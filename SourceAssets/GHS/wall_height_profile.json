@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "source_wall_height_m": 2.8,
+  "version": 3,
+  "source_wall_height_m": 9.6,
   "wall_height_m": 9.6,
   "column_height_m": 9.6,
   "edge_offset_m": 0.0005,
@@ -13,6 +13,7 @@
     "GHS_CAD_WallSections",
     "GHS_CAD_WallEdges"
   ],
-  "policy": "Preserve measured XY and wall thickness; synchronized walls, columns and outlines; equipment and ground-door lines retain scale",
-  "height_basis": "9.6m display envelope selected to clear CAD rack tops 9.144/9.154m; no surveyed building elevation supplied"
+  "policy": "Complete CAD outer perimeter with continuous door headers, open top and half-open door apertures",
+  "height_basis": "9.6m display envelope selected to clear CAD rack tops 9.144/9.154m; no surveyed building elevation supplied",
+  "wall_geometry_source": "RefinementV2/Envelope"
 }

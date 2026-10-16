@@ -1,0 +1,142 @@
+{
+  "success": false,
+  "checkpoint": "D:\\UEPro\\Test\\Saved\\GHS_RefinementV2Checkpoint.json",
+  "backup_root": "D:\\UEPro\\Test\\Saved\\Backups\\GHS_CADRacks_20261016_140702",
+  "revision": {
+    "schema_version": 2,
+    "source_sha256": {
+      "Layout/rack_spacing.json": "0b47d041078c6c6fa861c0d07a249308cedc7f37b372456cd00eeefa3c54e39a",
+      "Layout/rack_spacing_validation.json": "e2aa1477fc015de5188066690002a17b074d9c8451f5d90bffdf7c71d91d5726",
+      "Racks/refined_rack_cargo.json": "37211307b3cf2a991427e22cc60e70311da89b65b1021f14cbc653a181b93344",
+      "Envelope/envelope_v2.json": "70d3a4f8d70c3e84080913dae6d252b165f633f40f1b0cde9f25ced1a554e7c0",
+      "Trucks/dock_truck_v2.json": "150031f402623d5dc7f7175db71fba809efb9ebe4f6a733136ca99abe9f745df"
+    },
+    "changed_groups": [
+      "GHS_CAD_DockDoors",
+      "GHS_CAD_PalletCargo",
+      "GHS_CAD_PalletCargoHigh",
+      "GHS_CAD_PalletCargoLow",
+      "GHS_CAD_WallEdges",
+      "GHS_CAD_WallFaces",
+      "GHS_CAD_WallSections",
+      "GHS_V2_Rack_A_Pass_W36176",
+      "GHS_V2_Rack_A_Pass_W37138",
+      "GHS_V2_Rack_A_W37138",
+      "GHS_V2_Rack_A_W37619",
+      "GHS_V2_Rack_B_Pass_W36176",
+      "GHS_V2_Rack_B_W37138",
+      "GHS_V2_Rack_B_W37619",
+      "GHS_V2_Rack_D1",
+      "GHS_V2_Rack_D1_W37138",
+      "GHS_V2_Rack_D1_W37619",
+      "GHS_V2_WaitingDockTrucks"
+    ],
+    "retired_groups": [
+      "GHS_CAD_Rack_A_Pass_W36176",
+      "GHS_CAD_Rack_A_Pass_W37138",
+      "GHS_CAD_Rack_A_W08169",
+      "GHS_CAD_Rack_A_W23409",
+      "GHS_CAD_Rack_A_W26457",
+      "GHS_CAD_Rack_A_W27219",
+      "GHS_CAD_Rack_A_W28743",
+      "GHS_CAD_Rack_A_W29505",
+      "GHS_CAD_Rack_A_W32553",
+      "GHS_CAD_Rack_A_W36363",
+      "GHS_CAD_Rack_A_W37138",
+      "GHS_CAD_Rack_A_W37619",
+      "GHS_CAD_Rack_B_Pass_W36176",
+      "GHS_CAD_Rack_B_W08169",
+      "GHS_CAD_Rack_B_W23409",
+      "GHS_CAD_Rack_B_W26457",
+      "GHS_CAD_Rack_B_W27219",
+      "GHS_CAD_Rack_B_W28743",
+      "GHS_CAD_Rack_B_W29505",
+      "GHS_CAD_Rack_B_W32553",
+      "GHS_CAD_Rack_B_W36363",
+      "GHS_CAD_Rack_B_W37138",
+      "GHS_CAD_Rack_B_W37619",
+      "GHS_CAD_Rack_D1",
+      "GHS_CAD_Rack_D1_W37138",
+      "GHS_CAD_Rack_D1_W37619",
+      "GHS_ColumnOccupiedStorageOutlines"
+    ],
+    "rack_count": 1629,
+    "cargo_count": 7530,
+    "truck_count": 87,
+    "door_count": 87,
+    "rack_types": {
+      "A": 1205,
+      "B": 264,
+      "D1": 102,
+      "A_PASS": 47,
+      "B_PASS": 11
+    },
+    "spacing_summary": {
+      "previous_rack_instances": 1639,
+      "new_rack_instances": 1629,
+      "restored_original_bays": 70,
+      "retired_split_instances": 80,
+      "translated_rows": 25,
+      "translated_rack_instances": 625,
+      "maximum_row_displacement_m": 0.964,
+      "narrowest_longitudinal_aisle_m": 2.000199999999986,
+      "narrowest_back_to_back_gap_m": 0.30479995999999754,
+      "rack_envelope_collision_count": 0,
+      "blocked_ground_slots": 122,
+      "restored_ground_slots": 122,
+      "unresolved_ground_slots": 0,
+      "restored_ground_collision_count": 0,
+      "moved_existing_ground_slots": 1044,
+      "ground_total_count": 7530,
+      "changed_ground_blocks": 96,
+      "maximum_ground_displacement_m": 0.754,
+      "narrowest_ground_interblock_aisle_m": 1.6763999999999726,
+      "minimum_ground_internal_side_gap_m": 0.02019999999997224,
+      "type_counts": {
+        "A": 1205,
+        "B": 264,
+        "D1": 102,
+        "A_PASS": 47,
+        "B_PASS": 11
+      }
+    },
+    "closed_exterior": true,
+    "roof": false,
+    "door_open_fraction": 0.5,
+    "scope": "Both GHS palettes; authorized small rack and ground-storage spacing changes; existing AGVs and lights preserved"
+  },
+  "maps": [],
+  "changed_files": {
+    "SourceAssets/GHS/ue_scene_registry.json": {
+      "before_sha256": "bb5d262a7a6d5daf38b395c7b861e91576b5dec2bbce6f328e21c0c9e59e53fe",
+      "backup": "D:\\UEPro\\Test\\Saved\\Backups\\GHS_CADRacks_20261016_140702\\SourceAssets\\GHS\\ue_scene_registry.json"
+    },
+    "SourceAssets/GHS_Normal/ue_scene_registry.json": {
+      "before_sha256": "3d5ced3116f5029226ab365557c338dbd9ba63c5b304f3287e49253e557c1371",
+      "backup": "D:\\UEPro\\Test\\Saved\\Backups\\GHS_CADRacks_20261016_140702\\SourceAssets\\GHS_Normal\\ue_scene_registry.json"
+    },
+    "SourceAssets/GHS/Presentation/visual_layout.json": {
+      "before_sha256": "bb5d262a7a6d5daf38b395c7b861e91576b5dec2bbce6f328e21c0c9e59e53fe",
+      "backup": "D:\\UEPro\\Test\\Saved\\Backups\\GHS_CADRacks_20261016_140702\\SourceAssets\\GHS\\Presentation\\visual_layout.json"
+    },
+    "SourceAssets/GHS/wall_height_profile.json": {
+      "before_sha256": "4086966ca6681bd51fc4fac030f034e7f14825bb2be4507a3126d495206fd6f9",
+      "backup": "D:\\UEPro\\Test\\Saved\\Backups\\GHS_CADRacks_20261016_140702\\SourceAssets\\GHS\\wall_height_profile.json"
+    },
+    "Content/Maps/GHS_CAD_DigitalTwin.umap": {
+      "before_sha256": "bb2793a6fd45958b6544cfdf33dd191d30edcfe1ca060d6e35bd318a8a238f48",
+      "backup": "D:\\UEPro\\Test\\Saved\\Backups\\GHS_CADRacks_20261016_140702\\Content\\Maps\\GHS_CAD_DigitalTwin.umap"
+    },
+    "Content/Maps/GHS_CAD_NormalWarehouse.umap": {
+      "before_sha256": "c78f58952c52d4ad17a31e708dd171051244f7e37c4c8fb99957c73dde2bcf43",
+      "backup": "D:\\UEPro\\Test\\Saved\\Backups\\GHS_CADRacks_20261016_140702\\Content\\Maps\\GHS_CAD_NormalWarehouse.umap"
+    }
+  },
+  "preserved_snapshots": {
+    "/Game/Maps/GHS_CAD_DigitalTwin": "D:\\UEPro\\Test\\Saved\\Backups\\GHS_CADRacks_20261016_140702\\GHS_CAD_DigitalTwin_v2_actors_before.json",
+    "/Game/Maps/GHS_CAD_NormalWarehouse": "D:\\UEPro\\Test\\Saved\\Backups\\GHS_CADRacks_20261016_140702\\GHS_CAD_NormalWarehouse_v2_actors_before.json"
+  },
+  "import_sha256": "40409278f723861c8da8f3cdd0190622056605e803007aff48283a65f5a71f0d",
+  "geometry_audit_sha256": "f88ef08d31db85ccb6cdefa8aed479daa17797c0f449d57d5d75fe59cdd5f033",
+  "error": "Traceback (most recent call last):\n  File \"D:/UEPro/Test/Scripts/ghs/apply_refinement_v2.py\", line 63, in run\n    assert component.get_instance_count()==g['count']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+}

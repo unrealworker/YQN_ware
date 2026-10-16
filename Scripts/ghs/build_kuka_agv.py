@@ -73,8 +73,8 @@ assert .32125-.0015/2 > .317+.006/2
 assert .32325-.0015/2 > .32125+.0015/2
 for x in [-.285,.285]:
  for y in [-.48,.48]:
-  box('Deck_panel_outline',(x,y,.3198),(.056,.083,.0004),gray,.001)
-  for dy in [-.031,.031]: c.cylinder('Deck_screw',(x,y+dy,.32),.002,.0003,metal,16)
+  box('Deck_panel_outline',(x,y,.3216),(.056,.083,.0016),gray,.001)
+  for dy in [-.031,.031]: c.cylinder('Deck_screw',(x,y+dy,.3229),.002,.0006,metal,16)
 # wheels are mostly concealed inside the skirt
 for x in [-.34,.34]:
  for y in [-.43,.43]: c.cylinder('Concealed_wheel',(x,y,.042),.042,.05,rubber,40,'X')

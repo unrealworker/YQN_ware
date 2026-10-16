@@ -1,0 +1,139 @@
+{
+  "meshes": [
+    {
+      "name": "SM_GHS_V2DockTruck",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Trucks\\SM_GHS_V2DockTruck.fbx",
+      "slots": [
+        "M_VR_GHSV2Truck_Trim",
+        "M_VR_GHSV2Truck_Body",
+        "M_VR_GHSV2Truck_Accent",
+        "M_VR_GHSV2Truck_Headlight",
+        "M_VR_GHSV2Truck_Rubber",
+        "M_VR_GHSV2Truck_TailLight",
+        "M_VR_GHSV2Truck_Glass"
+      ],
+      "bounds_m": [
+        [
+          -0.19749999046325684,
+          8.705999374389648
+        ],
+        [
+          -1.5,
+          1.5
+        ],
+        [
+          -0.0065000057220458984,
+          3.7350001335144043
+        ]
+      ],
+      "source_parts": 371,
+      "vertices": 18522,
+      "polygons": 16857,
+      "fbx_sha256": "ba72776b5141874d221afd4242c90249fbe00ebd6c2069b84bfc10e64d426de6",
+      "slot_roles": [
+        "Trim",
+        "Body",
+        "Accent",
+        "Headlight",
+        "Rubber",
+        "TailLight",
+        "Glass"
+      ],
+      "rear_origin_m": [
+        0,
+        0,
+        0
+      ],
+      "forward_axis": "+X",
+      "estimated_dimensions": true,
+      "physical_body_width_m": 2.58,
+      "mirror_width_m": 3.0,
+      "origin_m": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_GHSV2Truck_Accent",
+      "base_color": [
+        0.02,
+        0.09,
+        0.34,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.03
+    },
+    {
+      "name": "M_VR_GHSV2Truck_Body",
+      "base_color": [
+        0.6,
+        0.65,
+        0.7,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.25
+    },
+    {
+      "name": "M_VR_GHSV2Truck_Glass",
+      "base_color": [
+        0.025,
+        0.065,
+        0.09,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.03
+    },
+    {
+      "name": "M_VR_GHSV2Truck_Headlight",
+      "base_color": [
+        0.66,
+        0.87,
+        0.96,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.03
+    },
+    {
+      "name": "M_VR_GHSV2Truck_Rubber",
+      "base_color": [
+        0.018,
+        0.023,
+        0.03,
+        1
+      ],
+      "roughness": 0.84,
+      "metallic": 0.03
+    },
+    {
+      "name": "M_VR_GHSV2Truck_TailLight",
+      "base_color": [
+        0.5,
+        0.035,
+        0.018,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.03
+    },
+    {
+      "name": "M_VR_GHSV2Truck_Trim",
+      "base_color": [
+        0.3,
+        0.39,
+        0.49,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.25
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Trucks\\dock_truck_v2.blend",
+  "design": "Medium rigid box truck, three axles, open rear doors folded against sides; unmeasured visual dimensions"
+}

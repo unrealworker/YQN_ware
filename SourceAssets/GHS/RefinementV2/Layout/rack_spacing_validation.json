@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "passed": true,
+  "rack_count": 1629,
+  "ground_count": 7530,
+  "full_envelope_collisions": 0,
+  "failures": [],
+  "collisions": [],
+  "assertions": [
+    "All 1629 unique CAD rack parents retained exactly once; all 1639 old instances accounted for.",
+    "70 split rack parents restored; no rack span under 3.6175m.",
+    "All 7530 CAD ground slots represented; fixed 1.016m by 1.2192m dimensions preserved.",
+    "No rack or ground displacement reaches 1m; no Y coordinate changed.",
+    "Every ground pallet stays inside its exact original block outer rectangle.",
+    "All loaded footprints stay inside the CAD building outline.",
+    "All loaded footprints are disjoint from each other, dock geometry and every column base plus 100mm.",
+    "Main longitudinal rack aisles remain at least 2m.",
+    "Original source files match their recorded SHA256."
+  ],
+  "limitations": [
+    "Planar loaded envelopes conservatively contain all physical solids; imported UE world bounds still require integration verification."
+  ]
+}

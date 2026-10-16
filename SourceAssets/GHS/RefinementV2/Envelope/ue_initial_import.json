@@ -1,0 +1,1972 @@
+{
+  "success": true,
+  "manifests": {
+    "Racks/refined_rack_cargo.json": "37211307b3cf2a991427e22cc60e70311da89b65b1021f14cbc653a181b93344",
+    "Envelope/envelope_v2.json": "d14a8f41b2dbb7ff31560c0fed7200d4f10c0a0caa8f0e5e166739ed76cf81b0",
+    "Trucks/dock_truck_v2.json": "150031f402623d5dc7f7175db71fba809efb9ebe4f6a733136ca99abe9f745df"
+  },
+  "meshes": [
+    {
+      "name": "SM_GHS_V2Rack_A",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A.SM_GHS_V2Rack_A",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "1d80a785e82e1b9ae21ed2610934ff7fe3a058a05e3d2d3e6de98c4cf550996d",
+      "bounds_m": [
+        [
+          -1.9049999713897705,
+          1.9049999713897705
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        12940,
+        7116,
+        3882,
+        2330
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B.SM_GHS_V2Rack_B",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "6fbe8cc48f73fe36eb45a9f316544106d0aa81923835844b40ccf052133b9dc8",
+      "bounds_m": [
+        [
+          -1.9049999713897705,
+          1.9049999713897705
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        17412,
+        9576,
+        5224,
+        3134
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_C",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_C.SM_GHS_V2Rack_C",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "cccb0040b411e0f44e2ba8bd054d3455a883b0a54b250678fde5af759483cfed",
+      "bounds_m": [
+        [
+          -1.9049999713897705,
+          1.9049999713897705
+        ],
+        [
+          -0.7628999948501587,
+          0.7628999948501587
+        ],
+        [
+          0.0,
+          9.144000053405762
+        ]
+      ],
+      "lod_triangles": [
+        13724,
+        7548,
+        4118,
+        2470
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_D1",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_D1.SM_GHS_V2Rack_D1",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "8c56f358677d49f615ee678e34e77efd31160c03507bd644118b59f60800931d",
+      "bounds_m": [
+        [
+          -1.9049999713897705,
+          1.9049999713897705
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        7144,
+        3930,
+        2144,
+        1286
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_D2",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_D2.SM_GHS_V2Rack_D2",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "c63187c02132ce47415fea25921625a69a82b5fb8fbfb04f051d03e92dd10d85",
+      "bounds_m": [
+        [
+          -1.9049999713897705,
+          1.9049999713897705
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.144000053405762
+        ]
+      ],
+      "lod_triangles": [
+        13724,
+        7548,
+        4118,
+        2470
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_Pass",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_Pass.SM_GHS_V2Rack_A_Pass",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "1989b05364e2482f8c59b328a381c59c1cf376aee65a1c419c62fab96e227d16",
+      "bounds_m": [
+        [
+          -1.9049999713897705,
+          1.9049999713897705
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        7144,
+        3930,
+        2144,
+        1286
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_Pass",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B_Pass.SM_GHS_V2Rack_B_Pass",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "40021df60f502eea84fede172e2fec6c651c814a1c31d28bbf13c824d2b0a66c",
+      "bounds_m": [
+        [
+          -1.9049999713897705,
+          1.9049999713897705
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        9280,
+        5104,
+        2784,
+        1670
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_C_Pass",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_C_Pass.SM_GHS_V2Rack_C_Pass",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "77079ebd939d4aba15c5270d726658bb5ea0dab7ff3749c40d89e826331bef41",
+      "bounds_m": [
+        [
+          -1.9049999713897705,
+          1.9049999713897705
+        ],
+        [
+          -0.7628999948501587,
+          0.7628999948501587
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        6144,
+        3380,
+        1844,
+        1106
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_W37138",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_W37138.SM_GHS_V2Rack_A_W37138",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "13f534de8da0e95c4f2f76569b3def67de94f6904bbaeb5ae672d743a32a8c35",
+      "bounds_m": [
+        [
+          -1.8568999767303467,
+          1.8568999767303467
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        12940,
+        7116,
+        3882,
+        2330
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_W37619",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_W37619.SM_GHS_V2Rack_A_W37619",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "e71550b790f5ab1259702a585432e7af305a7dd0066ea00a2915a12f4e3df14b",
+      "bounds_m": [
+        [
+          -1.8809499740600586,
+          1.8809499740600586
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        12940,
+        7116,
+        3882,
+        2330
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_W28743",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_W28743.SM_GHS_V2Rack_A_W28743",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "cdb5c1895529c68677226e33d6c1a7e4397d4158fd49edd36563766527c68cee",
+      "bounds_m": [
+        [
+          -1.437150001525879,
+          1.437150001525879
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        9088,
+        4998,
+        2726,
+        1636
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_W08169",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_W08169.SM_GHS_V2Rack_A_W08169",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "93bca7de6e53a10af8da826f8d96ffdf72e63befd9c8e6fce1e0de4ef20c36e9",
+      "bounds_m": [
+        [
+          -0.40845000743865967,
+          0.40845000743865967
+        ],
+        [
+          -0.5343000292778015,
+          0.5343000292778015
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        1384,
+        762,
+        416,
+        250
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_W23409",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_W23409.SM_GHS_V2Rack_A_W23409",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "ea938819d98e9007f15fcef053e1b66819d8059471ba8519cc2d52c40103d9bd",
+      "bounds_m": [
+        [
+          -1.17044997215271,
+          1.17044997215271
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        9088,
+        4998,
+        2726,
+        1636
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_W27219",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_W27219.SM_GHS_V2Rack_A_W27219",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "e45d9a12a9b5a3a80bcb56c2cea1953bd93dcfadd071dc1e1dff841b971715ab",
+      "bounds_m": [
+        [
+          -1.360949993133545,
+          1.360949993133545
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        9088,
+        4998,
+        2726,
+        1636
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_W36363",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_W36363.SM_GHS_V2Rack_A_W36363",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "6104d4b7f71d85b671e6a0d48ab45b5bc4e2dd39b48c86a936f7293a47712237",
+      "bounds_m": [
+        [
+          -1.8181500434875488,
+          1.8181500434875488
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        12940,
+        7116,
+        3882,
+        2330
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_W32553",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_W32553.SM_GHS_V2Rack_A_W32553",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "9eb92094c54bbe8b8b32ec6860a0321bbcaef08cd95a030fe70928055e232ce6",
+      "bounds_m": [
+        [
+          -1.6276500225067139,
+          1.6276500225067139
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        9088,
+        4998,
+        2726,
+        1636
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_W29505",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_W29505.SM_GHS_V2Rack_A_W29505",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "a8c564f51abd251e6c6671409d4b9c3e9b0f23a695e8f0b696018be8f3fd4407",
+      "bounds_m": [
+        [
+          -1.475250005722046,
+          1.475250005722046
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        9088,
+        4998,
+        2726,
+        1636
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_W26457",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_W26457.SM_GHS_V2Rack_A_W26457",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "ef3dc5de61a54323361b53065a9c9127f594418b6d97bd63c5019807d85c46b5",
+      "bounds_m": [
+        [
+          -1.322849988937378,
+          1.322849988937378
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        9088,
+        4998,
+        2726,
+        1636
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_W37619",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B_W37619.SM_GHS_V2Rack_B_W37619",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "685e330f051d1491969faaa36c6f74354575a04e4d4ef99c2d80f7bbdbcd3832",
+      "bounds_m": [
+        [
+          -1.8809499740600586,
+          1.8809499740600586
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        17412,
+        9576,
+        5224,
+        3134
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_W37138",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B_W37138.SM_GHS_V2Rack_B_W37138",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "c7b24b78b4989e1c32c68e922a7923d0a77dcd25f3033b2291a34b0bcb8d4dec",
+      "bounds_m": [
+        [
+          -1.8568999767303467,
+          1.8568999767303467
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        17412,
+        9576,
+        5224,
+        3134
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_W36363",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B_W36363.SM_GHS_V2Rack_B_W36363",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "11063d9ac2ea7f99c546c92cce342625e3b86ca2ee8037afc6c81d6947e88875",
+      "bounds_m": [
+        [
+          -1.8181500434875488,
+          1.8181500434875488
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        17412,
+        9576,
+        5224,
+        3134
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_W32553",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B_W32553.SM_GHS_V2Rack_B_W32553",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "11e940c6e0a152e45c6bbfd88a54f31b33c3790b1f20f1be76faac2486bb266f",
+      "bounds_m": [
+        [
+          -1.6276500225067139,
+          1.6276500225067139
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        12432,
+        6838,
+        3730,
+        2238
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_W29505",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B_W29505.SM_GHS_V2Rack_B_W29505",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "ed625a29e7292f70611b1f7ac72ab5ac58803155659971722b3a046321c4e823",
+      "bounds_m": [
+        [
+          -1.475250005722046,
+          1.475250005722046
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        12432,
+        6838,
+        3730,
+        2238
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_W26457",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B_W26457.SM_GHS_V2Rack_B_W26457",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "748a26ffb8a2b9f0bcb0292d94b84fe185c54010a157950677ad27b5628aa004",
+      "bounds_m": [
+        [
+          -1.322849988937378,
+          1.322849988937378
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        12432,
+        6838,
+        3730,
+        2238
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_W08169",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B_W08169.SM_GHS_V2Rack_B_W08169",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "b1f9a03dc32fe11bfe2e04d8f13e477d25047a38ea292fffd5148d6c61d1f079",
+      "bounds_m": [
+        [
+          -0.40845000743865967,
+          0.40845000743865967
+        ],
+        [
+          -0.5343000292778015,
+          0.5343000292778015
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        2472,
+        1360,
+        742,
+        444
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_W23409",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B_W23409.SM_GHS_V2Rack_B_W23409",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "a0cfa3f96b82df44d61c8b993d1e06af18022e1534b688c9e8205640bb8f78f4",
+      "bounds_m": [
+        [
+          -1.17044997215271,
+          1.17044997215271
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        12432,
+        6838,
+        3730,
+        2238
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_W27219",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B_W27219.SM_GHS_V2Rack_B_W27219",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "d408f989985fc05552a7fadc5d802c2fd4dc32c04e853b00995c33873300db76",
+      "bounds_m": [
+        [
+          -1.360949993133545,
+          1.360949993133545
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        12432,
+        6838,
+        3730,
+        2238
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_D1_W37619",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_D1_W37619.SM_GHS_V2Rack_D1_W37619",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "f32c56d9f7283bf83f5f6b5852cab71fc6c6cdf23eba3d672313105eca5fc47b",
+      "bounds_m": [
+        [
+          -1.8809499740600586,
+          1.8809499740600586
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        7144,
+        3930,
+        2144,
+        1286
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_D1_W37138",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_D1_W37138.SM_GHS_V2Rack_D1_W37138",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "4b21a8bb096ae8821075a3b09d7600a10ba2c3d006916a8dc478ab911c689135",
+      "bounds_m": [
+        [
+          -1.8568999767303467,
+          1.8568999767303467
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        7144,
+        3930,
+        2144,
+        1286
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_W28743",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B_W28743.SM_GHS_V2Rack_B_W28743",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "bca8c48358b98dd4bc4dff8d1d23c7347dae75f8023d371da74a2a330c018e36",
+      "bounds_m": [
+        [
+          -1.437150001525879,
+          1.437150001525879
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        12432,
+        6838,
+        3730,
+        2238
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_Pass_W37138",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_Pass_W37138.SM_GHS_V2Rack_A_Pass_W37138",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "0fa38a7829e4d5749b1be61643186a336f97915be97ca2f3c96a56496ef7c03a",
+      "bounds_m": [
+        [
+          -1.8568999767303467,
+          1.8568999767303467
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        7144,
+        3930,
+        2144,
+        1286
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_Pass_W36176",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_B_Pass_W36176.SM_GHS_V2Rack_B_Pass_W36176",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "df977612c7e51529b80a2b624a7537214895a80ef0d2056141c95517fda1b929",
+      "bounds_m": [
+        [
+          -1.8087999820709229,
+          1.8087999820709229
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        9280,
+        5104,
+        2784,
+        1670
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_Pass_W36176",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2Rack_A_Pass_W36176.SM_GHS_V2Rack_A_Pass_W36176",
+      "roles": [
+        "Upright",
+        "Beam",
+        "Braces",
+        "Pallet",
+        "Cargo",
+        "CargoEdges",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StoragePalletBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoBlue",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCargoGrid",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_BluePallet",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Cardboard",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_CardboardSeam",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "b74ae8a60112dff1b2ba5284aa386f25a6cec90b440b20750610fe2465ae70f7",
+      "bounds_m": [
+        [
+          -1.8087999820709229,
+          1.8087999820709229
+        ],
+        [
+          -0.6096000075340271,
+          0.6096000075340271
+        ],
+        [
+          0.0,
+          9.154000282287598
+        ]
+      ],
+      "lod_triangles": [
+        7144,
+        3930,
+        2144,
+        1286
+      ]
+    },
+    {
+      "name": "SM_GHS_V2ExteriorFaces",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2ExteriorFaces.SM_GHS_V2ExteriorFaces",
+      "roles": [
+        "Faces"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_WallVolume"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Wall"
+        ]
+      },
+      "fbx_sha256": "5c857451b42f695467076c2055ddffc4d5925f127043319791fc92d6c1524cec",
+      "bounds_m": [
+        [
+          -239.3868865966797,
+          226.45358276367188
+        ],
+        [
+          -76.97283935546875,
+          60.2932243347168
+        ],
+        [
+          0.0,
+          9.600000381469727
+        ]
+      ],
+      "lod_triangles": [
+        4596
+      ]
+    },
+    {
+      "name": "SM_GHS_V2ExteriorSections",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2ExteriorSections.SM_GHS_V2ExteriorSections",
+      "roles": [
+        "Sections"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_WallSection"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_WallSection"
+        ]
+      },
+      "fbx_sha256": "43b1666af16acd4dfdcd9abf2ae4705494ad5c09667632933ab7761ef61fabfa",
+      "bounds_m": [
+        [
+          -239.3868865966797,
+          226.45358276367188
+        ],
+        [
+          -76.97283935546875,
+          60.2932243347168
+        ],
+        [
+          0.0,
+          9.600000381469727
+        ]
+      ],
+      "lod_triangles": [
+        2566
+      ]
+    },
+    {
+      "name": "SM_GHS_V2ExteriorEdges",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2ExteriorEdges.SM_GHS_V2ExteriorEdges",
+      "roles": [
+        "Edges"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_WallTrim"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_WallTrim"
+        ]
+      },
+      "fbx_sha256": "5e36b6870b36c6836229d6b9313b6d4257999459d47f1e4bc3d210acb9d1745e",
+      "bounds_m": [
+        [
+          -239.3868865966797,
+          226.45358276367188
+        ],
+        [
+          -76.97283935546875,
+          60.2932243347168
+        ],
+        [
+          9.600500106811523,
+          9.600500106811523
+        ]
+      ],
+      "lod_triangles": [
+        1851
+      ]
+    },
+    {
+      "name": "SM_GHS_V2DockDoor",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2DockDoor.SM_GHS_V2DockDoor",
+      "roles": [
+        "Frame",
+        "Panel",
+        "Dark",
+        "Detail"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteelLight",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageSteel",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal",
+          "/Game/GHSDigitalTwin/Materials/Instanced/M_GHS_StorageCharcoal"
+        ],
+        "Normal": [
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_WallTrim",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_RackSilver",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal",
+          "/Game/GHSNormalWarehouse/Materials/M_GHN_Charcoal"
+        ]
+      },
+      "fbx_sha256": "95e0312df5c917d10429ed4e38dae2c7ff4b2fd9a38a637eea727814c804d0c0",
+      "bounds_m": [
+        [
+          -1.5208250284194946,
+          1.5208250284194946
+        ],
+        [
+          -0.0938323587179184,
+          0.0938323587179184
+        ],
+        [
+          0.0,
+          4.199999809265137
+        ]
+      ],
+      "lod_triangles": [
+        2592,
+        1426,
+        778,
+        466
+      ]
+    },
+    {
+      "name": "SM_GHS_V2DockTruck",
+      "path": "/Game/GHSRefinementV2/Meshes/SM_GHS_V2DockTruck.SM_GHS_V2DockTruck",
+      "roles": [
+        "Trim",
+        "Body",
+        "Accent",
+        "Headlight",
+        "Rubber",
+        "TailLight",
+        "Glass"
+      ],
+      "palettes": {
+        "Blue": [
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Blue_Trim",
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Blue_Body",
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Blue_Accent",
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Blue_Headlight",
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Blue_Rubber",
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Blue_TailLight",
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Blue_Glass"
+        ],
+        "Normal": [
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Normal_Trim",
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Normal_Body",
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Normal_Accent",
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Normal_Headlight",
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Normal_Rubber",
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Normal_TailLight",
+          "/Game/GHSRefinementV2/Materials/M_V2Truck_Normal_Glass"
+        ]
+      },
+      "fbx_sha256": "ba72776b5141874d221afd4242c90249fbe00ebd6c2069b84bfc10e64d426de6",
+      "bounds_m": [
+        [
+          -0.19749999046325684,
+          8.705999374389648
+        ],
+        [
+          -1.5,
+          1.5
+        ],
+        [
+          -0.0065000057220458984,
+          3.7350001335144043
+        ]
+      ],
+      "lod_triangles": [
+        35536,
+        19545,
+        10660,
+        6396
+      ]
+    }
+  ]
+}

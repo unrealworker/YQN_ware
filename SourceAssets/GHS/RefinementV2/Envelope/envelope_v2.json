@@ -1,0 +1,347 @@
+{
+  "meshes": [
+    {
+      "name": "SM_GHS_V2ExteriorFaces",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Envelope\\SM_GHS_V2ExteriorFaces.fbx",
+      "slots": [
+        "M_VR_WallVolume"
+      ],
+      "bounds_m": [
+        [
+          -239.3868865966797,
+          226.45358276367188
+        ],
+        [
+          -76.97283935546875,
+          60.2932243347168
+        ],
+        [
+          0.0,
+          9.600000381469727
+        ]
+      ],
+      "source_parts": 1,
+      "vertices": 9232,
+      "polygons": 2298,
+      "removed_zero_area_polygons": 10,
+      "uv_verification": {
+        "method": "Per-face orthogonal projection, origin-relative, independently normalized U/V",
+        "uv_layer": "UVMap",
+        "minimum_uv_triangle_area": 0.5,
+        "degenerate_uv_triangle_count": 0,
+        "triangles_checked": 4596,
+        "explicit_tangent_space": "Unit orthogonal loop basis exported; import normals and tangents in UE."
+      },
+      "sha256": "a9a52b4ea3bec0c8a9ad3dc46f8f84a55798e674f6490f6e2befb513106d483d",
+      "role": "Faces",
+      "slot_roles": [
+        "Faces"
+      ]
+    },
+    {
+      "name": "SM_GHS_V2ExteriorSections",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Envelope\\SM_GHS_V2ExteriorSections.fbx",
+      "slots": [
+        "M_VR_WallSection"
+      ],
+      "bounds_m": [
+        [
+          -239.3868865966797,
+          226.45358276367188
+        ],
+        [
+          -76.97283935546875,
+          60.2932243347168
+        ],
+        [
+          0.0,
+          9.600000381469727
+        ]
+      ],
+      "source_parts": 1,
+      "vertices": 7728,
+      "polygons": 2566,
+      "removed_zero_area_polygons": 10,
+      "uv_verification": {
+        "method": "Per-face orthogonal projection, origin-relative, independently normalized U/V",
+        "uv_layer": "UVMap",
+        "minimum_uv_triangle_area": 0.4999999999290496,
+        "degenerate_uv_triangle_count": 0,
+        "triangles_checked": 2566,
+        "explicit_tangent_space": "Unit orthogonal loop basis exported; import normals and tangents in UE."
+      },
+      "sha256": "12eb506ee6480382f453edba9f304da3d2ae0ab579ae44c6485afb4e12e499c8",
+      "role": "Sections",
+      "slot_roles": [
+        "Sections"
+      ]
+    },
+    {
+      "name": "SM_GHS_V2ExteriorEdges",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Envelope\\SM_GHS_V2ExteriorEdges.fbx",
+      "slots": [
+        "M_VR_WallTrim"
+      ],
+      "bounds_m": [
+        [
+          -239.3868865966797,
+          226.45358276367188
+        ],
+        [
+          -76.97283935546875,
+          60.2932243347168
+        ],
+        [
+          9.600500106811523,
+          9.600500106811523
+        ]
+      ],
+      "source_parts": 1,
+      "vertices": 5568,
+      "polygons": 1851,
+      "removed_zero_area_polygons": 5,
+      "uv_verification": {
+        "method": "Per-face orthogonal projection, origin-relative, independently normalized U/V",
+        "uv_layer": "UVMap",
+        "minimum_uv_triangle_area": 0.49999999999998557,
+        "degenerate_uv_triangle_count": 0,
+        "triangles_checked": 1851,
+        "explicit_tangent_space": "Unit orthogonal loop basis exported; import normals and tangents in UE."
+      },
+      "sha256": "dbbab13ea124bdd8df40d41ea92d66653c96f6de8a13efc2b0900182dac1cef8",
+      "role": "Edges",
+      "slot_roles": [
+        "Edges"
+      ]
+    },
+    {
+      "name": "SM_GHS_V2DockDoor",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Envelope\\SM_GHS_V2DockDoor.fbx",
+      "slots": [
+        "M_VR_M_CADDock_Frame",
+        "M_VR_M_CADDock_Panel",
+        "M_VR_M_CADDock_Dark",
+        "M_VR_M_CADDock_Detail"
+      ],
+      "bounds_m": [
+        [
+          -1.5208250284194946,
+          1.5208250284194946
+        ],
+        [
+          -0.0938323587179184,
+          0.0938323587179184
+        ],
+        [
+          0.0,
+          4.199999809265137
+        ]
+      ],
+      "source_parts": 24,
+      "vertices": 1344,
+      "polygons": 1296,
+      "removed_zero_area_polygons": 0,
+      "uv_verification": {
+        "method": "Per-face orthogonal projection, origin-relative, independently normalized U/V",
+        "uv_layer": "UVMap",
+        "minimum_uv_triangle_area": 0.39581098662355885,
+        "degenerate_uv_triangle_count": 0,
+        "triangles_checked": 2592,
+        "explicit_tangent_space": "Unit orthogonal loop basis exported; import normals and tangents in UE."
+      },
+      "sha256": "049596db30691640e3cf4268bf2f56f9dd2887782989a47a6f239051f2b903d4",
+      "role": "DockDoor",
+      "slot_roles": [
+        "Frame",
+        "Panel",
+        "Dark",
+        "Detail"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_M_CADDock_Dark",
+      "base_color": [
+        0.008,
+        0.016,
+        0.03,
+        1
+      ],
+      "roughness": 0.8,
+      "metallic": 0
+    },
+    {
+      "name": "M_VR_M_CADDock_Detail",
+      "base_color": [
+        0.08,
+        0.3,
+        0.43,
+        1
+      ],
+      "roughness": 0.6,
+      "metallic": 0.1
+    },
+    {
+      "name": "M_VR_M_CADDock_Frame",
+      "base_color": [
+        0.04,
+        0.1,
+        0.18,
+        1
+      ],
+      "roughness": 0.55,
+      "metallic": 0.3
+    },
+    {
+      "name": "M_VR_M_CADDock_Panel",
+      "base_color": [
+        0.09,
+        0.18,
+        0.29,
+        1
+      ],
+      "roughness": 0.6,
+      "metallic": 0.15
+    },
+    {
+      "name": "M_VR_WallSection",
+      "base_color": [
+        0.035,
+        0.105,
+        0.15,
+        1
+      ],
+      "roughness": 0.55,
+      "metallic": 0.1,
+      "unlit": true,
+      "emission": 0.65
+    },
+    {
+      "name": "M_VR_WallTrim",
+      "base_color": [
+        0.1,
+        0.27,
+        0.34,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.1,
+      "unlit": true,
+      "emission": 0.45
+    },
+    {
+      "name": "M_VR_WallVolume",
+      "base_color": [
+        0.026,
+        0.13,
+        0.28,
+        1
+      ],
+      "roughness": 0.55,
+      "metallic": 0,
+      "opacity": 0.4,
+      "unlit": true,
+      "emission": 0.5,
+      "wall_gradient": true,
+      "two_sided": false
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Envelope\\envelope_v2.blend",
+  "coordinate_contract": "CAD metres; Unreal imported axes reflect Y; actor scale exactly [1,1,1]",
+  "wall_height_m": 9.6,
+  "perimeter_wall_thickness_m": 0.254,
+  "main_building_polygon_cad_m": [
+    [
+      226.40055,
+      60.24019
+    ],
+    [
+      226.40055,
+      -51.74349
+    ],
+    [
+      201.54811,
+      -58.63181
+    ],
+    [
+      -193.46145,
+      -58.63181
+    ],
+    [
+      -193.46145,
+      -76.91981
+    ],
+    [
+      -239.33385,
+      -76.91981
+    ],
+    [
+      -239.33385,
+      60.24019
+    ],
+    [
+      226.40055,
+      60.24019
+    ]
+  ],
+  "verification": {
+    "source_wall_count": 330,
+    "door_count": 87,
+    "wall_height_m": 9.6,
+    "wall_thickness_m": 0.254,
+    "lintel_bottom_m": 4.2,
+    "main_building_outline_closed": true,
+    "main_building_outline_valid": true,
+    "top_perimeter_ring_continuous": true,
+    "top_perimeter_uncovered_area_m2": 4.623387406431586e-14,
+    "all_87_door_openings_clear": true,
+    "all_87_door_lintels_present": true,
+    "preserved_existing_wall_outside_door_openings_area_loss_m2": 0.0,
+    "building_footprint_area_m2": 56116.09826824961,
+    "wall_top_cap_area_m2": 332.1864894949999,
+    "roofless": true,
+    "no_roof_cap_created": true,
+    "old_wall_footprint_area_m2": 224.84532955698165,
+    "new_upper_wall_footprint_area_m2": 332.1864894949796,
+    "new_lower_wall_footprint_area_m2": 264.9721077949986,
+    "old_wall_missing_perimeter_area_m2": 107.34115993802368,
+    "interior_layout_policy": "Union original wall geometry with measured perimeter; remove only 87 loading-door prisms below 4.2m.",
+    "door_geometry_policy": "No backplate. Twelve solid shutter slats from 2.1m to 4.03m; both broad faces use the original Panel role.",
+    "door_both_normals_panel_checked": true,
+    "door_half_open_geometric_check": true,
+    "all_exported_uv_triangles_non_degenerate": true,
+    "explicit_unit_tangent_space_exported": true
+  },
+  "door": {
+    "overall_width_m": 3.0416499999999997,
+    "leaf_width_m": 2.794,
+    "depth_m": 0.1876647153,
+    "height_m": 4.2,
+    "clear_opening_height_m": 2.1,
+    "slat_count": 12,
+    "panel_on_both_faces": true,
+    "full_size_black_backplate": false,
+    "dark_material_only_narrow_seals": true,
+    "opening_fraction": 0.5
+  },
+  "integration": {
+    "maps": [
+      "/Game/Maps/GHS_CAD_DigitalTwin",
+      "/Game/Maps/GHS_CAD_NormalWarehouse"
+    ],
+    "replace_actor_meshes": {
+      "GHS_CAD_WallFaces": "SM_GHS_V2ExteriorFaces",
+      "GHS_CAD_WallSections": "SM_GHS_V2ExteriorSections",
+      "GHS_CAD_WallEdges": "SM_GHS_V2ExteriorEdges",
+      "GHS_CAD_DockDoors": "SM_GHS_V2DockDoor"
+    },
+    "wall_instances": "One instance each at CAD (0,0,0), rotation 0, scale (1,1,1). NEW walls are already 9.6m. Do not retain previous Z scale 3.42857. New edges already at 9.6005m; no actor height offset.",
+    "door_instances": "All 87 positions and rotations from existing physical_center_m; keep unit scale.",
+    "materials": "Reuse per-map original WallVolume/WallSection/WallTrim overrides; map door slot roles to per-map original CAD door Panel/Frame/Dark/Detail materials.",
+    "remove_old_geometry": "Replace the three existing joined-wall instances; do not overlay new geometry onto old joined walls.",
+    "docking_data": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Envelope\\door_docking_targets.json",
+    "fbx_normal_import_method": "FBXNIM_IMPORT_NORMALS_AND_TANGENTS",
+    "tangent_policy": "Use explicit FBX unit orthogonal tangent/binormal arrays; do not recompute weighted tangents for the long narrow CAD cap triangles."
+  }
+}

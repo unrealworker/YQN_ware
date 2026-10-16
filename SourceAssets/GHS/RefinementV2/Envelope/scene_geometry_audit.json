@@ -1,0 +1,4207 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "generated_at_utc": "2026-10-16T06:43:15.293901+00:00",
+  "coordinate_contract": "CAD XY metres. Truck origin is rear, local +X points outside. Rack model local +X is span, hence CAD layout rotation +90 degrees.",
+  "source_files": {
+    "envelope_geometry": {
+      "path": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Envelope\\envelope_geometry.json",
+      "sha256": "4b6e2d7acb2292f3029205a26c38554febcbd3ec33508c2676b99f1fd6372cf5"
+    },
+    "envelope_manifest": {
+      "path": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Envelope\\envelope_v2.json",
+      "sha256": "70d3a4f8d70c3e84080913dae6d252b165f633f40f1b0cde9f25ced1a554e7c0"
+    },
+    "docking_targets": {
+      "path": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Envelope\\door_docking_targets.json",
+      "sha256": "1cf84b89d968ae4b99a7cc1a63148a0ab43d98d7dd4fadc92aaf3fe1dfcce4f5"
+    },
+    "truck_mesh": {
+      "path": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Trucks\\dock_truck_v2.json",
+      "sha256": "150031f402623d5dc7f7175db71fba809efb9ebe4f6a733136ca99abe9f745df"
+    },
+    "rack_layout": {
+      "path": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Layout\\rack_spacing.json",
+      "sha256": "0b47d041078c6c6fa861c0d07a249308cedc7f37b372456cd00eeefa3c54e39a"
+    },
+    "rack_meshes": {
+      "path": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\refined_rack_cargo.json",
+      "sha256": "37211307b3cf2a991427e22cc60e70311da89b65b1021f14cbc653a181b93344"
+    },
+    "ground_meshes": {
+      "path": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Presentation\\presentation_storage.json",
+      "sha256": "d352377ca9aaf15ce56395761930e670d7654be15eee203a9653d759439c6e7e"
+    }
+  },
+  "rack_asset_binding": {
+    "requested_manifest": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\refined_rack_cargo.json",
+    "used_manifest": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\refined_rack_cargo.json",
+    "baseline_fallback_used": false,
+    "status": "v2_current_fbx",
+    "fbx_checks": [
+      {
+        "mapping_key": "A:0:3.7138",
+        "name": "SM_GHS_V2Rack_A_W37138",
+        "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\SM_GHS_V2Rack_A_W37138.fbx",
+        "expected_sha256": "13f534de8da0e95c4f2f76569b3def67de94f6904bbaeb5ae672d743a32a8c35",
+        "actual_sha256": "13f534de8da0e95c4f2f76569b3def67de94f6904bbaeb5ae672d743a32a8c35",
+        "sha256_matches": true
+      },
+      {
+        "mapping_key": "A:0:3.7619",
+        "name": "SM_GHS_V2Rack_A_W37619",
+        "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\SM_GHS_V2Rack_A_W37619.fbx",
+        "expected_sha256": "e71550b790f5ab1259702a585432e7af305a7dd0066ea00a2915a12f4e3df14b",
+        "actual_sha256": "e71550b790f5ab1259702a585432e7af305a7dd0066ea00a2915a12f4e3df14b",
+        "sha256_matches": true
+      },
+      {
+        "mapping_key": "A:1:3.6176",
+        "name": "SM_GHS_V2Rack_A_Pass_W36176",
+        "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\SM_GHS_V2Rack_A_Pass_W36176.fbx",
+        "expected_sha256": "b74ae8a60112dff1b2ba5284aa386f25a6cec90b440b20750610fe2465ae70f7",
+        "actual_sha256": "b74ae8a60112dff1b2ba5284aa386f25a6cec90b440b20750610fe2465ae70f7",
+        "sha256_matches": true
+      },
+      {
+        "mapping_key": "A:1:3.7138",
+        "name": "SM_GHS_V2Rack_A_Pass_W37138",
+        "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\SM_GHS_V2Rack_A_Pass_W37138.fbx",
+        "expected_sha256": "0fa38a7829e4d5749b1be61643186a336f97915be97ca2f3c96a56496ef7c03a",
+        "actual_sha256": "0fa38a7829e4d5749b1be61643186a336f97915be97ca2f3c96a56496ef7c03a",
+        "sha256_matches": true
+      },
+      {
+        "mapping_key": "B:0:3.7138",
+        "name": "SM_GHS_V2Rack_B_W37138",
+        "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\SM_GHS_V2Rack_B_W37138.fbx",
+        "expected_sha256": "c7b24b78b4989e1c32c68e922a7923d0a77dcd25f3033b2291a34b0bcb8d4dec",
+        "actual_sha256": "c7b24b78b4989e1c32c68e922a7923d0a77dcd25f3033b2291a34b0bcb8d4dec",
+        "sha256_matches": true
+      },
+      {
+        "mapping_key": "B:0:3.7619",
+        "name": "SM_GHS_V2Rack_B_W37619",
+        "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\SM_GHS_V2Rack_B_W37619.fbx",
+        "expected_sha256": "685e330f051d1491969faaa36c6f74354575a04e4d4ef99c2d80f7bbdbcd3832",
+        "actual_sha256": "685e330f051d1491969faaa36c6f74354575a04e4d4ef99c2d80f7bbdbcd3832",
+        "sha256_matches": true
+      },
+      {
+        "mapping_key": "B:1:3.6176",
+        "name": "SM_GHS_V2Rack_B_Pass_W36176",
+        "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\SM_GHS_V2Rack_B_Pass_W36176.fbx",
+        "expected_sha256": "df977612c7e51529b80a2b624a7537214895a80ef0d2056141c95517fda1b929",
+        "actual_sha256": "df977612c7e51529b80a2b624a7537214895a80ef0d2056141c95517fda1b929",
+        "sha256_matches": true
+      },
+      {
+        "mapping_key": "D1:0:3.7138",
+        "name": "SM_GHS_V2Rack_D1_W37138",
+        "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\SM_GHS_V2Rack_D1_W37138.fbx",
+        "expected_sha256": "4b21a8bb096ae8821075a3b09d7600a10ba2c3d006916a8dc478ab911c689135",
+        "actual_sha256": "4b21a8bb096ae8821075a3b09d7600a10ba2c3d006916a8dc478ab911c689135",
+        "sha256_matches": true
+      },
+      {
+        "mapping_key": "D1:0:3.7619",
+        "name": "SM_GHS_V2Rack_D1_W37619",
+        "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\SM_GHS_V2Rack_D1_W37619.fbx",
+        "expected_sha256": "f32c56d9f7283bf83f5f6b5852cab71fc6c6cdf23eba3d672313105eca5fc47b",
+        "actual_sha256": "f32c56d9f7283bf83f5f6b5852cab71fc6c6cdf23eba3d672313105eca5fc47b",
+        "sha256_matches": true
+      },
+      {
+        "mapping_key": "D1:0:3.8100",
+        "name": "SM_GHS_V2Rack_D1",
+        "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Racks\\SM_GHS_V2Rack_D1.fbx",
+        "expected_sha256": "8c56f358677d49f615ee678e34e77efd31160c03507bd644118b59f60800931d",
+        "actual_sha256": "8c56f358677d49f615ee678e34e77efd31160c03507bd644118b59f60800931d",
+        "sha256_matches": true
+      }
+    ],
+    "fbx_issues": []
+  },
+  "tolerances": {
+    "area_m2": 1e-08,
+    "volume_m3": 1e-08
+  },
+  "summary": {
+    "truck_count": 87,
+    "truck_pair_count_checked": 3741,
+    "truck_obb_collision_count": 0,
+    "trucks_inside_building_count": 0,
+    "truck_wall_collision_count": 0,
+    "truck_ground_offset_m": 0.0065000057220458984,
+    "truck_lowest_world_z_m": 0.0,
+    "minimum_truck_to_truck_gap_m": 0.791751000000005,
+    "nearest_truck_pair": [
+      "DockTruck_31",
+      "DockTruck_32"
+    ],
+    "minimum_truck_to_building_gap_m": 0.11978300953673937,
+    "rack_count": 1629,
+    "rack_wall_broadphase_candidates": 0,
+    "rack_wall_component_collision_count": 0,
+    "rack_outside_building_count": 0,
+    "rack_missing_model_count": 0,
+    "rack_mesh_manifest_fallback_used": false,
+    "rack_model_fbx_hash_issue_count": 0,
+    "final_v2_rack_asset_binding_verified": true,
+    "minimum_rack_envelope_to_wall_gap_m": 0.1396017987540794,
+    "nearest_rack_to_wall": "CAD_35ED2D_36CF16",
+    "groundcargo_count": 7530,
+    "groundcargo_wall_collision_count": 0,
+    "groundcargo_outside_building_count": 0,
+    "groundcargo_unknown_variant_count": 0,
+    "minimum_groundcargo_envelope_to_wall_gap_m": 4.725599999999993,
+    "nearest_groundcargo_to_wall": "CAD_30035D",
+    "closed_top_perimeter_with_intentional_door_openings": true
+  },
+  "trucks": [
+    {
+      "id": "DockTruck_01",
+      "dock_number": "1",
+      "door_instance_id": "CAD_251052",
+      "rear_origin_cad_m": [
+        227.099359,
+        4.627811,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        4.627811,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          3.1278110000000003
+        ],
+        [
+          235.80535837438964,
+          6.127811
+        ],
+        [
+          226.90185900953674,
+          6.127811
+        ],
+        [
+          226.90185900953674,
+          3.1278110000000003
+        ],
+        [
+          235.80535837438964,
+          3.1278110000000003
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_02",
+      "dock_number": "2",
+      "door_instance_id": "CAD_25105B",
+      "rear_origin_cad_m": [
+        227.099359,
+        -1.803597,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        -1.803597,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          -3.303597
+        ],
+        [
+          235.80535837438964,
+          -0.3035969999999999
+        ],
+        [
+          226.90185900953674,
+          -0.3035969999999999
+        ],
+        [
+          226.90185900953674,
+          -3.303597
+        ],
+        [
+          235.80535837438964,
+          -3.303597
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_03",
+      "dock_number": "3",
+      "door_instance_id": "CAD_251064",
+      "rear_origin_cad_m": [
+        227.099359,
+        -5.738591,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        -5.738591,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          -7.238591
+        ],
+        [
+          235.80535837438964,
+          -4.238591
+        ],
+        [
+          226.90185900953674,
+          -4.238591
+        ],
+        [
+          226.90185900953674,
+          -7.238591
+        ],
+        [
+          235.80535837438964,
+          -7.238591
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_04",
+      "dock_number": "4",
+      "door_instance_id": "CAD_25106D",
+      "rear_origin_cad_m": [
+        227.099359,
+        -9.715904,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        -9.715904,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          -11.215904
+        ],
+        [
+          235.80535837438964,
+          -8.215904
+        ],
+        [
+          226.90185900953674,
+          -8.215904
+        ],
+        [
+          226.90185900953674,
+          -11.215904
+        ],
+        [
+          235.80535837438964,
+          -11.215904
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_05",
+      "dock_number": "5",
+      "door_instance_id": "CAD_251076",
+      "rear_origin_cad_m": [
+        227.099359,
+        -13.566287,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        -13.566287,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          -15.066287
+        ],
+        [
+          235.80535837438964,
+          -12.066287
+        ],
+        [
+          226.90185900953674,
+          -12.066287
+        ],
+        [
+          226.90185900953674,
+          -15.066287
+        ],
+        [
+          235.80535837438964,
+          -15.066287
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_06",
+      "dock_number": "6",
+      "door_instance_id": "CAD_25107F",
+      "rear_origin_cad_m": [
+        227.099359,
+        -17.458971,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        -17.458971,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          -18.958971
+        ],
+        [
+          235.80535837438964,
+          -15.958970999999998
+        ],
+        [
+          226.90185900953674,
+          -15.958970999999998
+        ],
+        [
+          226.90185900953674,
+          -18.958971
+        ],
+        [
+          235.80535837438964,
+          -18.958971
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_07",
+      "dock_number": "7",
+      "door_instance_id": "CAD_251088",
+      "rear_origin_cad_m": [
+        227.099359,
+        -21.57188,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        -21.57188,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          -23.07188
+        ],
+        [
+          235.80535837438964,
+          -20.07188
+        ],
+        [
+          226.90185900953674,
+          -20.07188
+        ],
+        [
+          226.90185900953674,
+          -23.07188
+        ],
+        [
+          235.80535837438964,
+          -23.07188
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_08",
+      "dock_number": "8",
+      "door_instance_id": "CAD_251091",
+      "rear_origin_cad_m": [
+        227.099359,
+        -29.490452,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        -29.490452,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          -30.990452
+        ],
+        [
+          235.80535837438964,
+          -27.990452
+        ],
+        [
+          226.90185900953674,
+          -27.990452
+        ],
+        [
+          226.90185900953674,
+          -30.990452
+        ],
+        [
+          235.80535837438964,
+          -30.990452
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_09",
+      "dock_number": "9",
+      "door_instance_id": "CAD_25109A",
+      "rear_origin_cad_m": [
+        227.099359,
+        -33.489963,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        -33.489963,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          -34.989963
+        ],
+        [
+          235.80535837438964,
+          -31.989963000000003
+        ],
+        [
+          226.90185900953674,
+          -31.989963000000003
+        ],
+        [
+          226.90185900953674,
+          -34.989963
+        ],
+        [
+          235.80535837438964,
+          -34.989963
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_10",
+      "dock_number": "10",
+      "door_instance_id": "CAD_2510A3",
+      "rear_origin_cad_m": [
+        227.099359,
+        -37.31131,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        -37.31131,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          -38.81131
+        ],
+        [
+          235.80535837438964,
+          -35.81131
+        ],
+        [
+          226.90185900953674,
+          -35.81131
+        ],
+        [
+          226.90185900953674,
+          -38.81131
+        ],
+        [
+          235.80535837438964,
+          -38.81131
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_11",
+      "dock_number": "11",
+      "door_instance_id": "CAD_2510AC",
+      "rear_origin_cad_m": [
+        227.099359,
+        -41.345137,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        -41.345137,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          -42.845137
+        ],
+        [
+          235.80535837438964,
+          -39.845137
+        ],
+        [
+          226.90185900953674,
+          -39.845137
+        ],
+        [
+          226.90185900953674,
+          -42.845137
+        ],
+        [
+          235.80535837438964,
+          -42.845137
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_12",
+      "dock_number": "12",
+      "door_instance_id": "CAD_2510B5",
+      "rear_origin_cad_m": [
+        227.099359,
+        -45.213911,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        -45.213911,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          -46.713911
+        ],
+        [
+          235.80535837438964,
+          -43.713911
+        ],
+        [
+          226.90185900953674,
+          -43.713911
+        ],
+        [
+          226.90185900953674,
+          -46.713911
+        ],
+        [
+          235.80535837438964,
+          -46.713911
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_13",
+      "dock_number": "13",
+      "door_instance_id": "CAD_2510BE",
+      "rear_origin_cad_m": [
+        227.099359,
+        -49.207425,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        227.099359,
+        -49.207425,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -0.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          235.80535837438964,
+          -50.707425
+        ],
+        [
+          235.80535837438964,
+          -47.707425
+        ],
+        [
+          226.90185900953674,
+          -47.707425
+        ],
+        [
+          226.90185900953674,
+          -50.707425
+        ],
+        [
+          235.80535837438964,
+          -50.707425
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.5013090095367261,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_14",
+      "dock_number": "14",
+      "door_instance_id": "CAD_2510C7",
+      "rear_origin_cad_m": [
+        165.113563,
+        -59.076617,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        165.113563,
+        -59.076617,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          163.613563,
+          -67.78261637438965
+        ],
+        [
+          166.613563,
+          -67.78261637438965
+        ],
+        [
+          166.613563,
+          -58.87911700953674
+        ],
+        [
+          163.613563,
+          -58.87911700953674
+        ],
+        [
+          163.613563,
+          -67.78261637438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.24730700953674045,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_15",
+      "dock_number": "15",
+      "door_instance_id": "CAD_2510D0",
+      "rear_origin_cad_m": [
+        161.139135,
+        -59.076617,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        161.139135,
+        -59.076617,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          159.639135,
+          -67.78261637438965
+        ],
+        [
+          162.639135,
+          -67.78261637438965
+        ],
+        [
+          162.639135,
+          -58.87911700953674
+        ],
+        [
+          159.639135,
+          -58.87911700953674
+        ],
+        [
+          159.639135,
+          -67.78261637438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.24730700953674045,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_16",
+      "dock_number": "16",
+      "door_instance_id": "CAD_2510D9",
+      "rear_origin_cad_m": [
+        153.133982,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        153.133982,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          151.633982,
+          -67.65509237438965
+        ],
+        [
+          154.633982,
+          -67.65509237438965
+        ],
+        [
+          154.633982,
+          -58.75159300953674
+        ],
+        [
+          151.633982,
+          -58.75159300953674
+        ],
+        [
+          151.633982,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_17",
+      "dock_number": "17",
+      "door_instance_id": "CAD_2510E2",
+      "rear_origin_cad_m": [
+        149.029819,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        149.029819,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          147.529819,
+          -67.65509237438965
+        ],
+        [
+          150.529819,
+          -67.65509237438965
+        ],
+        [
+          150.529819,
+          -58.75159300953674
+        ],
+        [
+          147.529819,
+          -58.75159300953674
+        ],
+        [
+          147.529819,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_18",
+      "dock_number": "18",
+      "door_instance_id": "CAD_2510EB",
+      "rear_origin_cad_m": [
+        145.104864,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        145.104864,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          143.604864,
+          -67.65509237438965
+        ],
+        [
+          146.604864,
+          -67.65509237438965
+        ],
+        [
+          146.604864,
+          -58.75159300953674
+        ],
+        [
+          143.604864,
+          -58.75159300953674
+        ],
+        [
+          143.604864,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_19",
+      "dock_number": "19",
+      "door_instance_id": "CAD_2510F4",
+      "rear_origin_cad_m": [
+        141.159093,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        141.159093,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          139.659093,
+          -67.65509237438965
+        ],
+        [
+          142.659093,
+          -67.65509237438965
+        ],
+        [
+          142.659093,
+          -58.75159300953674
+        ],
+        [
+          139.659093,
+          -58.75159300953674
+        ],
+        [
+          139.659093,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_20",
+      "dock_number": "20",
+      "door_instance_id": "CAD_2510FD",
+      "rear_origin_cad_m": [
+        137.188227,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        137.188227,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          135.688227,
+          -67.65509237438965
+        ],
+        [
+          138.688227,
+          -67.65509237438965
+        ],
+        [
+          138.688227,
+          -58.75159300953674
+        ],
+        [
+          135.688227,
+          -58.75159300953674
+        ],
+        [
+          135.688227,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_21",
+      "dock_number": "21",
+      "door_instance_id": "CAD_251106",
+      "rear_origin_cad_m": [
+        133.355324,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        133.355324,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          131.855324,
+          -67.65509237438965
+        ],
+        [
+          134.855324,
+          -67.65509237438965
+        ],
+        [
+          134.855324,
+          -58.75159300953674
+        ],
+        [
+          131.855324,
+          -58.75159300953674
+        ],
+        [
+          131.855324,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_22",
+      "dock_number": "22",
+      "door_instance_id": "CAD_25110F",
+      "rear_origin_cad_m": [
+        129.392924,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        129.392924,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          127.892924,
+          -67.65509237438965
+        ],
+        [
+          130.892924,
+          -67.65509237438965
+        ],
+        [
+          130.892924,
+          -58.75159300953674
+        ],
+        [
+          127.892924,
+          -58.75159300953674
+        ],
+        [
+          127.892924,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_23",
+      "dock_number": "23",
+      "door_instance_id": "CAD_251118",
+      "rear_origin_cad_m": [
+        121.468124,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        121.468124,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          119.968124,
+          -67.65509237438965
+        ],
+        [
+          122.968124,
+          -67.65509237438965
+        ],
+        [
+          122.968124,
+          -58.75159300953674
+        ],
+        [
+          119.968124,
+          -58.75159300953674
+        ],
+        [
+          119.968124,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_24",
+      "dock_number": "24",
+      "door_instance_id": "CAD_251121",
+      "rear_origin_cad_m": [
+        117.505724,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        117.505724,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          116.005724,
+          -67.65509237438965
+        ],
+        [
+          119.005724,
+          -67.65509237438965
+        ],
+        [
+          119.005724,
+          -58.75159300953674
+        ],
+        [
+          116.005724,
+          -58.75159300953674
+        ],
+        [
+          116.005724,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_25",
+      "dock_number": "25",
+      "door_instance_id": "CAD_25112A",
+      "rear_origin_cad_m": [
+        113.543324,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        113.543324,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          112.043324,
+          -67.65509237438965
+        ],
+        [
+          115.043324,
+          -67.65509237438965
+        ],
+        [
+          115.043324,
+          -58.75159300953674
+        ],
+        [
+          112.043324,
+          -58.75159300953674
+        ],
+        [
+          112.043324,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_26",
+      "dock_number": "26",
+      "door_instance_id": "CAD_251133",
+      "rear_origin_cad_m": [
+        109.580924,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        109.580924,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          108.080924,
+          -67.65509237438965
+        ],
+        [
+          111.080924,
+          -67.65509237438965
+        ],
+        [
+          111.080924,
+          -58.75159300953674
+        ],
+        [
+          108.080924,
+          -58.75159300953674
+        ],
+        [
+          108.080924,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_27",
+      "dock_number": "27",
+      "door_instance_id": "CAD_25113C",
+      "rear_origin_cad_m": [
+        105.618524,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        105.618524,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          104.118524,
+          -67.65509237438965
+        ],
+        [
+          107.118524,
+          -67.65509237438965
+        ],
+        [
+          107.118524,
+          -58.75159300953674
+        ],
+        [
+          104.118524,
+          -58.75159300953674
+        ],
+        [
+          104.118524,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_28",
+      "dock_number": "28",
+      "door_instance_id": "CAD_251145",
+      "rear_origin_cad_m": [
+        101.656124,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        101.656124,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          100.156124,
+          -67.65509237438965
+        ],
+        [
+          103.156124,
+          -67.65509237438965
+        ],
+        [
+          103.156124,
+          -58.75159300953674
+        ],
+        [
+          100.156124,
+          -58.75159300953674
+        ],
+        [
+          100.156124,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_29",
+      "dock_number": "29",
+      "door_instance_id": "CAD_25114E",
+      "rear_origin_cad_m": [
+        97.693724,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        97.693724,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          96.193724,
+          -67.65509237438965
+        ],
+        [
+          99.193724,
+          -67.65509237438965
+        ],
+        [
+          99.193724,
+          -58.75159300953674
+        ],
+        [
+          96.193724,
+          -58.75159300953674
+        ],
+        [
+          96.193724,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_30",
+      "dock_number": "30",
+      "door_instance_id": "CAD_251157",
+      "rear_origin_cad_m": [
+        89.768924,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        89.768924,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          88.268924,
+          -67.65509237438965
+        ],
+        [
+          91.268924,
+          -67.65509237438965
+        ],
+        [
+          91.268924,
+          -58.75159300953674
+        ],
+        [
+          88.268924,
+          -58.75159300953674
+        ],
+        [
+          88.268924,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_31",
+      "dock_number": "31",
+      "door_instance_id": "CAD_251160",
+      "rear_origin_cad_m": [
+        85.635875,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        85.635875,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          84.135875,
+          -67.65509237438965
+        ],
+        [
+          87.135875,
+          -67.65509237438965
+        ],
+        [
+          87.135875,
+          -58.75159300953674
+        ],
+        [
+          84.135875,
+          -58.75159300953674
+        ],
+        [
+          84.135875,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_32",
+      "dock_number": "32",
+      "door_instance_id": "CAD_251169",
+      "rear_origin_cad_m": [
+        81.844124,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        81.844124,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          80.344124,
+          -67.65509237438965
+        ],
+        [
+          83.344124,
+          -67.65509237438965
+        ],
+        [
+          83.344124,
+          -58.75159300953674
+        ],
+        [
+          80.344124,
+          -58.75159300953674
+        ],
+        [
+          80.344124,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_33",
+      "dock_number": "33",
+      "door_instance_id": "CAD_251172",
+      "rear_origin_cad_m": [
+        77.881724,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        77.881724,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          76.381724,
+          -67.65509237438965
+        ],
+        [
+          79.381724,
+          -67.65509237438965
+        ],
+        [
+          79.381724,
+          -58.75159300953674
+        ],
+        [
+          76.381724,
+          -58.75159300953674
+        ],
+        [
+          76.381724,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_34",
+      "dock_number": "34",
+      "door_instance_id": "CAD_25117B",
+      "rear_origin_cad_m": [
+        73.919324,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        73.919324,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          72.419324,
+          -67.65509237438965
+        ],
+        [
+          75.419324,
+          -67.65509237438965
+        ],
+        [
+          75.419324,
+          -58.75159300953674
+        ],
+        [
+          72.419324,
+          -58.75159300953674
+        ],
+        [
+          72.419324,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_35",
+      "dock_number": "35",
+      "door_instance_id": "CAD_251184",
+      "rear_origin_cad_m": [
+        69.956924,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        69.956924,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          68.456924,
+          -67.65509237438965
+        ],
+        [
+          71.456924,
+          -67.65509237438965
+        ],
+        [
+          71.456924,
+          -58.75159300953674
+        ],
+        [
+          68.456924,
+          -58.75159300953674
+        ],
+        [
+          68.456924,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_36",
+      "dock_number": "36",
+      "door_instance_id": "CAD_25118D",
+      "rear_origin_cad_m": [
+        65.994524,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        65.994524,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          64.494524,
+          -67.65509237438965
+        ],
+        [
+          67.494524,
+          -67.65509237438965
+        ],
+        [
+          67.494524,
+          -58.75159300953674
+        ],
+        [
+          64.494524,
+          -58.75159300953674
+        ],
+        [
+          64.494524,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_37",
+      "dock_number": "37",
+      "door_instance_id": "CAD_251196",
+      "rear_origin_cad_m": [
+        58.069724,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        58.069724,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          56.569724,
+          -67.65509237438965
+        ],
+        [
+          59.569724,
+          -67.65509237438965
+        ],
+        [
+          59.569724,
+          -58.75159300953674
+        ],
+        [
+          56.569724,
+          -58.75159300953674
+        ],
+        [
+          56.569724,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_38",
+      "dock_number": "38",
+      "door_instance_id": "CAD_25119F",
+      "rear_origin_cad_m": [
+        54.107324,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        54.107324,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          52.607324,
+          -67.65509237438965
+        ],
+        [
+          55.607324,
+          -67.65509237438965
+        ],
+        [
+          55.607324,
+          -58.75159300953674
+        ],
+        [
+          52.607324,
+          -58.75159300953674
+        ],
+        [
+          52.607324,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_39",
+      "dock_number": "39",
+      "door_instance_id": "CAD_2511A8",
+      "rear_origin_cad_m": [
+        50.144924,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        50.144924,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          48.644924,
+          -67.65509237438965
+        ],
+        [
+          51.644924,
+          -67.65509237438965
+        ],
+        [
+          51.644924,
+          -58.75159300953674
+        ],
+        [
+          48.644924,
+          -58.75159300953674
+        ],
+        [
+          48.644924,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_40",
+      "dock_number": "40",
+      "door_instance_id": "CAD_2511B1",
+      "rear_origin_cad_m": [
+        46.182524,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        46.182524,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          44.682524,
+          -67.65509237438965
+        ],
+        [
+          47.682524,
+          -67.65509237438965
+        ],
+        [
+          47.682524,
+          -58.75159300953674
+        ],
+        [
+          44.682524,
+          -58.75159300953674
+        ],
+        [
+          44.682524,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_41",
+      "dock_number": "41",
+      "door_instance_id": "CAD_2511BA",
+      "rear_origin_cad_m": [
+        42.220124,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        42.220124,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          40.720124,
+          -67.65509237438965
+        ],
+        [
+          43.720124,
+          -67.65509237438965
+        ],
+        [
+          43.720124,
+          -58.75159300953674
+        ],
+        [
+          40.720124,
+          -58.75159300953674
+        ],
+        [
+          40.720124,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_42",
+      "dock_number": "42",
+      "door_instance_id": "CAD_2511C3",
+      "rear_origin_cad_m": [
+        38.257724,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        38.257724,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          36.757724,
+          -67.65509237438965
+        ],
+        [
+          39.757724,
+          -67.65509237438965
+        ],
+        [
+          39.757724,
+          -58.75159300953674
+        ],
+        [
+          36.757724,
+          -58.75159300953674
+        ],
+        [
+          36.757724,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_43",
+      "dock_number": "43",
+      "door_instance_id": "CAD_2511CC",
+      "rear_origin_cad_m": [
+        34.295324,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        34.295324,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          32.795324,
+          -67.65509237438965
+        ],
+        [
+          35.795324,
+          -67.65509237438965
+        ],
+        [
+          35.795324,
+          -58.75159300953674
+        ],
+        [
+          32.795324,
+          -58.75159300953674
+        ],
+        [
+          32.795324,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_44",
+      "dock_number": "44",
+      "door_instance_id": "CAD_2511D5",
+      "rear_origin_cad_m": [
+        26.370524,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        26.370524,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          24.870524,
+          -67.65509237438965
+        ],
+        [
+          27.870524,
+          -67.65509237438965
+        ],
+        [
+          27.870524,
+          -58.75159300953674
+        ],
+        [
+          24.870524,
+          -58.75159300953674
+        ],
+        [
+          24.870524,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_45",
+      "dock_number": "45",
+      "door_instance_id": "CAD_2511DE",
+      "rear_origin_cad_m": [
+        22.408124,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        22.408124,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          20.908124,
+          -67.65509237438965
+        ],
+        [
+          23.908124,
+          -67.65509237438965
+        ],
+        [
+          23.908124,
+          -58.75159300953674
+        ],
+        [
+          20.908124,
+          -58.75159300953674
+        ],
+        [
+          20.908124,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_46",
+      "dock_number": "46",
+      "door_instance_id": "CAD_2511E7",
+      "rear_origin_cad_m": [
+        18.445724,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        18.445724,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          16.945724,
+          -67.65509237438965
+        ],
+        [
+          19.945724,
+          -67.65509237438965
+        ],
+        [
+          19.945724,
+          -58.75159300953674
+        ],
+        [
+          16.945724,
+          -58.75159300953674
+        ],
+        [
+          16.945724,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_47",
+      "dock_number": "47",
+      "door_instance_id": "CAD_2511F0",
+      "rear_origin_cad_m": [
+        14.483324,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        14.483324,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          12.983324,
+          -67.65509237438965
+        ],
+        [
+          15.983324,
+          -67.65509237438965
+        ],
+        [
+          15.983324,
+          -58.75159300953674
+        ],
+        [
+          12.983324,
+          -58.75159300953674
+        ],
+        [
+          12.983324,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_48",
+      "dock_number": "48",
+      "door_instance_id": "CAD_2511F9",
+      "rear_origin_cad_m": [
+        10.520924,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        10.520924,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          9.020924,
+          -67.65509237438965
+        ],
+        [
+          12.020924,
+          -67.65509237438965
+        ],
+        [
+          12.020924,
+          -58.75159300953674
+        ],
+        [
+          9.020924,
+          -58.75159300953674
+        ],
+        [
+          9.020924,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_49",
+      "dock_number": "49",
+      "door_instance_id": "CAD_251202",
+      "rear_origin_cad_m": [
+        6.558524,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        6.558524,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          5.058524,
+          -67.65509237438965
+        ],
+        [
+          8.058524,
+          -67.65509237438965
+        ],
+        [
+          8.058524,
+          -58.75159300953674
+        ],
+        [
+          5.058524,
+          -58.75159300953674
+        ],
+        [
+          5.058524,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_50",
+      "dock_number": "50",
+      "door_instance_id": "CAD_25120B",
+      "rear_origin_cad_m": [
+        2.596124,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        2.596124,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          1.096124,
+          -67.65509237438965
+        ],
+        [
+          4.096124,
+          -67.65509237438965
+        ],
+        [
+          4.096124,
+          -58.75159300953674
+        ],
+        [
+          1.096124,
+          -58.75159300953674
+        ],
+        [
+          1.096124,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_51",
+      "dock_number": "51",
+      "door_instance_id": "CAD_251214",
+      "rear_origin_cad_m": [
+        -5.328676,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -5.328676,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -6.828676,
+          -67.65509237438965
+        ],
+        [
+          -3.8286759999999997,
+          -67.65509237438965
+        ],
+        [
+          -3.8286759999999997,
+          -58.75159300953674
+        ],
+        [
+          -6.828676,
+          -58.75159300953674
+        ],
+        [
+          -6.828676,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_52",
+      "dock_number": "52",
+      "door_instance_id": "CAD_25121D",
+      "rear_origin_cad_m": [
+        -9.291076,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -9.291076,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -10.791076,
+          -67.65509237438965
+        ],
+        [
+          -7.791076,
+          -67.65509237438965
+        ],
+        [
+          -7.791076,
+          -58.75159300953674
+        ],
+        [
+          -10.791076,
+          -58.75159300953674
+        ],
+        [
+          -10.791076,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_53",
+      "dock_number": "53",
+      "door_instance_id": "CAD_251226",
+      "rear_origin_cad_m": [
+        -13.253476,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -13.253476,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -14.753476,
+          -67.65509237438965
+        ],
+        [
+          -11.753476,
+          -67.65509237438965
+        ],
+        [
+          -11.753476,
+          -58.75159300953674
+        ],
+        [
+          -14.753476,
+          -58.75159300953674
+        ],
+        [
+          -14.753476,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_54",
+      "dock_number": "54",
+      "door_instance_id": "CAD_25122F",
+      "rear_origin_cad_m": [
+        -37.027876,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -37.027876,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -38.527876,
+          -67.65509237438965
+        ],
+        [
+          -35.527876,
+          -67.65509237438965
+        ],
+        [
+          -35.527876,
+          -58.75159300953674
+        ],
+        [
+          -38.527876,
+          -58.75159300953674
+        ],
+        [
+          -38.527876,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_55",
+      "dock_number": "55",
+      "door_instance_id": "CAD_251238",
+      "rear_origin_cad_m": [
+        -40.990276,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -40.990276,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -42.490276,
+          -67.65509237438965
+        ],
+        [
+          -39.490276,
+          -67.65509237438965
+        ],
+        [
+          -39.490276,
+          -58.75159300953674
+        ],
+        [
+          -42.490276,
+          -58.75159300953674
+        ],
+        [
+          -42.490276,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_56",
+      "dock_number": "56",
+      "door_instance_id": "CAD_251241",
+      "rear_origin_cad_m": [
+        -44.952676,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -44.952676,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -46.452676,
+          -67.65509237438965
+        ],
+        [
+          -43.452676,
+          -67.65509237438965
+        ],
+        [
+          -43.452676,
+          -58.75159300953674
+        ],
+        [
+          -46.452676,
+          -58.75159300953674
+        ],
+        [
+          -46.452676,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_57",
+      "dock_number": "57",
+      "door_instance_id": "CAD_25124A",
+      "rear_origin_cad_m": [
+        -48.915076,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -48.915076,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -50.415076,
+          -67.65509237438965
+        ],
+        [
+          -47.415076,
+          -67.65509237438965
+        ],
+        [
+          -47.415076,
+          -58.75159300953674
+        ],
+        [
+          -50.415076,
+          -58.75159300953674
+        ],
+        [
+          -50.415076,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_58",
+      "dock_number": "58",
+      "door_instance_id": "CAD_251253",
+      "rear_origin_cad_m": [
+        -52.877476,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -52.877476,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -54.377476,
+          -67.65509237438965
+        ],
+        [
+          -51.377476,
+          -67.65509237438965
+        ],
+        [
+          -51.377476,
+          -58.75159300953674
+        ],
+        [
+          -54.377476,
+          -58.75159300953674
+        ],
+        [
+          -54.377476,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_60",
+      "dock_number": "60",
+      "door_instance_id": "CAD_25125C",
+      "rear_origin_cad_m": [
+        -60.802276,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -60.802276,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -62.302276,
+          -67.65509237438965
+        ],
+        [
+          -59.302276,
+          -67.65509237438965
+        ],
+        [
+          -59.302276,
+          -58.75159300953674
+        ],
+        [
+          -62.302276,
+          -58.75159300953674
+        ],
+        [
+          -62.302276,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_59",
+      "dock_number": "59",
+      "door_instance_id": "CAD_251265",
+      "rear_origin_cad_m": [
+        -56.839876,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -56.839876,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -58.339876,
+          -67.65509237438965
+        ],
+        [
+          -55.339876,
+          -67.65509237438965
+        ],
+        [
+          -55.339876,
+          -58.75159300953674
+        ],
+        [
+          -58.339876,
+          -58.75159300953674
+        ],
+        [
+          -58.339876,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_61",
+      "dock_number": "61",
+      "door_instance_id": "CAD_25126E",
+      "rear_origin_cad_m": [
+        -68.727076,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -68.727076,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -70.227076,
+          -67.65509237438965
+        ],
+        [
+          -67.227076,
+          -67.65509237438965
+        ],
+        [
+          -67.227076,
+          -58.75159300953674
+        ],
+        [
+          -70.227076,
+          -58.75159300953674
+        ],
+        [
+          -70.227076,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_62",
+      "dock_number": "62",
+      "door_instance_id": "CAD_251277",
+      "rear_origin_cad_m": [
+        -72.689476,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -72.689476,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -74.189476,
+          -67.65509237438965
+        ],
+        [
+          -71.189476,
+          -67.65509237438965
+        ],
+        [
+          -71.189476,
+          -58.75159300953674
+        ],
+        [
+          -74.189476,
+          -58.75159300953674
+        ],
+        [
+          -74.189476,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_63",
+      "dock_number": "63",
+      "door_instance_id": "CAD_251280",
+      "rear_origin_cad_m": [
+        -76.651876,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -76.651876,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -78.151876,
+          -67.65509237438965
+        ],
+        [
+          -75.151876,
+          -67.65509237438965
+        ],
+        [
+          -75.151876,
+          -58.75159300953674
+        ],
+        [
+          -78.151876,
+          -58.75159300953674
+        ],
+        [
+          -78.151876,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_64",
+      "dock_number": "64",
+      "door_instance_id": "CAD_251289",
+      "rear_origin_cad_m": [
+        -80.614276,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -80.614276,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -82.114276,
+          -67.65509237438965
+        ],
+        [
+          -79.114276,
+          -67.65509237438965
+        ],
+        [
+          -79.114276,
+          -58.75159300953674
+        ],
+        [
+          -82.114276,
+          -58.75159300953674
+        ],
+        [
+          -82.114276,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_65",
+      "dock_number": "65",
+      "door_instance_id": "CAD_251292",
+      "rear_origin_cad_m": [
+        -84.576676,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -84.576676,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -86.076676,
+          -67.65509237438965
+        ],
+        [
+          -83.076676,
+          -67.65509237438965
+        ],
+        [
+          -83.076676,
+          -58.75159300953674
+        ],
+        [
+          -86.076676,
+          -58.75159300953674
+        ],
+        [
+          -86.076676,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_66",
+      "dock_number": "66",
+      "door_instance_id": "CAD_25129B",
+      "rear_origin_cad_m": [
+        -88.539076,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -88.539076,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -90.039076,
+          -67.65509237438965
+        ],
+        [
+          -87.039076,
+          -67.65509237438965
+        ],
+        [
+          -87.039076,
+          -58.75159300953674
+        ],
+        [
+          -90.039076,
+          -58.75159300953674
+        ],
+        [
+          -90.039076,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_67",
+      "dock_number": "67",
+      "door_instance_id": "CAD_2512A4",
+      "rear_origin_cad_m": [
+        -92.501476,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -92.501476,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -94.001476,
+          -67.65509237438965
+        ],
+        [
+          -91.001476,
+          -67.65509237438965
+        ],
+        [
+          -91.001476,
+          -58.75159300953674
+        ],
+        [
+          -94.001476,
+          -58.75159300953674
+        ],
+        [
+          -94.001476,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_68",
+      "dock_number": "68",
+      "door_instance_id": "CAD_2512AD",
+      "rear_origin_cad_m": [
+        -100.426276,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -100.426276,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -101.926276,
+          -67.65509237438965
+        ],
+        [
+          -98.926276,
+          -67.65509237438965
+        ],
+        [
+          -98.926276,
+          -58.75159300953674
+        ],
+        [
+          -101.926276,
+          -58.75159300953674
+        ],
+        [
+          -101.926276,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_69",
+      "dock_number": "69",
+      "door_instance_id": "CAD_2512B6",
+      "rear_origin_cad_m": [
+        -104.388676,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -104.388676,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -105.888676,
+          -67.65509237438965
+        ],
+        [
+          -102.888676,
+          -67.65509237438965
+        ],
+        [
+          -102.888676,
+          -58.75159300953674
+        ],
+        [
+          -105.888676,
+          -58.75159300953674
+        ],
+        [
+          -105.888676,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_70",
+      "dock_number": "70",
+      "door_instance_id": "CAD_2512BF",
+      "rear_origin_cad_m": [
+        -108.351076,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -108.351076,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -109.851076,
+          -67.65509237438965
+        ],
+        [
+          -106.851076,
+          -67.65509237438965
+        ],
+        [
+          -106.851076,
+          -58.75159300953674
+        ],
+        [
+          -109.851076,
+          -58.75159300953674
+        ],
+        [
+          -109.851076,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_71",
+      "dock_number": "71",
+      "door_instance_id": "CAD_2512C8",
+      "rear_origin_cad_m": [
+        -112.313476,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -112.313476,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -113.813476,
+          -67.65509237438965
+        ],
+        [
+          -110.813476,
+          -67.65509237438965
+        ],
+        [
+          -110.813476,
+          -58.75159300953674
+        ],
+        [
+          -113.813476,
+          -58.75159300953674
+        ],
+        [
+          -113.813476,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_72",
+      "dock_number": "72",
+      "door_instance_id": "CAD_2512D1",
+      "rear_origin_cad_m": [
+        -116.275876,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -116.275876,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -117.775876,
+          -67.65509237438965
+        ],
+        [
+          -114.775876,
+          -67.65509237438965
+        ],
+        [
+          -114.775876,
+          -58.75159300953674
+        ],
+        [
+          -117.775876,
+          -58.75159300953674
+        ],
+        [
+          -117.775876,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_73",
+      "dock_number": "73",
+      "door_instance_id": "CAD_2512DA",
+      "rear_origin_cad_m": [
+        -120.238276,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -120.238276,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -121.738276,
+          -67.65509237438965
+        ],
+        [
+          -118.738276,
+          -67.65509237438965
+        ],
+        [
+          -118.738276,
+          -58.75159300953674
+        ],
+        [
+          -121.738276,
+          -58.75159300953674
+        ],
+        [
+          -121.738276,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_74",
+      "dock_number": "74",
+      "door_instance_id": "CAD_2512E3",
+      "rear_origin_cad_m": [
+        -124.200676,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -124.200676,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -125.700676,
+          -67.65509237438965
+        ],
+        [
+          -122.700676,
+          -67.65509237438965
+        ],
+        [
+          -122.700676,
+          -58.75159300953674
+        ],
+        [
+          -125.700676,
+          -58.75159300953674
+        ],
+        [
+          -125.700676,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_75",
+      "dock_number": "75",
+      "door_instance_id": "CAD_2512EC",
+      "rear_origin_cad_m": [
+        -132.163576,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -132.163576,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -133.663576,
+          -67.65509237438965
+        ],
+        [
+          -130.663576,
+          -67.65509237438965
+        ],
+        [
+          -130.663576,
+          -58.75159300953674
+        ],
+        [
+          -133.663576,
+          -58.75159300953674
+        ],
+        [
+          -133.663576,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_76",
+      "dock_number": "76",
+      "door_instance_id": "CAD_2512F5",
+      "rear_origin_cad_m": [
+        -136.125976,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -136.125976,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -137.625976,
+          -67.65509237438965
+        ],
+        [
+          -134.625976,
+          -67.65509237438965
+        ],
+        [
+          -134.625976,
+          -58.75159300953674
+        ],
+        [
+          -137.625976,
+          -58.75159300953674
+        ],
+        [
+          -137.625976,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_77",
+      "dock_number": "77",
+      "door_instance_id": "CAD_2512FE",
+      "rear_origin_cad_m": [
+        -140.088376,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -140.088376,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -141.588376,
+          -67.65509237438965
+        ],
+        [
+          -138.588376,
+          -67.65509237438965
+        ],
+        [
+          -138.588376,
+          -58.75159300953674
+        ],
+        [
+          -141.588376,
+          -58.75159300953674
+        ],
+        [
+          -141.588376,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_78",
+      "dock_number": "78",
+      "door_instance_id": "CAD_251307",
+      "rear_origin_cad_m": [
+        -144.050776,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -144.050776,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -145.550776,
+          -67.65509237438965
+        ],
+        [
+          -142.550776,
+          -67.65509237438965
+        ],
+        [
+          -142.550776,
+          -58.75159300953674
+        ],
+        [
+          -145.550776,
+          -58.75159300953674
+        ],
+        [
+          -145.550776,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_79",
+      "dock_number": "79",
+      "door_instance_id": "CAD_251310",
+      "rear_origin_cad_m": [
+        -148.013176,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -148.013176,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -149.513176,
+          -67.65509237438965
+        ],
+        [
+          -146.513176,
+          -67.65509237438965
+        ],
+        [
+          -146.513176,
+          -58.75159300953674
+        ],
+        [
+          -149.513176,
+          -58.75159300953674
+        ],
+        [
+          -149.513176,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_80",
+      "dock_number": "80",
+      "door_instance_id": "CAD_251319",
+      "rear_origin_cad_m": [
+        -151.975576,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -151.975576,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -153.475576,
+          -67.65509237438965
+        ],
+        [
+          -150.475576,
+          -67.65509237438965
+        ],
+        [
+          -150.475576,
+          -58.75159300953674
+        ],
+        [
+          -153.475576,
+          -58.75159300953674
+        ],
+        [
+          -153.475576,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_81",
+      "dock_number": "81",
+      "door_instance_id": "CAD_251322",
+      "rear_origin_cad_m": [
+        -155.937976,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -155.937976,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -157.437976,
+          -67.65509237438965
+        ],
+        [
+          -154.437976,
+          -67.65509237438965
+        ],
+        [
+          -154.437976,
+          -58.75159300953674
+        ],
+        [
+          -157.437976,
+          -58.75159300953674
+        ],
+        [
+          -157.437976,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_82",
+      "dock_number": "82",
+      "door_instance_id": "CAD_25132B",
+      "rear_origin_cad_m": [
+        -163.824676,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -163.824676,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -165.324676,
+          -67.65509237438965
+        ],
+        [
+          -162.324676,
+          -67.65509237438965
+        ],
+        [
+          -162.324676,
+          -58.75159300953674
+        ],
+        [
+          -165.324676,
+          -58.75159300953674
+        ],
+        [
+          -165.324676,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_83",
+      "dock_number": "83",
+      "door_instance_id": "CAD_251334",
+      "rear_origin_cad_m": [
+        -167.787076,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -167.787076,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -169.287076,
+          -67.65509237438965
+        ],
+        [
+          -166.287076,
+          -67.65509237438965
+        ],
+        [
+          -166.287076,
+          -58.75159300953674
+        ],
+        [
+          -169.287076,
+          -58.75159300953674
+        ],
+        [
+          -169.287076,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_84",
+      "dock_number": "84",
+      "door_instance_id": "CAD_25133D",
+      "rear_origin_cad_m": [
+        -171.749476,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -171.749476,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -173.249476,
+          -67.65509237438965
+        ],
+        [
+          -170.249476,
+          -67.65509237438965
+        ],
+        [
+          -170.249476,
+          -58.75159300953674
+        ],
+        [
+          -173.249476,
+          -58.75159300953674
+        ],
+        [
+          -173.249476,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_85",
+      "dock_number": "85",
+      "door_instance_id": "CAD_251346",
+      "rear_origin_cad_m": [
+        -175.711876,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -175.711876,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -177.211876,
+          -67.65509237438965
+        ],
+        [
+          -174.211876,
+          -67.65509237438965
+        ],
+        [
+          -174.211876,
+          -58.75159300953674
+        ],
+        [
+          -177.211876,
+          -58.75159300953674
+        ],
+        [
+          -177.211876,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_86",
+      "dock_number": "86",
+      "door_instance_id": "CAD_25134F",
+      "rear_origin_cad_m": [
+        -179.674276,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -179.674276,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -181.174276,
+          -67.65509237438965
+        ],
+        [
+          -178.174276,
+          -67.65509237438965
+        ],
+        [
+          -178.174276,
+          -58.75159300953674
+        ],
+        [
+          -181.174276,
+          -58.75159300953674
+        ],
+        [
+          -181.174276,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    },
+    {
+      "id": "DockTruck_87",
+      "dock_number": "87",
+      "door_instance_id": "CAD_251358",
+      "rear_origin_cad_m": [
+        -183.636676,
+        -58.949093,
+        0.0065000057220458984
+      ],
+      "source_docking_target_cad_m": [
+        -183.636676,
+        -58.949093,
+        0
+      ],
+      "ground_offset_m": 0.0065000057220458984,
+      "yaw_cad_deg": -90.0,
+      "z_bounds_m": [
+        0.0,
+        3.74150013923645
+      ],
+      "obb_corners_cad_m": [
+        [
+          -185.136676,
+          -67.65509237438965
+        ],
+        [
+          -182.136676,
+          -67.65509237438965
+        ],
+        [
+          -182.136676,
+          -58.75159300953674
+        ],
+        [
+          -185.136676,
+          -58.75159300953674
+        ],
+        [
+          -185.136676,
+          -67.65509237438965
+        ]
+      ],
+      "building_overlap_area_m2": 0.0,
+      "building_clearance_m": 0.11978300953673937,
+      "wall_intersections": []
+    }
+  ],
+  "truck_collisions": [],
+  "truck_building_intrusions": [],
+  "truck_wall_collisions": [],
+  "rack_wall_candidates": [],
+  "rack_wall_collisions": [],
+  "racks_outside_building": [],
+  "missing_rack_models": [],
+  "groundcargo_wall_collisions": [],
+  "groundcargo_outside_building": [],
+  "unknown_ground_variants": [],
+  "closure_verification": {
+    "source_wall_count": 330,
+    "door_count": 87,
+    "wall_height_m": 9.6,
+    "wall_thickness_m": 0.254,
+    "lintel_bottom_m": 4.2,
+    "main_building_outline_closed": true,
+    "main_building_outline_valid": true,
+    "top_perimeter_ring_continuous": true,
+    "top_perimeter_uncovered_area_m2": 4.623387406431586e-14,
+    "all_87_door_openings_clear": true,
+    "all_87_door_lintels_present": true,
+    "preserved_existing_wall_outside_door_openings_area_loss_m2": 0.0,
+    "building_footprint_area_m2": 56116.09826824961,
+    "wall_top_cap_area_m2": 332.1864894949999,
+    "roofless": true,
+    "no_roof_cap_created": true,
+    "old_wall_footprint_area_m2": 224.84532955698165,
+    "new_upper_wall_footprint_area_m2": 332.1864894949796,
+    "new_lower_wall_footprint_area_m2": 264.9721077949986,
+    "old_wall_missing_perimeter_area_m2": 107.34115993802368,
+    "interior_layout_policy": "Union original wall geometry with measured perimeter; remove only 87 loading-door prisms below 4.2m.",
+    "door_geometry_policy": "No backplate. Twelve solid shutter slats from 2.1m to 4.03m; both broad faces use the original Panel role."
+  },
+  "method_limits": [
+    "Truck OBBs include the full exported mirror width and all open rear-door geometry. Disjoint OBBs prove disjoint meshes.",
+    "Rack broad-phase uses actual mapped mesh bounds. A hit is resolved against exported component bounds and wall solids at the overlapping elevations. Angled-part bounds are conservative.",
+    "Groundcargo uses full CAD pallet XY bounds with actual presentation variant height; bounds are conservative for individual cartons.",
+    "No rack-wall exemption exists for D1 or door bays. Geometry intersecting the 4.2m lintel is reported.",
+    "87 intentional door apertures do not invalidate the closed top perimeter. No roof is assumed.",
+    "This verifies the proposed source transforms; after UE integration, compare imported mesh bounds and applied transforms with these values."
+  ]
+}

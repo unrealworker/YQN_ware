@@ -129,4 +129,7 @@ def run():
         report['error']=traceback.format_exc();raise
     finally:REPORT.write_text(json.dumps(report,indent=2,ensure_ascii=False),encoding='utf-8')
 
-if __name__=='__main__':run()
+if __name__=='__main__':
+    from cad_rack_revision_state import dispatch_refinement_v2_verification
+    if not dispatch_refinement_v2_verification():
+        run()
