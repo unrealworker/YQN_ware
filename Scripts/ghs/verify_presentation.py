@@ -1,7 +1,8 @@
-"""Read-only presentation verification, retaining historical applied/verification reports."""
+"""Verify current CAD racks or legacy presentation; retain superseded reports."""
 import json,math,sys,traceback,collections
 from pathlib import Path
 ROOT=Path(r'D:\UEPro\Test');sys.path.insert(0,str(ROOT/'Scripts/ghs'))
+from cad_rack_revision_state import dispatch_cad_rack_verification
 import unreal
 import verify_ue_scene as common
 import verify_clearance_scene as clearance
@@ -130,6 +131,7 @@ def main(report):
  report.update(success=True,presentation_refined=True,baseline_sha256=before['registry_sha256'],all_cargo_xy_unchanged=True,all_column_frames_closed=True,blocked_slots_preserved=122,lighting_style=style,historical_reports_unchanged=True,non_surveyed_height_assumptions=plan['presentation']['assumptions'])
 
 def run():
+ if dispatch_cad_rack_verification():return
  report=dict(success=False,map=common.MAP,groups=[],individuals=[],effects=[],meshes=[],verification_mode='Fresh UE reload; read-only actual transforms and mesh geometry')
  try:main(report)
  except Exception:report['error']=traceback.format_exc();raise

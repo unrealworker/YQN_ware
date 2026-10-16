@@ -1,8 +1,11 @@
 """Reapply the approved presentation pass after rebuilding the original CAD scene."""
 from pathlib import Path
-import runpy,json
+import runpy,json,sys
 import unreal
 root=Path(r'D:\UEPro\Test')
+sys.path.insert(0,str(root/'Scripts/ghs'))
+from cad_rack_revision_state import refuse_legacy_rebuild
+refuse_legacy_rebuild('rebuild_presentation_refinement.py')
 for name in ['start_presentation_session','import_presentation_storage','prepare_visual_layout',
              'apply_presentation_layout','refine_presentation_materials']:
     runpy.run_path(str(root/'Scripts/ghs'/(name+'.py')),run_name='__main__')

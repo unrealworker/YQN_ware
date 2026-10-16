@@ -1,8 +1,10 @@
 """Verify the saved normal warehouse in a fresh UE process without saving assets.
 
-Only Saved/GHS_NormalVerification.json is written. Original mesh/material
-assets are immutable. An explicit wall-height-sync report can authorize the
-two saved maps and three registries, with before/after and backup SHA checks.
+After a successful CAD rack revision, dispatch to the shared two-map verifier
+and write its current report. Otherwise write Saved/GHS_NormalVerification.json.
+Original mesh/material assets are immutable. An explicit wall-height-sync
+report can authorize the two saved maps and three registries, with before/after
+and backup SHA checks.
 """
 import hashlib
 import json
@@ -33,6 +35,7 @@ WALL_SYNC_FILES = {
     'SourceAssets/GHS/Presentation/visual_layout.json',
 }
 sys.path.insert(0, str(ROOT / 'Scripts/ghs'))
+from cad_rack_revision_state import dispatch_cad_rack_verification
 import verify_ue_scene as common
 import verify_clearance_scene as clearance
 import verify_column_outlines as column
@@ -585,6 +588,8 @@ def main(report):
 
 
 def run():
+    if dispatch_cad_rack_verification():
+        return
     report = dict(success=False, map=MAP, source_map=OLD_MAP,
                   created_utc=datetime.now(timezone.utc).isoformat(),
                   verification_mode='Fresh UE process; reload source and new saved maps; read-only assets; actual-transform OBB SAT',

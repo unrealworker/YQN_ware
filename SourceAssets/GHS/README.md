@@ -2,15 +2,19 @@
 
 ## 场景与状态
 
+当前货架修订以 `RackSpecs/README.md`、`RackSpecs/cad_elevation_specs.json` 和 `RackSpecs/cad_plan_mapping.json` 为准：两场景同步使用 1639 个 A/B/D1 实例（含跨通道版本），C/D2 仅保留在资产库；87 个原 `W_DOCK` 对象更正为装卸门。货架柱高来自图纸，为 9.144/9.154 m；建筑墙、柱及轮廓采用 9.6 m 展示包络，门高 4.2 m，后二者均为明确估算。
+
+新修订目标为每场景 43 组 HISM、14138 个实例，保存及验收状态分别以 `Saved/GHS_CADRackRevision.json` 和 `Saved/GHS_CADRackVerification.json` 的 `success` 为准。旧重建入口检测到修订后会停止，`verify_ue_scene.py` 转入新的双场景验收。以下原构建与逐次修复记录保留为历史，不代表本轮货架类型、数量和高度。
+
 新场景：`/Game/Maps/GHS_CAD_DigitalTwin`。新资源目录：`/Game/GHSDigitalTwin`。原场景与共享资产保留。
 
-已在 UE 5.4 中完成构建、保存与蓝图编译，之后按用户反馈修正柱位和储物穿插。修正版包含 247 个 Actor、15 组 HISM、14,383 个实例。当前记录为 `Saved/GHS_ClearanceApplied.json`；修正后的独立验收记录为 `Saved/GHS_ClearanceVerification.json`。`Saved/GHS_Verification.json` 仅为修正前版本的历史验证，不代表当前数量。
+初次避让修正阶段已在 UE 5.4 中完成构建、保存与蓝图编译，之后按用户反馈修正柱位和储物穿插。该阶段包含 247 个 Actor、15 组 HISM、14,383 个实例，记录为 `Saved/GHS_ClearanceApplied.json`，独立验收为 `Saved/GHS_ClearanceVerification.json`。这些报告及 `Saved/GHS_Verification.json` 均为历史验证，不代表当前数量。
 
 4 个 GHS Blueprint（1 个生产实例蓝图、3 个隔离测试蓝图）编译无错误、无警告。UE 启动日志中的 Unreal Trace Server `0x00006005` 为追踪辅助进程启动警告，未影响资产编译或场景验证。
 
 ## 数据与坐标
 
-唯一平面布局依据为 `D:\EdgeDownload\平面布局图_GHS_0.23_20260710现状.dxf`。采用当前右侧现状主体，建筑底图 INSERT 句柄 `2379D1`；排除左侧旧方案、图框、网格标注和主体下方货架立面示意，不使用通用仓库布局替代。
+唯一平面布局依据为 `D:\EdgeDownload\平面布局图_GHS_0.23_20260710现状.dxf`。采用当前右侧现状主体，建筑底图 INSERT 句柄 `2379D1`；左侧旧方案、图框和网格外延不作为主体位置。下方五类货架立面用于本轮真实结构尺寸，不把立面本身当作仓库内放置位置。
 
 DXF 单位为 inch，换算系数为 **0.0254 m/inch**。文件虽然声明 ANSI_936，实际中文以 UTF-8 解码才能正确读取。
 
@@ -25,12 +29,12 @@ DXF 单位为 inch，换算系数为 **0.0254 m/inch**。文件虽然声明 ANSI
 
 | 内容 | 数量 | 依据与说明 |
 |---|---:|---|
-| 货架 | 1607 个 CAD 源位、1617 个显示段 | 实体轮廓排除文字边界；共享端框留 2cm 接缝；柱边局部分段 |
+| 货架 | 1639 个显示实例 | 1214 A、47 A跨通道、265 B、11 B跨通道、102 D1；源handle与分段关系见RackSpecs映射 |
 | 托盘/地堆储位 | 7530 | 7408 处放置货物；122 处柱占用位置留空并保留边线 |
 | 柱 | 170 | 采用建筑底图柱；36 个 PILLAR 中33个重复绘制、3个未确认离网候选，均保留来源记录不重复显示 |
 | 墙段 | 330 | 从 601 条墙面候选线合并；271 对墙面提供实测厚度 |
 | 门 | 55 | 建筑门块实例 |
-| 装卸货架 | 87 | W_DOCK 实例，不视作输送线 |
+| 装卸门 | 87 | W_DOCK 的 DOCK_NO. 和实体几何证明为门，不属于货架或输送线 |
 | 充电位 | 56 | 7 排各 8 个斜置停车格，与“56台充电桩”标注一致 |
 
 按用户选择严格保留现状，**不增加输送线**。未识别到明确输送设备；“皮带机(蓝)”图层仅有文字注释，不能据图层名推定输送线。
@@ -53,13 +57,13 @@ DXF 单位为 inch，换算系数为 **0.0254 m/inch**。文件虽然声明 ANSI
 
 墙体验收由 `verify_joined_walls.py` 读取UE保存网格的实际三角形、世界变换与材质，并继续执行柱/货架/货物相交、AGV、动效和LOD检查。历史结果保存在 `Saved/GHS_JoinedWallsVerification.json`。
 
-170根柱体补充与墙体边线相同的 `M_GHS_WallTrim` 青色轮廓：每根顶部四边、底部四边和四条竖棱，共2040条实例。12mm宽边线全部位于原柱体边界内，接角只相接，不叠加伸出。柱体半透明材质保持一致。配置为 `column_outline_style.json`，应用脚本为 `apply_column_outlines.py`；全场重建时会自动恢复此轮廓。
+170根柱体补充与墙体边线相同的 `M_GHS_WallTrim` 青色轮廓：每根顶部四边、底部四边和四条竖棱，共2040条实例。12mm宽边线全部位于原柱体边界内，接角只相接，不叠加伸出。柱体半透明材质保持一致。配置为 `column_outline_style.json`，应用脚本为 `apply_column_outlines.py`。当前CAD货架修订保留相同轮廓规则并同步高度；旧全场重建入口现已受保护。
 
-最新验收入口仍为 `Scripts/ghs/verify_ue_scene.py`，柱轮廓存在时进入 `verify_column_outlines.py`，结果为 `Saved/GHS_ColumnOutlinesVerification.json`，并继续回归墙体和柱位修正。当前场景为248个Actor、16个实例组、14116个实例。截图 `Saved/GHS_ColumnOutlines_After.png` 来自用户检查柱子的同一视点。
+柱轮廓阶段的历史验收为 `Saved/GHS_ColumnOutlinesVerification.json`，当时场景为248个Actor、16个实例组、14116个实例。截图 `Saved/GHS_ColumnOutlines_After.png` 来自用户检查柱子的同一视点。当前 `Scripts/ghs/verify_ue_scene.py` 优先识别 CAD 货架修订并验收两场景。
 
 ## 估算与参考图补充
 
-CAD 确定平面位置、排布、可读尺寸及轮廓，不代表所有三维尺寸均有实测依据。墙体剖切高度采用 2.8 m；货架、货物和其他未给定高度采用可视化估算。59 条未配对墙段采用 0.15 m 估算厚度；其余配对墙面厚度从 CAD 距离提取，常见值为 0.254 m。
+CAD 确定平面位置、排布、可读尺寸及轮廓。货架现已按独立立面测量柱顶、横梁和货载高度；建筑墙/柱的9.6 m展示高度和装卸门4.2 m高度仍为估算。旧2.8 m墙网格仅作为不可变局部源几何，由实例高度配置同步映射。59 条未配对墙段采用 0.15 m 估算厚度；其余配对墙面厚度从 CAD 距离提取，常见值为 0.254 m。
 
 白灰低底盘 KUKA 外形 AGV 和红黑壁挂式充电器按用户参考截图建模，机壳尺寸、细节、线缆及接头属于截图推定，不是厂商实测模型。
 
@@ -86,8 +90,9 @@ Blender 源文件在本目录：
 | CAD 调查 | `inspect_dxf.py`、`inspect_groups.py` |
 | CAD 提取、墙体配对、二维核验 | `extract_layout.py`、`refine_layout.py`、`verify_layout.py` |
 | Blender 建模 | `build_kuka_agv.py`、`build_charger.py`、`build_cad_architecture.py` |
-| UE 资源准备与构建 | `prepare_ue_assets.py`、`build_ue_scene.py` |
-| UE 独立核验 | `verify_ue_scene.py` |
+| CAD 货架修订 | `prepare_cad_rack_registry.py`、`import_cad_rack_models.py`、`apply_cad_rack_revision.py`；流程见 `RackSpecs/README.md` |
+| UE 独立核验 | `verify_ue_scene.py` → `verify_cad_rack_revision.py`（存在成功修订时） |
+| 历史初次构建 | `prepare_ue_assets.py`、`build_ue_scene.py`；修订后旧builder明确停止 |
 | UE 截图 | `capture_ue_scene.py` |
 
 CAD 脚本使用已配置的 Python 和 `Scripts/_vendor/cad` 下的 ezdxf；Blender 脚本在 Blender 中执行；UE 脚本在 Unreal Editor Python 环境执行。
@@ -105,11 +110,11 @@ CAD 脚本使用已配置的 Python 和 `Scripts/_vendor/cad` 下的 ezdxf；Ble
 5. `CAM_GHS_Charging`：充电区域。
 6. `CAM_GHS_AGV_Charger`：AGV 与充电器近景。
 
-初版验收核对了40个附着于 AGV 的无网格 Decal、6个相机、7个模型资产、5个模型的四级 LOD，以及原地图 SHA；地板包围盒也核对了 CAD 到 UE 的 Y 镜像。柱位修正后的 `Saved/GHS_ClearanceVerification.json` 在新 UE 进程重新读取保存地图，验证9452个柱、柱脚、货物、货架和装卸货架的实际网格包围盒及世界变换，12类对象组合的 OBB 相交均为0（1mm数值容差）。柱体与墙面材质资产相同，原有材质、动效、相机及LOD回归通过。`verify_ue_scene.py` 自动进入此修正版验收，初版报告作为历史保留。
+初版验收核对了40个附着于 AGV 的无网格 Decal、6个相机、7个模型资产、5个模型的四级 LOD，以及原地图 SHA；地板包围盒也核对了 CAD 到 UE 的 Y 镜像。柱位修正后的 `Saved/GHS_ClearanceVerification.json` 在新 UE 进程重新读取保存地图，验证9452个柱、柱脚、货物、货架和装卸货架的实际网格包围盒及世界变换，12类对象组合的 OBB 相交均为0（1mm数值容差）。柱体与墙面材质资产相同，原有材质、动效、相机及LOD回归通过。以上均为该阶段历史结果；当前 `verify_ue_scene.py` 优先进入CAD货架双场景验收，历史报告保留。
 
 6 张 UE 实景截图保存于 `Saved/GHS_UE_*.png`（3840 × 2160）。`Saved/GHS_AGV_ActualAnimation.gif` 来自编辑器真实运行画面，共 28 个不同帧，非合成动画。数值证据为 `Saved/GHS_AnimationVerification.json`。
 
-修正后柱边近景为 `Saved/GHS_Clearance_UE_ColumnDetail.png`，货堆与货架细节为 `Saved/GHS_Clearance_UE_FloorStorage.png`、`Saved/GHS_Clearance_UE_RackAisles.png`；均由当前UE场景直接截图。柱体沿用墙面蓝色半透明效果。
+修正后柱边近景为 `Saved/GHS_Clearance_UE_ColumnDetail.png`，货堆与货架细节为 `Saved/GHS_Clearance_UE_FloorStorage.png`、`Saved/GHS_Clearance_UE_RackAisles.png`；均由当时的UE场景直接截图。柱体沿用墙面蓝色半透明效果。
 
 视觉检查修复了 AGV 中央圆盘与平台共面的问题，整车最终高度为 0.324 m；设备远近细节阈值保留近景结构。GHS 货箱的最远 LOD 从过度简化的 290 三角形修复为 1,048 三角形，保留货物、托盘与接缝三个材质段。
 

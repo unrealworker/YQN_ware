@@ -2,12 +2,15 @@
 import hashlib
 import json
 import math
+import sys
 import traceback
 from pathlib import Path
 
 import unreal
 
 ROOT = Path(r'D:\UEPro\Test')
+sys.path.insert(0, str(ROOT / 'Scripts/ghs'))
+from cad_rack_revision_state import dispatch_cad_rack_verification
 SOURCE = ROOT / 'SourceAssets/GHS'
 REPORT_PATH = ROOT / 'Saved/GHS_Verification.json'
 MAP = '/Game/Maps/GHS_CAD_DigitalTwin'
@@ -310,6 +313,8 @@ def main(clearance_layout=None):
 
 
 def run_legacy():
+    if dispatch_cad_rack_verification():
+        return
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     try:
         main()
@@ -324,8 +329,9 @@ def run_legacy():
 
 
 if __name__ == '__main__':
-    build_state = read_json(ROOT / 'Saved/GHS_BuildReport.json')
-    if build_state.get('presentation_refined'):
+    if dispatch_cad_rack_verification():
+        pass
+    elif (build_state := read_json(ROOT / 'Saved/GHS_BuildReport.json')).get('presentation_refined'):
         import sys
         sys.path.insert(0, str(ROOT / 'Scripts/ghs'))
         import verify_presentation

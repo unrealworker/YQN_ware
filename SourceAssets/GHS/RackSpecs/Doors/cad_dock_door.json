@@ -1,0 +1,84 @@
+{
+  "meshes": [
+    {
+      "name": "SM_GHS_CADDockDoor",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RackSpecs\\Doors\\SM_GHS_CADDockDoor.fbx",
+      "slots": [
+        "M_VR_M_CADDock_Frame",
+        "M_VR_M_CADDock_Dark",
+        "M_VR_M_CADDock_Panel",
+        "M_VR_M_CADDock_Detail"
+      ],
+      "bounds_m": [
+        [
+          -1.5208250284194946,
+          1.5208250284194946
+        ],
+        [
+          -0.0938323587179184,
+          0.0938323587179184
+        ],
+        [
+          0.0,
+          4.199999809265137
+        ]
+      ],
+      "source_parts": 31,
+      "vertices": 1736,
+      "polygons": 1674
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_M_CADDock_Dark",
+      "base_color": [
+        0.008,
+        0.016,
+        0.03,
+        1
+      ],
+      "roughness": 0.8,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_VR_M_CADDock_Detail",
+      "base_color": [
+        0.08,
+        0.3,
+        0.43,
+        1
+      ],
+      "roughness": 0.6,
+      "metallic": 0.1
+    },
+    {
+      "name": "M_VR_M_CADDock_Frame",
+      "base_color": [
+        0.04,
+        0.1,
+        0.18,
+        1
+      ],
+      "roughness": 0.55,
+      "metallic": 0.3
+    },
+    {
+      "name": "M_VR_M_CADDock_Panel",
+      "base_color": [
+        0.09,
+        0.18,
+        0.29,
+        1
+      ],
+      "roughness": 0.6,
+      "metallic": 0.15
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\GHS\\RackSpecs\\Doors\\cad_dock_door.blend",
+  "classification": "loading_dock_door",
+  "not_storage_rack": true,
+  "measured_plan_width_m": 3.0416499999999997,
+  "measured_leaf_width_m": 2.794,
+  "display_height_m": 4.2,
+  "height_basis": "4.2 m industrial-door display estimate; plan has no elevation dimension"
+}

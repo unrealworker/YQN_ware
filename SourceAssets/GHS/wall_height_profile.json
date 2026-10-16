@@ -1,11 +1,18 @@
 {
-  "version": 1,
+  "version": 2,
   "source_wall_height_m": 2.8,
-  "wall_height_m": 5.6,
-  "column_height_m": 5.6,
+  "wall_height_m": 9.6,
+  "column_height_m": 9.6,
   "edge_offset_m": 0.0005,
-  "maps": ["/Game/Maps/GHS_CAD_DigitalTwin", "/Game/Maps/GHS_CAD_NormalWarehouse"],
-  "wall_groups": ["GHS_CAD_WallFaces", "GHS_CAD_WallSections", "GHS_CAD_WallEdges"],
-  "policy": "Shared presentation height; preserve CAD XY, wall thickness, source geometry and per-scene materials. Ground door lines and equipment support partitions retain their original heights.",
-  "height_basis": "Visual presentation estimate aligned with the existing 5.6m columns, not a surveyed CAD elevation."
+  "maps": [
+    "/Game/Maps/GHS_CAD_DigitalTwin",
+    "/Game/Maps/GHS_CAD_NormalWarehouse"
+  ],
+  "wall_groups": [
+    "GHS_CAD_WallFaces",
+    "GHS_CAD_WallSections",
+    "GHS_CAD_WallEdges"
+  ],
+  "policy": "Preserve measured XY and wall thickness; synchronized walls, columns and outlines; equipment and ground-door lines retain scale",
+  "height_basis": "9.6m display envelope selected to clear CAD rack tops 9.144/9.154m; no surveyed building elevation supplied"
 }

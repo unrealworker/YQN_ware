@@ -13,6 +13,8 @@ import unreal
 
 ROOT=Path(r'D:\UEPro\Test')
 sys.path.insert(0,str(ROOT/'Scripts/ghs'))
+from cad_rack_revision_state import refuse_legacy_rebuild
+refuse_legacy_rebuild('build_ue_scene.py')
 import ue_instancing
 importlib.reload(ue_instancing)
 spawn_group=ue_instancing.spawn_group

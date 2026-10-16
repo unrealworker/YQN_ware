@@ -1,7 +1,11 @@
 """Prepare presentation-only vertical hierarchy; never mutate authoritative registry."""
-import json,math,copy,hashlib,collections
+import json,math,copy,hashlib,collections,sys
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[2];SRC=ROOT/'SourceAssets/GHS';baseline=SRC/'ue_scene_registry.json';raw=baseline.read_bytes();reg=json.loads(raw);groups={g['actor']:g for g in reg['groups']};cargo=groups['GHS_CAD_PalletCargo']['instances']
+ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT/'Scripts/ghs'))
+from cad_rack_revision_state import refuse_legacy_rebuild
+refuse_legacy_rebuild('prepare_visual_layout.py')
+SRC=ROOT/'SourceAssets/GHS';baseline=SRC/'ue_scene_registry.json';raw=baseline.read_bytes();reg=json.loads(raw);groups={g['actor']:g for g in reg['groups']};cargo=groups['GHS_CAD_PalletCargo']['instances']
 # Cluster original CAD slots (including blocked positions) so column holes cannot
 # break a contiguous storage block into random height islands.
 cad=json.loads((SRC/'cad_layout.json').read_text(encoding='utf8'));slots=cad['storage'];parent=list(range(len(slots)));grid=collections.defaultdict(list)

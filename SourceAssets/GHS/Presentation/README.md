@@ -1,5 +1,7 @@
 # 仓库视觉增强
 
+本目录的四层货架和5.6 m柱高属于早期视觉增强历史。CAD货架修订以 `../RackSpecs/README.md` 为准：两场景同步为1639个A/B/D1货架（含跨通道），C/D2只在资产库，87个W_DOCK实体为装卸门。货架柱高按图为9.144/9.154 m；建筑9.6 m和门高4.2 m属于展示假设。`visual_layout.json` 随新修订保存当前映射，其余早期源模型、材质方案和报告保留供追溯。
+
 保持 CAD 的库位、通道、柱位及已完成避让，调整垂直层次和蓝色材质。高度是展示设定，不代表现场测绘结果。
 
 - 主货架 4.8 m，四层；装卸区货架保留原高度。
@@ -11,9 +13,9 @@
 
 `presentation_storage.blend` 和四个同名 FBX 是可编辑模型；`presentation_storage.json` 记录原点、尺寸和材质槽。`visual_layout.json` 记录最终实例和高度分区，`material_style.json` 控制表面颜色等参数，上一级 `lighting_style.json` 控制照明。
 
-建模入口为 `Scripts/ghs/build_presentation_storage.py`（后台 Blender）。完整 CAD 重建脚本 `Scripts/ghs/build_ue_scene.py` 在最后调用 `rebuild_presentation_refinement.py`，导入并应用该视觉版本。单独重新生成布局时应以增强前的 CAD registry 为输入，不能把已分成三组的 registry 再次当作原始输入。
+旧建模入口为 `Scripts/ghs/build_presentation_storage.py`（后台 Blender）。完整旧重建链 `build_ue_scene.py` → `rebuild_presentation_refinement.py` 仅适用于修订前版本。它们以及 `prepare_visual_layout.py`、`apply_presentation_layout.py` 已加保护，存在CAD货架修订时在写入前停止，防止恢复通用四层货架。当前修改使用 RackSpecs 中的规格、平面映射、专用模型和受备份保护的修订流程。
 
-检查入口是 `Scripts/ghs/verify_ue_scene.py`，当前版本进入 `verify_presentation.py`，验证模型、实际包围盒避让、原始 CAD 身份、材质连接、灯光、LOD、柱轮廓、墙缝及 AGV 特效。结果写入 `Saved/GHS_PresentationVerification.json`。
+检查入口仍为 `Scripts/ghs/verify_ue_scene.py`。它与 `verify_presentation.py` 均在成功货架修订存在时转入 `verify_cad_rack_revision.run()`，验证两套保存关卡，并写入 `Saved/GHS_CADRackVerification.json`。旧 `Saved/GHS_PresentationVerification.json` 保留，不重写。
 
 固定相机对照图：`Saved/GHS_PresentationBefore_UE_*.png`；最终从磁盘重新加载的带投影版本：`Saved/GHS_PresentationReload_UE_*.png`，汇总为 `Saved/GHS_PresentationComparison.jpg`。
 

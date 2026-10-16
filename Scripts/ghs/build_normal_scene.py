@@ -4,6 +4,9 @@ from pathlib import Path
 import unreal
 
 ROOT=Path(r'D:\UEPro\Test');SOURCE=ROOT/'SourceAssets/GHS_Normal'
+sys.path.insert(0,str(ROOT/'Scripts/ghs'))
+from cad_rack_revision_state import refuse_legacy_rebuild
+refuse_legacy_rebuild('build_normal_scene.py')
 MAP='/Game/Maps/GHS_CAD_NormalWarehouse';OLD_MAP='/Game/Maps/GHS_CAD_DigitalTwin'
 DEST='/Game/GHSNormalWarehouse';MR=DEST+'/Materials';FR=DEST+'/FX'
 REPORT=ROOT/'Saved/GHS_NormalBuild.json'

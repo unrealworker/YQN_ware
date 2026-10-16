@@ -3,6 +3,8 @@ import json,sys,hashlib,traceback
 from pathlib import Path
 import unreal
 ROOT=Path(r'D:\UEPro\Test');sys.path.insert(0,str(ROOT/'Scripts/ghs'))
+from cad_rack_revision_state import refuse_legacy_rebuild
+refuse_legacy_rebuild('apply_presentation_layout.py')
 from ue_instancing import spawn_group
 registry_path=ROOT/'SourceAssets/GHS/ue_scene_registry.json'
 layout=json.loads((ROOT/'SourceAssets/GHS/Presentation/visual_layout.json').read_text())
