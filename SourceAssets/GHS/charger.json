@@ -1,0 +1,115 @@
+{
+  "meshes": [
+    {
+      "name": "SM_GHS_WallCharger",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\SM_GHS_WallCharger.fbx",
+      "slots": [
+        "M_VR_GHS_Charger_Steel",
+        "M_VR_GHS_Charger_Powdercoat",
+        "M_VR_GHS_Charger_Red",
+        "M_VR_GHS_Charger_Rubber",
+        "M_VR_GHS_Charger_Label",
+        "M_VR_GHS_Charger_Screen",
+        "M_VR_GHS_Charger_Warning"
+      ],
+      "bounds_m": [
+        [
+          -0.8561574220657349,
+          0.8556199073791504
+        ],
+        [
+          -1.9302277110000432e-08,
+          0.24700000882148743
+        ],
+        [
+          0.052492156624794006,
+          1.809999942779541
+        ]
+      ],
+      "source_parts": 81,
+      "vertices": 14755,
+      "polygons": 12570
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_GHS_Charger_Label",
+      "base_color": [
+        0.87,
+        0.88,
+        0.84,
+        1
+      ],
+      "roughness": 0.7,
+      "metallic": 0
+    },
+    {
+      "name": "M_VR_GHS_Charger_Powdercoat",
+      "base_color": [
+        0.022,
+        0.026,
+        0.029,
+        1
+      ],
+      "roughness": 0.55,
+      "metallic": 0.3
+    },
+    {
+      "name": "M_VR_GHS_Charger_Red",
+      "base_color": [
+        0.55,
+        0.018,
+        0.023,
+        1
+      ],
+      "roughness": 0.38,
+      "metallic": 0.35
+    },
+    {
+      "name": "M_VR_GHS_Charger_Rubber",
+      "base_color": [
+        0.009,
+        0.011,
+        0.012,
+        1
+      ],
+      "roughness": 0.8,
+      "metallic": 0
+    },
+    {
+      "name": "M_VR_GHS_Charger_Screen",
+      "base_color": [
+        0.1,
+        0.29,
+        0.3,
+        1
+      ],
+      "roughness": 0.25,
+      "metallic": 0
+    },
+    {
+      "name": "M_VR_GHS_Charger_Steel",
+      "base_color": [
+        0.23,
+        0.26,
+        0.28,
+        1
+      ],
+      "roughness": 0.32,
+      "metallic": 0.8
+    },
+    {
+      "name": "M_VR_GHS_Charger_Warning",
+      "base_color": [
+        0.95,
+        0.65,
+        0.025,
+        1
+      ],
+      "roughness": 0.5,
+      "metallic": 0
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\GHS\\charger.blend",
+  "reference_estimate": "Image-estimated dimensions: cabinet 0.60 x 0.18 x 0.40 m, center height 1.40 m; overall equipment approx 1.4-1.7 m wide and 1.8 m high; no background wall."
+}

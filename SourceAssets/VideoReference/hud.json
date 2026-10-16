@@ -1,0 +1,46 @@
+{
+  "meshes": [
+    {
+      "name": "SM_VR_AlarmPanel",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_AlarmPanel.fbx",
+      "slots": [
+        "M_VR_AlarmPanel"
+      ],
+      "bounds_m": [
+        [
+          -1.25,
+          1.25
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1.25
+        ]
+      ],
+      "source_parts": 1,
+      "vertices": 4,
+      "polygons": 1
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_AlarmPanel",
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "roughness": 1,
+      "metallic": 0,
+      "texture": "T_VR_AlarmPanel",
+      "unlit": true,
+      "opacity": 1,
+      "two_sided": true
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\hud.blend"
+}

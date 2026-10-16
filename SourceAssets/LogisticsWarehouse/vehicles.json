@@ -1,0 +1,356 @@
+{
+  "meshes": [
+    {
+      "name": "SM_SemiTruck",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_SemiTruck.fbx",
+      "slots": [
+        "M_WH_Vehicle_EnamelWhite",
+        "M_WH_Vehicle_BrushedAluminium",
+        "M_WH_Vehicle_AmberLens",
+        "M_WH_Vehicle_RedLens",
+        "M_WH_Vehicle_Chassis",
+        "M_WH_Vehicle_TireRubber",
+        "M_WH_Vehicle_TreadEdges",
+        "M_WH_Vehicle_GlassBlue",
+        "M_WH_Vehicle_Headlight"
+      ],
+      "bounds_m": [
+        [
+          -8.524999618530273,
+          8.32699966430664
+        ],
+        [
+          -1.6200000047683716,
+          1.6200000047683716
+        ],
+        [
+          0.0,
+          4.110459804534912
+        ]
+      ],
+      "vertices": 42204,
+      "polygons": 38523,
+      "front_axis": "+X",
+      "ground_z_m": 0
+    },
+    {
+      "name": "SM_DeliveryVan",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_DeliveryVan.fbx",
+      "slots": [
+        "M_WH_Vehicle_EnamelWhite",
+        "M_WH_Vehicle_Chassis",
+        "M_WH_Vehicle_TireRubber",
+        "M_WH_Vehicle_TreadEdges",
+        "M_WH_Vehicle_BrushedAluminium",
+        "M_WH_Vehicle_GlassBlue",
+        "M_WH_Vehicle_Headlight",
+        "M_WH_Vehicle_RedLens"
+      ],
+      "bounds_m": [
+        [
+          -3.0,
+          2.9850001335144043
+        ],
+        [
+          -1.290000081062317,
+          1.290000081062317
+        ],
+        [
+          0.0,
+          2.731060028076172
+        ]
+      ],
+      "vertices": 10736,
+      "polygons": 9654,
+      "front_axis": "+X",
+      "ground_z_m": 0
+    },
+    {
+      "name": "SM_Forklift",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_Forklift.fbx",
+      "slots": [
+        "M_WH_Vehicle_ForkliftAmber",
+        "M_WH_Vehicle_Chassis",
+        "M_WH_Vehicle_TireRubber",
+        "M_WH_Vehicle_TreadEdges",
+        "M_WH_Vehicle_BrushedAluminium",
+        "M_WH_Vehicle_Headlight",
+        "M_WH_Vehicle_AmberLens"
+      ],
+      "bounds_m": [
+        [
+          -1.399999976158142,
+          2.4778261184692383
+        ],
+        [
+          -0.75,
+          0.75
+        ],
+        [
+          0.0,
+          3.011500120162964
+        ]
+      ],
+      "vertices": 11148,
+      "polygons": 9998,
+      "front_axis": "+X",
+      "ground_z_m": 0
+    },
+    {
+      "name": "SM_LoadedPallet",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_LoadedPallet.fbx",
+      "slots": [
+        "M_WH_Vehicle_PalletTimber",
+        "M_WH_Vehicle_PalletLightTimber",
+        "M_WH_Vehicle_Carton0",
+        "M_WH_Vehicle_PackingTape",
+        "M_WH_Vehicle_Carton1",
+        "M_WH_Vehicle_Carton2",
+        "M_WH_Vehicle_Carton3"
+      ],
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.6000000238418579
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.3675000667572021
+        ]
+      ],
+      "vertices": 4144,
+      "polygons": 3996,
+      "front_axis": "+X",
+      "ground_z_m": 0
+    },
+    {
+      "name": "SM_PalletStack",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_PalletStack.fbx",
+      "slots": [
+        "M_WH_Vehicle_PalletTimber",
+        "M_WH_Vehicle_PalletLightTimber"
+      ],
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.6000000238418579
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.3270000219345093
+        ]
+      ],
+      "vertices": 7840,
+      "polygons": 7560,
+      "front_axis": "+X",
+      "ground_z_m": 0
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_WH_Vehicle_AmberLens",
+      "base_color": [
+        0.95,
+        0.31,
+        0.014,
+        1.0
+      ],
+      "roughness": 0.23,
+      "metallic": 0.1,
+      "emission": 0.6
+    },
+    {
+      "name": "M_WH_Vehicle_BrushedAluminium",
+      "base_color": [
+        0.42,
+        0.46,
+        0.49,
+        1.0
+      ],
+      "roughness": 0.27,
+      "metallic": 0.85,
+      "texture_role": "metal"
+    },
+    {
+      "name": "M_WH_Vehicle_Carton0",
+      "base_color": [
+        0.48,
+        0.31,
+        0.15,
+        1.0
+      ],
+      "roughness": 0.88,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_WH_Vehicle_Carton1",
+      "base_color": [
+        0.59,
+        0.4,
+        0.22,
+        1.0
+      ],
+      "roughness": 0.88,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_WH_Vehicle_Carton2",
+      "base_color": [
+        0.67,
+        0.49,
+        0.29,
+        1.0
+      ],
+      "roughness": 0.88,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_WH_Vehicle_Carton3",
+      "base_color": [
+        0.52,
+        0.35,
+        0.19,
+        1.0
+      ],
+      "roughness": 0.88,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_WH_Vehicle_Chassis",
+      "base_color": [
+        0.035,
+        0.043,
+        0.048,
+        1.0
+      ],
+      "roughness": 0.5,
+      "metallic": 0.65,
+      "texture_role": "metal"
+    },
+    {
+      "name": "M_WH_Vehicle_EnamelWhite",
+      "base_color": [
+        0.82,
+        0.85,
+        0.86,
+        1.0
+      ],
+      "roughness": 0.29,
+      "metallic": 0.28,
+      "texture_role": "metal"
+    },
+    {
+      "name": "M_WH_Vehicle_ForkliftAmber",
+      "base_color": [
+        0.9,
+        0.43,
+        0.024,
+        1.0
+      ],
+      "roughness": 0.34,
+      "metallic": 0.35,
+      "texture_role": "metal"
+    },
+    {
+      "name": "M_WH_Vehicle_GlassBlue",
+      "base_color": [
+        0.035,
+        0.095,
+        0.13,
+        1.0
+      ],
+      "roughness": 0.13,
+      "metallic": 0.28,
+      "glass": true
+    },
+    {
+      "name": "M_WH_Vehicle_Headlight",
+      "base_color": [
+        0.77,
+        0.89,
+        1,
+        1.0
+      ],
+      "roughness": 0.15,
+      "metallic": 0.3,
+      "emission": 1.5
+    },
+    {
+      "name": "M_WH_Vehicle_PackingTape",
+      "base_color": [
+        0.67,
+        0.53,
+        0.34,
+        1.0
+      ],
+      "roughness": 0.38,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_WH_Vehicle_PalletLightTimber",
+      "base_color": [
+        0.5,
+        0.34,
+        0.19,
+        1.0
+      ],
+      "roughness": 0.85,
+      "metallic": 0.0,
+      "texture_role": "wood"
+    },
+    {
+      "name": "M_WH_Vehicle_PalletTimber",
+      "base_color": [
+        0.37,
+        0.24,
+        0.125,
+        1.0
+      ],
+      "roughness": 0.85,
+      "metallic": 0.0,
+      "texture_role": "wood"
+    },
+    {
+      "name": "M_WH_Vehicle_RedLens",
+      "base_color": [
+        0.48,
+        0.012,
+        0.008,
+        1.0
+      ],
+      "roughness": 0.24,
+      "metallic": 0.1,
+      "emission": 0.7
+    },
+    {
+      "name": "M_WH_Vehicle_TireRubber",
+      "base_color": [
+        0.018,
+        0.021,
+        0.023,
+        1.0
+      ],
+      "roughness": 0.86,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_WH_Vehicle_TreadEdges",
+      "base_color": [
+        0.027,
+        0.03,
+        0.032,
+        1.0
+      ],
+      "roughness": 0.89,
+      "metallic": 0.0
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+{
+  "meshes": [
+    {
+      "name": "SM_VR_PalletCargo",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_PalletCargo.fbx",
+      "slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.5999999642372131
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.0760310888290405
+        ]
+      ],
+      "source_parts": 77,
+      "vertices": 3064,
+      "polygons": 2878
+    },
+    {
+      "name": "SM_VR_RackBay",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_RackBay.fbx",
+      "slots": [
+        "M_VR_StorageSteel",
+        "M_VR_StorageSteelLight",
+        "M_VR_StorageCharcoal",
+        "M_VR_StorageBinInner",
+        "M_VR_StorageBinBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageGhostEnvelope"
+      ],
+      "bounds_m": [
+        [
+          -0.75,
+          0.7500000596046448
+        ],
+        [
+          -0.42500001192092896,
+          0.4270000159740448
+        ],
+        [
+          0.0,
+          2.799999952316284
+        ]
+      ],
+      "source_parts": 194,
+      "vertices": 8680,
+      "polygons": 8274
+    },
+    {
+      "name": "SM_VR_LM_Pad",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_LM_Pad.fbx",
+      "slots": [
+        "M_VR_StoragePadBase",
+        "M_VR_StoragePadBorder",
+        "M_VR_StoragePadText"
+      ],
+      "bounds_m": [
+        [
+          -0.5900000333786011,
+          0.5900000333786011
+        ],
+        [
+          -0.5900000333786011,
+          0.5900000333786011
+        ],
+        [
+          0.0,
+          0.009499999694526196
+        ]
+      ],
+      "source_parts": 7,
+      "vertices": 248,
+      "polygons": 186
+    },
+    {
+      "name": "SM_VR_AP_Pad",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_AP_Pad.fbx",
+      "slots": [
+        "M_VR_StoragePadBase",
+        "M_VR_StoragePadBorder",
+        "M_VR_StoragePadText",
+        "M_VR_StorageAPGreen"
+      ],
+      "bounds_m": [
+        [
+          -0.5900000333786011,
+          0.5900000333786011
+        ],
+        [
+          -0.5900000333786011,
+          0.5900000333786011
+        ],
+        [
+          0.0,
+          0.012000000104308128
+        ]
+      ],
+      "source_parts": 40,
+      "vertices": 543,
+      "polygons": 350
+    },
+    {
+      "name": "SM_VR_Conveyor",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Conveyor.fbx",
+      "slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageSteelLight",
+        "M_VR_StorageRoller",
+        "M_VR_StorageRollerEnd",
+        "M_VR_StorageSteel"
+      ],
+      "bounds_m": [
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          -1.506864070892334,
+          1.5068641901016235
+        ],
+        [
+          -3.67872416973114e-08,
+          1.1577472686767578
+        ]
+      ],
+      "source_parts": 99,
+      "vertices": 3248,
+      "polygons": 2230
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_StorageAPGreen",
+      "base_color": [
+        0.12,
+        0.63,
+        0.28,
+        1
+      ],
+      "roughness": 0.65,
+      "metallic": 0.0,
+      "emission": 0.22
+    },
+    {
+      "name": "M_VR_StorageBinBlue",
+      "base_color": [
+        0.12,
+        0.22,
+        0.37,
+        1
+      ],
+      "roughness": 0.58,
+      "metallic": 0.12
+    },
+    {
+      "name": "M_VR_StorageBinInner",
+      "base_color": [
+        0.035,
+        0.07,
+        0.13,
+        1
+      ],
+      "roughness": 0.72,
+      "metallic": 0.08
+    },
+    {
+      "name": "M_VR_StorageCargoBlue",
+      "base_color": [
+        0.18,
+        0.29,
+        0.46,
+        1
+      ],
+      "roughness": 0.58,
+      "metallic": 0.08
+    },
+    {
+      "name": "M_VR_StorageCargoGrid",
+      "base_color": [
+        0.12,
+        0.64,
+        0.84,
+        1
+      ],
+      "roughness": 0.42,
+      "metallic": 0.12,
+      "emission": 0.28
+    },
+    {
+      "name": "M_VR_StorageCharcoal",
+      "base_color": [
+        0.018,
+        0.035,
+        0.065,
+        1
+      ],
+      "roughness": 0.62,
+      "metallic": 0.15
+    },
+    {
+      "name": "M_VR_StorageGhostEnvelope",
+      "base_color": [
+        0.1,
+        0.23,
+        0.4,
+        1
+      ],
+      "roughness": 0.45,
+      "metallic": 0.08,
+      "opacity": 0.075
+    },
+    {
+      "name": "M_VR_StoragePadBase",
+      "base_color": [
+        0.095,
+        0.115,
+        0.15,
+        1
+      ],
+      "roughness": 0.82,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_VR_StoragePadBorder",
+      "base_color": [
+        0.37,
+        0.43,
+        0.5,
+        1
+      ],
+      "roughness": 0.72,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_VR_StoragePadText",
+      "base_color": [
+        0.46,
+        0.51,
+        0.57,
+        1
+      ],
+      "roughness": 0.76,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_VR_StoragePalletBlue",
+      "base_color": [
+        0.015,
+        0.18,
+        0.44,
+        1
+      ],
+      "roughness": 0.4,
+      "metallic": 0.28
+    },
+    {
+      "name": "M_VR_StorageRoller",
+      "base_color": [
+        0.22,
+        0.34,
+        0.44,
+        1
+      ],
+      "roughness": 0.28,
+      "metallic": 0.75
+    },
+    {
+      "name": "M_VR_StorageRollerEnd",
+      "base_color": [
+        0.045,
+        0.085,
+        0.13,
+        1
+      ],
+      "roughness": 0.42,
+      "metallic": 0.6
+    },
+    {
+      "name": "M_VR_StorageSteel",
+      "base_color": [
+        0.075,
+        0.145,
+        0.235,
+        1
+      ],
+      "roughness": 0.34,
+      "metallic": 0.72
+    },
+    {
+      "name": "M_VR_StorageSteelLight",
+      "base_color": [
+        0.24,
+        0.33,
+        0.44,
+        1
+      ],
+      "roughness": 0.32,
+      "metallic": 0.62
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\storage.blend"
+}

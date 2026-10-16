@@ -1,0 +1,196 @@
+{
+  "meshes": [
+    {
+      "name": "SM_GHS_JoinedWallFaces",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\SM_GHS_JoinedWallFaces.fbx",
+      "slots": [
+        "M_VR_WallVolume"
+      ],
+      "bounds_m": [
+        [
+          -239.3868865966797,
+          226.45358276367188
+        ],
+        [
+          -76.97283935546875,
+          60.2932243347168
+        ],
+        [
+          0.0,
+          2.799999952316284
+        ]
+      ],
+      "source_parts": 1,
+      "vertices": 4640,
+      "polygons": 2320
+    },
+    {
+      "name": "SM_GHS_JoinedWallSections",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\SM_GHS_JoinedWallSections.fbx",
+      "slots": [
+        "M_VR_WallSection"
+      ],
+      "bounds_m": [
+        [
+          -239.3868865966797,
+          226.45358276367188
+        ],
+        [
+          -76.97283935546875,
+          60.2932243347168
+        ],
+        [
+          0.0,
+          2.799999952316284
+        ]
+      ],
+      "source_parts": 1,
+      "vertices": 4614,
+      "polygons": 1538
+    },
+    {
+      "name": "SM_GHS_JoinedWallEdges",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\SM_GHS_JoinedWallEdges.fbx",
+      "slots": [
+        "M_VR_WallTrim"
+      ],
+      "bounds_m": [
+        [
+          -239.3868865966797,
+          226.45358276367188
+        ],
+        [
+          -76.97283935546875,
+          60.2932243347168
+        ],
+        [
+          2.80049991607666,
+          2.80049991607666
+        ]
+      ],
+      "source_parts": 1,
+      "vertices": 6504,
+      "polygons": 2168
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_WallSection",
+      "base_color": [
+        0.035,
+        0.105,
+        0.15,
+        1
+      ],
+      "roughness": 0.55,
+      "metallic": 0.1,
+      "unlit": true,
+      "emission": 0.65
+    },
+    {
+      "name": "M_VR_WallTrim",
+      "base_color": [
+        0.1,
+        0.27,
+        0.34,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.1,
+      "unlit": true,
+      "emission": 0.45
+    },
+    {
+      "name": "M_VR_WallVolume",
+      "base_color": [
+        0.026,
+        0.13,
+        0.28,
+        1
+      ],
+      "roughness": 0.55,
+      "metallic": 0,
+      "opacity": 0.4,
+      "unlit": true,
+      "emission": 0.5,
+      "wall_gradient": true,
+      "two_sided": false
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\GHS\\joined_walls.blend",
+  "geometry_verification": {
+    "source_wall_count": 330,
+    "all_source_ids_retained": true,
+    "source_rectangle_area_sum_m2": 236.38622331221765,
+    "footprint_union_area_m2": 224.84532955698165,
+    "overlap_removed_area_m2": 11.540893755235999,
+    "polygon_count": 193,
+    "closed_loop_count": 198,
+    "hole_count": 5,
+    "all_loops_closed": true,
+    "union_valid": true,
+    "edge_band_width_m": 0.012,
+    "edge_band_area_m2": 23.173548338170672,
+    "edge_outside_wall_area_m2": 0.0,
+    "top_triangle_area_m2": 224.8453295569829,
+    "edge_triangle_area_m2": 23.17354833817071,
+    "wall_height_m": 2.8,
+    "edge_z_m": 2.8005,
+    "no_snapping_or_positive_buffer": true,
+    "duplicate_groups": [
+      [
+        "W_2379D1_4E2D9_461",
+        "W_2379D1_4E3B7_493",
+        "W_2379D1_4E3BD_494"
+      ],
+      [
+        "W_2379D1_4E2DB_463",
+        "W_2379D1_4E30A_465"
+      ],
+      [
+        "W_2379D1_4E30C_466",
+        "W_2379D1_4E30D_467"
+      ],
+      [
+        "W_2379D1_4E385_483",
+        "W_2379D1_4E3A7_485"
+      ],
+      [
+        "W_2379D1_4E3BF_495",
+        "W_2379D1_4E3C0_496"
+      ]
+    ],
+    "mesh_counts": {
+      "SM_GHS_JoinedWallFaces": {
+        "vertices": 4640,
+        "triangles": 2320
+      },
+      "SM_GHS_JoinedWallSections": {
+        "vertices": 4614,
+        "triangles": 1538
+      },
+      "SM_GHS_JoinedWallEdges": {
+        "vertices": 6504,
+        "triangles": 2168
+      }
+    }
+  },
+  "blender_checks": {
+    "SM_GHS_JoinedWallFaces": {
+      "polygons": 2320,
+      "vertices": 4640,
+      "normal_test_passed": true
+    },
+    "SM_GHS_JoinedWallSections": {
+      "polygons": 1538,
+      "vertices": 4614,
+      "normal_test_passed": true
+    },
+    "SM_GHS_JoinedWallEdges": {
+      "polygons": 2168,
+      "vertices": 6504,
+      "normal_test_passed": true
+    }
+  },
+  "coordinate_contract": "CAD XY metres; exported using common.save_library axis_forward=-Y axis_up=Z; UE imports at origin unit scale"
+}

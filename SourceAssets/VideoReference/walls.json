@@ -1,0 +1,1223 @@
+{
+  "meshes": [
+    {
+      "name": "SM_VR_Wall_Outer_West",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_Outer_West.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -10.0,
+          10.0
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "Outer_West",
+        "length": 20.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          -18,
+          -7
+        ],
+        "source_end_m": [
+          -18,
+          13
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_Outer_Back",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_Outer_Back.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -18.0,
+          18.0
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "Outer_Back",
+        "length": 36.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          -18,
+          13
+        ],
+        "source_end_m": [
+          18,
+          13
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_Outer_East",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_Outer_East.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -13.0,
+          13.0
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "Outer_East",
+        "length": 26.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          18,
+          13
+        ],
+        "source_end_m": [
+          18,
+          -13
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_Outer_FrontA",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_Outer_FrontA.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -7.0,
+          7.0
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "Outer_FrontA",
+        "length": 14.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          -18,
+          -7
+        ],
+        "source_end_m": [
+          -4,
+          -7
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_Outer_FrontB",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_Outer_FrontB.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -11.0,
+          11.0
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "Outer_FrontB",
+        "length": 22.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          -4,
+          -13
+        ],
+        "source_end_m": [
+          18,
+          -13
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_RackBack",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_RackBack.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -7.0,
+          7.0
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "RackBack",
+        "length": 14.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          -18,
+          4
+        ],
+        "source_end_m": [
+          -4,
+          4
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_RackToCorridorA",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_RackToCorridorA.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -1.25,
+          1.25
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "RackToCorridorA",
+        "length": 2.5,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          -4,
+          -7
+        ],
+        "source_end_m": [
+          -4,
+          -4.5
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_RackToCorridorB",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_RackToCorridorB.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -2.75,
+          2.75
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "RackToCorridorB",
+        "length": 5.5,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          -4,
+          -1.5
+        ],
+        "source_end_m": [
+          -4,
+          4
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_PalletToCorridorA",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_PalletToCorridorA.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -1.6500000953674316,
+          1.6500000953674316
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "PalletToCorridorA",
+        "length": 3.3,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          -4,
+          4
+        ],
+        "source_end_m": [
+          -4,
+          7.3
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_PalletToCorridorB",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_PalletToCorridorB.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -1.350000023841858,
+          1.350000023841858
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "PalletToCorridorB",
+        "length": 2.6999999999999993,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          -4,
+          10.3
+        ],
+        "source_end_m": [
+          -4,
+          13
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_RearRoomBack",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_RearRoomBack.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -8.5,
+          8.5
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "RearRoomBack",
+        "length": 17.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          1,
+          9
+        ],
+        "source_end_m": [
+          18,
+          9
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_RearRoomSideA",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_RearRoomSideA.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -3.5,
+          3.5
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "RearRoomSideA",
+        "length": 7.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          1,
+          6
+        ],
+        "source_end_m": [
+          1,
+          13
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_RearRoomSideB",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_RearRoomSideB.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -3.5,
+          3.5
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "RearRoomSideB",
+        "length": 7.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          5,
+          6
+        ],
+        "source_end_m": [
+          5,
+          13
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_RearRoomSideC",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_RearRoomSideC.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -3.5,
+          3.5
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "RearRoomSideC",
+        "length": 7.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          9,
+          6
+        ],
+        "source_end_m": [
+          9,
+          13
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_RearRoomFrontA",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_RearRoomFrontA.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -1.0,
+          1.0
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "RearRoomFrontA",
+        "length": 2.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          1,
+          6
+        ],
+        "source_end_m": [
+          3,
+          6
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_RearRoomFrontB",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_RearRoomFrontB.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -1.5,
+          1.5
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "RearRoomFrontB",
+        "length": 3.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          6,
+          6
+        ],
+        "source_end_m": [
+          9,
+          6
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_EastGridSideA",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_EastGridSideA.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -1.0,
+          1.0
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "EastGridSideA",
+        "length": 2.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          1,
+          -1
+        ],
+        "source_end_m": [
+          1,
+          1.0
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_EastGridSideB",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_EastGridSideB.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -1.0,
+          1.0
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "EastGridSideB",
+        "length": 2.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          1,
+          4
+        ],
+        "source_end_m": [
+          1,
+          6
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_EastGridBack",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_EastGridBack.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -4.5,
+          4.5
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "EastGridBack",
+        "length": 9.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          9,
+          6
+        ],
+        "source_end_m": [
+          18,
+          6
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_EastGridDivider",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_EastGridDivider.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -8.5,
+          8.5
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "EastGridDivider",
+        "length": 17.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          1,
+          -1
+        ],
+        "source_end_m": [
+          18,
+          -1
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_TransferWest",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_TransferWest.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -1.1500000953674316,
+          1.1500000953674316
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "TransferWest",
+        "length": 2.3000000000000007,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          -4,
+          -13
+        ],
+        "source_end_m": [
+          -4,
+          -10.7
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_TransferWestB",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_TransferWestB.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -0.3499999940395355,
+          0.3499999940395355
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "TransferWestB",
+        "length": 0.7000000000000002,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          -4,
+          -7.7
+        ],
+        "source_end_m": [
+          -4,
+          -7
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_TransferBack",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_TransferBack.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -1.600000023841858,
+          1.600000023841858
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "TransferBack",
+        "length": 3.2,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          -4,
+          -7
+        ],
+        "source_end_m": [
+          -0.8,
+          -7
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_TransferBackB",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_TransferBackB.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "TransferBackB",
+        "length": 2.8,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          2.2,
+          -7
+        ],
+        "source_end_m": [
+          5,
+          -7
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_TransferEast",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_TransferEast.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -3.0,
+          3.0
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "TransferEast",
+        "length": 6.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          5,
+          -7
+        ],
+        "source_end_m": [
+          5,
+          -13
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_FrontGridBack",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_FrontGridBack.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -6.0,
+          6.0
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "FrontGridBack",
+        "length": 12.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          6,
+          -3
+        ],
+        "source_end_m": [
+          18,
+          -3
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    },
+    {
+      "name": "SM_VR_Wall_FrontGridWest",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Wall_FrontGridWest.fbx",
+      "slots": [
+        "M_VR_WallVolume",
+        "M_VR_WallSection",
+        "M_VR_WallTrim",
+        "M_VR_WallFootTrim"
+      ],
+      "bounds_m": [
+        [
+          -1.5,
+          1.5
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -1.4000000953674316,
+          1.4000000953674316
+        ]
+      ],
+      "source_parts": 10,
+      "vertices": 512,
+      "polygons": 488,
+      "metadata": {
+        "wall_label": "FrontGridWest",
+        "length": 3.0,
+        "thickness": 0.2,
+        "height": 2.8,
+        "source_start_m": [
+          6,
+          -13
+        ],
+        "source_end_m": [
+          6,
+          -10
+        ],
+        "origin": "centered_xyz; place at UE actor z=140 cm",
+        "translucent_faces": 2
+      }
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_WallFootTrim",
+      "base_color": [
+        0.032,
+        0.1,
+        0.13,
+        1
+      ],
+      "roughness": 0.58,
+      "metallic": 0,
+      "unlit": true,
+      "emission": 0.16
+    },
+    {
+      "name": "M_VR_WallSection",
+      "base_color": [
+        0.035,
+        0.105,
+        0.15,
+        1
+      ],
+      "roughness": 0.55,
+      "metallic": 0.1,
+      "unlit": true,
+      "emission": 0.65
+    },
+    {
+      "name": "M_VR_WallTrim",
+      "base_color": [
+        0.1,
+        0.27,
+        0.34,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.1,
+      "unlit": true,
+      "emission": 0.45
+    },
+    {
+      "name": "M_VR_WallVolume",
+      "base_color": [
+        0.026,
+        0.13,
+        0.28,
+        1
+      ],
+      "roughness": 0.55,
+      "metallic": 0,
+      "opacity": 0.4,
+      "unlit": true,
+      "emission": 0.5,
+      "wall_gradient": true,
+      "two_sided": false
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\walls.blend"
+}

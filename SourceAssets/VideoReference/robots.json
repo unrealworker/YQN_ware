@@ -1,0 +1,310 @@
+{
+  "meshes": [
+    {
+      "name": "SM_VR_BlueStacker",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_BlueStacker.fbx",
+      "slots": [
+        "M_VR_RobotRubber",
+        "M_VR_RobotMachinedSteel",
+        "M_VR_RobotGraphite",
+        "M_VR_RobotSatinAluminum",
+        "M_VR_RobotBlueRecess",
+        "M_VR_RobotStackerBlue",
+        "M_VR_RobotWhiteLight",
+        "M_VR_RobotSensorGlass",
+        "M_VR_RobotWarningYellow",
+        "M_VR_RobotIndicatorRed",
+        "M_VR_RobotCyanLight"
+      ],
+      "bounds_m": [
+        [
+          -0.36000004410743713,
+          0.36000001430511475
+        ],
+        [
+          -0.5350000262260437,
+          1.309999942779541
+        ],
+        [
+          -3.426920969218372e-09,
+          1.8070000410079956
+        ]
+      ],
+      "source_parts": 89,
+      "vertices": 4364,
+      "polygons": 3636
+    },
+    {
+      "name": "SM_VR_OrangeTransporter",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_OrangeTransporter.fbx",
+      "slots": [
+        "M_VR_RobotRubber",
+        "M_VR_RobotMachinedSteel",
+        "M_VR_RobotGraphite",
+        "M_VR_RobotSatinAluminum",
+        "M_VR_RobotTransportOrange",
+        "M_VR_RobotWarningYellow",
+        "M_VR_RobotSensorGlass",
+        "M_VR_RobotIndicatorRed",
+        "M_VR_RobotCyanLight",
+        "M_VR_RobotWhiteLight"
+      ],
+      "bounds_m": [
+        [
+          -0.46000000834465027,
+          0.46000003814697266
+        ],
+        [
+          -0.6899999976158142,
+          1.5
+        ],
+        [
+          -3.785459057326079e-09,
+          1.6570000648498535
+        ]
+      ],
+      "source_parts": 85,
+      "vertices": 4104,
+      "polygons": 3482
+    },
+    {
+      "name": "SM_VR_WhiteRackRobot",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_WhiteRackRobot.fbx",
+      "slots": [
+        "M_VR_RobotRubber",
+        "M_VR_RobotMachinedSteel",
+        "M_VR_RobotGraphite",
+        "M_VR_RobotSatinAluminum",
+        "M_VR_RobotRackWhite",
+        "M_VR_RobotCyanLight",
+        "M_VR_RobotWhiteLight",
+        "M_VR_RobotSensorGlass",
+        "M_VR_RobotWarningYellow"
+      ],
+      "bounds_m": [
+        [
+          -0.7250001430511475,
+          0.4999999701976776
+        ],
+        [
+          -0.5799999833106995,
+          1.155500054359436
+        ],
+        [
+          -4.878241810502004e-09,
+          2.5999999046325684
+        ]
+      ],
+      "source_parts": 97,
+      "vertices": 4736,
+      "polygons": 4098
+    },
+    {
+      "name": "SM_VR_AlarmRobot",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_AlarmRobot.fbx",
+      "slots": [
+        "M_VR_RobotRubber",
+        "M_VR_RobotMachinedSteel",
+        "M_VR_RobotGraphite",
+        "M_VR_RobotSatinAluminum",
+        "M_VR_RobotTransportOrange",
+        "M_VR_RobotIndicatorRed",
+        "M_VR_RobotSensorGlass",
+        "M_VR_RobotCyanLight",
+        "M_VR_RobotWarningYellow"
+      ],
+      "bounds_m": [
+        [
+          -0.49000000953674316,
+          0.49000006914138794
+        ],
+        [
+          -0.6499999761581421,
+          1.1299999952316284
+        ],
+        [
+          -4.2225742902246566e-09,
+          0.996999979019165
+        ]
+      ],
+      "source_parts": 70,
+      "vertices": 3452,
+      "polygons": 2846
+    },
+    {
+      "name": "SM_VR_TrafficCone",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_TrafficCone.fbx",
+      "slots": [
+        "M_VR_RobotRubber",
+        "M_VR_RobotTransportOrange",
+        "M_VR_RobotRackWhite"
+      ],
+      "bounds_m": [
+        [
+          -0.1850000023841858,
+          0.1850000023841858
+        ],
+        [
+          -0.1850000023841858,
+          0.1850000023841858
+        ],
+        [
+          0.0,
+          0.597000002861023
+        ]
+      ],
+      "source_parts": 6,
+      "vertices": 688,
+      "polygons": 468
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_RobotBlueRecess",
+      "base_color": [
+        0.008,
+        0.08,
+        0.15,
+        1
+      ],
+      "roughness": 0.43,
+      "metallic": 0.52
+    },
+    {
+      "name": "M_VR_RobotCyanLight",
+      "base_color": [
+        0.025,
+        0.68,
+        1.0,
+        1
+      ],
+      "roughness": 0.24,
+      "metallic": 0.12,
+      "emission": 3.4
+    },
+    {
+      "name": "M_VR_RobotGraphite",
+      "base_color": [
+        0.027,
+        0.035,
+        0.044,
+        1
+      ],
+      "roughness": 0.29,
+      "metallic": 0.58
+    },
+    {
+      "name": "M_VR_RobotIndicatorRed",
+      "base_color": [
+        0.8,
+        0.015,
+        0.012,
+        1
+      ],
+      "roughness": 0.25,
+      "metallic": 0.18,
+      "emission": 2.5
+    },
+    {
+      "name": "M_VR_RobotMachinedSteel",
+      "base_color": [
+        0.38,
+        0.44,
+        0.49,
+        1
+      ],
+      "roughness": 0.28,
+      "metallic": 0.82
+    },
+    {
+      "name": "M_VR_RobotRackWhite",
+      "base_color": [
+        0.83,
+        0.88,
+        0.91,
+        1
+      ],
+      "roughness": 0.3,
+      "metallic": 0.35
+    },
+    {
+      "name": "M_VR_RobotRubber",
+      "base_color": [
+        0.014,
+        0.018,
+        0.022,
+        1
+      ],
+      "roughness": 0.85,
+      "metallic": 0.05
+    },
+    {
+      "name": "M_VR_RobotSatinAluminum",
+      "base_color": [
+        0.61,
+        0.68,
+        0.73,
+        1
+      ],
+      "roughness": 0.31,
+      "metallic": 0.68
+    },
+    {
+      "name": "M_VR_RobotSensorGlass",
+      "base_color": [
+        0.012,
+        0.038,
+        0.052,
+        1
+      ],
+      "roughness": 0.14,
+      "metallic": 0.78
+    },
+    {
+      "name": "M_VR_RobotStackerBlue",
+      "base_color": [
+        0.012,
+        0.26,
+        0.53,
+        1
+      ],
+      "roughness": 0.29,
+      "metallic": 0.4
+    },
+    {
+      "name": "M_VR_RobotTransportOrange",
+      "base_color": [
+        0.98,
+        0.185,
+        0.022,
+        1
+      ],
+      "roughness": 0.31,
+      "metallic": 0.28
+    },
+    {
+      "name": "M_VR_RobotWarningYellow",
+      "base_color": [
+        0.98,
+        0.66,
+        0.035,
+        1
+      ],
+      "roughness": 0.42,
+      "metallic": 0.22
+    },
+    {
+      "name": "M_VR_RobotWhiteLight",
+      "base_color": [
+        0.73,
+        0.9,
+        1.0,
+        1
+      ],
+      "roughness": 0.22,
+      "metallic": 0.1,
+      "emission": 3
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\robots.blend"
+}

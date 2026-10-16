@@ -1,0 +1,151 @@
+{
+  "meshes": [
+    {
+      "name": "SM_GHS_KukaLowProfileAGV",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\SM_GHS_KukaLowProfileAGV.fbx",
+      "slots": [
+        "M_VR_GHS_AGV_Rubber",
+        "M_VR_GHS_AGV_Chassis",
+        "M_VR_GHS_AGV_WarmWhite",
+        "M_VR_GHS_AGV_SideGray",
+        "M_VR_GHS_AGV_KukaOrange",
+        "M_VR_GHS_AGV_Fasteners",
+        "M_VR_GHS_AGV_SafetyYellow",
+        "M_VR_GHS_AGV_EmergencyRed",
+        "M_VR_GHS_AGV_OpticalGlass",
+        "M_VR_GHS_AGV_GreenLED"
+      ],
+      "bounds_m": [
+        [
+          -0.47699999809265137,
+          0.47699999809265137
+        ],
+        [
+          -0.7074999809265137,
+          0.7074999809265137
+        ],
+        [
+          0.0,
+          0.3240000009536743
+        ]
+      ],
+      "source_parts": 91,
+      "vertices": 6848,
+      "polygons": 5138
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_GHS_AGV_Chassis",
+      "base_color": [
+        0.035,
+        0.043,
+        0.047,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.25
+    },
+    {
+      "name": "M_VR_GHS_AGV_EmergencyRed",
+      "base_color": [
+        0.7,
+        0.015,
+        0.012,
+        1
+      ],
+      "roughness": 0.28,
+      "metallic": 0
+    },
+    {
+      "name": "M_VR_GHS_AGV_Fasteners",
+      "base_color": [
+        0.34,
+        0.38,
+        0.4,
+        1
+      ],
+      "roughness": 0.25,
+      "metallic": 0.8
+    },
+    {
+      "name": "M_VR_GHS_AGV_GreenLED",
+      "base_color": [
+        0.012,
+        0.9,
+        0.12,
+        1
+      ],
+      "roughness": 0.25,
+      "metallic": 0,
+      "emission": 4
+    },
+    {
+      "name": "M_VR_GHS_AGV_KukaOrange",
+      "base_color": [
+        0.95,
+        0.19,
+        0.018,
+        1
+      ],
+      "roughness": 0.33,
+      "metallic": 0
+    },
+    {
+      "name": "M_VR_GHS_AGV_OpticalGlass",
+      "base_color": [
+        0.006,
+        0.018,
+        0.023,
+        1
+      ],
+      "roughness": 0.15,
+      "metallic": 0.45
+    },
+    {
+      "name": "M_VR_GHS_AGV_Rubber",
+      "base_color": [
+        0.006,
+        0.008,
+        0.009,
+        1
+      ],
+      "roughness": 0.95,
+      "metallic": 0
+    },
+    {
+      "name": "M_VR_GHS_AGV_SafetyYellow",
+      "base_color": [
+        0.95,
+        0.65,
+        0.015,
+        1
+      ],
+      "roughness": 0.38,
+      "metallic": 0
+    },
+    {
+      "name": "M_VR_GHS_AGV_SideGray",
+      "base_color": [
+        0.24,
+        0.29,
+        0.31,
+        1
+      ],
+      "roughness": 0.36,
+      "metallic": 0.35
+    },
+    {
+      "name": "M_VR_GHS_AGV_WarmWhite",
+      "base_color": [
+        0.79,
+        0.82,
+        0.82,
+        1
+      ],
+      "roughness": 0.3,
+      "metallic": 0.12
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\GHS\\kuka_agv.blend"
+}

@@ -1,0 +1,92 @@
+{
+  "implementation": "Native deferred decals with Time-driven procedural shader",
+  "effect_meshes": false,
+  "master_materials": [
+    "/Game/VideoDigitalTwin/FX/M_VR_FX_Diffusion.M_VR_FX_Diffusion",
+    "/Game/VideoDigitalTwin/FX/M_VR_FX_Radar.M_VR_FX_Radar"
+  ],
+  "effects": [
+    {
+      "actor": "FX_CDD14-1_Diffusion",
+      "parent": "CDD14-1",
+      "material": "/Game/VideoDigitalTwin/FX/MI_VR_FX_CDD14_1.MI_VR_FX_CDD14_1",
+      "radius_cm": 155,
+      "projection_depth_cm": 6,
+      "rotation_yaw": -90.00000000000001,
+      "type": "Diffusion"
+    },
+    {
+      "actor": "FX_CDD14-2_Diffusion",
+      "parent": "CDD14-2",
+      "material": "/Game/VideoDigitalTwin/FX/MI_VR_FX_CDD14_2.MI_VR_FX_CDD14_2",
+      "radius_cm": 155,
+      "projection_depth_cm": 6,
+      "rotation_yaw": 0.0,
+      "type": "Diffusion"
+    },
+    {
+      "actor": "FX_CDD14-3_Diffusion",
+      "parent": "CDD14-3",
+      "material": "/Game/VideoDigitalTwin/FX/MI_VR_FX_CDD14_3.MI_VR_FX_CDD14_3",
+      "radius_cm": 155,
+      "projection_depth_cm": 6,
+      "rotation_yaw": -14.999999999999996,
+      "type": "Diffusion"
+    },
+    {
+      "actor": "FX_CDD14-4_Diffusion",
+      "parent": "CDD14-4",
+      "material": "/Game/VideoDigitalTwin/FX/MI_VR_FX_CDD14_4.MI_VR_FX_CDD14_4",
+      "radius_cm": 155,
+      "projection_depth_cm": 6,
+      "rotation_yaw": -90.00000000000001,
+      "type": "Diffusion"
+    },
+    {
+      "actor": "FX_CBD50-1_Diffusion",
+      "parent": "CBD50-1",
+      "material": "/Game/VideoDigitalTwin/FX/MI_VR_FX_CBD50_1.MI_VR_FX_CBD50_1",
+      "radius_cm": 155,
+      "projection_depth_cm": 6,
+      "rotation_yaw": -35.0,
+      "type": "Diffusion"
+    },
+    {
+      "actor": "FX_HR-1_Diffusion",
+      "parent": "HR-1",
+      "material": "/Game/VideoDigitalTwin/FX/MI_VR_FX_HR_1.MI_VR_FX_HR_1",
+      "radius_cm": 155,
+      "projection_depth_cm": 6,
+      "rotation_yaw": -90.00000000000001,
+      "type": "Diffusion"
+    },
+    {
+      "actor": "FX_DN-1_Diffusion",
+      "parent": "DN-1",
+      "material": "/Game/VideoDigitalTwin/FX/MI_VR_FX_DN_1.MI_VR_FX_DN_1",
+      "radius_cm": 175,
+      "projection_depth_cm": 6,
+      "rotation_yaw": -20.0,
+      "type": "Diffusion"
+    },
+    {
+      "actor": "FX_CBD50-1_Radar",
+      "parent": "CBD50-1",
+      "material": "/Game/VideoDigitalTwin/FX/MI_VR_FX_CBD50_Radar.MI_VR_FX_CBD50_Radar",
+      "radius_cm": 350,
+      "projection_depth_cm": 6,
+      "rotation_yaw": 74.99999999999993,
+      "type": "Radar"
+    }
+  ],
+  "hidden_legacy_actors": [
+    "CDD14-1_StatusRing",
+    "CDD14-2_StatusRing",
+    "CDD14-3_StatusRing",
+    "CDD14-4_StatusRing",
+    "CBD50-1_StatusRing",
+    "HR-1_StatusRing",
+    "ALARM_DN1_Ring",
+    "SCAN_AvoidanceFan"
+  ]
+}

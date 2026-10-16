@@ -1,0 +1,147 @@
+{
+  "meshes": [
+    {
+      "name": "SM_Tree_Plane_A",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_Tree_Plane_A.fbx",
+      "slots": [
+        "M_WH_Tree_Bark",
+        "M_WH_Tree_Leaf_Mid",
+        "M_WH_Tree_Leaf_Shade",
+        "M_WH_Tree_Leaf_Light"
+      ],
+      "bounds_m": [
+        [
+          -2.7033135890960693,
+          3.2966864109039307
+        ],
+        [
+          -2.7955987453460693,
+          2.6644012928009033
+        ],
+        [
+          0.0,
+          9.0
+        ]
+      ],
+      "vertices": 78082,
+      "polygons": 66664,
+      "leaves": 10600,
+      "origin": "trunk ground",
+      "foliage_geometry": "individual curved seven-vertex leaf blades",
+      "collision_recommendation": "trunk only; foliage no collision"
+    },
+    {
+      "name": "SM_Tree_Plane_B",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_Tree_Plane_B.fbx",
+      "slots": [
+        "M_WH_Tree_Bark",
+        "M_WH_Tree_Leaf_Mid",
+        "M_WH_Tree_Leaf_Shade",
+        "M_WH_Tree_Leaf_Light"
+      ],
+      "bounds_m": [
+        [
+          -2.327808141708374,
+          2.672191858291626
+        ],
+        [
+          -2.5202646255493164,
+          2.029735565185547
+        ],
+        [
+          0.0,
+          7.0
+        ]
+      ],
+      "vertices": 63382,
+      "polygons": 54064,
+      "leaves": 8500,
+      "origin": "trunk ground",
+      "foliage_geometry": "individual curved seven-vertex leaf blades",
+      "collision_recommendation": "trunk only; foliage no collision"
+    },
+    {
+      "name": "SM_Tree_Columnar",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_Tree_Columnar.fbx",
+      "slots": [
+        "M_WH_Tree_Bark",
+        "M_WH_Tree_Leaf_Mid",
+        "M_WH_Tree_Leaf_Shade",
+        "M_WH_Tree_Leaf_Light"
+      ],
+      "bounds_m": [
+        [
+          -1.5692312717437744,
+          1.4307687282562256
+        ],
+        [
+          -1.3888567686080933,
+          1.341143250465393
+        ],
+        [
+          0.0,
+          8.0
+        ]
+      ],
+      "vertices": 70360,
+      "polygons": 60000,
+      "leaves": 9400,
+      "origin": "trunk ground",
+      "foliage_geometry": "individual curved seven-vertex leaf blades",
+      "collision_recommendation": "trunk only; foliage no collision"
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_WH_Tree_Bark",
+      "base_color": [
+        0.18,
+        0.125,
+        0.075,
+        1.0
+      ],
+      "roughness": 0.96,
+      "metallic": 0.0,
+      "texture_role": "bark"
+    },
+    {
+      "name": "M_WH_Tree_Leaf_Light",
+      "base_color": [
+        0.2,
+        0.34,
+        0.065,
+        1.0
+      ],
+      "roughness": 0.85,
+      "metallic": 0.0,
+      "two_sided": true,
+      "foliage": true
+    },
+    {
+      "name": "M_WH_Tree_Leaf_Mid",
+      "base_color": [
+        0.105,
+        0.225,
+        0.035,
+        1.0
+      ],
+      "roughness": 0.85,
+      "metallic": 0.0,
+      "two_sided": true,
+      "foliage": true
+    },
+    {
+      "name": "M_WH_Tree_Leaf_Shade",
+      "base_color": [
+        0.055,
+        0.135,
+        0.02,
+        1.0
+      ],
+      "roughness": 0.85,
+      "metallic": 0.0,
+      "two_sided": true,
+      "foliage": true
+    }
+  ]
+}

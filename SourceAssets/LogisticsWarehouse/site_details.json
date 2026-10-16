@@ -1,0 +1,251 @@
+{
+  "meshes": [
+    {
+      "name": "SM_PerimeterFence",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_PerimeterFence.fbx",
+      "slots": [
+        "M_WH_SiteGalvanized",
+        "M_WH_SiteDarkSteel"
+      ],
+      "bounds_m": [
+        [
+          -3.125,
+          3.125
+        ],
+        [
+          -0.125,
+          0.125
+        ],
+        [
+          0.0,
+          2.5
+        ]
+      ],
+      "vertices": 1394,
+      "polygons": 1189
+    },
+    {
+      "name": "SM_YardLightPole",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_YardLightPole.fbx",
+      "slots": [
+        "M_WH_SiteGalvanized",
+        "M_WH_SiteDarkSteel",
+        "M_WH_LampLED"
+      ],
+      "bounds_m": [
+        [
+          -0.3499999940395355,
+          0.3499999940395355
+        ],
+        [
+          -1.600000023841858,
+          0.32499998807907104
+        ],
+        [
+          0.0,
+          8.34999942779541
+        ]
+      ],
+      "vertices": 232,
+      "polygons": 198
+    },
+    {
+      "name": "SM_ShippingContainer",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_ShippingContainer.fbx",
+      "slots": [
+        "M_WH_ContainerTerracotta",
+        "M_WH_SiteGalvanized"
+      ],
+      "bounds_m": [
+        [
+          -3.059999942779541,
+          3.108776569366455
+        ],
+        [
+          -1.2799999713897705,
+          1.2799999713897705
+        ],
+        [
+          0.0,
+          2.5999999046325684
+        ]
+      ],
+      "vertices": 5400,
+      "polygons": 5178
+    },
+    {
+      "name": "SM_Guardhouse",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_Guardhouse.fbx",
+      "slots": [
+        "M_WH_SiteGalvanized",
+        "M_WH_SiteIvory",
+        "M_WH_SiteGlass",
+        "M_WH_SiteDarkSteel"
+      ],
+      "bounds_m": [
+        [
+          -4.0,
+          4.0
+        ],
+        [
+          -4.099999904632568,
+          1.899999976158142
+        ],
+        [
+          0.0,
+          3.18999981880188
+        ]
+      ],
+      "vertices": 568,
+      "polygons": 522
+    },
+    {
+      "name": "SM_SecurityBarrier",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_SecurityBarrier.fbx",
+      "slots": [
+        "M_WH_SafetyYellow",
+        "M_WH_SiteIvory",
+        "M_WH_ContainerTerracotta"
+      ],
+      "bounds_m": [
+        [
+          -0.20000000298023224,
+          4.0
+        ],
+        [
+          -0.20000000298023224,
+          0.20000000298023224
+        ],
+        [
+          0.0,
+          1.190000057220459
+        ]
+      ],
+      "vertices": 448,
+      "polygons": 432
+    },
+    {
+      "name": "SM_StaffCar",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\LogisticsWarehouse\\SM_StaffCar.fbx",
+      "slots": [
+        "M_WH_SiteIvory",
+        "M_WH_SiteGlass",
+        "M_WH_SiteDarkSteel",
+        "M_WH_SiteRubber",
+        "M_WH_SiteGalvanized",
+        "M_WH_LampLED",
+        "M_WH_ContainerTerracotta"
+      ],
+      "bounds_m": [
+        [
+          -2.25,
+          2.299999952316284
+        ],
+        [
+          -1.0850000381469727,
+          1.0850000381469727
+        ],
+        [
+          0.0,
+          1.5085656642913818
+        ]
+      ],
+      "vertices": 1356,
+      "polygons": 1088
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_WH_ContainerTerracotta",
+      "base_color": [
+        0.32,
+        0.065,
+        0.035,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.5,
+      "texture_role": "metal"
+    },
+    {
+      "name": "M_WH_LampLED",
+      "base_color": [
+        0.95,
+        0.85,
+        0.65,
+        1.0
+      ],
+      "roughness": 0.25,
+      "metallic": 0,
+      "emission": 3.0
+    },
+    {
+      "name": "M_WH_SafetyYellow",
+      "base_color": [
+        0.95,
+        0.57,
+        0.035,
+        1.0
+      ],
+      "roughness": 0.58,
+      "metallic": 0.05
+    },
+    {
+      "name": "M_WH_SiteDarkSteel",
+      "base_color": [
+        0.028,
+        0.041,
+        0.05,
+        1.0
+      ],
+      "roughness": 0.5,
+      "metallic": 0.65
+    },
+    {
+      "name": "M_WH_SiteGalvanized",
+      "base_color": [
+        0.31,
+        0.35,
+        0.37,
+        1.0
+      ],
+      "roughness": 0.38,
+      "metallic": 0.8,
+      "texture_role": "metal"
+    },
+    {
+      "name": "M_WH_SiteGlass",
+      "base_color": [
+        0.055,
+        0.12,
+        0.16,
+        1.0
+      ],
+      "roughness": 0.15,
+      "metallic": 0.5,
+      "glass": true
+    },
+    {
+      "name": "M_WH_SiteIvory",
+      "base_color": [
+        0.65,
+        0.68,
+        0.69,
+        1.0
+      ],
+      "roughness": 0.6,
+      "metallic": 0.15
+    },
+    {
+      "name": "M_WH_SiteRubber",
+      "base_color": [
+        0.013,
+        0.016,
+        0.02,
+        1.0
+      ],
+      "roughness": 0.86,
+      "metallic": 0.0
+    }
+  ]
+}

@@ -1,0 +1,394 @@
+{
+  "meshes": [
+    {
+      "name": "SM_VR_Elevator",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Elevator.fbx",
+      "slots": [
+        "M_VR_ElevatorInterior",
+        "M_VR_ArchitecturalBlueShadow",
+        "M_VR_ArchitecturalBlue",
+        "M_VR_ArchitecturalRail",
+        "M_VR_ArchitecturalEdge",
+        "M_VR_ElevatorRoofBlue",
+        "M_VR_HologramWhite"
+      ],
+      "bounds_m": [
+        [
+          -1.600000023841858,
+          1.600000023841858
+        ],
+        [
+          -1.5,
+          1.524999976158142
+        ],
+        [
+          0.0,
+          3.5
+        ]
+      ],
+      "source_parts": 30,
+      "vertices": 1574,
+      "polygons": 1516
+    },
+    {
+      "name": "SM_VR_Gate",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_Gate.fbx",
+      "slots": [
+        "M_VR_ArchitecturalBlue",
+        "M_VR_ArchitecturalBlueShadow",
+        "M_VR_ElevatorRoofBlue",
+        "M_VR_CabinetGray",
+        "M_VR_GateAmber"
+      ],
+      "bounds_m": [
+        [
+          -1.5,
+          1.4999998807907104
+        ],
+        [
+          -0.17000000178813934,
+          0.17000000178813934
+        ],
+        [
+          0.0,
+          2.86650013923645
+        ]
+      ],
+      "source_parts": 7,
+      "vertices": 392,
+      "polygons": 378
+    },
+    {
+      "name": "SM_VR_ControlCabinet",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_ControlCabinet.fbx",
+      "slots": [
+        "M_VR_CabinetGray",
+        "M_VR_ArchitecturalRail",
+        "M_VR_CabinetDisplay",
+        "M_VR_HologramCyan",
+        "M_VR_HologramGreen",
+        "M_VR_GateAmber"
+      ],
+      "bounds_m": [
+        [
+          -0.22499999403953552,
+          0.22499999403953552
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          0.0,
+          1.149999976158142
+        ]
+      ],
+      "source_parts": 12,
+      "vertices": 408,
+      "polygons": 348
+    },
+    {
+      "name": "SM_VR_StatusRing",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_StatusRing.fbx",
+      "slots": [
+        "M_VR_HologramGreen",
+        "M_VR_HologramCyan",
+        "M_VR_HologramWhite"
+      ],
+      "bounds_m": [
+        [
+          -1.159999966621399,
+          1.159999966621399
+        ],
+        [
+          -1.159999966621399,
+          1.159999966621399
+        ],
+        [
+          0.03999999910593033,
+          0.0430000014603138
+        ]
+      ],
+      "source_parts": 20,
+      "vertices": 430,
+      "polygons": 195
+    },
+    {
+      "name": "SM_VR_AlarmRing",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_AlarmRing.fbx",
+      "slots": [
+        "M_VR_AlarmOrange",
+        "M_VR_AlarmRedPulse",
+        "M_VR_HologramWhite"
+      ],
+      "bounds_m": [
+        [
+          -1.649999976158142,
+          1.649999976158142
+        ],
+        [
+          -1.649999976158142,
+          1.649999976158142
+        ],
+        [
+          0.03999999910593033,
+          0.04399999976158142
+        ]
+      ],
+      "source_parts": 52,
+      "vertices": 752,
+      "polygons": 324
+    },
+    {
+      "name": "SM_VR_TargetMarker",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_TargetMarker.fbx",
+      "slots": [
+        "M_VR_HologramGreen"
+      ],
+      "bounds_m": [
+        [
+          -0.5174999833106995,
+          0.5174999833106995
+        ],
+        [
+          -0.5174999833106995,
+          0.5174999833106995
+        ],
+        [
+          0.03999999910593033,
+          1.2999999523162842
+        ]
+      ],
+      "source_parts": 14,
+      "vertices": 77,
+      "polygons": 43
+    },
+    {
+      "name": "SM_VR_ScanFan",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\SM_VR_ScanFan.fbx",
+      "slots": [
+        "M_VR_ScanFanTranslucent",
+        "M_VR_ScanFanGrid"
+      ],
+      "bounds_m": [
+        [
+          -1.1507290601730347,
+          1.1507290601730347
+        ],
+        [
+          0.0,
+          3.006999969482422
+        ],
+        [
+          0.05000000074505806,
+          0.05400000140070915
+        ]
+      ],
+      "source_parts": 39,
+      "vertices": 1916,
+      "polygons": 949
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_AlarmOrange",
+      "base_color": [
+        1,
+        0.16,
+        0.008,
+        1
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0,
+      "emission": 1.6,
+      "unlit": true
+    },
+    {
+      "name": "M_VR_AlarmRedPulse",
+      "base_color": [
+        1,
+        0.025,
+        0.005,
+        1
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0,
+      "emission": 1.3,
+      "unlit": true,
+      "pulse": true,
+      "pulse_speed": 2.0
+    },
+    {
+      "name": "M_VR_ArchitecturalBlue",
+      "base_color": [
+        0.015,
+        0.18,
+        0.45,
+        1
+      ],
+      "roughness": 0.36,
+      "metallic": 0.28
+    },
+    {
+      "name": "M_VR_ArchitecturalBlueShadow",
+      "base_color": [
+        0.008,
+        0.065,
+        0.16,
+        1
+      ],
+      "roughness": 0.44,
+      "metallic": 0.22
+    },
+    {
+      "name": "M_VR_ArchitecturalEdge",
+      "base_color": [
+        0.08,
+        0.68,
+        0.9,
+        1
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0,
+      "emission": 0.8,
+      "unlit": true
+    },
+    {
+      "name": "M_VR_ArchitecturalRail",
+      "base_color": [
+        0.008,
+        0.014,
+        0.023,
+        1
+      ],
+      "roughness": 0.32,
+      "metallic": 0.5
+    },
+    {
+      "name": "M_VR_CabinetDisplay",
+      "base_color": [
+        0.015,
+        0.06,
+        0.072,
+        1
+      ],
+      "roughness": 0.2,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_VR_CabinetGray",
+      "base_color": [
+        0.29,
+        0.34,
+        0.36,
+        1
+      ],
+      "roughness": 0.47,
+      "metallic": 0.3
+    },
+    {
+      "name": "M_VR_ElevatorInterior",
+      "base_color": [
+        0.025,
+        0.54,
+        0.73,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.0,
+      "emission": 0.35
+    },
+    {
+      "name": "M_VR_ElevatorRoofBlue",
+      "base_color": [
+        0.015,
+        0.23,
+        0.58,
+        1
+      ],
+      "roughness": 0.42,
+      "metallic": 0.18
+    },
+    {
+      "name": "M_VR_GateAmber",
+      "base_color": [
+        1,
+        0.48,
+        0.075,
+        1
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0,
+      "emission": 1.6,
+      "unlit": true
+    },
+    {
+      "name": "M_VR_HologramCyan",
+      "base_color": [
+        0.07,
+        0.77,
+        0.74,
+        1
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0,
+      "emission": 0.8,
+      "unlit": true
+    },
+    {
+      "name": "M_VR_HologramGreen",
+      "base_color": [
+        0.18,
+        0.95,
+        0.05,
+        1
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0,
+      "emission": 1.0,
+      "unlit": true
+    },
+    {
+      "name": "M_VR_HologramWhite",
+      "base_color": [
+        0.78,
+        0.94,
+        1,
+        1
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0,
+      "emission": 1.5,
+      "unlit": true
+    },
+    {
+      "name": "M_VR_ScanFanGrid",
+      "base_color": [
+        0.12,
+        0.72,
+        0.25,
+        1
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0,
+      "emission": 0.4,
+      "opacity": 0.3,
+      "unlit": true
+    },
+    {
+      "name": "M_VR_ScanFanTranslucent",
+      "base_color": [
+        0.15,
+        0.75,
+        0.22,
+        1
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0,
+      "emission": 0.3,
+      "opacity": 0.11,
+      "unlit": true
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\VideoReference\\architecture.blend"
+}

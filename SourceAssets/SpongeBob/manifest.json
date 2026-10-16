@@ -1,0 +1,320 @@
+{
+  "source": "D:\\BlenderModel\\spongebob-3d.blend",
+  "source_parts": [
+    "3D | Sculpted closed sponge",
+    "3D | Smile rim",
+    "3D | Tooth",
+    "3D | Tooth.001",
+    "3D | Tongue left",
+    "3D | Tongue right",
+    "3D | Tongue central groove",
+    "3D | Left eye",
+    "3D | Left iris dark rim",
+    "3D | Left blue iris",
+    "3D | Left pupil",
+    "3D | Left eyelash",
+    "3D | Left eyelash.001",
+    "3D | Left eyelash.002",
+    "3D | Right eye",
+    "3D | Right iris dark rim",
+    "3D | Right blue iris",
+    "3D | Right pupil",
+    "3D | Right eyelash",
+    "3D | Right eyelash.001",
+    "3D | Right eyelash.002",
+    "3D | Long rounded nose",
+    "3D | Smile cheek",
+    "3D | Cheek dimple",
+    "3D | Cheek freckle",
+    "3D | Cheek freckle.001",
+    "3D | Cheek freckle.002",
+    "3D | Smile cheek.001",
+    "3D | Cheek dimple.001",
+    "3D | Cheek freckle.003",
+    "3D | Cheek freckle.004",
+    "3D | Cheek freckle.005",
+    "3D | Lower lip accent",
+    "3D | Full shirt waistband",
+    "3D | Full shorts volume",
+    "3D | Belt segment",
+    "3D | Belt segment.001",
+    "3D | Belt segment.002",
+    "3D | Belt segment.003",
+    "3D | Belt segment.004",
+    "3D | Belt segment.005",
+    "3D | Belt segment.006",
+    "3D | Belt segment.007",
+    "3D | Belt segment.008",
+    "3D | Belt segment.009",
+    "3D | Belt segment.010",
+    "3D | Belt segment.011",
+    "3D | Side belt segment",
+    "3D | Side belt segment.001",
+    "3D | Side belt segment.002",
+    "3D | Side belt segment.003",
+    "3D | Side belt segment.004",
+    "3D | Side belt segment.005",
+    "3D | Back pocket",
+    "3D | Back pocket stitching",
+    "3D | Back pocket.001",
+    "3D | Back pocket stitching.001",
+    "3D | Side shorts seam",
+    "3D | Side shorts seam.001",
+    "3D | Shirt collar",
+    "3D | Shirt collar.001",
+    "3D | Tie knot",
+    "3D | Tie pendant",
+    "3D | Left hollow sleeve",
+    "3D | Left continuous arm and four finger hand",
+    "3D | Left leg",
+    "3D | Left sock",
+    "3D | Left sock top roll",
+    "3D | Left blue sock stripe",
+    "3D | Left red sock stripe",
+    "3D | Left shoe leather upper",
+    "3D | Left shoe heel",
+    "3D | Left continuous shoe sole",
+    "3D | Left shoe collar",
+    "3D | Right hollow sleeve",
+    "3D | Right continuous arm and four finger hand",
+    "3D | Right leg",
+    "3D | Right sock",
+    "3D | Right sock top roll",
+    "3D | Right blue sock stripe",
+    "3D | Right red sock stripe",
+    "3D | Right shoe leather upper",
+    "3D | Right shoe heel",
+    "3D | Right continuous shoe sole",
+    "3D | Right shoe collar"
+  ],
+  "materials": [
+    {
+      "name": "M_SB_Black_leather_shoes",
+      "source_name": "3D | Black leather shoes",
+      "base_color": [
+        0.0033465358428657055,
+        0.0030352699104696512,
+        0.004024717025458813,
+        1.0
+      ],
+      "roughness": 0.23000000417232513,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Blue_sock_stripes",
+      "source_name": "3D | Blue sock stripes",
+      "base_color": [
+        0.015208514407277107,
+        0.21223075687885284,
+        0.5088813304901123,
+        1.0
+      ],
+      "roughness": 0.6499999761581421,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Cheek_smile",
+      "source_name": "3D | Cheek smile",
+      "base_color": [
+        1.0,
+        0.8549926280975342,
+        0.10461648553609848,
+        1.0
+      ],
+      "roughness": 0.6499999761581421,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Clean_ivory",
+      "source_name": "3D | Clean ivory",
+      "base_color": [
+        1.0,
+        0.9911020994186401,
+        0.9130986332893372,
+        1.0
+      ],
+      "roughness": 0.6000000238418579,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Coral_freckles",
+      "source_name": "3D | Coral freckles",
+      "base_color": [
+        0.7304607629776001,
+        0.12213877588510513,
+        0.03688944876194,
+        1.0
+      ],
+      "roughness": 0.800000011920929,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Cyan_irises",
+      "source_name": "3D | Cyan irises",
+      "base_color": [
+        0.0,
+        0.43965718150138855,
+        0.7529422044754028,
+        1.0
+      ],
+      "roughness": 0.3499999940395355,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Eye_whites",
+      "source_name": "3D | Eye whites",
+      "base_color": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "roughness": 0.30000001192092896,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Golden_brown_shorts",
+      "source_name": "3D | Golden brown shorts",
+      "base_color": [
+        0.6239603757858276,
+        0.2581828534603119,
+        0.020288562402129173,
+        1.0
+      ],
+      "roughness": 0.800000011920929,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Ink",
+      "source_name": "3D | Ink",
+      "base_color": [
+        0.0030352699104696512,
+        0.0027317428030073643,
+        0.0027317428030073643,
+        1.0
+      ],
+      "roughness": 0.6000000238418579,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Iris_outline",
+      "source_name": "3D | Iris outline",
+      "base_color": [
+        0.0015176349552348256,
+        0.017641954123973846,
+        0.026241222396492958,
+        1.0
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Lemon_sponge",
+      "source_name": "3D | Lemon sponge",
+      "base_color": [
+        0.9822505712509155,
+        0.8713670969009399,
+        0.05780543014407158,
+        1.0
+      ],
+      "roughness": 0.6499999761581421,
+      "metallic": 0.0,
+      "texture": "D:\\UEPro\\Test\\SourceAssets\\SpongeBob\\T_SB_LemonSponge_BaseColor.png"
+    },
+    {
+      "name": "M_SB_Mouth_cavity",
+      "source_name": "3D | Mouth cavity",
+      "base_color": [
+        0.23074005544185638,
+        0.012286487966775894,
+        0.004024717025458813,
+        1.0
+      ],
+      "roughness": 0.800000011920929,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Red_tie_and_stripes",
+      "source_name": "3D | Red tie and stripes",
+      "base_color": [
+        0.8796223998069763,
+        0.05448027700185776,
+        0.024157632142305374,
+        1.0
+      ],
+      "roughness": 0.6499999761581421,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Rubber_soles",
+      "source_name": "3D | Rubber soles",
+      "base_color": [
+        0.0027317428030073643,
+        0.002428215928375721,
+        0.0033465358428657055,
+        1.0
+      ],
+      "roughness": 0.8500000238418579,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Shorts_seams",
+      "source_name": "3D | Shorts seams",
+      "base_color": [
+        0.3324515223503113,
+        0.10461648553609848,
+        0.006995410192757845,
+        1.0
+      ],
+      "roughness": 0.8999999761581421,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Tongue",
+      "source_name": "3D | Tongue",
+      "base_color": [
+        0.9473065137863159,
+        0.2917706370353699,
+        0.22696587443351746,
+        1.0
+      ],
+      "roughness": 0.6000000238418579,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_SB_Yellow_limbs_and_nose",
+      "source_name": "3D | Yellow limbs and nose",
+      "base_color": [
+        1.0,
+        0.8307698965072632,
+        0.06301001459360123,
+        1.0
+      ],
+      "roughness": 0.550000011920929,
+      "metallic": 0.0
+    }
+  ],
+  "source_height_metres": 6.402560830116272,
+  "height_cm": 180,
+  "vertices": 131726,
+  "polygons": 131312,
+  "slots": [
+    "M_SB_Lemon_sponge",
+    "M_SB_Mouth_cavity",
+    "M_SB_Ink",
+    "M_SB_Clean_ivory",
+    "M_SB_Tongue",
+    "M_SB_Eye_whites",
+    "M_SB_Iris_outline",
+    "M_SB_Cyan_irises",
+    "M_SB_Yellow_limbs_and_nose",
+    "M_SB_Cheek_smile",
+    "M_SB_Coral_freckles",
+    "M_SB_Golden_brown_shorts",
+    "M_SB_Shorts_seams",
+    "M_SB_Red_tie_and_stripes",
+    "M_SB_Blue_sock_stripes",
+    "M_SB_Black_leather_shoes",
+    "M_SB_Rubber_soles"
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "meshes": [
+    {
+      "name": "SM_GHS_Presentation_CargoLow",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Presentation\\SM_GHS_Presentation_CargoLow.fbx",
+      "slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.5999999642372131
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.3760311603546143
+        ]
+      ],
+      "source_parts": 87,
+      "vertices": 3592,
+      "polygons": 3388,
+      "triangles": 6840,
+      "origin_m": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "SM_GHS_Presentation_CargoMid",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Presentation\\SM_GHS_Presentation_CargoMid.fbx",
+      "slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.5999999642372131
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.9760311841964722
+        ]
+      ],
+      "source_parts": 107,
+      "vertices": 4648,
+      "polygons": 4408,
+      "triangles": 8880,
+      "origin_m": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "SM_GHS_Presentation_CargoHigh",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Presentation\\SM_GHS_Presentation_CargoHigh.fbx",
+      "slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.5999999642372131
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          2.576030969619751
+        ]
+      ],
+      "source_parts": 127,
+      "vertices": 5704,
+      "polygons": 5428,
+      "triangles": 10920,
+      "origin_m": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "SM_GHS_Presentation_RackTall",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Presentation\\SM_GHS_Presentation_RackTall.fbx",
+      "slots": [
+        "M_VR_StorageSteel",
+        "M_VR_StorageSteelLight",
+        "M_VR_StorageCharcoal",
+        "M_VR_StorageBinInner",
+        "M_VR_StorageBinBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageGhostEnvelope"
+      ],
+      "bounds_m": [
+        [
+          -0.75,
+          0.7500000596046448
+        ],
+        [
+          -0.42500001192092896,
+          0.4270000159740448
+        ],
+        [
+          0.0,
+          4.800000190734863
+        ]
+      ],
+      "source_parts": 226,
+      "vertices": 8968,
+      "polygons": 8482,
+      "triangles": 17028,
+      "origin_m": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_StorageBinBlue",
+      "base_color": [
+        0.12,
+        0.22,
+        0.37,
+        1
+      ],
+      "roughness": 0.58,
+      "metallic": 0.12
+    },
+    {
+      "name": "M_VR_StorageBinInner",
+      "base_color": [
+        0.035,
+        0.07,
+        0.13,
+        1
+      ],
+      "roughness": 0.72,
+      "metallic": 0.08
+    },
+    {
+      "name": "M_VR_StorageCargoBlue",
+      "base_color": [
+        0.18,
+        0.29,
+        0.46,
+        1
+      ],
+      "roughness": 0.58,
+      "metallic": 0.08
+    },
+    {
+      "name": "M_VR_StorageCargoGrid",
+      "base_color": [
+        0.12,
+        0.64,
+        0.84,
+        1
+      ],
+      "roughness": 0.42,
+      "metallic": 0.12,
+      "emission": 0.28
+    },
+    {
+      "name": "M_VR_StorageCharcoal",
+      "base_color": [
+        0.018,
+        0.035,
+        0.065,
+        1
+      ],
+      "roughness": 0.62,
+      "metallic": 0.15
+    },
+    {
+      "name": "M_VR_StorageGhostEnvelope",
+      "base_color": [
+        0.1,
+        0.23,
+        0.4,
+        1
+      ],
+      "roughness": 0.45,
+      "metallic": 0.08,
+      "opacity": 0.075
+    },
+    {
+      "name": "M_VR_StoragePalletBlue",
+      "base_color": [
+        0.015,
+        0.18,
+        0.44,
+        1
+      ],
+      "roughness": 0.4,
+      "metallic": 0.28
+    },
+    {
+      "name": "M_VR_StorageSteel",
+      "base_color": [
+        0.075,
+        0.145,
+        0.235,
+        1
+      ],
+      "roughness": 0.34,
+      "metallic": 0.72
+    },
+    {
+      "name": "M_VR_StorageSteelLight",
+      "base_color": [
+        0.24,
+        0.33,
+        0.44,
+        1
+      ],
+      "roughness": 0.32,
+      "metallic": 0.62
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Presentation\\presentation_storage.blend"
+}

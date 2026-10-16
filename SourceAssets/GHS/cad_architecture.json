@@ -1,0 +1,98 @@
+{
+  "meshes": [
+    {
+      "name": "SM_GHS_CAD_Floor",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\SM_GHS_CAD_Floor.fbx",
+      "slots": [
+        "M_VR_Floor"
+      ],
+      "bounds_m": [
+        [
+          -239.33384704589844,
+          226.40054321289062
+        ],
+        [
+          -76.91980743408203,
+          60.24018859863281
+        ],
+        [
+          -0.15000000596046448,
+          0.0
+        ]
+      ],
+      "source_parts": 1,
+      "vertices": 14,
+      "polygons": 17
+    },
+    {
+      "name": "SM_GHS_WallPanelUnit",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\SM_GHS_WallPanelUnit.fbx",
+      "slots": [
+        "M_VR_WallVolume"
+      ],
+      "bounds_m": [
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          -0.10000000149011612,
+          0.10000000149011612
+        ],
+        [
+          -0.5,
+          0.5
+        ]
+      ],
+      "source_parts": 1,
+      "vertices": 8,
+      "polygons": 2
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_Floor",
+      "base_color": [
+        0.012,
+        0.019,
+        0.034,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.15
+    },
+    {
+      "name": "M_VR_WallVolume",
+      "base_color": [
+        0.026,
+        0.13,
+        0.28,
+        1
+      ],
+      "roughness": 0.55,
+      "metallic": 0,
+      "opacity": 0.4,
+      "unlit": true,
+      "emission": 0.5,
+      "wall_gradient": true,
+      "two_sided": false
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\GHS\\cad_architecture.blend",
+  "verification": {
+    "floor_outline_vertices": 7,
+    "floor_top_triangles": 5,
+    "floor_area_m2": 56116.0982682496,
+    "mesh_top_area_m2": 56116.09063720703,
+    "floor_z_m": [
+      -0.15,
+      0
+    ],
+    "cad_positive_y_preserved": true,
+    "wall_outward_normals_y": [
+      -1,
+      1
+    ],
+    "wall_caps": false
+  }
+}
