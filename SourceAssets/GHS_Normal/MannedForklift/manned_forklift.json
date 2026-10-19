@@ -1,0 +1,253 @@
+{
+  "name": "SM_GHN_MannedForklift",
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\MannedForklift\\manned_forklift.blend",
+  "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\MannedForklift\\manned_forklift.fbx",
+  "units": "metres",
+  "dimensions_estimated_from_reference": true,
+  "bounds_m": [
+    [
+      -1.2400001287460327,
+      2.190000057220459
+    ],
+    [
+      -0.6480000615119934,
+      0.6480000615119934
+    ],
+    [
+      -0.005000002682209015,
+      2.3370001316070557
+    ]
+  ],
+  "dimensions_m": [
+    3.4300001859664917,
+    1.2960001230239868,
+    2.3420001342892647
+  ],
+  "source_parts": 583,
+  "driver_parts": 97,
+  "vertices": 45258,
+  "triangles": 86772,
+  "slots": [
+    "M_MF_Frame",
+    "M_MF_Body",
+    "M_MF_Blue",
+    "M_MF_Rubber",
+    "M_MF_Metal",
+    "M_MF_Dark",
+    "M_MF_Seat",
+    "M_MF_Red",
+    "M_MF_LED",
+    "M_MF_Glass",
+    "M_MF_Navy",
+    "M_MF_Cloth",
+    "M_MF_Reflective",
+    "M_MF_Safety",
+    "M_MF_Skin",
+    "M_MF_Helmet",
+    "M_MF_Amber",
+    "M_MF_White"
+  ],
+  "materials": [
+    {
+      "name": "M_MF_Body",
+      "base_color": [
+        0.57,
+        0.62,
+        0.68,
+        1
+      ],
+      "roughness": 0.42,
+      "metallic": 0.12
+    },
+    {
+      "name": "M_MF_Blue",
+      "base_color": [
+        0.012,
+        0.045,
+        0.35,
+        1
+      ],
+      "roughness": 0.38,
+      "metallic": 0.12
+    },
+    {
+      "name": "M_MF_Frame",
+      "base_color": [
+        0.045,
+        0.065,
+        0.086,
+        1
+      ],
+      "roughness": 0.45,
+      "metallic": 0.48
+    },
+    {
+      "name": "M_MF_Metal",
+      "base_color": [
+        0.29,
+        0.36,
+        0.43,
+        1
+      ],
+      "roughness": 0.33,
+      "metallic": 0.72
+    },
+    {
+      "name": "M_MF_Rubber",
+      "base_color": [
+        0.013,
+        0.018,
+        0.024,
+        1
+      ],
+      "roughness": 0.84,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_Dark",
+      "base_color": [
+        0.024,
+        0.034,
+        0.046,
+        1
+      ],
+      "roughness": 0.65,
+      "metallic": 0.05
+    },
+    {
+      "name": "M_MF_Seat",
+      "base_color": [
+        0.035,
+        0.046,
+        0.057,
+        1
+      ],
+      "roughness": 0.85,
+      "metallic": 0
+    },
+    {
+      "name": "M_MF_Glass",
+      "base_color": [
+        0.025,
+        0.085,
+        0.12,
+        1
+      ],
+      "roughness": 0.22,
+      "metallic": 0.27
+    },
+    {
+      "name": "M_MF_Safety",
+      "base_color": [
+        0.95,
+        0.24,
+        0.025,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0
+    },
+    {
+      "name": "M_MF_Helmet",
+      "base_color": [
+        0.95,
+        0.6,
+        0.025,
+        1
+      ],
+      "roughness": 0.31,
+      "metallic": 0.02
+    },
+    {
+      "name": "M_MF_Reflective",
+      "base_color": [
+        0.73,
+        0.8,
+        0.77,
+        1
+      ],
+      "roughness": 0.42,
+      "metallic": 0.15
+    },
+    {
+      "name": "M_MF_Skin",
+      "base_color": [
+        0.45,
+        0.245,
+        0.145,
+        1
+      ],
+      "roughness": 0.72,
+      "metallic": 0
+    },
+    {
+      "name": "M_MF_Cloth",
+      "base_color": [
+        0.12,
+        0.21,
+        0.31,
+        1
+      ],
+      "roughness": 0.93,
+      "metallic": 0
+    },
+    {
+      "name": "M_MF_Navy",
+      "base_color": [
+        0.025,
+        0.065,
+        0.14,
+        1
+      ],
+      "roughness": 0.92,
+      "metallic": 0
+    },
+    {
+      "name": "M_MF_White",
+      "base_color": [
+        0.79,
+        0.84,
+        0.87,
+        1
+      ],
+      "roughness": 0.48,
+      "metallic": 0.02
+    },
+    {
+      "name": "M_MF_LED",
+      "base_color": [
+        0.34,
+        0.7,
+        0.85,
+        1
+      ],
+      "roughness": 0.25,
+      "metallic": 0.05,
+      "emission": 0.35
+    },
+    {
+      "name": "M_MF_Red",
+      "base_color": [
+        0.55,
+        0.025,
+        0.015,
+        1
+      ],
+      "roughness": 0.32,
+      "metallic": 0.03,
+      "emission": 0.35
+    },
+    {
+      "name": "M_MF_Amber",
+      "base_color": [
+        0.95,
+        0.3,
+        0.018,
+        1
+      ],
+      "roughness": 0.24,
+      "metallic": 0.04,
+      "emission": 0.35
+    }
+  ]
+}

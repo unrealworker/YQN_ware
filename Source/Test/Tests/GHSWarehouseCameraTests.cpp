@@ -174,14 +174,12 @@ bool FGHSWarehouseCameraMouseGestures::RunTest(const FString& Parameters)
     Released.CheckUnchanged(*this, *F.Pawn, TEXT("Mouse motion after release"));
 
     F.Key(EKeys::RightMouseButton, IE_Pressed);
-    TestTrue(TEXT("Right press selects pan"), F.Controller->DragMode == EGHSWarehouseDragMode::Pan);
-    F.Key(EKeys::LeftMouseButton, IE_DoubleClick);
-    TestTrue(TEXT("Double-click left cannot steal active pan"), F.Controller->DragMode == EGHSWarehouseDragMode::Pan);
-    F.Key(EKeys::LeftMouseButton, IE_Released);
-    TestTrue(TEXT("Left release cannot end right-button pan"), F.Controller->DragMode == EGHSWarehouseDragMode::Pan);
+    // A map grab requires a real local viewport and a valid ground point.
+    // The rendered runtime test covers RMB ownership and double-click dragging.
+    TestTrue(TEXT("No viewport means no ground grab"), F.Controller->DragMode == EGHSWarehouseDragMode::None);
     F.Key(EKeys::RightMouseButton, IE_Released);
     F.Key(EKeys::RightMouseButton, IE_DoubleClick);
-    TestTrue(TEXT("Second right click held starts pan"), F.Controller->DragMode == EGHSWarehouseDragMode::Pan);
+    TestTrue(TEXT("Double-click also requires a valid viewport"), F.Controller->DragMode == EGHSWarehouseDragMode::None);
     F.Key(EKeys::RightMouseButton, IE_Released);
     TestTrue(TEXT("Double-click pan release clears mode"), F.Controller->DragMode == EGHSWarehouseDragMode::None);
     return true;
@@ -378,6 +376,30 @@ bool FGHSWarehouseCameraNonFinite::RunTest(const FString& Parameters)
     F.Pawn->PanPixels(FVector2D(50, 25), 0);
     F.Pawn->PanPixels(FVector2D(50, 25), -1);
     Before.CheckUnchanged(*this, *F.Pawn, TEXT("Missing viewport dimensions rejected"));
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSWarehouseCameraHUDThreshold,
+    "GHS.WarehouseCamera.HUD.ActualSpringArmControlsAggregation", GHSWarehouseCameraTests::Flags)
+
+bool FGHSWarehouseCameraHUDThreshold::RunTest(const FString& Parameters)
+{
+    using namespace GHSWarehouseCameraTests;
+    FFixture F;
+    if (!F.Check(*this)) return false;
+
+    Near(*this, TEXT("Aggregation minimum defaults to 10000"), F.Pawn->HUDClusterMinArmLength, 10000);
+    F.Pawn->SpringArmComponent->TargetArmLength = 9999;
+    F.Pawn->DesiredZoom = 20000;
+    TestFalse(TEXT("Near current camera remains ungrouped while zooming out"), F.Pawn->ShouldAggregateTruckHUD());
+    F.Pawn->SpringArmComponent->TargetArmLength = 10000;
+    F.Pawn->DesiredZoom = 2000;
+    TestTrue(TEXT("Equality aggregates even while desired zoom is nearer"), F.Pawn->ShouldAggregateTruckHUD());
+    F.Pawn->HUDClusterMinArmLength = 12000;
+    TestFalse(TEXT("Changing the exposed threshold immediately changes eligibility"), F.Pawn->ShouldAggregateTruckHUD());
+    F.Pawn->HUDClusterMinArmLength = 0;
+    F.Pawn->SpringArmComponent->TargetArmLength = 900;
+    TestTrue(TEXT("Zero permits aggregation at the closest camera distance"), F.Pawn->ShouldAggregateTruckHUD());
     return true;
 }
 

@@ -1,9 +1,11 @@
 #include "GHSWarehousePlayerController.h"
 #include "GHSWarehouseCameraPawn.h"
+#include "GHSDockTruckHUDWidget.h"
 #include "Engine/GameViewportClient.h"
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/PlayerInput.h"
 #include "UnrealClient.h"
+#include "SceneView.h"
 
 AGHSWarehousePlayerController::AGHSWarehousePlayerController()
 {
@@ -15,6 +17,11 @@ AGHSWarehousePlayerController::AGHSWarehousePlayerController()
 void AGHSWarehousePlayerController::BeginPlay()
 {
     Super::BeginPlay();
+    if (IsLocalController() && GetWorld()->GetMapName().Contains(TEXT("GHS_CAD_NormalWarehouse")))
+    {
+        TruckHUDWidget = CreateWidget<UGHSDockTruckHUDWidget>(this);
+        if (TruckHUDWidget) TruckHUDWidget->AddToViewport(20);
+    }
     FInputModeGameAndUI Mode;
     Mode.SetHideCursorDuringCapture(true);
     Mode.SetLockMouseToViewportBehavior(EMouseLockMode::LockOnCapture);
@@ -29,12 +36,24 @@ void AGHSWarehousePlayerController::BeginPlay()
     }
 }
 
+void AGHSWarehousePlayerController::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+    CancelCameraDrag();
+    if (TruckHUDWidget) { TruckHUDWidget->RemoveFromParent(); TruckHUDWidget = nullptr; }
+    Super::EndPlay(EndPlayReason);
+}
+
 bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
 {
     const bool bHandled = Super::InputKey(Params);
     AGHSWarehouseCameraPawn* Camera = Cast<AGHSWarehouseCameraPawn>(GetPawn());
     if (!Camera || Params.IsGamepad()) return bHandled;
     const FKey Key = Params.Key;
+    if (Key == EKeys::Escape && Params.Event == IE_Pressed && TruckHUDWidget &&
+        (TruckHUDWidget->bDetailVisible || TruckHUDWidget->bClusterListVisible || !TruckHUDWidget->GetSelectedEquipmentId().IsEmpty()))
+    {
+        TruckHUDWidget->ClearSelection(); CancelCameraDrag(); return true;
+    }
     if (Key == EKeys::LeftMouseButton || Key == EKeys::RightMouseButton)
     {
         const auto Requested = Key == EKeys::LeftMouseButton ? EGHSWarehouseDragMode::Orbit : EGHSWarehouseDragMode::Pan;
@@ -42,9 +61,17 @@ bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
         {
             CancelCameraDrag();
             DragMode = Requested;
+            if (Requested == EGHSWarehouseDragMode::Pan)
+            {
+                BeginMapDrag();
+            }
+            else if (ULocalPlayer* Local = GetLocalPlayer())
+            {
+                if (Local->ViewportClient) Local->ViewportClient->SetHideCursorDuringCapture(true);
+            }
             // SceneViewport's double-click route does not acquire capture as
             // its ordinary button-down route does. Support click-then-drag too.
-            if (Params.Event == IE_DoubleClick)
+            if (Params.Event == IE_DoubleClick && Requested == EGHSWarehouseDragMode::Orbit)
             {
                 if (ULocalPlayer* Local = GetLocalPlayer())
                 {
@@ -69,13 +96,14 @@ bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
     }
     if (Key == EKeys::MouseWheelAxis)
     {
+        if (DragMode == EGHSWarehouseDragMode::Pan) CancelCameraDrag();
         Camera->ZoomSteps(float(Params.Delta.X)); return true;
     }
     if (Key == EKeys::MouseX || Key == EKeys::MouseY)
     {
         // Read viewport deltas before legacy axis sensitivity, FOV scaling and
         // mouse smoothing. The plugin supplies one predictable smoothing stage.
-        if (DragMode != EGHSWarehouseDragMode::None && FMath::IsFinite(Params.Delta.X))
+        if (DragMode == EGHSWarehouseDragMode::Orbit && FMath::IsFinite(Params.Delta.X))
         {
             if (Key == EKeys::MouseX) PendingMouse.X += Params.Delta.X;
             else PendingMouse.Y -= Params.Delta.X;
@@ -95,6 +123,13 @@ void AGHSWarehousePlayerController::PlayerTick(float DeltaSeconds)
     }
     auto* Camera = Cast<AGHSWarehouseCameraPawn>(GetPawn());
     if (!Camera || DragMode == EGHSWarehouseDragMode::None) { PendingMouse = FVector2D::ZeroVector; return; }
+    if (DragMode == EGHSWarehouseDragMode::Pan)
+    {
+        PendingMouse = FVector2D::ZeroVector;
+        // The plugin updates the grabbed point once in the Pawn's Tick.
+        if (!Camera->IsPreciseMouseDragging || !HasValidMapDragCursor()) CancelCameraDrag();
+        return;
+    }
     FVector2D Delta = PendingMouse;
     PendingMouse = FVector2D::ZeroVector;
     if (!bPastDragThreshold)
@@ -104,17 +139,69 @@ void AGHSWarehousePlayerController::PlayerTick(float DeltaSeconds)
         bPastDragThreshold = true;
         Delta = DragTravel;
     }
-    if (DragMode == EGHSWarehouseDragMode::Orbit) Camera->OrbitPixels(Delta);
-    else
-    {
-        int32 Width = 0, Height = 0;
-        GetViewportSize(Width, Height);
-        Camera->PanPixels(Delta, Width);
-    }
+    Camera->OrbitPixels(Delta);
+}
+
+bool AGHSWarehousePlayerController::BeginMapDrag()
+{
+    if (DragMode == EGHSWarehouseDragMode::Orbit) return false;
+    CancelCameraDrag();
+    auto* Camera = Cast<AGHSWarehouseCameraPawn>(GetPawn());
+    if (!Camera || !HasValidMapDragCursor()) return false;
+    ULocalPlayer* Local = GetLocalPlayer();
+    MapDragViewportSize = Local->ViewportClient->Viewport->GetSizeXY();
+
+    // Stop unfinished easing at the actual view, without jumping to its target.
+    const FVector Current = Camera->GetActorLocation();
+    Camera->SetDesiredLocation(FVector(Current.X, Current.Y, 0), true);
+    Camera->SetDesiredRotation(Camera->GetActorRotation(), true);
+    Camera->SetDesiredZoom(Camera->SpringArmComponent->TargetArmLength, true);
+    Camera->EnableFeatures(EEnabledFeatures::PreciseMouseDrag);
+    Camera->PreciseMouseDragMode = EPreciseMouseDragMode::Plane;
+    Camera->PreciseMouseDragPoint = FVector::ZeroVector;
+    Camera->PreciseMouseDragNormal = FVector::UpVector;
+    Camera->PreciseMouseDragIgnoreMovementLag = true;
+    Camera->TogglePreciseMouseDrag(true);
+    if (!Camera->IsPreciseMouseDragging) return false;
+    DragMode = EGHSWarehouseDragMode::Pan;
+    bShowMouseCursor = true;
+    // Called during InputKey, before SceneViewport acquires ordinary capture.
+    // Visible absolute cursor tracking must not use high-precision recentering.
+    Local->ViewportClient->SetHideCursorDuringCapture(false);
+    return true;
+}
+
+bool AGHSWarehousePlayerController::HasValidMapDragCursor() const
+{
+    ULocalPlayer* Local = GetLocalPlayer();
+    FViewport* Viewport = Local && Local->ViewportClient ? Local->ViewportClient->Viewport : nullptr;
+    FSceneViewProjectionData Projection;
+    if (!Viewport || !Local->GetProjectionData(Viewport, Projection) || !Projection.IsValidViewRectangle()) return false;
+    if (DragMode == EGHSWarehouseDragMode::Pan && MapDragViewportSize != Viewport->GetSizeXY()) return false;
+    FVector2D Position;
+    const FIntRect Rect = Projection.GetConstrainedViewRect();
+    if (!GetMousePosition(Position.X, Position.Y)
+        || !FMath::IsFinite(Position.X) || !FMath::IsFinite(Position.Y)
+        || Position.X < Rect.Min.X || Position.Y < Rect.Min.Y
+        || Position.X >= Rect.Max.X || Position.Y >= Rect.Max.Y) return false;
+    FVector Origin, Direction;
+    return DeprojectScreenPositionToWorld(Position.X, Position.Y, Origin, Direction)
+        && !Origin.ContainsNaN() && !Direction.ContainsNaN()
+        && Origin.Z > 0 && Direction.Z < -1.e-6;
 }
 
 void AGHSWarehousePlayerController::CancelCameraDrag()
 {
+    if (auto* Camera = Cast<AGHSWarehouseCameraPawn>(GetPawn()))
+    {
+        if (Camera->IsPreciseMouseDragging)
+        {
+            Camera->TogglePreciseMouseDrag(false);
+            const FVector Current = Camera->GetActorLocation();
+            Camera->SetDesiredLocation(FVector(Current.X, Current.Y, 0), true);
+        }
+    }
+    MapDragViewportSize = FIntPoint::ZeroValue;
     if (bManualDoubleClickCapture)
     {
         bManualDoubleClickCapture = false;

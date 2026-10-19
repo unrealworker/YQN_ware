@@ -1,0 +1,5816 @@
+{
+  "original_triangles": 198900,
+  "triangles": 49813,
+  "reduction_percent": 74.956,
+  "groups": {
+    "01_Body": 5824,
+    "02_Wheels": 16299,
+    "03_Mast_Forks": 3156,
+    "04_Cockpit": 4840,
+    "05_Driver": 17734,
+    "06_Details": 1960
+  },
+  "mesh_objects": 721,
+  "bounds_m": [
+    [
+      -1.25,
+      2.198268413543701
+    ],
+    [
+      -0.6245500445365906,
+      0.6245500445365906
+    ],
+    [
+      0.0,
+      2.3370001316070557
+    ]
+  ],
+  "dimensions_m": [
+    3.448268413543701,
+    1.2491000890731812,
+    2.3370001316070557
+  ],
+  "maximum_bounds_change_m": 8.487701416015625e-05,
+  "primary_worker_non_manifold_edges": {
+    "DRV_Head": 0,
+    "DRV_WorkJacket": 0,
+    "DRV_Trousers": 0
+  },
+  "removed_chain_parts": 136,
+  "duplicate_axles_removed": 2,
+  "original_preserved": true,
+  "unreal_imported": false,
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\MannedForklift\\manned_forklift_50k.blend",
+  "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\MannedForklift\\manned_forklift_50k.fbx",
+  "preview": "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\MannedForklift\\manned_forklift_50k_preview.png",
+  "objects": [
+    {
+      "name": "MF_V2_Chassis",
+      "triangles": 176,
+      "vertices": 90,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_CastCounterweight",
+      "triangles": 476,
+      "vertices": 240,
+      "materials": [
+        "M_MF_Body"
+      ]
+    },
+    {
+      "name": "MF_V2_HoodSeam",
+      "triangles": 156,
+      "vertices": 80,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_BatteryHood",
+      "triangles": 236,
+      "vertices": 120,
+      "materials": [
+        "M_MF_Body"
+      ]
+    },
+    {
+      "name": "MF_V2_RearBumper",
+      "triangles": 316,
+      "vertices": 160,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_SeatBase",
+      "triangles": 136,
+      "vertices": 70,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_BatteryPanelGasket",
+      "triangles": 68,
+      "vertices": 36,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_BatteryAccessPanel",
+      "triangles": 164,
+      "vertices": 84,
+      "materials": [
+        "M_MF_Body"
+      ]
+    },
+    {
+      "name": "MF_V2_BlueShoulderStripe",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Blue"
+      ]
+    },
+    {
+      "name": "MF_V2_RecessedLatch",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_LatchLever",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_PanelHinge",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_PanelHinge.001",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_FleetMark",
+      "triangles": 284,
+      "vertices": 296,
+      "materials": [
+        "M_MF_Blue"
+      ]
+    },
+    {
+      "name": "MF_V2_ModelMark",
+      "triangles": 480,
+      "vertices": 508,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_ArchedWheelGuard",
+      "triangles": 348,
+      "vertices": 176,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_FenderShoulder",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Body"
+      ]
+    },
+    {
+      "name": "MF_V2_Sill",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_EntryStep",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_StepInset",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.001",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.002",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.003",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.004",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.005",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.006",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.007",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.008",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.009",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.010",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.011",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.012",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.013",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.014",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.015",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.016",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.017",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.018",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.019",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.020",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.021",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.022",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.023",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_EntryScuffPlate",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_BatteryPanelGasket.001",
+      "triangles": 68,
+      "vertices": 36,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_BatteryAccessPanel.001",
+      "triangles": 164,
+      "vertices": 84,
+      "materials": [
+        "M_MF_Body"
+      ]
+    },
+    {
+      "name": "MF_V2_BlueShoulderStripe.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Blue"
+      ]
+    },
+    {
+      "name": "MF_V2_RecessedLatch.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_LatchLever.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_PanelHinge.002",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_PanelHinge.003",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_FleetMark.001",
+      "triangles": 284,
+      "vertices": 296,
+      "materials": [
+        "M_MF_Blue"
+      ]
+    },
+    {
+      "name": "MF_V2_ModelMark.001",
+      "triangles": 480,
+      "vertices": 508,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_ArchedWheelGuard.001",
+      "triangles": 348,
+      "vertices": 176,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_FenderShoulder.001",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Body"
+      ]
+    },
+    {
+      "name": "MF_V2_Sill.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_EntryStep.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_StepInset.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.024",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.025",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.026",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.027",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.028",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.029",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.030",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.031",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.032",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.033",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.034",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.035",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.036",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.037",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.038",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.039",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.040",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.041",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.042",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.043",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.044",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.045",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.046",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_StepGrip.047",
+      "triangles": 12,
+      "vertices": 8,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_EntryScuffPlate.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Footwell",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_FloorMat",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_RoundedSolidTyre",
+      "triangles": 1440,
+      "vertices": 720,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.001",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.002",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.003",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.004",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.005",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.006",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.007",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.008",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.009",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.010",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.011",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.012",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.013",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.014",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.015",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.016",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.017",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.018",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.019",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.020",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.021",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.022",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.023",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.024",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.025",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.026",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.027",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.028",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.029",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.030",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.031",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.032",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.033",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.034",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.035",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.036",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.037",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.038",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.039",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.040",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.041",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.042",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.043",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.044",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.045",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.046",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.047",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.048",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.049",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.050",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.051",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.052",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.053",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.054",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.055",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.056",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.057",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.058",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.059",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.060",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.061",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.062",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.063",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.064",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.065",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.066",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.067",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.068",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.069",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.070",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.071",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.072",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.073",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.074",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.075",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.076",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.077",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.078",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.079",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.080",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.081",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.082",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.083",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.084",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.085",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.086",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_MouldedTreadGroove.087",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_SidewallBead",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_RimSeat",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_SidewallBead.001",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_RimSeat.001",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_DishedRim",
+      "triangles": 500,
+      "vertices": 283,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_Hub",
+      "triangles": 100,
+      "vertices": 52,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_AxleCap",
+      "triangles": 64,
+      "vertices": 34,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_RecessedBoltWasher",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_HexNut",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_RecessedBoltWasher.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_HexNut.001",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_RecessedBoltWasher.002",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_HexNut.002",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_RecessedBoltWasher.003",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_HexNut.003",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_RecessedBoltWasher.004",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_HexNut.004",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_RecessedBoltWasher.005",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_HexNut.005",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_RecessedBoltWasher.006",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_HexNut.006",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_RecessedBoltWasher.007",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_HexNut.007",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_R_Axle",
+      "triangles": 92,
+      "vertices": 48,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_RoundedSolidTyre",
+      "triangles": 960,
+      "vertices": 480,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.001",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.002",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.003",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.004",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.005",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.006",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.007",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.008",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.009",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.010",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.011",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.012",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.013",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.014",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.015",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.016",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.017",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.018",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.019",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.020",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.021",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.022",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.023",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.024",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.025",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.026",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.027",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.028",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.029",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.030",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.031",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.032",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.033",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.034",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.035",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.036",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.037",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.038",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.039",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.040",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.041",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.042",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.043",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.044",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.045",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.046",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.047",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.048",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.049",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.050",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.051",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.052",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.053",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.054",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.055",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.056",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.057",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.058",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.059",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.060",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.061",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.062",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.063",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.064",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.065",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.066",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.067",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.068",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.069",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.070",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_MouldedTreadGroove.071",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_SidewallBead",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_RimSeat",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_SidewallBead.001",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_RimSeat.001",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_DishedRim",
+      "triangles": 349,
+      "vertices": 194,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_Hub",
+      "triangles": 100,
+      "vertices": 52,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_AxleCap",
+      "triangles": 64,
+      "vertices": 34,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_RecessedBoltWasher",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_HexNut",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_RecessedBoltWasher.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_HexNut.001",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_RecessedBoltWasher.002",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_HexNut.002",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_RecessedBoltWasher.003",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_HexNut.003",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_RecessedBoltWasher.004",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_HexNut.004",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_R_Axle",
+      "triangles": 92,
+      "vertices": 48,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_RoundedSolidTyre",
+      "triangles": 1440,
+      "vertices": 720,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.001",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.002",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.003",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.004",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.005",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.006",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.007",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.008",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.009",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.010",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.011",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.012",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.013",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.014",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.015",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.016",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.017",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.018",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.019",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.020",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.021",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.022",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.023",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.024",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.025",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.026",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.027",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.028",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.029",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.030",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.031",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.032",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.033",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.034",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.035",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.036",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.037",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.038",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.039",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.040",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.041",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.042",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.043",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.044",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.045",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.046",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.047",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.048",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.049",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.050",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.051",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.052",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.053",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.054",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.055",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.056",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.057",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.058",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.059",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.060",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.061",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.062",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.063",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.064",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.065",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.066",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.067",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.068",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.069",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.070",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.071",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.072",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.073",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.074",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.075",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.076",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.077",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.078",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.079",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.080",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.081",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.082",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.083",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.084",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.085",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.086",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_MouldedTreadGroove.087",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_SidewallBead",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_RimSeat",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_SidewallBead.001",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_RimSeat.001",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_DishedRim",
+      "triangles": 500,
+      "vertices": 283,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_Hub",
+      "triangles": 100,
+      "vertices": 52,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_AxleCap",
+      "triangles": 64,
+      "vertices": 34,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_RecessedBoltWasher",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_HexNut",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_RecessedBoltWasher.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_HexNut.001",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_RecessedBoltWasher.002",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_HexNut.002",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_RecessedBoltWasher.003",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_HexNut.003",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_RecessedBoltWasher.004",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_HexNut.004",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_RecessedBoltWasher.005",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_HexNut.005",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_RecessedBoltWasher.006",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_HexNut.006",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_RecessedBoltWasher.007",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Front_L_HexNut.007",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_RoundedSolidTyre",
+      "triangles": 960,
+      "vertices": 480,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.001",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.002",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.003",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.004",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.005",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.006",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.007",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.008",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.009",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.010",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.011",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.012",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.013",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.014",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.015",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.016",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.017",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.018",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.019",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.020",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.021",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.022",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.023",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.024",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.025",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.026",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.027",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.028",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.029",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.030",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.031",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.032",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.033",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.034",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.035",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.036",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.037",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.038",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.039",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.040",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.041",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.042",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.043",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.044",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.045",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.046",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.047",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.048",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.049",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.050",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.051",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.052",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.053",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.054",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.055",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.056",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.057",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.058",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.059",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.060",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.061",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.062",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.063",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.064",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.065",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.066",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.067",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.068",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.069",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.070",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_MouldedTreadGroove.071",
+      "triangles": 10,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_SidewallBead",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_RimSeat",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_SidewallBead.001",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_RimSeat.001",
+      "triangles": 256,
+      "vertices": 128,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_DishedRim",
+      "triangles": 350,
+      "vertices": 195,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_Hub",
+      "triangles": 100,
+      "vertices": 52,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_AxleCap",
+      "triangles": 64,
+      "vertices": 34,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_RecessedBoltWasher",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_HexNut",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_RecessedBoltWasher.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_HexNut.001",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_RecessedBoltWasher.002",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_HexNut.002",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_RecessedBoltWasher.003",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_HexNut.003",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_RecessedBoltWasher.004",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_Rear_L_HexNut.004",
+      "triangles": 20,
+      "vertices": 12,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_OuterMastWeb",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_OuterMastFlange",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_OuterMastFlange.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_InnerMastRail",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_MastRoller",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_MastRoller.001",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_MastRoller.002",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_LiftRamBarrel",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LiftRamChrome",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_ChainPulley",
+      "triangles": 92,
+      "vertices": 48,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_HydraulicHose",
+      "triangles": 136,
+      "vertices": 70,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_TiltRam",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_TiltPiston",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_OuterMastWeb.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_OuterMastFlange.002",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_OuterMastFlange.003",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_InnerMastRail.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_MastRoller.003",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_MastRoller.004",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_MastRoller.005",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_LiftRamBarrel.001",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LiftRamChrome.001",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_ChainPulley.001",
+      "triangles": 92,
+      "vertices": 48,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_HydraulicHose.001",
+      "triangles": 136,
+      "vertices": 70,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_TiltRam.001",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_TiltPiston.001",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_MastCrossmember",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_MastCrossmember.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_CarriageCrossbar",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_CarriageCrossbar.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LoadBackrestSide",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LoadBackrestSide.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LoadBackrestCross",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LoadBackrestCross.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LoadBackrestGrille",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LoadBackrestGrille.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LoadBackrestGrille.002",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LoadBackrestGrille.003",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LoadBackrestGrille.004",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LoadBackrestGrille.005",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_LoadBackrestGrille.006",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_ForkLock",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_ForkLock.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_TaperedForgedFork",
+      "triangles": 256,
+      "vertices": 130,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_ForkCarriageHook",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Blue"
+      ]
+    },
+    {
+      "name": "MF_V2_TaperedForgedFork.001",
+      "triangles": 256,
+      "vertices": 130,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_ForkCarriageHook.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Blue"
+      ]
+    },
+    {
+      "name": "MF_SeatSuspension",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_SeatCushion",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Seat"
+      ]
+    },
+    {
+      "name": "MF_SeatBack",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Seat"
+      ]
+    },
+    {
+      "name": "MF_SeatBolster",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Seat"
+      ]
+    },
+    {
+      "name": "MF_BackBolster",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Seat"
+      ]
+    },
+    {
+      "name": "MF_ArmrestSupport",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_Armrest",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Seat"
+      ]
+    },
+    {
+      "name": "MF_SeatBeltAnchor",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_SeatBolster.001",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Seat"
+      ]
+    },
+    {
+      "name": "MF_BackBolster.001",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Seat"
+      ]
+    },
+    {
+      "name": "MF_ArmrestSupport.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_Armrest.001",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Seat"
+      ]
+    },
+    {
+      "name": "MF_SeatBeltAnchor.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_SeatBeltLatch",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Red"
+      ]
+    },
+    {
+      "name": "MF_SteeringColumn",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_SteeringWheel",
+      "triangles": 320,
+      "vertices": 160,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_SteeringHub",
+      "triangles": 92,
+      "vertices": 48,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_SteeringSpoke",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_SteeringSpoke.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_SteeringSpoke.002",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_Console",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_DigitalDisplay",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Glass"
+      ]
+    },
+    {
+      "name": "MF_DisplayGlyph",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_LED"
+      ]
+    },
+    {
+      "name": "MF_DisplayGlyph.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_LED"
+      ]
+    },
+    {
+      "name": "MF_DisplayGlyph.002",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_LED"
+      ]
+    },
+    {
+      "name": "MF_HydraulicLever",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_LeverGrip",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_HydraulicLever.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_LeverGrip.001",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_HydraulicLever.002",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_LeverGrip.002",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_FootPedal",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_FootPedal.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_RearGuardPost",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_FrontGuardPost",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_GuardFootPlate",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_GuardFootPlate.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_ShapedRoofRail",
+      "triangles": 200,
+      "vertices": 102,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RoofGusset",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_EntryHandle",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_WorkLampHousing",
+      "triangles": 124,
+      "vertices": 64,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_WorkLampRim",
+      "triangles": 124,
+      "vertices": 64,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_WorkLampLens",
+      "triangles": 124,
+      "vertices": 64,
+      "materials": [
+        "M_MF_LED"
+      ]
+    },
+    {
+      "name": "MF_V2_RearGuardPost.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_FrontGuardPost.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_GuardFootPlate.002",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_GuardFootPlate.003",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_ShapedRoofRail.001",
+      "triangles": 200,
+      "vertices": 102,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RoofGusset.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_EntryHandle.001",
+      "triangles": 76,
+      "vertices": 40,
+      "materials": [
+        "M_MF_Rubber"
+      ]
+    },
+    {
+      "name": "MF_V2_WorkLampHousing.001",
+      "triangles": 124,
+      "vertices": 64,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_WorkLampRim.001",
+      "triangles": 124,
+      "vertices": 64,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_V2_WorkLampLens.001",
+      "triangles": 124,
+      "vertices": 64,
+      "materials": [
+        "M_MF_LED"
+      ]
+    },
+    {
+      "name": "MF_V2_RoofHeader",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RoofHeader.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RoofSlat",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RoofSlat.001",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RoofSlat.002",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RoofSlat.003",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RoofSlat.004",
+      "triangles": 108,
+      "vertices": 56,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RearRoofMount",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "DRV_RightCargoPocket",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_WorkerV3_Navy"
+      ]
+    },
+    {
+      "name": "DRV_RightPocketFlap",
+      "triangles": 28,
+      "vertices": 16,
+      "materials": [
+        "M_MF_WorkerV3_Navy"
+      ]
+    },
+    {
+      "name": "DRV_RightBoot",
+      "triangles": 156,
+      "vertices": 80,
+      "materials": [
+        "M_MF_WorkerV3_Rubber"
+      ]
+    },
+    {
+      "name": "DRV_RightBootSole",
+      "triangles": 92,
+      "vertices": 48,
+      "materials": [
+        "M_MF_WorkerV3_Rubber"
+      ]
+    },
+    {
+      "name": "DRV_RightBootToeCap",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_WorkerV3_Rubber"
+      ]
+    },
+    {
+      "name": "DRV_RightLace0",
+      "triangles": 32,
+      "vertices": 18,
+      "materials": [
+        "M_MF_WorkerV3_Rubber"
+      ]
+    },
+    {
+      "name": "DRV_RightLace1",
+      "triangles": 32,
+      "vertices": 18,
+      "materials": [
+        "M_MF_WorkerV3_Rubber"
+      ]
+    },
+    {
+      "name": "DRV_RightLace2",
+      "triangles": 32,
+      "vertices": 18,
+      "materials": [
+        "M_MF_WorkerV3_Rubber"
+      ]
+    },
+    {
+      "name": "DRV_LeftCargoPocket",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_WorkerV3_Navy"
+      ]
+    },
+    {
+      "name": "DRV_LeftPocketFlap",
+      "triangles": 28,
+      "vertices": 16,
+      "materials": [
+        "M_MF_WorkerV3_Navy"
+      ]
+    },
+    {
+      "name": "DRV_LeftBoot",
+      "triangles": 156,
+      "vertices": 80,
+      "materials": [
+        "M_MF_WorkerV3_Rubber"
+      ]
+    },
+    {
+      "name": "DRV_LeftBootSole",
+      "triangles": 92,
+      "vertices": 48,
+      "materials": [
+        "M_MF_WorkerV3_Rubber"
+      ]
+    },
+    {
+      "name": "DRV_LeftBootToeCap",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_WorkerV3_Rubber"
+      ]
+    },
+    {
+      "name": "DRV_LeftLace0",
+      "triangles": 32,
+      "vertices": 18,
+      "materials": [
+        "M_MF_WorkerV3_Rubber"
+      ]
+    },
+    {
+      "name": "DRV_LeftLace1",
+      "triangles": 32,
+      "vertices": 18,
+      "materials": [
+        "M_MF_WorkerV3_Rubber"
+      ]
+    },
+    {
+      "name": "DRV_LeftLace2",
+      "triangles": 32,
+      "vertices": 18,
+      "materials": [
+        "M_MF_WorkerV3_Rubber"
+      ]
+    },
+    {
+      "name": "DRV_JacketWaistBand",
+      "triangles": 92,
+      "vertices": 48,
+      "materials": [
+        "M_MF_WorkerV3_Cloth"
+      ]
+    },
+    {
+      "name": "DRV_Neck",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_RightSleeveCuff",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_WorkerV3_Cloth"
+      ]
+    },
+    {
+      "name": "DRV_RightGlovePalm",
+      "triangles": 104,
+      "vertices": 54,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_RightGloveFinger1",
+      "triangles": 104,
+      "vertices": 54,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_RightGloveFinger2",
+      "triangles": 104,
+      "vertices": 54,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_RightGloveFinger3",
+      "triangles": 104,
+      "vertices": 54,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_RightGloveFinger4",
+      "triangles": 104,
+      "vertices": 54,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_RightGloveThumb",
+      "triangles": 104,
+      "vertices": 54,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_LeftSleeveCuff",
+      "triangles": 60,
+      "vertices": 32,
+      "materials": [
+        "M_MF_WorkerV3_Cloth"
+      ]
+    },
+    {
+      "name": "DRV_LeftGlovePalm",
+      "triangles": 104,
+      "vertices": 54,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_LeftGloveFinger1",
+      "triangles": 104,
+      "vertices": 54,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_LeftGloveFinger2",
+      "triangles": 104,
+      "vertices": 54,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_LeftGloveFinger3",
+      "triangles": 104,
+      "vertices": 54,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_LeftGloveFinger4",
+      "triangles": 104,
+      "vertices": 54,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_LeftGloveThumb",
+      "triangles": 104,
+      "vertices": 54,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_HelmetSuspension",
+      "triangles": 92,
+      "vertices": 48,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "DRV_SafetyHelmetShell",
+      "triangles": 1398,
+      "vertices": 701,
+      "materials": [
+        "M_MF_WorkerV3_Helmet"
+      ]
+    },
+    {
+      "name": "DRV_SafetyHelmetBrim",
+      "triangles": 400,
+      "vertices": 202,
+      "materials": [
+        "M_MF_WorkerV3_Helmet"
+      ]
+    },
+    {
+      "name": "DRV_HelmetRidge1",
+      "triangles": 112,
+      "vertices": 58,
+      "materials": [
+        "M_MF_WorkerV3_Helmet"
+      ]
+    },
+    {
+      "name": "DRV_HelmetRidge2",
+      "triangles": 112,
+      "vertices": 58,
+      "materials": [
+        "M_MF_WorkerV3_Helmet"
+      ]
+    },
+    {
+      "name": "DRV_HelmetRidge3",
+      "triangles": 112,
+      "vertices": 58,
+      "materials": [
+        "M_MF_WorkerV3_Helmet"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightChestTape0",
+      "triangles": 24,
+      "vertices": 26,
+      "materials": [
+        "M_MF_WorkerV3_Tape"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightChestTapeCore0",
+      "triangles": 24,
+      "vertices": 26,
+      "materials": [
+        "M_MF_WorkerV3_TapeCore"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightChestTape1",
+      "triangles": 24,
+      "vertices": 26,
+      "materials": [
+        "M_MF_WorkerV3_Tape"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightChestTapeCore1",
+      "triangles": 24,
+      "vertices": 26,
+      "materials": [
+        "M_MF_WorkerV3_TapeCore"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightChestPocket",
+      "triangles": 96,
+      "vertices": 50,
+      "materials": [
+        "M_MF_WorkerV3_Cloth"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightPocketFlap",
+      "triangles": 52,
+      "vertices": 28,
+      "materials": [
+        "M_MF_WorkerV3_Cloth"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightPocketStitch",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_WorkerV3_Seam"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightPocketSnap",
+      "triangles": 120,
+      "vertices": 62,
+      "materials": [
+        "M_MF_WorkerV3_Dark"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftChestTape0",
+      "triangles": 24,
+      "vertices": 26,
+      "materials": [
+        "M_MF_WorkerV3_Tape"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftChestTapeCore0",
+      "triangles": 24,
+      "vertices": 26,
+      "materials": [
+        "M_MF_WorkerV3_TapeCore"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftChestTape1",
+      "triangles": 24,
+      "vertices": 26,
+      "materials": [
+        "M_MF_WorkerV3_Tape"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftChestTapeCore1",
+      "triangles": 24,
+      "vertices": 26,
+      "materials": [
+        "M_MF_WorkerV3_TapeCore"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftChestPocket",
+      "triangles": 96,
+      "vertices": 50,
+      "materials": [
+        "M_MF_WorkerV3_Cloth"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftPocketFlap",
+      "triangles": 52,
+      "vertices": 28,
+      "materials": [
+        "M_MF_WorkerV3_Cloth"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftPocketStitch",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_WorkerV3_Seam"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftPocketSnap",
+      "triangles": 120,
+      "vertices": 62,
+      "materials": [
+        "M_MF_WorkerV3_Dark"
+      ]
+    },
+    {
+      "name": "DRV_V3_JacketPlacket",
+      "triangles": 96,
+      "vertices": 50,
+      "materials": [
+        "M_MF_WorkerV3_Seam"
+      ]
+    },
+    {
+      "name": "DRV_V3_ZipSeam",
+      "triangles": 100,
+      "vertices": 52,
+      "materials": [
+        "M_MF_WorkerV3_Metal"
+      ]
+    },
+    {
+      "name": "DRV_V3_CollarStand",
+      "triangles": 124,
+      "vertices": 64,
+      "materials": [
+        "M_MF_WorkerV3_Cloth"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightTurnDownCollar",
+      "triangles": 52,
+      "vertices": 28,
+      "materials": [
+        "M_MF_WorkerV3_Cloth"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftTurnDownCollar",
+      "triangles": 52,
+      "vertices": 28,
+      "materials": [
+        "M_MF_WorkerV3_Cloth"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightSleeveTape0",
+      "triangles": 128,
+      "vertices": 96,
+      "materials": [
+        "M_MF_WorkerV3_Tape"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightSleeveTapeCore0",
+      "triangles": 128,
+      "vertices": 96,
+      "materials": [
+        "M_MF_WorkerV3_TapeCore"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightSleeveTape1",
+      "triangles": 128,
+      "vertices": 96,
+      "materials": [
+        "M_MF_WorkerV3_Tape"
+      ]
+    },
+    {
+      "name": "DRV_V3_RightSleeveTapeCore1",
+      "triangles": 128,
+      "vertices": 96,
+      "materials": [
+        "M_MF_WorkerV3_TapeCore"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftSleeveTape0",
+      "triangles": 128,
+      "vertices": 96,
+      "materials": [
+        "M_MF_WorkerV3_Tape"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftSleeveTapeCore0",
+      "triangles": 128,
+      "vertices": 96,
+      "materials": [
+        "M_MF_WorkerV3_TapeCore"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftSleeveTape1",
+      "triangles": 128,
+      "vertices": 96,
+      "materials": [
+        "M_MF_WorkerV3_Tape"
+      ]
+    },
+    {
+      "name": "DRV_V3_LeftSleeveTapeCore1",
+      "triangles": 128,
+      "vertices": 96,
+      "materials": [
+        "M_MF_WorkerV3_TapeCore"
+      ]
+    },
+    {
+      "name": "DRV_V3_BadgeEdge",
+      "triangles": 48,
+      "vertices": 49,
+      "materials": [
+        "M_MF_WorkerV3_BadgeRed"
+      ]
+    },
+    {
+      "name": "DRV_V3_BadgeFace",
+      "triangles": 48,
+      "vertices": 49,
+      "materials": [
+        "M_MF_WorkerV3_BadgeWhite"
+      ]
+    },
+    {
+      "name": "DRV_V3_BadgeMark",
+      "triangles": 96,
+      "vertices": 50,
+      "materials": [
+        "M_MF_WorkerV3_BadgeRed"
+      ]
+    },
+    {
+      "name": "DRV_Head",
+      "triangles": 4198,
+      "vertices": 2101,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_RightEye",
+      "triangles": 24,
+      "vertices": 25,
+      "materials": [
+        "DRV_FaceV3_MutedIvory"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_RightIris",
+      "triangles": 20,
+      "vertices": 21,
+      "materials": [
+        "DRV_FaceV3_BrownIris"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_RightPupil",
+      "triangles": 16,
+      "vertices": 17,
+      "materials": [
+        "DRV_FaceV3_Pupil"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_RightUpperLid",
+      "triangles": 100,
+      "vertices": 52,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_RightLowerLid",
+      "triangles": 100,
+      "vertices": 52,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_RightEyebrow",
+      "triangles": 24,
+      "vertices": 26,
+      "materials": [
+        "DRV_FaceV3_Brows"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_RightNostril",
+      "triangles": 16,
+      "vertices": 17,
+      "materials": [
+        "DRV_FaceV3_SoftCrease"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_RightEar",
+      "triangles": 200,
+      "vertices": 102,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_LeftEye",
+      "triangles": 24,
+      "vertices": 25,
+      "materials": [
+        "DRV_FaceV3_MutedIvory"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_LeftIris",
+      "triangles": 20,
+      "vertices": 21,
+      "materials": [
+        "DRV_FaceV3_BrownIris"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_LeftPupil",
+      "triangles": 16,
+      "vertices": 17,
+      "materials": [
+        "DRV_FaceV3_Pupil"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_LeftUpperLid",
+      "triangles": 100,
+      "vertices": 52,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_LeftLowerLid",
+      "triangles": 100,
+      "vertices": 52,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_LeftEyebrow",
+      "triangles": 24,
+      "vertices": 26,
+      "materials": [
+        "DRV_FaceV3_Brows"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_LeftNostril",
+      "triangles": 16,
+      "vertices": 17,
+      "materials": [
+        "DRV_FaceV3_SoftCrease"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_LeftEar",
+      "triangles": 200,
+      "vertices": 102,
+      "materials": [
+        "M_MF_WorkerV3_Skin"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_MouthCrease",
+      "triangles": 120,
+      "vertices": 62,
+      "materials": [
+        "DRV_FaceV3_SoftCrease"
+      ]
+    },
+    {
+      "name": "DRV_FaceV3_LowerLip",
+      "triangles": 48,
+      "vertices": 50,
+      "materials": [
+        "DRV_FaceV3_Lips"
+      ]
+    },
+    {
+      "name": "DRV_V3_EarConcha_-1",
+      "triangles": 24,
+      "vertices": 25,
+      "materials": [
+        "DRV_FaceV3_SkinShade"
+      ]
+    },
+    {
+      "name": "DRV_V3_EarConcha_1",
+      "triangles": 24,
+      "vertices": 25,
+      "materials": [
+        "DRV_FaceV3_SkinShade"
+      ]
+    },
+    {
+      "name": "DRV_V3_ShortHair",
+      "triangles": 598,
+      "vertices": 354,
+      "materials": [
+        "M_MF_WorkerV3_Hair"
+      ]
+    },
+    {
+      "name": "DRV_WorkJacket",
+      "triangles": 2600,
+      "vertices": 1302,
+      "materials": [
+        "M_MF_WorkerV3_Cloth"
+      ]
+    },
+    {
+      "name": "DRV_Trousers",
+      "triangles": 2000,
+      "vertices": 1002,
+      "materials": [
+        "M_MF_WorkerV3_Navy"
+      ]
+    },
+    {
+      "name": "MF_MastWarning",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Helmet"
+      ]
+    },
+    {
+      "name": "MF_WarningInk",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_WarningInk.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_WarningInk.002",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_MastWarning.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Helmet"
+      ]
+    },
+    {
+      "name": "MF_WarningInk.003",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_WarningInk.004",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_WarningInk.005",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_RearTowPin",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Metal"
+      ]
+    },
+    {
+      "name": "MF_BeaconBase",
+      "triangles": 124,
+      "vertices": 64,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_AmberBeacon",
+      "triangles": 124,
+      "vertices": 64,
+      "materials": [
+        "M_MF_Amber"
+      ]
+    },
+    {
+      "name": "MF_BeaconLensRing",
+      "triangles": 128,
+      "vertices": 64,
+      "materials": [
+        "M_MF_Amber"
+      ]
+    },
+    {
+      "name": "MF_BeaconLensRing.001",
+      "triangles": 128,
+      "vertices": 64,
+      "materials": [
+        "M_MF_Amber"
+      ]
+    },
+    {
+      "name": "MF_BeaconLensRing.002",
+      "triangles": 128,
+      "vertices": 64,
+      "materials": [
+        "M_MF_Amber"
+      ]
+    },
+    {
+      "name": "MF_V2_RearLampHousing",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_RearLampLens",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Red"
+      ]
+    },
+    {
+      "name": "MF_V2_Reflector",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Reflective"
+      ]
+    },
+    {
+      "name": "MF_V2_RearLampHousing.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_RearLampLens.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Red"
+      ]
+    },
+    {
+      "name": "MF_V2_Reflector.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Reflective"
+      ]
+    },
+    {
+      "name": "MF_V2_RearVentRecess",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Dark"
+      ]
+    },
+    {
+      "name": "MF_V2_RearVentSlat",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RearVentSlat.001",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RearVentSlat.002",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RearVentSlat.003",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RearVentSlat.004",
+      "triangles": 44,
+      "vertices": 24,
+      "materials": [
+        "M_MF_Frame"
+      ]
+    },
+    {
+      "name": "MF_V2_RearFleetNumber",
+      "triangles": 404,
+      "vertices": 424,
+      "materials": [
+        "M_MF_Blue"
+      ]
+    }
+  ]
+}

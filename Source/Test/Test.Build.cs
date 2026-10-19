@@ -10,7 +10,9 @@ public class Test : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "UniversalCameraPlugin", "UMG" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+		RuntimeDependencies.Add("$(ProjectDir)/Content/GHSNormalWarehouse/HUD/Fonts/DroidSansFallback.ttf", StagedFileType.NonUFS);
+		RuntimeDependencies.Add("$(ProjectDir)/Content/GHSNormalWarehouse/HUD/Fonts/LICENSE.txt", StagedFileType.NonUFS);
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

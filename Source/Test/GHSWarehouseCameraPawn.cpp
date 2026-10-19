@@ -1,4 +1,5 @@
 #include "GHSWarehouseCameraPawn.h"
+#include "GHSWarehousePlayerController.h"
 #include "Camera/CameraComponent.h"
 
 namespace
@@ -99,9 +100,22 @@ void AGHSWarehouseCameraPawn::ZoomSteps(float Steps)
     SetDesiredZoom(float(Distance));
 }
 
+bool AGHSWarehouseCameraPawn::ShouldAggregateTruckHUD() const
+{
+    // The plugin eases TargetArmLength toward DesiredZoom. Follow the camera's
+    // current arm length so HUDs change mode when the view reaches the threshold.
+    return SpringArmComponent && SpringArmComponent->TargetArmLength >= FMath::Max(0.f, HUDClusterMinArmLength);
+}
+
 void AGHSWarehouseCameraPawn::Tick(float DeltaSeconds)
 {
     if (DeltaSeconds <= SMALL_NUMBER) return;
+    if (IsPreciseMouseDragging)
+    {
+        auto* WarehouseController = Cast<AGHSWarehousePlayerController>(GetController());
+        if (!WarehouseController) TogglePreciseMouseDrag(false);
+        else if (!WarehouseController->HasValidMapDragCursor()) WarehouseController->CancelCameraDrag();
+    }
     Super::Tick(DeltaSeconds);
 }
 

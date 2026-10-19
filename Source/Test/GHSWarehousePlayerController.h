@@ -4,6 +4,8 @@
 #include "GameFramework/PlayerController.h"
 #include "GHSWarehousePlayerController.generated.h"
 
+class UGHSDockTruckHUDWidget;
+
 UENUM(BlueprintType)
 enum class EGHSWarehouseDragMode : uint8 { None, Orbit, Pan };
 
@@ -23,8 +25,16 @@ public:
     float DragThresholdPixels = 3.0f;
     UFUNCTION(BlueprintCallable, Category="Warehouse Camera")
     void CancelCameraDrag();
+    /** Grab the ground under the visible cursor using the camera plugin. */
+    UFUNCTION(BlueprintCallable, Category="Warehouse Camera")
+    bool BeginMapDrag();
+    /** Validate the live cursor/ray before the plugin updates its ground anchor. */
+    bool HasValidMapDragCursor() const;
+    UPROPERTY(BlueprintReadOnly, Transient, Category="Dock Truck HUD")
+    TObjectPtr<UGHSDockTruckHUDWidget> TruckHUDWidget;
 protected:
     virtual void BeginPlay() override;
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void OnUnPossess() override;
 private:
     FVector2D PendingMouse = FVector2D::ZeroVector;
@@ -32,4 +42,5 @@ private:
     bool bPastDragThreshold = false;
     bool bManualDoubleClickCapture = false;
     FIntPoint DoubleClickCursorPosition = FIntPoint::ZeroValue;
+    FIntPoint MapDragViewportSize = FIntPoint::ZeroValue;
 };

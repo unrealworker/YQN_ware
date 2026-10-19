@@ -16,6 +16,15 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Warehouse Camera")
     TObjectPtr<UCameraComponent> WarehouseCamera;
 
+    /** Current spring-arm lengths below this value show individual truck HUDs. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Warehouse Camera",
+        meta=(ClampMin="0", UIMin="0", Units="cm", DisplayName="HUD 聚合最小臂长",
+            ToolTip="当前弹簧臂长度低于此值时，装卸车与电动堆高车 HUD 不聚合；达到或超过时使用四等分聚合。0 表示始终允许聚合。"))
+    float HUDClusterMinArmLength = 10000.0f;
+
+    UFUNCTION(BlueprintPure, Category="Warehouse Camera")
+    bool ShouldAggregateTruckHUD() const;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Warehouse Camera|Overview")
     FVector OverviewCenter = FVector(-646.665, 833.981, 0.0);
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Warehouse Camera|Overview", meta=(ClampMin="900"))

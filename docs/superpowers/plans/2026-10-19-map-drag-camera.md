@@ -1,0 +1,9 @@
+# Ground map dragging
+
+The user explicitly replaced absolute cursor positioning with map/grab dragging. RMB must grab the ground point without jumping, keep that same point under the moving cursor, and stop immediately on release. Keep the Pawn at Z=0 and orbit around its moved position, preserving LMB, wheel, Home and the completed truck HUD.
+
+Use the existing UniversalCameraPlugin TogglePreciseMouseDrag and native Tick with Plane mode at Z=0 and PreciseMouseDragIgnoreMovementLag=true. Validate the live cursor and downward ray before beginning and before the plugin Tick. Stop pending location, rotation and zoom easing at the actual current view when beginning a grab. Cancel plugin state on release, invalid cursor, resize, focus loss, unpossession, wheel and Home. Remove the previous frozen-projection absolute targeting functions. No scene or asset changes.
+
+RED: Saved/Automation/MapDrag_RED/index.json records the old implementation failing the no-jump-on-press assertion across 20 angles. GREEN validation must use actual offscreen game mouse events, native plugin Tick, and independent world-to-screen projection to verify the grabbed anchor follows the cursor, rather than only comparing internal target variables.
+
+GREEN: compiled and linked successfully using MSVC 14.38.33130 (Saved/Logs/GHS_MapDrag_Build.log). MapDrag_GHS reports 12 passed, 0 failed. MapDrag_Runtime_Final reports 1 passed, 0 failed in a real 1920x1080 game viewport across 20 angles, with anchor screen error below 0.75px, no jump/drift, immediate stop on release, Z=0, orbit pivot, input ownership, cancellation and HUD preservation. The offscreen test explicitly clears its startup hidden-capture flag via OnFocusLost before injecting only internal viewport mouse events; it never moves the OS cursor. Production code uses unmodified native PreciseMouseDrag math. Content preservation check verified 753 unchanged files.
