@@ -5,6 +5,7 @@
 #include "GHSWarehousePlayerController.generated.h"
 
 class UGHSDockTruckHUDWidget;
+class UGHSTwinHUDWidget;
 
 UENUM(BlueprintType)
 enum class EGHSWarehouseDragMode : uint8 { None, Orbit, Pan };
@@ -32,15 +33,22 @@ public:
     bool HasValidMapDragCursor() const;
     UPROPERTY(BlueprintReadOnly, Transient, Category="Dock Truck HUD")
     TObjectPtr<UGHSDockTruckHUDWidget> TruckHUDWidget;
+    UPROPERTY(BlueprintReadOnly, Transient, Category="Warehouse Twin")
+    TObjectPtr<UGHSTwinHUDWidget> TwinHUDWidget;
 protected:
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void OnUnPossess() override;
 private:
+    void ConsumeOrbitMotion();
+    void FinishTwinOrbitRelease();
     FVector2D PendingMouse = FVector2D::ZeroVector;
     FVector2D DragTravel = FVector2D::ZeroVector;
     bool bPastDragThreshold = false;
+    bool bTwinOrbitReleasePending = false;
     bool bManualDoubleClickCapture = false;
     FIntPoint DoubleClickCursorPosition = FIntPoint::ZeroValue;
     FIntPoint MapDragViewportSize = FIntPoint::ZeroValue;
+    FVector2D TwinPressPosition = FVector2D::ZeroVector;
+    TSharedPtr<SWidget> TwinViewportWidget;
 };

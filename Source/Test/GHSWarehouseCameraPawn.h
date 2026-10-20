@@ -4,7 +4,7 @@
 #include "UniversalCamera.h"
 #include "GHSWarehouseCameraPawn.generated.h"
 
-/** Ground-plane Pawn movement; UniversalCamera orbits around the moving Pawn. */
+/** Ground navigation plus explicit object-centered camera flights for the twin HUD. */
 UCLASS(Blueprintable)
 class TEST_API AGHSWarehouseCameraPawn : public AUniversalCamera
 {
@@ -54,9 +54,48 @@ public:
     UFUNCTION(BlueprintCallable, Category="Warehouse Camera")
     void ZoomSteps(float Steps);
 
+    /** Orbit the actual 3D model center; panel framing is a separate camera-local offset. */
+    UFUNCTION(BlueprintCallable, Category="Warehouse Camera|Focus")
+    void FocusOnTarget(FVector TargetCenter, float Distance, FRotator Rotation,
+        FVector2D ViewportSize, FVector2D SceneCenterPixels, float Duration = 0.85f);
+    /** One ease clock for pivot, rotation, distance and framing. Duration 0 applies immediately. */
+    UFUNCTION(BlueprintCallable, Category="Warehouse Camera|Focus")
+    void TransitionToPose(FVector Pivot, float Distance, FRotator Rotation,
+        FVector2D ViewportSize, FVector2D SceneCenterPixels, bool bGroundMode = true, float Duration = 0.85f);
+    /** Freeze at the actual current pose, never at an unfinished desired destination. */
+    UFUNCTION(BlueprintCallable, Category="Warehouse Camera|Focus")
+    void CancelPoseTransition();
+    /** Convert a 3D object orbit into ground navigation without moving the rendered camera. */
+    UFUNCTION(BlueprintCallable, Category="Warehouse Camera|Focus")
+    void PrepareForGroundPan();
+    /** Stop manual-navigation lag at the actual view without applying destination clamps. */
+    UFUNCTION(BlueprintCallable, Category="Warehouse Camera|Focus")
+    void FreezeCurrentPose();
+    UFUNCTION(BlueprintPure, Category="Warehouse Camera|Focus")
+    bool IsPoseTransitionActive() const { return bPoseTransitionActive; }
+    UFUNCTION(BlueprintPure, Category="Warehouse Camera|Focus")
+    bool UsesObjectPivot() const { return bObjectPivot; }
+    UFUNCTION(BlueprintPure, Category="Warehouse Camera|Focus")
+    FVector GetFocusTarget() const { return FocusTarget; }
+
 protected:
     virtual void BeginPlay() override;
     virtual FRotator Lag_GetTickDesiredRotation_Implementation(float DeltaTime) override;
 private:
     void ConfigureGroundRestrictions();
+    void ConfigureObjectRestrictions();
+    void ApplyPose(FVector Pivot, FRotator Rotation, float Distance, FVector SocketOffset, FVector TargetOffset);
+    void UpdateFraming();
+    bool bPoseTransitionActive = false;
+    bool bObjectPivot = false;
+    bool bUseSceneFraming = false;
+    bool bGroundPanRecovery = false;
+    FVector GroundRecoveryMinimum = FVector::ZeroVector, GroundRecoveryMaximum = FVector::ZeroVector;
+    bool bFlightEndsOnGround = true;
+    float FlightElapsed = 0, FlightDuration = 0;
+    FVector FlightStartPivot, FlightEndPivot, FlightStartOffsetRatio, FlightEndOffsetRatio, FlightStartTargetOffset;
+    FRotator FlightStartRotation, FlightEndRotation;
+    float FlightStartDistance = 0, FlightEndDistance = 0;
+    FVector FramingOffsetRatio = FVector::ZeroVector;
+    FVector FocusTarget = FVector::ZeroVector;
 };

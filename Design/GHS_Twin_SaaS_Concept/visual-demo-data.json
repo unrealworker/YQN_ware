@@ -1,0 +1,53 @@
+{
+  "snapshot": "2026-10-20 14:20:08",
+  "kind": "demonstration",
+  "sourceTotals": "../business-demo-data.json",
+  "completedOrderTrend": {
+    "times": [
+      "06:00:00",
+      "08:00:00",
+      "10:00:00",
+      "12:00:00",
+      "14:00:00",
+      "14:20:08"
+    ],
+    "inbound": [
+      0,
+      12,
+      38,
+      66,
+      92,
+      96
+    ],
+    "outbound": [
+      0,
+      18,
+      48,
+      78,
+      112,
+      118
+    ],
+    "axisMax": 150
+  },
+  "rackA03": {
+    "kind": "demonstration distribution, not CAD coordinates",
+    "total": 48,
+    "freeBins": [
+      13,
+      20,
+      27,
+      34,
+      41,
+      42,
+      43,
+      44
+    ],
+    "lockedBins": [
+      15,
+      30,
+      45,
+      48
+    ],
+    "selectedBin": 12
+  }
+}

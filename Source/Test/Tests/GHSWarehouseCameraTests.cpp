@@ -2,6 +2,7 @@
 
 #include "../GHSWarehouseCameraPawn.h"
 #include "../GHSWarehousePlayerController.h"
+#include "../GHSTwinHUDWidget.h"
 #include "Camera/CameraComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
@@ -182,6 +183,55 @@ bool FGHSWarehouseCameraMouseGestures::RunTest(const FString& Parameters)
     TestTrue(TEXT("Double-click also requires a valid viewport"), F.Controller->DragMode == EGHSWarehouseDragMode::None);
     F.Key(EKeys::RightMouseButton, IE_Released);
     TestTrue(TEXT("Double-click pan release clears mode"), F.Controller->DragMode == EGHSWarehouseDragMode::None);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinFastMouseRelease,
+    "GHS.WarehouseCamera.Input.TwinFastRelease", GHSWarehouseCameraTests::Flags)
+
+bool FGHSTwinFastMouseRelease::RunTest(const FString& Parameters)
+{
+    using namespace GHSWarehouseCameraTests;
+    FFixture F;
+    if (!F.Check(*this)) return false;
+    F.Controller->TwinHUDWidget = NewObject<UGHSTwinHUDWidget>(F.Controller);
+    F.Controller->TwinHUDWidget->SelectedId = TEXT("AGV-07");
+    const double InitialYaw = F.Pawn->DesiredRotation.Yaw;
+
+    // Real SceneViewport ordering: release first, then the frame's accumulated
+    // pointer axes. This used to treat a short fast drag as an empty-scene click.
+    F.Key(EKeys::LeftMouseButton, IE_Pressed);
+    F.Key(EKeys::LeftMouseButton, IE_Released);
+    F.Mouse(100, 0);
+    F.InputFrame();
+    Near(*this, TEXT("Fast released drag consumes the final pointer batch"),
+        F.Pawn->DesiredRotation.Yaw, InitialYaw + 100 * F.Pawn->OrbitDegreesPerPixel);
+    TestEqual(TEXT("Fast drag preserves the open object"), F.Controller->TwinHUDWidget->SelectedId, FString(TEXT("AGV-07")));
+    TestTrue(TEXT("Release finishes after the input batch"), F.Controller->DragMode == EGHSWarehouseDragMode::None);
+    const FDesiredPose Released(*F.Pawn);
+    F.Mouse(30, 0);
+    F.InputFrame();
+    Released.CheckUnchanged(*this, *F.Pawn, TEXT("Uncaptured movement after finished release"));
+
+    F.Key(EKeys::LeftMouseButton, IE_Pressed);
+    F.Key(EKeys::LeftMouseButton, IE_Released);
+    F.Controller->CancelCameraDrag();
+    F.Mouse(100, 0);
+    F.InputFrame();
+    Released.CheckUnchanged(*this, *F.Pawn, TEXT("Focus cancellation discards pending gesture"));
+
+    F.Key(EKeys::LeftMouseButton, IE_Pressed);
+    F.Key(EKeys::LeftMouseButton, IE_Released);
+    F.Key(EKeys::LeftMouseButton, IE_DoubleClick);
+    TestEqual(TEXT("Another press in the unflushed batch never emits a stale click"),
+        F.Controller->TwinHUDWidget->SelectedId, FString(TEXT("AGV-07")));
+    F.Mouse(100, 0);
+    F.Key(EKeys::LeftMouseButton, IE_Released);
+    F.InputFrame();
+    Near(*this, TEXT("Same-frame second gesture consumes accumulated movement once"),
+        F.Pawn->DesiredRotation.Yaw, InitialYaw + 200 * F.Pawn->OrbitDegreesPerPixel);
+    TestEqual(TEXT("Same-frame double-click drag preserves detail"),
+        F.Controller->TwinHUDWidget->SelectedId, FString(TEXT("AGV-07")));
     return true;
 }
 

@@ -1,11 +1,26 @@
 #include "GHSWarehousePlayerController.h"
 #include "GHSWarehouseCameraPawn.h"
 #include "GHSDockTruckHUDWidget.h"
+#include "GHSTwinHUDWidget.h"
 #include "Engine/GameViewportClient.h"
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/PlayerInput.h"
 #include "UnrealClient.h"
 #include "SceneView.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
+#include "Widgets/Layout/SDPIScaler.h"
+#include "Slate/SceneViewport.h"
+#include "Misc/CommandLine.h"
+#include "Misc/Parse.h"
+
+namespace
+{
+bool TraceTwinInput()
+{
+    static const bool bEnabled = FParse::Param(FCommandLine::Get(), TEXT("TwinInputTrace"));
+    return bEnabled;
+}
+}
 
 AGHSWarehousePlayerController::AGHSWarehousePlayerController()
 {
@@ -19,8 +34,23 @@ void AGHSWarehousePlayerController::BeginPlay()
     Super::BeginPlay();
     if (IsLocalController() && GetWorld()->GetMapName().Contains(TEXT("GHS_CAD_NormalWarehouse")))
     {
-        TruckHUDWidget = CreateWidget<UGHSDockTruckHUDWidget>(this);
-        if (TruckHUDWidget) TruckHUDWidget->AddToViewport(20);
+        if (GetWorld()->GetMapName().Contains(TEXT("ZcoolSmartFactory")))
+        {
+            TwinHUDWidget = CreateWidget<UGHSTwinHUDWidget>(this);
+            if (TwinHUDWidget && GetWorld()->GetGameViewport())
+            {
+                // Keep typography readable instead of inheriting the old HUD's global DPI shrink.
+                TwinViewportWidget = SNew(SDPIScaler)
+                    .DPIScale_Lambda([this](){return 1.f/FMath::Max(.1f,UWidgetLayoutLibrary::GetViewportScale(this));})
+                    [TwinHUDWidget->TakeWidget()];
+                GetWorld()->GetGameViewport()->AddViewportWidgetContent(TwinViewportWidget.ToSharedRef(),20);
+            }
+        }
+        else
+        {
+            TruckHUDWidget = CreateWidget<UGHSDockTruckHUDWidget>(this);
+            if (TruckHUDWidget) TruckHUDWidget->AddToViewport(20);
+        }
     }
     FInputModeGameAndUI Mode;
     Mode.SetHideCursorDuringCapture(true);
@@ -40,15 +70,39 @@ void AGHSWarehousePlayerController::EndPlay(const EEndPlayReason::Type EndPlayRe
 {
     CancelCameraDrag();
     if (TruckHUDWidget) { TruckHUDWidget->RemoveFromParent(); TruckHUDWidget = nullptr; }
+    if (TwinViewportWidget.IsValid() && GetWorld()->GetGameViewport()) GetWorld()->GetGameViewport()->RemoveViewportWidgetContent(TwinViewportWidget.ToSharedRef());
+    TwinViewportWidget.Reset(); TwinHUDWidget=nullptr;
     Super::EndPlay(EndPlayReason);
 }
 
 bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
 {
+    // A second press may precede Slate's final axis batch too. Discard the old
+    // click candidate rather than interpreting zero received pixels as a tap.
+    if (bTwinOrbitReleasePending && (Params.Event == IE_Pressed || Params.Event == IE_DoubleClick)
+        && (Params.Key == EKeys::LeftMouseButton || Params.Key == EKeys::RightMouseButton))
+        CancelCameraDrag();
     const bool bHandled = Super::InputKey(Params);
     AGHSWarehouseCameraPawn* Camera = Cast<AGHSWarehouseCameraPawn>(GetPawn());
     if (!Camera || Params.IsGamepad()) return bHandled;
     const FKey Key = Params.Key;
+    if (TwinHUDWidget && TraceTwinInput() && (Key == EKeys::LeftMouseButton || Key == EKeys::MouseX || Key == EKeys::MouseY))
+        UE_LOG(LogTemp, Display, TEXT("GHS_TWIN_INPUT frame=%llu key=%s event=%d delta=%.2f mode=%d pending=%s releasing=%d"),
+            GFrameCounter, *Key.ToString(), int32(Params.Event), Params.Delta.X, int32(DragMode), *PendingMouse.ToString(), bTwinOrbitReleasePending);
+    if (TwinHUDWidget)
+    {
+        if(Key==EKeys::Escape && Params.Event==IE_Pressed) { TwinHUDWidget->ClearSelection(); CancelCameraDrag(); return true; }
+        if(Key==EKeys::LeftMouseButton || Key==EKeys::RightMouseButton || Key==EKeys::MouseWheelAxis)
+        {
+            FVector2D Cursor;
+            if(GetMousePosition(Cursor.X,Cursor.Y))
+            {
+                if(Key==EKeys::LeftMouseButton && Params.Event==IE_Pressed && TwinHUDWidget->HandleChromeClick(Cursor)) { CancelCameraDrag(); return true; }
+                if(!TwinHUDWidget->IsScenePoint(Cursor)) { CancelCameraDrag(); return true; }
+                if(Key==EKeys::LeftMouseButton && (Params.Event==IE_Pressed || Params.Event==IE_DoubleClick)) TwinPressPosition=Cursor;
+            }
+        }
+    }
     if (Key == EKeys::Escape && Params.Event == IE_Pressed && TruckHUDWidget &&
         (TruckHUDWidget->bDetailVisible || TruckHUDWidget->bClusterListVisible || !TruckHUDWidget->GetSelectedEquipmentId().IsEmpty()))
     {
@@ -87,12 +141,29 @@ bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
                 }
             }
         }
-        else if (Params.Event == IE_Released && DragMode == Requested) CancelCameraDrag();
+        else if (Params.Event == IE_Released && DragMode == Requested)
+        {
+            // Slate sends button-up before its accumulated MouseX/Y for this
+            // frame. Decide click vs drag only after that batch reaches us.
+            if (TwinHUDWidget && Requested == EGHSWarehouseDragMode::Orbit)
+            {
+                // Flush while the scene still owns pointer capture. After
+                // button-up Slate can route FinishedPointerInput to a different
+                // widget, losing this gesture's final batch before our Tick.
+                if (ULocalPlayer* Local = GetLocalPlayer())
+                    if (Local->ViewportClient)
+                        if (FSceneViewport* SceneViewport = Local->ViewportClient->GetGameViewport())
+                            SceneViewport->OnFinishedPointerInput();
+                bTwinOrbitReleasePending = true;
+            }
+            else
+                CancelCameraDrag();
+        }
         return true;
     }
     if (Key == EKeys::Home && Params.Event == IE_Pressed)
     {
-        CancelCameraDrag(); Camera->ResetOverview(); return true;
+        CancelCameraDrag(); if(TwinHUDWidget) TwinHUDWidget->Command(TEXT("{\"action\":\"overview\"}")); else Camera->ResetOverview(); return true;
     }
     if (Key == EKeys::MouseWheelAxis)
     {
@@ -130,6 +201,14 @@ void AGHSWarehousePlayerController::PlayerTick(float DeltaSeconds)
         if (!Camera->IsPreciseMouseDragging || !HasValidMapDragCursor()) CancelCameraDrag();
         return;
     }
+    ConsumeOrbitMotion();
+    if (bTwinOrbitReleasePending) FinishTwinOrbitRelease();
+}
+
+void AGHSWarehousePlayerController::ConsumeOrbitMotion()
+{
+    auto* Camera = Cast<AGHSWarehouseCameraPawn>(GetPawn());
+    if (!Camera || DragMode != EGHSWarehouseDragMode::Orbit) return;
     FVector2D Delta = PendingMouse;
     PendingMouse = FVector2D::ZeroVector;
     if (!bPastDragThreshold)
@@ -142,20 +221,29 @@ void AGHSWarehousePlayerController::PlayerTick(float DeltaSeconds)
     Camera->OrbitPixels(Delta);
 }
 
+void AGHSWarehousePlayerController::FinishTwinOrbitRelease()
+{
+    if (TraceTwinInput()) UE_LOG(LogTemp, Display, TEXT("GHS_TWIN_RELEASE frame=%llu pending=%s travel=%s past=%d"),
+        GFrameCounter, *PendingMouse.ToString(), *DragTravel.ToString(), bPastDragThreshold);
+    ConsumeOrbitMotion();
+    const bool bSceneClick = !bPastDragThreshold;
+    const FVector2D PressPosition = TwinPressPosition;
+    CancelCameraDrag();
+    if (bSceneClick && TwinHUDWidget) TwinHUDWidget->HandleSceneClick(PressPosition);
+}
+
 bool AGHSWarehousePlayerController::BeginMapDrag()
 {
     if (DragMode == EGHSWarehouseDragMode::Orbit) return false;
     CancelCameraDrag();
     auto* Camera = Cast<AGHSWarehouseCameraPawn>(GetPawn());
     if (!Camera || !HasValidMapDragCursor()) return false;
+    Camera->PrepareForGroundPan();
     ULocalPlayer* Local = GetLocalPlayer();
     MapDragViewportSize = Local->ViewportClient->Viewport->GetSizeXY();
 
     // Stop unfinished easing at the actual view, without jumping to its target.
-    const FVector Current = Camera->GetActorLocation();
-    Camera->SetDesiredLocation(FVector(Current.X, Current.Y, 0), true);
-    Camera->SetDesiredRotation(Camera->GetActorRotation(), true);
-    Camera->SetDesiredZoom(Camera->SpringArmComponent->TargetArmLength, true);
+    Camera->FreezeCurrentPose();
     Camera->EnableFeatures(EEnabledFeatures::PreciseMouseDrag);
     Camera->PreciseMouseDragMode = EPreciseMouseDragMode::Plane;
     Camera->PreciseMouseDragPoint = FVector::ZeroVector;
@@ -184,6 +272,7 @@ bool AGHSWarehousePlayerController::HasValidMapDragCursor() const
         || !FMath::IsFinite(Position.X) || !FMath::IsFinite(Position.Y)
         || Position.X < Rect.Min.X || Position.Y < Rect.Min.Y
         || Position.X >= Rect.Max.X || Position.Y >= Rect.Max.Y) return false;
+    if(TwinHUDWidget && !TwinHUDWidget->IsScenePoint(Position)) return false;
     FVector Origin, Direction;
     return DeprojectScreenPositionToWorld(Position.X, Position.Y, Origin, Direction)
         && !Origin.ContainsNaN() && !Direction.ContainsNaN()
@@ -197,8 +286,7 @@ void AGHSWarehousePlayerController::CancelCameraDrag()
         if (Camera->IsPreciseMouseDragging)
         {
             Camera->TogglePreciseMouseDrag(false);
-            const FVector Current = Camera->GetActorLocation();
-            Camera->SetDesiredLocation(FVector(Current.X, Current.Y, 0), true);
+            Camera->FreezeCurrentPose();
         }
     }
     MapDragViewportSize = FIntPoint::ZeroValue;
@@ -221,6 +309,7 @@ void AGHSWarehousePlayerController::CancelCameraDrag()
     DragMode = EGHSWarehouseDragMode::None;
     PendingMouse = DragTravel = FVector2D::ZeroVector;
     bPastDragThreshold = false;
+    bTwinOrbitReleasePending = false;
 }
 
 void AGHSWarehousePlayerController::FlushPressedKeys()

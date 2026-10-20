@@ -1,0 +1,116 @@
+{
+  "snapshot": "2026-10-20 14:20:08",
+  "capacity": {
+    "total": 2400,
+    "occupied": 1728,
+    "lockedEmpty": 96,
+    "available": 576,
+    "regions": [
+      {
+        "name": "货架区 A",
+        "total": 1600,
+        "occupied": 1200,
+        "lockedEmpty": 64,
+        "available": 336
+      },
+      {
+        "name": "地堆区 B",
+        "total": 800,
+        "occupied": 528,
+        "lockedEmpty": 32,
+        "available": 240
+      }
+    ],
+    "occupiedPercent": 72
+  },
+  "orders": {
+    "inbound": {
+      "total": 128,
+      "completed": 96,
+      "executing": 22,
+      "waiting": 8,
+      "exception": 2
+    },
+    "outbound": {
+      "total": 156,
+      "completed": 118,
+      "executing": 24,
+      "waiting": 10,
+      "exception": 4
+    },
+    "total": 284,
+    "statusTotals": {
+      "completed": 214,
+      "executing": 46,
+      "waiting": 18,
+      "exception": 6
+    }
+  },
+  "material": {
+    "sku": "SKU2038",
+    "name": "电机安装支架",
+    "model": "BH-M8 · 镀锌钢",
+    "bin": "A-03-12",
+    "batch": "B20261018",
+    "pallet": "PLT202610200038",
+    "boxes": 24,
+    "perBox": 20,
+    "quantity": 480,
+    "allocated": 120,
+    "available": 360,
+    "inbound": "IN-20261020-096",
+    "outbound": "OUT-20261020-121",
+    "unit": "件",
+    "palletCount": 1
+  },
+  "equipment": {
+    "total": 106,
+    "types": {
+      "truck": 52,
+      "forklift": 16,
+      "stacker": 6,
+      "agv": 32
+    },
+    "states": {
+      "running": 62,
+      "idle": 36,
+      "warning": 5,
+      "fault": 2,
+      "offline": 1
+    }
+  },
+  "facilities": {
+    "total": 56,
+    "charging": 18,
+    "idle": 36,
+    "offline": 2
+  },
+  "rack": {
+    "id": "A-03",
+    "total": 48,
+    "occupied": 36,
+    "available": 8,
+    "lockedEmpty": 4
+  },
+  "alerts": {
+    "current": 7,
+    "warning": 5,
+    "fault": 2,
+    "pendingAcknowledgement": 4,
+    "acknowledged": 3,
+    "offlineExcluded": 1
+  },
+  "outboundDetail": {
+    "id": "OUT-20261020-121",
+    "sku": "SKU2038",
+    "planned": 120,
+    "shipped": 0,
+    "state": "执行中",
+    "step": "待拣货",
+    "device": "FORK-01",
+    "task": "T-0401",
+    "from": "A-03-12",
+    "to": "DOCK-02",
+    "dueAt": "2026-10-20 15:00:00"
+  }
+}

@@ -1,22 +1,45 @@
 # GHS Warehouse HUD
 
-设计日期：2026-10-16；紧凑布局修订：2026-10-19。适用场景：`/Game/Maps/GHS_CAD_NormalWarehouse`。
+设计日期：2026-10-16；紧凑布局修订：2026-10-19；网页 V9 修订：2026-10-20。适用场景：`/Game/Maps/GHS_CAD_NormalWarehouse`。
+
+**最新网页设计：V9 操作与状态完善**（50—60画板）。在V8银蓝材质上统一字号、明确异常定位、修正环图口径，追溯底部收为160px一体回放台；新增无记录、数据过期、异常设备详情、视图菜单，以及状态与过渡规范。保留1920×1080、左右384px无缝吸边与全屏3D。见 [V9说明](dashboard-v9-refinement.md)、[主稿总览](exports/v9/v9-main-comparison.png)、[状态总览](exports/v9/v9-state-comparison.png)。本轮仅设计，未开发网页或修改UE。
+
+**历史网页设计：V8 银蓝材质控制台**（40—45 画板）。银蓝渐变标题栏、冷灰面板底座与乳白图表阅读层，局部磨砂工具栏、实蓝选中态及浅砖红／赭色告警区；左右各 **384px 无缝贴边面板**，保留左侧作业效率、右侧异常优先及折线图、柱状图、环形饼图。六张页面覆盖实时／追溯的近景与全仓、选中设备、面板收起，均为 **1920×1080**。3D 全屏铺底，网页高于内部 HUD。见 [V8 说明](dashboard-v8-material-design.md)、[修改前后](exports/v8/before-after.png)、[六屏对照](exports/v8/v8-comparison.png)。仅设计，未开发网页或修改 UE。
+
+V7（30—36 画板）保留，功能流程和动效时序见 [V7 设计说明](dashboard-v7-spatial-console-design.md)；[V7 收展动效示意](exports/v7/panel-motion-preview.gif) 使用的是修订前配色。
+
+V6（26—29 画板）保留为历史设计，见 [V6 说明](dashboard-v6-original-design.md)。
+
+V4（18—22 画板）及以前版本保留为历史设计，见 [V4 说明](dashboard-v4-monitor-trace-design.md)。V5 为已停止草案；当前设计以 V9 为准。
 
 2026-10-19 人工叉车接入更新：现已按第五画板新增原生 HUD 源码，使用独立 FORK 身份、载荷/速度、驾驶员和作业信息，并接入三类分组、点击和动画。当前编译与场景运行验收由人工叉车导入任务统一完成；下文“仅设计”的说明保留当时设计交付背景，最新接口与验证状态见 `../../docs/GHS_MannedForkliftHUD.md`。
 
 ## 文件
 
-- `GHS_Warehouse_HUD.pen`：Pencil 可编辑源文件，包含五张画板、可复用组件和组件实例。
+- `GHS_Warehouse_HUD.pen`：Pencil 可编辑源文件，包含设备组件、历次网页设计与最新 V9 的十一张画板。
+- `exports/v9/`：十张页面、一张状态与过渡规范、四张透明覆盖层及对照总览；完整索引见 `dashboard-v9-refinement.md`。
+- `exports/v8/`：六张页面、四张透明网页层、前后对照及六屏总览；完整索引见 `dashboard-v8-material-design.md`。
+- `exports/v7/`：六张页面、动效与适配板、四张透明网页覆盖层、六屏对照及收展 GIF；完整索引见 `dashboard-v7-spatial-console-design.md`。
+- `exports/v6/`：四张 1920×1080 主稿、两张透明网页覆盖层与四屏对照；完整索引见 `dashboard-v6-original-design.md`。
 - `exports/boards/01-equipment-library.png`：六类设备的详情卡、紧凑悬浮标签和锚点示例。
 - `exports/boards/02-scene-overlay.png`：在项目真实 UE 场景截图上叠加堆高车 HUD。
 - `exports/boards/03-states-and-guidelines.png`：运行、充电、待机、预警、故障、离线，以及深色选中卡和布局规范。
 - `exports/boards/04-clustering-and-motion.png`：2×2 自适应四等分聚合、分页成员列表、选车详情及合并/拆分/开合动画规范。
 - `exports/boards/05-manual-forklift.png`：人工叉车设计，含五种状态、运行/预警/离线详情、独立聚合和位置动效说明；对应原生 HUD 源码已实现，等待本次集成验收。
 - `exports/manual-forklift/`：人工叉车十张独立组件 PNG，2 倍尺寸；说明见 `manual-forklift-design.md`。
+- `exports/boards/06-dashboard-overview.png`：使用用户提供的 3D 截图为底图的网页统计总览设计。
+- `exports/boards/07-dashboard-focus.png`：收起统计、自动旋转开启的全景浏览状态设计。
+- `exports/dashboard/overlay-transparent.png`：不含 3D 底图的透明网页叠加层；仅设计，尚未开发。说明见 `dashboard-design.md`。
 - `exports/components/`：20 张独立 PNG，2 倍分辨率，保留卡片半透明背景与透明圆角。
 - `assets/`：源文件引用的项目场景截图。移动 `.pen` 时保留该目录。
 
 ## 设计方向
+
+历史版本：**V3 满屏场景桌面覆盖层**（15—17 画板）。依据用户近景满屏截图，改用固定 80px 顶栏、264px 银白阅读面板与底部工具，中央 3D 保持全屏铺底。说明见 [dashboard-v3-fullscene-design.md](dashboard-v3-fullscene-design.md)，历史导出为 `exports/v3/15-closeup-statistics.png`。其中涉及内部 HUD 的避让规则已由 V4 取代。V2 手机稿仅为历史探索，不属于当前交付范围。
+
+2026-10-19 新增 **V2 空间运营总览**（08—14 画板）：完整仓库居中、银白渐隐侧栏、运营大数、告警定位、专注/旋转状态、1440 笔记本和 390 手机布局，以及按钮/图表/标签动效规范。设计经过三轮视觉复核；仅设计与导出，未开发网页或修改 UE。说明见 [dashboard-v2-design.md](dashboard-v2-design.md)，主稿位于 `exports/v2/08-v2-overview.png`，动效预览位于 `exports/v2/motion/motion-preview.gif`。V1 及此前设备组件均保留。
+
+2026-10-19 新增网页外层设计：第六、七画板基于用户最新截图，采用银白面板、工业蓝图表与透明中央场景。左右各 300 px，含库容环图、出入库双折线、任务表、设备状态环图、月台矩阵与告警列表；下方提供重置视角、启动/停止旋转、设备标签、收起/展开统计及全屏工具。本轮仅制作静态设计和透明图层，没有开发网页或修改 UE 工程。
 
 依据当前 NormalWarehouse 的浅灰环境、银白设备、工业蓝托盘/层板及绿色设备特效设计。主体采用半透明银白信息卡、深灰蓝文字、工业蓝识别线和细锚点引线；复杂背景提供深灰蓝选中卡。
 
