@@ -4,6 +4,31 @@ const fs=require('node:fs');
 const path=require('node:path');
 const {boot}=require('./harness');
 
+test('rail zoom actions dispatch camera commands without changing business page or selection',()=>{
+  const app=boot();app.window.twinNavigate('inventory');app.flush();
+  const page=app.window.twinState.page,markup=app.html();
+  app.click({action:'zoomIn'});app.click({action:'zoomOut'});
+  assert.deepEqual(app.commands.slice(-2),[{action:'zoomIn'},{action:'zoomOut'}]);
+  assert.equal(app.window.twinState.page,page);assert.equal(app.html(),markup);
+  assert.ok(app.elements.navigation.innerHTML.indexOf('data-action="zoomIn"')<app.elements.navigation.innerHTML.indexOf('data-action="overview"'));
+});
+
+test('Chinese composition retains the live input and filters only the committed text',()=>{
+  const app=boot();app.window.twinNavigate('devices');app.flush();
+  const input={tagName:'INPUT',dataset:{search:'devices'},value:'cha',selectionStart:3,focus(){app.window.document.activeElement=this},setSelectionRange(){}};
+  app.window.document.activeElement=input;
+  app.window.document.querySelector=selector=>selector==='[data-search="devices"]'?input:null;
+  const before=app.html();
+  if(app.listeners.compositionstart)app.listeners.compositionstart({target:input});
+  app.listeners.input({target:input,isComposing:true});
+  assert.equal(app.window.twinState.filters.devices.query,'');
+  assert.equal(app.html(),before);
+  input.value='叉车';input.selectionStart=2;
+  if(app.listeners.compositionend)app.listeners.compositionend({target:input});
+  assert.equal(app.window.twinState.filters.devices.query,'叉车');
+  assert.ok(app.html().includes('value="叉车"'));
+});
+
 test('all seven native navigation destinations render real content and source labels',()=>{
   const app=boot();
   for(const [name,title]of[['overview','仓库运营总览'],['inventory','库存与货位'],['orders','今日出入库订单'],['devices','设备监控'],['alerts','设备告警中心'],['trace','追溯查询'],['settings','场景设置']]){

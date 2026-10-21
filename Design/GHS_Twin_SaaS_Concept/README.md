@@ -1,81 +1,85 @@
-# GHS 仓储数字孪生 · 业务页面、HUD 与 POI 设计
+# 仓储数字孪生 · 当前设计入口
 
-当前交付为 Pencil 可编辑静态设计：**23 张 1920 × 1080 画板、34 个可复用组件**。本轮在完整业务页面上增加设备模型图片、指标卡、容量环图、订单趋势、状态条形图、货位矩阵和视角缩略图。未开发业务，也未制作可运行的点击原型。
+**唯一编辑与后续开发依据：[Saas.pen](Saas.pen)。当前状态：2026-10-21 用户已批准开发，按本设计实施。**
 
-## 打开设计
+Pencil 已打开项目内的主文件。原有页面和公共组件已直接覆盖更新，三张重复的旧圆角确认页已移除。保留白色平面底色、深蓝文字、蓝色交互与 12px 圆角，不使用渐变。当前共 31 张画板、38 个可复用组件；设备图片和业务图表保留。
 
-- [Pencil 主文件](C:/Users/28109/.pencil/documents/ddf468b1-64d1-4a74-8f7f-a5f24bff996f/untitled.pen)
-- [七个侧栏页面与设备详情](exports/visual-v4/sidebar-contents.png)
-- [场景与设备图片](exports/visual-v4/scene-and-equipment.png)
-- [图片与图表重点预览](exports/visual-v4/visual-highlights.png)
-- [本轮 taste-skill 视觉评审](taste-visual-review.md)
-- [业务设计说明](business-design-brief.md) · [演示数据](business-demo-data.json)
+## 本轮重点预览
 
-主文件保存在 Pencil 应用管理目录。本目录保存参考、截图、说明与 PNG 导出；最新版为 exports/visual-v4/，旧稿 business-v3、taste-v2 和 before-taste 保留。早期评审记录见 taste-review.md、taste-revision.md。
+| 内容 | 预览 |
+| --- | --- |
+| 仓库总览与统一导航 | [总览](exports/current/CLx7Q.png) |
+| 完整设备选中框与详情 | [设备详情](exports/current/mP7E5.png) |
+| AGV 搜索结果与定位入口 | [搜索](exports/current/t1QfTH.png) |
+| 当前 GHS 仓库与未来切换 | [仓库切换](exports/current/Lxvbj.png) |
+| 像素流服务启动器 · 待启动 | [启动器](exports/current/RyNRe.png) |
+| 像素流服务启动器 · 运行中 | [运行状态](exports/current/ApVA8.png) |
+| 启动器配置、端口与异常状态 | [配置与异常](exports/current/A5t3VD.png) |
+| 像素流自动连接进度 | [加载页](exports/current/tWZ13.png) |
+| 连接超时、踢出与重连 | [连接状态](exports/current/jCHwc.png) |
+| 中文输入、选中态与动效规范 | [交互规范](exports/current/k2v5GZ.png) |
 
-## 七个侧栏的内容
+完整机器可读索引：[current-design.json](current-design.json)。本轮评审：[taste-current-review.md](taste-current-review.md)。
 
-| 入口 | 先回答的问题 | 内容与下一步 |
-| --- | --- | --- |
-| 总览 | 仓库是否正常、今天任务多少？ | 库容、可用托位、今日出入库、设备状态、关注事件；进入对应业务 |
-| 库存 | 哪些货位有空间、物料在哪里？ | 全仓/区域容量、货架货位、SKU/批次搜索、占用/可用/锁定筛选；查看物料 |
-| 订单 | 哪些出入库订单需要处理？ | 入库/出库切换、状态统计、搜索筛选、订单列表及详情；定位执行设备 |
-| 设备 | 哪台设备异常、在做什么？ | 106 台作业设备及五类状态、56 个充电设施独立切换；定位、任务及详情 |
-| 告警 | 哪些故障未恢复、有人确认了吗？ | 分级队列、确认/恢复状态、告警详情、关联设施；确认及查看历史 |
-| 追溯 | 物料经过哪里、设备怎样运行？ | 物料批次流转与设备轨迹查询；时间、地点、作业及订单串联 |
-| 场景 | 怎样看到当前关心的对象？ | 视角预设、图层、路线、POI、告警、标签密度；应用和恢复默认 |
+## 本轮设计决定
 
-## 核心路径
+1. 删除场景中的独立缩放/复位组件，把 +、− 放到右侧导航“全仓”上方；保留“全仓”恢复默认视角并清除选中。
+2. 左上角改为当前仓库选择器，明确显示 GHS 和当前区域。当前只有 GHS，不提供虚构的已接入仓库。
+3. 搜索限定当前仓库，支持设备名称、类型、编号和物料等。AGV 查询显示设备列表、位置、状态和定位入口；点击后平滑聚焦并打开详情。中文组合输入不触发未完成的查询，Enter 先确认候选；系统输入法候选窗仅作行为示意。
+4. 类型筛选使用 3px 蓝色选中边框；模型使用 6px 蓝色四角框及白色衬边，覆盖完整模型。
+5. POI 状态区高 24px，状态文字固定行高并垂直居中。
+6. 启动器统一命名“像素流服务启动器”，设计程序路径、端口、窗口显示、分辨率、画质、共享/独立模式、自动资源分配及启动/运行/停止状态。关闭本地窗口仍需后台渲染；60 FPS 是上限，不是保证。运行中显示实际帧率和当前目标。
+7. 加载页采用相同白底、深蓝顶栏和蓝色状态语言，展示实际连接阶段与等待时间；首帧就绪后自动进入，默认静音，不伪造完成百分比。
+8. 搜索框与面板共同移动；页面切换、菜单、聚焦与全仓复位的状态联动以交互规范画板为准。
 
-- 库存 → 货架 A-03 → 货位 A-03-12 → 物料 SKU2038 → 关联订单 / 物料追溯。
-- 订单 → OUT-20261020-121 → 查看数量、源货位、目标月台和任务 → 定位 FORK-01。
-- 告警 → AGV-12 低电量 → 查看阈值与确认/恢复状态 → 关联充电位 / 历史轨迹。
-- 返回保留筛选、选中对象和日期范围，避免查看详情后丢失上下文。
+## 保留的业务内容
 
-物料详情包括名称、SKU、规格、批次、托盘、货位、入库时间、480 件库存、120 件已分配、360 件可用及关联订单。空货位、锁定、无结果、零订单、加载、局部失败和确认未恢复均有状态设计。
+总览、库存、订单、设备、告警、追溯、场景七个业务入口，以及物料、订单、设备详情继续保留。业务说明与演示数据：[business-design-brief.md](business-design-brief.md)、[business-demo-data.json](business-demo-data.json)、[visual-demo-data.json](visual-demo-data.json)。
+
+设备编号、库存数据、帧率、会话和地址在画板中是设计样例，不表示实时接口或实际运行状态。
 
 ## 全部画板
 
-| 编号 | 内容 | 文件 |
+| 画板 | 尺寸 | 预览 |
 | --- | --- | --- |
-| 00 | POI 与 HUD 设计系统 | [预览](exports/visual-v4/00-poi-system.png) |
-| 01 | 仓库运营总览 | [预览](exports/visual-v4/01-business-overview.png) |
-| 02 | 设备详情 | [预览](exports/visual-v4/02-device-detail.png) |
-| 03 | 聚合点位展开 | [预览](exports/visual-v4/03-poi-group.png) |
-| 04 | 告警详情 | [预览](exports/visual-v4/04-alert-detail.png) |
-| 05 | 设备轨迹查询 | [预览](exports/visual-v4/05-device-history.png) |
-| 06 | 库位悬停预览 | [预览](exports/visual-v4/06-bin-hover.png) |
-| 07 | 车辆与设施 HUD | [预览](exports/visual-v4/07-hud-library.png) |
-| 08 | 系统状态 | [预览](exports/visual-v4/08-system-states.png) |
-| 09 | 交互规范 | [预览](exports/visual-v4/09-interaction-spec.png) |
-| 10 | 聚合预警筛选 | [预览](exports/visual-v4/10-group-warning.png) |
-| 11 | 库存容量与库位 | [预览](exports/visual-v4/11-inventory.png) |
-| 12 | 出库订单 | [预览](exports/visual-v4/12-outbound-orders.png) |
-| 13 | 设备状态 | [预览](exports/visual-v4/13-devices.png) |
-| 14 | 告警中心 | [预览](exports/visual-v4/14-alerts.png) |
-| 15 | 物料追溯 | [预览](exports/visual-v4/15-material-trace.png) |
-| 16 | 场景设置 | [预览](exports/visual-v4/16-scene-settings.png) |
-| 17 | 货架物料详情 | [预览](exports/visual-v4/17-material-detail.png) |
-| 18 | 出库订单详情 | [预览](exports/visual-v4/18-order-detail.png) |
-| 19 | 入库订单 | [预览](exports/visual-v4/19-inbound-orders.png) |
-| 20 | 充电设施 | [预览](exports/visual-v4/20-charging-facilities.png) |
-| 21 | 导航与业务流程 | [预览](exports/visual-v4/21-navigation-map.png) |
-| 22 | 业务边界状态 | [预览](exports/visual-v4/22-business-states.png) |
+| 00 · POI 与 HUD 设计系统 | 3840 × 1080 | [打开](exports/current/bi8Au.png) |
+| 01 · 总览 / 仓库空间态势 | 1920 × 1080 | [打开](exports/current/CLx7Q.png) |
+| 02 · 点位选中 / AGV 设备详情 | 1920 × 1080 | [打开](exports/current/mP7E5.png) |
+| 03 · 聚合展开 / 成员分页与定位 | 1920 × 1080 | [打开](exports/current/d7P3z.png) |
+| 04 · 告警定位 / AGV 低电量 | 1920 × 1080 | [打开](exports/current/Wt7Vo.png) |
+| 05 · 历史追溯 / 时间与事件联动 | 1920 × 1080 | [打开](exports/current/iiFrY.png) |
+| 06 · 库位 POI / 悬停轻预览 | 1920 × 1080 | [打开](exports/current/gW9oH.png) |
+| 07 · HUD 详情组件 / 车辆与设施 | 1920 × 1080 | [打开](exports/current/UbszE.png) |
+| 08 · 搜索与数据状态 / 边界反馈 | 1920 × 1080 | [打开](exports/current/PE2am.png) |
+| 09 · 交互路径 / 密度与动效规范 | 1920 × 1080 | [打开](exports/current/r5SOcd.png) |
+| 10 · 聚合预警 / 从异常到设备 | 1920 × 1080 | [打开](exports/current/XJoOQ.png) |
+| 11 · 库存 / 容量与货架货位 | 1920 × 1080 | [打开](exports/current/F8Cox.png) |
+| 12 · 订单 / 今日出入库作业 | 1920 × 1080 | [打开](exports/current/lvDfx.png) |
+| 13 · 设备 / 状态筛选与空间定位 | 1920 × 1080 | [打开](exports/current/zyWMm.png) |
+| 14 · 告警 / 分级队列与处理状态 | 1920 × 1080 | [打开](exports/current/lCf0H.png) |
+| 15 · 追溯 / 物料批次与作业事件 | 1920 × 1080 | [打开](exports/current/OA1Bd.png) |
+| 16 · 场景 / 图层视角与显示设置 | 1920 × 1080 | [打开](exports/current/kvTdT.png) |
+| 17 · 物料详情 / 货位批次与订单 | 1920 × 1080 | [打开](exports/current/XhUtw.png) |
+| 18 · 订单详情 / 拣货与设备联动 | 1920 × 1080 | [打开](exports/current/t4mlxm.png) |
+| 19 · 订单 / 入库切换状态 | 1920 × 1080 | [打开](exports/current/qNsRa.png) |
+| 20 · 设备 / 充电设施切换状态 | 1920 × 1080 | [打开](exports/current/ibTva.png) |
+| 21 · 导航内容地图 / 七个业务入口 | 1920 × 1080 | [打开](exports/current/RXvoP.png) |
+| 22 · 业务状态 / 空值权限与确认反馈 | 1920 × 1080 | [打开](exports/current/G316Rk.png) |
+| 23 · 设备搜索 / 匹配结果与定位 | 1920 × 1080 | [打开](exports/current/t1QfTH.png) |
+| 24 · 仓库切换 / 当前与接入边界 | 1920 × 1080 | [打开](exports/current/Lxvbj.png) |
+| 25 · 像素流服务启动器 / 待启动 | 1200 × 900 | [打开](exports/current/RyNRe.png) |
+| 26 · 像素流服务启动器 / 运行中 | 1200 × 900 | [打开](exports/current/ApVA8.png) |
+| 27 · 启动器 / 配置与异常状态 | 1920 × 1080 | [打开](exports/current/A5t3VD.png) |
+| 28 · 像素流访问 / 自动连接进度 | 1440 × 900 | [打开](exports/current/tWZ13.png) |
+| 29 · 像素流访问 / 连接边界反馈 | 1920 × 1080 | [打开](exports/current/jCHwc.png) |
+| 30 · 搜索与选中 / 中文输入和控件规范 | 1920 × 1080 | [打开](exports/current/k2v5GZ.png) |
 
-## 视觉和数据
+## 交付边界与版本规则
 
-延续 Saas.gif 与站酷参考：灰白仓库、白色业务信息层、蓝色交互强调、窄深色顶栏。空间和点位承担定位；右栏承载判断和行动。侧栏增加中文名称。
+已检查画布、全尺寸 PNG、共享组件、布局边界，并完成独立 taste 复核；静态设计无法验证中文输入法、UE 镜头、浏览器会话和响应式运行行为。
 
-演示快照为 2026-10-20 14:20:08。2400 托位 = 占用 1728 + 空位锁定 96 + 可用 576，占用率 72.0%。今日 284 单 = 入库 128 + 出库 156。设备与设施分开；7 项设备告警不与 6 单订单异常混算。
+用户已于 2026-10-21 明确下达开发命令。对应实施及验收记录见 [开发计划](../../docs/superpowers/plans/2026-10-21-approved-hud-streaming-ui.md)。代码完成并验证后，按用户要求自动使用中文提交 Git，仅提交对应任务的修改。
 
-设计沿用 GHS_CAD_NormalWarehouse 设备分类与 HUD 语义；库存、订单、追溯等扩展不表示原项目已接入。数值为演示数据，POI 为设计示意，未绑定世界坐标。
-
-## 验证
-
-23 张画板无未完成占位标志，绝对布局边界未发现越界；34 个可复用组件，字号统一为 12/14/16/20/24/32。库存、分区、货架、订单、物料分配、设备、设施与告警的关系已通过断言核对。全尺寸 PNG 已检查，两个独立只读评审核对了业务与视觉，修正已复核。
-
-结论仅针对桌面静态设计与演示数据，不代表点击行为、设备控制、接口、响应式或 Unreal 功能经过运行验证。本轮未改动 Unreal 场景或业务代码。
-
-交付日期：2026-10-20。
+旧导出已移至 [archive/superseded-exports](archive/superseded-exports/)，仅供历史追溯，不作为开发依据。历史评审不代表当前设计状态；出现冲突时，以本 README、Saas.pen、current-design.json 和 exports/current 为准。
 
 

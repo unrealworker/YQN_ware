@@ -1,3 +1,5 @@
+> 历史评审，已由 2026-10-21 当前设计替代。开发请以 [README](README.md)、[Saas.pen](Saas.pen) 和 [当前评审](taste-current-review.md) 为准。
+
 # GHS SaaS · taste-skill 修订记录
 
 日期：2026-10-20。已修改当前 Pencil 新文档，设计稿为 11 张 1920 × 1080 画板、23 个可复用组件。
@@ -61,7 +63,7 @@
 ## 文件
 
 - Pencil 主文件：`C:\Users\28109\.pencil\documents\ddf468b1-64d1-4a74-8f7f-a5f24bff996f\untitled.pen`。
-- 最新全尺寸预览：`exports/taste-v2/`。
-- 六页总览：`exports/taste-v2/design-overview.png`。
-- 修改前预览：`exports/before-taste/`。
+- 最新全尺寸预览：`archive/superseded-exports/taste-v2/`。
+- 六页总览：`archive/superseded-exports/taste-v2/design-overview.png`。
+- 修改前预览：`archive/superseded-exports/before-taste/`。
 - 原评审保留于 `taste-review.md`，不作为最新完成状态。

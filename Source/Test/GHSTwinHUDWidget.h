@@ -5,10 +5,32 @@
 #include "Components/EditableTextBox.h"
 #include "GHSTwinLayout.h"
 #include "GHSTwinSceneData.h"
+#include "GHSTwinSearchLayout.h"
+#include "GHSTwinTypography.h"
 #include "GHSTwinHUDWidget.generated.h"
 
 class SWebBrowser;
 class UCanvasPanelSlot;
+class SGHSTwinEditableText;
+class UGHSTwinHUDWidget;
+
+/** Native IME context remains owned by Slate; composition is never queried prematurely. */
+UCLASS()
+class TEST_API UGHSTwinSearchInput : public UWidget
+{
+    GENERATED_BODY()
+public:
+    void Bind(UGHSTwinHUDWidget* Owner);
+    void SetText(const FString& Value);
+    bool IsComposing() const;
+    bool HasInputFocus() const;
+    virtual void ReleaseSlateResources(bool bReleaseChildren) override;
+protected:
+    virtual TSharedRef<SWidget> RebuildWidget() override;
+private:
+    TWeakObjectPtr<UGHSTwinHUDWidget> SearchOwner;
+    TSharedPtr<SGHSTwinEditableText> Editor;
+};
 
 /** Candidate work is periodic; visible-point projection remains per frame. */
 struct FGHSTwinPOIRefreshPolicy
@@ -71,6 +93,12 @@ public:
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") float GetPanelOpacity() const;
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetPOIReport() const;
     UFUNCTION() void SearchCommitted(const FText& Text, ETextCommit::Type Method);
+    void SearchChanged(const FText& Text);
+    void SetSearchOpen(bool bOpen);
+    bool HandleSearchKey(FKey Key);
+    bool HandleSearchWheel(FVector2D Position,double Delta);
+    void HandleStreamSearch(const FString& Json);
+    UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetSearchState(bool bGeometryOnly=false) const;
 protected:
     virtual TSharedRef<SWidget> RebuildWidget() override;
     virtual void NativeConstruct() override;
@@ -87,9 +115,14 @@ private:
     void Focus(const FString& Id);
     void Overview();
     void FocusRegion(const FString& Region);
+    void RefreshSearch(int32 Offset=INDEX_NONE);
+    void MoveSearchSelection(int32 Delta);
+    void PushSearchState(bool bForce=false);
+    bool SelectSearchResult(const FString& Id);
+    FGHSTwinSearchLayout SearchLayout() const;
     UPROPERTY(Transient) TObjectPtr<UGHSTwinBrowser> Panel;
     UPROPERTY(Transient) TObjectPtr<UCanvasPanelSlot> PanelSlot;
-    UPROPERTY(Transient) TObjectPtr<UEditableTextBox> SearchBox;
+    UPROPERTY(Transient) TObjectPtr<UGHSTwinSearchInput> SearchBox;
     UPROPERTY(Transient) TObjectPtr<UCanvasPanelSlot> SearchSlot;
     FGHSTwinSceneData SceneData;
     FGHSTwinLayout Layout;
@@ -103,6 +136,15 @@ private:
     FString Density = TEXT("auto");
     FString PointFilter = TEXT("all");
     FString ActiveRegionId;
+    FString SearchQuery,PendingSearchText,LastSearchState,SearchClientId;
+    TArray<FGHSTwinSearchResult> SearchResults;
+    int32 SearchTotal=0,SearchIndex=INDEX_NONE,SearchOffset=0,SearchFirstVisible=0;
+    uint64 SearchRevision=MAX_uint64;
+    double SearchRequestId=0;
+    bool bSearchOpen=false,bSearchPending=false,bStreamSearchReady=false,bWarehouseMenuOpen=false;
+    bool bSearchStateDirty=true,bStreamSearchApplying=false,bLastSearchVisible=false,bSearchIsRemote=false;
+    float SearchMenuProgress=0,WarehouseMenuProgress=0;
+    FVector2D LastSearchPosition=FVector2D::ZeroVector,LastSearchSize=FVector2D::ZeroVector,LastSearchViewport=FVector2D::ZeroVector;
     struct FLabel
     {
         FString Id,Text,Kind,Status,DisplayTitle,State;
@@ -112,6 +154,7 @@ private:
         bool bAlert=false,bSelected=false,bHovered=false,bRegion=false,bGroup=false;
         float Opacity=1;
         double BadgeWidth=0;
+        FGHSTwinTextMetrics TitleMetrics,StateMetrics;
     };
     FGHSTwinPOIRefreshPolicy POICadence;
     TArray<FLabel> Labels;

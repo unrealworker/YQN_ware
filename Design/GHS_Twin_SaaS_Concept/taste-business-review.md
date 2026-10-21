@@ -1,6 +1,8 @@
+> 历史评审，已由 2026-10-21 当前设计替代。开发请以 [README](README.md)、[Saas.pen](Saas.pen) 和 [当前评审](taste-current-review.md) 为准。
+
 # taste-skill 业务界面评审
 
-日期：2026-10-20。对象：23 张 Pencil 桌面静态画板，最新导出为 exports/business-v3/。
+日期：2026-10-20。对象：23 张 Pencil 桌面静态画板，最新导出为 archive/superseded-exports/business-v3/。
 
 依据 [design-taste-frontend](C:/Users/28109/.agents/skills/design-taste-frontend/SKILL.md)、[app-screens](C:/Users/28109/.agents/skills/design-taste-frontend/references/app-screens.md) 和 [critique](C:/Users/28109/.agents/skills/design-taste-frontend/references/critique.md)。采用工作型应用界面的任务、数据、导航、列表、状态与层级准则，不套用营销网站的照片数量、hero 和页面动效条款。延续用户已确定的灰白空间、蓝色强调、白色侧栏及中文字体。
 

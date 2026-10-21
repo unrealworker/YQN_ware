@@ -50,7 +50,7 @@ struct FGHSTwinSceneChrome
     static bool Contains(FVector2D P,FVector2D At,FVector2D Size)
     { return P.X>=At.X && P.Y>=At.Y && P.X<At.X+Size.X && P.Y<At.Y+Size.Y; }
     static bool IsHeadingPoint(FVector2D P,double HeaderHeight)
-    { return Contains(P,FVector2D(24,HeaderHeight+16),FVector2D(220,80)); }
+    { return Contains(P,FVector2D(24,HeaderHeight+16),FVector2D(256,84)); }
     static bool FiltersVisible(const FGHSTwinLayout& Layout)
     { return Layout.SceneSize.X>660 && Layout.SceneSize.Y>=195; }
     static int32 FilterAt(FVector2D P,const FGHSTwinLayout& Layout)
@@ -63,7 +63,7 @@ struct FGHSTwinSceneChrome
     {
         auto Intersects=[&](FVector2D P,FVector2D S)
         { return At.X<P.X+S.X && At.X+Size.X>P.X && At.Y<P.Y+S.Y && At.Y+Size.Y>P.Y; };
-        if(Intersects(FVector2D(24,Layout.HeaderHeight+16),FVector2D(220,80))) return true;
+        if(Intersects(FVector2D(24,Layout.HeaderHeight+16),FVector2D(256,84))) return true;
         return FiltersVisible(Layout) && Intersects(FVector2D(24,Layout.HeaderHeight+108),FVector2D(424,87));
     }
 };

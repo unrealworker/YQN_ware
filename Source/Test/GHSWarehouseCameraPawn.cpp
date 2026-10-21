@@ -97,6 +97,7 @@ void AGHSWarehouseCameraPawn::TransitionToPose(FVector Pivot,float Distance,FRot
     if(!Finite(Pivot) || !Finite(Rotation) || !FMath::IsFinite(Distance) || !FMath::IsFinite(Duration)
         || !Finite(ViewportSize) || !Finite(SceneCenterPixels) || ViewportSize.X<=0 || ViewportSize.Y<=0) return;
     CancelPoseTransition();
+    bOverviewFraming=false;
     if(IsPreciseMouseDragging) TogglePreciseMouseDrag(false);
     FlightStartPivot=GetActorLocation(); FlightStartRotation=GetActorRotation();
     FlightStartDistance=SpringArmComponent->TargetArmLength;
@@ -144,6 +145,7 @@ void AGHSWarehouseCameraPawn::CancelPoseTransition()
 
 void AGHSWarehouseCameraPawn::PrepareForGroundPan()
 {
+    bOverviewFraming=false;
     CancelPoseTransition();
     if(!bObjectPivot) return;
     const FRotator Rotation=GetActorRotation();
@@ -194,6 +196,7 @@ void AGHSWarehouseCameraPawn::BeginPlay()
 void AGHSWarehouseCameraPawn::ResetOverview(bool Immediate)
 {
     CancelPoseTransition();
+    bOverviewFraming=true;
     bObjectPivot=false; bUseSceneFraming=false; bGroundPanRecovery=false; FramingOffsetRatio=FVector::ZeroVector;
     FocusTarget=FVector(OverviewCenter.X,OverviewCenter.Y,0);
     ConfigureGroundRestrictions();
@@ -207,10 +210,23 @@ void AGHSWarehouseCameraPawn::ResetOverview(bool Immediate)
     SetDesiredZoom(OverviewDistance, Immediate);
 }
 
+void AGHSWarehouseCameraPawn::FrameOverview(FVector2D ViewportSize,FVector2D ScenePosition,FVector2D SceneSize,float Duration)
+{
+    if(!Finite(ViewportSize) || !Finite(ScenePosition) || !Finite(SceneSize)
+        || ViewportSize.X<=0 || ViewportSize.Y<=0 || SceneSize.X<=0 || SceneSize.Y<=0 || !FMath::IsFinite(Duration)) return;
+    const float Distance=FMath::Min(MaximumZoom,float(OverviewDistance*ViewportSize.X/SceneSize.X));
+    TransitionToPose(OverviewCenter,Distance,FRotator(OverviewPitch,OverviewYaw,0),ViewportSize,
+        ScenePosition+SceneSize*.5,true,Duration);
+    bOverviewFraming=true;
+    UE_LOG(LogTemp,Display,TEXT("GHS_OVERVIEW_FRAME viewport=%s scene=%s+%s distance=%.1f duration=%.2f"),
+        *ViewportSize.ToString(),*ScenePosition.ToString(),*SceneSize.ToString(),Distance,Duration);
+}
+
 void AGHSWarehouseCameraPawn::OrbitPixels(FVector2D Delta)
 {
     if (!Finite(Delta)) return;
     if(Delta.IsNearlyZero()) return;
+    bOverviewFraming=false;
     CancelPoseTransition();
     SetDesiredYaw(FRotator::NormalizeAxis(DesiredRotation.Yaw + Delta.X * OrbitDegreesPerPixel));
     // The plugin normalizes angles before constraining them. Clamp the pixel
@@ -239,6 +255,7 @@ void AGHSWarehouseCameraPawn::ZoomSteps(float Steps)
 {
     if (!FMath::IsFinite(Steps)) return;
     if(FMath::IsNearlyZero(Steps)) return;
+    bOverviewFraming=false;
     CancelPoseTransition();
     const double Exponent = FMath::Clamp(-double(Steps) * WheelZoomExponent, -80.0, 80.0);
     // Clamp before converting to float; the plugin applies its zoom limits too.

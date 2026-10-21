@@ -1,8 +1,10 @@
+> 历史评审，已由 2026-10-21 当前设计替代。开发请以 [README](README.md)、[Saas.pen](Saas.pen) 和 [当前评审](taste-current-review.md) 为准。
+
 # HUD 与类型按钮：淡蓝渐变审批稿
 
 日期：2026-10-21。状态：**历史提案；用户已否决渐变，仅确认 12px 圆角**。
 
-后续版本已恢复原配色，并同步完成项目开发。当前 Pencil 的这三张新增稿已原位更新为圆角方案，最新导出见 `exports/rounded-v6/`；下文和 `exports/blue-hud-v5/` 保留为上一版提案记录。实现与验证见 `D:/UEPro/Test/docs/bugs/2026-10-21-rounded-hud-main-rack-poi.md`。
+后续版本已恢复原配色，并同步完成项目开发。当前 Pencil 的这三张新增稿已原位更新为圆角方案，最新导出见 `archive/superseded-exports/rounded-v6/`；下文和 `archive/superseded-exports/blue-hud-v5/` 保留为上一版提案记录。实现与验证见 `D:/UEPro/Test/docs/bugs/2026-10-21-rounded-hud-main-rack-poi.md`。
 
 Pencil 当前主文件：`C:/Users/28109/.pencil/documents/ddf468b1-64d1-4a74-8f7f-a5f24bff996f/Saas.pen`。
 
@@ -14,9 +16,9 @@ Pencil 当前主文件：`C:/Users/28109/.pencil/documents/ddf468b1-64d1-4a74-8f
 
 预览：
 
-- [前后对比与状态](exports/blue-hud-v5/01-before-after-states.png)
-- [仓库总览](exports/blue-hud-v5/02-warehouse-overview.png)
-- [设备选中态](exports/blue-hud-v5/03-device-selected.png)
+- [前后对比与状态](archive/superseded-exports/blue-hud-v5/01-before-after-states.png)
+- [仓库总览](archive/superseded-exports/blue-hud-v5/02-warehouse-overview.png)
+- [设备选中态](archive/superseded-exports/blue-hud-v5/03-device-selected.png)
 
 ## 本轮样式
 

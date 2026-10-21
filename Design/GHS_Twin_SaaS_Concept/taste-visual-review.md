@@ -1,6 +1,8 @@
+> 历史评审，已由 2026-10-21 当前设计替代。开发请以 [README](README.md)、[Saas.pen](Saas.pen) 和 [当前评审](taste-current-review.md) 为准。
+
 # taste-skill 图片与图表改版评审
 
-日期：2026-10-20。设计文件：Pencil 当前文档；最新交付目录：exports/visual-v4/。23 张 1920 × 1080 画板、34 个可复用组件。
+日期：2026-10-20。设计文件：Pencil 当前文档；最新交付目录：archive/superseded-exports/visual-v4/。23 张 1920 × 1080 画板、34 个可复用组件。
 
 ## 本轮问题和改动
 
@@ -57,7 +59,7 @@ Top three problems (most visible first), each with the screenshot it shows in an
 
 库存72%已占用、24%可用、4%空位锁定；充电区不计库存库容。A-03 48格=36占用+8可用+4锁定，格位排列是演示分布，并不声称来自实际CAD坐标。
 
-日内累计完成为明确标注的演示趋势：06:00、08:00、10:00、12:00、14:00、14:20:08，入库为0/12/38/66/92/96，出库为0/18/48/78/112/118；横轴按真实时间间距，截止值与96/118已完成订单一致，不延伸至快照之后。来源和断言记录在 visual-demo-data.json 与 exports/visual-v4/make_preview_sheets.py。
+日内累计完成为明确标注的演示趋势：06:00、08:00、10:00、12:00、14:00、14:20:08，入库为0/12/38/66/92/96，出库为0/18/48/78/112/118；横轴按真实时间间距，截止值与96/118已完成订单一致，不延伸至快照之后。来源和断言记录在 visual-demo-data.json 与 archive/superseded-exports/visual-v4/make_preview_sheets.py。
 
 106作业设备与56设施分别统计。7项设备告警与6单订单异常分开。装卸车 HUD 的装载单位已统一为订单119的160/240件、剩余80件，进度66.7%。未知设施电量不画成0%。
 

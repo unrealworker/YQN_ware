@@ -6,8 +6,10 @@
 #include "Camera/CameraComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
+#include "Engine/LocalPlayer.h"
 #include "GameFramework/PlayerInput.h"
 #include "Misc/AutomationTest.h"
+#include "Slate/SObjectWidget.h"
 
 #include <limits>
 
@@ -493,6 +495,55 @@ bool FGHSWarehouseCameraHUDThreshold::RunTest(const FString& Parameters)
     F.Pawn->HUDClusterMinArmLength = 0;
     F.Pawn->SpringArmComponent->TargetArmLength = 900;
     TestTrue(TEXT("Zero permits aggregation at the closest camera distance"), F.Pawn->ShouldAggregateTruckHUD());
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSWarehouseInitialViewport,
+    "GHS.WarehouseCamera.Composition.StartupViewportResizeReframesOverviewOnly", GHSWarehouseCameraTests::Flags)
+
+bool FGHSWarehouseInitialViewport::RunTest(const FString&)
+{
+    using namespace GHSWarehouseCameraTests;
+    FFixture F;
+    if (!F.Check(*this)) return false;
+    auto* Local=NewObject<ULocalPlayer>(GEngine);
+    Local->PlayerController=F.Controller; F.Controller->Player=Local;
+    auto* HUD=NewObject<UGHSTwinHUDWidget>(F.Controller);
+    HUD->SetOwningPlayer(F.Controller);
+    if(!TestEqual(TEXT("HUD resolves the actual possessed camera"),HUD->GetOwningPlayerPawn(),static_cast<APawn*>(F.Pawn))) return false;
+    // Dispatch real UMG NativeTick through Slate without creating CEF or an OS viewport.
+    auto Slate=SNew(SObjectWidget,HUD)[SNullWidget::NullWidget];
+    auto TickHUD=[&](FVector2D Size)
+    { Slate->Tick(FGeometry::MakeRoot(Size,FSlateLayoutTransform()),0,FrameSeconds); };
+    auto Settle=[&]() { for(int I=0;I<120;++I) F.CameraFrame(); };
+    TickHUD(FVector2D(800,600));
+    TestFalse(TEXT("First visible frame does not animate out of the legacy unframed pose"),F.Pawn->IsPoseTransitionActive());
+    Settle();
+    TickHUD(FVector2D(1920,1080));
+    TestFalse(TEXT("Final startup resolution receives its correct framing immediately"),F.Pawn->IsPoseTransitionActive());
+    Settle();
+    const auto Layout=FGHSTwinLayout::Calculate(FVector2D(1920,1080));
+    const FVector2D Center=Layout.ScenePosition+Layout.SceneSize*.5;
+    const float Distance=F.Pawn->SpringArmComponent->TargetArmLength;
+    const auto Offset=F.Pawn->SpringArmComponent->SocketOffset;
+    const double Focal=1920./(2*FMath::Tan(FMath::DegreesToRadians(F.Pawn->WarehouseCamera->FieldOfView*.5)));
+    const FVector2D Projected(960-Offset.Y/Distance*Focal,540+Offset.Z/Distance*Focal);
+    TestTrue(TEXT("Final 1080p overview centers in the left scene instead of retaining temporary bottom-sheet framing"),Projected.Equals(Center,.5));
+    TestTrue(TEXT("Final viewport reserves the desktop panel when fitting the whole warehouse"),Distance>F.Pawn->OverviewDistance*1.2);
+
+    const FDesiredPose BeforeCollapse(*F.Pawn);
+    HUD->HandleChromeClick(FVector2D(1900,20));
+    for(int I=0;I<40;++I) { TickHUD(FVector2D(1920,1080)); F.CameraFrame(); }
+    BeforeCollapse.CheckUnchanged(*this,*F.Pawn,TEXT("Panel collapse never triggers overview recentering"));
+    HUD->HandleChromeClick(FVector2D(1900,20));
+    for(int I=0;I<40;++I) { TickHUD(FVector2D(1920,1080)); F.CameraFrame(); }
+    BeforeCollapse.CheckUnchanged(*this,*F.Pawn,TEXT("Panel expand never triggers overview recentering"));
+
+    F.Pawn->OrbitPixels(FVector2D(100,20)); Settle();
+    const FDesiredPose BeforeResize(*F.Pawn);
+    TickHUD(FVector2D(2560,1440)); Settle();
+    BeforeResize.CheckUnchanged(*this,*F.Pawn,TEXT("Resizing after manual orbit does not overwrite the user's view"));
+    Slate->ResetWidget();
     return true;
 }
 

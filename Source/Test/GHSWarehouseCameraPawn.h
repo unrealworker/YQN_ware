@@ -46,6 +46,9 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="Warehouse Camera")
     void ResetOverview(bool Immediate = false);
+    /** The overview may be reframed when the real viewport replaces the startup window size. */
+    void FrameOverview(FVector2D ViewportSize, FVector2D ScenePosition, FVector2D SceneSize, float Duration = 0.85f);
+    bool IsOverviewFraming() const { return bOverviewFraming; }
     /** Delta is measured in screen pixels, positive Y down. Do not multiply by time. */
     UFUNCTION(BlueprintCallable, Category="Warehouse Camera")
     void OrbitPixels(FVector2D Delta);
@@ -89,6 +92,7 @@ private:
     bool bPoseTransitionActive = false;
     bool bObjectPivot = false;
     bool bUseSceneFraming = false;
+    bool bOverviewFraming = false;
     bool bGroundPanRecovery = false;
     FVector GroundRecoveryMinimum = FVector::ZeroVector, GroundRecoveryMaximum = FVector::ZeroVector;
     bool bFlightEndsOnGround = true;

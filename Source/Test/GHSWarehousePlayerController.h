@@ -6,6 +6,7 @@
 
 class UGHSDockTruckHUDWidget;
 class UGHSTwinHUDWidget;
+class UPixelStreamingInput;
 
 UENUM(BlueprintType)
 enum class EGHSWarehouseDragMode : uint8 { None, Orbit, Pan };
@@ -35,11 +36,14 @@ public:
     TObjectPtr<UGHSDockTruckHUDWidget> TruckHUDWidget;
     UPROPERTY(BlueprintReadOnly, Transient, Category="Warehouse Twin")
     TObjectPtr<UGHSTwinHUDWidget> TwinHUDWidget;
+    void SendSearchResponse(const FString& Json);
 protected:
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void OnUnPossess() override;
 private:
+    UFUNCTION() void HandleStreamingInput(const FString& Descriptor);
+    UPROPERTY(Transient) TObjectPtr<UPixelStreamingInput> SearchStreamingInput;
     void ConsumeOrbitMotion();
     void FinishTwinOrbitRelease();
     FVector2D PendingMouse = FVector2D::ZeroVector;

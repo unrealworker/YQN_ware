@@ -1,0 +1,9 @@
+{
+  "name": "ghs-lan-pixel-streaming",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GHS local UE5.4 Pixel Streaming service and player",
+  "scripts": { "test": "node --test tests/*.test.js", "build": "node build.js", "start": "node server/server.js" },
+  "dependencies": { "ws": "8.18.3" },
+  "devDependencies": { "@epicgames-ps/lib-pixelstreamingfrontend-ue5.4": "1.1.6", "sdp": "3.2.1" }
+}

@@ -346,7 +346,17 @@ struct FGHSTwinSceneData::FImpl
     TMap<FString,FRecord> Records;
     TArray<FRecord> Devices;
     TMap<FString,int32> DeviceById;
-    TMap<FString,FRecord> MaterialSelections;
+    mutable TMap<FString,FRecord> MaterialSelections;
+    struct FSearchDocument
+    {
+        FGHSTwinSearchResult Result;
+        FString ParentId,Text;
+    };
+    TArray<FSearchDocument> SearchDocuments;
+    TMap<FString,int32> SearchDocumentById;
+    uint64 SearchStorageBuilds=MAX_uint64;
+    int32 SearchRecordCount=INDEX_NONE;
+    FString SearchDeviceKey;
     TMap<FString,TArray<FCadInstance>> CadByMesh;
     TMap<FString,TArray<FSlot>> SlotsByMesh;
     TMap<TWeakObjectPtr<UInstancedStaticMeshComponent>,FStorageCache> StorageCaches;
@@ -644,8 +654,64 @@ struct FGHSTwinSceneData::FImpl
         if (const int32* Index=DeviceById.Find(Id))
             return Devices.IsValidIndex(*Index) && IsCurrent(&Devices[*Index])?&Devices[*Index]:nullptr;
         if (const FRecord* Record=Records.Find(Id)) return IsCurrent(Record)?Record:nullptr;
-        const FRecord* Material=MaterialSelections.Find(Id);
-        return IsCurrent(Material)?Material:nullptr;
+        if(const FRecord* Material=MaterialSelections.Find(Id)) return IsCurrent(Material)?Material:nullptr;
+        // Material IDs address real cargo slots in a registered rack mesh. They
+        // remain resolvable even before any click and after the 64-entry LRU resets.
+        if(!Id.StartsWith(TEXT("MATERIAL:"))) return nullptr;
+        const int32 LevelAt=Id.Find(TEXT(":L"),ESearchCase::CaseSensitive,ESearchDir::FromEnd);
+        const int32 ColumnAt=Id.Find(TEXT(":C"),ESearchCase::CaseSensitive,ESearchDir::FromEnd);
+        int32 Level=0,Column=0;
+        if(LevelAt<=9 || ColumnAt<=LevelAt+2 || !PositiveNumber(Id.Mid(LevelAt+2,ColumnAt-LevelAt-2),Level) || !PositiveNumber(Id.Mid(ColumnAt+2),Column)) return nullptr;
+        const FString ParentId=Id.Mid(9,LevelAt-9);
+        const FRecord* Parent=Records.Find(ParentId);
+        if(!IsCurrent(Parent) || Parent->Kind!=TEXT("rack")) return nullptr;
+        const auto* Slots=SlotsByMesh.Find(Parent->MeshName);
+        const FSlot* Slot=Slots?Slots->FindByPredicate([&](const FSlot& S){return S.Level==Level && S.Column==Column;}):nullptr;
+        if(!Slot) return nullptr;
+        FRecord Material=*Parent;Material.ParentId=ParentId;Material.Id=Id;Material.Kind=TEXT("material");Material.Type=TEXT("pallet");
+        Material.Title=FString::Printf(TEXT("货架托盘 · 第 %d 层 / 第 %d 列"),Level,Column);
+        Material.Level=Level;Material.Column=Column;Material.LocalBounds=Slot->Bounds;Material.CachedJson.Reset();
+        if(!CurrentTransform(Material,Material.Transform)) return nullptr;
+        if(!Material.Transform.GetLocation().Equals(Parent->Transform.GetLocation(),.1)) Material.CadId.Empty();
+        UpdateBounds(Material);
+        if(MaterialSelections.Num()>=64) MaterialSelections.Reset();
+        return &MaterialSelections.Add(Id,MoveTemp(Material));
+    }
+
+    void EnsureSearchIndex()
+    {
+        FString DeviceKey;
+        for(const auto& R:Devices) DeviceKey+=R.Id+TEXT("|")+R.Title+TEXT("|")+(R.Actor.IsValid()?R.Actor->GetActorNameOrLabel():FString())+TEXT(";");
+        if(SearchStorageBuilds==Stats.StorageRecordsBuilt && SearchRecordCount==Records.Num() && DeviceKey==SearchDeviceKey) return;
+        SearchStorageBuilds=Stats.StorageRecordsBuilt;SearchRecordCount=Records.Num();SearchDeviceKey=MoveTemp(DeviceKey);
+        SearchDocuments.Reset();SearchDocumentById.Reset();++Stats.SearchIndexBuilds;
+        auto Add=[&](const FRecord& R,const FSlot* Slot=nullptr)
+        {
+            if(!R.Actor.IsValid() || R.Actor->IsActorBeingDestroyed()) return;
+            FSearchDocument D;D.ParentId=R.Id;
+            D.Result.Id=Slot?FString::Printf(TEXT("MATERIAL:%s:L%d:C%d"),*R.Id,Slot->Level,Slot->Column):R.Id;
+            D.Result.Title=Slot?FString::Printf(TEXT("货架托盘 · 第 %d 层 / 第 %d 列"),Slot->Level,Slot->Column):R.Kind==TEXT("device")?R.Id:R.Title;
+            D.Result.Type=Slot?TEXT("货架物料"):R.Title;
+            D.Result.Location=R.LocationText;
+            if(Slot && !R.CadId.IsEmpty()) D.Result.Location+=TEXT(" · ")+R.CadId;
+            const FString Aliases=Slot || R.Kind==TEXT("material")?TEXT("物料 货位 托盘 pallet material"):FString();
+            D.Text=D.Result.Id+TEXT(" ")+D.Result.Title+TEXT(" ")+D.Result.Title.Replace(TEXT(" "),TEXT(""))+TEXT(" ")+R.Title+TEXT(" ")+R.Type+TEXT(" ")+R.MeshName+TEXT(" ")+R.Actor->GetActorNameOrLabel()+TEXT(" ")+R.CadId+TEXT(" ")+Aliases;
+            SearchDocuments.Add(MoveTemp(D));
+        };
+        for(const auto& R:Devices) Add(R);
+        for(const auto& Entry:Records)
+        {
+            const auto& R=Entry.Value;
+            if(R.Kind==TEXT("rack")) {if(const auto* Slots=SlotsByMesh.Find(R.MeshName)) for(const auto& Slot:*Slots) Add(R,&Slot);}
+            else Add(R);
+        }
+        SearchDocuments.Sort([](const FSearchDocument& A,const FSearchDocument& B){return A.Result.Id<B.Result.Id;});
+        for(int32 I=0;I<SearchDocuments.Num();++I) SearchDocumentById.Add(SearchDocuments[I].Result.Id,I);
+    }
+    bool SearchMatches(const FSearchDocument& D,const FString& Term) const
+    {
+        const auto* R=Find(D.ParentId);
+        return R && (D.Text.Contains(Term,ESearchCase::IgnoreCase) || R->LocationText.Contains(Term,ESearchCase::IgnoreCase));
     }
 
     void ReadTelemetry(FRecord& Record)
@@ -1094,6 +1160,54 @@ TArray<FGHSTwinPoint> FGHSTwinSceneData::Points() const
         if (ResolvePoint(TEXT("REGION:floor"),Location)) Result.Add({TEXT("REGION:floor"),TEXT("地堆区域"),TEXT("pallet"),TEXT("scene"),Location,false});
     }
     return Result;
+}
+
+FString FGHSTwinSceneData::LocationLabel(const FString& Id) const
+{
+    const auto* Record=Impl->Find(Id);
+    return Record?Record->LocationText:FString();
+}
+
+TArray<FGHSTwinSearchResult> FGHSTwinSceneData::Search(const FString& Query,int32 Limit,int32* OutTotal,int32 Offset) const
+{
+    TArray<FGHSTwinSearchResult> Results;
+    if(OutTotal) *OutTotal=0;
+    const FString Term=Query.Left(128).TrimStartAndEnd();
+    if(Term.IsEmpty() || !Impl->World.IsValid() || Limit<=0) return Results;
+    Impl->EnsureSearchIndex();
+    TArray<int32> Matches;
+    for(int32 I=0;I<Impl->SearchDocuments.Num();++I)
+        if(Impl->SearchMatches(Impl->SearchDocuments[I],Term)) Matches.Add(I);
+    const int32 Exact=Matches.IndexOfByPredicate([&](int32 I){return Impl->SearchDocuments[I].Result.Id.Equals(Term,ESearchCase::IgnoreCase);});
+    if(Exact>0) {const int32 Index=Matches[Exact];Matches.RemoveAt(Exact,1,EAllowShrinking::No);Matches.Insert(Index,0);}
+    if(OutTotal) *OutTotal=Matches.Num();
+    const int32 First=FMath::Clamp(Offset,0,Matches.Num()),End=First+FMath::Min(Limit,Matches.Num()-First);
+    for(int32 I=First;I<End;++I)
+    {
+        const auto& D=Impl->SearchDocuments[Matches[I]];
+        const auto* Record=Impl->Find(D.ParentId);if(!Record) continue;
+        const auto& R=*Record;
+        FString State=TEXT("待接入");
+        if(R.Status==TEXT("running")) State=TEXT("运行");
+        else if(R.Status==TEXT("idle")) State=TEXT("待机");
+        else if(R.Status==TEXT("warning")) State=TEXT("预警");
+        else if(R.Status==TEXT("fault")) State=TEXT("故障");
+        else if(R.Status==TEXT("offline")) State=TEXT("离线");
+        else if(R.Status==TEXT("charging")) State=TEXT("充电中");
+        else if(R.Status==TEXT("scene")) State=TEXT("场景");
+        auto Row=D.Result;Row.Status=State;
+        if(R.Kind==TEXT("device")) Row.Location=R.LocationText;
+        Results.Add(MoveTemp(Row));
+    }
+    return Results;
+}
+
+bool FGHSTwinSceneData::MatchesSearch(const FString& Query,const FString& Id) const
+{
+    const FString Term=Query.Left(128).TrimStartAndEnd();
+    if(Term.IsEmpty() || !Impl->World.IsValid()) return false;
+    Impl->EnsureSearchIndex();const int32* Index=Impl->SearchDocumentById.Find(Id);
+    return Index && Impl->SearchMatches(Impl->SearchDocuments[*Index],Term);
 }
 
 void FGHSTwinSceneData::ApplyLayers(bool Equipment,bool Racks)

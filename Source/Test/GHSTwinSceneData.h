@@ -12,10 +12,16 @@ struct TEST_API FGHSTwinPoint
     bool bAlert = false;
 };
 
+/** Search results always refer to registered scene geometry, never business demo rows. */
+struct TEST_API FGHSTwinSearchResult
+{
+    FString Id, Title, Type, Location, Status;
+};
+
 /** Cumulative work counters for runtime profiling (not wall-clock timing). */
 struct TEST_API FGHSTwinSceneCacheStats
 {
-    uint64 WorldScans=0, ActorsInspected=0, StorageRecordsBuilt=0, InstancesVerified=0, SnapshotSerializations=0;
+    uint64 WorldScans=0, ActorsInspected=0, StorageRecordsBuilt=0, InstancesVerified=0, SnapshotSerializations=0, SearchIndexBuilds=0;
     int32 RegisteredActors=0, StorageComponents=0;
 };
 
@@ -62,6 +68,9 @@ public:
     /** The same scene selection for a world ray, also usable by non-mouse input. */
     bool PickRay(const FVector& Origin, const FVector& Direction, FString& OutId);
     TArray<FGHSTwinPoint> Points() const;
+    TArray<FGHSTwinSearchResult> Search(const FString& Query, int32 Limit=50, int32* OutTotal=nullptr, int32 Offset=0) const;
+    bool MatchesSearch(const FString& Query,const FString& Id) const;
+    FString LocationLabel(const FString& Id) const;
     void ApplyLayers(bool Equipment, bool Racks);
 
 private:

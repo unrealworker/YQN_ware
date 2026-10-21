@@ -12,6 +12,7 @@
 #include "Slate/SceneViewport.h"
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
+#include "PixelStreamingInputComponent.h"
 
 namespace
 {
@@ -27,11 +28,13 @@ AGHSWarehousePlayerController::AGHSWarehousePlayerController()
     bShowMouseCursor = true;
     bEnableClickEvents = false;
     bEnableMouseOverEvents = false;
+    SearchStreamingInput=CreateDefaultSubobject<UPixelStreamingInput>(TEXT("SceneSearchStreamingInput"));
 }
 
 void AGHSWarehousePlayerController::BeginPlay()
 {
     Super::BeginPlay();
+    if(SearchStreamingInput) SearchStreamingInput->OnInputEvent.AddDynamic(this,&AGHSWarehousePlayerController::HandleStreamingInput);
     if (IsLocalController() && GetWorld()->GetMapName().Contains(TEXT("GHS_CAD_NormalWarehouse")))
     {
         if (GetWorld()->GetMapName().Contains(TEXT("ZcoolSmartFactory")))
@@ -68,6 +71,7 @@ void AGHSWarehousePlayerController::BeginPlay()
 
 void AGHSWarehousePlayerController::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    if(SearchStreamingInput) SearchStreamingInput->OnInputEvent.RemoveDynamic(this,&AGHSWarehousePlayerController::HandleStreamingInput);
     CancelCameraDrag();
     if (TruckHUDWidget) { TruckHUDWidget->RemoveFromParent(); TruckHUDWidget = nullptr; }
     if (TwinViewportWidget.IsValid() && GetWorld()->GetGameViewport()) GetWorld()->GetGameViewport()->RemoveViewportWidgetContent(TwinViewportWidget.ToSharedRef());
@@ -91,12 +95,14 @@ bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
             GFrameCounter, *Key.ToString(), int32(Params.Event), Params.Delta.X, int32(DragMode), *PendingMouse.ToString(), bTwinOrbitReleasePending);
     if (TwinHUDWidget)
     {
+        if(Params.Event==IE_Pressed && TwinHUDWidget->HandleSearchKey(Key)) {CancelCameraDrag();return true;}
         if(Key==EKeys::Escape && Params.Event==IE_Pressed) { TwinHUDWidget->ClearSelection(); CancelCameraDrag(); return true; }
         if(Key==EKeys::LeftMouseButton || Key==EKeys::RightMouseButton || Key==EKeys::MiddleMouseButton || Key==EKeys::MouseWheelAxis)
         {
             FVector2D Cursor;
             if(GetMousePosition(Cursor.X,Cursor.Y))
             {
+                if(Key==EKeys::MouseWheelAxis && TwinHUDWidget->HandleSearchWheel(Cursor,Params.Delta.X)) {CancelCameraDrag();return true;}
                 if(Key==EKeys::LeftMouseButton && Params.Event==IE_Pressed && TwinHUDWidget->HandleChromeClick(Cursor)) { CancelCameraDrag(); return true; }
                 if(!TwinHUDWidget->IsScenePoint(Cursor)) { CancelCameraDrag(); return true; }
                 if(Key==EKeys::LeftMouseButton && (Params.Event==IE_Pressed || Params.Event==IE_DoubleClick)) TwinPressPosition=Cursor;
@@ -324,3 +330,8 @@ void AGHSWarehousePlayerController::OnUnPossess()
     CancelCameraDrag();
     Super::OnUnPossess();
 }
+
+void AGHSWarehousePlayerController::HandleStreamingInput(const FString& Descriptor)
+{ if(IsLocalController() && TwinHUDWidget) TwinHUDWidget->HandleStreamSearch(Descriptor); }
+void AGHSWarehousePlayerController::SendSearchResponse(const FString& Json)
+{ if(SearchStreamingInput) SearchStreamingInput->SendPixelStreamingResponse(Json); }

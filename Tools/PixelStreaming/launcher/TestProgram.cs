@@ -1,0 +1,2 @@
+using System;
+namespace Ghs.PixelStreaming { internal static class TestProgram { [STAThread] public static int Main(string[] args) { if(args.Length>0 && args[0].EndsWith("server.js",StringComparison.OrdinalIgnoreCase)) return BackendFixture.Run(args); if(args.Length>0 && args[0]=="--test-worker") return SelfTests.Worker(args); return SelfTests.Run(args.Length>0?args[0]:"launcher-selftest.json"); } } }
