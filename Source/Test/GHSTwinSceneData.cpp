@@ -88,6 +88,58 @@ namespace
         default: return TEXT("unknown");
         }
     }
+
+    FBox MainRackFieldBounds(const TArray<FBox>& Racks)
+    {
+        // The warehouse also has isolated racks along its dock and rear walls.
+        // Join neighbouring rack footprints across the main field's <=5m aisles,
+        // then use the largest field, rather than the envelope of every rack.
+        // This runs only when cached storage geometry changes; projection stays O(1).
+        constexpr double AisleGap=500., CellSize=1000.;
+        TMap<FIntPoint,TArray<int32>> Cells;
+        TArray<int32> Parents;
+        Parents.Reserve(Racks.Num());
+        auto Root=[&Parents](int32 I)
+        {
+            while(Parents[I]!=I) { Parents[I]=Parents[Parents[I]]; I=Parents[I]; }
+            return I;
+        };
+        auto Cell=[](double Value) { return FMath::FloorToInt(Value/CellSize); };
+        for(int32 I=0;I<Racks.Num();++I)
+        {
+            Parents.Add(I);
+            const auto& Box=Racks[I];
+            for(int32 X=Cell(Box.Min.X-AisleGap);X<=Cell(Box.Max.X+AisleGap);++X)
+                for(int32 Y=Cell(Box.Min.Y-AisleGap);Y<=Cell(Box.Max.Y+AisleGap);++Y)
+                    if(const auto* Neighbours=Cells.Find(FIntPoint(X,Y)))
+                        for(int32 J:*Neighbours)
+                        {
+                            const auto& Other=Racks[J];
+                            const double DX=FMath::Max(0.,FMath::Max(Box.Min.X-Other.Max.X,Other.Min.X-Box.Max.X));
+                            const double DY=FMath::Max(0.,FMath::Max(Box.Min.Y-Other.Max.Y,Other.Min.Y-Box.Max.Y));
+                            if(DX*DX+DY*DY<=AisleGap*AisleGap) Parents[Root(I)]=Root(J);
+                        }
+            for(int32 X=Cell(Box.Min.X);X<=Cell(Box.Max.X);++X)
+                for(int32 Y=Cell(Box.Min.Y);Y<=Cell(Box.Max.Y);++Y)
+                    Cells.FindOrAdd(FIntPoint(X,Y)).Add(I);
+        }
+        TArray<FBox> Fields; Fields.Init(FBox(ForceInit),Racks.Num());
+        TArray<int32> Counts; Counts.Init(0,Racks.Num());
+        for(int32 I=0;I<Racks.Num();++I)
+        {
+            const int32 Field=Root(I); Fields[Field]+=Racks[I]; ++Counts[Field];
+        }
+        FBox Largest(ForceInit); int32 LargestCount=0;
+        for(int32 I=0;I<Fields.Num();++I)
+        {
+            // A tie stays deterministic even when actor discovery order changes.
+            const bool Earlier=Largest.IsValid && Fields[I].IsValid &&
+                (Fields[I].Min.X<Largest.Min.X || (Fields[I].Min.X==Largest.Min.X && Fields[I].Min.Y<Largest.Min.Y));
+            if(Counts[I]>LargestCount || (Counts[I]>0 && Counts[I]==LargestCount && Earlier))
+            { Largest=Fields[I]; LargestCount=Counts[I]; }
+        }
+        return Largest;
+    }
 }
 
 bool GHSTwinSelection::Identify(const TArray<FName>& Tags, FIdentity& Out)
@@ -315,7 +367,7 @@ struct FGHSTwinSceneData::FImpl
     FGHSTwinSceneCacheStats Stats;
     bool bMetadataLoaded=false, bEquipmentVisible=true, bRacksVisible=true;
     int32 RackInstanceCount=0;
-    FBox RackRegion=FBox(ForceInit), FloorRegion=FBox(ForceInit);
+    FBox RackRegion=FBox(ForceInit), FloorRegion=FBox(ForceInit), RackPOIRegion=FBox(ForceInit);
 
     void RestoreVisibility()
     {
@@ -442,12 +494,22 @@ struct FGHSTwinSceneData::FImpl
     void UpdateRegions()
     {
         RackRegion=FBox(ForceInit); FloorRegion=FBox(ForceInit); RackInstanceCount=0;
+        TArray<FBox> RackFootprints;
         for(const auto& Entry:StorageCaches)
         {
             const auto& Cache=Entry.Value;
-            if(Cache.bRack) { RackRegion+=Cache.Bounds(); RackInstanceCount+=Cache.Count; }
+            if(Cache.bRack)
+            {
+                RackRegion+=Cache.Bounds(); RackInstanceCount+=Cache.Count;
+                for(int32 I=0;I<Cache.Count;++I)
+                {
+                    const FBox& Bounds=Cache.BoundsTree[Cache.LeafCount+I];
+                    if(Bounds.IsValid) RackFootprints.Add(Bounds);
+                }
+            }
             else if(!Cache.bDock) FloorRegion+=Cache.Bounds();
         }
+        RackPOIRegion=MainRackFieldBounds(RackFootprints);
     }
     void UpdateInstance(UInstancedStaticMeshComponent* Component,FStorageCache& Cache,int32 Index,const FTransform& Transform)
     {
@@ -926,6 +988,14 @@ bool FGHSTwinSceneData::Resolve(const FString& Id,FVector& OutLocation,FVector& 
 
 bool FGHSTwinSceneData::ResolvePoint(const FString& Id,FVector& OutLocation) const
 {
+    if(Id==TEXT("REGION:racks"))
+    {
+        if(!Impl->World.IsValid() || !Impl->RackPOIRegion.IsValid) return false;
+        // A region pin belongs to the body of the field, not the top of its tallest
+        // shelf. The HUD supplies the short leader above this world-space anchor.
+        OutLocation=Impl->RackPOIRegion.GetCenter()+FVector(0,0,80);
+        return true;
+    }
     FVector Center,Extent;
     const bool bResolved=Id.StartsWith(TEXT("REGION:"))
         ?RegionBounds(Id.Mid(7),Center,Extent):Resolve(Id,Center,Extent);
@@ -1019,9 +1089,9 @@ TArray<FGHSTwinPoint> FGHSTwinSceneData::Points() const
         }
     if (Impl->bRacksVisible)
     {
-        FVector Center,Extent;
-        if (RegionBounds(TEXT("racks"),Center,Extent)) Result.Add({TEXT("REGION:racks"),TEXT("货架区域"),TEXT("rack"),TEXT("scene"),Center+FVector(0,0,Extent.Z+80),false});
-        if (RegionBounds(TEXT("floor"),Center,Extent)) Result.Add({TEXT("REGION:floor"),TEXT("地堆区域"),TEXT("pallet"),TEXT("scene"),Center+FVector(0,0,Extent.Z+80),false});
+        FVector Location;
+        if (ResolvePoint(TEXT("REGION:racks"),Location)) Result.Add({TEXT("REGION:racks"),TEXT("货架区域"),TEXT("rack"),TEXT("scene"),Location,false});
+        if (ResolvePoint(TEXT("REGION:floor"),Location)) Result.Add({TEXT("REGION:floor"),TEXT("地堆区域"),TEXT("pallet"),TEXT("scene"),Location,false});
     }
     return Result;
 }

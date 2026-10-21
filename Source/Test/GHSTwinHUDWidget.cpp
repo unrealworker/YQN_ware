@@ -128,10 +128,28 @@ FVector2D UGHSTwinHUDWidget::GetPanelVisualSize() const
 {
     return PanelSlot?PanelSlot->GetSize():FGHSTwinLayout::Calculate(ViewSize).PanelSize;
 }
+FVector2D UGHSTwinHUDWidget::GetSceneControlsPosition() const
+{
+    return PanelMotion.SceneControlsPosition(ViewSize);
+}
+FVector2D UGHSTwinHUDWidget::GetSceneSearchPosition() const
+{
+    return SearchSlot?SearchSlot->GetPosition():PanelMotion.SceneSearchPosition(ViewSize);
+}
+FVector2D UGHSTwinHUDWidget::GetSceneSearchSize() const
+{
+    return SearchSlot?SearchSlot->GetSize():FVector2D::ZeroVector;
+}
+bool UGHSTwinHUDWidget::IsSceneSearchVisible() const
+{
+    return SearchBox && SearchBox->GetVisibility()==ESlateVisibility::Visible;
+}
 float UGHSTwinHUDWidget::GetPanelOpacity() const { return Panel?Panel->GetRenderOpacity():1.f; }
 bool UGHSTwinHUDWidget::IsScenePoint(FVector2D Position) const
 {
     if(!Inside(Position,FVector2D(0,Layout.HeaderHeight),FVector2D(ViewSize.X,ViewSize.Y-Layout.HeaderHeight))) return false;
+    if(IsSceneSearchVisible() && Inside(Position,GetSceneSearchPosition(),GetSceneSearchSize())) return false;
+    if(FGHSTwinSceneChrome::IsHeadingPoint(Position,Layout.HeaderHeight)) return false;
     // Input follows the visible moving panel, not the area it occupied when open.
     return PanelVisibilityProgress<=0 || !Inside(Position,GetPanelVisualPosition(),GetPanelVisualSize());
 }
@@ -247,16 +265,14 @@ bool UGHSTwinHUDWidget::HandleChromeClick(FVector2D Position)
 {
     if(Position.Y<Layout.HeaderHeight && Position.X>ViewSize.X-112)
     { SetPanelCollapsed(!bPanelCollapsed); return true; }
-    if(Inside(Position,FVector2D(20,Layout.HeaderHeight+16),FVector2D(104,36)))
-    { Overview(); return true; }
-    if(Layout.SceneSize.X>660 && Position.Y>=Layout.HeaderHeight+68 && Position.Y<Layout.HeaderHeight+100 && Position.X>=20 && Position.X<424)
+    const int32 TypeIndex=FGHSTwinSceneChrome::FilterAt(Position,Layout);
+    if(TypeIndex!=INDEX_NONE)
     {
-        const int32 Index=FMath::Clamp(int32((Position.X-20)/104),0,3);
-        PointFilter=Index==1?TEXT("rack"):Index==2?TEXT("truck"):Index==3?TEXT("charger"):TEXT("all");
+        PointFilter=TypeIndex==1?TEXT("rack"):TypeIndex==2?TEXT("truck"):TypeIndex==3?TEXT("charger"):TEXT("all");
         POICadence.Invalidate();
         return true;
     }
-    const FVector2D Tool(ViewSize.X<900 ? ViewSize.X-60 : Layout.SceneSize.X-60,Layout.ScenePosition.Y+Layout.SceneSize.Y-132);
+    const FVector2D Tool=GetSceneControlsPosition();
     if(Inside(Position,Tool,FVector2D(40,112)))
     {
         if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn()))
@@ -311,8 +327,11 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
         Panel->SetRenderOpacity(1.f);
         Panel->SetRenderTranslation(PanelMotion.Position(Expanded)-Expanded.PanelPosition);
     }
-    if(SearchSlot) { SearchSlot->SetPosition(FVector2D(FMath::Max(140.,Layout.SceneSize.X-384),Layout.HeaderHeight+16)); SearchSlot->SetSize(FVector2D(FMath::Min(360.,Layout.SceneSize.X-160),36)); }
-    if(SearchBox) SearchBox->SetVisibility(Layout.SceneSize.X>=600 ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
+    // Search uses the same eased edge as the scene controls. Keep its dimensions
+    // and responsive visibility stable while the drawer moves so it cannot snap
+    // or suddenly appear at the final frame of the animation.
+    if(SearchSlot) { SearchSlot->SetPosition(PanelMotion.SceneSearchPosition(ViewSize)); SearchSlot->SetSize(FVector2D(FMath::Max(0.,FMath::Min(360.,Expanded.SceneSize.X-160)),36)); }
+    if(SearchBox) SearchBox->SetVisibility(Expanded.SceneSize.X>=600 ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
     const double Now=GetWorld()->GetTimeSeconds();
     {
         TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_SceneRefresh);
@@ -425,6 +444,7 @@ void UGHSTwinHUDWidget::UpdateVisiblePOIs(float DeltaSeconds,bool bRelayout)
         {
             At=Original+FVector2D(0,Attempt==0?0:((Attempt+1)/2)*60*(Attempt%2?-1:1));
             Overlap=!Layout.IsScenePoint(At) || !Layout.IsScenePoint(At+Size) || At.Y<Layout.HeaderHeight+110;
+            Overlap|=FGHSTwinSceneChrome::Overlaps(At,Size,Layout);
             if(Inside(Screen,At-FVector2D(14,14),Size+FVector2D(28,28))) Overlap=true;
             if(!Selected && bSelectedScreenBoundsValid && At.X<SelectedMax.X && At.X+Size.X>SelectedMin.X && At.Y<SelectedMax.Y && At.Y+Size.Y>SelectedMin.Y) Overlap=true;
             for(int32 ExistingIndex:VisibleLabels)
@@ -435,7 +455,10 @@ void UGHSTwinHUDWidget::UpdateVisiblePOIs(float DeltaSeconds,bool bRelayout)
             if(!Overlap) break;
         }
         if(Overlap && !Selected) continue;
+        // Scene headings and filters always win, including over selected labels.
+        if(FGHSTwinSceneChrome::Overlaps(At,Size,Layout)) continue;
         if(auto* Previous=PreviousPositions.Find(L.Id)) At=GHSHUDMotion::FollowPosition(*Previous,At,DeltaSeconds);
+        if(FGHSTwinSceneChrome::Overlaps(At,Size,Layout)) continue;
         PreviousPositions.Add(L.Id,At);Current.Add(L.Id);
         float& Age=LabelAges.FindOrAdd(L.Id);Age+=DeltaSeconds;
         L.Position=At;L.Anchor=Screen;L.bSelected=Selected;L.bHovered=bCursor && Inside(FVector2D(CursorX,CursorY),At,Size);L.Opacity=GHSHUDMotion::Progress(Age);
@@ -456,6 +479,18 @@ FString UGHSTwinHUDWidget::GetPOIReport() const
         Items.Add(MakeShared<FJsonValueObject>(Item));
     }
     auto Root=MakeShared<FJsonObject>(); Root->SetArrayField(TEXT("labels"),Items); Root->SetNumberField(TEXT("selectionStroke"),4);
+    Root->SetStringField(TEXT("pointFilter"),PointFilter);
+    if(bDiagnostics)
+    {
+        TArray<TSharedPtr<FJsonValue>> Regions;
+        for(const auto& Point:SceneData.Points()) if(Point.Id.StartsWith(TEXT("REGION:")))
+        {
+            auto Region=MakeShared<FJsonObject>();Region->SetStringField(TEXT("id"),Point.Id);
+            Region->SetArrayField(TEXT("worldPosition"),{MakeShared<FJsonValueNumber>(Point.Location.X),MakeShared<FJsonValueNumber>(Point.Location.Y),MakeShared<FJsonValueNumber>(Point.Location.Z)});
+            Regions.Add(MakeShared<FJsonValueObject>(Region));
+        }
+        Root->SetArrayField(TEXT("regionPoints"),Regions);
+    }
     auto Work=MakeShared<FJsonObject>();Work->SetNumberField(TEXT("candidateBuilds"),double(CandidateBuildCount));
     Work->SetNumberField(TEXT("projectionFrames"),double(VisibleProjectionFrames));Work->SetNumberField(TEXT("pointProjections"),double(PointProjectionCount));
     Work->SetNumberField(TEXT("selectionProjections"),double(SelectionProjectionCount));Work->SetNumberField(TEXT("candidateCount"),Labels.Num());
@@ -480,13 +515,14 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
     Text(FVector2D(57,Layout.HeaderHeight/2-12),TEXT("GHS 仓储数字孪生"),17,FLinearColor::White);
     if(ViewSize.X>850) {Text(FVector2D(300,24),TEXT("普通仓库  /  三维运营中心"),12,C(TEXT("A5B2C5"))); Text(FVector2D(ViewSize.X-310,24),TEXT("场景已连接  ·  业务演示"),12,C(TEXT("B8C5D8")));}
     Text(FVector2D(ViewSize.X-102,Layout.HeaderHeight/2-9),bPanelCollapsed?TEXT("展开面板"):TEXT("收起面板"),12,FLinearColor::White);
-    Box(FVector2D(20,Layout.HeaderHeight+16),FVector2D(104,36),FLinearColor::White,4,C(TEXT("E5EAF2")));
-    Text(FVector2D(36,Layout.HeaderHeight+25),TEXT("仓库总览"),12,C(TEXT("25364B")));
-    if(Layout.SceneSize.X>660)
+    Text(FVector2D(32,Layout.HeaderHeight+25),TEXT("GHS 仓库 / 全部区域"),9,C(TEXT("5B6C82")));
+    Text(FVector2D(32,Layout.HeaderHeight+50),TEXT("仓库总览"),18,C(TEXT("25364B")));
+    if(FGHSTwinSceneChrome::FiltersVisible(Layout))
     {
+        Text(FVector2D(32,Layout.HeaderHeight+116),TEXT("按类型查看"),11,C(TEXT("5B6C82")));
         const TCHAR* Names[]={TEXT("全部设备"),TEXT("货架区域"),TEXT("装卸车辆"),TEXT("充电设施")};
         const TCHAR* Filters[]={TEXT("all"),TEXT("rack"),TEXT("truck"),TEXT("charger")};
-        for(int I=0;I<4;++I) { const FVector2D At(20+I*104,Layout.HeaderHeight+68); Box(At,FVector2D(96,32),FLinearColor::White,4,C(PointFilter==Filters[I]?TEXT("356BFA"):TEXT("E5EAF2"))); Text(At+FVector2D(15,8),Names[I],11,C(TEXT("25364B"))); }
+        for(int I=0;I<4;++I) { const FVector2D At=FGHSTwinSceneChrome::FilterPosition(Layout.HeaderHeight,I); Box(At,FGHSTwinSceneChrome::FilterSize(),FLinearColor::White,FGHSTwinSceneChrome::CornerRadius,C(PointFilter==Filters[I]?TEXT("356BFA"):TEXT("E5EAF2"))); Text(At+FVector2D(15,12),Names[I],11,C(TEXT("25364B"))); }
     }
     if(bSelectedScreenBoundsValid && Layout.IsScenePoint((SelectedScreenMin+SelectedScreenMax)*.5))
     {
@@ -515,8 +551,8 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
         auto Fade=[&](FLinearColor Color){Color.A*=L.Opacity;return Color;};
         const FLinearColor Accent=L.Accent;
         const FLinearColor Blue=C(TEXT("356BFA"));
-        Box(L.Position+FVector2D(0,3),L.Size,Fade(FLinearColor(.08,.15,.25,.055)),6);
-        Box(L.Position,L.Size,Fade(L.bSelected?Blue:FLinearColor::White),6,Fade(L.bSelected || L.bHovered?Blue:C(TEXT("DFE7F2"))),L.bHovered?1.5f:1.f);
+        Box(L.Position+FVector2D(0,3),L.Size,Fade(FLinearColor(.08,.15,.25,.055)),FGHSTwinSceneChrome::CornerRadius);
+        Box(L.Position,L.Size,Fade(L.bSelected?Blue:FLinearColor::White),FGHSTwinSceneChrome::CornerRadius,Fade(L.bSelected || L.bHovered?Blue:C(TEXT("DFE7F2"))),L.bHovered?1.5f:1.f);
         // Type marks follow the approved 24-unit line-icon system, not a generic status dot.
         const FVector2D IconAt=L.Position+FVector2D(12,12); const FLinearColor Ink=Fade(L.bSelected?FLinearColor::White:Accent);
         auto Path=[&](std::initializer_list<FVector2D> Points)
@@ -541,9 +577,9 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
             Text(BadgeAt+FVector2D(6,4),L.State,12,Fade(Accent));
         }
     }
-    const FVector2D Tool(Layout.SceneSize.X-60,Layout.ScenePosition.Y+Layout.SceneSize.Y-132);
+    const FVector2D Tool=GetSceneControlsPosition();
     Box(Tool,FVector2D(40,112),FLinearColor::White,4,C(TEXT("E5EAF2")));
     Text(Tool+FVector2D(13,5),TEXT("+"),22,C(TEXT("5B6C82"))); Box(Tool+FVector2D(14,55),FVector2D(12,2),C(TEXT("5B6C82"))); Text(Tool+FVector2D(8,83),TEXT("复位"),11,C(TEXT("5B6C82")));
-    if(Layout.SceneSize.X>650) Text(FVector2D(22,Layout.ScenePosition.Y+Layout.SceneSize.Y-32),TEXT("左键拖动旋转  ·  右键平移  ·  滚轮缩放  ·  点击对象查看详情"),11,C(TEXT("5B6C82")));
+    if(Layout.SceneSize.X>650) Text(FVector2D(22,Layout.ScenePosition.Y+Layout.SceneSize.Y-32),TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  中键复位  ·  点击查看详情"),11,C(TEXT("5B6C82")));
     return Layer;
 }

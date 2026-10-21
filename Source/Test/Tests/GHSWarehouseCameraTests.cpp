@@ -280,6 +280,49 @@ bool FGHSWarehouseCameraCancellation::RunTest(const FString& Parameters)
     return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSWarehouseCameraMiddleReset,
+    "GHS.WarehouseCamera.Input.MiddleClickResetsOverview", GHSWarehouseCameraTests::Flags)
+
+bool FGHSWarehouseCameraMiddleReset::RunTest(const FString& Parameters)
+{
+    using namespace GHSWarehouseCameraTests;
+    FFixture F;
+    if (!F.Check(*this)) return false;
+    const FDesiredPose Overview(*F.Pawn);
+    F.Pawn->OrbitPixels(FVector2D(120,-40));
+    F.Pawn->PanPixels(FVector2D(200,20),1600);
+    F.Pawn->ZoomSteps(2);
+    F.Key(EKeys::LeftMouseButton,IE_Pressed);
+    F.Mouse(60,20);
+    TestTrue(TEXT("Middle click is consumed"),F.Key(EKeys::MiddleMouseButton,IE_Pressed));
+    TestTrue(TEXT("Middle click cancels the active gesture"),F.Controller->DragMode==EGHSWarehouseDragMode::None);
+    F.InputFrame();
+    Overview.CheckUnchanged(*this,*F.Pawn,TEXT("Middle click restores overview and discards pending drag"));
+
+    F.Pawn->OrbitPixels(FVector2D(30,10));
+    const FDesiredPose AfterPress(*F.Pawn);
+    F.Key(EKeys::MiddleMouseButton,IE_Released);
+    AfterPress.CheckUnchanged(*this,*F.Pawn,TEXT("Middle release must not restart overview"));
+    TestTrue(TEXT("Rapid second middle click is consumed"),F.Key(EKeys::MiddleMouseButton,IE_DoubleClick));
+    Overview.CheckUnchanged(*this,*F.Pawn,TEXT("Rapid second click also restores overview"));
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinMiddleResetClearsSelection,
+    "GHS.WarehouseCamera.Input.MiddleClickClearsTwinSelection", GHSWarehouseCameraTests::Flags)
+
+bool FGHSTwinMiddleResetClearsSelection::RunTest(const FString& Parameters)
+{
+    using namespace GHSWarehouseCameraTests;
+    FFixture F;
+    if (!F.Check(*this)) return false;
+    F.Controller->TwinHUDWidget=NewObject<UGHSTwinHUDWidget>(F.Controller);
+    F.Controller->TwinHUDWidget->SelectedId=TEXT("AGV-07");
+    TestTrue(TEXT("Twin scene middle click is consumed"),F.Key(EKeys::MiddleMouseButton,IE_Pressed));
+    TestTrue(TEXT("Middle reset uses overview to clear the selected object"),F.Controller->TwinHUDWidget->SelectedId.IsEmpty());
+    return true;
+}
+
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSWarehouseCameraZoomKeepsPan,
     "GHS.WarehouseCamera.Composition.ZoomKeepsRemotePan", GHSWarehouseCameraTests::Flags)
 

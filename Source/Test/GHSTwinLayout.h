@@ -40,6 +40,34 @@ struct FGHSTwinLayout
     }
 };
 
+/** Shared geometry for the non-interactive scene heading and native type filters. */
+struct FGHSTwinSceneChrome
+{
+    static constexpr float CornerRadius=12.f;
+    static FVector2D FilterPosition(double HeaderHeight,int32 Index)
+    { return FVector2D(32+Index*104,HeaderHeight+147); }
+    static FVector2D FilterSize() { return FVector2D(96,40); }
+    static bool Contains(FVector2D P,FVector2D At,FVector2D Size)
+    { return P.X>=At.X && P.Y>=At.Y && P.X<At.X+Size.X && P.Y<At.Y+Size.Y; }
+    static bool IsHeadingPoint(FVector2D P,double HeaderHeight)
+    { return Contains(P,FVector2D(24,HeaderHeight+16),FVector2D(220,80)); }
+    static bool FiltersVisible(const FGHSTwinLayout& Layout)
+    { return Layout.SceneSize.X>660 && Layout.SceneSize.Y>=195; }
+    static int32 FilterAt(FVector2D P,const FGHSTwinLayout& Layout)
+    {
+        if(FiltersVisible(Layout))
+            for(int32 I=0;I<4;++I) if(Contains(P,FilterPosition(Layout.HeaderHeight,I),FilterSize())) return I;
+        return INDEX_NONE;
+    }
+    static bool Overlaps(FVector2D At,FVector2D Size,const FGHSTwinLayout& Layout)
+    {
+        auto Intersects=[&](FVector2D P,FVector2D S)
+        { return At.X<P.X+S.X && At.X+Size.X>P.X && At.Y<P.Y+S.Y && At.Y+Size.Y>P.Y; };
+        if(Intersects(FVector2D(24,Layout.HeaderHeight+16),FVector2D(220,80))) return true;
+        return FiltersVisible(Layout) && Intersects(FVector2D(24,Layout.HeaderHeight+108),FVector2D(424,87));
+    }
+};
+
 /** A full-width drawer; retargeting starts from the current visible position. */
 struct FGHSTwinPanelMotion
 {
@@ -58,5 +86,20 @@ struct FGHSTwinPanelMotion
     FVector2D Position(const FGHSTwinLayout& Expanded) const
     {
         return Expanded.PanelPosition+FVector2D(Expanded.PanelSize.X*(1.-Progress),0);
+    }
+    FVector2D SceneControlsPosition(FVector2D Viewport) const
+    {
+        const auto Expanded=FGHSTwinLayout::Calculate(Viewport);
+        // Desktop controls follow the same eased drawer edge on every frame.
+        // A narrow bottom sheet slides horizontally: keep controls above it so
+        // they never travel through the browser or jump when it becomes hidden.
+        const double Right=Viewport.X<900?Viewport.X:Position(Expanded).X;
+        return FVector2D(Right-60,Expanded.ScenePosition.Y+Expanded.SceneSize.Y-132);
+    }
+    FVector2D SceneSearchPosition(FVector2D Viewport) const
+    {
+        const auto Expanded=FGHSTwinLayout::Calculate(Viewport);
+        const double Right=Viewport.X<900?Viewport.X:Position(Expanded).X;
+        return FVector2D(FMath::Max(140.,Right-384),Expanded.HeaderHeight+16);
     }
 };

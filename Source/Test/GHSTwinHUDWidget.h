@@ -64,6 +64,10 @@ public:
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") float GetPanelTransitionProgress() const { return PanelVisibilityProgress; }
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FVector2D GetPanelVisualPosition() const;
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FVector2D GetPanelVisualSize() const;
+    UFUNCTION(BlueprintPure, Category="Warehouse Twin") FVector2D GetSceneControlsPosition() const;
+    UFUNCTION(BlueprintPure, Category="Warehouse Twin") FVector2D GetSceneSearchPosition() const;
+    UFUNCTION(BlueprintPure, Category="Warehouse Twin") FVector2D GetSceneSearchSize() const;
+    UFUNCTION(BlueprintPure, Category="Warehouse Twin") bool IsSceneSearchVisible() const;
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") float GetPanelOpacity() const;
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetPOIReport() const;
     UFUNCTION() void SearchCommitted(const FText& Text, ETextCommit::Type Method);

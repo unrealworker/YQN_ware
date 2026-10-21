@@ -92,7 +92,7 @@ bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
     if (TwinHUDWidget)
     {
         if(Key==EKeys::Escape && Params.Event==IE_Pressed) { TwinHUDWidget->ClearSelection(); CancelCameraDrag(); return true; }
-        if(Key==EKeys::LeftMouseButton || Key==EKeys::RightMouseButton || Key==EKeys::MouseWheelAxis)
+        if(Key==EKeys::LeftMouseButton || Key==EKeys::RightMouseButton || Key==EKeys::MiddleMouseButton || Key==EKeys::MouseWheelAxis)
         {
             FVector2D Cursor;
             if(GetMousePosition(Cursor.X,Cursor.Y))
@@ -161,7 +161,8 @@ bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
         }
         return true;
     }
-    if (Key == EKeys::Home && Params.Event == IE_Pressed)
+    if ((Key == EKeys::Home && Params.Event == IE_Pressed)
+        || (Key == EKeys::MiddleMouseButton && (Params.Event == IE_Pressed || Params.Event == IE_DoubleClick)))
     {
         CancelCameraDrag(); if(TwinHUDWidget) TwinHUDWidget->Command(TEXT("{\"action\":\"overview\"}")); else Camera->ResetOverview(); return true;
     }

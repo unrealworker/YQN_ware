@@ -5,6 +5,16 @@ const M = require('../model.js');
 test('capacity, material, and both order queues reconcile with their actual rows', () => {
   const d = M.demo;
   assert.equal(d.capacity.occupied + d.capacity.available + d.capacity.lockedEmpty, d.capacity.total);
+  assert.equal(d.capacity.occupied / d.capacity.total, .8);
+  assert.equal(d.capacity.regions[0].occupied / d.capacity.regions[0].total, .7);
+  assert.equal(d.capacity.regions[1].occupied / d.capacity.regions[1].total, 1);
+  assert.equal(d.capacity.regions[1].available, 0);
+  assert.equal(d.capacity.regions[1].lockedEmpty, 0);
+  for (const region of d.capacity.regions) {
+    assert.equal(region.occupied + region.available + region.lockedEmpty, region.total);
+  }
+  for (const key of ['total', 'occupied', 'available', 'lockedEmpty'])
+    assert.equal(d.capacity.regions.reduce((sum, region) => sum + region[key], 0), d.capacity[key]);
   assert.equal(d.material.quantity, d.material.available + d.material.allocated);
   assert.equal(d.material.quantity, d.material.boxes * d.material.perBox);
   for (const direction of ['inbound', 'outbound']) {
@@ -46,12 +56,13 @@ test('search and state filter combine; pagination cannot produce an invalid empt
   assert.ok(page.rows.length>0);
   assert.deepEqual(M.paginate([],3,5),{rows:[],page:1,pages:1,total:0,start:0,end:0});
 });
-test('stock matrix encodes the approved 36/8/4 distribution with no invented SKU binding', () => {
+test('stock matrix encodes the 34/10/4 demonstration distribution with no invented SKU binding', () => {
   const bins=M.rackBins();
-  assert.equal(bins.filter(x=>x.status==='occupied').length,36);
-  assert.equal(bins.filter(x=>x.status==='available').length,8);
+  assert.equal(bins.filter(x=>x.status==='occupied').length,34);
+  assert.equal(bins.filter(x=>x.status==='available').length,10);
   assert.equal(bins.filter(x=>x.status==='locked').length,4);
   assert.equal(bins.find(x=>x.id===12).sku,'SKU2038');
+  assert.equal(bins.find(x=>x.id===12).status,'occupied');
   assert.ok(bins.filter(x=>x.id!==12).every(x=>!x.sku));
 });
 test('navigation retains each page filter and back restores the selected list', () => {

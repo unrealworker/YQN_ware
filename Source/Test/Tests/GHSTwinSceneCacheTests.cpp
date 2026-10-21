@@ -32,14 +32,14 @@ struct FFixture
         A->GetStaticMeshComponent()->SetMobility(EComponentMobility::Movable);
         return A;
     }
-    UInstancedStaticMeshComponent* Cargo(int32 Count)
+    UInstancedStaticMeshComponent* Cargo(int32 Count,const TCHAR* MeshPrefix=TEXT("SM_GHS_Presentation_Cargo_CacheFixture"))
     {
         auto* A=World->SpawnActor<AActor>();
         auto* C=NewObject<UInstancedStaticMeshComponent>(A);
         A->SetRootComponent(C); A->AddInstanceComponent(C);
         auto* Cube=LoadObject<UStaticMesh>(nullptr,TEXT("/Engine/BasicShapes/Cube.Cube"));
         C->SetStaticMesh(DuplicateObject<UStaticMesh>(Cube,GetTransientPackage(),
-            MakeUniqueObjectName(GetTransientPackage(),UStaticMesh::StaticClass(),TEXT("SM_GHS_Presentation_Cargo_CacheFixture"))));
+            MakeUniqueObjectName(GetTransientPackage(),UStaticMesh::StaticClass(),MeshPrefix)));
         C->RegisterComponent();
         for(int32 I=0;I<Count;++I) C->AddInstance(FTransform(FVector(100+I*200,0,0)));
         return C;
@@ -104,6 +104,43 @@ bool FGHSTwinSceneSilentMove::RunTest(const FString&)
     for(int32 I=0;I<24;++I) S.MaintainCache(17);
     TestTrue(TEXT("Region remains valid after both extreme instances move inward"),S.RegionBounds(TEXT("floor"),Position,Extent));
     TestTrue(TEXT("Cached region shrinks as well as expands"),Position.Equals(FVector(29950,0,0),.01) && Extent.Equals(FVector(29800,50,50),.01));
+    return true;
+}
+
+// Peripheral dock/wall racks must not pull the main rack-area label into floor storage.
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinRackAreaAnchor,"GHS.Twin.Scene.Cache.RackAreaPOIFollowsMainRackField",GHSTwinSceneCacheTests::Flags)
+bool FGHSTwinRackAreaAnchor::RunTest(const FString&)
+{
+    using namespace GHSTwinSceneCacheTests;
+    FFixture F; auto* Racks=F.Cargo(0,TEXT("SM_GHS_V2Rack_AreaFixture"));
+    for(double X:{-600.,0.,600.}) for(double Y:{-300.,300.})
+        Racks->AddInstance(FTransform(FRotator::ZeroRotator,FVector(X,Y,400),FVector(2,4,8)));
+    for(double X:{10000.,10600.})
+        Racks->AddInstance(FTransform(FRotator::ZeroRotator,FVector(X,8000,400),FVector(2,4,8)));
+    auto* Floor=F.Cargo(1); Floor->UpdateInstanceTransform(0,FTransform(FVector(9000,5000,100)),false,true,true);
+    FGHSTwinSceneData S; S.Refresh(F.World);
+    FVector Point,Center,Extent;
+    TestTrue(TEXT("Rack region anchor resolves"),S.ResolvePoint(TEXT("REGION:racks"),Point));
+    TestTrue(TEXT("Anchor sits over the dense main field, not midway to remote dock racks"),Point.Equals(FVector(0,0,480),.01));
+    TestTrue(TEXT("Full rack bounds remain available for existing camera framing"),S.RegionBounds(TEXT("racks"),Center,Extent));
+    TestTrue(TEXT("Peripheral racks are retained in full-region bounds"),Center.Equals(FVector(5000,3850,400),.01));
+    const auto InitialPoints=S.Points();
+    const auto* Candidate=InitialPoints.FindByPredicate([](const FGHSTwinPoint& P){return P.Id==TEXT("REGION:racks");});
+    TestTrue(TEXT("Candidate catalogue and per-frame resolution agree"),Candidate && Candidate->Location.Equals(Point,.01));
+    TestTrue(TEXT("Floor POI retains its existing top clearance"),S.ResolvePoint(TEXT("REGION:floor"),Point) && Point.Equals(FVector(9000,5000,230),.01));
+
+    // The label is a world anchor, including rotation and translation of the whole rack host.
+    Racks->SetWorldTransform(FTransform(FRotator(0,90,0),FVector(1200,-900,200)));
+    S.MaintainCache(32);
+    TestTrue(TEXT("Rotated/moved main field carries its anchor"),S.ResolvePoint(TEXT("REGION:racks"),Point) && Point.Equals(FVector(1200,-900,680),.01));
+    const auto MovedPoints=S.Points();
+    Candidate=MovedPoints.FindByPredicate([](const FGHSTwinPoint& P){return P.Id==TEXT("REGION:racks");});
+    TestTrue(TEXT("Candidates adopt the same moved world anchor"),Candidate && Candidate->Location.Equals(Point,.01));
+    const uint64 Scans=S.GetCacheStats().WorldScans;
+    S.Refresh(F.World); S.MaintainCache(32);
+    TestEqual(TEXT("POI update does not trigger another world scan"),S.GetCacheStats().WorldScans,Scans);
+    S.ApplyLayers(true,false);
+    TestFalse(TEXT("Hidden rack layer has no visible region candidate"),S.Points().ContainsByPredicate([](const FGHSTwinPoint& P){return P.Id==TEXT("REGION:racks");}));
     return true;
 }
 
