@@ -2,21 +2,8 @@ const test=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
-const vm=require('node:vm');
-// Exercise the actual page/bridge controller without a browser dependency. Geometry is
-// verified separately in UE's embedded Chromium using the emitted report payloads.
-function boot({reducedMotion=true}={}){
-  const commands=[],elements={},listeners={};
-  const element=id=>elements[id]||(elements[id]={innerHTML:'',textContent:'',hidden:true,scrollTop:0,scrollWidth:480,clientWidth:480,offsetWidth:480,className:'',style:{},dataset:{},classList:{add(){},remove(){}},setAttribute(){},removeAttribute(){},contains(node){return !!(node&&node.insidePage)},querySelectorAll(){return[]},querySelector(){return null},focus(){document.activeElement=this;}});
-  const document={getElementById:element,documentElement:{scrollWidth:480},images:[],activeElement:null,querySelectorAll(){return[]},querySelector(){return null},addEventListener(name,handler){listeners[name]=handler}};
-  let queue=[],now=0,timerId=0,motionListener;
-  const motion={matches:reducedMotion,addEventListener(event,fn){motionListener=fn;}};
-  function advance(ms){const until=now+ms;for(;;){queue.sort((a,b)=>a.at-b.at);const next=queue[0];if(!next||next.at>until)break;queue.shift();now=next.at;next.fn();}now=until;}
-  const context={document,innerWidth:480,innerHeight:1016,console,performance:{now:()=>now},getComputedStyle:()=>({opacity:'1'}),matchMedia:()=>motion,requestAnimationFrame:fn=>fn(),setTimeout:(fn,delay=0)=>{const id=++timerId;queue.push({id,at:now+delay,fn});return id;},clearTimeout:id=>{queue=queue.filter(t=>t.id!==id);},setInterval(){return 1},clearInterval(){},ue:{twin:{command:json=>commands.push(JSON.parse(json))}}};
-  context.window=context;context.globalThis=context;vm.createContext(context);
-  for(const file of ['model.js','app.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),context,{filename:file});
-  return{window:context,commands,elements,listeners,advance,flush(){while(queue.length)advance(Math.max(...queue.map(t=>t.at))-now);},reduceMotion(){motion.matches=true;if(motionListener)motionListener(motion);},click(dataset){listeners.click({target:{closest:()=>({dataset,insidePage:true})}});},html:()=>element('page').innerHTML};
-}
+const {boot}=require('./harness');
+
 test('all seven native navigation destinations render real content and source labels',()=>{
   const app=boot();
   for(const [name,title]of[['overview','仓库运营总览'],['inventory','库存与货位'],['orders','今日出入库订单'],['devices','设备监控'],['alerts','设备告警中心'],['trace','追溯查询'],['settings','场景设置']]){

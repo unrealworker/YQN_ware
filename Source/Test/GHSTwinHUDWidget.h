@@ -10,6 +10,25 @@
 class SWebBrowser;
 class UCanvasPanelSlot;
 
+/** Candidate work is periodic; visible-point projection remains per frame. */
+struct FGHSTwinPOIRefreshPolicy
+{
+    bool Consume(double Now,uint64 CurrentRevision,bool bCurrentFar)
+    {
+        if(!bDirty && Now>=LastRefresh && Now<NextRefresh && Revision==CurrentRevision && bFar==bCurrentFar) return false;
+        bDirty=false;Revision=CurrentRevision;bFar=bCurrentFar;LastRefresh=Now;NextRefresh=Now+.1;return true;
+    }
+    void Invalidate() { bDirty=true; }
+private:
+    double NextRefresh=0,LastRefresh=-1;
+    uint64 Revision=MAX_uint64;
+    bool bFar=false,bDirty=true;
+};
+namespace GHSTwinHUDPerformance
+{
+    inline bool ShouldRefreshBrowser(bool bCollapsed,float Progress) { return !bCollapsed || Progress>0.f; }
+}
+
 UCLASS()
 class TEST_API UGHSTwinBrowser : public UWidget
 {
@@ -55,7 +74,12 @@ protected:
     virtual void NativeTick(const FGeometry& Geometry, float DeltaSeconds) override;
     virtual int32 NativePaint(const FPaintArgs&, const FGeometry&, const FSlateRect&, FSlateWindowElementList&, int32, const FWidgetStyle&, bool) const override;
 private:
-    void PushSnapshot(bool bExplicitSelection=false);
+    void PushSnapshot(bool bExplicitSelection=false,bool bForce=false);
+    void SetPanelCollapsed(bool bCollapsed,bool bExplicitSelection=false);
+    void UpdateBrowserVisibility(bool bForce=false,bool bExplicitSelection=false);
+    void RebuildPOICandidates(bool bAggregate);
+    void UpdateVisiblePOIs(float DeltaSeconds,bool bRelayout);
+    void UpdateSelectedScreenBounds();
     void Focus(const FString& Id);
     void Overview();
     void FocusRegion(const FString& Region);
@@ -69,13 +93,30 @@ private:
     double NextRefresh = 0;
     bool bPanelCollapsed = false, bShowPOIs = true, bEquipment = true, bRacks = true;
     bool bInitialViewPending = true;
+    bool bBrowserActive=true,bDiagnostics=false;
     float PanelVisibilityProgress = 1.f;
     FGHSTwinPanelMotion PanelMotion;
     FString Density = TEXT("auto");
     FString PointFilter = TEXT("all");
     FString ActiveRegionId;
-    struct FLabel { FString Id, Text, Kind, Status; FVector2D Position; FVector2D Anchor; FVector2D Size; bool bAlert=false; bool bSelected=false; bool bHovered=false; float Opacity=1; };
+    struct FLabel
+    {
+        FString Id,Text,Kind,Status,DisplayTitle,State;
+        FVector WorldLocation=FVector::ZeroVector;
+        FVector2D Position,Anchor,Size;
+        FLinearColor Accent;
+        bool bAlert=false,bSelected=false,bHovered=false,bRegion=false,bGroup=false;
+        float Opacity=1;
+        double BadgeWidth=0;
+    };
+    FGHSTwinPOIRefreshPolicy POICadence;
     TArray<FLabel> Labels;
+    TArray<int32> VisibleLabels,PreviousVisibleLabels;
     TMap<FString,FVector2D> PreviousPositions;
     TMap<FString,float> LabelAges;
+    FRotator LastLayoutRotation=FRotator::ZeroRotator;
+    FVector LastLayoutLocation=FVector::ZeroVector;
+    FVector2D SelectedScreenMin=FVector2D::ZeroVector,SelectedScreenMax=FVector2D::ZeroVector;
+    bool bSelectedScreenBoundsValid=false;
+    uint64 CandidateBuildCount=0,VisibleProjectionFrames=0,PointProjectionCount=0,SelectionProjectionCount=0;
 };

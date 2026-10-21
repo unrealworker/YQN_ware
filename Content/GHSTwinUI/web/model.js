@@ -17,6 +17,13 @@ Object.assign(sampleFacilities.find(r=>r.id==='CH-07'),{taskId:'AGV-03',value:'1
 Object.assign(sampleFacilities.find(r=>r.id==='CH-12'),{status:'idle',taskId:'',value:'0 kW',progress:0});
 Object.assign(sampleFacilities.find(r=>r.id==='CH-19'),{status:'charging',taskId:'AGV-16',value:'22 kW',progress:68});
 function equipmentFor(s,facility){const key=facility?'facilities':'equipment';return (s&&Array.isArray(s[key])?s[key]:facility?sampleFacilities:sampleEquipment).map(normalizeEquipment);}
+// Normalize once at the snapshot boundary. Renderers share these arrays and index;
+// CAD bounds and other scene-only fields never participate in a page dependency key.
+function prepareSnapshot(s){
+  const equipment=equipmentFor(s),facilities=equipmentFor(s,true),byId=new Map();
+  equipment.concat(facilities).forEach(row=>{if(!byId.has(row.id))byId.set(row.id,row);});
+  return{equipment,facilities,byId,equipmentStates:countStates(equipment),facilityStates:countStates(facilities)};
+}
 function countStates(rows){return rows.reduce((a,r)=>(a[r.status]=(a[r.status]||0)+1,a),{});}
 function filterEquipment(rows,query='',status='all',type='all'){const q=query.trim().toLowerCase();return rows.filter(r=>(status==='all'||r.status===status)&&(type==='all'||r.type===type)&&(!q||[r.id,r.title,r.location,r.taskId,typeNames[r.type]].join(' ').toLowerCase().includes(q))).sort((a,b)=>(stateOrder[a.status]??9)-(stateOrder[b.status]??9)||a.id.localeCompare(b.id));}
 function paginate(rows,page,size=5){const total=rows.length,pages=Math.max(1,Math.ceil(total/size));page=Math.max(1,Math.min(pages,Number(page)||1));return{rows:rows.slice((page-1)*size,page*size),page,pages,total,start:total?(page-1)*size+1:0,end:Math.min(total,page*size)};}
@@ -30,5 +37,5 @@ function createState(){return{page:'overview',detail:null,stack:[],scroll:{},fil
 function navigate(s,page){s.page=page;s.detail=null;s.stack=[];}
 function openDetail(s,detail){s.stack.push({page:s.page,detail:s.detail});s.detail=detail;}
 function back(s){const prev=s.stack.pop();if(prev){s.page=prev.page;s.detail=prev.detail;}else s.detail=null;}
-return{demo,stateNames,typeNames,normalizeEquipment,equipmentFor,countStates,filterEquipment,paginate,makeOrders,filterOrders,rackBins,trendPoints,alerts,trace,createState,navigate,openDetail,back};
+return{demo,stateNames,typeNames,normalizeEquipment,equipmentFor,prepareSnapshot,countStates,filterEquipment,paginate,makeOrders,filterOrders,rackBins,trendPoints,alerts,trace,createState,navigate,openDetail,back};
 });

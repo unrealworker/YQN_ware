@@ -10,6 +10,7 @@
 #include "Engine/StaticMesh.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
+#include "InstancedStaticMeshDelegates.h"
 #include "GameFramework/PlayerController.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
@@ -123,17 +124,18 @@ bool GHSTwinSelection::Identify(const TArray<FName>& Tags, FIdentity& Out)
     return false;
 }
 
-int32 GHSTwinSelection::BootstrapComponents(UWorld* World)
+namespace
+{
+int32 BootstrapActors(UWorld* World,const TArray<AActor*>& Actors)
 {
     if (!IsValid(World) || !World->IsGameWorld()) return 0;
-    UGHSMannedForkliftIdentityLibrary::ReconcileWorld(World);
+    UGHSMannedForkliftIdentityLibrary::ReconcileActors(World,Actors);
     int32 Created=0;
-    for (TActorIterator<AActor> It(World); It; ++It)
+    for (AActor* Actor : Actors)
     {
-        AActor* Actor=*It;
         if (!IsValid(Actor) || Actor->IsActorBeingDestroyed()) continue;
-        FIdentity Identity;
-        if (!Identify(Actor->Tags,Identity)) continue;
+        GHSTwinSelection::FIdentity Identity;
+        if (!GHSTwinSelection::Identify(Actor->Tags,Identity)) continue;
         if (Identity.Type==TEXT("forklift"))
         {
             if (!UGHSMannedForkliftIdentityLibrary::IsSupportedActor(Actor)) continue;
@@ -178,6 +180,15 @@ int32 GHSTwinSelection::BootstrapComponents(UWorld* World)
         }
     }
     return Created;
+}
+}
+
+int32 GHSTwinSelection::BootstrapComponents(UWorld* World)
+{
+    if(!IsValid(World) || !World->IsGameWorld()) return 0;
+    TArray<AActor*> Actors;
+    for(TActorIterator<AActor> It(World);It;++It) Actors.Add(*It);
+    return BootstrapActors(World,Actors);
 }
 
 bool GHSTwinSelection::IntersectBox(const FVector& Origin, const FVector& Direction,
@@ -231,12 +242,16 @@ struct FGHSTwinSceneData::FImpl
         FString DockId, CadId, MeshName, ParentId, Reason, DriverId;
         TWeakObjectPtr<AActor> Actor;
         TWeakObjectPtr<UStaticMeshComponent> Component;
+        TWeakObjectPtr<UActorComponent> Telemetry;
         FTransform Transform=FTransform::Identity;
         FBox LocalBounds=FBox(ForceInit);
         FVector Center=FVector::ZeroVector, Extent=FVector::ZeroVector;
         int32 InstanceIndex=INDEX_NONE, Level=0, Column=0;
         double Progress=0, LastUpdate=-1;
         bool bLive=false, bDemo=false, bAvailable=false, bAlert=false;
+        mutable TSharedPtr<FJsonObject> CachedJson;
+        mutable FTransform JsonTransform=FTransform::Identity;
+        mutable bool bJsonHidden=false;
     };
     struct FVisibility
     {
@@ -247,25 +262,57 @@ struct FGHSTwinSceneData::FImpl
     struct FStorageCache
     {
         TWeakObjectPtr<UStaticMesh> Mesh;
-        FTransform ComponentTransform=FTransform::Identity;
+        FBox LocalBounds=FBox(ForceInit);
         int32 Count=0;
-        double CheckedAt=0;
-        TArray<FRecord> Entries;
+        int32 Cursor=0, LeafCount=1;
+        bool bRack=false, bDock=false;
+        TArray<FString> Ids;
+        TArray<FTransform> Transforms;
+        TArray<FBox> BoundsTree;
+        void SetBounds(int32 Index,const FBox& Bounds)
+        {
+            int32 Node=LeafCount+Index; BoundsTree[Node]=Bounds;
+            while(Node>1) { Node/=2; BoundsTree[Node]=BoundsTree[Node*2]+BoundsTree[Node*2+1]; }
+        }
+        FBox Bounds() const { return BoundsTree.Num()>1?BoundsTree[1]:FBox(ForceInit); }
+    };
+    struct FActorRegistration
+    {
+        TArray<FName> Tags;
+        TSet<TWeakObjectPtr<UActorComponent>> Components;
+        GHSTwinSelection::FIdentity Identity;
+        TWeakObjectPtr<UStaticMeshComponent> DeviceComponent;
+        TWeakObjectPtr<UStaticMesh> DeviceMesh;
+        FBox DeviceBounds=FBox(ForceInit);
+        TWeakObjectPtr<UActorComponent> Telemetry;
+        TArray<TWeakObjectPtr<UInstancedStaticMeshComponent>> Storage;
+        bool bDirty=true, bFx=false, bDeviceRegistered=false;
     };
 
     TWeakObjectPtr<UWorld> World;
     FString MapName;
-    TArray<FRecord> Records;
+    TMap<FString,FRecord> Records;
     TArray<FRecord> Devices;
-    TMap<FString,int32> ById;
     TMap<FString,int32> DeviceById;
     TMap<FString,FRecord> MaterialSelections;
     TMap<FString,TArray<FCadInstance>> CadByMesh;
     TMap<FString,TArray<FSlot>> SlotsByMesh;
     TMap<TWeakObjectPtr<UInstancedStaticMeshComponent>,FStorageCache> StorageCaches;
-    TArray<FGHSTwinPoint> CachedPoints;
-    TArray<FGHSTwinPoint> StoragePoints;
     TArray<FVisibility> Visibility;
+    TSet<TWeakObjectPtr<AActor>> VisibilityTracked;
+    TMap<TWeakObjectPtr<AActor>,FActorRegistration> RegisteredActors;
+    TArray<TWeakObjectPtr<UInstancedStaticMeshComponent>> StorageOrder;
+    FDelegateHandle SpawnHandle,DestroyedHandle,RemovedHandle,RegisteredHandle,LevelsHandle,InstanceHandle;
+    int32 StorageCursor=0;
+    double NextWorldValidation=0;
+    bool bWorldRescan=true, bBootstrapNeeded=true, bSnapshotDirty=true;
+    FString CachedSnapshotBase, LastSentSnapshot;
+    TSharedPtr<FJsonObject> CachedSelectionObject;
+    FString CachedSelectionJson;
+    bool bHasSentSnapshot=false;
+    bool bLegacyBootstrapped=false;
+    uint64 Revision=0;
+    FGHSTwinSceneCacheStats Stats;
     bool bMetadataLoaded=false, bEquipmentVisible=true, bRacksVisible=true;
     int32 RackInstanceCount=0;
     FBox RackRegion=FBox(ForceInit), FloorRegion=FBox(ForceInit);
@@ -275,12 +322,14 @@ struct FGHSTwinSceneData::FImpl
         for (const FVisibility& Item : Visibility)
             if (Item.Actor.IsValid()) Item.Actor->SetActorHiddenInGame(Item.bOriginalHidden);
         Visibility.Reset();
+        VisibilityTracked.Reset();
     }
 
     void TrackVisibility(AActor* Actor, bool bEquipment)
     {
         if (!Actor || !World.IsValid() || !World->IsGameWorld()) return;
-        if (Visibility.ContainsByPredicate([Actor](const FVisibility& Item) { return Item.Actor.Get()==Actor; })) return;
+        if (VisibilityTracked.Contains(Actor)) return;
+        VisibilityTracked.Add(Actor);
         Visibility.Add({Actor,Actor->IsHidden(),bEquipment});
     }
 
@@ -289,6 +338,152 @@ struct FGHSTwinSceneData::FImpl
         if (!World.IsValid() || !World->IsGameWorld()) return;
         for (const FVisibility& Item : Visibility)
             if (Item.Actor.IsValid()) Item.Actor->SetActorHiddenInGame(Item.bOriginalHidden || !(Item.bEquipment?bEquipmentVisible:bRacksVisible));
+    }
+
+    void AddActor(AActor* Actor)
+    {
+        if(!IsValid(Actor) || Actor->GetWorld()!=World.Get() || Actor->IsActorBeingDestroyed()) return;
+        RegisteredActors.FindOrAdd(Actor).bDirty=true; bBootstrapNeeded=true;
+    }
+    void RemoveActor(AActor* Actor)
+    {
+        RegisteredActors.Remove(Actor); bBootstrapNeeded=true; bSnapshotDirty=true;
+    }
+    void Detach()
+    {
+        if(auto* W=World.Get())
+        {
+            W->RemoveOnActorSpawnedHandler(SpawnHandle); W->RemoveOnActorDestroyededHandler(DestroyedHandle);
+            W->RemoveOnActorRemovedFromWorldHandler(RemovedHandle);
+            W->RemoveOnPostRegisterAllActorComponentsHandler(RegisteredHandle); W->OnLevelsChanged().Remove(LevelsHandle);
+        }
+        FInstancedStaticMeshDelegates::OnInstanceIndexUpdated.Remove(InstanceHandle);
+    }
+    void Attach(UWorld* W)
+    {
+        SpawnHandle=W->AddOnActorSpawnedHandler(FOnActorSpawned::FDelegate::CreateRaw(this,&FImpl::AddActor));
+        DestroyedHandle=W->AddOnActorDestroyedHandler(FOnActorDestroyed::FDelegate::CreateRaw(this,&FImpl::RemoveActor));
+        RemovedHandle=W->AddOnActorRemovedFromWorldHandler(FOnActorRemovedFromWorld::FDelegate::CreateRaw(this,&FImpl::RemoveActor));
+        RegisteredHandle=W->AddOnPostRegisterAllActorComponentsHandler(FOnPostRegisterAllActorComponents::FDelegate::CreateRaw(this,&FImpl::AddActor));
+        LevelsHandle=W->OnLevelsChanged().AddLambda([this](){ bWorldRescan=true; });
+        InstanceHandle=FInstancedStaticMeshDelegates::OnInstanceIndexUpdated.AddLambda(
+            [this](UInstancedStaticMeshComponent* Component,TArrayView<const FInstancedStaticMeshDelegates::FInstanceIndexUpdateData>)
+            {
+                if(Component && Component->GetWorld()==World.Get())
+                {
+                    if(auto* Registration=RegisteredActors.Find(Component->GetOwner())) Registration->bDirty=true;
+                }
+            });
+    }
+    void Discover()
+    {
+        ++Stats.WorldScans;
+        TSet<TWeakObjectPtr<AActor>> Seen;
+        for(TActorIterator<AActor> It(World.Get());It;++It)
+        {
+            AActor* Actor=*It;
+            if(!IsValid(Actor) || Actor->IsActorBeingDestroyed()) continue;
+            Seen.Add(Actor);
+            if(!RegisteredActors.Contains(Actor)) AddActor(Actor);
+        }
+        for(auto It=RegisteredActors.CreateIterator();It;++It)
+            if(!Seen.Contains(It.Key())) { It.RemoveCurrent(); bBootstrapNeeded=true; bSnapshotDirty=true; }
+        bWorldRescan=false; NextWorldValidation=FPlatformTime::Seconds()+30.;
+    }
+    bool InspectActor(AActor* Actor,FActorRegistration& R)
+    {
+        ++Stats.ActorsInspected;
+        bool bComponentsChanged=R.Components.Num()!=Actor->GetComponents().Num();
+        if(!bComponentsChanged)
+            for(auto* Component:Actor->GetComponents())
+                if(!R.Components.Contains(Component)) { bComponentsChanged=true; break; }
+        UStaticMesh* DeviceMesh=R.DeviceComponent.IsValid()?R.DeviceComponent->GetStaticMesh():nullptr;
+        // Identity can be edited directly on a data component without changing the actor's
+        // tags or component set. Keep the legacy repair contract for that path as well.
+        bool bIdentityMismatch=false;
+        if(auto* TruckData=Cast<UGHSDockTruckDataComponent>(R.Telemetry.Get()))
+            bIdentityMismatch=TruckData->TruckId!=R.Identity.Id || TruckData->DockId!=R.Identity.DockId;
+        else if(auto* ForkliftData=Cast<UGHSMannedForkliftDataComponent>(R.Telemetry.Get())) bIdentityMismatch=ForkliftData->ForkliftId!=R.Identity.Id;
+        else if(auto* StackerData=Cast<UGHSStackerDataComponent>(R.Telemetry.Get())) bIdentityMismatch=StackerData->StackerId!=R.Identity.Id;
+        const bool bChanged=R.bDirty || R.Tags!=Actor->Tags || bComponentsChanged
+            || DeviceMesh!=R.DeviceMesh.Get() || (DeviceMesh && !R.DeviceBounds.Equals(DeviceMesh->GetBoundingBox()))
+            || bIdentityMismatch || (R.DeviceComponent.IsValid() && R.DeviceComponent->IsRegistered()!=R.bDeviceRegistered);
+        if(!bChanged) return false;
+        bBootstrapNeeded=true; R.bDirty=false; R.Tags=Actor->Tags;
+        R.Components.Reset();
+        for(auto* Component:Actor->GetComponents()) R.Components.Add(Component);
+        GHSTwinSelection::Identify(Actor->Tags,R.Identity);
+        R.DeviceComponent.Reset(); R.DeviceMesh.Reset(); R.Telemetry.Reset(); R.Storage.Reset();
+        R.bDeviceRegistered=false;
+        // Track even an unclassified or meshless component so a later mesh assignment
+        // can make it eligible for legacy identity reconciliation without a world scan.
+        auto* Component=Actor->FindComponentByClass<UStaticMeshComponent>();
+        if(Component && !Cast<UInstancedStaticMeshComponent>(Component))
+        {
+            R.DeviceComponent=Component; R.DeviceMesh=Component->GetStaticMesh();
+            R.DeviceBounds=R.DeviceMesh.IsValid()?R.DeviceMesh->GetBoundingBox():FBox(ForceInit);
+            R.bDeviceRegistered=Component->IsRegistered();
+        }
+        if(!R.Identity.Id.IsEmpty())
+        {
+            if(R.Identity.Type==TEXT("truck")) R.Telemetry=Actor->FindComponentByClass<UGHSDockTruckDataComponent>();
+            else if(R.Identity.Type==TEXT("forklift")) R.Telemetry=Actor->FindComponentByClass<UGHSMannedForkliftDataComponent>();
+            else if(R.Identity.Type==TEXT("stacker")) R.Telemetry=Actor->FindComponentByClass<UGHSStackerDataComponent>();
+        }
+        else
+        {
+            TInlineComponentArray<UInstancedStaticMeshComponent*> Components(Actor);
+            for(auto* StorageComponent:Components) R.Storage.Add(StorageComponent);
+        }
+        FString Owner; R.bFx=SingleTag(Actor->Tags,TEXT("FXOwner="),Owner) || Actor->ActorHasTag(TEXT("AGVAnimatedFX"));
+        return true;
+    }
+
+    void UpdateRegions()
+    {
+        RackRegion=FBox(ForceInit); FloorRegion=FBox(ForceInit); RackInstanceCount=0;
+        for(const auto& Entry:StorageCaches)
+        {
+            const auto& Cache=Entry.Value;
+            if(Cache.bRack) { RackRegion+=Cache.Bounds(); RackInstanceCount+=Cache.Count; }
+            else if(!Cache.bDock) FloorRegion+=Cache.Bounds();
+        }
+    }
+    void UpdateInstance(UInstancedStaticMeshComponent* Component,FStorageCache& Cache,int32 Index,const FTransform& Transform)
+    {
+        const FString OldId=Cache.Ids[Index];
+        FRecord Record;
+        AActor* Actor=Component->GetOwner(); UStaticMesh* Mesh=Component->GetStaticMesh();
+        Record.Id=FString::Printf(TEXT("%s:%s:%s:%d"),Cache.bRack?TEXT("RACK"):TEXT("PALLET"),*Actor->GetName(),*Component->GetName(),Index);
+        Record.Kind=Cache.bRack?TEXT("rack"):TEXT("material"); Record.Type=Cache.bRack?TEXT("rack"):TEXT("pallet");
+        Record.Title=Cache.bRack?TEXT("实际货架"):TEXT("地堆托盘"); Record.Status=TEXT("scene");
+        Record.Actor=Actor; Record.Component=Component; Record.InstanceIndex=Index; Record.MeshName=Mesh->GetName();
+        Record.Transform=Transform; Record.LocalBounds=Mesh->GetBoundingBox(); Record.LocationText=Cache.bRack?TEXT("货架区"):TEXT("地堆区");
+        Record.bAvailable=true; Record.Metric=TEXT("数据绑定"); Record.Value=TEXT("待绑定业务数据");
+        const auto* Metadata=CadByMesh.Find(Record.MeshName);
+        if(Metadata && Metadata->Num()==Cache.Count && (*Metadata)[Index].Position.Equals(Transform.GetLocation(),.1))
+        { Record.CadId=(*Metadata)[Index].Id; if(Cache.bDock) Record.Id=(*Metadata)[Index].DockId; }
+        Cache.Transforms[Index]=Transform;
+        if(Cache.bDock && !Record.Id.StartsWith(TEXT("DOCK-")))
+        { if(!OldId.IsEmpty()) Records.Remove(OldId); Cache.Ids[Index].Empty(); Cache.SetBounds(Index,FBox(ForceInit)); return; }
+        if(Cache.bDock) { Record.Kind=Record.Type=TEXT("dock"); Record.Title=TEXT("装卸月台"); Record.LocationText=Record.Id; }
+        UpdateBounds(Record); Cache.SetBounds(Index,Record.LocalBounds.TransformBy(Transform));
+        if(!OldId.IsEmpty() && OldId!=Record.Id) Records.Remove(OldId);
+        Cache.Ids[Index]=Record.Id; Records.Add(Cache.Ids[Index],MoveTemp(Record)); ++Stats.StorageRecordsBuilt;
+    }
+    void RebuildStorage(UInstancedStaticMeshComponent* Component,FStorageCache& Cache)
+    {
+        for(const FString& Id:Cache.Ids) if(!Id.IsEmpty()) Records.Remove(Id);
+        Cache=FStorageCache(); Cache.Mesh=Component->GetStaticMesh(); Cache.Count=Component->GetInstanceCount();
+        Cache.LocalBounds=Cache.Mesh->GetBoundingBox();
+        const FString MeshName=Cache.Mesh->GetName(); Cache.bRack=MeshName.StartsWith(TEXT("SM_GHS_V2Rack_")); Cache.bDock=MeshName==TEXT("SM_GHS_V2DockDoor");
+        Cache.Ids.SetNum(Cache.Count); Cache.Transforms.SetNum(Cache.Count);
+        while(Cache.LeafCount<Cache.Count) Cache.LeafCount*=2;
+        Cache.BoundsTree.Init(FBox(ForceInit),Cache.LeafCount*2);
+        for(int32 Index=0;Index<Cache.Count;++Index)
+        { FTransform Transform; if(Component->GetInstanceTransform(Index,Transform,true)) UpdateInstance(Component,Cache,Index,Transform); }
+        if(!Cache.bDock) TrackVisibility(Component->GetOwner(),false);
+        bSnapshotDirty=true;
     }
 
     void LoadMetadata()
@@ -368,7 +563,8 @@ struct FGHSTwinSceneData::FImpl
 
     static bool CurrentTransform(const FRecord& Record, FTransform& Out)
     {
-        if (!Record.Component.IsValid()) return false;
+        if (!Record.Actor.IsValid() || Record.Actor->IsActorBeingDestroyed() || !Record.Component.IsValid()
+            || !Record.Component->IsRegistered() || !Record.Component->GetStaticMesh()) return false;
         if (Record.InstanceIndex!=INDEX_NONE)
         {
             auto* Instances=Cast<UInstancedStaticMeshComponent>(Record.Component.Get());
@@ -380,12 +576,14 @@ struct FGHSTwinSceneData::FImpl
 
     const FRecord* Find(const FString& Id) const
     {
+        auto IsCurrent=[](const FRecord* Record)
+        { return Record && Record->Actor.IsValid() && !Record->Actor->IsActorBeingDestroyed()
+            && Record->Component.IsValid() && Record->Component->IsRegistered() && Record->Component->GetStaticMesh(); };
         if (const int32* Index=DeviceById.Find(Id))
-            return Devices.IsValidIndex(*Index) && Devices[*Index].Actor.IsValid()?&Devices[*Index]:nullptr;
-        if (const int32* Index=ById.Find(Id))
-            return Records.IsValidIndex(*Index) && Records[*Index].Actor.IsValid()?&Records[*Index]:nullptr;
+            return Devices.IsValidIndex(*Index) && IsCurrent(&Devices[*Index])?&Devices[*Index]:nullptr;
+        if (const FRecord* Record=Records.Find(Id)) return IsCurrent(Record)?Record:nullptr;
         const FRecord* Material=MaterialSelections.Find(Id);
-        return Material && Material->Actor.IsValid()?Material:nullptr;
+        return IsCurrent(Material)?Material:nullptr;
     }
 
     void ReadTelemetry(FRecord& Record)
@@ -395,7 +593,7 @@ struct FGHSTwinSceneData::FImpl
         if (Record.Type==TEXT("truck"))
         {
             Record.Metric=TEXT("装载托盘"); Record.LocationText=Record.DockId;
-            if (const auto* Data=Actor->FindComponentByClass<UGHSDockTruckDataComponent>(); Data && Data->TruckId==Record.Id)
+            if (const auto* Data=Cast<UGHSDockTruckDataComponent>(Record.Telemetry.Get()); Data && Data->TruckId==Record.Id)
             {
                 switch(Data->Status)
                 {
@@ -415,7 +613,7 @@ struct FGHSTwinSceneData::FImpl
         else if (Record.Type==TEXT("forklift"))
         {
             Record.Metric=TEXT("载荷"); Record.LocationText=TEXT("地堆作业区");
-            if (const auto* Data=Actor->FindComponentByClass<UGHSMannedForkliftDataComponent>(); Data && Data->ForkliftId==Record.Id)
+            if (const auto* Data=Cast<UGHSMannedForkliftDataComponent>(Record.Telemetry.Get()); Data && Data->ForkliftId==Record.Id)
             {
                 const FString ExpectedOwner=TEXT("GHSManualIdentityOwner=")+Actor->GetName();
                 const bool bCopiedOwner=Actor->Tags.ContainsByPredicate([&ExpectedOwner](FName Tag)
@@ -435,7 +633,7 @@ struct FGHSTwinSceneData::FImpl
         else if (Record.Type==TEXT("stacker"))
         {
             Record.Metric=TEXT("电量 / 举升"); Record.LocationText=TEXT("地堆作业区");
-            if (const auto* Data=Actor->FindComponentByClass<UGHSStackerDataComponent>(); Data && Data->StackerId==Record.Id)
+            if (const auto* Data=Cast<UGHSStackerDataComponent>(Record.Telemetry.Get()); Data && Data->StackerId==Record.Id)
             {
                 Record.Status=EnumState(uint8(Data->Status)); Record.bAvailable=Data->HasTelemetry(); Record.bDemo=Data->bIsDemoData;
                 Record.LastUpdate=Data->LastUpdateSeconds; Record.TaskId=Data->TaskId;
@@ -463,6 +661,11 @@ struct FGHSTwinSceneData::FImpl
 
     TSharedRef<FJsonObject> Json(const FRecord& Record) const
     {
+        FTransform Transform=Record.Transform;
+        CurrentTransform(Record,Transform);
+        const bool Hidden=!Record.Actor.IsValid() || Record.Actor->IsHidden();
+        if(Record.CachedJson.IsValid() && Record.JsonTransform.Equals(Transform,.0001) && Record.bJsonHidden==Hidden)
+            return Record.CachedJson.ToSharedRef();
         const auto Result=MakeShared<FJsonObject>();
         Result->SetStringField(TEXT("id"),Record.Id);
         Result->SetStringField(TEXT("kind"),Record.Kind);
@@ -484,7 +687,8 @@ struct FGHSTwinSceneData::FImpl
         Result->SetNumberField(TEXT("progress"),Record.Progress);
         Result->SetNumberField(TEXT("lastUpdateSeconds"),Record.LastUpdate);
         Result->SetStringField(TEXT("source"),Record.bDemo?TEXT("demo"):(Record.bLive?TEXT("telemetry"):(Record.Kind==TEXT("device")?TEXT("unknown"):TEXT("scene"))));
-        Result->SetStringField(TEXT("cadId"),Record.CadId);
+        // A cached catalogue must not keep a CAD binding after an unannounced instance move.
+        Result->SetStringField(TEXT("cadId"),Transform.GetLocation().Equals(Record.Transform.GetLocation(),.1)?Record.CadId:FString());
         Result->SetNumberField(TEXT("instanceIndex"),Record.InstanceIndex);
         Result->SetStringField(TEXT("mesh"),Record.MeshName);
         if (Record.Level>0) Result->SetNumberField(TEXT("level"),Record.Level);
@@ -497,174 +701,216 @@ struct FGHSTwinSceneData::FImpl
         }
         Result->SetStringField(TEXT("component"),Record.Component.IsValid()?Record.Component->GetName():FString());
         Result->SetStringField(TEXT("actor"),Record.Actor.IsValid()?Record.Actor->GetName():FString());
-        FTransform Transform=Record.Transform;
-        CurrentTransform(Record,Transform);
         const FBox Bounds=Record.LocalBounds.TransformBy(Transform);
         SetVector(Result,TEXT("worldPosition"),Bounds.GetCenter());
         SetVector(Result,TEXT("extent"),Bounds.GetExtent());
+        Record.CachedJson=Result; Record.JsonTransform=Transform; Record.bJsonHidden=Hidden;
         return Result;
     }
 };
 
 FGHSTwinSceneData::FGHSTwinSceneData() : Impl(MakeUnique<FImpl>()) {}
-FGHSTwinSceneData::~FGHSTwinSceneData() { Impl->RestoreVisibility(); }
+FGHSTwinSceneData::~FGHSTwinSceneData() { Impl->Detach(); Impl->RestoreVisibility(); }
 
-void FGHSTwinSceneData::Refresh(UWorld* World)
+void FGHSTwinSceneData::Refresh(UWorld* World,bool bBootstrapLegacyComponents)
 {
-    if (Impl->World.Get()!=World)
+    if(Impl->World.Get()!=World)
     {
-        Impl->RestoreVisibility(); Impl->World=World; Impl->MaterialSelections.Reset(); Impl->StorageCaches.Reset();
-        Impl->Records.Reset(); Impl->ById.Reset(); Impl->StoragePoints.Reset(); Impl->RackInstanceCount=0;
-        Impl->RackRegion=FBox(ForceInit); Impl->FloorRegion=FBox(ForceInit);
+        Impl->Detach(); Impl->RestoreVisibility();
+        Impl=MakeUnique<FImpl>(); Impl->World=World;
+        if(IsValid(World)) Impl->Attach(World);
     }
-    Impl->MapName=IsValid(World)?World->GetMapName():FString();
-    Impl->Devices.Reset(); Impl->DeviceById.Reset(); Impl->CachedPoints.Reset();
-    if (!IsValid(World)) return;
+    if(!IsValid(World)) return;
+    const FString MapName=World->GetMapName();
+    bool bContentChanged=Impl->MapName!=MapName;
+    if(bContentChanged) { Impl->MapName=MapName; Impl->bSnapshotDirty=true; }
     Impl->LoadMetadata();
-    const double Now=FPlatformTime::Seconds();
-    bool bStorageChanged=false;
-    TSet<TWeakObjectPtr<UInstancedStaticMeshComponent>> SeenStorage;
-    TMap<FString,int32> IdentityCounts;
-    for (TActorIterator<AActor> It(World); It; ++It)
+    if(Impl->bWorldRescan || FPlatformTime::Seconds()>=Impl->NextWorldValidation) Impl->Discover();
+    bool bRegistryChanged=Impl->bBootstrapNeeded;
+    TArray<AActor*> Actors;
+    for(auto It=Impl->RegisteredActors.CreateIterator();It;++It)
     {
-        GHSTwinSelection::FIdentity Identity;
-        if (GHSTwinSelection::Identify(It->Tags,Identity)) ++IdentityCounts.FindOrAdd(Identity.Id);
+        AActor* Actor=It.Key().Get();
+        if(!Actor || Actor->IsActorBeingDestroyed() || Actor->GetWorld()!=World)
+        { It.RemoveCurrent(); bRegistryChanged=true; continue; }
+        Actors.Add(Actor); bRegistryChanged|=Impl->InspectActor(Actor,It.Value());
     }
-    for (TActorIterator<AActor> It(World); It; ++It)
+    if(bBootstrapLegacyComponents && (!Impl->bLegacyBootstrapped || Impl->bBootstrapNeeded || bRegistryChanged))
     {
-        AActor* Actor=*It;
-        if (!IsValid(Actor) || Actor->IsActorBeingDestroyed()) continue;
-        GHSTwinSelection::FIdentity Identity;
-        if (GHSTwinSelection::Identify(Actor->Tags,Identity))
+        BootstrapActors(World,Actors);
+        Impl->bLegacyBootstrapped=true;
+        for(auto& Entry:Impl->RegisteredActors)
+            if(auto* Actor=Entry.Key.Get()) bRegistryChanged|=Impl->InspectActor(Actor,Entry.Value);
+    }
+    Impl->bBootstrapNeeded=false;
+    if(bRegistryChanged)
+    {
+        TMap<FString,int32> Counts;
+        for(const auto& Entry:Impl->RegisteredActors)
+            if(!Entry.Value.Identity.Id.IsEmpty()) ++Counts.FindOrAdd(Entry.Value.Identity.Id);
+        TArray<FImpl::FRecord> Devices;
+        for(const auto& Entry:Impl->RegisteredActors)
         {
-            // A copied ID is ambiguous. Never silently bind it to whichever Actor iteration returns first.
-            if (IdentityCounts.FindRef(Identity.Id)!=1) continue;
-            UStaticMeshComponent* Component=Actor->FindComponentByClass<UStaticMeshComponent>();
-            if (!Component || !Component->GetStaticMesh() || Cast<UInstancedStaticMeshComponent>(Component)) continue;
+            AActor* Actor=Entry.Key.Get(); const auto& R=Entry.Value;
+            auto* Component=R.DeviceComponent.Get(); auto* Mesh=R.DeviceMesh.Get();
+            if(!Actor || !Component || !Component->IsRegistered() || !Mesh || R.Identity.Id.IsEmpty() || Counts.FindRef(R.Identity.Id)!=1) continue;
             FImpl::FRecord Record;
-            Record.Id=Identity.Id; Record.Type=Identity.Type; Record.Title=Identity.Title; Record.DockId=Identity.DockId;
-            Record.Kind=TEXT("device"); Record.Actor=Actor; Record.Component=Component;
-            Record.MeshName=Component->GetStaticMesh()->GetName(); Record.Transform=Component->GetComponentTransform();
-            Record.LocalBounds=Component->GetStaticMesh()->GetBoundingBox();
-            FImpl::UpdateBounds(Record); Impl->ReadTelemetry(Record);
-            Impl->Devices.Add(MoveTemp(Record)); Impl->TrackVisibility(Actor,true);
-            continue;
+            if(const int32* Old=Impl->DeviceById.Find(R.Identity.Id); Old && Impl->Devices.IsValidIndex(*Old))
+            {
+                const auto& Prior=Impl->Devices[*Old];
+                if(Prior.Actor.Get()==Actor && Prior.Component.Get()==Component && Prior.MeshName==Mesh->GetName()
+                    && Prior.DockId==R.Identity.DockId && Prior.LocalBounds.Equals(Mesh->GetBoundingBox()))
+                    Record=MoveTemp(Impl->Devices[*Old]);
+            }
+            Record.Id=R.Identity.Id; Record.Type=R.Identity.Type; Record.Title=R.Identity.Title; Record.DockId=R.Identity.DockId;
+            Record.Kind=TEXT("device"); Record.Actor=Actor; Record.Component=Component; Record.Telemetry=R.Telemetry;
+            Record.MeshName=Mesh->GetName(); Record.LocalBounds=Mesh->GetBoundingBox();
+            Devices.Add(MoveTemp(Record)); Impl->TrackVisibility(Actor,true);
         }
-        TInlineComponentArray<UInstancedStaticMeshComponent*> Components(Actor);
-        for (UInstancedStaticMeshComponent* Component : Components)
+        Impl->Devices=MoveTemp(Devices);
+        Impl->Devices.Sort([](const FImpl::FRecord& A,const FImpl::FRecord& B){return A.Id<B.Id;});
+        Impl->DeviceById.Reset();
+        for(int32 I=0;I<Impl->Devices.Num();++I) Impl->DeviceById.Add(Impl->Devices[I].Id,I);
+        Impl->bSnapshotDirty=true;
+        bContentChanged=true;
+    }
+    for(auto& Record:Impl->Devices)
+    {
+        const FImpl::FRecord Before=Record;
+        Record.Status=TEXT("unknown"); Record.LocationText.Empty(); Record.Metric.Empty(); Record.Value=TEXT("—");
+        Record.TaskId.Empty(); Record.Reason.Empty(); Record.DriverId.Empty(); Record.Progress=0; Record.LastUpdate=-1;
+        Record.bLive=Record.bDemo=Record.bAvailable=Record.bAlert=false;
+        FImpl::CurrentTransform(Record,Record.Transform);
+        if(!Before.Transform.Equals(Record.Transform,.0001)) bContentChanged=true;
+        FImpl::UpdateBounds(Record); Impl->ReadTelemetry(Record);
+        if(Before.Status!=Record.Status || Before.LocationText!=Record.LocationText || Before.Metric!=Record.Metric
+            || Before.Value!=Record.Value || Before.TaskId!=Record.TaskId || Before.Reason!=Record.Reason || Before.DriverId!=Record.DriverId
+            || Before.Progress!=Record.Progress || Before.LastUpdate!=Record.LastUpdate || Before.bLive!=Record.bLive
+            || Before.bDemo!=Record.bDemo || Before.bAvailable!=Record.bAvailable || Before.bAlert!=Record.bAlert)
+        { Record.CachedJson.Reset(); Impl->bSnapshotDirty=true; bContentChanged=true; }
+    }
+    TSet<TWeakObjectPtr<UInstancedStaticMeshComponent>> SeenStorage;
+    bool bStorageChanged=false;
+    for(const auto& Entry:Impl->RegisteredActors)
+    {
+        if(Entry.Value.bFx) Impl->TrackVisibility(Entry.Key.Get(),true);
+        for(const auto& Weak:Entry.Value.Storage)
         {
-            UStaticMesh* Mesh=Component->GetStaticMesh();
-            if (!Mesh) continue;
-            const FString MeshName=Mesh->GetName();
-            const bool bRack=MeshName.StartsWith(TEXT("SM_GHS_V2Rack_"));
-            const bool bFloor=MeshName.StartsWith(TEXT("SM_GHS_Presentation_Cargo"));
-            const bool bDock=MeshName==TEXT("SM_GHS_V2DockDoor");
-            if (!bRack && !bFloor && !bDock) continue;
+            auto* Component=Weak.Get(); UStaticMesh* Mesh=Component?Component->GetStaticMesh():nullptr;
+            if(!Mesh || !Component->IsRegistered()) continue;
+            const FString Name=Mesh->GetName();
+            if(!Name.StartsWith(TEXT("SM_GHS_V2Rack_")) && !Name.StartsWith(TEXT("SM_GHS_Presentation_Cargo")) && Name!=TEXT("SM_GHS_V2DockDoor")) continue;
             SeenStorage.Add(Component);
+            const bool bNew=!Impl->StorageCaches.Contains(Component);
             auto& Cache=Impl->StorageCaches.FindOrAdd(Component);
-            const int32 InstanceCount=Component->GetInstanceCount();
-            const bool bRefreshCache=Cache.Mesh.Get()!=Mesh || Cache.Count!=InstanceCount
-                || !Cache.ComponentTransform.Equals(Component->GetComponentTransform()) || Now-Cache.CheckedAt>30.;
-            if (!bRefreshCache)
-            {
-                if (!bDock) Impl->TrackVisibility(Actor,false);
-                continue;
-            }
-            bStorageChanged=true;
-            Cache.Mesh=Mesh; Cache.Count=InstanceCount; Cache.ComponentTransform=Component->GetComponentTransform();
-            Cache.CheckedAt=Now; Cache.Entries.Reset(); Cache.Entries.Reserve(InstanceCount);
-            const auto* Metadata=Impl->CadByMesh.Find(MeshName);
-            const bool bCountMatches=Metadata && Metadata->Num()==InstanceCount;
-            for (int32 Index=0; Index<InstanceCount; ++Index)
-            {
-                FImpl::FRecord Record;
-                if (!Component->GetInstanceTransform(Index,Record.Transform,true)) continue;
-                Record.Id=FString::Printf(TEXT("%s:%s:%s:%d"),bRack?TEXT("RACK"):TEXT("PALLET"),*Actor->GetName(),*Component->GetName(),Index);
-                Record.Kind=bRack?TEXT("rack"):TEXT("material"); Record.Type=bRack?TEXT("rack"):TEXT("pallet");
-                Record.Title=bRack?TEXT("实际货架"):TEXT("地堆托盘"); Record.Status=TEXT("scene");
-                Record.Actor=Actor; Record.Component=Component; Record.InstanceIndex=Index; Record.MeshName=MeshName;
-                Record.LocalBounds=Mesh->GetBoundingBox(); Record.LocationText=bRack?TEXT("货架区"):TEXT("地堆区");
-                Record.bAvailable=true; Record.Metric=TEXT("数据绑定"); Record.Value=TEXT("待绑定业务数据");
-                // CAD IDs are only supplied after both the count and the actual instance transform agree.
-                if (bCountMatches && (*Metadata)[Index].Position.Equals(Record.Transform.GetLocation(),.1))
-                {
-                    Record.CadId=(*Metadata)[Index].Id;
-                    if (bDock) Record.Id=(*Metadata)[Index].DockId;
-                }
-                if (bDock)
-                {
-                    if (!Record.Id.StartsWith(TEXT("DOCK-"))) continue;
-                    Record.Kind=Record.Type=TEXT("dock"); Record.Title=TEXT("装卸月台"); Record.LocationText=Record.Id;
-                }
-                FImpl::UpdateBounds(Record); Cache.Entries.Add(MoveTemp(Record));
-            }
-            if (!bDock) Impl->TrackVisibility(Actor,false);
+            if(bNew) Impl->StorageOrder.Add(Component);
+            if(bNew || Cache.Mesh.Get()!=Mesh || Cache.Count!=Component->GetInstanceCount() || !Cache.LocalBounds.Equals(Mesh->GetBoundingBox()))
+            { Impl->RebuildStorage(Component,Cache); bStorageChanged=true; }
         }
-        FString FXOwner;
-        if (SingleTag(Actor->Tags,TEXT("FXOwner="),FXOwner) || Actor->ActorHasTag(TEXT("AGVAnimatedFX")))
-            Impl->TrackVisibility(Actor,true);
     }
-    for (auto It=Impl->StorageCaches.CreateIterator(); It; ++It)
-        if (!SeenStorage.Contains(It.Key())) { It.RemoveCurrent(); bStorageChanged=true; }
-    if (bStorageChanged)
-    {
-        Impl->Records.Reset(); Impl->ById.Reset(); Impl->StoragePoints.Reset(); Impl->RackInstanceCount=0;
-        Impl->RackRegion=FBox(ForceInit); Impl->FloorRegion=FBox(ForceInit);
-        for (const auto& Cache : Impl->StorageCaches) Impl->Records.Append(Cache.Value.Entries);
-        Impl->Records.Sort([](const FImpl::FRecord& A,const FImpl::FRecord& B) { return A.Id<B.Id; });
-        for (int32 Index=0; Index<Impl->Records.Num(); ++Index)
+    for(auto It=Impl->StorageCaches.CreateIterator();It;++It)
+        if(!SeenStorage.Contains(It.Key()))
         {
-            const auto& Record=Impl->Records[Index];
-            Impl->ById.Add(Record.Id,Index);
-            // One area POI replaces selectable rack-structure instances.
-            if (Record.Kind==TEXT("rack")) { ++Impl->RackInstanceCount; Impl->RackRegion+=FBox(Record.Center-Record.Extent,Record.Center+Record.Extent); }
-            else if (Record.Type==TEXT("pallet")) Impl->FloorRegion+=FBox(Record.Center-Record.Extent,Record.Center+Record.Extent);
+            for(const FString& Id:It.Value().Ids) if(!Id.IsEmpty()) Impl->Records.Remove(Id);
+            Impl->StorageOrder.Remove(It.Key()); It.RemoveCurrent();
+            bStorageChanged=true; Impl->bSnapshotDirty=true;
         }
-    }
-    Impl->Devices.Sort([](const FImpl::FRecord& A,const FImpl::FRecord& B) { return A.Id<B.Id; });
-    for (int32 Index=0; Index<Impl->Devices.Num(); ++Index)
+    if(bStorageChanged) { Impl->UpdateRegions(); bContentChanged=true; }
+    for(auto It=Impl->MaterialSelections.CreateIterator();It;++It)
     {
-        const auto& Record=Impl->Devices[Index];
-        Impl->DeviceById.Add(Record.Id,Index);
-        Impl->CachedPoints.Add({Record.Id,Record.Id,Record.Type,Record.Status,
-            Record.Center+FVector(0,0,Record.Extent.Z+80),Record.bAlert});
+        auto& Selection=It.Value(); const auto* Rack=Impl->Find(Selection.ParentId);
+        if(!Rack) { It.RemoveCurrent(); continue; }
+        if(Selection.CadId!=Rack->CadId || !Selection.Transform.Equals(Rack->Transform,.0001))
+        { Selection.CadId=Rack->CadId; Selection.Transform=Rack->Transform; Selection.CachedJson.Reset(); }
+        Selection.Actor=Rack->Actor; Selection.Component=Rack->Component;
     }
-    Impl->CachedPoints.Append(Impl->StoragePoints);
-    for (auto It=Impl->MaterialSelections.CreateIterator(); It; ++It)
-    {
-        FImpl::FRecord& Selection=It.Value();
-        const auto* Rack=Impl->Find(Selection.ParentId);
-        if (!Rack) { It.RemoveCurrent(); continue; }
-        Selection.Actor=Rack->Actor; Selection.Component=Rack->Component; Selection.Transform=Rack->Transform;
-        Selection.CadId=Rack->CadId; FImpl::UpdateBounds(Selection);
-    }
-    Impl->Visibility.RemoveAll([](const FImpl::FVisibility& Item) { return !Item.Actor.IsValid(); });
+    Impl->Visibility.RemoveAll([this](const FImpl::FVisibility& Item)
+    { if(Item.Actor.IsValid()) return false; Impl->VisibilityTracked.Remove(Item.Actor); return true; });
     Impl->UpdateLayers();
+    Impl->Stats.RegisteredActors=Impl->RegisteredActors.Num(); Impl->Stats.StorageComponents=Impl->StorageCaches.Num();
+    if(bContentChanged) ++Impl->Revision;
 }
 
+void FGHSTwinSceneData::MaintainCache(int32 InstanceBudget)
+{
+    if(InstanceBudget<=0 || !Impl->World.IsValid() || Impl->StorageOrder.IsEmpty()) return;
+    // Index events flag catalogue changes; transforms need bounded real-data verification:
+    // UpdateInstanceTransform(..., bMarkRenderStateDirty=false) emits no public change delegate.
+    // Never reset a partially verified cursor on render dirtiness: continuous edits must not
+    // starve later instances or force a full component rebuild into one frame.
+    int32 Remaining=InstanceBudget, EmptyVisits=0;
+    bool bChanged=false;
+    while(Remaining>0 && EmptyVisits<Impl->StorageOrder.Num())
+    {
+        Impl->StorageCursor%=Impl->StorageOrder.Num();
+        const auto Weak=Impl->StorageOrder[Impl->StorageCursor];
+        auto* Component=Weak.Get(); auto* Cache=Impl->StorageCaches.Find(Weak);
+        if(!Component || !Cache || !Cache->Mesh.IsValid() || !Component->IsRegistered()
+            || Cache->Mesh.Get()!=Component->GetStaticMesh() || Cache->Count!=Component->GetInstanceCount() || Cache->Count==0)
+        { ++Impl->StorageCursor; ++EmptyVisits; continue; }
+        const int32 Count=FMath::Min(Remaining,Cache->Count-Cache->Cursor);
+        for(int32 I=0;I<Count;++I)
+        {
+            const int32 Index=Cache->Cursor++; FTransform Transform; ++Impl->Stats.InstancesVerified;
+            if(Component->GetInstanceTransform(Index,Transform,true) && !Cache->Transforms[Index].Equals(Transform,.0001))
+            { Impl->UpdateInstance(Component,*Cache,Index,Transform); bChanged=true; }
+        }
+        Remaining-=Count;
+        if(Cache->Cursor>=Cache->Count)
+        { Cache->Cursor=0; ++Impl->StorageCursor; ++EmptyVisits; }
+    }
+    if(bChanged) { Impl->UpdateRegions(); ++Impl->Revision; }
+}
+
+FGHSTwinSceneCacheStats FGHSTwinSceneData::GetCacheStats() const { return Impl->Stats; }
+uint64 FGHSTwinSceneData::GetRevision() const { return Impl->Revision; }
 FString FGHSTwinSceneData::SnapshotJson(const FString& SelectedId) const
 {
-    const auto Root=MakeShared<FJsonObject>();
-    Root->SetBoolField(TEXT("connected"),Impl->World.IsValid());
-    Root->SetStringField(TEXT("mapName"),Impl->MapName);
-    TArray<TSharedPtr<FJsonValue>> Equipment,Facilities;
-    for (const auto& Record : Impl->Devices)
+    // Cheap transform/visibility comparison, without allocating JSON or computing bounds.
+    for(const auto& Record:Impl->Devices)
     {
-        if (Record.Kind!=TEXT("device") || !Record.Actor.IsValid()) continue;
-        (Record.Type==TEXT("charger")?Facilities:Equipment).Add(MakeShared<FJsonValueObject>(Impl->Json(Record)));
+        FTransform Transform;
+        if(!Record.Actor.IsValid() || Record.Actor->IsActorBeingDestroyed() || !FImpl::CurrentTransform(Record,Transform))
+        { Impl->bSnapshotDirty=true; continue; }
+        if(!Record.CachedJson.IsValid() || !Record.JsonTransform.Equals(Transform,.0001) || Record.bJsonHidden!=Record.Actor->IsHidden())
+            Impl->bSnapshotDirty=true;
     }
-    Root->SetArrayField(TEXT("equipment"),Equipment); Root->SetArrayField(TEXT("facilities"),Facilities);
-    Root->SetNumberField(TEXT("rackInstanceCount"),Impl->RackInstanceCount);
-    if (!SelectedId.IsEmpty())
+    if(Impl->bSnapshotDirty || Impl->CachedSnapshotBase.IsEmpty())
     {
-        if (const auto* Selected=Impl->Find(SelectedId)) Root->SetObjectField(TEXT("selection"),Impl->Json(*Selected));
-        else Root->SetField(TEXT("selection"),MakeShared<FJsonValueNull>());
+        const auto Root=MakeShared<FJsonObject>();
+        Root->SetBoolField(TEXT("connected"),Impl->World.IsValid()); Root->SetStringField(TEXT("mapName"),Impl->MapName);
+        TArray<TSharedPtr<FJsonValue>> Equipment,Facilities;
+        for(const auto& Record:Impl->Devices)
+            if(Impl->Find(Record.Id))
+                (Record.Type==TEXT("charger")?Facilities:Equipment).Add(MakeShared<FJsonValueObject>(Impl->Json(Record)));
+        Root->SetArrayField(TEXT("equipment"),Equipment); Root->SetArrayField(TEXT("facilities"),Facilities);
+        Root->SetNumberField(TEXT("rackInstanceCount"),Impl->RackInstanceCount);
+        Impl->CachedSnapshotBase.Empty();
+        FJsonSerializer::Serialize(Root,TJsonWriterFactory<TCHAR,TCondensedJsonPrintPolicy<TCHAR>>::Create(&Impl->CachedSnapshotBase));
+        ++Impl->Stats.SnapshotSerializations; Impl->bSnapshotDirty=false;
     }
-    FString Result;
-    FJsonSerializer::Serialize(Root,TJsonWriterFactory<>::Create(&Result));
-    return Result;
+    if(SelectedId.IsEmpty()) return Impl->CachedSnapshotBase;
+    FString Selection=TEXT("null");
+    if(const auto* Selected=Impl->Find(SelectedId))
+    {
+        const auto Object=Impl->Json(*Selected);
+        if(Impl->CachedSelectionObject!=Object)
+        {
+            Impl->CachedSelectionJson.Empty();
+            FJsonSerializer::Serialize(Object,TJsonWriterFactory<TCHAR,TCondensedJsonPrintPolicy<TCHAR>>::Create(&Impl->CachedSelectionJson));
+            Impl->CachedSelectionObject=Object; ++Impl->Stats.SnapshotSerializations;
+        }
+        Selection=Impl->CachedSelectionJson;
+    }
+    return Impl->CachedSnapshotBase.LeftChop(1)+TEXT(",\"selection\":")+Selection+TEXT("}");
 }
 
+bool FGHSTwinSceneData::BuildSnapshotIfChanged(const FString& SelectedId,FString& OutJson,bool bForce)
+{
+    FString Current=SnapshotJson(SelectedId);
+    if(!bForce && Impl->bHasSentSnapshot && Current==Impl->LastSentSnapshot) { OutJson.Empty(); return false; }
+    Impl->LastSentSnapshot=Current; Impl->bHasSentSnapshot=true; OutJson=MoveTemp(Current); return true;
+}
 bool FGHSTwinSceneData::Resolve(const FString& Id,FVector& OutLocation,FVector& OutExtent) const
 {
     const auto* Record=Impl->Find(Id);
@@ -676,6 +922,15 @@ bool FGHSTwinSceneData::Resolve(const FString& Id,FVector& OutLocation,FVector& 
     const FBox Bounds=Record->LocalBounds.TransformBy(Transform);
     OutLocation=Bounds.GetCenter(); OutExtent=Bounds.GetExtent();
     return true;
+}
+
+bool FGHSTwinSceneData::ResolvePoint(const FString& Id,FVector& OutLocation) const
+{
+    FVector Center,Extent;
+    const bool bResolved=Id.StartsWith(TEXT("REGION:"))
+        ?RegionBounds(Id.Mid(7),Center,Extent):Resolve(Id,Center,Extent);
+    if(!bResolved) return false;
+    OutLocation=Center+FVector(0,0,Extent.Z+80); return true;
 }
 
 bool FGHSTwinSceneData::RegionBounds(const FString& Region,FVector& OutLocation,FVector& OutExtent) const
@@ -701,16 +956,15 @@ bool FGHSTwinSceneData::PickRay(const FVector& Origin,const FVector& Direction,F
     double Closest=TNumericLimits<double>::Max();
     const FImpl::FRecord* Selected=nullptr;
     const FImpl::FSlot* SelectedSlot=nullptr;
-    for (const auto* Collection : {&Impl->Devices,&Impl->Records})
-    for (const auto& Record : *Collection)
+    auto Consider=[&](const FImpl::FRecord& Record)
     {
-        if (!Record.Actor.IsValid() || Record.Actor->IsHidden() || !Record.Component.IsValid()
-            || !Record.Component->IsVisible() || Record.Component->bHiddenInGame) continue;
-        if (Record.Kind==TEXT("dock")) continue;
+        if (!Record.Actor.IsValid() || Record.Actor->IsActorBeingDestroyed() || Record.Actor->IsHidden() || !Record.Component.IsValid()
+            || !Record.Component->IsVisible() || Record.Component->bHiddenInGame) return;
+        if (Record.Kind==TEXT("dock")) return;
         FTransform Transform;
-        if (!FImpl::CurrentTransform(Record,Transform)) continue;
+        if (!FImpl::CurrentTransform(Record,Transform)) return;
         double Distance=0;
-        if (!GHSTwinSelection::IntersectBox(Origin,Direction,Transform,Record.LocalBounds,Distance)) continue;
+        if (!GHSTwinSelection::IntersectBox(Origin,Direction,Transform,Record.LocalBounds,Distance)) return;
         const FImpl::FSlot* HitSlot=nullptr;
         if (Record.Kind==TEXT("rack"))
         {
@@ -723,11 +977,13 @@ bool FGHSTwinSceneData::PickRay(const FVector& Origin,const FVector& Direction,F
                 { SlotDistance=Hit; HitSlot=&Slot; }
             }
             if (HitSlot) Distance=SlotDistance;
-            else continue; // Rack steel is context; only its actual cargo slots can be selected.
+            else return; // Rack steel is context; only its actual cargo slots can be selected.
         }
         if (Distance<Closest)
         { Closest=Distance; Selected=&Record; SelectedSlot=HitSlot; }
-    }
+    };
+    for(const auto& Record:Impl->Devices) Consider(Record);
+    for(const auto& Entry:Impl->Records) Consider(Entry.Value);
     if (!Selected) return false;
     OutId=Selected->Id;
     if (SelectedSlot)
@@ -738,7 +994,9 @@ bool FGHSTwinSceneData::PickRay(const FVector& Origin,const FVector& Direction,F
         Material.Kind=TEXT("material"); Material.Type=TEXT("pallet");
         Material.Title=FString::Printf(TEXT("货架托盘 · 第 %d 层 / 第 %d 列"),SelectedSlot->Level,SelectedSlot->Column);
         Material.Level=SelectedSlot->Level; Material.Column=SelectedSlot->Column; Material.LocalBounds=SelectedSlot->Bounds;
+        Material.CachedJson.Reset();
         FImpl::CurrentTransform(Material,Material.Transform);
+        if(!Material.Transform.GetLocation().Equals(Selected->Transform.GetLocation(),.1)) Material.CadId.Empty();
         FImpl::UpdateBounds(Material); OutId=Material.Id;
         if (Impl->MaterialSelections.Num()>=64 && !Impl->MaterialSelections.Contains(OutId)) Impl->MaterialSelections.Reset();
         Impl->MaterialSelections.Add(OutId,MoveTemp(Material));
@@ -749,16 +1007,14 @@ bool FGHSTwinSceneData::PickRay(const FVector& Origin,const FVector& Direction,F
 TArray<FGHSTwinPoint> FGHSTwinSceneData::Points() const
 {
     TArray<FGHSTwinPoint> Result;
-    for (const auto& Point : Impl->CachedPoints)
-        if (const auto* Record=Impl->Find(Point.Id); Record && Record->Actor.IsValid() && !Record->Actor->IsHidden())
+    Result.Reserve(Impl->Devices.Num()+2);
+    for (const auto& Record:Impl->Devices)
+        if(Record.Actor.IsValid() && !Record.Actor->IsActorBeingDestroyed() && !Record.Actor->IsHidden())
         {
-            FGHSTwinPoint Current=Point;
-            FTransform Transform;
-            if (FImpl::CurrentTransform(*Record,Transform))
+            FVector Location;
+            if(ResolvePoint(Record.Id,Location))
             {
-                const FBox Bounds=Record->LocalBounds.TransformBy(Transform);
-                Current.Location=Bounds.GetCenter()+FVector(0,0,Bounds.GetExtent().Z+80);
-                Result.Add(MoveTemp(Current));
+                Result.Add({Record.Id,Record.Id,Record.Type,Record.Status,Location,Record.bAlert});
             }
         }
     if (Impl->bRacksVisible)
@@ -772,5 +1028,7 @@ TArray<FGHSTwinPoint> FGHSTwinSceneData::Points() const
 
 void FGHSTwinSceneData::ApplyLayers(bool Equipment,bool Racks)
 {
+    if(Impl->bEquipmentVisible!=Equipment || Impl->bRacksVisible!=Racks)
+    { ++Impl->Revision; Impl->bSnapshotDirty=true; }
     Impl->bEquipmentVisible=Equipment; Impl->bRacksVisible=Racks; Impl->UpdateLayers();
 }

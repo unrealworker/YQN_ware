@@ -1,7 +1,10 @@
 (function(){
 'use strict';
-const M=window.TwinModel,D=M.demo,S=M.createState();
+const M=window.TwinModel,D=M.demo,S=M.createState(),Dropdown=window.TwinDropdown;
 let snapshot=null,selectionKey='',toastTimer,renderToken=0,previousFocus=null;
+let prepared=M.prepareSnapshot(null),panelVisible=true,snapshotDirty=false,hiddenRestore=false,pendingFocusRefresh=false;
+let diagnosticsEnabled=!/(?:^|[?&])diagnostics=(?:0|false)(?:&|$)/i.test(window.location&&window.location.search||'');
+const performanceCounts={receivedSnapshots:0,normalizedSnapshots:0,htmlBuilds:0,domWrites:0,skippedRenders:0,hiddenSnapshots:0};
 const main=document.getElementById('main'),page=document.getElementById('page'),nav=document.getElementById('navigation');
 const colors={running:'#6e91ee',idle:'#bcc6d4',warning:'#da963f',fault:'#cb5663',offline:'#8997aa',unknown:'#d0d7e2',charging:'#356bfa',completed:'#356bfa',executing:'#8daafc',waiting:'#dbe4f2',exception:'#da963f'};
 const names={overview:'总览',inventory:'库存',orders:'订单',devices:'设备',alerts:'告警',trace:'追溯',scene:'场景'};
@@ -24,21 +27,21 @@ function legend(parts,inline=false){return '<div class="'+(inline?'legend-inline
 function stateBars(rows,facility=false){const counts=M.countStates(rows),keys=facility?['charging','idle','offline']:['running','idle','warning','fault','offline'];if(counts.unknown)keys.push('unknown');const max=Math.max(1,...keys.map(k=>counts[k]||0));return keys.map(k=>'<div class="bar-row"><span>'+M.stateNames[k]+'</span><div class="bar-track"><div class="bar-fill" style="width:'+((counts[k]||0)/max*100)+'%;background:'+colors[k]+'"></div></div><span class="num">'+(counts[k]||0)+'</span></div>').join('');}
 function facilityChart(rows){const counts=M.countStates(rows),parts=['charging','idle','offline','unknown'].filter(k=>counts[k]).map(k=>({label:M.stateNames[k],value:counts[k],color:colors[k]}));return '<div class="chart-split">'+ring(parts.length?parts:[{value:1,color:'#e5eaf2'}],String(rows.length),'充电设施 / 个')+legend(parts)+'</div>';}
 function search(key,value,placeholder){return '<label class="search" style="display:block">'+icon('search')+'<input type="search" data-search="'+key+'" value="'+esc(value)+'" placeholder="'+placeholder+'" aria-label="'+placeholder+'" autocomplete="off"></label>';}
-function select(key,value,items){return '<select data-filter="'+key+'" aria-label="'+esc(key.split('.').pop())+'">'+items.map(([v,t])=>'<option value="'+v+'"'+(v===value?' selected':'')+'>'+t+'</option>').join('')+'</select>';}
+function select(key,value,items){return Dropdown.render(key,value,items);}
 function tabs(key,value,items){return '<div class="tabs" role="tablist">'+items.map(([v,t])=>'<button role="tab" aria-selected="'+(v===value)+'" class="'+(v===value?'active':'')+'" data-action="tab" data-key="'+key+'" data-value="'+v+'">'+t+'</button>').join('')+'</div>';}
 function empty(title,copy,reset=''){return '<div class="empty"><strong>'+title+'</strong>'+copy+(reset?'<br>'+link('清除筛选','reset',attr('scope',reset)):'')+'</div>';}
 function pager(p,scope,unit){return '<div class="pager"><span class="num">'+p.start+'–'+p.end+' / '+p.total+' '+unit+'</span><div class="pager-controls"><button aria-label="上一页" data-action="page" data-scope="'+scope+'" data-value="'+(p.page-1)+'" '+(p.page===1?'disabled':'')+'>‹</button><span>'+p.page+' / '+p.pages+'</span><button aria-label="下一页" data-action="page" data-scope="'+scope+'" data-value="'+(p.page+1)+'" '+(p.page===p.pages?'disabled':'')+'>›</button></div></div>';}
-function equipment(){return M.equipmentFor(snapshot,S.filters.devices.facility);}
-function findDevice(id){return M.equipmentFor(snapshot).concat(M.equipmentFor(snapshot,true)).find(r=>r.id===id);}
+function equipment(){return S.filters.devices.facility?prepared.facilities:prepared.equipment;}
+function findDevice(id){return prepared.byId.get(id);}
 function photo(type){return 'assets/'+(M.typeNames[type]?type:'truck')+'.png';}
 function equipRow(e){return '<button class="list-row media-row" data-action="device" data-id="'+esc(e.id)+'"><img class="thumb" src="'+photo(e.type)+'" alt="'+M.typeNames[e.type]+'模型"><span><span class="row-title"><span>'+esc(e.id)+'</span><span class="link">详情 →</span></span><span class="row-sub" style="display:block">'+M.typeNames[e.type]+' · '+esc(e.location)+'</span><span class="row-sub '+(e.status==='fault'?'red':e.status==='warning'?'amber':e.status==='running'?'green':'')+'" style="display:block">'+M.stateNames[e.status]+' · '+esc(e.value||e.taskId||'—')+'</span></span></button>';}
 function orderParts(direction){return ['completed','executing','waiting','exception'].map(k=>({label:M.stateNames[k],value:D.orders[direction][k],color:colors[k]}));}
-function overview(){const c=D.capacity,rows=M.equipmentFor(snapshot);return header('仓库运营总览','今日 · 2026-10-20 / 业务演示快照 14:20:08')+'<div class="kpis"><button class="kpi" data-action="nav" data-page="orders" data-direction="inbound"><span>今日入库 / 单</span><strong class="num">128</strong><small>已完成 96 · 完成率 75.0%</small></button><button class="kpi" data-action="nav" data-page="orders" data-direction="outbound"><span>今日出库 / 单</span><strong class="num">156</strong><small>已完成 118 · 完成率 75.6%</small></button><button class="kpi" data-action="nav" data-page="inventory"><span>已用托位</span><strong class="num">1,728</strong><small>总容量 2,400 托位</small></button><button class="kpi" data-action="nav" data-page="inventory"><span>可用托位</span><strong class="num">576</strong><small>另有 96 个空位锁定</small></button></div>'+section('库容占用','<div class="chart-split">'+ring([{value:c.occupied,color:'#356bfa'},{value:c.available,color:'#dce6ff'},{value:c.lockedEmpty,color:'#aebccc'}],'72.0%','占用率')+legend([{label:'已占用',value:'72%',color:'#356bfa'},{label:'可用',value:'24%',color:'#dce6ff'},{label:'空位锁定',value:'4%',color:'#aebccc'}])+'</div>',link('查看库存 →','nav',attr('page','inventory')))+section('今日订单进度 · 284 单',['inbound','outbound'].map(d=>'<div class="progress-label"><span>'+(d==='inbound'?'入库':'出库')+'</span><span>'+D.orders[d].completed+' / '+D.orders[d].total+' 已完成</span></div>'+stack(orderParts(d),D.orders[d].total)).join('')+legend(orderParts('inbound').map(p=>({...p,label:p.label.replace('已','').replace('中','')})),true)+'<p class="caption">每条对应各自订单总量（100%）</p>',link('查看订单 →','nav',attr('page','orders')))+section('设备状态 · '+rows.length+' 台',stateBars(rows)+'<p class="caption">'+(snapshot?'设备状态来自当前场景；业务统计为演示。':'浏览器预览 · 设备为演示数据。')+'</p>',link('查看设备 →','nav',attr('page','devices')))+'<div class="notice-row"><span class="amber">7 项设备告警 · 6 单异常订单</span>'+link('查看 →','nav',attr('page','alerts'))+'</div>';}
+function overview(){const c=D.capacity,rows=prepared.equipment;return header('仓库运营总览','今日 · 2026-10-20 / 业务演示快照 14:20:08')+'<div class="kpis"><button class="kpi" data-action="nav" data-page="orders" data-direction="inbound"><span>今日入库 / 单</span><strong class="num">128</strong><small>已完成 96 · 完成率 75.0%</small></button><button class="kpi" data-action="nav" data-page="orders" data-direction="outbound"><span>今日出库 / 单</span><strong class="num">156</strong><small>已完成 118 · 完成率 75.6%</small></button><button class="kpi" data-action="nav" data-page="inventory"><span>已用托位</span><strong class="num">1,728</strong><small>总容量 2,400 托位</small></button><button class="kpi" data-action="nav" data-page="inventory"><span>可用托位</span><strong class="num">576</strong><small>另有 96 个空位锁定</small></button></div>'+section('库容占用','<div class="chart-split">'+ring([{value:c.occupied,color:'#356bfa'},{value:c.available,color:'#dce6ff'},{value:c.lockedEmpty,color:'#aebccc'}],'72.0%','占用率')+legend([{label:'已占用',value:'72%',color:'#356bfa'},{label:'可用',value:'24%',color:'#dce6ff'},{label:'空位锁定',value:'4%',color:'#aebccc'}])+'</div>',link('查看库存 →','nav',attr('page','inventory')))+section('今日订单进度 · 284 单',['inbound','outbound'].map(d=>'<div class="progress-label"><span>'+(d==='inbound'?'入库':'出库')+'</span><span>'+D.orders[d].completed+' / '+D.orders[d].total+' 已完成</span></div>'+stack(orderParts(d),D.orders[d].total)).join('')+legend(orderParts('inbound').map(p=>({...p,label:p.label.replace('已','').replace('中','')})),true)+'<p class="caption">每条对应各自订单总量（100%）</p>',link('查看订单 →','nav',attr('page','orders')))+section('设备状态 · '+rows.length+' 台',stateBars(rows)+'<p class="caption">'+(snapshot?'设备状态来自当前场景；业务统计为演示。':'浏览器预览 · 设备为演示数据。')+'</p>',link('查看设备 →','nav',attr('page','devices')))+'<div class="notice-row"><span class="amber">7 项设备告警 · 6 单异常订单</span>'+link('查看 →','nav',attr('page','alerts'))+'</div>';}
 function inventory(){const f=S.filters.inventory,c=D.capacity,bins=M.rackBins(),chosen=bins.find(b=>b.id===f.bin),match=!f.query||['SKU2038','B20261018','电机安装支架','A-03','A-03-12'].some(x=>x.toLowerCase().includes(f.query.toLowerCase()));let detail='';if(chosen){if(chosen.status==='available')detail='<h3>'+chosen.label+' · 空货位</h3><p class="small">可用托位 1 · 当前没有库存物料</p>';else if(chosen.status==='locked')detail='<h3>'+chosen.label+' · 空位锁定</h3><p class="small">维护锁定 · 不计入可用库容</p>';else if(chosen.sku)detail='<h3>A-03-12 · 电机安装支架</h3><p class="small">SKU2038 · 批次 B20261018</p><div class="flex-between"><strong class="num">480 件</strong>'+link('查看物料 →','material')+'</div>';else detail='<h3>'+chosen.label+' · 已占用</h3><p class="small">演示格位未配置物料明细</p>';}
 return header('库存与货位','全仓容量 · 业务演示快照 14:20:08')+section('','<div class="big-stat"><strong class="num">1,728</strong><span>/ 2,400 托位已用</span></div>'+stack([{label:'占用',value:1728,color:'#356bfa'},{label:'可用',value:576,color:'#dce6ff'},{label:'锁定',value:96,color:'#aebccc'}],2400)+'<div class="progress-label"><span class="blue">占用 72.0%</span><span>可用 576</span><span>锁定 96</span></div>'+c.regions.map(r=>'<div class="region"><div class="progress-label"><span>'+r.name+'</span><span>'+r.occupied+' / '+r.total+'</span></div>'+stack([{label:'占用',value:r.occupied,color:'#7b9af1'},{label:'可用',value:r.available,color:'#dce6ff'},{label:'锁定',value:r.lockedEmpty,color:'#aebccc'}],r.total)+'</div>').join(''))+section('货架 A-03 · 48 个托位',search('inventory',f.query,'搜索物料 / 批次 / 货位')+'<div class="filters">'+select('inventory.state',f.state,[['all','全部货位'],['occupied','占用'],['available','可用'],['locked','锁定']])+'<span class="badge">演示分布</span></div>'+(match?'<div class="bin-grid">'+bins.map(b=>'<button title="'+b.label+'" aria-label="'+b.label+' '+({occupied:'占用',available:'可用',locked:'锁定'}[b.status])+'" class="bin '+b.status+(f.bin===b.id?' selected':'')+(f.state!=='all'&&f.state!==b.status?' filtered':'')+'" '+(f.state!=='all'&&f.state!==b.status?'disabled ':'')+'data-action="bin" data-id="'+b.id+'">'+String(b.id).padStart(2,'0')+'</button>').join('')+'</div>'+legend([{label:'占用 36',color:'#dce6ff'},{label:'可用 8',color:'#fff'},{label:'锁定 4',color:'#f6e9d4'}],true)+'<div class="selection-card">'+detail+'</div>':empty('未找到匹配物料','检查 SKU、批次或货位编号。','inventory'))+'<p class="caption">示例物料可用 360 件 · 已分配 120 件<br>格位分布为演示；点击场景货架查看实际 CAD 实例。</p>');}
 function trend(){const pts=M.trendPoints(),x=p=>30+p.x*282,y=v=>122-v/150*110;let out='<svg class="trend" viewBox="0 0 330 154" role="img" aria-label="累计完成订单趋势：入库96单，出库118单">';[0,75,150].forEach(v=>{out+='<line x1="30" y1="'+y(v)+'" x2="312" y2="'+y(v)+'" stroke="#e5eaf2"/><text x="23" y="'+(y(v)+4)+'" text-anchor="end">'+v+'</text>';});['inbound','outbound'].forEach((key,i)=>out+='<polyline points="'+pts.map(p=>x(p)+','+y(p[key])).join(' ')+'" fill="none" stroke="'+(i?'#356bfa':'#879bb8')+'" stroke-width="2"/>');pts.slice(0,5).forEach((p,i)=>out+='<text x="'+x(p)+'" y="145" text-anchor="'+(i===0?'start':i===4?'end':'middle')+'">'+p.time.slice(0,5)+'</text>');return out+'</svg>';}
 function orders(){const f=S.filters.orders,rows=M.filterOrders(M.makeOrders(f.direction),f.query,f.status),p=M.paginate(rows,f.page,5),summary=D.orders[f.direction];f.page=p.page;return header('今日出入库订单','2026-10-20 · 00:00–14:20 / 共 284 单')+tabs('orders.direction',f.direction,[['inbound','入库 128'],['outbound','出库 156']])+'<div class="stats-four">'+['completed','executing','waiting','exception'].map(k=>'<div><strong class="num '+(k==='executing'?'blue':k==='exception'?'amber':'')+'">'+summary[k]+'</strong><span>'+M.stateNames[k]+'</span></div>').join('')+'</div>'+stack(orderParts(f.direction),summary.total)+'<div class="section" style="padding-top:24px"><div class="section-head"><h2>累计完成 / 单</h2><span class="badge">演示趋势</span></div>'+legend([{label:'入库',color:'#879bb8'},{label:'出库',color:'#356bfa'}],true)+trend()+'</div>'+search('orders',f.query,'搜索订单号 / 物料')+'<div class="filters">'+select('orders.status',f.status,[['all','全部状态'],...['completed','executing','waiting','exception'].map(k=>[k,M.stateNames[k]])])+'<span class="filter-tag">今日</span>'+link('只看异常','filter-exception')+'</div><div class="row-list">'+(p.rows.length?p.rows.map(o=>'<button class="list-row '+(o.id===D.material.outbound?'selected':'')+'" data-action="order" data-id="'+o.id+'"><span class="row-title"><span>'+o.id+'</span><span class="link">详情 →</span></span><span class="row-sub" style="display:block">'+o.sku+' · '+o.name+'</span><span class="row-foot"><span>'+o.completed+' / '+o.quantity+' 件</span><span class="'+(o.status==='exception'?'amber':o.status==='executing'?'blue':'')+'">'+o.step+'</span></span></button>').join(''):empty('没有符合条件的订单','换一个订单号或状态继续查找。','orders'))+'</div>'+pager(p,'orders','单');}
-function devices(){const f=S.filters.devices,all=equipment(),rows=M.filterEquipment(all,f.query,f.status,f.type),p=M.paginate(rows,f.page,5);f.page=p.page;return header('设备监控',snapshot?'普通仓库 · 场景设备':'浏览器预览 · 演示快照 14:20:08',!!snapshot)+tabs('devices.facility',String(f.facility),[['false','作业设备 '+M.equipmentFor(snapshot).length],['true','充电设施 '+M.equipmentFor(snapshot,true).length]])+section('',f.facility?facilityChart(all):stateBars(all))+search('devices',f.query,'搜索设备编号 / 任务')+'<div class="filters">'+(f.facility?'':select('devices.type',f.type,[['all','全部类型'],...Object.keys(M.typeNames).filter(k=>k!=='charger').map(k=>[k,M.typeNames[k]])]))+select('devices.status',f.status,[['all','全部状态'],...(f.facility?['charging','idle','offline','unknown']:['running','idle','warning','fault','offline','unknown']).map(k=>[k,M.stateNames[k]])])+'<span class="small muted">异常优先</span></div><div class="row-list">'+(p.rows.length?p.rows.map(equipRow).join(''):empty('没有匹配的设备','调整编号、类型或运行状态。','devices'))+'</div>'+pager(p,'devices',f.facility?'个':'台')+'<p class="caption">图片为设备模型预览。'+(snapshot?'状态来自场景数据；具体来源见详情。':'当前设备列表使用演示数据。')+'</p>';}
+function devices(){const f=S.filters.devices,all=equipment(),rows=M.filterEquipment(all,f.query,f.status,f.type),p=M.paginate(rows,f.page,5);f.page=p.page;return header('设备监控',snapshot?'普通仓库 · 场景设备':'浏览器预览 · 演示快照 14:20:08',!!snapshot)+tabs('devices.facility',String(f.facility),[['false','作业设备 '+prepared.equipment.length],['true','充电设施 '+prepared.facilities.length]])+section('',f.facility?facilityChart(all):stateBars(all))+search('devices',f.query,'搜索设备编号 / 任务')+'<div class="filters">'+(f.facility?'':select('devices.type',f.type,[['all','全部类型'],...Object.keys(M.typeNames).filter(k=>k!=='charger').map(k=>[k,M.typeNames[k]])]))+select('devices.status',f.status,[['all','全部状态'],...(f.facility?['charging','idle','offline','unknown']:['running','idle','warning','fault','offline','unknown']).map(k=>[k,M.stateNames[k]])])+'<span class="small muted">异常优先</span></div><div class="row-list">'+(p.rows.length?p.rows.map(equipRow).join(''):empty('没有匹配的设备','调整编号、类型或运行状态。','devices'))+'</div>'+pager(p,'devices',f.facility?'个':'台')+'<p class="caption">图片为设备模型预览。'+(snapshot?'状态来自场景数据；具体来源见详情。':'当前设备列表使用演示数据。')+'</p>';}
 function alerts(){const f=S.filters.alerts,all=M.alerts.filter(a=>a.recovered===f.history),rows=all.filter(a=>f.severity==='all'||a.severity===f.severity),pending=all.filter(a=>!a.acknowledged).length;return header('设备告警中心','当前未恢复 7 项 · 业务演示快照 14:20:08')+'<div class="alert-summary"><div><strong class="num">'+all.length+'</strong> <small>'+(f.history?'条恢复记录':'项未恢复告警')+'</small></div><small>待确认 '+pending+' · 已确认 '+(all.length-pending)+'</small></div>'+stack([{label:'故障',value:all.filter(a=>a.severity==='fault').length,color:colors.fault},{label:'预警',value:all.filter(a=>a.severity==='warning').length,color:colors.warning}],all.length)+legend([{label:'故障 '+all.filter(a=>a.severity==='fault').length,color:colors.fault},{label:'预警 '+all.filter(a=>a.severity==='warning').length,color:colors.warning}],true)+tabs('alerts.history',String(f.history),[['false','当前 7'],['true','已恢复记录']])+'<div class="filters">'+select('alerts.severity',f.severity,[['all','全部级别'],['fault','故障'],['warning','预警']])+'<span class="small muted">按严重程度排序</span></div>'+rows.map(a=>{const e=findDevice(a.device);return '<button class="list-row media-row" data-action="alert" data-id="'+a.id+'"><img class="thumb" src="'+photo(e?e.type:'truck')+'" alt="设备模型"><span><span class="row-title"><span>'+a.device+'</span><span class="link">查看 →</span></span><span class="row-sub '+(a.severity==='fault'?'red':'amber')+'" style="display:block">'+a.title+'</span><span class="row-sub" style="display:block">'+a.time+' · '+(a.acknowledged?'已确认':'待确认')+'</span></span></button>'}).join('')+(rows.length?'':empty('暂无恢复记录','确认告警后仍保留，直到异常真正恢复。'))+'<p class="caption">告警确认仅记录处理进度，不代表设备恢复。<br>本页为演示队列，不下发真实设备控制指令。</p>';}
 function trace(){const f=S.filters.trace,material=f.mode==='material',found=material&&['sku2038','b20261018','plt202610200038','电机安装支架','a-03-12'].some(v=>v.includes(f.query.toLowerCase().trim()))&&f.date==='2026-10-20';return header('追溯查询',material?'串联批次、货位和关联订单':'查看选定设备的历史运行记录')+tabs('trace.mode',f.mode,[['material','物料追溯'],['device','设备轨迹']])+search('trace',f.query,material?'SKU / 批次 / 托盘编号':'设备编号，如 AGV-07')+'<div class="query-row"><input class="date-input" type="date" value="'+f.date+'" data-filter="trace.date" aria-label="查询日期">'+button('查询','trace-query','',true,'search')+'</div>'+(f.queried?(material?(found?'<div class="section" style="margin-top:28px"><h2>'+D.material.name+'</h2><p class="caption">'+D.material.pallet+' · 当前 A-03-12</p></div><div class="section-head"><h2>5 条流转事件</h2><span class="small muted">最新在下</span></div><ol class="timeline">'+M.trace.map(t=>'<li><time>'+t.time+'</time><div><h3>'+t.title+'</h3><p>'+t.location+'</p><p>'+t.detail+'</p>'+(t.device?link('定位设备 →','device',attr('id',t.device)):t.order?link('查看订单 →','order',attr('id',t.order)):'')+'</div></li>').join('')+'</ol><p class="caption">数量单位为件；事件时间为本地时间。业务演示数据。</p>':empty('没有匹配的流转记录','示例批次 B20261018 的记录日期为 2026-10-20。')):deviceHistory()):'<div class="notice" style="margin-top:24px">设置编号和日期后查询。</div>');}
 function deviceHistory(){const e=findDevice(S.filters.trace.query.trim());if(!e)return empty('未找到该设备','输入完整设备编号，例如 AGV-07。');return '<div class="selection-card"><div class="flex-between"><h3>'+esc(e.id)+'</h3>'+status(e.status)+'</div><p class="small">'+M.typeNames[e.type]+' · '+esc(e.location)+'</p>'+link('查看设备 →','device',attr('id',e.id))+'</div><div class="notice">当前场景未接入历史轨迹服务。可定位设备当前坐标；不会将演示路线显示为真实历史。</div><div class="actions">'+button('定位当前设备','focus',attr('id',e.id),true,'focus')+'</div>';}
@@ -50,20 +53,47 @@ function orderDetail(detail){const dir=detail.id.startsWith('IN')?'inbound':'out
 function alertDetail(detail){const a=M.alerts.find(a=>a.id===detail.id);if(!a)return alerts();const e=findDevice(a.device);return header('告警详情','演示告警 · '+a.time,false,true)+'<button class="device-photo" data-action="device" data-id="'+a.device+'"><img src="'+photo(e?e.type:'truck')+'" alt="告警设备模型"></button><div class="image-caption"><span>关联设备模型预览</span><span>'+a.device+'</span></div><div class="flex-between"><h2 style="font-size:20px">'+a.title+'</h2>'+status(a.severity)+'</div><p class="caption">'+a.device+' · 尚未恢复</p>'+(a.device==='AGV-12'?'<div class="device-metrics">'+ring([{value:18,color:colors.warning},{value:82,color:'#e5ebf6'}],'18%','当前电量')+'<div><p class="small muted">预警阈值</p><div class="metric-value">20<small>%</small></div><p class="small amber">低于阈值 2%</p></div></div>':'<div class="divider"></div>')+section('处理状态',kv('发生时间','2026-10-20 '+a.time)+kv('确认状态',a.acknowledged?'已确认':'待确认')+kv('恢复状态','未恢复')+'<div class="notice">确认表示已接手处理，不会解除告警或恢复设备。</div>')+(a.device==='AGV-12'?section('建议关联设施','<div class="media-row"><img class="thumb" src="assets/charger.png" alt="充电设施模型"><div><h3>CH-12 · 充电区 C</h3><p class="caption">演示设施 · 空闲</p>'+link('查看设施 →','device',attr('id','CH-12'))+'</div></div>'):'')+'<div class="actions">'+button(a.acknowledged?'已确认':'确认告警','ack',attr('id',a.id)+(a.acknowledged?' disabled':''),true)+button('定位设备','device',attr('id',a.device),false,'focus')+'</div>';}
 const renderers={overview,inventory,orders,devices,alerts,trace,scene:settings};
 function content(){if(S.detail){switch(S.detail.kind){case'device':return deviceDetail(S.detail);case'material-demo':return materialDetail();case'order':return orderDetail(S.detail);case'alert':return alertDetail(S.detail);default:return rackDetail(S.detail);}}return renderers[S.page]();}
+const fields=(row,keys)=>row?keys.map(key=>row[key]??null):null;
+const stateCounts=counts=>Object.keys(M.stateNames).map(key=>counts[key]||0);
+// This key describes the visible business view, not the entire native scene.
+// Comparing it before content() avoids HTML/SVG generation for irrelevant updates.
+function contentDependency(){
+  let data=null;const detail=S.detail,f=S.filters[S.page];
+  if(detail){
+    if(detail.kind==='device'){
+      const e=findDevice(detail.id),base=['id','type','status','location','live','demo'];
+      if(S.deviceTab==='status')base.push('progress','available','metric','value','title','taskId');
+      else if(S.deviceTab==='task')base.push('taskId');
+      data=[!!snapshot,S.deviceTab,fields(e,base),S.deviceTab==='events'?M.alerts.filter(a=>a.device===detail.id):null];
+    }else if(detail.kind==='alert'){
+      const alert=M.alerts.find(a=>a.id===detail.id),e=alert&&findDevice(alert.device);
+      data=[alert,e&&e.type];
+    }else if(detail.kind!=='material-demo'&&detail.kind!=='order')data=fields(detail,['kind','id','title','location','cadId','instanceIndex','level','column','actor']);
+  }else if(S.page==='overview')data=[!!snapshot,prepared.equipment.length,stateCounts(prepared.equipmentStates)];
+  else if(S.page==='devices'){
+    const rows=equipment(),filtered=M.filterEquipment(rows,f.query,f.status,f.type),p=M.paginate(filtered,f.page,5);
+    data=[!!snapshot,prepared.equipment.length,prepared.facilities.length,stateCounts(f.facility?prepared.facilityStates:prepared.equipmentStates),f,p.page,p.total,p.rows.map(e=>fields(e,['id','type','location','status','value','taskId']))];
+  }else if(S.page==='alerts')data=[f,M.alerts.map(a=>[a,(findDevice(a.device)||{}).type])];
+  else if(S.page==='trace')data=[f,f.mode==='device'&&f.queried?fields(findDevice(f.query.trim()),['id','type','status','location']):null];
+  else if(S.page==='scene')data=[!!snapshot,S.settings];
+  else data=f;
+  return JSON.stringify([viewKey(),data]);
+}
 // DOM identity belongs to the visible view, while S may already target the next one.
 // Refreshes only update the snapshot during a transition; they cannot replace or restart it.
 const motionPreference=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
 const viewFocus={};
-let displayedKey='',renderedHtml='',transitionPhase='idle',transitionTimer=0,transitionSerial=0,deferredRender=false,restoreNext=false;
+let displayedKey='',renderedHtml='',renderedDependency='',transitionPhase='idle',transitionTimer=0,transitionSerial=0,deferredRender=false,restoreNext=false,reportTimer=0;
 const recentPhases=[];
 function recordTransitionPhase(){
+  if(!diagnosticsEnabled||!panelVisible)return;
   const opacity=window.getComputedStyle?Number(window.getComputedStyle(page).opacity):null;
   recentPhases.push({phase:transitionPhase,atMs:window.performance?window.performance.now():Date.now(),opacity,displayedView:displayedKey,targetView:viewKey(),serial:transitionSerial});
   if(recentPhases.length>8)recentPhases.shift();
 }
 function viewKey(){return S.page+(S.detail?':'+S.detail.kind+':'+S.detail.id:'');}
 function captureFocus(){
-  const active=document.activeElement;
+  const active=Dropdown.getAnchor()||document.activeElement;
   if(!active||!page.contains(active)||!active.dataset)return null;
   const keys=['search','filter','action','id','key','value','scope','page'].filter(key=>active.dataset[key]!=null);
   if(!keys.length)return null;
@@ -86,10 +116,19 @@ function renderNavigation(){
   if(!nav.innerHTML)nav.innerHTML=Object.keys(names).map(k=>'<button aria-label="'+names[k]+'" title="'+names[k]+'" data-action="nav" data-page="'+k+'">'+icon(k)+'<span>'+names[k]+'</span></button>').join('')+'<button class="nav-utility" title="返回全仓视角" data-action="overview">'+icon('focus')+'<span>全仓</span></button>';
   nav.querySelectorAll('[data-page]').forEach(button=>{const active=button.dataset.page===S.page;button.classList.toggle('active',active);if(active)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');});
 }
-function scheduleReport(){const token=renderToken;setTimeout(()=>{if(token===renderToken&&transitionPhase==='idle')report();},40);}
+function scheduleReport(){
+  clearTimeout(reportTimer);if(!diagnosticsEnabled||!panelVisible)return;
+  const token=renderToken;reportTimer=setTimeout(()=>{if(token===renderToken&&transitionPhase==='idle')report();},40);
+}
 function paint(restore,enter=false){
   const bookmark=captureFocus(),key=viewKey(),scroll=restore?(S.scroll[key]||0):main.scrollTop;
-  const html=content();if(renderedHtml!==html){page.innerHTML=html;renderedHtml=html;}
+  const dependency=contentDependency();
+  if(dependency!==renderedDependency){
+    ++performanceCounts.htmlBuilds;const html=content();
+    if(renderedHtml!==html){Dropdown.close(false);page.innerHTML=html;renderedHtml=html;++performanceCounts.domWrites;}
+    // Pagination may clamp a stale page number while rendering.
+    renderedDependency=contentDependency();
+  }else ++performanceCounts.skippedRenders;
   ++renderToken;displayedKey=key;
   page.className='view-'+S.page+(S.detail&&S.detail.kind==='device'?' detail-device':'')+(enter?' page-enter-start':'');
   main.scrollTop=scroll;
@@ -109,6 +148,8 @@ function completeWithoutMotion(){
   paint(restore);main.removeAttribute('aria-busy');recordTransitionPhase();scheduleReport();
 }
 function render(animate=false,restore=false){
+  if(!panelVisible){hiddenRestore=hiddenRestore||restore;return;}
+  if(animate)Dropdown.close(false);
   renderNavigation();
   if(!animate){if(transitionPhase!=='idle'){deferredRender=true;return;}paint(restore);scheduleReport();return;}
   restoreNext=restore||transitionPhase==='out'&&restoreNext;
@@ -145,9 +186,70 @@ document.addEventListener('input',event=>{const input=event.target;if(!input.dat
 document.addEventListener('change',event=>{if(!event.target.dataset.filter)return;setNested(event.target.dataset.filter,event.target.value);if(event.target.dataset.filter.startsWith('trace'))S.filters.trace.queried=false;render();});
 function openPhoto(type,id){const modal=document.getElementById('modal');previousFocus=document.activeElement;modal.innerHTML='<button class="close" data-action="close-photo" aria-label="关闭图片">'+icon('close')+'</button><h2>'+esc(id)+'</h2><img src="'+photo(type)+'" alt="'+M.typeNames[type]+'模型大图"><p class="small muted">设备模型预览 · '+M.typeNames[type]+'</p>';modal.hidden=false;modal.querySelector('button').focus();}
 function closePhoto(){document.getElementById('modal').hidden=true;if(previousFocus&&previousFocus.isConnected)previousFocus.focus();}
-document.addEventListener('keydown',e=>{const modal=document.getElementById('modal');if(e.key==='Escape'){if(!modal.hidden){closePhoto();e.stopPropagation();}else if(S.detail){if(window.ue&&window.ue.twin)command({action:'clear'},true);else back();e.stopPropagation();}}if(e.key==='Tab'&&!modal.hidden){e.preventDefault();modal.querySelector('button').focus();}});
-window.twinReceive=function(value){let next=value;if(typeof next==='string'){try{next=JSON.parse(next);}catch(e){return;}}if(!next||typeof next!=='object')return;const prevSnapshot=snapshot;snapshot=next;const selection=next.selection;const key=selection&&selection.id?selection.kind+':'+selection.id+':'+(selection.instanceIndex??''):'';if(key&&key!==selectionKey){selectionKey=key;if(!(S.detail&&S.detail.kind==='device'&&selection.kind==='device'&&S.detail.id===selection.id)){open(selection.kind==='device'?{kind:'device',id:selection.id}:Object.assign({},selection));return;}}else if(!key)selectionKey='';if(transitionPhase!=='idle'){deferredRender=true;return;}const active=document.activeElement;if(active&&(active.tagName==='INPUT'||active.tagName==='SELECT'))return;if(!prevSnapshot||S.page==='devices'||S.page==='overview'||S.detail&&S.detail.kind==='device'){const scroll=main.scrollTop;render();main.scrollTop=scroll;}};
+document.addEventListener('keydown',e=>{if(e.defaultPrevented)return;const modal=document.getElementById('modal');if(e.key==='Escape'){if(!modal.hidden){closePhoto();e.stopPropagation();}else if(S.detail){if(window.ue&&window.ue.twin)command({action:'clear'},true);else back();e.stopPropagation();}}if(e.key==='Tab'&&!modal.hidden){e.preventDefault();modal.querySelector('button').focus();}});
+function normalizePendingSnapshot(){
+  if(!snapshotDirty)return;
+  prepared=M.prepareSnapshot(snapshot);snapshotDirty=false;++performanceCounts.normalizedSnapshots;
+}
+function updateSceneDetailRecords(selection){
+  if(!selection||!selection.id||selection.kind==='device')return;
+  const matches=detail=>detail&&detail.kind===selection.kind&&detail.id===selection.id&&(detail.instanceIndex??null)===(selection.instanceIndex??null);
+  // Native messages carry a full record. Replacing it removes optional fields
+  // absent from the new snapshot, including details temporarily in the Back stack.
+  if(matches(S.detail))S.detail=Object.assign({},selection);
+  S.stack.forEach(frame=>{if(matches(frame.detail))frame.detail=Object.assign({},selection);});
+}
+function receiveSnapshot(value){
+  let next=value;if(typeof next==='string'){try{next=JSON.parse(next);}catch(e){return;}}
+  if(!next||typeof next!=='object')return;
+  ++performanceCounts.receivedSnapshots;snapshot=next;snapshotDirty=true;
+  if(panelVisible)normalizePendingSnapshot();else ++performanceCounts.hiddenSnapshots;
+  const selection=next.selection;
+  updateSceneDetailRecords(selection);
+  const key=selection&&selection.id?selection.kind+':'+selection.id+':'+(selection.instanceIndex??''):'';
+  if(key&&key!==selectionKey){
+    selectionKey=key;
+    if(!(S.detail&&S.detail.kind==='device'&&selection.kind==='device'&&S.detail.id===selection.id)){
+      open(selection.kind==='device'?{kind:'device',id:selection.id}:Object.assign({},selection));return;
+    }
+  }else if(!key)selectionKey='';
+  if(!panelVisible)return;
+  if(transitionPhase!=='idle'){deferredRender=true;return;}
+  const active=document.activeElement;
+  if(Dropdown.isOpen()||active&&(active.tagName==='INPUT'||active.tagName==='SELECT'||active.dataset&&active.dataset.filter)){pendingFocusRefresh=true;return;}
+  if(contentDependency()===renderedDependency){++performanceCounts.skippedRenders;return;}
+  render();
+}
+window.twinReceive=receiveSnapshot;
+// A focused control owns its DOM until focus leaves. The latest normalized snapshot
+// is retained, and a later user action or focus-out consumes it without resetting scroll.
+function refreshAfterControlBlur(){if(!pendingFocusRefresh)return;setTimeout(()=>{
+  const active=document.activeElement;if(Dropdown.isOpen()||active&&(active.tagName==='INPUT'||active.tagName==='SELECT'||active.dataset&&active.dataset.filter))return;
+  pendingFocusRefresh=false;if(panelVisible)render();
+},0);}
+document.addEventListener('focusout',refreshAfterControlBlur);
+document.addEventListener('twin-dropdown-close',refreshAfterControlBlur);
+window.twinSetVisibility=function(value){
+  const visible=!!value;if(visible===panelVisible)return;
+  if(!visible){
+    saveScroll();Dropdown.close(false);hiddenRestore=transitionPhase==='out'?restoreNext:false;panelVisible=false;
+    clearTimeout(transitionTimer);clearTimeout(reportTimer);++transitionSerial;
+    transitionPhase='idle';deferredRender=false;main.removeAttribute('aria-busy');
+    page.classList.remove('page-leave','page-enter-start','page-enter');return;
+  }
+  panelVisible=true;normalizePendingSnapshot();pendingFocusRefresh=false;
+  const restore=hiddenRestore||displayedKey!==viewKey();hiddenRestore=false;
+  render(false,restore);recordTransitionPhase();
+};
+window.twinSetDiagnostics=function(value){
+  const enabled=!!value;if(enabled===diagnosticsEnabled)return;
+  diagnosticsEnabled=enabled;clearTimeout(reportTimer);
+  if(enabled){recordTransitionPhase();scheduleReport();}else recentPhases.length=0;
+};
+window.twinGetPerformance=function(){return Object.assign({},performanceCounts,{visible:panelVisible,diagnostics:diagnosticsEnabled});};
+
 function report(){
+  if(!diagnosticsEnabled||!panelVisible)return;
   const actions=document.querySelector('.device-actions'),bounds=actions?actions.getBoundingClientRect():null;
   const tolerance=1,visual=window.visualViewport;
   const actionBounds=bounds?{left:bounds.left,top:bounds.top,right:bounds.right,bottom:bounds.bottom,width:bounds.width,height:bounds.height}:null;
@@ -155,7 +257,7 @@ function report(){
   // Chromium rounds innerWidth/Height to integers while DOMRects retain fractional
   // CSS pixels at Windows 150% scaling. Only the visibility predicate tolerates 1px;
   // raw rectangles, strict visibility and each scroll extent remain in the report.
-  command({action:'report',page:S.page==='scene'?'settings':S.page,detail:S.detail?{kind:S.detail.kind,id:S.detail.id}:null,equipmentCount:M.equipmentFor(snapshot).length,facilityCount:M.equipmentFor(snapshot,true).length,width:innerWidth,height:innerHeight,viewport,transition:{phase:transitionPhase,durationMs:motionPreference&&motionPreference.matches?0:320,displayedView:displayedKey,recentPhases:recentPhases.slice()},detailActionBounds:actionBounds,visibilityToleranceCssPx:tolerance,detailActionsStrictlyVisible:bounds?bounds.left>=0&&bounds.top>=0&&bounds.right<=innerWidth&&bounds.bottom<=innerHeight:null,detailActionsVisible:bounds?bounds.left>=-tolerance&&bounds.top>=-tolerance&&bounds.right<=innerWidth+tolerance&&bounds.bottom<=innerHeight+tolerance:null,overflow:document.documentElement.scrollWidth>innerWidth||main.scrollWidth>main.clientWidth||nav.scrollWidth>nav.clientWidth,scrollExtents:{document:document.documentElement.scrollWidth,main:main.scrollWidth,mainClient:main.clientWidth,navigation:nav.scrollWidth,navigationClient:nav.clientWidth},imageFailures:Array.from(document.images).filter(i=>i.complete&&!i.naturalWidth).map(i=>i.getAttribute('src')),charts:document.querySelectorAll('.ring svg,.trend').length},true);
+  command({action:'report',page:S.page==='scene'?'settings':S.page,detail:S.detail?{kind:S.detail.kind,id:S.detail.id}:null,equipmentCount:prepared.equipment.length,facilityCount:prepared.facilities.length,width:innerWidth,height:innerHeight,viewport,transition:{phase:transitionPhase,durationMs:motionPreference&&motionPreference.matches?0:320,displayedView:displayedKey,recentPhases:recentPhases.slice()},detailActionBounds:actionBounds,visibilityToleranceCssPx:tolerance,detailActionsStrictlyVisible:bounds?bounds.left>=0&&bounds.top>=0&&bounds.right<=innerWidth&&bounds.bottom<=innerHeight:null,detailActionsVisible:bounds?bounds.left>=-tolerance&&bounds.top>=-tolerance&&bounds.right<=innerWidth+tolerance&&bounds.bottom<=innerHeight+tolerance:null,overflow:document.documentElement.scrollWidth>innerWidth||main.scrollWidth>main.clientWidth||nav.scrollWidth>nav.clientWidth,scrollExtents:{document:document.documentElement.scrollWidth,main:main.scrollWidth,mainClient:main.clientWidth,navigation:nav.scrollWidth,navigationClient:nav.clientWidth},imageFailures:Array.from(document.images).filter(i=>i.complete&&!i.naturalWidth).map(i=>i.getAttribute('src')),charts:document.querySelectorAll('.ring svg,.trend').length,performance:window.twinGetPerformance()},true);
 }
 window.twinNavigate=navigate;window.twinBack=back;window.twinState=S;
 // Clearing a scene pick closes the entire detail stack; ordinary Back still

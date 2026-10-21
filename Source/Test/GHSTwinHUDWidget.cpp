@@ -9,6 +9,9 @@
 #include "SWebBrowser.h"
 #include "WebBrowserModule.h"
 #include "Misc/Paths.h"
+#include "Misc/CommandLine.h"
+#include "Misc/Parse.h"
+#include "ProfilingDebugging/CpuProfilerTrace.h"
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonSerializer.h"
 #include "Brushes/SlateRoundedBoxBrush.h"
@@ -20,7 +23,23 @@ namespace
 {
 FLinearColor C(const TCHAR* Hex) { return FLinearColor::FromSRGBColor(FColor::FromHex(Hex)); }
 bool Inside(FVector2D P, FVector2D At, FVector2D Size) { return P.X>=At.X && P.Y>=At.Y && P.X<At.X+Size.X && P.Y<At.Y+Size.Y; }
-FSlateFontInfo Font(int32 Size) { return FSlateFontInfo(FPaths::ProjectContentDir()/TEXT("GHSNormalWarehouse/HUD/Fonts/DroidSansFallback.ttf"), Size); }
+const FSlateFontInfo& Font(int32 Size)
+{
+    static const FString Path=FPaths::ProjectContentDir()/TEXT("GHSNormalWarehouse/HUD/Fonts/DroidSansFallback.ttf");
+    static TMap<int32,FSlateFontInfo> Fonts;
+    if(const auto* Existing=Fonts.Find(Size)) return *Existing;
+    return Fonts.Add(Size,FSlateFontInfo(Path,Size));
+}
+const TArray<FVector2D>& UnitAnchorEllipse()
+{
+    static const TArray<FVector2D> Points=[]()
+    {
+        TArray<FVector2D> Result;Result.Reserve(25);
+        for(int32 I=0;I<=24;++I) {const double A=I*2*PI/24;Result.Add(FVector2D(FMath::Cos(A)*12,FMath::Sin(A)*5));}
+        return Result;
+    }();
+    return Points;
+}
 }
 
 TSharedRef<SWidget> UGHSTwinBrowser::RebuildWidget()
@@ -68,15 +87,38 @@ void UGHSTwinHUDWidget::NativeConstruct()
     Super::NativeConstruct();
     SetVisibility(ESlateVisibility::SelfHitTestInvisible);
     if (Panel) Panel->Bind(this);
-    GHSTwinSelection::BootstrapComponents(GetWorld());
-    SceneData.Refresh(GetWorld());
+    bDiagnostics=FParse::Param(FCommandLine::Get(),TEXT("TwinDiagnostics"));
+    SceneData.Refresh(GetWorld(),true);
+    NextRefresh=GetWorld()->GetTimeSeconds()+2;
     UE_LOG(LogTemp,Display,TEXT("GHS_TWIN_UI_STARTED %s"),*GetWorld()->GetMapName());
 }
-void UGHSTwinHUDWidget::NativeDestruct() { SceneData.Refresh(nullptr); PreviousPositions.Empty(); Labels.Empty(); Super::NativeDestruct(); }
+void UGHSTwinHUDWidget::NativeDestruct() { SceneData.Refresh(nullptr); PreviousPositions.Empty(); LabelAges.Empty(); Labels.Empty(); VisibleLabels.Empty(); PreviousVisibleLabels.Empty(); Super::NativeDestruct(); }
 FString UGHSTwinHUDWidget::GetSnapshot() const { return SceneData.SnapshotJson(SelectedId); }
-void UGHSTwinHUDWidget::PushSnapshot(bool bExplicitSelection)
+void UGHSTwinHUDWidget::PushSnapshot(bool bExplicitSelection,bool bForce)
 {
-    if(Panel) Panel->Evaluate(FString(bExplicitSelection?TEXT("window.twinSelect && window.twinSelect("):TEXT("window.twinReceive && window.twinReceive("))+GetSnapshot()+TEXT(");"));
+    TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_PushSnapshot);
+    if(!Panel || !bBrowserReady || !bBrowserActive) return;
+    FString Json;
+    if(SceneData.BuildSnapshotIfChanged(SelectedId,Json,bForce || bExplicitSelection))
+        Panel->Evaluate(FString(bExplicitSelection?TEXT("window.twinSelect && window.twinSelect("):TEXT("window.twinReceive && window.twinReceive("))+Json+TEXT(");"));
+}
+void UGHSTwinHUDWidget::SetPanelCollapsed(bool bCollapsed,bool bExplicitSelection)
+{
+    const bool bOpening=bPanelCollapsed && !bCollapsed;
+    bPanelCollapsed=bCollapsed;POICadence.Invalidate();
+    if(bOpening) UpdateBrowserVisibility(true,bExplicitSelection);
+}
+void UGHSTwinHUDWidget::UpdateBrowserVisibility(bool bForce,bool bExplicitSelection)
+{
+    const bool bActive=GHSTwinHUDPerformance::ShouldRefreshBrowser(bPanelCollapsed,PanelVisibilityProgress);
+    if(!Panel || !bBrowserReady) { bBrowserActive=bActive;return; }
+    if(bActive==bBrowserActive && !bForce) return;
+    bBrowserActive=bActive;
+    // Queue the newest full snapshot while the page is still paused, then render
+    // it once as visibility resumes. Explicit picks use this same ordering and do
+    // not send a second selection snapshot after the panel has become visible.
+    if(bActive) PushSnapshot(bExplicitSelection,true);
+    Panel->Evaluate(bActive?TEXT("window.twinSetVisibility && window.twinSetVisibility(true);"):TEXT("window.twinSetVisibility && window.twinSetVisibility(false);"));
 }
 FVector2D UGHSTwinHUDWidget::GetPanelVisualPosition() const
 {
@@ -106,7 +148,7 @@ void UGHSTwinHUDWidget::SearchCommitted(const FText& Text,ETextCommit::Type Meth
     if(!SelectObject(Query.ToUpper()))
     {
         FString Encoded; auto Writer=TJsonWriterFactory<>::Create(&Encoded); Writer->WriteValue(Query); Writer->Close();
-        bPanelCollapsed=false;
+        SetPanelCollapsed(false);
         Panel->Evaluate(TEXT("window.twinSearch && window.twinSearch(")+Encoded+TEXT(");"));
     }
 }
@@ -116,7 +158,13 @@ void UGHSTwinHUDWidget::Command(const FString& Json)
     if(Json.Len()>16384 || !FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Json),Object) || !Object) return;
     FString Action,Id; Object->TryGetStringField(TEXT("action"),Action); Object->TryGetStringField(TEXT("id"),Id);
     if(Action!=TEXT("report") && Action!=TEXT("ready")) if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer())) PC->CancelCameraDrag();
-    if(Action==TEXT("ready")) { bBrowserReady=true; PushSnapshot(); UE_LOG(LogTemp,Display,TEXT("GHS_TWIN_BROWSER_READY")); }
+    if(Action==TEXT("ready"))
+    {
+        bBrowserReady=true;
+        if(Panel) Panel->Evaluate(bDiagnostics?TEXT("window.twinSetDiagnostics && window.twinSetDiagnostics(true);"):TEXT("window.twinSetDiagnostics && window.twinSetDiagnostics(false);"));
+        UpdateBrowserVisibility(true);
+        UE_LOG(LogTemp,Display,TEXT("GHS_TWIN_BROWSER_READY"));
+    }
     else if(Action==TEXT("select")) SelectObject(Id);
     else if(Action==TEXT("focus")) Focus(Id);
     else if(Action==TEXT("clear")) ClearSelection();
@@ -125,8 +173,9 @@ void UGHSTwinHUDWidget::Command(const FString& Json)
     {
         Object->TryGetBoolField(TEXT("equipment"),bEquipment); Object->TryGetBoolField(TEXT("racks"),bRacks); Object->TryGetBoolField(TEXT("pois"),bShowPOIs);
         SceneData.ApplyLayers(bEquipment,bRacks);
+        POICadence.Invalidate();
     }
-    else if(Action==TEXT("poiDensity")) Object->TryGetStringField(TEXT("value"),Density);
+    else if(Action==TEXT("poiDensity")) {Object->TryGetStringField(TEXT("value"),Density);POICadence.Invalidate();}
     else if(Action==TEXT("preset"))
     {
         FString Value; Object->TryGetStringField(TEXT("value"),Value);
@@ -141,18 +190,21 @@ void UGHSTwinHUDWidget::Command(const FString& Json)
             else Overview();
         }
     }
-    else if(Action==TEXT("report")) { LastBrowserReport=Json; UE_LOG(LogTemp,Display,TEXT("GHS_TWIN_BROWSER_REPORT %s"),*Json); }
+    else if(Action==TEXT("report") && bDiagnostics) { LastBrowserReport=Json; UE_LOG(LogTemp,Display,TEXT("GHS_TWIN_BROWSER_REPORT %s"),*Json); }
 }
 bool UGHSTwinHUDWidget::SelectObject(const FString& Id,bool bFocus)
 {
     if(Id.StartsWith(TEXT("RACK:"))) return false;
     FVector Location,Extent; if(!SceneData.Resolve(Id,Location,Extent)) return false;
-    SelectedId=Id; ActiveRegionId.Empty(); bPanelCollapsed=false;
+    const bool bOpening=bPanelCollapsed;
+    SelectedId=Id; ActiveRegionId.Empty(); POICadence.Invalidate();
     // Selection may open a previously collapsed panel. Use its final content area once.
     Layout=FGHSTwinLayout::Calculate(ViewSize,false);
-    if(bFocus) Focus(Id); PushSnapshot(true); return true;
+    if(bFocus) Focus(Id);
+    if(bOpening) SetPanelCollapsed(false,true); else PushSnapshot(true);
+    return true;
 }
-void UGHSTwinHUDWidget::ClearSelection() { SelectedId.Empty(); ActiveRegionId.Empty(); PushSnapshot(); if(Panel) Panel->Evaluate(TEXT("window.twinClearSelection && window.twinClearSelection();")); }
+void UGHSTwinHUDWidget::ClearSelection() { SelectedId.Empty(); ActiveRegionId.Empty(); POICadence.Invalidate(); bSelectedScreenBoundsValid=false; PushSnapshot(); if(Panel) Panel->Evaluate(TEXT("window.twinClearSelection && window.twinClearSelection();")); }
 void UGHSTwinHUDWidget::Overview()
 {
     ClearSelection();
@@ -184,7 +236,7 @@ void UGHSTwinHUDWidget::FocusRegion(const FString& Region)
     if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer())) PC->CancelCameraDrag();
     if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn()))
     {
-        ClearSelection(); ActiveRegionId=TEXT("REGION:")+Region;
+        ClearSelection(); ActiveRegionId=TEXT("REGION:")+Region; POICadence.Invalidate();
         const double Tan=FMath::Tan(FMath::DegreesToRadians(Cam->WarehouseCamera->FieldOfView*.5));
         const double Fill=FMath::Clamp(FMath::Min(Layout.SceneSize.X/ViewSize.X,Layout.SceneSize.Y/ViewSize.X),.12,1.);
         const float Distance=FMath::Clamp(float(Extent.Size()/(Tan*Fill)*1.12),5000.f,95000.f);
@@ -194,13 +246,14 @@ void UGHSTwinHUDWidget::FocusRegion(const FString& Region)
 bool UGHSTwinHUDWidget::HandleChromeClick(FVector2D Position)
 {
     if(Position.Y<Layout.HeaderHeight && Position.X>ViewSize.X-112)
-    { bPanelCollapsed=!bPanelCollapsed; return true; }
+    { SetPanelCollapsed(!bPanelCollapsed); return true; }
     if(Inside(Position,FVector2D(20,Layout.HeaderHeight+16),FVector2D(104,36)))
     { Overview(); return true; }
     if(Layout.SceneSize.X>660 && Position.Y>=Layout.HeaderHeight+68 && Position.Y<Layout.HeaderHeight+100 && Position.X>=20 && Position.X<424)
     {
         const int32 Index=FMath::Clamp(int32((Position.X-20)/104),0,3);
         PointFilter=Index==1?TEXT("rack"):Index==2?TEXT("truck"):Index==3?TEXT("charger"):TEXT("all");
+        POICadence.Invalidate();
         return true;
     }
     const FVector2D Tool(ViewSize.X<900 ? ViewSize.X-60 : Layout.SceneSize.X-60,Layout.ScenePosition.Y+Layout.SceneSize.Y-132);
@@ -216,29 +269,35 @@ bool UGHSTwinHUDWidget::HandleSceneClick(FVector2D Position)
 {
     if(HandleChromeClick(Position)) return true;
     if(!IsScenePoint(Position)) return false;
-    for(int32 I=Labels.Num()-1; I>=0; --I) if(Inside(Position,Labels[I].Position,Labels[I].Size))
+    for(int32 I=VisibleLabels.Num()-1; I>=0; --I) if(Inside(Position,Labels[VisibleLabels[I]].Position,Labels[VisibleLabels[I]].Size))
     {
-        if(Labels[I].Id.StartsWith(TEXT("REGION:"))) { FocusRegion(Labels[I].Id.Mid(7)); return true; }
-        if(Labels[I].Id.StartsWith(TEXT("GROUP:")))
+        const auto& Label=Labels[VisibleLabels[I]];
+        if(Label.bRegion) { FocusRegion(Label.Id.Mid(7)); return true; }
+        if(Label.bGroup)
         {
-            bPanelCollapsed=false;
-            if(Labels[I].Id==TEXT("GROUP:rack")) Navigate(TEXT("inventory"));
-            else if(Panel) Panel->Evaluate(FString::Printf(TEXT("window.twinFilterType && window.twinFilterType('%s');"),*Labels[I].Id.Mid(6)));
+            SetPanelCollapsed(false);
+            if(Label.Id==TEXT("GROUP:rack")) Navigate(TEXT("inventory"));
+            else if(Panel) Panel->Evaluate(FString::Printf(TEXT("window.twinFilterType && window.twinFilterType('%s');"),*Label.Id.Mid(6)));
             return true;
         }
-        return SelectObject(Labels[I].Id);
+        return SelectObject(Label.Id);
     }
     FString Id; if(SceneData.Pick(GetOwningPlayer(),Position,Id)) return SelectObject(Id);
     ClearSelection(); return true;
 }
 void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
 {
+    TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_Tick);
     Super::NativeTick(Geometry,DeltaSeconds);
     const bool bViewportChanged=!ViewSize.Equals(Geometry.GetLocalSize(),.5);
     ViewSize=Geometry.GetLocalSize(); if(ViewSize.X<1 || ViewSize.Y<1) return;
     PanelMotion.Advance(DeltaSeconds,bPanelCollapsed);
     PanelVisibilityProgress=PanelMotion.Progress;
+    UpdateBrowserVisibility();
+    if(bViewportChanged) POICadence.Invalidate();
+    const FVector2D PreviousSceneSize=Layout.SceneSize;
     Layout=FGHSTwinLayout::Calculate(ViewSize,bPanelCollapsed && PanelVisibilityProgress<=0);
+    if(!PreviousSceneSize.Equals(Layout.SceneSize,.5)) POICadence.Invalidate();
     if(bInitialViewPending && GetOwningPlayerPawn()) { bInitialViewPending=false; Overview(); }
     // A panel toggle changes UI/input bounds only; it must never initiate camera focus.
     else if(bViewportChanged && !SelectedId.IsEmpty()) Focus(SelectedId);
@@ -255,14 +314,37 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
     if(SearchSlot) { SearchSlot->SetPosition(FVector2D(FMath::Max(140.,Layout.SceneSize.X-384),Layout.HeaderHeight+16)); SearchSlot->SetSize(FVector2D(FMath::Min(360.,Layout.SceneSize.X-160),36)); }
     if(SearchBox) SearchBox->SetVisibility(Layout.SceneSize.X>=600 ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
     const double Now=GetWorld()->GetTimeSeconds();
-    if(Now>=NextRefresh) { GHSTwinSelection::BootstrapComponents(GetWorld()); SceneData.Refresh(GetWorld()); PushSnapshot(); NextRefresh=Now+2; }
-    Labels.Empty();
-    if(!bShowPOIs || !GetOwningPlayer()) return;
+    {
+        TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_SceneRefresh);
+        SceneData.MaintainCache(128);
+        if(Now>=NextRefresh) { SceneData.Refresh(GetWorld(),true); PushSnapshot(); NextRefresh=Now+2; }
+    }
+    UpdateSelectedScreenBounds();
+    if(!bShowPOIs || !GetOwningPlayer())
+    { VisibleLabels.Reset();PreviousVisibleLabels.Reset();PreviousPositions.Reset();LabelAges.Reset();return; }
+    auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn());
+    const bool bAggregate=Cam && Cam->SpringArmComponent->TargetArmLength>14000 && Density!=TEXT("all");
+    const bool bCandidatesChanged=POICadence.Consume(Now,SceneData.GetRevision(),bAggregate);
+    if(bCandidatesChanged) RebuildPOICandidates(bAggregate);
+    // Fast movement may expose a different candidate between cadence ticks. It only
+    // repeats visibility layout; it does not regenerate catalogue strings or groups.
+    const FRotator Rotation=Cam?Cam->GetActorRotation():FRotator::ZeroRotator;
+    const FVector Location=Cam?Cam->GetActorLocation():FVector::ZeroVector;
+    const FRotator Delta=(Rotation-LastLayoutRotation).GetNormalized();
+    const bool bFastMovement=FMath::Abs(Delta.Yaw)>2.5 || FMath::Abs(Delta.Pitch)>2.5 || FVector::DistSquared(Location,LastLayoutLocation)>40000;
+    const bool bRelayout=bCandidatesChanged || bViewportChanged || bFastMovement;
+    if(bRelayout) {LastLayoutRotation=Rotation;LastLayoutLocation=Location;}
+    UpdateVisiblePOIs(DeltaSeconds,bRelayout);
+}
+void UGHSTwinHUDWidget::RebuildPOICandidates(bool bAggregate)
+{
+    TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_POICandidates);
+    ++CandidateBuildCount;
     auto Points=SceneData.Points();
     if(!SelectedId.IsEmpty() && !Points.ContainsByPredicate([this](const FGHSTwinPoint& P){return P.Id==SelectedId;}))
-    { FVector Location,Extent; if(SceneData.Resolve(SelectedId,Location,Extent)) Points.Add({SelectedId,TEXT("选中物料"),TEXT("material"),TEXT("scene"),Location+FVector(0,0,Extent.Z+80),false}); }
+    { FVector Location; if(SceneData.ResolvePoint(SelectedId,Location)) Points.Add({SelectedId,TEXT("选中物料"),TEXT("material"),TEXT("scene"),Location,false}); }
     Points.RemoveAll([this](const FGHSTwinPoint& P){return P.Id!=SelectedId && PointFilter!=TEXT("all") && P.Kind!=PointFilter;});
-    if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn()); Cam && Cam->SpringArmComponent->TargetArmLength>14000 && Density!=TEXT("all"))
+    if(bAggregate)
     {
         TMap<FString,FGHSTwinPoint> Groups; TMap<FString,int32> Counts; TArray<FGHSTwinPoint> Chosen;
         for(const auto& P:Points)
@@ -272,63 +354,101 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
             if(P.Status==TEXT("fault")) Group.Status=TEXT("fault"); else if(P.bAlert && Group.Status!=TEXT("fault")) Group.Status=TEXT("warning");
             ++Counts.FindOrAdd(P.Kind);
         }
-        const TMap<FString,FString> Names{{TEXT("agv"),TEXT("AGV")},{TEXT("forklift"),TEXT("人工叉车")},{TEXT("stacker"),TEXT("堆高车")},{TEXT("truck"),TEXT("装卸车")},{TEXT("charger"),TEXT("充电设施")},{TEXT("rack"),TEXT("货架区")}};
+        static const TMap<FString,FString> Names{{TEXT("agv"),TEXT("AGV")},{TEXT("forklift"),TEXT("人工叉车")},{TEXT("stacker"),TEXT("堆高车")},{TEXT("truck"),TEXT("装卸车")},{TEXT("charger"),TEXT("充电设施")},{TEXT("rack"),TEXT("货架区")}};
         for(auto& Entry:Groups) { auto& P=Entry.Value; P.Location/=Counts[Entry.Key]; P.Id=TEXT("GROUP:")+Entry.Key; const FString* Name=Names.Find(Entry.Key); P.Title=Entry.Key==TEXT("rack")?TEXT("货架区域"):FString::Printf(TEXT("%s · %d"),Name?**Name:*Entry.Key,Counts[Entry.Key]); Chosen.Add(P); }
         Points=MoveTemp(Chosen);
     }
     Points.StableSort([this](const FGHSTwinPoint& A,const FGHSTwinPoint& B) { if(A.Id==B.Id) return false; const bool AS=A.Id==SelectedId || A.Id==ActiveRegionId, BS=B.Id==SelectedId || B.Id==ActiveRegionId; if(AS!=BS) return AS; return A.bAlert && !B.bAlert; });
-    const int32 Maximum=Density==TEXT("minimal") ? 6 : Density==TEXT("all") ? 32 : 16;
-    // Keep adjacent equipment labels off the object the user is inspecting.
-    FVector2D SelectedMin(1.e8,1.e8),SelectedMax(-1.e8,-1.e8);
-    FVector SelectedCenter,SelectedExtent;
-    bool bSelectedBoundsValid=!SelectedId.IsEmpty() && SceneData.Resolve(SelectedId,SelectedCenter,SelectedExtent);
-    if(bSelectedBoundsValid) for(int I=0;I<8;++I)
+    Labels.Reset();Labels.Reserve(Points.Num());
+    for(const auto& P:Points)
+    {
+        FLabel L;L.Id=P.Id;L.Text=P.Title;L.Kind=P.Kind;L.Status=P.Status;L.WorldLocation=P.Location;L.bAlert=P.bAlert;
+        L.bRegion=P.Id.StartsWith(TEXT("REGION:"));L.bGroup=P.Id.StartsWith(TEXT("GROUP:"));
+        L.Size=FVector2D(L.bRegion?176:L.bGroup?246:236,42);
+        L.DisplayTitle=L.bRegion || L.bGroup?L.Text:L.Id.Len()<22?L.Id:TEXT("货架物料");
+        L.State=TEXT("待接入");L.Accent=C(TEXT("8490A2"));
+        if(L.Status==TEXT("running") || L.Status==TEXT("charging")) {L.State=L.Status==TEXT("charging")?TEXT("充电中"):TEXT("运行");L.Accent=C(TEXT("087B68"));}
+        else if(L.Status==TEXT("fault")) {L.State=TEXT("故障");L.Accent=C(TEXT("B53743"));}
+        else if(L.Status==TEXT("warning") || L.bAlert) {L.State=TEXT("预警");L.Accent=C(TEXT("92580D"));}
+        else if(L.Status==TEXT("idle")) L.State=TEXT("待机");
+        else if(L.Status==TEXT("offline")) L.State=TEXT("离线");
+        else if(L.Status==TEXT("scene")) {L.State=TEXT("场景");L.Accent=C(TEXT("356BFA"));}
+        if(L.bGroup && !L.bAlert) L.State=TEXT("设备");
+        L.BadgeWidth=L.State.Len()*14.+12;
+        Labels.Add(MoveTemp(L));
+    }
+}
+void UGHSTwinHUDWidget::UpdateSelectedScreenBounds()
+{
+    TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_SelectedProjection);
+    bSelectedScreenBoundsValid=false;
+    if(SelectedId.IsEmpty() || !GetOwningPlayer()) return;
+    FVector Center,Extent;if(!SceneData.Resolve(SelectedId,Center,Extent)) return;
+    SelectedScreenMin=FVector2D(1.e8,1.e8);SelectedScreenMax=FVector2D(-1.e8,-1.e8);
+    for(int32 I=0;I<8;++I)
     {
         FVector2D P;
-        if(!GetOwningPlayer()->ProjectWorldLocationToScreen(SelectedCenter+SelectedExtent*FVector(I&1?1:-1,I&2?1:-1,I&4?1:-1),P,false)) { bSelectedBoundsValid=false; break; }
-        SelectedMin.X=FMath::Min(SelectedMin.X,P.X-8);SelectedMin.Y=FMath::Min(SelectedMin.Y,P.Y-8);
-        SelectedMax.X=FMath::Max(SelectedMax.X,P.X+8);SelectedMax.Y=FMath::Max(SelectedMax.Y,P.Y+8);
+        ++SelectionProjectionCount;
+        if(!GetOwningPlayer()->ProjectWorldLocationToScreen(Center+Extent*FVector(I&1?1:-1,I&2?1:-1,I&4?1:-1),P,false)) return;
+        SelectedScreenMin.X=FMath::Min(SelectedScreenMin.X,P.X);SelectedScreenMin.Y=FMath::Min(SelectedScreenMin.Y,P.Y);
+        SelectedScreenMax.X=FMath::Max(SelectedScreenMax.X,P.X);SelectedScreenMax.Y=FMath::Max(SelectedScreenMax.Y,P.Y);
     }
+    bSelectedScreenBoundsValid=true;
+}
+void UGHSTwinHUDWidget::UpdateVisiblePOIs(float DeltaSeconds,bool bRelayout)
+{
+    TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_VisibleProjection);
+    ++VisibleProjectionFrames;
+    Swap(VisibleLabels,PreviousVisibleLabels);VisibleLabels.Reset();
+    const int32 Maximum=Density==TEXT("minimal")?6:Density==TEXT("all")?32:16;
+    const FVector2D SelectedMin=SelectedScreenMin-FVector2D(8,8),SelectedMax=SelectedScreenMax+FVector2D(8,8);
     TSet<FString> Current;
-    for(const auto& Point: Points)
+    float CursorX=0,CursorY=0;const bool bCursor=GetOwningPlayer()->GetMousePosition(CursorX,CursorY);
+    const int32 Count=bRelayout?Labels.Num():PreviousVisibleLabels.Num();
+    for(int32 I=0;I<Count;++I)
     {
-        FVector2D Screen;
-        if(!GetOwningPlayer()->ProjectWorldLocationToScreen(Point.Location,Screen,false)) continue;
-        const bool Selected=Point.Id==SelectedId || Point.Id==ActiveRegionId;
-        const bool bRegion=Point.Id.StartsWith(TEXT("REGION:"));
-        const FVector2D Size(bRegion ? 176 : Point.Id.StartsWith(TEXT("GROUP:")) ? 246 : 236,42);
+        const int32 Index=bRelayout?I:PreviousVisibleLabels[I];
+        if(!Labels.IsValidIndex(Index)) continue;
+        auto& L=Labels[Index];FVector World=L.WorldLocation;
+        // Aggregates intentionally retain the 100ms centroid. Actual objects and
+        // selected CAD instances resolve their current world anchor on every frame.
+        if(!L.bGroup && !SceneData.ResolvePoint(L.Id,World)) continue;
+        ++PointProjectionCount;
+        FVector2D Screen;if(!GetOwningPlayer()->ProjectWorldLocationToScreen(World,Screen,false)) continue;
+        const bool Selected=L.Id==SelectedId || L.Id==ActiveRegionId;
+        const FVector2D Size=L.Size;
         FVector2D At=Screen-FVector2D(Size.X*.5,Size.Y+28);
         if(!Layout.IsScenePoint(At-FVector2D(4,4)) || !Layout.IsScenePoint(At+Size+FVector2D(4,4)) || At.Y<Layout.HeaderHeight+64) continue;
-        bool Overlap=false;
-        const FVector2D Original=At;
-        const int32 Attempts=Point.Id.StartsWith(TEXT("GROUP:")) || bRegion ?7:1;
+        bool Overlap=false;const FVector2D Original=At;
+        const int32 Attempts=L.bGroup || L.bRegion?7:1;
         for(int32 Attempt=0;Attempt<Attempts;++Attempt)
         {
-            At=Original+FVector2D(0,Attempt==0?0:((Attempt+1)/2)*60*(Attempt%2? -1:1));
+            At=Original+FVector2D(0,Attempt==0?0:((Attempt+1)/2)*60*(Attempt%2?-1:1));
             Overlap=!Layout.IsScenePoint(At) || !Layout.IsScenePoint(At+Size) || At.Y<Layout.HeaderHeight+110;
-            // A displaced aggregate must leave its own world anchor outside the card.
             if(Inside(Screen,At-FVector2D(14,14),Size+FVector2D(28,28))) Overlap=true;
-            if(!Selected && bSelectedBoundsValid && At.X<SelectedMax.X && At.X+Size.X>SelectedMin.X
-                && At.Y<SelectedMax.Y && At.Y+Size.Y>SelectedMin.Y) Overlap=true;
-            for(const auto& Existing:Labels) if(FMath::Abs((At+Size*.5-Existing.Position-Existing.Size*.5).X)<(Size.X+Existing.Size.X)*.5+12 && FMath::Abs((At+Size*.5-Existing.Position-Existing.Size*.5).Y)<(Size.Y+Existing.Size.Y)*.5+12) {Overlap=true; break;}
+            if(!Selected && bSelectedScreenBoundsValid && At.X<SelectedMax.X && At.X+Size.X>SelectedMin.X && At.Y<SelectedMax.Y && At.Y+Size.Y>SelectedMin.Y) Overlap=true;
+            for(int32 ExistingIndex:VisibleLabels)
+            {
+                const auto& Existing=Labels[ExistingIndex];
+                if(FMath::Abs((At+Size*.5-Existing.Position-Existing.Size*.5).X)<(Size.X+Existing.Size.X)*.5+12 && FMath::Abs((At+Size*.5-Existing.Position-Existing.Size*.5).Y)<(Size.Y+Existing.Size.Y)*.5+12) {Overlap=true;break;}
+            }
             if(!Overlap) break;
         }
         if(Overlap && !Selected) continue;
-        if(auto* Previous=PreviousPositions.Find(Point.Id)) At=GHSHUDMotion::FollowPosition(*Previous,At,DeltaSeconds);
-        PreviousPositions.Add(Point.Id,At); Current.Add(Point.Id);
-        float& Age=LabelAges.FindOrAdd(Point.Id); Age+=DeltaSeconds;
-        float CursorX=0,CursorY=0;
-        const bool bHover=GetOwningPlayer()->GetMousePosition(CursorX,CursorY) && Inside(FVector2D(CursorX,CursorY),At,Size);
-        FLabel L; L.Id=Point.Id; L.Text=Point.Title; L.Kind=Point.Kind; L.Status=Point.Status; L.Position=At; L.Anchor=Screen; L.Size=Size; L.bAlert=Point.bAlert; L.bSelected=Selected; L.bHovered=bHover; L.Opacity=GHSHUDMotion::Progress(Age);
-        Labels.Add(L); if(Labels.Num()>=Maximum) break;
+        if(auto* Previous=PreviousPositions.Find(L.Id)) At=GHSHUDMotion::FollowPosition(*Previous,At,DeltaSeconds);
+        PreviousPositions.Add(L.Id,At);Current.Add(L.Id);
+        float& Age=LabelAges.FindOrAdd(L.Id);Age+=DeltaSeconds;
+        L.Position=At;L.Anchor=Screen;L.bSelected=Selected;L.bHovered=bCursor && Inside(FVector2D(CursorX,CursorY),At,Size);L.Opacity=GHSHUDMotion::Progress(Age);
+        VisibleLabels.Add(Index);if(VisibleLabels.Num()>=Maximum) break;
     }
     for(auto It=LabelAges.CreateIterator();It;++It) if(!Current.Contains(It.Key())) {PreviousPositions.Remove(It.Key());It.RemoveCurrent();}
 }
 FString UGHSTwinHUDWidget::GetPOIReport() const
 {
     TArray<TSharedPtr<FJsonValue>> Items;
-    for(const auto& Label:Labels)
+    for(const int32 Index:VisibleLabels)
     {
+        const auto& Label=Labels[Index];
         auto Item=MakeShared<FJsonObject>(); Item->SetStringField(TEXT("id"),Label.Id); Item->SetStringField(TEXT("icon"),Label.Kind);
         Item->SetBoolField(TEXT("selected"),Label.bSelected); Item->SetNumberField(TEXT("height"),Label.Size.Y);
         Item->SetStringField(TEXT("fill"),Label.bSelected?TEXT("356BFA"):TEXT("FFFFFF"));
@@ -336,10 +456,18 @@ FString UGHSTwinHUDWidget::GetPOIReport() const
         Items.Add(MakeShared<FJsonValueObject>(Item));
     }
     auto Root=MakeShared<FJsonObject>(); Root->SetArrayField(TEXT("labels"),Items); Root->SetNumberField(TEXT("selectionStroke"),4);
+    auto Work=MakeShared<FJsonObject>();Work->SetNumberField(TEXT("candidateBuilds"),double(CandidateBuildCount));
+    Work->SetNumberField(TEXT("projectionFrames"),double(VisibleProjectionFrames));Work->SetNumberField(TEXT("pointProjections"),double(PointProjectionCount));
+    Work->SetNumberField(TEXT("selectionProjections"),double(SelectionProjectionCount));Work->SetNumberField(TEXT("candidateCount"),Labels.Num());
+    Work->SetBoolField(TEXT("browserActive"),bBrowserActive);Work->SetBoolField(TEXT("diagnostics"),bDiagnostics);
+    const auto Cache=SceneData.GetCacheStats();
+    Work->SetNumberField(TEXT("worldScans"),double(Cache.WorldScans));Work->SetNumberField(TEXT("snapshotSerializations"),double(Cache.SnapshotSerializations));
+    Root->SetObjectField(TEXT("performance"),Work);
     FString Out; FJsonSerializer::Serialize(Root,TJsonWriterFactory<>::Create(&Out)); return Out;
 }
 int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,const FSlateRect& Clip,FSlateWindowElementList& Elements,int32 Layer,const FWidgetStyle& Style,bool Enabled) const
 {
+    TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_Paint);
     Layer=Super::NativePaint(Args,G,Clip,Elements,Layer,Style,Enabled);
     auto Box=[&](FVector2D At,FVector2D Size,FLinearColor Fill,float Radius=0.f,FLinearColor Border=FLinearColor::Transparent,float BorderWidth=1.f)
     { FSlateRoundedBoxBrush Brush(FLinearColor::White,Radius,Border,Border.A>0?BorderWidth:0); FSlateDrawElement::MakeBox(Elements,++Layer,G.ToPaintGeometry(Size,FSlateLayoutTransform(At)),&Brush,ESlateDrawEffect::None,Fill); };
@@ -360,54 +488,32 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
         const TCHAR* Filters[]={TEXT("all"),TEXT("rack"),TEXT("truck"),TEXT("charger")};
         for(int I=0;I<4;++I) { const FVector2D At(20+I*104,Layout.HeaderHeight+68); Box(At,FVector2D(96,32),FLinearColor::White,4,C(PointFilter==Filters[I]?TEXT("356BFA"):TEXT("E5EAF2"))); Text(At+FVector2D(15,8),Names[I],11,C(TEXT("25364B"))); }
     }
-    if(!SelectedId.IsEmpty())
+    if(bSelectedScreenBoundsValid && Layout.IsScenePoint((SelectedScreenMin+SelectedScreenMax)*.5))
     {
-        FVector Location,Extent;
-        if(SceneData.Resolve(SelectedId,Location,Extent))
-        {
-            FVector2D Min(1.e8,1.e8),Max(-1.e8,-1.e8); bool Valid=true;
-            for(int I=0;I<8;++I)
-            {
-                FVector2D P; if(!GetOwningPlayer()->ProjectWorldLocationToScreen(Location+Extent*FVector(I&1?1:-1,I&2?1:-1,I&4?1:-1),P,false)) {Valid=false;break;}
-                Min.X=FMath::Min(Min.X,P.X);Min.Y=FMath::Min(Min.Y,P.Y);Max.X=FMath::Max(Max.X,P.X);Max.Y=FMath::Max(Max.Y,P.Y);
-            }
-            if(Valid && Layout.IsScenePoint((Min+Max)*.5))
-            {
-                Min.X=FMath::Max(Min.X,8.);Min.Y=FMath::Max(Min.Y,Layout.HeaderHeight+8);Max.X=FMath::Min(Max.X,Layout.SceneSize.X-8);Max.Y=FMath::Min(Max.Y,Layout.ScenePosition.Y+Layout.SceneSize.Y-8);
-                const FLinearColor Blue=C(TEXT("356BFA"));
-                for(int I=0;I<4;++I) {const FVector2D P(I&1?Max.X:Min.X,I&2?Max.Y:Min.Y);Line(P,P+FVector2D(I&1?-24:24,0),Blue,4);Line(P,P+FVector2D(0,I&2?-24:24),Blue,4);}
-            }
-        }
+        // Tick already projected the eight model corners for POI avoidance.
+        FVector2D Min=SelectedScreenMin,Max=SelectedScreenMax;
+        Min.X=FMath::Max(Min.X,8.);Min.Y=FMath::Max(Min.Y,Layout.HeaderHeight+8);Max.X=FMath::Min(Max.X,Layout.SceneSize.X-8);Max.Y=FMath::Min(Max.Y,Layout.ScenePosition.Y+Layout.SceneSize.Y-8);
+        const FLinearColor Blue=C(TEXT("356BFA"));
+        for(int I=0;I<4;++I) {const FVector2D P(I&1?Max.X:Min.X,I&2?Max.Y:Min.Y);Line(P,P+FVector2D(I&1?-24:24,0),Blue,4);Line(P,P+FVector2D(0,I&2?-24:24),Blue,4);}
     }
     // Render stems beneath every card. A tag moved below its anchor connects
     // from the top edge; neither its stem nor its anchor may overwrite text.
-    for(const FLabel& L:Labels)
+    for(const int32 Index:VisibleLabels)
     {
+        const FLabel& L=Labels[Index];
         if(Inside(L.Anchor,L.Position-FVector2D(2,2),L.Size+FVector2D(4,4))) continue;
-        FLinearColor Accent=C(TEXT("8490A2"));
-        if(L.Status==TEXT("running") || L.Status==TEXT("charging")) Accent=C(TEXT("087B68"));
-        else if(L.Status==TEXT("fault")) Accent=C(TEXT("B53743"));
-        else if(L.Status==TEXT("warning") || L.bAlert) Accent=C(TEXT("92580D"));
-        else if(L.Status==TEXT("scene")) Accent=C(TEXT("356BFA"));
+        const FLinearColor Accent=L.Accent;
         const FVector2D Edge(FMath::Clamp(L.Anchor.X,L.Position.X,L.Position.X+L.Size.X),
             FMath::Clamp(L.Anchor.Y,L.Position.Y,L.Position.Y+L.Size.Y));
         Line(Edge,L.Anchor,Accent.CopyWithNewOpacity(.6f*L.Opacity));
-        TArray<FVector2D> Ring; for(int I=0;I<=24;++I) {const double A=I*2*PI/24;Ring.Add(L.Anchor+FVector2D(FMath::Cos(A)*12,FMath::Sin(A)*5));}
-        FSlateDrawElement::MakeLines(Elements,++Layer,G.ToPaintGeometry(),Ring,ESlateDrawEffect::None,Accent.CopyWithNewOpacity(.55f*L.Opacity),true,1.f);
+        FSlateDrawElement::MakeLines(Elements,++Layer,G.ToPaintGeometry(FVector2D(24,10),FSlateLayoutTransform(L.Anchor)),UnitAnchorEllipse(),ESlateDrawEffect::None,Accent.CopyWithNewOpacity(.55f*L.Opacity),true,1.f);
         Box(L.Anchor-FVector2D(3,3),FVector2D(6,6),Accent.CopyWithNewOpacity(L.Opacity),3);
     }
-    for(const FLabel& L:Labels)
+    for(const int32 Index:VisibleLabels)
     {
+        const FLabel& L=Labels[Index];
         auto Fade=[&](FLinearColor Color){Color.A*=L.Opacity;return Color;};
-        const bool bRegion=L.Id.StartsWith(TEXT("REGION:")), bGroup=L.Id.StartsWith(TEXT("GROUP:"));
-        FString State=TEXT("待接入"); FLinearColor Accent=C(TEXT("8490A2"));
-        if(L.Status==TEXT("running") || L.Status==TEXT("charging")) {State=L.Status==TEXT("charging")?TEXT("充电中"):TEXT("运行");Accent=C(TEXT("087B68"));}
-        else if(L.Status==TEXT("fault")) {State=TEXT("故障");Accent=C(TEXT("B53743"));}
-        else if(L.Status==TEXT("warning") || L.bAlert) {State=TEXT("预警");Accent=C(TEXT("92580D"));}
-        else if(L.Status==TEXT("idle")) State=TEXT("待机");
-        else if(L.Status==TEXT("offline")) State=TEXT("离线");
-        else if(L.Status==TEXT("scene")) {State=TEXT("场景");Accent=C(TEXT("356BFA"));}
-        if(bGroup && !L.bAlert) State=TEXT("设备");
+        const FLinearColor Accent=L.Accent;
         const FLinearColor Blue=C(TEXT("356BFA"));
         Box(L.Position+FVector2D(0,3),L.Size,Fade(FLinearColor(.08,.15,.25,.055)),6);
         Box(L.Position,L.Size,Fade(L.bSelected?Blue:FLinearColor::White),6,Fade(L.bSelected || L.bHovered?Blue:C(TEXT("DFE7F2"))),L.bHovered?1.5f:1.f);
@@ -427,13 +533,12 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
         {Path({{2,3},{22,3},{22,22}});Path({{2,3},{2,22}});Path({{2,12},{22,12}});Path({{2,21},{22,21}});Path({{5,5},{10,5},{10,10},{5,10},{5,5}});Path({{14,14},{19,14},{19,19},{14,19},{14,14}});}
         else
         {Path({{3,7},{12,2},{21,7},{21,18},{12,23},{3,18},{3,7},{12,12},{21,7}});Path({{12,12},{12,23}});Path({{8,4},{17,9}});}
-        const FString Title=bRegion || bGroup?L.Text:L.Id.Len()<22?L.Id:TEXT("货架物料");
-        Text(L.Position+FVector2D(40,11),Title,14,Fade(L.bSelected?FLinearColor::White:C(TEXT("25364B"))));
-        if(!bRegion)
+        Text(L.Position+FVector2D(40,11),L.DisplayTitle,14,Fade(L.bSelected?FLinearColor::White:C(TEXT("25364B"))));
+        if(!L.bRegion)
         {
-            const double BadgeWidth=State.Len()*14.+12; const FVector2D BadgeAt=L.Position+FVector2D(L.Size.X-BadgeWidth-12,9);
-            Box(BadgeAt,FVector2D(BadgeWidth,24),Fade(C(TEXT("F0F4F9"))),3);
-            Text(BadgeAt+FVector2D(6,4),State,12,Fade(Accent));
+            const FVector2D BadgeAt=L.Position+FVector2D(L.Size.X-L.BadgeWidth-12,9);
+            Box(BadgeAt,FVector2D(L.BadgeWidth,24),Fade(C(TEXT("F0F4F9"))),3);
+            Text(BadgeAt+FVector2D(6,4),L.State,12,Fade(Accent));
         }
     }
     const FVector2D Tool(Layout.SceneSize.X-60,Layout.ScenePosition.Y+Layout.SceneSize.Y-132);

@@ -23,3 +23,14 @@
 @media(max-width:300px){.title-row,.section-head{flex-wrap:wrap}.chart-split,.view-overview .chart-split,.device-metrics{grid-template-columns:100px minmax(0,1fr);gap:10px}.legend{gap:12px}.legend-item{gap:5px}.legend-item>span{min-width:0;overflow-wrap:anywhere}.image-caption{gap:8px;flex-wrap:wrap}}
 
 .preset-check{float:right}.preset-check .icon{width:16px;height:16px;vertical-align:middle}
+
+/* Filters share the browser viewport with their trigger, including UE HUD scaling. */
+.filter-select{display:inline-flex;align-items:center;justify-content:space-between;gap:9px;max-width:100%;min-width:0;height:32px;padding:3px 7px;border:1px solid var(--line);border-radius:3px;background:#fff;font-size:12px;text-align:left;white-space:nowrap}
+.filter-select:hover,.filter-select[aria-expanded=true]{border-color:#91adfa;color:var(--blue-ink)}
+.filter-chevron,.filter-check{width:14px;height:14px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.filter-select[aria-expanded=true] .filter-chevron{transform:rotate(180deg)}
+.filter-listbox{position:fixed;z-index:30;width:max-content;min-width:112px;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:4px;border:1px solid #d7e0ee;border-radius:4px;background:#fff;box-shadow:0 4px 16px #2337521f;font-size:12px;line-height:1.5;outline:none;scrollbar-width:thin;scrollbar-color:#bdc9d8 transparent}
+.filter-option{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:30px;padding:5px 7px;border-radius:2px;cursor:pointer;white-space:nowrap}
+.filter-option.is-active,.filter-option:hover{background:#edf3ff;color:var(--blue-ink)}
+.filter-option[aria-selected=true]{color:var(--blue-ink)}
+.filter-check{visibility:hidden}.filter-option[aria-selected=true] .filter-check{visibility:visible}
