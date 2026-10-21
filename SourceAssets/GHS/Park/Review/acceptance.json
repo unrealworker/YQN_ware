@@ -1,9 +1,9 @@
 {
-  "date_local": "2026-10-21T23:48:04",
+  "date_local": "2026-10-22T01:39:16",
   "timezone": "Asia/Shanghai",
   "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
-  "map_sha256": "76786559b6076d51717a6c3ea9fad11d22633faa07989c12f7bc81b19e78f92f",
-  "manifest_sha256": "6a398e47a69d4a79c876d2f46bb691ca1f8d7ee93bba39a070c151622b149289",
+  "map_sha256": "fe43d3b6830c5592e9c5c94043a41a9978b3dd2d010630ccb9e6533758c22b2c",
+  "manifest_sha256": "fd6911d823f24cfe8050cffb4dbaf9407d3b8023aae442b96edb0eb7c51a050a",
   "old_map_preserved": true,
   "original_objects_checked": 334,
   "pre_import_changes": [
@@ -34,23 +34,35 @@
       ]
     }
   ],
-  "added_meshes": 21,
-  "triangles": 741077,
+  "component_material_overrides": {
+    "SM_GHSPark_Blue": [
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt"
+    ]
+  },
+  "shared_source_assets_sha256": {
+    "D:\\UEPro\\Test\\Content\\GHSNormalWarehouse\\TrucksLong\\SM_GHN_LongDockTruck.uasset": "740890fc3b54d672e1e16d3afca04503d0285fff4062d84dfa298fcd0d5352ad",
+    "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\TrucksLong\\dock_truck_long.blend": "9f488bba3a1f513fc265c7a10f4ec27ca57c29ae80233870dd3ce949eaf6c802",
+    "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\TrucksLong\\SM_GHN_LongDockTruck.fbx": "b2f5df7846a15ff810e4cfe62085a3462549f77374c389dfc5c2f3b8d8cb3770",
+    "D:\\UEPro\\Test\\Content\\GHSDigitalTwin\\Blueprints\\BP_GHS_InstanceGroup.uasset": "5b38d964c355664ac4b2b1c6568b0ab1629ba9c6b653e0ab951c9dc6815633bf"
+  },
+  "added_meshes": 22,
+  "triangles": 808778,
+  "instanced_triangles_total": 1955274,
   "context_counts": {
     "fence_posts": 604,
     "fence_bars": 6306,
     "fence_rails": 3134,
     "gate_columns": 4,
     "perimeter_gates": 2,
-    "landscape_shrubs": 191,
-    "low_poly_trees": 815,
-    "clustered_broadleaf_trees": 815,
+    "landscape_shrubs": 260,
+    "low_poly_trees": 821,
+    "clustered_broadleaf_trees": 821,
     "tree_candidates_omitted_for_road_clearance": 5,
-    "parked_cars": 140,
-    "detailed_compact_suv": 78,
-    "car_spaces": 82,
-    "detailed_sedan": 62,
-    "parked_trailers": 27,
+    "parked_cars": 157,
+    "detailed_compact_suv": 84,
+    "car_spaces": 112,
+    "detailed_sedan": 73,
+    "static_display_trucks": 27,
     "trailer_spaces": 52,
     "gatehouses": 2,
     "detailed_context_houses": 338,
@@ -83,7 +95,7 @@
     "source_building_heights_all_3m_default": true
   },
   "saved_map_reload_passed": true,
-  "saved_map_reload_finished_utc": "2026-10-21T15:41:25.348707+00:00",
+  "saved_map_reload_finished_utc": "2026-10-21T17:34:55.941671+00:00",
   "runtime_checks": [
     {
       "name": "saved_campus_loaded_and_business_registry_preserved",
@@ -142,25 +154,634 @@
       "passed": true
     }
   ],
-  "runtime_elapsed_seconds": 14.937999999965541,
+  "runtime_elapsed_seconds": 78.78100000007544,
   "runtime_business_registry": {
     "equipment": 106,
     "facilities": 56
   },
+  "static_trucks": {
+    "count": 27,
+    "shared_meshes": 1,
+    "doors_closed": true,
+    "collision": false,
+    "tick": false,
+    "poi": false,
+    "validation": {
+      "success": true,
+      "source_assets_preserved": true,
+      "preserved_source_parts": 423,
+      "maximum_reused_vertex_error_m": 0.0,
+      "removed_folded_door_parts": 16,
+      "modified_belt_parts": 2,
+      "added_closed_door_parts": 30,
+      "door_aperture_rays_passed": 2350,
+      "rear_aperture_closed": true,
+      "mesh_validate_needed_repairs": false,
+      "degenerate_faces": 0,
+      "full_source_bounds_preserved": true
+    },
+    "clearance_review": {
+      "success": true,
+      "reviewed_utc": "2026-10-21T17:31:46.351650+00:00",
+      "review_scope": "Independent read-only review of static closed truck manifest, placement clearances and Blender-source restoration code; no UE or Blender process started by reviewer.",
+      "manifest": {
+        "path": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\park_manifest.json",
+        "sha256": "fd6911d823f24cfe8050cffb4dbaf9407d3b8023aae442b96edb0eb7c51a050a",
+        "version": 3
+      },
+      "site_geometry_report_sha256": "475b548a9bff7392b4c7c84f74deee76eca61419ae974985dc1d9bf05040e4a6",
+      "original_scene_baseline_sha256": "cb59f1e4f8e44b6f4906d2a40d4fdbaa2080c62b252c703c3a607334da17841f",
+      "truck_mesh": {
+        "name": "SM_GHSPark_ClosedTruck",
+        "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\Trucks\\SM_GHSPark_ClosedTruck.fbx",
+        "fbx_sha256": "2f3f18766b14c63f7de63062a9e1cbd3854a007b4f8222af0401bdf2a05656c0",
+        "triangles": 44096,
+        "bounds_ue_cm": {
+          "min": [
+            -19.749923050403595,
+            -149.9999761581421,
+            -0.6500244140625
+          ],
+          "max": [
+            1470.6001281738281,
+            150.00003576278687,
+            373.50006103515625
+          ]
+        },
+        "material_roles": [
+          "TruckRubber",
+          "TruckTrim",
+          "TruckGlass",
+          "TruckBody",
+          "TruckHeadlight",
+          "TruckBlue",
+          "TruckTailLight"
+        ],
+        "slot_names": [
+          "M_GHSPark_TruckRubber",
+          "M_GHSPark_TruckTrim",
+          "M_GHSPark_TruckGlass",
+          "M_GHSPark_TruckBody",
+          "M_GHSPark_TruckHeadlight",
+          "M_GHSPark_TruckBlue",
+          "M_GHSPark_TruckTailLight"
+        ]
+      },
+      "instance_parameters_sha256": "d3cc23d13d81fed3ac1e0fe615f85dc23a37800d27b939433cdb7f7d0a285722",
+      "instance_parameters": [
+        {
+          "position_cm": [
+            -16921.268893049015,
+            15299.817619324438,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            71.88072524825384,
+            220.27598595020396
+          ]
+        },
+        {
+          "position_cm": [
+            -16533.213963059963,
+            15202.795089409006,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            75.76127454814439,
+            219.30576065104967
+          ]
+        },
+        {
+          "position_cm": [
+            -16145.159033070906,
+            15105.772559493578,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            79.64182384803493,
+            218.33553535189537
+          ]
+        },
+        {
+          "position_cm": [
+            -15369.049173092799,
+            14911.72749966272,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            87.40292244781601,
+            216.3950847535868
+          ]
+        },
+        {
+          "position_cm": [
+            -14980.994243103743,
+            14814.704969747288,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            91.28347174770654,
+            215.4248594544325
+          ]
+        },
+        {
+          "position_cm": [
+            -14204.884383125636,
+            14620.659909916434,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            99.04457034748764,
+            213.48440885612393
+          ]
+        },
+        {
+          "position_cm": [
+            -13816.829453136581,
+            14523.637380001002,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            102.92511964737817,
+            212.51418355696964
+          ]
+        },
+        {
+          "position_cm": [
+            -12652.664663169418,
+            14232.569790254718,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            114.56676754704979,
+            209.6035076595068
+          ]
+        },
+        {
+          "position_cm": [
+            -12264.609733180365,
+            14135.547260339292,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            118.44731684694034,
+            208.6332823603525
+          ]
+        },
+        {
+          "position_cm": [
+            -11876.55480319131,
+            14038.524730423858,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            122.32786614683089,
+            207.6630570611982
+          ]
+        },
+        {
+          "position_cm": [
+            -11488.499873202256,
+            13941.502200508432,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            126.20841544672142,
+            206.6928317620439
+          ]
+        },
+        {
+          "position_cm": [
+            -10712.390013224145,
+            13747.457140677574,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            133.96951404650252,
+            204.75238116373535
+          ]
+        },
+        {
+          "position_cm": [
+            -8932.497276781061,
+            10448.130496940526,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            150.09665122972228,
+            171.97521495766125
+          ]
+        },
+        {
+          "position_cm": [
+            -7732.585121709272,
+            10433.610851250132,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            162.09577278044017,
+            171.83001850075732
+          ]
+        },
+        {
+          "position_cm": [
+            -6932.643684994744,
+            10423.931087456536,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            170.09518714758545,
+            171.73322086282136
+          ]
+        },
+        {
+          "position_cm": [
+            -6532.672966637483,
+            10419.09120555974,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            174.09489433115806,
+            171.6848220438534
+          ]
+        },
+        {
+          "position_cm": [
+            -5732.7315299229585,
+            10409.411441766142,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            182.0943086983033,
+            171.58802440591742
+          ]
+        },
+        {
+          "position_cm": [
+            -4532.819374851167,
+            10394.89179607575,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            194.09343024902122,
+            171.4428279490135
+          ]
+        },
+        {
+          "position_cm": [
+            -1333.0536279930611,
+            10356.172740901367,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            226.09108771760228,
+            171.05563739726966
+          ]
+        },
+        {
+          "position_cm": [
+            1166.7860369400414,
+            10602.795089409006,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            252.7612745481444,
+            173.30576065104967
+          ]
+        },
+        {
+          "position_cm": [
+            1554.8409669290918,
+            10505.772559493578,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            256.6418238480349,
+            172.33553535189537
+          ]
+        },
+        {
+          "position_cm": [
+            2330.95082690721,
+            10311.727499662718,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            264.402922447816,
+            170.3950847535868
+          ]
+        },
+        {
+          "position_cm": [
+            2719.0057568962657,
+            10214.70496974729,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            268.2834717477066,
+            169.4248594544325
+          ]
+        },
+        {
+          "position_cm": [
+            3495.1156168743723,
+            10020.659909916434,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            276.04457034748765,
+            167.48440885612393
+          ]
+        },
+        {
+          "position_cm": [
+            4659.280406841534,
+            9729.592320170146,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            287.6862182471593,
+            164.57373295866105
+          ]
+        },
+        {
+          "position_cm": [
+            5435.3902668196415,
+            9535.54726033929,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            295.44731684694034,
+            162.6332823603525
+          ]
+        },
+        {
+          "position_cm": [
+            6211.500126797753,
+            9341.50220050843,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            303.20841544672146,
+            160.6928317620439
+          ]
+        }
+      ],
+      "clearance_checks": {
+        "truck_count": 27,
+        "maximum_center_error_m": 1.2710574864626038e-13,
+        "ground_bottom_cm_minmax": [
+          -4.0,
+          -4.0
+        ],
+        "all_contained_in_campus": true,
+        "minimum_road_clearance_m": 4.587938054812694,
+        "minimum_fence_clearance_m": 16.509772477941976,
+        "minimum_warehouse_clearance_m": 34.227776200566055,
+        "minimum_other_truck_clearance_m": 0.9999998807906684,
+        "minimum_original_dock_truck_AABB_clearance_m": 16.732761577065272,
+        "minimum_occupied_car_stall_clearance_m": 30.788921593677873,
+        "minimum_residential_driveway_clearance_m": 131.96347629753848,
+        "original_business_trucks": 52
+      },
+      "method": {
+        "truck_footprints": "Transform actual imported-reference UE local bounding rectangles with each manifest yaw and position, then translate to registered site UV metres. Bounds include mirrors.",
+        "roads": "Reconstruct CAD road surfaces with current park_site.py prefix and identical smoothing/NE local correction; no report writes from generator.",
+        "fence": "Full fence centerline from campus inward 0.85 m, conservatively includes gated openings.",
+        "other_vehicles": "Compare to all 52 original dock trucks using world AABBs; to occupied campus car stall polygons and all residential driveway polygons (supersets of actual cars)."
+      },
+      "source_save_review": {
+        "status": "code_verified",
+        "function": "Scripts/ghs/build_park_geometry.py:add_trucks_to_source",
+        "findings": [],
+        "prior_missing_trucks_issue": "Resolved in code: import single validated FBX, bake transforms, assert original Blender-metre bounds, create shared-mesh copies, convert UE centimetres to Blender metres with Y sign flip and negative yaw, then save GHS_Park_Source.blend before QA-only warehouse/floor/light geometry.",
+        "coordinate_conversion": "location=(UE.x/100,-UE.y/100,UE.z/100); yaw=-UE.yaw; scale unchanged",
+        "no_additional_fbx_export": true,
+        "does_not_change_editable_truck_source": true,
+        "blender_file_contents_not_reopened_by_reviewer": true
+      },
+      "integration_code_review": {
+        "blocking_findings": [],
+        "material_slot_assignment": "Seven named slots checked before binding, then persisted mesh bindings checked; actual Unreal import/runtime evidence belongs to root acceptance.",
+        "business_isolation": "New HISM Actor is overwritten to GHS_ParkContext tags, Static mobility and NoCollision, no Actor Tick. Existing truck identity tags and actor components are not copied.",
+        "component_override": "Preserved explicit SM_GHSPark_Blue component override; truck material bindings are Park-private and original shared truck sources match recorded hashes."
+      },
+      "source_files": {
+        "Scripts/ghs/build_park_geometry.py": "04f5d26939e7564750f9fdc9e2eeb28bb928f6de22580848bcfde9e9f6640dd1",
+        "Scripts/ghs/park_site.py": "90daee3ef1b2e9d01fa31a0e9c2de045a9390ceb79750179afe99c5588004e5c",
+        "Scripts/ghs/apply_park_expansion.py": "acb5da4b459ac191f238b2133b0b19c47970a97035920f17e9c50c9d08ad6f07",
+        "Scripts/ghs/validate_park_expansion.py": "4644cc62793561cb4a7e90cbbc5aae1faf7f462608d31812e8fc7e8ed76d37d4",
+        "Scripts/ghs/verify_park_runtime.py": "c793a85df383f079d776c843e8fec77036e8ef6c4c924953faa9f35fd293fa40"
+      },
+      "triangles": {
+        "unique_meshes": 808778,
+        "including_all_instances": 1955274
+      },
+      "remaining_validation": "Root to verify actual Unreal import slots, 27 static HISM instances, scene save/reload, visual inspection and business runtime regression."
+    }
+  },
   "visual_review_passed": true,
   "visual_review_notes": [
-    "Actual UE renders show vehicle bodies, four tyres, glazing, mirrors and lamps.",
-    "Three clustered green tree variants and lower planting replace the diamond crowns.",
-    "Upper and lower parking rows retain the differing satellite directions; all four central rows face the shared line.",
-    "Upper western six bays are continuous; wheel stops and closed markings leave aisle-facing mouths open.",
-    "West and northeast woodland clusters keep clear of roads, houses and the CAD water corridor.",
-    "1080p and 2560x1600 overview framing, AGV details, panel transitions and reset checked."
+    "Northeast lot has opposing central rows, perimeter bays, two accessible bays, two planted end islands and a curved entrance garden.",
+    "All 72 southwest bays and their cars, planting and geometry are unchanged.",
+    "Actual UE front and rear renders show blue cabs, wide blue side belts and closed rear doors with locking hardware.",
+    "27 park trucks share one static HISM mesh without equipment identities, collision or Tick; 52 original dock trucks are preserved.",
+    "Existing cobalt material component override is retained.",
+    "1080p and 2560x1600 framing, AGV details, panel transitions, region focus and reset passed."
   ],
   "parking": {
-    "stalls": 82,
-    "end_islands": 4,
+    "stalls": 112,
+    "northeast_stalls": 40,
+    "accessible_bays": 2,
+    "end_islands": 6,
     "planting_road_overlap_m2": 0.0,
-    "minimum_island_road_clearance_m": 0.5969391830070221
+    "southwest_preservation": {
+      "success": true,
+      "checks": {
+        "meshes": true,
+        "preview": true,
+        "cars": true,
+        "trees": true,
+        "boxes": true,
+        "ribbons": true,
+        "polys": true,
+        "SW_rows_identical": true,
+        "SW_72_stalls_identical": true,
+        "NE_40_stalls": true,
+        "NE_no_rejected_stalls": true,
+        "NE_2_accessible": true,
+        "NE_2_islands": true,
+        "NE_planting_no_road_overlap": true
+      },
+      "northeast_stall_count": 40,
+      "northeast_min_stall_road_clearance_m": 0.09413339897107065,
+      "northeast_min_island_road_clearance_m": 0.693841078689326,
+      "SW_mesh_parts_compared": 403,
+      "SW_car_records_compared": 46,
+      "SW_tree_records_compared": 23
+    }
   },
   "forests": {
     "trees": 510,
@@ -175,138 +796,165 @@
   "images": [
     {
       "file": "SitePlan.png",
-      "sha256": "33609217e897080342aaa0b7cf5c1ddc4486767bf439ae31e607b7ccac49fbec",
+      "sha256": "fb0a04e592c14a01056e33be61df5bd40cb681251520c1044bf4aa590e50d070",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 2226018
+      "bytes": 2241897
     },
     {
       "file": "Runtime_Overview_1920x1080.png",
-      "sha256": "a7084971d2527cf5769739141a040c72c85840248e03275caf3477659d3fb59a",
+      "sha256": "0a81e41486ba53a3cb4817a4bd0568ffc4a5336934be40255ec9f039109e43fc",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1729892
+      "bytes": 1742996
     },
     {
       "file": "Runtime_Overview_2560x1600.png",
-      "sha256": "6c090583e94587650389020251d1f618d237bc40f276386754a8406c5246a981",
+      "sha256": "382cc3bcf45276b63ac4e464044d174695f004a75ce3edfb01299b355b1ec989",
       "dimensions": [
         2560,
         1600
       ],
-      "bytes": 3241750
+      "bytes": 3307424
     },
     {
       "file": "Runtime_AGV07_Focus.png",
-      "sha256": "ce46a3b2738e4e978dafd533204cda9018fcd4ac12bccbd0d740064e12de483b",
+      "sha256": "86193b80906366b1d239fbf3f7095fa52613dfc56dc680f001ba8878f55a1f32",
       "dimensions": [
         2560,
         1600
       ],
-      "bytes": 3621407
+      "bytes": 3375838
     },
     {
       "file": "SW_Gate.png",
-      "sha256": "e83955d5b1f0b2615f6f13c9ba4767b5a6583e8461cc2574a70932db99ef4bbe",
+      "sha256": "b56da05996217c54db50113e19c1a14c936b05ce2a436fda875dc66beed21109",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1842951
+      "bytes": 1882470
     },
     {
       "file": "NE_Gate.png",
-      "sha256": "90631f541968fa51078a1c1779675e8a1c3d083d9c3dc8dccae8556995d64f5e",
+      "sha256": "bd7ed3278a983afb28204003ce33abc3eb11a615412751bd79bbeddd0a045390",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1613126
+      "bytes": 1755839
     },
     {
       "file": "Housing.png",
-      "sha256": "400d42a9a74681967d911c7e1d762634bd602f9250fb2ecb6e3f937dcc9c0c8a",
+      "sha256": "c007a5a1dd73f98c64a6572c1d558f45415a3990dae0d9e9cd11aa83ec0e6eea",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1671452
+      "bytes": 1562815
     },
     {
       "file": "TruckCourt.png",
-      "sha256": "82cf8b40a444d63da2de8d7a86ca69bd74c258c2d94c961d76829d9b6f659bb0",
+      "sha256": "2d42fc26c65ca35bdb4b2bed6746e7d34a8f22dfe0d69680d23c2b881a4c55dc",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1731305
+      "bytes": 1785684
     },
     {
       "file": "ParkingUpper.png",
-      "sha256": "7674f1eceb34a2f212c47f9f40827814e2b65bb4c357727abf162f15594ec961",
+      "sha256": "1d8565ceda60dba3ae481baa0a68b5e0a7fc0b6b1f0bb20610542b8c49f9979f",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1501053
+      "bytes": 1585912
     },
     {
       "file": "ParkingLower.png",
-      "sha256": "4a59900ad860748d6c1c0d8a18d82dcce9deb124d67ece372f152037d44cb557",
+      "sha256": "f88a70cb5c7ae6797638aa0c537d20f68df3efebf324a3a98b169729e1eb68d0",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1517404
+      "bytes": 1597060
     },
     {
       "file": "TreeDetail.png",
-      "sha256": "ef15c13066fc3786b39b920cf34865a8331f43125863de0adde19da9637a94c8",
+      "sha256": "a4228f5d8831b1a591f2051234d0c70cd4877645b54ab216dddc77720ee3025e",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 2085051
+      "bytes": 2141882
     },
     {
       "file": "WestForest.png",
-      "sha256": "6412fcf4f7326c8cf9a8c8e225485099bdada52789fb349486e16d4104acce51",
+      "sha256": "563705d49b5f42f6a6b391894ad573d1d0e8773b66c1f5c0797f22fee5a8f3d2",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 2234724
+      "bytes": 2236981
     },
     {
       "file": "NortheastForest.png",
-      "sha256": "a11d8ec8910f3fe54f44a8de85c561038991cc86e5db7f9868fd788bd19501f0",
+      "sha256": "ead141999ba1a800bf6ca08ee7ed78c7350fd537e3468bfad6d37c9e9a337504",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1831952
+      "bytes": 1831673
+    },
+    {
+      "file": "NE_Parking.png",
+      "sha256": "914ceeb14af3915ae872a04e8d38187331f626019b70d7362ecf6fb9efce9c8a",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1498658
     },
     {
       "file": "VehicleDetail.png",
-      "sha256": "104b5a47076e83cb0d68d2605c0046d4a90a04f65d4a39960ca60cdb535a5f99",
+      "sha256": "6f55d88f4b5bf62e2ed78f39f3453e546d62515f980237a3cc73a4562be3579f",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 2058844
+      "bytes": 2110383
+    },
+    {
+      "file": "DisplayTruckFront.png",
+      "sha256": "cdd6e42ee611da6efb230215c1e88674ae1478fe4e74998f19da5ddb073572d8",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2111857
+    },
+    {
+      "file": "DisplayTruckRear.png",
+      "sha256": "191cd922617f20f92cc837e0c2fc2b8aa70faca7383c4431ec347ef767fb16e5",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2101900
     },
     {
       "file": "Polish_Summary.png",
-      "sha256": "06c28e6fb24a5d40f665531ca8edee599b01fd0068679ddfbfc6c073b123cbb2",
+      "sha256": "4cf405ae574fce403d55cfcd6813d84a2ff091c38be25b7885e92ed6831625a3",
       "dimensions": [
         1952,
         1252
       ],
-      "bytes": 1835680
+      "bytes": 1572192
     }
   ],
   "performance_benchmark": false,

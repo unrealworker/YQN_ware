@@ -51,6 +51,18 @@ ROAD_INDEX = 0
 CONTEXT_ROADS = []
 HOUSE_CLEARANCES = []
 PARKED_VEHICLES = []
+PARK_TRUCK_INSTANCES = []
+TRUCK_SPEC = None
+
+
+def truck_spec():
+    global TRUCK_SPEC
+    if TRUCK_SPEC is None:
+        TRUCK_SPEC=json.loads((OUT/'Trucks/closed_truck.json').read_text(encoding='utf-8'))
+        assert TRUCK_SPEC['validation']['success'], 'Closed truck geometry is not validated'
+        for source in TRUCK_SPEC['source_assets']:
+            assert hashlib.sha256(Path(source['path']).read_bytes()).hexdigest()==source['sha256'], source['path']
+    return TRUCK_SPEC
 
 
 def road_clearance(u,v,radius):
@@ -208,15 +220,19 @@ def tree(u,v,height=5.3,scale=1):
 
 
 def trailer(u,v,angle=math.pi/2):
-    PARKED_VEHICLES.append(dict(kind='trailer',center=[u,v],size=[13.26,2.66],angle=angle))
-    box('Buildings',(u,v,2.35),(13.2,2.6,3),angle,True)
-    box('Roofs',(u,v,3.88),(13.26,2.66,.08),angle)
-    box('Detail',(u,v,.72),(10.9,1.9,.3),angle)
-    for x in (-3.9,-2.8):
-        for y in (-1.05,1.05):
-            px,py=rotate_point(x,y,(u,v),angle)
-            box('Detail',(px,py,.55),(.78,.42,.85),angle)
-    COUNTS['parked_trailers']+=1
+    # Reuse one fully detailed closed dock-truck derivative. Keep each bay
+    # centre stable while accounting for the source model's rear-door origin.
+    bounds=truck_spec()['mesh']['bounds_ue_cm']
+    size=[(bounds['max'][i]-bounds['min'][i])/100 for i in (0,1)]
+    mid=[(bounds['max'][i]+bounds['min'][i])/200 for i in (0,1)]
+    rear=rotate_point(-mid[0],-mid[1],(u,v),angle)
+    PARKED_VEHICLES.append(dict(kind='closed_display_truck',center=[u,v],size=size,angle=angle))
+    PARK_TRUCK_INSTANCES.append(dict(
+        position_cm=[(rear[0]-ORIGIN[0])*100,(rear[1]-ORIGIN[1])*100,-4.-bounds['min'][2]],
+        rotation_deg=math.degrees(angle),scale=[1.,1.,1.],bay_center_uv_m=[u,v]))
+    a,b=size[0]/2,size[1]/2
+    PREVIEW.append(('TruckBlue',[rotate_point(x,y,(u,v),angle) for x,y in [(-a,-b),(a,-b),(a,b),(-a,b)]]))
+    COUNTS['static_display_trucks']+=1
 
 
 def car(u,v,angle=0,blue=False):
@@ -299,6 +315,32 @@ def write_svg():
     (OUT/'campus_plan.svg').write_text('\n'.join(svg),encoding='utf8')
 
 
+def add_trucks_to_source():
+    """Keep the editable campus and preview complete using linked mesh data."""
+    spec=truck_spec()['mesh']
+    before=set(bpy.data.objects)
+    bpy.ops.import_scene.fbx(filepath=spec['fbx'],use_anim=False)
+    imported=[o for o in bpy.data.objects if o not in before]
+    assert len(imported)==1 and imported[0].type=='MESH', imported
+    base=imported[0]
+    bpy.ops.object.select_all(action='DESELECT')
+    base.select_set(True);bpy.context.view_layer.objects.active=base
+    bpy.ops.object.transform_apply(location=True,rotation=True,scale=True)
+    expected=spec['blender_bounds_m']
+    for axis in range(3):
+        assert abs(min(v.co[axis] for v in base.data.vertices)-expected['min'][axis])<.001
+        assert abs(max(v.co[axis] for v in base.data.vertices)-expected['max'][axis])<.001
+    for i,placement in enumerate(PARK_TRUCK_INSTANCES):
+        obj=base if i==0 else base.copy()
+        if i: bpy.context.collection.objects.link(obj)
+        obj.name='Park_DisplayTruck_'+str(i+1).zfill(2)
+        p=placement['position_cm']
+        obj.location=(p[0]/100,-p[1]/100,p[2]/100)
+        obj.rotation_euler=(0,0,-math.radians(placement['rotation_deg']))
+        obj.scale=placement['scale']
+        obj['purpose']='Static closed display truck; no business identity'
+
+
 def export():
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.object.delete(use_global=False)
@@ -343,13 +385,23 @@ def export():
                        'vertices':len(geo.vertices),'triangles':len(geo.loop_triangles),
                        'source_parts':data['parts'],'blender_bounds_m':bounds,'bounds_ue_cm':ue_bounds,
                        'sha256':hashlib.sha256(fbx.read_bytes()).hexdigest()})
+    spec=truck_spec()
+    PALETTE.update(spec['materials'])
+    truck=dict(spec['mesh'])
+    truck.update(role=truck['material_roles'][0],instances=PARK_TRUCK_INSTANCES,
+                 source_assets=spec['source_assets'],closed_doors=True,static_display_only=True)
+    assets.append(truck)
+    overrides=json.loads((OUT/'scene_overrides.json').read_text(encoding='utf-8'))
+    for asset in assets:
+        if asset['name'] in overrides['component_materials']:
+            asset['component_material_overrides']=overrides['component_materials'][asset['name']]
     total=sum(a['triangles'] for a in assets)
     # Clustered forests and recognisable cars share material batches. Keep an
     # explicit combined environment budget while avoiding per-prop Actors.
     assert total<950000, total
     minimum_house_clearance=min(h['road_clearance_m'] for h in GEOMETRY_REPORT['residential']['houses'])
     assert minimum_house_clearance>=.10, minimum_house_clearance
-    manifest={'version':2,'purpose':'Full campus primary display; restrained public-road and residential context',
+    manifest={'version':3,'purpose':'Full campus primary display; restrained public-road and residential context',
               'reference_address':'17335 Glen Helen Pkwy, San Bernardino, CA 92407',
               'measurement_status':'Roads and building placements registered from user CADmapper DXF. Parcel and architectural detail from satellite references; not a cadastral survey.',
               'coordinate_contract':'Local u,v metres; Blender X=u-239.33385, Y=-(v-60.24019); FBX -Y forward Z up; UE import at origin scale 1 yields cm X=(u-239.33385)*100,Y=(v-60.24019)*100.',
@@ -359,6 +411,7 @@ def export():
               'counts':dict(COUNTS),'meshes':assets,'materials':PALETTE,
               'campus_boundary_ue_cm':[[(u-ORIGIN[0])*100,(v-ORIGIN[1])*100,-4] for u,v in CAMPUS],
               'stats':{'triangles':total,'asset_count':len(assets),**dict(COUNTS)}}
+    manifest['instanced_triangles_total']=sum(a['triangles']*len(a.get('instances',[None])) for a in assets)
     manifest['geometry_checks']={
         'minimum_house_to_road_edge_m':minimum_house_clearance,
         'road_union_valid':GEOMETRY_REPORT['road_surface_valid'],
@@ -368,6 +421,7 @@ def export():
         'lane_dash_vertices_follow_road_segment_gradient':True,
     }
     (OUT/'park_manifest.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False),encoding='utf8')
+    add_trucks_to_source()
     bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'GHS_Park_Source.blend'))
     write_svg()
     print('GHS_PARK_READY '+json.dumps({'assets':len(assets),'triangles':total,'counts':dict(COUNTS)}))
@@ -422,6 +476,7 @@ def preview():
     bpy.ops.render.render(write_still=True)
 
 
-build()
-export()
-preview()
+if __name__=='__main__':
+    build()
+    export()
+    preview()

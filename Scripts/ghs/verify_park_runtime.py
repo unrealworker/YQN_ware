@@ -216,6 +216,7 @@ def verify_registry():
                    if actor.actor_has_tag('GHS_ParkContext')]
     assert len(park_actors) == int(manifest['asset_count']) + 3, ('Park actor count', len(park_actors), manifest['asset_count'])
     used_meshes = Counter()
+    instance_counts = {}
     capture_cameras = []
     for actor in park_actors:
         label = actor.get_actor_label()
@@ -227,12 +228,20 @@ def verify_registry():
             mesh = component.static_mesh
             if mesh and mesh.get_name().startswith('SM_GHSPark_'):
                 used_meshes[mesh.get_name()] += 1
+                if isinstance(component,unreal.InstancedStaticMeshComponent):
+                    instance_counts[mesh.get_name()]=component.get_instance_count()
+                    assert component.get_collision_enabled()==unreal.CollisionEnabled.NO_COLLISION
+                    assert component.get_editor_property('mobility')==unreal.ComponentMobility.STATIC
+                    assert not actor.is_actor_tick_enabled() and not actor.get_actor_enable_collision()
     expected_meshes = Counter({row['name']: 1 for row in manifest['meshes']})
     assert used_meshes == expected_meshes, (dict(used_meshes), dict(expected_meshes))
+    expected_instances={row['name']:len(row['instances']) for row in manifest['meshes'] if 'instances' in row}
+    assert instance_counts==expected_instances, (instance_counts,expected_instances)
     assert len(capture_cameras) == 3, capture_cameras
     result['initial_business_ids'] = identifiers
     record('saved_campus_loaded_and_business_registry_preserved', equipment=106, facilities=56,
-           park_actors=len(park_actors), mesh_components=dict(used_meshes), capture_cameras=capture_cameras)
+           park_actors=len(park_actors), mesh_components=dict(used_meshes), capture_cameras=capture_cameras,
+           static_display_instances=instance_counts)
 
 
 def capture(name):

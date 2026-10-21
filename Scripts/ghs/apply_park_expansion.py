@@ -7,6 +7,7 @@ import hashlib
 import json
 import math
 import shutil
+import sys
 import traceback
 from pathlib import Path
 import unreal
@@ -73,12 +74,16 @@ def import_mesh(row, mats):
     mesh=LIB.load_asset(DEST+'/Meshes/'+name)
     assert isinstance(mesh,unreal.StaticMesh),name
     slots=mesh.static_materials
-    assert len(slots)==1,(name,len(slots))
-    slot=slots[0]
-    slot.material_interface=mats[row['role']]
-    slots[0]=slot
+    roles=row.get('material_roles',[row['role']])
+    assert len(slots)==len(roles),(name,len(slots),roles)
+    for i,role in enumerate(roles):
+        slot=slots[i]
+        if 'slot_names' in row:
+            assert str(slot.material_slot_name)==row['slot_names'][i], (name,i,str(slot.material_slot_name))
+        slot.material_interface=mats[role]
+        slots[i]=slot
     mesh.set_editor_property('static_materials',slots)
-    assert mesh.get_material(0)==mats[row['role']], (name,'Material slot assignment did not persist')
+    assert all(mesh.get_material(i)==mats[role] for i,role in enumerate(roles)), (name,'Material slot assignment did not persist')
     bounds=mesh.get_bounds()
     actual_min=xyz(bounds.origin-bounds.box_extent)
     actual_max=xyz(bounds.origin+bounds.box_extent)
@@ -129,15 +134,31 @@ def main():
                 assert TAG in [str(t) for t in actor.tags]
                 ACTORS.destroy_actor(actor)
         for row,mesh in meshes:
-            actor=ACTORS.spawn_actor_from_class(unreal.StaticMeshActor,unreal.Vector())
             label=PREFIX+row['name'].removeprefix('SM_GHSPark_')
+            if 'instances' in row:
+                sys.path.insert(0,str(ROOT/'Scripts/ghs'))
+                from ue_instancing import spawn_group, BLUEPRINT_PATH
+                # Use the already compiled, geometry-only group template.
+                # Do not create/edit the shared blueprint or copy business actors.
+                assert LIB.does_asset_exist(BLUEPRINT_PATH)
+                transforms=[unreal.Transform(location=unreal.Vector(*p['position_cm']),
+                    rotation=unreal.Rotator(pitch=0,yaw=p['rotation_deg'],roll=0),
+                    scale=unreal.Vector(*p['scale'])) for p in row['instances']]
+                actor=spawn_group(label,'GHS/Park/Geometry',mesh,transforms)
+            else:
+                actor=ACTORS.spawn_actor_from_class(unreal.StaticMeshActor,unreal.Vector())
             decorate(actor,label,'Geometry')
             component=actor.get_component_by_class(unreal.StaticMeshComponent)
             component.set_static_mesh(mesh)
             component.set_mobility(unreal.ComponentMobility.STATIC)
             component.set_editor_property('cast_shadow',row['role'] not in ('Ground','Hardstand','Roads','CampusRoads','Markings','Landscape'))
+            for index,path in enumerate(row.get('component_material_overrides',[])):
+                override=LIB.load_asset(path)
+                assert override,path
+                component.set_material(index,override)
             result['new_actors'].append(label)
-            result['meshes'].append(dict(name=row['name'],triangles=row['triangles'],bounds=xyz(mesh.get_bounds().box_extent)))
+            result['meshes'].append(dict(name=row['name'],triangles=row['triangles'],
+                instances=len(row.get('instances',[None])),bounds=xyz(mesh.get_bounds().box_extent)))
         by={a.get_actor_label():a for a in ACTORS.get_all_level_actors()}
         pawn=by['GHS_WarehouseCamera']
         center=(3000.,6000.,0.)

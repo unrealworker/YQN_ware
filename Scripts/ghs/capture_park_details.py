@@ -28,10 +28,15 @@ views=[('SW_Gate',(4,185,1),12500,-38,-30),
        ('ParkingLower',(20,218,0),8500,-72,-90),
        ('TreeDetail',(14.3,152.15,2),1400,-25,-125),
        ('WestForest',(-115,90,0),34000,-53,-110),
-       ('NortheastForest',(555,-135,0),29000,-52,-110)]
+       ('NortheastForest',(555,-135,0),29000,-52,-110),
+       ('NE_Parking',(486,20,0),10500,-78,-90)]
 site=json.loads((ROOT/'SourceAssets/GHS/Park/site_geometry_report.json').read_text(encoding='utf-8'))
 selected=next(s for s in site['parking']['stalls'] if s['row']=='upper_center_north' and s['occupied'])
 views.append(('VehicleDetail',(*selected['center'],.8),1100,-32,-110))
+manifest=json.loads((ROOT/'SourceAssets/GHS/Park/park_manifest.json').read_text(encoding='utf-8'))
+truck=next(row for row in manifest['meshes'] if row['name']=='SM_GHSPark_ClosedTruck')['instances'][0]
+views += [('DisplayTruckFront',(*truck['bay_center_uv_m'],1.8),2500,-25,truck['rotation_deg']+145),
+          ('DisplayTruckRear',(*truck['bay_center_uv_m'],1.8),2500,-25,truck['rotation_deg']-35)]
 started=time.monotonic();task=pending=handle=None;index=0;done=busy=False
 report=dict(success=False,captures=[])
 

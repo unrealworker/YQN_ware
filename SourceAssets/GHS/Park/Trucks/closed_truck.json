@@ -1,0 +1,2753 @@
+{
+  "success": true,
+  "version": 1,
+  "name": "SM_GHSPark_ClosedTruck",
+  "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\Trucks\\SM_GHSPark_ClosedTruck.fbx",
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\Trucks\\closed_truck.blend",
+  "fbx_sha256": "2f3f18766b14c63f7de63062a9e1cbd3854a007b4f8222af0401bdf2a05656c0",
+  "source_sha256": {
+    "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\TrucksLong\\dock_truck_long.blend": "9f488bba3a1f513fc265c7a10f4ec27ca57c29ae80233870dd3ce949eaf6c802",
+    "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\TrucksLong\\SM_GHN_LongDockTruck.fbx": "b2f5df7846a15ff810e4cfe62085a3462549f77374c389dfc5c2f3b8d8cb3770",
+    "D:\\UEPro\\Test\\Content\\GHSNormalWarehouse\\TrucksLong\\SM_GHN_LongDockTruck.uasset": "740890fc3b54d672e1e16d3afca04503d0285fff4062d84dfa298fcd0d5352ad"
+  },
+  "source_assets_preserved": true,
+  "origin_m": [
+    0,
+    0,
+    0
+  ],
+  "forward_axis": "+X",
+  "coordinate_contract": "Blender metres; rear origin; FBX -Y forward Z up; UE import at origin scale 1 mirrors Y and converts to centimetres.",
+  "material_roles": [
+    "TruckRubber",
+    "TruckTrim",
+    "TruckGlass",
+    "TruckBody",
+    "TruckHeadlight",
+    "TruckBlue",
+    "TruckTailLight"
+  ],
+  "slot_names": [
+    "M_GHSPark_TruckRubber",
+    "M_GHSPark_TruckTrim",
+    "M_GHSPark_TruckGlass",
+    "M_GHSPark_TruckBody",
+    "M_GHSPark_TruckHeadlight",
+    "M_GHSPark_TruckBlue",
+    "M_GHSPark_TruckTailLight"
+  ],
+  "materials": {
+    "TruckBody": [
+      0.87,
+      0.9,
+      0.93
+    ],
+    "TruckBlue": [
+      0.018,
+      0.075,
+      0.51
+    ],
+    "TruckTrim": [
+      0.63,
+      0.68,
+      0.73
+    ],
+    "TruckGlass": [
+      0.055,
+      0.14,
+      0.22
+    ],
+    "TruckRubber": [
+      0.018,
+      0.024,
+      0.028
+    ],
+    "TruckHeadlight": [
+      0.66,
+      0.87,
+      0.96
+    ],
+    "TruckTailLight": [
+      0.46,
+      0.035,
+      0.025
+    ]
+  },
+  "triangles": 44096,
+  "vertices": 22970,
+  "polygons": 21073,
+  "bounds_blender_m": {
+    "min": [
+      -0.19749923050403595,
+      -1.5000003576278687,
+      -0.006500244140625
+    ],
+    "max": [
+      14.706001281738281,
+      1.499999761581421,
+      3.7350006103515625
+    ]
+  },
+  "bounds_ue_cm": {
+    "min": [
+      -19.749923050403595,
+      -149.9999761581421,
+      -0.6500244140625
+    ],
+    "max": [
+      1470.6001281738281,
+      150.00003576278687,
+      373.50006103515625
+    ]
+  },
+  "dimensions_m": [
+    14.903500512242317,
+    3.0000001192092896,
+    3.7415008544921875
+  ],
+  "geometry_center_offset_m": [
+    7.254251025617123,
+    -2.980232238769531e-07,
+    1.8642501831054688
+  ],
+  "source_parts": 441,
+  "derived_editable_parts": 455,
+  "removed_source_parts": [
+    {
+      "name": "Rear door hinge.007",
+      "source_bounds_m": {
+        "min": [
+          1.1174999475479126,
+          1.3174999952316284,
+          1.255000114440918
+        ],
+        "max": [
+          1.1425000429153442,
+          1.34250009059906,
+          3.505000114440918
+        ]
+      }
+    },
+    {
+      "name": "Rear door hinge.006",
+      "source_bounds_m": {
+        "min": [
+          0.8975000381469727,
+          1.3174999952316284,
+          1.255000114440918
+        ],
+        "max": [
+          0.9225000143051147,
+          1.34250009059906,
+          3.505000114440918
+        ]
+      }
+    },
+    {
+      "name": "Rear door hinge.005",
+      "source_bounds_m": {
+        "min": [
+          0.3075000047683716,
+          1.3174999952316284,
+          1.255000114440918
+        ],
+        "max": [
+          0.33249998092651367,
+          1.34250009059906,
+          3.505000114440918
+        ]
+      }
+    },
+    {
+      "name": "Rear door hinge.004",
+      "source_bounds_m": {
+        "min": [
+          0.06749999523162842,
+          1.3174999952316284,
+          1.255000114440918
+        ],
+        "max": [
+          0.0925000011920929,
+          1.34250009059906,
+          3.505000114440918
+        ]
+      }
+    },
+    {
+      "name": "Rear door hinge.003",
+      "source_bounds_m": {
+        "min": [
+          1.1174999475479126,
+          -1.34250009059906,
+          1.255000114440918
+        ],
+        "max": [
+          1.1425000429153442,
+          -1.3174999952316284,
+          3.505000114440918
+        ]
+      }
+    },
+    {
+      "name": "Rear door hinge.002",
+      "source_bounds_m": {
+        "min": [
+          0.8975000381469727,
+          -1.34250009059906,
+          1.255000114440918
+        ],
+        "max": [
+          0.9225000143051147,
+          -1.3174999952316284,
+          3.505000114440918
+        ]
+      }
+    },
+    {
+      "name": "Rear door hinge.001",
+      "source_bounds_m": {
+        "min": [
+          0.3075000047683716,
+          -1.34250009059906,
+          1.255000114440918
+        ],
+        "max": [
+          0.33249998092651367,
+          -1.3174999952316284,
+          3.505000114440918
+        ]
+      }
+    },
+    {
+      "name": "Rear door hinge",
+      "source_bounds_m": {
+        "min": [
+          0.06749999523162842,
+          -1.34250009059906,
+          1.255000114440918
+        ],
+        "max": [
+          0.0925000011920929,
+          -1.3174999952316284,
+          3.505000114440918
+        ]
+      }
+    },
+    {
+      "name": "Folded rear cargo door.001",
+      "source_bounds_m": {
+        "min": [
+          0.050000011920928955,
+          1.2624999284744263,
+          1.1450001001358032
+        ],
+        "max": [
+          1.2100000381469727,
+          1.3174999952316284,
+          3.6150002479553223
+        ]
+      }
+    },
+    {
+      "name": "Folded rear cargo door",
+      "source_bounds_m": {
+        "min": [
+          0.050000011920928955,
+          -1.3174999952316284,
+          1.1450001001358032
+        ],
+        "max": [
+          1.2100000381469727,
+          -1.2624999284744263,
+          3.6150002479553223
+        ]
+      }
+    },
+    {
+      "name": "Cargo hinge.005",
+      "source_bounds_m": {
+        "min": [
+          0.0,
+          1.3075000047683716,
+          3.1700000762939453
+        ],
+        "max": [
+          0.10000000149011612,
+          1.352500081062317,
+          3.2300000190734863
+        ]
+      }
+    },
+    {
+      "name": "Cargo hinge.004",
+      "source_bounds_m": {
+        "min": [
+          0.0,
+          1.3075000047683716,
+          2.2699999809265137
+        ],
+        "max": [
+          0.10000000149011612,
+          1.352500081062317,
+          2.3299999237060547
+        ]
+      }
+    },
+    {
+      "name": "Cargo hinge.003",
+      "source_bounds_m": {
+        "min": [
+          0.0,
+          1.3075000047683716,
+          1.4700000286102295
+        ],
+        "max": [
+          0.10000000149011612,
+          1.352500081062317,
+          1.5299999713897705
+        ]
+      }
+    },
+    {
+      "name": "Cargo hinge.002",
+      "source_bounds_m": {
+        "min": [
+          0.0,
+          -1.352500081062317,
+          3.1700000762939453
+        ],
+        "max": [
+          0.10000000149011612,
+          -1.3075000047683716,
+          3.2300000190734863
+        ]
+      }
+    },
+    {
+      "name": "Cargo hinge.001",
+      "source_bounds_m": {
+        "min": [
+          0.0,
+          -1.352500081062317,
+          2.2699999809265137
+        ],
+        "max": [
+          0.10000000149011612,
+          -1.3075000047683716,
+          2.3299999237060547
+        ]
+      }
+    },
+    {
+      "name": "Cargo hinge",
+      "source_bounds_m": {
+        "min": [
+          0.0,
+          -1.352500081062317,
+          1.4700000286102295
+        ],
+        "max": [
+          0.10000000149011612,
+          -1.3075000047683716,
+          1.5299999713897705
+        ]
+      }
+    }
+  ],
+  "modified_source_parts": [
+    {
+      "name": "Side blue belt.001",
+      "change": "Side blue belt height 0.22 to 0.62 m; centre z 1.55 m",
+      "source_bounds_m": {
+        "min": [
+          0.05000019073486328,
+          1.2430000305175781,
+          1.3199999332427979
+        ],
+        "max": [
+          11.949999809265137,
+          1.2609999179840088,
+          1.5399999618530273
+        ]
+      },
+      "derived_bounds_m": {
+        "min": [
+          0.05000019073486328,
+          1.2430000305175781,
+          1.2400000095367432
+        ],
+        "max": [
+          11.949999809265137,
+          1.2609999179840088,
+          1.8599998950958252
+        ]
+      }
+    },
+    {
+      "name": "Side blue belt",
+      "change": "Side blue belt height 0.22 to 0.62 m; centre z 1.55 m",
+      "source_bounds_m": {
+        "min": [
+          0.05000019073486328,
+          -1.2609999179840088,
+          1.3199999332427979
+        ],
+        "max": [
+          11.949999809265137,
+          -1.2430000305175781,
+          1.5399999618530273
+        ]
+      },
+      "derived_bounds_m": {
+        "min": [
+          0.05000019073486328,
+          -1.2609999179840088,
+          1.2400000095367432
+        ],
+        "max": [
+          11.949999809265137,
+          -1.2430000305175781,
+          1.8599998950958252
+        ]
+      }
+    }
+  ],
+  "added_parts": [
+    "Closed cargo door Left",
+    "Closed door blue lower band Left",
+    "Closed door hinge barrel Left",
+    "Closed door hinge strap Left",
+    "Closed door hinge barrel Left.001",
+    "Closed door hinge strap Left.001",
+    "Closed door hinge barrel Left.002",
+    "Closed door hinge strap Left.002",
+    "Closed door locking rod Left",
+    "Closed door rod collar Left",
+    "Closed door rod collar Left.001",
+    "Closed door rod collar Left.002",
+    "Closed door lock handle Left",
+    "Closed door lower reflector Left",
+    "Closed cargo door Right",
+    "Closed door blue lower band Right",
+    "Closed door hinge barrel Right",
+    "Closed door hinge strap Right",
+    "Closed door hinge barrel Right.001",
+    "Closed door hinge strap Right.001",
+    "Closed door hinge barrel Right.002",
+    "Closed door hinge strap Right.002",
+    "Closed door locking rod Right",
+    "Closed door rod collar Right",
+    "Closed door rod collar Right.001",
+    "Closed door rod collar Right.002",
+    "Closed door lock handle Right",
+    "Closed door lower reflector Right",
+    "Closed door centre overlap gasket",
+    "Closed door top identity plate"
+  ],
+  "reuse_validation": {
+    "preserved_parts": 423,
+    "maximum_vertex_error_m": 0.0,
+    "source_bounds_m": {
+      "min": [
+        -0.19749999046325684,
+        -1.5,
+        -0.006500001531094313
+      ],
+      "max": [
+        14.705999374389648,
+        1.5,
+        3.7350001335144043
+      ]
+    },
+    "checks": [
+      {
+        "name": "Windshield wiper.001",
+        "vertices": 24,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Windshield wiper",
+        "vertices": 24,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Windscreen center",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Windscreen",
+        "vertices": 8,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.047",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.046",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.045",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.044",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.043",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.042",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.041",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.040",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.039",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.038",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.037",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.036",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.035",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.034",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.033",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.032",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.031",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.030",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.029",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.028",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.027",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.026",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.025",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.024",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.023",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.022",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.021",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.020",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.019",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.018",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.017",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.016",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.015",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.014",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.013",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.012",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.011",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.010",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.009",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.008",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.007",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.006",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.005",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.004",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.003",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.002",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug.001",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel lug",
+        "vertices": 16,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.023",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.022",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.021",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.020",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.019",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.018",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.017",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.016",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.015",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.014",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.013",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.012",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.011",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.010",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.009",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.008",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.007",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.006",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.005",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.004",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.003",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.002",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub.001",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel hub",
+        "vertices": 48,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel arch.005",
+        "vertices": 76,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel arch.004",
+        "vertices": 76,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel arch.003",
+        "vertices": 76,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel arch.002",
+        "vertices": 76,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel arch.001",
+        "vertices": 76,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Wheel arch",
+        "vertices": 76,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Upper bright rail.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Upper bright rail",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Underrun rail.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Underrun rail",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Underrun bracket.007",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Underrun bracket.006",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Underrun bracket.005",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Underrun bracket.004",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Underrun bracket.003",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Underrun bracket.002",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Underrun bracket.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Underrun bracket",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.143",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.142",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.141",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.140",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.139",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.138",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.137",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.136",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.135",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.134",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.133",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.132",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.131",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.130",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.129",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.128",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.127",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.126",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.125",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.124",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.123",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.122",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.121",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.120",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.119",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.118",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.117",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.116",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.115",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.114",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.113",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.112",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.111",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.110",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.109",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.108",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.107",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.106",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.105",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.104",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.103",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.102",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.101",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.100",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.099",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.098",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.097",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.096",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.095",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.094",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.093",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.092",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.091",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.090",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.089",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.088",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.087",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.086",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.085",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.084",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.083",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.082",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.081",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.080",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.079",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.078",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.077",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.076",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.075",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.074",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.073",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.072",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.071",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.070",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.069",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.068",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.067",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.066",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.065",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.064",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.063",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.062",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.061",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.060",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.059",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.058",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.057",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.056",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.055",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.054",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.053",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.052",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.051",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.050",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.049",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.048",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.047",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.046",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.045",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.044",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.043",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.042",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.041",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.040",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.039",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.038",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.037",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.036",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.035",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.034",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.033",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.032",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.031",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.030",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.029",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.028",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.027",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.026",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.025",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.024",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.023",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.022",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.021",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.020",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.019",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.018",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.017",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.016",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.015",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.014",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.013",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.012",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.011",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.010",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.009",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.008",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.007",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.006",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.005",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.004",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.003",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.002",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Tire tread",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.117",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.116",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.115",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.114",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.113",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.112",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.111",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.110",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.109",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.108",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.107",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.106",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.105",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.104",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.103",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.102",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.101",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.100",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.099",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.098",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.097",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.096",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.095",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.094",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.093",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.092",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.091",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.090",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.089",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.088",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.087",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.086",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.085",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.084",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.083",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.082",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.081",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.080",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.079",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.078",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.077",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.076",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.075",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.074",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.073",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.072",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.071",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.070",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.069",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.068",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.067",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.066",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.065",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.064",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.063",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.062",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.061",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.060",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.059",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.058",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.057",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.056",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.055",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.054",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.053",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.052",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.051",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.050",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.049",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.048",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.047",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.046",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.045",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.044",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.043",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.042",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.041",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.040",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.039",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.038",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.037",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.036",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.035",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.034",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.033",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.032",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.031",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.030",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.029",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.028",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.027",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.026",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.025",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.024",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.023",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.022",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.021",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.020",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.019",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.018",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.017",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.016",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.015",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.014",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.013",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.012",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.011",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.010",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.009",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.008",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.007",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.006",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.005",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.004",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.003",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.002",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side pressed rib",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.013",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.012",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.011",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.010",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.009",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.008",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.007",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.006",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.005",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.004",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.003",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.002",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side marker",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side glazing.001",
+        "vertices": 8,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Side glazing",
+        "vertices": 8,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Sculpted cab",
+        "vertices": 90,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Road tire.005",
+        "vertices": 64,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Road tire.004",
+        "vertices": 64,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Road tire.003",
+        "vertices": 64,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Road tire.002",
+        "vertices": 64,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Road tire.001",
+        "vertices": 64,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Road tire",
+        "vertices": 64,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Rear upper frame",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Rear license",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Rear lamp.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Rear lamp",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Rear corner post.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Rear corner post",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Rear bumper",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Mirror surface.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Mirror surface",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Mirror stay.001",
+        "vertices": 24,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Mirror stay",
+        "vertices": 24,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Mirror housing.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Mirror housing",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Lower rub rail.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Lower rub rail",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Headlamp.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Headlamp",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Grille slat.002",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Grille slat.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Grille slat",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Front license",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Front grille",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Front bumper",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Chassis rail.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Chassis rail",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cargo side skin.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cargo side skin",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cargo roof",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cargo front bulkhead",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cargo floor",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cab step.003",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cab step.002",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cab step.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cab step",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cab roof lip",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cab door seam.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cab door seam",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cab door handle.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cab door handle",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cab blue belt.001",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Cab blue belt",
+        "vertices": 56,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Axle.002",
+        "vertices": 32,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Axle.001",
+        "vertices": 32,
+        "maximum_vertex_error_m": 0.0
+      },
+      {
+        "name": "Axle",
+        "vertices": 32,
+        "maximum_vertex_error_m": 0.0
+      }
+    ]
+  },
+  "door_validation": {
+    "rear_aperture_closed": true,
+    "sample_count": 2350,
+    "sample_region_yz_m": {
+      "y": [
+        -1.14,
+        1.14
+      ],
+      "z": [
+        1.16,
+        3.59
+      ]
+    },
+    "raycast_only_new_door_assembly": true,
+    "center_seam_backed_by_overlap_gasket": true,
+    "folded_doors_and_hinges_removed": true
+  },
+  "geometry_validation": {
+    "mesh_validate_needed_repairs": false,
+    "degenerate_faces": 0
+  },
+  "interaction_policy": "Static background only: no business actor clone, no identity/POI/data components. Root importer applies instance collision/tick/identity restrictions.",
+  "material_specs": {
+    "TruckBody": {
+      "name": "M_GHSPark_TruckBody",
+      "color_linear": [
+        0.87,
+        0.9,
+        0.93
+      ],
+      "roughness": 0.64,
+      "metallic": 0.03
+    },
+    "TruckBlue": {
+      "name": "M_GHSPark_TruckBlue",
+      "color_linear": [
+        0.018,
+        0.075,
+        0.51
+      ],
+      "roughness": 0.57,
+      "metallic": 0.04
+    },
+    "TruckTrim": {
+      "name": "M_GHSPark_TruckTrim",
+      "color_linear": [
+        0.63,
+        0.68,
+        0.73
+      ],
+      "roughness": 0.55,
+      "metallic": 0.18
+    },
+    "TruckGlass": {
+      "name": "M_GHSPark_TruckGlass",
+      "color_linear": [
+        0.055,
+        0.14,
+        0.22
+      ],
+      "roughness": 0.25,
+      "metallic": 0.12
+    },
+    "TruckRubber": {
+      "name": "M_GHSPark_TruckRubber",
+      "color_linear": [
+        0.018,
+        0.024,
+        0.028
+      ],
+      "roughness": 0.84,
+      "metallic": 0.0
+    },
+    "TruckHeadlight": {
+      "name": "M_GHSPark_TruckHeadlight",
+      "color_linear": [
+        0.66,
+        0.87,
+        0.96
+      ],
+      "roughness": 0.38,
+      "metallic": 0.03
+    },
+    "TruckTailLight": {
+      "name": "M_GHSPark_TruckTailLight",
+      "color_linear": [
+        0.46,
+        0.035,
+        0.025
+      ],
+      "roughness": 0.42,
+      "metallic": 0.03
+    }
+  },
+  "mesh": {
+    "name": "SM_GHSPark_ClosedTruck",
+    "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\Trucks\\SM_GHSPark_ClosedTruck.fbx",
+    "material_roles": [
+      "TruckRubber",
+      "TruckTrim",
+      "TruckGlass",
+      "TruckBody",
+      "TruckHeadlight",
+      "TruckBlue",
+      "TruckTailLight"
+    ],
+    "slot_names": [
+      "M_GHSPark_TruckRubber",
+      "M_GHSPark_TruckTrim",
+      "M_GHSPark_TruckGlass",
+      "M_GHSPark_TruckBody",
+      "M_GHSPark_TruckHeadlight",
+      "M_GHSPark_TruckBlue",
+      "M_GHSPark_TruckTailLight"
+    ],
+    "vertices": 22970,
+    "polygons": 21073,
+    "triangles": 44096,
+    "bounds_ue_cm": {
+      "min": [
+        -19.749923050403595,
+        -149.9999761581421,
+        -0.6500244140625
+      ],
+      "max": [
+        1470.6001281738281,
+        150.00003576278687,
+        373.50006103515625
+      ]
+    },
+    "blender_bounds_m": {
+      "min": [
+        -0.19749923050403595,
+        -1.5000003576278687,
+        -0.006500244140625
+      ],
+      "max": [
+        14.706001281738281,
+        1.499999761581421,
+        3.7350006103515625
+      ]
+    },
+    "sha256": "2f3f18766b14c63f7de63062a9e1cbd3854a007b4f8222af0401bdf2a05656c0"
+  },
+  "source_assets": [
+    {
+      "path": "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\TrucksLong\\dock_truck_long.blend",
+      "sha256": "9f488bba3a1f513fc265c7a10f4ec27ca57c29ae80233870dd3ce949eaf6c802"
+    },
+    {
+      "path": "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\TrucksLong\\SM_GHN_LongDockTruck.fbx",
+      "sha256": "b2f5df7846a15ff810e4cfe62085a3462549f77374c389dfc5c2f3b8d8cb3770"
+    },
+    {
+      "path": "D:\\UEPro\\Test\\Content\\GHSNormalWarehouse\\TrucksLong\\SM_GHN_LongDockTruck.uasset",
+      "sha256": "740890fc3b54d672e1e16d3afca04503d0285fff4062d84dfa298fcd0d5352ad"
+    }
+  ],
+  "validation": {
+    "success": true,
+    "source_assets_preserved": true,
+    "preserved_source_parts": 423,
+    "maximum_reused_vertex_error_m": 0.0,
+    "removed_folded_door_parts": 16,
+    "modified_belt_parts": 2,
+    "added_closed_door_parts": 30,
+    "door_aperture_rays_passed": 2350,
+    "rear_aperture_closed": true,
+    "mesh_validate_needed_repairs": false,
+    "degenerate_faces": 0,
+    "full_source_bounds_preserved": true
+  },
+  "generator": "D:\\UEPro\\Test\\Scripts\\ghs\\build_park_truck.py"
+}

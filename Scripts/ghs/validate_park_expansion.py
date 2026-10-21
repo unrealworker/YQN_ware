@@ -239,16 +239,34 @@ def main():
                     meshes[part['mesh']] += 1
                     name = mesh.get_name()
                     if name in expected_meshes:
+                        spec = expected_meshes[name]
                         mesh_path = ASSET_ROOT + '/Meshes/' + name + '.' + name
-                        material_name = 'M_GHSPark_' + expected_meshes[name]['role']
-                        material_path = ASSET_ROOT + '/Materials/' + material_name + '.' + material_name
                         assert part['mesh'] == mesh_path, (label, part['mesh'], mesh_path)
-                        assert component.get_num_materials() == 1, label + ': unexpected material slots'
-                        actual = component.get_material(0)
-                        saved = mesh.get_material(0)
-                        assert actual and actual.get_path_name() == material_path, (label, 'Component material mismatch', material_path)
-                        assert saved and saved.get_path_name() == material_path, (label, 'Mesh material mismatch', material_path)
-                        part['material'] = material_path
+                        roles = spec.get('material_roles',[spec['role']])
+                        assert component.get_num_materials() == len(roles), label + ': unexpected material slots'
+                        defaults = [ASSET_ROOT+'/Materials/M_GHSPark_'+r+'.M_GHSPark_'+r for r in roles]
+                        overrides = spec.get('component_material_overrides',defaults)
+                        assert len(overrides)==len(defaults)
+                        for i,(saved_path,actual_path) in enumerate(zip(defaults,overrides)):
+                            actual,saved_material = component.get_material(i),mesh.get_material(i)
+                            assert actual and actual.get_path_name()==actual_path, (label,i,'Component material mismatch')
+                            assert saved_material and saved_material.get_path_name()==saved_path, (label,i,'Mesh material mismatch')
+                        part['materials'] = overrides
+                        if 'instances' in spec:
+                            assert isinstance(component,unreal.HierarchicalInstancedStaticMeshComponent), label
+                            assert component.get_instance_count()==len(spec['instances']), label
+                            assert component.get_editor_property('mobility')==unreal.ComponentMobility.STATIC
+                            assert spec['closed_doors'] and spec['static_display_only']
+                            for i,expected in enumerate(spec['instances']):
+                                transform=component.get_instance_transform(i,world_space=True)
+                                assert max(abs(a-b) for a,b in zip(xyz(transform.translation),expected['position_cm']))<.05,(label,i,'position')
+                                assert max(abs(a-b) for a,b in zip(xyz(transform.scale3d),expected['scale']))<.0001,(label,i,'scale')
+                                yaw=transform.rotation.rotator().yaw
+                                assert abs((yaw-expected['rotation_deg']+180)%360-180)<.001,(label,i,'yaw')
+                            for source in spec['source_assets']:
+                                assert sha(Path(source['path']))==source['sha256'], ('Shared source changed',source['path'])
+                        else:
+                            assert not isinstance(component,unreal.InstancedStaticMeshComponent), label
                         park_meshes[name] += 1
                     else:
                         assert isinstance(actor, unreal.CameraActor), (label, 'Mesh absent from park manifest', name)
@@ -261,6 +279,7 @@ def main():
         assert park_meshes == Counter({name: 1 for name in expected_meshes}), (dict(park_meshes), list(expected_meshes))
         assert len(capture_cameras) == 3 and len(additions) == len(expected_meshes) + 3, \
             ('Unexpected park mesh/camera actor count', len(additions), capture_cameras)
+        assert instances==sum(len(row.get('instances',[])) for row in expected_meshes.values())
 
         source = read(SOURCE_BASELINE)
         source_path = Path(source['path'])

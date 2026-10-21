@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "purpose": "Full campus primary display; restrained public-road and residential context",
   "reference_address": "17335 Glen Helen Pkwy, San Bernardino, CA 92407",
   "measurement_status": "Roads and building placements registered from user CADmapper DXF. Parcel and architectural detail from satellite references; not a cadastral survey.",
@@ -6184,23 +6184,23 @@
     159.7
   ],
   "hardstand_elevation_ue_cm": -4,
-  "asset_count": 21,
-  "triangles_total": 741077,
+  "asset_count": 22,
+  "triangles_total": 808778,
   "counts": {
     "fence_posts": 604,
     "fence_bars": 6306,
     "fence_rails": 3134,
     "gate_columns": 4,
     "perimeter_gates": 2,
-    "landscape_shrubs": 191,
-    "low_poly_trees": 815,
-    "clustered_broadleaf_trees": 815,
+    "landscape_shrubs": 260,
+    "low_poly_trees": 821,
+    "clustered_broadleaf_trees": 821,
     "tree_candidates_omitted_for_road_clearance": 5,
-    "parked_cars": 140,
-    "detailed_compact_suv": 78,
-    "car_spaces": 82,
-    "detailed_sedan": 62,
-    "parked_trailers": 27,
+    "parked_cars": 157,
+    "detailed_compact_suv": 84,
+    "car_spaces": 112,
+    "detailed_sedan": 73,
+    "static_display_trucks": 27,
     "trailer_spaces": 52,
     "gatehouses": 2,
     "detailed_context_houses": 338,
@@ -6259,7 +6259,7 @@
           -15.999999642372131
         ]
       },
-      "sha256": "3af4e462a162fb7c0d03d7e66256c78dde67143df5f264339bdb7378a45cc9d9"
+      "sha256": "03183d6229ffceecbbf591d7cad982d97526a1d70137115e0677ae840c89fd64"
     },
     {
       "name": "SM_GHSPark_Hardstand",
@@ -6299,7 +6299,7 @@
           3.500000014901161
         ]
       },
-      "sha256": "7bfabb883e04cd0d3a5630a047f080daf8cb4697f76c5f788ef71378cd1980ed"
+      "sha256": "5489d239c526c1f8becfeec71d934e627ca58cdc72e3dee39589da6e074070b1"
     },
     {
       "name": "SM_GHSPark_ContextRoads",
@@ -6339,7 +6339,7 @@
           613.0000114440918
         ]
       },
-      "sha256": "c77c39387d5c689f4a48117a89101a86a129e0ef88548e49d72a2f48bf8fc63f"
+      "sha256": "82ddb79f63adcff28018016759ae0a9c27855381ba8d2d48c9e2e26c39285236"
     },
     {
       "name": "SM_GHSPark_CampusRoads",
@@ -6350,8 +6350,8 @@
         0.65,
         0.69
       ],
-      "vertices": 3566,
-      "triangles": 3574,
+      "vertices": 3646,
+      "triangles": 3654,
       "source_parts": 1,
       "blender_bounds_m": [
         [
@@ -6379,7 +6379,7 @@
           1.7999999225139618
         ]
       },
-      "sha256": "5d73bc1f09e6eab91404c0628e0dabbc99880878ab5e1c73b7d98326bc28cba8"
+      "sha256": "d0ed8ae75bc1ce18e33b102343c15651a05efc6bf26c1ac3adb405d12e3038dc"
     },
     {
       "name": "SM_GHSPark_Curbs",
@@ -6390,9 +6390,9 @@
         0.88,
         0.92
       ],
-      "vertices": 200385,
-      "triangles": 159069,
-      "source_parts": 27492,
+      "vertices": 203790,
+      "triangles": 161328,
+      "source_parts": 27528,
       "blender_bounds_m": [
         [
           -438.3520202636719,
@@ -6419,7 +6419,7 @@
           810.0000381469727
         ]
       },
-      "sha256": "7cb6e2f2308a6171412f460dbcf18f06ee091f9464ed8f8245b4f31b2ee49437"
+      "sha256": "fef9cf570c21bba3fc53b20e876bc4955da4e7f83015edef0aa40e0a17e40d16"
     },
     {
       "name": "SM_GHSPark_Markings",
@@ -6430,9 +6430,9 @@
         0.94,
         0.98
       ],
-      "vertices": 27724,
-      "triangles": 26152,
-      "source_parts": 2046,
+      "vertices": 29162,
+      "triangles": 27486,
+      "source_parts": 2251,
       "blender_bounds_m": [
         [
           -438.3373107910156,
@@ -6459,7 +6459,7 @@
           615.500020980835
         ]
       },
-      "sha256": "5e8b86e8e77c22c39ff16b73c21c79a788d9b4ca665527c5903eb93017135ef6"
+      "sha256": "ed303e527fb55a80c6ebe88b8acbd4f43eed67c55f189e635a8eecbde138d80d"
     },
     {
       "name": "SM_GHSPark_Landscape",
@@ -6470,9 +6470,9 @@
         0.63,
         0.57
       ],
-      "vertices": 27937,
-      "triangles": 26545,
-      "source_parts": 347,
+      "vertices": 28112,
+      "triangles": 26712,
+      "source_parts": 350,
       "blender_bounds_m": [
         [
           -443.39166259765625,
@@ -6499,7 +6499,7 @@
           12.999999523162842
         ]
       },
-      "sha256": "25167369a3695eaf8c34eef2057c4cc67da6f6c6f9850c257b4c72d0c13a0005"
+      "sha256": "e9948a2a2c3dd543618b60ac82b702800b490c67bb6301d70121dd7ba02b6b64"
     },
     {
       "name": "SM_GHSPark_Fence",
@@ -6539,7 +6539,7 @@
           229.99999523162842
         ]
       },
-      "sha256": "dfc7935b8b4eadbc90f49cb7d087a1d59aca4e400b39d9e2785bae0d0a0a9d5a"
+      "sha256": "7f68afb792562d90ff223c4de640253386c7339257c81b9eb2fadd3841afb97d"
     },
     {
       "name": "SM_GHSPark_Buildings",
@@ -6550,9 +6550,9 @@
         0.9,
         0.93
       ],
-      "vertices": 28976,
-      "triangles": 44296,
-      "source_parts": 3414,
+      "vertices": 29528,
+      "triangles": 45252,
+      "source_parts": 3451,
       "blender_bounds_m": [
         [
           -301.2064514160156,
@@ -6579,7 +6579,7 @@
           748.1976509094238
         ]
       },
-      "sha256": "71131fbb9bbe30456a82d42974d86f2645135c72730cc3deae97a8520e67da83"
+      "sha256": "b527899b1d50ffbc6cb58a18d3ae3b2cb36d7c22df5ba5e988bceed9d1784baf"
     },
     {
       "name": "SM_GHSPark_Blue",
@@ -6590,9 +6590,9 @@
         0.075,
         0.51
       ],
-      "vertices": 1816,
-      "triangles": 2988,
-      "source_parts": 158,
+      "vertices": 2060,
+      "triangles": 3218,
+      "source_parts": 185,
       "blender_bounds_m": [
         [
           -253.79385375976562,
@@ -6619,7 +6619,10 @@
           239.49999809265137
         ]
       },
-      "sha256": "c18cfaa77162f6640ce7d03ad4175850fde4bcc3d7b36eb1faaa063f924e6283"
+      "sha256": "e3c325c94690b1e4b2dcbe45c1c671a1f5187934f1445a2e88490f7fc0c710ba",
+      "component_material_overrides": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt"
+      ]
     },
     {
       "name": "SM_GHSPark_Roads",
@@ -6630,17 +6633,17 @@
         0.33,
         0.39
       ],
-      "vertices": 143,
-      "triangles": 137,
+      "vertices": 294,
+      "triangles": 288,
       "source_parts": 3,
       "blender_bounds_m": [
         [
           -240.88385009765625,
-          263.7661437988281
+          288.6661376953125
         ],
         [
           -179.809814453125,
-          60.34019088745117
+          62.690189361572266
         ],
         [
           0.02800000086426735,
@@ -6650,16 +6653,16 @@
       "bounds_ue_cm": {
         "min": [
           -24088.385009765625,
-          -6034.019088745117,
+          -6269.018936157227,
           2.800000086426735
         ],
         "max": [
-          26376.614379882812,
+          28866.61376953125,
           17980.9814453125,
           2.800000086426735
         ]
       },
-      "sha256": "741d57b26fc2dabd04e61e6c584d144fc09a0caf3c0e88bc9384ec806b78e1dd"
+      "sha256": "f37f690e36199e6e7ba4bbf0d20d19c172fc81cdb66f68363ab0712b8ee5b9d5"
     },
     {
       "name": "SM_GHSPark_TreesDark",
@@ -6670,9 +6673,9 @@
         0.205,
         0.055
       ],
-      "vertices": 36960,
-      "triangles": 70400,
-      "source_parts": 880,
+      "vertices": 38178,
+      "triangles": 72720,
+      "source_parts": 909,
       "blender_bounds_m": [
         [
           -429.0189514160156,
@@ -6699,7 +6702,7 @@
           697.5345134735107
         ]
       },
-      "sha256": "8f2db6f4ba5226d745c0b80ad5840a6a4692229145a931098a05fdf612da08ca"
+      "sha256": "13cb0f5eac1e1fe2578342e9de086bf59f129d31018dc5f4ec4cf9143cd2781c"
     },
     {
       "name": "SM_GHSPark_TreesLight",
@@ -6710,9 +6713,9 @@
         0.415,
         0.115
       ],
-      "vertices": 42252,
-      "triangles": 80480,
-      "source_parts": 1006,
+      "vertices": 45402,
+      "triangles": 86480,
+      "source_parts": 1081,
       "blender_bounds_m": [
         [
           -428.41168212890625,
@@ -6739,7 +6742,7 @@
           744.6747779846191
         ]
       },
-      "sha256": "2e842a9fc673514b6cc22ba2f5beadddcc5ab708360675a43aa7c6ccfc26e5c7"
+      "sha256": "a6f09dedf559651033f415042726d9c3d7fd44e7da5fff26514ffe5d791b845a"
     },
     {
       "name": "SM_GHSPark_Trees",
@@ -6750,9 +6753,9 @@
         0.315,
         0.08
       ],
-      "vertices": 39522,
-      "triangles": 75280,
-      "source_parts": 941,
+      "vertices": 41706,
+      "triangles": 79440,
+      "source_parts": 993,
       "blender_bounds_m": [
         [
           -428.4269104003906,
@@ -6779,7 +6782,7 @@
           796.479606628418
         ]
       },
-      "sha256": "1ec7a48ba2ed302ea55d7cfed2008c3d3c0cc96a673acef94a69e008b47b1df6"
+      "sha256": "518b9b752f69d2ddab411041583f739ba5013a485bcfb3dfc8e8e153b4cc7690"
     },
     {
       "name": "SM_GHSPark_Trunk",
@@ -6790,9 +6793,9 @@
         0.165,
         0.115
       ],
-      "vertices": 39120,
-      "triangles": 65200,
-      "source_parts": 3260,
+      "vertices": 39408,
+      "triangles": 65680,
+      "source_parts": 3284,
       "blender_bounds_m": [
         [
           -427.7709045410156,
@@ -6819,7 +6822,7 @@
           556.5902233123779
         ]
       },
-      "sha256": "50613fedbe982e8e27ebcb99224c67e9f311f92bb031074be6d690afa43f9837"
+      "sha256": "b49c4db53e9edd7dff5a8c72c2c550e86d6b7b1f6c7bcf3b92ce9340d2a5a6ce"
     },
     {
       "name": "SM_GHSPark_Rubber",
@@ -6830,9 +6833,9 @@
         0.024,
         0.028
       ],
-      "vertices": 19040,
-      "triangles": 34720,
-      "source_parts": 840,
+      "vertices": 21352,
+      "triangles": 38936,
+      "source_parts": 942,
       "blender_bounds_m": [
         [
           -239.50985717773438,
@@ -6840,7 +6843,7 @@
         ],
         [
           -511.5714416503906,
-          47.84019088745117
+          61.41619110107422
         ],
         [
           0.05566191300749779,
@@ -6850,7 +6853,7 @@
       "bounds_ue_cm": {
         "min": [
           -23950.985717773438,
-          -4784.019088745117,
+          -6141.619110107422,
           5.566191300749779
         ],
         "max": [
@@ -6859,7 +6862,7 @@
           66.43381118774414
         ]
       },
-      "sha256": "7ddf95efce5c03e9d69982daad137569e2ffce1f8ecb1be9baf9f4efaf3b2e20"
+      "sha256": "1a7290a77b08aa44c1c1adc436ed21fe55bd70cdd2cfdf6da7fea212a0cc2498"
     },
     {
       "name": "SM_GHSPark_Detail",
@@ -6870,9 +6873,9 @@
         0.39,
         0.46
       ],
-      "vertices": 29776,
-      "triangles": 27248,
-      "source_parts": 4217,
+      "vertices": 31144,
+      "triangles": 28212,
+      "source_parts": 4320,
       "blender_bounds_m": [
         [
           -293.79888916015625,
@@ -6899,7 +6902,7 @@
           800.0
         ]
       },
-      "sha256": "ef6c82730e9548b7db3bbeffd27677d352bc7ead0e4fceffe55161eb7353218a"
+      "sha256": "22f6e56018a1db0e01c02394f3ecee3c79b4080b134359287614b339f064b520"
     },
     {
       "name": "SM_GHSPark_Solar",
@@ -6910,9 +6913,9 @@
         0.075,
         0.13
       ],
-      "vertices": 13632,
-      "triangles": 6816,
-      "source_parts": 3408,
+      "vertices": 14040,
+      "triangles": 7020,
+      "source_parts": 3510,
       "blender_bounds_m": [
         [
           -293.7001647949219,
@@ -6939,7 +6942,7 @@
           723.2565402984619
         ]
       },
-      "sha256": "e9faa3efd34a8d9bed3d4767a4b27511124e6a33eb233d61b73f909b5acbd77c"
+      "sha256": "8ac1c466fdaaf76f180aa9022eb7e144c446c2d512c6157070c390b6ae9a7eac"
     },
     {
       "name": "SM_GHSPark_VehicleLights",
@@ -6950,9 +6953,9 @@
         0.035,
         0.025
       ],
-      "vertices": 2240,
-      "triangles": 3360,
-      "source_parts": 280,
+      "vertices": 2512,
+      "triangles": 3768,
+      "source_parts": 314,
       "blender_bounds_m": [
         [
           -235.00885009765625,
@@ -6960,7 +6963,7 @@
         ],
         [
           -507.1006774902344,
-          47.5701904296875
+          56.915191650390625
         ],
         [
           0.5799999833106995,
@@ -6970,7 +6973,7 @@
       "bounds_ue_cm": {
         "min": [
           -23500.885009765625,
-          -4757.01904296875,
+          -5691.5191650390625,
           57.999998331069946
         ],
         "max": [
@@ -6979,7 +6982,7 @@
           68.00000071525574
         ]
       },
-      "sha256": "a9ee0e9aaa582588f417604f3250c7b6346a8de2a7644cb4925eba2f1747b657"
+      "sha256": "7657bf1a9689b2b37d9afda77ce869c39b8f5f57a7c29d01b1baa1b9d5c46956"
     },
     {
       "name": "SM_GHSPark_Roofs",
@@ -6990,9 +6993,9 @@
         0.78,
         0.83
       ],
-      "vertices": 7668,
-      "triangles": 7108,
-      "source_parts": 1381,
+      "vertices": 7452,
+      "triangles": 6784,
+      "source_parts": 1354,
       "blender_bounds_m": [
         [
           -297.8122863769531,
@@ -7019,7 +7022,7 @@
           780.9999942779541
         ]
       },
-      "sha256": "66ba606d45a30ffb742671fbb1aff68c1f79b991706befeb4776fb1772f76d90"
+      "sha256": "1bb7f9acc98b62c2dbd8578136b7ac23745c22dcd4207eea35342af14b54cdf8"
     },
     {
       "name": "SM_GHSPark_Glass",
@@ -7059,7 +7062,535 @@
           505.63511848449707
         ]
       },
-      "sha256": "270f7451356863b230868c6337128843d5a096813e1f876bf91fb26023d62b00"
+      "sha256": "03dcb05577d1382e224e2fb32bc72afa8d5b5be89b7018aec0e6afb5de24b627"
+    },
+    {
+      "name": "SM_GHSPark_ClosedTruck",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\Trucks\\SM_GHSPark_ClosedTruck.fbx",
+      "material_roles": [
+        "TruckRubber",
+        "TruckTrim",
+        "TruckGlass",
+        "TruckBody",
+        "TruckHeadlight",
+        "TruckBlue",
+        "TruckTailLight"
+      ],
+      "slot_names": [
+        "M_GHSPark_TruckRubber",
+        "M_GHSPark_TruckTrim",
+        "M_GHSPark_TruckGlass",
+        "M_GHSPark_TruckBody",
+        "M_GHSPark_TruckHeadlight",
+        "M_GHSPark_TruckBlue",
+        "M_GHSPark_TruckTailLight"
+      ],
+      "vertices": 22970,
+      "polygons": 21073,
+      "triangles": 44096,
+      "bounds_ue_cm": {
+        "min": [
+          -19.749923050403595,
+          -149.9999761581421,
+          -0.6500244140625
+        ],
+        "max": [
+          1470.6001281738281,
+          150.00003576278687,
+          373.50006103515625
+        ]
+      },
+      "blender_bounds_m": {
+        "min": [
+          -0.19749923050403595,
+          -1.5000003576278687,
+          -0.006500244140625
+        ],
+        "max": [
+          14.706001281738281,
+          1.499999761581421,
+          3.7350006103515625
+        ]
+      },
+      "sha256": "2f3f18766b14c63f7de63062a9e1cbd3854a007b4f8222af0401bdf2a05656c0",
+      "role": "TruckRubber",
+      "instances": [
+        {
+          "position_cm": [
+            -16921.268893049015,
+            15299.817619324438,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            71.88072524825384,
+            220.27598595020396
+          ]
+        },
+        {
+          "position_cm": [
+            -16533.213963059963,
+            15202.795089409006,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            75.76127454814439,
+            219.30576065104967
+          ]
+        },
+        {
+          "position_cm": [
+            -16145.159033070906,
+            15105.772559493578,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            79.64182384803493,
+            218.33553535189537
+          ]
+        },
+        {
+          "position_cm": [
+            -15369.049173092799,
+            14911.72749966272,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            87.40292244781601,
+            216.3950847535868
+          ]
+        },
+        {
+          "position_cm": [
+            -14980.994243103743,
+            14814.704969747288,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            91.28347174770654,
+            215.4248594544325
+          ]
+        },
+        {
+          "position_cm": [
+            -14204.884383125636,
+            14620.659909916434,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            99.04457034748764,
+            213.48440885612393
+          ]
+        },
+        {
+          "position_cm": [
+            -13816.829453136581,
+            14523.637380001002,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            102.92511964737817,
+            212.51418355696964
+          ]
+        },
+        {
+          "position_cm": [
+            -12652.664663169418,
+            14232.569790254718,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            114.56676754704979,
+            209.6035076595068
+          ]
+        },
+        {
+          "position_cm": [
+            -12264.609733180365,
+            14135.547260339292,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            118.44731684694034,
+            208.6332823603525
+          ]
+        },
+        {
+          "position_cm": [
+            -11876.55480319131,
+            14038.524730423858,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            122.32786614683089,
+            207.6630570611982
+          ]
+        },
+        {
+          "position_cm": [
+            -11488.499873202256,
+            13941.502200508432,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            126.20841544672142,
+            206.6928317620439
+          ]
+        },
+        {
+          "position_cm": [
+            -10712.390013224145,
+            13747.457140677574,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            133.96951404650252,
+            204.75238116373535
+          ]
+        },
+        {
+          "position_cm": [
+            -8932.497276781061,
+            10448.130496940526,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            150.09665122972228,
+            171.97521495766125
+          ]
+        },
+        {
+          "position_cm": [
+            -7732.585121709272,
+            10433.610851250132,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            162.09577278044017,
+            171.83001850075732
+          ]
+        },
+        {
+          "position_cm": [
+            -6932.643684994744,
+            10423.931087456536,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            170.09518714758545,
+            171.73322086282136
+          ]
+        },
+        {
+          "position_cm": [
+            -6532.672966637483,
+            10419.09120555974,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            174.09489433115806,
+            171.6848220438534
+          ]
+        },
+        {
+          "position_cm": [
+            -5732.7315299229585,
+            10409.411441766142,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            182.0943086983033,
+            171.58802440591742
+          ]
+        },
+        {
+          "position_cm": [
+            -4532.819374851167,
+            10394.89179607575,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            194.09343024902122,
+            171.4428279490135
+          ]
+        },
+        {
+          "position_cm": [
+            -1333.0536279930611,
+            10356.172740901367,
+            -3.3499755859375
+          ],
+          "rotation_deg": 89.3067210678917,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            226.09108771760228,
+            171.05563739726966
+          ]
+        },
+        {
+          "position_cm": [
+            1166.7860369400414,
+            10602.795089409006,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            252.7612745481444,
+            173.30576065104967
+          ]
+        },
+        {
+          "position_cm": [
+            1554.8409669290918,
+            10505.772559493578,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            256.6418238480349,
+            172.33553535189537
+          ]
+        },
+        {
+          "position_cm": [
+            2330.95082690721,
+            10311.727499662718,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            264.402922447816,
+            170.3950847535868
+          ]
+        },
+        {
+          "position_cm": [
+            2719.0057568962657,
+            10214.70496974729,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            268.2834717477066,
+            169.4248594544325
+          ]
+        },
+        {
+          "position_cm": [
+            3495.1156168743723,
+            10020.659909916434,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            276.04457034748765,
+            167.48440885612393
+          ]
+        },
+        {
+          "position_cm": [
+            4659.280406841534,
+            9729.592320170146,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            287.6862182471593,
+            164.57373295866105
+          ]
+        },
+        {
+          "position_cm": [
+            5435.3902668196415,
+            9535.54726033929,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            295.44731684694034,
+            162.6332823603525
+          ]
+        },
+        {
+          "position_cm": [
+            6211.500126797753,
+            9341.50220050843,
+            -3.3499755859375
+          ],
+          "rotation_deg": 75.96253401929482,
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bay_center_uv_m": [
+            303.20841544672146,
+            160.6928317620439
+          ]
+        }
+      ],
+      "source_assets": [
+        {
+          "path": "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\TrucksLong\\dock_truck_long.blend",
+          "sha256": "9f488bba3a1f513fc265c7a10f4ec27ca57c29ae80233870dd3ce949eaf6c802"
+        },
+        {
+          "path": "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\TrucksLong\\SM_GHN_LongDockTruck.fbx",
+          "sha256": "b2f5df7846a15ff810e4cfe62085a3462549f77374c389dfc5c2f3b8d8cb3770"
+        },
+        {
+          "path": "D:\\UEPro\\Test\\Content\\GHSNormalWarehouse\\TrucksLong\\SM_GHN_LongDockTruck.uasset",
+          "sha256": "740890fc3b54d672e1e16d3afca04503d0285fff4062d84dfa298fcd0d5352ad"
+        }
+      ],
+      "closed_doors": true,
+      "static_display_only": true
     }
   ],
   "materials": {
@@ -7167,6 +7698,41 @@
       0.205,
       0.165,
       0.115
+    ],
+    "TruckBody": [
+      0.87,
+      0.9,
+      0.93
+    ],
+    "TruckBlue": [
+      0.018,
+      0.075,
+      0.51
+    ],
+    "TruckTrim": [
+      0.63,
+      0.68,
+      0.73
+    ],
+    "TruckGlass": [
+      0.055,
+      0.14,
+      0.22
+    ],
+    "TruckRubber": [
+      0.018,
+      0.024,
+      0.028
+    ],
+    "TruckHeadlight": [
+      0.66,
+      0.87,
+      0.96
+    ],
+    "TruckTailLight": [
+      0.46,
+      0.035,
+      0.025
     ]
   },
   "campus_boundary_ue_cm": [
@@ -14847,22 +15413,22 @@
     ]
   ],
   "stats": {
-    "triangles": 741077,
-    "asset_count": 21,
+    "triangles": 808778,
+    "asset_count": 22,
     "fence_posts": 604,
     "fence_bars": 6306,
     "fence_rails": 3134,
     "gate_columns": 4,
     "perimeter_gates": 2,
-    "landscape_shrubs": 191,
-    "low_poly_trees": 815,
-    "clustered_broadleaf_trees": 815,
+    "landscape_shrubs": 260,
+    "low_poly_trees": 821,
+    "clustered_broadleaf_trees": 821,
     "tree_candidates_omitted_for_road_clearance": 5,
-    "parked_cars": 140,
-    "detailed_compact_suv": 78,
-    "car_spaces": 82,
-    "detailed_sedan": 62,
-    "parked_trailers": 27,
+    "parked_cars": 157,
+    "detailed_compact_suv": 84,
+    "car_spaces": 112,
+    "detailed_sedan": 73,
+    "static_display_trucks": 27,
     "trailer_spaces": 52,
     "gatehouses": 2,
     "detailed_context_houses": 338,
@@ -14882,6 +15448,7 @@
     "cad_road_segments": 79,
     "context_road_segments": 75
   },
+  "instanced_triangles_total": 1955274,
   "geometry_checks": {
     "minimum_house_to_road_edge_m": 1.064755415292048,
     "road_union_valid": true,

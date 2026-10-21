@@ -86,6 +86,18 @@ def build_site(api):
     # Keep the 7.7m open strip between the SW parking loop and fire access.
     # A 4m closing radius falsely joined those parallel lanes at mid-block.
     all_ground,union_meta=road_union(specs,3.8,True)
+    # The NE parking loop is only ~6m from the back fire lane. Global 3.8m
+    # closing filled the intervening parking strip, despite the CAD routes
+    # remaining separate. Use the smaller concave fillet only in this pocket.
+    # Include the complete northeast bend: its closing-radius difference
+    # reaches v=6.965. Cutting at v=5.5 leaves a transverse step in the road
+    # edge; v=7.5 puts the mask wholly beyond that difference, with a margin.
+    ne_corner=rect(473,-3,501,7.5)
+    ne_ground=road_union(specs,2.8)
+    seam=all_ground.symmetric_difference(ne_ground).intersection(ne_corner.boundary)
+    assert seam.length<.001, ('NE local road correction has an open seam',seam.length)
+    all_ground=all_ground.difference(ne_corner).union(ne_ground.intersection(ne_corner))
+    assert all_ground.is_valid
     public=all_ground.difference(campus)
     private=all_ground.intersection(campus)
     emit_surface(api,public,'ContextRoads',.015)
