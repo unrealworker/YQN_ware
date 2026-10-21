@@ -1,0 +1,735 @@
+{
+  "version": 1,
+  "purpose": "Full campus primary display; restrained public-road and residential context",
+  "reference_address": "17335 Glen Helen Pkwy, San Bernardino, CA 92407",
+  "measurement_status": "Approximate from user satellite reference. Not a cadastral survey.",
+  "coordinate_contract": "Local u,v metres; Blender X=u-239.33385, Y=-(v-60.24019); FBX -Y forward Z up; UE import at origin scale 1 yields cm X=(u-239.33385)*100,Y=(v-60.24019)*100.",
+  "campus_boundary_uv_m": [
+    [
+      -10,
+      -10
+    ],
+    [
+      475,
+      -15
+    ],
+    [
+      500,
+      -25
+    ],
+    [
+      535,
+      0
+    ],
+    [
+      570,
+      68
+    ],
+    [
+      548,
+      115
+    ],
+    [
+      452,
+      157
+    ],
+    [
+      251,
+      209
+    ],
+    [
+      46,
+      278
+    ],
+    [
+      11,
+      266
+    ],
+    [
+      -2,
+      220
+    ],
+    [
+      -10,
+      170
+    ]
+  ],
+  "existing_warehouse_uv_m": [
+    [
+      0,
+      0
+    ],
+    [
+      465.7344,
+      0
+    ],
+    [
+      465.7344,
+      111.98368
+    ],
+    [
+      440.88196,
+      118.872
+    ],
+    [
+      45.8724,
+      118.872
+    ],
+    [
+      45.8724,
+      137.16
+    ],
+    [
+      0,
+      137.16
+    ]
+  ],
+  "warehouse_geometry_modified": false,
+  "ground_title_clearance_uv_m": [
+    189.5,
+    277.1,
+    147.9,
+    159.7
+  ],
+  "hardstand_elevation_ue_cm": -4,
+  "asset_count": 12,
+  "triangles_total": 14996,
+  "counts": {
+    "parked_cars": 47,
+    "car_spaces": 78,
+    "parked_trailers": 8,
+    "trailer_spaces": 40,
+    "gatehouses": 2,
+    "context_houses": 182,
+    "low_poly_trees": 200,
+    "context_house_candidates_omitted_for_road_clearance": 32,
+    "tree_candidates_omitted_for_road_clearance": 10,
+    "light_poles": 10
+  },
+  "meshes": [
+    {
+      "name": "SM_GHSPark_Hardstand",
+      "role": "Hardstand",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\SM_GHSPark_Hardstand.fbx",
+      "material_color_linear": [
+        0.72,
+        0.76,
+        0.79
+      ],
+      "vertices": 12,
+      "triangles": 10,
+      "source_parts": 1,
+      "blender_bounds_m": [
+        [
+          -249.33384704589844,
+          330.6661376953125
+        ],
+        [
+          -217.7598114013672,
+          85.24018859863281
+        ],
+        [
+          -0.03999999910593033,
+          -0.03999999910593033
+        ]
+      ],
+      "bounds_ue_cm": {
+        "min": [
+          -24933.384704589844,
+          -8524.018859863281,
+          -3.999999910593033
+        ],
+        "max": [
+          33066.61376953125,
+          21775.98114013672,
+          -3.999999910593033
+        ]
+      },
+      "sha256": "1199f9822652638af859be218f405529ec0753a7cdbba2a8949daf9ffe473f6b"
+    },
+    {
+      "name": "SM_GHSPark_Landscape",
+      "role": "Landscape",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\SM_GHSPark_Landscape.fbx",
+      "material_color_linear": [
+        0.63,
+        0.71,
+        0.69
+      ],
+      "vertices": 102,
+      "triangles": 118,
+      "source_parts": 10,
+      "blender_bounds_m": [
+        [
+          -459.3338623046875,
+          538.54443359375
+        ],
+        [
+          -363.0182189941406,
+          220.2401885986328
+        ],
+        [
+          -0.14000000059604645,
+          0.09000000357627869
+        ]
+      ],
+      "bounds_ue_cm": {
+        "min": [
+          -45933.38623046875,
+          -22024.01885986328,
+          -14.000000059604645
+        ],
+        "max": [
+          53854.443359375,
+          36301.82189941406,
+          9.000000357627869
+        ]
+      },
+      "sha256": "1a17551bc1cd4ea1022ed862b8689dbe5bcd848e790b1ee8f0c929f48abd748c"
+    },
+    {
+      "name": "SM_GHSPark_Curbs",
+      "role": "Curbs",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\SM_GHSPark_Curbs.fbx",
+      "material_color_linear": [
+        0.88,
+        0.91,
+        0.94
+      ],
+      "vertices": 324,
+      "triangles": 302,
+      "source_parts": 29,
+      "blender_bounds_m": [
+        [
+          -419.3338623046875,
+          600.837890625
+        ],
+        [
+          -507.4001770019531,
+          230.2401885986328
+        ],
+        [
+          -0.005400000140070915,
+          5.619999885559082
+        ]
+      ],
+      "bounds_ue_cm": {
+        "min": [
+          -41933.38623046875,
+          -23024.01885986328,
+          -0.5400000140070915
+        ],
+        "max": [
+          60083.7890625,
+          50740.01770019531,
+          561.9999885559082
+        ]
+      },
+      "sha256": "b74c4dd8b49cf7690a40b39f8748fae7a966eabf8bec6fc7aab9024e59e9e2cc"
+    },
+    {
+      "name": "SM_GHSPark_Roads",
+      "role": "Roads",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\SM_GHSPark_Roads.fbx",
+      "material_color_linear": [
+        0.42,
+        0.48,
+        0.55
+      ],
+      "vertices": 110,
+      "triangles": 122,
+      "source_parts": 12,
+      "blender_bounds_m": [
+        [
+          -283.3338623046875,
+          316.76788330078125
+        ],
+        [
+          -203.40830993652344,
+          102.24018859863281
+        ],
+        [
+          -0.019999999552965164,
+          0.03999999910593033
+        ]
+      ],
+      "bounds_ue_cm": {
+        "min": [
+          -28333.38623046875,
+          -10224.018859863281,
+          -1.9999999552965164
+        ],
+        "max": [
+          31676.788330078125,
+          20340.830993652344,
+          3.999999910593033
+        ]
+      },
+      "sha256": "1837b1c4dffb924848b57c903f73e20b52dbfeb8af568a6f9fdd2c20c65230c2"
+    },
+    {
+      "name": "SM_GHSPark_ContextRoads",
+      "role": "ContextRoads",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\SM_GHSPark_ContextRoads.fbx",
+      "material_color_linear": [
+        0.6,
+        0.65,
+        0.69
+      ],
+      "vertices": 210,
+      "triangles": 178,
+      "source_parts": 16,
+      "blender_bounds_m": [
+        [
+          -419.3338623046875,
+          600.3948364257812
+        ],
+        [
+          -506.3702392578125,
+          230.2401885986328
+        ],
+        [
+          -0.00800000037997961,
+          5.199999809265137
+        ]
+      ],
+      "bounds_ue_cm": {
+        "min": [
+          -41933.38623046875,
+          -23024.01885986328,
+          -0.800000037997961
+        ],
+        "max": [
+          60039.483642578125,
+          50637.02392578125,
+          519.9999809265137
+        ]
+      },
+      "sha256": "e6f1ca1ea258bd5dda3e4ab45dcb22054a371eb5d4b5b740656aa1ea5434643d"
+    },
+    {
+      "name": "SM_GHSPark_Markings",
+      "role": "Markings",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\SM_GHSPark_Markings.fbx",
+      "material_color_linear": [
+        0.91,
+        0.94,
+        0.98
+      ],
+      "vertices": 2788,
+      "triangles": 1430,
+      "source_parts": 679,
+      "blender_bounds_m": [
+        [
+          -417.3338623046875,
+          537.3985595703125
+        ],
+        [
+          -360.3637390136719,
+          228.2401885986328
+        ],
+        [
+          0.017999999225139618,
+          5.2220001220703125
+        ]
+      ],
+      "bounds_ue_cm": {
+        "min": [
+          -41733.38623046875,
+          -22824.01885986328,
+          1.7999999225139618
+        ],
+        "max": [
+          53739.85595703125,
+          36036.37390136719,
+          522.2000122070312
+        ]
+      },
+      "sha256": "e40a4b44ac23b8e7375fd58913c3f2c9d0296ea9ca715d48b43cf89ff8162678"
+    },
+    {
+      "name": "SM_GHSPark_Buildings",
+      "role": "Buildings",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\SM_GHSPark_Buildings.fbx",
+      "material_color_linear": [
+        0.88,
+        0.91,
+        0.94
+      ],
+      "vertices": 2008,
+      "triangles": 3012,
+      "source_parts": 251,
+      "blender_bounds_m": [
+        [
+          -276.9603576660156,
+          364.29266357421875
+        ],
+        [
+          -448.0669250488281,
+          205.4901885986328
+        ],
+        [
+          0.0,
+          8.095000267028809
+        ]
+      ],
+      "bounds_ue_cm": {
+        "min": [
+          -27696.035766601562,
+          -20549.01885986328,
+          0.0
+        ],
+        "max": [
+          36429.266357421875,
+          44806.69250488281,
+          809.5000267028809
+        ]
+      },
+      "sha256": "05c024bd0dbe9c471a60a67f9fb4fbdf57710f30e0677dfc2395f790e82453b2"
+    },
+    {
+      "name": "SM_GHSPark_Glass",
+      "role": "Glass",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\SM_GHSPark_Glass.fbx",
+      "material_color_linear": [
+        0.38,
+        0.46,
+        0.55
+      ],
+      "vertices": 408,
+      "triangles": 612,
+      "source_parts": 51,
+      "blender_bounds_m": [
+        [
+          -238.37135314941406,
+          282.2661437988281
+        ],
+        [
+          -180.44996643066406,
+          60.27769088745117
+        ],
+        [
+          1.034999966621399,
+          2.450000047683716
+        ]
+      ],
+      "bounds_ue_cm": {
+        "min": [
+          -23837.135314941406,
+          -6027.769088745117,
+          103.49999666213989
+        ],
+        "max": [
+          28226.614379882812,
+          18044.996643066406,
+          245.00000476837158
+        ]
+      },
+      "sha256": "5e75ebbb5fc29b57a5b1741f987f66e3bf7885af71969c793a5df5ecc4c995db"
+    },
+    {
+      "name": "SM_GHSPark_Blue",
+      "role": "Blue",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\SM_GHSPark_Blue.fbx",
+      "material_color_linear": [
+        0.018,
+        0.075,
+        0.51
+      ],
+      "vertices": 80,
+      "triangles": 120,
+      "source_parts": 10,
+      "blender_bounds_m": [
+        [
+          -247.953857421875,
+          286.2861633300781
+        ],
+        [
+          -163.3798065185547,
+          75.86019134521484
+        ],
+        [
+          0.0,
+          2.890000104904175
+        ]
+      ],
+      "bounds_ue_cm": {
+        "min": [
+          -24795.3857421875,
+          -7586.019134521484,
+          0.0
+        ],
+        "max": [
+          28628.616333007812,
+          16337.980651855469,
+          289.0000104904175
+        ]
+      },
+      "sha256": "df28d04abfbd01dbfef24160ec94f251005a3ceb1c52cb3a192b6d73a1287355"
+    },
+    {
+      "name": "SM_GHSPark_Roofs",
+      "role": "Roofs",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\SM_GHSPark_Roofs.fbx",
+      "material_color_linear": [
+        0.8,
+        0.85,
+        0.89
+      ],
+      "vertices": 1172,
+      "triangles": 1212,
+      "source_parts": 192,
+      "blender_bounds_m": [
+        [
+          -276.9603576660156,
+          364.29266357421875
+        ],
+        [
+          -448.0669250488281,
+          205.4901885986328
+        ],
+        [
+          3.4000000953674316,
+          7.050000190734863
+        ]
+      ],
+      "bounds_ue_cm": {
+        "min": [
+          -27696.035766601562,
+          -20549.01885986328,
+          340.00000953674316
+        ],
+        "max": [
+          36429.266357421875,
+          44806.69250488281,
+          705.0000190734863
+        ]
+      },
+      "sha256": "b1e15c2c7eb6e35e5fa1ae75742e2291f31399eecf046e6f967f334d7822445a"
+    },
+    {
+      "name": "SM_GHSPark_Detail",
+      "role": "Detail",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\SM_GHSPark_Detail.fbx",
+      "material_color_linear": [
+        0.37,
+        0.44,
+        0.49
+      ],
+      "vertices": 2840,
+      "triangles": 4680,
+      "source_parts": 250,
+      "blender_bounds_m": [
+        [
+          -427.8108215332031,
+          320.80615234375
+        ],
+        [
+          -486.0970458984375,
+          189.36143493652344
+        ],
+        [
+          0.0,
+          8.0
+        ]
+      ],
+      "bounds_ue_cm": {
+        "min": [
+          -42781.08215332031,
+          -18936.143493652344,
+          0.0
+        ],
+        "max": [
+          32080.615234375,
+          48609.70458984375,
+          800.0
+        ]
+      },
+      "sha256": "52cc47cf6dc3a326983b38a75d31a26105260b28aee7e8a7a120b64c1f21e2fd"
+    },
+    {
+      "name": "SM_GHSPark_Trees",
+      "role": "Trees",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\SM_GHSPark_Trees.fbx",
+      "material_color_linear": [
+        0.72,
+        0.79,
+        0.77
+      ],
+      "vertices": 2000,
+      "triangles": 3200,
+      "source_parts": 200,
+      "blender_bounds_m": [
+        [
+          -428.8176574707031,
+          322.1701354980469
+        ],
+        [
+          -487.44781494140625,
+          190.61619567871094
+        ],
+        [
+          0.6858412027359009,
+          5.800000190734863
+        ]
+      ],
+      "bounds_ue_cm": {
+        "min": [
+          -42881.76574707031,
+          -19061.619567871094,
+          68.58412027359009
+        ],
+        "max": [
+          32217.013549804688,
+          48744.781494140625,
+          580.0000190734863
+        ]
+      },
+      "sha256": "01d676c9c6590ab9df7b628e0b808f66588ac1c6d5eb36be34b8b3cd17524896"
+    }
+  ],
+  "materials": {
+    "Hardstand": [
+      0.72,
+      0.76,
+      0.79
+    ],
+    "Roads": [
+      0.42,
+      0.48,
+      0.55
+    ],
+    "ContextRoads": [
+      0.6,
+      0.65,
+      0.69
+    ],
+    "Curbs": [
+      0.88,
+      0.91,
+      0.94
+    ],
+    "Markings": [
+      0.91,
+      0.94,
+      0.98
+    ],
+    "Buildings": [
+      0.88,
+      0.91,
+      0.94
+    ],
+    "Roofs": [
+      0.8,
+      0.85,
+      0.89
+    ],
+    "Trees": [
+      0.72,
+      0.79,
+      0.77
+    ],
+    "Landscape": [
+      0.63,
+      0.71,
+      0.69
+    ],
+    "Glass": [
+      0.38,
+      0.46,
+      0.55
+    ],
+    "Blue": [
+      0.018,
+      0.075,
+      0.51
+    ],
+    "Detail": [
+      0.37,
+      0.44,
+      0.49
+    ]
+  },
+  "campus_boundary_ue_cm": [
+    [
+      -24933.385000000002,
+      -7024.019,
+      -4
+    ],
+    [
+      23566.614999999998,
+      -7524.019,
+      -4
+    ],
+    [
+      26066.615,
+      -8524.019,
+      -4
+    ],
+    [
+      29566.615,
+      -6024.019,
+      -4
+    ],
+    [
+      33066.615000000005,
+      775.9810000000002,
+      -4
+    ],
+    [
+      30866.615,
+      5475.981,
+      -4
+    ],
+    [
+      21266.614999999998,
+      9675.981,
+      -4
+    ],
+    [
+      1166.6149999999989,
+      14875.981000000002,
+      -4
+    ],
+    [
+      -19333.385000000002,
+      21775.981,
+      -4
+    ],
+    [
+      -22833.385000000002,
+      20575.981,
+      -4
+    ],
+    [
+      -24133.385000000002,
+      15975.981000000002,
+      -4
+    ],
+    [
+      -24933.385000000002,
+      10975.981,
+      -4
+    ]
+  ],
+  "stats": {
+    "triangles": 14996,
+    "asset_count": 12,
+    "parked_cars": 47,
+    "car_spaces": 78,
+    "parked_trailers": 8,
+    "trailer_spaces": 40,
+    "gatehouses": 2,
+    "context_houses": 182,
+    "low_poly_trees": 200,
+    "context_house_candidates_omitted_for_road_clearance": 32,
+    "tree_candidates_omitted_for_road_clearance": 10,
+    "light_poles": 10
+  },
+  "geometry_checks": {
+    "minimum_house_bounding_circle_to_road_edge_m": 0.8553500354340251,
+    "house_clearance_required_m": 0.8,
+    "lane_dash_vertices_follow_road_segment_gradient": true,
+    "reviewer_conflict_house_u40_v517_48_included": false
+  }
+}
