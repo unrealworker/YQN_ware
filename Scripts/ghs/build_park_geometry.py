@@ -10,6 +10,7 @@ import hashlib
 import json
 import math
 import random
+import sys
 from collections import defaultdict
 
 import bpy
@@ -19,6 +20,9 @@ from mathutils.geometry import tessellate_polygon
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'SourceAssets/GHS/Park'
 OUT.mkdir(parents=True, exist_ok=True)
+sys.dont_write_bytecode=True
+sys.path.insert(0,str(ROOT/'Scripts/ghs'))
+sys.path.insert(0,str(ROOT/'Saved/ParkRefinement/python_deps'))
 RNG = random.Random(17335)
 ORIGIN = (239.33385, 60.24019)
 CAMPUS = [(-10,-10),(475,-15),(500,-25),(535,0),(570,68),
@@ -26,19 +30,23 @@ CAMPUS = [(-10,-10),(475,-15),(500,-25),(535,0),(570,68),
 WAREHOUSE = [(0,0),(465.7344,0),(465.7344,111.98368),(440.88196,118.872),
              (45.8724,118.872),(45.8724,137.16),(0,137.16)]
 PALETTE = {
-    'Hardstand': (.72,.76,.79), 'Roads': (.42,.48,.55),
-    'ContextRoads': (.60,.65,.69), 'Curbs': (.88,.91,.94),
-    'Markings': (.91,.94,.98), 'Buildings': (.88,.91,.94),
-    'Roofs': (.80,.85,.89), 'Trees': (.72,.79,.77),
-    'Landscape': (.63,.71,.69), 'Glass': (.38,.46,.55),
-    'Blue': (.018,.075,.51), 'Detail': (.37,.44,.49),
+    'Ground': (.70,.75,.78), 'Hardstand': (.72,.76,.79),
+    'Roads': (.27,.33,.39), 'CampusRoads': (.60,.65,.69),
+    'ContextRoads': (.31,.38,.45), 'Curbs': (.84,.88,.92),
+    'Markings': (.91,.94,.98), 'Buildings': (.87,.90,.93),
+    'Roofs': (.72,.78,.83), 'Trees': (.43,.56,.50),
+    'Landscape': (.53,.63,.57), 'Glass': (.24,.34,.44),
+    'Blue': (.018,.075,.51), 'Detail': (.30,.39,.46),
+    'Fence': (.23,.31,.40), 'Solar': (.045,.075,.13),
 }
+
 DATA = defaultdict(lambda: {'vertices': [], 'faces': [], 'parts': 0})
 COUNTS = defaultdict(int)
 PREVIEW = []
 ROAD_INDEX = 0
 CONTEXT_ROADS = []
 HOUSE_CLEARANCES = []
+PARKED_VEHICLES = []
 
 
 def road_clearance(u,v,radius):
@@ -203,26 +211,8 @@ def tree(u,v,height=5.3,scale=1):
     COUNTS['low_poly_trees']+=1
 
 
-def house(u,v,angle=0,width=8,depth=10,height=4.7):
-    # Keep the full rotated footprint clear of the actual curved street paths,
-    # not only their nominal u coordinate. A bounding circle is conservative.
-    radius=math.hypot(width,depth)*.5
-    clearance=road_clearance(u,v,radius)
-    if clearance<.8:
-        COUNTS['context_house_candidates_omitted_for_road_clearance']+=1
-        return False
-    HOUSE_CLEARANCES.append((u,v,radius))
-    box('Buildings',(u,v,height*.5+.015),(width,depth,height),angle,True)
-    local=[(-width*.5,-depth*.5,height),(width*.5,-depth*.5,height),
-           (width*.5,depth*.5,height),(-width*.5,depth*.5,height),
-           (0,-depth*.5,height+1.5),(0,depth*.5,height+1.5)]
-    vertices=[(*rotate_point(x,y,(u,v),angle),z) for x,y,z in local]
-    mesh('Roofs',vertices,[(0,1,4),(3,5,2),(0,4,5,3),(1,2,5,4)])
-    COUNTS['context_houses']+=1
-    return True
-
-
 def trailer(u,v,angle=math.pi/2):
+    PARKED_VEHICLES.append(dict(kind='trailer',center=[u,v],size=[13.26,2.66],angle=angle))
     box('Buildings',(u,v,2.35),(13.2,2.6,3),angle,True)
     box('Roofs',(u,v,3.88),(13.26,2.66,.08),angle)
     box('Detail',(u,v,.72),(10.9,1.9,.3),angle)
@@ -234,6 +224,7 @@ def trailer(u,v,angle=math.pi/2):
 
 
 def car(u,v,angle=0,blue=False):
+    PARKED_VEHICLES.append(dict(kind='car',center=[u,v],size=[4.45,1.85],angle=angle))
     box('Blue' if blue else 'Buildings',(u,v,.67),(4.45,1.85,.95),angle,True)
     box('Glass',(u-.1*math.cos(angle),v-.1*math.sin(angle),1.31),(2.4,1.6,.55),angle)
     COUNTS['parked_cars']+=1
@@ -283,121 +274,14 @@ def gatehouse(u,v,angle=0):
 
 
 def build():
-    # Wedge-shaped parcel, keeping the original warehouse and dock title clear.
-    poly('Hardstand',CAMPUS,-.04,True)
-    ribbon('Landscape',[(-8,-8),(474,-13),(499,-22),(533,2),(567,68),(545,112),
-                         (450,154),(250,206),(46,274),(14,263)],3.4,-.025,True)
-    ribbon('Curbs',[(-10,-10),(475,-15),(500,-25),(535,0),(570,68),(548,115),
-                     (452,157),(251,209),(46,278),(11,266)],.38,.12)
-    ribbon('Curbs',[(-10,-10),(-10,170),(-5,196)],.38,.12)
-    ribbon('Curbs',[(-1,225),(11,266)],.38,.12)
-    # Primary perimeter circulation, generous southwest truck court and northeast loop.
-    loop=[(-2,200),(7,237),(25,255),(46,259),(125,231),(253,192),
-          (390,157),(452,141),(529,105),(551,70),(530,24),(501,-6),(475,-6)]
-    road(loop,9,centerline=False)
-    # Gates connect to real public road positions rather than dead-ending.
-    road([(-44,208),(-12,208),(-2,200)],11)
-    road([(514,-42),(514,-17),(526,4),(530,24)],9)
-    road([(-3,195),(-3,150),(-4,118)],7)
-    # Rear fire access lane, visually restrained along the warehouse back.
-    ribbon('ContextRoads',[(0,-6),(469,-6)],5.4,-.008,True)
-    # Separated west employee parking pockets and central truck staging.
-    road([(6,202),(36,202),(61,195),(85,185),(131,180)],7)
-    parking(8,163,17,0,.64)
-    parking(8,182,17,0,.48)
-    parking(19,220,13,-.13,.56)
-    parking(24,237,10,-.13,.58)
-    staging(83,201,22,-.275,.42)
-    staging(184,179,18,-.255,.28)
-    # Small northeastern staff/visitor parking beyond the existing truck ends.
-    parking(497,36,11,math.pi/2,.6)
-    parking(523,41,10,math.pi/2,.45)
-    road([(511,19),(512,81),(529,105)],6.5)
-    gatehouse(3,212,math.pi/2)
-    gatehouse(503,2,0)
-    # Lightweight entry pylons and quiet landscaped islands.
-    for u,v in [(2,223),(-8,195),(505,-15),(525,-1)]:
-        box('Buildings',(u,v,1.6),(1.2,1.2,3.2),record=True)
-        box('Blue',(u,v,2.8),(1.24,1.24,.18))
-    for u,v,a,b in [(30,153,41,3),(31,176,43,2.5),(36,213,34,3),
-                     (38,248,26,2),(544,70,3,33),(486,39,3,55)]:
-        box('Landscape',(u,v,.03),(a,b,.12),record=True)
-    # Main public road north of the campus.
-    glen=[(-180,-42),(-44,-42),(150,-42),(340,-42),(505,-42),(680,-42)]
-    road(glen,20,context=True,centerline=True)
-    for delta in (-5,5):
-        dashed(offset_path(glen,delta),.1,3.7,8,z=.028)
-    sycamore=[(-44,-170),(-44,-42),(-44,80),(-43,174),(-35,238),
-              (-12,282),(39,323),(112,348),(180,350)]
-    road(sycamore,15,context=True,centerline=True)
-    freeway=[(-170,405),(-80,371.25),(-30,352.71),(5,339.95),(46,325),
-             (105,305.14),(170,283.26),(251,256),(452,204),(650,134),(770,81)]
-    freeway_z=[.012,.012,2.1,5.2,5.2,5.2,2.3,.012,.012,.012,.012]
-    ribbon('Landscape',freeway,39,-.05,True)
-    for offset in (-10,10):
-        carriage=offset_path(freeway,offset)
-        CONTEXT_ROADS.append((carriage,14))
-        ribbon('ContextRoads',carriage,14,freeway_z,True)
-        for lane in (-2.3,2.3):
-            dashed(offset_path(carriage,lane),.14,6,10,z=[h+.018 for h in freeway_z])
-        for edge in (-6.6,6.6):
-            ribbon('Markings',offset_path(carriage,edge),.13,[h+.022 for h in freeway_z])
-    ribbon('Curbs',freeway,.5,[h+.42 for h in freeway_z])
-    # Highway crossing: a thin deck and edge supports let Sycamore pass below.
-    for a,b in [((5,339.95),(46,325)),((46,325),(105,305.14))]:
-        length=math.dist(a,b)
-        angle=math.atan2(b[1]-a[1],b[0]-a[0])
-        box('Curbs',((a[0]+b[0])*.5,(a[1]+b[1])*.5,4.95),(length,35,.45),angle)
-    for u,v in [(6,339.6),(103,305.8)]:
-        for delta in (-16,16):
-            box('Curbs',(u,v+delta,2.45),(1.7,1.7,4.9))
-    # Gray Pine Pl and the compact northern housing strip.
-    graypine=[(-45,-114),(80,-114),(240,-114),(400,-114),(470,-108),(481,-82),(480,-42)]
-    road(graypine,8,True)
-    road([(-44,-42),(-44,-114)],8,True)
-    for rowv in (-88,-140):
-        for i in range(26):
-            u=-20+i*18.5
-            house(u,rowv,0,7.8+(i%3)*.35,10.5,4.2+(i%4)*.35)
-            if i%2==0:
-                tree(u+6.6,rowv+(11 if rowv<-114 else -11),4.3)
-    # Southeast neighborhood follows the freeway diagonal, with three ordered streets.
-    for delta in (53,111,169):
-        road(offset_path(freeway,delta),7.2,True)
-    for u in (15,135,255,375,495,615):
-        base=341-.288*u
-        road([(u-18,base+47),(u,base+96),(u+17,base+154),(u+24,base+188)],6.5,True)
-    angle=-math.atan(.288)
-    for row in (31,74,90,132,148,188):
-        for i in range(36):
-            u=-32+i*18
-            if any(abs(u-cross)<14 for cross in (15,135,255,375,495,615)):
-                continue
-            v=341-.288*u+row
-            house(u,v,angle,8.6,10.8,4.5+(i%4)*.35)
-            if i%4==0:
-                tree(u+6,v+8,4.6)
-    # Sparse landscape, with the west wash kept open instead of adding false buildings.
-    poly('Landscape',[(-205,-160),(-80,-160),(-73,133),(-66,220),(-110,282),(-215,324)],-.14,True)
-    poly('Landscape',[(-220,-155),(-160,-155),(-135,-20),(-130,130),(-168,285),(-218,324)],-.135,True)
-    for i in range(48):
-        tree(-75-RNG.random()*115,-130+RNG.random()*385,2.4+RNG.random()*2)
-    for i in range(46):
-        tree(6+i*10.1,-23,5.1+(i%3)*.25)
-    for i in range(25):
-        u=48+i*19.5
-        v=275-.265*(u-48)
-        tree(u,v,5.2+(i%3)*.3)
-    for u,v in [(14,151),(30,151),(46,151),(13,176),(30,176),(46,176),
-                 (22,213),(38,213),(52,213),(490,24),(490,43),(490,62),
-                 (544,48),(544,66),(544,84),(546,17),(560,43)]:
-        tree(u,v,4.7)
-    # Slim campus lights, only enough to establish scale without heavy details.
-    for u,v in [(19,194),(62,180),(112,220),(174,201),(292,177),(357,160),
-                (427,141),(480,120),(540,92),(539,35)]:
-        cylinder('Detail',u,v,0,.085,8,6)
-        box('Buildings',(u,v,8.03),(1.4,.42,.13))
-        COUNTS['light_poles']+=1
+    global CAMPUS, GEOMETRY_REPORT
+    from park_site import build_site
+    api={name:globals()[name] for name in
+         ('mesh','poly','box','ribbon','cylinder','tree','trailer','car','parking','staging','gatehouse','rotate_point')}
+    api.update(counts=COUNTS,preview=PREVIEW,warehouse=WAREHOUSE,context_roads=CONTEXT_ROADS,
+               parked_vehicles=PARKED_VEHICLES)
+    GEOMETRY_REPORT=build_site(api)
+    CAMPUS=GEOMETRY_REPORT['campus_boundary_uv_m']
 
 
 def write_svg():
@@ -428,6 +312,7 @@ def export():
         material=bpy.data.materials.new('M_GHSPark_'+role)
         material.diffuse_color=(*PALETTE[role],1)
         material.use_nodes=True
+        material.use_backface_culling=False if role=='Fence' else True
         principled=next((n for n in material.node_tree.nodes if n.type=='BSDF_PRINCIPLED'),None)
         if principled is None:
             principled=material.node_tree.nodes.new('ShaderNodeBsdfPrincipled')
@@ -461,12 +346,12 @@ def export():
                        'source_parts':data['parts'],'blender_bounds_m':bounds,'bounds_ue_cm':ue_bounds,
                        'sha256':hashlib.sha256(fbx.read_bytes()).hexdigest()})
     total=sum(a['triangles'] for a in assets)
-    assert total<120000, total
-    minimum_house_clearance=min(road_clearance(u,v,r) for u,v,r in HOUSE_CLEARANCES)
-    assert minimum_house_clearance>=.8, minimum_house_clearance
-    manifest={'version':1,'purpose':'Full campus primary display; restrained public-road and residential context',
+    assert total<500000, total
+    minimum_house_clearance=min(h['road_clearance_m'] for h in GEOMETRY_REPORT['residential']['houses'])
+    assert minimum_house_clearance>=.10, minimum_house_clearance
+    manifest={'version':2,'purpose':'Full campus primary display; restrained public-road and residential context',
               'reference_address':'17335 Glen Helen Pkwy, San Bernardino, CA 92407',
-              'measurement_status':'Approximate from user satellite reference. Not a cadastral survey.',
+              'measurement_status':'Roads and building placements registered from user CADmapper DXF. Parcel and architectural detail from satellite references; not a cadastral survey.',
               'coordinate_contract':'Local u,v metres; Blender X=u-239.33385, Y=-(v-60.24019); FBX -Y forward Z up; UE import at origin scale 1 yields cm X=(u-239.33385)*100,Y=(v-60.24019)*100.',
               'campus_boundary_uv_m':CAMPUS,'existing_warehouse_uv_m':WAREHOUSE,
               'warehouse_geometry_modified':False,'ground_title_clearance_uv_m':[189.5,277.1,147.9,159.7],
@@ -474,10 +359,14 @@ def export():
               'counts':dict(COUNTS),'meshes':assets,'materials':PALETTE,
               'campus_boundary_ue_cm':[[(u-ORIGIN[0])*100,(v-ORIGIN[1])*100,-4] for u,v in CAMPUS],
               'stats':{'triangles':total,'asset_count':len(assets),**dict(COUNTS)}}
-    manifest['geometry_checks']={'minimum_house_bounding_circle_to_road_edge_m':minimum_house_clearance,
-                                 'house_clearance_required_m':.8,
-                                 'lane_dash_vertices_follow_road_segment_gradient':True,
-                                 'reviewer_conflict_house_u40_v517_48_included':any(abs(u-40)<.01 and abs(v-517.48)<.01 for u,v,r in HOUSE_CLEARANCES)}
+    manifest['geometry_checks']={
+        'minimum_house_to_road_edge_m':minimum_house_clearance,
+        'road_union_valid':GEOMETRY_REPORT['road_surface_valid'],
+        'fence':GEOMETRY_REPORT['fence'],
+        'original_dock_trucks_contained':GEOMETRY_REPORT['original_dock_trucks_contained'],
+        'source_dxf':GEOMETRY_REPORT['source_dxf'],
+        'lane_dash_vertices_follow_road_segment_gradient':True,
+    }
     (OUT/'park_manifest.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False),encoding='utf8')
     bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'GHS_Park_Source.blend'))
     write_svg()
@@ -491,7 +380,7 @@ def preview():
     scene.cycles.samples=16
     scene.cycles.use_denoising=True
     scene.render.resolution_x=1600
-    scene.render.resolution_y=1280
+    scene.render.resolution_y=1440
     scene.render.resolution_percentage=100
     scene.world.color=(.5,.5,.5)
     scene.world.use_nodes=True
@@ -522,10 +411,10 @@ def preview():
     camdata=bpy.data.cameras.new('QA_Plan')
     cam=bpy.data.objects.new('QA_Plan',camdata)
     scene.collection.objects.link(cam)
-    cam.location=(280-ORIGIN[0],-(220-ORIGIN[1]),1200)
+    cam.location=(270-ORIGIN[0],-(190-ORIGIN[1]),1200)
     cam.rotation_euler=(0,0,0)
     camdata.type='ORTHO'
-    camdata.ortho_scale=1060
+    camdata.ortho_scale=1030
     camdata.clip_end=4000
     scene.camera=cam
     scene.render.image_settings.file_format='PNG'

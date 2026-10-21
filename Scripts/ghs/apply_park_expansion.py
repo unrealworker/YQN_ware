@@ -46,7 +46,7 @@ def material(role, rgb):
         node.set_editor_property('parameter_name',name)
         node.set_editor_property('default_value',value)
         ML.connect_material_property(node,'',prop)
-    mat.set_editor_property('two_sided',False)
+    mat.set_editor_property('two_sided',role=='Fence')
     ML.layout_material_expressions(mat)
     ML.recompile_material(mat)
     assert LIB.save_loaded_asset(mat,only_if_is_dirty=False)
@@ -135,7 +135,7 @@ def main():
             component=actor.get_component_by_class(unreal.StaticMeshComponent)
             component.set_static_mesh(mesh)
             component.set_mobility(unreal.ComponentMobility.STATIC)
-            component.set_editor_property('cast_shadow',row['role'] not in ('Hardstand','Roads','ContextRoads','Markings','Landscape'))
+            component.set_editor_property('cast_shadow',row['role'] not in ('Ground','Hardstand','Roads','CampusRoads','Markings','Landscape'))
             result['new_actors'].append(label)
             result['meshes'].append(dict(name=row['name'],triangles=row['triangles'],bounds=xyz(mesh.get_bounds().box_extent)))
         by={a.get_actor_label():a for a in ACTORS.get_all_level_actors()}
@@ -153,7 +153,7 @@ def main():
         assert LEVELS.save_current_level()
         assert sha(Path(baseline['path']))==baseline['sha256']
         result.update(success=True,saved=True,source_map_preserved=True,triangle_total=sum(r['triangles'] for r in manifest['meshes']),
-            camera=dict(center=center,distance=65000,pitch=-48,yaw=-110),reference_accuracy='Satellite-referenced visual approximation; not cadastral survey')
+            camera=dict(center=center,distance=65000,pitch=-48,yaw=-110),reference_accuracy=manifest['measurement_status'])
     except Exception:
         result['error']=traceback.format_exc()
         unreal.log_error(result['error'])

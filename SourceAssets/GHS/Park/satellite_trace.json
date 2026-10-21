@@ -1,0 +1,1826 @@
+{
+  "version": 1,
+  "purpose": "Raw satellite alignment reference; CAD geometry is now the authoritative layout source.",
+  "coordinate_system": {
+    "local_units": "metres",
+    "u_axis": "Warehouse long axis toward northeast",
+    "v_axis": "Warehouse back toward front dock yard",
+    "ue_cm": "X=(u-239.33385)*100; Y=(v-60.24019)*100",
+    "pixel_origin": "top_left",
+    "pixel_y_direction": "down"
+  },
+  "authority": {
+    "primary_source": "CADGis/cadmapper-muscoy-california-us/cadmapper-muscoy-california-us/cadmapper-muscoy-california-us.dxf",
+    "satellite_role": "Alignment, names, gate/road topology and visual checking; not cadastral or traffic-engineering measurements",
+    "clearance_adjustments_applied": false
+  },
+  "images": {
+    "close": {
+      "path": "Saved/ParkRefinement/maps-campus-close.png",
+      "size_px": [
+        1707,
+        908
+      ],
+      "anchors": [
+        {
+          "pixel": [
+            556,
+            390
+          ],
+          "uv_m": [
+            0,
+            0
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            50
+          ],
+          "uv_m": [
+            465.7344,
+            0
+          ]
+        },
+        {
+          "pixel": [
+            660,
+            602
+          ],
+          "uv_m": [
+            0,
+            137.16
+          ]
+        }
+      ],
+      "affine": {
+        "pixel_origin": [
+          556,
+          390
+        ],
+        "uv_to_pixel_2x2": [
+          [
+            1.5459455002679638,
+            0.758238553514144
+          ],
+          [
+            -0.730029819570983,
+            1.5456401283172938
+          ]
+        ],
+        "pixel_to_uv_2x2": [
+          [
+            0.525189855319149,
+            -0.25764030638297875
+          ],
+          [
+            0.2480553191489362,
+            0.5252936170212766
+          ]
+        ]
+      }
+    },
+    "wide": {
+      "path": "Saved/ParkRefinement/maps-context-clear.png",
+      "size_px": [
+        1707,
+        908
+      ],
+      "anchors": [
+        {
+          "pixel": [
+            675,
+            391
+          ],
+          "uv_m": [
+            0,
+            0
+          ]
+        },
+        {
+          "pixel": [
+            1187,
+            148
+          ],
+          "uv_m": [
+            465.7344,
+            0
+          ]
+        },
+        {
+          "pixel": [
+            749,
+            547
+          ],
+          "uv_m": [
+            0,
+            137.16
+          ]
+        }
+      ],
+      "affine": {
+        "pixel_origin": [
+          675,
+          391
+        ],
+        "uv_to_pixel_2x2": [
+          [
+            1.0993390224127744,
+            0.5395158938466025
+          ],
+          [
+            -0.5217566063404379,
+            1.1373578302712162
+          ]
+        ],
+        "pixel_to_uv_2x2": [
+          [
+            0.7424792691152123,
+            -0.352201704580293
+          ],
+          [
+            0.3406082531117787,
+            0.7176601876264638
+          ]
+        ]
+      }
+    }
+  },
+  "traces": [
+    {
+      "id": "glen_helen",
+      "image_id": "wide",
+      "kind": "road_centerline",
+      "name": "Glen Helen Pkwy",
+      "closed": false,
+      "pixels": [
+        [
+          0,
+          653
+        ],
+        [
+          350,
+          484
+        ],
+        [
+          608,
+          365
+        ],
+        [
+          810,
+          268
+        ],
+        [
+          1054,
+          166
+        ],
+        [
+          1241,
+          78
+        ],
+        [
+          1409,
+          0
+        ]
+      ],
+      "uv_m": [
+        [
+          -593.4504,
+          -41.8836
+        ],
+        [
+          -274.0605,
+          -43.9553
+        ],
+        [
+          -40.5889,
+          -41.4799
+        ],
+        [
+          143.5555,
+          -42.2901
+        ],
+        [
+          360.645,
+          -32.383
+        ],
+        [
+          530.4824,
+          -31.8434
+        ],
+        [
+          682.6907,
+          -30.5987
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "sycamore_creek",
+          "at_pixel": [
+            608,
+            365
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "gray_pine_west",
+          "at_pixel": [
+            608,
+            365
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "gray_pine",
+          "at_pixel": [
+            1054,
+            166
+          ],
+          "relation": "at_grade"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "Visible public road crosses entire screenshot; edge endpoints are image clips."
+      ]
+    },
+    {
+      "id": "sycamore_creek",
+      "image_id": "wide",
+      "kind": "road_centerline",
+      "name": "Sycamore Creek Dr",
+      "closed": false,
+      "pixels": [
+        [
+          608,
+          365
+        ],
+        [
+          627,
+          420
+        ],
+        [
+          659,
+          473
+        ],
+        [
+          704,
+          533
+        ],
+        [
+          733,
+          591
+        ],
+        [
+          755,
+          650
+        ],
+        [
+          782,
+          700
+        ],
+        [
+          808,
+          738
+        ],
+        [
+          825,
+          756
+        ],
+        [
+          852,
+          785
+        ],
+        [
+          891,
+          815
+        ],
+        [
+          941,
+          843
+        ],
+        [
+          991,
+          860
+        ],
+        [
+          1041,
+          863
+        ],
+        [
+          1097,
+          845
+        ],
+        [
+          1151,
+          825
+        ],
+        [
+          1206,
+          802
+        ],
+        [
+          1257,
+          776
+        ],
+        [
+          1323,
+          746
+        ],
+        [
+          1450,
+          690
+        ],
+        [
+          1570,
+          637
+        ],
+        [
+          1618,
+          620
+        ],
+        [
+          1706,
+          582
+        ]
+      ],
+      "uv_m": [
+        [
+          -40.5889,
+          -41.4799
+        ],
+        [
+          -45.8529,
+          4.4629
+        ],
+        [
+          -40.7602,
+          53.3984
+        ],
+        [
+          -28.4807,
+          111.7854
+        ],
+        [
+          -27.3765,
+          163.2873
+        ],
+        [
+          -31.8219,
+          213.1226
+        ],
+        [
+          -29.385,
+          258.2021
+        ],
+        [
+          -23.4642,
+          294.329
+        ],
+        [
+          -17.1817,
+          313.0372
+        ],
+        [
+          -7.3486,
+          343.0458
+        ],
+        [
+          11.042,
+          377.8593
+        ],
+        [
+          38.3043,
+          414.9842
+        ],
+        [
+          69.4408,
+          444.2148
+        ],
+        [
+          105.5082,
+          463.3982
+        ],
+        [
+          153.4267,
+          469.5544
+        ],
+        [
+          200.5646,
+          473.594
+        ],
+        [
+          249.5016,
+          475.8213
+        ],
+        [
+          296.5253,
+          474.5332
+        ],
+        [
+          356.095,
+          475.4835
+        ],
+        [
+          470.1131,
+          478.5518
+        ],
+        [
+          577.8773,
+          481.3888
+        ],
+        [
+          619.5038,
+          485.5378
+        ],
+        [
+          698.2256,
+          488.2402
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "glen_helen",
+          "at_pixel": [
+            608,
+            365
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "i15",
+          "at_pixel": [
+            825,
+            756
+          ],
+          "relation": "underpass_no_junction"
+        },
+        {
+          "other_trace": "cedrela",
+          "at_pixel": [
+            1323,
+            746
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "east_neighborhood_connector",
+          "at_pixel": [
+            1618,
+            620
+          ],
+          "relation": "at_grade"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "Main public road curves around the residential district. Bridge crossing must remain grade separated from I-15. Intermediate points along the lower arc are approximate and should align to CAD when available."
+      ]
+    },
+    {
+      "id": "gray_pine",
+      "image_id": "wide",
+      "kind": "road_centerline",
+      "name": "Gray Pine Pl",
+      "closed": false,
+      "pixels": [
+        [
+          475,
+          274
+        ],
+        [
+          580,
+          248
+        ],
+        [
+          700,
+          215
+        ],
+        [
+          850,
+          174
+        ],
+        [
+          1003,
+          134
+        ],
+        [
+          1025,
+          116
+        ],
+        [
+          1038,
+          113
+        ],
+        [
+          1048,
+          126
+        ],
+        [
+          1054,
+          146
+        ],
+        [
+          1054,
+          166
+        ]
+      ],
+      "uv_m": [
+        [
+          -107.2883,
+          -152.0879
+        ],
+        [
+          -20.1707,
+          -134.9832
+        ],
+        [
+          80.5495,
+          -117.793
+        ],
+        [
+          206.3616,
+          -96.1258
+        ],
+        [
+          334.049,
+          -72.7192
+        ],
+        [
+          356.7232,
+          -78.1437
+        ],
+        [
+          367.432,
+          -75.8687
+        ],
+        [
+          370.2782,
+          -63.1331
+        ],
+        [
+          367.6891,
+          -46.7362
+        ],
+        [
+          360.645,
+          -32.383
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "gray_pine_west",
+          "at_pixel": [
+            580,
+            248
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "glen_helen",
+          "at_pixel": [
+            1054,
+            166
+          ],
+          "relation": "at_grade"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "West endpoint is a visible short neighborhood access termination; do not extend it into the wash. East curved end joins Glen Helen."
+      ]
+    },
+    {
+      "id": "gray_pine_west",
+      "image_id": "wide",
+      "kind": "road_centerline",
+      "name": "Gray Pine west access",
+      "closed": false,
+      "pixels": [
+        [
+          580,
+          248
+        ],
+        [
+          589,
+          278
+        ],
+        [
+          599,
+          319
+        ],
+        [
+          608,
+          365
+        ]
+      ],
+      "uv_m": [
+        [
+          -20.1707,
+          -134.9832
+        ],
+        [
+          -24.0544,
+          -110.3879
+        ],
+        [
+          -31.0699,
+          -77.5578
+        ],
+        [
+          -40.5889,
+          -41.4799
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "gray_pine",
+          "at_pixel": [
+            580,
+            248
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "glen_helen",
+          "at_pixel": [
+            608,
+            365
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "sycamore_creek",
+          "at_pixel": [
+            608,
+            365
+          ],
+          "relation": "at_grade"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "This is the actual west connector; no repeated invented cross streets."
+      ]
+    },
+    {
+      "id": "bur_oak",
+      "image_id": "wide",
+      "kind": "road_centerline",
+      "name": "Bur Oak Rd",
+      "closed": false,
+      "pixels": [
+        [
+          1469,
+          350
+        ],
+        [
+          1458,
+          367
+        ],
+        [
+          1352,
+          453
+        ],
+        [
+          1248,
+          540
+        ],
+        [
+          1138,
+          632
+        ],
+        [
+          1037,
+          716
+        ],
+        [
+          979,
+          762
+        ],
+        [
+          970,
+          774
+        ],
+        [
+          978,
+          786
+        ],
+        [
+          997,
+          792
+        ]
+      ],
+      "uv_m": [
+        [
+          603.9688,
+          241.0189
+        ],
+        [
+          589.8141,
+          249.4724
+        ],
+        [
+          480.822,
+          275.0867
+        ],
+        [
+          372.9626,
+          302.0999
+        ],
+        [
+          258.8873,
+          330.6577
+        ],
+        [
+          154.3119,
+          356.5397
+        ],
+        [
+          95.0469,
+          369.7968
+        ],
+        [
+          84.1381,
+          375.3433
+        ],
+        [
+          85.8515,
+          386.6801
+        ],
+        [
+          97.8454,
+          397.4576
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "rosena_ranch",
+          "at_pixel": [
+            997,
+            792
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "east_neighborhood_connector",
+          "at_pixel": [
+            1469,
+            350
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "comfrey",
+          "at_pixel": [
+            1469,
+            350
+          ],
+          "relation": "at_grade"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "West bend connects directly to the Rosena Ranch arc. Use smooth tangent-continuous geometry through the last four control points."
+      ]
+    },
+    {
+      "id": "bilberry",
+      "image_id": "wide",
+      "kind": "road_centerline",
+      "name": "Bilberry Rd",
+      "closed": false,
+      "pixels": [
+        [
+          1530,
+          436
+        ],
+        [
+          1461,
+          492
+        ],
+        [
+          1385,
+          553
+        ],
+        [
+          1267,
+          646
+        ],
+        [
+          1182,
+          718
+        ],
+        [
+          1142,
+          751
+        ],
+        [
+          1131,
+          763
+        ],
+        [
+          1128,
+          774
+        ],
+        [
+          1135,
+          782
+        ]
+      ],
+      "uv_m": [
+        [
+          618.9707,
+          323.5148
+        ],
+        [
+          548.0163,
+          340.2018
+        ],
+        [
+          470.1036,
+          358.0928
+        ],
+        [
+          349.7363,
+          384.6434
+        ],
+        [
+          261.267,
+          407.3633
+        ],
+        [
+          219.9452,
+          417.4217
+        ],
+        [
+          207.5515,
+          422.287
+        ],
+        [
+          201.4499,
+          429.1594
+        ],
+        [
+          203.8296,
+          437.2849
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "rosena_ranch",
+          "at_pixel": [
+            1135,
+            782
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "cedrela",
+          "at_pixel": [
+            1267,
+            646
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "east_neighborhood_connector",
+          "at_pixel": [
+            1530,
+            436
+          ],
+          "relation": "at_grade"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "Separate short west bend meets Rosena Ranch; do not merge it with the Bur Oak west turn."
+      ]
+    },
+    {
+      "id": "cedrela",
+      "image_id": "wide",
+      "kind": "road_centerline",
+      "name": "Cedrela Way",
+      "closed": false,
+      "pixels": [
+        [
+          1267,
+          646
+        ],
+        [
+          1284,
+          667
+        ],
+        [
+          1307,
+          705
+        ],
+        [
+          1323,
+          746
+        ]
+      ],
+      "uv_m": [
+        [
+          349.7363,
+          384.6434
+        ],
+        [
+          354.9622,
+          405.5046
+        ],
+        [
+          358.6556,
+          440.6097
+        ],
+        [
+          356.095,
+          475.4835
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "bilberry",
+          "at_pixel": [
+            1267,
+            646
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "rosena_ranch",
+          "at_pixel": [
+            1307,
+            705
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "sycamore_creek",
+          "at_pixel": [
+            1323,
+            746
+          ],
+          "relation": "at_grade"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "Short link from Bilberry via Rosena Ranch to Sycamore. Shared junction pixels are deliberate. Street-name extent south of Rosena is not independently established."
+      ]
+    },
+    {
+      "id": "rosena_ranch",
+      "image_id": "wide",
+      "kind": "road_centerline",
+      "name": "Rosena Ranch Rd",
+      "closed": false,
+      "pixels": [
+        [
+          997,
+          792
+        ],
+        [
+          1040,
+          799
+        ],
+        [
+          1090,
+          794
+        ],
+        [
+          1135,
+          782
+        ],
+        [
+          1216,
+          745
+        ],
+        [
+          1307,
+          705
+        ],
+        [
+          1421,
+          653
+        ],
+        [
+          1520,
+          610
+        ],
+        [
+          1601,
+          575
+        ]
+      ],
+      "uv_m": [
+        [
+          97.8454,
+          397.4576
+        ],
+        [
+          127.3066,
+          417.1274
+        ],
+        [
+          166.1916,
+          430.5695
+        ],
+        [
+          203.8296,
+          437.2849
+        ],
+        [
+          277.0019,
+          438.3208
+        ],
+        [
+          358.6556,
+          440.6097
+        ],
+        [
+          461.6127,
+          442.1207
+        ],
+        [
+          550.2628,
+          444.9816
+        ],
+        [
+          622.7307,
+          447.4527
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "bur_oak",
+          "at_pixel": [
+            997,
+            792
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "bilberry",
+          "at_pixel": [
+            1135,
+            782
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "cedrela",
+          "at_pixel": [
+            1307,
+            705
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "east_neighborhood_connector",
+          "at_pixel": [
+            1601,
+            575
+          ],
+          "relation": "at_grade"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "West arc joins Bur Oak and Bilberry separately. Connects to Sycamore through Cedrela and the east connector."
+      ]
+    },
+    {
+      "id": "east_neighborhood_connector",
+      "image_id": "wide",
+      "kind": "road_centerline",
+      "name": "Visible east neighborhood connector",
+      "closed": false,
+      "pixels": [
+        [
+          1469,
+          350
+        ],
+        [
+          1499,
+          389
+        ],
+        [
+          1530,
+          436
+        ],
+        [
+          1567,
+          489
+        ],
+        [
+          1591,
+          533
+        ],
+        [
+          1601,
+          575
+        ],
+        [
+          1618,
+          620
+        ]
+      ],
+      "uv_m": [
+        [
+          603.9688,
+          241.0189
+        ],
+        [
+          612.5073,
+          279.2259
+        ],
+        [
+          618.9707,
+          323.5148
+        ],
+        [
+          627.7757,
+          374.1533
+        ],
+        [
+          630.0984,
+          413.9049
+        ],
+        [
+          622.7307,
+          447.4527
+        ],
+        [
+          619.5038,
+          485.5378
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "bur_oak",
+          "at_pixel": [
+            1469,
+            350
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "comfrey",
+          "at_pixel": [
+            1469,
+            350
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "bilberry",
+          "at_pixel": [
+            1530,
+            436
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "rosena_ranch",
+          "at_pixel": [
+            1601,
+            575
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "sycamore_creek",
+          "at_pixel": [
+            1618,
+            620
+          ],
+          "relation": "at_grade"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "Visible geometry traced without asserting the street name. Links Bur Oak, Bilberry, Rosena Ranch and Sycamore."
+      ]
+    },
+    {
+      "id": "comfrey",
+      "image_id": "wide",
+      "kind": "road_centerline",
+      "name": "Comfrey Dr visible segment",
+      "closed": false,
+      "pixels": [
+        [
+          1469,
+          350
+        ],
+        [
+          1531,
+          299
+        ],
+        [
+          1588,
+          249
+        ],
+        [
+          1603,
+          240
+        ],
+        [
+          1624,
+          244
+        ],
+        [
+          1706,
+          264
+        ]
+      ],
+      "uv_m": [
+        [
+          603.9688,
+          241.0189
+        ],
+        [
+          667.9648,
+          225.5359
+        ],
+        [
+          727.8962,
+          209.0676
+        ],
+        [
+          742.2032,
+          207.7178
+        ],
+        [
+          756.3865,
+          217.7412
+        ],
+        [
+          810.2257,
+          260.0243
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "bur_oak",
+          "at_pixel": [
+            1469,
+            350
+          ],
+          "relation": "at_grade"
+        },
+        {
+          "other_trace": "east_neighborhood_connector",
+          "at_pixel": [
+            1469,
+            350
+          ],
+          "relation": "at_grade"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "Optional visible neighborhood continuation; image clips the eastern end."
+      ]
+    },
+    {
+      "id": "i15",
+      "image_id": "wide",
+      "kind": "road_centerline",
+      "name": "I-15 median centreline",
+      "closed": false,
+      "pixels": [
+        [
+          646,
+          907
+        ],
+        [
+          825,
+          756
+        ],
+        [
+          1008,
+          606
+        ],
+        [
+          1191,
+          457
+        ],
+        [
+          1374,
+          307
+        ],
+        [
+          1540,
+          172
+        ],
+        [
+          1706,
+          35
+        ]
+      ],
+      "uv_m": [
+        [
+          -203.268,
+          360.435
+        ],
+        [
+          -17.1817,
+          313.0372
+        ],
+        [
+          171.5222,
+          267.7195
+        ],
+        [
+          359.874,
+          223.1194
+        ],
+        [
+          548.578,
+          177.8017
+        ],
+        [
+          719.3767,
+          137.4586
+        ],
+        [
+          890.8799,
+          95.6801
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "sycamore_creek",
+          "at_pixel": [
+            825,
+            756
+          ],
+          "relation": "overpass_no_junction"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "Centreline follows the median between the two carriageways, not the centre of one carriageway. Offset carriageways from this line. Existing bridge over Sycamore must be preserved."
+      ]
+    },
+    {
+      "id": "campus_boundary",
+      "image_id": "close",
+      "kind": "campus_boundary",
+      "name": "Coarse visible campus outer boundary",
+      "closed": true,
+      "pixels": [
+        [
+          524,
+          366
+        ],
+        [
+          544,
+          426
+        ],
+        [
+          575,
+          479
+        ],
+        [
+          610,
+          535
+        ],
+        [
+          646,
+          601
+        ],
+        [
+          666,
+          652
+        ],
+        [
+          688,
+          715
+        ],
+        [
+          715,
+          767
+        ],
+        [
+          737,
+          794
+        ],
+        [
+          755,
+          800
+        ],
+        [
+          804,
+          762
+        ],
+        [
+          914,
+          669
+        ],
+        [
+          1028,
+          571
+        ],
+        [
+          1141,
+          478
+        ],
+        [
+          1254,
+          384
+        ],
+        [
+          1363,
+          291
+        ],
+        [
+          1450,
+          213
+        ],
+        [
+          1494,
+          169
+        ],
+        [
+          1515,
+          106
+        ],
+        [
+          1458,
+          67
+        ],
+        [
+          1381,
+          32
+        ],
+        [
+          1321,
+          7
+        ],
+        [
+          1275,
+          32
+        ],
+        [
+          1105,
+          107
+        ],
+        [
+          949,
+          179
+        ],
+        [
+          791,
+          253
+        ],
+        [
+          629,
+          329
+        ],
+        [
+          524,
+          366
+        ]
+      ],
+      "uv_m": [
+        [
+          -10.6227,
+          -20.5448
+        ],
+        [
+          -15.5773,
+          15.9339
+        ],
+        [
+          -12.9514,
+          51.4642
+        ],
+        [
+          -8.9976,
+          89.5626
+        ],
+        [
+          -7.095,
+          133.1619
+        ],
+        [
+          -9.7309,
+          164.913
+        ],
+        [
+          -14.408,
+          203.4637
+        ],
+        [
+          -13.6252,
+          237.4765
+        ],
+        [
+          -9.0273,
+          257.1166
+        ],
+        [
+          -1.1197,
+          264.7334
+        ],
+        [
+          34.4049,
+          256.9269
+        ],
+        [
+          116.1363,
+          235.3607
+        ],
+        [
+          201.2567,
+          212.1603
+        ],
+        [
+          284.5637,
+          191.3382
+        ],
+        [
+          368.1284,
+          169.9909
+        ],
+        [
+          449.3346,
+          148.1766
+        ],
+        [
+          515.1221,
+          128.7845
+        ],
+        [
+          549.5666,
+          116.586
+        ],
+        [
+          576.8269,
+          88.7017
+        ],
+        [
+          556.9391,
+          54.0761
+        ],
+        [
+          525.5169,
+          16.5905
+        ],
+        [
+          500.4465,
+          -11.4251
+        ],
+        [
+          469.8467,
+          -9.7033
+        ],
+        [
+          361.2414,
+          -12.4757
+        ],
+        [
+          260.7617,
+          -13.3512
+        ],
+        [
+          158.7163,
+          -13.6722
+        ],
+        [
+          54.0549,
+          -13.9349
+        ],
+        [
+          -10.6227,
+          -20.5448
+        ]
+      ],
+      "connections": [],
+      "confidence": "image_estimate",
+      "notes": [
+        "Coarse raw image trace follows the outside campus landscape/yard envelope. No warehouse, truck, title, road or fence clearance expansion has been applied. NE landscape triangle and SW landscape toe are uncertain by several metres. The parent should align to CAD and resolve actual property vs pavement edges. Existing gate openings are represented separately; do not interpret every boundary segment as uninterrupted fence."
+      ]
+    },
+    {
+      "id": "campus_ne_turn",
+      "image_id": "close",
+      "kind": "campus_circulation",
+      "name": "Northeast access and return curve",
+      "closed": false,
+      "pixels": [
+        [
+          1307,
+          8
+        ],
+        [
+          1340,
+          35
+        ],
+        [
+          1390,
+          57
+        ],
+        [
+          1434,
+          82
+        ],
+        [
+          1456,
+          108
+        ],
+        [
+          1463,
+          129
+        ],
+        [
+          1456,
+          153
+        ],
+        [
+          1435,
+          178
+        ],
+        [
+          1409,
+          202
+        ],
+        [
+          1373,
+          229
+        ],
+        [
+          1328,
+          270
+        ]
+      ],
+      "uv_m": [
+        [
+          492.8362,
+          -14.3726
+        ],
+        [
+          503.2112,
+          7.9961
+        ],
+        [
+          523.8026,
+          31.9554
+        ],
+        [
+          540.4699,
+          56.0021
+        ],
+        [
+          545.3254,
+          75.117
+        ],
+        [
+          543.5913,
+          87.8845
+        ],
+        [
+          533.7316,
+          98.7552
+        ],
+        [
+          516.2616,
+          106.6784
+        ],
+        [
+          496.4233,
+          112.836
+        ],
+        [
+          470.5602,
+          118.0889
+        ],
+        [
+          436.3634,
+          128.4635
+        ]
+      ],
+      "connections": [],
+      "confidence": "image_estimate",
+      "notes": [
+        "Raw smooth-turn control points around the NE parking pocket; extends to the front-yard circulation. Public-road join lies close to the top image edge."
+      ]
+    },
+    {
+      "id": "campus_sw_entry",
+      "image_id": "close",
+      "kind": "campus_circulation",
+      "name": "Southwest entry between employee parking pockets",
+      "closed": false,
+      "pixels": [
+        [
+          646,
+          687
+        ],
+        [
+          677,
+          677
+        ],
+        [
+          721,
+          664
+        ],
+        [
+          773,
+          654
+        ],
+        [
+          805,
+          643
+        ]
+      ],
+      "uv_m": [
+        [
+          -29.2521,
+          178.3372
+        ],
+        [
+          -10.3948,
+          180.774
+        ],
+        [
+          16.0629,
+          184.8596
+        ],
+        [
+          45.9492,
+          192.5055
+        ],
+        [
+          65.5893,
+          194.6651
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "campus_sw_gate",
+          "at_pixel": [
+            773,
+            654
+          ],
+          "relation": "at_grade"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "Entrances split the two parking pockets and continue to an inner gate. Gatehouse must remain beside the road. Final road tie-in must be snapped to CAD/public road."
+      ]
+    },
+    {
+      "id": "campus_sw_gate",
+      "image_id": "close",
+      "kind": "gate_portal",
+      "name": "Southwest inner gate opening",
+      "closed": false,
+      "pixels": [
+        [
+          771,
+          646
+        ],
+        [
+          775,
+          662
+        ]
+      ],
+      "uv_m": [
+        [
+          46.9599,
+          187.8071
+        ],
+        [
+          44.9384,
+          197.204
+        ]
+      ],
+      "connections": [
+        {
+          "other_trace": "campus_sw_entry",
+          "at_pixel": [
+            773,
+            654
+          ],
+          "relation": "at_grade"
+        }
+      ],
+      "confidence": "image_estimate",
+      "notes": [
+        "Image-picked gate portal endpoints. Approximate width 10 m; central point 773,654 lies on the entrance trace. Fence geometry is not part of this input."
+      ]
+    }
+  ],
+  "junction_policy": "At-grade connections share pixel points within a single image. I-15/Sycamore crossing is explicitly grade separated. Close and wide traces require affine coordinates/CAD alignment before snapping.",
+  "limitations": [
+    "All pixels were read from provided screenshots; neither aerial perspective nor map-image distortion was solved beyond the supplied affine anchors.",
+    "Only visible principal streets are traced. No regular-grid cross streets were invented.",
+    "Raw boundary samples are deliberately retained. Parent applies any warehouse or trailer clearance correction after CAD alignment."
+  ]
+}

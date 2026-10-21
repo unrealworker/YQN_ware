@@ -1,8 +1,9 @@
 {
-  "date_local": "2026-10-21",
+  "date_local": "2026-10-21T22:33:26",
   "timezone": "Asia/Shanghai",
   "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
-  "map_sha256": "4f1db9caebe8b77405fc736ff27c1ca10624aaaab05e45f69319967c32cab331",
+  "map_sha256": "1f0bff393d929375d311a576d74b934a517ba178ce2175a21fff214563d4fd99",
+  "manifest_sha256": "82823da62dea2f56f3fcb34dc13e0e685dc1bd8238c8239c547312401c7f0705",
   "old_map_preserved": true,
   "original_objects_checked": 334,
   "pre_import_changes": [
@@ -33,19 +34,47 @@
       ]
     }
   ],
-  "added_meshes": 12,
-  "triangles": 14996,
+  "added_meshes": 16,
+  "triangles": 371592,
   "context_counts": {
-    "parked_cars": 47,
-    "car_spaces": 78,
-    "parked_trailers": 8,
-    "trailer_spaces": 40,
+    "fence_posts": 604,
+    "fence_bars": 6306,
+    "fence_rails": 3134,
+    "gate_columns": 4,
+    "perimeter_gates": 2,
+    "parked_cars": 110,
+    "car_spaces": 28,
+    "parked_trailers": 16,
+    "trailer_spaces": 52,
     "gatehouses": 2,
-    "context_houses": 182,
-    "low_poly_trees": 200,
-    "context_house_candidates_omitted_for_road_clearance": 32,
-    "tree_candidates_omitted_for_road_clearance": 10,
-    "light_poles": 10
+    "detailed_context_houses": 338,
+    "house_variant_1": 81,
+    "house_windows": 7684,
+    "house_solar_panels": 2568,
+    "context_houses": 338,
+    "house_variant_0": 83,
+    "house_variant_2": 90,
+    "house_variant_3": 84,
+    "low_poly_trees": 286,
+    "tree_candidates_omitted_for_road_clearance": 1,
+    "satellite_infill_houses": 39,
+    "residential_driveways": 338,
+    "residential_yard_wall_segments": 856,
+    "light_poles": 4,
+    "cad_road_segments": 79,
+    "context_road_segments": 75
+  },
+  "cad_validation": {
+    "passed": true,
+    "source_sha256_unchanged": true,
+    "source_entities": 605,
+    "exported_building_meshes_exact": 419,
+    "exported_polylines_exact": 185,
+    "exported_vehicle_roads": 79,
+    "affine_roundtrip_max_error_m": 3.2155493553843715e-13,
+    "anchor_max_error_m": 1.9065862296939058e-13,
+    "all_projected_building_footprints_valid": true,
+    "source_building_heights_all_3m_default": true
   },
   "saved_reload_passed": true,
   "runtime_checks": [
@@ -106,327 +135,65 @@
       "passed": true
     }
   ],
-  "runtime_views": [
-    {
-      "name": "Overview_1920x1080",
-      "path": "D:\\UEPro\\Test\\Saved\\ParkExpansion\\Runtime_Overview_1920x1080.png",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1798512,
-      "sha256": "eec3a6c8d189eb4ba7c294492ae31ee3041afb395f23861182fb4fdc347881e0",
-      "selection": "",
-      "camera": {
-        "eye": [
-          33269.38765218832,
-          55481.14855975472,
-          65433.70062871098
-        ],
-        "rotation": [
-          -47.99999999999984,
-          -109.99999999999984,
-          1.9013057548037272e-14
-        ],
-        "pivot": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "focus_target": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "component_horizontal_fov": 56.0,
-        "camera_manager_fov": 56.0,
-        "actual_arm_length": 86666.6640625,
-        "desired_zoom": 86666.6640625,
-        "overview_center": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "overview_distance": 65000.0
-      }
-    },
-    {
-      "name": "Overview_2560x1600",
-      "path": "D:\\UEPro\\Test\\Saved\\ParkExpansion\\Runtime_Overview_2560x1600.png",
-      "dimensions": [
-        2560,
-        1600
-      ],
-      "bytes": 3369894,
-      "sha256": "579912e639402769a3589e1309e6537b9871146cbf11f03ebc222408a89251ef",
-      "selection": "",
-      "camera": {
-        "eye": [
-          33269.38762736617,
-          55481.148491556465,
-          65433.70069405787
-        ],
-        "rotation": [
-          -47.99999999999984,
-          -109.99999999999984,
-          1.9013057548037272e-14
-        ],
-        "pivot": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "focus_target": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "component_horizontal_fov": 56.0,
-        "camera_manager_fov": 56.0,
-        "actual_arm_length": 86666.6640625,
-        "desired_zoom": 86666.6640625,
-        "overview_center": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "overview_distance": 65000.0
-      }
-    },
-    {
-      "name": "PanelCollapsed_2560x1600",
-      "path": "D:\\UEPro\\Test\\Saved\\ParkExpansion\\Runtime_PanelCollapsed_2560x1600.png",
-      "dimensions": [
-        2560,
-        1600
-      ],
-      "bytes": 4192390,
-      "sha256": "fc7d61069eb454a0aa7f1325f26182daaeab368a06bc51ef473e2cac0c64b865",
-      "selection": "",
-      "camera": {
-        "eye": [
-          33269.38762736617,
-          55481.148491556465,
-          65433.70069405787
-        ],
-        "rotation": [
-          -47.99999999999984,
-          -109.99999999999984,
-          1.9013057548037272e-14
-        ],
-        "pivot": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "focus_target": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "component_horizontal_fov": 56.0,
-        "camera_manager_fov": 56.0,
-        "actual_arm_length": 86666.6640625,
-        "desired_zoom": 86666.6640625,
-        "overview_center": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "overview_distance": 65000.0
-      }
-    },
-    {
-      "name": "AGV07_Focus",
-      "path": "D:\\UEPro\\Test\\Saved\\ParkExpansion\\Runtime_AGV07_Focus.png",
-      "dimensions": [
-        2560,
-        1600
-      ],
-      "bytes": 3627775,
-      "sha256": "bf1a0168fbe81c53d2934742cf2dd96a73585a2f85a2663274067e3bc8881cc1",
-      "selection": "AGV-07",
-      "camera": {
-        "eye": [
-          15642.070920763848,
-          -3859.6467346466197,
-          1478.7770695401055
-        ],
-        "rotation": [
-          -65.00000607967374,
-          -109.99999999999993,
-          -2.2577505705355395e-14
-        ],
-        "pivot": [
-          15219.733502697398,
-          -4398.163502697398,
-          16.700000762939453
-        ],
-        "focus_target": [
-          15219.733502697398,
-          -4398.163502697398,
-          16.700000762939453
-        ],
-        "component_horizontal_fov": 56.0,
-        "camera_manager_fov": 56.0,
-        "actual_arm_length": 1600.0,
-        "desired_zoom": 1600.0,
-        "overview_center": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "overview_distance": 65000.0
-      }
-    },
-    {
-      "name": "Overview_Reset",
-      "path": "D:\\UEPro\\Test\\Saved\\ParkExpansion\\Runtime_Overview_Reset.png",
-      "dimensions": [
-        2560,
-        1600
-      ],
-      "bytes": 3530053,
-      "sha256": "04742741e6c828d947b1057a4a99c73be33338527abcba36e46a542bb9adffe5",
-      "selection": "",
-      "camera": {
-        "eye": [
-          33269.38762736617,
-          55481.148491556465,
-          65433.70069405787
-        ],
-        "rotation": [
-          -47.99999999999984,
-          -109.99999999999984,
-          1.9013057548037272e-14
-        ],
-        "pivot": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "focus_target": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "component_horizontal_fov": 56.0,
-        "camera_manager_fov": 56.0,
-        "actual_arm_length": 86666.6640625,
-        "desired_zoom": 86666.6640625,
-        "overview_center": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "overview_distance": 65000.0
-      }
-    },
-    {
-      "name": "Region_racks",
-      "path": "D:\\UEPro\\Test\\Saved\\ParkExpansion\\Runtime_Region_racks.png",
-      "dimensions": [
-        2560,
-        1600
-      ],
-      "bytes": 3644710,
-      "sha256": "21963d21a78cf211a47484a740a8fec0c44c5cfe60bdfd18776556243ead760c",
-      "selection": "",
-      "camera": {
-        "eye": [
-          25031.064092646884,
-          37333.22474146715,
-          73637.2288019697
-        ],
-        "rotation": [
-          -57.999994039535345,
-          -109.99999999999984,
-          1.2003919716183971e-14
-        ],
-        "pivot": [
-          -659.3649999999998,
-          -80.41899999999987,
-          457.70001220703125
-        ],
-        "focus_target": [
-          -659.3649999999998,
-          -80.41900000000032,
-          457.70001220703125
-        ],
-        "component_horizontal_fov": 56.0,
-        "camera_manager_fov": 56.0,
-        "actual_arm_length": 85346.515625,
-        "desired_zoom": 85346.515625,
-        "overview_center": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "overview_distance": 65000.0
-      }
-    },
-    {
-      "name": "Region_floor",
-      "path": "D:\\UEPro\\Test\\Saved\\ParkExpansion\\Runtime_Region_floor.png",
-      "dimensions": [
-        2560,
-        1600
-      ],
-      "bytes": 4087250,
-      "sha256": "5a8022e988ab5f80bbbf216cdbeaa3fa52aba833a5782f726d4bd0ecced10c91",
-      "selection": "",
-      "camera": {
-        "eye": [
-          22013.894317534745,
-          21652.48451430466,
-          43607.44195544852
-        ],
-        "rotation": [
-          -57.999994039535345,
-          -109.99999999999984,
-          1.2003919716183971e-14
-        ],
-        "pivot": [
-          6750.689996772767,
-          -575.7191,
-          130.0015441894531
-        ],
-        "focus_target": [
-          6750.689996772767,
-          -575.7191,
-          130.0015441894531
-        ],
-        "component_horizontal_fov": 56.0,
-        "camera_manager_fov": 56.0,
-        "actual_arm_length": 50706.09375,
-        "desired_zoom": 50706.09375,
-        "overview_center": [
-          3000.0,
-          6000.0,
-          0.0
-        ],
-        "overview_distance": 65000.0
-      }
-    }
-  ],
+  "visual_review": {
+    "passed": true,
+    "views": [
+      "SitePlan",
+      "Overview",
+      "Yard",
+      "SW_Gate",
+      "NE_Gate",
+      "Housing",
+      "TruckCourt",
+      "Runtime_Overview_2560x1600",
+      "Runtime_AGV07_Focus"
+    ],
+    "notes": [
+      "Final UE reimport 22:23; capture 22:24-22:26.",
+      "Parking centre curbs removed, entrances and road junctions remain open.",
+      "Original warehouse geometry, materials, transforms and instances preserved."
+    ]
+  },
+  "geometry_checks": {
+    "road_surface_valid": true,
+    "fence_road_overlap_m": 0.0,
+    "parked_vehicles_checked": 126,
+    "parked_vehicle_min_road_clearance_m": 1.470111177611951
+  },
   "images": [
     {
+      "file": "SitePlan.png",
+      "sha256": "c9801212e445b6a840bf71ea8ac1c973fce46227fe8d163b376e4c03c2dd53a9"
+    },
+    {
       "file": "Runtime_Overview_1920x1080.png",
-      "sha256": "eec3a6c8d189eb4ba7c294492ae31ee3041afb395f23861182fb4fdc347881e0"
+      "sha256": "3a96f310391d70bc26fedde1bacf2171257cf29404a02784f1a0cefa53765463"
     },
     {
       "file": "Runtime_Overview_2560x1600.png",
-      "sha256": "579912e639402769a3589e1309e6537b9871146cbf11f03ebc222408a89251ef"
+      "sha256": "bfeaa687c46cb5efd2226f1b4a8fe87ec04f3735fb1962394c0a1e99c7290cbd"
     },
     {
       "file": "Runtime_AGV07_Focus.png",
-      "sha256": "bf1a0168fbe81c53d2934742cf2dd96a73585a2f85a2663274067e3bc8881cc1"
+      "sha256": "e9675f72be46783bda97a20ed8e1e97a305f229162a5a3b135331dd7a027356e"
     },
     {
-      "file": "SitePlan.png",
-      "sha256": "0b9a629a52310f5b610ba28c340f0d719ad1160bc15af6411b5e073bb915ebed"
+      "file": "SW_Gate.png",
+      "sha256": "baad782637a583a3cbc65444c5f6fb9430f287dfeae7858f70ee5308e89eb9e6"
+    },
+    {
+      "file": "NE_Gate.png",
+      "sha256": "4a97567ecc354d55c32bc42e58273aa2e9b646ee4230308e7522ade83a868b62"
+    },
+    {
+      "file": "Housing.png",
+      "sha256": "bcb5d817f06de86e7fd60f386e229a917b4f4ba404617312d4e89e547cfd09a2"
+    },
+    {
+      "file": "TruckCourt.png",
+      "sha256": "6971c69e63a108c6ab2ff1b1068ef425c7db5214ea8f2cab175947b70e674004"
     }
   ],
   "performance_benchmark": false,
-  "accuracy": "Visual reconstruction from satellite reference; not a survey"
+  "accuracy": "Roads and building placements registered from user CADmapper DXF. Parcel and architectural detail from satellite references; not a cadastral survey."
 }

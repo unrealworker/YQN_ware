@@ -1,65 +1,148 @@
-# GHS 完整园区扩展
+# GHS 园区 CAD 校准与细化
 
-目标关卡：`/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`。
+目标关卡：`/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`。本说明对应 2026-10-21 的 CAD 校准细化版本，替代首版近似排布说明。当前布局与统计以 `SourceAssets/GHS/Park/park_manifest.json`、`site_geometry_report.json`、`cad_layout.json` 为准。
 
-用户提供的红线是完整园区的大致边界，也是本次重点展示区域。现有仓库继续作为主体，补齐边界以内的装卸前场、内部车道、停车区、回转区域及出入口；红线以外的公路和住宅仅承担环境定位作用。主视角应能读懂整个园区，而不是只框住厂房。
+园区以现有仓库为主体，完整展示装卸前场、内部道路、停车、回转、围栏及出入口；公共道路和住宅提供环境参照。沿用瓷白、冷灰与深蓝风格，不使用卫星截图地面贴图。
 
-## 参考与坐标
+## 来源、许可和精度
 
-位置为美国加州 San Bernardino 的 **17335 Glen Helen Pkwy**。参考用户提供的三张卫星图、道路图及红线标注，以及 [Google Maps 对应位置](https://www.google.com/maps/place/17335+Glen+Helen+Pkwy,+San+Bernardino,+CA+92407/@34.1897677,-117.4293908,758m/data=!3m1!1e3!4m6!3m5!1s0x80c34f1ee704ce7b:0x5deb49b79433fae9!8m2!3d34.1894244!4d-117.4287021!16s%2Fg%2F11lj1bmrxg)。道路和停车场按参考形态简化重建；园区边界是展示用估算，不是土地测绘或交通工程设计数据。
+用户提供的源文件：
 
-现有厂房使用 `SourceAssets/GHS/RefinementV2/Envelope/building_footprint.json` 中的 CAD 轮廓，不旋转、不缩放。坐标约定为 CAD 米转换到 UE 厘米：`UE = (X, -Y, Z) × 100`。厂房长轴约 465.73 米，最大进深约 137.16 米；这两个尺寸用于校准卫星图中的相对比例。
-
-园区布局局部坐标以厂房西北角为原点，`u` 顺厂房长轴向东北，`v` 由背面向装卸前场。转换为 UE 米：`X = u - 239.33385`，`Y = v - 60.24019`。园区原始数据、网格及生成资料集中在 `SourceAssets/GHS/Park`，以最终生成资料为准，不将参考图中的像素位置当作测量值。
-
-| 区域 | 场景方向与布局关系 |
-| --- | --- |
-| Glen Helen Pkwy | 厂房背面、UE -Y，沿长轴延伸 |
-| Sycamore Creek Dr | 厂房西南短边、UE -X，与背面道路相连 |
-| I-15 / Ontario Fwy | 装卸前场外侧、UE +Y，斜向经过，采用分离车行带 |
-| 园区装卸前场 | 位于厂房与高速之间，西南端较宽、东北端逐渐收窄 |
-| 西南端 | 展示停车及出入口空间，并保留货车转向余量 |
-| 东北端 | 延续到厂房端部以外，以回转及进出道路收尾 |
-| 周边住宅 | 北侧 Gray Pine Pl 一带与高速东南侧，以低模白色体块简化 |
-
-## 视觉和性能约束
-
-沿用当前瓷白、冷灰与深蓝的场景风格。道路采用可辨认的灰度差、浅色路缘与标线；周边建筑简化为白色体块，避免与园区主体争夺注意力。不得把卫星截图直接覆盖为地面贴图。
-
-新增对象使用 `GHSPark_` Actor 前缀与 `GHS_ParkContext` 标签，便于单独重建、筛选与核验。道路等固定几何合并管理；重复建筑、车辆或绿化适合采用实例组。背景对象关闭碰撞和 Actor Tick，不带 `TwinId=` 等现有设备业务标识，不进入仓库设备搜索、选中或状态统计。
-
-保持现有厂房、货架、货物、设备、门牌、材质、实例数量及实例变换。只调整当前关卡 `GHS_WarehouseCamera` 实例的全景中心、距离、俯仰、朝向和平移范围，以容纳完整园区。`MaximumZoom` 为仅类默认值可编辑的属性，保留原有 95,000 厘米上限，不修改共享蓝图或原生类默认值。旧关卡 `/Game/Maps/GHS_CAD_NormalWarehouse` 的文件内容保持不变。
-
-## 可复查证据
-
-`Saved/ParkExpansion/scene_inspection.json` 是改动前的当前关卡基线；`map_before.umap` 是修改前地图备份；`source_map_baseline.json` 保存旧 NormalWarehouse 地图的 SHA-256。不得用扩展后的场景覆盖这份基线。
-
-基线捕获于 2026-10-21 11:21:48 UTC，共 335 个 Actor。随后编辑器在 11:24:34 UTC 记录了用户的 `DELETE` / `ACTOR DELETE` 命令及一个 `TextRenderActor` 的删除，早于 11:40 UTC 的园区导入。与基线核对后唯一缺失项为 `GHS_SiteTitle`，其余原对象一致。因此保留用户对该地面标题的删除，不重新生成。`Saved/ParkExpansion/pre_import_changes.json` 单独记录这一项、基线哈希及日志证据；验证器只豁免这个已确认的导入前删除，仍严格检查其余 334 个原 Actor。
-
-在扩展关卡保存后，通过现有 `Scripts/ghs/live_dispatcher.py` 执行 `validate_park_expansion.py`。验证器只读取场景，并输出 `Saved/ParkExpansion/validation.json`：
-
-- 对照基线及上述独立变更记录，逐一核对 334 个原 Actor 的标签、类别、变换、静态网格、材质、实例数量和实例变换哈希；仅允许全景相机变换改变，相机原有网格、材质、标签仍须一致。
-- 检测遗漏或重复 Actor、没有园区归属标记的新 Actor、意外业务标签、碰撞和逐帧 Tick。
-- 对照园区 manifest 检查每个网格恰有一个组件及三个辅助拍摄相机；同时检查网格保存材质槽和组件实际材质均绑定到对应角色材质，避免灰白默认材质掩盖绑定错误。
-- 重新计算旧地图哈希，确认原关卡未被改写；记录当前保存地图的哈希、扩展 Actor 数量、使用的网格和实例数。
-- 失败时写出具体对象与失败原因并抛出错误，不以日志中的普通提示代替通过结果。
-
-另需检查实际 UE 渲染的完整园区视角、装卸前场与入口近景、公共道路和住宅背景，确认边界关系、道路衔接、遮挡与比例。保存后的新进程重载验证和实际运行中的全景／设备聚焦回归属于独立证据，不能由编辑器内的结构检查代替。
-
-此文档描述范围与验收方法。是否通过以最新报告、重载结果和实际截图为准；新增实例数或低模面数本身不能证明 1080P 60 帧或多人像素流性能。
-
-## 2026-10-21 验收结果
-
-当前地图已保存完整园区：12 个环境网格、14,996 个三角面，另有 3 个编辑器拍摄相机。新增 78 个小车泊位、40 个挂车泊位、2 个入口门卫，并用 182 栋住宅白膜、200 棵简化树表现周边。默认全景覆盖完整园区，现有货架和地堆局部视角继续可用。
-
-新进程重载核对通过，334 个原场景对象的变换、材质、网格及实例数据一致。导入前用户已删除的 `GHS_SiteTitle` 单独记录并保持删除；旧 NormalWarehouse 地图哈希不变。UE 无渲染命令行模式不创建编辑器相机图标网格，该差异已与场景模型分别处理。
-
-运行中的 14 项检查通过，包括 1920×1080 与 2560×1600、面板收放、完整园区边界投影、AGV-07 聚焦和详情、全景复位清除选择、货架／地堆视角。实际业务注册数量仍为 106 台设备、56 个设施。截图与验收摘要保存在 `SourceAssets/GHS/Park/Review`。本次未进行多人像素流或稳定帧率基准测试，也未重新生成发布包。
-
-复查运行使用独立 UE 游戏进程，通过 `-ExecCmds` 执行 Python；`-ExecutePythonScript` 在该模式下不会启动此检查：
-
-```powershell
-& 'D:/UE/UE_5.4/Engine/Binaries/Win64/UnrealEditor.exe' 'D:/UEPro/Test/Test.uproject' /Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory -game -RenderOffscreen -TwinDiagnostics -windowed -ForceRes -ResX=1920 -ResY=1080 -unattended '-ExecCmds=py D:/UEPro/Test/Scripts/ghs/verify_park_runtime.py'
+```text
+D:/UEPro/Test/CADGis/cadmapper-muscoy-california-us/cadmapper-muscoy-california-us/cadmapper-muscoy-california-us.dxf
+SHA-256: 82ad1a249acc8f1bacf6fb313f8c422c316663ff987738e789b15e448283a9ec
 ```
 
-保留当前工作区 `Saved/ParkExpansion` 下的原始基线与地图备份，用于复查原有对象；不要重新采集并覆盖基线。
+该文件为 CADmapper 区域数据。`extract_park_cad.py` 只读提取 419 个建筑 MESH、185 条线要素，其中 79 条为车辆道路中心线。原顶点、原面、原高程、句柄与图层均保留，场景位置采用三点仿射后的 UV。园区边界、入口、停车与细节由用户卫星图及 `satellite_trace.json` 补充，属于展示重建，不是宗地测量。
+
+原许可全文复制到 [SourceAssets/GHS/Park/LICENSE.txt](../SourceAssets/GHS/Park/LICENSE.txt)，同时保存在 `cad_layout.json.attribution`。地图数据归属 OpenStreetMap contributors；高程注明 USGS NED、NASA SRTM 公有领域来源。分发源数据时须随附原许可文本。
+
+必须区分源标签与可信几何：
+
+- `$INSUNITS=4` 标称毫米，但大仓库为约 `465.14 × 137.66` 个坐标单位，与现有约 `465.73 × 137.16 m` 仓库一致。坐标按米解释，不能再乘 `0.001`；文件头范围也是无效占位值，使用实体计算范围。
+- 全部建筑默认拉伸 `3 m`，不是实测高度。住宅采用参考图双层形式，高度约 `7.45–7.81 m`，源高度状态仍标为未经验证。
+- 原地形高程保留在数据中，场景地面按平坦展示处理；高速跨越 Sycamore 附近仅局部抬升约 `6.1 m`，坡道和标线跟随高程。不是全场真实地形复原。
+- 道路宽度、圆角与院落细节是模型参数；几何净距不能代替交通工程转向扫掠或安全认证。
+
+## 配准与既有仓库
+
+唯一大仓库为 `buildings` 图层 MESH `1eb6`。使用三个锚点：
+
+| 锚点 | CAD XY | 现有仓库 UV，米 |
+| --- | --- | --- |
+| backSW | `(423.8071, 444.0218)` | `(0, 0)` |
+| backNE | `(843.2883, 645.0026)` | `(465.7344, 0)` |
+| frontSW | `(483.48, 319.9706)` | `(0, 137.16)` |
+
+```text
+u = 0.9023064585475312*x + 0.43404048546294594*y - 575.1273211364305
+v = 0.4305234644027491*x - 0.8985758812574258*y + 216.52837930202614
+```
+
+长边尺度约 `1.001272`、短边约 `0.996387`。三锚点精确吻合，其余角点最大残差约 `2.22 m`；差异保留并报告，不对周围路网做局部变形。**现有仓库主模型使用项目内资产，不重建、不旋转、不缩放，园区生成器跳过 `1eb6`**。货架、货物、月台和设备也不属于重建范围。
+
+局部 `u` 沿仓库长轴，`v` 指向装卸前场。导出约定以 manifest 为准：
+
+```text
+Blender metres: X = u - 239.33385; Y = -(v - 60.24019); Z up
+FBX: -Y forward, Z up
+UE centimetres after import at origin / scale 1:
+X = (u - 239.33385) * 100; Y = (v - 60.24019) * 100
+```
+
+硬化地坪为 `−4 cm`。原地面标识所在矩形 `u=189.5…277.1、v=147.9…159.7` 保持避让。公共道路、住宅主位置来自 CAD；北侧 Gray Pine 的卫星补房单独标记，不混称为 CAD 建筑。
+
+## 本轮生成结果
+
+当前 manifest 版本 `2`：**16 个网格、371,592 个三角面、338 栋住宅**。其中 299 栋保留 CAD 中心和外接矩形轴向，39 栋为 `satellite_infill`；补房沿已有 Gray Pine 道路与支路布置。最终范围约为 `u=[−197,747]、v=[−217,592] m`，不同于较小范围的独立住宅模块预检。
+
+四种住宅模块包含双层体量、坡屋顶、车库、门窗及太阳能板。屋顶限制在源建筑外接矩形内，场景检查的 `footprint_uv_m` 是实际模型的定向包围矩形。335 条车道连接街边，3 户保留短入口。共用车道口整体合并，前草坪按邻近住宅分区，856 段约 `1.4 m` 浅灰侧后院墙避让道路和住宅。
+
+道路先以圆弧相切处理转角，再合并路面并生成外缘路缘，不在交叉口横穿内部白边。虚线沿全程弧长延续，坡道标线顶点随道路高程变化。道路及围栏模块可独立做几何测试。
+
+围栏周长约 `1,533.835 m`，其中约 `1,513.526 m` 有栏，仅在 **SW Main gate** 与 **NE Service gate** 处开口；604 根立柱、4 个门柱、2 个门卫。非入口围栏与道路重叠长度为 `0 m`，52 台既有月台货车轮廓位于围栏范围内。入口门柱间净宽约 `9.813 m`、`10.914 m`。
+
+| 离线检查 | 当前结果 |
+| --- | --- |
+| 道路合并面 | 有效 |
+| 住宅最小道路净距 | `1.064755 m` |
+| 受检停车车辆最小道路净距 | `1.470111 m` |
+| 两门卫道路净距 | `2.583393 m`、`3.774644 m` |
+| 三组挂车泊位道路净距 | 约 `4.040–4.695 m` |
+| 前草坪重叠面积 | 约 `1.46e-11 m²`，浮点误差量级 |
+
+统计还包含 52 个挂车泊位、28 个园区小车泊位、16 台停放挂车和 286 棵低模树。`parked_cars=110` 包含住宅车道车辆，不能当作园区泊位数量。
+
+## 依赖与复现
+
+以下命令在 `D:/UEPro/Test` 运行。生成侧使用 Blender 5.2 自带 Python 3.13；Shapely 2.1.2 及其 NumPy 依赖放在项目专用目录，不安装到 UE Python：
+
+```powershell
+& 'D:/WinAPP/Blender/5.2/python/bin/python.exe' -B -m pip install 'shapely==2.1.2' --target 'Saved/ParkRefinement/python_deps'
+```
+
+DXF 提取复用 `Scripts/_vendor/cad/ezdxf`。Shapely 只负责离线路面合并、带孔三角化和空间裁剪；**FBX、UE 静态网格及运行时不需要 Shapely**。
+
+1. 提取 CAD：
+
+   ```powershell
+   & 'D:/WinAPP/Blender/5.2/python/bin/python.exe' -B Scripts/ghs/extract_park_cad.py --extract-only
+   ```
+
+   输出 `SourceAssets/GHS/Park/cad_layout.json` 与 `Saved/ParkRefinement/CAD/cad_analysis.json`。带 Pillow 的 Python 可运行同脚本 `--render-only` 重建三张 CAD PNG。
+
+2. 运行几何测试并后台生成：
+
+   ```powershell
+   $env:PYTHONPATH = 'D:/UEPro/Test/Saved/ParkRefinement/python_deps'
+   & 'D:/WinAPP/Blender/5.2/python/bin/python.exe' -B -m unittest discover -s Scripts/ghs -p 'test_park_*.py' -v
+   & 'D:/WinAPP/Blender/blender.exe' --background --python-exit-code 1 --python Scripts/ghs/build_park_geometry.py
+   ```
+
+   生成器调用 `park_site.py`，组合 `park_curves.py`、`park_surfaces.py`、`park_fence.py`、`park_residential.py`、`park_housing.py`。生成 `.blend`、16 个 FBX、manifest、完整几何报告及预览；成功以退出码和 `GHS_PARK_READY` 为准。
+
+3. 在已打开目标关卡且退出 PIE 的 UE 编辑器中应用。使用当前会话 `Scripts/ghs/live_dispatcher.py` 桥接；未启用时先在编辑器 Python 环境执行该脚本，再投递请求：
+
+   ```powershell
+   $parkRequest = @{ id = [guid]::NewGuid().ToString(); script = 'apply_park_expansion.py' }
+   [IO.File]::WriteAllText('D:/UEPro/Test/Saved/GHS_LiveRequest.json', ($parkRequest | ConvertTo-Json), [Text.UTF8Encoding]::new($false))
+   ```
+
+   核对同 ID 的 `Saved/GHS_LiveStatus.json` 和新生成的 `Saved/ParkExpansion/apply_report.json`。应用脚本导入 FBX、绑定材质、更新 `GHSPark_` 环境 Actor 并保存关卡。不要重采集或覆盖修改前基线。
+
+4. 以相同请求方式依次运行 `validate_park_expansion.py`、`capture_park_expansion.py`、`capture_park_details.py`。每项完成并核对最新报告后再投递下一项。截图使用异步回调，桥接 `executed` 仅说明已启动，必须等待截图报告自身 `success` 及文件时间更新。
+
+5. 独立进程重载使用 `validate_park_saved.py`，实际运行回归使用 `verify_park_runtime.py`，与编辑器结构检查分别保留证据：
+
+   ```powershell
+   & 'D:/UE/UE_5.4/Engine/Binaries/Win64/UnrealEditor-Cmd.exe' 'D:/UEPro/Test/Test.uproject' -run=pythonscript '-script=D:/UEPro/Test/Scripts/ghs/validate_park_saved.py' -unattended -nop4 -NullRHI
+   & 'D:/UE/UE_5.4/Engine/Binaries/Win64/UnrealEditor.exe' 'D:/UEPro/Test/Test.uproject' /Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory -game -RenderOffscreen -TwinDiagnostics -windowed -ForceRes -ResX=1920 -ResY=1080 -unattended '-ExecCmds=py D:/UEPro/Test/Scripts/ghs/verify_park_runtime.py'
+   ```
+
+## 原场景保护
+
+新增对象使用 `GHSPark_` 前缀和 `GHS_ParkContext` 标签，不带现有设备业务 `TwinId=`，不进入设备搜索或状态统计。背景关闭碰撞和 Tick。只调整当前关卡相机实例以容纳园区，不修改共享相机类默认值；旧 `/Game/Maps/GHS_CAD_NormalWarehouse` 地图应保持原哈希。
+
+`Saved/ParkExpansion/scene_inspection.json`、`map_before.umap`、`source_map_baseline.json` 是原扩展前基线，须保留。导入前用户删除 `GHS_SiteTitle` 的证据在 `pre_import_changes.json`，不要恢复标题。验证器对其余 334 个原 Actor 的网格、材质、标签、变换与实例数据逐项比对，仅允许约定的相机变化。`Saved/ParkRefinement/Before` 另存本轮细化前状态。
+
+## 本轮验收证据
+
+**本轮 UE 最终验收已通过。** 2026-10-21 22:23 完成最终导入，16 个网格共 371,592 三角面；22:24–22:25 拍摄近景与全景；22:26 独立进程重载和实际运行检查通过。334 个原场景对象的网格、材质、标签、变换及实例数据保持，旧 NormalWarehouse 地图哈希未变。
+
+实际运行覆盖 1920×1080 和 2560×1600，共 14 项检查通过，包括完整园区在 HUD 可视范围内、面板收展、AGV-07 选择与详情、全景复位清除选中、货架区／地堆区聚焦，以及业务注册表保持 106 台设备与 56 个设施。曲线、曲面与围栏模块 32 项测试通过。全景、入口、住宅和货场截图已人工复核，最终重新导入后停车场内部路缘已消除，不再横穿通道。
+
+`SourceAssets/GHS/Park/Review` 的旧图片和旧 `acceptance.json` 已替换为本轮结果，记录地图、manifest 和图片哈希，可直接用于复查。
+
+| 范围 | 证据位置与用途 |
+| --- | --- |
+| 源完整性 | `Saved/ParkRefinement/CAD/validation.json`：419 个网格、185 条线逐项一致，源哈希未变 |
+| 配准 | `Saved/ParkRefinement/CAD/CAD_raw_context.png`、`CAD_registered_uv.png`、`CAD_warehouse_alignment.png` |
+| 最终离线几何 | `SourceAssets/GHS/Park/park_manifest.json`、`site_geometry_report.json`、`Saved/ParkRefinement/blender_geometry.log` |
+| 模块预检 | `Saved/ParkRefinement/housing_validation.json`、`residential_validation.json`；独立预检范围较小，不代替最终 338 栋统计 |
+| UE 应用与结构 | 本轮最新 `Saved/ParkExpansion/apply_report.json`、`validation.json` |
+| UE 保存重载 | 本轮最新 `Saved/ParkExpansion/saved_validation.json`、`reloaded_actors.json` |
+| UE 全景截图 | 本轮最新 `Saved/ParkExpansion/capture_report.json` 及其列出的图片 |
+| UE 近景 | `Saved/ParkRefinement/detail_capture_report.json`、`SW_Gate.png`、`NE_Gate.png`、`Housing.png`、`TruckCourt.png`；已完成最终视觉复核 |
+| 实际运行回归 | 本轮最新 `Saved/ParkExpansion/runtime_report.json` 与 `Runtime_*.png` |
+
+最终复核覆盖完整园区边界、两入口开口、道路连接、跨线桥、住宅及车道关系、原仓库遮挡、设备聚焦与全景复位。验收摘要已核对本轮保存地图、manifest、运行结果及截图哈希。静态网格面数与结构检查不证明多人像素流或稳定 60 FPS；本轮未以此替代独立性能测试。
