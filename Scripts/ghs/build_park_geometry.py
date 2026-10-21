@@ -23,6 +23,8 @@ OUT.mkdir(parents=True, exist_ok=True)
 sys.dont_write_bytecode=True
 sys.path.insert(0,str(ROOT/'Scripts/ghs'))
 sys.path.insert(0,str(ROOT/'Saved/ParkRefinement/python_deps'))
+from park_vegetation import PALETTE as VEGETATION_PALETTE, build_tree
+from park_vehicles import build_car
 RNG = random.Random(17335)
 ORIGIN = (239.33385, 60.24019)
 CAMPUS = [(-10,-10),(475,-15),(500,-25),(535,0),(570,68),
@@ -38,7 +40,9 @@ PALETTE = {
     'Landscape': (.53,.63,.57), 'Glass': (.24,.34,.44),
     'Blue': (.018,.075,.51), 'Detail': (.30,.39,.46),
     'Fence': (.23,.31,.40), 'Solar': (.045,.075,.13),
+    'Rubber': (.018,.024,.028), 'VehicleLights': (.46,.035,.025),
 }
+PALETTE.update(VEGETATION_PALETTE)
 
 DATA = defaultdict(lambda: {'vertices': [], 'faces': [], 'parts': 0})
 COUNTS = defaultdict(int)
@@ -195,20 +199,12 @@ def cylinder(role,u,v,z,radius,height,sides=8):
 
 
 def tree(u,v,height=5.3,scale=1):
-    if road_clearance(u,v,height*.32)<.3:
+    variant=int(abs(u*7.31+v*11.17))%3
+    size=height/(5.737,6.750,5.397)[variant]*scale
+    if road_clearance(u,v,2.8*size)<.3:
         COUNTS['tree_candidates_omitted_for_road_clearance']+=1
-        return
-    cylinder('Detail',u,v,.02,.14*scale,height*.48,6)
-    r=height*.32
-    vertices=[(u,v,height)]
-    for i in range(8):
-        angle=i*math.pi/4
-        vertices.append((u+math.cos(angle)*r,v+math.sin(angle)*r,height*.62))
-    vertices.append((u,v,height*.28))
-    faces=[(0,i+1,(i+1)%8+1) for i in range(8)]
-    faces += [(9,(i+1)%8+1,i+1) for i in range(8)]
-    mesh('Trees',vertices,faces)
-    COUNTS['low_poly_trees']+=1
+        return None
+    return build_tree({'mesh':mesh,'counts':COUNTS},u,v,size,variant)
 
 
 def trailer(u,v,angle=math.pi/2):
@@ -224,10 +220,12 @@ def trailer(u,v,angle=math.pi/2):
 
 
 def car(u,v,angle=0,blue=False):
-    PARKED_VEHICLES.append(dict(kind='car',center=[u,v],size=[4.45,1.85],angle=angle))
-    box('Blue' if blue else 'Buildings',(u,v,.67),(4.45,1.85,.95),angle,True)
-    box('Glass',(u-.1*math.cos(angle),v-.1*math.sin(angle),1.31),(2.4,1.6,.55),angle)
+    variant=int(abs(u*13.7+v*7.3))%2
+    result=build_car({'mesh':mesh},u,v,angle,blue,variant)
+    PARKED_VEHICLES.append(dict(kind='car',center=[u,v],size=result['parking_size_m'],angle=angle))
     COUNTS['parked_cars']+=1
+    COUNTS['detailed_'+result['variant']]+=1
+    return result
 
 
 def parking(u,v,count,angle=0,filled=.55):
@@ -346,7 +344,9 @@ def export():
                        'source_parts':data['parts'],'blender_bounds_m':bounds,'bounds_ue_cm':ue_bounds,
                        'sha256':hashlib.sha256(fbx.read_bytes()).hexdigest()})
     total=sum(a['triangles'] for a in assets)
-    assert total<500000, total
+    # Clustered forests and recognisable cars share material batches. Keep an
+    # explicit combined environment budget while avoiding per-prop Actors.
+    assert total<950000, total
     minimum_house_clearance=min(h['road_clearance_m'] for h in GEOMETRY_REPORT['residential']['houses'])
     assert minimum_house_clearance>=.10, minimum_house_clearance
     manifest={'version':2,'purpose':'Full campus primary display; restrained public-road and residential context',

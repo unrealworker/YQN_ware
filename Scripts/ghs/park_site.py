@@ -83,7 +83,9 @@ def build_site(api):
     emit_surface(api,campus,'Hardstand',-.04)
     preview.append(('Hardstand',boundary))
 
-    all_ground,union_meta=road_union(specs,4,True)
+    # Keep the 7.7m open strip between the SW parking loop and fire access.
+    # A 4m closing radius falsely joined those parallel lanes at mid-block.
+    all_ground,union_meta=road_union(specs,3.8,True)
     public=all_ground.difference(campus)
     private=all_ground.intersection(campus)
     emit_surface(api,public,'ContextRoads',.015)
@@ -176,18 +178,8 @@ def build_site(api):
     emit_surface(api,planting,'Landscape',-.005)
     for p in parts(planting,'Polygon'):preview.append(('Landscape',list(p.exterior.coords)))
 
-    # Employee lots follow the two closed CAD parking aisles; no unused
-    # roadside blocks or duplicate foreground title are retained.
-    for x0,y0,x1,y1 in [(2,141,40,177),(0,199,39,242),(471,1,502,42)]:
-        lot=rect(x0,y0,x1,y1).buffer(1.1,quad_segs=10).intersection(campus)
-        emit_surface(api,lot,'Roads',.028)
-        # Only the outside parking-lot boundary is raised. Interior stalls
-        # meet their circulation aisles at grade and entrances stay open.
-        emit_curb(api,lot,'Curbs',.28,.20,openings=[all_ground.buffer(.25)],base_z=.02)
-    for u,v,n,angle in [(20,150,4,math.pi/2),(20.4,161,4,-math.pi/2),
-                         (20,211,5,math.pi/2),(20.4,225,5,-math.pi/2),
-                         (485.5,12,5,math.pi/2),(485.9,28.8,5,-math.pi/2)]:
-        api['parking'](u,v,n,angle,.55)
+    from park_parking import build_parking
+    parking=build_parking(api,campus,all_ground,warehouse)
     # Rear trailer rows stay clear of the CAD circulation and existing trucks.
     bay_checks=[]
     for u,v,num,angle in [(68,213,17,-.245),(148,164,20,-.0121),(245,167,15,-.245)]:
@@ -212,6 +204,10 @@ def build_site(api):
     from park_residential import build_residential
     residential=build_residential(api,cad,specs+highways,all_ground.union(freeway),scope,campus)
     occupied=unary_union([Polygon(h['footprint_uv_m']) for h in residential['houses']])
+    driveway_mask=unary_union([Polygon(h['driveway_polygon_uv_m'])
+                             for h in residential['houses'] if h['driveway_polygon_uv_m']])
+    from park_forests import build_forests
+    forests=build_forests(api,cad,all_ground.union(freeway),occupied.union(driveway_mask),scope,campus)
     vehicle_clearances=[]
     for vehicle in api['parked_vehicles']:
         w,d=vehicle['size'];angle=vehicle['angle'];center=vehicle['center']
@@ -220,7 +216,8 @@ def build_site(api):
         vehicle_clearances.append(all_ground.distance(footprint))
     remaining_fence=fence_line.difference(unary_union([g['geometry'] for g in gate_corridors]))
     assert remaining_fence.intersection(all_ground).length<.01,'Fence crosses road outside named gates'
-    # Selective street trees define edges without a noisy random forest.
+    # Street trees remain individually spaced; forests occupy only the two
+    # user-requested outer areas with their own road/water/building masks.
     tree_points=[]
     for p,t,d in sample_along(boundary,15.,closed=True):
         q=Point(p)
@@ -258,6 +255,7 @@ def build_site(api):
     result=dict(version=2,campus_boundary_uv_m=boundary,source_dxf=cad['source'],
                 original_dock_trucks_contained=len(truck_checks),roads=curve_report,
                 fence=fence_result,gatehouses=booths,residential=residential,
+                parking=parking,forests=forests,
                 trailer_bay_checks=bay_checks,parked_vehicles_checked=len(vehicle_clearances),
                 parked_vehicle_min_road_clearance_m=min(vehicle_clearances),fence_road_overlap_m=remaining_fence.intersection(all_ground).length,
                 bridge_crossings=crossings,scope_bounds=list(scope.bounds),

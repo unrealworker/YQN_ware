@@ -23,7 +23,15 @@ performance.set_editor_property('bThrottleCPUWhenNotForeground',False)
 views=[('SW_Gate',(4,185,1),12500,-38,-30),
        ('NE_Gate',(523,29,1),13500,-42,135),
        ('Housing',(302,343,3),8500,-43,-95),
-       ('TruckCourt',(190,177,0),25000,-57,-90)]
+       ('TruckCourt',(190,177,0),25000,-57,-90),
+       ('ParkingUpper',(21,157,0),8500,-72,-90),
+       ('ParkingLower',(20,218,0),8500,-72,-90),
+       ('TreeDetail',(14.3,152.15,2),1400,-25,-125),
+       ('WestForest',(-115,90,0),34000,-53,-110),
+       ('NortheastForest',(555,-135,0),29000,-52,-110)]
+site=json.loads((ROOT/'SourceAssets/GHS/Park/site_geometry_report.json').read_text(encoding='utf-8'))
+selected=next(s for s in site['parking']['stalls'] if s['row']=='upper_center_north' and s['occupied'])
+views.append(('VehicleDetail',(*selected['center'],.8),1100,-32,-110))
 started=time.monotonic();task=pending=handle=None;index=0;done=busy=False
 report=dict(success=False,captures=[])
 

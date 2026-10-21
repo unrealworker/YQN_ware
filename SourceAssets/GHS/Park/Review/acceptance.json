@@ -1,9 +1,9 @@
 {
-  "date_local": "2026-10-21T22:33:26",
+  "date_local": "2026-10-21T23:48:04",
   "timezone": "Asia/Shanghai",
   "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
-  "map_sha256": "1f0bff393d929375d311a576d74b934a517ba178ce2175a21fff214563d4fd99",
-  "manifest_sha256": "82823da62dea2f56f3fcb34dc13e0e685dc1bd8238c8239c547312401c7f0705",
+  "map_sha256": "76786559b6076d51717a6c3ea9fad11d22633faa07989c12f7bc81b19e78f92f",
+  "manifest_sha256": "6a398e47a69d4a79c876d2f46bb691ca1f8d7ee93bba39a070c151622b149289",
   "old_map_preserved": true,
   "original_objects_checked": 334,
   "pre_import_changes": [
@@ -34,17 +34,23 @@
       ]
     }
   ],
-  "added_meshes": 16,
-  "triangles": 371592,
+  "added_meshes": 21,
+  "triangles": 741077,
   "context_counts": {
     "fence_posts": 604,
     "fence_bars": 6306,
     "fence_rails": 3134,
     "gate_columns": 4,
     "perimeter_gates": 2,
-    "parked_cars": 110,
-    "car_spaces": 28,
-    "parked_trailers": 16,
+    "landscape_shrubs": 191,
+    "low_poly_trees": 815,
+    "clustered_broadleaf_trees": 815,
+    "tree_candidates_omitted_for_road_clearance": 5,
+    "parked_cars": 140,
+    "detailed_compact_suv": 78,
+    "car_spaces": 82,
+    "detailed_sedan": 62,
+    "parked_trailers": 27,
     "trailer_spaces": 52,
     "gatehouses": 2,
     "detailed_context_houses": 338,
@@ -55,11 +61,11 @@
     "house_variant_0": 83,
     "house_variant_2": 90,
     "house_variant_3": 84,
-    "low_poly_trees": 286,
-    "tree_candidates_omitted_for_road_clearance": 1,
     "satellite_infill_houses": 39,
     "residential_driveways": 338,
     "residential_yard_wall_segments": 856,
+    "woodland_trees": 510,
+    "woodland_groups": 2,
     "light_poles": 4,
     "cad_road_segments": 79,
     "context_road_segments": 75
@@ -76,7 +82,8 @@
     "all_projected_building_footprints_valid": true,
     "source_building_heights_all_3m_default": true
   },
-  "saved_reload_passed": true,
+  "saved_map_reload_passed": true,
+  "saved_map_reload_finished_utc": "2026-10-21T15:41:25.348707+00:00",
   "runtime_checks": [
     {
       "name": "saved_campus_loaded_and_business_registry_preserved",
@@ -135,63 +142,171 @@
       "passed": true
     }
   ],
-  "visual_review": {
-    "passed": true,
-    "views": [
-      "SitePlan",
-      "Overview",
-      "Yard",
-      "SW_Gate",
-      "NE_Gate",
-      "Housing",
-      "TruckCourt",
-      "Runtime_Overview_2560x1600",
-      "Runtime_AGV07_Focus"
-    ],
-    "notes": [
-      "Final UE reimport 22:23; capture 22:24-22:26.",
-      "Parking centre curbs removed, entrances and road junctions remain open.",
-      "Original warehouse geometry, materials, transforms and instances preserved."
-    ]
+  "runtime_elapsed_seconds": 14.937999999965541,
+  "runtime_business_registry": {
+    "equipment": 106,
+    "facilities": 56
   },
-  "geometry_checks": {
-    "road_surface_valid": true,
-    "fence_road_overlap_m": 0.0,
-    "parked_vehicles_checked": 126,
-    "parked_vehicle_min_road_clearance_m": 1.470111177611951
+  "visual_review_passed": true,
+  "visual_review_notes": [
+    "Actual UE renders show vehicle bodies, four tyres, glazing, mirrors and lamps.",
+    "Three clustered green tree variants and lower planting replace the diamond crowns.",
+    "Upper and lower parking rows retain the differing satellite directions; all four central rows face the shared line.",
+    "Upper western six bays are continuous; wheel stops and closed markings leave aisle-facing mouths open.",
+    "West and northeast woodland clusters keep clear of roads, houses and the CAD water corridor.",
+    "1080p and 2560x1600 overview framing, AGV details, panel transitions and reset checked."
+  ],
+  "parking": {
+    "stalls": 82,
+    "end_islands": 4,
+    "planting_road_overlap_m2": 0.0,
+    "minimum_island_road_clearance_m": 0.5969391830070221
+  },
+  "forests": {
+    "trees": 510,
+    "groups": 2,
+    "clearance_policy_m": {
+      "roads": 8,
+      "buildings_and_driveways": 10,
+      "campus": 8,
+      "water": 18
+    }
   },
   "images": [
     {
       "file": "SitePlan.png",
-      "sha256": "c9801212e445b6a840bf71ea8ac1c973fce46227fe8d163b376e4c03c2dd53a9"
+      "sha256": "33609217e897080342aaa0b7cf5c1ddc4486767bf439ae31e607b7ccac49fbec",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2226018
     },
     {
       "file": "Runtime_Overview_1920x1080.png",
-      "sha256": "3a96f310391d70bc26fedde1bacf2171257cf29404a02784f1a0cefa53765463"
+      "sha256": "a7084971d2527cf5769739141a040c72c85840248e03275caf3477659d3fb59a",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1729892
     },
     {
       "file": "Runtime_Overview_2560x1600.png",
-      "sha256": "bfeaa687c46cb5efd2226f1b4a8fe87ec04f3735fb1962394c0a1e99c7290cbd"
+      "sha256": "6c090583e94587650389020251d1f618d237bc40f276386754a8406c5246a981",
+      "dimensions": [
+        2560,
+        1600
+      ],
+      "bytes": 3241750
     },
     {
       "file": "Runtime_AGV07_Focus.png",
-      "sha256": "e9675f72be46783bda97a20ed8e1e97a305f229162a5a3b135331dd7a027356e"
+      "sha256": "ce46a3b2738e4e978dafd533204cda9018fcd4ac12bccbd0d740064e12de483b",
+      "dimensions": [
+        2560,
+        1600
+      ],
+      "bytes": 3621407
     },
     {
       "file": "SW_Gate.png",
-      "sha256": "baad782637a583a3cbc65444c5f6fb9430f287dfeae7858f70ee5308e89eb9e6"
+      "sha256": "e83955d5b1f0b2615f6f13c9ba4767b5a6583e8461cc2574a70932db99ef4bbe",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1842951
     },
     {
       "file": "NE_Gate.png",
-      "sha256": "4a97567ecc354d55c32bc42e58273aa2e9b646ee4230308e7522ade83a868b62"
+      "sha256": "90631f541968fa51078a1c1779675e8a1c3d083d9c3dc8dccae8556995d64f5e",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1613126
     },
     {
       "file": "Housing.png",
-      "sha256": "bcb5d817f06de86e7fd60f386e229a917b4f4ba404617312d4e89e547cfd09a2"
+      "sha256": "400d42a9a74681967d911c7e1d762634bd602f9250fb2ecb6e3f937dcc9c0c8a",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1671452
     },
     {
       "file": "TruckCourt.png",
-      "sha256": "6971c69e63a108c6ab2ff1b1068ef425c7db5214ea8f2cab175947b70e674004"
+      "sha256": "82cf8b40a444d63da2de8d7a86ca69bd74c258c2d94c961d76829d9b6f659bb0",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1731305
+    },
+    {
+      "file": "ParkingUpper.png",
+      "sha256": "7674f1eceb34a2f212c47f9f40827814e2b65bb4c357727abf162f15594ec961",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1501053
+    },
+    {
+      "file": "ParkingLower.png",
+      "sha256": "4a59900ad860748d6c1c0d8a18d82dcce9deb124d67ece372f152037d44cb557",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1517404
+    },
+    {
+      "file": "TreeDetail.png",
+      "sha256": "ef15c13066fc3786b39b920cf34865a8331f43125863de0adde19da9637a94c8",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2085051
+    },
+    {
+      "file": "WestForest.png",
+      "sha256": "6412fcf4f7326c8cf9a8c8e225485099bdada52789fb349486e16d4104acce51",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2234724
+    },
+    {
+      "file": "NortheastForest.png",
+      "sha256": "a11d8ec8910f3fe54f44a8de85c561038991cc86e5db7f9868fd788bd19501f0",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1831952
+    },
+    {
+      "file": "VehicleDetail.png",
+      "sha256": "104b5a47076e83cb0d68d2605c0046d4a90a04f65d4a39960ca60cdb535a5f99",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2058844
+    },
+    {
+      "file": "Polish_Summary.png",
+      "sha256": "06c28e6fb24a5d40f665531ca8edee599b01fd0068679ddfbfc6c073b123cbb2",
+      "dimensions": [
+        1952,
+        1252
+      ],
+      "bytes": 1835680
     }
   ],
   "performance_benchmark": false,
