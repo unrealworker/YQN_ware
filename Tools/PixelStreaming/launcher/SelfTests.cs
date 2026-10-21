@@ -29,9 +29,42 @@ namespace Ghs.PixelStreaming
         private static LauncherConfig FixtureConfig() { LauncherConfig c=Config(); c.httpPort=FreePort(); do { c.streamerPort=FreePort(); } while(c.httpPort==c.streamerPort); return c; }
         private static Dictionary<string,object> ConfigValues(LauncherConfig c) { JavaScriptSerializer json=new JavaScriptSerializer(); return json.Deserialize<Dictionary<string,object>>(json.Serialize(c)); }
         private static void EventuallyGone(int id) { Stopwatch t=Stopwatch.StartNew(); while(Alive(id) && t.ElapsedMilliseconds<4000) Thread.Sleep(40); Assert(!Alive(id),"Owned PID survived job close: "+id); }
+        private static void AssertRoundedButtonBackgrounds()
+        {
+            BindingFlags flags=BindingFlags.Instance|BindingFlags.NonPublic;
+            MethodInfo paint=typeof(RoundedButton).GetMethod("OnPaint",flags);
+            MethodInfo background=typeof(Control).GetMethod("OnPaintBackground",flags);
+            MethodInfo style=typeof(Control).GetMethod("GetStyle",flags);
+            foreach(int dpi in new[]{96,144,192})
+            foreach(System.Drawing.Color parentColor in new[]{System.Drawing.Color.White,LauncherTheme.Canvas})
+            using(Panel parent=new Panel {BackColor=parentColor})
+            using(RoundedButton button=new RoundedButton {Text="按钮",Size=new System.Drawing.Size(180*dpi/96,44*dpi/96)})
+            {
+                parent.Controls.Add(button);
+                for(int state=0;state<6;state++)
+                {
+                    button.Primary=state==1 || state==4; button.Selected=state==2 || state==5; button.Enabled=state<3;
+                    using(System.Drawing.Bitmap bitmap=new System.Drawing.Bitmap(button.Width,button.Height))
+                    {
+                        bitmap.SetResolution(dpi,dpi);
+                        using(System.Drawing.Graphics graphics=System.Drawing.Graphics.FromImage(bitmap))
+                        using(PaintEventArgs args=new PaintEventArgs(graphics,button.ClientRectangle))
+                        {
+                            graphics.Clear(System.Drawing.Color.Black);
+                            // WM_PAINT skips background painting for opaque controls. DrawToBitmap masks this defect.
+                            if(!(bool)style.Invoke(button,new object[]{ControlStyles.Opaque})) background.Invoke(button,new object[]{args});
+                            paint.Invoke(button,new object[]{args});
+                        }
+                        foreach(System.Drawing.Point corner in new[]{new System.Drawing.Point(0,0),new System.Drawing.Point(button.Width-1,0),new System.Drawing.Point(0,button.Height-1),new System.Drawing.Point(button.Width-1,button.Height-1)})
+                            Assert(bitmap.GetPixel(corner.X,corner.Y).ToArgb()==parentColor.ToArgb(),"Unpainted rounded button corner at "+dpi+" DPI, state "+state+", parent "+parentColor);
+                    }
+                }
+            }
+        }
         public static int Run(string report)
         {
             failures=0; Results.Clear(); scratch=Path.Combine(Path.GetTempPath(),"GHS launcher 测试 "+Guid.NewGuid().ToString("N")); Directory.CreateDirectory(scratch);
+            Test("GUI rounded button corners match their parent in enabled selected and disabled states at 100 150 and 200 percent DPI",AssertRoundedButtonBackgrounds);
             Test("valid existing executable accepted",delegate { Config().Validate(scratch,false); });
             Test("missing executable rejected",delegate { LauncherConfig c=Config(); c.executablePath=Path.Combine(scratch,"missing.exe"); Throws<ArgumentException>(delegate { c.Validate(scratch,false); }); });
             Test("invalid and duplicate ports rejected",delegate { LauncherConfig c=Config(); c.httpPort=0; Throws<ArgumentException>(delegate { c.Validate(scratch,false); }); c.httpPort=8888; Throws<ArgumentException>(delegate { c.Validate(scratch,false); }); });

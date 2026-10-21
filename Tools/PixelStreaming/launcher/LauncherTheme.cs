@@ -52,6 +52,12 @@ namespace Ghs.PixelStreaming
         protected override void OnMouseLeave(EventArgs e) { hovering=false; Invalidate(); base.OnMouseLeave(e); }
         protected override void OnPaint(PaintEventArgs e)
         {
+            // Button is opaque: WM_PAINT does not paint the background before this override.
+            // Cover the buffer, including the area outside the rounded outline, on every repaint.
+            Control background=Parent;
+            while(background!=null && background.BackColor.A<255) background=background.Parent;
+            using(SolidBrush backdrop=new SolidBrush(background==null?LauncherTheme.Canvas:background.BackColor))
+                e.Graphics.FillRectangle(backdrop,ClientRectangle);
             e.Graphics.SmoothingMode=SmoothingMode.AntiAlias;
             Color fill=Enabled?(Primary?LauncherTheme.Blue:(hovering?Color.FromArgb(239,244,255):BackColor)):LauncherTheme.Canvas;
             Color border=Enabled?(Destructive?LauncherTheme.Red:(Primary || Selected?LauncherTheme.Blue:LauncherTheme.Border)):LauncherTheme.Border;
