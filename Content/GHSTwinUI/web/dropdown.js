@@ -46,7 +46,9 @@ function open(button,index){
   close(false);
   let options;try{options=JSON.parse(button.dataset.dropdownOptions);}catch(e){return;}
   if(!Array.isArray(options)||!options.length)return;
-  const rect=button.getBoundingClientRect(),viewport={width:window.innerWidth,height:window.innerHeight};
+  const rawRect=button.getBoundingClientRect();
+  const rect=window.TwinViewport?window.TwinViewport.toLayoutRect(rawRect):rawRect;
+  const viewport=window.TwinViewport?window.TwinViewport.getState():{width:window.innerWidth,height:window.innerHeight};
   if(rect.bottom<=0||rect.top>=viewport.height||rect.right<=0||rect.left>=viewport.width)return;
   anchor=button;items=options;
   menu=document.createElement('div');menu.id=menuId;menu.className='filter-listbox';menu.tabIndex=-1;
@@ -55,8 +57,8 @@ function open(button,index){
   menu.style.visibility='hidden';menu.style.maxWidth=Math.max(1,viewport.width-16)+'px';
   document.body.appendChild(menu);
   const bounds=position(rect,{width:menu.offsetWidth,height:menu.scrollHeight+2},viewport);
-  // No physical-pixel or devicePixelRatio conversion: both rect and fixed CSS
-  // positions use the same viewport, including while the native drawer moves.
+  // Native design zoom is already removed from the anchor above. Do not apply
+  // devicePixelRatio here: fixed CSS positions use the same design coordinates.
   Object.assign(menu.style,{left:bounds.left+'px',top:bounds.top+'px',width:bounds.width+'px',maxHeight:bounds.maxHeight+'px',visibility:'visible'});
   placement=bounds.side;menu.dataset.placement=placement;
   button.setAttribute('aria-expanded','true');button.setAttribute('aria-controls',menuId);

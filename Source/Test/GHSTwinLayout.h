@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 
-/** Physical pixels: this HUD bypasses the project's legacy whole-screen DPI curve. */
+/** Design units: high-resolution scaling belongs to FGHSTwinViewport. */
 struct FGHSTwinLayout
 {
     FVector2D PanelPosition, PanelSize, ScenePosition, SceneSize;

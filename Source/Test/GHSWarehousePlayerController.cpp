@@ -2,6 +2,7 @@
 #include "GHSWarehouseCameraPawn.h"
 #include "GHSDockTruckHUDWidget.h"
 #include "GHSTwinHUDWidget.h"
+#include "GHSTwinViewport.h"
 #include "Engine/GameViewportClient.h"
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/PlayerInput.h"
@@ -42,9 +43,15 @@ void AGHSWarehousePlayerController::BeginPlay()
             TwinHUDWidget = CreateWidget<UGHSTwinHUDWidget>(this);
             if (TwinHUDWidget && GetWorld()->GetGameViewport())
             {
-                // Keep typography readable instead of inheriting the old HUD's global DPI shrink.
+                // The warehouse has its own 1080p design scale. The surrounding
+                // game layer already normalizes Windows DPI; cancel only its curve.
                 TwinViewportWidget = SNew(SDPIScaler)
-                    .DPIScale_Lambda([this](){return 1.f/FMath::Max(.1f,UWidgetLayoutLibrary::GetViewportScale(this));})
+                    .DPIScale_Lambda([this]()
+                    {
+                        FVector2D Pixels(1920,1080);
+                        if(GetWorld() && GetWorld()->GetGameViewport()) GetWorld()->GetGameViewport()->GetViewportSize(Pixels);
+                        return float(FGHSTwinViewport::FromPixels(Pixels).SlateScale(UWidgetLayoutLibrary::GetViewportScale(this)));
+                    })
                     [TwinHUDWidget->TakeWidget()];
                 GetWorld()->GetGameViewport()->AddViewportWidgetContent(TwinViewportWidget.ToSharedRef(),20);
             }

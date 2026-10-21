@@ -1,6 +1,56 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "../GHSTwinLayout.h"
+#include "../GHSTwinViewport.h"
 #include "Misc/AutomationTest.h"
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinDesktopScale,"GHS.TwinUI.Layout.HighResolutionUsesDesignCoordinates",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSTwinDesktopScale::RunTest(const FString&)
+{
+    const auto Desktop=FGHSTwinViewport::FromPixels(FVector2D(2560,1600));
+    TestTrue(TEXT("2560x1600 scales the approved 1080p interface by four thirds"),FMath::IsNearlyEqual(Desktop.Scale,4./3.,.0001));
+    TestTrue(TEXT("16:10 retains extra vertical space rather than stretching the HUD"),Desktop.LogicalSize.Equals(FVector2D(1920,1200),.0001));
+    const auto L=FGHSTwinLayout::Calculate(Desktop.LogicalSize);
+    TestTrue(TEXT("Sidebar occupies the same quarter of the screen"),FMath::IsNearlyEqual(Desktop.ToPixels(L.PanelSize).X,640.,.0001));
+    TestTrue(TEXT("14 unit labels no longer remain 14 physical pixels"),FMath::IsNearlyEqual(14.*Desktop.Scale,18.6666667,.0001));
+    TestEqual(TEXT("4K uses double size type and controls"),FGHSTwinViewport::FromPixels(FVector2D(3840,2160)).Scale,2.);
+    TestEqual(TEXT("Small displays preserve existing responsive rules"),FGHSTwinViewport::FromPixels(FVector2D(1366,768)).Scale,1.);
+    const double ProjectCurve=1.25;
+    for(const double PlatformDPI:{1.,1.25,1.5,2.})
+        TestTrue(TEXT("Windows DPI is normalized by the game layer and never multiplied twice"),FMath::IsNearlyEqual(PlatformDPI*(ProjectCurve/PlatformDPI)*Desktop.SlateScale(ProjectCurve),Desktop.Scale,.0001));
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinInitialGeometry,"GHS.TwinUI.Layout.InitialFrameWaitsForActualViewportGeometry",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSTwinInitialGeometry::RunTest(const FString&)
+{
+    const auto View=FGHSTwinViewport::FromPixels(FVector2D(2560,1600));
+    TestFalse(TEXT("Temporary Slate startup geometry cannot frame a 2560x1600 scene"),View.MatchesGeometry(FVector2D(383.616,239.760)));
+    TestFalse(TEXT("A stale 1080p allocation cannot frame the 16:10 viewport"),View.MatchesGeometry(FVector2D(1920,1080)));
+    TestTrue(TEXT("The actual 1920x1200 design allocation is ready immediately"),View.MatchesGeometry(FVector2D(1920,1200)));
+    TestTrue(TEXT("Subpixel layout rounding does not block the first frame"),View.MatchesGeometry(FVector2D(1919.875,1200.125)));
+    const auto Fractional=FGHSTwinViewport::FromPixels(FVector2D(2501,1563));
+    TestTrue(TEXT("Noninteger design scales settle without a fixed timer"),Fractional.MatchesGeometry(Fractional.LogicalSize));
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinViewportCoordinates,"GHS.TwinUI.Layout.ProjectionInputAndSearchShareOneCoordinateSpace",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSTwinViewportCoordinates::RunTest(const FString&)
+{
+    for(FVector2D Pixels:{FVector2D(2560,1600),FVector2D(2501,1563),FVector2D(3840,2160),FVector2D(1366,768)})
+    {
+        const auto View=FGHSTwinViewport::FromPixels(Pixels);
+        const auto L=FGHSTwinLayout::Calculate(View.LogicalSize);
+        const FVector2D ProjectedPixel(Pixels.X*.42,Pixels.Y*.53);
+        const FVector2D Label=View.ToLogical(ProjectedPixel)-FVector2D(118,70);
+        const FVector2D MousePixel=View.ToPixels(Label+FVector2D(118,21));
+        TestTrue(TEXT("Physical mouse hits the label positioned from a world projection"),FGHSTwinSceneChrome::Contains(View.ToLogical(MousePixel),Label,FVector2D(236,42)));
+        TestTrue(TEXT("Scene trace retains the exact physical mouse position"),View.ToPixels(View.ToLogical(MousePixel)).Equals(MousePixel,.0001));
+        TestFalse(TEXT("Physical sidebar clicks stay outside scene hit region"),L.IsScenePoint(View.ToLogical(View.ToPixels(L.PanelPosition+L.PanelSize*.5))));
+        const FGHSTwinPanelMotion Motion;
+        const FVector2D Search=Motion.SceneSearchPosition(View.LogicalSize);
+        const FVector2D PlayerPosition(Search.X/View.LogicalSize.X*Pixels.X,Search.Y/View.LogicalSize.Y*Pixels.Y);
+        TestTrue(TEXT("Search rect and viewport normalized on the player match the native physical position"),PlayerPosition.Equals(View.ToPixels(Search),.0001));
+        TestTrue(TEXT("Search keeps the scaled 24 unit margin from the panel"),FMath::IsNearlyEqual(View.ToPixels(L.PanelPosition).X-View.ToPixels(Search+FVector2D(360,0)).X,24.*View.Scale,.0001));
+    }
+    return true;
+}
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinAdaptiveLayout, "GHS.TwinUI.Layout.PreservesSceneAndReadablePanel", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FGHSTwinAdaptiveLayout::RunTest(const FString& Parameters)
 {

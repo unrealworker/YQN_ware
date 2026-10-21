@@ -26,14 +26,15 @@ function boot({reducedMotion=true,search=""}={}){
     return el;
   }
   const element=id=>elements[id]||(elements[id]=node('DIV',id));
-  const document={getElementById:element,documentElement:{scrollWidth:480,clientWidth:480,clientHeight:1016},images:[],activeElement:null,querySelectorAll(){return[]},querySelector(){return null},createElement:tag=>node(tag),dispatchEvent(event){if(listeners[event.type])listeners[event.type](event);},addEventListener(name,handler){listen(handlers,listeners,name,handler)}};
+  const document={getElementById:element,documentElement:{style:{},scrollWidth:480,clientWidth:480,clientHeight:1016},styleSheets:[],images:[],activeElement:null,querySelectorAll(){return[]},querySelector(){return null},createElement:tag=>node(tag),dispatchEvent(event){if(listeners[event.type])listeners[event.type](event);},addEventListener(name,handler){listen(handlers,listeners,name,handler)}};
+  document.documentElement=node('HTML');document.documentElement.clientHeight=1016;
   document.body=node('BODY');document.body.appendChild(element('main'));element('main').appendChild(element('page'));
   let queue=[],now=0,timerId=0,motionListener;
   const motion={matches:reducedMotion,addEventListener(event,fn){motionListener=fn;}};
   function advance(ms){const until=now+ms;for(;;){queue.sort((a,b)=>a.at-b.at);const next=queue[0];if(!next||next.at>until)break;queue.shift();now=next.at;next.fn();}now=until;}
   const context={location:{search},document,innerWidth:480,innerHeight:1016,console,Event:class{constructor(type,options={}){this.type=type;Object.assign(this,options)}},addEventListener(name,handler){listen(windowHandlers,windowListeners,name,handler)},performance:{now:()=>now},getComputedStyle:()=>({opacity:'1'}),matchMedia:()=>motion,requestAnimationFrame:fn=>fn(),setTimeout:(fn,delay=0)=>{const id=++timerId;queue.push({id,at:now+delay,fn});return id;},clearTimeout:id=>{queue=queue.filter(t=>t.id!==id);},setInterval(){return 1},clearInterval(){},ue:{twin:{command:json=>commands.push(JSON.parse(json))}}};
   context.window=context;context.globalThis=context;vm.createContext(context);
-  for(const file of ['model.js','dropdown.js','app.js']){const source=path.join(__dirname,'..',file);if(fs.existsSync(source))vm.runInContext(fs.readFileSync(source,'utf8'),context,{filename:file});}
+  for(const file of ['viewport.js','model.js','dropdown.js','app.js']){const source=path.join(__dirname,'..',file);if(fs.existsSync(source))vm.runInContext(fs.readFileSync(source,'utf8'),context,{filename:file});}
   return{window:context,commands,elements,listeners,windowListeners,advance,flush(){while(queue.length)advance(Math.max(...queue.map(t=>t.at))-now);},reduceMotion(){motion.matches=true;if(motionListener)motionListener(motion);},click(dataset){listeners.click({target:{closest:()=>({dataset,insidePage:true})}});},html:()=>element('page').innerHTML};
 }
 

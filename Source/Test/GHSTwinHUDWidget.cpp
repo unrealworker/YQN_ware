@@ -28,6 +28,7 @@
 #include "Brushes/SlateNoResource.h"
 #include "Widgets/Text/SlateEditableTextLayout.h"
 #include "GenericPlatform/ITextInputMethodSystem.h"
+#include "Engine/GameViewportClient.h"
 
 namespace
 {
@@ -127,9 +128,11 @@ TSharedRef<SWidget> UGHSTwinHUDWidget::RebuildWidget()
     Panel=WidgetTree->ConstructWidget<UGHSTwinBrowser>(UGHSTwinBrowser::StaticClass(),TEXT("BusinessPanel"));
     PanelSlot=Root->AddChildToCanvas(Panel);
     PanelSlot->SetPosition(FVector2D(1440,64)); PanelSlot->SetSize(FVector2D(480,1016));
+    Panel->SetVisibility(ESlateVisibility::Hidden);
     SearchBox=WidgetTree->ConstructWidget<UGHSTwinSearchInput>(UGHSTwinSearchInput::StaticClass(),TEXT("SceneSearch"));
     SearchBox->Bind(this);
     SearchSlot=Root->AddChildToCanvas(SearchBox);
+    SearchBox->SetVisibility(ESlateVisibility::Hidden);
     return Super::RebuildWidget();
 }
 void UGHSTwinHUDWidget::NativeConstruct()
@@ -170,6 +173,16 @@ void UGHSTwinHUDWidget::UpdateBrowserVisibility(bool bForce,bool bExplicitSelect
     if(bActive) PushSnapshot(bExplicitSelection,true);
     Panel->Evaluate(bActive?TEXT("window.twinSetVisibility && window.twinSetVisibility(true);"):TEXT("window.twinSetVisibility && window.twinSetVisibility(false);"));
 }
+void UGHSTwinHUDWidget::UpdateBrowserViewport(bool bForce)
+{
+    if(!Panel || !bBrowserReady) return;
+    const FVector2D Size=GetPanelVisualSize();
+    if(Size.X<=0 || Size.Y<=0 || (!bForce && Size.Equals(LastBrowserViewport,.01))) return;
+    LastBrowserViewport=Size;
+    // CEF has its own OS-DPI-sized CSS viewport. Give the page its design size
+    // so its type, hit targets and responsive breakpoints match the native HUD.
+    Panel->Evaluate(FString::Printf(TEXT("window.twinSetViewport && window.twinSetViewport(%.6f,%.6f);"),Size.X,Size.Y));
+}
 FVector2D UGHSTwinHUDWidget::GetPanelVisualPosition() const
 {
     return PanelSlot && Panel?PanelSlot->GetPosition()+Panel->GetRenderTransform().Translation:FGHSTwinLayout::Calculate(ViewSize).PanelPosition;
@@ -197,6 +210,8 @@ bool UGHSTwinHUDWidget::IsSceneSearchVisible() const
 float UGHSTwinHUDWidget::GetPanelOpacity() const { return Panel?Panel->GetRenderOpacity():1.f; }
 bool UGHSTwinHUDWidget::IsScenePoint(FVector2D Position) const
 {
+    if(bInitialLayoutPending) return false;
+    Position=Viewport.ToLogical(Position);
     if(!Inside(Position,FVector2D(0,Layout.HeaderHeight),FVector2D(ViewSize.X,ViewSize.Y-Layout.HeaderHeight))) return false;
     if(IsSceneSearchVisible() && Inside(Position,GetSceneSearchPosition(),GetSceneSearchSize())) return false;
     if(bSearchOpen && !bSearchIsRemote && IsSceneSearchVisible() && Inside(Position,SearchLayout().Position,SearchLayout().Size)) return false;
@@ -252,6 +267,7 @@ void UGHSTwinHUDWidget::MoveSearchSelection(int32 Delta)
 }
 bool UGHSTwinHUDWidget::HandleSearchWheel(FVector2D Position,double Delta)
 {
+    Position=Viewport.ToLogical(Position);
     if(!bSearchOpen || bSearchIsRemote || !IsSceneSearchVisible() || !Inside(Position,SearchLayout().Position,SearchLayout().Size)) return false;
     if(FMath::IsFinite(Delta) && !FMath::IsNearlyZero(Delta)) MoveSearchSelection(Delta>0?-3:3);
     return true;
@@ -355,6 +371,7 @@ void UGHSTwinHUDWidget::Command(const FString& Json)
     if(Action==TEXT("ready"))
     {
         bBrowserReady=true;
+        UpdateBrowserViewport(true);
         if(Panel) Panel->Evaluate(bDiagnostics?TEXT("window.twinSetDiagnostics && window.twinSetDiagnostics(true);"):TEXT("window.twinSetDiagnostics && window.twinSetDiagnostics(false);"));
         UpdateBrowserVisibility(true);
         UE_LOG(LogTemp,Display,TEXT("GHS_TWIN_BROWSER_READY"));
@@ -441,6 +458,8 @@ void UGHSTwinHUDWidget::FocusRegion(const FString& Region)
 }
 bool UGHSTwinHUDWidget::HandleChromeClick(FVector2D Position)
 {
+    if(bInitialLayoutPending) return false;
+    Position=Viewport.ToLogical(Position);
     if(IsSceneSearchVisible() && bSearchOpen && !bSearchIsRemote && Inside(Position,SearchLayout().Position,SearchLayout().Size))
     {
         const int32 Row=SearchLayout().RowAt(Position),Index=Row==INDEX_NONE?INDEX_NONE:SearchFirstVisible+Row;
@@ -470,7 +489,8 @@ bool UGHSTwinHUDWidget::HandleSceneClick(FVector2D Position)
 {
     if(HandleChromeClick(Position)) return true;
     if(!IsScenePoint(Position)) return false;
-    for(int32 I=VisibleLabels.Num()-1; I>=0; --I) if(Inside(Position,Labels[VisibleLabels[I]].Position,Labels[VisibleLabels[I]].Size))
+    const FVector2D LogicalPosition=Viewport.ToLogical(Position);
+    for(int32 I=VisibleLabels.Num()-1; I>=0; --I) if(Inside(LogicalPosition,Labels[VisibleLabels[I]].Position,Labels[VisibleLabels[I]].Size))
     {
         const auto& Label=Labels[VisibleLabels[I]];
         if(Label.bRegion) { FocusRegion(Label.Id.Mid(7)); return true; }
@@ -490,11 +510,24 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
 {
     TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_Tick);
     Super::NativeTick(Geometry,DeltaSeconds);
+    const FVector2D AllocatedSize=Geometry.GetLocalSize();
+    if(AllocatedSize.X<1 || AllocatedSize.Y<1) return;
+    FVector2D Pixels=AllocatedSize;
+    if(GetWorld() && GetWorld()->GetGameViewport()) GetWorld()->GetGameViewport()->GetViewportSize(Pixels);
+    Viewport=FGHSTwinViewport::FromPixels(Pixels);
+    // The first Slate allocation may still use its pre-viewport DPI scale. Do
+    // not frame the camera or expose that temporary layout for even one frame.
+    // This is a geometry condition, not a timer, and does not alter later resizes.
+    if(bInitialLayoutPending && !Viewport.MatchesGeometry(AllocatedSize)) return;
+    bInitialLayoutPending=false;
     // Menus use the approved 160ms fade/short slide; the drawer retains its 420ms motion.
     WarehouseMenuProgress=FMath::FInterpConstantTo(WarehouseMenuProgress,bWarehouseMenuOpen?1.f:0.f,DeltaSeconds,1.f/.16f);
     SearchMenuProgress=bSearchIsRemote?0.f:FMath::FInterpConstantTo(SearchMenuProgress,bSearchOpen?1.f:0.f,DeltaSeconds,1.f/.16f);
-    const bool bViewportChanged=!ViewSize.Equals(Geometry.GetLocalSize(),.5);
-    ViewSize=Geometry.GetLocalSize(); if(ViewSize.X<1 || ViewSize.Y<1) return;
+    const bool bViewportChanged=!ViewSize.Equals(AllocatedSize,.5);
+    ViewSize=AllocatedSize;
+    // Use the actual allocated geometry at the pixel boundary, including any
+    // fractional Slate rounding during a window resize.
+    Viewport.LogicalSize=ViewSize;
     PanelMotion.Advance(DeltaSeconds,bPanelCollapsed);
     PanelVisibilityProgress=PanelMotion.Progress;
     UpdateBrowserVisibility();
@@ -520,6 +553,7 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
     // Resizing it to zero on close causes a relayout/blank frame on the next open.
     const auto Expanded=FGHSTwinLayout::Calculate(ViewSize);
     if(PanelSlot) { PanelSlot->SetPosition(Expanded.PanelPosition); PanelSlot->SetSize(Expanded.PanelSize); }
+    UpdateBrowserViewport();
     if(Panel)
     {
         Panel->SetVisibility(PanelVisibilityProgress<=0 ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
@@ -615,6 +649,7 @@ void UGHSTwinHUDWidget::UpdateSelectedScreenBounds()
         FVector2D P;
         ++SelectionProjectionCount;
         if(!GetOwningPlayer()->ProjectWorldLocationToScreen(Center+Extent*FVector(I&1?1:-1,I&2?1:-1,I&4?1:-1),P,false)) return;
+        P=Viewport.ToLogical(P);
         SelectedScreenMin.X=FMath::Min(SelectedScreenMin.X,P.X);SelectedScreenMin.Y=FMath::Min(SelectedScreenMin.Y,P.Y);
         SelectedScreenMax.X=FMath::Max(SelectedScreenMax.X,P.X);SelectedScreenMax.Y=FMath::Max(SelectedScreenMax.Y,P.Y);
     }
@@ -629,6 +664,7 @@ void UGHSTwinHUDWidget::UpdateVisiblePOIs(float DeltaSeconds,bool bRelayout)
     const FVector2D SelectedMin=SelectedScreenMin-FVector2D(8,8),SelectedMax=SelectedScreenMax+FVector2D(8,8);
     TSet<FString> Current;
     float CursorX=0,CursorY=0;const bool bCursor=GetOwningPlayer()->GetMousePosition(CursorX,CursorY);
+    const FVector2D LogicalCursor=Viewport.ToLogical(FVector2D(CursorX,CursorY));
     const int32 Count=bRelayout?Labels.Num():PreviousVisibleLabels.Num();
     for(int32 I=0;I<Count;++I)
     {
@@ -640,6 +676,7 @@ void UGHSTwinHUDWidget::UpdateVisiblePOIs(float DeltaSeconds,bool bRelayout)
         if(!L.bGroup && !SceneData.ResolvePoint(L.Id,World)) continue;
         ++PointProjectionCount;
         FVector2D Screen;if(!GetOwningPlayer()->ProjectWorldLocationToScreen(World,Screen,false)) continue;
+        Screen=Viewport.ToLogical(Screen);
         const bool Selected=L.Id==SelectedId || L.Id==ActiveRegionId;
         const FVector2D Size=L.Size;
         FVector2D At=Screen-FVector2D(Size.X*.5,Size.Y+28);
@@ -667,7 +704,7 @@ void UGHSTwinHUDWidget::UpdateVisiblePOIs(float DeltaSeconds,bool bRelayout)
         if(FGHSTwinSceneChrome::Overlaps(At,Size,Layout)) continue;
         PreviousPositions.Add(L.Id,At);Current.Add(L.Id);
         float& Age=LabelAges.FindOrAdd(L.Id);Age+=DeltaSeconds;
-        L.Position=At;L.Anchor=Screen;L.bSelected=Selected;L.bHovered=bCursor && Inside(FVector2D(CursorX,CursorY),At,Size);L.Opacity=GHSHUDMotion::Progress(Age);
+        L.Position=At;L.Anchor=Screen;L.bSelected=Selected;L.bHovered=bCursor && Inside(LogicalCursor,At,Size);L.Opacity=GHSHUDMotion::Progress(Age);
         VisibleLabels.Add(Index);if(VisibleLabels.Num()>=Maximum) break;
     }
     for(auto It=LabelAges.CreateIterator();It;++It) if(!Current.Contains(It.Key())) {PreviousPositions.Remove(It.Key());It.RemoveCurrent();}
@@ -714,6 +751,7 @@ FString UGHSTwinHUDWidget::GetPOIReport() const
 int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,const FSlateRect& Clip,FSlateWindowElementList& Elements,int32 Layer,const FWidgetStyle& Style,bool Enabled) const
 {
     TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_Paint);
+    if(bInitialLayoutPending) return Layer;
     Layer=Super::NativePaint(Args,G,Clip,Elements,Layer,Style,Enabled);
     float DrawOpacity=1;
     auto Box=[&](FVector2D At,FVector2D Size,FLinearColor Fill,float Radius=0.f,FLinearColor Border=FLinearColor::Transparent,float BorderWidth=1.f)

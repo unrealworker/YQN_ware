@@ -4,6 +4,7 @@
 #include "Components/Widget.h"
 #include "Components/EditableTextBox.h"
 #include "GHSTwinLayout.h"
+#include "GHSTwinViewport.h"
 #include "GHSTwinSceneData.h"
 #include "GHSTwinSearchLayout.h"
 #include "GHSTwinTypography.h"
@@ -74,11 +75,15 @@ public:
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetSnapshot() const;
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool SelectObject(const FString& Id, bool bFocus = true);
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void ClearSelection();
+    /** Controller-facing positions remain physical viewport pixels, including high DPI. */
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool HandleSceneClick(FVector2D Position);
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") bool IsScenePoint(FVector2D Position) const;
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void Navigate(const FString& Page);
+    /** Layout reports use design units; GetHUDScale converts them to display pixels. */
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FVector2D GetPanelPosition() const { return Layout.PanelPosition; }
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FVector2D GetPanelSize() const { return Layout.PanelSize; }
+    UFUNCTION(BlueprintPure, Category="Warehouse Twin") FVector2D GetViewportPixelSize() const { return Viewport.PixelSize; }
+    UFUNCTION(BlueprintPure, Category="Warehouse Twin") float GetHUDScale() const { return float(Viewport.Scale); }
     UPROPERTY(BlueprintReadOnly, Category="Warehouse Twin") FString SelectedId;
     UPROPERTY(BlueprintReadOnly, Category="Warehouse Twin") bool bBrowserReady = false;
     UPROPERTY(BlueprintReadOnly, Category="Warehouse Twin") FString LastBrowserReport;
@@ -109,6 +114,7 @@ private:
     void PushSnapshot(bool bExplicitSelection=false,bool bForce=false);
     void SetPanelCollapsed(bool bCollapsed,bool bExplicitSelection=false);
     void UpdateBrowserVisibility(bool bForce=false,bool bExplicitSelection=false);
+    void UpdateBrowserViewport(bool bForce=false);
     void RebuildPOICandidates(bool bAggregate);
     void UpdateVisiblePOIs(float DeltaSeconds,bool bRelayout);
     void UpdateSelectedScreenBounds();
@@ -126,10 +132,13 @@ private:
     UPROPERTY(Transient) TObjectPtr<UCanvasPanelSlot> SearchSlot;
     FGHSTwinSceneData SceneData;
     FGHSTwinLayout Layout;
+    FGHSTwinViewport Viewport;
+    FVector2D LastBrowserViewport=FVector2D::ZeroVector;
     FVector2D ViewSize = FVector2D(1920,1080);
     double NextRefresh = 0;
     bool bPanelCollapsed = false, bShowPOIs = true, bEquipment = true, bRacks = true;
     bool bInitialViewPending = true;
+    bool bInitialLayoutPending = true;
     bool bBrowserActive=true,bDiagnostics=false;
     float PanelVisibilityProgress = 1.f;
     FGHSTwinPanelMotion PanelMotion;

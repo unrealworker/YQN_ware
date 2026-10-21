@@ -8,6 +8,11 @@
 			"Name": "Test",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "GHSDisplayBootstrap",
+			"Type": "Runtime",
+			"LoadingPhase": "PostSplashScreen"
 		}
 	],
 	"Plugins": [
