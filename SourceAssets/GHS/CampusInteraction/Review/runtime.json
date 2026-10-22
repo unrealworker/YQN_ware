@@ -15,7 +15,7 @@
     },
     {
       "name": "poi_click_half_second_and_interaction_lock",
-      "game_seconds": 0.5070214942097664
+      "game_seconds": 0.513322789222002
     },
     {
       "name": "direct_roof_click"
@@ -39,24 +39,24 @@
       "name": "traffic_motion_and_bounded_recycling",
       "before": {
         "ready": true,
-        "active": 15,
+        "active": 16,
         "capacity": 16,
         "peak_active": 16,
         "route_count": 6,
         "component_count": 4,
-        "completed": 1,
+        "completed": 0,
         "spawned": 16,
         "fixed_instances": 16,
         "collision": false
       },
       "after": {
         "ready": true,
-        "active": 13,
+        "active": 15,
         "capacity": 16,
         "peak_active": 16,
         "route_count": 6,
         "component_count": 4,
-        "completed": 4,
+        "completed": 2,
         "spawned": 17,
         "fixed_instances": 16,
         "collision": false
@@ -70,40 +70,40 @@
     {
       "name": "01_Closed_Overview",
       "path": "D:\\UEPro\\Test\\Saved\\RoofTraffic\\01_Closed_Overview.png",
-      "sha256": "b5dad3503c6eba1b3ef0ba9f3c8a9f58722446dab9e2082c59422b460016c6be"
+      "sha256": "18b11d1a99f0bd2de79d1684b079b063fb7abbdd09eba99b852300d51516822e"
     },
     {
       "name": "03_Open_Interior",
       "path": "D:\\UEPro\\Test\\Saved\\RoofTraffic\\03_Open_Interior.png",
-      "sha256": "e70716d5eb48e80a923a479cd2fee0586f42ebee6fd507f9d384728c05abed67"
+      "sha256": "8d3fe073144afcc6143d8862dbc8b14093fbdaec59c0ea717212ebc7e58d41e5"
     },
     {
       "name": "04_AGV_Located",
       "path": "D:\\UEPro\\Test\\Saved\\RoofTraffic\\04_AGV_Located.png",
-      "sha256": "07666a011a091d52ecc7492477b6d2671bb382daa9e703f5b7fea2043d6a6061"
+      "sha256": "f21469b0dd275dd97bad375e89589fc37e1fca8197932960192a634ac400d214"
     },
     {
       "name": "02_Dissolve_Midpoint",
       "path": "D:\\UEPro\\Test\\Saved\\RoofTraffic\\02_Dissolve_Midpoint.png",
-      "sha256": "0d3e80e9a7e3d0de701284e3fa73748a566205bc2b24e39b0d4e375f2d6f53ea"
+      "sha256": "264798762a519bda5cf9abde3c02aa4034bf966c188cafb7465769aea8e326df"
     },
     {
       "name": "05_Closed_2560x1600",
       "path": "D:\\UEPro\\Test\\Saved\\RoofTraffic\\05_Closed_2560x1600.png",
-      "sha256": "2e39fc02e5ce75b8154b1631f9a49dcecb987396722caff0a8e1f79c99550705"
+      "sha256": "27f68aa702888b55d6ccf99d7c642949ffac32d5982d1999b91c34920e2ea41e"
     },
     {
       "name": "06_Context_Edges",
       "path": "D:\\UEPro\\Test\\Saved\\RoofTraffic\\06_Context_Edges.png",
-      "sha256": "c945713d4bb75e46aaea645756561feac49a62f4cae4d6009feecc463b954585"
+      "sha256": "7ff3a2365e1e62f8789f9ea48307f1c4aa18325fe8863536cda7d5eeeb0599be"
     }
   ],
   "performance_benchmark": false,
-  "elapsed_seconds": 33.07799999997951,
+  "elapsed_seconds": 25.875,
   "frame_sample_ms": {
-    "median": 7.068600505590439,
-    "p95": 10.944101959466934,
-    "count": 4227,
+    "median": 9.907599538564682,
+    "p95": 16.661599278450012,
+    "count": 2260,
     "note": "Shared-machine editor/offscreen sample; not independent-session streaming benchmark"
   }
 }

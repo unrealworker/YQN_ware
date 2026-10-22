@@ -1,6 +1,6 @@
 {
   "updated": "2026-10-22",
-  "status": "approved_warehouse_poi_direct_open",
+  "status": "approved_warehouse_poi_copy_refinement",
   "source": "Saas.pen",
   "previewDirectory": "exports/current",
   "style": {
@@ -258,7 +258,17 @@
       "status": "approved_for_implementation"
     }
   ],
-  "approvedScope": "00-33 approved; main warehouse direct-open interaction updated on 2026-10-22; board 01 is interior overview",
+  "approvedScope": "00-33 approved; main warehouse POI retained with simplified subtitle and upper-left warehouse type removed on 2026-10-22; board 01 is interior overview",
+  "warehouseCopy": {
+    "poiTitle": "GHS · 主仓库",
+    "poiSubtitle": "点击查看",
+    "selectorTitle": "GHS",
+    "selectorSubtitle": "current_area_only",
+    "headerContext": "三维运营中心",
+    "menuOption": "GHS · 当前仓库",
+    "menuOptionHeight": 48,
+    "menuHeight": 176
+  },
   "warehousePOI": {
     "name": "主仓库 POI 与屋顶交互",
     "status": "approved_for_implementation",

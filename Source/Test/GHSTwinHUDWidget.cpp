@@ -216,7 +216,7 @@ bool UGHSTwinHUDWidget::IsScenePoint(FVector2D Position) const
     if(!Inside(Position,FVector2D(0,Layout.HeaderHeight),FVector2D(ViewSize.X,ViewSize.Y-Layout.HeaderHeight))) return false;
     if(IsSceneSearchVisible() && Inside(Position,GetSceneSearchPosition(),GetSceneSearchSize())) return false;
     if(bSearchOpen && !bSearchIsRemote && IsSceneSearchVisible() && Inside(Position,SearchLayout().Position,SearchLayout().Size)) return false;
-    if(bWarehouseMenuOpen && Inside(Position,FVector2D(24,Layout.HeaderHeight+110),FVector2D(320,200))) return false;
+    if(bWarehouseMenuOpen && Inside(Position,FVector2D(24,Layout.HeaderHeight+110),FVector2D(320,176))) return false;
     if(FGHSTwinSceneChrome::IsHeadingPoint(Position,Layout.HeaderHeight)) return false;
     // Input follows the visible moving panel, not the area it occupied when open.
     return PanelVisibilityProgress<=0 || !Inside(Position,GetPanelVisualPosition(),GetPanelVisualSize());
@@ -521,7 +521,7 @@ bool UGHSTwinHUDWidget::HandleChromeClick(FVector2D Position)
     { bWarehouseMenuOpen=!bWarehouseMenuOpen;SetSearchOpen(false);return true; }
     if(bWarehouseMenuOpen)
     {
-        const bool bInside=Inside(Position,FVector2D(24,Layout.HeaderHeight+110),FVector2D(320,200));
+        const bool bInside=Inside(Position,FVector2D(24,Layout.HeaderHeight+110),FVector2D(320,176));
         bWarehouseMenuOpen=false;if(bInside) return true;
     }
     if(bSearchOpen && !Inside(Position,GetSceneSearchPosition(),GetSceneSearchSize())) SetSearchOpen(false);
@@ -843,13 +843,13 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
     Box(FVector2D::ZeroVector,FVector2D(ViewSize.X,Layout.HeaderHeight),C(TEXT("172131")));
     Box(FVector2D(22,20),FVector2D(9,9),C(TEXT("356BFA")),1); Box(FVector2D(34,20),FVector2D(9,9),C(TEXT("78A3FF")),1); Box(FVector2D(22,32),FVector2D(9,9),C(TEXT("78A3FF")),1); Box(FVector2D(34,32),FVector2D(9,9),C(TEXT("356BFA")),1);
     Text(FVector2D(57,Layout.HeaderHeight/2-12),TEXT("GHS 仓储数字孪生"),17,FLinearColor::White);
-    if(ViewSize.X>850) {Text(FVector2D(300,24),TEXT("普通仓库  /  三维运营中心"),12,C(TEXT("A5B2C5"))); Text(FVector2D(ViewSize.X-310,24),TEXT("场景已连接  ·  业务演示"),12,C(TEXT("B8C5D8")));}
+    if(ViewSize.X>850) {Text(FVector2D(300,24),TEXT("三维运营中心"),12,C(TEXT("A5B2C5"))); Text(FVector2D(ViewSize.X-310,24),TEXT("场景已连接  ·  业务演示"),12,C(TEXT("B8C5D8")));}
     Text(FVector2D(ViewSize.X-102,Layout.HeaderHeight/2-9),bPanelCollapsed?TEXT("展开面板"):TEXT("收起面板"),12,FLinearColor::White);
     Box(FVector2D(24,Layout.HeaderHeight+16),FVector2D(256,84),FLinearColor::White,12,C(TEXT("DFE7F2")));
     Text(FVector2D(48,Layout.HeaderHeight+28),TEXT("GHS"),22,C(TEXT("25364B")));
     FString Area=SceneData.LocationLabel(SelectedId);
     if(Area.IsEmpty()) Area=ActiveRegionId==TEXT("REGION:racks")?TEXT("货架区域"):ActiveRegionId==TEXT("REGION:floor")?TEXT("地堆区域"):TEXT("全部区域");
-    Text(FVector2D(48,Layout.HeaderHeight+65),TEXT("普通仓库 · ")+Area.Left(12),11,C(TEXT("5B6C82")));
+    Text(FVector2D(48,Layout.HeaderHeight+65),Area.Left(12),11,C(TEXT("5B6C82")));
     Line(FVector2D(252,Layout.HeaderHeight+53),FVector2D(257,Layout.HeaderHeight+58),C(TEXT("5B6C82")),1.5);
     Line(FVector2D(257,Layout.HeaderHeight+58),FVector2D(262,Layout.HeaderHeight+53),C(TEXT("5B6C82")),1.5);
     if(IsInteriorAvailable() && FGHSTwinSceneChrome::FiltersVisible(Layout))
@@ -882,9 +882,9 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
         WarehouseLine({0,7},{11,1});WarehouseLine({11,1},{22,7});WarehouseLine({2,7},{2,21});WarehouseLine({20,7},{20,21});WarehouseLine({2,21},{20,21});
         WarehouseLine({7,21},{7,11});WarehouseLine({7,11},{15,11});WarehouseLine({15,11},{15,21});WarehouseLine({7,15},{15,15});
         const auto Title=GHSTwinTypography::Measure(TEXT("GHS · 主仓库"),Font(16));
-        const auto Subtitle=GHSTwinTypography::Measure(TEXT("普通仓库 · 点击查看"),Font(12));
+        const auto Subtitle=GHSTwinTypography::Measure(TEXT("点击查看"),Font(12));
         Text(At+FVector2D(62,10+Title.CenteredOriginY(24)),TEXT("GHS · 主仓库"),16,C(TEXT("25364B")));
-        Text(At+FVector2D(62,36+Subtitle.CenteredOriginY(18)),TEXT("普通仓库 · 点击查看"),12,C(TEXT("5B6C82")));
+        Text(At+FVector2D(62,36+Subtitle.CenteredOriginY(18)),TEXT("点击查看"),12,C(TEXT("5B6C82")));
         Line(At+FVector2D(243,26),At+FVector2D(249,32),Blue,1.5f);Line(At+FVector2D(249,32),At+FVector2D(243,38),Blue,1.5f);
     }
     // Render stems beneath every card. A tag moved below its anchor connects
@@ -936,13 +936,12 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
     {
         DrawOpacity=WarehouseMenuProgress*WarehouseMenuProgress*(3-2*WarehouseMenuProgress);
         const FVector2D At(24,Layout.HeaderHeight+110-8*(1-DrawOpacity));
-        Box(At,FVector2D(320,200),FLinearColor::White,12,C(TEXT("DFE7F2")));
+        Box(At,FVector2D(320,176),FLinearColor::White,12,C(TEXT("DFE7F2")));
         Text(At+FVector2D(16,14),TEXT("切换仓库"),11,C(TEXT("5B6C82")));
-        Box(At+FVector2D(16,46),FVector2D(288,64),C(TEXT("EDF3FF")),12);
-        Text(At+FVector2D(32,56),TEXT("GHS · 当前仓库"),14,C(TEXT("356BFA")));
-        Text(At+FVector2D(32,84),TEXT("普通仓库"),11,C(TEXT("5B6C82")));
-        Text(At+FVector2D(16,132),TEXT("暂无其他仓库"),11,C(TEXT("5B6C82")));
-        Text(At+FVector2D(16,158),TEXT("接入后会显示在这里"),11,C(TEXT("5B6C82")));
+        Box(At+FVector2D(16,46),FVector2D(288,48),C(TEXT("EDF3FF")),12);
+        Text(At+FVector2D(32,60),TEXT("GHS · 当前仓库"),14,C(TEXT("356BFA")));
+        Text(At+FVector2D(16,116),TEXT("暂无其他仓库"),11,C(TEXT("5B6C82")));
+        Text(At+FVector2D(16,142),TEXT("接入后会显示在这里"),11,C(TEXT("5B6C82")));
     }
     if(SearchMenuProgress>0 && !bSearchIsRemote && IsSceneSearchVisible())
     {
