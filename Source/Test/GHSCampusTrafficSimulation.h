@@ -9,7 +9,11 @@
 
 namespace GHSTraffic
 {
-constexpr int Capacity=16;
+constexpr int Capacity=32;
+constexpr int KindCount=4;
+constexpr int InitialPerRoute=4;
+constexpr int MaxPerRoute=6;
+static_assert(Capacity%KindCount==0,"Each mesh kind must have a fixed number of slots");
 struct Route { double Length=0, MaxSpeed=0; };
 struct Vehicle
 {
@@ -36,15 +40,15 @@ struct Simulation
         Routes=std::move(InRoutes);RandomState=Seed ? Seed : 1;Completed=Spawned=0;
         for(int i=0;i<Capacity;++i)
         {
-            Vehicles[i]=Vehicle{};Vehicles[i].Kind=i%4;Vehicles[i].Cooldown=Random()*6;
+            Vehicles[i]=Vehicle{};Vehicles[i].Kind=i%KindCount;Vehicles[i].Cooldown=Random()*3;
         }
         if(Routes.empty())return;
-        // Two well-spaced vehicles per route make all four corridors alive on
-        // entry, with different types and positions on every session.
-        for(int i=0;i<std::min(Capacity,int(Routes.size())*2);++i)
+        // Four distributed vehicles per direction double the entry traffic.
+        // Jitter stays within each quarter so initial vehicles cannot overlap.
+        for(int i=0;i<std::min(Capacity,int(Routes.size())*InitialPerRoute);++i)
         {
             auto& v=Vehicles[i];v.Route=i%int(Routes.size());
-            v.Distance=Routes[v.Route].Length*((i/int(Routes.size()) ? .62 : .20)+Random()*.09);
+            v.Distance=Routes[v.Route].Length*((i/int(Routes.size())+.35+Random()*.3)/InitialPerRoute);
             Activate(v);
         }
     }
@@ -79,7 +83,7 @@ struct Simulation
                         ++routeCount;
                         if(other.Distance<HalfLength(other.Kind)+HalfLength(v.Kind)+4000)free=false;
                     }
-                    if(!free||routeCount>=4){v.Cooldown=1+Random()*2;continue;}
+                    if(!free||routeCount>=MaxPerRoute){v.Cooldown=1+Random()*2;continue;}
                     v.Distance=0;Activate(v);continue;
                 }
                 double allowed=Routes[v.Route].Length;
@@ -95,7 +99,7 @@ struct Simulation
                 v.Distance=std::max(v.Distance,std::min(allowed,v.Distance+v.Speed*dt));
                 if(v.Distance>=Routes[v.Route].Length-1.e-6)
                 {
-                    v.Active=false;v.Cooldown=4+Random()*12;++Completed;
+                    v.Active=false;v.Cooldown=2+Random()*6;++Completed;
                 }
             }
         }

@@ -7,7 +7,7 @@
 
 class UInstancedStaticMeshComponent;
 
-/** Decorative, non-interactive campus context: four ISMs, sixteen fixed slots. */
+/** Decorative, non-interactive campus context: four ISMs, thirty-two fixed slots. */
 UCLASS(NotBlueprintable)
 class TEST_API AGHSCampusTrafficActor : public AActor
 {

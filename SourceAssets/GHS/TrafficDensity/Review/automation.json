@@ -1,0 +1,43 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "PLUTO",
+			"instance": "71B98DA445E947953A448E92DFE5CD3B",
+			"instanceName": "PLUTO-40120",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (25H2) [10.0.26200.9711] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 5060 Laptop GPU",
+			"cPUModel": "Intel(R) Core(TM) i9-14900HX",
+			"rAMInGB": 32,
+			"renderMode": "SM5",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.10.23-00.58.41",
+	"succeeded": 1,
+	"succeededWithWarnings": 0,
+	"failed": 0,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.10912160575389862,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "BoundedLifetimeAndHeadway",
+			"fullTestPath": "GHS.Twin.Traffic.BoundedLifetimeAndHeadway",
+			"state": "Success",
+			"deviceInstance": [
+				"71B98DA445E947953A448E92DFE5CD3B"
+			],
+			"duration": 0.10912160575389862,
+			"dateTime": "0001.01.01-00.00.00",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

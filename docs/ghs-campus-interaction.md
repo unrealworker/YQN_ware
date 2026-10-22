@@ -15,7 +15,7 @@
 ## 场景与资源
 
 - `UGHSWarehouseRoofComponent` 仅在开顶过程中 Tick；运行时替换为独立 Masked 材质副本，完成/复位后恢复原材质对象。保存的屋顶天窗玻璃覆盖保留。
-- `AGHSCampusTrafficActor` 使用现有封闭蓝白卡车和同源停车场轿车/SUV；4 个 ISM、固定16实例、初始12辆。按随机间隔、速度和车型循环，单路线最多4辆，到活动路线末端回收后等待4–16秒再出现。
+- `AGHSCampusTrafficActor` 使用现有封闭蓝白卡车和同源停车场轿车/SUV；4 个 ISM、固定32实例、初始24辆（每方向4辆）。按随机间隔、速度和车型循环，单路线最多6辆，到活动路线末端回收后等待2–8秒再出现；每类8个变换使用内联数组，不增加逐帧堆分配。
 - 四条道路走廊：Glen Helen、Sycamore、I-15 两幅车道，共六个行驶方向。无碰撞、物理、导航、业务标签及逐帧射线检测；实例容量不随运行时间增长。
 - Sycamore 两方向在远端原始车道汇合之前约19米结束/进入活动路径，保留视觉道路延伸；15×3米保守卡车包络净空8.62米，不在汇合处穿车。
 - 园区外建筑使用独立材质覆盖，向现有地面色混合18%；空间遮罩保留主厂区的原有颜色。
@@ -27,9 +27,18 @@
 - 车辆：`build_traffic_assets.py`、`traffic_routes.py`、`import_traffic_assets.py`；运行路径数据位于 `Content/GHSTwinUI/data/campus-traffic-routes.json`，沿用已有打包规则。
 - 环境：`build_context_transition.py`、`apply_context_transition.py`、`validate_context_transition.py`。应用脚本核对原 Actor 变换与材质，限制变更范围。
 - 实际游戏验收：`verify_roof_traffic_runtime.py`，仅运行于自有 `-game -RenderOffscreen -TwinDiagnostics` 进程。结果与截图写入 `Saved/RoofTraffic`，不保存场景。
+- 车流增量验收：`verify_traffic_density_runtime.py`，检查实际位移、六方向、固定实例/Actor 数量、12秒常规速度样本和端点回收；结果写入 `Saved/TrafficDensity`，归档于 `SourceAssets/GHS/TrafficDensity/Review`。
 - UE 自动化包含屋顶时序/拾取轮廓/材质恢复和有界车流测试；车流离线测试覆盖一小时生命周期、车距及路线几何。
 
 多人独立像素流的性能测试仍按用户后续服务器任务执行。本次本机编辑器/离屏验证不代表服务器并发承载量。
+
+## 2026-10-23 车流增量验收
+
+- UE5.4 `TestEditor` 与 `TestGame Win64 Development` 编译通过（MSVC14.38.33130）。`GHS.Twin.Traffic.BoundedLifetimeAndHeadway` 自动化1项通过、0失败、0警告；一小时独立模拟核对初始24辆、六方向覆盖、32辆池上限、每方向上限、所有车对头距与端点回收。
+- 实际离屏游戏4项检查通过：4个ISM各8实例，六方向均有车，无碰撞；12秒常规速度样本为27–30辆，平均29.25辆。端点回收前后实例保持32、Actor保持383，累计完成5→6、生成34→35，证明回收复用没有数量增长。
+- 常规速度阶段采集1,390个本机离屏Slate帧间隔，中位数8.60ms、P95为9.43ms。此数据包含当前场景和UI执行环境，不是车流GPU独立耗时，也不是服务器“每人独立”像素流基准；回收加速段排除在该样本之外，不能据此保证所有设备都不卡顿。
+- 106台场景设备、56个充电设施身份保留，交通车辆仍不进入业务标签；目标地图SHA256保持 `d7800f8796340150e397cf65fefd722af18620ccf0f1135ddb2fc8938050c0fd`。未保存场景资产；编辑器恢复原地图、370个Actor、所选对象与视角。
+- 运行报告、自动化摘要、道路全景截图与编辑器恢复报告位于 `SourceAssets/GHS/TrafficDensity/Review`。本轮仅增加车流，图层/库容交互与道路端头清理另待设计确认；未执行cook/package或像素流服务/服务器并发验证。
 
 ## 2026-10-22 验收
 

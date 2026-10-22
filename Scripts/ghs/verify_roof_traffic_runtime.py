@@ -145,7 +145,7 @@ def run():
     unreal.GameplayStatics.set_global_time_dilation(world,1.)
     yield from wait('finish_visual_dissolve',roof.is_interior_available)
     yield from restore()
-    t0=json.loads(traffic.get_traffic_report_json());assert t0['ready'] and t0['capacity']==16 and t0['fixed_instances']==16 and not t0['collision']
+    t0=json.loads(traffic.get_traffic_report_json());assert t0['ready'] and t0['capacity']==32 and t0['fixed_instances']==32 and not t0['collision']
     components=traffic.get_components_by_class(unreal.InstancedStaticMeshComponent)
     assert len(components)==4
     transforms0=[[xyz(c.get_instance_transform(i,True).translation) for i in range(c.get_instance_count())] for c in components]
@@ -158,7 +158,7 @@ def run():
     yield from wait('traffic_end_recycling',recycled,seconds=70)
     t1=json.loads(traffic.get_traffic_report_json())
     assert t1['completed']>t0['completed'] and t1['spawned']>t0['spawned']
-    assert t1['fixed_instances']==16 and t1['peak_active']<=16
+    assert t1['fixed_instances']==32 and t1['peak_active']<=32
     record('traffic_motion_and_bounded_recycling',before=t0,after=t1)
     unreal.SystemLibrary.execute_console_command(world,'r.SetRes 2560x1600w',pc)
     yield from wait('2560_viewport',lambda:tuple(pc.get_viewport_size())==(2560,1600))

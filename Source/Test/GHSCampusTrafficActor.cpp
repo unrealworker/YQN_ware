@@ -21,7 +21,7 @@ AGHSCampusTrafficActor::AGHSCampusTrafficActor()
     static ConstructorHelpers::FObjectFinder<UStaticMesh> SUV(TEXT("/Game/GHSZcoolSmartFactory/Traffic/Meshes/SM_GHSTraffic_SUV"));
     static ConstructorHelpers::FObjectFinder<UStaticMesh> BlueSedan(TEXT("/Game/GHSZcoolSmartFactory/Traffic/Meshes/SM_GHSTraffic_BlueSedan"));
     UStaticMesh* Meshes[]={Truck.Object,Sedan.Object,SUV.Object,BlueSedan.Object};
-    for(int32 Kind=0;Kind<4;++Kind)
+    for(int32 Kind=0;Kind<GHSTraffic::KindCount;++Kind)
     {
         auto* Mesh=CreateDefaultSubobject<UInstancedStaticMeshComponent>(*FString::Printf(TEXT("TrafficKind%d"),Kind));
         Mesh->SetupAttachment(RootComponent);
@@ -94,7 +94,7 @@ void AGHSCampusTrafficActor::BeginPlay()
     {
         const FBoxSphereBounds Bounds=Mesh->GetStaticMesh()->GetBounds();
         MeshOffsets.Add(FVector(Bounds.Origin.X,Bounds.Origin.Y,Bounds.Origin.Z-Bounds.BoxExtent.Z));
-        for(int32 Slot=0;Slot<GHSTraffic::Capacity/4;++Slot)
+        for(int32 Slot=0;Slot<GHSTraffic::Capacity/GHSTraffic::KindCount;++Slot)
             Mesh->AddInstance(FTransform(FQuat::Identity,FVector::ZeroVector,FVector::ZeroVector));
     }
     UpdateInstances();
@@ -116,7 +116,9 @@ FVector AGHSCampusTrafficActor::FRoute::At(double Distance) const
 
 void AGHSCampusTrafficActor::UpdateInstances()
 {
-    TArray<FTransform,TInlineAllocator<4>> Poses[4];
+    // Keep all eight transforms of each kind inline: denser traffic must not
+    // introduce per-frame array allocations after the pool has been created.
+    TArray<FTransform,TInlineAllocator<GHSTraffic::Capacity/GHSTraffic::KindCount>> Poses[GHSTraffic::KindCount];
     for(const auto& Vehicle:Simulation.Vehicles)
     {
         const auto& Route=Routes[Vehicle.Route];
@@ -128,7 +130,7 @@ void AGHSCampusTrafficActor::UpdateInstances()
         Position-=Rotation.RotateVector(MeshOffsets[Vehicle.Kind]);
         Poses[Vehicle.Kind].Add(FTransform(Rotation,Position,Vehicle.Active ? FVector::OneVector : FVector::ZeroVector));
     }
-    for(int32 Kind=0;Kind<4;++Kind)
+    for(int32 Kind=0;Kind<GHSTraffic::KindCount;++Kind)
     {
         // Stable instance indices: no component/Actor allocation, removal,
         // collision update or HISM tree rebuild occurs during traffic motion.
@@ -161,5 +163,16 @@ FString AGHSCampusTrafficActor::GetTrafficReportJson() const
     for(const auto& Mesh:VehicleMeshes)if(Mesh)Instances+=Mesh->GetInstanceCount();
     Json->SetNumberField(TEXT("fixed_instances"),Instances);
     Json->SetBoolField(TEXT("collision"),GetActorEnableCollision());
+    TArray<TSharedPtr<FJsonValue>> RouteCounts;
+    for(int32 I=0;I<Routes.Num();++I)
+    {
+        int32 Count=0;
+        for(const auto& Vehicle:Simulation.Vehicles)Count+=Vehicle.Active&&Vehicle.Route==I ? 1 : 0;
+        auto Row=MakeShared<FJsonObject>();
+        Row->SetStringField(TEXT("id"),Routes[I].Id);
+        Row->SetNumberField(TEXT("active"),Count);
+        RouteCounts.Add(MakeShared<FJsonValueObject>(Row));
+    }
+    Json->SetArrayField(TEXT("active_by_route"),RouteCounts);
     FString Text;FJsonSerializer::Serialize(Json,TJsonWriterFactory<>::Create(&Text));return Text;
 }

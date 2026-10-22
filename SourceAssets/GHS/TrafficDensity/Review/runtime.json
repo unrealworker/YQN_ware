@@ -1,0 +1,166 @@
+{
+  "success": true,
+  "checks": [
+    {
+      "name": "fixed_32_instances_six_directions",
+      "passed": true,
+      "report": {
+        "ready": true,
+        "active": 29,
+        "capacity": 32,
+        "peak_active": 29,
+        "route_count": 6,
+        "component_count": 4,
+        "completed": 0,
+        "spawned": 29,
+        "fixed_instances": 32,
+        "collision": false,
+        "active_by_route": [
+          {
+            "id": "glen_forward",
+            "active": 5
+          },
+          {
+            "id": "glen_reverse",
+            "active": 5
+          },
+          {
+            "id": "sycamore_south_forward",
+            "active": 4
+          },
+          {
+            "id": "sycamore_north_forward",
+            "active": 5
+          },
+          {
+            "id": "i15_0_forward",
+            "active": 5
+          },
+          {
+            "id": "i15_1_forward",
+            "active": 5
+          }
+        ]
+      }
+    },
+    {
+      "name": "motion_and_denser_population",
+      "passed": true,
+      "active_samples": [
+        30,
+        30,
+        30,
+        30,
+        29,
+        30,
+        28,
+        27,
+        29,
+        29,
+        30,
+        29
+      ],
+      "average": 29.25
+    },
+    {
+      "name": "endpoint_recycling_without_actor_or_instance_growth",
+      "passed": true,
+      "before": {
+        "ready": true,
+        "active": 29,
+        "capacity": 32,
+        "peak_active": 30,
+        "route_count": 6,
+        "component_count": 4,
+        "completed": 5,
+        "spawned": 34,
+        "fixed_instances": 32,
+        "collision": false,
+        "active_by_route": [
+          {
+            "id": "glen_forward",
+            "active": 5
+          },
+          {
+            "id": "glen_reverse",
+            "active": 5
+          },
+          {
+            "id": "sycamore_south_forward",
+            "active": 4
+          },
+          {
+            "id": "sycamore_north_forward",
+            "active": 5
+          },
+          {
+            "id": "i15_0_forward",
+            "active": 5
+          },
+          {
+            "id": "i15_1_forward",
+            "active": 5
+          }
+        ]
+      },
+      "after": {
+        "ready": true,
+        "active": 29,
+        "capacity": 32,
+        "peak_active": 30,
+        "route_count": 6,
+        "component_count": 4,
+        "completed": 6,
+        "spawned": 35,
+        "fixed_instances": 32,
+        "collision": false,
+        "active_by_route": [
+          {
+            "id": "glen_forward",
+            "active": 5
+          },
+          {
+            "id": "glen_reverse",
+            "active": 5
+          },
+          {
+            "id": "sycamore_south_forward",
+            "active": 4
+          },
+          {
+            "id": "sycamore_north_forward",
+            "active": 5
+          },
+          {
+            "id": "i15_0_forward",
+            "active": 5
+          },
+          {
+            "id": "i15_1_forward",
+            "active": 5
+          }
+        ]
+      },
+      "actor_count": 383
+    },
+    {
+      "name": "business_identity_and_map_preserved",
+      "passed": true,
+      "equipment": 106,
+      "facilities": 56,
+      "map_sha256": "d7800f8796340150e397cf65fefd722af18620ccf0f1135ddb2fc8938050c0fd"
+    }
+  ],
+  "captures": [
+    "01-traffic-overview.png",
+    "02-traffic-corridors.png"
+  ],
+  "assets_saved": false,
+  "elapsed_seconds": 16.655999999959022,
+  "ordinary_speed_frame_sample_ms": {
+    "count": 1390,
+    "median": 8.600600063800812,
+    "p95": 9.426798671483994,
+    "note": "Local offscreen Slate sample, not GPU-only cost or independent-user Pixel Streaming benchmark"
+  }
+}
