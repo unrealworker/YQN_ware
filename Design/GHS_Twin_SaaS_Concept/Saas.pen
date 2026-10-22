@@ -43639,6 +43639,1703 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "M0wx5h",
+      "x": 4080,
+      "y": 12840,
+      "name": "33 · 主仓库 POI / 状态与交互提案",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "#F6F8FB",
+      "layout": "none",
+      "children": [
+        {
+          "type": "text",
+          "id": "IgxgQ",
+          "x": 56,
+          "y": 42,
+          "name": "提案状态",
+          "fill": "#5B6C82",
+          "content": "DESIGN PROPOSAL  /  2026.10",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 12,
+          "fontWeight": "500"
+        },
+        {
+          "type": "text",
+          "id": "ACO0A",
+          "x": 56,
+          "y": 72,
+          "name": "设计标题",
+          "fill": "#25364B",
+          "content": "先看园区，再进入主仓库",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 32,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "vdtwj",
+          "x": 56,
+          "y": 126,
+          "name": "设计说明",
+          "fill": "#5B6C82",
+          "content": "完整屋顶下只显示建筑入口；把设备信息留给内部视图。",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 16,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "UKuiU",
+          "x": 56,
+          "y": 210,
+          "name": "默认态标题",
+          "fill": "#25364B",
+          "content": "01  默认",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 16,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "Amr0X",
+          "x": 416,
+          "y": 210,
+          "name": "悬停态标题",
+          "fill": "#25364B",
+          "content": "02  悬停",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 16,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "fRPun",
+          "x": 776,
+          "y": 210,
+          "name": "展开态标题",
+          "fill": "#25364B",
+          "content": "03  点击展开",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 16,
+          "fontWeight": "600"
+        },
+        {
+          "type": "frame",
+          "id": "cwZ7S",
+          "x": 56,
+          "y": 258,
+          "name": "POI / 主仓库 / 默认",
+          "reusable": true,
+          "width": 268,
+          "height": 144,
+          "fill": "#FFFFFF00",
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "U11wlF",
+              "x": 0,
+              "y": 0,
+              "name": "标签卡片",
+              "width": 268,
+              "height": 64,
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "stroke": "#D6DFEC",
+              "strokeWidth": 1,
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#223E601A",
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 14
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "dplhG",
+                  "x": 0,
+                  "y": 0,
+                  "name": "仓库身份与状态",
+                  "width": 268,
+                  "height": 64,
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 12,
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ahiEr",
+                      "name": "建筑图标底",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "#EDF3FF",
+                      "cornerRadius": 8,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "qFwGr",
+                          "name": "主仓库图标",
+                          "width": 22,
+                          "height": 22,
+                          "icon": "warehouse",
+                          "library": "lucide",
+                          "fill": "#356BFA"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zWKYY",
+                      "name": "仓库名称与用途",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "xiv5N",
+                          "name": "主仓库名称",
+                          "fill": "#25364B",
+                          "content": "GHS · 主仓库",
+                          "fontFamily": "Noto Sans SC",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Ehyf8",
+                          "name": "主仓库说明",
+                          "fill": "#5B6C82",
+                          "content": "普通仓库 · 点击查看",
+                          "fontFamily": "Noto Sans SC",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "icon",
+                      "id": "OarH3",
+                      "name": "展开仓库卡片",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "chevron-right",
+                      "library": "lucide",
+                      "fill": "#356BFA"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "fecaE",
+              "x": 133.25,
+              "y": 64,
+              "name": "屋顶投影引线",
+              "fill": "#356BFA",
+              "width": 1.5,
+              "height": 60
+            },
+            {
+              "type": "ellipse",
+              "id": "y0rKy9",
+              "x": 119,
+              "y": 118,
+              "name": "屋顶锚点白衬",
+              "fill": "#FFFFFFC9",
+              "width": 30,
+              "height": 14,
+              "stroke": "#356BFA",
+              "strokeWidth": 1.5
+            },
+            {
+              "type": "ellipse",
+              "id": "jCnTl",
+              "x": 131,
+              "y": 121,
+              "name": "建筑定位点",
+              "fill": "#356BFA",
+              "width": 6,
+              "height": 6
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Gjygy",
+          "x": 416,
+          "y": 258,
+          "name": "POI / 主仓库 / 悬停",
+          "reusable": true,
+          "width": 268,
+          "height": 144,
+          "fill": "#FFFFFF00",
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "xawOW",
+              "x": 0,
+              "y": 0,
+              "name": "标签卡片",
+              "width": 268,
+              "height": 64,
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "stroke": "#356BFA",
+              "strokeWidth": 2,
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#223E601A",
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 14
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "GoGd7",
+                  "x": 0,
+                  "y": 0,
+                  "name": "仓库身份与状态",
+                  "width": 268,
+                  "height": 64,
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 12,
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "chMX5",
+                      "name": "建筑图标底",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "#EDF3FF",
+                      "cornerRadius": 8,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "OGVdx",
+                          "name": "主仓库图标",
+                          "width": 22,
+                          "height": 22,
+                          "icon": "warehouse",
+                          "library": "lucide",
+                          "fill": "#356BFA"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "B2UQK4",
+                      "name": "仓库名称与用途",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "zjwyt",
+                          "name": "主仓库名称",
+                          "fill": "#25364B",
+                          "content": "GHS · 主仓库",
+                          "fontFamily": "Noto Sans SC",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "KIKNk",
+                          "name": "主仓库说明",
+                          "fill": "#5B6C82",
+                          "content": "普通仓库 · 点击查看",
+                          "fontFamily": "Noto Sans SC",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "icon",
+                      "id": "fNqjM",
+                      "name": "展开仓库卡片",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "chevron-right",
+                      "library": "lucide",
+                      "fill": "#356BFA"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "wFmrY",
+              "x": 133.25,
+              "y": 64,
+              "name": "屋顶投影引线",
+              "fill": "#356BFA",
+              "width": 1.5,
+              "height": 60
+            },
+            {
+              "type": "ellipse",
+              "id": "v44cr",
+              "x": 119,
+              "y": 118,
+              "name": "屋顶锚点白衬",
+              "fill": "#FFFFFFC9",
+              "width": 30,
+              "height": 14,
+              "stroke": "#356BFA",
+              "strokeWidth": 1.5
+            },
+            {
+              "type": "ellipse",
+              "id": "w3ZZzY",
+              "x": 131,
+              "y": 121,
+              "name": "建筑定位点",
+              "fill": "#356BFA",
+              "width": 6,
+              "height": 6
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "nkhot",
+          "x": 776,
+          "y": 258,
+          "name": "POI / 主仓库 / 展开",
+          "reusable": true,
+          "width": 320,
+          "height": 262,
+          "fill": "#FFFFFF00",
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "rkiO3",
+              "x": 0,
+              "y": 0,
+              "name": "标签卡片",
+              "width": 320,
+              "height": 182,
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "stroke": "#356BFA",
+              "strokeWidth": 1,
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#223E601A",
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 14
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Nl5cQ",
+                  "x": 0,
+                  "y": 0,
+                  "name": "仓库身份与状态",
+                  "width": 320,
+                  "height": 64,
+                  "fill": "#356BFA",
+                  "cornerRadius": [
+                    12,
+                    12,
+                    0,
+                    0
+                  ],
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "FpKos",
+                      "name": "建筑图标底",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "#FFFFFF24",
+                      "cornerRadius": 8,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "H0YH69",
+                          "name": "主仓库图标",
+                          "width": 22,
+                          "height": 22,
+                          "icon": "warehouse",
+                          "library": "lucide",
+                          "fill": "#FFFFFF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "v0BRQJ",
+                      "name": "仓库名称与用途",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "yH7Ec",
+                          "name": "主仓库名称",
+                          "fill": "#FFFFFF",
+                          "content": "GHS · 主仓库",
+                          "fontFamily": "Noto Sans SC",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "o1cqR",
+                          "name": "主仓库说明",
+                          "fill": "#E5EDFF",
+                          "content": "普通仓库 · 园区建筑",
+                          "fontFamily": "Noto Sans SC",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "icon",
+                      "id": "R2njn",
+                      "name": "收起仓库卡片",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "x",
+                      "library": "lucide",
+                      "fill": "#FFFFFF"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "PbmnE",
+                  "x": 20,
+                  "y": 83,
+                  "name": "内部入口说明",
+                  "fill": "#5B6C82",
+                  "content": "收起屋顶，查看仓内设备与货位。",
+                  "fontFamily": "Noto Sans SC",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "K4Chdh",
+                  "x": 20,
+                  "y": 122,
+                  "name": "查看内部按钮",
+                  "width": 280,
+                  "height": 40,
+                  "fill": "#356BFA",
+                  "cornerRadius": 8,
+                  "gap": 9,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "pG3ZI",
+                      "name": "查看内部",
+                      "fill": "#FFFFFF",
+                      "content": "查看内部",
+                      "fontFamily": "Noto Sans SC",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "R98gLY",
+                      "name": "进入内部箭头",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "arrow-up-right",
+                      "library": "lucide",
+                      "fill": "#FFFFFF"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "HSObF",
+              "x": 159.25,
+              "y": 182,
+              "name": "屋顶投影引线",
+              "fill": "#356BFA",
+              "width": 1.5,
+              "height": 60
+            },
+            {
+              "type": "ellipse",
+              "id": "XTmAf",
+              "x": 145,
+              "y": 236,
+              "name": "屋顶锚点白衬",
+              "fill": "#FFFFFFC9",
+              "width": 30,
+              "height": 14,
+              "stroke": "#356BFA",
+              "strokeWidth": 1.5
+            },
+            {
+              "type": "ellipse",
+              "id": "z5PfX7",
+              "x": 157,
+              "y": 239,
+              "name": "建筑定位点",
+              "fill": "#356BFA",
+              "width": 6,
+              "height": 6
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "KCMXl",
+          "x": 56,
+          "y": 432,
+          "name": "默认行为",
+          "fill": "#5B6C82",
+          "content": "唯一建筑标签 · 不显示设备 POI",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "RGpdO",
+          "x": 416,
+          "y": 432,
+          "name": "悬停行为",
+          "fill": "#5B6C82",
+          "content": "蓝边加深 · 不移动镜头、不展开屋顶",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "gG7Ey",
+          "x": 776,
+          "y": 546,
+          "name": "展开行为",
+          "fill": "#5B6C82",
+          "content": "× 只收起卡片；“查看内部”切换视图",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "cnSpG",
+          "x": 1208,
+          "y": 210,
+          "name": "视觉规范标题",
+          "fill": "#25364B",
+          "content": "延续现有界面，增加建筑层级",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 20,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "O6HVCo",
+          "x": 1208,
+          "y": 260,
+          "name": "规范项 尺寸",
+          "fill": "#5B6C82",
+          "content": "尺寸",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "vWGdz",
+          "x": 1280,
+          "y": 260,
+          "name": "规范值 尺寸",
+          "fill": "#25364B",
+          "content": "默认 268 × 64；展开 320 × 182",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "LLYqq",
+          "x": 1208,
+          "y": 302,
+          "name": "规范项 颜色",
+          "fill": "#5B6C82",
+          "content": "颜色",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "sqRFp",
+          "x": 1280,
+          "y": 302,
+          "name": "规范值 颜色",
+          "fill": "#25364B",
+          "content": "白色卡片 / 深蓝文字 / #356BFA",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "N3His",
+          "x": 1208,
+          "y": 344,
+          "name": "规范项 排版",
+          "fill": "#5B6C82",
+          "content": "排版",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "kRIQ4",
+          "x": 1280,
+          "y": 344,
+          "name": "规范值 排版",
+          "fill": "#25364B",
+          "content": "名称 16 / 600；说明 12；正文 14",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "m6k3d",
+          "x": 1208,
+          "y": 386,
+          "name": "规范项 指向",
+          "fill": "#5B6C82",
+          "content": "指向",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "KSqq3",
+          "x": 1280,
+          "y": 386,
+          "name": "规范值 指向",
+          "fill": "#25364B",
+          "content": "1.5px 蓝线落在屋顶中央，6px 实心点",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "Q2irXD",
+          "x": 1208,
+          "y": 428,
+          "name": "规范项 固定",
+          "fill": "#5B6C82",
+          "content": "固定",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "G7vOc",
+          "x": 1280,
+          "y": 428,
+          "name": "规范值 固定",
+          "fill": "#25364B",
+          "content": "屏幕尺寸固定，随镜头只更新锚点",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "CfE1X",
+          "x": 1208,
+          "y": 470,
+          "name": "规范项 边界",
+          "fill": "#5B6C82",
+          "content": "边界",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "ECGoQ",
+          "x": 1280,
+          "y": 470,
+          "name": "规范值 边界",
+          "fill": "#25364B",
+          "content": "标签避让搜索与侧栏，不穿过面板",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "rectangle",
+          "id": "NxhHY",
+          "x": 56,
+          "y": 608,
+          "name": "交互分隔",
+          "fill": "#DDE5EF",
+          "width": 1808,
+          "height": 1
+        },
+        {
+          "type": "text",
+          "id": "XHlGn",
+          "x": 56,
+          "y": 640,
+          "name": "交互提案标题",
+          "fill": "#25364B",
+          "content": "进入与返回的四个状态",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 22,
+          "fontWeight": "600"
+        },
+        {
+          "type": "icon",
+          "id": "FPjFs",
+          "x": 56,
+          "y": 706,
+          "name": "流程图标 0",
+          "width": 28,
+          "height": 28,
+          "icon": "warehouse",
+          "library": "lucide",
+          "fill": "#356BFA"
+        },
+        {
+          "type": "text",
+          "id": "djN49",
+          "x": 56,
+          "y": 752,
+          "name": "流程名称 0",
+          "fill": "#25364B",
+          "content": "园区总览",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 18,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "fDvW0",
+          "x": 56,
+          "y": 790,
+          "name": "流程说明 0",
+          "fill": "#5B6C82",
+          "content": "屋顶显示；只有主仓库 POI",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "icon",
+          "id": "r2vA1q",
+          "x": 446,
+          "y": 748,
+          "name": "流程箭头 0",
+          "width": 24,
+          "height": 24,
+          "icon": "arrow-right",
+          "library": "lucide",
+          "fill": "#9AAAC0"
+        },
+        {
+          "type": "icon",
+          "id": "Z5jAPX",
+          "x": 516,
+          "y": 706,
+          "name": "流程图标 1",
+          "width": 28,
+          "height": 28,
+          "icon": "panel-top",
+          "library": "lucide",
+          "fill": "#356BFA"
+        },
+        {
+          "type": "text",
+          "id": "ha6hX",
+          "x": 516,
+          "y": 752,
+          "name": "流程名称 1",
+          "fill": "#25364B",
+          "content": "仓库卡片",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 18,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "J57dmm",
+          "x": 516,
+          "y": 790,
+          "name": "流程说明 1",
+          "fill": "#5B6C82",
+          "content": "点击标签；展开“查看内部”",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "icon",
+          "id": "v6PYt",
+          "x": 906,
+          "y": 748,
+          "name": "流程箭头 1",
+          "width": 24,
+          "height": 24,
+          "icon": "arrow-right",
+          "library": "lucide",
+          "fill": "#9AAAC0"
+        },
+        {
+          "type": "icon",
+          "id": "JR6kP",
+          "x": 976,
+          "y": 706,
+          "name": "流程图标 2",
+          "width": 28,
+          "height": 28,
+          "icon": "layers-2",
+          "library": "lucide",
+          "fill": "#356BFA"
+        },
+        {
+          "type": "text",
+          "id": "c56eU",
+          "x": 976,
+          "y": 752,
+          "name": "流程名称 2",
+          "fill": "#25364B",
+          "content": "仓库内部",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 18,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "JrDCr",
+          "x": 976,
+          "y": 790,
+          "name": "流程说明 2",
+          "fill": "#5B6C82",
+          "content": "屋顶收起；设备标签 + 返回园区入口",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "icon",
+          "id": "e25AF",
+          "x": 1366,
+          "y": 748,
+          "name": "流程箭头 2",
+          "width": 24,
+          "height": 24,
+          "icon": "arrow-right",
+          "library": "lucide",
+          "fill": "#9AAAC0"
+        },
+        {
+          "type": "icon",
+          "id": "tcYB1",
+          "x": 1436,
+          "y": 706,
+          "name": "流程图标 3",
+          "width": 28,
+          "height": 28,
+          "icon": "undo-2",
+          "library": "lucide",
+          "fill": "#356BFA"
+        },
+        {
+          "type": "text",
+          "id": "KCjZR",
+          "x": 1436,
+          "y": 752,
+          "name": "流程名称 3",
+          "fill": "#25364B",
+          "content": "返回园区",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 18,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "Wnq8h",
+          "x": 1436,
+          "y": 790,
+          "name": "流程说明 3",
+          "fill": "#5B6C82",
+          "content": "恢复屋顶；清空设备选中与标签",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "KwSdh",
+          "x": 56,
+          "y": 890,
+          "name": "隐藏联动说明",
+          "fill": "#5B6C82",
+          "content": "带屋顶时，内部模型也不响应点击。设备搜索结果使用“打开屋顶并定位”，先进入内部再显示目标。",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "Mm6o6",
+          "x": 56,
+          "y": 928,
+          "name": "全仓返回边界",
+          "fill": "#5B6C82",
+          "content": "“返回园区”负责合顶与状态复位；“全仓”保留当前视图内的镜头复位语义。",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "Y9ptzs",
+          "x": 56,
+          "y": 1005,
+          "name": "本轮设计边界",
+          "fill": "#7B8A9D",
+          "content": "本页为交互提案 · 尚未开发",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "cgOha",
+      "x": 0,
+      "y": 12840,
+      "name": "31 · 园区默认 / 唯一主仓库 POI 提案",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "#C3C8CD",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "ryWrC",
+          "x": 0,
+          "y": 64,
+          "name": "用户当前带屋顶园区截图",
+          "width": 1864,
+          "height": 1016,
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "assets/warehouse-poi/roof-campus.png",
+            "mode": "cover"
+          },
+          "layout": "none"
+        },
+        {
+          "type": "frame",
+          "id": "XGEE2",
+          "x": 0,
+          "y": 0,
+          "name": "项目深蓝顶栏",
+          "width": 1920,
+          "height": 64,
+          "fill": "#172131",
+          "layout": "none",
+          "children": [
+            {
+              "type": "icon",
+              "id": "tUipZ",
+              "x": 28,
+              "y": 21,
+              "name": "项目图标",
+              "width": 22,
+              "height": 22,
+              "icon": "layers",
+              "library": "lucide",
+              "fill": "#82AEFF"
+            },
+            {
+              "type": "text",
+              "id": "mCz71",
+              "x": 66,
+              "y": 16,
+              "name": "项目名称",
+              "fill": "#FFFFFF",
+              "content": "GHS 仓储数字孪生",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 20,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "Seu7s",
+              "x": 330,
+              "y": 24,
+              "name": "当前场景范围",
+              "fill": "#C0CBDD",
+              "content": "普通仓库  /  园区总览",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "CDbjZ",
+              "x": 1800,
+              "y": 23,
+              "name": "展开业务面板",
+              "fill": "#D5DFEF",
+              "content": "展开面板",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "id": "T8eD1h",
+          "type": "ref",
+          "ref": "Dta3T",
+          "name": "当前仓库选择器",
+          "x": 32,
+          "y": 88,
+          "descendants": {
+            "qIBQu": {
+              "content": "普通仓库 · 园区总览"
+            }
+          }
+        },
+        {
+          "id": "PEVRG",
+          "type": "ref",
+          "ref": "q7JLn",
+          "name": "仓库内搜索",
+          "x": 1412,
+          "y": 88
+        },
+        {
+          "type": "frame",
+          "id": "q1iMbm",
+          "x": 1864,
+          "y": 64,
+          "name": "业务导航与场景控制",
+          "width": 56,
+          "height": 1016,
+          "fill": "#F8FAFC",
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "faO5Y",
+              "x": 4,
+              "y": 24,
+              "name": "当前入口 总览",
+              "width": 48,
+              "height": 70,
+              "fill": "#E9EEF5",
+              "cornerRadius": 6,
+              "layout": "none"
+            },
+            {
+              "type": "icon",
+              "id": "yV25B",
+              "x": 18,
+              "y": 35,
+              "name": "layout-dashboard",
+              "width": 20,
+              "height": 20,
+              "icon": "layout-dashboard",
+              "library": "lucide",
+              "fill": "#2455CC"
+            },
+            {
+              "type": "text",
+              "id": "cUuVI",
+              "x": 16,
+              "y": 66,
+              "name": "总览",
+              "fill": "#25364B",
+              "content": "总览",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon",
+              "id": "Dnc9H",
+              "x": 18,
+              "y": 123,
+              "name": "package",
+              "width": 20,
+              "height": 20,
+              "icon": "package",
+              "library": "lucide",
+              "fill": "#5B6C82"
+            },
+            {
+              "type": "text",
+              "id": "kTz9F",
+              "x": 16,
+              "y": 154,
+              "name": "库存",
+              "fill": "#5B6C82",
+              "content": "库存",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon",
+              "id": "pgm7i",
+              "x": 18,
+              "y": 211,
+              "name": "clipboard-list",
+              "width": 20,
+              "height": 20,
+              "icon": "clipboard-list",
+              "library": "lucide",
+              "fill": "#5B6C82"
+            },
+            {
+              "type": "text",
+              "id": "Yy13r",
+              "x": 16,
+              "y": 242,
+              "name": "订单",
+              "fill": "#5B6C82",
+              "content": "订单",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon",
+              "id": "SGfOa",
+              "x": 18,
+              "y": 299,
+              "name": "boxes",
+              "width": 20,
+              "height": 20,
+              "icon": "boxes",
+              "library": "lucide",
+              "fill": "#5B6C82"
+            },
+            {
+              "type": "text",
+              "id": "LHhGh",
+              "x": 16,
+              "y": 330,
+              "name": "设备",
+              "fill": "#5B6C82",
+              "content": "设备",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon",
+              "id": "zkvaH",
+              "x": 18,
+              "y": 387,
+              "name": "triangle-alert",
+              "width": 20,
+              "height": 20,
+              "icon": "triangle-alert",
+              "library": "lucide",
+              "fill": "#5B6C82"
+            },
+            {
+              "type": "text",
+              "id": "SdJBC",
+              "x": 16,
+              "y": 418,
+              "name": "告警",
+              "fill": "#5B6C82",
+              "content": "告警",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon",
+              "id": "XqnzK",
+              "x": 18,
+              "y": 475,
+              "name": "history",
+              "width": 20,
+              "height": 20,
+              "icon": "history",
+              "library": "lucide",
+              "fill": "#5B6C82"
+            },
+            {
+              "type": "text",
+              "id": "YPvjI",
+              "x": 16,
+              "y": 506,
+              "name": "追溯",
+              "fill": "#5B6C82",
+              "content": "追溯",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon",
+              "id": "JKCHm",
+              "x": 18,
+              "y": 563,
+              "name": "sliders-horizontal",
+              "width": 20,
+              "height": 20,
+              "icon": "sliders-horizontal",
+              "library": "lucide",
+              "fill": "#5B6C82"
+            },
+            {
+              "type": "text",
+              "id": "U1ZjPS",
+              "x": 16,
+              "y": 594,
+              "name": "场景",
+              "fill": "#5B6C82",
+              "content": "场景",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "id": "wgIxZ",
+              "type": "ref",
+              "ref": "oIJE1",
+              "name": "缩放与全仓 / 合并控制",
+              "x": 0,
+              "y": 836
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "hnPBM",
+          "x": 24,
+          "y": 1040,
+          "name": "操作提示",
+          "fill": "#5B6C82",
+          "content": "左键旋转 · Shift + 左键平移 · 滚轮缩放 · 中键全仓",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "id": "q4HJ5",
+          "type": "ref",
+          "ref": "cwZ7S",
+          "name": "唯一主仓库标签",
+          "x": 754,
+          "y": 290
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "q2RKW8",
+      "x": 2040,
+      "y": 12840,
+      "name": "32 · 主仓库选中 / 查看内部提案",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "#C3C8CD",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "j76cr",
+          "x": 0,
+          "y": 64,
+          "name": "用户当前带屋顶园区截图",
+          "width": 1864,
+          "height": 1016,
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "assets/warehouse-poi/roof-campus.png",
+            "mode": "cover"
+          },
+          "layout": "none"
+        },
+        {
+          "type": "frame",
+          "id": "z4qgv1",
+          "x": 0,
+          "y": 0,
+          "name": "项目深蓝顶栏",
+          "width": 1920,
+          "height": 64,
+          "fill": "#172131",
+          "layout": "none",
+          "children": [
+            {
+              "type": "icon",
+              "id": "y0RYGn",
+              "x": 28,
+              "y": 21,
+              "name": "项目图标",
+              "width": 22,
+              "height": 22,
+              "icon": "layers",
+              "library": "lucide",
+              "fill": "#82AEFF"
+            },
+            {
+              "type": "text",
+              "id": "nAFGm",
+              "x": 66,
+              "y": 16,
+              "name": "项目名称",
+              "fill": "#FFFFFF",
+              "content": "GHS 仓储数字孪生",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 20,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "JI6Xw",
+              "x": 330,
+              "y": 24,
+              "name": "当前场景范围",
+              "fill": "#C0CBDD",
+              "content": "普通仓库  /  园区总览",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "vlTAc",
+              "x": 1800,
+              "y": 23,
+              "name": "展开业务面板",
+              "fill": "#D5DFEF",
+              "content": "展开面板",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "id": "B7nXkT",
+          "type": "ref",
+          "ref": "Dta3T",
+          "name": "当前仓库选择器",
+          "x": 32,
+          "y": 88,
+          "descendants": {
+            "qIBQu": {
+              "content": "普通仓库 · 园区总览"
+            }
+          }
+        },
+        {
+          "id": "Eka25",
+          "type": "ref",
+          "ref": "q7JLn",
+          "name": "仓库内搜索",
+          "x": 1412,
+          "y": 88
+        },
+        {
+          "type": "frame",
+          "id": "WoEU7",
+          "x": 1864,
+          "y": 64,
+          "name": "业务导航与场景控制",
+          "width": 56,
+          "height": 1016,
+          "fill": "#F8FAFC",
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "e1K0JC",
+              "x": 4,
+              "y": 24,
+              "name": "当前入口 总览",
+              "width": 48,
+              "height": 70,
+              "fill": "#E9EEF5",
+              "cornerRadius": 6,
+              "layout": "none"
+            },
+            {
+              "type": "icon",
+              "id": "D2qaF4",
+              "x": 18,
+              "y": 35,
+              "name": "layout-dashboard",
+              "width": 20,
+              "height": 20,
+              "icon": "layout-dashboard",
+              "library": "lucide",
+              "fill": "#2455CC"
+            },
+            {
+              "type": "text",
+              "id": "olXkE",
+              "x": 16,
+              "y": 66,
+              "name": "总览",
+              "fill": "#25364B",
+              "content": "总览",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon",
+              "id": "kuDAP",
+              "x": 18,
+              "y": 123,
+              "name": "package",
+              "width": 20,
+              "height": 20,
+              "icon": "package",
+              "library": "lucide",
+              "fill": "#5B6C82"
+            },
+            {
+              "type": "text",
+              "id": "Vai9E",
+              "x": 16,
+              "y": 154,
+              "name": "库存",
+              "fill": "#5B6C82",
+              "content": "库存",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon",
+              "id": "dBV66",
+              "x": 18,
+              "y": 211,
+              "name": "clipboard-list",
+              "width": 20,
+              "height": 20,
+              "icon": "clipboard-list",
+              "library": "lucide",
+              "fill": "#5B6C82"
+            },
+            {
+              "type": "text",
+              "id": "gUPcH",
+              "x": 16,
+              "y": 242,
+              "name": "订单",
+              "fill": "#5B6C82",
+              "content": "订单",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon",
+              "id": "lWgWw",
+              "x": 18,
+              "y": 299,
+              "name": "boxes",
+              "width": 20,
+              "height": 20,
+              "icon": "boxes",
+              "library": "lucide",
+              "fill": "#5B6C82"
+            },
+            {
+              "type": "text",
+              "id": "MgpVJ",
+              "x": 16,
+              "y": 330,
+              "name": "设备",
+              "fill": "#5B6C82",
+              "content": "设备",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon",
+              "id": "mNhso",
+              "x": 18,
+              "y": 387,
+              "name": "triangle-alert",
+              "width": 20,
+              "height": 20,
+              "icon": "triangle-alert",
+              "library": "lucide",
+              "fill": "#5B6C82"
+            },
+            {
+              "type": "text",
+              "id": "p6xnU",
+              "x": 16,
+              "y": 418,
+              "name": "告警",
+              "fill": "#5B6C82",
+              "content": "告警",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon",
+              "id": "Ba8je",
+              "x": 18,
+              "y": 475,
+              "name": "history",
+              "width": 20,
+              "height": 20,
+              "icon": "history",
+              "library": "lucide",
+              "fill": "#5B6C82"
+            },
+            {
+              "type": "text",
+              "id": "uy8e1",
+              "x": 16,
+              "y": 506,
+              "name": "追溯",
+              "fill": "#5B6C82",
+              "content": "追溯",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon",
+              "id": "PhlNO",
+              "x": 18,
+              "y": 563,
+              "name": "sliders-horizontal",
+              "width": 20,
+              "height": 20,
+              "icon": "sliders-horizontal",
+              "library": "lucide",
+              "fill": "#5B6C82"
+            },
+            {
+              "type": "text",
+              "id": "IbE68",
+              "x": 16,
+              "y": 594,
+              "name": "场景",
+              "fill": "#5B6C82",
+              "content": "场景",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "id": "W022e",
+              "type": "ref",
+              "ref": "oIJE1",
+              "name": "缩放与全仓 / 合并控制",
+              "x": 0,
+              "y": 836
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "xkAim",
+          "x": 24,
+          "y": 1040,
+          "name": "操作提示",
+          "fill": "#5B6C82",
+          "content": "左键旋转 · Shift + 左键平移 · 滚轮缩放 · 中键全仓",
+          "fontFamily": "Noto Sans SC",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "id": "f9bij",
+          "type": "ref",
+          "ref": "nkhot",
+          "name": "展开的主仓库标签",
+          "x": 728,
+          "y": 172
+        }
+      ]
     }
   ],
   "variables": {

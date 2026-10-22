@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-21",
-  "status": "approved_for_implementation",
+  "updated": "2026-10-22",
+  "status": "approved_base_with_pending_warehouse_poi_design",
   "source": "Saas.pen",
   "previewDirectory": "exports/current",
   "style": {
@@ -232,6 +232,47 @@
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/k2v5GZ.png"
+    },
+    {
+      "id": "cgOha",
+      "name": "31 · 园区默认 / 唯一主仓库 POI 提案",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/cgOha.png",
+      "status": "awaiting_user_review"
+    },
+    {
+      "id": "q2RKW8",
+      "name": "32 · 主仓库选中 / 查看内部提案",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/q2RKW8.png",
+      "status": "awaiting_user_review"
+    },
+    {
+      "id": "M0wx5h",
+      "name": "33 · 主仓库 POI / 状态与交互提案",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/M0wx5h.png",
+      "status": "awaiting_user_review"
     }
-  ]
+  ],
+  "approvedScope": "00-30: previously approved design; implementation status is unchanged",
+  "pendingProposal": {
+    "name": "主仓库 POI 与屋顶分层",
+    "status": "awaiting_user_review",
+    "implemented": false,
+    "spec": "warehouse-poi-design.md",
+    "artboards": [
+      "cgOha",
+      "q2RKW8",
+      "M0wx5h"
+    ],
+    "components": {
+      "default": "cwZ7S",
+      "hover": "Gjygy",
+      "expanded": "nkhot"
+    }
+  }
 }
