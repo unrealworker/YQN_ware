@@ -21,6 +21,24 @@ FOREST_AREAS = (
                            (615,-45),(550,-55),(510,-100),(410,-120)],270),
 )
 
+# User's five red boxes, registered from the 1994x1219 editor screenshot
+# codex-clipboard-dcb24e90-c035-4373-ad8e-f527d963bd42.png using four ground
+# landmarks. These are screen-selected context regions, not surveyed woods;
+# estimated boundary accuracy is +/-10 m. Keep their oblique UV quadrilaterals
+# instead of replacing them with axis-aligned bounding boxes.
+FOREST_FILL_AREAS = (
+    ('West outer woodland', [(-303.486,30.045),(-211.008,22.010),
+                             (-165.955,145.302),(-251.122,152.710)], 125),
+    ('Northwest outer woodland', [(-298.436,-254.247),(-227.010,-260.439),
+                                  (-188.940,-140.759),(-255.726,-134.963)], 96),
+    ('Gray Pine west woodland', [(-170.741,-316.104),(17.614,-332.429),
+                                 (35.187,-233.911),(-143.473,-218.415)], 170),
+    ('Gray Pine middle woodland', [(171.704,-304.043),(305.933,-315.680),
+                                   (310.033,-169.445),(186.147,-158.693)], 165),
+    ('Northeast outer woodland', [(645.319,-310.580),(775.093,-321.834),
+                                  (755.602,-232.607),(631.908,-221.873)], 140),
+)
+
 
 def _parts(shape,kind):
     if shape.is_empty:
@@ -45,8 +63,32 @@ def _grove_polygon(center,radius,phase):
     return Polygon(points).buffer(2,quad_segs=8).buffer(-2,quad_segs=8)
 
 
+def _fill_grove_lobes(outline,index):
+    """Three connected, uneven groves follow each selected area's long axis."""
+    def local(s,t):
+        weights=((1-s)*(1-t),s*(1-t),s*t,(1-s)*t)
+        return Point(*(sum(p[axis]*w for p,w in zip(outline,weights)) for axis in (0,1)))
+
+    width=(math.dist(outline[0],outline[1])+math.dist(outline[3],outline[2]))*.5
+    length=(math.dist(outline[0],outline[3])+math.dist(outline[1],outline[2]))*.5
+    short=min(width,length)
+    if max(width,length)>short*1.35:
+        # Off-axis centres leave alternating bays along the woodland edge.
+        layout=((.19,.43,.36),(.50,.61,.41),(.81,.41,.35))
+        if length>width:
+            layout=tuple((t,s,r) for s,t,r in layout)
+    else:
+        # The lower lobe links two upper clusters while leaving a shallow
+        # open bay; none of the source selection's four corners is filled.
+        layout=((.30,.32,.33),(.71,.36,.31),(.47,.72,.36))
+    centers=[(local(s,t),short*r) for s,t,r in layout]
+    grove=unary_union([_grove_polygon(point,radius,index*.791+i*1.357)
+                       for i,(point,radius) in enumerate(centers)])
+    return grove,centers
+
+
 def build_forests(api,cad,roads,occupied,scope,campus):
-    """Append two green woodland groups and return fully auditable placement.
+    """Preserve the two original woods and append five requested forest groups.
 
     api requires mesh and may provide counts/preview; no api['tree'] is needed.
     roads is the union of pavement (including the freeway), occupied should
@@ -154,6 +196,109 @@ def build_forests(api,cad,roads,occupied,scope,campus):
                            ground_polygons_uv_m=[dict(exterior=list(p.exterior.coords),
                                                        holes=[list(r.coords) for r in p.interiors]) for p in _parts(grove,'Polygon')],
                            positions=placements))
+
+    # Everything above retains the original two groups, random call sequence,
+    # crown records and ground output. Expanded masks and independent seeds
+    # apply only to the five new user-selected groups below.
+    original_tree_count=len(selected)
+    full_roads=[]
+    glen_ids={'13a3','1460','1633','149c','1673','17c8','1f42','20d4'}
+    for row in cad.get('roads',[]):
+        points=row.get('points_uv_m',[])
+        if len(points)<2:continue
+        width=14. if row['layer']=='highways' else (19. if row.get('handle') in glen_ids else 7.4)
+        full_roads.append(LineString(points).buffer(width/2,cap_style=2))
+    expanded_roads=unary_union([roads,*full_roads])
+    full_buildings=[]
+    for row in cad.get('buildings',[]):
+        rings=row.get('footprints_uv_m') or [row.get('footprint_uv_m',[])]
+        for ring in rings:
+            points=ring.get('exterior',[]) if isinstance(ring,dict) else ring
+            holes=ring.get('holes',[]) if isinstance(ring,dict) else []
+            if len(points)>=3:
+                full_buildings.append(Polygon(points,holes).buffer(0))
+    expanded_occupied=unary_union([occupied,*full_buildings])
+    expanded_excluded=unary_union([expanded_roads.buffer(8),expanded_occupied.buffer(10),
+                                   campus.buffer(8),water.buffer(18)])
+    requested=[Polygon(outline) for _,outline,_ in FOREST_FILL_AREAS]
+    # Extend a single coherent rounded ground envelope, never the public site
+    # scope used to filter roads and housing. Only emit the new exterior band:
+    # the old ground stays byte-for-byte identical and has no overlaid face.
+    hull=unary_union([scope,*[p.buffer(15,quad_segs=12) for p in requested]]).convex_hull
+    forest_scope=hull.buffer(-20,quad_segs=16).buffer(20,quad_segs=16).union(scope)
+    assert forest_scope.geom_type=='Polygon' and forest_scope.is_valid
+    assert scope.difference(forest_scope).area<1e-6
+    extra_ground=forest_scope.difference(scope)
+    assert extra_ground.intersection(scope).area<1e-6
+    emit_surface(api,extra_ground,'Ground',-.16)
+    if 'preview' in api:
+        for p in _parts(extra_ground,'Polygon'):
+            api['preview'].append(('Ground',list(p.exterior.coords)))
+
+    for fill_index,((name,outline,target),desired) in enumerate(zip(FOREST_FILL_AREAS,requested)):
+        seed=173352210+fill_index*101
+        fill_rng=random.Random(seed)
+        # Connected irregular lobes, rather than a softened rectangular tile,
+        # give every group a wavy perimeter, small bays and differing density.
+        grove,centers=_fill_grove_lobes(outline,fill_index)
+        grove=grove.intersection(desired).intersection(forest_scope.buffer(-1)).difference(expanded_excluded)
+        grove=grove.buffer(-.5,quad_segs=8).buffer(.5,quad_segs=8).intersection(grove)
+        # New soil is clipped against prior soil to avoid coplanar overlaps;
+        # all original grove faces and previous tree positions remain intact.
+        prior_ground=unary_union([Polygon(p['exterior'],p['holes'])
+                                 for g in groups for p in g['ground_polygons_uv_m']])
+        added_grove=grove.difference(prior_ground)
+        assert added_grove.is_valid and added_grove.intersection(expanded_excluded).area<1e-6
+        emit_surface(api,added_grove,'Landscape',-.12)
+        if 'preview' in api:
+            for p in _parts(added_grove,'Polygon'):
+                api['preview'].append(('Landscape',list(p.exterior.coords)))
+        xmin,ymin,xmax,ymax=grove.bounds
+        placements=[]
+        for attempt in range(target*250):
+            if len(placements)>=target:break
+            if attempt%10<7:
+                center,radius=centers[fill_rng.randrange(len(centers))]
+                q=Point(fill_rng.gauss(center.x,radius*.47),fill_rng.gauss(center.y,radius*.47))
+            else:
+                q=Point(fill_rng.uniform(xmin,xmax),fill_rng.uniform(ymin,ymax))
+            if not grove.contains(q) or not is_spaced(q):continue
+            # Larger mature crowns fill the distant red-box areas, with a
+            # smaller fringe. A very light density variation avoids rows.
+            if (math.sin(q.x*.083+fill_index)*math.cos(q.y*.077)>.72 and attempt%3):continue
+            variant=fill_rng.randrange(3)
+            edge_distance=q.distance(grove.boundary)
+            target_height=fill_rng.uniform(5.5,7.4) if edge_distance<9 else fill_rng.uniform(6.8,9.4)
+            size=target_height/(5.74,6.75,5.40)[variant]
+            shape_info=build_tree({'mesh':lambda *args:None},q.x,q.y,size,variant)
+            crown=q.buffer(shape_info['radius_m'],quad_segs=12)
+            if not grove.covers(crown):continue
+            assert expanded_roads.distance(crown)>=8-1e-6
+            assert expanded_occupied.is_empty or expanded_occupied.distance(crown)>=10-1e-6
+            assert campus.distance(crown)>=8-1e-6
+            assert water.is_empty or water.distance(crown)>=18-1e-6
+            assert forest_scope.covers(crown)
+            meta=build_tree(api,q.x,q.y,size,variant)
+            record=dict(center_uv_m=[q.x,q.y],height_m=meta['height_m'],
+                        crown_radius_m=meta['radius_m'],variant=variant,scale=size,
+                        road_canopy_clearance_m=expanded_roads.distance(crown),
+                        building_canopy_clearance_m=_finite_distance(expanded_occupied,crown),
+                        campus_canopy_clearance_m=campus.distance(crown),
+                        water_canopy_clearance_m=_finite_distance(water,crown))
+            placements.append(record);selected.append(record)
+            key=(math.floor(q.x/global_spacing),math.floor(q.y/global_spacing))
+            bins.setdefault(key,[]).append((q.x,q.y))
+        assert len(placements)==target,('Requested woodland under-filled',name,len(placements),target)
+        groups.append(dict(name=name,target_trees=target,trees=len(placements),seed=seed,
+                           reference='User red-box screenshot, 2026-10-22; +/-10m registration estimate',
+                           requested_polygon_uv_m=outline,available_area_m2=grove.area,
+                           grove_centers_uv_m=[dict(center_uv_m=[p.x,p.y],radius_m=r) for p,r in centers],
+                           planted_ground_area_m2=added_grove.area,
+                           canopy_road_clearance_min_m=min(p['road_canopy_clearance_m'] for p in placements),
+                           canopy_water_clearance_min_m=min(p['water_canopy_clearance_m'] for p in placements),
+                           ground_polygons_uv_m=[dict(exterior=list(p.exterior.coords),
+                                                       holes=[list(r.coords) for r in p.interiors]) for p in _parts(added_grove,'Polygon')],
+                           positions=placements))
     if 'counts' in api:
         api['counts']['woodland_trees']+=len(selected)
         api['counts']['woodland_groups']+=sum(g['trees']>0 for g in groups)
@@ -162,6 +307,12 @@ def build_forests(api,cad,roads,occupied,scope,campus):
     minimum=min(distances,default=None)
     assert minimum is None or minimum>=global_spacing-1e-6
     return dict(seed=173350210,total_trees=len(selected),triangles=len(selected)*320,
+                original_tree_count=original_tree_count,additional_tree_count=len(selected)-original_tree_count,
+                additional_group_count=len(FOREST_FILL_AREAS),public_site_scope_changed=False,
+                original_ground_overlap_m2=extra_ground.intersection(scope).area,
+                extended_ground_area_m2=extra_ground.area,
+                forest_scope_bounds_uv_m=list(forest_scope.bounds),
+                forest_scope_polygon_uv_m=list(forest_scope.exterior.coords),
                 minimum_tree_center_spacing_m=minimum,required_center_spacing_m=global_spacing,
                 clearance_policy_m=dict(roads=8,buildings_and_driveways=10,campus=8,water=18),
                 watercourses_avoided=[name for name,s in water_records],groups=groups,

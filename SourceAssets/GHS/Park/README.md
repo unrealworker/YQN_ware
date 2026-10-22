@@ -1,6 +1,6 @@
-# GHS 园区东北停车场与静态闭门卡车版
+# GHS 园区五处新增树林版
 
-本目录保存 2026-10-22 东北停车场及静态闭门卡车版本的布局、Blender 源模型和 FBX。**以版本 3 的 `park_manifest.json`、`site_geometry_report.json`、`cad_layout.json` 为当前数据依据**；本页统计覆盖此前版本。目标关卡是 `/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`。本轮已完成离线检查、UE 导入保存、独立进程重载及实际运行验收。
+本目录保存 2026-10-22 按用户五处红框补齐树林的布局、Blender 源模型和 FBX。**以版本 3 的 `park_manifest.json`、`site_geometry_report.json`、`cad_layout.json` 为当前数据依据**；本页统计覆盖此前版本。目标关卡是 `/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`。本轮保留原两片林带，增补五处外围树林；仅原位刷新六个环境网格。本轮六网格原位导入、独立进程保存重载及 14 项实际运行回归已通过，完成 3 张全景与 19 张细节截图；证据取自本轮新报告。
 
 ## 数据来源与配准
 
@@ -34,8 +34,8 @@ DXF 的 `$INSUNITS=4` 标称毫米，但仓库数值约 `465.14 × 137.66`、普
 | 项目 | 当前值 |
 | --- | --- |
 | 唯一网格资产 | 22：21 个环境合并网格 + 1 个闭门卡车网格 |
-| 唯一资产三角面 | 808,778；卡车资产仅计一次 |
-| 按全部实例展开的三角面 | 1,955,274；包含 27 次卡车实例，不代表每帧实际可见面数 |
+| 唯一资产三角面 | 1,033,536；卡车资产仅计一次 |
+| 按全部实例展开的三角面 | 2,180,032；包含 27 次卡车实例，不代表每帧实际可见面数 |
 | 住宅 | 338：299 栋 CAD 位置 + 39 栋 Gray Pine 卫星补房 |
 | 住宅形式 | 四种双层组合、坡屋顶及太阳能板；高度约 7.45–7.81 m |
 | 住宅车道 | 335 条连接街边，3 户只保留短入口 |
@@ -46,7 +46,7 @@ DXF 的 `$INSUNITS=4` 标称毫米，但仓库数值约 `465.14 × 137.66`、普
 | 园区小车泊位 | 112 个；西南两场 35 + 37，东北 40（含 2 个无障碍位） |
 | 小车占用 | 园区泊位 68 台，住宅车道 89 台，共 157 台 |
 | 园区展示卡车 | 52 个大车泊位、27 台闭门静态卡车，单网格 44,096 面，以 HISM 复用 |
-| 树木 | 821 棵多簇阔叶树，包含两片林带的 510 棵 |
+| 树木 | 1,517 棵多簇阔叶树，包含七组林带的 1,206 棵；原 510 + 新增 696 |
 | 低矮灌木 | 260 组，独立于树木统计 |
 | 停车场端头绿岛 | 6 处：西南两场 4 处、东北 2 处 |
 | 受检停车车辆最小道路净距 | 0.309 m；受检车辆共 184 台 |
@@ -57,13 +57,15 @@ DXF 的 `$INSUNITS=4` 标称毫米，但仓库数值约 `465.14 × 137.66`、普
 
 道路使用相切圆角、持续弧长标线和合并路面。交叉口从合并后的外边界生成路缘，不再依赖首版各段抬高来掩盖交叉路缘。跨线桥和坡道标线跟随道路高程。实际圆角半径仍受相邻线段限制，不等同于货车扫掠轨迹验算。
 
-本轮沿用已配准的 79 条 CAD 道路中心线及 `3.8 m` 道路合并圆角。西南两场的 72 个泊位、方向和模型保持一致；东北停车场按新卫星近景补齐中央双排、周边停车、2 个无障碍位及侧向通道、2 处圆头端岛与入口绿化，合计 40 个泊位。东北泊位边缘道路净距最小 `0.094 m`、绿岛道路净距最小 `0.694 m`；全园区对应最小值仍为 `0.029 m`、`0.597 m`。种植区域与道路重叠面积为 `0 m²`。排布根据现有 CAD 通道适配，不宣称车位逐位测绘一致。
+当前沿用已配准的 79 条 CAD 道路中心线及 `3.8 m` 道路合并圆角。本轮补林不修改道路、住宅、停车场、车辆或材质。西南两场的 72 个泊位、方向和模型保持一致；此前东北停车场按卫星近景补齐中央双排、周边停车、2 个无障碍位及侧向通道、2 处圆头端岛与入口绿化，合计 40 个泊位。东北泊位边缘道路净距最小 `0.094 m`、绿岛道路净距最小 `0.694 m`；全园区对应最小值仍为 `0.029 m`、`0.597 m`。种植区域与道路重叠面积为 `0 m²`。排布根据现有 CAD 通道适配，不宣称车位逐位测绘一致。
 
-车辆使用明确的引擎盖、斜前后风挡、车顶、轮胎及轮毂、轮眉、后视镜、车灯和保险杠；保守停车占地为 `4.53 × 1.854 m`。树冠改为不对称的圆润多簇轮廓，使用深、中、浅三档绿色与独立树干色，保留低模表现。左侧和右上方新增两片林带分别为 240、270 棵，是用户要求的环境补充，**不是卫星逐棵测绘**。森林生成避让 CAD 道路、住宅／车道、园区边界及 10 条水道，其中水道保留至少 `18 m` 的净距策略，实际最小树冠水道净距约 `18.603 m`。
+车辆使用明确的引擎盖、斜前后风挡、车顶、轮胎及轮毂、轮眉、后视镜、车灯和保险杠；保守停车占地为 `4.53 × 1.854 m`。树冠改为不对称的圆润多簇轮廓，使用深、中、浅三档绿色与独立树干色，保留低模表现。原左侧／右上两片林带的 240、270 棵树及地面保持。本轮按五处红框增加 696 棵：西外侧 125、西北外侧 96、Gray Pine 西段 170、Gray Pine 中段 165、东北外侧 140；七组林带合计 1,206 棵，已包含在全场 1,517 棵中。五组独立种子与实际树冠净距约束保证可重建；西北外侧按水道避让后的容量采用 96 棵。树林是用户要求的环境补充，**不是卫星逐棵测绘**，截图边界映射约 ±10 m。森林生成避让 CAD 道路、住宅／车道、园区边界及 10 条水道，策略依次为 `8 / 10 / 8 / 18 m`；实际最小树冠水道净距约 `18.404 m`。
+
+道路／住宅共用 `scope` 保持 `u=[−197,747]、v=[−217,592] m`。仅为外围森林扩展 Ground 包络至约 `u=[−318.469,789.817]、v=[−347.407,592] m`，追加地面约 `208,517.797 m²`，与原地面重叠 `0 m²`。没有扩大公共路网或住宅生成范围。唯一资源三角面预算为 `1,100,000`，当前 `1,033,536`；实例展开统计另计。
 
 `Trucks/closed_truck.blend` 从原月台长卡车派生，保留 **455 个可编辑零件**，关闭双扇后门并补齐锁杆、铰链和密封；驾驶室及加宽腰带使用深蓝。`GHS_Park_Source.blend` 中的 27 台展示卡车共用同一网格数据，UE 侧使用一个 HISM 组件，禁止业务标签、POI、碰撞和 Tick。原 52 台月台业务车辆不替换；原共享 `.blend`、`.fbx`、`.uasset` 的哈希由派生生成器逐项保护，见 `Trucks/closed_truck.json`。
 
-`scene_overrides.json` 保存用户在编辑器中对 `SM_GHSPark_Blue` 指定的 `/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt` 组件材质覆盖。后续重新生成、导入仍应保留该覆盖，不用通用生成材质把它冲掉。
+`scene_overrides.json` 与 manifest 已登记两项用户组件材质覆盖：`SM_GHSPark_Ground` 使用 `/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Landscape`，`SM_GHSPark_Blue` 使用 `/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt`。Ground 的 Actor 位置保持用户原有 `(170,240,0) cm`；本轮修改前快照与保存重载记录完全一致。局部导入保留这些覆盖与位置，不恢复成生成器的默认外观或原点。
 
 ## 坐标与资产
 
@@ -77,24 +79,24 @@ DXF 的 `$INSUNITS=4` 标称毫米，但仓库数值约 `465.14 × 137.66`、普
 
 完整步骤见 [园区扩展说明](../../../docs/ghs-park-expansion.md)。生成侧使用 Blender 5.2 / Python 3.13，`shapely==2.1.2` 安装到 `Saved/ParkRefinement/python_deps`；**UE 运行时不需要 Shapely**。
 
-顺序为 `extract_park_cad.py` → **`build_park_truck.py`** → `build_park_geometry.py` → 编辑器内 `apply_park_expansion.py` → `validate_park_expansion.py` 与截图；保存后另做 `validate_park_saved.py` 新进程重载及 `verify_park_runtime.py` 运行回归。闭门卡车生成是主场景生成的前置步骤。
+首次完整生成顺序为 `extract_park_cad.py` → **`build_park_truck.py`** → `build_park_geometry.py`。本轮复用已经验证的派生卡车，仅重跑 `build_park_geometry.py`；保存后仍需 `validate_park_expansion.py`、截图、`validate_park_saved.py` 新进程重载及 `verify_park_runtime.py` 运行回归。
 
-已有本轮离线证据：
+本轮采用 `apply_park_forest_fill.py` 局部更新：只重导入 `Ground`、`Landscape`、`Trees`、`TreesDark`、`TreesLight`、`Trunk` 六个既有网格，复用现有材质资产，逐项比对全部 Actor 的变换、材质、标签与实例数据；不销毁或重建 Actor。`apply_park_expansion.py` 保留用于首次完整部署，不是本轮增补森林的执行入口。局部导入记录并保留其他未保存资产的 dirty 状态；当前 7 个 Truck 材质的未保存编辑不由本脚本保存或重建。若目标六网格自身存在未保存编辑，则停止导入，避免覆盖。
 
-- `Saved/ParkRefinement/CAD/validation.json`：源顶点／面／线一致、DXF 哈希未变、仿射往返误差小于 `1e-9 m`。
-- `Saved/ParkRefinement/CAD/CAD_registered_uv.png`、`CAD_warehouse_alignment.png`：配准总图和局部。
-- `Saved/ParkNortheast/blender_geometry.log`：本轮 22 个唯一网格资产、808,778 面的导出记录。
-- `Trucks/closed_truck.json`：源资产哈希、423 个保留部件的顶点比对、新后门射线及派生网格检查。
-- `Saved/ParkNortheast/verification.json`：西南 72 个泊位及既有输出保持一致；东北 40 个泊位、2 个无障碍位、2 个绿岛和种植区道路避让通过。
-- `Saved/ParkNortheast/parking_independent_review.json`、`parking_plan_review.png`：本轮停车布局复核与离线平面图。
-- `site_geometry_report.json`、`park_manifest.json`：当前净距、围栏闭合与道路合并检查。
+本轮离线证据和保护范围：
 
-**2026-10-22 本轮 UE 验收通过**：22 个资产已导入并保存，27 台闭门展示卡车以 HISM 复用，7 个卡车材质槽及用户 Cobalt 覆盖校验通过。01:34:55（Asia/Shanghai）独立进程重载通过，当前关卡共 359 个 Actor；334 个原对象的变换、网格、材质、标签和实例数据保留，包含原 52 台月台业务卡车，旧 NormalWarehouse 地图哈希不变。
+- `Saved/ParkForestFill/Before`：本轮修改前的 manifest、完整几何报告与地图；不得覆盖为修改后状态。
+- `Saved/ParkForestFill/forest_fill_verification.json`：保留原 510 棵树、原林带地面及 3,572 次几何输出，五处补林确定性和避让检查。
+- `Saved/ParkForestFill/region_mapping.json`：五处用户红框的参考点配准；边界估计精度约 ±10 m，不是测绘边界。
+- `Saved/ParkForestFill/blender_geometry.log`、`park_manifest.json`、`site_geometry_report.json`：最终生成统计及几何证据，以文件实际内容为准。
+- `Saved/ParkRefinement/CAD/validation.json`、`Trucks/closed_truck.json`：沿用的 CAD 来源与卡车派生资源保护证据，不能替代本轮 UE 验收。
 
-32 项几何检查、14 项实际运行检查通过；运行回归耗时 78.781 秒，覆盖 1920×1080 / 2560×1600 构图、面板收展、AGV 选择与详情、全景复位及区域聚焦。设备与设施注册表保持 106 / 56，新园区卡车未进入业务身份或 POI。3 个全景和 13 个近景截图成功，东北停车场及卡车前后视图经过实际 UE 画面复核。
+**本轮 UE 原位应用、保存重载与实际运行验收通过。** `Saved/ParkForestFill/apply_report.json` 记录只更新六个网格、未新增 Actor，全部 359 个 Actor 的变换、材质、标签及实例快照保持。编辑器中原有 7 个 Truck 材质的未保存编辑仍然未保存，也未被本次导入修改或写盘。
 
-`Review` 已覆盖为本轮 **18 张图片（17 张截图 + 1 张拼图）**。[验收摘要](Review/acceptance.json) 记录地图、manifest 和图片哈希；本轮地图 SHA-256 为 `fe43d3b6830c5592e9c5c94043a41a9978b3dd2d010630ccb9e6533758c22b2c`。
+2026-10-22 **10:38:28（Asia/Shanghai）** 独立进程重载成功；334 个原对象保留，原 52 台月台业务卡车与 27 台静态展示卡车的身份分离，Ground／Cobalt 用户覆盖校验通过。当前地图 SHA-256 为 `e5ed08fe1960ef5b673360606bf2851b0c7dcb06bb039c212c6abde9482d5258`，与保存报告及磁盘文件一致。
 
-![本轮 UE 场景实拍](Review/Polish_Summary.png)
+实际运行回归 **14 项全部通过，耗时 58.156 秒**，覆盖 1920×1080／2560×1600 构图、面板收展、AGV 详情、复位与区域聚焦；设备／设施保持 **106 / 56**，测试没有修改保存地图。3 张全景和 19 张细节截图成功，新增 `ForestFillOverview` 与 `ForestFill1`～`ForestFill5` 六张森林视图。
 
-本轮没有重新打包 EXE，也没有进行多人像素流或稳定 60 FPS 性能测试。
+本轮 `Review` 已覆盖为 **24 张图片**，包含森林视图、运行截图与实拍拼图。[验收摘要](Review/acceptance.json) 于 2026-10-22 10:41:25（Asia/Shanghai）更新，地图／manifest 哈希与当前磁盘文件一致，并记录图片哈希、Ground／Cobalt 用户覆盖和 7 个仍未保存的 Truck 材质状态。
+
+本轮不包含重新打包 EXE，也不包含多人像素流或稳定 60 FPS 性能测试。

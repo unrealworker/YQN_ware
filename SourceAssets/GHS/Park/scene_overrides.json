@@ -1,9 +1,12 @@
 {
   "component_materials": {
+    "SM_GHSPark_Ground": [
+      "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Landscape.M_GHSPark_Landscape"
+    ],
     "SM_GHSPark_Blue": [
       "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt"
     ]
   },
-  "reason": "Preserve the user's component material override observed in the editor before the 2026-10-22 northeast parking refinement.",
-  "evidence": "Saved/ParkNortheast/Before/editor_snapshot.json"
+  "reason": "Preserve existing editor component overrides: Blue uses Cobalt; Ground uses Landscape. Ground's existing actor translation is preserved by the partial forest importer.",
+  "evidence": "Saved/ParkForestFill/Before/editor_snapshot.json"
 }

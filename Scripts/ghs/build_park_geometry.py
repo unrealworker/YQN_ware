@@ -398,7 +398,8 @@ def export():
     total=sum(a['triangles'] for a in assets)
     # Clustered forests and recognisable cars share material batches. Keep an
     # explicit combined environment budget while avoiding per-prop Actors.
-    assert total<950000, total
+    # Five requested outer woodland patches add at most 720 low-poly trees.
+    assert total<1100000, total
     minimum_house_clearance=min(h['road_clearance_m'] for h in GEOMETRY_REPORT['residential']['houses'])
     assert minimum_house_clearance>=.10, minimum_house_clearance
     manifest={'version':3,'purpose':'Full campus primary display; restrained public-road and residential context',
@@ -465,10 +466,12 @@ def preview():
     camdata=bpy.data.cameras.new('QA_Plan')
     cam=bpy.data.objects.new('QA_Plan',camdata)
     scene.collection.objects.link(cam)
-    cam.location=(270-ORIGIN[0],-(190-ORIGIN[1]),1200)
+    xmin,ymin,xmax,ymax=GEOMETRY_REPORT['forests'].get('forest_scope_bounds_uv_m',GEOMETRY_REPORT['scope_bounds'])
+    cam.location=((xmin+xmax)/2-ORIGIN[0],-((ymin+ymax)/2-ORIGIN[1]),1200)
     cam.rotation_euler=(0,0,0)
     camdata.type='ORTHO'
-    camdata.ortho_scale=1030
+    aspect=scene.render.resolution_x/scene.render.resolution_y
+    camdata.ortho_scale=max(xmax-xmin,(ymax-ymin)*aspect)*1.05
     camdata.clip_end=4000
     scene.camera=cam
     scene.render.image_settings.file_format='PNG'

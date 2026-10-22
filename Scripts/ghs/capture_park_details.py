@@ -37,6 +37,13 @@ manifest=json.loads((ROOT/'SourceAssets/GHS/Park/park_manifest.json').read_text(
 truck=next(row for row in manifest['meshes'] if row['name']=='SM_GHSPark_ClosedTruck')['instances'][0]
 views += [('DisplayTruckFront',(*truck['bay_center_uv_m'],1.8),2500,-25,truck['rotation_deg']+145),
           ('DisplayTruckRear',(*truck['bay_center_uv_m'],1.8),2500,-25,truck['rotation_deg']-35)]
+if len(site['forests']['groups'])>2:
+    views.append(('ForestFillOverview',(220,-60,0),115000,-65,-90))
+    for i,group in enumerate(site['forests']['groups'][2:],1):
+        positions=group['positions']
+        u=sum(p['center_uv_m'][0] for p in positions)/len(positions)
+        v=sum(p['center_uv_m'][1] for p in positions)/len(positions)
+        views.append(('ForestFill'+str(i),(u,v,2),22000,-58,-90))
 started=time.monotonic();task=pending=handle=None;index=0;done=busy=False
 report=dict(success=False,captures=[])
 

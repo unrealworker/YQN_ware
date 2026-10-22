@@ -6185,7 +6185,7 @@
   ],
   "hardstand_elevation_ue_cm": -4,
   "asset_count": 22,
-  "triangles_total": 808778,
+  "triangles_total": 1033536,
   "counts": {
     "fence_posts": 604,
     "fence_bars": 6306,
@@ -6193,8 +6193,8 @@
     "gate_columns": 4,
     "perimeter_gates": 2,
     "landscape_shrubs": 260,
-    "low_poly_trees": 821,
-    "clustered_broadleaf_trees": 821,
+    "low_poly_trees": 1517,
+    "clustered_broadleaf_trees": 1517,
     "tree_candidates_omitted_for_road_clearance": 5,
     "parked_cars": 157,
     "detailed_compact_suv": 84,
@@ -6214,8 +6214,8 @@
     "satellite_infill_houses": 39,
     "residential_driveways": 338,
     "residential_yard_wall_segments": 856,
-    "woodland_trees": 510,
-    "woodland_groups": 2,
+    "woodland_trees": 1206,
+    "woodland_groups": 7,
     "light_poles": 4,
     "cad_road_segments": 79,
     "context_road_segments": 75
@@ -6230,17 +6230,17 @@
         0.75,
         0.78
       ],
-      "vertices": 68,
-      "triangles": 66,
-      "source_parts": 1,
+      "vertices": 150,
+      "triangles": 146,
+      "source_parts": 2,
       "blender_bounds_m": [
         [
-          -436.3338623046875,
-          507.6661376953125
+          -557.802978515625,
+          550.4832763671875
         ],
         [
           -531.7598266601562,
-          277.2402038574219
+          407.64715576171875
         ],
         [
           -0.1599999964237213,
@@ -6249,17 +6249,20 @@
       ],
       "bounds_ue_cm": {
         "min": [
-          -43633.38623046875,
-          -27724.020385742188,
+          -55780.2978515625,
+          -40764.715576171875,
           -15.999999642372131
         ],
         "max": [
-          50766.61376953125,
+          55048.32763671875,
           53175.982666015625,
           -15.999999642372131
         ]
       },
-      "sha256": "03183d6229ffceecbbf591d7cad982d97526a1d70137115e0677ae840c89fd64"
+      "sha256": "f253b954cff0b7a43603dc7dffd684e635e014264c96fd14d43c9188758566b1",
+      "component_material_overrides": [
+        "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Landscape.M_GHSPark_Landscape"
+      ]
     },
     {
       "name": "SM_GHSPark_Hardstand",
@@ -6299,7 +6302,7 @@
           3.500000014901161
         ]
       },
-      "sha256": "5489d239c526c1f8becfeec71d934e627ca58cdc72e3dee39589da6e074070b1"
+      "sha256": "9cb23abd173881c21dd936bc476209d5d55781dea7e8d80958680f78e048239c"
     },
     {
       "name": "SM_GHSPark_ContextRoads",
@@ -6339,7 +6342,7 @@
           613.0000114440918
         ]
       },
-      "sha256": "82ddb79f63adcff28018016759ae0a9c27855381ba8d2d48c9e2e26c39285236"
+      "sha256": "27ad7fe5d9e77b24c52c092f27e055e196df68a4e0e54ca6944bec0e0df42faa"
     },
     {
       "name": "SM_GHSPark_CampusRoads",
@@ -6379,7 +6382,7 @@
           1.7999999225139618
         ]
       },
-      "sha256": "d0ed8ae75bc1ce18e33b102343c15651a05efc6bf26c1ac3adb405d12e3038dc"
+      "sha256": "2e4a5cbe1d32f83c6bc1e600201e111ca83496f33fce5efbc2200e50b98d7103"
     },
     {
       "name": "SM_GHSPark_Curbs",
@@ -6419,7 +6422,7 @@
           810.0000381469727
         ]
       },
-      "sha256": "fef9cf570c21bba3fc53b20e876bc4955da4e7f83015edef0aa40e0a17e40d16"
+      "sha256": "33c37e40daa524410414abb289491b4ef953886e35994cf58a0f786650686a5b"
     },
     {
       "name": "SM_GHSPark_Markings",
@@ -6459,7 +6462,7 @@
           615.500020980835
         ]
       },
-      "sha256": "ed303e527fb55a80c6ebe88b8acbd4f43eed67c55f189e635a8eecbde138d80d"
+      "sha256": "303d77d9b5cc45e7cecdfb60519baddb91b340dfc6af0a840aceb81c143429af"
     },
     {
       "name": "SM_GHSPark_Landscape",
@@ -6470,17 +6473,17 @@
         0.63,
         0.57
       ],
-      "vertices": 28112,
-      "triangles": 26712,
-      "source_parts": 350,
+      "vertices": 30080,
+      "triangles": 28670,
+      "source_parts": 355,
       "blender_bounds_m": [
         [
-          -443.39166259765625,
-          514.3214111328125
+          -520.72802734375,
+          528.49365234375
         ],
         [
           -531.6098022460938,
-          255.2401885986328
+          384.1476135253906
         ],
         [
           -0.11999999731779099,
@@ -6489,17 +6492,17 @@
       ],
       "bounds_ue_cm": {
         "min": [
-          -44339.166259765625,
-          -25524.01885986328,
+          -52072.802734375,
+          -38414.76135253906,
           -11.999999731779099
         ],
         "max": [
-          51432.14111328125,
+          52849.365234375,
           53160.980224609375,
           12.999999523162842
         ]
       },
-      "sha256": "e9948a2a2c3dd543618b60ac82b702800b490c67bb6301d70121dd7ba02b6b64"
+      "sha256": "4da0026ec1e9e926d48820522f6ae534923a367bb37a0619f35f913c6ba54559"
     },
     {
       "name": "SM_GHSPark_Fence",
@@ -6539,7 +6542,7 @@
           229.99999523162842
         ]
       },
-      "sha256": "7f68afb792562d90ff223c4de640253386c7339257c81b9eb2fadd3841afb97d"
+      "sha256": "fb1ccc56eabda34f00b398e89e8996304b0cd0e2cbaca6c50eb5611612dcfa60"
     },
     {
       "name": "SM_GHSPark_Buildings",
@@ -6579,7 +6582,7 @@
           748.1976509094238
         ]
       },
-      "sha256": "b527899b1d50ffbc6cb58a18d3ae3b2cb36d7c22df5ba5e988bceed9d1784baf"
+      "sha256": "eaa23487837b2821089386f6963ccf3d224f0c053add95aa47f0cfab19c3b560"
     },
     {
       "name": "SM_GHSPark_Blue",
@@ -6619,7 +6622,7 @@
           239.49999809265137
         ]
       },
-      "sha256": "e3c325c94690b1e4b2dcbe45c1c671a1f5187934f1445a2e88490f7fc0c710ba",
+      "sha256": "316ddc52ff0636baeb51889d644489d744071483ec5d6cade41d6998183a9f38",
       "component_material_overrides": [
         "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt"
       ]
@@ -6662,7 +6665,7 @@
           2.800000086426735
         ]
       },
-      "sha256": "f37f690e36199e6e7ba4bbf0d20d19c172fc81cdb66f68363ab0712b8ee5b9d5"
+      "sha256": "d2e426893f910e2ec0864cf8f79d919748476349e90d708b02a314899a44487f"
     },
     {
       "name": "SM_GHSPark_TreesDark",
@@ -6673,36 +6676,36 @@
         0.205,
         0.055
       ],
-      "vertices": 38178,
-      "triangles": 72720,
-      "source_parts": 909,
+      "vertices": 67410,
+      "triangles": 128400,
+      "source_parts": 1605,
       "blender_bounds_m": [
         [
-          -429.0189514160156,
-          501.3578186035156
+          -518.6002197265625,
+          525.3638305664062
         ],
         [
           -525.9155883789062,
-          253.81919860839844
+          380.1510314941406
         ],
         [
           0.021507855504751205,
-          6.975345134735107
+          8.205342292785645
         ]
       ],
       "bounds_ue_cm": {
         "min": [
-          -42901.89514160156,
-          -25381.919860839844,
+          -51860.02197265625,
+          -38015.10314941406,
           2.1507855504751205
         ],
         "max": [
-          50135.78186035156,
+          52536.383056640625,
           52591.558837890625,
-          697.5345134735107
+          820.5342292785645
         ]
       },
-      "sha256": "13cb0f5eac1e1fe2578342e9de086bf59f129d31018dc5f4ec4cf9143cd2781c"
+      "sha256": "516d8f4ec146caea9b7ee1b6a728e2fb1cd30cdc2e7319096d1348901d4c4d1b"
     },
     {
       "name": "SM_GHSPark_TreesLight",
@@ -6713,36 +6716,36 @@
         0.415,
         0.115
       ],
-      "vertices": 45402,
-      "triangles": 86480,
-      "source_parts": 1081,
+      "vertices": 74634,
+      "triangles": 142160,
+      "source_parts": 1777,
       "blender_bounds_m": [
         [
-          -428.41168212890625,
-          500.4273681640625
+          -518.2230224609375,
+          525.4758911132812
         ],
         [
           -525.6251831054688,
-          254.07650756835938
+          379.217529296875
         ],
         [
           0.021164540201425552,
-          7.446747779846191
+          8.76375675201416
         ]
       ],
       "bounds_ue_cm": {
         "min": [
-          -42841.168212890625,
-          -25407.650756835938,
+          -51822.30224609375,
+          -37921.7529296875,
           2.1164540201425552
         ],
         "max": [
-          50042.73681640625,
+          52547.589111328125,
           52562.518310546875,
-          744.6747779846191
+          876.375675201416
         ]
       },
-      "sha256": "a6f09dedf559651033f415042726d9c3d7fd44e7da5fff26514ffe5d791b845a"
+      "sha256": "5b09dd3068cd63888509be682348a63a2dae9ae44cb6cf982e3c40f412a0a8b8"
     },
     {
       "name": "SM_GHSPark_Trees",
@@ -6753,36 +6756,36 @@
         0.315,
         0.08
       ],
-      "vertices": 41706,
-      "triangles": 79440,
-      "source_parts": 993,
+      "vertices": 70938,
+      "triangles": 135120,
+      "source_parts": 1689,
       "blender_bounds_m": [
         [
-          -428.4269104003906,
-          501.0115661621094
+          -518.0309448242188,
+          525.7510375976562
         ],
         [
           -525.936767578125,
-          254.50918579101562
+          379.5069885253906
         ],
         [
           0.009628275409340858,
-          7.96479606628418
+          9.376124382019043
         ]
       ],
       "bounds_ue_cm": {
         "min": [
-          -42842.69104003906,
-          -25450.918579101562,
+          -51803.094482421875,
+          -37950.69885253906,
           0.9628275409340858
         ],
         "max": [
-          50101.15661621094,
+          52575.103759765625,
           52593.6767578125,
-          796.479606628418
+          937.6124382019043
         ]
       },
-      "sha256": "518b9b752f69d2ddab411041583f739ba5013a485bcfb3dfc8e8e153b4cc7690"
+      "sha256": "e45ed924c293942b2bef93b951b031dac017ce62a3512fa440dd76f935b6f31a"
     },
     {
       "name": "SM_GHSPark_Trunk",
@@ -6793,36 +6796,36 @@
         0.165,
         0.115
       ],
-      "vertices": 39408,
-      "triangles": 65680,
-      "source_parts": 3284,
+      "vertices": 72816,
+      "triangles": 121360,
+      "source_parts": 6068,
       "blender_bounds_m": [
         [
-          -427.7709045410156,
-          500.6831970214844
+          -517.22412109375,
+          524.0731811523438
         ],
         [
           -525.4063720703125,
-          252.93060302734375
+          378.4778137207031
         ],
         [
-          0.018832599744200706,
-          5.565902233123779
+          0.017741160467267036,
+          6.54647159576416
         ]
       ],
       "bounds_ue_cm": {
         "min": [
-          -42777.09045410156,
-          -25293.060302734375,
-          1.8832599744200706
+          -51722.412109375,
+          -37847.78137207031,
+          1.7741160467267036
         ],
         "max": [
-          50068.31970214844,
+          52407.318115234375,
           52540.63720703125,
-          556.5902233123779
+          654.647159576416
         ]
       },
-      "sha256": "b49c4db53e9edd7dff5a8c72c2c550e86d6b7b1f6c7bcf3b92ce9340d2a5a6ce"
+      "sha256": "0d188a0eb4021b6c9ff6d14a9a23302f9a1c4e62a7b90aa57da32addfad03843"
     },
     {
       "name": "SM_GHSPark_Rubber",
@@ -6862,7 +6865,7 @@
           66.43381118774414
         ]
       },
-      "sha256": "1a7290a77b08aa44c1c1adc436ed21fe55bd70cdd2cfdf6da7fea212a0cc2498"
+      "sha256": "5e1ec948eadf834abeed638ea24c947a09ccc14c6ccbbd18bff630687521a682"
     },
     {
       "name": "SM_GHSPark_Detail",
@@ -6902,7 +6905,7 @@
           800.0
         ]
       },
-      "sha256": "22f6e56018a1db0e01c02394f3ecee3c79b4080b134359287614b339f064b520"
+      "sha256": "fc8fcd89dd692da0f67eebd1c3ccf9086cadde95b6a0357629819bb2edab158e"
     },
     {
       "name": "SM_GHSPark_Solar",
@@ -6942,7 +6945,7 @@
           723.2565402984619
         ]
       },
-      "sha256": "8ac1c466fdaaf76f180aa9022eb7e144c446c2d512c6157070c390b6ae9a7eac"
+      "sha256": "27a2cf2a41180b43a9654b719f5faa6182d50c91fdfad810625fd20e2f6d7a8e"
     },
     {
       "name": "SM_GHSPark_VehicleLights",
@@ -6982,7 +6985,7 @@
           68.00000071525574
         ]
       },
-      "sha256": "7657bf1a9689b2b37d9afda77ce869c39b8f5f57a7c29d01b1baa1b9d5c46956"
+      "sha256": "576f2a634ec0bfa16a0d00e6aa62dc91d0d87717ef758abca57617005f59a601"
     },
     {
       "name": "SM_GHSPark_Roofs",
@@ -7022,7 +7025,7 @@
           780.9999942779541
         ]
       },
-      "sha256": "1bb7f9acc98b62c2dbd8578136b7ac23745c22dcd4207eea35342af14b54cdf8"
+      "sha256": "f3d2d16566a1f2b5961a0c3b2b9767bf5a6db55ed78fe80c8390d204d60f7cf9"
     },
     {
       "name": "SM_GHSPark_Glass",
@@ -7062,7 +7065,7 @@
           505.63511848449707
         ]
       },
-      "sha256": "03dcb05577d1382e224e2fb32bc72afa8d5b5be89b7018aec0e6afb5de24b627"
+      "sha256": "29aef344c255fac4ad0e440b1b9a2fcc6e4e66f73ca8d293a23b4779969af884"
     },
     {
       "name": "SM_GHSPark_ClosedTruck",
@@ -15413,7 +15416,7 @@
     ]
   ],
   "stats": {
-    "triangles": 808778,
+    "triangles": 1033536,
     "asset_count": 22,
     "fence_posts": 604,
     "fence_bars": 6306,
@@ -15421,8 +15424,8 @@
     "gate_columns": 4,
     "perimeter_gates": 2,
     "landscape_shrubs": 260,
-    "low_poly_trees": 821,
-    "clustered_broadleaf_trees": 821,
+    "low_poly_trees": 1517,
+    "clustered_broadleaf_trees": 1517,
     "tree_candidates_omitted_for_road_clearance": 5,
     "parked_cars": 157,
     "detailed_compact_suv": 84,
@@ -15442,13 +15445,13 @@
     "satellite_infill_houses": 39,
     "residential_driveways": 338,
     "residential_yard_wall_segments": 856,
-    "woodland_trees": 510,
-    "woodland_groups": 2,
+    "woodland_trees": 1206,
+    "woodland_groups": 7,
     "light_poles": 4,
     "cad_road_segments": 79,
     "context_road_segments": 75
   },
-  "instanced_triangles_total": 1955274,
+  "instanced_triangles_total": 2180032,
   "geometry_checks": {
     "minimum_house_to_road_edge_m": 1.064755415292048,
     "road_union_valid": true,
