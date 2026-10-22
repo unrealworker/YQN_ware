@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-22",
-  "status": "approved_warehouse_address_local_clock",
+  "updated": "2026-10-23",
+  "status": "approved_verified_data_with_original_unverified_design",
   "source": "Saas.pen",
   "previewDirectory": "exports/current",
   "style": {
@@ -62,7 +62,7 @@
     },
     {
       "id": "gW9oH",
-      "name": "06 · 库位 POI / 悬停轻预览",
+      "name": "06 · 库位 POI / 原设计与未核验标记",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/gW9oH.png"
@@ -97,7 +97,7 @@
     },
     {
       "id": "F8Cox",
-      "name": "11 · 库存 / 容量与货架货位",
+      "name": "11 · 库存 / 已核验数据与原设计示例",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/F8Cox.png"
@@ -111,7 +111,7 @@
     },
     {
       "id": "zyWMm",
-      "name": "13 · 设备 / 状态筛选与空间定位",
+      "name": "13 · 设备 / 真实台账与场景映射边界",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/zyWMm.png"
@@ -139,7 +139,7 @@
     },
     {
       "id": "XhUtw",
-      "name": "17 · 物料详情 / 货位批次与订单",
+      "name": "17 · 库存样例 / 已核验记录与原设计物料",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/XhUtw.png"
@@ -260,13 +260,16 @@
       "status": "approved_for_implementation"
     }
   ],
-  "approvedScope": "00-33 approved; warehouse address and local clock synchronized across all 20 scene headers on 2026-10-22; main warehouse POI retained with subtitle 点击查看; board 01 is interior overview",
+  "approvedScope": "00-33 approved; verified inventory and forklift ledger preserved; unverified fields retain original design and carry visible 数据未核验 labels; address/local clock and main warehouse POI preserved",
   "warehouseHeader": {
     "status": "approved_for_implementation",
     "spec": "warehouse-address-clock-design.md",
     "height": 64,
     "background": "#172333",
-    "addressLines": ["17335 Glen Helen Pkwy", "San Bernardino, CA 92407 美国"],
+    "addressLines": [
+      "17335 Glen Helen Pkwy",
+      "San Bernardino, CA 92407 美国"
+    ],
     "timeLabel": "仓库当地时间",
     "timeZone": "America/Los_Angeles",
     "timeFormat": "HH:mm:ss",
@@ -274,8 +277,34 @@
     "refreshIntervalMs": 1000,
     "daylightTime": "PDT (UTC−07:00)",
     "standardTime": "PST (UTC−08:00)",
-    "designSample": {"instant": "2026-10-22T14:38:00Z", "time": "07:38:00", "date": "2026.10.22 · PDT (UTC−07:00)", "isLive": false},
-    "sceneArtboards": ["CLx7Q", "mP7E5", "d7P3z", "Wt7Vo", "iiFrY", "gW9oH", "XJoOQ", "F8Cox", "XhUtw", "lvDfx", "t4mlxm", "zyWMm", "lCf0H", "OA1Bd", "kvTdT", "qNsRa", "ibTva", "t1QfTH", "Lxvbj", "cgOha"],
+    "designSample": {
+      "instant": "2026-10-22T14:38:00Z",
+      "time": "07:38:00",
+      "date": "2026.10.22 · PDT (UTC−07:00)",
+      "isLive": false
+    },
+    "sceneArtboards": [
+      "CLx7Q",
+      "mP7E5",
+      "d7P3z",
+      "Wt7Vo",
+      "iiFrY",
+      "gW9oH",
+      "XJoOQ",
+      "F8Cox",
+      "XhUtw",
+      "lvDfx",
+      "t4mlxm",
+      "zyWMm",
+      "lCf0H",
+      "OA1Bd",
+      "kvTdT",
+      "qNsRa",
+      "ibTva",
+      "t1QfTH",
+      "Lxvbj",
+      "cgOha"
+    ],
     "componentCount": 42,
     "currentExportCount": 34
   },
@@ -307,5 +336,127 @@
     "direction": "center_to_both_sides",
     "reset": "restore_roof_and_campus_view",
     "focus": "wait_until_roof_hidden_then_focus"
+  },
+  "confirmedBusinessData": {
+    "spec": "business-data-confirmed-design.md",
+    "status": "approved_for_implementation",
+    "source": "Saved/DataIntegration/questionnaire-answers.json",
+    "warehouseId": 108,
+    "warehouseCode": "GHS_CA_US",
+    "queryTime": "2026-10-22T22:27:00+08:00",
+    "inventoryMaxEtl": "2026-10-22T22:01:21+08:00",
+    "isLive": false,
+    "quantityUnit": null,
+    "inventory": {
+      "current": 337783,
+      "available": 336006,
+      "frozen": 55,
+      "allocated": 1722,
+      "pendingOut": 0,
+      "owners": 156,
+      "sku": 14373,
+      "rows": 76752
+    },
+    "regionCount": 10,
+    "regionCountsAvailable": false,
+    "capacityConfirmed": false,
+    "equipment": {
+      "ledger": 82,
+      "normal": 62,
+      "repair": 0,
+      "disabled": 20,
+      "statusKind": "management",
+      "fullLedgerDelivered": false,
+      "sampleCount": 5,
+      "telemetryAvailable": false,
+      "sceneMappingConfirmed": false
+    },
+    "components": {
+      "overview": "PjVwW",
+      "inventory": "H4NHQ0",
+      "inventorySamples": "i96jo",
+      "ledger": "nqiHV"
+    },
+    "demoOnly": [
+      "orders",
+      "alerts",
+      "continuous_tracks",
+      "charging_facilities",
+      "scene_device_states"
+    ],
+    "verification": {
+      "artboards": 34,
+      "components": 42,
+      "sceneHeaderPairs": 20,
+      "missingReferences": 0,
+      "layoutProblems": 0,
+      "currentPngCount": 34,
+      "sourceDiskSave": "verified_native_ctrl_s_and_file_metadata",
+      "sourceFileBytes": 1329813,
+      "sourceFileLastWrite": "2026-10-23T00:25:48+08:00",
+      "unverifiedTextLabelCount": 57
+    },
+    "queryTimePrecision": "minute",
+    "unverifiedDisplayPolicy": "preserve_original_design_with_visible_data_unverified_label",
+    "unverifiedModules": [
+      "capacity_ring",
+      "capacity_regions",
+      "48_bin_illustration",
+      "material_example",
+      "orders",
+      "alerts",
+      "continuous_tracks",
+      "charging_facilities",
+      "scene_device_states"
+    ],
+    "designExampleCapacity": {
+      "verified": false,
+      "total": 2400,
+      "occupied": 1920,
+      "available": 416,
+      "locked": 64,
+      "occupancyPercent": 80,
+      "unit": "托位（仅原设计示例）",
+      "regions": [
+        {
+          "name": "货架区 A",
+          "total": 1600,
+          "occupied": 1120,
+          "available": 416,
+          "locked": 64
+        },
+        {
+          "name": "地堆区 B",
+          "total": 800,
+          "occupied": 800,
+          "available": 0,
+          "locked": 0
+        }
+      ],
+      "rackBins": {
+        "total": 48,
+        "occupied": 34,
+        "available": 10,
+        "locked": 4,
+        "availableIds": [
+          6,
+          13,
+          20,
+          27,
+          34,
+          39,
+          41,
+          42,
+          43,
+          44
+        ],
+        "lockedIds": [
+          15,
+          30,
+          45,
+          48
+        ]
+      }
+    }
   }
 }

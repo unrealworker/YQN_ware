@@ -14,15 +14,15 @@ function update(){
   if(logical)Object.assign(root.style,{transform:'scale('+zoom+')',transformOrigin:'0 0',width:width+'px',height:height+'px'});
   // file:// stylesheets cannot be inspected through CSSOM in UE's CEF. Match
   // layout breakpoints from design dimensions explicitly; motion stays in CSS.
-  const modes=[];
+  const modes=[],bottomNav=width>=360&&height<=600;
   if(width<=440)modes.push('compact');
   if(width<=359)modes.push('narrow');
   if(width>=640)modes.push('wide');
   if(width>=500&&height<=600)modes.push('short-wide');
-  if(width>=450&&height<=600)modes.push('bottom-nav');
+  if(bottomNav)modes.push('bottom-nav');
   if(width<=300)modes.push('tiny');
-  if(width>=360&&height<=820)modes.push('short-rail');
-  if(width<=359||width>=450&&height<=600)modes.push('horizontal-zoom');
+  if(width>=360&&height<=820&&!bottomNav)modes.push('short-rail');
+  if(width<=359||bottomNav)modes.push('horizontal-zoom');
   root.setAttribute('data-layout',modes.join(' '));
   if(window.TwinDropdown)window.TwinDropdown.close(false);
   document.dispatchEvent(new Event('twin-viewport-change'));

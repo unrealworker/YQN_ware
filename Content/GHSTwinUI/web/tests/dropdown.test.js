@@ -1,10 +1,12 @@
 const test=require('node:test');
 const assert=require('node:assert/strict');
-const {boot}=require('./harness');
+const {boot:bootController}=require('./harness');
+// These existing tests exercise scene browsing; verified ledger defaults have their own suite.
+function boot(options){const app=bootController(options);app.window.twinState.filters.devices.view='scene';return app;}
 
 test('all business filters render in the page instead of CEF native popup controls',()=>{
   const app=boot();
-  for(const [page,keys]of [['inventory',['inventory.state']],['orders',['orders.status']],['devices',['devices.type','devices.status']],['alerts',['alerts.severity']]]){
+  for(const [page,keys]of [['inventory',[]],['orders',['orders.status']],['devices',['devices.type','devices.status']],['alerts',['alerts.severity']]]){
     app.window.twinNavigate(page);
     assert.doesNotMatch(app.html(),/<select\b/i,page+' must not invoke the mismatched native popup coordinate path');
     for(const key of keys)assert.match(app.html(),new RegExp('<button[^>]+data-filter="'+key.replace('.', '\\.')+'"[^>]+aria-haspopup="listbox"'),key);
@@ -34,15 +36,15 @@ test('popup stays anchored in CSS pixels at every device scale and flips inside 
   state=app.window.TwinDropdown.getState();assert.ok(state.menu.top>=8&&state.menu.bottom<=152);assert.ok(state.menu.left>=8&&state.menu.right<=232);
 });
 
-test('inventory pointer choice and order keyboard choice use the existing filter change path',()=>{
-  const app=boot();assert.ok(app.window.TwinDropdown);app.window.twinNavigate('inventory');app.elements.main.scrollTop=210;
-  let button=open(app,'inventory.state');
+test('order pointer and keyboard choice use the existing filter change path',()=>{
+  const app=boot();assert.ok(app.window.TwinDropdown);app.window.twinNavigate('orders');app.elements.main.scrollTop=210;
+  let button=open(app,'orders.status');
   assert.equal(button.getAttribute('aria-expanded'),'true');
   const menu=app.window.document.body.children.at(-1),option=menu.querySelector('[data-dropdown-index="2"]');
   app.listeners.click({target:option});
-  assert.equal(app.window.twinState.filters.inventory.state,'available');assert.equal(app.elements.main.scrollTop,210);
-  assert.equal(app.window.TwinDropdown.isOpen(),false);assert.equal(app.window.document.activeElement.dataset.filter,'inventory.state');
-  assert.match(app.html(),/class="bin occupied filtered" disabled/);
+  assert.equal(app.window.twinState.filters.orders.status,'executing');assert.equal(app.elements.main.scrollTop,210);
+  assert.equal(app.window.TwinDropdown.isOpen(),false);assert.equal(app.window.document.activeElement.dataset.filter,'orders.status');
+  assert.ok(app.html().includes('装车中'));
   app.window.twinNavigate('orders');app.window.twinState.filters.orders.page=3;
   button=control(app,'orders.status');button.focus();press(app,' ');press(app,'End');press(app,'Enter');
   assert.equal(app.window.twinState.filters.orders.status,'exception');assert.equal(app.window.twinState.filters.orders.page,1);

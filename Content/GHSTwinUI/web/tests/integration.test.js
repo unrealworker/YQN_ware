@@ -2,7 +2,9 @@ const test=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
-const {boot}=require('./harness');
+const {boot:bootController}=require('./harness');
+// These existing tests exercise scene browsing; verified ledger defaults have their own suite.
+function boot(options){const app=bootController(options);app.window.twinState.filters.devices.view='scene';return app;}
 
 test('rail zoom actions dispatch camera commands without changing business page or selection',()=>{
   const app=boot();app.window.twinNavigate('inventory');app.flush();
@@ -57,10 +59,10 @@ test('actual CAD material selection never displays the demonstration SKU as its 
   assert.ok(app.html().includes('场景物料详情'));
   assert.ok(app.html().includes('DXF-07'));
   assert.ok(app.html().includes('123'));
-  assert.ok(app.html().includes('查看演示物料'));
+  assert.ok(app.html().includes('查看原设计物料'));assert.ok(app.html().includes('data-unverified="cad-example-link"'));
   assert.ok(!app.html().includes('480 件'));
 });
-test('native type chips and global search apply device filters and use real snapshot counts',()=>{
+test('native type chips and unmatched searches filter scene models using scene snapshot counts',()=>{
   const app=boot();app.window.twinReceive({equipment:[],facilities:[]});
   app.window.twinFilterType('charger');
   assert.equal(app.window.twinState.filters.devices.facility,true);
@@ -106,18 +108,18 @@ test('native clear selection discards nested device and material details but pre
   assert.ok(app.commands.slice(before).every(command=>command.action==='report'));
   app.window.twinBack();app.flush();assert.equal(app.window.twinState.detail,null);
 });
-test('global search routes known material examples to clearly marked demonstration details',()=>{
+test('legacy material shortcuts remain explicit demos while rack shortcuts open verified inventory',()=>{
   const app=boot();app.window.twinReceive({equipment:[],facilities:[]});
   for(const query of ['SKU2038',' 电机安装支架 ','BH-M8','b20261018']){
     app.window.twinSearch(query);
     assert.equal(app.window.twinState.page,'inventory');
     assert.equal(app.window.twinState.detail.kind,'material-demo');
-    assert.ok(app.html().includes('演示物料'));
+    assert.ok(app.html().includes('数据未核验'));assert.ok(app.html().includes('原设计物料'));
     assert.ok(app.html().includes('尚未绑定 WMS'));
   }
   app.window.twinSearch('A-03');
   assert.equal(app.window.twinState.page,'inventory');assert.equal(app.window.twinState.detail,null);
-  assert.ok(app.html().includes('演示分布'));
+  assert.ok(app.html().includes('库存样例'));assert.ok(app.html().includes('data-unverified="inventory-design"'));
   app.window.twinSearch('SKU-NOT-EXISTS');
   assert.equal(app.window.twinState.page,'devices');assert.equal(app.window.twinState.detail,null);
   assert.ok(app.html().includes('没有匹配的设备'));
@@ -138,11 +140,11 @@ test('action visibility tolerates only fractional viewport rounding and reports 
 test('native technical map names never replace readable business page subtitles',()=>{
   const app=boot(),mapName='UEDPIE_0_GHS_CAD_NormalWarehouse_CADScene_WithLongTechnicalSuffix';
   app.window.twinReceive({connected:true,mapName,equipment:[],facilities:[]});
-  for(const [page,subtitle]of[['devices','普通仓库 · 场景设备'],['settings','普通仓库 · 场景视图']]){
+  for(const [page,subtitle]of[['devices','场景设备'],['settings','普通仓库 · 场景视图']]){
     app.window.twinNavigate(page);
     assert.ok(app.html().includes(subtitle));
     assert.ok(!app.html().includes(mapName));
-    assert.ok(app.html().includes('场景数据'));
+    assert.ok(app.html().includes(page==='devices'?'遥测未接入':'场景数据'));
   }
 });
 test('page navigation keeps outgoing content until fade-out and coalesces telemetry refreshes',()=>{

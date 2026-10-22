@@ -1,8 +1,14 @@
 # 仓储数字孪生 · 当前设计入口
 
-**唯一编辑源：[Saas.pen](Saas.pen)。00–33 号已获准开发。2026-10-22 最新修订：20 处场景顶栏统一显示仓库地址和当地时钟；主仓库 POI 继续显示“GHS · 主仓库 / 点击查看”。以本页、地址时钟规范及 31–33 号当前规则为准。**
+**唯一编辑源：[Saas.pen](Saas.pen)。00–33 号已获准开发。2026-10-23 最新修订：按已回答问卷原位更新真实库存汇总、区域主数据、库存样例和设备台账；未核验的库容饼图、容量分布、货位矩阵等继续显示原设计，逐模块注明“数据未核验”。20 处地址/当地时钟和主仓库 POI 规则继续保留。**
 
 Pencil 已打开项目内的主文件。原有页面和公共组件已直接覆盖更新，三张重复的旧圆角确认页已移除。保留白色平面底色、深蓝文字、蓝色交互与 12px 圆角，不使用渐变。当前共 34 张画板、42 个可复用组件；设备图片和业务图表保留。`exports/current` 的 34 张同名 PNG 已全部覆盖导出。
+
+## 已确认业务数据 · 当前规范
+
+库存现存 **337,783**、可用 **336,006**、冻结 **55**、分配 **1,722**、待移出 **0**；数量单位待确认。156 货主、14,373 SKU、76,752 明细和 10 个区域主数据来自已核验查询，不推定真实容量、空位或占用率。设备台账 **82 条**，正常 **62**、维修中 **0**、禁用 **20**，是管理状态；实时在线与遥测暂无。
+
+库存查询时间 `2026-10-22 22:27（UTC+08:00）` 与最大 ETL `22:01:21` 分开显示；当地时钟不表示数据更新时间。真实台账与场景模型分开，完整清单和位置映射待补。原库容 1,920/2,400 托位、80% 饼图及 48 格货位分布保留为“数据未核验”示例，和已核验数量分区展示；订单、告警、轨迹与充电设施同样标注未核验。详情、来源单元格、组件 ID 和限制见 [business-data-confirmed-design.md](business-data-confirmed-design.md)。
 
 ## 仓库地址与当地时钟 · 当前规范
 
@@ -35,7 +41,7 @@ Pencil 已打开项目内的主文件。原有页面和公共组件已直接覆�
 | 连接超时、踢出与重连 | [连接状态](exports/current/jCHwc.png) |
 | 中文输入、选中态与动效规范 | [交互规范](exports/current/k2v5GZ.png) |
 
-完整机器可读索引：[current-design.json](current-design.json)。本轮评审：[taste-current-review.md](taste-current-review.md)。
+完整机器可读索引：[current-design.json](current-design.json)。本轮业务数据规范：[business-data-confirmed-design.md](business-data-confirmed-design.md)。[taste-current-review.md](taste-current-review.md) 为此前视觉评审，不覆盖本轮数据口径。
 
 ## 本轮设计决定
 
@@ -51,9 +57,9 @@ Pencil 已打开项目内的主文件。原有页面和公共组件已直接覆�
 
 ## 保留的业务内容
 
-总览、库存、订单、设备、告警、追溯、场景七个业务入口，以及物料、订单、设备详情继续保留。业务说明与演示数据：[business-design-brief.md](business-design-brief.md)、[business-demo-data.json](business-demo-data.json)、[visual-demo-data.json](visual-demo-data.json)。
+总览、库存、订单、设备、告警、追溯、场景七个业务入口，以及物料、订单、设备详情继续保留。当前业务说明：[business-design-brief.md](business-design-brief.md)。[business-demo-data.json](business-demo-data.json) 与 [visual-demo-data.json](visual-demo-data.json) 是历史交互演示数据，不再作为真实库存或设备台账口径。
 
-设备编号、库存数据、帧率、会话、服务访问地址和时钟时刻在画板中是设计样例，不表示实时接口或实际运行状态。顶栏的仓库物理地址为本次已批准的固定展示文案。
+已核验库存和叉车台账是静态查询结果；场景模型编号、演示订单/告警、帧率、会话、服务访问地址和时钟时刻是设计样例，不表示实时接口或实际运行状态。顶栏仓库物理地址沿用已批准的固定展示文案。
 
 ## 全部画板
 
@@ -65,18 +71,18 @@ Pencil 已打开项目内的主文件。原有页面和公共组件已直接覆�
 | 03 · 聚合展开 / 成员分页与定位 | 1920 × 1080 | [打开](exports/current/d7P3z.png) |
 | 04 · 告警定位 / AGV 低电量 | 1920 × 1080 | [打开](exports/current/Wt7Vo.png) |
 | 05 · 历史追溯 / 时间与事件联动 | 1920 × 1080 | [打开](exports/current/iiFrY.png) |
-| 06 · 库位 POI / 悬停轻预览 | 1920 × 1080 | [打开](exports/current/gW9oH.png) |
+| 06 · 库位 POI / 场景映射待确认 | 1920 × 1080 | [打开](exports/current/gW9oH.png) |
 | 07 · HUD 详情组件 / 车辆与设施 | 1920 × 1080 | [打开](exports/current/UbszE.png) |
 | 08 · 搜索与数据状态 / 边界反馈 | 1920 × 1080 | [打开](exports/current/PE2am.png) |
 | 09 · 交互路径 / 密度与动效规范 | 1920 × 1080 | [打开](exports/current/r5SOcd.png) |
 | 10 · 聚合预警 / 从异常到设备 | 1920 × 1080 | [打开](exports/current/XJoOQ.png) |
-| 11 · 库存 / 容量与货架货位 | 1920 × 1080 | [打开](exports/current/F8Cox.png) |
+| 11 · 库存 / 已核验汇总与区域主数据 | 1920 × 1080 | [打开](exports/current/F8Cox.png) |
 | 12 · 订单 / 今日出入库作业 | 1920 × 1080 | [打开](exports/current/lvDfx.png) |
-| 13 · 设备 / 状态筛选与空间定位 | 1920 × 1080 | [打开](exports/current/zyWMm.png) |
+| 13 · 设备 / 真实台账与场景映射边界 | 1920 × 1080 | [打开](exports/current/zyWMm.png) |
 | 14 · 告警 / 分级队列与处理状态 | 1920 × 1080 | [打开](exports/current/lCf0H.png) |
 | 15 · 追溯 / 物料批次与作业事件 | 1920 × 1080 | [打开](exports/current/OA1Bd.png) |
 | 16 · 场景 / 图层视角与显示设置 | 1920 × 1080 | [打开](exports/current/kvTdT.png) |
-| 17 · 物料详情 / 货位批次与订单 | 1920 × 1080 | [打开](exports/current/XhUtw.png) |
+| 17 · 库存样例 / 物料与货位待关联 | 1920 × 1080 | [打开](exports/current/XhUtw.png) |
 | 18 · 订单详情 / 拣货与设备联动 | 1920 × 1080 | [打开](exports/current/t4mlxm.png) |
 | 19 · 订单 / 入库切换状态 | 1920 × 1080 | [打开](exports/current/qNsRa.png) |
 | 20 · 设备 / 充电设施切换状态 | 1920 × 1080 | [打开](exports/current/ibTva.png) |

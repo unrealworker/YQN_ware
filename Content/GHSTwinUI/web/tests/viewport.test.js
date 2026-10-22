@@ -41,15 +41,38 @@ test('logical media breakpoints survive OS DPI changes and ignore invalid native
   w.twinSetViewport(0,NaN);
   assert.equal(JSON.stringify(w.TwinViewport.getState()),prior);
   w.twinSetViewport(380,600);
-  assert.equal(w.document.documentElement.getAttribute('data-layout'),'compact short-rail');
+  assert.equal(w.document.documentElement.getAttribute('data-layout'),'compact bottom-nav horizontal-zoom');
 });
 
-test('diagnostics compare scroll widths in design units rather than CEF viewport pixels',()=>{
+test('390px short panels use horizontal navigation while tall panels keep the vertical rail',()=>{
+  const app=boot(),w=app.window,layout=()=>w.document.documentElement.getAttribute('data-layout').split(' ');
+  w.innerWidth=390;w.innerHeight=439;w.twinSetViewport(390,439);
+  assert.ok(layout().includes('bottom-nav'));assert.ok(layout().includes('horizontal-zoom'));
+  assert.ok(!layout().includes('short-rail'));assert.ok(!layout().includes('narrow'));
+  w.innerHeight=900;w.twinSetViewport(390,900);
+  assert.ok(!layout().includes('bottom-nav'));assert.ok(!layout().includes('horizontal-zoom'));
+  w.twinSetViewport(390,700);assert.ok(layout().includes('short-rail'));assert.ok(!layout().includes('bottom-nav'));
+});
+
+test('diagnostics retain design width as the overflow baseline when CEF viewport is smaller',()=>{
   const app=boot({search:'?diagnostics=1'}),w=app.window;
   w.innerWidth=320;w.innerHeight=678;w.twinSetViewport(480,1016);
   w.twinNavigate('inventory');app.flush();
   assert.equal(app.commands.filter(c=>c.action==='report').at(-1).overflow,false);
   w.document.documentElement.scrollWidth=482;
+  w.twinNavigate('orders');app.flush();
+  assert.equal(app.commands.filter(c=>c.action==='report').at(-1).overflow,true);
+});
+
+test('diagnostics account for the root viewport minimum width when CEF scales up the design',()=>{
+  const app=boot({search:'?diagnostics=1'}),w=app.window;
+  w.innerWidth=640;w.innerHeight=1515;w.twinSetViewport(479.999969,1135.999878);
+  w.document.documentElement.clientWidth=640;w.document.documentElement.scrollWidth=640;
+  app.elements.main.clientWidth=424;app.elements.main.scrollWidth=424;
+  app.elements.navigation.clientWidth=55;app.elements.navigation.scrollWidth=55;
+  w.twinNavigate('inventory');app.flush();
+  assert.equal(app.commands.filter(c=>c.action==='report').at(-1).overflow,false);
+  w.document.documentElement.scrollWidth=642;
   w.twinNavigate('orders');app.flush();
   assert.equal(app.commands.filter(c=>c.action==='report').at(-1).overflow,true);
 });

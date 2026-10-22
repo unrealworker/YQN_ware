@@ -2,7 +2,9 @@ const test=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
-const {boot}=require('./harness');
+const {boot:bootController}=require('./harness');
+// These existing tests exercise scene browsing; verified ledger defaults have their own suite.
+function boot(options){const app=bootController(options);app.window.twinState.filters.devices.view='scene';return app;}
 
 const device=(id='AGV-07',value='82%')=>({id,type:'agv',status:'running',progress:82,value,location:'A 区',live:true,available:true});
 const snapshot=(equipment=[device()],extra={})=>({connected:true,equipment,facilities:[],...extra});
@@ -21,13 +23,13 @@ test('identical snapshots and scene geometry changes do not regenerate business 
   assert.ok(app.html().includes('73%'));
 });
 
-test('overview ignores telemetry values but refreshes state distribution',()=>{
+test('verified overview ignores unrelated scene telemetry values and state distribution',()=>{
   const app=boot();app.window.twinReceive(snapshot());const before=metrics(app).htmlBuilds;
   app.window.twinReceive(snapshot([device('AGV-07','73%')]));
   assert.equal(metrics(app).htmlBuilds,before);
   app.window.twinReceive(snapshot([{...device(),status:'fault'}]));
-  assert.equal(metrics(app).htmlBuilds,before+1);
-  assert.ok(app.html().includes('设备状态 · 1 台'));
+  assert.equal(metrics(app).htmlBuilds,before);
+  assert.ok(app.html().includes('叉车台账'));assert.ok(app.html().includes('337,783'));
 });
 
 test('open device detail updates only its own dependencies and Back sees latest list',()=>{
