@@ -2,6 +2,7 @@
 #include "GHSWarehousePlayerController.h"
 #include "GHSWarehouseCameraPawn.h"
 #include "GHSWarehouseRoofComponent.h"
+#include "GHSStorageCapacityComponent.h"
 #include "GHSHUDMotion.h"
 #include "Blueprint/WidgetTree.h"
 #include "Components/CanvasPanel.h"
@@ -148,6 +149,53 @@ void UGHSTwinHUDWidget::NativeConstruct()
 }
 void UGHSTwinHUDWidget::NativeDestruct() { SceneData.Refresh(nullptr); PreviousPositions.Empty(); LabelAges.Empty(); Labels.Empty(); VisibleLabels.Empty(); PreviousVisibleLabels.Empty(); Super::NativeDestruct(); }
 FString UGHSTwinHUDWidget::GetSnapshot() const { return SceneData.SnapshotJson(SelectedId); }
+void UGHSTwinHUDWidget::EvaluateDiagnostics(const FString& Script)
+{
+    if(bDiagnostics && Panel && Script.Len()<=32768) Panel->Evaluate(Script);
+}
+FString UGHSTwinHUDWidget::GetSceneControlsState() const
+{
+    auto Json=MakeShared<FJsonObject>();
+    const auto* R=Roof();const auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer());
+    const auto* Capacity=PC?PC->StorageCapacity.Get():nullptr;
+    Json->SetBoolField(TEXT("building"),!R || R->IsBuildingVisible());
+    Json->SetBoolField(TEXT("racks"),bRacks);Json->SetBoolField(TEXT("equipment"),bEquipment);Json->SetBoolField(TEXT("pois"),bShowPOIs);
+    Json->SetStringField(TEXT("density"),Density);Json->SetNumberField(TEXT("sequence"),double(SettingsSequence));
+    Json->SetNumberField(TEXT("rackCapacity"),Capacity?Capacity->GetRackCapacity():.8);
+    Json->SetNumberField(TEXT("floorCapacity"),Capacity?Capacity->GetFloorCapacity():1.);
+    Json->SetBoolField(TEXT("roofClosed"),R && R->IsRoofClosed());Json->SetBoolField(TEXT("roofOpening"),R && R->IsOpening());
+    FString Text;FJsonSerializer::Serialize(Json,TJsonWriterFactory<>::Create(&Text));return Text;
+}
+void UGHSTwinHUDWidget::PushSceneControls(const FString& Notice,bool bForce)
+{
+    if(!Panel || !bBrowserReady || !bBrowserActive) return;
+    const FString State=GetSceneControlsState();
+    if(!bForce && Notice.IsEmpty() && State==LastSceneControls) return;
+    LastSceneControls=State;FString Json=State;
+    if(!Notice.IsEmpty())
+    {
+        TSharedPtr<FJsonObject> Object;FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(State),Object);
+        Object->SetStringField(TEXT("notice"),Notice);Json.Empty();FJsonSerializer::Serialize(Object.ToSharedRef(),TJsonWriterFactory<>::Create(&Json));
+    }
+    Panel->Evaluate(TEXT("window.twinSceneControls && window.twinSceneControls(")+Json+TEXT(");"));
+}
+void UGHSTwinHUDWidget::ApplySceneLayers()
+{
+    SceneData.ApplyLayers(bEquipment,bRacks);
+    if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer());PC && PC->StorageCapacity) PC->StorageCapacity->SetStorageVisible(bRacks);
+    if(!SelectedId.IsEmpty() && !SceneData.IsObjectVisible(SelectedId)) ClearSelection();
+    POICadence.Invalidate();
+}
+bool UGHSTwinHUDWidget::RevealForNavigation(const FString& Id)
+{
+    FVector Location,Extent;if(!SceneData.Resolve(Id,Location,Extent)) return false;
+    const bool bStorage=SceneData.IsStorageObject(Id);
+    bool bChanged=false;
+    if(bStorage && !bRacks) {bRacks=true;bChanged=true;}
+    if(!bStorage && !bEquipment) {bEquipment=true;bChanged=true;}
+    if(bChanged) {ApplySceneLayers();PushSceneControls(bStorage?TEXT("已显示货架与货物"):TEXT("已显示作业设备"));}
+    return SceneData.IsObjectVisible(Id);
+}
 void UGHSTwinHUDWidget::PushSnapshot(bool bExplicitSelection,bool bForce)
 {
     TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_PushSnapshot);
@@ -171,7 +219,7 @@ void UGHSTwinHUDWidget::UpdateBrowserVisibility(bool bForce,bool bExplicitSelect
     // Queue the newest full snapshot while the page is still paused, then render
     // it once as visibility resumes. Explicit picks use this same ordering and do
     // not send a second selection snapshot after the panel has become visible.
-    if(bActive) PushSnapshot(bExplicitSelection,true);
+    if(bActive) {PushSnapshot(bExplicitSelection,true);PushSceneControls(TEXT(""),true);}
     Panel->Evaluate(bActive?TEXT("window.twinSetVisibility && window.twinSetVisibility(true);"):TEXT("window.twinSetVisibility && window.twinSetVisibility(false);"));
 }
 void UGHSTwinHUDWidget::UpdateBrowserViewport(bool bForce)
@@ -368,6 +416,7 @@ void UGHSTwinHUDWidget::Command(const FString& Json)
     TSharedPtr<FJsonObject> Object;
     if(Json.Len()>16384 || !FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Json),Object) || !Object) return;
     FString Action,Id; Object->TryGetStringField(TEXT("action"),Action); Object->TryGetStringField(TEXT("id"),Id);
+    double Sequence=0;if(Object->TryGetNumberField(TEXT("sequence"),Sequence) && FMath::IsFinite(Sequence)) SettingsSequence=FMath::Max(SettingsSequence,int64(Sequence));
     if(Action!=TEXT("report") && Action!=TEXT("ready")) if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer())) PC->CancelCameraDrag();
     if(Action==TEXT("ready"))
     {
@@ -387,11 +436,31 @@ void UGHSTwinHUDWidget::Command(const FString& Json)
     { if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn())) Cam->ZoomSteps(Action==TEXT("zoomIn")?1:-1); }
     else if(Action==TEXT("layers"))
     {
-        Object->TryGetBoolField(TEXT("equipment"),bEquipment); Object->TryGetBoolField(TEXT("racks"),bRacks); Object->TryGetBoolField(TEXT("pois"),bShowPOIs);
-        SceneData.ApplyLayers(bEquipment,bRacks);
-        POICadence.Invalidate();
+        PendingInteriorAction.Empty();PendingInteriorId.Empty();
+        Object->TryGetBoolField(TEXT("equipment"),bEquipment);Object->TryGetBoolField(TEXT("racks"),bRacks);Object->TryGetBoolField(TEXT("pois"),bShowPOIs);
+        bool bBuilding=true;if(auto* R=Roof()) {bBuilding=R->IsBuildingVisible();if(Object->TryGetBoolField(TEXT("building"),bBuilding)) R->SetBuildingVisible(bBuilding);}
+        ApplySceneLayers();PushSceneControls();
     }
-    else if(Action==TEXT("poiDensity")) {Object->TryGetStringField(TEXT("value"),Density);POICadence.Invalidate();}
+    else if(Action==TEXT("capacity"))
+    {
+        double Rack=PendingRackCapacity,Floor=PendingFloorCapacity;
+        Object->TryGetNumberField(TEXT("rack"),Rack);Object->TryGetNumberField(TEXT("floor"),Floor);
+        if(FMath::IsFinite(Rack)) PendingRackCapacity=FMath::Clamp(float(Rack),0.f,1.f);
+        if(FMath::IsFinite(Floor)) PendingFloorCapacity=FMath::Clamp(float(Floor),0.f,1.f);
+        bCapacityPending=true;
+    }
+    else if(Action==TEXT("settingsReset"))
+    {
+        PendingInteriorAction.Empty();PendingInteriorId.Empty();bEquipment=bRacks=bShowPOIs=true;Density=TEXT("auto");
+        if(auto* R=Roof()) R->SetBuildingVisible(true);
+        PendingRackCapacity=.8f;PendingFloorCapacity=1.f;bCapacityPending=true;
+        ApplySceneLayers();
+    }
+    else if(Action==TEXT("poiDensity"))
+    {
+        FString Value;if(Object->TryGetStringField(TEXT("value"),Value) && (Value==TEXT("auto") || Value==TEXT("minimal") || Value==TEXT("all"))) Density=Value;
+        POICadence.Invalidate();PushSceneControls();
+    }
     else if(Action==TEXT("preset"))
     {
         FString Value; Object->TryGetStringField(TEXT("value"),Value);
@@ -399,6 +468,7 @@ void UGHSTwinHUDWidget::Command(const FString& Json)
         {
             if(Value==TEXT("top"))
             {
+                PendingInteriorAction.Empty();PendingInteriorId.Empty();
                 const float Distance=FMath::Min(95000.f,float(Cam->OverviewDistance*ViewSize.X/FMath::Max(1.,Layout.SceneSize.X)));
                 Cam->TransitionToPose(Cam->OverviewCenter,Distance,FRotator(-78,Cam->OverviewYaw,0),ViewSize,Layout.ScenePosition+Layout.SceneSize*.5,true);
             }
@@ -412,6 +482,7 @@ bool UGHSTwinHUDWidget::SelectObject(const FString& Id,bool bFocus)
 {
     if(Id.StartsWith(TEXT("RACK:"))) return false;
     FVector Location,Extent; if(!SceneData.Resolve(Id,Location,Extent)) return false;
+    if(!RevealForNavigation(Id)) return false;
     if(!IsInteriorAvailable()) return QueueInteriorAction(TEXT("select"),Id,bFocus);
     const bool bOpening=bPanelCollapsed;
     SelectedId=Id; ActiveRegionId.Empty(); POICadence.Invalidate();
@@ -435,7 +506,7 @@ bool UGHSTwinHUDWidget::OpenWarehouse()
     auto* R=Roof();
     if(!R || !R->OpenRoof()) return false;
     bWarehousePOIVisible=false; VisibleLabels.Reset(); PreviousVisibleLabels.Reset();
-    POICadence.Invalidate(); return true;
+    POICadence.Invalidate(); PushSceneControls(); return true;
 }
 bool UGHSTwinHUDWidget::QueueInteriorAction(const FString& Action,const FString& Id,bool bFocus)
 {
@@ -449,7 +520,7 @@ void UGHSTwinHUDWidget::UpdateWarehousePOI()
 {
     bWarehousePOIVisible=false; bWarehousePOIHovered=false;
     auto* R=Roof(); auto* PC=GetOwningPlayer();
-    if(!R || !R->HasRoof() || !R->IsRoofClosed() || !PC) return;
+    if(!bShowPOIs || !R || !R->IsBuildingVisible() || !R->HasRoof() || !R->IsRoofClosed() || !PC) return;
     FVector2D Anchor;
     if(!PC->ProjectWorldLocationToScreen(R->GetPOIWorldLocation(),Anchor,false)) return;
     Anchor=Viewport.ToLogical(Anchor);
@@ -468,7 +539,8 @@ void UGHSTwinHUDWidget::Overview()
 {
     SetSearchOpen(false); bWarehouseMenuOpen=false;
     ClearSelection();
-    if(auto* R=Roof()) R->RestoreRoof();
+    if(auto* R=Roof()) {R->SetBuildingVisible(true);R->RestoreRoof();}
+    PushSceneControls();
     VisibleLabels.Reset(); PreviousVisibleLabels.Reset(); PreviousPositions.Reset(); LabelAges.Reset();
     bWarehousePOIVisible=false;
     POICadence.Invalidate();
@@ -481,6 +553,7 @@ void UGHSTwinHUDWidget::Overview()
 void UGHSTwinHUDWidget::Focus(const FString& Id)
 {
     FVector Location,Extent; if(!SceneData.Resolve(Id,Location,Extent)) return;
+    if(!RevealForNavigation(Id)) return;
     if(!IsInteriorAvailable()) {QueueInteriorAction(TEXT("focus"),Id);return;}
     if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer())) PC->CancelCameraDrag();
     if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn()))
@@ -496,6 +569,7 @@ void UGHSTwinHUDWidget::Focus(const FString& Id)
 void UGHSTwinHUDWidget::FocusRegion(const FString& Region)
 {
     FVector Center,Extent; if(!SceneData.RegionBounds(Region,Center,Extent)) return;
+    if(!bRacks) {bRacks=true;ApplySceneLayers();PushSceneControls(TEXT("已显示货架与货物"));}
     if(!IsInteriorAvailable()) {QueueInteriorAction(TEXT("region"),Region);return;}
     if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer())) PC->CancelCameraDrag();
     if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn()))
@@ -639,8 +713,16 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
     }
     else if(bSearchOpen && SearchRevision!=SceneData.GetRevision()) RefreshSearch();
     PushSearchState();
+    if(bCapacityPending)
+    {
+        bCapacityPending=false;
+        if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer());PC && PC->StorageCapacity)
+            PC->StorageCapacity->SetCapacity(PendingRackCapacity,PendingFloorCapacity);
+        if(!SelectedId.IsEmpty() && !SceneData.IsObjectVisible(SelectedId)) ClearSelection();
+        PushSceneControls();
+    }
     const bool bInterior=IsInteriorAvailable();
-    if(bInterior!=bLastInteriorAvailable) {bLastInteriorAvailable=bInterior;POICadence.Invalidate();}
+    if(bInterior!=bLastInteriorAvailable) {bLastInteriorAvailable=bInterior;POICadence.Invalidate();PushSceneControls();}
     if(bInterior && !PendingInteriorAction.IsEmpty())
     {
         const FString Action=PendingInteriorAction,Id=PendingInteriorId;const bool bFocus=bPendingInteriorFocus;

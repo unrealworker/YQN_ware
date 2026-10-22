@@ -75,6 +75,8 @@ class TEST_API UGHSTwinHUDWidget : public UUserWidget
 public:
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void Command(const FString& Json);
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetSnapshot() const;
+    UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetSceneControlsState() const;
+    UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void EvaluateDiagnostics(const FString& Script);
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool SelectObject(const FString& Id, bool bFocus = true);
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void ClearSelection();
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool OpenWarehouse();
@@ -115,6 +117,13 @@ protected:
     virtual void NativeTick(const FGeometry& Geometry, float DeltaSeconds) override;
     virtual int32 NativePaint(const FPaintArgs&, const FGeometry&, const FSlateRect&, FSlateWindowElementList&, int32, const FWidgetStyle&, bool) const override;
 private:
+    void PushSceneControls(const FString& Notice=TEXT(""),bool bForce=false);
+    void ApplySceneLayers();
+    bool RevealForNavigation(const FString& Id);
+    FString LastSceneControls;
+    int64 SettingsSequence=0;
+    bool bCapacityPending=false;
+    float PendingRackCapacity=.8f,PendingFloorCapacity=1.f;
     void PushSnapshot(bool bExplicitSelection=false,bool bForce=false);
     void SetPanelCollapsed(bool bCollapsed,bool bExplicitSelection=false);
     void UpdateBrowserVisibility(bool bForce=false,bool bExplicitSelection=false);

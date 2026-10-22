@@ -8,6 +8,7 @@ from shapely.ops import unary_union, linemerge, nearest_points
 from park_curves import rounded_path, offset_path, sample_along, dash_segments
 from park_surfaces import road_union, emit_surface, emit_curb
 from park_fence import build_fence
+from road_endcaps import open_glen_endcaps
 
 ROOT=Path(__file__).resolve().parents[2]
 PARK=ROOT/'SourceAssets/GHS/Park'
@@ -107,8 +108,13 @@ def build_site(api):
     # Public sidewalks are computed from the merged surface. No independent
     # road strip border can cross a junction or the two campus entrances.
     sidewalks=all_ground.buffer(1.75,quad_segs=12).difference(all_ground).difference(campus)
+    # Glen continues beyond the original CAD presentation boundary. Its old
+    # transverse bands must be cut at those two joins, while side bands stay.
+    continuation_roads=json.loads((ROOT/'SourceAssets/GHS/Traffic/routes.json').read_text(encoding='utf-8'))['roads']
+    sidewalks=open_glen_endcaps(sidewalks,continuation_roads)
     emit_surface(api,sidewalks,'Curbs',.10)
     curb_band=all_ground.buffer(.27,quad_segs=8).difference(all_ground).difference(campus)
+    curb_band=open_glen_endcaps(curb_band,continuation_roads)
     emit_surface(api,curb_band,'Curbs',.19)
     for s in specs:
         api['context_roads'].append((s['path'],s['width']))

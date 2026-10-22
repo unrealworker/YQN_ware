@@ -89,6 +89,9 @@ bool FGHSRoofRuntimeLifecycle::RunTest(const FString&)
     auto* Original=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/GHSZcoolSmartFactory/OfficeFacade/Materials/M_GHSFacade_Glass.M_GHSFacade_Glass"));
     TestNotNull(TEXT("User skylight material is available"),Original);
     Mesh->SetMaterial(0,Original);
+    AStaticMeshActor* Facade=World->SpawnActor<AStaticMeshActor>();
+    Facade->Tags.Add(TEXT("GHS_OfficeFacade"));
+    Facade->GetStaticMeshComponent()->SetStaticMesh(Mesh->GetStaticMesh());
     AActor* Owner=World->SpawnActor<AActor>();
     auto* Component=NewObject<UGHSWarehouseRoofComponent>(Owner);
     Owner->AddInstanceComponent(Component);
@@ -115,6 +118,18 @@ bool FGHSRoofRuntimeLifecycle::RunTest(const FString&)
     TestFalse(TEXT("Open state has no ticking cost"),Component->IsComponentTickEnabled());
     Component->RestoreRoof();
     TestTrue(TEXT("Second reset still preserves the original material"),Mesh->GetMaterial(0)==Original);
+    Component->SetBuildingVisible(false);
+    Component->TickComponent(.2f,LEVELTICK_All,nullptr);
+    TestFalse(TEXT("Shell remains visible during opening lock"),Facade->IsHidden());
+    Component->SetBuildingVisible(true);
+    Component->TickComponent(.5f,LEVELTICK_All,nullptr);
+    TestFalse(TEXT("Last toggle wins over delayed shell hide"),Facade->IsHidden());
+    TestTrue(TEXT("Showing shell does not reclose roof"),Component->IsInteriorAvailable());
+    Component->SetBuildingVisible(false);
+    TestTrue(TEXT("Open shell hides immediately"),Facade->IsHidden());
+    Component->SetBuildingVisible(true);Component->RestoreRoof();
+    TestFalse(TEXT("Overview restores shell"),Facade->IsHidden());
+    TestTrue(TEXT("Overview closes roof"),Component->IsRoofClosed());
     GEngine->DestroyWorldContext(World);
     World->DestroyWorld(false);
     return true;

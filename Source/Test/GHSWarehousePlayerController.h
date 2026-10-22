@@ -9,6 +9,7 @@ class UGHSTwinHUDWidget;
 class UPixelStreamingInput;
 class UGHSWarehouseRoofComponent;
 class AGHSCampusTrafficActor;
+class UGHSStorageCapacityComponent;
 
 UENUM(BlueprintType)
 enum class EGHSWarehouseDragMode : uint8 { None, Orbit, Pan };
@@ -40,6 +41,8 @@ public:
     TObjectPtr<UGHSTwinHUDWidget> TwinHUDWidget;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Warehouse Twin")
     TObjectPtr<UGHSWarehouseRoofComponent> WarehouseRoof;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Warehouse Twin")
+    TObjectPtr<UGHSStorageCapacityComponent> StorageCapacity;
     UPROPERTY(BlueprintReadOnly, Transient, Category="Warehouse Twin")
     TObjectPtr<AGHSCampusTrafficActor> CampusTraffic;
     void SendSearchResponse(const FString& Json);

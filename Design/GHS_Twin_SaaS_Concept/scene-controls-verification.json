@@ -1,0 +1,172 @@
+{
+  "date": "2026-10-23",
+  "scope": "approved scene controls design",
+  "status": "canvas_and_exports_verified_source_save_pending_parent",
+  "source": "Saas.pen",
+  "sourceDiskSave": {
+    "status": "pending_windows_unlock_and_native_save",
+    "lastObservedBytes": 1329813,
+    "lastObservedLastWrite": "2026-10-23T00:25:48+08:00",
+    "observation": "before parent save handoff",
+    "reason": "Windows desktop is locked; native Pencil save is blocked until unlock. Parent owns save and disk confirmation.",
+    "canvasRecovery": "scene-controls-canvas-recovery.json"
+  },
+  "canvas": {
+    "artboards": 35,
+    "components": 42,
+    "modifiedOriginalArtboards": [
+      "kvTdT",
+      "RXvoP",
+      "q2RKW8",
+      "M0wx5h"
+    ],
+    "addedArtboard": "mG0YD",
+    "verifiedUnchangedOriginalArtboards": 30,
+    "missingReferences": 0,
+    "obsoleteApplyTextMatches": 0,
+    "geometryProblems": 0,
+    "geometryCheckedArtboards": [
+      "kvTdT",
+      "mG0YD",
+      "RXvoP",
+      "M0wx5h",
+      "q2RKW8"
+    ],
+    "geometryMethod": "Pencil source x/y for absolute-layout children plus resolved widths/heights; flex bounds for flex children; recursive instance resolution",
+    "boundsCaveat": "MCP ctx.bounds showed an extra 50px y offset for newly inserted absolute nodes; source-coordinate checks and full-size exported visuals had no clipping",
+    "fingerprintMethod": "FNV-1a32 over JSON.stringify(Get(artboard)), before/after in Pencil MCP",
+    "unchangedBusinessFingerprints": {
+      "CLx7Q": "f5706780",
+      "F8Cox": "ab00e7a0",
+      "XhUtw": "b9d92792",
+      "zyWMm": "4a2ed3ef",
+      "gW9oH": "16d135fc",
+      "lvDfx": "8b539b76",
+      "t4mlxm": "b15ad7a0",
+      "lCf0H": "0369eeef",
+      "OA1Bd": "94579a64",
+      "qNsRa": "272f5401",
+      "ibTva": "82e5d1a3"
+    }
+  },
+  "index": {
+    "artboards": 35,
+    "uniqueArtboards": 35,
+    "currentPngCount": 35,
+    "missingPreviews": [],
+    "confirmedBusinessDataUnchanged": true,
+    "confirmedBusinessDataCanonicalSha256": "6CA644E3C9584907B783C49FE9AB54AE54EBF9A55CE5CEDFC3D267F0B3DB4145",
+    "canonicalization": "PowerShell ConvertTo-Json -Depth 50 -Compress, UTF-8"
+  },
+  "controls": {
+    "layers": [
+      "建筑外壳",
+      "货架与货物",
+      "作业设备",
+      "POI 标签"
+    ],
+    "on": "#356BFA",
+    "off": "#D8E0EC",
+    "thumb": "#FFFFFF",
+    "applyMode": "immediate",
+    "applyButton": false,
+    "rackDefaultPercent": 80,
+    "floorDefaultPercent": 100,
+    "visualOnly": true,
+    "inventoryDisclaimer": "仅调整场景货物展示，不改变实际库存。",
+    "disabledSlidersPreserveValues": true,
+    "roofClosedAndOpeningLock": true,
+    "restoreDefaultPreservesCameraAndRoof": true,
+    "overviewPreservesOtherLayersAndCapacity": true,
+    "lastOperationWins": true
+  },
+  "exports": [
+    {
+      "path": "exports/current/kvTdT.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1849595,
+      "sha256": "68FE92AAA4F6B86348708B2D90FD247A6EE36F703C4C296DE9DF39BA19B6DBB5"
+    },
+    {
+      "path": "exports/current/mG0YD.png",
+      "width": 1920,
+      "height": 1200,
+      "bytes": 238818,
+      "sha256": "3BF3A3BEAA4C14E268A92DCA16808715BD0587A6C6BEACC4C8FDFB68DBE65199"
+    },
+    {
+      "path": "exports/current/RXvoP.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 141982,
+      "sha256": "FAD970E093D767CA41FD7718224389F92272685EFF8073ED4FDCD51122F32E61"
+    },
+    {
+      "path": "exports/current/M0wx5h.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 147560,
+      "sha256": "EB1154A52A8BE89C996EFCCE5FA0222ADD7F5446B7117C38321F34A5210E6862"
+    },
+    {
+      "path": "exports/current/q2RKW8.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 124492,
+      "sha256": "C70CB22F9A8674F97A8F2BD417D08B727F87FD29D9D4E1C1D8AFAECF6F9691C7"
+    },
+    {
+      "path": "exports/scene-controls-20261023/G81ak.png",
+      "width": 848,
+      "height": 2032,
+      "bytes": 255203,
+      "sha256": "1FFB8B1F777F3E8F268E03C07594AA344F8D2BC256C0E4B0817BEF78AF7F2B44"
+    },
+    {
+      "path": "exports/scene-controls-20261023/QKnV0.png",
+      "width": 848,
+      "height": 2032,
+      "bytes": 253181,
+      "sha256": "9F4D25DC43682E4979F4484EA75A751B5B1F96247926484DBAF4EFE3EEBE2160"
+    }
+  ],
+  "git": {
+    "newFilesIgnoredBy": ".gitignore:87 Design/*",
+    "requiresForceAdd": [
+      "scene-controls-design.md",
+      "scene-controls-verification.json",
+      "exports/current/mG0YD.png",
+      "exports/scene-controls-20261023/G81ak.png",
+      "exports/scene-controls-20261023/QKnV0.png",
+      "scene-controls-canvas-recovery.json"
+    ],
+    "stagedByDesignAgent": false,
+    "committedByDesignAgent": false
+  },
+  "limitations": [
+    "Source save is not confirmed by this record.",
+    "Static design checks do not verify UE runtime behavior or performance.",
+    "ConfirmedBusinessData.verification remains the previous business revision record."
+  ],
+  "parentSaveFinalization": [
+    "Save native Pencil document and verify changed file timestamp/length.",
+    "Verify the saved document still contains mG0YD and updated G81ak.",
+    "Update current-design.json pending source-save statuses and this record only after evidence.",
+    "Force-add the listed new design files when staging the authorized task."
+  ],
+  "canvasRecovery": {
+    "path": "scene-controls-canvas-recovery.json",
+    "readMethod": "Pencil Get/GetVariables/Print only",
+    "selectedNodes": 6,
+    "dependencyNodes": 6,
+    "uniqueNodes": 425,
+    "missingReferences": 0,
+    "elidedTrees": 0,
+    "existingImageAssets": 4,
+    "sha256": "EB81B55D959056DD9E12004A5E908161B6EAFD19F28DB634D46949FC25D0980F",
+    "bytes": 188023,
+    "replacesPenSource": false,
+    "sourceSave": "pending_windows_unlock_and_native_save"
+  }
+}

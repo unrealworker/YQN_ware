@@ -53,7 +53,24 @@ void UGHSWarehouseRoofComponent::BeginPlay()
 
 void UGHSWarehouseRoofComponent::InitializeRoof()
 {
-    if(HasRoof() || !GetWorld()) return;
+    if(!GetWorld()) return;
+    if(!bShellInitialized)
+    {
+        bShellInitialized=true;
+        for(TActorIterator<AActor> It(GetWorld());It;++It)
+        {
+            if(It->ActorHasTag(TEXT("GHS_WarehouseRoof"))) continue;
+            bool bShell=It->ActorHasTag(TEXT("GHS_OfficeFacade")) || It->ActorHasTag(TEXT("ZcoolSequentialDockNumber"));
+            TInlineComponentArray<UStaticMeshComponent*> Meshes(*It);
+            for(auto* Mesh:Meshes) if(Mesh->GetStaticMesh())
+            {
+                const FString Name=Mesh->GetStaticMesh()->GetName();
+                bShell|=Name.StartsWith(TEXT("SM_GHS_V2Exterior")) || Name==TEXT("SM_GHS_V2DockDoor");
+            }
+            if(bShell) ShellActors.Add({*It,It->IsHidden()});
+        }
+    }
+    if(HasRoof()) return;
     for(TActorIterator<AActor> It(GetWorld());It;++It)
     {
         if(!It->ActorHasTag(TEXT("GHS_WarehouseRoof"))) continue;
@@ -99,6 +116,20 @@ bool UGHSWarehouseRoofComponent::OpenRoof()
     return true;
 }
 
+void UGHSWarehouseRoofComponent::SetBuildingVisible(bool bVisible)
+{
+    bBuildingVisible=bVisible;
+    if(!bShellInitialized) InitializeRoof();
+    if(!bVisible) OpenRoof();
+    UpdateShellVisibility();
+}
+void UGHSWarehouseRoofComponent::UpdateShellVisibility()
+{
+    const bool bHide=!bBuildingVisible && IsInteriorAvailable();
+    for(const auto& Entry:ShellActors) if(Entry.Actor.IsValid())
+        Entry.Actor->SetActorHiddenInGame(Entry.bOriginallyHidden || bHide);
+}
+
 void UGHSWarehouseRoofComponent::RestoreSourceMaterials()
 {
     if(!RoofMesh) return;
@@ -108,6 +139,7 @@ void UGHSWarehouseRoofComponent::RestoreSourceMaterials()
 void UGHSWarehouseRoofComponent::RestoreRoof()
 {
     Transition.Restore();
+    UpdateShellVisibility();
     SetComponentTickEnabled(false);
     if(!HasRoof()) return;
     RestoreSourceMaterials();
@@ -124,6 +156,7 @@ void UGHSWarehouseRoofComponent::TickComponent(float DeltaTime,ELevelTick TickTy
     if(Transition.IsOpen())
     {
         RoofActor->SetActorHiddenInGame(true);
+        UpdateShellVisibility();
         RestoreSourceMaterials();
         SetComponentTickEnabled(false);
     }
@@ -189,5 +222,6 @@ bool UGHSWarehouseRoofComponent::RayHitsRoofFootprint(const FVector& Origin,cons
 void UGHSWarehouseRoofComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
     RestoreRoof();
+    for(const auto& Entry:ShellActors) if(Entry.Actor.IsValid()) Entry.Actor->SetActorHiddenInGame(Entry.bOriginallyHidden);
     Super::EndPlay(EndPlayReason);
 }

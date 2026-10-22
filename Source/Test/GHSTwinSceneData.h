@@ -72,6 +72,8 @@ public:
     bool MatchesSearch(const FString& Query,const FString& Id) const;
     FString LocationLabel(const FString& Id) const;
     void ApplyLayers(bool Equipment, bool Racks);
+    bool IsObjectVisible(const FString& Id) const;
+    bool IsStorageObject(const FString& Id) const;
 
 private:
     struct FImpl;

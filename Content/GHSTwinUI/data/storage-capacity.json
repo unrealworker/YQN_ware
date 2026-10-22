@@ -1,0 +1,6491 @@
+{
+  "owner": "ghs-complete-storage-capacity-v1",
+  "rack_total_slots": 25056,
+  "floor_total_slots": 7530,
+  "multiplier": 97,
+  "offset": 17,
+  "groups": [
+    {
+      "actor": "GHS_V2_Rack_A_Pass_W36176",
+      "mesh": "SM_GHS_V2Rack_A_Pass_W36176_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_A_Pass_W36176",
+      "kind": "rack",
+      "count": 11,
+      "base_slot": 0,
+      "slots_per_instance": 6
+    },
+    {
+      "actor": "GHS_V2_Rack_A_Pass_W37138",
+      "mesh": "SM_GHS_V2Rack_A_Pass_W37138_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_A_Pass_W37138",
+      "kind": "rack",
+      "count": 36,
+      "base_slot": 66,
+      "slots_per_instance": 6
+    },
+    {
+      "actor": "GHS_V2_Rack_A_W37138",
+      "mesh": "SM_GHS_V2Rack_A_W37138_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_A_W37138",
+      "kind": "rack",
+      "count": 1065,
+      "base_slot": 282,
+      "slots_per_instance": 12
+    },
+    {
+      "actor": "GHS_V2_Rack_A_W37619",
+      "mesh": "SM_GHS_V2Rack_A_W37619_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_A_W37619",
+      "kind": "rack",
+      "count": 140,
+      "base_slot": 13062,
+      "slots_per_instance": 12
+    },
+    {
+      "actor": "GHS_V2_Rack_B_Pass_W36176",
+      "mesh": "SM_GHS_V2Rack_B_Pass_W36176_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_B_Pass_W36176",
+      "kind": "rack",
+      "count": 11,
+      "base_slot": 14742,
+      "slots_per_instance": 18
+    },
+    {
+      "actor": "GHS_V2_Rack_B_W37138",
+      "mesh": "SM_GHS_V2Rack_B_W37138_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_B_W37138",
+      "kind": "rack",
+      "count": 220,
+      "base_slot": 14940,
+      "slots_per_instance": 36
+    },
+    {
+      "actor": "GHS_V2_Rack_B_W37619",
+      "mesh": "SM_GHS_V2Rack_B_W37619_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_B_W37619",
+      "kind": "rack",
+      "count": 44,
+      "base_slot": 22860,
+      "slots_per_instance": 36
+    },
+    {
+      "actor": "GHS_V2_Rack_D1",
+      "mesh": "SM_GHS_V2Rack_D1_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_D1",
+      "kind": "rack",
+      "count": 89,
+      "base_slot": 24444,
+      "slots_per_instance": 6
+    },
+    {
+      "actor": "GHS_V2_Rack_D1_W37138",
+      "mesh": "SM_GHS_V2Rack_D1_W37138_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_D1_W37138",
+      "kind": "rack",
+      "count": 5,
+      "base_slot": 24978,
+      "slots_per_instance": 6
+    },
+    {
+      "actor": "GHS_V2_Rack_D1_W37619",
+      "mesh": "SM_GHS_V2Rack_D1_W37619_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_D1_W37619",
+      "kind": "rack",
+      "count": 8,
+      "base_slot": 25008,
+      "slots_per_instance": 6
+    },
+    {
+      "actor": "GHS_CAD_PalletCargo",
+      "mesh": "SM_GHS_Presentation_CargoMid",
+      "source_mesh": "SM_GHS_Presentation_CargoMid",
+      "kind": "floor",
+      "count": 3726,
+      "base_slot": 0,
+      "slots_per_instance": 1
+    },
+    {
+      "actor": "GHS_CAD_PalletCargoHigh",
+      "mesh": "SM_GHS_Presentation_CargoHigh",
+      "source_mesh": "SM_GHS_Presentation_CargoHigh",
+      "kind": "floor",
+      "count": 1900,
+      "base_slot": 3726,
+      "slots_per_instance": 1
+    },
+    {
+      "actor": "GHS_CAD_PalletCargoLow",
+      "mesh": "SM_GHS_Presentation_CargoLow",
+      "source_mesh": "SM_GHS_Presentation_CargoLow",
+      "kind": "floor",
+      "count": 1904,
+      "base_slot": 5626,
+      "slots_per_instance": 1
+    }
+  ],
+  "meshes": [
+    {
+      "name": "SM_GHS_V2Rack_A_Pass_W36176_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_A_Pass_W36176",
+      "kind": "rack",
+      "cargo_width_m": 1.016,
+      "cargo_depth_m": 1.2192,
+      "cargo_stacks": [
+        {
+          "level": 1,
+          "column": 1,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": -1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.346752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.4350479999999992,
+          "cad_envelope_unused_height_m": 0.30804799999999943,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 2,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.426752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.35504800000000003,
+          "cad_envelope_unused_height_m": 0.22804800000000025,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 3,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 3,
+          "cartons_per_layer": 4,
+          "carton_count": 12,
+          "stack_top_z_m": 5.946752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.8350479999999996,
+          "cad_envelope_unused_height_m": 0.7080479999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 1,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": -1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 2,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.658152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.4958480000000005,
+          "cad_envelope_unused_height_m": 0.3080480000000012,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 3,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "level": 1,
+          "column": 1,
+          "min_cm": [
+            -162.82999999999998,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            -61.22999999999998,
+            60.96,
+            634.6752
+          ]
+        },
+        {
+          "index": 1,
+          "level": 1,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            642.6751999999999
+          ]
+        },
+        {
+          "index": 2,
+          "level": 1,
+          "column": 3,
+          "min_cm": [
+            61.22999999999998,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            162.82999999999998,
+            60.96,
+            594.6752
+          ]
+        },
+        {
+          "index": 3,
+          "level": 2,
+          "column": 1,
+          "min_cm": [
+            -162.82999999999998,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            -61.22999999999998,
+            60.96,
+            873.8152
+          ]
+        },
+        {
+          "index": 4,
+          "level": 2,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            865.8151999999999
+          ]
+        },
+        {
+          "index": 5,
+          "level": 2,
+          "column": 3,
+          "min_cm": [
+            61.22999999999998,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            162.82999999999998,
+            60.96,
+            873.8152
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_Pass_W37138_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_A_Pass_W37138",
+      "kind": "rack",
+      "cargo_width_m": 1.016,
+      "cargo_depth_m": 1.2192,
+      "cargo_stacks": [
+        {
+          "level": 1,
+          "column": 1,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.346752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.4350479999999992,
+          "cad_envelope_unused_height_m": 0.30804799999999943,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 2,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.426752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.35504800000000003,
+          "cad_envelope_unused_height_m": 0.22804800000000025,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 3,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 3,
+          "cartons_per_layer": 4,
+          "carton_count": 12,
+          "stack_top_z_m": 5.946752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.8350479999999996,
+          "cad_envelope_unused_height_m": 0.7080479999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 1,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 2,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.658152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.4958480000000005,
+          "cad_envelope_unused_height_m": 0.3080480000000012,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 3,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "level": 1,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            634.6752
+          ]
+        },
+        {
+          "index": 1,
+          "level": 1,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            642.6751999999999
+          ]
+        },
+        {
+          "index": 2,
+          "level": 1,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            594.6752
+          ]
+        },
+        {
+          "index": 3,
+          "level": 2,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            873.8152
+          ]
+        },
+        {
+          "index": 4,
+          "level": 2,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            865.8151999999999
+          ]
+        },
+        {
+          "index": 5,
+          "level": 2,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            873.8152
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_W37138_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_A_W37138",
+      "kind": "rack",
+      "cargo_width_m": 1.016,
+      "cargo_depth_m": 1.2192,
+      "cargo_stacks": [
+        {
+          "level": 1,
+          "column": 1,
+          "base_z_m": 0.0,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 1.7239520000000002,
+          "overhead_z_m": 2.159,
+          "top_clearance_m": 0.43504799999999966,
+          "cad_envelope_unused_height_m": 0.3080479999999999,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 2,
+          "base_z_m": 0.0,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 1.803952,
+          "overhead_z_m": 2.159,
+          "top_clearance_m": 0.3550479999999998,
+          "cad_envelope_unused_height_m": 0.22804800000000003,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 3,
+          "base_z_m": 0.0,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 3,
+          "cartons_per_layer": 4,
+          "carton_count": 12,
+          "stack_top_z_m": 1.3239520000000002,
+          "overhead_z_m": 2.159,
+          "top_clearance_m": 0.8350479999999996,
+          "cad_envelope_unused_height_m": 0.7080479999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 1,
+          "base_z_m": 2.3114,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 4.115352,
+          "overhead_z_m": 4.4704,
+          "top_clearance_m": 0.35504800000000003,
+          "cad_envelope_unused_height_m": 0.22804800000000025,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 2,
+          "base_z_m": 2.3114,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 4.035352,
+          "overhead_z_m": 4.4704,
+          "top_clearance_m": 0.4350480000000001,
+          "cad_envelope_unused_height_m": 0.3080480000000003,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 3,
+          "base_z_m": 2.3114,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 4.115352,
+          "overhead_z_m": 4.4704,
+          "top_clearance_m": 0.35504800000000003,
+          "cad_envelope_unused_height_m": 0.22804800000000025,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 1,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 3,
+          "cartons_per_layer": 4,
+          "carton_count": 12,
+          "stack_top_z_m": 5.946752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.8350479999999996,
+          "cad_envelope_unused_height_m": 0.7080479999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 2,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.426752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.35504800000000003,
+          "cad_envelope_unused_height_m": 0.22804800000000025,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 3,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.346752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.4350479999999992,
+          "cad_envelope_unused_height_m": 0.30804799999999943,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 1,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 2,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 3,
+          "cartons_per_layer": 4,
+          "carton_count": 12,
+          "stack_top_z_m": 8.258151999999999,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.8958480000000009,
+          "cad_envelope_unused_height_m": 0.7080480000000016,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 3,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "level": 1,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            0.0
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            172.39520000000002
+          ]
+        },
+        {
+          "index": 1,
+          "level": 1,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            0.0
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            180.3952
+          ]
+        },
+        {
+          "index": 2,
+          "level": 1,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            0.0
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            132.39520000000002
+          ]
+        },
+        {
+          "index": 3,
+          "level": 2,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            231.14
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            411.5352
+          ]
+        },
+        {
+          "index": 4,
+          "level": 2,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            231.14
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            403.5352
+          ]
+        },
+        {
+          "index": 5,
+          "level": 2,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            231.14
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            411.5352
+          ]
+        },
+        {
+          "index": 6,
+          "level": 3,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            594.6752
+          ]
+        },
+        {
+          "index": 7,
+          "level": 3,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            642.6751999999999
+          ]
+        },
+        {
+          "index": 8,
+          "level": 3,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            634.6752
+          ]
+        },
+        {
+          "index": 9,
+          "level": 4,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            873.8152
+          ]
+        },
+        {
+          "index": 10,
+          "level": 4,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            825.8151999999999
+          ]
+        },
+        {
+          "index": 11,
+          "level": 4,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            873.8152
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_A_W37619_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_A_W37619",
+      "kind": "rack",
+      "cargo_width_m": 1.016,
+      "cargo_depth_m": 1.2192,
+      "cargo_stacks": [
+        {
+          "level": 1,
+          "column": 1,
+          "base_z_m": 0.0,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 1.7239520000000002,
+          "overhead_z_m": 2.159,
+          "top_clearance_m": 0.43504799999999966,
+          "cad_envelope_unused_height_m": 0.3080479999999999,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 2,
+          "base_z_m": 0.0,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 1.803952,
+          "overhead_z_m": 2.159,
+          "top_clearance_m": 0.3550479999999998,
+          "cad_envelope_unused_height_m": 0.22804800000000003,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 3,
+          "base_z_m": 0.0,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 3,
+          "cartons_per_layer": 4,
+          "carton_count": 12,
+          "stack_top_z_m": 1.3239520000000002,
+          "overhead_z_m": 2.159,
+          "top_clearance_m": 0.8350479999999996,
+          "cad_envelope_unused_height_m": 0.7080479999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 1,
+          "base_z_m": 2.3114,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 4.115352,
+          "overhead_z_m": 4.4704,
+          "top_clearance_m": 0.35504800000000003,
+          "cad_envelope_unused_height_m": 0.22804800000000025,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 2,
+          "base_z_m": 2.3114,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 4.035352,
+          "overhead_z_m": 4.4704,
+          "top_clearance_m": 0.4350480000000001,
+          "cad_envelope_unused_height_m": 0.3080480000000003,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 3,
+          "base_z_m": 2.3114,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 4.115352,
+          "overhead_z_m": 4.4704,
+          "top_clearance_m": 0.35504800000000003,
+          "cad_envelope_unused_height_m": 0.22804800000000025,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 1,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 3,
+          "cartons_per_layer": 4,
+          "carton_count": 12,
+          "stack_top_z_m": 5.946752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.8350479999999996,
+          "cad_envelope_unused_height_m": 0.7080479999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 2,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.426752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.35504800000000003,
+          "cad_envelope_unused_height_m": 0.22804800000000025,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 3,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.346752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.4350479999999992,
+          "cad_envelope_unused_height_m": 0.30804799999999943,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 1,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 2,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 3,
+          "cartons_per_layer": 4,
+          "carton_count": 12,
+          "stack_top_z_m": 8.258151999999999,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.8958480000000009,
+          "cad_envelope_unused_height_m": 0.7080480000000016,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 3,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "level": 1,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            0.0
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            172.39520000000002
+          ]
+        },
+        {
+          "index": 1,
+          "level": 1,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            0.0
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            180.3952
+          ]
+        },
+        {
+          "index": 2,
+          "level": 1,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            0.0
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            132.39520000000002
+          ]
+        },
+        {
+          "index": 3,
+          "level": 2,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            231.14
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            411.5352
+          ]
+        },
+        {
+          "index": 4,
+          "level": 2,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            231.14
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            403.5352
+          ]
+        },
+        {
+          "index": 5,
+          "level": 2,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            231.14
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            411.5352
+          ]
+        },
+        {
+          "index": 6,
+          "level": 3,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            594.6752
+          ]
+        },
+        {
+          "index": 7,
+          "level": 3,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            642.6751999999999
+          ]
+        },
+        {
+          "index": 8,
+          "level": 3,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            634.6752
+          ]
+        },
+        {
+          "index": 9,
+          "level": 4,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            873.8152
+          ]
+        },
+        {
+          "index": 10,
+          "level": 4,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            825.8151999999999
+          ]
+        },
+        {
+          "index": 11,
+          "level": 4,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            873.8152
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_Pass_W36176_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_B_Pass_W36176",
+      "kind": "rack",
+      "cargo_width_m": 1.016,
+      "cargo_depth_m": 1.2192,
+      "cargo_stacks": [
+        {
+          "level": 1,
+          "column": 1,
+          "base_z_m": 4.5602,
+          "pallet_center_x_m": -1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.044152,
+          "overhead_z_m": 5.2459999999999996,
+          "top_clearance_m": 0.20184799999999914,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 2,
+          "base_z_m": 4.5602,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.064152,
+          "overhead_z_m": 5.2459999999999996,
+          "top_clearance_m": 0.18184799999999957,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 3,
+          "base_z_m": 4.5602,
+          "pallet_center_x_m": 1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.044152,
+          "overhead_z_m": 5.2459999999999996,
+          "top_clearance_m": 0.20184799999999914,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 1,
+          "base_z_m": 5.3222,
+          "pallet_center_x_m": -1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.8261519999999996,
+          "overhead_z_m": 6.008,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 2,
+          "base_z_m": 5.3222,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.806152,
+          "overhead_z_m": 6.008,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 3,
+          "base_z_m": 5.3222,
+          "pallet_center_x_m": 1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.8261519999999996,
+          "overhead_z_m": 6.008,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 1,
+          "base_z_m": 6.0842,
+          "pallet_center_x_m": -1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 6.568152,
+          "overhead_z_m": 6.77,
+          "top_clearance_m": 0.20184799999999914,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 2,
+          "base_z_m": 6.0842,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 6.588152,
+          "overhead_z_m": 6.77,
+          "top_clearance_m": 0.18184799999999957,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 3,
+          "base_z_m": 6.0842,
+          "pallet_center_x_m": 1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 6.568152,
+          "overhead_z_m": 6.77,
+          "top_clearance_m": 0.20184799999999914,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 1,
+          "base_z_m": 6.8462,
+          "pallet_center_x_m": -1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 7.350152,
+          "overhead_z_m": 7.532,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 2,
+          "base_z_m": 6.8462,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 7.330152,
+          "overhead_z_m": 7.532,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 3,
+          "base_z_m": 6.8462,
+          "pallet_center_x_m": 1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 7.350152,
+          "overhead_z_m": 7.532,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 5,
+          "column": 1,
+          "base_z_m": 7.6082,
+          "pallet_center_x_m": -1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.092152,
+          "overhead_z_m": 8.294,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 5,
+          "column": 2,
+          "base_z_m": 7.6082,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.112152,
+          "overhead_z_m": 8.294,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 5,
+          "column": 3,
+          "base_z_m": 7.6082,
+          "pallet_center_x_m": 1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.092152,
+          "overhead_z_m": 8.294,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 6,
+          "column": 1,
+          "base_z_m": 8.3702,
+          "pallet_center_x_m": -1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.874152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.27984799999999943,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 6,
+          "column": 2,
+          "base_z_m": 8.3702,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.854152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.2998480000000008,
+          "cad_envelope_unused_height_m": 0.12564800000000176,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 6,
+          "column": 3,
+          "base_z_m": 8.3702,
+          "pallet_center_x_m": 1.1202999999999999,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.874152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.27984799999999943,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "level": 1,
+          "column": 1,
+          "min_cm": [
+            -162.82999999999998,
+            -60.96,
+            456.02
+          ],
+          "max_cm": [
+            -61.22999999999998,
+            60.96,
+            504.4152
+          ]
+        },
+        {
+          "index": 1,
+          "level": 1,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            456.02
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            506.4152
+          ]
+        },
+        {
+          "index": 2,
+          "level": 1,
+          "column": 3,
+          "min_cm": [
+            61.22999999999998,
+            -60.96,
+            456.02
+          ],
+          "max_cm": [
+            162.82999999999998,
+            60.96,
+            504.4152
+          ]
+        },
+        {
+          "index": 3,
+          "level": 2,
+          "column": 1,
+          "min_cm": [
+            -162.82999999999998,
+            -60.96,
+            532.2199999999999
+          ],
+          "max_cm": [
+            -61.22999999999998,
+            60.96,
+            582.6152
+          ]
+        },
+        {
+          "index": 4,
+          "level": 2,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            532.2199999999999
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            580.6152
+          ]
+        },
+        {
+          "index": 5,
+          "level": 2,
+          "column": 3,
+          "min_cm": [
+            61.22999999999998,
+            -60.96,
+            532.2199999999999
+          ],
+          "max_cm": [
+            162.82999999999998,
+            60.96,
+            582.6152
+          ]
+        },
+        {
+          "index": 6,
+          "level": 3,
+          "column": 1,
+          "min_cm": [
+            -162.82999999999998,
+            -60.96,
+            608.42
+          ],
+          "max_cm": [
+            -61.22999999999998,
+            60.96,
+            656.8152
+          ]
+        },
+        {
+          "index": 7,
+          "level": 3,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            608.42
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            658.8152
+          ]
+        },
+        {
+          "index": 8,
+          "level": 3,
+          "column": 3,
+          "min_cm": [
+            61.22999999999998,
+            -60.96,
+            608.42
+          ],
+          "max_cm": [
+            162.82999999999998,
+            60.96,
+            656.8152
+          ]
+        },
+        {
+          "index": 9,
+          "level": 4,
+          "column": 1,
+          "min_cm": [
+            -162.82999999999998,
+            -60.96,
+            684.62
+          ],
+          "max_cm": [
+            -61.22999999999998,
+            60.96,
+            735.0151999999999
+          ]
+        },
+        {
+          "index": 10,
+          "level": 4,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            684.62
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            733.0152
+          ]
+        },
+        {
+          "index": 11,
+          "level": 4,
+          "column": 3,
+          "min_cm": [
+            61.22999999999998,
+            -60.96,
+            684.62
+          ],
+          "max_cm": [
+            162.82999999999998,
+            60.96,
+            735.0151999999999
+          ]
+        },
+        {
+          "index": 12,
+          "level": 5,
+          "column": 1,
+          "min_cm": [
+            -162.82999999999998,
+            -60.96,
+            760.82
+          ],
+          "max_cm": [
+            -61.22999999999998,
+            60.96,
+            809.2152000000001
+          ]
+        },
+        {
+          "index": 13,
+          "level": 5,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            760.82
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            811.2152
+          ]
+        },
+        {
+          "index": 14,
+          "level": 5,
+          "column": 3,
+          "min_cm": [
+            61.22999999999998,
+            -60.96,
+            760.82
+          ],
+          "max_cm": [
+            162.82999999999998,
+            60.96,
+            809.2152000000001
+          ]
+        },
+        {
+          "index": 15,
+          "level": 6,
+          "column": 1,
+          "min_cm": [
+            -162.82999999999998,
+            -60.96,
+            837.0200000000001
+          ],
+          "max_cm": [
+            -61.22999999999998,
+            60.96,
+            887.4152
+          ]
+        },
+        {
+          "index": 16,
+          "level": 6,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            837.0200000000001
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            885.4151999999999
+          ]
+        },
+        {
+          "index": 17,
+          "level": 6,
+          "column": 3,
+          "min_cm": [
+            61.22999999999998,
+            -60.96,
+            837.0200000000001
+          ],
+          "max_cm": [
+            162.82999999999998,
+            60.96,
+            887.4152
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_W37138_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_B_W37138",
+      "kind": "rack",
+      "cargo_width_m": 1.016,
+      "cargo_depth_m": 1.2192,
+      "cargo_stacks": [
+        {
+          "level": 1,
+          "column": 1,
+          "base_z_m": 0.0,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 0.483952,
+          "overhead_z_m": 0.6739999999999999,
+          "top_clearance_m": 0.19004799999999994,
+          "cad_envelope_unused_height_m": 0.10024800000000006,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 2,
+          "base_z_m": 0.0,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 0.503952,
+          "overhead_z_m": 0.6739999999999999,
+          "top_clearance_m": 0.17004799999999998,
+          "cad_envelope_unused_height_m": 0.0802480000000001,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 3,
+          "base_z_m": 0.0,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 0.483952,
+          "overhead_z_m": 0.6739999999999999,
+          "top_clearance_m": 0.19004799999999994,
+          "cad_envelope_unused_height_m": 0.10024800000000006,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 1,
+          "base_z_m": 0.7502,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 1.254152,
+          "overhead_z_m": 1.436,
+          "top_clearance_m": 0.181848,
+          "cad_envelope_unused_height_m": 0.10564799999999996,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 2,
+          "base_z_m": 0.7502,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 1.234152,
+          "overhead_z_m": 1.436,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 3,
+          "base_z_m": 0.7502,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 1.254152,
+          "overhead_z_m": 1.436,
+          "top_clearance_m": 0.181848,
+          "cad_envelope_unused_height_m": 0.10564799999999996,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 1,
+          "base_z_m": 1.5122,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 1.996152,
+          "overhead_z_m": 2.198,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 2,
+          "base_z_m": 1.5122,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 2.016152,
+          "overhead_z_m": 2.198,
+          "top_clearance_m": 0.181848,
+          "cad_envelope_unused_height_m": 0.10564799999999996,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 3,
+          "base_z_m": 1.5122,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 1.996152,
+          "overhead_z_m": 2.198,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 1,
+          "base_z_m": 2.2742,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 2.778152,
+          "overhead_z_m": 2.96,
+          "top_clearance_m": 0.181848,
+          "cad_envelope_unused_height_m": 0.10564799999999996,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 2,
+          "base_z_m": 2.2742,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 2.758152,
+          "overhead_z_m": 2.96,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 3,
+          "base_z_m": 2.2742,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 2.778152,
+          "overhead_z_m": 2.96,
+          "top_clearance_m": 0.181848,
+          "cad_envelope_unused_height_m": 0.10564799999999996,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 5,
+          "column": 1,
+          "base_z_m": 3.0362,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 3.520152,
+          "overhead_z_m": 3.722,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 5,
+          "column": 2,
+          "base_z_m": 3.0362,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 3.540152,
+          "overhead_z_m": 3.722,
+          "top_clearance_m": 0.181848,
+          "cad_envelope_unused_height_m": 0.10564799999999996,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 5,
+          "column": 3,
+          "base_z_m": 3.0362,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 3.520152,
+          "overhead_z_m": 3.722,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 6,
+          "column": 1,
+          "base_z_m": 3.7982,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 4.302152,
+          "overhead_z_m": 4.484,
+          "top_clearance_m": 0.18184799999999957,
+          "cad_envelope_unused_height_m": 0.10564799999999952,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 6,
+          "column": 2,
+          "base_z_m": 3.7982,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 4.282152,
+          "overhead_z_m": 4.484,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 6,
+          "column": 3,
+          "base_z_m": 3.7982,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 4.302152,
+          "overhead_z_m": 4.484,
+          "top_clearance_m": 0.18184799999999957,
+          "cad_envelope_unused_height_m": 0.10564799999999952,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 7,
+          "column": 1,
+          "base_z_m": 4.5602,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.044152,
+          "overhead_z_m": 5.2459999999999996,
+          "top_clearance_m": 0.20184799999999914,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 7,
+          "column": 2,
+          "base_z_m": 4.5602,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.064152,
+          "overhead_z_m": 5.2459999999999996,
+          "top_clearance_m": 0.18184799999999957,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 7,
+          "column": 3,
+          "base_z_m": 4.5602,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.044152,
+          "overhead_z_m": 5.2459999999999996,
+          "top_clearance_m": 0.20184799999999914,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 8,
+          "column": 1,
+          "base_z_m": 5.3222,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.8261519999999996,
+          "overhead_z_m": 6.008,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 8,
+          "column": 2,
+          "base_z_m": 5.3222,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.806152,
+          "overhead_z_m": 6.008,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 8,
+          "column": 3,
+          "base_z_m": 5.3222,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.8261519999999996,
+          "overhead_z_m": 6.008,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 9,
+          "column": 1,
+          "base_z_m": 6.0842,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 6.568152,
+          "overhead_z_m": 6.77,
+          "top_clearance_m": 0.20184799999999914,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 9,
+          "column": 2,
+          "base_z_m": 6.0842,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 6.588152,
+          "overhead_z_m": 6.77,
+          "top_clearance_m": 0.18184799999999957,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 9,
+          "column": 3,
+          "base_z_m": 6.0842,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 6.568152,
+          "overhead_z_m": 6.77,
+          "top_clearance_m": 0.20184799999999914,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 10,
+          "column": 1,
+          "base_z_m": 6.8462,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 7.350152,
+          "overhead_z_m": 7.532,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 10,
+          "column": 2,
+          "base_z_m": 6.8462,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 7.330152,
+          "overhead_z_m": 7.532,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 10,
+          "column": 3,
+          "base_z_m": 6.8462,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 7.350152,
+          "overhead_z_m": 7.532,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 11,
+          "column": 1,
+          "base_z_m": 7.6082,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.092152,
+          "overhead_z_m": 8.294,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 11,
+          "column": 2,
+          "base_z_m": 7.6082,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.112152,
+          "overhead_z_m": 8.294,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 11,
+          "column": 3,
+          "base_z_m": 7.6082,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.092152,
+          "overhead_z_m": 8.294,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 12,
+          "column": 1,
+          "base_z_m": 8.3702,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.874152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.27984799999999943,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 12,
+          "column": 2,
+          "base_z_m": 8.3702,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.854152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.2998480000000008,
+          "cad_envelope_unused_height_m": 0.12564800000000176,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 12,
+          "column": 3,
+          "base_z_m": 8.3702,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.874152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.27984799999999943,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "level": 1,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            0.0
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            48.3952
+          ]
+        },
+        {
+          "index": 1,
+          "level": 1,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            0.0
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            50.395199999999996
+          ]
+        },
+        {
+          "index": 2,
+          "level": 1,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            0.0
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            48.3952
+          ]
+        },
+        {
+          "index": 3,
+          "level": 2,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            75.02
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            125.4152
+          ]
+        },
+        {
+          "index": 4,
+          "level": 2,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            75.02
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            123.4152
+          ]
+        },
+        {
+          "index": 5,
+          "level": 2,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            75.02
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            125.4152
+          ]
+        },
+        {
+          "index": 6,
+          "level": 3,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            151.22
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            199.6152
+          ]
+        },
+        {
+          "index": 7,
+          "level": 3,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            151.22
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            201.6152
+          ]
+        },
+        {
+          "index": 8,
+          "level": 3,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            151.22
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            199.6152
+          ]
+        },
+        {
+          "index": 9,
+          "level": 4,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            227.42
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            277.8152
+          ]
+        },
+        {
+          "index": 10,
+          "level": 4,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            227.42
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            275.8152
+          ]
+        },
+        {
+          "index": 11,
+          "level": 4,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            227.42
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            277.8152
+          ]
+        },
+        {
+          "index": 12,
+          "level": 5,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            303.62
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            352.0152
+          ]
+        },
+        {
+          "index": 13,
+          "level": 5,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            303.62
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            354.0152
+          ]
+        },
+        {
+          "index": 14,
+          "level": 5,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            303.62
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            352.0152
+          ]
+        },
+        {
+          "index": 15,
+          "level": 6,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            379.82
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            430.21520000000004
+          ]
+        },
+        {
+          "index": 16,
+          "level": 6,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            379.82
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            428.2152
+          ]
+        },
+        {
+          "index": 17,
+          "level": 6,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            379.82
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            430.21520000000004
+          ]
+        },
+        {
+          "index": 18,
+          "level": 7,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            456.02
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            504.4152
+          ]
+        },
+        {
+          "index": 19,
+          "level": 7,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            456.02
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            506.4152
+          ]
+        },
+        {
+          "index": 20,
+          "level": 7,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            456.02
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            504.4152
+          ]
+        },
+        {
+          "index": 21,
+          "level": 8,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            532.2199999999999
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            582.6152
+          ]
+        },
+        {
+          "index": 22,
+          "level": 8,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            532.2199999999999
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            580.6152
+          ]
+        },
+        {
+          "index": 23,
+          "level": 8,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            532.2199999999999
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            582.6152
+          ]
+        },
+        {
+          "index": 24,
+          "level": 9,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            608.42
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            656.8152
+          ]
+        },
+        {
+          "index": 25,
+          "level": 9,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            608.42
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            658.8152
+          ]
+        },
+        {
+          "index": 26,
+          "level": 9,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            608.42
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            656.8152
+          ]
+        },
+        {
+          "index": 27,
+          "level": 10,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            684.62
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            735.0151999999999
+          ]
+        },
+        {
+          "index": 28,
+          "level": 10,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            684.62
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            733.0152
+          ]
+        },
+        {
+          "index": 29,
+          "level": 10,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            684.62
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            735.0151999999999
+          ]
+        },
+        {
+          "index": 30,
+          "level": 11,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            760.82
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            809.2152000000001
+          ]
+        },
+        {
+          "index": 31,
+          "level": 11,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            760.82
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            811.2152
+          ]
+        },
+        {
+          "index": 32,
+          "level": 11,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            760.82
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            809.2152000000001
+          ]
+        },
+        {
+          "index": 33,
+          "level": 12,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            837.0200000000001
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            887.4152
+          ]
+        },
+        {
+          "index": 34,
+          "level": 12,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            837.0200000000001
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            885.4151999999999
+          ]
+        },
+        {
+          "index": 35,
+          "level": 12,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            837.0200000000001
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            887.4152
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_B_W37619_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_B_W37619",
+      "kind": "rack",
+      "cargo_width_m": 1.016,
+      "cargo_depth_m": 1.2192,
+      "cargo_stacks": [
+        {
+          "level": 1,
+          "column": 1,
+          "base_z_m": 0.0,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 0.483952,
+          "overhead_z_m": 0.6739999999999999,
+          "top_clearance_m": 0.19004799999999994,
+          "cad_envelope_unused_height_m": 0.10024800000000006,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 2,
+          "base_z_m": 0.0,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 0.503952,
+          "overhead_z_m": 0.6739999999999999,
+          "top_clearance_m": 0.17004799999999998,
+          "cad_envelope_unused_height_m": 0.0802480000000001,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 3,
+          "base_z_m": 0.0,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 0.483952,
+          "overhead_z_m": 0.6739999999999999,
+          "top_clearance_m": 0.19004799999999994,
+          "cad_envelope_unused_height_m": 0.10024800000000006,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 1,
+          "base_z_m": 0.7502,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 1.254152,
+          "overhead_z_m": 1.436,
+          "top_clearance_m": 0.181848,
+          "cad_envelope_unused_height_m": 0.10564799999999996,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 2,
+          "base_z_m": 0.7502,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 1.234152,
+          "overhead_z_m": 1.436,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 3,
+          "base_z_m": 0.7502,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 1.254152,
+          "overhead_z_m": 1.436,
+          "top_clearance_m": 0.181848,
+          "cad_envelope_unused_height_m": 0.10564799999999996,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 1,
+          "base_z_m": 1.5122,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 1.996152,
+          "overhead_z_m": 2.198,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 2,
+          "base_z_m": 1.5122,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 2.016152,
+          "overhead_z_m": 2.198,
+          "top_clearance_m": 0.181848,
+          "cad_envelope_unused_height_m": 0.10564799999999996,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 3,
+          "column": 3,
+          "base_z_m": 1.5122,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 1.996152,
+          "overhead_z_m": 2.198,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 1,
+          "base_z_m": 2.2742,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 2.778152,
+          "overhead_z_m": 2.96,
+          "top_clearance_m": 0.181848,
+          "cad_envelope_unused_height_m": 0.10564799999999996,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 2,
+          "base_z_m": 2.2742,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 2.758152,
+          "overhead_z_m": 2.96,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 4,
+          "column": 3,
+          "base_z_m": 2.2742,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 2.778152,
+          "overhead_z_m": 2.96,
+          "top_clearance_m": 0.181848,
+          "cad_envelope_unused_height_m": 0.10564799999999996,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 5,
+          "column": 1,
+          "base_z_m": 3.0362,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 3.520152,
+          "overhead_z_m": 3.722,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 5,
+          "column": 2,
+          "base_z_m": 3.0362,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 3.540152,
+          "overhead_z_m": 3.722,
+          "top_clearance_m": 0.181848,
+          "cad_envelope_unused_height_m": 0.10564799999999996,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 5,
+          "column": 3,
+          "base_z_m": 3.0362,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 3.520152,
+          "overhead_z_m": 3.722,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 6,
+          "column": 1,
+          "base_z_m": 3.7982,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 4.302152,
+          "overhead_z_m": 4.484,
+          "top_clearance_m": 0.18184799999999957,
+          "cad_envelope_unused_height_m": 0.10564799999999952,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 6,
+          "column": 2,
+          "base_z_m": 3.7982,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 4.282152,
+          "overhead_z_m": 4.484,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 6,
+          "column": 3,
+          "base_z_m": 3.7982,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 4.302152,
+          "overhead_z_m": 4.484,
+          "top_clearance_m": 0.18184799999999957,
+          "cad_envelope_unused_height_m": 0.10564799999999952,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 7,
+          "column": 1,
+          "base_z_m": 4.5602,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.044152,
+          "overhead_z_m": 5.2459999999999996,
+          "top_clearance_m": 0.20184799999999914,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 7,
+          "column": 2,
+          "base_z_m": 4.5602,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.064152,
+          "overhead_z_m": 5.2459999999999996,
+          "top_clearance_m": 0.18184799999999957,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 7,
+          "column": 3,
+          "base_z_m": 4.5602,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.044152,
+          "overhead_z_m": 5.2459999999999996,
+          "top_clearance_m": 0.20184799999999914,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 8,
+          "column": 1,
+          "base_z_m": 5.3222,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.8261519999999996,
+          "overhead_z_m": 6.008,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 8,
+          "column": 2,
+          "base_z_m": 5.3222,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.806152,
+          "overhead_z_m": 6.008,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 8,
+          "column": 3,
+          "base_z_m": 5.3222,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 5.8261519999999996,
+          "overhead_z_m": 6.008,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 9,
+          "column": 1,
+          "base_z_m": 6.0842,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 6.568152,
+          "overhead_z_m": 6.77,
+          "top_clearance_m": 0.20184799999999914,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 9,
+          "column": 2,
+          "base_z_m": 6.0842,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 6.588152,
+          "overhead_z_m": 6.77,
+          "top_clearance_m": 0.18184799999999957,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 9,
+          "column": 3,
+          "base_z_m": 6.0842,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 6.568152,
+          "overhead_z_m": 6.77,
+          "top_clearance_m": 0.20184799999999914,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 10,
+          "column": 1,
+          "base_z_m": 6.8462,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 7.350152,
+          "overhead_z_m": 7.532,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 10,
+          "column": 2,
+          "base_z_m": 6.8462,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 7.330152,
+          "overhead_z_m": 7.532,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 10,
+          "column": 3,
+          "base_z_m": 6.8462,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 7.350152,
+          "overhead_z_m": 7.532,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 11,
+          "column": 1,
+          "base_z_m": 7.6082,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.092152,
+          "overhead_z_m": 8.294,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 11,
+          "column": 2,
+          "base_z_m": 7.6082,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.112152,
+          "overhead_z_m": 8.294,
+          "top_clearance_m": 0.18184800000000045,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 11,
+          "column": 3,
+          "base_z_m": 7.6082,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.092152,
+          "overhead_z_m": 8.294,
+          "top_clearance_m": 0.20184800000000003,
+          "cad_envelope_unused_height_m": 0.12564799999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 12,
+          "column": 1,
+          "base_z_m": 8.3702,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.874152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.27984799999999943,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 12,
+          "column": 2,
+          "base_z_m": 8.3702,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.36
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.854152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.2998480000000008,
+          "cad_envelope_unused_height_m": 0.12564800000000176,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 12,
+          "column": 3,
+          "base_z_m": 8.3702,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.38
+          ],
+          "layers": 1,
+          "cartons_per_layer": 4,
+          "carton_count": 4,
+          "stack_top_z_m": 8.874152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.27984799999999943,
+          "cad_envelope_unused_height_m": 0.10564800000000041,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "level": 1,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            0.0
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            48.3952
+          ]
+        },
+        {
+          "index": 1,
+          "level": 1,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            0.0
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            50.395199999999996
+          ]
+        },
+        {
+          "index": 2,
+          "level": 1,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            0.0
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            48.3952
+          ]
+        },
+        {
+          "index": 3,
+          "level": 2,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            75.02
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            125.4152
+          ]
+        },
+        {
+          "index": 4,
+          "level": 2,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            75.02
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            123.4152
+          ]
+        },
+        {
+          "index": 5,
+          "level": 2,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            75.02
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            125.4152
+          ]
+        },
+        {
+          "index": 6,
+          "level": 3,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            151.22
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            199.6152
+          ]
+        },
+        {
+          "index": 7,
+          "level": 3,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            151.22
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            201.6152
+          ]
+        },
+        {
+          "index": 8,
+          "level": 3,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            151.22
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            199.6152
+          ]
+        },
+        {
+          "index": 9,
+          "level": 4,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            227.42
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            277.8152
+          ]
+        },
+        {
+          "index": 10,
+          "level": 4,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            227.42
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            275.8152
+          ]
+        },
+        {
+          "index": 11,
+          "level": 4,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            227.42
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            277.8152
+          ]
+        },
+        {
+          "index": 12,
+          "level": 5,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            303.62
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            352.0152
+          ]
+        },
+        {
+          "index": 13,
+          "level": 5,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            303.62
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            354.0152
+          ]
+        },
+        {
+          "index": 14,
+          "level": 5,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            303.62
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            352.0152
+          ]
+        },
+        {
+          "index": 15,
+          "level": 6,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            379.82
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            430.21520000000004
+          ]
+        },
+        {
+          "index": 16,
+          "level": 6,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            379.82
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            428.2152
+          ]
+        },
+        {
+          "index": 17,
+          "level": 6,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            379.82
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            430.21520000000004
+          ]
+        },
+        {
+          "index": 18,
+          "level": 7,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            456.02
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            504.4152
+          ]
+        },
+        {
+          "index": 19,
+          "level": 7,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            456.02
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            506.4152
+          ]
+        },
+        {
+          "index": 20,
+          "level": 7,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            456.02
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            504.4152
+          ]
+        },
+        {
+          "index": 21,
+          "level": 8,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            532.2199999999999
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            582.6152
+          ]
+        },
+        {
+          "index": 22,
+          "level": 8,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            532.2199999999999
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            580.6152
+          ]
+        },
+        {
+          "index": 23,
+          "level": 8,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            532.2199999999999
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            582.6152
+          ]
+        },
+        {
+          "index": 24,
+          "level": 9,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            608.42
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            656.8152
+          ]
+        },
+        {
+          "index": 25,
+          "level": 9,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            608.42
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            658.8152
+          ]
+        },
+        {
+          "index": 26,
+          "level": 9,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            608.42
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            656.8152
+          ]
+        },
+        {
+          "index": 27,
+          "level": 10,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            684.62
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            735.0151999999999
+          ]
+        },
+        {
+          "index": 28,
+          "level": 10,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            684.62
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            733.0152
+          ]
+        },
+        {
+          "index": 29,
+          "level": 10,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            684.62
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            735.0151999999999
+          ]
+        },
+        {
+          "index": 30,
+          "level": 11,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            760.82
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            809.2152000000001
+          ]
+        },
+        {
+          "index": 31,
+          "level": 11,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            760.82
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            811.2152
+          ]
+        },
+        {
+          "index": 32,
+          "level": 11,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            760.82
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            809.2152000000001
+          ]
+        },
+        {
+          "index": 33,
+          "level": 12,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            837.0200000000001
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            887.4152
+          ]
+        },
+        {
+          "index": 34,
+          "level": 12,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            837.0200000000001
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            885.4151999999999
+          ]
+        },
+        {
+          "index": 35,
+          "level": 12,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            837.0200000000001
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            887.4152
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_D1_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_D1",
+      "kind": "rack",
+      "cargo_width_m": 1.016,
+      "cargo_depth_m": 1.2192,
+      "cargo_stacks": [
+        {
+          "level": 1,
+          "column": 1,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": -1.1684,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.346752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.4350479999999992,
+          "cad_envelope_unused_height_m": 0.30804799999999943,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 2,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.426752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.35504800000000003,
+          "cad_envelope_unused_height_m": 0.22804800000000025,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 3,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 1.1684,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 3,
+          "cartons_per_layer": 4,
+          "carton_count": 12,
+          "stack_top_z_m": 5.946752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.8350479999999996,
+          "cad_envelope_unused_height_m": 0.7080479999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 1,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": -1.1684,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 2,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.658152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.4958480000000005,
+          "cad_envelope_unused_height_m": 0.3080480000000012,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 3,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 1.1684,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "level": 1,
+          "column": 1,
+          "min_cm": [
+            -167.64000000000001,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            -66.04,
+            60.96,
+            634.6752
+          ]
+        },
+        {
+          "index": 1,
+          "level": 1,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            642.6751999999999
+          ]
+        },
+        {
+          "index": 2,
+          "level": 1,
+          "column": 3,
+          "min_cm": [
+            66.04,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            167.64000000000001,
+            60.96,
+            594.6752
+          ]
+        },
+        {
+          "index": 3,
+          "level": 2,
+          "column": 1,
+          "min_cm": [
+            -167.64000000000001,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            -66.04,
+            60.96,
+            873.8152
+          ]
+        },
+        {
+          "index": 4,
+          "level": 2,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            865.8151999999999
+          ]
+        },
+        {
+          "index": 5,
+          "level": 2,
+          "column": 3,
+          "min_cm": [
+            66.04,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            167.64000000000001,
+            60.96,
+            873.8152
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_D1_W37138_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_D1_W37138",
+      "kind": "rack",
+      "cargo_width_m": 1.016,
+      "cargo_depth_m": 1.2192,
+      "cargo_stacks": [
+        {
+          "level": 1,
+          "column": 1,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.346752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.4350479999999992,
+          "cad_envelope_unused_height_m": 0.30804799999999943,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 2,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.426752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.35504800000000003,
+          "cad_envelope_unused_height_m": 0.22804800000000025,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 3,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 3,
+          "cartons_per_layer": 4,
+          "carton_count": 12,
+          "stack_top_z_m": 5.946752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.8350479999999996,
+          "cad_envelope_unused_height_m": 0.7080479999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 1,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": -1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 2,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.658152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.4958480000000005,
+          "cad_envelope_unused_height_m": 0.3080480000000012,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 3,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 1.14435,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "level": 1,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            634.6752
+          ]
+        },
+        {
+          "index": 1,
+          "level": 1,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            642.6751999999999
+          ]
+        },
+        {
+          "index": 2,
+          "level": 1,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            594.6752
+          ]
+        },
+        {
+          "index": 3,
+          "level": 2,
+          "column": 1,
+          "min_cm": [
+            -165.23499999999999,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            -63.635,
+            60.96,
+            873.8152
+          ]
+        },
+        {
+          "index": 4,
+          "level": 2,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            865.8151999999999
+          ]
+        },
+        {
+          "index": 5,
+          "level": 2,
+          "column": 3,
+          "min_cm": [
+            63.635,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            165.23499999999999,
+            60.96,
+            873.8152
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SM_GHS_V2Rack_D1_W37619_Capacity",
+      "source_mesh": "SM_GHS_V2Rack_D1_W37619",
+      "kind": "rack",
+      "cargo_width_m": 1.016,
+      "cargo_depth_m": 1.2192,
+      "cargo_stacks": [
+        {
+          "level": 1,
+          "column": 1,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.346752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.4350479999999992,
+          "cad_envelope_unused_height_m": 0.30804799999999943,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 2,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 6.426752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.35504800000000003,
+          "cad_envelope_unused_height_m": 0.22804800000000025,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 1,
+          "column": 3,
+          "base_z_m": 4.6228,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 3,
+          "cartons_per_layer": 4,
+          "carton_count": 12,
+          "stack_top_z_m": 5.946752,
+          "overhead_z_m": 6.7818,
+          "top_clearance_m": 0.8350479999999996,
+          "cad_envelope_unused_height_m": 0.7080479999999998,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 1,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": -1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 2,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 0.0,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.4
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.658152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.4958480000000005,
+          "cad_envelope_unused_height_m": 0.3080480000000012,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ],
+            [
+              -0.012,
+              0.008
+            ],
+            [
+              0.012,
+              -0.008
+            ]
+          ]
+        },
+        {
+          "level": 2,
+          "column": 3,
+          "base_z_m": 6.9342,
+          "pallet_center_x_m": 1.1563750000000002,
+          "carton_size_m": [
+            0.45,
+            0.55,
+            0.42
+          ],
+          "layers": 4,
+          "cartons_per_layer": 4,
+          "carton_count": 16,
+          "stack_top_z_m": 8.738152,
+          "overhead_z_m": 9.154,
+          "top_clearance_m": 0.41584800000000044,
+          "cad_envelope_unused_height_m": 0.22804800000000114,
+          "layer_shifts_m": [
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ],
+            [
+              -0.012,
+              -0.008
+            ],
+            [
+              0.012,
+              0.008
+            ]
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "level": 1,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            634.6752
+          ]
+        },
+        {
+          "index": 1,
+          "level": 1,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            642.6751999999999
+          ]
+        },
+        {
+          "index": 2,
+          "level": 1,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            462.28
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            594.6752
+          ]
+        },
+        {
+          "index": 3,
+          "level": 2,
+          "column": 1,
+          "min_cm": [
+            -166.43750000000003,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            -64.83750000000002,
+            60.96,
+            873.8152
+          ]
+        },
+        {
+          "index": 4,
+          "level": 2,
+          "column": 2,
+          "min_cm": [
+            -50.8,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            50.8,
+            60.96,
+            865.8151999999999
+          ]
+        },
+        {
+          "index": 5,
+          "level": 2,
+          "column": 3,
+          "min_cm": [
+            64.83750000000002,
+            -60.96,
+            693.42
+          ],
+          "max_cm": [
+            166.43750000000003,
+            60.96,
+            873.8152
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SM_GHS_Presentation_CargoMid",
+      "source_mesh": "SM_GHS_Presentation_CargoMid",
+      "kind": "floor",
+      "slots": [],
+      "pallet_count": 2,
+      "pallet_base_z_m": [
+        0.0,
+        0.9880155920982361
+      ]
+    },
+    {
+      "name": "SM_GHS_Presentation_CargoHigh",
+      "source_mesh": "SM_GHS_Presentation_CargoHigh",
+      "kind": "floor",
+      "slots": [],
+      "pallet_count": 2,
+      "pallet_base_z_m": [
+        0.0,
+        1.2880154848098755
+      ]
+    },
+    {
+      "name": "SM_GHS_Presentation_CargoLow",
+      "source_mesh": "SM_GHS_Presentation_CargoLow",
+      "kind": "floor",
+      "slots": [],
+      "pallet_count": 2,
+      "pallet_base_z_m": [
+        0.0,
+        0.6880155801773071
+      ]
+    }
+  ]
+}

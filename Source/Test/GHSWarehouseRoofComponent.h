@@ -42,6 +42,9 @@ public:
     bool OpenRoof();
     UFUNCTION(BlueprintCallable, Category="Warehouse Roof")
     void RestoreRoof();
+    /** Hides shell only after the roof opens; latest target wins during dissolve. */
+    UFUNCTION(BlueprintCallable, Category="Warehouse Roof") void SetBuildingVisible(bool bVisible);
+    UFUNCTION(BlueprintPure, Category="Warehouse Roof") bool IsBuildingVisible() const { return bBuildingVisible; }
     UFUNCTION(BlueprintPure, Category="Warehouse Roof")
     bool IsInteriorAvailable() const { return !HasRoof() || Transition.IsOpen(); }
     UFUNCTION(BlueprintPure, Category="Warehouse Roof")
@@ -65,6 +68,10 @@ protected:
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 private:
+    void UpdateShellVisibility();
+    struct FShellActor { TWeakObjectPtr<AActor> Actor; bool bOriginallyHidden=false; };
+    TArray<FShellActor> ShellActors;
+    bool bShellInitialized=false,bBuildingVisible=true;
     void UpdateDissolveMaterials();
     void RestoreSourceMaterials();
     UPROPERTY(Transient) TObjectPtr<AActor> RoofActor;

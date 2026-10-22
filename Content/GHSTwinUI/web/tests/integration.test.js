@@ -140,7 +140,7 @@ test('action visibility tolerates only fractional viewport rounding and reports 
 test('native technical map names never replace readable business page subtitles',()=>{
   const app=boot(),mapName='UEDPIE_0_GHS_CAD_NormalWarehouse_CADScene_WithLongTechnicalSuffix';
   app.window.twinReceive({connected:true,mapName,equipment:[],facilities:[]});
-  for(const [page,subtitle]of[['devices','场景设备'],['settings','普通仓库 · 场景视图']]){
+  for(const [page,subtitle]of[['devices','场景设备'],['settings','GHS · 场景视图']]){
     app.window.twinNavigate(page);
     assert.ok(app.html().includes(subtitle));
     assert.ok(!app.html().includes(mapName));

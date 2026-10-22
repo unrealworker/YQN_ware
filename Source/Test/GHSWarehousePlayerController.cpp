@@ -4,6 +4,7 @@
 #include "GHSTwinHUDWidget.h"
 #include "GHSTwinViewport.h"
 #include "GHSWarehouseRoofComponent.h"
+#include "GHSStorageCapacityComponent.h"
 #include "GHSCampusTrafficActor.h"
 #include "Engine/GameViewportClient.h"
 #include "Engine/LocalPlayer.h"
@@ -33,6 +34,7 @@ AGHSWarehousePlayerController::AGHSWarehousePlayerController()
     bEnableMouseOverEvents = false;
     SearchStreamingInput=CreateDefaultSubobject<UPixelStreamingInput>(TEXT("SceneSearchStreamingInput"));
     WarehouseRoof=CreateDefaultSubobject<UGHSWarehouseRoofComponent>(TEXT("WarehouseRoof"));
+    StorageCapacity=CreateDefaultSubobject<UGHSStorageCapacityComponent>(TEXT("StorageCapacity"));
 }
 
 void AGHSWarehousePlayerController::BeginPlay()
@@ -44,6 +46,7 @@ void AGHSWarehousePlayerController::BeginPlay()
         if (GetWorld()->GetMapName().Contains(TEXT("ZcoolSmartFactory")))
         {
             CampusTraffic=GetWorld()->SpawnActor<AGHSCampusTrafficActor>();
+            if(StorageCapacity) StorageCapacity->InitializeForWorld();
             TwinHUDWidget = CreateWidget<UGHSTwinHUDWidget>(this);
             if (TwinHUDWidget && GetWorld()->GetGameViewport())
             {

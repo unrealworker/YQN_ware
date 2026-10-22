@@ -1,4 +1,5 @@
 #include "GHSTwinSceneData.h"
+#include "GHSStorageCapacityComponent.h"
 
 #include "GHSDockTruckDataComponent.h"
 #include "GHSMannedForkliftDataComponent.h"
@@ -359,6 +360,7 @@ struct FGHSTwinSceneData::FImpl
     FString SearchDeviceKey;
     TMap<FString,TArray<FCadInstance>> CadByMesh;
     TMap<FString,TArray<FSlot>> SlotsByMesh;
+    TWeakObjectPtr<UGHSStorageCapacityComponent> Capacity;
     TMap<TWeakObjectPtr<UInstancedStaticMeshComponent>,FStorageCache> StorageCaches;
     TArray<FVisibility> Visibility;
     TSet<TWeakObjectPtr<AActor>> VisibilityTracked;
@@ -625,6 +627,25 @@ struct FGHSTwinSceneData::FImpl
                 Slots.Add(Slot);
             }
         }
+        // Complete-capacity meshes retain the original CAD instance ordering.
+        auto CapacityData=ReadJson(FPaths::ProjectContentDir()/TEXT("GHSTwinUI/data/storage-capacity.json"));
+        const TArray<TSharedPtr<FJsonValue>>* CapacityMeshes=nullptr;
+        if(CapacityData && CapacityData->TryGetArrayField(TEXT("meshes"),CapacityMeshes)) for(const auto& Value:*CapacityMeshes)
+        {
+            const auto Model=Value->AsObject(); FString Name,Source;
+            if(!Model || !Model->TryGetStringField(TEXT("name"),Name) || !Model->TryGetStringField(TEXT("source_mesh"),Source)) continue;
+            if(const auto* Cad=CadByMesh.Find(Source)) CadByMesh.Add(Name,*Cad);
+            const TArray<TSharedPtr<FJsonValue>>* Slots=nullptr;
+            if(!Name.EndsWith(TEXT("_Capacity")) || !Model->TryGetArrayField(TEXT("slots"),Slots)) continue;
+            auto& Target=SlotsByMesh.FindOrAdd(Name);Target.Reset();
+            for(const auto& V:*Slots)
+            {
+                const auto Slot=V->AsObject(); FVector Min,Max;double Level=0,Column=0;
+                if(!Slot || !JsonVector(Slot,TEXT("min_cm"),Min) || !JsonVector(Slot,TEXT("max_cm"),Max)
+                    || !Slot->TryGetNumberField(TEXT("level"),Level) || !Slot->TryGetNumberField(TEXT("column"),Column)) continue;
+                Target.Add({int32(Level),int32(Column),FBox(Min,Max)});
+            }
+        }
     }
 
     static void UpdateBounds(FRecord& Record)
@@ -853,6 +874,8 @@ void FGHSTwinSceneData::Refresh(UWorld* World,bool bBootstrapLegacyComponents)
     bool bContentChanged=Impl->MapName!=MapName;
     if(bContentChanged) { Impl->MapName=MapName; Impl->bSnapshotDirty=true; }
     Impl->LoadMetadata();
+    if(!Impl->Capacity.IsValid()) for(TActorIterator<APlayerController> It(World);It;++It)
+        if(auto* Capacity=It->FindComponentByClass<UGHSStorageCapacityComponent>()) {Impl->Capacity=Capacity;break;}
     if(Impl->bWorldRescan || FPlatformTime::Seconds()>=Impl->NextWorldValidation) Impl->Discover();
     bool bRegistryChanged=Impl->bBootstrapNeeded;
     TArray<AActor*> Actors;
@@ -1109,12 +1132,15 @@ bool FGHSTwinSceneData::PickRay(const FVector& Origin,const FVector& Direction,F
             if (Slots) for (const auto& Slot : *Slots)
             {
                 double Hit=0;
-                if (GHSTwinSelection::IntersectBox(Origin,Direction,Transform,Slot.Bounds,Hit) && Hit<SlotDistance)
+                if (GHSTwinSelection::IntersectBox(Origin,Direction,Transform,Slot.Bounds,Hit) && Hit<SlotDistance
+                    && (!Impl->Capacity.IsValid() || Impl->Capacity->IsStorageHitVisible(Record.Component.Get(),Record.InstanceIndex,Transform.TransformPosition(Slot.Bounds.GetCenter()))))
                 { SlotDistance=Hit; HitSlot=&Slot; }
             }
             if (HitSlot) Distance=SlotDistance;
             else return; // Rack steel is context; only its actual cargo slots can be selected.
         }
+        if(Record.Kind==TEXT("material") && Impl->Capacity.IsValid()
+            && !Impl->Capacity->IsStorageHitVisible(Record.Component.Get(),Record.InstanceIndex,Transform.TransformPosition(Record.LocalBounds.GetCenter()))) return;
         if (Distance<Closest)
         { Closest=Distance; Selected=&Record; SelectedSlot=HitSlot; }
     };
@@ -1215,4 +1241,19 @@ void FGHSTwinSceneData::ApplyLayers(bool Equipment,bool Racks)
     if(Impl->bEquipmentVisible!=Equipment || Impl->bRacksVisible!=Racks)
     { ++Impl->Revision; Impl->bSnapshotDirty=true; }
     Impl->bEquipmentVisible=Equipment; Impl->bRacksVisible=Racks; Impl->UpdateLayers();
+}
+
+bool FGHSTwinSceneData::IsStorageObject(const FString& Id) const
+{
+    const auto* R=Impl->Find(Id);return R && (R->Kind==TEXT("rack") || R->Kind==TEXT("material"));
+}
+bool FGHSTwinSceneData::IsObjectVisible(const FString& Id) const
+{
+    const auto* R=Impl->Find(Id);
+    if(!R || !R->Actor.IsValid() || R->Actor->IsHidden() || !R->Component.IsValid()
+        || !R->Component->IsVisible() || R->Component->bHiddenInGame) return false;
+    FTransform Transform;if(!FImpl::CurrentTransform(*R,Transform)) return false;
+    if(R->Kind==TEXT("material") && Impl->Capacity.IsValid())
+        return Impl->Capacity->IsStorageHitVisible(R->Component.Get(),R->InstanceIndex,Transform.TransformPosition(R->LocalBounds.GetCenter()));
+    return true;
 }
