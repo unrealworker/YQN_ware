@@ -1,0 +1,4170 @@
+{
+  "version": 1,
+  "name": "GHS office wing exterior display glazing",
+  "mesh": {
+    "name": "SM_GHS_OfficeGlassFacade",
+    "fbx": "SourceAssets\\GHS\\OfficeFacade\\SM_GHS_OfficeGlassFacade.fbx",
+    "vertices": 1944,
+    "triangles": 2916,
+    "bounds_ue_cm": {
+      "min": [
+        -23951.385498046875,
+        5863.180923461914,
+        3.999999910593033
+      ],
+      "max": [
+        -19346.145629882812,
+        7709.980773925781,
+        956.0000419616699
+      ]
+    },
+    "material_roles": [
+      "Glass",
+      "Frame",
+      "Panel",
+      "Pier",
+      "Sill"
+    ],
+    "slot_names": [
+      "M_GHSOfficeFacade_Glass",
+      "M_GHSOfficeFacade_Frame",
+      "M_GHSOfficeFacade_Panel",
+      "M_GHSOfficeFacade_Pier",
+      "M_GHSOfficeFacade_Sill"
+    ],
+    "sha256": "c6b535f60b4afa3c6bd4eb06432cafb71878afb61f3f844fa9abb7c9433daa03"
+  },
+  "coordinate_contract": "u,v metres; Blender (u-239.33385,-(v-60.24019),z); FBX -Y forward Z up; UE origin scale1 cm",
+  "materials": {
+    "Glass": {
+      "color_linear": [
+        0.018,
+        0.06,
+        0.12
+      ],
+      "roughness": 0.18,
+      "metallic": 0.18,
+      "opaque": true
+    },
+    "Frame": {
+      "color_linear": [
+        0.5,
+        0.59,
+        0.68
+      ],
+      "roughness": 0.45,
+      "metallic": 0.35,
+      "opaque": true
+    },
+    "Panel": {
+      "color_linear": [
+        0.78,
+        0.82,
+        0.87
+      ],
+      "roughness": 0.8,
+      "metallic": 0.0,
+      "opaque": true
+    },
+    "Pier": {
+      "color_linear": [
+        0.69,
+        0.74,
+        0.8
+      ],
+      "roughness": 0.8,
+      "metallic": 0.0,
+      "opaque": true
+    },
+    "Sill": {
+      "color_linear": [
+        0.6,
+        0.66,
+        0.72
+      ],
+      "roughness": 0.8,
+      "metallic": 0.0,
+      "opaque": true
+    }
+  },
+  "facades": [
+    {
+      "id": "West",
+      "plane_u_m": 0.0,
+      "s_min_m": 118.872,
+      "s_max_m": 137.16,
+      "bay_count": 3,
+      "bay_pitch_m": 6.096,
+      "outward_uv": [
+        -1,
+        0
+      ]
+    },
+    {
+      "id": "Front",
+      "plane_v_m": 137.16,
+      "s_min_m": 0.0,
+      "s_max_m": 45.8724,
+      "bay_count": 5,
+      "bay_pitch_m": 9.17448,
+      "outward_uv": [
+        0,
+        1
+      ]
+    }
+  ],
+  "bays": [
+    {
+      "id": "West_01",
+      "facade": "West",
+      "horizontal_range_m": [
+        119.262,
+        124.578
+      ],
+      "glass_z_range_m": [
+        0.24,
+        6.54
+      ],
+      "columns": 4,
+      "rows": 3,
+      "pane_count": 12
+    },
+    {
+      "id": "West_02",
+      "facade": "West",
+      "horizontal_range_m": [
+        125.358,
+        130.674
+      ],
+      "glass_z_range_m": [
+        0.24,
+        6.54
+      ],
+      "columns": 4,
+      "rows": 3,
+      "pane_count": 12
+    },
+    {
+      "id": "West_03",
+      "facade": "West",
+      "horizontal_range_m": [
+        131.45399999999998,
+        136.77
+      ],
+      "glass_z_range_m": [
+        0.24,
+        6.54
+      ],
+      "columns": 4,
+      "rows": 3,
+      "pane_count": 12
+    },
+    {
+      "id": "Front_01",
+      "facade": "Front",
+      "horizontal_range_m": [
+        0.39,
+        8.78448
+      ],
+      "glass_z_range_m": [
+        0.24,
+        6.54
+      ],
+      "columns": 4,
+      "rows": 3,
+      "pane_count": 12
+    },
+    {
+      "id": "Front_02",
+      "facade": "Front",
+      "horizontal_range_m": [
+        9.564480000000001,
+        17.95896
+      ],
+      "glass_z_range_m": [
+        0.24,
+        6.54
+      ],
+      "columns": 4,
+      "rows": 3,
+      "pane_count": 12
+    },
+    {
+      "id": "Front_03",
+      "facade": "Front",
+      "horizontal_range_m": [
+        18.738960000000002,
+        27.13344
+      ],
+      "glass_z_range_m": [
+        0.24,
+        6.54
+      ],
+      "columns": 4,
+      "rows": 3,
+      "pane_count": 12
+    },
+    {
+      "id": "Front_04",
+      "facade": "Front",
+      "horizontal_range_m": [
+        27.91344,
+        36.30792
+      ],
+      "glass_z_range_m": [
+        0.24,
+        6.54
+      ],
+      "columns": 4,
+      "rows": 3,
+      "pane_count": 12
+    },
+    {
+      "id": "Front_05",
+      "facade": "Front",
+      "horizontal_range_m": [
+        37.087920000000004,
+        45.482400000000005
+      ],
+      "glass_z_range_m": [
+        0.24,
+        6.54
+      ],
+      "columns": 4,
+      "rows": 3,
+      "pane_count": 12
+    }
+  ],
+  "bay_count": 8,
+  "pane_count": 96,
+  "glass_outward_offset_m": [
+    0.08,
+    0.1
+  ],
+  "frame_outward_offset_m": [
+    0.1,
+    0.18
+  ],
+  "pier_width_m": 0.78,
+  "head_panel_z_m": [
+    6.54,
+    8.22
+  ],
+  "existing_wall_top_m": 9.6,
+  "structural_note": "Visual reference reconstruction; bay spacing follows the CAD-fitted office wing; glazing is an opaque exterior overlay and does not cut or replace shared walls.",
+  "parts": [
+    {
+      "name": "West_Pier_00",
+      "role": "Pier",
+      "bounds_uv_m": [
+        -0.18,
+        118.872,
+        -0.055,
+        119.262
+      ],
+      "z_range_m": [
+        0.04,
+        9.56
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Pier_01",
+      "role": "Pier",
+      "bounds_uv_m": [
+        -0.18,
+        124.578,
+        -0.055,
+        125.358
+      ],
+      "z_range_m": [
+        0.04,
+        9.56
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Pier_02",
+      "role": "Pier",
+      "bounds_uv_m": [
+        -0.18,
+        130.674,
+        -0.055,
+        131.45399999999998
+      ],
+      "z_range_m": [
+        0.04,
+        9.56
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Pier_03",
+      "role": "Pier",
+      "bounds_uv_m": [
+        -0.18,
+        136.77,
+        -0.055,
+        137.16
+      ],
+      "z_range_m": [
+        0.04,
+        9.56
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Sill",
+      "role": "Sill",
+      "bounds_uv_m": [
+        -0.18,
+        119.262,
+        -0.055,
+        124.578
+      ],
+      "z_range_m": [
+        0.04,
+        0.24
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_HeadPanel",
+      "role": "Panel",
+      "bounds_uv_m": [
+        -0.16,
+        119.262,
+        -0.065,
+        124.578
+      ],
+      "z_range_m": [
+        6.54,
+        8.22
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_FrameLeft",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.18,
+        119.262,
+        -0.1,
+        119.352
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_FrameRight",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.18,
+        124.488,
+        -0.1,
+        124.578
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_FrameBottom",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.18,
+        119.352,
+        -0.1,
+        124.488
+      ],
+      "z_range_m": [
+        0.24,
+        0.32999999999999996
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_FrameTop",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.18,
+        119.352,
+        -0.1,
+        124.488
+      ],
+      "z_range_m": [
+        6.45,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_VerticalMullion_01",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        120.5985,
+        -0.1,
+        120.67349999999999
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_VerticalMullion_02",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        121.88250000000001,
+        -0.1,
+        121.9575
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_VerticalMullion_03",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        123.16650000000001,
+        -0.1,
+        123.2415
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_HorizontalMullion_1_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        119.352,
+        -0.1,
+        120.5985
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_HorizontalMullion_1_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        120.67349999999999,
+        -0.1,
+        121.88250000000001
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_HorizontalMullion_1_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        121.9575,
+        -0.1,
+        123.16650000000001
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_HorizontalMullion_1_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        123.2415,
+        -0.1,
+        124.488
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_HorizontalMullion_2_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        119.352,
+        -0.1,
+        120.5985
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_HorizontalMullion_2_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        120.67349999999999,
+        -0.1,
+        121.88250000000001
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_HorizontalMullion_2_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        121.9575,
+        -0.1,
+        123.16650000000001
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_HorizontalMullion_2_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        123.2415,
+        -0.1,
+        124.488
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Glass_1_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        119.342,
+        -0.08,
+        120.6085
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Glass_1_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        120.66349999999998,
+        -0.08,
+        121.89250000000001
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Glass_1_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        121.94749999999999,
+        -0.08,
+        123.17650000000002
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Glass_1_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        123.2315,
+        -0.08,
+        124.498
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Glass_2_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        119.342,
+        -0.08,
+        120.6085
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Glass_2_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        120.66349999999998,
+        -0.08,
+        121.89250000000001
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Glass_2_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        121.94749999999999,
+        -0.08,
+        123.17650000000002
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Glass_2_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        123.2315,
+        -0.08,
+        124.498
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Glass_3_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        119.342,
+        -0.08,
+        120.6085
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Glass_3_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        120.66349999999998,
+        -0.08,
+        121.89250000000001
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Glass_3_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        121.94749999999999,
+        -0.08,
+        123.17650000000002
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_01_Glass_3_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        123.2315,
+        -0.08,
+        124.498
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Sill",
+      "role": "Sill",
+      "bounds_uv_m": [
+        -0.18,
+        125.358,
+        -0.055,
+        130.674
+      ],
+      "z_range_m": [
+        0.04,
+        0.24
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_HeadPanel",
+      "role": "Panel",
+      "bounds_uv_m": [
+        -0.16,
+        125.358,
+        -0.065,
+        130.674
+      ],
+      "z_range_m": [
+        6.54,
+        8.22
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_FrameLeft",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.18,
+        125.358,
+        -0.1,
+        125.44800000000001
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_FrameRight",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.18,
+        130.584,
+        -0.1,
+        130.674
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_FrameBottom",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.18,
+        125.44800000000001,
+        -0.1,
+        130.584
+      ],
+      "z_range_m": [
+        0.24,
+        0.32999999999999996
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_FrameTop",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.18,
+        125.44800000000001,
+        -0.1,
+        130.584
+      ],
+      "z_range_m": [
+        6.45,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_VerticalMullion_01",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        126.6945,
+        -0.1,
+        126.7695
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_VerticalMullion_02",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        127.97850000000003,
+        -0.1,
+        128.0535
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_VerticalMullion_03",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        129.26250000000002,
+        -0.1,
+        129.3375
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_HorizontalMullion_1_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        125.44800000000001,
+        -0.1,
+        126.6945
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_HorizontalMullion_1_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        126.7695,
+        -0.1,
+        127.97850000000003
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_HorizontalMullion_1_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        128.0535,
+        -0.1,
+        129.26250000000002
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_HorizontalMullion_1_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        129.3375,
+        -0.1,
+        130.584
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_HorizontalMullion_2_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        125.44800000000001,
+        -0.1,
+        126.6945
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_HorizontalMullion_2_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        126.7695,
+        -0.1,
+        127.97850000000003
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_HorizontalMullion_2_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        128.0535,
+        -0.1,
+        129.26250000000002
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_HorizontalMullion_2_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        129.3375,
+        -0.1,
+        130.584
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Glass_1_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        125.438,
+        -0.08,
+        126.70450000000001
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Glass_1_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        126.75949999999999,
+        -0.08,
+        127.98850000000002
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Glass_1_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        128.04350000000002,
+        -0.08,
+        129.2725
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Glass_1_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        129.32750000000001,
+        -0.08,
+        130.594
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Glass_2_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        125.438,
+        -0.08,
+        126.70450000000001
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Glass_2_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        126.75949999999999,
+        -0.08,
+        127.98850000000002
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Glass_2_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        128.04350000000002,
+        -0.08,
+        129.2725
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Glass_2_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        129.32750000000001,
+        -0.08,
+        130.594
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Glass_3_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        125.438,
+        -0.08,
+        126.70450000000001
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Glass_3_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        126.75949999999999,
+        -0.08,
+        127.98850000000002
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Glass_3_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        128.04350000000002,
+        -0.08,
+        129.2725
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_02_Glass_3_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        129.32750000000001,
+        -0.08,
+        130.594
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Sill",
+      "role": "Sill",
+      "bounds_uv_m": [
+        -0.18,
+        131.45399999999998,
+        -0.055,
+        136.77
+      ],
+      "z_range_m": [
+        0.04,
+        0.24
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_HeadPanel",
+      "role": "Panel",
+      "bounds_uv_m": [
+        -0.16,
+        131.45399999999998,
+        -0.065,
+        136.77
+      ],
+      "z_range_m": [
+        6.54,
+        8.22
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_FrameLeft",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.18,
+        131.45399999999998,
+        -0.1,
+        131.54399999999998
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_FrameRight",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.18,
+        136.68,
+        -0.1,
+        136.77
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_FrameBottom",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.18,
+        131.54399999999998,
+        -0.1,
+        136.68
+      ],
+      "z_range_m": [
+        0.24,
+        0.32999999999999996
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_FrameTop",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.18,
+        131.54399999999998,
+        -0.1,
+        136.68
+      ],
+      "z_range_m": [
+        6.45,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_VerticalMullion_01",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        132.79049999999998,
+        -0.1,
+        132.86549999999997
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_VerticalMullion_02",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        134.0745,
+        -0.1,
+        134.1495
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_VerticalMullion_03",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        135.35850000000002,
+        -0.1,
+        135.4335
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_HorizontalMullion_1_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        131.54399999999998,
+        -0.1,
+        132.79049999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_HorizontalMullion_1_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        132.86549999999997,
+        -0.1,
+        134.0745
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_HorizontalMullion_1_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        134.1495,
+        -0.1,
+        135.35850000000002
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_HorizontalMullion_1_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        135.4335,
+        -0.1,
+        136.68
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_HorizontalMullion_2_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        131.54399999999998,
+        -0.1,
+        132.79049999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_HorizontalMullion_2_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        132.86549999999997,
+        -0.1,
+        134.0745
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_HorizontalMullion_2_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        134.1495,
+        -0.1,
+        135.35850000000002
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_HorizontalMullion_2_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        -0.17,
+        135.4335,
+        -0.1,
+        136.68
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Glass_1_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        131.534,
+        -0.08,
+        132.80049999999997
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Glass_1_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        132.85549999999998,
+        -0.08,
+        134.0845
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Glass_1_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        134.1395,
+        -0.08,
+        135.3685
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Glass_1_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        135.42350000000002,
+        -0.08,
+        136.69
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Glass_2_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        131.534,
+        -0.08,
+        132.80049999999997
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Glass_2_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        132.85549999999998,
+        -0.08,
+        134.0845
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Glass_2_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        134.1395,
+        -0.08,
+        135.3685
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Glass_2_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        135.42350000000002,
+        -0.08,
+        136.69
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Glass_3_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        131.534,
+        -0.08,
+        132.80049999999997
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Glass_3_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        132.85549999999998,
+        -0.08,
+        134.0845
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Glass_3_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        134.1395,
+        -0.08,
+        135.3685
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "West_Bay_03_Glass_3_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        -0.1,
+        135.42350000000002,
+        -0.08,
+        136.69
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Pier_00",
+      "role": "Pier",
+      "bounds_uv_m": [
+        0.0,
+        137.215,
+        0.39,
+        137.34
+      ],
+      "z_range_m": [
+        0.04,
+        9.56
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Pier_01",
+      "role": "Pier",
+      "bounds_uv_m": [
+        8.78448,
+        137.215,
+        9.564480000000001,
+        137.34
+      ],
+      "z_range_m": [
+        0.04,
+        9.56
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Pier_02",
+      "role": "Pier",
+      "bounds_uv_m": [
+        17.95896,
+        137.215,
+        18.738960000000002,
+        137.34
+      ],
+      "z_range_m": [
+        0.04,
+        9.56
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Pier_03",
+      "role": "Pier",
+      "bounds_uv_m": [
+        27.13344,
+        137.215,
+        27.91344,
+        137.34
+      ],
+      "z_range_m": [
+        0.04,
+        9.56
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Pier_04",
+      "role": "Pier",
+      "bounds_uv_m": [
+        36.30792,
+        137.215,
+        37.087920000000004,
+        137.34
+      ],
+      "z_range_m": [
+        0.04,
+        9.56
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Pier_05",
+      "role": "Pier",
+      "bounds_uv_m": [
+        45.482400000000005,
+        137.215,
+        45.8724,
+        137.34
+      ],
+      "z_range_m": [
+        0.04,
+        9.56
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Sill",
+      "role": "Sill",
+      "bounds_uv_m": [
+        0.39,
+        137.215,
+        8.78448,
+        137.34
+      ],
+      "z_range_m": [
+        0.04,
+        0.24
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_HeadPanel",
+      "role": "Panel",
+      "bounds_uv_m": [
+        0.39,
+        137.225,
+        8.78448,
+        137.32
+      ],
+      "z_range_m": [
+        6.54,
+        8.22
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_FrameLeft",
+      "role": "Frame",
+      "bounds_uv_m": [
+        0.39,
+        137.26,
+        0.48,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_FrameRight",
+      "role": "Frame",
+      "bounds_uv_m": [
+        8.69448,
+        137.26,
+        8.78448,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_FrameBottom",
+      "role": "Frame",
+      "bounds_uv_m": [
+        0.48,
+        137.26,
+        8.69448,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        0.32999999999999996
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_FrameTop",
+      "role": "Frame",
+      "bounds_uv_m": [
+        0.48,
+        137.26,
+        8.69448,
+        137.34
+      ],
+      "z_range_m": [
+        6.45,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_VerticalMullion_01",
+      "role": "Frame",
+      "bounds_uv_m": [
+        2.49612,
+        137.26,
+        2.57112,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_VerticalMullion_02",
+      "role": "Frame",
+      "bounds_uv_m": [
+        4.54974,
+        137.26,
+        4.624739999999999,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_VerticalMullion_03",
+      "role": "Frame",
+      "bounds_uv_m": [
+        6.60336,
+        137.26,
+        6.67836,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_HorizontalMullion_1_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        0.48,
+        137.26,
+        2.49612,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_HorizontalMullion_1_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        2.57112,
+        137.26,
+        4.54974,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_HorizontalMullion_1_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        4.624739999999999,
+        137.26,
+        6.60336,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_HorizontalMullion_1_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        6.67836,
+        137.26,
+        8.69448,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_HorizontalMullion_2_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        0.48,
+        137.26,
+        2.49612,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_HorizontalMullion_2_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        2.57112,
+        137.26,
+        4.54974,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_HorizontalMullion_2_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        4.624739999999999,
+        137.26,
+        6.60336,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_HorizontalMullion_2_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        6.67836,
+        137.26,
+        8.69448,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Glass_1_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        0.47,
+        137.24,
+        2.5061199999999997,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Glass_1_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        2.5611200000000003,
+        137.24,
+        4.55974,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Glass_1_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        4.614739999999999,
+        137.24,
+        6.61336,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Glass_1_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        6.66836,
+        137.24,
+        8.70448,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Glass_2_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        0.47,
+        137.24,
+        2.5061199999999997,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Glass_2_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        2.5611200000000003,
+        137.24,
+        4.55974,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Glass_2_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        4.614739999999999,
+        137.24,
+        6.61336,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Glass_2_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        6.66836,
+        137.24,
+        8.70448,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Glass_3_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        0.47,
+        137.24,
+        2.5061199999999997,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Glass_3_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        2.5611200000000003,
+        137.24,
+        4.55974,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Glass_3_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        4.614739999999999,
+        137.24,
+        6.61336,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_01_Glass_3_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        6.66836,
+        137.24,
+        8.70448,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Sill",
+      "role": "Sill",
+      "bounds_uv_m": [
+        9.564480000000001,
+        137.215,
+        17.95896,
+        137.34
+      ],
+      "z_range_m": [
+        0.04,
+        0.24
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_HeadPanel",
+      "role": "Panel",
+      "bounds_uv_m": [
+        9.564480000000001,
+        137.225,
+        17.95896,
+        137.32
+      ],
+      "z_range_m": [
+        6.54,
+        8.22
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_FrameLeft",
+      "role": "Frame",
+      "bounds_uv_m": [
+        9.564480000000001,
+        137.26,
+        9.654480000000001,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_FrameRight",
+      "role": "Frame",
+      "bounds_uv_m": [
+        17.86896,
+        137.26,
+        17.95896,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_FrameBottom",
+      "role": "Frame",
+      "bounds_uv_m": [
+        9.654480000000001,
+        137.26,
+        17.86896,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        0.32999999999999996
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_FrameTop",
+      "role": "Frame",
+      "bounds_uv_m": [
+        9.654480000000001,
+        137.26,
+        17.86896,
+        137.34
+      ],
+      "z_range_m": [
+        6.45,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_VerticalMullion_01",
+      "role": "Frame",
+      "bounds_uv_m": [
+        11.670600000000002,
+        137.26,
+        11.745600000000001,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_VerticalMullion_02",
+      "role": "Frame",
+      "bounds_uv_m": [
+        13.72422,
+        137.26,
+        13.79922,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_VerticalMullion_03",
+      "role": "Frame",
+      "bounds_uv_m": [
+        15.777840000000001,
+        137.26,
+        15.85284,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_HorizontalMullion_1_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        9.654480000000001,
+        137.26,
+        11.670600000000002,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_HorizontalMullion_1_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        11.745600000000001,
+        137.26,
+        13.72422,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_HorizontalMullion_1_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        13.79922,
+        137.26,
+        15.777840000000001,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_HorizontalMullion_1_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        15.85284,
+        137.26,
+        17.86896,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_HorizontalMullion_2_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        9.654480000000001,
+        137.26,
+        11.670600000000002,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_HorizontalMullion_2_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        11.745600000000001,
+        137.26,
+        13.72422,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_HorizontalMullion_2_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        13.79922,
+        137.26,
+        15.777840000000001,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_HorizontalMullion_2_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        15.85284,
+        137.26,
+        17.86896,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Glass_1_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        9.644480000000001,
+        137.24,
+        11.680600000000002,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Glass_1_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        11.735600000000002,
+        137.24,
+        13.73422,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Glass_1_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        13.78922,
+        137.24,
+        15.787840000000001,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Glass_1_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        15.84284,
+        137.24,
+        17.878960000000003,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Glass_2_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        9.644480000000001,
+        137.24,
+        11.680600000000002,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Glass_2_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        11.735600000000002,
+        137.24,
+        13.73422,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Glass_2_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        13.78922,
+        137.24,
+        15.787840000000001,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Glass_2_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        15.84284,
+        137.24,
+        17.878960000000003,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Glass_3_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        9.644480000000001,
+        137.24,
+        11.680600000000002,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Glass_3_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        11.735600000000002,
+        137.24,
+        13.73422,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Glass_3_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        13.78922,
+        137.24,
+        15.787840000000001,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_02_Glass_3_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        15.84284,
+        137.24,
+        17.878960000000003,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Sill",
+      "role": "Sill",
+      "bounds_uv_m": [
+        18.738960000000002,
+        137.215,
+        27.13344,
+        137.34
+      ],
+      "z_range_m": [
+        0.04,
+        0.24
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_HeadPanel",
+      "role": "Panel",
+      "bounds_uv_m": [
+        18.738960000000002,
+        137.225,
+        27.13344,
+        137.32
+      ],
+      "z_range_m": [
+        6.54,
+        8.22
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_FrameLeft",
+      "role": "Frame",
+      "bounds_uv_m": [
+        18.738960000000002,
+        137.26,
+        18.828960000000002,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_FrameRight",
+      "role": "Frame",
+      "bounds_uv_m": [
+        27.04344,
+        137.26,
+        27.13344,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_FrameBottom",
+      "role": "Frame",
+      "bounds_uv_m": [
+        18.828960000000002,
+        137.26,
+        27.04344,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        0.32999999999999996
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_FrameTop",
+      "role": "Frame",
+      "bounds_uv_m": [
+        18.828960000000002,
+        137.26,
+        27.04344,
+        137.34
+      ],
+      "z_range_m": [
+        6.45,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_VerticalMullion_01",
+      "role": "Frame",
+      "bounds_uv_m": [
+        20.84508,
+        137.26,
+        20.920080000000002,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_VerticalMullion_02",
+      "role": "Frame",
+      "bounds_uv_m": [
+        22.898699999999998,
+        137.26,
+        22.9737,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_VerticalMullion_03",
+      "role": "Frame",
+      "bounds_uv_m": [
+        24.95232,
+        137.26,
+        25.027320000000003,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_HorizontalMullion_1_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        18.828960000000002,
+        137.26,
+        20.84508,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_HorizontalMullion_1_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        20.920080000000002,
+        137.26,
+        22.898699999999998,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_HorizontalMullion_1_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        22.9737,
+        137.26,
+        24.95232,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_HorizontalMullion_1_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        25.027320000000003,
+        137.26,
+        27.04344,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_HorizontalMullion_2_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        18.828960000000002,
+        137.26,
+        20.84508,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_HorizontalMullion_2_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        20.920080000000002,
+        137.26,
+        22.898699999999998,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_HorizontalMullion_2_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        22.9737,
+        137.26,
+        24.95232,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_HorizontalMullion_2_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        25.027320000000003,
+        137.26,
+        27.04344,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Glass_1_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        18.81896,
+        137.24,
+        20.85508,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Glass_1_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        20.91008,
+        137.24,
+        22.9087,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Glass_1_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        22.9637,
+        137.24,
+        24.962320000000002,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Glass_1_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        25.01732,
+        137.24,
+        27.053440000000002,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Glass_2_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        18.81896,
+        137.24,
+        20.85508,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Glass_2_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        20.91008,
+        137.24,
+        22.9087,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Glass_2_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        22.9637,
+        137.24,
+        24.962320000000002,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Glass_2_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        25.01732,
+        137.24,
+        27.053440000000002,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Glass_3_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        18.81896,
+        137.24,
+        20.85508,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Glass_3_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        20.91008,
+        137.24,
+        22.9087,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Glass_3_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        22.9637,
+        137.24,
+        24.962320000000002,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_03_Glass_3_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        25.01732,
+        137.24,
+        27.053440000000002,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Sill",
+      "role": "Sill",
+      "bounds_uv_m": [
+        27.91344,
+        137.215,
+        36.30792,
+        137.34
+      ],
+      "z_range_m": [
+        0.04,
+        0.24
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_HeadPanel",
+      "role": "Panel",
+      "bounds_uv_m": [
+        27.91344,
+        137.225,
+        36.30792,
+        137.32
+      ],
+      "z_range_m": [
+        6.54,
+        8.22
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_FrameLeft",
+      "role": "Frame",
+      "bounds_uv_m": [
+        27.91344,
+        137.26,
+        28.00344,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_FrameRight",
+      "role": "Frame",
+      "bounds_uv_m": [
+        36.21792,
+        137.26,
+        36.30792,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_FrameBottom",
+      "role": "Frame",
+      "bounds_uv_m": [
+        28.00344,
+        137.26,
+        36.21792,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        0.32999999999999996
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_FrameTop",
+      "role": "Frame",
+      "bounds_uv_m": [
+        28.00344,
+        137.26,
+        36.21792,
+        137.34
+      ],
+      "z_range_m": [
+        6.45,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_VerticalMullion_01",
+      "role": "Frame",
+      "bounds_uv_m": [
+        30.01956,
+        137.26,
+        30.09456,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_VerticalMullion_02",
+      "role": "Frame",
+      "bounds_uv_m": [
+        32.07318,
+        137.26,
+        32.14818,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_VerticalMullion_03",
+      "role": "Frame",
+      "bounds_uv_m": [
+        34.126799999999996,
+        137.26,
+        34.2018,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_HorizontalMullion_1_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        28.00344,
+        137.26,
+        30.01956,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_HorizontalMullion_1_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        30.09456,
+        137.26,
+        32.07318,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_HorizontalMullion_1_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        32.14818,
+        137.26,
+        34.126799999999996,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_HorizontalMullion_1_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        34.2018,
+        137.26,
+        36.21792,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_HorizontalMullion_2_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        28.00344,
+        137.26,
+        30.01956,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_HorizontalMullion_2_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        30.09456,
+        137.26,
+        32.07318,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_HorizontalMullion_2_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        32.14818,
+        137.26,
+        34.126799999999996,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_HorizontalMullion_2_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        34.2018,
+        137.26,
+        36.21792,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Glass_1_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        27.99344,
+        137.24,
+        30.02956,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Glass_1_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        30.08456,
+        137.24,
+        32.08318,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Glass_1_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        32.138180000000006,
+        137.24,
+        34.136799999999994,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Glass_1_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        34.1918,
+        137.24,
+        36.22792,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Glass_2_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        27.99344,
+        137.24,
+        30.02956,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Glass_2_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        30.08456,
+        137.24,
+        32.08318,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Glass_2_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        32.138180000000006,
+        137.24,
+        34.136799999999994,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Glass_2_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        34.1918,
+        137.24,
+        36.22792,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Glass_3_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        27.99344,
+        137.24,
+        30.02956,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Glass_3_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        30.08456,
+        137.24,
+        32.08318,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Glass_3_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        32.138180000000006,
+        137.24,
+        34.136799999999994,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_04_Glass_3_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        34.1918,
+        137.24,
+        36.22792,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Sill",
+      "role": "Sill",
+      "bounds_uv_m": [
+        37.087920000000004,
+        137.215,
+        45.482400000000005,
+        137.34
+      ],
+      "z_range_m": [
+        0.04,
+        0.24
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_HeadPanel",
+      "role": "Panel",
+      "bounds_uv_m": [
+        37.087920000000004,
+        137.225,
+        45.482400000000005,
+        137.32
+      ],
+      "z_range_m": [
+        6.54,
+        8.22
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_FrameLeft",
+      "role": "Frame",
+      "bounds_uv_m": [
+        37.087920000000004,
+        137.26,
+        37.17792000000001,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_FrameRight",
+      "role": "Frame",
+      "bounds_uv_m": [
+        45.3924,
+        137.26,
+        45.482400000000005,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_FrameBottom",
+      "role": "Frame",
+      "bounds_uv_m": [
+        37.17792000000001,
+        137.26,
+        45.3924,
+        137.34
+      ],
+      "z_range_m": [
+        0.24,
+        0.32999999999999996
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_FrameTop",
+      "role": "Frame",
+      "bounds_uv_m": [
+        37.17792000000001,
+        137.26,
+        45.3924,
+        137.34
+      ],
+      "z_range_m": [
+        6.45,
+        6.54
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_VerticalMullion_01",
+      "role": "Frame",
+      "bounds_uv_m": [
+        39.19404000000001,
+        137.26,
+        39.26904000000001,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_VerticalMullion_02",
+      "role": "Frame",
+      "bounds_uv_m": [
+        41.24766,
+        137.26,
+        41.322660000000006,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_VerticalMullion_03",
+      "role": "Frame",
+      "bounds_uv_m": [
+        43.30128,
+        137.26,
+        43.37628,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        0.32999999999999996,
+        6.45
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_HorizontalMullion_1_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        37.17792000000001,
+        137.26,
+        39.19404000000001,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_HorizontalMullion_1_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        39.26904000000001,
+        137.26,
+        41.24766,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_HorizontalMullion_1_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        41.322660000000006,
+        137.26,
+        43.30128,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_HorizontalMullion_1_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        43.37628,
+        137.26,
+        45.3924,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        2.3325,
+        2.4075
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_HorizontalMullion_2_0",
+      "role": "Frame",
+      "bounds_uv_m": [
+        37.17792000000001,
+        137.26,
+        39.19404000000001,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_HorizontalMullion_2_1",
+      "role": "Frame",
+      "bounds_uv_m": [
+        39.26904000000001,
+        137.26,
+        41.24766,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_HorizontalMullion_2_2",
+      "role": "Frame",
+      "bounds_uv_m": [
+        41.322660000000006,
+        137.26,
+        43.30128,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_HorizontalMullion_2_3",
+      "role": "Frame",
+      "bounds_uv_m": [
+        43.37628,
+        137.26,
+        45.3924,
+        137.32999999999998
+      ],
+      "z_range_m": [
+        4.3725000000000005,
+        4.4475
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Glass_1_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        37.16792000000001,
+        137.24,
+        39.204040000000006,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Glass_1_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        39.25904000000001,
+        137.24,
+        41.25766,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Glass_1_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        41.31266000000001,
+        137.24,
+        43.31128,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Glass_1_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        43.36628,
+        137.24,
+        45.4024,
+        137.26
+      ],
+      "z_range_m": [
+        0.31999999999999995,
+        2.3425
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Glass_2_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        37.16792000000001,
+        137.24,
+        39.204040000000006,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Glass_2_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        39.25904000000001,
+        137.24,
+        41.25766,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Glass_2_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        41.31266000000001,
+        137.24,
+        43.31128,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Glass_2_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        43.36628,
+        137.24,
+        45.4024,
+        137.26
+      ],
+      "z_range_m": [
+        2.3975000000000004,
+        4.3825
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Glass_3_1",
+      "role": "Glass",
+      "bounds_uv_m": [
+        37.16792000000001,
+        137.24,
+        39.204040000000006,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Glass_3_2",
+      "role": "Glass",
+      "bounds_uv_m": [
+        39.25904000000001,
+        137.24,
+        41.25766,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Glass_3_3",
+      "role": "Glass",
+      "bounds_uv_m": [
+        41.31266000000001,
+        137.24,
+        43.31128,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "Front_Bay_05_Glass_3_4",
+      "role": "Glass",
+      "bounds_uv_m": [
+        43.36628,
+        137.24,
+        45.4024,
+        137.26
+      ],
+      "z_range_m": [
+        4.4375,
+        6.46
+      ],
+      "closed": true,
+      "triangles": 12
+    },
+    {
+      "name": "SharedCorner_ContinuousPier",
+      "role": "Pier",
+      "bounds_uv_m": [
+        -0.18,
+        137.16,
+        0.0,
+        137.34
+      ],
+      "z_range_m": [
+        0.04,
+        9.56
+      ],
+      "closed": true,
+      "triangles": 12
+    }
+  ],
+  "editable_part_count": 243,
+  "checks": {
+    "all_parts_closed": true,
+    "all_faces_valid": true,
+    "positive_volume_parts": true,
+    "cad_loading_door_count": 87,
+    "loading_door_overlap_area_m2": 0.0,
+    "minimum_door_clearance_m": 19.651392038445778,
+    "audited_existing_wall_outward_protrusion_m": 0.053033,
+    "glass_back_clearance_m": 0.026967000000000005,
+    "all_geometry_below_roof": true,
+    "existing_shared_sources_unchanged": true,
+    "source_hashes": {
+      "SourceAssets\\GHS\\RefinementV2\\Envelope\\envelope_geometry.json": "4b6e2d7acb2292f3029205a26c38554febcbd3ec33508c2676b99f1fd6372cf5",
+      "SourceAssets\\GHS\\RefinementV2\\Envelope\\building_footprint.json": "d0f7ebad99ba965361804469121350ef5449ac72a67e289f2111d58862dea1f7",
+      "SourceAssets\\GHS\\RackSpecs\\cad_plan_mapping.json": "f359d43e8cd8d9016aea6b9a49ee569605d6d391dec9c1e6b7ff1b4d80b6b598",
+      "SourceAssets\\GHS\\MainRoof\\roof_manifest.json": "c63019e41bb37087690a5824df7534497019dce499067ebed5befe4899ce02d4"
+    },
+    "triangle_budget": 12000
+  },
+  "outputs": {
+    "blend": "SourceAssets/GHS/OfficeFacade/OfficeGlassFacade.blend",
+    "fbx": "SourceAssets\\GHS\\OfficeFacade\\SM_GHS_OfficeGlassFacade.fbx",
+    "preview": "SourceAssets/GHS/OfficeFacade/office_facade_preview.png"
+  }
+}

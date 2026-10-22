@@ -350,12 +350,24 @@ def capture_reference_art_views():
            ('ReferenceRoad',(0,-38,0),14000,-58,-90,False),
            ('ReferenceRoof',(170,56,9.8),18000,-45,-115,False),
            ('ReferenceInterior',(235,87,0),85000,-46,-90,True)]
+    if re.search(r'(?:^|\s)-OfficeFacadeCapture(?=\s|$)',CLI,re.I):
+        facade=by['GHS_OfficeGlassFacade']
+        assert facade.actor_has_tag('GHS_OfficeFacade')
+        assert not facade.get_actor_enable_collision() and not facade.is_actor_tick_enabled()
+        assert facade.get_attach_parent_actor() is None
+        assert not any(str(t).startswith(('TwinId=','Dock=','FXOwner=')) for t in facade.tags)
+        views=[('OfficeFacade_Corner',(18,129,4.6),7200,-27,-42,False),
+               ('OfficeFacade_Detail',(3.5,133,4.),2800,-12,-40,False),
+               ('OfficeFacade_RoofHidden',(18,129,4.6),7200,-27,-42,True),
+               ('ReferenceOverview',(235,87,0),85000,-46,-90,False)]
     try:
         widget.set_visibility(unreal.SlateVisibility.COLLAPSED)
         unreal.SystemLibrary.execute_console_command(world,'r.SetRes 1920x1080w',pc)
         yield from wait_for('reference_art_resolution',lambda:tuple(pc.get_viewport_size())==(1920,1080))
         for name,uv,distance,pitch,yaw,hidden in views:
             roof.set_actor_hidden_in_game(hidden)
+            if name.startswith('OfficeFacade_'):
+                assert not facade.get_editor_property('hidden'), 'Roof visibility affected the facade'
             target=unreal.Vector((uv[0]-239.33385)*100,(uv[1]-60.24019)*100,uv[2]*100)
             rotation=unreal.Rotator(pitch=pitch,yaw=yaw)
             eye=target-unreal.MathLibrary.get_forward_vector(rotation)*distance
@@ -365,6 +377,9 @@ def capture_reference_art_views():
             yield from capture(name)
         result['reference_art_views']=dict(count=len(views),render='actual 1920x1080 game viewport',
             temporal_settle_seconds=2.,hud_hidden_for_art_only=True)
+        if re.search(r'(?:^|\s)-OfficeFacadeCapture(?=\s|$)',CLI,re.I):
+            record('office_facade_independent_from_roof_and_business',actors=1,
+                   material_slots=facade.get_component_by_class(unreal.StaticMeshComponent).get_num_materials())
     finally:
         roof.set_actor_hidden_in_game(old_hidden)
         art_camera.set_actor_transform(original_transform,False,True)
@@ -441,7 +456,7 @@ def run():
     final_ids = [row['id'] for row in data['equipment'] + data['facilities']]
     assert final_ids == result['initial_business_ids'], 'Business registry changed during interaction'
     record('business_registry_unchanged_after_focus_resize_and_reset', equipment=106, facilities=56)
-    if re.search(r'(?:^|\s)-ReferenceStyleCapture(?=\s|$)',CLI,re.I):
+    if re.search(r'(?:^|\s)-(?:ReferenceStyleCapture|OfficeFacadeCapture)(?=\s|$)',CLI,re.I):
         yield from capture_reference_art_views()
     verify_saved_maps()
 

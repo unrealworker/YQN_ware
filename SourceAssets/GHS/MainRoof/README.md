@@ -1,6 +1,6 @@
 # GHS 主厂房独立屋顶
 
-目标关卡为 `/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`，Actor 为 `GHS_MainWarehouseRoof`。当前屋顶几何沿用既有源；本轮只把 Roof 槽按 `../Park/reference_style.json.roof_color_linear` 调整为更清晰的淡蓝白色，其他四个槽和模型不变。完整参考风格已完成本轮保存重载、15 项实际运行检查和 11 张当前图片归档，不沿用此前版本证据。
+目标关卡为 `/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`，Actor 为 `GHS_MainWarehouseRoof`。当前屋顶几何沿用既有源；园区风格阶段把 Roof 槽按 `../Park/reference_style.json.roof_color_linear` 调整为更清晰的淡蓝白色，其他四个槽和模型不变。该阶段的保存重载、15 项实际运行检查和 11 张图片归档是**新增办公室玻璃立面之前的风格基线**。当前场景另已增加独立立面，最新状态以 [OfficeFacade 文档](../OfficeFacade/README.md) 和 [增量验收文件](../OfficeFacade/Review/acceptance.json) 为准。
 
 ## 几何与视觉
 
@@ -44,6 +44,8 @@ UE vertices: ((u−239.33385)*100, (v−60.24019)*100, z*100) cm
 
 UE 网格路径为 `/Game/GHSZcoolSmartFactory/Roof/Meshes/SM_GHS_MainWarehouseRoof`。Actor 无碰撞、无 Tick，不带设备业务身份。所有屋顶细节属于一个 Actor 的一个网格，整体显隐即可，不需逐个隐藏采光带、包边和通风帽。
 
+新增办公室立面为另一独立 Actor：西侧 3 跨、正面 5 跨，共 96 块玻璃、2,916 个三角面。玻璃采用不透明（Opaque）外贴蓝色 Fresnel 材质，用于展示玻璃外观，不透视后方原墙。屋顶隐藏时立面仍保留，立面不属于屋顶显隐组。
+
 ## 后续交互边界
 
 **本轮没有新增产品 UI 屋顶开关。** 独立 Actor 只为后续开顶交互准备；通过 Actor 显隐可以验证内外状态。正式 UI 开关应联动内部 POI、设备／货物选取和视角状态。当前业务 `PickRay` 按包围盒选取，不会因为屋顶遮挡而自动禁用内部对象；单独开启屋顶碰撞不能解决这个问题。
@@ -64,12 +66,14 @@ UE 网格路径为 `/Game/GHSZcoolSmartFactory/Roof/Meshes/SM_GHS_MainWarehouseR
 
 生成器只写本目录；项目共享材质与既有墙体源资产只读并校验哈希。生成和独立 FBX 回读退出码均为 0，闭合流形、无退化面、正体积、五槽顺序通过，包围回读误差约 `2.29e-5 m`。
 
-当前统一应用入口为 `Scripts/ghs/apply_reference_style.py`，保存重载入口为 `validate_reference_style.py`，截图入口为 `capture_reference_style.py`；旧 roof-style 入口属于历史阶段，不作为当前执行方法。完整证据位于 `Saved/ParkReferenceStyle`。
+园区与屋顶风格统一应用入口为 `Scripts/ghs/apply_reference_style.py`，保存重载入口为 `validate_reference_style.py`，截图入口为 `capture_reference_style.py`；旧 roof-style 入口属于历史阶段，不作为当前执行方法。立面之前的风格基线证据位于 `Saved/ParkReferenceStyle`；新增立面的执行与增量验收见 OfficeFacade 文档。
 
 本轮没有新增产品 UI 屋顶按钮。独立 Actor 显隐和后续交互准备不等于用户按钮已经开发；后续仍需联动内部 POI／选取。
 
-原关卡保持 360 个 Actor。当前 Ground 已根据最新要求改为独立冷灰蓝材质，StudioGround 使用无网格蓝灰背景；旧手动材质已备份，用户位置 `(170,240,0) cm`、缩放 `(1.1,1.1,1.1)` 保留。Cobalt 组件覆盖继续保护。7 个 Truck 材质在 live／disk 表面参数对比一致后，仅补齐实例化 usage 标记并保存；材质图、配色及其余参数未改。
+立面之前的风格基线为 360 个 Actor；新增独立玻璃立面后，当前主关卡为 **361 个 Actor**。Ground 使用独立冷灰蓝材质，StudioGround 使用无网格蓝灰背景；旧手动材质已备份，用户位置 `(170,240,0) cm`、缩放 `(1.1,1.1,1.1)` 保留。Cobalt 组件覆盖继续保护。7 个 Truck 材质在 live／disk 表面参数对比一致后，仅补齐实例化 usage 标记并保存；材质图、配色及其余参数未改。
 
-本轮独立保存重载于 **2026-10-22 15:49:01（Asia/Shanghai）** 通过；**15 项运行检查通过，耗时 32.093 秒**。正式 Review 于 **15:52:26** 覆盖为 **11 张**当前图片，旧 30 图已移除，地图与全部图片哈希核对一致。当前地图 SHA-256：`eb46503811527cf427450d7a0a67bf9e89b63e4b97f0d50cbc775bca092d4f5b`。
+**历史园区风格基线**的独立保存重载于 **2026-10-22 15:49:01（Asia/Shanghai）** 通过；15 项运行检查通过，耗时 32.093 秒。其 Review 于 **15:52:26** 覆盖为 11 张基线图片，旧 30 图已移除，地图与全部图片哈希在当时核对一致。历史地图 SHA-256 为 `eb46503811527cf427450d7a0a67bf9e89b63e4b97f0d50cbc775bca092d4f5b`，不代表当前已添加立面的地图，也不作为当前保存重载成功的证明。
 
-Park 当前 1,657,364 面，屋顶仍为 8,288 面，合计 1,665,652 个唯一资源三角面。植被为 586 棵树、332 组灌木、24 岛；单树 1,856 面，三类树冠启用 Nanite 并保留完整 fallback。该静态统计不代表性能基准；本轮没有新 EXE 或多人像素流性能测试。
+当前立面增量已通过 **16 项真实游戏运行检查，耗时 29.422 秒**。最新地图哈希、保存重载状态与截图以 [OfficeFacade/Review/acceptance.json](../OfficeFacade/Review/acceptance.json) 为准。
+
+Park 当前 1,657,364 面，屋顶仍为 8,288 面，新增立面 2,916 面；Park + Roof + Facade 合计 **1,668,568 个唯一资源三角面**，不含原仓库内部资产。植被为 586 棵树、332 组灌木、24 岛；单树 1,856 面，三类树冠启用 Nanite 并保留完整 fallback。该静态统计不代表性能基准；本轮没有新 EXE 或多人像素流性能测试。

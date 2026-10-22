@@ -1,0 +1,165 @@
+{
+  "success": true,
+  "stage": "complete",
+  "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
+  "started_utc": "2026-10-22T09:59:28.079487+00:00",
+  "mode": "live_editor",
+  "writes_scene": false,
+  "errors": [],
+  "actor_count": 361,
+  "preserved_existing_actors": 360,
+  "ground_transform_preserved": {
+    "position": [
+      170.0,
+      240.0,
+      0.0
+    ],
+    "scale": [
+      1.1,
+      1.1,
+      1.1
+    ],
+    "rotation": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "lighting_and_post_process_checked": {
+    "lights": 0,
+    "post_process_volumes": 0
+  },
+  "facade_label": "GHS_OfficeGlassFacade",
+  "facade_asset": "/Game/GHSZcoolSmartFactory/OfficeFacade/Meshes/SM_GHS_OfficeGlassFacade.SM_GHS_OfficeGlassFacade",
+  "bounds_ue_cm": {
+    "min": [
+      -23951.384765625,
+      5863.18310546875,
+      4.0
+    ],
+    "max": [
+      -19346.14453125,
+      7709.98291015625,
+      956.0000610351562
+    ]
+  },
+  "facade_triangles": 2916,
+  "independent_from_roof": true,
+  "no_business_identity": true,
+  "materials_checked": [
+    {
+      "role": "Glass",
+      "path": "/Game/GHSZcoolSmartFactory/OfficeFacade/Materials/M_GHSFacade_Glass.M_GHSFacade_Glass",
+      "color_linear": [
+        0.017999999225139618,
+        0.05999999865889549,
+        0.11999999731779099
+      ],
+      "scalars": {
+        "Roughness": 0.18000000715255737,
+        "Metallic": 0.18000000715255737,
+        "Specular": 0.15000000596046448
+      },
+      "expressions": 7,
+      "base_color_connected_parameters": [
+        "GrazingTint",
+        "SurfaceTint"
+      ],
+      "fresnel_connected": true
+    },
+    {
+      "role": "Frame",
+      "path": "/Game/GHSZcoolSmartFactory/OfficeFacade/Materials/M_GHSFacade_Frame.M_GHSFacade_Frame",
+      "color_linear": [
+        0.5,
+        0.5899999737739563,
+        0.6800000071525574
+      ],
+      "scalars": {
+        "Roughness": 0.44999998807907104,
+        "Metallic": 0.3499999940395355,
+        "Specular": 0.15000000596046448
+      },
+      "expressions": 4,
+      "base_color_connected_parameters": [
+        "SurfaceTint"
+      ],
+      "fresnel_connected": false
+    },
+    {
+      "role": "Panel",
+      "path": "/Game/GHSZcoolSmartFactory/OfficeFacade/Materials/M_GHSFacade_Panel.M_GHSFacade_Panel",
+      "color_linear": [
+        0.7799999713897705,
+        0.8199999928474426,
+        0.8700000047683716
+      ],
+      "scalars": {
+        "Roughness": 0.800000011920929,
+        "Metallic": 0.0,
+        "Specular": 0.15000000596046448
+      },
+      "expressions": 4,
+      "base_color_connected_parameters": [
+        "SurfaceTint"
+      ],
+      "fresnel_connected": false
+    },
+    {
+      "role": "Pier",
+      "path": "/Game/GHSZcoolSmartFactory/OfficeFacade/Materials/M_GHSFacade_Pier.M_GHSFacade_Pier",
+      "color_linear": [
+        0.6899999976158142,
+        0.7400000095367432,
+        0.800000011920929
+      ],
+      "scalars": {
+        "Roughness": 0.800000011920929,
+        "Metallic": 0.0,
+        "Specular": 0.15000000596046448
+      },
+      "expressions": 4,
+      "base_color_connected_parameters": [
+        "SurfaceTint"
+      ],
+      "fresnel_connected": false
+    },
+    {
+      "role": "Sill",
+      "path": "/Game/GHSZcoolSmartFactory/OfficeFacade/Materials/M_GHSFacade_Sill.M_GHSFacade_Sill",
+      "color_linear": [
+        0.6000000238418579,
+        0.6600000262260437,
+        0.7200000286102295
+      ],
+      "scalars": {
+        "Roughness": 0.800000011920929,
+        "Metallic": 0.0,
+        "Specular": 0.15000000596046448
+      },
+      "expressions": 4,
+      "base_color_connected_parameters": [
+        "SurfaceTint"
+      ],
+      "fresnel_connected": false
+    }
+  ],
+  "source_hashes": {
+    "SourceAssets\\GHS\\OfficeFacade\\facade_manifest.json": "e0e1a9d5dad9fb8ef47ccbd8337b6f2d07b77fb4b50b2a9023c01c34497c5537",
+    "SourceAssets\\GHS\\OfficeFacade\\SM_GHS_OfficeGlassFacade.fbx": "c6b535f60b4afa3c6bd4eb06432cafb71878afb61f3f844fa9abb7c9433daa03",
+    "SourceAssets\\GHS\\OfficeFacade\\OfficeGlassFacade.blend": "bad7d9b42ec1405d6d578b025190e320c37974230ade0f72c9e8d765c370cfac"
+  },
+  "bay_count": 8,
+  "pane_count": 96,
+  "protected_source_hashes": {
+    "SourceAssets\\GHS\\RefinementV2\\Envelope\\envelope_geometry.json": "4b6e2d7acb2292f3029205a26c38554febcbd3ec33508c2676b99f1fd6372cf5",
+    "SourceAssets\\GHS\\RefinementV2\\Envelope\\building_footprint.json": "d0f7ebad99ba965361804469121350ef5449ac72a67e289f2111d58862dea1f7",
+    "SourceAssets\\GHS\\RackSpecs\\cad_plan_mapping.json": "f359d43e8cd8d9016aea6b9a49ee569605d6d391dec9c1e6b7ff1b4d80b6b598",
+    "SourceAssets\\GHS\\MainRoof\\roof_manifest.json": "c63019e41bb37087690a5824df7534497019dce499067ebed5befe4899ce02d4"
+  },
+  "dirty_assets": [],
+  "map_sha256": "28d740e6baea2330bb313d7946662566aa38d8875a1c2e0fb7b45c8fcb88070d",
+  "map_unchanged_during_validation": true,
+  "finished_utc": "2026-10-22T09:59:28.339227+00:00"
+}

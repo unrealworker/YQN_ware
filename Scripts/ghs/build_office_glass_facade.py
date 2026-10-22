@@ -1,0 +1,309 @@
+"""Generate the independently removable GHS office-wing display glazing.
+
+Run with Blender in background. Existing walls, roof, ground, CAD and Unreal
+assets are read-only. Editable named parts and the merged export share exactly
+the same geometry. The two elevations are ornamental opaque glass overlays.
+"""
+from pathlib import Path
+import hashlib
+import json
+import math
+import sys
+
+import bpy
+import bmesh
+from mathutils import Vector
+
+ROOT = Path(__file__).resolve().parents[2]
+OUT = ROOT / 'SourceAssets/GHS/OfficeFacade'
+sys.path.insert(0, str(ROOT / 'Saved/ParkRefinement/python_deps'))
+sys.dont_write_bytecode = True
+from shapely.geometry import Polygon, box
+from shapely.ops import unary_union
+
+NAME = 'SM_GHS_OfficeGlassFacade'
+ORIGIN = (239.33385, 60.24019)
+ROLES = ('Glass', 'Frame', 'Panel', 'Pier', 'Sill')
+PALETTE = {
+    'Glass': ((.018, .060, .12), .18, .18),
+    'Frame': ((.50, .59, .68), .45, .35),
+    'Panel': ((.78, .82, .87), .8, 0.),
+    'Pier': ((.69, .74, .80), .8, 0.),
+    'Sill': ((.60, .66, .72), .8, 0.),
+}
+FACADES = (
+    dict(id='West', plane_u_m=0., s_min_m=118.872, s_max_m=137.16,
+         bay_count=3, bay_pitch_m=6.096, outward_uv=[-1, 0]),
+    dict(id='Front', plane_v_m=137.16, s_min_m=0., s_max_m=45.8724,
+         bay_count=5, bay_pitch_m=9.17448, outward_uv=[0, 1]),
+)
+GLASS_Z = (.24, 6.54)
+FRAME_WIDTH = .09
+MULLION_WIDTH = .075
+PIER_WIDTH = .78
+GLASS_DEPTH = (.08, .10)
+FRAME_DEPTH = (.10, .18)
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def write(name, data):
+    (OUT / name).write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+
+def point(u, v, z):
+    return (u - ORIGIN[0], -(v - ORIGIN[1]), z)
+
+
+def bounds_ue(mesh):
+    coords = [(v.co.x * 100, -v.co.y * 100, v.co.z * 100) for v in mesh.vertices]
+    return dict(min=[min(p[i] for p in coords) for i in range(3)],
+                max=[max(p[i] for p in coords) for i in range(3)])
+
+
+def make_material(name, color, roughness, metallic):
+    material = bpy.data.materials.new(name)
+    material.diffuse_color = (*color, 1)
+    material.use_nodes = True
+    principled = next((n for n in material.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+    if principled is None:
+        principled = material.node_tree.nodes.new('ShaderNodeBsdfPrincipled')
+        output = material.node_tree.nodes.new('ShaderNodeOutputMaterial')
+        material.node_tree.links.new(principled.outputs['BSDF'], output.inputs['Surface'])
+    principled.inputs['Base Color'].default_value = (*color, 1)
+    principled.inputs['Roughness'].default_value = roughness
+    principled.inputs['Metallic'].default_value = metallic
+    return material
+
+
+def main():
+    OUT.mkdir(parents=True, exist_ok=True)
+    envelope_path = ROOT / 'SourceAssets/GHS/RefinementV2/Envelope/envelope_geometry.json'
+    protected = [envelope_path,
+                 ROOT / 'SourceAssets/GHS/RefinementV2/Envelope/building_footprint.json',
+                 ROOT / 'SourceAssets/GHS/RackSpecs/cad_plan_mapping.json',
+                 ROOT / 'SourceAssets/GHS/MainRoof/roof_manifest.json']
+    hashes = {str(p.relative_to(ROOT)): sha(p) for p in protected}
+    envelope = json.loads(envelope_path.read_text(encoding='utf-8'))
+    dock_polygons = [Polygon(p['cut_polygon_cad_m']) for p in envelope['openings']]
+    dock_union = unary_union(dock_polygons)
+    # Envelope uses CAD (x, y), while the facade helper uses campus (u, v).
+    overlay_footprint = unary_union([
+        box(-ORIGIN[0] - .18, ORIGIN[1] - 137.16, -ORIGIN[0] + .01, ORIGIN[1] - 118.872),
+        box(-ORIGIN[0] - .18, ORIGIN[1] - 137.16 - .18, 45.8724 - ORIGIN[0], ORIGIN[1] - 137.16 + .01),
+    ])
+    assert dock_union.intersection(overlay_footprint).area < 1e-9, 'Facade covers a CAD loading door'
+    bpy.ops.object.select_all(action='SELECT')
+    bpy.ops.object.delete(use_global=False)
+    scene = bpy.context.scene
+    scene.name = 'GHS_OfficeGlassFacade_Source'
+    scene.unit_settings.system = 'METRIC'
+    scene.unit_settings.scale_length = 1.
+    scene.render.engine = 'CYCLES'
+    scene.cycles.samples = 24
+    scene.cycles.use_denoising = True
+    scene.render.threads_mode = 'FIXED'
+    scene.render.threads = 8
+    materials = {r: make_material('M_GHSOfficeFacade_' + r, *PALETTE[r]) for r in ROLES}
+    editable = bpy.data.collections.new('Editable_OfficeFacade_Parts')
+    scene.collection.children.link(editable)
+    preview = bpy.data.collections.new('Preview_Only_Not_Exported')
+    scene.collection.children.link(preview)
+    objects, records, bays = [], [], []
+
+    def cuboid(name, uv_bounds, z_bounds, role, collection=editable):
+        u0, v0, u1, v1 = uv_bounds
+        z0, z1 = z_bounds
+        assert u1 > u0 and v1 > v0 and z1 > z0, name
+        vertices = [point(u, v, z) for z in (z0, z1)
+                    for u, v in ((u0, v0), (u1, v0), (u1, v1), (u0, v1))]
+        faces = [(0, 1, 2, 3), (7, 6, 5, 4), (0, 4, 5, 1),
+                 (1, 5, 6, 2), (2, 6, 7, 3), (3, 7, 4, 0)]
+        mesh = bpy.data.meshes.new(name)
+        mesh.from_pydata(vertices, [], faces)
+        mesh.materials.append(materials[role])
+        mesh.update()
+        assert not mesh.validate(verbose=True), name
+        bm = bmesh.new()
+        bm.from_mesh(mesh)
+        bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
+        assert all(e.is_manifold for e in bm.edges), name
+        assert all(f.calc_area() > 1e-10 for f in bm.faces), name
+        assert bm.calc_volume(signed=True) > 0, name
+        bm.to_mesh(mesh)
+        bm.free()
+        mesh.calc_loop_triangles()
+        ob = bpy.data.objects.new(name, mesh)
+        collection.objects.link(ob)
+        ob['material_role'] = role
+        ob['facade_part'] = name
+        if collection == editable:
+            objects.append(ob)
+            records.append(dict(name=name, role=role, bounds_uv_m=list(uv_bounds),
+                                z_range_m=list(z_bounds), closed=True, triangles=len(mesh.loop_triangles)))
+        return ob
+
+    def piece(facade, name, s0, s1, depth, height, role):
+        t0, t1 = depth
+        if facade['id'] == 'West':
+            uv = (-t1, s0, -t0, s1)
+        else:
+            uv = (s0, 137.16 + t0, s1, 137.16 + t1)
+        return cuboid(facade['id'] + '_' + name, uv, height, role)
+
+    for facade in FACADES:
+        start, end = facade['s_min_m'], facade['s_max_m']
+        count, pitch = facade['bay_count'], facade['bay_pitch_m']
+        assert abs(end - start - count * pitch) < 1e-8
+        # Shared vertical piers continue from plinth to the existing roof fascia.
+        for i in range(count + 1):
+            center = start + i * pitch
+            lo, hi = max(start, center - PIER_WIDTH / 2), min(end, center + PIER_WIDTH / 2)
+            piece(facade, 'Pier_%02d' % i, lo, hi, (.055, .18), (.04, 9.56), 'Pier')
+        for bay in range(count):
+            s0 = start + bay * pitch + PIER_WIDTH / 2
+            s1 = start + (bay + 1) * pitch - PIER_WIDTH / 2
+            z0, z1 = GLASS_Z
+            name = 'Bay_%02d_' % (bay + 1)
+            # A continuous closed sill and separate opaque header cap the glass.
+            piece(facade, name + 'Sill', s0, s1, (.055, .18), (.04, z0), 'Sill')
+            piece(facade, name + 'HeadPanel', s0, s1, (.065, .16), (z1, 8.22), 'Panel')
+            piece(facade, name + 'FrameLeft', s0, s0 + FRAME_WIDTH, FRAME_DEPTH, (z0, z1), 'Frame')
+            piece(facade, name + 'FrameRight', s1 - FRAME_WIDTH, s1, FRAME_DEPTH, (z0, z1), 'Frame')
+            piece(facade, name + 'FrameBottom', s0 + FRAME_WIDTH, s1 - FRAME_WIDTH, FRAME_DEPTH,
+                  (z0, z0 + FRAME_WIDTH), 'Frame')
+            piece(facade, name + 'FrameTop', s0 + FRAME_WIDTH, s1 - FRAME_WIDTH, FRAME_DEPTH,
+                  (z1 - FRAME_WIDTH, z1), 'Frame')
+            inner0, inner1 = s0 + FRAME_WIDTH, s1 - FRAME_WIDTH
+            lower, upper = z0 + FRAME_WIDTH, z1 - FRAME_WIDTH
+            sx = [inner0 + (inner1 - inner0) * i / 4 for i in range(5)]
+            sz = [lower + (upper - lower) * i / 3 for i in range(4)]
+            for i in range(1, 4):
+                piece(facade, name + 'VerticalMullion_%02d' % i,
+                      sx[i] - MULLION_WIDTH / 2, sx[i] + MULLION_WIDTH / 2,
+                      (.10, .17), (lower, upper), 'Frame')
+            # Split horizontal mullions between verticals: no coincident surfaces.
+            for row in range(1, 3):
+                for col in range(4):
+                    lo = sx[col] + (MULLION_WIDTH / 2 if col else 0)
+                    hi = sx[col + 1] - (MULLION_WIDTH / 2 if col < 3 else 0)
+                    piece(facade, name + 'HorizontalMullion_%d_%d' % (row, col), lo, hi,
+                          (.10, .17), (sz[row] - MULLION_WIDTH / 2, sz[row] + MULLION_WIDTH / 2), 'Frame')
+            for row in range(3):
+                for col in range(4):
+                    # Glass edges tuck 1cm underneath frames, front faces offset
+                    # from the audited 5.3033cm outward legacy-wall protrusion.
+                    lo = sx[col] - .01 + (MULLION_WIDTH / 2 if col else 0)
+                    hi = sx[col + 1] + .01 - (MULLION_WIDTH / 2 if col < 3 else 0)
+                    bottom = sz[row] - .01 + (MULLION_WIDTH / 2 if row else 0)
+                    top = sz[row + 1] + .01 - (MULLION_WIDTH / 2 if row < 2 else 0)
+                    piece(facade, name + 'Glass_%d_%d' % (row + 1, col + 1), lo, hi,
+                          GLASS_DEPTH, (bottom, top), 'Glass')
+            bays.append(dict(id=facade['id'] + '_%02d' % (bay + 1), facade=facade['id'],
+                             horizontal_range_m=[s0, s1], glass_z_range_m=list(GLASS_Z),
+                             columns=4, rows=3, pane_count=12))
+    # A single exterior corner post joins both half-piers without seam gaps.
+    cuboid('SharedCorner_ContinuousPier', (-.18, 137.16, 0., 137.34), (.04, 9.56), 'Pier')
+
+    vertices, faces, slots = [], [], []
+    for ob in objects:
+        offset = len(vertices)
+        vertices.extend([tuple(v.co) for v in ob.data.vertices])
+        faces.extend([[offset + i for i in p.vertices] for p in ob.data.polygons])
+        slots.extend([ROLES.index(ob['material_role'])] * len(ob.data.polygons))
+    mesh = bpy.data.meshes.new(NAME)
+    mesh.from_pydata(vertices, [], faces)
+    for role in ROLES:
+        mesh.materials.append(materials[role])
+    for p, index in zip(mesh.polygons, slots):
+        p.material_index = index
+    mesh.update()
+    mesh.calc_loop_triangles()
+    assert not mesh.validate(verbose=True)
+    assert len(mesh.loop_triangles) < 12000
+    export = bpy.data.objects.new(NAME, mesh)
+    scene.collection.objects.link(export)
+    bpy.ops.object.select_all(action='DESELECT')
+    export.select_set(True)
+    bpy.context.view_layer.objects.active = export
+    fbx = OUT / (NAME + '.fbx')
+    bpy.ops.export_scene.fbx(filepath=str(fbx), use_selection=True, object_types={'MESH'},
+        axis_forward='-Y', axis_up='Z', apply_unit_scale=True, bake_anim=False,
+        mesh_smooth_type='FACE', use_mesh_modifiers=True, add_leaf_bones=False)
+    mesh_row = dict(name=NAME, fbx=str(fbx.relative_to(ROOT)), vertices=len(mesh.vertices),
+                    triangles=len(mesh.loop_triangles), bounds_ue_cm=bounds_ue(mesh),
+                    material_roles=list(ROLES), slot_names=[materials[r].name for r in ROLES], sha256=sha(fbx))
+    export.hide_render = True
+    export.hide_set(True)
+    export.select_set(False)
+
+    # Preview shell/ground are isolated in an explicit non-exported collection.
+    cuboid('PREVIEW_ExistingOfficeMass_NotExported', (0, 110, 45.8724, 137.16), (0, 9.6), 'Panel', preview)
+    cuboid('PREVIEW_Roof_NotExported', (-.25, 109.75, 46.1224, 137.41), (9.6, 9.79), 'Panel', preview)
+    cuboid('PREVIEW_Ground_NotExported', (-35, 75, 80, 180), (-.16, -.03), 'Sill', preview)
+    roof_blue = make_material('PREVIEW_RoofBlue_NotExported', (.035, .13, .48), .8, .05)
+    for name, uv in [('PREVIEW_BlueWest_NotExported', (-.25, 109.75, -.12, 137.41)),
+                     ('PREVIEW_BlueFront_NotExported', (-.25, 137.28, 46.1224, 137.41))]:
+        ob = cuboid(name, uv, (9.79, 9.85), 'Frame', preview)
+        ob.data.materials.clear()
+        ob.data.materials.append(roof_blue)
+    scene.world.use_nodes = True
+    world_nodes = scene.world.node_tree.nodes
+    background = next((n for n in world_nodes if n.type == 'BACKGROUND'), None)
+    if background is None:
+        background = world_nodes.new('ShaderNodeBackground')
+        output = world_nodes.new('ShaderNodeOutputWorld')
+        scene.world.node_tree.links.new(background.outputs['Background'], output.inputs['Surface'])
+    background.inputs['Color'].default_value = (.65, .72, .82, 1)
+    background.inputs['Strength'].default_value = .65
+    target = Vector(point(16, 130, 4.6))
+    camera_data = bpy.data.cameras.new('OfficeFacade_PreviewCamera')
+    camera = bpy.data.objects.new('OfficeFacade_PreviewCamera', camera_data)
+    scene.collection.objects.link(camera)
+    camera.location = Vector(point(-30, 181, 32))
+    camera.rotation_euler = (target - camera.location).to_track_quat('-Z', 'Y').to_euler()
+    camera_data.type = 'ORTHO'
+    camera_data.ortho_scale = 62
+    scene.camera = camera
+    for name, uvz, energy, size in [('Key', (-18, 150, 50), 85000, 35), ('Fill', (50, 175, 30), 40000, 28)]:
+        light = bpy.data.lights.new(name, 'AREA')
+        ob = bpy.data.objects.new(name, light)
+        scene.collection.objects.link(ob)
+        ob.location = point(*uvz)
+        ob.rotation_euler = (target - ob.location).to_track_quat('-Z', 'Y').to_euler()
+        light.energy = energy
+        light.shape = 'DISK'
+        light.size = size
+    scene.render.resolution_x = 1536
+    scene.render.resolution_y = 1024
+    scene.render.resolution_percentage = 100
+    scene.view_settings.view_transform = 'AgX'
+    scene.render.filepath = str(OUT / 'office_facade_preview.png')
+    bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'OfficeGlassFacade.blend'))
+    bpy.ops.render.render(write_still=True)
+    assert all(sha(ROOT / p) == h for p, h in hashes.items()), 'Shared source changed'
+    manifest = dict(version=1, name='GHS office wing exterior display glazing', mesh=mesh_row,
+        coordinate_contract='u,v metres; Blender (u-239.33385,-(v-60.24019),z); FBX -Y forward Z up; UE origin scale1 cm',
+        materials={r: dict(color_linear=list(PALETTE[r][0]), roughness=PALETTE[r][1], metallic=PALETTE[r][2], opaque=True) for r in ROLES},
+        facades=list(FACADES), bays=bays, bay_count=len(bays), pane_count=96,
+        glass_outward_offset_m=list(GLASS_DEPTH), frame_outward_offset_m=list(FRAME_DEPTH),
+        pier_width_m=PIER_WIDTH, head_panel_z_m=[6.54, 8.22], existing_wall_top_m=9.6,
+        structural_note='Visual reference reconstruction; bay spacing follows the CAD-fitted office wing; glazing is an opaque exterior overlay and does not cut or replace shared walls.',
+        parts=records, editable_part_count=len(records),
+        checks=dict(all_parts_closed=True, all_faces_valid=True, positive_volume_parts=True,
+            cad_loading_door_count=len(dock_polygons), loading_door_overlap_area_m2=dock_union.intersection(overlay_footprint).area,
+            minimum_door_clearance_m=dock_union.distance(overlay_footprint),
+            audited_existing_wall_outward_protrusion_m=.053033, glass_back_clearance_m=.08-.053033,
+            all_geometry_below_roof=True, existing_shared_sources_unchanged=True,
+            source_hashes=hashes, triangle_budget=12000),
+        outputs=dict(blend='SourceAssets/GHS/OfficeFacade/OfficeGlassFacade.blend', fbx=mesh_row['fbx'],
+                     preview='SourceAssets/GHS/OfficeFacade/office_facade_preview.png'))
+    write('facade_manifest.json', manifest)
+    print('GHS_OFFICE_FACADE_READY ' + json.dumps(dict(vertices=mesh_row['vertices'], triangles=mesh_row['triangles'],
+          bays=len(bays), panes=96, parts=len(records), bounds_ue_cm=mesh_row['bounds_ue_cm'])))
+
+
+if __name__ == '__main__':
+    main()

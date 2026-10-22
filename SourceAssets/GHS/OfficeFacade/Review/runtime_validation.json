@@ -1,0 +1,79 @@
+{
+  "success": true,
+  "status": "success",
+  "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
+  "elapsed_seconds": 29.42200000002049,
+  "checks": [
+    {
+      "name": "saved_campus_loaded_and_business_registry_preserved",
+      "passed": true
+    },
+    {
+      "name": "independent_roof_visibility_and_business_isolation",
+      "passed": true
+    },
+    {
+      "name": "initial_1080p_hud_ready",
+      "passed": true
+    },
+    {
+      "name": "initial_full_campus_1920x1080",
+      "passed": true
+    },
+    {
+      "name": "resized_2560x1600_hud_ready",
+      "passed": true
+    },
+    {
+      "name": "full_campus_after_live_resize_2560x1600",
+      "passed": true
+    },
+    {
+      "name": "full_campus_after_panel_collapse",
+      "passed": true
+    },
+    {
+      "name": "full_campus_after_panel_expand",
+      "passed": true
+    },
+    {
+      "name": "agv_selection_focus_and_details_visible",
+      "passed": true
+    },
+    {
+      "name": "overview_command_clears_selection_and_restores_campus",
+      "passed": true
+    },
+    {
+      "name": "region_racks_focus_preserved",
+      "passed": true
+    },
+    {
+      "name": "region_floor_focus_preserved",
+      "passed": true
+    },
+    {
+      "name": "final_full_campus_after_region_focus",
+      "passed": true
+    },
+    {
+      "name": "business_registry_unchanged_after_focus_resize_and_reset",
+      "passed": true
+    },
+    {
+      "name": "office_facade_independent_from_roof_and_business",
+      "passed": true
+    },
+    {
+      "name": "runtime_did_not_modify_either_saved_map",
+      "passed": true
+    }
+  ],
+  "map_sha256": {
+    "D:\\UEPro\\Test\\Content\\Maps\\GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap": "28d740e6baea2330bb313d7946662566aa38d8875a1c2e0fb7b45c8fcb88070d",
+    "D:\\UEPro\\Test\\Content\\Maps\\GHS_CAD_NormalWarehouse.umap": "f7201ef820bcfca947071a5e936427362a0c002ba50398dba2e17755d7e40066"
+  },
+  "full_report_path": "Saved\\ParkExpansion\\runtime_report.json",
+  "full_report_sha256": "551d8d7b216e2f91492d532d94368b215d353982747afcde50c06b73081cc402",
+  "note": "Compact receipt; full report retains the per-frame viewport and business diagnostics in Saved."
+}
