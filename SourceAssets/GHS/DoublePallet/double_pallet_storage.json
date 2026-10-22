@@ -1,0 +1,188 @@
+{
+  "meshes": [
+    {
+      "name": "SM_GHS_Presentation_CargoLow",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\DoublePallet\\SM_GHS_Presentation_CargoLow.fbx",
+      "slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.5999999642372131
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.3760311603546143
+        ]
+      ],
+      "source_parts": 134,
+      "vertices": 5072,
+      "polygons": 4736,
+      "pallet_count": 2,
+      "pallet_base_z_m": [
+        0.0,
+        0.6880155801773071
+      ],
+      "pallet_height_m": 0.17,
+      "carton_layers_per_tier": 2,
+      "original_bounds_m": [
+        [
+          -0.6000000238418579,
+          0.5999999642372131
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.3760311603546143
+        ]
+      ],
+      "sha256": "61c82887b037955f9a1ae9691efef3943e5aef70649c28a3ada4e4599d8d3a59"
+    },
+    {
+      "name": "SM_GHS_Presentation_CargoMid",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\DoublePallet\\SM_GHS_Presentation_CargoMid.fbx",
+      "slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.5999999642372131
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.9760311841964722
+        ]
+      ],
+      "source_parts": 154,
+      "vertices": 6128,
+      "polygons": 5756,
+      "pallet_count": 2,
+      "pallet_base_z_m": [
+        0.0,
+        0.9880155920982361
+      ],
+      "pallet_height_m": 0.17,
+      "carton_layers_per_tier": 3,
+      "original_bounds_m": [
+        [
+          -0.6000000238418579,
+          0.5999999642372131
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.9760311841964722
+        ]
+      ],
+      "sha256": "dd6054cb48097a9302fdae0c6605224e30dee3a06138f0774d74e40a8613a054"
+    },
+    {
+      "name": "SM_GHS_Presentation_CargoHigh",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\DoublePallet\\SM_GHS_Presentation_CargoHigh.fbx",
+      "slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.5999999642372131
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          2.576030731201172
+        ]
+      ],
+      "source_parts": 174,
+      "vertices": 7184,
+      "polygons": 6776,
+      "pallet_count": 2,
+      "pallet_base_z_m": [
+        0.0,
+        1.2880154848098755
+      ],
+      "pallet_height_m": 0.17,
+      "carton_layers_per_tier": 4,
+      "original_bounds_m": [
+        [
+          -0.6000000238418579,
+          0.5999999642372131
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          2.576030969619751
+        ]
+      ],
+      "sha256": "75a3a458500c11001b09c29f777c57825998f488403ef3756b65d4ead0938075"
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_VR_StorageCargoBlue",
+      "base_color": [
+        0.18,
+        0.29,
+        0.46,
+        1
+      ],
+      "roughness": 0.58,
+      "metallic": 0.08
+    },
+    {
+      "name": "M_VR_StorageCargoGrid",
+      "base_color": [
+        0.12,
+        0.64,
+        0.84,
+        1
+      ],
+      "roughness": 0.42,
+      "metallic": 0.12,
+      "emission": 0.28
+    },
+    {
+      "name": "M_VR_StoragePalletBlue",
+      "base_color": [
+        0.015,
+        0.18,
+        0.44,
+        1
+      ],
+      "roughness": 0.4,
+      "metallic": 0.28
+    }
+  ],
+  "blend": "D:\\UEPro\\Test\\SourceAssets\\GHS\\DoublePallet\\double_pallet_storage.blend",
+  "source": "Scripts/video_reference/build_storage.py",
+  "source_sha256": "ee6847614cb2a511f0ecb791b964daa19e031a658a907352b5d76fabeb627dd5",
+  "description": "Two full-height blue pallet bases; original total height and XY envelope retained"
+}

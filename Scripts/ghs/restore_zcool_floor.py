@@ -84,7 +84,9 @@ def restore_floor(by):
             x, y, z = binding['position_m']
             location = component.get_instance_transform(index, world_space=True).translation
             assert (location - unreal.Vector(x * 100, -y * 100, z * 100)).length() < .02, (label, index, 'Current CAD order')
-        mesh = unreal.EditorAssetLibrary.load_asset(saved['mesh'])
+        # A private visual revision can retain the basename/CAD identity. Keep
+        # that current mesh when restoring instances rather than reverting it.
+        mesh = component.static_mesh if current_name == mesh_name else unreal.EditorAssetLibrary.load_asset(saved['mesh'])
         assert mesh and mesh.get_name() == mesh_name
         materials = [component.get_material(i) for i in range(component.get_num_materials())]
         assert len(mesh.static_materials) == len(materials)
