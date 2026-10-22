@@ -9,9 +9,9 @@ import math
 
 
 PALETTE = {
-    'Trees': (.115, .315, .080),
-    'TreesLight': (.185, .415, .115),
-    'TreesDark': (.055, .205, .055),
+    'Trees': (.10, .22, .11),
+    'TreesLight': (.14, .29, .15),
+    'TreesDark': (.065, .16, .075),
     'Trunk': (.205, .165, .115),
 }
 

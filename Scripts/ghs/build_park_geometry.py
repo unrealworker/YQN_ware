@@ -366,6 +366,11 @@ def export():
         geo.from_pydata(data['vertices'],[],data['faces'])
         geo.update()
         geo.validate(verbose=True)
+        if role in ('Trees', 'TreesDark', 'TreesLight'):
+            # Smooth crown shading preserves every vertex, canopy bound and
+            # placement while removing the flat-faceted presentation.
+            for polygon in geo.polygons:
+                polygon.use_smooth=True
         obj=bpy.data.objects.new(name,geo)
         bpy.context.collection.objects.link(obj)
         geo.materials.append(material)

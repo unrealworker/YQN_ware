@@ -1,8 +1,8 @@
-# GHS 园区疏朗扩域树林
+# GHS 园区参考风格与独立主厂房屋顶
 
-目标关卡：`/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`。本说明对应 2026-10-22 按用户反馈将五处外围树林扩大、疏化后的版本，覆盖此前模型统计和验收状态。当前布局与统计以版本 3 的 `SourceAssets/GHS/Park/park_manifest.json`、`site_geometry_report.json`、`cad_layout.json` 为准。本轮保留原两片林带的 510 棵树，扩大五处外围树林覆盖、降低密度并增加自然空隙，只刷新六个既有网格。本轮 UE 原位应用、独立视觉复核、保存重载与 14 项运行检查已通过；下文记录疏朗扩域版本的当前证据。
+目标关卡：`/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`。本说明对应用户最新参考图：柔和的白模厂区、浅色金属屋顶、浅蓝采光带、蓝色包边与圆润灰绿树冠。当前布局分别以 `SourceAssets/GHS/Park/park_manifest.json`／`site_geometry_report.json` 和 `SourceAssets/GHS/MainRoof/roof_manifest.json` 记录。本轮不重排道路、建筑、车辆或树林；新增一个独立屋顶 Actor，对现有树冠平滑着色并调整三类树木材质，既有灯光只改光源角与 AO。
 
-园区以现有仓库为主体，完整展示装卸前场、内部道路、停车、回转、围栏及出入口；公共道路和住宅提供环境参照。沿用瓷白、冷灰与深蓝风格，不使用卫星截图地面贴图。
+当前屋顶已导入，2026-10-22 13:44:16（Asia/Shanghai）独立保存重载通过；15 项运行检查与正式图片归档也已完成，旧疏林版记录不作为当前版本证据。全部屋顶部件合并为一网格整体显隐，后续产品 UI 交互尚未开发。
 
 ## 来源、许可和精度
 
@@ -39,7 +39,7 @@ u = 0.9023064585475312*x + 0.43404048546294594*y - 575.1273211364305
 v = 0.4305234644027491*x - 0.8985758812574258*y + 216.52837930202614
 ```
 
-长边尺度约 `1.001272`、短边约 `0.996387`。三锚点精确吻合，其余角点最大残差约 `2.22 m`；差异保留并报告，不对周围路网做局部变形。**现有仓库主模型使用项目内资产，不重建、不旋转、不缩放，园区生成器跳过 `1eb6`**。货架、货物、月台和设备也不属于重建范围。
+长边尺度约 `1.001272`、短边约 `0.996387`。三锚点精确吻合，其余角点最大残差约 `2.22 m`；差异保留并报告，不对周围路网做局部变形。**现有仓库墙体和内部模型使用项目内资产，不重建、不旋转、不缩放，园区生成器跳过 `1eb6`**。本轮另按项目内精确轮廓添加独立屋顶；货架、货物、月台和设备不属于重建范围。
 
 局部 `u` 沿仓库长轴，`v` 指向装卸前场。导出约定以 manifest 为准：
 
@@ -52,17 +52,19 @@ X = (u - 239.33385) * 100; Y = (v - 60.24019) * 100
 
 硬化地坪为 `−4 cm`。原地面标识所在矩形 `u=189.5…277.1、v=147.9…159.7` 保持避让。公共道路、住宅主位置来自 CAD；北侧 Gray Pine 的卫星补房单独标记，不混称为 CAD 建筑。
 
-## 本轮生成结果
+## 当前生成结果
 
 当前 manifest 版本 `3`：**22 个唯一网格资产、987,014 个唯一资产三角面、338 栋住宅**。22 个资产由 21 个环境合并网格与 1 个闭门卡车网格组成；卡车网格自身为 44,096 面，复用 27 次。按所有实例展开后的环境三角面为 **2,133,510**，计算为 `987014 + 44096 × (27−1)`，不能将唯一资产面数当成全场实例面数，也不能将展开面数当作每帧实际可见面数。
 
-住宅中 299 栋保留 CAD 中心和外接矩形轴向，39 栋为 `satellite_infill`；补房沿已有 Gray Pine 道路与支路布置。道路／住宅共用范围继续为 `u=[−197,747]、v=[−217,592] m`，不同于较小范围的独立住宅模块预检。本轮只扩展外围森林地面，未扩大这套公共路网／住宅生成范围。
+MainRoof 另计 **1 个独立网格、1 个 Actor、5 个材质槽、8,288 个三角面**。Park 与屋顶合计 23 个唯一网格、995,302 个唯一资源三角面，按环境实例展开为 2,141,798 面；上述统计不包含原仓库内部资产。主关卡原 359 个 Actor 保留，新增屋顶后为 360 个。
+
+住宅中 299 栋保留 CAD 中心和外接矩形轴向，39 栋为 `satellite_infill`；补房沿已有 Gray Pine 道路与支路布置。道路／住宅共用范围继续为 `u=[−197,747]、v=[−217,592] m`，不同于较小范围的独立住宅模块预检。外围森林地面沿用已经确认的扩域结果，本轮不扩大公共路网／住宅生成范围。
 
 四种住宅模块包含双层体量、坡屋顶、车库、门窗及太阳能板。屋顶限制在源建筑外接矩形内，场景检查的 `footprint_uv_m` 是实际模型的定向包围矩形。335 条车道连接街边，3 户保留短入口。共用车道口整体合并，前草坪按邻近住宅分区，856 段约 `1.4 m` 浅灰侧后院墙避让道路和住宅。
 
 道路先以圆弧相切处理转角，再合并路面并生成外缘路缘，不在交叉口横穿内部白边。虚线沿全程弧长延续，坡道标线顶点随道路高程变化。道路及围栏模块可独立做几何测试。
 
-本轮补林保留全部道路、住宅、停车场、车辆与材质。当前沿用已配准的 79 条 CAD 道路中心线及 `road_union` 的 `3.8 m` 合并圆角，不改变中心线来迁就车位。西南停车场的 72 个泊位、车辆方向、植被与对应输出逐项保持一致；东北停车场已按此前卫星近景补齐。停车、绿岛与森林均从道路保护区外布置。
+本轮保留全部道路、住宅、停车场和车辆；树冠材质与平滑法线按参考风格调整，用户 Ground／Cobalt 组件覆盖保持。当前沿用已配准的 79 条 CAD 道路中心线及 `road_union` 的 `3.8 m` 合并圆角，不改变中心线来迁就车位。西南停车场的 72 个泊位、车辆方向、植被与对应输出逐项保持一致；东北停车场已按此前卫星近景补齐。停车、绿岛与森林均从道路保护区外布置。
 
 围栏周长约 `1,533.835 m`，其中约 `1,513.526 m` 有栏，仅在 **SW Main gate** 与 **NE Service gate** 处开口；604 根立柱、4 个门柱、2 个门卫。非入口围栏与道路重叠长度为 `0 m`，52 台既有月台货车轮廓位于围栏范围内。入口门柱间净宽约 `9.813 m`、`10.914 m`。
 
@@ -106,11 +108,11 @@ X = (u - 239.33385) * 100; Y = (v - 60.24019) * 100
 
 派生生成器记录并校验原 `.blend`、`.fbx`、`.uasset` 三个共享资源的 SHA-256，不修改其内容。`Trucks/closed_truck.json` 还包含 2,350 条仅针对新后门的封闭射线检查、材质槽顺序、部件比对及几何结果；离线射线与源哈希保护不能代替本轮 UE 保存重载和业务回归。
 
-### 五处树林扩域、疏化与自然空隙
+### 灰绿色平滑树冠与已确认的疏朗布局
 
-`park_vegetation.py` 使用圆润、偏心的多簇树冠和可见树干，三种树形按深、中、浅绿色分配树冠，低矮灌木为独立形态。当前树木 **1,373 棵**、低矮灌木 **260 组**；林带共 **1,062 棵**，另有场边、住宅与停车场树木 311 棵。
+`park_vegetation.py` 使用圆润、偏心的多簇树冠和可见树干，三种树形按深、中、浅灰绿色分配树冠，本轮应用平滑法线，低矮灌木为独立形态。当前树木 **1,373 棵**、低矮灌木 **260 组**；林带共 **1,062 棵**，另有场边、住宅与停车场树木 311 棵。
 
-原两片林带的 510 棵树、固定随机序列、尺度、树形及地面输出保持；原种子为 `173350210`。本轮仅把五处外围树林的参考轮廓按中心线性放大 **1.4 倍**，并降低树群密度。五片使用独立种子 `173352210 + 101 × 组序号`，不会扰动原组。实际放置受中心间距和完整 CAD 避让约束，以完整报告的 **552 棵**为准，不为凑目标数量缩小净距。
+原两片林带的 510 棵树、固定随机序列、尺度、树形及地面输出保持；原种子为 `173350210`。五处外围树林沿用此前已确认的线性扩大 **1.4 倍**、降低密度的布局；本轮只调整树冠着色与法线，不再次扩域。五片使用独立种子 `173352210 + 101 × 组序号`，不会扰动原组。实际放置受中心间距和完整 CAD 避让约束，以完整报告的 **552 棵**为准，不为凑目标数量缩小净距。
 
 | 林带 | 当前状态 | 树木数 |
 | --- | --- | --- |
@@ -136,93 +138,79 @@ X = (u - 239.33385) * 100; Y = (v - 60.24019) * 100
 
 五片新树到全部林树的实际最小中心距为 **10.005902 m**；包含原两片的全局最小值仍为 **5.701946 m**。两个指标的范围不同，不能用全局数值误判新组未达到 10 m。
 
-树林是用户要求的环境补充，**不是卫星逐棵测绘，也不改写 CAD 建筑或道路**。原五处边界由截图地面锚点映射，定位精度估计约 **±10 m**；本轮扩域同样属于展示调整。树冠至道路、建筑及车道、园区、水道的策略净距为 `8 / 10 / 8 / 18 m`，检查使用完整 CAD 道路与建筑保护区。CAD 内 10 条水道保持，当前最小实际树冠水道净距为 **18.063233 m**。
+树林是用户要求的环境补充，**不是卫星逐棵测绘，也不改写 CAD 建筑或道路**。原五处边界由截图地面锚点映射，定位精度估计约 **±10 m**；此前扩域同样属于展示调整。树冠至道路、建筑及车道、园区、水道的策略净距为 `8 / 10 / 8 / 18 m`，检查使用完整 CAD 道路与建筑保护区。CAD 内 10 条水道保持，当前最小实际树冠水道净距为 **18.063233 m**。
 
 外围森林 Ground 包络单独扩展至约 `u=[−346.541,818.904]、v=[−370.118,592] m`，相对原公共场景地面增加约 **261,350.716 m²**。只输出原地面之外的增量区域，重叠面积约 **6.69e-14 m²**，为浮点误差量级。道路与住宅共享的 `scope` 未扩大；原林带地面不被覆盖，新林地裁去原林地后再输出，避免共面叠加。
 
-生成器唯一资源三角面上限为 **1,100,000**，本轮实际 **987,014**；卡车按全部实例展开后的全场面数为 **2,133,510**。这个预算不是实时帧率承诺。
+生成器唯一资源三角面上限为 **1,100,000**，Park 当前 **987,014**；卡车按全部实例展开后的环境面数为 **2,133,510**，不含另计的屋顶。这个预算不是实时帧率承诺。
+
+## 独立主厂房屋顶与参考风格
+
+屋顶由 `Scripts/ghs/build_main_warehouse_roof.py` 读取 `SourceAssets/GHS/RefinementV2/Envelope/envelope_geometry.json` 的项目内厂房轮廓生成。它不是 CADmapper 98 m 通用仓库屋顶的拉伸件；保留现有 **465.7344 m 长边、西南突出办公室和东南斜切角**。源轮廓 UV 米为：
+
+```text
+(465.7344,0) → (465.7344,111.98368) → (440.88196,118.872)
+→ (45.8724,118.872) → (45.8724,137.16) → (0,137.16) → (0,0)
+```
+
+外挑 `0.25 m`；封闭底面 `9.60 m` 贴合墙顶，主檐口 `9.76 m`、脊线位于 `v=59.436 m` 且高 `10.40 m`；办公室 `v>118.872 m` 为低平屋面。白色侧边封到底面，保留墙体、门洞和内部设备。最高货架约 `9.154 m`，屋顶底面净空约 `0.446 m`。屋顶造型与高度是展示建模参数，不当作实测结构数据。
+
+5 条不透明浅蓝采光带分别位于 `u=75/155/235/315/395 m`、`v=15…105 m`，宽 `3.6 m`，每条 15 格。屋面立缝间距 `1.5 m`、高 `0.03 m`，蓝色包边约 `0.36 m`；18 个主通风帽避开采光带，办公室另有 2 个小通风口。
+
+`MainWarehouseRoof.blend` 保留 **431 个命名部件**。FBX 为 **SM_GHS_MainWarehouseRoof** 单一多材质网格，8,288 面／5,018 顶点，槽顺序固定为 `Roof / Seams / Blue / Skylight / Detail`。UE 路径为 `/Game/GHSZcoolSmartFactory/Roof/Meshes/SM_GHS_MainWarehouseRoof`，使用五个私有 `M_GHSRoof_<role>` 材质；Actor 为 `GHS_MainWarehouseRoof`，无业务身份、无碰撞、无 Tick。具体材质值和源文件在 [MainRoof 说明](../SourceAssets/GHS/MainRoof/README.md)。
+
+树冠三类网格使用平滑法线和灰绿色，粗糙度 `0.85`、高光 `0.15`，几何和位置不变。既有定向光的**光源角**调为 `7°`，AO 强度 `0.75`、半径 `110 cm`。本轮不增加灯光，不改光照强度、曝光或渲染方式；源参数位于 `SourceAssets/GHS/Park/presentation_style.json`。
+
+**本轮没有产品 UI 屋顶开关。** 全部屋顶细节集中在一个 Actor 中，可通过原生 Actor 显隐整体开合，测试截图也验证了开顶视角。后续开发 UI 时需要同步内部设备 POI、货物选取与视角状态。当前 `FGHSTwinSceneData::PickRay` 采用业务包围盒而非物理遮挡；闭顶后内部物体仍可能被点选，开启屋顶碰撞不能代替完整交互逻辑。
 
 ## 依赖与复现
 
-以下命令在 `D:/UEPro/Test` 运行。生成侧使用 Blender 5.2 自带 Python 3.13；Shapely 2.1.2 及其 NumPy 依赖放在项目专用目录，不安装到 UE Python：
+生成侧使用 Blender 5.2 与 `Saved/ParkRefinement/python_deps` 中的 Shapely 2.1.2；UE 运行时不依赖 Shapely。以下命令在 `D:/UEPro/Test` 执行：
 
 ```powershell
-& 'D:/WinAPP/Blender/5.2/python/bin/python.exe' -B -m pip install 'shapely==2.1.2' --target 'Saved/ParkRefinement/python_deps'
+& 'D:/WinAPP/Blender/blender.exe' --background --python-exit-code 1 --python Scripts/ghs/build_main_warehouse_roof.py
+& 'D:/WinAPP/Blender/blender.exe' --background --python-exit-code 1 --python Scripts/ghs/build_park_geometry.py
 ```
 
-DXF 提取复用 `Scripts/_vendor/cad/ezdxf`。Shapely 只负责离线路面合并、带孔三角化和空间裁剪；**FBX、UE 静态网格及运行时不需要 Shapely**。
+闭门卡车、CAD 和园区基础结构沿用已验证源文件，不需要为了本轮风格修改重新派生。屋顶 FBX 独立回读验证记录在 `SourceAssets/GHS/MainRoof/fbx_roundtrip_verification.json`。
 
-1. 提取 CAD：
+在目标关卡已打开且退出 PIE 后，通过现有 `live_dispatcher.py` 依次执行 `inspect_park_roof_style.py`、`apply_park_roof_style.py` 和 `capture_park_roof_style.py`。不要把首次部署的 `apply_park_expansion.py` 或旧六网格补林入口当作本轮样式应用入口。本轮脚本仅重导入三类树冠、更新对应私有材质，导入一个独立屋顶并设置既有光源角／AO；核对 `Saved/ParkRoofStyle/apply_report.json` 的当前成功状态和保存状态。
 
-   ```powershell
-   & 'D:/WinAPP/Blender/5.2/python/bin/python.exe' -B Scripts/ghs/extract_park_cad.py --extract-only
-   ```
+截图异步完成，以 `Saved/ParkRoofStyle/capture_report.json` 自身 `success` 和图片更新时间为准，不能只看桥接器 `executed`。六个视图包含屋顶全景、园区全景、屋顶细节、办公室边缘、柔和树冠和隐藏屋顶后的内部；结束后恢复屋顶可见性和原视角。
 
-   输出 `SourceAssets/GHS/Park/cad_layout.json` 与 `Saved/ParkRefinement/CAD/cad_analysis.json`。带 Pillow 的 Python 可运行同脚本 `--render-only` 重建三张 CAD PNG。
+独立保存重载使用本轮专用验证器：
 
-2. 运行几何测试并生成园区。以下包含首次部署的卡车派生命令；本轮补林复用已验证卡车，仅执行测试与最后一条主生成命令：
+```powershell
+& 'D:/UE/UE_5.4/Engine/Binaries/Win64/UnrealEditor-Cmd.exe' 'D:/UEPro/Test/Test.uproject' -run=pythonscript '-script=D:/UEPro/Test/Scripts/ghs/validate_park_roof_style.py' -unattended -nop4 -NullRHI
+```
 
-   ```powershell
-   $env:PYTHONPATH = 'D:/UEPro/Test/Saved/ParkRefinement/python_deps'
-   & 'D:/WinAPP/Blender/5.2/python/bin/python.exe' -B -m unittest discover -s Scripts/ghs -p 'test_park_*.py' -v
-   & 'D:/WinAPP/Blender/blender.exe' --background --python-exit-code 1 --python Scripts/ghs/build_park_truck.py
-   & 'D:/WinAPP/Blender/blender.exe' --background --python-exit-code 1 --python Scripts/ghs/build_park_geometry.py
-   ```
-
-   首次部署时，`build_park_truck.py` 是主生成器的前置步骤；本轮补林复用已经验证的派生卡车，不重复修改卡车源。该步骤输出 `Trucks/closed_truck.blend`、闭门卡车 FBX、JSON 和三张预览。随后主生成器调用 `park_site.py`，组合道路、围栏、住宅、车辆、植被与停车模块，读取派生卡车及 `scene_overrides.json`。最终包含主 `.blend` 的 27 个共用网格卡车实例、21 个环境 FBX 与 1 个卡车 FBX、manifest、完整几何报告及预览；成功以各步骤退出码和最终 `GHS_PARK_READY` 为准。
-
-3. 在已打开目标关卡且退出 PIE 的 UE 编辑器中应用。使用当前会话 `Scripts/ghs/live_dispatcher.py` 桥接；未启用时先在编辑器 Python 环境执行该脚本，再投递请求：
-
-   ```powershell
-   $parkRequest = @{ id = [guid]::NewGuid().ToString(); script = 'apply_park_forest_fill.py' }
-   [IO.File]::WriteAllText('D:/UEPro/Test/Saved/GHS_LiveRequest.json', ($parkRequest | ConvertTo-Json), [Text.UTF8Encoding]::new($false))
-   ```
-
-   本轮密度比较基线保存在 `Saved/ParkForestSpread/Before`；局部导入继续复用 `Saved/ParkForestFill/Before` 的原林带和编辑器保护基线，不覆盖任一修改前记录。核对同 ID 的 `Saved/GHS_LiveStatus.json` 和新生成的 `Saved/ParkForestFill/apply_report.json`。局部脚本只原位导入 `Ground`、`Landscape`、`Trees`、`TreesDark`、`TreesLight`、`Trunk` 六个 FBX，复用已有材质，不销毁或重建 Actor，不修改相机或 27 个 HISM 卡车实例。导入前后比较全部 Actor 快照，校验变换、组件材质、标签及实例参数，再保存当前关卡。首次完整部署仍使用 `apply_park_expansion.py`，不要将完整重建入口代替本轮局部应用。`scene_overrides.json` 中 Ground → `M_GHSPark_Landscape`、Blue → `M_Zcool_Cobalt` 两项用户组件材质覆盖必须保留；Ground 既有 Actor 位置 `(170,240,0) cm` 也由局部导入保留。不要重采集或覆盖修改前基线。
-
-4. 以相同请求方式依次运行 `validate_park_expansion.py`、`capture_park_expansion.py`、`capture_park_details.py`。每项完成并核对最新报告后再投递下一项。截图使用异步回调，桥接 `executed` 仅说明已启动，必须等待截图报告自身 `success` 及文件时间更新。
-
-5. 独立进程重载使用 `validate_park_saved.py`，实际运行回归使用 `verify_park_runtime.py`，与编辑器结构检查分别保留证据：
-
-   ```powershell
-   & 'D:/UE/UE_5.4/Engine/Binaries/Win64/UnrealEditor-Cmd.exe' 'D:/UEPro/Test/Test.uproject' -run=pythonscript '-script=D:/UEPro/Test/Scripts/ghs/validate_park_saved.py' -unattended -nop4 -NullRHI
-   & 'D:/UE/UE_5.4/Engine/Binaries/Win64/UnrealEditor.exe' 'D:/UEPro/Test/Test.uproject' /Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory -game -RenderOffscreen -TwinDiagnostics -windowed -ForceRes -ResX=1920 -ResY=1080 -unattended '-ExecCmds=py D:/UEPro/Test/Scripts/ghs/verify_park_runtime.py'
-   ```
+实际运行回归单独执行，记录屋顶存在、可整体显隐、原设备／设施注册表及内部交互行为。本轮运行报告为 `Saved/ParkExpansion/runtime_report.json`；15 项通过，保存重载和 Actor 显隐测试不等同于产品 UI 开关验收。
 
 ## 原场景保护
 
-新增对象使用 `GHSPark_` 前缀和 `GHS_ParkContext` 标签，不带现有设备业务 `TwinId=`，不进入设备搜索或状态统计。展示卡车也不得复制 `IndependentDockTruck`、`Dock=` 标签或附加 POI／数据组件；背景关闭碰撞和 Tick。只调整当前关卡相机实例以容纳园区，不修改共享相机类默认值；旧 `/Game/Maps/GHS_CAD_NormalWarehouse` 地图应保持原哈希。
+屋顶使用 `GHS_WarehouseRoof / RemovableRoof / GHS_ArchitecturalContext` 标记，不复用设备 `TwinId=` 或 `FXOwner=`。原 359 个 Actor 的变换、标签、网格路径、组件覆盖及实例布局保留，主关卡仅新增屋顶成为 360 个 Actor。树冠网格内容只改变平滑法线，三类树冠材质有明确的风格修改范围；不改变原仓库墙、货架、货物、月台或设备。
 
-`Saved/ParkExpansion/scene_inspection.json`、`map_before.umap`、`source_map_baseline.json` 是原扩展前基线，须保留。导入前用户删除 `GHS_SiteTitle` 的证据在 `pre_import_changes.json`，不要恢复标题。验证器对其余 334 个原 Actor 的网格、材质、标签、变换与实例数据逐项比对，仅允许约定的相机变化。`Saved/ParkRefinement/Before` 是此前 CAD 细化前快照，不能当作本轮车辆植被细化后的验收结果。
+当前用户手动设置继续保护：Ground 组件使用 `/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Landscape`，位置 `(170,240,0) cm`；Blue 组件使用 `/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt`。不恢复默认地面材质或原点，也不改共享 Cobalt 资源。7 个 Truck 材质的未保存编辑继续保持未保存，不因本轮保存地图而顺带写盘。
 
-本轮较密版本对比基线位于 `Saved/ParkForestSpread/Before`，局部导入保护仍使用 `Saved/ParkForestFill/Before`。导入前后所有 Actor 应一致，六个网格的几何内容是唯一修改范围。导入器只拒绝目标六网格存在未保存编辑的情况；其他未保存资产的 dirty 集合须前后相同。当前编辑器中的 7 个 Truck 材质未保存编辑不被重建或写盘，保持用户现有编辑状态。此前东北停车场版本的基线仍保存在 `Saved/ParkNortheast/Before`。当前两项用户组件材质覆盖已写入 `SourceAssets/GHS/Park/scene_overrides.json` 与 manifest：Ground 使用 `/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Landscape`，Blue 使用 `/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt`。Ground 的 Actor 位置为 `(170,240,0) cm`，是用户原有编辑状态；`Saved/ParkForestFill/Before/editor_snapshot.json` 与本轮 `reloaded_actors.json` 的该对象记录完全一致。用户已确认材质由本人手工修改，本轮登记和保护该状态，不把 Ground 恢复为默认材质或原点，也不修改共享 Cobalt 资产。27 台新展示卡车与原 52 台业务卡车的数量、身份、源资源哈希须分别检查。
+本轮修改前快照和资产证据位于 `Saved/ParkRoofStyle/Before`。历史 `ParkExpansion`、`ParkNortheast`、`ParkForestFill` 和 `ParkForestSpread` 基线均保留；旧 `/Game/Maps/GHS_CAD_NormalWarehouse` 地图仍应保持原哈希。27 台展示卡车和原 52 台月台业务卡车须分别保留数量、身份与源资源。
 
 ## 本轮验收证据
 
-**本轮疏朗扩域版本验收通过。** 相对 `Saved/ParkForestSpread/Before` 保存的较密版本（提交 `dc15e22`），五片林地扩大为 1.984 倍、平均密度降低约 60.02%。本轮生成退出码为 0；manifest 为 22 个唯一网格、987,014 面、1,373 棵树。离线报告确认原 510 棵及原几何输出保持，五片疏林为 552 棵，新树到全部林树最小中心距 10.005902 m，确定性与避让检查通过。
+屋顶生成及 FBX 独立回读已通过：8,288 三角面、5 槽、闭合流形、无退化面、正体积，包围回读最大误差约 `2.29e-5 m`。编辑器屋顶应用与六视图截图已完成；**保存重载、15 项运行回归和统一 Review 归档全部通过**。当前报告绑定本轮地图和 manifest，正式图片已经覆盖旧版。
 
-`Saved/ParkForestFill/apply_report.json` 确认六网格原位导入成功，没有新增或重建 Actor；全部 359 个 Actor 的快照保持。Ground 的 Landscape 组件覆盖及 `(170,240,0) cm` 位置、Blue 的 Cobalt 覆盖均保持用户既有状态；原 7 个 Truck 材质仍未保存，本轮未重建、修改或写盘。原 52 台月台业务卡车与 27 台静态展示卡车保持独立身份。
+独立重载于 **2026-10-22 13:44:16（Asia/Shanghai）** 完成：原 359 个 Actor 和树木布置保持、场景总数 360，屋顶单 Actor／单网格、整体显隐和全部材质参数通过。当前保存地图 SHA-256 为 `08eb315366fda2cc76cdfe147d16a422451e1ba224d4beb7421453095b84f74c`。
 
-独立进程在 **2026-10-22 11:06:31（Asia/Shanghai）** 完成保存重载，`saved_validation.json.success=true`，334 个原对象和旧 NormalWarehouse 地图保持。当前地图 SHA-256 与磁盘文件一致：
+本轮 **15 项运行检查全部通过，耗时 15.547 秒**，设备／设施注册表仍为 **106 / 56**。正式 `Review/acceptance.json` 于 **2026-10-22 13:46:00（Asia/Shanghai）** 更新，含 19 张标准细节、1 张场地平面、3 张运行截图、6 张屋顶／风格视图与 1 张拼图，共 **30 张**。地图、Park／屋顶 manifest 和全部图片的 SHA-256 与当前文件一致。闭顶、开顶内部及细节的实际 UE 画面复核通过；这轮只验证独立 Actor 显隐，没有产品 UI 按钮。
 
-```text
-44951d4361864ce80854b6b2ca647b8c1bcb4a550fb0761ee4d71cc26d736c03
-```
-
-本轮实际运行回归 **14 项检查全部通过，耗时 14.297 秒**，报告绑定当前 manifest。覆盖 1920×1080／2560×1600 构图、面板收展、AGV 详情、复位清除选中、货架区／地堆区聚焦及运行不修改地图；设备／设施保持 **106 / 56**，展示卡车不进入业务身份或 POI。
-
-**19 张细节截图**及六个森林视图已完成独立视觉复核，五片树林覆盖更广、树群更疏、空隙更自然，未见道路侵入。`Review` 已覆盖为 **24 张本轮图片**，`acceptance.json` 于 **2026-10-22 11:09:44（Asia/Shanghai）** 更新，记录 `forests.spread_revision` 中的前后面积／密度比较、用户覆盖、未保存材质状态与资产哈希。当前地图、manifest 及全部 24 张图片哈希逐项核对一致；较密版本仅作为比较基线，不作为并列的当前正式设计。
-
-| 范围 | 证据位置与用途 |
+| 范围 | 当前证据位置 |
 | --- | --- |
-| 当前生成结果 | `SourceAssets/GHS/Park/park_manifest.json`、`site_geometry_report.json`、`Saved/ParkForestFill/blender_geometry.log`；本轮生成退出码 0 |
-| 本轮修改前基线 | `Saved/ParkForestSpread/Before`；较密版本的地图、manifest、报告与编辑器状态 |
-| 原边界配准 | `Saved/ParkForestFill/region_mapping.json`、`reference_mapping_overlay.png`；约 ±10 m 的参考定位，本轮在此基础上扩域 |
-| 原林带保留与新布局 | `Saved/ParkForestFill/forest_fill_verification.json`；原 510 棵及原输出保持，五片疏林最小中心距 10.005902 m，确定性检查通过 |
-| 局部 UE 应用 | `Saved/ParkForestFill/apply_report.json`；六网格原位导入、全部 Actor 快照与用户材质状态保持 |
-| UE 保存重载 | `Saved/ParkExpansion/saved_validation.json`、`reloaded_actors.json`；11:06:31 独立进程重载通过 |
-| UE 视觉 | `Saved/ParkExpansion/capture_report.json`、`Saved/ParkRefinement/detail_capture_report.json`；本轮全景和 19 张细节截图，含六个森林视图 |
-| 实际运行回归 | `Saved/ParkExpansion/runtime_report.json` 与 `Runtime_*.png`；14 项通过，耗时 14.297 秒 |
-| 最终归档 | `SourceAssets/GHS/Park/Review/acceptance.json` 与 24 张图片；本轮已覆盖旧归档并核对全部哈希 |
+| 屋顶生成与 FBX 回读 | `SourceAssets/GHS/MainRoof/roof_manifest.json`、`fbx_roundtrip_verification.json`、`Saved/ParkRoofStyle/roof_build.log` |
+| 树冠法线与布局保护 | `Saved/ParkRoofStyle/vegetation_blend_validation.json`、`vegetation_manifest_validation.json` |
+| 本轮修改前基线 | `Saved/ParkRoofStyle/Before` |
+| UE 应用与约定修改 | `Saved/ParkRoofStyle/apply_report.json` |
+| 闭顶／开顶及细节截图 | `Saved/ParkRoofStyle/capture_report.json` 与六张对应 PNG |
+| UE 保存重载 | `Saved/ParkRoofStyle/saved_validation.json`；13:44:16 新进程重载通过，原 359 个 Actor／360 总数、屋顶与材质／布局保护通过 |
+| 实际运行回归 | `Saved/ParkExpansion/runtime_report.json`；15 项通过、15.547 秒，设备／设施 106 / 56 |
+| 正式展示归档 | `SourceAssets/GHS/Park/Review/acceptance.json`；13:46:00 已覆盖 30 张（29 张实拍 + 1 张拼图），逐项图片哈希核对通过 |
 
-本轮不包含重新打包 EXE。静态网格面数、离线净距及结构检查不证明多人像素流或稳定 60 FPS；本轮环境细化不替代独立性能测试。
+本轮不包含重新打包 EXE，也不包含多人像素流或稳定 60 FPS 性能测试。

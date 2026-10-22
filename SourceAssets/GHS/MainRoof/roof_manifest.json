@@ -1,0 +1,3589 @@
+{
+  "version": 1,
+  "name": "GHS independent main warehouse roof",
+  "purpose": "White model campus exterior; one independent removable roof, interaction-ready grouping only",
+  "coordinate_contract": "u,v metres; Blender (u-239.33385,-(v-60.24019),z); FBX -Y forward Z up; UE origin, scale1 in cm",
+  "source_footprint_uv_m": [
+    [
+      465.73440000000005,
+      -7.105427357601002e-15
+    ],
+    [
+      465.73440000000005,
+      111.98367999999999
+    ],
+    [
+      440.88196000000005,
+      118.872
+    ],
+    [
+      45.8724,
+      118.872
+    ],
+    [
+      45.8724,
+      137.16
+    ],
+    [
+      0.0,
+      137.16
+    ],
+    [
+      0.0,
+      -7.105427357601002e-15
+    ],
+    [
+      465.73440000000005,
+      -7.105427357601002e-15
+    ]
+  ],
+  "roof_outline_uv_m": [
+    [
+      465.98440000000005,
+      -0.2500000000000071
+    ],
+    [
+      -0.25,
+      -0.2500000000000071
+    ],
+    [
+      -0.25,
+      137.41
+    ],
+    [
+      46.1224,
+      137.41
+    ],
+    [
+      46.1224,
+      119.122
+    ],
+    [
+      440.91596508908935,
+      119.122
+    ],
+    [
+      465.98440000000005,
+      112.1738129581834
+    ],
+    [
+      465.98440000000005,
+      -0.2500000000000071
+    ]
+  ],
+  "overhang_m": 0.25,
+  "bottom_elevation_m": 9.6,
+  "eave_surface_m": 9.76,
+  "ridge_v_m": 59.436,
+  "ridge_surface_m": 10.4,
+  "existing_rack_top_m": 9.154,
+  "minimum_rack_clearance_m": 0.44599999999999973,
+  "source_height_status": "9.6m existing display walls; roof pitch/details from user visual reference, not measured elevations",
+  "asset_count": 1,
+  "mesh": {
+    "name": "SM_GHS_MainWarehouseRoof",
+    "role": "Roof",
+    "fbx": "SourceAssets\\GHS\\MainRoof\\SM_GHS_MainWarehouseRoof.fbx",
+    "vertices": 5018,
+    "triangles": 8288,
+    "source_parts": 431,
+    "bounds_ue_cm": {
+      "min": [
+        -23958.384704589844,
+        -6049.018859863281,
+        960.0000381469727
+      ],
+      "max": [
+        22665.054321289062,
+        7716.980743408203,
+        1049.4999885559082
+      ]
+    },
+    "blender_bounds_m": [
+      [
+        -239.58384704589844,
+        226.65054321289062
+      ],
+      [
+        -77.16980743408203,
+        60.49018859863281
+      ],
+      [
+        9.600000381469727,
+        10.494999885559082
+      ]
+    ],
+    "material_roles": [
+      "Roof",
+      "Seams",
+      "Blue",
+      "Skylight",
+      "Detail"
+    ],
+    "slot_names": [
+      "M_GHSMainRoof_Roof",
+      "M_GHSMainRoof_Seams",
+      "M_GHSMainRoof_Blue",
+      "M_GHSMainRoof_Skylight",
+      "M_GHSMainRoof_Detail"
+    ],
+    "sha256": "6b91bf2df579d218705e666eb6e8746c812d5b65db430bfcd905029f5824ca43"
+  },
+  "meshes": [
+    {
+      "name": "SM_GHS_MainWarehouseRoof",
+      "role": "Roof",
+      "fbx": "SourceAssets\\GHS\\MainRoof\\SM_GHS_MainWarehouseRoof.fbx",
+      "vertices": 5018,
+      "triangles": 8288,
+      "source_parts": 431,
+      "bounds_ue_cm": {
+        "min": [
+          -23958.384704589844,
+          -6049.018859863281,
+          960.0000381469727
+        ],
+        "max": [
+          22665.054321289062,
+          7716.980743408203,
+          1049.4999885559082
+        ]
+      },
+      "blender_bounds_m": [
+        [
+          -239.58384704589844,
+          226.65054321289062
+        ],
+        [
+          -77.16980743408203,
+          60.49018859863281
+        ],
+        [
+          9.600000381469727,
+          10.494999885559082
+        ]
+      ],
+      "material_roles": [
+        "Roof",
+        "Seams",
+        "Blue",
+        "Skylight",
+        "Detail"
+      ],
+      "slot_names": [
+        "M_GHSMainRoof_Roof",
+        "M_GHSMainRoof_Seams",
+        "M_GHSMainRoof_Blue",
+        "M_GHSMainRoof_Skylight",
+        "M_GHSMainRoof_Detail"
+      ],
+      "sha256": "6b91bf2df579d218705e666eb6e8746c812d5b65db430bfcd905029f5824ca43"
+    }
+  ],
+  "triangles_total": 8288,
+  "materials": {
+    "Roof": {
+      "color_linear": [
+        0.78,
+        0.83,
+        0.9
+      ],
+      "roughness": 0.75,
+      "metallic": 0.08
+    },
+    "Seams": {
+      "color_linear": [
+        0.63,
+        0.71,
+        0.81
+      ],
+      "roughness": 0.8,
+      "metallic": 0.05
+    },
+    "Blue": {
+      "color_linear": [
+        0.035,
+        0.13,
+        0.48
+      ],
+      "roughness": 0.8,
+      "metallic": 0.05
+    },
+    "Skylight": {
+      "color_linear": [
+        0.24,
+        0.45,
+        0.7
+      ],
+      "roughness": 0.42,
+      "metallic": 0.05
+    },
+    "Detail": {
+      "color_linear": [
+        0.6,
+        0.67,
+        0.74
+      ],
+      "roughness": 0.8,
+      "metallic": 0.05
+    }
+  },
+  "material_properties": {
+    "Roof": {
+      "color": [
+        0.78,
+        0.83,
+        0.9
+      ],
+      "roughness": 0.75,
+      "metallic": 0.08,
+      "opaque": true
+    },
+    "Seams": {
+      "color": [
+        0.63,
+        0.71,
+        0.81
+      ],
+      "roughness": 0.8,
+      "metallic": 0.05,
+      "opaque": true
+    },
+    "Blue": {
+      "color": [
+        0.035,
+        0.13,
+        0.48
+      ],
+      "roughness": 0.8,
+      "metallic": 0.05,
+      "opaque": true
+    },
+    "Skylight": {
+      "color": [
+        0.24,
+        0.45,
+        0.7
+      ],
+      "roughness": 0.42,
+      "metallic": 0.05,
+      "opaque": true
+    },
+    "Detail": {
+      "color": [
+        0.6,
+        0.67,
+        0.74
+      ],
+      "roughness": 0.8,
+      "metallic": 0.05,
+      "opaque": true
+    }
+  },
+  "skylight_bands": [
+    {
+      "center_u_m": 75.0,
+      "v_range_m": [
+        15,
+        105
+      ],
+      "width_m": 3.6,
+      "cells": 15
+    },
+    {
+      "center_u_m": 155.0,
+      "v_range_m": [
+        15,
+        105
+      ],
+      "width_m": 3.6,
+      "cells": 15
+    },
+    {
+      "center_u_m": 235.0,
+      "v_range_m": [
+        15,
+        105
+      ],
+      "width_m": 3.6,
+      "cells": 15
+    },
+    {
+      "center_u_m": 315.0,
+      "v_range_m": [
+        15,
+        105
+      ],
+      "width_m": 3.6,
+      "cells": 15
+    },
+    {
+      "center_u_m": 395.0,
+      "v_range_m": [
+        15,
+        105
+      ],
+      "width_m": 3.6,
+      "cells": 15
+    }
+  ],
+  "standing_seams": {
+    "count": 310,
+    "pitch_m": 1.5,
+    "height_m": 0.03,
+    "width_m": 0.07
+  },
+  "main_vent_count": 18,
+  "office_vent_count": 2,
+  "vents": [
+    {
+      "center_uv_m": [
+        35.0,
+        11.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        90.0,
+        11.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        145.0,
+        11.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        200.0,
+        11.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        255.0,
+        11.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        310.0,
+        11.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        365.0,
+        11.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        420.0,
+        11.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        450.0,
+        11.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        35.0,
+        109.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        90.0,
+        109.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        145.0,
+        109.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        200.0,
+        109.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        255.0,
+        109.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        310.0,
+        109.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        365.0,
+        109.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        420.0,
+        109.0
+      ],
+      "height_above_roof_m": 0.55
+    },
+    {
+      "center_uv_m": [
+        450.0,
+        109.0
+      ],
+      "height_above_roof_m": 0.55
+    }
+  ],
+  "parts": [
+    {
+      "name": "RoofBody_ClosedCADEnvelope",
+      "role": "Roof",
+      "vertices": 26,
+      "triangles": 48,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_BlueBand",
+      "role": "Skylight",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_PerimeterFrame",
+      "role": "Seams",
+      "vertices": 24,
+      "triangles": 48,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_01",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_02",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_03",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_04",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_05",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_06",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_07",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_08",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_09",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_10",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_11",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_12",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_13",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_01_Mullion_14",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_BlueBand",
+      "role": "Skylight",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_PerimeterFrame",
+      "role": "Seams",
+      "vertices": 24,
+      "triangles": 48,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_01",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_02",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_03",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_04",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_05",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_06",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_07",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_08",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_09",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_10",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_11",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_12",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_13",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_02_Mullion_14",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_BlueBand",
+      "role": "Skylight",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_PerimeterFrame",
+      "role": "Seams",
+      "vertices": 24,
+      "triangles": 48,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_01",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_02",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_03",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_04",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_05",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_06",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_07",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_08",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_09",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_10",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_11",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_12",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_13",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_03_Mullion_14",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_BlueBand",
+      "role": "Skylight",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_PerimeterFrame",
+      "role": "Seams",
+      "vertices": 24,
+      "triangles": 48,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_01",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_02",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_03",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_04",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_05",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_06",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_07",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_08",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_09",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_10",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_11",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_12",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_13",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_04_Mullion_14",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_BlueBand",
+      "role": "Skylight",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_PerimeterFrame",
+      "role": "Seams",
+      "vertices": 24,
+      "triangles": 48,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_01",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_02",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_03",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_04",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_05",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_06",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_07",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_08",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_09",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_10",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_11",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_12",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_13",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Skylight_05_Mullion_14",
+      "role": "Seams",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_001",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_002",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_003",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_004",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_005",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_006",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_007",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_008",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_009",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_010",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_011",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_012",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_013",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_014",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_015",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_016",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_017",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_018",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_019",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_020",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_021",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_022",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_023",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_024",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_025",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_026",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_027",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_028",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_029",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_030",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 28,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_031",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_032",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_033",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_034",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_035",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_036",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_037",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_038",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_039",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_040",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_041",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_042",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_043",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_044",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_045",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_046",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_047",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_048",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_049",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 24,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_050",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 24,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_051",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 24,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_052",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_053",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_054",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_055",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_056",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_057",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_058",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_059",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_060",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_061",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_062",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_063",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_064",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_065",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_066",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_067",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_068",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_069",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_070",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_071",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_072",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_073",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_074",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_075",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_076",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_077",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_078",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_079",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_080",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_081",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_082",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_083",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_084",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_085",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_086",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_087",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_088",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_089",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_090",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_091",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_092",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_093",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_094",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_095",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_096",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_097",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_098",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_099",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_100",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_101",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_102",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_103",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 24,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_104",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 24,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_105",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_106",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_107",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_108",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_109",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_110",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_111",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_112",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_113",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_114",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_115",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_116",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_117",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_118",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_119",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_120",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_121",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_122",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_123",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_124",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_125",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_126",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_127",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_128",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_129",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_130",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_131",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_132",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_133",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_134",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_135",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_136",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_137",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_138",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_139",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_140",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_141",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_142",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_143",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_144",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_145",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_146",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_147",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_148",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_149",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_150",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_151",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_152",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_153",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_154",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_155",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_156",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 24,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_157",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 24,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_158",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_159",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_160",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_161",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_162",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_163",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_164",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_165",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_166",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_167",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_168",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_169",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_170",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_171",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_172",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_173",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_174",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_175",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_176",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_177",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_178",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_179",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_180",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_181",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_182",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_183",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_184",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_185",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_186",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_187",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_188",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_189",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_190",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_191",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_192",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_193",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_194",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_195",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_196",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_197",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_198",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_199",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_200",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_201",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_202",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_203",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_204",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_205",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_206",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_207",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_208",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_209",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 24,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_210",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 24,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_211",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 24,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_212",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_213",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_214",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_215",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_216",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_217",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_218",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_219",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_220",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_221",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_222",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_223",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_224",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_225",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_226",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_227",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_228",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_229",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_230",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_231",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_232",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_233",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_234",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_235",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_236",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_237",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_238",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_239",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_240",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_241",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_242",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_243",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_244",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_245",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_246",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_247",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_248",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_249",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_250",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_251",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_252",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_253",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_254",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_255",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_256",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_257",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_258",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_259",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_260",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_261",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_262",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_263",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 24,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_264",
+      "role": "Seams",
+      "vertices": 16,
+      "triangles": 24,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_265",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_266",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_267",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_268",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_269",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_270",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_271",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_272",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_273",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_274",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_275",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_276",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_277",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_278",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_279",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_280",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_281",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_282",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_283",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_284",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_285",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_286",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_287",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_288",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_289",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_290",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_291",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_292",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_293",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_294",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_295",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_296",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_297",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_298",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_299",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_300",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_301",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_302",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_303",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_304",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_305",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_306",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_307",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_308",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_309",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "StandingSeam_310",
+      "role": "Seams",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "BluePerimeterCap",
+      "role": "Blue",
+      "vertices": 48,
+      "triangles": 96,
+      "closed": true
+    },
+    {
+      "name": "RidgeCap",
+      "role": "Roof",
+      "vertices": 12,
+      "triangles": 20,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_00_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_00_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_01_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_01_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_02_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_02_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_03_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_03_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_04_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_04_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_05_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_05_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_06_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_06_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_07_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_07_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_08_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_00_08_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_00_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_00_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_01_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_01_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_02_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_02_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_03_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_03_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_04_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_04_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_05_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_05_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_06_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_06_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_07_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_07_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_08_Curb",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "Vent_01_08_Cap",
+      "role": "Roof",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "OfficeVent_00",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    },
+    {
+      "name": "OfficeVent_01",
+      "role": "Detail",
+      "vertices": 8,
+      "triangles": 12,
+      "closed": true
+    }
+  ],
+  "recommended_actor": {
+    "label": "GHS_MainWarehouseRoof",
+    "tags": [
+      "GHS_WarehouseRoof",
+      "RemovableRoof"
+    ],
+    "transform": {
+      "position_cm": [
+        0,
+        0,
+        0
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "collision": false,
+    "tick": false,
+    "independent_visibility": true
+  },
+  "checks": {
+    "source_footprint_fully_covered": true,
+    "uncovered_area_m2": 0.0,
+    "exterior_cad_area_m2": 56116.0982682496,
+    "roof_plan_area_m2": 56416.3011606967,
+    "all_parts_closed": true,
+    "all_faces_valid": true,
+    "material_slot_order": [
+      "Roof",
+      "Seams",
+      "Blue",
+      "Skylight",
+      "Detail"
+    ],
+    "skylight_count": 5,
+    "all_skylights_inside": true,
+    "vent_skylight_overlap": false,
+    "shared_sources_unchanged": true,
+    "shared_assets_sha256": {
+      "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Envelope\\envelope_geometry.json": "4b6e2d7acb2292f3029205a26c38554febcbd3ec33508c2676b99f1fd6372cf5",
+      "D:\\UEPro\\Test\\SourceAssets\\GHS\\wall_height_profile.json": "9852d22502e2857f249b1084add027fe3c11d291005233b70e768d8787b51b88",
+      "D:\\UEPro\\Test\\SourceAssets\\GHS\\Park\\scene_overrides.json": "cf5c8c3725ed899d38e85861e3e8f6fcc02570f1f5bea6c550a014b0fe78a4ad",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_Cargo.uasset": "a64718847aa301998a0b1f4466834fae07b68fcfb46df8b5a66efd6f0a99547d",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_CargoSeam.uasset": "502bc3541cee8240c483fba76acb05abd46c3c8bc00e6de0569d0584132209f4",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_Charcoal.uasset": "7aa82b36e2253abbde67abc4324c6cdac2bb64e144692f2bb6b3035438155e9e",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_Cobalt.uasset": "805f41a83913f5e0751794183bb8cbaab3fa0477151517293b65d4642eaaf7c1",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_Cyan.uasset": "72282d3fe00f37009c50c3bfd8a3d4fb8275ee49df785a931f5ff04c08bb0f29",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_FloorGrid.uasset": "8435208a3f736de3fd72699eac62d4b3417210b00a04165b0d265a79dbd5fc34",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_Glass.uasset": "7eab629096cbb7c7742f046d26a5245127da68f7157e6d5915b042d5a1eba757",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_Invisible.uasset": "878fc9176314a687656d14ae8d77c5200d9fe5c2f13527a635fc9797c7776b0b",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_Metal.uasset": "c878554b999ec23c68eed96ec78f607a3dcbe1cc458c9277cecccb7469ead9f3",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_PaleGray.uasset": "d00563a9bf38e0b40e6fb54924e5e8d552e1965f5fa90abffbee29446aa5057b",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_Porcelain.uasset": "59eab32aa8c77297c1f79e8782be5b3e79625d387f4252e659e9746c93f7250d",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_Rubber.uasset": "a28b07e4ad871cb1f450c88d6f6dd58342afd6ccfe91ff2245fcae86b76fa4e3",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_SafetyAmber.uasset": "120e0adee75dc41961048ccf4db197016a6c96ea8943c63dd3bdcea3f23d5028",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_SafetyRed.uasset": "725c281dd1fa62dfdeaceaa7f93a963f6dd096c8af5201c590ab57de7054c1de",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_Skin.uasset": "0db947bef14c7c88536af5bcb2645f9fa0e00e2235f6e2600aabaaebf7ee3865",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_Sky.uasset": "c6a3599dbdc3f0575a1ecfaf591460d4aa84e0fb2f1af7816981a9152543ed64",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_SoftBlue.uasset": "280ae6c51725a3cb3cbcd524f35907387eb27dfef12752aae98f422e997f6f5f",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_SurroundGrid.uasset": "365fd3fdd0287923cd7634e2e9ee36e866160d7fb05ed06a07b64705432bdb8f",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Materials\\M_Zcool_WallTop.uasset": "cca53d6dc3cd8cb21f859205d70052f4ed2761efc7966947a7c66a48ef3ae92a",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Blue.uasset": "efedfa7213d3e13509b7d8fe3156ef241e2c43e8b1625d91892744368297774f",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Buildings.uasset": "c5406c311869a86a6c88eec1c7dfd1ea27825b9dcf26f7bb60d9558be4f01342",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_CampusRoads.uasset": "95b74846346559fc20cd2a8006cc720287ca35361c960ebba2720a930fbf2caf",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_ContextRoads.uasset": "9b7690f999b61c67624fd0bd352f2df85b893bab09aff24bdf8176fddfabe352",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Curbs.uasset": "43b371274dd4348386520e95584af36ec49d69abbd23c78323e024e918b40fbd",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Detail.uasset": "38f78db77bd53ab337fd80297c9242c1d06554a5426fac8b7fc510c29624a175",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Fence.uasset": "8abe76ee4af17edfb4ce7f10aab01b0e370d2f2fc8565adafbaac264af36336d",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Glass.uasset": "58aaac69cd28fb05c7a5037844cdb048b0939faebe37ef9e86c3d8d72e908e7f",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Ground.uasset": "582b7f6aca8a2221bd66ac6d44aef1029b5d3ab2f4954a3e1d8792f1e294d11f",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Hardstand.uasset": "a41b0e8859c0f8c0a3c730dad6a7d5e75201dab6d888a55c84598d8003969202",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Landscape.uasset": "f8fb66844a06fd92a18c33c3c880335a6ae5b0b33fa9a0ec333314839bac6349",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Markings.uasset": "fab5b26554ec835287cce3300f0808ef21da4d1bab131ca126bbffe55f549887",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Roads.uasset": "4695e9a97921c44cabfa4d2063b8f7d53a94115ae50138e1785810d657c651d6",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Roofs.uasset": "5383016fb3b11a25a0fcef96a721c0a2ad34c4ffda736b6e13bf48f1e9f739c8",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Rubber.uasset": "54800d11d0d967f7b249a4f6578676560fefeacca90c46b802726905c56b0a8c",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Solar.uasset": "5871af81adbf46b7c95968a11d021971aaea2acec56f06c84c7447305cb05096",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Trees.uasset": "eed527ea659316dd05a25560dbff8df488d7eac973be251e57e682c50c002661",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_TreesDark.uasset": "bf68bc6a50ad57f31e62686977a557122a968aaaa13857be4a74a1ee66323ea8",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_TreesLight.uasset": "56f845ab3ba65f7c6535f5672906441fe46fab0c60e791dbd774b79f4be0b448",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_TruckBlue.uasset": "017755d56b4712ee631da90da75d52ad3799a8253046009b2bda977f96eaf437",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_TruckBody.uasset": "5f778d952af3030512deae26460c3ec1ca9153b1981b199bb5caff621c6a246c",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_TruckGlass.uasset": "6ebc0f27cf7a540cb2695e5bcafb165a672335e41133fdfd39c064b7b851ce74",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_TruckHeadlight.uasset": "c3a2949b0e783accb474129cf43789b2d284ff478f081ae6ad85a1bde88f8c21",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_TruckRubber.uasset": "a681bee21abfd6041b1984646914a1f7cb0a4698d49910281ca72bc3c77704d1",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_TruckTailLight.uasset": "1f1b6fae10ccccdba13d70850eb080b617afa211fb070482b3595a746d543f3f",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_TruckTrim.uasset": "30b446cf761bbcabdd886654a9783dadf0cf6dd8dc20d9a57a226e58890833b5",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_Trunk.uasset": "eac1bae9f77abf3b90ea3de8638b77423a73b8598905fe9d19b63f22b9af012c",
+      "D:\\UEPro\\Test\\Content\\GHSZcoolSmartFactory\\Park\\Materials\\M_GHSPark_VehicleLights.uasset": "3a66c530d6a4ab4481f19bc56aea58d6cb6ef7f0bd148e4a4bc7c46f6bd6b708"
+    },
+    "triangle_budget": 60000
+  },
+  "outputs": {
+    "blend": "SourceAssets/GHS/MainRoof/MainWarehouseRoof.blend",
+    "fbx": "SourceAssets\\GHS\\MainRoof\\SM_GHS_MainWarehouseRoof.fbx",
+    "preview": "SourceAssets/GHS/MainRoof/roof_preview.png"
+  }
+}

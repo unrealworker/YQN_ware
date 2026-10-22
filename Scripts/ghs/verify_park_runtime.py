@@ -242,6 +242,20 @@ def verify_registry():
     record('saved_campus_loaded_and_business_registry_preserved', equipment=106, facilities=56,
            park_actors=len(park_actors), mesh_components=dict(used_meshes), capture_cameras=capture_cameras,
            static_display_instances=instance_counts)
+    roof_manifest=ROOT/'SourceAssets/GHS/MainRoof/roof_manifest.json'
+    if roof_manifest.exists():
+        roofs=[a for a in unreal.GameplayStatics.get_all_actors_of_class(world,unreal.Actor)
+               if a.actor_has_tag('GHS_WarehouseRoof')]
+        assert len(roofs)==1
+        roof=roofs[0]
+        assert roof.actor_has_tag('RemovableRoof') and not roof.get_actor_enable_collision()
+        assert not roof.is_actor_tick_enabled() and not roof.get_editor_property('hidden')
+        assert len(roof.get_components_by_class(unreal.StaticMeshComponent))==1
+        assert not any(str(t).startswith(('TwinId=','Dock=','FXOwner=')) for t in roof.tags)
+        roof.set_actor_hidden_in_game(True);assert roof.get_editor_property('hidden')
+        roof.set_actor_hidden_in_game(False);assert not roof.get_editor_property('hidden')
+        record('independent_roof_visibility_and_business_isolation',actors=1,visible_after_check=True,
+               roof_manifest_sha256=sha(roof_manifest))
 
 
 def capture(name):

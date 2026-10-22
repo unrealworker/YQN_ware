@@ -196,7 +196,28 @@ def main():
         assert MAP not in dirty_maps, 'Save the expanded map before validation'
 
         current_actors = list(actors.get_all_level_actors())
-        current_rows = [snapshot(actor, unreal) for actor in current_actors]
+        # The separately generated roof is not park context or a business
+        # device. Validate this single explicit addition before excluding it
+        # from the older park-only ownership/count contract.
+        roofs = [a for a in current_actors if a.get_actor_label() == 'GHS_MainWarehouseRoof']
+        if roofs:
+            assert len(roofs) == 1
+            roof = roofs[0]
+            roof_spec = read(ROOT/'SourceAssets/GHS/MainRoof/roof_manifest.json')
+            assert isinstance(roof, unreal.StaticMeshActor)
+            assert set(str(t) for t in roof.tags) == {'GHS_WarehouseRoof','RemovableRoof','GHS_ArchitecturalContext'}
+            assert not roof.get_actor_enable_collision() and not roof.is_actor_tick_enabled()
+            parts = roof.get_components_by_class(unreal.StaticMeshComponent)
+            assert len(parts) == 1
+            part = parts[0]
+            assert part.static_mesh.get_path_name() == '/Game/GHSZcoolSmartFactory/Roof/Meshes/SM_GHS_MainWarehouseRoof.SM_GHS_MainWarehouseRoof'
+            assert part.get_collision_enabled() == unreal.CollisionEnabled.NO_COLLISION
+            roles = roof_spec['mesh']['material_roles']
+            assert part.get_num_materials() == len(roles)
+            for i, role in enumerate(roles):
+                assert part.get_material(i).get_path_name() == f'/Game/GHSZcoolSmartFactory/Roof/Materials/M_GHSRoof_{role}.M_GHSRoof_{role}'
+        report['independent_roof_actor_count'] = len(roofs)
+        current_rows = [snapshot(actor, unreal) for actor in current_actors if actor not in roofs]
         checked_baseline, pre_import_removals = effective_baseline(baseline, current_rows)
         report['pre_import_user_changes_preserved'] = pre_import_removals
         mismatches = compare_preservation(checked_baseline, current_rows, commandlet=commandlet)
@@ -204,7 +225,7 @@ def main():
         report['preservation_mismatches'] = mismatches
         assert not mismatches, 'Original scene changed: ' + json.dumps(mismatches, ensure_ascii=False)
         originals = {row['label'] for row in baseline['actors']}
-        additions = [actor for actor in current_actors if actor.get_actor_label() not in originals]
+        additions = [actor for actor in current_actors if actor.get_actor_label() not in originals and actor not in roofs]
         assert additions, 'No campus actors were added'
         groups = Counter()
         meshes = Counter()
