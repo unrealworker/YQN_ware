@@ -48,6 +48,11 @@ def material(role, rgb):
         node.set_editor_property('default_value',value)
         ML.connect_material_property(node,'',prop)
     mat.set_editor_property('two_sided',role=='Fence')
+    # Park display trucks use a HISM. Persist its shader permutation before
+    # saving: an editor can auto-enable it in memory, while a packaged/game
+    # process cannot repair an omitted usage flag and renders a fallback.
+    if role.startswith('Truck'):
+        mat.set_editor_property('used_with_instanced_static_meshes',True)
     ML.layout_material_expressions(mat)
     ML.recompile_material(mat)
     assert LIB.save_loaded_asset(mat,only_if_is_dirty=False)

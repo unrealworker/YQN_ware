@@ -1,51 +1,185 @@
 {
-  "date_local": "2026-10-22T13:46:00",
+  "date_local": "2026-10-22T15:52:26",
   "timezone": "Asia/Shanghai",
   "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
-  "map_sha256": "08eb315366fda2cc76cdfe147d16a422451e1ba224d4beb7421453095b84f74c",
-  "manifest_sha256": "3c3f596820c754a1448ac68f42232daf424334fb74b8d92370137f2b706f1b80",
+  "map_sha256": "eb46503811527cf427450d7a0a67bf9e89b63e4b97f0d50cbc775bca092d4f5b",
+  "manifest_sha256": "eac222675c1faffa8ba50afca43c9eb6849a0bbb0c811e86c32ada6aa1a27b7b",
   "roof_manifest_sha256": "c63019e41bb37087690a5824df7534497019dce499067ebed5befe4899ce02d4",
+  "reference_style_sha256": "66259f36a674858879a0f786cbc0aebe55ea68b845fb15ce7822ff2ce5cb0dc5",
+  "style": {
+    "version": 1,
+    "reference": "codex-clipboard-0df2ba29-2688-4912-a76f-f19056c0ec63.png",
+    "palette": {
+      "Ground": [
+        0.52,
+        0.58,
+        0.66
+      ],
+      "Hardstand": [
+        0.53,
+        0.6,
+        0.68
+      ],
+      "Roads": [
+        0.17,
+        0.225,
+        0.3
+      ],
+      "ContextRoads": [
+        0.18,
+        0.235,
+        0.31
+      ],
+      "CampusRoads": [
+        0.38,
+        0.45,
+        0.52
+      ],
+      "Curbs": [
+        0.92,
+        0.95,
+        0.98
+      ],
+      "Markings": [
+        0.95,
+        0.97,
+        1.0
+      ],
+      "Buildings": [
+        0.9,
+        0.93,
+        0.98
+      ],
+      "Roofs": [
+        0.82,
+        0.87,
+        0.95
+      ],
+      "Landscape": [
+        0.47,
+        0.53,
+        0.48
+      ],
+      "Trees": [
+        0.28,
+        0.42,
+        0.24
+      ],
+      "TreesLight": [
+        0.36,
+        0.5,
+        0.3
+      ],
+      "TreesDark": [
+        0.18,
+        0.32,
+        0.15
+      ],
+      "Trunk": [
+        0.18,
+        0.15,
+        0.1
+      ]
+    },
+    "roof_color_linear": [
+      0.8,
+      0.88,
+      1.0
+    ],
+    "ground_material": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Ground.M_GHSPark_Ground",
+    "studio_ground_material": "/Game/GHSZcoolSmartFactory/Presentation/M_GHSReference_Backdrop.M_GHSReference_Backdrop",
+    "lighting": {
+      "directional_intensity": 3.8,
+      "skylight_intensity": 0.5,
+      "directional_rotation": [
+        -55.0,
+        -38.0,
+        0.0
+      ],
+      "directional_color": [
+        1.0,
+        0.985,
+        0.965
+      ],
+      "skylight_color": [
+        0.87,
+        0.94,
+        1.0
+      ],
+      "directional_source_angle": 8.0,
+      "ambient_occlusion_intensity": 0.9,
+      "ambient_occlusion_radius_cm": 180.0,
+      "ambient_occlusion_quality": 80.0,
+      "bloom_intensity": 0.02,
+      "exposure_ev100": 0.0,
+      "lower_hemisphere_color": [
+        0.055,
+        0.075,
+        0.1
+      ],
+      "lower_hemisphere_is_black": false
+    },
+    "reference_camera": {
+      "target_uv_m": [
+        235.0,
+        87.0,
+        0.0
+      ],
+      "distance_cm": 85000.0,
+      "pitch": -46.0,
+      "yaw": -90.0
+    },
+    "scope": "Reference matching: separate cool-grey ground, darker roads, soft cool-white roof, larger rounded trees and readable forest islands. CAD layout and original business geometry remain.",
+    "selected_lighting_candidate": "Reference_C_with_balanced_hemisphere_fill"
+  },
+  "current_appearance_authority": "SourceAssets/GHS/Park/reference_style.json",
+  "actor_count": 360,
+  "static_layout_preserved": true,
   "original_source_map_preserved": true,
-  "existing_actor_count_preserved": 359,
-  "total_actor_count": 360,
+  "authorized_ground_color_replacement": true,
+  "ground_transform_preserved": {
+    "position": [
+      170.0,
+      240.0,
+      0.0
+    ],
+    "scale": [
+      1.1,
+      1.1,
+      1.1
+    ],
+    "rotation": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "prior_ground_material_backup": "Saved/ParkReferenceStyle/Before",
   "component_material_overrides": {
     "SM_GHSPark_Ground": [
-      "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Landscape.M_GHSPark_Landscape"
+      "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Ground.M_GHSPark_Ground"
     ],
     "SM_GHSPark_Blue": [
       "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt"
     ]
   },
-  "preserved_ground_actor_position_cm": [
-    170.0,
-    240.0,
-    0.0
-  ],
   "shared_source_assets_sha256": {
     "D:\\UEPro\\Test\\Content\\GHSNormalWarehouse\\TrucksLong\\SM_GHN_LongDockTruck.uasset": "740890fc3b54d672e1e16d3afca04503d0285fff4062d84dfa298fcd0d5352ad",
     "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\TrucksLong\\dock_truck_long.blend": "9f488bba3a1f513fc265c7a10f4ec27ca57c29ae80233870dd3ce949eaf6c802",
     "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\TrucksLong\\SM_GHN_LongDockTruck.fbx": "b2f5df7846a15ff810e4cfe62085a3462549f77374c389dfc5c2f3b8d8cb3770",
     "D:\\UEPro\\Test\\Content\\GHSDigitalTwin\\Blueprints\\BP_GHS_InstanceGroup.uasset": "5b38d964c355664ac4b2b1c6568b0ab1629ba9c6b653e0ab951c9dc6815633bf"
   },
-  "unsaved_unrelated_assets_preserved": [
-    "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_TruckBlue",
-    "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_TruckBody",
-    "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_TruckGlass",
-    "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_TruckHeadlight",
-    "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_TruckRubber",
-    "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_TruckTailLight",
-    "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_TruckTrim"
-  ],
   "context_counts": {
     "fence_posts": 604,
     "fence_bars": 6306,
     "fence_rails": 3134,
     "gate_columns": 4,
     "perimeter_gates": 2,
-    "landscape_shrubs": 260,
-    "low_poly_trees": 1373,
-    "clustered_broadleaf_trees": 1373,
-    "tree_candidates_omitted_for_road_clearance": 5,
+    "landscape_shrubs": 332,
+    "low_poly_trees": 586,
+    "clustered_broadleaf_trees": 586,
+    "tree_candidates_omitted_for_road_clearance": 10,
     "parked_cars": 157,
     "detailed_compact_suv": 84,
     "car_spaces": 112,
@@ -64,49 +198,52 @@
     "satellite_infill_houses": 39,
     "residential_driveways": 338,
     "residential_yard_wall_segments": 856,
-    "woodland_trees": 1062,
+    "woodland_trees": 280,
     "woodland_groups": 7,
+    "woodland_islands": 24,
+    "woodland_shrubs": 72,
     "light_poles": 4,
     "cad_road_segments": 79,
     "context_road_segments": 75
   },
-  "park_triangles": 987014,
+  "park_triangles": 1657364,
   "roof_triangles": 8288,
-  "total_unique_triangles": 995302,
-  "total_instanced_triangles": 2141798,
+  "total_unique_triangles": 1665652,
+  "total_instanced_triangles": 2812148,
+  "vegetation": {
+    "forest_trees": 280,
+    "total_trees": 586,
+    "islands": 24,
+    "total_shrubs": 332,
+    "tree_triangles": 1856,
+    "tree_shape": "Five unequal foliage masses with short visible supporting branches",
+    "nanite_crown_meshes": 3,
+    "clearance": {
+      "trees": 280,
+      "islands": 24,
+      "minimum_spacing_m": 10.017596104135436,
+      "minimum_canopy_clearance_m": {
+        "roads": 11.935994663383195,
+        "buildings_and_driveways": 36.71436559800276,
+        "campus": 58.593871124737696,
+        "water": 18.73336051851162
+      },
+      "source": "Checked saved geometry metadata and independently recomputed tree spacing"
+    }
+  },
+  "truck_material_fix": {
+    "materials": 7,
+    "only_usage_flags_changed": true,
+    "live_and_disk_surface_properties_equal_before_save": true
+  },
   "roof": {
     "actor": "GHS_MainWarehouseRoof",
     "mesh_count": 1,
-    "material_slots": 5,
-    "editable_parts": 431,
-    "collision": false,
-    "tick": false,
-    "business_identity": false,
     "visibility_toggle_verified": true,
-    "bottom_elevation_m": 9.6,
-    "minimum_rack_clearance_m": 0.44599999999999973,
-    "product_ui_toggle_implemented": false,
-    "future_interaction": "Roof visibility must be linked with interior POI and picking filters."
+    "product_ui_toggle_implemented": false
   },
-  "style": {
-    "reference": "codex-clipboard-0df2ba29-2688-4912-a76f-f19056c0ec63.png",
-    "purpose": "Soft white architectural campus with a removable light roof and rounded muted-green tree crowns",
-    "preserve_ground_component_override": true,
-    "smooth_mesh_roles": [
-      "Trees",
-      "TreesDark",
-      "TreesLight"
-    ],
-    "tree_roughness": 0.85,
-    "tree_specular": 0.15,
-    "directional_source_angle": 7.0,
-    "ambient_occlusion_intensity": 0.75,
-    "ambient_occlusion_radius_cm": 110.0,
-    "lighting_policy": "Keep existing lights, intensity, exposure, rendering methods and all ground materials; change only source angle and AO intensity/radius."
-  },
-  "vegetation_geometry_preserved": true,
   "saved_map_reload_passed": true,
-  "saved_map_reload_finished_utc": "2026-10-22T05:44:16.933042+00:00",
+  "saved_map_reload_finished_utc": "2026-10-22T07:49:01.863390+00:00",
   "runtime_checks": [
     {
       "name": "saved_campus_loaded_and_business_registry_preserved",
@@ -169,289 +306,117 @@
       "passed": true
     }
   ],
-  "runtime_elapsed_seconds": 15.547000000020489,
+  "runtime_elapsed_seconds": 32.09299999999348,
   "runtime_business_registry": {
     "equipment": 106,
     "facilities": 56
   },
   "visual_review_passed": true,
-  "visual_review_notes": [
-    "Exact warehouse silhouette is covered, including the southwest office wing and southeast angled edge.",
-    "Five blue rooflight strips, standing seams and blue perimeter trim match the supplied architectural direction.",
-    "All roof parts hide together; the existing racks, cargo and equipment remain intact.",
-    "Vegetation uses smooth crown normals and muted greens with unchanged geometry and placements.",
-    "User ground material and translation remain unchanged."
-  ],
+  "visual_evidence": {
+    "count": 6,
+    "render": "actual 1920x1080 game viewport",
+    "temporal_settle_seconds": 2.0,
+    "hud_hidden_for_art_only": true
+  },
   "images": [
     {
-      "file": "SitePlan.png",
-      "sha256": "f82f4324302c86218193daebead19b16ed618d812866f81e16500a2b8fe0a2ce",
+      "file": "ReferenceOverview.png",
+      "sha256": "807a3010233bd682371d8ebd6cfeadbfeaa989c841f54fcf0829790978e35dbf",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1811096
+      "bytes": 2083921
+    },
+    {
+      "file": "ReferenceIsland.png",
+      "sha256": "68a9ff85499090313118664d0921e10c145d57d8af6d09c02cb30d732dd71653",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1276968
+    },
+    {
+      "file": "ReferenceTree.png",
+      "sha256": "29c9621787ace612634b4839c955f105671b6f8831053d123b10fb43340887b2",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2069163
+    },
+    {
+      "file": "ReferenceRoad.png",
+      "sha256": "36de61895dae77db313927b591fe46db47ae29981fa4aa8db06cb51e758a4f0a",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1360390
+    },
+    {
+      "file": "ReferenceRoof.png",
+      "sha256": "fcbad862c8320c7d2e8555aa39319ded5bd476638635d8a960ec29ed277f5b55",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1941370
+    },
+    {
+      "file": "ReferenceInterior.png",
+      "sha256": "fd7e88a0e08fff99d22b9131e120b2fe10978ea96d1ff07b28964f16bd1c6d15",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2195851
     },
     {
       "file": "Runtime_Overview_1920x1080.png",
-      "sha256": "697c27cc723193557230015887188f35054aafd9011eb01ad6d8a7be85848e8d",
+      "sha256": "d01610dfff650f653aa99a082969eccffd79b29f695330b569860166802bc53a",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1703065
+      "bytes": 1707003
     },
     {
       "file": "Runtime_Overview_2560x1600.png",
-      "sha256": "afb6557a40aff5e72e52bd21e557eaa14bef06c04dfdc13b07435a30ef1599bb",
+      "sha256": "f7fadcc2f3d198e00dbcd40a62c0ec86c454a10f03060864a3359990cb13da46",
       "dimensions": [
         2560,
         1600
       ],
-      "bytes": 3159155
+      "bytes": 3139795
     },
     {
       "file": "Runtime_AGV07_Focus.png",
-      "sha256": "f33321c3eb958bae8e83537c298e239602f8f6f26896b700787f275a920040bf",
+      "sha256": "0ba6ce74823decaf61d11ef988cb8f682d16f3a10baa3627f5f85fa48012d1e7",
       "dimensions": [
         2560,
         1600
       ],
-      "bytes": 2453430
+      "bytes": 2089070
     },
     {
-      "file": "SW_Gate.png",
-      "sha256": "61aa4afe4be3ee10c6995c4899e37115d3481a68a6302b1fe84198ad49a33be3",
+      "file": "ReferenceContext.png",
+      "sha256": "54242957ed8461c3c5a1328ef2b5ca8bcd2c69029326d2a1721add6869ffdd32",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1793205
-    },
-    {
-      "file": "NE_Gate.png",
-      "sha256": "01e0bb5cb0155994b09885b93962511f44e2be02e05ae7942eef5c6c79e47b67",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1562071
-    },
-    {
-      "file": "Housing.png",
-      "sha256": "c70bf23c6e24e70d815625490914fca6cc4a2dfbe3b35f8a594e57e08d65650e",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1681293
-    },
-    {
-      "file": "TruckCourt.png",
-      "sha256": "0310c92eaca11376d3e98d30dd7c6b1b19437f8d8bb341927dc94f60b08cd8fe",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1561859
-    },
-    {
-      "file": "ParkingUpper.png",
-      "sha256": "8ad9ef21829804bef73dfcd4f12f22998ac16e4325db4d357d5730de34eff040",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1570507
-    },
-    {
-      "file": "ParkingLower.png",
-      "sha256": "0a259a4bfe759ed6391c203fd5b5ef147385aad0f6f92b4bc8e553d688e945c3",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1592668
-    },
-    {
-      "file": "TreeDetail.png",
-      "sha256": "1bef0a589ca9969121581c4100767f47db678e6b2acc7fa5a66c31ae72511011",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 2112303
-    },
-    {
-      "file": "WestForest.png",
-      "sha256": "c0bd5b5c0f14f5344344f3df821011707ba1c41c7844d3ececa4e15d6ebeda3a",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1607455
-    },
-    {
-      "file": "NortheastForest.png",
-      "sha256": "a3b76a249fe243d08557bc8131b25bcb5104204c088788782b6002dd35f59501",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1556927
-    },
-    {
-      "file": "NE_Parking.png",
-      "sha256": "05cd18bc2c0cb89d8c99fd0c244f6251d9cfe380789d8c7ce0e1cfb379b89604",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1500316
-    },
-    {
-      "file": "VehicleDetail.png",
-      "sha256": "4c53f2e4efe96fefb56caed95f600fe068e8fd499decda701a875bd36cfc9e69",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 2042518
-    },
-    {
-      "file": "DisplayTruckFront.png",
-      "sha256": "3578c9f5b9c3f5716149660476e53b4dbf6eda74a79e4a914e2aa48c0b1062bc",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 2043437
-    },
-    {
-      "file": "DisplayTruckRear.png",
-      "sha256": "a48a9feef9551bea91557b9f8a52570a5e6d386434667a0e428ed9b90522f486",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 2090197
-    },
-    {
-      "file": "ForestFillOverview.png",
-      "sha256": "09c94be8388c04803875506fe0700ff080ebc67694f5f99535329e2213e97a41",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1807676
-    },
-    {
-      "file": "ForestFill1.png",
-      "sha256": "92196be594cfb7d085f0fa3286db0da41c40c38844d8f86ea8fcc5a39246cb04",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1372636
-    },
-    {
-      "file": "ForestFill2.png",
-      "sha256": "b0f6f3f3ec4a2ad204200d908524be8844b6e8acc5e864655e73f89db27fb585",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1353449
-    },
-    {
-      "file": "ForestFill3.png",
-      "sha256": "262e5965000d95fb7b2bcbd8c8be9568e8e2c766bfe5b969f0e66bb774cff4ab",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1433282
-    },
-    {
-      "file": "ForestFill4.png",
-      "sha256": "5ba7ef0c01158b7e4b656554908ce2dc8d9f335ecac6226e51645387dc97d26f",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1468115
-    },
-    {
-      "file": "ForestFill5.png",
-      "sha256": "35b3cde6474e90559ce4e295b9d7545d234be0d1a544bb583a059a6c3c6ff1f9",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1220011
-    },
-    {
-      "file": "RoofExteriorOverview.png",
-      "sha256": "5c382e958d68a85858f69df05cb2e129cbca4b49a79a5d18cd3b499ea52a8648",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 2049696
-    },
-    {
-      "file": "RoofCampusContext.png",
-      "sha256": "8e65b6dcdc6f510773bdf9d599c7dc93f8042fc847f7129f370bf6f4cecb4e46",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1843023
-    },
-    {
-      "file": "RoofDetail.png",
-      "sha256": "8175a29c2ad81fa98aba8bfcadf1c1fd51475b6487899e471edfc3c2cf515c66",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1786442
-    },
-    {
-      "file": "RoofOfficeEdge.png",
-      "sha256": "89d557a99954d043b9e0366e98c4078bf289915a6a1a6b5aeec157ca3d6da9ed",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 1787768
-    },
-    {
-      "file": "TreeSoftDetail.png",
-      "sha256": "3464da052c195750a838cfbbf44f5523dfd0b8a74d6111eee9ffa0e3e71fb4ec",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 2076185
-    },
-    {
-      "file": "RoofHiddenInterior.png",
-      "sha256": "067396209a7336b8958fffea7dd291d86c4f642658a8502ffe1bef55e747343c",
-      "dimensions": [
-        1920,
-        1080
-      ],
-      "bytes": 2094099
+      "bytes": 1680243
     },
     {
       "file": "Polish_Summary.png",
-      "sha256": "68bec3601ff35ac003ccd3208a0dee73ab9f3ac783ecb6d3331983f76914b562",
+      "sha256": "23cbf01d436555ede0f48f580107ea38eed76ffd4c47b863af6c1dc8624ab2a0",
       "dimensions": [
         1952,
         1272
       ],
-      "bytes": 1910115
+      "bytes": 1642012
     }
   ],
   "performance_benchmark": false,

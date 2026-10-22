@@ -1,33 +1,40 @@
 """Original clustered broadleaf trees and shrubs for the GHS campus context.
 
 All geometry uses the generator's unreflected u/v metres, with outward CCW
-faces. ``size`` is a uniform multiplier: size=1 gives a 5.6--6.8 m tree,
+faces. ``size`` is a uniform multiplier: size=1 gives an 8.6--10.8 m tree,
 depending on variant. No Blender dependency, global random state, or scene
 side effects. The caller owns placement, clearance and material merging.
 """
 import math
+import json
+from pathlib import Path
 
 
 PALETTE = {
-    'Trees': (.10, .22, .11),
-    'TreesLight': (.14, .29, .15),
-    'TreesDark': (.065, .16, .075),
-    'Trunk': (.205, .165, .115),
+    'Trees': (.28, .42, .24), 'TreesLight': (.36, .50, .30),
+    'TreesDark': (.18, .32, .15), 'Trunk': (.205, .165, .115),
 }
+_style_path=Path(__file__).resolve().parents[2]/'SourceAssets/GHS/Park/reference_style.json'
+if _style_path.exists():
+    _palette=json.loads(_style_path.read_text(encoding='utf-8'))['palette']
+    PALETTE.update({k:_palette[k] for k in PALETTE if k in _palette})
 
-# Each crown is three overlapping rounded clusters. The slight lean and
-# uneven heights produce an organic silhouette without high polygon counts.
+# Five unequal, overlapping foliage masses form an irregular broadleaf crown.
+# Their combined radius/height matches the prior placement envelope, while
+# three supporting branches can be read in the open lower crown.
 TREE_PROFILES = (
-    ((-.10, .02, 4.05, 1.72, 1.60, 1.68),
-     (1.03, -.23, 3.70, 1.18, 1.26, 1.20),
-     (-.94, .42, 4.00, 1.17, 1.15, 1.35)),
-    ((.02, -.03, 4.88, 1.28, 1.25, 1.91),
-     (.65, .38, 3.88, 1.15, 1.10, 1.45),
-     (-.62, -.48, 4.60, 1.10, 1.05, 1.48)),
-    ((-.05, .05, 3.95, 1.78, 1.61, 1.46),
-     (1.21, .39, 3.39, 1.34, 1.29, 1.28),
-     (-1.19, -.38, 3.49, 1.39, 1.31, 1.28)),
+    ((.25,.05,6.45,2.35,2.20,2.15),(-2.05,.15,4.65,2.05,2.30,2.15),
+     (1.90,-.20,4.20,2.25,2.05,2.15),(-.15,1.60,3.70,2.55,2.05,2.10),
+     (.65,-1.55,5.10,2.30,1.95,2.30)),
+    ((-.25,.10,8.20,2.10,1.95,2.60),(-1.65,.15,5.80,2.00,2.10,2.60),
+     (1.60,-.30,5.20,2.15,2.00,2.55),(.05,1.45,4.25,2.35,1.85,2.25),
+     (-.45,-1.45,6.45,2.20,1.85,2.60)),
+    ((.50,.10,6.50,2.60,2.25,2.20),(-2.30,.10,4.55,2.30,2.25,2.25),
+     (2.15,-.35,4.20,2.45,2.15,2.25),(-.20,1.70,3.85,2.80,2.05,2.15),
+     (.65,-1.70,5.05,2.55,1.90,2.25)),
 )
+TREE_BASE_HEIGHTS=(8.60,10.80,8.70)
+TREE_BASE_RADII=(4.05,3.70,4.60)
 
 
 def _normal(p):
@@ -64,14 +71,14 @@ def _icosphere():
 SPHERE_VERTICES, SPHERE_FACES = _icosphere()
 
 
-def _make_emitter(api,u,v,size,angle):
+def _make_emitter(api,u,v,size,angle,base_z=.025):
     if size <= 0:
         raise ValueError('Vegetation size must be positive')
     ca,sa = math.cos(angle),math.sin(angle)
     stats = {'triangles':0, 'parts':0, 'height_m':0, 'radius_m':0}
 
     def emit(role,vertices,faces):
-        transformed = [(u+size*(x*ca-y*sa),v+size*(x*sa+y*ca),.025+size*z)
+        transformed = [(u+size*(x*ca-y*sa),v+size*(x*sa+y*ca),base_z+size*z)
                        for x,y,z in vertices]
         api['mesh'](role,transformed,faces)
         stats['triangles'] += sum(len(face)-2 for face in faces)
@@ -114,38 +121,63 @@ def _branch(emit,start,end,radius0,radius1,sides=6):
     emit('Trunk',verts,faces)
 
 
-def build_tree(api,u,v,size=1,variant=0):
-    """Emit one 320-triangle tree and return its actual height/crown radius.
+def _leaf_lobe(center,radii,phase):
+    segments,rings=16,12
+    vertices=[(center[0],center[1],center[2]+radii[2])]
+    for ring in range(1,rings):
+        phi=math.pi*ring/rings
+        for j in range(segments):
+            theta=math.tau*j/segments
+            irregularity=.965+.045*math.sin(theta*3+phase+phi*.8)+.025*math.sin(theta*5-phase)
+            vertices.append((center[0]+radii[0]*math.sin(phi)*math.cos(theta)*irregularity,
+                             center[1]+radii[1]*math.sin(phi)*math.sin(theta)*irregularity,
+                             center[2]+radii[2]*math.cos(phi)))
+    bottom=len(vertices);vertices.append((center[0],center[1],center[2]-radii[2]))
+    faces=[(0,1+j,1+(j+1)%segments) for j in range(segments)]
+    for ring in range(rings-2):
+        a=1+ring*segments;b=a+segments
+        faces.extend((a+j,b+j,b+(j+1)%segments,a+(j+1)%segments) for j in range(segments))
+    last=1+(rings-2)*segments
+    faces.extend((bottom,last+(j+1)%segments,last+j) for j in range(segments))
+    return vertices,faces
 
-    Required api['mesh'](role,vertices,faces); optional api['counts'] mapping.
-    Roles Trees/TreesLight/TreesDark/Trunk. size=1: broad tree about 5.8 m,
-    narrow tree about 6.8 m, spreading tree about 5.5 m. There is no clearance
-    rejection here; the caller should test returned/known canopy dimensions.
+
+def build_tree(api,u,v,size=1,variant=0,base_z=.025):
+    """Emit a 1856-triangle broadleaf tree with five unequal foliage masses.
+
+    Returns actual geometry bounds for placement safety; base_z permits
+    planting on raised forest islands without buried or floating tree roots.
     """
-    variant = int(variant)
-    profile = TREE_PROFILES[variant%3]
-    angle = (variant*2.399963 + u*.037 + v*.023) % (math.pi*2)
-    emit,stats = _make_emitter(api,u,v,size,angle)
-    _branch(emit,(0,0,0),(-.055,.03,2.85),.19,.105)
-    for i,(x,y,z,rx,ry,rz) in enumerate(profile):
-        _branch(emit,(-.035,.02,1.86+i*.23),(x*.72,y*.72,z-.20),.105,.045)
-        _cluster(emit,(x,y,z),(rx,ry,rz),variant+i*3.1,
-                 ('Trees','TreesDark','TreesLight')[i])
+    variant=int(variant)%3;profile=TREE_PROFILES[variant]
+    angle=(variant*2.399963+u*.037+v*.023)%(math.pi*2)
+    emit,stats=_make_emitter(api,u,v,size,angle,base_z)
+    _branch(emit,(0,0,0),(-.12,.06,3.60),.27,.16,sides=10)
+    role=('Trees','TreesLight','TreesDark')[variant]
+    lobes=[_leaf_lobe(p[:3],p[3:],variant*1.17+i*.83) for i,p in enumerate(profile)]
+    max_radius=max(math.hypot(x,y) for vertices,_ in lobes for x,y,z in vertices)
+    radial_scale=TREE_BASE_RADII[variant]/max_radius
+    for vertices,faces in lobes:
+        emit(role,[(x*radial_scale,y*radial_scale,z) for x,y,z in vertices],faces)
+    for i in (1,2,3):
+        x,y,z,rx,ry,rz=profile[i]
+        _branch(emit,(-.08,.04,1.60+i*.08),
+                (x*radial_scale*.72,y*radial_scale*.72,z-rz*.60),.15,.075,sides=6)
     if 'counts' in api:
-        api['counts']['low_poly_trees'] += 1
-        api['counts']['clustered_broadleaf_trees'] += 1
-    stats.update(variant=variant%3,size=size)
+        api['counts']['low_poly_trees']+=1
+        api['counts']['clustered_broadleaf_trees']+=1
+    stats.update(variant=variant,size=size,base_z_m=base_z,
+                 crown_start_height_m=min(p[2]-p[5] for p in profile)*size)
     return stats
 
 
-def build_shrub(api,u,v,size=.65,variant=0):
+def build_shrub(api,u,v,size=.65,variant=0,base_z=.025):
     """Emit a dense, low round shrub; size=.65 gives ~0.9 m tall, 1.5 m wide.
 
     160 triangles. Green clusters sit below tree crowns and hide trunks, so
     repeated shrubs form the clipped hedge islands seen in the reference.
     """
     variant = int(variant)
-    emit,stats = _make_emitter(api,u,v,size,variant*2.399963)
+    emit,stats = _make_emitter(api,u,v,size,variant*2.399963,base_z)
     _cluster(emit,(-.22,.04,.66),(.87,.84,.69),variant,
              'TreesDark' if variant%3==0 else 'Trees')
     _cluster(emit,(.42,-.11,.60),(.66,.70,.59),variant+4,'TreesLight')

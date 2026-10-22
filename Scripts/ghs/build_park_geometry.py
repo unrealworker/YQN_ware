@@ -23,7 +23,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 sys.dont_write_bytecode=True
 sys.path.insert(0,str(ROOT/'Scripts/ghs'))
 sys.path.insert(0,str(ROOT/'Saved/ParkRefinement/python_deps'))
-from park_vegetation import PALETTE as VEGETATION_PALETTE, build_tree
+from park_vegetation import PALETTE as VEGETATION_PALETTE, TREE_BASE_HEIGHTS, build_tree
 from park_vehicles import build_car
 RNG = random.Random(17335)
 ORIGIN = (239.33385, 60.24019)
@@ -43,6 +43,8 @@ PALETTE = {
     'Rubber': (.018,.024,.028), 'VehicleLights': (.46,.035,.025),
 }
 PALETTE.update(VEGETATION_PALETTE)
+REFERENCE_STYLE=json.loads((OUT/'reference_style.json').read_text(encoding='utf-8'))
+PALETTE.update({role:color for role,color in REFERENCE_STYLE['palette'].items() if role in PALETTE})
 
 DATA = defaultdict(lambda: {'vertices': [], 'faces': [], 'parts': 0})
 COUNTS = defaultdict(int)
@@ -52,6 +54,8 @@ CONTEXT_ROADS = []
 HOUSE_CLEARANCES = []
 PARKED_VEHICLES = []
 PARK_TRUCK_INSTANCES = []
+STREET_TREE_PLACEMENTS = []
+TREE_BUILDING_MASK = None
 TRUCK_SPEC = None
 
 
@@ -211,12 +215,27 @@ def cylinder(role,u,v,z,radius,height,sides=8):
 
 
 def tree(u,v,height=5.3,scale=1):
+    global TREE_BUILDING_MASK
+    from shapely.geometry import Polygon,Point,box as rect
+    from shapely.ops import unary_union
+    if TREE_BUILDING_MASK is None:
+        existing=json.loads((OUT/'site_geometry_report.json').read_text(encoding='utf-8'))
+        buildings=[Polygon(WAREHOUSE)]+[Polygon(h['footprint_uv_m']) for h in existing['residential']['houses']]
+        buildings += [rect(34.2,177.7,41.8,182.3),rect(502.7,6.2,507.3,13.8)]
+        TREE_BUILDING_MASK=unary_union(buildings)
     variant=int(abs(u*7.31+v*11.17))%3
-    size=height/(5.737,6.750,5.397)[variant]*scale
-    if road_clearance(u,v,2.8*size)<.3:
+    size=(height*1.35)/TREE_BASE_HEIGHTS[variant]*scale
+    info=build_tree({'mesh':lambda *args:None},u,v,size,variant)
+    road_gap=road_clearance(u,v,info['radius_m'])
+    crown=Point(u,v).buffer(info['radius_m'],quad_segs=16)
+    if road_gap<.3 or TREE_BUILDING_MASK.distance(crown)<.3:
         COUNTS['tree_candidates_omitted_for_road_clearance']+=1
         return None
-    return build_tree({'mesh':mesh,'counts':COUNTS},u,v,size,variant)
+    meta=build_tree({'mesh':mesh,'counts':COUNTS},u,v,size,variant)
+    STREET_TREE_PLACEMENTS.append(dict(center_uv_m=[u,v],height_m=meta['height_m'],
+        crown_radius_m=meta['radius_m'],road_canopy_clearance_m=road_gap,
+        building_canopy_clearance_m=TREE_BUILDING_MASK.distance(crown)))
+    return meta
 
 
 def trailer(u,v,angle=math.pi/2):
@@ -404,7 +423,9 @@ def export():
     # Clustered forests and recognisable cars share material batches. Keep an
     # explicit combined environment budget while avoiding per-prop Actors.
     # Five requested outer woodland patches add at most 720 low-poly trees.
-    assert total<1100000, total
+    # More latitude rings keep smooth leaf normals close to their shadow
+    # geometry; the three tree-crown assets use Nanite in the UE scene.
+    assert total<1800000, total
     minimum_house_clearance=min(h['road_clearance_m'] for h in GEOMETRY_REPORT['residential']['houses'])
     assert minimum_house_clearance>=.10, minimum_house_clearance
     manifest={'version':3,'purpose':'Full campus primary display; restrained public-road and residential context',
@@ -426,6 +447,7 @@ def export():
         'source_dxf':GEOMETRY_REPORT['source_dxf'],
         'lane_dash_vertices_follow_road_segment_gradient':True,
     }
+    manifest['street_tree_placement_checks']=STREET_TREE_PLACEMENTS
     (OUT/'park_manifest.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False),encoding='utf8')
     add_trucks_to_source()
     bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'GHS_Park_Source.blend'))

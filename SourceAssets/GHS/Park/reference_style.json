@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "reference": "codex-clipboard-0df2ba29-2688-4912-a76f-f19056c0ec63.png",
+  "palette": {
+    "Ground": [
+      0.52,
+      0.58,
+      0.66
+    ],
+    "Hardstand": [
+      0.53,
+      0.6,
+      0.68
+    ],
+    "Roads": [
+      0.17,
+      0.225,
+      0.3
+    ],
+    "ContextRoads": [
+      0.18,
+      0.235,
+      0.31
+    ],
+    "CampusRoads": [
+      0.38,
+      0.45,
+      0.52
+    ],
+    "Curbs": [
+      0.92,
+      0.95,
+      0.98
+    ],
+    "Markings": [
+      0.95,
+      0.97,
+      1.0
+    ],
+    "Buildings": [
+      0.9,
+      0.93,
+      0.98
+    ],
+    "Roofs": [
+      0.82,
+      0.87,
+      0.95
+    ],
+    "Landscape": [
+      0.47,
+      0.53,
+      0.48
+    ],
+    "Trees": [
+      0.28,
+      0.42,
+      0.24
+    ],
+    "TreesLight": [
+      0.36,
+      0.5,
+      0.3
+    ],
+    "TreesDark": [
+      0.18,
+      0.32,
+      0.15
+    ],
+    "Trunk": [
+      0.18,
+      0.15,
+      0.1
+    ]
+  },
+  "roof_color_linear": [
+    0.8,
+    0.88,
+    1.0
+  ],
+  "ground_material": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Ground.M_GHSPark_Ground",
+  "studio_ground_material": "/Game/GHSZcoolSmartFactory/Presentation/M_GHSReference_Backdrop.M_GHSReference_Backdrop",
+  "lighting": {
+    "directional_intensity": 3.8,
+    "skylight_intensity": 0.5,
+    "directional_rotation": [
+      -55.0,
+      -38.0,
+      0.0
+    ],
+    "directional_color": [
+      1.0,
+      0.985,
+      0.965
+    ],
+    "skylight_color": [
+      0.87,
+      0.94,
+      1.0
+    ],
+    "directional_source_angle": 8.0,
+    "ambient_occlusion_intensity": 0.9,
+    "ambient_occlusion_radius_cm": 180.0,
+    "ambient_occlusion_quality": 80.0,
+    "bloom_intensity": 0.02,
+    "exposure_ev100": 0.0,
+    "lower_hemisphere_color": [
+      0.055,
+      0.075,
+      0.1
+    ],
+    "lower_hemisphere_is_black": false
+  },
+  "reference_camera": {
+    "target_uv_m": [
+      235.0,
+      87.0,
+      0.0
+    ],
+    "distance_cm": 85000.0,
+    "pitch": -46.0,
+    "yaw": -90.0
+  },
+  "scope": "Reference matching: separate cool-grey ground, darker roads, soft cool-white roof, larger rounded trees and readable forest islands. CAD layout and original business geometry remain.",
+  "selected_lighting_candidate": "Reference_C_with_balanced_hemisphere_fill"
+}

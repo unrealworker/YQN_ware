@@ -233,6 +233,9 @@ def verify_registry():
                     assert component.get_collision_enabled()==unreal.CollisionEnabled.NO_COLLISION
                     assert component.get_editor_property('mobility')==unreal.ComponentMobility.STATIC
                     assert not actor.is_actor_tick_enabled() and not actor.get_actor_enable_collision()
+                    for slot in range(component.get_num_materials()):
+                        material=component.get_material(slot)
+                        assert material and material.get_editor_property('used_with_instanced_static_meshes'), (label,slot,'Missing instanced material shader usage')
     expected_meshes = Counter({row['name']: 1 for row in manifest['meshes']})
     assert used_meshes == expected_meshes, (dict(used_meshes), dict(expected_meshes))
     expected_instances={row['name']:len(row['instances']) for row in manifest['meshes'] if 'instances' in row}
@@ -333,6 +336,42 @@ def verify_saved_maps():
     record('runtime_did_not_modify_either_saved_map', map_sha256=map_hashes)
 
 
+def capture_reference_art_views():
+    """Real game frames with settled temporal AA, without the HUD overlay."""
+    all_actors=unreal.GameplayStatics.get_all_actors_of_class(world,unreal.Actor)
+    by={a.get_actor_label():a for a in all_actors}
+    art_camera=by['GHSPark_Yard'];roof=by['GHS_MainWarehouseRoof']
+    original_transform=art_camera.get_actor_transform()
+    original_target=pc.get_view_target();visibility=widget.get_visibility()
+    old_hidden=roof.get_editor_property('hidden')
+    views=[('ReferenceOverview',(235,87,0),85000,-46,-90,False),
+           ('ReferenceIsland',(-66.68862,-276.87253,0),10500,-55,-95,False),
+           ('ReferenceTree',(-59.59298,-264.43257,4.5),2200,-25,-110,False),
+           ('ReferenceRoad',(0,-38,0),14000,-58,-90,False),
+           ('ReferenceRoof',(170,56,9.8),18000,-45,-115,False),
+           ('ReferenceInterior',(235,87,0),85000,-46,-90,True)]
+    try:
+        widget.set_visibility(unreal.SlateVisibility.COLLAPSED)
+        unreal.SystemLibrary.execute_console_command(world,'r.SetRes 1920x1080w',pc)
+        yield from wait_for('reference_art_resolution',lambda:tuple(pc.get_viewport_size())==(1920,1080))
+        for name,uv,distance,pitch,yaw,hidden in views:
+            roof.set_actor_hidden_in_game(hidden)
+            target=unreal.Vector((uv[0]-239.33385)*100,(uv[1]-60.24019)*100,uv[2]*100)
+            rotation=unreal.Rotator(pitch=pitch,yaw=yaw)
+            eye=target-unreal.MathLibrary.get_forward_vector(rotation)*distance
+            art_camera.set_actor_location_and_rotation(eye,rotation,False,True)
+            pc.set_view_target_with_blend(art_camera,0.)
+            yield from pause(2.)
+            yield from capture(name)
+        result['reference_art_views']=dict(count=len(views),render='actual 1920x1080 game viewport',
+            temporal_settle_seconds=2.,hud_hidden_for_art_only=True)
+    finally:
+        roof.set_actor_hidden_in_game(old_hidden)
+        art_camera.set_actor_transform(original_transform,False,True)
+        pc.set_view_target_with_blend(original_target,0.)
+        widget.set_visibility(visibility)
+
+
 def run():
     global manifest, map_hashes
     manifest = read(MANIFEST_FILE)
@@ -402,6 +441,8 @@ def run():
     final_ids = [row['id'] for row in data['equipment'] + data['facilities']]
     assert final_ids == result['initial_business_ids'], 'Business registry changed during interaction'
     record('business_registry_unchanged_after_focus_resize_and_reset', equipment=106, facilities=56)
+    if re.search(r'(?:^|\s)-ReferenceStyleCapture(?=\s|$)',CLI,re.I):
+        yield from capture_reference_art_views()
     verify_saved_maps()
 
 

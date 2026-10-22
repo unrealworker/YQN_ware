@@ -1,6 +1,6 @@
 # GHS 主厂房独立屋顶
 
-本目录保存按用户参考图创建的浅色金属主厂房屋顶。目标关卡为 `/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`；UE Actor 名为 `GHS_MainWarehouseRoof`。屋顶已独立导入；2026-10-22 13:44:16（Asia/Shanghai）独立保存重载已验证单 Actor／单网格、整体显隐及五个材质参数。15 项运行检查与正式图片归档也已完成；当前状态仅表示独立 Actor 显隐能力，不包含产品 UI 开关。
+目标关卡为 `/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`，Actor 为 `GHS_MainWarehouseRoof`。当前屋顶几何沿用既有源；本轮只把 Roof 槽按 `../Park/reference_style.json.roof_color_linear` 调整为更清晰的淡蓝白色，其他四个槽和模型不变。完整参考风格已完成本轮保存重载、15 项实际运行检查和 11 张当前图片归档，不沿用此前版本证据。
 
 ## 几何与视觉
 
@@ -27,13 +27,13 @@
 
 | 固定槽顺序 | 线性底色 RGB | 粗糙度 | 金属度 |
 | --- | --- | --- | --- |
-| Roof | 0.78 / 0.83 / 0.90 | 0.75 | 0.08 |
+| Roof（当前 UE 展示覆盖） | 0.80 / 0.88 / 1.0 | 0.75 | 0.08 |
 | Seams | 0.63 / 0.71 / 0.81 | 0.80 | 0.05 |
 | Blue | 0.035 / 0.13 / 0.48 | 0.80 | 0.05 |
 | Skylight | 0.24 / 0.45 / 0.70 | 0.42 | 0.05 |
 | Detail | 0.60 / 0.67 / 0.74 | 0.80 | 0.05 |
 
-FBX 槽名称是 `M_GHSMainRoof_<role>`；UE 使用屋顶私有资源 `/Game/GHSZcoolSmartFactory/Roof/Materials/M_GHSRoof_<role>`，不修改原仓库或园区共享材质。
+当前唯一展示参数是 `../Park/reference_style.json`，Roof 槽覆盖生成源的旧颜色；源几何、其他四槽参数保持。FBX 槽名称是 `M_GHSMainRoof_<role>`；UE 使用屋顶私有资源 `/Game/GHSZcoolSmartFactory/Roof/Materials/M_GHSRoof_<role>`，不修改原仓库或园区共享材质。
 
 ```text
 Blender: (u−239.33385, −(v−60.24019), z) metres
@@ -64,6 +64,12 @@ UE 网格路径为 `/Game/GHSZcoolSmartFactory/Roof/Meshes/SM_GHS_MainWarehouseR
 
 生成器只写本目录；项目共享材质与既有墙体源资产只读并校验哈希。生成和独立 FBX 回读退出码均为 0，闭合流形、无退化面、正体积、五槽顺序通过，包围回读误差约 `2.29e-5 m`。
 
-UE 应用、截图与保存重载证据写入 `Saved/ParkRoofStyle`。正式场景图片统一更新到 `SourceAssets/GHS/Park/Review`，避免屋顶版与此前开顶版被混当成同一当前设计；本轮保存重载及 15 项实际运行检查全部通过（运行耗时 15.547 秒）。`Review/acceptance.json` 于 2026-10-22 13:46:00（Asia/Shanghai）更新，30 张正式图片及地图／manifest 的 SHA-256 已核对一致。
+当前统一应用入口为 `Scripts/ghs/apply_reference_style.py`，保存重载入口为 `validate_reference_style.py`，截图入口为 `capture_reference_style.py`；旧 roof-style 入口属于历史阶段，不作为当前执行方法。完整证据位于 `Saved/ParkReferenceStyle`。
 
-当前地图 SHA-256：`08eb315366fda2cc76cdfe147d16a422451e1ba224d4beb7421453095b84f74c`。原 359 个 Actor 保留，新增屋顶后共 360 个；Ground 手动材质及位移、Cobalt 覆盖和未保存 Truck 材质状态均保留。
+本轮没有新增产品 UI 屋顶按钮。独立 Actor 显隐和后续交互准备不等于用户按钮已经开发；后续仍需联动内部 POI／选取。
+
+原关卡保持 360 个 Actor。当前 Ground 已根据最新要求改为独立冷灰蓝材质，StudioGround 使用无网格蓝灰背景；旧手动材质已备份，用户位置 `(170,240,0) cm`、缩放 `(1.1,1.1,1.1)` 保留。Cobalt 组件覆盖继续保护。7 个 Truck 材质在 live／disk 表面参数对比一致后，仅补齐实例化 usage 标记并保存；材质图、配色及其余参数未改。
+
+本轮独立保存重载于 **2026-10-22 15:49:01（Asia/Shanghai）** 通过；**15 项运行检查通过，耗时 32.093 秒**。正式 Review 于 **15:52:26** 覆盖为 **11 张**当前图片，旧 30 图已移除，地图与全部图片哈希核对一致。当前地图 SHA-256：`eb46503811527cf427450d7a0a67bf9e89b63e4b97f0d50cbc775bca092d4f5b`。
+
+Park 当前 1,657,364 面，屋顶仍为 8,288 面，合计 1,665,652 个唯一资源三角面。植被为 586 棵树、332 组灌木、24 岛；单树 1,856 面，三类树冠启用 Nanite 并保留完整 fallback。该静态统计不代表性能基准；本轮没有新 EXE 或多人像素流性能测试。
