@@ -1,6 +1,6 @@
-# GHS 园区五处新增树林
+# GHS 园区疏朗扩域树林
 
-目标关卡：`/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`。本说明对应 2026-10-22 按用户五处红框补齐树林的版本，覆盖此前模型统计和验收状态。当前布局与统计以版本 3 的 `SourceAssets/GHS/Park/park_manifest.json`、`site_geometry_report.json`、`cad_layout.json` 为准。本轮保留原两片林带并追加五组树林，只刷新六个既有网格。本轮六网格原位应用、独立进程保存重载与 14 项实际运行回归已通过，完成 3 张全景与 19 张细节截图；下文记录本轮新证据。
+目标关卡：`/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`。本说明对应 2026-10-22 按用户反馈将五处外围树林扩大、疏化后的版本，覆盖此前模型统计和验收状态。当前布局与统计以版本 3 的 `SourceAssets/GHS/Park/park_manifest.json`、`site_geometry_report.json`、`cad_layout.json` 为准。本轮保留原两片林带的 510 棵树，扩大五处外围树林覆盖、降低密度并增加自然空隙，只刷新六个既有网格。本轮 UE 原位应用、独立视觉复核、保存重载与 14 项运行检查已通过；下文记录疏朗扩域版本的当前证据。
 
 园区以现有仓库为主体，完整展示装卸前场、内部道路、停车、回转、围栏及出入口；公共道路和住宅提供环境参照。沿用瓷白、冷灰与深蓝风格，不使用卫星截图地面贴图。
 
@@ -54,7 +54,7 @@ X = (u - 239.33385) * 100; Y = (v - 60.24019) * 100
 
 ## 本轮生成结果
 
-当前 manifest 版本 `3`：**22 个唯一网格资产、1,033,536 个唯一资产三角面、338 栋住宅**。22 个资产由 21 个环境合并网格与 1 个闭门卡车网格组成；卡车网格自身为 44,096 面，复用 27 次。按所有实例展开后的环境三角面为 **2,180,032**，计算为 `1033536 + 44096 × (27−1)`，不能将唯一资产面数当成全场实例面数，也不能将展开面数当作每帧实际可见面数。
+当前 manifest 版本 `3`：**22 个唯一网格资产、987,014 个唯一资产三角面、338 栋住宅**。22 个资产由 21 个环境合并网格与 1 个闭门卡车网格组成；卡车网格自身为 44,096 面，复用 27 次。按所有实例展开后的环境三角面为 **2,133,510**，计算为 `987014 + 44096 × (27−1)`，不能将唯一资产面数当成全场实例面数，也不能将展开面数当作每帧实际可见面数。
 
 住宅中 299 栋保留 CAD 中心和外接矩形轴向，39 栋为 `satellite_infill`；补房沿已有 Gray Pine 道路与支路布置。道路／住宅共用范围继续为 `u=[−197,747]、v=[−217,592] m`，不同于较小范围的独立住宅模块预检。本轮只扩展外围森林地面，未扩大这套公共路网／住宅生成范围。
 
@@ -80,10 +80,11 @@ X = (u - 239.33385) * 100; Y = (v - 60.24019) * 100
 | 东北停车场泊位／无障碍位／端岛 | `40 / 2 / 2`；无障碍位计入 40 个泊位 |
 | 东北泊位边缘最小道路净距 | `0.094133 m` |
 | 东北绿岛最小道路净距 | `0.693841 m` |
-| 林带树心最小间距 | `5.701946 m`，要求至少 `5.7 m` |
-| 林带树冠最小水道净距 | `18.403966 m`，保留 `18 m` 避让策略 |
+| 原林带／全局树心最小间距 | `5.701946 m`，保留原组至少 `5.7 m` 的规则 |
+| 五片疏林到全部林树最小中心距 | `10.005902 m`，新组要求至少 `10 m` |
+| 林带树冠最小水道净距 | `18.063233 m`，保留 `18 m` 避让策略 |
 
-当前包含 **112 个园区小车泊位、52 个大车泊位、157 台小车、27 台闭门静态展示卡车、1,517 棵树、260 组低矮灌木**。小车中 68 台在园区泊位、89 台在住宅车道；车和泊位的数量不是同一统计口径。1,517 棵树已包含七组林带的 1,206 棵（原 510 + 新增 696），不能再相加。27 台展示卡车独立于原 52 台月台业务卡车，不重复计入设备注册表。
+当前包含 **112 个园区小车泊位、52 个大车泊位、157 台小车、27 台闭门静态展示卡车、1,373 棵树、260 组低矮灌木**。小车中 68 台在园区泊位、89 台在住宅车道；车和泊位的数量不是同一统计口径。1,373 棵树已包含七组林带的 1,062 棵（原 510 + 五片疏林 552），不能再相加。27 台展示卡车独立于原 52 台月台业务卡车，不重复计入设备注册表。
 
 ### 汽车与停车场细节
 
@@ -105,30 +106,41 @@ X = (u - 239.33385) * 100; Y = (v - 60.24019) * 100
 
 派生生成器记录并校验原 `.blend`、`.fbx`、`.uasset` 三个共享资源的 SHA-256，不修改其内容。`Trucks/closed_truck.json` 还包含 2,350 条仅针对新后门的封闭射线检查、材质槽顺序、部件比对及几何结果；离线射线与源哈希保护不能代替本轮 UE 保存重载和业务回归。
 
-### 绿色树冠与五处新增树林
+### 五处树林扩域、疏化与自然空隙
 
-`park_vegetation.py` 用圆润、偏心的多簇树冠和可见树干替换单个棱锥。三种树形按深、中、浅绿色分配树冠，低矮灌木为独立形态。当前树木 **1,517 棵**，低矮灌木 **260 组**；其中林带 **1,206 棵**，另有场边、住宅与停车场树木 311 棵。
+`park_vegetation.py` 使用圆润、偏心的多簇树冠和可见树干，三种树形按深、中、浅绿色分配树冠，低矮灌木为独立形态。当前树木 **1,373 棵**、低矮灌木 **260 组**；林带共 **1,062 棵**，另有场边、住宅与停车场树木 311 棵。
 
-原两片林带及其固定随机序列、树位、尺度、树形和地面输出保持；原种子为 `173350210`。本轮按用户五处红框增补 696 棵，新增组使用独立种子 `173352210 + 101 × 组序号`，不会扰动原组。最终按完整报告读取的分组如下：
+原两片林带的 510 棵树、固定随机序列、尺度、树形及地面输出保持；原种子为 `173350210`。本轮仅把五处外围树林的参考轮廓按中心线性放大 **1.4 倍**，并降低树群密度。五片使用独立种子 `173352210 + 101 × 组序号`，不会扰动原组。实际放置受中心间距和完整 CAD 避让约束，以完整报告的 **552 棵**为准，不为凑目标数量缩小净距。
 
-| 林带 | 状态 | 树木数 |
+| 林带 | 当前状态 | 树木数 |
 | --- | --- | --- |
 | West woodland | 原左侧林带，保留 | 240 |
 | Northeast woodland | 原右上林带，保留 | 270 |
-| West outer woodland | 新增西外侧 | 125 |
-| Northwest outer woodland | 新增西北外侧 | 96 |
-| Gray Pine west woodland | 新增 Gray Pine 西段 | 170 |
-| Gray Pine middle woodland | 新增 Gray Pine 中段 | 165 |
-| Northeast outer woodland | 新增东北外侧 | 140 |
-| 合计 | 原 510 + 新增 696，七组 | 1,206 |
+| West outer woodland | 扩大并疏化的西外侧 | 85 |
+| Northwest outer woodland | 扩大并疏化的西北外侧 | 66 |
+| Gray Pine west woodland | 扩大并疏化的 Gray Pine 西段 | 150 |
+| Gray Pine middle woodland | 扩大并疏化的 Gray Pine 中段 | 150 |
+| Northeast outer woodland | 扩大并疏化的东北外侧 | 101 |
+| 合计 | 原 510 + 五片疏林 552，七组 | 1,062 |
 
-这七组树林是用户要求的环境补充，**不是卫星逐棵测绘，也不改写 CAD 建筑或道路**。五处新边界由截图地面锚点映射，估计定位精度约 **±10 m**；不能当作测绘边界。西北外侧按水道避让后的可用区域采用 96 棵，文档不沿用此前预计数量。
+下表仅比较五处外围树林，基线为 `Saved/ParkForestSpread/Before/site_geometry_report.json`（较密版本，提交 `dc15e22`）；“林地”采用报告中五组 `planted_ground_area_m2` 之和，不是整片 Ground 包络：
 
-新增森林的避让检查使用完整 CAD 道路与建筑保护区；树冠至道路、建筑及车道、园区、水道的策略净距为 `8 / 10 / 8 / 18 m`。CAD 内 10 条水道保持，七组最小实际树冠水道净距为 `18.403966 m`，树心最小间距 `5.701946 m`，符合至少 `5.7 m` 的约束。林地轮廓沿树群形成连续、圆润的斑块，保持道路、河道和住宅空隙。
+| 指标 | 较密基线 | 当前疏朗扩域版 |
+| --- | --- | --- |
+| 五片实际树木 | 696 | 552 |
+| 五片实际林地面积 | 43,858.823 m² | 86,999.352 m² |
+| 平均树木密度 | 158.691 棵/公顷 | 63.449 棵/公顷 |
+| 新组树心间距要求 | 5.7 m | 10 m |
 
-外围森林 Ground 包络单独扩展至约 `u=[−318.469,789.817]、v=[−347.407,592] m`，新增地面约 **208,517.797 m²**。只输出原地面之外的增量区域，与原地面重叠面积 **0 m²**；道路与住宅共享的 `scope` 未扩大，原林带地面也不重叠铺盖。新增林带地面裁去既有林带，避免共面叠加。
+覆盖达到基线 **1.984 倍**，平均密度降低约 **60.02%**。林地内采用变密度树群、较稀疏的边缘和宽阔自然空隙；部分外侧区域因水道或间距限制少于目标棵数，保留空隙，不重新加密填满。
 
-生成器唯一资源三角面上限为 **1,100,000**，本轮实际 **1,033,536**，包括六个植被／地面合并网格的增量；卡车按全部实例展开后的全场面数为 **2,180,032**。这个预算不是实时帧率承诺。
+五片新树到全部林树的实际最小中心距为 **10.005902 m**；包含原两片的全局最小值仍为 **5.701946 m**。两个指标的范围不同，不能用全局数值误判新组未达到 10 m。
+
+树林是用户要求的环境补充，**不是卫星逐棵测绘，也不改写 CAD 建筑或道路**。原五处边界由截图地面锚点映射，定位精度估计约 **±10 m**；本轮扩域同样属于展示调整。树冠至道路、建筑及车道、园区、水道的策略净距为 `8 / 10 / 8 / 18 m`，检查使用完整 CAD 道路与建筑保护区。CAD 内 10 条水道保持，当前最小实际树冠水道净距为 **18.063233 m**。
+
+外围森林 Ground 包络单独扩展至约 `u=[−346.541,818.904]、v=[−370.118,592] m`，相对原公共场景地面增加约 **261,350.716 m²**。只输出原地面之外的增量区域，重叠面积约 **6.69e-14 m²**，为浮点误差量级。道路与住宅共享的 `scope` 未扩大；原林带地面不被覆盖，新林地裁去原林地后再输出，避免共面叠加。
+
+生成器唯一资源三角面上限为 **1,100,000**，本轮实际 **987,014**；卡车按全部实例展开后的全场面数为 **2,133,510**。这个预算不是实时帧率承诺。
 
 ## 依赖与复现
 
@@ -166,7 +178,7 @@ DXF 提取复用 `Scripts/_vendor/cad/ezdxf`。Shapely 只负责离线路面合�
    [IO.File]::WriteAllText('D:/UEPro/Test/Saved/GHS_LiveRequest.json', ($parkRequest | ConvertTo-Json), [Text.UTF8Encoding]::new($false))
    ```
 
-   本轮先保留 `Saved/ParkForestFill/Before` 中的修改前 manifest、完整几何报告与地图。核对同 ID 的 `Saved/GHS_LiveStatus.json` 和新生成的 `Saved/ParkForestFill/apply_report.json`。局部脚本只原位导入 `Ground`、`Landscape`、`Trees`、`TreesDark`、`TreesLight`、`Trunk` 六个 FBX，复用已有材质，不销毁或重建 Actor，不修改相机或 27 个 HISM 卡车实例。导入前后比较全部 Actor 快照，校验变换、组件材质、标签及实例参数，再保存当前关卡。首次完整部署仍使用 `apply_park_expansion.py`，不要将完整重建入口代替本轮局部应用。`scene_overrides.json` 中 Ground → `M_GHSPark_Landscape`、Blue → `M_Zcool_Cobalt` 两项用户组件材质覆盖必须保留；Ground 既有 Actor 位置 `(170,240,0) cm` 也由局部导入保留。不要重采集或覆盖修改前基线。
+   本轮密度比较基线保存在 `Saved/ParkForestSpread/Before`；局部导入继续复用 `Saved/ParkForestFill/Before` 的原林带和编辑器保护基线，不覆盖任一修改前记录。核对同 ID 的 `Saved/GHS_LiveStatus.json` 和新生成的 `Saved/ParkForestFill/apply_report.json`。局部脚本只原位导入 `Ground`、`Landscape`、`Trees`、`TreesDark`、`TreesLight`、`Trunk` 六个 FBX，复用已有材质，不销毁或重建 Actor，不修改相机或 27 个 HISM 卡车实例。导入前后比较全部 Actor 快照，校验变换、组件材质、标签及实例参数，再保存当前关卡。首次完整部署仍使用 `apply_park_expansion.py`，不要将完整重建入口代替本轮局部应用。`scene_overrides.json` 中 Ground → `M_GHSPark_Landscape`、Blue → `M_Zcool_Cobalt` 两项用户组件材质覆盖必须保留；Ground 既有 Actor 位置 `(170,240,0) cm` 也由局部导入保留。不要重采集或覆盖修改前基线。
 
 4. 以相同请求方式依次运行 `validate_park_expansion.py`、`capture_park_expansion.py`、`capture_park_details.py`。每项完成并核对最新报告后再投递下一项。截图使用异步回调，桥接 `executed` 仅说明已启动，必须等待截图报告自身 `success` 及文件时间更新。
 
@@ -183,34 +195,34 @@ DXF 提取复用 `Scripts/_vendor/cad/ezdxf`。Shapely 只负责离线路面合�
 
 `Saved/ParkExpansion/scene_inspection.json`、`map_before.umap`、`source_map_baseline.json` 是原扩展前基线，须保留。导入前用户删除 `GHS_SiteTitle` 的证据在 `pre_import_changes.json`，不要恢复标题。验证器对其余 334 个原 Actor 的网格、材质、标签、变换与实例数据逐项比对，仅允许约定的相机变化。`Saved/ParkRefinement/Before` 是此前 CAD 细化前快照，不能当作本轮车辆植被细化后的验收结果。
 
-本轮额外基线位于 `Saved/ParkForestFill/Before`，导入前后所有 Actor 应一致，六个网格的几何内容是唯一修改范围。导入器只拒绝目标六网格存在未保存编辑的情况；其他未保存资产的 dirty 集合须前后相同。当前编辑器中的 7 个 Truck 材质未保存编辑不被重建或写盘，保持用户现有编辑状态。此前东北停车场版本的基线仍保存在 `Saved/ParkNortheast/Before`。当前两项用户组件材质覆盖已写入 `SourceAssets/GHS/Park/scene_overrides.json` 与 manifest：Ground 使用 `/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Landscape`，Blue 使用 `/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt`。Ground 的 Actor 位置为 `(170,240,0) cm`，是用户原有编辑状态；`Saved/ParkForestFill/Before/editor_snapshot.json` 与本轮 `reloaded_actors.json` 的该对象记录完全一致。用户已确认材质由本人手工修改，本轮登记和保护该状态，不把 Ground 恢复为默认材质或原点，也不修改共享 Cobalt 资产。27 台新展示卡车与原 52 台业务卡车的数量、身份、源资源哈希须分别检查。
+本轮较密版本对比基线位于 `Saved/ParkForestSpread/Before`，局部导入保护仍使用 `Saved/ParkForestFill/Before`。导入前后所有 Actor 应一致，六个网格的几何内容是唯一修改范围。导入器只拒绝目标六网格存在未保存编辑的情况；其他未保存资产的 dirty 集合须前后相同。当前编辑器中的 7 个 Truck 材质未保存编辑不被重建或写盘，保持用户现有编辑状态。此前东北停车场版本的基线仍保存在 `Saved/ParkNortheast/Before`。当前两项用户组件材质覆盖已写入 `SourceAssets/GHS/Park/scene_overrides.json` 与 manifest：Ground 使用 `/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Landscape`，Blue 使用 `/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt`。Ground 的 Actor 位置为 `(170,240,0) cm`，是用户原有编辑状态；`Saved/ParkForestFill/Before/editor_snapshot.json` 与本轮 `reloaded_actors.json` 的该对象记录完全一致。用户已确认材质由本人手工修改，本轮登记和保护该状态，不把 Ground 恢复为默认材质或原点，也不修改共享 Cobalt 资产。27 台新展示卡车与原 52 台业务卡车的数量、身份、源资源哈希须分别检查。
 
 ## 本轮验收证据
 
-**本轮六网格原位应用、保存重载与实际运行回归通过。** `Saved/ParkForestFill/apply_report.json` 确认只更新 `Ground`、`Landscape`、`Trees`、`TreesDark`、`TreesLight`、`Trunk`，没有新增或重建 Actor；359 个 Actor 的变换、组件材质、标签和实例快照保持。原 7 个 Truck 材质的 dirty 状态仍在，未被本轮导入修改、重建或保存。
+**本轮疏朗扩域版本验收通过。** 相对 `Saved/ParkForestSpread/Before` 保存的较密版本（提交 `dc15e22`），五片林地扩大为 1.984 倍、平均密度降低约 60.02%。本轮生成退出码为 0；manifest 为 22 个唯一网格、987,014 面、1,373 棵树。离线报告确认原 510 棵及原几何输出保持，五片疏林为 552 棵，新树到全部林树最小中心距 10.005902 m，确定性与避让检查通过。
 
-`Saved/ParkExpansion/saved_validation.json` 记录独立进程在 **2026-10-22 10:38:28（Asia/Shanghai）** 重载通过：334 个原对象保留，27 个 HISM 展示卡车实例及其材质绑定正确，原 52 台月台业务卡车不受影响，旧 NormalWarehouse 地图哈希保持。Ground 的 Landscape 组件覆盖、`(170,240,0) cm` 位置和 Blue 的 Cobalt 覆盖均按用户修改前状态保留。当前保存地图 SHA-256：
+`Saved/ParkForestFill/apply_report.json` 确认六网格原位导入成功，没有新增或重建 Actor；全部 359 个 Actor 的快照保持。Ground 的 Landscape 组件覆盖及 `(170,240,0) cm` 位置、Blue 的 Cobalt 覆盖均保持用户既有状态；原 7 个 Truck 材质仍未保存，本轮未重建、修改或写盘。原 52 台月台业务卡车与 27 台静态展示卡车保持独立身份。
+
+独立进程在 **2026-10-22 11:06:31（Asia/Shanghai）** 完成保存重载，`saved_validation.json.success=true`，334 个原对象和旧 NormalWarehouse 地图保持。当前地图 SHA-256 与磁盘文件一致：
 
 ```text
-e5ed08fe1960ef5b673360606bf2851b0c7dcb06bb039c212c6abde9482d5258
+44951d4361864ce80854b6b2ca647b8c1bcb4a550fb0761ee4d71cc26d736c03
 ```
 
-`Saved/ParkExpansion/runtime_report.json` 的 **14 项检查全部通过，耗时 58.156 秒**；报告绑定当前 manifest 哈希。检查覆盖 1920×1080／2560×1600 构图、面板收展、AGV-07 选择与详情、全景复位清除选中、货架区／地堆区聚焦及地图未被运行测试修改。设备／设施注册表保持 **106 / 56**，园区展示卡车未进入业务身份或 POI。
+本轮实际运行回归 **14 项检查全部通过，耗时 14.297 秒**，报告绑定当前 manifest。覆盖 1920×1080／2560×1600 构图、面板收展、AGV 详情、复位清除选中、货架区／地堆区聚焦及运行不修改地图；设备／设施保持 **106 / 56**，展示卡车不进入业务身份或 POI。
 
-本轮完成 **3 张全景、19 张细节截图**，包含新增的 `ForestFillOverview` 与 `ForestFill1`～`ForestFill5` 六张森林视图。原东北停车场、汽车、闭门卡车及西南两场继续纳入复核。最终 `Review` 已覆盖为 **24 张图片**，包含森林视图、运行截图与实拍拼图；`Review/acceptance.json` 于 2026-10-22 10:41:25（Asia/Shanghai）更新，地图／manifest 哈希与当前磁盘文件一致。该摘要同时登记图片哈希、Ground／Cobalt 用户覆盖、Ground 原有位置与 7 个仍未保存的 Truck 材质状态。
+**19 张细节截图**及六个森林视图已完成独立视觉复核，五片树林覆盖更广、树群更疏、空隙更自然，未见道路侵入。`Review` 已覆盖为 **24 张本轮图片**，`acceptance.json` 于 **2026-10-22 11:09:44（Asia/Shanghai）** 更新，记录 `forests.spread_revision` 中的前后面积／密度比较、用户覆盖、未保存材质状态与资产哈希。当前地图、manifest 及全部 24 张图片哈希逐项核对一致；较密版本仅作为比较基线，不作为并列的当前正式设计。
 
 | 范围 | 证据位置与用途 |
 | --- | --- |
-| 源完整性与配准 | `Saved/ParkRefinement/CAD/validation.json`、`CAD_registered_uv.png`、`CAD_warehouse_alignment.png`；保留 CAD 来源证据 |
-| 五处红框映射 | `Saved/ParkForestFill/region_mapping.json`、`reference_mapping_overlay.png`；约 ±10 m 的展示边界定位 |
-| 本轮离线生成 | `SourceAssets/GHS/Park/park_manifest.json`、`site_geometry_report.json`、`Saved/ParkForestFill/blender_geometry.log` |
-| 原林带保留与新增避让 | `Saved/ParkForestFill/forest_fill_verification.json`、`forest_fill_geometry.json`；原 510 棵及原输出保持、五处补林和确定性检查 |
-| 本轮修改前基线 | `Saved/ParkForestFill/Before`；地图、manifest、报告及导入前编辑器快照 |
-| 局部 UE 应用 | `Saved/ParkForestFill/apply_report.json`；六网格已更新、359 个 Actor 快照保持、7 个未保存 Truck 材质状态保留 |
-| UE 结构与材质保护 | `Saved/ParkExpansion/validation.json`；27 个 HISM 卡车实例、Ground／Cobalt 组件覆盖及业务身份检查通过 |
-| UE 保存重载 | `Saved/ParkExpansion/saved_validation.json`、`reloaded_actors.json`；本轮独立进程重载通过 |
-| UE 全景及近景 | `Saved/ParkExpansion/capture_report.json`、`Saved/ParkRefinement/detail_capture_report.json`；3 张全景与 19 张细节截图成功 |
-| 实际运行回归 | `Saved/ParkExpansion/runtime_report.json` 与 `Runtime_*.png`；14 项通过，设备／设施 106 / 56 |
-| 提交内的最终证据 | `SourceAssets/GHS/Park/Review/acceptance.json` 与 24 张图片；已覆盖旧归档，地图／manifest／图片哈希对应本轮 |
+| 当前生成结果 | `SourceAssets/GHS/Park/park_manifest.json`、`site_geometry_report.json`、`Saved/ParkForestFill/blender_geometry.log`；本轮生成退出码 0 |
+| 本轮修改前基线 | `Saved/ParkForestSpread/Before`；较密版本的地图、manifest、报告与编辑器状态 |
+| 原边界配准 | `Saved/ParkForestFill/region_mapping.json`、`reference_mapping_overlay.png`；约 ±10 m 的参考定位，本轮在此基础上扩域 |
+| 原林带保留与新布局 | `Saved/ParkForestFill/forest_fill_verification.json`；原 510 棵及原输出保持，五片疏林最小中心距 10.005902 m，确定性检查通过 |
+| 局部 UE 应用 | `Saved/ParkForestFill/apply_report.json`；六网格原位导入、全部 Actor 快照与用户材质状态保持 |
+| UE 保存重载 | `Saved/ParkExpansion/saved_validation.json`、`reloaded_actors.json`；11:06:31 独立进程重载通过 |
+| UE 视觉 | `Saved/ParkExpansion/capture_report.json`、`Saved/ParkRefinement/detail_capture_report.json`；本轮全景和 19 张细节截图，含六个森林视图 |
+| 实际运行回归 | `Saved/ParkExpansion/runtime_report.json` 与 `Runtime_*.png`；14 项通过，耗时 14.297 秒 |
+| 最终归档 | `SourceAssets/GHS/Park/Review/acceptance.json` 与 24 张图片；本轮已覆盖旧归档并核对全部哈希 |
 
 本轮不包含重新打包 EXE。静态网格面数、离线净距及结构检查不证明多人像素流或稳定 60 FPS；本轮环境细化不替代独立性能测试。

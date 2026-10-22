@@ -9,6 +9,7 @@ import random
 
 from shapely.geometry import Point,Polygon,LineString
 from shapely.ops import unary_union
+from shapely.affinity import scale as scale_shape
 
 from park_surfaces import emit_surface
 from park_vegetation import build_tree
@@ -28,15 +29,15 @@ FOREST_AREAS = (
 # instead of replacing them with axis-aligned bounding boxes.
 FOREST_FILL_AREAS = (
     ('West outer woodland', [(-303.486,30.045),(-211.008,22.010),
-                             (-165.955,145.302),(-251.122,152.710)], 125),
+                             (-165.955,145.302),(-251.122,152.710)], 100),
     ('Northwest outer woodland', [(-298.436,-254.247),(-227.010,-260.439),
-                                  (-188.940,-140.759),(-255.726,-134.963)], 96),
+                                  (-188.940,-140.759),(-255.726,-134.963)], 70),
     ('Gray Pine west woodland', [(-170.741,-316.104),(17.614,-332.429),
-                                 (35.187,-233.911),(-143.473,-218.415)], 170),
+                                 (35.187,-233.911),(-143.473,-218.415)], 150),
     ('Gray Pine middle woodland', [(171.704,-304.043),(305.933,-315.680),
-                                   (310.033,-169.445),(186.147,-158.693)], 165),
+                                   (310.033,-169.445),(186.147,-158.693)], 150),
     ('Northeast outer woodland', [(645.319,-310.580),(775.093,-321.834),
-                                  (755.602,-232.607),(631.908,-221.873)], 140),
+                                  (755.602,-232.607),(631.908,-221.873)], 120),
 )
 
 
@@ -64,27 +65,19 @@ def _grove_polygon(center,radius,phase):
 
 
 def _fill_grove_lobes(outline,index):
-    """Three connected, uneven groves follow each selected area's long axis."""
+    """Broad uneven woodland edge, without three repeated circular clumps."""
     def local(s,t):
         weights=((1-s)*(1-t),s*(1-t),s*t,(1-s)*t)
         return Point(*(sum(p[axis]*w for p,w in zip(outline,weights)) for axis in (0,1)))
 
-    width=(math.dist(outline[0],outline[1])+math.dist(outline[3],outline[2]))*.5
-    length=(math.dist(outline[0],outline[3])+math.dist(outline[1],outline[2]))*.5
-    short=min(width,length)
-    if max(width,length)>short*1.35:
-        # Off-axis centres leave alternating bays along the woodland edge.
-        layout=((.19,.43,.36),(.50,.61,.41),(.81,.41,.35))
-        if length>width:
-            layout=tuple((t,s,r) for s,t,r in layout)
-    else:
-        # The lower lobe links two upper clusters while leaving a shallow
-        # open bay; none of the source selection's four corners is filled.
-        layout=((.30,.32,.33),(.71,.36,.31),(.47,.72,.36))
-    centers=[(local(s,t),short*r) for s,t,r in layout]
-    grove=unary_union([_grove_polygon(point,radius,index*.791+i*1.357)
-                       for i,(point,radius) in enumerate(centers)])
-    return grove,centers
+    points=[]
+    for i in range(64):
+        angle=i*math.tau/64
+        radius=.65*(1+.12*math.sin(angle*2+index*.79)+.07*math.sin(angle*5-index))
+        p=local(.5+math.cos(angle)*radius,.5+math.sin(angle)*radius)
+        points.append((p.x,p.y))
+    grove=Polygon(points).buffer(3,quad_segs=8).buffer(-3,quad_segs=8)
+    return grove,[]
 
 
 def build_forests(api,cad,roads,occupied,scope,campus):
@@ -114,12 +107,13 @@ def build_forests(api,cad,roads,occupied,scope,campus):
     global_spacing=5.7
     bins={}
 
-    def is_spaced(point):
+    def is_spaced(point,minimum=global_spacing):
         key=(math.floor(point.x/global_spacing),math.floor(point.y/global_spacing))
-        for dx in (-1,0,1):
-            for dy in (-1,0,1):
+        reach=math.ceil(minimum/global_spacing)
+        for dx in range(-reach,reach+1):
+            for dy in range(-reach,reach+1):
                 for other in bins.get((key[0]+dx,key[1]+dy),[]):
-                    if math.dist((point.x,point.y),other)<global_spacing:
+                    if math.dist((point.x,point.y),other)<minimum:
                         return False
         return True
 
@@ -220,7 +214,8 @@ def build_forests(api,cad,roads,occupied,scope,campus):
     expanded_occupied=unary_union([occupied,*full_buildings])
     expanded_excluded=unary_union([expanded_roads.buffer(8),expanded_occupied.buffer(10),
                                    campus.buffer(8),water.buffer(18)])
-    requested=[Polygon(outline) for _,outline,_ in FOREST_FILL_AREAS]
+    requested=[scale_shape(Polygon(outline),xfact=1.4,yfact=1.4,origin='centroid')
+               for _,outline,_ in FOREST_FILL_AREAS]
     # Extend a single coherent rounded ground envelope, never the public site
     # scope used to filter roads and housing. Only emit the new exterior band:
     # the old ground stays byte-for-byte identical and has no overlaid face.
@@ -238,8 +233,8 @@ def build_forests(api,cad,roads,occupied,scope,campus):
     for fill_index,((name,outline,target),desired) in enumerate(zip(FOREST_FILL_AREAS,requested)):
         seed=173352210+fill_index*101
         fill_rng=random.Random(seed)
-        # Connected irregular lobes, rather than a softened rectangular tile,
-        # give every group a wavy perimeter, small bays and differing density.
+        # A broader irregular envelope keeps the reference centre but gives
+        # the trees open transitions and scattered margins, not tight clumps.
         grove,centers=_fill_grove_lobes(outline,fill_index)
         grove=grove.intersection(desired).intersection(forest_scope.buffer(-1)).difference(expanded_excluded)
         grove=grove.buffer(-.5,quad_segs=8).buffer(.5,quad_segs=8).intersection(grove)
@@ -257,12 +252,14 @@ def build_forests(api,cad,roads,occupied,scope,campus):
         placements=[]
         for attempt in range(target*250):
             if len(placements)>=target:break
-            if attempt%10<7:
-                center,radius=centers[fill_rng.randrange(len(centers))]
-                q=Point(fill_rng.gauss(center.x,radius*.47),fill_rng.gauss(center.y,radius*.47))
-            else:
-                q=Point(fill_rng.uniform(xmin,xmax),fill_rng.uniform(ymin,ymax))
-            if not grove.contains(q) or not is_spaced(q):continue
+            q=Point(fill_rng.uniform(xmin,xmax),fill_rng.uniform(ymin,ymax))
+            if not grove.contains(q) or not is_spaced(q,10.):continue
+            # Sparse edges and broad variable-density transitions prevent a
+            # uniformly filled perimeter even with deterministic spacing.
+            edge_distance=q.distance(grove.boundary)
+            density=.57+.18*math.sin(q.x*.038+fill_index)*math.cos(q.y*.045)
+            if edge_distance<12:density*=.55
+            if fill_rng.random()>density:continue
             # Larger mature crowns fill the distant red-box areas, with a
             # smaller fringe. A very light density variation avoids rows.
             if (math.sin(q.x*.083+fill_index)*math.cos(q.y*.077)>.72 and attempt%3):continue
@@ -288,10 +285,13 @@ def build_forests(api,cad,roads,occupied,scope,campus):
             placements.append(record);selected.append(record)
             key=(math.floor(q.x/global_spacing),math.floor(q.y/global_spacing))
             bins.setdefault(key,[]).append((q.x,q.y))
-        assert len(placements)==target,('Requested woodland under-filled',name,len(placements),target)
+        # Respect the 10 m spacing when river exclusion limits an outer site;
+        # the target is a cap rather than a reason to pack the grove tightly.
+        assert len(placements)>=target*.65,('Requested woodland under-filled',name,len(placements),target)
         groups.append(dict(name=name,target_trees=target,trees=len(placements),seed=seed,
                            reference='User red-box screenshot, 2026-10-22; +/-10m registration estimate',
-                           requested_polygon_uv_m=outline,available_area_m2=grove.area,
+                           requested_polygon_uv_m=outline,expanded_polygon_uv_m=list(desired.exterior.coords),
+                           new_tree_minimum_spacing_m=10.,available_area_m2=grove.area,
                            grove_centers_uv_m=[dict(center_uv_m=[p.x,p.y],radius_m=r) for p,r in centers],
                            planted_ground_area_m2=added_grove.area,
                            canopy_road_clearance_min_m=min(p['road_canopy_clearance_m'] for p in placements),
@@ -309,6 +309,7 @@ def build_forests(api,cad,roads,occupied,scope,campus):
     return dict(seed=173350210,total_trees=len(selected),triangles=len(selected)*320,
                 original_tree_count=original_tree_count,additional_tree_count=len(selected)-original_tree_count,
                 additional_group_count=len(FOREST_FILL_AREAS),public_site_scope_changed=False,
+                additional_tree_required_spacing_m=10.,
                 original_ground_overlap_m2=extra_ground.intersection(scope).area,
                 extended_ground_area_m2=extra_ground.area,
                 forest_scope_bounds_uv_m=list(forest_scope.bounds),

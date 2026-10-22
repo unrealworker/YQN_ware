@@ -1,9 +1,9 @@
 {
-  "date_local": "2026-10-22T10:41:25",
+  "date_local": "2026-10-22T11:09:44",
   "timezone": "Asia/Shanghai",
   "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
-  "map_sha256": "e5ed08fe1960ef5b673360606bf2851b0c7dcb06bb039c212c6abde9482d5258",
-  "manifest_sha256": "bb27f9ca5958154cb9a2c630e1057fd8a53996d1caaf1efdfaf638e9cfe2e000",
+  "map_sha256": "44951d4361864ce80854b6b2ca647b8c1bcb4a550fb0761ee4d71cc26d736c03",
+  "manifest_sha256": "8209548c81b29e53a1a1add0e7c7af0e29812b53ff08ddaa809551dbc560af9c",
   "old_map_preserved": true,
   "original_objects_checked": 334,
   "pre_import_changes": [
@@ -72,8 +72,8 @@
     "SM_GHSPark_Trunk"
   ],
   "all_actor_transforms_materials_tags_instances_preserved": true,
-  "triangles": 1033536,
-  "instanced_triangles_total": 2180032,
+  "triangles": 987014,
+  "instanced_triangles_total": 2133510,
   "context_counts": {
     "fence_posts": 604,
     "fence_bars": 6306,
@@ -81,8 +81,8 @@
     "gate_columns": 4,
     "perimeter_gates": 2,
     "landscape_shrubs": 260,
-    "low_poly_trees": 1517,
-    "clustered_broadleaf_trees": 1517,
+    "low_poly_trees": 1373,
+    "clustered_broadleaf_trees": 1373,
     "tree_candidates_omitted_for_road_clearance": 5,
     "parked_cars": 157,
     "detailed_compact_suv": 84,
@@ -102,7 +102,7 @@
     "satellite_infill_houses": 39,
     "residential_driveways": 338,
     "residential_yard_wall_segments": 856,
-    "woodland_trees": 1206,
+    "woodland_trees": 1062,
     "woodland_groups": 7,
     "light_poles": 4,
     "cad_road_segments": 79,
@@ -121,7 +121,7 @@
     "source_building_heights_all_3m_default": true
   },
   "saved_map_reload_passed": true,
-  "saved_map_reload_finished_utc": "2026-10-22T02:38:28.805314+00:00",
+  "saved_map_reload_finished_utc": "2026-10-22T03:06:31.607303+00:00",
   "runtime_checks": [
     {
       "name": "saved_campus_loaded_and_business_registry_preserved",
@@ -180,7 +180,7 @@
       "passed": true
     }
   ],
-  "runtime_elapsed_seconds": 58.15599999995902,
+  "runtime_elapsed_seconds": 14.297000000020489,
   "runtime_business_registry": {
     "equipment": 106,
     "facilities": 56
@@ -209,11 +209,20 @@
     "unchanged": true
   },
   "forests": {
-    "trees": 1206,
+    "trees": 1062,
     "groups": 7,
-    "added_trees": 696,
+    "added_trees": 552,
     "added_groups": 5,
     "original_trees_preserved": 510,
+    "spread_revision": {
+      "previous_trees": 696,
+      "trees": 552,
+      "previous_area_m2": 43858.822602766886,
+      "area_m2": 86999.35235476762,
+      "area_ratio": 1.9836226143763185,
+      "density_reduction_fraction": 0.6001742254157423,
+      "new_tree_minimum_distance_m": 10.005902216219097
+    },
     "clearance_policy_m": {
       "roads": 8,
       "buildings_and_driveways": 10,
@@ -525,219 +534,219 @@
   "images": [
     {
       "file": "SitePlan.png",
-      "sha256": "c044f2406698f9799cf09d3873c998bc43348fe295d2195ef5b06606f12ad484",
+      "sha256": "7d35d084a52d737c2454863ea7e3ee06012b5ee225dcc967838d5f1fcd95d1de",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 2147098
+      "bytes": 2326076
     },
     {
       "file": "Runtime_Overview_1920x1080.png",
-      "sha256": "d936d4ef3e8d508534d4e1eb325362a54b377a88e5a885d3af79cbfac0d0d312",
+      "sha256": "6f7ad3ad5baafee8e358facbd51a83015792e6420f107ae248830fc5fe14465e",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1767370
+      "bytes": 1786613
     },
     {
       "file": "Runtime_Overview_2560x1600.png",
-      "sha256": "08b6a37d4ec3663b056b5c814cac8f0f01f091da2c392ad0cdd3b8b4df1fc010",
+      "sha256": "eac9bbbc22b0cb333009eb57fe7bf95113738abb1457070b6c124eb245c8aa10",
       "dimensions": [
         2560,
         1600
       ],
-      "bytes": 3359655
+      "bytes": 3333717
     },
     {
       "file": "Runtime_AGV07_Focus.png",
-      "sha256": "241b0e09a8bb4cbe1b9da688db36ef294d3044426809c91ac4d0ad32c7552aa3",
+      "sha256": "4c961a40ff54bb1011351a51db76394794c959a25d700af32e8f01c3f150350c",
       "dimensions": [
         2560,
         1600
       ],
-      "bytes": 3312977
+      "bytes": 3625974
     },
     {
       "file": "SW_Gate.png",
-      "sha256": "887f6164a0396700f21ebb0eff4c317ea53a080a6493a2a8cbd6ecc95bc4acb6",
+      "sha256": "c12d2581c53419a29dc65176ee9d90a1a8e36081dd44345298442eb29c74abe7",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1865577
+      "bytes": 1923363
     },
     {
       "file": "NE_Gate.png",
-      "sha256": "2d429589a5702b6c942b49951dda769732cf2b424b1cd655fedbde928dec65a0",
+      "sha256": "b275324b5bfa40a72bd664e70002a5e865bc42eec23964b3957406f922f172ca",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1650443
+      "bytes": 1648850
     },
     {
       "file": "Housing.png",
-      "sha256": "2a8e2de645cc2462ade14bdf5fa4cf961ba8d2e115ff2002fb6387070348cfd4",
+      "sha256": "5dc4501de33f1841286615e9c493a1966bd8634a2d44096610209bf3eefdcb0a",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1702543
+      "bytes": 1602437
     },
     {
       "file": "TruckCourt.png",
-      "sha256": "b7d42b668b1ad188f29a038a27b0cdfde53f4534152e7d61e02e43483e79a3c9",
+      "sha256": "fb786cfa1f5707220ad4a78d784f0cd002512845321323e35055c40279d3c329",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1862818
+      "bytes": 1775705
     },
     {
       "file": "ParkingUpper.png",
-      "sha256": "c37815f7cdbd76668ec4374581263b0da88aa734bb7f2c8006cfc156f4adb28a",
+      "sha256": "cca5229d9f5d73a30047ce8859e76d4ec359ff5ce98c5e3e004a9d7deade51c7",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1576013
+      "bytes": 1576610
     },
     {
       "file": "ParkingLower.png",
-      "sha256": "c7f8a7502194aef06f68f27266af59c56be0e8c66bcb42f6e791e802f53d1dd0",
+      "sha256": "906d7affd9cf11d31332b6e6c921bfcf66b48542631bbf5788f2e1fa07b76280",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1611242
+      "bytes": 1610865
     },
     {
       "file": "TreeDetail.png",
-      "sha256": "352c30c89b7017290417162fdf425d7bb0adf69fe498e1c62243244ff5a5f5ef",
+      "sha256": "98edaee49d173dc0b414ec8bcb6667f127a40b1b6a146a6302a27acca7b4cc70",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 2087367
+      "bytes": 2146663
     },
     {
       "file": "WestForest.png",
-      "sha256": "b494e59e5bde2d63104602a038e0d4ed87ed54528c0f39a0ccd1f1477d35d1ab",
+      "sha256": "8762ea5f1612d6032ed96bb8d6b9e887d405a1420164197f886fc6b8c63f17ba",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1946028
+      "bytes": 1839050
     },
     {
       "file": "NortheastForest.png",
-      "sha256": "c38e78ad97ae96880f17d617347388517834e9746fdd87271dba9433c2a6ca26",
+      "sha256": "d04fee6e16bc07d90e96876042e3d5d5591e50d754f7d064d6cbe841f8a1c793",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1564608
+      "bytes": 1568744
     },
     {
       "file": "NE_Parking.png",
-      "sha256": "e9f867cd834897c060f8383ac1443fd4625b1c5132a756b62196b27954e65af6",
+      "sha256": "c9dd252194839c4070324e4d24dbc338b21c14dfb7fea88c393530b07cfd7a8f",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1563065
+      "bytes": 1466975
     },
     {
       "file": "VehicleDetail.png",
-      "sha256": "6b324517a7a6eb5d6ef56ad038d1215046724ace1631a24b6f28352a062c275a",
+      "sha256": "f4b93dcbd21a7870c02df3a2b5532498144bca301117ca12e277c84b9e272823",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 2105538
+      "bytes": 2110079
     },
     {
       "file": "DisplayTruckFront.png",
-      "sha256": "456d35556b231c65318110fa233e24ff151ac1e3d6540dfa0d2ad70a2597b738",
+      "sha256": "6318b4d9a99161772659f17ad8dfb5811e80bd3d03df22c3cbf4e965a4e761dc",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 2110098
+      "bytes": 2112236
     },
     {
       "file": "DisplayTruckRear.png",
-      "sha256": "683e00899d65b6781a20b73908fc14d4d5e901eeb9219867e05bc3aa0bb0aede",
+      "sha256": "fc1665269ff4d01d164a6435e84fc501154f81484f483386d1ff8b55c4f59cc3",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 2105006
+      "bytes": 2030402
     },
     {
       "file": "ForestFillOverview.png",
-      "sha256": "5b315273d474e17fe01bcb61543eb92c97854737293ccaf603b2e768fca83857",
+      "sha256": "91b05d32d51d7a2f4af12eaa9d660c53426cbc112dd8ce0679336804250b2513",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 2183743
+      "bytes": 2058410
     },
     {
       "file": "ForestFill1.png",
-      "sha256": "4d69de35ba1c98d6a9686f385d7f13a8cda9f276cba1e3ab2a110efdcb7c598d",
+      "sha256": "1ffc417c434a5434fc696d1a27ede0988858417f273ba6eaf0769ad23cd15d09",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1678503
+      "bytes": 1407993
     },
     {
       "file": "ForestFill2.png",
-      "sha256": "5b1a156641687d96627475f8d06a6fb69d97ee205d3fba1027f283d9bb35be6b",
+      "sha256": "0c086755c0874e7895a8ee76c3d896b9d0b4ae249c73a4f972987a722a848392",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1517147
+      "bytes": 1341566
     },
     {
       "file": "ForestFill3.png",
-      "sha256": "47fc61b5a7a923c7b09baf14a3feda60b911a66f6d94b220fb24e83adbd19889",
+      "sha256": "9e06a6b259718fa80bc374c48bcccaa3c6db147fbebc93bda4a010d0cf58b90d",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1517858
+      "bytes": 1436221
     },
     {
       "file": "ForestFill4.png",
-      "sha256": "d9f66537f69926b96641d972c41e4418907a8ce7f83082301acf0b0695f308da",
+      "sha256": "b8fce8d079cfb1e5d862cc18bfdf2446c51f56c2e35c9341e900843d1ad44227",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1497501
+      "bytes": 1456498
     },
     {
       "file": "ForestFill5.png",
-      "sha256": "17b52d7f11283ce187f1e7dd1db442e982cf9c900ba036275b5e9045dcf466ab",
+      "sha256": "48c46eb3102367f975f6e3f781f818107588920b547f6d45bbe8a28f0ab2cc25",
       "dimensions": [
         1920,
         1080
       ],
-      "bytes": 1559571
+      "bytes": 1219047
     },
     {
       "file": "Polish_Summary.png",
-      "sha256": "e7f36038cd9bdc029e0d41a0cd2fd65383ad477288c8b96597586efe291ac4ec",
+      "sha256": "3a939ea26cc5041b4d5e932a70318868b00f85f242c9e560428b4be96745f830",
       "dimensions": [
         1952,
         1910
       ],
-      "bytes": 2196929
+      "bytes": 1840740
     }
   ],
   "performance_benchmark": false,
