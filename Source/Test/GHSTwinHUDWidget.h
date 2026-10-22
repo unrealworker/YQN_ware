@@ -14,6 +14,7 @@ class SWebBrowser;
 class UCanvasPanelSlot;
 class SGHSTwinEditableText;
 class UGHSTwinHUDWidget;
+class UGHSWarehouseRoofComponent;
 
 /** Native IME context remains owned by Slate; composition is never queried prematurely. */
 UCLASS()
@@ -75,6 +76,8 @@ public:
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetSnapshot() const;
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool SelectObject(const FString& Id, bool bFocus = true);
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void ClearSelection();
+    UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool OpenWarehouse();
+    UFUNCTION(BlueprintPure, Category="Warehouse Twin") bool IsInteriorAvailable() const;
     /** Controller-facing positions remain physical viewport pixels, including high DPI. */
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool HandleSceneClick(FVector2D Position);
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") bool IsScenePoint(FVector2D Position) const;
@@ -121,6 +124,13 @@ private:
     void Focus(const FString& Id);
     void Overview();
     void FocusRegion(const FString& Region);
+    UGHSWarehouseRoofComponent* Roof() const;
+    bool QueueInteriorAction(const FString& Action,const FString& Id,bool bFocus=true);
+    void UpdateWarehousePOI();
+    FString PendingInteriorAction,PendingInteriorId;
+    bool bPendingInteriorFocus=true,bLastInteriorAvailable=false;
+    bool bWarehousePOIVisible=false,bWarehousePOIHovered=false;
+    FVector2D WarehousePOIPosition=FVector2D::ZeroVector,WarehousePOIAnchor=FVector2D::ZeroVector;
     void RefreshSearch(int32 Offset=INDEX_NONE);
     void MoveSearchSelection(int32 Delta);
     void PushSearchState(bool bForce=false);

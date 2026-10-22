@@ -3,6 +3,8 @@
 #include "GHSDockTruckHUDWidget.h"
 #include "GHSTwinHUDWidget.h"
 #include "GHSTwinViewport.h"
+#include "GHSWarehouseRoofComponent.h"
+#include "GHSCampusTrafficActor.h"
 #include "Engine/GameViewportClient.h"
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/PlayerInput.h"
@@ -30,6 +32,7 @@ AGHSWarehousePlayerController::AGHSWarehousePlayerController()
     bEnableClickEvents = false;
     bEnableMouseOverEvents = false;
     SearchStreamingInput=CreateDefaultSubobject<UPixelStreamingInput>(TEXT("SceneSearchStreamingInput"));
+    WarehouseRoof=CreateDefaultSubobject<UGHSWarehouseRoofComponent>(TEXT("WarehouseRoof"));
 }
 
 void AGHSWarehousePlayerController::BeginPlay()
@@ -40,6 +43,7 @@ void AGHSWarehousePlayerController::BeginPlay()
     {
         if (GetWorld()->GetMapName().Contains(TEXT("ZcoolSmartFactory")))
         {
+            CampusTraffic=GetWorld()->SpawnActor<AGHSCampusTrafficActor>();
             TwinHUDWidget = CreateWidget<UGHSTwinHUDWidget>(this);
             if (TwinHUDWidget && GetWorld()->GetGameViewport())
             {
@@ -83,6 +87,7 @@ void AGHSWarehousePlayerController::EndPlay(const EEndPlayReason::Type EndPlayRe
     if (TruckHUDWidget) { TruckHUDWidget->RemoveFromParent(); TruckHUDWidget = nullptr; }
     if (TwinViewportWidget.IsValid() && GetWorld()->GetGameViewport()) GetWorld()->GetGameViewport()->RemoveViewportWidgetContent(TwinViewportWidget.ToSharedRef());
     TwinViewportWidget.Reset(); TwinHUDWidget=nullptr;
+    if(CampusTraffic) { CampusTraffic->Destroy(); CampusTraffic=nullptr; }
     Super::EndPlay(EndPlayReason);
 }
 

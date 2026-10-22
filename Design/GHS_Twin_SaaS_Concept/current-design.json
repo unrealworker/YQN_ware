@@ -1,6 +1,6 @@
 {
   "updated": "2026-10-22",
-  "status": "approved_base_with_pending_warehouse_poi_design",
+  "status": "approved_warehouse_poi_direct_open",
   "source": "Saas.pen",
   "previewDirectory": "exports/current",
   "style": {
@@ -25,7 +25,7 @@
     },
     {
       "id": "CLx7Q",
-      "name": "01 · 总览 / 仓库空间态势",
+      "name": "01 · 内部总览 / 仓库空间态势",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/CLx7Q.png"
@@ -235,34 +235,33 @@
     },
     {
       "id": "cgOha",
-      "name": "31 · 园区默认 / 唯一主仓库 POI 提案",
+      "name": "31 · 园区默认 / 唯一主仓库 POI",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/cgOha.png",
-      "status": "awaiting_user_review"
+      "status": "approved_for_implementation"
     },
     {
       "id": "q2RKW8",
-      "name": "32 · 主仓库选中 / 查看内部提案",
+      "name": "32 · 点击开顶 / 0.5 秒溶解流程",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/q2RKW8.png",
-      "status": "awaiting_user_review"
+      "status": "approved_for_implementation"
     },
     {
       "id": "M0wx5h",
-      "name": "33 · 主仓库 POI / 状态与交互提案",
+      "name": "33 · 主仓库 POI / 当前交互规范",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/M0wx5h.png",
-      "status": "awaiting_user_review"
+      "status": "approved_for_implementation"
     }
   ],
-  "approvedScope": "00-30: previously approved design; implementation status is unchanged",
-  "pendingProposal": {
-    "name": "主仓库 POI 与屋顶分层",
-    "status": "awaiting_user_review",
-    "implemented": false,
+  "approvedScope": "00-33 approved; main warehouse direct-open interaction updated on 2026-10-22; board 01 is interior overview",
+  "warehousePOI": {
+    "name": "主仓库 POI 与屋顶交互",
+    "status": "approved_for_implementation",
     "spec": "warehouse-poi-design.md",
     "artboards": [
       "cgOha",
@@ -271,8 +270,12 @@
     ],
     "components": {
       "default": "cwZ7S",
-      "hover": "Gjygy",
-      "expanded": "nkhot"
-    }
+      "hover": "Gjygy"
+    },
+    "click": "open_roof_directly",
+    "dissolveSeconds": 0.5,
+    "direction": "center_to_both_sides",
+    "reset": "restore_roof_and_campus_view",
+    "focus": "wait_until_roof_hidden_then_focus"
   }
 }

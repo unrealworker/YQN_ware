@@ -1,6 +1,7 @@
 #include "GHSTwinHUDWidget.h"
 #include "GHSWarehousePlayerController.h"
 #include "GHSWarehouseCameraPawn.h"
+#include "GHSWarehouseRoofComponent.h"
 #include "GHSHUDMotion.h"
 #include "Blueprint/WidgetTree.h"
 #include "Components/CanvasPanel.h"
@@ -376,6 +377,7 @@ void UGHSTwinHUDWidget::Command(const FString& Json)
         UpdateBrowserVisibility(true);
         UE_LOG(LogTemp,Display,TEXT("GHS_TWIN_BROWSER_READY"));
     }
+    else if(Action==TEXT("openWarehouse")) OpenWarehouse();
     else if(Action==TEXT("select")) SelectObject(Id);
     else if(Action==TEXT("focus")) Focus(Id);
     else if(Action==TEXT("clear")) ClearSelection();
@@ -410,6 +412,7 @@ bool UGHSTwinHUDWidget::SelectObject(const FString& Id,bool bFocus)
 {
     if(Id.StartsWith(TEXT("RACK:"))) return false;
     FVector Location,Extent; if(!SceneData.Resolve(Id,Location,Extent)) return false;
+    if(!IsInteriorAvailable()) return QueueInteriorAction(TEXT("select"),Id,bFocus);
     const bool bOpening=bPanelCollapsed;
     SelectedId=Id; ActiveRegionId.Empty(); POICadence.Invalidate();
     // Selection may open a previously collapsed panel. Use its final content area once.
@@ -418,11 +421,57 @@ bool UGHSTwinHUDWidget::SelectObject(const FString& Id,bool bFocus)
     if(bOpening) SetPanelCollapsed(false,true); else PushSnapshot(true);
     return true;
 }
-void UGHSTwinHUDWidget::ClearSelection() { SelectedId.Empty(); ActiveRegionId.Empty(); POICadence.Invalidate(); bSelectedScreenBoundsValid=false; PushSnapshot(); if(Panel) Panel->Evaluate(TEXT("window.twinClearSelection && window.twinClearSelection();")); }
+void UGHSTwinHUDWidget::ClearSelection() { PendingInteriorAction.Empty(); PendingInteriorId.Empty(); SelectedId.Empty(); ActiveRegionId.Empty(); POICadence.Invalidate(); bSelectedScreenBoundsValid=false; PushSnapshot(); if(Panel) Panel->Evaluate(TEXT("window.twinClearSelection && window.twinClearSelection();")); }
+UGHSWarehouseRoofComponent* UGHSTwinHUDWidget::Roof() const
+{
+    const auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer());
+    return PC?PC->WarehouseRoof.Get():nullptr;
+}
+bool UGHSTwinHUDWidget::IsInteriorAvailable() const
+{ const auto* R=Roof(); return !R || R->IsInteriorAvailable(); }
+bool UGHSTwinHUDWidget::OpenWarehouse()
+{
+    ClearSelection(); SetSearchOpen(false); bWarehouseMenuOpen=false;
+    auto* R=Roof();
+    if(!R || !R->OpenRoof()) return false;
+    bWarehousePOIVisible=false; VisibleLabels.Reset(); PreviousVisibleLabels.Reset();
+    POICadence.Invalidate(); return true;
+}
+bool UGHSTwinHUDWidget::QueueInteriorAction(const FString& Action,const FString& Id,bool bFocus)
+{
+    if(!OpenWarehouse()) return false;
+    PendingInteriorAction=Action; PendingInteriorId=Id; bPendingInteriorFocus=bFocus;
+    // Keep the current view still until the full roof is gone. Latest request wins.
+    if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn())) Cam->FreezeCurrentPose();
+    return true;
+}
+void UGHSTwinHUDWidget::UpdateWarehousePOI()
+{
+    bWarehousePOIVisible=false; bWarehousePOIHovered=false;
+    auto* R=Roof(); auto* PC=GetOwningPlayer();
+    if(!R || !R->HasRoof() || !R->IsRoofClosed() || !PC) return;
+    FVector2D Anchor;
+    if(!PC->ProjectWorldLocationToScreen(R->GetPOIWorldLocation(),Anchor,false)) return;
+    Anchor=Viewport.ToLogical(Anchor);
+    if(!Layout.IsScenePoint(Anchor)) return;
+    const FVector2D Size(268,64);
+    FVector2D At=Anchor-FVector2D(134,124);
+    At.X=FMath::Clamp(At.X,Layout.ScenePosition.X+12,FMath::Max(Layout.ScenePosition.X+12,Layout.ScenePosition.X+Layout.SceneSize.X-Size.X-12));
+    At.Y=FMath::Max(At.Y,Layout.HeaderHeight+112.);
+    if(!Layout.IsScenePoint(At+Size)) return;
+    if(IsSceneSearchVisible() && At.X<GetSceneSearchPosition().X+GetSceneSearchSize().X && At.X+Size.X>GetSceneSearchPosition().X && At.Y<GetSceneSearchPosition().Y+GetSceneSearchSize().Y) return;
+    WarehousePOIPosition=At; WarehousePOIAnchor=Anchor; bWarehousePOIVisible=true;
+    FVector2D CursorPosition;
+    bWarehousePOIHovered=PC->GetMousePosition(CursorPosition.X,CursorPosition.Y) && Inside(Viewport.ToLogical(CursorPosition),At,Size);
+}
 void UGHSTwinHUDWidget::Overview()
 {
     SetSearchOpen(false); bWarehouseMenuOpen=false;
     ClearSelection();
+    if(auto* R=Roof()) R->RestoreRoof();
+    VisibleLabels.Reset(); PreviousVisibleLabels.Reset(); PreviousPositions.Reset(); LabelAges.Reset();
+    bWarehousePOIVisible=false;
+    POICadence.Invalidate();
     if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn()))
     {
         const auto Destination=FGHSTwinLayout::Calculate(ViewSize,bPanelCollapsed);
@@ -432,6 +481,7 @@ void UGHSTwinHUDWidget::Overview()
 void UGHSTwinHUDWidget::Focus(const FString& Id)
 {
     FVector Location,Extent; if(!SceneData.Resolve(Id,Location,Extent)) return;
+    if(!IsInteriorAvailable()) {QueueInteriorAction(TEXT("focus"),Id);return;}
     if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer())) PC->CancelCameraDrag();
     if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn()))
     {
@@ -446,6 +496,7 @@ void UGHSTwinHUDWidget::Focus(const FString& Id)
 void UGHSTwinHUDWidget::FocusRegion(const FString& Region)
 {
     FVector Center,Extent; if(!SceneData.RegionBounds(Region,Center,Extent)) return;
+    if(!IsInteriorAvailable()) {QueueInteriorAction(TEXT("region"),Region);return;}
     if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer())) PC->CancelCameraDrag();
     if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn()))
     {
@@ -476,7 +527,7 @@ bool UGHSTwinHUDWidget::HandleChromeClick(FVector2D Position)
     if(bSearchOpen && !Inside(Position,GetSceneSearchPosition(),GetSceneSearchSize())) SetSearchOpen(false);
     if(Position.Y<Layout.HeaderHeight && Position.X>ViewSize.X-112)
     { SetPanelCollapsed(!bPanelCollapsed); return true; }
-    const int32 TypeIndex=FGHSTwinSceneChrome::FilterAt(Position,Layout);
+    const int32 TypeIndex=IsInteriorAvailable()?FGHSTwinSceneChrome::FilterAt(Position,Layout):INDEX_NONE;
     if(TypeIndex!=INDEX_NONE)
     {
         PointFilter=TypeIndex==1?TEXT("rack"):TypeIndex==2?TEXT("truck"):TypeIndex==3?TEXT("charger"):TEXT("all");
@@ -490,6 +541,14 @@ bool UGHSTwinHUDWidget::HandleSceneClick(FVector2D Position)
     if(HandleChromeClick(Position)) return true;
     if(!IsScenePoint(Position)) return false;
     const FVector2D LogicalPosition=Viewport.ToLogical(Position);
+    if(!IsInteriorAvailable())
+    {
+        auto* R=Roof(); FVector Origin,Direction;
+        if(R && R->IsRoofClosed() && ((bWarehousePOIVisible && Inside(LogicalPosition,WarehousePOIPosition,FVector2D(268,64))) ||
+            (GetOwningPlayer()->DeprojectScreenPositionToWorld(Position.X,Position.Y,Origin,Direction) && R->HitRoofRay(Origin,Direction)))) OpenWarehouse();
+        // Bounds-based equipment picking must never run through an opaque or dissolving roof.
+        return true;
+    }
     for(int32 I=VisibleLabels.Num()-1; I>=0; --I) if(Inside(LogicalPosition,Labels[VisibleLabels[I]].Position,Labels[VisibleLabels[I]].Size))
     {
         const auto& Label=Labels[VisibleLabels[I]];
@@ -577,8 +636,19 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
     }
     else if(bSearchOpen && SearchRevision!=SceneData.GetRevision()) RefreshSearch();
     PushSearchState();
+    const bool bInterior=IsInteriorAvailable();
+    if(bInterior!=bLastInteriorAvailable) {bLastInteriorAvailable=bInterior;POICadence.Invalidate();}
+    if(bInterior && !PendingInteriorAction.IsEmpty())
+    {
+        const FString Action=PendingInteriorAction,Id=PendingInteriorId;const bool bFocus=bPendingInteriorFocus;
+        PendingInteriorAction.Empty();PendingInteriorId.Empty();
+        if(Action==TEXT("select")) SelectObject(Id,bFocus);
+        else if(Action==TEXT("focus")) Focus(Id);
+        else if(Action==TEXT("region")) FocusRegion(Id);
+    }
+    UpdateWarehousePOI();
     UpdateSelectedScreenBounds();
-    if(!bShowPOIs || !GetOwningPlayer())
+    if(!bInterior || !bShowPOIs || !GetOwningPlayer())
     { VisibleLabels.Reset();PreviousVisibleLabels.Reset();PreviousPositions.Reset();LabelAges.Reset();return; }
     auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn());
     const bool bAggregate=Cam && Cam->SpringArmComponent->TargetArmLength>14000 && Density!=TEXT("all");
@@ -641,7 +711,7 @@ void UGHSTwinHUDWidget::UpdateSelectedScreenBounds()
 {
     TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_SelectedProjection);
     bSelectedScreenBoundsValid=false;
-    if(SelectedId.IsEmpty() || !GetOwningPlayer()) return;
+    if(!IsInteriorAvailable() || SelectedId.IsEmpty() || !GetOwningPlayer()) return;
     FVector Center,Extent;if(!SceneData.Resolve(SelectedId,Center,Extent)) return;
     SelectedScreenMin=FVector2D(1.e8,1.e8);SelectedScreenMax=FVector2D(-1.e8,-1.e8);
     for(int32 I=0;I<8;++I)
@@ -712,7 +782,13 @@ void UGHSTwinHUDWidget::UpdateVisiblePOIs(float DeltaSeconds,bool bRelayout)
 FString UGHSTwinHUDWidget::GetPOIReport() const
 {
     TArray<TSharedPtr<FJsonValue>> Items;
-    for(const int32 Index:VisibleLabels)
+    if(bWarehousePOIVisible && Roof() && Roof()->IsRoofClosed())
+    {
+        auto Item=MakeShared<FJsonObject>();Item->SetStringField(TEXT("id"),TEXT("WAREHOUSE:GHS"));
+        Item->SetStringField(TEXT("icon"),TEXT("warehouse"));Item->SetNumberField(TEXT("x"),WarehousePOIPosition.X);Item->SetNumberField(TEXT("y"),WarehousePOIPosition.Y);
+        Item->SetNumberField(TEXT("width"),268);Item->SetNumberField(TEXT("height"),64);Items.Add(MakeShared<FJsonValueObject>(Item));
+    }
+    if(IsInteriorAvailable()) for(const int32 Index:VisibleLabels)
     {
         const auto& Label=Labels[Index];
         auto Item=MakeShared<FJsonObject>(); Item->SetStringField(TEXT("id"),Label.Id); Item->SetStringField(TEXT("icon"),Label.Kind);
@@ -728,6 +804,10 @@ FString UGHSTwinHUDWidget::GetPOIReport() const
     }
     auto Root=MakeShared<FJsonObject>(); Root->SetArrayField(TEXT("labels"),Items); Root->SetNumberField(TEXT("selectionStroke"),6);
     Root->SetStringField(TEXT("pointFilter"),PointFilter);
+    Root->SetBoolField(TEXT("interiorAvailable"),IsInteriorAvailable());
+    Root->SetStringField(TEXT("pendingNavigation"),PendingInteriorAction);
+    if(const auto* R=Roof())
+    {Root->SetBoolField(TEXT("roofClosed"),R->IsRoofClosed());Root->SetBoolField(TEXT("roofOpening"),R->IsOpening());Root->SetNumberField(TEXT("roofProgress"),R->GetOpenProgress());}
     if(bDiagnostics)
     {
         TArray<TSharedPtr<FJsonValue>> Regions;
@@ -772,14 +852,14 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
     Text(FVector2D(48,Layout.HeaderHeight+65),TEXT("普通仓库 · ")+Area.Left(12),11,C(TEXT("5B6C82")));
     Line(FVector2D(252,Layout.HeaderHeight+53),FVector2D(257,Layout.HeaderHeight+58),C(TEXT("5B6C82")),1.5);
     Line(FVector2D(257,Layout.HeaderHeight+58),FVector2D(262,Layout.HeaderHeight+53),C(TEXT("5B6C82")),1.5);
-    if(FGHSTwinSceneChrome::FiltersVisible(Layout))
+    if(IsInteriorAvailable() && FGHSTwinSceneChrome::FiltersVisible(Layout))
     {
         Text(FVector2D(32,Layout.HeaderHeight+116),TEXT("按类型查看"),11,C(TEXT("5B6C82")));
         const TCHAR* Names[]={TEXT("全部设备"),TEXT("货架区域"),TEXT("装卸车辆"),TEXT("充电设施")};
         const TCHAR* Filters[]={TEXT("all"),TEXT("rack"),TEXT("truck"),TEXT("charger")};
         for(int I=0;I<4;++I) { const FVector2D At=FGHSTwinSceneChrome::FilterPosition(Layout.HeaderHeight,I); Box(At,FGHSTwinSceneChrome::FilterSize(),FLinearColor::White,FGHSTwinSceneChrome::CornerRadius,C(PointFilter==Filters[I]?TEXT("356BFA"):TEXT("E5EAF2")),PointFilter==Filters[I]?3.f:1.f); Text(At+FVector2D(15,12),Names[I],11,C(PointFilter==Filters[I]?TEXT("356BFA"):TEXT("25364B"))); }
     }
-    if(bSelectedScreenBoundsValid && Layout.IsScenePoint((SelectedScreenMin+SelectedScreenMax)*.5))
+    if(IsInteriorAvailable() && bSelectedScreenBoundsValid && Layout.IsScenePoint((SelectedScreenMin+SelectedScreenMax)*.5))
     {
         // Tick already projected the eight model corners for POI avoidance.
         FVector2D Min=SelectedScreenMin,Max=SelectedScreenMax;
@@ -787,9 +867,29 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
         const FLinearColor Blue=C(TEXT("356BFA"));
         for(const float Width:{9.f,6.f}) for(int I=0;I<4;++I) {const FVector2D P(I&1?Max.X:Min.X,I&2?Max.Y:Min.Y);const FLinearColor Ink=Width>6?FLinearColor::White:Blue;Line(P,P+FVector2D(I&1?-28:28,0),Ink,Width);Line(P,P+FVector2D(0,I&2?-28:28),Ink,Width);}
     }
+    if(bWarehousePOIVisible && Roof() && Roof()->IsRoofClosed())
+    {
+        const FVector2D At=WarehousePOIPosition,Anchor=WarehousePOIAnchor,Size(268,64);
+        const FLinearColor Blue=C(TEXT("356BFA"));
+        Line(At+FVector2D(134,64),Anchor,Blue.CopyWithNewOpacity(.75f),1.5f);
+        Box(Anchor-FVector2D(15,7),FVector2D(30,14),FLinearColor::White,7,Blue.CopyWithNewOpacity(.45f));
+        Box(Anchor-FVector2D(3,3),FVector2D(6,6),Blue,3);
+        Box(At+FVector2D(0,4),Size,FLinearColor(.05,.10,.18,.08),12);
+        Box(At,Size,FLinearColor::White,12,bWarehousePOIHovered?Blue:C(TEXT("D6DFEC")),bWarehousePOIHovered?2.f:1.f);
+        Box(At+FVector2D(14,14),FVector2D(36,36),C(TEXT("EDF3FF")),8);
+        const FVector2D Icon=At+FVector2D(21,21);
+        auto WarehouseLine=[&](FVector2D A,FVector2D B){Line(Icon+A,Icon+B,Blue,1.5f);};
+        WarehouseLine({0,7},{11,1});WarehouseLine({11,1},{22,7});WarehouseLine({2,7},{2,21});WarehouseLine({20,7},{20,21});WarehouseLine({2,21},{20,21});
+        WarehouseLine({7,21},{7,11});WarehouseLine({7,11},{15,11});WarehouseLine({15,11},{15,21});WarehouseLine({7,15},{15,15});
+        const auto Title=GHSTwinTypography::Measure(TEXT("GHS · 主仓库"),Font(16));
+        const auto Subtitle=GHSTwinTypography::Measure(TEXT("普通仓库 · 点击查看"),Font(12));
+        Text(At+FVector2D(62,10+Title.CenteredOriginY(24)),TEXT("GHS · 主仓库"),16,C(TEXT("25364B")));
+        Text(At+FVector2D(62,36+Subtitle.CenteredOriginY(18)),TEXT("普通仓库 · 点击查看"),12,C(TEXT("5B6C82")));
+        Line(At+FVector2D(243,26),At+FVector2D(249,32),Blue,1.5f);Line(At+FVector2D(249,32),At+FVector2D(243,38),Blue,1.5f);
+    }
     // Render stems beneath every card. A tag moved below its anchor connects
     // from the top edge; neither its stem nor its anchor may overwrite text.
-    for(const int32 Index:VisibleLabels)
+    if(IsInteriorAvailable()) for(const int32 Index:VisibleLabels)
     {
         const FLabel& L=Labels[Index];
         if(Inside(L.Anchor,L.Position-FVector2D(2,2),L.Size+FVector2D(4,4))) continue;
@@ -800,7 +900,7 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
         FSlateDrawElement::MakeLines(Elements,++Layer,G.ToPaintGeometry(FVector2D(24,10),FSlateLayoutTransform(L.Anchor)),UnitAnchorEllipse(),ESlateDrawEffect::None,Accent.CopyWithNewOpacity(.55f*L.Opacity),true,1.f);
         Box(L.Anchor-FVector2D(3,3),FVector2D(6,6),Accent.CopyWithNewOpacity(L.Opacity),3);
     }
-    for(const int32 Index:VisibleLabels)
+    if(IsInteriorAvailable()) for(const int32 Index:VisibleLabels)
     {
         const FLabel& L=Labels[Index];
         auto Fade=[&](FLinearColor Color){Color.A*=L.Opacity;return Color;};
@@ -863,6 +963,6 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
         Text(At+FVector2D(16,Drop.Size.Y-27),FString::Printf(TEXT("↑ ↓ / 滚轮   %d / %d   Enter 定位   Esc 收起"),SearchIndex==INDEX_NONE?0:SearchOffset+SearchIndex+1,SearchTotal),10,C(TEXT("5B6C82")));
     }
     DrawOpacity=1;
-    if(Layout.SceneSize.X>650) Text(FVector2D(22,Layout.ScenePosition.Y+Layout.SceneSize.Y-32),TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  中键复位  ·  点击查看详情"),11,C(TEXT("5B6C82")));
+    if(Layout.SceneSize.X>650) Text(FVector2D(22,Layout.ScenePosition.Y+Layout.SceneSize.Y-32),IsInteriorAvailable()?TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  中键返回园区  ·  点击查看详情"):TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  点击仓库查看内部"),11,C(TEXT("5B6C82")));
     return Layer;
 }
