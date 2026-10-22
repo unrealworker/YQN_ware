@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "GHSTwinHeaderLayout.h"
 
 /** Design units: high-resolution scaling belongs to FGHSTwinViewport. */
 struct FGHSTwinLayout
@@ -10,7 +11,7 @@ struct FGHSTwinLayout
     {
         FGHSTwinLayout L;
         Viewport.X = FMath::Max(1., Viewport.X); Viewport.Y = FMath::Max(1., Viewport.Y);
-        L.HeaderHeight = Viewport.X < 700 ? 52 : 64;
+        L.HeaderHeight = FGHSTwinHeaderLayout::Calculate(Viewport.X).Height;
         L.ScenePosition = FVector2D(0, L.HeaderHeight);
         if (bCollapsed)
         {

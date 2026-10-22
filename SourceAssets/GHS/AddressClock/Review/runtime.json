@@ -1,0 +1,97 @@
+{
+  "success": true,
+  "checks": [
+    {
+      "name": "real_wall_time_ticks",
+      "before": {
+        "time": "08:34:56",
+        "date": "2026.10.22 · PDT (UTC−07:00)",
+        "zone": "America/Los_Angeles",
+        "headerHeight": 64,
+        "width": 1919.9998779296875,
+        "addressX": 440,
+        "addressY": 8,
+        "clockX": 1517.9998779296875,
+        "clockY": 8
+      },
+      "after": {
+        "time": "08:34:57",
+        "date": "2026.10.22 · PDT (UTC−07:00)",
+        "zone": "America/Los_Angeles",
+        "headerHeight": 64,
+        "width": 1919.9998779296875,
+        "addressX": 440,
+        "addressY": 8,
+        "clockX": 1517.9998779296875,
+        "clockY": 8
+      }
+    },
+    {
+      "name": "clock_continues_while_scene_paused",
+      "after": {
+        "time": "08:34:58",
+        "date": "2026.10.22 · PDT (UTC−07:00)",
+        "zone": "America/Los_Angeles",
+        "headerHeight": 64,
+        "width": 1919.9998779296875,
+        "addressX": 440,
+        "addressY": 8,
+        "clockX": 1517.9998779296875,
+        "clockY": 8
+      }
+    },
+    {
+      "name": "responsive_header_1024",
+      "clock": {
+        "time": "08:34:59",
+        "date": "2026.10.22 · PDT (UTC−07:00)",
+        "zone": "America/Los_Angeles",
+        "headerHeight": 64,
+        "width": 1024,
+        "addressX": 300,
+        "addressY": 8,
+        "clockX": 622,
+        "clockY": 8
+      }
+    },
+    {
+      "name": "responsive_header_800",
+      "clock": {
+        "time": "08:35:01",
+        "date": "2026.10.22 · PDT (UTC−07:00)",
+        "zone": "America/Los_Angeles",
+        "headerHeight": 112,
+        "width": 800.0000610351562,
+        "addressX": 24,
+        "addressY": 56,
+        "clockX": 510.00006103515625,
+        "clockY": 56
+      }
+    },
+    {
+      "name": "responsive_header_390",
+      "clock": {
+        "time": "08:35:03",
+        "date": "2026.10.22 · PDT (UTC−07:00)",
+        "zone": "America/Los_Angeles",
+        "headerHeight": 168,
+        "width": 390,
+        "addressX": 24,
+        "addressY": 56,
+        "clockX": 24,
+        "clockY": 112
+      }
+    },
+    {
+      "name": "map_unchanged",
+      "sha256": "d7800f8796340150e397cf65fefd722af18620ccf0f1135ddb2fc8938050c0fd"
+    }
+  ],
+  "captures": [
+    "D:\\UEPro\\Test\\Saved\\AddressClock\\01_2560x1600.png",
+    "D:\\UEPro\\Test\\Saved\\AddressClock\\width_1024.png",
+    "D:\\UEPro\\Test\\Saved\\AddressClock\\width_800.png",
+    "D:\\UEPro\\Test\\Saved\\AddressClock\\width_390.png"
+  ],
+  "elapsed_seconds": 9.468999999924563
+}

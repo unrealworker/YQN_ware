@@ -525,7 +525,7 @@ bool UGHSTwinHUDWidget::HandleChromeClick(FVector2D Position)
         bWarehouseMenuOpen=false;if(bInside) return true;
     }
     if(bSearchOpen && !Inside(Position,GetSceneSearchPosition(),GetSceneSearchSize())) SetSearchOpen(false);
-    if(Position.Y<Layout.HeaderHeight && Position.X>ViewSize.X-112)
+    if(FGHSTwinHeaderLayout::Calculate(ViewSize.X).IsPanelButton(Position))
     { SetPanelCollapsed(!bPanelCollapsed); return true; }
     const int32 TypeIndex=IsInteriorAvailable()?FGHSTwinSceneChrome::FilterAt(Position,Layout):INDEX_NONE;
     if(TypeIndex!=INDEX_NONE)
@@ -569,6 +569,9 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
 {
     TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_Tick);
     Super::NativeTick(Geometry,DeltaSeconds);
+    // Wall time must continue while scene simulation is paused, and must never
+    // inherit the viewer's or deployment server's local time zone.
+    WarehouseClock.Refresh(FDateTime::UtcNow());
     const FVector2D AllocatedSize=Geometry.GetLocalSize();
     if(AllocatedSize.X<1 || AllocatedSize.Y<1) return;
     FVector2D Pixels=AllocatedSize;
@@ -810,6 +813,13 @@ FString UGHSTwinHUDWidget::GetPOIReport() const
     {Root->SetBoolField(TEXT("roofClosed"),R->IsRoofClosed());Root->SetBoolField(TEXT("roofOpening"),R->IsOpening());Root->SetNumberField(TEXT("roofProgress"),R->GetOpenProgress());}
     if(bDiagnostics)
     {
+        const auto Header=FGHSTwinHeaderLayout::Calculate(ViewSize.X);
+        auto Clock=MakeShared<FJsonObject>();
+        Clock->SetStringField(TEXT("time"),WarehouseClock.TimeText);Clock->SetStringField(TEXT("date"),WarehouseClock.DateText);
+        Clock->SetStringField(TEXT("zone"),TEXT("America/Los_Angeles"));Clock->SetNumberField(TEXT("headerHeight"),Header.Height);
+        Clock->SetNumberField(TEXT("width"),ViewSize.X);Clock->SetNumberField(TEXT("addressX"),Header.AddressPosition.X);Clock->SetNumberField(TEXT("addressY"),Header.AddressPosition.Y);
+        Clock->SetNumberField(TEXT("clockX"),Header.ClockPosition.X);Clock->SetNumberField(TEXT("clockY"),Header.ClockPosition.Y);
+        Root->SetObjectField(TEXT("warehouseClock"),Clock);
         TArray<TSharedPtr<FJsonValue>> Regions;
         for(const auto& Point:SceneData.Points()) if(Point.Id.StartsWith(TEXT("REGION:")))
         {
@@ -840,11 +850,45 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
     { Color.A*=DrawOpacity;FSlateDrawElement::MakeText(Elements,++Layer,G.ToPaintGeometry(FVector2D(600,Size+10),FSlateLayoutTransform(At)),Value,Font(Size),ESlateDrawEffect::None,Color); };
     auto Line=[&](FVector2D A,FVector2D B,FLinearColor Color,float Width=1.f)
     { FSlateDrawElement::MakeLines(Elements,++Layer,G.ToPaintGeometry(),TArray<FVector2D>{A,B},ESlateDrawEffect::None,Color,true,Width); };
-    Box(FVector2D::ZeroVector,FVector2D(ViewSize.X,Layout.HeaderHeight),C(TEXT("172131")));
-    Box(FVector2D(22,20),FVector2D(9,9),C(TEXT("356BFA")),1); Box(FVector2D(34,20),FVector2D(9,9),C(TEXT("78A3FF")),1); Box(FVector2D(22,32),FVector2D(9,9),C(TEXT("78A3FF")),1); Box(FVector2D(34,32),FVector2D(9,9),C(TEXT("356BFA")),1);
-    Text(FVector2D(57,Layout.HeaderHeight/2-12),TEXT("GHS 仓储数字孪生"),17,FLinearColor::White);
-    if(ViewSize.X>850) {Text(FVector2D(300,24),TEXT("三维运营中心"),12,C(TEXT("A5B2C5"))); Text(FVector2D(ViewSize.X-310,24),TEXT("场景已连接  ·  业务演示"),12,C(TEXT("B8C5D8")));}
-    Text(FVector2D(ViewSize.X-102,Layout.HeaderHeight/2-9),bPanelCollapsed?TEXT("展开面板"):TEXT("收起面板"),12,FLinearColor::White);
+    const auto Header=FGHSTwinHeaderLayout::Calculate(ViewSize.X);
+    const FLinearColor HeaderMuted=C(TEXT("B3C1D1")),HeaderIcon=C(TEXT("8BAFFF"));
+    auto HeaderText=[&](FVector2D At,const FString& Value,int Size,double RowHeight,FLinearColor Ink)
+    { Text(At+FVector2D(0,GHSTwinTypography::Measure(Value,Font(Size)).CenteredOriginY(RowHeight)),Value,Size,Ink); };
+    Box(FVector2D::ZeroVector,FVector2D(ViewSize.X,Layout.HeaderHeight),C(TEXT("172333")));
+    const double LogoY=(Header.BrandRowHeight-21)*.5;
+    Box(FVector2D(22,LogoY),FVector2D(9,9),C(TEXT("356BFA")),1); Box(FVector2D(34,LogoY),FVector2D(9,9),C(TEXT("78A3FF")),1); Box(FVector2D(22,LogoY+12),FVector2D(9,9),C(TEXT("78A3FF")),1); Box(FVector2D(34,LogoY+12),FVector2D(9,9),C(TEXT("356BFA")),1);
+    HeaderText(FVector2D(57,0),Header.bCompactBrand?TEXT("GHS 数字孪生"):TEXT("GHS 仓储数字孪生"),17,Header.BrandRowHeight,FLinearColor::White);
+    if(Header.bShowContext) HeaderText(FVector2D(300,0),TEXT("三维运营中心"),12,Header.BrandRowHeight,HeaderMuted);
+    if(ViewSize.X>=1000)
+    {
+        Line(FVector2D(Header.AddressPosition.X-20,18),FVector2D(Header.AddressPosition.X-20,46),C(TEXT("354253")));
+        Line(FVector2D(ViewSize.X-128,18),FVector2D(ViewSize.X-128,46),C(TEXT("354253")));
+    }
+    const FVector2D Address=Header.AddressPosition,Clock=Header.ClockPosition;
+    // Small line icons match the existing native HUD; no icon texture or tick is needed.
+    auto HeaderPath=[&](FVector2D At,std::initializer_list<FVector2D> Points)
+    { TArray<FVector2D> P;for(const auto& V:Points) P.Add(At+V);FSlateDrawElement::MakeLines(Elements,++Layer,G.ToPaintGeometry(),P,ESlateDrawEffect::None,HeaderIcon,true,1.3f); };
+    HeaderPath(Address+FVector2D(0,15),{{8,18},{2,10},{1,6},{3,2},{8,0},{13,2},{15,6},{14,10},{8,18}});
+    HeaderPath(Address+FVector2D(0,15),{{8,4},{5,7},{8,10},{11,7},{8,4}});
+    HeaderText(Address+FVector2D(28,0),TEXT("17335 Glen Helen Pkwy"),13,23,FLinearColor::White);
+    HeaderText(Address+FVector2D(28,25),TEXT("San Bernardino, CA 92407 美国"),11,19,HeaderMuted);
+    TArray<FVector2D> Circle;
+    for(int32 I=0;I<=20;++I) {const double A=I*2.*PI/20.;Circle.Add(Clock+FVector2D(8+8*FMath::Cos(A),23+8*FMath::Sin(A)));}
+    FSlateDrawElement::MakeLines(Elements,++Layer,G.ToPaintGeometry(),Circle,ESlateDrawEffect::None,HeaderIcon,true,1.3f);
+    HeaderPath(Clock+FVector2D(8,23),{{0,-5},{0,0},{4,2}});
+    HeaderText(Clock+FVector2D(28,0),TEXT("仓库当地时间"),11,23,HeaderMuted);
+    // Each digit has a fixed advance, so even fallback fonts cannot jitter the clock.
+    double DigitX=Clock.X+130;
+    for(const TCHAR Ch:WarehouseClock.TimeText)
+    {
+        const FString Glyph=FString::Chr(Ch);const double Cell=Ch==TEXT(':')?7:15;
+        const double Width=GHSTwinTypography::Measure(Glyph,Font(19)).Size.X;
+        HeaderText(FVector2D(DigitX+(Cell-Width)*.5,Clock.Y),Glyph,19,23,FLinearColor::White);DigitX+=Cell;
+    }
+    // The bundled CJK font lacks the mathematical minus glyph; use its normal
+    // hyphen for the visible offset instead of rendering a missing-glyph box.
+    HeaderText(Clock+FVector2D(28,25),WarehouseClock.DateText.Replace(TEXT("−"),TEXT("-")),11,19,HeaderMuted);
+    HeaderText(Header.PanelButtonPosition+FVector2D(10,0),bPanelCollapsed?TEXT("展开面板"):TEXT("收起面板"),12,Header.PanelButtonSize.Y,FLinearColor::White);
     Box(FVector2D(24,Layout.HeaderHeight+16),FVector2D(256,84),FLinearColor::White,12,C(TEXT("DFE7F2")));
     Text(FVector2D(48,Layout.HeaderHeight+28),TEXT("GHS"),22,C(TEXT("25364B")));
     FString Area=SceneData.LocationLabel(SelectedId);

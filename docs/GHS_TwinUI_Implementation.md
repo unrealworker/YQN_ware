@@ -47,6 +47,14 @@
 
 ## 验证证据
 
+### 2026-10-22 地址与仓库当地时钟
+
+- 顶栏加入完整地址 `17335 Glen Helen Pkwy / San Bernardino, CA 92407 美国`，当地时钟每秒更新，日期、PDT/PST 和 UTC 偏移统一通过引擎 ICU 的 `America/Los_Angeles` 从系统 UTC 转换，不依赖本机所在地时区。时间精度跟随运行机器的系统时钟；没有新增联网校时请求。
+- `GHSWarehouseClock.*` 每个 UTC 秒只格式化一次，支持时钟回拨；`GHSTwinHeaderLayout.h` 共用绘制与输入区域规则。1000 以下宽度分两行，640 以下分三行，高 DPI 沿用既有设计单位缩放。暂停场景仍更新时钟，地址区域不能切换面板或选择设备。
+- 正式 `Saas.pen` 的 20 处场景顶栏和 34 张 current 导出已覆盖同步，规范见 `Design/GHS_Twin_SaaS_Concept/warehouse-address-clock-design.md`。当前字体缺少数学负号，原生渲染偏移使用普通 `-` 避免缺字。
+- `TestEditor` 与 `TestGame Win64 Development` 编译通过（MSVC 14.38.33130）。最终 `Saved/Automation/AddressClock/index.json`：111 项通过、0 失败、0 警告，新增 6 项涵盖 DST 切换、当地午夜/跨年、文化独立性、秒缓存与回拨、实际字体宽度和点击边界。
+- `SourceAssets/GHS/AddressClock/Review/runtime.json`：6 项实际游戏检查通过；截图覆盖 2560×1600、1024×768、800×900、390×844。确认时钟连续刷新、场景暂停仍刷新、动态改尺寸与面板收展、屋顶闭合只保留主仓库 POI；地图 SHA256 保持不变。此次未重新 cook/package 或启动像素流服务。
+
 - 面板收展与总览复位追加修订：`Saved/Automation/PanelSlide/index.json` 70 项 UE 测试通过；`Saved/PanelSlide_Acceptance.json` 22 项场景运行检查通过。1920×1080 和 600×900 均按完整面板宽度从左到右收起、从右到左展开，透明度保持 1、CEF 尺寸不变，快速反向从当前位置接续；动态输入区域跟随可见面板。设备详情和订单页在收展后保留，相机各姿态分量不变。
 - 回到初始视角的共同入口清空设备、实际货架物料和区域的选中状态，包括详情栈、角框与 POI 选中态。Home 为源码路由核对加共用命令运行验证，两个原生复位入口直接运行验证；没有将其描述为 OS 按键注入测试。
 - `Saved/PanelSlide_*_Closing.png`、`*_Opening.png` 为真实滑动中间帧，确认整个面板平移、边界裁切、无淡出替代。重启前后状态记录为 `PanelSlide_EditorState.json` 和 `PanelSlide_EditorRestored.json`，保留用户本轮的编辑器视角、货架编辑器选择与两地图文件。

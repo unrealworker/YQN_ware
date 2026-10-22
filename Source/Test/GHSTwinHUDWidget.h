@@ -8,6 +8,7 @@
 #include "GHSTwinSceneData.h"
 #include "GHSTwinSearchLayout.h"
 #include "GHSTwinTypography.h"
+#include "GHSWarehouseClock.h"
 #include "GHSTwinHUDWidget.generated.h"
 
 class SWebBrowser;
@@ -143,6 +144,7 @@ private:
     FGHSTwinSceneData SceneData;
     FGHSTwinLayout Layout;
     FGHSTwinViewport Viewport;
+    FGHSWarehouseClock WarehouseClock;
     FVector2D LastBrowserViewport=FVector2D::ZeroVector;
     FVector2D ViewSize = FVector2D(1920,1080);
     double NextRefresh = 0;

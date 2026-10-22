@@ -1,6 +1,6 @@
 {
   "updated": "2026-10-22",
-  "status": "approved_warehouse_poi_copy_refinement",
+  "status": "approved_warehouse_address_local_clock",
   "source": "Saas.pen",
   "previewDirectory": "exports/current",
   "style": {
@@ -13,7 +13,9 @@
     "warehouse": "Dta3T",
     "filter": "pXfPV",
     "search": "q7JLn",
-    "zoom": "oIJE1"
+    "zoom": "oIJE1",
+    "warehouseAddress": "yCuML",
+    "warehouseLocalClock": "uzdua"
   },
   "artboards": [
     {
@@ -258,7 +260,25 @@
       "status": "approved_for_implementation"
     }
   ],
-  "approvedScope": "00-33 approved; main warehouse POI retained with simplified subtitle and upper-left warehouse type removed on 2026-10-22; board 01 is interior overview",
+  "approvedScope": "00-33 approved; warehouse address and local clock synchronized across all 20 scene headers on 2026-10-22; main warehouse POI retained with subtitle 点击查看; board 01 is interior overview",
+  "warehouseHeader": {
+    "status": "approved_for_implementation",
+    "spec": "warehouse-address-clock-design.md",
+    "height": 64,
+    "background": "#172333",
+    "addressLines": ["17335 Glen Helen Pkwy", "San Bernardino, CA 92407 美国"],
+    "timeLabel": "仓库当地时间",
+    "timeZone": "America/Los_Angeles",
+    "timeFormat": "HH:mm:ss",
+    "dateFormat": "YYYY.MM.DD · z (UTC±HH:mm)",
+    "refreshIntervalMs": 1000,
+    "daylightTime": "PDT (UTC−07:00)",
+    "standardTime": "PST (UTC−08:00)",
+    "designSample": {"instant": "2026-10-22T14:38:00Z", "time": "07:38:00", "date": "2026.10.22 · PDT (UTC−07:00)", "isLive": false},
+    "sceneArtboards": ["CLx7Q", "mP7E5", "d7P3z", "Wt7Vo", "iiFrY", "gW9oH", "XJoOQ", "F8Cox", "XhUtw", "lvDfx", "t4mlxm", "zyWMm", "lCf0H", "OA1Bd", "kvTdT", "qNsRa", "ibTva", "t1QfTH", "Lxvbj", "cgOha"],
+    "componentCount": 42,
+    "currentExportCount": 34
+  },
   "warehouseCopy": {
     "poiTitle": "GHS · 主仓库",
     "poiSubtitle": "点击查看",
