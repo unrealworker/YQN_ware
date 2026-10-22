@@ -1,6 +1,6 @@
 # GHS 主厂房独立屋顶
 
-目标关卡为 `/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`，Actor 为 `GHS_MainWarehouseRoof`。当前屋顶几何沿用既有源；园区风格阶段把 Roof 槽按 `../Park/reference_style.json.roof_color_linear` 调整为更清晰的淡蓝白色，其他四个槽和模型不变。该阶段的保存重载、15 项实际运行检查和 11 张图片归档是**新增办公室玻璃立面之前的风格基线**。当前场景另已增加独立立面，最新状态以 [OfficeFacade 文档](../OfficeFacade/README.md) 和 [增量验收文件](../OfficeFacade/Review/acceptance.json) 为准。
+目标关卡为 `/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory`，Actor 为 `GHS_MainWarehouseRoof`。当前屋顶几何沿用既有源；园区风格阶段把 Roof 槽按 `../Park/reference_style.json.roof_color_linear` 调整为更清晰的淡蓝白色，模型几何保持；用户手工将 Skylight 槽改绑 `M_GHSFacade_Glass`，本轮保留该绑定。当前场景复用原立面 Actor 扩展为四面窗组，最新状态以 [OfficeFacade 文档](../OfficeFacade/README.md) 和 [增量验收文件](../OfficeFacade/Review/acceptance.json) 为准。
 
 ## 几何与视觉
 
@@ -13,7 +13,7 @@
 | 主脊线 | v=59.436 m，高 10.40 m |
 | 办公室屋面 | v>118.872 m，9.76 m 低平屋面 |
 | 最高货架／净空 | 9.154 m／0.446 m |
-| 采光带 | 5 条，不透明浅蓝，每条宽 3.6 m、15 格 |
+| 采光带 | 5 条，不透明蓝色，每条宽 3.6 m、15 格；保留用户 Glass 材质覆盖 |
 | 采光带位置 | u=75/155/235/315/395 m，v=15…105 m |
 | 立缝 | 310 条，间距 1.5 m、高 0.03 m |
 | 包边 | 约 0.36 m 蓝色金属边 |
@@ -30,10 +30,10 @@
 | Roof（当前 UE 展示覆盖） | 0.80 / 0.88 / 1.0 | 0.75 | 0.08 |
 | Seams | 0.63 / 0.71 / 0.81 | 0.80 | 0.05 |
 | Blue | 0.035 / 0.13 / 0.48 | 0.80 | 0.05 |
-| Skylight | 0.24 / 0.45 / 0.70 | 0.42 | 0.05 |
+| Skylight（用户绑定的 Glass 覆盖） | 0.027 / 0.085 / 0.155 | 0.18 | 0.18 |
 | Detail | 0.60 / 0.67 / 0.74 | 0.80 | 0.05 |
 
-当前唯一展示参数是 `../Park/reference_style.json`，Roof 槽覆盖生成源的旧颜色；源几何、其他四槽参数保持。FBX 槽名称是 `M_GHSMainRoof_<role>`；UE 使用屋顶私有资源 `/Game/GHSZcoolSmartFactory/Roof/Materials/M_GHSRoof_<role>`，不修改原仓库或园区共享材质。
+Roof 槽展示参数来自 `../Park/reference_style.json`。Skylight 保留用户手工设置的 `/Game/GHSZcoolSmartFactory/OfficeFacade/Materials/M_GHSFacade_Glass` 覆盖，当前底色略微调浅，Fresnel 掠射色为 `(0.085,0.18,0.275)`；它没有被重置为源生成器的旧浅蓝色。其他三槽与源几何保持。FBX 槽名称仍是 `M_GHSMainRoof_<role>`，屋顶默认材质资源位于 `/Game/GHSZcoolSmartFactory/Roof/Materials`。
 
 ```text
 Blender: (u−239.33385, −(v−60.24019), z) metres
@@ -44,7 +44,7 @@ UE vertices: ((u−239.33385)*100, (v−60.24019)*100, z*100) cm
 
 UE 网格路径为 `/Game/GHSZcoolSmartFactory/Roof/Meshes/SM_GHS_MainWarehouseRoof`。Actor 无碰撞、无 Tick，不带设备业务身份。所有屋顶细节属于一个 Actor 的一个网格，整体显隐即可，不需逐个隐藏采光带、包边和通风帽。
 
-新增办公室立面为另一独立 Actor：西侧 3 跨、正面 5 跨，共 96 块玻璃、2,916 个三角面。玻璃采用不透明（Opaque）外贴蓝色 Fresnel 材质，用于展示玻璃外观，不透视后方原墙。屋顶隐藏时立面仍保留，立面不属于屋顶显隐组。
+立面为另一独立 Actor，本轮复用它扩展四面窗组：原办公翼 8 跨保留，新增 15 组／35 跨，合计 43 跨、400 块玻璃、13,380 个三角面。玻璃采用略浅的不透明（Opaque）蓝色 Fresnel 材质，不透视后方原墙。南侧 75–78、51–53、30–33 号月台对应 2／3／2 跨，门间 0.60 m 全高柱与 Z=4.25..7.55 m 白面板将高窗接至卷帘门头；11 个编号只向 +Y 外移 20 cm，X／Z、字号和材质保留。其他方向仍按落地、高位、上下分段窗型区分。屋顶隐藏时立面仍保留，立面不属于屋顶显隐组。
 
 ## 后续交互边界
 
@@ -72,8 +72,6 @@ UE 网格路径为 `/Game/GHSZcoolSmartFactory/Roof/Meshes/SM_GHS_MainWarehouseR
 
 立面之前的风格基线为 360 个 Actor；新增独立玻璃立面后，当前主关卡为 **361 个 Actor**。Ground 使用独立冷灰蓝材质，StudioGround 使用无网格蓝灰背景；旧手动材质已备份，用户位置 `(170,240,0) cm`、缩放 `(1.1,1.1,1.1)` 保留。Cobalt 组件覆盖继续保护。7 个 Truck 材质在 live／disk 表面参数对比一致后，仅补齐实例化 usage 标记并保存；材质图、配色及其余参数未改。
 
-**历史园区风格基线**的独立保存重载于 **2026-10-22 15:49:01（Asia/Shanghai）** 通过；15 项运行检查通过，耗时 32.093 秒。其 Review 于 **15:52:26** 覆盖为 11 张基线图片，旧 30 图已移除，地图与全部图片哈希在当时核对一致。历史地图 SHA-256 为 `eb46503811527cf427450d7a0a67bf9e89b63e4b97f0d50cbc775bca092d4f5b`，不代表当前已添加立面的地图，也不作为当前保存重载成功的证明。
+园区与屋顶风格历史证据保留在 `Saved/ParkReferenceStyle`。当前四面扩窗和南侧门头的检查输出位于 `Saved/FacadeExpansion`；最新地图哈希、保存重载、运行状态与 **13 张实景**以 [OfficeFacade/Review/acceptance.json](../OfficeFacade/Review/acceptance.json) 为准，不沿用历史验收结论。
 
-当前立面增量已通过 **16 项真实游戏运行检查，耗时 29.422 秒**。最新地图哈希、保存重载状态与截图以 [OfficeFacade/Review/acceptance.json](../OfficeFacade/Review/acceptance.json) 为准。
-
-Park 当前 1,657,364 面，屋顶仍为 8,288 面，新增立面 2,916 面；Park + Roof + Facade 合计 **1,668,568 个唯一资源三角面**，不含原仓库内部资产。植被为 586 棵树、332 组灌木、24 岛；单树 1,856 面，三类树冠启用 Nanite 并保留完整 fallback。该静态统计不代表性能基准；本轮没有新 EXE 或多人像素流性能测试。
+Park 当前 1,657,364 面，屋顶仍为 8,288 面，扩展后立面 13,380 面；Park + Roof + Facade 合计 **1,679,032 个唯一资源三角面**，不含原仓库内部资产。植被为 586 棵树、332 组灌木、24 岛；单树 1,856 面，三类树冠启用 Nanite 并保留完整 fallback。该静态统计不代表性能基准；本轮没有新 EXE 或多人像素流性能测试。

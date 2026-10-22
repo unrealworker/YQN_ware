@@ -1,12 +1,14 @@
 """Import the independent office glazing without touching existing geometry."""
 import hashlib
+import copy
 import json
 from pathlib import Path
 import runpy
+import shutil
 import traceback
 import unreal
 
-ROOT=Path('D:/UEPro/Test');OUT=ROOT/'Saved/OfficeFacade'
+ROOT=Path('D:/UEPro/Test');OUT=ROOT/'Saved/FacadeExpansion'
 MAP='/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory'
 DEST='/Game/GHSZcoolSmartFactory/OfficeFacade'
 LABEL='GHS_OfficeGlassFacade'
@@ -21,6 +23,16 @@ def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def snapshot():
     fn=runpy.run_path(str(ROOT/'Scripts/ghs/validate_park_expansion.py'))['snapshot']
     return sorted([fn(a,unreal) for a in actors.get_all_level_actors() if a.get_actor_label()!=LABEL],key=lambda r:r['label'])
+
+def label_adjusted(rows,placement):
+    adjusted=copy.deepcopy(rows)
+    names={'GHS_DockNumber_'+str(n) for n in placement['numbers']}
+    delta=placement['translation_ue_cm']
+    for row in adjusted:
+        if row['label'] not in names:continue
+        for transform in [row['transform']]+[c['transform'] for c in row['components']]:
+            transform['position']=[round(a+b,4) for a,b in zip(transform['position'],delta)]
+    return adjusted
 
 def material(role,spec):
     folder=DEST+'/Materials';name='M_GHSFacade_'+role;path=folder+'/'+name
@@ -39,7 +51,7 @@ def material(role,spec):
     if role=='Glass':
         edge=ML.create_material_expression(mat,unreal.MaterialExpressionVectorParameter)
         edge.set_editor_property('parameter_name','GrazingTint')
-        edge.set_editor_property('default_value',unreal.LinearColor(.065,.15,.24,1.))
+        edge.set_editor_property('default_value',unreal.LinearColor(.085,.18,.275,1.))
         fresnel=ML.create_material_expression(mat,unreal.MaterialExpressionFresnel)
         fresnel.set_editor_property('exponent',3.)
         fresnel.set_editor_property('base_reflect_fraction',.04)
@@ -92,11 +104,24 @@ report=dict(success=False,map=MAP)
 try:
     assert not levels.is_in_play_in_editor()
     assert editor.get_editor_world().get_path_name().split('.')[0]==MAP
-    assert not unreal.EditorLoadingAndSavingUtils.get_dirty_map_packages(), 'Save existing scene edits before applying the facade'
     dirty={p.get_path_name() for p in unreal.EditorLoadingAndSavingUtils.get_dirty_content_packages()}
     assert not any(p.startswith(DEST+'/') for p in dirty),'Target facade assets have unsaved edits'
     before=snapshot();baseline=read(OUT/'Before/scene_state.json')
-    assert before==baseline['actors'],'Existing actors changed since baseline'
+    expected=[row for row in baseline['actors'] if row['label']!=LABEL]
+    layout=read(ROOT/'SourceAssets/GHS/OfficeFacade/facade_layout.json')
+    placement=layout['dock_label_placement']
+    after_expected=label_adjusted(expected,placement)
+    assert before in (expected,after_expected),'Existing actors changed outside the planned dock text offset'
+    dirty_maps=[p.get_path_name() for p in unreal.EditorLoadingAndSavingUtils.get_dirty_map_packages()]
+    assert dirty_maps==baseline['dirty_maps'] or not dirty_maps,'Uninspected unsaved map edits'
+    # Preserve the user's inspected skylight material override before changing
+    # our private facade resources. Other dirty maps are never saved here.
+    if dirty_maps:
+        assert dirty_maps==[MAP]
+        assert levels.save_current_level()
+        saved_user_map=OUT/'Before/map_with_user_edits.umap'
+        if not saved_user_map.exists():
+            shutil.copy2(ROOT/'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap',saved_user_map)
     spec=read(ROOT/'SourceAssets/GHS/OfficeFacade/facade_manifest.json')
     materials={role:material(role,values) for role,values in spec['materials'].items()}
     mesh=import_mesh(spec['mesh'],materials)
@@ -116,11 +141,19 @@ try:
     component.set_collision_profile_name('NoCollision')
     component.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
     component.set_editor_property('cast_shadow',True)
-    assert snapshot()==before,'Unrelated actors changed during import'
+    original_by={row['label']:row for row in baseline['actors']}
+    by={a.get_actor_label():a for a in actors.get_all_level_actors()}
+    for number in placement['numbers']:
+        name='GHS_DockNumber_'+str(number)
+        old_position=original_by[name]['transform']['position']
+        target=[a+b for a,b in zip(old_position,placement['translation_ue_cm'])]
+        by[name].set_actor_location(unreal.Vector(*target),False,True)
+    assert snapshot()==after_expected,'Unrelated actors changed during import'
     assert {p.get_path_name() for p in unreal.EditorLoadingAndSavingUtils.get_dirty_content_packages()}==dirty
     assert levels.save_current_level()
     report.update(success=True,saved=True,preserved_existing_actors=len(before),
         actor_count=len(actors.get_all_level_actors()),facade_asset=mesh.get_path_name(),
+        dock_label_placement=placement,
         triangles=spec['mesh']['triangles'],manifest_sha256=sha(ROOT/'SourceAssets/GHS/OfficeFacade/facade_manifest.json'),
         map_sha256=sha(ROOT/'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap'))
 except Exception:

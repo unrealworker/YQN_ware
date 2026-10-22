@@ -2,12 +2,15 @@
   "success": true,
   "stage": "complete",
   "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
-  "started_utc": "2026-10-22T09:59:28.079487+00:00",
+  "started_utc": "2026-10-22T11:17:13.482005+00:00",
   "mode": "live_editor",
   "writes_scene": false,
   "errors": [],
+  "pie_active": false,
+  "validated_world": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
+  "editor_internal_actors_excluded": [],
   "actor_count": 361,
-  "preserved_existing_actors": 360,
+  "preserved_existing_actors": 361,
   "ground_transform_preserved": {
     "position": [
       170.0,
@@ -26,6 +29,193 @@
       1.0
     ]
   },
+  "dock_text_preservation": [
+    {
+      "label": "GHS_DockNumber_30",
+      "bounds_ue_cm": {
+        "min": [
+          8916.8924,
+          5884.681,
+          550.0
+        ],
+        "max": [
+          9036.8924,
+          5884.681,
+          670.0
+        ]
+      },
+      "attributes_preserved": true
+    },
+    {
+      "label": "GHS_DockNumber_31",
+      "bounds_ue_cm": {
+        "min": [
+          8503.5875,
+          5884.681,
+          550.0
+        ],
+        "max": [
+          8623.5875,
+          5884.681,
+          670.0
+        ]
+      },
+      "attributes_preserved": true
+    },
+    {
+      "label": "GHS_DockNumber_32",
+      "bounds_ue_cm": {
+        "min": [
+          8124.412400000001,
+          5884.681,
+          550.0
+        ],
+        "max": [
+          8244.412400000001,
+          5884.681,
+          670.0
+        ]
+      },
+      "attributes_preserved": true
+    },
+    {
+      "label": "GHS_DockNumber_33",
+      "bounds_ue_cm": {
+        "min": [
+          7728.1724,
+          5884.681,
+          550.0
+        ],
+        "max": [
+          7848.1724,
+          5884.681,
+          670.0
+        ]
+      },
+      "attributes_preserved": true
+    },
+    {
+      "label": "GHS_DockNumber_51",
+      "bounds_ue_cm": {
+        "min": [
+          -592.8676,
+          5884.681,
+          550.0
+        ],
+        "max": [
+          -472.86760000000004,
+          5884.681,
+          670.0
+        ]
+      },
+      "attributes_preserved": true
+    },
+    {
+      "label": "GHS_DockNumber_52",
+      "bounds_ue_cm": {
+        "min": [
+          -989.1076,
+          5884.681,
+          550.0
+        ],
+        "max": [
+          -869.1076,
+          5884.681,
+          670.0
+        ]
+      },
+      "attributes_preserved": true
+    },
+    {
+      "label": "GHS_DockNumber_53",
+      "bounds_ue_cm": {
+        "min": [
+          -1385.3476,
+          5884.681,
+          550.0
+        ],
+        "max": [
+          -1265.3476,
+          5884.681,
+          670.0
+        ]
+      },
+      "attributes_preserved": true
+    },
+    {
+      "label": "GHS_DockNumber_75",
+      "bounds_ue_cm": {
+        "min": [
+          -13276.3576,
+          5884.681,
+          550.0
+        ],
+        "max": [
+          -13156.3576,
+          5884.681,
+          670.0
+        ]
+      },
+      "attributes_preserved": true
+    },
+    {
+      "label": "GHS_DockNumber_76",
+      "bounds_ue_cm": {
+        "min": [
+          -13672.5976,
+          5884.681,
+          550.0
+        ],
+        "max": [
+          -13552.5976,
+          5884.681,
+          670.0
+        ]
+      },
+      "attributes_preserved": true
+    },
+    {
+      "label": "GHS_DockNumber_77",
+      "bounds_ue_cm": {
+        "min": [
+          -14068.8376,
+          5884.681,
+          550.0
+        ],
+        "max": [
+          -13948.8376,
+          5884.681,
+          670.0
+        ]
+      },
+      "attributes_preserved": true
+    },
+    {
+      "label": "GHS_DockNumber_78",
+      "bounds_ue_cm": {
+        "min": [
+          -14465.0776,
+          5884.681,
+          550.0
+        ],
+        "max": [
+          -14345.0776,
+          5884.681,
+          670.0
+        ]
+      },
+      "attributes_preserved": true
+    }
+  ],
+  "actor_preservation_scope": {
+    "unchanged_actors": 350,
+    "dock_text_offset_only_actors": 11,
+    "dock_translation_ue_cm": [
+      0,
+      20,
+      0
+    ]
+  },
   "lighting_and_post_process_checked": {
     "lights": 0,
     "post_process_volumes": 0
@@ -34,27 +224,34 @@
   "facade_asset": "/Game/GHSZcoolSmartFactory/OfficeFacade/Meshes/SM_GHS_OfficeGlassFacade.SM_GHS_OfficeGlassFacade",
   "bounds_ue_cm": {
     "min": [
-      -23951.384765625,
-      5863.18310546875,
+      -23951.38671875,
+      -6042.02099609375,
       4.0
     ],
     "max": [
-      -19346.14453125,
+      22658.0546875,
       7709.98291015625,
       956.0000610351562
     ]
   },
-  "facade_triangles": 2916,
+  "facade_triangles": 13380,
   "independent_from_roof": true,
   "no_business_identity": true,
+  "preserved_roof_material_bindings": [
+    "/Game/GHSZcoolSmartFactory/Roof/Materials/M_GHSRoof_Roof.M_GHSRoof_Roof",
+    "/Game/GHSZcoolSmartFactory/Roof/Materials/M_GHSRoof_Seams.M_GHSRoof_Seams",
+    "/Game/GHSZcoolSmartFactory/Roof/Materials/M_GHSRoof_Blue.M_GHSRoof_Blue",
+    "/Game/GHSZcoolSmartFactory/OfficeFacade/Materials/M_GHSFacade_Glass.M_GHSFacade_Glass",
+    "/Game/GHSZcoolSmartFactory/Roof/Materials/M_GHSRoof_Detail.M_GHSRoof_Detail"
+  ],
   "materials_checked": [
     {
       "role": "Glass",
       "path": "/Game/GHSZcoolSmartFactory/OfficeFacade/Materials/M_GHSFacade_Glass.M_GHSFacade_Glass",
       "color_linear": [
-        0.017999999225139618,
-        0.05999999865889549,
-        0.11999999731779099
+        0.027000000700354576,
+        0.08500000089406967,
+        0.1550000011920929
       ],
       "scalars": {
         "Roughness": 0.18000000715255737,
@@ -146,20 +343,43 @@
     }
   ],
   "source_hashes": {
-    "SourceAssets\\GHS\\OfficeFacade\\facade_manifest.json": "e0e1a9d5dad9fb8ef47ccbd8337b6f2d07b77fb4b50b2a9023c01c34497c5537",
-    "SourceAssets\\GHS\\OfficeFacade\\SM_GHS_OfficeGlassFacade.fbx": "c6b535f60b4afa3c6bd4eb06432cafb71878afb61f3f844fa9abb7c9433daa03",
-    "SourceAssets\\GHS\\OfficeFacade\\OfficeGlassFacade.blend": "bad7d9b42ec1405d6d578b025190e320c37974230ade0f72c9e8d765c370cfac"
+    "SourceAssets\\GHS\\OfficeFacade\\facade_manifest.json": "f6f4ca3ed1ab381002db9276dd1879096c15672612137faf2ef6976db0b47721",
+    "SourceAssets\\GHS\\OfficeFacade\\facade_layout.json": "3dc3326ca2a41176c9802e0581d151b8a1090281fcc7697752c4f1924b90e793",
+    "SourceAssets\\GHS\\OfficeFacade\\SM_GHS_OfficeGlassFacade.fbx": "99d10ed4ad958878adbacb8965e951d39540a2262835640bc4108852a2911c79",
+    "SourceAssets\\GHS\\OfficeFacade\\OfficeGlassFacade.blend": "794d98914cd6c728487d1a86889a47d736cecc7def6c6909ebd7dc9a557b39ba"
   },
-  "bay_count": 8,
-  "pane_count": 96,
+  "facade_asset_hashes": {
+    "Content\\GHSZcoolSmartFactory\\OfficeFacade\\Materials\\M_GHSFacade_Frame.uasset": "5d577c09afe47aeb8c56f09530dd10cdb7d2b2fecd47e843eea94ed0d13d27f9",
+    "Content\\GHSZcoolSmartFactory\\OfficeFacade\\Materials\\M_GHSFacade_Glass.uasset": "8d3834bef56e89f505db050b393beb4ae937d09c7f2a7de57483f7f5d73fc126",
+    "Content\\GHSZcoolSmartFactory\\OfficeFacade\\Materials\\M_GHSFacade_Panel.uasset": "107857ff447f522eb536065b3bd80afbf5b4f816cbc5d1dd3895d508e3102346",
+    "Content\\GHSZcoolSmartFactory\\OfficeFacade\\Materials\\M_GHSFacade_Pier.uasset": "403d3ebbb7af6c289f9da57b5c4453bfffeae088e64b8619cfbe9575cefb7a4d",
+    "Content\\GHSZcoolSmartFactory\\OfficeFacade\\Materials\\M_GHSFacade_Sill.uasset": "a2867069a201fe43d2d130fdff93f0f41272cf1dc20331d35efd1992bb06d6bd",
+    "Content\\GHSZcoolSmartFactory\\OfficeFacade\\Meshes\\SM_GHS_OfficeGlassFacade.uasset": "ebc51e8cda700ed6dc0ea6102d8061adfc2ecb0944f7b398fa51e6d4ac198911"
+  },
+  "layout_validation": {
+    "window_groups": 15,
+    "bay_count": 43,
+    "pane_count": 400,
+    "preserved_corner_parts": 243,
+    "added_parts": 872,
+    "dock_labels_checked": 87,
+    "dock_number_overlaps": [],
+    "moved_dock_text_count": 11,
+    "minimum_text_front_clearance_cm": 5.5000000000009095,
+    "portal_dock_count": 11,
+    "minimum_pier_to_door_clearance_m": 0.07505049999996549
+  },
+  "bay_count": 43,
+  "pane_count": 400,
   "protected_source_hashes": {
     "SourceAssets\\GHS\\RefinementV2\\Envelope\\envelope_geometry.json": "4b6e2d7acb2292f3029205a26c38554febcbd3ec33508c2676b99f1fd6372cf5",
     "SourceAssets\\GHS\\RefinementV2\\Envelope\\building_footprint.json": "d0f7ebad99ba965361804469121350ef5449ac72a67e289f2111d58862dea1f7",
     "SourceAssets\\GHS\\RackSpecs\\cad_plan_mapping.json": "f359d43e8cd8d9016aea6b9a49ee569605d6d391dec9c1e6b7ff1b4d80b6b598",
-    "SourceAssets\\GHS\\MainRoof\\roof_manifest.json": "c63019e41bb37087690a5824df7534497019dce499067ebed5befe4899ce02d4"
+    "SourceAssets\\GHS\\MainRoof\\roof_manifest.json": "c63019e41bb37087690a5824df7534497019dce499067ebed5befe4899ce02d4",
+    "SourceAssets\\GHS\\OfficeFacade\\facade_layout.json": "3dc3326ca2a41176c9802e0581d151b8a1090281fcc7697752c4f1924b90e793"
   },
   "dirty_assets": [],
-  "map_sha256": "28d740e6baea2330bb313d7946662566aa38d8875a1c2e0fb7b45c8fcb88070d",
+  "map_sha256": "9f2a715bd41a84ac703452800497c21a8c6c21fbef49561f78bb487a636fd503",
   "map_unchanged_during_validation": true,
-  "finished_utc": "2026-10-22T09:59:28.339227+00:00"
+  "finished_utc": "2026-10-22T11:17:13.833743+00:00"
 }

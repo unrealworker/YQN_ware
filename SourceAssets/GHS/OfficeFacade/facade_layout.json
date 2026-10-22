@@ -1,0 +1,631 @@
+{
+  "version": 2,
+  "reference_note": "Wall planes follow the existing CAD footprint. Window group extents and elevations are inferred from the four user reference images; not surveyed window openings.",
+  "preserve_original_office_bays": true,
+  "groups": [
+    {
+      "id": "NorthWest",
+      "start_uv_m": [
+        0,
+        0
+      ],
+      "end_uv_m": [
+        18.288,
+        0
+      ],
+      "outward_uv": [
+        0,
+        -1
+      ],
+      "bay_count": 2,
+      "kind": "high",
+      "window_z_ranges": [
+        [
+          6.5,
+          8.2
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.2,
+        9.05
+      ]
+    },
+    {
+      "id": "NorthWestMiddle",
+      "start_uv_m": [
+        97.536,
+        0
+      ],
+      "end_uv_m": [
+        115.824,
+        0
+      ],
+      "outward_uv": [
+        0,
+        -1
+      ],
+      "bay_count": 2,
+      "kind": "high",
+      "window_z_ranges": [
+        [
+          6.5,
+          8.2
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.2,
+        9.05
+      ]
+    },
+    {
+      "id": "NorthCenter",
+      "start_uv_m": [
+        207.264,
+        0
+      ],
+      "end_uv_m": [
+        225.552,
+        0
+      ],
+      "outward_uv": [
+        0,
+        -1
+      ],
+      "bay_count": 2,
+      "kind": "high",
+      "window_z_ranges": [
+        [
+          6.5,
+          8.2
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.2,
+        9.05
+      ]
+    },
+    {
+      "id": "NorthEastMiddle",
+      "start_uv_m": [
+        316.992,
+        0
+      ],
+      "end_uv_m": [
+        335.28,
+        0
+      ],
+      "outward_uv": [
+        0,
+        -1
+      ],
+      "bay_count": 2,
+      "kind": "high",
+      "window_z_ranges": [
+        [
+          6.5,
+          8.2
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.2,
+        9.05
+      ]
+    },
+    {
+      "id": "NorthEastOffice",
+      "start_uv_m": [
+        438.302,
+        0
+      ],
+      "end_uv_m": [
+        465.7344,
+        0
+      ],
+      "outward_uv": [
+        0,
+        -1
+      ],
+      "bay_count": 3,
+      "kind": "split",
+      "window_z_ranges": [
+        [
+          0.24,
+          3.3
+        ],
+        [
+          5.7,
+          7.9
+        ]
+      ],
+      "columns": 4,
+      "rows": [
+        2,
+        1
+      ],
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        7.9,
+        9.05
+      ],
+      "spandrel": true
+    },
+    {
+      "id": "WestNorth",
+      "start_uv_m": [
+        0,
+        0
+      ],
+      "end_uv_m": [
+        0,
+        18.288
+      ],
+      "outward_uv": [
+        -1,
+        0
+      ],
+      "bay_count": 2,
+      "kind": "high",
+      "window_z_ranges": [
+        [
+          6.5,
+          8.2
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.2,
+        9.05
+      ]
+    },
+    {
+      "id": "WestMiddle",
+      "start_uv_m": [
+        0,
+        59.436
+      ],
+      "end_uv_m": [
+        0,
+        77.724
+      ],
+      "outward_uv": [
+        -1,
+        0
+      ],
+      "bay_count": 2,
+      "kind": "high",
+      "window_z_ranges": [
+        [
+          6.5,
+          8.2
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.2,
+        9.05
+      ]
+    },
+    {
+      "id": "EastOffice",
+      "start_uv_m": [
+        465.7344,
+        0
+      ],
+      "end_uv_m": [
+        465.7344,
+        18.288
+      ],
+      "outward_uv": [
+        1,
+        0
+      ],
+      "bay_count": 3,
+      "kind": "split",
+      "window_z_ranges": [
+        [
+          0.24,
+          3.3
+        ],
+        [
+          5.7,
+          7.9
+        ]
+      ],
+      "columns": 4,
+      "rows": [
+        2,
+        1
+      ],
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        7.9,
+        9.05
+      ],
+      "spandrel": true
+    },
+    {
+      "id": "EastDockNorth",
+      "start_uv_m": [
+        465.7344,
+        60.1
+      ],
+      "end_uv_m": [
+        465.7344,
+        75.8
+      ],
+      "outward_uv": [
+        1,
+        0
+      ],
+      "bay_count": 2,
+      "kind": "high",
+      "window_z_ranges": [
+        [
+          7.55,
+          8.95
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        7.48,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.95,
+        9.35
+      ]
+    },
+    {
+      "id": "EastDockSouth",
+      "start_uv_m": [
+        465.7344,
+        101.5
+      ],
+      "end_uv_m": [
+        465.7344,
+        111.98368
+      ],
+      "outward_uv": [
+        1,
+        0
+      ],
+      "bay_count": 2,
+      "kind": "high",
+      "window_z_ranges": [
+        [
+          7.55,
+          8.95
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        7.48,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.95,
+        9.35
+      ]
+    },
+    {
+      "id": "SouthEastChamfer",
+      "start_uv_m": [
+        440.88196,
+        118.872
+      ],
+      "end_uv_m": [
+        465.7344,
+        111.98368
+      ],
+      "outward_uv": [
+        0.267099,
+        0.963669
+      ],
+      "bay_count": 4,
+      "kind": "high",
+      "window_z_ranges": [
+        [
+          7.05,
+          8.65
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.65,
+        9.15
+      ]
+    },
+    {
+      "id": "SouthEastEnd",
+      "start_uv_m": [
+        425.6,
+        118.872
+      ],
+      "end_uv_m": [
+        440.88196,
+        118.872
+      ],
+      "outward_uv": [
+        0,
+        1
+      ],
+      "bay_count": 2,
+      "kind": "high",
+      "window_z_ranges": [
+        [
+          7.05,
+          8.65
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.65,
+        9.15
+      ]
+    },
+    {
+      "id": "SouthDockWest",
+      "start_uv_m": [
+        93.301874,
+        118.872
+      ],
+      "end_uv_m": [
+        109.151474,
+        118.872
+      ],
+      "outward_uv": [
+        0,
+        1
+      ],
+      "bay_count": 2,
+      "kind": "dock_portal",
+      "window_z_ranges": [
+        [
+          7.55,
+          8.95
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.95,
+        9.35
+      ],
+      "bay_edges_m": [
+        0.0,
+        7.924800000000005,
+        15.849599999999995
+      ],
+      "dock_numbers_by_bay": [
+        [
+          78,
+          77
+        ],
+        [
+          76,
+          75
+        ]
+      ],
+      "pier_width_m": 0.6,
+      "lower_panel_z_range": [
+        4.25,
+        7.55
+      ]
+    },
+    {
+      "id": "SouthDockCenter",
+      "start_uv_m": [
+        224.099174,
+        118.872
+      ],
+      "end_uv_m": [
+        235.986374,
+        118.872
+      ],
+      "outward_uv": [
+        0,
+        1
+      ],
+      "bay_count": 3,
+      "kind": "dock_portal",
+      "window_z_ranges": [
+        [
+          7.55,
+          8.95
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.95,
+        9.35
+      ],
+      "bay_edges_m": [
+        0.0,
+        3.9624000000000024,
+        7.924800000000005,
+        11.887200000000007
+      ],
+      "dock_numbers_by_bay": [
+        [
+          53
+        ],
+        [
+          52
+        ],
+        [
+          51
+        ]
+      ],
+      "pier_width_m": 0.6,
+      "lower_panel_z_range": [
+        4.25,
+        7.55
+      ]
+    },
+    {
+      "id": "SouthDockEast",
+      "start_uv_m": [
+        315.234374,
+        118.872
+      ],
+      "end_uv_m": [
+        331.1692985,
+        118.872
+      ],
+      "outward_uv": [
+        0,
+        1
+      ],
+      "bay_count": 2,
+      "kind": "dock_portal",
+      "window_z_ranges": [
+        [
+          7.55,
+          8.95
+        ]
+      ],
+      "columns": 4,
+      "rows": 2,
+      "pier_z_range": [
+        0.04,
+        9.56
+      ],
+      "head_panel_z_range": [
+        8.95,
+        9.35
+      ],
+      "bay_edges_m": [
+        0.0,
+        7.839475499999992,
+        15.934924500000022
+      ],
+      "dock_numbers_by_bay": [
+        [
+          33,
+          32
+        ],
+        [
+          31,
+          30
+        ]
+      ],
+      "pier_width_m": 0.6,
+      "lower_panel_z_range": [
+        4.25,
+        7.55
+      ]
+    }
+  ],
+  "corner_piers": [
+    {
+      "id": "NorthWestCorner",
+      "uv_bounds": [
+        -0.18,
+        -0.18,
+        0,
+        0
+      ],
+      "z_range": [
+        0.04,
+        9.56
+      ]
+    },
+    {
+      "id": "NorthEastCorner",
+      "uv_bounds": [
+        465.7344,
+        -0.18,
+        465.9144,
+        0
+      ],
+      "z_range": [
+        0.04,
+        9.56
+      ]
+    }
+  ],
+  "dock_number_protection_note": "East-side high dock windows retain piers and sills starting at z=7.48m. The three south dock portals use full-height piers in door gaps and move only their 11 number labels 20cm along the outward normal. Actual text-component bounds are z=550..670cm; the actor bounds extending to z=738cm include an editor icon. Number height, along-wall position, font, size and color remain unchanged.",
+  "dock_label_placement": {
+    "numbers": [
+      30,
+      31,
+      32,
+      33,
+      51,
+      52,
+      53,
+      75,
+      76,
+      77,
+      78
+    ],
+    "translation_ue_cm": [
+      0,
+      20,
+      0
+    ],
+    "reason": "Move text along facade outward normal only, in front of 0.16m cladding; retain along-wall position, height, size, font and color."
+  },
+  "revision_note": "Three south portals aligned to exact user-specified dock numbers 75-78,51-53,30-33; full-height piers land in CAD door gaps."
+}

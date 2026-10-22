@@ -1,15 +1,21 @@
 {
-  "date_local": "2026-10-22T18:06:41.032467+08:00",
+  "date_local": "2026-10-22T19:19:27.659998+08:00",
   "timezone": "Asia/Shanghai",
   "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
-  "map_sha256": "28d740e6baea2330bb313d7946662566aa38d8875a1c2e0fb7b45c8fcb88070d",
-  "manifest_sha256": "e0e1a9d5dad9fb8ef47ccbd8337b6f2d07b77fb4b50b2a9023c01c34497c5537",
+  "map_sha256": "9f2a715bd41a84ac703452800497c21a8c6c21fbef49561f78bb487a636fd503",
+  "manifest_sha256": "f6f4ca3ed1ab381002db9276dd1879096c15672612137faf2ef6976db0b47721",
   "actor_count": 361,
-  "preserved_original_actors": 360,
-  "facade_triangles": 2916,
-  "bays": 8,
-  "panes": 96,
+  "preserved_actor_transforms_and_bindings": 350,
+  "dock_labels_moved_outward_only": 11,
+  "facade_triangles": 13380,
+  "bays": 43,
+  "panes": 400,
   "material_slots": 5,
+  "added_groups": 15,
+  "original_corner_geometry_preserved": true,
+  "layout_sha256": "3dc3326ca2a41176c9802e0581d151b8a1090281fcc7697752c4f1924b90e793",
+  "dock_number_overlap_count": 0,
+  "user_skylight_glass_material_binding_preserved": true,
   "independent_roof_visibility": true,
   "business_registry": {
     "equipment": 106,
@@ -20,13 +26,13 @@
     "saved_reload": true,
     "fbx_roundtrip": true,
     "runtime_checks": 16,
-    "runtime_seconds": 29.42200000002049,
+    "runtime_seconds": 48.68700000003446,
     "runtime_process_exit": "self-quit after success"
   },
   "images": [
     {
       "file": "OfficeFacade_Corner.png",
-      "sha256": "8785fe75ae0d65ffa48155f5a8f5f8506afd3a0e5d174034b21efceb16d2b3c9",
+      "sha256": "28236cab8b50c925702c5da9d91a78649ff23abbd6e8727c85f5ecfe7d886b6e",
       "dimensions": [
         1920,
         1080
@@ -35,7 +41,7 @@
     },
     {
       "file": "OfficeFacade_Detail.png",
-      "sha256": "e310ca5b1b857ebb5e490ab96e00e6dadff224ff1c54be3fbb87296a88338bcb",
+      "sha256": "f940bedad37b2c591a8834dd226e1a3f5f5d91c33caff5646e8a9c54ea69cbf1",
       "dimensions": [
         1920,
         1080
@@ -44,7 +50,88 @@
     },
     {
       "file": "OfficeFacade_RoofHidden.png",
-      "sha256": "6b43269679a93cac5061775119e4cbd4cae61ea49e9ee1c0e3824e4a808129f4",
+      "sha256": "723e911906897a1c3c631a332cf2f1df092f48ac2bf450febf4ecebd4f29342d",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "render": "actual UE game viewport"
+    },
+    {
+      "file": "Facade_NEOffice.png",
+      "sha256": "ee67e3baf0b7de3ecdb5d82d7991bd384221a45101906bee4b2e5feedabf4e6a",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "render": "actual UE game viewport"
+    },
+    {
+      "file": "Facade_EastLoading.png",
+      "sha256": "78baf9328be6e294bed6d7178698644c5b9f58f0b180877f7abbbc6742548987",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "render": "actual UE game viewport"
+    },
+    {
+      "file": "Facade_NorthWest.png",
+      "sha256": "2d298475140b51de63e36cdec2d7506186341837491f08c3a494e897869dbde3",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "render": "actual UE game viewport"
+    },
+    {
+      "file": "Facade_NorthStreet.png",
+      "sha256": "3d4cc5cfc4c04057fd3596992ac0129a228517712daac4abfa25624eb2c0491c",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "render": "actual UE game viewport"
+    },
+    {
+      "file": "Facade_NorthHigh.png",
+      "sha256": "f9afdb5bd9bc2e96d397f74d1c03b53d8b928fbafe62540d0d4f2d6fe6119632",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "render": "actual UE game viewport"
+    },
+    {
+      "file": "Facade_SouthDock.png",
+      "sha256": "761d390f9e077d79114bf977066e1b99940770036650036ab55f823254b27d50",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "render": "actual UE game viewport"
+    },
+    {
+      "file": "Facade_Dock75_78.png",
+      "sha256": "7d1c20d4fc6b3ce19d1333983260526068866cb47c5b541f25777e26583822aa",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "render": "actual UE game viewport"
+    },
+    {
+      "file": "Facade_Dock51_53.png",
+      "sha256": "4d64541dab2e91dfaa41bea6f3041ba22af32649524a75c8474bc47e35e68568",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "render": "actual UE game viewport"
+    },
+    {
+      "file": "Facade_Dock30_33.png",
+      "sha256": "a978c9e7762fd7a2a2b50e4fd53bfa6abfdaffb7852db3b62cfd1d4ba0d6a15b",
       "dimensions": [
         1920,
         1080
@@ -53,7 +140,7 @@
     },
     {
       "file": "ReferenceOverview.png",
-      "sha256": "ca4fc8af689f33129b3f745d9519417b1cd13c5273b56f8f99df79cdd5717365",
+      "sha256": "64cf250e15ab8bb04ad3151a4229aea59ffd3ef508ad8eba3a82e76c6435fa69",
       "dimensions": [
         1920,
         1080

@@ -1,14 +1,14 @@
-D:\UEPro\Test\Scripts\ghs\build_office_glass_facade.py:69: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+D:\UEPro\Test\Scripts\ghs\build_office_glass_facade.py:71: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   material.use_nodes = True
-D:\UEPro\Test\Scripts\ghs\build_office_glass_facade.py:252: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+D:\UEPro\Test\Scripts\ghs\build_office_glass_facade.py:392: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
   scene.world.use_nodes = True
-00:04.906  image.write      | ERROR OpenImageIO write failed: Could not open file "\.thumbnails\large\blender_28676_c9304f0fdd49152edb38bbd4dd7e2e4b.png.png"
-00:23.875  render           | Saved: 'D:\UEPro\Test\SourceAssets\GHS\OfficeFacade\office_facade_preview.png'
+00:15.406  render           | Saved: 'D:\UEPro\Test\SourceAssets\GHS\OfficeFacade\office_facade_preview.png'
+00:15.484  image.write      | ERROR OpenImageIO write failed: Could not open file "\.thumbnails\large\blender_36968_c9304f0fdd49152edb38bbd4dd7e2e4b.png.png"
 
 FBX export starting... 'D:\\UEPro\\Test\\SourceAssets\\GHS\\OfficeFacade\\SM_GHS_OfficeGlassFacade.fbx'
-export finished in 0.0102 sec.
+export finished in 0.0088 sec.
 Info: Saved as "OfficeGlassFacade.blend"
-GHS_OFFICE_FACADE_READY {"vertices": 1944, "triangles": 2916, "bays": 8, "panes": 96, "parts": 243, "bounds_ue_cm": {"min": [-23951.385498046875, 5863.180923461914, 3.999999910593033], "max": [-19346.145629882812, 7709.980773925781, 956.0000419616699]}}
+GHS_OFFICE_FACADE_READY {"vertices": 8920, "triangles": 13380, "bays": 43, "panes": 400, "parts": 1115, "bounds_ue_cm": {"min": [-23951.385498046875, -6042.018890380859, 3.999999910593033], "max": [22658.055114746094, 7709.980773925781, 956.0000419616699]}}
 Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
 
 Blender quit

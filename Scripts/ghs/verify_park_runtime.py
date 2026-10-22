@@ -333,6 +333,8 @@ def assert_region_visible(region):
 def verify_saved_maps():
     for path, expected in map_hashes.items():
         assert sha(Path(path)) == expected, 'Runtime changed saved map: ' + path
+    for relative, expected in result.get('facade_resource_hashes', {}).items():
+        assert sha(ROOT / relative) == expected, 'Facade resource changed during capture: ' + relative
     record('runtime_did_not_modify_either_saved_map', map_sha256=map_hashes)
 
 
@@ -359,6 +361,15 @@ def capture_reference_art_views():
         views=[('OfficeFacade_Corner',(18,129,4.6),7200,-27,-42,False),
                ('OfficeFacade_Detail',(3.5,133,4.),2800,-12,-40,False),
                ('OfficeFacade_RoofHidden',(18,129,4.6),7200,-27,-42,True),
+               ('Facade_NEOffice',(451,10,4.5),6800,-25,140,False),
+               ('Facade_EastLoading',(458,80,4),18000,-30,-145,False),
+               ('Facade_NorthWest',(10,45,3),21000,-35,32,False),
+               ('Facade_NorthStreet',(235,0,2),65000,-38,90,False),
+               ('Facade_NorthHigh',(216,0,6),6000,-15,90,False),
+               ('Facade_SouthDock',(216,118,5),40000,-30,-90,False),
+               ('Facade_Dock75_78',(101.2,118.9,4.5),3800,-15,-90,False),
+               ('Facade_Dock51_53',(230.0,118.9,4.5),3400,-15,-90,False),
+               ('Facade_Dock30_33',(323.2,118.9,4.5),3800,-15,-90,False),
                ('ReferenceOverview',(235,87,0),85000,-46,-90,False)]
     try:
         widget.set_visibility(unreal.SlateVisibility.COLLAPSED)
@@ -393,6 +404,15 @@ def run():
     assert len(manifest['campus_boundary_ue_cm']) >= 3
     result['manifest_sha256'] = sha(MANIFEST_FILE)
     map_hashes = {str(path): sha(path) for path in (MAP_FILE, SOURCE_FILE)}
+    if re.search(r'(?:^|\s)-OfficeFacadeCapture(?=\s|$)', CLI, re.I):
+        facade_source = ROOT / 'SourceAssets/GHS/OfficeFacade'
+        resources = [facade_source / name for name in (
+            'facade_manifest.json', 'facade_layout.json', 'OfficeGlassFacade.blend',
+            'SM_GHS_OfficeGlassFacade.fbx')]
+        assets = sorted((ROOT / 'Content/GHSZcoolSmartFactory/OfficeFacade').rglob('*.uasset'))
+        assert len(assets) == 6, 'Expected the facade mesh and five materials'
+        result['facade_resource_hashes'] = {str(path.relative_to(ROOT)): sha(path)
+                                            for path in resources + assets}
     source_baseline = read(OUT / 'source_map_baseline.json')
     assert map_hashes[str(SOURCE_FILE)] == source_baseline['sha256'], 'Original map changed before runtime'
     yield from wait_for('discover_live_hud_browser', discover, timeout=55)
