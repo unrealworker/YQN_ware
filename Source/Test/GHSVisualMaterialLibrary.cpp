@@ -7,8 +7,9 @@ namespace
 {
 bool IsOwnedVisualMaterial(const UMaterial* Material)
 {
-    return IsValid(Material) && Material->GetPathName().StartsWith(
-        TEXT("/Game/GHSZcoolSmartFactory/VisualPolish/"));
+    return IsValid(Material) && (Material->GetPathName().StartsWith(
+        TEXT("/Game/GHSZcoolSmartFactory/VisualPolish/"))
+        || Material->GetPathName() == TEXT("/Game/GHSOrderReplay/Materials/M_ReplayTrail.M_ReplayTrail"));
 }
 }
 

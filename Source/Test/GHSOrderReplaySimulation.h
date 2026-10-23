@@ -20,8 +20,11 @@ struct Pose
 struct Track { std::string Id,Name,Kind,Mesh; Vec Scale{1,1,1}; std::vector<Key> Keys; std::vector<Vec> Route; };
 struct Event { double Time=0; std::string Id,DeviceId,Kind,Text; };
 struct Occurrence { const Event* Source=nullptr; double Time=0; long long Cycle=0; };
-struct TrailSegment { Vec A,B; double StartMeters=0,LengthMeters=0; };
-/** Visible motion only, with collinear repeated traversals removed at initialization. */
+struct TrailSegment { Vec A,B; double StartMeters=0,LengthMeters=0,StartShearCm=0,EndShearCm=0,StartHalfWidthCm=37.5,EndHalfWidthCm=37.5,FlowDeltaMeters=0; };
+constexpr double TrailWidthCm=75.,TrailCornerCutCm=80.;
+/** Forklift-only palette, shared by runtime presentation and the device list. */
+const char* TrailColor(int DeviceIndex);
+/** Visible motion, bounded circular joins, with repeated runs removed. */
 std::vector<TrailSegment> BuildTrailSegments(const Track& Track);
 /** Stateless evaluation: no accumulation, spawning, physics or process wall clock. */
 class Simulation

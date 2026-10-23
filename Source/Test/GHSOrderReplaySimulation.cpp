@@ -4,11 +4,18 @@
 #include <set>
 #include <map>
 #include <functional>
+#include <queue>
+#include <limits>
 
 namespace GHSReplay
 {
 static double Lerp(double A,double B,double T){return A+(B-A)*T;}
 static double Angle(double A,double B,double T){return A+std::remainder(B-A,360.)*T;}
+const char* TrailColor(int DeviceIndex)
+{
+    static const char* Colors[]={"#2F7CFF","#00D9C0","#F6B83F","#A77BFF","#F26AA6"};
+    return DeviceIndex>=0&&DeviceIndex<ForkCount?Colors[DeviceIndex]:"";
+}
 std::vector<TrailSegment> BuildTrailSegments(const Track& Track)
 {
     std::vector<TrailSegment> Result;std::vector<Vec> Run;
@@ -22,7 +29,7 @@ std::vector<TrailSegment> BuildTrailSegments(const Track& Track)
         std::vector<bool> Keep(Run.size(),false);Keep.front()=Keep.back()=true;
         std::function<void(size_t,size_t)> Simplify=[&](size_t A,size_t B)
         {
-            if(B<=A+1)return;double Maximum=1.;size_t Split=B;
+            if(B<=A+1)return;double Maximum=2.;size_t Split=B;
             const auto& P=Run[A];const auto& Q=Run[B];const double DX=Q.X-P.X,DY=Q.Y-P.Y,L2=DX*DX+DY*DY;
             for(size_t I=A+1;I<B;++I)
             {
@@ -33,10 +40,54 @@ std::vector<TrailSegment> BuildTrailSegments(const Track& Track)
             if(Split<B){Keep[Split]=true;Simplify(A,Split);Simplify(Split,B);}
         };
         Simplify(0,Run.size()-1);
-        size_t Previous=0;
-        for(size_t I=1;I<Run.size();++I)if(Keep[I])
+        std::vector<Vec> Points,Curve;std::vector<double> HalfWidths;
+        for(size_t I=0;I<Run.size();++I)if(Keep[I])Points.push_back(Run[I]);
+        auto Append=[&](const Vec& P,double Width=TrailWidthCm*.5)
         {
-            const Vec A=Run[Previous],B=Run[I];Previous=I;const double L=Length(A,B);if(L<.01)continue;
+            if(Curve.empty()||Length(Curve.back(),P)>.001){Curve.push_back(P);HalfWidths.push_back(Width);}
+            else HalfWidths.back()=std::min(HalfWidths.back(),Width);
+        };
+        Append(Points.front());
+        for(size_t I=1;I+1<Points.size();++I)
+        {
+            const auto &A=Points[I-1],&B=Points[I],&C=Points[I+1];
+            const double LA=Length(A,B),LB=Length(B,C);
+            const Vec U{(B.X-A.X)/LA,(B.Y-A.Y)/LA,0},V{(C.X-B.X)/LB,(C.Y-B.Y)/LB,0};
+            const double Cos=std::clamp(U.X*V.X+U.Y*V.Y,-1.,1.);
+            // A reversal retraces the same path: never invent a bulb outside the aisle.
+            if(Cos>.999999||Cos<-.8660254){Append(B);continue;}
+            const double Cut=std::min({TrailCornerCutCm,.45*LA,.45*LB});
+            const Vec P{B.X-U.X*Cut,B.Y-U.Y*Cut,B.Z},Q{B.X+V.X*Cut,B.Y+V.Y*Cut,B.Z};
+            const int Steps=std::max(4,int(std::ceil(std::acos(Cos)/(3.*3.14159265358979323846/180.))));
+            const double Cross=U.X*V.Y-U.Y*V.X,Sign=Cross<0?-1.:1.;
+            const double Radius=Cut*std::sqrt((1.+Cos)/(1.-Cos));
+            // The rare short pickup approach has a smaller radius than the usual
+            // ribbon half-width. Taper locally; never fold its inside edge backwards.
+            const double HalfWidth=std::min(TrailWidthCm*.5,Radius*.8);
+            Append(P,HalfWidth);
+            const Vec Center{P.X-U.Y*Radius*Sign,P.Y+U.X*Radius*Sign,B.Z};
+            const double StartAngle=std::atan2(P.Y-Center.Y,P.X-Center.X);
+            // Actual circular fillets give a constant turn radius. The movement keys
+            // themselves stay untouched; only this floor ribbon is rounded.
+            for(int J=1;J<=Steps;++J)
+            {
+                const double Angle=StartAngle+Sign*std::acos(Cos)*double(J)/Steps;
+                Append(J==Steps?Q:Vec{Center.X+Radius*std::cos(Angle),Center.Y+Radius*std::sin(Angle),B.Z},HalfWidth);
+            }
+        }
+        Append(Points.back());
+        auto Turn=[](const Vec& A,const Vec& B,const Vec& C)
+        {
+            const double LX=std::hypot(B.X-A.X,B.Y-A.Y),LY=std::hypot(C.X-B.X,C.Y-B.Y);
+            const double Cos=((B.X-A.X)*(C.X-B.X)+(B.Y-A.Y)*(C.Y-B.Y))/(LX*LY);
+            if(Cos<-.8660254)return 0.;
+            return ((B.X-A.X)*(C.Y-B.Y)-(B.Y-A.Y)*(C.X-B.X))/(LX*LY*(1.+Cos));
+        };
+        for(size_t I=1;I<Curve.size();++I)
+        {
+            const Vec A=Curve[I-1],B=Curve[I];const double L=Length(A,B);if(L<.01)continue;
+            const double StartShear=I>1?Turn(Curve[I-2],A,B)*HalfWidths[I-1]:0.;
+            const double EndShear=I+1<Curve.size()?-Turn(A,B,Curve[I+1])*HalfWidths[I]:0.;
             double R=std::atan2(B.Y-A.Y,B.X-A.X);if(R<0)R+=3.14159265358979323846;if(R>=3.14159265358979323846)R-=3.14159265358979323846;
             const long long AngleKey=std::llround(R*1.e6);R=double(AngleKey)/1.e6;
             const double C=std::cos(R),S=std::sin(R),PA=A.X*C+A.Y*S,PB=B.X*C+B.Y*S;
@@ -54,7 +105,9 @@ std::vector<TrailSegment> BuildTrailSegments(const Track& Track)
             {
                 double U=(Span.first-PA)/(PB-PA),V=(Span.second-PA)/(PB-PA);if(U>V)std::swap(U,V);
                 auto At=[&](double T){return Vec{Lerp(A.X,B.X,T),Lerp(A.Y,B.Y,T),Lerp(A.Z,B.Z,T)};};
-                Result.push_back({At(U),At(V),DistanceMeters+U*L/100.,(V-U)*L/100.});
+                Result.push_back({At(U),At(V),DistanceMeters+U*L/100.,(V-U)*L/100.,
+                    Lerp(StartShear,EndShear,U),Lerp(StartShear,EndShear,V),
+                    Lerp(HalfWidths[I-1],HalfWidths[I],U),Lerp(HalfWidths[I-1],HalfWidths[I],V)});
             }
             Intervals.emplace_back(Low,High);std::sort(Intervals.begin(),Intervals.end());
             std::vector<std::pair<double,double>> Merged;
@@ -67,10 +120,80 @@ std::vector<TrailSegment> BuildTrailSegments(const Track& Track)
     for(size_t I=1;I<Track.Keys.size();++I)
     {
         const auto& A=Track.Keys[I-1];const auto& B=Track.Keys[I];
-        if(!A.Visible||!B.Visible||Length(A.Position,B.Position)<.01){Flush();continue;}
+        if(!A.Visible||!B.Visible){Flush();continue;}
+        if(Length(A.Position,B.Position)<.01)continue;
         if(Run.empty())Run.push_back(A.Position);Run.push_back(B.Position);
     }
-    Flush();return Result;
+    Flush();
+    // A retraced branch can be retained from a later trip after geometric deduplication.
+    // Trip mileage is not a valid UV coordinate there: identical physical junctions
+    // would jump to unrelated light phases. Build one shared distance field once.
+    using PointKey=std::array<long long,2>;
+    std::map<PointKey,std::vector<size_t>> NodeIds;
+    std::vector<Vec> NodePositions;
+    std::vector<std::vector<std::pair<size_t,double>>> Edges;
+    auto Node=[&](const Vec& P)
+    {
+        const PointKey K{std::llround(P.X*2.),std::llround(P.Y*2.)};
+        for(long long X=K[0]-1;X<=K[0]+1;++X)for(long long Y=K[1]-1;Y<=K[1]+1;++Y)
+        {
+            auto It=NodeIds.find({X,Y});if(It==NodeIds.end())continue;
+            for(size_t Id:It->second)if(Length(P,NodePositions[Id])<=.51)return Id;
+        }
+        const size_t Id=Edges.size();NodeIds[K].push_back(Id);NodePositions.push_back(P);Edges.emplace_back();return Id;
+    };
+    std::vector<std::pair<size_t,size_t>> OriginalNodes,SegmentNodes;
+    for(const auto& S:Result)
+    {
+        const size_t A=Node(S.A),B=Node(S.B);OriginalNodes.emplace_back(A,B);
+    }
+    // A return branch may meet the middle of a retained long strip. Subdivide
+    // only that existing quad, interpolating its exact cross-sections; its union
+    // footprint and curve stay unchanged while the T junction gains one phase.
+    std::vector<TrailSegment> Subdivided;
+    for(size_t I=0;I<Result.size();++I)
+    {
+        const auto& S=Result[I];const double DX=S.B.X-S.A.X,DY=S.B.Y-S.A.Y,L2=DX*DX+DY*DY,L=std::sqrt(L2);
+        std::vector<std::pair<double,size_t>> Cuts{{0.,OriginalNodes[I].first},{1.,OriginalNodes[I].second}};
+        for(size_t N=0;N<NodePositions.size();++N)
+        {
+            const auto& P=NodePositions[N];const double T=((P.X-S.A.X)*DX+(P.Y-S.A.Y)*DY)/L2;
+            if(T*L<=.005||(1.-T)*L<=.005)continue;
+            if(std::hypot(P.X-S.A.X-T*DX,P.Y-S.A.Y-T*DY)<=.51)Cuts.emplace_back(T,N);
+        }
+        std::sort(Cuts.begin(),Cuts.end());
+        for(size_t C=1;C<Cuts.size();++C)
+        {
+            const auto [U,A]=Cuts[C-1];const auto [V,B]=Cuts[C];if((V-U)*L<=1.e-7)continue;
+            auto At=[&](double T){return Vec{Lerp(S.A.X,S.B.X,T),Lerp(S.A.Y,S.B.Y,T),Lerp(S.A.Z,S.B.Z,T)};};
+            Subdivided.push_back({At(U),At(V),0.,(V-U)*S.LengthMeters,
+                Lerp(S.StartShearCm,S.EndShearCm,U),Lerp(S.StartShearCm,S.EndShearCm,V),
+                Lerp(S.StartHalfWidthCm,S.EndHalfWidthCm,U),Lerp(S.StartHalfWidthCm,S.EndHalfWidthCm,V)});
+            SegmentNodes.emplace_back(A,B);const double EdgeLength=(V-U)*S.LengthMeters;
+            Edges[A].emplace_back(B,EdgeLength);Edges[B].emplace_back(A,EdgeLength);
+        }
+    }
+    Result=std::move(Subdivided);
+    std::vector<double> Phase(Edges.size(),std::numeric_limits<double>::infinity());
+    using Candidate=std::pair<double,size_t>;
+    for(size_t Root=0;Root<Edges.size();++Root)
+    {
+        if(std::isfinite(Phase[Root]))continue;
+        std::priority_queue<Candidate,std::vector<Candidate>,std::greater<Candidate>> Queue;
+        Phase[Root]=0;Queue.emplace(0.,Root);
+        while(!Queue.empty())
+        {
+            const auto [D,N]=Queue.top();Queue.pop();if(D>Phase[N])continue;
+            for(const auto& [Other,EdgeLength]:Edges[N])if(D+EdgeLength<Phase[Other])
+            {Phase[Other]=D+EdgeLength;Queue.emplace(Phase[Other],Other);}
+        }
+    }
+    for(size_t I=0;I<Result.size();++I)
+    {
+        const auto [A,B]=SegmentNodes[I];Result[I].StartMeters=Phase[A];
+        Result[I].FlowDeltaMeters=Phase[B]-Phase[A];
+    }
+    return Result;
 }
 bool Simulation::Validate(std::string& Error) const
 {

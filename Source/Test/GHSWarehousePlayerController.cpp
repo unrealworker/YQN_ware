@@ -143,7 +143,7 @@ bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
             DragMode = Requested;
             if (Requested == EGHSWarehouseDragMode::Pan)
             {
-                BeginMapDrag();
+                if(!BeginMapDrag()) CancelCameraDrag();
             }
             else if (ULocalPlayer* Local = GetLocalPlayer())
             {
@@ -245,8 +245,6 @@ void AGHSWarehousePlayerController::ConsumeOrbitMotion()
         bPastDragThreshold = true;
         Delta = DragTravel;
     }
-    if(OrderReplay && OrderReplay->IsReplaying() && !OrderReplay->GetFollowId().IsEmpty() && !Delta.IsNearlyZero())
-        OrderReplay->Follow(TEXT(""),FVector2D::ZeroVector,FVector2D::ZeroVector);
     Camera->OrbitPixels(Delta);
 }
 
@@ -266,9 +264,8 @@ bool AGHSWarehousePlayerController::BeginMapDrag()
     if (DragMode == EGHSWarehouseDragMode::Orbit) return false;
     CancelCameraDrag();
     auto* Camera = Cast<AGHSWarehouseCameraPawn>(GetPawn());
+    if(Camera && Camera->IsReplayFollowing()) return false;
     if (!Camera || !HasValidMapDragCursor()) return false;
-    if(OrderReplay && OrderReplay->IsReplaying() && !OrderReplay->GetFollowId().IsEmpty())
-        OrderReplay->Follow(TEXT(""),FVector2D::ZeroVector,FVector2D::ZeroVector);
     Camera->PrepareForGroundPan();
     ULocalPlayer* Local = GetLocalPlayer();
     MapDragViewportSize = Local->ViewportClient->Viewport->GetSizeXY();

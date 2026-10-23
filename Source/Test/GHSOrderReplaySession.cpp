@@ -126,6 +126,7 @@ void UGHSOrderReplaySession::CaptureAndIsolate()
 }
 bool UGHSOrderReplaySession::HideSourceInstances()
 {
+    FBox CargoBounds(ForceInit);TArray<FBox> LoadingDoors;
     const auto Sources=ArrayJson(Replay->GetSourceInstancesJson());
     for(const auto& Source:Sources)
     {
@@ -141,12 +142,24 @@ bool UGHSOrderReplaySession::HideSourceInstances()
                 {
                     const int32 Index=int32(IndexValue);FTransform Transform;
                     if(Index<0 || Index>=ISM->GetInstanceCount() || !ISM->GetInstanceTransform(Index,Transform,false)) break;
+                    FString Role;Object->TryGetStringField(TEXT("role"),Role);
+                    if(Role==TEXT("cargo")) CargoBounds+=ISM->Bounds.GetBox();
+                    else if(Role==TEXT("door") && ISM->GetStaticMesh())
+                        LoadingDoors.Add(ISM->GetStaticMesh()->GetBoundingBox().TransformBy(Transform*ISM->GetComponentTransform()));
                     Instances.Add({ISM,Index,Transform});FTransform Hidden=Transform;Hidden.SetScale3D(FVector::ZeroVector);
                     ISM->UpdateInstanceTransform(Index,Hidden,false,true,true);Found=true;break;
                 }
         }
         if(!Found) {Error=TEXT("回放货位或月台已变化: ")+ActorName;return false;}
     }
+    if(!CargoBounds.IsValid) {Error=TEXT("回放地堆区域没有可用边界。");return false;}
+    // The full floor-storage groups define this view. Far-west docks and trucks
+    // on public roads remain available through follow but never widen this frame.
+    WorkAreaBounds=CargoBounds.ExpandBy(FVector(400,400,0));
+    for(const FBox& Door:LoadingDoors)
+        if(Door.GetCenter().X>=CargoBounds.Min.X && Door.GetCenter().X<=CargoBounds.Max.X)
+            WorkAreaBounds.Max.Y=FMath::Max(WorkAreaBounds.Max.Y,Door.Max.Y+1700.);
+    WorkAreaBounds.Min.Z=0;WorkAreaBounds.Max.Z=FMath::Max(450.,WorkAreaBounds.Max.Z);
     return true;
 }
 void UGHSOrderReplaySession::Restore()
@@ -193,7 +206,7 @@ void UGHSOrderReplaySession::Advance(float Delta,FVector2D Viewport,FVector2D Sc
         FVector At,Extent;FRotator Rotation;
         if(Replay->ResolveDevice(FollowId,At,Rotation,Extent))
             if(auto* Camera=PC?Cast<AGHSWarehouseCameraPawn>(PC->GetPawn()):nullptr)
-                Camera->FollowReplayTarget(At,Delta,FRotator(FollowId.Contains(TEXT("TRUCK"))?-38:-62,Rotation.Yaw-65,0));
+            {Camera->UpdateReplayViewport(Viewport,SceneCenter);Camera->FollowReplayTarget(At,Delta);}
     }
 }
 void UGHSOrderReplaySession::Play() {if(bActive && !Exit.Pending()) {if(Clock.Completed()) Seek(0);Clock.Playing=true;}}
@@ -209,11 +222,14 @@ void UGHSOrderReplaySession::Select(const FString& Id)
 void UGHSOrderReplaySession::Follow(const FString& Id,FVector2D Viewport,FVector2D SceneCenter)
 {
     if(!bActive || Exit.Pending()) return;
-    if(Id.IsEmpty()) {FollowId.Empty();if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwner())) if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(PC->GetPawn())) Camera->FreezeCurrentPose();return;}
+    if(Id.IsEmpty()) {FollowId.Empty();if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwner())) if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(PC->GetPawn())) {Camera->SetReplayFollowEnabled(false);Camera->FreezeCurrentPose();}return;}
     FVector P,E;FRotator R;if(!Replay->ResolveDevice(Id,P,R,E)) return;
     Select(Id);FollowId=Id;
     if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwner())) if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(PC->GetPawn()))
+    {
         Camera->FocusOnTarget(P,Id.Contains(TEXT("TRUCK"))?2800.f:1100.f,FRotator(Id.Contains(TEXT("TRUCK"))?-38:-62,R.Yaw-65,0),Viewport,SceneCenter);
+        Camera->SetReplayFollowEnabled(true);
+    }
 }
 void UGHSOrderReplaySession::SetTrails(const FString& Mode)
 {if(bActive && (Mode==TEXT("all") || Mode==TEXT("selected") || Mode==TEXT("off"))) {TrailMode=Mode;Replay->SetTrailMode(Mode,SelectedId);}}

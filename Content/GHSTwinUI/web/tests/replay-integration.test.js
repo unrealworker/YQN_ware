@@ -41,3 +41,36 @@ test('a fresh request for the same event window reopens events without hijacking
  a.window.twinReplayReceive({...active,time:231,eventsWindow:w});assert.equal(r.view().tab,'devices');
  a.window.twinReplayReceive({...active,eventsWindow:{...w,revision:2}});assert.equal(r.view().tab,'events');
 });
+test('native forklift trail identity is separate from fault status and never added to trucks',()=>{
+ const a=replay();a.window.twinReplayReceive({...active,devices:[
+  {...active.devices[0],state:'fault',trailColor:'#F6B83F'},
+  {id:'REPLAY-TRUCK-01',type:'truck',state:'loading',visible:true,trailColor:'#F26AA6'}
+ ]});a.flush();
+ const rows=a.html().match(/<article class="replay-device[\s\S]*?<\/article>/g);
+ assert.match(rows[0],/class="replay-trail-dot" style="--replay-trail-color:#F6B83F"/);
+ assert.match(rows[0],/class="replay-device-state fault">车辆故障/);
+ assert.doesNotMatch(rows[1],/replay-trail-dot/);
+ a.window.twinReplayUI.handle('follow',{id:'REPLAY-TRUCK-01'});
+ assert.deepEqual(JSON.parse(JSON.stringify(a.commands.at(-1))),{action:'replayFollow',id:'REPLAY-TRUCK-01'});
+});
+test('a changed native trail colour refreshes the device identity without accepting arbitrary CSS',()=>{
+ const a=replay(),r=a.window.twinReplayUI,key=r.key();
+ a.window.twinReplayReceive({...active,devices:[{...active.devices[0],trailColor:'#00D9C0'}]});a.flush();
+ assert.notEqual(r.key(),key);assert.match(a.html(),/--replay-trail-color:#00D9C0/);
+ a.window.twinReplayReceive({...active,devices:[{...active.devices[0],trailColor:'red;background:url(example)'}]});a.flush();
+ assert.doesNotMatch(a.html(),/replay-trail-dot|background:url/);
+});
+test('following a truck still shows orbit and zoom guidance and clears the guidance on cancellation',()=>{
+ const a=replay();a.window.twinReplayReceive({...active,followId:'REPLAY-TRUCK-01'});a.flush();
+ assert.match(a.html(),/跟随中：左键旋转 · 滚轮缩放 · 右键平移无效/);
+ a.window.twinReplayReceive({...active,followId:''});a.flush();
+ assert.doesNotMatch(a.html(),/跟随中：/);
+});
+test('native Chinese fault and waiting descriptions retain semantic status colours independently of trail identity',()=>{
+ const a=replay();a.window.twinReplayReceive({...active,devices:[
+  {...active.devices[0],state:'故障停机',trailColor:'#F6B83F'},
+  {...active.devices[0],id:'REPLAY-FORK-02',state:'交叉通道让行',trailColor:'#00D9C0'}
+ ]});a.flush();
+ assert.match(a.html(),/class="replay-device-state fault">故障停机/);
+ assert.match(a.html(),/class="replay-device-state waiting">交叉通道让行/);
+});

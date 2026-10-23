@@ -7,6 +7,7 @@
 class UStaticMeshComponent;
 class UInstancedStaticMeshComponent;
 class UMaterialInstanceDynamic;
+class UDecalComponent;
 
 /** Isolated, fixed-size replay presentation. The HUD exclusively owns its clock. */
 UCLASS(NotBlueprintable)
@@ -38,7 +39,8 @@ private:
     UPROPERTY(Transient) TArray<TObjectPtr<UStaticMeshComponent>> Fixtures;
     UPROPERTY(Transient) TArray<TObjectPtr<UInstancedStaticMeshComponent>> Trails;
     UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInstanceDynamic>> TrailMaterials;
-    TArray<TArray<FTransform>> TrailTransforms;
+    UPROPERTY(Transient) TArray<TObjectPtr<UDecalComponent>> GroundRipples;
+    UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInstanceDynamic>> RippleMaterials;
     FString Error,SourceInstancesJson,TrailMode=TEXT("all"),SelectedId;
     double CurrentTime=0;
     bool bReady=false;

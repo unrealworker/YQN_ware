@@ -7,7 +7,7 @@
 class UMaterial;
 class UMaterialExpression;
 
-/** Narrow editor authoring access for the owned GHS visual-polish materials. */
+/** Narrow editor authoring access for GHS visual-polish materials and the replay trail. */
 UCLASS()
 class TEST_API UGHSVisualMaterialLibrary : public UBlueprintFunctionLibrary
 {

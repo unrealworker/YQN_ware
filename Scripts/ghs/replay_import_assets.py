@@ -38,8 +38,8 @@ for spec in manifest['meshes']:
     assert LIB.save_loaded_asset(mesh,only_if_is_dirty=False)
     results.append(dict(name=name,path=path,triangles=mesh.get_num_triangles(0),bounds_cm=u.mesh_box(mesh,unreal.Transform())))
 
-from replay_repair_trail_material import build_trail_material
-path=DEST+'/Materials/M_ReplayTrail';build_trail_material()
+from replay_repair_trail_material import build_trail_material,build_ripple_material
+path=DEST+'/Materials/M_ReplayTrail';build_trail_material();build_ripple_material()
 assert before==snapshot(u.labels()),'Replay import changed original scene'
 assert original=={p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in original}
 report=dict(success=True,meshes=results,original_scene_unchanged=True,source_hashes_unchanged=True,trail_material=path)

@@ -59,6 +59,7 @@ public:
     UFUNCTION(BlueprintPure,Category="Warehouse Replay") bool IsReplaying() const {return bActive;}
     UFUNCTION(BlueprintPure,Category="Warehouse Replay") FString GetStateJson() const;
     UFUNCTION(BlueprintPure,Category="Warehouse Replay") FString GetRestorationReport() const;
+    UFUNCTION(BlueprintPure,Category="Warehouse Replay") FBox GetWorkAreaBounds() const {return WorkAreaBounds;}
     bool IsExitPending() const {return Exit.Pending();}
     bool IsPreparing() const {return bPreparing;}
     const FString& GetFollowId() const {return FollowId;}
@@ -89,4 +90,5 @@ private:
     mutable TArray<TSharedPtr<FJsonValue>> CachedMarkers;
     double EventWindowStart=-1,EventWindowEnd=-1;
     uint64 EventWindowRevision=0;
+    FBox WorkAreaBounds=FBox(ForceInit);
 };

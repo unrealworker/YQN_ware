@@ -92,7 +92,15 @@ public:
     FVector GetFocusTarget() const { return FocusTarget; }
     FGHSCameraReplayPose CaptureReplayPose() const;
     void RestoreReplayPose(const FGHSCameraReplayPose& Pose);
-    void FollowReplayTarget(FVector Location, float DeltaSeconds, FRotator ViewRotation);
+    /** Tracking moves only the pivot; orbit and zoom retain their own input/lag targets. */
+    void FollowReplayTarget(FVector Location, float DeltaSeconds);
+    void UpdateReplayViewport(FVector2D ViewportSize,FVector2D SceneCenterPixels);
+    UFUNCTION(BlueprintCallable, Category="Warehouse Camera|Replay")
+    void SetReplayFollowEnabled(bool bEnabled);
+    UFUNCTION(BlueprintPure, Category="Warehouse Camera|Replay")
+    bool IsReplayFollowing() const {return bReplayFollowing;}
+    static float CalculateFramingDistance(const FBox& Bounds,FRotator Rotation,float FieldOfView,
+        FVector2D ViewportSize,const FBox2D& SceneBounds);
 
 protected:
     virtual void BeginPlay() override;
@@ -107,6 +115,7 @@ private:
     bool bUseSceneFraming = false;
     bool bOverviewFraming = false;
     bool bGroundPanRecovery = false;
+    bool bReplayFollowing = false;
     FVector GroundRecoveryMinimum = FVector::ZeroVector, GroundRecoveryMaximum = FVector::ZeroVector;
     bool bFlightEndsOnGround = true;
     float FlightElapsed = 0, FlightDuration = 0;

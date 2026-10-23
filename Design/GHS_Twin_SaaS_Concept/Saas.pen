@@ -9771,8 +9771,16 @@
           "fill": {
             "type": "image",
             "enabled": true,
-            "url": "images/latest-scene-20261023/interior-overview.png",
-            "mode": "cover"
+            "url": "images/order-replay-20261023/scene-floor-overview-dbac427f34b1.png",
+            "mode": "cover",
+            "transform": [
+              1.3333333333333333,
+              0,
+              0,
+              1.062992125984252,
+              0,
+              -0.06299212598425197
+            ]
           },
           "layout": "none"
         },
@@ -10426,6 +10434,24 @@
                       "fontWeight": "normal"
                     }
                   ]
+                },
+                {
+                  "type": "ellipse",
+                  "id": "rEVxf",
+                  "x": 29,
+                  "y": 31,
+                  "name": "叉车 1 轨迹色点",
+                  "metadata": {
+                    "type": "replay_visual",
+                    "trailColor": "#2F7CFF",
+                    "appliesTo": "forklift trail and replay-only pulsing base",
+                    "stateColor": false
+                  },
+                  "fill": "#2F7CFF",
+                  "width": 10,
+                  "height": 10,
+                  "stroke": "#FFFFFF",
+                  "strokeWidth": 2
                 }
               ]
             },
@@ -10514,6 +10540,24 @@
                       "fontWeight": "normal"
                     }
                   ]
+                },
+                {
+                  "type": "ellipse",
+                  "id": "CAJRq",
+                  "x": 29,
+                  "y": 31,
+                  "name": "叉车 2 轨迹色点",
+                  "metadata": {
+                    "type": "replay_visual",
+                    "trailColor": "#00D9C0",
+                    "appliesTo": "forklift trail and replay-only pulsing base",
+                    "stateColor": false
+                  },
+                  "fill": "#00D9C0",
+                  "width": 10,
+                  "height": 10,
+                  "stroke": "#FFFFFF",
+                  "strokeWidth": 2
                 }
               ]
             },
@@ -10602,6 +10646,24 @@
                       "fontWeight": "normal"
                     }
                   ]
+                },
+                {
+                  "type": "ellipse",
+                  "id": "y05pp",
+                  "x": 29,
+                  "y": 31,
+                  "name": "叉车 3 轨迹色点",
+                  "metadata": {
+                    "type": "replay_visual",
+                    "trailColor": "#F6B83F",
+                    "appliesTo": "forklift trail and replay-only pulsing base",
+                    "stateColor": false
+                  },
+                  "fill": "#F6B83F",
+                  "width": 10,
+                  "height": 10,
+                  "stroke": "#FFFFFF",
+                  "strokeWidth": 2
                 }
               ]
             },
@@ -10690,6 +10752,24 @@
                       "fontWeight": "normal"
                     }
                   ]
+                },
+                {
+                  "type": "ellipse",
+                  "id": "hW0Qm",
+                  "x": 29,
+                  "y": 31,
+                  "name": "叉车 4 轨迹色点",
+                  "metadata": {
+                    "type": "replay_visual",
+                    "trailColor": "#A77BFF",
+                    "appliesTo": "forklift trail and replay-only pulsing base",
+                    "stateColor": false
+                  },
+                  "fill": "#A77BFF",
+                  "width": 10,
+                  "height": 10,
+                  "stroke": "#FFFFFF",
+                  "strokeWidth": 2
                 }
               ]
             },
@@ -10778,6 +10858,24 @@
                       "fontWeight": "normal"
                     }
                   ]
+                },
+                {
+                  "type": "ellipse",
+                  "id": "X5z5mb",
+                  "x": 29,
+                  "y": 31,
+                  "name": "叉车 5 轨迹色点",
+                  "metadata": {
+                    "type": "replay_visual",
+                    "trailColor": "#F26AA6",
+                    "appliesTo": "forklift trail and replay-only pulsing base",
+                    "stateColor": false
+                  },
+                  "fill": "#F26AA6",
+                  "width": 10,
+                  "height": 10,
+                  "stroke": "#FFFFFF",
+                  "strokeWidth": 2
                 }
               ]
             },
@@ -10788,7 +10886,7 @@
               "y": 706,
               "name": "装卸车数量",
               "fill": "#25364B",
-              "content": "装卸车 · 3",
+              "content": "装卸车 · 3（无轨迹）",
               "fontFamily": "Noto Sans SC",
               "fontSize": 14,
               "fontWeight": "normal"
@@ -11064,7 +11162,9 @@
               "y": 973,
               "name": "参与设备说明",
               "fill": "#536478",
-              "content": "参与设备保持 8 台，离场车辆继续保留记录。",
+              "textGrowth": "fixed-width",
+              "width": 376,
+              "content": "色点对应轨迹与波动底座，状态文字保持原色。",
               "fontFamily": "Noto Sans SC",
               "fontSize": 12,
               "fontWeight": "normal"
@@ -11113,7 +11213,7 @@
           "x": 32,
           "y": 232,
           "name": "轨迹显示控件",
-          "width": 360,
+          "width": 392,
           "height": 44,
           "fill": "#FFFFFFF2",
           "cornerRadius": 8,
@@ -11126,7 +11226,7 @@
           "y": 245,
           "name": "轨迹显示标签",
           "fill": "#536478",
-          "content": "轨迹",
+          "content": "叉车轨迹",
           "fontFamily": "Noto Sans SC",
           "fontSize": 13,
           "fontWeight": "normal"
@@ -11134,7 +11234,7 @@
         {
           "type": "frame",
           "id": "Dptaz",
-          "x": 100,
+          "x": 124,
           "y": 234,
           "name": "显示全部轨迹",
           "metadata": {
@@ -11171,14 +11271,14 @@
         {
           "type": "frame",
           "id": "iIqHp",
-          "x": 188,
+          "x": 212,
           "y": 234,
           "name": "仅显示选中轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_selected"
           },
-          "width": 92,
+          "width": 106,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -11194,7 +11294,7 @@
               "name": "仅显示选中轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 92,
+              "width": 106,
               "height": 40,
               "content": "仅选中",
               "textAlign": "center",
@@ -11208,14 +11308,14 @@
         {
           "type": "frame",
           "id": "R4HD5",
-          "x": 286,
+          "x": 324,
           "y": 234,
           "name": "关闭轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_off"
           },
-          "width": 90,
+          "width": 84,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -11231,7 +11331,7 @@
               "name": "关闭轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 90,
+              "width": 84,
               "height": 40,
               "content": "关闭",
               "textAlign": "center",
@@ -11985,6 +12085,159 @@
               "name": "时间轴交互提示",
               "fill": "#536478",
               "content": "拖动定位 · 点击事件暂停",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "chHsP",
+          "x": 32,
+          "y": 286,
+          "name": "追溯叉车五色对应",
+          "metadata": {
+            "type": "replay_visual",
+            "onlyDuringReplay": true,
+            "curvedTrails": true,
+            "basePulse": true,
+            "truckTrails": false
+          },
+          "width": 392,
+          "height": 38,
+          "fill": "#FFFFFFF2",
+          "cornerRadius": 6,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "t5YZjA",
+              "x": 16,
+              "y": 11,
+              "name": "轨迹色标说明",
+              "fill": "#536478",
+              "content": "叉车",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "Pyxln",
+              "x": 64,
+              "y": 14,
+              "name": "叉车 1 轨迹色标",
+              "fill": "#2F7CFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "pF9KB",
+              "x": 80,
+              "y": 10,
+              "name": "叉车 1 色标编号",
+              "fill": "#25364B",
+              "content": "01",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "wjLVu",
+              "x": 125,
+              "y": 14,
+              "name": "叉车 2 轨迹色标",
+              "fill": "#00D9C0",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "khbaz",
+              "x": 141,
+              "y": 10,
+              "name": "叉车 2 色标编号",
+              "fill": "#25364B",
+              "content": "02",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "RLU1z",
+              "x": 186,
+              "y": 14,
+              "name": "叉车 3 轨迹色标",
+              "fill": "#F6B83F",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "PyPUP",
+              "x": 202,
+              "y": 10,
+              "name": "叉车 3 色标编号",
+              "fill": "#25364B",
+              "content": "03",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "C3mEU",
+              "x": 247,
+              "y": 14,
+              "name": "叉车 4 轨迹色标",
+              "fill": "#A77BFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "O2dqhB",
+              "x": 263,
+              "y": 10,
+              "name": "叉车 4 色标编号",
+              "fill": "#25364B",
+              "content": "04",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "hhSIQ",
+              "x": 308,
+              "y": 14,
+              "name": "叉车 5 轨迹色标",
+              "fill": "#F26AA6",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "NGB0m",
+              "x": 324,
+              "y": 10,
+              "name": "叉车 5 色标编号",
+              "fill": "#25364B",
+              "content": "05",
               "fontFamily": "Noto Sans SC",
               "fontSize": 12,
               "fontWeight": "normal"
@@ -59951,8 +60204,16 @@
           "fill": {
             "type": "image",
             "enabled": true,
-            "url": "images/latest-scene-20261023/interior-overview.png",
-            "mode": "cover"
+            "url": "images/order-replay-20261023/scene-floor-overview-dbac427f34b1.png",
+            "mode": "cover",
+            "transform": [
+              1.3333333333333333,
+              0,
+              0,
+              1.062992125984252,
+              0,
+              -0.06299212598425197
+            ]
           },
           "layout": "none"
         },
@@ -60358,7 +60619,7 @@
           "x": 32,
           "y": 232,
           "name": "轨迹显示控件",
-          "width": 360,
+          "width": 392,
           "height": 44,
           "fill": "#FFFFFFF2",
           "cornerRadius": 8,
@@ -60371,7 +60632,7 @@
           "y": 245,
           "name": "轨迹显示标签",
           "fill": "#536478",
-          "content": "轨迹",
+          "content": "叉车轨迹",
           "fontFamily": "Noto Sans SC",
           "fontSize": 13,
           "fontWeight": "normal"
@@ -60379,7 +60640,7 @@
         {
           "type": "frame",
           "id": "VzMSS",
-          "x": 100,
+          "x": 124,
           "y": 234,
           "name": "显示全部轨迹",
           "metadata": {
@@ -60416,14 +60677,14 @@
         {
           "type": "frame",
           "id": "OMM59",
-          "x": 188,
+          "x": 212,
           "y": 234,
           "name": "仅显示选中轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_selected"
           },
-          "width": 92,
+          "width": 106,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -60439,7 +60700,7 @@
               "name": "仅显示选中轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 92,
+              "width": 106,
               "height": 40,
               "content": "仅选中",
               "textAlign": "center",
@@ -60453,14 +60714,14 @@
         {
           "type": "frame",
           "id": "v4NBpm",
-          "x": 286,
+          "x": 324,
           "y": 234,
           "name": "关闭轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_off"
           },
-          "width": 90,
+          "width": 84,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -60476,7 +60737,7 @@
               "name": "关闭轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 90,
+              "width": 84,
               "height": 40,
               "content": "关闭",
               "textAlign": "center",
@@ -60602,11 +60863,197 @@
               "textGrowth": "fixed-width-height",
               "width": 108,
               "height": 40,
-              "content": "回放全景",
+              "content": "地堆全景",
               "textAlign": "center",
               "textAlignVertical": "middle",
               "fontFamily": "Noto Sans SC",
               "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "B4jxRy",
+          "x": 32,
+          "y": 286,
+          "name": "追溯叉车五色对应",
+          "metadata": {
+            "type": "replay_visual",
+            "onlyDuringReplay": true,
+            "curvedTrails": true,
+            "basePulse": true,
+            "truckTrails": false
+          },
+          "width": 392,
+          "height": 38,
+          "fill": "#FFFFFFF2",
+          "cornerRadius": 6,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "P0mGN",
+              "x": 16,
+              "y": 11,
+              "name": "轨迹色标说明",
+              "fill": "#536478",
+              "content": "叉车",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "g9BFXo",
+              "x": 64,
+              "y": 14,
+              "name": "叉车 1 轨迹色标",
+              "fill": "#2F7CFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "C7ZbY",
+              "x": 80,
+              "y": 10,
+              "name": "叉车 1 色标编号",
+              "fill": "#25364B",
+              "content": "01",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "iMBuq",
+              "x": 125,
+              "y": 14,
+              "name": "叉车 2 轨迹色标",
+              "fill": "#00D9C0",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "tI1wV",
+              "x": 141,
+              "y": 10,
+              "name": "叉车 2 色标编号",
+              "fill": "#25364B",
+              "content": "02",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "wJi5C",
+              "x": 186,
+              "y": 14,
+              "name": "叉车 3 轨迹色标",
+              "fill": "#F6B83F",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "QuxrK",
+              "x": 202,
+              "y": 10,
+              "name": "叉车 3 色标编号",
+              "fill": "#25364B",
+              "content": "03",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "F4YFdr",
+              "x": 247,
+              "y": 14,
+              "name": "叉车 4 轨迹色标",
+              "fill": "#A77BFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "FIoqw",
+              "x": 263,
+              "y": 10,
+              "name": "叉车 4 色标编号",
+              "fill": "#25364B",
+              "content": "04",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "BVAT6",
+              "x": 308,
+              "y": 14,
+              "name": "叉车 5 轨迹色标",
+              "fill": "#F26AA6",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "eySef",
+              "x": 324,
+              "y": 10,
+              "name": "叉车 5 色标编号",
+              "fill": "#25364B",
+              "content": "05",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "MZE2T",
+          "x": 434,
+          "y": 232,
+          "name": "跟随相机操作提示",
+          "metadata": {
+            "type": "interaction",
+            "followOrbit": true,
+            "followZoom": true,
+            "followPan": false,
+            "orbitCancelsFollow": false
+          },
+          "width": 526,
+          "height": 44,
+          "fill": "#FFFFFFF2",
+          "cornerRadius": 6,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "drwAv",
+              "x": 16,
+              "y": 14,
+              "name": "跟随中旋转缩放说明",
+              "fill": "#536478",
+              "content": "跟随中：左键旋转 · 滚轮缩放 · 右键平移无效",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
               "fontWeight": "normal"
             }
           ]
@@ -60636,8 +61083,16 @@
           "fill": {
             "type": "image",
             "enabled": true,
-            "url": "images/latest-scene-20261023/interior-overview.png",
-            "mode": "cover"
+            "url": "images/order-replay-20261023/scene-floor-overview-dbac427f34b1.png",
+            "mode": "cover",
+            "transform": [
+              1.3333333333333333,
+              0,
+              0,
+              1.062992125984252,
+              0,
+              -0.06299212598425197
+            ]
           },
           "layout": "none"
         },
@@ -61028,7 +61483,7 @@
           "x": 32,
           "y": 232,
           "name": "轨迹显示控件",
-          "width": 360,
+          "width": 392,
           "height": 44,
           "fill": "#FFFFFFF2",
           "cornerRadius": 8,
@@ -61041,7 +61496,7 @@
           "y": 245,
           "name": "轨迹显示标签",
           "fill": "#536478",
-          "content": "轨迹",
+          "content": "叉车轨迹",
           "fontFamily": "Noto Sans SC",
           "fontSize": 13,
           "fontWeight": "normal"
@@ -61049,7 +61504,7 @@
         {
           "type": "frame",
           "id": "JExu9",
-          "x": 100,
+          "x": 124,
           "y": 234,
           "name": "显示全部轨迹",
           "metadata": {
@@ -61086,14 +61541,14 @@
         {
           "type": "frame",
           "id": "xmtgg",
-          "x": 188,
+          "x": 212,
           "y": 234,
           "name": "仅显示选中轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_selected"
           },
-          "width": 92,
+          "width": 106,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -61109,7 +61564,7 @@
               "name": "仅显示选中轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 92,
+              "width": 106,
               "height": 40,
               "content": "仅选中",
               "textAlign": "center",
@@ -61123,14 +61578,14 @@
         {
           "type": "frame",
           "id": "WE0Yh",
-          "x": 286,
+          "x": 324,
           "y": 234,
           "name": "关闭轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_off"
           },
-          "width": 90,
+          "width": 84,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -61146,7 +61601,7 @@
               "name": "关闭轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 90,
+              "width": 84,
               "height": 40,
               "content": "关闭",
               "textAlign": "center",
@@ -61802,6 +62257,159 @@
               "fontWeight": "normal"
             }
           ]
+        },
+        {
+          "type": "frame",
+          "id": "Gk0Ob",
+          "x": 32,
+          "y": 286,
+          "name": "追溯叉车五色对应",
+          "metadata": {
+            "type": "replay_visual",
+            "onlyDuringReplay": true,
+            "curvedTrails": true,
+            "basePulse": true,
+            "truckTrails": false
+          },
+          "width": 392,
+          "height": 38,
+          "fill": "#FFFFFFF2",
+          "cornerRadius": 6,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "CSFzu",
+              "x": 16,
+              "y": 11,
+              "name": "轨迹色标说明",
+              "fill": "#536478",
+              "content": "叉车",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "MHNJx",
+              "x": 64,
+              "y": 14,
+              "name": "叉车 1 轨迹色标",
+              "fill": "#2F7CFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "W6v9wd",
+              "x": 80,
+              "y": 10,
+              "name": "叉车 1 色标编号",
+              "fill": "#25364B",
+              "content": "01",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "Lcmem",
+              "x": 125,
+              "y": 14,
+              "name": "叉车 2 轨迹色标",
+              "fill": "#00D9C0",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "O1RG15",
+              "x": 141,
+              "y": 10,
+              "name": "叉车 2 色标编号",
+              "fill": "#25364B",
+              "content": "02",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "nKIGc",
+              "x": 186,
+              "y": 14,
+              "name": "叉车 3 轨迹色标",
+              "fill": "#F6B83F",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "G0xVFi",
+              "x": 202,
+              "y": 10,
+              "name": "叉车 3 色标编号",
+              "fill": "#25364B",
+              "content": "03",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "LotnB",
+              "x": 247,
+              "y": 14,
+              "name": "叉车 4 轨迹色标",
+              "fill": "#A77BFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "QY9IY",
+              "x": 263,
+              "y": 10,
+              "name": "叉车 4 色标编号",
+              "fill": "#25364B",
+              "content": "04",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "sVTuW",
+              "x": 308,
+              "y": 14,
+              "name": "叉车 5 轨迹色标",
+              "fill": "#F26AA6",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "SmTBQ",
+              "x": 324,
+              "y": 10,
+              "name": "叉车 5 色标编号",
+              "fill": "#25364B",
+              "content": "05",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
         }
       ]
     },
@@ -61828,8 +62436,16 @@
           "fill": {
             "type": "image",
             "enabled": true,
-            "url": "images/latest-scene-20261023/interior-overview.png",
-            "mode": "cover"
+            "url": "images/order-replay-20261023/scene-floor-overview-dbac427f34b1.png",
+            "mode": "cover",
+            "transform": [
+              1.3333333333333333,
+              0,
+              0,
+              1.062992125984252,
+              0,
+              -0.06299212598425197
+            ]
           },
           "layout": "none"
         },
@@ -62225,7 +62841,7 @@
           "x": 32,
           "y": 232,
           "name": "轨迹显示控件",
-          "width": 360,
+          "width": 392,
           "height": 44,
           "fill": "#FFFFFFF2",
           "cornerRadius": 8,
@@ -62238,7 +62854,7 @@
           "y": 245,
           "name": "轨迹显示标签",
           "fill": "#536478",
-          "content": "轨迹",
+          "content": "叉车轨迹",
           "fontFamily": "Noto Sans SC",
           "fontSize": 13,
           "fontWeight": "normal"
@@ -62246,7 +62862,7 @@
         {
           "type": "frame",
           "id": "m8SpY",
-          "x": 100,
+          "x": 124,
           "y": 234,
           "name": "显示全部轨迹",
           "metadata": {
@@ -62283,14 +62899,14 @@
         {
           "type": "frame",
           "id": "KOkGQ",
-          "x": 188,
+          "x": 212,
           "y": 234,
           "name": "仅显示选中轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_selected"
           },
-          "width": 92,
+          "width": 106,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -62306,7 +62922,7 @@
               "name": "仅显示选中轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 92,
+              "width": 106,
               "height": 40,
               "content": "仅选中",
               "textAlign": "center",
@@ -62320,14 +62936,14 @@
         {
           "type": "frame",
           "id": "w7ILg",
-          "x": 286,
+          "x": 324,
           "y": 234,
           "name": "关闭轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_off"
           },
-          "width": 90,
+          "width": 84,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -62343,7 +62959,7 @@
               "name": "关闭轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 90,
+              "width": 84,
               "height": 40,
               "content": "关闭",
               "textAlign": "center",
@@ -62523,6 +63139,159 @@
               ]
             }
           ]
+        },
+        {
+          "type": "frame",
+          "id": "WOhbP",
+          "x": 32,
+          "y": 286,
+          "name": "追溯叉车五色对应",
+          "metadata": {
+            "type": "replay_visual",
+            "onlyDuringReplay": true,
+            "curvedTrails": true,
+            "basePulse": true,
+            "truckTrails": false
+          },
+          "width": 392,
+          "height": 38,
+          "fill": "#FFFFFFF2",
+          "cornerRadius": 6,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "kEkJv",
+              "x": 16,
+              "y": 11,
+              "name": "轨迹色标说明",
+              "fill": "#536478",
+              "content": "叉车",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "sZq5E",
+              "x": 64,
+              "y": 14,
+              "name": "叉车 1 轨迹色标",
+              "fill": "#2F7CFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "paKLe",
+              "x": 80,
+              "y": 10,
+              "name": "叉车 1 色标编号",
+              "fill": "#25364B",
+              "content": "01",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "i94Oq",
+              "x": 125,
+              "y": 14,
+              "name": "叉车 2 轨迹色标",
+              "fill": "#00D9C0",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "bL4N4",
+              "x": 141,
+              "y": 10,
+              "name": "叉车 2 色标编号",
+              "fill": "#25364B",
+              "content": "02",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "A9PKc6",
+              "x": 186,
+              "y": 14,
+              "name": "叉车 3 轨迹色标",
+              "fill": "#F6B83F",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "BCpJM",
+              "x": 202,
+              "y": 10,
+              "name": "叉车 3 色标编号",
+              "fill": "#25364B",
+              "content": "03",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "mqNqf",
+              "x": 247,
+              "y": 14,
+              "name": "叉车 4 轨迹色标",
+              "fill": "#A77BFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "Z7lIG",
+              "x": 263,
+              "y": 10,
+              "name": "叉车 4 色标编号",
+              "fill": "#25364B",
+              "content": "04",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "K32Ar",
+              "x": 308,
+              "y": 14,
+              "name": "叉车 5 轨迹色标",
+              "fill": "#F26AA6",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "eU4Lz",
+              "x": 324,
+              "y": 10,
+              "name": "叉车 5 色标编号",
+              "fill": "#25364B",
+              "content": "05",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
         }
       ]
     },
@@ -62549,8 +63318,16 @@
           "fill": {
             "type": "image",
             "enabled": true,
-            "url": "images/latest-scene-20261023/interior-overview.png",
-            "mode": "cover"
+            "url": "images/order-replay-20261023/scene-floor-overview-dbac427f34b1.png",
+            "mode": "cover",
+            "transform": [
+              1.3333333333333333,
+              0,
+              0,
+              1.062992125984252,
+              0,
+              -0.06299212598425197
+            ]
           },
           "layout": "none"
         },
@@ -62906,6 +63683,159 @@
         },
         {
           "type": "frame",
+          "id": "tQlC8",
+          "x": 32,
+          "y": 286,
+          "name": "追溯叉车五色对应",
+          "metadata": {
+            "type": "replay_visual",
+            "onlyDuringReplay": true,
+            "curvedTrails": true,
+            "basePulse": true,
+            "truckTrails": false
+          },
+          "width": 392,
+          "height": 38,
+          "fill": "#FFFFFFF2",
+          "cornerRadius": 6,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "I9d2j",
+              "x": 16,
+              "y": 11,
+              "name": "轨迹色标说明",
+              "fill": "#536478",
+              "content": "叉车",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "kztkm",
+              "x": 64,
+              "y": 14,
+              "name": "叉车 1 轨迹色标",
+              "fill": "#2F7CFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "KCbX1",
+              "x": 80,
+              "y": 10,
+              "name": "叉车 1 色标编号",
+              "fill": "#25364B",
+              "content": "01",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "DSkJd",
+              "x": 125,
+              "y": 14,
+              "name": "叉车 2 轨迹色标",
+              "fill": "#00D9C0",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "as4Nd",
+              "x": 141,
+              "y": 10,
+              "name": "叉车 2 色标编号",
+              "fill": "#25364B",
+              "content": "02",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "ZXX10",
+              "x": 186,
+              "y": 14,
+              "name": "叉车 3 轨迹色标",
+              "fill": "#F6B83F",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "pU3dZ",
+              "x": 202,
+              "y": 10,
+              "name": "叉车 3 色标编号",
+              "fill": "#25364B",
+              "content": "03",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "jPVa6",
+              "x": 247,
+              "y": 14,
+              "name": "叉车 4 轨迹色标",
+              "fill": "#A77BFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "uKRjT",
+              "x": 263,
+              "y": 10,
+              "name": "叉车 4 色标编号",
+              "fill": "#25364B",
+              "content": "04",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "MJu56",
+              "x": 308,
+              "y": 14,
+              "name": "叉车 5 轨迹色标",
+              "fill": "#F26AA6",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "WvIBf",
+              "x": 324,
+              "y": 10,
+              "name": "叉车 5 色标编号",
+              "fill": "#25364B",
+              "content": "05",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
           "id": "BuetG",
           "x": 32,
           "y": 174,
@@ -62946,7 +63876,7 @@
           "x": 32,
           "y": 232,
           "name": "轨迹显示控件",
-          "width": 360,
+          "width": 392,
           "height": 44,
           "fill": "#FFFFFFF2",
           "cornerRadius": 8,
@@ -62959,7 +63889,7 @@
           "y": 245,
           "name": "轨迹显示标签",
           "fill": "#536478",
-          "content": "轨迹",
+          "content": "叉车轨迹",
           "fontFamily": "Noto Sans SC",
           "fontSize": 13,
           "fontWeight": "normal"
@@ -62967,7 +63897,7 @@
         {
           "type": "frame",
           "id": "jYz9F",
-          "x": 100,
+          "x": 124,
           "y": 234,
           "name": "显示全部轨迹",
           "metadata": {
@@ -63004,14 +63934,14 @@
         {
           "type": "frame",
           "id": "NHVUL",
-          "x": 188,
+          "x": 212,
           "y": 234,
           "name": "仅显示选中轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_selected"
           },
-          "width": 92,
+          "width": 106,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -63027,7 +63957,7 @@
               "name": "仅显示选中轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 92,
+              "width": 106,
               "height": 40,
               "content": "仅选中",
               "textAlign": "center",
@@ -63041,14 +63971,14 @@
         {
           "type": "frame",
           "id": "s4gL28",
-          "x": 286,
+          "x": 324,
           "y": 234,
           "name": "关闭轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_off"
           },
-          "width": 90,
+          "width": 84,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -63064,7 +63994,7 @@
               "name": "关闭轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 90,
+              "width": 84,
               "height": 40,
               "content": "关闭",
               "textAlign": "center",
@@ -63272,8 +64202,16 @@
           "fill": {
             "type": "image",
             "enabled": true,
-            "url": "images/latest-scene-20261023/interior-overview.png",
-            "mode": "cover"
+            "url": "images/order-replay-20261023/scene-floor-overview-dbac427f34b1.png",
+            "mode": "cover",
+            "transform": [
+              1.3333333333333333,
+              0,
+              0,
+              1.062992125984252,
+              0,
+              -0.06299212598425197
+            ]
           },
           "layout": "none"
         },
@@ -63629,6 +64567,159 @@
         },
         {
           "type": "frame",
+          "id": "kxMWm",
+          "x": 32,
+          "y": 286,
+          "name": "追溯叉车五色对应",
+          "metadata": {
+            "type": "replay_visual",
+            "onlyDuringReplay": true,
+            "curvedTrails": true,
+            "basePulse": true,
+            "truckTrails": false
+          },
+          "width": 392,
+          "height": 38,
+          "fill": "#FFFFFFF2",
+          "cornerRadius": 6,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "uX1uj",
+              "x": 16,
+              "y": 11,
+              "name": "轨迹色标说明",
+              "fill": "#536478",
+              "content": "叉车",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "Tg483",
+              "x": 64,
+              "y": 14,
+              "name": "叉车 1 轨迹色标",
+              "fill": "#2F7CFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "E49dI",
+              "x": 80,
+              "y": 10,
+              "name": "叉车 1 色标编号",
+              "fill": "#25364B",
+              "content": "01",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "dnL3o",
+              "x": 125,
+              "y": 14,
+              "name": "叉车 2 轨迹色标",
+              "fill": "#00D9C0",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "yodPk",
+              "x": 141,
+              "y": 10,
+              "name": "叉车 2 色标编号",
+              "fill": "#25364B",
+              "content": "02",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "ZuZ6t",
+              "x": 186,
+              "y": 14,
+              "name": "叉车 3 轨迹色标",
+              "fill": "#F6B83F",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "cvifu",
+              "x": 202,
+              "y": 10,
+              "name": "叉车 3 色标编号",
+              "fill": "#25364B",
+              "content": "03",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "Q9wKOK",
+              "x": 247,
+              "y": 14,
+              "name": "叉车 4 轨迹色标",
+              "fill": "#A77BFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "N35FS",
+              "x": 263,
+              "y": 10,
+              "name": "叉车 4 色标编号",
+              "fill": "#25364B",
+              "content": "04",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "a32NEj",
+              "x": 308,
+              "y": 14,
+              "name": "叉车 5 轨迹色标",
+              "fill": "#F26AA6",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "F3H4h",
+              "x": 324,
+              "y": 10,
+              "name": "叉车 5 色标编号",
+              "fill": "#25364B",
+              "content": "05",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
           "id": "Dk6mo",
           "x": 32,
           "y": 174,
@@ -63669,7 +64760,7 @@
           "x": 32,
           "y": 232,
           "name": "轨迹显示控件",
-          "width": 360,
+          "width": 392,
           "height": 44,
           "fill": "#FFFFFFF2",
           "cornerRadius": 8,
@@ -63682,7 +64773,7 @@
           "y": 245,
           "name": "轨迹显示标签",
           "fill": "#536478",
-          "content": "轨迹",
+          "content": "叉车轨迹",
           "fontFamily": "Noto Sans SC",
           "fontSize": 13,
           "fontWeight": "normal"
@@ -63690,7 +64781,7 @@
         {
           "type": "frame",
           "id": "eJwwV",
-          "x": 100,
+          "x": 124,
           "y": 234,
           "name": "显示全部轨迹",
           "metadata": {
@@ -63727,14 +64818,14 @@
         {
           "type": "frame",
           "id": "E79l2x",
-          "x": 188,
+          "x": 212,
           "y": 234,
           "name": "仅显示选中轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_selected"
           },
-          "width": 92,
+          "width": 106,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -63750,7 +64841,7 @@
               "name": "仅显示选中轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 92,
+              "width": 106,
               "height": 40,
               "content": "仅选中",
               "textAlign": "center",
@@ -63764,14 +64855,14 @@
         {
           "type": "frame",
           "id": "iWROX",
-          "x": 286,
+          "x": 324,
           "y": 234,
           "name": "关闭轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_off"
           },
-          "width": 90,
+          "width": 84,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -63787,7 +64878,7 @@
               "name": "关闭轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 90,
+              "width": 84,
               "height": 40,
               "content": "关闭",
               "textAlign": "center",
@@ -64552,8 +65643,16 @@
           "fill": {
             "type": "image",
             "enabled": true,
-            "url": "images/latest-scene-20261023/interior-overview.png",
-            "mode": "cover"
+            "url": "images/order-replay-20261023/scene-floor-overview-dbac427f34b1.png",
+            "mode": "cover",
+            "transform": [
+              1.3333333333333333,
+              0,
+              0,
+              1.062992125984252,
+              0,
+              -0.06299212598425197
+            ]
           },
           "layout": "none"
         },
@@ -65108,7 +66207,7 @@
           "x": 32,
           "y": 232,
           "name": "轨迹显示控件",
-          "width": 360,
+          "width": 392,
           "height": 44,
           "fill": "#FFFFFFF2",
           "cornerRadius": 8,
@@ -65121,7 +66220,7 @@
           "y": 245,
           "name": "轨迹显示标签",
           "fill": "#536478",
-          "content": "轨迹",
+          "content": "叉车轨迹",
           "fontFamily": "Noto Sans SC",
           "fontSize": 13,
           "fontWeight": "normal"
@@ -65129,7 +66228,7 @@
         {
           "type": "frame",
           "id": "ZCD3s",
-          "x": 100,
+          "x": 124,
           "y": 234,
           "name": "显示全部轨迹",
           "metadata": {
@@ -65166,14 +66265,14 @@
         {
           "type": "frame",
           "id": "xUrEX",
-          "x": 188,
+          "x": 212,
           "y": 234,
           "name": "仅显示选中轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_selected"
           },
-          "width": 92,
+          "width": 106,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -65189,7 +66288,7 @@
               "name": "仅显示选中轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 92,
+              "width": 106,
               "height": 40,
               "content": "仅选中",
               "textAlign": "center",
@@ -65203,14 +66302,14 @@
         {
           "type": "frame",
           "id": "wGqIZ",
-          "x": 286,
+          "x": 324,
           "y": 234,
           "name": "关闭轨迹",
           "metadata": {
             "type": "interaction",
             "action": "trails_off"
           },
-          "width": 90,
+          "width": 84,
           "height": 40,
           "fill": "#FFFFFF",
           "cornerRadius": 6,
@@ -65226,7 +66325,7 @@
               "name": "关闭轨迹 文案",
               "fill": "#25364B",
               "textGrowth": "fixed-width-height",
-              "width": 90,
+              "width": 84,
               "height": 40,
               "content": "关闭",
               "textAlign": "center",
@@ -65438,6 +66537,159 @@
               "enabled": false
             }
           }
+        },
+        {
+          "type": "frame",
+          "id": "zyYhI",
+          "x": 32,
+          "y": 286,
+          "name": "追溯叉车五色对应",
+          "metadata": {
+            "type": "replay_visual",
+            "onlyDuringReplay": true,
+            "curvedTrails": true,
+            "basePulse": true,
+            "truckTrails": false
+          },
+          "width": 392,
+          "height": 38,
+          "fill": "#FFFFFFF2",
+          "cornerRadius": 6,
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "u150h",
+              "x": 16,
+              "y": 11,
+              "name": "轨迹色标说明",
+              "fill": "#536478",
+              "content": "叉车",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "LngVq",
+              "x": 64,
+              "y": 14,
+              "name": "叉车 1 轨迹色标",
+              "fill": "#2F7CFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "B2L6K",
+              "x": 80,
+              "y": 10,
+              "name": "叉车 1 色标编号",
+              "fill": "#25364B",
+              "content": "01",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "bHdJA",
+              "x": 125,
+              "y": 14,
+              "name": "叉车 2 轨迹色标",
+              "fill": "#00D9C0",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "Pzanz",
+              "x": 141,
+              "y": 10,
+              "name": "叉车 2 色标编号",
+              "fill": "#25364B",
+              "content": "02",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "V2eFL",
+              "x": 186,
+              "y": 14,
+              "name": "叉车 3 轨迹色标",
+              "fill": "#F6B83F",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "BqsGL",
+              "x": 202,
+              "y": 10,
+              "name": "叉车 3 色标编号",
+              "fill": "#25364B",
+              "content": "03",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "uqXsx",
+              "x": 247,
+              "y": 14,
+              "name": "叉车 4 轨迹色标",
+              "fill": "#A77BFF",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "LNcgE",
+              "x": 263,
+              "y": 10,
+              "name": "叉车 4 色标编号",
+              "fill": "#25364B",
+              "content": "04",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "tSk3T",
+              "x": 308,
+              "y": 14,
+              "name": "叉车 5 轨迹色标",
+              "fill": "#F26AA6",
+              "width": 9,
+              "height": 9,
+              "stroke": "#25364B33",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "NB8Cf",
+              "x": 324,
+              "y": 10,
+              "name": "叉车 5 色标编号",
+              "fill": "#25364B",
+              "content": "05",
+              "fontFamily": "Noto Sans SC",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
         }
       ]
     }

@@ -99,6 +99,8 @@ public:
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetSnapshot() const;
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetSceneControlsState() const;
     UFUNCTION(BlueprintPure, Category="Warehouse Replay") FString GetReplayState() const;
+    /** Logical viewport rectangle (x,y,width,height), excluding header, panel and timeline. */
+    UFUNCTION(BlueprintPure, Category="Warehouse Replay") FVector4 GetReplaySceneRect() const;
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void EvaluateDiagnostics(const FString& Script);
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool SelectObject(const FString& Id, bool bFocus = true);
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void ClearSelection();

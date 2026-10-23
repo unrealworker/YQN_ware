@@ -5,6 +5,7 @@
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonSerializer.h"
 #include "Components/CanvasPanelSlot.h"
+#include "Camera/CameraComponent.h"
 
 namespace
 {
@@ -49,17 +50,27 @@ bool UGHSTwinHUDWidget::GuardReplayOperation(const FString& Json,const FString& 
 void UGHSTwinHUDWidget::ReplayOverview()
 {
     auto* Session=ReplaySession();if(!Session || !Session->IsReplaying() || Session->IsExitPending()) return;
-    Session->Follow(TEXT(""),ViewSize,Layout.ScenePosition+Layout.SceneSize*.5);
+    const FVector4 Rect=GetReplaySceneRect();const FVector2D Position(Rect.X,Rect.Y),Size(Rect.Z,Rect.W),Center=Position+Size*.5;
+    Session->Follow(TEXT(""),ViewSize,Center);
     if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn()))
-        Camera->FocusOnTarget(Camera->OverviewCenter,FMath::Min(Camera->MaximumZoom,
-            float(Camera->OverviewDistance*ViewSize.X/FMath::Max(1.,Layout.SceneSize.X))),FRotator(-54,-90,0),ViewSize,
-            Layout.ScenePosition+FVector2D(Layout.SceneSize.X*.5,(Layout.SceneSize.Y-168)*.5));
+    {
+        const FBox Bounds=Session->GetWorkAreaBounds();const FRotator Rotation(-58,-90,0);
+        const float Distance=Camera->CalculateFramingDistance(Bounds,Rotation,Camera->WarehouseCamera->FieldOfView,ViewSize,FBox2D(Position,Position+Size));
+        if(Distance>0) Camera->FocusOnTarget(Bounds.GetCenter(),Distance,Rotation,ViewSize,Center);
+    }
+}
+FVector4 UGHSTwinHUDWidget::GetReplaySceneRect() const
+{
+    const double Side=FMath::Min(28.,Layout.SceneSize.X*.06),Top=FMath::Min(72.,Layout.SceneSize.Y*.12);
+    // Timeline begins 192 logical pixels above the bottom; keep another 24px gap.
+    return FVector4(Layout.ScenePosition.X+Side,Layout.ScenePosition.Y+Top,
+        FMath::Max(64.,Layout.SceneSize.X-Side*2),FMath::Max(80.,Layout.SceneSize.Y-Top-216));
 }
 bool UGHSTwinHUDWidget::HandleReplayCommand(const FString& Action,const TSharedPtr<FJsonObject>& Object)
 {
     auto* Session=ReplaySession();if(!Session) return false;
     FString Id;Object->TryGetStringField(TEXT("id"),Id);
-    const FVector2D Center=Layout.ScenePosition+FVector2D(Layout.SceneSize.X*.5,(Layout.SceneSize.Y-168)*.5);
+    const FVector4 Rect=GetReplaySceneRect();const FVector2D Center(Rect.X+Rect.Z*.5,Rect.Y+Rect.W*.5);
     if(Action==TEXT("replayReady")) {bReplayOverlayReady=true;LastReplayViewport=FVector2D::ZeroVector;PushReplayState();return true;}
     if(Action==TEXT("replayStart"))
     {

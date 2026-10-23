@@ -798,7 +798,8 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
     }
     if(auto* Replay=ReplaySession();Replay && Replay->IsReplaying())
     {
-        Replay->Advance(DeltaSeconds,ViewSize,Layout.ScenePosition+FVector2D(Layout.SceneSize.X*.5,(Layout.SceneSize.Y-168)*.5));
+        const FVector4 Rect=GetReplaySceneRect();
+        Replay->Advance(DeltaSeconds,ViewSize,FVector2D(Rect.X+Rect.Z*.5,Rect.Y+Rect.W*.5));
         if(Now>=NextReplayPush) {PushReplayState();NextReplayPush=Now+.1;}
         bWarehousePOIVisible=false;bSelectedScreenBoundsValid=false;
         VisibleLabels.Reset();PreviousVisibleLabels.Reset();PreviousPositions.Reset();LabelAges.Reset();return;
@@ -1142,7 +1143,8 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
     // Scene guidance stays below menus so a short viewport never obscures results.
     if(Layout.SceneSize.X>650)
     {
-        const FString Hint=IsReplayActive()?TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  点击选择回放设备"):(IsInteriorAvailable()?TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  中键返回园区  ·  点击查看详情"):TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  点击仓库查看内部"));
+        const auto* Replay=ReplaySession();const bool bFollowing=Replay && Replay->IsReplaying() && !Replay->GetFollowId().IsEmpty();
+        const FString Hint=IsReplayActive()?(bFollowing?TEXT("跟随中  ·  左键旋转  ·  滚轮缩放  ·  右键平移无效"):TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  点击选择回放设备")):(IsInteriorAvailable()?TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  中键返回园区  ·  点击查看详情"):TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  点击仓库查看内部"));
         const auto Metrics=GHSTwinTypography::Measure(Hint,Font(11));
         const FVector2D At(22,Layout.ScenePosition.Y+Layout.SceneSize.Y-44);
         Box(At,FVector2D(Metrics.Size.X+28,32),FLinearColor::White.CopyWithNewOpacity(.94f),8,C(TEXT("DFE7F2")));

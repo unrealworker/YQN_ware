@@ -2,6 +2,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Components/SceneComponent.h"
+#include "Components/DecalComponent.h"
 #include "Engine/StaticMesh.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Dom/JsonObject.h"
@@ -34,6 +35,7 @@ UStaticMeshComponent* AGHSOrderReplayActor::AddMesh(const FString& Name,const FS
     auto* C=NewObject<UStaticMeshComponent>(this,*Name);AddInstanceComponent(C);C->SetupAttachment(RootComponent);
     C->SetMobility(EComponentMobility::Movable);C->SetStaticMesh(Mesh);C->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     C->SetGenerateOverlapEvents(false);C->SetCanEverAffectNavigation(false);C->bAffectDistanceFieldLighting=false;C->SetCastShadow(true);
+    C->SetReceivesDecals(false);
     C->RegisterComponent();return C;
 }
 
@@ -100,25 +102,38 @@ bool AGHSOrderReplayActor::InitializeReplay()
     }
     UStaticMesh* Plane=LoadObject<UStaticMesh>(nullptr,TEXT("/Engine/BasicShapes/Plane.Plane"));
     auto* Material=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/GHSOrderReplay/Materials/M_ReplayTrail"));
-    if(!Plane||!Material){Error=TEXT("回放轨迹材质尚未就绪");return false;}
-    for(int I=0;I<GHSReplay::DeviceCount;++I)
+    auto* RippleMaterial=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/GHSOrderReplay/Materials/M_ReplayGroundRipple"));
+    if(!Plane||!Material||!RippleMaterial){Error=TEXT("回放轨迹材质尚未就绪");return false;}
+    for(int I=0;I<GHSReplay::ForkCount;++I)
     {
         auto* Trail=NewObject<UInstancedStaticMeshComponent>(this,*FString::Printf(TEXT("Trail%d"),I));AddInstanceComponent(Trail);Trail->SetupAttachment(RootComponent);Trail->SetStaticMesh(Plane);Trail->SetMobility(EComponentMobility::Movable);Trail->SetCollisionEnabled(ECollisionEnabled::NoCollision);Trail->SetCastShadow(false);Trail->SetCanEverAffectNavigation(false);Trail->SetGenerateOverlapEvents(false);
         // Metres along the whole route, not one repeating UV cycle per short chord.
-        Trail->SetNumCustomDataFloats(2);
-        auto* MID=UMaterialInstanceDynamic::Create(Material,this);Trail->SetMaterial(0,MID);Trail->RegisterComponent();Trails.Add(Trail);TrailMaterials.Add(MID);TrailTransforms.AddDefaulted();
+        Trail->SetNumCustomDataFloats(6);
+        const auto Tint=FLinearColor::FromSRGBColor(FColor::FromHex(UTF8_TO_TCHAR(GHSReplay::TrailColor(I))));
+        auto* MID=UMaterialInstanceDynamic::Create(Material,this);MID->SetVectorParameterValue(TEXT("Tint"),Tint);
+        Trail->SetMaterial(0,MID);Trail->RegisterComponent();Trails.Add(Trail);TrailMaterials.Add(MID);
         const auto Segments=GHSReplay::BuildTrailSegments(Simulation.Tracks[I]);
         for(const auto& Segment:Segments)
         {
             FVector A=V(Segment.A),B=V(Segment.B);A.Z+=3;B.Z+=3;const FVector Delta=B-A;
             const double LengthMeters=Segment.LengthMeters;
             // Exact adjoining lengths avoid dark/bright stripes from alpha overlap.
-            FTransform Transform(FRotator(0,Delta.Rotation().Yaw,0),(A+B)*.5,FVector(LengthMeters,.65,1));
-            const int32 Instance=Trail->AddInstance(Transform);TrailTransforms[I].Add(Transform);
+            FTransform Transform(FRotator(0,Delta.Rotation().Yaw,0),(A+B)*.5,FVector(LengthMeters,GHSReplay::TrailWidthCm/100.,1));
+            const int32 Instance=Trail->AddInstance(Transform);
             Trail->SetCustomDataValue(Instance,0,float(Segment.StartMeters),false);
-            Trail->SetCustomDataValue(Instance,1,float(LengthMeters),false);
+            Trail->SetCustomDataValue(Instance,1,float(Segment.FlowDeltaMeters),false);
+            Trail->SetCustomDataValue(Instance,2,float(Segment.StartShearCm),false);
+            Trail->SetCustomDataValue(Instance,3,float(Segment.EndShearCm),false);
+            Trail->SetCustomDataValue(Instance,4,float(Segment.StartHalfWidthCm),false);
+            Trail->SetCustomDataValue(Instance,5,float(Segment.EndHalfWidthCm),false);
         }
         Trail->MarkRenderStateDirty();
+        auto* Ripple=NewObject<UDecalComponent>(this,*FString::Printf(TEXT("GroundRipple%d"),I));
+        AddInstanceComponent(Ripple);Ripple->SetupAttachment(RootComponent);Ripple->SetMobility(EComponentMobility::Movable);
+        Ripple->DecalSize=FVector(3.,165.,165.);Ripple->SetFadeScreenSize(0);Ripple->SetSortOrder(30);
+        auto* RippleMID=UMaterialInstanceDynamic::Create(RippleMaterial,this);
+        RippleMID->SetVectorParameterValue(TEXT("Tint"),Tint);RippleMID->SetScalarParameterValue(TEXT("Phase"),I*.173f);
+        Ripple->SetDecalMaterial(RippleMID);Ripple->RegisterComponent();GroundRipples.Add(Ripple);RippleMaterials.Add(RippleMID);
     }
     bReady=true;EvaluateAt(0);SetTrailMode(TrailMode,SelectedId);return true;
 }
@@ -134,6 +149,8 @@ void AGHSOrderReplayActor::EvaluateAt(double Time)
         {
             auto Fork=Transform;Fork.AddToTranslation(FVector(0,0,P.Lift));Carriages[I]->SetWorldTransform(Fork);Carriages[I]->SetVisibility(P.Visible);
             auto Mast=Transform;Mast.AddToTranslation(FVector(0,0,FMath::Max(0.,P.Lift-70.)*.5));Masts[I]->SetWorldTransform(Mast);Masts[I]->SetVisibility(P.Visible);
+            GroundRipples[I]->SetWorldLocationAndRotation(FVector(P.Position.X,P.Position.Y,1.5),FRotator(-90,P.Yaw,0));
+            GroundRipples[I]->SetVisibility(P.Visible&&TrailMode!=TEXT("off")&&(TrailMode!=TEXT("selected")||SelectedId==S(Simulation.Tracks[I].Id)));
         }
         if(I>=GHSReplay::ForkCount&&I<GHSReplay::DeviceCount)
         {
@@ -145,6 +162,7 @@ void AGHSOrderReplayActor::EvaluateAt(double Time)
         }
     }
     for(UMaterialInstanceDynamic* Material:TrailMaterials)if(Material)Material->SetScalarParameterValue(TEXT("ReplayTime"),float(FMath::Fmod(CurrentTime,10000.)));
+    for(UMaterialInstanceDynamic* Material:RippleMaterials)if(Material)Material->SetScalarParameterValue(TEXT("ReplayTime"),float(FMath::Fmod(CurrentTime,10000.)));
 }
 
 void AGHSOrderReplayActor::SetTrailMode(const FString& Mode,const FString& Id)
@@ -153,7 +171,12 @@ void AGHSOrderReplayActor::SetTrailMode(const FString& Mode,const FString& Id)
 }
 void AGHSOrderReplayActor::UpdateTrails()
 {
-    for(int32 I=0;I<Trails.Num();++I)Trails[I]->SetVisibility(TrailMode==TEXT("all")||(TrailMode==TEXT("selected")&&S(Simulation.Tracks[I].Id)==SelectedId));
+    for(int32 I=0;I<Trails.Num();++I)
+    {
+        const bool Visible=TrailMode==TEXT("all")||(TrailMode==TEXT("selected")&&S(Simulation.Tracks[I].Id)==SelectedId);
+        Trails[I]->SetVisibility(Visible);
+        GroundRipples[I]->SetVisibility(Visible&&Simulation.Poses[I].Visible);
+    }
 }
 FString AGHSOrderReplayActor::GetSourceInstancesJson() const {return SourceInstancesJson;}
 bool AGHSOrderReplayActor::ResolveDevice(const FString& Id,FVector& Location,FRotator& Rotation,FVector& Extent) const
@@ -193,10 +216,11 @@ FString AGHSOrderReplayActor::GetEventsJson(double Start,double End,int32 Limit)
 FString AGHSOrderReplayActor::GetSnapshotJson() const
 {
     auto Json=MakeShared<FJsonObject>();Json->SetBoolField(TEXT("ready"),bReady);Json->SetNumberField(TEXT("time"),CurrentTime);Json->SetNumberField(TEXT("cycleDuration"),Simulation.CycleDuration);Json->SetNumberField(TEXT("fixedEntities"),GHSReplay::EntityCount);Json->SetStringField(TEXT("error"),Error);
+    Json->SetNumberField(TEXT("trailComponents"),Trails.Num());Json->SetNumberField(TEXT("rippleComponents"),GroundRipples.Num());
     TArray<TSharedPtr<FJsonValue>> Devices;
     for(int I=0;I<GHSReplay::DeviceCount;++I)
     {
-        const auto& T=Simulation.Tracks[I];const auto& P=Simulation.Poses[I];auto R=MakeShared<FJsonObject>();R->SetStringField(TEXT("id"),S(T.Id));R->SetStringField(TEXT("name"),S(T.Name));R->SetStringField(TEXT("title"),S(T.Name));R->SetStringField(TEXT("kind"),S(T.Kind));R->SetStringField(TEXT("type"),I<5?TEXT("forklift"):TEXT("truck"));R->SetStringField(TEXT("status"),P.Status?S(*P.Status):TEXT("准备中"));R->SetStringField(TEXT("state"),P.Status?S(*P.Status):TEXT("准备中"));R->SetBoolField(TEXT("visible"),P.Visible);R->SetArrayField(TEXT("position"),JsonVec(V(P.Position)));R->SetNumberField(TEXT("yaw"),P.Yaw);R->SetNumberField(TEXT("lift"),P.Lift);int Load=0;for(int C=8;C<18;++C)if(Simulation.Poses[C].Owner==I)++Load;R->SetNumberField(TEXT("cargoCount"),Load);R->SetNumberField(TEXT("load"),Load);R->SetBoolField(TEXT("loaded"),Load>0);R->SetNumberField(TEXT("capacity"),I<5?1:(I==6?2:4));R->SetNumberField(TEXT("trip"),Simulation.CycleDuration>0?FMath::FloorToDouble(CurrentTime/Simulation.CycleDuration)+1:1);Devices.Add(MakeShared<FJsonValueObject>(R));
+        const auto& T=Simulation.Tracks[I];const auto& P=Simulation.Poses[I];auto R=MakeShared<FJsonObject>();R->SetStringField(TEXT("id"),S(T.Id));R->SetStringField(TEXT("name"),S(T.Name));R->SetStringField(TEXT("title"),S(T.Name));R->SetStringField(TEXT("kind"),S(T.Kind));R->SetStringField(TEXT("type"),I<5?TEXT("forklift"):TEXT("truck"));R->SetStringField(TEXT("trailColor"),UTF8_TO_TCHAR(GHSReplay::TrailColor(I)));R->SetStringField(TEXT("status"),P.Status?S(*P.Status):TEXT("准备中"));R->SetStringField(TEXT("state"),P.Status?S(*P.Status):TEXT("准备中"));R->SetBoolField(TEXT("visible"),P.Visible);R->SetArrayField(TEXT("position"),JsonVec(V(P.Position)));R->SetNumberField(TEXT("yaw"),P.Yaw);R->SetNumberField(TEXT("lift"),P.Lift);int Load=0;for(int C=8;C<18;++C)if(Simulation.Poses[C].Owner==I)++Load;R->SetNumberField(TEXT("cargoCount"),Load);R->SetNumberField(TEXT("load"),Load);R->SetBoolField(TEXT("loaded"),Load>0);R->SetNumberField(TEXT("capacity"),I<5?1:(I==6?2:4));R->SetNumberField(TEXT("trip"),Simulation.CycleDuration>0?FMath::FloorToDouble(CurrentTime/Simulation.CycleDuration)+1:1);Devices.Add(MakeShared<FJsonValueObject>(R));
     }
     Json->SetArrayField(TEXT("devices"),Devices);return Write(Json);
 }

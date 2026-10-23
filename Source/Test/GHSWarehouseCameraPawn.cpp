@@ -99,6 +99,7 @@ FGHSCameraReplayPose AGHSWarehouseCameraPawn::CaptureReplayPose() const
 }
 void AGHSWarehouseCameraPawn::RestoreReplayPose(const FGHSCameraReplayPose& Pose)
 {
+    bReplayFollowing=false;
     CancelPoseTransition();
     bObjectPivot=Pose.ObjectPivot;bUseSceneFraming=Pose.UseFraming;bOverviewFraming=Pose.OverviewFraming;
     FramingOffsetRatio=Pose.FramingRatio;FocusTarget=Pose.FocusTarget;bGroundPanRecovery=Pose.GroundPanRecovery;
@@ -106,16 +107,51 @@ void AGHSWarehouseCameraPawn::RestoreReplayPose(const FGHSCameraReplayPose& Pose
     ApplyPose(Pose.Pivot,Pose.Rotation,Pose.Distance,Pose.SocketOffset,Pose.TargetOffset);
     if(bObjectPivot) ConfigureObjectRestrictions();else ConfigureGroundRestrictions();
 }
-void AGHSWarehouseCameraPawn::FollowReplayTarget(FVector Location,float DeltaSeconds,FRotator ViewRotation)
+void AGHSWarehouseCameraPawn::SetReplayFollowEnabled(bool bEnabled)
 {
-    if(!Finite(Location) || bPoseTransitionActive) return;
+    bReplayFollowing=bEnabled;
+    if(bEnabled && IsPreciseMouseDragging) TogglePreciseMouseDrag(false);
+}
+void AGHSWarehouseCameraPawn::FollowReplayTarget(FVector Location,float DeltaSeconds)
+{
+    if(!Finite(Location) || !FMath::IsFinite(DeltaSeconds) || DeltaSeconds<0) return;
+    bReplayFollowing=true;FocusTarget=Location;
+    // The target may move during the entry flight. Keep its final pivot current.
+    if(bPoseTransitionActive) {FlightEndPivot=Location;return;}
     const FVector Pivot=FMath::VInterpTo(GetActorLocation(),Location,DeltaSeconds,5.f);
-    FocusTarget=Location;bObjectPivot=true;ConfigureObjectRestrictions();
-    // A damped three-quarter view exposes the forks and cargo, including at the dock.
-    // Vehicle heading (not velocity) keeps the view stable while reversing.
-    const FRotator Rotation=FMath::RInterpTo(GetActorRotation(),ViewRotation,DeltaSeconds,2.f);
-    ApplyPose(Pivot,Rotation,SpringArmComponent->TargetArmLength,
-        SpringArmComponent->SocketOffset,SpringArmComponent->TargetOffset);
+    bObjectPivot=true;ConfigureObjectRestrictions();
+    // Do not ApplyPose here: that would overwrite unfinished user orbit/zoom lag.
+    DesiredLocation=Pivot;SetActorLocation(Pivot);
+}
+void AGHSWarehouseCameraPawn::UpdateReplayViewport(FVector2D ViewportSize,FVector2D SceneCenterPixels)
+{
+    if(!Finite(ViewportSize) || !Finite(SceneCenterPixels) || ViewportSize.X<=0 || ViewportSize.Y<=0) return;
+    const double Units=2*FMath::Tan(FMath::DegreesToRadians(WarehouseCamera->FieldOfView*.5))/ViewportSize.X;
+    const FVector Ratio(0,(ViewportSize.X*.5-SceneCenterPixels.X)*Units,(SceneCenterPixels.Y-ViewportSize.Y*.5)*Units);
+    bUseSceneFraming=true;
+    if(bPoseTransitionActive) FlightEndOffsetRatio=Ratio;
+    else {FramingOffsetRatio=Ratio;UpdateFraming();}
+}
+float AGHSWarehouseCameraPawn::CalculateFramingDistance(const FBox& Bounds,FRotator Rotation,float FieldOfView,
+    FVector2D ViewportSize,const FBox2D& SceneBounds)
+{
+    if(!Bounds.IsValid || !SceneBounds.bIsValid || !Finite(ViewportSize) || ViewportSize.X<=0 || ViewportSize.Y<=0 ||
+        !FMath::IsFinite(FieldOfView) || FieldOfView<=1 || FieldOfView>=179 || !Finite(Rotation)) return 0;
+    const FVector2D Size=SceneBounds.GetSize(),Center=SceneBounds.GetCenter();
+    if(Size.X<=0 || Size.Y<=0) return 0;
+    const double K=ViewportSize.X/(2*FMath::Tan(FMath::DegreesToRadians(FieldOfView*.5)));
+    const double HalfX=Size.X/(2*K),HalfY=Size.Y/(2*K);
+    const double CenterX=(Center.X-ViewportSize.X*.5)/K,CenterY=(ViewportSize.Y*.5-Center.Y)/K;
+    const FRotationMatrix Basis(Rotation);double Distance=900;
+    for(int32 I=0;I<8;++I)
+    {
+        const FVector Corner(I&1?Bounds.Max.X:Bounds.Min.X,I&2?Bounds.Max.Y:Bounds.Min.Y,I&4?Bounds.Max.Z:Bounds.Min.Z);
+        const FVector Q=Basis.GetTransposed().TransformVector(Corner-Bounds.GetCenter());
+        // Perspective fit includes the off-axis framing shift for the panel/timeline.
+        Distance=FMath::Max(Distance,FMath::Max(FMath::Abs(Q.Y-CenterX*Q.X)/HalfX-Q.X,
+            FMath::Abs(Q.Z-CenterY*Q.X)/HalfY-Q.X));
+    }
+    return float(Distance*1.04);
 }
 
 void AGHSWarehouseCameraPawn::TransitionToPose(FVector Pivot,float Distance,FRotator Rotation,
@@ -124,6 +160,7 @@ void AGHSWarehouseCameraPawn::TransitionToPose(FVector Pivot,float Distance,FRot
     if(!Finite(Pivot) || !Finite(Rotation) || !FMath::IsFinite(Distance) || !FMath::IsFinite(Duration)
         || !Finite(ViewportSize) || !Finite(SceneCenterPixels) || ViewportSize.X<=0 || ViewportSize.Y<=0) return;
     CancelPoseTransition();
+    bReplayFollowing=false;
     bOverviewFraming=false;
     if(IsPreciseMouseDragging) TogglePreciseMouseDrag(false);
     FlightStartPivot=GetActorLocation(); FlightStartRotation=GetActorRotation();
@@ -172,6 +209,7 @@ void AGHSWarehouseCameraPawn::CancelPoseTransition()
 
 void AGHSWarehouseCameraPawn::PrepareForGroundPan()
 {
+    if(bReplayFollowing) return;
     bOverviewFraming=false;
     CancelPoseTransition();
     if(!bObjectPivot) return;
@@ -222,6 +260,7 @@ void AGHSWarehouseCameraPawn::BeginPlay()
 
 void AGHSWarehouseCameraPawn::ResetOverview(bool Immediate)
 {
+    bReplayFollowing=false;
     CancelPoseTransition();
     bOverviewFraming=true;
     bObjectPivot=false; bUseSceneFraming=false; bGroundPanRecovery=false; FramingOffsetRatio=FVector::ZeroVector;
@@ -264,6 +303,7 @@ void AGHSWarehouseCameraPawn::OrbitPixels(FVector2D Delta)
 
 void AGHSWarehouseCameraPawn::PanPixels(FVector2D Delta, int32 ViewportWidth)
 {
+    if(bReplayFollowing) return;
     if (!Finite(Delta) || ViewportWidth <= 0) return;
     if(Delta.IsNearlyZero()) return;
     PrepareForGroundPan();

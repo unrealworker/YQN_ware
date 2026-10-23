@@ -148,8 +148,8 @@
     ],
     "cancelFollow": "preserve current camera",
     "trails": [
-      "all",
-      "selected",
+      "all forklifts",
+      "selected forklift",
       "off"
     ],
     "guarded": [
@@ -170,7 +170,19 @@
       "trails",
       "replay overview",
       "panel collapse"
-    ]
+    ],
+    "followOrbit": "left drag rotates and wheel zooms without leaving follow; right drag has no effect",
+    "overview": "floor-storage work area only",
+    "truckTrails": false,
+    "truckFollow": true,
+    "replayOnlyPulsingBase": true,
+    "forkliftTrailColors": {
+      "REPLAY-FORK-01": "#2F7CFF",
+      "REPLAY-FORK-02": "#00D9C0",
+      "REPLAY-FORK-03": "#F6B83F",
+      "REPLAY-FORK-04": "#A77BFF",
+      "REPLAY-FORK-05": "#F26AA6"
+    }
   },
   "limitations": [
     "Pencil exports are static state designs; navigation JSON is the implementation handoff, not executable native Pencil playback.",

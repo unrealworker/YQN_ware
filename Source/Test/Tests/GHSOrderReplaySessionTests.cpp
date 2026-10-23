@@ -6,6 +6,7 @@
 #include "Engine/StaticMeshActor.h"
 #include "Engine/StaticMesh.h"
 #include "Components/StaticMeshComponent.h"
+#include "Camera/CameraComponent.h"
 #include <limits>
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayClockTest,"GHS.Replay.Transport",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
@@ -62,9 +63,9 @@ bool FGHSReplayCameraRestoreTest::RunTest(const FString&)
         TestEqual(TEXT("original distance restored"),Before.Distance,After.Distance);
         TestTrue(TEXT("framing offsets restored"),Before.SocketOffset.Equals(After.SocketOffset) && Before.TargetOffset.Equals(After.TargetOffset));
         TestEqual(TEXT("object pivot preserved"),Before.ObjectPivot,After.ObjectPivot);
-        Camera->FollowReplayTarget(Before.Pivot+FVector(100,200,0),.1f,FRotator(-62,-55,0));
+        Camera->FollowReplayTarget(Before.Pivot+FVector(100,200,0),.1f);
         TestTrue(TEXT("follow moves smoothly toward device"),Camera->GetActorLocation().Equals(Before.Pivot+FVector(50,100,0),.01));
-        TestTrue(TEXT("follow turns toward clear side view without snapping"),Camera->GetActorRotation().Yaw>Before.Rotation.Yaw && Camera->GetActorRotation().Yaw<-55);
+        TestTrue(TEXT("follow keeps the chosen viewing angle"),Camera->GetActorRotation().Equals(Before.Rotation));
         TestTrue(TEXT("follow does not reset user's zoom"),FMath::IsNearlyEqual(Camera->SpringArmComponent->TargetArmLength,Before.Distance));
 
         Camera->FocusOnTarget(FVector(Camera->OverviewCenter.X+Camera->MaximumPan.X+15000,0,400),4200,FRotator(-41,0,0),FVector2D(1920,1080),FVector2D(650,550),0);
@@ -78,6 +79,62 @@ bool FGHSReplayCameraRestoreTest::RunTest(const FString&)
         TestTrue(TEXT("restored recovery mode does not snap exterior pivot on following ticks"),Camera->GetActorLocation().Equals(GroundBefore.Pivot,.01));
     }
     GEngine->DestroyWorldContext(World);World->DestroyWorld(false);return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayFollowNavigationTest,"GHS.Replay.FollowNavigation",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSReplayFollowNavigationTest::RunTest(const FString&)
+{
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);
+    if(!TestNotNull(TEXT("transient follow world"),World)) return false;
+    GEngine->CreateNewWorldContext(World->WorldType).SetCurrentWorld(World);World->InitializeActorsForPlay(FURL());
+    auto* Camera=World->SpawnActor<AGHSWarehouseCameraPawn>();
+    Camera->FocusOnTarget(FVector(1000,2000,150),1800,FRotator(-62,-65,0),FVector2D(1920,1080),FVector2D(700,490),0);
+    const auto Original=Camera->CaptureReplayPose();
+    Camera->FollowReplayTarget(Original.Pivot,.1f);
+    Camera->OrbitPixels(FVector2D(140,-35));Camera->ZoomSteps(-2);
+    const FRotator UserRotation=Camera->DesiredRotation;const float UserZoom=Camera->DesiredZoom;
+    for(int32 I=0;I<120;++I)
+    {
+        Camera->FollowReplayTarget(FVector(1800,2500,150),1.f/60.f);
+        Camera->Tick(1.f/60.f);
+    }
+    TestTrue(TEXT("moving device does not override user's orbit target"),Camera->DesiredRotation.Equals(UserRotation,.01));
+    TestTrue(TEXT("orbit lag completes while following"),Camera->GetActorRotation().Equals(UserRotation,.05));
+    TestEqual(TEXT("follow does not erase wheel zoom target"),Camera->DesiredZoom,UserZoom);
+    TestTrue(TEXT("wheel zoom completes while following"),FMath::IsNearlyEqual(Camera->SpringArmComponent->TargetArmLength,UserZoom,.1f));
+    TestTrue(TEXT("follow still tracks the moving device"),Camera->GetActorLocation().Equals(FVector(1800,2500,150),.1));
+    const auto FollowPose=Camera->CaptureReplayPose();
+    Camera->PanPixels(FVector2D(300,160),1920);Camera->PrepareForGroundPan();
+    TestTrue(TEXT("both direct pan and ground conversion are blocked during follow"),Camera->DesiredLocation.Equals(FollowPose.Pivot) && Camera->UsesObjectPivot());
+    TestTrue(TEXT("follow framing is retained"),Camera->SpringArmComponent->SocketOffset.Equals(FollowPose.SocketOffset));
+    Camera->RestoreReplayPose(Original);Camera->PanPixels(FVector2D(100,0),1920);
+    TestFalse(TEXT("restoring the original view releases the pan lock"),Camera->DesiredLocation.Equals(Original.Pivot));
+    GEngine->DestroyWorldContext(World);World->DestroyWorld(false);return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayWorkAreaFramingTest,"GHS.Replay.WorkAreaFraming",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSReplayWorkAreaFramingTest::RunTest(const FString&)
+{
+    // Actual floor cargo bounds plus its loading apron, never the truck's public-road route.
+    const FBox Bounds(FVector(-7104,-5647,0),FVector(20605,7539,450));
+    const FRotator Rotation(-58,-90,0);const FRotationMatrix Basis(Rotation);
+    for(const FVector2D Viewport:{FVector2D(1920,1080),FVector2D(1366,768)})
+    {
+        const FBox2D Scene(FVector2D(28,136),FVector2D(Viewport.X-492,Viewport.Y-216));
+        const float Distance=AGHSWarehouseCameraPawn::CalculateFramingDistance(Bounds,Rotation,56,Viewport,Scene);
+        TestTrue(TEXT("work-area view is closer than the former campus framing"),Distance>900 && Distance<53500*Viewport.X/(Scene.Max.X-Scene.Min.X));
+        const double K=Viewport.X/(2*FMath::Tan(FMath::DegreesToRadians(28.)));
+        const FVector2D Center=Scene.GetCenter();
+        const FVector Offset(0,(Viewport.X*.5-Center.X)*Distance/K,(Center.Y-Viewport.Y*.5)*Distance/K);
+        for(int32 I=0;I<8;++I)
+        {
+            const FVector Corner(I&1?Bounds.Max.X:Bounds.Min.X,I&2?Bounds.Max.Y:Bounds.Min.Y,I&4?Bounds.Max.Z:Bounds.Min.Z);
+            FVector Local=Basis.GetTransposed().TransformVector(Corner-Bounds.GetCenter());Local.X+=Distance;Local-=Offset;
+            const FVector2D Pixel(Viewport.X*.5+K*Local.Y/Local.X,Viewport.Y*.5-K*Local.Z/Local.X);
+            TestTrue(TEXT("work-area corner avoids panel, header and timeline"),Pixel.X>=Scene.Min.X-.1 && Pixel.X<=Scene.Max.X+.1 && Pixel.Y>=Scene.Min.Y-.1 && Pixel.Y<=Scene.Max.Y+.1);
+        }
+    }
+    return true;
 }
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayRoofRestoreTest,"GHS.Replay.RoofVisibilityRestoration",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
