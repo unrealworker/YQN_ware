@@ -11,11 +11,13 @@ import traceback
 import unreal
 
 ROOT=Path('D:/UEPro/Test')
-OUT=ROOT/'Saved/RoofTraffic'
-DEST='/Game/GHSZcoolSmartFactory/Roof/Dissolve'
+OUT=ROOT/'Saved/RoofScan'
+DEST='/Game/GHSZcoolSmartFactory/Roof/ScanReveal'
 LIB=unreal.EditorAssetLibrary
 ML=unreal.MaterialEditingLibrary
-VERSION='center-out-0.5s-v1'
+VERSION='scan-reveal-v2'
+SHADER=(ROOT/'Scripts/ghs/roof_scan_shader.hlsl').read_text(encoding='utf8')
+SHADER_HASH=hashlib.sha256(SHADER.encode('utf8')).hexdigest()
 SOURCES=[f'/Game/GHSZcoolSmartFactory/Roof/Materials/M_GHSRoof_{role}'
          for role in ('Roof','Seams','Blue','Skylight','Detail')]
 SOURCES.append('/Game/GHSZcoolSmartFactory/OfficeFacade/Materials/M_GHSFacade_Glass')
@@ -41,7 +43,7 @@ def custom_input(name):
 
 def create(source):
     source_name=source.rsplit('/',1)[1]
-    target=f'{DEST}/M_Dissolve_{source_name}'
+    target=f'{DEST}/M_Scan_{source_name}'
     original=LIB.load_asset(source)
     assert isinstance(original,unreal.Material),source
     fingerprint=sha_asset(source)
@@ -55,14 +57,21 @@ def create(source):
         assert LIB.get_metadata_tag(material,'GHS.RoofDissolve.Version')==VERSION,('Unrecognized existing target',target)
         assert LIB.get_metadata_tag(material,'GHS.RoofDissolve.SourceHash')==fingerprint,('Source changed; regenerate reviewed variant',source)
         assert material.get_editor_property('blend_mode')==unreal.BlendMode.BLEND_MASKED
+        if LIB.get_metadata_tag(material,'GHS.RoofScan.ShaderHash')!=SHADER_HASH:
+            nodes=[n for n in unreal.ObjectIterator(unreal.MaterialExpressionCustom)
+                   if n.get_outer()==material and n.get_editor_property('description')=='Roof architectural scan reveal']
+            assert len(nodes)==1,('Expected owned scan node',target,len(nodes))
+            nodes[0].set_editor_property('code',SHADER)
+            ML.recompile_material(material)
+            LIB.set_metadata_tag(material,'GHS.RoofScan.ShaderHash',SHADER_HASH)
+            assert LIB.save_loaded_asset(material,only_if_is_dirty=False)
         return {'source':source,'target':target,'source_sha256':fingerprint,'reused':True}
     material=LIB.duplicate_asset(source,target)
     assert material is not None,target
     material.set_editor_property('blend_mode',unreal.BlendMode.BLEND_MASKED)
     material.set_editor_property('opacity_mask_clip_value',.5)
-    # A narrow, lightly irregular front moves symmetrically out from center.
-    # Clip testing uses opaque masked rendering: no translucent sorting and no
-    # permanent translucent overdraw after the 0.5 second transition.
+    # Private masked variants preserve original source shading. Fractional coverage
+    # is temporally antialiased only at the scan edge and short grid afterglow.
     world=expression(material,unreal.MaterialExpressionWorldPosition,-1000,300)
     center=expression(material,unreal.MaterialExpressionVectorParameter,-1000,460,
         parameter_name='RoofCenter',default_value=unreal.LinearColor(0,0,0,0))
@@ -71,17 +80,10 @@ def create(source):
     progress=expression(material,unreal.MaterialExpressionScalarParameter,-1000,780,
         parameter_name='RoofOpenProgress',default_value=0.)
     cut=expression(material,unreal.MaterialExpressionCustom,-700,300,
-        description='Roof center-out pale blue dissolve',
-        output_type=unreal.CustomMaterialOutputType.CMOT_FLOAT2,
+        description='Roof architectural scan reveal',
+        output_type=unreal.CustomMaterialOutputType.CMOT_FLOAT4,
         inputs=[custom_input(name) for name in ('Position','Center','Axis','Progress')],
-        code='''float3 p=Position-Center;
-float u=abs(dot(p,Axis.xyz))*Axis.w;
-float grain=(sin(p.x*0.027+p.y*0.019)*sin(p.y*0.043+p.z*0.021))*0.006;
-float field=u+grain;
-float front=saturate(Progress)*1.08-0.04;
-float keep=step(front,field);
-float edge=saturate(1.0-abs(field-front)/0.035)*keep;
-return float2(keep,edge);''')
+        code=SHADER)
     connect(world,'',cut,'Position')
     connect(center,'',cut,'Center')
     # UE5.4 VectorParameter exposes RGB and A separately, not a named RGBA pin.
@@ -91,18 +93,30 @@ return float2(keep,edge);''')
     connect(progress,'',cut,'Progress')
     mask=expression(material,unreal.MaterialExpressionComponentMask,-420,300,r=True,g=False,b=False,a=False)
     edge=expression(material,unreal.MaterialExpressionComponentMask,-420,450,r=False,g=True,b=False,a=False)
+    core=expression(material,unreal.MaterialExpressionComponentMask,-420,820,r=False,g=False,b=True,a=False)
+    trail=expression(material,unreal.MaterialExpressionComponentMask,-420,980,r=False,g=False,b=False,a=True)
     connect(cut,'',mask,'');connect(cut,'',edge,'')
-    property_input(material,mask,'',unreal.MaterialProperty.MP_OPACITY_MASK)
+    connect(cut,'',core,'');connect(cut,'',trail,'')
+    dither=expression(material,unreal.MaterialExpressionMaterialFunctionCall,-200,300,
+        material_function=LIB.load_asset('/Engine/Functions/Engine_MaterialFunctions02/Utility/DitherTemporalAA'))
+    connect(mask,'',dither,'Alpha Threshold')
+    property_input(material,dither,'',unreal.MaterialProperty.MP_OPACITY_MASK)
     old_base=ML.get_material_property_input_node(material,unreal.MaterialProperty.MP_BASE_COLOR)
     old_base_output=ML.get_material_property_input_node_output_name(material,unreal.MaterialProperty.MP_BASE_COLOR)
     assert old_base is not None,source
     blue=expression(material,unreal.MaterialExpressionConstant3Vector,-430,630,
-        constant=unreal.LinearColor(.30,.70,1.,1.))
+        constant=unreal.LinearColor(.27,.65,.95,1.))
     tint=expression(material,unreal.MaterialExpressionLinearInterpolate,-100,100)
     connect(old_base,old_base_output,tint,'A');connect(blue,'',tint,'B');connect(edge,'',tint,'Alpha')
     property_input(material,tint,'',unreal.MaterialProperty.MP_BASE_COLOR)
-    glow=expression(material,unreal.MaterialExpressionMultiply,-100,450)
-    connect(blue,'',glow,'A');connect(edge,'',glow,'B')
+    white=expression(material,unreal.MaterialExpressionConstant3Vector,-200,820,
+        constant=unreal.LinearColor(1.5,2.8,3.6,1.))
+    leading=expression(material,unreal.MaterialExpressionMultiply,0,820)
+    connect(white,'',leading,'A');connect(core,'',leading,'B')
+    trailing=expression(material,unreal.MaterialExpressionMultiply,0,980)
+    connect(blue,'',trailing,'A');connect(trail,'',trailing,'B')
+    glow=expression(material,unreal.MaterialExpressionAdd,180,820)
+    connect(leading,'',glow,'A');connect(trailing,'',glow,'B')
     old_emissive=ML.get_material_property_input_node(material,unreal.MaterialProperty.MP_EMISSIVE_COLOR)
     if old_emissive:
         output=ML.get_material_property_input_node_output_name(material,unreal.MaterialProperty.MP_EMISSIVE_COLOR)
@@ -113,13 +127,15 @@ return float2(keep,edge);''')
     LIB.set_metadata_tag(material,'GHS.RoofDissolve.Version',VERSION)
     LIB.set_metadata_tag(material,'GHS.RoofDissolve.SourceHash',fingerprint)
     LIB.set_metadata_tag(material,'GHS.RoofDissolve.Source',source)
+    LIB.set_metadata_tag(material,'GHS.RoofScan.ShaderHash',SHADER_HASH)
     assert LIB.save_loaded_asset(material,only_if_is_dirty=False)
     return {'source':source,'target':target,'source_sha256':fingerprint,'reused':False,
             'expression_count':ML.get_num_material_expressions(material)}
 
 def main():
     OUT.mkdir(parents=True,exist_ok=True)
-    report={'success':False,'variants':[],'version':VERSION,'duration_seconds':.5,
+    report={'success':False,'variants':[],'version':VERSION,'manual_seconds':.8,'navigation_seconds':.5,'restore_seconds':.55,
+            'shader_sha256':SHADER_HASH,
             'map_modified':False,'original_materials_modified':False}
     protected={path:sha_asset(path) for path in SOURCES}
     dirty={p.get_path_name() for p in unreal.EditorLoadingAndSavingUtils.get_dirty_content_packages()}

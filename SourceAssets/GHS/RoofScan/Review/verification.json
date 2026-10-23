@@ -1,0 +1,26 @@
+{
+  "ue": {
+    "succeeded": 120,
+    "succeededWithWarnings": 0,
+    "failed": 0,
+    "notRun": 0
+  },
+  "web": {
+    "passed": 90,
+    "failed": 0
+  },
+  "builds": [
+    "TestEditor Win64 Development",
+    "TestGame Win64 Development"
+  ],
+  "runtime_checks": 12,
+  "success": true,
+  "maps_and_source_materials_preserved": true,
+  "motion": {
+    "frames": 126,
+    "fps": 60,
+    "duration_ms": 2100,
+    "fixed_simulation_time": true
+  },
+  "scope": "Local UE offscreen game only. No cook/package or Pixel Streaming startup/concurrency test."
+}

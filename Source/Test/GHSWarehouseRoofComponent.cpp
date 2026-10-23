@@ -38,8 +38,8 @@ UGHSWarehouseRoofComponent::UGHSWarehouseRoofComponent()
     PrimaryComponentTick.bStartWithTickEnabled=false;
     for(const TCHAR* SourceName:SourceNames)
     {
-        const FString Name=FString(TEXT("M_Dissolve_"))+SourceName;
-        const FString Path=FString(TEXT("/Game/GHSZcoolSmartFactory/Roof/Dissolve/"))+Name+TEXT(".")+Name;
+        const FString Name=FString(TEXT("M_Scan_"))+SourceName;
+        const FString Path=FString(TEXT("/Game/GHSZcoolSmartFactory/Roof/ScanReveal/"))+Name+TEXT(".")+Name;
         ConstructorHelpers::FObjectFinderOptional<UMaterialInterface> Material(*Path);
         DissolveTemplates.Add(Material.Get());
     }
@@ -78,8 +78,10 @@ void UGHSWarehouseRoofComponent::InitializeRoof()
         if(!Mesh || !Mesh->GetStaticMesh()) continue;
         RoofActor=*It;
         RoofMesh=Mesh;
+        SourceMaterials.Reset();
+        DissolveInstances.Reset();
         for(int32 Slot=0;Slot<Mesh->GetNumMaterials();++Slot) SourceMaterials.Add(Mesh->GetMaterial(Slot));
-        RestoreRoof();
+        RestoreRoof(false);
         return;
     }
 }
@@ -89,13 +91,32 @@ bool UGHSWarehouseRoofComponent::HasRoof() const
     return IsValid(RoofActor) && IsValid(RoofMesh) && RoofMesh->GetStaticMesh()!=nullptr;
 }
 
-bool UGHSWarehouseRoofComponent::OpenRoof()
+bool UGHSWarehouseRoofComponent::OpenRoof(bool bFast)
 {
     if(!HasRoof()) InitializeRoof();
     if(!HasRoof()) return false;
-    if(!Transition.IsClosed()) return true;
-    Transition.Open();
+    if(Transition.IsOpen()) return true;
+    Transition.Open(bFast);
+    if(Transition.IsOpen())
+    {
+        RoofActor->SetActorHiddenInGame(true);
+        RestoreSourceMaterials();
+        UpdateShellVisibility();
+        SetComponentTickEnabled(false);
+        return true;
+    }
+    ApplyDissolveMaterials();
+    UpdateDissolveMaterials();
     RoofActor->SetActorHiddenInGame(false);
+    RoofMesh->SetVisibility(true,true);
+    UpdateShellVisibility();
+    SetComponentTickEnabled(true);
+    return true;
+}
+
+void UGHSWarehouseRoofComponent::ApplyDissolveMaterials()
+{
+    if(!HasRoof()) return;
     if(DissolveInstances.IsEmpty())
     {
         for(UMaterialInterface* Source:SourceMaterials)
@@ -105,15 +126,17 @@ bool UGHSWarehouseRoofComponent::OpenRoof()
             for(int32 I=0;I<UE_ARRAY_COUNT(SourceNames);++I)
                 if(SourceName==SourceNames[I] && DissolveTemplates.IsValidIndex(I)) Template=DissolveTemplates[I];
             UMaterialInstanceDynamic* Instance=Template?UMaterialInstanceDynamic::Create(Template,this):nullptr;
-            if(Instance && Source) Instance->CopyMaterialUniformParameters(Source);
             DissolveInstances.Add(Instance);
         }
     }
     for(int32 Slot=0;Slot<DissolveInstances.Num();++Slot)
-        if(DissolveInstances[Slot]) RoofMesh->SetMaterial(Slot,DissolveInstances[Slot]);
-    UpdateDissolveMaterials();
-    SetComponentTickEnabled(true);
-    return true;
+    {
+        UMaterialInstanceDynamic* Instance=DissolveInstances[Slot];
+        if(!Instance) continue;
+        if(SourceMaterials.IsValidIndex(Slot) && SourceMaterials[Slot])
+            Instance->CopyMaterialUniformParameters(SourceMaterials[Slot]);
+        RoofMesh->SetMaterial(Slot,Instance);
+    }
 }
 
 void UGHSWarehouseRoofComponent::SetBuildingVisible(bool bVisible)
@@ -136,13 +159,18 @@ void UGHSWarehouseRoofComponent::RestoreSourceMaterials()
     for(int32 Slot=0;Slot<SourceMaterials.Num();++Slot) RoofMesh->SetMaterial(Slot,SourceMaterials[Slot]);
 }
 
-void UGHSWarehouseRoofComponent::RestoreRoof()
+void UGHSWarehouseRoofComponent::RestoreRoof(bool bAnimate)
 {
-    Transition.Restore();
+    Transition.Restore(bAnimate && HasRoof());
     UpdateShellVisibility();
-    SetComponentTickEnabled(false);
+    SetComponentTickEnabled(Transition.IsTransitioning());
     if(!HasRoof()) return;
-    RestoreSourceMaterials();
+    if(Transition.IsTransitioning())
+    {
+        ApplyDissolveMaterials();
+        UpdateDissolveMaterials();
+    }
+    else RestoreSourceMaterials();
     RoofActor->SetActorHiddenInGame(false);
     RoofMesh->SetVisibility(true,true);
 }
@@ -150,7 +178,8 @@ void UGHSWarehouseRoofComponent::RestoreRoof()
 void UGHSWarehouseRoofComponent::TickComponent(float DeltaTime,ELevelTick TickType,FActorComponentTickFunction* ThisTickFunction)
 {
     Super::TickComponent(DeltaTime,TickType,ThisTickFunction);
-    if(!HasRoof() || !Transition.IsOpening()) { SetComponentTickEnabled(false); return; }
+    if(!HasRoof()) { RestoreRoof(false); return; }
+    if(!Transition.IsTransitioning()) { SetComponentTickEnabled(false); return; }
     Transition.Advance(DeltaTime);
     UpdateDissolveMaterials();
     if(Transition.IsOpen())
@@ -158,6 +187,12 @@ void UGHSWarehouseRoofComponent::TickComponent(float DeltaTime,ELevelTick TickTy
         RoofActor->SetActorHiddenInGame(true);
         UpdateShellVisibility();
         RestoreSourceMaterials();
+        SetComponentTickEnabled(false);
+    }
+    else if(Transition.IsClosed())
+    {
+        RestoreSourceMaterials();
+        UpdateShellVisibility();
         SetComponentTickEnabled(false);
     }
 }
@@ -221,7 +256,7 @@ bool UGHSWarehouseRoofComponent::RayHitsRoofFootprint(const FVector& Origin,cons
 
 void UGHSWarehouseRoofComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-    RestoreRoof();
+    RestoreRoof(false);
     for(const auto& Entry:ShellActors) if(Entry.Actor.IsValid()) Entry.Actor->SetActorHiddenInGame(Entry.bOriginallyHidden);
     Super::EndPlay(EndPlayReason);
 }

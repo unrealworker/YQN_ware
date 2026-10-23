@@ -54,6 +54,24 @@ namespace GHSTwinHUDPerformance
     inline bool ShouldRefreshBrowser(bool bCollapsed,float Progress) { return !bCollapsed || Progress>0.f; }
 }
 
+/** HUD fades use elapsed activation time, independent of manual/fast roof speed. */
+struct FGHSTwinRoofHUDMotion
+{
+    void Advance(bool bClosed,bool bOpening,bool bInterior,float DeltaSeconds)
+    {
+        const float Step=FMath::IsFinite(DeltaSeconds)?FMath::Max(0.f,DeltaSeconds):0.f;
+        if(bClosed) ActivationAge=0.f;
+        else if(bOpening) ActivationAge=FMath::Min(.1f,ActivationAge+Step);
+        else ActivationAge=.1f;
+        InteriorAge=bInterior?FMath::Min(.16f,InteriorAge+Step):0.f;
+    }
+    float WarehouseOpacity() const { return 1.f-Ease(ActivationAge/.1f); }
+    float InteriorOpacity() const { return Ease(InteriorAge/.16f); }
+private:
+    static float Ease(float T) { return T*T*(3.f-2.f*T); }
+    float ActivationAge=0.f,InteriorAge=0.f;
+};
+
 UCLASS()
 class TEST_API UGHSTwinBrowser : public UWidget
 {
@@ -135,11 +153,15 @@ private:
     void Overview();
     void FocusRegion(const FString& Region);
     UGHSWarehouseRoofComponent* Roof() const;
+    bool BeginWarehouseOpen(bool bFast);
     bool QueueInteriorAction(const FString& Action,const FString& Id,bool bFocus=true);
     void UpdateWarehousePOI();
+    bool ShouldDrawWarehousePOI() const;
     FString PendingInteriorAction,PendingInteriorId;
     bool bPendingInteriorFocus=true,bLastInteriorAvailable=false;
+    bool bLastRoofClosed=false,bLastRoofOpening=false,bLastRoofClosing=false;
     bool bWarehousePOIVisible=false,bWarehousePOIHovered=false;
+    FGHSTwinRoofHUDMotion RoofHUDMotion;
     FVector2D WarehousePOIPosition=FVector2D::ZeroVector,WarehousePOIAnchor=FVector2D::ZeroVector;
     void RefreshSearch(int32 Offset=INDEX_NONE);
     void MoveSearchSelection(int32 Delta);

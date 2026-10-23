@@ -1,0 +1,806 @@
+{
+  "success": true,
+  "checks": [
+    {
+      "name": "scene_registry_kept_separate",
+      "passed": true,
+      "equipment": 106,
+      "facilities": 56
+    },
+    {
+      "name": "cef_overview_2560",
+      "passed": true,
+      "browser": {
+        "action": "report",
+        "page": "overview",
+        "detail": null,
+        "equipmentCount": 106,
+        "facilityCount": 56,
+        "width": 640,
+        "height": 1515,
+        "viewport": {
+          "design": {
+            "width": 479.999969,
+            "height": 1135.999878,
+            "zoom": 1.33333341944445
+          },
+          "width": 640,
+          "height": 1515,
+          "clientWidth": 640,
+          "clientHeight": 1515,
+          "devicePixelRatio": 1,
+          "visual": {
+            "width": 640,
+            "height": 1515,
+            "scale": 1,
+            "offsetLeft": 0,
+            "offsetTop": 0
+          }
+        },
+        "transition": {
+          "phase": "idle",
+          "durationMs": 320,
+          "displayedView": "overview",
+          "recentPhases": [
+            {
+              "phase": "out",
+              "atMs": 2608.974999981001,
+              "opacity": 1,
+              "displayedView": "overview",
+              "targetView": "overview",
+              "serial": 1
+            },
+            {
+              "phase": "in",
+              "atMs": 2730.66999996081,
+              "opacity": 0,
+              "displayedView": "overview",
+              "targetView": "overview",
+              "serial": 1
+            },
+            {
+              "phase": "idle",
+              "atMs": 2942.244999925606,
+              "opacity": 1,
+              "displayedView": "overview",
+              "targetView": "overview",
+              "serial": 1
+            }
+          ]
+        },
+        "detailActionBounds": null,
+        "visibilityToleranceCssPx": 1,
+        "detailActionsStrictlyVisible": null,
+        "detailActionsVisible": null,
+        "overflow": false,
+        "scrollExtents": {
+          "document": 640,
+          "main": 424,
+          "mainClient": 424,
+          "navigation": 55,
+          "navigationClient": 55
+        },
+        "imageFailures": [],
+        "charts": 1,
+        "sceneControls": {
+          "building": true,
+          "equipment": true,
+          "racks": true,
+          "pois": true,
+          "density": "auto",
+          "preset": "overview",
+          "rackCapacity": 0.800000011920929,
+          "floorCapacity": 1,
+          "roofClosed": true,
+          "roofOpening": false,
+          "roofClosing": false
+        },
+        "business": {
+          "sourceMode": "verified-extract",
+          "live": false,
+          "warehouseCode": "GHS_CA_US",
+          "deviceView": "ledger",
+          "visibleText": "仓库运营总览\n\n库存、设备与作业概况\n\n现存数量\n337,783\n单位待确认\n可用数量\n336,006\n单位待确认\n货主数\n156\nSKU 编码数\n14,373\n叉车台账\n查看台账 →\n82\n台账总数\n62\n正常\n20\n禁用\n0\n维修中\n\n按台账管理状态统计。\n\n库容占用\n数据未核验\n80.0%\n占用率\n已占用\n1,920\n可用\n416\n空位锁定\n64\n\n原设计示例：容量 2,400 托位，已用 1,920，可用 416，空位锁定 64。数据未核验，实际库容与占用规则待确认。\n\n查看库存 →\n订单进度\n数据未核验\n入库\n96 / 128 已完成\n出库\n118 / 156 已完成\n查看订单 →\n数据未核验 · 告警 7 项\n查看 →",
+          "inventorySampleRows": 0,
+          "ledgerSampleRows": 0,
+          "unverifiedSections": 3
+        },
+        "performance": {
+          "receivedSnapshots": 1,
+          "normalizedSnapshots": 1,
+          "htmlBuilds": 1,
+          "domWrites": 1,
+          "skippedRenders": 2,
+          "hiddenSnapshots": 0,
+          "visible": true,
+          "diagnostics": true
+        }
+      }
+    },
+    {
+      "name": "cef_inventory_2560",
+      "passed": true,
+      "browser": {
+        "action": "report",
+        "page": "inventory",
+        "detail": null,
+        "equipmentCount": 106,
+        "facilityCount": 56,
+        "width": 640,
+        "height": 1515,
+        "viewport": {
+          "design": {
+            "width": 479.999969,
+            "height": 1135.999878,
+            "zoom": 1.33333341944445
+          },
+          "width": 640,
+          "height": 1515,
+          "clientWidth": 640,
+          "clientHeight": 1515,
+          "devicePixelRatio": 1,
+          "visual": {
+            "width": 640,
+            "height": 1515,
+            "scale": 1,
+            "offsetLeft": 0,
+            "offsetTop": 0
+          }
+        },
+        "transition": {
+          "phase": "idle",
+          "durationMs": 320,
+          "displayedView": "inventory",
+          "recentPhases": [
+            {
+              "phase": "out",
+              "atMs": 3700.059999944642,
+              "opacity": 1,
+              "displayedView": "overview",
+              "targetView": "inventory",
+              "serial": 2
+            },
+            {
+              "phase": "in",
+              "atMs": 3841.0750000039116,
+              "opacity": 0,
+              "displayedView": "inventory",
+              "targetView": "inventory",
+              "serial": 2
+            },
+            {
+              "phase": "idle",
+              "atMs": 4043.0400000186637,
+              "opacity": 1,
+              "displayedView": "inventory",
+              "targetView": "inventory",
+              "serial": 2
+            }
+          ]
+        },
+        "detailActionBounds": null,
+        "visibilityToleranceCssPx": 1,
+        "detailActionsStrictlyVisible": null,
+        "detailActionsVisible": null,
+        "overflow": false,
+        "scrollExtents": {
+          "document": 640,
+          "main": 419,
+          "mainClient": 419,
+          "navigation": 55,
+          "navigationClient": 55
+        },
+        "imageFailures": [],
+        "charts": 0,
+        "sceneControls": {
+          "building": true,
+          "equipment": true,
+          "racks": true,
+          "pois": true,
+          "density": "auto",
+          "preset": "overview",
+          "rackCapacity": 0.800000011920929,
+          "floorCapacity": 1,
+          "roofClosed": true,
+          "roofOpening": false,
+          "roofClosing": false
+        },
+        "business": {
+          "sourceMode": "verified-extract",
+          "live": false,
+          "warehouseCode": "GHS_CA_US",
+          "deviceView": "ledger",
+          "visibleText": "库存与货位\n\n库存数量与货位分布\n\n现存数量\n337,783\n单位待确认\n可用数量\n336,006\n单位待确认\n数量构成\n冻结\n55\n已分配\n1,722\n待移出\n0\n\n可用 = 现存 − 冻结 − 已分配 − 待移出。数量单位未确认，不换算件、箱或托盘。\n\n156\n货主\n14,373\nSKU 编码\n76,752\n库存明细记录\n库容与区域\n数据未核验\n1,920\n/ 2,400 托位已用\n占用 80.0%\n可用 416\n锁定 64\n货架区 A\n1120 / 1600\n地堆区 B\n800 / 800\n\n数据未核验，保留原设计示例。完整有效货位清单和容量规则待确认；零库存记录不等于真实空位，库存冻结不等于货位锁定。\n\n货架 A-03 · 48 个托位\n数据未核验\n全部货位\n原设计分布\n01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n占用 34\n可用 10\n锁定 4\nA-03-12 · 电机安装支架\n\nSKU2038 · 批次 B20261018\n\n480 件\n查看物料 →\n\n示例物料可用 360 件 · 已分配 120 件\n数量、格位状态及物料信息均为原设计示例，数据未核验；不代表真实货位，不关联 CAD 实例。\n\n区域目录 · 10 个\nGHS-R\n货架\nGHS-SR\n类型待确认\nGHS-T\n类型待确认\nGHS-MOVE\n转仓\nGHS-HL\n恒林\nGHS-WALL01\n靠墙货架\nGHS-G\n地堆\nGHS-DG\n地柜\nGHS-DOCK01\n临时存放\nGHS-TEMP\n退货暂存\n库存样例 · 5 条\n明细 ID\t现存\t可用\n8551268\t10\t10\n7111566\t0\t0\n8556512\t4\t3\n8703069\t1\t0\n10274458\t-1\t-1\n真实库存与三维货位尚未建立映射，暂不提供库存定位。",
+          "inventorySampleRows": 5,
+          "ledgerSampleRows": 0,
+          "unverifiedSections": 3
+        },
+        "performance": {
+          "receivedSnapshots": 1,
+          "normalizedSnapshots": 1,
+          "htmlBuilds": 2,
+          "domWrites": 2,
+          "skippedRenders": 2,
+          "hiddenSnapshots": 0,
+          "visible": true,
+          "diagnostics": true
+        }
+      }
+    },
+    {
+      "name": "cef_devices_2560",
+      "passed": true,
+      "browser": {
+        "action": "report",
+        "page": "devices",
+        "detail": null,
+        "equipmentCount": 106,
+        "facilityCount": 56,
+        "width": 640,
+        "height": 1515,
+        "viewport": {
+          "design": {
+            "width": 479.999969,
+            "height": 1135.999878,
+            "zoom": 1.33333341944445
+          },
+          "width": 640,
+          "height": 1515,
+          "clientWidth": 640,
+          "clientHeight": 1515,
+          "devicePixelRatio": 1,
+          "visual": {
+            "width": 640,
+            "height": 1515,
+            "scale": 1,
+            "offsetLeft": 0,
+            "offsetTop": 0
+          }
+        },
+        "transition": {
+          "phase": "idle",
+          "durationMs": 320,
+          "displayedView": "devices",
+          "recentPhases": [
+            {
+              "phase": "out",
+              "atMs": 5179.009999963455,
+              "opacity": 1,
+              "displayedView": "inventory",
+              "targetView": "devices",
+              "serial": 3
+            },
+            {
+              "phase": "in",
+              "atMs": 5307.009999989532,
+              "opacity": 0,
+              "displayedView": "devices",
+              "targetView": "devices",
+              "serial": 3
+            },
+            {
+              "phase": "idle",
+              "atMs": 5508.94500000868,
+              "opacity": 1,
+              "displayedView": "devices",
+              "targetView": "devices",
+              "serial": 3
+            }
+          ]
+        },
+        "detailActionBounds": null,
+        "visibilityToleranceCssPx": 1,
+        "detailActionsStrictlyVisible": null,
+        "detailActionsVisible": null,
+        "overflow": false,
+        "scrollExtents": {
+          "document": 640,
+          "main": 419,
+          "mainClient": 419,
+          "navigation": 55,
+          "navigationClient": 55
+        },
+        "imageFailures": [],
+        "charts": 0,
+        "sceneControls": {
+          "building": true,
+          "equipment": true,
+          "racks": true,
+          "pois": true,
+          "density": "auto",
+          "preset": "overview",
+          "rackCapacity": 0.800000011920929,
+          "floorCapacity": 1,
+          "roofClosed": true,
+          "roofOpening": false,
+          "roofClosing": false
+        },
+        "business": {
+          "sourceMode": "verified-extract",
+          "live": false,
+          "warehouseCode": "GHS_CA_US",
+          "deviceView": "ledger",
+          "visibleText": "设备监控\n\n叉车台账与设备状态\n\n叉车台账\n场景模型\n叉车台账 · 82 条\n82\n台账总数\n62\n正常\n20\n禁用\n0\n维修中\n\n按台账管理状态统计。\n\n台账类型分布\n电动托盘车\n8\nORDER PICKER\n20\nREACH\n18\nRider\n9\n坐式叉车\n27\n台账样例 · 5 条\n叉车 ID 2574\n正常\nSITDOWN-GHS-L-OUT-S1\n\n坐式叉车 · 台账管理状态\n\n叉车 ID 2575\n正常\nSITDOWN-GHS-L-OUT-S2\n\n坐式叉车 · 台账管理状态\n\n叉车 ID 2576\n正常\nSITDOWN-GHS-L-IN-S3\n\n坐式叉车 · 台账管理状态\n\n叉车 ID 2577\n正常\nSITDOWN-GHS-L-IN-S4\n\n坐式叉车 · 台账管理状态\n\n叉车 ID 2578\n正常\nSITDOWN-GHS-L-IN-S5\n\n坐式叉车 · 台账管理状态\n\n遥测与场景关联\n实时电量\n暂无\n速度 / 载荷\n暂无\n当前货叉高度\n暂无\n当前位置 / 心跳\n暂无\n充电设施遥测\n暂无\n设备身份与场景模型尚未建立映射。台账样例不提供场景定位；场景模型可在独立页签浏览。",
+          "inventorySampleRows": 0,
+          "ledgerSampleRows": 5,
+          "unverifiedSections": 0
+        },
+        "performance": {
+          "receivedSnapshots": 1,
+          "normalizedSnapshots": 1,
+          "htmlBuilds": 3,
+          "domWrites": 3,
+          "skippedRenders": 2,
+          "hiddenSnapshots": 0,
+          "visible": true,
+          "diagnostics": true
+        }
+      }
+    },
+    {
+      "name": "cef_overview_390",
+      "passed": true,
+      "browser": {
+        "action": "report",
+        "page": "overview",
+        "detail": null,
+        "equipmentCount": 106,
+        "facilityCount": 56,
+        "width": 390,
+        "height": 439,
+        "viewport": {
+          "design": {
+            "width": 390,
+            "height": 438.880005,
+            "zoom": 1
+          },
+          "width": 390,
+          "height": 439,
+          "clientWidth": 390,
+          "clientHeight": 439,
+          "devicePixelRatio": 1,
+          "visual": {
+            "width": 390,
+            "height": 439,
+            "scale": 1,
+            "offsetLeft": 0,
+            "offsetTop": 0
+          }
+        },
+        "transition": {
+          "phase": "idle",
+          "durationMs": 320,
+          "displayedView": "overview",
+          "recentPhases": [
+            {
+              "phase": "out",
+              "atMs": 7635.974999982864,
+              "opacity": 1,
+              "displayedView": "devices",
+              "targetView": "overview",
+              "serial": 4
+            },
+            {
+              "phase": "in",
+              "atMs": 7758.369999937713,
+              "opacity": 0,
+              "displayedView": "overview",
+              "targetView": "overview",
+              "serial": 4
+            },
+            {
+              "phase": "idle",
+              "atMs": 7959.80499999132,
+              "opacity": 1,
+              "displayedView": "overview",
+              "targetView": "overview",
+              "serial": 4
+            }
+          ]
+        },
+        "detailActionBounds": null,
+        "visibilityToleranceCssPx": 1,
+        "detailActionsStrictlyVisible": null,
+        "detailActionsVisible": null,
+        "overflow": false,
+        "scrollExtents": {
+          "document": 390,
+          "main": 385,
+          "mainClient": 385,
+          "navigation": 390,
+          "navigationClient": 390
+        },
+        "imageFailures": [],
+        "charts": 1,
+        "sceneControls": {
+          "building": true,
+          "equipment": true,
+          "racks": true,
+          "pois": true,
+          "density": "auto",
+          "preset": "overview",
+          "rackCapacity": 0.800000011920929,
+          "floorCapacity": 1,
+          "roofClosed": true,
+          "roofOpening": false,
+          "roofClosing": false
+        },
+        "business": {
+          "sourceMode": "verified-extract",
+          "live": false,
+          "warehouseCode": "GHS_CA_US",
+          "deviceView": "ledger",
+          "visibleText": "仓库运营总览\n\n库存、设备与作业概况\n\n现存数量\n337,783\n单位待确认\n可用数量\n336,006\n单位待确认\n货主数\n156\nSKU 编码数\n14,373\n叉车台账\n查看台账 →\n82\n台账总数\n62\n正常\n20\n禁用\n0\n维修中\n\n按台账管理状态统计。\n\n库容占用\n数据未核验\n80.0%\n占用率\n已占用\n1,920\n可用\n416\n空位锁定\n64\n\n原设计示例：容量 2,400 托位，已用 1,920，可用 416，空位锁定 64。数据未核验，实际库容与占用规则待确认。\n\n查看库存 →\n订单进度\n数据未核验\n入库\n96 / 128 已完成\n出库\n118 / 156 已完成\n查看订单 →\n数据未核验 · 告警 7 项\n查看 →",
+          "inventorySampleRows": 0,
+          "ledgerSampleRows": 0,
+          "unverifiedSections": 3
+        },
+        "performance": {
+          "receivedSnapshots": 1,
+          "normalizedSnapshots": 1,
+          "htmlBuilds": 4,
+          "domWrites": 4,
+          "skippedRenders": 2,
+          "hiddenSnapshots": 0,
+          "visible": true,
+          "diagnostics": true
+        }
+      }
+    },
+    {
+      "name": "cef_inventory_390",
+      "passed": true,
+      "browser": {
+        "action": "report",
+        "page": "inventory",
+        "detail": null,
+        "equipmentCount": 106,
+        "facilityCount": 56,
+        "width": 390,
+        "height": 439,
+        "viewport": {
+          "design": {
+            "width": 390,
+            "height": 438.880005,
+            "zoom": 1
+          },
+          "width": 390,
+          "height": 439,
+          "clientWidth": 390,
+          "clientHeight": 439,
+          "devicePixelRatio": 1,
+          "visual": {
+            "width": 390,
+            "height": 439,
+            "scale": 1,
+            "offsetLeft": 0,
+            "offsetTop": 0
+          }
+        },
+        "transition": {
+          "phase": "idle",
+          "durationMs": 320,
+          "displayedView": "inventory",
+          "recentPhases": [
+            {
+              "phase": "out",
+              "atMs": 8858.589999959804,
+              "opacity": 1,
+              "displayedView": "overview",
+              "targetView": "inventory",
+              "serial": 5
+            },
+            {
+              "phase": "in",
+              "atMs": 8986.849999986589,
+              "opacity": 0,
+              "displayedView": "inventory",
+              "targetView": "inventory",
+              "serial": 5
+            },
+            {
+              "phase": "idle",
+              "atMs": 9194.874999928288,
+              "opacity": 1,
+              "displayedView": "inventory",
+              "targetView": "inventory",
+              "serial": 5
+            }
+          ]
+        },
+        "detailActionBounds": null,
+        "visibilityToleranceCssPx": 1,
+        "detailActionsStrictlyVisible": null,
+        "detailActionsVisible": null,
+        "overflow": false,
+        "scrollExtents": {
+          "document": 390,
+          "main": 385,
+          "mainClient": 385,
+          "navigation": 390,
+          "navigationClient": 390
+        },
+        "imageFailures": [],
+        "charts": 0,
+        "sceneControls": {
+          "building": true,
+          "equipment": true,
+          "racks": true,
+          "pois": true,
+          "density": "auto",
+          "preset": "overview",
+          "rackCapacity": 0.800000011920929,
+          "floorCapacity": 1,
+          "roofClosed": true,
+          "roofOpening": false,
+          "roofClosing": false
+        },
+        "business": {
+          "sourceMode": "verified-extract",
+          "live": false,
+          "warehouseCode": "GHS_CA_US",
+          "deviceView": "ledger",
+          "visibleText": "库存与货位\n\n库存数量与货位分布\n\n现存数量\n337,783\n单位待确认\n可用数量\n336,006\n单位待确认\n数量构成\n冻结\n55\n已分配\n1,722\n待移出\n0\n\n可用 = 现存 − 冻结 − 已分配 − 待移出。数量单位未确认，不换算件、箱或托盘。\n\n156\n货主\n14,373\nSKU 编码\n76,752\n库存明细记录\n库容与区域\n数据未核验\n1,920\n/ 2,400 托位已用\n占用 80.0%\n可用 416\n锁定 64\n货架区 A\n1120 / 1600\n地堆区 B\n800 / 800\n\n数据未核验，保留原设计示例。完整有效货位清单和容量规则待确认；零库存记录不等于真实空位，库存冻结不等于货位锁定。\n\n货架 A-03 · 48 个托位\n数据未核验\n全部货位\n原设计分布\n01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n占用 34\n可用 10\n锁定 4\nA-03-12 · 电机安装支架\n\nSKU2038 · 批次 B20261018\n\n480 件\n查看物料 →\n\n示例物料可用 360 件 · 已分配 120 件\n数量、格位状态及物料信息均为原设计示例，数据未核验；不代表真实货位，不关联 CAD 实例。\n\n区域目录 · 10 个\nGHS-R\n货架\nGHS-SR\n类型待确认\nGHS-T\n类型待确认\nGHS-MOVE\n转仓\nGHS-HL\n恒林\nGHS-WALL01\n靠墙货架\nGHS-G\n地堆\nGHS-DG\n地柜\nGHS-DOCK01\n临时存放\nGHS-TEMP\n退货暂存\n库存样例 · 5 条\n明细 ID\t现存\t可用\n8551268\t10\t10\n7111566\t0\t0\n8556512\t4\t3\n8703069\t1\t0\n10274458\t-1\t-1\n真实库存与三维货位尚未建立映射，暂不提供库存定位。",
+          "inventorySampleRows": 5,
+          "ledgerSampleRows": 0,
+          "unverifiedSections": 3
+        },
+        "performance": {
+          "receivedSnapshots": 1,
+          "normalizedSnapshots": 1,
+          "htmlBuilds": 5,
+          "domWrites": 5,
+          "skippedRenders": 2,
+          "hiddenSnapshots": 0,
+          "visible": true,
+          "diagnostics": true
+        }
+      }
+    },
+    {
+      "name": "cef_devices_390",
+      "passed": true,
+      "browser": {
+        "action": "report",
+        "page": "devices",
+        "detail": null,
+        "equipmentCount": 106,
+        "facilityCount": 56,
+        "width": 390,
+        "height": 439,
+        "viewport": {
+          "design": {
+            "width": 390,
+            "height": 438.880005,
+            "zoom": 1
+          },
+          "width": 390,
+          "height": 439,
+          "clientWidth": 390,
+          "clientHeight": 439,
+          "devicePixelRatio": 1,
+          "visual": {
+            "width": 390,
+            "height": 439,
+            "scale": 1,
+            "offsetLeft": 0,
+            "offsetTop": 0
+          }
+        },
+        "transition": {
+          "phase": "idle",
+          "durationMs": 320,
+          "displayedView": "devices",
+          "recentPhases": [
+            {
+              "phase": "out",
+              "atMs": 10081.894999952056,
+              "opacity": 1,
+              "displayedView": "inventory",
+              "targetView": "devices",
+              "serial": 6
+            },
+            {
+              "phase": "in",
+              "atMs": 10204.629999934696,
+              "opacity": 0,
+              "displayedView": "devices",
+              "targetView": "devices",
+              "serial": 6
+            },
+            {
+              "phase": "idle",
+              "atMs": 10407.524999929592,
+              "opacity": 1,
+              "displayedView": "devices",
+              "targetView": "devices",
+              "serial": 6
+            }
+          ]
+        },
+        "detailActionBounds": null,
+        "visibilityToleranceCssPx": 1,
+        "detailActionsStrictlyVisible": null,
+        "detailActionsVisible": null,
+        "overflow": false,
+        "scrollExtents": {
+          "document": 390,
+          "main": 385,
+          "mainClient": 385,
+          "navigation": 390,
+          "navigationClient": 390
+        },
+        "imageFailures": [],
+        "charts": 0,
+        "sceneControls": {
+          "building": true,
+          "equipment": true,
+          "racks": true,
+          "pois": true,
+          "density": "auto",
+          "preset": "overview",
+          "rackCapacity": 0.800000011920929,
+          "floorCapacity": 1,
+          "roofClosed": true,
+          "roofOpening": false,
+          "roofClosing": false
+        },
+        "business": {
+          "sourceMode": "verified-extract",
+          "live": false,
+          "warehouseCode": "GHS_CA_US",
+          "deviceView": "ledger",
+          "visibleText": "设备监控\n\n叉车台账与设备状态\n\n叉车台账\n场景模型\n叉车台账 · 82 条\n82\n台账总数\n62\n正常\n20\n禁用\n0\n维修中\n\n按台账管理状态统计。\n\n台账类型分布\n电动托盘车\n8\nORDER PICKER\n20\nREACH\n18\nRider\n9\n坐式叉车\n27\n台账样例 · 5 条\n叉车 ID 2574\n正常\nSITDOWN-GHS-L-OUT-S1\n\n坐式叉车 · 台账管理状态\n\n叉车 ID 2575\n正常\nSITDOWN-GHS-L-OUT-S2\n\n坐式叉车 · 台账管理状态\n\n叉车 ID 2576\n正常\nSITDOWN-GHS-L-IN-S3\n\n坐式叉车 · 台账管理状态\n\n叉车 ID 2577\n正常\nSITDOWN-GHS-L-IN-S4\n\n坐式叉车 · 台账管理状态\n\n叉车 ID 2578\n正常\nSITDOWN-GHS-L-IN-S5\n\n坐式叉车 · 台账管理状态\n\n遥测与场景关联\n实时电量\n暂无\n速度 / 载荷\n暂无\n当前货叉高度\n暂无\n当前位置 / 心跳\n暂无\n充电设施遥测\n暂无\n设备身份与场景模型尚未建立映射。台账样例不提供场景定位；场景模型可在独立页签浏览。",
+          "inventorySampleRows": 0,
+          "ledgerSampleRows": 5,
+          "unverifiedSections": 0
+        },
+        "performance": {
+          "receivedSnapshots": 1,
+          "normalizedSnapshots": 1,
+          "htmlBuilds": 6,
+          "domWrites": 6,
+          "skippedRenders": 2,
+          "hiddenSnapshots": 0,
+          "visible": true,
+          "diagnostics": true
+        }
+      }
+    },
+    {
+      "name": "scene_pick_keeps_identity_and_roof_interaction",
+      "passed": true,
+      "browser": {
+        "action": "report",
+        "page": "devices",
+        "detail": {
+          "kind": "device",
+          "id": "FORK-07"
+        },
+        "equipmentCount": 106,
+        "facilityCount": 56,
+        "width": 390,
+        "height": 439,
+        "viewport": {
+          "design": {
+            "width": 390,
+            "height": 438.880005,
+            "zoom": 1
+          },
+          "width": 390,
+          "height": 439,
+          "clientWidth": 390,
+          "clientHeight": 439,
+          "devicePixelRatio": 1,
+          "visual": {
+            "width": 390,
+            "height": 439,
+            "scale": 1,
+            "offsetLeft": 0,
+            "offsetTop": 0
+          }
+        },
+        "transition": {
+          "phase": "idle",
+          "durationMs": 320,
+          "displayedView": "devices:device:FORK-07",
+          "recentPhases": [
+            {
+              "phase": "out",
+              "atMs": 11772.64500001911,
+              "opacity": 1,
+              "displayedView": "devices",
+              "targetView": "devices:device:FORK-07",
+              "serial": 7
+            },
+            {
+              "phase": "in",
+              "atMs": 11897.035000030883,
+              "opacity": 0,
+              "displayedView": "devices:device:FORK-07",
+              "targetView": "devices:device:FORK-07",
+              "serial": 7
+            },
+            {
+              "phase": "idle",
+              "atMs": 12108.649999951012,
+              "opacity": 1,
+              "displayedView": "devices:device:FORK-07",
+              "targetView": "devices:device:FORK-07",
+              "serial": 7
+            }
+          ]
+        },
+        "detailActionBounds": {
+          "left": 0,
+          "top": 371.875,
+          "right": 390,
+          "bottom": 438.875,
+          "width": 390,
+          "height": 67
+        },
+        "visibilityToleranceCssPx": 1,
+        "detailActionsStrictlyVisible": true,
+        "detailActionsVisible": true,
+        "overflow": false,
+        "scrollExtents": {
+          "document": 390,
+          "main": 385,
+          "mainClient": 385,
+          "navigation": 390,
+          "navigationClient": 390
+        },
+        "imageFailures": [],
+        "charts": 1,
+        "sceneControls": {
+          "building": true,
+          "equipment": true,
+          "racks": true,
+          "pois": true,
+          "density": "auto",
+          "preset": "overview",
+          "rackCapacity": 0.800000011920929,
+          "floorCapacity": 1,
+          "roofClosed": false,
+          "roofOpening": false,
+          "roofClosing": false
+        },
+        "business": {
+          "sourceMode": "verified-extract",
+          "live": false,
+          "warehouseCode": "GHS_CA_US",
+          "deviceView": "ledger",
+          "visibleText": "返回设备\n设备详情\n数据未核验\n\n人工叉车 · FORK-07\n\n数据未核验\n场景状态及参数尚未与设备平台核验。\n设备模型预览\n放大查看 ↗\nFORK-07\n待机\n\n人工叉车 · G区 · 地堆\n\n运行状态\n任务信息\n事件\n—\n任务进度\n\n载荷\n\n0.0 t · 0.0 km/h\n\n人工叉车\n\n当前任务\n任务编号\n暂无任务\n当前位置\nG区 · 地堆\n定位设备\n历史追溯",
+          "inventorySampleRows": 0,
+          "ledgerSampleRows": 0,
+          "unverifiedSections": 2
+        },
+        "performance": {
+          "receivedSnapshots": 2,
+          "normalizedSnapshots": 2,
+          "htmlBuilds": 7,
+          "domWrites": 7,
+          "skippedRenders": 2,
+          "hiddenSnapshots": 0,
+          "visible": true,
+          "diagnostics": true
+        }
+      }
+    },
+    {
+      "name": "map_preserved",
+      "passed": true,
+      "sha256": "a8166517696498d18f2ff9e6bdd133aa9cbc229f3810734ad8be9c61eaab65b8"
+    }
+  ],
+  "captures": [
+    "D:\\UEPro\\Test\\Saved\\AnnotationCleanup\\2560_overview.png",
+    "D:\\UEPro\\Test\\Saved\\AnnotationCleanup\\2560_inventory.png",
+    "D:\\UEPro\\Test\\Saved\\AnnotationCleanup\\2560_devices.png",
+    "D:\\UEPro\\Test\\Saved\\AnnotationCleanup\\390_overview.png",
+    "D:\\UEPro\\Test\\Saved\\AnnotationCleanup\\390_inventory.png",
+    "D:\\UEPro\\Test\\Saved\\AnnotationCleanup\\390_devices.png"
+  ],
+  "assets_saved": false,
+  "elapsed_seconds": 12.312000000034459
+}

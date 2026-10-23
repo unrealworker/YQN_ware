@@ -7,8 +7,6 @@ test('inventory displays verified current-query totals without inventing capacit
   const app=boot();app.window.twinNavigate('inventory');const html=verifiedInventory(app);
   for(const value of ['337,783','336,006','1,722','14,373','76,752','156','55'])assert.ok(html.includes(value),value);
   assert.ok(html.includes('单位待确认'));
-  assert.ok(html.includes('2026-10-22 22:27'));
-  assert.ok(html.includes('22:01:21'));
   assert.ok(app.html().includes('容量规则待确认'));assert.ok(html.includes('单位待确认'));
   assert.ok(!html.includes('480 件'));assert.ok(!html.includes('bin-grid'));
   assert.ok(!html.includes('占用率'));assert.ok(!html.includes('托位已用'));
@@ -33,7 +31,7 @@ test('default equipment view shows management ledger totals and only evidence-ba
   const app=boot();app.window.twinNavigate('devices');const html=app.html();
   assert.ok(html.includes('叉车台账'));assert.ok(html.includes('82'));
   for(const label of ['正常','禁用','维修中','62','20','电动托盘车','ORDER PICKER','REACH','Rider','坐式叉车'])assert.ok(html.includes(label),label);
-  assert.ok(html.includes('管理状态'));assert.ok(html.includes('在线'));
+  assert.ok(html.includes('管理状态'));assert.ok(!html.includes('在线 62'));
   assert.ok(html.includes('SITDOWN-GHS-L-OUT-S1'));assert.ok(html.includes('SITDOWN-GHS-L-OUT-S2'));
   assert.equal((html.match(/data-ledger-sample=/g)||[]).length,5);
   for(const code of ['SITDOWN-GHS-L-IN-S3','SITDOWN-GHS-L-IN-S4','SITDOWN-GHS-L-IN-S5'])assert.ok(html.includes(code),code);
@@ -41,12 +39,36 @@ test('default equipment view shows management ledger totals and only evidence-ba
   assert.ok(!html.includes('AGV-07'));assert.ok(!html.includes('data-action="device"'));
 });
 
-test('ledger uses its verified date rather than the separate inventory query time',()=>{
-  const app=boot();app.window.twinNavigate('devices');
-  assert.ok(app.html().includes('核验日期 2026-10-22'));
-  assert.ok(!app.html().includes('22:27'));
-  assert.ok(app.html().includes('2026-10-08 10:45:34'));
-  app.window.twinNavigate('inventory');assert.ok(app.html().includes('查询核验 2026-10-22 22:27'));
+const assertBusinessCopy=(app,label)=>{
+  const html=app.html(),text=html.replace(/<[^>]*>/g,' ');
+  assert.doesNotMatch(text,/GHS_CA_US|仓库\s*108|ETL|UTC\+08|查询核验|核验日期|静态核验|静态数据|业务快照|当前快照|演示快照|表格核验数据|已交付|未交付|当前查询范围|场景组件/,label);
+  assert.ok(!html.includes('class="evidence-time"'),label+' removes the metadata block without leaving blank space');
+};
+
+test('all business pages omit internal warehouse and extract metadata while retaining business titles',()=>{
+  const app=boot();
+  for(const [page,title] of [['overview','仓库运营总览'],['inventory','库存与货位'],['devices','设备监控'],['orders','今日出入库订单'],['alerts','设备告警中心'],['trace','追溯查询'],['settings','场景设置']]){
+    app.window.twinNavigate(page);assertBusinessCopy(app,page);assert.ok(app.html().includes(title),page);
+  }
+  app.window.twinNavigate('inventory');
+  for(const value of ['337,783','336,006','14,373','76,752','156','55','1,722'])assert.ok(app.html().includes(value),value);
+  assert.ok(app.html().includes('暂不提供库存定位'));assert.ok(app.html().includes('数据未核验'));
+  app.window.twinNavigate('devices');
+  for(const value of ['82','62','20','SITDOWN-GHS-L-OUT-S1'])assert.ok(app.html().includes(value),value);
+  assert.ok(app.html().includes('台账样例不提供场景定位'));
+});
+
+test('scene equipment and detail copy stays business-facing without changing operational values',()=>{
+  const app=boot();
+  app.window.twinReceive({equipment:[{id:'FORK-07',type:'forklift',live:true,available:true,status:'running',value:'1.2 m/s'}],facilities:[]});
+  app.window.twinFilterType('forklift');assertBusinessCopy(app,'scene devices');
+  app.click({action:'device',id:'FORK-07'});assertBusinessCopy(app,'device detail');
+  assert.ok(app.html().includes('1.2 m/s'));assert.ok(app.html().includes('数据未核验'));
+  app.click({action:'tab',key:'deviceTab',value:'task'});assertBusinessCopy(app,'device task');
+  app.window.twinNavigate('inventory');app.click({action:'material'});assertBusinessCopy(app,'material detail');
+  assert.ok(app.html().includes('480'));assert.ok(app.html().includes('SKU2038'));assert.ok(app.html().includes('数据未核验'));
+  app.window.twinSelect({equipment:[],facilities:[],selection:{kind:'device',id:'FORK-07'}});assertBusinessCopy(app,'unavailable device');
+  assert.ok(app.html().includes('当前设备已不可用'));
 });
 
 test('diagnostics report verified provenance and current device view for native CEF validation',()=>{
@@ -62,7 +84,7 @@ test('diagnostics report verified provenance and current device view for native 
 
 test('overview and ledger remain verified when scene telemetry changes and model browsing stays separate',()=>{
   const app=boot();assert.ok(app.html().includes('337,783'));assert.ok(app.html().includes('336,006'));
-  assert.ok(app.html().includes('叉车台账'));assert.ok(app.html().includes('演示'));
+  assert.ok(app.html().includes('叉车台账'));assert.ok(app.html().includes('数据未核验'));
   const initial=app.html();app.window.twinReceive({equipment:[{id:'FORK-07',type:'forklift',status:'running',value:'14 km/h',live:true}],facilities:[]});
   assert.equal(app.html(),initial);
   app.window.twinNavigate('devices');const ledger=app.html();
@@ -106,7 +128,7 @@ test('original capacity design is retained under explicit unverified labels with
   assert.ok(html.includes('数据未核验'));assert.ok(html.includes('1,920'));
   assert.ok(!html.includes('class="unknown-metrics"'));
   assert.ok(html.indexOf('337,783')<html.indexOf('1,920'));
-  assert.ok(html.indexOf('data-unverified="inventory-design"')<html.indexOf('区域主数据'));
+  assert.ok(html.indexOf('data-unverified="inventory-design"')<html.indexOf('区域目录'));
   assert.ok(html.indexOf('data-action="demo-bin"')<html.indexOf('data-inventory-sample='));
   assert.equal((html.match(/data-verified="inventory"/g)||[]).length,2);
 });
@@ -150,7 +172,7 @@ test('legacy design shortcuts reset only design filters while verified sample se
 
 test('original order alert and trace pages identify their unchecked data while real ledger stays verified',()=>{
   const app=boot();for(const page of ['orders','alerts','trace']){app.window.twinNavigate(page);assert.ok(app.html().includes('数据未核验'),page);}
-  app.window.twinNavigate('devices');assert.ok(app.html().includes('表格核验数据'));assert.ok(!app.html().includes('数据未核验'));
+  app.window.twinNavigate('devices');assert.ok(app.html().includes('叉车台账'));assert.ok(!app.html().includes('数据未核验'));
 });
 
 test('scene telemetry detail keeps its original design with an unverified badge and never fills missing telemetry',()=>{

@@ -8,7 +8,7 @@ import traceback
 import unreal
 
 ROOT = Path('D:/UEPro/Test')
-OUT = ROOT / 'Saved/ConfirmedBusiness'
+OUT = ROOT / 'Saved/AnnotationCleanup'
 CLI = unreal.SystemLibrary.get_command_line()
 assert all(re.search(r'(?:^|\s)-'+f+r'(?=\s|$)', CLI, re.I) for f in ('game','RenderOffscreen','TwinDiagnostics'))
 OUT.mkdir(parents=True, exist_ok=True)
@@ -64,6 +64,8 @@ def validate(page):
     assert b['sourceMode']=='verified-extract' and b['live'] is False
     assert b['warehouseCode']=='GHS_CA_US'
     text=b['visibleText']
+    assert not re.search(r'GHS_CA_US|仓库\s*108|ETL|UTC\+08|核验日期|静态数据|静态核验|业务快照|查询核验|当前快照',text),text
+    assert {'overview':'库存、设备与作业概况','inventory':'库存数量与货位分布','devices':'叉车台账与设备状态'}[page] in text
     if page in ('overview','inventory'):
         for value in ('337,783','336,006','156','14,373'):
             assert value in text, (value,text)
@@ -76,7 +78,7 @@ def validate(page):
         assert '数据未核验' in text and b['unverifiedSections']>0
     if page=='devices':
         assert b['deviceView']=='ledger' and b['ledgerSampleRows']==5
-        for value in ('82','62','20','0','SITDOWN-GHS-L-IN-S5','暂无','核验日期 2026-10-22'):
+        for value in ('82','62','20','0','SITDOWN-GHS-L-IN-S5','暂无'):
             assert value in text,(value,text)
         assert '22:27' not in text
         assert not r['detail']
@@ -117,8 +119,11 @@ def run():
     assert hud.select_object('FORK-07',False)
     yield from wait('scene_pick',lambda:(report().get('detail') or {}).get('id')=='FORK-07')
     assert hud.is_interior_available()
-    text=report()['business']['visibleText']
-    assert '台账未关联' in text and not report()['overflow']
+    yield from wait('scene_detail_ready',lambda:report().get('transition',{}).get('phase')=='idle')
+    r=report()
+    text=r['business']['visibleText']
+    assert all(value in text for value in ('FORK-07','数据未核验','场景状态及参数尚未与设备平台核验')),r
+    assert not r['overflow'],r
     record('scene_pick_keeps_identity_and_roof_interaction',browser=report())
     hud.command('{"action":"overview"}')
     yield from wait('roof_restored',lambda:pc.warehouse_roof.is_roof_closed())

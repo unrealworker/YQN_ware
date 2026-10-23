@@ -45,3 +45,45 @@ test('roof completion during a drag appears when the drag ends even if final ack
  a.window.twinSceneControls({roofClosed:false,roofOpening:false,rackCapacity:.45});
  assert.ok(a.html().includes('屋顶已打开'));assert.ok(!a.html().includes('屋顶正在打开'));
 });
+
+test('reverse roof restoration remains closing until the native closed state arrives',()=>{
+ const a=open();
+ a.window.twinSceneControls({roofClosed:false,roofOpening:false,roofClosing:true});
+ assert.equal(a.window.twinState.settings.roofClosing,true);
+ assert.ok(a.html().includes('屋顶正在恢复'));
+ assert.ok(!a.html().includes('屋顶已打开'));assert.ok(!a.html().includes('打开屋顶查看'));
+ a.window.twinSceneControls({roofClosed:true,roofOpening:false,roofClosing:false});
+ assert.ok(a.html().includes('屋顶已关闭'));assert.ok(a.html().includes('打开屋顶查看'));
+ assert.ok(!a.html().includes('屋顶正在恢复'));
+});
+
+test('navigation reversing roof restoration shows opening and then fully open',()=>{
+ const a=open();
+ a.window.twinSceneControls({roofClosed:false,roofOpening:false,roofClosing:true});
+ a.window.twinSceneControls({roofClosed:false,roofOpening:true,roofClosing:false});
+ assert.ok(a.html().includes('屋顶正在打开'));assert.ok(!a.html().includes('屋顶正在恢复'));
+ assert.ok(!a.html().includes('打开屋顶查看'));
+ a.window.twinSceneControls({roofClosed:false,roofOpening:false,roofClosing:false});
+ assert.ok(a.html().includes('屋顶已打开'));
+});
+
+test('roof restoration during a capacity drag renders the final closed state after release',()=>{
+ const a=open();
+ a.window.twinSceneControls({roofClosed:false,roofOpening:false,roofClosing:false});
+ const input={dataset:{capacity:'floorCapacity'},value:'65',style:{setProperty(){}}};
+ a.listeners.input({target:input});
+ a.window.twinSceneControls({roofClosed:false,roofOpening:false,roofClosing:true});
+ a.window.twinSceneControls({roofClosed:true,roofOpening:false,roofClosing:false});
+ a.listeners.change({target:input});
+ assert.ok(a.html().includes('屋顶已关闭'));assert.ok(a.html().includes('打开屋顶查看'));
+ assert.equal(a.commands.filter(c=>c.action==='capacity').at(-1).floor,.65);
+});
+
+test('restoring display defaults preserves an in-progress roof restoration',()=>{
+ const a=open();
+ a.window.twinSceneControls({roofClosed:false,roofOpening:false,roofClosing:true});
+ a.click({action:'settings-reset'});
+ assert.equal(a.window.twinState.settings.roofClosing,true);
+ assert.ok(a.html().includes('屋顶正在恢复'));assert.ok(!a.html().includes('屋顶已打开'));
+ assert.equal(a.commands.at(-1).action,'settingsReset');
+});
