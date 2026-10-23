@@ -55,20 +55,23 @@
   document.addEventListener('visibilitychange', () => { if (document.hidden) endPan(); });
   // Read-only inspection snapshot for support / real-browser verification.
   Object.defineProperty(window, 'ghsStreamingStats', { get: () => Object.freeze({ ...metrics }) });
-  function progress(value, title, text) {
+  function progress(value, title, text, presentation = 'running') {
     if (terminal || firstFrame) return;
+    document.querySelector('.card').dataset.state = presentation;
     stage = Math.max(stage, Math.min(5, value)); $('connection-progress').value = stage; $('stage-title').textContent = title; $('stage-message').textContent = text;
     $('stage-count').textContent = `阶段 ${Math.max(1, stage)} / 5`;
     document.querySelectorAll('.stages li').forEach((item, i) => { item.dataset.state = i + 1 < stage ? 'done' : i + 1 === Math.max(1, stage) ? 'active' : 'waiting'; });
     document.querySelectorAll('.stage-segments span').forEach((item, i) => { item.dataset.state = i + 1 < stage ? 'done' : i + 1 === Math.max(1, stage) ? 'active' : 'waiting'; });
     $('connection-state').textContent = title; metrics.state = title;
   }
-  function halt(title, text, evicted = false) {
+  function halt(title, text, evicted = false, presentation = 'fault') {
     endPan(); sceneSearch?.suspend();
     terminal = true; firstFrame = false; metrics.firstFrame = false; document.body.classList.remove('playing'); clearTimeout(deadline); clearTimeout(reconnectTimer); clearTimeout(elapsedTimer); metrics.state = evicted ? 'evicted' : 'stopped';
     if (evicted) sessionStorage.setItem('ghsEvicted', 'true');
     if (stream) { stream.config.setNumericSetting(NumericParameters.MaxReconnectAttempts, 0); stream.config.setFlagEnabled(Flags.WaitForStreamer, false); stream.disconnect(); }
-    $('loading').hidden = false; $('allow-play').hidden = true; document.querySelector('.card').classList.add('error'); $('stage-title').textContent = title; $('stage-message').textContent = text; $('connection-state').textContent = title; $('retry').hidden = false;
+    // Presentation only: retain the existing terminal, eviction and retry policy.
+    const card = document.querySelector('.card'); card.classList.add('error'); card.dataset.state = evicted ? 'exited' : presentation;
+    $('loading').hidden = false; $('allow-play').hidden = true; $('stage-title').textContent = title; $('stage-message').textContent = text; $('connection-state').textContent = title; $('retry').hidden = false;
   }
   function armDeadline() {
     clearTimeout(deadline); clearTimeout(elapsedTimer); elapsedStart = performance.now();
@@ -98,6 +101,7 @@
   };
   function autoplayBlocked() {
     if (terminal || firstFrame) return;
+    document.querySelector('.card').dataset.state = 'waiting';
     $('stage-title').textContent = '浏览器暂未允许播放'; $('stage-message').textContent = '连接已建立，浏览器阻止了自动播放。允许播放后即可进入场景。'; $('allow-play').hidden = false;
   }
   $('allow-play').onclick = async () => {
@@ -107,7 +111,7 @@
   };
   async function start() {
     if (sessionStorage.getItem('ghsEvicted') === 'true') return halt('连接已被替换', '新访问者已进入，本标签页已停止自动重连。需要再次访问时，请主动点击“重新进入”。', true);
-    if (sessionStorage.getItem('ghsReplaced') === 'true') return halt('已在其他标签页连接', '同一会话已在其他标签页连接，本页已停止自动重连。点击“重新进入”可申请独立名额。');
+    if (sessionStorage.getItem('ghsReplaced') === 'true') return halt('已在其他标签页连接', '同一会话已在其他标签页连接，本页已停止自动重连。点击“重新进入”可申请独立名额。', false, 'exited');
     armDeadline();
     progress(1, '正在连接仓库', '正在获取访问会话，请稍候。');
     let response = await fetch('/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: sessionStorage.getItem('ghsSession') || undefined }) });
@@ -121,28 +125,28 @@
     stream = new PixelStreaming(config, { videoElementParent: $('video-root') }); watchVideo();
     sceneSearch = window.GHSSceneSearch.create({ stream, videoRoot, keyboardFlag: Flags.KeyboardInput, beforeFocus: endPan });
     const protocol = stream.webSocketController.signallingProtocol;
-    protocol.addMessageHandler('ghsAdmission', payload => { const m = JSON.parse(payload); metrics.instanceId = m.instanceId; $('stat-instance').textContent = m.instanceId; progress(1, '已接入服务', '名额已分配，正在等待场景就绪'); });
-    protocol.addMessageHandler('ghsStage', payload => { const m = JSON.parse(payload); progress(m.stage === 'streamerReady' ? 2 : 1, m.stage === 'streamerReady' ? '场景已就绪' : '正在启动场景', m.message); });
+    protocol.addMessageHandler('ghsAdmission', payload => { const m = JSON.parse(payload); metrics.instanceId = m.instanceId; $('stat-instance').textContent = m.instanceId; progress(1, '已接入服务', '名额已分配，正在等待场景就绪', 'waiting'); });
+    protocol.addMessageHandler('ghsStage', payload => { const m = JSON.parse(payload); progress(m.stage === 'streamerReady' ? 2 : 1, m.stage === 'streamerReady' ? '场景已就绪' : '正在启动场景', m.message, m.stage === 'streamerReady' ? 'running' : 'waiting'); });
     protocol.addMessageHandler('ghsEvicted', payload => halt('连接已被替换', JSON.parse(payload).message, true));
-    protocol.addMessageHandler('ghsSessionReplaced', payload => { sessionStorage.setItem('ghsReplaced', 'true'); halt('已在其他标签页连接', JSON.parse(payload).message); });
-    protocol.addMessageHandler('ghsShutdown', payload => halt('服务已停止', JSON.parse(payload).message));
+    protocol.addMessageHandler('ghsSessionReplaced', payload => { sessionStorage.setItem('ghsReplaced', 'true'); halt('已在其他标签页连接', JSON.parse(payload).message, false, 'exited'); });
+    protocol.addMessageHandler('ghsShutdown', payload => halt('服务已停止', JSON.parse(payload).message, false, 'stopped'));
     protocol.addMessageHandler('ghsInstanceFailed', payload => halt('场景连接失败', JSON.parse(payload).message));
     stream.addEventListener('webRtcSdp', () => progress(3, '正在协商视频', '已交换视频会话信息，正在建立内网媒体连接'));
     stream.addEventListener('webRtcConnected', () => progress(4, '视频已连接', '媒体连接已建立，等待首帧显示'));
     stream.addEventListener('videoInitialized', watchVideo);
     stream.addEventListener('dataChannelOpen', () => { if (firstFrame && !terminal) sceneSearch.ready(); });
     stream.addEventListener('playerCount', e => { $('viewer-count').textContent = `${e.data.count} / 3`; metrics.viewerCount = e.data.count; });
-    stream.addEventListener('webRtcDisconnected', e => { endPan(); sceneSearch?.suspend(); if (terminal) return; const wasPlaying = firstFrame; firstFrame = false; metrics.firstFrame = false; $('loading').hidden = false; document.body.classList.remove('playing'); stage = 0; progress(1, '正在恢复连接', '网络暂时中断，正在恢复当前会话；场景状态暂时保留。'); if (wasPlaying) armDeadline(); });
+    stream.addEventListener('webRtcDisconnected', e => { endPan(); sceneSearch?.suspend(); if (terminal) return; const wasPlaying = firstFrame; firstFrame = false; metrics.firstFrame = false; $('loading').hidden = false; document.body.classList.remove('playing'); stage = 0; progress(1, '正在恢复连接', '网络暂时中断，正在恢复当前会话；场景状态暂时保留。', 'waiting'); if (wasPlaying) armDeadline(); });
     stream.webSocketController.onClose.addEventListener('close', e => {
       if (terminal) return;
       if (e.detail.code === 4001) return halt('连接已被替换', '连接已被新访问者替换，已停止自动重连。', true);
-      if (e.detail.code === 4002) { sessionStorage.setItem('ghsReplaced', 'true'); return halt('已在其他标签页连接', '同一会话已在其他标签页连接，本页已停止自动重连。'); }
-      if (e.detail.code === 1001) return halt('服务已停止', '服务连接已关闭，请在启动器确认状态后重新进入。');
+      if (e.detail.code === 4002) { sessionStorage.setItem('ghsReplaced', 'true'); return halt('已在其他标签页连接', '同一会话已在其他标签页连接，本页已停止自动重连。', false, 'exited'); }
+      if (e.detail.code === 1001) return halt('服务已停止', '服务连接已关闭，请在启动器确认状态后重新进入。', false, 'stopped');
       if (reconnectAttempts >= 12) return halt('无法恢复连接', '12次连接尝试均未成功，请检查启动器和网络后重新进入。');
       stream.disconnect(); clearTimeout(reconnectTimer);
       reconnectTimer = setTimeout(() => { if (!terminal) { reconnectAttempts++; stream.connect(); } }, 2000);
     });
-    stream.addEventListener('webRtcFailed', () => { if (!terminal) progress(stage, '媒体连接失败', '暂未建立媒体连接，正在等待恢复；请确认客户端和服务端位于同一内网。'); });
+    stream.addEventListener('webRtcFailed', () => { if (!terminal) progress(stage, '媒体连接失败', '暂未建立媒体连接，正在等待恢复；请确认客户端和服务端位于同一内网。', 'fault'); });
     stream.addEventListener('playStreamRejected', () => { const video = $('video-root').querySelector('video'); if (video) { video.muted = true; video.play().catch(autoplayBlocked); } });
     stream.addEventListener('statsReceived', e => {
       const stats = e.data.aggregatedStats; const v = stats.inboundVideoStats; const pair = stats.getActiveCandidatePair(); const video = $('video-root').querySelector('video');

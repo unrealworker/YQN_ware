@@ -7,13 +7,27 @@ namespace Ghs.PixelStreaming
 {
     internal static class LauncherTheme
     {
-        internal static readonly Color Navy=Color.FromArgb(34,52,76);
-        internal static readonly Color Muted=Color.FromArgb(107,126,153);
+        internal static readonly Color Navy=Color.FromArgb(37,54,75);
+        internal static readonly Color Muted=Color.FromArgb(83,100,120);
         internal static readonly Color Blue=Color.FromArgb(53,107,250);
-        internal static readonly Color Canvas=Color.FromArgb(245,247,250);
-        internal static readonly Color Border=Color.FromArgb(209,220,236);
-        internal static readonly Color Green=Color.FromArgb(0,145,124);
-        internal static readonly Color Red=Color.FromArgb(214,45,63);
+        internal static readonly Color BlueInk=Color.FromArgb(36,85,204);
+        internal static readonly Color Canvas=Color.FromArgb(244,246,249);
+        internal static readonly Color Border=Color.FromArgb(204,214,227);
+        internal static readonly Color DisabledInk=Color.FromArgb(107,119,136);
+        internal static readonly Color Amber=Color.FromArgb(151,96,37);
+        internal static readonly Color Red=Color.FromArgb(168,69,64);
+        internal static readonly Color RedAccent=Color.FromArgb(200,88,82);
+        internal static Color StateInk(string state)
+        {
+            switch(state)
+            {
+                case "running": case "ready": case "connected": return BlueInk;
+                case "starting": case "waiting": case "reconnecting": return Amber;
+                case "error": case "failed": return Red;
+                case "idle": case "stopping": case "stopped": case "exited": return DisabledInk;
+                default: return Muted;
+            }
+        }
         internal static GraphicsPath Round(RectangleF r,float radius)
         {
             float d=Math.Min(radius*2,Math.Min(r.Width,r.Height)); GraphicsPath path=new GraphicsPath();
@@ -60,8 +74,8 @@ namespace Ghs.PixelStreaming
                 e.Graphics.FillRectangle(backdrop,ClientRectangle);
             e.Graphics.SmoothingMode=SmoothingMode.AntiAlias;
             Color fill=Enabled?(Primary?LauncherTheme.Blue:(hovering?Color.FromArgb(239,244,255):BackColor)):LauncherTheme.Canvas;
-            Color border=Enabled?(Destructive?LauncherTheme.Red:(Primary || Selected?LauncherTheme.Blue:LauncherTheme.Border)):LauncherTheme.Border;
-            Color ink=Enabled?(Primary?Color.White:(Destructive?LauncherTheme.Red:(Selected?LauncherTheme.Blue:ForeColor))):LauncherTheme.Muted;
+            Color border=Enabled?(Destructive?LauncherTheme.RedAccent:(Primary || Selected?LauncherTheme.Blue:LauncherTheme.Border)):LauncherTheme.Border;
+            Color ink=Enabled?(Primary?Color.White:(Destructive?LauncherTheme.Red:(Selected?LauncherTheme.BlueInk:ForeColor))):LauncherTheme.DisabledInk;
             using(GraphicsPath p=LauncherTheme.Round(new RectangleF(1,1,Width-2,Height-2),12*e.Graphics.DpiX/96F))
             using(SolidBrush brush=new SolidBrush(fill)) using(Pen pen=new Pen(border,Selected && Enabled?2:1)) { e.Graphics.FillPath(brush,p); e.Graphics.DrawPath(pen,p); }
             TextRenderer.DrawText(e.Graphics,Text,Font,new Rectangle(6,2,Width-12,Height-4),ink,TextFormatFlags.HorizontalCenter|TextFormatFlags.VerticalCenter|TextFormatFlags.EndEllipsis);
@@ -80,10 +94,10 @@ namespace Ghs.PixelStreaming
         {
             e.Graphics.Clear(BackColor); e.Graphics.SmoothingMode=SmoothingMode.AntiAlias;
             float scale=e.Graphics.DpiX/96F; float w=36*scale,h=20*scale,y=(Height-h)/2;
-            Color track=Checked?(Enabled?LauncherTheme.Blue:Color.FromArgb(157,175,205)):Color.FromArgb(170,183,202);
+            Color track=Checked&&Enabled?LauncherTheme.Blue:Color.FromArgb(148,163,184);
             using(GraphicsPath p=LauncherTheme.Round(new RectangleF(0,y,w,h),h/2)) using(SolidBrush b=new SolidBrush(track)) e.Graphics.FillPath(b,p);
             using(SolidBrush b=new SolidBrush(Color.White)) e.Graphics.FillEllipse(b,(Checked?18:2)*scale,y+2*scale,16*scale,16*scale);
-            TextRenderer.DrawText(e.Graphics,Text,Font,new Rectangle((int)(48*scale),0,Width-(int)(48*scale),Height),Enabled?ForeColor:LauncherTheme.Muted,TextFormatFlags.VerticalCenter|TextFormatFlags.Left|TextFormatFlags.EndEllipsis);
+            TextRenderer.DrawText(e.Graphics,Text,Font,new Rectangle((int)(48*scale),0,Width-(int)(48*scale),Height),Enabled?ForeColor:LauncherTheme.DisabledInk,TextFormatFlags.VerticalCenter|TextFormatFlags.Left|TextFormatFlags.EndEllipsis);
             if(Focused && ShowFocusCues) ControlPaint.DrawFocusRectangle(e.Graphics,new Rectangle(0,0,Width-1,Height-1));
         }
     }

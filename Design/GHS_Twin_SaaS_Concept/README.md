@@ -1,10 +1,21 @@
 # 仓储数字孪生 · 当前设计入口
 
-**唯一编辑源：[Saas.pen](Saas.pen)。00–34 号已获准开发。2026-10-23 最新修订：场景设置改为四图层即时控制，增加货架 80% / 地堆 100% 的视觉库容滑条及状态规范。已核验库存、设备台账和标有“数据未核验”的原业务设计均保留。**
+**唯一编辑源：[Saas.pen](Saas.pen)。00–34 号已获准开发。2026-10-23 新增 35–43 号像素流 Web 管理后台、登录及通知设计，更新 28、29 号访问页；预览统一使用无主仓库 POI 的真实园区截图。此前场景设置、已核验库存、设备台账和标有“数据未核验”的业务设计继续保留。**
 
-Pencil 当前画布共 35 张画板、42 个可复用组件；`exports/current` 有 35 张 PNG。本次更新 16、21、32、33 号并新增 34 号，其余 30 张原画板的结构指纹保持一致。保留白色底、深蓝文字和工业蓝交互。**本次画布与导出已验证，Windows 锁屏阻止原生保存，`Saas.pen` 待解锁后由主任务保存确认；不能将导出成功视为源文件已保存。** 验证记录见 [scene-controls-verification.json](scene-controls-verification.json)。
+Pencil 当前画布共 45 张画板、42 个可复用组件；`exports/current` 有 45 张 PNG。右侧业务面板采用 #F4F6F9 灰白底，保留白色卡片、深蓝文字和工业蓝交互。2026-10-23 本轮已清理业务页仓库代码、查询时间、ETL、静态核验与来源标注，更新 21 张业务画板和 5 个共用组件；保留“数据未核验”、业务编号、地址与当地时钟。此前标注清理未修改后台与登录设计；本次全页面精修已同步其颜色和文字层级，功能流程保持既有设计。此前标注清理状态见 [标注清理验证](annotation-cleanup-verification.json)；此前 10:29:57 的原生保存记录属于清理前版本。后台设计见 [像素流后台设计规范](streaming-admin-design.md)，此前验证见 [streaming-admin-verification.json](streaming-admin-verification.json)。
 
-未保存画布已通过 Pencil 读取 API 备份至 [scene-controls-canvas-recovery.json](scene-controls-canvas-recovery.json)，包含本次组件、五张相关画板及六个依赖组件。这是结构化恢复备份，不是 `.pen` 替代文件；恢复时需用 Pencil API 核对或重建节点并处理引用 ID，完成后仍须原生保存。
+## 当前视觉精修 · 全部 45 张画板
+
+2026-10-23 按已批准的当前页面构图更新总览：顶部告警摘要、四张库存卡片、叉车台账、库容环图及四类订单进度图例。辅助文字增强为 `#536478`；长说明收进信息提示，演示及未核验标记保留。主仓库 POI 缩为 228 × 56，名称“GHS · 主仓库”，副标题“点击查看”。31 号为园区总览，新增 44 号展示库容说明展开；库存、订单、设备、告警、追溯、场景，以及详情、空态、筛选、弹出层、后台和登录均已统一样式。后台和登录功能不变。
+
+先看 [园区总览](exports/current/cgOha.png)、[侧栏近图](exports/visual-polish-20261023/PjVwW.png)、[库容说明展开](exports/current/OiC8B.png)。规范见 [visual-polish-design.md](visual-polish-design.md)，逐页记录见 [全页面审查](visual-polish-all-pages-audit.md)，最终保存与验证状态见 [全页面验证](visual-polish-all-pages-verification.json)。
+全部 56 处场景图片现已替换为最新 `GHS_CAD_NormalWarehouse_ZcoolSmartFactory` 地图的 11 类真实截图，覆盖室内、闭顶园区、设备近景、缩略图和后台预览。45 页已逐页检查并重新导出；源稿于 2026-10-23 16:45:24 原生保存，最终副文案为“点击查看”。证据见 [最新场景验证](latest-scene-verification.json) 与 [图源映射](latest-scene-capture-plan.md)。
+
+## 像素流后台 · 新增设计
+
+先看 [后台主页面](exports/current/uR0QK.png)、[管理员登录](exports/current/jRpYB.png)、[用户自动连接](exports/current/tWZ13.png)。支持服务启停、分辨率和 30/60 FPS、端口设置、在线用户管理、通知后断开，以及完整异常反馈。固定管理员账号按本次用户要求设计；密码默认隐藏。35–43 号为本次设计交付，尚未实现或部署。完整行为与图源见 [设计规范](streaming-admin-design.md)。
+
+此前场景控件阶段的画布曾通过 Pencil 读取 API 备份至 [scene-controls-canvas-recovery.json](scene-controls-canvas-recovery.json)，包含本次组件、五张相关画板及六个依赖组件。这是结构化恢复备份，不是 `.pen` 替代文件；恢复时需用 Pencil API 核对或重建节点并处理引用 ID，完成后仍须原生保存。
 
 ## 场景图层与库容 · 当前规范
 
@@ -23,7 +34,7 @@ Pencil 当前画布共 35 张画板、42 个可复用组件；`exports/current` 
 
 库存现存 **337,783**、可用 **336,006**、冻结 **55**、分配 **1,722**、待移出 **0**；数量单位待确认。156 货主、14,373 SKU、76,752 明细和 10 个区域主数据来自已核验查询，不推定真实容量、空位或占用率。设备台账 **82 条**，正常 **62**、维修中 **0**、禁用 **20**，是管理状态；实时在线与遥测暂无。
 
-库存查询时间 `2026-10-22 22:27（UTC+08:00）` 与最大 ETL `22:01:21` 分开显示；当地时钟不表示数据更新时间。真实台账与场景模型分开，完整清单和位置映射待补。原库容 1,920/2,400 托位、80% 饼图及 48 格货位分布保留为“数据未核验”示例，和已核验数量分区展示；订单、告警、轨迹与充电设施同样标注未核验。详情、来源单元格、组件 ID 和限制见 [business-data-confirmed-design.md](business-data-confirmed-design.md)。
+业务页面不显示仓库内部代码/数据库编号、查询时间、ETL、“已核验静态数据”“非同一业务快照”等技术标注，来源信息保留在设计说明与数据记录中。总览和库存三行技术信息收为一行业务副标题，内容上移 38px；台账与告警保留简短业务说明，底栏统一为“场景示例 · 数据未核验”。库存明细 ID、设备 ID、SKU、订单和库位编号继续保留。当地时钟正常显示。真实台账与场景模型分开，完整清单和位置映射待补。原库容 1,920/2,400 托位、80% 饼图及 48 格货位分布保留为“数据未核验”示例；订单、告警、轨迹与充电设施同样保留未核验标记。详情、来源单元格、组件 ID 和限制见 [business-data-confirmed-design.md](business-data-confirmed-design.md)。
 
 ## 仓库地址与当地时钟 · 当前规范
 
@@ -92,13 +103,13 @@ Pencil 当前画布共 35 张画板、42 个可复用组件；`exports/current` 
 | 08 · 搜索与数据状态 / 边界反馈 | 1920 × 1080 | [打开](exports/current/PE2am.png) |
 | 09 · 交互路径 / 密度与动效规范 | 1920 × 1080 | [打开](exports/current/r5SOcd.png) |
 | 10 · 聚合预警 / 从异常到设备 | 1920 × 1080 | [打开](exports/current/XJoOQ.png) |
-| 11 · 库存 / 已核验汇总与区域主数据 | 1920 × 1080 | [打开](exports/current/F8Cox.png) |
+| 11 · 库存 / 数量与货位分布 | 1920 × 1080 | [打开](exports/current/F8Cox.png) |
 | 12 · 订单 / 今日出入库作业 | 1920 × 1080 | [打开](exports/current/lvDfx.png) |
 | 13 · 设备 / 真实台账与场景映射边界 | 1920 × 1080 | [打开](exports/current/zyWMm.png) |
 | 14 · 告警 / 分级队列与处理状态 | 1920 × 1080 | [打开](exports/current/lCf0H.png) |
 | 15 · 追溯 / 物料批次与作业事件 | 1920 × 1080 | [打开](exports/current/OA1Bd.png) |
 | 16 · 场景 / 即时图层与库容设置 | 1920 × 1080 | [打开](exports/current/kvTdT.png) |
-| 17 · 库存样例 / 物料与货位待关联 | 1920 × 1080 | [打开](exports/current/XhUtw.png) |
+| 17 · 库存明细 / 物料与货位详情 | 1920 × 1080 | [打开](exports/current/XhUtw.png) |
 | 18 · 订单详情 / 拣货与设备联动 | 1920 × 1080 | [打开](exports/current/t4mlxm.png) |
 | 19 · 订单 / 入库切换状态 | 1920 × 1080 | [打开](exports/current/qNsRa.png) |
 | 20 · 设备 / 充电设施切换状态 | 1920 × 1080 | [打开](exports/current/ibTva.png) |
@@ -116,13 +127,20 @@ Pencil 当前画布共 35 张画板、42 个可复用组件；`exports/current` 
 | 32 · 点击开顶 / 0.5 秒溶解流程 | 1920 × 1080 | [打开](exports/current/q2RKW8.png) |
 | 33 · 主仓库 POI / 当前交互规范 | 1920 × 1080 | [打开](exports/current/M0wx5h.png) |
 | 34 · 场景设置 / 即时控制与库容状态 | 1920 × 1200 | [打开](exports/current/mG0YD.png) |
+| 35 · 像素流后台 / 运行中 | 1440 × 1080 | [打开](exports/current/uR0QK.png) |
+| 36 · 像素流后台 / 已停止 | 1440 × 1080 | [打开](exports/current/ieg9r.png) |
+| 37 · 像素流后台 / 结束用户连接 | 1440 × 1080 | [打开](exports/current/D6HC9.png) |
+| 38 · 像素流后台 / 停止服务确认 | 1440 × 1080 | [打开](exports/current/Jsit1.png) |
+| 39 · 像素流后台 / 状态与参数反馈 | 1920 × 1320 | [打开](exports/current/i8fzG.png) |
+| 40 · 像素流访问 / 管理员结束连接 | 1440 × 900 | [打开](exports/current/tYSnE.png) |
+| 41 · 像素流访问 / 服务已暂停 | 1440 × 900 | [打开](exports/current/aIei1.png) |
+| 42 · 像素流后台 / 管理员登录 | 1440 × 900 | [打开](exports/current/jRpYB.png) |
+| 43 · 像素流后台 / 登录失败 | 1440 × 900 | [打开](exports/current/F554L.png) |
 
 ## 交付边界与版本规则
 
-此前版本已完成独立 taste 复核。本次场景控制已检查画布、全尺寸面板 PNG、组件引用与源坐标边界；源文件落盘待主任务确认。静态设计无法验证中文输入法、UE 镜头、浏览器会话和响应式运行行为。本轮开发计划见 [场景控制实施计划](../../docs/superpowers/plans/2026-10-23-scene-controls.md)。
+此前版本已完成独立 taste 复核。场景控制已检查画布、全尺寸面板 PNG、组件引用与源坐标边界；本次后台及登录设计已完成独立视觉复核，源稿已确认落盘。静态设计无法验证中文输入法、UE 镜头、浏览器会话和响应式运行行为。此前开发计划见 [场景控制实施计划](../../docs/superpowers/plans/2026-10-23-scene-controls.md)。
 
 用户已于 2026-10-21 明确下达开发命令。对应实施及验收记录见 [开发计划](../../docs/superpowers/plans/2026-10-21-approved-hud-streaming-ui.md)。代码完成并验证后，按用户要求自动使用中文提交 Git，仅提交对应任务的修改。
 
 旧导出已移至 [archive/superseded-exports](archive/superseded-exports/)，仅供历史追溯，不作为开发依据。历史评审不代表当前设计状态；出现冲突时，以本 README、Saas.pen、current-design.json 和 exports/current 为准。
-
-

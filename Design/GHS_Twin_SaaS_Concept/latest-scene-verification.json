@@ -1,0 +1,2773 @@
+{
+  "source": "Saas.pen",
+  "sourceSaved": true,
+  "status": "saved_canvas_and_exports_verified",
+  "sourceManifest": "latest-scene-source-runtime.json",
+  "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
+  "imageNodeCount": 56,
+  "imageAssetCount": 11,
+  "artboardCount": 45,
+  "componentCount": 42,
+  "boardAudit": [
+    {
+      "id": "bi8Au",
+      "name": "00 · POI 与 HUD 设计系统",
+      "width": 3840,
+      "height": 1080,
+      "hash": "3261803e",
+      "currentHash": "3261803e",
+      "restoredHash": "3261803e",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/bi8Au.png"
+    },
+    {
+      "id": "CLx7Q",
+      "name": "01 · 内部总览 / 仓库空间态势",
+      "width": 1920,
+      "height": 1080,
+      "hash": "4e127643",
+      "currentHash": "63f1a684",
+      "restoredHash": "4e127643",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/CLx7Q.png"
+    },
+    {
+      "id": "mP7E5",
+      "name": "02 · 点位选中 / AGV 设备详情",
+      "width": 1920,
+      "height": 1080,
+      "hash": "d820997a",
+      "currentHash": "37ad5f88",
+      "restoredHash": "d820997a",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/mP7E5.png"
+    },
+    {
+      "id": "d7P3z",
+      "name": "03 · 聚合展开 / 成员分页与定位",
+      "width": 1920,
+      "height": 1080,
+      "hash": "c5c18f8e",
+      "currentHash": "10693dad",
+      "restoredHash": "c5c18f8e",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/d7P3z.png"
+    },
+    {
+      "id": "Wt7Vo",
+      "name": "04 · 告警定位 / AGV 低电量",
+      "width": 1920,
+      "height": 1080,
+      "hash": "1cd08151",
+      "currentHash": "792129c5",
+      "restoredHash": "1cd08151",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/Wt7Vo.png"
+    },
+    {
+      "id": "iiFrY",
+      "name": "05 · 历史追溯 / 时间与事件联动",
+      "width": 1920,
+      "height": 1080,
+      "hash": "9ed1fb51",
+      "currentHash": "4fe7393f",
+      "restoredHash": "9ed1fb51",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/iiFrY.png"
+    },
+    {
+      "id": "gW9oH",
+      "name": "06 · 库位 POI / 原设计与未核验标记",
+      "width": 1920,
+      "height": 1080,
+      "hash": "4d8e5dc5",
+      "currentHash": "5fa94ce5",
+      "restoredHash": "4d8e5dc5",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/gW9oH.png"
+    },
+    {
+      "id": "UbszE",
+      "name": "07 · HUD 详情组件 / 车辆与设施",
+      "width": 1920,
+      "height": 1080,
+      "hash": "72dc47ca",
+      "currentHash": "da75f276",
+      "restoredHash": "72dc47ca",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/UbszE.png"
+    },
+    {
+      "id": "PE2am",
+      "name": "08 · 搜索与数据状态 / 边界反馈",
+      "width": 1920,
+      "height": 1080,
+      "hash": "2839c9c3",
+      "currentHash": "2839c9c3",
+      "restoredHash": "2839c9c3",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/PE2am.png"
+    },
+    {
+      "id": "r5SOcd",
+      "name": "09 · 交互路径 / 密度与动效规范",
+      "width": 1920,
+      "height": 1080,
+      "hash": "ff70cdc7",
+      "currentHash": "ff70cdc7",
+      "restoredHash": "ff70cdc7",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/r5SOcd.png"
+    },
+    {
+      "id": "XJoOQ",
+      "name": "10 · 聚合预警 / 从异常到设备",
+      "width": 1920,
+      "height": 1080,
+      "hash": "6cb8890e",
+      "currentHash": "56a0f583",
+      "restoredHash": "6cb8890e",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/XJoOQ.png"
+    },
+    {
+      "id": "F8Cox",
+      "name": "11 · 库存 / 数量与货位分布",
+      "width": 1920,
+      "height": 1080,
+      "hash": "f607f27d",
+      "currentHash": "4c7431fd",
+      "restoredHash": "f607f27d",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/F8Cox.png"
+    },
+    {
+      "id": "XhUtw",
+      "name": "17 · 库存明细 / 物料与货位详情",
+      "width": 1920,
+      "height": 1080,
+      "hash": "bcbfb0f1",
+      "currentHash": "c8e58c1",
+      "restoredHash": "bcbfb0f1",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/XhUtw.png"
+    },
+    {
+      "id": "lvDfx",
+      "name": "12 · 订单 / 今日出入库作业",
+      "width": 1920,
+      "height": 1080,
+      "hash": "e0b1678f",
+      "currentHash": "fabc093d",
+      "restoredHash": "e0b1678f",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/lvDfx.png"
+    },
+    {
+      "id": "t4mlxm",
+      "name": "18 · 订单详情 / 拣货与设备联动",
+      "width": 1920,
+      "height": 1080,
+      "hash": "9a245a1e",
+      "currentHash": "ce56856",
+      "restoredHash": "9a245a1e",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/t4mlxm.png"
+    },
+    {
+      "id": "zyWMm",
+      "name": "13 · 设备 / 真实台账与场景映射边界",
+      "width": 1920,
+      "height": 1080,
+      "hash": "8223d58",
+      "currentHash": "705adf25",
+      "restoredHash": "8223d58",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/zyWMm.png"
+    },
+    {
+      "id": "lCf0H",
+      "name": "14 · 告警 / 分级队列与处理状态",
+      "width": 1920,
+      "height": 1080,
+      "hash": "66f63bae",
+      "currentHash": "f7f92960",
+      "restoredHash": "66f63bae",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/lCf0H.png"
+    },
+    {
+      "id": "OA1Bd",
+      "name": "15 · 追溯 / 物料批次与作业事件",
+      "width": 1920,
+      "height": 1080,
+      "hash": "7fc1d216",
+      "currentHash": "c89f654a",
+      "restoredHash": "7fc1d216",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/OA1Bd.png"
+    },
+    {
+      "id": "kvTdT",
+      "name": "16 · 场景 / 即时图层与库容设置",
+      "width": 1920,
+      "height": 1080,
+      "hash": "6ce65a29",
+      "currentHash": "231ed096",
+      "restoredHash": "6ce65a29",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/kvTdT.png"
+    },
+    {
+      "id": "qNsRa",
+      "name": "19 · 订单 / 入库切换状态",
+      "width": 1920,
+      "height": 1080,
+      "hash": "a8159bf8",
+      "currentHash": "421f8c16",
+      "restoredHash": "a8159bf8",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/qNsRa.png"
+    },
+    {
+      "id": "ibTva",
+      "name": "20 · 设备 / 充电设施切换状态",
+      "width": 1920,
+      "height": 1080,
+      "hash": "fbb6a302",
+      "currentHash": "bb45b202",
+      "restoredHash": "fbb6a302",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/ibTva.png"
+    },
+    {
+      "id": "RXvoP",
+      "name": "21 · 导航内容地图 / 七个业务入口",
+      "width": 1920,
+      "height": 1080,
+      "hash": "cdc89a5e",
+      "currentHash": "cdc89a5e",
+      "restoredHash": "cdc89a5e",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/RXvoP.png"
+    },
+    {
+      "id": "G316Rk",
+      "name": "22 · 业务状态 / 空值权限与确认反馈",
+      "width": 1920,
+      "height": 1080,
+      "hash": "740585c6",
+      "currentHash": "740585c6",
+      "restoredHash": "740585c6",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/G316Rk.png"
+    },
+    {
+      "id": "t1QfTH",
+      "name": "23 · 设备搜索 / 匹配结果与定位",
+      "width": 1920,
+      "height": 1080,
+      "hash": "133363f",
+      "currentHash": "42e565f8",
+      "restoredHash": "133363f",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/t1QfTH.png"
+    },
+    {
+      "id": "Lxvbj",
+      "name": "24 · 仓库切换 / 当前与接入边界",
+      "width": 1920,
+      "height": 1080,
+      "hash": "eb6c00b9",
+      "currentHash": "e1c8bf5a",
+      "restoredHash": "eb6c00b9",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/Lxvbj.png"
+    },
+    {
+      "id": "RyNRe",
+      "name": "25 · 像素流服务启动器 / 待启动",
+      "width": 1200,
+      "height": 900,
+      "hash": "929b78df",
+      "currentHash": "7b648a81",
+      "restoredHash": "929b78df",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/RyNRe.png"
+    },
+    {
+      "id": "ApVA8",
+      "name": "26 · 像素流服务启动器 / 运行中",
+      "width": 1200,
+      "height": 900,
+      "hash": "d5dd2d93",
+      "currentHash": "82bd68f5",
+      "restoredHash": "d5dd2d93",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/ApVA8.png"
+    },
+    {
+      "id": "tWZ13",
+      "name": "28 · 像素流访问 / 自动连接进度",
+      "width": 1440,
+      "height": 900,
+      "hash": "ee45cb64",
+      "currentHash": "7bc6387d",
+      "restoredHash": "ee45cb64",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/tWZ13.png"
+    },
+    {
+      "id": "A5t3VD",
+      "name": "27 · 启动器 / 配置与异常状态",
+      "width": 1920,
+      "height": 1080,
+      "hash": "74a929c0",
+      "currentHash": "74a929c0",
+      "restoredHash": "74a929c0",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/A5t3VD.png"
+    },
+    {
+      "id": "jCHwc",
+      "name": "29 · 像素流访问 / 连接边界反馈",
+      "width": 1920,
+      "height": 1080,
+      "hash": "f662285e",
+      "currentHash": "f662285e",
+      "restoredHash": "f662285e",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/jCHwc.png"
+    },
+    {
+      "id": "k2v5GZ",
+      "name": "30 · 搜索与选中 / 中文输入和控件规范",
+      "width": 1920,
+      "height": 1080,
+      "hash": "cdf4da52",
+      "currentHash": "abf33682",
+      "restoredHash": "cdf4da52",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/k2v5GZ.png"
+    },
+    {
+      "id": "M0wx5h",
+      "name": "33 · 主仓库 POI / 当前交互规范",
+      "width": 1920,
+      "height": 1080,
+      "hash": "1603c72b",
+      "currentHash": "dea01c5b",
+      "restoredHash": "1603c72b",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/M0wx5h.png"
+    },
+    {
+      "id": "cgOha",
+      "name": "31 · 园区默认 / 唯一主仓库 POI",
+      "width": 1920,
+      "height": 1080,
+      "hash": "eeadfa89",
+      "currentHash": "d2c4d3b0",
+      "restoredHash": "eeadfa89",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/cgOha.png"
+    },
+    {
+      "id": "q2RKW8",
+      "name": "32 · 点击开顶 / 0.5 秒溶解流程",
+      "width": 1920,
+      "height": 1080,
+      "hash": "e8122d00",
+      "currentHash": "e8122d00",
+      "restoredHash": "e8122d00",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/q2RKW8.png"
+    },
+    {
+      "id": "mG0YD",
+      "name": "34 · 场景设置 / 即时控制与库容状态",
+      "width": 1920,
+      "height": 1200,
+      "hash": "d64c7b86",
+      "currentHash": "d64c7b86",
+      "restoredHash": "d64c7b86",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/mG0YD.png"
+    },
+    {
+      "id": "uR0QK",
+      "name": "35 · 像素流后台 / 运行中",
+      "width": 1440,
+      "height": 1080,
+      "hash": "41e5ea92",
+      "currentHash": "bce3b0b3",
+      "restoredHash": "41e5ea92",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/uR0QK.png"
+    },
+    {
+      "id": "ieg9r",
+      "name": "36 · 像素流后台 / 已停止",
+      "width": 1440,
+      "height": 1080,
+      "hash": "8f8441f9",
+      "currentHash": "d3f41814",
+      "restoredHash": "8f8441f9",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/ieg9r.png"
+    },
+    {
+      "id": "D6HC9",
+      "name": "37 · 像素流后台 / 结束用户连接",
+      "width": 1440,
+      "height": 1080,
+      "hash": "4debf322",
+      "currentHash": "adf97e7b",
+      "restoredHash": "4debf322",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/D6HC9.png"
+    },
+    {
+      "id": "Jsit1",
+      "name": "38 · 像素流后台 / 停止服务确认",
+      "width": 1440,
+      "height": 1080,
+      "hash": "6a535b86",
+      "currentHash": "f8f1192b",
+      "restoredHash": "6a535b86",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/Jsit1.png"
+    },
+    {
+      "id": "i8fzG",
+      "name": "39 · 像素流后台 / 状态与参数反馈",
+      "width": 1920,
+      "height": 1320,
+      "hash": "a31af84d",
+      "currentHash": "a31af84d",
+      "restoredHash": "a31af84d",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/i8fzG.png"
+    },
+    {
+      "id": "tYSnE",
+      "name": "40 · 像素流访问 / 管理员结束连接",
+      "width": 1440,
+      "height": 900,
+      "hash": "9ce8fa4a",
+      "currentHash": "97bc6bcb",
+      "restoredHash": "9ce8fa4a",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/tYSnE.png"
+    },
+    {
+      "id": "aIei1",
+      "name": "41 · 像素流访问 / 服务已暂停",
+      "width": 1440,
+      "height": 900,
+      "hash": "d6ab1465",
+      "currentHash": "330e5e8a",
+      "restoredHash": "d6ab1465",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/aIei1.png"
+    },
+    {
+      "id": "jRpYB",
+      "name": "42 · 像素流后台 / 管理员登录",
+      "width": 1440,
+      "height": 900,
+      "hash": "9a34d403",
+      "currentHash": "150ac3a8",
+      "restoredHash": "9a34d403",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/jRpYB.png"
+    },
+    {
+      "id": "F554L",
+      "name": "43 · 像素流后台 / 登录失败",
+      "width": 1440,
+      "height": 900,
+      "hash": "98602875",
+      "currentHash": "135f370",
+      "restoredHash": "98602875",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/F554L.png"
+    },
+    {
+      "id": "OiC8B",
+      "name": "44 · 园区总览 / 库容说明展开",
+      "width": 1920,
+      "height": 1080,
+      "hash": "a5b22525",
+      "currentHash": "5435e17b",
+      "restoredHash": "a5b22525",
+      "uiUnchangedExceptApprovedFixes": true,
+      "visualReview": "All boards inspected previously; final affected boards rechecked by Pencil TakeScreenshot",
+      "export": "exports/current/OiC8B.png"
+    }
+  ],
+  "imageReferenceMismatches": [],
+  "images": [
+    {
+      "root": "CLx7Q",
+      "id": "X3XmU",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/interior-overview.png"
+    },
+    {
+      "root": "mP7E5",
+      "id": "pxdF5",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/charging-zone.png"
+    },
+    {
+      "root": "mP7E5",
+      "id": "xJ9st",
+      "name": "AGV 项目模型预览",
+      "url": "images/latest-scene-20261023/device-agv-clear.png"
+    },
+    {
+      "root": "d7P3z",
+      "id": "R89Nj",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/interior-overview.png"
+    },
+    {
+      "root": "Wt7Vo",
+      "id": "B68ru",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/charging-zone.png"
+    },
+    {
+      "root": "Wt7Vo",
+      "id": "FJkhx",
+      "name": "AGV-12 设备模型",
+      "url": "images/latest-scene-20261023/device-agv-clear.png"
+    },
+    {
+      "root": "Wt7Vo",
+      "id": "LHSh0",
+      "name": "CH-12 设施模型",
+      "url": "images/latest-scene-20261023/device-charger.png"
+    },
+    {
+      "root": "iiFrY",
+      "id": "vjuyT",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/interior-overview.png"
+    },
+    {
+      "root": "gW9oH",
+      "id": "jHlz7",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/racks-detail.png"
+    },
+    {
+      "root": "UbszE",
+      "id": "y4MP7H",
+      "name": "人工叉车模型预览",
+      "url": "images/latest-scene-20261023/device-forklift.png"
+    },
+    {
+      "root": "UbszE",
+      "id": "j3yYK",
+      "name": "电动堆高车模型预览",
+      "url": "images/latest-scene-20261023/device-stacker.png"
+    },
+    {
+      "root": "UbszE",
+      "id": "uGnUS",
+      "name": "装卸车辆模型预览",
+      "url": "images/latest-scene-20261023/device-truck.png"
+    },
+    {
+      "root": "UbszE",
+      "id": "Q7mav9",
+      "name": "充电设施模型预览",
+      "url": "images/latest-scene-20261023/device-charger.png"
+    },
+    {
+      "root": "XJoOQ",
+      "id": "w1SaW9",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/interior-overview.png"
+    },
+    {
+      "root": "F8Cox",
+      "id": "rtxaT",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/racks-detail.png"
+    },
+    {
+      "root": "XhUtw",
+      "id": "OCspa",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/racks-detail.png"
+    },
+    {
+      "root": "lvDfx",
+      "id": "W0nnF",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/interior-overview.png"
+    },
+    {
+      "root": "t4mlxm",
+      "id": "I6PYf",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/racks-detail.png"
+    },
+    {
+      "root": "zyWMm",
+      "id": "YKgOX",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/interior-overview.png"
+    },
+    {
+      "root": "lCf0H",
+      "id": "z6NYxa",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/interior-overview.png"
+    },
+    {
+      "root": "lCf0H",
+      "id": "aM40q",
+      "name": "STACKER-04告警设备预览",
+      "url": "images/latest-scene-20261023/device-stacker.png"
+    },
+    {
+      "root": "lCf0H",
+      "id": "uK8f5",
+      "name": "TRUCK-042告警设备预览",
+      "url": "images/latest-scene-20261023/device-truck.png"
+    },
+    {
+      "root": "lCf0H",
+      "id": "TzIcx",
+      "name": "FORK-07告警设备预览",
+      "url": "images/latest-scene-20261023/device-forklift.png"
+    },
+    {
+      "root": "lCf0H",
+      "id": "XTfDR",
+      "name": "FORK-12告警设备预览",
+      "url": "images/latest-scene-20261023/device-forklift.png"
+    },
+    {
+      "root": "lCf0H",
+      "id": "Z2rX4X",
+      "name": "TRUCK-009告警设备预览",
+      "url": "images/latest-scene-20261023/device-truck.png"
+    },
+    {
+      "root": "lCf0H",
+      "id": "zNh9d",
+      "name": "TRUCK-016告警设备预览",
+      "url": "images/latest-scene-20261023/device-truck.png"
+    },
+    {
+      "root": "lCf0H",
+      "id": "LRJoD",
+      "name": "AGV-12告警设备预览",
+      "url": "images/latest-scene-20261023/device-agv-clear.png"
+    },
+    {
+      "root": "OA1Bd",
+      "id": "zTxvT",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/racks-detail.png"
+    },
+    {
+      "root": "kvTdT",
+      "id": "aaUir",
+      "name": "园区场景 / 屋顶关闭",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "kvTdT",
+      "id": "b5dXz",
+      "name": "全仓视角预览",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "kvTdT",
+      "id": "d0bfg",
+      "name": "俯视视角预览",
+      "url": "images/latest-scene-20261023/top-view.png"
+    },
+    {
+      "root": "kvTdT",
+      "id": "qL0Pt",
+      "name": "货架区域视角预览",
+      "url": "images/latest-scene-20261023/racks-detail.png"
+    },
+    {
+      "root": "kvTdT",
+      "id": "ZLT60",
+      "name": "地堆区域视角预览",
+      "url": "images/latest-scene-20261023/floor-storage-detail.png"
+    },
+    {
+      "root": "qNsRa",
+      "id": "XeOiK",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/interior-overview.png"
+    },
+    {
+      "root": "ibTva",
+      "id": "b5c18",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/interior-overview.png"
+    },
+    {
+      "root": "ibTva",
+      "id": "V6OsC",
+      "name": "CH-07设施模型",
+      "url": "images/latest-scene-20261023/device-charger.png"
+    },
+    {
+      "root": "ibTva",
+      "id": "mkXEp",
+      "name": "CH-12设施模型",
+      "url": "images/latest-scene-20261023/device-charger.png"
+    },
+    {
+      "root": "ibTva",
+      "id": "mRRaZ",
+      "name": "CH-19设施模型",
+      "url": "images/latest-scene-20261023/device-charger.png"
+    },
+    {
+      "root": "ibTva",
+      "id": "j2jhGr",
+      "name": "CH-52设施模型",
+      "url": "images/latest-scene-20261023/device-charger.png"
+    },
+    {
+      "root": "t1QfTH",
+      "id": "izBhk",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/interior-overview.png"
+    },
+    {
+      "root": "Lxvbj",
+      "id": "LFZLI",
+      "name": "三维仓库场景",
+      "url": "images/latest-scene-20261023/interior-overview.png"
+    },
+    {
+      "root": "RyNRe",
+      "id": "a41TnP",
+      "name": "当前仓库预览",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "ApVA8",
+      "id": "ElzN4",
+      "name": "仓库模型预览",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "tWZ13",
+      "id": "WYD6K",
+      "name": "真实仓库场景预览",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "k2v5GZ",
+      "id": "qHJpy",
+      "name": "人工叉车模型小图",
+      "url": "images/latest-scene-20261023/device-forklift.png"
+    },
+    {
+      "root": "k2v5GZ",
+      "id": "BvtM2",
+      "name": "人工叉车项目模型",
+      "url": "images/latest-scene-20261023/device-forklift.png"
+    },
+    {
+      "root": "cgOha",
+      "id": "ryWrC",
+      "name": "真实运行园区 / 屋顶关闭",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "uR0QK",
+      "id": "z3AVCD",
+      "name": "当前园区预览",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "ieg9r",
+      "id": "gBdC7",
+      "name": "当前园区预览",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "D6HC9",
+      "id": "B49Dl",
+      "name": "当前园区预览",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "Jsit1",
+      "id": "fUtEw",
+      "name": "当前园区预览",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "tYSnE",
+      "id": "S5E1N6",
+      "name": "真实仓库场景预览",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "aIei1",
+      "id": "w2jdSo",
+      "name": "真实仓库场景预览",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "jRpYB",
+      "id": "W5NZqZ",
+      "name": "真实仓库场景预览",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "F554L",
+      "id": "PZti8",
+      "name": "真实仓库场景预览",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    },
+    {
+      "root": "OiC8B",
+      "id": "yjZiG",
+      "name": "真实运行园区 / 屋顶关闭",
+      "url": "images/latest-scene-20261023/campus-closed.png"
+    }
+  ],
+  "anchorChanges": [
+    {
+      "root": "CLx7Q",
+      "id": "mhFwC",
+      "patch": {
+        "x": 320,
+        "y": 400
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 238,
+        "y": 380
+      }
+    },
+    {
+      "root": "CLx7Q",
+      "id": "bNHEb",
+      "patch": {
+        "x": 640,
+        "y": 570
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 694,
+        "y": 503
+      }
+    },
+    {
+      "root": "CLx7Q",
+      "id": "FLw1I",
+      "patch": {
+        "x": 1080,
+        "y": 530
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1144,
+        "y": 453
+      }
+    },
+    {
+      "root": "CLx7Q",
+      "id": "igqro",
+      "patch": {
+        "x": 585,
+        "y": 660
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 568,
+        "y": 664
+      }
+    },
+    {
+      "root": "CLx7Q",
+      "id": "L0icv",
+      "patch": {
+        "x": 800,
+        "y": 442
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 838,
+        "y": 420
+      }
+    },
+    {
+      "root": "CLx7Q",
+      "id": "B3izp",
+      "patch": {
+        "x": 245,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 152,
+        "y": 638
+      }
+    },
+    {
+      "root": "CLx7Q",
+      "id": "kwXYC",
+      "patch": {
+        "x": 890,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 946,
+        "y": 573
+      }
+    },
+    {
+      "root": "CLx7Q",
+      "id": "GFZWR",
+      "patch": {
+        "x": 1170,
+        "y": 640
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1190,
+        "y": 535
+      }
+    },
+    {
+      "root": "d7P3z",
+      "id": "gqJXJ",
+      "patch": {
+        "x": 320,
+        "y": 400
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 238,
+        "y": 380
+      }
+    },
+    {
+      "root": "d7P3z",
+      "id": "sOBFu",
+      "patch": {
+        "x": 640,
+        "y": 570
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 694,
+        "y": 503
+      }
+    },
+    {
+      "root": "d7P3z",
+      "id": "Ojk5Q",
+      "patch": {
+        "x": 1080,
+        "y": 530
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1144,
+        "y": 453
+      }
+    },
+    {
+      "root": "d7P3z",
+      "id": "bGp4G",
+      "patch": {
+        "x": 585,
+        "y": 660
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 568,
+        "y": 664
+      }
+    },
+    {
+      "root": "d7P3z",
+      "id": "I1HvG",
+      "patch": {
+        "x": 800,
+        "y": 442
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 838,
+        "y": 420
+      }
+    },
+    {
+      "root": "d7P3z",
+      "id": "zNFgk",
+      "patch": {
+        "x": 245,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 152,
+        "y": 638
+      }
+    },
+    {
+      "root": "d7P3z",
+      "id": "ztLUC",
+      "patch": {
+        "x": 890,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 946,
+        "y": 573
+      }
+    },
+    {
+      "root": "d7P3z",
+      "id": "W44vGJ",
+      "patch": {
+        "x": 1170,
+        "y": 640
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1190,
+        "y": 535
+      }
+    },
+    {
+      "root": "XJoOQ",
+      "id": "gIMpI",
+      "patch": {
+        "x": 320,
+        "y": 400
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 238,
+        "y": 380
+      }
+    },
+    {
+      "root": "XJoOQ",
+      "id": "rIlPw",
+      "patch": {
+        "x": 640,
+        "y": 570
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 694,
+        "y": 503
+      }
+    },
+    {
+      "root": "XJoOQ",
+      "id": "NZde0",
+      "patch": {
+        "x": 1080,
+        "y": 530
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1144,
+        "y": 453
+      }
+    },
+    {
+      "root": "XJoOQ",
+      "id": "gLIGz",
+      "patch": {
+        "x": 585,
+        "y": 660
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 568,
+        "y": 664
+      }
+    },
+    {
+      "root": "XJoOQ",
+      "id": "RvWhh",
+      "patch": {
+        "x": 800,
+        "y": 442
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 838,
+        "y": 420
+      }
+    },
+    {
+      "root": "XJoOQ",
+      "id": "LUoEM",
+      "patch": {
+        "x": 245,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 152,
+        "y": 638
+      }
+    },
+    {
+      "root": "XJoOQ",
+      "id": "H1Q8B",
+      "patch": {
+        "x": 890,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 946,
+        "y": 573
+      }
+    },
+    {
+      "root": "XJoOQ",
+      "id": "Dfwzw",
+      "patch": {
+        "x": 1170,
+        "y": 640
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1190,
+        "y": 535
+      }
+    },
+    {
+      "root": "zyWMm",
+      "id": "exeYL",
+      "patch": {
+        "x": 640,
+        "y": 570
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 694,
+        "y": 503
+      }
+    },
+    {
+      "root": "zyWMm",
+      "id": "ZlAtM",
+      "patch": {
+        "x": 1080,
+        "y": 530
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1144,
+        "y": 453
+      }
+    },
+    {
+      "root": "zyWMm",
+      "id": "c6TuAG",
+      "patch": {
+        "x": 585,
+        "y": 660
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 568,
+        "y": 664
+      }
+    },
+    {
+      "root": "zyWMm",
+      "id": "HCVVy",
+      "patch": {
+        "x": 245,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 152,
+        "y": 638
+      }
+    },
+    {
+      "root": "zyWMm",
+      "id": "xoSt4",
+      "patch": {
+        "x": 890,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 946,
+        "y": 573
+      }
+    },
+    {
+      "root": "zyWMm",
+      "id": "W0bjl",
+      "patch": {
+        "x": 1170,
+        "y": 640
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1190,
+        "y": 535
+      }
+    },
+    {
+      "root": "lCf0H",
+      "id": "T2CrV",
+      "patch": {
+        "x": 640,
+        "y": 570
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 694,
+        "y": 503
+      }
+    },
+    {
+      "root": "lCf0H",
+      "id": "eqijM",
+      "patch": {
+        "x": 1080,
+        "y": 530
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1144,
+        "y": 453
+      }
+    },
+    {
+      "root": "lCf0H",
+      "id": "A7O0G4",
+      "patch": {
+        "x": 585,
+        "y": 660
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 568,
+        "y": 664
+      }
+    },
+    {
+      "root": "lCf0H",
+      "id": "uzxmZ",
+      "patch": {
+        "x": 245,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 152,
+        "y": 638
+      }
+    },
+    {
+      "root": "lCf0H",
+      "id": "DsXvU",
+      "patch": {
+        "x": 890,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 946,
+        "y": 573
+      }
+    },
+    {
+      "root": "lCf0H",
+      "id": "bjj3W",
+      "patch": {
+        "x": 1170,
+        "y": 640
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1190,
+        "y": 535
+      }
+    },
+    {
+      "root": "t1QfTH",
+      "id": "yDw1J",
+      "patch": {
+        "x": 320,
+        "y": 400
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 238,
+        "y": 380
+      }
+    },
+    {
+      "root": "t1QfTH",
+      "id": "dOKjW",
+      "patch": {
+        "x": 640,
+        "y": 570
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 694,
+        "y": 503
+      }
+    },
+    {
+      "root": "t1QfTH",
+      "id": "rTtmm",
+      "patch": {
+        "x": 1080,
+        "y": 530
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1144,
+        "y": 453
+      }
+    },
+    {
+      "root": "t1QfTH",
+      "id": "Pcws1",
+      "patch": {
+        "x": 585,
+        "y": 660
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 568,
+        "y": 664
+      }
+    },
+    {
+      "root": "t1QfTH",
+      "id": "jNFKN",
+      "patch": {
+        "x": 800,
+        "y": 442
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 838,
+        "y": 420
+      }
+    },
+    {
+      "root": "t1QfTH",
+      "id": "j37jQ",
+      "patch": {
+        "x": 245,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 152,
+        "y": 638
+      }
+    },
+    {
+      "root": "t1QfTH",
+      "id": "A5vje",
+      "patch": {
+        "x": 890,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 946,
+        "y": 573
+      }
+    },
+    {
+      "root": "t1QfTH",
+      "id": "jmt3s",
+      "patch": {
+        "x": 1170,
+        "y": 640
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1190,
+        "y": 535
+      }
+    },
+    {
+      "root": "Lxvbj",
+      "id": "twHml",
+      "patch": {
+        "x": 320,
+        "y": 400
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 238,
+        "y": 380
+      }
+    },
+    {
+      "root": "Lxvbj",
+      "id": "b6xeDZ",
+      "patch": {
+        "x": 640,
+        "y": 570
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 694,
+        "y": 503
+      }
+    },
+    {
+      "root": "Lxvbj",
+      "id": "HjgjY",
+      "patch": {
+        "x": 1080,
+        "y": 530
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1144,
+        "y": 453
+      }
+    },
+    {
+      "root": "Lxvbj",
+      "id": "LbHPX",
+      "patch": {
+        "x": 585,
+        "y": 660
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 568,
+        "y": 664
+      }
+    },
+    {
+      "root": "Lxvbj",
+      "id": "CwmRb",
+      "patch": {
+        "x": 800,
+        "y": 442
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 838,
+        "y": 420
+      }
+    },
+    {
+      "root": "Lxvbj",
+      "id": "x7kgX",
+      "patch": {
+        "x": 245,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 152,
+        "y": 638
+      }
+    },
+    {
+      "root": "Lxvbj",
+      "id": "ctvTN",
+      "patch": {
+        "x": 890,
+        "y": 620
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 946,
+        "y": 573
+      }
+    },
+    {
+      "root": "Lxvbj",
+      "id": "V8faV",
+      "patch": {
+        "x": 1170,
+        "y": 640
+      },
+      "reason": "Reanchor same scene category to visible latest-map subject",
+      "before": {
+        "x": 1190,
+        "y": 535
+      }
+    },
+    {
+      "root": "mP7E5",
+      "id": "y109h5",
+      "patch": {
+        "x": 593,
+        "y": 469
+      },
+      "reason": "Actual AGV-07 camera projection (703,542)",
+      "before": {
+        "x": 626,
+        "y": 640
+      }
+    },
+    {
+      "root": "mP7E5",
+      "id": "b9mdKC",
+      "patch": {
+        "x": 344,
+        "y": 445
+      },
+      "reason": "Actual CH-07 camera projection (462,518)",
+      "before": {
+        "x": 832,
+        "y": 338
+      }
+    },
+    {
+      "root": "mP7E5",
+      "id": "J1tBB",
+      "patch": {
+        "x": 646,
+        "y": 540,
+        "width": 116,
+        "height": 44
+      },
+      "reason": "Ground ring around visible AGV-07",
+      "before": {
+        "x": 566,
+        "y": 817,
+        "width": 420,
+        "height": 120
+      }
+    },
+    {
+      "root": "mP7E5",
+      "id": "fZqMf",
+      "patch": {
+        "x": 646,
+        "y": 493,
+        "width": 116,
+        "height": 108
+      },
+      "reason": "Selection corners frame actual AGV-07",
+      "before": {
+        "x": 560,
+        "y": 674,
+        "width": 340,
+        "height": 294
+      }
+    },
+    {
+      "root": "lvDfx",
+      "id": "ePG1f",
+      "patch": {
+        "x": 340,
+        "y": 400
+      },
+      "reason": "Source bin on rack region",
+      "before": {
+        "x": 360,
+        "y": 412
+      }
+    },
+    {
+      "root": "lvDfx",
+      "id": "pl5Q8",
+      "patch": {
+        "x": 875,
+        "y": 695
+      },
+      "reason": "Target dock on visible loading bay",
+      "before": {
+        "x": 890,
+        "y": 637
+      }
+    },
+    {
+      "root": "ibTva",
+      "id": "LOTh5",
+      "patch": {
+        "x": 1060,
+        "y": 530
+      },
+      "reason": "Charging area marker on actual array",
+      "before": {
+        "x": 1060,
+        "y": 442
+      }
+    },
+    {
+      "root": "iiFrY",
+      "id": "Mp50F",
+      "patch": {
+        "x": 1080,
+        "y": 515
+      },
+      "reason": "Replay endpoint on actual charging zone",
+      "before": {
+        "x": 1080,
+        "y": 490
+      }
+    },
+    {
+      "root": "d7P3z",
+      "id": "wYvPC",
+      "patch": {
+        "x": 1004,
+        "y": 501,
+        "width": 100,
+        "rotation": 34
+      },
+      "reason": "Reconnect aggregate popup to moved AGV marker",
+      "before": {
+        "x": 1010,
+        "y": 474,
+        "width": 134,
+        "rotation": null
+      }
+    },
+    {
+      "root": "XJoOQ",
+      "id": "WvJO5",
+      "patch": {
+        "x": 1004,
+        "y": 501,
+        "width": 100,
+        "rotation": 34
+      },
+      "reason": "Reconnect aggregate popup to moved AGV marker",
+      "before": {
+        "x": 1010,
+        "y": 474,
+        "width": 134,
+        "rotation": null
+      }
+    },
+    {
+      "root": "mP7E5",
+      "id": "S63Znz",
+      "patch": {
+        "width": 116,
+        "height": 108,
+        "strokeWidth": 5
+      },
+      "before": {
+        "width": 340,
+        "height": 294,
+        "strokeWidth": 9
+      },
+      "reason": "Scale corner strokes with actual selection bounds"
+    },
+    {
+      "root": "mP7E5",
+      "id": "vyykz",
+      "patch": {
+        "width": 116,
+        "height": 108,
+        "strokeWidth": 3
+      },
+      "before": {
+        "width": 340,
+        "height": 294,
+        "strokeWidth": 6
+      },
+      "reason": "Scale corner strokes with actual selection bounds"
+    },
+    {
+      "root": "mP7E5",
+      "id": "QefN5",
+      "patch": {
+        "width": 116,
+        "height": 108,
+        "strokeWidth": 5
+      },
+      "before": {
+        "width": 340,
+        "height": 294,
+        "strokeWidth": 9
+      },
+      "reason": "Scale corner strokes with actual selection bounds"
+    },
+    {
+      "root": "mP7E5",
+      "id": "c0ySQ",
+      "patch": {
+        "width": 116,
+        "height": 108,
+        "strokeWidth": 3
+      },
+      "before": {
+        "width": 340,
+        "height": 294,
+        "strokeWidth": 6
+      },
+      "reason": "Scale corner strokes with actual selection bounds"
+    },
+    {
+      "root": "mP7E5",
+      "id": "icgzH",
+      "patch": {
+        "width": 116,
+        "height": 108,
+        "strokeWidth": 5
+      },
+      "before": {
+        "width": 340,
+        "height": 294,
+        "strokeWidth": 9
+      },
+      "reason": "Scale corner strokes with actual selection bounds"
+    },
+    {
+      "root": "mP7E5",
+      "id": "gNERX",
+      "patch": {
+        "width": 116,
+        "height": 108,
+        "strokeWidth": 3
+      },
+      "before": {
+        "width": 340,
+        "height": 294,
+        "strokeWidth": 6
+      },
+      "reason": "Scale corner strokes with actual selection bounds"
+    },
+    {
+      "root": "mP7E5",
+      "id": "A3raZm",
+      "patch": {
+        "width": 116,
+        "height": 108,
+        "strokeWidth": 5
+      },
+      "before": {
+        "width": 340,
+        "height": 294,
+        "strokeWidth": 9
+      },
+      "reason": "Scale corner strokes with actual selection bounds"
+    },
+    {
+      "root": "mP7E5",
+      "id": "I5P9lY",
+      "patch": {
+        "width": 116,
+        "height": 108,
+        "strokeWidth": 3
+      },
+      "before": {
+        "width": 340,
+        "height": 294,
+        "strokeWidth": 6
+      },
+      "reason": "Scale corner strokes with actual selection bounds"
+    },
+    {
+      "root": "mP7E5",
+      "id": "XAWmD",
+      "patch": {
+        "x": 505,
+        "y": 674
+      },
+      "reason": "Actual AGV-08 camera projection (613,747)",
+      "before": {
+        "x": 194,
+        "y": 476
+      }
+    },
+    {
+      "root": "Wt7Vo",
+      "id": "PwfKH",
+      "patch": {
+        "x": 745,
+        "y": 757
+      },
+      "reason": "Actual AGV-12 camera projection (869,830)",
+      "before": {
+        "x": 626,
+        "y": 638
+      }
+    },
+    {
+      "root": "Wt7Vo",
+      "id": "fMRZs",
+      "patch": {
+        "x": 702,
+        "y": 316
+      },
+      "reason": "Actual CH-12 camera projection (810,389)",
+      "before": {
+        "x": 872,
+        "y": 345
+      }
+    },
+    {
+      "root": "Wt7Vo",
+      "id": "s94kwS",
+      "patch": {
+        "x": 805,
+        "y": 815,
+        "width": 128,
+        "height": 46
+      },
+      "reason": "Ground ring around actual AGV-12",
+      "before": {
+        "x": 566,
+        "y": 817,
+        "width": 420,
+        "height": 120
+      }
+    },
+    {
+      "root": "t4mlxm",
+      "id": "kuGvM",
+      "patch": {
+        "x": 32,
+        "y": 204,
+        "name": "关联执行设备 / 位置未核验"
+      },
+      "reason": "Forklift not visible in rack detail: show unverified relation without false pin",
+      "before": {
+        "x": 292,
+        "y": 546,
+        "name": "执行叉车"
+      }
+    },
+    {
+      "root": "t4mlxm",
+      "id": "X1Tgd",
+      "patch": {
+        "content": "位置未核验",
+        "width": 60,
+        "fill": "#536478",
+        "name": "位置未核验"
+      },
+      "reason": "Do not assert location absent from new scene view",
+      "before": {
+        "content": "运行",
+        "width": 24,
+        "fill": "#356BFA",
+        "name": "运行"
+      }
+    },
+    {
+      "root": "t4mlxm",
+      "id": "j71IJ",
+      "patch": {
+        "enabled": false
+      },
+      "reason": "Hide unsupported forklift location leader and anchor",
+      "before": {
+        "enabled": null
+      }
+    },
+    {
+      "root": "t4mlxm",
+      "id": "hWeVD",
+      "patch": {
+        "enabled": false
+      },
+      "reason": "Hide unsupported forklift location leader and anchor",
+      "before": {
+        "enabled": null
+      }
+    },
+    {
+      "root": "t4mlxm",
+      "id": "l7s8c",
+      "patch": {
+        "enabled": false
+      },
+      "reason": "Hide unsupported forklift location leader and anchor",
+      "before": {
+        "enabled": null
+      }
+    },
+    {
+      "id": "CSEcX",
+      "patch": {
+        "x": 166,
+        "y": 90
+      },
+      "root": "k2v5GZ",
+      "before": {
+        "x": 158,
+        "y": 20
+      },
+      "reason": "Selection example brackets follow actual forklift body in latest scene photograph"
+    },
+    {
+      "id": "MZZkn",
+      "patch": {
+        "geometry": "M240 154l-18 0 0 18"
+      },
+      "root": "k2v5GZ",
+      "before": {
+        "geometry": "M98 112l-28 0 0 28"
+      },
+      "reason": "Selection example brackets follow actual forklift body in latest scene photograph"
+    },
+    {
+      "id": "DUlda",
+      "patch": {
+        "geometry": "M240 154l-18 0 0 18"
+      },
+      "root": "k2v5GZ",
+      "before": {
+        "geometry": "M98 112l-28 0 0 28"
+      },
+      "reason": "Selection example brackets follow actual forklift body in latest scene photograph"
+    },
+    {
+      "id": "Y6iQb",
+      "patch": {
+        "geometry": "M312 154l18 0 0 18"
+      },
+      "root": "k2v5GZ",
+      "before": {
+        "geometry": "M438 112l28 0 0 28"
+      },
+      "reason": "Selection example brackets follow actual forklift body in latest scene photograph"
+    },
+    {
+      "id": "UJKlw",
+      "patch": {
+        "geometry": "M312 154l18 0 0 18"
+      },
+      "root": "k2v5GZ",
+      "before": {
+        "geometry": "M438 112l28 0 0 28"
+      },
+      "reason": "Selection example brackets follow actual forklift body in latest scene photograph"
+    },
+    {
+      "id": "rviPh",
+      "patch": {
+        "geometry": "M240 290l-18 0 0-18"
+      },
+      "root": "k2v5GZ",
+      "before": {
+        "geometry": "M98 328l-28 0 0-28"
+      },
+      "reason": "Selection example brackets follow actual forklift body in latest scene photograph"
+    },
+    {
+      "id": "hwRJa",
+      "patch": {
+        "geometry": "M240 290l-18 0 0-18"
+      },
+      "root": "k2v5GZ",
+      "before": {
+        "geometry": "M98 328l-28 0 0-28"
+      },
+      "reason": "Selection example brackets follow actual forklift body in latest scene photograph"
+    },
+    {
+      "id": "yg9G5",
+      "patch": {
+        "geometry": "M312 290l18 0 0-18"
+      },
+      "root": "k2v5GZ",
+      "before": {
+        "geometry": "M438 328l28 0 0-28"
+      },
+      "reason": "Selection example brackets follow actual forklift body in latest scene photograph"
+    },
+    {
+      "id": "awU3J",
+      "patch": {
+        "geometry": "M312 290l18 0 0-18"
+      },
+      "root": "k2v5GZ",
+      "before": {
+        "geometry": "M438 328l28 0 0-28"
+      },
+      "reason": "Selection example brackets follow actual forklift body in latest scene photograph"
+    },
+    {
+      "id": "fZqMf",
+      "patch": {
+        "y": 520,
+        "height": 81
+      },
+      "root": "mP7E5",
+      "before": {
+        "y": 493,
+        "height": 108
+      },
+      "reason": "Final review: keep upper selection corners below AGV label while enclosing vehicle"
+    },
+    {
+      "id": "S63Znz",
+      "patch": {
+        "height": 81
+      },
+      "root": "mP7E5",
+      "before": {
+        "height": 108
+      },
+      "reason": "Final review: keep upper selection corners below AGV label while enclosing vehicle"
+    },
+    {
+      "id": "vyykz",
+      "patch": {
+        "height": 81
+      },
+      "root": "mP7E5",
+      "before": {
+        "height": 108
+      },
+      "reason": "Final review: keep upper selection corners below AGV label while enclosing vehicle"
+    },
+    {
+      "id": "QefN5",
+      "patch": {
+        "height": 81
+      },
+      "root": "mP7E5",
+      "before": {
+        "height": 108
+      },
+      "reason": "Final review: keep upper selection corners below AGV label while enclosing vehicle"
+    },
+    {
+      "id": "c0ySQ",
+      "patch": {
+        "height": 81
+      },
+      "root": "mP7E5",
+      "before": {
+        "height": 108
+      },
+      "reason": "Final review: keep upper selection corners below AGV label while enclosing vehicle"
+    },
+    {
+      "id": "icgzH",
+      "patch": {
+        "height": 81
+      },
+      "root": "mP7E5",
+      "before": {
+        "height": 108
+      },
+      "reason": "Final review: keep upper selection corners below AGV label while enclosing vehicle"
+    },
+    {
+      "id": "gNERX",
+      "patch": {
+        "height": 81
+      },
+      "root": "mP7E5",
+      "before": {
+        "height": 108
+      },
+      "reason": "Final review: keep upper selection corners below AGV label while enclosing vehicle"
+    },
+    {
+      "id": "A3raZm",
+      "patch": {
+        "height": 81
+      },
+      "root": "mP7E5",
+      "before": {
+        "height": 108
+      },
+      "reason": "Final review: keep upper selection corners below AGV label while enclosing vehicle"
+    },
+    {
+      "id": "I5P9lY",
+      "patch": {
+        "height": 81
+      },
+      "root": "mP7E5",
+      "before": {
+        "height": 108
+      },
+      "reason": "Final review: keep upper selection corners below AGV label while enclosing vehicle"
+    }
+  ],
+  "layoutIssues": [],
+  "missingReferences": [],
+  "placeholders": [],
+  "exportChecks": [
+    {
+      "file": "exports/current/bi8Au.png",
+      "bytes": 294753,
+      "width": 3840,
+      "height": 1080,
+      "sha256": "41b383ab10c1acf2c083b4c306ee16cf442232e2dd8f8751bc21fe248683f148",
+      "expectedWidth": 3840,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/CLx7Q.png",
+      "bytes": 2168827,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "da82475ec9357d4bcee05dac4b6cee5cb8e944dce7d9720390f1e2e954cd35ff",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/mP7E5.png",
+      "bytes": 2433898,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "3271d11d4e10ffda33d48399f12031f30019c75d42b39e01c972f3702a6a4d46",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/d7P3z.png",
+      "bytes": 1972958,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "7f3c95ab684a88ec7856d1eeffeebd330bd2f88b53b5cd0efd99405daf1254f7",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/Wt7Vo.png",
+      "bytes": 2438976,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "2b86a95f69719cecaf5569de44aa9aa91f9ede1c5b4656e0eb2788e90838cf60",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/iiFrY.png",
+      "bytes": 1922673,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "a4477ccc1b62b5cabc3be1adb4e9354e312a845ee2ddc3af0c21fb59ce605505",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/gW9oH.png",
+      "bytes": 2949241,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "7bc1037a6eb08d5db8e4fa4efce327fce93a84b3ea5d27d65d50b02e33e789c6",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/UbszE.png",
+      "bytes": 774467,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "469ee5a21d432112f606754dd8326724157a00144719403853ade0d6130a29cd",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/PE2am.png",
+      "bytes": 124724,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "0bb4c129e4e9e53f6315fdbfc8ab69c3de78289f410e1683cbc049146ced31f3",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/r5SOcd.png",
+      "bytes": 136686,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "5b94a87e45c7795a8f21cbd123aeb5056d48c2ea626d7f751e5ce32613b47439",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/XJoOQ.png",
+      "bytes": 2004813,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "82f0d66762200a691d3fa6a98468380bb3aa948040d577968dccf4ecc2becb58",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/F8Cox.png",
+      "bytes": 2964903,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "19802efa83e227e4bee0e3373aeb9f6d0491b1484f69bd0c3aed51ff89932b95",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/XhUtw.png",
+      "bytes": 2984429,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "77a427157fd5d9158de45162b61eaf0c9ef377f8751208ebbd7d0c559270c339",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/lvDfx.png",
+      "bytes": 2112178,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "17ec35ab0225e3bf1ba25cdacdab4c815d5bf9c43b65cf49b1fb45418399f1d7",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/t4mlxm.png",
+      "bytes": 3046941,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "0dd49517a923a8e4ac53521d3115745d6086cb400fa68fcc7afdce252687f4ee",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/zyWMm.png",
+      "bytes": 2160185,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "0185e4710a1d619eca328975257043b471a971a35d296173b0565bd44284545d",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/lCf0H.png",
+      "bytes": 2195294,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "35db8768f908bd4682647876c06235a0ea54cbde81ba9a0558ed91d50ba6ba36",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/OA1Bd.png",
+      "bytes": 2887250,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "abaedd766bab78a2c71f6e0316d1d938ddcb8809ccd569929276defc0a6b9228",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/kvTdT.png",
+      "bytes": 2167509,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "d3675c19825107f6755b9d3d377fad713907cdada3c2148f16eeaaa11e1180b8",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/qNsRa.png",
+      "bytes": 2202297,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "f514c25c44437730808dbf622fdeedb4452b4342e48c308043bb017466cdc6b3",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/ibTva.png",
+      "bytes": 2242412,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "f016c8d02c06e2f61058ab474be8a3fb034991c3e38dad28858aa30aa8dfa7d9",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/RXvoP.png",
+      "bytes": 135804,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "b77d7cc4b0c4dcca798527b95106f65f7638867bca94004f57e8a774900871b8",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/G316Rk.png",
+      "bytes": 110471,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "c4af979d58527bf5351762434c5add71f86d2fccf2b54e3403521c34bfd31a95",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/t1QfTH.png",
+      "bytes": 2057175,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "2a79f424c611a4ad0c898f6af1fcd183a61ce629bf535e158072659ec1e32bc2",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/Lxvbj.png",
+      "bytes": 2116304,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "941b7c9a4dc4fc1c46df1888978a62082070147a6753b2da56b4cfcee8f2c1a2",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/RyNRe.png",
+      "bytes": 212105,
+      "width": 1200,
+      "height": 900,
+      "sha256": "3902d1146b14fb7faf0477d9a143898dd393ee79fa352d00a562550c5bb2ab8d",
+      "expectedWidth": 1200,
+      "expectedHeight": 900
+    },
+    {
+      "file": "exports/current/ApVA8.png",
+      "bytes": 125283,
+      "width": 1200,
+      "height": 900,
+      "sha256": "bb87b565160d5bf8f9ef50856370f4b2b3ec587bb942da525892154e6d11646a",
+      "expectedWidth": 1200,
+      "expectedHeight": 900
+    },
+    {
+      "file": "exports/current/tWZ13.png",
+      "bytes": 609154,
+      "width": 1440,
+      "height": 900,
+      "sha256": "87865619db205a521fa2bf732b9cf5b1db2cd1b24d26441c25aae2c32445ae33",
+      "expectedWidth": 1440,
+      "expectedHeight": 900
+    },
+    {
+      "file": "exports/current/A5t3VD.png",
+      "bytes": 132441,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "f43711fd37de7b987dfe4a4665e3dfeb101d842126f85678459c637ba90a365f",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/jCHwc.png",
+      "bytes": 115262,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "17484068ae5199fd8e7fe86ce797069a3f1890382c5719fab8413211ceb70b82",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/k2v5GZ.png",
+      "bytes": 273718,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "588fe3c60865e41002dc30f7c263e9dc8285bcc19e26ffc33cb3144197f7fc8c",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/M0wx5h.png",
+      "bytes": 150629,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "eac933922c812a79f5ac2ee8f8e9255f39b64b2adb0b3baef08f84131ace0cc7",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/cgOha.png",
+      "bytes": 2216037,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "c047a3282a0417ef863ff7c8da31bd3beb28b43c2b1b46d0a0bc0f291f644cac",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/q2RKW8.png",
+      "bytes": 119331,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "9f2a5360506bee26976a07143ef730bf9584357d70c1b7164d1ee7a55ffff5f6",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/mG0YD.png",
+      "bytes": 241344,
+      "width": 1920,
+      "height": 1200,
+      "sha256": "6a82b386146d6bfbe6edc76259a78624c5b6ebed4baba757f20f2db1553e2558",
+      "expectedWidth": 1920,
+      "expectedHeight": 1200
+    },
+    {
+      "file": "exports/current/uR0QK.png",
+      "bytes": 198413,
+      "width": 1440,
+      "height": 1080,
+      "sha256": "00b6f815e6443162750c55196b8da077febb14fd0f861f6517315ea3fd2aa69d",
+      "expectedWidth": 1440,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/ieg9r.png",
+      "bytes": 168980,
+      "width": 1440,
+      "height": 1080,
+      "sha256": "97d73b5d49e069a28b35e6020d747dd64cf4ac6fd06a85d0565308872e3692f5",
+      "expectedWidth": 1440,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/D6HC9.png",
+      "bytes": 192078,
+      "width": 1440,
+      "height": 1080,
+      "sha256": "8879a7d7def8ef790bbb7f565fef98f346a1c3be8550223f186cee4b63d01741",
+      "expectedWidth": 1440,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/Jsit1.png",
+      "bytes": 190332,
+      "width": 1440,
+      "height": 1080,
+      "sha256": "4f18eeae70224e5420ae69e2bf2e85c7b9e4614e75874ed860ebc5597fd40264",
+      "expectedWidth": 1440,
+      "expectedHeight": 1080
+    },
+    {
+      "file": "exports/current/i8fzG.png",
+      "bytes": 180541,
+      "width": 1920,
+      "height": 1320,
+      "sha256": "c7f78f9314b0b99e8ea8650a95713f1e3a847a129a2575bb7ee022942465f69a",
+      "expectedWidth": 1920,
+      "expectedHeight": 1320
+    },
+    {
+      "file": "exports/current/tYSnE.png",
+      "bytes": 612985,
+      "width": 1440,
+      "height": 900,
+      "sha256": "349570b8a71aa825d82bb7d41e1dc52ffab012765d0712460159f8e4e12b819a",
+      "expectedWidth": 1440,
+      "expectedHeight": 900
+    },
+    {
+      "file": "exports/current/aIei1.png",
+      "bytes": 610314,
+      "width": 1440,
+      "height": 900,
+      "sha256": "52fd88aabd1c857dd5cdb34e6a9468c869c6df3095eb646e5ec2ded636b3f440",
+      "expectedWidth": 1440,
+      "expectedHeight": 900
+    },
+    {
+      "file": "exports/current/jRpYB.png",
+      "bytes": 605964,
+      "width": 1440,
+      "height": 900,
+      "sha256": "5e216ea930ff753b579d6a638e05b635402af07c8641b4a4169ad4abd5e39de7",
+      "expectedWidth": 1440,
+      "expectedHeight": 900
+    },
+    {
+      "file": "exports/current/F554L.png",
+      "bytes": 609626,
+      "width": 1440,
+      "height": 900,
+      "sha256": "2e1777f5271e8d7cc535c51bf6123089e500ab0f7f384b53edf67f01405d9bfc",
+      "expectedWidth": 1440,
+      "expectedHeight": 900
+    },
+    {
+      "file": "exports/current/OiC8B.png",
+      "bytes": 2235865,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "761b901ea09edeaad0e3090f3348bbd01289fdb6b1ecb238ebd0de63d1230abc",
+      "expectedWidth": 1920,
+      "expectedHeight": 1080
+    }
+  ],
+  "currentPngCount": 45,
+  "closeupPngCount": 15,
+  "assetEvidence": "latest-scene-assets.json",
+  "projectedAnchors": "latest-scene-projected-anchors.json",
+  "capturePlan": "latest-scene-capture-plan.json",
+  "all45BoardsVisuallyInspected": true,
+  "sourceSaveState": "native_save_confirmed_after_final_changes",
+  "previousSourceSaveEvidence": {
+    "method": "native_ctrl_s_by_root_agent",
+    "editedIndicatorCleared": true,
+    "sourceFileBytes": 1769993,
+    "sourceFileLastWrite": "2026-10-23T15:47:43.1648275+08:00",
+    "sha256": "D98496070649832862929FFB2B488919BD71D49D76B5F839666AFE97E5172956",
+    "diskMetadataRechecked": true,
+    "canvasMutationAfterSave": false,
+    "scope": "all_45_artboards_42_components_56_latest_scene_image_nodes"
+  },
+  "unexpectedUiChanges": [],
+  "approvedFinalUiFixes": {
+    "hintContrast": [
+      {
+        "root": "cgOha",
+        "addedId": "l362O",
+        "reason": "Final review: readable bottom hint over scene context houses",
+        "text": {
+          "id": "hnPBM",
+          "before": {
+            "x": 24,
+            "y": 1040
+          },
+          "patch": {
+            "x": 28,
+            "y": 1038
+          }
+        }
+      },
+      {
+        "root": "OiC8B",
+        "addedId": "YPQwf",
+        "reason": "Final review: readable bottom hint over scene context houses",
+        "text": {
+          "id": "qJM2J",
+          "before": {
+            "x": 24,
+            "y": 1040
+          },
+          "patch": {
+            "x": 28,
+            "y": 1038
+          }
+        }
+      }
+    ],
+    "warehouseSelectorCopy": [
+      {
+        "root": "mP7E5",
+        "id": "U6zQEO",
+        "beforeDescendants": {
+          "qIBQu": {
+            "content": "普通仓库 · 充电区 C"
+          }
+        },
+        "subtitleBefore": "普通仓库 · 充电区 C",
+        "subtitleAfter": "充电区 C"
+      }
+    ],
+    "warehousePoiActionCopy": [
+      {
+        "id": "Ehyf8",
+        "root": "M0wx5h",
+        "before": {
+          "content": "屋顶已闭合"
+        },
+        "patch": {
+          "content": "点击查看"
+        }
+      },
+      {
+        "id": "KIKNk",
+        "root": "M0wx5h",
+        "before": {
+          "content": "屋顶已闭合"
+        },
+        "patch": {
+          "content": "点击查看"
+        }
+      }
+    ]
+  },
+  "assetChecks": [
+    {
+      "file": "images/latest-scene-20261023/campus-closed.png",
+      "bytes": 2497501,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "a845ac641035aea2ded6c6dabebd87d1d0bb57bd9a936d3250403a2bc5fd0383",
+      "expectedSha256": "a845ac641035aea2ded6c6dabebd87d1d0bb57bd9a936d3250403a2bc5fd0383",
+      "hashMatches": true
+    },
+    {
+      "file": "images/latest-scene-20261023/interior-overview.png",
+      "bytes": 2573772,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "d36937eff4b760b36aba33f30afd1b14cd80f7fabb66a6751c20f7136a88a73f",
+      "expectedSha256": "d36937eff4b760b36aba33f30afd1b14cd80f7fabb66a6751c20f7136a88a73f",
+      "hashMatches": true
+    },
+    {
+      "file": "images/latest-scene-20261023/charging-zone.png",
+      "bytes": 3015881,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "6769b5ea73c19980df73e52c1615086ce5d9826030747623bdf364d9914c7376",
+      "expectedSha256": "6769b5ea73c19980df73e52c1615086ce5d9826030747623bdf364d9914c7376",
+      "hashMatches": true
+    },
+    {
+      "file": "images/latest-scene-20261023/racks-detail.png",
+      "bytes": 4005217,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "77f73ee7f7d5428bc52a9454ee6e933c8abb514c3247135353130e87e02589d0",
+      "expectedSha256": "77f73ee7f7d5428bc52a9454ee6e933c8abb514c3247135353130e87e02589d0",
+      "hashMatches": true
+    },
+    {
+      "file": "images/latest-scene-20261023/top-view.png",
+      "bytes": 2337695,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "39c071d71a7e19d476f48135d41a9f37f4ac52af03d01ad81403c996592c1fe9",
+      "expectedSha256": "39c071d71a7e19d476f48135d41a9f37f4ac52af03d01ad81403c996592c1fe9",
+      "hashMatches": true
+    },
+    {
+      "file": "images/latest-scene-20261023/floor-storage-detail.png",
+      "bytes": 2593703,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "595c20e8282de015d2cda7e13c9501f90864f79a42846ba814b57b9c034b447f",
+      "expectedSha256": "595c20e8282de015d2cda7e13c9501f90864f79a42846ba814b57b9c034b447f",
+      "hashMatches": true
+    },
+    {
+      "file": "images/latest-scene-20261023/device-agv-clear.png",
+      "bytes": 2346801,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "5bc11b1fffd518dee0a1247cf6857553429c49d73f8d6facc643b4cc336be72d",
+      "expectedSha256": "5bc11b1fffd518dee0a1247cf6857553429c49d73f8d6facc643b4cc336be72d",
+      "hashMatches": true
+    },
+    {
+      "file": "images/latest-scene-20261023/device-forklift.png",
+      "bytes": 2153038,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "9150f6a20e199a4d265743254d61deafb729bc62ce28d2ebb8d8ba3761caf701",
+      "expectedSha256": "9150f6a20e199a4d265743254d61deafb729bc62ce28d2ebb8d8ba3761caf701",
+      "hashMatches": true
+    },
+    {
+      "file": "images/latest-scene-20261023/device-stacker.png",
+      "bytes": 1973437,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "37a3884a6a8282113b7ffe596ada58d16fabf2e10c136520e931395f5336560b",
+      "expectedSha256": "37a3884a6a8282113b7ffe596ada58d16fabf2e10c136520e931395f5336560b",
+      "hashMatches": true
+    },
+    {
+      "file": "images/latest-scene-20261023/device-truck.png",
+      "bytes": 2568889,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "d3b87d03cd5a0f7f623f355d709ec5fe2ac97ae0baab141647623b75514d38e2",
+      "expectedSha256": "d3b87d03cd5a0f7f623f355d709ec5fe2ac97ae0baab141647623b75514d38e2",
+      "hashMatches": true
+    },
+    {
+      "file": "images/latest-scene-20261023/device-charger.png",
+      "bytes": 2626288,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "171a4542109ee445a23b8f9e0b22592c37bccd0ace77375c028bc648d7b73931",
+      "expectedSha256": "171a4542109ee445a23b8f9e0b22592c37bccd0ace77375c028bc648d7b73931",
+      "hashMatches": true
+    }
+  ],
+  "finalCopy": "点击查看",
+  "closeupDirectory": "exports/visual-polish-20261023",
+  "deliveryManifest": "latest-scene-delivery-files.json",
+  "missingDeliveryFiles": [],
+  "sourceSaveEvidence": {
+    "method": "native_ctrl_s_by_root_agent",
+    "editedIndicatorCleared": true,
+    "sourceFileBytes": 1770580,
+    "sourceFileLastWrite": "2026-10-23T16:45:24.0907124+08:00",
+    "sha256": "BA6C7FAB0013F6DE05C7729D0E6F63A17A96A2B80CB354FCC0902252F9E4C1E1",
+    "diskMetadataRechecked": true,
+    "canvasMutationAfterSave": false,
+    "scope": "all_45_artboards_42_components_56_scene_image_nodes_and_final_authorized_details"
+  }
+}

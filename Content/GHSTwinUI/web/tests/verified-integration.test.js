@@ -3,6 +3,63 @@ const assert=require('node:assert/strict');
 const {boot}=require('./harness');
 const verifiedInventory=app=>app.html().split('<div data-verified="inventory">').slice(1).map(part=>part.split('<div class="unverified-design"')[0]).join('');
 
+test('overview prioritizes the actionable demo alarm queue and explains every order segment',()=>{
+  const app=boot(),html=app.html();
+  assert.ok(html.indexOf('data-unverified="overview-alerts"')<html.indexOf('337,783'));
+  assert.ok(html.includes('告警 7 项'));assert.ok(html.includes('数据未核验'));
+  const progress=html.split('data-unverified="orders-progress"')[1];
+  for(const [label,value,color]of[['已完成',96,'#356bfa'],['执行中',22,'#8daafc'],['待作业',8,'#d1843c'],['异常',2,'#c85852']]){
+    assert.ok(progress.includes('title="'+label+' '+value+'"'));
+    assert.ok(progress.includes('background:'+color+'"></i>'+label));
+  }
+  assert.ok(progress.includes('96 / 128 已完成'));assert.ok(progress.includes('118 / 156 已完成'));
+  assert.ok(html.includes('aria-label="库容占用说明"'));
+  assert.ok(html.includes('data-info="原设计示例：容量 2,400 托位'));
+  assert.ok(!html.includes('<p class="caption">原设计示例：容量'));
+  app.click({action:'nav',page:'alerts'});
+  assert.ok(app.html().includes('设备告警中心'));assert.ok(app.html().includes('数据未核验'));
+});
+
+test('data explanations keep units and distinct source times accessible without restoring metadata blocks',()=>{
+  const app=boot(),inventoryTime=app.window.TwinBusinessData.snapshot.source.queryTime,ledgerTime=app.window.TwinBusinessData.snapshot.source.forkliftSourceUpdatedTime;
+  for(const page of ['overview','inventory','devices']){
+    app.window.twinNavigate(page);const html=app.html(),visible=html.replace(/<[^>]*>/g,' ');
+    assert.ok(html.includes('aria-label="数据说明"'));
+    assert.ok(html.includes('数据非实时刷新'));
+    if(page!=='devices'){assert.ok(html.includes('数量单位待确认'));assert.ok(html.includes(inventoryTime));}
+    if(page!=='inventory')assert.ok(html.includes(ledgerTime));
+    if(page==='devices')assert.ok(!html.includes(inventoryTime),'ledger must not inherit inventory query time');
+    assert.ok(!visible.includes(inventoryTime));assert.ok(!visible.includes(ledgerTime));
+    assert.ok(!visible.includes('单位待确认'),'unit caveat belongs to the accessible data explanation');
+    assert.ok(!html.includes('evidence-time'));assert.ok(!visible.includes('GHS_CA_US'));
+  }
+});
+
+test('all navigation pages expose data explanations and retain explicit demonstration boundaries',()=>{
+  const app=boot();
+  for(const page of ['overview','inventory','orders','devices','alerts','trace','settings']){
+    app.window.twinNavigate(page);assert.ok(app.html().includes('aria-label="数据说明"'),page);
+  }
+  app.window.twinNavigate('orders');assert.ok(app.html().includes('示例时点：2026-10-20 14:20:08'));
+  app.window.twinFilterType('forklift');assert.ok(app.html().includes('场景模型 · 台账未关联'));
+  assert.ok(app.html().includes('data-unverified="scene-telemetry"'));
+  app.click({action:'device',id:'FORK-07'});assert.ok(app.html().includes('场景参数 · 尚未核验'));
+  assert.ok(app.html().includes('data-unverified="scene-device"'));
+  app.window.twinNavigate('inventory');app.click({action:'material'});
+  assert.ok(app.html().includes('物料数据说明'));assert.ok(app.html().includes('尚未绑定 WMS'));
+  app.window.twinSelect({equipment:[],facilities:[],selection:{kind:'material',id:'CAD-07',instanceIndex:7}});
+  assert.ok(app.html().includes('库存信息尚未接入'));assert.ok(app.html().includes('data-unverified="cad-example-link"'));
+  assert.ok(!app.html().includes('480 件'));
+});
+
+test('filtered alert empty state distinguishes active alerts from recovered history',()=>{
+  const app=boot();app.window.twinNavigate('alerts');
+  app.window.twinState.filters.alerts.severity='missing';app.window.twinNavigate('alerts');
+  assert.ok(app.html().includes('没有匹配的告警'));assert.ok(!app.html().includes('暂无恢复记录'));
+  app.click({action:'tab',key:'alerts.history',value:'true'});
+  assert.ok(app.html().includes('暂无恢复记录'));assert.ok(app.html().includes('确认规则说明'));
+});
+
 test('inventory displays verified current-query totals without inventing capacity or quantity units',()=>{
   const app=boot();app.window.twinNavigate('inventory');const html=verifiedInventory(app);
   for(const value of ['337,783','336,006','1,722','14,373','76,752','156','55'])assert.ok(html.includes(value),value);

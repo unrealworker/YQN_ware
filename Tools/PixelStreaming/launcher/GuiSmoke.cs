@@ -40,7 +40,7 @@ namespace Ghs.PixelStreaming
                 try { ((NumericUpDown)Field(form,"httpPort")).Value=((IPEndPoint)owner.LocalEndpoint).Port; ((NumericUpDown)Field(form,"streamerPort")).Value=FreePort(); Call(form,"CheckPorts"); Capture(form,Path.Combine(directory,stem+"-port-conflict.png"),captures); }
                 finally { owner.Stop(); }
                 ((NumericUpDown)Field(form,"httpPort")).Value=8080; ((NumericUpDown)Field(form,"streamerPort")).Value=8888;
-                Set(form,"startBusy",true); Call(form,"SetStatus","◌  正在启动服务",LauncherTheme.Blue); Call(form,"UpdateControls"); Capture(form,Path.Combine(directory,stem+"-starting.png"),captures); Set(form,"startBusy",false);
+                Set(form,"startBusy",true); Call(form,"SetStatus","◌  正在启动服务",LauncherTheme.StateInk("starting")); Call(form,"UpdateControls"); Capture(form,Path.Combine(directory,stem+"-starting.png"),captures); Set(form,"startBusy",false);
                 ServiceSession session=(ServiceSession)Field(form,"session"); typeof(ServiceSession).GetField("state",Private).SetValue(session,"running");
                 Call(form,"ApplyStatus",new ServiceStatus {state="running",mode="independent",viewerCount=2,maxViewers=3,instances=new[]{new InstanceStatus {id="会话 01",pid=12001,state="connected",targetFps=30,actualFps=29.7},new InstanceStatus {id="会话 02",pid=12002,state="connected",targetFps=30,actualFps=null}},urls=new[]{"http://192.168.1.20:8080"},logs=new[]{"界面检查样例：第 4 位访问者进入，已通知并断开最早访问者。"}});
                 Capture(form,Path.Combine(directory,stem+"-running.png"),captures);
@@ -50,7 +50,7 @@ namespace Ghs.PixelStreaming
                 form.MinimumSize=originalMinimum; form.ClientSize=regular;
                 form.ClientSize=form.MinimumSize; Capture(form,Path.Combine(directory,stem+"-compact.png"),captures); form.ClientSize=regular;
                 Call(form,"ToggleLogs"); Capture(form,Path.Combine(directory,stem+"-logs.png"),captures); Call(form,"ToggleLogs");
-                Set(form,"stopBusy",true); Call(form,"SetStatus","◌  正在停止服务",LauncherTheme.Muted); Call(form,"UpdateControls"); Capture(form,Path.Combine(directory,stem+"-stopping.png"),captures);
+                Set(form,"stopBusy",true); Call(form,"SetStatus","◌  正在停止服务",LauncherTheme.StateInk("stopping")); Call(form,"UpdateControls"); Capture(form,Path.Combine(directory,stem+"-stopping.png"),captures);
                 Set(form,"stopBusy",false); Set(form,"onlineViewers",0); typeof(ServiceSession).GetField("state",Private).SetValue(session,"idle");
                 form.Close(); Application.DoEvents();
             }

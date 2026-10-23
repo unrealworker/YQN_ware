@@ -217,7 +217,7 @@ namespace Ghs.PixelStreaming
             if(session.State!="idle" || startBusy || stopBusy) return; portConflict=false; SetFieldError(httpPort,false); SetFieldError(streamerPort,false);
             if(httpPort.Value==streamerPort.Value) { portConflict=true; portFeedback.Text="网页端口与串流端口不能相同，请修改后重新检测。"; SetFieldError(httpPort,true); SetFieldError(streamerPort,true); }
             else foreach(NumericUpDown field in new[]{httpPort,streamerPort}) { try { PortProbe.EnsureAvailable((int)field.Value); } catch(InvalidOperationException) { portConflict=true; portFeedback.Text="端口 "+field.Value+" 已被占用或不可用，请更换端口后重新检测。"; SetFieldError(field,true); break; } }
-            if(!portConflict) portFeedback.Text="✓  "+httpPort.Value+" / "+streamerPort.Value+" 端口可用"; portFeedback.ForeColor=portConflict?LauncherTheme.Red:LauncherTheme.Green; AppendLog(portFeedback.Text); UpdateControls();
+            if(!portConflict) portFeedback.Text="✓  "+httpPort.Value+" / "+streamerPort.Value+" 端口可用"; portFeedback.ForeColor=portConflict?LauncherTheme.Red:LauncherTheme.BlueInk; AppendLog(portFeedback.Text); UpdateControls();
         }
         private void UpdateControls()
         {
@@ -225,7 +225,7 @@ namespace Ghs.PixelStreaming
             foreach(Control control in new Control[]{showWindow,adaptiveResources,mode,browse,sharedMode,independentMode,advanced}) control.Enabled=canConfigure;
             stop.Enabled=!idle && !stopBusy && !closing; start.Visible=idle; stop.Visible=!idle; stop.Text=stopBusy?"正在停止…":startBusy?"取消启动":"□  停止服务"; copy.Enabled=open.Enabled=urls.Items.Count>0 && session.State=="running" && !closing;
             pageSubtitle.Text=idle?"配置流送程序，启动后分享内网地址。":startBusy?"正在准备服务，可取消本次启动。":stopBusy?"正在断开访问并回收本次启动的程序。":"服务运行中，停止服务后可修改配置。"; footerHint.Text=idle?"启动时自动保存配置":"停止将断开访问并关闭本次启动的程序";
-            if(session.State=="running") { portFeedback.Text="✓  "+httpPort.Value+" / "+streamerPort.Value+" 已监听"; portFeedback.ForeColor=LauncherTheme.Green; }
+            if(session.State=="running") { portFeedback.Text="✓  "+httpPort.Value+" / "+streamerPort.Value+" 已监听"; portFeedback.ForeColor=LauncherTheme.BlueInk; }
             foreach(KeyValuePair<Control,RoundedPanel> pair in fieldHosts) if(pair.Key!=urls) { pair.Key.Enabled=canConfigure; pair.Value.BackColor=idle?Color.White:LauncherTheme.Canvas; pair.Key.BackColor=idle?Color.White:LauncherTheme.Canvas; pair.Value.Invalidate(); }
             foreach(Control label in configLabels) label.ForeColor=Navy; PerformLayout();
         }
@@ -233,14 +233,14 @@ namespace Ghs.PixelStreaming
         {
             if(startBusy || stopBusy || session.State!="idle") return; CheckPorts(); if(portConflict) return;
             LauncherConfig c; try { c=ReadSettings(); c.Validate(root,true); } catch(Exception ex) { bool missing=true; try { missing=!File.Exists(ReadSettings().ResolveExecutable(root)) || !string.Equals(Path.GetExtension(executable.Text),".exe",StringComparison.OrdinalIgnoreCase); } catch(ArgumentException) {} catch(NotSupportedException) {} if(missing) { pathFeedback.Text="找不到流送程序，请重新选择。"; SetFieldError(executable,true); } ShowError(ex); return; }
-            startBusy=true; stopRequested=false; pollFailures=0; lastBackendLog=""; urls.Items.Clear(); instances.Items.Clear(); SetStatus("◌  正在启动服务",Blue); sessionHint.Text="检查端口 → 启动流送服务 → 准备场景"; UpdateControls();
-            try { c.Save(Path.Combine(root,"launcher.config.json")); AppendLog("正在启动"+(c.mode=="shared"?"共享":"独立")+"模式，渲染 "+c.width+" × "+c.height+"。"); await Task.Run(delegate {session.Start(c);}); if(stopRequested || closing) await Task.Run(delegate {session.Stop();}); else if(session.State=="running") { SetStatus("✓  服务运行中",LauncherTheme.Green); await Poll(); } }
+            startBusy=true; stopRequested=false; pollFailures=0; lastBackendLog=""; urls.Items.Clear(); instances.Items.Clear(); SetStatus("◌  正在启动服务",LauncherTheme.StateInk("starting")); sessionHint.Text="检查端口 → 启动流送服务 → 准备场景"; UpdateControls();
+            try { c.Save(Path.Combine(root,"launcher.config.json")); AppendLog("正在启动"+(c.mode=="shared"?"共享":"独立")+"模式，渲染 "+c.width+" × "+c.height+"。"); await Task.Run(delegate {session.Start(c);}); if(stopRequested || closing) await Task.Run(delegate {session.Stop();}); else if(session.State=="running") { SetStatus("✓  服务运行中",LauncherTheme.StateInk(session.State)); await Poll(); } }
             catch(OperationCanceledException) { AppendLog("启动已取消。"); if(!closing) SetStatus("○  服务未启动",Muted); } catch(Exception ex) { if(!closing) ShowError(ex); else AppendLog(ex.Message); } finally { startBusy=false; UpdateControls(); }
         }
         private bool ConfirmStop() { if(onlineViewers<1) return true; return MessageBox.Show(this,"当前 "+onlineViewers+" 位访问者将断开连接。\r\n本次启动的服务及程序将一并关闭。","停止像素流服务？",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning,MessageBoxDefaultButton.Button2)==DialogResult.OK; }
         private async Task StopService()
         {
-            stopRequested=true; if(stopBusy) return; stopBusy=true; SetStatus("◌  正在停止服务",Muted); sessionHint.Text="断开访问 → 关闭本次启动的程序 → 回收服务"; UpdateControls();
+            stopRequested=true; if(stopBusy) return; stopBusy=true; SetStatus("◌  正在停止服务",LauncherTheme.StateInk("stopping")); sessionHint.Text="断开访问 → 关闭本次启动的程序 → 回收服务"; UpdateControls();
             try { await Task.Run(delegate {session.Stop();}); AppendLog("本次服务和实例已停止。"); } catch(Exception ex) { AppendLog("停止时出现错误："+ex.Message); }
             finally { urls.Items.Clear(); instances.Items.Clear(); onlineViewers=0; viewers.Text="0 / 3 在线"; portConflict=false; portFeedback.Text="服务已停止 · 启动时重新检查端口"; portFeedback.ForeColor=Muted; SetStatus("○  服务未启动",Muted); stopBusy=false; UpdateControls(); }
         }
@@ -253,9 +253,9 @@ namespace Ghs.PixelStreaming
         }
         private void ApplyStatus(ServiceStatus s)
         {
-            onlineViewers=s.viewerCount; viewers.Text=s.viewerCount+" / "+(s.maxViewers>0?s.maxViewers:3)+" 在线"; SetStatus(s.state=="error"?"服务异常 · 请查看日志":"✓  服务运行中",s.state=="error"?LauncherTheme.Red:LauncherTheme.Green);
+            onlineViewers=s.viewerCount; viewers.Text=s.viewerCount+" / "+(s.maxViewers>0?s.maxViewers:3)+" 在线"; SetStatus(s.state=="error"?"服务异常 · 请查看日志":"✓  服务运行中",LauncherTheme.StateInk(s.state));
             string selected=urls.SelectedItem as string; string[] current=s.urls ?? new string[0]; if(!urls.Items.Cast<string>().SequenceEqual(current)) { urls.Items.Clear(); urls.Items.AddRange(current); if(selected!=null && urls.Items.Contains(selected)) urls.SelectedItem=selected; else if(urls.Items.Count>0) urls.SelectedIndex=0; }
-            instances.BeginUpdate(); instances.Items.Clear(); foreach(InstanceStatus item in s.instances ?? new InstanceStatus[0]) { string fps=(item.actualFps.HasValue?item.actualFps.Value.ToString("0.0",System.Globalization.CultureInfo.InvariantCulture):"—")+" / "+(item.targetFps>0?item.targetFps.ToString():"—"); ListViewItem row=new ListViewItem(new[]{item.id,StateText(item.state),fps}); row.ToolTipText="PID "+item.pid+" · 实际 / 当前目标 FPS"; instances.Items.Add(row); } instances.EndUpdate(); instances.ShowItemToolTips=true;
+            instances.BeginUpdate(); instances.Items.Clear(); foreach(InstanceStatus item in s.instances ?? new InstanceStatus[0]) { string fps=(item.actualFps.HasValue?item.actualFps.Value.ToString("0.0",System.Globalization.CultureInfo.InvariantCulture):"—")+" / "+(item.targetFps>0?item.targetFps.ToString():"—"); ListViewItem row=new ListViewItem(new[]{item.id,StateText(item.state),fps}); row.UseItemStyleForSubItems=false; row.SubItems[1].ForeColor=LauncherTheme.StateInk(item.state); row.ToolTipText="PID "+item.pid+" · 实际 / 当前目标 FPS"; instances.Items.Add(row); } instances.EndUpdate(); instances.ShowItemToolTips=true;
             sessionHint.Text=s.viewerCount==0?"等待访问者连接。实际帧率在画面就绪后显示。":(mode.SelectedIndex==1 && adaptiveResources.Checked?"当前按 "+Math.Max(1,(s.instances??new InstanceStatus[0]).Length)+" 个独立场景分配资源。":"当前"+(mode.SelectedIndex==1?"每位访问者独立操作。":"所有访问者共享视角与操作。"))+"\r\n实际帧率取决于场景、显卡与网络。";
             string backend=string.Join(Environment.NewLine,s.logs ?? new string[0]); if(backend!=lastBackendLog) { lastBackendLog=backend; RenderLog(); } UpdateControls();
         }

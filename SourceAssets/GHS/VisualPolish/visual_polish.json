@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
+  "asset_root": "/Game/GHSZcoolSmartFactory/VisualPolish",
+  "atlas_bounds_uv_m": [
+    -450.0,
+    -450.0,
+    950.0,
+    750.0
+  ],
+  "atlas_resolution": 2048,
+  "cad_origin_uv_m": [
+    239.33385,
+    60.24019
+  ],
+  "palette": {
+    "campus": [
+      0.59,
+      0.665,
+      0.735
+    ],
+    "outer_green": [
+      0.435,
+      0.505,
+      0.445
+    ],
+    "far_ground": [
+      0.58,
+      0.635,
+      0.69
+    ],
+    "boundary": [
+      0.23,
+      0.43,
+      0.66
+    ],
+    "context_road": [
+      0.155,
+      0.208,
+      0.278
+    ],
+    "campus_road": [
+      0.335,
+      0.405,
+      0.475
+    ]
+  },
+  "boundary_opacity": 0.28,
+  "far_fade_center_uv_m": [
+    235.0,
+    100.0
+  ],
+  "far_fade_start_m": 420.0,
+  "far_fade_end_m": 900.0,
+  "lighting": {
+    "directional_intensity": 3.65,
+    "directional_source_angle": 9.0,
+    "directional_color": [
+      1.0,
+      0.99,
+      0.975
+    ],
+    "skylight_intensity": 0.42,
+    "skylight_color": [
+      0.92,
+      0.965,
+      1.0
+    ],
+    "ambient_occlusion_intensity": 1.1,
+    "ambient_occlusion_radius": 150.0,
+    "ambient_occlusion_quality": 80.0,
+    "bloom_intensity": 0.015
+  },
+  "mask": {
+    "file": "D:\\UEPro\\Test\\SourceAssets\\GHS\\VisualPolish\\T_VisualPolish_CampusMask.png",
+    "sha256": "3bd89cf7382cc997cb713c7b994b07dd2c5c187d960267be1dd633dd890f525d",
+    "original_boundary_points": 1535,
+    "raster_boundary_points": 55,
+    "max_boundary_error_m": 0.23604857823673847,
+    "channels": {
+      "R": "campus coverage",
+      "G": "continuous outside greenery",
+      "B": "inside blue boundary",
+      "A": "opaque"
+    }
+  },
+  "scope": "Material bindings and existing light/post-process values only. Original roof/dissolve, meshes, trees, parking, curbs, vehicles and all actor/component/instance transforms remain unchanged."
+}

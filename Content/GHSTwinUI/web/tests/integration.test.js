@@ -6,6 +6,107 @@ const {boot:bootController}=require('./harness');
 // These existing tests exercise scene browsing; verified ledger defaults have their own suite.
 function boot(options){const app=bootController(options);app.window.twinState.filters.devices.view='scene';return app;}
 
+function explanationTrigger(app){
+  const trigger=app.window.document.createElement('button');
+  trigger.setAttribute('data-info','原设计示例，数据未核验。容量规则待确认。');
+  trigger.setAttribute('aria-expanded','false');trigger.insidePage=true;
+  trigger.rect={left:430,right:454,top:890,bottom:914,width:24,height:24};
+  app.elements.page.appendChild(trigger);return trigger;
+}
+
+test('metric explanation supports hover, keyboard focus and Escape without leaving detail',()=>{
+  const app=boot(),trigger=explanationTrigger(app);
+  app.listeners.mouseover({target:trigger});
+  const popup=app.window.document.body.children.find(n=>n.className==='info-tooltip');
+  assert.ok(popup);assert.equal(popup.getAttribute('role'),'tooltip');
+  assert.equal(popup.textContent,trigger.dataset.info);
+  assert.equal(trigger.getAttribute('aria-describedby'),'metric-info-tooltip');
+  assert.ok(parseFloat(popup.style.left)+parseFloat(popup.style.width)<=468);
+  assert.ok(parseFloat(popup.style.top)>=12);
+  // Crossing the small gap onto the explanation must keep it readable.
+  app.listeners.mouseout({target:trigger,relatedTarget:null});
+  app.listeners.mouseover({target:popup});app.advance(150);assert.equal(popup.isConnected,true);
+  app.listeners.mouseout({target:popup,relatedTarget:null});app.advance(150);
+  assert.equal(trigger.getAttribute('aria-expanded'),'false');assert.equal(popup.isConnected,false);
+  trigger.focus();assert.equal(trigger.getAttribute('aria-expanded'),'true');
+  app.window.twinState.detail={kind:'device',id:'FORK-07'};const before=app.commands.length;
+  const event=app.listeners.keydown({target:trigger,key:'Escape'});
+  assert.equal(event.defaultPrevented,true);assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  assert.equal(app.window.twinState.detail.id,'FORK-07');assert.equal(app.commands.length,before);
+  assert.equal(app.window.document.activeElement,trigger);
+});
+
+test('metric explanation click toggles and dismisses on outside click or navigation',()=>{
+  const app=boot(),trigger=explanationTrigger(app);app.flush();const before=app.commands.length;
+  app.listeners.click({target:trigger});app.listeners.mouseout({target:trigger,relatedTarget:null});app.advance(150);
+  assert.equal(trigger.getAttribute('aria-expanded'),'true');assert.equal(app.commands.length,before);
+  app.listeners.click({target:trigger});assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  app.listeners.click({target:trigger});app.listeners.click({target:app.window.document.body});
+  assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  app.listeners.click({target:trigger});app.window.twinNavigate('inventory');
+  assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  assert.ok(app.window.document.body.children.every(n=>n.className!=='info-tooltip'));
+});
+
+test('metric explanation uses native design coordinates and closes when the viewport changes',()=>{
+  const app=boot();app.window.innerWidth=320;app.window.innerHeight=640;app.window.twinSetViewport(480,960);
+  const trigger=explanationTrigger(app);trigger.rect={left:266.6667,right:282.6667,top:100,bottom:116,width:16,height:16};
+  app.listeners.mouseover({target:trigger});
+  const popup=app.window.document.body.children.find(n=>n.className==='info-tooltip');
+  assert.equal(popup.style.width,'300px');assert.equal(popup.style.left,'168px');
+  app.window.twinSetViewport(400,900);assert.equal(trigger.getAttribute('aria-expanded'),'false');assert.equal(popup.isConnected,false);
+});
+
+const explanationSnapshot=value=>({equipment:[{id:'AGV-07',type:'agv',status:'running',available:true,metric:'电量',value:value+'%',progress:value}],facilities:[]});
+for(const mode of ['focused','pinned'])test(mode+' metric explanation retains its DOM during telemetry and applies the latest data once on close',()=>{
+  const app=boot();app.window.twinReceive(explanationSnapshot(47));app.window.twinNavigate('devices');app.flush();
+  const trigger=explanationTrigger(app);app.elements.main.scrollTop=137;
+  if(mode==='focused')trigger.focus();else app.listeners.click({target:trigger});
+  const popup=app.window.document.body.children.find(n=>n.className==='info-tooltip');
+  const before=app.window.twinGetPerformance(),markup=app.html();
+  app.window.twinReceive(explanationSnapshot(48));app.window.twinReceive(explanationSnapshot(49));app.flush();
+  assert.equal(app.html(),markup);assert.equal(trigger.isConnected,true);assert.equal(popup.isConnected,true);
+  assert.equal(trigger.getAttribute('aria-expanded'),'true');assert.equal(app.window.twinGetPerformance().domWrites,before.domWrites);
+  if(mode==='focused')app.listeners.keydown({target:trigger,key:'Escape'});else app.listeners.click({target:trigger});
+  app.flush();assert.equal(popup.isConnected,false);assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  assert.ok(app.html().includes('49%'));assert.ok(!app.html().includes('48%'));
+  assert.equal(app.window.twinGetPerformance().domWrites,before.domWrites+1);assert.equal(app.elements.main.scrollTop,137);
+});
+
+test('pending explanation telemetry yields to navigation and stays deferred while the panel is hidden',()=>{
+  const app=boot({reducedMotion:false});app.window.twinReceive(explanationSnapshot(47));app.window.twinNavigate('devices');app.flush();
+  let trigger=explanationTrigger(app);app.listeners.click({target:trigger});app.window.twinReceive(explanationSnapshot(48));
+  const beforeNavigation=app.window.twinGetPerformance().domWrites;
+  app.window.twinNavigate('orders');app.flush();
+  assert.ok(app.html().includes('<h1>今日出入库订单</h1>'));assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  assert.equal(app.window.twinGetPerformance().domWrites,beforeNavigation+1);
+  app.window.twinNavigate('devices');app.flush();trigger=explanationTrigger(app);trigger.focus();
+  app.window.twinReceive(explanationSnapshot(49));const beforeHidden=app.window.twinGetPerformance().domWrites;
+  app.window.twinSetVisibility(false);app.window.twinReceive(explanationSnapshot(50));app.flush();
+  assert.equal(app.window.twinGetPerformance().domWrites,beforeHidden);assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  app.window.twinSetVisibility(true);app.flush();assert.ok(app.html().includes('50%'));
+  assert.equal(app.window.twinGetPerformance().domWrites,beforeHidden+1);
+  assert.ok(app.window.document.body.children.every(n=>n.className!=='info-tooltip'));
+});
+
+test('Escape applies queued telemetry and restores focus to the replacement explanation button without reopening it',()=>{
+  const app=boot();app.window.twinReceive(explanationSnapshot(47));app.window.twinNavigate('devices');app.flush();
+  const selector='[data-info][aria-label="数据说明"]',trigger=app.elements.page.querySelector(selector);
+  assert.ok(trigger);trigger.focus();assert.equal(trigger.getAttribute('aria-expanded'),'true');
+  app.window.twinReceive(explanationSnapshot(48));app.listeners.keydown({target:trigger,key:'Escape'});app.flush();
+  const replacement=app.elements.page.querySelector(selector);
+  assert.ok(app.html().includes('48%'));assert.notEqual(replacement,trigger);assert.equal(trigger.isConnected,false);
+  assert.equal(app.window.document.activeElement,replacement);assert.equal(replacement.isConnected,true);
+  assert.equal(replacement.getAttribute('aria-expanded'),'false');assert.equal(replacement.getAttribute('aria-describedby'),null);
+  assert.ok(app.window.document.body.children.every(n=>n.className!=='info-tooltip'));
+  // Ongoing telemetry keeps the closed control focused; explicit input can reopen it.
+  app.window.twinReceive(explanationSnapshot(49));app.flush();
+  const latest=app.elements.page.querySelector(selector);
+  assert.ok(app.html().includes('49%'));assert.equal(app.window.document.activeElement,latest);
+  assert.equal(latest.getAttribute('aria-expanded'),'false');
+  app.listeners.click({target:latest});assert.equal(latest.getAttribute('aria-expanded'),'true');
+});
+
 test('rail zoom actions dispatch camera commands without changing business page or selection',()=>{
   const app=boot();app.window.twinNavigate('inventory');app.flush();
   const page=app.window.twinState.page,markup=app.html();

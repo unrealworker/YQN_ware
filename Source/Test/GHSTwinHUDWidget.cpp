@@ -36,6 +36,7 @@ namespace
 {
 FLinearColor C(const TCHAR* Hex) { return FLinearColor::FromSRGBColor(FColor::FromHex(Hex)); }
 bool Inside(FVector2D P, FVector2D At, FVector2D Size) { return P.X>=At.X && P.Y>=At.Y && P.X<At.X+Size.X && P.Y<At.Y+Size.Y; }
+const FVector2D WarehousePOISize(228,56);
 const FSlateFontInfo& Font(int32 Size)
 {
     static const FString Path=FPaths::ProjectContentDir()/TEXT("GHSNormalWarehouse/HUD/Fonts/DroidSansFallback.ttf");
@@ -107,7 +108,7 @@ TSharedRef<SWidget> UGHSTwinBrowser::RebuildWidget()
     SAssignNew(Browser,SWebBrowser)
         .InitialURL(TEXT("file:///")+File).ShowControls(false).ShowAddressBar(false)
         .SupportsTransparency(false).ShowInitialThrobber(true).BrowserFrameRate(60)
-        .BackgroundColor(FColor::White)
+        .BackgroundColor(FColor(244,246,249))
         .OnBeforePopup_Lambda([](FString,FString){return true;})
         .OnBeforeNavigation_Lambda([](const FString& URL,const FWebNavigationRequest&){return !URL.StartsWith(TEXT("file:///"));})
         .OnSuppressContextMenu_Lambda([](){return true;})
@@ -534,8 +535,8 @@ void UGHSTwinHUDWidget::UpdateWarehousePOI()
     if(!PC->ProjectWorldLocationToScreen(R->GetPOIWorldLocation(),Anchor,false)) return;
     Anchor=Viewport.ToLogical(Anchor);
     if(!Layout.IsScenePoint(Anchor)) return;
-    const FVector2D Size(268,64);
-    FVector2D At=Anchor-FVector2D(134,124);
+    const FVector2D Size=WarehousePOISize;
+    FVector2D At=Anchor-FVector2D(Size.X*.5,104);
     At.X=FMath::Clamp(At.X,Layout.ScenePosition.X+12,FMath::Max(Layout.ScenePosition.X+12,Layout.ScenePosition.X+Layout.SceneSize.X-Size.X-12));
     At.Y=FMath::Max(At.Y,Layout.HeaderHeight+112.);
     if(!Layout.IsScenePoint(At+Size)) return;
@@ -633,7 +634,7 @@ bool UGHSTwinHUDWidget::HandleSceneClick(FVector2D Position)
     if(!IsInteriorAvailable())
     {
         auto* R=Roof(); FVector Origin,Direction;
-        if(R && R->IsRoofClosed() && ((bWarehousePOIVisible && Inside(LogicalPosition,WarehousePOIPosition,FVector2D(268,64))) ||
+        if(R && R->IsRoofClosed() && ((bWarehousePOIVisible && Inside(LogicalPosition,WarehousePOIPosition,WarehousePOISize)) ||
             (GetOwningPlayer()->DeprojectScreenPositionToWorld(Position.X,Position.Y,Origin,Direction) && R->HitRoofRay(Origin,Direction)))) OpenWarehouse();
         // Bounds-based equipment picking must never run through an opaque or dissolving roof.
         return true;
@@ -894,7 +895,7 @@ FString UGHSTwinHUDWidget::GetPOIReport() const
     {
         auto Item=MakeShared<FJsonObject>();Item->SetStringField(TEXT("id"),TEXT("WAREHOUSE:GHS"));
         Item->SetStringField(TEXT("icon"),TEXT("warehouse"));Item->SetNumberField(TEXT("x"),WarehousePOIPosition.X);Item->SetNumberField(TEXT("y"),WarehousePOIPosition.Y);
-        Item->SetNumberField(TEXT("width"),268);Item->SetNumberField(TEXT("height"),64);Items.Add(MakeShared<FJsonValueObject>(Item));
+        Item->SetNumberField(TEXT("width"),WarehousePOISize.X);Item->SetNumberField(TEXT("height"),WarehousePOISize.Y);Items.Add(MakeShared<FJsonValueObject>(Item));
         Item->SetNumberField(TEXT("opacity"),RoofHUDMotion.WarehouseOpacity());Item->SetBoolField(TEXT("interactive"),Roof()->IsRoofClosed());
     }
     if(IsInteriorAvailable()) for(const int32 Index:VisibleLabels)
@@ -1024,23 +1025,24 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
     if(ShouldDrawWarehousePOI())
     {
         DrawOpacity=RoofHUDMotion.WarehouseOpacity();
-        const FVector2D At=WarehousePOIPosition,Anchor=WarehousePOIAnchor,Size(268,64);
+        const FVector2D At=WarehousePOIPosition,Anchor=WarehousePOIAnchor,Size=WarehousePOISize;
         const FLinearColor Blue=C(TEXT("356BFA"));
-        Line(At+FVector2D(134,64),Anchor,Blue.CopyWithNewOpacity(.75f*DrawOpacity),1.5f);
+        Line(At+FVector2D(Size.X*.5,Size.Y),Anchor,Blue.CopyWithNewOpacity(.65f*DrawOpacity),1.25f);
         Box(Anchor-FVector2D(15,7),FVector2D(30,14),FLinearColor::White,7,Blue.CopyWithNewOpacity(.45f));
         Box(Anchor-FVector2D(3,3),FVector2D(6,6),Blue,3);
-        Box(At+FVector2D(0,4),Size,FLinearColor(.05,.10,.18,.08),12);
-        Box(At,Size,FLinearColor::White,12,bWarehousePOIHovered?Blue:C(TEXT("D6DFEC")),bWarehousePOIHovered?2.f:1.f);
-        Box(At+FVector2D(14,14),FVector2D(36,36),C(TEXT("EDF3FF")),8);
-        const FVector2D Icon=At+FVector2D(21,21);
+        Box(At+FVector2D(0,3),Size,FLinearColor(.05,.10,.18,.065),10);
+        Box(At,Size,FLinearColor::White,10,bWarehousePOIHovered?Blue:C(TEXT("D6DFEC")),bWarehousePOIHovered?2.f:1.f);
+        Box(At+FVector2D(12,14),FVector2D(28,28),C(TEXT("EDF3FF")),7);
+        const FVector2D Icon=At+FVector2D(15,17);
         auto WarehouseLine=[&](FVector2D A,FVector2D B){Line(Icon+A,Icon+B,Blue.CopyWithNewOpacity(DrawOpacity),1.5f);};
         WarehouseLine({0,7},{11,1});WarehouseLine({11,1},{22,7});WarehouseLine({2,7},{2,21});WarehouseLine({20,7},{20,21});WarehouseLine({2,21},{20,21});
         WarehouseLine({7,21},{7,11});WarehouseLine({7,11},{15,11});WarehouseLine({15,11},{15,21});WarehouseLine({7,15},{15,15});
-        const auto Title=GHSTwinTypography::Measure(TEXT("GHS · 主仓库"),Font(16));
-        const auto Subtitle=GHSTwinTypography::Measure(TEXT("点击查看"),Font(12));
-        Text(At+FVector2D(62,10+Title.CenteredOriginY(24)),TEXT("GHS · 主仓库"),16,C(TEXT("25364B")));
-        Text(At+FVector2D(62,36+Subtitle.CenteredOriginY(18)),TEXT("点击查看"),12,C(TEXT("5B6C82")));
-        Line(At+FVector2D(243,26),At+FVector2D(249,32),Blue.CopyWithNewOpacity(DrawOpacity),1.5f);Line(At+FVector2D(249,32),At+FVector2D(243,38),Blue.CopyWithNewOpacity(DrawOpacity),1.5f);
+        const FString Status=Roof()->IsOpening()?TEXT("正在打开"):TEXT("点击查看");
+        const auto Title=GHSTwinTypography::Measure(TEXT("GHS · 主仓库"),Font(14));
+        const auto Subtitle=GHSTwinTypography::Measure(Status,Font(12));
+        Text(At+FVector2D(52,7+Title.CenteredOriginY(22)),TEXT("GHS · 主仓库"),14,C(TEXT("25364B")));
+        Text(At+FVector2D(52,30+Subtitle.CenteredOriginY(18)),Status,12,C(TEXT("536478")));
+        Line(At+FVector2D(204,22),At+FVector2D(210,28),Blue.CopyWithNewOpacity(DrawOpacity),1.5f);Line(At+FVector2D(210,28),At+FVector2D(204,34),Blue.CopyWithNewOpacity(DrawOpacity),1.5f);
         DrawOpacity=1.f;
     }
     // Render stems beneath every card. A tag moved below its anchor connects
@@ -1088,6 +1090,15 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
             Text(BadgeAt+FVector2D((L.BadgeWidth-L.StateMetrics.Size.X)*.5,L.StateMetrics.CenteredOriginY(24)),L.State,12,Fade(Accent));
         }
     }
+    // Scene guidance stays below menus so a short viewport never obscures results.
+    if(Layout.SceneSize.X>650)
+    {
+        const FString Hint=IsInteriorAvailable()?TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  中键返回园区  ·  点击查看详情"):TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  点击仓库查看内部");
+        const auto Metrics=GHSTwinTypography::Measure(Hint,Font(11));
+        const FVector2D At(22,Layout.ScenePosition.Y+Layout.SceneSize.Y-44);
+        Box(At,FVector2D(Metrics.Size.X+28,32),FLinearColor::White.CopyWithNewOpacity(.94f),8,C(TEXT("DFE7F2")));
+        Text(At+FVector2D(14,Metrics.CenteredOriginY(32)),Hint,11,C(TEXT("536478")));
+    }
     if(WarehouseMenuProgress>0)
     {
         DrawOpacity=WarehouseMenuProgress*WarehouseMenuProgress*(3-2*WarehouseMenuProgress);
@@ -1118,6 +1129,5 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
         Text(At+FVector2D(16,Drop.Size.Y-27),FString::Printf(TEXT("↑ ↓ / 滚轮   %d / %d   Enter 定位   Esc 收起"),SearchIndex==INDEX_NONE?0:SearchOffset+SearchIndex+1,SearchTotal),10,C(TEXT("5B6C82")));
     }
     DrawOpacity=1;
-    if(Layout.SceneSize.X>650) Text(FVector2D(22,Layout.ScenePosition.Y+Layout.SceneSize.Y-32),IsInteriorAvailable()?TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  中键返回园区  ·  点击查看详情"):TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  点击仓库查看内部"),11,C(TEXT("5B6C82")));
     return Layer;
 }

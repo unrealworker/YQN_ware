@@ -1,13 +1,19 @@
 {
   "updated": "2026-10-23",
-  "status": "approved_scene_controls_canvas_and_exports_pending_source_save",
+  "status": "final_design_saved_and_verified",
   "source": "Saas.pen",
   "previewDirectory": "exports/current",
   "style": {
-    "surface": "white",
+    "surface": "#F4F6F9",
     "accent": "#356BFA",
     "cornerRadius": 12,
-    "gradients": false
+    "gradients": false,
+    "auxiliaryText": "#536478",
+    "pending": "#D1843C",
+    "fault": "#C85852",
+    "disabledText": "#6B7788",
+    "faultText": "#A84540",
+    "pendingText": "#976025"
   },
   "components": {
     "warehouse": "Dta3T",
@@ -98,7 +104,7 @@
     },
     {
       "id": "F8Cox",
-      "name": "11 · 库存 / 已核验数据与原设计示例",
+      "name": "11 · 库存 / 数量与货位分布",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/F8Cox.png"
@@ -140,7 +146,7 @@
     },
     {
       "id": "XhUtw",
-      "name": "17 · 库存样例 / 已核验记录与原设计物料",
+      "name": "17 · 库存明细 / 物料与货位详情",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/XhUtw.png"
@@ -267,6 +273,85 @@
       "height": 1200,
       "preview": "exports/current/mG0YD.png",
       "status": "approved_canvas_and_export_pending_source_save"
+    },
+    {
+      "id": "uR0QK",
+      "name": "35 · 像素流后台 / 运行中",
+      "status": "design_only_not_implemented",
+      "height": 1080,
+      "width": 1440,
+      "preview": "exports/current/uR0QK.png"
+    },
+    {
+      "id": "ieg9r",
+      "name": "36 · 像素流后台 / 已停止",
+      "status": "design_only_not_implemented",
+      "height": 1080,
+      "width": 1440,
+      "preview": "exports/current/ieg9r.png"
+    },
+    {
+      "id": "D6HC9",
+      "name": "37 · 像素流后台 / 结束用户连接",
+      "status": "design_only_not_implemented",
+      "height": 1080,
+      "width": 1440,
+      "preview": "exports/current/D6HC9.png"
+    },
+    {
+      "id": "Jsit1",
+      "name": "38 · 像素流后台 / 停止服务确认",
+      "status": "design_only_not_implemented",
+      "height": 1080,
+      "width": 1440,
+      "preview": "exports/current/Jsit1.png"
+    },
+    {
+      "id": "i8fzG",
+      "name": "39 · 像素流后台 / 状态与参数反馈",
+      "status": "design_only_not_implemented",
+      "height": 1320,
+      "width": 1920,
+      "preview": "exports/current/i8fzG.png"
+    },
+    {
+      "id": "tYSnE",
+      "name": "40 · 像素流访问 / 管理员结束连接",
+      "status": "design_only_not_implemented",
+      "height": 900,
+      "width": 1440,
+      "preview": "exports/current/tYSnE.png"
+    },
+    {
+      "id": "aIei1",
+      "name": "41 · 像素流访问 / 服务已暂停",
+      "status": "design_only_not_implemented",
+      "height": 900,
+      "width": 1440,
+      "preview": "exports/current/aIei1.png"
+    },
+    {
+      "id": "jRpYB",
+      "name": "42 · 像素流后台 / 管理员登录",
+      "status": "design_only_not_implemented",
+      "height": 900,
+      "width": 1440,
+      "preview": "exports/current/jRpYB.png"
+    },
+    {
+      "id": "F554L",
+      "name": "43 · 像素流后台 / 登录失败",
+      "status": "design_only_not_implemented",
+      "height": 900,
+      "width": 1440,
+      "preview": "exports/current/F554L.png"
+    },
+    {
+      "id": "OiC8B",
+      "name": "44 · 园区总览 / 库容说明展开",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/OiC8B.png"
     }
   ],
   "approvedScope": "00-34 approved; four immediate scene layers and visual capacity controls added; verified inventory and forklift ledger preserved; unverified business fields retain original design and visible 数据未核验 labels; address/local clock and main warehouse POI preserved; scene-control source save pending parent confirmation",
@@ -346,15 +431,33 @@
     "reset": "restore_shell_roof_and_campus_view_preserve_other_layers_and_capacity",
     "focus": "show_target_layer_wait_until_roof_hidden_then_focus",
     "mainPoiVisibleWhen": "building_visible_and_roof_closed_and_poi_enabled",
-    "sceneControlsSpec": "scene-controls-design.md"
+    "sceneControlsSpec": "scene-controls-design.md",
+    "visualSpec": {
+      "cardWidth": 228,
+      "cardHeight": 56,
+      "cornerRadius": 10,
+      "titleSize": 14,
+      "statusSize": 11,
+      "status": "点击查看",
+      "leaderHeight": 52
+    }
   },
   "sceneControls": {
     "spec": "scene-controls-design.md",
     "verification": "scene-controls-verification.json",
     "status": "approved_canvas_and_exports_pending_source_save",
     "component": "G81ak",
-    "artboards": ["kvTdT", "RXvoP", "q2RKW8", "M0wx5h", "mG0YD"],
-    "stateInstances": {"default": "q8ofBb", "storageHidden": "QKnV0"},
+    "artboards": [
+      "kvTdT",
+      "RXvoP",
+      "q2RKW8",
+      "M0wx5h",
+      "mG0YD"
+    ],
+    "stateInstances": {
+      "default": "q8ofBb",
+      "storageHidden": "QKnV0"
+    },
     "previewCloseups": {
       "default": "exports/scene-controls-20261023/G81ak.png",
       "storageHidden": "exports/scene-controls-20261023/QKnV0.png"
@@ -362,12 +465,40 @@
     "applyMode": "immediate",
     "applyButton": false,
     "persistence": "current_session_only",
-    "switchColors": {"on": "#356BFA", "off": "#D8E0EC", "thumb": "#FFFFFF"},
+    "switchColors": {
+      "on": "#356BFA",
+      "off": "#D8E0EC",
+      "thumb": "#FFFFFF"
+    },
     "layers": [
-      {"key": "building", "label": "建筑外壳", "default": true, "node": "e0hqYl", "scope": "main_warehouse_walls_roof_glass"},
-      {"key": "storage", "label": "货架与货物", "default": true, "node": "y3iFM", "scope": "rack_frames_rack_cargo_floor_cargo"},
-      {"key": "equipment", "label": "作业设备", "default": true, "node": "y0mxWg", "scope": "business_trucks_forklifts_agvs_charging_facilities_and_effects"},
-      {"key": "pois", "label": "POI 标签", "default": true, "node": "ZcKXY", "scope": "warehouse_region_and_internal_equipment_labels"}
+      {
+        "key": "building",
+        "label": "建筑外壳",
+        "default": true,
+        "node": "e0hqYl",
+        "scope": "main_warehouse_walls_roof_glass"
+      },
+      {
+        "key": "storage",
+        "label": "货架与货物",
+        "default": true,
+        "node": "y3iFM",
+        "scope": "rack_frames_rack_cargo_floor_cargo"
+      },
+      {
+        "key": "equipment",
+        "label": "作业设备",
+        "default": true,
+        "node": "y0mxWg",
+        "scope": "business_trucks_forklifts_agvs_charging_facilities_and_effects"
+      },
+      {
+        "key": "pois",
+        "label": "POI 标签",
+        "default": true,
+        "node": "ZcKXY",
+        "scope": "warehouse_region_and_internal_equipment_labels"
+      }
     ],
     "capacity": {
       "kind": "visual_cargo_display_ratio",
@@ -401,30 +532,52 @@
       "conflictingActions": "last_operation_wins_cancel_stale_side_effects"
     },
     "resetOverview": {
-      "restore": ["building_shell", "closed_roof", "campus_camera"],
-      "preserve": ["storage_layer", "equipment_layer", "poi_layer", "rack_capacity", "floor_capacity"],
-      "clear": ["selection", "pending_focus"]
+      "restore": [
+        "building_shell",
+        "closed_roof",
+        "campus_camera"
+      ],
+      "preserve": [
+        "storage_layer",
+        "equipment_layer",
+        "poi_layer",
+        "rack_capacity",
+        "floor_capacity"
+      ],
+      "clear": [
+        "selection",
+        "pending_focus"
+      ]
     },
     "restoreDefaults": {
       "layers": "all_on",
       "density": "standard",
       "rackPercent": 80,
       "floorPercent": 100,
-      "preserve": ["camera", "roof_state_including_active_opening"],
-      "clear": ["stale_side_effects", "pending_focus"]
+      "preserve": [
+        "camera",
+        "roof_state_including_active_opening"
+      ],
+      "clear": [
+        "stale_side_effects",
+        "pending_focus"
+      ]
     },
     "sourceDiskSave": "pending_windows_unlock_and_native_save",
     "sourceSaveBlocker": "windows_desktop_locked",
     "canvasRecovery": "scene-controls-canvas-recovery.json"
   },
   "currentDesignVerification": {
-    "record": "scene-controls-verification.json",
-    "artboards": 35,
+    "record": "latest-scene-verification.json",
+    "artboards": 45,
     "components": 42,
-    "currentPngCount": 35,
-    "sourceDiskSave": "pending_windows_unlock_and_native_save",
-    "canvasRecovery": "scene-controls-canvas-recovery.json",
-    "businessVerificationRecord": "confirmedBusinessData.verification retains the previous verified business-data revision"
+    "currentPngCount": 45,
+    "missingReferences": 0,
+    "layoutProblems": 0,
+    "sourceDiskSave": "verified_native_ctrl_s_and_file_metadata",
+    "sourceFileBytes": 1770580,
+    "sourceFileLastWrite": "2026-10-23T16:45:24.0907124+08:00",
+    "sha256": "BA6C7FAB0013F6DE05C7729D0E6F63A17A96A2B80CB354FCC0902252F9E4C1E1"
   },
   "confirmedBusinessData": {
     "spec": "business-data-confirmed-design.md",
@@ -546,6 +699,242 @@
           48
         ]
       }
+    },
+    "presentationPolicy": {
+      "technicalSourceMetadataVisible": false,
+      "verifiedBadgesVisible": false,
+      "unverifiedBadgesVisible": true,
+      "warehouseAddressVisible": true,
+      "warehouseLocalClockVisible": true,
+      "normalBusinessIdentifiersVisible": true,
+      "sourceMetadataRetainedInRecords": true
+    }
+  },
+  "streamingAdminDesign": {
+    "spec": "streaming-admin-design.md",
+    "verification": "streaming-admin-verification.json",
+    "newArtboards": [
+      "uR0QK",
+      "ieg9r",
+      "D6HC9",
+      "Jsit1",
+      "i8fzG",
+      "tYSnE",
+      "aIei1",
+      "jRpYB",
+      "F554L"
+    ],
+    "updatedArtboards": [
+      "tWZ13",
+      "jCHwc"
+    ],
+    "authAccount": "admin",
+    "password": "user_specified_not_displayed",
+    "mode": "independent_sessions",
+    "sourceSaved": true,
+    "implementation": "not_started",
+    "previewAsset": "images/latest-scene-20261023/campus-closed.png"
+  },
+  "annotationCleanup": {
+    "spec": "business-data-confirmed-design.md",
+    "verification": "annotation-cleanup-verification.json",
+    "status": "source_saved_canvas_and_exports_verified",
+    "sourceDiskSave": "verified_native_ctrl_s_and_file_metadata",
+    "components": [
+      "PjVwW",
+      "H4NHQ0",
+      "i96jo",
+      "nqiHV",
+      "BkJLx"
+    ],
+    "artboards": [
+      "CLx7Q",
+      "mP7E5",
+      "d7P3z",
+      "Wt7Vo",
+      "iiFrY",
+      "gW9oH",
+      "XJoOQ",
+      "F8Cox",
+      "XhUtw",
+      "lvDfx",
+      "t4mlxm",
+      "zyWMm",
+      "lCf0H",
+      "OA1Bd",
+      "kvTdT",
+      "qNsRa",
+      "ibTva",
+      "RXvoP",
+      "G316Rk",
+      "t1QfTH",
+      "Lxvbj"
+    ],
+    "subtitles": {
+      "overview": "库存、设备与作业概况",
+      "inventory": "库存数量与货位分布",
+      "equipment": "叉车台账与设备状态",
+      "alerts": "告警状态与处理进度"
+    },
+    "regionHeading": "区域目录 · 10 个",
+    "preserve": [
+      "data_unverified_badges",
+      "normal_business_identifiers",
+      "warehouse_address",
+      "warehouse_local_clock",
+      "streaming_admin_and_login_design"
+    ],
+    "removeFromBusinessPages": [
+      "internal_warehouse_code_and_database_id",
+      "query_timestamp",
+      "etl_timestamp",
+      "verified_static_data_labels",
+      "same_snapshot_disclaimers",
+      "obsolete_source_caption"
+    ],
+    "previousSourceSaveEvidence": {
+      "method": "native_ctrl_s_via_computer_use",
+      "editedIndicatorCleared": true,
+      "sourceFileBytes": 1722775,
+      "sourceFileLastWrite": "2026-10-23T10:47:25+08:00",
+      "diskMetadataRechecked": true,
+      "postSaveCanvasReadOnly": {
+        "artboards": 44,
+        "components": 42,
+        "technicalTextMatches": 0,
+        "placeholders": 0
+      }
+    },
+    "ledgerSampleDescription": "部分台账记录，不代表完整设备清单。",
+    "sourceSaveEvidence": {
+      "method": "native_ctrl_s_via_computer_use",
+      "editedIndicatorCleared": true,
+      "sourceFileBytes": 1722758,
+      "sourceFileLastWrite": "2026-10-23T10:57:17+08:00",
+      "diskMetadataRechecked": true,
+      "latestCopy": "部分台账记录，不代表完整设备清单。",
+      "sourceContainsPreservedPriorStreamingAdminDesign": true,
+      "commitScope": "saved_complete_current_source_only_no_commit_performed"
+    }
+  },
+  "visualPolish": {
+    "spec": "visual-polish-design.md",
+    "verification": "visual-polish-all-pages-verification.json",
+    "status": "saved_canvas_and_exports_verified",
+    "sourceSaved": true,
+    "artboardCount": 45,
+    "componentCount": 42,
+    "affectedBoards": [
+      "bi8Au",
+      "CLx7Q",
+      "mP7E5",
+      "d7P3z",
+      "Wt7Vo",
+      "iiFrY",
+      "gW9oH",
+      "UbszE",
+      "PE2am",
+      "r5SOcd",
+      "XJoOQ",
+      "F8Cox",
+      "XhUtw",
+      "lvDfx",
+      "t4mlxm",
+      "zyWMm",
+      "lCf0H",
+      "OA1Bd",
+      "kvTdT",
+      "qNsRa",
+      "ibTva",
+      "RXvoP",
+      "G316Rk",
+      "t1QfTH",
+      "Lxvbj",
+      "RyNRe",
+      "ApVA8",
+      "tWZ13",
+      "A5t3VD",
+      "jCHwc",
+      "k2v5GZ",
+      "M0wx5h",
+      "cgOha",
+      "q2RKW8",
+      "mG0YD",
+      "uR0QK",
+      "ieg9r",
+      "D6HC9",
+      "Jsit1",
+      "i8fzG",
+      "tYSnE",
+      "aIei1",
+      "jRpYB",
+      "F554L",
+      "OiC8B"
+    ],
+    "closeupDirectory": "exports/visual-polish-20261023",
+    "poiTitle": "GHS · 主仓库",
+    "poiStatus": "点击查看",
+    "poiCardSize": [
+      228,
+      56
+    ],
+    "orderLegend": [
+      "已完成",
+      "执行中",
+      "待作业",
+      "异常"
+    ],
+    "orderColors": [
+      "#356BFA",
+      "#8DAAFC",
+      "#D1843C",
+      "#C85852"
+    ],
+    "sourceScreenshot": "C:/Users/28109/AppData/Local/Temp/codex-clipboard-72bc812c-9141-4be7-9f9e-80a93fb4ec65.png",
+    "scope": "all_45_boards_including_admin_login_details_empty_filters_and_tooltips",
+    "audit": "visual-polish-all-pages-audit.md",
+    "infoPolicy": "unit_and_verified_source_times_in_info_only_no_global_fake_update_footer",
+    "previousSourceSaveEvidence": {
+      "method": "native_ctrl_s_by_root_agent",
+      "editedIndicatorCleared": true,
+      "sourceFileBytes": 1769993,
+      "sourceFileLastWrite": "2026-10-23T15:47:43.1648275+08:00",
+      "sha256": "D98496070649832862929FFB2B488919BD71D49D76B5F839666AFE97E5172956",
+      "diskMetadataRechecked": true,
+      "canvasMutationAfterSave": false,
+      "scope": "all_45_artboards_42_components_56_latest_scene_image_nodes"
+    },
+    "sceneBackgroundUpdate": {
+      "scope": "all_56_scene_image_nodes",
+      "verification": "latest-scene-verification.json",
+      "sourceManifest": "latest-scene-source-runtime.json",
+      "assetEvidence": "latest-scene-assets.json",
+      "imageNodeCount": 56,
+      "imageAssetCount": 11,
+      "anchorAdjustments": 97,
+      "unexpectedUiChanges": 0
+    },
+    "latestSceneVerification": "latest-scene-verification.json",
+    "latestSceneAssets": "latest-scene-assets.json",
+    "finalCorrections": {
+      "agvSelectionClearance": 9,
+      "hintBackgroundBoards": [
+        "cgOha",
+        "OiC8B"
+      ],
+      "warehouseSelectorPrefixRemoved": true,
+      "poiSubtitle": "点击查看"
+    },
+    "deliveryManifest": "latest-scene-delivery-files.json",
+    "sourceSaveEvidence": {
+      "method": "native_ctrl_s_by_root_agent",
+      "editedIndicatorCleared": true,
+      "sourceFileBytes": 1770580,
+      "sourceFileLastWrite": "2026-10-23T16:45:24.0907124+08:00",
+      "sha256": "BA6C7FAB0013F6DE05C7729D0E6F63A17A96A2B80CB354FCC0902252F9E4C1E1",
+      "diskMetadataRechecked": true,
+      "canvasMutationAfterSave": false,
+      "scope": "all_45_artboards_42_components_56_scene_image_nodes_and_final_authorized_details"
     }
   }
 }

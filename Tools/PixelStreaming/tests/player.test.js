@@ -41,6 +41,33 @@ test('repeated transport failures cannot postpone the initial first-frame deadli
   assert.ok(p.timers.has(originalDeadline), 'failed attempts must retain the same absolute timeout');
   p.timers.get(originalDeadline).cb(); assert.match(p.elements.get('stage-title').textContent, /超时/); assert.equal(p.elements.get('retry').hidden, false);
 });
+test('terminal presentation distinguishes stopped and replaced sessions from actual failures without changing reconnect policy', async () => {
+  for (const [message, state, storedKey] of [['ghsShutdown', 'stopped'], ['ghsSessionReplaced', 'exited', 'ghsReplaced'], ['ghsEvicted', 'exited', 'ghsEvicted'], ['ghsInstanceFailed', 'fault']]) {
+    const p = await page(); p.stream.protocol.get(message)(JSON.stringify({ message: 'Current service state' }));
+    assert.equal(p.elements.get('.card').dataset.state, state, message);
+    assert.ok(p.stream.closed > 0); assert.equal(p.stream.connected, 1);
+    assert.equal([...p.timers.values()].some(timer => timer.ms === 120000 || timer.ms === 2000), false);
+    if (storedKey) assert.equal(p.store.get(storedKey), 'true');
+  }
+  for (const [code, state] of [[1001, 'stopped'], [4001, 'exited'], [4002, 'exited']]) {
+    const p = await page(); p.stream.onClose({ detail: { code } }); assert.equal(p.elements.get('.card').dataset.state, state, String(code));
+  }
+  for (const key of ['ghsEvicted', 'ghsReplaced']) {
+    const p = await page({ [key]: 'true' }); assert.equal(p.elements.get('.card').dataset.state, 'exited'); assert.equal(p.stream, undefined);
+  }
+  const timeout = await page(); [...timeout.timers.values()].find(timer => timer.ms === 120000).cb();
+  assert.equal(timeout.elements.get('.card').dataset.state, 'fault');
+});
+
+test('connection presentation follows actual waiting ready and recovery events', async () => {
+  const p = await page(); assert.equal(p.elements.get('.card').dataset.state, 'running');
+  p.stream.protocol.get('ghsAdmission')(JSON.stringify({ instanceId: 'UE-1' })); assert.equal(p.elements.get('.card').dataset.state, 'waiting');
+  p.stream.protocol.get('ghsStage')(JSON.stringify({ stage: 'streamerReady', message: 'Ready' })); assert.equal(p.elements.get('.card').dataset.state, 'running');
+  p.stream.events.get('webRtcDisconnected')({}); assert.equal(p.elements.get('.card').dataset.state, 'waiting');
+  p.stream.events.get('webRtcFailed')(); assert.equal(p.elements.get('.card').dataset.state, 'fault'); assert.equal(p.stream.closed, 0);
+  p.stream.events.get('webRtcConnected')(); assert.equal(p.elements.get('.card').dataset.state, 'running');
+});
+
 test('shift-left drag pans with right-button messages in visible video coordinates and never emits a left click', async () => {
   const p = await page(); p.frame(); const root = p.elements.get('video-root');
   const down = root.fire('mousedown', { shiftKey: true }); assert.equal(down.defaultPrevented, true); assert.equal(down.stopped, true);
