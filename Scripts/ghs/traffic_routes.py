@@ -93,8 +93,9 @@ def build_routes():
             samples=[p for p,_,_ in sample_along(lane,3.,start=18.) if line.project(Point(p))<line.length-18.]
             if corridor=='Sycamore':
                 # The source's two carriageways meet at one CAD endpoint far
-                # south of the campus. Their visual context tails continue
-                # beyond it, but straight tangent extensions cross there.
+                # south of the campus. The historical manifest still records
+                # tangent extensions, but context_road_ends filters these
+                # internal junction tails out of the visible scenery.
                 # End/start the active lanes 18m before/after that terminal
                 # join, keeping an entire 15m truck out of the shared point.
                 if name=='sycamore_south':

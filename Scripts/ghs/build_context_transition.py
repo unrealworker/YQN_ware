@@ -23,6 +23,7 @@ from park_curves import offset_path,dash_segments
 from park_surfaces import emit_surface
 from park_forests import _island,_emit_island
 from park_vegetation import build_tree,build_shrub
+from context_road_ends import classify_context_road_ends
 import build_park_geometry as base
 
 DATA=defaultdict(lambda:dict(vertices=[],faces=[],fade=[]))
@@ -37,45 +38,46 @@ def mesh(role,vertices,faces):
     data['fade'].extend(float(FADE(p)) for p in vertices)
 
 
-def road_ends(roads):
-    """Exact tangent continuation, only for externally terminating road ends."""
+def emit_road_end(road, side):
+    """Emit one exact source continuation; callers classify its endpoint first."""
     global FADE
-    ends=[]
-    for road in roads:
-        path=road['path_uv_m'];heights=road['heights_m'];width=road['width_m']
-        for side in ('start','end'):
-            if not road.get('extend_'+side):continue
-            i,j=(0,1) if side=='start' else (-1,-2)
-            p=path[i];neighbor=path[j]
-            size=math.dist(p,neighbor)
-            tangent=((p[0]-neighbor[0])/size,(p[1]-neighbor[1])/size)
-            length=float(road.get('extension_m',65.))
-            end=(p[0]+tangent[0]*length,p[1]+tangent[1]*length)
-            # Start 8 cm inside the original edge; put the overlap 0.3 cm up.
-            a=(p[0]-tangent[0]*.08,p[1]-tangent[1]*.08)
-            points=[(a[0]+tangent[0]*d,a[1]+tangent[1]*d)
-                    for d in [k*(length+.08)/32 for k in range(33)]]
-            z=heights[i]+.003
-            def fade(point,origin=p,direction=tangent,total=length):
-                d=(point[0]-origin[0])*direction[0]+(point[1]-origin[1])*direction[1]
-                t=max(0.,min(1.,(d-(total-30))/30))
-                return t*t*(3-2*t)
-            FADE=fade
-            base.ribbon('ContextRoads',points,width,z)
-            freeway=road['id'].lower().startswith(('i15','freeway','highway'))
-            lane_offsets=(-2.3,2.3) if freeway else (-4.6,0,4.6) if width>15 else (0,)
-            for offset in lane_offsets:
-                for dash in dash_segments(offset_path(points,offset),5.5 if freeway else 3.8,8 if freeway else 6.5):
-                    base.ribbon('Markings',dash,.12,z+.026)
-            for side_sign in (-1,1):
-                base.ribbon('Curbs',offset_path(points,side_sign*(width/2+.14)),.26,z+.15)
-                base.ribbon('Landscape',offset_path(points,side_sign*(width/2+1.1)),1.5,-.04)
-                if freeway:base.ribbon('Markings',offset_path(points,side_sign*(width/2-.25)),.13,z+.026)
-            ends.append(dict(road_id=road['id'],side=side,old_end_uv_m=p,
-                             new_end_uv_m=end,length_m=length,width_m=width,height_m=z,
-                             fade_starts_m=length-30,path_uv_m=points))
+    path=road['path_uv_m'];heights=road['heights_m'];width=road['width_m']
+    i,j=(0,1) if side=='start' else (-1,-2)
+    p=path[i];neighbor=path[j]
+    size=math.dist(p,neighbor)
+    tangent=((p[0]-neighbor[0])/size,(p[1]-neighbor[1])/size)
+    length=float(road.get('extension_m',65.))
+    end=(p[0]+tangent[0]*length,p[1]+tangent[1]*length)
+    # Start 8 cm inside the original edge; put the overlap 0.3 cm up.
+    a=(p[0]-tangent[0]*.08,p[1]-tangent[1]*.08)
+    points=[(a[0]+tangent[0]*d,a[1]+tangent[1]*d)
+            for d in [k*(length+.08)/32 for k in range(33)]]
+    z=heights[i]+.003
+    def fade(point,origin=p,direction=tangent,total=length):
+        d=(point[0]-origin[0])*direction[0]+(point[1]-origin[1])*direction[1]
+        t=max(0.,min(1.,(d-(total-30))/30))
+        return t*t*(3-2*t)
+    FADE=fade
+    base.ribbon('ContextRoads',points,width,z)
+    freeway=road['id'].lower().startswith(('i15','freeway','highway'))
+    lane_offsets=(-2.3,2.3) if freeway else (-4.6,0,4.6) if width>15 else (0,)
+    for offset in lane_offsets:
+        for dash in dash_segments(offset_path(points,offset),5.5 if freeway else 3.8,8 if freeway else 6.5):
+            base.ribbon('Markings',dash,.12,z+.026)
+    for side_sign in (-1,1):
+        base.ribbon('Curbs',offset_path(points,side_sign*(width/2+.14)),.26,z+.15)
+        base.ribbon('Landscape',offset_path(points,side_sign*(width/2+1.1)),1.5,-.04)
+        if freeway:base.ribbon('Markings',offset_path(points,side_sign*(width/2-.25)),.13,z+.026)
     FADE=lambda p:0.
-    return ends
+    return dict(road_id=road['id'],side=side,old_end_uv_m=p,new_end_uv_m=end,
+                length_m=length,width_m=width,height_m=z,fade_starts_m=length-30,path_uv_m=points)
+
+
+def road_ends(roads, cad_roads=()):
+    """Continue only physical outer road ends, never internal CAD junctions."""
+    allowed=classify_context_road_ends(roads,cad_roads)['external']
+    by={road['id']:road for road in roads}
+    return [emit_road_end(by[row['road_id']],row['side']) for row in allowed]
 
 
 def distant_islands(site,cad,ends):
@@ -168,13 +170,14 @@ def main():
     routes=json.loads((ROOT/'SourceAssets/GHS/Traffic/routes.json').read_text(encoding='utf-8'))
     site=json.loads((ROOT/'SourceAssets/GHS/Park/site_geometry_report.json').read_text(encoding='utf-8'))
     cad=json.loads((ROOT/'SourceAssets/GHS/Park/cad_layout.json').read_text(encoding='utf-8'))
-    ends=road_ends(routes['roads'])
+    ends=road_ends(routes['roads'],cad['roads'])
     islands=distant_islands(site,cad,ends)
     assets=export()
     # Convex support planes keep all campus props at their original color.
     hull=Polygon(site['campus_boundary_uv_m']).convex_hull.simplify(2,preserve_topology=True)
     assert all(hull.buffer(5).covers(Polygon(h['footprint_uv_m'])) is False for h in site['residential']['houses'])
-    result=dict(version=1,roads=ends,islands=islands,meshes=assets,
+    result=dict(version=2,roads=ends,islands=islands,meshes=assets,
+        excluded_internal_endpoints=classify_context_road_ends(routes['roads'],cad['roads'])['internal'],
         protected_campus_hull_uv_m=list(hull.exterior.coords),
         exterior_building_blend=.18,interior_materials_unchanged=True,
         original_ground_unchanged=True,new_actor_count=len(assets),

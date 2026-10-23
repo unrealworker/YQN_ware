@@ -14,6 +14,8 @@ sys.dont_write_bytecode=True
 sys.path.insert(0,str(ROOT/'Saved/ParkRefinement/python_deps'))
 from shapely.geometry import Polygon,LineString,Point
 from shapely.ops import unary_union
+from context_road_ends import classify_context_road_ends
+from validate_road_terminal_junction_fix import validate_scoped_repair
 
 
 def read(path):return json.loads(path.read_text(encoding='utf-8'))
@@ -36,8 +38,18 @@ def main():
         assert abs(end['height_m']-road['heights_m'][index]-.003)<1e-7
         assert abs(math.dist(end['new_end_uv_m'],end['old_end_uv_m'])-65)<1e-6
         joins.append(end['road_id']+':'+side)
-    expected=sum(int(r['extend_start'])+int(r['extend_end']) for r in routes['roads'])
-    assert len(set(joins))==expected==8
+    classified=classify_context_road_ends(routes['roads'],cad['roads'])
+    expected={r['road_id']+':'+r['side'] for r in classified['external']}
+    assert len(expected)==6
+    scoped=None
+    # The original version 1 blend/manifest remains immutable. Its eight
+    # source tails are not the active geometry once the scoped repair exists.
+    if manifest.get('version',1)>=2:
+        assert set(joins)==expected
+    else:
+        scoped=validate_scoped_repair(ROOT)
+        legacy=expected|{r['road_id']+':'+r['side'] for r in classified['internal']}
+        assert set(joins)==legacy
     hull=manifest['protected_campus_hull_uv_m']
     def outside(p):
         return max(((b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0]))/math.dist(a,b)
@@ -72,7 +84,10 @@ def main():
         assert path.is_file() and hashlib.sha256(path.read_bytes()).hexdigest()==row['sha256']
     assert manifest['triangles']==sum(r['triangles'] for r in manifest['meshes'])<110000
     assert manifest['trees']==len(centers)<=54
-    report=dict(success=True,road_end_joins=joins,islands=len(manifest['islands']),trees=len(centers),
+    report=dict(success=True,road_end_joins=sorted(expected),
+        context_geometry_source='scoped repaired meshes' if scoped else 'version 2 context meshes',
+        legacy_source_not_active=bool(scoped),scoped_repair=scoped,
+        islands=len(manifest['islands']),trees=len(centers),
         triangles=manifest['triangles'],minimum_tree_spacing_m=spacing,
         maximum_protected_campus_distance_m=maximum_campus,minimum_house_distance_m=minimum_house,
         all_source_assets_hash_verified=True)
