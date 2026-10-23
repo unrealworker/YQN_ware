@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN" class="replay-overlay-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>GHS 追溯回放时间轴</title><link rel="stylesheet" href="replay.css"></head>
+<body class="replay-overlay">
+<section id="replay-transport" class="replay-transport" aria-label="追溯回放控制" hidden>
+ <div class="replay-transport-top"><strong>作业回放</strong><span class="replay-transport-status" id="replay-status">已暂停</span><span class="replay-transport-clock-label">回放时间</span><time id="replay-current"></time><span class="replay-elapsed" id="replay-elapsed"></span></div>
+ <div class="replay-timeline"><div class="replay-markers" id="replay-markers" aria-label="关键事件标记"></div><input id="replay-seek" type="range" min="0" max="3600" step="0.1" value="0" aria-label="回放时间轴"></div>
+ <div class="replay-timeline-labels"><span id="replay-start-label"></span><span id="replay-end-label"></span></div>
+ <div class="replay-transport-controls">
+  <button id="replay-play" class="replay-play" data-control="play">播放</button>
+  <button data-control="back" title="后退 30 秒" aria-label="后退 30 秒">−30 秒</button><button data-control="forward" title="前进 30 秒" aria-label="前进 30 秒">+30 秒</button>
+  <label><span>倍率</span><span id="replay-rate"></span></label>
+  <span class="replay-control-separator"></span><label><span>视角</span><span id="replay-follow"></span></label><button data-control="overview">回放全景</button>
+  <label class="replay-trail-label"><span>轨迹</span><span id="replay-trails"></span></label>
+ </div>
+</section>
+<script src="viewport.js"></script><script src="dropdown.js"></script><script src="replay-core.js"></script><script src="replay-overlay.js"></script>
+</body></html>

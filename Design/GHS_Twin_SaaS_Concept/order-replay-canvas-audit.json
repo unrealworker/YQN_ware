@@ -1,0 +1,345 @@
+{
+  "boards": [
+    {
+      "id": "bi8Au",
+      "name": "00 · POI 与 HUD 设计系统",
+      "width": 3840,
+      "height": 1080
+    },
+    {
+      "id": "CLx7Q",
+      "name": "01 · 内部总览 / 仓库空间态势",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "mP7E5",
+      "name": "02 · 点位选中 / AGV 设备详情",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "d7P3z",
+      "name": "03 · 聚合展开 / 成员分页与定位",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "Wt7Vo",
+      "name": "04 · 告警定位 / AGV 低电量",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "iiFrY",
+      "name": "05 · 订单追溯 / 全时段设备回放",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "gW9oH",
+      "name": "06 · 库位 POI / 原设计与未核验标记",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "UbszE",
+      "name": "07 · HUD 详情组件 / 车辆与设施",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "PE2am",
+      "name": "08 · 搜索与数据状态 / 边界反馈",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "r5SOcd",
+      "name": "09 · 交互路径 / 密度与动效规范",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "XJoOQ",
+      "name": "10 · 聚合预警 / 从异常到设备",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "F8Cox",
+      "name": "11 · 库存 / 数量与货位分布",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "XhUtw",
+      "name": "17 · 库存明细 / 物料与货位详情",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "lvDfx",
+      "name": "12 · 订单 / 今日出入库作业",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "t4mlxm",
+      "name": "18 · 订单详情 / 拣货与设备联动",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "zyWMm",
+      "name": "13 · 设备 / 真实台账与场景映射边界",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "lCf0H",
+      "name": "14 · 告警 / 分级队列与处理状态",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "OA1Bd",
+      "name": "15 · 订单追溯 / 时段查询",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "kvTdT",
+      "name": "16 · 场景 / 即时图层与库容设置",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "qNsRa",
+      "name": "19 · 订单 / 入库切换状态",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "ibTva",
+      "name": "20 · 设备 / 充电设施切换状态",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "RXvoP",
+      "name": "21 · 导航内容地图 / 七个业务入口",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "G316Rk",
+      "name": "22 · 业务状态 / 空值权限与确认反馈",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "t1QfTH",
+      "name": "23 · 设备搜索 / 匹配结果与定位",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "Lxvbj",
+      "name": "24 · 仓库切换 / 当前与接入边界",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "RyNRe",
+      "name": "25 · 像素流服务启动器 / 待启动",
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "id": "ApVA8",
+      "name": "26 · 像素流服务启动器 / 运行中",
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "id": "tWZ13",
+      "name": "28 · 像素流访问 / 自动连接进度",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "id": "A5t3VD",
+      "name": "27 · 启动器 / 配置与异常状态",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "jCHwc",
+      "name": "29 · 像素流访问 / 连接边界反馈",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "k2v5GZ",
+      "name": "30 · 搜索与选中 / 中文输入和控件规范",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "M0wx5h",
+      "name": "33 · 主仓库 POI / 当前交互规范",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "cgOha",
+      "name": "31 · 园区默认 / 唯一主仓库 POI",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "q2RKW8",
+      "name": "32 · 点击开顶 / 0.5 秒溶解流程",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "mG0YD",
+      "name": "34 · 场景设置 / 即时控制与库容状态",
+      "width": 1920,
+      "height": 1200
+    },
+    {
+      "id": "uR0QK",
+      "name": "35 · 像素流后台 / 运行中",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "id": "ieg9r",
+      "name": "36 · 像素流后台 / 已停止",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "id": "D6HC9",
+      "name": "37 · 像素流后台 / 结束用户连接",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "id": "Jsit1",
+      "name": "38 · 像素流后台 / 停止服务确认",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "id": "i8fzG",
+      "name": "39 · 像素流后台 / 状态与参数反馈",
+      "width": 1920,
+      "height": 1320
+    },
+    {
+      "id": "tYSnE",
+      "name": "40 · 像素流访问 / 管理员结束连接",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "id": "aIei1",
+      "name": "41 · 像素流访问 / 服务已暂停",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "id": "jRpYB",
+      "name": "42 · 像素流后台 / 管理员登录",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "id": "F554L",
+      "name": "43 · 像素流后台 / 登录失败",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "id": "OiC8B",
+      "name": "44 · 园区总览 / 库容说明展开",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "sNQHB",
+      "name": "45 · 订单追溯 / 4 个测试订单",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "oRKJZ",
+      "name": "46 · 订单追溯 / 最短 1 小时校验",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "dJZrJ",
+      "name": "47 · 订单追溯 / 暂停与设备跟随",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "Aqeif",
+      "name": "48 · 订单追溯 / 关键事件定位暂停",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "vNXAk",
+      "name": "49 · 订单追溯 / 区间播放完成",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "QFsnb",
+      "name": "50 · 订单追溯 / 跨页停止确认",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "IeQ6D",
+      "name": "51 · 订单追溯 / 手动结束并恢复场景",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "G0MuIS",
+      "name": "52 · 订单追溯 / 查询与恢复边界",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "UTzjR",
+      "name": "53 · 订单追溯 / 1440 设备与时间轴",
+      "width": 1440,
+      "height": 900
+    }
+  ],
+  "traceBoards": [
+    "OA1Bd",
+    "iiFrY",
+    "sNQHB",
+    "oRKJZ",
+    "dJZrJ",
+    "Aqeif",
+    "vNXAk",
+    "QFsnb",
+    "IeQ6D",
+    "G0MuIS",
+    "UTzjR"
+  ],
+  "componentCount": 47,
+  "issues": [],
+  "placeholders": [],
+  "missingRefs": []
+}

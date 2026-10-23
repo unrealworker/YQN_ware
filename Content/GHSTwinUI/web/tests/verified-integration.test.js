@@ -38,7 +38,7 @@ test('data explanations keep units and distinct source times accessible without 
 test('all navigation pages expose data explanations and retain explicit demonstration boundaries',()=>{
   const app=boot();
   for(const page of ['overview','inventory','orders','devices','alerts','trace','settings']){
-    app.window.twinNavigate(page);assert.ok(app.html().includes('aria-label="数据说明"'),page);
+    app.window.twinNavigate(page);assert.ok(app.html().includes(page==='trace'?'不代表真实业务记录':'aria-label="数据说明"'),page);
   }
   app.window.twinNavigate('orders');assert.ok(app.html().includes('示例时点：2026-10-20 14:20:08'));
   app.window.twinFilterType('forklift');assert.ok(app.html().includes('场景模型 · 台账未关联'));
@@ -104,7 +104,7 @@ const assertBusinessCopy=(app,label)=>{
 
 test('all business pages omit internal warehouse and extract metadata while retaining business titles',()=>{
   const app=boot();
-  for(const [page,title] of [['overview','仓库运营总览'],['inventory','库存与货位'],['devices','设备监控'],['orders','今日出入库订单'],['alerts','设备告警中心'],['trace','追溯查询'],['settings','场景设置']]){
+  for(const [page,title] of [['overview','仓库运营总览'],['inventory','库存与货位'],['devices','设备监控'],['orders','今日出入库订单'],['alerts','设备告警中心'],['trace','订单追溯'],['settings','场景设置']]){
     app.window.twinNavigate(page);assertBusinessCopy(app,page);assert.ok(app.html().includes(title),page);
   }
   app.window.twinNavigate('inventory');
@@ -227,8 +227,8 @@ test('legacy design shortcuts reset only design filters while verified sample se
   assert.equal(app.window.twinState.filters.inventoryDemo.state,'available');
 });
 
-test('original order alert and trace pages identify their unchecked data while real ledger stays verified',()=>{
-  const app=boot();for(const page of ['orders','alerts','trace']){app.window.twinNavigate(page);assert.ok(app.html().includes('数据未核验'),page);}
+test('order and alert demos stay unchecked while replay is explicitly test-only and the ledger stays verified',()=>{
+  const app=boot();for(const page of ['orders','alerts']){app.window.twinNavigate(page);assert.ok(app.html().includes('数据未核验'),page);}app.window.twinNavigate('trace');assert.ok(app.html().includes('测试回放'));assert.ok(app.html().includes('不代表真实业务记录'));
   app.window.twinNavigate('devices');assert.ok(app.html().includes('叉车台账'));assert.ok(!app.html().includes('数据未核验'));
 });
 

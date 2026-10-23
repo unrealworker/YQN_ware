@@ -6,6 +6,7 @@
 #include "GHSWarehouseRoofComponent.h"
 #include "GHSStorageCapacityComponent.h"
 #include "GHSCampusTrafficActor.h"
+#include "GHSOrderReplaySession.h"
 #include "Engine/GameViewportClient.h"
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/PlayerInput.h"
@@ -35,6 +36,7 @@ AGHSWarehousePlayerController::AGHSWarehousePlayerController()
     SearchStreamingInput=CreateDefaultSubobject<UPixelStreamingInput>(TEXT("SceneSearchStreamingInput"));
     WarehouseRoof=CreateDefaultSubobject<UGHSWarehouseRoofComponent>(TEXT("WarehouseRoof"));
     StorageCapacity=CreateDefaultSubobject<UGHSStorageCapacityComponent>(TEXT("StorageCapacity"));
+    OrderReplay=CreateDefaultSubobject<UGHSOrderReplaySession>(TEXT("OrderReplay"));
 }
 
 void AGHSWarehousePlayerController::BeginPlay()
@@ -85,6 +87,7 @@ void AGHSWarehousePlayerController::BeginPlay()
 
 void AGHSWarehousePlayerController::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    if(OrderReplay) OrderReplay->Stop();
     if(SearchStreamingInput) SearchStreamingInput->OnInputEvent.RemoveDynamic(this,&AGHSWarehousePlayerController::HandleStreamingInput);
     CancelCameraDrag();
     if (TruckHUDWidget) { TruckHUDWidget->RemoveFromParent(); TruckHUDWidget = nullptr; }
@@ -110,6 +113,8 @@ bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
             GFrameCounter, *Key.ToString(), int32(Params.Event), Params.Delta.X, int32(DragMode), *PendingMouse.ToString(), bTwinOrbitReleasePending);
     if (TwinHUDWidget)
     {
+        if(Key==EKeys::Escape && Params.Event==IE_Pressed && OrderReplay && OrderReplay->IsExitPending())
+        {TwinHUDWidget->Command(TEXT("{\"action\":\"replayExitCancel\"}"));CancelCameraDrag();return true;}
         if(Params.Event==IE_Pressed && TwinHUDWidget->HandleSearchKey(Key)) {CancelCameraDrag();return true;}
         if(Key==EKeys::Escape && Params.Event==IE_Pressed) { TwinHUDWidget->ClearSelection(); CancelCameraDrag(); return true; }
         if(Key==EKeys::LeftMouseButton || Key==EKeys::RightMouseButton || Key==EKeys::MiddleMouseButton || Key==EKeys::MouseWheelAxis)
@@ -240,6 +245,8 @@ void AGHSWarehousePlayerController::ConsumeOrbitMotion()
         bPastDragThreshold = true;
         Delta = DragTravel;
     }
+    if(OrderReplay && OrderReplay->IsReplaying() && !OrderReplay->GetFollowId().IsEmpty() && !Delta.IsNearlyZero())
+        OrderReplay->Follow(TEXT(""),FVector2D::ZeroVector,FVector2D::ZeroVector);
     Camera->OrbitPixels(Delta);
 }
 
@@ -260,6 +267,8 @@ bool AGHSWarehousePlayerController::BeginMapDrag()
     CancelCameraDrag();
     auto* Camera = Cast<AGHSWarehouseCameraPawn>(GetPawn());
     if (!Camera || !HasValidMapDragCursor()) return false;
+    if(OrderReplay && OrderReplay->IsReplaying() && !OrderReplay->GetFollowId().IsEmpty())
+        OrderReplay->Follow(TEXT(""),FVector2D::ZeroVector,FVector2D::ZeroVector);
     Camera->PrepareForGroundPan();
     ULocalPlayer* Local = GetLocalPlayer();
     MapDragViewportSize = Local->ViewportClient->Viewport->GetSizeXY();

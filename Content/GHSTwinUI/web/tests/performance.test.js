@@ -134,14 +134,13 @@ test('same CAD instance updates its metadata without adding a detail return fram
   assert.equal(app.window.twinState.stack.length,stack);
 });
 
-test('device trace refreshes its referenced state but unrelated devices do not rebuild it',()=>{
+test('order replay query is independent of live device telemetry and does not rebuild on unrelated snapshots',()=>{
   const app=boot();app.window.twinReceive(snapshot([device(),device('AGV-08')]));
-  Object.assign(app.window.twinState.filters.trace,{mode:'device',query:'AGV-07',queried:true});
   app.window.twinNavigate('trace');const before=metrics(app).htmlBuilds;
   app.window.twinReceive(snapshot([device(),{...device('AGV-08'),status:'fault'}]));
   assert.equal(metrics(app).htmlBuilds,before);
   app.window.twinReceive(snapshot([{...device(),status:'offline',location:'C 区'},device('AGV-08')]));
-  assert.equal(metrics(app).htmlBuilds,before+1);assert.ok(app.html().includes('C 区'));
+  assert.equal(metrics(app).htmlBuilds,before);assert.ok(app.html().includes('选择时间段'));
 });
 
 test('diagnostic bridge opt-out cancels an already scheduled report',()=>{

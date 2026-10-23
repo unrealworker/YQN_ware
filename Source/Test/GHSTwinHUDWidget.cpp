@@ -3,6 +3,7 @@
 #include "GHSWarehouseCameraPawn.h"
 #include "GHSWarehouseRoofComponent.h"
 #include "GHSStorageCapacityComponent.h"
+#include "GHSOrderReplaySession.h"
 #include "GHSHUDMotion.h"
 #include "Blueprint/WidgetTree.h"
 #include "Components/CanvasPanel.h"
@@ -103,12 +104,12 @@ TSharedRef<SWidget> UGHSTwinBrowser::RebuildWidget()
 {
     // Direct Slate hosting does not load the WebBrowserWidget plugin's startup hook.
     IWebBrowserModule::Get();
-    FString File = FPaths::ConvertRelativePathToFull(FPaths::ProjectContentDir()/TEXT("GHSTwinUI/web/index.html"));
+    FString File = FPaths::ConvertRelativePathToFull(FPaths::ProjectContentDir()/TEXT("GHSTwinUI/web")/Document);
     File.ReplaceInline(TEXT("\\"),TEXT("/"));
     SAssignNew(Browser,SWebBrowser)
         .InitialURL(TEXT("file:///")+File).ShowControls(false).ShowAddressBar(false)
-        .SupportsTransparency(false).ShowInitialThrobber(true).BrowserFrameRate(60)
-        .BackgroundColor(FColor(244,246,249))
+        .SupportsTransparency(bTransparent).ShowInitialThrobber(!bTransparent).BrowserFrameRate(60)
+        .BackgroundColor(bTransparent?FColor::Transparent:FColor(244,246,249))
         .OnBeforePopup_Lambda([](FString,FString){return true;})
         .OnBeforeNavigation_Lambda([](const FString& URL,const FWebNavigationRequest&){return !URL.StartsWith(TEXT("file:///"));})
         .OnSuppressContextMenu_Lambda([](){return true;})
@@ -132,6 +133,11 @@ TSharedRef<SWidget> UGHSTwinHUDWidget::RebuildWidget()
     PanelSlot=Root->AddChildToCanvas(Panel);
     PanelSlot->SetPosition(FVector2D(1440,64)); PanelSlot->SetSize(FVector2D(480,1016));
     Panel->SetVisibility(ESlateVisibility::Hidden);
+    ReplayOverlay=WidgetTree->ConstructWidget<UGHSTwinBrowser>(UGHSTwinBrowser::StaticClass(),TEXT("ReplayTransport"));
+    ReplayOverlay->Document=TEXT("replay-overlay.html");ReplayOverlay->bTransparent=true;
+    ReplayOverlaySlot=Root->AddChildToCanvas(ReplayOverlay);
+    ReplayOverlaySlot->SetPosition(FVector2D(24,888));ReplayOverlaySlot->SetSize(FVector2D(1320,168));
+    ReplayOverlay->SetVisibility(ESlateVisibility::Hidden);
     SearchBox=WidgetTree->ConstructWidget<UGHSTwinSearchInput>(UGHSTwinSearchInput::StaticClass(),TEXT("SceneSearch"));
     SearchBox->Bind(this);
     SearchSlot=Root->AddChildToCanvas(SearchBox);
@@ -143,6 +149,7 @@ void UGHSTwinHUDWidget::NativeConstruct()
     Super::NativeConstruct();
     SetVisibility(ESlateVisibility::SelfHitTestInvisible);
     if (Panel) Panel->Bind(this);
+    if (ReplayOverlay) ReplayOverlay->Bind(this);
     bDiagnostics=FParse::Param(FCommandLine::Get(),TEXT("TwinDiagnostics"));
     SceneData.Refresh(GetWorld(),true);
     NextRefresh=GetWorld()->GetTimeSeconds()+2;
@@ -263,6 +270,8 @@ bool UGHSTwinHUDWidget::IsScenePoint(FVector2D Position) const
 {
     if(bInitialLayoutPending) return false;
     Position=Viewport.ToLogical(Position);
+    if(IsReplayActive() && ReplayOverlaySlot && Inside(Position,ReplayOverlaySlot->GetPosition(),ReplayOverlaySlot->GetSize())) return false;
+    if(auto* Replay=ReplaySession();Replay && Replay->IsExitPending()) return false;
     if(!Inside(Position,FVector2D(0,Layout.HeaderHeight),FVector2D(ViewSize.X,ViewSize.Y-Layout.HeaderHeight))) return false;
     if(IsSceneSearchVisible() && Inside(Position,GetSceneSearchPosition(),GetSceneSearchSize())) return false;
     if(bSearchOpen && !bSearchIsRemote && IsSceneSearchVisible() && Inside(Position,SearchLayout().Position,SearchLayout().Size)) return false;
@@ -273,8 +282,10 @@ bool UGHSTwinHUDWidget::IsScenePoint(FVector2D Position) const
 }
 void UGHSTwinHUDWidget::Navigate(const FString& Page)
 {
+    auto Object=MakeShared<FJsonObject>();Object->SetStringField(TEXT("action"),TEXT("navigate"));Object->SetStringField(TEXT("page"),Page);
+    FString Intent;FJsonSerializer::Serialize(Object,TJsonWriterFactory<>::Create(&Intent));if(GuardReplayOperation(Intent)) return;
     SetSearchOpen(false); bWarehouseMenuOpen=false;
-    static const TSet<FString> Allowed{TEXT("overview"),TEXT("inventory"),TEXT("orders"),TEXT("devices"),TEXT("alerts"),TEXT("trace"),TEXT("settings")};
+    static const TSet<FString> Allowed{TEXT("overview"),TEXT("inventory"),TEXT("orders"),TEXT("devices"),TEXT("alerts"),TEXT("trace"),TEXT("scene"),TEXT("settings")};
     if(Allowed.Contains(Page) && Panel) Panel->Evaluate(FString::Printf(TEXT("window.twinNavigate && window.twinNavigate('%s');"),*Page));
 }
 void UGHSTwinHUDWidget::SearchCommitted(const FText& Text,ETextCommit::Type Method)
@@ -418,6 +429,9 @@ void UGHSTwinHUDWidget::Command(const FString& Json)
     TSharedPtr<FJsonObject> Object;
     if(Json.Len()>16384 || !FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Json),Object) || !Object) return;
     FString Action,Id; Object->TryGetStringField(TEXT("action"),Action); Object->TryGetStringField(TEXT("id"),Id);
+    if(Action.StartsWith(TEXT("replay"))) {HandleReplayCommand(Action,Object);return;}
+    if(IsReplayActive() && Action!=TEXT("report") && Action!=TEXT("ready") && Action!=TEXT("zoomIn") && Action!=TEXT("zoomOut") && Action!=TEXT("clear"))
+        if(GuardReplayOperation(Json)) return;
     double Sequence=0;if(Object->TryGetNumberField(TEXT("sequence"),Sequence) && FMath::IsFinite(Sequence)) SettingsSequence=FMath::Max(SettingsSequence,int64(Sequence));
     if(Action!=TEXT("report") && Action!=TEXT("ready")) if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer())) PC->CancelCameraDrag();
     if(Action==TEXT("ready"))
@@ -429,7 +443,7 @@ void UGHSTwinHUDWidget::Command(const FString& Json)
         UE_LOG(LogTemp,Display,TEXT("GHS_TWIN_BROWSER_READY"));
     }
     else if(Action==TEXT("openWarehouse")) OpenWarehouse();
-    else if(Action==TEXT("select")) SelectObject(Id);
+    else if(Action==TEXT("select")) {bool bFocus=true;Object->TryGetBoolField(TEXT("focusSelection"),bFocus);SelectObject(Id,bFocus);}
     else if(Action==TEXT("focus")) Focus(Id);
     else if(Action==TEXT("clear")) ClearSelection();
     else if(Action==TEXT("navigate")) {SetSearchOpen(false);bWarehouseMenuOpen=false;}
@@ -482,6 +496,11 @@ void UGHSTwinHUDWidget::Command(const FString& Json)
 }
 bool UGHSTwinHUDWidget::SelectObject(const FString& Id,bool bFocus)
 {
+    if(IsReplayActive())
+    {
+        auto Intent=MakeShared<FJsonObject>();Intent->SetStringField(TEXT("action"),TEXT("select"));Intent->SetStringField(TEXT("id"),Id);Intent->SetBoolField(TEXT("focusSelection"),bFocus);
+        FString Json;FJsonSerializer::Serialize(Intent,TJsonWriterFactory<>::Create(&Json));GuardReplayOperation(Json,TEXT("定位设备"));return false;
+    }
     if(Id.StartsWith(TEXT("RACK:"))) return false;
     FVector Location,Extent; if(!SceneData.Resolve(Id,Location,Extent)) return false;
     if(!RevealForNavigation(Id)) return false;
@@ -568,6 +587,7 @@ void UGHSTwinHUDWidget::Overview()
 }
 void UGHSTwinHUDWidget::Focus(const FString& Id)
 {
+    if(IsReplayActive()) {auto Intent=MakeShared<FJsonObject>();Intent->SetStringField(TEXT("action"),TEXT("focus"));Intent->SetStringField(TEXT("id"),Id);FString Json;FJsonSerializer::Serialize(Intent,TJsonWriterFactory<>::Create(&Json));GuardReplayOperation(Json);return;}
     FVector Location,Extent; if(!SceneData.Resolve(Id,Location,Extent)) return;
     if(!RevealForNavigation(Id)) return;
     if(!IsInteriorAvailable()) {QueueInteriorAction(TEXT("focus"),Id);return;}
@@ -584,6 +604,7 @@ void UGHSTwinHUDWidget::Focus(const FString& Id)
 }
 void UGHSTwinHUDWidget::FocusRegion(const FString& Region)
 {
+    if(IsReplayActive()) {auto Intent=MakeShared<FJsonObject>();Intent->SetStringField(TEXT("action"),TEXT("preset"));Intent->SetStringField(TEXT("value"),Region);FString Json;FJsonSerializer::Serialize(Intent,TJsonWriterFactory<>::Create(&Json));GuardReplayOperation(Json);return;}
     FVector Center,Extent; if(!SceneData.RegionBounds(Region,Center,Extent)) return;
     if(!bRacks) {bRacks=true;ApplySceneLayers();PushSceneControls(TEXT("已显示货架与货物"));}
     if(!IsInteriorAvailable()) {QueueInteriorAction(TEXT("region"),Region);return;}
@@ -600,6 +621,7 @@ void UGHSTwinHUDWidget::FocusRegion(const FString& Region)
 bool UGHSTwinHUDWidget::HandleChromeClick(FVector2D Position)
 {
     if(bInitialLayoutPending) return false;
+    if(auto* Replay=ReplaySession();Replay && Replay->IsExitPending()) return true;
     Position=Viewport.ToLogical(Position);
     if(IsSceneSearchVisible() && bSearchOpen && !bSearchIsRemote && Inside(Position,SearchLayout().Position,SearchLayout().Size))
     {
@@ -617,7 +639,7 @@ bool UGHSTwinHUDWidget::HandleChromeClick(FVector2D Position)
     if(bSearchOpen && !Inside(Position,GetSceneSearchPosition(),GetSceneSearchSize())) SetSearchOpen(false);
     if(FGHSTwinHeaderLayout::Calculate(ViewSize.X).IsPanelButton(Position))
     { SetPanelCollapsed(!bPanelCollapsed); return true; }
-    const int32 TypeIndex=IsInteriorAvailable()?FGHSTwinSceneChrome::FilterAt(Position,Layout):INDEX_NONE;
+    const int32 TypeIndex=IsInteriorAvailable() && !IsReplayActive()?FGHSTwinSceneChrome::FilterAt(Position,Layout):INDEX_NONE;
     if(TypeIndex!=INDEX_NONE)
     {
         PointFilter=TypeIndex==1?TEXT("rack"):TypeIndex==2?TEXT("truck"):TypeIndex==3?TEXT("charger"):TEXT("all");
@@ -630,6 +652,13 @@ bool UGHSTwinHUDWidget::HandleSceneClick(FVector2D Position)
 {
     if(HandleChromeClick(Position)) return true;
     if(!IsScenePoint(Position)) return false;
+    if(auto* Replay=ReplaySession();Replay && Replay->IsReplaying())
+    {
+        FVector Origin,Direction;FString Id;
+        if(GetOwningPlayer()->DeprojectScreenPositionToWorld(Position.X,Position.Y,Origin,Direction) && Replay->Pick(Origin,Direction,Id)) Replay->Select(Id);
+        else Replay->Select(TEXT(""));
+        PushReplayState();return true;
+    }
     const FVector2D LogicalPosition=Viewport.ToLogical(Position);
     if(!IsInteriorAvailable())
     {
@@ -689,7 +718,7 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
     if(!PreviousSceneSize.Equals(Layout.SceneSize,.5)) POICadence.Invalidate();
     if(bInitialViewPending && GetOwningPlayerPawn()) { Overview(); bInitialViewPending=false; }
     // A panel toggle changes UI/input bounds only; it must never initiate camera focus.
-    else if(bViewportChanged && !SelectedId.IsEmpty()) Focus(SelectedId);
+    else if(bViewportChanged && !SelectedId.IsEmpty() && !IsReplayActive()) Focus(SelectedId);
     else if(bViewportChanged)
     {
         // Packaged windows can tick at a temporary narrow size before -ResX/-ResY
@@ -712,6 +741,16 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
         Panel->SetRenderOpacity(1.f);
         Panel->SetRenderTranslation(PanelMotion.Position(Expanded)-Expanded.PanelPosition);
     }
+    if(ReplayOverlay && ReplayOverlaySlot)
+    {
+        const FVector2D OverlaySize(FMath::Max(320.,Layout.SceneSize.X-48),168);
+        const FVector2D OverlayPosition(Layout.ScenePosition.X+24,ViewSize.Y-192);
+        const bool bChanged=!LastReplayViewport.Equals(OverlaySize,.1);
+        ReplayOverlaySlot->SetPosition(OverlayPosition);ReplayOverlaySlot->SetSize(OverlaySize);
+        ReplayOverlay->SetVisibility(IsReplayActive()?ESlateVisibility::Visible:ESlateVisibility::Hidden);
+        if(bChanged && bReplayOverlayReady && IsReplayActive())
+        {ReplayOverlay->Evaluate(FString::Printf(TEXT("window.twinSetViewport && window.twinSetViewport(%.4f,168);"),OverlaySize.X));LastReplayViewport=OverlaySize;}
+    }
     // Search uses the same eased edge as the scene controls. Keep its dimensions
     // and responsive visibility stable while the drawer moves so it cannot snap
     // or suddenly appear at the final frame of the animation.
@@ -720,8 +759,11 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
     const double Now=GetWorld()->GetTimeSeconds();
     {
         TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_SceneRefresh);
-        SceneData.MaintainCache(128);
-        if(Now>=NextRefresh) { SceneData.Refresh(GetWorld(),true); PushSnapshot(); NextRefresh=Now+2; }
+        if(!IsReplayActive())
+        {
+            SceneData.MaintainCache(128);
+            if(Now>=NextRefresh) { SceneData.Refresh(GetWorld(),true); PushSnapshot(); NextRefresh=Now+2; }
+        }
     }
     if(bSearchPending && (!SearchBox || !SearchBox->IsComposing()))
     {
@@ -753,6 +795,13 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
         if(Action==TEXT("select")) SelectObject(Id,bFocus);
         else if(Action==TEXT("focus")) Focus(Id);
         else if(Action==TEXT("region")) FocusRegion(Id);
+    }
+    if(auto* Replay=ReplaySession();Replay && Replay->IsReplaying())
+    {
+        Replay->Advance(DeltaSeconds,ViewSize,Layout.ScenePosition+FVector2D(Layout.SceneSize.X*.5,(Layout.SceneSize.Y-168)*.5));
+        if(Now>=NextReplayPush) {PushReplayState();NextReplayPush=Now+.1;}
+        bWarehousePOIVisible=false;bSelectedScreenBoundsValid=false;
+        VisibleLabels.Reset();PreviousVisibleLabels.Reset();PreviousPositions.Reset();LabelAges.Reset();return;
     }
     UpdateWarehousePOI();
     UpdateSelectedScreenBounds();
@@ -1007,7 +1056,7 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
     Text(FVector2D(48,Layout.HeaderHeight+65),Area.Left(12),11,C(TEXT("5B6C82")));
     Line(FVector2D(252,Layout.HeaderHeight+53),FVector2D(257,Layout.HeaderHeight+58),C(TEXT("5B6C82")),1.5);
     Line(FVector2D(257,Layout.HeaderHeight+58),FVector2D(262,Layout.HeaderHeight+53),C(TEXT("5B6C82")),1.5);
-    if(IsInteriorAvailable() && FGHSTwinSceneChrome::FiltersVisible(Layout))
+    if(IsInteriorAvailable() && !IsReplayActive() && FGHSTwinSceneChrome::FiltersVisible(Layout))
     {
         Text(FVector2D(32,Layout.HeaderHeight+116),TEXT("按类型查看"),11,C(TEXT("5B6C82")));
         const TCHAR* Names[]={TEXT("全部设备"),TEXT("货架区域"),TEXT("装卸车辆"),TEXT("充电设施")};
@@ -1093,7 +1142,7 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
     // Scene guidance stays below menus so a short viewport never obscures results.
     if(Layout.SceneSize.X>650)
     {
-        const FString Hint=IsInteriorAvailable()?TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  中键返回园区  ·  点击查看详情"):TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  点击仓库查看内部");
+        const FString Hint=IsReplayActive()?TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  点击选择回放设备"):(IsInteriorAvailable()?TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  中键返回园区  ·  点击查看详情"):TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  点击仓库查看内部"));
         const auto Metrics=GHSTwinTypography::Measure(Hint,Font(11));
         const FVector2D At(22,Layout.ScenePosition.Y+Layout.SceneSize.Y-44);
         Box(At,FVector2D(Metrics.Size.X+28,32),FLinearColor::White.CopyWithNewOpacity(.94f),8,C(TEXT("DFE7F2")));

@@ -1,0 +1,796 @@
+{
+  "success": true,
+  "source_hashes": {
+    "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\MannedForklift\\manned_forklift_50k.blend": "7bebb8a8ed7a9f4edbca28a7c5b3ed8db76054c81d87a95a55157ee5155b4808",
+    "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\TrucksLong\\dock_truck_long.blend": "9f488bba3a1f513fc265c7a10f4ec27ca57c29ae80233870dd3ce949eaf6c802",
+    "D:\\UEPro\\Test\\SourceAssets\\GHS\\DoublePallet\\double_pallet_storage.blend": "3aa77a7689a4374d922cca92fe61107337e7479e1e00abb138c7e8f99228121e",
+    "D:\\UEPro\\Test\\SourceAssets\\GHS\\RefinementV2\\Envelope\\envelope_v2.blend": "a75e86f584705d6bb1ce3e8eb4ed3ef1274d9e3c13baf67080c3cc1c01d8fdaa"
+  },
+  "meshes": [
+    {
+      "name": "SM_Replay_ForkliftBody",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\OrderReplay\\SM_Replay_ForkliftBody.fbx",
+      "slots": [
+        "M_MF_WorkerV3_Skin",
+        "DRV_FaceV3_MutedIvory",
+        "DRV_FaceV3_Brows",
+        "DRV_FaceV3_BrownIris",
+        "DRV_FaceV3_SoftCrease",
+        "DRV_FaceV3_Pupil",
+        "DRV_FaceV3_Lips",
+        "M_MF_WorkerV3_Helmet",
+        "M_MF_Dark",
+        "M_MF_WorkerV3_Cloth",
+        "M_MF_WorkerV3_Rubber",
+        "M_MF_WorkerV3_Navy",
+        "M_MF_WorkerV3_BadgeRed",
+        "M_MF_WorkerV3_BadgeWhite",
+        "DRV_FaceV3_SkinShade",
+        "M_MF_WorkerV3_Seam",
+        "M_MF_WorkerV3_Tape",
+        "M_MF_WorkerV3_TapeCore",
+        "M_MF_WorkerV3_Dark",
+        "M_MF_WorkerV3_Hair",
+        "M_MF_WorkerV3_Metal",
+        "M_MF_Amber",
+        "M_MF_Seat",
+        "M_MF_Frame",
+        "M_MF_Metal",
+        "M_MF_Glass",
+        "M_MF_LED",
+        "M_MF_Rubber",
+        "M_MF_Helmet",
+        "M_MF_Red",
+        "M_MF_Body",
+        "M_MF_Blue",
+        "M_MF_Reflective"
+      ],
+      "bounds_m": [
+        [
+          -1.25,
+          0.9113599061965942
+        ],
+        [
+          -0.6245500445365906,
+          0.6245500445365906
+        ],
+        [
+          0.0,
+          2.3370001316070557
+        ]
+      ],
+      "source_parts": 699,
+      "triangles": 48313,
+      "sha256": "8fe9adec2d7738f580c4800f320821ce16961cb4d868fbc3259c9b9741b89ad7"
+    },
+    {
+      "name": "SM_Replay_ForkliftCarriage",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\OrderReplay\\SM_Replay_ForkliftCarriage.fbx",
+      "slots": [
+        "M_MF_Frame",
+        "M_MF_Metal",
+        "M_MF_Blue"
+      ],
+      "bounds_m": [
+        [
+          0.8999999761581421,
+          2.198268413543701
+        ],
+        [
+          -0.48250001668930054,
+          0.48250001668930054
+        ],
+        [
+          0.0430000014603138,
+          1.277500033378601
+        ]
+      ],
+      "source_parts": 19,
+      "triangles": 1260,
+      "sha256": "a37e58508cfa41f4d20a8ccbe1a4752ac2d9c6344e860904a12010b770968909"
+    },
+    {
+      "name": "SM_Replay_ForkliftMast",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\OrderReplay\\SM_Replay_ForkliftMast.fbx",
+      "slots": [
+        "M_MF_Frame",
+        "M_MF_Metal"
+      ],
+      "bounds_m": [
+        [
+          0.7050000429153442,
+          0.8889999985694885
+        ],
+        [
+          -0.3024999797344208,
+          0.3024999797344208
+        ],
+        [
+          0.2549999952316284,
+          2.065000057220459
+        ]
+      ],
+      "source_parts": 4,
+      "triangles": 240,
+      "sha256": "c153adc4c289f1c8aea3d6cf821febbfb6f22717ce013a186f905a158fa18885"
+    },
+    {
+      "name": "SM_Replay_TruckBody",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\OrderReplay\\SM_Replay_TruckBody.fbx",
+      "slots": [
+        "M_VR_GHSV2Truck_Rubber",
+        "M_VR_GHSV2Truck_Accent",
+        "M_VR_GHSV2Truck_Trim",
+        "M_VR_GHSV2Truck_Body",
+        "M_VR_GHSV2Truck_Headlight",
+        "M_VR_GHSV2Truck_Glass",
+        "M_VR_GHSV2Truck_TailLight"
+      ],
+      "bounds_m": [
+        [
+          -0.19749999046325684,
+          14.705999374389648
+        ],
+        [
+          -1.5,
+          1.5
+        ],
+        [
+          -0.006500001531094313,
+          3.7350001335144043
+        ]
+      ],
+      "source_parts": 439,
+      "triangles": 42880,
+      "sha256": "a4c2c69961a026f2a5c5d08b87b578e813bc732448e3979bbf0a84c8952c5aba"
+    },
+    {
+      "name": "SM_Replay_TruckDoorLeft",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\OrderReplay\\SM_Replay_TruckDoorLeft.fbx",
+      "slots": [
+        "M_VR_GHSV2Truck_Body"
+      ],
+      "bounds_m": [
+        [
+          -0.012500000186264515,
+          0.042500000447034836
+        ],
+        [
+          -1.2200000286102295,
+          0.0
+        ],
+        [
+          1.1449999809265137,
+          3.615000009536743
+        ]
+      ],
+      "source_parts": 1,
+      "triangles": 12,
+      "sha256": "1c5d8c8d7f98d671635230c0db118bb4f9320bf50bfcc6f2dc09dd7de2539aa4"
+    },
+    {
+      "name": "SM_Replay_TruckDoorRight",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\OrderReplay\\SM_Replay_TruckDoorRight.fbx",
+      "slots": [
+        "M_VR_GHSV2Truck_Body"
+      ],
+      "bounds_m": [
+        [
+          -0.012500000186264515,
+          0.042500000447034836
+        ],
+        [
+          0.0,
+          1.2200000286102295
+        ],
+        [
+          1.1449999809265137,
+          3.615000009536743
+        ]
+      ],
+      "source_parts": 1,
+      "triangles": 12,
+      "sha256": "b5471cc154d5ee0ef7e54274a99da6584205d6126934aa0ffb6e4d7aa5dbe3b7"
+    },
+    {
+      "name": "SM_Replay_CargoLow",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\OrderReplay\\SM_Replay_CargoLow.fbx",
+      "slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.6000000238418579
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          0.6880155205726624
+        ]
+      ],
+      "source_parts": 67,
+      "triangles": 4800,
+      "sha256": "e71a033078cdaab5ae492e4401063a8636f6889a10df230ac5de9fc0c6e400a6"
+    },
+    {
+      "name": "SM_Replay_CargoMid",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\OrderReplay\\SM_Replay_CargoMid.fbx",
+      "slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.6000000238418579
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          0.9880155324935913
+        ]
+      ],
+      "source_parts": 77,
+      "triangles": 5820,
+      "sha256": "d6478a2eaaf9c48c0cc00e09f092866db26698a92928d12eacf64e3629a6ee55"
+    },
+    {
+      "name": "SM_Replay_CargoHigh",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\OrderReplay\\SM_Replay_CargoHigh.fbx",
+      "slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.6000000238418579
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.2880154848098755
+        ]
+      ],
+      "source_parts": 87,
+      "triangles": 6840,
+      "sha256": "b62321e611dac8b8d5941440b33c307a8640e21cf1268b8253c5adfc4daacb7e"
+    },
+    {
+      "name": "SM_Replay_DockDoorOpen",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\GHS\\OrderReplay\\SM_Replay_DockDoorOpen.fbx",
+      "slots": [
+        "M_VR_M_CADDock_Frame",
+        "M_VR_M_CADDock_Detail"
+      ],
+      "bounds_m": [
+        [
+          -1.5208250284194946,
+          1.5208250284194946
+        ],
+        [
+          -0.0938323587179184,
+          0.0938323587179184
+        ],
+        [
+          0.0,
+          4.199999809265137
+        ]
+      ],
+      "source_parts": 7,
+      "triangles": 756,
+      "sha256": "f0e80f615aef743227e7aa0ea624b529806e1bf9efb642fb910f79a8bd6f5d14"
+    }
+  ],
+  "materials": [
+    {
+      "name": "M_MF_WorkerV3_Skin",
+      "color": [
+        0.4699999988079071,
+        0.2849999964237213,
+        0.20000000298023224,
+        1.0
+      ],
+      "roughness": 0.6800000071525574,
+      "metallic": 0.0
+    },
+    {
+      "name": "DRV_FaceV3_MutedIvory",
+      "color": [
+        0.3100000023841858,
+        0.2849999964237213,
+        0.25,
+        1.0
+      ],
+      "roughness": 0.4300000071525574,
+      "metallic": 0.0
+    },
+    {
+      "name": "DRV_FaceV3_Brows",
+      "color": [
+        0.027000000700354576,
+        0.019999999552965164,
+        0.01600000075995922,
+        1.0
+      ],
+      "roughness": 0.8799999952316284,
+      "metallic": 0.0
+    },
+    {
+      "name": "DRV_FaceV3_BrownIris",
+      "color": [
+        0.054999999701976776,
+        0.035999998450279236,
+        0.019999999552965164,
+        1.0
+      ],
+      "roughness": 0.46000000834465027,
+      "metallic": 0.0
+    },
+    {
+      "name": "DRV_FaceV3_SoftCrease",
+      "color": [
+        0.2443999946117401,
+        0.14820000529289246,
+        0.10400000214576721,
+        1.0
+      ],
+      "roughness": 0.6600000262260437,
+      "metallic": 0.0
+    },
+    {
+      "name": "DRV_FaceV3_Pupil",
+      "color": [
+        0.009999999776482582,
+        0.00800000037997961,
+        0.006000000052154064,
+        1.0
+      ],
+      "roughness": 0.4000000059604645,
+      "metallic": 0.0
+    },
+    {
+      "name": "DRV_FaceV3_Lips",
+      "color": [
+        0.41499999165534973,
+        0.23749999701976776,
+        0.16875000298023224,
+        1.0
+      ],
+      "roughness": 0.6600000262260437,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_WorkerV3_Helmet",
+      "color": [
+        0.41999998688697815,
+        0.012000000104308128,
+        0.017999999225139618,
+        1.0
+      ],
+      "roughness": 0.5199999809265137,
+      "metallic": 0.019999999552965164
+    },
+    {
+      "name": "M_MF_Dark",
+      "color": [
+        0.024000000208616257,
+        0.03400000184774399,
+        0.04600000008940697,
+        1.0
+      ],
+      "roughness": 0.6499999761581421,
+      "metallic": 0.05000000074505806
+    },
+    {
+      "name": "M_MF_WorkerV3_Cloth",
+      "color": [
+        0.014000000432133675,
+        0.02500000037252903,
+        0.04500000178813934,
+        1.0
+      ],
+      "roughness": 0.8600000143051147,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_WorkerV3_Rubber",
+      "color": [
+        0.019999999552965164,
+        0.024000000208616257,
+        0.028999999165534973,
+        1.0
+      ],
+      "roughness": 0.8799999952316284,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_WorkerV3_Navy",
+      "color": [
+        0.013000000268220901,
+        0.02199999988079071,
+        0.04100000113248825,
+        1.0
+      ],
+      "roughness": 0.8799999952316284,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_WorkerV3_BadgeRed",
+      "color": [
+        0.30000001192092896,
+        0.029999999329447746,
+        0.03500000014901161,
+        1.0
+      ],
+      "roughness": 0.699999988079071,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_WorkerV3_BadgeWhite",
+      "color": [
+        0.5899999737739563,
+        0.6100000143051147,
+        0.6100000143051147,
+        1.0
+      ],
+      "roughness": 0.699999988079071,
+      "metallic": 0.0
+    },
+    {
+      "name": "DRV_FaceV3_SkinShade",
+      "color": [
+        0.37599998712539673,
+        0.2280000001192093,
+        0.1599999964237213,
+        1.0
+      ],
+      "roughness": 0.6600000262260437,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_WorkerV3_Seam",
+      "color": [
+        0.012000000104308128,
+        0.019999999552965164,
+        0.03500000014901161,
+        1.0
+      ],
+      "roughness": 0.8299999833106995,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_WorkerV3_Tape",
+      "color": [
+        0.7799999713897705,
+        0.6200000047683716,
+        0.02500000037252903,
+        1.0
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_WorkerV3_TapeCore",
+      "color": [
+        0.6399999856948853,
+        0.6200000047683716,
+        0.3400000035762787,
+        1.0
+      ],
+      "roughness": 0.47999998927116394,
+      "metallic": 0.05000000074505806
+    },
+    {
+      "name": "M_MF_WorkerV3_Dark",
+      "color": [
+        0.014000000432133675,
+        0.017999999225139618,
+        0.024000000208616257,
+        1.0
+      ],
+      "roughness": 0.7300000190734863,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_WorkerV3_Hair",
+      "color": [
+        0.020999999716877937,
+        0.01600000075995922,
+        0.014000000432133675,
+        1.0
+      ],
+      "roughness": 0.949999988079071,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_WorkerV3_Metal",
+      "color": [
+        0.11999999731779099,
+        0.15000000596046448,
+        0.1899999976158142,
+        1.0
+      ],
+      "roughness": 0.4300000071525574,
+      "metallic": 0.4000000059604645
+    },
+    {
+      "name": "M_MF_Amber",
+      "color": [
+        0.949999988079071,
+        0.30000001192092896,
+        0.017999999225139618,
+        1.0
+      ],
+      "roughness": 0.23999999463558197,
+      "metallic": 0.03999999910593033
+    },
+    {
+      "name": "M_MF_Seat",
+      "color": [
+        0.03500000014901161,
+        0.04600000008940697,
+        0.05700000002980232,
+        1.0
+      ],
+      "roughness": 0.8500000238418579,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_Frame",
+      "color": [
+        0.027000000700354576,
+        0.03500000014901161,
+        0.04500000178813934,
+        1.0
+      ],
+      "roughness": 0.4300000071525574,
+      "metallic": 0.44999998807907104
+    },
+    {
+      "name": "M_MF_Metal",
+      "color": [
+        0.20000000298023224,
+        0.24500000476837158,
+        0.28999999165534973,
+        1.0
+      ],
+      "roughness": 0.3700000047683716,
+      "metallic": 0.7200000286102295
+    },
+    {
+      "name": "M_MF_Glass",
+      "color": [
+        0.02500000037252903,
+        0.08500000089406967,
+        0.11999999731779099,
+        1.0
+      ],
+      "roughness": 0.2199999988079071,
+      "metallic": 0.27000001072883606
+    },
+    {
+      "name": "M_MF_LED",
+      "color": [
+        0.3400000035762787,
+        0.699999988079071,
+        0.8500000238418579,
+        1.0
+      ],
+      "roughness": 0.25,
+      "metallic": 0.05000000074505806
+    },
+    {
+      "name": "M_MF_Rubber",
+      "color": [
+        0.012000000104308128,
+        0.014000000432133675,
+        0.017000000923871994,
+        1.0
+      ],
+      "roughness": 0.8600000143051147,
+      "metallic": 0.0
+    },
+    {
+      "name": "M_MF_Helmet",
+      "color": [
+        0.949999988079071,
+        0.6000000238418579,
+        0.02500000037252903,
+        1.0
+      ],
+      "roughness": 0.3100000023841858,
+      "metallic": 0.019999999552965164
+    },
+    {
+      "name": "M_MF_Red",
+      "color": [
+        0.550000011920929,
+        0.02500000037252903,
+        0.014999999664723873,
+        1.0
+      ],
+      "roughness": 0.3199999928474426,
+      "metallic": 0.029999999329447746
+    },
+    {
+      "name": "M_MF_Body",
+      "color": [
+        0.5299999713897705,
+        0.5699999928474426,
+        0.6100000143051147,
+        1.0
+      ],
+      "roughness": 0.3799999952316284,
+      "metallic": 0.17000000178813934
+    },
+    {
+      "name": "M_MF_Blue",
+      "color": [
+        0.014999999664723873,
+        0.05999999865889549,
+        0.20999999344348907,
+        1.0
+      ],
+      "roughness": 0.36000001430511475,
+      "metallic": 0.27000001072883606
+    },
+    {
+      "name": "M_MF_Reflective",
+      "color": [
+        0.7300000190734863,
+        0.800000011920929,
+        0.7699999809265137,
+        1.0
+      ],
+      "roughness": 0.41999998688697815,
+      "metallic": 0.15000000596046448
+    },
+    {
+      "name": "M_VR_GHSV2Truck_Rubber",
+      "color": [
+        0.017999999225139618,
+        0.023000000044703484,
+        0.029999999329447746,
+        1.0
+      ],
+      "roughness": 0.8399999737739563,
+      "metallic": 0.029999999329447746
+    },
+    {
+      "name": "M_VR_GHSV2Truck_Accent",
+      "color": [
+        0.019999999552965164,
+        0.09000000357627869,
+        0.3400000035762787,
+        1.0
+      ],
+      "roughness": 0.47999998927116394,
+      "metallic": 0.029999999329447746
+    },
+    {
+      "name": "M_VR_GHSV2Truck_Trim",
+      "color": [
+        0.30000001192092896,
+        0.38999998569488525,
+        0.49000000953674316,
+        1.0
+      ],
+      "roughness": 0.47999998927116394,
+      "metallic": 0.25
+    },
+    {
+      "name": "M_VR_GHSV2Truck_Body",
+      "color": [
+        0.6000000238418579,
+        0.6499999761581421,
+        0.699999988079071,
+        1.0
+      ],
+      "roughness": 0.47999998927116394,
+      "metallic": 0.25
+    },
+    {
+      "name": "M_VR_GHSV2Truck_Headlight",
+      "color": [
+        0.6600000262260437,
+        0.8700000047683716,
+        0.9599999785423279,
+        1.0
+      ],
+      "roughness": 0.47999998927116394,
+      "metallic": 0.029999999329447746
+    },
+    {
+      "name": "M_VR_GHSV2Truck_Glass",
+      "color": [
+        0.02500000037252903,
+        0.06499999761581421,
+        0.09000000357627869,
+        1.0
+      ],
+      "roughness": 0.47999998927116394,
+      "metallic": 0.029999999329447746
+    },
+    {
+      "name": "M_VR_GHSV2Truck_TailLight",
+      "color": [
+        0.5,
+        0.03500000014901161,
+        0.017999999225139618,
+        1.0
+      ],
+      "roughness": 0.47999998927116394,
+      "metallic": 0.029999999329447746
+    },
+    {
+      "name": "M_VR_StoragePalletBlue",
+      "color": [
+        0.014999999664723873,
+        0.18000000715255737,
+        0.4399999976158142,
+        1.0
+      ],
+      "roughness": 0.4000000059604645,
+      "metallic": 0.2800000011920929
+    },
+    {
+      "name": "M_VR_StorageCargoBlue",
+      "color": [
+        0.18000000715255737,
+        0.28999999165534973,
+        0.46000000834465027,
+        1.0
+      ],
+      "roughness": 0.5799999833106995,
+      "metallic": 0.07999999821186066
+    },
+    {
+      "name": "M_VR_StorageCargoGrid",
+      "color": [
+        0.11999999731779099,
+        0.6399999856948853,
+        0.8399999737739563,
+        1.0
+      ],
+      "roughness": 0.41999998688697815,
+      "metallic": 0.11999999731779099
+    },
+    {
+      "name": "M_VR_M_CADDock_Frame",
+      "color": [
+        0.03999999910593033,
+        0.10000000149011612,
+        0.18000000715255737,
+        1.0
+      ],
+      "roughness": 0.550000011920929,
+      "metallic": 0.30000001192092896
+    },
+    {
+      "name": "M_VR_M_CADDock_Detail",
+      "color": [
+        0.07999999821186066,
+        0.30000001192092896,
+        0.4300000071525574,
+        1.0
+      ],
+      "roughness": 0.6000000238418579,
+      "metallic": 0.10000000149011612
+    }
+  ]
+}

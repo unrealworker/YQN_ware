@@ -1,6 +1,6 @@
 {
   "updated": "2026-10-23",
-  "status": "final_design_saved_and_verified",
+  "status": "saved_canvas_and_exports_verified",
   "source": "Saas.pen",
   "previewDirectory": "exports/current",
   "style": {
@@ -62,7 +62,7 @@
     },
     {
       "id": "iiFrY",
-      "name": "05 · 历史追溯 / 时间与事件联动",
+      "name": "05 · 订单追溯 / 全时段设备回放",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/iiFrY.png"
@@ -110,11 +110,25 @@
       "preview": "exports/current/F8Cox.png"
     },
     {
+      "id": "XhUtw",
+      "name": "17 · 库存明细 / 物料与货位详情",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/XhUtw.png"
+    },
+    {
       "id": "lvDfx",
       "name": "12 · 订单 / 今日出入库作业",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/lvDfx.png"
+    },
+    {
+      "id": "t4mlxm",
+      "name": "18 · 订单详情 / 拣货与设备联动",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/t4mlxm.png"
     },
     {
       "id": "zyWMm",
@@ -132,7 +146,7 @@
     },
     {
       "id": "OA1Bd",
-      "name": "15 · 追溯 / 物料批次与作业事件",
+      "name": "15 · 订单追溯 / 时段查询",
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/OA1Bd.png"
@@ -143,20 +157,6 @@
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/kvTdT.png"
-    },
-    {
-      "id": "XhUtw",
-      "name": "17 · 库存明细 / 物料与货位详情",
-      "width": 1920,
-      "height": 1080,
-      "preview": "exports/current/XhUtw.png"
-    },
-    {
-      "id": "t4mlxm",
-      "name": "18 · 订单详情 / 拣货与设备联动",
-      "width": 1920,
-      "height": 1080,
-      "preview": "exports/current/t4mlxm.png"
     },
     {
       "id": "qNsRa",
@@ -215,18 +215,18 @@
       "preview": "exports/current/ApVA8.png"
     },
     {
-      "id": "A5t3VD",
-      "name": "27 · 启动器 / 配置与异常状态",
-      "width": 1920,
-      "height": 1080,
-      "preview": "exports/current/A5t3VD.png"
-    },
-    {
       "id": "tWZ13",
       "name": "28 · 像素流访问 / 自动连接进度",
       "width": 1440,
       "height": 900,
       "preview": "exports/current/tWZ13.png"
+    },
+    {
+      "id": "A5t3VD",
+      "name": "27 · 启动器 / 配置与异常状态",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/A5t3VD.png"
     },
     {
       "id": "jCHwc",
@@ -243,107 +243,94 @@
       "preview": "exports/current/k2v5GZ.png"
     },
     {
+      "id": "M0wx5h",
+      "name": "33 · 主仓库 POI / 当前交互规范",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/M0wx5h.png"
+    },
+    {
       "id": "cgOha",
       "name": "31 · 园区默认 / 唯一主仓库 POI",
       "width": 1920,
       "height": 1080,
-      "preview": "exports/current/cgOha.png",
-      "status": "approved_for_implementation"
+      "preview": "exports/current/cgOha.png"
     },
     {
       "id": "q2RKW8",
       "name": "32 · 点击开顶 / 0.5 秒溶解流程",
       "width": 1920,
       "height": 1080,
-      "preview": "exports/current/q2RKW8.png",
-      "status": "approved_for_implementation"
-    },
-    {
-      "id": "M0wx5h",
-      "name": "33 · 主仓库 POI / 当前交互规范",
-      "width": 1920,
-      "height": 1080,
-      "preview": "exports/current/M0wx5h.png",
-      "status": "approved_for_implementation"
+      "preview": "exports/current/q2RKW8.png"
     },
     {
       "id": "mG0YD",
       "name": "34 · 场景设置 / 即时控制与库容状态",
       "width": 1920,
       "height": 1200,
-      "preview": "exports/current/mG0YD.png",
-      "status": "approved_canvas_and_export_pending_source_save"
+      "preview": "exports/current/mG0YD.png"
     },
     {
       "id": "uR0QK",
       "name": "35 · 像素流后台 / 运行中",
-      "status": "design_only_not_implemented",
-      "height": 1080,
       "width": 1440,
+      "height": 1080,
       "preview": "exports/current/uR0QK.png"
     },
     {
       "id": "ieg9r",
       "name": "36 · 像素流后台 / 已停止",
-      "status": "design_only_not_implemented",
-      "height": 1080,
       "width": 1440,
+      "height": 1080,
       "preview": "exports/current/ieg9r.png"
     },
     {
       "id": "D6HC9",
       "name": "37 · 像素流后台 / 结束用户连接",
-      "status": "design_only_not_implemented",
-      "height": 1080,
       "width": 1440,
+      "height": 1080,
       "preview": "exports/current/D6HC9.png"
     },
     {
       "id": "Jsit1",
       "name": "38 · 像素流后台 / 停止服务确认",
-      "status": "design_only_not_implemented",
-      "height": 1080,
       "width": 1440,
+      "height": 1080,
       "preview": "exports/current/Jsit1.png"
     },
     {
       "id": "i8fzG",
       "name": "39 · 像素流后台 / 状态与参数反馈",
-      "status": "design_only_not_implemented",
-      "height": 1320,
       "width": 1920,
+      "height": 1320,
       "preview": "exports/current/i8fzG.png"
     },
     {
       "id": "tYSnE",
       "name": "40 · 像素流访问 / 管理员结束连接",
-      "status": "design_only_not_implemented",
-      "height": 900,
       "width": 1440,
+      "height": 900,
       "preview": "exports/current/tYSnE.png"
     },
     {
       "id": "aIei1",
       "name": "41 · 像素流访问 / 服务已暂停",
-      "status": "design_only_not_implemented",
-      "height": 900,
       "width": 1440,
+      "height": 900,
       "preview": "exports/current/aIei1.png"
     },
     {
       "id": "jRpYB",
       "name": "42 · 像素流后台 / 管理员登录",
-      "status": "design_only_not_implemented",
-      "height": 900,
       "width": 1440,
+      "height": 900,
       "preview": "exports/current/jRpYB.png"
     },
     {
       "id": "F554L",
       "name": "43 · 像素流后台 / 登录失败",
-      "status": "design_only_not_implemented",
-      "height": 900,
       "width": 1440,
+      "height": 900,
       "preview": "exports/current/F554L.png"
     },
     {
@@ -352,6 +339,69 @@
       "width": 1920,
       "height": 1080,
       "preview": "exports/current/OiC8B.png"
+    },
+    {
+      "id": "sNQHB",
+      "name": "45 · 订单追溯 / 4 个测试订单",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/sNQHB.png"
+    },
+    {
+      "id": "oRKJZ",
+      "name": "46 · 订单追溯 / 最短 1 小时校验",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/oRKJZ.png"
+    },
+    {
+      "id": "dJZrJ",
+      "name": "47 · 订单追溯 / 暂停与设备跟随",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/dJZrJ.png"
+    },
+    {
+      "id": "Aqeif",
+      "name": "48 · 订单追溯 / 关键事件定位暂停",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/Aqeif.png"
+    },
+    {
+      "id": "vNXAk",
+      "name": "49 · 订单追溯 / 区间播放完成",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/vNXAk.png"
+    },
+    {
+      "id": "QFsnb",
+      "name": "50 · 订单追溯 / 跨页停止确认",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/QFsnb.png"
+    },
+    {
+      "id": "IeQ6D",
+      "name": "51 · 订单追溯 / 手动结束并恢复场景",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/IeQ6D.png"
+    },
+    {
+      "id": "G0MuIS",
+      "name": "52 · 订单追溯 / 查询与恢复边界",
+      "width": 1920,
+      "height": 1080,
+      "preview": "exports/current/G0MuIS.png"
+    },
+    {
+      "id": "UTzjR",
+      "name": "53 · 订单追溯 / 1440 设备与时间轴",
+      "width": 1440,
+      "height": 900,
+      "preview": "exports/current/UTzjR.png"
     }
   ],
   "approvedScope": "00-34 approved; four immediate scene layers and visual capacity controls added; verified inventory and forklift ledger preserved; unverified business fields retain original design and visible 数据未核验 labels; address/local clock and main warehouse POI preserved; scene-control source save pending parent confirmation",
@@ -935,6 +985,54 @@
       "diskMetadataRechecked": true,
       "canvasMutationAfterSave": false,
       "scope": "all_45_artboards_42_components_56_scene_image_nodes_and_final_authorized_details"
+    }
+  },
+  "orderReplay": {
+    "approved": true,
+    "approval": "用户已批准追溯功能替换设计并开发功能",
+    "status": "saved_canvas_and_exports_verified",
+    "sourceSaved": true,
+    "spec": "order-replay-design.md",
+    "verification": "order-replay-verification.json",
+    "navigation": "order-replay-navigation.json",
+    "canvasAudit": "order-replay-canvas-audit.json",
+    "boardCount": 54,
+    "componentCount": 47,
+    "boards": [
+      "OA1Bd",
+      "iiFrY",
+      "sNQHB",
+      "oRKJZ",
+      "dJZrJ",
+      "Aqeif",
+      "vNXAk",
+      "QFsnb",
+      "IeQ6D",
+      "G0MuIS",
+      "UTzjR"
+    ],
+    "components": {
+      "query": "Z1BxY",
+      "devices": "OsnX0",
+      "timeline": "f1klDQ",
+      "results": "n23H5",
+      "events": "yKCFc",
+      "exit": "UWu6c"
+    },
+    "sourceImages": [
+      "images/latest-scene-20261023/campus-closed.png",
+      "images/latest-scene-20261023/interior-overview.png"
+    ],
+    "stateDesignOnly": true,
+    "ueImplementation": "owned_by_root_separate_runtime_acceptance",
+    "sourceSaveEvidence": {
+      "sourceFile": "Saas.pen",
+      "sourceSaved": true,
+      "method": "native_ctrl_s_by_root_agent_and_disk_metadata",
+      "bytes": 1971198,
+      "lastWriteTimeUtc": "2026-10-23T11:05:20.242Z",
+      "sha256": "13576D3C702A8867E7415FB9CD6FE4BD0189192E66EDF881B7E883C0E0FE7EFA",
+      "canvasMutationAfterSave": false
     }
   }
 }

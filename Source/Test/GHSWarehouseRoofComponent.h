@@ -64,6 +64,15 @@ private:
     float ActiveDuration=ManualOpenDuration;
 };
 
+/** Runtime visibility overrides belong to the saved scene, separately from roof phase. */
+struct FGHSWarehouseRoofReplayState
+{
+    struct FShellVisibility { TWeakObjectPtr<AActor> Actor; bool Hidden=false,OriginalHidden=false; };
+    FGHSWarehouseRoofTransition Transition;
+    TArray<FShellVisibility> Shells;
+    bool HasRoofVisibility=false,RoofHidden=false,MeshVisible=true,MeshHidden=false,TickEnabled=false;
+};
+
 /** The architecture roof has no equipment identity and never changes its saved asset. */
 UCLASS(ClassGroup=(GHS), meta=(BlueprintSpawnableComponent))
 class TEST_API UGHSWarehouseRoofComponent : public UActorComponent
@@ -104,6 +113,8 @@ public:
     bool HitRoofRay(const FVector& Origin,const FVector& Direction) const;
     /** Called at BeginPlay; also supports headless world fixtures. */
     void InitializeRoof();
+    FGHSWarehouseRoofReplayState CaptureReplayState();
+    void RestoreReplayState(const FGHSWarehouseRoofReplayState& Saved,bool bSavedBuilding);
     static bool RayHitsRoofFootprint(const FVector& Origin,const FVector& Direction,const FTransform& RoofTransform);
 
 protected:

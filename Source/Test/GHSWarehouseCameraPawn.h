@@ -4,6 +4,16 @@
 #include "UniversalCamera.h"
 #include "GHSWarehouseCameraPawn.generated.h"
 
+struct FGHSCameraReplayPose
+{
+    FVector Pivot,SocketOffset,TargetOffset,FocusTarget,FramingRatio;
+    FRotator Rotation;
+    float Distance=0;
+    bool ObjectPivot=false,UseFraming=false,OverviewFraming=false;
+    bool GroundPanRecovery=false;
+    FVector RecoveryMinimum=FVector::ZeroVector,RecoveryMaximum=FVector::ZeroVector;
+};
+
 /** Ground navigation plus explicit object-centered camera flights for the twin HUD. */
 UCLASS(Blueprintable)
 class TEST_API AGHSWarehouseCameraPawn : public AUniversalCamera
@@ -80,6 +90,9 @@ public:
     bool UsesObjectPivot() const { return bObjectPivot; }
     UFUNCTION(BlueprintPure, Category="Warehouse Camera|Focus")
     FVector GetFocusTarget() const { return FocusTarget; }
+    FGHSCameraReplayPose CaptureReplayPose() const;
+    void RestoreReplayPose(const FGHSCameraReplayPose& Pose);
+    void FollowReplayTarget(FVector Location, float DeltaSeconds, FRotator ViewRotation);
 
 protected:
     virtual void BeginPlay() override;

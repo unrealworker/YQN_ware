@@ -1,0 +1,114 @@
+{
+  "success": true,
+  "carsRemoved": 157,
+  "replacementMeshes": 5,
+  "hideOnlyRoles": [
+    "Rubber",
+    "VehicleLights"
+  ],
+  "files": [
+    {
+      "file": "Scripts/ghs/build_order_replay_parking.py",
+      "bytes": 10717,
+      "sha256": "a8411e7d776b62533eff349e0753d54aeaf6af9dc3bef73ab38f2aee778d2dee"
+    },
+    {
+      "file": "Scripts/ghs/import_order_replay_parking.py",
+      "bytes": 8301,
+      "sha256": "d0300f8592ab4e431343a42d9776b774cf12c6517a7a5d2a2c2640f04d4ae29e"
+    },
+    {
+      "file": "SourceAssets/GHS/OrderReplayParking/README.md",
+      "bytes": 3667,
+      "sha256": "cf9413e0796ad846d68b1c278a40918021722982227858604f47f7ac41f3b5ca"
+    },
+    {
+      "file": "SourceAssets/GHS/OrderReplayParking/manifest.json",
+      "bytes": 79620,
+      "sha256": "45d078e7a85d4729ae6cc453b05c5e3bf359c10683874f0096bd0907ee6592b5"
+    },
+    {
+      "file": "SourceAssets/GHS/OrderReplayParking/exact-match-probe.json",
+      "bytes": 369,
+      "sha256": "c63ca85a2290b4d5012188a847d6fcf352375ca15256ed62d143ffcc002364f3"
+    },
+    {
+      "file": "SourceAssets/GHS/OrderReplayParking/ue-import-verification.json",
+      "bytes": 10218,
+      "sha256": "34ad9722348ebbd546ea4c3af0679976a491b6336457b19beee4e5c141c02ddb"
+    },
+    {
+      "file": "SourceAssets/GHS/OrderReplayParking/GHS_OrderReplay_NoParkingCars.blend",
+      "bytes": 1186317,
+      "sha256": "cf59317f4c32328fa9de1f6a4f12d311bbcba955d2fc66e0e9838eb4459ddb5a"
+    },
+    {
+      "file": "SourceAssets/GHS/OrderReplayParking/SM_ReplayNoCars_Buildings.fbx",
+      "bytes": 468748,
+      "sha256": "9a490309fddb86c0bdf5a9a7f067ec9069d258760295745e75c74b4eddfd22b3"
+    },
+    {
+      "file": "SourceAssets/GHS/OrderReplayParking/SM_ReplayNoCars_Blue.fbx",
+      "bytes": 18444,
+      "sha256": "d8b8bfd61f1f477ade366c06e7a151dd0f07107eb7506e53df126489d55f9a8d"
+    },
+    {
+      "file": "SourceAssets/GHS/OrderReplayParking/SM_ReplayNoCars_Detail.fbx",
+      "bytes": 117468,
+      "sha256": "3e929799b2178b8b4c872434bea3408030f74b84b33f62a117d7b02c74a87a54"
+    },
+    {
+      "file": "SourceAssets/GHS/OrderReplayParking/SM_ReplayNoCars_Solar.fbx",
+      "bytes": 167660,
+      "sha256": "321b4c091017b2fa2075e8e97525df8ea897e3784b67ad4a33c2598eac5c4eb7"
+    },
+    {
+      "file": "SourceAssets/GHS/OrderReplayParking/SM_ReplayNoCars_Markings.fbx",
+      "bytes": 290140,
+      "sha256": "963fac1f06009d79475459c47adc0bed4fcd029a0a03fa6b4556e621ae1ec66b"
+    },
+    {
+      "file": "Content/GHSOrderReplay/Parking/SM_ReplayNoCars_Buildings.uasset",
+      "bytes": 427277,
+      "sha256": "ca06d3374f61964277daff9932cf0f01cbbff40b3d501aa2bacd19f19f2b712a"
+    },
+    {
+      "file": "Content/GHSOrderReplay/Parking/SM_ReplayNoCars_Blue.uasset",
+      "bytes": 18978,
+      "sha256": "bf03c0b06f2933b5bb0977cdadfa4292a3f9413bcdaa4343fc14a88c9237ea83"
+    },
+    {
+      "file": "Content/GHSOrderReplay/Parking/SM_ReplayNoCars_Detail.uasset",
+      "bytes": 98799,
+      "sha256": "604a8cb6967872a6c7bf36a24a397f5b2e6771b7f9c436ad463b72f640214cb5"
+    },
+    {
+      "file": "Content/GHSOrderReplay/Parking/SM_ReplayNoCars_Solar.uasset",
+      "bytes": 134414,
+      "sha256": "99e23e5447ae53d0ad3669ed03d2751aac56aa2b7c97111e96cb23a629df9cbf"
+    },
+    {
+      "file": "Content/GHSOrderReplay/Parking/SM_ReplayNoCars_Markings.uasset",
+      "bytes": 222534,
+      "sha256": "c7b14751026413139d4a162610f376375e4da9b84363383293f6b59625e1257a"
+    },
+    {
+      "file": "Content/GHSTwinUI/data/order-replay-parking.json",
+      "bytes": 1022,
+      "sha256": "4b59d3b1b5434997ffd3b3c66ca05f7db6bdb276697e78ccdbb600b5e6ca3b9c"
+    }
+  ],
+  "excluded": [
+    "*.blend1",
+    "Saved bridge requests/status",
+    "original Park source/assets/map"
+  ],
+  "validation": {
+    "exactFloat32PolygonMatching": true,
+    "preservedNonVehicleFaceHashes": true,
+    "ueMaterialSlotsIdentical": true,
+    "sceneUnchanged": true,
+    "dirtyMapsUnchanged": true
+  },
+  "self": "SourceAssets/GHS/OrderReplayParking/delivery-files.json"
+}

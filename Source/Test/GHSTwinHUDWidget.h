@@ -16,6 +16,8 @@ class UCanvasPanelSlot;
 class SGHSTwinEditableText;
 class UGHSTwinHUDWidget;
 class UGHSWarehouseRoofComponent;
+class UGHSOrderReplaySession;
+class FJsonObject;
 
 /** Native IME context remains owned by Slate; composition is never queried prematurely. */
 UCLASS()
@@ -77,6 +79,8 @@ class TEST_API UGHSTwinBrowser : public UWidget
 {
     GENERATED_BODY()
 public:
+    FString Document=TEXT("index.html");
+    bool bTransparent=false;
     void Bind(UObject* Target);
     void Evaluate(const FString& Script);
     virtual void ReleaseSlateResources(bool bReleaseChildren) override;
@@ -94,6 +98,7 @@ public:
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void Command(const FString& Json);
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetSnapshot() const;
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetSceneControlsState() const;
+    UFUNCTION(BlueprintPure, Category="Warehouse Replay") FString GetReplayState() const;
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void EvaluateDiagnostics(const FString& Script);
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool SelectObject(const FString& Id, bool bFocus = true);
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void ClearSelection();
@@ -136,6 +141,18 @@ protected:
     virtual int32 NativePaint(const FPaintArgs&, const FGeometry&, const FSlateRect&, FSlateWindowElementList&, int32, const FWidgetStyle&, bool) const override;
 private:
     void PushSceneControls(const FString& Notice=TEXT(""),bool bForce=false);
+    UGHSOrderReplaySession* ReplaySession() const;
+    bool GuardReplayOperation(const FString& Json,const FString& Title=TEXT(""));
+    bool HandleReplayCommand(const FString& Action,const TSharedPtr<FJsonObject>& Object);
+    void PushReplayState();
+    void ReplayOverview();
+    bool IsReplayActive() const;
+    double NextReplayPush=0;
+    bool bReplayOverlayReady=false;
+    FVector2D LastReplayViewport=FVector2D::ZeroVector;
+    FString PreReplaySelectedId,PreReplayRegionId;
+    UPROPERTY(Transient) TObjectPtr<UGHSTwinBrowser> ReplayOverlay;
+    UPROPERTY(Transient) TObjectPtr<UCanvasPanelSlot> ReplayOverlaySlot;
     void ApplySceneLayers();
     bool RevealForNavigation(const FString& Id);
     FString LastSceneControls;

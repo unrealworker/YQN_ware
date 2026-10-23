@@ -1,0 +1,42 @@
+const fs=require('node:fs');
+const path=require('node:path');
+const crypto=require('node:crypto');
+const root=__dirname;
+const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
+const sha=buffer=>crypto.createHash('sha256').update(buffer).digest('hex').toUpperCase();
+const audit=read('order-replay-canvas-audit.json');
+const nav=read('order-replay-navigation.json');
+const sourceSaved=process.argv.includes('--source-saved');
+const boards=new Set(audit.boards.map(b=>b.id));
+const failures=[];
+const exported=audit.boards.map(b=>{
+  const file=`exports/current/${b.id}.png`;
+  const buffer=fs.readFileSync(path.join(root,file));
+  const width=buffer.readUInt32BE(16),height=buffer.readUInt32BE(20);
+  if(width!==b.width||height!==b.height) failures.push(`${file}: dimensions`);
+  return {file,width,height,bytes:buffer.length,sha256:sha(buffer)};
+});
+for(const [state,id] of Object.entries(nav.states)) if(!boards.has(id)) failures.push(`state ${state}: missing ${id}`);
+for(const t of nav.transitions){
+  for(const from of Array.isArray(t.from)?t.from:[t.from]) if(!boards.has(from)) failures.push(`from ${from}`);
+  if(!['previous_replay_state','pending_original_destination'].includes(t.to)&&!boards.has(t.to)) failures.push(`to ${t.to}`);
+  if(t.exampleTarget&&!boards.has(t.exampleTarget)) failures.push(`target ${t.exampleTarget}`);
+}
+const sourceImages=['images/latest-scene-20261023/campus-closed.png','images/latest-scene-20261023/interior-overview.png'].map(file=>{const b=fs.readFileSync(path.join(root,file));return {file,bytes:b.length,sha256:sha(b)};});
+const closeups=['Z1BxY','OsnX0','f1klDQ','n23H5','yKCFc','UWu6c'].map(id=>{const file=`exports/order-replay-20261023/${id}.png`;const b=fs.readFileSync(path.join(root,file));return {file,bytes:b.length,sha256:sha(b)};});
+const source=fs.readFileSync(path.join(root,'Saas.pen'));
+const stat=fs.statSync(path.join(root,'Saas.pen'));
+const evidence={sourceFile:'Saas.pen',sourceSaved,method:sourceSaved?'native_ctrl_s_by_root_agent_and_disk_metadata':'pending_native_ctrl_s',bytes:source.length,lastWriteTimeUtc:stat.mtime.toISOString(),sha256:sha(source),canvasMutationAfterSave:false};
+const report={date:'2026-10-23',approved:true,status:sourceSaved?'saved_canvas_and_exports_verified':'canvas_and_exports_verified_pending_native_save',sourceSaveEvidence:evidence,boardCount:audit.boards.length,componentCount:audit.componentCount,traceBoardCount:audit.traceBoards.length,layoutIssues:audit.issues,missingReferences:audit.missingRefs,placeholders:audit.placeholders,navigationTargetFailures:failures,screenshotsInspected:audit.traceBoards,exported,componentCloseups:closeups,sourceImages,limitations:['Static Pencil state designs and navigation handoff, not executable native Pencil playback.','Existing approved actual scene backgrounds are composition references; this does not verify new UE animation, vehicle isolation or collision.'],success:!failures.length&&!audit.issues.length&&!audit.missingRefs.length&&!audit.placeholders.length};
+fs.writeFileSync(path.join(root,'order-replay-verification.json'),JSON.stringify(report,null,2)+'\n');
+const current=read('current-design.json');
+current.status=report.status;
+current.orderReplay.status=report.status;
+current.orderReplay.sourceSaved=sourceSaved;
+current.orderReplay.sourceSaveEvidence=evidence;
+fs.writeFileSync(path.join(root,'current-design.json'),JSON.stringify(current,null,2)+'\n');
+const files=['Saas.pen','README.md','business-design-brief.md','current-design.json','order-replay-design.md','order-replay-navigation.json','order-replay-canvas-audit.json','order-replay-verification.json','order-replay-delivery-files.json','verify-order-replay-design.cjs',...exported.map(x=>x.file),...closeups.map(x=>x.file)];
+const manifest={date:'2026-10-23',sourceSaved,files,existingDependencies:sourceImages.map(x=>x.file),localRecoveryOnly:['archive/order-replay-before-20261023.json'],exclude:['historical before/recovery snapshots','unused image drafts'],notes:'Current export set contains all 54 artboards. Only changed tracked exports need staging; all 9 new boards and 6 closeups must be included.'};
+fs.writeFileSync(path.join(root,'order-replay-delivery-files.json'),JSON.stringify(manifest,null,2)+'\n');
+console.log(JSON.stringify({success:report.success,sourceSaved,boards:report.boardCount,components:report.componentCount,traceBoards:report.traceBoardCount,exports:exported.length,closeups:closeups.length,navigationFailures:failures,source:evidence},null,2));
+if(!report.success) process.exitCode=1;

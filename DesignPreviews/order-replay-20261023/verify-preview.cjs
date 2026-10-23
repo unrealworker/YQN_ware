@@ -1,0 +1,50 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const crypto = require('node:crypto');
+const source = fs.readFileSync(path.join(__dirname, 'prototype.js'), 'utf8');
+const names = ['warehouseDateTime','readRange','waveIndex','waveTime','forkState','pointOnRoute','truckState','waveEvents','seek','finishScrub','restartReplay'];
+const functions = names.map(name => {
+  const start = source.indexOf('  function '+name+'(');
+  const end = source.indexOf('\n  function ', start + 5);
+  if(start < 0) throw Error('Missing state function: '+name);
+  return source.slice(start, end < 0 ? undefined : end);
+}).join('\n');
+const sandbox = {Intl,Date,Math,Number,String};
+vm.createContext(sandbox);
+vm.runInContext(`const TZ='America/Los_Angeles',WAVE=720,forkOffsets=[0,105,35,70,175],forkLanes=[650,700,750,800,850],sourceY=[176,266,356,446,536],dockY=[208,383,558],destinations=[0,0,1,2,2],capacities=[2,1,2];const state={duration:7200,time:0};let scrubPlayback=null;function renderPlayback(){}function renderEvents(){}const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));const pad=n=>String(n).padStart(2,'0');const formatParts=new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});const inputs={},attributes={};const $=id=>({value:inputs[id],dataset:attributes[id]||{}});${functions}\nthis.api={state,inputs,attributes,warehouseDateTime,readRange,forkState,truckState,waveEvents,seek,finishScrub,restartReplay,setScrub:value=>{scrubPlayback=value}};`, sandbox);
+const a = sandbox.api, checks = [];
+const check = (name, condition) => {checks.push({name,pass:!!condition});if(!condition)throw Error(name);};
+a.inputs['start-time']='2026-10-22T08:00';a.inputs['end-time']='2026-10-22T08:59';
+check('Less than one hour rejected',!!a.readRange().error);
+a.inputs['end-time']='2026-10-22T09:00';
+check('Exactly one hour accepted',a.readRange().duration===3600);
+check('Los Angeles daylight offset correct',a.warehouseDateTime('2026-10-22T08:00').epoch===Date.parse('2026-10-22T15:00:00Z'));
+check('Spring DST nonexistent hour rejected',a.warehouseDateTime('2026-03-08T02:30')===null);
+check('Fall duplicate hour resolves explicitly',a.warehouseDateTime('2026-11-01T01:30').ambiguous===true);
+a.inputs['start-time']='2026-11-01T01:30';a.inputs['end-time']='2026-11-01T01:30';a.attributes['end-time']={resolvedValue:'2026-11-01T01:30',resolvedEpoch:String(Date.parse('2026-11-01T09:30:00Z'))};
+check('One-hour shortcut preserves duration across fall clock repeat',a.readRange().duration===3600);
+const p1=a.forkState(2,310),p2=a.forkState(2,354.99),p3=a.forkState(2,355);
+check('Forklift 03 holds same position through 45-second fault',p1.isFault&&p2.isFault&&!p3.isFault&&Math.hypot(p1.position.x-p2.position.x,p1.position.y-p2.position.y)<.001&&Math.hypot(p1.position.x-p3.position.x,p1.position.y-p3.position.y)<.001);
+let exclusive=true;
+for(let t=0;t<=719;t++)for(let i=0;i<5;i++){const f=a.forkState(i,t);if(Number(f.upperAtSource)+Number(f.loaded)+Number(f.delivered)!==1)exclusive=false;}
+check('Upper pallet has one transfer owner at every second',exclusive);
+for(let i=0;i<5;i++){const drop=350+[0,105,35,70,175][i]+(i===2?45:0);check('Forklift '+(i+1)+' clears forks at delivery',a.forkState(i,drop-.01).loaded&&!a.forkState(i,drop).loaded&&a.forkState(i,drop).delivered);}
+for(let i=0;i<3;i++){const departed=a.truckState(i,a.truckState(i,0).departAt+66),incoming=a.truckState(i,650),parked=a.truckState(i,700);check('Truck '+(i+1)+' departs and empty replacement enters',!departed.visible&&incoming.visible&&incoming.load===0&&parked.stage==='空车就位');}
+check('Each full wave has 15 key events',a.waveEvents(0).length===15);
+a.state.duration=3600;
+check('No events exceed selected interval',a.waveEvents(4).every(e=>e.time<=3600)&&a.waveEvents(5).length===0);
+check('Forklift position stays continuous across wave boundary',[0,1,2,3,4].every(i=>{const p=a.forkState(i,719.999).position,q=a.forkState(i,720).position;return Math.hypot(p.x-q.x,p.y-q.y)<.01;}));
+Object.assign(a.state,{active:true,playing:true,time:100,completed:false,exit:null});
+a.seek(130,null,true);check('Thirty-second seek preserves playing state',a.state.playing&&a.state.time===130);
+a.state.playing=false;a.seek(160,null,true);check('Thirty-second seek preserves paused state',!a.state.playing&&a.state.time===160);
+a.state.playing=true;a.seek(200);check('Event seek always pauses',!a.state.playing);
+a.setScrub(true);a.seek(250);a.finishScrub();check('Slider release resumes previously playing state',a.state.playing&&a.state.time===250);
+a.setScrub(false);a.seek(300);a.finishScrub();check('Slider release preserves previously paused state',!a.state.playing);
+a.setScrub(true);a.seek(a.state.duration);a.finishScrub();check('Slider release at endpoint remains completed and paused',a.state.completed&&!a.state.playing);
+Object.assign(a.state,{order:'TEST-OUT-004',start:123456,end:987654});a.restartReplay();check('Explicit restart keeps order and interval and plays from zero',a.state.time===0&&a.state.playing&&!a.state.completed&&a.state.order==='TEST-OUT-004'&&a.state.start===123456&&a.state.end===987654);
+const sha256 = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
+const assets=['campus-closed','interior-overview'].map(name=>{const file='assets/'+name+'.png',b=fs.readFileSync(path.join(__dirname,file));return{file,bytes:b.length,sha256:sha256(b)};});
+const result={scope:'Pure playback-state invariants; browser visual and interaction verification is separate',sourceSha256:sha256(source),checks,passed:checks.length,failed:0,assets};
+fs.writeFileSync(path.join(__dirname,'state-verification.json'),JSON.stringify(result,null,2)+'\n');
+console.log(`${checks.length} state checks passed; 0 failed`);

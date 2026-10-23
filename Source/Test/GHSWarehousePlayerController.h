@@ -10,6 +10,7 @@ class UPixelStreamingInput;
 class UGHSWarehouseRoofComponent;
 class AGHSCampusTrafficActor;
 class UGHSStorageCapacityComponent;
+class UGHSOrderReplaySession;
 
 UENUM(BlueprintType)
 enum class EGHSWarehouseDragMode : uint8 { None, Orbit, Pan };
@@ -45,6 +46,8 @@ public:
     TObjectPtr<UGHSStorageCapacityComponent> StorageCapacity;
     UPROPERTY(BlueprintReadOnly, Transient, Category="Warehouse Twin")
     TObjectPtr<AGHSCampusTrafficActor> CampusTraffic;
+    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Warehouse Replay")
+    TObjectPtr<UGHSOrderReplaySession> OrderReplay;
     void SendSearchResponse(const FString& Json);
 protected:
     virtual void BeginPlay() override;

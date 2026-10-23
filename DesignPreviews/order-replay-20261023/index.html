@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>GHS · 订单场景回放 · 交互设计预览</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="m3 9 9-6 9 6v12H3Z M8 21V11h8v10 M9 14h6 M9 17h6"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m3 7 9-4 9 4v10l-9 4-9-4Z m0 0 9 4 9-4 M12 11v10 M7 5l10 4"/></symbol>
+    <symbol id="i-order" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6 M9 11h6 M9 15h3"/></symbol>
+    <symbol id="i-device" viewBox="0 0 24 24"><rect x="4" y="8" width="11" height="10" rx="2"/><path d="M8 8V4h7v14h6 M19 6v12 M7 21v-3 M13 21v-3"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9 M10 21h4"/></symbol>
+    <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2 7 M3 4v7h7 M12 7v6l4 2"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m3 7 9-4 9 4-9 4Z M3 12l9 4 9-4 M3 17l9 4 9-4"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16 m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14 M16 5v14"/></symbol>
+    <symbol id="i-focus" viewBox="0 0 24 24"><path d="M9 3H3v6 M15 3h6v6 M3 15v6h6 M21 15v6h-6"/><circle cx="12" cy="12" r="4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6 M12 7v.1"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12 M18 6 6 18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 5h11v12H3Z M14 9h4l3 4v4h-7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
+  </defs></svg>
+  <div class="prototype-bar"><span><i></i><strong>订单回放 · 交互设计预览</strong><small>路线及动作示意，非 UE 运行效果</small></span><div class="view-switch" role="group" aria-label="设计预览展示方式"><button data-view="real" class="active">实际场景底图</button><button data-view="diagram">作业演示示意</button></div></div>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><strong>GHS 仓储数字孪生</strong><span class="brand-context">三维运营中心</span></div>
+    <div class="header-address"><span>17335 Glen Helen Pkwy</span><small>San Bernardino, CA 92407 美国</small></div>
+    <div class="header-right"><div class="local-clock"><span>仓库当地时间</span><strong id="warehouse-clock">--:--:--</strong><small id="warehouse-date"></small></div></div>
+  </header>
+  <main class="workspace">
+    <section class="scene" id="scene" aria-label="仓库场景预览">
+      <div class="scene-photo" id="scene-photo"></div>
+      <div class="scene-tools"><button class="warehouse-selector" id="warehouse-button"><span class="warehouse-icon"><svg class="icon"><use href="#i-building"/></svg></span><span><strong>GHS</strong><small id="area-label">园区总览</small></span><svg class="icon chevron"><use href="#i-down"/></svg></button><div class="scene-search"><svg class="icon"><use href="#i-search"/></svg><span>搜索设备、物料或位置</span><kbd>Ctrl K</kbd></div></div>
+      <button class="warehouse-poi" id="warehouse-poi"><svg class="icon"><use href="#i-building"/></svg><span><strong>GHS · 主仓库</strong><small>点击查看</small></span><svg class="icon"><use href="#i-arrow"/></svg><i></i></button>
+      <div class="replay-scene-bar hidden" id="replay-scene-bar"><div class="replay-tag"><span class="live-dot"></span><strong id="scene-state-label">场景回放</strong><span class="test-badge">测试回放</span></div></div>
+      <div class="diagram-wrap hidden" id="diagram-wrap"><div class="diagram-caption"><span>作业演示示意</span><small>路线、动作及设备均为测试示意，非实际运行记录</small></div><svg id="operation-map" viewBox="0 0 1200 760" role="img" aria-label="5台人工叉车与3台装卸车的测试作业示意"></svg><div class="replenishment-placeholder hidden" id="replenishment-placeholder"><span>后续补给流程 · 示意占位</span><strong>补给车进入 → 叉车回补来源堆 → 空车就位</strong><small>此预览只演示取货与装车动作；补给搬运暂未制作</small><div><i id="replenishment-progress"></i></div><em id="replenishment-countdown"></em></div></div>
+      <div class="real-scene-note hidden" id="real-scene-note"><svg class="icon"><use href="#i-info"/></svg><span>最新实际场景底图<span>设备动作请切换至“作业演示示意”查看</span></span></div>
+      <div class="follow-banner hidden" id="follow-banner"><svg class="icon"><use href="#i-focus"/></svg><span id="follow-copy"></span><button id="cancel-follow">取消跟随</button></div>
+      <div class="scene-legend hidden" id="scene-legend"><span><i class="legend-line"></i>作业路线</span><span><i class="legend-box"></i>蓝色托盘</span><span><i class="legend-dot fault"></i>故障</span></div>
+      <div class="scene-hint" id="scene-hint">左键旋转 · 滚轮缩放 · 中键恢复全仓 <span>实景底图预览</span></div>
+      <section class="timeline-panel hidden" id="timeline-panel" aria-label="场景回放时间轴">
+        <div class="timeline-heading"><div><span class="state-pill" id="play-state">播放中</span><strong id="current-time">08:00:00</strong><span class="time-zone" id="timeline-zone">PDT · 仓库当地时间</span></div><span class="entry-order" id="entry-order">入口订单 TEST-OUT-001</span><button class="text-button end-button" id="end-replay">结束回放 <svg class="icon"><use href="#i-close"/></svg></button></div>
+        <div class="timeline-track-area"><div class="timeline-track"><div class="timeline-progress" id="timeline-progress"></div><div class="event-markers" id="event-markers"></div><input type="range" id="timeline-range" min="0" max="3600" value="0" step="1" aria-label="调整回放时刻"><div class="timeline-thumb-label" id="timeline-thumb-label">08:00:00</div></div><div class="time-ticks" id="time-ticks"></div></div>
+        <div class="timeline-bottom"><div class="transport"><button class="skip-button" id="back-30" aria-label="后退30秒">↶ <span>30秒</span></button><button class="play-button" id="toggle-play" aria-label="暂停回放"><svg class="icon"><use href="#i-pause"/></svg></button><button class="skip-button" id="forward-30" aria-label="前进30秒"><span>30秒</span> ↷</button><div class="speed-group" id="speed-group" aria-label="回放速度"></div></div><div class="timeline-tip" id="timeline-tip"><svg class="icon"><use href="#i-info"/></svg>点击事件或拖动时间轴，暂停到对应时刻</div><span id="elapsed-copy" class="elapsed-copy"></span></div>
+      </section>
+      <div class="completion-card hidden" id="completion-card"><span class="completion-icon"><svg class="icon"><use href="#i-check"/></svg></span><h2>区间回放完成</h2><p>已停在区间终点，可拖动时间轴继续查看</p><div><button class="secondary-button" id="complete-return">返回订单列表</button><button class="primary-button" id="restart-replay">从头回放</button></div><button class="completion-events" id="review-events">查看关键事件</button></div>
+    </section>
+    <nav class="nav-rail" id="nav-rail" aria-label="主导航"></nav>
+    <aside class="business-panel" id="business-panel" aria-label="订单回放面板">
+      <section id="query-view" class="panel-view"><div class="panel-eyebrow">作业追溯</div><div class="panel-heading"><h1>订单场景回放</h1><span class="test-badge">测试数据</span></div><p class="panel-intro">选择时间区间，从订单进入整段场景回放。</p><form id="query-form" novalidate><div class="section-title"><h2>回放区间</h2><span class="info-tip" tabindex="0" aria-label="最短1小时，按America/Los_Angeles解析，夏令时自动适配">i<span>区间至少 1 小时。以 America/Los_Angeles 解析输入，自动适配夏令时；手填重复时刻采用较早一次；快捷时长按实际经过时间计算。</span></span></div><div class="timezone-label"><svg class="icon"><use href="#i-clock"/></svg>仓库当地时间 <strong>America/Los_Angeles</strong></div><div class="quick-ranges" role="group" aria-label="快捷时长"><span>快捷时长</span><button type="button" data-hours="1" class="active" aria-pressed="true">1 小时</button><button type="button" data-hours="2" aria-pressed="false">2 小时</button><button type="button" data-hours="4" aria-pressed="false">4 小时</button></div><label for="start-time">开始时间</label><input id="start-time" type="datetime-local" value="2026-10-22T08:00" step="60"><label for="end-time">结束时间</label><input id="end-time" type="datetime-local" value="2026-10-22T09:00" step="60"><div class="range-summary" id="range-summary">已选 1 小时</div><div class="form-error hidden" id="query-error" role="alert"></div><button class="primary-button full-width" type="submit"><svg class="icon"><use href="#i-search"/></svg>查询测试订单</button></form><div class="query-divider"></div><div class="section-title"><h2>区间订单</h2><span id="order-count">待查询</span></div><div class="query-result-note hidden" id="query-result-note"></div><div id="order-list" class="order-list"><div class="empty-state"><svg class="icon"><use href="#i-history"/></svg><strong>先选择一段时间</strong><p>查询后，从任一测试订单进入回放</p></div></div><div class="test-scope-note"><svg class="icon"><use href="#i-info"/></svg><p>任意有效区间均显示相同 4 个测试订单。任一订单进入相同的 <strong>5 台人工叉车 + 3 台装卸车</strong>回放；订单仅作为入口，不筛选区间设备。</p></div></section>
+      <section id="replay-view" class="panel-view hidden"><div class="panel-eyebrow">所选区间 · 全部设备</div><div class="panel-heading"><h1>场景回放</h1><span class="test-badge">测试数据</span></div><div class="replay-range" id="replay-range"></div><div class="replay-order-meta"><span>入口订单</span><strong id="replay-order-id">TEST-OUT-001</strong><span class="info-tip" tabindex="0">i<span>订单只是进入回放的入口。此处始终展示所选时间区间的全部 8 台测试设备。</span></span></div><div class="replay-stat-row"><div><strong>5</strong><span>人工叉车</span></div><div><strong>3</strong><span>装卸车</span></div><div><strong id="fault-count">0</strong><span>当前故障</span></div></div><div class="panel-tabs" role="tablist"><button id="devices-tab" role="tab" aria-selected="true" class="active" data-tab="devices">设备 <span>8</span></button><button id="events-tab" role="tab" aria-selected="false" data-tab="events">关键事件 <span id="events-count"></span></button></div><div id="device-content"><div class="list-section-label">人工叉车 <span>5</span></div><div id="forklift-list"></div><div class="list-section-label truck-list-label">装卸车 <span>3</span></div><div id="truck-list"></div></div><div id="event-content" class="hidden"><div class="event-list-hint">点击任一事件，暂停到发生时刻</div><div id="event-list"></div></div><div class="panel-bottom-note">交互设计预览 · 路线及动作示意</div></section>
+      <section id="normal-view" class="panel-view hidden"><div class="panel-eyebrow">GHS · 普通场景</div><div class="panel-heading"><h1 id="normal-page-title">仓库运营总览</h1></div><p class="panel-intro">已结束回放并恢复普通场景。</p><div class="normal-success"><svg class="icon"><use href="#i-check"/></svg><strong>页面导航已执行</strong><p>这份预览只演示订单回放及退出衔接。</p></div><button class="primary-button full-width" id="return-query">返回订单回放</button></section>
+    </aside>
+  </main>
+  <div class="modal-backdrop hidden" id="exit-modal" role="presentation"><section class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="exit-title" aria-describedby="exit-description"><div class="dialog-icon"><svg class="icon"><use href="#i-history"/></svg></div><h2 id="exit-title">结束当前回放？</h2><p id="exit-description"></p><div class="dialog-status"><span class="status-dot"></span>已暂停在 <strong id="exit-time"></strong></div><div class="dialog-actions"><button class="secondary-button" id="cancel-exit">继续查看</button><button class="primary-button" id="confirm-exit">结束回放</button></div></section></div>
+  <div class="toast hidden" id="toast" role="status"></div>
+  <script src="prototype.js"></script>
+</body>
+</html>

@@ -134,7 +134,7 @@ test('Chinese composition retains the live input and filters only the committed 
 
 test('all seven native navigation destinations render their business titles and report the active page',()=>{
   const app=boot();
-  for(const [name,title]of[['overview','仓库运营总览'],['inventory','库存与货位'],['orders','今日出入库订单'],['devices','设备监控'],['alerts','设备告警中心'],['trace','追溯查询'],['settings','场景设置']]){
+  for(const [name,title]of[['overview','仓库运营总览'],['inventory','库存与货位'],['orders','今日出入库订单'],['devices','设备监控'],['alerts','设备告警中心'],['trace','订单追溯'],['settings','场景设置']]){
     app.window.twinNavigate(name);
     assert.ok(app.html().includes('<h1>'+title+'</h1>'),name);
     app.flush();

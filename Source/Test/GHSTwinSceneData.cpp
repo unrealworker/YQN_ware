@@ -1243,6 +1243,13 @@ void FGHSTwinSceneData::ApplyLayers(bool Equipment,bool Racks)
     Impl->bEquipmentVisible=Equipment; Impl->bRacksVisible=Racks; Impl->UpdateLayers();
 }
 
+void FGHSTwinSceneData::CaptureVisibilityOverrides()
+{
+    for(auto& Item:Impl->Visibility)
+        if(Item.Actor.IsValid() && (Item.bEquipment?Impl->bEquipmentVisible:Impl->bRacksVisible))
+            Item.bOriginalHidden=Item.Actor->IsHidden();
+}
+
 bool FGHSTwinSceneData::IsStorageObject(const FString& Id) const
 {
     const auto* R=Impl->Find(Id);return R && (R->Kind==TEXT("rack") || R->Kind==TEXT("material"));

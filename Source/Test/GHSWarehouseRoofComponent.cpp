@@ -260,3 +260,36 @@ void UGHSWarehouseRoofComponent::EndPlay(const EEndPlayReason::Type EndPlayReaso
     for(const auto& Entry:ShellActors) if(Entry.Actor.IsValid()) Entry.Actor->SetActorHiddenInGame(Entry.bOriginallyHidden);
     Super::EndPlay(EndPlayReason);
 }
+
+FGHSWarehouseRoofReplayState UGHSWarehouseRoofComponent::CaptureReplayState()
+{
+    FGHSWarehouseRoofReplayState Saved;Saved.Transition=Transition;Saved.TickEnabled=IsComponentTickEnabled();
+    for(auto& Entry:ShellActors) if(Entry.Actor.IsValid())
+    {
+        // A visible building layer lets us distinguish a manual override from the layer's hide.
+        if(bBuildingVisible) Entry.bOriginallyHidden=Entry.Actor->IsHidden();
+        Saved.Shells.Add({Entry.Actor,Entry.Actor->IsHidden(),Entry.bOriginallyHidden});
+    }
+    Saved.HasRoofVisibility=HasRoof();
+    if(Saved.HasRoofVisibility)
+    {Saved.RoofHidden=RoofActor->IsHidden();Saved.MeshVisible=RoofMesh->IsVisible();Saved.MeshHidden=RoofMesh->bHiddenInGame;}
+    return Saved;
+}
+
+void UGHSWarehouseRoofComponent::RestoreReplayState(const FGHSWarehouseRoofReplayState& Saved,bool bSavedBuilding)
+{
+    Transition=Saved.Transition;bBuildingVisible=bSavedBuilding;
+    if(HasRoof())
+    {
+        RoofActor->SetActorHiddenInGame(Saved.HasRoofVisibility?Saved.RoofHidden:Transition.IsOpen());
+        if(Transition.IsTransitioning()) {ApplyDissolveMaterials();UpdateDissolveMaterials();}
+        else RestoreSourceMaterials();
+        if(Saved.HasRoofVisibility) {RoofMesh->SetVisibility(Saved.MeshVisible);RoofMesh->SetHiddenInGame(Saved.MeshHidden);}
+    }
+    for(const auto& State:Saved.Shells) if(State.Actor.IsValid())
+    {
+        for(auto& Entry:ShellActors) if(Entry.Actor==State.Actor) {Entry.bOriginallyHidden=State.OriginalHidden;break;}
+        State.Actor->SetActorHiddenInGame(State.Hidden);
+    }
+    SetComponentTickEnabled(Saved.TickEnabled);
+}

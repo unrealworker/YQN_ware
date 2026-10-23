@@ -72,6 +72,8 @@ public:
     bool MatchesSearch(const FString& Query,const FString& Id) const;
     FString LocationLabel(const FString& Id) const;
     void ApplyLayers(bool Equipment, bool Racks);
+    /** Remember external per-actor hides before a temporary replay isolation. */
+    void CaptureVisibilityOverrides();
     bool IsObjectVisible(const FString& Id) const;
     bool IsStorageObject(const FString& Id) const;
 

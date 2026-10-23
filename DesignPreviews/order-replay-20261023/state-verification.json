@@ -1,0 +1,124 @@
+{
+  "scope": "Pure playback-state invariants; browser visual and interaction verification is separate",
+  "sourceSha256": "d9274c23ed23330f5a38d207cf59298b9edea248c0996f8be221dd06e6bd4ed1",
+  "checks": [
+    {
+      "name": "Less than one hour rejected",
+      "pass": true
+    },
+    {
+      "name": "Exactly one hour accepted",
+      "pass": true
+    },
+    {
+      "name": "Los Angeles daylight offset correct",
+      "pass": true
+    },
+    {
+      "name": "Spring DST nonexistent hour rejected",
+      "pass": true
+    },
+    {
+      "name": "Fall duplicate hour resolves explicitly",
+      "pass": true
+    },
+    {
+      "name": "One-hour shortcut preserves duration across fall clock repeat",
+      "pass": true
+    },
+    {
+      "name": "Forklift 03 holds same position through 45-second fault",
+      "pass": true
+    },
+    {
+      "name": "Upper pallet has one transfer owner at every second",
+      "pass": true
+    },
+    {
+      "name": "Forklift 1 clears forks at delivery",
+      "pass": true
+    },
+    {
+      "name": "Forklift 2 clears forks at delivery",
+      "pass": true
+    },
+    {
+      "name": "Forklift 3 clears forks at delivery",
+      "pass": true
+    },
+    {
+      "name": "Forklift 4 clears forks at delivery",
+      "pass": true
+    },
+    {
+      "name": "Forklift 5 clears forks at delivery",
+      "pass": true
+    },
+    {
+      "name": "Truck 1 departs and empty replacement enters",
+      "pass": true
+    },
+    {
+      "name": "Truck 2 departs and empty replacement enters",
+      "pass": true
+    },
+    {
+      "name": "Truck 3 departs and empty replacement enters",
+      "pass": true
+    },
+    {
+      "name": "Each full wave has 15 key events",
+      "pass": true
+    },
+    {
+      "name": "No events exceed selected interval",
+      "pass": true
+    },
+    {
+      "name": "Forklift position stays continuous across wave boundary",
+      "pass": true
+    },
+    {
+      "name": "Thirty-second seek preserves playing state",
+      "pass": true
+    },
+    {
+      "name": "Thirty-second seek preserves paused state",
+      "pass": true
+    },
+    {
+      "name": "Event seek always pauses",
+      "pass": true
+    },
+    {
+      "name": "Slider release resumes previously playing state",
+      "pass": true
+    },
+    {
+      "name": "Slider release preserves previously paused state",
+      "pass": true
+    },
+    {
+      "name": "Slider release at endpoint remains completed and paused",
+      "pass": true
+    },
+    {
+      "name": "Explicit restart keeps order and interval and plays from zero",
+      "pass": true
+    }
+  ],
+  "passed": 26,
+  "failed": 0,
+  "assets": [
+    {
+      "file": "assets/campus-closed.png",
+      "bytes": 2497501,
+      "sha256": "a845ac641035aea2ded6c6dabebd87d1d0bb57bd9a936d3250403a2bc5fd0383"
+    },
+    {
+      "file": "assets/interior-overview.png",
+      "bytes": 2573772,
+      "sha256": "d36937eff4b760b36aba33f30afd1b14cd80f7fabb66a6751c20f7136a88a73f"
+    }
+  ]
+}

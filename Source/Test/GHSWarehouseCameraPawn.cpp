@@ -91,6 +91,33 @@ void AGHSWarehouseCameraPawn::FocusOnTarget(FVector TargetCenter,float Distance,
     TransitionToPose(TargetCenter,Distance,Rotation,ViewportSize,SceneCenterPixels,false,Duration);
 }
 
+FGHSCameraReplayPose AGHSWarehouseCameraPawn::CaptureReplayPose() const
+{
+    return {GetActorLocation(),SpringArmComponent->SocketOffset,SpringArmComponent->TargetOffset,
+        FocusTarget,FramingOffsetRatio,GetActorRotation(),SpringArmComponent->TargetArmLength,
+        bObjectPivot,bUseSceneFraming,bOverviewFraming,bGroundPanRecovery,GroundRecoveryMinimum,GroundRecoveryMaximum};
+}
+void AGHSWarehouseCameraPawn::RestoreReplayPose(const FGHSCameraReplayPose& Pose)
+{
+    CancelPoseTransition();
+    bObjectPivot=Pose.ObjectPivot;bUseSceneFraming=Pose.UseFraming;bOverviewFraming=Pose.OverviewFraming;
+    FramingOffsetRatio=Pose.FramingRatio;FocusTarget=Pose.FocusTarget;bGroundPanRecovery=Pose.GroundPanRecovery;
+    GroundRecoveryMinimum=Pose.RecoveryMinimum;GroundRecoveryMaximum=Pose.RecoveryMaximum;
+    ApplyPose(Pose.Pivot,Pose.Rotation,Pose.Distance,Pose.SocketOffset,Pose.TargetOffset);
+    if(bObjectPivot) ConfigureObjectRestrictions();else ConfigureGroundRestrictions();
+}
+void AGHSWarehouseCameraPawn::FollowReplayTarget(FVector Location,float DeltaSeconds,FRotator ViewRotation)
+{
+    if(!Finite(Location) || bPoseTransitionActive) return;
+    const FVector Pivot=FMath::VInterpTo(GetActorLocation(),Location,DeltaSeconds,5.f);
+    FocusTarget=Location;bObjectPivot=true;ConfigureObjectRestrictions();
+    // A damped three-quarter view exposes the forks and cargo, including at the dock.
+    // Vehicle heading (not velocity) keeps the view stable while reversing.
+    const FRotator Rotation=FMath::RInterpTo(GetActorRotation(),ViewRotation,DeltaSeconds,2.f);
+    ApplyPose(Pivot,Rotation,SpringArmComponent->TargetArmLength,
+        SpringArmComponent->SocketOffset,SpringArmComponent->TargetOffset);
+}
+
 void AGHSWarehouseCameraPawn::TransitionToPose(FVector Pivot,float Distance,FRotator Rotation,
     FVector2D ViewportSize,FVector2D SceneCenterPixels,bool bGroundMode,float Duration)
 {
