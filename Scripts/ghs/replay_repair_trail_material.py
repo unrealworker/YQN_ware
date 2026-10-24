@@ -8,7 +8,7 @@ PATH='/Game/GHSOrderReplay/Materials/M_ReplayTrail'
 RIPPLE_PATH='/Game/GHSOrderReplay/Materials/M_ReplayGroundRipple'
 ML=unreal.MaterialEditingLibrary
 LIB=unreal.EditorAssetLibrary
-PALETTE=['#67DDEB']*5
+PALETTE=['#356BFA']*5
 
 
 def build_material(path,domain=unreal.MaterialDomain.MD_SURFACE):
@@ -64,7 +64,7 @@ def params(material):
     uv=node(material,unreal.MaterialExpressionTextureCoordinate,-700,0)
     clock=node(material,unreal.MaterialExpressionScalarParameter,-700,120,parameter_name='ReplayTime',default_value=0.)
     tint=node(material,unreal.MaterialExpressionVectorParameter,-700,-180,parameter_name='Tint',
-              default_value=unreal.LinearColor(.135633,.723055,.830770,1.))
+              default_value=unreal.LinearColor(.035601315,.147027266,.955973353,1.))
     return uv,clock,tint
 
 
@@ -125,7 +125,7 @@ return side * (d * lerp(StartShear, EndShear, UV.x) + float3(-d.y, d.x, 0) * (le
     # UE 5.4 hides this material output from Python; use the existing scoped native bridge.
     assert unreal.GHSVisualMaterialLibrary.connect_world_position_offset(material,offset)
     assert unreal.GHSVisualMaterialLibrary.has_world_position_offset(material)
-    result=finish(material,'cyan-remaining-leg-distance-clipped-v6')
+    result=finish(material,'theme-blue-remaining-leg-distance-clipped-v7')
     result['custom_data_indices']=[v.get_editor_property('data_index') for v in data]
     result['vertex_interpolators']=len(distance)
     return result

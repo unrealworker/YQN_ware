@@ -9,7 +9,7 @@
     "IeQ6D",
     "UTzjR"
   ],
-  "trailColor": "#67DDEB",
+  "trailColor": "#356BFA",
   "trailVisibility": "native trailVisible === true && visible !== false",
   "remainingOnly": true,
   "movingOnly": true,
@@ -34,7 +34,7 @@
     {
       "board": "iiFrY",
       "id": "vjuyT",
-      "url": "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+      "url": "images/order-replay-20261024/scene-floor-overview-041838b1715f.png",
       "transform": [
         1.3333333333333333,
         0,
@@ -47,7 +47,7 @@
     {
       "board": "dJZrJ",
       "id": "e3fnYV",
-      "url": "images/order-replay-20261024/scene-followed-21714c64d6c0.png",
+      "url": "images/order-replay-20261024/scene-followed-d9e7f0684a9b.png",
       "transform": [
         1.3333333333333333,
         0,
@@ -86,7 +86,7 @@
     {
       "board": "QFsnb",
       "id": "L0xO0H",
-      "url": "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+      "url": "images/order-replay-20261024/scene-floor-overview-041838b1715f.png",
       "transform": [
         1.3333333333333333,
         0,
@@ -99,7 +99,7 @@
     {
       "board": "IeQ6D",
       "id": "yS6nm",
-      "url": "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+      "url": "images/order-replay-20261024/scene-floor-overview-041838b1715f.png",
       "transform": [
         1.3333333333333333,
         0,
@@ -112,7 +112,7 @@
     {
       "board": "UTzjR",
       "id": "RTfbC",
-      "url": "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+      "url": "images/order-replay-20261024/scene-floor-overview-041838b1715f.png",
       "transform": [
         1.3333333333333333,
         0,
@@ -618,7 +618,7 @@
     "Seven state screenshots inspected; full-resolution followed, completion and compact exports inspected.",
     "Global moving/completed contain seven visible POIs; offscreen truck A not invented.",
     "Followed/fault contain one visible forklift 03 POI with actual selected/following state.",
-    "Completion uses separate no-route capture and no cyan route dots.",
+    "Completion uses separate no-route capture and no route dots.",
     "Cyan route dots match native trailVisible; fault and pending text stay independent.",
     "1920 POIs use native coordinates with y=64 subtraction. Compact uses image scale; truck C card clamped within right edge, anchor unchanged.",
     "Four SHA-derived image filenames avoid cache reuse."
@@ -629,17 +629,108 @@
     "Completion truck A stays as an offscreen record without inventing unobserved status."
   ],
   "imageCacheVerification": {
-    "method": "Distinct SHA256 filenames and visible scene crops matched to native references",
-    "newAssetUrlCount": 4,
-    "backgroundCount": 7
+    "method": "Two new SHA-derived asset URLs; screenshots inspected against approved native captures",
+    "newAssetUrlCount": 2,
+    "updatedBackgroundCount": 5
   },
   "sourceSaveEvidence": {
     "sourceFile": "Saas.pen",
     "sourceSaved": true,
     "method": "native_ctrl_s_by_root_agent_and_disk_metadata",
-    "bytes": 2137790,
-    "lastWriteTimeUtc": "2026-10-24T01:27:18.154Z",
-    "sha256": "7DD0D0970B2DFFE0A7A4877DE99DF2C7028EB7BF73BE9CE2CCB20F904815FD44",
+    "bytes": 2137990,
+    "lastWriteTimeUtc": "2026-10-24T01:54:39.523Z",
+    "sha256": "666C2CF70A003DF9A917992B5E279D3E7DDB6A378DC5866F11688F9F9A0B5478",
     "canvasMutationAfterSave": false
+  },
+  "themeBlueRevision": {
+    "trailColor": "#356BFA",
+    "flowAndEmissionPreserved": true,
+    "followOutlinesUnchanged": true,
+    "poiAnchorChecks": [
+      {
+        "role": "moving",
+        "id": "REPLAY-FORK-01",
+        "anchorDeltaPx": 0,
+        "titleMatches": true,
+        "stateMatches": true,
+        "labelDeltaX": 0,
+        "labelDeltaY": 0
+      },
+      {
+        "role": "moving",
+        "id": "REPLAY-FORK-02",
+        "anchorDeltaPx": 0,
+        "titleMatches": true,
+        "stateMatches": true,
+        "labelDeltaX": 0,
+        "labelDeltaY": 0
+      },
+      {
+        "role": "moving",
+        "id": "REPLAY-FORK-03",
+        "anchorDeltaPx": 0,
+        "titleMatches": true,
+        "stateMatches": true,
+        "labelDeltaX": 0,
+        "labelDeltaY": 0
+      },
+      {
+        "role": "moving",
+        "id": "REPLAY-FORK-04",
+        "anchorDeltaPx": 0,
+        "titleMatches": true,
+        "stateMatches": true,
+        "labelDeltaX": 0,
+        "labelDeltaY": 0
+      },
+      {
+        "role": "moving",
+        "id": "REPLAY-FORK-05",
+        "anchorDeltaPx": 0,
+        "titleMatches": true,
+        "stateMatches": true,
+        "labelDeltaX": 0,
+        "labelDeltaY": 0
+      },
+      {
+        "role": "moving",
+        "id": "REPLAY-TRUCK-B",
+        "anchorDeltaPx": 0,
+        "titleMatches": true,
+        "stateMatches": true,
+        "labelDeltaX": 0,
+        "labelDeltaY": 0
+      },
+      {
+        "role": "moving",
+        "id": "REPLAY-TRUCK-C",
+        "anchorDeltaPx": 0,
+        "titleMatches": true,
+        "stateMatches": true,
+        "labelDeltaX": 0,
+        "labelDeltaY": 0
+      },
+      {
+        "role": "followed",
+        "id": "REPLAY-FORK-03",
+        "anchorDeltaPx": 0,
+        "titleMatches": true,
+        "stateMatches": true,
+        "labelDeltaX": -148.5,
+        "labelDeltaY": 0
+      }
+    ],
+    "approvedLabelPlacementRetained": true,
+    "geometryCorrection": {
+      "board": "UTzjR",
+      "nodes": [
+        "DlysX/jVFLv",
+        "DlysX/GiH8X",
+        "DlysX/CsQaM"
+      ],
+      "previousY": 10,
+      "currentY": 4,
+      "reason": "Restore compact row alignment after preceding device-link node replacement; 40px buttons within 48px rows"
+    }
   }
 }

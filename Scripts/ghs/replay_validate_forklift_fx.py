@@ -1,4 +1,4 @@
-"""Audit current-leg cyan ribbons using the actual compiled replay route builder."""
+"""Audit current-leg theme-blue ribbons using the actual compiled replay route builder."""
 import bisect,csv,hashlib,json,math,os,struct,subprocess,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
@@ -106,7 +106,7 @@ for i,track in enumerate(data['tracks'][:5]):
         if abs(last_progress-total)>1.e-5:remaining_errors.append([i,leg_id,last_progress,total])
         if not LineString(chain).is_simple:nonsimple_legs.append([i,leg_id])
         union=unary_union(ribbons);area+=union.area;maximum_overlap=max(maximum_overlap,sum(poly.area for poly in ribbons)-union.area);count+=len(segments)
-    rows.append(dict(id=track['id'],color='#67DDEB',legs=len(legs[i]),segments=count,
+    rows.append(dict(id=track['id'],color='#356BFA',legs=len(legs[i]),segments=count,
         height_cm=3+i*.8,maximum_centerline_error_cm=maximum,minimum_local_width_cm=minimum_width,
         maximum_same_leg_overlap_m2=maximum_overlap,total_cached_area_m2=area))
 # The GPU clipping boundary must follow the actual directed movement, not merely

@@ -3,7 +3,7 @@ from pathlib import Path
 exec(Path('D:/UEPro/Test/Scripts/ghs/verify_order_replay_runtime.py').read_text(encoding='utf8').split('steps=run()')[0])
 OUT=ROOT/'Saved/OrderReplay/RemainingRoutes';OUT.mkdir(parents=True,exist_ok=True)
 report=dict(success=False,checks=[],captures=[],states={})
-EXPECTED=['#67DDEB']*5
+EXPECTED=['#356BFA']*5
 
 def replay_actor():
     return next(a for a in unreal.GameplayStatics.get_all_actors_of_class(world,unreal.Actor)
@@ -74,7 +74,7 @@ def run():
         assert a['y']+a['height']<=888 and a['x']+a['width']<=1440,a
         for b in labels[n+1:]:
             assert not(a['x']<b['x']+b['width'] and a['x']+a['width']>b['x'] and a['y']<b['y']+b['height'] and a['y']+a['height']>b['y']),(a,b)
-    record('thin_cyan_moving_routes_and_height_separation',colours=EXPECTED,trail_components=len(trails),ripple_components=len(ripples),instances=total_instances)
+    record('thin_theme_blue_moving_routes_and_height_separation',colours=EXPECTED,trail_components=len(trails),ripple_components=len(ripples),instances=total_instances)
     record('replay_pois_include_idle_and_trucks',visible_ids=sorted(ids))
     yield from capture('01-floor-overview');yield from scene_capture('scene-floor-overview')
     initial=forks()[0];command('replaySeek',time=240);later=forks()[0]
@@ -103,7 +103,7 @@ def run():
         device='REPLAY-FORK-%02d'%i
         command('replayFollow',id=device)
         yield from wait('follow '+device,lambda:not pawn.is_pose_transition_active());yield from pause(.7)
-        yield from capture('02-cyan-fork-%02d'%i)
+        yield from capture('02-theme-blue-fork-%02d'%i)
         if i==3: yield from scene_capture('scene-followed')
     followed=poi_report('poi-followed')['labels']
     assert any(x['id']=='REPLAY-FORK-03' and x['following'] for x in followed)

@@ -1,28 +1,30 @@
 {
   "date": "2026-10-24",
   "status": "saved_canvas_and_exports_verified",
-  "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\RemainingRoutes\\scene-floor-overview.png",
-  "asset": "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
-  "sha256": "1AA896C062D0F39BC20371654AC66DAEEEBEEBE002CB1EB773FC5211B93DE6CF",
-  "bytes": 2465005,
+  "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\ThemeBlue\\scene-floor-overview.png",
+  "asset": "images/order-replay-20261024/scene-floor-overview-041838b1715f.png",
+  "sha256": "041838B1715F9A01E12C53FEABC3D93A21C26E774C2B4F05C01664A1D2513F44",
+  "bytes": 2465456,
   "width": 1920,
   "height": 1080,
-  "sourceCaptureLastWriteUtc": "2026-10-24T01:08:20.215Z",
+  "sourceCaptureLastWriteUtc": "2026-10-24T01:49:19.673Z",
   "poiSource": "sources/order-replay-20261024/poi-moving.json",
   "captureContainsHUD": false,
   "containsNativeRemainingRoutes": true,
   "captures": {
     "moving": {
-      "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\RemainingRoutes\\scene-floor-overview.png",
-      "asset": "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
-      "sha256": "1AA896C062D0F39BC20371654AC66DAEEEBEEBE002CB1EB773FC5211B93DE6CF",
-      "bytes": 2465005,
+      "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\ThemeBlue\\scene-floor-overview.png",
+      "asset": "images/order-replay-20261024/scene-floor-overview-041838b1715f.png",
+      "sha256": "041838B1715F9A01E12C53FEABC3D93A21C26E774C2B4F05C01664A1D2513F44",
+      "bytes": 2465456,
       "width": 1920,
       "height": 1080,
-      "sourceCaptureLastWriteUtc": "2026-10-24T01:08:20.215Z",
+      "sourceCaptureLastWriteUtc": "2026-10-24T01:49:19.673Z",
       "poiSource": "sources/order-replay-20261024/poi-moving.json",
       "captureContainsHUD": false,
-      "containsNativeRemainingRoutes": true
+      "containsNativeRemainingRoutes": true,
+      "trailColor": "#356BFA",
+      "preservesFlowAndEmission": true
     },
     "completed": {
       "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\RemainingRoutes\\scene-completed.png",
@@ -37,17 +39,19 @@
       "containsNativeRemainingRoutes": false
     },
     "followed": {
-      "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\RemainingViews\\scene-followed.png",
-      "asset": "images/order-replay-20261024/scene-followed-21714c64d6c0.png",
-      "sha256": "21714C64D6C06140E70DFFA912BEA0E845DAB49ABA0125833D3EC4E50C1FFF03",
-      "bytes": 2696307,
+      "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\ThemeBlue\\scene-followed.png",
+      "asset": "images/order-replay-20261024/scene-followed-d9e7f0684a9b.png",
+      "sha256": "D9E7F0684A9BC5EFF351F4F91D2BA0964EDF1EEE1BA2E3E843FC516C9A578431",
+      "bytes": 2631825,
       "width": 1920,
       "height": 1080,
-      "sourceCaptureLastWriteUtc": "2026-10-24T01:14:45.980Z",
+      "sourceCaptureLastWriteUtc": "2026-10-24T01:49:24.093Z",
       "poiSource": "sources/order-replay-20261024/poi-followed.json",
       "stateSource": "sources/order-replay-20261024/state-followed.json",
       "captureContainsHUD": false,
-      "containsNativeRemainingRoutes": true
+      "containsNativeRemainingRoutes": true,
+      "trailColor": "#356BFA",
+      "preservesFlowAndEmission": true
     },
     "fault": {
       "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\RemainingViews\\scene-fault.png",
@@ -77,9 +81,9 @@
     0,
     -0.06299212598425197
   ],
-  "captureApproval": "Root visually approved final remaining-route captures on 2026-10-24",
+  "captureApproval": "Root visually approved theme-blue moving/followed captures 2026-10-24; existing no-route fault/completed images retained",
   "cacheInvalidation": "SHA256-derived filenames",
-  "trailColor": "#67DDEB",
+  "trailColor": "#356BFA",
   "sourcePOICoordinates": "Full 1920x1080 screen pixels; subtract 64 only inside scene-local overlay",
   "boards": [
     "iiFrY",
@@ -100,5 +104,19 @@
     "UTzjR": "moving"
   },
   "oldIllustrativeTrajectoryLayersFound": 0,
-  "sourceSaved": true
+  "sourceSaved": true,
+  "preservesFlowAndEmission": true,
+  "themeBlueRevision": {
+    "roles": [
+      "moving",
+      "followed"
+    ],
+    "unchangedCaptureRoles": [
+      "fault",
+      "completed"
+    ],
+    "poiAnchorsVerifiedAgainst": "Saved/OrderReplay/ThemeBlue/poi-moving.json and poi-followed.json",
+    "keepApprovedPoiLabelLayout": true,
+    "keepFollowOutline": true
+  }
 }

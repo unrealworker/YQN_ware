@@ -38,7 +38,7 @@ struct TrailState
     double StartTime=0,EndTime=0,DistanceMeters=0,LengthMeters=0;
 };
 constexpr double TrailWidthCm=18.,TrailCornerCutCm=80.;
-/** Forklift-only cyan, shared by runtime presentation and the device list. */
+/** Forklift-only theme blue, shared by runtime presentation and the device list. */
 const char* TrailColor(int DeviceIndex);
 /** Visible motion, bounded circular joins, with repeated runs removed. */
 std::vector<TrailSegment> BuildTrailSegments(const Track& Track);

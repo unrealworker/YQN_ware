@@ -13,7 +13,7 @@ static double Lerp(double A,double B,double T){return A+(B-A)*T;}
 static double Angle(double A,double B,double T){return A+std::remainder(B-A,360.)*T;}
 const char* TrailColor(int DeviceIndex)
 {
-    return DeviceIndex>=0&&DeviceIndex<ForkCount?"#67DDEB":"";
+    return DeviceIndex>=0&&DeviceIndex<ForkCount?"#356BFA":"";
 }
 std::vector<TrailSegment> BuildTrailSegments(const Track& Track)
 {

@@ -112,7 +112,7 @@ bool FGHSReplayRoundedTrails::RunTest(const FString&)
     for(int I=0;I<GHSReplay::ForkCount;++I)
     {
         TestTrue(TEXT("forklift owns a visible color"),std::string(GHSReplay::TrailColor(I)).size()==7);
-        TestEqual(TEXT("forklift routes use the common pale cyan"),FString(UTF8_TO_TCHAR(GHSReplay::TrailColor(I))),FString(TEXT("#67DDEB")));
+        TestEqual(TEXT("forklift routes use the project theme blue"),FString(UTF8_TO_TCHAR(GHSReplay::TrailColor(I))),FString(TEXT("#356BFA")));
     }
     for(int I=GHSReplay::ForkCount;I<GHSReplay::DeviceCount;++I)TestTrue(TEXT("trucks have no route color"),std::string(GHSReplay::TrailColor(I)).empty());
     T.Keys={{0,{0,0,0}},{1,{1000,0,0}},{2,{1000,10,0}},{3,{2000,10,0}}};
