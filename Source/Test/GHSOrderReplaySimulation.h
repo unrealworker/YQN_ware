@@ -20,12 +20,32 @@ struct Pose
 struct Track { std::string Id,Name,Kind,Mesh; Vec Scale{1,1,1}; std::vector<Key> Keys; std::vector<Vec> Route; };
 struct Event { double Time=0; std::string Id,DeviceId,Kind,Text; };
 struct Occurrence { const Event* Source=nullptr; double Time=0; long long Cycle=0; };
-struct TrailSegment { Vec A,B; double StartMeters=0,LengthMeters=0,StartShearCm=0,EndShearCm=0,StartHalfWidthCm=37.5,EndHalfWidthCm=37.5,FlowDeltaMeters=0; };
-constexpr double TrailWidthCm=75.,TrailCornerCutCm=80.;
-/** Forklift-only palette, shared by runtime presentation and the device list. */
+struct TrailSegment
+{
+    Vec A,B; double StartMeters=0,LengthMeters=0,StartShearCm=0,EndShearCm=0,StartHalfWidthCm=9.,EndHalfWidthCm=9.,FlowDeltaMeters=0;
+    int LegId=-1; double ProgressStartMeters=0,ProgressDeltaMeters=0;
+};
+struct TrailDistanceKey { double Time=0,Meters=0; };
+struct TrailLeg
+{
+    int Id=-1; double StartTime=0,EndTime=0,LengthMeters=0;
+    std::vector<TrailDistanceKey> DistanceKeys;
+};
+struct TrailPlan { std::vector<TrailSegment> Segments; std::vector<TrailLeg> Legs; };
+struct TrailState
+{
+    bool Moving=false; int LegId=-1;
+    double StartTime=0,EndTime=0,DistanceMeters=0,LengthMeters=0;
+};
+constexpr double TrailWidthCm=18.,TrailCornerCutCm=80.;
+/** Forklift-only cyan, shared by runtime presentation and the device list. */
 const char* TrailColor(int DeviceIndex);
 /** Visible motion, bounded circular joins, with repeated runs removed. */
 std::vector<TrailSegment> BuildTrailSegments(const Track& Track);
+/** Precompute disjoint moving legs once; stationary/lift-only/hidden spans are absent. */
+TrailPlan BuildTaskTrail(const Track& Track);
+/** Absolute-clock, logarithmic lookup; no geometry or instance updates. */
+TrailState EvaluateTaskTrail(const TrailPlan& Plan,double Time,double CycleDuration,double PlaybackEndTime=-1.);
 /** Stateless evaluation: no accumulation, spawning, physics or process wall clock. */
 class Simulation
 {

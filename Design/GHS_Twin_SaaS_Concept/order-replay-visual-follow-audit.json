@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-23",
+  "date": "2026-10-24",
   "affectedBoards": [
     "iiFrY",
     "dJZrJ",
@@ -9,13 +9,11 @@
     "IeQ6D",
     "UTzjR"
   ],
-  "trailColors": [
-    "#2F7CFF",
-    "#00D9C0",
-    "#F6B83F",
-    "#A77BFF",
-    "#F26AA6"
-  ],
+  "trailColor": "#67DDEB",
+  "trailVisibility": "native trailVisible === true && visible !== false",
+  "remainingOnly": true,
+  "movingOnly": true,
+  "pausePreserves": true,
   "truckTrails": false,
   "truckFollow": true,
   "followOrbit": true,
@@ -27,20 +25,104 @@
   "componentCount": 47,
   "issues": [],
   "placeholders": [],
-  "method": "Expanded instances; persisted local x/y and resolved sizes; raw new-node ctx.bounds Y is offset by +50px, visually cross-checked in component screenshots",
+  "method": "Expanded instances; persisted local x/y and resolved sizes; screenshots cross-checked.",
   "sourceSaved": true,
   "sceneCapturePending": false,
-  "sceneCaptureStatus": "Final native capture installed, seven artboards and device component exported, source saved and independently hashed",
+  "sceneCaptureStatus": "Four native captures and 37 editable POIs saved and exported",
   "sceneSource": "order-replay-scene-source.json",
-  "backgroundNodes": {
-    "iiFrY": "vjuyT",
-    "dJZrJ": "e3fnYV",
-    "Aqeif": "whcfP",
-    "vNXAk": "KObVc",
-    "QFsnb": "L0xO0H",
-    "IeQ6D": "yS6nm",
-    "UTzjR": "RTfbC"
-  },
+  "backgrounds": [
+    {
+      "board": "iiFrY",
+      "id": "vjuyT",
+      "url": "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+      "transform": [
+        1.3333333333333333,
+        0,
+        0,
+        1.062992125984252,
+        0,
+        -0.06299212598425197
+      ]
+    },
+    {
+      "board": "dJZrJ",
+      "id": "e3fnYV",
+      "url": "images/order-replay-20261024/scene-followed-21714c64d6c0.png",
+      "transform": [
+        1.3333333333333333,
+        0,
+        0,
+        1.062992125984252,
+        0,
+        -0.06299212598425197
+      ]
+    },
+    {
+      "board": "Aqeif",
+      "id": "whcfP",
+      "url": "images/order-replay-20261024/scene-fault-0e8a7deb1e1d.png",
+      "transform": [
+        1.3333333333333333,
+        0,
+        0,
+        1.062992125984252,
+        0,
+        -0.06299212598425197
+      ]
+    },
+    {
+      "board": "vNXAk",
+      "id": "KObVc",
+      "url": "images/order-replay-20261024/scene-completed-23749eace0ff.png",
+      "transform": [
+        1.3333333333333333,
+        0,
+        0,
+        1.062992125984252,
+        0,
+        -0.06299212598425197
+      ]
+    },
+    {
+      "board": "QFsnb",
+      "id": "L0xO0H",
+      "url": "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+      "transform": [
+        1.3333333333333333,
+        0,
+        0,
+        1.062992125984252,
+        0,
+        -0.06299212598425197
+      ]
+    },
+    {
+      "board": "IeQ6D",
+      "id": "yS6nm",
+      "url": "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+      "transform": [
+        1.3333333333333333,
+        0,
+        0,
+        1.062992125984252,
+        0,
+        -0.06299212598425197
+      ]
+    },
+    {
+      "board": "UTzjR",
+      "id": "RTfbC",
+      "url": "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+      "transform": [
+        1.3333333333333333,
+        0,
+        0,
+        1.062992125984252,
+        0,
+        -0.06299212598425197
+      ]
+    }
+  ],
   "backgroundCount": 7,
   "oldIllustrativeTrajectoryLayersFound": 0,
   "sceneCropPixels": [
@@ -49,35 +131,515 @@
     1440,
     1016
   ],
-  "visualChecks": [
-    "1920 running and paused-follow exports inspected at full resolution",
-    "1440 compact export inspected at full resolution",
-    "No old illustrative route layers overlay the native capture",
-    "Five identity dots retain separate business status colors",
-    "Final hashed capture replaces all seven background URLs; iiFrY pixels match final image exactly"
+  "poiCount": 37,
+  "poiMappings": [
+    {
+      "board": "iiFrY",
+      "overlay": "emcBd",
+      "metadata": {
+        "type": "replay_poi_overlay",
+        "source": "sources/order-replay-20261024/poi-moving.json",
+        "sourceViewport": [
+          1920,
+          1080
+        ],
+        "sourceCrop": [
+          0,
+          64,
+          1440,
+          1016
+        ],
+        "scale": 1
+      },
+      "labels": [
+        {
+          "id": "A1IfIx",
+          "name": "人工叉车 01 · 返回地堆",
+          "x": 265.0886535644531,
+          "y": 387.13812255859375,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-01"
+        },
+        {
+          "id": "OAKKM",
+          "name": "人工叉车 02 · 等待作业",
+          "x": 770.3726806640625,
+          "y": 498.885498046875,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-02"
+        },
+        {
+          "id": "C3C91p",
+          "name": "人工叉车 03 · 返回地堆",
+          "x": 534.34326171875,
+          "y": 398.1644287109375,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-03"
+        },
+        {
+          "id": "ge1xZ",
+          "name": "人工叉车 04 · 返回地堆",
+          "x": 690.8694458007812,
+          "y": 587.34375,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-04"
+        },
+        {
+          "id": "oj2LO",
+          "name": "人工叉车 05 · 等待作业",
+          "x": 286.8330078125,
+          "y": 498.885498046875,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-05"
+        },
+        {
+          "id": "O6V2Hi",
+          "name": "装卸卡车 B · 等待叉车退出",
+          "x": 230.32769775390625,
+          "y": 682.2916259765625,
+          "width": 273,
+          "height": 42,
+          "entityId": "REPLAY-TRUCK-B"
+        },
+        {
+          "id": "IT50p",
+          "name": "装卸卡车 C · 等待叉车退出",
+          "x": 1042.7786865234375,
+          "y": 592.2916870117188,
+          "width": 272,
+          "height": 42,
+          "entityId": "REPLAY-TRUCK-C"
+        }
+      ]
+    },
+    {
+      "board": "dJZrJ",
+      "overlay": "v9H1qU",
+      "metadata": {
+        "type": "replay_poi_overlay",
+        "source": "sources/order-replay-20261024/poi-followed.json",
+        "sourceViewport": [
+          1920,
+          1080
+        ],
+        "sourceCrop": [
+          0,
+          64,
+          1440,
+          1016
+        ],
+        "scale": 1
+      },
+      "labels": [
+        {
+          "id": "w8Vb3",
+          "name": "人工叉车 03 · 返回地堆 · 跟随中",
+          "x": 713.4075927734375,
+          "y": 242.53121948242188,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-03"
+        }
+      ]
+    },
+    {
+      "board": "Aqeif",
+      "overlay": "ENy9m",
+      "metadata": {
+        "type": "replay_poi_overlay",
+        "source": "sources/order-replay-20261024/poi-fault.json",
+        "sourceViewport": [
+          1920,
+          1080
+        ],
+        "sourceCrop": [
+          0,
+          64,
+          1440,
+          1016
+        ],
+        "scale": 1
+      },
+      "labels": [
+        {
+          "id": "Xwfk5",
+          "name": "人工叉车 03 · 故障停机 · 跟随中",
+          "x": 632.7005081176758,
+          "y": 242.53125,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-03"
+        }
+      ]
+    },
+    {
+      "board": "vNXAk",
+      "overlay": "LntpZ",
+      "metadata": {
+        "type": "replay_poi_overlay",
+        "source": "sources/order-replay-20261024/poi-completed.json",
+        "sourceViewport": [
+          1920,
+          1080
+        ],
+        "sourceCrop": [
+          0,
+          64,
+          1440,
+          1016
+        ],
+        "scale": 1
+      },
+      "labels": [
+        {
+          "id": "bDuRt",
+          "name": "人工叉车 03 · 等待补给",
+          "x": 1066.109130859375,
+          "y": 247.47531127929688,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-03"
+        },
+        {
+          "id": "ctzmB",
+          "name": "人工叉车 01 · 等待补给",
+          "x": 892.40576171875,
+          "y": 155.07940673828125,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-01"
+        },
+        {
+          "id": "JpQp5",
+          "name": "人工叉车 02 · 等待补给",
+          "x": 770.3726806640625,
+          "y": 498.885498046875,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-02"
+        },
+        {
+          "id": "Ya2IN",
+          "name": "人工叉车 04 · 等待补给",
+          "x": 214.61087036132812,
+          "y": 245.07940673828125,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-04"
+        },
+        {
+          "id": "FSQZW",
+          "name": "人工叉车 05 · 等待补给",
+          "x": 435.3330078125,
+          "y": 588.885498046875,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-05"
+        },
+        {
+          "id": "OjtKE",
+          "name": "装卸卡车 B · 补给卸货完成",
+          "x": 276.8668212890625,
+          "y": 736.2916259765625,
+          "width": 273,
+          "height": 42,
+          "entityId": "REPLAY-TRUCK-B"
+        },
+        {
+          "id": "Sya5U",
+          "name": "装卸卡车 C · 驶离园区",
+          "x": 1121.612548828125,
+          "y": 628.34765625,
+          "width": 240,
+          "height": 42,
+          "entityId": "REPLAY-TRUCK-C"
+        }
+      ]
+    },
+    {
+      "board": "QFsnb",
+      "overlay": "Q5okhG",
+      "metadata": {
+        "type": "replay_poi_overlay",
+        "source": "sources/order-replay-20261024/poi-moving.json",
+        "sourceViewport": [
+          1920,
+          1080
+        ],
+        "sourceCrop": [
+          0,
+          64,
+          1440,
+          1016
+        ],
+        "scale": 1
+      },
+      "labels": [
+        {
+          "id": "YSCeD",
+          "name": "人工叉车 01 · 返回地堆",
+          "x": 265.0886535644531,
+          "y": 387.13812255859375,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-01"
+        },
+        {
+          "id": "ivDWN",
+          "name": "人工叉车 02 · 等待作业",
+          "x": 770.3726806640625,
+          "y": 498.885498046875,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-02"
+        },
+        {
+          "id": "vFAFb",
+          "name": "人工叉车 03 · 返回地堆",
+          "x": 534.34326171875,
+          "y": 398.1644287109375,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-03"
+        },
+        {
+          "id": "SMaZW",
+          "name": "人工叉车 04 · 返回地堆",
+          "x": 690.8694458007812,
+          "y": 587.34375,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-04"
+        },
+        {
+          "id": "owfRk",
+          "name": "人工叉车 05 · 等待作业",
+          "x": 286.8330078125,
+          "y": 498.885498046875,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-05"
+        },
+        {
+          "id": "uNrMl",
+          "name": "装卸卡车 B · 等待叉车退出",
+          "x": 230.32769775390625,
+          "y": 682.2916259765625,
+          "width": 273,
+          "height": 42,
+          "entityId": "REPLAY-TRUCK-B"
+        },
+        {
+          "id": "ryuMa",
+          "name": "装卸卡车 C · 等待叉车退出",
+          "x": 1042.7786865234375,
+          "y": 592.2916870117188,
+          "width": 272,
+          "height": 42,
+          "entityId": "REPLAY-TRUCK-C"
+        }
+      ]
+    },
+    {
+      "board": "IeQ6D",
+      "overlay": "W1xCx",
+      "metadata": {
+        "type": "replay_poi_overlay",
+        "source": "sources/order-replay-20261024/poi-moving.json",
+        "sourceViewport": [
+          1920,
+          1080
+        ],
+        "sourceCrop": [
+          0,
+          64,
+          1440,
+          1016
+        ],
+        "scale": 1
+      },
+      "labels": [
+        {
+          "id": "RY7p7",
+          "name": "人工叉车 01 · 返回地堆",
+          "x": 265.0886535644531,
+          "y": 387.13812255859375,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-01"
+        },
+        {
+          "id": "QRzPf",
+          "name": "人工叉车 02 · 等待作业",
+          "x": 770.3726806640625,
+          "y": 498.885498046875,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-02"
+        },
+        {
+          "id": "Cd2yV",
+          "name": "人工叉车 03 · 返回地堆",
+          "x": 534.34326171875,
+          "y": 398.1644287109375,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-03"
+        },
+        {
+          "id": "y0rHP0",
+          "name": "人工叉车 04 · 返回地堆",
+          "x": 690.8694458007812,
+          "y": 587.34375,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-04"
+        },
+        {
+          "id": "qb14r",
+          "name": "人工叉车 05 · 等待作业",
+          "x": 286.8330078125,
+          "y": 498.885498046875,
+          "width": 249,
+          "height": 42,
+          "entityId": "REPLAY-FORK-05"
+        },
+        {
+          "id": "EQL7I",
+          "name": "装卸卡车 B · 等待叉车退出",
+          "x": 230.32769775390625,
+          "y": 682.2916259765625,
+          "width": 273,
+          "height": 42,
+          "entityId": "REPLAY-TRUCK-B"
+        },
+        {
+          "id": "vXSVZ",
+          "name": "装卸卡车 C · 等待叉车退出",
+          "x": 1042.7786865234375,
+          "y": 592.2916870117188,
+          "width": 272,
+          "height": 42,
+          "entityId": "REPLAY-TRUCK-C"
+        }
+      ]
+    },
+    {
+      "board": "UTzjR",
+      "overlay": "OAXfW",
+      "metadata": {
+        "type": "replay_poi_overlay",
+        "source": "sources/order-replay-20261024/poi-moving.json",
+        "sourceViewport": [
+          1920,
+          1080
+        ],
+        "sourceCrop": [
+          0,
+          64,
+          1440,
+          1016
+        ],
+        "scale": 0.8228346456692913
+      },
+      "labels": [
+        {
+          "id": "QCMcW",
+          "name": "人工叉车 01 · 返回地堆",
+          "x": 105.68318344476654,
+          "y": 318.55065990057517,
+          "width": 204.88582677165354,
+          "height": 34.55905511811024,
+          "entityId": "REPLAY-FORK-01"
+        },
+        {
+          "id": "Y0Eo3",
+          "name": "人工叉车 02 · 等待作业",
+          "x": 521.4483868456261,
+          "y": 410.50027201494834,
+          "width": 204.88582677165354,
+          "height": 34.55905511811024,
+          "entityId": "REPLAY-FORK-02"
+        },
+        {
+          "id": "gzKE0",
+          "name": "人工叉车 03 · 返回地堆",
+          "x": 327.2352035402313,
+          "y": 327.6234866164801,
+          "width": 204.88582677165354,
+          "height": 34.55905511811024,
+          "entityId": "REPLAY-FORK-03"
+        },
+        {
+          "id": "yhOvk",
+          "name": "人工叉车 04 · 返回地堆",
+          "x": 456.03037075733573,
+          "y": 483.28678641732284,
+          "width": 204.88582677165354,
+          "height": 34.55905511811024,
+          "entityId": "REPLAY-FORK-04"
+        },
+        {
+          "id": "KDgHX",
+          "name": "人工叉车 05 · 等待作业",
+          "x": 123.57519146776573,
+          "y": 410.50027201494834,
+          "width": 204.88582677165354,
+          "height": 34.55905511811024,
+          "entityId": "REPLAY-FORK-05"
+        },
+        {
+          "id": "i3GfT",
+          "name": "装卸卡车 B · 等待叉车退出",
+          "x": 77.08066468726929,
+          "y": 561.4131883035494,
+          "width": 224.63385826771653,
+          "height": 34.55905511811024,
+          "entityId": "REPLAY-TRUCK-B"
+        },
+        {
+          "id": "kfGi0",
+          "name": "装卸卡车 C · 等待叉车退出",
+          "x": 728.1889763779527,
+          "y": 487.3581204151544,
+          "width": 223.81102362204723,
+          "height": 34.55905511811024,
+          "entityId": "REPLAY-TRUCK-C"
+        }
+      ]
+    }
   ],
+  "visualChecks": [
+    "Seven state screenshots inspected; full-resolution followed, completion and compact exports inspected.",
+    "Global moving/completed contain seven visible POIs; offscreen truck A not invented.",
+    "Followed/fault contain one visible forklift 03 POI with actual selected/following state.",
+    "Completion uses separate no-route capture and no cyan route dots.",
+    "Cyan route dots match native trailVisible; fault and pending text stay independent.",
+    "1920 POIs use native coordinates with y=64 subtraction. Compact uses image scale; truck C card clamped within right edge, anchor unchanged.",
+    "Four SHA-derived image filenames avoid cache reuse."
+  ],
+  "limitations": [
+    "Static editable Pencil states, not executable native playback.",
+    "POI text, cards, icons, leaders and anchors are editable, not a captured UI overlay.",
+    "Completion truck A stays as an offscreen record without inventing unobserved status."
+  ],
+  "imageCacheVerification": {
+    "method": "Distinct SHA256 filenames and visible scene crops matched to native references",
+    "newAssetUrlCount": 4,
+    "backgroundCount": 7
+  },
   "sourceSaveEvidence": {
     "sourceFile": "Saas.pen",
     "sourceSaved": true,
     "method": "native_ctrl_s_by_root_agent_and_disk_metadata",
-    "bytes": 2007656,
-    "lastWriteTimeUtc": "2026-10-23T15:21:21.276Z",
-    "sha256": "183B0DBF25F8BE92A2F00A61B63C5D3D4882F00770E393718F4AE263EB6128D8",
+    "bytes": 2137790,
+    "lastWriteTimeUtc": "2026-10-24T01:27:18.154Z",
+    "sha256": "7DD0D0970B2DFFE0A7A4877DE99DF2C7028EB7BF73BE9CE2CCB20F904815FD44",
     "canvasMutationAfterSave": false
-  },
-  "finalSceneAsset": "images/order-replay-20261023/scene-floor-overview-dbac427f34b1.png",
-  "finalSceneSha256": "DBAC427F34B1C64BB9E2CDCAC3557F0FA2701AA6CAEE7C49A95F0D46F29EE2C7",
-  "imageCacheVerification": {
-    "method": "Pixel comparison of an unobscured 800x370 scene region in iiFrY against copied captures",
-    "export": "exports/current/iiFrY.png",
-    "regionPixels": [
-      450,
-      330,
-      1250,
-      700
-    ],
-    "finalImageMeanAbsoluteDifference": 0,
-    "previousImageMeanAbsoluteDifference": 1.2335,
-    "newAssetUrlCount": 7
   }
 }

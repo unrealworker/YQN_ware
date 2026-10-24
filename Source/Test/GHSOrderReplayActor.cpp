@@ -107,15 +107,16 @@ bool AGHSOrderReplayActor::InitializeReplay()
     for(int I=0;I<GHSReplay::ForkCount;++I)
     {
         auto* Trail=NewObject<UInstancedStaticMeshComponent>(this,*FString::Printf(TEXT("Trail%d"),I));AddInstanceComponent(Trail);Trail->SetupAttachment(RootComponent);Trail->SetStaticMesh(Plane);Trail->SetMobility(EComponentMobility::Movable);Trail->SetCollisionEnabled(ECollisionEnabled::NoCollision);Trail->SetCastShadow(false);Trail->SetCanEverAffectNavigation(false);Trail->SetGenerateOverlapEvents(false);
-        // Metres along the whole route, not one repeating UV cycle per short chord.
-        Trail->SetNumCustomDataFloats(6);
+        Trail->SetReceivesDecals(false);
+        // Static per-leg geometry; only two material scalars change during replay.
+        Trail->SetNumCustomDataFloats(9);
         const auto Tint=FLinearColor::FromSRGBColor(FColor::FromHex(UTF8_TO_TCHAR(GHSReplay::TrailColor(I))));
         auto* MID=UMaterialInstanceDynamic::Create(Material,this);MID->SetVectorParameterValue(TEXT("Tint"),Tint);
         Trail->SetMaterial(0,MID);Trail->RegisterComponent();Trails.Add(Trail);TrailMaterials.Add(MID);
-        const auto Segments=GHSReplay::BuildTrailSegments(Simulation.Tracks[I]);
-        for(const auto& Segment:Segments)
+        TrailPlans[I]=GHSReplay::BuildTaskTrail(Simulation.Tracks[I]);
+        for(const auto& Segment:TrailPlans[I].Segments)
         {
-            FVector A=V(Segment.A),B=V(Segment.B);A.Z+=3;B.Z+=3;const FVector Delta=B-A;
+            FVector A=V(Segment.A),B=V(Segment.B);A.Z=B.Z=3.+I*.8;const FVector Delta=B-A;
             const double LengthMeters=Segment.LengthMeters;
             // Exact adjoining lengths avoid dark/bright stripes from alpha overlap.
             FTransform Transform(FRotator(0,Delta.Rotation().Yaw,0),(A+B)*.5,FVector(LengthMeters,GHSReplay::TrailWidthCm/100.,1));
@@ -126,6 +127,9 @@ bool AGHSOrderReplayActor::InitializeReplay()
             Trail->SetCustomDataValue(Instance,3,float(Segment.EndShearCm),false);
             Trail->SetCustomDataValue(Instance,4,float(Segment.StartHalfWidthCm),false);
             Trail->SetCustomDataValue(Instance,5,float(Segment.EndHalfWidthCm),false);
+            Trail->SetCustomDataValue(Instance,6,float(Segment.LegId),false);
+            Trail->SetCustomDataValue(Instance,7,float(Segment.ProgressStartMeters),false);
+            Trail->SetCustomDataValue(Instance,8,float(Segment.ProgressDeltaMeters),false);
         }
         Trail->MarkRenderStateDirty();
         auto* Ripple=NewObject<UDecalComponent>(this,*FString::Printf(TEXT("GroundRipple%d"),I));
@@ -150,7 +154,9 @@ void AGHSOrderReplayActor::EvaluateAt(double Time)
             auto Fork=Transform;Fork.AddToTranslation(FVector(0,0,P.Lift));Carriages[I]->SetWorldTransform(Fork);Carriages[I]->SetVisibility(P.Visible);
             auto Mast=Transform;Mast.AddToTranslation(FVector(0,0,FMath::Max(0.,P.Lift-70.)*.5));Masts[I]->SetWorldTransform(Mast);Masts[I]->SetVisibility(P.Visible);
             GroundRipples[I]->SetWorldLocationAndRotation(FVector(P.Position.X,P.Position.Y,1.5),FRotator(-90,P.Yaw,0));
-            GroundRipples[I]->SetVisibility(P.Visible&&TrailMode!=TEXT("off")&&(TrailMode!=TEXT("selected")||SelectedId==S(Simulation.Tracks[I].Id)));
+            TrailStates[I]=GHSReplay::EvaluateTaskTrail(TrailPlans[I],CurrentTime,Simulation.CycleDuration,PlaybackEndTime);
+            TrailMaterials[I]->SetScalarParameterValue(TEXT("ActiveLegId"),TrailStates[I].Moving?float(TrailStates[I].LegId):-1.f);
+            TrailMaterials[I]->SetScalarParameterValue(TEXT("RemainingFromMeters"),float(TrailStates[I].DistanceMeters));
         }
         if(I>=GHSReplay::ForkCount&&I<GHSReplay::DeviceCount)
         {
@@ -163,8 +169,14 @@ void AGHSOrderReplayActor::EvaluateAt(double Time)
     }
     for(UMaterialInstanceDynamic* Material:TrailMaterials)if(Material)Material->SetScalarParameterValue(TEXT("ReplayTime"),float(FMath::Fmod(CurrentTime,10000.)));
     for(UMaterialInstanceDynamic* Material:RippleMaterials)if(Material)Material->SetScalarParameterValue(TEXT("ReplayTime"),float(FMath::Fmod(CurrentTime,10000.)));
+    UpdateTrails();
 }
 
+void AGHSOrderReplayActor::SetPlaybackEndTime(double EndTime)
+{
+    PlaybackEndTime=FMath::IsFinite(EndTime)&&EndTime>=0?EndTime:-1.;
+    if(bReady)EvaluateAt(CurrentTime);
+}
 void AGHSOrderReplayActor::SetTrailMode(const FString& Mode,const FString& Id)
 {
     TrailMode=Mode==TEXT("selected")||Mode==TEXT("off")?Mode:TEXT("all");SelectedId=Id;UpdateTrails();
@@ -173,9 +185,10 @@ void AGHSOrderReplayActor::UpdateTrails()
 {
     for(int32 I=0;I<Trails.Num();++I)
     {
-        const bool Visible=TrailMode==TEXT("all")||(TrailMode==TEXT("selected")&&S(Simulation.Tracks[I].Id)==SelectedId);
+        const bool Visible=TrailStates[I].Moving&&Simulation.Poses[I].Visible&&
+            (TrailMode==TEXT("all")||(TrailMode==TEXT("selected")&&S(Simulation.Tracks[I].Id)==SelectedId));
         Trails[I]->SetVisibility(Visible);
-        GroundRipples[I]->SetVisibility(Visible&&Simulation.Poses[I].Visible);
+        GroundRipples[I]->SetVisibility(Visible);
     }
 }
 FString AGHSOrderReplayActor::GetSourceInstancesJson() const {return SourceInstancesJson;}
@@ -220,7 +233,20 @@ FString AGHSOrderReplayActor::GetSnapshotJson() const
     TArray<TSharedPtr<FJsonValue>> Devices;
     for(int I=0;I<GHSReplay::DeviceCount;++I)
     {
-        const auto& T=Simulation.Tracks[I];const auto& P=Simulation.Poses[I];auto R=MakeShared<FJsonObject>();R->SetStringField(TEXT("id"),S(T.Id));R->SetStringField(TEXT("name"),S(T.Name));R->SetStringField(TEXT("title"),S(T.Name));R->SetStringField(TEXT("kind"),S(T.Kind));R->SetStringField(TEXT("type"),I<5?TEXT("forklift"):TEXT("truck"));R->SetStringField(TEXT("trailColor"),UTF8_TO_TCHAR(GHSReplay::TrailColor(I)));R->SetStringField(TEXT("status"),P.Status?S(*P.Status):TEXT("准备中"));R->SetStringField(TEXT("state"),P.Status?S(*P.Status):TEXT("准备中"));R->SetBoolField(TEXT("visible"),P.Visible);R->SetArrayField(TEXT("position"),JsonVec(V(P.Position)));R->SetNumberField(TEXT("yaw"),P.Yaw);R->SetNumberField(TEXT("lift"),P.Lift);int Load=0;for(int C=8;C<18;++C)if(Simulation.Poses[C].Owner==I)++Load;R->SetNumberField(TEXT("cargoCount"),Load);R->SetNumberField(TEXT("load"),Load);R->SetBoolField(TEXT("loaded"),Load>0);R->SetNumberField(TEXT("capacity"),I<5?1:(I==6?2:4));R->SetNumberField(TEXT("trip"),Simulation.CycleDuration>0?FMath::FloorToDouble(CurrentTime/Simulation.CycleDuration)+1:1);Devices.Add(MakeShared<FJsonValueObject>(R));
+        const auto& T=Simulation.Tracks[I];const auto& P=Simulation.Poses[I];auto R=MakeShared<FJsonObject>();R->SetStringField(TEXT("id"),S(T.Id));R->SetStringField(TEXT("name"),S(T.Name));R->SetStringField(TEXT("title"),S(T.Name));R->SetStringField(TEXT("kind"),S(T.Kind));R->SetStringField(TEXT("type"),I<5?TEXT("forklift"):TEXT("truck"));R->SetStringField(TEXT("trailColor"),UTF8_TO_TCHAR(GHSReplay::TrailColor(I)));R->SetStringField(TEXT("status"),P.Status?S(*P.Status):TEXT("准备中"));R->SetStringField(TEXT("state"),P.Status?S(*P.Status):TEXT("准备中"));R->SetBoolField(TEXT("visible"),P.Visible);R->SetArrayField(TEXT("position"),JsonVec(V(P.Position)));R->SetNumberField(TEXT("yaw"),P.Yaw);R->SetNumberField(TEXT("lift"),P.Lift);int Load=0;for(int C=8;C<18;++C)if(Simulation.Poses[C].Owner==I)++Load;R->SetNumberField(TEXT("cargoCount"),Load);R->SetNumberField(TEXT("load"),Load);R->SetBoolField(TEXT("loaded"),Load>0);R->SetNumberField(TEXT("capacity"),I<5?1:(I==6?2:4));R->SetNumberField(TEXT("trip"),Simulation.CycleDuration>0?FMath::FloorToDouble(CurrentTime/Simulation.CycleDuration)+1:1);
+        const bool TrailVisible=I<GHSReplay::ForkCount&&Trails.IsValidIndex(I)&&Trails[I]->IsVisible();
+        R->SetBoolField(TEXT("trailVisible"),TrailVisible);
+        if(I<GHSReplay::ForkCount)
+        {
+            const auto& State=TrailStates[I];
+            R->SetBoolField(TEXT("moving"),State.Moving);R->SetNumberField(TEXT("trailLegId"),State.LegId);
+            R->SetNumberField(TEXT("trailLegStartTime"),State.StartTime);R->SetNumberField(TEXT("trailLegEndTime"),State.EndTime);
+            R->SetNumberField(TEXT("trailCompletedMeters"),State.DistanceMeters);R->SetNumberField(TEXT("trailProgressMeters"),State.DistanceMeters);R->SetNumberField(TEXT("trailLengthMeters"),State.LengthMeters);
+            R->SetNumberField(TEXT("trailRemainingMeters"),FMath::Max(0.,State.LengthMeters-State.DistanceMeters));
+            R->SetNumberField(TEXT("trailWidthCm"),GHSReplay::TrailWidthCm);R->SetNumberField(TEXT("trailHeightCm"),3.+I*.8);
+            R->SetNumberField(TEXT("trailLegCount"),TrailPlans[I].Legs.size());
+        }
+        Devices.Add(MakeShared<FJsonValueObject>(R));
     }
     Json->SetArrayField(TEXT("devices"),Devices);return Write(Json);
 }

@@ -4,6 +4,8 @@
 #include "GHSWarehouseRoofComponent.h"
 #include "GHSStorageCapacityComponent.h"
 #include "GHSOrderReplaySession.h"
+#include "GHSOrderReplayActor.h"
+#include "GHSReplayPOILayout.h"
 #include "GHSHUDMotion.h"
 #include "Blueprint/WidgetTree.h"
 #include "Components/CanvasPanel.h"
@@ -654,6 +656,13 @@ bool UGHSTwinHUDWidget::HandleSceneClick(FVector2D Position)
     if(!IsScenePoint(Position)) return false;
     if(auto* Replay=ReplaySession();Replay && Replay->IsReplaying())
     {
+        const FVector2D LogicalPosition=Viewport.ToLogical(Position);
+        for(int32 I=VisibleLabels.Num()-1;I>=0;--I)
+        {
+            const FLabel& Label=Labels[VisibleLabels[I]];
+            if(Inside(LogicalPosition,Label.Position,Label.Size))
+            {Replay->Select(Label.Id);PushReplayState();return true;}
+        }
         FVector Origin,Direction;FString Id;
         if(GetOwningPlayer()->DeprojectScreenPositionToWorld(Position.X,Position.Y,Origin,Direction) && Replay->Pick(Origin,Direction,Id)) Replay->Select(Id);
         else Replay->Select(TEXT(""));
@@ -802,8 +811,9 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
         Replay->Advance(DeltaSeconds,ViewSize,FVector2D(Rect.X+Rect.Z*.5,Rect.Y+Rect.W*.5));
         if(Now>=NextReplayPush) {PushReplayState();NextReplayPush=Now+.1;}
         bWarehousePOIVisible=false;bSelectedScreenBoundsValid=false;
-        VisibleLabels.Reset();PreviousVisibleLabels.Reset();PreviousPositions.Reset();LabelAges.Reset();return;
+        UpdateReplayPOIs(DeltaSeconds);return;
     }
+    if(bReplayPOIs) ClearReplayPOIs();
     UpdateWarehousePOI();
     UpdateSelectedScreenBounds();
     if(!bInterior || !bShowPOIs || !GetOwningPlayer())
@@ -821,6 +831,82 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
     const bool bRelayout=bCandidatesChanged || bViewportChanged || bFastMovement;
     if(bRelayout) {LastLayoutRotation=Rotation;LastLayoutLocation=Location;}
     UpdateVisiblePOIs(DeltaSeconds,bRelayout);
+}
+void UGHSTwinHUDWidget::ClearReplayPOIs()
+{
+    bReplayPOIs=false;Labels.Reset();VisibleLabels.Reset();PreviousVisibleLabels.Reset();
+    PreviousPositions.Reset();LabelAges.Reset();POICadence.Invalidate();
+}
+void UGHSTwinHUDWidget::UpdateReplayPOIs(float DeltaSeconds)
+{
+    TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinHUD_ReplayPOIs);
+    auto* Session=ReplaySession();auto* PC=GetOwningPlayer();
+    auto* Replay=Session?Session->GetReplayActor():nullptr;
+    if(!Replay || !PC || !IsInteriorAvailable()) {VisibleLabels.Reset();return;}
+    const auto& Simulation=Replay->GetSimulation();
+    if(!bReplayPOIs)
+    {
+        ClearReplayPOIs();bReplayPOIs=true;Labels.SetNum(GHSReplay::DeviceCount);++CandidateBuildCount;
+    }
+    ++VisibleProjectionFrames;VisibleLabels.Reset();
+    const double Bottom=FMath::Min(Layout.ScenePosition.Y+Layout.SceneSize.Y-8,
+        ReplayOverlaySlot?ReplayOverlaySlot->GetPosition().Y-12:ViewSize.Y-204);
+    const FBox2D Bounds(Layout.ScenePosition+FVector2D(8,8),FVector2D(Layout.ScenePosition.X+Layout.SceneSize.X-8,Bottom));
+    TArray<FBox2D> Blocked,Occupied;
+    Blocked.Reserve(14);Occupied.Reserve(GHSReplay::DeviceCount);
+    auto Block=[&](FVector2D At,FVector2D Size){if(Size.X>0 && Size.Y>0) Blocked.Add(FBox2D(At,At+Size));};
+    Block(FVector2D(24,Layout.HeaderHeight+16),FVector2D(256,84));
+    if(IsSceneSearchVisible()) Block(GetSceneSearchPosition(),GetSceneSearchSize());
+    if(bSearchOpen && !bSearchIsRemote && IsSceneSearchVisible()) Block(SearchLayout().Position,SearchLayout().Size);
+    if(bWarehouseMenuOpen) Block(FVector2D(24,Layout.HeaderHeight+110),FVector2D(320,176));
+    if(PanelVisibilityProgress>0) Block(GetPanelVisualPosition(),GetPanelVisualSize());
+    Block(GetSceneControlsPosition(),FVector2D(48,132));
+    FVector2D Anchors[GHSReplay::DeviceCount];bool Projected[GHSReplay::DeviceCount]={};
+    TArray<int32> Order;Order.Reserve(GHSReplay::DeviceCount);
+    for(int32 I=0;I<GHSReplay::DeviceCount;++I)
+    {
+        auto& L=Labels[I];const auto& T=Simulation.Tracks[I];const auto& P=Simulation.Poses[I];
+        const FString Id=UTF8_TO_TCHAR(T.Id.c_str()),Status=P.Status?UTF8_TO_TCHAR(P.Status->c_str()):TEXT("");
+        if(L.Id!=Id || L.Status!=Status)
+        {
+            L.Id=Id;L.Kind=I<GHSReplay::ForkCount?TEXT("forklift"):TEXT("truck");
+            L.DisplayTitle=UTF8_TO_TCHAR(T.Name.c_str());L.Text=L.DisplayTitle;L.Status=Status;L.State=GHSReplayPOI::CompactStatus(Status);
+            const auto Kind=GHSReplayPOI::StatusKind(Status);
+            L.bAlert=Kind==GHSReplayPOI::EStatus::Fault;
+            L.Accent=C(Kind==GHSReplayPOI::EStatus::Fault?TEXT("B53743"):Kind==GHSReplayPOI::EStatus::Waiting?TEXT("92580D"):Kind==GHSReplayPOI::EStatus::Idle?TEXT("64748B"):TEXT("087B68"));
+            L.TitleMetrics=GHSTwinTypography::Measure(L.DisplayTitle,Font(14));L.StateMetrics=GHSTwinTypography::Measure(L.State,Font(12));
+            L.BadgeWidth=FMath::Max(40.,L.StateMetrics.Size.X+16.);
+            L.Size=FVector2D(FMath::Max(220.,40+L.TitleMetrics.Size.X+16+L.BadgeWidth+12),42);
+        }
+        L.bSelected=L.Id==Session->GetSelectedId();L.bFollowing=L.Id==Session->GetFollowId();
+        if(!P.Visible) continue;
+        FVector Center,Extent;FRotator Rotation;
+        if(!Replay->ResolveDevice(L.Id,Center,Rotation,Extent)) continue;
+        L.WorldLocation=Center+FVector(0,0,Extent.Z+24);
+        ++PointProjectionCount;FVector2D Pixel;
+        if(!PC->ProjectWorldLocationToScreen(L.WorldLocation,Pixel,false)) continue;
+        Anchors[I]=Viewport.ToLogical(Pixel);Projected[I]=Bounds.IsInside(Anchors[I]);
+        if(Projected[I]) {Order.Add(I);Block(Anchors[I]-FVector2D(12,12),FVector2D(24,24));}
+    }
+    Order.StableSort([&](int32 A,int32 B)
+    {
+        const int32 PA=Labels[A].bFollowing?3:Labels[A].bSelected?2:Labels[A].bAlert?1:0;
+        const int32 PB=Labels[B].bFollowing?3:Labels[B].bSelected?2:Labels[B].bAlert?1:0;
+        return PA>PB;
+    });
+    float CursorX=0,CursorY=0;const bool bCursor=PC->GetMousePosition(CursorX,CursorY);
+    const FVector2D ReplayCursorPosition=Viewport.ToLogical(FVector2D(CursorX,CursorY));TSet<FString> Current;
+    for(const int32 I:Order)
+    {
+        auto& L=Labels[I];const FVector2D Screen=Anchors[I];FVector2D At,Previous=L.Position+Screen-L.Anchor;
+        const FVector2D* Preferred=PreviousPositions.Contains(L.Id)?&Previous:nullptr;
+        if(!GHSReplayPOI::Place(Screen,L.Size,Bounds,Blocked,Occupied,Preferred,At)) continue;
+        Occupied.Add(FBox2D(At,At+L.Size));Current.Add(L.Id);PreviousPositions.Add(L.Id,At);
+        L.Position=At;L.Anchor=Screen;L.bHovered=bCursor && Inside(ReplayCursorPosition,At,L.Size);
+        float& Age=LabelAges.FindOrAdd(L.Id);Age+=FMath::Max(0.f,DeltaSeconds);
+        L.Opacity=FMath::Min(GHSHUDMotion::Progress(Age),RoofHUDMotion.InteriorOpacity());VisibleLabels.Add(I);
+    }
+    for(auto It=LabelAges.CreateIterator();It;++It) if(!Current.Contains(It.Key())) {PreviousPositions.Remove(It.Key());It.RemoveCurrent();}
 }
 void UGHSTwinHUDWidget::RebuildPOICandidates(bool bAggregate)
 {
@@ -953,6 +1039,11 @@ FString UGHSTwinHUDWidget::GetPOIReport() const
         const auto& Label=Labels[Index];
         auto Item=MakeShared<FJsonObject>(); Item->SetStringField(TEXT("id"),Label.Id); Item->SetStringField(TEXT("icon"),Label.Kind);
         Item->SetBoolField(TEXT("selected"),Label.bSelected); Item->SetNumberField(TEXT("height"),Label.Size.Y);
+        Item->SetBoolField(TEXT("following"),Label.bFollowing);Item->SetNumberField(TEXT("width"),Label.Size.X);
+        Item->SetStringField(TEXT("title"),Label.DisplayTitle);Item->SetStringField(TEXT("status"),Label.Status);
+        Item->SetStringField(TEXT("state"),Label.State);Item->SetStringField(TEXT("statusText"),Label.State);
+        Item->SetStringField(TEXT("accent"),Label.Accent.ToFColorSRGB().ToHex());Item->SetNumberField(TEXT("badgeWidth"),Label.BadgeWidth);
+        Item->SetNumberField(TEXT("anchorX"),Label.Anchor.X);Item->SetNumberField(TEXT("anchorY"),Label.Anchor.Y);
         Item->SetNumberField(TEXT("opacity"),Label.Opacity);
         Item->SetStringField(TEXT("fill"),Label.bSelected?TEXT("356BFA"):TEXT("FFFFFF"));
         Item->SetNumberField(TEXT("x"),Label.Position.X); Item->SetNumberField(TEXT("y"),Label.Position.Y);
@@ -965,6 +1056,7 @@ FString UGHSTwinHUDWidget::GetPOIReport() const
     }
     auto Root=MakeShared<FJsonObject>(); Root->SetArrayField(TEXT("labels"),Items); Root->SetNumberField(TEXT("selectionStroke"),6);
     Root->SetStringField(TEXT("pointFilter"),PointFilter);
+    Root->SetBoolField(TEXT("replay"),IsReplayActive());
     Root->SetBoolField(TEXT("interiorAvailable"),IsInteriorAvailable());
     Root->SetStringField(TEXT("pendingNavigation"),PendingInteriorAction);
     Root->SetStringField(TEXT("pendingNavigationId"),PendingInteriorId);
@@ -1115,7 +1207,7 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
         const FLinearColor Accent=L.Accent;
         const FLinearColor Blue=C(TEXT("356BFA"));
         Box(L.Position+FVector2D(0,3),L.Size,Fade(FLinearColor(.08,.15,.25,.055)),FGHSTwinSceneChrome::CornerRadius);
-        Box(L.Position,L.Size,Fade(L.bSelected?Blue:FLinearColor::White),FGHSTwinSceneChrome::CornerRadius,Fade(L.bSelected || L.bHovered?Blue:C(TEXT("DFE7F2"))),L.bHovered?1.5f:1.f);
+        Box(L.Position,L.Size,Fade(L.bSelected?Blue:FLinearColor::White),FGHSTwinSceneChrome::CornerRadius,Fade(L.bFollowing?C(TEXT("36B5C6")):L.bSelected || L.bHovered?Blue:C(TEXT("DFE7F2"))),L.bFollowing?2.5f:L.bHovered?1.5f:1.f);
         // Type marks follow the approved 24-unit line-icon system, not a generic status dot.
         const FVector2D IconAt=L.Position+FVector2D(12,12); const FLinearColor Ink=Fade(L.bSelected?FLinearColor::White:Accent);
         auto Path=[&](std::initializer_list<FVector2D> Points)

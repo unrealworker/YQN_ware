@@ -18,6 +18,7 @@ public:
     AGHSOrderReplayActor();
     bool InitializeReplay();
     void EvaluateAt(double Time);
+    void SetPlaybackEndTime(double EndTime);
     void SetTrailMode(const FString& Mode,const FString& SelectedId);
     FString GetSnapshotJson() const;
     FString GetEventsJson(double WindowStart,double WindowEnd,int32 Limit=256) const;
@@ -26,11 +27,14 @@ public:
     bool PickRay(const FVector& Origin,const FVector& Direction,FString& Id) const;
     const FString& GetError() const { return Error; }
     double GetCycleDuration() const { return Simulation.CycleDuration; }
+    const GHSReplay::Simulation& GetSimulation() const { return Simulation; }
 private:
     bool LoadData();
     UStaticMeshComponent* AddMesh(const FString& Name,const FString& Path);
     void UpdateTrails();
     GHSReplay::Simulation Simulation;
+    std::array<GHSReplay::TrailPlan,GHSReplay::ForkCount> TrailPlans;
+    std::array<GHSReplay::TrailState,GHSReplay::ForkCount> TrailStates;
     UPROPERTY(Transient) TArray<TObjectPtr<UStaticMeshComponent>> Bodies;
     UPROPERTY(Transient) TArray<TObjectPtr<UStaticMeshComponent>> Carriages;
     UPROPERTY(Transient) TArray<TObjectPtr<UStaticMeshComponent>> Masts;
@@ -42,6 +46,6 @@ private:
     UPROPERTY(Transient) TArray<TObjectPtr<UDecalComponent>> GroundRipples;
     UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInstanceDynamic>> RippleMaterials;
     FString Error,SourceInstancesJson,TrailMode=TEXT("all"),SelectedId;
-    double CurrentTime=0;
+    double CurrentTime=0,PlaybackEndTime=-1.;
     bool bReady=false;
 };

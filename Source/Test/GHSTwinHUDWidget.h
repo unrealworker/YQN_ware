@@ -167,6 +167,8 @@ private:
     void UpdateBrowserViewport(bool bForce=false);
     void RebuildPOICandidates(bool bAggregate);
     void UpdateVisiblePOIs(float DeltaSeconds,bool bRelayout);
+    void UpdateReplayPOIs(float DeltaSeconds);
+    void ClearReplayPOIs();
     void UpdateSelectedScreenBounds();
     void Focus(const FString& Id);
     void Overview();
@@ -220,9 +222,9 @@ private:
     {
         FString Id,Text,Kind,Status,DisplayTitle,State;
         FVector WorldLocation=FVector::ZeroVector;
-        FVector2D Position,Anchor,Size;
+        FVector2D Position=FVector2D::ZeroVector,Anchor=FVector2D::ZeroVector,Size=FVector2D::ZeroVector;
         FLinearColor Accent;
-        bool bAlert=false,bSelected=false,bHovered=false,bRegion=false,bGroup=false;
+        bool bAlert=false,bSelected=false,bHovered=false,bRegion=false,bGroup=false,bFollowing=false;
         float Opacity=1;
         double BadgeWidth=0;
         FGHSTwinTextMetrics TitleMetrics,StateMetrics;
@@ -232,6 +234,7 @@ private:
     TArray<int32> VisibleLabels,PreviousVisibleLabels;
     TMap<FString,FVector2D> PreviousPositions;
     TMap<FString,float> LabelAges;
+    bool bReplayPOIs=false;
     FRotator LastLayoutRotation=FRotator::ZeroRotator;
     FVector LastLayoutLocation=FVector::ZeroVector;
     FVector2D SelectedScreenMin=FVector2D::ZeroVector,SelectedScreenMax=FVector2D::ZeroVector;

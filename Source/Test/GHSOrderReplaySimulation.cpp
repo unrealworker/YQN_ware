@@ -13,8 +13,7 @@ static double Lerp(double A,double B,double T){return A+(B-A)*T;}
 static double Angle(double A,double B,double T){return A+std::remainder(B-A,360.)*T;}
 const char* TrailColor(int DeviceIndex)
 {
-    static const char* Colors[]={"#2F7CFF","#00D9C0","#F6B83F","#A77BFF","#F26AA6"};
-    return DeviceIndex>=0&&DeviceIndex<ForkCount?Colors[DeviceIndex]:"";
+    return DeviceIndex>=0&&DeviceIndex<ForkCount?"#67DDEB":"";
 }
 std::vector<TrailSegment> BuildTrailSegments(const Track& Track)
 {
@@ -194,6 +193,80 @@ std::vector<TrailSegment> BuildTrailSegments(const Track& Track)
         Result[I].FlowDeltaMeters=Phase[B]-Phase[A];
     }
     return Result;
+}
+TrailPlan BuildTaskTrail(const Track& Track)
+{
+    TrailPlan Plan;
+    if(Track.Keys.size()<2)return Plan;
+    const auto Moving=[](const Key& A,const Key& B)
+    {
+        return A.Visible&&B.Visible&&B.Time>A.Time&&
+            A.Status.find("\xE6\x95\x85\xE9\x9A\x9C")==std::string::npos&&A.Status.find("\xE7\xAD\x89\xE5\xBE\x85")==std::string::npos&&
+            std::hypot(B.Position.X-A.Position.X,B.Position.Y-A.Position.Y)>.01;
+    };
+    auto AddLeg=[&](size_t First,size_t Last)
+    {
+        if(Last<=First)return;
+        GHSReplay::Track Part;
+        Part.Keys.assign(Track.Keys.begin()+First,Track.Keys.begin()+Last+1);
+        auto Segments=BuildTrailSegments(Part);if(Segments.empty())return;
+        TrailLeg Leg;Leg.Id=int(Plan.Legs.size());Leg.StartTime=Track.Keys[First].Time;Leg.EndTime=Track.Keys[Last].Time;
+        for(auto& Segment:Segments)
+        {
+            Segment.LegId=Leg.Id;Segment.ProgressStartMeters=Leg.LengthMeters;Segment.ProgressDeltaMeters=Segment.LengthMeters;
+            // Only this directed leg can render. No shared whole-cycle graph or
+            // opposite journey is visible at the same time, so flow is monotonic.
+            Segment.StartMeters=Leg.LengthMeters;Segment.FlowDeltaMeters=Segment.LengthMeters;
+            Leg.LengthMeters+=Segment.LengthMeters;
+        }
+        double Previous=0.;
+        for(size_t I=First;I<=Last;++I)
+        {
+            double Progress=I==Last?Leg.LengthMeters:0.;
+            if(I>First&&I<Last)
+            {
+                const auto& P=Track.Keys[I].Position;double Best=std::numeric_limits<double>::infinity();Progress=Previous;
+                for(const auto& Segment:Segments)
+                {
+                    const double End=Segment.ProgressStartMeters+Segment.ProgressDeltaMeters;
+                    if(End+1.e-9<Previous)continue;
+                    const double DX=Segment.B.X-Segment.A.X,DY=Segment.B.Y-Segment.A.Y;
+                    const double Minimum=std::clamp((Previous-Segment.ProgressStartMeters)/Segment.ProgressDeltaMeters,0.,1.);
+                    const double T=std::clamp(((P.X-Segment.A.X)*DX+(P.Y-Segment.A.Y)*DY)/(DX*DX+DY*DY),Minimum,1.);
+                    const double Error=std::hypot(P.X-Segment.A.X-T*DX,P.Y-Segment.A.Y-T*DY);
+                    if(Error<Best){Best=Error;Progress=Segment.ProgressStartMeters+Segment.ProgressDeltaMeters*T;}
+                }
+            }
+            Progress=std::clamp(Progress,Previous,Leg.LengthMeters);Leg.DistanceKeys.push_back({Track.Keys[I].Time,Progress});Previous=Progress;
+        }
+        Plan.Segments.insert(Plan.Segments.end(),Segments.begin(),Segments.end());Plan.Legs.push_back(std::move(Leg));
+    };
+    size_t First=Track.Keys.size();
+    for(size_t I=1;I<Track.Keys.size();++I)
+    {
+        if(Moving(Track.Keys[I-1],Track.Keys[I])){if(First==Track.Keys.size())First=I-1;}
+        else if(First!=Track.Keys.size()){AddLeg(First,I-1);First=Track.Keys.size();}
+    }
+    if(First!=Track.Keys.size())AddLeg(First,Track.Keys.size()-1);
+    return Plan;
+}
+TrailState EvaluateTaskTrail(const TrailPlan& Plan,double Time,double CycleDuration,double PlaybackEndTime)
+{
+    TrailState State;if(Plan.Legs.empty())return State;
+    Time=std::isfinite(Time)?std::max(0.,Time):0.;
+    if(std::isfinite(PlaybackEndTime)&&PlaybackEndTime>=0&&Time>=PlaybackEndTime)return State;
+    if(std::isfinite(CycleDuration)&&CycleDuration>0)Time=std::fmod(Time,CycleDuration);
+    auto It=std::upper_bound(Plan.Legs.begin(),Plan.Legs.end(),Time,[](double Value,const TrailLeg& Leg){return Value<Leg.StartTime;});
+    if(It==Plan.Legs.begin())return State;--It;
+    if(Time<It->StartTime||Time>=It->EndTime||It->DistanceKeys.size()<2)return State;
+    auto KeyIt=std::upper_bound(It->DistanceKeys.begin(),It->DistanceKeys.end(),Time,[](double Value,const TrailDistanceKey& Key){return Value<Key.Time;});
+    const auto& B=KeyIt==It->DistanceKeys.end()?It->DistanceKeys.back():*KeyIt;
+    const auto& A=KeyIt==It->DistanceKeys.begin()?It->DistanceKeys.front():*(KeyIt-1);
+    const double T=B.Time>A.Time?std::clamp((Time-A.Time)/(B.Time-A.Time),0.,1.):0.;
+    State.LegId=It->Id;State.StartTime=It->StartTime;State.EndTime=It->EndTime;State.LengthMeters=It->LengthMeters;
+    State.DistanceMeters=std::clamp(Lerp(A.Meters,B.Meters,T),0.,State.LengthMeters);
+    State.Moving=State.LengthMeters-State.DistanceMeters>1.e-7;
+    return State;
 }
 bool Simulation::Validate(std::string& Error) const
 {

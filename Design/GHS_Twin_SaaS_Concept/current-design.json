@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23",
+  "updated": "2026-10-24",
   "status": "saved_canvas_and_exports_verified",
   "source": "Saas.pen",
   "previewDirectory": "exports/current",
@@ -1021,7 +1021,10 @@
     },
     "sourceImages": [
       "images/latest-scene-20261023/campus-closed.png",
-      "images/order-replay-20261023/scene-floor-overview-dbac427f34b1.png"
+      "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+      "images/order-replay-20261024/scene-completed-23749eace0ff.png",
+      "images/order-replay-20261024/scene-followed-21714c64d6c0.png",
+      "images/order-replay-20261024/scene-fault-0e8a7deb1e1d.png"
     ],
     "stateDesignOnly": true,
     "ueImplementation": "owned_by_root_separate_runtime_acceptance",
@@ -1029,12 +1032,22 @@
       "sourceFile": "Saas.pen",
       "sourceSaved": true,
       "method": "native_ctrl_s_by_root_agent_and_disk_metadata",
-      "bytes": 2007656,
-      "lastWriteTimeUtc": "2026-10-23T15:21:21.276Z",
-      "sha256": "183B0DBF25F8BE92A2F00A61B63C5D3D4882F00770E393718F4AE263EB6128D8",
+      "bytes": 2137790,
+      "lastWriteTimeUtc": "2026-10-24T01:27:18.154Z",
+      "sha256": "7DD0D0970B2DFFE0A7A4877DE99DF2C7028EB7BF73BE9CE2CCB20F904815FD44",
       "canvasMutationAfterSave": false
     },
     "visualFollowAudit": "order-replay-visual-follow-audit.json",
-    "sceneSource": "order-replay-scene-source.json"
+    "sceneSource": "order-replay-scene-source.json",
+    "sourceRecords": [
+      "sources/order-replay-20261024/poi-moving.json",
+      "sources/order-replay-20261024/poi-completed.json",
+      "sources/order-replay-20261024/poi-followed.json",
+      "sources/order-replay-20261024/state-followed.json",
+      "sources/order-replay-20261024/poi-fault.json",
+      "sources/order-replay-20261024/state-fault.json"
+    ],
+    "remainingRouteColor": "#67DDEB",
+    "editablePoiCount": 37
   }
 }

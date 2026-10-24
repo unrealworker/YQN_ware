@@ -41,24 +41,42 @@ test('a fresh request for the same event window reopens events without hijacking
  a.window.twinReplayReceive({...active,time:231,eventsWindow:w});assert.equal(r.view().tab,'devices');
  a.window.twinReplayReceive({...active,eventsWindow:{...w,revision:2}});assert.equal(r.view().tab,'events');
 });
-test('native forklift trail identity is separate from fault status and never added to trucks',()=>{
+test('visible remaining routes use one cyan cue and trucks still follow without route cues',()=>{
  const a=replay();a.window.twinReplayReceive({...active,devices:[
-  {...active.devices[0],state:'fault',trailColor:'#F6B83F'},
-  {id:'REPLAY-TRUCK-01',type:'truck',state:'loading',visible:true,trailColor:'#F26AA6'}
+  {...active.devices[0],state:'moving',trailVisible:true,trailColor:'#67DDEB'},
+  {...active.devices[0],id:'REPLAY-FORK-02',state:'carrying',trailVisible:true,trailColor:'red;background:url(example)'},
+  {id:'REPLAY-TRUCK-01',type:'truck',state:'loading',visible:true,trailVisible:true,trailColor:'#67DDEB'}
  ]});a.flush();
  const rows=a.html().match(/<article class="replay-device[\s\S]*?<\/article>/g);
- assert.match(rows[0],/class="replay-trail-dot" style="--replay-trail-color:#F6B83F"/);
- assert.match(rows[0],/class="replay-device-state fault">车辆故障/);
- assert.doesNotMatch(rows[1],/replay-trail-dot/);
+ assert.match(rows[0],/class="replay-trail-dot" style="--replay-trail-color:#67DDEB"/);
+ assert.match(rows[1],/class="replay-trail-dot" style="--replay-trail-color:#67DDEB"/);
+ assert.doesNotMatch(a.html(),/background:url/);
+ assert.doesNotMatch(rows[2],/replay-trail-dot/);
  a.window.twinReplayUI.handle('follow',{id:'REPLAY-TRUCK-01'});
  assert.deepEqual(JSON.parse(JSON.stringify(a.commands.at(-1))),{action:'replayFollow',id:'REPLAY-TRUCK-01'});
 });
-test('a changed native trail colour refreshes the device identity without accepting arbitrary CSS',()=>{
+test('native remaining-route visibility refreshes device cues without interpreting the state wording',()=>{
  const a=replay(),r=a.window.twinReplayUI,key=r.key();
- a.window.twinReplayReceive({...active,devices:[{...active.devices[0],trailColor:'#00D9C0'}]});a.flush();
- assert.notEqual(r.key(),key);assert.match(a.html(),/--replay-trail-color:#00D9C0/);
- a.window.twinReplayReceive({...active,devices:[{...active.devices[0],trailColor:'red;background:url(example)'}]});a.flush();
- assert.doesNotMatch(a.html(),/replay-trail-dot|background:url/);
+ a.window.twinReplayReceive({...active,devices:[{...active.devices[0],state:'原生动作阶段',trailVisible:true,trailColor:'#67DDEB'}]});a.flush();
+ const visibleKey=r.key();assert.notEqual(visibleKey,key);assert.match(a.html(),/replay-trail-dot/);
+ a.window.twinReplayReceive({...active,devices:[{...active.devices[0],state:'原生动作阶段',trailVisible:false,trailColor:'#67DDEB'}]});a.flush();
+ assert.notEqual(r.key(),visibleKey);assert.doesNotMatch(a.html(),/replay-trail-dot/);
+});
+test('pausing at a moving replay instant retains the remaining-route cue until native visibility changes',()=>{
+ const a=replay(),moving={...active.devices[0],state:'carrying',trailVisible:true,trailColor:'#67DDEB'};
+ a.window.twinReplayReceive({...active,playing:false,devices:[moving]});a.flush();
+ assert.match(a.html(),/replay-trail-dot/);assert.match(a.html(),/已暂停/);
+ a.window.twinReplayReceive({...active,playing:false,trailMode:'off',devices:[{...moving,trailVisible:false}]});a.flush();
+ assert.doesNotMatch(a.html(),/replay-trail-dot/);
+});
+test('stationary, hidden and unknown-route devices have no remaining-route cue',()=>{
+ const a=replay();a.window.twinReplayReceive({...active,devices:[
+  ...['idle','fault','pickup','unloading'].map((state,i)=>({...active.devices[0],id:'REPLAY-FORK-0'+(i+1),state,trailVisible:false,trailColor:'#67DDEB'})),
+  {...active.devices[0],id:'REPLAY-FORK-05',state:'moving',visible:false,trailVisible:true,trailColor:'#67DDEB'},
+  {...active.devices[0],id:'UNKNOWN',state:'moving',trailColor:'#67DDEB'}
+ ]});a.flush();
+ assert.doesNotMatch(a.html(),/replay-trail-dot/);
+ assert.match(a.html(),/class="replay-device-state fault">车辆故障/);
 });
 test('following a truck still shows orbit and zoom guidance and clears the guidance on cancellation',()=>{
  const a=replay();a.window.twinReplayReceive({...active,followId:'REPLAY-TRUCK-01'});a.flush();
@@ -66,10 +84,10 @@ test('following a truck still shows orbit and zoom guidance and clears the guida
  a.window.twinReplayReceive({...active,followId:''});a.flush();
  assert.doesNotMatch(a.html(),/跟随中：/);
 });
-test('native Chinese fault and waiting descriptions retain semantic status colours independently of trail identity',()=>{
+test('native Chinese fault and waiting descriptions retain semantic status colours independently of route cues',()=>{
  const a=replay();a.window.twinReplayReceive({...active,devices:[
-  {...active.devices[0],state:'故障停机',trailColor:'#F6B83F'},
-  {...active.devices[0],id:'REPLAY-FORK-02',state:'交叉通道让行',trailColor:'#00D9C0'}
+  {...active.devices[0],state:'故障停机',trailVisible:false,trailColor:'#67DDEB'},
+  {...active.devices[0],id:'REPLAY-FORK-02',state:'交叉通道让行',trailVisible:false,trailColor:'#67DDEB'}
  ]});a.flush();
  assert.match(a.html(),/class="replay-device-state fault">故障停机/);
  assert.match(a.html(),/class="replay-device-state waiting">交叉通道让行/);

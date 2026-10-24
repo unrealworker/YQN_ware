@@ -1,13 +1,68 @@
 {
-  "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\VisualFollow\\scene-floor-overview.png",
-  "asset": "images/order-replay-20261023/scene-floor-overview-dbac427f34b1.png",
-  "sha256": "DBAC427F34B1C64BB9E2CDCAC3557F0FA2701AA6CAEE7C49A95F0D46F29EE2C7",
-  "bytes": 2515567,
+  "date": "2026-10-24",
+  "status": "saved_canvas_and_exports_verified",
+  "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\RemainingRoutes\\scene-floor-overview.png",
+  "asset": "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+  "sha256": "1AA896C062D0F39BC20371654AC66DAEEEBEEBE002CB1EB773FC5211B93DE6CF",
+  "bytes": 2465005,
   "width": 1920,
   "height": 1080,
+  "sourceCaptureLastWriteUtc": "2026-10-24T01:08:20.215Z",
+  "poiSource": "sources/order-replay-20261024/poi-moving.json",
   "captureContainsHUD": false,
-  "containsNativeForkliftTrails": true,
-  "captureApproval": "Root approved final native capture after curve material refinement; source mtime 2026-10-23 23:16:34 UTC+08:00",
+  "containsNativeRemainingRoutes": true,
+  "captures": {
+    "moving": {
+      "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\RemainingRoutes\\scene-floor-overview.png",
+      "asset": "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+      "sha256": "1AA896C062D0F39BC20371654AC66DAEEEBEEBE002CB1EB773FC5211B93DE6CF",
+      "bytes": 2465005,
+      "width": 1920,
+      "height": 1080,
+      "sourceCaptureLastWriteUtc": "2026-10-24T01:08:20.215Z",
+      "poiSource": "sources/order-replay-20261024/poi-moving.json",
+      "captureContainsHUD": false,
+      "containsNativeRemainingRoutes": true
+    },
+    "completed": {
+      "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\RemainingRoutes\\scene-completed.png",
+      "asset": "images/order-replay-20261024/scene-completed-23749eace0ff.png",
+      "sha256": "23749EACE0FF8521BBD1C5FD6922CA6A6A2517D2A9BFF9D73CB7D86656B62F72",
+      "bytes": 2342817,
+      "width": 1920,
+      "height": 1080,
+      "sourceCaptureLastWriteUtc": "2026-10-24T01:08:36.429Z",
+      "poiSource": "sources/order-replay-20261024/poi-completed.json",
+      "captureContainsHUD": false,
+      "containsNativeRemainingRoutes": false
+    },
+    "followed": {
+      "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\RemainingViews\\scene-followed.png",
+      "asset": "images/order-replay-20261024/scene-followed-21714c64d6c0.png",
+      "sha256": "21714C64D6C06140E70DFFA912BEA0E845DAB49ABA0125833D3EC4E50C1FFF03",
+      "bytes": 2696307,
+      "width": 1920,
+      "height": 1080,
+      "sourceCaptureLastWriteUtc": "2026-10-24T01:14:45.980Z",
+      "poiSource": "sources/order-replay-20261024/poi-followed.json",
+      "stateSource": "sources/order-replay-20261024/state-followed.json",
+      "captureContainsHUD": false,
+      "containsNativeRemainingRoutes": true
+    },
+    "fault": {
+      "sourceCapture": "D:\\UEPro\\Test\\Saved\\OrderReplay\\RemainingViews\\scene-fault.png",
+      "asset": "images/order-replay-20261024/scene-fault-0e8a7deb1e1d.png",
+      "sha256": "0E8A7DEB1E1D874BBF855357B785CE161E7DC45805EABD16D4ECB9990C3BB637",
+      "bytes": 2422681,
+      "width": 1920,
+      "height": 1080,
+      "sourceCaptureLastWriteUtc": "2026-10-24T01:14:47.795Z",
+      "poiSource": "sources/order-replay-20261024/poi-fault.json",
+      "stateSource": "sources/order-replay-20261024/state-fault.json",
+      "captureContainsHUD": false,
+      "containsNativeRemainingRoutes": true
+    }
+  },
   "sourceVisibleSceneCropPixels": {
     "x": 0,
     "y": 64,
@@ -22,8 +77,10 @@
     0,
     -0.06299212598425197
   ],
-  "wideBoards": "Native 1440x1016 visible scene is mapped at 1:1; original full 1920x1080 file preserved",
-  "compactBoard": "The same visible-scene crop covers the 960x836 compact scene, cropping sides as required",
+  "captureApproval": "Root visually approved final remaining-route captures on 2026-10-24",
+  "cacheInvalidation": "SHA256-derived filenames",
+  "trailColor": "#67DDEB",
+  "sourcePOICoordinates": "Full 1920x1080 screen pixels; subtract 64 only inside scene-local overlay",
   "boards": [
     "iiFrY",
     "dJZrJ",
@@ -33,9 +90,15 @@
     "IeQ6D",
     "UTzjR"
   ],
+  "boardCaptureRoles": {
+    "iiFrY": "moving",
+    "dJZrJ": "followed",
+    "Aqeif": "fault",
+    "vNXAk": "completed",
+    "QFsnb": "moving",
+    "IeQ6D": "moving",
+    "UTzjR": "moving"
+  },
   "oldIllustrativeTrajectoryLayersFound": 0,
-  "scope": "Source-image provenance only; independent live runtime acceptance remains owned by root",
-  "status": "final_native_capture_approved",
-  "sourceCaptureLastWriteUtc": "2026-10-23T15:16:34.753Z",
-  "cacheInvalidation": "SHA256-derived asset filename; all seven Pencil image fills updated to the new URL"
+  "sourceSaved": true
 }

@@ -83,7 +83,7 @@ bool UGHSTwinHUDWidget::HandleReplayCommand(const FString& Action,const TSharedP
             PreReplaySelectedId=SelectedId;PreReplayRegionId=ActiveRegionId;
             SelectedId.Empty();ActiveRegionId.Empty();PendingInteriorAction.Empty();PendingInteriorId.Empty();
             bSelectedScreenBoundsValid=false;bWarehousePOIVisible=false;
-            VisibleLabels.Reset();PreviousVisibleLabels.Reset();Labels.Reset();
+            ClearReplayPOIs();
             SetSearchOpen(false);bWarehouseMenuOpen=false;SetPanelCollapsed(false);
             ReplayOverview();
         }
@@ -112,7 +112,7 @@ bool UGHSTwinHUDWidget::HandleReplayCommand(const FString& Action,const TSharedP
         const FString Pending=Session->ConfirmExit();
         if(!Session->IsReplaying())
         {
-            SelectedId=PreReplaySelectedId;ActiveRegionId=PreReplayRegionId;POICadence.Invalidate();
+            ClearReplayPOIs();SelectedId=PreReplaySelectedId;ActiveRegionId=PreReplayRegionId;POICadence.Invalidate();
             // Resume catalogue refresh only after source instance/visibility restoration.
             NextRefresh=0;PushSceneControls(TEXT(""),true);PushReplayState();
         }

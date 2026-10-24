@@ -66,6 +66,7 @@ bool UGHSOrderReplaySession::Start(const FString& Order,const FString& Start,con
     Replay=GetWorld()->SpawnActor<AGHSOrderReplayActor>(FVector::ZeroVector,FRotator::ZeroRotator,Spawn);
     if(!Replay || !Replay->InitializeReplay())
     {Error=Replay?Replay->GetError():TEXT("无法创建回放场景");if(Replay) Replay->Destroy();Replay=nullptr;return false;}
+    Replay->SetPlaybackEndTime(Clock.Duration);
     // Prepare all assets first; a failure must not leave a partially cleared scene.
     if(!LoadParkingAlternates()) {Replay->Destroy();Replay=nullptr;return false;}
     CaptureAndIsolate();

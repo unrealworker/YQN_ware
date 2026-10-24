@@ -28,7 +28,7 @@ export async function inspectTransport(page,width,screenshotPath){
 }
 
 export async function exerciseTransport(page){
- for(const label of ['播放倍率','跟随设备','叉车轨迹显示']){
+ for(const label of ['播放倍率','跟随设备','叉车剩余路线显示']){
   await page.click('loc=css:button[aria-label="'+label+'"]');
   await page.keyboard.press('End');
   await page.keyboard.press('Enter');

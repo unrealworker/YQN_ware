@@ -8,7 +8,7 @@ PATH='/Game/GHSOrderReplay/Materials/M_ReplayTrail'
 RIPPLE_PATH='/Game/GHSOrderReplay/Materials/M_ReplayGroundRipple'
 ML=unreal.MaterialEditingLibrary
 LIB=unreal.EditorAssetLibrary
-PALETTE=['#2F7CFF','#00D9C0','#F6B83F','#A77BFF','#F26AA6']
+PALETTE=['#67DDEB']*5
 
 
 def build_material(path,domain=unreal.MaterialDomain.MD_SURFACE):
@@ -64,7 +64,7 @@ def params(material):
     uv=node(material,unreal.MaterialExpressionTextureCoordinate,-700,0)
     clock=node(material,unreal.MaterialExpressionScalarParameter,-700,120,parameter_name='ReplayTime',default_value=0.)
     tint=node(material,unreal.MaterialExpressionVectorParameter,-700,-180,parameter_name='Tint',
-              default_value=unreal.LinearColor(.028426,.201556,1.,1.))
+              default_value=unreal.LinearColor(.135633,.723055,.830770,1.))
     return uv,clock,tint
 
 
@@ -85,22 +85,29 @@ def build_trail_material():
     material.set_editor_property('used_with_instanced_static_meshes',True)
     uv,clock,tint=params(material)
     distance=[];data=[]
-    for index in range(6):
+    for index in range(9):
         value=node(material,unreal.MaterialExpressionPerInstanceCustomData,-1100,260+index*160,
-                   data_index=index,const_default_value=37.5 if index>=4 else 0.)
+                   data_index=index,const_default_value=9. if index in (4,5) else -1. if index==6 else 0.)
         data.append(value)
-        if index<2:
+        if index<2 or index>=6:
             interp=node(material,unreal.MaterialExpressionVertexInterpolator,-700,260+index*160)
             connect(value,interp,'VS');distance.append(interp)
+    active_leg=node(material,unreal.MaterialExpressionScalarParameter,-700,1150,parameter_name='ActiveLegId',default_value=-1.)
+    remaining_from=node(material,unreal.MaterialExpressionScalarParameter,-700,1300,parameter_name='RemainingFromMeters',default_value=0.)
     signal=custom(material,'''float d = RouteStart + UV.x * PhaseDelta;
+float progress = ProgressStart + UV.x * ProgressDelta;
+float active = (ActiveLeg >= 0.0 && abs(RouteLeg - ActiveLeg) < 0.25) ? 1.0 : 0.0;
+// Clip in absolute route distance: paused frames remain fixed and seeks are reversible.
+float remaining = saturate((progress - RemainingFrom) / 0.06);
 float across = abs(UV.y - 0.5) * 2.0;
 float edge = 1.0 - smoothstep(0.70, 1.0, across);
 float core = 1.0 - smoothstep(0.06, 0.52, across);
 float flow = pow(0.5 + 0.5 * cos((d - ReplayClock * 1.2) * 6.28318530718 / 5.0), 5.0);
-float emission = 1.65 + core * 0.9 + flow * 2.1;
-return float4(Tint * emission, edge);''',
-                  ['UV','ReplayClock','RouteStart','PhaseDelta','Tint'])
-    for source,pin in [(uv,'UV'),(clock,'ReplayClock'),(distance[0],'RouteStart'),(distance[1],'PhaseDelta'),(tint,'Tint')]:
+float emission = 1.4 + core * 0.7 + flow * 1.25;
+return float4(Tint * emission, edge * active * remaining);''',
+                  ['UV','ReplayClock','RouteStart','PhaseDelta','Tint','RouteLeg','ProgressStart','ProgressDelta','ActiveLeg','RemainingFrom'])
+    for source,pin in [(uv,'UV'),(clock,'ReplayClock'),(distance[0],'RouteStart'),(distance[1],'PhaseDelta'),(tint,'Tint'),
+                       (distance[2],'RouteLeg'),(distance[3],'ProgressStart'),(distance[4],'ProgressDelta'),(active_leg,'ActiveLeg'),(remaining_from,'RemainingFrom')]:
         connect(source,signal,pin)
     output_rgba(material,signal,masked=True)
     # Miter the two end cross-sections of every plane so neighboring curve chords
@@ -112,13 +119,13 @@ return float4(Tint * emission, edge);''',
     connect(tangent,transform,'')
     offset=custom(material,'''float3 d = normalize(Direction);
 float side = 2.0 * UV.y - 1.0;
-return side * (d * lerp(StartShear, EndShear, UV.x) + float3(-d.y, d.x, 0) * (lerp(StartWidth, EndWidth, UV.x) - 37.5));''',
+return side * (d * lerp(StartShear, EndShear, UV.x) + float3(-d.y, d.x, 0) * (lerp(StartWidth, EndWidth, UV.x) - 9.0));''',
                   ['UV','StartShear','EndShear','StartWidth','EndWidth','Direction'],unreal.CustomMaterialOutputType.CMOT_FLOAT3)
     for source,pin in [(uv,'UV'),(data[2],'StartShear'),(data[3],'EndShear'),(data[4],'StartWidth'),(data[5],'EndWidth'),(transform,'Direction')]:connect(source,offset,pin)
     # UE 5.4 hides this material output from Python; use the existing scoped native bridge.
     assert unreal.GHSVisualMaterialLibrary.connect_world_position_offset(material,offset)
     assert unreal.GHSVisualMaterialLibrary.has_world_position_offset(material)
-    result=finish(material,'five-color-emissive-shared-phase-soft-edge-v5')
+    result=finish(material,'cyan-remaining-leg-distance-clipped-v6')
     result['custom_data_indices']=[v.get_editor_property('data_index') for v in data]
     result['vertex_interpolators']=len(distance)
     return result
@@ -150,7 +157,7 @@ def repair():
     other={str(p.relative_to(ROOT)):sha(p) for p in (ROOT/'Content/GHSOrderReplay').rglob('*.uasset') if p not in targets}
     out=ROOT/'Saved/OrderReplay/TrailMaterial';out.mkdir(parents=True,exist_ok=True)
     for target in targets:
-        backup=out/(target.stem+'.before-five-color.uasset')
+        backup=out/(target.stem+'.before-remaining-route.uasset')
         if target.exists() and not backup.exists():shutil.copy2(target,backup)
     trail_stats=build_trail_material();ripple_stats=build_ripple_material()
     assert all(sha(ROOT/p)==value for p,value in originals.items()),'Protected source changed'
@@ -174,19 +181,20 @@ def repair():
         assert ML.get_material_property_input_node(material,coverage)
         assert {str(o.get_editor_property('parameter_name')) for o in nodes[path] if isinstance(o,unreal.MaterialExpressionScalarParameter)} >= {'ReplayTime'}
     indices=trail_stats['custom_data_indices']
-    assert sorted(indices)==[0,1,2,3,4,5],indices
-    assert trail_stats['vertex_interpolators']==2
+    assert sorted(indices)==list(range(9)),indices
+    assert trail_stats['vertex_interpolators']==5
     report=dict(success=True,trail=PATH,ripple=RIPPLE_PATH,palette=PALETTE,clock='ReplayTime',wall_clock_nodes=0,
-                fixed_trails=5,fixed_ground_ripples=5,custom_data_indices=indices,vertex_interpolators=2,
-                width_cm=75,wavelength_m=5.,flow_speed_mps=1.2,opacity_range=[0.,1.],core_coverage=1.,dither_region='Soft edges only',emission_range=[1.65,4.65],
-                phase_source='Static shared-junction path metric; custom data 0=start, 1=signed phase delta',
+                fixed_trails=5,fixed_ground_ripples=5,custom_data_indices=indices,vertex_interpolators=5,
+                width_cm=18,wavelength_m=5.,flow_speed_mps=1.2,opacity_range=[0.,1.],core_coverage=1.,dither_region='Soft edges only',emission_range=[1.4,3.35],
+                phase_source='Per-leg route metric; custom data 0=start, 1=phase delta',
+                remaining_clip=dict(active_leg='ActiveLegId',distance='RemainingFromMeters',custom_data='6 leg id, 7 progress start metres, 8 progress delta metres',front_soft_edge_cm=6),
                 trail_blending='Masked with engine DitherTemporalAA soft coverage and depth writing; no alpha accumulation',
                 ripple_radius_cm=165,ripple_depth_cm=6,reused_shader='RINGS_HLSL',
                 statistics=dict(trail=trail_stats,ripple=ripple_stats),protected_hashes=originals,
                 protected_sources_unchanged=True,other_replay_assets_unchanged=len(other),
                 material_sha256={p.stem:sha(p) for p in targets})
     (ROOT/'Saved/OrderReplay/trail_material_repair.json').write_text(json.dumps(report,indent=2),encoding='utf8')
-    unreal.log('ORDER_REPLAY_FIVE_COLOR_FX_BUILT '+json.dumps(report))
+    unreal.log('ORDER_REPLAY_REMAINING_ROUTE_FX_BUILT '+json.dumps(report))
 
 
 if __name__=='__main__':repair()

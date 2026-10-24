@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-23",
+  "date": "2026-10-24",
   "sourceSaved": true,
   "files": [
     "Saas.pen",
@@ -14,7 +14,16 @@
     "order-replay-scene-source.json",
     "order-replay-delivery-files.json",
     "verify-order-replay-design.cjs",
-    "images/order-replay-20261023/scene-floor-overview-dbac427f34b1.png",
+    "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+    "images/order-replay-20261024/scene-completed-23749eace0ff.png",
+    "images/order-replay-20261024/scene-followed-21714c64d6c0.png",
+    "images/order-replay-20261024/scene-fault-0e8a7deb1e1d.png",
+    "sources/order-replay-20261024/poi-moving.json",
+    "sources/order-replay-20261024/poi-completed.json",
+    "sources/order-replay-20261024/poi-followed.json",
+    "sources/order-replay-20261024/state-followed.json",
+    "sources/order-replay-20261024/poi-fault.json",
+    "sources/order-replay-20261024/state-fault.json",
     "exports/current/bi8Au.png",
     "exports/current/CLx7Q.png",
     "exports/current/mP7E5.png",
@@ -86,7 +95,16 @@
     "order-replay-scene-source.json",
     "order-replay-delivery-files.json",
     "verify-order-replay-design.cjs",
-    "images/order-replay-20261023/scene-floor-overview-dbac427f34b1.png",
+    "images/order-replay-20261024/scene-floor-overview-1aa896c062d0.png",
+    "images/order-replay-20261024/scene-completed-23749eace0ff.png",
+    "images/order-replay-20261024/scene-followed-21714c64d6c0.png",
+    "images/order-replay-20261024/scene-fault-0e8a7deb1e1d.png",
+    "sources/order-replay-20261024/poi-moving.json",
+    "sources/order-replay-20261024/poi-completed.json",
+    "sources/order-replay-20261024/poi-followed.json",
+    "sources/order-replay-20261024/state-followed.json",
+    "sources/order-replay-20261024/poi-fault.json",
+    "sources/order-replay-20261024/state-fault.json",
     "exports/current/iiFrY.png",
     "exports/current/dJZrJ.png",
     "exports/current/Aqeif.png",
@@ -94,19 +112,22 @@
     "exports/current/QFsnb.png",
     "exports/current/IeQ6D.png",
     "exports/current/UTzjR.png",
-    "exports/order-replay-20261023/OsnX0.png"
+    "exports/order-replay-20261023/OsnX0.png",
+    "exports/order-replay-20261023/f1klDQ.png",
+    "exports/order-replay-20261023/yKCFc.png"
   ],
   "existingDependencies": [
     "images/latest-scene-20261023/campus-closed.png"
   ],
   "localRecoveryOnly": [
     "archive/order-replay-before-20261023.json",
-    "archive/order-replay-trails-before-20261023.json"
+    "archive/order-replay-trails-before-20261023.json",
+    "archive/order-replay-remaining-before-20261024.json"
   ],
   "exclude": [
     "historical before/recovery snapshots",
     "unused image drafts",
-    "initial unversioned replay scene capture superseded by the final hashed filename"
+    "superseded replay scene captures"
   ],
-  "notes": "Current export set contains all 54 artboards. revisionFiles is the exact 18-file visual-follow design commit scope, including seven replay exports and the OsnX0 closeup. The scene image filename is derived from its final SHA256 to invalidate Pencil image caches."
+  "notes": "revisionFiles is the exact 29-file remaining-route design scope: four hashed images, six immutable source records, seven state exports, three affected component closeups, source and nine metadata/spec/verification entries including the source. Other current artboards remain unchanged."
 }
