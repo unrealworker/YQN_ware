@@ -16,13 +16,13 @@ float body = lerp(1.0, smoothstep(-aa, aa, distanceToFront), smoothstep(0.0, 0.0
 float shoulder = (1.0 - smoothstep(100.0, 950.0, distanceToFront)) * body * active;
 float core = (1.0 - smoothstep(45.0, max(160.0, aa * 1.4), abs(distanceToFront))) * active;
 
-// Short-lived architectural grid follows the scan; derivative AA prevents fine flicker.
+// Architectural grid trails the scan over 24 m with a 9 m rear fade; derivative AA prevents flicker.
 float2 q = float2(along / 1400.0, across / 800.0);
 float2 cell = abs(frac(q + 0.5) - 0.5);
 float2 width = max(fwidth(q), float2(0.002, 0.002));
 float2 lines = 1.0 - smoothstep(width * 0.25, width * 1.1, cell);
 float grid = max(lines.x, lines.y);
-float trail = smoothstep(-1550.0, -950.0, distanceToFront)
+float trail = smoothstep(-2400.0, -1500.0, distanceToFront)
             * (1.0 - smoothstep(-120.0, 0.0, distanceToFront)) * active;
 float afterglow = grid * trail;
 float coverage = max(body, afterglow * 0.58);

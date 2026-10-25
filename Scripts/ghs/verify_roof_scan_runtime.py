@@ -80,6 +80,11 @@ def xyz(value):
     return [float(value.x), float(value.y), float(value.z)]
 
 
+def roof_transform_values():
+    transform = actor.get_actor_transform()
+    return xyz(transform.translation) + xyz(transform.rotation) + [float(transform.rotation.w)] + xyz(transform.scale3d)
+
+
 def camera_state():
     camera = pc.player_camera_manager
     rotation = camera.get_camera_rotation()
@@ -348,7 +353,7 @@ def run():
     source_materials = material_paths()
     for path in source_materials+[mesh.get_editor_property('static_mesh').get_path_name()]:
         remember_asset(path)
-    initial_transform = str(actor.get_actor_transform())
+    initial_transform = roof_transform_values()
     initial_count = len(unreal.GameplayStatics.get_all_actors_of_class(world, unreal.Actor))
     assert_idle(False)
     assert not hud.selected_id and not poi()['pendingNavigation'] and ids() == ['WAREHOUSE:GHS']
@@ -477,9 +482,11 @@ def run():
     unreal.GameplayStatics.set_global_time_dilation(world, 1.)
     yield from restore('final_restore')
     yield from capture('10_closed_restored', time_dilation=1.0)
-    assert str(actor.get_actor_transform()) == initial_transform
+    final_transform = roof_transform_values()
+    assert all(abs(a-b) < 1e-6 for a, b in zip(initial_transform, final_transform)), 'Roof transform changed'
     assert len(unreal.GameplayStatics.get_all_actors_of_class(world, unreal.Actor)) == initial_count
-    record('all_idle_ticks_stopped_materials_transform_actor_count_preserved', materials=material_paths())
+    record('all_idle_ticks_stopped_materials_transform_actor_count_preserved', materials=material_paths(),
+           initial_transform=initial_transform, final_transform=final_transform, actor_count=initial_count)
 
 
 def finish(error=None):
