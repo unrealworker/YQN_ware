@@ -76,7 +76,9 @@ def astar(start,end):
         j=len(chain)-1
         while j>i+1 and not clear(chain[i],chain[j]):j-=1
         result.append(chain[j]);i=j
-    curve=rounded_path(result,.85,max_step=.35)
+    # A broader tangent arc turns naturally at the unchanged driving speed.
+    # Keep exact corridor clearance and finely sample the curve geometry.
+    curve=rounded_path(result,1.50,max_step=.10)
     assert all(clear(a,b,1.70) for a,b in zip(curve,curve[1:])),('unsafe rounded route',result)
     return curve
 

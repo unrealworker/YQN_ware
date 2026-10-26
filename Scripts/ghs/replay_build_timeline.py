@@ -1,6 +1,7 @@
 """Deterministic full outbound + visible replenishment cycle for 5/3/10 entities."""
 import json,math,hashlib,bisect
 from pathlib import Path
+from replay_motion_profile import build_route_profile
 ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'Saved/OrderReplay'
 plan=json.loads((OUT/'routes_plan.json').read_text());truck_plan=json.loads((OUT/'truck_routes.json').read_text())
 assert plan['success'] and truck_plan['success']
@@ -39,6 +40,27 @@ class Motion:
                 adjusted.append([p[0]-math.cos(yaw)*offset,p[1]-math.sin(yaw)*offset,p[2],math.degrees(yaw)])
             path=adjusted
         self.status=status;self.emit()
+        if self.i<5:
+            # Bake continuous steering at the original constant driving speed.
+            # Absolute keys keep playback, scrubbing and reverse seeks deterministic.
+            directed=[]
+            for j,p in enumerate(path):
+                a,b=path[max(0,j-1)],path[min(len(path)-1,j+1)]
+                yaw=p[3] if len(p)>3 else math.degrees(math.atan2(b[1]-a[1],b[0]-a[0]))
+                directed.append([*p[:3],yaw])
+            split=len(directed)//3 if fault else len(directed)-1
+            parts=[directed[:split+1]]+([directed[split:]] if fault else [])
+            self.tween(3,yaw=directed[0][3],status=status)
+            for part_index,part in enumerate(parts):
+                frames=build_route_profile(part,speed);start=self.t
+                for elapsed,position,yaw in frames[1:]:
+                    self.t=start+elapsed;self.p=list(position);self.yaw=yaw;self.emit()
+                if fault and part_index==0:
+                    event(self.t,self.i,'fault','人工叉车 03 · 电机过热，暂停作业')
+                    self.wait(45,'故障停机')
+                    event(self.t,self.i,'recovery','人工叉车 03 · 故障排除，恢复作业')
+                    self.status=status;self.emit()
+            return
         for j,p in enumerate(path):
             if len(p)>3:yaw=p[3]
             else:
