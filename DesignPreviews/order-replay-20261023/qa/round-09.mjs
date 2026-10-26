@@ -1,0 +1,16 @@
+const task = await taskSpace(5);
+const page = task.page('p1');
+await page.click('button[aria-label="跳转至 08:05:10 FORK-03 设备故障"]');
+await page.click('button[aria-label="跟随人工叉车 03"]');
+console.log(await page.evaluate(()=>({time:document.querySelector('#current-time').textContent,state:document.querySelector('#play-state').textContent,follow:document.querySelector('#follow-copy').textContent,faults:document.querySelector('#fault-count').textContent,status:document.querySelector('#fork-status-2').textContent})));
+await page.click('[data-page="overview"]');
+console.log(await page.evaluate(()=>({dialog:document.querySelector('#exit-modal').textContent.trim(),visible:document.querySelector('#exit-modal').checkVisibility()})));
+await page.click('#cancel-exit');
+console.log(await page.evaluate(()=>({afterCancel:{time:document.querySelector('#current-time').textContent,state:document.querySelector('#play-state').textContent,follow:document.querySelector('#follow-copy').textContent}})));
+await page.click('[data-page="inventory"]');
+await page.click('#confirm-exit');
+console.log(await page.evaluate(()=>({destination:document.querySelector('#normal-page-title').textContent,replayHidden:!document.querySelector('#timeline-panel').checkVisibility(),view:document.querySelector('#normal-view').textContent.trim()})));
+await page.reload();
+await page.cdp('Emulation.setDeviceMetricsOverride',{width:1920,height:1080,deviceScaleFactor:1,mobile:false});
+console.log({screenshot:await page.screenshot({path:'D:/UEPro/Test/DesignPreviews/order-replay-20261023/qa/01-query-1920.png'})});
+console.log(await page.snapshot());

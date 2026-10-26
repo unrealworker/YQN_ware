@@ -1,0 +1,14 @@
+const task = await taskSpace(5);
+const page = task.page('p1');
+await page.goto('http://127.0.0.1:8770/?state=paused&time=230');
+await page.cdp('Emulation.setDeviceMetricsOverride',{width:1920,height:1080,deviceScaleFactor:1,mobile:false});
+console.log({screenshot:await page.screenshot({path:'D:/UEPro/Test/DesignPreviews/order-replay-20261023/qa/02-replay-1920.png'})});
+await page.click('[data-view="real"]');
+console.log({screenshot:await page.screenshot({path:'D:/UEPro/Test/DesignPreviews/order-replay-20261023/qa/05-real-scene-1920.png'})});
+await page.goto('http://127.0.0.1:8770/?state=paused&time=310');
+await page.click('#events-tab');
+await page.cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:900,deviceScaleFactor:1,mobile:false});
+console.log({screenshot:await page.screenshot({path:'D:/UEPro/Test/DesignPreviews/order-replay-20261023/qa/03-events-1440.png'})});
+await page.click('[data-page="overview"]');
+console.log({screenshot:await page.screenshot({path:'D:/UEPro/Test/DesignPreviews/order-replay-20261023/qa/04-exit-1440.png'})});
+await task.finish({keep:[]});
