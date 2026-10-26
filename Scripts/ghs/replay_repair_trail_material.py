@@ -1,4 +1,4 @@
-"""Build replay-only luminous routes and a clock-controlled derivative of the existing rings."""
+"""Build replay-only flowing blue dashes and a clock-controlled derivative of the existing rings."""
 import hashlib,json,shutil,sys
 from pathlib import Path
 import unreal
@@ -99,12 +99,16 @@ float progress = ProgressStart + UV.x * ProgressDelta;
 float active = (ActiveLeg >= 0.0 && abs(RouteLeg - ActiveLeg) < 0.25) ? 1.0 : 0.0;
 // Clip in absolute route distance: paused frames remain fixed and seeks are reversible.
 float remaining = saturate((progress - RemainingFrom) / 0.06);
-float across = abs(UV.y - 0.5) * 2.0;
-float edge = 1.0 - smoothstep(0.70, 1.0, across);
-float core = 1.0 - smoothstep(0.06, 0.52, across);
-float flow = pow(0.5 + 0.5 * cos((d - ReplayClock * 1.2) * 6.28318530718 / 5.0), 5.0);
-float emission = 1.4 + core * 0.7 + flow * 1.25;
-return float4(Tint * emission, edge * active * remaining);''',
+// A 1.8 m capsule followed by a real 1.2 m gap, measured along the directed leg.
+// Advect coverage rather than brightness: no white hotspot or continuous underlay.
+// 1.2 * 10000 / 3 is integral, matching the runtime replay-clock wrap.
+float phase = (frac((d - ReplayClock * 1.2) / 3.0 + 0.5) - 0.5) * 3.0;
+float across = (UV.y - 0.5) * 0.18;
+float2 cap = float2(max(abs(phase) - 0.81, 0.0), across);
+float sdf = length(cap) - 0.09;
+float aa = clamp(fwidth(sdf), 0.008, 0.045);
+float dash = 1.0 - smoothstep(-aa, aa, sdf);
+return float4(Tint * 1.45, dash * active * remaining);''',
                   ['UV','ReplayClock','RouteStart','PhaseDelta','Tint','RouteLeg','ProgressStart','ProgressDelta','ActiveLeg','RemainingFrom'])
     for source,pin in [(uv,'UV'),(clock,'ReplayClock'),(distance[0],'RouteStart'),(distance[1],'PhaseDelta'),(tint,'Tint'),
                        (distance[2],'RouteLeg'),(distance[3],'ProgressStart'),(distance[4],'ProgressDelta'),(active_leg,'ActiveLeg'),(remaining_from,'RemainingFrom')]:
@@ -125,7 +129,7 @@ return side * (d * lerp(StartShear, EndShear, UV.x) + float3(-d.y, d.x, 0) * (le
     # UE 5.4 hides this material output from Python; use the existing scoped native bridge.
     assert unreal.GHSVisualMaterialLibrary.connect_world_position_offset(material,offset)
     assert unreal.GHSVisualMaterialLibrary.has_world_position_offset(material)
-    result=finish(material,'theme-blue-remaining-leg-distance-clipped-v7')
+    result=finish(material,'theme-blue-flowing-round-dashes-v8')
     result['custom_data_indices']=[v.get_editor_property('data_index') for v in data]
     result['vertex_interpolators']=len(distance)
     return result
@@ -185,7 +189,9 @@ def repair():
     assert trail_stats['vertex_interpolators']==5
     report=dict(success=True,trail=PATH,ripple=RIPPLE_PATH,palette=PALETTE,clock='ReplayTime',wall_clock_nodes=0,
                 fixed_trails=5,fixed_ground_ripples=5,custom_data_indices=indices,vertex_interpolators=5,
-                width_cm=18,wavelength_m=5.,flow_speed_mps=1.2,opacity_range=[0.,1.],core_coverage=1.,dither_region='Soft edges only',emission_range=[1.4,3.35],
+                width_cm=18,wavelength_m=3.,dash_length_m=1.8,gap_length_m=1.2,flow_speed_mps=1.2,
+                opacity_range=[0.,1.],core_coverage=1.,dither_region='Antialiased capsule edges only',emission_range=[1.45,1.45],
+                trail_pattern='Directed round dashes; transparent gaps; no brightness pulse or white highlight',
                 phase_source='Per-leg route metric; custom data 0=start, 1=phase delta',
                 remaining_clip=dict(active_leg='ActiveLegId',distance='RemainingFromMeters',custom_data='6 leg id, 7 progress start metres, 8 progress delta metres',front_soft_edge_cm=6),
                 trail_blending='Masked with engine DitherTemporalAA soft coverage and depth writing; no alpha accumulation',
