@@ -99,23 +99,23 @@ float progress = ProgressStart + UV.x * ProgressDelta;
 float active = (ActiveLeg >= 0.0 && abs(RouteLeg - ActiveLeg) < 0.25) ? 1.0 : 0.0;
 // Clip in absolute route distance: paused frames remain fixed and seeks are reversible.
 float remaining = saturate((progress - RemainingFrom) / 0.06);
-// A 1.8 m capsule followed by a real 1.2 m gap, measured along the directed leg.
+// A 2.25 m capsule followed by a real 0.75 m gap, measured along the directed leg.
 // Advect coverage and its blue gradient together; no white hotspot or continuous underlay.
 // 1.2 * 10000 / 3 is integral, matching the runtime replay-clock wrap.
 float phase = (frac((d - ReplayClock * 1.2) / 3.0 + 0.5) - 0.5) * 3.0;
 float across = (UV.y - 0.5) * 0.18;
-float2 cap = float2(max(abs(phase) - 0.81, 0.0), across);
+float2 cap = float2(max(abs(phase) - 1.035, 0.0), across);
 float sdf = length(cap) - 0.09;
 float aa = clamp(fwidth(sdf), 0.008, 0.045);
 float dash = 1.0 - smoothstep(-aa, aa, sdf);
-// Tail -> theme blue -> brighter blue at the forward cap. Linear RGB ratios
-// correspond to sRGB #1748C9 -> #356BFA -> #5A9FFF for the project Tint.
-float gradient = saturate((phase + 0.9) / 1.8);
-float3 tailBlue = Tint * float3(0.2406688, 0.4407568, 0.6109777);
-float3 headBlue = saturate(Tint * float3(2.8718527, 2.3580936, 1.0460543));
-float3 blue = lerp(tailBlue, Tint, smoothstep(0.0, 0.52, gradient));
-blue = lerp(blue, headBlue, smoothstep(0.52, 1.0, gradient));
-return float4(blue * 1.45, dash * active * remaining);''',
+// A pale, transparent blue tail leads into the theme-blue forward cap.
+// Keep the opacity fade in the rear third so the visible dash stays longer than the gap.
+float gradient = saturate((phase + 1.125) / 2.25);
+// Linear RGB ratios map the project Tint to sRGB #8BB9FF at the tail.
+float3 tailBlue = saturate(Tint * float3(7.2520595, 3.2997277, 1.0460543));
+float3 blue = lerp(tailBlue, Tint, smoothstep(0.0, 0.86, gradient));
+float tailCoverage = smoothstep(0.0, 0.35, gradient);
+return float4(blue * 1.45, dash * tailCoverage * active * remaining);''',
                   ['UV','ReplayClock','RouteStart','PhaseDelta','Tint','RouteLeg','ProgressStart','ProgressDelta','ActiveLeg','RemainingFrom'])
     for source,pin in [(uv,'UV'),(clock,'ReplayClock'),(distance[0],'RouteStart'),(distance[1],'PhaseDelta'),(tint,'Tint'),
                        (distance[2],'RouteLeg'),(distance[3],'ProgressStart'),(distance[4],'ProgressDelta'),(active_leg,'ActiveLeg'),(remaining_from,'RemainingFrom')]:
@@ -136,7 +136,7 @@ return side * (d * lerp(StartShear, EndShear, UV.x) + float3(-d.y, d.x, 0) * (le
     # UE 5.4 hides this material output from Python; use the existing scoped native bridge.
     assert unreal.GHSVisualMaterialLibrary.connect_world_position_offset(material,offset)
     assert unreal.GHSVisualMaterialLibrary.has_world_position_offset(material)
-    result=finish(material,'theme-blue-gradient-flowing-dashes-v9')
+    result=finish(material,'theme-blue-fading-long-dashes-v10')
     result['custom_data_indices']=[v.get_editor_property('data_index') for v in data]
     result['vertex_interpolators']=len(distance)
     return result
@@ -196,10 +196,10 @@ def repair():
     assert trail_stats['vertex_interpolators']==5
     report=dict(success=True,trail=PATH,ripple=RIPPLE_PATH,palette=PALETTE,clock='ReplayTime',wall_clock_nodes=0,
                 fixed_trails=5,fixed_ground_ripples=5,custom_data_indices=indices,vertex_interpolators=5,
-                width_cm=18,wavelength_m=3.,dash_length_m=1.8,gap_length_m=1.2,flow_speed_mps=1.2,
-                opacity_range=[0.,1.],core_coverage=1.,dither_region='Antialiased capsule edges only',emission_range=[1.45,1.45],
-                trail_pattern='Directed round dashes with an attached blue gradient; transparent gaps; no white highlight',
-                dash_gradient_srgb=['#1748C9','#356BFA','#5A9FFF'],gradient_direction='Tail to forward cap',
+                width_cm=18,wavelength_m=3.,dash_length_m=2.25,gap_length_m=.75,flow_speed_mps=1.2,
+                opacity_range=[0.,1.],core_coverage=1.,dither_region='Rear 35 percent fade and antialiased capsule edges',emission_range=[1.45,1.45],
+                trail_pattern='Long round blue dashes with fading pale-blue tails; transparent gaps; no white highlight',
+                dash_gradient_srgb=['#8BB9FF','#356BFA'],gradient_direction='Transparent pale tail to theme-blue forward cap',
                 phase_source='Per-leg route metric; custom data 0=start, 1=phase delta',
                 remaining_clip=dict(active_leg='ActiveLegId',distance='RemainingFromMeters',custom_data='6 leg id, 7 progress start metres, 8 progress delta metres',front_soft_edge_cm=6),
                 trail_blending='Masked with engine DitherTemporalAA soft coverage and depth writing; no alpha accumulation',
