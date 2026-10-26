@@ -5,7 +5,7 @@
 const esc=value=>String(value==null?'':value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const names={'inventory.state':'货位状态','orders.status':'订单状态','devices.type':'设备类型','devices.status':'设备状态','alerts.severity':'告警级别'};
 const menuId='twin-filter-listbox';
-let anchor=null,menu=null,items=[],activeIndex=0,placement='below';
+let anchor=null,menu=null,items=[],activeIndex=0,placement='below',boundsProvider=null;
 
 function render(key,value,options){
   const selected=options.find(item=>item[0]===value)||options[0],label=selected?selected[1]:'';
@@ -49,6 +49,9 @@ function open(button,index){
   const rawRect=button.getBoundingClientRect();
   const rect=window.TwinViewport?window.TwinViewport.toLayoutRect(rawRect):rawRect;
   const viewport=window.TwinViewport?window.TwinViewport.getState():{width:window.innerWidth,height:window.innerHeight};
+  // A clipped overlay can expose less space than its stable browser surface.
+  const bounds=boundsProvider&&boundsProvider();
+  for(const key of ['width','height'])if(bounds&&Number.isFinite(bounds[key])&&bounds[key]>0)viewport[key]=Math.min(viewport[key],bounds[key]);
   if(rect.bottom<=0||rect.top>=viewport.height||rect.right<=0||rect.left>=viewport.width)return;
   anchor=button;items=options;
   menu=document.createElement('div');menu.id=menuId;menu.className='filter-listbox';menu.tabIndex=-1;
@@ -56,11 +59,11 @@ function open(button,index){
   menu.innerHTML=options.map(([value,label],i)=>'<div id="'+menuId+'-'+i+'" class="filter-option" role="option" aria-selected="'+(String(value)===button.value)+'" data-dropdown-index="'+i+'"><span>'+esc(label)+'</span><svg class="filter-check" viewBox="0 0 16 16" aria-hidden="true"><path d="m3 8 3 3 7-7"/></svg></div>').join('');
   menu.style.visibility='hidden';menu.style.maxWidth=Math.max(1,viewport.width-16)+'px';
   document.body.appendChild(menu);
-  const bounds=position(rect,{width:menu.offsetWidth,height:menu.scrollHeight+2},viewport);
+  const popupBounds=position(rect,{width:menu.offsetWidth,height:menu.scrollHeight+2},viewport);
   // Native design zoom is already removed from the anchor above. Do not apply
   // devicePixelRatio here: fixed CSS positions use the same design coordinates.
-  Object.assign(menu.style,{left:bounds.left+'px',top:bounds.top+'px',width:bounds.width+'px',maxHeight:bounds.maxHeight+'px',visibility:'visible'});
-  placement=bounds.side;menu.dataset.placement=placement;
+  Object.assign(menu.style,{left:popupBounds.left+'px',top:popupBounds.top+'px',width:popupBounds.width+'px',maxHeight:popupBounds.maxHeight+'px',visibility:'visible'});
+  placement=popupBounds.side;menu.dataset.placement=placement;
   button.setAttribute('aria-expanded','true');button.setAttribute('aria-controls',menuId);
   menu.focus({preventScroll:true});
   highlight(index==null?Math.max(0,options.findIndex(item=>String(item[0])===button.value)):index);
@@ -111,6 +114,7 @@ window.addEventListener('resize',()=>close(false));
 window.addEventListener('blur',()=>close(false));
 
 window.TwinDropdown={render,close,isOpen:()=>!!menu,getAnchor:()=>anchor,
+  setBoundsProvider(provider){boundsProvider=typeof provider==='function'?provider:null;},
   getState(){return menu?{open:true,filter:anchor.dataset.filter,value:anchor.value,activeValue:items[activeIndex][0],placement,anchor:rectOf(anchor),menu:rectOf(menu)}:{open:false};}
 };
 function rectOf(element){const r=element.getBoundingClientRect();return{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height};}

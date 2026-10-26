@@ -13,6 +13,7 @@
 
 class SWebBrowser;
 class UCanvasPanelSlot;
+class UCanvasPanel;
 class SGHSTwinEditableText;
 class UGHSTwinHUDWidget;
 class UGHSWarehouseRoofComponent;
@@ -101,7 +102,7 @@ public:
     UFUNCTION(BlueprintPure, Category="Warehouse Replay") FString GetReplayState() const;
     /** Logical viewport rectangle (x,y,width,height), excluding header, panel and timeline. */
     UFUNCTION(BlueprintPure, Category="Warehouse Replay") FVector4 GetReplaySceneRect() const;
-    UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void EvaluateDiagnostics(const FString& Script);
+    UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void EvaluateDiagnostics(const FString& Script, bool bReplay=false);
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool SelectObject(const FString& Id, bool bFocus = true);
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void ClearSelection();
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool OpenWarehouse();
@@ -152,9 +153,13 @@ private:
     double NextReplayPush=0;
     bool bReplayOverlayReady=false;
     FVector2D LastReplayViewport=FVector2D::ZeroVector;
+    double LastReplayTransportWidth=-1.;
+    bool bLastReplayTransportMoving=false;
     FString PreReplaySelectedId,PreReplayRegionId;
     UPROPERTY(Transient) TObjectPtr<UGHSTwinBrowser> ReplayOverlay;
+    UPROPERTY(Transient) TObjectPtr<UCanvasPanel> ReplayOverlayClip;
     UPROPERTY(Transient) TObjectPtr<UCanvasPanelSlot> ReplayOverlaySlot;
+    UPROPERTY(Transient) TObjectPtr<UCanvasPanelSlot> ReplayBrowserSlot;
     void ApplySceneLayers();
     bool RevealForNavigation(const FString& Id);
     FString LastSceneControls;

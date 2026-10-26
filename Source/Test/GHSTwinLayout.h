@@ -103,4 +103,10 @@ struct FGHSTwinPanelMotion
         const double Right=Viewport.X<900?Viewport.X:Position(Expanded).X;
         return FVector2D(FMath::Max(140.,Right-384),Expanded.HeaderHeight+16);
     }
+    FVector2D ReplayTransportSize(FVector2D Viewport) const
+    {
+        const auto Expanded=FGHSTwinLayout::Calculate(Viewport);
+        const double Right=Viewport.X<900?Viewport.X:Position(Expanded).X;
+        return FVector2D(FMath::Max(320.,Right-48),168);
+    }
 };

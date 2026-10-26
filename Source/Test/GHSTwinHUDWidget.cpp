@@ -137,8 +137,13 @@ TSharedRef<SWidget> UGHSTwinHUDWidget::RebuildWidget()
     Panel->SetVisibility(ESlateVisibility::Hidden);
     ReplayOverlay=WidgetTree->ConstructWidget<UGHSTwinBrowser>(UGHSTwinBrowser::StaticClass(),TEXT("ReplayTransport"));
     ReplayOverlay->Document=TEXT("replay-overlay.html");ReplayOverlay->bTransparent=true;
-    ReplayOverlaySlot=Root->AddChildToCanvas(ReplayOverlay);
+    ReplayOverlayClip=WidgetTree->ConstructWidget<UCanvasPanel>(UCanvasPanel::StaticClass(),TEXT("ReplayTransportClip"));
+    ReplayOverlayClip->SetClipping(EWidgetClipping::ClipToBoundsAlways);
+    ReplayOverlayClip->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+    ReplayOverlaySlot=Root->AddChildToCanvas(ReplayOverlayClip);
     ReplayOverlaySlot->SetPosition(FVector2D(24,888));ReplayOverlaySlot->SetSize(FVector2D(1320,168));
+    ReplayBrowserSlot=ReplayOverlayClip->AddChildToCanvas(ReplayOverlay);
+    ReplayBrowserSlot->SetPosition(FVector2D::ZeroVector);ReplayBrowserSlot->SetSize(FVector2D(1872,168));
     ReplayOverlay->SetVisibility(ESlateVisibility::Hidden);
     SearchBox=WidgetTree->ConstructWidget<UGHSTwinSearchInput>(UGHSTwinSearchInput::StaticClass(),TEXT("SceneSearch"));
     SearchBox->Bind(this);
@@ -159,9 +164,10 @@ void UGHSTwinHUDWidget::NativeConstruct()
 }
 void UGHSTwinHUDWidget::NativeDestruct() { SceneData.Refresh(nullptr); PreviousPositions.Empty(); LabelAges.Empty(); Labels.Empty(); VisibleLabels.Empty(); PreviousVisibleLabels.Empty(); Super::NativeDestruct(); }
 FString UGHSTwinHUDWidget::GetSnapshot() const { return SceneData.SnapshotJson(SelectedId); }
-void UGHSTwinHUDWidget::EvaluateDiagnostics(const FString& Script)
+void UGHSTwinHUDWidget::EvaluateDiagnostics(const FString& Script,bool bReplay)
 {
-    if(bDiagnostics && Panel && Script.Len()<=32768) Panel->Evaluate(Script);
+    auto* Target=bReplay?ReplayOverlay.Get():Panel.Get();
+    if(bDiagnostics && Target && Script.Len()<=32768) Target->Evaluate(Script);
 }
 FString UGHSTwinHUDWidget::GetSceneControlsState() const
 {
@@ -750,15 +756,29 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
         Panel->SetRenderOpacity(1.f);
         Panel->SetRenderTranslation(PanelMotion.Position(Expanded)-Expanded.PanelPosition);
     }
-    if(ReplayOverlay && ReplayOverlaySlot)
+    if(ReplayOverlay && ReplayOverlaySlot && ReplayBrowserSlot)
     {
-        const FVector2D OverlaySize(FMath::Max(320.,Layout.SceneSize.X-48),168);
+        const FVector2D OverlaySize=PanelMotion.ReplayTransportSize(ViewSize);
+        const FVector2D BrowserSize(FMath::Max(320.,ViewSize.X-48),168);
         const FVector2D OverlayPosition(Layout.ScenePosition.X+24,ViewSize.Y-192);
-        const bool bChanged=!LastReplayViewport.Equals(OverlaySize,.1);
+        const bool bChanged=!LastReplayViewport.Equals(BrowserSize,.1);
+        const bool bMoving=PanelMotion.Progress!=PanelMotion.Target;
         ReplayOverlaySlot->SetPosition(OverlayPosition);ReplayOverlaySlot->SetSize(OverlaySize);
+        // Animate the clip and HTML content, keeping CEF's backing texture stable.
+        // Both layout and input bounds follow the drawer's existing 420ms curve.
+        ReplayBrowserSlot->SetSize(BrowserSize);
         ReplayOverlay->SetVisibility(IsReplayActive()?ESlateVisibility::Visible:ESlateVisibility::Hidden);
-        if(bChanged && bReplayOverlayReady && IsReplayActive())
-        {ReplayOverlay->Evaluate(FString::Printf(TEXT("window.twinSetViewport && window.twinSetViewport(%.4f,168);"),OverlaySize.X));LastReplayViewport=OverlaySize;}
+        if(bReplayOverlayReady && IsReplayActive())
+        {
+            FString Script;
+            if(bChanged) {Script=FString::Printf(TEXT("window.twinSetViewport && window.twinSetViewport(%.4f,168);"),BrowserSize.X);LastReplayViewport=BrowserSize;}
+            if(bChanged || FMath::Abs(LastReplayTransportWidth-OverlaySize.X)>.01 || bMoving!=bLastReplayTransportMoving)
+            {
+                Script+=FString::Printf(TEXT("window.twinReplayLayout && window.twinReplayLayout(%.4f,%s);"),OverlaySize.X,bMoving?TEXT("true"):TEXT("false"));
+                LastReplayTransportWidth=OverlaySize.X;bLastReplayTransportMoving=bMoving;
+            }
+            if(!Script.IsEmpty()) ReplayOverlay->Evaluate(Script);
+        }
     }
     // Search uses the same eased edge as the scene controls. Keep its dimensions
     // and responsive visibility stable while the drawer moves so it cannot snap
