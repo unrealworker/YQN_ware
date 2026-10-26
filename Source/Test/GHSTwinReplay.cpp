@@ -61,10 +61,15 @@ void UGHSTwinHUDWidget::ReplayOverview()
 }
 FVector4 UGHSTwinHUDWidget::GetReplaySceneRect() const
 {
-    const double Side=FMath::Min(28.,Layout.SceneSize.X*.06),Top=FMath::Min(72.,Layout.SceneSize.Y*.12);
+    // Follow framing uses the drawer's current eased edge, not Layout's discrete
+    // input bounds. Re-focusing here would reset the user's orbit and zoom.
+    const auto Expanded=FGHSTwinLayout::Calculate(ViewSize);
+    const auto Collapsed=FGHSTwinLayout::Calculate(ViewSize,true);
+    const FVector2D Size=FMath::Lerp(Collapsed.SceneSize,Expanded.SceneSize,double(PanelMotion.Progress));
+    const double Side=FMath::Min(28.,Size.X*.06),Top=FMath::Min(72.,Size.Y*.12);
     // Timeline begins 192 logical pixels above the bottom; keep another 24px gap.
-    return FVector4(Layout.ScenePosition.X+Side,Layout.ScenePosition.Y+Top,
-        FMath::Max(64.,Layout.SceneSize.X-Side*2),FMath::Max(80.,Layout.SceneSize.Y-Top-216));
+    return FVector4(Expanded.ScenePosition.X+Side,Expanded.ScenePosition.Y+Top,
+        FMath::Max(64.,Size.X-Side*2),FMath::Max(80.,Size.Y-Top-216));
 }
 bool UGHSTwinHUDWidget::HandleReplayCommand(const FString& Action,const TSharedPtr<FJsonObject>& Object)
 {
