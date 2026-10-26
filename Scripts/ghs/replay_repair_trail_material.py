@@ -143,16 +143,24 @@ return side * (d * lerp(StartShear, EndShear, UV.x) + float3(-d.y, d.x, 0) * (le
 
 
 def build_ripple_material():
-    sys.path.insert(0,str(ROOT/'Scripts/video_reference'))
-    from agv_fx_shader import RINGS_HLSL
+    sys.path.insert(0,str(ROOT/'Scripts/ghs'))
+    from replay_ripple_shader import REPLAY_RIPPLE_HLSL
     material=build_material(RIPPLE_PATH,unreal.MaterialDomain.MD_DEFERRED_DECAL)
     uv,clock,tint=params(material)
     phase=node(material,unreal.MaterialExpressionScalarParameter,-700,300,parameter_name='Phase',default_value=0.)
-    signal=custom(material,RINGS_HLSL,['UV','T','Tint','Phase'])
+    signal=custom(material,REPLAY_RIPPLE_HLSL,['UV','T','Tint','Phase'])
     for source,pin in [(uv,'UV'),(clock,'T'),(tint,'Tint'),(phase,'Phase')]:connect(source,signal,pin)
-    output_rgba(material,signal)
-    LIB.set_metadata_tag(material,'GHS.Replay.ReusedShader','Scripts/video_reference/agv_fx_shader.py:RINGS_HLSL')
-    return finish(material,'existing-diffusion-replay-clock-v1')
+    rgb=node(material,unreal.MaterialExpressionComponentMask,600,0,r=True,g=True,b=True,a=False)
+    alpha=node(material,unreal.MaterialExpressionComponentMask,600,200,r=False,g=False,b=False,a=True)
+    connect(signal,rgb,'');connect(signal,alpha,'')
+    assert ML.connect_material_property(rgb,'',unreal.MaterialProperty.MP_BASE_COLOR)
+    assert ML.connect_material_property(alpha,'',unreal.MaterialProperty.MP_OPACITY)
+    strength=node(material,unreal.MaterialExpressionScalarParameter,600,-180,parameter_name='RippleEmission',default_value=.55)
+    emission=node(material,unreal.MaterialExpressionMultiply,850,0)
+    connect(rgb,emission,'A');connect(strength,emission,'B')
+    assert ML.connect_material_property(emission,'',unreal.MaterialProperty.MP_EMISSIVE_COLOR)
+    LIB.set_metadata_tag(material,'GHS.Replay.ReusedShader','Derived from Scripts/video_reference/agv_fx_shader.py:RINGS_HLSL; replay-only coverage and blue palette')
+    return finish(material,'theme-blue-visible-diffusion-v2')
 
 
 def repair():
@@ -203,7 +211,8 @@ def repair():
                 phase_source='Per-leg route metric; custom data 0=start, 1=phase delta',
                 remaining_clip=dict(active_leg='ActiveLegId',distance='RemainingFromMeters',custom_data='6 leg id, 7 progress start metres, 8 progress delta metres',front_soft_edge_cm=6),
                 trail_blending='Masked with engine DitherTemporalAA soft coverage and depth writing; no alpha accumulation',
-                ripple_radius_cm=165,ripple_depth_cm=6,reused_shader='RINGS_HLSL',
+                ripple_radius_cm=165,ripple_depth_cm=6,reused_shader='REPLAY_RIPPLE_HLSL derived from RINGS_HLSL',
+                ripple_gradient_srgb=['#8BB9FF','#356BFA'],ripple_core_width_cm=5.28,ripple_emission=.55,
                 statistics=dict(trail=trail_stats,ripple=ripple_stats),protected_hashes=originals,
                 protected_sources_unchanged=True,other_replay_assets_unchanged=len(other),
                 material_sha256={p.stem:sha(p) for p in targets})
