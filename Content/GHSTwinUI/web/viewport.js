@@ -32,7 +32,7 @@ window.twinSetViewport=function(width,height){
   if(logical&&logical.width===width&&logical.height===height&&zoom===window.innerWidth/width)return;
   logical={width,height};update();
 };
-window.TwinViewport={getState:state,toLayoutRect(rect){
+window.TwinViewport={getState:state,hasNativeViewport:()=>!!logical,toLayoutRect(rect){
   const result={};for(const key of ['left','top','right','bottom','width','height'])result[key]=rect[key]/zoom;
   return result;
 }};
