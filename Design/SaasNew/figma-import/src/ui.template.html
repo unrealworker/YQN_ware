@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>SaasNew 设计迁移</title>
+<style>
+*{box-sizing:border-box}body{margin:0;padding:24px;font:14px/1.6 Inter,"Microsoft YaHei",sans-serif;color:#25364b;background:#f4f6f9}h1{margin:0 0 8px;font-size:22px}p{margin:8px 0}.card{background:white;border:1px solid #e5eaf2;border-radius:12px;padding:16px;margin:16px 0}.small{font-size:12px;color:#536478}button{border:0;border-radius:8px;background:#356bfa;color:white;font:600 14px inherit;padding:12px 20px;cursor:pointer;margin:4px 4px 4px 0}button:disabled{opacity:.45;cursor:default}button.secondary{background:#e8eefc;color:#2455cc}pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:190px;overflow:auto;font-size:11px}#log{font-size:12px;color:#2455cc}label{display:flex;gap:8px;align-items:flex-start;margin-bottom:18px}input{margin-top:5px}
+</style>
+<body>
+<h1>SaasNew · 全量设计迁移</h1><p>原生可编辑图层 · 离线图片 · 组件库 · 原型连线</p>
+<div class="card"><strong id="counts">载入迁移包…</strong><p class="small">只允许导入名为 <b>SaasNew</b> 的新空白文件，或续传本次已通过源哈希、节点 ID 和结构校验的导入。插件不会清空或删除任何节点，其他已有设计会被拒绝。</p><p class="small">54 画板按模块分区，47 主组件单独保留。后台页标明设计阶段。导入后可导出 Figma 实际渲染的 54 张 50% PNG 与验收 JSON，进行全量视觉核验。</p></div>
+<label><input id="ready" type="checkbox"><span>当前文件为 SaasNew 新空白文件，或本次可校验续传的导入文件。</span></label>
+<button id="start" disabled>导入完整设计</button><button id="download" class="secondary" hidden>下载验收 JSON</button>
+<div><button id="export" class="secondary" hidden>导出视觉核验包</button><button id="zip" hidden>下载视觉核验 ZIP</button></div>
+<p id="log">等待开始</p><pre id="details"></pre>
+<script>
+/*__ZIP__*/
+const payload=/*__PAYLOAD__*/;
+let report,visualFiles=[],zipBytes=null;
+const $=id=>document.getElementById(id);
+function downloadBlob(data,type,name){const a=document.createElement('a'),url=URL.createObjectURL(new Blob([data],{type}));a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+$('counts').textContent=`${payload.expected.boards} 个画板 · ${payload.expected.components} 个组件 · ${Object.keys(payload.images).length} 张离线素材 · ${payload.links.length} 条原型连接`;
+$('ready').onchange=()=>{$('start').disabled=!$('ready').checked;};
+$('start').onclick=()=>{$('start').disabled=true;$('ready').disabled=true;$('log').textContent='开始完整性与空白文件检查…';parent.postMessage({pluginMessage:{type:'import',payload}},'*');};
+$('download').onclick=()=>downloadBlob(JSON.stringify(report,null,2),'application/json','SaasNew-acceptance.json');
+$('export').onclick=()=>{visualFiles=[];zipBytes=null;$('zip').hidden=true;$('export').disabled=true;$('log').textContent='开始导出 Figma 实际渲染图…';parent.postMessage({pluginMessage:{type:'export-visuals'}},'*');};
+$('zip').onclick=()=>{if(zipBytes)downloadBlob(zipBytes,'application/zip','SaasNew-visual-verification.zip');};
+onmessage=event=>{
+ const m=event.data.pluginMessage;if(!m)return;
+ if(m.type==='progress')$('log').textContent=m.text;
+ if(m.type==='error'){$('log').textContent='已停止，未清空已有内容';$('details').textContent=m.text;if(m.report){report=m.report;$('download').hidden=false;}}
+ if(m.type==='report'){report=m.report;$('log').textContent=report.completed?'导入完成，可下载验收报告或导出视觉核验包。':'有待核查项，请下载验收报告。';$('details').textContent=JSON.stringify({counts:report.counts,checks:report.checks,warnings:report.warnings,errors:report.errors},null,2);$('download').hidden=false;$('export').hidden=!report.completed;}
+ if(m.type==='visual-file'){visualFiles.push({name:m.name,data:new Uint8Array(m.bytes)});$('log').textContent=`Figma 实际渲染导出 ${m.index}/${m.total} · 画板 ${String(m.number).padStart(2,'0')}`;}
+ if(m.type==='visual-error'){visualFiles=[];zipBytes=null;$('export').disabled=false;$('zip').hidden=true;$('log').textContent='视觉核验包未完成，未提供不完整 ZIP';$('details').textContent=m.text;}
+ if(m.type==='visual-complete'){
+  try{if(visualFiles.length!==54||m.summary.exported!==54)throw new Error('视觉核验图数量不足54');report=m.report;const manifest={...m.summary,files:m.summary.files.map((f,i)=>({...f,crc32:SaasZip.crc32(visualFiles[i].data).toString(16).padStart(8,'0')}))};const files=visualFiles.concat([{name:'SaasNew-acceptance.json',data:JSON.stringify(report,null,2)},{name:'visual-manifest.json',data:JSON.stringify(manifest,null,2)}]);zipBytes=SaasZip.build(files);visualFiles=[];$('zip').hidden=false;$('export').disabled=false;$('log').textContent=`54 张 Figma 渲染图已就绪（${(zipBytes.length/1048576).toFixed(1)} MB），点击“下载视觉核验 ZIP”。`;$('details').textContent=JSON.stringify({exported:54,scale:.5,zipFiles:56,completedAt:m.summary.finishedAt},null,2);}catch(error){zipBytes=null;$('zip').hidden=true;$('export').disabled=false;$('log').textContent='打包失败';$('details').textContent=String(error);}
+ }
+};
+</script></body></html>

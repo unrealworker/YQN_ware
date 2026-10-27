@@ -1,0 +1,124 @@
+{
+  "labels": [
+    {
+      "id": "WAREHOUSE:GHS",
+      "icon": "warehouse",
+      "x": 582.7597045898438,
+      "y": 367.9444274902344,
+      "width": 228,
+      "height": 56,
+      "opacity": 1,
+      "interactive": true,
+      "title": "GHS · 主仓库",
+      "subtitle": "点击查看",
+      "anchorX": 696.7597045898438,
+      "anchorY": 471.9444274902344,
+      "anchorSource": "UpdateWarehousePOI unclamped center position; verified central campus view",
+      "fill": "FFFFFF"
+    }
+  ],
+  "selectionStroke": 6,
+  "pointFilter": "all",
+  "replay": false,
+  "interiorAvailable": false,
+  "pendingNavigation": "",
+  "pendingNavigationId": "",
+  "warehousePOIOpacity": 1,
+  "interiorLabelOpacity": 0,
+  "roofClosed": true,
+  "roofOpening": false,
+  "roofClosing": false,
+  "roofTransitioning": false,
+  "roofProgress": 0,
+  "warehouseClock": {
+    "time": "07:59:28",
+    "date": "2026.10.27 · PDT (UTC−07:00)",
+    "zone": "America/Los_Angeles",
+    "headerHeight": 64,
+    "width": 1920,
+    "addressX": 440,
+    "addressY": 8,
+    "clockX": 1518,
+    "clockY": 8
+  },
+  "regionPoints": [
+    {
+      "id": "REGION:racks",
+      "worldPosition": [
+        -15515.824998092652,
+        -575.7241460266114,
+        537.2459411621094
+      ]
+    },
+    {
+      "id": "REGION:floor",
+      "worldPosition": [
+        6750.689996772767,
+        -575.7191,
+        338.80308837890624
+      ]
+    }
+  ],
+  "name": "campus-roof-closed",
+  "sourceCommit": "73e7b58",
+  "mapSha256": "1a28e3301d524bbb9aa0a32556e684d1468d4c7f095544e8a3430599e5a5aa01",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "hudScale": 1.0,
+  "sceneCamera": {
+    "location": [
+      35145.91266271779,
+      60636.858657310215,
+      60229.918200248736
+    ],
+    "rotation": [
+      -42.99999999999996,
+      -109.99999999999997,
+      8.697719514981521e-15
+    ],
+    "fov": 56.0
+  },
+  "replayState": {
+    "active": false,
+    "preparing": false,
+    "playing": false,
+    "completed": false,
+    "isTest": true,
+    "time": 0,
+    "duration": 0,
+    "rate": 1,
+    "startUtc": "",
+    "endUtc": "",
+    "orderId": "",
+    "followId": "",
+    "selectedId": "",
+    "trailMode": "all",
+    "error": "",
+    "exitPending": false,
+    "exitTitle": "",
+    "exitActionLabel": ""
+  },
+  "coordinateSystem": "Native HUD design pixels in full viewport. Scene crop subtracts x=0,y=64.",
+  "designStyle": {
+    "radius": 10,
+    "fontFamily": "Microsoft YaHei",
+    "titleSize": 14,
+    "titleOffsetX": 40,
+    "titleColor": "#25364B",
+    "selectedTitleColor": "#FFFFFF",
+    "badgeSize": 12,
+    "badgeHeight": 24,
+    "badgeRightInset": 12,
+    "badgeFill": "#F0F4F9",
+    "badgeRadius": 3,
+    "iconOffset": [
+      12,
+      12
+    ],
+    "iconScale": 0.75,
+    "iconLineWidth": 1.5,
+    "source": "GHSTwinHUDWidget.cpp NativePaint"
+  }
+}

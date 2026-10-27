@@ -1,0 +1,2605 @@
+{
+  "name": "SaasNew",
+  "auditedAt": "2026-10-27",
+  "scope": "54 approved Saas.pen pages and all their states, synchronized against latest actual warehouse UI",
+  "source": {
+    "path": "Design/GHS_Twin_SaaS_Concept/Saas.pen",
+    "sha256": "666c2cf70a003df9a917992b5e279d3e7ddb6a378dc5866f11688f9f9a0b5478",
+    "version": "2.21"
+  },
+  "counts": {
+    "artboards": 54,
+    "components": 47,
+    "images": 64,
+    "missingImages": 0,
+    "nodeTypes": {
+      "frame": 1452,
+      "text": 2353,
+      "rectangle": 230,
+      "icon": 612,
+      "ellipse": 332,
+      "ref": 228,
+      "path": 57
+    }
+  },
+  "sourcePriority": [
+    {
+      "priority": 1,
+      "source": "UE actual runtime screenshots + Content/GHSTwinUI/web + Tools/GHSTwinMotion",
+      "appliesTo": "Current warehouse business UI and latest motion/state behavior"
+    },
+    {
+      "priority": 2,
+      "source": "Source/Test roof/replay/camera/HUD and saved Zcool scene",
+      "appliesTo": "3D interaction, POIs, roof, replay, camera, current model shape"
+    },
+    {
+      "priority": 3,
+      "source": "Design/GHS_Twin_SaaS_Concept/Saas.pen",
+      "appliesTo": "Complete 54-board page/state inventory, editable components and approved unimplemented admin designs"
+    },
+    {
+      "priority": 4,
+      "source": "Design/GHS_SaaS_Interactive_20261026",
+      "appliesTo": "Reference interaction flows only; prototype simulations are not evidence of production integration"
+    },
+    {
+      "priority": 5,
+      "source": "Design/GHS_Warehouse_HUD",
+      "appliesTo": "Earlier separate NormalWarehouse HUD history; do not merge old V9 dual-sidebar style into SaasNew"
+    }
+  ],
+  "modules": {
+    "foundation": [
+      0,
+      7,
+      8,
+      9,
+      21,
+      22,
+      30,
+      33,
+      34
+    ],
+    "campus": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      10,
+      23,
+      24,
+      31,
+      32,
+      44
+    ],
+    "business": [
+      11,
+      12,
+      13,
+      14,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "replay": [
+      5,
+      15,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53
+    ],
+    "launcher": [
+      25,
+      26,
+      27
+    ],
+    "connection": [
+      28,
+      29,
+      40,
+      41
+    ],
+    "administration": [
+      35,
+      36,
+      37,
+      38,
+      39,
+      42,
+      43
+    ]
+  },
+  "pages": [
+    {
+      "number": 0,
+      "name": "00 · POI 与 HUD 设计系统",
+      "group": "system-and-states",
+      "interactions": [
+        "检查 POI 默认、悬停、选中、预警、故障、离线、待接入、区域和月台状态"
+      ],
+      "id": "bi8Au",
+      "sourceName": "00 · POI 与 HUD 设计系统",
+      "width": 3840,
+      "height": 1080,
+      "module": "foundation",
+      "sourcePriority": "current implementation where available; otherwise approved Saas.pen",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/bi8Au.png",
+      "runtimeOverrides": [],
+      "imageNodes": []
+    },
+    {
+      "number": 1,
+      "name": "01 · 内部总览 / 仓库空间态势",
+      "group": "warehouse",
+      "interactions": [
+        "切换七个业务入口",
+        "点聚合标签展开成员",
+        "收起/展开侧栏"
+      ],
+      "id": "CLx7Q",
+      "sourceName": "01 · 内部总览 / 仓库空间态势",
+      "width": 1920,
+      "height": 1080,
+      "module": "campus",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/CLx7Q.png",
+      "runtimeOverrides": [
+        "motion",
+        "startup",
+        "roof"
+      ],
+      "imageNodes": [
+        "X3XmU"
+      ]
+    },
+    {
+      "number": 2,
+      "name": "02 · 点位选中 / AGV 设备详情",
+      "group": "warehouse",
+      "interactions": [
+        "切换运行状态/任务/事件",
+        "放大设备图",
+        "定位设备",
+        "进入追溯"
+      ],
+      "id": "mP7E5",
+      "sourceName": "02 · 点位选中 / AGV 设备详情",
+      "width": 1920,
+      "height": 1080,
+      "module": "campus",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/mP7E5.png",
+      "runtimeOverrides": [
+        "motion",
+        "agv-model"
+      ],
+      "imageNodes": [
+        "pxdF5",
+        "xJ9st"
+      ]
+    },
+    {
+      "number": 3,
+      "name": "03 · 聚合展开 / 成员分页与定位",
+      "group": "warehouse",
+      "interactions": [
+        "全部/预警筛选",
+        "成员分页",
+        "点击成员定位"
+      ],
+      "id": "d7P3z",
+      "sourceName": "03 · 聚合展开 / 成员分页与定位",
+      "width": 1920,
+      "height": 1080,
+      "module": "campus",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/d7P3z.png",
+      "runtimeOverrides": [],
+      "imageNodes": [
+        "R89Nj"
+      ]
+    },
+    {
+      "number": 4,
+      "name": "04 · 告警定位 / AGV 低电量",
+      "group": "warehouse",
+      "interactions": [
+        "定位关联充电位",
+        "确认告警并保留未恢复状态",
+        "进入追溯"
+      ],
+      "id": "Wt7Vo",
+      "sourceName": "04 · 告警定位 / AGV 低电量",
+      "width": 1920,
+      "height": 1080,
+      "module": "campus",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/Wt7Vo.png",
+      "runtimeOverrides": [
+        "motion",
+        "agv-model"
+      ],
+      "imageNodes": [
+        "B68ru",
+        "FJkhx",
+        "LHSh0"
+      ]
+    },
+    {
+      "number": 5,
+      "name": "05 · 订单追溯 / 全时段设备回放",
+      "group": "replay",
+      "interactions": [
+        "播放/暂停",
+        "拖动时间轴",
+        "倍率",
+        "±30 秒",
+        "关键事件",
+        "跟随设备",
+        "结束追溯"
+      ],
+      "id": "iiFrY",
+      "sourceName": "05 · 订单追溯 / 全时段设备回放",
+      "width": 1920,
+      "height": 1080,
+      "module": "replay",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/iiFrY.png",
+      "runtimeOverrides": [
+        "motion",
+        "replay-trail",
+        "replay-ripple",
+        "replay-camera"
+      ],
+      "imageNodes": [
+        "vjuyT"
+      ]
+    },
+    {
+      "number": 6,
+      "name": "06 · 库位 POI / 原设计与未核验标记",
+      "group": "warehouse",
+      "interactions": [
+        "查看货位占用",
+        "打开独立示例物料",
+        "锁定货位反馈"
+      ],
+      "id": "gW9oH",
+      "sourceName": "06 · 库位 POI / 原设计与未核验标记",
+      "width": 1920,
+      "height": 1080,
+      "module": "campus",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/gW9oH.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "jHlz7"
+      ]
+    },
+    {
+      "number": 7,
+      "name": "07 · HUD 详情组件 / 车辆与设施",
+      "group": "system-and-states",
+      "interactions": [
+        "切换叉车/堆高车/装卸车/充电设施详情",
+        "查看关联对象"
+      ],
+      "id": "UbszE",
+      "sourceName": "07 · HUD 详情组件 / 车辆与设施",
+      "width": 1920,
+      "height": 1080,
+      "module": "foundation",
+      "sourcePriority": "current implementation where available; otherwise approved Saas.pen",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/UbszE.png",
+      "runtimeOverrides": [
+        "agv-model"
+      ],
+      "imageNodes": [
+        "y4MP7H",
+        "j3yYK",
+        "uGnUS",
+        "Q7mav9"
+      ]
+    },
+    {
+      "number": 8,
+      "name": "08 · 搜索与数据状态 / 边界反馈",
+      "group": "system-and-states",
+      "interactions": [
+        "搜索无结果清除筛选",
+        "历史无记录调整时间",
+        "失败重试",
+        "过期刷新",
+        "未知与离线区分"
+      ],
+      "id": "PE2am",
+      "sourceName": "08 · 搜索与数据状态 / 边界反馈",
+      "width": 1920,
+      "height": 1080,
+      "module": "foundation",
+      "sourcePriority": "current implementation where available; otherwise approved Saas.pen",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/PE2am.png",
+      "runtimeOverrides": [],
+      "imageNodes": []
+    },
+    {
+      "number": 9,
+      "name": "09 · 交互路径 / 密度与动效规范",
+      "group": "system-and-states",
+      "interactions": [
+        "聚合→成员→设备→返回交互路径",
+        "检查减少动态效果"
+      ],
+      "id": "r5SOcd",
+      "sourceName": "09 · 交互路径 / 密度与动效规范",
+      "width": 1920,
+      "height": 1080,
+      "module": "foundation",
+      "sourcePriority": "current implementation where available; otherwise approved Saas.pen",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/r5SOcd.png",
+      "runtimeOverrides": [
+        "replay-trail"
+      ],
+      "imageNodes": []
+    },
+    {
+      "number": 10,
+      "name": "10 · 聚合预警 / 从异常到设备",
+      "group": "warehouse",
+      "interactions": [
+        "从异常聚合筛选并定位设备"
+      ],
+      "id": "XJoOQ",
+      "sourceName": "10 · 聚合预警 / 从异常到设备",
+      "width": 1920,
+      "height": 1080,
+      "module": "campus",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/XJoOQ.png",
+      "runtimeOverrides": [],
+      "imageNodes": [
+        "w1SaW9"
+      ]
+    },
+    {
+      "number": 11,
+      "name": "11 · 库存 / 数量与货位分布",
+      "group": "warehouse",
+      "interactions": [
+        "区域目录选择",
+        "样例库存搜索",
+        "占用图例交互",
+        "格位选择"
+      ],
+      "id": "F8Cox",
+      "sourceName": "11 · 库存 / 数量与货位分布",
+      "width": 1920,
+      "height": 1080,
+      "module": "business",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/F8Cox.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "rtxaT"
+      ]
+    },
+    {
+      "number": 12,
+      "name": "12 · 订单 / 今日出入库作业",
+      "group": "warehouse",
+      "interactions": [
+        "出入库切换",
+        "订单/物料搜索",
+        "状态筛选",
+        "仅异常",
+        "分页",
+        "订单详情"
+      ],
+      "id": "lvDfx",
+      "sourceName": "12 · 订单 / 今日出入库作业",
+      "width": 1920,
+      "height": 1080,
+      "module": "business",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/lvDfx.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "W0nnF"
+      ]
+    },
+    {
+      "number": 13,
+      "name": "13 · 设备 / 真实台账与场景映射边界",
+      "group": "warehouse",
+      "interactions": [
+        "真实台账/场景模型切换",
+        "类型筛选",
+        "台账样例详情",
+        "未映射禁用定位"
+      ],
+      "id": "zyWMm",
+      "sourceName": "13 · 设备 / 真实台账与场景映射边界",
+      "width": 1920,
+      "height": 1080,
+      "module": "business",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/zyWMm.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "YKgOX"
+      ]
+    },
+    {
+      "number": 14,
+      "name": "14 · 告警 / 分级队列与处理状态",
+      "group": "warehouse",
+      "interactions": [
+        "按级别/确认状态筛选",
+        "当前/恢复队列",
+        "告警定位",
+        "确认操作"
+      ],
+      "id": "lCf0H",
+      "sourceName": "14 · 告警 / 分级队列与处理状态",
+      "width": 1920,
+      "height": 1080,
+      "module": "business",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/lCf0H.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "z6NYxa",
+        "aM40q",
+        "uK8f5",
+        "TzIcx",
+        "XTfDR",
+        "Z2rX4X",
+        "zNh9d",
+        "LRJoD"
+      ]
+    },
+    {
+      "number": 15,
+      "name": "15 · 订单追溯 / 时段查询",
+      "group": "replay",
+      "interactions": [
+        "开始/结束时间选择",
+        "1/2/4小时快捷选择",
+        "至少1小时校验",
+        "索引订单"
+      ],
+      "id": "OA1Bd",
+      "sourceName": "15 · 订单追溯 / 时段查询",
+      "width": 1920,
+      "height": 1080,
+      "module": "replay",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/OA1Bd.png",
+      "runtimeOverrides": [
+        "motion",
+        "replay-trail"
+      ],
+      "imageNodes": [
+        "zTxvT"
+      ]
+    },
+    {
+      "number": 16,
+      "name": "16 · 场景 / 即时图层与库容设置",
+      "group": "warehouse",
+      "interactions": [
+        "全仓/俯视/货架/地堆视角",
+        "四图层开关",
+        "标签密度",
+        "货架/地堆比例滑条",
+        "恢复默认"
+      ],
+      "id": "kvTdT",
+      "sourceName": "16 · 场景 / 即时图层与库容设置",
+      "width": 1920,
+      "height": 1080,
+      "module": "business",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/kvTdT.png",
+      "runtimeOverrides": [
+        "motion",
+        "roof"
+      ],
+      "imageNodes": [
+        "aaUir",
+        "b5dXz",
+        "d0bfg",
+        "qL0Pt",
+        "ZLT60"
+      ]
+    },
+    {
+      "number": 17,
+      "name": "17 · 库存明细 / 物料与货位详情",
+      "group": "warehouse",
+      "interactions": [
+        "返回库存保留筛选",
+        "库存样例列表",
+        "独立物料样例详情"
+      ],
+      "id": "XhUtw",
+      "sourceName": "17 · 库存明细 / 物料与货位详情",
+      "width": 1920,
+      "height": 1080,
+      "module": "business",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/XhUtw.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "OCspa"
+      ]
+    },
+    {
+      "number": 18,
+      "name": "18 · 订单详情 / 拣货与设备联动",
+      "group": "warehouse",
+      "interactions": [
+        "返回原订单列表",
+        "定位来源货位/目标月台/执行设备",
+        "查看物料",
+        "追溯"
+      ],
+      "id": "t4mlxm",
+      "sourceName": "18 · 订单详情 / 拣货与设备联动",
+      "width": 1920,
+      "height": 1080,
+      "module": "business",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/t4mlxm.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "I6PYf"
+      ]
+    },
+    {
+      "number": 19,
+      "name": "19 · 订单 / 入库切换状态",
+      "group": "warehouse",
+      "interactions": [
+        "入库订单状态",
+        "切回出库保留日期"
+      ],
+      "id": "qNsRa",
+      "sourceName": "19 · 订单 / 入库切换状态",
+      "width": 1920,
+      "height": 1080,
+      "module": "business",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/qNsRa.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "XeOiK"
+      ]
+    },
+    {
+      "number": 20,
+      "name": "20 · 设备 / 充电设施切换状态",
+      "group": "warehouse",
+      "interactions": [
+        "设施状态筛选",
+        "仅空闲",
+        "充电设施详情",
+        "定位关联AGV"
+      ],
+      "id": "ibTva",
+      "sourceName": "20 · 设备 / 充电设施切换状态",
+      "width": 1920,
+      "height": 1080,
+      "module": "business",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/ibTva.png",
+      "runtimeOverrides": [
+        "motion",
+        "agv-model"
+      ],
+      "imageNodes": [
+        "b5c18",
+        "V6OsC",
+        "mkXEp",
+        "mRRaZ",
+        "j2jhGr"
+      ]
+    },
+    {
+      "number": 21,
+      "name": "21 · 导航内容地图 / 七个业务入口",
+      "group": "system-and-states",
+      "interactions": [
+        "七业务入口导航",
+        "检查跨页返回路径"
+      ],
+      "id": "RXvoP",
+      "sourceName": "21 · 导航内容地图 / 七个业务入口",
+      "width": 1920,
+      "height": 1080,
+      "module": "foundation",
+      "sourcePriority": "current implementation where available; otherwise approved Saas.pen",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/RXvoP.png",
+      "runtimeOverrides": [],
+      "imageNodes": []
+    },
+    {
+      "number": 22,
+      "name": "22 · 业务状态 / 空值权限与确认反馈",
+      "group": "system-and-states",
+      "interactions": [
+        "库存空结果/加载/失败",
+        "订单零值",
+        "锁定记录",
+        "已确认未恢复"
+      ],
+      "id": "G316Rk",
+      "sourceName": "22 · 业务状态 / 空值权限与确认反馈",
+      "width": 1920,
+      "height": 1080,
+      "module": "foundation",
+      "sourcePriority": "current implementation where available; otherwise approved Saas.pen",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/G316Rk.png",
+      "runtimeOverrides": [],
+      "imageNodes": []
+    },
+    {
+      "number": 23,
+      "name": "23 · 设备搜索 / 匹配结果与定位",
+      "group": "warehouse",
+      "interactions": [
+        "输入查询",
+        "上下箭头选结果",
+        "Enter定位",
+        "Esc收起"
+      ],
+      "id": "t1QfTH",
+      "sourceName": "23 · 设备搜索 / 匹配结果与定位",
+      "width": 1920,
+      "height": 1080,
+      "module": "campus",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/t1QfTH.png",
+      "runtimeOverrides": [
+        "agv-model"
+      ],
+      "imageNodes": [
+        "izBhk"
+      ]
+    },
+    {
+      "number": 24,
+      "name": "24 · 仓库切换 / 当前与接入边界",
+      "group": "warehouse",
+      "interactions": [
+        "打开仓库选择器",
+        "选择当前GHS",
+        "无其他接入仓库说明"
+      ],
+      "id": "Lxvbj",
+      "sourceName": "24 · 仓库切换 / 当前与接入边界",
+      "width": 1920,
+      "height": 1080,
+      "module": "campus",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/Lxvbj.png",
+      "runtimeOverrides": [],
+      "imageNodes": [
+        "LFZLI"
+      ]
+    },
+    {
+      "number": 25,
+      "name": "25 · 像素流服务启动器 / 待启动",
+      "group": "stream-launcher",
+      "interactions": [
+        "程序/端口/分辨率/画质配置",
+        "访问模式切换",
+        "高级参数",
+        "启动服务(原型模拟)"
+      ],
+      "id": "RyNRe",
+      "sourceName": "25 · 像素流服务启动器 / 待启动",
+      "width": 1200,
+      "height": 900,
+      "module": "launcher",
+      "sourcePriority": "current implementation where available; otherwise approved Saas.pen",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/RyNRe.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": [
+        "a41TnP"
+      ]
+    },
+    {
+      "number": 26,
+      "name": "26 · 像素流服务启动器 / 运行中",
+      "group": "stream-launcher",
+      "interactions": [
+        "访问页",
+        "在线会话",
+        "日志",
+        "停止服务确认"
+      ],
+      "id": "ApVA8",
+      "sourceName": "26 · 像素流服务启动器 / 运行中",
+      "width": 1200,
+      "height": 900,
+      "module": "launcher",
+      "sourcePriority": "current implementation where available; otherwise approved Saas.pen",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/ApVA8.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": [
+        "ElzN4"
+      ]
+    },
+    {
+      "number": 27,
+      "name": "27 · 启动器 / 配置与异常状态",
+      "group": "stream-launcher",
+      "interactions": [
+        "端口冲突/路径错误校验",
+        "画质与高级参数",
+        "启动停止反馈",
+        "停止确认"
+      ],
+      "id": "A5t3VD",
+      "sourceName": "27 · 启动器 / 配置与异常状态",
+      "width": 1920,
+      "height": 1080,
+      "module": "launcher",
+      "sourcePriority": "current implementation where available; otherwise approved Saas.pen",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/A5t3VD.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": []
+    },
+    {
+      "number": 28,
+      "name": "28 · 像素流访问 / 自动连接进度",
+      "group": "stream-launcher",
+      "interactions": [
+        "五阶段连接进度模拟",
+        "帮助",
+        "首帧进入场景"
+      ],
+      "id": "tWZ13",
+      "sourceName": "28 · 像素流访问 / 自动连接进度",
+      "width": 1440,
+      "height": 900,
+      "module": "connection",
+      "sourcePriority": "current implementation where available; otherwise approved Saas.pen",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/tWZ13.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": [
+        "WYD6K"
+      ]
+    },
+    {
+      "number": 29,
+      "name": "29 · 像素流访问 / 连接边界反馈",
+      "group": "stream-launcher",
+      "interactions": [
+        "管理员结束/超时/停止/重连/其他标签/自动播放阻止",
+        "对应重试或允许播放"
+      ],
+      "id": "jCHwc",
+      "sourceName": "29 · 像素流访问 / 连接边界反馈",
+      "width": 1920,
+      "height": 1080,
+      "module": "connection",
+      "sourcePriority": "current implementation where available; otherwise approved Saas.pen",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/jCHwc.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": []
+    },
+    {
+      "number": 30,
+      "name": "30 · 搜索与选中 / 中文输入和控件规范",
+      "group": "system-and-states",
+      "interactions": [
+        "中文输入法合成期间不误定位",
+        "搜索匹配",
+        "类型/模型选中",
+        "放大缩小与全仓"
+      ],
+      "id": "k2v5GZ",
+      "sourceName": "30 · 搜索与选中 / 中文输入和控件规范",
+      "width": 1920,
+      "height": 1080,
+      "module": "foundation",
+      "sourcePriority": "current implementation where available; otherwise approved Saas.pen",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/k2v5GZ.png",
+      "runtimeOverrides": [],
+      "imageNodes": [
+        "qHJpy",
+        "BvtM2"
+      ]
+    },
+    {
+      "number": 31,
+      "name": "31 · 园区默认 / 唯一主仓库 POI",
+      "group": "warehouse",
+      "interactions": [
+        "主仓库唯一POI",
+        "点击查看内部",
+        "展开业务面板"
+      ],
+      "id": "cgOha",
+      "sourceName": "31 · 园区默认 / 唯一主仓库 POI",
+      "width": 1920,
+      "height": 1080,
+      "module": "campus",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/cgOha.png",
+      "runtimeOverrides": [
+        "motion",
+        "startup",
+        "roof"
+      ],
+      "imageNodes": [
+        "ryWrC"
+      ]
+    },
+    {
+      "number": 32,
+      "name": "32 · 点击开顶 / 0.5 秒溶解流程",
+      "group": "system-and-states",
+      "interactions": [
+        "点击主仓库开始开顶",
+        "动画期间内部拾取禁用",
+        "完成后显示内部",
+        "全仓恢复"
+      ],
+      "id": "q2RKW8",
+      "sourceName": "32 · 点击开顶 / 0.5 秒溶解流程",
+      "width": 1920,
+      "height": 1080,
+      "module": "campus",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/q2RKW8.png",
+      "runtimeOverrides": [
+        "roof"
+      ],
+      "imageNodes": []
+    },
+    {
+      "number": 33,
+      "name": "33 · 主仓库 POI / 当前交互规范",
+      "group": "system-and-states",
+      "interactions": [
+        "POI默认/悬停/开顶规范",
+        "主动设备定位先开顶"
+      ],
+      "id": "M0wx5h",
+      "sourceName": "33 · 主仓库 POI / 当前交互规范",
+      "width": 1920,
+      "height": 1080,
+      "module": "foundation",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/M0wx5h.png",
+      "runtimeOverrides": [
+        "roof"
+      ],
+      "imageNodes": []
+    },
+    {
+      "number": 34,
+      "name": "34 · 场景设置 / 即时控制与库容状态",
+      "group": "system-and-states",
+      "interactions": [
+        "四图层蓝色开关",
+        "80%/100%初始比例",
+        "关闭货物禁用滑条",
+        "全仓和恢复默认区别"
+      ],
+      "id": "mG0YD",
+      "sourceName": "34 · 场景设置 / 即时控制与库容状态",
+      "width": 1920,
+      "height": 1200,
+      "module": "foundation",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/mG0YD.png",
+      "runtimeOverrides": [
+        "roof"
+      ],
+      "imageNodes": []
+    },
+    {
+      "number": 35,
+      "name": "35 · 像素流后台 / 运行中",
+      "group": "stream-admin",
+      "interactions": [
+        "服务参数保存",
+        "在线用户操作",
+        "结束单用户",
+        "停止服务",
+        "访问页"
+      ],
+      "id": "uR0QK",
+      "sourceName": "35 · 像素流后台 / 运行中",
+      "width": 1440,
+      "height": 1080,
+      "module": "administration",
+      "sourcePriority": "Saas.pen approved design; React prototype is simulation",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/uR0QK.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": [
+        "z3AVCD"
+      ]
+    },
+    {
+      "number": 36,
+      "name": "36 · 像素流后台 / 已停止",
+      "group": "stream-admin",
+      "interactions": [
+        "无用户空态",
+        "启动服务",
+        "服务参数保存"
+      ],
+      "id": "ieg9r",
+      "sourceName": "36 · 像素流后台 / 已停止",
+      "width": 1440,
+      "height": 1080,
+      "module": "administration",
+      "sourcePriority": "Saas.pen approved design; React prototype is simulation",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/ieg9r.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": [
+        "gBdC7"
+      ]
+    },
+    {
+      "number": 37,
+      "name": "37 · 像素流后台 / 结束用户连接",
+      "group": "stream-admin",
+      "interactions": [
+        "结束连接确认",
+        "取消",
+        "单用户移出列表"
+      ],
+      "id": "D6HC9",
+      "sourceName": "37 · 像素流后台 / 结束用户连接",
+      "width": 1440,
+      "height": 1080,
+      "module": "administration",
+      "sourcePriority": "Saas.pen approved design; React prototype is simulation",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/D6HC9.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": [
+        "B49Dl"
+      ]
+    },
+    {
+      "number": 38,
+      "name": "38 · 像素流后台 / 停止服务确认",
+      "group": "stream-admin",
+      "interactions": [
+        "停止服务确认",
+        "取消继续",
+        "停止全部会话"
+      ],
+      "id": "Jsit1",
+      "sourceName": "38 · 像素流后台 / 停止服务确认",
+      "width": 1440,
+      "height": 1080,
+      "module": "administration",
+      "sourcePriority": "Saas.pen approved design; React prototype is simulation",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/Jsit1.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": [
+        "fUtEw"
+      ]
+    },
+    {
+      "number": 39,
+      "name": "39 · 像素流后台 / 状态与参数反馈",
+      "group": "stream-admin",
+      "interactions": [
+        "启动/停止过程",
+        "失败/重试",
+        "端口校验",
+        "参数待重启提示",
+        "高级参数",
+        "无用户",
+        "停止失败",
+        "断开通知"
+      ],
+      "id": "i8fzG",
+      "sourceName": "39 · 像素流后台 / 状态与参数反馈",
+      "width": 1920,
+      "height": 1320,
+      "module": "administration",
+      "sourcePriority": "Saas.pen approved design; React prototype is simulation",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/i8fzG.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": []
+    },
+    {
+      "number": 40,
+      "name": "40 · 像素流访问 / 管理员结束连接",
+      "group": "stream-admin",
+      "interactions": [
+        "管理员结束连接说明",
+        "手动重新连接"
+      ],
+      "id": "tYSnE",
+      "sourceName": "40 · 像素流访问 / 管理员结束连接",
+      "width": 1440,
+      "height": 900,
+      "module": "connection",
+      "sourcePriority": "Saas.pen approved design; React prototype is simulation",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/tYSnE.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": [
+        "S5E1N6"
+      ]
+    },
+    {
+      "number": 41,
+      "name": "41 · 像素流访问 / 服务已暂停",
+      "group": "stream-admin",
+      "interactions": [
+        "服务暂停说明",
+        "检查服务状态"
+      ],
+      "id": "aIei1",
+      "sourceName": "41 · 像素流访问 / 服务已暂停",
+      "width": 1440,
+      "height": 900,
+      "module": "connection",
+      "sourcePriority": "Saas.pen approved design; React prototype is simulation",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/aIei1.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": [
+        "w2jdSo"
+      ]
+    },
+    {
+      "number": 42,
+      "name": "42 · 像素流后台 / 管理员登录",
+      "group": "stream-admin",
+      "interactions": [
+        "管理员账号密码",
+        "登录",
+        "打开用户连接页"
+      ],
+      "id": "jRpYB",
+      "sourceName": "42 · 像素流后台 / 管理员登录",
+      "width": 1440,
+      "height": 900,
+      "module": "administration",
+      "sourcePriority": "Saas.pen approved design; React prototype is simulation",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/jRpYB.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": [
+        "W5NZqZ"
+      ]
+    },
+    {
+      "number": 43,
+      "name": "43 · 像素流后台 / 登录失败",
+      "group": "stream-admin",
+      "interactions": [
+        "登录失败保留账号",
+        "重新输入密码",
+        "重试登录"
+      ],
+      "id": "F554L",
+      "sourceName": "43 · 像素流后台 / 登录失败",
+      "width": 1440,
+      "height": 900,
+      "module": "administration",
+      "sourcePriority": "Saas.pen approved design; React prototype is simulation",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/F554L.png",
+      "runtimeOverrides": [
+        "streaming-scope"
+      ],
+      "imageNodes": [
+        "PZti8"
+      ]
+    },
+    {
+      "number": 44,
+      "name": "44 · 园区总览 / 库容说明展开",
+      "group": "warehouse",
+      "interactions": [
+        "库容说明打开/关闭",
+        "示例与真实数据分离"
+      ],
+      "id": "OiC8B",
+      "sourceName": "44 · 园区总览 / 库容说明展开",
+      "width": 1920,
+      "height": 1080,
+      "module": "campus",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/OiC8B.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "yjZiG"
+      ]
+    },
+    {
+      "number": 45,
+      "name": "45 · 订单追溯 / 4 个测试订单",
+      "group": "replay",
+      "interactions": [
+        "4个测试订单选择",
+        "修改时段",
+        "开始全部设备回放"
+      ],
+      "id": "sNQHB",
+      "sourceName": "45 · 订单追溯 / 4 个测试订单",
+      "width": 1920,
+      "height": 1080,
+      "module": "replay",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/sNQHB.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "K0o94n"
+      ]
+    },
+    {
+      "number": 46,
+      "name": "46 · 订单追溯 / 最短 1 小时校验",
+      "group": "replay",
+      "interactions": [
+        "少于1小时错误",
+        "输入纠正",
+        "索引按钮不可重复"
+      ],
+      "id": "oRKJZ",
+      "sourceName": "46 · 订单追溯 / 最短 1 小时校验",
+      "width": 1920,
+      "height": 1080,
+      "module": "replay",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/oRKJZ.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "l4vnhN"
+      ]
+    },
+    {
+      "number": 47,
+      "name": "47 · 订单追溯 / 暂停与设备跟随",
+      "group": "replay",
+      "interactions": [
+        "暂停/播放",
+        "跟随人工叉车",
+        "取消跟随",
+        "地堆全景",
+        "剩余路线全部/选中/关闭"
+      ],
+      "id": "dJZrJ",
+      "sourceName": "47 · 订单追溯 / 暂停与设备跟随",
+      "width": 1920,
+      "height": 1080,
+      "module": "replay",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/dJZrJ.png",
+      "runtimeOverrides": [
+        "motion",
+        "replay-trail",
+        "replay-ripple",
+        "replay-camera"
+      ],
+      "imageNodes": [
+        "e3fnYV"
+      ]
+    },
+    {
+      "number": 48,
+      "name": "48 · 订单追溯 / 关键事件定位暂停",
+      "group": "replay",
+      "interactions": [
+        "关键事件分页",
+        "事件点击定位并暂停",
+        "时间轴标记跳转"
+      ],
+      "id": "Aqeif",
+      "sourceName": "48 · 订单追溯 / 关键事件定位暂停",
+      "width": 1920,
+      "height": 1080,
+      "module": "replay",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/Aqeif.png",
+      "runtimeOverrides": [
+        "motion",
+        "replay-trail",
+        "replay-ripple",
+        "replay-camera"
+      ],
+      "imageNodes": [
+        "whcfP"
+      ]
+    },
+    {
+      "number": 49,
+      "name": "49 · 订单追溯 / 区间播放完成",
+      "group": "replay",
+      "interactions": [
+        "停止在区间终点",
+        "从头回放",
+        "结束追溯"
+      ],
+      "id": "vNXAk",
+      "sourceName": "49 · 订单追溯 / 区间播放完成",
+      "width": 1920,
+      "height": 1080,
+      "module": "replay",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/vNXAk.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "KObVc"
+      ]
+    },
+    {
+      "number": 50,
+      "name": "50 · 订单追溯 / 跨页停止确认",
+      "group": "replay",
+      "interactions": [
+        "跨页停止确认",
+        "继续恢复原播放状态",
+        "停止后执行原导航"
+      ],
+      "id": "QFsnb",
+      "sourceName": "50 · 订单追溯 / 跨页停止确认",
+      "width": 1920,
+      "height": 1080,
+      "module": "replay",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/QFsnb.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "L0xO0H"
+      ]
+    },
+    {
+      "number": 51,
+      "name": "51 · 订单追溯 / 手动结束并恢复场景",
+      "group": "replay",
+      "interactions": [
+        "手动结束确认",
+        "恢复进入前场景",
+        "取消保持回放"
+      ],
+      "id": "IeQ6D",
+      "sourceName": "51 · 订单追溯 / 手动结束并恢复场景",
+      "width": 1920,
+      "height": 1080,
+      "module": "replay",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/IeQ6D.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": [
+        "yS6nm"
+      ]
+    },
+    {
+      "number": 52,
+      "name": "52 · 订单追溯 / 查询与恢复边界",
+      "group": "replay",
+      "interactions": [
+        "索引加载/空/失败",
+        "夏令时不存在/重复时刻",
+        "恢复失败重试"
+      ],
+      "id": "G0MuIS",
+      "sourceName": "52 · 订单追溯 / 查询与恢复边界",
+      "width": 1920,
+      "height": 1080,
+      "module": "replay",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/G0MuIS.png",
+      "runtimeOverrides": [
+        "motion"
+      ],
+      "imageNodes": []
+    },
+    {
+      "number": 53,
+      "name": "53 · 订单追溯 / 1440 设备与时间轴",
+      "group": "replay",
+      "interactions": [
+        "1440×900响应式回放面板",
+        "时间轴与侧栏同步伸缩"
+      ],
+      "id": "UTzjR",
+      "sourceName": "53 · 订单追溯 / 1440 设备与时间轴",
+      "width": 1440,
+      "height": 900,
+      "module": "replay",
+      "sourcePriority": "current UE runtime > current code > Saas.pen > prototype",
+      "preview": "Design/GHS_Twin_SaaS_Concept/exports/current/UTzjR.png",
+      "runtimeOverrides": [
+        "motion",
+        "replay-trail",
+        "replay-ripple",
+        "replay-camera"
+      ],
+      "imageNodes": [
+        "RTfbC"
+      ]
+    }
+  ],
+  "components": [
+    {
+      "id": "AXhJs",
+      "name": "POI / 区域 / 默认",
+      "board": "bi8Au",
+      "width": 176,
+      "height": 92
+    },
+    {
+      "id": "AR4QQ",
+      "name": "POI / 设备 / 默认",
+      "board": "bi8Au",
+      "width": 236,
+      "height": 92
+    },
+    {
+      "id": "zZdjB",
+      "name": "POI / 设备 / 选中",
+      "board": "bi8Au",
+      "width": 220,
+      "height": 92
+    },
+    {
+      "id": "xO4VH",
+      "name": "POI / 设备 / 悬停",
+      "board": "bi8Au",
+      "width": 236,
+      "height": 92
+    },
+    {
+      "id": "hyMUB",
+      "name": "POI / 设备 / 预警",
+      "board": "bi8Au",
+      "width": 242,
+      "height": 92
+    },
+    {
+      "id": "q2XioG",
+      "name": "POI / 设备 / 故障选中",
+      "board": "bi8Au",
+      "width": 270,
+      "height": 92
+    },
+    {
+      "id": "qmFIM",
+      "name": "POI / 设备 / 离线",
+      "board": "bi8Au",
+      "width": 254,
+      "height": 92
+    },
+    {
+      "id": "U071M",
+      "name": "POI / 设备 / 待接入",
+      "board": "bi8Au",
+      "width": 242,
+      "height": 92
+    },
+    {
+      "id": "q1Fkpg",
+      "name": "POI / 聚合 / 含异常",
+      "board": "bi8Au",
+      "width": 270,
+      "height": 92
+    },
+    {
+      "id": "AE7wv",
+      "name": "POI / 设施 / 充电位",
+      "board": "bi8Au",
+      "width": 238,
+      "height": 92
+    },
+    {
+      "id": "uLeSp",
+      "name": "POI / 库位 / 已占用",
+      "board": "bi8Au",
+      "width": 248,
+      "height": 92
+    },
+    {
+      "id": "KtN6F",
+      "name": "POI / 月台 / 作业中",
+      "board": "bi8Au",
+      "width": 254,
+      "height": 92
+    },
+    {
+      "id": "Dta3T",
+      "name": "公共 / 当前仓库选择器",
+      "board": "bi8Au",
+      "width": 256,
+      "height": 84
+    },
+    {
+      "id": "pXfPV",
+      "name": "公共 / 按类型查看",
+      "board": "bi8Au",
+      "width": 484,
+      "height": 76
+    },
+    {
+      "id": "q7JLn",
+      "name": "公共 / 场景搜索",
+      "board": "bi8Au",
+      "width": 420,
+      "height": 48
+    },
+    {
+      "id": "oIJE1",
+      "name": "公共 / 右侧缩放与全仓",
+      "board": "bi8Au",
+      "width": 56,
+      "height": 164
+    },
+    {
+      "id": "yCuML",
+      "name": "公共 / 仓库地址",
+      "board": "bi8Au",
+      "width": 420,
+      "height": 44
+    },
+    {
+      "id": "uzdua",
+      "name": "公共 / 仓库当地时钟",
+      "board": "bi8Au",
+      "width": 282,
+      "height": 44
+    },
+    {
+      "id": "PjVwW",
+      "name": "综合总览 / 库存订单设备",
+      "board": "CLx7Q",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "j6vyw",
+      "name": "告警详情 / 待确认",
+      "board": "Wt7Vo",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "OsnX0",
+      "name": "订单追溯 / 回放设备面板",
+      "board": "iiFrY",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "f1klDQ",
+      "name": "订单追溯 / 底部时间轴",
+      "board": "iiFrY",
+      "width": 1392,
+      "height": 204
+    },
+    {
+      "id": "fMQpU",
+      "name": "HUD / 人工叉车",
+      "board": "UbszE",
+      "width": 416,
+      "height": 704
+    },
+    {
+      "id": "y8d3P",
+      "name": "HUD / 电动堆高车",
+      "board": "UbszE",
+      "width": 416,
+      "height": 704
+    },
+    {
+      "id": "I5LfXX",
+      "name": "HUD / 装卸车辆",
+      "board": "UbszE",
+      "width": 416,
+      "height": 704
+    },
+    {
+      "id": "OdRUv",
+      "name": "HUD / 充电设施",
+      "board": "UbszE",
+      "width": 416,
+      "height": 704
+    },
+    {
+      "id": "Y8nwy",
+      "name": "状态组件 / 搜索无结果",
+      "board": "PE2am",
+      "width": 564,
+      "height": 322
+    },
+    {
+      "id": "hmZ8d",
+      "name": "状态组件 / 历史无记录",
+      "board": "PE2am",
+      "width": 564,
+      "height": 322
+    },
+    {
+      "id": "rOqoW",
+      "name": "状态组件 / 查询失败",
+      "board": "PE2am",
+      "width": 564,
+      "height": 322
+    },
+    {
+      "id": "tfMbN",
+      "name": "状态组件 / 数据过期",
+      "board": "PE2am",
+      "width": 564,
+      "height": 322
+    },
+    {
+      "id": "qlQtA",
+      "name": "状态组件 / 等待接入",
+      "board": "PE2am",
+      "width": 564,
+      "height": 322
+    },
+    {
+      "id": "G33hbz",
+      "name": "状态组件 / 设备离线",
+      "board": "PE2am",
+      "width": 564,
+      "height": 322
+    },
+    {
+      "id": "H4NHQ0",
+      "name": "业务侧栏 / 库存与货位",
+      "board": "F8Cox",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "i96jo",
+      "name": "业务侧栏 / 库存样例与待关联详情",
+      "board": "XhUtw",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "FpOV2",
+      "name": "业务侧栏 / 出库订单",
+      "board": "lvDfx",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "B3cqCK",
+      "name": "业务侧栏 / 订单详情",
+      "board": "t4mlxm",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "nqiHV",
+      "name": "业务侧栏 / 设备台账",
+      "board": "zyWMm",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "BkJLx",
+      "name": "业务侧栏 / 设备告警",
+      "board": "lCf0H",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "Z1BxY",
+      "name": "业务侧栏 / 订单追溯查询",
+      "board": "OA1Bd",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "G81ak",
+      "name": "业务侧栏 / 场景设置",
+      "board": "kvTdT",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "e3N8n",
+      "name": "业务侧栏 / 入库订单",
+      "board": "qNsRa",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "A3Rng7",
+      "name": "业务侧栏 / 充电设施",
+      "board": "ibTva",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "cwZ7S",
+      "name": "POI / 主仓库 / 默认",
+      "board": "M0wx5h",
+      "width": 228,
+      "height": 132
+    },
+    {
+      "id": "Gjygy",
+      "name": "POI / 主仓库 / 悬停",
+      "board": "M0wx5h",
+      "width": 228,
+      "height": 132
+    },
+    {
+      "id": "n23H5",
+      "name": "订单追溯 / 索引结果",
+      "board": "sNQHB",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "yKCFc",
+      "name": "订单追溯 / 关键事件面板",
+      "board": "Aqeif",
+      "width": 424,
+      "height": 1016
+    },
+    {
+      "id": "UWu6c",
+      "name": "停止追溯确认",
+      "board": "QFsnb",
+      "width": 600,
+      "height": 286
+    }
+  ],
+  "images": [
+    {
+      "nodeId": "X3XmU",
+      "name": "三维仓库场景",
+      "boardId": "CLx7Q",
+      "url": "images/latest-scene-20261023/interior-overview.png",
+      "exists": true
+    },
+    {
+      "nodeId": "pxdF5",
+      "name": "三维仓库场景",
+      "boardId": "mP7E5",
+      "url": "images/latest-scene-20261023/charging-zone.png",
+      "exists": true
+    },
+    {
+      "nodeId": "xJ9st",
+      "name": "AGV 项目模型预览",
+      "boardId": "mP7E5",
+      "url": "images/latest-scene-20261023/device-agv-clear.png",
+      "exists": true
+    },
+    {
+      "nodeId": "R89Nj",
+      "name": "三维仓库场景",
+      "boardId": "d7P3z",
+      "url": "images/latest-scene-20261023/interior-overview.png",
+      "exists": true
+    },
+    {
+      "nodeId": "B68ru",
+      "name": "三维仓库场景",
+      "boardId": "Wt7Vo",
+      "url": "images/latest-scene-20261023/charging-zone.png",
+      "exists": true
+    },
+    {
+      "nodeId": "FJkhx",
+      "name": "AGV-12 设备模型",
+      "boardId": "Wt7Vo",
+      "url": "images/latest-scene-20261023/device-agv-clear.png",
+      "exists": true
+    },
+    {
+      "nodeId": "LHSh0",
+      "name": "CH-12 设施模型",
+      "boardId": "Wt7Vo",
+      "url": "images/latest-scene-20261023/device-charger.png",
+      "exists": true
+    },
+    {
+      "nodeId": "vjuyT",
+      "name": "三维仓库场景",
+      "boardId": "iiFrY",
+      "url": "images/order-replay-20261024/scene-floor-overview-041838b1715f.png",
+      "exists": true
+    },
+    {
+      "nodeId": "jHlz7",
+      "name": "三维仓库场景",
+      "boardId": "gW9oH",
+      "url": "images/latest-scene-20261023/racks-detail.png",
+      "exists": true
+    },
+    {
+      "nodeId": "y4MP7H",
+      "name": "人工叉车模型预览",
+      "boardId": "UbszE",
+      "url": "images/latest-scene-20261023/device-forklift.png",
+      "exists": true
+    },
+    {
+      "nodeId": "j3yYK",
+      "name": "电动堆高车模型预览",
+      "boardId": "UbszE",
+      "url": "images/latest-scene-20261023/device-stacker.png",
+      "exists": true
+    },
+    {
+      "nodeId": "uGnUS",
+      "name": "装卸车辆模型预览",
+      "boardId": "UbszE",
+      "url": "images/latest-scene-20261023/device-truck.png",
+      "exists": true
+    },
+    {
+      "nodeId": "Q7mav9",
+      "name": "充电设施模型预览",
+      "boardId": "UbszE",
+      "url": "images/latest-scene-20261023/device-charger.png",
+      "exists": true
+    },
+    {
+      "nodeId": "w1SaW9",
+      "name": "三维仓库场景",
+      "boardId": "XJoOQ",
+      "url": "images/latest-scene-20261023/interior-overview.png",
+      "exists": true
+    },
+    {
+      "nodeId": "rtxaT",
+      "name": "三维仓库场景",
+      "boardId": "F8Cox",
+      "url": "images/latest-scene-20261023/racks-detail.png",
+      "exists": true
+    },
+    {
+      "nodeId": "OCspa",
+      "name": "三维仓库场景",
+      "boardId": "XhUtw",
+      "url": "images/latest-scene-20261023/racks-detail.png",
+      "exists": true
+    },
+    {
+      "nodeId": "W0nnF",
+      "name": "三维仓库场景",
+      "boardId": "lvDfx",
+      "url": "images/latest-scene-20261023/interior-overview.png",
+      "exists": true
+    },
+    {
+      "nodeId": "I6PYf",
+      "name": "三维仓库场景",
+      "boardId": "t4mlxm",
+      "url": "images/latest-scene-20261023/racks-detail.png",
+      "exists": true
+    },
+    {
+      "nodeId": "YKgOX",
+      "name": "三维仓库场景",
+      "boardId": "zyWMm",
+      "url": "images/latest-scene-20261023/interior-overview.png",
+      "exists": true
+    },
+    {
+      "nodeId": "z6NYxa",
+      "name": "三维仓库场景",
+      "boardId": "lCf0H",
+      "url": "images/latest-scene-20261023/interior-overview.png",
+      "exists": true
+    },
+    {
+      "nodeId": "aM40q",
+      "name": "STACKER-04告警设备预览",
+      "boardId": "lCf0H",
+      "url": "images/latest-scene-20261023/device-stacker.png",
+      "exists": true
+    },
+    {
+      "nodeId": "uK8f5",
+      "name": "TRUCK-042告警设备预览",
+      "boardId": "lCf0H",
+      "url": "images/latest-scene-20261023/device-truck.png",
+      "exists": true
+    },
+    {
+      "nodeId": "TzIcx",
+      "name": "FORK-07告警设备预览",
+      "boardId": "lCf0H",
+      "url": "images/latest-scene-20261023/device-forklift.png",
+      "exists": true
+    },
+    {
+      "nodeId": "XTfDR",
+      "name": "FORK-12告警设备预览",
+      "boardId": "lCf0H",
+      "url": "images/latest-scene-20261023/device-forklift.png",
+      "exists": true
+    },
+    {
+      "nodeId": "Z2rX4X",
+      "name": "TRUCK-009告警设备预览",
+      "boardId": "lCf0H",
+      "url": "images/latest-scene-20261023/device-truck.png",
+      "exists": true
+    },
+    {
+      "nodeId": "zNh9d",
+      "name": "TRUCK-016告警设备预览",
+      "boardId": "lCf0H",
+      "url": "images/latest-scene-20261023/device-truck.png",
+      "exists": true
+    },
+    {
+      "nodeId": "LRJoD",
+      "name": "AGV-12告警设备预览",
+      "boardId": "lCf0H",
+      "url": "images/latest-scene-20261023/device-agv-clear.png",
+      "exists": true
+    },
+    {
+      "nodeId": "zTxvT",
+      "name": "三维仓库场景",
+      "boardId": "OA1Bd",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "aaUir",
+      "name": "园区场景 / 屋顶关闭",
+      "boardId": "kvTdT",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "b5dXz",
+      "name": "全仓视角预览",
+      "boardId": "kvTdT",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "d0bfg",
+      "name": "俯视视角预览",
+      "boardId": "kvTdT",
+      "url": "images/latest-scene-20261023/top-view.png",
+      "exists": true
+    },
+    {
+      "nodeId": "qL0Pt",
+      "name": "货架区域视角预览",
+      "boardId": "kvTdT",
+      "url": "images/latest-scene-20261023/racks-detail.png",
+      "exists": true
+    },
+    {
+      "nodeId": "ZLT60",
+      "name": "地堆区域视角预览",
+      "boardId": "kvTdT",
+      "url": "images/latest-scene-20261023/floor-storage-detail.png",
+      "exists": true
+    },
+    {
+      "nodeId": "XeOiK",
+      "name": "三维仓库场景",
+      "boardId": "qNsRa",
+      "url": "images/latest-scene-20261023/interior-overview.png",
+      "exists": true
+    },
+    {
+      "nodeId": "b5c18",
+      "name": "三维仓库场景",
+      "boardId": "ibTva",
+      "url": "images/latest-scene-20261023/interior-overview.png",
+      "exists": true
+    },
+    {
+      "nodeId": "V6OsC",
+      "name": "CH-07设施模型",
+      "boardId": "ibTva",
+      "url": "images/latest-scene-20261023/device-charger.png",
+      "exists": true
+    },
+    {
+      "nodeId": "mkXEp",
+      "name": "CH-12设施模型",
+      "boardId": "ibTva",
+      "url": "images/latest-scene-20261023/device-charger.png",
+      "exists": true
+    },
+    {
+      "nodeId": "mRRaZ",
+      "name": "CH-19设施模型",
+      "boardId": "ibTva",
+      "url": "images/latest-scene-20261023/device-charger.png",
+      "exists": true
+    },
+    {
+      "nodeId": "j2jhGr",
+      "name": "CH-52设施模型",
+      "boardId": "ibTva",
+      "url": "images/latest-scene-20261023/device-charger.png",
+      "exists": true
+    },
+    {
+      "nodeId": "izBhk",
+      "name": "三维仓库场景",
+      "boardId": "t1QfTH",
+      "url": "images/latest-scene-20261023/interior-overview.png",
+      "exists": true
+    },
+    {
+      "nodeId": "LFZLI",
+      "name": "三维仓库场景",
+      "boardId": "Lxvbj",
+      "url": "images/latest-scene-20261023/interior-overview.png",
+      "exists": true
+    },
+    {
+      "nodeId": "a41TnP",
+      "name": "当前仓库预览",
+      "boardId": "RyNRe",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "ElzN4",
+      "name": "仓库模型预览",
+      "boardId": "ApVA8",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "WYD6K",
+      "name": "真实仓库场景预览",
+      "boardId": "tWZ13",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "qHJpy",
+      "name": "人工叉车模型小图",
+      "boardId": "k2v5GZ",
+      "url": "images/latest-scene-20261023/device-forklift.png",
+      "exists": true
+    },
+    {
+      "nodeId": "BvtM2",
+      "name": "人工叉车项目模型",
+      "boardId": "k2v5GZ",
+      "url": "images/latest-scene-20261023/device-forklift.png",
+      "exists": true
+    },
+    {
+      "nodeId": "ryWrC",
+      "name": "真实运行园区 / 屋顶关闭",
+      "boardId": "cgOha",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "z3AVCD",
+      "name": "当前园区预览",
+      "boardId": "uR0QK",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "gBdC7",
+      "name": "当前园区预览",
+      "boardId": "ieg9r",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "B49Dl",
+      "name": "当前园区预览",
+      "boardId": "D6HC9",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "fUtEw",
+      "name": "当前园区预览",
+      "boardId": "Jsit1",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "S5E1N6",
+      "name": "真实仓库场景预览",
+      "boardId": "tYSnE",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "w2jdSo",
+      "name": "真实仓库场景预览",
+      "boardId": "aIei1",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "W5NZqZ",
+      "name": "真实仓库场景预览",
+      "boardId": "jRpYB",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "PZti8",
+      "name": "真实仓库场景预览",
+      "boardId": "F554L",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "yjZiG",
+      "name": "真实运行园区 / 屋顶关闭",
+      "boardId": "OiC8B",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "K0o94n",
+      "name": "三维仓库场景",
+      "boardId": "sNQHB",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "l4vnhN",
+      "name": "三维仓库场景",
+      "boardId": "oRKJZ",
+      "url": "images/latest-scene-20261023/campus-closed.png",
+      "exists": true
+    },
+    {
+      "nodeId": "e3fnYV",
+      "name": "三维仓库场景",
+      "boardId": "dJZrJ",
+      "url": "images/order-replay-20261024/scene-followed-d9e7f0684a9b.png",
+      "exists": true
+    },
+    {
+      "nodeId": "whcfP",
+      "name": "三维仓库场景",
+      "boardId": "Aqeif",
+      "url": "images/order-replay-20261024/scene-fault-0e8a7deb1e1d.png",
+      "exists": true
+    },
+    {
+      "nodeId": "KObVc",
+      "name": "三维仓库场景",
+      "boardId": "vNXAk",
+      "url": "images/order-replay-20261024/scene-completed-23749eace0ff.png",
+      "exists": true
+    },
+    {
+      "nodeId": "L0xO0H",
+      "name": "三维仓库场景",
+      "boardId": "QFsnb",
+      "url": "images/order-replay-20261024/scene-floor-overview-041838b1715f.png",
+      "exists": true
+    },
+    {
+      "nodeId": "yS6nm",
+      "name": "三维仓库场景",
+      "boardId": "IeQ6D",
+      "url": "images/order-replay-20261024/scene-floor-overview-041838b1715f.png",
+      "exists": true
+    },
+    {
+      "nodeId": "RTfbC",
+      "name": "三维仓库场景",
+      "boardId": "UTzjR",
+      "url": "images/order-replay-20261024/scene-floor-overview-041838b1715f.png",
+      "exists": true
+    }
+  ],
+  "runtimeOverrides": [
+    {
+      "id": "motion",
+      "boards": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        31,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "rule": "生产侧栏已使用 React Bits 数字与 ECharts SVG 图表；以当前实际页面内容/颜色/布局为准。导航选中高光仅点击或键盘激活后移动；hover仅显示本按钮淡蓝反馈。",
+      "source": [
+        "Content/GHSTwinUI/web/app.js",
+        "Tools/GHSTwinMotion/src/runtime.jsx",
+        "Tools/GHSTwinMotion/src/charts.js",
+        "Tools/GHSTwinMotion/README.md"
+      ]
+    },
+    {
+      "id": "startup",
+      "boards": [
+        1,
+        31
+      ],
+      "rule": "初始保持#F4F6F9底色，正式视口和字体准备完毕后呈现；禁止展示1×1临时纹理中的业务内容。ready握手即时发送；字体失败可回退，尺寸条件不得超时绕过。",
+      "source": [
+        "Content/GHSTwinUI/web/startup.js",
+        "Content/GHSTwinUI/web/index.html"
+      ]
+    },
+    {
+      "id": "roof",
+      "boards": [
+        1,
+        16,
+        31,
+        32,
+        33,
+        34
+      ],
+      "rule": "手动点击POI/屋顶开顶0.8s，设备定位快速开顶0.5s，恢复合顶0.55s；从中央向两侧平滑打开，长蓝色拖尾。闭顶及过渡中内部标签和拾取锁定。纠正旧画板统一写0.5s的描述。",
+      "source": [
+        "Source/Test/GHSWarehouseRoofComponent.h",
+        "Source/Test/GHSWarehouseRoofComponent.cpp"
+      ]
+    },
+    {
+      "id": "replay-trail",
+      "boards": [
+        5,
+        9,
+        15,
+        47,
+        48,
+        53
+      ],
+      "rule": "只显示移动中人工叉车当前任务尚未行驶的路线；统一#356BFA主题蓝前端到#8BB9FF淡蓝透明尾端。18cm宽，2.25m实段+0.75m空段，1.2m/s流动，不要白色流光。不同叉车路线以高度3cm+i×0.8cm错开；暂停保留当前剩余路线；静止/取放/故障无路线；卡车无路线。",
+      "source": [
+        "Scripts/ghs/replay_repair_trail_material.py",
+        "Source/Test/GHSOrderReplayActor.cpp",
+        "Source/Test/GHSOrderReplaySimulation.h"
+      ]
+    },
+    {
+      "id": "replay-ripple",
+      "boards": [
+        5,
+        47,
+        48,
+        53
+      ],
+      "rule": "追溯叉车底座扩散圈使用与路线一致的可辨认主题蓝渐变；普通场景人工叉车不显示追溯扩散圈；暂停和跳转跟随同一回放时钟。",
+      "source": [
+        "Scripts/ghs/replay_ripple_shader.py",
+        "Source/Test/GHSOrderReplayActor.cpp",
+        "docs/changes/2026-10-26-replay-ripple-visibility.md"
+      ]
+    },
+    {
+      "id": "replay-camera",
+      "boards": [
+        5,
+        47,
+        48,
+        53
+      ],
+      "rule": "回放全景覆盖地堆作业区；跟随可左键旋转/滚轮缩放，右键平移无效，不脱离跟随；面板收展与时间轴宽度同步平滑变化，保持镜头连续，无跳帧重定位。",
+      "source": [
+        "Source/Test/GHSWarehouseCameraPawn.cpp",
+        "Source/Test/GHSOrderReplaySession.cpp",
+        "Content/GHSTwinUI/web/replay-overlay.js"
+      ]
+    },
+    {
+      "id": "agv-model",
+      "boards": [
+        2,
+        4,
+        7,
+        20,
+        23
+      ],
+      "rule": "按实际设备ID匹配外观：AGV-01为白色扁平AGV，STACKER-04为当前场景蓝色小车。2/23页使用AGV-01的充电区场景和白色模型缩略图，4页使用STACKER-04的地堆作业区场景与蓝色模型缩略图；不能把STEP蓝色外壳误标为AGV-01。本次仅整理设计素材，不修改生产模型。",
+      "source": [
+        "Design/SaasNew/runtime/detail-alignment-validation.json",
+        "Design/SaasNew/runtime/assets/agv.png",
+        "Design/SaasNew/runtime/assets/stacker.png"
+      ]
+    },
+    {
+      "id": "streaming-scope",
+      "boards": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "rule": "本地Windows启动器和连接页已有实现，按Tools/PixelStreaming实际功能核对；35–43后台/管理员登录保留设计状态，不把独立React原型的模拟操作标成已部署后台。",
+      "source": [
+        "Tools/PixelStreaming/README.md",
+        "Tools/PixelStreaming/server/README.md",
+        "Tools/PixelStreaming/launcher/MainForm.cs",
+        "Tools/PixelStreaming/player/app.js",
+        "Design/GHS_Twin_SaaS_Concept/streaming-admin-design.md"
+      ]
+    }
+  ],
+  "motion": [
+    {
+      "name": "导航选中高光",
+      "ms": 250,
+      "trigger": "点击/键盘确认导航",
+      "details": "hover不迁移选中高光；焦点有可见边框"
+    },
+    {
+      "name": "指标数字",
+      "ms": 680,
+      "trigger": "首次或数值更新",
+      "details": "从当前值滚动到新值；编号/时间/未知值不滚动"
+    },
+    {
+      "name": "环图展开",
+      "ms": 600,
+      "trigger": "进入相应页面"
+    },
+    {
+      "name": "柱条生长",
+      "ms": 450,
+      "trigger": "进入相应页面"
+    },
+    {
+      "name": "折线描画",
+      "ms": 650,
+      "trigger": "进入相应页面"
+    },
+    {
+      "name": "图表数据更新",
+      "ms": 350,
+      "trigger": "实际数据变化",
+      "details": "复用实例及稳定数据ID，不变数据不重播"
+    },
+    {
+      "name": "面板条目错峰",
+      "ms": 300,
+      "staggerMs": 35,
+      "maxDelayMs": 210,
+      "details": "轻移淡入；遥测刷新不重播"
+    },
+    {
+      "name": "业务页面切换",
+      "exitMs": 120,
+      "enterMs": 200,
+      "details": "保留旧内容直到淡出结束；快速导航以最后目标为准"
+    },
+    {
+      "name": "原生侧栏收展",
+      "ms": 420,
+      "details": "搜索框与时间轴同步收展；追溯相机保持连续"
+    },
+    {
+      "name": "原生菜单",
+      "ms": 160,
+      "details": "淡入和短距离移动"
+    },
+    {
+      "name": "POI合并拆分",
+      "ms": 120,
+      "maxLocalDriftPx": 8,
+      "details": "原地淡入淡出，不跨屏飞行"
+    },
+    {
+      "name": "相机定位",
+      "ms": 850,
+      "details": "默认值，实际飞行范围700–1000ms；屋顶完成打开后才定位"
+    },
+    {
+      "name": "减弱动态效果",
+      "ms": 0,
+      "details": "立即收敛，不循环动画；隐藏页面暂停无意义绘制"
+    }
+  ],
+  "replayNavigation": {
+    "source": "Saas.pen",
+    "approved": true,
+    "kind": "static_pencil_state_handoff",
+    "runtimePrototype": "../../DesignPreviews/order-replay-20261023/index.html",
+    "entryBoard": "OA1Bd",
+    "states": {
+      "query": "OA1Bd",
+      "invalid": "oRKJZ",
+      "indexed": "sNQHB",
+      "playing": "iiFrY",
+      "pausedFollow": "dJZrJ",
+      "eventsPaused": "Aqeif",
+      "complete": "vNXAk",
+      "navigationConfirmation": "QFsnb",
+      "manualConfirmation": "IeQ6D",
+      "boundaries": "G0MuIS",
+      "compact": "UTzjR"
+    },
+    "transitions": [
+      {
+        "from": "OA1Bd",
+        "action": "index_valid_range",
+        "to": "sNQHB",
+        "condition": "end-start >= 3600 actual seconds; valid America/Los_Angeles offsets"
+      },
+      {
+        "from": "OA1Bd",
+        "action": "index_invalid_range",
+        "to": "oRKJZ",
+        "preserve": "all input and scene state"
+      },
+      {
+        "from": "sNQHB",
+        "action": "edit_range",
+        "to": "OA1Bd"
+      },
+      {
+        "from": "sNQHB",
+        "action": "start_any_TEST-OUT-001_to_004",
+        "to": "iiFrY",
+        "devices": 8,
+        "filterByEntryOrder": false
+      },
+      {
+        "from": "iiFrY",
+        "action": "pause_or_follow",
+        "to": "dJZrJ",
+        "follow": "REPLAY-FORK-03"
+      },
+      {
+        "from": "iiFrY",
+        "action": "show_events",
+        "to": "Aqeif"
+      },
+      {
+        "from": "Aqeif",
+        "action": "click_event",
+        "to": "Aqeif",
+        "clock": "seek and pause",
+        "camera": "preserve follow target"
+      },
+      {
+        "from": "dJZrJ",
+        "action": "play",
+        "to": "iiFrY",
+        "clock": "resume current position"
+      },
+      {
+        "from": "iiFrY",
+        "action": "reach_exact_end",
+        "to": "vNXAk",
+        "loop": false
+      },
+      {
+        "from": "vNXAk",
+        "action": "restart",
+        "to": "iiFrY",
+        "clock": "0 and play",
+        "preserve": "order and selected range"
+      },
+      {
+        "from": [
+          "iiFrY",
+          "dJZrJ",
+          "Aqeif",
+          "vNXAk"
+        ],
+        "action": "manual_end",
+        "to": "IeQ6D",
+        "clock": "pause and remember previous playback"
+      },
+      {
+        "from": [
+          "iiFrY",
+          "dJZrJ",
+          "Aqeif",
+          "vNXAk"
+        ],
+        "action": "navigate_or_external_focus",
+        "to": "QFsnb",
+        "clock": "pause and remember previous playback"
+      },
+      {
+        "from": [
+          "IeQ6D",
+          "QFsnb"
+        ],
+        "action": "cancel_or_escape",
+        "to": "previous_replay_state",
+        "preserve": "time, speed, selection, follow",
+        "restore": "previous playback"
+      },
+      {
+        "from": "IeQ6D",
+        "action": "confirm",
+        "to": "sNQHB",
+        "sequence": "restore captured scene, preserve range and order results"
+      },
+      {
+        "from": "QFsnb",
+        "action": "confirm",
+        "to": "pending_original_destination",
+        "sequence": "restore captured scene, execute original operation exactly once",
+        "exampleTarget": "cgOha"
+      },
+      {
+        "from": [
+          "IeQ6D",
+          "QFsnb"
+        ],
+        "action": "restore_failed",
+        "to": "G0MuIS",
+        "sequence": "remain paused; block original navigation; retry restore"
+      }
+    ],
+    "controlSemantics": {
+      "seek30": "clamp range and preserve play/pause",
+      "drag": "pointerdown pause, pointerup restore previous play/pause unless end",
+      "speeds": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "cancelFollow": "preserve current camera",
+      "trails": [
+        "all forklifts",
+        "selected forklift",
+        "off"
+      ],
+      "guarded": [
+        "business navigation",
+        "back",
+        "global search result",
+        "device focus",
+        "normal view presets",
+        "Home",
+        "middle mouse reset",
+        "native HUD navigation"
+      ],
+      "unguarded": [
+        "replay tabs",
+        "follow/cancel",
+        "free camera",
+        "zoom",
+        "trails",
+        "replay overview",
+        "panel collapse"
+      ],
+      "followOrbit": "left drag rotates and wheel zooms without leaving follow; right drag has no effect",
+      "overview": "floor-storage work area only",
+      "truckTrails": false,
+      "truckFollow": true,
+      "replayOnlyPulsingBase": true,
+      "forkliftTrailColor": "#356BFA",
+      "trailVisibility": "native trailVisible === true and visible !== false",
+      "remainingRouteOnly": true,
+      "activeMovementOnly": true,
+      "pausePreservesRemainingRoute": true,
+      "idleFaultPickupDropoffHaveRoute": false,
+      "poi": "All visible replay models may have native POIs; offscreen or hidden models are not invented; POI state colors remain independent."
+    },
+    "limitations": [
+      "Pencil exports are static state designs; navigation JSON is the implementation handoff, not executable native Pencil playback.",
+      "UE route safety, cargo transfer, scene isolation and restore require actual runtime acceptance."
+    ]
+  },
+  "figmaSuggestedPages": [
+    "00 封面与版本说明",
+    "01 设计系统与公共组件",
+    "02 园区与空间交互",
+    "03 库存订单设备告警",
+    "04 订单追溯完整流程",
+    "05 像素流启动器与连接页",
+    "06 后台与登录设计",
+    "07 交互与动效规范"
+  ],
+  "completionBoundary": "This inventory does not mean the Figma import has occurred. Figma file URL, node counts, screenshots and prototype links must be verified by the main task."
+}

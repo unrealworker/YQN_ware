@@ -1,0 +1,187 @@
+{
+  "labels": [
+    {
+      "id": "AGV-01",
+      "icon": "agv",
+      "selected": true,
+      "height": 42,
+      "following": false,
+      "width": 236,
+      "title": "AGV-01",
+      "status": "unknown",
+      "state": "待接入",
+      "statusText": "待接入",
+      "accent": "8490A2FF",
+      "badgeWidth": 64,
+      "anchorX": 706.1683349609375,
+      "anchorY": 525.3224487304688,
+      "opacity": 1,
+      "fill": "356BFA",
+      "x": 588.1683349609373,
+      "y": 455.32244873046864,
+      "titleInkTop": 12.5,
+      "titleInkBottom": 29.5,
+      "badgeHeight": 24,
+      "badgeInkTop": 3.5,
+      "badgeInkBottom": 20.5
+    },
+    {
+      "id": "CH-02",
+      "icon": "charger",
+      "selected": false,
+      "height": 42,
+      "following": false,
+      "width": 236,
+      "title": "CH-02",
+      "status": "unknown",
+      "state": "待接入",
+      "statusText": "待接入",
+      "accent": "8490A2FF",
+      "badgeWidth": 64,
+      "anchorX": 861.6053466796875,
+      "anchorY": 369.93701171875,
+      "opacity": 1,
+      "fill": "FFFFFF",
+      "x": 743.6053466796873,
+      "y": 299.9370117187499,
+      "titleInkTop": 12.5,
+      "titleInkBottom": 29.5,
+      "badgeHeight": 24,
+      "badgeInkTop": 3.5,
+      "badgeInkBottom": 20.5
+    },
+    {
+      "id": "CH-04",
+      "icon": "charger",
+      "selected": false,
+      "height": 42,
+      "following": false,
+      "width": 236,
+      "title": "CH-04",
+      "status": "unknown",
+      "state": "待接入",
+      "statusText": "待接入",
+      "accent": "8490A2FF",
+      "badgeWidth": 64,
+      "anchorX": 551.5840454101562,
+      "anchorY": 1064.076904296875,
+      "opacity": 1,
+      "fill": "FFFFFF",
+      "x": 433.58404541015614,
+      "y": 994.0769042968748,
+      "titleInkTop": 12.5,
+      "titleInkBottom": 29.5,
+      "badgeHeight": 24,
+      "badgeInkTop": 3.5,
+      "badgeInkBottom": 20.5
+    }
+  ],
+  "selectionStroke": 6,
+  "pointFilter": "all",
+  "replay": false,
+  "interiorAvailable": true,
+  "pendingNavigation": "",
+  "pendingNavigationId": "",
+  "warehousePOIOpacity": 0,
+  "interiorLabelOpacity": 1,
+  "roofClosed": false,
+  "roofOpening": false,
+  "roofClosing": false,
+  "roofTransitioning": false,
+  "roofProgress": 1,
+  "warehouseClock": {
+    "time": "09:11:56",
+    "date": "2026.10.27 · PDT (UTC−07:00)",
+    "zone": "America/Los_Angeles",
+    "headerHeight": 64,
+    "width": 1920,
+    "addressX": 440,
+    "addressY": 8,
+    "clockX": 1518,
+    "clockY": 8
+  },
+  "regionPoints": [
+    {
+      "id": "REGION:racks",
+      "worldPosition": [
+        -15515.824998092652,
+        -575.7241460266114,
+        537.2459411621094
+      ]
+    },
+    {
+      "id": "REGION:floor",
+      "worldPosition": [
+        6750.689996772767,
+        -575.7191,
+        338.80308837890624
+      ]
+    }
+  ],
+  "name": "detail-agv-search",
+  "sourceCommit": "73e7b58",
+  "mapSha256": "1a28e3301d524bbb9aa0a32556e684d1468d4c7f095544e8a3430599e5a5aa01",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "hudScale": 1.0,
+  "sceneCamera": {
+    "location": [
+      15013.451567231883,
+      -4977.244943668216,
+      1478.7762215470057
+    ],
+    "rotation": [
+      -64.99993145464214,
+      -110.00000000000009,
+      -7.52581421462877e-15
+    ],
+    "fov": 56.0
+  },
+  "replayState": {
+    "active": false,
+    "preparing": false,
+    "playing": false,
+    "completed": false,
+    "isTest": true,
+    "time": 0,
+    "duration": 0,
+    "rate": 1,
+    "startUtc": "",
+    "endUtc": "",
+    "orderId": "",
+    "followId": "",
+    "selectedId": "",
+    "trailMode": "all",
+    "error": "",
+    "exitPending": false,
+    "exitTitle": "",
+    "exitActionLabel": ""
+  },
+  "coordinateSystem": "Native HUD design pixels in full viewport. Scene crop subtracts x=0,y=64.",
+  "designStyle": {
+    "radius": 10,
+    "fontFamily": "Microsoft YaHei",
+    "titleSize": 14,
+    "titleOffsetX": 40,
+    "titleColor": "#25364B",
+    "selectedTitleColor": "#FFFFFF",
+    "badgeSize": 12,
+    "badgeHeight": 24,
+    "badgeRightInset": 12,
+    "badgeFill": "#F0F4F9",
+    "badgeRadius": 3,
+    "iconOffset": [
+      12,
+      12
+    ],
+    "iconScale": 0.75,
+    "iconLineWidth": 1.5,
+    "source": "GHSTwinHUDWidget.cpp NativePaint"
+  },
+  "nativeChrome": {
+    "area": "充电区"
+  },
+  "selectedId": "AGV-01"
+}
