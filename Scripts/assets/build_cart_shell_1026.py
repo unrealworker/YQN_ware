@@ -223,6 +223,16 @@ for part in data['parts']:
         bpy.data.meshes.remove(source_mesh)
     parts_report.append(dict(index=i, name=obj.name, cad_name=part['name'],
                              input_triangles=input_triangles, triangles=triangle_count(obj)))
+    if DETAIL_20K:
+        # Valid planar UVs on every triangle give UE a non-degenerate tangent
+        # basis, including long thin CAD faces. No texture dependency is added.
+        uv = mesh.uv_layers.new(name='UVMap')
+        for poly in mesh.polygons:
+            dominant = max(range(3), key=lambda axis: abs(poly.normal[axis]))
+            axes = [axis for axis in range(3) if axis != dominant]
+            for loop_index in poly.loop_indices:
+                co = mesh.vertices[mesh.loops[loop_index].vertex_index].co
+                uv.data[loop_index].uv = (co[axes[0]]*2+.5, co[axes[1]]*2+.5)
     print('MESH', i, triangle_count(obj), flush=True)
 
 if not REFERENCE:

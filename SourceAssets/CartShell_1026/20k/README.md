@@ -18,8 +18,20 @@
 | `preview_front.png`、`preview_rear.png` | 两侧渲染预览 |
 | `manifest.json` | 来源哈希、尺寸、分零件面数和材质 |
 | `verification.json` | 文件重开、FBX 回导、GLB 和 CAD 对照检查 |
+| `ue-import-verification.json` | UE 导入尺寸、材质、6 台设备身份和场景保存验证 |
+| `ue_scene_close.png` | 仓库内实际模型近景 |
 
 验证结果：Blender、FBX、GLB 均为 19,965 三角面；FBX 回导尺寸一致；原 STEP 哈希不变。受保护 CAD 表面采样最大距离为 0.0154 mm，33 个顶板通孔与提手槽通过无遮挡射线检查。此数值是受保护网格对输入 CAD 三角网格的检查结果，不代表全部简化内部结构的加工公差。
+
+## Unreal 场景替换
+
+资产路径：`/Game/GHSZcoolSmartFactory/CartShell1026/Meshes/SM_CartShell_1026`。已在 `/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory` 替换截图中一排 6 台竖式设备的可见模型；目标 Actor 为 `GHN_FloorStacker_08`、`_12`、`_9`、`_13`、`_10`、`_14`。Actor 名称与 TwinId 后缀不一定相同，导入脚本逐个保留原身份，不重新编号。
+
+UE 实测 **38.2 × 50 × 19.55 cm**，缩放 `(1,1,1)`，底面距地面 0.5 cm，沿用原位置和朝向。导入时烘焙 180° 转向补偿 FBX 的 Y 轴转换，使大开口朝向原设备叉臂方向。其余 364 个 Actor（包含 32 台低平 AGV）未修改。
+
+模型已补齐 UV；UE 保留导入法线并使用 BuiltIn 方式重建切线。5 个独立材质对应 Blender 配色，清除旧设备的材质覆盖。没有增加纹理贴图依赖，6 台设备共享一个静态网格。
+
+`Scripts/ghs/import_cart_shell_1026.py` 用于在已打开的目标地图中导入与替换；`Scripts/ghs/verify_cart_shell_1026_ue.py` 只读核验结果。只保存本次网格、材质与目标地图，替换前地图备份位于 `Saved/Backups/CartShell1026_*`。
 
 ## 重建
 

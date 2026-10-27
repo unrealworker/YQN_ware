@@ -26,6 +26,8 @@ def audit(objects):
         total+=len(obj.data.loop_triangles)
         assert all(len(p.vertices)==3 for p in obj.data.polygons), obj.name
         assert not obj.modifiers, obj.name
+        if DETAIL_20K:
+            assert obj.data.uv_layers, ('Missing UVs for UE tangents', obj.name)
     return dict(meshes=len(meshes),triangles=total,bounds_m=[low,high],size_mm=[(high[k]-low[k])*1000 for k in range(3)])
 
 bpy.ops.wm.open_mainfile(filepath=str(OUT/'CartShell_1026.blend'))
@@ -113,6 +115,8 @@ gltf=json.loads(payload[20:20+size])
 primitives=[p for m in gltf['meshes'] for p in m['primitives']]
 glb_triangles=sum(gltf['accessors'][p['indices']]['count']//3 for p in primitives)
 assert glb_triangles==native['triangles']
+if DETAIL_20K:
+    assert all('TEXCOORD_0' in p['attributes'] for p in primitives)
 assert all(n.get('name','').startswith(('GHS_Cart','0','1','2','3','4')) for n in gltf['nodes'])
 assert 'cameras' not in gltf
 
@@ -127,5 +131,6 @@ report=dict(passed=True,blender_version=bpy.app.version_string,native=native,fbx
 if DETAIL_20K:
     report['protected_cad_surfaces']=protected_audit
     report['clear_top_openings']=open_hole_checks
+    report['uvs_verified_for_ue_tangents']=True
 (OUT/'verification.json').write_text(json.dumps(report,indent=2),encoding='utf8')
 print('VERIFIED',json.dumps(report),flush=True)
