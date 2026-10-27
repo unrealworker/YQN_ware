@@ -13,14 +13,19 @@ import hashlib
 from pathlib import Path
 from mathutils import Vector
 from mathutils.bvhtree import BVHTree
+from mathutils.kdtree import KDTree
 
 ROOT = Path(__file__).resolve().parents[2]
 TEMP = ROOT / 'Saved/CartShell1026'
 OUT = ROOT / 'SourceAssets/CartShell_1026'
+DETAIL_20K='--20k' in sys.argv
+if DETAIL_20K:OUT=OUT/'20k'
+BUDGET=20000 if DETAIL_20K else 10000
 OUT.mkdir(parents=True, exist_ok=True)
 REFERENCE = '--reference' in sys.argv
 data = json.loads((TEMP / 'assembly_mesh.json').read_text(encoding='utf8'))
-optimized = {p['index']:p for p in json.loads((TEMP/'optimized_shells.json').read_text(encoding='utf8'))} if not REFERENCE else {}
+optimized_file='optimized_parts_20k.json' if DETAIL_20K else 'optimized_shells.json'
+optimized = {p['index']:p for p in json.loads((TEMP/optimized_file).read_text(encoding='utf8'))} if not REFERENCE else {}
 all_vertices=[]
 all_triangles=[]
 for part in data['parts']:
@@ -64,7 +69,7 @@ root.empty_display_size=.04
 root['source_units'] = 'millimeter'
 root['source_origin_mm'] = origin
 root['source_file'] = Path(data['source']).name
-root['triangle_budget'] = 10000
+root['triangle_budget'] = BUDGET
 
 def triangle_count(obj):
     obj.data.calc_loop_triangles()
@@ -86,18 +91,43 @@ def simplify(obj, target):
     bpy.ops.object.modifier_apply(modifier=mod.name)
 
 parts_report = []
+rejected_interior_bridges=0
 for part in data['parts']:
     i = part['index']
     input_triangles=len(part['triangles'])
     if i in optimized:
+        original=part
         part=dict(part,vertices_mm=optimized[i]['vertices_mm'],triangles=optimized[i]['triangles'],
                   colors=[(0,0,0)]*len(optimized[i]['triangles']))
+        if DETAIL_20K and i>1 and part['triangles']:
+            tree=KDTree(len(original['triangles']))
+            old_vertices=[Vector(v) for v in original['vertices_mm']]
+            for j,f in enumerate(original['triangles']):
+                tree.insert(sum((old_vertices[v] for v in f),Vector())/3,j)
+            tree.balance()
+            new_vertices=[Vector(v) for v in part['vertices_mm']]
+            part['colors']=[original['colors'][tree.find(sum((new_vertices[v] for v in f),Vector())/3)[1]] for f in part['triangles']]
     name = ('LowerShell' if i == 0 else 'UpperShell' if i == 1 else
             'DriveWheel' if i in (2, 4) else 'Caster' if i in (6,17,28,39) else 'Hardware')
     mesh = bpy.data.meshes.new(f'CAD_{i:02d}_{name}')
-    vertices = [[(p[k]-origin[k])/1000 for k in range(3)] for p in part['vertices_mm']]
+    vertices = [[(p[0]-origin[0])/1000,(p[1]-origin[1])/1000,max(0.0,(p[2]-origin[2])/1000)] for p in part['vertices_mm']]
     faces=part['triangles']
     colors=part['colors']
+    if DETAIL_20K and i in optimized and i<6 and faces:
+        source_vertices=[Vector(tuple((p[k]-origin[k])/1000 for k in range(3))) for p in original['vertices_mm']]
+        source_tree=BVHTree.FromPolygons(source_vertices,original['triangles'],all_triangles=True)
+        current_vertices=[Vector(v) for v in vertices]
+        keep=[]
+        for j,face in enumerate(faces):
+            a,b,c=(current_vertices[v] for v in face)
+            samples=((a+b+c)/3,(a+b)/2,(b+c)/2,(c+a)/2)
+            # Collapse is allowed inside, but may never create a new sheet
+            # spanning an original opening or fold a panel away from the CAD.
+            if max(source_tree.find_nearest(p)[3] for p in samples)<.0005:
+                keep.append(j)
+        rejected_interior_bridges+=len(faces)-len(keep)
+        colors=[colors[j] for j in keep]
+        faces=[faces[j] for j in keep]
     if not REFERENCE and i not in optimized:
         keep=[]
         directions=[Vector((x,y,z)).normalized() for x,y,z in
@@ -150,10 +180,12 @@ for part in data['parts']:
     bmesh.ops.remove_doubles(bm, verts=list(bm.verts), dist=.000001)
     bmesh.ops.dissolve_degenerate(bm, edges=list(bm.edges), dist=.0000001)
     if not REFERENCE:
-        bmesh.ops.dissolve_limit(bm,angle_limit=math.radians(.05),verts=list(bm.verts),edges=list(bm.edges),delimit={'MATERIAL'})
+        bmesh.ops.dissolve_limit(bm,angle_limit=math.radians(.005 if DETAIL_20K else .05),verts=list(bm.verts),edges=list(bm.edges),delimit={'MATERIAL'})
     bmesh.ops.triangulate(bm, faces=list(bm.faces))
     bm.to_mesh(mesh)
     bm.free()
+    mesh.validate(clean_customdata=False)
+    mesh.update()
     normal_source = None
     if not REFERENCE and i not in optimized and len(mesh.polygons) and i not in (2,4):
         normal_source = obj.copy()
@@ -171,6 +203,8 @@ for part in data['parts']:
         simplify(obj, budget)
     for poly in obj.data.polygons:
         poly.use_smooth = not ((i in (0,1) and abs(poly.normal.z)>.98) or (i in (2,4) and abs(poly.normal.x)>.98))
+        if DETAIL_20K and max(abs(n) for n in poly.normal)>.999:
+            poly.use_smooth=False
     obj.data.set_sharp_from_angle(angle=math.radians(35))
     activate(obj)
     norm = obj.modifiers.new('CAD weighted normals', 'WEIGHTED_NORMAL')
@@ -187,16 +221,13 @@ for part in data['parts']:
         source_mesh=normal_source.data
         bpy.data.objects.remove(normal_source,do_unlink=True)
         bpy.data.meshes.remove(source_mesh)
-    # A sub-millimetre collapse overshoot must not move a wheel below the CAD ground.
-    for v in obj.data.vertices:
-        v.co.z=max(0.0,v.co.z)
     parts_report.append(dict(index=i, name=obj.name, cad_name=part['name'],
                              input_triangles=input_triangles, triangles=triangle_count(obj)))
     print('MESH', i, triangle_count(obj), flush=True)
 
 if not REFERENCE:
     total = sum(p['triangles'] for p in parts_report)
-    if total > 10000:
+    if total > BUDGET and not DETAIL_20K:
         drive = bpy.data.objects['02_DriveWheel']
         simplify(drive, triangle_count(drive)-(total-10000)-4)
         activate(drive)
@@ -270,14 +301,15 @@ if REFERENCE:
     bpy.ops.render.render(write_still=True)
 else:
     total=sum(p['triangles'] for p in parts_report)
-    assert 9000 <= total <= 10000, total
+    assert BUDGET*.9 <= total <= BUDGET, total
     manifest=dict(source=data['source'], source_sha256=hashlib.sha256(Path(data['source']).read_bytes()).hexdigest(),
-                  source_size_mm=data['size_mm'], triangle_count=total, source_part_count=len(parts_report),
+                  source_size_mm=data['size_mm'], triangle_count=total, triangle_budget=BUDGET,source_part_count=len(parts_report),
                   mesh_part_count=sum(p['triangles']>0 for p in parts_report),
                   units='meters', up_axis='Z', origin='floor center', cad_origin_mm=origin,
                   input_triangles=sum(p['input_triangles'] for p in parts_report), parts=parts_report,
+                  rejected_interior_bridge_triangles=rejected_interior_bridges,
                   palette_source='SourceAssets/GHS_Normal/material_style.json',
-                  optimization='CAD exterior patches and original top plate; simplified rim strips; hidden mechanical faces culled; minor hardware decimated',
+                  optimization=('Original visible CAD patches, including hole walls and window-visible internals; visibility culling and weighted simplification' if DETAIL_20K else 'CAD exterior patches and original top plate; simplified rim strips; hidden mechanical faces culled; minor hardware decimated'),
                   materials=[dict(name=m.name,linear_rgba=list(m.diffuse_color)) for m in materials])
     (OUT/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf8')
     bpy.ops.object.select_all(action='DESELECT')

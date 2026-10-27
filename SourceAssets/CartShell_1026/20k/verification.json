@@ -1,0 +1,90 @@
+{
+  "passed": true,
+  "blender_version": "5.2.2 LTS",
+  "native": {
+    "meshes": 46,
+    "triangles": 19965,
+    "bounds_m": [
+      [
+        -0.19099999964237213,
+        -0.25,
+        0.0
+      ],
+      [
+        0.19099999964237213,
+        0.25,
+        0.19550000131130219
+      ]
+    ],
+    "size_mm": [
+      381.99999928474426,
+      500.0,
+      195.50000131130219
+    ]
+  },
+  "fbx_roundtrip": {
+    "meshes": 46,
+    "triangles": 19965,
+    "bounds_m": [
+      [
+        -0.19099999964237213,
+        -0.25,
+        0.0
+      ],
+      [
+        0.19099999964237213,
+        0.25,
+        0.19550000131130219
+      ]
+    ],
+    "size_mm": [
+      381.99999928474426,
+      500.0,
+      195.50000131130219
+    ]
+  },
+  "glb_triangles": 19965,
+  "material_nodes_verified": true,
+  "source_hash_unchanged": true,
+  "export_studio_excluded": true,
+  "triangle_budget": 20000,
+  "protected_cad_surfaces": [
+    {
+      "part_index": 0,
+      "cad_patches": 71,
+      "samples": 18596,
+      "max_surface_error_mm": 0.015385269235049083
+    },
+    {
+      "part_index": 1,
+      "cad_patches": 240,
+      "samples": 23324,
+      "max_surface_error_mm": 0.005300835255184211
+    },
+    {
+      "part_index": 2,
+      "cad_patches": 89,
+      "samples": 11408,
+      "max_surface_error_mm": 0.006573179689439712
+    },
+    {
+      "part_index": 3,
+      "cad_patches": 7,
+      "samples": 1096,
+      "max_surface_error_mm": 0.0007517336939599772
+    },
+    {
+      "part_index": 4,
+      "cad_patches": 65,
+      "samples": 9036,
+      "max_surface_error_mm": 0.0060963611758779734
+    },
+    {
+      "part_index": 5,
+      "cad_patches": 7,
+      "samples": 1096,
+      "max_surface_error_mm": 0.00021007673467465793
+    }
+  ],
+  "clear_top_openings": 33
+}
