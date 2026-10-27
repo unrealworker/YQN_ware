@@ -1,0 +1,317 @@
+{
+  "run": "D:\\UEPro\\Test\\Saved\\Performance20261028\\TraceNative01_20261027_183736\\run.json",
+  "source": "D:\\UEPro\\Test\\Saved\\Performance20261028\\TraceNative01_20261027_183736\\cpu-events.csv",
+  "source_sha256": "4786b11d49210f1ffae20e641910be70f3475ae4ed52609f9af4cfcd35e589f2",
+  "units": "milliseconds",
+  "window_seconds": [
+    38.51211819806883,
+    128.53377759838293
+  ],
+  "window_alignment": "median of 38 native action offsets; excludes pre-capture trace tail history",
+  "alignment_spread_ms": 0.00690125899893701,
+  "scopes": {
+    "GHSTwinHUDWidget /Engine/Transient.GameEngine_0:GameInstance_0.GHSTwinHUDWidget_0_Paint": {
+      "count": 5563,
+      "total_ms": 508.7316,
+      "mean_ms": 0.09144914614416681,
+      "p95_ms": 0.1389,
+      "p99_ms": 0.1863,
+      "max_ms": 1.6887
+    },
+    "GHSTwinHUDWidget /Engine/Transient.GameEngine_0:GameInstance_0.GHSTwinHUDWidget_0_Tick": {
+      "count": 5563,
+      "total_ms": 545.2355,
+      "mean_ms": 0.09801105518605069,
+      "p95_ms": 0.4234,
+      "p99_ms": 0.7249,
+      "max_ms": 3.3641
+    },
+    "GHSTwinHUD_POICandidates": {
+      "count": 439,
+      "total_ms": 110.1309,
+      "mean_ms": 0.25086765375854214,
+      "p95_ms": 0.428,
+      "p99_ms": 0.516,
+      "max_ms": 0.7789
+    },
+    "GHSTwinHUD_Paint": {
+      "count": 5563,
+      "total_ms": 284.4865,
+      "mean_ms": 0.05113904368146683,
+      "p95_ms": 0.0791,
+      "p99_ms": 0.1197,
+      "max_ms": 0.4763
+    },
+    "GHSTwinHUD_PushSnapshot": {
+      "count": 60,
+      "total_ms": 15.2594,
+      "mean_ms": 0.25432333333333335,
+      "p95_ms": 0.9892,
+      "p99_ms": 1.9954,
+      "max_ms": 1.9954
+    },
+    "GHSTwinHUD_SceneRefresh": {
+      "count": 5563,
+      "total_ms": 84.2925,
+      "mean_ms": 0.015152345856552221,
+      "p95_ms": 0.017499999999999998,
+      "p99_ms": 0.0444,
+      "max_ms": 2.9645
+    },
+    "GHSTwinHUD_SelectedProjection": {
+      "count": 5563,
+      "total_ms": 35.7104,
+      "mean_ms": 0.006419270177961531,
+      "p95_ms": 0.0202,
+      "p99_ms": 0.0298,
+      "max_ms": 0.1109
+    },
+    "GHSTwinHUD_Tick": {
+      "count": 5563,
+      "total_ms": 537.3321,
+      "mean_ms": 0.09659034693510696,
+      "p95_ms": 0.422,
+      "p99_ms": 0.7232000000000001,
+      "max_ms": 3.3624
+    },
+    "GHSTwinHUD_VisibleProjection": {
+      "count": 2629,
+      "total_ms": 135.896,
+      "mean_ms": 0.05169113731456827,
+      "p95_ms": 0.19369999999999998,
+      "p99_ms": 0.43629999999999997,
+      "max_ms": 0.6644
+    },
+    "GHSTwinPerfAction": {
+      "count": 38,
+      "total_ms": 15.9565,
+      "mean_ms": 0.4199078947368421,
+      "p95_ms": 2.5454000000000003,
+      "p99_ms": 2.8541,
+      "max_ms": 2.8541
+    },
+    "GHSTwinPerfDriver": {
+      "count": 5562,
+      "total_ms": 44.9371,
+      "mean_ms": 0.00807930600503416,
+      "p95_ms": 0.009099999999999999,
+      "p99_ms": 0.0206,
+      "max_ms": 2.8586
+    },
+    "GHSTwinScene_PickRay": {
+      "count": 2,
+      "total_ms": 3.2564,
+      "mean_ms": 1.6282,
+      "p95_ms": 1.8797,
+      "p99_ms": 1.8797,
+      "max_ms": 1.8797
+    }
+  },
+  "material_clicks": [
+    {
+      "start": 64.5298175,
+      "duration_ms": 1.3767
+    },
+    {
+      "start": 109.524503,
+      "duration_ms": 1.8797
+    }
+  ],
+  "actions": [
+    {
+      "name": "overview",
+      "planned": 0,
+      "duration_ms": 0.3622
+    },
+    {
+      "name": "all_poi",
+      "planned": 1,
+      "duration_ms": 0.10890000000000001
+    },
+    {
+      "name": "orbit",
+      "planned": 4,
+      "duration_ms": 0.020999999999999998
+    },
+    {
+      "name": "agv",
+      "planned": 12,
+      "duration_ms": 0.40059999999999996
+    },
+    {
+      "name": "forklift",
+      "planned": 16,
+      "duration_ms": 1.758
+    },
+    {
+      "name": "racks",
+      "planned": 20,
+      "duration_ms": 0.8779
+    },
+    {
+      "name": "cargo_focus",
+      "planned": 24,
+      "duration_ms": 0.1235
+    },
+    {
+      "name": "cargo_click",
+      "planned": 26,
+      "duration_ms": 2.5454000000000003
+    },
+    {
+      "name": "panel_close",
+      "planned": 28,
+      "duration_ms": 0.0252
+    },
+    {
+      "name": "panel_open",
+      "planned": 29,
+      "duration_ms": 0.7678999999999999
+    },
+    {
+      "name": "page_devices",
+      "planned": 30,
+      "duration_ms": 0.0824
+    },
+    {
+      "name": "page_orders",
+      "planned": 31,
+      "duration_ms": 0.07550000000000001
+    },
+    {
+      "name": "page_inventory",
+      "planned": 32,
+      "duration_ms": 0.07669999999999999
+    },
+    {
+      "name": "page_alerts",
+      "planned": 33,
+      "duration_ms": 0.0769
+    },
+    {
+      "name": "page_trace",
+      "planned": 34,
+      "duration_ms": 0.08
+    },
+    {
+      "name": "page_settings",
+      "planned": 35,
+      "duration_ms": 0.0771
+    },
+    {
+      "name": "page_overview",
+      "planned": 36,
+      "duration_ms": 0.07959999999999999
+    },
+    {
+      "name": "overview",
+      "planned": 38,
+      "duration_ms": 0.857
+    },
+    {
+      "name": "all_poi",
+      "planned": 40,
+      "duration_ms": 0.0668
+    },
+    {
+      "name": "overview",
+      "planned": 45,
+      "duration_ms": 0.2122
+    },
+    {
+      "name": "all_poi",
+      "planned": 46,
+      "duration_ms": 0.0773
+    },
+    {
+      "name": "orbit",
+      "planned": 49,
+      "duration_ms": 0.0239
+    },
+    {
+      "name": "agv",
+      "planned": 57,
+      "duration_ms": 0.4416
+    },
+    {
+      "name": "forklift",
+      "planned": 61,
+      "duration_ms": 0.7634
+    },
+    {
+      "name": "racks",
+      "planned": 65,
+      "duration_ms": 0.7196
+    },
+    {
+      "name": "cargo_focus",
+      "planned": 69,
+      "duration_ms": 0.1163
+    },
+    {
+      "name": "cargo_click",
+      "planned": 71,
+      "duration_ms": 2.8541
+    },
+    {
+      "name": "panel_close",
+      "planned": 73,
+      "duration_ms": 0.0248
+    },
+    {
+      "name": "panel_open",
+      "planned": 74,
+      "duration_ms": 0.7353000000000001
+    },
+    {
+      "name": "page_devices",
+      "planned": 75,
+      "duration_ms": 0.0758
+    },
+    {
+      "name": "page_orders",
+      "planned": 76,
+      "duration_ms": 0.1183
+    },
+    {
+      "name": "page_inventory",
+      "planned": 77,
+      "duration_ms": 0.0811
+    },
+    {
+      "name": "page_alerts",
+      "planned": 78,
+      "duration_ms": 0.08670000000000001
+    },
+    {
+      "name": "page_trace",
+      "planned": 79,
+      "duration_ms": 0.0765
+    },
+    {
+      "name": "page_settings",
+      "planned": 80,
+      "duration_ms": 0.0784
+    },
+    {
+      "name": "page_overview",
+      "planned": 81,
+      "duration_ms": 0.08009999999999999
+    },
+    {
+      "name": "overview",
+      "planned": 83,
+      "duration_ms": 0.8611
+    },
+    {
+      "name": "all_poi",
+      "planned": 85,
+      "duration_ms": 0.0674
+    }
+  ],
+  "limitations": [
+    "Inclusive CPU scopes can overlap; do not sum nested scopes.",
+    "Two deterministic material clicks are not all possible user selections.",
+    "CEF child-process work, input delivery and network latency are not measured here."
+  ]
+}

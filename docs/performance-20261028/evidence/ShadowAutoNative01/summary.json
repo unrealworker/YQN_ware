@@ -1,0 +1,2261 @@
+{
+  "run": "D:\\UEPro\\Test\\Saved\\Performance20261028\\ShadowAutoNative01_20261027_182635\\run.json",
+  "configuration": {
+    "label": "ShadowAutoNative01",
+    "route_version": 2,
+    "process_id": 33436,
+    "variant": "shadow-auto",
+    "runtime": "editor-game",
+    "build_configuration": "Development",
+    "render_offscreen": true,
+    "engine_version": "5.4.4-35576357+++UE5+Release-5.4",
+    "cpu": "Intel(R) Core(TM) i9-14900HX",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "duration_seconds": 90,
+    "warmup_seconds": 30,
+    "route_cycle_seconds": 45,
+    "trace_enabled": false,
+    "trace_connected": false,
+    "trace_start_succeeded": false,
+    "assets_saved": false,
+    "input_scope": "Native HUD/camera public APIs; material hit uses real screen projection. Not OS input latency.",
+    "poi_mode": "all; production layout cap remains 32",
+    "status": "complete",
+    "success": true,
+    "error": "",
+    "csv": "D:/UEPro/Test/Saved/Performance20261028/ShadowAutoNative01_20261027_182635/frames.csv",
+    "elapsed_seconds": 123.52380499988794,
+    "completed_actions": 38,
+    "cargo_clicks": 2,
+    "segments": [
+      {
+        "name": "capture_begin",
+        "planned_seconds": 0,
+        "actual_seconds": 0,
+        "csv_frame": 0
+      },
+      {
+        "name": "overview",
+        "planned_seconds": 0,
+        "actual_seconds": 0.014255199581384659,
+        "csv_frame": 1
+      },
+      {
+        "name": "all_poi",
+        "planned_seconds": 1,
+        "actual_seconds": 1.0048170015215874,
+        "csv_frame": 75
+      },
+      {
+        "name": "orbit",
+        "planned_seconds": 4,
+        "actual_seconds": 4.000932101160288,
+        "csv_frame": 300
+      },
+      {
+        "name": "agv",
+        "planned_seconds": 12,
+        "actual_seconds": 12.010189801454544,
+        "csv_frame": 883
+      },
+      {
+        "name": "forklift",
+        "planned_seconds": 16,
+        "actual_seconds": 16.00947330147028,
+        "csv_frame": 1150
+      },
+      {
+        "name": "racks",
+        "planned_seconds": 20,
+        "actual_seconds": 20.006653301417828,
+        "csv_frame": 1322
+      },
+      {
+        "name": "cargo_focus",
+        "planned_seconds": 24,
+        "actual_seconds": 24.0131613984704,
+        "csv_frame": 1487
+      },
+      {
+        "name": "cargo_click",
+        "planned_seconds": 26,
+        "actual_seconds": 26.012361600995064,
+        "csv_frame": 1601
+      },
+      {
+        "name": "panel_close",
+        "planned_seconds": 28,
+        "actual_seconds": 28.007778201252222,
+        "csv_frame": 1739
+      },
+      {
+        "name": "panel_open",
+        "planned_seconds": 29,
+        "actual_seconds": 29.013626098632812,
+        "csv_frame": 1812
+      },
+      {
+        "name": "page_devices",
+        "planned_seconds": 30,
+        "actual_seconds": 30.003781002014875,
+        "csv_frame": 1882
+      },
+      {
+        "name": "page_orders",
+        "planned_seconds": 31,
+        "actual_seconds": 31.004189901053905,
+        "csv_frame": 1955
+      },
+      {
+        "name": "page_inventory",
+        "planned_seconds": 32,
+        "actual_seconds": 32.00969009846449,
+        "csv_frame": 2028
+      },
+      {
+        "name": "page_alerts",
+        "planned_seconds": 33,
+        "actual_seconds": 33.01091179996729,
+        "csv_frame": 2099
+      },
+      {
+        "name": "page_trace",
+        "planned_seconds": 34,
+        "actual_seconds": 34.00114940106869,
+        "csv_frame": 2169
+      },
+      {
+        "name": "page_settings",
+        "planned_seconds": 35,
+        "actual_seconds": 35.01269480213523,
+        "csv_frame": 2239
+      },
+      {
+        "name": "page_overview",
+        "planned_seconds": 36,
+        "actual_seconds": 36.00872699916363,
+        "csv_frame": 2310
+      },
+      {
+        "name": "overview",
+        "planned_seconds": 38,
+        "actual_seconds": 38.01106810197234,
+        "csv_frame": 2452
+      },
+      {
+        "name": "all_poi",
+        "planned_seconds": 40,
+        "actual_seconds": 40.00896010175347,
+        "csv_frame": 2577
+      },
+      {
+        "name": "overview",
+        "planned_seconds": 45,
+        "actual_seconds": 45.005836099386215,
+        "csv_frame": 2950
+      },
+      {
+        "name": "all_poi",
+        "planned_seconds": 46,
+        "actual_seconds": 46.00175840035081,
+        "csv_frame": 3025
+      },
+      {
+        "name": "orbit",
+        "planned_seconds": 49,
+        "actual_seconds": 49.00929610058665,
+        "csv_frame": 3251
+      },
+      {
+        "name": "agv",
+        "planned_seconds": 57,
+        "actual_seconds": 57.01498880237341,
+        "csv_frame": 3840
+      },
+      {
+        "name": "forklift",
+        "planned_seconds": 61,
+        "actual_seconds": 61.006629299372435,
+        "csv_frame": 4100
+      },
+      {
+        "name": "racks",
+        "planned_seconds": 65,
+        "actual_seconds": 65.02513559907675,
+        "csv_frame": 4275
+      },
+      {
+        "name": "cargo_focus",
+        "planned_seconds": 69,
+        "actual_seconds": 69.01776520162821,
+        "csv_frame": 4442
+      },
+      {
+        "name": "cargo_click",
+        "planned_seconds": 71,
+        "actual_seconds": 71.01221499964595,
+        "csv_frame": 4529
+      },
+      {
+        "name": "panel_close",
+        "planned_seconds": 73,
+        "actual_seconds": 73.00628650188446,
+        "csv_frame": 4657
+      },
+      {
+        "name": "panel_open",
+        "planned_seconds": 74,
+        "actual_seconds": 74.00345690175891,
+        "csv_frame": 4728
+      },
+      {
+        "name": "page_devices",
+        "planned_seconds": 75,
+        "actual_seconds": 75.00759620219469,
+        "csv_frame": 4799
+      },
+      {
+        "name": "page_orders",
+        "planned_seconds": 76,
+        "actual_seconds": 76.00466930121183,
+        "csv_frame": 4867
+      },
+      {
+        "name": "page_inventory",
+        "planned_seconds": 77,
+        "actual_seconds": 77.00535780191422,
+        "csv_frame": 4937
+      },
+      {
+        "name": "page_alerts",
+        "planned_seconds": 78,
+        "actual_seconds": 78.00215030089021,
+        "csv_frame": 5007
+      },
+      {
+        "name": "page_trace",
+        "planned_seconds": 79,
+        "actual_seconds": 79.00118700042367,
+        "csv_frame": 5077
+      },
+      {
+        "name": "page_settings",
+        "planned_seconds": 80,
+        "actual_seconds": 80.00902090221643,
+        "csv_frame": 5148
+      },
+      {
+        "name": "page_overview",
+        "planned_seconds": 81,
+        "actual_seconds": 81.00157120078802,
+        "csv_frame": 5216
+      },
+      {
+        "name": "overview",
+        "planned_seconds": 83,
+        "actual_seconds": 83.0022822022438,
+        "csv_frame": 5356
+      },
+      {
+        "name": "all_poi",
+        "planned_seconds": 85,
+        "actual_seconds": 85.00189119949937,
+        "csv_frame": 5482
+      },
+      {
+        "name": "capture_end",
+        "planned_seconds": 90,
+        "actual_seconds": 90.00625430047512,
+        "csv_frame": 5844
+      }
+    ],
+    "rhi": "D3D12",
+    "window_mode": "windowed",
+    "map": "GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "equipment_count": 106,
+    "facility_count": 56,
+    "variant_setup": {
+      "name": "shadow-auto",
+      "implementation": "native-runtime-v1",
+      "applied_before_warmup": true,
+      "success": true,
+      "groups": [
+        {
+          "actor": "BP_GHS_InstanceGroup_C_16",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_CAD_PalletCargoLow",
+          "mesh": "SM_GHS_Presentation_CargoLow",
+          "kind": "floor",
+          "instances": 1904,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_17",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_CAD_PalletCargoHigh",
+          "mesh": "SM_GHS_Presentation_CargoHigh",
+          "kind": "floor",
+          "instances": 1900,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_45",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_V2_Rack_A_W37138",
+          "mesh": "SM_GHS_V2Rack_A_W37138_Capacity",
+          "kind": "rack",
+          "instances": 1065,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_46",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_V2_Rack_A_W37619",
+          "mesh": "SM_GHS_V2Rack_A_W37619_Capacity",
+          "kind": "rack",
+          "instances": 140,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_47",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_V2_Rack_B_Pass_W36176",
+          "mesh": "SM_GHS_V2Rack_B_Pass_W36176_Capacity",
+          "kind": "rack",
+          "instances": 11,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_48",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_V2_Rack_B_W37138",
+          "mesh": "SM_GHS_V2Rack_B_W37138_Capacity",
+          "kind": "rack",
+          "instances": 220,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_49",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_V2_Rack_B_W37619",
+          "mesh": "SM_GHS_V2Rack_B_W37619_Capacity",
+          "kind": "rack",
+          "instances": 44,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_50",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_V2_Rack_D1",
+          "mesh": "SM_GHS_V2Rack_D1_Capacity",
+          "kind": "rack",
+          "instances": 89,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_51",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_V2_Rack_D1_W37138",
+          "mesh": "SM_GHS_V2Rack_D1_W37138_Capacity",
+          "kind": "rack",
+          "instances": 5,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_52",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_V2_Rack_D1_W37619",
+          "mesh": "SM_GHS_V2Rack_D1_W37619_Capacity",
+          "kind": "rack",
+          "instances": 8,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_7",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_V2_Rack_A_Pass_W36176",
+          "mesh": "SM_GHS_V2Rack_A_Pass_W36176_Capacity",
+          "kind": "rack",
+          "instances": 11,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_8",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_CAD_PalletCargo",
+          "mesh": "SM_GHS_Presentation_CargoMid",
+          "kind": "floor",
+          "instances": 3726,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_9",
+          "component": "HierarchicalInstancedStaticMesh",
+          "tag": "GHSStorageGroup:GHS_V2_Rack_A_Pass_W37138",
+          "mesh": "SM_GHS_V2Rack_A_Pass_W37138_Capacity",
+          "kind": "rack",
+          "instances": 36,
+          "before": {
+            "shadow_cache_invalidation": "Always",
+            "cast_shadow": true,
+            "collision_mode": 0
+          },
+          "after": {
+            "shadow_cache_invalidation": "Auto",
+            "cast_shadow": true,
+            "collision_mode": 0
+          }
+        }
+      ],
+      "traffic": {
+        "runtime_before": {
+          "ready": true,
+          "active": 26,
+          "capacity": 32,
+          "peak_active": 26,
+          "route_count": 6,
+          "component_count": 4,
+          "completed": 0,
+          "spawned": 26,
+          "fixed_instances": 32,
+          "collision": false,
+          "active_by_route": [
+            {
+              "id": "glen_forward",
+              "active": 4
+            },
+            {
+              "id": "glen_reverse",
+              "active": 5
+            },
+            {
+              "id": "sycamore_south_forward",
+              "active": 4
+            },
+            {
+              "id": "sycamore_north_forward",
+              "active": 4
+            },
+            {
+              "id": "i15_0_forward",
+              "active": 5
+            },
+            {
+              "id": "i15_1_forward",
+              "active": 4
+            }
+          ]
+        },
+        "tick_before": true,
+        "hidden_before": false,
+        "tick_after": true,
+        "hidden_after": false
+      },
+      "capacity": {
+        "initialized": true,
+        "error": "",
+        "storage_visible": true,
+        "rack_capacity": 0.800000011920929,
+        "floor_capacity": 1,
+        "rack_total_slots": 25056,
+        "floor_total_slots": 7530,
+        "rack_visible_slots": 20045,
+        "floor_visible_groups": 7530,
+        "registered_components": 13,
+        "shared_materials": 7,
+        "initialization_scans": 1,
+        "capacity_updates": 0,
+        "parameter_writes": 7
+      },
+      "group_count": 13,
+      "instance_count": 9159
+    },
+    "cargo_fixture_version": 2,
+    "cargo_fixture_capacity": {
+      "initialized": true,
+      "error": "",
+      "storage_visible": true,
+      "rack_capacity": 0.800000011920929,
+      "floor_capacity": 1,
+      "rack_total_slots": 25056,
+      "floor_total_slots": 7530,
+      "rack_visible_slots": 20045,
+      "floor_visible_groups": 7530,
+      "registered_components": 13,
+      "shared_materials": 7,
+      "initialization_scans": 1,
+      "capacity_updates": 0,
+      "parameter_writes": 7
+    },
+    "cargo_fixture": "BP_GHS_InstanceGroup_C_45/HierarchicalInstancedStaticMesh/0/SM_GHS_V2Rack_A_W37138_Capacity/capacity-slots-v2",
+    "cargo_fixture_metadata": "storage-capacity.json",
+    "cargo_fixture_instance_count": 1065,
+    "cargo_fixture_slot_count": 12,
+    "cargo_fixture_visible_candidates": 12,
+    "original_cvars": {
+      "r.GPUStatsEnabled": "1",
+      "r.GPUCsvStatsEnabled": "0",
+      "csv.CompressionMode": "-1",
+      "t.MaxFPS": "0",
+      "r.VSync": "0",
+      "r.VSyncEditor": "0",
+      "t.IdleWhenNotForeground": "0",
+      "Slate.bAllowThrottling": "1",
+      "r.DynamicRes.OperationMode": "0",
+      "r.ScreenPercentage": "0"
+    },
+    "observed_cvars": {
+      "r.ScreenPercentage": "100",
+      "r.DynamicRes.OperationMode": "0",
+      "r.AntiAliasingMethod": "4",
+      "r.Shadow.Virtual.Enable": "1",
+      "r.DynamicGlobalIlluminationMethod": "1",
+      "r.ReflectionMethod": "1",
+      "sg.ShadowQuality": "3",
+      "sg.PostProcessQuality": "3",
+      "sg.EffectsQuality": "3",
+      "sg.ViewDistanceQuality": "3",
+      "sg.TextureQuality": "3",
+      "t.MaxFPS": "0",
+      "r.VSync": "0",
+      "r.GPUCsvStatsEnabled": "1"
+    },
+    "post_process_note": "Console GI/reflection values are project defaults, not final view PP overrides. Inspect final view in GPU capture before assigning Lumen cost.",
+    "measured_seconds": 90.00625430047512,
+    "final_browser_report": "",
+    "final_poi_report": "{\r\n\t\"labels\": [\r\n\t\t{\r\n\t\t\t\"id\": \"WAREHOUSE:GHS\",\r\n\t\t\t\"icon\": \"warehouse\",\r\n\t\t\t\"x\": 582.75970458984375,\r\n\t\t\t\"y\": 367.94442749023438,\r\n\t\t\t\"width\": 228,\r\n\t\t\t\"height\": 56,\r\n\t\t\t\"opacity\": 1,\r\n\t\t\t\"interactive\": true\r\n\t\t}\r\n\t],\r\n\t\"selectionStroke\": 6,\r\n\t\"pointFilter\": \"all\",\r\n\t\"replay\": false,\r\n\t\"interiorAvailable\": false,\r\n\t\"pendingNavigation\": \"\",\r\n\t\"pendingNavigationId\": \"\",\r\n\t\"warehousePOIOpacity\": 1,\r\n\t\"interiorLabelOpacity\": 0,\r\n\t\"roofClosed\": true,\r\n\t\"roofOpening\": false,\r\n\t\"roofClosing\": false,\r\n\t\"roofTransitioning\": false,\r\n\t\"roofProgress\": 0,\r\n\t\"performance\":\r\n\t{\r\n\t\t\"candidateBuilds\": 432,\r\n\t\t\"projectionFrames\": 2832,\r\n\t\t\"pointProjections\": 96391,\r\n\t\t\"selectionProjections\": 19557,\r\n\t\t\"candidateCount\": 165,\r\n\t\t\"browserActive\": true,\r\n\t\t\"diagnostics\": false,\r\n\t\t\"worldScans\": 4,\r\n\t\t\"snapshotSerializations\": 8\r\n\t}\r\n}",
+    "variant_restored": true
+  },
+  "capture": {
+    "csv": "D:\\UEPro\\Test\\Saved\\Performance20261028\\ShadowAutoNative01_20261027_182635\\frames.csv",
+    "csv_sha256": "4417a1cae0ade70d2626941e7b2f3d3c1a563d4d700f7d4f5a7e2698300e6f7d",
+    "captured_frames": 5916,
+    "measured_frames": 5844,
+    "route_markers_present": true,
+    "sample_window": "after_begin_through_end",
+    "metrics": {
+      "GPU/RayTracingGeometry": {
+        "count": 5844,
+        "mean_ms": 0.0026386036960985627,
+        "median_ms": 0.002,
+        "p95_ms": 0.003,
+        "p99_ms": 0.003,
+        "min_ms": 0.0,
+        "max_ms": 0.539,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/DistanceFields": {
+        "count": 5844,
+        "mean_ms": 0.1133993839835729,
+        "median_ms": 0.074,
+        "p95_ms": 0.337,
+        "p99_ms": 0.695,
+        "min_ms": 0.05,
+        "max_ms": 30.166,
+        "over_16_67_ms_count": 1,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.017111567419575632
+      },
+      "GPU/AllocateRendertargets": {
+        "count": 5844,
+        "mean_ms": 7.683093771389459e-05,
+        "median_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.001,
+        "min_ms": 0.0,
+        "max_ms": 0.007,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/VisibilityCommands": {
+        "count": 5844,
+        "mean_ms": 0.006867556468172485,
+        "median_ms": 0.003,
+        "p95_ms": 0.005,
+        "p99_ms": 0.13,
+        "min_ms": 0.0,
+        "max_ms": 1.029,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/GPUSceneUpdate": {
+        "count": 5844,
+        "mean_ms": 0.023784736481861735,
+        "median_ms": 0.015,
+        "p95_ms": 0.022,
+        "p99_ms": 0.298,
+        "min_ms": 0.012,
+        "max_ms": 1.029,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/Unaccounted": {
+        "count": 5844,
+        "mean_ms": 0.2312145790554415,
+        "median_ms": 0.128,
+        "p95_ms": 0.673,
+        "p99_ms": 0.956,
+        "min_ms": 0.105,
+        "max_ms": 29.898,
+        "over_16_67_ms_count": 1,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.017111567419575632
+      },
+      "GPU/FXSystemPreRender": {
+        "count": 5844,
+        "mean_ms": 0.002295687885010267,
+        "median_ms": 0.002,
+        "p95_ms": 0.002,
+        "p99_ms": 0.005,
+        "min_ms": 0.0,
+        "max_ms": 0.789,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/BuildRenderingCommandsDeferred": {
+        "count": 5844,
+        "mean_ms": 0.027248117727583846,
+        "median_ms": 0.021,
+        "p95_ms": 0.029,
+        "p99_ms": 0.246,
+        "min_ms": 0.018,
+        "max_ms": 1.676,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/Prepass": {
+        "count": 5844,
+        "mean_ms": 1.161500684462697,
+        "median_ms": 0.814,
+        "p95_ms": 4.858,
+        "p99_ms": 5.762,
+        "min_ms": 0.192,
+        "max_ms": 30.955,
+        "over_16_67_ms_count": 2,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.034223134839151265
+      },
+      "GPU/RenderVelocities": {
+        "count": 5844,
+        "mean_ms": 0.057028405201916495,
+        "median_ms": 0.062,
+        "p95_ms": 0.079,
+        "p99_ms": 0.518,
+        "min_ms": 0.003,
+        "max_ms": 2.124,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/NaniteVisBuffer": {
+        "count": 5844,
+        "mean_ms": 0.5431444216290212,
+        "median_ms": 0.427,
+        "p95_ms": 0.995,
+        "p99_ms": 1.211,
+        "min_ms": 0.302,
+        "max_ms": 1.624,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/NaniteBasePass": {
+        "count": 5844,
+        "mean_ms": 0.3551827515400411,
+        "median_ms": 0.351,
+        "p95_ms": 0.856,
+        "p99_ms": 1.051,
+        "min_ms": 0.111,
+        "max_ms": 36.846,
+        "over_16_67_ms_count": 1,
+        "over_33_33_ms_count": 1,
+        "over_budget_percent": 0.017111567419575632
+      },
+      "GPU/SortLights": {
+        "count": 5844,
+        "mean_ms": 0.01667864476386037,
+        "median_ms": 0.012,
+        "p95_ms": 0.014,
+        "p99_ms": 0.222,
+        "min_ms": 0.011,
+        "max_ms": 0.967,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/LightFunctionAtlasGeneration": {
+        "count": 5844,
+        "mean_ms": 0.0017416153319644082,
+        "median_ms": 0.001,
+        "p95_ms": 0.002,
+        "p99_ms": 0.002,
+        "min_ms": 0.0,
+        "max_ms": 0.532,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/HZB": {
+        "count": 5844,
+        "mean_ms": 0.022929158110882954,
+        "median_ms": 0.012,
+        "p95_ms": 0.03,
+        "p99_ms": 0.293,
+        "min_ms": 0.006,
+        "max_ms": 0.882,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/BeginOcclusionTests": {
+        "count": 5844,
+        "mean_ms": 0.059138774811772765,
+        "median_ms": 0.056,
+        "p95_ms": 0.117,
+        "p99_ms": 0.585,
+        "min_ms": 0.002,
+        "max_ms": 1.262,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/CompositionBeforeBasePass": {
+        "count": 5844,
+        "mean_ms": 0.008787132101300478,
+        "median_ms": 0.007,
+        "p95_ms": 0.018,
+        "p99_ms": 0.019,
+        "min_ms": 0.0,
+        "max_ms": 0.929,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/Basepass": {
+        "count": 5844,
+        "mean_ms": 1.878194900752909,
+        "median_ms": 1.511,
+        "p95_ms": 6.409,
+        "p99_ms": 7.379,
+        "min_ms": 0.434,
+        "max_ms": 37.91,
+        "over_16_67_ms_count": 3,
+        "over_33_33_ms_count": 3,
+        "over_budget_percent": 0.0513347022587269
+      },
+      "GPU/ShadowDepths": {
+        "count": 5844,
+        "mean_ms": 2.688142368240931,
+        "median_ms": 1.788,
+        "p95_ms": 11.767,
+        "p99_ms": 15.197,
+        "min_ms": 0.987,
+        "max_ms": 38.164,
+        "over_16_67_ms_count": 28,
+        "over_33_33_ms_count": 1,
+        "over_budget_percent": 0.4791238877481177
+      },
+      "GPU/NaniteReadback": {
+        "count": 5844,
+        "mean_ms": 0.30254243668720054,
+        "median_ms": 0.251,
+        "p95_ms": 0.731,
+        "p99_ms": 0.883,
+        "min_ms": 0.145,
+        "max_ms": 1.78,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/CompositionPreLighting": {
+        "count": 5844,
+        "mean_ms": 0.005310232717316906,
+        "median_ms": 0.003,
+        "p95_ms": 0.014,
+        "p99_ms": 0.016,
+        "min_ms": 0.0,
+        "max_ms": 1.049,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/SSAOSetup": {
+        "count": 5844,
+        "mean_ms": 0.0340924024640657,
+        "median_ms": 0.03,
+        "p95_ms": 0.039,
+        "p99_ms": 0.045,
+        "min_ms": 0.02,
+        "max_ms": 0.948,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/SSAO": {
+        "count": 5844,
+        "mean_ms": 1.347863620807666,
+        "median_ms": 1.309,
+        "p95_ms": 1.899,
+        "p99_ms": 2.124,
+        "min_ms": 0.98,
+        "max_ms": 2.566,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/RenderDeferredLighting": {
+        "count": 5844,
+        "mean_ms": 0.05219336071184121,
+        "median_ms": 0.018,
+        "p95_ms": 0.285,
+        "p99_ms": 0.568,
+        "min_ms": 0.002,
+        "max_ms": 1.16,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/TranslucentLighting": {
+        "count": 5844,
+        "mean_ms": 0.151234257357974,
+        "median_ms": 0.1,
+        "p95_ms": 0.528,
+        "p99_ms": 0.774,
+        "min_ms": 0.093,
+        "max_ms": 1.949,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/Lights": {
+        "count": 5844,
+        "mean_ms": 0.4962200547570157,
+        "median_ms": 0.356,
+        "p95_ms": 0.982,
+        "p99_ms": 1.261,
+        "min_ms": 0.321,
+        "max_ms": 30.903,
+        "over_16_67_ms_count": 1,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.017111567419575632
+      },
+      "GPU/ShadowProjection": {
+        "count": 5844,
+        "mean_ms": 1.1639714236824092,
+        "median_ms": 1.116,
+        "p95_ms": 1.843,
+        "p99_ms": 2.154,
+        "min_ms": 0.68,
+        "max_ms": 34.715,
+        "over_16_67_ms_count": 1,
+        "over_33_33_ms_count": 1,
+        "over_budget_percent": 0.017111567419575632
+      },
+      "GPU/ReflectionEnvironment": {
+        "count": 5844,
+        "mean_ms": 0.2534885352498289,
+        "median_ms": 0.178,
+        "p95_ms": 0.706,
+        "p99_ms": 0.878,
+        "min_ms": 0.168,
+        "max_ms": 3.934,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/TemporalSuperResolution": {
+        "count": 5844,
+        "mean_ms": 3.297635352498289,
+        "median_ms": 3.293,
+        "p95_ms": 3.836,
+        "p99_ms": 4.119,
+        "min_ms": 2.226,
+        "max_ms": 33.976,
+        "over_16_67_ms_count": 3,
+        "over_33_33_ms_count": 3,
+        "over_budget_percent": 0.0513347022587269
+      },
+      "GPU/PostRenderOpsFX": {
+        "count": 5844,
+        "mean_ms": 0.0652903832991102,
+        "median_ms": 0.04,
+        "p95_ms": 0.295,
+        "p99_ms": 0.568,
+        "min_ms": 0.035,
+        "max_ms": 1.161,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/FXSystemPostRenderOpaque": {
+        "count": 5844,
+        "mean_ms": 0.0006007871321013005,
+        "median_ms": 0.0,
+        "p95_ms": 0.001,
+        "p99_ms": 0.001,
+        "min_ms": 0.0,
+        "max_ms": 0.534,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/Translucency": {
+        "count": 5844,
+        "mean_ms": 0.008773956194387405,
+        "median_ms": 0.006,
+        "p95_ms": 0.007,
+        "p99_ms": 0.013,
+        "min_ms": 0.005,
+        "max_ms": 0.693,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/Postprocessing": {
+        "count": 5844,
+        "mean_ms": 0.43559976043805615,
+        "median_ms": 0.308,
+        "p95_ms": 0.87,
+        "p99_ms": 1.095,
+        "min_ms": 0.289,
+        "max_ms": 1.581,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/FrameRenderFinish": {
+        "count": 5844,
+        "mean_ms": 0.057133470225872694,
+        "median_ms": 0.034,
+        "p95_ms": 0.255,
+        "p99_ms": 0.565,
+        "min_ms": 0.029,
+        "max_ms": 1.265,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/SlateUI": {
+        "count": 5844,
+        "mean_ms": 0.03504551676933607,
+        "median_ms": 0.026,
+        "p95_ms": 0.051,
+        "p99_ms": 0.321,
+        "min_ms": 0.017,
+        "max_ms": 0.879,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPU/Total": {
+        "count": 5844,
+        "mean_ms": 14.907916495550992,
+        "median_ms": 13.261,
+        "p95_ms": 23.915,
+        "p99_ms": 30.241,
+        "min_ms": 10.882,
+        "max_ms": 52.66,
+        "over_16_67_ms_count": 968,
+        "over_33_33_ms_count": 30,
+        "over_budget_percent": 16.56399726214921
+      },
+      "FrameTime": {
+        "count": 5844,
+        "mean_ms": 15.401480749486653,
+        "median_ms": 13.837299999999999,
+        "p95_ms": 24.3905,
+        "p99_ms": 30.6526,
+        "min_ms": 6.0735,
+        "max_ms": 69.587,
+        "over_16_67_ms_count": 997,
+        "over_33_33_ms_count": 35,
+        "over_budget_percent": 17.060232717316907
+      },
+      "RenderThreadTime": {
+        "count": 5844,
+        "mean_ms": 15.102062902121835,
+        "median_ms": 13.54015,
+        "p95_ms": 24.0332,
+        "p99_ms": 30.1959,
+        "min_ms": 5.5917,
+        "max_ms": 69.2874,
+        "over_16_67_ms_count": 974,
+        "over_33_33_ms_count": 31,
+        "over_budget_percent": 16.666666666666668
+      },
+      "GameThreadTime": {
+        "count": 5844,
+        "mean_ms": 2.085282665982204,
+        "median_ms": 2.0227,
+        "p95_ms": 2.5868,
+        "p99_ms": 3.1063,
+        "min_ms": 1.6114,
+        "max_ms": 5.711,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      },
+      "GPUTime": {
+        "count": 5844,
+        "mean_ms": 15.515633983572895,
+        "median_ms": 13.87265,
+        "p95_ms": 24.7284,
+        "p99_ms": 31.4809,
+        "min_ms": 11.236,
+        "max_ms": 53.8706,
+        "over_16_67_ms_count": 1034,
+        "over_33_33_ms_count": 38,
+        "over_budget_percent": 17.693360711841205
+      },
+      "GPU/NaniteStreaming": {
+        "count": 5572,
+        "mean_ms": 0.0009718234027279254,
+        "median_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "min_ms": 0.0,
+        "max_ms": 1.707,
+        "over_16_67_ms_count": 0,
+        "over_33_33_ms_count": 0,
+        "over_budget_percent": 0.0
+      }
+    },
+    "segments": {
+      "overview": {
+        "frames": 400,
+        "metrics": {
+          "FrameTime": {
+            "count": 400,
+            "mean_ms": 14.9638285,
+            "median_ms": 13.719100000000001,
+            "p95_ms": 24.2668,
+            "p99_ms": 30.205,
+            "min_ms": 11.9657,
+            "max_ms": 46.9362,
+            "over_16_67_ms_count": 55,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 13.75
+          },
+          "GameThreadTime": {
+            "count": 400,
+            "mean_ms": 2.0372007500000002,
+            "median_ms": 1.9807000000000001,
+            "p95_ms": 2.4212,
+            "p99_ms": 2.6455,
+            "min_ms": 1.7048,
+            "max_ms": 3.0714,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 400,
+            "mean_ms": 14.646788999999998,
+            "median_ms": 13.43,
+            "p95_ms": 23.9625,
+            "p99_ms": 29.6929,
+            "min_ms": 11.4288,
+            "max_ms": 46.5742,
+            "over_16_67_ms_count": 50,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 12.5
+          },
+          "GPUTime": {
+            "count": 400,
+            "mean_ms": 14.916198,
+            "median_ms": 13.517900000000001,
+            "p95_ms": 24.6258,
+            "p99_ms": 30.4752,
+            "min_ms": 11.5633,
+            "max_ms": 47.578,
+            "over_16_67_ms_count": 58,
+            "over_33_33_ms_count": 2,
+            "over_budget_percent": 14.5
+          },
+          "GPU/Total": {
+            "count": 400,
+            "mean_ms": 14.45556,
+            "median_ms": 13.141,
+            "p95_ms": 23.485,
+            "p99_ms": 30.589,
+            "min_ms": 11.446,
+            "max_ms": 47.429,
+            "over_16_67_ms_count": 50,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 12.5
+          }
+        }
+      },
+      "all_poi": {
+        "frames": 1187,
+        "metrics": {
+          "FrameTime": {
+            "count": 1187,
+            "mean_ms": 13.49321642796967,
+            "median_ms": 13.4182,
+            "p95_ms": 14.5456,
+            "p99_ms": 15.1411,
+            "min_ms": 11.1578,
+            "max_ms": 50.2124,
+            "over_16_67_ms_count": 2,
+            "over_33_33_ms_count": 2,
+            "over_budget_percent": 0.16849199663016007
+          },
+          "GameThreadTime": {
+            "count": 1187,
+            "mean_ms": 1.9991546756529064,
+            "median_ms": 1.958,
+            "p95_ms": 2.3517,
+            "p99_ms": 2.6111,
+            "min_ms": 1.6707,
+            "max_ms": 3.0431,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 1187,
+            "mean_ms": 13.187820219039596,
+            "median_ms": 13.1198,
+            "p95_ms": 14.2449,
+            "p99_ms": 14.8048,
+            "min_ms": 10.8652,
+            "max_ms": 49.8849,
+            "over_16_67_ms_count": 2,
+            "over_33_33_ms_count": 2,
+            "over_budget_percent": 0.16849199663016007
+          },
+          "GPUTime": {
+            "count": 1187,
+            "mean_ms": 13.32077304128054,
+            "median_ms": 13.2361,
+            "p95_ms": 14.2302,
+            "p99_ms": 14.7847,
+            "min_ms": 11.3305,
+            "max_ms": 49.8851,
+            "over_16_67_ms_count": 3,
+            "over_33_33_ms_count": 2,
+            "over_budget_percent": 0.2527379949452401
+          },
+          "GPU/Total": {
+            "count": 1187,
+            "mean_ms": 13.012453243470935,
+            "median_ms": 12.922,
+            "p95_ms": 13.793,
+            "p99_ms": 14.247,
+            "min_ms": 11.57,
+            "max_ms": 49.577,
+            "over_16_67_ms_count": 2,
+            "over_33_33_ms_count": 2,
+            "over_budget_percent": 0.16849199663016007
+          }
+        }
+      },
+      "orbit": {
+        "frames": 1172,
+        "metrics": {
+          "FrameTime": {
+            "count": 1172,
+            "mean_ms": 13.664135494880545,
+            "median_ms": 13.40145,
+            "p95_ms": 15.2179,
+            "p99_ms": 16.2743,
+            "min_ms": 11.0421,
+            "max_ms": 50.4488,
+            "over_16_67_ms_count": 10,
+            "over_33_33_ms_count": 4,
+            "over_budget_percent": 0.8532423208191127
+          },
+          "GameThreadTime": {
+            "count": 1172,
+            "mean_ms": 2.0130648464163823,
+            "median_ms": 1.9699499999999999,
+            "p95_ms": 2.3965,
+            "p99_ms": 2.7016,
+            "min_ms": 1.6114,
+            "max_ms": 3.6321,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 1172,
+            "mean_ms": 13.36795204778157,
+            "median_ms": 13.10225,
+            "p95_ms": 14.9553,
+            "p99_ms": 15.922,
+            "min_ms": 10.8556,
+            "max_ms": 50.2291,
+            "over_16_67_ms_count": 8,
+            "over_33_33_ms_count": 4,
+            "over_budget_percent": 0.6825938566552902
+          },
+          "GPUTime": {
+            "count": 1172,
+            "mean_ms": 13.479358873720138,
+            "median_ms": 13.2366,
+            "p95_ms": 15.3587,
+            "p99_ms": 17.3984,
+            "min_ms": 11.3311,
+            "max_ms": 50.0217,
+            "over_16_67_ms_count": 27,
+            "over_33_33_ms_count": 3,
+            "over_budget_percent": 2.303754266211604
+          },
+          "GPU/Total": {
+            "count": 1172,
+            "mean_ms": 13.189307167235496,
+            "median_ms": 12.908,
+            "p95_ms": 15.145,
+            "p99_ms": 16.704,
+            "min_ms": 11.504,
+            "max_ms": 50.126,
+            "over_16_67_ms_count": 12,
+            "over_33_33_ms_count": 4,
+            "over_budget_percent": 1.023890784982935
+          }
+        }
+      },
+      "agv": {
+        "frames": 527,
+        "metrics": {
+          "FrameTime": {
+            "count": 527,
+            "mean_ms": 15.16675540796964,
+            "median_ms": 13.2474,
+            "p95_ms": 24.44,
+            "p99_ms": 29.8561,
+            "min_ms": 6.0735,
+            "max_ms": 43.6287,
+            "over_16_67_ms_count": 107,
+            "over_33_33_ms_count": 4,
+            "over_budget_percent": 20.30360531309298
+          },
+          "GameThreadTime": {
+            "count": 527,
+            "mean_ms": 2.1509789373814043,
+            "median_ms": 2.0702,
+            "p95_ms": 2.738,
+            "p99_ms": 3.5376,
+            "min_ms": 1.7394,
+            "max_ms": 4.3403,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 527,
+            "mean_ms": 14.847968311195444,
+            "median_ms": 12.9425,
+            "p95_ms": 24.1643,
+            "p99_ms": 29.1028,
+            "min_ms": 5.5917,
+            "max_ms": 43.1203,
+            "over_16_67_ms_count": 105,
+            "over_33_33_ms_count": 4,
+            "over_budget_percent": 19.924098671726757
+          },
+          "GPUTime": {
+            "count": 527,
+            "mean_ms": 15.137102087286529,
+            "median_ms": 13.1999,
+            "p95_ms": 24.4438,
+            "p99_ms": 31.4541,
+            "min_ms": 11.236,
+            "max_ms": 44.1395,
+            "over_16_67_ms_count": 107,
+            "over_33_33_ms_count": 4,
+            "over_budget_percent": 20.30360531309298
+          },
+          "GPU/Total": {
+            "count": 527,
+            "mean_ms": 14.651132827324478,
+            "median_ms": 12.648,
+            "p95_ms": 23.74,
+            "p99_ms": 29.889,
+            "min_ms": 10.882,
+            "max_ms": 43.853,
+            "over_16_67_ms_count": 103,
+            "over_33_33_ms_count": 4,
+            "over_budget_percent": 19.54459203036053
+          }
+        }
+      },
+      "forklift": {
+        "frames": 347,
+        "metrics": {
+          "FrameTime": {
+            "count": 347,
+            "mean_ms": 22.969326224783863,
+            "median_ms": 24.0242,
+            "p95_ms": 28.3661,
+            "p99_ms": 33.3766,
+            "min_ms": 10.2391,
+            "max_ms": 53.1978,
+            "over_16_67_ms_count": 313,
+            "over_33_33_ms_count": 4,
+            "over_budget_percent": 90.20172910662824
+          },
+          "GameThreadTime": {
+            "count": 347,
+            "mean_ms": 2.181092795389049,
+            "median_ms": 2.1172,
+            "p95_ms": 2.7049,
+            "p99_ms": 3.1987,
+            "min_ms": 1.7373,
+            "max_ms": 3.3697,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 347,
+            "mean_ms": 22.655674351585017,
+            "median_ms": 23.7227,
+            "p95_ms": 28.0535,
+            "p99_ms": 32.1003,
+            "min_ms": 11.0704,
+            "max_ms": 52.7651,
+            "over_16_67_ms_count": 310,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 89.33717579250721
+          },
+          "GPUTime": {
+            "count": 347,
+            "mean_ms": 23.354501152737754,
+            "median_ms": 24.3544,
+            "p95_ms": 29.2496,
+            "p99_ms": 33.0791,
+            "min_ms": 12.3058,
+            "max_ms": 53.8706,
+            "over_16_67_ms_count": 315,
+            "over_33_33_ms_count": 3,
+            "over_budget_percent": 90.77809798270893
+          },
+          "GPU/Total": {
+            "count": 347,
+            "mean_ms": 22.504521613832853,
+            "median_ms": 23.615,
+            "p95_ms": 28.612,
+            "p99_ms": 32.723,
+            "min_ms": 11.707,
+            "max_ms": 52.66,
+            "over_16_67_ms_count": 308,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 88.76080691642652
+          }
+        }
+      },
+      "racks": {
+        "frames": 332,
+        "metrics": {
+          "FrameTime": {
+            "count": 332,
+            "mean_ms": 24.161748192771082,
+            "median_ms": 23.5427,
+            "p95_ms": 30.849,
+            "p99_ms": 35.992,
+            "min_ms": 16.3685,
+            "max_ms": 49.5743,
+            "over_16_67_ms_count": 331,
+            "over_33_33_ms_count": 10,
+            "over_budget_percent": 99.6987951807229
+          },
+          "GameThreadTime": {
+            "count": 332,
+            "mean_ms": 2.263394879518072,
+            "median_ms": 2.2062,
+            "p95_ms": 2.7865,
+            "p99_ms": 3.155,
+            "min_ms": 1.8273,
+            "max_ms": 3.9072,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 332,
+            "mean_ms": 23.81787590361446,
+            "median_ms": 23.2329,
+            "p95_ms": 30.6288,
+            "p99_ms": 35.2664,
+            "min_ms": 16.6925,
+            "max_ms": 48.5034,
+            "over_16_67_ms_count": 332,
+            "over_33_33_ms_count": 9,
+            "over_budget_percent": 100.0
+          },
+          "GPUTime": {
+            "count": 332,
+            "mean_ms": 24.102057228915662,
+            "median_ms": 23.33265,
+            "p95_ms": 30.9602,
+            "p99_ms": 37.0421,
+            "min_ms": 17.0437,
+            "max_ms": 47.8944,
+            "over_16_67_ms_count": 332,
+            "over_33_33_ms_count": 9,
+            "over_budget_percent": 100.0
+          },
+          "GPU/Total": {
+            "count": 332,
+            "mean_ms": 23.647831325301205,
+            "median_ms": 23.0875,
+            "p95_ms": 29.884,
+            "p99_ms": 35.104,
+            "min_ms": 16.912,
+            "max_ms": 47.314,
+            "over_16_67_ms_count": 332,
+            "over_33_33_ms_count": 8,
+            "over_budget_percent": 100.0
+          }
+        }
+      },
+      "cargo_focus": {
+        "frames": 201,
+        "metrics": {
+          "FrameTime": {
+            "count": 201,
+            "mean_ms": 19.948244776119402,
+            "median_ms": 19.8026,
+            "p95_ms": 30.8055,
+            "p99_ms": 38.939,
+            "min_ms": 12.3603,
+            "max_ms": 69.587,
+            "over_16_67_ms_count": 123,
+            "over_33_33_ms_count": 6,
+            "over_budget_percent": 61.19402985074627
+          },
+          "GameThreadTime": {
+            "count": 201,
+            "mean_ms": 2.019115422885572,
+            "median_ms": 1.9899,
+            "p95_ms": 2.3564,
+            "p99_ms": 2.5868,
+            "min_ms": 1.6802,
+            "max_ms": 3.209,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 201,
+            "mean_ms": 19.625260199004973,
+            "median_ms": 19.4625,
+            "p95_ms": 30.4508,
+            "p99_ms": 38.8587,
+            "min_ms": 12.0691,
+            "max_ms": 69.2874,
+            "over_16_67_ms_count": 122,
+            "over_33_33_ms_count": 6,
+            "over_budget_percent": 60.69651741293532
+          },
+          "GPUTime": {
+            "count": 201,
+            "mean_ms": 20.495107462686565,
+            "median_ms": 20.2295,
+            "p95_ms": 33.1624,
+            "p99_ms": 51.1193,
+            "min_ms": 12.8524,
+            "max_ms": 53.3384,
+            "over_16_67_ms_count": 122,
+            "over_33_33_ms_count": 10,
+            "over_budget_percent": 60.69651741293532
+          },
+          "GPU/Total": {
+            "count": 201,
+            "mean_ms": 19.49325870646766,
+            "median_ms": 19.233,
+            "p95_ms": 32.147,
+            "p99_ms": 40.424,
+            "min_ms": 12.254,
+            "max_ms": 51.931,
+            "over_16_67_ms_count": 121,
+            "over_33_33_ms_count": 7,
+            "over_budget_percent": 60.19900497512438
+          }
+        }
+      },
+      "cargo_click": {
+        "frames": 266,
+        "metrics": {
+          "FrameTime": {
+            "count": 266,
+            "mean_ms": 15.014092105263158,
+            "median_ms": 14.479099999999999,
+            "p95_ms": 19.4554,
+            "p99_ms": 21.4384,
+            "min_ms": 10.371,
+            "max_ms": 23.646,
+            "over_16_67_ms_count": 50,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 18.796992481203006
+          },
+          "GameThreadTime": {
+            "count": 266,
+            "mean_ms": 2.1262327067669173,
+            "median_ms": 2.03305,
+            "p95_ms": 2.8073,
+            "p99_ms": 3.4995,
+            "min_ms": 1.615,
+            "max_ms": 5.5184,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 266,
+            "mean_ms": 14.739996616541355,
+            "median_ms": 14.123000000000001,
+            "p95_ms": 19.1255,
+            "p99_ms": 21.0444,
+            "min_ms": 12.2053,
+            "max_ms": 23.3031,
+            "over_16_67_ms_count": 40,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 15.037593984962406
+          },
+          "GPUTime": {
+            "count": 266,
+            "mean_ms": 15.525973684210525,
+            "median_ms": 14.9224,
+            "p95_ms": 20.3405,
+            "p99_ms": 21.8138,
+            "min_ms": 12.3968,
+            "max_ms": 22.3222,
+            "over_16_67_ms_count": 57,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 21.428571428571427
+          },
+          "GPU/Total": {
+            "count": 266,
+            "mean_ms": 14.530281954887217,
+            "median_ms": 13.804,
+            "p95_ms": 19.158,
+            "p99_ms": 20.858,
+            "min_ms": 11.961,
+            "max_ms": 21.127,
+            "over_16_67_ms_count": 35,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 13.157894736842104
+          }
+        }
+      },
+      "panel_close": {
+        "frames": 144,
+        "metrics": {
+          "FrameTime": {
+            "count": 144,
+            "mean_ms": 13.907190972222223,
+            "median_ms": 13.77895,
+            "p95_ms": 15.304,
+            "p99_ms": 16.0007,
+            "min_ms": 11.8422,
+            "max_ms": 16.1139,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "GameThreadTime": {
+            "count": 144,
+            "mean_ms": 2.0966756944444445,
+            "median_ms": 2.00155,
+            "p95_ms": 2.6666,
+            "p99_ms": 3.3589,
+            "min_ms": 1.7191,
+            "max_ms": 4.2065,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 144,
+            "mean_ms": 13.637670833333333,
+            "median_ms": 13.515,
+            "p95_ms": 14.9502,
+            "p99_ms": 15.2443,
+            "min_ms": 12.1677,
+            "max_ms": 15.7859,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "GPUTime": {
+            "count": 144,
+            "mean_ms": 14.445986111111113,
+            "median_ms": 14.4528,
+            "p95_ms": 15.7191,
+            "p99_ms": 16.2204,
+            "min_ms": 13.0046,
+            "max_ms": 16.6501,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "GPU/Total": {
+            "count": 144,
+            "mean_ms": 13.431166666666666,
+            "median_ms": 13.3595,
+            "p95_ms": 14.282,
+            "p99_ms": 15.369,
+            "min_ms": 12.372,
+            "max_ms": 15.588,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          }
+        }
+      },
+      "panel_open": {
+        "frames": 141,
+        "metrics": {
+          "FrameTime": {
+            "count": 141,
+            "mean_ms": 14.14951063829787,
+            "median_ms": 13.8933,
+            "p95_ms": 15.4852,
+            "p99_ms": 16.1934,
+            "min_ms": 11.6148,
+            "max_ms": 43.6256,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 0.7092198581560284
+          },
+          "GameThreadTime": {
+            "count": 141,
+            "mean_ms": 2.140648936170213,
+            "median_ms": 2.0385,
+            "p95_ms": 2.6318,
+            "p99_ms": 4.8232,
+            "min_ms": 1.7248,
+            "max_ms": 5.4707,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 141,
+            "mean_ms": 13.888955319148936,
+            "median_ms": 13.6609,
+            "p95_ms": 15.0648,
+            "p99_ms": 15.4037,
+            "min_ms": 11.4245,
+            "max_ms": 43.3897,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 0.7092198581560284
+          },
+          "GPUTime": {
+            "count": 141,
+            "mean_ms": 14.679090780141845,
+            "median_ms": 14.3845,
+            "p95_ms": 15.913,
+            "p99_ms": 16.4965,
+            "min_ms": 13.0464,
+            "max_ms": 43.4285,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 0.7092198581560284
+          },
+          "GPU/Total": {
+            "count": 141,
+            "mean_ms": 13.443390070921986,
+            "median_ms": 13.351,
+            "p95_ms": 14.481,
+            "p99_ms": 14.728,
+            "min_ms": 12.298,
+            "max_ms": 14.764,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          }
+        }
+      },
+      "page_devices": {
+        "frames": 141,
+        "metrics": {
+          "FrameTime": {
+            "count": 141,
+            "mean_ms": 14.156614184397164,
+            "median_ms": 13.9487,
+            "p95_ms": 15.2226,
+            "p99_ms": 16.8701,
+            "min_ms": 11.0952,
+            "max_ms": 46.8345,
+            "over_16_67_ms_count": 2,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 1.4184397163120568
+          },
+          "GameThreadTime": {
+            "count": 141,
+            "mean_ms": 2.094246808510638,
+            "median_ms": 2.0072,
+            "p95_ms": 2.4322,
+            "p99_ms": 3.4405,
+            "min_ms": 1.7326,
+            "max_ms": 4.5966,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 141,
+            "mean_ms": 13.893909929078015,
+            "median_ms": 13.7392,
+            "p95_ms": 14.7986,
+            "p99_ms": 15.8183,
+            "min_ms": 11.586,
+            "max_ms": 45.6587,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 0.7092198581560284
+          },
+          "GPUTime": {
+            "count": 141,
+            "mean_ms": 14.756753191489363,
+            "median_ms": 14.4226,
+            "p95_ms": 16.0545,
+            "p99_ms": 16.8507,
+            "min_ms": 12.9436,
+            "max_ms": 45.9935,
+            "over_16_67_ms_count": 2,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 1.4184397163120568
+          },
+          "GPU/Total": {
+            "count": 141,
+            "mean_ms": 13.66117730496454,
+            "median_ms": 13.341,
+            "p95_ms": 14.602,
+            "p99_ms": 15.417,
+            "min_ms": 12.193,
+            "max_ms": 44.213,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 0.7092198581560284
+          }
+        }
+      },
+      "page_orders": {
+        "frames": 143,
+        "metrics": {
+          "FrameTime": {
+            "count": 143,
+            "mean_ms": 14.048263636363636,
+            "median_ms": 14.0143,
+            "p95_ms": 15.2612,
+            "p99_ms": 15.7799,
+            "min_ms": 11.9132,
+            "max_ms": 15.9432,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "GameThreadTime": {
+            "count": 143,
+            "mean_ms": 2.1600006993006997,
+            "median_ms": 2.0844,
+            "p95_ms": 2.7568,
+            "p99_ms": 3.2059,
+            "min_ms": 1.754,
+            "max_ms": 5.711,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 143,
+            "mean_ms": 13.76607902097902,
+            "median_ms": 13.6809,
+            "p95_ms": 15.0676,
+            "p99_ms": 15.4357,
+            "min_ms": 11.7538,
+            "max_ms": 15.7479,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "GPUTime": {
+            "count": 143,
+            "mean_ms": 14.520911188811189,
+            "median_ms": 14.4194,
+            "p95_ms": 16.002,
+            "p99_ms": 16.455,
+            "min_ms": 12.2837,
+            "max_ms": 17.0624,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.6993006993006993
+          },
+          "GPU/Total": {
+            "count": 143,
+            "mean_ms": 13.551888111888113,
+            "median_ms": 13.483,
+            "p95_ms": 14.579,
+            "p99_ms": 14.983,
+            "min_ms": 12.108,
+            "max_ms": 15.134,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          }
+        }
+      },
+      "page_inventory": {
+        "frames": 141,
+        "metrics": {
+          "FrameTime": {
+            "count": 141,
+            "mean_ms": 14.172779432624115,
+            "median_ms": 14.1699,
+            "p95_ms": 15.1749,
+            "p99_ms": 15.3785,
+            "min_ms": 12.4568,
+            "max_ms": 15.5129,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "GameThreadTime": {
+            "count": 141,
+            "mean_ms": 2.130649645390071,
+            "median_ms": 2.0647,
+            "p95_ms": 2.6209,
+            "p99_ms": 3.3388,
+            "min_ms": 1.7329,
+            "max_ms": 3.6458,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 141,
+            "mean_ms": 13.911304964539006,
+            "median_ms": 13.8384,
+            "p95_ms": 14.8726,
+            "p99_ms": 15.1293,
+            "min_ms": 12.3434,
+            "max_ms": 15.1456,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "GPUTime": {
+            "count": 141,
+            "mean_ms": 14.628534042553193,
+            "median_ms": 14.529,
+            "p95_ms": 16.0522,
+            "p99_ms": 16.4606,
+            "min_ms": 13.2144,
+            "max_ms": 17.0267,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.7092198581560284
+          },
+          "GPU/Total": {
+            "count": 141,
+            "mean_ms": 13.671234042553191,
+            "median_ms": 13.632,
+            "p95_ms": 14.531,
+            "p99_ms": 14.858,
+            "min_ms": 12.663,
+            "max_ms": 14.927,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          }
+        }
+      },
+      "page_alerts": {
+        "frames": 140,
+        "metrics": {
+          "FrameTime": {
+            "count": 140,
+            "mean_ms": 14.181571428571429,
+            "median_ms": 14.07065,
+            "p95_ms": 15.6275,
+            "p99_ms": 16.0047,
+            "min_ms": 11.9191,
+            "max_ms": 16.4118,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "GameThreadTime": {
+            "count": 140,
+            "mean_ms": 2.1395871428571427,
+            "median_ms": 2.0763499999999997,
+            "p95_ms": 2.7368,
+            "p99_ms": 3.1557,
+            "min_ms": 1.759,
+            "max_ms": 3.3392,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 140,
+            "mean_ms": 13.904936428571428,
+            "median_ms": 13.78615,
+            "p95_ms": 15.2556,
+            "p99_ms": 15.643,
+            "min_ms": 12.0728,
+            "max_ms": 15.8288,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "GPUTime": {
+            "count": 140,
+            "mean_ms": 14.654503571428572,
+            "median_ms": 14.59825,
+            "p95_ms": 15.8661,
+            "p99_ms": 16.478,
+            "min_ms": 12.6399,
+            "max_ms": 16.8759,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.7142857142857143
+          },
+          "GPU/Total": {
+            "count": 140,
+            "mean_ms": 13.729978571428571,
+            "median_ms": 13.651,
+            "p95_ms": 14.682,
+            "p99_ms": 15.137,
+            "min_ms": 12.597,
+            "max_ms": 15.189,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          }
+        }
+      },
+      "page_trace": {
+        "frames": 141,
+        "metrics": {
+          "FrameTime": {
+            "count": 141,
+            "mean_ms": 14.335702836879433,
+            "median_ms": 14.1541,
+            "p95_ms": 15.1411,
+            "p99_ms": 15.8214,
+            "min_ms": 12.3667,
+            "max_ms": 46.6509,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 0.7092198581560284
+          },
+          "GameThreadTime": {
+            "count": 141,
+            "mean_ms": 2.165585815602837,
+            "median_ms": 2.1112,
+            "p95_ms": 2.8281,
+            "p99_ms": 3.2147,
+            "min_ms": 1.7729,
+            "max_ms": 3.3711,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 141,
+            "mean_ms": 14.05116170212766,
+            "median_ms": 13.8244,
+            "p95_ms": 14.9313,
+            "p99_ms": 15.5233,
+            "min_ms": 12.1518,
+            "max_ms": 46.3579,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 0.7092198581560284
+          },
+          "GPUTime": {
+            "count": 141,
+            "mean_ms": 15.102366666666667,
+            "median_ms": 14.5847,
+            "p95_ms": 16.0281,
+            "p99_ms": 47.688,
+            "min_ms": 12.9914,
+            "max_ms": 47.8618,
+            "over_16_67_ms_count": 2,
+            "over_33_33_ms_count": 2,
+            "over_budget_percent": 1.4184397163120568
+          },
+          "GPU/Total": {
+            "count": 141,
+            "mean_ms": 13.806695035460992,
+            "median_ms": 13.532,
+            "p95_ms": 14.59,
+            "p99_ms": 15.209,
+            "min_ms": 12.355,
+            "max_ms": 47.075,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 0.7092198581560284
+          }
+        }
+      },
+      "page_settings": {
+        "frames": 139,
+        "metrics": {
+          "FrameTime": {
+            "count": 139,
+            "mean_ms": 14.312322302158274,
+            "median_ms": 13.9984,
+            "p95_ms": 15.5633,
+            "p99_ms": 16.158,
+            "min_ms": 11.8771,
+            "max_ms": 44.3964,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 0.7194244604316546
+          },
+          "GameThreadTime": {
+            "count": 139,
+            "mean_ms": 2.2252172661870504,
+            "median_ms": 2.1626,
+            "p95_ms": 2.8463,
+            "p99_ms": 3.694,
+            "min_ms": 1.7883,
+            "max_ms": 4.2469,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 139,
+            "mean_ms": 14.038143884892087,
+            "median_ms": 13.7414,
+            "p95_ms": 15.0822,
+            "p99_ms": 15.8434,
+            "min_ms": 11.6749,
+            "max_ms": 44.1283,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 0.7194244604316546
+          },
+          "GPUTime": {
+            "count": 139,
+            "mean_ms": 14.83618201438849,
+            "median_ms": 14.5104,
+            "p95_ms": 16.0805,
+            "p99_ms": 17.0044,
+            "min_ms": 13.1993,
+            "max_ms": 45.9659,
+            "over_16_67_ms_count": 3,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 2.158273381294964
+          },
+          "GPU/Total": {
+            "count": 139,
+            "mean_ms": 13.798798561151079,
+            "median_ms": 13.514,
+            "p95_ms": 14.689,
+            "p99_ms": 15.311,
+            "min_ms": 12.514,
+            "max_ms": 44.368,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 1,
+            "over_budget_percent": 0.7194244604316546
+          }
+        }
+      },
+      "page_overview": {
+        "frames": 282,
+        "metrics": {
+          "FrameTime": {
+            "count": 282,
+            "mean_ms": 14.199983687943263,
+            "median_ms": 14.179400000000001,
+            "p95_ms": 15.425,
+            "p99_ms": 16.3059,
+            "min_ms": 12.0272,
+            "max_ms": 22.454,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.3546099290780142
+          },
+          "GameThreadTime": {
+            "count": 282,
+            "mean_ms": 2.1396893617021275,
+            "median_ms": 2.07905,
+            "p95_ms": 2.6868,
+            "p99_ms": 3.3457,
+            "min_ms": 1.7347,
+            "max_ms": 3.5778,
+            "over_16_67_ms_count": 0,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.0
+          },
+          "RenderThreadTime": {
+            "count": 282,
+            "mean_ms": 13.92428829787234,
+            "median_ms": 13.8796,
+            "p95_ms": 15.1125,
+            "p99_ms": 16.0067,
+            "min_ms": 11.7952,
+            "max_ms": 21.9875,
+            "over_16_67_ms_count": 1,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.3546099290780142
+          },
+          "GPUTime": {
+            "count": 282,
+            "mean_ms": 14.722209929078014,
+            "median_ms": 14.6064,
+            "p95_ms": 16.0327,
+            "p99_ms": 16.5072,
+            "min_ms": 12.3144,
+            "max_ms": 20.3862,
+            "over_16_67_ms_count": 2,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.7092198581560284
+          },
+          "GPU/Total": {
+            "count": 282,
+            "mean_ms": 13.699021276595744,
+            "median_ms": 13.608,
+            "p95_ms": 14.586,
+            "p99_ms": 15.509,
+            "min_ms": 12.433,
+            "max_ms": 19.263,
+            "over_16_67_ms_count": 2,
+            "over_33_33_ms_count": 0,
+            "over_budget_percent": 0.7092198581560284
+          }
+        }
+      }
+    },
+    "duration_from_frame_times_seconds": 90.0062535,
+    "units": "milliseconds",
+    "thresholds_ms": [
+      16.666666666666668,
+      33.333333333333336
+    ],
+    "sixty_fps_assessment": {
+      "p99_within_budget": false,
+      "all_frames_within_budget": false,
+      "note": "Uncapped render headroom only. Not a claim of Pixel Streaming delivery or input latency."
+    }
+  }
+}

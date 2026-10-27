@@ -15,6 +15,7 @@
 #include "GameFramework/PlayerController.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
+#include "ProfilingDebugging/CpuProfilerTrace.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 
@@ -1111,6 +1112,7 @@ bool FGHSTwinSceneData::Pick(APlayerController* Controller,const FVector2D& Scre
 
 bool FGHSTwinSceneData::PickRay(const FVector& Origin,const FVector& Direction,FString& OutId)
 {
+    TRACE_CPUPROFILER_EVENT_SCOPE(GHSTwinScene_PickRay);
     OutId.Empty();
     double Closest=TNumericLimits<double>::Max();
     const FImpl::FRecord* Selected=nullptr;

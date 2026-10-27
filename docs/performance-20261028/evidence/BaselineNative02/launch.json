@@ -1,0 +1,39 @@
+{
+  "label": "BaselineNative02",
+  "variant": "baseline",
+  "pid": 54360,
+  "processStartUtc": "2026-10-27T18:24:16.8008292Z",
+  "project": "D:\\UEPro\\Test\\Saved\\Performance20261028\\IsolatedProject\\Test.uproject",
+  "engine": "D:/UE/UE_5.4/Engine/Binaries/Win64/UnrealEditor.exe",
+  "arguments": [
+    "D:\\UEPro\\Test\\Saved\\Performance20261028\\IsolatedProject\\Test.uproject",
+    "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
+    "-game",
+    "-RenderOffscreen",
+    "-Windowed",
+    "-ForceRes",
+    "-ResX=1920",
+    "-ResY=1080",
+    "-Unattended",
+    "-NoVSync",
+    "-TwinPerf=BaselineNative02",
+    "-TwinPerfVariant=baseline",
+    "-TwinPerfWarmup=30",
+    "-TwinPerfDuration=90",
+    "-TwinPerfOutput=D:\\UEPro\\Test\\Saved\\Performance20261028",
+    "-abslog=D:\\UEPro\\Test\\Saved\\Performance20261028/BaselineNative02.log"
+  ],
+  "otherEditorProcesses": [
+    {
+      "Id": 30652,
+      "StartTime": "2026-10-26T16:59:00.6722776+08:00"
+    }
+  ],
+  "trace": false,
+  "diagnosticTAA": false,
+  "backgroundCondition": "user-editor-minimized-figma-static",
+  "note": "Owned offscreen Development process; user editor preserved. No scene or configuration saves.",
+  "sourceMapSha256": "1A28E3301D524BBB9AA0A32556E684D1468D4C7F095544E8A3430599E5A5AA01",
+  "testModuleSha256": "1C2F656FF5ACC0DF8DB08CB6A02B2D9A457741BDE4A2C9D190F4FFFD13226688",
+  "sourceCommit": "0ec3b9fd59befc7d9c060248cab5fb8debfcaf05"
+}
