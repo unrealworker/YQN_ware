@@ -2,7 +2,7 @@
 const { webcrypto } = require('node:crypto');
 const test = require('node:test'); const assert = require('node:assert/strict'); const fs = require('node:fs'); const path = require('node:path'); const vm = require('node:vm');
 // Browser boundary harness: simulate the official library's public events, real page policy runs unchanged.
-async function page(initialStorage = {}) {
+async function page(initialStorage = {}, fetchHandler) {
   const elements = new Map(), store = new Map(Object.entries(initialStorage)), timers = new Map(); let timerId = 0, streaming, videoFrame, now = 100, created = 0;
   function events(object) { const listeners = new Map(); return Object.assign(object, { addEventListener(type, fn) { if (!listeners.has(type)) listeners.set(type, []); listeners.get(type).push(fn); }, fire(type, fields = {}) { const e = { type, button: 0, buttons: 1, clientX: 900, clientY: 550, shiftKey: false, defaultPrevented: false, stopped: false, preventDefault() { this.defaultPrevented = true; }, stopImmediatePropagation() { this.stopped = true; }, ...fields }; for (const fn of listeners.get(type) || []) { fn(e); if (e.stopped) break; } return e; } }); }
   const video = events({ videoWidth: 1920, videoHeight: 1080, readyState: 3, paused: false, dataset: {}, play: () => Promise.resolve(), getBoundingClientRect: () => ({ left: 100, top: 50, width: 1600, height: 1000 }), requestVideoFrameCallback(fn) { videoFrame = fn; } });
@@ -13,7 +13,7 @@ async function page(initialStorage = {}) {
     addEventListener(name, cb) { this.events.set(name, cb); } connect() { this.connected++; } reconnect() { this.connected++; } disconnect() { this.closed++; } play() {}
     emitUIInteraction(payload) { this.ui.push(JSON.parse(JSON.stringify(payload))); return true; } addResponseEventListener(name, cb) { this.responses.set(name, cb); }
   }
-  const sandbox = { window: events({ crypto: webcrypto, 'lib-pixelstreamingfrontend': { Config, PixelStreaming, Flags: { StartVideoMuted: 'StartVideoMuted', WaitForStreamer: 'WaitForStreamer', KeyboardInput: 'KeyboardInput' }, NumericParameters: { MaxReconnectAttempts: 'MaxReconnectAttempts' } } }), document: events({ body: element('body'), getElementById: element, querySelector: element, querySelectorAll: () => Array.from({length: 5}, (_, i) => element('stage-' + (i + 1))), createElement: tag => element(tag + ++created) }), sessionStorage: { getItem: k => store.get(k) || null, setItem: (k, v) => store.set(k, v), removeItem: k => store.delete(k) }, location: { protocol: 'http:', host: 'test:8080', reload() {} }, performance: { now: () => now }, MutationObserver: class { observe() {} }, setTimeout: (cb, ms) => { timers.set(++timerId, { cb, ms }); return timerId; }, clearTimeout: id => timers.delete(id), fetch: async () => ({ ok: true, status: 200, json: async () => ({ token: 'token123', mode: 'shared', fps: 60, minBitrateMbps: 8, maxBitrateMbps: 35 }) }), console };
+  const sandbox = { window: events({ crypto: webcrypto, 'lib-pixelstreamingfrontend': { Config, PixelStreaming, Flags: { StartVideoMuted: 'StartVideoMuted', WaitForStreamer: 'WaitForStreamer', KeyboardInput: 'KeyboardInput' }, NumericParameters: { MaxReconnectAttempts: 'MaxReconnectAttempts' } } }), document: events({ body: element('body'), getElementById: element, querySelector: element, querySelectorAll: () => Array.from({length: 5}, (_, i) => element('stage-' + (i + 1))), createElement: tag => element(tag + ++created) }), sessionStorage: { getItem: k => store.get(k) || null, setItem: (k, v) => store.set(k, v), removeItem: k => store.delete(k) }, location: { protocol: 'http:', host: 'test:8080', reload() {} }, performance: { now: () => now }, MutationObserver: class { observe() {} }, setTimeout: (cb, ms) => { timers.set(++timerId, { cb, ms }); return timerId; }, clearTimeout: id => timers.delete(id), fetch: fetchHandler || (async () => ({ ok: true, status: 200, json: async () => ({ token: 'token123', mode: 'shared', fps: 60, minBitrateMbps: 8, maxBitrateMbps: 35 }) })), console };
   const searchPath = path.join(__dirname, '../player/scene-search.js'); if (fs.existsSync(searchPath)) vm.runInNewContext(fs.readFileSync(searchPath, 'utf8'), sandbox);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../player/app.js'), 'utf8'), sandbox); await new Promise(r => setImmediate(r));
   return { elements, store, timers, window: sandbox.window, document: sandbox.document, video, get stream() { return streaming; }, frame() { videoFrame(); }, stats: () => sandbox.window.ghsStreamingStats, advance(ms) { now += ms; }, reply(fields = {}) { const state = { type: 'ghs.sceneSearch', clientId: streaming.ui.at(-1)?.clientId, requestId: streaming.ui.at(-1)?.requestId || 0, viewport: { width: 1920, height: 1080 }, rect: { x: 1100, y: 90, width: 420, height: 48 }, visible: true, open: false, query: '', results: [], total: 0, selectedIndex: 0, ...fields }; for (const cb of streaming.responses.values()) cb(JSON.stringify(state)); } };
@@ -217,4 +217,32 @@ test('ArrowDown at the loaded-page boundary requests more and a new query reject
   input.value = '叉车'; input.fire('input'); assert.equal(p.stream.ui.at(-1).offset, 0);
   p.reply({ ...stale, open: true, offset: 1, hasMore: false, total: 2, results: [{ id: 'b', title: 'AGV-02' }] }); assert.equal(p.elements.get('scene-search-list').children.length, 0); assert.equal(input.value, '叉车');
   p.reply({ open: true, query: '叉车', offset: 0, hasMore: false, total: 1, results: [{ id: 'fork', title: '叉车' }] }); assert.equal(p.elements.get('scene-search-list').children.length, 1);
+});
+
+test('public access form gates connection and never persists the access code', async () => {
+  const requests = [];
+  const p = await page({}, async (_url, opts) => {
+    const body = JSON.parse(opts.body); requests.push(body);
+    return body.accessCode === 'test-only-code' ? { ok: true, status: 200, json: async () => ({ token: 'access-granted', mode: 'independent', fps: 60, minBitrateMbps: 8, maxBitrateMbps: 35, maxViewers: 10 }) } : { ok: false, status: 401, json: async () => ({ accessRequired: true }) };
+  });
+  assert.equal(p.stream, undefined); assert.equal(p.elements.get('access-form').hidden, false);
+  assert.equal([...p.timers.values()].some(t => t.ms === 120000), false);
+  p.elements.get('access-code').value = 'test-only-code'; p.elements.get('access-name').value = '张工';
+  await p.elements.get('access-form').onsubmit({ preventDefault() {} });
+  assert.equal(p.stream.connected, 1); assert.equal(p.elements.get('access-form').hidden, true);
+  assert.equal(p.elements.get('access-code').value, ''); assert.equal(requests[1].displayName, '张工');
+  assert.equal([...p.store.values()].includes('test-only-code'), false);
+  p.stream.events.get('playerCount')({ data: { count: 10 } }); assert.equal(p.elements.get('viewer-count').textContent, '10 / 10');
+});
+test('administrator disconnect stops playback and all retries until explicit fresh entry', async () => {
+  const p = await page(); p.frame(); p.stream.protocol.get('ghsKicked')(JSON.stringify({ message: '管理员断开' }));
+  assert.equal(p.store.get('ghsKicked'), 'true'); assert.equal(p.elements.get('.card').dataset.state, 'exited');
+  assert.equal([...p.timers.values()].some(t => t.ms === 120000 || t.ms === 2000), false);
+  const refreshed = await page(Object.fromEntries(p.store)); assert.equal(refreshed.stream, undefined);
+  refreshed.elements.get('retry').onclick(); assert.equal(refreshed.store.size, 0);
+});
+test('full capacity is a terminal waiting state without automatic retry storm', async () => {
+  const p = await page(); p.stream.onClose({ detail: { code: 4004 } });
+  assert.equal(p.elements.get('.card').dataset.state, 'waiting'); assert.equal(p.elements.get('retry').hidden, false);
+  assert.equal([...p.timers.values()].some(t => t.ms === 2000), false);
 });

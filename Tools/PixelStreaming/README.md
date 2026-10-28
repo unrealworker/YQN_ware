@@ -1,6 +1,6 @@
-# GHS LAN Pixel Streaming
+# GHS Pixel Streaming
 
-UE5.4 native PixelStreaming + pinned Epic frontend + local Node signalling/admission + Windows Forms launcher. Deployment output: `../../Deployment/GHSPixelStreaming`.
+UE5.4 native PixelStreaming + pinned Epic frontend + Node signalling/admission + Windows Forms launcher. Supports LAN and configurable public HTTPS/STUN/TURN deployment. Legacy output: `../../Deployment/GHSPixelStreaming`; portable public delivery: `../../Package_PublicStreaming_20261028`.
 
 ## Build
 
@@ -11,11 +11,17 @@ UE5.4 native PixelStreaming + pinned Epic frontend + local Node signalling/admis
 
 Use `Deployment/GHSPixelStreaming/使用说明.md` for operation. Configuration and protocol contract are documented in `server/README.md` and `launcher/README.md`. Browser evidence is under `Saved/PixelStreaming/Browser/20261021`; packaged build and smoke evidence is under `Saved/PixelStreaming/Packaging`.
 
+For a portable public package, set `-Configuration Shipping -ArchiveDirectory <delivery>/App` on the packaging script, build the launcher, then run `node Tools/PixelStreaming/assemble-public.js --output <delivery> --launcher <launcher-output>`. An optional `-BuildProjectFile` supports an isolated build checkout while preserving the open editor. The assembler verifies current UI/data hashes, copies Node and the launcher, adds configuration and Chinese operation notes, and records a SHA256 manifest. It preserves any existing destination launcher configuration.
+
+The public delivery preset is independent scenes, 1920×1080, 30 FPS target, 5/12/24 Mbps, admission up to 10, adaptive budgeting off. It starts in LAN mode until a real public URL, access code and optional TLS/STUN/TURN are supplied. See `deployment/部署说明.md` and `deployment/验收记录.md`. Admission capacity is not a guarantee of ten simultaneous GPU-rendered scenes.
+
 ## Ownership
 
 The launcher creates Node suspended, assigns a kill-on-close Windows Job, then resumes it. A random control token is passed only in the child environment. Management HTTP binds only to loopback and requires the token. Public player traffic cannot invoke launch/stop or access configuration.
 
-One shared UE starts with service; independent instances start on viewer admission. Admission and release serialize through one queue. A disconnected session has a generation-checked grace timer; a restored socket cannot be removed by an obsolete queued cleanup. Evicted sessions never auto-rejoin. The fourth session replaces the oldest admitted session, not the most recently refreshed one.
+One shared UE starts with service; independent instances start on viewer admission. Admission and release serialize through one queue. A disconnected session has a generation-checked grace timer; a restored socket cannot be removed by an obsolete queued cleanup. The configured limit is 1–10, default 10; excess sessions are rejected without evicting existing viewers. Admin disconnect revokes the selected session and stops automatic reconnection; the user may explicitly authenticate again. The launcher shows connection identity, source, duration and state.
+
+Public player admission requires an access code and a server-issued session token. UE signal sockets bind to loopback, authenticate a per-instance token and validate identity before receiving ICE credentials. Admin control is loopback-only with a separate random bearer token. Public configuration supports native TLS or an explicitly trusted local reverse proxy; only the latter consumes proxy headers. Firewall helpers use program/path-specific rules and do not expose admin or UE signal ports.
 
 ## Quality and resource budget
 
@@ -27,7 +33,7 @@ The launcher writes `qualityProfile` and `adaptiveResourceBudget` alongside the 
 | 清晰优先 | `clear` | 12 / 35 / 60 |
 | 超清细节 | `ultra` | 20 / 50 / 90 |
 
-Loading a legacy config without a quality profile upgrades the old shipped 8 / 20 / 35 defaults to `clear`. Other legacy bitrate values are retained as `custom`. An explicit `balanced` selection survives reopening. Selecting a profile does not change the configured resolution or target FPS. Port conflict checks, the three-session FIFO limit, and owned-process cleanup on Stop or launcher close are unchanged.
+Loading a legacy config without a quality profile upgrades the old shipped 8 / 20 / 35 defaults to `clear`. Other legacy bitrate values are retained as `custom`. An explicit `balanced` selection survives reopening. Selecting a profile does not change the configured resolution or target FPS. Port conflict checks and owned-process cleanup on Stop or launcher close remain in place. The former three-viewer FIFO policy has been replaced by configurable admission without eviction.
 
 With resource budgeting enabled, independent mode starts each instance at configured FPS divided by active instance count: at the default target, 60 / 30 / 20 FPS for one / two / three instances. It then probes a common FPS budget using each instance's actual FPS feedback. Stable instances permit gradual increases; persistently low achieved FPS causes a reduction and a hold period before probing again. GPU frame times can include waits caused by contention between instances, so the controller does not add those timings to estimate total GPU capacity. When only one instance remains, the configured target is restored immediately (60 FPS by default). This is workload control rather than hard GPU partitioning; equal targets do not reserve fixed GPU percentages or guarantee equal observed FPS. Disabling budgeting keeps the configured target for each instance.
 

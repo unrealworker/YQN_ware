@@ -1,7 +1,11 @@
 'use strict';
 const fs = require('node:fs'); const path = require('node:path'); const crypto = require('node:crypto');
 const { execFileSync } = require('node:child_process');
-const root = __dirname; const target = path.resolve(root, '../../Deployment/GHSPixelStreaming');
+const root = __dirname;
+const outputFlag = process.argv.indexOf('--output');
+if (outputFlag >= 0 && !process.argv[outputFlag + 1]) throw Error('--output requires a directory');
+const target = outputFlag >= 0 ? path.resolve(process.argv[outputFlag + 1]) : path.resolve(root, '../../Deployment/GHSPixelStreaming');
+if (target === root || target.startsWith(root + path.sep)) throw Error('输出目录不能位于像素流源码中');
 const pins = JSON.parse(fs.readFileSync(path.join(root, 'dependency-pins.json'), 'utf8'));
 for (const pin of pins.packages) {
   const digest = 'sha512-' + crypto.createHash('sha512').update(fs.readFileSync(path.join(root, 'vendor', pin.archive))).digest('base64');

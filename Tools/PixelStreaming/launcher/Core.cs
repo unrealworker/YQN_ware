@@ -23,7 +23,46 @@ namespace Ghs.PixelStreaming
         public int maxBitrateMbps { get; set; }
         public string qualityProfile { get; set; }
         public bool adaptiveResourceBudget { get; set; }
-        public LauncherConfig() { executablePath="App/Windows/Test/Binaries/Win64/TestGame.exe"; httpPort=8080; streamerPort=8888; width=1920; height=1080; mode="shared"; fps=60; adaptiveResourceBudget=true; ApplyQualityProfile("clear"); }
+        public int maxViewers { get; set; }
+        public string networkMode { get; set; }
+        public string publicUrl { get; set; }
+        public string accessCode { get; set; }
+        public string tlsCertPath { get; set; }
+        public string tlsKeyPath { get; set; }
+        public bool trustProxy { get; set; }
+        public string stunUrl { get; set; }
+        public string turnUrl { get; set; }
+        public string turnUsername { get; set; }
+        public string turnPassword { get; set; }
+        public LauncherConfig() { executablePath="App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe"; httpPort=8080; streamerPort=8888; width=1920; height=1080; mode="shared"; fps=60; maxViewers=10; networkMode="lan"; publicUrl=accessCode=tlsCertPath=tlsKeyPath=stunUrl=turnUrl=turnUsername=turnPassword=""; adaptiveResourceBudget=true; ApplyQualityProfile("clear"); }
+        public LauncherConfig Clone() { JavaScriptSerializer json=new JavaScriptSerializer(); return json.Deserialize<LauncherConfig>(json.Serialize(this)); }
+        public string ResolveLocalFile(string root,string file) { return string.IsNullOrWhiteSpace(file)?"":Path.GetFullPath(Path.Combine(root,file)); }
+        public void ValidateNetwork(string root)
+        {
+            if(maxViewers<1 || maxViewers>10) throw new ArgumentException("在线人数上限必须为 1–10。");
+            if(networkMode!="lan" && networkMode!="public") throw new ArgumentException("请选择局域网或公网访问。");
+            if(trustProxy && networkMode!="public") throw new ArgumentException("本机 HTTPS 反向代理仅适用于公网模式；局域网访问请关闭此选项。");
+            foreach(string value in new[]{publicUrl,accessCode,tlsCertPath,tlsKeyPath,stunUrl,turnUrl,turnUsername,turnPassword}) if(value==null || value.Length>4096 || value.IndexOfAny(new[]{'\r','\n','\0'})>=0) throw new ArgumentException("网络配置不能包含换行、空字符或超过 4096 个字符。");
+            Uri url;
+            if(!string.IsNullOrEmpty(publicUrl) && (!Uri.TryCreate(publicUrl,UriKind.Absolute,out url) || (url.Scheme!="https" && url.Scheme!="http") || !string.IsNullOrEmpty(url.UserInfo) || (url.AbsolutePath!="/" && url.AbsolutePath!="") || !string.IsNullOrEmpty(url.Query) || !string.IsNullOrEmpty(url.Fragment))) throw new ArgumentException("公网地址须为完整 HTTP / HTTPS 地址，不含路径、账号、查询或片段。");
+            if(networkMode=="public" && (string.IsNullOrWhiteSpace(publicUrl) || string.IsNullOrWhiteSpace(accessCode) || accessCode.Length<12)) throw new ArgumentException("公网模式需要公网访问地址和至少 12 位访问码。");
+            if(string.IsNullOrWhiteSpace(tlsCertPath)!=string.IsNullOrWhiteSpace(tlsKeyPath)) throw new ArgumentException("HTTPS 证书与私钥需要成对选择。");
+            if(trustProxy && !string.IsNullOrWhiteSpace(tlsCertPath)) throw new ArgumentException("本机反向代理与原生 HTTPS 证书不可同时启用。");
+            foreach(string file in new[]{tlsCertPath,tlsKeyPath}) if(!string.IsNullOrWhiteSpace(file) && !File.Exists(ResolveLocalFile(root,file))) throw new ArgumentException("找不到 HTTPS 证书或私钥文件。");
+            if(networkMode=="public" && publicUrl.StartsWith("https://",StringComparison.OrdinalIgnoreCase) && !trustProxy && string.IsNullOrWhiteSpace(tlsCertPath)) throw new ArgumentException("HTTPS 地址需要选择证书和私钥，或启用本机 HTTPS 反向代理。");
+            if(networkMode=="public" && publicUrl.StartsWith("http://",StringComparison.OrdinalIgnoreCase) && (!string.IsNullOrWhiteSpace(tlsCertPath) || trustProxy)) throw new ArgumentException("已启用 HTTPS 或代理时，请填写 HTTPS 公网地址。");
+            ValidateIce(stunUrl,new[]{"stun:","stuns:"},"STUN"); ValidateIce(turnUrl,new[]{"turn:","turns:"},"TURN");
+            if(!string.IsNullOrWhiteSpace(turnUrl) && (string.IsNullOrWhiteSpace(turnUsername) || string.IsNullOrWhiteSpace(turnPassword))) throw new ArgumentException("TURN 中继需要填写用户名和密码。");
+            if(string.IsNullOrWhiteSpace(turnUrl) && (!string.IsNullOrEmpty(turnUsername) || !string.IsNullOrEmpty(turnPassword))) throw new ArgumentException("已填写 TURN 账号，请同时填写 TURN 服务地址。");
+        }
+        private static void ValidateIce(string value,string[] schemes,string label)
+        {
+            if(string.IsNullOrWhiteSpace(value)) return;
+            bool valid=false; foreach(string scheme in schemes) if(value.StartsWith(scheme,StringComparison.Ordinal) && value.Length>scheme.Length) valid=true;
+            if(!valid || !System.Text.RegularExpressions.Regex.IsMatch(value,@"^(?:stuns?|turns?):(?:\[[a-fA-F0-9:]+\]|[a-zA-Z0-9.-]+)(?::\d{1,5})?(?:\?transport=(?:udp|tcp))?$")) throw new ArgumentException(label+" 地址格式无效，请使用协议:主机:端口，可附加 ?transport=udp 或 tcp。");
+            System.Text.RegularExpressions.Match port=System.Text.RegularExpressions.Regex.Match(value,@":(\d+)(?:\?|$)");
+            if(port.Success && (int.Parse(port.Groups[1].Value)<1 || int.Parse(port.Groups[1].Value)>65535)) throw new ArgumentException(label+" 端口必须是 1–65535。");
+        }
         public void ApplyQualityProfile(string profile)
         {
             switch(profile) {
@@ -39,7 +78,8 @@ namespace Ghs.PixelStreaming
         public void Validate(string root, bool checkPorts)
         {
             if(string.IsNullOrWhiteSpace(executablePath) || !File.Exists(ResolveExecutable(root)) || !string.Equals(Path.GetExtension(executablePath),".exe",StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("请选择存在的仓库程序（.exe）。");
-            if(httpPort<1024 || httpPort>65535 || streamerPort<1024 || streamerPort>65535) throw new ArgumentException("端口范围必须为 1024–65535。");
+            if(httpPort<1 || httpPort>65535 || streamerPort<1 || streamerPort>65535) throw new ArgumentException("端口范围必须为 1–65535。");
+            ValidateNetwork(root);
             if(httpPort==streamerPort) throw new ArgumentException("网页端口与串流端口不能相同。");
             if(width<320 || width>7680 || height<320 || height>7680) throw new ArgumentException("分辨率范围：宽、高均为 320–7680。");
             if(mode!="shared" && mode!="independent") throw new ArgumentException("请选择共享或每人独立模式。");

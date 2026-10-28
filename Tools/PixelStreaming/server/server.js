@@ -7,6 +7,7 @@ async function main() {
   const configPath = path.resolve(value('--config')); const controlPath = path.resolve(value('--control-file'));
   const config = JSON.parse(fs.readFileSync(configPath, 'utf8').replace(/^\uFEFF/, ''));
   if (config.executablePath && !path.isAbsolute(config.executablePath)) config.executablePath = path.resolve(path.dirname(configPath), config.executablePath);
+  for (const key of ['tlsCertPath', 'tlsKeyPath']) if (config[key] && !path.isAbsolute(config[key])) config[key] = path.resolve(path.dirname(configPath), config[key]);
   const service = createService(config, { controlRoot: path.join(path.dirname(controlPath), 'instances'), onLog: line => console.log(line), onStopped: () => shutdown(0) });
   let stopping = false;
   const shutdown = async code => { if (stopping) return; stopping = true; await service.stop(); try { fs.unlinkSync(controlPath); } catch {} process.exit(code); };

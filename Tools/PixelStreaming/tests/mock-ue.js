@@ -1,6 +1,6 @@
 'use strict';
 const WebSocket = require('ws');
-const ws = new WebSocket(`ws://127.0.0.1:${process.argv[2]}`);
+const ws = new WebSocket(process.argv[2], { origin: 'http://127.0.0.1' });
 ws.on('message', bytes => {
   const m = JSON.parse(bytes);
   if (m.type === 'identify') ws.send(JSON.stringify({ type: 'endpointId', id: process.argv[3] }));

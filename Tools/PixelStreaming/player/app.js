@@ -3,7 +3,7 @@
   'use strict';
   const { Config, PixelStreaming, Flags, NumericParameters } = window['lib-pixelstreamingfrontend'];
   const $ = id => document.getElementById(id);
-  let stream, sceneSearch, terminal = false, firstFrame = false, stage = 0, deadline, elapsedTimer, elapsedStart, sessionToken, reconnectTimer, reconnectAttempts = 0;
+  let stream, sceneSearch, terminal = false, firstFrame = false, stage = 0, deadline, elapsedTimer, elapsedStart, sessionToken, maxViewers = 10, reconnectTimer, reconnectAttempts = 0;
   const initialTime = performance.now();
   const metrics = { state: 'connecting', firstFrame: false, width: 0, height: 0, fps: 0, bitrateMbps: 0, rttMs: 0, decodedFrames: 0, mode: null, instanceId: null };
   let pan = null;
@@ -76,7 +76,7 @@
   function armDeadline() {
     clearTimeout(deadline); clearTimeout(elapsedTimer); elapsedStart = performance.now();
     const tick = () => { $('elapsed-time').textContent = `已等待 ${String(Math.floor((performance.now() - elapsedStart) / 1000)).padStart(2, '0')} 秒`; if (!terminal && !firstFrame) elapsedTimer = setTimeout(tick, 1000); }; tick();
-    deadline = setTimeout(() => halt('连接超时', `视频连接等待超过 120 秒，尚未收到首帧（停留阶段 ${Math.max(1, stage)} / 5）。请检查启动器日志、UE 进程和内网连接，再点击重新进入。`), 120000);
+    deadline = setTimeout(() => halt('连接超时', `视频连接等待超过 120 秒，尚未收到首帧（停留阶段 ${Math.max(1, stage)} / 5）。请检查启动器日志、UE 进程和网络连接，再点击重新进入。`), 120000);
   }
   function markFrame(video) {
     if (terminal || firstFrame || video.videoWidth === 0 || video.readyState < 2) return;
@@ -92,7 +92,7 @@
     if (video.requestVideoFrameCallback) video.requestVideoFrameCallback(() => markFrame(video));
   }
   new MutationObserver(watchVideo).observe($('video-root'), { childList: true, subtree: true });
-  $('retry').onclick = () => { sessionStorage.removeItem('ghsSession'); sessionStorage.removeItem('ghsEvicted'); sessionStorage.removeItem('ghsReplaced'); location.reload(); };
+  $('retry').onclick = () => { sessionStorage.removeItem('ghsSession'); sessionStorage.removeItem('ghsEvicted'); sessionStorage.removeItem('ghsReplaced'); sessionStorage.removeItem('ghsKicked'); location.reload(); };
   $('fullscreen').onclick = () => { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen().catch(() => {}); };
   $('audio-toggle').onclick = () => {
     if (!stream || terminal) return;
@@ -109,15 +109,28 @@
     try { video.muted = true; await video.play(); stream?.play(); watchVideo(); }
     catch { autoplayBlocked(); }
   };
-  async function start() {
+  function requestAccess(message) {
+    clearTimeout(deadline); clearTimeout(elapsedTimer);
+    $('stage-title').textContent = '安全访问仓库'; $('stage-message').textContent = message || '输入管理员提供的访问码后进入。';
+    $('access-form').hidden = false; $('retry').hidden = true; $('access-error').textContent = ''; $('access-code').focus();
+    metrics.state = 'authentication'; document.querySelector('.card').dataset.state = 'authentication'; $('connection-state').textContent = '等待访问验证';
+  }
+  $('access-form').onsubmit = async event => {
+    event.preventDefault(); $('access-submit').disabled = true; $('access-error').textContent = '';
+    try { await start($('access-code').value); } catch (e) { requestAccess(); $('access-error').textContent = e.message; }
+    finally { $('access-code').value = ''; $('access-submit').disabled = false; }
+  };
+  async function start(accessCode) {
+    if (sessionStorage.getItem('ghsKicked') === 'true') return halt('管理员已断开连接', '本页已停止自动重连。需要再次访问时，请主动点击“重新进入”。', false, 'exited');
     if (sessionStorage.getItem('ghsEvicted') === 'true') return halt('连接已被替换', '新访问者已进入，本标签页已停止自动重连。需要再次访问时，请主动点击“重新进入”。', true);
     if (sessionStorage.getItem('ghsReplaced') === 'true') return halt('已在其他标签页连接', '同一会话已在其他标签页连接，本页已停止自动重连。点击“重新进入”可申请独立名额。', false, 'exited');
     armDeadline();
     progress(1, '正在连接仓库', '正在获取访问会话，请稍候。');
-    let response = await fetch('/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: sessionStorage.getItem('ghsSession') || undefined }) });
-    if (response.status === 409) { sessionStorage.removeItem('ghsSession'); response = await fetch('/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' }); }
-    const session = await response.json(); if (!response.ok) throw Error(session.error || '无法获取访问会话');
-    if (session.evicted) return halt('连接已被替换', session.message, true);
+    let response = await fetch('/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: sessionStorage.getItem('ghsSession') || undefined, accessCode, displayName: $('access-name').value }) });
+    if (response.status === 409) { sessionStorage.removeItem('ghsSession'); response = await fetch('/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ accessCode, displayName: $('access-name').value }) }); }
+    const session = await response.json(); if (response.status === 401) return requestAccess(accessCode ? '访问码不正确，请重新输入。' : undefined); if (!response.ok) throw Error(session.error || '无法获取访问会话');
+    if (session.evicted) { sessionStorage.setItem('ghsKicked', 'true'); return halt('管理员已断开连接', session.message, false, 'exited'); }
+    $('access-form').hidden = true; maxViewers = session.maxViewers || 10;
     sessionToken = session.token; sessionStorage.setItem('ghsSession', sessionToken); metrics.mode = session.mode; $('stat-mode').textContent = session.mode === 'shared' ? '共享场景' : '独立场景';
     const wsUrl = `${location.protocol === 'https:' ? 'wss:' : 'ws:'}//${location.host}/ws?token=${encodeURIComponent(sessionToken)}`;
     // Own the reconnect timer so an eviction/replaced-tab message can cancel every queued attempt.
@@ -127,18 +140,22 @@
     const protocol = stream.webSocketController.signallingProtocol;
     protocol.addMessageHandler('ghsAdmission', payload => { const m = JSON.parse(payload); metrics.instanceId = m.instanceId; $('stat-instance').textContent = m.instanceId; progress(1, '已接入服务', '名额已分配，正在等待场景就绪', 'waiting'); });
     protocol.addMessageHandler('ghsStage', payload => { const m = JSON.parse(payload); progress(m.stage === 'streamerReady' ? 2 : 1, m.stage === 'streamerReady' ? '场景已就绪' : '正在启动场景', m.message, m.stage === 'streamerReady' ? 'running' : 'waiting'); });
+    protocol.addMessageHandler('ghsKicked', payload => { sessionStorage.setItem('ghsKicked', 'true'); halt('管理员已断开连接', JSON.parse(payload).message, false, 'exited'); });
+    protocol.addMessageHandler('ghsFull', payload => halt('当前访问名额已满', JSON.parse(payload).message, false, 'waiting'));
     protocol.addMessageHandler('ghsEvicted', payload => halt('连接已被替换', JSON.parse(payload).message, true));
     protocol.addMessageHandler('ghsSessionReplaced', payload => { sessionStorage.setItem('ghsReplaced', 'true'); halt('已在其他标签页连接', JSON.parse(payload).message, false, 'exited'); });
     protocol.addMessageHandler('ghsShutdown', payload => halt('服务已停止', JSON.parse(payload).message, false, 'stopped'));
     protocol.addMessageHandler('ghsInstanceFailed', payload => halt('场景连接失败', JSON.parse(payload).message));
-    stream.addEventListener('webRtcSdp', () => progress(3, '正在协商视频', '已交换视频会话信息，正在建立内网媒体连接'));
+    stream.addEventListener('webRtcSdp', () => progress(3, '正在协商视频', '已交换视频会话信息，正在建立媒体连接'));
     stream.addEventListener('webRtcConnected', () => progress(4, '视频已连接', '媒体连接已建立，等待首帧显示'));
     stream.addEventListener('videoInitialized', watchVideo);
     stream.addEventListener('dataChannelOpen', () => { if (firstFrame && !terminal) sceneSearch.ready(); });
-    stream.addEventListener('playerCount', e => { $('viewer-count').textContent = `${e.data.count} / 3`; metrics.viewerCount = e.data.count; });
+    stream.addEventListener('playerCount', e => { $('viewer-count').textContent = `${e.data.count} / ${maxViewers}`; metrics.viewerCount = e.data.count; });
     stream.addEventListener('webRtcDisconnected', e => { endPan(); sceneSearch?.suspend(); if (terminal) return; const wasPlaying = firstFrame; firstFrame = false; metrics.firstFrame = false; $('loading').hidden = false; document.body.classList.remove('playing'); stage = 0; progress(1, '正在恢复连接', '网络暂时中断，正在恢复当前会话；场景状态暂时保留。', 'waiting'); if (wasPlaying) armDeadline(); });
     stream.webSocketController.onClose.addEventListener('close', e => {
       if (terminal) return;
+      if (e.detail.code === 4003) { sessionStorage.setItem('ghsKicked', 'true'); return halt('管理员已断开连接', '已停止自动重连。请联系管理员，或稍后主动重新进入。', false, 'exited'); }
+      if (e.detail.code === 4004) return halt('当前访问名额已满', `最多 ${maxViewers} 人同时访问，请稍后重新进入。`, false, 'waiting');
       if (e.detail.code === 4001) return halt('连接已被替换', '连接已被新访问者替换，已停止自动重连。', true);
       if (e.detail.code === 4002) { sessionStorage.setItem('ghsReplaced', 'true'); return halt('已在其他标签页连接', '同一会话已在其他标签页连接，本页已停止自动重连。', false, 'exited'); }
       if (e.detail.code === 1001) return halt('服务已停止', '服务连接已关闭，请在启动器确认状态后重新进入。', false, 'stopped');
@@ -146,7 +163,7 @@
       stream.disconnect(); clearTimeout(reconnectTimer);
       reconnectTimer = setTimeout(() => { if (!terminal) { reconnectAttempts++; stream.connect(); } }, 2000);
     });
-    stream.addEventListener('webRtcFailed', () => { if (!terminal) progress(stage, '媒体连接失败', '暂未建立媒体连接，正在等待恢复；请确认客户端和服务端位于同一内网。', 'fault'); });
+    stream.addEventListener('webRtcFailed', () => { if (!terminal) progress(stage, '媒体连接失败', '暂未建立媒体连接，正在等待恢复；请检查公网端口或 TURN 中继配置。', 'fault'); });
     stream.addEventListener('playStreamRejected', () => { const video = $('video-root').querySelector('video'); if (video) { video.muted = true; video.play().catch(autoplayBlocked); } });
     stream.addEventListener('statsReceived', e => {
       const stats = e.data.aggregatedStats; const v = stats.inboundVideoStats; const pair = stats.getActiveCandidatePair(); const video = $('video-root').querySelector('video');

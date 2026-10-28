@@ -24,10 +24,11 @@ namespace Ghs.PixelStreaming
             {
                 using(TcpClient client=listener.AcceptTcpClient()) using(NetworkStream stream=client.GetStream()) using(StreamReader reader=new StreamReader(stream,Encoding.ASCII,false,1024,true))
                 {
-                    string first=reader.ReadLine(); string line; bool authorized=false;
-                    while(!string.IsNullOrEmpty(line=reader.ReadLine())) if(line=="Authorization: Bearer "+token && !string.IsNullOrEmpty(token)) authorized=true;
+                    string first=reader.ReadLine(); string line; bool authorized=false; int contentLength=0;
+                    while(!string.IsNullOrEmpty(line=reader.ReadLine())) { if(line=="Authorization: Bearer "+token && !string.IsNullOrEmpty(token)) authorized=true; if(line.StartsWith("Content-Length:",StringComparison.OrdinalIgnoreCase)) contentLength=int.Parse(line.Substring(15).Trim()); }
+                    if(authorized && first.StartsWith("POST /disconnect ")) { char[] bodyChars=new char[contentLength]; int received=0; while(received<contentLength) { int n=reader.Read(bodyChars,received,contentLength-received); if(n<=0) break; received+=n; } File.WriteAllText(Path.Combine(root,"disconnect.json"),new string(bodyChars,0,received)); }
                     stop=authorized && first.StartsWith("POST /stop ");
-                    string body=authorized?new JavaScriptSerializer().Serialize(new { state="running",message="fixture",mode=config.mode,viewerCount=0,maxViewers=3,instances=new object[0],urls=new[]{"http://127.0.0.1:"+config.httpPort},logs=new[]{"fixture ready"} }):"{}";
+                    string body=authorized?new JavaScriptSerializer().Serialize(new { state="running",message="fixture",mode=config.mode,viewerCount=0,maxViewers=config.maxViewers,viewers=new object[0],instances=new object[0],urls=new[]{"http://127.0.0.1:"+config.httpPort},logs=new[]{"fixture ready"} }):"{}";
                     byte[] payload=Encoding.UTF8.GetBytes(body); byte[] header=Encoding.ASCII.GetBytes("HTTP/1.1 "+(authorized?"200 OK":"401 Unauthorized")+"\r\nContent-Type: application/json\r\nContent-Length: "+payload.Length+"\r\nConnection: close\r\n\r\n"); stream.Write(header,0,header.Length); stream.Write(payload,0,payload.Length);
                 }
             }

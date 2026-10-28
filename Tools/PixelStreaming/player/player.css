@@ -30,3 +30,15 @@ button:disabled,button#scene-search-more:disabled{opacity:1;color:var(--disabled
 .card.error[data-state=exited] .stages [data-state=active]::after{content:'已退出'}
 .card[data-state=fault] #stage-title{color:var(--red)}
 .stages [data-state=done]{color:var(--ink)}
+
+#access-form { margin: 24px 0; text-align: left; }
+#access-form[hidden] { display: none; }
+#access-form label { display: block; margin: 14px 0 8px; font-size: 14px; font-weight: 600; color: #263d5c; }
+#access-form label span { font-weight: 400; font-size: 12px; color: #687c94; }
+#access-form input { box-sizing: border-box; width: 100%; padding: 12px 14px; font: inherit; color: #213753; background: #f6f8fc; border: 1px solid #d9e2ee; border-radius: 8px; outline: none; }
+#access-form input:focus { border-color: #3467ff; box-shadow: 0 0 0 3px #3467ff18; }
+#access-submit { width: 100%; padding: 12px; margin-top: 8px; background: #3467ff; color: white; border: 0; border-radius: 8px; font: inherit; cursor: pointer; }
+#access-submit:disabled { opacity: .6; cursor: wait; }
+#access-error { color: #bc493e; min-height: 18px; margin: 8px 0; font-size: 13px; }
+
+.card[data-state=authentication] .stage-meta,.card[data-state=authentication] .stage-segments,.card[data-state=authentication] .stages,.card[data-state=authentication] .note { display:none; }

@@ -10,7 +10,8 @@ using System.Web.Script.Serialization;
 namespace Ghs.PixelStreaming
 {
     public class InstanceStatus { public string id {get;set;} public int pid {get;set;} public string state {get;set;} public int targetFps {get;set;} public double? actualFps {get;set;} }
-    public class ServiceStatus { public string state {get;set;} public string message {get;set;} public string mode {get;set;} public int viewerCount {get;set;} public int maxViewers {get;set;} public InstanceStatus[] instances {get;set;} public string[] urls {get;set;} public string[] logs {get;set;} }
+    public class ViewerStatus { public string playerId {get;set;} public string displayName {get;set;} public string address {get;set;} public string userAgent {get;set;} public string connectedAt {get;set;} public string state {get;set;} public string instanceId {get;set;} }
+    public class ServiceStatus { public string state {get;set;} public string message {get;set;} public string mode {get;set;} public int viewerCount {get;set;} public int maxViewers {get;set;} public ViewerStatus[] viewers {get;set;} public InstanceStatus[] instances {get;set;} public string[] urls {get;set;} public string[] logs {get;set;} }
     public sealed class ServiceSession : IDisposable
     {
         private readonly string root;
@@ -42,7 +43,7 @@ namespace Ghs.PixelStreaming
                     LogPath=Path.Combine(root,"logs","server-"+sessionId+".log");
                     byte[] random=new byte[32]; using(RandomNumberGenerator generator=RandomNumberGenerator.Create()) generator.GetBytes(random); token=Convert.ToBase64String(random);
                     string configPath=Path.Combine(sessionDirectory,"config.json"); string controlPath=Path.Combine(sessionDirectory,"control.json");
-                    LauncherConfig runtime=new JavaScriptSerializer().Deserialize<LauncherConfig>(new JavaScriptSerializer().Serialize(config)); runtime.executablePath=config.ResolveExecutable(root); runtime.Save(configPath);
+                    LauncherConfig runtime=config.Clone(); runtime.executablePath=config.ResolveExecutable(root); runtime.tlsCertPath=config.ResolveLocalFile(root,config.tlsCertPath); runtime.tlsKeyPath=config.ResolveLocalFile(root,config.tlsKeyPath); runtime.Save(configPath);
                     ThrowIfCanceled();
                     process=OwnedProcess.Start(node,new[]{server,"--config",configPath,"--control-file",controlPath},root,new Dictionary<string,string>{{"GHS_CONTROL_TOKEN",token}},LogPath);
                     Stopwatch wait=Stopwatch.StartNew();
@@ -88,11 +89,18 @@ namespace Ghs.PixelStreaming
                 return new JavaScriptSerializer().Deserialize<ServiceStatus>(Request("GET","/status"));
             }
         }
-        private string Request(string method,string route)
+        public void DisconnectViewer(string playerId)
+        {
+            if(string.IsNullOrWhiteSpace(playerId) || !System.Text.RegularExpressions.Regex.IsMatch(playerId,"^[0-9]{1,16}$")) throw new ArgumentException("用户编号无效。");
+            lock(gate) { if(state!="running" || process==null || process.HasExited) throw new InvalidOperationException("服务尚未运行。"); Request("POST","/disconnect",new JavaScriptSerializer().Serialize(new {playerId=playerId})); }
+        }
+        private string Request(string method,string route) { return Request(method,route,null); }
+        private string Request(string method,string route,string body)
         {
             HttpWebRequest request=(HttpWebRequest)WebRequest.Create("http://127.0.0.1:"+controlPort+route);
             request.Method=method; request.Proxy=null; request.AllowAutoRedirect=false; request.Timeout=1800; request.ReadWriteTimeout=1800; request.KeepAlive=false; request.Headers[HttpRequestHeader.Authorization]="Bearer "+token;
-            if(method=="POST") request.ContentLength=0;
+            if(route=="/disconnect") { request.Timeout=15000; request.ReadWriteTimeout=15000; }
+            if(method=="POST") { byte[] bytes=Encoding.UTF8.GetBytes(body ?? ""); request.ContentType="application/json"; request.ContentLength=bytes.Length; if(bytes.Length>0) using(Stream stream=request.GetRequestStream()) stream.Write(bytes,0,bytes.Length); }
             using(WebResponse response=request.GetResponse()) using(StreamReader reader=new StreamReader(response.GetResponseStream(),Encoding.UTF8)) return reader.ReadToEnd();
         }
         private string ReadLogTail()

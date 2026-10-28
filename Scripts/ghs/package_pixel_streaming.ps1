@@ -2,6 +2,7 @@
 param(
     [string]$EngineRoot = 'D:\UE\UE_5.4',
     [string]$ArchiveDirectory = '',
+    [string]$BuildProjectFile = '',
     [ValidateSet('Development', 'Shipping')]
     [string]$Configuration = 'Development'
 )
@@ -9,6 +10,8 @@ param(
 $ErrorActionPreference = 'Stop'
 $ProjectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $ProjectFile = Join-Path $ProjectRoot 'Test.uproject'
+if ($BuildProjectFile) { $ProjectFile = [IO.Path]::GetFullPath($BuildProjectFile) }
+if (-not (Test-Path -LiteralPath $ProjectFile -PathType Leaf)) { throw "Project not found: $ProjectFile" }
 $Uat = Join-Path $EngineRoot 'Engine/Build/BatchFiles/RunUAT.bat'
 if (-not (Test-Path -LiteralPath $Uat)) { throw "UE AutomationTool not found: $Uat" }
 if (-not $ArchiveDirectory) { $ArchiveDirectory = Join-Path $ProjectRoot 'Deployment/GHSPixelStreaming/App' }
@@ -27,7 +30,7 @@ $UatArguments = @(
     '-ubtargs=-CompilerVersion=14.38.33130', '-unattended', '-utf8output'
 )
 $StartedAt = (Get-Date).ToString('o')
-$MapFile = Join-Path $ProjectRoot 'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap'
+$MapFile = Join-Path (Split-Path -Parent $ProjectFile) 'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap'
 $MapHash = (Get-FileHash -LiteralPath $MapFile -Algorithm SHA256).Hash
 & $Uat @UatArguments 2>&1 | Tee-Object -FilePath $LogFile
 $PackageExitCode = $LASTEXITCODE

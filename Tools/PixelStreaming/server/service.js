@@ -1,5 +1,7 @@
 'use strict';
 const http = require('node:http');
+const https = require('node:https');
+const { NETWORK_DEFAULTS, validateNetwork, iceServers, clientAddress, sameOrigin: requestSameOrigin, secretEqual } = require('./network-policy');
 const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
@@ -8,11 +10,11 @@ const { spawn } = require('node:child_process');
 const { WebSocketServer, WebSocket } = require('ws');
 const { BudgetPolicy, readMetrics, writeBudget } = require('./resource-budget');
 
-const EVICTED = '当前最多支持3位访问者。新访问者已进入，您的连接已被替换，已停止自动重连。';
-const DEFAULTS = { httpPort: 8080, streamerPort: 8888, showWindow: false, width: 1920, height: 1080, mode: 'shared', fps: 60, minBitrateMbps: 12, startBitrateMbps: 35, maxBitrateMbps: 60, qualityProfile: 'clear', adaptiveResourceBudget: true };
+const EVICTED = '管理员已断开此连接，已停止自动重连。需要再次访问时请主动重新进入。';
+const DEFAULTS = { ...NETWORK_DEFAULTS, httpPort: 8080, streamerPort: 8888, showWindow: false, width: 1920, height: 1080, mode: 'shared', fps: 60, minBitrateMbps: 12, startBitrateMbps: 35, maxBitrateMbps: 60, qualityProfile: 'clear', adaptiveResourceBudget: true };
 function validateConfig(raw) {
   const config = { ...DEFAULTS, ...raw };
-  for (const key of ['httpPort', 'streamerPort']) if (!Number.isInteger(config[key]) || config[key] < 1024 || config[key] > 65535) throw Error('端口必须是1024至65535的整数：' + key);
+  for (const key of ['httpPort', 'streamerPort']) if (!Number.isInteger(config[key]) || config[key] < 1 || config[key] > 65535) throw Error('端口必须是1至65535的整数：' + key);
   if (config.httpPort === config.streamerPort) throw Error('网页端口和信令端口必须不同');
   if (!['shared', 'independent'].includes(config.mode)) throw Error('模式必须为 shared 或 independent');
   if (typeof config.showWindow !== 'boolean') throw Error('showWindow 必须是布尔值');
@@ -22,11 +24,11 @@ function validateConfig(raw) {
   if (!Number.isInteger(config.fps) || config.fps < 15 || config.fps > 120) throw Error('帧率必须为15至120');
   if (![config.minBitrateMbps, config.startBitrateMbps, config.maxBitrateMbps].every(n => Number.isFinite(n) && n >= 1 && n <= 200) || config.minBitrateMbps > config.startBitrateMbps || config.startBitrateMbps > config.maxBitrateMbps) throw Error('码率必须满足 1 ≤ 最小 ≤ 初始 ≤ 最大 ≤ 200 Mbps');
   if (typeof config.executablePath !== 'string' || !path.isAbsolute(config.executablePath) || !fs.statSync(config.executablePath, { throwIfNoEntry: false })?.isFile()) throw Error('UE可执行文件不存在，请选择完整EXE路径');
-  return config;
+  return validateNetwork(config);
 }
-function buildUEArgs(c, id, controlDir) {
+function buildUEArgs(c, id, controlDir, streamerToken) {
   const quality = c.qualityProfile || 'clear';
-  const args = ['-PixelStreamingURL=ws://127.0.0.1:' + c.streamerPort, '-PixelStreamingID=' + id,
+  const args = ['-PixelStreamingURL=ws://127.0.0.1:' + c.streamerPort + (streamerToken ? '/?streamerToken=' + encodeURIComponent(streamerToken) : ''), '-PixelStreamingID=' + id,
     '-ResX=' + c.width, '-ResY=' + c.height, '-ForceRes', '-AudioMixer', '-Unattended', '-NoSplash', '-StdOut', '-FullStdOutLogOutput',
     c.showWindow ? '-Windowed' : '-RenderOffscreen', '-PixelStreamingWebRTCFps=' + c.fps,
     '-PixelStreamingWebRTCMinBitrate=' + c.minBitrateMbps * 1000000, '-PixelStreamingWebRTCStartBitrate=' + c.startBitrateMbps * 1000000,
@@ -66,14 +68,17 @@ function createService(rawConfig, options = {}) {
   const token = options.token || process.env.GHS_CONTROL_TOKEN;
   if (!token || token.length < 24) throw Error('缺少有效的 GHS_CONTROL_TOKEN（至少24字符）');
   const playerRoot = path.resolve(options.playerRoot || path.join(__dirname, '../player'));
-  const sessions = new Map(), viewers = new Map(), instances = new Map();
+  const sessions = new Map(), viewers = new Map(), instances = new Map(), authAttempts = new Map();
+  const ice = iceServers(config), scheme = config.tlsCertPath ? 'https' : 'http';
   const logs = []; let state = 'starting', message = '正在启动服务', order = 0, nextPlayer = 1, stopPromise, admission = Promise.resolve(), heartbeat, budgetTimer;
   const budgetPolicy = new BudgetPolicy(config);
   const reconnectGraceMs = options.reconnectGraceMs ?? 8000;
   const spawnProcess = options.spawnProcess || spawn;
-  function log(text) { const line = new Date().toISOString() + ' ' + String(text).slice(0, 1500); logs.push(line); if (logs.length > 100) logs.shift(); options.onLog?.(line); }
-  function urls() { const ips = Object.values(os.networkInterfaces()).flat().filter(x => x && x.family === 'IPv4' && !x.internal).map(x => x.address); return [...new Set(ips)].map(ip => `http://${ip}:${config.httpPort}/`); }
-  function status() { return { state, message, mode: config.mode, qualityProfile: config.qualityProfile, adaptiveResourceBudget: config.adaptiveResourceBudget, viewerCount: viewers.size, maxViewers: 3, instances: [...instances.values()].map(i => ({ id: i.id, pid: i.child?.pid || null, state: i.state, targetFps: i.targetFps, actualFps: i.metrics?.actualFps ?? null, gpuMs: i.metrics?.gpuMs ?? null, budgetAcknowledged: !!i.metrics && i.metrics.sequence === i.sequence, screenPercentage: i.metrics?.screenPercentage ?? null })), urls: urls(), localUrl: `http://127.0.0.1:${config.httpPort}/`, logs: [...logs] }; }
+  function log(text) { let safe = String(text); for (const secret of [config.accessCode, config.turnPassword, config.turnUsername, config.turnUrl, config.stunUrl, ...[...instances.values()].map(i => i.streamerToken)]) if (secret) { safe = safe.split(JSON.stringify(secret).slice(1, -1)).join('[已隐藏]'); safe = safe.split(secret).join('[已隐藏]'); } const line = new Date().toISOString() + ' ' + safe.slice(0, 1500); logs.push(line); if (logs.length > 100) logs.shift(); options.onLog?.(line); }
+  function urls() { if (config.networkMode === 'public') return [config.publicUrl + '/']; const ips = Object.values(os.networkInterfaces()).flat().filter(x => x && x.family === 'IPv4' && !x.internal).map(x => x.address); return [...new Set(ips)].map(ip => `${scheme}://${ip}:${config.httpPort}/`); }
+  function status() { return { state, message, mode: config.mode, networkMode: config.networkMode, publicUrl: config.publicUrl, tlsEnabled: !!config.tlsCertPath, trustProxy: config.trustProxy, qualityProfile: config.qualityProfile, adaptiveResourceBudget: config.adaptiveResourceBudget, viewerCount: viewers.size, maxViewers: config.maxViewers,
+    viewers: [...viewers.values()].map(v => ({ playerId: v.playerId, displayName: v.displayName, address: v.address, userAgent: v.userAgent, connectedAt: v.connectedAt, state: !v.ws ? 'reconnecting' : v.subscribed ? 'connected' : instances.get(v.instanceId)?.state === 'failed' ? 'failed' : 'starting', instanceId: v.instanceId })),
+    instances: [...instances.values()].map(i => ({ id: i.id, pid: i.child?.pid || null, state: i.state, targetFps: i.targetFps, actualFps: i.metrics?.actualFps ?? null, gpuMs: i.metrics?.gpuMs ?? null, budgetAcknowledged: !!i.metrics && i.metrics.sequence === i.sequence, screenPercentage: i.metrics?.screenPercentage ?? null })), urls: urls(), localUrl: `${scheme}://127.0.0.1:${config.httpPort}/`, logs: [...logs] }; }
   function rebalance() {
     if (state === 'stopping' || state === 'stopped') return;
     const active = [...instances.values()].filter(i => !['stopping', 'failed'].includes(i.state));
@@ -84,20 +89,33 @@ function createService(rawConfig, options = {}) {
       catch (e) { log('写入实例资源预算失败：' + e.message); }
     }
   }
-  function sameOrigin(req) { if (!req.headers.origin) return true; try { return new URL(req.headers.origin).host === req.headers.host; } catch { return false; } }
-  function publicSession(s) { return { token: s.token, evicted: !!s.evicted, message: s.evicted ? EVICTED : '', mode: config.mode, width: config.width, height: config.height, fps: config.fps, minBitrateMbps: config.minBitrateMbps, maxBitrateMbps: config.maxBitrateMbps }; }
-  const publicServer = http.createServer(async (req, res) => {
+  const sameOrigin = req => requestSameOrigin(req, config);
+  function publicSession(s) { return { token: s.token, evicted: !!s.evicted, message: s.evicted ? EVICTED : '', mode: config.mode, maxViewers: config.maxViewers, width: config.width, height: config.height, fps: config.fps, minBitrateMbps: config.minBitrateMbps, maxBitrateMbps: config.maxBitrateMbps }; }
+  function pruneSessions() { const now = Date.now(); for (const [id, s] of sessions) if (!viewers.has(id) && now - s.created > 12 * 60 * 60 * 1000) sessions.delete(id); for (const [ip, attempt] of authAttempts) if (now > attempt.until) authAttempts.delete(ip); }
+  const handlePublic = async (req, res) => {
     try {
       const url = new URL(req.url, 'http://localhost');
-      if (req.method === 'GET' && url.pathname === '/health') return json(res, 200, { state, mode: config.mode, viewerCount: viewers.size, maxViewers: 3 });
+      if (req.method === 'GET' && url.pathname === '/health') return json(res, 200, { state, mode: config.mode, viewerCount: viewers.size, maxViewers: config.maxViewers, accessRequired: config.networkMode === 'public' });
       if (req.method === 'POST' && url.pathname === '/api/session') {
-        if (!sameOrigin(req)) return json(res, 403, { error: '仅允许同源连接' });
+        if (!sameOrigin(req)) return json(res, 403, { error: '仅允许已配置地址的同源连接' });
         const body = await readJSON(req); if (!body || typeof body !== 'object' || Array.isArray(body)) return json(res, 400, { error: '无效会话请求' });
-        if (body.token && sessions.has(body.token)) return json(res, 200, publicSession(sessions.get(body.token)));
-        if (body.token) return json(res, 409, { error: '服务已重启，请刷新页面重新进入', expired: true });
-        // Evicted tokens remain blocked for the lifetime of this service, including all reconnect attempts.
-        if (sessions.size >= 10000) return json(res, 503, { error: '会话数量达到上限，请重启服务' });
-        const session = { token: crypto.randomBytes(24).toString('hex'), created: Date.now(), evicted: false };
+        pruneSessions();
+        if (typeof body.token === 'string' && sessions.has(body.token)) return json(res, 200, publicSession(sessions.get(body.token)));
+        if (body.token) return json(res, 409, { error: '会话已过期，请重新进入', expired: true });
+        if (config.networkMode === 'public') {
+          if (!body.accessCode) return json(res, 401, { error: '请输入访问码', accessRequired: true });
+          const ip = clientAddress(req, config), attempt = authAttempts.get(ip);
+          if (attempt?.count >= 20) return json(res, 429, { error: '访问码尝试过多，请5分钟后重试' });
+          if (!secretEqual(body.accessCode, config.accessCode)) {
+            if (!attempt && authAttempts.size >= 10000) return json(res, 429, { error: '请求过多，请稍后重试' });
+            authAttempts.set(ip, { count: (attempt?.count || 0) + 1, until: attempt?.until || Date.now() + 300000 });
+            return json(res, 401, { error: '请输入有效的访问码', accessRequired: true });
+          }
+          authAttempts.delete(ip);
+        }
+        if (sessions.size >= 10000) return json(res, 503, { error: '会话数量达到上限，请稍后重试' });
+        const displayName = typeof body.displayName === 'string' ? body.displayName.replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 40) : '';
+        const session = { token: crypto.randomBytes(24).toString('hex'), created: Date.now(), evicted: false, displayName };
         sessions.set(session.token, session); return json(res, 200, publicSession(session));
       }
       if (req.method !== 'GET' && req.method !== 'HEAD') return json(res, 405, { error: '不支持的请求' });
@@ -116,12 +134,30 @@ function createService(rawConfig, options = {}) {
       if (req.method === 'HEAD') return res.end();
       fs.createReadStream(filename).on('error', () => res.destroy()).pipe(res);
     } catch (e) { if (!res.headersSent) json(res, 400, { error: '无效请求' }); else res.destroy(); }
-  });
+  };
+  const publicServer = config.tlsCertPath ? https.createServer({ cert: fs.readFileSync(config.tlsCertPath), key: fs.readFileSync(config.tlsKeyPath), minVersion: 'TLSv1.2' }, handlePublic) : http.createServer(handlePublic);
+  publicServer.requestTimeout = 15000; publicServer.headersTimeout = 10000;
   const streamerServer = http.createServer((_req, res) => json(res, 404, {}));
-  const controlServer = http.createServer((req, res) => {
+  const controlServer = http.createServer(async (req, res) => {
     const supplied = Buffer.from(req.headers.authorization || ''); const expected = Buffer.from('Bearer ' + token);
     if (supplied.length !== expected.length || !crypto.timingSafeEqual(supplied, expected)) return json(res, 401, { error: '未授权' });
     if (req.method === 'GET' && req.url === '/status') return json(res, 200, status());
+    if (req.method === 'POST' && req.url === '/disconnect') {
+      try {
+        const body = await readJSON(req);
+        if (!body || typeof body.playerId !== 'string' || !/^\d{1,16}$/.test(body.playerId)) return json(res, 400, { error: '无效访问者编号' });
+        let found = false;
+        admission = admission.then(async () => {
+          const viewer = [...viewers.values()].find(v => v.playerId === body.playerId);
+          if (!viewer) return;
+          found = true; sessions.get(viewer.token).evicted = true;
+          send(viewer.ws, { type: 'ghsKicked', message: EVICTED, reconnect: false }); viewer.ws?.close(4003, 'Disconnected by administrator');
+          await release(viewer, '管理员断开');
+        });
+        await admission;
+        return json(res, found ? 200 : 404, found ? { disconnected: true, playerId: body.playerId } : { error: '访问者已离线' });
+      } catch { admission = admission.catch(() => {}); return json(res, 400, { error: '断开连接失败' }); }
+    }
     if (req.method === 'POST' && req.url === '/stop') { json(res, 200, { state: 'stopping' }); setImmediate(() => stop().then(() => options.onStopped?.())); return; }
     json(res, 404, {});
   });
@@ -133,19 +169,30 @@ function createService(rawConfig, options = {}) {
     playersWS.handleUpgrade(req, socket, head, ws => {
       ws.alive = true; ws.on('pong', () => { ws.alive = true; }); ws.on('error', () => {});
       ws.pendingMessages = []; ws.bufferMessage = bytes => { if (ws.pendingMessages.length < 16) ws.pendingMessages.push(bytes); else ws.close(1008, 'Too many early messages'); }; ws.on('message', ws.bufferMessage);
-      admission = admission.then(() => admit(ws, sessions.get(url.searchParams.get('token')))).catch(e => { log('接入失败：' + e.message); send(ws, { type: 'ghsInstanceFailed', message: e.message }); ws.close(1011, 'Admission failed'); });
+      admission = admission.then(() => admit(ws, sessions.get(url.searchParams.get('token')), req)).catch(e => { log('接入失败：' + e.message); send(ws, { type: 'ghsInstanceFailed', message: e.message }); ws.close(1011, 'Admission failed'); });
     });
   });
-  streamerServer.on('upgrade', (req, socket, head) => streamersWS.handleUpgrade(req, socket, head, ws => {
+  streamerServer.on('upgrade', (req, socket, head) => {
+    // Native UE 5.4 libwebsockets supplies a loopback Origin; browsers must not
+    // bootstrap onto this local control channel, even from a malicious website.
+    const origins = [undefined, '127.0.0.1', 'http://127.0.0.1', 'http://127.0.0.1:' + config.streamerPort];
+    let url; try { url = new URL(req.url, 'http://localhost'); } catch { return socket.destroy(); }
+    const suppliedToken = url.searchParams.get('streamerToken');
+    const expectedInstance = [...instances.values()].find(i => suppliedToken && secretEqual(suppliedToken, i.streamerToken));
+    if (!origins.includes(req.headers.origin) || !expectedInstance || ['stopping', 'failed'].includes(expectedInstance.state) || ['stopping', 'stopped'].includes(state)) {
+      socket.write('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n'); return socket.destroy();
+    }
+    streamersWS.handleUpgrade(req, socket, head, ws => {
     ws.alive = true; ws.on('pong', () => { ws.alive = true; }); ws.on('error', () => {}); let instance;
     const identityTimeout = setTimeout(() => { if (!instance) ws.close(1008, 'Identification required'); }, 10000); identityTimeout.unref();
-    send(ws, { type: 'identify' }); send(ws, { type: 'config', peerConnectionOptions: { iceServers: [] } });
+    send(ws, { type: 'identify' });
     ws.on('message', bytes => {
       let m; try { m = parseMessage(bytes, 'streamer'); } catch { return ws.close(1007, 'Invalid signalling message'); }
       if (m.type === 'endpointId') {
         const candidate = instances.get(m.id);
-        if (!candidate || candidate.state === 'stopping' || candidate.state === 'failed' || (candidate.ws && candidate.ws !== ws)) return ws.close(1008, 'Unknown or duplicate streamer');
+        if (!candidate || candidate !== expectedInstance || candidate.state === 'stopping' || candidate.state === 'failed' || (candidate.ws && candidate.ws !== ws)) return ws.close(1008, 'Unknown or duplicate streamer');
         instance = candidate; instance.ws = ws; instance.state = 'ready'; instance.readyAt = Date.now(); clearTimeout(instance.startTimer); clearTimeout(identityTimeout);
+        send(ws, { type: 'config', peerConnectionOptions: { iceServers: ice } });
         state = 'running'; message = '像素流服务运行中'; log('UE信令已连接：' + instance.id);
         for (const viewer of viewers.values()) if (viewer.instanceId === instance.id) { notifyStage(viewer, 'streamerReady', '场景已启动，正在建立视频连接'); sendStreamerList(viewer); }
         return;
@@ -163,7 +210,8 @@ function createService(rawConfig, options = {}) {
       instance.ws = null;
       if (!['stopping', 'failed'].includes(instance.state) && state !== 'stopping') { instance.state = 'reconnecting'; log('UE信令连接断开：' + instance.id); for (const viewer of viewers.values()) if (viewer.instanceId === instance.id) { viewer.subscribed = false; notifyStage(viewer, 'waitingStreamer', '场景信令连接断开，等待恢复'); } }
     });
-  }));
+    });
+  });
   function notifyStage(viewer, stage, text) { send(viewer.ws, { type: 'ghsStage', stage, message: text, mode: config.mode }); }
   function sendStreamerList(viewer) { const i = instances.get(viewer.instanceId); send(viewer.ws, { type: 'streamerList', ids: i?.state === 'ready' ? [i.id] : [] }); }
   function broadcastCount() { for (const v of viewers.values()) send(v.ws, { type: 'playerCount', count: viewers.size }); }
@@ -174,28 +222,26 @@ function createService(rawConfig, options = {}) {
     if (config.mode === 'independent') await stopInstance(instances.get(viewer.instanceId));
     log('访问者离开：' + viewer.playerId + '，' + reason); broadcastCount();
   }
-  async function admit(ws, session) {
-    if (session.evicted) { send(ws, { type: 'ghsEvicted', message: EVICTED, reconnect: false }); return ws.close(4001, 'Replaced by a newer viewer'); }
+  async function admit(ws, session, req) {
+    if (session.evicted) { send(ws, { type: 'ghsKicked', message: EVICTED, reconnect: false }); return ws.close(4003, 'Disconnected by administrator'); }
     if (ws.readyState !== WebSocket.OPEN || ['stopping', 'stopped'].includes(state)) return ws.close(1001, 'Service stopping');
     let viewer = viewers.get(session.token);
     if (!viewer) {
-      if (viewers.size >= 3) {
-        const oldest = [...viewers.values()].sort((a, b) => a.order - b.order)[0];
-        sessions.get(oldest.token).evicted = true;
-        send(oldest.ws, { type: 'ghsEvicted', message: EVICTED, reconnect: false }); oldest.ws?.close(4001, 'Replaced by a newer viewer');
-        await release(oldest, '被新访问者替换');
+      if (viewers.size >= config.maxViewers) {
+        send(ws, { type: 'ghsFull', message: `当前 ${config.maxViewers} 个访问名额已满，请稍后重新进入。`, reconnect: false });
+        return ws.close(4004, 'Service at capacity');
       }
       // Reclaiming a process is asynchronous; a tab may have closed while we waited.
       if (ws.readyState !== WebSocket.OPEN || ['stopping', 'stopped'].includes(state)) return ws.close(1001, 'Connection ended during admission');
-      viewer = { token: session.token, playerId: String(nextPlayer++), order: ++order, instanceId: config.mode === 'shared' ? 'shared' : 'viewer-' + crypto.randomBytes(6).toString('hex') };
+      viewer = { displayName: session.displayName, address: clientAddress(req, config), userAgent: String(req.headers['user-agent'] || '').replace(/[\x00-\x1f\x7f]/g, '').slice(0, 240), connectedAt: new Date().toISOString(), token: session.token, playerId: String(nextPlayer++), order: ++order, instanceId: config.mode === 'shared' ? 'shared' : 'viewer-' + crypto.randomBytes(6).toString('hex') };
       viewers.set(session.token, viewer);
       if (config.mode === 'independent') startInstance(viewer.instanceId);
     }
     clearTimeout(viewer.disconnectTimer); viewer.disconnectGeneration = (viewer.disconnectGeneration || 0) + 1; unsubscribe(viewer);
     const previous = viewer.ws; viewer.ws = ws;
     if (previous && previous !== ws) { send(previous, { type: 'ghsSessionReplaced', message: '同一会话已在其他标签页连接，本页已停止自动重连。', reconnect: false }); previous.close(4002, 'Session reconnected'); }
-    send(ws, { type: 'ghsAdmission', playerId: viewer.playerId, mode: config.mode, instanceId: viewer.instanceId, maxViewers: 3 });
-    send(ws, { type: 'config', peerConnectionOptions: { iceServers: [] } });
+    send(ws, { type: 'ghsAdmission', playerId: viewer.playerId, mode: config.mode, instanceId: viewer.instanceId, maxViewers: config.maxViewers });
+    send(ws, { type: 'config', peerConnectionOptions: { iceServers: ice } });
     const instance = instances.get(viewer.instanceId);
     if (instance?.state === 'failed') send(ws, { type: 'ghsInstanceFailed', message: 'UE场景启动失败或意外退出，请在启动器停止后重新开启' });
     else notifyStage(viewer, instance?.state === 'ready' ? 'streamerReady' : 'waitingStreamer', instance?.state === 'ready' ? '场景已就绪，正在建立视频连接' : '正在启动UE场景，等待信令连接');
@@ -224,7 +270,7 @@ function createService(rawConfig, options = {}) {
     });
   }
   function startInstance(id) {
-    const instance = { id, state: 'starting', child: null, ws: null, sequence: 0, targetFps: null, controlDir: null }; instances.set(id, instance);
+    const instance = { id, streamerToken: crypto.randomBytes(32).toString('hex'), state: 'starting', child: null, ws: null, sequence: 0, targetFps: null, controlDir: null }; instances.set(id, instance);
     const failed = detail => {
       if (instance.state === 'stopping' || state === 'stopping' || state === 'stopped') return;
       clearTimeout(instance.startTimer); instance.state = 'failed'; state = 'degraded'; message = 'UE实例失败：' + detail; log(message);
@@ -238,7 +284,7 @@ function createService(rawConfig, options = {}) {
       rebalance();
       // UE5.4 snapshots the capture ceiling into new RTP senders. Keep it at the configured
       // maximum; the private bridge limits rendering so existing peers can later recover.
-      const child = spawnProcess(config.executablePath, buildUEArgs(config, id, instance.controlDir), { cwd: path.dirname(config.executablePath), shell: false, windowsHide: !config.showWindow, stdio: ['ignore', 'pipe', 'pipe'] });
+      const child = spawnProcess(config.executablePath, buildUEArgs(config, id, instance.controlDir, instance.streamerToken), { cwd: path.dirname(config.executablePath), shell: false, windowsHide: !config.showWindow, stdio: ['ignore', 'pipe', 'pipe'] });
       instance.child = child; log('启动UE实例 ' + id + '，PID ' + child.pid);
       for (const stream of [child.stdout, child.stderr]) stream?.on('data', bytes => { const lines = bytes.toString().split(/\r?\n/).filter(Boolean); for (const line of lines.slice(-6)) if (/error|fatal|PixelStreaming|Signalling|Warning/i.test(line)) log('[' + id + '] ' + line); });
       child.once('error', e => failed('启动失败：' + e.message)); child.once('exit', (code, signal) => failed('实例 ' + id + ' 退出（' + (code ?? signal) + '）'));
@@ -257,9 +303,9 @@ function createService(rawConfig, options = {}) {
   async function stopInstance(instance) { if (!instance) return; instance.state = 'stopping'; clearTimeout(instance.startTimer); instance.ws?.terminate(); await stopProcess(instance); instances.delete(instance.id); if (instance.controlDir) fs.rmSync(instance.controlDir, { recursive: true, force: true }); rebalance(); }
   async function start() {
     try {
-      await listen(streamerServer, config.streamerPort, '127.0.0.1'); await listen(publicServer, config.httpPort, '0.0.0.0'); await listen(controlServer, 0, '127.0.0.1');
-      state = 'running'; message = '服务已启动'; log('网页服务 http://0.0.0.0:' + config.httpPort + '，UE信令仅本机:' + config.streamerPort);
-      heartbeat = setInterval(() => { for (const server of [playersWS, streamersWS]) for (const ws of server.clients) { if (!ws.alive) { ws.terminate(); continue; } ws.alive = false; ws.ping(); } }, 10000); heartbeat.unref();
+      await listen(streamerServer, config.streamerPort, '127.0.0.1'); await listen(publicServer, config.httpPort, config.trustProxy ? '127.0.0.1' : '0.0.0.0'); await listen(controlServer, 0, '127.0.0.1');
+      state = 'running'; message = '服务已启动'; log('网页服务 ' + scheme + '://' + (config.trustProxy ? '127.0.0.1' : '0.0.0.0') + ':' + config.httpPort + '，UE信令仅本机:' + config.streamerPort);
+      heartbeat = setInterval(() => { pruneSessions(); for (const server of [playersWS, streamersWS]) for (const ws of server.clients) { if (!ws.alive) { ws.terminate(); continue; } ws.alive = false; ws.ping(); } }, 10000); heartbeat.unref();
       budgetTimer = setInterval(rebalance, 2000); budgetTimer.unref();
       if (config.mode === 'shared') startInstance('shared');
       return status();

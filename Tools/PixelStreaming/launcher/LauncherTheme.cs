@@ -22,7 +22,7 @@ namespace Ghs.PixelStreaming
             switch(state)
             {
                 case "running": case "ready": case "connected": return BlueInk;
-                case "starting": case "waiting": case "reconnecting": return Amber;
+                case "starting": case "waiting": case "reconnecting": case "degraded": return Amber;
                 case "error": case "failed": return Red;
                 case "idle": case "stopping": case "stopped": case "exited": return DisabledInk;
                 default: return Muted;
