@@ -34,6 +34,11 @@ namespace Ghs.PixelStreaming
             {
                 ((Timer)Field(form,"timer")).Stop(); form.ShowInTaskbar=false; form.StartPosition=FormStartPosition.Manual; form.Location=new Point(-30000,-30000); form.Show(); Application.DoEvents();
                 Capture(form,absolute,captures); Size regular=form.ClientSize;
+                LauncherConfig protectedFixture=new LauncherConfig {accessProtectionEnabled=true,accessCode="fixture-only-not-real"};
+                Call(form,"ApplyAccessSettings",protectedFixture); Capture(form,Path.Combine(directory,stem+"-access-on.png"),captures);
+                ((CheckBox)Field(form,"accessProtection")).Checked=false; Capture(form,Path.Combine(directory,stem+"-access-off.png"),captures);
+                LauncherConfig accessRead=(LauncherConfig)typeof(MainForm).GetMethod("ReadSettings",Private).Invoke(form,null);
+                if(accessRead.accessProtectionEnabled || accessRead.accessCode!=protectedFixture.accessCode) throw new InvalidOperationException("Main access fixture cleared credentials or failed to switch off.");
                 ((ComboBox)Field(form,"mode")).SelectedIndex=1;
                 ((Button)Field(form,"advanced")).PerformClick(); Capture(form,Path.Combine(directory,stem+"-advanced.png"),captures); ((Button)Field(form,"advanced")).PerformClick(); ((Panel)Field(form,"body")).AutoScrollPosition=Point.Empty;
                 TcpListener owner=new TcpListener(IPAddress.Any,0); owner.ExclusiveAddressUse=true; owner.Start();
@@ -68,6 +73,17 @@ namespace Ghs.PixelStreaming
             using(PublicSettingsForm settings=new PublicSettingsForm(directory,sample)) {
                 settings.ShowInTaskbar=false; settings.StartPosition=FormStartPosition.Manual; settings.Location=new Point(-30000,-30000); settings.Show(); Application.DoEvents();
                 foreach(Control control in settings.Controls) if(control is TabControl) { TabControl tabs=(TabControl)control; for(int page=0;page<tabs.TabPages.Count;page++) { tabs.SelectedIndex=page; Application.DoEvents(); string file=stem+"-public-"+page+".png"; using(Bitmap image=new Bitmap(settings.Width,settings.Height)) { settings.DrawToBitmap(image,new Rectangle(Point.Empty,image.Size)); image.Save(Path.Combine(directory,file),ImageFormat.Png); } captures.Add(new {file=file,width=settings.Width,height=settings.Height,fixtureOnly=true}); } }
+                foreach(Control control in settings.Controls) if(control is TabControl) ((TabControl)control).SelectedIndex=0;
+                CheckBox protection=(CheckBox)typeof(PublicSettingsForm).GetField("accessProtection",Private).GetValue(settings);
+                TextBox accessCode=(TextBox)typeof(PublicSettingsForm).GetField("code",Private).GetValue(settings);
+                Button generator=(Button)typeof(PublicSettingsForm).GetField("generate",Private).GetValue(settings);
+                foreach(bool enabled in new[]{true,false}) {
+                    protection.Checked=enabled; Application.DoEvents();
+                    if(accessCode.Enabled!=enabled || generator.Enabled!=enabled || settings.Read().accessCode!=sample.accessCode) throw new InvalidOperationException("Access policy fixture lost code or has incorrect enabled controls.");
+                    string file=stem+"-public-access-"+(enabled?"on":"off")+".png";
+                    using(Bitmap image=new Bitmap(settings.Width,settings.Height)) { settings.DrawToBitmap(image,new Rectangle(Point.Empty,image.Size)); image.Save(Path.Combine(directory,file),ImageFormat.Png); }
+                    captures.Add(new {file=file,width=settings.Width,height=settings.Height,fixtureOnly=true});
+                }
                 settings.Close();
             }
             sample.trustProxy=false; sample.externalTlsTermination=true; sample.publicUrl="https://warehouse-sim.iyunquna.com";

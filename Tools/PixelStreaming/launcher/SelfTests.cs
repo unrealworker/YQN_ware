@@ -66,6 +66,56 @@ namespace Ghs.PixelStreaming
             failures=0; Results.Clear(); scratch=Path.Combine(Path.GetTempPath(),"GHS launcher 测试 "+Guid.NewGuid().ToString("N")); Directory.CreateDirectory(scratch);
             Test("GUI rounded button corners match their parent in enabled selected and disabled states at 100 150 and 200 percent DPI",AssertRoundedButtonBackgrounds);
             Test("valid existing executable accepted",delegate { Config().Validate(scratch,false); });
+            Test("access protection defaults off for new and missing-field legacy configurations",delegate {
+                Dictionary<string,object> fresh=ConfigValues(Config()); Assert(fresh.ContainsKey("accessProtectionEnabled") && !(bool)fresh["accessProtectionEnabled"],"New configuration must explicitly default access protection off");
+                string file=Path.Combine(scratch,"legacy-access.json"); File.WriteAllText(file,"{\"networkMode\":\"public\",\"publicUrl\":\"http://fixture.example.com:8080\",\"accessCode\":\"fixture-only-preserved-code\"}");
+                LauncherConfig legacy=LauncherConfig.Load(file).Clone(); legacy.ValidateNetwork(scratch); Assert(!(bool)ConfigValues(legacy)["accessProtectionEnabled"] && legacy.accessCode=="fixture-only-preserved-code","Legacy config enabled protection or lost its saved code");
+            });
+            Test("access protection validates codes in LAN and public only when explicitly enabled",delegate {
+                JavaScriptSerializer accessJson=new JavaScriptSerializer();
+                foreach(string network in new[]{"lan","public"}) {
+                    Dictionary<string,object> values=ConfigValues(Config()); values["networkMode"]=network; values["publicUrl"]="http://fixture.example.com:8080"; values["accessCode"]=""; values["accessProtectionEnabled"]=false;
+                    LauncherConfig off=accessJson.Deserialize<LauncherConfig>(accessJson.Serialize(values)); off.ValidateNetwork(scratch);
+                    values["accessProtectionEnabled"]=true; foreach(string invalid in new[]{"","short","            "}) { values["accessCode"]=invalid; LauncherConfig enabled=accessJson.Deserialize<LauncherConfig>(accessJson.Serialize(values)); Throws<ArgumentException>(delegate { enabled.ValidateNetwork(scratch); }); }
+                    values["accessCode"]="fixture-only-protected-code"; LauncherConfig valid=accessJson.Deserialize<LauncherConfig>(accessJson.Serialize(values)); valid.ValidateNetwork(scratch); string file=Path.Combine(scratch,"protected-"+network+".json"); valid.Save(file); LauncherConfig restored=LauncherConfig.Load(file).Clone(); Assert((bool)ConfigValues(restored)["accessProtectionEnabled"] && restored.accessCode==valid.accessCode,"Protection or stored code lost in save/load/clone");
+                }
+                LauncherConfig noAddress=Config(); noAddress.networkMode="public"; Throws<ArgumentException>(delegate { noAddress.ValidateNetwork(scratch); });
+            });
+            Test("access protection JSON rejects coerced strings numbers null and containers",delegate {
+                string file=Path.Combine(scratch,"access-types.json");
+                foreach(string invalid in new[]{"\"true\"","\"false\"","\"\"","0","1","null","{}","[]"}) {
+                    File.WriteAllText(file,"{\"accessProtectionEnabled\":"+invalid+"}");
+                    try { LauncherConfig.Load(file); throw new Exception("Accepted non-boolean access policy: "+invalid); }
+                    catch(ArgumentException ex) { Assert(ex.Message.Contains("布尔值"),"Non-boolean policy did not produce clear type validation: "+invalid); }
+                }
+                foreach(bool enabled in new[]{false,true}) { File.WriteAllText(file,"{\"accessProtectionEnabled\":"+(enabled?"true":"false")+"}"); LauncherConfig read=LauncherConfig.Load(file); Assert(read.accessProtectionEnabled==enabled,"Boolean value changed while loading"); read.Save(file); Assert(LauncherConfig.Load(file).Clone().accessProtectionEnabled==enabled,"Boolean value changed during save/load/clone"); }
+            });
+            Test("GUI access protection disables credential actions without discarding stored code",delegate {
+                BindingFlags flags=BindingFlags.Instance|BindingFlags.NonPublic; LauncherConfig c=Config(); c.accessCode="fixture-only-existing-code";
+                using(PublicSettingsForm form=new PublicSettingsForm(scratch,c)) {
+                    CheckBox toggle=(CheckBox)typeof(PublicSettingsForm).GetField("accessProtection",flags).GetValue(form),reveal=(CheckBox)typeof(PublicSettingsForm).GetField("reveal",flags).GetValue(form); TextBox code=(TextBox)typeof(PublicSettingsForm).GetField("code",flags).GetValue(form); Button generate=(Button)typeof(PublicSettingsForm).GetField("generate",flags).GetValue(form);
+                    Assert(!toggle.Checked && !code.Enabled && !generate.Enabled && !reveal.Enabled && code.UseSystemPasswordChar,"Off protection left credential controls active or exposed");
+                    Assert(!form.Read().accessProtectionEnabled && form.Read().accessCode==c.accessCode,"Opening disabled protection erased code");
+                    toggle.Checked=true; Assert(code.Enabled && generate.Enabled && reveal.Enabled && form.Read().accessProtectionEnabled,"Enabled protection did not enable credential editing"); reveal.Checked=true; Assert(!code.UseSystemPasswordChar,"Reveal did not show code");
+                    code.Text="fixture-only-edited-code"; toggle.Checked=false; Assert(!reveal.Checked && code.UseSystemPasswordChar && !code.Enabled && !generate.Enabled && !reveal.Enabled,"Turning off failed to remask and disable actions");
+                    LauncherConfig saved=form.Read(); saved.Save(Path.Combine(scratch,"access-disabled.json")); saved=LauncherConfig.Load(Path.Combine(scratch,"access-disabled.json")); Assert(!saved.accessProtectionEnabled && saved.accessCode=="fixture-only-edited-code","Off save dropped edited code");
+                    toggle.Checked=true; Assert(code.Text=="fixture-only-edited-code","Enabling again lost stored code"); form.Read().ValidateNetwork(scratch);
+                }
+            });
+            Test("GUI main access toggle loads saved state and agrees with access settings after save",delegate {
+                BindingFlags flags=BindingFlags.Instance|BindingFlags.NonPublic; string folder=Path.Combine(scratch,"access-main"); Directory.CreateDirectory(folder); LauncherConfig c=Config(); c.accessProtectionEnabled=true; c.accessCode="fixture-only-main-code"; c.Save(Path.Combine(folder,"launcher.config.json"));
+                using(MainForm form=new MainForm()) {
+                    typeof(MainForm).GetField("root",flags).SetValue(form,folder); typeof(MainForm).GetMethod("LoadSettings",flags).Invoke(form,null); CheckBox toggle=(CheckBox)typeof(MainForm).GetField("accessProtection",flags).GetValue(form);
+                    Assert(toggle.Checked,"Main switch did not load saved protection"); toggle.Checked=false; LauncherConfig read=(LauncherConfig)typeof(MainForm).GetMethod("ReadSettings",flags).Invoke(form,null); Assert(!read.accessProtectionEnabled && read.accessCode==c.accessCode,"Main switch did not reach settings or cleared code");
+                    using(PublicSettingsForm dialog=new PublicSettingsForm(folder,read)) { Assert(!dialog.Read().accessProtectionEnabled,"Dialog ignored main switch"); ((CheckBox)typeof(PublicSettingsForm).GetField("accessProtection",flags).GetValue(dialog)).Checked=true; LauncherConfig accepted=dialog.Read(); typeof(MainForm).GetMethod("ApplyAccessSettings",flags).Invoke(form,new object[]{accepted}); }
+                    Assert(toggle.Checked && ((LauncherConfig)typeof(MainForm).GetMethod("ReadSettings",flags).Invoke(form,null)).accessProtectionEnabled,"Saved dialog and main switch diverged");
+                    foreach(string busy in new[]{"startBusy","stopBusy"}) { typeof(MainForm).GetField(busy,flags).SetValue(form,true); typeof(MainForm).GetMethod("UpdateControls",flags).Invoke(form,null); Assert(!toggle.Enabled,"Protection could change during lifecycle transition"); typeof(MainForm).GetField(busy,flags).SetValue(form,false); }
+                    typeof(MainForm).GetMethod("UpdateControls",flags).Invoke(form,null); Assert(toggle.Enabled,"Protection did not unlock while stopped");
+                }
+            });
+            Test("explicit access protection reaches child runtime configuration without exposing or replacing credentials",delegate {
+                foreach(bool enabled in new[]{false,true}) { string fixture=FixtureRoot(); LauncherConfig c=FixtureConfig(); c.accessProtectionEnabled=enabled; c.accessCode="fixture-only-runtime-code"; using(ServiceSession session=new ServiceSession(fixture)) { session.Start(c); string file=Directory.GetFiles(Path.Combine(fixture,"sessions"),"config.json",SearchOption.AllDirectories)[0]; LauncherConfig runtime=LauncherConfig.Load(file); Assert(runtime.accessProtectionEnabled==enabled && runtime.accessCode==c.accessCode,"Runtime access policy or credentials changed"); session.Stop(); } }
+            });
             Test("uncapped FPS default and explicit legacy caps roundtrip without an SDK",delegate {
                 LauncherConfig fresh=Config(); Assert(fresh.fps==0,"New configuration has a fixed FPS cap");
                 Assert(fresh.qualityProfile=="balanced" && fresh.minBitrateMbps==1 && fresh.startBitrateMbps==8 && fresh.maxBitrateMbps==24,"New configuration did not use the balanced network budget");
@@ -111,7 +161,7 @@ namespace Ghs.PixelStreaming
                 Assert(actual.ContainsKey("externalTlsTermination") && (bool)actual["externalTlsTermination"],"Cloud HTTPS mode was dropped during save or clone");
                 Assert(!restored.trustProxy && restored.tlsCertPath=="" && restored.publicUrl=="https://warehouse-sim.iyunquna.com","Cloud mode changed local proxy or public origin");
             });
-            Test("public defaults, bounds and local configuration roundtrip",delegate { LauncherConfig c=Config(); Assert(c.maxViewers==10,"Default capacity is not ten"); c.networkMode="public"; c.publicUrl="http://198.51.100.20:8080"; c.accessCode="test-only-code-12345"; c.turnUrl="turn:relay.example.com:3478?transport=udp"; c.turnUsername="test-user"; c.turnPassword="test-password"; c.Validate(scratch,false); string file=Path.Combine(scratch,"public.json"); c.Save(file); LauncherConfig restored=LauncherConfig.Load(file); Assert(restored.publicUrl==c.publicUrl && restored.accessCode==c.accessCode && restored.turnPassword==c.turnPassword && restored.maxViewers==10,"Public fields lost"); c.maxViewers=11; Throws<ArgumentException>(delegate {c.Validate(scratch,false);}); c.maxViewers=10; c.accessCode="short"; Throws<ArgumentException>(delegate {c.Validate(scratch,false);}); });
+            Test("public defaults, bounds and local configuration roundtrip",delegate { LauncherConfig c=Config(); Assert(c.maxViewers==10,"Default capacity is not ten"); c.networkMode="public"; c.publicUrl="http://198.51.100.20:8080"; c.accessProtectionEnabled=true; c.accessCode="test-only-code-12345"; c.turnUrl="turn:relay.example.com:3478?transport=udp"; c.turnUsername="test-user"; c.turnPassword="test-password"; c.Validate(scratch,false); string file=Path.Combine(scratch,"public.json"); c.Save(file); LauncherConfig restored=LauncherConfig.Load(file); Assert(restored.publicUrl==c.publicUrl && restored.accessCode==c.accessCode && restored.turnPassword==c.turnPassword && restored.maxViewers==10,"Public fields lost"); c.maxViewers=11; Throws<ArgumentException>(delegate {c.Validate(scratch,false);}); c.maxViewers=10; c.accessCode="short"; Throws<ArgumentException>(delegate {c.Validate(scratch,false);}); });
             Test("public HTTPS, proxy and TURN requirements reject invalid combinations",delegate { LauncherConfig c=Config(); c.networkMode="public"; c.publicUrl="https://warehouse.example.com"; c.accessCode="test-only-code-12345"; Throws<ArgumentException>(delegate {c.Validate(scratch,false);}); c.trustProxy=true; c.Validate(scratch,false); c.publicUrl="https://warehouse.example.com/path"; Throws<ArgumentException>(delegate {c.Validate(scratch,false);}); c.publicUrl="https://warehouse.example.com"; c.turnUrl="turn:relay.example.com:3478"; Throws<ArgumentException>(delegate {c.Validate(scratch,false);}); c.turnUsername="u"; c.turnPassword="p"; c.Validate(scratch,false); c.stunUrl="https://wrong.example.com"; Throws<ArgumentException>(delegate {c.Validate(scratch,false);}); });
             Test("switching either public proxy to LAN clears it and does not silently restore it",delegate {
                 BindingFlags flags=BindingFlags.Instance|BindingFlags.NonPublic;
@@ -132,7 +182,7 @@ namespace Ghs.PixelStreaming
                 c.publicUrl="http://warehouse-sim.iyunquna.com"; Throws<ArgumentException>(delegate {c.ValidateNetwork(scratch);}); c.publicUrl="https://warehouse-sim.iyunquna.com";
                 c.trustProxy=true; Throws<ArgumentException>(delegate {c.ValidateNetwork(scratch);}); c.trustProxy=false;
                 c.tlsCertPath=c.tlsKeyPath=Path.Combine(scratch,"fake.pem"); File.WriteAllText(c.tlsCertPath,"test-only"); Throws<ArgumentException>(delegate {c.ValidateNetwork(scratch);}); c.tlsCertPath=c.tlsKeyPath="";
-                c.accessCode="short"; Throws<ArgumentException>(delegate {c.ValidateNetwork(scratch);});
+                c.accessProtectionEnabled=true; c.accessCode="short"; Throws<ArgumentException>(delegate {c.ValidateNetwork(scratch);});
                 Assert(!Config().externalTlsTermination,"Old LAN configuration unexpectedly opted into external TLS");
             });
             Test("TLS selector changes modes without carrying inactive certificates or proxy flags",delegate {
@@ -212,7 +262,7 @@ namespace Ghs.PixelStreaming
                     using(ServiceSession live=new ServiceSession(root)) {
                         typeof(MainForm).GetField("session",flags).SetValue(form,live); live.Start(FixtureConfig());
                         typeof(MainForm).GetMethod("UpdateControls",flags).Invoke(form,null);
-                        foreach(string field in new[]{"executable","httpPort","streamerPort","renderWidth","renderHeight","showWindow","mode","quality","adaptiveResources","publicSettings"}) Assert(!((Control)typeof(MainForm).GetField(field,flags).GetValue(form)).Enabled,"Running setting remains enabled: "+field);
+                        foreach(string field in new[]{"executable","httpPort","streamerPort","renderWidth","renderHeight","showWindow","mode","quality","adaptiveResources","accessProtection","publicSettings"}) Assert(!((Control)typeof(MainForm).GetField(field,flags).GetValue(form)).Enabled,"Running setting remains enabled: "+field);
                         MethodInfo apply=typeof(MainForm).GetMethod("ApplyStatus",flags); Assert(apply!=null,"Runtime status presentation is missing");
                         apply.Invoke(form,new object[]{new ServiceStatus {state="running",viewerCount=2,maxViewers=3,instances=new[]{new InstanceStatus {id="scene-1",pid=100,state="connected",targetFps=30,actualFps=29.7},new InstanceStatus {id="scene-2",pid=101,state="connected",targetFps=30,actualFps=null}},urls=new string[0],logs=new string[0]}});
                         Label ports=(Label)typeof(MainForm).GetField("portFeedback",flags).GetValue(form); Assert(ports.Text.Contains("已监听"),"Running ports were not labelled listened");

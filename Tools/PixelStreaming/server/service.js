@@ -107,7 +107,7 @@ function createService(rawConfig, options = {}) {
   }
   function log(text) { let safe = String(text); for (const secret of [config.accessCode, config.turnPassword, config.turnUsername, config.turnUrl, config.stunUrl, ...[...instances.values()].map(i => i.streamerToken)]) if (secret) { safe = safe.split(JSON.stringify(secret).slice(1, -1)).join('[已隐藏]'); safe = safe.split(secret).join('[已隐藏]'); } const line = new Date().toISOString() + ' ' + safe.slice(0, 1500); logs.push(line); if (logs.length > 100) logs.shift(); options.onLog?.(line); }
   function urls() { if (config.networkMode === 'public') return [config.publicUrl + '/']; const ips = Object.values(os.networkInterfaces()).flat().filter(x => x && x.family === 'IPv4' && !x.internal).map(x => x.address); return [...new Set(ips)].map(ip => `${scheme}://${ip}:${config.httpPort}/`); }
-  function status() { return { state, message, mode: config.mode, networkMode: config.networkMode, publicUrl: config.publicUrl, tlsEnabled: !!config.tlsCertPath, trustProxy: config.trustProxy, externalTlsTermination: config.externalTlsTermination, qualityProfile: config.qualityProfile, adaptiveResourceBudget: config.adaptiveResourceBudget, viewerCount: viewers.size, maxViewers: config.maxViewers,
+  function status() { return { state, message, mode: config.mode, networkMode: config.networkMode, publicUrl: config.publicUrl, accessProtectionEnabled: config.accessProtectionEnabled, tlsEnabled: !!config.tlsCertPath, trustProxy: config.trustProxy, externalTlsTermination: config.externalTlsTermination, qualityProfile: config.qualityProfile, adaptiveResourceBudget: config.adaptiveResourceBudget, viewerCount: viewers.size, maxViewers: config.maxViewers,
     viewers: [...viewers.values()].map(v => ({ playerId: v.playerId, displayName: v.displayName, address: v.address, userAgent: v.userAgent, connectedAt: v.connectedAt, state: !v.ws ? 'reconnecting' : v.subscribed ? 'connected' : instances.get(v.instanceId)?.state === 'failed' ? 'failed' : instances.get(v.instanceId)?.state === 'queued' ? 'queued' : 'starting', instanceId: v.instanceId })),
     instances: [...instances.values()].map(i => ({ id: i.id, pid: i.child?.pid || null, state: i.state, targetFps: i.targetFps, actualFps: i.metrics?.actualFps ?? null, gpuMs: i.metrics?.gpuMs ?? null, budgetAcknowledged: !!i.metrics && i.metrics.sequence === i.sequence, screenPercentage: i.metrics?.screenPercentage ?? null })), urls: urls(), localUrl: `${scheme}://127.0.0.1:${config.httpPort}/`, logs: [...logs] }; }
   function rebalance() {
@@ -126,14 +126,14 @@ function createService(rawConfig, options = {}) {
   const handlePublic = async (req, res) => {
     try {
       const url = new URL(req.url, 'http://localhost');
-      if (req.method === 'GET' && url.pathname === '/health') return json(res, 200, { state, mode: config.mode, viewerCount: viewers.size, maxViewers: config.maxViewers, accessRequired: config.networkMode === 'public' });
+      if (req.method === 'GET' && url.pathname === '/health') return json(res, 200, { state, mode: config.mode, viewerCount: viewers.size, maxViewers: config.maxViewers, accessRequired: config.accessProtectionEnabled });
       if (req.method === 'POST' && url.pathname === '/api/session') {
         if (!sameOrigin(req)) return json(res, 403, { error: '仅允许已配置地址的同源连接' });
         const body = await readJSON(req); if (!body || typeof body !== 'object' || Array.isArray(body)) return json(res, 400, { error: '无效会话请求' });
         pruneSessions();
         if (typeof body.token === 'string' && sessions.has(body.token)) return json(res, 200, publicSession(sessions.get(body.token)));
         if (body.token) return json(res, 409, { error: '会话已过期，请重新进入', expired: true });
-        if (config.networkMode === 'public') {
+        if (config.accessProtectionEnabled) {
           if (!body.accessCode) return json(res, 401, { error: '请输入访问码', accessRequired: true });
           let ip, attempt;
           if (config.externalTlsTermination) {

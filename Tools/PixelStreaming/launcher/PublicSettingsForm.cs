@@ -13,6 +13,9 @@ namespace Ghs.PixelStreaming
         private readonly LauncherConfig original;
         private readonly ComboBox network=new ComboBox(),tlsMode=new ComboBox();
         private readonly NumericUpDown capacity=new NumericUpDown();
+        private readonly CheckBox accessProtection=new ToggleCheckBox(),reveal=new CheckBox();
+        private readonly RoundedButton generate=new RoundedButton();
+        private readonly Label accessHint=new Label();
         private readonly TextBox address=new TextBox(),code=new TextBox(),cert=new TextBox(),key=new TextBox(),stun=new TextBox(),turn=new TextBox(),username=new TextBox(),password=new TextBox();
         private readonly Label tlsHint=new Label();
         private Panel certField,keyField;
@@ -34,10 +37,13 @@ namespace Ghs.PixelStreaming
             capacity.Minimum=1; capacity.Maximum=10; capacity.Value=Math.Max(1,Math.Min(10,config.maxViewers));
             AddField(first,"网络模式",network); AddField(first,"最多在线人数",capacity); AddField(first,"公网访问地址",address); address.Text=config.publicUrl;
             AddNote(first,"例如 https://warehouse.example.com；临时 IP 测试可用 http://公网IP:8080（未加密）。",false);
-            code.Text=config.accessCode; code.UseSystemPasswordChar=true; AddField(first,"访问码（至少 12 位）",code);
-            FlowLayoutPanel credentials=new FlowLayoutPanel {AutoSize=true,Dock=DockStyle.Fill}; RoundedButton generate=new RoundedButton {Text="生成随机访问码",Width=210,Height=38}; CheckBox reveal=new CheckBox {Text="显示访问码",AutoSize=true,Margin=new Padding(18,8,0,0)}; credentials.Controls.Add(generate); credentials.Controls.Add(reveal); AddWide(first,credentials);
+            accessProtection.Text="安全访问仓库"; accessProtection.AccessibleName=accessProtection.Text; accessProtection.Height=34; accessProtection.Checked=config.accessProtectionEnabled; AddWide(first,accessProtection);
+            accessHint.AutoSize=true; accessHint.MaximumSize=new Size(900,0); accessHint.ForeColor=LauncherTheme.Muted; accessHint.Font=new Font("Microsoft YaHei UI",9F); AddWide(first,accessHint);
+            code.Text=config.accessCode; code.UseSystemPasswordChar=true; AddField(first,"访问码（至少12位）",code);
+            FlowLayoutPanel credentials=new FlowLayoutPanel {AutoSize=true,Dock=DockStyle.Fill}; generate.Text="生成随机访问码"; generate.Width=210; generate.Height=38; reveal.Text="显示访问码"; reveal.AutoSize=true; reveal.Margin=new Padding(18,8,0,0); credentials.Controls.Add(generate); credentials.Controls.Add(reveal); AddWide(first,credentials);
             generate.Click+=delegate { byte[] bytes=new byte[18]; using(RandomNumberGenerator rng=RandomNumberGenerator.Create()) rng.GetBytes(bytes); code.Text=Convert.ToBase64String(bytes).Replace('+','-').Replace('/','_'); };
             reveal.CheckedChanged+=delegate { code.UseSystemPasswordChar=!reveal.Checked; };
+            accessProtection.CheckedChanged+=delegate { UpdateAccessProtection(); }; UpdateAccessProtection();
             AddNote(first,"访问码与 TURN 密码保存在本机 launcher.config.json，请仅分享访问地址和访问码。",false);
             AddNote(first,"HTTPS 连接",true);
             tlsMode.DropDownStyle=ComboBoxStyle.DropDownList; tlsMode.Items.AddRange(new object[]{"HTTP 临时验证（未加密）","原生 HTTPS（本机证书）","本机 HTTPS 反向代理","云负载均衡 HTTPS（ALB 等）"});
@@ -55,7 +61,13 @@ namespace Ghs.PixelStreaming
         internal LauncherConfig Read()
         {
             if(tlsMode.SelectedIndex==1 && (string.IsNullOrWhiteSpace(cert.Text) || string.IsNullOrWhiteSpace(key.Text))) throw new ArgumentException("选择原生 HTTPS 时，请同时选择本机证书和私钥。");
-            LauncherConfig c=original.Clone(); c.networkMode=network.SelectedIndex==1?"public":"lan"; c.maxViewers=(int)capacity.Value; c.publicUrl=address.Text.Trim(); c.accessCode=code.Text; c.tlsCertPath=tlsMode.SelectedIndex==1?cert.Text.Trim():""; c.tlsKeyPath=tlsMode.SelectedIndex==1?key.Text.Trim():""; c.trustProxy=network.SelectedIndex==1 && tlsMode.SelectedIndex==2; c.externalTlsTermination=network.SelectedIndex==1 && tlsMode.SelectedIndex==3; c.stunUrl=stun.Text.Trim(); c.turnUrl=turn.Text.Trim(); c.turnUsername=username.Text.Trim(); c.turnPassword=password.Text; return c;
+            LauncherConfig c=original.Clone(); c.networkMode=network.SelectedIndex==1?"public":"lan"; c.maxViewers=(int)capacity.Value; c.publicUrl=address.Text.Trim(); c.accessProtectionEnabled=accessProtection.Checked; c.accessCode=code.Text; c.tlsCertPath=tlsMode.SelectedIndex==1?cert.Text.Trim():""; c.tlsKeyPath=tlsMode.SelectedIndex==1?key.Text.Trim():""; c.trustProxy=network.SelectedIndex==1 && tlsMode.SelectedIndex==2; c.externalTlsTermination=network.SelectedIndex==1 && tlsMode.SelectedIndex==3; c.stunUrl=stun.Text.Trim(); c.turnUrl=turn.Text.Trim(); c.turnUsername=username.Text.Trim(); c.turnPassword=password.Text; return c;
+        }
+        private void UpdateAccessProtection()
+        {
+            bool enabled=accessProtection.Checked; code.Enabled=generate.Enabled=reveal.Enabled=enabled;
+            if(!enabled) { reveal.Checked=false; code.UseSystemPasswordChar=true; }
+            accessHint.Text=enabled?"已开启：访客需输入访问码。停止服务后可修改，下次启动生效。":"已关闭：访客直接进入仓库；保留已存访问码。下次启动生效。";
         }
         private void UpdateTlsMode()
         {

@@ -26,6 +26,7 @@ namespace Ghs.PixelStreaming
         public int maxViewers { get; set; }
         public string networkMode { get; set; }
         public string publicUrl { get; set; }
+        public bool accessProtectionEnabled { get; set; }
         public string accessCode { get; set; }
         public string tlsCertPath { get; set; }
         public string tlsKeyPath { get; set; }
@@ -47,7 +48,8 @@ namespace Ghs.PixelStreaming
             foreach(string value in new[]{publicUrl,accessCode,tlsCertPath,tlsKeyPath,stunUrl,turnUrl,turnUsername,turnPassword}) if(value==null || value.Length>4096 || value.IndexOfAny(new[]{'\r','\n','\0'})>=0) throw new ArgumentException("网络配置不能包含换行、空字符或超过 4096 个字符。");
             Uri url;
             if(!string.IsNullOrEmpty(publicUrl) && (!Uri.TryCreate(publicUrl,UriKind.Absolute,out url) || (url.Scheme!="https" && url.Scheme!="http") || !string.IsNullOrEmpty(url.UserInfo) || (url.AbsolutePath!="/" && url.AbsolutePath!="") || !string.IsNullOrEmpty(url.Query) || !string.IsNullOrEmpty(url.Fragment))) throw new ArgumentException("公网地址须为完整 HTTP / HTTPS 地址，不含路径、账号、查询或片段。");
-            if(networkMode=="public" && (string.IsNullOrWhiteSpace(publicUrl) || string.IsNullOrWhiteSpace(accessCode) || accessCode.Length<12)) throw new ArgumentException("公网模式需要公网访问地址和至少 12 位访问码。");
+            if(networkMode=="public" && string.IsNullOrWhiteSpace(publicUrl)) throw new ArgumentException("公网模式需要填写公网访问地址。");
+            if(accessProtectionEnabled && (string.IsNullOrWhiteSpace(accessCode) || accessCode.Length<12)) throw new ArgumentException("开启安全访问仓库后，需要设置至少 12 位访问码。");
             if(string.IsNullOrWhiteSpace(tlsCertPath)!=string.IsNullOrWhiteSpace(tlsKeyPath)) throw new ArgumentException("HTTPS 证书与私钥需要成对选择。");
             if(trustProxy && !string.IsNullOrWhiteSpace(tlsCertPath)) throw new ArgumentException("本机反向代理与原生 HTTPS 证书不可同时启用。");
             if(externalTlsTermination && (trustProxy || !string.IsNullOrWhiteSpace(tlsCertPath))) throw new ArgumentException("云负载均衡 HTTPS 不能同时使用本机代理或本机证书。");
@@ -101,8 +103,10 @@ namespace Ghs.PixelStreaming
         {
             if(!File.Exists(path)) return new LauncherConfig();
             string text=File.ReadAllText(path,Encoding.UTF8); JavaScriptSerializer json=new JavaScriptSerializer();
-            LauncherConfig c=json.Deserialize<LauncherConfig>(text); if(c==null) throw new ArgumentException("配置文件为空。");
             Dictionary<string,object> fields=json.Deserialize<Dictionary<string,object>>(text);
+            if(fields==null) throw new ArgumentException("配置文件为空。");
+            if(fields.ContainsKey("accessProtectionEnabled") && !(fields["accessProtectionEnabled"] is bool)) throw new ArgumentException("安全访问仓库配置 accessProtectionEnabled 必须为 true 或 false 布尔值。");
+            LauncherConfig c=json.Deserialize<LauncherConfig>(text); if(c==null) throw new ArgumentException("配置文件为空。");
             // An explicit budget always wins, including the old 8/20/35 defaults.
             bool explicitBudget=fields.ContainsKey("minBitrateMbps") || fields.ContainsKey("startBitrateMbps") || fields.ContainsKey("maxBitrateMbps");
             if(!fields.ContainsKey("qualityProfile") && explicitBudget) c.qualityProfile="custom";

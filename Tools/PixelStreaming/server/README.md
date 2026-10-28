@@ -20,7 +20,7 @@ The token-protected management server binds **127.0.0.1** on a dynamic port writ
 
 Each viewer row contains `playerId`, optional `displayName`, client `address`, bounded `userAgent`, ISO UTC `connectedAt`, `instanceId`, and `state` (`starting`, `connected`, `reconnecting`, `failed`). `connected` denotes signalling subscription; actual received video/frame rate is reported in the browser. Status and logs contain neither session bearer tokens nor access/TURN secrets.
 
-A manually disconnected browser does not automatically reconnect, including on reload. The user must explicitly choose re-entry; public mode requires the access code again. This is a connection-disconnect action, not a permanent identity/IP ban.
+A manually disconnected browser does not automatically reconnect, including on reload. The user must explicitly choose re-entry; access-code protection, when enabled, requires the code again. This is a connection-disconnect action, not a permanent identity/IP ban.
 
 ## Public network configuration
 
@@ -28,7 +28,8 @@ A manually disconnected browser does not automatically reconnect, including on r
 | --- | --- |
 | `networkMode` | `lan` or `public` |
 | `publicUrl` | Exact player origin, e.g. `https://warehouse.example`; root path only |
-| `accessCode` | Public mode requires at least 12 characters |
+| `accessProtectionEnabled` | Strict boolean; defaults to `false`, including when absent in older configuration; independently gates LAN and public sessions |
+| `accessCode` | At least 12 characters when protection is enabled; a saved code alone never enables the gate |
 | `httpPort` | Player TCP port, also used for native HTTPS; 1–65535 |
 | `tlsCertPath`, `tlsKeyPath` | Matching PEM certificate chain and private key for native HTTPS |
 | `trustProxy` | Explicit same-machine reverse proxy; mutually exclusive with native TLS |
@@ -44,7 +45,9 @@ Choose one entry arrangement:
 3. **External cloud HTTPS load balancer:** set `externalTlsTermination:true` and the exact public HTTPS origin, leaving PEM paths empty and `trustProxy:false`. The HTTP player service listens on server interfaces for remote backhaul. Preserve the public Host and WebSocket Upgrade. Restrict the backend TCP port to the actual load balancer source addresses in both cloud security groups and Windows Firewall. This flag does not trust forwarded client addresses: viewer addresses remain the socket peer. Cloud authentication uses the bounded global throttle described below so failed attempts do not lock out all users sharing an ALB peer. `/health` is suitable for the load balancer health check. The load balancer must own the public certificate and HTTPS listener; this configuration does not create them.
 4. **Initial public-IP test:** explicitly use an `http://IP:port` public URL without TLS or proxy. HTTP does not encrypt the access code or signalling; use HTTPS for the finished deployment.
 
-`POST /api/session` exchanges the supplied access code for a random 48-hex bearer token. The access code is not stored in browser storage. Tokens are retained per browser tab for reconnection; unused sessions expire after 12 hours. Native HTTPS and local proxy modes limit invalid-code attempts per client address to 20 per five minutes. Cloud load balancer mode instead throttles all access-code comparisons, including correct codes, at five per second with an initial burst of ten. Its FIFO queue holds at most twenty requests for at most four seconds; excess or expired requests receive 429 with Retry-After, and disconnect/stop releases pending requests. Records and sessions have hard bounds. Browser POST/WebSocket origins must match the configured public origin (or direct loopback testing). A public `GET /health` exposes only basic state/count/auth-needed information.
+`POST /api/session` creates a random 48-hex bearer token. With `accessProtectionEnabled:false` (the default), it does so without an access code and the player enters automatically. With protection enabled, both LAN and public modes require a valid code first. Explicit non-boolean values such as `"false"`, `0` or `null` are rejected. Public mode still requires a valid public URL and matching TLS arrangement even when the gate is off. Stop and restart the service to apply changes; a valid existing session token still resumes without prompting again.
+
+The access code is not stored in browser storage. Tokens are retained per browser tab for reconnection; unused sessions expire after 12 hours. With protection enabled, LAN, native HTTPS and local proxy modes limit invalid-code attempts per client address to 20 per five minutes. Cloud load balancer mode instead throttles all access-code comparisons, including correct codes, at five per second with an initial burst of ten. Its FIFO queue holds at most twenty requests for at most four seconds; excess or expired requests receive 429 with Retry-After, and disconnect/stop releases pending requests. Records and sessions have hard bounds. Browser POST/WebSocket origins must match the configured public origin (or direct loopback testing), regardless of protection setting. `GET /health` reports `accessRequired` from the protection switch; token-protected operator `/status` includes `accessProtectionEnabled`. Neither endpoint exposes the code. Disabling access-code protection never bypasses session tokens, streamer/control authentication, IP trust boundaries, revocation or viewer limits.
 
 Configured ICE servers are delivered to **both UE and authenticated browsers**. TURN credentials necessarily reach admitted WebRTC clients; use restricted/dedicated TURN credentials, not unrelated account passwords. The packaged server does not itself install or operate a TURN server. Without a configured TURN relay, restrictive client NAT/firewalls may prevent media even when the website opens.
 

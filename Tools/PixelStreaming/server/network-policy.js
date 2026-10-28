@@ -3,10 +3,11 @@ const fs = require('node:fs');
 const net = require('node:net');
 const crypto = require('node:crypto');
 
-const NETWORK_DEFAULTS = { maxViewers: 10, networkMode: 'lan', publicUrl: '', accessCode: '', tlsCertPath: '', tlsKeyPath: '', trustProxy: false, externalTlsTermination: false, stunUrl: '', turnUrl: '', turnUsername: '', turnPassword: '' };
+const NETWORK_DEFAULTS = { maxViewers: 10, networkMode: 'lan', publicUrl: '', accessProtectionEnabled: false, accessCode: '', tlsCertPath: '', tlsKeyPath: '', trustProxy: false, externalTlsTermination: false, stunUrl: '', turnUrl: '', turnUsername: '', turnPassword: '' };
 function validateNetwork(c) {
   if (!Number.isInteger(c.maxViewers) || c.maxViewers < 1 || c.maxViewers > 10) throw Error('人数上限必须是1至10的整数');
   if (!['lan', 'public'].includes(c.networkMode)) throw Error('网络模式必须是 lan 或 public');
+  if (typeof c.accessProtectionEnabled !== 'boolean') throw Error('accessProtectionEnabled 必须是布尔值');
   if (typeof c.trustProxy !== 'boolean') throw Error('trustProxy 必须是布尔值');
   if (typeof c.externalTlsTermination !== 'boolean') throw Error('externalTlsTermination 必须是布尔值');
   if (c.trustProxy && c.networkMode !== 'public') throw Error('本机反向代理仅适用于公网模式');
@@ -19,7 +20,8 @@ function validateNetwork(c) {
     if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.search || url.hash || url.pathname !== '/') throw Error('公网地址只能包含协议、域名或IP和端口');
     c.publicUrl = url.origin;
   }
-  if (c.networkMode === 'public' && (!c.publicUrl || c.accessCode.length < 12)) throw Error('公网模式需要公网地址及至少12字符的访问码');
+  if (c.networkMode === 'public' && !c.publicUrl) throw Error('公网模式需要公网地址');
+  if (c.accessProtectionEnabled && (!c.accessCode.trim() || c.accessCode.length < 12)) throw Error('开启安全访问仓库后需要至少12字符的访问码');
   if (!!c.tlsCertPath !== !!c.tlsKeyPath) throw Error('HTTPS 证书和私钥必须同时提供');
   for (const key of ['tlsCertPath', 'tlsKeyPath']) if (c[key] && !fs.statSync(c[key], { throwIfNoEntry: false })?.isFile()) throw Error('找不到 HTTPS 文件：' + key);
   if (c.trustProxy && c.tlsCertPath) throw Error('本机反向代理和服务直连 HTTPS 请选择一种');
@@ -57,8 +59,8 @@ function clientAddress(req, c) {
 function sameOrigin(req, c) {
   const native = (c.tlsCertPath ? 'https://' : 'http://') + req.headers.host;
   if (c.networkMode === 'public') {
-    // Public auth never accepts a browser cross-origin POST/WS. Requests without
-    // Origin (CLI clients) still need the configured access code or bearer token.
+    // Disabling the access-code gate never disables browser Origin/Host guards.
+    // WebSockets still require a server-issued session token in every mode.
     const expectedHost = new URL(c.publicUrl).host;
     const local = loopback(req.socket.remoteAddress) && ['127.0.0.1:' + c.httpPort, 'localhost:' + c.httpPort].includes(req.headers.host);
     if (req.headers.host !== expectedHost && !local) return false;

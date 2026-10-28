@@ -337,8 +337,92 @@ test('JSON null/primitive/array and malformed message shapes cannot crash player
   }
 });
 
- test('public access gate, exact origins, private ICE and manual revocation work together', async t => {
-  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'http://warehouse.example:8080', accessCode: 'test-only-access-code', stunUrl: 'stun:stun.example:3478', turnUrl: 'turn:relay.example:3478?transport=udp', turnUsername: 'test-user', turnPassword: 'test-turn-secret' });
+test('access protection defaults off, requires an explicit boolean and validates codes only when enabled', () => {
+  const base = { executablePath: process.execPath };
+  assert.equal(validateConfig(base).accessProtectionEnabled, false);
+  assert.equal(validateConfig({ ...base, accessCode: 'previously-saved-code' }).accessProtectionEnabled, false);
+  assert.equal(validateConfig({ ...base, accessProtectionEnabled: false, accessCode: 'short' }).accessCode, 'short');
+  for (const value of [undefined, null, 0, 1, 'false', 'true', [], {}]) {
+    assert.throws(() => validateConfig({ ...base, accessProtectionEnabled: value }), /accessProtectionEnabled.*布尔/);
+  }
+  for (const networkMode of ['lan', 'public']) {
+    const config = { ...base, networkMode, publicUrl: networkMode === 'public' ? 'http://warehouse.example' : '', accessProtectionEnabled: true };
+    for (const accessCode of ['', '12345678901', '            ']) assert.throws(() => validateConfig({ ...config, accessCode }), /12/);
+    assert.equal(validateConfig({ ...config, accessCode: '123456789012' }).accessProtectionEnabled, true);
+  }
+  assert.throws(() => validateConfig({ ...base, networkMode: 'public', accessProtectionEnabled: false }), /公网地址/);
+  assert.throws(() => validateConfig({ ...base, networkMode: 'public', publicUrl: 'https://warehouse.example', accessProtectionEnabled: false }), /HTTPS/);
+});
+
+test('access protection disabled allows automatic LAN and public sessions even with a saved code', async t => {
+  for (const networkMode of ['lan', 'public']) for (const accessCode of ['', 'previously-saved-code']) {
+    const ctx = await setup(t, 'independent', 0, { networkMode, publicUrl: networkMode === 'public' ? 'http://warehouse.example' : '', accessCode });
+    assert.equal((await (await fetch(ctx.base + '/health')).json()).accessRequired, false);
+    for (const body of [{}, { accessCode: 'irrelevant-old-client-value' }]) {
+      const response = await fetch(ctx.base + '/api/session', { method: 'POST', body: JSON.stringify(body) });
+      assert.equal(response.status, 200, networkMode + ' should not request a code');
+      const session = await response.json(); assert.match(session.token, /^[a-f0-9]{48}$/);
+      assert.equal(session.accessCode, undefined);
+    }
+    assert.equal(ctx.service.status().accessProtectionEnabled, false);
+    assert.equal(ctx.children.length, 0, 'session allocation alone never starts UE');
+  }
+});
+
+test('access protection enabled gates LAN and public sessions and preserves authenticated resumption', async t => {
+  for (const networkMode of ['lan', 'public']) {
+    const ctx = await setup(t, 'independent', 0, { networkMode, publicUrl: networkMode === 'public' ? 'http://warehouse.example' : '', accessProtectionEnabled: true, accessCode: 'test-only-access-code' });
+    const request = body => fetch(ctx.base + '/api/session', { method: 'POST', body: JSON.stringify(body) });
+    assert.equal((await (await fetch(ctx.base + '/health')).json()).accessRequired, true);
+    assert.equal(ctx.service.status().accessProtectionEnabled, true);
+    for (const body of [{}, { accessCode: 'wrong' }]) {
+      const response = await request(body); assert.equal(response.status, 401); assert.equal((await response.json()).accessRequired, true);
+    }
+    const response = await request({ accessCode: ctx.config.accessCode }); assert.equal(response.status, 200);
+    const session = await response.json(); assert.equal(session.accessCode, undefined);
+    assert.equal((await request({ token: session.token })).status, 200);
+    assert.equal((await request({ token: 'forged-token' })).status, 409);
+    assert.equal(ctx.children.length, 0);
+  }
+});
+
+test('access protection disabled preserves session token and public Origin Host management and IP guards', async t => {
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'https://warehouse.example', externalTlsTermination: true, accessProtectionEnabled: false });
+  // Node fetch normalizes Host; exercise the actual malformed HTTP Host on wire.
+  const request = (body, headers = {}) => new Promise((resolve, reject) => {
+    const req = require('node:http').request(ctx.base + '/api/session', { method: 'POST', headers, timeout: 5000 }, res => {
+      let text = ''; res.on('data', chunk => { text += chunk; });
+      res.on('end', () => resolve({ status: res.statusCode, json: async () => JSON.parse(text) }));
+    });
+    req.on('error', reject); req.on('timeout', () => req.destroy(Error('session request timeout'))); req.end(JSON.stringify(body));
+  });
+  assert.equal((await request({}, { Origin: 'https://evil.example' })).status, 403);
+  assert.equal((await request({}, { Host: 'evil.example' })).status, 403);
+  assert.equal((await request({ token: 'forged-token' })).status, 409);
+  const response = await request({}); assert.equal(response.status, 200); const session = await response.json();
+  for (const [sessionToken, origin] of [['forged-token', undefined], [session.token, 'https://evil.example']]) {
+    const status = await new Promise((resolve, reject) => {
+      const ws = new WebSocket(ctx.base.replace('http:', 'ws:') + '/ws?token=' + sessionToken, { origin, handshakeTimeout: 5000 });
+      ws.on('unexpected-response', (_req, res) => { res.resume(); resolve(res.statusCode); ws.terminate(); });
+      ws.on('error', () => {}); ws.on('open', () => { ws.terminate(); reject(Error('guard bypassed while access protection was disabled')); });
+    });
+    assert.equal(status, 403);
+  }
+  assert.equal((await fetch(ctx.base + '/status')).status, 404);
+  const { clientAddress } = require('../server/network-policy');
+  assert.equal(clientAddress({ socket: { remoteAddress: '10.0.0.10' }, headers: { 'x-forwarded-for': '203.0.113.123' } }, ctx.config), '10.0.0.10');
+  assert.equal(ctx.children.length, 0);
+});
+
+test('access protection enabled retains LAN rate limiting', async t => {
+  const ctx = await setup(t, 'independent', 0, { accessProtectionEnabled: true, accessCode: 'test-only-access-code' });
+  for (let i = 0; i < 20; i++) assert.equal((await fetch(ctx.base + '/api/session', { method: 'POST', body: JSON.stringify({ accessCode: 'wrong' }) })).status, 401);
+  assert.equal((await fetch(ctx.base + '/api/session', { method: 'POST', body: JSON.stringify({ accessCode: ctx.config.accessCode }) })).status, 429);
+  assert.equal(ctx.children.length, 0);
+});
+
+test('public access gate, exact origins, private ICE and manual revocation work together', async t => {
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', accessProtectionEnabled: true, publicUrl: 'http://warehouse.example:8080', accessCode: 'test-only-access-code', stunUrl: 'stun:stun.example:3478', turnUrl: 'turn:relay.example:3478?transport=udp', turnUsername: 'test-user', turnPassword: 'test-turn-secret' });
   const request = (body, headers = {}) => fetch(ctx.base + '/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json', ...headers }, body: JSON.stringify(body) });
   assert.equal((await request({})).status, 401);
   assert.equal((await request({ accessCode: 'wrong' })).status, 401);
@@ -357,7 +441,7 @@ test('JSON null/primitive/array and malformed message shapes cannot crash player
 });
 
 test('public access attempts are bounded and invalid sessions never spawn a UE', async t => {
-  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'http://warehouse.example', accessCode: 'test-only-access-code' });
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', accessProtectionEnabled: true, publicUrl: 'http://warehouse.example', accessCode: 'test-only-access-code' });
   for (let i = 0; i < 20; i++) assert.equal((await fetch(ctx.base + '/api/session', { method: 'POST', body: JSON.stringify({ accessCode: 'wrong' }) })).status, 401);
   assert.equal((await fetch(ctx.base + '/api/session', { method: 'POST', body: JSON.stringify({ accessCode: ctx.config.accessCode }) })).status, 429);
   assert.equal(ctx.children.length, 0);
@@ -365,9 +449,9 @@ test('public access attempts are bounded and invalid sessions never spawn a UE',
 
 test('network validation fails closed for malformed public origin, TLS and ICE settings', () => {
   const c = { executablePath: process.execPath };
-  for (const fields of [{ maxViewers: 11 }, { maxViewers: 0 }, { networkMode: 'public' }, { networkMode: 'public', publicUrl: 'https://a.example', accessCode: 'long-enough-code' }, { publicUrl: 'http://user:password@a.example' }, { publicUrl: 'http://a.example/subpath' }, { tlsCertPath: 'missing' }, { turnUrl: 'http://relay' }, { turnUrl: 'turn:relay:3478' }, { stunUrl: 'stun:host:99999' }, { trustProxy: 'yes' }, { networkMode: 'lan', trustProxy: true }]) assert.throws(() => validateConfig({ ...c, ...fields }));
+  for (const fields of [{ maxViewers: 11 }, { maxViewers: 0 }, { networkMode: 'public' }, { networkMode: 'public', accessProtectionEnabled: true, publicUrl: 'https://a.example', accessCode: 'long-enough-code' }, { publicUrl: 'http://user:password@a.example' }, { publicUrl: 'http://a.example/subpath' }, { tlsCertPath: 'missing' }, { turnUrl: 'http://relay' }, { turnUrl: 'turn:relay:3478' }, { stunUrl: 'stun:host:99999' }, { trustProxy: 'yes' }, { networkMode: 'lan', trustProxy: true }]) assert.throws(() => validateConfig({ ...c, ...fields }));
   assert.equal(validateConfig({ ...c, httpPort: 443 }).httpPort, 443);
-  assert.equal(validateConfig({ ...c, networkMode: 'public', publicUrl: 'https://warehouse.example/', accessCode: 'long-enough-code', trustProxy: true }).publicUrl, 'https://warehouse.example');
+  assert.equal(validateConfig({ ...c, networkMode: 'public', accessProtectionEnabled: true, publicUrl: 'https://warehouse.example/', accessCode: 'long-enough-code', trustProxy: true }).publicUrl, 'https://warehouse.example');
 });
 
 test('trusted proxy only accepts client address from loopback and rejects cross-origin signalling', async t => {
@@ -381,7 +465,7 @@ test('trusted proxy only accepts client address from loopback and rejects cross-
 
 test('cloud TLS termination requires an exclusive public HTTPS arrangement and preserves old defaults', () => {
   const base = { executablePath: process.execPath };
-  const cloud = { ...base, networkMode: 'public', publicUrl: 'https://warehouse.example/', accessCode: 'test-only-access-code', externalTlsTermination: true };
+  const cloud = { ...base, networkMode: 'public', accessProtectionEnabled: true, publicUrl: 'https://warehouse.example/', accessCode: 'test-only-access-code', externalTlsTermination: true };
   assert.equal(validateConfig(base).externalTlsTermination, false);
   assert.equal(validateConfig(cloud).publicUrl, 'https://warehouse.example');
   for (const fields of [
@@ -394,7 +478,7 @@ test('cloud TLS termination requires an exclusive public HTTPS arrangement and p
 test('cloud HTTPS uses HTTP backhaul with exact public Host and Origin for sessions and websocket admission', async t => {
   const http = require('node:http');
   const os = require('node:os');
-  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', accessProtectionEnabled: true, publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
   // Use the actual local network interface when available: a loopback-only bind
   // would pass localhost tests but fail remote ALB connections.
   const host = Object.values(os.networkInterfaces()).flat().find(x => x.family === 'IPv4' && !x.internal)?.address || '127.0.0.1';
@@ -433,7 +517,7 @@ test('cloud HTTPS uses HTTP backhaul with exact public Host and Origin for sessi
 
 test('cloud TLS termination never trusts forwarded client addresses, even from loopback', () => {
   const { clientAddress, sameOrigin } = require('../server/network-policy');
-  const config = validateConfig({ executablePath: process.execPath, networkMode: 'public', publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
+  const config = validateConfig({ executablePath: process.execPath, networkMode: 'public', accessProtectionEnabled: true, publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
   const req = { socket: { remoteAddress: '10.0.0.10' }, headers: { host: 'warehouse.example', origin: 'https://warehouse.example', 'x-forwarded-for': '203.0.113.123', 'x-forwarded-host': 'warehouse.example' } };
   assert.equal(clientAddress(req, config), '10.0.0.10');
   req.socket.remoteAddress = '127.0.0.1'; assert.equal(clientAddress(req, config), '127.0.0.1');
@@ -446,7 +530,7 @@ async function cloudCodeRequest(ctx, accessCode, headers = {}) {
 }
 
 test('cloud authentication does not lock all ALB visitors after twenty wrong access codes', async t => {
-  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', accessProtectionEnabled: true, publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
   const started = performance.now();
   for (let i = 0; i < 20; i++) assert.equal((await cloudCodeRequest(ctx, 'wrong', { 'X-Forwarded-For': '203.0.113.20' })).status, 401);
   const legitimate = await cloudCodeRequest(ctx, ctx.config.accessCode, { 'X-Forwarded-For': '198.51.100.30' });
@@ -456,7 +540,7 @@ test('cloud authentication does not lock all ALB visitors after twenty wrong acc
 });
 
 test('cloud authentication throttles correct codes too and bounds excess pending requests', async t => {
-  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', accessProtectionEnabled: true, publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
   const started = performance.now();
   const results = await Promise.all(Array.from({ length: 31 }, () => cloudCodeRequest(ctx, ctx.config.accessCode)));
   const rejected = results.filter(x => x.status === 429);
@@ -469,7 +553,7 @@ test('cloud authentication throttles correct codes too and bounds excess pending
 });
 
 test('cloud authentication stop settles pending requests', async t => {
-  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', accessProtectionEnabled: true, publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
   await Promise.all(Array.from({ length: 10 }, () => cloudCodeRequest(ctx, ctx.config.accessCode)));
   let settled = false;
   const waiting = cloudCodeRequest(ctx, ctx.config.accessCode).then(value => { settled = true; return value; });
@@ -480,7 +564,7 @@ test('cloud authentication stop settles pending requests', async t => {
 });
 
 test('cloud authentication releases queue capacity when clients disconnect', async t => {
-  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', accessProtectionEnabled: true, publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
   await Promise.all(Array.from({ length: 10 }, () => cloudCodeRequest(ctx, ctx.config.accessCode)));
   const controllers = Array.from({ length: 20 }, () => new AbortController());
   let completed = 0;
@@ -494,7 +578,7 @@ test('cloud authentication releases queue capacity when clients disconnect', asy
 // These self-signed PEM files exist only for loopback transport tests, never the delivery.
 test('native HTTPS performs a verified TLS handshake and accepts WSS with authenticated admission', async t => {
   const https = require('node:https');
-  const config = { executablePath: process.execPath, httpPort: await freePort(), streamerPort: await freePort(), mode: 'independent', networkMode: 'public', accessCode: 'test-only-access-code', publicUrl: 'https://127.0.0.1', tlsCertPath: path.join(__dirname, 'fixtures/test-localhost-cert.pem'), tlsKeyPath: path.join(__dirname, 'fixtures/test-localhost-key.pem') };
+  const config = { executablePath: process.execPath, httpPort: await freePort(), streamerPort: await freePort(), mode: 'independent', networkMode: 'public', accessProtectionEnabled: true, accessCode: 'test-only-access-code', publicUrl: 'https://127.0.0.1', tlsCertPath: path.join(__dirname, 'fixtures/test-localhost-cert.pem'), tlsKeyPath: path.join(__dirname, 'fixtures/test-localhost-key.pem') };
   config.publicUrl = 'https://127.0.0.1:' + config.httpPort;
   const service = createService(config, { token, spawnProcess() { const child = new EventEmitter(); child.pid = null; child.exitCode = 0; return child; } });
   await service.start(); t.after(() => service.stop());
