@@ -41,6 +41,14 @@ test('uncapped session sends zero to the official SDK rather than silently falli
   assert.equal(p.stream.config.settings.WebRTCFPS, 0);
   assert.match(p.elements.get('stat-limit').textContent, /无固定上限/);
 });
+
+test('player attaches session bitrate policy before constructing the official streamer', async () => {
+  const p = await page({}, async () => ({ ok: true, status: 200, json: async () => ({ token: 'test', mode: 'independent', fps: 0, minBitrateMbps: 1, startBitrateMbps: 5.5, maxBitrateMbps: 15.75 }) }));
+  assert.equal(p.stream.config.settings.WebRTCMinBitrate, 1000);
+  assert.equal(p.stream.config.settings.WebRTCMaxBitrate, 15750);
+  const sdp = 'm=video 9 UDP/TLS/RTP/SAVPF 96\r\na=rtpmap:96 H264/90000\r\na=fmtp:96 profile-level-id=42e01f\r\n';
+  assert.match(p.stream.config.ghsMungeVideoSDP(sdp), /x-google-start-bitrate=5500;x-google-max-bitrate=15750/);
+});
 test('session replacement stops reconnect policy and survives page reload without taking the session back', async () => {
   const p = await page(); p.stream.onClose({ detail: { code: 4002 } });
   for (const timer of [...p.timers.values()]) if (timer.ms < 120000) timer.cb();

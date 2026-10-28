@@ -121,7 +121,7 @@ function createService(rawConfig, options = {}) {
     }
   }
   const sameOrigin = req => requestSameOrigin(req, config);
-  function publicSession(s) { return { token: s.token, evicted: !!s.evicted, message: s.evicted ? EVICTED : '', mode: config.mode, maxViewers: config.maxViewers, width: config.width, height: config.height, fps: config.fps, minBitrateMbps: config.minBitrateMbps, maxBitrateMbps: config.maxBitrateMbps }; }
+  function publicSession(s) { return { token: s.token, evicted: !!s.evicted, message: s.evicted ? EVICTED : '', mode: config.mode, maxViewers: config.maxViewers, width: config.width, height: config.height, fps: config.fps, minBitrateMbps: config.minBitrateMbps, startBitrateMbps: config.startBitrateMbps, maxBitrateMbps: config.maxBitrateMbps }; }
   function pruneSessions() { const now = Date.now(); for (const [id, s] of sessions) if (!viewers.has(id) && now - s.created > 12 * 60 * 60 * 1000) sessions.delete(id); for (const [ip, attempt] of authAttempts) if (now > attempt.until) authAttempts.delete(ip); }
   const handlePublic = async (req, res) => {
     try {

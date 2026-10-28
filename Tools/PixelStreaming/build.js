@@ -1,6 +1,7 @@
 'use strict';
 const fs = require('node:fs'); const path = require('node:path'); const crypto = require('node:crypto');
 const { execFileSync } = require('node:child_process');
+const { patchFrontendSDK } = require('./frontend-sdk-patch');
 const root = __dirname;
 const outputFlag = process.argv.indexOf('--output');
 if (outputFlag >= 0 && !process.argv[outputFlag + 1]) throw Error('--output requires a directory');
@@ -18,7 +19,11 @@ for (const [archive, directory] of [['epic-ue5.4-1.1.6.tgz', 'vendor/package'], 
   execFileSync('tar', ['-xzf', path.join(root, 'vendor', archive), '-C', destination, '--strip-components=1']);
 }
 const playerVendor = path.join(root, 'player/vendor'); fs.mkdirSync(playerVendor, { recursive: true });
-fs.copyFileSync(path.join(root, 'vendor/package/dist/lib-pixelstreamingfrontend.js'), path.join(playerVendor, 'epic-ue5.4-1.1.6.js'));
+const patchedSDK = patchFrontendSDK(fs.readFileSync(path.join(root, 'vendor/package/dist/lib-pixelstreamingfrontend.js'), 'utf8'));
+fs.writeFileSync(path.join(playerVendor, 'epic-ue5.4-1.1.6.js'), patchedSDK.code);
+fs.writeFileSync(path.join(playerVendor, 'epic-sdp-patch.json'), JSON.stringify({ ...patchedSDK.manifest,
+  patchScriptSha256: crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'frontend-sdk-patch.js'))).digest('hex'),
+  qualityPolicySha256: crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'player/stream-quality.js'))).digest('hex') }, null, 2) + '\n');
 fs.writeFileSync(path.join(playerVendor, 'sdp-3.2.1.js'), '(function(){\n' + fs.readFileSync(path.join(root, 'vendor/sdp/sdp.js'), 'utf8') + '\nwindow.sdp = SDPUtils;\n})();\n');
 fs.copyFileSync(path.join(root, 'vendor/sdp/LICENSE'), path.join(playerVendor, 'LICENSE-sdp.txt'));
 fs.copyFileSync(path.join(root, 'node_modules/ws/LICENSE'), path.join(playerVendor, 'LICENSE-ws.txt'));

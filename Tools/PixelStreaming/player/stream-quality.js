@@ -6,6 +6,42 @@
 })(typeof window === 'object' ? window : globalThis, function () {
   'use strict';
   const finite = n => typeof n === 'number' && Number.isFinite(n);
+  function configureBitrates(config, session) {
+    const min = session.minBitrateMbps, max = session.maxBitrateMbps;
+    // Old launchers did not return startBitrateMbps; retain their 8 Mbps default
+    // within the advertised range. New sessions always supply all three values.
+    const start = session.startBitrateMbps === undefined ? Math.min(max, Math.max(min, 8)) : session.startBitrateMbps;
+    if (![min, start, max].every(n => finite(n) && n >= 1 && n <= 200) || min > start || start > max) throw Error('会话码率配置无效，请检查启动器设置');
+    const budget = { min: Math.round(min * 1000), start: Math.round(start * 1000), max: Math.round(max * 1000) };
+    config.setNumericSetting('WebRTCMinBitrate', budget.min);
+    config.setNumericSetting('WebRTCMaxBitrate', budget.max);
+    // The generated SDK calls this per-Config hook in both offer and answer paths.
+    // Keep policy on the session, isolated from other players and SDK defaults.
+    config.ghsMungeVideoSDP = sdp => rewriteVideoBitrates(sdp, budget);
+  }
+  function rewriteVideoBitrates(sdp, budget) {
+    const newline = sdp.includes('\r\n') ? '\r\n' : '\n';
+    const hints = `x-google-min-bitrate=${budget.min};x-google-start-bitrate=${budget.start};x-google-max-bitrate=${budget.max}`;
+    return sdp.split(/(?=^m=)/m).map(section => {
+      if (!/^m=video (?!0(?:\s|$))/.test(section)) return section;
+      const lines = section.split(/\r?\n/), payloads = new Set(), existing = new Set();
+      for (const line of lines) {
+        const match = /^a=rtpmap:(\d+) (?:H264|VP8|VP9|AV1)\/\d+/i.exec(line);
+        if (match) payloads.add(match[1]);
+      }
+      for (let i = 0; i < lines.length; i++) {
+        const fmtp = /^a=fmtp:(\d+) (.*)$/.exec(lines[i]);
+        if (!fmtp || !payloads.has(fmtp[1])) continue;
+        existing.add(fmtp[1]);
+        const parameters = fmtp[2].split(';').filter(p => p.trim() && !/^x-google-(?:min|start|max)-bitrate\s*=/i.test(p.trim()));
+        lines[i] = `a=fmtp:${fmtp[1]} ` + [...parameters, hints].join(';');
+      }
+      return lines.flatMap(line => {
+        const rtp = /^a=rtpmap:(\d+) /.exec(line);
+        return rtp && payloads.has(rtp[1]) && !existing.has(rtp[1]) ? [line, `a=fmtp:${rtp[1]} ${hints}`] : [line];
+      }).join(newline);
+    }).join('');
+  }
   function configureUncapped(config, fps) {
     if (fps !== 0) return;
     // The pinned SDK exposes its SettingNumber objects, but its FPS minimum is 1.
@@ -63,5 +99,5 @@
     const kind = relay ? 'TURN 中继' : privateAddress(remote?.address) ? '内网地址' : remote?.candidateType === 'srflx' || remote?.candidateType === 'prflx' ? '公网映射' : '直连';
     return kind + ' · ' + protocol;
   }
-  return { configureUncapped, configureReceivers, createMeter, describePath };
+  return { configureBitrates, configureUncapped, configureReceivers, createMeter, describePath };
 });

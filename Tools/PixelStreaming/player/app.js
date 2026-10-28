@@ -137,6 +137,7 @@
     // Own the reconnect timer so an eviction/replaced-tab message can cancel every queued attempt.
     const config = new Config({ useUrlParams: false, initialSettings: { AutoConnect: false, AutoPlayVideo: true, StartVideoMuted: true, HoveringMouse: true, MatchViewportRes: false, TimeoutIfIdle: false, WaitForStreamer: false, OfferToReceive: false, UseMic: false, MaxReconnectAttempts: 0, ss: wsUrl, WebRTCFPS: session.fps, WebRTCMinBitrate: session.minBitrateMbps * 1000, WebRTCMaxBitrate: session.maxBitrateMbps * 1000 } });
     quality.configureUncapped(config, session.fps);
+    quality.configureBitrates(config, session);
     $('stat-limit').textContent = session.fps === 0 ? '无固定上限' : session.fps + ' FPS';
     stream = new PixelStreaming(config, { videoElementParent: $('video-root') }); watchVideo();
     sceneSearch = window.GHSSceneSearch.create({ stream, videoRoot, keyboardFlag: Flags.KeyboardInput, beforeFocus: endPan });

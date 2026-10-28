@@ -155,6 +155,17 @@ test('defaults allow WebRTC congestion adaptation while explicit existing qualit
   assert.deepEqual([existing.fps, existing.minBitrateMbps, existing.startBitrateMbps, existing.maxBitrateMbps], [60, 12, 35, 60]);
 });
 
+test('new and resumed public sessions expose the exact launcher SDP bitrate budget', async t => {
+  const ctx = await setup(t, 'independent', 0, { minBitrateMbps: 1.25, startBitrateMbps: 5.5, maxBitrateMbps: 15.75 });
+  let session;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const response = await fetch(ctx.base + '/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(session ? { token: session.token } : {}) });
+    assert.equal(response.status, 200); session = await response.json();
+    assert.deepEqual([session.minBitrateMbps, session.startBitrateMbps, session.maxBitrateMbps], [1.25, 5.5, 15.75]);
+    assert.equal(session.accessCode, undefined);
+  }
+});
+
 test('unlimited launch removes render and capture caps without forcing queued frames or a fake high ceiling', () => {
   const config = validateConfig({ executablePath: process.execPath, httpPort: 8080, streamerPort: 8888, fps: 0 });
   const args = buildUEArgs(config, 'shared');
