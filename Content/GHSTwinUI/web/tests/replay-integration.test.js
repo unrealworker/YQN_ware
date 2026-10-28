@@ -12,6 +12,15 @@ test('active native navigation waits for confirmation and native callback',()=>{
  const a=replay();assert.equal(a.window.twinState.page,'trace');a.click({action:'nav',page:'inventory'});a.flush();assert.equal(a.window.twinState.page,'trace');assert.equal(a.commands.at(-1).action,'navigate');
  a.window.twinReplayReceive({...active,active:false,playing:false});a.window.twinNavigate('inventory');a.flush();assert.equal(a.window.twinState.page,'inventory');
 });
+
+test('cancelling native navigation keeps the replay selection and does not start a destination transition',()=>{
+ const a=replay(),selections=[];
+ a.window.TwinMotion={navigation:()=>selections.push(a.window.twinState.page),beforePaint(){},afterPaint(){},diagnostics:()=>({}),text:()=>a.html()};
+ a.click({action:'nav',page:'inventory'});
+ a.window.twinReplayReceive({...active,exitPending:true});a.window.twinReplayReceive({...active,exitPending:false});a.flush();
+ assert.equal(a.window.twinState.page,'trace');assert.ok(selections.every(page=>page==='trace'));
+ assert.equal(a.window.twinReplayUI.view().state.time,230);
+});
 test('active JavaScript detail action retains its ID and executes only on matching continuation',()=>{
  const a=replay();a.click({action:'order',id:'OUT-20261020-121'});a.flush();const token=a.commands.findLast(c=>c.action==='replayLeave').token;assert.equal(a.window.twinState.detail,null);
  a.window.twinReplayReceive({...active,exitPending:true});a.window.twinReplayReceive({...active,active:false,exitPending:false});a.window.twinReplayContinue(token);a.flush();assert.equal(a.window.twinState.detail.id,'OUT-20261020-121');

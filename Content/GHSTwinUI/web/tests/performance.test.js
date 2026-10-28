@@ -91,12 +91,12 @@ test('hidden navigation and telemetry settle once without restarting a page tran
   assert.equal(metrics(app).htmlBuilds,before+1);assert.equal(app.commands.at(-1).transition.phase,'idle');
 });
 
-test('diagnostic opt-out avoids layout reads and reporting while preserving 320 ms navigation',()=>{
+test('diagnostic opt-out avoids layout reads and reporting while preserving 220 ms navigation',()=>{
   const app=boot({reducedMotion:false,search:'?diagnostics=0'});
   let reads=0;
   app.window.getComputedStyle=()=>{reads++;return{opacity:'1'};};
   app.window.document.querySelector=()=>{reads++;return null;};
-  app.window.twinNavigate('devices');app.advance(119);assert.ok(app.html().includes('仓库运营总览'));
+  app.window.twinNavigate('devices');app.advance(79);assert.ok(app.html().includes('仓库运营总览'));
   app.advance(1);assert.ok(app.html().includes('设备监控'));app.flush();
   assert.equal(reads,0);assert.ok(!app.commands.some(x=>x.action==='report'));
   app.window.twinSetDiagnostics(true);app.flush();assert.ok(reads>0);assert.equal(app.commands.at(-1).action,'report');

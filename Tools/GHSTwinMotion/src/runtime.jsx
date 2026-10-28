@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { flushSync } from 'react-dom';
-import { animate } from 'motion';
+import { createNavigation } from './navigation.js';
 import CountUp from './react-bits/CountUp.jsx';
 import { createChart } from './charts.js';
 import { parseMetric, equalSpec } from './identity.js';
@@ -99,14 +99,15 @@ function enterItems(page, enter) {
   const rowNodes = [...page.querySelectorAll('.list-row,.ledger-sample,.replay-device,.replay-event,.replay-order')];
   const newRows = rowNodes.filter(n => !previousRows.has(rowKey(n)));
   previousRows = new Set(rowNodes.map(rowKey));
-  if (!canAnimate()) return;
-  const selector = '.page-head,.kpi,.section,.stats-four,.notice-row,.replay-head,.replay-card,.replay-session,.replay-empty,.replay-device-list,.replay-event-list';
-  const candidates = enter ? [...page.querySelectorAll(selector)] : newRows;
+  // A view already has one parent transition. A second staggered entrance
+  // makes the destination feel late and dims it twice while charts mount.
+  if (!canAnimate() || enter) return;
+  const candidates = newRows;
   // Do not animate an element and its ancestor simultaneously.
   const items = candidates.filter(n => !candidates.some(p => p !== n && p.contains(n)));
   items.slice(0, 24).forEach((node, i) => {
-    const animation = node.animate([{ opacity: 0, transform: 'translateY(7px)' }, { opacity: 1, transform: 'translateY(0)' }],
-      { duration: 300, delay: Math.min(i * 35, 210), easing: 'cubic-bezier(.22,1,.36,1)', fill: 'backwards' });
+    const animation = node.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'translateY(0)' }],
+      { duration: 160, delay: Math.min(i * 20, 60), easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' });
     entrance.push(animation);
   });
 }
@@ -117,28 +118,7 @@ function afterPaint(page, view, enter) {
 }
 
 function navigation(nav) {
-  if (!navControl) {
-    const pill = document.createElement('span'); pill.className = 'motion-nav-highlight'; pill.setAttribute('aria-hidden', 'true');
-    nav.prepend(pill); nav.classList.add('motion-navigation');
-    let target, animation, previous;
-    function move(button, immediate = false) {
-      if (!button) return;
-      target = button;
-      // offset coordinates stay in layout pixels under UE's root transform scale.
-      const next = { x: button.offsetLeft, y: button.offsetTop, width: button.offsetWidth, height: button.offsetHeight };
-      if (equalSpec(previous, next)) return;
-      animation?.stop();
-      if (!previous || immediate || !canAnimate()) Object.assign(pill.style, { transform: `translate(${next.x}px,${next.y}px)`, width: `${next.width}px`, height: `${next.height}px`, opacity: '1' });
-      else animation = animate(pill, { x: next.x, y: next.y, width: next.width, height: next.height, opacity: 1 }, { duration: 0.25, ease: [0.22, 1, 0.36, 1] });
-      previous = next;
-    }
-    const active = () => nav.querySelector('[aria-current="page"]');
-    // Selection moves only after navigation is activated. Hover/focus feedback
-    // belongs to the individual button and must not move the selected marker.
-    const resize = new ResizeObserver(() => move(target || active(), true)); resize.observe(nav);
-    document.addEventListener('twin-viewport-change', () => { previous = null; move(target || active(), true); });
-    navControl = { update: () => move(active()), settle: () => { animation?.stop(); previous = null; move(active(), true); }, dispose: () => resize.disconnect() };
-  }
+  if (!navControl) navControl = createNavigation(nav, { canAnimate, document, ResizeObserver });
   navControl.update();
 }
 function settle() {

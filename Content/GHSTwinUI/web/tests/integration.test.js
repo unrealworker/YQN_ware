@@ -251,19 +251,19 @@ test('page navigation keeps outgoing content until fade-out and coalesces teleme
   const app=boot({reducedMotion:false}),old=app.html();
   app.window.twinNavigate('devices');assert.equal(app.html(),old);
   app.advance(60);app.window.twinReceive({equipment:[{id:'AGV-07',type:'agv'}],facilities:[]});
-  assert.equal(app.html(),old);app.advance(59);assert.equal(app.html(),old);
+  assert.equal(app.html(),old);app.advance(19);assert.equal(app.html(),old);
   app.advance(1);assert.ok(app.html().includes('作业设备 1'));
   const entering=app.html();app.window.twinReceive({equipment:[],facilities:[]});
-  assert.equal(app.html(),entering);app.advance(199);assert.equal(app.html(),entering);
+  assert.equal(app.html(),entering);app.advance(139);assert.equal(app.html(),entering);
   app.advance(1);assert.ok(app.html().includes('作业设备 0'));
   app.flush();assert.equal(app.commands.at(-1).page,'devices');
 });
 test('completed transition reports preserve measured exit entry and idle diagnostics',()=>{
   const app=boot({reducedMotion:false});app.window.twinNavigate('devices');app.flush();
   let transition=app.commands.at(-1).transition;
-  assert.equal(transition.phase,'idle');assert.equal(transition.durationMs,320);
+  assert.equal(transition.phase,'idle');assert.equal(transition.durationMs,220);
   assert.deepEqual(transition.recentPhases.map(sample=>sample.phase),['out','in','idle']);
-  assert.deepEqual(transition.recentPhases.map(sample=>sample.atMs),[0,120,320]);
+  assert.deepEqual(transition.recentPhases.map(sample=>sample.atMs),[0,80,220]);
   assert.ok(transition.recentPhases.every(sample=>typeof sample.opacity==='number'));
   app.window.twinReceive({equipment:[],facilities:[]});app.flush();
   assert.deepEqual(app.commands.at(-1).transition.recentPhases,transition.recentPhases);
@@ -287,6 +287,21 @@ test('rapid navigation during both transition phases settles on the final destin
   app.advance(40);app.window.twinNavigate('devices');app.advance(20);app.window.twinNavigate('settings');
   app.flush();assert.ok(app.html().includes('<h1>场景设置</h1>'));
   assert.equal(app.window.twinState.page,'scene');assert.equal(app.commands.at(-1).page,'settings');
+});
+
+test('accepted navigation updates selection before the native bridge and repeats do not restart entry',()=>{
+  const app=boot({reducedMotion:false}),order=[];
+  app.window.TwinMotion={navigation:()=>order.push('selection:'+app.window.twinState.page),beforePaint(){},afterPaint(){},diagnostics:()=>({}),text:()=>app.html()};
+  const original=app.window.ue.twin.command;
+  app.window.ue.twin.command=json=>{const command=JSON.parse(json);if(command.action==='navigate')order.push('bridge:'+command.page);return original(json);};
+  // Navigation lives outside #page and remains interactive while content fades.
+  const button={dataset:{action:'nav',page:'devices'},insidePage:false};
+  const activate=()=>app.listeners.click({target:{closest:()=>button}});
+  activate();assert.deepEqual(order.slice(0,2),['selection:devices','bridge:devices']);
+  app.advance(100);activate();app.advance(120);app.flush();
+  const transition=app.commands.at(-1).transition;
+  assert.deepEqual(transition.recentPhases.map(sample=>sample.phase),['out','in','idle']);
+  assert.deepEqual(transition.recentPhases.map(sample=>sample.atMs),[0,80,220]);
 });
 test('scroll and search focus survive navigating away and back, including queued refresh',()=>{
   const app=boot({reducedMotion:false});app.window.twinNavigate('devices');app.flush();
