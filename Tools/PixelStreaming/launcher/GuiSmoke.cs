@@ -59,6 +59,9 @@ namespace Ghs.PixelStreaming
                 Call(form,"ToggleLogs"); Capture(form,Path.Combine(directory,stem+"-logs.png"),captures); Call(form,"ToggleLogs");
                 Set(form,"stopBusy",true); Call(form,"SetStatus","◌  正在停止服务",LauncherTheme.StateInk("stopping")); Call(form,"UpdateControls"); Capture(form,Path.Combine(directory,stem+"-stopping.png"),captures);
                 Set(form,"stopBusy",false); Set(form,"onlineViewers",0); typeof(ServiceSession).GetField("state",Private).SetValue(session,"idle");
+                LauncherConfig cloudBaseline=new LauncherConfig {networkMode="public",externalTlsTermination=true,publicUrl="https://warehouse-sim.iyunquna.com",accessCode="fixture-only-not-real",maxViewers=10};
+                Set(form,"baseline",cloudBaseline); Call(form,"UpdateNetworkSummary"); Call(form,"SetStatus","○  服务未启动",LauncherTheme.Muted); ((Label)Field(form,"portFeedback")).Text="尚未检测端口 · 启动时自动检查"; ((Label)Field(form,"portFeedback")).ForeColor=LauncherTheme.Muted; Capture(form,Path.Combine(directory,stem+"-cloud-idle.png"),captures);
+                if(((Button)Field(form,"firewall")).Enabled) throw new InvalidOperationException("Cloud mode must not offer automatic broad firewall rules.");
                 form.Close(); Application.DoEvents();
             }
             LauncherConfig sample=new LauncherConfig {networkMode="public",maxViewers=10,publicUrl="https://warehouse.example.com",accessCode="fixture-only-not-real",trustProxy=true,stunUrl="stun:stun.example.com:3478",turnUrl="turn:relay.example.com:3478?transport=udp",turnUsername="fixture",turnPassword="fixture-only-not-real"};
@@ -66,6 +69,13 @@ namespace Ghs.PixelStreaming
                 settings.ShowInTaskbar=false; settings.StartPosition=FormStartPosition.Manual; settings.Location=new Point(-30000,-30000); settings.Show(); Application.DoEvents();
                 foreach(Control control in settings.Controls) if(control is TabControl) { TabControl tabs=(TabControl)control; for(int page=0;page<tabs.TabPages.Count;page++) { tabs.SelectedIndex=page; Application.DoEvents(); string file=stem+"-public-"+page+".png"; using(Bitmap image=new Bitmap(settings.Width,settings.Height)) { settings.DrawToBitmap(image,new Rectangle(Point.Empty,image.Size)); image.Save(Path.Combine(directory,file),ImageFormat.Png); } captures.Add(new {file=file,width=settings.Width,height=settings.Height,fixtureOnly=true}); } }
                 settings.Close();
+            }
+            sample.trustProxy=false; sample.externalTlsTermination=true; sample.publicUrl="https://warehouse-sim.iyunquna.com";
+            using(PublicSettingsForm settings=new PublicSettingsForm(directory,sample)) {
+                settings.ShowInTaskbar=false; settings.StartPosition=FormStartPosition.Manual; settings.Location=new Point(-30000,-30000); settings.Show(); Application.DoEvents();
+                string file=stem+"-cloud-https.png"; using(Bitmap image=new Bitmap(settings.Width,settings.Height)) { settings.DrawToBitmap(image,new Rectangle(Point.Empty,image.Size)); image.Save(Path.Combine(directory,file),ImageFormat.Png); }
+                captures.Add(new {file=file,width=settings.Width,height=settings.Height,fixtureOnly=true});
+                LauncherConfig read=settings.Read(); if(!read.externalTlsTermination || read.trustProxy || read.tlsCertPath!="" || read.tlsKeyPath!="") throw new InvalidOperationException("Cloud settings fixture did not preserve HTTP backhaul mode."); settings.Close();
             }
             File.WriteAllText(Path.Combine(directory,stem+"-report.json"),new JavaScriptSerializer().Serialize(new {fixtureOnly=true,capturedAt=DateTime.UtcNow.ToString("o"),captures=captures})); return 0;
         }

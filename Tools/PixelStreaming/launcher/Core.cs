@@ -30,6 +30,7 @@ namespace Ghs.PixelStreaming
         public string tlsCertPath { get; set; }
         public string tlsKeyPath { get; set; }
         public bool trustProxy { get; set; }
+        public bool externalTlsTermination { get; set; }
         public string stunUrl { get; set; }
         public string turnUrl { get; set; }
         public string turnUsername { get; set; }
@@ -42,15 +43,17 @@ namespace Ghs.PixelStreaming
             if(maxViewers<1 || maxViewers>10) throw new ArgumentException("在线人数上限必须为 1–10。");
             if(networkMode!="lan" && networkMode!="public") throw new ArgumentException("请选择局域网或公网访问。");
             if(trustProxy && networkMode!="public") throw new ArgumentException("本机 HTTPS 反向代理仅适用于公网模式；局域网访问请关闭此选项。");
+            if(externalTlsTermination && networkMode!="public") throw new ArgumentException("云负载均衡 HTTPS 仅适用于公网模式。");
             foreach(string value in new[]{publicUrl,accessCode,tlsCertPath,tlsKeyPath,stunUrl,turnUrl,turnUsername,turnPassword}) if(value==null || value.Length>4096 || value.IndexOfAny(new[]{'\r','\n','\0'})>=0) throw new ArgumentException("网络配置不能包含换行、空字符或超过 4096 个字符。");
             Uri url;
             if(!string.IsNullOrEmpty(publicUrl) && (!Uri.TryCreate(publicUrl,UriKind.Absolute,out url) || (url.Scheme!="https" && url.Scheme!="http") || !string.IsNullOrEmpty(url.UserInfo) || (url.AbsolutePath!="/" && url.AbsolutePath!="") || !string.IsNullOrEmpty(url.Query) || !string.IsNullOrEmpty(url.Fragment))) throw new ArgumentException("公网地址须为完整 HTTP / HTTPS 地址，不含路径、账号、查询或片段。");
             if(networkMode=="public" && (string.IsNullOrWhiteSpace(publicUrl) || string.IsNullOrWhiteSpace(accessCode) || accessCode.Length<12)) throw new ArgumentException("公网模式需要公网访问地址和至少 12 位访问码。");
             if(string.IsNullOrWhiteSpace(tlsCertPath)!=string.IsNullOrWhiteSpace(tlsKeyPath)) throw new ArgumentException("HTTPS 证书与私钥需要成对选择。");
             if(trustProxy && !string.IsNullOrWhiteSpace(tlsCertPath)) throw new ArgumentException("本机反向代理与原生 HTTPS 证书不可同时启用。");
+            if(externalTlsTermination && (trustProxy || !string.IsNullOrWhiteSpace(tlsCertPath))) throw new ArgumentException("云负载均衡 HTTPS 不能同时使用本机代理或本机证书。");
             foreach(string file in new[]{tlsCertPath,tlsKeyPath}) if(!string.IsNullOrWhiteSpace(file) && !File.Exists(ResolveLocalFile(root,file))) throw new ArgumentException("找不到 HTTPS 证书或私钥文件。");
-            if(networkMode=="public" && publicUrl.StartsWith("https://",StringComparison.OrdinalIgnoreCase) && !trustProxy && string.IsNullOrWhiteSpace(tlsCertPath)) throw new ArgumentException("HTTPS 地址需要选择证书和私钥，或启用本机 HTTPS 反向代理。");
-            if(networkMode=="public" && publicUrl.StartsWith("http://",StringComparison.OrdinalIgnoreCase) && (!string.IsNullOrWhiteSpace(tlsCertPath) || trustProxy)) throw new ArgumentException("已启用 HTTPS 或代理时，请填写 HTTPS 公网地址。");
+            if(networkMode=="public" && publicUrl.StartsWith("https://",StringComparison.OrdinalIgnoreCase) && !trustProxy && !externalTlsTermination && string.IsNullOrWhiteSpace(tlsCertPath)) throw new ArgumentException("HTTPS 地址需要原生证书、本机反向代理或云负载均衡 HTTPS 接入方式。");
+            if(networkMode=="public" && publicUrl.StartsWith("http://",StringComparison.OrdinalIgnoreCase) && (!string.IsNullOrWhiteSpace(tlsCertPath) || trustProxy || externalTlsTermination)) throw new ArgumentException("已启用 HTTPS 或代理时，请填写 HTTPS 公网地址。");
             ValidateIce(stunUrl,new[]{"stun:","stuns:"},"STUN"); ValidateIce(turnUrl,new[]{"turn:","turns:"},"TURN");
             if(!string.IsNullOrWhiteSpace(turnUrl) && (string.IsNullOrWhiteSpace(turnUsername) || string.IsNullOrWhiteSpace(turnPassword))) throw new ArgumentException("TURN 中继需要填写用户名和密码。");
             if(string.IsNullOrWhiteSpace(turnUrl) && (!string.IsNullOrEmpty(turnUsername) || !string.IsNullOrEmpty(turnPassword))) throw new ArgumentException("已填写 TURN 账号，请同时填写 TURN 服务地址。");

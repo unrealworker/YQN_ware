@@ -213,7 +213,7 @@ namespace Ghs.PixelStreaming
         }
         private void EnsureCustomQuality() { if(quality.Items.Count<4) quality.Items.Add("自定义码率"); }
         private static decimal Clamp(int value,NumericUpDown control) { return Math.Max(control.Minimum,Math.Min(control.Maximum,value)); }
-        private LauncherConfig ReadSettings() { LauncherConfig c=new LauncherConfig {maxViewers=baseline.maxViewers,networkMode=baseline.networkMode,publicUrl=baseline.publicUrl,accessCode=baseline.accessCode,tlsCertPath=baseline.tlsCertPath,tlsKeyPath=baseline.tlsKeyPath,trustProxy=baseline.trustProxy,stunUrl=baseline.stunUrl,turnUrl=baseline.turnUrl,turnUsername=baseline.turnUsername,turnPassword=baseline.turnPassword,executablePath=executable.Text.Trim(),httpPort=(int)httpPort.Value,streamerPort=(int)streamerPort.Value,width=(int)renderWidth.Value,height=(int)renderHeight.Value,showWindow=showWindow.Checked,mode=mode.SelectedIndex==1?"independent":"shared",fps=(int)fpsLimit.Value,minBitrateMbps=(int)minBitrate.Value,startBitrateMbps=(int)startBitrate.Value,maxBitrateMbps=(int)maxBitrate.Value,adaptiveResourceBudget=adaptiveResources.Checked}; c.ApplyQualityProfile(quality.SelectedIndex==0?"balanced":quality.SelectedIndex==2?"ultra":quality.SelectedIndex==3?"custom":"clear"); return c; }
+        private LauncherConfig ReadSettings() { LauncherConfig c=new LauncherConfig {maxViewers=baseline.maxViewers,networkMode=baseline.networkMode,publicUrl=baseline.publicUrl,accessCode=baseline.accessCode,tlsCertPath=baseline.tlsCertPath,tlsKeyPath=baseline.tlsKeyPath,trustProxy=baseline.trustProxy,externalTlsTermination=baseline.externalTlsTermination,stunUrl=baseline.stunUrl,turnUrl=baseline.turnUrl,turnUsername=baseline.turnUsername,turnPassword=baseline.turnPassword,executablePath=executable.Text.Trim(),httpPort=(int)httpPort.Value,streamerPort=(int)streamerPort.Value,width=(int)renderWidth.Value,height=(int)renderHeight.Value,showWindow=showWindow.Checked,mode=mode.SelectedIndex==1?"independent":"shared",fps=(int)fpsLimit.Value,minBitrateMbps=(int)minBitrate.Value,startBitrateMbps=(int)startBitrate.Value,maxBitrateMbps=(int)maxBitrate.Value,adaptiveResourceBudget=adaptiveResources.Checked}; c.ApplyQualityProfile(quality.SelectedIndex==0?"balanced":quality.SelectedIndex==2?"ultra":quality.SelectedIndex==3?"custom":"clear"); return c; }
         private void UpdateModeHint()
         {
             bool separate=mode.SelectedIndex==1; modeHint.Text=(separate?"每位访问者拥有独立视角与操作。":"所有访问者共享同一场景、视角与操作。")+"最多 "+baseline.maxViewers+" 位，实际容量取决于服务器。";
@@ -236,7 +236,7 @@ namespace Ghs.PixelStreaming
         }
         private void UpdateControls()
         {
-            bool idle=session.State=="idle" && !startBusy && !stopBusy,canConfigure=idle && !closing; start.Enabled=canConfigure && !portConflict; probe.Enabled=canConfigure; firewall.Enabled=canConfigure;
+            bool idle=session.State=="idle" && !startBusy && !stopBusy,canConfigure=idle && !closing; start.Enabled=canConfigure && !portConflict; probe.Enabled=canConfigure; firewall.Enabled=canConfigure && !baseline.externalTlsTermination;
             foreach(Control control in new Control[]{showWindow,adaptiveResources,mode,browse,sharedMode,independentMode,advanced,publicSettings}) control.Enabled=canConfigure;
             stop.Enabled=!idle && !stopBusy && !closing; start.Visible=idle; stop.Visible=!idle; stop.Text=stopBusy?"正在停止…":startBusy?"取消启动":"□  停止服务"; copy.Enabled=open.Enabled=urls.Items.Count>0 && session.State=="running" && !closing;
             pageSubtitle.Text=idle?"配置访问入口，管理当前连接与运行资源。":startBusy?"正在准备服务，可取消本次启动。":stopBusy?"正在断开访问并回收本次启动的程序。":"服务运行中，停止服务后可修改配置。"; footerHint.Text=idle?"启动时自动保存配置":"停止将断开访问并关闭本次启动的程序";
@@ -283,13 +283,14 @@ namespace Ghs.PixelStreaming
         private void OpenUrl(string url) { try { Uri uri; if(!Uri.TryCreate(url,UriKind.Absolute,out uri) || (uri.Scheme!="http" && uri.Scheme!="https")) throw new ArgumentException("访问地址无效。"); Process.Start(new ProcessStartInfo(uri.AbsoluteUri) {UseShellExecute=true}); } catch(Exception ex) { ShowError(ex); } }
         private void ConfigureFirewall()
         {
+            if(baseline.externalTlsTermination) { AppendLog("云负载均衡模式：请由管理员将网页端口限制为 ALB 回源来源；未修改防火墙。"); return; }
             try { LauncherConfig c=ReadSettings(); c.Validate(root,false); bool internet=c.networkMode=="public"; string filename=internet?"Enable-PublicAccess.ps1":"Enable-LanAccess.ps1"; string script=Path.Combine(root,filename); if(!File.Exists(script)) throw new FileNotFoundException("缺少 "+filename+"，请保留完整部署目录。"); if(MessageBox.Show(this,internet?"将请求 Windows 管理员授权，允许公网访问配置的网页及视频端口。\r\n还需在路由器 / 云安全组设置映射；本操作不会申请公网 IP。":"将请求 Windows 管理员授权，仅允许本地子网访问网页和视频端口。","配置访问防火墙",MessageBoxButtons.OKCancel,MessageBoxIcon.Information)!=DialogResult.OK) return;
                 string args="-NoProfile -ExecutionPolicy Bypass -File "+OwnedProcess.QuoteArgument(script)+" -HttpPort "+c.httpPort+" -ApplicationPath "+OwnedProcess.QuoteArgument(c.ResolveExecutable(root))+(internet && c.trustProxy?" -TrustProxy":""); Process.Start(new ProcessStartInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System),"WindowsPowerShell","v1.0","powershell.exe"),args) {UseShellExecute=true,Verb="runas",WorkingDirectory=root}); AppendLog("已请求配置访问防火墙，请查看 Windows 授权窗口与脚本结果。");
             } catch(System.ComponentModel.Win32Exception ex) { AppendLog(ex.NativeErrorCode==1223?"已取消防火墙授权。":ex.Message); } catch(Exception ex) { ShowError(ex); }
         }
         private void UpdateNetworkSummary()
         {
-            bool internet=baseline.networkMode=="public"; networkSummary.Text=(internet?"公网访问":"局域网验证")+" · 最多 "+baseline.maxViewers+" 人\r\n"+(internet?"入口 / 访问码 / HTTPS / TURN":"公网地址可稍后配置"); firewall.Text=internet?"配置公网防火墙":"配置内网访问"; UpdateModeHint();
+            bool internet=baseline.networkMode=="public",cloud=baseline.externalTlsTermination; networkSummary.Text=(cloud?"云负载均衡 HTTPS":internet?"公网访问":"局域网验证")+" · 最多 "+baseline.maxViewers+" 人\r\n"+(cloud?"网页端口仅允许 ALB 回源来源":internet?"入口 / 访问码 / HTTPS / TURN":"公网地址可稍后配置"); firewall.Text=cloud?"回源规则需配置":internet?"配置公网防火墙":"配置内网访问"; UpdateModeHint(); UpdateControls();
         }
         private void ApplyViewers(ViewerStatus[] current)
         {

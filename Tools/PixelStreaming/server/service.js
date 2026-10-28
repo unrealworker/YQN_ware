@@ -6,6 +6,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
 const crypto = require('node:crypto');
+const { performance } = require('node:perf_hooks');
 const { spawn } = require('node:child_process');
 const { WebSocketServer, WebSocket } = require('ws');
 const { BudgetPolicy, readMetrics, writeBudget } = require('./resource-budget');
@@ -74,9 +75,39 @@ function createService(rawConfig, options = {}) {
   const budgetPolicy = new BudgetPolicy(config);
   const reconnectGraceMs = options.reconnectGraceMs ?? 8000;
   const spawnProcess = options.spawnProcess || spawn;
+  const cloudAuthQueue = [];
+  let cloudAuthTokens = 10, cloudAuthUpdated = performance.now(), cloudAuthTimer;
+  function drainCloudAuth() {
+    clearTimeout(cloudAuthTimer); cloudAuthTimer = undefined;
+    const now = performance.now();
+    cloudAuthTokens = Math.min(10, cloudAuthTokens + (now - cloudAuthUpdated) / 200);
+    cloudAuthUpdated = now;
+    while (cloudAuthQueue.length) {
+      const next = cloudAuthQueue[0];
+      if (now >= next.expires) { cloudAuthQueue.shift().finish(429); continue; }
+      if (cloudAuthTokens < 1) break;
+      cloudAuthTokens--; cloudAuthQueue.shift().finish(200);
+    }
+    if (cloudAuthQueue.length) {
+      const wait = Math.min((1 - cloudAuthTokens) * 200, cloudAuthQueue[0].expires - now);
+      cloudAuthTimer = setTimeout(drainCloudAuth, Math.max(1, Math.ceil(wait)));
+      cloudAuthTimer.unref();
+    }
+  }
+  function reserveCloudAuth(res) {
+    if (res.destroyed) return Promise.resolve(0);
+    if (state === 'stopping' || state === 'stopped') return Promise.resolve(503);
+    drainCloudAuth();
+    if (cloudAuthQueue.length >= 20) return Promise.resolve(429);
+    return new Promise(resolve => {
+      const cancel = () => { const i = cloudAuthQueue.indexOf(entry); if (i >= 0) { cloudAuthQueue.splice(i, 1); entry.finish(0); drainCloudAuth(); } };
+      const entry = { expires: performance.now() + 4000, finish(code) { res.removeListener('close', cancel); resolve(code); } };
+      res.once('close', cancel); cloudAuthQueue.push(entry); drainCloudAuth();
+    });
+  }
   function log(text) { let safe = String(text); for (const secret of [config.accessCode, config.turnPassword, config.turnUsername, config.turnUrl, config.stunUrl, ...[...instances.values()].map(i => i.streamerToken)]) if (secret) { safe = safe.split(JSON.stringify(secret).slice(1, -1)).join('[已隐藏]'); safe = safe.split(secret).join('[已隐藏]'); } const line = new Date().toISOString() + ' ' + safe.slice(0, 1500); logs.push(line); if (logs.length > 100) logs.shift(); options.onLog?.(line); }
   function urls() { if (config.networkMode === 'public') return [config.publicUrl + '/']; const ips = Object.values(os.networkInterfaces()).flat().filter(x => x && x.family === 'IPv4' && !x.internal).map(x => x.address); return [...new Set(ips)].map(ip => `${scheme}://${ip}:${config.httpPort}/`); }
-  function status() { return { state, message, mode: config.mode, networkMode: config.networkMode, publicUrl: config.publicUrl, tlsEnabled: !!config.tlsCertPath, trustProxy: config.trustProxy, qualityProfile: config.qualityProfile, adaptiveResourceBudget: config.adaptiveResourceBudget, viewerCount: viewers.size, maxViewers: config.maxViewers,
+  function status() { return { state, message, mode: config.mode, networkMode: config.networkMode, publicUrl: config.publicUrl, tlsEnabled: !!config.tlsCertPath, trustProxy: config.trustProxy, externalTlsTermination: config.externalTlsTermination, qualityProfile: config.qualityProfile, adaptiveResourceBudget: config.adaptiveResourceBudget, viewerCount: viewers.size, maxViewers: config.maxViewers,
     viewers: [...viewers.values()].map(v => ({ playerId: v.playerId, displayName: v.displayName, address: v.address, userAgent: v.userAgent, connectedAt: v.connectedAt, state: !v.ws ? 'reconnecting' : v.subscribed ? 'connected' : instances.get(v.instanceId)?.state === 'failed' ? 'failed' : 'starting', instanceId: v.instanceId })),
     instances: [...instances.values()].map(i => ({ id: i.id, pid: i.child?.pid || null, state: i.state, targetFps: i.targetFps, actualFps: i.metrics?.actualFps ?? null, gpuMs: i.metrics?.gpuMs ?? null, budgetAcknowledged: !!i.metrics && i.metrics.sequence === i.sequence, screenPercentage: i.metrics?.screenPercentage ?? null })), urls: urls(), localUrl: `${scheme}://127.0.0.1:${config.httpPort}/`, logs: [...logs] }; }
   function rebalance() {
@@ -104,14 +135,25 @@ function createService(rawConfig, options = {}) {
         if (body.token) return json(res, 409, { error: '会话已过期，请重新进入', expired: true });
         if (config.networkMode === 'public') {
           if (!body.accessCode) return json(res, 401, { error: '请输入访问码', accessRequired: true });
-          const ip = clientAddress(req, config), attempt = authAttempts.get(ip);
-          if (attempt?.count >= 20) return json(res, 429, { error: '访问码尝试过多，请5分钟后重试' });
+          let ip, attempt;
+          if (config.externalTlsTermination) {
+            // ALB peers share socket IPs. Bound every code comparison, including
+            // correct codes, without trusting XFF or locking the whole ALB out.
+            const permit = await reserveCloudAuth(res);
+            if (res.destroyed || !permit) return;
+            if (permit !== 200) { res.setHeader('Retry-After', '1'); return json(res, permit, { error: '访问验证繁忙，请稍后重试' }); }
+          } else {
+            ip = clientAddress(req, config); attempt = authAttempts.get(ip);
+            if (attempt?.count >= 20) return json(res, 429, { error: '访问码尝试过多，请5分钟后重试' });
+          }
           if (!secretEqual(body.accessCode, config.accessCode)) {
-            if (!attempt && authAttempts.size >= 10000) return json(res, 429, { error: '请求过多，请稍后重试' });
-            authAttempts.set(ip, { count: (attempt?.count || 0) + 1, until: attempt?.until || Date.now() + 300000 });
+            if (!config.externalTlsTermination) {
+              if (!attempt && authAttempts.size >= 10000) return json(res, 429, { error: '请求过多，请稍后重试' });
+              authAttempts.set(ip, { count: (attempt?.count || 0) + 1, until: attempt?.until || Date.now() + 300000 });
+            }
             return json(res, 401, { error: '请输入有效的访问码', accessRequired: true });
           }
-          authAttempts.delete(ip);
+          if (!config.externalTlsTermination) authAttempts.delete(ip);
         }
         if (sessions.size >= 10000) return json(res, 503, { error: '会话数量达到上限，请稍后重试' });
         const displayName = typeof body.displayName === 'string' ? body.displayName.replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 40) : '';
@@ -315,6 +357,8 @@ function createService(rawConfig, options = {}) {
     if (stopPromise) return stopPromise;
     stopPromise = (async () => {
       state = 'stopping'; message = '正在清理本服务的场景实例'; clearInterval(heartbeat); clearInterval(budgetTimer);
+      clearTimeout(cloudAuthTimer); cloudAuthTimer = undefined;
+      for (const pending of cloudAuthQueue.splice(0)) pending.finish(503);
       await admission;
       for (const v of viewers.values()) { clearTimeout(v.disconnectTimer); send(v.ws, { type: 'ghsShutdown', message: '启动器已停止服务', reconnect: false }); }
       for (const server of [playersWS, streamersWS]) for (const ws of server.clients) ws.terminate();

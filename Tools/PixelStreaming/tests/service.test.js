@@ -256,6 +256,118 @@ test('trusted proxy only accepts client address from loopback and rejects cross-
   req.headers.origin = 'https://evil.example'; assert.equal(sameOrigin(req, c), false);
 });
 
+test('cloud TLS termination requires an exclusive public HTTPS arrangement and preserves old defaults', () => {
+  const base = { executablePath: process.execPath };
+  const cloud = { ...base, networkMode: 'public', publicUrl: 'https://warehouse.example/', accessCode: 'test-only-access-code', externalTlsTermination: true };
+  assert.equal(validateConfig(base).externalTlsTermination, false);
+  assert.equal(validateConfig(cloud).publicUrl, 'https://warehouse.example');
+  for (const fields of [
+    { networkMode: 'lan' }, { publicUrl: 'http://warehouse.example' },
+    { trustProxy: true }, { externalTlsTermination: 'true' },
+    { tlsCertPath: path.join(__dirname, 'fixtures/test-localhost-cert.pem'), tlsKeyPath: path.join(__dirname, 'fixtures/test-localhost-key.pem') },
+  ]) assert.throws(() => validateConfig({ ...cloud, ...fields }), undefined, JSON.stringify(fields));
+});
+
+test('cloud HTTPS uses HTTP backhaul with exact public Host and Origin for sessions and websocket admission', async t => {
+  const http = require('node:http');
+  const os = require('node:os');
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
+  // Use the actual local network interface when available: a loopback-only bind
+  // would pass localhost tests but fail remote ALB connections.
+  const host = Object.values(os.networkInterfaces()).flat().find(x => x.family === 'IPv4' && !x.internal)?.address || '127.0.0.1';
+  const backhaul = `http://${host}:${ctx.config.httpPort}`;
+  const headers = { Host: 'warehouse.example', Origin: 'https://warehouse.example', 'Content-Type': 'application/json', 'X-Forwarded-For': '203.0.113.123', 'X-Forwarded-Proto': 'https' };
+  const request = (body, changed = {}) => new Promise((resolve, reject) => {
+    const req = http.request(backhaul + '/api/session', { method: 'POST', headers: { ...headers, ...changed }, timeout: 5000 }, res => {
+      let text = ''; res.on('data', b => text += b); res.on('end', () => resolve({ status: res.statusCode, body: JSON.parse(text) }));
+    });
+    req.on('error', reject); req.on('timeout', () => req.destroy(Error('HTTP backhaul timeout'))); req.end(JSON.stringify(body));
+  });
+  assert.equal((await request({})).status, 401);
+  const body = { accessCode: ctx.config.accessCode, displayName: 'ALB guest' };
+  assert.equal((await request(body, { Host: 'evil.example' })).status, 403);
+  assert.equal((await request(body, { Origin: 'https://evil.example' })).status, 403);
+  assert.equal((await request(body, { Origin: 'http://warehouse.example' })).status, 403);
+  const session = await request(body); assert.equal(session.status, 200);
+  const wsUrl = backhaul.replace('http:', 'ws:') + '/ws?token=' + session.body.token;
+  for (const changed of [{ Host: 'evil.example' }, { Origin: 'https://evil.example' }]) {
+    const code = await new Promise((resolve, reject) => {
+      const denied = new WebSocket(wsUrl, { headers: { ...headers, ...changed }, handshakeTimeout: 5000 });
+      denied.on('unexpected-response', (_req, res) => { res.resume(); resolve(res.statusCode); denied.terminate(); });
+      denied.on('error', () => {}); denied.on('open', () => { denied.terminate(); reject(Error('invalid cloud origin was admitted')); });
+    });
+    assert.equal(code, 403);
+  }
+  const ws = new WebSocket(wsUrl, { headers, handshakeTimeout: 5000 });
+  const messages = []; ws.on('message', b => messages.push(JSON.parse(b))); await once(ws, 'open');
+  await until(() => messages.some(m => m.type === 'ghsAdmission'));
+  assert.equal(ctx.service.status().externalTlsTermination, true);
+  assert.equal(ctx.service.status().tlsEnabled, false);
+  assert.equal(ctx.service.status().viewerCount, 1);
+  assert.notEqual(ctx.service.status().viewers[0].address, '203.0.113.123', 'untrusted forwarded address must not become viewer identity');
+  assert.deepEqual(ctx.service.status().urls, ['https://warehouse.example/']);
+});
+
+test('cloud TLS termination never trusts forwarded client addresses, even from loopback', () => {
+  const { clientAddress, sameOrigin } = require('../server/network-policy');
+  const config = validateConfig({ executablePath: process.execPath, networkMode: 'public', publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
+  const req = { socket: { remoteAddress: '10.0.0.10' }, headers: { host: 'warehouse.example', origin: 'https://warehouse.example', 'x-forwarded-for': '203.0.113.123', 'x-forwarded-host': 'warehouse.example' } };
+  assert.equal(clientAddress(req, config), '10.0.0.10');
+  req.socket.remoteAddress = '127.0.0.1'; assert.equal(clientAddress(req, config), '127.0.0.1');
+  req.headers.host = 'evil.example'; assert.equal(sameOrigin(req, config), false);
+});
+
+async function cloudCodeRequest(ctx, accessCode, headers = {}) {
+  const response = await fetch(ctx.base + '/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json', ...headers }, body: JSON.stringify({ accessCode }) });
+  return { status: response.status, retryAfter: response.headers.get('retry-after'), body: await response.json() };
+}
+
+test('cloud authentication does not lock all ALB visitors after twenty wrong access codes', async t => {
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
+  const started = performance.now();
+  for (let i = 0; i < 20; i++) assert.equal((await cloudCodeRequest(ctx, 'wrong', { 'X-Forwarded-For': '203.0.113.20' })).status, 401);
+  const legitimate = await cloudCodeRequest(ctx, ctx.config.accessCode, { 'X-Forwarded-For': '198.51.100.30' });
+  assert.equal(legitimate.status, 200, 'a correct code from the same ALB peer must not inherit a five-minute lock');
+  assert.ok(performance.now() - started >= 2000, 'wrong codes must consume the global five-per-second budget after the initial burst');
+  assert.equal(ctx.children.length, 0);
+});
+
+test('cloud authentication throttles correct codes too and bounds excess pending requests', async t => {
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
+  const started = performance.now();
+  const results = await Promise.all(Array.from({ length: 31 }, () => cloudCodeRequest(ctx, ctx.config.accessCode)));
+  const rejected = results.filter(x => x.status === 429);
+  assert.ok(rejected.length >= 1, 'ten immediate attempts plus twenty queued attempts is the hard burst bound');
+  assert.ok(rejected.every(x => x.retryAfter === '1'));
+  assert.ok(results.filter(x => x.status === 200).length >= 29, 'the bounded FIFO must still drain legitimate queued logins');
+  assert.ok(performance.now() - started >= 3700, 'correct codes cannot bypass the sustained rate limit');
+  assert.ok(performance.now() - started < 5000, 'queued requests expire within four seconds, with scheduling tolerance');
+  assert.equal(ctx.children.length, 0);
+});
+
+test('cloud authentication stop settles pending requests', async t => {
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
+  await Promise.all(Array.from({ length: 10 }, () => cloudCodeRequest(ctx, ctx.config.accessCode)));
+  let settled = false;
+  const waiting = cloudCodeRequest(ctx, ctx.config.accessCode).then(value => { settled = true; return value; });
+  await delay(40);
+  assert.equal(settled, false, 'an exhausted burst must queue even a correct access code');
+  await ctx.service.stop();
+  assert.equal((await waiting).status, 503);
+});
+
+test('cloud authentication releases queue capacity when clients disconnect', async t => {
+  const ctx = await setup(t, 'independent', 0, { networkMode: 'public', publicUrl: 'https://warehouse.example', accessCode: 'test-only-access-code', externalTlsTermination: true });
+  await Promise.all(Array.from({ length: 10 }, () => cloudCodeRequest(ctx, ctx.config.accessCode)));
+  const controllers = Array.from({ length: 20 }, () => new AbortController());
+  let completed = 0;
+  const waiting = controllers.map(controller => fetch(ctx.base + '/api/session', { method: 'POST', signal: controller.signal, body: JSON.stringify({ accessCode: ctx.config.accessCode }) }).then(response => { completed++; return response.text(); }).catch(() => {}));
+  await delay(40);
+  assert.equal(completed, 0, 'queued clients must not be validated before a permit exists');
+  controllers.forEach(controller => controller.abort()); await Promise.all(waiting); await delay(40);
+  assert.equal((await cloudCodeRequest(ctx, ctx.config.accessCode)).status, 200, 'abandoned requests must not keep the queue full');
+});
+
 // These self-signed PEM files exist only for loopback transport tests, never the delivery.
 test('native HTTPS performs a verified TLS handshake and accepts WSS with authenticated admission', async t => {
   const https = require('node:https');

@@ -3,12 +3,14 @@ const fs = require('node:fs');
 const net = require('node:net');
 const crypto = require('node:crypto');
 
-const NETWORK_DEFAULTS = { maxViewers: 10, networkMode: 'lan', publicUrl: '', accessCode: '', tlsCertPath: '', tlsKeyPath: '', trustProxy: false, stunUrl: '', turnUrl: '', turnUsername: '', turnPassword: '' };
+const NETWORK_DEFAULTS = { maxViewers: 10, networkMode: 'lan', publicUrl: '', accessCode: '', tlsCertPath: '', tlsKeyPath: '', trustProxy: false, externalTlsTermination: false, stunUrl: '', turnUrl: '', turnUsername: '', turnPassword: '' };
 function validateNetwork(c) {
   if (!Number.isInteger(c.maxViewers) || c.maxViewers < 1 || c.maxViewers > 10) throw Error('人数上限必须是1至10的整数');
   if (!['lan', 'public'].includes(c.networkMode)) throw Error('网络模式必须是 lan 或 public');
   if (typeof c.trustProxy !== 'boolean') throw Error('trustProxy 必须是布尔值');
+  if (typeof c.externalTlsTermination !== 'boolean') throw Error('externalTlsTermination 必须是布尔值');
   if (c.trustProxy && c.networkMode !== 'public') throw Error('本机反向代理仅适用于公网模式');
+  if (c.externalTlsTermination && c.networkMode !== 'public') throw Error('云负载均衡 HTTPS 仅适用于公网模式');
   for (const key of ['publicUrl', 'accessCode', 'tlsCertPath', 'tlsKeyPath', 'stunUrl', 'turnUrl', 'turnUsername', 'turnPassword']) {
     if (typeof c[key] !== 'string' || c[key].length > 4096 || /[\r\n\0]/.test(c[key])) throw Error('无效网络配置：' + key);
   }
@@ -21,9 +23,10 @@ function validateNetwork(c) {
   if (!!c.tlsCertPath !== !!c.tlsKeyPath) throw Error('HTTPS 证书和私钥必须同时提供');
   for (const key of ['tlsCertPath', 'tlsKeyPath']) if (c[key] && !fs.statSync(c[key], { throwIfNoEntry: false })?.isFile()) throw Error('找不到 HTTPS 文件：' + key);
   if (c.trustProxy && c.tlsCertPath) throw Error('本机反向代理和服务直连 HTTPS 请选择一种');
+  if (c.externalTlsTermination && (c.trustProxy || c.tlsCertPath)) throw Error('云负载均衡、本机反向代理和服务直连 HTTPS 请选择一种');
   if (c.networkMode === 'public') {
-    if (c.publicUrl.startsWith('https:') && !c.tlsCertPath && !c.trustProxy) throw Error('HTTPS 公网地址需要证书，或启用本机反向代理');
-    if (c.publicUrl.startsWith('http:') && (c.tlsCertPath || c.trustProxy)) throw Error('已启用 HTTPS 证书，公网地址应使用 https://');
+    if (c.publicUrl.startsWith('https:') && !c.tlsCertPath && !c.trustProxy && !c.externalTlsTermination) throw Error('HTTPS 公网地址需要证书、本机反向代理或云负载均衡 HTTPS');
+    if (c.publicUrl.startsWith('http:') && (c.tlsCertPath || c.trustProxy || c.externalTlsTermination)) throw Error('已启用 HTTPS 接入，公网地址应使用 https://');
   }
   for (const [key, schemes] of [['stunUrl', ['stun:', 'stuns:']], ['turnUrl', ['turn:', 'turns:']]]) {
     if (!c[key]) continue;
@@ -43,6 +46,8 @@ function iceServers(c) {
 }
 const loopback = address => ['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(address);
 function clientAddress(req, c) {
+  // External TLS termination changes only the transport arrangement, never the
+  // trust boundary for forwarded headers. Remote ALB peers retain socket IPs.
   if (c.trustProxy && loopback(req.socket.remoteAddress)) {
     const forwarded = String(req.headers['x-forwarded-for'] || '').split(',').at(-1).trim();
     if (net.isIP(forwarded)) return forwarded;
