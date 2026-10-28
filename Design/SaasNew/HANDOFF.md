@@ -2,6 +2,8 @@
 
 后续主设计源：[Figma · SaasNew](https://www.figma.com/design/AvRtQ9Hcbr1ttTF5dQx9Z1/SaasNew)。
 
+最新增量更新（2026-10-29）：导航动效与像素流预览已直接写入现有 Figma 并回读验证，见 [本次规则](updates/2026-10-28-navigation-motion.md)。54 张画板旁说明、154 条普通导航连接及12处预览填充已更新；保留36条追溯确认路径。下面的4d3a214e验收记录和本地.fig属于首次迁移快照，不能用于覆盖本次实时更新。本次 MCP 不支持命名版本 API，因此仅声明实时文件写入和回读成功，不声明新增命名版本。
+
 状态：**已完成实际导入、54 页导出、视觉与主要原型路径验收，并保存 Figma 命名版本。** 当前实际验收版本 `4d3a214e…`，记录见 `acceptance/final/SaasNew-acceptance.json`：54 画板、47 历史主组件、11 当前组件、12,229 画板节点、4,065 文字节点、1,063 条实际原型连接，全部 checks 为 true，错误 0；667 个过期节点已隐藏且清除交互，未删除。5 种字体/字重回退涉及 413 次使用，已在实际 01–30 页视觉复验中检查，没有造成可见缺字或溢出。最终结论见 acceptance/FINAL_ACCEPTANCE.md、实际验收 JSON 与视觉 QA 记录。
 
 原 `Design/GHS_Twin_SaaS_Concept/Saas.pen` 作为历史来源保留；未来设计修改以 Figma 为主，不再默认回写旧 `.pen`。本目录保存本次迁移的来源、转换逻辑、交互说明与验收证据；UE 生产实现仍需独立开发与验证。
