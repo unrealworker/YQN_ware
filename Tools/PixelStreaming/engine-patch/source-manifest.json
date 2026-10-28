@@ -1,0 +1,1784 @@
+{
+  "schemaVersion": 1,
+  "patchId": "ghs-ue54-uncapped-playout-v1",
+  "upstream": {
+    "engineVersion": "5.4.4",
+    "changelist": 35576357,
+    "branch": "++UE5+Release-5.4",
+    "buildVersionSha256": "50e44c92eff2ba7efdcce2877828662395e7d5f0344182421e43aac9870a063a",
+    "relativePluginPath": "Engine/Plugins/Media/PixelStreaming"
+  },
+  "upstreamCopiedFileCount": 248,
+  "upstreamCopiedBytes": 1119772,
+  "excludes": [
+    "Binaries",
+    "Intermediate",
+    "downloaded WebServers"
+  ],
+  "files": [
+    {
+      "path": "PixelStreaming.uplugin",
+      "bytes": 2746,
+      "upstreamSha256": "2ba186f0fd971288f7a8766eec7e8e42da10d99244ba7141c2b1ff2f32503736",
+      "projectSha256": "2ba186f0fd971288f7a8766eec7e8e42da10d99244ba7141c2b1ff2f32503736",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/Private/PixelStreamingStreamerVideoInput.cpp",
+      "bytes": 253,
+      "upstreamSha256": "0437d15eb5031181099eef2a9e6296268cddd03035b3eb4870eb78f09ee9f924",
+      "projectSha256": "0437d15eb5031181099eef2a9e6296268cddd03035b3eb4870eb78f09ee9f924",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/Private/PixelStreamingStreamerVideoInputBackBuffer.cpp",
+      "bytes": 851,
+      "upstreamSha256": "68d9ddae32d864bdab6c4e9aafc1a25f3fa648bcc913070d9472a69b0cd922b0",
+      "projectSha256": "68d9ddae32d864bdab6c4e9aafc1a25f3fa648bcc913070d9472a69b0cd922b0",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/Private/PixelStreamingStreamerVideoInputMediaCapture.cpp",
+      "bytes": 884,
+      "upstreamSha256": "f51a656a76ea325932f56c07b1d6a2e40cb5b9021823d08a89b4f1fdc7c6c2b3",
+      "projectSha256": "f51a656a76ea325932f56c07b1d6a2e40cb5b9021823d08a89b4f1fdc7c6c2b3",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/Private/PixelStreamingStreamerVideoInputRenderTarget.cpp",
+      "bytes": 569,
+      "upstreamSha256": "ba0faa4973c6b14fae9cfa97ee0b1099c34435a2b4be5d249a129ecf5b491a42",
+      "projectSha256": "ba0faa4973c6b14fae9cfa97ee0b1099c34435a2b4be5d249a129ecf5b491a42",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprintEditor/PixelStreamingBlueprintEditor.Build.cs",
+      "bytes": 845,
+      "upstreamSha256": "0769473d8bb4835e78ee2c64b5306e4beebf29d61e99ee4fd0ad2ba7cbfa786d",
+      "projectSha256": "0769473d8bb4835e78ee2c64b5306e4beebf29d61e99ee4fd0ad2ba7cbfa786d",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprintEditor/Private/AssetTypeActions_StreamerVideoInput.h",
+      "bytes": 1148,
+      "upstreamSha256": "607b2f6d9c04ad0db8364ffb791f02be90fb19a2b8f0c2b721422ba0ee6fb210",
+      "projectSha256": "607b2f6d9c04ad0db8364ffb791f02be90fb19a2b8f0c2b721422ba0ee6fb210",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprintEditor/Private/PixelStreamingBlueprintEditorModule.cpp",
+      "bytes": 1897,
+      "upstreamSha256": "b02e6678765d1c94f22d04f567c09f1fab6e6d3b84747921f9a728d75596c070",
+      "projectSha256": "b02e6678765d1c94f22d04f567c09f1fab6e6d3b84747921f9a728d75596c070",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprintEditor/Private/PixelStreamingStreamerVideoInputBackBufferFactory.cpp",
+      "bytes": 1596,
+      "upstreamSha256": "cf2aaf71dad1d2831a63f60209e2fcbd73f7e00c0a74322dab24e856dcae8e11",
+      "projectSha256": "cf2aaf71dad1d2831a63f60209e2fcbd73f7e00c0a74322dab24e856dcae8e11",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprintEditor/Private/PixelStreamingStreamerVideoInputBackBufferFactory.h",
+      "bytes": 629,
+      "upstreamSha256": "0030cf9d3ee7b0ddbfb61c05ede3fffb9c8df7201ab6cadc8e7d936b62cdf744",
+      "projectSha256": "0030cf9d3ee7b0ddbfb61c05ede3fffb9c8df7201ab6cadc8e7d936b62cdf744",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprintEditor/Private/PixelStreamingStreamerVideoInputMediaCaptureFactory.cpp",
+      "bytes": 1620,
+      "upstreamSha256": "3c0a18d0c9ae914b8044e680b2e3f6efa65decb82d0d864a16ac840bff484044",
+      "projectSha256": "3c0a18d0c9ae914b8044e680b2e3f6efa65decb82d0d864a16ac840bff484044",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprintEditor/Private/PixelStreamingStreamerVideoInputMediaCaptureFactory.h",
+      "bytes": 633,
+      "upstreamSha256": "6f47581478e3185cdd004dad9f993dd0add7b496d3e416989c0afa97c8e13098",
+      "projectSha256": "6f47581478e3185cdd004dad9f993dd0add7b496d3e416989c0afa97c8e13098",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprintEditor/Private/PixelStreamingStreamerVideoInputRenderTargetFactory.cpp",
+      "bytes": 1622,
+      "upstreamSha256": "8bb0c7791c793a0ce19a37bb601fd4f6320bd77f0b3eb0a9901188f540b37949",
+      "projectSha256": "8bb0c7791c793a0ce19a37bb601fd4f6320bd77f0b3eb0a9901188f540b37949",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprintEditor/Private/PixelStreamingStreamerVideoInputRenderTargetFactory.h",
+      "bytes": 633,
+      "upstreamSha256": "4d198baf8f13b7ca02b6deb97439ee79b06eb2a7f98234a0082316d31d668c76",
+      "projectSha256": "4d198baf8f13b7ca02b6deb97439ee79b06eb2a7f98234a0082316d31d668c76",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/PixelStreamingEditor.build.cs",
+      "bytes": 1148,
+      "upstreamSha256": "e3196853adec7b6724272184d93bcee7fea090d44539be92b4100a240e0a581e",
+      "projectSha256": "e3196853adec7b6724272184d93bcee7fea090d44539be92b4100a240e0a581e",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/EditorSubmixListener.cpp",
+      "bytes": 1688,
+      "upstreamSha256": "c972df6ad6fbfbb5dd03483e9e457d8f0d1ac1519474ccbcfd59dc61fc6841e2",
+      "projectSha256": "c972df6ad6fbfbb5dd03483e9e457d8f0d1ac1519474ccbcfd59dc61fc6841e2",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/EditorSubmixListener.h",
+      "bytes": 1090,
+      "upstreamSha256": "b70589b1779dee4ab93e284561ad7079de931741007b93f7817f08884607764c",
+      "projectSha256": "b70589b1779dee4ab93e284561ad7079de931741007b93f7817f08884607764c",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/PixelStreamingCommands.cpp",
+      "bytes": 1500,
+      "upstreamSha256": "d0ef4f92ee41825fcee1d19d9ed0158ce2240d8d32315fb33754773df17fd478",
+      "projectSha256": "d0ef4f92ee41825fcee1d19d9ed0158ce2240d8d32315fb33754773df17fd478",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/PixelStreamingCommands.h",
+      "bytes": 1039,
+      "upstreamSha256": "ab485cf75110a5dc71c451cf379cfb1a19877ae96b39e961e48692b787847190",
+      "projectSha256": "ab485cf75110a5dc71c451cf379cfb1a19877ae96b39e961e48692b787847190",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/PixelStreamingEditorModule.cpp",
+      "bytes": 16530,
+      "upstreamSha256": "05fb39f78cc4b5c4899bda6caced79b390a008fe775557dc0c920821500cc9b8",
+      "projectSha256": "05fb39f78cc4b5c4899bda6caced79b390a008fe775557dc0c920821500cc9b8",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/PixelStreamingEditorModule.h",
+      "bytes": 2837,
+      "upstreamSha256": "6cfbc1d2ce9df3fb18218f18e4b7e49b173480c37b7ce6022ac6feec4152f922",
+      "projectSha256": "6cfbc1d2ce9df3fb18218f18e4b7e49b173480c37b7ce6022ac6feec4152f922",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/PixelStreamingEditorUtils.cpp",
+      "bytes": 1349,
+      "upstreamSha256": "fbf06f627edf87541b9e973783bcab61479da1f7af266db86ecb753613c1e6b2",
+      "projectSha256": "fbf06f627edf87541b9e973783bcab61479da1f7af266db86ecb753613c1e6b2",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/PixelStreamingStyle.cpp",
+      "bytes": 2769,
+      "upstreamSha256": "f097365e91f1852aaed5f8aa1c01743a7953a94d9a362324d810fc2e9225fb74",
+      "projectSha256": "f097365e91f1852aaed5f8aa1c01743a7953a94d9a362324d810fc2e9225fb74",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/PixelStreamingToolbar.cpp",
+      "bytes": 18525,
+      "upstreamSha256": "73a54c07ebed68e30abeedad99cfff7071a61b0858fe79b06b5c5f0a17833d4f",
+      "projectSha256": "73a54c07ebed68e30abeedad99cfff7071a61b0858fe79b06b5c5f0a17833d4f",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/PixelStreamingToolbar.h",
+      "bytes": 1268,
+      "upstreamSha256": "9fa541a65c85b895bd67ea192791b9b9c2afb1204b6580bc9a08c3aec8067b0d",
+      "projectSha256": "9fa541a65c85b895bd67ea192791b9b9c2afb1204b6580bc9a08c3aec8067b0d",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/PixelStreamingVideoInputBackBufferComposited.cpp",
+      "bytes": 14695,
+      "upstreamSha256": "a5e453a913cdc72dc71433ed34694a0ba16a17171ebdb477902967f9610b5a1a",
+      "projectSha256": "a5e453a913cdc72dc71433ed34694a0ba16a17171ebdb477902967f9610b5a1a",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/PixelStreamingVideoInputViewport.cpp",
+      "bytes": 4563,
+      "upstreamSha256": "87a650f5419c8151c00353b7f97e4a59a50674f81713ec9f6a4b3d19971a15dc",
+      "projectSha256": "87a650f5419c8151c00353b7f97e4a59a50674f81713ec9f6a4b3d19971a15dc",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/Settings.cpp",
+      "bytes": 2429,
+      "upstreamSha256": "bdce4ff069dfdb29fc0d88c7b476c8430e86f9e9d60ef6aca0701a53c7af8a06",
+      "projectSha256": "bdce4ff069dfdb29fc0d88c7b476c8430e86f9e9d60ef6aca0701a53c7af8a06",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/Private/PixelStreamingStreamerComponent.h",
+      "bytes": 2718,
+      "upstreamSha256": "2d3e255f6c82105911e5b996c43a233883a605254c475534942c427c964f2238",
+      "projectSha256": "2d3e255f6c82105911e5b996c43a233883a605254c475534942c427c964f2238",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/Private/PixelStreamingStreamerComponent.cpp",
+      "bytes": 3737,
+      "upstreamSha256": "122d44037e6596bb7c47feb3b45fd4e84d7a8fb7d19879f4d64d1510bb7894c1",
+      "projectSha256": "122d44037e6596bb7c47feb3b45fd4e84d7a8fb7d19879f4d64d1510bb7894c1",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/Private/PixelStreamingBlueprintPrivate.h",
+      "bytes": 172,
+      "upstreamSha256": "8dec12c98a5535120010125e9b00c31fcc8deb5975a99b0a955eca684f4d53b7",
+      "projectSha256": "8dec12c98a5535120010125e9b00c31fcc8deb5975a99b0a955eca684f4d53b7",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/Private/PixelStreamingBlueprintModule.cpp",
+      "bytes": 468,
+      "upstreamSha256": "04d15b8a8844988f34925d1ff0bfc0bc7f1360fa5947947bbf700fd66e8fe0ff",
+      "projectSha256": "04d15b8a8844988f34925d1ff0bfc0bc7f1360fa5947947bbf700fd66e8fe0ff",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingBufferBuilder.h",
+      "bytes": 1021,
+      "upstreamSha256": "8f277faaa0c5a2e5be1f2dd8a7427ac2fc11a00653de603b122295f36d34abf0",
+      "projectSha256": "8f277faaa0c5a2e5be1f2dd8a7427ac2fc11a00653de603b122295f36d34abf0",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingCodec.h",
+      "bytes": 313,
+      "upstreamSha256": "c54985e6f4e3af1bcafe4955c6384e3fd84006dc6939d15ad63081e73ffca063",
+      "projectSha256": "c54985e6f4e3af1bcafe4955c6384e3fd84006dc6939d15ad63081e73ffca063",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingDataChannel.h",
+      "bytes": 2801,
+      "upstreamSha256": "46d021d66190e68c4b94fd2081f69374a9232ed97e98bb89f51849a106c426d6",
+      "projectSha256": "46d021d66190e68c4b94fd2081f69374a9232ed97e98bb89f51849a106c426d6",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingDelegates.h",
+      "bytes": 4907,
+      "upstreamSha256": "c9ac2c2481d0953bb19cbf6a1fd21cae185ba43573a071d24b7b81ca03dd26c6",
+      "projectSha256": "c9ac2c2481d0953bb19cbf6a1fd21cae185ba43573a071d24b7b81ca03dd26c6",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingInputComponent.h",
+      "bytes": 3036,
+      "upstreamSha256": "a00345f87cf57e494f1c4799b0e4e1444293f8ff26d1c1e88faa45f073995488",
+      "projectSha256": "a00345f87cf57e494f1c4799b0e4e1444293f8ff26d1c1e88faa45f073995488",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingPeerConnection.h",
+      "bytes": 13532,
+      "upstreamSha256": "889dac0836526bbb5f1798eeff94a02910f87ad2c0c7ea55d1d1b6f09f5491f6",
+      "projectSha256": "974765bc78d251d353182f8220274761a136c72105c68358fa1588df02402b73",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingPlayerConfig.h",
+      "bytes": 216,
+      "upstreamSha256": "a368f83095644199ddb6af85d13cdffec655c6492d3c2b108c384aa869c797d7",
+      "projectSha256": "a368f83095644199ddb6af85d13cdffec655c6492d3c2b108c384aa869c797d7",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingPlayerId.h",
+      "bytes": 726,
+      "upstreamSha256": "5faaf88bd30c4c7f18ab94490cf9f053612f2db511cbb24a61087a739dbaff8b",
+      "projectSha256": "5faaf88bd30c4c7f18ab94490cf9f053612f2db511cbb24a61087a739dbaff8b",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingSessionDescriptionObservers.h",
+      "bytes": 3002,
+      "upstreamSha256": "360c9169c552b49dd2338f03acdeec90fe54d3ef00d3d97c6f35712ec8819525",
+      "projectSha256": "360c9169c552b49dd2338f03acdeec90fe54d3ef00d3d97c6f35712ec8819525",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingSettings.h",
+      "bytes": 907,
+      "upstreamSha256": "b4fde0182d609b34d8b929eadd1dc7abedcb5af7931e83e8e09b6a46816d930b",
+      "projectSha256": "b4fde0182d609b34d8b929eadd1dc7abedcb5af7931e83e8e09b6a46816d930b",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingSignallingConnection.h",
+      "bytes": 4682,
+      "upstreamSha256": "3b7334d996e9dcd3b6d91e75d8e7ca164a304d887d852651911b7312348ced54",
+      "projectSha256": "3b7334d996e9dcd3b6d91e75d8e7ca164a304d887d852651911b7312348ced54",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingStatNames.h",
+      "bytes": 3884,
+      "upstreamSha256": "21342efc539bea542b3a864dd92dfc2448a223b985d6c418055cdf8fdd9dc5e5",
+      "projectSha256": "21342efc539bea542b3a864dd92dfc2448a223b985d6c418055cdf8fdd9dc5e5",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingTrace.h",
+      "bytes": 217,
+      "upstreamSha256": "0d2583e379f15ef9c21dde457e64b18579e8c3a11cc7bb4652718951680f3304",
+      "projectSha256": "0d2583e379f15ef9c21dde457e64b18579e8c3a11cc7bb4652718951680f3304",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Private/Settings.h",
+      "bytes": 539,
+      "upstreamSha256": "c4cefd49c54890a6b19f72ed5aba97756894c24f57dbde1e08221faf4b1a02a2",
+      "projectSha256": "c4cefd49c54890a6b19f72ed5aba97756894c24f57dbde1e08221faf4b1a02a2",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingUtils.h",
+      "bytes": 1095,
+      "upstreamSha256": "ca026daa726ad75b93bf0cd54fcd06161b3375eb7ea15743a7d329d6828440d3",
+      "projectSha256": "ca026daa726ad75b93bf0cd54fcd06161b3375eb7ea15743a7d329d6828440d3",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingVideoInputBackBuffer.h",
+      "bytes": 738,
+      "upstreamSha256": "ae57179e5148fa967a9f439c4e31f52fff771b6c15cc7633a3909dceadb02b1b",
+      "projectSha256": "ae57179e5148fa967a9f439c4e31f52fff771b6c15cc7633a3909dceadb02b1b",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingVideoInputI420.h",
+      "bytes": 488,
+      "upstreamSha256": "c8d07953b7697e8b0b6210330bc7716d2e2902d9941ef32b1877e787b0843f3f",
+      "projectSha256": "c8d07953b7697e8b0b6210330bc7716d2e2902d9941ef32b1877e787b0843f3f",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingVideoInputNV12.h",
+      "bytes": 488,
+      "upstreamSha256": "29eacad093dca9173e08339f03af4b62c47a24fc0239e9ae316e18f68882659e",
+      "projectSha256": "29eacad093dca9173e08339f03af4b62c47a24fc0239e9ae316e18f68882659e",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingVideoInputPIEViewport.h",
+      "bytes": 679,
+      "upstreamSha256": "9cab5578cebfbefbcbcffa87c227e1f0f1c5daa378feecb6e8383ddd28c72306",
+      "projectSha256": "9cab5578cebfbefbcbcffa87c227e1f0f1c5daa378feecb6e8383ddd28c72306",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingVideoInputRenderTarget.h",
+      "bytes": 820,
+      "upstreamSha256": "57b9ddee0ab7613edcc40346bfa1c188ed5e4dfcc0405e2a6cf862436569e99e",
+      "projectSha256": "57b9ddee0ab7613edcc40346bfa1c188ed5e4dfcc0405e2a6cf862436569e99e",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingVideoInputRHI.h",
+      "bytes": 484,
+      "upstreamSha256": "2c96d44ba8748dd341d76cb129d17ae9f677ab11bd83cd5b2c8a84038c0fab0a",
+      "projectSha256": "2c96d44ba8748dd341d76cb129d17ae9f677ab11bd83cd5b2c8a84038c0fab0a",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingVideoSink.h",
+      "bytes": 1058,
+      "upstreamSha256": "1fa1ceb7ec2f8a6a816f2fe8a8ca25d45417b0d85457ae9e4b255ddc27774931",
+      "projectSha256": "1fa1ceb7ec2f8a6a816f2fe8a8ca25d45417b0d85457ae9e4b255ddc27774931",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingWebRTCIncludes.h",
+      "bytes": 1293,
+      "upstreamSha256": "e9221240e77fd839e1b1a05b5e2cab935986e08873817ed8b90f29d07a27a8f7",
+      "projectSha256": "e9221240e77fd839e1b1a05b5e2cab935986e08873817ed8b90f29d07a27a8f7",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/PixelStreamingBlueprint.Build.cs",
+      "bytes": 852,
+      "upstreamSha256": "3c5d2575aa33eb11ea51dc641c231ec1ef98abe77816f6083240f1c8866ff1c7",
+      "projectSha256": "3c5d2575aa33eb11ea51dc641c231ec1ef98abe77816f6083240f1c8866ff1c7",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/Internal/PixelStreamingStreamerVideoInput.h",
+      "bytes": 600,
+      "upstreamSha256": "4db055d7436aae48c76358e91af2766ad2c4a759217d04379946ea50b8c54e4e",
+      "projectSha256": "4db055d7436aae48c76358e91af2766ad2c4a759217d04379946ea50b8c54e4e",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/Internal/PixelStreamingStreamerVideoInputBackBuffer.h",
+      "bytes": 558,
+      "upstreamSha256": "81ddeb2431487730f78e309c5d845b42d260bbc0ef2ce88a129571ffbbbb6437",
+      "projectSha256": "81ddeb2431487730f78e309c5d845b42d260bbc0ef2ce88a129571ffbbbb6437",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/Internal/PixelStreamingStreamerVideoInputMediaCapture.h",
+      "bytes": 704,
+      "upstreamSha256": "77a368d05a1959d38bf7e675dac96e55a3c75b77f030cdc11b4694d15b09f7e2",
+      "projectSha256": "77a368d05a1959d38bf7e675dac96e55a3c75b77f030cdc11b4694d15b09f7e2",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingBlueprint/Internal/PixelStreamingStreamerVideoInputRenderTarget.h",
+      "bytes": 743,
+      "upstreamSha256": "b5bcfefd3bfb2239d5ce93833c9e00e856643b25b761ba7e615d58b30ddc9bf5",
+      "projectSha256": "b5bcfefd3bfb2239d5ce93833c9e00e856643b25b761ba7e615d58b30ddc9bf5",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingVideoInput.h",
+      "bytes": 2351,
+      "upstreamSha256": "ce1a0f1402beb2dfa1438f03fba10211a10f3292929ebd1c5e38ba179a65fe7a",
+      "projectSha256": "ce1a0f1402beb2dfa1438f03fba10211a10f3292929ebd1c5e38ba179a65fe7a",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/PixelStreamingAudioComponent.h",
+      "bytes": 5292,
+      "upstreamSha256": "d90a83b3b8aed9b6b52d0ac8b2dffe0f762306c5a999e40d4533dfcebc3ce86f",
+      "projectSha256": "d90a83b3b8aed9b6b52d0ac8b2dffe0f762306c5a999e40d4533dfcebc3ce86f",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Public/IPixelStreamingEditorModule.h",
+      "bytes": 3719,
+      "upstreamSha256": "9cc1a492862e115e17a7e8d716733c1bfad382fb8cf26f9a98a75ca08bd2b94f",
+      "projectSha256": "9cc1a492862e115e17a7e8d716733c1bfad382fb8cf26f9a98a75ca08bd2b94f",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Public/PixelStreamingStyle.h",
+      "bytes": 727,
+      "upstreamSha256": "93f776fca6565e35144ebeacabc6762eacda43683fbc47e219d30601fb17ed15",
+      "projectSha256": "93f776fca6565e35144ebeacabc6762eacda43683fbc47e219d30601fb17ed15",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Public/IPixelStreamingInputModule.h",
+      "bytes": 1654,
+      "upstreamSha256": "778e3c5532dafcd3fbbdcac742e05cb69ffc3ed0d4a7e613607caf9bdead4381",
+      "projectSha256": "778e3c5532dafcd3fbbdcac742e05cb69ffc3ed0d4a7e613607caf9bdead4381",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Public/PixelStreamingInputConversion.h",
+      "bytes": 548,
+      "upstreamSha256": "65ce0a064d4503e3f69bfbee6925b58a5d1431d5ff2f02f8a64299e700c81556",
+      "projectSha256": "65ce0a064d4503e3f69bfbee6925b58a5d1431d5ff2f02f8a64299e700c81556",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Public/PixelStreamingInputEnums.h",
+      "bytes": 1258,
+      "upstreamSha256": "8740d4700db5b6773189ea1a4ea9df87ced6aa73bc9a8c685a3d59a961057beb",
+      "projectSha256": "8740d4700db5b6773189ea1a4ea9df87ced6aa73bc9a8c685a3d59a961057beb",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Public/PixelStreamingInputMessage.h",
+      "bytes": 1091,
+      "upstreamSha256": "2a927692fc0f4539d791fc1e4cd93c91ac6490f0a03f1bd86f917bc8afc2052f",
+      "projectSha256": "2a927692fc0f4539d791fc1e4cd93c91ac6490f0a03f1bd86f917bc8afc2052f",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Public/PixelStreamingInputProtocol.h",
+      "bytes": 528,
+      "upstreamSha256": "3f5f7fd858905d1544cb678d81a7425449d78ae28af6c9124404d853f5d69fdf",
+      "projectSha256": "3f5f7fd858905d1544cb678d81a7425449d78ae28af6c9124404d853f5d69fdf",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Public/PixelStreamingInputProtocolMap.h",
+      "bytes": 825,
+      "upstreamSha256": "6e0513eb1eb43fa290460057bb59ee820d3b036d8d1b31a813e64132e45aa7c1",
+      "projectSha256": "6e0513eb1eb43fa290460057bb59ee820d3b036d8d1b31a813e64132e45aa7c1",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/PixelStreamingServers.build.cs",
+      "bytes": 884,
+      "upstreamSha256": "526ef8f21302a353c77e898660f512857670eeeac1397cb9642ecd762446db7a",
+      "projectSha256": "87c317543f476ab6a9289819e2f5886104b855ca8bbc7e91e9ff498665c4e292",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/CirrusWrapper.cpp",
+      "bytes": 1914,
+      "upstreamSha256": "6791ef1a03a13982c7b772fc937c280f0d9c1d0b2cff9d4426f3c3968dae0157",
+      "projectSha256": "6791ef1a03a13982c7b772fc937c280f0d9c1d0b2cff9d4426f3c3968dae0157",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/CirrusWrapper.h",
+      "bytes": 879,
+      "upstreamSha256": "fad764d20cdb166656298b984a491f5d0cf176a020a89bce7e0811839d0c75eb",
+      "projectSha256": "fad764d20cdb166656298b984a491f5d0cf176a020a89bce7e0811839d0c75eb",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/MonitoredServerBase.cpp",
+      "bytes": 2543,
+      "upstreamSha256": "d52b4f4f78f3acffd44a51fb461b63a2a2e0c9163bb786b6b8e3fa9f9e56a51e",
+      "projectSha256": "d52b4f4f78f3acffd44a51fb461b63a2a2e0c9163bb786b6b8e3fa9f9e56a51e",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/MonitoredServerBase.h",
+      "bytes": 1673,
+      "upstreamSha256": "4a6fdf3f2a163321f2663ae9c7fcbf92881463fe88ea672315a798751c65f205",
+      "projectSha256": "4a6fdf3f2a163321f2663ae9c7fcbf92881463fe88ea672315a798751c65f205",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/PixelStreamingServers.cpp",
+      "bytes": 726,
+      "upstreamSha256": "0f23bde2ef4d3ab3880adb2af75b1d4c07a5844d6039df38725c8afd26c13644",
+      "projectSha256": "0f23bde2ef4d3ab3880adb2af75b1d4c07a5844d6039df38725c8afd26c13644",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/PixelStreamingServersLog.cpp",
+      "bytes": 141,
+      "upstreamSha256": "ad8017bb15e257825b8afa077fadfe0b0d0c735d1bf7bea0de136a33c9ff8f25",
+      "projectSha256": "ad8017bb15e257825b8afa077fadfe0b0d0c735d1bf7bea0de136a33c9ff8f25",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/PixelStreamingServersLog.h",
+      "bytes": 202,
+      "upstreamSha256": "f35af5926833a187a2b1aad70960f020d2a250b59b7d2be119b42a33b22c9a99",
+      "projectSha256": "f35af5926833a187a2b1aad70960f020d2a250b59b7d2be119b42a33b22c9a99",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/PixelStreamingServersModule.cpp",
+      "bytes": 594,
+      "upstreamSha256": "921acd6333709680b35e90e559d01ff9561f6892ff6481421b8d8a4b0756fcfb",
+      "projectSha256": "921acd6333709680b35e90e559d01ff9561f6892ff6481421b8d8a4b0756fcfb",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/PixelStreamingServersModule.h",
+      "bytes": 475,
+      "upstreamSha256": "3c0db78752d484c3f6f2f20566536fc5b6c95d568a6fb785aa06119da4e6b4a5",
+      "projectSha256": "3c0db78752d484c3f6f2f20566536fc5b6c95d568a6fb785aa06119da4e6b4a5",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/ServerBase.cpp",
+      "bytes": 2387,
+      "upstreamSha256": "d1faba673bafdf3d085707d31e6301a883b10cea8f7f668547af0702cd0d3f56",
+      "projectSha256": "d1faba673bafdf3d085707d31e6301a883b10cea8f7f668547af0702cd0d3f56",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/ServerBase.h",
+      "bytes": 2167,
+      "upstreamSha256": "48f2ea79c6136cf3d92d9621439cedeea8c4e7bbd6d39d80b135ac6722c7c30f",
+      "projectSha256": "48f2ea79c6136cf3d92d9621439cedeea8c4e7bbd6d39d80b135ac6722c7c30f",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/ServerUtils.cpp",
+      "bytes": 9836,
+      "upstreamSha256": "85ab744541f0e9645318550226e5f40f4e62a7c05d207d41e896235c20547b33",
+      "projectSha256": "a0e414b454c21de92cdaec9a919241e2365ed790543f2e059103400fc97abba4",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/ServerUtils.h",
+      "bytes": 4641,
+      "upstreamSha256": "bc0d0e8c9e826eb500a53530d0e63779ae19b09f3db18d4b96537f92e9a53372",
+      "projectSha256": "bc0d0e8c9e826eb500a53530d0e63779ae19b09f3db18d4b96537f92e9a53372",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/SignallingServer.cpp",
+      "bytes": 16419,
+      "upstreamSha256": "b16a150176b9f08eb2c0835451d716dd0150774818521c56bdd9d93846d16e0c",
+      "projectSha256": "b16a150176b9f08eb2c0835451d716dd0150774818521c56bdd9d93846d16e0c",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/SignallingServer.h",
+      "bytes": 3175,
+      "upstreamSha256": "5040cee83b0befc958da9ba643906ce55b375d6b062e74a1b4ab20137d06e0de",
+      "projectSha256": "5040cee83b0befc958da9ba643906ce55b375d6b062e74a1b4ab20137d06e0de",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/SignallingServerLegacy.cpp",
+      "bytes": 4664,
+      "upstreamSha256": "337998d875957dcd04373bd338deb5db5cfc7747a77ef306191b2ff40e674649",
+      "projectSha256": "337998d875957dcd04373bd338deb5db5cfc7747a77ef306191b2ff40e674649",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/SignallingServerLegacy.h",
+      "bytes": 921,
+      "upstreamSha256": "520e68e4a21b5ddeffff8aa433cf7c7a9fdb3b0866212006b2b2a77fbc57308f",
+      "projectSha256": "520e68e4a21b5ddeffff8aa433cf7c7a9fdb3b0866212006b2b2a77fbc57308f",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/WebSocketProbe.h",
+      "bytes": 1409,
+      "upstreamSha256": "ced7fc876179f31e3970b798112bc4c62f3f1b10b63365684b0f086ec0634d4f",
+      "projectSha256": "ced7fc876179f31e3970b798112bc4c62f3f1b10b63365684b0f086ec0634d4f",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/WebSocketServerWrapper.cpp",
+      "bytes": 7054,
+      "upstreamSha256": "a7c774f516a587676e42ede4b6136b878182bf5a52bb221d54a23b20d855a2bf",
+      "projectSha256": "a7c774f516a587676e42ede4b6136b878182bf5a52bb221d54a23b20d855a2bf",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/WebSocketServerWrapper.h",
+      "bytes": 3609,
+      "upstreamSha256": "4d69063ba29ab5fd6edb679e5b466f04e17564995891da5ea6a64478e7b683a3",
+      "projectSha256": "4d69063ba29ab5fd6edb679e5b466f04e17564995891da5ea6a64478e7b683a3",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Public/IPixelStreamingInputHandler.h",
+      "bytes": 5416,
+      "upstreamSha256": "2d0080fc594366ce95da85608291333d72af2bd8286c06c86d500f887844c6c2",
+      "projectSha256": "2d0080fc594366ce95da85608291333d72af2bd8286c06c86d500f887844c6c2",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Public/EditorPixelStreamingSettings.h",
+      "bytes": 1916,
+      "upstreamSha256": "8d9ce98b3d1af99731049c906c15d7180abca2c2be0a0862d4a01f33b1645981",
+      "projectSha256": "8d9ce98b3d1af99731049c906c15d7180abca2c2be0a0862d4a01f33b1645981",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/Utils.h",
+      "bytes": 2647,
+      "upstreamSha256": "fc31054fbc717df4dd74eda76be7b205efa9bf3cc8ad1817d38d3d1e72674f7c",
+      "projectSha256": "fc31054fbc717df4dd74eda76be7b205efa9bf3cc8ad1817d38d3d1e72674f7c",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/Settings.h",
+      "bytes": 827,
+      "upstreamSha256": "ffe5942d22da1982ce69ef814be510402876a8f77e8607a20c40d2b4b13d3316",
+      "projectSha256": "ffe5942d22da1982ce69ef814be510402876a8f77e8607a20c40d2b4b13d3316",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Public/PixelStreamingVideoInputBackBufferComposited.h",
+      "bytes": 2957,
+      "upstreamSha256": "1f15e1c3f707203d0a0cd73cb5830d2097f78b4b2bd37d53f3fec2b1c35e8f88",
+      "projectSha256": "1f15e1c3f707203d0a0cd73cb5830d2097f78b4b2bd37d53f3fec2b1c35e8f88",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Public/PixelStreamingVideoInputViewport.h",
+      "bytes": 1125,
+      "upstreamSha256": "a1822de85fd7c1fd71418b42c26f3cffe8ffb6c8f8a1a943c26c1d17c3ff60e3",
+      "projectSha256": "a1822de85fd7c1fd71418b42c26f3cffe8ffb6c8f8a1a943c26c1d17c3ff60e3",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingHMD/PixelStreamingHMD.build.cs",
+      "bytes": 492,
+      "upstreamSha256": "c5586f920c874874871e98fadd67cecd1ecfef372a3395553ba476c79a5a0ccd",
+      "projectSha256": "c5586f920c874874871e98fadd67cecd1ecfef372a3395553ba476c79a5a0ccd",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingHMD/Private/PixelStreamingHMD.cpp",
+      "bytes": 11311,
+      "upstreamSha256": "60357bb68afb2bc5ccd257d6b48d41b8a7d2c73313122483bb96d54ce71bd090",
+      "projectSha256": "60357bb68afb2bc5ccd257d6b48d41b8a7d2c73313122483bb96d54ce71bd090",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingHMD/Private/PixelStreamingHMDModule.cpp",
+      "bytes": 1652,
+      "upstreamSha256": "1f77d10bc9cc84fbe07f6a1a9322eaabf40c857733a7f2d8902ab5329b0ba479",
+      "projectSha256": "1f77d10bc9cc84fbe07f6a1a9322eaabf40c857733a7f2d8902ab5329b0ba479",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingHMD/Private/PixelStreamingHMDModule.h",
+      "bytes": 1237,
+      "upstreamSha256": "4b8fef699d6e9baccf0bf12056292c82ab19f4221177cf1ae687336ad12cb293",
+      "projectSha256": "4b8fef699d6e9baccf0bf12056292c82ab19f4221177cf1ae687336ad12cb293",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingHMD/Private/Settings.cpp",
+      "bytes": 2796,
+      "upstreamSha256": "fb113908d28e081a78d936f8a0df80d6100cae2665425bd75384e7a5f65eb85b",
+      "projectSha256": "fb113908d28e081a78d936f8a0df80d6100cae2665425bd75384e7a5f65eb85b",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingHMD/Private/Settings.h",
+      "bytes": 637,
+      "upstreamSha256": "1fe6728e15b863d034730216a12a0274fe5e5f43f583d98f2d8c93dbef3fb0cc",
+      "projectSha256": "1fe6728e15b863d034730216a12a0274fe5e5f43f583d98f2d8c93dbef3fb0cc",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingHMD/Public/IPixelStreamingHMDModule.h",
+      "bytes": 1427,
+      "upstreamSha256": "f742a38fb09992bb3309266bc8a3d5e9c7442fbfdef7575435b6483427a21cac",
+      "projectSha256": "f742a38fb09992bb3309266bc8a3d5e9c7442fbfdef7575435b6483427a21cac",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingHMD/Public/PixelStreamingHMD.h",
+      "bytes": 4911,
+      "upstreamSha256": "aadacd32f96b187b2140dc6f1fb82347c3814449e0f0c1eb465f7e76e57c7ab5",
+      "projectSha256": "aadacd32f96b187b2140dc6f1fb82347c3814449e0f0c1eb465f7e76e57c7ab5",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingHMD/Public/PixelStreamingHMDEnums.h",
+      "bytes": 179,
+      "upstreamSha256": "f58b17c928a77387cf32198c8cec807ebc1444423b2a4ddb52df3ed901e3d565",
+      "projectSha256": "f58b17c928a77387cf32198c8cec807ebc1444423b2a4ddb52df3ed901e3d565",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/PixelStreamingInput.build.cs",
+      "bytes": 671,
+      "upstreamSha256": "548cd96ecf825f847edc9a15cfa85ba290ef338115d20d711be83911f3ba131e",
+      "projectSha256": "548cd96ecf825f847edc9a15cfa85ba290ef338115d20d711be83911f3ba131e",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/ApplicationWrapper.cpp",
+      "bytes": 1580,
+      "upstreamSha256": "9597c4cc80364d6359a26bfee154a3430788e51b1b67c65c7c762b9a5fcfeebf",
+      "projectSha256": "9597c4cc80364d6359a26bfee154a3430788e51b1b67c65c7c762b9a5fcfeebf",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingEditor/Public/PixelStreamingEditorUtils.h",
+      "bytes": 536,
+      "upstreamSha256": "1f405d192c7a7048d8e2aae807b0553c87803c067580d1ea9048d18bf577191e",
+      "projectSha256": "1f405d192c7a7048d8e2aae807b0553c87803c067580d1ea9048d18bf577191e",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/ApplicationWrapper.h",
+      "bytes": 5945,
+      "upstreamSha256": "de6f9d57afd707dbe7260b2d341ea326aa2b9a58ea5717fa6fab2f8ab7b3b58b",
+      "projectSha256": "de6f9d57afd707dbe7260b2d341ea326aa2b9a58ea5717fa6fab2f8ab7b3b58b",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/InputStructures.h",
+      "bytes": 5369,
+      "upstreamSha256": "d5e5064b23abd6d46cfdb6efe1a47d2ee602f8c7cf43243b095e90e1107bfee4",
+      "projectSha256": "d5e5064b23abd6d46cfdb6efe1a47d2ee602f8c7cf43243b095e90e1107bfee4",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/JavaScriptKeyCodes.inl",
+      "bytes": 8266,
+      "upstreamSha256": "13eafa10611d10f920b2f6f5ddc19af886ffe92acfe2e44a49467c05860fcc1b",
+      "projectSha256": "13eafa10611d10f920b2f6f5ddc19af886ffe92acfe2e44a49467c05860fcc1b",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/PixelStreamingInputConversion.cpp",
+      "bytes": 349,
+      "upstreamSha256": "ba632c0785c9a548c3a5d5de4fc43f18a1896b38b529fcc0a4b3230a930b9bc0",
+      "projectSha256": "ba632c0785c9a548c3a5d5de4fc43f18a1896b38b529fcc0a4b3230a930b9bc0",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/PixelStreamingInputDevice.cpp",
+      "bytes": 3340,
+      "upstreamSha256": "e774f540aa3e2617e74e41cdcf343a2d861d149306b943050274e1836b1e4487",
+      "projectSha256": "e774f540aa3e2617e74e41cdcf343a2d861d149306b943050274e1836b1e4487",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/PixelStreamingInputDevice.h",
+      "bytes": 2621,
+      "upstreamSha256": "8c2f6a7ef91a20055e30ec768a9bd3cd84ab289da3e7d547dcf53f644a049ed4",
+      "projectSha256": "8c2f6a7ef91a20055e30ec768a9bd3cd84ab289da3e7d547dcf53f644a049ed4",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/PixelStreamingInputHandler.cpp",
+      "bytes": 69348,
+      "upstreamSha256": "133287ffd1fde761a760d01eb443a24a9cc04a44e8c8a5879359891a4820f3c4",
+      "projectSha256": "133287ffd1fde761a760d01eb443a24a9cc04a44e8c8a5879359891a4820f3c4",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/PixelStreamingInputHandler.h",
+      "bytes": 10449,
+      "upstreamSha256": "076e2244cd8a31da2c3983464b7477d71c49b95eea7ac51cf3d4f96d7933fe4f",
+      "projectSha256": "076e2244cd8a31da2c3983464b7477d71c49b95eea7ac51cf3d4f96d7933fe4f",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/PixelStreamingInputMessage.cpp",
+      "bytes": 1325,
+      "upstreamSha256": "aeeee9fe78f9cd5524b8b892fa23319fd320eaa4ff61f6881c3af4abc5b7474b",
+      "projectSha256": "aeeee9fe78f9cd5524b8b892fa23319fd320eaa4ff61f6881c3af4abc5b7474b",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/PixelStreamingInputModule.cpp",
+      "bytes": 12224,
+      "upstreamSha256": "2b1dfe0d64943da44e6f0629e240ef7618f01b69265bb2f57b1fc33b3f8ebf4a",
+      "projectSha256": "2b1dfe0d64943da44e6f0629e240ef7618f01b69265bb2f57b1fc33b3f8ebf4a",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/PixelStreamingInputModule.h",
+      "bytes": 887,
+      "upstreamSha256": "48f5080dc928e435c8f2d851c223df9bf3dd39737697e3eda15cf23a9532b4e8",
+      "projectSha256": "48f5080dc928e435c8f2d851c223df9bf3dd39737697e3eda15cf23a9532b4e8",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/PixelStreamingInputProtocol.cpp",
+      "bytes": 2287,
+      "upstreamSha256": "140779bd7b60d6997471afe28adb9a7f8d450dc4b4a3e8f3a1928fd9631877d0",
+      "projectSha256": "140779bd7b60d6997471afe28adb9a7f8d450dc4b4a3e8f3a1928fd9631877d0",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/PixelStreamingInputProtocolMap.cpp",
+      "bytes": 1351,
+      "upstreamSha256": "760f588d2fb12b3390a2675e151ac436bba663e44052ef9e253dd8ced0b87c18",
+      "projectSha256": "760f588d2fb12b3390a2675e151ac436bba663e44052ef9e253dd8ced0b87c18",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/Settings.cpp",
+      "bytes": 2598,
+      "upstreamSha256": "dccc436481cd735a2af5a39b453adf3b886ecab6d78bf98e2ea3afd36cbb72e5",
+      "projectSha256": "dccc436481cd735a2af5a39b453adf3b886ecab6d78bf98e2ea3afd36cbb72e5",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingInput/Private/EditorPixelStreamingSettings.cpp",
+      "bytes": 685,
+      "upstreamSha256": "99a52ed1a934cb26b3fe85374123d98d3e333207b25ea7fb086fc16f4ac021f7",
+      "projectSha256": "99a52ed1a934cb26b3fe85374123d98d3e333207b25ea7fb086fc16f4ac021f7",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/IPixelStreamingStreamer.h",
+      "bytes": 10447,
+      "upstreamSha256": "5d38b545435d012f6c24ad65bf98d6eb4089cbc790404e97be1eb9c7d137e132",
+      "projectSha256": "5d38b545435d012f6c24ad65bf98d6eb4089cbc790404e97be1eb9c7d137e132",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/IPixelStreamingStats.h",
+      "bytes": 1249,
+      "upstreamSha256": "9900b4bf8bf48c24844b7525d090c2d2e023023803a749af4a201461fb765163",
+      "projectSha256": "9900b4bf8bf48c24844b7525d090c2d2e023023803a749af4a201461fb765163",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/IPixelStreamingSignallingConnectionObserver.h",
+      "bytes": 1906,
+      "upstreamSha256": "34a2a7d672cac3ca5458866b67900fe97a61bcaee308b013154f4423690871b8",
+      "projectSha256": "34a2a7d672cac3ca5458866b67900fe97a61bcaee308b013154f4423690871b8",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/FrameBufferI420.h",
+      "bytes": 2214,
+      "upstreamSha256": "4974798318a2839f69b5b594081c6d2369ca45b63bee83661f76135397d72405",
+      "projectSha256": "4974798318a2839f69b5b594081c6d2369ca45b63bee83661f76135397d72405",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/FrameBufferMultiFormat.cpp",
+      "bytes": 2347,
+      "upstreamSha256": "135baeeab4a7d70ff8482d7daf6c045e340bcb5a12173e97e4165c81ee954cd5",
+      "projectSha256": "135baeeab4a7d70ff8482d7daf6c045e340bcb5a12173e97e4165c81ee954cd5",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/FrameBufferMultiFormat.h",
+      "bytes": 2337,
+      "upstreamSha256": "0960cfd955e2d906b6df803f78b9751a0b41ee71a17c846c702741efc6a6df42",
+      "projectSha256": "0960cfd955e2d906b6df803f78b9751a0b41ee71a17c846c702741efc6a6df42",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/FrameBufferRHI.h",
+      "bytes": 1203,
+      "upstreamSha256": "e175f570f5a81e3e63c88602051c2bf5f4444f5aec6d2f023ce01297d38bee80",
+      "projectSha256": "e175f570f5a81e3e63c88602051c2bf5f4444f5aec6d2f023ce01297d38bee80",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/FreezeFrame.cpp",
+      "bytes": 12459,
+      "upstreamSha256": "ce5945d2a8a9339b34983f04d7ddd57b4c93efbe4d3fea76d767d20362b06205",
+      "projectSha256": "ce5945d2a8a9339b34983f04d7ddd57b4c93efbe4d3fea76d767d20362b06205",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/FreezeFrame.h",
+      "bytes": 2856,
+      "upstreamSha256": "7db45612ce1fd7650530feb86bfc257187ad7f7a5861a6bceaad109c0630c060",
+      "projectSha256": "7db45612ce1fd7650530feb86bfc257187ad7f7a5861a6bceaad109c0630c060",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/GHSPixelStreamingPolicy.h",
+      "bytes": 1959,
+      "upstreamSha256": null,
+      "projectSha256": "2b737587c2b7493a7d11b4f666481a4b7f9ede304383302e536598c400a88eba",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingAudioComponent.cpp",
+      "bytes": 7050,
+      "upstreamSha256": "439424647bb504d5728744d0705cca164d78d33882bab793b1bca25a75a8d2ee",
+      "projectSha256": "439424647bb504d5728744d0705cca164d78d33882bab793b1bca25a75a8d2ee",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingAudioDeviceModule.cpp",
+      "bytes": 9086,
+      "upstreamSha256": "e9924869f302e26c440b81b0e2fcc8281dc5afdaa33f6918243d3b5804947ae6",
+      "projectSha256": "e9924869f302e26c440b81b0e2fcc8281dc5afdaa33f6918243d3b5804947ae6",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingAudioDeviceModule.h",
+      "bytes": 5088,
+      "upstreamSha256": "7d53efc58900e9d481cf63d226fda0a321e963149edc5a6e58ebedcee4beebe6",
+      "projectSha256": "7d53efc58900e9d481cf63d226fda0a321e963149edc5a6e58ebedcee4beebe6",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingBlueprints.cpp",
+      "bytes": 7520,
+      "upstreamSha256": "7fddda364c6cffb294cefb9935323542e40fcaeae47eac79ff4589ebc22489eb",
+      "projectSha256": "7fddda364c6cffb294cefb9935323542e40fcaeae47eac79ff4589ebc22489eb",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingBlueprints.h",
+      "bytes": 6999,
+      "upstreamSha256": "05f86a0fa9a738d0e6566ab980f7ba26ca14786c462d926e54b9e72d5bc3cabb",
+      "projectSha256": "05f86a0fa9a738d0e6566ab980f7ba26ca14786c462d926e54b9e72d5bc3cabb",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingDataChannel.cpp",
+      "bytes": 7410,
+      "upstreamSha256": "0c78804eea9f45562a39d0cfc64965ea4c9ac38246a6cafa8ffddacd13f2be25",
+      "projectSha256": "0c78804eea9f45562a39d0cfc64965ea4c9ac38246a6cafa8ffddacd13f2be25",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingDelegates.cpp",
+      "bytes": 471,
+      "upstreamSha256": "e366d64f001ab465d67c6cf0edad88ecb3dd08ec1e6c1a2a9a3d59c656a73a85",
+      "projectSha256": "e366d64f001ab465d67c6cf0edad88ecb3dd08ec1e6c1a2a9a3d59c656a73a85",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingInputComponent.cpp",
+      "bytes": 2834,
+      "upstreamSha256": "11135213fa9be9b7e62f16d0269c372b5b6997a78104f4fdf49dbe5c04c093ba",
+      "projectSha256": "11135213fa9be9b7e62f16d0269c372b5b6997a78104f4fdf49dbe5c04c093ba",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingMediaIOCapture.cpp",
+      "bytes": 7698,
+      "upstreamSha256": "c77d580e42b15b097ea417c11d2b3368f2f292a3dd8ecaf6066b68ff730d67cb",
+      "projectSha256": "c77d580e42b15b097ea417c11d2b3368f2f292a3dd8ecaf6066b68ff730d67cb",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingModule.cpp",
+      "bytes": 17625,
+      "upstreamSha256": "03ee6908e4a804eeb0d1836aa52d89a031997362677b895327704e69e29be4ea",
+      "projectSha256": "03ee6908e4a804eeb0d1836aa52d89a031997362677b895327704e69e29be4ea",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingModule.h",
+      "bytes": 3441,
+      "upstreamSha256": "003ba3b3fa12d45a76d0d1b35306f026232c9862b865913c481289ed3bb220c5",
+      "projectSha256": "003ba3b3fa12d45a76d0d1b35306f026232c9862b865913c481289ed3bb220c5",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingPeerConnection.cpp",
+      "bytes": 40657,
+      "upstreamSha256": "20f84c4831056cc667d50e76ddf01fb89a1fed18afcd9375cc93afece62e79b1",
+      "projectSha256": "937bab68c5e43dcc69caca3c803f046b4fbdeb1774c523ac7904196a662eb7f7",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingPrivate.h",
+      "bytes": 195,
+      "upstreamSha256": "17e8bc8689621cdbb67f59b01062e9dfda092f5b8eed22d94e4abe2247bfa8be",
+      "projectSha256": "17e8bc8689621cdbb67f59b01062e9dfda092f5b8eed22d94e4abe2247bfa8be",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingSettings.cpp",
+      "bytes": 577,
+      "upstreamSha256": "feaab131b94283d790fe571de0753758a06a85fe18548baeff76059e9be585ce",
+      "projectSha256": "feaab131b94283d790fe571de0753758a06a85fe18548baeff76059e9be585ce",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingSignallingConnection.cpp",
+      "bytes": 32698,
+      "upstreamSha256": "05e9b45ac6b41f84c71000b6893b659f385099082d6dfecd713b4f30456e6802",
+      "projectSha256": "05e9b45ac6b41f84c71000b6893b659f385099082d6dfecd713b4f30456e6802",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingTrace.cpp",
+      "bytes": 169,
+      "upstreamSha256": "7788a485a373a101aa7d8db9caaf6e0e7901551124b8cf9451d2b0f5a5f94611",
+      "projectSha256": "7788a485a373a101aa7d8db9caaf6e0e7901551124b8cf9451d2b0f5a5f94611",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingUtils.cpp",
+      "bytes": 2673,
+      "upstreamSha256": "8fa2cce469e5479241fae816b93717c6e3a8d0865546ec88409d93c86f385ae9",
+      "projectSha256": "8fa2cce469e5479241fae816b93717c6e3a8d0865546ec88409d93c86f385ae9",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingVideoInput.cpp",
+      "bytes": 2945,
+      "upstreamSha256": "3d4efeda831bf1f86bca5bac9f128fdf3c945313dd2b8293766d388143455702",
+      "projectSha256": "3d4efeda831bf1f86bca5bac9f128fdf3c945313dd2b8293766d388143455702",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingVideoInputBackBuffer.cpp",
+      "bytes": 1820,
+      "upstreamSha256": "143b1ade7465b7f0e46f58be6dff19415a21783e33392784d74e9c58de1a695b",
+      "projectSha256": "143b1ade7465b7f0e46f58be6dff19415a21783e33392784d74e9c58de1a695b",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingVideoInputI420.cpp",
+      "bytes": 752,
+      "upstreamSha256": "7e9f29e8bc25ad2a9a1ed0d536c85968e212ab2eb3650ce3bbeeab526b54518f",
+      "projectSha256": "7e9f29e8bc25ad2a9a1ed0d536c85968e212ab2eb3650ce3bbeeab526b54518f",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/DebugGraph.h",
+      "bytes": 898,
+      "upstreamSha256": "df26447fc064aab4824987bcd7f9b7525acbea65209bde8a5c51a03242e3f4d3",
+      "projectSha256": "df26447fc064aab4824987bcd7f9b7525acbea65209bde8a5c51a03242e3f4d3",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/DebugGraph.cpp",
+      "bytes": 5352,
+      "upstreamSha256": "823dce4388461600d7481369ab43a9b7f99bb850314bf63d82ab39274e7750ac",
+      "projectSha256": "823dce4388461600d7481369ab43a9b7f99bb850314bf63d82ab39274e7750ac",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/AudioSubmixCapturer.h",
+      "bytes": 1838,
+      "upstreamSha256": "c8e548f80ee81f321dcf11dd14d4a40c4f624f4c2a920ea8cce9d7a59a6be453",
+      "projectSha256": "c8e548f80ee81f321dcf11dd14d4a40c4f624f4c2a920ea8cce9d7a59a6be453",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/AudioSubmixCapturer.cpp",
+      "bytes": 6045,
+      "upstreamSha256": "97a2fcb077c2eb618bcb3b08b7ccaa62939b5349e5db6928ca4e579dbf72476d",
+      "projectSha256": "97a2fcb077c2eb618bcb3b08b7ccaa62939b5349e5db6928ca4e579dbf72476d",
+      "changed": false
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 156,
+      "upstreamSha256": null,
+      "projectSha256": "85a3f017cb5d555f80c179f104f61dc7e1ad33c7ac01beb0300fb79da3bc49c9",
+      "changed": true
+    },
+    {
+      "path": ".gitattributes",
+      "bytes": 237,
+      "upstreamSha256": null,
+      "projectSha256": "ad38e00726e144dca17ffce15e3df3a4a85d8e65027399af70261f6e2df11c70",
+      "changed": true
+    },
+    {
+      "path": "Config/BasePixelStreaming.ini",
+      "bytes": 675,
+      "upstreamSha256": "924c43b91e78db5253a99a83318127f591a91219265b66f18a8c805e7865269e",
+      "projectSha256": "924c43b91e78db5253a99a83318127f591a91219265b66f18a8c805e7865269e",
+      "changed": false
+    },
+    {
+      "path": "Content/DefaultCursor.uasset",
+      "bytes": 19235,
+      "upstreamSha256": "c0dfd3d29c89ac57900c281a046dc81a88f5bbdda36f3cc2397139c3774140f4",
+      "projectSha256": "c0dfd3d29c89ac57900c281a046dc81a88f5bbdda36f3cc2397139c3774140f4",
+      "changed": false
+    },
+    {
+      "path": "Content/HiddenCursor.uasset",
+      "bytes": 18845,
+      "upstreamSha256": "6b8d180a9ca8c93e399b2e056b109b3d6707cbbc7d4fd87a4225816668f4b28e",
+      "projectSha256": "6b8d180a9ca8c93e399b2e056b109b3d6707cbbc7d4fd87a4225816668f4b28e",
+      "changed": false
+    },
+    {
+      "path": "Content/TextEditBeamCursor.uasset",
+      "bytes": 20253,
+      "upstreamSha256": "3aed4a4bacaa57403bba593f9e2ace74b57128e1af2ff44be7cce4f433de4d3a",
+      "projectSha256": "3aed4a4bacaa57403bba593f9e2ace74b57128e1af2ff44be7cce4f433de4d3a",
+      "changed": false
+    },
+    {
+      "path": "Content/TextEditBeamTexture.uasset",
+      "bytes": 3582,
+      "upstreamSha256": "6425de819df1190b5a99d2b3f4c1c88d98eb6b759c2c98ff9b05ce844566b331",
+      "projectSha256": "6425de819df1190b5a99d2b3f4c1c88d98eb6b759c2c98ff9b05ce844566b331",
+      "changed": false
+    },
+    {
+      "path": "Resources/Icon128.png",
+      "bytes": 2642,
+      "upstreamSha256": "0915a53670b3e1bf29b38a7b624aa8fc3789cfd59b58a7a0fe2029717e98ce1f",
+      "projectSha256": "0915a53670b3e1bf29b38a7b624aa8fc3789cfd59b58a7a0fe2029717e98ce1f",
+      "changed": false
+    },
+    {
+      "path": "Resources/PixelStreaming_16.svg",
+      "bytes": 941,
+      "upstreamSha256": "e7b8a57bce948b1c8daa4033b43592d1880887d36012a0fb90185b507eb781c5",
+      "projectSha256": "e7b8a57bce948b1c8daa4033b43592d1880887d36012a0fb90185b507eb781c5",
+      "changed": false
+    },
+    {
+      "path": "Resources/PixelStreaming_20.svg",
+      "bytes": 927,
+      "upstreamSha256": "f568f2a44921a8e0751c520baf41ffda664e438ada2a726b6fd8847cb988d257",
+      "projectSha256": "f568f2a44921a8e0751c520baf41ffda664e438ada2a726b6fd8847cb988d257",
+      "changed": false
+    },
+    {
+      "path": "Resources/PixelStreaming_64.svg",
+      "bytes": 2989,
+      "upstreamSha256": "bc23e63903718f8e0b7e366d9e6b423018a6636578cd779aded261cae305b601",
+      "projectSha256": "bc23e63903718f8e0b7e366d9e6b423018a6636578cd779aded261cae305b601",
+      "changed": false
+    },
+    {
+      "path": "Resources/NotFound/not_found.html",
+      "bytes": 319,
+      "upstreamSha256": "f7d825957777ed75d404592c6a0d5d23a6795ffcbc5fa972c59813546acc0739",
+      "projectSha256": "f7d825957777ed75d404592c6a0d5d23a6795ffcbc5fa972c59813546acc0739",
+      "changed": false
+    },
+    {
+      "path": "Resources/WebServers/get_ps_servers.bat",
+      "bytes": 6419,
+      "upstreamSha256": "8b1ad6c9302ff6e111200f8055159744280856f5d18b60ae70bfb8d5e5274290",
+      "projectSha256": "8b1ad6c9302ff6e111200f8055159744280856f5d18b60ae70bfb8d5e5274290",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingVideoInputMediaCapture.cpp",
+      "bytes": 5555,
+      "upstreamSha256": "5c5a685fb01489d7d6cc457f66bb79f618323f4625fd7e60e883159181a3aa9f",
+      "projectSha256": "5c5a685fb01489d7d6cc457f66bb79f618323f4625fd7e60e883159181a3aa9f",
+      "changed": false
+    },
+    {
+      "path": "Resources/WebServers/get_ps_servers.sh",
+      "bytes": 6203,
+      "upstreamSha256": "162c84edcfa14b125fc58599e3ca479dba1c14fe6d2e0f74f9fda216d1fbbb52",
+      "projectSha256": "162c84edcfa14b125fc58599e3ca479dba1c14fe6d2e0f74f9fda216d1fbbb52",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Internal/PixelStreamingCoderUtils.h",
+      "bytes": 3432,
+      "upstreamSha256": "c03d3a174b63c097c6dd5baf5c3973f8627c5acd3ee009f3105b2691c6ea9f39",
+      "projectSha256": "c03d3a174b63c097c6dd5baf5c3973f8627c5acd3ee009f3105b2691c6ea9f39",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Internal/PixelStreamingMediaIOCapture.h",
+      "bytes": 3297,
+      "upstreamSha256": "433f5d0efd272f6f5a5b179cd25a6b20d8a626b6e300055735bd2bdf8d0579d5",
+      "projectSha256": "433f5d0efd272f6f5a5b179cd25a6b20d8a626b6e300055735bd2bdf8d0579d5",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Internal/PixelStreamingVideoInputMediaCapture.h",
+      "bytes": 2638,
+      "upstreamSha256": "5dc8fc9c5cade16b4c3897f03ef083e139477c7e16de546c2ebb481a754a2b67",
+      "projectSha256": "5dc8fc9c5cade16b4c3897f03ef083e139477c7e16de546c2ebb481a754a2b67",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/AdaptedVideoTrackSource.cpp",
+      "bytes": 3169,
+      "upstreamSha256": "b5e4b5b4daf7699b07f29286d6c3986ecdc7795bef8d27df18c181523b515ecc",
+      "projectSha256": "b5e4b5b4daf7699b07f29286d6c3986ecdc7795bef8d27df18c181523b515ecc",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/AdaptedVideoTrackSource.h",
+      "bytes": 3724,
+      "upstreamSha256": "f48ad7d86d68b53ad78fb1e3c57a44ec5b166368cd2b6938d912c5c4911919d6",
+      "projectSha256": "f48ad7d86d68b53ad78fb1e3c57a44ec5b166368cd2b6938d912c5c4911919d6",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/AudioCapturer.cpp",
+      "bytes": 8951,
+      "upstreamSha256": "3a240632ce274763c8912e38f146a3daecbc56b21ff1cb003fa47b4cb885b3f0",
+      "projectSha256": "3a240632ce274763c8912e38f146a3daecbc56b21ff1cb003fa47b4cb885b3f0",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/AudioCapturer.h",
+      "bytes": 6274,
+      "upstreamSha256": "f62771347d66bb9ae44d6aa9b4cbaa40260de35e5cd5443d533341d24a8b6a7b",
+      "projectSha256": "f62771347d66bb9ae44d6aa9b4cbaa40260de35e5cd5443d533341d24a8b6a7b",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/AudioInputMixer.cpp",
+      "bytes": 5728,
+      "upstreamSha256": "02122b8f3c95ad83d442505cded83b466707326fca7f5a5a62b0fbd0c7b00843",
+      "projectSha256": "02122b8f3c95ad83d442505cded83b466707326fca7f5a5a62b0fbd0c7b00843",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/AudioInputMixer.h",
+      "bytes": 2988,
+      "upstreamSha256": "4012e3a3003c7ba21d045d7fe0d71e35db0806e70bba5f22e19d20bbf69d5210",
+      "projectSha256": "4012e3a3003c7ba21d045d7fe0d71e35db0806e70bba5f22e19d20bbf69d5210",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/AudioPlayoutRequester.cpp",
+      "bytes": 4954,
+      "upstreamSha256": "a498ec73fd7808e528e3d37a0c86b6fe87c19fd67501bb61e1f3f92d5ced6632",
+      "projectSha256": "a498ec73fd7808e528e3d37a0c86b6fe87c19fd67501bb61e1f3f92d5ced6632",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/AudioPlayoutRequester.h",
+      "bytes": 1943,
+      "upstreamSha256": "00966bf2c996a975f051b1c27b655dfe406cc861e03db72a5bd776ad5f15f31e",
+      "projectSha256": "00966bf2c996a975f051b1c27b655dfe406cc861e03db72a5bd776ad5f15f31e",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/AudioSink.cpp",
+      "bytes": 2170,
+      "upstreamSha256": "f23fbf1548e0e0668dd6492951102c165cf950da3f585bb40ae2676c184843b8",
+      "projectSha256": "f23fbf1548e0e0668dd6492951102c165cf950da3f585bb40ae2676c184843b8",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/AudioSink.h",
+      "bytes": 1334,
+      "upstreamSha256": "407e1acd2e2e92621bf0387599863f2cf3ca59a47a7723ba77e26a46c4f5a734",
+      "projectSha256": "407e1acd2e2e92621bf0387599863f2cf3ca59a47a7723ba77e26a46c4f5a734",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/PixelStreaming.Build.cs",
+      "bytes": 7543,
+      "upstreamSha256": "eaa255c93b88a71f81763ef66facef6995566db3ccd1dd5de5eb57342f3eded1",
+      "projectSha256": "bd26bb614ff0563c5c067fd1f735d9c66e1ea49a89db17477b622334d3a00aef",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingVideoInputNV12.cpp",
+      "bytes": 820,
+      "upstreamSha256": "3223cf580480164fd5da808a112314357ac3b6d5043a713de4791789e706d0d9",
+      "projectSha256": "3223cf580480164fd5da808a112314357ac3b6d5043a713de4791789e706d0d9",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingVideoInputPIEViewport.cpp",
+      "bytes": 1663,
+      "upstreamSha256": "5cef6ab5cd0e7d035e06ba643ef39ffc7d8d7bad951460113fb48e5ba8de5949",
+      "projectSha256": "5cef6ab5cd0e7d035e06ba643ef39ffc7d8d7bad951460113fb48e5ba8de5949",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingVideoInputRenderTarget.cpp",
+      "bytes": 1252,
+      "upstreamSha256": "24a31d2608a5dfba54a8117b323463594af5c617b3cc9733d51f3ffb5c4b53ce",
+      "projectSha256": "24a31d2608a5dfba54a8117b323463594af5c617b3cc9733d51f3ffb5c4b53ce",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoEncoderSingleLayerVPX.h",
+      "bytes": 1361,
+      "upstreamSha256": "c5436ea9b26936e921cfe90695d84e9c60cc2a278fbadea39d33d73045e360ca",
+      "projectSha256": "c5436ea9b26936e921cfe90695d84e9c60cc2a278fbadea39d33d73045e360ca",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoSource.cpp",
+      "bytes": 2169,
+      "upstreamSha256": "e3f3c5cf24a4bd33d54b5168a38a6395cb887b2ad65a723eeae3f3635c88cbe8",
+      "projectSha256": "e3f3c5cf24a4bd33d54b5168a38a6395cb887b2ad65a723eeae3f3635c88cbe8",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoSource.h",
+      "bytes": 1867,
+      "upstreamSha256": "91286612d61ff2eec65755af4905667391360354c589700fc68f720d62d88ee1",
+      "projectSha256": "91286612d61ff2eec65755af4905667391360354c589700fc68f720d62d88ee1",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoSourceGroup.cpp",
+      "bytes": 8955,
+      "upstreamSha256": "7eeff5a953c705be4582b82ff40fb905e0a4211ef63cc1d407c38fe985ea79f2",
+      "projectSha256": "af9e984ffe0521d266eebe46bb0f0ba050a68dd88162f40a046ce1bb209f73dd",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoSourceGroup.h",
+      "bytes": 3151,
+      "upstreamSha256": "0a598bd735906b23f02c09706571fbac1ee079eb384356739658c0dc5eae1bd5",
+      "projectSha256": "1454a097532a84db8dafc71b6239104e53cb1c2bd0a53b12b15dc637e95dc2e6",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Private/WebRTCIncludes.h",
+      "bytes": 3138,
+      "upstreamSha256": "df4ce9b52b66a809f5db7923ebdc0fdc68b535da53cc33ce19aacdf9ace15e5d",
+      "projectSha256": "df4ce9b52b66a809f5db7923ebdc0fdc68b535da53cc33ce19aacdf9ace15e5d",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/WebRTCLogging.cpp",
+      "bytes": 2858,
+      "upstreamSha256": "b664e4b288e59e1ddbcd34100b5316193a38c9341beffce9f9c24cdc2b2d6c90",
+      "projectSha256": "b664e4b288e59e1ddbcd34100b5316193a38c9341beffce9f9c24cdc2b2d6c90",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/WebRTCLogging.h",
+      "bytes": 274,
+      "upstreamSha256": "e0f3d229afc00c2327dc9e4b014f9d92a9f9be8b86a043b65309b7bbbba59ffb",
+      "projectSha256": "e0f3d229afc00c2327dc9e4b014f9d92a9f9be8b86a043b65309b7bbbba59ffb",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/AudioDirectionTest.cpp",
+      "bytes": 2250,
+      "upstreamSha256": "9e52e930161ca80d87cf3412ba5fa5e38fe06b49a709fbaa3769048334982459",
+      "projectSha256": "9e52e930161ca80d87cf3412ba5fa5e38fe06b49a709fbaa3769048334982459",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/CodecUtils.h",
+      "bytes": 3661,
+      "upstreamSha256": "de0e76eb2cb1668b369a4f526f614416ae0e7c6c26d1db52c40fc096245c7d17",
+      "projectSha256": "de0e76eb2cb1668b369a4f526f614416ae0e7c6c26d1db52c40fc096245c7d17",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/DataChannelTest.cpp",
+      "bytes": 3346,
+      "upstreamSha256": "406d7d0dd85e829570d21d03bce5836010186ca5d2393f072b72b1d79dfa6d25",
+      "projectSha256": "406d7d0dd85e829570d21d03bce5836010186ca5d2393f072b72b1d79dfa6d25",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/DirectionUtils.h",
+      "bytes": 1919,
+      "upstreamSha256": "160cbfc4b01253b0ceb8e9105e9d5702386151d05f6ebe77661965b0f97fb02e",
+      "projectSha256": "160cbfc4b01253b0ceb8e9105e9d5702386151d05f6ebe77661965b0f97fb02e",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/GHSStreamingPolicyTests.cpp",
+      "bytes": 4438,
+      "upstreamSha256": null,
+      "projectSha256": "e8547c3dedca10d5cde8afb629a4089884032614162a8111f49a620480732087",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoEncoderSingleLayerVPX.cpp",
+      "bytes": 4028,
+      "upstreamSha256": "ea4fbb7b34195130fd708b66e7044e52a3b83113c30eb8c5d926cbb3786630ab",
+      "projectSha256": "ea4fbb7b34195130fd708b66e7044e52a3b83113c30eb8c5d926cbb3786630ab",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/HandshakeTest.cpp",
+      "bytes": 3280,
+      "upstreamSha256": "1b685322b93580177bad9d0b2db4118a36354b7938dce44cdb0c5a52e7756902",
+      "projectSha256": "1b685322b93580177bad9d0b2db4118a36354b7938dce44cdb0c5a52e7756902",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/MultipleSignallingConnectionsTest.cpp",
+      "bytes": 7754,
+      "upstreamSha256": "f8b880b586896931f28c2c6ed4616d77d0091fb014f81023f23ef96955339151",
+      "projectSha256": "f8b880b586896931f28c2c6ed4616d77d0091fb014f81023f23ef96955339151",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/ProtocolTest.cpp",
+      "bytes": 6071,
+      "upstreamSha256": "016df1b79f97932c56eb839333c982d8db35ea999133b210363c2ded1a19bd16",
+      "projectSha256": "016df1b79f97932c56eb839333c982d8db35ea999133b210363c2ded1a19bd16",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/SignallingServerConnectionTests.cpp",
+      "bytes": 14119,
+      "upstreamSha256": "555c3714cd8109ff8a9c7da61cd4cabfc53099004a25d09e73a185f34980d72c",
+      "projectSha256": "555c3714cd8109ff8a9c7da61cd4cabfc53099004a25d09e73a185f34980d72c",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/TestUtils.cpp",
+      "bytes": 13653,
+      "upstreamSha256": "3e05cd07a5cedb03ec1966648f0a1c47c88acc68d921a03a646ef54fcf33e48a",
+      "projectSha256": "3e05cd07a5cedb03ec1966648f0a1c47c88acc68d921a03a646ef54fcf33e48a",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/TestUtils.h",
+      "bytes": 4274,
+      "upstreamSha256": "1b6e4658f66af4a37711250fd2a66c4f424411a62e3c046d8b72a34736956d57",
+      "projectSha256": "1b6e4658f66af4a37711250fd2a66c4f424411a62e3c046d8b72a34736956d57",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/VideoDirectionTest.cpp",
+      "bytes": 1202,
+      "upstreamSha256": "8981b2de151b2094859b1e77e4ef9581be68a82eddfa049033fd4ab65da23c65",
+      "projectSha256": "8981b2de151b2094859b1e77e4ef9581be68a82eddfa049033fd4ab65da23c65",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/VP8Tests.cpp",
+      "bytes": 1948,
+      "upstreamSha256": "3c825fd1f98c85b4edb3f088be702c7813604b296fbdcacc2f5078226b4b3cdd",
+      "projectSha256": "3c825fd1f98c85b4edb3f088be702c7813604b296fbdcacc2f5078226b4b3cdd",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/VP9Tests.cpp",
+      "bytes": 1949,
+      "upstreamSha256": "6f4bef1e9fcc065096326abcb255677e0cf9ee063fd4316f76982292100e2bda",
+      "projectSha256": "6f4bef1e9fcc065096326abcb255677e0cf9ee063fd4316f76982292100e2bda",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/IPixelStreamingAudioConsumer.h",
+      "bytes": 502,
+      "upstreamSha256": "983cae7e96f4885a87f552dc0bb6030130feed34c2ad6f319d4af44508bc13bc",
+      "projectSha256": "983cae7e96f4885a87f552dc0bb6030130feed34c2ad6f319d4af44508bc13bc",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/IPixelStreamingAudioInput.h",
+      "bytes": 448,
+      "upstreamSha256": "24c11f89ec29eea24c85da9439ffcb1de91b6285ce48ad099d892b82547734aa",
+      "projectSha256": "24c11f89ec29eea24c85da9439ffcb1de91b6285ce48ad099d892b82547734aa",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/IPixelStreamingAudioSink.h",
+      "bytes": 652,
+      "upstreamSha256": "111970303d9455239b6f317a90bf43d11ce0c483968889b3f64825e3c5ede159",
+      "projectSha256": "111970303d9455239b6f317a90bf43d11ce0c483968889b3f64825e3c5ede159",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/IPixelStreamingModule.h",
+      "bytes": 6210,
+      "upstreamSha256": "b8896ac48cc94a9d3d8b17a3aae94a65dcdd83484591f0a1fc95995f09395d93",
+      "projectSha256": "b8896ac48cc94a9d3d8b17a3aae94a65dcdd83484591f0a1fc95995f09395d93",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Public/IPixelStreamingSignallingConnection.h",
+      "bytes": 4503,
+      "upstreamSha256": "11c54b6db7ccbff70ace2960d094ff7c7903f66f429bde42b835256e1395990c",
+      "projectSha256": "11c54b6db7ccbff70ace2960d094ff7c7903f66f429bde42b835256e1395990c",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Tests/MockPlayer.h",
+      "bytes": 7800,
+      "upstreamSha256": "dfdf537a63b0ffa49fdde7d49378247aadb4133d73acdca20488abc3d7826301",
+      "projectSha256": "dfdf537a63b0ffa49fdde7d49378247aadb4133d73acdca20488abc3d7826301",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Private/Tests/ServerTests.cpp",
+      "bytes": 9257,
+      "upstreamSha256": "581a8efdcdb0b7d80486cb7a173e96b565d7626ce6bf878686e64e433c87568a",
+      "projectSha256": "581a8efdcdb0b7d80486cb7a173e96b565d7626ce6bf878686e64e433c87568a",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoEncoderSingleLayerHardware.h",
+      "bytes": 3447,
+      "upstreamSha256": "0f453dc282622f7ac18b5561946f5bdff03e2db89bae9d84334c4e2befaed50a",
+      "projectSha256": "dce8837f7666e7b551bc7b8ef29d8a502558096f878695ddefd87b9bbf2bd6f7",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoEncoderLayered.h",
+      "bytes": 3071,
+      "upstreamSha256": "f657c5dff8755b69eaba738b0655fd929696b3817e0bb9f78099450f2f6bff14",
+      "projectSha256": "f657c5dff8755b69eaba738b0655fd929696b3817e0bb9f78099450f2f6bff14",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingVideoInputRHI.cpp",
+      "bytes": 1461,
+      "upstreamSha256": "af3810af1bbd95ed81a349708454410c62734cc683ee1e6727274b6249550849",
+      "projectSha256": "af3810af1bbd95ed81a349708454410c62734cc683ee1e6727274b6249550849",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PixelStreamingVideoSink.cpp",
+      "bytes": 3971,
+      "upstreamSha256": "53a9b7220a9549eb026eaec38b207b167f14ed545238b5a512485987ea386641",
+      "projectSha256": "53a9b7220a9549eb026eaec38b207b167f14ed545238b5a512485987ea386641",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/PlayerContext.h",
+      "bytes": 418,
+      "upstreamSha256": "73547a6823f2e42fcd9c4c6ab1f92d3ca3594cd5075006ede5c19c4bca729c1d",
+      "projectSha256": "73547a6823f2e42fcd9c4c6ab1f92d3ca3594cd5075006ede5c19c4bca729c1d",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/RTCStatsCollector.cpp",
+      "bytes": 19561,
+      "upstreamSha256": "1c8370f1be08170c19232107b26baf14fd2cfa2215482de087887d5fa7a3833a",
+      "projectSha256": "1c8370f1be08170c19232107b26baf14fd2cfa2215482de087887d5fa7a3833a",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/RTCStatsCollector.h",
+      "bytes": 5779,
+      "upstreamSha256": "7fcc14f7c0c375255c26cbcc42db481c7a66fe2d75da5439a6de022fca909bea",
+      "projectSha256": "7fcc14f7c0c375255c26cbcc42db481c7a66fe2d75da5439a6de022fca909bea",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Settings.cpp",
+      "bytes": 34257,
+      "upstreamSha256": "7fdecd5244817b454ee712c6bcc0924a81f9bc41a2da112325fae39174e90760",
+      "projectSha256": "0c193c7d0d82fac35d628d01d4b6fa9ffe55cd56702134e74fa2613fab532242",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Settings.h",
+      "bytes": 6060,
+      "upstreamSha256": "895fd82a189d73a35426e95398056c3f63c38b25f23d4b2ce986ffb9877bd908",
+      "projectSha256": "994b20add97914f1d43e390fa8f1ba466926b56f90197fbbbaa857242d5a77cf",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Private/SignallingConnectionObserver.cpp",
+      "bytes": 4395,
+      "upstreamSha256": "fb2b17001f2a26edc257140eddc64290bbec66f763156af49df5b085ed4d0ebc",
+      "projectSha256": "fb2b17001f2a26edc257140eddc64290bbec66f763156af49df5b085ed4d0ebc",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/SignallingConnectionObserver.h",
+      "bytes": 2178,
+      "upstreamSha256": "20ec84af5bcd5a79591e689124c51b524aeca95a1c26ad12d31832cbda915584",
+      "projectSha256": "20ec84af5bcd5a79591e689124c51b524aeca95a1c26ad12d31832cbda915584",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Stats.cpp",
+      "bytes": 24339,
+      "upstreamSha256": "c740d16f7259863dff825537668d8eaf03ca74bd95c21ee5ccc2ffae3835fd15",
+      "projectSha256": "c740d16f7259863dff825537668d8eaf03ca74bd95c21ee5ccc2ffae3835fd15",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Stats.h",
+      "bytes": 7021,
+      "upstreamSha256": "2f065b307a8a454710a80fab1868703c7bca98af6f3f241743b906a6026c8bcc",
+      "projectSha256": "2f065b307a8a454710a80fab1868703c7bca98af6f3f241743b906a6026c8bcc",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Streamer.cpp",
+      "bytes": 37109,
+      "upstreamSha256": "b1dccff5513fba29726b862e18b0cb20965bda676da4bcf70c1fe90bab15dac1",
+      "projectSha256": "57b8b01699974fe57e4944260c88374fa19635db486aadae7a03d0e076583926",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Streamer.h",
+      "bytes": 7204,
+      "upstreamSha256": "59227e576f3bf29920ff2df51799ce62c04203e77f01eb98163b71b90e2793b5",
+      "projectSha256": "59227e576f3bf29920ff2df51799ce62c04203e77f01eb98163b71b90e2793b5",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoEncoderSingleLayerHardware.cpp",
+      "bytes": 19896,
+      "upstreamSha256": "cbd66ed7d61c639ed2ca43e113ba65f36d7a227424189786f37e9ebd28fdac8b",
+      "projectSha256": "46c46715442a384352171946d67bae368b21ff2e19851860b09e99751b8e5174",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Private/ThreadSafeMap.h",
+      "bytes": 3229,
+      "upstreamSha256": "10617b2549275facab5b6225abd5c3dd9c5a39e4a26c60fef0932ee1bc9cd45d",
+      "projectSha256": "10617b2549275facab5b6225abd5c3dd9c5a39e4a26c60fef0932ee1bc9cd45d",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/Utils.h",
+      "bytes": 3111,
+      "upstreamSha256": "78fc4ed19646526a71175a996b5d9ce6c1e0b97a4076669dcebaed88f9d0444c",
+      "projectSha256": "78fc4ed19646526a71175a996b5d9ce6c1e0b97a4076669dcebaed88f9d0444c",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoDecoderFactory.cpp",
+      "bytes": 5822,
+      "upstreamSha256": "3986079ae25db57cfda4b7b670c582e215088f6d5b1adfea1a5babbb78254e8d",
+      "projectSha256": "3986079ae25db57cfda4b7b670c582e215088f6d5b1adfea1a5babbb78254e8d",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoDecoderFactory.h",
+      "bytes": 453,
+      "upstreamSha256": "1f55421d1d17eb10f6f8c6f3cace298e3e191bbf3747cc8ea1aab16f675bba75",
+      "projectSha256": "1f55421d1d17eb10f6f8c6f3cace298e3e191bbf3747cc8ea1aab16f675bba75",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoDecoderHardware.cpp",
+      "bytes": 3520,
+      "upstreamSha256": "57e8c2b0b0f38b0a9655cf91a926247461d085933b83486d7dc2b35dba8d228b",
+      "projectSha256": "57e8c2b0b0f38b0a9655cf91a926247461d085933b83486d7dc2b35dba8d228b",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoDecoderHardware.h",
+      "bytes": 1105,
+      "upstreamSha256": "640f36e9421f7302a7048f98895f41f395ef55df6c331fbffe405e41f35620fb",
+      "projectSha256": "640f36e9421f7302a7048f98895f41f395ef55df6c331fbffe405e41f35620fb",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoDecoderSoftware.cpp",
+      "bytes": 1415,
+      "upstreamSha256": "e9cf7bcbc4d8e152dd933a260ae9120ea159dba6c02ec813f03b426b9d759ded",
+      "projectSha256": "e9cf7bcbc4d8e152dd933a260ae9120ea159dba6c02ec813f03b426b9d759ded",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoDecoderSoftware.h",
+      "bytes": 855,
+      "upstreamSha256": "d5dbee8388f88483f42b96b5a0edde4eb35d601130bdf243376ca72c8374f70b",
+      "projectSha256": "d5dbee8388f88483f42b96b5a0edde4eb35d601130bdf243376ca72c8374f70b",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoDecoderStub.h",
+      "bytes": 621,
+      "upstreamSha256": "db46e6aa958a99858637d9fc9ccd5ca364c128b3e06cb9c7d3841819cd856f7f",
+      "projectSha256": "db46e6aa958a99858637d9fc9ccd5ca364c128b3e06cb9c7d3841819cd856f7f",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoEncoderFactoryLayered.cpp",
+      "bytes": 2172,
+      "upstreamSha256": "7bcdf937bd436e1deb8cea13bf93984781f9d3b5eb420d6796333f5ea501bc70",
+      "projectSha256": "7bcdf937bd436e1deb8cea13bf93984781f9d3b5eb420d6796333f5ea501bc70",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoEncoderFactoryLayered.h",
+      "bytes": 1409,
+      "upstreamSha256": "15be680fa436dc5a1e5bb116a48187428a9e51c213f1fd69128bf8c157166029",
+      "projectSha256": "15be680fa436dc5a1e5bb116a48187428a9e51c213f1fd69128bf8c157166029",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoEncoderFactorySingleLayer.cpp",
+      "bytes": 10335,
+      "upstreamSha256": "fa16c009257f0972b0b0a84e0aa9162daa8832dcdf6e4d7c5421b15437a6f594",
+      "projectSha256": "fa16c009257f0972b0b0a84e0aa9162daa8832dcdf6e4d7c5421b15437a6f594",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoEncoderFactorySingleLayer.h",
+      "bytes": 3360,
+      "upstreamSha256": "f78e5dec53b18d18ed5f54ee528e1d0fca2ac641e81998fb0564f46faf3d7c8d",
+      "projectSha256": "f78e5dec53b18d18ed5f54ee528e1d0fca2ac641e81998fb0564f46faf3d7c8d",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreaming/Private/VideoEncoderLayered.cpp",
+      "bytes": 18262,
+      "upstreamSha256": "62c73e8f5510475e7a4eddcf630e71bdc0fbd4ac04f78ea928f26c501ab9cd53",
+      "projectSha256": "869a0fbb9e80c2d5b68ae6fa8dd5a079d950029c87eeee7091772720774ab494",
+      "changed": true
+    },
+    {
+      "path": "Source/PixelStreaming/Private/ToStringExtensions.h",
+      "bytes": 3913,
+      "upstreamSha256": "b55156b83b71866383d1b850838fc6abf34d70a04db78b6bd1547e819fdd7b1e",
+      "projectSha256": "b55156b83b71866383d1b850838fc6abf34d70a04db78b6bd1547e819fdd7b1e",
+      "changed": false
+    },
+    {
+      "path": "Source/PixelStreamingServers/Public/PixelStreamingServers.h",
+      "bytes": 6108,
+      "upstreamSha256": "36d5b5fcdff3dfc3004125652d9cf5599c9cc9ae7162cfac0e2df58acdd01df1",
+      "projectSha256": "36d5b5fcdff3dfc3004125652d9cf5599c9cc9ae7162cfac0e2df58acdd01df1",
+      "changed": false
+    }
+  ]
+}

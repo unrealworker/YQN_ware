@@ -13,9 +13,11 @@ class BudgetPolicy {
     if (count !== this.count) {
       this.count = count; this.warmupUntil = now + 5000; this.holdUntil = 0;
       this.pressureCount = 0; this.pressureTarget = null; this.healthyCount = 0; this.lastProbeAt = now; this.lastSamples.clear();
-      this.currentFps = Math.max(5, Math.floor(this.config.fps / Math.max(1, count)));
+      // Admission is not proof of contention: keep the selected target until fresh
+      // measurements show sustained pressure. Never turn an uncapped request into 5 FPS.
+      this.currentFps = this.config.fps;
     }
-    if (this.config.mode === 'shared' || this.config.adaptiveResourceBudget === false || count <= 1) return this.currentFps = this.config.fps;
+    if (this.config.fps === 0 || this.config.mode === 'shared' || this.config.adaptiveResourceBudget === false || count <= 1) return this.currentFps = this.config.fps;
     if (now < this.warmupUntil) return this.currentFps;
     // Every instance must acknowledge the current cap before its measurements inform another.
     // Require a new sample from every instance; repeated polling is not repeated evidence.
@@ -56,7 +58,7 @@ function readMetrics(dir, now = Date.now()) {
     const file = path.join(dir, 'metrics.json'); const stat = fs.statSync(file);
     if (stat.size > 8192 || now - stat.mtimeMs > 5000 || stat.mtimeMs > now + 1000) return null;
     const m = JSON.parse(fs.readFileSync(file, 'utf8'));
-    if (m.version !== 1 || !Number.isSafeInteger(m.sequence) || m.sequence < 0 || !Number.isFinite(m.appliedFps) || m.appliedFps < 5 || m.appliedFps > 120 || !Number.isFinite(m.actualFps) || m.actualFps < 0 || m.actualFps > 1000) return null;
+    if (m.version !== 1 || !Number.isSafeInteger(m.sequence) || m.sequence < 0 || !Number.isInteger(m.appliedFps) || (m.appliedFps !== 0 && (m.appliedFps < 5 || m.appliedFps > 120)) || !Number.isFinite(m.actualFps) || m.actualFps < 0 || m.actualFps > 1000) return null;
     return { receivedAt: stat.mtimeMs, sequence: m.sequence, appliedFps: m.appliedFps, actualFps: m.actualFps, gpuMs: Number.isFinite(m.gpuMs) && m.gpuMs > 0 && m.gpuMs <= 1000 ? m.gpuMs : null, screenPercentage: Number.isFinite(m.screenPercentage) ? m.screenPercentage : null };
   } catch { return null; }
 }

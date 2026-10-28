@@ -14,7 +14,7 @@ async function until(fn, ms = 5000) { const start = Date.now(); while (!fn()) { 
 async function freePort() { const s = net.createServer(); s.listen(0, '127.0.0.1'); await once(s, 'listening'); const p = s.address().port; await new Promise(r => s.close(r)); return p; }
 const token = 'test-control-token-01234567890123456789';
 async function setup(t, mode = 'shared', observedExitDelayMs = 0, extra = {}) {
-  const config = { executablePath: process.execPath, httpPort: await freePort(), streamerPort: await freePort(), mode, showWindow: false, width: 1920, height: 1080, ...extra };
+  const config = { executablePath: process.execPath, httpPort: await freePort(), streamerPort: await freePort(), mode, showWindow: false, width: 1920, height: 1080, fps: 60, ...extra };
   const children = [], streamerUrls = [];
   const service = createService(config, { token, reconnectGraceMs: 60, spawnProcess(exe, args, opts) {
     assert.equal(opts.shell, false); assert.equal(exe, process.execPath);
@@ -42,6 +42,83 @@ async function viewer(ctx, resume, fields = {}) {
   return { ws, messages, token: session.token, get close() { return close; } };
 }
 
+async function startupQueueFixture(t, failStartAt = 0) {
+  const launched = []; let starts = 0;
+  const config = { executablePath: process.execPath, httpPort: await freePort(), streamerPort: await freePort(), mode: 'independent', fps: 0 };
+  const service = createService(config, { token, reconnectGraceMs: 60, spawnProcess(_exe, args) {
+    if (++starts === failStartAt) throw Error('fixture spawn rejected');
+    const child = new EventEmitter(); child.pid = null; child.exitCode = null; child.signalCode = null;
+    launched.push({ child, id: args.find(a => a.startsWith('-PixelStreamingID=')).slice('-PixelStreamingID='.length), url: args.find(a => a.startsWith('-PixelStreamingURL=')).slice('-PixelStreamingURL='.length), directory: args.find(a => a.startsWith('-GHSStreamControlDir=')).slice('-GHSStreamControlDir='.length) });
+    return child;
+  } });
+  await service.start(); t.after(() => service.stop());
+  return { service, launched, base: `http://127.0.0.1:${config.httpPort}` };
+}
+async function acknowledgeStartup(instance) {
+  const ws = new WebSocket(instance.url);
+  ws.on('message', bytes => { if (JSON.parse(bytes).type === 'identify') ws.send(JSON.stringify({ type: 'endpointId', id: instance.id })); });
+  await once(ws, 'open'); return ws;
+}
+
+test('startup queue starts one UE at a time and a cancelled waiting user never spawns', async t => {
+  const ctx = await startupQueueFixture(t);
+  const a = await viewer(ctx), b = await viewer(ctx), c = await viewer(ctx);
+  await until(() => ctx.service.status().instances.length === 3);
+  assert.equal(ctx.launched.length, 1, 'initialization must not overlap before streamer readiness');
+  assert.equal(ctx.service.status().instances.filter(i => i.state === 'queued').length, 2);
+  await until(() => c.messages.some(m => m.type === 'ghsStage'));
+  assert.deepEqual(a.messages.filter(m => m.type === 'ghsStage').map(m => m.stage), ['waitingStreamer']);
+  assert.deepEqual(c.messages.filter(m => m.type === 'ghsStage').map(m => m.stage), ['queued']);
+  b.ws.close(); await until(() => ctx.service.status().instances.length === 2);
+  assert.equal(ctx.launched.length, 1, 'closing a queued user must not start a UE');
+  await acknowledgeStartup(ctx.launched[0]); await until(() => ctx.launched.length === 2);
+  const cid = c.messages.find(m => m.type === 'ghsAdmission').instanceId;
+  assert.equal(ctx.launched[1].id, cid);
+  await until(() => c.messages.some(m => m.type === 'ghsStage' && m.stage === 'waitingStreamer'));
+  assert.deepEqual(c.messages.filter(m => m.type === 'ghsStage').map(m => m.stage), ['queued', 'waitingStreamer']);
+  await acknowledgeStartup(ctx.launched[1]); await until(() => ctx.service.status().instances.every(i => i.state === 'ready'));
+  assert.ok(ctx.service.status().instances.every(i => i.targetFps === 0));
+  for (const instance of ctx.launched) assert.equal(JSON.parse(fs.readFileSync(path.join(instance.directory, 'budget.json'), 'utf8')).fps, 0);
+  assert.equal(a.close, undefined);
+});
+
+test('startup failure releases the next queued instance and service stop does not launch waiting work', async t => {
+  const ctx = await startupQueueFixture(t);
+  await viewer(ctx); await viewer(ctx); await viewer(ctx);
+  await until(() => ctx.service.status().instances.length === 3);
+  assert.equal(ctx.launched.length, 1);
+  ctx.launched[0].child.exitCode = 1; ctx.launched[0].child.emit('exit', 1, null);
+  await until(() => ctx.launched.length === 2);
+  assert.equal(ctx.service.status().instances.filter(i => i.state === 'queued').length, 1);
+  await ctx.service.stop(); assert.equal(ctx.launched.length, 2, 'stop must not drain waiting work by spawning it');
+});
+
+test('readiness keeps degraded status when releasing the startup slot synchronously fails the next spawn', async t => {
+  const ctx = await startupQueueFixture(t, 2);
+  await viewer(ctx); await viewer(ctx);
+  await until(() => ctx.service.status().instances.length === 2);
+  await acknowledgeStartup(ctx.launched[0]);
+  await until(() => ctx.service.status().instances.some(i => i.state === 'failed'));
+  const status = ctx.service.status();
+  assert.deepEqual(status.instances.map(i => i.state), ['ready', 'failed']);
+  assert.equal(status.state, 'degraded');
+  assert.match(status.message, /fixture spawn rejected/);
+});
+
+test('a later ready instance cannot hide an existing failed instance or its failure explanation', async t => {
+  const ctx = await startupQueueFixture(t);
+  await viewer(ctx); await viewer(ctx);
+  await until(() => ctx.service.status().instances.length === 2);
+  ctx.launched[0].child.exitCode = 1; ctx.launched[0].child.emit('exit', 1, null);
+  await until(() => ctx.launched.length === 2);
+  const failedMessage = ctx.service.status().message;
+  await acknowledgeStartup(ctx.launched[1]);
+  await until(() => ctx.service.status().instances.some(i => i.state === 'ready'));
+  assert.deepEqual(ctx.service.status().instances.map(i => i.state), ['failed', 'ready']);
+  assert.equal(ctx.service.status().state, 'degraded');
+  assert.equal(ctx.service.status().message, failedMessage);
+});
+
 test('configuration rejects invalid ports, dimensions and bitrate order; UE arguments preserve resolution and local media ports', () => {
   const cfg = { executablePath: process.execPath, httpPort: 8080, streamerPort: 8888 };
   assert.throws(() => validateConfig({ ...cfg, httpPort: 0 }), /端口/);
@@ -53,11 +130,43 @@ test('configuration rejects invalid ports, dimensions and bitrate order; UE argu
   assert.ok(args.includes('-PixelStreamingWebRTCMinPort=50000'));
   assert.ok(args.includes('-PixelStreamingWebRTCMaxPort=50199'));
   assert.ok(args.includes('-PixelStreamingEncoderPreset=HIGH_QUALITY'));
-  assert.ok(args.includes('-PixelStreamingEncoderMaxQP=26'));
+  assert.ok(args.includes('-PixelStreamingEncoderMaxQP=32'));
   assert.ok(args.some(x => x.includes('r.ScreenPercentage 100') && x.includes('r.DynamicRes.OperationMode 0')));
-  assert.ok(buildUEArgs(validateConfig({ ...cfg, qualityProfile: 'ultra' }), 'shared').includes('-PixelStreamingEncoderMaxQP=22'));
+  assert.ok(buildUEArgs(validateConfig({ ...cfg, qualityProfile: 'ultra' }), 'shared').includes('-PixelStreamingEncoderMaxQP=28'));
+  for (const qualityProfile of ['balanced', 'custom']) assert.ok(buildUEArgs(validateConfig({ ...cfg, qualityProfile }), 'shared').includes('-PixelStreamingEncoderMaxQP=36'));
+  assert.equal(args.some(a => a.includes('EncoderTargetBitrate')), false, 'congestion controller must retain bitrate control');
   assert.throws(() => validateConfig({ ...cfg, qualityProfile: 'unknown' }), /画质/);
   assert.throws(() => validateConfig({ ...cfg, adaptiveResourceBudget: 'true' }), /布尔/);
+});
+
+test('unlimited configuration uses an explicit zero frame cap and accepts a low congestion floor', () => {
+  const cfg = { executablePath: process.execPath, httpPort: 8080, streamerPort: 8888, fps: 0, minBitrateMbps: 1, startBitrateMbps: 8, maxBitrateMbps: 20 };
+  const result = validateConfig(cfg);
+  assert.equal(result.fps, 0);
+  assert.equal(result.minBitrateMbps, 1);
+  for (const fps of [-1, 0.5, 1, 14, 121, 300]) assert.throws(() => validateConfig({ ...cfg, fps }), /帧率/);
+});
+
+test('defaults allow WebRTC congestion adaptation while explicit existing quality budgets remain intact', () => {
+  const cfg = { executablePath: process.execPath, httpPort: 8080, streamerPort: 8888 };
+  const defaults = validateConfig(cfg);
+  assert.deepEqual([defaults.fps, defaults.minBitrateMbps, defaults.startBitrateMbps, defaults.maxBitrateMbps], [0, 1, 8, 24]);
+  const existing = validateConfig({ ...cfg, fps: 60, minBitrateMbps: 12, startBitrateMbps: 35, maxBitrateMbps: 60, qualityProfile: 'custom' });
+  assert.deepEqual([existing.fps, existing.minBitrateMbps, existing.startBitrateMbps, existing.maxBitrateMbps], [60, 12, 35, 60]);
+});
+
+test('unlimited launch removes render and capture caps without forcing queued frames or a fake high ceiling', () => {
+  const config = validateConfig({ executablePath: process.execPath, httpPort: 8080, streamerPort: 8888, fps: 0 });
+  const args = buildUEArgs(config, 'shared');
+  assert.ok(args.includes('-NoVSync'));
+  assert.ok(args.includes('-GHSLowLatencyPlayout'));
+  assert.ok(args.includes('-PixelStreamingWebRTCFps=0'));
+  const commands = args.find(a => a.startsWith('-ExecCmds=')).slice('-ExecCmds='.length).split(',');
+  assert.ok(commands.includes('t.MaxFPS 0'));
+  assert.ok(commands.includes('r.VSync 0'));
+  assert.ok(commands.includes('PixelStreaming.DecoupleFramerate 0'));
+  assert.equal(args.some(a => /DisableFrameDropper|UseFixedTimeStep|FixedFrameRate/.test(a)), false);
+  assert.ok(args.includes('-PixelStreamingWebRTCMinBitrate=1000000'));
 });
 
 test('ten viewers share one UE; eleventh is rejected without disconnecting admitted users', async t => {
@@ -76,15 +185,16 @@ test('ten viewers share one UE; eleventh is rejected without disconnecting admit
   assert.ok(active.every(v => !v.close));
 });
 
-test('independent admission and departure apply equal live frame budgets without restarting surviving UE instances', async t => {
+test('independent admission preserves configured targets until measured pressure and never restarts survivors', async t => {
   const ctx = await setup(t, 'independent'); const a = await viewer(ctx);
   await until(() => ctx.service.status().instances.length === 1);
   const firstPid = ctx.service.status().instances[0].pid;
   assert.equal(ctx.service.status().instances[0].targetFps, 60);
   const b = await viewer(ctx); await until(() => ctx.service.status().instances.length === 2);
-  assert.deepEqual(ctx.service.status().instances.map(x => x.targetFps), [30, 30]);
+  assert.deepEqual(ctx.service.status().instances.map(x => x.targetFps), [60, 60]);
   const c = await viewer(ctx); await until(() => ctx.service.status().instances.length === 3);
-  assert.deepEqual(ctx.service.status().instances.map(x => x.targetFps), [20, 20, 20]);
+  assert.deepEqual(ctx.service.status().instances.map(x => x.targetFps), [60, 60, 60]);
+  await until(() => ctx.service.status().instances.filter(x => x.state === 'ready').length === 3);
   b.ws.close(); c.ws.close(); await until(() => ctx.service.status().instances.length === 1);
   assert.equal(ctx.service.status().instances[0].targetFps, 60);
   assert.equal(ctx.service.status().instances[0].pid, firstPid);
@@ -172,7 +282,9 @@ test('independent concurrent admissions never exceed configured capacity and clo
   const attempted = await Promise.all(Array.from({ length: 8 }, () => viewer(ctx)));
   await until(() => attempted.every(v => v.close));
   assert.ok(attempted.every(v => v.close.code === 4004));
-  assert.equal(ctx.children.length, 2); assert.equal(ctx.service.status().viewerCount, 2);
+  assert.ok(ctx.children.length <= 2); assert.equal(ctx.service.status().viewerCount, 2);
+  await until(() => ctx.service.status().instances.filter(i => i.state === 'ready').length === 2);
+  assert.equal(ctx.children.length, 2);
 });
 test('queued resume behind another manual cleanup retains its owned instance', async t => {
   const ctx = await setup(t, 'independent', 400); const a = await viewer(ctx); const b = await viewer(ctx);

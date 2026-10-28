@@ -1,0 +1,3 @@
+# Preserve upstream and patched file bytes so the source SHA256 manifest survives checkout.
+# Preserve Epic's existing CRLF and trailing whitespace in the vendored snapshot.
+* -text whitespace=-trailing-space,-space-before-tab,cr-at-eol

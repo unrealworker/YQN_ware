@@ -20,7 +20,7 @@ bool FGHSStreamingRejectBudgetTest::RunTest(const FString&)
 {
     const FString Base=TEXT("{\"version\":1,\"sequence\":1,\"fps\":60,\"minBitrateMbps\":8,\"maxBitrateMbps\":50");
     TArray<FString> Invalid={Base+TEXT(",\"command\":\"quit\"}"),Base+TEXT(",\"startBitrateMbps\":100}"),TEXT("[]"),TEXT("{}"),TEXT("{\"version\":1"),Base+TEXT(",\"fps\":1e100}")};
-    Invalid.Add(Base.Replace(TEXT("\"fps\":60"),TEXT("\"fps\":0"))+TEXT("}"));
+    Invalid.Add(Base.Replace(TEXT("\"fps\":60"),TEXT("\"fps\":-1"))+TEXT("}"));
     Invalid.Add(Base.Replace(TEXT("\"fps\":60"),TEXT("\"fps\":60.5"))+TEXT("}"));
     Invalid.Add(Base.Replace(TEXT("\"sequence\":1"),TEXT("\"sequence\":0"))+TEXT("}"));
     Invalid.Add(Base.Replace(TEXT("\"sequence\":1"),TEXT("\"sequence\":9007199254740992"))+TEXT("}"));
@@ -63,7 +63,18 @@ bool FGHSStreamingLiveBudgetTest::RunTest(const FString&)
     TestTrue(TEXT("Disconnect can immediately restore frame capacity"),GHSStreamingRuntime::ApplyBudget(Budget,Sequence,Error));
     TestEqual(TEXT("Restored FPS"),IConsoleManager::Get().FindConsoleVariable(Names[0])->GetInt(),60);
     TestEqual(TEXT("Existing RTP stream permits full restored capacity"),IConsoleManager::Get().FindConsoleVariable(Names[1])->GetInt(),60);
+    Budget.Sequence=3; Budget.FPS=0;
+    TestTrue(TEXT("Explicit zero removes the rendering cap"),GHSStreamingRuntime::ApplyBudget(Budget,Sequence,Error));
+    TestEqual(TEXT("Unlimited is not an arbitrary large cap"),IConsoleManager::Get().FindConsoleVariable(Names[0])->GetInt(),0);
     for(int32 Index=0;Index<UE_ARRAY_COUNT(Names);++Index) IConsoleManager::Get().FindConsoleVariable(Names[Index])->Set(*Previous[Index],ECVF_SetByConsole);
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStreamingUncappedBudgetTest,"GHS.Streaming.Runtime.AcceptsExplicitUncappedBudget",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSStreamingUncappedBudgetTest::RunTest(const FString&)
+{
+    GHSStreamingRuntime::FBudget Budget; FString Error;
+    TestTrue(TEXT("Zero FPS is a supported no-cap mode"),GHSStreamingRuntime::ParseBudget(TEXT("{\"version\":1,\"sequence\":1,\"fps\":0,\"minBitrateMbps\":1,\"startBitrateMbps\":8,\"maxBitrateMbps\":24}"),Budget,Error));
+    TestEqual(TEXT("Keep the no-cap sentinel"),Budget.FPS,0);
     return true;
 }
 #endif

@@ -21,7 +21,7 @@ namespace
 {
 bool ValidBudget(const FBudget& Budget)
 {
-    return Budget.Sequence>0 && Budget.Sequence<=9007199254740991LL && Budget.FPS>=5 && Budget.FPS<=120
+    return Budget.Sequence>0 && Budget.Sequence<=9007199254740991LL && (Budget.FPS==0 || (Budget.FPS>=5 && Budget.FPS<=120))
         && FMath::IsFinite(Budget.MinBitrateMbps) && FMath::IsFinite(Budget.MaxBitrateMbps)
         && Budget.MinBitrateMbps>=1 && Budget.MaxBitrateMbps<=200 && Budget.MinBitrateMbps<=Budget.MaxBitrateMbps;
 }
@@ -133,10 +133,10 @@ bool ParseBudget(const FString& Json,FBudget& Out,FString& Error)
     };
     if(!Number(TEXT("version"),Version) || Version!=1 || !Number(TEXT("sequence"),Sequence)
         || Sequence<1 || Sequence>9007199254740991. || FMath::FloorToDouble(Sequence)!=Sequence
-        || !Number(TEXT("fps"),FPS) || FPS<5 || FPS>120 || FMath::FloorToDouble(FPS)!=FPS
+        || !Number(TEXT("fps"),FPS) || (FPS!=0 && (FPS<5 || FPS>120)) || FMath::FloorToDouble(FPS)!=FPS
         || !Number(TEXT("minBitrateMbps"),Min) || !Number(TEXT("maxBitrateMbps"),Max)
         || Min<1 || Max>200 || Min>Max)
-    { Error=TEXT("Budget requires version 1, positive integer sequence, integer fps 5..120 and ordered bitrates 1..200 Mbps"); return false; }
+    { Error=TEXT("Budget requires version 1, positive integer sequence, fps 0 (uncapped) or integer 5..120 and ordered bitrates 1..200 Mbps"); return false; }
     if(Root->HasField(TEXT("startBitrateMbps")))
     {
         double Start=0;
@@ -158,9 +158,9 @@ bool ApplyBudget(const FBudget& Budget,int64& LastSequence,FString& Error)
     if(!FrameLimit || !MinBitrate || !MaxBitrate)
     { Error=TEXT("Pixel Streaming runtime variables are not ready"); return false; }
     const int32 Min=FMath::RoundToInt(Budget.MinBitrateMbps*1000000),Max=FMath::RoundToInt(Budget.MaxBitrateMbps*1000000);
-    // Keep WebRTC.Fps at the configured ceiling. UE 5.4 stores it in each RTP sender at
-    // connection time; lowering it would prevent that live connection recovering to 60.
-    // Coupled capture already follows actual rendered frames, so only t.MaxFPS is throttled.
+    // Keep negotiated RTP parameters unchanged. The project PixelStreaming patch omits
+    // max_framerate for startup FPS=0; coupled capture follows actual rendered frames.
+    // A finite configured ceiling still uses only t.MaxFPS for temporary workload control.
     // These three variables are the entire control surface. No GEngine->Exec or user commands.
     FrameLimit->Set(Budget.FPS,ECVF_SetByConsole);
     if(Min>MaxBitrate->GetInt()) { MaxBitrate->Set(Max,ECVF_SetByConsole); MinBitrate->Set(Min,ECVF_SetByConsole); }

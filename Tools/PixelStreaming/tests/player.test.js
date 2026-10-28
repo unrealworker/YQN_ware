@@ -14,6 +14,7 @@ async function page(initialStorage = {}, fetchHandler) {
     emitUIInteraction(payload) { this.ui.push(JSON.parse(JSON.stringify(payload))); return true; } addResponseEventListener(name, cb) { this.responses.set(name, cb); }
   }
   const sandbox = { window: events({ crypto: webcrypto, 'lib-pixelstreamingfrontend': { Config, PixelStreaming, Flags: { StartVideoMuted: 'StartVideoMuted', WaitForStreamer: 'WaitForStreamer', KeyboardInput: 'KeyboardInput' }, NumericParameters: { MaxReconnectAttempts: 'MaxReconnectAttempts' } } }), document: events({ body: element('body'), getElementById: element, querySelector: element, querySelectorAll: () => Array.from({length: 5}, (_, i) => element('stage-' + (i + 1))), createElement: tag => element(tag + ++created) }), sessionStorage: { getItem: k => store.get(k) || null, setItem: (k, v) => store.set(k, v), removeItem: k => store.delete(k) }, location: { protocol: 'http:', host: 'test:8080', reload() {} }, performance: { now: () => now }, MutationObserver: class { observe() {} }, setTimeout: (cb, ms) => { timers.set(++timerId, { cb, ms }); return timerId; }, clearTimeout: id => timers.delete(id), fetch: fetchHandler || (async () => ({ ok: true, status: 200, json: async () => ({ token: 'token123', mode: 'shared', fps: 60, minBitrateMbps: 8, maxBitrateMbps: 35 }) })), console };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../player/stream-quality.js'), 'utf8'), sandbox);
   const searchPath = path.join(__dirname, '../player/scene-search.js'); if (fs.existsSync(searchPath)) vm.runInNewContext(fs.readFileSync(searchPath, 'utf8'), sandbox);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../player/app.js'), 'utf8'), sandbox); await new Promise(r => setImmediate(r));
   return { elements, store, timers, window: sandbox.window, document: sandbox.document, video, get stream() { return streaming; }, frame() { videoFrame(); }, stats: () => sandbox.window.ghsStreamingStats, advance(ms) { now += ms; }, reply(fields = {}) { const state = { type: 'ghs.sceneSearch', clientId: streaming.ui.at(-1)?.clientId, requestId: streaming.ui.at(-1)?.requestId || 0, viewport: { width: 1920, height: 1080 }, rect: { x: 1100, y: 90, width: 420, height: 48 }, visible: true, open: false, query: '', results: [], total: 0, selectedIndex: 0, ...fields }; for (const cb of streaming.responses.values()) cb(JSON.stringify(state)); } };
@@ -22,6 +23,23 @@ test('page automatically connects muted and does not declare success before actu
   const p = await page(); assert.equal(p.stream.connected, 1); assert.equal(p.stream.config.settings.AutoPlayVideo, true); assert.equal(p.stream.config.settings.StartVideoMuted, true); assert.equal(p.stream.config.settings.MatchViewportRes, false);
   p.stream.events.get('webRtcConnected')(); assert.equal(p.stats().firstFrame, false); assert.equal(p.elements.get('loading')?.hidden || false, false);
   p.frame(); assert.equal(p.stats().firstFrame, true); assert.equal(p.elements.get('loading').hidden, true); assert.equal(p.stats().width, 1920);
+});
+test('queued viewers get one bounded queue deadline and one fresh first-frame deadline when their UE starts', async () => {
+  const p = await page(); const stage = payload => p.stream.protocol.get('ghsStage')(JSON.stringify(payload));
+  stage({ stage: 'queued', message: '前方实例正在启动' });
+  const queueDeadline = [...p.timers].find(([, t]) => t.ms === 600000)?.[0];
+  assert.ok(queueDeadline); assert.equal([...p.timers.values()].some(t => t.ms === 120000), false);
+  stage({ stage: 'queued', message: '前方实例正在启动' }); assert.ok(p.timers.has(queueDeadline));
+  stage({ stage: 'waitingStreamer', message: '正在启动场景' });
+  assert.equal(p.timers.has(queueDeadline), false);
+  const firstFrameDeadline = [...p.timers].find(([, t]) => t.ms === 120000)?.[0]; assert.ok(firstFrameDeadline);
+  stage({ stage: 'waitingStreamer', message: '仍在启动' }); assert.ok(p.timers.has(firstFrameDeadline));
+  p.stream.events.get('webRtcDisconnected')({}); assert.ok(p.timers.has(firstFrameDeadline));
+});
+test('uncapped session sends zero to the official SDK rather than silently falling back to a fixed FPS', async () => {
+  const p = await page({}, async () => ({ok: true, status: 200, json: async () => ({token:'test',mode:'independent',fps:0,minBitrateMbps:1,maxBitrateMbps:24})}));
+  assert.equal(p.stream.config.settings.WebRTCFPS, 0);
+  assert.match(p.elements.get('stat-limit').textContent, /无固定上限/);
 });
 test('session replacement stops reconnect policy and survives page reload without taking the session back', async () => {
   const p = await page(); p.stream.onClose({ detail: { code: 4002 } });
@@ -245,4 +263,20 @@ test('full capacity is a terminal waiting state without automatic retry storm', 
   const p = await page(); p.stream.onClose({ detail: { code: 4004 } });
   assert.equal(p.elements.get('.card').dataset.state, 'waiting'); assert.equal(p.elements.get('retry').hidden, false);
   assert.equal([...p.timers.values()].some(t => t.ms === 2000), false);
+});
+
+test('a replacement instance receives its own bounded queue and startup deadlines', async () => {
+  const p = await page();
+  const admission = id => p.stream.protocol.get('ghsAdmission')(JSON.stringify({ instanceId: id }));
+  const stage = value => p.stream.protocol.get('ghsStage')(JSON.stringify({ stage: value, message: value }));
+  admission('first'); stage('queued'); stage('waitingStreamer'); p.frame();
+  p.stream.events.get('webRtcDisconnected')({});
+  admission('replacement'); stage('queued');
+  assert.equal([...p.timers.values()].filter(t => t.ms === 600000).length, 1);
+  const queueTimer = [...p.timers.entries()].find(([, t]) => t.ms === 600000)[0];
+  admission('replacement'); stage('queued');
+  assert.equal(p.timers.has(queueTimer), true);
+  stage('waitingStreamer');
+  assert.equal([...p.timers.values()].filter(t => t.ms === 120000).length, 1);
+  assert.equal([...p.timers.values()].some(t => t.ms === 600000), false);
 });

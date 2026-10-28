@@ -8,7 +8,7 @@ namespace GHSStreamingRuntime
     struct FBudget
     {
         int64 Sequence = 0;
-        int32 FPS = 60;
+        int32 FPS = 0; // Zero removes the fixed render limit; capture is frame-coupled.
         double MinBitrateMbps = 1;
         double MaxBitrateMbps = 35;
     };

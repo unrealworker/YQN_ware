@@ -3,9 +3,10 @@
   'use strict';
   const { Config, PixelStreaming, Flags, NumericParameters } = window['lib-pixelstreamingfrontend'];
   const $ = id => document.getElementById(id);
-  let stream, sceneSearch, terminal = false, firstFrame = false, stage = 0, deadline, elapsedTimer, elapsedStart, sessionToken, maxViewers = 10, reconnectTimer, reconnectAttempts = 0;
+  let stream, sceneSearch, terminal = false, firstFrame = false, stage = 0, deadline, elapsedTimer, elapsedStart, sessionToken, maxViewers = 10, reconnectTimer, reconnectAttempts = 0, queuePhase = 'none';
+  const quality = window.GHSStreamQuality, meter = quality.createMeter();
   const initialTime = performance.now();
-  const metrics = { state: 'connecting', firstFrame: false, width: 0, height: 0, fps: 0, bitrateMbps: 0, rttMs: 0, decodedFrames: 0, mode: null, instanceId: null };
+  const metrics = { state: 'connecting', firstFrame: false, width: 0, height: 0, fps: null, bitrateMbps: null, rttMs: null, decodedFrames: 0, mode: null, instanceId: null, bufferMs: null, decodeMs: null, lossPercent: null, networkPath: '协商中' };
   let pan = null;
   const videoRoot = $('video-root');
   // Browser-level right-button gestures can run before a page receives input.
@@ -135,11 +136,30 @@
     const wsUrl = `${location.protocol === 'https:' ? 'wss:' : 'ws:'}//${location.host}/ws?token=${encodeURIComponent(sessionToken)}`;
     // Own the reconnect timer so an eviction/replaced-tab message can cancel every queued attempt.
     const config = new Config({ useUrlParams: false, initialSettings: { AutoConnect: false, AutoPlayVideo: true, StartVideoMuted: true, HoveringMouse: true, MatchViewportRes: false, TimeoutIfIdle: false, WaitForStreamer: false, OfferToReceive: false, UseMic: false, MaxReconnectAttempts: 0, ss: wsUrl, WebRTCFPS: session.fps, WebRTCMinBitrate: session.minBitrateMbps * 1000, WebRTCMaxBitrate: session.maxBitrateMbps * 1000 } });
+    quality.configureUncapped(config, session.fps);
+    $('stat-limit').textContent = session.fps === 0 ? '无固定上限' : session.fps + ' FPS';
     stream = new PixelStreaming(config, { videoElementParent: $('video-root') }); watchVideo();
     sceneSearch = window.GHSSceneSearch.create({ stream, videoRoot, keyboardFlag: Flags.KeyboardInput, beforeFocus: endPan });
     const protocol = stream.webSocketController.signallingProtocol;
-    protocol.addMessageHandler('ghsAdmission', payload => { const m = JSON.parse(payload); metrics.instanceId = m.instanceId; $('stat-instance').textContent = m.instanceId; progress(1, '已接入服务', '名额已分配，正在等待场景就绪', 'waiting'); });
-    protocol.addMessageHandler('ghsStage', payload => { const m = JSON.parse(payload); progress(m.stage === 'streamerReady' ? 2 : 1, m.stage === 'streamerReady' ? '场景已就绪' : '正在启动场景', m.message, m.stage === 'streamerReady' ? 'running' : 'waiting'); });
+    protocol.addMessageHandler('ghsAdmission', payload => {
+      const m = JSON.parse(payload);
+      if (m.instanceId !== metrics.instanceId) {
+        queuePhase = 'none';
+        if (!firstFrame && !terminal) armDeadline();
+      }
+      metrics.instanceId = m.instanceId; $('stat-instance').textContent = m.instanceId;
+      progress(1, '已接入服务', '名额已分配，正在等待场景就绪', 'waiting');
+    });
+    protocol.addMessageHandler('ghsStage', payload => {
+      const m = JSON.parse(payload);
+      if (m.stage === 'queued' && queuePhase === 'none' && !firstFrame && !terminal) {
+        queuePhase = 'waiting'; clearTimeout(deadline);
+        deadline = setTimeout(() => halt('排队等待超时', '等待启动超过 10 分钟，请稍后重新进入。', false, 'waiting'), 600000);
+      } else if (m.stage !== 'queued' && queuePhase === 'waiting' && !firstFrame && !terminal) {
+        queuePhase = 'started'; armDeadline();
+      }
+      progress(m.stage === 'streamerReady' ? 2 : 1, m.stage === 'queued' ? '正在排队' : m.stage === 'streamerReady' ? '场景已就绪' : '正在启动场景', m.message, m.stage === 'streamerReady' ? 'running' : 'waiting');
+    });
     protocol.addMessageHandler('ghsKicked', payload => { sessionStorage.setItem('ghsKicked', 'true'); halt('管理员已断开连接', JSON.parse(payload).message, false, 'exited'); });
     protocol.addMessageHandler('ghsFull', payload => halt('当前访问名额已满', JSON.parse(payload).message, false, 'waiting'));
     protocol.addMessageHandler('ghsEvicted', payload => halt('连接已被替换', JSON.parse(payload).message, true));
@@ -147,11 +167,15 @@
     protocol.addMessageHandler('ghsShutdown', payload => halt('服务已停止', JSON.parse(payload).message, false, 'stopped'));
     protocol.addMessageHandler('ghsInstanceFailed', payload => halt('场景连接失败', JSON.parse(payload).message));
     stream.addEventListener('webRtcSdp', () => progress(3, '正在协商视频', '已交换视频会话信息，正在建立媒体连接'));
-    stream.addEventListener('webRtcConnected', () => progress(4, '视频已连接', '媒体连接已建立，等待首帧显示'));
+    stream.addEventListener('webRtcConnected', () => {
+      // Pinned Epic 1.1.6 adapter; optional access is guarded for other SDK versions.
+      metrics.lowLatencyHints = quality.configureReceivers(stream._webRtcController?.peerConnectionController?.peerConnection);
+      progress(4, '视频已连接', '媒体连接已建立，等待首帧显示');
+    });
     stream.addEventListener('videoInitialized', watchVideo);
     stream.addEventListener('dataChannelOpen', () => { if (firstFrame && !terminal) sceneSearch.ready(); });
     stream.addEventListener('playerCount', e => { $('viewer-count').textContent = `${e.data.count} / ${maxViewers}`; metrics.viewerCount = e.data.count; });
-    stream.addEventListener('webRtcDisconnected', e => { endPan(); sceneSearch?.suspend(); if (terminal) return; const wasPlaying = firstFrame; firstFrame = false; metrics.firstFrame = false; $('loading').hidden = false; document.body.classList.remove('playing'); stage = 0; progress(1, '正在恢复连接', '网络暂时中断，正在恢复当前会话；场景状态暂时保留。', 'waiting'); if (wasPlaying) armDeadline(); });
+    stream.addEventListener('webRtcDisconnected', e => { endPan(); sceneSearch?.suspend(); meter.reset(); if (terminal) return; const wasPlaying = firstFrame; firstFrame = false; metrics.firstFrame = false; $('loading').hidden = false; document.body.classList.remove('playing'); stage = 0; progress(1, '正在恢复连接', '网络暂时中断，正在恢复当前会话；场景状态暂时保留。', 'waiting'); if (wasPlaying) armDeadline(); });
     stream.webSocketController.onClose.addEventListener('close', e => {
       if (terminal) return;
       if (e.detail.code === 4003) { sessionStorage.setItem('ghsKicked', 'true'); return halt('管理员已断开连接', '已停止自动重连。请联系管理员，或稍后主动重新进入。', false, 'exited'); }
@@ -167,8 +191,13 @@
     stream.addEventListener('playStreamRejected', () => { const video = $('video-root').querySelector('video'); if (video) { video.muted = true; video.play().catch(autoplayBlocked); } });
     stream.addEventListener('statsReceived', e => {
       const stats = e.data.aggregatedStats; const v = stats.inboundVideoStats; const pair = stats.getActiveCandidatePair(); const video = $('video-root').querySelector('video');
-      if (video) updateDimensions(video); metrics.fps = v.framesPerSecond || 0; metrics.bitrateMbps = (v.bitrate || 0) / 1000; metrics.rttMs = (pair?.currentRoundTripTime || 0) * 1000; metrics.decodedFrames = v.framesDecoded || 0;
-      $('stat-fps').textContent = metrics.fps.toFixed(1) + ' fps'; $('stat-bitrate').textContent = metrics.bitrateMbps.toFixed(2) + ' Mbps'; $('stat-rtt').textContent = metrics.rttMs.toFixed(1) + ' ms'; $('stat-frames').textContent = String(metrics.decodedFrames);
+      if (video) updateDimensions(video);
+      Object.assign(metrics, meter.update(v));
+      metrics.rttMs = Number.isFinite(pair?.currentRoundTripTime) ? pair.currentRoundTripTime * 1000 : null; metrics.decodedFrames = v.framesDecoded || 0;
+      metrics.networkPath = quality.describePath(pair, stats.localCandidates, stats.remoteCandidates);
+      const format = (value, digits, unit) => Number.isFinite(value) ? value.toFixed(digits) + unit : '—';
+      $('stat-fps').textContent = format(metrics.fps, 1, ' fps'); $('stat-bitrate').textContent = format(metrics.bitrateMbps, 2, ' Mbps'); $('stat-rtt').textContent = format(metrics.rttMs, 1, ' ms'); $('stat-frames').textContent = String(metrics.decodedFrames);
+      $('stat-buffer').textContent = format(metrics.bufferMs, 0, ' ms'); $('stat-decode').textContent = format(metrics.decodeMs, 2, ' ms'); $('stat-loss').textContent = format(metrics.lossPercent, 2, '%'); $('stat-freezes').textContent = format(v.freezeCount, 0, ' 次'); $('stat-path').textContent = metrics.networkPath;
       if (!firstFrame && video && metrics.decodedFrames > 0 && !video.paused) { if (video.requestVideoFrameCallback) video.requestVideoFrameCallback(() => markFrame(video)); else markFrame(video); }
     });
     // Register all status handlers before automatic connection, so fast local UE startup cannot race them.

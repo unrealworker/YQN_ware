@@ -35,7 +35,7 @@ namespace Ghs.PixelStreaming
         public string turnUrl { get; set; }
         public string turnUsername { get; set; }
         public string turnPassword { get; set; }
-        public LauncherConfig() { executablePath="App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe"; httpPort=8080; streamerPort=8888; width=1920; height=1080; mode="shared"; fps=60; maxViewers=10; networkMode="lan"; publicUrl=accessCode=tlsCertPath=tlsKeyPath=stunUrl=turnUrl=turnUsername=turnPassword=""; adaptiveResourceBudget=true; ApplyQualityProfile("clear"); }
+        public LauncherConfig() { executablePath="App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe"; httpPort=8080; streamerPort=8888; width=1920; height=1080; mode="shared"; fps=0; maxViewers=10; networkMode="lan"; publicUrl=accessCode=tlsCertPath=tlsKeyPath=stunUrl=turnUrl=turnUsername=turnPassword=""; adaptiveResourceBudget=true; ApplyQualityProfile("balanced"); }
         public LauncherConfig Clone() { JavaScriptSerializer json=new JavaScriptSerializer(); return json.Deserialize<LauncherConfig>(json.Serialize(this)); }
         public string ResolveLocalFile(string root,string file) { return string.IsNullOrWhiteSpace(file)?"":Path.GetFullPath(Path.Combine(root,file)); }
         public void ValidateNetwork(string root)
@@ -69,9 +69,9 @@ namespace Ghs.PixelStreaming
         public void ApplyQualityProfile(string profile)
         {
             switch(profile) {
-                case "balanced": minBitrateMbps=8; startBitrateMbps=20; maxBitrateMbps=35; break;
-                case "clear": minBitrateMbps=12; startBitrateMbps=35; maxBitrateMbps=60; break;
-                case "ultra": minBitrateMbps=20; startBitrateMbps=50; maxBitrateMbps=90; break;
+                case "balanced": minBitrateMbps=1; startBitrateMbps=8; maxBitrateMbps=24; break;
+                case "clear": minBitrateMbps=1; startBitrateMbps=10; maxBitrateMbps=35; break;
+                case "ultra": minBitrateMbps=1; startBitrateMbps=16; maxBitrateMbps=50; break;
                 case "custom": break;
                 default: throw new ArgumentException("请选择流畅、清晰优先或超清细节画质。");
             }
@@ -87,7 +87,7 @@ namespace Ghs.PixelStreaming
             if(width<320 || width>7680 || height<320 || height>7680) throw new ArgumentException("分辨率范围：宽、高均为 320–7680。");
             if(mode!="shared" && mode!="independent") throw new ArgumentException("请选择共享或每人独立模式。");
             if(qualityProfile!="balanced" && qualityProfile!="clear" && qualityProfile!="ultra" && qualityProfile!="custom") throw new ArgumentException("画质配置无效，请重新选择画质。");
-            if(fps<15 || fps>120 || minBitrateMbps<1 || minBitrateMbps>startBitrateMbps || startBitrateMbps>maxBitrateMbps || maxBitrateMbps>200) throw new ArgumentException("帧率必须为 15–120；码率须满足 1 ≤ 最小 ≤ 初始 ≤ 最大 ≤ 200 Mbps。");
+            if((fps!=0 && (fps<15 || fps>120)) || minBitrateMbps<1 || minBitrateMbps>startBitrateMbps || startBitrateMbps>maxBitrateMbps || maxBitrateMbps>200) throw new ArgumentException("帧率须为 0（无固定上限）或 15–120；码率须满足 1 ≤ 最小 ≤ 初始 ≤ 最大 ≤ 200 Mbps。");
             if(checkPorts) { PortProbe.EnsureAvailable(httpPort); PortProbe.EnsureAvailable(streamerPort); }
         }
         public void Save(string path)
@@ -103,11 +103,10 @@ namespace Ghs.PixelStreaming
             string text=File.ReadAllText(path,Encoding.UTF8); JavaScriptSerializer json=new JavaScriptSerializer();
             LauncherConfig c=json.Deserialize<LauncherConfig>(text); if(c==null) throw new ArgumentException("配置文件为空。");
             Dictionary<string,object> fields=json.Deserialize<Dictionary<string,object>>(text);
-            // Upgrade only the old shipped defaults. Existing custom budgets stay intact.
-            if(!fields.ContainsKey("qualityProfile")) {
-                if(c.minBitrateMbps==8 && c.startBitrateMbps==20 && c.maxBitrateMbps==35) c.ApplyQualityProfile("clear");
-                else if(fields.ContainsKey("minBitrateMbps") || fields.ContainsKey("startBitrateMbps") || fields.ContainsKey("maxBitrateMbps")) c.qualityProfile="custom";
-            }
+            // An explicit budget always wins, including the old 8/20/35 defaults.
+            bool explicitBudget=fields.ContainsKey("minBitrateMbps") || fields.ContainsKey("startBitrateMbps") || fields.ContainsKey("maxBitrateMbps");
+            if(!fields.ContainsKey("qualityProfile") && explicitBudget) c.qualityProfile="custom";
+            else if(!explicitBudget && (c.qualityProfile=="balanced" || c.qualityProfile=="clear" || c.qualityProfile=="ultra")) c.ApplyQualityProfile(c.qualityProfile);
             return c;
         }
     }
