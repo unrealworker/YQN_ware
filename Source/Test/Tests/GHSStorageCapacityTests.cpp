@@ -13,6 +13,7 @@
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 #include "StaticMeshResources.h"
+#include "TimerManager.h"
 #include <limits>
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStorageCapacityPermutation,
@@ -157,7 +158,7 @@ bool FGHSStorageCapacityLODs::RunTest(const FString&)
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStorageCapacityRuntime,
     "GHS.StorageCapacity.RuntimePickingAndSliderDoNotMutateInstances",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::NonNullRHI | EAutomationTestFlags::ProductFilter)
 bool FGHSStorageCapacityRuntime::RunTest(const FString&)
 {
     UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);
@@ -167,11 +168,13 @@ bool FGHSStorageCapacityRuntime::RunTest(const FString&)
     AActor* Owner=World->SpawnActor<AActor>();
     auto* Instances=NewObject<UHierarchicalInstancedStaticMeshComponent>(Owner);
     Owner->AddInstanceComponent(Instances);
+    Instances->bAutoRebuildTreeOnInstanceChanges=false;
     Instances->ComponentTags.Add(TEXT("GHSStorageGroup:GHS_V2_Rack_A_Pass_W36176"));
     auto* Mesh=LoadObject<UStaticMesh>(nullptr,TEXT("/Game/GHSZcoolSmartFactory/StorageCapacity/Meshes/SM_GHS_V2Rack_A_Pass_W36176_Capacity.SM_GHS_V2Rack_A_Pass_W36176_Capacity"));
     if(!TestNotNull(TEXT("Prepared full rack"),Mesh))
     { GEngine->DestroyWorldContext(World); World->DestroyWorld(false); return false; }
     Instances->SetStaticMesh(Mesh);
+    Instances->ShadowCacheInvalidationBehavior=EShadowCacheInvalidationBehavior::Always;
     Instances->RegisterComponent();
     const FTransform First(FRotator(0,37,0),FVector(400,-600,170),FVector(1.2,.8,1.1));
     for(int32 Index=0;Index<11;++Index)
@@ -180,17 +183,34 @@ bool FGHSStorageCapacityRuntime::RunTest(const FString&)
         Transform.AddToTranslation(FVector(Index*2000,0,0));
         Instances->AddInstance(Transform);
     }
+    Instances->BuildTreeIfOutdated(false,true);
     auto* Capacity=NewObject<UGHSStorageCapacityComponent>(Owner);
     Owner->AddInstanceComponent(Capacity);
     Capacity->RegisterComponent();
     TestTrue(TEXT("Prepared component initialized"),Capacity->InitializeForWorld());
+    Owner->DispatchBeginPlay();
+    TestTrue(TEXT("Static cargo uses automatic shadow invalidation during play"),
+        Instances->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Auto);
     auto* Cargo=Cast<UMaterialInstanceDynamic>(Instances->GetMaterial(4));
     TestNotNull(TEXT("Full cargo receives a MID"),Cargo);
     UMaterialInterface* Steel=Instances->GetMaterial(0);
     const auto CustomData=Instances->PerInstanceSMCustomData;
     const FVector CargoPoint=First.TransformPosition(FVector(-112.03,0,500));
     const FVector FramePoint=First.TransformPosition(FVector(-178,0,400));
+    World->SendAllEndOfFrameUpdates();
+    TestTrue(TEXT("Fixture has a render state for shadow refresh assertions"),Instances->IsRenderStateCreated());
+    TestFalse(TEXT("Initialization render changes were consumed"),Instances->IsRenderStateDirty());
+    Capacity->SetCapacity(.8f,1.f);
+    TestFalse(TEXT("An unchanged slider does not invalidate cached shadows"),Instances->IsRenderStateDirty());
     Capacity->SetCapacity(0,0);
+    TestTrue(TEXT("Changing the opacity mask refreshes the rack shadow render state"),Instances->IsRenderStateDirty());
+    TestTrue(TEXT("Active slider changes keep opacity-mask shadows live"),
+        Instances->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Always);
+    World->SendAllEndOfFrameUpdates();
+    Capacity->SetCapacity(0,.5f);
+    TestFalse(TEXT("A floor-only slider change does not invalidate rack shadows"),Instances->IsRenderStateDirty());
+    Capacity->SetCapacity(std::numeric_limits<float>::quiet_NaN(),std::numeric_limits<float>::infinity());
+    TestFalse(TEXT("Rejected nonfinite slider values do not invalidate shadows"),Instances->IsRenderStateDirty());
     TestFalse(TEXT("Zero cargo cannot be picked after inverse instance transform"),Capacity->IsStorageHitVisible(Instances,0,CargoPoint));
     TestTrue(TEXT("Zero cargo retains steel context"),Capacity->IsStorageHitVisible(Instances,0,FramePoint));
     TestTrue(TEXT("Rack steel material is untouched"),Steel==Instances->GetMaterial(0));
@@ -199,6 +219,7 @@ bool FGHSStorageCapacityRuntime::RunTest(const FString&)
     for(int32 Index=0;Index<101;++Index) Capacity->SetCapacity(Index/100.f,1.f-Index/100.f);
     for(int32 Index=100;Index>=0;--Index) Capacity->SetCapacity(Index/100.f,1.f-Index/100.f);
     Capacity->SetCapacity(.8f,1.f);
+    TestFalse(TEXT("A continuous slider burst does not recreate the HISM proxy per update"),Instances->IsRenderStateDirty());
     TestTrue(TEXT("Stable instances retain all custom data"),CustomData==Instances->PerInstanceSMCustomData);
     TestEqual(TEXT("Slider never adds or removes instances"),Instances->GetInstanceCount(),11);
     FTransform After;
@@ -209,7 +230,12 @@ bool FGHSStorageCapacityRuntime::RunTest(const FString&)
     TSharedPtr<FJsonObject> Report;
     FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Capacity->GetReportJson()),Report);
     if(TestTrue(TEXT("Report is valid JSON"),Report.IsValid()))
+    {
         TestEqual(TEXT("All slider changes retain one initialization scan"),Report->GetIntegerField(TEXT("initialization_scans")),1);
+        double Refreshes=0;
+        TestTrue(TEXT("Shadow refresh requests are diagnosable"),Report->TryGetNumberField(TEXT("shadow_cache_refresh_requests"),Refreshes));
+        TestEqual(TEXT("The entire slider burst requests one entry refresh"),Refreshes,1.);
+    }
     Owner->SetActorHiddenInGame(true);
     Capacity->SetStorageVisible(false);
     TestFalse(TEXT("Hidden storage cannot be picked"),Capacity->IsStorageHitVisible(Instances,0,CargoPoint));
@@ -217,8 +243,57 @@ bool FGHSStorageCapacityRuntime::RunTest(const FString&)
     Capacity->SetStorageVisible(true);
     TestEqual(TEXT("Layer restoration retains changed rack capacity"),Capacity->GetRackCapacity(),.25f);
     TestTrue(TEXT("Component layer does not overwrite actor hidden state"),Owner->IsHidden());
-    GEngine->DestroyWorldContext(World);
-    World->DestroyWorld(false);
+    ADD_LATENT_AUTOMATION_COMMAND(FFunctionLatentCommand([this,World,Instances,Capacity,Mesh,First,Start=FPlatformTime::Seconds(),Phase=0]() mutable
+    {
+        // This isolated fixture is not a live game viewport; advance its timer on engine frames.
+        World->GetTimerManager().Tick(.05f);
+        if(Phase==1)
+        {
+            TSharedPtr<FJsonObject> OverrideReport;
+            FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Capacity->GetReportJson()),OverrideReport);
+            double Refreshing=1;
+            const bool bTimerFinished=OverrideReport.IsValid()
+                && OverrideReport->TryGetNumberField(TEXT("shadow_cache_refreshing_components"),Refreshing) && Refreshing==0;
+            if(!bTimerFinished && FPlatformTime::Seconds()-Start<2.) return false;
+            TestTrue(TEXT("Settle timer finishes after a caller changes shadow policy"),bTimerFinished);
+            TestTrue(TEXT("Settle timer preserves a caller's explicit shadow policy"),
+                Instances->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Rigid);
+            // Resume managed Auto, then exercise shutdown with another timer pending.
+            Instances->ShadowCacheInvalidationBehavior=EShadowCacheInvalidationBehavior::Auto;
+            Capacity->SetCapacity(.4f,.5f);
+            Capacity->DestroyComponent();
+            TestTrue(TEXT("Component shutdown restores the authored shadow policy"),
+                Instances->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Always);
+            TestTrue(TEXT("Component shutdown restores the authored cargo material"),Instances->GetMaterial(4)==Mesh->GetMaterial(4));
+            GEngine->DestroyWorldContext(World);
+            World->DestroyWorld(false);
+            return true;
+        }
+        const bool bSettled=Instances->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Auto;
+        if(!bSettled && FPlatformTime::Seconds()-Start<2.) return false;
+        TestTrue(TEXT("Quiet slider returns to cached shadows"),bSettled);
+        TSharedPtr<FJsonObject> SettledReport;
+        FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Capacity->GetReportJson()),SettledReport);
+        double Refreshes=0;
+        if(TestTrue(TEXT("Settled report has refresh diagnostics"),SettledReport.IsValid()
+            && SettledReport->TryGetNumberField(TEXT("shadow_cache_refresh_requests"),Refreshes)))
+            TestEqual(TEXT("One continuous burst has only entry and final refresh requests"),Refreshes,2.);
+        TestEqual(TEXT("Settling preserves the final exact slider value"),Capacity->GetRackCapacity(),.25f);
+        World->SendAllEndOfFrameUpdates();
+        FTransform Hidden=First;Hidden.SetScale3D(FVector::ZeroVector);
+        TestTrue(TEXT("Replay-style pickup accepts a hidden source transform"),Instances->UpdateInstanceTransform(0,Hidden,false,true,true));
+        TestTrue(TEXT("Replay-style pickup refreshes automatic shadow state"),Instances->IsRenderStateDirty());
+        World->SendAllEndOfFrameUpdates();
+        TestTrue(TEXT("Replay-style placement restores the original source transform"),Instances->UpdateInstanceTransform(0,First,false,true,true));
+        TestTrue(TEXT("Replay-style placement refreshes automatic shadow state"),Instances->IsRenderStateDirty());
+        FTransform Restored;Instances->GetInstanceTransform(0,Restored,false);
+        TestTrue(TEXT("Shadow caching preserves the restored pallet transform"),First.Equals(Restored,.0001));
+        Capacity->SetCapacity(.3f,.5f);
+        Instances->ShadowCacheInvalidationBehavior=EShadowCacheInvalidationBehavior::Rigid;
+        Instances->MarkRenderStateDirty();
+        Phase=1;
+        return false;
+    }));
     return true;
 }
 #endif

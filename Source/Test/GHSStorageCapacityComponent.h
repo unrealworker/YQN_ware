@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "TimerManager.h"
 #include "GHSStorageCapacityComponent.generated.h"
 
 class UPrimitiveComponent;
@@ -17,7 +18,7 @@ namespace GHSStorageCapacity
     TEST_API float ClampCapacity(float Value, float Previous);
 }
 
-/** Controls existing full-load HISM assets; slider changes only write shared MIDs. */
+/** Controls full-load HISM assets without changing instances or rebuilding their trees. */
 UCLASS(ClassGroup=(GHS), meta=(BlueprintSpawnableComponent))
 class TEST_API UGHSStorageCapacityComponent : public UActorComponent
 {
@@ -53,7 +54,10 @@ private:
         TArray<FSlot> Slots;
         int32 BaseSlot=0, SlotsPerInstance=0, InstanceCount=0;
         bool bRack=false;
+        bool bRestoreAlwaysShadowInvalidation=false, bShadowCacheRefreshing=false;
     };
+    void BeginCapacityShadowUpdate(bool bRackChanged, bool bFloorChanged);
+    void RestoreCachedShadows();
     TArray<FGroup> Groups;
     TMap<TWeakObjectPtr<UPrimitiveComponent>,int32> GroupByComponent;
     UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInstanceDynamic>> RackMaterials;
@@ -63,6 +67,8 @@ private:
     float RackCapacity=.8f, FloorCapacity=1.f;
     int32 RackTotalSlots=0, FloorTotalSlots=0;
     uint64 InitializationScans=0, ParameterWrites=0, CapacityUpdates=0;
+    uint64 ShadowCacheRefreshRequests=0;
+    FTimerHandle ShadowCacheSettleTimer;
     bool bStorageVisible=true, bInitialized=false;
     FString InitializationError;
 };

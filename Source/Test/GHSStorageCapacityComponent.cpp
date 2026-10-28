@@ -2,6 +2,7 @@
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Dom/JsonObject.h"
 #include "Engine/StaticMesh.h"
+#include "Engine/World.h"
 #include "EngineUtils.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInterface.h"
@@ -113,6 +114,11 @@ bool UGHSStorageCapacityComponent::InitializeForWorld()
             }
             if(!bMaterialsReady)
             { InitializationError=TEXT("Missing capacity mask material: ")+Component->GetPathName(); continue; }
+            // Authored Always compensated for MID-only opacity-mask changes. Keep the
+            // same shadows, but only force them live while capacity is being edited.
+            Group.bRestoreAlwaysShadowInvalidation=Component->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Always;
+            if(Group.bRestoreAlwaysShadowInvalidation)
+                Component->ShadowCacheInvalidationBehavior=EShadowCacheInvalidationBehavior::Auto;
             // Assign once. Slider updates never touch instance data or the HISM tree.
             if(Component->NumCustomDataFloats<1) Component->SetNumCustomDataFloats(1);
             for(int32 Index=0;Index<Group.InstanceCount;++Index)
@@ -150,19 +156,72 @@ void UGHSStorageCapacityComponent::SetCapacity(float Rack,float Floor)
 {
     Rack=GHSStorageCapacity::ClampCapacity(Rack,RackCapacity);
     Floor=GHSStorageCapacity::ClampCapacity(Floor,FloorCapacity);
-    if(Rack==RackCapacity && Floor==FloorCapacity) return;
+    const bool bRackChanged=Rack!=RackCapacity, bFloorChanged=Floor!=FloorCapacity;
+    if(!bRackChanged && !bFloorChanged) return;
+    BeginCapacityShadowUpdate(bRackChanged,bFloorChanged);
     ++CapacityUpdates;
-    if(Rack!=RackCapacity)
+    if(bRackChanged)
     {
         RackCapacity=Rack;
         for(UMaterialInstanceDynamic* Material:RackMaterials)
             if(Material) { Material->SetScalarParameterValue(TEXT("StorageCapacity"),Rack); ++ParameterWrites; }
     }
-    if(Floor!=FloorCapacity)
+    if(bFloorChanged)
     {
         FloorCapacity=Floor;
         for(UMaterialInstanceDynamic* Material:FloorMaterials)
             if(Material) { Material->SetScalarParameterValue(TEXT("StorageCapacity"),Floor); ++ParameterWrites; }
+    }
+}
+
+void UGHSStorageCapacityComponent::BeginCapacityShadowUpdate(bool bRackChanged,bool bFloorChanged)
+{
+    bool bPending=false;
+    for(FGroup& Group:Groups)
+    {
+        if(Group.bRack?bRackChanged:bFloorChanged)
+            if(auto* Component=Group.Component.Get())
+            {
+                if(Group.bShadowCacheRefreshing && Component->ShadowCacheInvalidationBehavior!=EShadowCacheInvalidationBehavior::Always)
+                    Group.bShadowCacheRefreshing=false;
+                if(Component->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Auto)
+                {
+                    // One proxy refresh on entry, never one per slider input. While
+                    // Always is active, every MID change casts the current mask.
+                    Component->ShadowCacheInvalidationBehavior=EShadowCacheInvalidationBehavior::Always;
+                    Group.bShadowCacheRefreshing=true;
+                    Component->MarkRenderStateDirty();
+                    ++ShadowCacheRefreshRequests;
+                }
+                else if(!Group.bShadowCacheRefreshing)
+                {
+                    // Preserve a caller's explicit policy; material-only changes still
+                    // need invalidation, including Rigid/Static policies.
+                    Component->MarkRenderStateDirty();
+                    ++ShadowCacheRefreshRequests;
+                }
+            }
+        bPending|=Group.bShadowCacheRefreshing;
+    }
+    if(bPending && GetWorld())
+        GetWorld()->GetTimerManager().SetTimer(ShadowCacheSettleTimer,this,
+            &UGHSStorageCapacityComponent::RestoreCachedShadows,.1f,false);
+}
+
+void UGHSStorageCapacityComponent::RestoreCachedShadows()
+{
+    for(FGroup& Group:Groups) if(Group.bShadowCacheRefreshing)
+    {
+        Group.bShadowCacheRefreshing=false;
+        if(auto* Component=Group.Component.Get(); Component &&
+            Component->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Always)
+        {
+            // Recreate with the final mask before caching. Do not overwrite a policy
+            // another runtime owner changed while our settle timer was pending.
+            Component->ShadowCacheInvalidationBehavior=EShadowCacheInvalidationBehavior::Auto;
+            Component->MarkRenderStateDirty();
+            ++ShadowCacheRefreshRequests;
+        }
     }
 }
 
@@ -210,6 +269,15 @@ FString UGHSStorageCapacityComponent::GetReportJson() const
     Report->SetNumberField(TEXT("initialization_scans"),double(InitializationScans));
     Report->SetNumberField(TEXT("capacity_updates"),double(CapacityUpdates));
     Report->SetNumberField(TEXT("parameter_writes"),double(ParameterWrites));
+    int32 AutoShadowGroups=0, RefreshingShadowGroups=0;
+    for(const FGroup& Group:Groups) if(auto* Component=Group.Component.Get())
+    {
+        if(Component->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Auto) ++AutoShadowGroups;
+        if(Group.bShadowCacheRefreshing) ++RefreshingShadowGroups;
+    }
+    Report->SetNumberField(TEXT("shadow_cache_auto_components"),AutoShadowGroups);
+    Report->SetNumberField(TEXT("shadow_cache_refreshing_components"),RefreshingShadowGroups);
+    Report->SetNumberField(TEXT("shadow_cache_refresh_requests"),double(ShadowCacheRefreshRequests));
     FString Result;
     FJsonSerializer::Serialize(Report,TJsonWriterFactory<>::Create(&Result));
     return Result;
@@ -217,6 +285,17 @@ FString UGHSStorageCapacityComponent::GetReportJson() const
 
 void UGHSStorageCapacityComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    if(GetWorld()) GetWorld()->GetTimerManager().ClearTimer(ShadowCacheSettleTimer);
+    for(FGroup& Group:Groups) if(auto* Component=Group.Component.Get())
+    {
+        bool bChanged=false;
+        if(Group.bShadowCacheRefreshing && Component->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Always)
+        { Component->ShadowCacheInvalidationBehavior=EShadowCacheInvalidationBehavior::Auto; bChanged=true; }
+        if(Group.bRestoreAlwaysShadowInvalidation && Component->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Auto)
+        { Component->ShadowCacheInvalidationBehavior=EShadowCacheInvalidationBehavior::Always; bChanged=true; }
+        Group.bShadowCacheRefreshing=false;
+        if(bChanged) Component->MarkRenderStateDirty();
+    }
     for(int32 Index=0;Index<SourceMaterialSlots.Num();++Index)
         if(auto* Component=SourceMaterialSlots[Index].Key.Get()) Component->SetMaterial(SourceMaterialSlots[Index].Value,SourceMaterials[Index]);
     Super::EndPlay(EndPlayReason);
