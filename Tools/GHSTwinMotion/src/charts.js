@@ -65,13 +65,21 @@ function datumFor(part, nonNegative = false) {
   return { id: part.id, name: part.label, value: part.value === null || nonNegative && part.value < 0 ? '-' : part.value, rawValue: part.value, unit: part.unit, itemStyle: { color: part.color } };
 }
 
+function barsLayout(parts, width) {
+  const chartWidth = Math.max(180, width);
+  const left = Math.max(48, Math.min(96, Math.round(chartWidth * 0.29)));
+  const longestValue = Math.max(1, ...parts.map(part => formatValue(part.value, part.unit).length));
+  const right = Math.max(30, Math.min(Math.round(chartWidth * 0.33), Math.ceil(longestValue * 6.5 + 10)));
+  return { left, right };
+}
+
 function optionFor(spec, width, animate, isUpdate) {
   const parts = partsFor(spec);
-  const duration = spec.type === 'ring' ? 600 : spec.type === 'trend' ? 650 : 450;
+  const duration = spec.type === 'ring' ? 320 : spec.type === 'trend' ? 360 : 280;
   const base = {
     animation: animate,
-    animationDuration: animate ? isUpdate ? 350 : duration : 0,
-    animationDurationUpdate: animate ? 350 : 0,
+    animationDuration: animate ? isUpdate ? 240 : duration : 0,
+    animationDurationUpdate: animate ? 240 : 0,
     animationEasing: 'cubicOut',
     animationEasingUpdate: 'cubicInOut',
     color: PALETTE,
@@ -101,10 +109,7 @@ function optionFor(spec, width, animate, isUpdate) {
       data: [{ ...datumFor(part, true), itemStyle: { color: part.color, borderColor: '#fff', borderWidth: 0.7 } }]
     }));
   } else if (spec.type === 'bars') {
-    const chartWidth = Math.max(180, width);
-    const left = Math.max(48, Math.min(96, Math.round(chartWidth * 0.29)));
-    const longestValue = Math.max(1, ...parts.map(part => formatValue(part.value, part.unit).length));
-    const right = Math.max(30, Math.min(Math.round(chartWidth * 0.33), Math.ceil(longestValue * 6.5 + 10)));
+    const { left, right } = barsLayout(parts, width);
     base.grid = [{ id: 'bars:grid', top: 4, bottom: 4, left, right, containLabel: false }];
     base.xAxis = [{ id: 'bars:x', type: 'value', show: false, min: value => Math.min(0, value.min) }];
     base.yAxis = [{
@@ -175,6 +180,7 @@ export function createChart(host, spec, { animate = true } = {}) {
   host.style.width = '100%';
   host.style.height = '100%';
   let currentSpec = spec;
+  let layoutWidth = 0;
   let disposed = false;
   let rendered = false;
   // SVGRenderer temporarily hides the host to measure it. Chromium 90 then
@@ -191,7 +197,7 @@ export function createChart(host, spec, { animate = true } = {}) {
       if (svg.style.display !== 'block') svg.style.display = 'block';
     });
   }
-  function finishAnimations() {
+  function finishAnimations(refresh = true) {
     const renderer = chart.getZr();
     renderer.storage.traverse(element => {
       element.stopAnimation(null, true);
@@ -200,8 +206,7 @@ export function createChart(host, spec, { animate = true } = {}) {
       const label = element.getTextContent && element.getTextContent();
       if (label) label.stopAnimation(null, true);
     });
-    renderer.refreshImmediately();
-    normalizeSVG();
+    if (refresh) { renderer.refreshImmediately(); normalizeSVG(); }
   }
   function apply(nextSpec, enabled) {
     if (disposed) return;
@@ -210,6 +215,7 @@ export function createChart(host, spec, { animate = true } = {}) {
     chart.setOption(optionFor(currentSpec, width, enabled, rendered), {
       notMerge: false, replaceMerge: ['series', 'xAxis', 'yAxis', 'grid'], lazyUpdate: false, silent: true
     });
+    layoutWidth = width;
     rendered = true;
     normalizeSVG();
     if (!enabled) finishAnimations();
@@ -226,12 +232,26 @@ export function createChart(host, spec, { animate = true } = {}) {
     update(nextSpec, { animate: enabled = true } = {}) { apply(nextSpec, enabled); },
     resize() {
       if (disposed) return;
-      chart.resize({ ...dimensions(), animation: { duration: 0 }, silent: true });
-      apply(currentSpec, false);
+      // End old value/clip animations before laying out at the new dimensions.
+      finishAnimations(false);
+      const size = dimensions();
+      if (currentSpec.type === 'bars' && size.width !== layoutWidth) {
+        const { left, right } = barsLayout(partsFor(currentSpec), size.width);
+        // Only pixel-based text gutters depend on width. Merge their patch into
+        // the resize update; never rebind series data or run a second full apply.
+        chart.setOption({
+          grid: [{ id: 'bars:grid', left, right }],
+          yAxis: [{ id: 'bars:y', axisLabel: { width: left - 8 } }],
+          series: [{ id: 'bars:states', label: { width: right - 8 } }]
+        }, { lazyUpdate: true, silent: true });
+      }
+      layoutWidth = size.width;
+      chart.resize({ ...size, animation: { duration: 0 }, silent: true });
+      finishAnimations();
     },
     settle() {
       if (disposed) return;
-      apply(currentSpec, false);
+      finishAnimations();
       chart.dispatchAction({ type: 'hideTip' });
     },
     dispose() {

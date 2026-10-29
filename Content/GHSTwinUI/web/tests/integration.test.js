@@ -290,8 +290,8 @@ test('rapid navigation during both transition phases settles on the final destin
 });
 
 test('accepted navigation updates selection before the native bridge and repeats do not restart entry',()=>{
-  const app=boot({reducedMotion:false}),order=[];
-  app.window.TwinMotion={navigation:()=>order.push('selection:'+app.window.twinState.page),beforePaint(){},afterPaint(){},diagnostics:()=>({}),text:()=>app.html()};
+  const app=boot({reducedMotion:false}),order=[],enhancementPauses=[];
+  app.window.TwinMotion={navigation:()=>order.push('selection:'+app.window.twinState.page),setTransitioning:value=>enhancementPauses.push(value),beforePaint(){},afterPaint(){},diagnostics:()=>({}),text:()=>app.html()};
   const original=app.window.ue.twin.command;
   app.window.ue.twin.command=json=>{const command=JSON.parse(json);if(command.action==='navigate')order.push('bridge:'+command.page);return original(json);};
   // Navigation lives outside #page and remains interactive while content fades.
@@ -302,6 +302,7 @@ test('accepted navigation updates selection before the native bridge and repeats
   const transition=app.commands.at(-1).transition;
   assert.deepEqual(transition.recentPhases.map(sample=>sample.phase),['out','in','idle']);
   assert.deepEqual(transition.recentPhases.map(sample=>sample.atMs),[0,80,220]);
+  assert.deepEqual(enhancementPauses,[true,false]);
 });
 test('scroll and search focus survive navigating away and back, including queued refresh',()=>{
   const app=boot({reducedMotion:false});app.window.twinNavigate('devices');app.flush();
@@ -310,6 +311,22 @@ test('scroll and search focus survive navigating away and back, including queued
   app.window.twinNavigate('orders');app.flush();app.window.document.activeElement=null;app.elements.main.scrollTop=94;
   app.window.twinNavigate('devices');app.advance(150);app.window.twinReceive({equipment:[],facilities:[]});app.flush();
   assert.equal(app.elements.main.scrollTop,285);assert.equal(app.window.document.activeElement,input);assert.deepEqual(input.range,[2,4]);
+});
+
+test('collapsing during page entry releases the enhancement pause before restoring the panel',()=>{
+  const app=boot({reducedMotion:false}),states=[];
+  let paused=false,visible=true;
+  app.window.TwinMotion={navigation(){},beforePaint(){},afterPaint(){},diagnostics:()=>({}),text:()=>app.html(),
+    setVisibility:value=>{visible=value;states.push(['visible',value]);},
+    setTransitioning:value=>{paused=value;states.push(['paused',value]);}};
+  app.window.twinNavigate('devices');app.advance(90);
+  assert.equal(paused,true);
+  app.window.twinSetVisibility(false);
+  assert.equal(visible,false);assert.equal(paused,false);
+  assert.deepEqual(states.slice(-2),[['visible',false],['paused',false]]);
+  app.window.twinSetVisibility(true);app.flush();
+  assert.equal(visible,true);assert.equal(paused,false);
+  assert.ok(app.html().includes('设备监控'));
 });
 test('reduced motion skips delays and changing preference cancels an active transition safely',()=>{
   const immediate=boot();immediate.window.twinNavigate('devices');assert.ok(immediate.html().includes('<h1>设备监控</h1>'));
@@ -334,8 +351,8 @@ test('pagination leaves the old scroll position through fade-out and starts the 
 test('scene presets use actual rack and floor images and dispatch the corresponding region IDs',()=>{
   const app=boot();app.window.twinNavigate('settings');
   for(const [id,label,file]of[['racks','货架区域','warehouse-racks'],['floor','地堆区域','warehouse-storage']]){
-    assert.ok(app.html().includes(label));assert.ok(app.html().includes('assets/'+file+'.png'));
-    assert.ok(fs.existsSync(path.join(__dirname,'../assets',file+'.png')));
+    assert.ok(app.html().includes(label));assert.ok(app.html().includes('assets/presets/'+file+'.webp'));
+    assert.ok(fs.statSync(path.join(__dirname,'../assets/presets',file+'.webp')).size<100000);
     app.click({action:'preset',value:id});
     assert.equal(app.commands.at(-1).action,'preset');assert.equal(app.commands.at(-1).value,id);
   }

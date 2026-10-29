@@ -100,7 +100,7 @@ function trace(){return replay.render();}
 function settings(){
  const t=S.settings,presets=[['overview','全仓','warehouse-overview'],['top','俯视','warehouse-top'],['racks','货架区域','warehouse-racks'],['floor','地堆区域','warehouse-storage']];
  const slider=(key,label)=>'<div class="capacity-slider"><div class="flex-between"><label for="'+key+'">'+label+'</label><output id="'+key+'-value">'+Math.round(t[key]*100)+'<small>%</small></output></div><input id="'+key+'" aria-label="'+label+'" class="capacity-range" type="range" min="0" max="100" step="1" value="'+Math.round(t[key]*100)+'" data-capacity="'+key+'" style="--fill:'+Math.round(t[key]*100)+'%"'+(!t.racks?' disabled':'')+'><div class="capacity-ends"><span>0%</span><span>100%</span></div></div>';
- return header('场景设置','GHS · 场景视图',!!snapshot)+section('常用视角','<div class="preset-grid">'+presets.map(([id,label,img])=>'<button class="preset '+(t.preset===id?'active':'')+'" data-action="preset" data-value="'+id+'"><div class="preset-illustration '+id+'"><img src="assets/'+img+'.png" alt="'+label+'场景参考"></div><span>'+label+'</span>'+(t.preset===id?'<span class="preset-check">'+icon('check')+'</span>':'')+'</button>').join('')+'</div>')+
+ return header('场景设置','GHS · 场景视图',!!snapshot)+section('常用视角','<div class="preset-grid">'+presets.map(([id,label,img])=>'<button class="preset '+(t.preset===id?'active':'')+'" data-action="preset" data-value="'+id+'"><div class="preset-illustration '+id+'"><img src="assets/presets/'+img+'.webp" decoding="async" alt="'+label+'场景参考"></div><span>'+label+'</span>'+(t.preset===id?'<span class="preset-check">'+icon('check')+'</span>':'')+'</button>').join('')+'</div>')+
  section('图层显示',[['building','建筑外壳','主厂房外墙、屋顶与玻璃立面'],['racks','货架与货物','货架结构、货架货物与地堆货物'],['equipment','作业设备','装卸车、叉车、AGV 与充电设施'],['pois','POI 标签','主仓库入口、区域及设备标签']].map(([key,label,copy])=>'<div class="setting-row"><div><h3>'+label+'</h3><p>'+copy+'</p></div><button role="switch" aria-label="'+label+'" aria-checked="'+t[key]+'" class="switch" data-action="toggle" data-key="'+key+'"></button></div>').join(''))+
  section('场景库容','<div class="capacity-body '+(!t.racks?'disabled':'')+'">'+slider('rackCapacity','货架库容')+slider('floorCapacity','地堆库容')+'</div><p class="caption">'+(t.racks?'仅调整场景货物展示，不改变实际库存。':'开启“货架与货物”后可调整，当前数值已保留。')+'</p><div class="capacity-roof"><span>'+ (t.roofOpening?'屋顶正在打开…':t.roofClosing?'屋顶正在恢复…':t.roofClosed?'屋顶已关闭':'屋顶已打开')+'</span>'+(!t.roofOpening&&!t.roofClosing&&t.roofClosed?link('打开屋顶查看 →','open-warehouse'):'')+'</div>')+
  section('标签密度',tabs('settings.density',t.density,[['minimal','精简'],['auto','标准'],['all','全部']])+'<p class="caption">屋顶打开后显示内部标签；远景自动聚合。</p>')+'<div class="actions">'+button('恢复默认','settings-reset')+'</div>'+metricHelp('恢复规则','恢复默认不改变当前视角和屋顶状态；全仓复位恢复屋顶并保留库容。')+'';
@@ -219,6 +219,7 @@ function paint(restore,enter=false){
 function finishTransition(){
   transitionPhase='idle';page.classList.remove('page-leave','page-enter-start','page-enter');main.removeAttribute('aria-busy');
   if(deferredRender){deferredRender=false;paint(false);}
+  if(window.TwinMotion)window.TwinMotion.setTransitioning(false);
   recordTransitionPhase();
   scheduleReport();
 }
@@ -226,7 +227,7 @@ function completeWithoutMotion(){
   const restore=transitionPhase==='in'?false:restoreNext;
   if(transitionPhase==='idle')recentPhases.length=0;
   clearTimeout(transitionTimer);++transitionSerial;transitionPhase='idle';deferredRender=false;
-  paint(restore);main.removeAttribute('aria-busy');recordTransitionPhase();scheduleReport();
+  paint(restore);if(window.TwinMotion)window.TwinMotion.setTransitioning(false);main.removeAttribute('aria-busy');recordTransitionPhase();scheduleReport();
 }
 function render(animate=false,restore=false){
   if(window.TwinStartup&&!window.TwinStartup.ready){hiddenRestore=hiddenRestore||restore;return;}
@@ -241,6 +242,7 @@ function render(animate=false,restore=false){
   clearTimeout(transitionTimer);const serial=++transitionSerial;
   if(transitionPhase==='idle')recentPhases.length=0;
   transitionPhase='out';main.setAttribute('aria-busy','true');
+  if(window.TwinMotion)window.TwinMotion.setTransitioning(true);
   page.classList.remove('page-enter-start','page-enter');page.classList.add('page-leave');
   recordTransitionPhase();
   transitionTimer=setTimeout(()=>{
@@ -339,6 +341,7 @@ window.twinSetVisibility=function(value){
     saveScroll();Dropdown.close(false);closeInfo();hiddenRestore=transitionPhase==='out'?restoreNext:false;panelVisible=false;
     clearTimeout(transitionTimer);clearTimeout(reportTimer);++transitionSerial;
     transitionPhase='idle';deferredRender=false;main.removeAttribute('aria-busy');
+    if(window.TwinMotion)window.TwinMotion.setTransitioning(false);
     page.classList.remove('page-leave','page-enter-start','page-enter');return;
   }
   panelVisible=true;normalizePendingSnapshot();pendingFocusRefresh=false;
@@ -387,7 +390,7 @@ window.twinSearch=function(text){
   if(B.inventory.samples.some(r=>String(r.id)===query)){S.filters.inventory.query=query;navigate('inventory');return;}
   S.filters.devices.view='scene';S.filters.devices.query=query;S.filters.devices.type='all';S.filters.devices.status='all';S.filters.devices.facility=/^CH-/i.test(query);S.filters.devices.page=1;navigate('devices');
 };
-if(window.TwinStartup){window.TwinStartup.whenReady(()=>render(false,true));document.addEventListener('twin-ui-presented',scheduleReport);}else render();
+if(window.TwinStartup){window.TwinStartup.whenReady(()=>{if(window.TwinMotion)window.TwinMotion.prepareView(page,'devices',forkliftLedger());render(false,true);});document.addEventListener('twin-ui-presented',scheduleReport);}else render();
 command({action:'ready'},true);command({action:'replayReady'},true);let attempts=0;const readyTimer=setInterval(()=>{if(snapshot||++attempts>20){clearInterval(readyTimer);return;}command({action:'ready'},true);},500);
 })();
 

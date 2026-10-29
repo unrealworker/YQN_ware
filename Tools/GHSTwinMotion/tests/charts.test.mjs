@@ -2,14 +2,20 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
+import { init as initECharts, use } from 'echarts/core';
+import { BarChart, LineChart, PieChart } from 'echarts/charts';
+import { GridComponent, TooltipComponent } from 'echarts/components';
+import { SVGRenderer } from 'echarts/renderers';
+
+use([BarChart, LineChart, PieChart, GridComponent, TooltipComponent, SVGRenderer]);
 
 const source = fs.readFileSync(new URL('../src/charts.js', import.meta.url), 'utf8')
   .replace(/^import .*?;\r?\n/gm, '').replace('export function createChart', 'function createChart');
 
-function harness() {
+function harness({ real = false } = {}) {
   const calls = [];
   const svg = { style: { transform: 'rotate(-90deg)' } };
-  const host = { style: {}, clientWidth: 180, querySelectorAll: () => [svg] };
+  const host = { style: {}, clientWidth: 180, clientHeight: 154, querySelectorAll: () => [svg] };
   const stop = (scope, final) => calls.push(['stop', scope, final]);
   const chart = {
     on: (event, callback) => calls.push(['on', event, callback]),
@@ -20,9 +26,26 @@ function harness() {
     dispatchAction: (...args) => calls.push(['action', ...args]),
     getZr: () => ({ storage: { traverse: visit => visit({ stopAnimation: stop, getClipPath: () => ({ stopAnimation: stop }), getTextContent: () => ({ stopAnimation: stop }) }) }, refreshImmediately: () => calls.push(['refresh']) })
   };
-  const scope = { init: (...args) => { calls.push(['init', ...args]); return chart; }, use() {}, BarChart: {}, LineChart: {}, PieChart: {}, GridComponent: {}, TooltipComponent: {}, SVGRenderer: {} };
-  vm.runInNewContext(source + '\nthis.createChart = createChart;', scope);
-  return { createChart: scope.createChart, host, svg, calls, option: () => calls.filter(call => call[0] === 'option').at(-1)[1] };
+  let instance = chart;
+  const scope = { init: (...args) => {
+    calls.push(['init', ...args]);
+    if (real) {
+      instance = initECharts(null, null, { ...args[2], ssr: true });
+      for (const [method, event] of [['setOption', 'option'], ['resize', 'resize']]) {
+        const original = instance[method].bind(instance);
+        instance[method] = (...parameters) => {
+          if (method === 'resize') calls.push(['resizeAnimators', animatedElements(instance).reduce((sum, element) => sum + element.animators.length, 0)]);
+          calls.push([event, ...parameters]); return original(...parameters);
+        };
+      }
+    }
+    return instance;
+  }, use() {}, BarChart: {}, LineChart: {}, PieChart: {}, GridComponent: {}, TooltipComponent: {}, SVGRenderer: {} };
+  // ECharts checks array types in its own realm; keep real fixture options there.
+  const createChart = real
+    ? new Function(...Object.keys(scope), source + '\nreturn createChart;')(...Object.values(scope))
+    : vm.runInNewContext(source + '\ncreateChart;', scope);
+  return { createChart, host, svg, calls, get instance() { return instance; }, option: () => calls.filter(call => call[0] === 'option').at(-1)[1] };
 }
 
 test('data changes reuse the SVG instance and retain item identities when reordered', () => {
@@ -34,8 +57,8 @@ test('data changes reuse the SVG instance and retain item identities when reorde
   assert.equal(h.calls.filter(call => call[0] === 'init').length, 1);
   assert.equal(h.calls.find(call => call[0] === 'init')[3].renderer, 'svg');
   assert.equal(first.series[0].data[1].id, second.series[0].data[0].id);
-  assert.equal(first.animationDuration, 600);
-  assert.equal(second.animationDurationUpdate, 350);
+  assert.equal(first.animationDuration, 320);
+  assert.equal(second.animationDurationUpdate, 240);
   assert.equal(h.svg.style.transform, 'none');
 });
 
@@ -75,9 +98,13 @@ test('reduced/hidden updates and settle resolve in-flight shapes without reiniti
   assert.equal(h.option().animationDuration, 0);
   assert.equal(h.option().series[0].data[0].rawValue, 8);
   assert.ok(h.calls.some(call => call[0] === 'stop' && call[2] === true));
+  const options = h.calls.filter(call => call[0] === 'option').length;
   control.settle();
+  assert.equal(h.calls.filter(call => call[0] === 'option').length, options);
   assert.equal(h.calls.find(call => call[0] === 'action')[1].type, 'hideTip');
   control.resize();
+  assert.equal(h.calls.filter(call => call[0] === 'option').length, options);
+  assert.equal(h.calls.filter(call => call[0] === 'resize').length, 1);
   assert.equal(h.calls.filter(call => call[0] === 'init').length, 1);
   control.dispose();
   control.dispose();
@@ -88,3 +115,87 @@ test('reduced/hidden updates and settle resolve in-flight shapes without reiniti
   assert.equal(h.calls.length, length);
   assert.equal(h.calls.filter(call => call[0] === 'dispose').length, 1);
 });
+
+function animatedElements(instance) {
+  const elements = new Set();
+  instance.getZr().storage.traverse(element => {
+    elements.add(element);
+    for (let clip = element.getClipPath?.(); clip; clip = clip.getClipPath?.()) elements.add(clip);
+    const label = element.getTextContent?.();
+    if (label) elements.add(label);
+  });
+  return [...elements];
+}
+
+function advanceAnimations(instance) {
+  let advanced = 0;
+  for (const element of animatedElements(instance)) for (const animator of element.animators) {
+    const clip = animator.getClip();
+    if (clip) { clip.onframe(0.25); advanced++; }
+  }
+  assert.ok(advanced > 0, 'The fixture must contain real in-flight ZRender animations.');
+}
+
+const chartShapes = instance => JSON.parse(JSON.stringify(instance.getZr().storage.getDisplayList(true)
+  .filter(element => element.shape).map(element => ({ type: element.type, shape: element.shape }))));
+
+const animationFixtures = [
+  { type: 'ring', parts: [{ label: '已用', value: 4 }, { label: '可用', value: 6 }] },
+  { type: 'stack', total: 10, parts: [{ label: '完成', value: 4 }, { label: '待办', value: 6 }] },
+  { type: 'bars', parts: [{ label: '运行', value: 4 }, { label: '待机', value: 6 }] },
+  { type: 'trend', points: [{ time: '06:00:00', x: 0, inbound: 2, outbound: 4 }, { time: '10:00:00', x: 1, inbound: 6, outbound: 3 }] }
+];
+
+for (const spec of animationFixtures) {
+  test(`${spec.type} settle finishes real animation without rebuilding chart options`, () => {
+    const h = harness({ real: true }), expected = harness({ real: true });
+    const control = h.createChart(h.host, spec), reference = expected.createChart(expected.host, spec, { animate: false });
+    try {
+      assert.ok(h.option().animationDuration >= 280 && h.option().animationDuration <= 360);
+      advanceAnimations(h.instance);
+      control.settle();
+      assert.equal(h.calls.filter(call => call[0] === 'option').length, 1);
+      assert.equal(h.instance.getOption().animation, true, 'Settling must retain animation for subsequent data updates.');
+      assert.ok(animatedElements(h.instance).every(element => element.animators.length === 0));
+      assert.deepEqual(chartShapes(h.instance), chartShapes(expected.instance));
+      const next = spec.parts ? { ...spec, parts: spec.parts.map(part => ({ ...part, value: part.value + 2 })) }
+        : { ...spec, points: spec.points.map(point => ({ ...point, inbound: point.inbound + 2, outbound: point.outbound + 2 })) };
+      control.update(next); reference.update(next, { animate: false });
+      assert.equal(h.option().animationDurationUpdate, 240);
+      // ECharts' SSR line view deliberately disables data interpolation. Its
+      // updated geometry is still checked; browser frame timing is separate QA.
+      if (spec.type !== 'trend') advanceAnimations(h.instance);
+      control.settle();
+      assert.equal(h.calls.filter(call => call[0] === 'option').length, 2);
+      assert.ok(animatedElements(h.instance).every(element => element.animators.length === 0));
+      assert.deepEqual(chartShapes(h.instance), chartShapes(expected.instance));
+    } finally { control.dispose(); reference.dispose(); }
+  });
+
+  test(`${spec.type} resize finishes real animation without repeating data options`, () => {
+    const h = harness({ real: true }), expected = harness({ real: true });
+    const control = h.createChart(h.host, spec);
+    expected.host.clientWidth = 320; expected.host.clientHeight = 220;
+    const reference = expected.createChart(expected.host, spec, { animate: false });
+    try {
+      advanceAnimations(h.instance);
+      h.host.clientWidth = 320; h.host.clientHeight = 220;
+      control.resize();
+      const options = h.calls.filter(call => call[0] === 'option');
+      assert.equal(options.length, spec.type === 'bars' ? 2 : 1);
+      if (spec.type === 'bars') {
+        assert.equal(options[1][2].lazyUpdate, true, 'The partial layout must be consumed by the resize update.');
+        assert.deepEqual(Object.keys(options[1][1]).sort(), ['grid', 'series', 'yAxis']);
+        assert.equal(options[1][1].series[0].data, undefined);
+        assert.equal(options[1][1].series[0].label.width, 22);
+      }
+      assert.equal(h.calls.filter(call => call[0] === 'resize').length, 1);
+      assert.equal(h.calls.find(call => call[0] === 'resizeAnimators')[1], 0, 'Old value animations finish before resize.');
+      assert.equal(h.instance.getWidth(), 320); assert.equal(h.instance.getHeight(), 220);
+      assert.ok(animatedElements(h.instance).every(element => element.animators.length === 0));
+      assert.deepEqual(chartShapes(h.instance), chartShapes(expected.instance));
+      control.resize();
+      assert.equal(h.calls.filter(call => call[0] === 'option').length, options.length, 'Unchanged widths do not patch options.');
+    } finally { control.dispose(); reference.dispose(); }
+  });
+}
