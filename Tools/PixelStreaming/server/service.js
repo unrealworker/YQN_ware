@@ -10,6 +10,7 @@ const { performance } = require('node:perf_hooks');
 const { spawn } = require('node:child_process');
 const { WebSocketServer, WebSocket } = require('ws');
 const { BudgetPolicy, readMetrics, writeBudget } = require('./resource-budget');
+const { createPeerComparisonProxy } = require('./peer-comparison-proxy');
 
 const EVICTED = '管理员已断开此连接，已停止自动重连。需要再次访问时请主动重新进入。';
 const DEFAULTS = { ...NETWORK_DEFAULTS, httpPort: 8080, streamerPort: 8888, showWindow: false, width: 1920, height: 1080, mode: 'shared', fps: 0, minBitrateMbps: 1, startBitrateMbps: 8, maxBitrateMbps: 24, qualityProfile: 'clear', adaptiveResourceBudget: true };
@@ -121,10 +122,25 @@ function createService(rawConfig, options = {}) {
     }
   }
   const sameOrigin = req => requestSameOrigin(req, config);
+  // A local, opt-in deployment sidecar exposes the comparison player through
+  // the existing HTTPS origin. Never bypass the launcher's access protection.
+  let comparisonConfig = options.peerComparison;
+  if (comparisonConfig === undefined) {
+    try { comparisonConfig = JSON.parse(fs.readFileSync(path.join(__dirname, 'peer-comparison.json'), 'utf8').replace(/^\uFEFF/, '')); }
+    catch (error) { if (error.code !== 'ENOENT') log('对比入口配置无效，入口保持关闭'); comparisonConfig = {}; }
+  }
+  let comparisonProxy;
+  try {
+    comparisonProxy = createPeerComparisonProxy(config.accessProtectionEnabled ? {} : comparisonConfig, {
+      sameOrigin,
+      canConnect: () => !['stopping', 'stopped'].includes(state) && viewers.size + comparisonProxy.connectionCount < config.maxViewers
+    });
+  } catch { log('对比入口端口无效，入口保持关闭'); comparisonProxy = createPeerComparisonProxy(); }
   function publicSession(s) { return { token: s.token, evicted: !!s.evicted, message: s.evicted ? EVICTED : '', mode: config.mode, maxViewers: config.maxViewers, width: config.width, height: config.height, fps: config.fps, minBitrateMbps: config.minBitrateMbps, startBitrateMbps: config.startBitrateMbps, maxBitrateMbps: config.maxBitrateMbps }; }
   function pruneSessions() { const now = Date.now(); for (const [id, s] of sessions) if (!viewers.has(id) && now - s.created > 12 * 60 * 60 * 1000) sessions.delete(id); for (const [ip, attempt] of authAttempts) if (now > attempt.until) authAttempts.delete(ip); }
   const handlePublic = async (req, res) => {
     try {
+      if (comparisonProxy.handleHttp(req, res)) return;
       const url = new URL(req.url, 'http://localhost');
       if (req.method === 'GET' && url.pathname === '/health') return json(res, 200, { state, mode: config.mode, viewerCount: viewers.size, maxViewers: config.maxViewers, accessRequired: config.accessProtectionEnabled });
       if (req.method === 'POST' && url.pathname === '/api/session') {
@@ -206,6 +222,7 @@ function createService(rawConfig, options = {}) {
   const playersWS = new WebSocketServer({ noServer: true, maxPayload: 1024 * 1024, perMessageDeflate: false });
   const streamersWS = new WebSocketServer({ noServer: true, maxPayload: 1024 * 1024, perMessageDeflate: false });
   publicServer.on('upgrade', (req, socket, head) => {
+    if (comparisonProxy.handleUpgrade(req, socket, head)) return;
     let url; try { url = new URL(req.url, 'http://localhost'); } catch { return socket.destroy(); }
     if (state === 'stopping' || state === 'stopped' || url.pathname !== '/ws' || !sameOrigin(req) || !sessions.has(url.searchParams.get('token'))) { socket.write('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n'); return socket.destroy(); }
     playersWS.handleUpgrade(req, socket, head, ws => {
@@ -273,7 +290,7 @@ function createService(rawConfig, options = {}) {
     if (ws.readyState !== WebSocket.OPEN || ['stopping', 'stopped'].includes(state)) return ws.close(1001, 'Service stopping');
     let viewer = viewers.get(session.token);
     if (!viewer) {
-      if (viewers.size >= config.maxViewers) {
+      if (viewers.size + comparisonProxy.connectionCount >= config.maxViewers) {
         send(ws, { type: 'ghsFull', message: `当前 ${config.maxViewers} 个访问名额已满，请稍后重新进入。`, reconnect: false });
         return ws.close(4004, 'Service at capacity');
       }
@@ -381,6 +398,7 @@ function createService(rawConfig, options = {}) {
     if (stopPromise) return stopPromise;
     stopPromise = (async () => {
       state = 'stopping'; message = '正在清理本服务的场景实例'; clearInterval(heartbeat); clearInterval(budgetTimer);
+      comparisonProxy.close();
       clearTimeout(cloudAuthTimer); cloudAuthTimer = undefined;
       for (const pending of cloudAuthQueue.splice(0)) pending.finish(503);
       await admission;

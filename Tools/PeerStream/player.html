@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GHS · Peer Stream</title>
+<style>
+html,body{margin:0;width:100%;height:100%;background:#111923;color:#e8eef5;font:14px system-ui,"Microsoft YaHei",sans-serif;overflow:hidden}
+header{height:48px;box-sizing:border-box;display:flex;align-items:center;gap:20px;padding:0 20px;background:#192431;border-bottom:1px solid #344354}header strong{letter-spacing:.5px}#status{color:#bac8d8}#stats{margin-left:auto;font-variant-numeric:tabular-nums}button{border:1px solid #60758d;border-radius:4px;padding:5px 12px;background:#24364b;color:white;cursor:pointer}
+main{height:calc(100% - 48px);display:grid;place-items:center}video{outline:none}#notice{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:18px 24px;background:#192431e8;border:1px solid #44566c;border-radius:6px;pointer-events:none}
+</style>
+<header><strong>GHS · PEER STREAM</strong><span id="status">正在连接</span><span id="target"></span><span id="stats"></span><button id="disconnect">结束连接</button><button id="reconnect">重新连接</button><button id="fullscreen">全屏</button></header>
+<main id="screen"></main><div id="notice">正在为你启动独立场景，请稍候…</div>
+<script src="./peer-stream.js"></script>
+<script src="./player-session.js"></script>
+<script>
+const statusText=document.querySelector('#status'), notice=document.querySelector('#notice');
+fetch(new URL('./health',location.href),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(s=>{if(s?.service==='ghs-peer-stream')document.querySelector('#target').textContent=`${s.width} × ${s.height} · ${s.fps===0?'无固定上限':s.fps+' FPS 目标'}`;}).catch(()=>{});
+const player=document.createElement('video',{is:'peer-stream'});
+player.id=GhsPeerSession.socketUrl(location.href);
+const session=GhsPeerSession.bindSession(player,(title,message)=>{statusText.textContent=title;notice.textContent=message;notice.hidden=false;document.querySelector('#disconnect').disabled=true;document.querySelector('#stats').textContent='连接已释放';});
+player.addEventListener('playing',()=>{if(session.ended)return;statusText.textContent='已连接 · 独立视角';notice.hidden=true;});
+player.addEventListener('playerqueue',e=>{if(!session.ended&&player.readyState<2){statusText.textContent='等待场景';notice.textContent=`等待独立场景，队列位置 ${e.detail.seq}`;notice.hidden=false;}});
+player.addEventListener('playerdisconnected',()=>{if(session.ended)return;statusText.textContent='连接中断，正在重连';notice.textContent='连接中断，正在重连…';notice.hidden=false;});
+player.addEventListener('click',()=>{if(!session.ended)player.play().catch(()=>{});});
+document.querySelector('#screen').append(player);
+function fitVideo(){const bounds=document.querySelector('#screen').getBoundingClientRect();const ratio=player.videoWidth&&player.videoHeight?player.videoWidth/player.videoHeight:16/9;const width=Math.min(bounds.width,bounds.height*ratio);player.style.width=width+'px';player.style.height=(width/ratio)+'px';}
+new ResizeObserver(fitVideo).observe(document.querySelector('#screen'));player.addEventListener('resize',fitVideo);fitVideo();
+document.querySelector('#reconnect').onclick=()=>location.reload();
+document.querySelector('#disconnect').onclick=()=>session.stop();
+addEventListener('pagehide',()=>session.stop());
+document.querySelector('#fullscreen').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.querySelector('#screen').requestFullscreen();
+setInterval(async()=>{if(session.ended||!(player.pc instanceof RTCPeerConnection))return;try{const reports=await player.pc.getStats();let video,pair;reports.forEach(r=>{if(r.type==='inbound-rtp'&&r.kind==='video')video=r;if(r.type==='candidate-pair'&&r.nominated&&r.state==='succeeded')pair=r;});if(video&&!session.ended){window.peerStreamMetrics={width:video.frameWidth,height:video.frameHeight,fps:video.framesPerSecond,framesDecoded:video.framesDecoded,framesDropped:video.framesDropped,rttMs:pair?.currentRoundTripTime*1000};document.querySelector('#stats').textContent=`${video.frameWidth||0} × ${video.frameHeight||0} · ${(video.framesPerSecond||0).toFixed(0)} FPS · ${Math.round((pair?.currentRoundTripTime||0)*1000)} ms`;}}catch{}},1000);
+</script>
+</html>
