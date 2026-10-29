@@ -9,6 +9,7 @@
 #include "Misc/FileHelper.h"
 #include "Misc/Parse.h"
 #include "Misc/Paths.h"
+#include "RenderTimer.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 #if PLATFORM_WINDOWS
@@ -73,6 +74,15 @@ public:
 
         const double GPUms=FPlatformTime::ToMilliseconds(GGPUFrameTime);
         if(FMath::IsFinite(GPUms) && GPUms>0 && GPUms<10000) { GPUTimeSum+=GPUms; ++GPUSamples; }
+        // Sample engine thread timings with the existing 4 Hz budget tick;
+        // these are diagnostics, not additional per-frame file writes.
+        const uint32 ThreadCycles[]={GGameThreadTime,GRenderThreadTime,GRHIThreadTime};
+        for(int32 Index=0;Index<3;++Index)
+        {
+            const double Milliseconds=FPlatformTime::ToMilliseconds(ThreadCycles[Index]);
+            if(FMath::IsFinite(Milliseconds) && Milliseconds>0 && Milliseconds<10000)
+            { ThreadTimeSums[Index]+=Milliseconds; ++ThreadSamples[Index]; }
+        }
         const double Now=FPlatformTime::Seconds();
         if(Now-PreviousTime>=1.)
         {
@@ -93,8 +103,19 @@ public:
             AddCVar(TEXT("appliedFps"),TEXT("t.MaxFPS"));
             AddCVar(TEXT("captureFps"),TEXT("PixelStreaming.WebRTC.Fps"));
             AddCVar(TEXT("screenPercentage"),TEXT("r.ScreenPercentage"));
+            // Report the effective AA history independently from the native
+            // render percentage, so a remote quality check cannot confuse them.
+            AddCVar(TEXT("antiAliasingMethod"),TEXT("r.AntiAliasingMethod"));
+            AddCVar(TEXT("tsrHistoryPercentage"),TEXT("r.TSR.History.ScreenPercentage"));
             if(GPUSamples) Metrics->SetNumberField(TEXT("gpuMs"),GPUTimeSum/GPUSamples);
             else Metrics->SetField(TEXT("gpuMs"),MakeShared<FJsonValueNull>());
+            const TCHAR* ThreadKeys[]={TEXT("gameMs"),TEXT("renderMs"),TEXT("rhiMs")};
+            for(int32 Index=0;Index<3;++Index)
+            {
+                if(ThreadSamples[Index]) Metrics->SetNumberField(ThreadKeys[Index],ThreadTimeSums[Index]/ThreadSamples[Index]);
+                else Metrics->SetField(ThreadKeys[Index],MakeShared<FJsonValueNull>());
+                ThreadTimeSums[Index]=0; ThreadSamples[Index]=0;
+            }
             Metrics->SetStringField(TEXT("gpuMetric"),TEXT("UE GGPUFrameTime average; not an isolated GPU capacity guarantee"));
             Metrics->SetStringField(TEXT("error"),Error);
             FString Json; FJsonSerializer::Serialize(Metrics,TJsonWriterFactory<>::Create(&Json));
@@ -110,6 +131,8 @@ private:
     double PreviousTime=0,GPUTimeSum=0;
     uint64 PreviousFrame=0;
     int32 GPUSamples=0;
+    double ThreadTimeSums[3]={};
+    int32 ThreadSamples[3]={};
 };
 TUniquePtr<FBridge> Bridge;
 FTSTicker::FDelegateHandle Ticker;
