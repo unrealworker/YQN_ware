@@ -1,0 +1,333 @@
+{
+  "success": true,
+  "production_assets_modified": true,
+  "source_sha256": {
+    "SourceAssets/GHS/DoublePallet/double_pallet_storage.blend": "3aa77a7689a4374d922cca92fe61107337e7479e1e00abb138c7e8f99228121e",
+    "SourceAssets/GHS/DoublePallet/double_pallet_storage.json": "331665d17be18c19398c1d49442019b14fd912120283449658bb6f24b11eaa4d",
+    "SourceAssets/GHS/DoublePallet/SM_GHS_Presentation_CargoHigh.fbx": "75a3a458500c11001b09c29f777c57825998f488403ef3756b65d4ead0938075",
+    "SourceAssets/GHS/DoublePallet/SM_GHS_Presentation_CargoLow.fbx": "61c82887b037955f9a1ae9691efef3943e5aef70649c28a3ada4e4599d8d3a59",
+    "SourceAssets/GHS/DoublePallet/SM_GHS_Presentation_CargoMid.fbx": "dd6054cb48097a9302fdae0c6605224e30dee3a06138f0774d74e40a8613a054"
+  },
+  "meshes": [
+    {
+      "name": "SM_GHS_Presentation_CargoLow",
+      "lod": 2,
+      "triangles": 1104,
+      "fbx": "SM_GHS_Presentation_CargoLow_LOD2.fbx",
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.6000000238418579
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.3760311603546143
+        ]
+      ],
+      "material_slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "role_triangles": {
+        "pallet_runners": 72,
+        "pallet_blocks": 216,
+        "pallet_deck": 192,
+        "pallet_rims": 48,
+        "carton_surfaces": 432,
+        "seam_strips": 144
+      },
+      "pallet_part_count": 44,
+      "pallet_base_z_m": [
+        0,
+        0.6880155801773071
+      ],
+      "sha256": "0e12482495eb4622c91361920c30a5b9f84273ebb36397639d283dda1c7bfe5c"
+    },
+    {
+      "name": "SM_GHS_Presentation_CargoLow",
+      "lod": 3,
+      "triangles": 864,
+      "fbx": "SM_GHS_Presentation_CargoLow_LOD3.fbx",
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.6000000238418579
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.3760311603546143
+        ]
+      ],
+      "material_slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "role_triangles": {
+        "pallet_runners": 72,
+        "pallet_blocks": 216,
+        "pallet_deck": 192,
+        "pallet_rims": 48,
+        "carton_surfaces": 168,
+        "recessed_joint_backing": 24,
+        "seam_strips": 144
+      },
+      "pallet_part_count": 44,
+      "pallet_base_z_m": [
+        0,
+        0.6880155801773071
+      ],
+      "sha256": "58dc036927206a5307ae08909fceacb603b88efc17db4beb5843b92685bd668b"
+    },
+    {
+      "name": "SM_GHS_Presentation_CargoMid",
+      "lod": 2,
+      "triangles": 1336,
+      "fbx": "SM_GHS_Presentation_CargoMid_LOD2.fbx",
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.6000000238418579
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.9760311841964722
+        ]
+      ],
+      "material_slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "role_triangles": {
+        "pallet_runners": 72,
+        "pallet_blocks": 216,
+        "pallet_deck": 192,
+        "pallet_rims": 48,
+        "carton_surfaces": 648,
+        "seam_strips": 160
+      },
+      "pallet_part_count": 44,
+      "pallet_base_z_m": [
+        0,
+        0.9880155920982361
+      ],
+      "sha256": "0ab01410bd9b70fc72a439fadbc29c568a1b3ebbbc50323030a8452a43ae49a0"
+    },
+    {
+      "name": "SM_GHS_Presentation_CargoMid",
+      "lod": 3,
+      "triangles": 928,
+      "fbx": "SM_GHS_Presentation_CargoMid_LOD3.fbx",
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.6000000238418579
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.9760311841964722
+        ]
+      ],
+      "material_slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "role_triangles": {
+        "pallet_runners": 72,
+        "pallet_blocks": 216,
+        "pallet_deck": 192,
+        "pallet_rims": 48,
+        "carton_surfaces": 216,
+        "recessed_joint_backing": 24,
+        "seam_strips": 160
+      },
+      "pallet_part_count": 44,
+      "pallet_base_z_m": [
+        0,
+        0.9880155920982361
+      ],
+      "sha256": "6824ba5a78f7658974f2c5c6f8e67bd274eba2ed70e89aa9bc5d6d319748c4ff"
+    },
+    {
+      "name": "SM_GHS_Presentation_CargoHigh",
+      "lod": 2,
+      "triangles": 1568,
+      "fbx": "SM_GHS_Presentation_CargoHigh_LOD2.fbx",
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.6000000238418579
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          2.576030969619751
+        ]
+      ],
+      "material_slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "role_triangles": {
+        "pallet_runners": 72,
+        "pallet_blocks": 216,
+        "pallet_deck": 192,
+        "pallet_rims": 48,
+        "carton_surfaces": 864,
+        "seam_strips": 176
+      },
+      "pallet_part_count": 44,
+      "pallet_base_z_m": [
+        0,
+        1.2880154848098755
+      ],
+      "sha256": "3bb6bd4b62acdcbd6bc659a06caeec2e174459c6f2fb2a816a0eea8f61b73274"
+    },
+    {
+      "name": "SM_GHS_Presentation_CargoHigh",
+      "lod": 3,
+      "triangles": 992,
+      "fbx": "SM_GHS_Presentation_CargoHigh_LOD3.fbx",
+      "bounds_m": [
+        [
+          -0.6000000238418579,
+          0.6000000238418579
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          2.576030969619751
+        ]
+      ],
+      "material_slots": [
+        "M_VR_StoragePalletBlue",
+        "M_VR_StorageCargoBlue",
+        "M_VR_StorageCargoGrid"
+      ],
+      "role_triangles": {
+        "pallet_runners": 72,
+        "pallet_blocks": 216,
+        "pallet_deck": 192,
+        "pallet_rims": 48,
+        "carton_surfaces": 264,
+        "recessed_joint_backing": 24,
+        "seam_strips": 176
+      },
+      "pallet_part_count": 44,
+      "pallet_base_z_m": [
+        0,
+        1.2880154848098755
+      ],
+      "sha256": "1c9981dc9d9c0ec7dbc3704167de8fba353da91d84fda134b19277ddcde71b9c"
+    }
+  ],
+  "lod0_lod1": "Exact original render-buffer hashes preserved; only LOD2 and LOD3 replaced in the three production meshes",
+  "screen_sizes": [
+    1.0,
+    0.35,
+    0.12,
+    0.03
+  ],
+  "status": "verified_and_applied_local_ue",
+  "editable_source": "storage_far_lods.blend",
+  "generator": "Scripts/ghs/build_storage_far_lods.py",
+  "editable_source_sha256": "b068171521f2a239a17bd5de1a09b62c97b711e520544e535d3fc21ae7984e2c",
+  "validation": {
+    "date": "2026-10-29",
+    "scope": "Local owned Editor-game on RTX 5060 Laptop at native1920x1080, TSRHistory150, EarlyZMask1; not Shipping, server or browser concurrency evidence",
+    "native_tests": {
+      "succeeded": 13,
+      "failed": 0,
+      "warnings": 0
+    },
+    "capacity_values": [
+      0,
+      0.8,
+      1
+    ],
+    "capacity_visible_groups": [
+      0,
+      6024,
+      7530
+    ],
+    "preserved": [
+      "LOD0/1 render buffers",
+      "material slots",
+      "LOD screen sizes",
+      "mesh bounds and origin",
+      "collision aggregate/trace/double-sided",
+      "source models",
+      "map",
+      "capacity materials",
+      "HISM instance transforms, order and business identities"
+    ],
+    "visual_note": "Passed visible double blue pallets, fork holes, carton seams, outer silhouette, and shadows. Extremely close forced farLOD seams are more uniform/slightly lighter than auto-reduced original; actual near LOD0/1 are exact render hashes.",
+    "gpu_comparisons": [
+      {
+        "view": "floor",
+        "source_gpu_mean_ms": 23.413931896551723,
+        "applied_gpu_ms": 20.19743448275862,
+        "saved_ms": 3.2164974137931033,
+        "reduction_percent": 13.737536386474291
+      },
+      {
+        "view": "replay",
+        "source_gpu_mean_ms": 20.31142327586207,
+        "applied_gpu_ms": 17.173299999999998,
+        "saved_ms": 3.138123275862071,
+        "reduction_percent": 15.45004125629833
+      },
+      {
+        "view": "open",
+        "source_gpu_mean_ms": 22.675048275862068,
+        "applied_gpu_ms": 19.647027586206896,
+        "saved_ms": 3.028020689655172,
+        "reduction_percent": 13.353976815469649
+      }
+    ],
+    "documentation": "docs/performance/gpu-rendering-20261029.md"
+  },
+  "applied_assets": [
+    {
+      "path": "Content/GHSZcoolSmartFactory/DoublePallet/Meshes/SM_GHS_Presentation_CargoLow.uasset",
+      "original_sha256": "98af1acf6eff6e2a8ee7ade0dd744de6826afc65c9a48a63fd50706484f07164",
+      "applied_sha256": "76187ba7738a05ee8714f62d54253643d089ebf59880723b04f565624e8db984"
+    },
+    {
+      "path": "Content/GHSZcoolSmartFactory/DoublePallet/Meshes/SM_GHS_Presentation_CargoMid.uasset",
+      "original_sha256": "313ab271e866ee8b3108f963f2dec82b0cec17bad27bc181b5e4c2ecb94174a6",
+      "applied_sha256": "1861b7185ebddb2d1eb3379dd3c92496a882e753fe921629553bccb76f1f78e3"
+    },
+    {
+      "path": "Content/GHSZcoolSmartFactory/DoublePallet/Meshes/SM_GHS_Presentation_CargoHigh.uasset",
+      "original_sha256": "f10665cf8866a08ba0a782766ad5e6d348eb53eed82ca90e48d1f57c64a2bf2b",
+      "applied_sha256": "fbe6454666c37f9a4b2c71149db3243bd37c29479499dadf4d68281939bfea63"
+    }
+  ]
+}

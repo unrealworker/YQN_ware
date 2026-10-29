@@ -49,4 +49,4 @@ $gpuProcess | Select-Object Id, StartTime
 
 `report.json` 包含原始/生效cvar、实际PP覆盖、相机、地图前后SHA、逐视图CSV统计和截图路径；`latest.json` 指向最新报告。每视图600帧，去掉首尾各10帧；截图和ProfileGPU在CSV采样之后执行。采样临时请求原生1080p、100%屏幕比例、关闭动态分辨率/VSync与帧率上限，退出时恢复cvar；其他画质维持原配置。
 
-`success=true` 仅说明流程完成，不能证明60FPS或三个客户端流畅。RHI的PrimitivesDrawn包括非三角图元，不是精确可见三角面数。静态截图/步进截图也不能代替连续运动和浏览器端验证。比较时必须控制二进制、分辨率、供电、GPU后台负载与热状态；记录ProfileGPU和真实PP，不能仅用项目cvar推断Lumen是否生效。服务器并发容量仍需服务器GPU与各客户端WebRTC统计。
+`success=true` 仅说明流程完成，不能证明60FPS或三个客户端流畅。RHI的PrimitivesDrawn包括非三角图元；UE5.4的D3D12间接绘制在`RHIMultiDrawIndexedPrimitiveIndirect`中以`SetupDraw(IndexBufferRHI,0,0)`登记，不回读HISM实际实例面数，因此不能拿该计数证明HISM减面比例。静态截图/步进截图也不能代替连续运动和浏览器端验证。比较时必须控制二进制、分辨率、供电、GPU后台负载与热状态；记录ProfileGPU和真实PP，不能仅用项目cvar推断Lumen是否生效。服务器并发容量仍需服务器GPU与各客户端WebRTC统计。

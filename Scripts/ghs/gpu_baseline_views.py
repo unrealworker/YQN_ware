@@ -106,7 +106,7 @@ def summarize_rhi(path):
             index=names.index(name)
             values=[float(row[index]) for row in samples if len(row)>index and row[index]]
             output[name]=dict(mean=statistics.fmean(values),p95=sorted(values)[math.ceil(len(values)*.95)-1],unit='MiB' if name.startswith('GPUMem/') else 'count')
-    output['primitive_note']='RHI PrimitivesDrawn is total submitted primitives, including non-triangle primitives; do not label as exact visible mesh triangles.'
+    output['primitive_note']='RHI PrimitivesDrawn is CPU-known submitted primitives, includes non-triangles and excludes actual D3D12 indirect/HISM counts (SetupDraw uses 0,0); not exact visible triangles or a reliable HISM triangle reduction metric.'
     return output
 def capture(name):
     global stage

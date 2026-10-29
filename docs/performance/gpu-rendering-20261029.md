@@ -1,6 +1,6 @@
 # GPU 渲染优化验证（2026-10-29）
 
-本轮保持 1920×1080、100% 屏幕比例、现有几何、材质、光照、阴影与交互。以下数据来自 RTX 5060 Laptop 单个独立 Editor-game 进程，不代表阿里云服务器或三实例吞吐量。测量时取消帧率上限以分离 GPU 耗时；发行的像素流目标仍为 60 FPS。
+本轮保持 1920×1080、100% 屏幕比例、近景几何、材质、光照、阴影与交互；仅对三款地堆模型的远景 LOD2/3 做经验证的结构减面。以下数据来自 RTX 5060 Laptop 单个独立 Editor-game 进程，不代表阿里云服务器或三实例吞吐量。测量时取消帧率上限以分离 GPU 耗时；发行的像素流目标仍为 60 FPS。
 
 ## 采用的配置
 
@@ -18,6 +18,32 @@ EarlyZ 同一轮、相同二进制与 History150 的比较（每视角 600 帧�
 | 追溯 | 21.60 | 21.12 | 5.9% |
 
 这些毫秒数仅描述本轮机器状态。不同轮的供电/热状态和 GPU 后台工作有差异，不能跨轮直接相减。完整原始数据位于 `Saved/GPUOptimization/EarlyZMaskExperiment/comparison.json`、`depth_20261029_132806`、`depth_20261029_133431`；预热后的屋顶复查位于 `baseline_20261029_134234`。
+
+## 已应用的地堆远景模型优化
+
+2026-10-29 已将 Low、Mid、High 三款地堆经过验证的远景网格应用到正式资产。保留两个蓝色托盘、真实叉孔、全部底面、箱体外壳及格线；LOD2 去除远景倒角细分，LOD3 省略箱垛内部面并增加后缩背衬，防止从接缝看穿。几何生成源与可重复执行脚本分别位于 `SourceAssets/GHS/DoublePallet/FarLOD/`、`Scripts/ghs/build_storage_far_lods.py`。
+
+| 模型 | 实例数 | LOD0/1（原样保留） | 原 LOD2/3 | 新 LOD2/3 |
+|---|---:|---|---|---|
+| Low | 1,904 | 9,600 / 4,800 | 2,112 / 1,536 | 1,104 / 864 |
+| Mid | 3,726 | 11,640 / 5,820 | 2,560 / 1,862 | 1,336 / 928 |
+| High | 1,900 | 13,680 / 6,840 | 3,010 / 2,188 | 1,568 / 992 |
+
+同进程、相同二进制、History150 与 EarlyZMask1 的有效 GPU 对照：
+
+| 视角 | 原版 GPU ms | 新模型 GPU ms | 节省 ms | 降幅 |
+|---|---:|---:|---:|---:|
+| 地堆预设 | 23.414 | 20.197 | 3.216 | 13.7% |
+| 追溯 | 20.311 | 17.173 | 3.138 | 15.5% |
+| 开顶全景 | 22.675 | 19.647 | 3.028 | 13.4% |
+
+地堆和追溯均采用原版→新模型→原版，每档 600 帧、去除首尾各 10 帧，原版两次取均值；两次原版耗时稳定。开顶全景为同进程原版→新模型。收益主要来自 BasePass 与 PrePass，不能跨轮与上方 EarlyZ 表格相减或将百分比相加。
+
+三款模型的 LOD0/1 顶点、索引、法线、UV 哈希完全一致；材料槽、LOD 屏阈、原点、包围盒及碰撞 aggregate/trace/double-sided 精确一致。双托盘、叉孔、外轮廓和阴影通过视觉检查；极近距离强制远景 LOD 时，箱格比原自动减面版略浅、更均匀。实际近景保持原 LOD0/1。容量 0/80/100% 的原生显示计数为 0/6024/7530，0% 截图没有残留货物阴影。13 项原生回归全部通过，无警告或错误，包含 40 个货架 LOD 的货物完整性检查。
+
+应用范围严格限定 `Content/GHSZcoolSmartFactory/DoublePallet/Meshes/SM_GHS_Presentation_Cargo{Low,Mid,High}.uasset`，实际文件 SHA 与已验收隔离包一致。原始 Blender/FBX、地图、容量材质、HISM 实例顺序和姿态、业务身份均未改变。原包备份位于 `Saved/GPUOptimization/StorageLODExperiment/production-backup-20261029-232724`。
+
+本地证据为 `Saved/GPUOptimization/StorageLODExperiment/final-verification.json`、`final-verification.md`、`finalized-import-report.json` 和 `production-applied.json`；有效 GPU 原始记录为 `baseline_20261029_145011` 与 `baseline_20261029_150046`，最终容量结果仅使用后者。`baseline_20261029_144136` 因 Static HISM 拒绝切换网格而无效；第一轮隐藏 HUD 后的容量截图也无效，已用原生容量调用重新验证。D3D12 HISM 间接绘制的 RHI PrimitivesDrawn 不包含实际实例三角数，不能用该计数推算全场三角降幅。这些结果仍不是发行包、服务器或三个浏览器独立实例的验证。
 
 ## 拒绝的实验与验证边界
 
