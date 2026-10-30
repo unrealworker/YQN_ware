@@ -1,4 +1,4 @@
-/* Epic UE5.4 owns WebRTC, input serialization, touch and keyboard handling. */
+/* Epic UE5.8 owns WebRTC, input serialization, touch and keyboard handling. */
 (() => {
   'use strict';
   const { Config, PixelStreaming, Flags, NumericParameters } = window['lib-pixelstreamingfrontend'];
@@ -135,15 +135,15 @@
     sessionToken = session.token; sessionStorage.setItem('ghsSession', sessionToken); metrics.mode = session.mode; $('stat-mode').textContent = session.mode === 'shared' ? '共享场景' : '独立场景';
     const wsUrl = `${location.protocol === 'https:' ? 'wss:' : 'ws:'}//${location.host}/ws?token=${encodeURIComponent(sessionToken)}`;
     // Own the reconnect timer so an eviction/replaced-tab message can cancel every queued attempt.
-    const config = new Config({ useUrlParams: false, initialSettings: { AutoConnect: false, AutoPlayVideo: true, StartVideoMuted: true, HoveringMouse: true, MatchViewportRes: false, TimeoutIfIdle: false, WaitForStreamer: false, OfferToReceive: false, UseMic: false, MaxReconnectAttempts: 0, ss: wsUrl, WebRTCFPS: session.fps, WebRTCMinBitrate: session.minBitrateMbps * 1000, WebRTCMaxBitrate: session.maxBitrateMbps * 1000 } });
-    quality.configureUncapped(config, session.fps);
+    const config = new Config({ useUrlParams: false, initialSettings: { AutoConnect: false, AutoPlayVideo: true, StartVideoMuted: true, HoveringMouse: true, MatchViewportRes: false, TimeoutIfIdle: false, WaitForStreamer: false, BrowserSendOffer: false, UseMic: false, UseCamera: false, MaxReconnectAttempts: 0, ss: wsUrl, WebRTCFPS: quality.captureFPS(session), WebRTCMinBitrate: session.minBitrateMbps * 1000, WebRTCMaxBitrate: session.maxBitrateMbps * 1000 } });
     quality.configureBitrates(config, session);
     $('stat-limit').textContent = session.fps === 0 ? '无固定上限' : session.fps + ' FPS';
     stream = new PixelStreaming(config, { videoElementParent: $('video-root') }); watchVideo();
     sceneSearch = window.GHSSceneSearch.create({ stream, videoRoot, keyboardFlag: Flags.KeyboardInput, beforeFocus: endPan });
-    const protocol = stream.webSocketController.signallingProtocol;
-    protocol.addMessageHandler('ghsAdmission', payload => {
-      const m = JSON.parse(payload);
+    // UE5.8 emits parsed objects from its public signallingProtocol. Register
+    // application messages before connect, preserving admission and eviction.
+    const protocol = stream.signallingProtocol;
+    protocol.addListener('ghsAdmission', m => {
       if (m.instanceId !== metrics.instanceId) {
         queuePhase = 'none';
         if (!firstFrame && !terminal) armDeadline();
@@ -151,8 +151,7 @@
       metrics.instanceId = m.instanceId; $('stat-instance').textContent = m.instanceId;
       progress(1, '已接入服务', '名额已分配，正在等待场景就绪', 'waiting');
     });
-    protocol.addMessageHandler('ghsStage', payload => {
-      const m = JSON.parse(payload);
+    protocol.addListener('ghsStage', m => {
       if (m.stage === 'queued' && queuePhase === 'none' && !firstFrame && !terminal) {
         queuePhase = 'waiting'; clearTimeout(deadline);
         deadline = setTimeout(() => halt('排队等待超时', '等待启动超过 10 分钟，请稍后重新进入。', false, 'waiting'), 600000);
@@ -161,29 +160,28 @@
       }
       progress(m.stage === 'streamerReady' ? 2 : 1, m.stage === 'queued' ? '正在排队' : m.stage === 'streamerReady' ? '场景已就绪' : '正在启动场景', m.message, m.stage === 'streamerReady' ? 'running' : 'waiting');
     });
-    protocol.addMessageHandler('ghsKicked', payload => { sessionStorage.setItem('ghsKicked', 'true'); halt('管理员已断开连接', JSON.parse(payload).message, false, 'exited'); });
-    protocol.addMessageHandler('ghsFull', payload => halt('当前访问名额已满', JSON.parse(payload).message, false, 'waiting'));
-    protocol.addMessageHandler('ghsEvicted', payload => halt('连接已被替换', JSON.parse(payload).message, true));
-    protocol.addMessageHandler('ghsSessionReplaced', payload => { sessionStorage.setItem('ghsReplaced', 'true'); halt('已在其他标签页连接', JSON.parse(payload).message, false, 'exited'); });
-    protocol.addMessageHandler('ghsShutdown', payload => halt('服务已停止', JSON.parse(payload).message, false, 'stopped'));
-    protocol.addMessageHandler('ghsInstanceFailed', payload => halt('场景连接失败', JSON.parse(payload).message));
+    protocol.addListener('ghsKicked', m => { sessionStorage.setItem('ghsKicked', 'true'); halt('管理员已断开连接', m.message, false, 'exited'); });
+    protocol.addListener('ghsFull', m => halt('当前访问名额已满', m.message, false, 'waiting'));
+    protocol.addListener('ghsEvicted', m => halt('连接已被替换', m.message, true));
+    protocol.addListener('ghsSessionReplaced', m => { sessionStorage.setItem('ghsReplaced', 'true'); halt('已在其他标签页连接', m.message, false, 'exited'); });
+    protocol.addListener('ghsShutdown', m => halt('服务已停止', m.message, false, 'stopped'));
+    protocol.addListener('ghsInstanceFailed', m => halt('场景连接失败', m.message));
     stream.addEventListener('webRtcSdp', () => progress(3, '正在协商视频', '已交换视频会话信息，正在建立媒体连接'));
     stream.addEventListener('webRtcConnected', () => {
-      // Pinned Epic 1.1.6 adapter; optional access is guarded for other SDK versions.
-      metrics.lowLatencyHints = quality.configureReceivers(stream._webRtcController?.peerConnectionController?.peerConnection);
+      metrics.lowLatencyHints = quality.configureReceivers(stream.webRtcController?.peerConnectionController?.peerConnection);
       progress(4, '视频已连接', '媒体连接已建立，等待首帧显示');
     });
     stream.addEventListener('videoInitialized', watchVideo);
     stream.addEventListener('dataChannelOpen', () => { if (firstFrame && !terminal) sceneSearch.ready(); });
     stream.addEventListener('playerCount', e => { $('viewer-count').textContent = `${e.data.count} / ${maxViewers}`; metrics.viewerCount = e.data.count; });
     stream.addEventListener('webRtcDisconnected', e => { endPan(); sceneSearch?.suspend(); meter.reset(); if (terminal) return; const wasPlaying = firstFrame; firstFrame = false; metrics.firstFrame = false; $('loading').hidden = false; document.body.classList.remove('playing'); stage = 0; progress(1, '正在恢复连接', '网络暂时中断，正在恢复当前会话；场景状态暂时保留。', 'waiting'); if (wasPlaying) armDeadline(); });
-    stream.webSocketController.onClose.addEventListener('close', e => {
+    protocol.transport.addListener('close', e => {
       if (terminal) return;
-      if (e.detail.code === 4003) { sessionStorage.setItem('ghsKicked', 'true'); return halt('管理员已断开连接', '已停止自动重连。请联系管理员，或稍后主动重新进入。', false, 'exited'); }
-      if (e.detail.code === 4004) return halt('当前访问名额已满', `最多 ${maxViewers} 人同时访问，请稍后重新进入。`, false, 'waiting');
-      if (e.detail.code === 4001) return halt('连接已被替换', '连接已被新访问者替换，已停止自动重连。', true);
-      if (e.detail.code === 4002) { sessionStorage.setItem('ghsReplaced', 'true'); return halt('已在其他标签页连接', '同一会话已在其他标签页连接，本页已停止自动重连。', false, 'exited'); }
-      if (e.detail.code === 1001) return halt('服务已停止', '服务连接已关闭，请在启动器确认状态后重新进入。', false, 'stopped');
+      if (e.code === 4003) { sessionStorage.setItem('ghsKicked', 'true'); return halt('管理员已断开连接', '已停止自动重连。请联系管理员，或稍后主动重新进入。', false, 'exited'); }
+      if (e.code === 4004) return halt('当前访问名额已满', `最多 ${maxViewers} 人同时访问，请稍后重新进入。`, false, 'waiting');
+      if (e.code === 4001) return halt('连接已被替换', '连接已被新访问者替换，已停止自动重连。', true);
+      if (e.code === 4002) { sessionStorage.setItem('ghsReplaced', 'true'); return halt('已在其他标签页连接', '同一会话已在其他标签页连接，本页已停止自动重连。', false, 'exited'); }
+      if (e.code === 1001) return halt('服务已停止', '服务连接已关闭，请在启动器确认状态后重新进入。', false, 'stopped');
       if (reconnectAttempts >= 12) return halt('无法恢复连接', '12次连接尝试均未成功，请检查启动器和网络后重新进入。');
       stream.disconnect(); clearTimeout(reconnectTimer);
       reconnectTimer = setTimeout(() => { if (!terminal) { reconnectAttempts++; stream.connect(); } }, 2000);

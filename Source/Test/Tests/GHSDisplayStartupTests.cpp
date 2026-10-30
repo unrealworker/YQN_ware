@@ -23,7 +23,7 @@ bool FGHSDesktopStartupOverridesTest::RunTest(const FString&)
     const TCHAR* Commands[]={
         TEXT("-Windowed"),TEXT("-fullscreen"),TEXT("-RenderOffscreen"),TEXT("-ForceRes"),
         TEXT("-ResX=1920"),TEXT("-ResY=1080"),TEXT("-Res=1920x1080w"),TEXT("-WinX=2560 -WinY=0"),
-        TEXT("-PixelStreamingURL=ws://127.0.0.1:8888 -ResX=1920 -ResY=1080 -ForceRes -RenderOffscreen"),
+        TEXT("-PixelStreamingConnectionURL=ws://127.0.0.1:8888 -ResX=1920 -ResY=1080 -ForceRes -RenderOffscreen"),
         TEXT("-ResX=1920 -ResY=1080 -Windowed")};
     for(const TCHAR* Command:Commands)
         TestFalse(Command,GHSDisplayStartup::BuildRequest(Command,true,FIntPoint(2560,1600)).bApply);

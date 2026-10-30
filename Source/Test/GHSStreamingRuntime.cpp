@@ -1,4 +1,5 @@
 #include "GHSStreamingRuntime.h"
+#include "Async/Async.h"
 #include "Containers/Ticker.h"
 #include "Dom/JsonObject.h"
 #include "DynamicRHI.h"
@@ -7,10 +8,14 @@
 #include "HAL/IConsoleManager.h"
 #include "HAL/PlatformProcess.h"
 #include "Misc/CommandLine.h"
+#include "Misc/CoreDelegates.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Parse.h"
 #include "Misc/Paths.h"
 #include "RenderTimer.h"
+#include "NVENC.h"
+#include "IPixelStreaming2Module.h"
+#include "PixelStreaming2Delegates.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 #if PLATFORM_WINDOWS
@@ -21,6 +26,45 @@ namespace GHSStreamingRuntime
 {
 namespace
 {
+FStartupOptions StartupOptions;
+FDelegateHandle EngineReadyHandle,SoftwareFallbackHandle;
+bool bNVENCValidated=false;
+bool bStartupRejected=false;
+
+void RejectStartup(const FString& Reason)
+{
+    if(bStartupRejected) return;
+    bStartupRejected=true;
+    UE_LOG(LogTemp,Error,TEXT("GHS_PS2_CONFIGURATION_REJECTED %s"),*Reason);
+    // Explicit NVIDIA selection must never silently turn into software encoding.
+    if(IPixelStreaming2Module::IsAvailable()) IPixelStreaming2Module::Get().StopStreaming();
+    FPlatformMisc::RequestExitWithStatus(false,1);
+}
+
+void ValidateEncoder()
+{
+    if(bStartupRejected) return;
+    if(StartupOptions.Encoder==TEXT("NVIDIA"))
+    {
+        const auto* Codec=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming2.Encoder.Codec"));
+        const auto* Negotiate=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming2.WebRTC.NegotiateCodecs"));
+        FString Error;
+        // PS2 can fall back during OnReady, before engine initialization completes.
+        // Re-read the effective codec as well as the NVENC API after its factory setup.
+        bNVENCValidated=ValidateNvidiaPolicy(GDynamicRHI && IsRHIDeviceNVIDIA(),FAPI::Get<FNVENC>().IsValid(),
+            Codec?Codec->GetString():FString(),!Negotiate || Negotiate->GetBool(),Error);
+        if(!bNVENCValidated)
+        {
+            RejectStartup(Error);
+            return;
+        }
+    }
+    auto* Decouple=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming2.DecoupleFramerate"));
+    auto* CaptureFPS=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming2.WebRTC.Fps"));
+    UE_LOG(LogTemp,Display,TEXT("GHS_PS2_CONFIG encoder=%s nvencApiValidated=%d fixedTargetFps=%d captureFps=%d decoupledCapture=%d fixedSimulationDelta=0"),
+        *StartupOptions.Encoder,int32(bNVENCValidated),StartupOptions.FixedFPS,CaptureFPS?CaptureFPS->GetInt():-1,Decouple?Decouple->GetInt():-1);
+}
+
 bool ValidBudget(const FBudget& Budget)
 {
     return Budget.Sequence>0 && Budget.Sequence<=9007199254740991LL && (Budget.FPS==0 || (Budget.FPS>=5 && Budget.FPS<=120))
@@ -102,7 +146,12 @@ public:
                 else Metrics->SetField(Key,MakeShared<FJsonValueNull>());
             };
             AddCVar(TEXT("appliedFps"),TEXT("t.MaxFPS"));
-            AddCVar(TEXT("captureFps"),TEXT("PixelStreaming.WebRTC.Fps"));
+            AddCVar(TEXT("captureFps"),TEXT("PixelStreaming2.WebRTC.Fps"));
+            AddCVar(TEXT("decoupledCapture"),TEXT("PixelStreaming2.DecoupleFramerate"));
+            Metrics->SetStringField(TEXT("streamingPlugin"),TEXT("PixelStreaming2"));
+            Metrics->SetStringField(TEXT("encoderPolicy"),StartupOptions.Encoder);
+            Metrics->SetBoolField(TEXT("nvencApiValidated"),bNVENCValidated);
+            Metrics->SetNumberField(TEXT("fixedTargetFps"),StartupOptions.FixedFPS);
             AddCVar(TEXT("screenPercentage"),TEXT("r.ScreenPercentage"));
             // Report the effective AA history independently from the native
             // render percentage, so a remote quality check cannot confuse them.
@@ -176,15 +225,17 @@ bool ApplyBudget(const FBudget& Budget,int64& LastSequence,FString& Error)
     Error.Reset();
     if(!ValidBudget(Budget) || Budget.Sequence<=LastSequence)
     { Error=TEXT("Invalid or already acknowledged budget"); return false; }
+    if(StartupOptions.FixedFPS>0 && Budget.FPS!=StartupOptions.FixedFPS)
+    { Error=TEXT("Fixed FPS is enabled; adaptive budgets cannot change its target"); return false; }
     auto* FrameLimit=IConsoleManager::Get().FindConsoleVariable(TEXT("t.MaxFPS"));
-    auto* MinBitrate=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming.WebRTC.MinBitrate"));
-    auto* MaxBitrate=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming.WebRTC.MaxBitrate"));
+    auto* MinBitrate=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming2.WebRTC.MinBitrate"));
+    auto* MaxBitrate=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming2.WebRTC.MaxBitrate"));
     if(!FrameLimit || !MinBitrate || !MaxBitrate)
     { Error=TEXT("Pixel Streaming runtime variables are not ready"); return false; }
     const int32 Min=FMath::RoundToInt(Budget.MinBitrateMbps*1000000),Max=FMath::RoundToInt(Budget.MaxBitrateMbps*1000000);
-    // Keep negotiated RTP parameters unchanged. The project PixelStreaming patch omits
-    // max_framerate for startup FPS=0; coupled capture follows actual rendered frames.
-    // A finite configured ceiling still uses only t.MaxFPS for temporary workload control.
+    // Keep PS2's positive negotiated RTP ceiling unchanged. The legacy FPS=0
+    // plugin patch is deliberately not carried into EpicRtc. Render-only budgets
+    // may still remove t.MaxFPS without sending zero to the capture/encode clock.
     // These three variables are the entire control surface. No GEngine->Exec or user commands.
     FrameLimit->Set(Budget.FPS,ECVF_SetByConsole);
     if(Min>MaxBitrate->GetInt()) { MaxBitrate->Set(Max,ECVF_SetByConsole); MinBitrate->Set(Min,ECVF_SetByConsole); }
@@ -194,9 +245,68 @@ bool ApplyBudget(const FBudget& Budget,int64& LastSequence,FString& Error)
     LastSequence=Budget.Sequence; return true;
 }
 
+bool ParseStartupOptions(const TCHAR* CommandLine,FStartupOptions& Out,FString& Error)
+{
+    Error.Reset();
+    FStartupOptions Parsed;
+    FParse::Value(CommandLine,TEXT("PixelStreamingEncoder="),Parsed.Encoder);
+    if(Parsed.Encoder.Equals(TEXT("NVIDIA"),ESearchCase::IgnoreCase)) Parsed.Encoder=TEXT("NVIDIA");
+    else if(Parsed.Encoder.Equals(TEXT("Auto"),ESearchCase::IgnoreCase)) Parsed.Encoder=TEXT("Auto");
+    else { Error=TEXT("PixelStreamingEncoder must be NVIDIA or Auto"); return false; }
+    FString FPS;
+    if(FParse::Value(CommandLine,TEXT("FixedFPS="),FPS))
+    {
+        if(FPS.IsEmpty() || !FPS.IsNumeric() || !LexTryParseString(Parsed.FixedFPS,*FPS)
+            || Parsed.FixedFPS<5 || Parsed.FixedFPS>120 || FPS!=FString::FromInt(Parsed.FixedFPS))
+        { Error=TEXT("FixedFPS must be an integer between 5 and 120"); return false; }
+    }
+    if(Parsed.FixedFPS>0 && (FParse::Param(CommandLine,TEXT("UseFixedTimeStep")) || FParse::Param(CommandLine,TEXT("Deterministic"))))
+    { Error=TEXT("FixedFPS targets real render/capture FPS and cannot be combined with a fixed simulation timestep"); return false; }
+    Out=Parsed; return true;
+}
+
+bool ValidateNvidiaPolicy(bool bNvidiaRHI,bool bNVENCAPIAvailable,const FString& ActualCodec,bool bNegotiateCodecs,FString& Error)
+{
+    Error.Reset();
+    if(!bNvidiaRHI || !bNVENCAPIAvailable)
+    { Error=TEXT("NVIDIA was requested but the active RHI / NVENC API is unavailable. Check the GPU adapter and driver, or select Auto."); return false; }
+    if(!ActualCodec.Equals(TEXT("H264"),ESearchCase::IgnoreCase) && !ActualCodec.Equals(TEXT("AV1"),ESearchCase::IgnoreCase))
+    { Error=TEXT("NVIDIA mode requires an effective H264/AV1 codec; PixelStreaming2 may have fallen back during hardware encoder initialization."); return false; }
+    if(bNegotiateCodecs)
+    { Error=TEXT("NVIDIA mode cannot negotiate software codecs; the effective codec negotiation setting must be disabled."); return false; }
+    return true;
+}
+
 void Startup()
 {
     if(Bridge) return;
+    FString StartupError;
+    if(!ParseStartupOptions(FCommandLine::Get(),StartupOptions,StartupError)) { RejectStartup(StartupError); return; }
+    if(StartupOptions.FixedFPS>0)
+    {
+        auto* FrameLimit=IConsoleManager::Get().FindConsoleVariable(TEXT("t.MaxFPS"));
+        auto* CaptureFPS=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming2.WebRTC.Fps"));
+        if(!FrameLimit || !CaptureFPS) { RejectStartup(TEXT("PixelStreaming2 settings were not loaded")); return; }
+        FrameLimit->Set(StartupOptions.FixedFPS,ECVF_SetByCommandline);
+        CaptureFPS->Set(StartupOptions.FixedFPS,ECVF_SetByCommandline);
+    }
+    if(StartupOptions.Encoder==TEXT("NVIDIA"))
+    {
+        auto* Codec=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming2.Encoder.Codec"));
+        auto* Negotiate=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming2.WebRTC.NegotiateCodecs"));
+        const FString CodecName=Codec?Codec->GetString():FString();
+        if(!Codec || !Negotiate || (CodecName!=TEXT("H264") && CodecName!=TEXT("AV1")))
+        { RejectStartup(TEXT("NVIDIA mode requires H264 or AV1 in PixelStreaming2")); return; }
+        // Prevent negotiation of a software-only codec while NVIDIA is explicitly required.
+        Negotiate->Set(false,ECVF_SetByCommandline);
+        // Bind during the project's Default loading phase, before PS2's OnReady
+        // factory checks at OnAllModuleLoadingPhasesComplete can signal a fallback.
+        SoftwareFallbackHandle=UPixelStreaming2Delegates::Get()->OnFallbackToSoftwareEncodingNative.AddLambda([]()
+        {
+            AsyncTask(ENamedThreads::GameThread,[](){ RejectStartup(TEXT("NVIDIA mode rejected a PixelStreaming2 software encoder fallback; check GPU codec support and NVENC session capacity.")); });
+        });
+    }
+    EngineReadyHandle=FCoreDelegates::OnFEngineLoopInitComplete.AddStatic(&ValidateEncoder);
     FString Directory;
     if(!FParse::Value(FCommandLine::Get(),TEXT("GHSStreamControlDir="),Directory)) return;
     if(Directory.IsEmpty() || FPaths::IsRelative(Directory) || Directory.StartsWith(TEXT("\\\\")) || Directory.StartsWith(TEXT("//")))
@@ -211,6 +321,10 @@ void Startup()
 
 void Shutdown()
 {
+    FCoreDelegates::OnFEngineLoopInitComplete.Remove(EngineReadyHandle); EngineReadyHandle.Reset();
+    if(SoftwareFallbackHandle.IsValid() && IPixelStreaming2Module::IsAvailable())
+        UPixelStreaming2Delegates::Get()->OnFallbackToSoftwareEncodingNative.Remove(SoftwareFallbackHandle);
+    SoftwareFallbackHandle.Reset();
     if(Ticker.IsValid()) { FTSTicker::GetCoreTicker().RemoveTicker(Ticker); Ticker.Reset(); }
     Bridge.Reset();
 }

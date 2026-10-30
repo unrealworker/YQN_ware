@@ -7,7 +7,7 @@
 
 class UGHSDockTruckHUDWidget;
 class UGHSTwinHUDWidget;
-class UPixelStreamingInput;
+class UGHSStreamingInputComponent;
 class UGHSWarehouseRoofComponent;
 class AGHSCampusTrafficActor;
 class UGHSStorageCapacityComponent;
@@ -62,7 +62,7 @@ protected:
     virtual void OnUnPossess() override;
 private:
     UFUNCTION() void HandleStreamingInput(const FString& Descriptor);
-    UPROPERTY(Transient) TObjectPtr<UPixelStreamingInput> SearchStreamingInput;
+    UPROPERTY(Transient) TObjectPtr<UGHSStreamingInputComponent> SearchStreamingInput;
     void ConsumeOrbitMotion();
     void FinishTwinOrbitRelease();
     FVector2D PendingMouse = FVector2D::ZeroVector;

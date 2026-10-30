@@ -10,17 +10,21 @@ const { performance } = require('node:perf_hooks');
 const { spawn } = require('node:child_process');
 const { WebSocketServer, WebSocket } = require('ws');
 const { BudgetPolicy, readMetrics, writeBudget } = require('./resource-budget');
-const { createPeerComparisonProxy } = require('./peer-comparison-proxy');
 
 const EVICTED = '管理员已断开此连接，已停止自动重连。需要再次访问时请主动重新进入。';
-const DEFAULTS = { ...NETWORK_DEFAULTS, httpPort: 8080, streamerPort: 8888, showWindow: false, width: 1920, height: 1080, mode: 'shared', fps: 0, minBitrateMbps: 1, startBitrateMbps: 8, maxBitrateMbps: 24, qualityProfile: 'clear', adaptiveResourceBudget: true };
+const DEFAULTS = { ...NETWORK_DEFAULTS, httpPort: 8080, streamerPort: 8888, showWindow: false, width: 1920, height: 1080, mode: 'shared', fps: 60, fixedFps: true, encoderAsync: true, encoder: 'NVIDIA', minBitrateMbps: 1, startBitrateMbps: 8, maxBitrateMbps: 24, qualityProfile: 'clear', adaptiveResourceBudget: false };
 function validateConfig(raw) {
   const config = { ...DEFAULTS, ...raw };
+  if (Object.hasOwn(raw, 'fps') && !Object.hasOwn(raw, 'fixedFps')) { config.fixedFps = false; if (!Object.hasOwn(raw, 'adaptiveResourceBudget')) config.adaptiveResourceBudget = true; }
   for (const key of ['httpPort', 'streamerPort']) if (!Number.isInteger(config[key]) || config[key] < 1 || config[key] > 65535) throw Error('端口必须是1至65535的整数：' + key);
   if (config.httpPort === config.streamerPort) throw Error('网页端口和信令端口必须不同');
   if (!['shared', 'independent'].includes(config.mode)) throw Error('模式必须为 shared 或 independent');
   if (typeof config.showWindow !== 'boolean') throw Error('showWindow 必须是布尔值');
   if (typeof config.adaptiveResourceBudget !== 'boolean') throw Error('adaptiveResourceBudget 必须是布尔值');
+  for (const key of ['fixedFps', 'encoderAsync']) if (typeof config[key] !== 'boolean') throw Error(key + ' 必须是布尔值');
+  if (!['NVIDIA', 'Auto'].includes(config.encoder)) throw Error('编码器必须为 NVIDIA 或 Auto');
+  if (config.fixedFps && config.fps === 0) throw Error('固定目标帧率必须为15至120');
+  if (config.fixedFps && config.adaptiveResourceBudget) throw Error('固定目标帧率与自动分配资源不能同时启用');
   if (!['balanced', 'clear', 'ultra', 'custom'].includes(config.qualityProfile)) throw Error('无效画质档位');
   if (![config.width, config.height].every(n => Number.isInteger(n) && n >= 320 && n <= 7680)) throw Error('分辨率必须为320至7680的整数');
   if (!Number.isInteger(config.fps) || (config.fps !== 0 && (config.fps < 15 || config.fps > 120))) throw Error('帧率必须为0（无固定上限）或15至120');
@@ -30,16 +34,19 @@ function validateConfig(raw) {
 }
 function buildUEArgs(c, id, controlDir, streamerToken) {
   const quality = c.qualityProfile || 'clear';
-  const args = ['-PixelStreamingURL=ws://127.0.0.1:' + c.streamerPort + (streamerToken ? '/?streamerToken=' + encodeURIComponent(streamerToken) : ''), '-PixelStreamingID=' + id,
-    '-ResX=' + c.width, '-ResY=' + c.height, '-ForceRes', '-AudioMixer', '-Unattended', '-NoSplash', '-NoVSync', '-GHSLowLatencyPlayout', '-StdOut', '-FullStdOutLogOutput',
-    c.showWindow ? '-Windowed' : '-RenderOffscreen', '-PixelStreamingWebRTCFps=' + c.fps,
+  const args = ['-PixelStreamingConnectionURL=ws://127.0.0.1:' + c.streamerPort + (streamerToken ? '/?streamerToken=' + encodeURIComponent(streamerToken) : ''), '-PixelStreamingID=' + id,
+    '-ResX=' + c.width, '-ResY=' + c.height, '-ForceRes', '-AudioMixer', '-Unattended', '-NoSplash', '-NoVSync', '-StdOut', '-FullStdOutLogOutput',
+    c.showWindow ? '-Windowed' : '-RenderOffscreen', '-PixelStreamingWebRTCFps=' + (c.fps > 0 ? c.fps : 120),
     '-PixelStreamingWebRTCMinBitrate=' + c.minBitrateMbps * 1000000, '-PixelStreamingWebRTCStartBitrate=' + c.startBitrateMbps * 1000000,
-    '-PixelStreamingWebRTCMaxBitrate=' + c.maxBitrateMbps * 1000000, '-PixelStreamingEncoderMaxBitrate=' + c.maxBitrateMbps * 1000000,
-    '-PixelStreamingWebRTCMinPort=50000', '-PixelStreamingWebRTCMaxPort=50199', '-PixelStreamingWebRTCDegradationPreference=MAINTAIN_RESOLUTION',
-    '-PixelStreamingEncoderPreset=' + (quality === 'balanced' ? 'DEFAULT' : 'HIGH_QUALITY'),
-    '-PixelStreamingEncoderRateControl=CBR', '-PixelStreamingEncoderMinQP=0',
-    '-PixelStreamingEncoderMaxQP=' + (quality === 'ultra' ? 28 : quality === 'clear' ? 32 : 36),
-    '-ExecCmds=t.MaxFPS ' + c.fps + ',r.VSync 0,PixelStreaming.DecoupleFramerate 0,r.ScreenPercentage 100,r.DynamicRes.OperationMode 0,r.MotionBlurQuality 0,r.DepthOfFieldQuality 0,r.Tonemapper.Sharpen 0.3'];
+    '-PixelStreamingWebRTCMaxBitrate=' + c.maxBitrateMbps * 1000000,
+    '-PixelStreamingWebRTCMinPort=50000', '-PixelStreamingWebRTCMaxPort=50199',
+    '-PixelStreamingEncoderQualityPreset=' + (quality === 'balanced' ? 'DEFAULT' : 'HIGH_QUALITY'),
+    '-PixelStreamingEncoderLatencyMode=ULTRA_LOW_LATENCY', '-PixelStreamingEncoderMaxQuality=100',
+    '-PixelStreamingEncoderMinQuality=' + (quality === 'ultra' ? 45 : quality === 'clear' ? 37 : 29),
+    '-PixelStreamingDecoupleFramerate=' + c.encoderAsync,
+    '-PixelStreamingEncoder=' + c.encoder,
+    '-ExecCmds=t.MaxFPS ' + c.fps + ',r.VSync 0,r.ScreenPercentage 100,r.DynamicRes.OperationMode 0,r.MotionBlurQuality 0,r.DepthOfFieldQuality 0,r.Tonemapper.Sharpen 0.3'];
+  if (c.fixedFps) args.push('-FixedFPS=' + c.fps);
   if (controlDir) args.push('-GHSStreamControlDir=' + controlDir);
   return args;
 }
@@ -47,10 +54,14 @@ const send = (ws, message) => { if (ws?.readyState === WebSocket.OPEN) ws.send(J
 function parseMessage(bytes, side) {
   const m = JSON.parse(bytes);
   if (!m || typeof m !== 'object' || Array.isArray(m) || typeof m.type !== 'string') throw Error('Expected message object');
-  const allowed = side === 'player' ? ['listStreamers', 'subscribe', 'unsubscribe', 'offer', 'answer', 'iceCandidate', 'ping', 'pong'] : ['endpointId', 'offer', 'answer', 'iceCandidate', 'disconnectPlayer', 'ping', 'pong'];
+  const allowed = side === 'player' ? ['listStreamers', 'subscribe', 'unsubscribe', 'layerPreference', 'offer', 'answer', 'iceCandidate', 'ping', 'pong'] : ['endpointId', 'offer', 'answer', 'iceCandidate', 'disconnectPlayer', 'ping', 'pong'];
   if (!allowed.includes(m.type)) throw Error('Unsupported message type');
   if (m.type === 'subscribe' && (typeof m.streamerId !== 'string' || m.streamerId.length > 100)) throw Error('Invalid streamer ID');
   if (m.type === 'endpointId' && (typeof m.id !== 'string' || m.id.length > 100)) throw Error('Invalid endpoint ID');
+  // UE5.8 sends this when initializing PreferredQuality, including direct
+  // connections. Match the official int32/string shape; it is SFU-only and
+  // never grants routing authority from a client-supplied playerId.
+  if (m.type === 'layerPreference' && (['spatialLayer', 'temporalLayer'].some(key => !Number.isInteger(m[key]) || m[key] < -2147483648 || m[key] > 2147483647) || (m.playerId !== undefined && (typeof m.playerId !== 'string' || m.playerId.length > 100)))) throw Error('Invalid layer preference');
   if (['offer', 'answer'].includes(m.type) && (typeof m.sdp !== 'string' || m.sdp.length > 256000)) throw Error('Invalid SDP');
   if (m.type === 'iceCandidate') {
     const c = m.candidate;
@@ -108,7 +119,7 @@ function createService(rawConfig, options = {}) {
   }
   function log(text) { let safe = String(text); for (const secret of [config.accessCode, config.turnPassword, config.turnUsername, config.turnUrl, config.stunUrl, ...[...instances.values()].map(i => i.streamerToken)]) if (secret) { safe = safe.split(JSON.stringify(secret).slice(1, -1)).join('[已隐藏]'); safe = safe.split(secret).join('[已隐藏]'); } const line = new Date().toISOString() + ' ' + safe.slice(0, 1500); logs.push(line); if (logs.length > 100) logs.shift(); options.onLog?.(line); }
   function urls() { if (config.networkMode === 'public') return [config.publicUrl + '/']; const ips = Object.values(os.networkInterfaces()).flat().filter(x => x && x.family === 'IPv4' && !x.internal).map(x => x.address); return [...new Set(ips)].map(ip => `${scheme}://${ip}:${config.httpPort}/`); }
-  function status() { return { state, message, mode: config.mode, networkMode: config.networkMode, publicUrl: config.publicUrl, accessProtectionEnabled: config.accessProtectionEnabled, tlsEnabled: !!config.tlsCertPath, trustProxy: config.trustProxy, externalTlsTermination: config.externalTlsTermination, qualityProfile: config.qualityProfile, adaptiveResourceBudget: config.adaptiveResourceBudget, viewerCount: viewers.size, maxViewers: config.maxViewers,
+  function status() { return { state, message, mode: config.mode, networkMode: config.networkMode, publicUrl: config.publicUrl, accessProtectionEnabled: config.accessProtectionEnabled, tlsEnabled: !!config.tlsCertPath, trustProxy: config.trustProxy, externalTlsTermination: config.externalTlsTermination, qualityProfile: config.qualityProfile, fixedFps: config.fixedFps, captureFps: config.fps > 0 ? config.fps : 120, encoderAsync: config.encoderAsync, encoder: config.encoder, adaptiveResourceBudget: config.adaptiveResourceBudget, viewerCount: viewers.size, maxViewers: config.maxViewers,
     viewers: [...viewers.values()].map(v => ({ playerId: v.playerId, displayName: v.displayName, address: v.address, userAgent: v.userAgent, connectedAt: v.connectedAt, state: !v.ws ? 'reconnecting' : v.subscribed ? 'connected' : instances.get(v.instanceId)?.state === 'failed' ? 'failed' : instances.get(v.instanceId)?.state === 'queued' ? 'queued' : 'starting', instanceId: v.instanceId })),
     instances: [...instances.values()].map(i => ({ id: i.id, pid: i.child?.pid || null, state: i.state, targetFps: i.targetFps, actualFps: i.metrics?.actualFps ?? null, gpuMs: i.metrics?.gpuMs ?? null, budgetAcknowledged: !!i.metrics && i.metrics.sequence === i.sequence, screenPercentage: i.metrics?.screenPercentage ?? null })), urls: urls(), localUrl: `${scheme}://127.0.0.1:${config.httpPort}/`, logs: [...logs] }; }
   function rebalance() {
@@ -122,25 +133,10 @@ function createService(rawConfig, options = {}) {
     }
   }
   const sameOrigin = req => requestSameOrigin(req, config);
-  // A local, opt-in deployment sidecar exposes the comparison player through
-  // the existing HTTPS origin. Never bypass the launcher's access protection.
-  let comparisonConfig = options.peerComparison;
-  if (comparisonConfig === undefined) {
-    try { comparisonConfig = JSON.parse(fs.readFileSync(path.join(__dirname, 'peer-comparison.json'), 'utf8').replace(/^\uFEFF/, '')); }
-    catch (error) { if (error.code !== 'ENOENT') log('对比入口配置无效，入口保持关闭'); comparisonConfig = {}; }
-  }
-  let comparisonProxy;
-  try {
-    comparisonProxy = createPeerComparisonProxy(config.accessProtectionEnabled ? {} : comparisonConfig, {
-      sameOrigin,
-      canConnect: () => !['stopping', 'stopped'].includes(state) && viewers.size + comparisonProxy.connectionCount < config.maxViewers
-    });
-  } catch { log('对比入口端口无效，入口保持关闭'); comparisonProxy = createPeerComparisonProxy(); }
-  function publicSession(s) { return { token: s.token, evicted: !!s.evicted, message: s.evicted ? EVICTED : '', mode: config.mode, maxViewers: config.maxViewers, width: config.width, height: config.height, fps: config.fps, minBitrateMbps: config.minBitrateMbps, startBitrateMbps: config.startBitrateMbps, maxBitrateMbps: config.maxBitrateMbps }; }
+  function publicSession(s) { return { token: s.token, evicted: !!s.evicted, message: s.evicted ? EVICTED : '', mode: config.mode, maxViewers: config.maxViewers, width: config.width, height: config.height, fps: config.fps, captureFps: config.fps > 0 ? config.fps : 120, minBitrateMbps: config.minBitrateMbps, startBitrateMbps: config.startBitrateMbps, maxBitrateMbps: config.maxBitrateMbps }; }
   function pruneSessions() { const now = Date.now(); for (const [id, s] of sessions) if (!viewers.has(id) && now - s.created > 12 * 60 * 60 * 1000) sessions.delete(id); for (const [ip, attempt] of authAttempts) if (now > attempt.until) authAttempts.delete(ip); }
   const handlePublic = async (req, res) => {
     try {
-      if (comparisonProxy.handleHttp(req, res)) return;
       const url = new URL(req.url, 'http://localhost');
       if (req.method === 'GET' && url.pathname === '/health') return json(res, 200, { state, mode: config.mode, viewerCount: viewers.size, maxViewers: config.maxViewers, accessRequired: config.accessProtectionEnabled });
       if (req.method === 'POST' && url.pathname === '/api/session') {
@@ -222,7 +218,6 @@ function createService(rawConfig, options = {}) {
   const playersWS = new WebSocketServer({ noServer: true, maxPayload: 1024 * 1024, perMessageDeflate: false });
   const streamersWS = new WebSocketServer({ noServer: true, maxPayload: 1024 * 1024, perMessageDeflate: false });
   publicServer.on('upgrade', (req, socket, head) => {
-    if (comparisonProxy.handleUpgrade(req, socket, head)) return;
     let url; try { url = new URL(req.url, 'http://localhost'); } catch { return socket.destroy(); }
     if (state === 'stopping' || state === 'stopped' || url.pathname !== '/ws' || !sameOrigin(req) || !sessions.has(url.searchParams.get('token'))) { socket.write('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n'); return socket.destroy(); }
     playersWS.handleUpgrade(req, socket, head, ws => {
@@ -232,7 +227,7 @@ function createService(rawConfig, options = {}) {
     });
   });
   streamerServer.on('upgrade', (req, socket, head) => {
-    // Native UE 5.4 libwebsockets supplies a loopback Origin; browsers must not
+    // Native UE libwebsockets supplies a loopback Origin; browsers must not
     // bootstrap onto this local control channel, even from a malicious website.
     const origins = [undefined, '127.0.0.1', 'http://127.0.0.1', 'http://127.0.0.1:' + config.streamerPort];
     let url; try { url = new URL(req.url, 'http://localhost'); } catch { return socket.destroy(); }
@@ -290,7 +285,7 @@ function createService(rawConfig, options = {}) {
     if (ws.readyState !== WebSocket.OPEN || ['stopping', 'stopped'].includes(state)) return ws.close(1001, 'Service stopping');
     let viewer = viewers.get(session.token);
     if (!viewer) {
-      if (viewers.size + comparisonProxy.connectionCount >= config.maxViewers) {
+      if (viewers.size >= config.maxViewers) {
         send(ws, { type: 'ghsFull', message: `当前 ${config.maxViewers} 个访问名额已满，请稍后重新进入。`, reconnect: false });
         return ws.close(4004, 'Service at capacity');
       }
@@ -315,6 +310,8 @@ function createService(rawConfig, options = {}) {
       const instance = instances.get(viewer.instanceId);
       if (m.type === 'listStreamers') return sendStreamerList(viewer);
       if (m.type === 'ping') return send(ws, { type: 'pong', time: m.time });
+      // This service connects each player directly to its owned UE, not an SFU.
+      if (m.type === 'layerPreference') return;
       if (m.type === 'subscribe') {
         if (m.streamerId !== viewer.instanceId || instance?.state !== 'ready') return send(ws, { type: 'warning', message: '所请求的实例不可用' });
         if (!viewer.subscribed) { viewer.subscribed = true; send(instance.ws, { type: 'playerConnected', playerId: viewer.playerId, dataChannel: true, sfu: false, sendOffer: true }); }
@@ -361,9 +358,8 @@ function createService(rawConfig, options = {}) {
       const controlRoot = options.controlRoot || os.tmpdir(); fs.mkdirSync(controlRoot, { recursive: true });
       instance.controlDir = fs.mkdtempSync(path.join(controlRoot, 'ghs-instance-'));
       rebalance();
-      // The project's patched UE5.4 plugin treats 0 as uncapped capture/RTP.
-      // Finite requests keep their selected ceiling while the private bridge can
-      // respond to measured pressure without restarting an existing viewer.
+      // PS2 capture negotiation stays positive; 0 only uncaps rendering.
+      // Fixed targets prevent the private resource bridge from lowering FPS.
       const child = spawnProcess(config.executablePath, buildUEArgs(config, id, instance.controlDir, instance.streamerToken), { cwd: path.dirname(config.executablePath), shell: false, windowsHide: !config.showWindow, stdio: ['ignore', 'pipe', 'pipe'] });
       instance.child = child; log('启动UE实例 ' + id + '，PID ' + child.pid);
       // Immediate starts are reported after admit binds viewer.ws. Queued starts
@@ -398,7 +394,6 @@ function createService(rawConfig, options = {}) {
     if (stopPromise) return stopPromise;
     stopPromise = (async () => {
       state = 'stopping'; message = '正在清理本服务的场景实例'; clearInterval(heartbeat); clearInterval(budgetTimer);
-      comparisonProxy.close();
       clearTimeout(cloudAuthTimer); cloudAuthTimer = undefined;
       for (const pending of cloudAuthQueue.splice(0)) pending.finish(503);
       await admission;

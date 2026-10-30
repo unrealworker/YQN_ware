@@ -1,4 +1,4 @@
-/* UE5.4 frontend 1.1.6 compatibility and receiver diagnostics; no extra stats poll. */
+/* UE5.8 frontend 0.1.3 session policy and receiver diagnostics; no extra stats poll. */
 (function (root, factory) {
   const api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
@@ -42,14 +42,12 @@
       }).join(newline);
     }).join('');
   }
-  function configureUncapped(config, fps) {
-    if (fps !== 0) return;
-    // The pinned SDK exposes its SettingNumber objects, but its FPS minimum is 1.
-    // Change that single bound before constructing PixelStreaming so subsequent
-    // InitialSettings messages cannot turn the server's uncapped 0 into 1 FPS.
-    const setting = config.getNumericSettings?.().find(s => s.id === 'WebRTCFPS');
-    if (setting) setting._min = 0;
-    config.setNumericSetting('WebRTCFPS', 0);
+  function captureFPS(session) {
+    // Rendering can be uncapped (t.MaxFPS=0); PS2's media capture clock must
+    // remain positive. Older sessions don't expose the separate capture field.
+    const fps = session.captureFps ?? (session.fps > 0 ? session.fps : 120);
+    if (!Number.isInteger(fps) || fps < 15 || fps > 120) throw Error('会话采集帧率配置无效，请检查启动器设置');
+    return fps;
   }
   function configureReceivers(peer) {
     let applied = false;
@@ -99,5 +97,5 @@
     const kind = relay ? 'TURN 中继' : privateAddress(remote?.address) ? '内网地址' : remote?.candidateType === 'srflx' || remote?.candidateType === 'prflx' ? '公网映射' : '直连';
     return kind + ' · ' + protocol;
   }
-  return { configureBitrates, configureUncapped, configureReceivers, createMeter, describePath };
+  return { configureBitrates, captureFPS, configureReceivers, createMeter, describePath };
 });

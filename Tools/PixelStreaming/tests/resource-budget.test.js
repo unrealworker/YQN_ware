@@ -2,6 +2,14 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { readMetrics, BudgetPolicy } = require('../server/resource-budget');
+
+test('fixed FPS target survives sustained contention and changing connection count', () => {
+  const policy = new BudgetPolicy({ mode: 'independent', fps: 60, fixedFps: true, adaptiveResourceBudget: true });
+  for (let now = 0; now < 30000; now += 1000) {
+    const metrics = Array.from({ length: now < 10000 ? 3 : 10 }, (_, i) => ({ id: String(i), appliedFps: 60, actualFps: 12, receivedAt: now }));
+    assert.equal(policy.update(metrics, now), 60);
+  }
+});
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');

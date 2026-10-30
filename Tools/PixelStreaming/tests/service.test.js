@@ -6,6 +6,7 @@ const { spawn } = require('node:child_process');
 const { once, EventEmitter } = require('node:events');
 const path = require('node:path');
 const fs = require('node:fs');
+const vm = require('node:vm');
 const WebSocket = require('ws');
 const { createService, validateConfig, buildUEArgs } = require('../server/service');
 
@@ -19,7 +20,7 @@ async function setup(t, mode = 'shared', observedExitDelayMs = 0, extra = {}) {
   const service = createService(config, { token, reconnectGraceMs: 60, spawnProcess(exe, args, opts) {
     assert.equal(opts.shell, false); assert.equal(exe, process.execPath);
     const id = args.find(x => x.startsWith('-PixelStreamingID=')).split('=')[1];
-    const streamerUrl = args.find(x => x.startsWith('-PixelStreamingURL=')).slice('-PixelStreamingURL='.length); streamerUrls.push(streamerUrl);
+    const streamerUrl = args.find(x => x.startsWith('-PixelStreamingConnectionURL=')).slice('-PixelStreamingConnectionURL='.length); streamerUrls.push(streamerUrl);
     const child = spawn(process.execPath, [path.join(__dirname, 'mock-ue.js'), streamerUrl, id], { stdio: 'ignore', windowsHide: true });
     children.push(child);
     if (!observedExitDelayMs) return child;
@@ -48,7 +49,7 @@ async function startupQueueFixture(t, failStartAt = 0) {
   const service = createService(config, { token, reconnectGraceMs: 60, spawnProcess(_exe, args) {
     if (++starts === failStartAt) throw Error('fixture spawn rejected');
     const child = new EventEmitter(); child.pid = null; child.exitCode = null; child.signalCode = null;
-    launched.push({ child, id: args.find(a => a.startsWith('-PixelStreamingID=')).slice('-PixelStreamingID='.length), url: args.find(a => a.startsWith('-PixelStreamingURL=')).slice('-PixelStreamingURL='.length), directory: args.find(a => a.startsWith('-GHSStreamControlDir=')).slice('-GHSStreamControlDir='.length) });
+    launched.push({ child, id: args.find(a => a.startsWith('-PixelStreamingID=')).slice('-PixelStreamingID='.length), url: args.find(a => a.startsWith('-PixelStreamingConnectionURL=')).slice('-PixelStreamingConnectionURL='.length), directory: args.find(a => a.startsWith('-GHSStreamControlDir=')).slice('-GHSStreamControlDir='.length) });
     return child;
   } });
   await service.start(); t.after(() => service.stop());
@@ -129,11 +130,11 @@ test('configuration rejects invalid ports, dimensions and bitrate order; UE argu
   assert.ok(args.includes('-ResX=1920')); assert.ok(args.includes('-RenderOffscreen'));
   assert.ok(args.includes('-PixelStreamingWebRTCMinPort=50000'));
   assert.ok(args.includes('-PixelStreamingWebRTCMaxPort=50199'));
-  assert.ok(args.includes('-PixelStreamingEncoderPreset=HIGH_QUALITY'));
-  assert.ok(args.includes('-PixelStreamingEncoderMaxQP=32'));
+  assert.ok(args.includes('-PixelStreamingEncoderQualityPreset=HIGH_QUALITY'));
+  assert.ok(args.includes('-PixelStreamingEncoderMinQuality=37'));
   assert.ok(args.some(x => x.includes('r.ScreenPercentage 100') && x.includes('r.DynamicRes.OperationMode 0')));
-  assert.ok(buildUEArgs(validateConfig({ ...cfg, qualityProfile: 'ultra' }), 'shared').includes('-PixelStreamingEncoderMaxQP=28'));
-  for (const qualityProfile of ['balanced', 'custom']) assert.ok(buildUEArgs(validateConfig({ ...cfg, qualityProfile }), 'shared').includes('-PixelStreamingEncoderMaxQP=36'));
+  assert.ok(buildUEArgs(validateConfig({ ...cfg, qualityProfile: 'ultra' }), 'shared').includes('-PixelStreamingEncoderMinQuality=45'));
+  for (const qualityProfile of ['balanced', 'custom']) assert.ok(buildUEArgs(validateConfig({ ...cfg, qualityProfile }), 'shared').includes('-PixelStreamingEncoderMinQuality=29'));
   assert.equal(args.some(a => a.includes('EncoderTargetBitrate')), false, 'congestion controller must retain bitrate control');
   assert.throws(() => validateConfig({ ...cfg, qualityProfile: 'unknown' }), /画质/);
   assert.throws(() => validateConfig({ ...cfg, adaptiveResourceBudget: 'true' }), /布尔/);
@@ -150,9 +151,35 @@ test('unlimited configuration uses an explicit zero frame cap and accepts a low 
 test('defaults allow WebRTC congestion adaptation while explicit existing quality budgets remain intact', () => {
   const cfg = { executablePath: process.execPath, httpPort: 8080, streamerPort: 8888 };
   const defaults = validateConfig(cfg);
-  assert.deepEqual([defaults.fps, defaults.minBitrateMbps, defaults.startBitrateMbps, defaults.maxBitrateMbps], [0, 1, 8, 24]);
+  assert.deepEqual([defaults.fps, defaults.minBitrateMbps, defaults.startBitrateMbps, defaults.maxBitrateMbps], [60, 1, 8, 24]);
   const existing = validateConfig({ ...cfg, fps: 60, minBitrateMbps: 12, startBitrateMbps: 35, maxBitrateMbps: 60, qualityProfile: 'custom' });
   assert.deepEqual([existing.fps, existing.minBitrateMbps, existing.startBitrateMbps, existing.maxBitrateMbps], [60, 12, 35, 60]);
+});
+
+test('PixelStreaming2 controls validate and reach actual launch arguments without fixed simulation time', () => {
+  const cfg = { executablePath: process.execPath };
+  const fresh = validateConfig(cfg);
+  assert.deepEqual([fresh.encoderAsync, fresh.encoder, fresh.fixedFps, fresh.fps, fresh.adaptiveResourceBudget], [true, 'NVIDIA', true, 60, false]);
+  let args = buildUEArgs(fresh, 'shared');
+  for (const expected of ['-PixelStreamingDecoupleFramerate=true', '-PixelStreamingEncoder=NVIDIA', '-FixedFPS=60', '-PixelStreamingWebRTCFps=60']) assert.ok(args.includes(expected), expected);
+  assert.equal(args.some(a => /UseFixedTimeStep|PixelStreamingEncoderAsync|EncoderRateControl|EncoderMaxQP|EncoderMaxBitrate|PixelStreaming\.Decouple/.test(a)), false);
+  args = buildUEArgs(validateConfig({ ...cfg, encoderAsync: false, encoder: 'Auto', fixedFps: false, fps: 45, adaptiveResourceBudget: true }), 'independent');
+  assert.ok(args.includes('-PixelStreamingDecoupleFramerate=false')); assert.ok(args.includes('-PixelStreamingEncoder=Auto')); assert.ok(args.includes('-PixelStreamingWebRTCFps=45'));
+  assert.equal(args.some(a => a.startsWith('-FixedFPS=')), false);
+  for (const bad of [{ encoderAsync: 'true' }, { fixedFps: 1 }, { encoder: 'NVIDIA & command' }, { fixedFps: true, fps: 0 }, { fixedFps: true, adaptiveResourceBudget: true }]) assert.throws(() => validateConfig({ ...cfg, ...bad }));
+  const legacy = validateConfig({ ...cfg, fps: 0 }); assert.equal(legacy.fixedFps, false); assert.equal(legacy.adaptiveResourceBudget, true);
+});
+
+test('removed comparison route cannot proxy an obsolete peer-stream service', async t => {
+  const ctx = await setup(t); assert.equal((await fetch(ctx.base + '/peer-stream/')).status, 404);
+});
+
+test('uncapped render sessions and resumed sessions advertise positive PS2 capture FPS', async t => {
+  const ctx = await setup(t, 'shared', 0, { fps: 0, fixedFps: false }); let session;
+  for (let i = 0; i < 2; i++) {
+    const res = await fetch(ctx.base + '/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(session ? { token: session.token } : {}) });
+    assert.equal(res.status, 200); session = await res.json(); assert.equal(session.fps, 0); assert.equal(session.captureFps, 120);
+  }
 });
 
 test('new and resumed public sessions expose the exact launcher SDP bitrate budget', async t => {
@@ -166,16 +193,18 @@ test('new and resumed public sessions expose the exact launcher SDP bitrate budg
   }
 });
 
-test('unlimited launch removes render and capture caps without forcing queued frames or a fake high ceiling', () => {
+test('uncapped rendering keeps a valid positive PixelStreaming2 capture negotiation rate', () => {
   const config = validateConfig({ executablePath: process.execPath, httpPort: 8080, streamerPort: 8888, fps: 0 });
   const args = buildUEArgs(config, 'shared');
   assert.ok(args.includes('-NoVSync'));
-  assert.ok(args.includes('-GHSLowLatencyPlayout'));
-  assert.ok(args.includes('-PixelStreamingWebRTCFps=0'));
+  assert.ok(args.includes('-PixelStreamingEncoderLatencyMode=ULTRA_LOW_LATENCY'));
+  assert.equal(args.includes('-GHSLowLatencyPlayout'), false);
+  assert.ok(args.includes('-PixelStreamingWebRTCFps=120'));
   const commands = args.find(a => a.startsWith('-ExecCmds=')).slice('-ExecCmds='.length).split(',');
   assert.ok(commands.includes('t.MaxFPS 0'));
   assert.ok(commands.includes('r.VSync 0'));
-  assert.ok(commands.includes('PixelStreaming.DecoupleFramerate 0'));
+  assert.ok(args.includes('-PixelStreamingDecoupleFramerate=true'));
+  assert.equal(args.some(a => a.startsWith('-FixedFPS=')), false);
   assert.equal(args.some(a => /DisableFrameDropper|UseFixedTimeStep|FixedFrameRate/.test(a)), false);
   assert.ok(args.includes('-PixelStreamingWebRTCMinBitrate=1000000'));
 });
@@ -334,6 +363,48 @@ test('JSON null/primitive/array and malformed message shapes cannot crash player
     const ws = new WebSocket(ctx.streamerUrls[0]); let closed;
     ws.on('close', code => { closed = code; }); await once(ws, 'open'); ws.send(JSON.stringify(bad)); await until(() => closed); assert.equal(closed, 1007);
     assert.equal((await fetch(ctx.base + '/health')).status, 200);
+  }
+});
+
+test('official UE5.8 quality initialization does not disconnect or forward SFU layer preferences to a direct UE', async t => {
+  const scope = { window: {}, Event, EventTarget, TextEncoder, TextDecoder, URLSearchParams, console };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../player/vendor/epic-ue5.8-0.1.3.js'), 'utf8'), scope);
+  const sdk = scope.window['lib-pixelstreamingfrontend'];
+  const preference = sdk.MessageHelpers.createMessage(sdk.Messages.layerPreference, { spatialLayer: 2, temporalLayer: 0 });
+  assert.equal(preference.playerId, '', 'the SDK supplies an empty default ID');
+  const ctx = await startupQueueFixture(t), player = await viewer(ctx);
+  const upstream = await acknowledgeStartup(ctx.launched[0]), upstreamMessages = [];
+  upstream.on('message', bytes => upstreamMessages.push(JSON.parse(bytes)));
+  await until(() => ctx.service.status().instances[0]?.state === 'ready');
+  player.ws.send(JSON.stringify({ type: 'listStreamers' }));
+  player.ws.send(JSON.stringify({ type: 'subscribe', streamerId: ctx.launched[0].id }));
+  player.ws.send(JSON.stringify(preference));
+  player.ws.send(JSON.stringify({ ...preference, playerId: '9999999999999999' }));
+  player.ws.send(JSON.stringify({ type: 'ping', time: 1234 }));
+  await until(() => player.messages.some(m => m.type === 'pong' && m.time === 1234));
+  assert.equal(player.close, undefined); assert.equal(player.ws.readyState, WebSocket.OPEN);
+  assert.equal(upstreamMessages.some(m => m.type === 'layerPreference'), false);
+  const connected = upstreamMessages.find(m => m.type === 'playerConnected'); assert.ok(connected);
+  assert.equal(connected.sfu, false);
+  upstream.send(JSON.stringify({ type: 'offer', playerId: connected.playerId, sdp: 'direct-offer' }));
+  await until(() => player.messages.some(m => m.type === 'offer' && m.sdp === 'direct-offer'));
+  player.ws.send(JSON.stringify({ type: 'answer', sdp: 'direct-answer' }));
+  await until(() => upstreamMessages.some(m => m.type === 'answer' && m.sdp === 'direct-answer'));
+  assert.equal(upstreamMessages.find(m => m.type === 'answer').playerId, connected.playerId);
+});
+
+test('malformed UE5.8 layer preferences and unrelated SFU-only messages still fail closed', async t => {
+  const ctx = await setup(t);
+  const valid = { type: 'layerPreference', spatialLayer: 2, temporalLayer: 0, playerId: '' };
+  for (const bad of [
+    { type: 'layerPreference' }, { ...valid, spatialLayer: '2' }, { ...valid, spatialLayer: 1.5 },
+    { ...valid, temporalLayer: null }, { ...valid, temporalLayer: 2147483648 },
+    { ...valid, spatialLayer: -2147483649 }, { ...valid, playerId: {} }, { ...valid, playerId: 'x'.repeat(101) },
+    { type: 'dataChannelRequest' }, { type: 'peerDataChannelsReady' }, { type: 'unknownMessage' }
+  ]) {
+    const player = await viewer(ctx); player.ws.send(JSON.stringify(bad));
+    await until(() => player.close); assert.equal(player.close.code, 1007);
+    await delay(80);
   }
 });
 
@@ -596,7 +667,7 @@ test('native HTTPS performs a verified TLS handshake and accepts WSS with authen
 test('streamer channel rejects browser origins and never releases ICE secrets before owned identity', async t => {
   let ownedUrl;
   const config = { executablePath: process.execPath, httpPort: await freePort(), streamerPort: await freePort(), mode: 'shared', turnUrl: 'turn:relay.example:3478', turnUsername: 'test-relay-user', turnPassword: 'test-private-relay-secret' };
-  const service = createService(config, { token, spawnProcess(_exe, args) { ownedUrl = args.find(a => a.startsWith('-PixelStreamingURL=')).slice('-PixelStreamingURL='.length); const child = new EventEmitter(); child.pid = null; child.exitCode = 0; return child; } });
+  const service = createService(config, { token, spawnProcess(_exe, args) { ownedUrl = args.find(a => a.startsWith('-PixelStreamingConnectionURL=')).slice('-PixelStreamingConnectionURL='.length); const child = new EventEmitter(); child.pid = null; child.exitCode = 0; return child; } });
   await service.start(); t.after(() => service.stop());
   async function rejected(url, origin) {
     return new Promise((resolve, reject) => {
