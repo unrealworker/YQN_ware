@@ -12,6 +12,7 @@ const launcher = argument('--launcher', path.join(repo, 'Saved/PixelStreaming/Pu
 const runtime = argument('--runtime', path.join(repo, 'Deployment/GHSPixelStreaming/runtime'));
 const engineRoot = argument('--engine-root', 'D:/UE/UE_5.8');
 if(output===repo || !output.startsWith(repo+path.sep)) throw Error('交付输出必须为项目工作目录内的独立子目录');
+if(fs.existsSync(path.join(output,'server/media-address.json'))) throw Error('交付目录含部署专用 server/media-address.json，请使用不含服务器配置的交付目录');
 const required = [
  'App/Windows/TestGame.exe', 'App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe',
  'App/Windows/Engine/Binaries/Win64/EpicWebHelper.exe',

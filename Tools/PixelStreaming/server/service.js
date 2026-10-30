@@ -10,6 +10,7 @@ const { performance } = require('node:perf_hooks');
 const { spawn } = require('node:child_process');
 const { WebSocketServer, WebSocket } = require('ws');
 const { BudgetPolicy, readMetrics, writeBudget } = require('./resource-budget');
+const { loadMediaAddress, publicMediaCandidate } = require('./media-address');
 
 const EVICTED = '管理员已断开此连接，已停止自动重连。需要再次访问时请主动重新进入。';
 const DEFAULTS = { ...NETWORK_DEFAULTS, httpPort: 8080, streamerPort: 8888, showWindow: false, width: 1920, height: 1080, mode: 'shared', fps: 60, fixedFps: true, encoderAsync: true, encoder: 'NVIDIA', minBitrateMbps: 1, startBitrateMbps: 8, maxBitrateMbps: 24, qualityProfile: 'clear', adaptiveResourceBudget: false };
@@ -83,9 +84,16 @@ function createService(rawConfig, options = {}) {
   const playerRoot = path.resolve(options.playerRoot || path.join(__dirname, '../player'));
   const sessions = new Map(), viewers = new Map(), instances = new Map(), authAttempts = new Map();
   const ice = iceServers(config), scheme = config.tlsCertPath ? 'https' : 'http';
+  const mediaAddress = loadMediaAddress(config.networkMode, options.mediaAddress);
   const logs = []; let state = 'starting', message = '正在启动服务', order = 0, nextPlayer = 1, stopPromise, admission = Promise.resolve(), heartbeat, budgetTimer, startingInstance;
   const budgetPolicy = new BudgetPolicy(config);
   const reconnectGraceMs = options.reconnectGraceMs ?? 8000;
+  // Internal clock overrides support bounded loopback lifecycle tests, never
+  // public settings. Initialization keeps its original 120-second total budget.
+  const startupTimeoutMs = options.startupTimeoutMs ?? 120000;
+  const identificationTimeoutMs = options.identificationTimeoutMs ?? 10000;
+  const heartbeatIntervalMs = options.heartbeatIntervalMs ?? 10000;
+  for (const [value, maximum] of [[startupTimeoutMs, 120000], [identificationTimeoutMs, 10000], [heartbeatIntervalMs, 10000]]) if (!Number.isInteger(value) || value < 1 || value > maximum) throw Error('无效的内部连接期限');
   const spawnProcess = options.spawnProcess || spawn;
   const cloudAuthQueue = [];
   let cloudAuthTokens = 10, cloudAuthUpdated = performance.now(), cloudAuthTimer;
@@ -118,10 +126,19 @@ function createService(rawConfig, options = {}) {
     });
   }
   function log(text) { let safe = String(text); for (const secret of [config.accessCode, config.turnPassword, config.turnUsername, config.turnUrl, config.stunUrl, ...[...instances.values()].map(i => i.streamerToken)]) if (secret) { safe = safe.split(JSON.stringify(secret).slice(1, -1)).join('[已隐藏]'); safe = safe.split(secret).join('[已隐藏]'); } const line = new Date().toISOString() + ' ' + safe.slice(0, 1500); logs.push(line); if (logs.length > 100) logs.shift(); options.onLog?.(line); }
+  function initializing(i) { return i && instances.get(i.id) === i && i.state === 'starting' && i.child && i.startDeadline > performance.now(); }
+  function startupElapsed(i) { return i.startedAt === undefined ? null : Math.max(0, Math.round((i.startEndedAt ?? performance.now()) - i.startedAt)); }
+  function identityWait(i) { return i.pendingWS ? Math.max(0, Math.round(performance.now() - i.identityStartedAt)) : i.identityWaitMs ?? null; }
+  function logStartup(i, phase, detail = '') { log('GHS_STARTUP id=' + i.id + ' phase=' + phase + ' elapsedMs=' + startupElapsed(i) + ' identityWaitMs=' + identityWait(i) + (detail ? ' ' + detail : '')); }
+  function closePendingIdentity(i) {
+    clearTimeout(i.identityTimer); i.identityTimer = undefined;
+    const ws = i.pendingWS;
+    if (ws) { i.identityWaitMs = identityWait(i); i.pendingWS = null; ws.terminate(); }
+  }
   function urls() { if (config.networkMode === 'public') return [config.publicUrl + '/']; const ips = Object.values(os.networkInterfaces()).flat().filter(x => x && x.family === 'IPv4' && !x.internal).map(x => x.address); return [...new Set(ips)].map(ip => `${scheme}://${ip}:${config.httpPort}/`); }
   function status() { return { state, message, mode: config.mode, networkMode: config.networkMode, publicUrl: config.publicUrl, accessProtectionEnabled: config.accessProtectionEnabled, tlsEnabled: !!config.tlsCertPath, trustProxy: config.trustProxy, externalTlsTermination: config.externalTlsTermination, qualityProfile: config.qualityProfile, fixedFps: config.fixedFps, captureFps: config.fps > 0 ? config.fps : 120, encoderAsync: config.encoderAsync, encoder: config.encoder, adaptiveResourceBudget: config.adaptiveResourceBudget, viewerCount: viewers.size, maxViewers: config.maxViewers,
     viewers: [...viewers.values()].map(v => ({ playerId: v.playerId, displayName: v.displayName, address: v.address, userAgent: v.userAgent, connectedAt: v.connectedAt, state: !v.ws ? 'reconnecting' : v.subscribed ? 'connected' : instances.get(v.instanceId)?.state === 'failed' ? 'failed' : instances.get(v.instanceId)?.state === 'queued' ? 'queued' : 'starting', instanceId: v.instanceId })),
-    instances: [...instances.values()].map(i => ({ id: i.id, pid: i.child?.pid || null, state: i.state, targetFps: i.targetFps, actualFps: i.metrics?.actualFps ?? null, gpuMs: i.metrics?.gpuMs ?? null, budgetAcknowledged: !!i.metrics && i.metrics.sequence === i.sequence, screenPercentage: i.metrics?.screenPercentage ?? null })), urls: urls(), localUrl: `${scheme}://127.0.0.1:${config.httpPort}/`, logs: [...logs] }; }
+    instances: [...instances.values()].map(i => ({ id: i.id, pid: i.child?.pid || null, state: i.state, startupStage: i.startupStage || i.state, startupElapsedMs: startupElapsed(i), identityWaitMs: identityWait(i), targetFps: i.targetFps, actualFps: i.metrics?.actualFps ?? null, gpuMs: i.metrics?.gpuMs ?? null, budgetAcknowledged: !!i.metrics && i.metrics.sequence === i.sequence, screenPercentage: i.metrics?.screenPercentage ?? null })), urls: urls(), localUrl: `${scheme}://127.0.0.1:${config.httpPort}/`, logs: [...logs] }; }
   function rebalance() {
     if (state === 'stopping' || state === 'stopped') return;
     const active = [...instances.values()].filter(i => !['queued', 'stopping', 'failed'].includes(i.state));
@@ -233,19 +250,36 @@ function createService(rawConfig, options = {}) {
     let url; try { url = new URL(req.url, 'http://localhost'); } catch { return socket.destroy(); }
     const suppliedToken = url.searchParams.get('streamerToken');
     const expectedInstance = [...instances.values()].find(i => suppliedToken && secretEqual(suppliedToken, i.streamerToken));
-    if (!origins.includes(req.headers.origin) || !expectedInstance || ['stopping', 'failed'].includes(expectedInstance.state) || ['stopping', 'stopped'].includes(state)) {
+    if (!origins.includes(req.headers.origin) || !expectedInstance?.child || !['starting', 'ready', 'reconnecting'].includes(expectedInstance.state) || expectedInstance.pendingWS || (expectedInstance.state === 'starting' && !initializing(expectedInstance)) || ['stopping', 'stopped'].includes(state)) {
       socket.write('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n'); return socket.destroy();
     }
     streamersWS.handleUpgrade(req, socket, head, ws => {
     ws.alive = true; ws.on('pong', () => { ws.alive = true; }); ws.on('error', () => {}); let instance;
-    const identityTimeout = setTimeout(() => { if (!instance) ws.close(1008, 'Identification required'); }, 10000); identityTimeout.unref();
+    expectedInstance.pendingWS = ws; expectedInstance.identityStartedAt = performance.now(); ws.initializingInstance = expectedInstance;
+    const startupGrace = initializing(expectedInstance);
+    // Only the token-authenticated, already-spawned process inherits its own
+    // remaining initialization budget. Reconnects cannot reset that deadline.
+    const identityBudget = startupGrace ? Math.max(1, expectedInstance.startDeadline - performance.now()) : identificationTimeoutMs;
+    if (startupGrace) expectedInstance.startupStage = 'waitingIdentity';
+    logStartup(expectedInstance, startupGrace ? 'waitingIdentity' : 'reconnectIdentity', 'deadlineRemainingMs=' + Math.round(identityBudget));
+    // The original process-start timer owns initial failure and cleanup; do not
+    // race it with a second timer or restart it after a transport reconnect.
+    const identityTimeout = startupGrace ? undefined : setTimeout(() => {
+      if (instance) return;
+      logStartup(expectedInstance, 'identityTimeout');
+      ws.close(1008, 'Identification required');
+    }, identityBudget); identityTimeout?.unref(); expectedInstance.identityTimer = identityTimeout;
+    if (startupGrace) for (const viewer of viewers.values()) if (viewer.instanceId === expectedInstance.id) notifyStage(viewer, 'initializingStreamer', '场景进程已连接，正在完成资源和界面初始化');
     send(ws, { type: 'identify' });
     ws.on('message', bytes => {
       let m; try { m = parseMessage(bytes, 'streamer'); } catch { return ws.close(1007, 'Invalid signalling message'); }
       if (m.type === 'endpointId') {
         const candidate = instances.get(m.id);
-        if (!candidate || candidate !== expectedInstance || candidate.state === 'stopping' || candidate.state === 'failed' || (candidate.ws && candidate.ws !== ws)) return ws.close(1008, 'Unknown or duplicate streamer');
-        instance = candidate; instance.ws = ws; instance.state = 'ready'; instance.readyAt = Date.now(); clearTimeout(instance.startTimer); clearTimeout(identityTimeout);
+        if (!candidate || candidate !== expectedInstance || candidate.state === 'stopping' || candidate.state === 'failed' || (candidate.state === 'starting' && !initializing(candidate)) || (candidate.ws && candidate.ws !== ws)) return ws.close(1008, 'Unknown or duplicate streamer');
+        if (instance === candidate) return; // Duplicate acknowledgments do not restart readiness or release more queued work.
+        instance = candidate; instance.identityWaitMs = identityWait(instance); instance.pendingWS = null; instance.identityTimer = undefined;
+        instance.ws = ws; ws.alive = true; instance.state = 'ready'; instance.startupStage = 'ready'; instance.readyAt = Date.now(); instance.startEndedAt ??= performance.now(); clearTimeout(instance.startTimer); clearTimeout(identityTimeout);
+        logStartup(instance, 'ready');
         releaseStartupSlot(instance);
         send(ws, { type: 'config', peerConnectionOptions: { iceServers: ice } });
         // Releasing this slot can synchronously fail the next launch. Readiness of
@@ -260,13 +294,26 @@ function createService(rawConfig, options = {}) {
       const viewer = [...viewers.values()].find(v => v.playerId === String(m.playerId) && v.instanceId === instance.id && v.subscribed);
       if (!viewer) return;
       if (m.type === 'disconnectPlayer') { send(viewer.ws, { type: 'ghsInstanceFailed', message: '场景已断开当前视频连接' }); viewer.ws?.close(1011, 'Streamer disconnected player'); return; }
-      if (['offer', 'answer', 'iceCandidate'].includes(m.type)) { const outgoing = { ...m }; delete outgoing.playerId; send(viewer.ws, outgoing); }
+      if (['offer', 'answer', 'iceCandidate'].includes(m.type)) {
+        const outgoing = { ...m }; delete outgoing.playerId; send(viewer.ws, outgoing);
+        // Only augment authenticated UE candidates already scoped to this viewer.
+        // Keep native candidates so local/VPN viewers can still use their route.
+        if (m.type === 'iceCandidate') {
+          const mapped = publicMediaCandidate(m.candidate, mediaAddress);
+          if (mapped) send(viewer.ws, { ...outgoing, candidate: mapped });
+        }
+      }
     });
-    ws.on('close', () => {
+    ws.on('close', code => {
       clearTimeout(identityTimeout);
+      if (expectedInstance.pendingWS === ws) {
+        expectedInstance.identityWaitMs = identityWait(expectedInstance); expectedInstance.pendingWS = null; expectedInstance.identityTimer = undefined;
+        if (expectedInstance.state === 'starting') expectedInstance.startupStage = 'processStarting';
+        logStartup(expectedInstance, 'identitySocketClosed', 'code=' + code);
+      }
       if (!instance || instance.ws !== ws) return;
       instance.ws = null;
-      if (!['stopping', 'failed'].includes(instance.state) && state !== 'stopping') { instance.state = 'reconnecting'; log('UE信令连接断开：' + instance.id); for (const viewer of viewers.values()) if (viewer.instanceId === instance.id) { viewer.subscribed = false; notifyStage(viewer, 'waitingStreamer', '场景信令连接断开，等待恢复'); } }
+      if (!['stopping', 'failed'].includes(instance.state) && state !== 'stopping') { instance.state = 'reconnecting'; instance.startupStage = 'reconnecting'; log('UE信令连接断开：' + instance.id); for (const viewer of viewers.values()) if (viewer.instanceId === instance.id) { viewer.subscribed = false; notifyStage(viewer, 'waitingStreamer', '场景信令连接断开，等待恢复'); } }
     });
     });
   });
@@ -302,7 +349,7 @@ function createService(rawConfig, options = {}) {
     send(ws, { type: 'config', peerConnectionOptions: { iceServers: ice } });
     const instance = instances.get(viewer.instanceId);
     if (instance?.state === 'failed') send(ws, { type: 'ghsInstanceFailed', message: 'UE场景启动失败或意外退出，请在启动器停止后重新开启' });
-    else notifyStage(viewer, instance?.state === 'ready' ? 'streamerReady' : instance?.state === 'queued' ? 'queued' : 'waitingStreamer', instance?.state === 'ready' ? '场景已就绪，正在建立视频连接' : instance?.state === 'queued' ? '场景正在排队，前序场景就绪后开始启动' : '正在启动UE场景，等待信令连接');
+    else notifyStage(viewer, instance?.state === 'ready' ? 'streamerReady' : instance?.state === 'queued' ? 'queued' : instance?.startupStage === 'waitingIdentity' ? 'initializingStreamer' : 'waitingStreamer', instance?.state === 'ready' ? '场景已就绪，正在建立视频连接' : instance?.state === 'queued' ? '场景正在排队，前序场景就绪后开始启动' : instance?.startupStage === 'waitingIdentity' ? '场景进程已连接，正在完成资源和界面初始化' : '正在启动UE场景，等待信令连接');
     log('访问者接入：' + viewer.playerId); broadcastCount();
     ws.on('message', bytes => {
       if (viewer.ws !== ws || viewers.get(viewer.token) !== viewer || session.evicted) return;
@@ -347,7 +394,8 @@ function createService(rawConfig, options = {}) {
     const id = instance.id;
     const failed = detail => {
       if (['stopping', 'failed'].includes(instance.state) || state === 'stopping' || state === 'stopped') return;
-      clearTimeout(instance.startTimer); instance.state = 'failed'; state = 'degraded'; message = 'UE实例失败：' + detail; log(message);
+      clearTimeout(instance.startTimer); instance.state = 'failed'; instance.startupStage = 'failed'; instance.startEndedAt ??= performance.now(); state = 'degraded'; message = 'UE实例失败：' + detail; log(message);
+      logStartup(instance, 'failed'); closePendingIdentity(instance);
       instance.ws?.close(1011, 'UE exited');
       rebalance();
       for (const v of viewers.values()) if (v.instanceId === id) { v.subscribed = false; send(v.ws, { type: 'ghsInstanceFailed', message }); }
@@ -360,14 +408,16 @@ function createService(rawConfig, options = {}) {
       rebalance();
       // PS2 capture negotiation stays positive; 0 only uncaps rendering.
       // Fixed targets prevent the private resource bridge from lowering FPS.
+      instance.startedAt = performance.now(); instance.startDeadline = instance.startedAt + startupTimeoutMs; instance.startupStage = 'processStarting';
       const child = spawnProcess(config.executablePath, buildUEArgs(config, id, instance.controlDir, instance.streamerToken), { cwd: path.dirname(config.executablePath), shell: false, windowsHide: !config.showWindow, stdio: ['ignore', 'pipe', 'pipe'] });
       instance.child = child; log('启动UE实例 ' + id + '，PID ' + child.pid);
+      logStartup(instance, 'processStarting');
       // Immediate starts are reported after admit binds viewer.ws. Queued starts
       // have an existing socket and must advance their stage now, exactly once.
       for (const v of viewers.values()) if (v.instanceId === id && v.ws) notifyStage(v, 'waitingStreamer', '正在启动UE场景，等待信令连接');
       for (const stream of [child.stdout, child.stderr]) stream?.on('data', bytes => { const lines = bytes.toString().split(/\r?\n/).filter(Boolean); for (const line of lines.slice(-6)) if (/error|fatal|PixelStreaming|Signalling|Warning/i.test(line)) log('[' + id + '] ' + line); });
       child.once('error', e => failed('启动失败：' + e.message)); child.once('exit', (code, signal) => failed('实例 ' + id + ' 退出（' + (code ?? signal) + '）'));
-      instance.startTimer = setTimeout(() => failed('实例 ' + id + ' 在120秒内未连接信令服务器'), 120000); instance.startTimer.unref();
+      instance.startTimer = setTimeout(() => failed('实例 ' + id + ' 在' + (startupTimeoutMs / 1000) + '秒内未完成' + (instance.pendingWS ? '信令身份确认' : '信令连接')), Math.max(1, instance.startDeadline - performance.now())); instance.startTimer.unref();
     } catch (e) { failed('启动失败：' + e.message); }
     return instance;
   }
@@ -379,12 +429,18 @@ function createService(rawConfig, options = {}) {
     else child.kill('SIGTERM');
     if (child.exitCode === null && child.signalCode === null) await new Promise((resolve, reject) => { const forceTimer = setTimeout(() => child.kill('SIGKILL'), 3000); const failTimer = setTimeout(() => reject(Error('无法确认自有UE进程退出：' + child.pid)), 8000); child.once('exit', () => { clearTimeout(forceTimer); clearTimeout(failTimer); resolve(); }); });
   }
-  async function stopInstance(instance) { if (!instance) return; instance.state = 'stopping'; clearTimeout(instance.startTimer); instance.ws?.terminate(); await stopProcess(instance); instances.delete(instance.id); if (instance.controlDir) fs.rmSync(instance.controlDir, { recursive: true, force: true }); rebalance(); releaseStartupSlot(instance); }
+  async function stopInstance(instance) { if (!instance) return; instance.state = 'stopping'; instance.startupStage = 'stopping'; instance.startEndedAt ??= performance.now(); clearTimeout(instance.startTimer); closePendingIdentity(instance); instance.ws?.terminate(); await stopProcess(instance); instances.delete(instance.id); if (instance.controlDir) fs.rmSync(instance.controlDir, { recursive: true, force: true }); rebalance(); releaseStartupSlot(instance); }
   async function start() {
     try {
       await listen(streamerServer, config.streamerPort, '127.0.0.1'); await listen(publicServer, config.httpPort, config.trustProxy ? '127.0.0.1' : '0.0.0.0'); await listen(controlServer, 0, '127.0.0.1');
       state = 'running'; message = '服务已启动'; log('网页服务 ' + scheme + '://' + (config.trustProxy ? '127.0.0.1' : '0.0.0.0') + ':' + config.httpPort + '，UE信令仅本机:' + config.streamerPort);
-      heartbeat = setInterval(() => { pruneSessions(); for (const server of [playersWS, streamersWS]) for (const ws of server.clients) { if (!ws.alive) { ws.terminate(); continue; } ws.alive = false; ws.ping(); } }, 10000); heartbeat.unref();
+      heartbeat = setInterval(() => { pruneSessions(); for (const server of [playersWS, streamersWS]) for (const ws of server.clients) {
+        // A native initialization stall may also delay pong dispatch. Only this
+        // one owned pending socket shares the same absolute startup deadline.
+        const ownedInitialization = ws.initializingInstance?.pendingWS === ws && initializing(ws.initializingInstance);
+        if (!ws.alive && !ownedInitialization) { ws.terminate(); continue; }
+        ws.alive = false; if (ws.readyState === WebSocket.OPEN) ws.ping();
+      } }, heartbeatIntervalMs); heartbeat.unref();
       budgetTimer = setInterval(rebalance, 2000); budgetTimer.unref();
       if (config.mode === 'shared') startInstance('shared');
       return status();

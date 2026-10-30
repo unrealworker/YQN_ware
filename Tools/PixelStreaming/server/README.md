@@ -22,6 +22,14 @@ Each viewer row contains `playerId`, optional `displayName`, client `address`, b
 
 A manually disconnected browser does not automatically reconnect, including on reload. The user must explicitly choose re-entry; access-code protection, when enabled, requires the code again. This is a connection-disconnect action, not a permanent identity/IP ban.
 
+### Bounded UE initialization
+
+An already spawned UE process authenticates its loopback signal socket with its own random token. Its first `endpointId` may arrive after scene/UI initialization, so that one pending socket shares the existing **120-second deadline measured from process launch**. Connecting or reconnecting never extends the deadline. An unknown token/origin is rejected; only one pending identity socket is allowed for an instance, and no ICE credentials or player routing are released before the matching endpoint identity. Ready-instance reconnects retain the ordinary **10-second identity deadline**.
+
+Missing heartbeat replies during this initial wait share the same bounded process deadline; the normal heartbeat resumes after identity. Process exit, administrator removal and service stop immediately close pending sockets. Startup capacity advances only after a valid identity or completed failed-process cleanup, never just a WebSocket connection.
+
+Management instance rows include `startupStage`, `startupElapsedMs` and `identityWaitMs`. `GHS_STARTUP` logs record process start, waiting identity, ready, identity timeout or failure without tokens or raw URLs. The player shows “场景进程已连接，正在完成资源和界面初始化” using its existing progress design. Signalling identity is not proof of a decoded video frame.
+
 ## Public network configuration
 
 | Field | Purpose |
@@ -44,6 +52,20 @@ Choose one entry arrangement:
 2. **Local reverse proxy:** set `trustProxy:true`, configure the public HTTPS origin and let the proxy terminate TLS. The Node player server then listens only on 127.0.0.1. The proxy must preserve the public `Host`, support WebSocket upgrade, and append its client address to `X-Forwarded-For`. Only a loopback peer is trusted; the last forwarded address is used.
 3. **External cloud HTTPS load balancer:** set `externalTlsTermination:true` and the exact public HTTPS origin, leaving PEM paths empty and `trustProxy:false`. The HTTP player service listens on server interfaces for remote backhaul. Preserve the public Host and WebSocket Upgrade. Restrict the backend TCP port to the actual load balancer source addresses in both cloud security groups and Windows Firewall. This flag does not trust forwarded client addresses: viewer addresses remain the socket peer. Cloud authentication uses the bounded global throttle described below so failed attempts do not lock out all users sharing an ALB peer. `/health` is suitable for the load balancer health check. The load balancer must own the public certificate and HTTPS listener; this configuration does not create them.
 4. **Initial public-IP test:** explicitly use an `http://IP:port` public URL without TLS or proxy. HTTP does not encrypt the access code or signalling; use HTTPS for the finished deployment.
+
+### Optional EIP media mapping
+
+An HTTP/HTTPS load balancer does not carry WebRTC UDP media. Where the UE host has an explicitly configured **1:1 EIP mapping preserving UDP ports 50000–50199**, the operator can create `server/media-address.json` on that deployment:
+
+```json
+{ "privateIp": "10.0.0.10", "publicIp": "203.0.113.10" }
+```
+
+These are illustrative addresses; replace both with the host's actual interface address and its bound EIP. Restart the service after editing. Public mode reads this optional file; an absent file leaves normal ICE behavior unchanged. The private IPv4 must exist on a local interface, and invalid mappings stop startup rather than advertising an unrelated host. This does not create an EIP, firewall rule, NAT mapping or TURN service.
+
+Only authenticated UE host candidates addressed to that instance's subscribed viewer are supplemented. The native LAN/VPN candidate is retained, and a lower-preference public `srflx` candidate is added only for matching UDP host addresses within 50000–50199, with the same port. Player-supplied candidates, TCP, TURN/relay and other interfaces/ports are not rewritten.
+
+This JSON is deployment-owned, ignored by Git, excluded from builds and forbidden in delivery manifests. The installer preserves its exact existing bytes even if an old manifest incorrectly claimed it, and aborts if it changes during staging. A portable delivery directory containing it is rejected; do not copy a server's EIP configuration into a distributable package.
 
 `POST /api/session` creates a random 48-hex bearer token. With `accessProtectionEnabled:false` (the default), it does so without an access code and the player enters automatically. With protection enabled, both LAN and public modes require a valid code first. Explicit non-boolean values such as `"false"`, `0` or `null` are rejected. Public mode still requires a valid public URL and matching TLS arrangement even when the gate is off. Stop and restart the service to apply changes; a valid existing session token still resumes without prompting again.
 
