@@ -9,7 +9,7 @@ using System.Threading;
 using System.Web.Script.Serialization;
 namespace Ghs.PixelStreaming
 {
-    public class InstanceStatus { public string id {get;set;} public int pid {get;set;} public string state {get;set;} public int targetFps {get;set;} public double? actualFps {get;set;} }
+    public class InstanceStatus { public string id {get;set;} public int? pid {get;set;} public string state {get;set;} public int targetFps {get;set;} public double? actualFps {get;set;} }
     public class ViewerStatus { public string playerId {get;set;} public string displayName {get;set;} public string address {get;set;} public string userAgent {get;set;} public string connectedAt {get;set;} public string state {get;set;} public string instanceId {get;set;} }
     public class ServiceStatus { public string state {get;set;} public string message {get;set;} public string mode {get;set;} public int viewerCount {get;set;} public int maxViewers {get;set;} public ViewerStatus[] viewers {get;set;} public InstanceStatus[] instances {get;set;} public string[] urls {get;set;} public string[] logs {get;set;} }
     public sealed class ServiceSession : IDisposable

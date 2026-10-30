@@ -28,6 +28,48 @@ namespace Ghs.PixelStreaming
         private static string FixtureRoot() { string root=Path.Combine(scratch,Guid.NewGuid().ToString("N")); Directory.CreateDirectory(Path.Combine(root,"runtime")); Directory.CreateDirectory(Path.Combine(root,"server")); File.Copy(Executable,Path.Combine(root,"runtime","node.exe")); File.WriteAllText(Path.Combine(root,"server","server.js"),""); return root; }
         private static LauncherConfig FixtureConfig() { LauncherConfig c=Config(); c.httpPort=FreePort(); do { c.streamerPort=FreePort(); } while(c.httpPort==c.streamerPort); return c; }
         private static Dictionary<string,object> ConfigValues(LauncherConfig c) { JavaScriptSerializer json=new JavaScriptSerializer(); return json.Deserialize<Dictionary<string,object>>(json.Serialize(c)); }
+        private const string QueuedStatusJson = "{\"state\":\"running\",\"mode\":\"independent\",\"viewerCount\":2,\"maxViewers\":10,\"instances\":[{\"id\":\"viewer-000000000001\",\"pid\":12345,\"state\":\"ready\",\"targetFps\":60,\"actualFps\":59.8},{\"id\":\"viewer-000000000002\",\"pid\":null,\"state\":\"queued\",\"targetFps\":60,\"actualFps\":null}],\"viewers\":[],\"urls\":[],\"logs\":[]}";
+        private static void AssertQueuedStatusPolling()
+        {
+            string root=FixtureRoot(); BindingFlags flags=BindingFlags.Instance|BindingFlags.NonPublic;
+            using(ServiceSession session=new ServiceSession(root)) {
+                session.Start(FixtureConfig());
+                FieldInfo portField=typeof(ServiceSession).GetField("controlPort",flags);
+                int originalPort=(int)portField.GetValue(session);
+                string expectedAuthorization="Authorization: Bearer "+(string)typeof(ServiceSession).GetField("token",flags).GetValue(session);
+                TcpListener listener=new TcpListener(IPAddress.Loopback,0); listener.Start();
+                Exception serverFailure=null; int requests=0;
+                Thread server=new Thread(delegate() {
+                    try {
+                        for(int i=0;i<4;i++) using(TcpClient client=listener.AcceptTcpClient()) {
+                            client.ReceiveTimeout=4000; client.SendTimeout=4000;
+                            using(NetworkStream stream=client.GetStream()) using(StreamReader reader=new StreamReader(stream,Encoding.ASCII,false,1024,true)) {
+                                Assert(reader.ReadLine()=="GET /status HTTP/1.1","ReadStatus changed its control request");
+                                bool authorized=false; string header;
+                                while(!string.IsNullOrEmpty(header=reader.ReadLine())) if(header==expectedAuthorization) authorized=true;
+                                Assert(authorized,"ReadStatus lost authenticated control access");
+                                byte[] body=Encoding.UTF8.GetBytes(QueuedStatusJson);
+                                byte[] head=Encoding.ASCII.GetBytes("HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: "+body.Length+"\r\nConnection: close\r\n\r\n");
+                                stream.Write(head,0,head.Length); stream.Write(body,0,body.Length); stream.Flush(); requests++;
+                            }
+                        }
+                    } catch(Exception ex) { serverFailure=ex; }
+                });
+                server.IsBackground=true; server.Start();
+                try {
+                    portField.SetValue(session,((IPEndPoint)listener.LocalEndpoint).Port);
+                    for(int i=0;i<4;i++) {
+                        ServiceStatus result=session.ReadStatus();
+                        Assert(result.instances.Length==2 && (object)result.instances[1].pid==null,"Queued PID must remain absent during HTTP polling");
+                        Assert(result.instances[0].pid==12345 && session.State=="running","Queued status interrupted the running session");
+                    }
+                    Assert(server.Join(4000),"Status fixture did not complete");
+                    Assert(serverFailure==null && requests==4,"Authenticated status fixture failed");
+                } finally {
+                    portField.SetValue(session,originalPort); listener.Stop(); server.Join(4000); session.Stop();
+                }
+            }
+        }
         private static void EventuallyGone(int id) { Stopwatch t=Stopwatch.StartNew(); while(Alive(id) && t.ElapsedMilliseconds<4000) Thread.Sleep(40); Assert(!Alive(id),"Owned PID survived job close: "+id); }
         private static void AssertRoundedButtonBackgrounds()
         {
@@ -213,6 +255,19 @@ namespace Ghs.PixelStreaming
             });
             Test("TURN strict URI ports and missing URL match backend validation",delegate { LauncherConfig c=Config(); c.turnUsername="u"; c.turnPassword="p"; foreach(string invalid in new[]{"","turn:","turn://relay.example.com","turn:relay.example.com:0","turn:relay.example.com:65536","turn:relay.example.com/path","turn:relay.example.com?transport=sctp","turn:user@relay.example.com","stun:relay.example.com:3478"}) { c.turnUrl=invalid; Throws<ArgumentException>(delegate {c.ValidateNetwork(scratch);}); } foreach(string valid in new[]{"turn:relay.example.com","turn:relay.example.com:3478?transport=udp","turns:[2001:db8::1]:5349?transport=tcp"}) {c.turnUrl=valid; c.ValidateNetwork(scratch);} c.stunUrl="stun:host:65536"; Throws<ArgumentException>(delegate {c.ValidateNetwork(scratch);}); c.stunUrl="stuns:stun.example.com:5349"; c.ValidateNetwork(scratch); });
             Test("degraded status shows an amber warning and backend explanation",delegate { using(MainForm form=new MainForm()) { BindingFlags flags=BindingFlags.Instance|BindingFlags.NonPublic; typeof(MainForm).GetMethod("ApplyStatus",flags).Invoke(form,new object[]{new ServiceStatus {state="degraded",message="实例启动失败，请检查显卡。",viewerCount=1,maxViewers=10,instances=new[]{new InstanceStatus {id="viewer-1",state="failed"}},viewers=new ViewerStatus[0]}}); Label status=(Label)typeof(MainForm).GetField("status",flags).GetValue(form),message=(Label)typeof(MainForm).GetField("healthMessage",flags).GetValue(form); Assert(status.Text=="部分实例异常" && status.ForeColor==LauncherTheme.Amber,"Degraded service presented as healthy"); Assert(message.Text.Contains("实例启动失败"),"Backend explanation was hidden"); ListView instances=(ListView)typeof(MainForm).GetField("instances",flags).GetValue(form); Assert(instances.Items[0].SubItems[1].Text=="异常","Failed instance state remained untranslated"); } });
+            Test("real status JSON preserves queued null PID and renders a waiting process hint",delegate {
+                ServiceStatus parsed=new JavaScriptSerializer().Deserialize<ServiceStatus>(QueuedStatusJson);
+                Assert(parsed.instances[0].pid==12345 && (object)parsed.instances[1].pid==null,"Status JSON lost numeric or absent PID semantics");
+                using(MainForm form=new MainForm()) {
+                    BindingFlags flags=BindingFlags.Instance|BindingFlags.NonPublic;
+                    typeof(MainForm).GetMethod("ApplyStatus",flags).Invoke(form,new object[]{parsed});
+                    ListView list=(ListView)typeof(MainForm).GetField("instances",flags).GetValue(form);
+                    Assert(list.Items[0].ToolTipText.StartsWith("PID 12345 ·"),"An allocated PID tooltip changed");
+                    Assert(list.Items[1].ToolTipText.StartsWith("PID 等待分配 ·") && list.Items[1].SubItems[1].Text=="排队中","Queued instance did not explain its absent PID");
+                    Assert(((Label)typeof(MainForm).GetField("status",flags).GetValue(form)).Text=="✓  服务运行中","Queued status displayed a service error");
+                }
+            });
+            Test("four authenticated ReadStatus polls tolerate queued null PID without stopping service",AssertQueuedStatusPolling);
             Test("relative certificate paths resolve before temporary runtime configuration",delegate { string root=FixtureRoot(); File.WriteAllText(Path.Combine(root,"cert.pem"),"test-certificate"); File.WriteAllText(Path.Combine(root,"key.pem"),"test-key"); LauncherConfig c=FixtureConfig(); c.networkMode="public"; c.publicUrl="https://warehouse.example.com"; c.accessCode="test-only-code-12345"; c.tlsCertPath="cert.pem"; c.tlsKeyPath="key.pem"; using(ServiceSession session=new ServiceSession(root)) {session.Start(c); string[] configs=Directory.GetFiles(Path.Combine(root,"sessions"),"config.json",SearchOption.AllDirectories); LauncherConfig runtime=LauncherConfig.Load(configs[0]); Assert(runtime.tlsCertPath==Path.Combine(root,"cert.pem") && runtime.tlsKeyPath==Path.Combine(root,"key.pem"),"Relative certificate location changed"); session.Stop();} });
             Test("authenticated disconnect posts only chosen player and leaves service running",delegate { string root=FixtureRoot(); using(ServiceSession session=new ServiceSession(root)) { session.Start(FixtureConfig()); session.DisconnectViewer("7"); var request=new JavaScriptSerializer().Deserialize<Dictionary<string,object>>(File.ReadAllText(Path.Combine(root,"disconnect.json"))); Assert(request.Count==1 && (string)request["playerId"]=="7","Disconnect target changed"); Assert(session.ReadStatus().state=="running","Disconnect stopped the service"); Throws<ArgumentException>(delegate {session.DisconnectViewer("../stop");}); session.Stop(); Throws<InvalidOperationException>(delegate {session.DisconnectViewer("7");}); } });
             Test("viewer polling preserves selected ID and removes departed rows",delegate { using(MainForm form=new MainForm()) { form.CreateControl(); BindingFlags flags=BindingFlags.Instance|BindingFlags.NonPublic; ListView list=(ListView)typeof(MainForm).GetField("connections",flags).GetValue(form); list.CreateControl(); MethodInfo apply=typeof(MainForm).GetMethod("ApplyViewers",flags); ViewerStatus one=new ViewerStatus {playerId="1",displayName="Alice",address="198.51.100.1",state="connected",connectedAt=DateTimeOffset.UtcNow.AddMinutes(-2).ToString("o")}, two=new ViewerStatus {playerId="2",displayName="Bob",address="198.51.100.2",state="connected",connectedAt=DateTimeOffset.UtcNow.ToString("o")}; apply.Invoke(form,new object[]{new[]{one,two}}); list.Items["2"].Selected=true; apply.Invoke(form,new object[]{new[]{two,one}}); Assert(list.Items.Count==2 && list.Items["2"].Selected,"Polling changed the selected user"); apply.Invoke(form,new object[]{new[]{one}}); Assert(list.Items.Count==1 && !list.Items.ContainsKey("2"),"Departed user retained"); } });
