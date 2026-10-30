@@ -12,6 +12,7 @@
 #include "Misc/FileHelper.h"
 #include "Misc/Parse.h"
 #include "Misc/Paths.h"
+#include "PipelineStateCache.h"
 #include "RenderTimer.h"
 #include "NVENC.h"
 #include "IPixelStreaming2Module.h"
@@ -148,6 +149,13 @@ public:
             AddCVar(TEXT("appliedFps"),TEXT("t.MaxFPS"));
             AddCVar(TEXT("captureFps"),TEXT("PixelStreaming2.WebRTC.Fps"));
             AddCVar(TEXT("decoupledCapture"),TEXT("PixelStreaming2.DecoupleFramerate"));
+            // Read the engine's effective settings in Shipping as well as Development.
+            // A small compiler pool retains all precaching; the remaining count lets
+            // startup/first-interaction checks distinguish compilation from rendering.
+            Metrics->SetBoolField(TEXT("psoPrecachingEnabled"),PipelineStateCache::IsPSOPrecachingEnabled());
+            AddCVar(TEXT("psoPrecompileThreadPoolSize"),TEXT("r.pso.PrecompileThreadPoolSize"));
+            AddCVar(TEXT("psoPrecompileThreadPoolPercent"),TEXT("r.pso.PrecompileThreadPoolPercentOfHardwareThreads"));
+            Metrics->SetNumberField(TEXT("psoActivePrecacheRequests"),PipelineStateCache::NumActivePrecacheRequests());
             Metrics->SetStringField(TEXT("streamingPlugin"),TEXT("PixelStreaming2"));
             Metrics->SetStringField(TEXT("encoderPolicy"),StartupOptions.Encoder);
             Metrics->SetBoolField(TEXT("nvencApiValidated"),bNVENCValidated);
