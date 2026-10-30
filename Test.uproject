@@ -54,6 +54,21 @@
 		{
 			"Name": "GameplayAbilities",
 			"Enabled": true
+		},
+		{
+			"Name": "ToolsetRegistry",
+			"Enabled": true,
+			"TargetAllowList": ["Editor"]
+		},
+		{
+			"Name": "EditorToolset",
+			"Enabled": true,
+			"TargetAllowList": ["Editor"]
+		},
+		{
+			"Name": "StateTreeToolset",
+			"Enabled": true,
+			"TargetAllowList": ["Editor"]
 		}
 	]
 }
