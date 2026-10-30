@@ -7,7 +7,7 @@
 #include "PixelCaptureCapturerI420.h"
 #include "PixelCaptureCapturerI420ToRHI.h"
 
-TSharedPtr<FPixelCaptureCapturer> FPixelStreamingVideoInputI420::CreateCapturer(int32 FinalFormat, float FinalScale)
+TSharedPtr<FPixelCaptureCapturer> FPixelStreamingVideoInputI420::CreateCapturer(int32 FinalFormat, FIntPoint Resolution)
 {
 	switch (FinalFormat)
 	{
@@ -17,10 +17,10 @@ TSharedPtr<FPixelCaptureCapturer> FPixelStreamingVideoInputI420::CreateCapturer(
 		}
 		case PixelCaptureBufferFormat::FORMAT_I420:
 		{
-			return MakeShared<FPixelCaptureCapturerI420>();
+			return FPixelCaptureCapturerI420::Create();
 		}
 		default:
-			UE_LOG(LogPixelStreaming, Error, TEXT("Unsupported final format %d"), FinalFormat);
+			UE_LOGF(LogPixelStreaming, Error, "Unsupported final format %d", FinalFormat);
 			return nullptr;
 	}
 }

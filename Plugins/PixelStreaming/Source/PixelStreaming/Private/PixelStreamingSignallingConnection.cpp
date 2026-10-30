@@ -23,11 +23,36 @@
 DECLARE_LOG_CATEGORY_EXTERN(LogPixelStreamingSS, Log, VeryVerbose);
 DEFINE_LOG_CATEGORY(LogPixelStreamingSS);
 
+template<typename T>
+void FPixelStreamingSignallingConnection::SafeGameThreadExecute(T&& Func)
+{
+	TWeakPtr<int> WeakSemaphore = AliveSemaphore;
+	UE::PixelStreaming::DoOnGameThread([this, WeakSemaphore, Func]() {
+		if (WeakSemaphore.IsValid())
+		{
+			Func();
+		}
+	});
+}
+
+template<typename T>
+void FPixelStreamingSignallingConnection::SafeGameThreadExecuteAndWait(uint32 Timeout, T&& Func)
+{
+	TWeakPtr<int> WeakSemaphore = AliveSemaphore;
+	UE::PixelStreaming::DoOnGameThreadAndWait(Timeout, [this, WeakSemaphore, Func]() {
+		if (WeakSemaphore.IsValid())
+		{
+			Func();
+		}
+	});
+}
+
 FPixelStreamingSignallingConnection::FPixelStreamingSignallingConnection(TSharedPtr<IPixelStreamingSignallingConnectionObserver> InObserver, FString InStreamerId, TSharedPtr<IWebSocket> InWebSocket)
 	: Observer(InObserver)
 	, StreamerId(InStreamerId)
 	, WebSocket(InWebSocket)
 {
+	AliveSemaphore = MakeShared<int>(1);
 	RegisterHandler("identify", [this](FJsonObjectPtr JsonMsg) { OnIdRequested(); });
 	RegisterHandler("config", [this](FJsonObjectPtr JsonMsg) { OnConfig(JsonMsg); });
 	RegisterHandler("offer", [this](FJsonObjectPtr JsonMsg) { OnSessionDescription(JsonMsg); });
@@ -49,6 +74,7 @@ FPixelStreamingSignallingConnection::~FPixelStreamingSignallingConnection()
 
 	WebSocket.Reset();
 	Observer.Reset();
+	AliveSemaphore.Reset();
 }
 
 void FPixelStreamingSignallingConnection::Connect(FString InUrl, bool bIsReconnect)
@@ -60,7 +86,7 @@ void FPixelStreamingSignallingConnection::Connect(FString InUrl, bool bIsReconne
 			// If we somehow got here, turn off reconnect timer as we are already connected.
 			StopReconnectTimer();
 		}
-		UE_LOG(LogPixelStreamingSS, Log, TEXT("Skipping `Connect()` because we are already connected. If you want to reconnect then disconnect first."));
+		UE_LOGF(LogPixelStreamingSS, Log, "Skipping `Connect()` because we are already connected. If you want to reconnect then disconnect first.");
 		return;
 	}
 
@@ -96,11 +122,11 @@ void FPixelStreamingSignallingConnection::Connect(FString InUrl, bool bIsReconne
 
 	if (bIsReconnect)
 	{
-		UE_LOG(LogPixelStreamingSS, Log, TEXT("Reconnecting to SS %s"), *Url);
+		UE_LOGF(LogPixelStreamingSS, Log, "Reconnecting to SS %ls", *Url);
 	}
 	else
 	{
-		UE_LOG(LogPixelStreamingSS, Log, TEXT("Connecting to SS %s"), *Url);
+		UE_LOGF(LogPixelStreamingSS, Log, "Connecting to SS %ls", *Url);
 	}
 
 	WebSocket->Connect();
@@ -142,7 +168,7 @@ void FPixelStreamingSignallingConnection::Disconnect(FString Reason)
 	WebSocket->OnBinaryMessage().Remove(OnBinaryMessageHandle);
 
 	WebSocket->Close(1000, Reason);
-	UE_LOG(LogPixelStreamingSS, Log, TEXT("Closing websocket to SS %s"), *Url);
+	UE_LOGF(LogPixelStreamingSS, Log, "Closing websocket to SS %ls", *Url);
 
 	bIsConnected = false;
 }
@@ -163,8 +189,8 @@ void FPixelStreamingSignallingConnection::SendOffer(FPixelStreamingPlayerId Play
 	FString SdpStr = UE::PixelStreaming::ToString(SdpAnsi);
 	OfferJson->SetStringField(TEXT("sdp"), SdpStr);
 
-	UE_LOG(LogPixelStreamingSS, Log, TEXT("Sending player=%s \"offer\" to SS %s"), *PlayerId, *Url);
-	UE_LOG(LogPixelStreamingSS, Verbose, TEXT("SDP offer\n%s"), *SdpStr);
+	UE_LOGF(LogPixelStreamingSS, Log, "Sending player=%ls \"offer\" to SS %ls", *PlayerId, *Url);
+	UE_LOGF(LogPixelStreamingSS, Verbose, "SDP offer\n%ls", *SdpStr);
 
 	SendMessage(UE::PixelStreaming::ToString(OfferJson, false));
 }
@@ -182,14 +208,14 @@ void FPixelStreamingSignallingConnection::SendAnswer(FPixelStreamingPlayerId Pla
 		FString SdpStr = UE::PixelStreaming::ToString(SdpAnsi);
 		AnswerJson->SetStringField(TEXT("sdp"), SdpStr);
 
-		UE_LOG(LogPixelStreamingSS, Log, TEXT("Sending player=%s \"answer\" to SS %s"), *PlayerId, *Url);
-		UE_LOG(LogPixelStreamingSS, Verbose, TEXT("SDP answer\n%s"), *SdpStr);
+		UE_LOGF(LogPixelStreamingSS, Log, "Sending player=%ls \"answer\" to SS %ls", *PlayerId, *Url);
+		UE_LOGF(LogPixelStreamingSS, Verbose, "SDP answer\n%ls", *SdpStr);
 
 		SendMessage(UE::PixelStreaming::ToString(AnswerJson, false));
 	}
 	else
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to serialise local SDP."));
+		UE_LOGF(LogPixelStreamingSS, Error, "Failed to serialise local SDP.");
 	}
 }
 
@@ -210,12 +236,12 @@ void FPixelStreamingSignallingConnection::SendIceCandidate(FPixelStreamingPlayer
 		FString CandidateStr = UE::PixelStreaming::ToString(CandidateAnsi);
 		CandidateJson->SetStringField(TEXT("candidate"), CandidateStr);
 		IceCandidateJson->SetObjectField(TEXT("candidate"), CandidateJson);
-		UE_LOG(LogPixelStreamingSS, Verbose, TEXT("-> SS: iceCandidate\n%s"), *UE::PixelStreaming::ToString(IceCandidateJson));
+		UE_LOGF(LogPixelStreamingSS, Verbose, "-> SS: iceCandidate\n%ls", *UE::PixelStreaming::ToString(IceCandidateJson));
 		SendMessage(UE::PixelStreaming::ToString(IceCandidateJson, false));
 	}
 	else
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to serialize IceCandidate"));
+		UE_LOGF(LogPixelStreamingSS, Error, "Failed to serialize IceCandidate");
 	}
 }
 
@@ -228,7 +254,7 @@ void FPixelStreamingSignallingConnection::SendDisconnectPlayer(FPixelStreamingPl
 	Json->SetStringField(TEXT("reason"), Reason);
 
 	FString Msg = UE::PixelStreaming::ToString(Json, false);
-	UE_LOG(LogPixelStreamingSS, Verbose, TEXT("Sending player=%s \"disconnectPlayer\" to SS %s"), *PlayerId, *Url);
+	UE_LOGF(LogPixelStreamingSS, Verbose, "Sending player=%ls \"disconnectPlayer\" to SS %ls", *PlayerId, *Url);
 
 	SendMessage(Msg);
 }
@@ -239,7 +265,7 @@ void FPixelStreamingSignallingConnection::RequestStreamerList()
 	Json->SetStringField(TEXT("type"), TEXT("listStreamers"));
 
 	const FString JsonStr = UE::PixelStreaming::ToString(Json, false);
-	UE_LOG(LogPixelStreamingSS, Verbose, TEXT("-> SS: listStreamers\n%s"), *JsonStr);
+	UE_LOGF(LogPixelStreamingSS, Verbose, "-> SS: listStreamers\n%ls", *JsonStr);
 
 	SendMessage(JsonStr);
 }
@@ -251,7 +277,7 @@ void FPixelStreamingSignallingConnection::SendSubscribe(const FString& ToStreame
 	SubscribeJson->SetStringField(TEXT("streamerId"), ToStreamerId);
 
 	const FString SubscribeJsonStr = UE::PixelStreaming::ToString(SubscribeJson, false);
-	UE_LOG(LogPixelStreamingSS, Verbose, TEXT("-> SS: subscribe\n%s"), *SubscribeJsonStr);
+	UE_LOGF(LogPixelStreamingSS, Verbose, "-> SS: subscribe\n%ls", *SubscribeJsonStr);
 
 	SendMessage(SubscribeJsonStr);
 }
@@ -262,7 +288,7 @@ void FPixelStreamingSignallingConnection::SendUnsubscribe()
 	UnsubscribeJson->SetStringField(TEXT("type"), TEXT("unsubscribe"));
 
 	const FString UnsubscribeJsonStr = UE::PixelStreaming::ToString(UnsubscribeJson, false);
-	UE_LOG(LogPixelStreamingSS, Verbose, TEXT("-> SS: unsubscribe\n%s"), *UnsubscribeJsonStr);
+	UE_LOGF(LogPixelStreamingSS, Verbose, "-> SS: unsubscribe\n%ls", *UnsubscribeJsonStr);
 
 	SendMessage(UnsubscribeJsonStr);
 }
@@ -275,7 +301,7 @@ void FPixelStreamingSignallingConnection::SendOffer(const webrtc::SessionDescrip
 	FString SdpStr = UE::PixelStreaming::ToString(SDP);
 	OfferJson->SetStringField(TEXT("sdp"), UE::PixelStreaming::ToString(SDP));
 
-	UE_LOG(LogPixelStreamingSS, Verbose, TEXT("-> SS: offer\n%s"), *SdpStr);
+	UE_LOGF(LogPixelStreamingSS, Verbose, "-> SS: offer\n%ls", *SdpStr);
 
 	SendMessage(UE::PixelStreaming::ToString(OfferJson, false));
 }
@@ -288,7 +314,7 @@ void FPixelStreamingSignallingConnection::SendAnswer(const webrtc::SessionDescri
 	FString SdpStr = UE::PixelStreaming::ToString(SDP);
 	AnswerJson->SetStringField(TEXT("sdp"), UE::PixelStreaming::ToString(SDP));
 
-	UE_LOG(LogPixelStreamingSS, Verbose, TEXT("-> SS: answer\n%s"), *SdpStr);
+	UE_LOGF(LogPixelStreamingSS, Verbose, "-> SS: answer\n%ls", *SdpStr);
 
 	SendMessage(UE::PixelStreaming::ToString(AnswerJson, false));
 }
@@ -310,7 +336,7 @@ void FPixelStreamingSignallingConnection::SendIceCandidate(const webrtc::IceCand
 
 	IceCandidateJson->SetObjectField(TEXT("candidate"), CandidateJson);
 
-	UE_LOG(LogPixelStreamingSS, Verbose, TEXT("-> SS: ice-candidate\n%s"), *UE::PixelStreaming::ToString(IceCandidateJson));
+	UE_LOGF(LogPixelStreamingSS, Verbose, "-> SS: ice-candidate\n%ls", *UE::PixelStreaming::ToString(IceCandidateJson));
 
 	SendMessage(UE::PixelStreaming::ToString(IceCandidateJson, false));
 }
@@ -345,18 +371,9 @@ void FPixelStreamingSignallingConnection::SetKeepAlive(bool bKeepAlive)
 	bKeepAliveEnabled = bKeepAlive;
 }
 
-void FPixelStreamingSignallingConnection::KeepAlive()
-{
-	FJsonObjectPtr Json = MakeShared<FJsonObject>();
-	const double UnixTime = FDateTime::UtcNow().ToUnixTimestamp();
-	Json->SetStringField(TEXT("type"), TEXT("ping"));
-	Json->SetNumberField(TEXT("time"), UnixTime);
-	SendMessage(UE::PixelStreaming::ToString(Json, false));
-}
-
 void FPixelStreamingSignallingConnection::OnConnected()
 {
-	UE_LOG(LogPixelStreamingSS, Log, TEXT("Connected to SS %s"), *Url);
+	UE_LOGF(LogPixelStreamingSS, Log, "Connected to SS %ls", *Url);
 
 	// No need to to do reconnect now that we are connected
 	StopReconnectTimer();
@@ -377,16 +394,16 @@ void FPixelStreamingSignallingConnection::OnConnected()
 
 void FPixelStreamingSignallingConnection::OnPing(const FJsonObjectPtr& Json)
 {
-	UE_LOG(LogPixelStreamingSS, Verbose, TEXT("Streamer got pinged."));
+	UE_LOGF(LogPixelStreamingSS, Verbose, "Streamer got pinged.");
 }
 void FPixelStreamingSignallingConnection::OnPong(const FJsonObjectPtr& Json)
 {
-	UE_LOG(LogPixelStreamingSS, Verbose, TEXT("Streamer got ponged."));
+	UE_LOGF(LogPixelStreamingSS, Verbose, "Streamer got ponged.");
 }
 
 void FPixelStreamingSignallingConnection::OnConnectionError(const FString& Error)
 {
-	UE_LOG(LogPixelStreamingSS, Log, TEXT("Failed to connect to SS %s - signalling server may not be up yet. Message: \"%s\""), *Url, *Error);
+	UE_LOGF(LogPixelStreamingSS, Log, "Failed to connect to SS %ls - signalling server may not be up yet. Message: \"%ls\"", *Url, *Error);
 
 	Observer->OnSignallingError(Error);
 
@@ -406,7 +423,7 @@ void FPixelStreamingSignallingConnection::OnConnectionError(const FString& Error
 
 void FPixelStreamingSignallingConnection::OnClosed(int32 StatusCode, const FString& Reason, bool bWasClean)
 {
-	UE_LOG(LogPixelStreamingSS, Log, TEXT("Closed connection to SS %s - \n\tstatus %d\n\treason: %s\n\twas clean: %s"), *Url, StatusCode, *Reason, bWasClean ? TEXT("true") : TEXT("false"));
+	UE_LOGF(LogPixelStreamingSS, Log, "Closed connection to SS %ls - \n\tstatus %d\n\treason: %ls\n\twas clean: %ls", *Url, StatusCode, *Reason, bWasClean ? TEXT("true") : TEXT("false"));
 
 	Observer->OnSignallingDisconnected(StatusCode, Reason, bWasClean);
 
@@ -431,14 +448,14 @@ void FPixelStreamingSignallingConnection::OnMessage(const FString& Msg)
 
 	if (!FJsonSerializer::Deserialize(JsonReader, JsonMsg))
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to parse SS message:\n%s"), *Msg);
+		UE_LOGF(LogPixelStreamingSS, Error, "Failed to parse SS message:\n%ls", *Msg);
 		return;
 	}
 
 	FString MsgType;
 	if (!JsonMsg->TryGetStringField(TEXT("type"), MsgType))
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Cannot find `type` field in SS message:\n%s"), *Msg);
+		UE_LOGF(LogPixelStreamingSS, Error, "Cannot find `type` field in SS message:\n%ls", *Msg);
 		return;
 	}
 
@@ -449,7 +466,7 @@ void FPixelStreamingSignallingConnection::OnMessage(const FString& Msg)
 	}
 	else
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Unsupported message `%s` received from SS"), *MsgType);
+		UE_LOGF(LogPixelStreamingSS, Error, "Unsupported message `%ls` received from SS", *MsgType);
 	}
 }
 
@@ -457,7 +474,7 @@ void FPixelStreamingSignallingConnection::OnBinaryMessage(const uint8* Data, int
 {
 	FUTF8ToTCHAR Convert((const ANSICHAR*)Data, Length);
 	const TCHAR* PayloadChars = Convert.Get();
-	FString Msg = FString(Convert.Length(), PayloadChars);
+	FString Msg = FString::ConstructFromPtrSize(PayloadChars, Convert.Length());
 	OnMessage(Msg);
 }
 
@@ -473,7 +490,7 @@ void FPixelStreamingSignallingConnection::OnIdRequested()
 	Json->SetStringField(TEXT("type"), TEXT("endpointId"));
 	Json->SetStringField(TEXT("id"), StreamerId);
 	FString Msg = UE::PixelStreaming::ToString(Json, false);
-	UE_LOG(LogPixelStreamingSS, Verbose, TEXT("-> SS: endpointId\n%s"), *Msg);
+	UE_LOGF(LogPixelStreamingSS, Verbose, "-> SS: endpointId\n%ls", *Msg);
 	SendMessage(Msg);
 }
 
@@ -488,7 +505,7 @@ void FPixelStreamingSignallingConnection::OnConfig(const FJsonObjectPtr& Json)
 	const TSharedPtr<FJsonObject>* PeerConnectionOptions = nullptr;
 	if (!Json->TryGetObjectField(TEXT("peerConnectionOptions"), PeerConnectionOptions))
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Cannot find `peerConnectionOptions` field in SS config\n%s"), *UE::PixelStreaming::ToString(Json));
+		UE_LOGF(LogPixelStreamingSS, Error, "Cannot find `peerConnectionOptions` field in SS config\n%ls", *UE::PixelStreaming::ToString(Json));
 		return;
 	}
 
@@ -502,7 +519,7 @@ void FPixelStreamingSignallingConnection::OnConfig(const FJsonObjectPtr& Json)
 			const TSharedPtr<FJsonObject>* IceServerJson;
 			if (!IceServerVal->TryGetObject(IceServerJson))
 			{
-				UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to parse SS config: `iceServer` - not an object\n%s"), *UE::PixelStreaming::ToString(*PeerConnectionOptions));
+				UE_LOGF(LogPixelStreamingSS, Error, "Failed to parse SS config: `iceServer` - not an object\n%ls", *UE::PixelStreaming::ToString(*PeerConnectionOptions));
 				return;
 			}
 
@@ -552,14 +569,14 @@ void FPixelStreamingSignallingConnection::OnConfig(const FJsonObjectPtr& Json)
 
 	if(MinPort < 0 || MinPort > 65535)
 	{
-		UE_LOG(LogPixelStreamingSS, Warning, TEXT("Invalid PixelStreaming.WebRTC.MinPort specified. Value must be within 0 to 65535 inclusive"));
+		UE_LOGF(LogPixelStreamingSS, Warning, "Invalid PixelStreaming.WebRTC.MinPort specified. Value must be within 0 to 65535 inclusive");
 		MinPort = 49152;
 		UE::PixelStreaming::Settings::CVarPixelStreamingWebRTCMinPort->Set(MinPort, ECVF_SetByCode);
 	}
 
 	if(MaxPort < 0 || MaxPort > 65535)
 	{
-		UE_LOG(LogPixelStreamingSS, Warning, TEXT("Invalid PixelStreaming.WebRTC.MaxPort specified. Value must be within 0 to 65535 inclusive"));
+		UE_LOGF(LogPixelStreamingSS, Warning, "Invalid PixelStreaming.WebRTC.MaxPort specified. Value must be within 0 to 65535 inclusive");
 		MaxPort = 65535;
 		UE::PixelStreaming::Settings::CVarPixelStreamingWebRTCMaxPort->Set(MaxPort, ECVF_SetByCode);
 	}
@@ -591,7 +608,7 @@ void FPixelStreamingSignallingConnection::OnSessionDescription(const FJsonObject
 	FString Sdp;
 	if (!Json->TryGetStringField(TEXT("sdp"), Sdp))
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Cannot find `sdp` in Streamer's answer\n%s"), *UE::PixelStreaming::ToString(Json));
+		UE_LOGF(LogPixelStreamingSS, Error, "Cannot find `sdp` in Streamer's answer\n%ls", *UE::PixelStreaming::ToString(Json));
 		return;
 	}
 
@@ -664,7 +681,7 @@ void FPixelStreamingSignallingConnection::OnPlayerCount(const FJsonObjectPtr& Js
 	uint32 Count;
 	if (!Json->TryGetNumberField(TEXT("count"), Count))
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to get `count` from `playerCount` message\n%s"), *UE::PixelStreaming::ToString(Json));
+		UE_LOGF(LogPixelStreamingSS, Error, "Failed to get `count` from `playerCount` message\n%ls", *UE::PixelStreaming::ToString(Json));
 		return;
 	}
 
@@ -677,11 +694,11 @@ void FPixelStreamingSignallingConnection::OnPlayerConnected(const FJsonObjectPtr
 	bool bGotPlayerId = GetPlayerIdJson(Json, PlayerId);
 	if (!bGotPlayerId)
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to get `playerId` from `join` message\n%s"), *UE::PixelStreaming::ToString(Json));
+		UE_LOGF(LogPixelStreamingSS, Error, "Failed to get `playerId` from `join` message\n%ls", *UE::PixelStreaming::ToString(Json));
 		return;
 	}
 
-	UE_LOG(LogPixelStreamingSS, Log, TEXT("Got player connected, player id=%s"), *PlayerId);
+	UE_LOGF(LogPixelStreamingSS, Log, "Got player connected, player id=%ls", *PlayerId);
 
 	FPixelStreamingPlayerConfig PlayerConfig;
 
@@ -704,7 +721,7 @@ void FPixelStreamingSignallingConnection::OnPlayerDisconnected(const FJsonObject
 	bool bGotPlayerId = GetPlayerIdJson(Json, PlayerId);
 	if (!bGotPlayerId)
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to get `playerId` from `playerDisconnected` message\n%s"), *UE::PixelStreaming::ToString(Json));
+		UE_LOGF(LogPixelStreamingSS, Error, "Failed to get `playerId` from `playerDisconnected` message\n%ls", *UE::PixelStreaming::ToString(Json));
 		return;
 	}
 
@@ -717,7 +734,7 @@ void FPixelStreamingSignallingConnection::OnSFUPeerDataChannels(const FJsonObjec
 	bool bSuccess = GetPlayerIdJson(Json, SFUId, TEXT("sfuId"));
 	if (!bSuccess)
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to get `sfuId` from `streamerDataChannels` message\n%s"), *UE::PixelStreaming::ToString(Json));
+		UE_LOGF(LogPixelStreamingSS, Error, "Failed to get `sfuId` from `streamerDataChannels` message\n%ls", *UE::PixelStreaming::ToString(Json));
 		return;
 	}
 
@@ -725,7 +742,7 @@ void FPixelStreamingSignallingConnection::OnSFUPeerDataChannels(const FJsonObjec
 	bSuccess = GetPlayerIdJson(Json, PlayerId, TEXT("playerId"));
 	if (!bSuccess)
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to get `playerId` from `streamerDataChannels` message\n%s"), *UE::PixelStreaming::ToString(Json));
+		UE_LOGF(LogPixelStreamingSS, Error, "Failed to get `playerId` from `streamerDataChannels` message\n%ls", *UE::PixelStreaming::ToString(Json));
 		return;
 	}
 
@@ -733,7 +750,7 @@ void FPixelStreamingSignallingConnection::OnSFUPeerDataChannels(const FJsonObjec
 	bSuccess = Json->TryGetNumberField(TEXT("sendStreamId"), SendStreamId);
 	if (!bSuccess)
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to get `sendStreamId` from `streamerDataChannels` message\n%s"), *UE::PixelStreaming::ToString(Json));
+		UE_LOGF(LogPixelStreamingSS, Error, "Failed to get `sendStreamId` from `streamerDataChannels` message\n%ls", *UE::PixelStreaming::ToString(Json));
 		return;
 	}
 
@@ -741,7 +758,7 @@ void FPixelStreamingSignallingConnection::OnSFUPeerDataChannels(const FJsonObjec
 	bSuccess = Json->TryGetNumberField(TEXT("recvStreamId"), RecvStreamId);
 	if (!bSuccess)
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to get `recvStreamId` from `streamerDataChannels` message\n%s"), *UE::PixelStreaming::ToString(Json));
+		UE_LOGF(LogPixelStreamingSS, Error, "Failed to get `recvStreamId` from `streamerDataChannels` message\n%ls", *UE::PixelStreaming::ToString(Json));
 		return;
 	}
 
@@ -753,13 +770,13 @@ void FPixelStreamingSignallingConnection::OnPeerDataChannels(const FJsonObjectPt
 	int32 SendStreamId = 0;
 	if (!Json->TryGetNumberField(TEXT("sendStreamId"), SendStreamId))
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to get `sendStreamId` from remote `peerDataChannels` message\n%s"), *UE::PixelStreaming::ToString(Json));
+		UE_LOGF(LogPixelStreamingSS, Error, "Failed to get `sendStreamId` from remote `peerDataChannels` message\n%ls", *UE::PixelStreaming::ToString(Json));
 		return;
 	}
 	int32 RecvStreamId = 0;
 	if (!Json->TryGetNumberField(TEXT("recvStreamId"), RecvStreamId))
 	{
-		UE_LOG(LogPixelStreamingSS, Error, TEXT("Failed to get `recvStreamId` from remote `peerDataChannels` message\n%s"), *UE::PixelStreaming::ToString(Json));
+		UE_LOGF(LogPixelStreamingSS, Error, "Failed to get `recvStreamId` from remote `peerDataChannels` message\n%ls", *UE::PixelStreaming::ToString(Json));
 		return;
 	}
 	Observer->OnSignallingPeerDataChannels(SendStreamId, RecvStreamId);
@@ -847,12 +864,29 @@ void FPixelStreamingSignallingConnection::StartKeepAliveTimer()
 {
 	// Dereferencing needs to happen on the game thread
 	// we dont need to wait since its just setting the timer
-	UE::PixelStreaming::DoOnGameThread([this]() {
+	SafeGameThreadExecute([this]() {
 		using namespace UE::PixelStreamingSignallingConnection::Private;
 		FTimerManager* TimerManager = GetTimerManager();
 		if (TimerManager && !TimerManager->IsTimerActive(TimerHandle_KeepAlive))
 		{
-			TimerManager->SetTimer(TimerHandle_KeepAlive, FTimerDelegate::CreateRaw(this, &FPixelStreamingSignallingConnection::KeepAlive), KEEP_ALIVE_INTERVAL, true);
+			TimerManager->SetTimer(TimerHandle_KeepAlive, FTimerDelegate::CreateLambda([this, TimerManager, TimerHandle = TimerHandle_KeepAlive, WeakSemaphore = AliveSemaphore.ToWeakPtr()]() {
+				if (WeakSemaphore.IsValid())
+				{
+					FJsonObjectPtr Json = MakeShared<FJsonObject>();
+					const double UnixTime = FDateTime::UtcNow().ToUnixTimestamp();
+					Json->SetStringField(TEXT("type"), TEXT("ping"));
+					Json->SetNumberField(TEXT("time"), UnixTime);
+					SendMessage(UE::PixelStreaming::ToString(Json, false));
+				}
+				else
+				{
+					// Owning connection has gone away for whatever reason. Clear this timer.
+					// TimerHandle captured is const and we cant use TimerHandle_KeepAlive because 'this' might have been deleted.
+					// ClearTimer takes a non const reference so we cant use TimerHandle.
+					FTimerHandle Handle = TimerHandle;
+					TimerManager->ClearTimer(Handle);
+				}
+			}), KEEP_ALIVE_INTERVAL, true);
 		}
 	});
 }
@@ -862,7 +896,7 @@ void FPixelStreamingSignallingConnection::StopKeepAliveTimer()
 	// Dereferencing needs to happen on the game thread
 	// we need to wait because if we're destructing this object we dont
 	// want to call the callback mid/post destruction
-	UE::PixelStreaming::DoOnGameThreadAndWait(MAX_uint32, [this]() {
+	SafeGameThreadExecuteAndWait(MAX_uint32, [this]() {
 		using namespace UE::PixelStreamingSignallingConnection::Private;
 		FTimerManager* TimerManager = GetTimerManager();
 		if (TimerManager)
@@ -875,7 +909,7 @@ void FPixelStreamingSignallingConnection::StopKeepAliveTimer()
 void FPixelStreamingSignallingConnection::StartReconnectTimer()
 {
 	// Dereferencing needs to happen on the game thread
-	UE::PixelStreaming::DoOnGameThread([this]() {
+	SafeGameThreadExecute([this]() {
 		if (IsEngineExitRequested())
 		{
 			return;
@@ -885,15 +919,21 @@ void FPixelStreamingSignallingConnection::StartReconnectTimer()
 		if (TimerManager && !TimerManager->IsTimerActive(TimerHandle_Reconnect))
 		{
 			float ReconnectInterval = UE::PixelStreaming::Settings::CVarPixelStreamingSignalingReconnectInterval.GetValueOnAnyThread();
-			TimerManager->SetTimer(TimerHandle_Reconnect, FTimerDelegate::CreateRaw(this, &FPixelStreamingSignallingConnection::Connect, Url, true), ReconnectInterval, true);
+			FTimerDelegate delegate = FTimerDelegate::CreateLambda([this, WeakSemaphore = AliveSemaphore.ToWeakPtr()]() {
+				if (WeakSemaphore.IsValid())
+				{
+					Connect(Url, true);
+				}
+				});
+			TimerManager->SetTimer(TimerHandle_Reconnect, delegate, ReconnectInterval, true);
 		}
 	});
 }
 
 void FPixelStreamingSignallingConnection::StopReconnectTimer()
 {
-	// Dereferencing needs to happen on the game thread
-	UE::PixelStreaming::DoOnGameThread([this]() {
+	// GWorld dereferencing needs to happen on the game thread
+	SafeGameThreadExecute([this]() {
 		if (IsEngineExitRequested())
 		{
 			return;
@@ -917,6 +957,6 @@ void FPixelStreamingSignallingConnection::SendMessage(const FString& Msg)
 
 void FPixelStreamingSignallingConnection::PlayerError(FPixelStreamingPlayerId PlayerId, const FString& Msg)
 {
-	UE_LOG(LogPixelStreamingSS, Error, TEXT("player %s: %s"), *PlayerId, *Msg);
+	UE_LOGF(LogPixelStreamingSS, Error, "player %ls: %ls", *PlayerId, *Msg);
 	SendDisconnectPlayer(PlayerId, Msg);
 }

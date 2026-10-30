@@ -71,7 +71,7 @@ namespace UE::PixelStreaming
 
 				if (Result != 0)
 				{
-					UE_LOG(LogPixelStreaming, Error, TEXT("NeedMorePlayData return non-zero result indicating an error"));
+					UE_LOGF(LogPixelStreaming, Error, "NeedMorePlayData return non-zero result indicating an error");
 				}
 			};
 

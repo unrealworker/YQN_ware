@@ -1,6 +1,6 @@
 """Render follow-camera composition while the real panel opens and closes."""
 from pathlib import Path
-exec(Path('D:/UEPro/Test/Scripts/ghs/verify_order_replay_runtime.py').read_text(encoding='utf8').split('steps=run()')[0])
+exec(Path(__file__).resolve().with_name('verify_order_replay_runtime.py').read_text(encoding='utf8').split('steps=run()')[0])
 OUT=ROOT/'Saved/OrderReplay/FollowPanel-20261026/runtime';OUT.mkdir(parents=True,exist_ok=True)
 report=dict(success=False,checks=[],captures=[],states={},motions=[])
 

@@ -1,6 +1,6 @@
 param(
     [string]$VisualStudio = 'C:\Program Files\Microsoft Visual Studio\2022\Professional',
-    [string]$CompilerVersion = '14.38.33130'
+    [string]$CompilerVersion = '14.44.35207'
 )
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../../..')).Path

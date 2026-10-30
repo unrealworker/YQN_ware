@@ -1,6 +1,6 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "../GHSOrderReplaySimulation.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 #include <limits>
 #include <cmath>
 #include <algorithm>
@@ -20,7 +20,7 @@ GHSReplay::Simulation Fixture()
     S.Events={{10,"pickup","entity-0","pickup","Pickup"},{90,"drop","entity-0","dropoff","Drop"}};return S;
 }
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayDirectSeek,"GHS.Replay.Motion.DirectSeek",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayDirectSeek,"GHS.Replay.Motion.DirectSeek",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayDirectSeek::RunTest(const FString&)
 {
     auto A=Fixture(),B=Fixture();std::string Error;TestTrue(TEXT("valid bounded fixture"),A.Validate(Error));
@@ -34,7 +34,7 @@ bool FGHSReplayDirectSeek::RunTest(const FString&)
     A.Evaluate(std::numeric_limits<double>::quiet_NaN());TestEqual(TEXT("nonfinite clock is guarded"),A.Poses[0].Position.X,0.);
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayCargoOwnership,"GHS.Replay.Motion.CargoOwnership",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayCargoOwnership,"GHS.Replay.Motion.CargoOwnership",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayCargoOwnership::RunTest(const FString&)
 {
     auto S=Fixture();auto& Cargo=S.Tracks[8];
@@ -48,7 +48,7 @@ bool FGHSReplayCargoOwnership::RunTest(const FString&)
     S.Evaluate(50);TestEqual(TEXT("rewind restores prior owner"),S.Poses[8].Owner,0);
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayEventWindow,"GHS.Replay.Motion.BoundedEvents",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayEventWindow,"GHS.Replay.Motion.BoundedEvents",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayEventWindow::RunTest(const FString&)
 {
     auto S=Fixture();const auto E=S.EventsIn(95,215,3);
@@ -61,7 +61,7 @@ bool FGHSReplayEventWindow::RunTest(const FString&)
     S=Fixture();S.Tracks[0].Keys.back().Position.X=1;TestFalse(TEXT("visible cycle teleport rejected"),S.Validate(Error));
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayCompleteTrails,"GHS.Replay.Motion.CompleteTrails",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayCompleteTrails,"GHS.Replay.Motion.CompleteTrails",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayCompleteTrails::RunTest(const FString&)
 {
     GHSReplay::Track T;
@@ -83,7 +83,7 @@ bool FGHSReplayCompleteTrails::RunTest(const FString&)
     TestTrue(TEXT("partial and reversed straight retraversals merged"),std::abs(Total-10.)<.0001);
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayRoundedTrails,"GHS.Replay.Motion.RoundedForkliftTrails",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayRoundedTrails,"GHS.Replay.Motion.RoundedForkliftTrails",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayRoundedTrails::RunTest(const FString&)
 {
     GHSReplay::Track T;T.Keys={{0,{0,0,0}},{1,{1000,0,0}},{2,{1000,0,0}},{3,{1000,1000,0}}};
@@ -126,7 +126,7 @@ bool FGHSReplayRoundedTrails::RunTest(const FString&)
     TestTrue(TEXT("tight pickup bend is tapered instead of folding"),Tapered);
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayContinuousFlow,"GHS.Replay.Motion.ContinuousTrailFlow",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayContinuousFlow,"GHS.Replay.Motion.ContinuousTrailFlow",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayContinuousFlow::RunTest(const FString&)
 {
     GHSReplay::Track T;T.Keys={{0,{0,0,0}},{1,{1000,0,0}},{2,{1000,1000,0}},{3,{0,1000,0}},{4,{0,0,0}},
@@ -151,7 +151,7 @@ bool FGHSReplayContinuousFlow::RunTest(const FString&)
     TestTrue(TEXT("return-side phases can be signed without reversing geometry"),Reversed);
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayRemainingTrail,"GHS.Replay.Motion.CurrentLegRemainingTrail",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayRemainingTrail,"GHS.Replay.Motion.CurrentLegRemainingTrail",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayRemainingTrail::RunTest(const FString&)
 {
     GHSReplay::Track T;

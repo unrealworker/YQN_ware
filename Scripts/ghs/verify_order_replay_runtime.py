@@ -9,7 +9,7 @@ import traceback
 from pathlib import Path
 import unreal
 
-ROOT=Path('D:/UEPro/Test');OUT=ROOT/'Saved/OrderReplay/Runtime';OUT.mkdir(parents=True,exist_ok=True)
+ROOT=Path(unreal.Paths.convert_relative_path_to_full(unreal.Paths.project_dir())).resolve();OUT=ROOT/'Saved/OrderReplay/Runtime';OUT.mkdir(parents=True,exist_ok=True)
 CLI=unreal.SystemLibrary.get_command_line()
 assert all(re.search(r'(?:^|\s)-'+flag+r'(?=\s|$)',CLI,re.I) for flag in ('game','RenderOffscreen','TwinDiagnostics'))
 MAP=ROOT/'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap'

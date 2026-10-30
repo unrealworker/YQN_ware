@@ -11,6 +11,7 @@
 #include "Serialization/JsonReader.h"
 #include "Policies/CondensedJsonPrintPolicy.h"
 #include "Misc/Paths.h"
+#include "SocketUtils.h"
 #include "Interfaces/IPluginManager.h"
 #include "GenericPlatform/GenericPlatformFile.h"
 
@@ -23,7 +24,7 @@ namespace UE::PixelStreamingServers::Utils
 		IPlatformFile& FileManager = FPlatformFileManager::Get().GetPlatformFile();
 		if (!FileManager.FileExists(*ExecutableAbsPath))
 		{
-			UE_LOG(LogPixelStreamingServers, Error, TEXT("Cannot start child process - the specified file did not exist. File=%s"), *ExecutableAbsPath);
+			UE_LOGF(LogPixelStreamingServers, Error, "Cannot start child process - the specified file did not exist. File=%ls", *ExecutableAbsPath);
 			return TSharedPtr<FMonitoredProcess>();
 		}
 
@@ -41,7 +42,7 @@ namespace UE::PixelStreamingServers::Utils
             Args = FString::Printf(TEXT(" -- \"%s\" %s --nosudo"), *ExecutableAbsPath, *Args);
             ExecutableAbsPath = TEXT("/bin/bash");
 #else
-			UE_LOG(LogPixelStreamingServers, Error, TEXT("Unsupported platform for Pixel Streaming."));
+			UE_LOGF(LogPixelStreamingServers, Error, "Unsupported platform for Pixel Streaming.");
 			return TSharedPtr<FMonitoredProcess>();
 #endif
 		}
@@ -59,10 +60,10 @@ namespace UE::PixelStreamingServers::Utils
 		);
 		// Bind to output so we can capture the output in the log
 		ChildProcess->OnOutput().BindLambda([LogPrefix](FString Output) {
-			UE_LOG(LogPixelStreamingServers, Log, TEXT("%s - %s"), *LogPrefix, *Output);
+			UE_LOGF(LogPixelStreamingServers, Log, "%ls - %ls", *LogPrefix, *Output);
 		});
 		// Run the child process
-		UE_LOG(LogPixelStreamingServers, Log, TEXT("Launch child process - %s %s"), *ExecutableAbsPath, *Args);
+		UE_LOGF(LogPixelStreamingServers, Log, "Launch child process - %ls %ls", *ExecutableAbsPath, *Args);
 		ChildProcess->Launch();
 		return ChildProcess;
 	}
@@ -166,7 +167,7 @@ namespace UE::PixelStreamingServers::Utils
 #elif PLATFORM_LINUX || PLATFORM_MAC
 		OutAbsPath = OutAbsPath / TEXT("bash") / TEXT("run_local.sh");
 #else
-		UE_LOG(LogPixelStreamingServers, Error, TEXT("Unsupported platform for Pixel Streaming scripts."));
+		UE_LOGF(LogPixelStreamingServers, Error, "Unsupported platform for Pixel Streaming scripts.");
 		return false;
 #endif
 
@@ -183,7 +184,7 @@ namespace UE::PixelStreamingServers::Utils
 		FString OutScriptPath;
 		if(bSkipIfPresent && GetDownloadedServer(OutScriptPath, FString(TEXT("SignallingWebServer"))))
 		{
-			UE_LOG(LogPixelStreamingServers, Log, TEXT("Found pixel streaming servers, skipping download."));
+			UE_LOGF(LogPixelStreamingServers, Log, "Found pixel streaming servers, skipping download.");
 			// empty process
 			return TSharedPtr<FMonitoredProcess>();
 		}
@@ -192,7 +193,7 @@ namespace UE::PixelStreamingServers::Utils
 
 		if(!bHasWebServersDir)
 		{
-			UE_LOG(LogPixelStreamingServers, Error, TEXT("Could not download ps servers, no PixelStreaming/Resources/WebServers directory found."));
+			UE_LOGF(LogPixelStreamingServers, Error, "Could not download ps servers, no PixelStreaming/Resources/WebServers directory found.");
 		}
 
 		FString Args = TEXT("");
@@ -202,7 +203,7 @@ namespace UE::PixelStreamingServers::Utils
 #elif PLATFORM_LINUX || PLATFORM_MAC
 		OutScriptPath = OutScriptPath / TEXT("get_ps_servers.sh");
 #else
-		UE_LOG(LogPixelStreamingServers, Error, TEXT("Unsupported platform for Pixel Streaming scripts."));
+		UE_LOGF(LogPixelStreamingServers, Error, "Unsupported platform for Pixel Streaming scripts.");
 		// empty process
 		return TSharedPtr<FMonitoredProcess>();
 #endif
@@ -210,15 +211,40 @@ namespace UE::PixelStreamingServers::Utils
 		return LaunchChildProcess(OutScriptPath, Args, FString(TEXT("Download ps servers")), true /*bRunAsScript*/);
 	}
 
-	void PopulateCirrusEndPoints(FLaunchArgs& InLaunchArgs, TMap<EEndpoint, FURL>& OutEndPoints)
+	bool PopulateCirrusEndPoints(FLaunchArgs& InLaunchArgs, TMap<EEndpoint, FURL>& OutEndPoints)
 	{
 		FPixelStreamingServersModule& Module = FPixelStreamingServersModule::Get();
 
 		// Query for ports, or set them if they don't exist
-		FString StreamerPort = Utils::QueryOrSetProcessArgs(InLaunchArgs, TEXT("--StreamerPort="), FString::FromInt(Module.NextPort()));
-		FString SFUPort = Utils::QueryOrSetProcessArgs(InLaunchArgs, TEXT("--SFUPort="), FString::FromInt(Module.NextPort()));
-		FString MatchmakerPort = Utils::QueryOrSetProcessArgs(InLaunchArgs, TEXT("--MatchmakerPort="), FString::FromInt(Module.NextPort()));
-		FString HttpPort = Utils::QueryOrSetProcessArgs(InLaunchArgs, TEXT("--HttpPort="), FString::FromInt(Module.NextPort()));
+		int FallbackStreamerPort = UE::PixelStreaming::GetNextAvailablePort();
+		int FallbackSFUPort = UE::PixelStreaming::GetNextAvailablePort();
+		int FallbackHttpPort = UE::PixelStreaming::GetNextAvailablePort();
+		int FallbackMatchmakerPort = UE::PixelStreaming::GetNextAvailablePort();
+		if (FallbackStreamerPort == -1)
+		{
+			UE_LOGF(LogPixelStreamingServers, Warning, "Failed to find an available port for streamer connections");
+			return false;
+		}
+		if (FallbackSFUPort == -1)
+		{
+			UE_LOGF(LogPixelStreamingServers, Warning, "Failed to find an available port for SFU connections");
+			return false;
+		}
+		if (FallbackHttpPort == -1)
+		{
+			UE_LOGF(LogPixelStreamingServers, Warning, "Failed to find an available port for http connections");
+			return false;
+		}
+		if (FallbackMatchmakerPort == -1)
+		{
+			UE_LOGF(LogPixelStreamingServers, Warning, "Failed to find an available port for matchmaker connections");
+			return false;
+		}
+
+		FString StreamerPort = Utils::QueryOrSetProcessArgs(InLaunchArgs, TEXT("--StreamerPort="), FString::FromInt(FallbackStreamerPort));
+		FString SFUPort = Utils::QueryOrSetProcessArgs(InLaunchArgs, TEXT("--SFUPort="), FString::FromInt(FallbackSFUPort));
+		FString MatchmakerPort = Utils::QueryOrSetProcessArgs(InLaunchArgs, TEXT("--MatchmakerPort="), FString::FromInt(FallbackMatchmakerPort));
+		FString HttpPort = Utils::QueryOrSetProcessArgs(InLaunchArgs, TEXT("--HttpPort="), FString::FromInt(FallbackHttpPort));
 
 		// Construct endpoint urls
 
@@ -262,6 +288,8 @@ namespace UE::PixelStreamingServers::Utils
 		OutEndPoints.Add(EEndpoint::Signalling_SFU, SFUUrl);
 		OutEndPoints.Add(EEndpoint::Signalling_Matchmaker, MatchmakerUrl);
 		OutEndPoints.Add(EEndpoint::Signalling_Webserver, WebServerUrl);
+
+		return true;
 	}
 
 	FString ToString(FURL Url)
@@ -272,7 +300,7 @@ namespace UE::PixelStreamingServers::Utils
 	FString ToString(TArrayView<uint8> UTF8Bytes)
 	{
 		FUTF8ToTCHAR Converted((const ANSICHAR*)UTF8Bytes.GetData(), UTF8Bytes.Num());
-		FString OutString(Converted.Length(), Converted.Get());
+		FString OutString = FString::ConstructFromPtrSize(Converted.Get(), Converted.Length());
 		return OutString;
 	}
 
@@ -283,7 +311,7 @@ namespace UE::PixelStreamingServers::Utils
 		bool bSerialized = FJsonSerializer::Serialize(JSONObj.ToSharedRef(), JsonWriter);
 		if(!bSerialized)
 		{
-			UE_LOG(LogPixelStreamingServers, Error, TEXT("Failed to stringify JSON object."));
+			UE_LOGF(LogPixelStreamingServers, Error, "Failed to stringify JSON object.");
 		}
 		return Res;
 	}

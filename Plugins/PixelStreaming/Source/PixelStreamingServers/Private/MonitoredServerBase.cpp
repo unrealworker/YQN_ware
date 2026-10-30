@@ -26,7 +26,7 @@ namespace UE::PixelStreamingServers
 			{
 				return true;
 			}
-			UE_LOG(LogPixelStreamingServers, Log, TEXT("Downloaded server not found at - %s"), *OutServerAbsPath);
+			UE_LOGF(LogPixelStreamingServers, Log, "Downloaded server not found at - %ls", *OutServerAbsPath);
 		}
 		else
 		{
@@ -36,7 +36,7 @@ namespace UE::PixelStreamingServers
 			{
 				return true;
 			}
-			UE_LOG(LogPixelStreamingServers, Log, TEXT("Server binary not found at - %s"), *OutServerAbsPath);
+			UE_LOGF(LogPixelStreamingServers, Log, "Server binary not found at - %ls", *OutServerAbsPath);
 		}
 		return false;
 	}

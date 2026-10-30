@@ -7,7 +7,7 @@
 // #include "PixelCaptureCapturerNV12.h"
 #include "PixelCaptureCapturerNV12ToRHI.h"
 
-TSharedPtr<FPixelCaptureCapturer> FPixelStreamingVideoInputNV12::CreateCapturer(int32 FinalFormat, float FinalScale)
+TSharedPtr<FPixelCaptureCapturer> FPixelStreamingVideoInputNV12::CreateCapturer(int32 FinalFormat, FIntPoint Resolution)
 {
 	switch (FinalFormat)
 	{
@@ -21,7 +21,7 @@ TSharedPtr<FPixelCaptureCapturer> FPixelStreamingVideoInputNV12::CreateCapturer(
 		// 	return MakeShared<FPixelCaptureCapturerNV12>();
 		// }
 		default:
-			UE_LOG(LogPixelStreaming, Error, TEXT("Unsupported final format %d"), FinalFormat);
+			UE_LOGF(LogPixelStreaming, Error, "Unsupported final format %d", FinalFormat);
 			return nullptr;
 	}
 }

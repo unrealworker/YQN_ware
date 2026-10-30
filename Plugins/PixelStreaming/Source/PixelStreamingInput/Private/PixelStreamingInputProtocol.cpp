@@ -16,11 +16,11 @@ TSharedPtr<FJsonObject> FPixelStreamingInputProtocol::ToJson(EPixelStreamingMess
 		? FPixelStreamingInputProtocol::ToStreamerProtocol
 		: FPixelStreamingInputProtocol::FromStreamerProtocol;
 
-	ProtocolJson->SetField("Direction", MakeShared<FJsonValueNumber>(static_cast<uint8>(Direction)));
+	ProtocolJson->SetField(TEXT("Direction"), MakeShared<FJsonValueNumber>(static_cast<uint8>(Direction)));
 	MessageProtocol.Apply([ProtocolJson](FString Key, FPixelStreamingInputMessage Value) {
 		TSharedPtr<FJsonObject> MessageJson = MakeShareable(new FJsonObject());
 
-		MessageJson->SetField("id", MakeShared<FJsonValueNumber>(Value.GetID()));
+		MessageJson->SetField(TEXT("id"), MakeShared<FJsonValueNumber>(Value.GetID()));
 
         TArray<EPixelStreamingMessageTypes> Structure = Value.GetStructure();
 		TArray<TSharedPtr<FJsonValue>> StructureJson;
@@ -55,7 +55,7 @@ TSharedPtr<FJsonObject> FPixelStreamingInputProtocol::ToJson(EPixelStreamingMess
 			TSharedRef<FJsonValueString> JsonValue = MakeShareable(new FJsonValueString(*Text));
 			StructureJson.Add(JsonValue);
 		}
-		MessageJson->SetArrayField("structure", StructureJson);
+		MessageJson->SetArrayField(TEXT("structure"), StructureJson);
 
 		ProtocolJson->SetField(*Key, MakeShared<FJsonValueObject>(MessageJson));
 	});

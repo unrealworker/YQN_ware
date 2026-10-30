@@ -7,7 +7,7 @@ import time
 import traceback
 import unreal
 
-ROOT = Path('D:/UEPro/Test')
+ROOT = Path(unreal.Paths.convert_relative_path_to_full(unreal.Paths.project_dir())).resolve()
 OUT = ROOT / 'Saved/AnnotationCleanup'
 CLI = unreal.SystemLibrary.get_command_line()
 assert all(re.search(r'(?:^|\s)-'+f+r'(?=\s|$)', CLI, re.I) for f in ('game','RenderOffscreen','TwinDiagnostics'))
@@ -18,6 +18,7 @@ result = dict(success=False, checks=[], captures=[], assets_saved=False)
 world = pc = hud = pawn = handle = None
 started = time.monotonic()
 stage = 'discover'
+probe_serial = 0
 
 def write():
     (OUT/'runtime.json').write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -55,8 +56,64 @@ def discover():
             return bool(report().get('business'))
     return False
 
-def validate(page):
-    r=report()
+def annotation_probe():
+    """Read the current CEF DOM, including accessible collapsed explanations."""
+    global probe_serial
+    probe_serial += 1
+    token = probe_serial
+    seed = report()
+    script = """(()=>{
+const r=%s,page=document.getElementById('page'),main=document.getElementById('main');
+const motion=window.TwinMotion,state=window.twinState;
+r.action='report';r.businessAnnotationQAToken=%d;
+r.page=state.page==='scene'?'settings':state.page;r.detail=state.detail;
+r.business=Object.assign({},r.business,{visibleText:String(motion?motion.text(page):(page.innerText||page.textContent||'')).slice(0,6000),
+ inventorySampleRows:page.querySelectorAll('[data-inventory-sample]').length,
+ ledgerSampleRows:page.querySelectorAll('[data-ledger-sample]').length,
+ unverifiedSections:page.querySelectorAll('[data-unverified]').length});
+r.businessAnnotations={busy:main.getAttribute('aria-busy')==='true',
+ explanations:[...page.querySelectorAll('[data-info]')].map(n=>({label:n.getAttribute('aria-label'),copy:n.dataset.info})),
+ numbers:[...page.querySelectorAll('[data-motion-value]')].map(n=>({target:n.dataset.motionValue,actual:n.textContent})),
+ unverifiedKeys:[...page.querySelectorAll('[data-unverified]')].map(n=>n.dataset.unverified)};
+window.ue.twin.command(JSON.stringify(r));
+})()""" % (json.dumps(seed,ensure_ascii=True),token)
+    deadline=time.monotonic()+10
+    next_send=0
+    while True:
+        current=report()
+        if current.get('businessAnnotationQAToken')==token:
+            return current
+        now=time.monotonic()
+        assert now<deadline,'Fresh CEF business annotation probe timed out'
+        if now>=next_send:
+            hud.evaluate_diagnostics(script)
+            next_send=now+.1
+        yield
+
+
+def settled_business_view(page, detail_id=None):
+    """Wait on actual rendered number values, not a guessed animation delay."""
+    deadline=time.monotonic()+20
+    while True:
+        current=report()
+        if current.get('page')==page and current.get('business') and current.get('transition',{}).get('phase')=='idle':
+            current=yield from annotation_probe()
+            dom=current['businessAnnotations']
+            detail=current.get('detail') or {}
+            if (current['page']==page and (detail.get('id')==detail_id if detail_id else not detail)
+                    and not dom['busy'] and all(n['actual']==n['target'] for n in dom['numbers'])):
+                return current
+        assert time.monotonic()<deadline,'Business view did not settle: '+page
+        yield from pause(.05)
+
+
+def explanation(r, label):
+    matches=[item['copy'] for item in r['businessAnnotations']['explanations'] if item['label']==label]
+    assert len(matches)==1,(label,matches)
+    return matches[0]
+
+
+def validate(page, r):
     assert r['page']==page, r
     assert not r['overflow'], r
     assert not r['imageFailures'], r
@@ -64,16 +121,31 @@ def validate(page):
     assert b['sourceMode']=='verified-extract' and b['live'] is False
     assert b['warehouseCode']=='GHS_CA_US'
     text=b['visibleText']
+    data_help=explanation(r,'数据说明')
+    assert '数据非实时刷新' in data_help,data_help
+    if page in ('overview','inventory'):
+        assert '数量单位待确认' in data_help,data_help
+        assert '单位待确认' not in text,text
+    if page=='devices':
+        assert '管理状态不代表实时在线状态' in data_help,data_help
     assert not re.search(r'GHS_CA_US|仓库\s*108|ETL|UTC\+08|核验日期|静态数据|静态核验|业务快照|查询核验|当前快照',text),text
     assert {'overview':'库存、设备与作业概况','inventory':'库存数量与货位分布','devices':'叉车台账与设备状态'}[page] in text
     if page in ('overview','inventory'):
         for value in ('337,783','336,006','156','14,373'):
             assert value in text, (value,text)
-        assert '1,920' in text and '2,400' in text
+        assert all(value in text for value in ('1,920','416','64')),text
+        if page=='overview':
+            capacity_help=explanation(r,'库容占用说明')
+            assert all(value in capacity_help for value in ('原设计示例','2,400','1,920','数据未核验')),capacity_help
+            assert 'capacity' in r['businessAnnotations']['unverifiedKeys']
+            assert '80.0%' in text,text
+        else:
+            assert '2,400' in text,text
+            assert 'inventory-design' in r['businessAnnotations']['unverifiedKeys']
         assert '数据未核验' in text and b['unverifiedSections']>0
     if page=='inventory':
         assert b['inventorySampleRows']==5
-        for value in ('8551268','7111566','8556512','8703069','10274458','-1','单位待确认','待确认'):
+        for value in ('8551268','7111566','8556512','8703069','10274458','-1','待确认'):
             assert value in text, (value,text)
         assert '数据未核验' in text and b['unverifiedSections']>0
     if page=='devices':
@@ -111,8 +183,8 @@ def run():
         for page in ('overview','inventory','devices'):
             hud.navigate(page)
             yield from wait('navigate_'+page,lambda:report().get('page')==page and report().get('transition',{}).get('phase')=='idle')
-            yield from pause(.8)
-            validate(page)
+            current=yield from settled_business_view(page)
+            validate(page,current)
             assert pc.warehouse_roof.is_roof_closed(), 'Business view changed the roof'
             yield from capture(str(width)+'_'+page)
     # Existing scene picking still opens the actual model, independently of ledger IDs.
@@ -120,9 +192,11 @@ def run():
     yield from wait('scene_pick',lambda:(report().get('detail') or {}).get('id')=='FORK-07')
     assert hud.is_interior_available()
     yield from wait('scene_detail_ready',lambda:report().get('transition',{}).get('phase')=='idle')
-    r=report()
+    r=yield from settled_business_view('devices',detail_id='FORK-07')
     text=r['business']['visibleText']
-    assert all(value in text for value in ('FORK-07','数据未核验','场景状态及参数尚未与设备平台核验')),r
+    assert all(value in text for value in ('FORK-07','数据未核验','场景参数 · 尚未核验')),r
+    assert 'scene-device' in r['businessAnnotations']['unverifiedKeys'],r
+    assert '场景状态及参数尚未与设备平台核验' in explanation(r,'场景参数 · 尚未核验说明'),r
     assert not r['overflow'],r
     record('scene_pick_keeps_identity_and_roof_interaction',browser=report())
     hud.command('{"action":"overview"}')
@@ -133,7 +207,7 @@ def run():
 def finish(error=None):
     result['success']=error is None
     result['elapsed_seconds']=time.monotonic()-started
-    if error:result.update(error=error,stage=stage)
+    if error:result.update(error=error,stage=stage,failure_browser=report())
     write()
     unreal.unregister_slate_post_tick_callback(handle)
     (unreal.log_error if error else unreal.log)('GHS_CONFIRMED_BUSINESS_RUNTIME '+json.dumps(result,ensure_ascii=False))

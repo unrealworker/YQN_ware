@@ -12,11 +12,11 @@
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 
 namespace GHSTwinSceneCacheTests
 {
-constexpr uint32 Flags=EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter;
+constexpr auto Flags=GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter;
 struct FFixture
 {
     UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);

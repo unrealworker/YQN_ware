@@ -61,12 +61,12 @@ namespace UE::PixelStreaming
 			if (!bFormatChecked)
 			{
 				bFormatChecked = true;
-				UE_LOG(LogPixelStreamingAudioCapturer, Error, TEXT("Audio samplerate needs to be 48000hz"));
+				UE_LOGF(LogPixelStreamingAudioCapturer, Error, "Audio samplerate needs to be 48000hz");
 			}
 			return;
 		}
 
-		UE_LOG(LogPixelStreamingAudioCapturer, VeryVerbose, TEXT("captured %d samples, %dc, %dHz"), NumSamples, NumChannels, SampleRate);
+		UE_LOGF(LogPixelStreamingAudioCapturer, VeryVerbose, "captured %d samples, %dc, %dHz", NumSamples, NumChannels, SampleRate);
 
 		Audio::TSampleBuffer<float> Buffer(AudioData, NumSamples, InNumChannels, SampleRate);
 		// Mix to stereo if required, since PixelStreaming only accepts stereo at the moment
@@ -98,7 +98,7 @@ namespace UE::PixelStreaming
 				{
 					DeviceBuffer->SetRecordedBuffer(RecordingBuffer.GetData(), BytesPer10Ms / (sizeof(uint16) * NumChannels));
 					DeviceBuffer->DeliverRecordedData();
-					UE_LOG(LogPixelStreamingAudioCapturer, VeryVerbose, TEXT("passed %d bytes"), BytesPer10Ms);
+					UE_LOGF(LogPixelStreamingAudioCapturer, VeryVerbose, "passed %d bytes", BytesPer10Ms);
 				}
 			}
 
@@ -141,7 +141,7 @@ namespace UE::PixelStreaming
 		}
 
 		bInitialized = true;
-		UE_LOG(LogPixelStreamingAudioCapturer, Verbose, TEXT("Init"));
+		UE_LOGF(LogPixelStreamingAudioCapturer, Verbose, "Init");
 		return 0;
 	}
 
@@ -165,7 +165,7 @@ namespace UE::PixelStreaming
 			DeviceBuffer.Reset();
 		}
 
-		UE_LOG(LogPixelStreamingAudioCapturer, Verbose, TEXT("Terminate"));
+		UE_LOGF(LogPixelStreamingAudioCapturer, Verbose, "Terminate");
 		return 0;
 	}
 

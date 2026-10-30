@@ -2,7 +2,7 @@
 import hashlib,json,re,time,traceback
 from pathlib import Path
 import unreal
-ROOT=Path('D:/UEPro/Test');OUT=ROOT/'Saved/TrafficDensity';OUT.mkdir(exist_ok=True)
+ROOT=Path(unreal.Paths.convert_relative_path_to_full(unreal.Paths.project_dir())).resolve();OUT=ROOT/'Saved/TrafficDensity';OUT.mkdir(exist_ok=True)
 assert all(re.search(r'(?:^|\s)-'+f+r'(?=\s|$)',unreal.SystemLibrary.get_command_line(),re.I) for f in ('game','RenderOffscreen','TwinDiagnostics'))
 MAP=ROOT/'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap'
 before_hash=hashlib.sha256(MAP.read_bytes()).hexdigest()

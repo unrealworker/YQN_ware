@@ -125,7 +125,7 @@ namespace UE::PixelStreaming
 				FTextureRHIRef TextureRHI = Texture->GetResource() ? Texture->GetResource()->TextureRHI : nullptr;
 				if (!TextureRHI)
 				{
-					UE_LOG(LogPixelStreaming, Error, TEXT("Attempting freeze frame with texture %s with no texture RHI"), *Texture->GetName());
+					UE_LOGF(LogPixelStreaming, Error, "Attempting freeze frame with texture %ls with no texture RHI", *Texture->GetName());
 					return;
 				}
 				uint32 Width = TextureRHI->GetDesc().Extent.X;
@@ -138,7 +138,7 @@ namespace UE::PixelStreaming
 						.SetInitialState(ERHIAccess::Present)
 						.DetermineInititialState();
 
-				FTextureRHIRef DestTexture = RHICreateTexture(TextureDesc);
+				FTextureRHIRef DestTexture = RHICmdList.CreateTexture(TextureDesc);
 
 				// Copy freeze frame texture to empty texture
 				CopyTexture(RHICmdList, TextureRHI, DestTexture);
@@ -226,7 +226,7 @@ namespace UE::PixelStreaming
 					}
 					else
 					{
-						UE_LOG(LogPixelStreaming, Error, TEXT("Could not find datachannel message with ID FreezeFrame."));
+						UE_LOGF(LogPixelStreaming, Error, "Could not find datachannel message with ID FreezeFrame.");
 					}
 				}
 			});
@@ -234,7 +234,7 @@ namespace UE::PixelStreaming
 		}
 		else
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("JPEG image wrapper failed to accept frame data"));
+			UE_LOGF(LogPixelStreaming, Error, "JPEG image wrapper failed to accept frame data");
 		}
 	}
 

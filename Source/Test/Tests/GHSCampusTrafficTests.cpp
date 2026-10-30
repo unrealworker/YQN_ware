@@ -1,8 +1,8 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "../GHSCampusTrafficSimulation.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSCampusTrafficPoolTest,"GHS.Twin.Traffic.BoundedLifetimeAndHeadway",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSCampusTrafficPoolTest,"GHS.Twin.Traffic.BoundedLifetimeAndHeadway",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSCampusTrafficPoolTest::RunTest(const FString&)
 {
     GHSTraffic::Simulation Simulation;

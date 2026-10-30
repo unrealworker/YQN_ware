@@ -2,11 +2,11 @@
 #include "../GHSTwinHeaderLayout.h"
 #include "../GHSTwinLayout.h"
 #include "../GHSTwinTypography.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 #include "Misc/Paths.h"
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinHeaderReflow,
-    "GHS.TwinUI.Layout.AddressClockReflowsAndKeepsInputBounds",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+    "GHS.TwinUI.Layout.AddressClockReflowsAndKeepsInputBounds",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinHeaderReflow::RunTest(const FString&)
 {
     auto Intersects=[](FVector2D A,FVector2D AS,FVector2D B,FVector2D BS)
@@ -31,7 +31,7 @@ bool FGHSTwinHeaderReflow::RunTest(const FString&)
 }
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinHeaderGlyphs,
-    "GHS.TwinUI.Layout.AddressClockTextFitsActualFont",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+    "GHS.TwinUI.Layout.AddressClockTextFitsActualFont",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinHeaderGlyphs::RunTest(const FString&)
 {
     const FString Path=FPaths::ProjectContentDir()/TEXT("GHSNormalWarehouse/HUD/Fonts/DroidSansFallback.ttf");

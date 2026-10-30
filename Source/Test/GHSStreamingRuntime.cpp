@@ -1,6 +1,7 @@
 #include "GHSStreamingRuntime.h"
 #include "Containers/Ticker.h"
 #include "Dom/JsonObject.h"
+#include "DynamicRHI.h"
 #include "EngineGlobals.h"
 #include "HAL/FileManager.h"
 #include "HAL/IConsoleManager.h"
@@ -72,7 +73,7 @@ public:
         if(!NextError.IsEmpty() && NextError!=Error) UE_LOG(LogTemp,Warning,TEXT("GHS_STREAM_BUDGET_REJECTED %s"),*NextError);
         Error=NextError;
 
-        const double GPUms=FPlatformTime::ToMilliseconds(GGPUFrameTime);
+        const double GPUms=GDynamicRHI ? FPlatformTime::ToMilliseconds(RHIGetGPUFrameCycles()) : 0.;
         if(FMath::IsFinite(GPUms) && GPUms>0 && GPUms<10000) { GPUTimeSum+=GPUms; ++GPUSamples; }
         // Sample engine thread timings with the existing 4 Hz budget tick;
         // these are diagnostics, not additional per-frame file writes.
@@ -116,7 +117,7 @@ public:
                 else Metrics->SetField(ThreadKeys[Index],MakeShared<FJsonValueNull>());
                 ThreadTimeSums[Index]=0; ThreadSamples[Index]=0;
             }
-            Metrics->SetStringField(TEXT("gpuMetric"),TEXT("UE GGPUFrameTime average; not an isolated GPU capacity guarantee"));
+            Metrics->SetStringField(TEXT("gpuMetric"),TEXT("UE RHI GPU frame cycles average; not an isolated GPU capacity guarantee"));
             Metrics->SetStringField(TEXT("error"),Error);
             FString Json; FJsonSerializer::Serialize(Metrics,TJsonWriterFactory<>::Create(&Json));
             if(!AtomicWrite(Directory/TEXT("metrics.json"),Json))
@@ -147,7 +148,7 @@ bool ParseBudget(const FString& Json,FBudget& Out,FString& Error)
     { Error=TEXT("Budget must be a complete JSON object"); return false; }
     static const TSet<FString> Allowed={TEXT("version"),TEXT("sequence"),TEXT("fps"),TEXT("minBitrateMbps"),TEXT("startBitrateMbps"),TEXT("maxBitrateMbps")};
     for(const auto& Pair:Root->Values)
-        if(!Allowed.Contains(Pair.Key)) { Error=TEXT("Budget contains an unsupported field"); return false; }
+        if(!Allowed.Contains(FString(Pair.Key.Len(), *Pair.Key))) { Error=TEXT("Budget contains an unsupported field"); return false; }
     double Version=0,Sequence=0,FPS=0,Min=0,Max=0;
     const auto Number=[&](const TCHAR* Name,double& Value)
     {

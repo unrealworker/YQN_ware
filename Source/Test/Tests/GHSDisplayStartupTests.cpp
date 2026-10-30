@@ -1,8 +1,8 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "GHSDisplayStartup.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSDesktopStartupDefaultTest,"GHS.Display.Startup.UsesCurrentDesktopBeforeWindowCreation",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSDesktopStartupDefaultTest,"GHS.Display.Startup.UsesCurrentDesktopBeforeWindowCreation",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSDesktopStartupDefaultTest::RunTest(const FString&)
 {
     for(const FIntPoint Desktop : {FIntPoint(2560,1600),FIntPoint(1920,1080),FIntPoint(3840,2160)})
@@ -17,7 +17,7 @@ bool FGHSDesktopStartupDefaultTest::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSDesktopStartupOverridesTest,"GHS.Display.Startup.PreservesExplicitResolutionAndWindowModes",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSDesktopStartupOverridesTest,"GHS.Display.Startup.PreservesExplicitResolutionAndWindowModes",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSDesktopStartupOverridesTest::RunTest(const FString&)
 {
     const TCHAR* Commands[]={

@@ -54,7 +54,7 @@ namespace UE::PixelStreaming
 		FAudioDeviceHandle AudioDevice = GEngine->GetMainAudioDevice();
 		if (!AudioDevice)
 		{
-			UE_LOG(LogPixelStreaming, Warning, TEXT("No audio device"));
+			UE_LOGF(LogPixelStreaming, Warning, "No audio device");
 			bInitialised = false;
 			return false;
 		}
@@ -97,12 +97,12 @@ namespace UE::PixelStreaming
 			if (!bReportedSampleRateMismatch)
 			{
 				bReportedSampleRateMismatch = true;
-				UE_LOG(LogPixelStreaming, Error, TEXT("Audio sample rate mismatch. Expected: %d | Actual: %d"), TargetSampleRate, SampleRate);
+				UE_LOGF(LogPixelStreaming, Error, "Audio sample rate mismatch. Expected: %d | Actual: %d", TargetSampleRate, SampleRate);
 			}
 			return;
 		}
 
-		UE_LOG(LogPixelStreaming, VeryVerbose, TEXT("captured %d samples, %dc, %dHz"), NumSamples, NumChannels, SampleRate);
+		UE_LOGF(LogPixelStreaming, VeryVerbose, "captured %d samples, %dc, %dHz", NumSamples, NumChannels, SampleRate);
 
 		// We got passed a patch to send the audio to instead of directly to WebRTC
 		if (AudioMixerPatchInput.IsValid())

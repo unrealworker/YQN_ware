@@ -17,7 +17,7 @@ namespace UE::PixelStreamingServers
 
 	void FCirrusWrapper::Stop()
 	{
-		UE_LOG(LogPixelStreamingServers, Log, TEXT("Stopping Cirrus signalling server."));
+		UE_LOGF(LogPixelStreamingServers, Log, "Stopping Cirrus signalling server.");
 		FMonitoredServerBase::Stop();
 	}
 	
@@ -37,7 +37,7 @@ namespace UE::PixelStreamingServers
 			FPaths::GetPathLeaf(ServerAbsPath), 
 			!bUseServerBinary);
 
-		UE_LOG(LogPixelStreamingServers, Log, TEXT("Cirrus signalling server running at: %s"), *OutEndPoints[EEndpoint::Signalling_Webserver].ToString(true));
+		UE_LOGF(LogPixelStreamingServers, Log, "Cirrus signalling server running at: %ls", *OutEndPoints[EEndpoint::Signalling_Webserver].ToString(true));
 
 		if (bPollUntilReady)
 		{

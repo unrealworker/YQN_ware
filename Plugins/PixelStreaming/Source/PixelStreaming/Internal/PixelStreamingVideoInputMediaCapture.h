@@ -17,6 +17,7 @@ class UPixelStreamingMediaIOOutput : public UMediaOutput
 public:
 	virtual FIntPoint GetRequestedSize() const override { return UMediaOutput::RequestCaptureSourceSize; }
 	virtual EPixelFormat GetRequestedPixelFormat() const override { return EPixelFormat::PF_B8G8R8A8; }
+	virtual EMediaCaptureConversionOperation GetConversionOperation(EMediaCaptureSourceType InSourceType) const override { return EMediaCaptureConversionOperation::CUSTOM; }
 
 private:
 	UPROPERTY(Transient)
@@ -53,7 +54,7 @@ public:
 
 protected:
 
-	virtual TSharedPtr<FPixelCaptureCapturer> CreateCapturer(int32 FinalFormat, float FinalScale) override;
+	virtual TSharedPtr<FPixelCaptureCapturer> CreateCapturer(int32 FinalFormat, FIntPoint Resolution) override;
 	void StartActiveViewportCapture();
 	void LateStartActiveViewportCapture();
 
@@ -62,7 +63,6 @@ private:
 	void OnCaptureActiveViewportStateChanged();
 
 private:
-	UPROPERTY(Transient)
 	TObjectPtr<UPixelStreamingMediaIOCapture> MediaCapture = nullptr;
 
 	TOptional<FDelegateHandle> OnFrameEndDelegateHandle;

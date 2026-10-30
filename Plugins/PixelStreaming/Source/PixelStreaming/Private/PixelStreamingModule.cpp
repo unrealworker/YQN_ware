@@ -65,6 +65,9 @@ DEFINE_LOG_CATEGORY(LogPixelStreaming);
 
 IPixelStreamingModule* UE::PixelStreaming::FPixelStreamingModule::PixelStreamingModule = nullptr;
 
+const FPixelStreamingPlayerId INVALID_PLAYER_ID = ToPlayerId(FString(TEXT("Invalid Player Id")));
+const FPixelStreamingPlayerId SFU_PLAYER_ID = FString(TEXT("1"));
+
 namespace UE::PixelStreaming
 {
 	/**
@@ -75,7 +78,7 @@ namespace UE::PixelStreaming
 #if UE_SERVER
 		// Hack to no-op the rest of the module so Blueprints can still work
 		return;
-#endif
+#else
 
 		// Initialise all settings from command line args etc
 		Settings::InitialiseSettings();
@@ -96,7 +99,7 @@ namespace UE::PixelStreaming
 		if (!(RHIType == ERHIInterfaceType::D3D11 || RHIType == ERHIInterfaceType::D3D12 || RHIType == ERHIInterfaceType::Vulkan || RHIType == ERHIInterfaceType::Metal))
 		{
 #if !WITH_DEV_AUTOMATION_TESTS
-			UE_LOG(LogPixelStreaming, Warning, TEXT("Only D3D11/D3D12/Vulkan/Metal Dynamic RHI is supported. Detected %s"), GDynamicRHI != nullptr ? GDynamicRHI->GetName() : TEXT("[null]"));
+			UE_LOGF(LogPixelStreaming, Warning, "Only D3D11/D3D12/Vulkan/Metal Dynamic RHI is supported. Detected %ls", GDynamicRHI != nullptr ? GDynamicRHI->GetName() : TEXT("[null]"));
 #endif
 			return;
 		}
@@ -154,6 +157,7 @@ namespace UE::PixelStreaming
 		// Call FStats::Get() to initialize the singleton
 		FStats::Get();
 		bStartupCompleted = true;
+#endif // UE_SERVER
 	}
 
 	void FPixelStreamingModule::ShutdownModule()
@@ -261,7 +265,7 @@ namespace UE::PixelStreaming
 			if (Settings::GetSignallingServerIP(SignallingServerIP) && Settings::GetSignallingServerPort(SignallingServerPort))
 			{
 				// got both old parameters. Warn about deprecation and build the proper url.
-				UE_LOG(LogPixelStreaming, Warning, TEXT("PixelStreamingIP and PixelStreamingPort are deprecated flags. Use PixelStreamingURL instead. eg. -PixelStreamingURL=ws://%s:%d"), *SignallingServerIP, SignallingServerPort);
+				UE_LOGF(LogPixelStreaming, Warning, "PixelStreamingIP and PixelStreamingPort are deprecated flags. Use PixelStreamingURL instead. eg. -PixelStreamingURL=ws://%ls:%d", *SignallingServerIP, SignallingServerPort);
 				SignallingServerURL = FString::Printf(TEXT("ws://%s:%d"), *SignallingServerIP, SignallingServerPort);
 			}
 		}
@@ -334,7 +338,8 @@ namespace UE::PixelStreaming
 
 	rtc::scoped_refptr<webrtc::VideoTrackSourceInterface> FPixelStreamingModule::CreateExternalVideoSource()
 	{
-		return ExternalVideoSourceGroup->CreateVideoSource([]() { return true; });
+		// New Video source will not work with stream sharing as bInRequireUniqueId is set to true
+		return ExternalVideoSourceGroup->CreateVideoSource(true, []() { return true; });
 	}
 
 	void FPixelStreamingModule::ReleaseExternalVideoSource(const webrtc::VideoTrackSourceInterface* InVideoSource)
@@ -394,24 +399,34 @@ namespace UE::PixelStreaming
 
 	void FPixelStreamingModule::InitDefaultStreamer()
 	{
-		UE_LOG(LogPixelStreaming, Log, TEXT("PixelStreaming streamer ID: %s"), *Settings::GetDefaultStreamerID());
+		UE_LOGF(LogPixelStreaming, Log, "PixelStreaming streamer ID: %ls", *Settings::GetDefaultStreamerID());
 
 		DefaultStreamer = CreateStreamer(Settings::GetDefaultStreamerID());
 		// The PixelStreamingEditorModule handles setting video input in the editor
 		if (!GIsEditor)
 		{
 			// default to the scene viewport if we have a game engine
-			if (UGameEngine* GameEngine = Cast<UGameEngine>(GEngine))
+			if (UGameEngine* GameEngine = Cast<UGameEngine>(GEngine); GameEngine != nullptr)
 			{
-				TSharedPtr<SWindow> TargetWindow = GameEngine->GameViewport->GetWindow();
+				TSharedPtr<SWindow> TargetWindow = GameEngine->GameViewport ? GameEngine->GameViewport->GetWindow() : nullptr;
+				if (!TargetWindow.IsValid())
+				{
+					TargetWindow = GameEngine->GameViewportWindow.Pin();
+				}
+			
 				if (TargetWindow.IsValid())
 				{
 					DefaultStreamer->SetTargetWindow(TargetWindow);
 				}
 				else
 				{
-					UE_LOG(LogPixelStreaming, Error, TEXT("Cannot set target window - target window is not valid."));
+					UE_LOGF(LogPixelStreaming, Error, "Cannot set target window - target window is not valid.");
 				}
+
+			}
+			else
+			{
+				UE_LOGF(LogPixelStreaming, Error, "Cannot set target window - GEngine is not valid.");
 			}
 		}
 
@@ -442,7 +457,7 @@ namespace UE::PixelStreaming
 			FText ErrorText = FText::FromString(ErrorString);
 			FText TitleText = FText::FromString(TEXT("Pixel Streaming Plugin"));
 			FMessageDialog::Open(EAppMsgType::Ok, ErrorText, TitleText);
-			UE_LOG(LogPixelStreaming, Error, TEXT("%s"), *ErrorString);
+			UE_LOGF(LogPixelStreaming, Error, "%ls", *ErrorString);
 			bCompatible = false;
 		}
 #endif
@@ -450,8 +465,8 @@ namespace UE::PixelStreaming
 		if ((Settings::CVarPixelStreamingEncoderCodec.GetValueOnAnyThread() == "H264" && !IsEncoderSupported<FVideoEncoderConfigH264>())
 			|| (Settings::CVarPixelStreamingEncoderCodec.GetValueOnAnyThread() == "AV1" && !IsEncoderSupported<FVideoEncoderConfigAV1>()))
 		{
-			UE_LOG(LogPixelStreaming, Warning, TEXT("Could not setup hardware encoder. This is usually a driver issue or hardware limitation, try reinstalling your drivers."));
-			UE_LOG(LogPixelStreaming, Warning, TEXT("Falling back to VP8 software video encoding."));
+			UE_LOGF(LogPixelStreaming, Warning, "Could not setup hardware encoder. This is usually a driver issue or hardware limitation, try reinstalling your drivers.");
+			UE_LOGF(LogPixelStreaming, Warning, "Falling back to VP8 software video encoding.");
 			Settings::CVarPixelStreamingEncoderCodec.AsVariable()->Set(TEXT("VP8"), ECVF_SetByCommandline);
 		}
 
@@ -522,7 +537,7 @@ namespace UE::PixelStreaming
 
 		FString Descriptor = Res.Mid(1);
 
-		UE_LOG(LogPixelStreaming, Verbose, TEXT("UIInteraction: %s"), *Descriptor);
+		UE_LOGF(LogPixelStreaming, Verbose, "UIInteraction: %ls", *Descriptor);
 		for (UPixelStreamingInput* InputComponent : InputComponents)
 		{
 			InputComponent->OnInputEvent.Broadcast(Descriptor);

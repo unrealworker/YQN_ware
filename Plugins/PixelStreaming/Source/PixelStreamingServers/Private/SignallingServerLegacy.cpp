@@ -9,12 +9,12 @@ namespace UE::PixelStreamingServers
 		// legacy supports: answer, disconnectPlayer, iceCandidate, config
 
 		const FString MessageString = Utils::ToString(JSONObj);
-		UE_LOG(LogPixelStreamingServers, Log, TEXT("Sending to player id=%d: %s"), PlayerId, *MessageString);
+		UE_LOGF(LogPixelStreamingServers, Log, "Sending to player id=%d: %ls", PlayerId, *MessageString);
 
 		FString MessageType;
 		if (!JSONObj->TryGetStringField(TEXT("type"), MessageType))
 		{
-			UE_LOG(LogPixelStreamingServers, Error, TEXT("No message type on message sent to player %d"), PlayerId);
+			UE_LOGF(LogPixelStreamingServers, Error, "No message type on message sent to player %d", PlayerId);
 			return;
 		}
 
@@ -38,7 +38,7 @@ namespace UE::PixelStreamingServers
 		else
 		{
 			// Unsupported message type
-			UE_LOG(LogPixelStreamingServers, Error, TEXT("Unsupported message type sent to player"));
+			UE_LOGF(LogPixelStreamingServers, Error, "Unsupported message type sent to player");
 			return;
 		}
 	}
@@ -48,12 +48,12 @@ namespace UE::PixelStreamingServers
 		// legacy supports: offer, stats, kick, iceCandidate
 
 		const FString MessageString = Utils::ToString(JSONObj);
-		UE_LOG(LogPixelStreamingServers, Log, TEXT("Sending to streamer id=%d: %s"), StreamerId, *MessageString);
+		UE_LOGF(LogPixelStreamingServers, Log, "Sending to streamer id=%d: %ls", StreamerId, *MessageString);
 
 		FString MessageType;
 		if (!JSONObj->TryGetStringField(TEXT("type"), MessageType))
 		{
-			UE_LOG(LogPixelStreamingServers, Error, TEXT("No message type on message sent to streamer %d"), StreamerId);
+			UE_LOGF(LogPixelStreamingServers, Error, "No message type on message sent to streamer %d", StreamerId);
 			return;
 		}
 
@@ -74,7 +74,7 @@ namespace UE::PixelStreamingServers
 		}
 		else if (MessageType == FString(TEXT("stats")))
 		{
-			UE_LOG(LogPixelStreamingServers, Log, TEXT("Player stats = \n %s"), *MessageString);
+			UE_LOGF(LogPixelStreamingServers, Log, "Player stats = \n %ls", *MessageString);
 			return;
 		}
 		else if (MessageType == FString(TEXT("kick")))
@@ -85,7 +85,7 @@ namespace UE::PixelStreamingServers
 		else
 		{
 			// Unsupported message type
-			UE_LOG(LogPixelStreamingServers, Error, TEXT("Unsupported message type sent to streamer"));
+			UE_LOGF(LogPixelStreamingServers, Error, "Unsupported message type sent to streamer");
 			return;
 		}
 	}
@@ -94,11 +94,11 @@ namespace UE::PixelStreamingServers
 	{
 		if(StreamersWS->GetConnections().Num() > 1)
 		{
-			UE_LOG(LogPixelStreamingServers, Warning, TEXT("Streamer (id=%d) attempted to connect to the signalling server, but we already have a streamer connected"), ConnectionId);	
+			UE_LOGF(LogPixelStreamingServers, Warning, "Streamer (id=%d) attempted to connect to the signalling server, but we already have a streamer connected", ConnectionId);	
 			return;
 		}
 
-		UE_LOG(LogPixelStreamingServers, Log, TEXT("Streamer websocket connected, id=%d"), ConnectionId);
+		UE_LOGF(LogPixelStreamingServers, Log, "Streamer websocket connected, id=%d", ConnectionId);
 
 		// Send a config message to the streamer passing ICE servers to be used.
 		TSharedPtr<FJsonObject> JSONObj = CreateConfigJSON();
@@ -106,7 +106,7 @@ namespace UE::PixelStreamingServers
 
 		// request the streamer id
 		TSharedRef<FJsonObject> idJSON = MakeShared<FJsonObject>();
-		idJSON->SetStringField("type", "identify");
+		idJSON->SetStringField(TEXT("type"), "identify");
 		SendStreamerMessage(ConnectionId, idJSON);
 
 		StreamersWS->NameConnection(ConnectionId, TEXT("_LEGACY_"));
@@ -115,13 +115,13 @@ namespace UE::PixelStreamingServers
 	void FSignallingServerLegacy::OnPlayerMessage(uint16 ConnectionId, TArrayView<uint8> Message) 
 	{
 		const FString Msg = Utils::ToString(Message);
-		UE_LOG(LogPixelStreamingServers, Log, TEXT("From Player id=%d: %s"), ConnectionId, *Msg);
+		UE_LOGF(LogPixelStreamingServers, Log, "From Player id=%d: %ls", ConnectionId, *Msg);
 
 		FString MsgType;
 		TSharedPtr<FJsonObject> JSONObj = ParseMessage(Msg, MsgType);
 		if (!JSONObj)
 		{
-			UE_LOG(LogPixelStreamingServers, Error, TEXT("Failed to parse incoming player message."));
+			UE_LOGF(LogPixelStreamingServers, Error, "Failed to parse incoming player message.");
 			return;
 		}
 
@@ -134,7 +134,7 @@ namespace UE::PixelStreamingServers
 			TArray<FString> StreamerConnections = StreamersWS->GetConnectionNames();
 			if(StreamerConnections.Num() == 0)
 			{
-				UE_LOG(LogPixelStreamingServers, Error, TEXT("Player %d sent a message, but no streamers were connected"), ConnectionId);
+				UE_LOGF(LogPixelStreamingServers, Error, "Player %d sent a message, but no streamers were connected", ConnectionId);
 				return;
 			}
 

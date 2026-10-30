@@ -68,7 +68,7 @@ namespace UE::PixelStreaming
 		TSharedPtr<FVideoSourceGroup> Group = FVideoSourceGroup::Create();
 		TSharedPtr<FPixelStreamingVideoInputI420> Input = MakeShared<FPixelStreamingVideoInputI420>();
 		Group->SetVideoInput(Input);
-		auto Source = Group->CreateVideoSource([] { return false; });
+		auto Source = Group->CreateVideoSource(false, [] { return false; });
 		Group->SetFPS(120);
 		Group->SetCoupleFramerate(false);
 		Group->Start();

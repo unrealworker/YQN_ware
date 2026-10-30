@@ -6,6 +6,15 @@ $manifest = Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'source-manif
 function Assert-Check([bool]$Condition, [string]$Message) {
     if (-not $Condition) { throw $Message }
 }
+$privateDir = Join-Path $plugin 'Source/PixelStreaming/Private'
+# Check the engine ABI before the manifest, so an old plugin cannot pass by
+# refreshing hashes against the new engine without actually rebasing its code.
+$sourceGroupHeader = Get-Content -Raw -LiteralPath (Join-Path $privateDir 'VideoSourceGroup.h')
+$hardwareSource = Get-Content -Raw -LiteralPath (Join-Path $privateDir 'VideoEncoderSingleLayerHardware.cpp')
+$layeredSource = Get-Content -Raw -LiteralPath (Join-Path $privateDir 'VideoEncoderLayered.cpp')
+Assert-Check ($sourceGroupHeader -match 'CreateVideoSource\(bool bInRequireUniqueId,') 'UE5.8 unique stream-id capture API is missing; rebase the plugin before updating hashes.'
+Assert-Check ($layeredSource -match 'GetLayer\(\{\s*StreamInfos\[StreamIdx\].Width,\s*StreamInfos\[StreamIdx\].Height\s*\}\)') 'UE5.8 PixelCapture resolution-based layer lookup is missing.'
+Assert-Check ($hardwareSource -match 'VideoConfig.MinQuality' -and $hardwareSource -match 'VideoConfig.MaxQuality' -and $hardwareSource -notmatch 'VideoConfig\.(MinQP|MaxQP)') 'UE5.8 AVCodecs quality API migration is incomplete.'
 foreach ($entry in $manifest.files) {
     Assert-Check ($entry.path -notmatch '^(Binaries|Intermediate)/|/node_modules/') "Generated file in source manifest: $($entry.path)"
     $file = Join-Path $plugin $entry.path

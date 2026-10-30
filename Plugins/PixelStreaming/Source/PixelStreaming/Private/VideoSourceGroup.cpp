@@ -67,12 +67,12 @@ namespace UE::PixelStreaming
 		}
 	}
 
-	rtc::scoped_refptr<webrtc::VideoTrackSourceInterface> FVideoSourceGroup::CreateVideoSource(const TFunction<bool()>& InShouldGenerateFramesCheck)
+	rtc::scoped_refptr<webrtc::VideoTrackSourceInterface> FVideoSourceGroup::CreateVideoSource(bool bInRequireUniqueId, const TFunction<bool()>& InShouldGenerateFramesCheck)
 	{
 #if WEBRTC_5414
-		rtc::scoped_refptr<FVideoSource> NewVideoSource = rtc::scoped_refptr<FVideoSource>(new FVideoSource(VideoInput, InShouldGenerateFramesCheck));
+		rtc::scoped_refptr<FVideoSource> NewVideoSource = rtc::scoped_refptr<FVideoSource>(new FVideoSource(bInRequireUniqueId, VideoInput, InShouldGenerateFramesCheck));
 #else
-		rtc::scoped_refptr<FVideoSource> NewVideoSource = new FVideoSource(VideoInput, InShouldGenerateFramesCheck);
+		rtc::scoped_refptr<FVideoSource> NewVideoSource = new FVideoSource(InStreamId, VideoInput, InShouldGenerateFramesCheck);
 #endif
 		{
 			FScopeLock Lock(&CriticalSection);
@@ -248,7 +248,7 @@ namespace UE::PixelStreaming
 						bool bGotNewFrame = FrameEvent.Get()->Wait(WaitTimeRemainingMs);
 						if(!bGotNewFrame)
 						{
-							UE_LOG(LogPixelStreaming, VeryVerbose, TEXT("Old frame submitted"));
+							UE_LOGF(LogPixelStreaming, VeryVerbose, "Old frame submitted");
 						}
 					}
 				}

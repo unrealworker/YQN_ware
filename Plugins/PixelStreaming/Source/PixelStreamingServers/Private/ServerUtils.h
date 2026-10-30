@@ -67,8 +67,9 @@ namespace UE::PixelStreamingServers
 		 * Populates the cirrus endpoints by extracting endpoint information from the `InLaunchArgs.ProcessArgs`, and if not found, using defaults.
 		 * @param InLaunchArgs The launch args containing the process args that we will be inspecting.
 		 * @param OutEndPoints The end points for the server if we launch it with these launch args.
+		 * @param return True if the end point was added.
 		 **/
-		void PopulateCirrusEndPoints(FLaunchArgs& InLaunchArgs, TMap<EEndpoint, FURL>& OutEndPoints);
+		bool PopulateCirrusEndPoints(FLaunchArgs& InLaunchArgs, TMap<EEndpoint, FURL>& OutEndPoints);
 
 		/**
 		 * Convert a `FURL` into a `FString`. `FURL::ToString()` already exists; however, it appends a problematic trailing slash to the output string.

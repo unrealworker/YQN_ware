@@ -38,6 +38,9 @@ public:
 
 	virtual bool UseExternalSignallingServer() override;
 	virtual void UseExternalSignallingServer(bool bInUseExternalSignallingServer) override;
+	/** End IModuleInterface implementation */
+
+	virtual FString GetEditorStreamerID() const { return EditorStreamerID; }
 
 private:
 	void InitEditorStreaming(IPixelStreamingModule& Module);
@@ -54,6 +57,8 @@ private:
 	TSharedPtr<FMonitoredProcess> DownloadProcess;
 	// The signalling server host: eg ws://127.0.0.1
 	FString SignallingDomain;
+	// The ID for the Editor stream, eg "Editor"
+	FString EditorStreamerID;
 	// The port the streamer will connect to. eg 8888
 	int32 StreamerPort;
 	// The port the streams can be viewed at on the browser. eg 80 or 8080

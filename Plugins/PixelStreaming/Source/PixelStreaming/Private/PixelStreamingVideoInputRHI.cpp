@@ -9,7 +9,7 @@
 #include "PixelCaptureCapturerRHIToI420CPU.h"
 #include "PixelCaptureCapturerRHIToI420Compute.h"
 
-TSharedPtr<FPixelCaptureCapturer> FPixelStreamingVideoInputRHI::CreateCapturer(int32 FinalFormat, float FinalScale)
+TSharedPtr<FPixelCaptureCapturer> FPixelStreamingVideoInputRHI::CreateCapturer(int32 FinalFormat, FIntPoint Resolution)
 {
 	switch (FinalFormat)
 	{
@@ -20,26 +20,26 @@ TSharedPtr<FPixelCaptureCapturer> FPixelStreamingVideoInputRHI::CreateCapturer(i
 			// a significant performance increase
 			if (UE::PixelStreaming::Settings::CVarPixelStreamingCaptureUseFence.GetValueOnAnyThread())
 			{
-				return FPixelCaptureCapturerRHI::Create(FinalScale);
+				return FPixelCaptureCapturerRHI::Create({ .OutputResolution = Resolution });
 			}
 			else
 			{
-				return FPixelCaptureCapturerRHIRDG::Create(FinalScale);
+				return FPixelCaptureCapturerRHIRDG::Create({ .OutputResolution = Resolution });
 			}
 		}
 		case PixelCaptureBufferFormat::FORMAT_I420:
 		{
 			if (UE::PixelStreaming::Settings::CVarPixelStreamingVPXUseCompute.GetValueOnAnyThread())
 			{
-				return FPixelCaptureCapturerRHIToI420Compute::Create(FinalScale);
+				return FPixelCaptureCapturerRHIToI420Compute::Create({ .OutputResolution = Resolution });
 			}
 			else
 			{
-				return FPixelCaptureCapturerRHIToI420CPU::Create(FinalScale);
+				return FPixelCaptureCapturerRHIToI420CPU::Create({ .OutputResolution = Resolution });
 			}
 		}
 		default:
-			UE_LOG(LogPixelStreaming, Error, TEXT("Unsupported final format %d"), FinalFormat);
+			UE_LOGF(LogPixelStreaming, Error, "Unsupported final format %d", FinalFormat);
 			return nullptr;
 	}
 }

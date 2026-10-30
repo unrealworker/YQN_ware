@@ -68,7 +68,7 @@ namespace UE::PixelStreaming
 		static std::vector<webrtc::SdpVideoFormat> SupportedFormats;
 
 		EPixelStreamingCodec SelectedCodec = UE::PixelStreaming::Settings::GetSelectedCodec();
-#if PLATFORM_WINDOWS || PLATFORM_LINUX
+#if (PLATFORM_WINDOWS && PLATFORM_CPU_X86_FAMILY) || PLATFORM_LINUX
 		if ((SelectedCodec == EPixelStreamingCodec::H264 || SelectedCodec == EPixelStreamingCodec::AV1) && IsRHIDeviceNVIDIA())
 		{
 			// NOTE (william.belcher): This check will return false if all the encoding sessions are in use, even if the user intends
@@ -102,7 +102,7 @@ namespace UE::PixelStreaming
 				});
 				// Also update our local SelectedCodec to reflect what the state will be
 				SelectedCodec = EPixelStreamingCodec::VP8;
-				UE_LOG(LogPixelStreaming, Warning, TEXT("No more HW encoders available. Falling back to software encoding"));
+				UE_LOGF(LogPixelStreaming, Warning, "No more HW encoders available. Falling back to software encoding");
 				CodecMap.Remove(EPixelStreamingCodec::H264);
 				CodecMap.Remove(EPixelStreamingCodec::AV1);
 			}
@@ -123,8 +123,15 @@ namespace UE::PixelStreaming
 			}
 			else
 			{
-				UE_LOG(LogPixelStreaming, Error, TEXT("Selected codec was not a supported codec."));
+				UE_LOGF(LogPixelStreaming, Error, "Selected codec was not a supported codec.");
 			}
+
+			// We can still support flex-fec even if we're not negotiating codecs
+			if (Settings::CVarPixelStreamingWebRTCEnableFlexFec.GetValueOnAnyThread())
+			{
+				SupportedFormats.push_back(webrtc::SdpVideoFormat(cricket::kFlexfecCodecName));
+			}
+
 			return SupportedFormats;
 		}
 
@@ -156,6 +163,11 @@ namespace UE::PixelStreaming
 						SupportedFormats.push_back(Format);
 					}
 				}
+			}
+
+			if (Settings::CVarPixelStreamingWebRTCEnableFlexFec.GetValueOnAnyThread())
+			{
+				SupportedFormats.push_back(webrtc::SdpVideoFormat(cricket::kFlexfecCodecName));
 			}
 		}
 

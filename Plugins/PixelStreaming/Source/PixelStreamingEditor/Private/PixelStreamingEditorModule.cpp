@@ -77,7 +77,6 @@ void FPixelStreamingEditorModule::ShutdownModule()
 
 void FPixelStreamingEditorModule::InitEditorStreaming(IPixelStreamingModule& Module)
 {
-	FString EditorStreamerID;
 	if (!FParse::Value(FCommandLine::Get(), TEXT("PixelStreamingID="), EditorStreamerID))
 	{
 		EditorStreamerID = "Editor";
@@ -133,27 +132,30 @@ void FPixelStreamingEditorModule::InitEditorStreaming(IPixelStreamingModule& Mod
 
 	EditorStreamer->SetConfigOption(FName(*FString(TEXT("DefaultToHover"))), TEXT("true"));
 
-	IMainFrameModule::Get().OnMainFrameCreationFinished().AddLambda([&](TSharedPtr<SWindow> RootWindow, bool bIsRunningStartupDialog) {
-		MaybeResizeEditor(RootWindow);
+	if (GIsEditor)
+	{
+		IMainFrameModule::Get().OnMainFrameCreationFinished().AddLambda([&](TSharedPtr<SWindow> RootWindow, bool bIsRunningStartupDialog) {
+			MaybeResizeEditor(RootWindow);
+			
+			if (UE::EditorPixelStreaming::Settings::CVarEditorPixelStreamingStartOnLaunch.GetValueOnAnyThread())
+			{
+				// Default our source to the full editor
+				UE::EditorPixelStreaming::EStreamTypes Source = UE::EditorPixelStreaming::EStreamTypes::Editor;
 
-		if (UE::EditorPixelStreaming::Settings::CVarEditorPixelStreamingStartOnLaunch.GetValueOnAnyThread())
-		{
-            // Default our source to the full editor
-            UE::EditorPixelStreaming::EStreamTypes Source = UE::EditorPixelStreaming::EStreamTypes::Editor;
-
-            FString SourceStr = UE::EditorPixelStreaming::Settings::CVarEditorPixelStreamingSource.GetValueOnAnyThread();
-            if(SourceStr == TEXT("Editor") || SourceStr == TEXT("editor"))
-            {
-                Source = UE::EditorPixelStreaming::EStreamTypes::Editor;
-            }
-            else if(SourceStr == TEXT("LevelEditor") || SourceStr == TEXT("leveleditor"))
-            {
-                Source = UE::EditorPixelStreaming::EStreamTypes::LevelEditorViewport;
-            }
-
-			StartStreaming(Source);
-		}
-	});
+				FString SourceStr = UE::EditorPixelStreaming::Settings::CVarEditorPixelStreamingSource.GetValueOnAnyThread();
+				if(SourceStr == TEXT("Editor") || SourceStr == TEXT("editor"))
+				{
+					Source = UE::EditorPixelStreaming::EStreamTypes::Editor;
+				}
+				else if(SourceStr == TEXT("LevelEditor") || SourceStr == TEXT("leveleditor"))
+				{
+					Source = UE::EditorPixelStreaming::EStreamTypes::LevelEditorViewport;
+				}
+				
+				StartStreaming(Source);
+			}
+		});
+	}
 
 	if (UPixelStreamingDelegates* Delegates = UPixelStreamingDelegates::GetPixelStreamingDelegates())
 	{
@@ -192,13 +194,16 @@ void FPixelStreamingEditorModule::StartStreaming(UE::EditorPixelStreaming::EStre
 					return;
 				}
 
-				TSharedPtr<SWindow> ParentWindow = IMainFrameModule::Get().GetParentWindow();
-				ParentWindow->Resize(FVector2D(Width, Height));
-				FSlateApplication::Get().OnSizeChanged(ParentWindow->GetNativeWindow().ToSharedRef(), Width, Height);
-                // Triggers the NullApplication to rebuild its DisplayMetrics with the new resolution and inform slate 
-                // about the updated virtual desktop size
-                FSystemResolution::RequestResolutionChange(Width, Height, GSystemResolution.WindowMode);
-	            IConsoleManager::Get().CallAllConsoleVariableSinks();
+				if (GIsEditor)
+				{
+					TSharedPtr<SWindow> ParentWindow = IMainFrameModule::Get().GetParentWindow();
+					ParentWindow->Resize(FVector2D(Width, Height));
+					FSlateApplication::Get().OnSizeChanged(ParentWindow->GetNativeWindow().ToSharedRef(), Width, Height);
+					// Triggers the NullApplication to rebuild its DisplayMetrics with the new resolution and inform slate 
+					// about the updated virtual desktop size
+					FSystemResolution::RequestResolutionChange(Width, Height, GSystemResolution.WindowMode);
+					IConsoleManager::Get().CallAllConsoleVariableSinks();					
+				}
 			});
 	}
 
@@ -234,7 +239,7 @@ void FPixelStreamingEditorModule::StartStreaming(UE::EditorPixelStreaming::EStre
 		break;
 		default:
 		{
-			UE_LOG(LogPixelStreamingEditor, Warning, TEXT("Specified Stream Type doesn't have an associated FPixelStreamingVideoInput"));
+			UE_LOGF(LogPixelStreamingEditor, Warning, "Specified Stream Type doesn't have an associated FPixelStreamingVideoInput");
 		}
 			// Return here as we don't want to start streaming if we didn't set a viewport
 			return;
@@ -400,7 +405,7 @@ void FPixelStreamingEditorModule::MaybeResizeEditor(TSharedPtr<SWindow> RootWind
 		bool UserSpecifiedHeight = FParse::Value(FCommandLine::Get(), TEXT("EditorPixelStreamingResY="), ResolutionY);
 		bSuccess = UserSpecifiedWidth | UserSpecifiedHeight;
 
-		const float AspectRatio = 16.0 / 9.0;
+		const float AspectRatio = 16.0f / 9.0f;
 		if (UserSpecifiedWidth && !UserSpecifiedHeight)
 		{
 			ResolutionY = int32(ResolutionX / AspectRatio);

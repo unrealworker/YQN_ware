@@ -3,6 +3,8 @@
 #include "../GHSWarehouseCameraPawn.h"
 #include "../GHSWarehousePlayerController.h"
 #include "../GHSDockTruckHUDWidget.h"
+#include "../GHSTwinHUDWidget.h"
+#include "Dom/JsonObject.h"
 #include "Camera/PlayerCameraManager.h"
 #include "Engine/Engine.h"
 #include "Engine/GameViewportClient.h"
@@ -15,6 +17,8 @@
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
 #include "Slate/SceneViewport.h"
+#include "Serialization/JsonReader.h"
+#include "Serialization/JsonSerializer.h"
 
 namespace GHSMapDragRuntimeTests
 {
@@ -58,6 +62,31 @@ namespace GHSMapDragRuntimeTests
         Point = Origin + Direction * Distance;
         Point.Z = 0;
         return !Point.ContainsNaN();
+    }
+
+    bool SnapshotDeviceIds(const UGHSTwinHUDWidget* HUD, TArray<FString>& Ids)
+    {
+        // Positions and visibility can change during navigation. Compare the
+        // registered identities, not a volatile whole-scene JSON snapshot.
+        TSharedPtr<FJsonObject> Snapshot;
+        if (!FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(HUD->GetSnapshot()), Snapshot)
+            || !Snapshot.IsValid()) return false;
+        Ids.Reset();
+        for (const FString Field : {FString(TEXT("equipment")), FString(TEXT("facilities"))})
+        {
+            const TArray<TSharedPtr<FJsonValue>>* Entries = nullptr;
+            if (!Snapshot->TryGetArrayField(Field, Entries) || !Entries) return false;
+            for (const auto& Entry : *Entries)
+            {
+                const TSharedPtr<FJsonObject>* Object = nullptr;
+                FString Id;
+                if (!Entry.IsValid() || !Entry->TryGetObject(Object) || !Object || !Object->IsValid()
+                    || !(*Object)->TryGetStringField(TEXT("id"), Id) || Id.IsEmpty()) return false;
+                Ids.Add(Field + TEXT(":") + Id);
+            }
+        }
+        Ids.Sort();
+        return true;
     }
 
     struct FViewportPointer
@@ -136,10 +165,29 @@ bool FGHSMapDragRuntime::RunTest(const FString& Parameters)
     const FVector2D First(FMath::RoundToInt(Size.X * 0.55), FMath::RoundToInt(Size.Y * 0.60));
     const FVector2D Second(FMath::RoundToInt(Size.X * 0.42), FMath::RoundToInt(Size.Y * 0.55));
     const FVector2D Third(FMath::RoundToInt(Size.X * 0.58), FMath::RoundToInt(Size.Y * 0.65));
-    const auto* OriginalHUD = Controller->TruckHUDWidget.Get();
-    if (!TestNotNull(TEXT("Existing dock-truck HUD"), OriginalHUD)) return false;
-    const int32 OriginalTruckCount = OriginalHUD->GetRegisteredTruckCount();
-    const FString OriginalSelection = OriginalHUD->GetSelectedTruckId();
+    const bool bTwinMap = Controller->GetWorld()->GetMapName().Contains(TEXT("ZcoolSmartFactory"));
+    const auto* OriginalTruckHUD = Controller->TruckHUDWidget.Get();
+    const auto* OriginalTwinHUD = Controller->TwinHUDWidget.Get();
+    TArray<FString> OriginalDeviceIds;
+    if (bTwinMap)
+    {
+        if (!TestNotNull(TEXT("Main map has its production Twin HUD"), OriginalTwinHUD)
+            || !TestNull(TEXT("Main map does not create the legacy truck HUD"), OriginalTruckHUD)) return false;
+        if (!TestTrue(TEXT("Twin HUD uses the actual viewport pixels"),
+                OriginalTwinHUD->GetViewportPixelSize().Equals(FVector2D(Size.X, Size.Y), 1.))
+            || !TestTrue(TEXT("Twin panel has completed its initial layout"),
+                FMath::IsNearlyEqual(OriginalTwinHUD->GetPanelTransitionProgress(), 1.f, .001f))
+            || !TestTrue(TEXT("All drag test pixels belong to the unobscured scene"),
+                OriginalTwinHUD->IsScenePoint(First) && OriginalTwinHUD->IsScenePoint(Second)
+                && OriginalTwinHUD->IsScenePoint(Third))
+            || !TestTrue(TEXT("Twin snapshot exposes registered device identities"),
+                SnapshotDeviceIds(OriginalTwinHUD, OriginalDeviceIds))
+            || !TestTrue(TEXT("Main map contains registered devices"), !OriginalDeviceIds.IsEmpty())) return false;
+    }
+    else if (!TestNotNull(TEXT("Legacy map has its dock-truck HUD"), OriginalTruckHUD)
+        || !TestNull(TEXT("Legacy map does not create a Twin HUD"), OriginalTwinHUD)) return false;
+    const int32 OriginalTruckCount = OriginalTruckHUD ? OriginalTruckHUD->GetRegisteredTruckCount() : 0;
+    const FString OriginalSelection = OriginalTwinHUD ? OriginalTwinHUD->SelectedId : OriginalTruckHUD->GetSelectedTruckId();
 
     auto CheckGround = [this, Pawn](const FString& Label)
     {
@@ -229,6 +277,59 @@ bool FGHSMapDragRuntime::RunTest(const FString& Parameters)
     }
     TestEqual(TEXT("All yaw/pitch combinations tested"), Cases, 20);
 
+    if (OriginalTwinHUD)
+    {
+        // Exercise the actual Controller and Pawn guard at visible UI regions,
+        // not just the layout helper: UI must neither start nor continue a pan.
+        const float Scale = OriginalTwinHUD->GetHUDScale();
+        const auto Layout = FGHSTwinLayout::Calculate(FVector2D(Size.X, Size.Y) / Scale);
+        if (!TestTrue(TEXT("Scene search is visible for the occlusion test"), OriginalTwinHUD->IsSceneSearchVisible())
+            || !TestTrue(TEXT("Scene search has a laid-out hit area"),
+                OriginalTwinHUD->GetSceneSearchSize().X > 0 && OriginalTwinHUD->GetSceneSearchSize().Y > 0)) return false;
+        const TArray<FVector2D> BlockedPixels = {
+            FVector2D(Size.X * .5, Layout.HeaderHeight * .5 * Scale),
+            (OriginalTwinHUD->GetPanelVisualPosition() + OriginalTwinHUD->GetPanelVisualSize() * .5) * Scale,
+            (OriginalTwinHUD->GetSceneSearchPosition() + OriginalTwinHUD->GetSceneSearchSize() * .5) * Scale
+        };
+        int32 BlockedCases = 0;
+        for (FVector2D Pixel : BlockedPixels)
+        {
+            Pixel = FVector2D(FMath::RoundToInt(Pixel.X), FMath::RoundToInt(Pixel.Y));
+            const FString Label = FString::Printf(TEXT("Twin UI region %d"), BlockedCases);
+            Controller->CancelCameraDrag();
+            Pawn->ResetOverview(true);
+            Pawn->SetDesiredZoom(5000.f, true);
+            SyncView(Pawn, Camera);
+            if (!TestFalse(Label + TEXT(" is excluded from scene input"), OriginalTwinHUD->IsScenePoint(Pixel))
+                || !Pointer.Move(Pixel)) return false;
+            const FVector Before = Pawn->GetActorLocation();
+            const FRotator RotationBefore = Pawn->GetActorRotation();
+            const float ZoomBefore = Pawn->DesiredZoom;
+            Controller->InputKey(FInputKeyParams(EKeys::RightMouseButton, IE_Pressed, 1.0));
+            TestTrue(Label + TEXT(" blocks starting native pan"),
+                Controller->DragMode == EGHSWarehouseDragMode::None && !Pawn->IsPreciseMouseDragging);
+            Controller->InputKey(FInputKeyParams(EKeys::MouseWheelAxis, 1.0, FrameSeconds, 1));
+            CameraFrame(Pawn, Camera);
+            TestTrue(Label + TEXT(" blocks wheel and leaves actual and desired pose unchanged"),
+                Pawn->GetActorLocation().Equals(Before, .01) && Pawn->DesiredLocation.Equals(Before, .01)
+                && Pawn->GetActorRotation().Equals(RotationBefore, .001) && Pawn->DesiredRotation.Equals(RotationBefore, .001)
+                && FMath::IsNearlyEqual(Pawn->DesiredZoom, ZoomBefore, .01f)
+                && FMath::IsNearlyEqual(Pawn->SpringArmComponent->TargetArmLength, ZoomBefore, .01f));
+            if (!Pointer.Move(First)) return false;
+            Controller->InputKey(FInputKeyParams(EKeys::RightMouseButton, IE_Pressed, 1.0));
+            TestTrue(Label + TEXT(" starts a valid scene pan before crossing UI"), Pawn->IsPreciseMouseDragging);
+            if (!Pointer.Move(Pixel, true)) return false;
+            TestFalse(Label + TEXT(" rejects an active pan cursor"), Controller->HasValidMapDragCursor());
+            CameraFrame(Pawn, Camera);
+            TestTrue(Label + TEXT(" cancels before the plugin moves through UI"),
+                Controller->DragMode == EGHSWarehouseDragMode::None && !Pawn->IsPreciseMouseDragging
+                && Pawn->GetActorLocation().Equals(Before, .01) && Pawn->DesiredLocation.Equals(Before, .01));
+            CheckGround(Label);
+            ++BlockedCases;
+        }
+        TestEqual(TEXT("Header, side panel and scene search all block map input"), BlockedCases, 3);
+    }
+
     Controller->CancelCameraDrag();
     Pawn->ResetOverview(true);
     Pawn->SetDesiredZoom(5000.0f, true);
@@ -279,14 +380,70 @@ bool FGHSMapDragRuntime::RunTest(const FString& Parameters)
     TestTrue(TEXT("Wheel ends native drag before changing zoom"), Controller->DragMode == EGHSWarehouseDragMode::None && !Pawn->IsPreciseMouseDragging);
     CameraFrame(Pawn, Camera);
     TestTrue(TEXT("Wheel preserves moved ground pivot"), Pawn->GetActorLocation().Equals(BeforeWheel, 0.01));
-    Controller->InputKey(FInputKeyParams(EKeys::Home, IE_Pressed, 1.0));
-    TestTrue(TEXT("Home restores ground overview center"), Pawn->DesiredLocation.Equals(FVector(Pawn->OverviewCenter.X, Pawn->OverviewCenter.Y, 0), 0.001));
-    TestTrue(TEXT("Home restores orientation"), Pawn->DesiredRotation.Equals(FRotator(Pawn->OverviewPitch, Pawn->OverviewYaw, 0), 0.001));
-    TestTrue(TEXT("Home restores distance"), FMath::IsNearlyEqual(Pawn->DesiredZoom, Pawn->OverviewDistance, 0.01f));
-    CheckGround(TEXT("Home"));
-    TestTrue(TEXT("Existing HUD object is preserved"), Controller->TruckHUDWidget.Get() == OriginalHUD);
-    TestEqual(TEXT("HUD truck count is preserved"), OriginalHUD->GetRegisteredTruckCount(), OriginalTruckCount);
-    TestEqual(TEXT("HUD selection is preserved"), OriginalHUD->GetSelectedTruckId(), OriginalSelection);
+    if (OriginalTwinHUD)
+    {
+        TestEqual(TEXT("Map navigation preserves Twin selection before the explicit overview reset"),
+            OriginalTwinHUD->SelectedId, OriginalSelection);
+        TArray<FString> CurrentDeviceIds;
+        TestTrue(TEXT("Map navigation preserves registered Twin equipment and facilities"),
+            SnapshotDeviceIds(OriginalTwinHUD, CurrentDeviceIds) && CurrentDeviceIds == OriginalDeviceIds);
+        const FVector2D Pixels(Size.X, Size.Y);
+        const float Scale = OriginalTwinHUD->GetHUDScale();
+        const FVector2D LogicalSize = Pixels / Scale;
+        const auto Destination = FGHSTwinLayout::Calculate(LogicalSize);
+        const FVector2D ExpectedPixel = (Destination.ScenePosition + Destination.SceneSize * .5) * Scale;
+        const FVector ExpectedPivot(Pawn->OverviewCenter.X, Pawn->OverviewCenter.Y, 0);
+        const FRotator ExpectedRotation(Pawn->OverviewPitch, Pawn->OverviewYaw, 0);
+        const float ExpectedZoom = FMath::Clamp(float(Pawn->OverviewDistance * LogicalSize.X / Destination.SceneSize.X),
+            Pawn->MinimumZoom, Pawn->MaximumZoom);
+        const FVector BeforeHome = Pawn->GetActorLocation();
+        const float BeforeHomeZoom = Pawn->SpringArmComponent->TargetArmLength;
+        Controller->InputKey(FInputKeyParams(EKeys::Home, IE_Pressed, 1.0));
+        TestTrue(TEXT("Twin Home begins the production overview flight"), Pawn->IsPoseTransitionActive());
+        TestTrue(TEXT("Twin Home does not teleport the actual camera on input"),
+            Pawn->GetActorLocation().Equals(BeforeHome, .01)
+            && FMath::IsNearlyEqual(Pawn->SpringArmComponent->TargetArmLength, BeforeHomeZoom, .01f));
+        for (int32 Frame = 0; Frame < 120 && Pawn->IsPoseTransitionActive(); ++Frame) CameraFrame(Pawn, Camera);
+        TestFalse(TEXT("Twin Home flight completes within two seconds"), Pawn->IsPoseTransitionActive());
+        TestTrue(TEXT("Twin Home restores actual and desired ground overview pivot"),
+            Pawn->GetActorLocation().Equals(ExpectedPivot, .01) && Pawn->DesiredLocation.Equals(ExpectedPivot, .01)
+            && Pawn->GetFocusTarget().Equals(ExpectedPivot, .01));
+        TestTrue(TEXT("Twin Home restores actual and desired overview orientation without banking"),
+            Pawn->GetActorRotation().Equals(ExpectedRotation, .001) && Pawn->DesiredRotation.Equals(ExpectedRotation, .001));
+        TestTrue(TEXT("Twin Home fits overview zoom to the unobscured scene width"),
+            FMath::IsNearlyEqual(Pawn->DesiredZoom, ExpectedZoom, .01f)
+            && FMath::IsNearlyEqual(Pawn->SpringArmComponent->TargetArmLength, ExpectedZoom, .01f));
+        TestTrue(TEXT("Twin Home retains scene framing and a ground pivot"),
+            Pawn->IsOverviewFraming() && !Pawn->UsesObjectPivot() && Pawn->CaptureReplayPose().UseFraming);
+        TestTrue(TEXT("Twin Home has no target offset and has reached its framing socket offset"),
+            Pawn->DesiredTargetOffset.IsNearlyZero(.001) && Pawn->SpringArmComponent->TargetOffset.IsNearlyZero(.001)
+            && Pawn->DesiredSocketOffset.Equals(Pawn->SpringArmComponent->SocketOffset, .01));
+        // An independent live projection verifies the visible result, including
+        // the deliberate nonzero socket offset needed to avoid the side panel.
+        CheckAnchor(TEXT("Twin Home overview is centered in the visible scene"), ExpectedPivot, ExpectedPixel);
+        const FVector FinishedSocket = Pawn->SpringArmComponent->SocketOffset;
+        for (int32 Frame = 0; Frame < 8; ++Frame) CameraFrame(Pawn, Camera);
+        TestTrue(TEXT("Twin Home final pose remains stable after the flight"),
+            Pawn->GetActorLocation().Equals(ExpectedPivot, .01) && Pawn->GetActorRotation().Equals(ExpectedRotation, .001)
+            && FMath::IsNearlyEqual(Pawn->SpringArmComponent->TargetArmLength, ExpectedZoom, .01f)
+            && Pawn->SpringArmComponent->SocketOffset.Equals(FinishedSocket, .01));
+        CheckAnchor(TEXT("Twin Home settled framing"), ExpectedPivot, ExpectedPixel);
+        TestTrue(TEXT("Existing Twin HUD object is preserved"), Controller->TwinHUDWidget.Get() == OriginalTwinHUD);
+        TestTrue(TEXT("Twin Home explicitly clears selection"), OriginalTwinHUD->SelectedId.IsEmpty());
+        TestTrue(TEXT("Twin Home preserves registered device identities"),
+            SnapshotDeviceIds(OriginalTwinHUD, CurrentDeviceIds) && CurrentDeviceIds == OriginalDeviceIds);
+    }
+    else
+    {
+        Controller->InputKey(FInputKeyParams(EKeys::Home, IE_Pressed, 1.0));
+        TestTrue(TEXT("Home restores ground overview center"), Pawn->DesiredLocation.Equals(FVector(Pawn->OverviewCenter.X, Pawn->OverviewCenter.Y, 0), 0.001));
+        TestTrue(TEXT("Home restores orientation"), Pawn->DesiredRotation.Equals(FRotator(Pawn->OverviewPitch, Pawn->OverviewYaw, 0), 0.001));
+        TestTrue(TEXT("Home restores distance"), FMath::IsNearlyEqual(Pawn->DesiredZoom, Pawn->OverviewDistance, 0.01f));
+        CheckGround(TEXT("Home"));
+        TestTrue(TEXT("Existing HUD object is preserved"), Controller->TruckHUDWidget.Get() == OriginalTruckHUD);
+        TestEqual(TEXT("HUD truck count is preserved"), OriginalTruckHUD->GetRegisteredTruckCount(), OriginalTruckCount);
+        TestEqual(TEXT("HUD selection is preserved"), OriginalTruckHUD->GetSelectedTruckId(), OriginalSelection);
+    }
     return true;
 }
 

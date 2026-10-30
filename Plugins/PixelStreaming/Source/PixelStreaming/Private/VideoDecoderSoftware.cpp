@@ -19,7 +19,7 @@ namespace UE::PixelStreaming
 			case EPixelStreamingCodec::H264:
 			case EPixelStreamingCodec::AV1:
 			default:
-				UE_LOG(LogPixelStreaming, Fatal, TEXT("Unsupported video codec"));
+				UE_LOGF(LogPixelStreaming, Fatal, "Unsupported video codec");
 				break;
 		}
 	}

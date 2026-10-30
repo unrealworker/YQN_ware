@@ -4,6 +4,7 @@
 #include "IXRTrackingSystem.h"
 #include "PixelStreamingHMD.h"
 #include "Settings.h"
+#include "GenericPlatform/GenericPlatformCrashContext.h"
 
 namespace UE::PixelStreamingHMD
 {
@@ -40,6 +41,7 @@ namespace UE::PixelStreamingHMD
 		TSharedRef<FPixelStreamingHMD> PixelStreamingHMD = FSceneViewExtensions::NewExtension<FPixelStreamingHMD>();
 		if (PixelStreamingHMD->IsInitialized())
 		{
+			FGenericCrashContext::SetEngineData(TEXT("XR"), TEXT("XR PixelStreaming"));
 			return PixelStreamingHMD;
 		}
 		return nullptr;

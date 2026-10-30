@@ -32,34 +32,40 @@ void FPixelStreamingVideoInput::OnFrame(const IPixelCaptureInputFrame& InputFram
 	}
 
 	Ready = true;
-	FrameCapturer->Capture(InputFrame);
+	
 	LastFrameWidth = InputFrame.GetWidth();
 	LastFrameHeight = InputFrame.GetHeight();
+
+	FrameCapturer->Capture(InputFrame);
 }
 
 rtc::scoped_refptr<webrtc::VideoFrameBuffer> FPixelStreamingVideoInput::GetFrameBuffer()
 {
 #if WEBRTC_5414
-	return rtc::make_ref_counted<UE::PixelStreaming::FFrameBufferMultiFormatLayered>(FrameCapturer, StreamId);
+	return rtc::make_ref_counted<UE::PixelStreaming::FFrameBufferMultiFormatLayered>(FrameCapturer, StreamId, FIntPoint(LastFrameWidth, LastFrameHeight));
 #else
-	return new rtc::RefCountedObject<UE::PixelStreaming::FFrameBufferMultiFormatLayered>(FrameCapturer, StreamId);
+	return new rtc::RefCountedObject<UE::PixelStreaming::FFrameBufferMultiFormatLayered>(FrameCapturer, StreamId, FIntPoint(LastFrameWidth, LastFrameHeight));
 #endif
 }
 
 rtc::scoped_refptr<webrtc::VideoFrameBuffer> FPixelStreamingVideoInput::GetEmptyFrameBuffer()
 {
 #if WEBRTC_5414
-	return rtc::make_ref_counted<UE::PixelStreaming::FFrameBufferMultiFormatLayered>(nullptr, StreamId);
+	return rtc::make_ref_counted<UE::PixelStreaming::FFrameBufferMultiFormatLayered>(nullptr, StreamId, FIntPoint(LastFrameWidth, LastFrameHeight));
 #else
-	return new rtc::RefCountedObject<UE::PixelStreaming::FFrameBufferMultiFormatLayered>(nullptr, StreamId);
+	return new rtc::RefCountedObject<UE::PixelStreaming::FFrameBufferMultiFormatLayered>(nullptr, StreamId, FIntPoint(LastFrameWidth, LastFrameHeight));
 #endif
 }
 
-TSharedPtr<IPixelCaptureOutputFrame> FPixelStreamingVideoInput::RequestFormat(int32 Format, int32 LayerIndex)
+TSharedPtr<IPixelCaptureOutputFrame> FPixelStreamingVideoInput::RequestFormat(int32 Format, TOptional<FIntPoint> Resolution)
 {
 	if (FrameCapturer != nullptr)
 	{
-		return FrameCapturer->RequestFormat(Format, LayerIndex);
+		if (!Resolution.IsSet())
+		{
+			Resolution = { LastFrameWidth, LastFrameHeight };
+		}
+		return FrameCapturer->RequestFormat(Format, *Resolution);
 	}
 	return nullptr;
 }
@@ -73,15 +79,7 @@ void FPixelStreamingVideoInput::CreateFrameCapturer()
 		FrameCapturer = nullptr;
 	}
 
-	TArray<float> LayerScaling;
-
-	for (auto& Layer : UE::PixelStreaming::Settings::SimulcastParameters.Layers)
-	{
-		LayerScaling.Add(1.0f / Layer.Scaling);
-	}
-	LayerScaling.Sort([](float ScaleA, float ScaleB) { return ScaleA < ScaleB; });
-
-	FrameCapturer = FPixelCaptureCapturerMultiFormat::Create(this, LayerScaling);
+	FrameCapturer = FPixelCaptureCapturerMultiFormat::Create(this);
 	CaptureCompleteHandle = FrameCapturer->OnComplete.AddRaw(this, &FPixelStreamingVideoInput::OnCaptureComplete);
 
 	for (auto& Format : PreInitFormats)
@@ -98,4 +96,9 @@ void FPixelStreamingVideoInput::OnCaptureComplete()
 FString FPixelStreamingVideoInput::ToString()
 {
 	return TEXT("a Video Input");
+}
+
+uint32 FPixelStreamingVideoInput::GetUniqueStreamId()
+{
+	return NextStreamId++;
 }

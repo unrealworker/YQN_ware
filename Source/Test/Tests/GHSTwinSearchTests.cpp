@@ -8,14 +8,14 @@
 #include "Engine/StaticMesh.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/InstancedStaticMeshComponent.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 #include "Misc/Paths.h"
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonSerializer.h"
 #include "Slate/SObjectWidget.h"
 #include "Widgets/SNullWidget.h"
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchCurrentScene,"GHS.TwinUI.Search.UsesCurrentSceneIdentityAndChineseNames",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchCurrentScene,"GHS.TwinUI.Search.UsesCurrentSceneIdentityAndChineseNames",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinSearchCurrentScene::RunTest(const FString&)
 {
     UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);
@@ -58,7 +58,7 @@ bool FGHSTwinSearchCurrentScene::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchBridge,"GHS.TwinUI.Search.StreamCommandsAreScopedAndSelectionsValidated",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchBridge,"GHS.TwinUI.Search.StreamCommandsAreScopedAndSelectionsValidated",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinSearchBridge::RunTest(const FString&)
 {
     auto* HUD=NewObject<UGHSTwinHUDWidget>();
@@ -85,7 +85,7 @@ bool FGHSTwinSearchBridge::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchUtf16Padding,"GHS.TwinUI.Search.AcceptsUtf16TransportPaddingWithoutChangingQuery",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchUtf16Padding,"GHS.TwinUI.Search.AcceptsUtf16TransportPaddingWithoutChangingQuery",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinSearchUtf16Padding::RunTest(const FString&)
 {
     auto* HUD=NewObject<UGHSTwinHUDWidget>();
@@ -113,7 +113,7 @@ bool FGHSTwinSearchUtf16Padding::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinBadgeInk,"GHS.TwinUI.Search.ChineseBadgeInkCentersWithActualFont",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinBadgeInk,"GHS.TwinUI.Search.ChineseBadgeInkCentersWithActualFont",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinBadgeInk::RunTest(const FString&)
 {
     const FSlateFontInfo Font(FPaths::ProjectContentDir()/TEXT("GHSNormalWarehouse/HUD/Fonts/DroidSansFallback.ttf"),12);
@@ -128,7 +128,7 @@ bool FGHSTwinBadgeInk::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchGeometry,"GHS.TwinUI.Search.DropdownStaysWithinSceneAndKeyboardWraps",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchGeometry,"GHS.TwinUI.Search.DropdownStaysWithinSceneAndKeyboardWraps",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinSearchGeometry::RunTest(const FString&)
 {
     for(const double Bottom:{300.,600.,1080.})
@@ -148,7 +148,7 @@ bool FGHSTwinSearchGeometry::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchPages,"GHS.TwinUI.Search.EveryResultCanBePagedAndSelected",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchPages,"GHS.TwinUI.Search.EveryResultCanBePagedAndSelected",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinSearchPages::RunTest(const FString&)
 {
     UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);
@@ -191,7 +191,7 @@ bool FGHSTwinSearchPages::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchFreshSlots,"GHS.TwinUI.Search.FreshRackSlotsResolveBeforeAnyPick",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchFreshSlots,"GHS.TwinUI.Search.FreshRackSlotsResolveBeforeAnyPick",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinSearchFreshSlots::RunTest(const FString&)
 {
     UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);

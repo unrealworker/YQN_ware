@@ -12,10 +12,4 @@ void FPixelStreamingServersModule::StartupModule()
 	// Any startup logic require goes here.
 }
 
-int FPixelStreamingServersModule::NextPort()
-{
-	// Todo: Checking for in-use ports.
-	return (4000 + NextGeneratedPort.Increment()) % 65535;
-}
-
 IMPLEMENT_MODULE(FPixelStreamingServersModule, PixelStreamingServers)

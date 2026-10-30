@@ -2,7 +2,7 @@
 
 Launch UnrealEditor Test.uproject /Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory
   -game -RenderOffscreen -TwinDiagnostics -ForceRes -ResX=1920 -ResY=1080
-  -UIMotionRun=baseline -ExecCmds="t.MaxFPS 60,r.VSync 0,py D:/UEPro/Test/Scripts/ghs/verify_ui_motion_performance.py"
+  -UIMotionRun=baseline -ExecCmds="t.MaxFPS 60,r.VSync 0,py <project-root>/Scripts/ghs/verify_ui_motion_performance.py"
 All output is under Saved/UIMotion. No fixed timestep: RAF and bridge timings use
 wall time. Reported RAF intervals measure the CEF renderer, not streamed video.
 """
@@ -15,7 +15,7 @@ import time
 import traceback
 import unreal
 
-ROOT = Path('D:/UEPro/Test')
+ROOT = Path(unreal.Paths.convert_relative_path_to_full(unreal.Paths.project_dir())).resolve()
 CLI = unreal.SystemLibrary.get_command_line()
 assert all(re.search(r'(?:^|\s)-' + flag + r'(?=\s|$)', CLI, re.I)
            for flag in ('game', 'RenderOffscreen', 'TwinDiagnostics'))

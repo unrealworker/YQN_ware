@@ -20,25 +20,25 @@ namespace UE::PixelStreaming
 	{
 		if (!OutStreamer.IsValid())
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Streamer not found"));
+			UE_LOGF(LogPixelStreaming, Error, "Streamer not found");
 			return true;
 		}
 
 		double DeltaTime = FPlatformTime::Seconds() - StartTime;
 		if (DeltaTime > TimeoutSeconds)
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Timed out waiting for streamer to dis/connect to signalling server."));
+			UE_LOGF(LogPixelStreaming, Error, "Timed out waiting for streamer to dis/connect to signalling server.");
 			return true;
 		}
 
 		if (bIsExpectedSignalling && OutStreamer->IsSignallingConnected())
 		{
-			UE_LOG(LogPixelStreaming, Log, TEXT("Signalling Connected as expected"));
+			UE_LOGF(LogPixelStreaming, Log, "Signalling Connected as expected");
 			return true;
 		}
 		else if (!bIsExpectedSignalling && !OutStreamer->IsSignallingConnected())
 		{
-			UE_LOG(LogPixelStreaming, Log, TEXT("Signalling Disconnected as expected"));
+			UE_LOGF(LogPixelStreaming, Log, "Signalling Disconnected as expected");
 			return true;
 		}
 		return false;
@@ -113,7 +113,7 @@ namespace UE::PixelStreaming
 		{
 			if (NumStreamers == NumExpected)
 			{
-				UE_LOG(LogPixelStreaming, Log, TEXT("Expected %d streamers and found %d"), NumExpected, NumStreamers);
+				UE_LOGF(LogPixelStreaming, Log, "Expected %d streamers and found %d", NumExpected, NumStreamers);
 				return true;
 			}
 			else
@@ -127,11 +127,11 @@ namespace UE::PixelStreaming
 		{
 			if (bHasNumStreamers)
 			{
-				UE_LOG(LogPixelStreaming, Error, TEXT("Expected %d streamers but found %d"), NumExpected, NumStreamers);
+				UE_LOGF(LogPixelStreaming, Error, "Expected %d streamers but found %d", NumExpected, NumStreamers);
 			}
 			else
 			{
-				UE_LOG(LogPixelStreaming, Error, TEXT("Timed out waiting for number of streamers to be retrieved."));
+				UE_LOGF(LogPixelStreaming, Error, "Timed out waiting for number of streamers to be retrieved.");
 			}
 			return true;
 		}
@@ -154,7 +154,7 @@ namespace UE::PixelStreaming
 	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMultipleSignallingConnectionsTest, "System.Plugins.PixelStreaming.MultipleSignallingConnectionsTest", EAutomationTestFlags::EditorContext | EAutomationTestFlags::ClientContext | EAutomationTestFlags::ProductFilter)
 	bool FMultipleSignallingConnectionsTest::RunTest(const FString& Parameters)
 	{
-		UE_LOG(LogPixelStreaming, Log, TEXT("----------- ConnectAndDisconnectMultipleStreamersEmbeddedCirrus -----------"));
+		UE_LOGF(LogPixelStreaming, Log, "----------- ConnectAndDisconnectMultipleStreamersEmbeddedCirrus -----------");
 
 		int32 StreamerPort = TestUtils::NextStreamerPort();
 		const int HttpPort = 85;
@@ -175,7 +175,7 @@ namespace UE::PixelStreaming
 		});
 
 		bool bLaunched = SignallingServer->Launch(LaunchArgs);
-		UE_LOG(LogPixelStreaming, Log, TEXT("Embedded cirrus launched: %s"), bLaunched ? TEXT("true") : TEXT("false"));
+		UE_LOGF(LogPixelStreaming, Log, "Embedded cirrus launched: %ls", bLaunched ? TEXT("true") : TEXT("false"));
 		TestTrue("Embedded cirrus launched.", bLaunched);
 
 		if(!bLaunched)

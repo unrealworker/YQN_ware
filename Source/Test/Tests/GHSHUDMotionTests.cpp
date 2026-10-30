@@ -1,10 +1,10 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "../GHSHUDMotion.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 
 namespace GHSHUDMotionTests
 {
-constexpr uint32 Flags = EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
+constexpr auto Flags = GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
 }
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSHUDMotionLocalEntry,

@@ -14,12 +14,12 @@
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 #include <limits>
 
 namespace GHSTwinSceneDataTests
 {
-    constexpr uint32 Flags = EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
+    constexpr auto Flags = GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
     TSharedPtr<FJsonObject> Parse(const FString& Text)
     {
         TSharedPtr<FJsonObject> Result;

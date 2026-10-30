@@ -25,8 +25,7 @@ FText UPixelStreamingStreamerVideoInputMediaCaptureFactory::GetDisplayName() con
 
 uint32 UPixelStreamingStreamerVideoInputMediaCaptureFactory::GetMenuCategories() const
 {
-	IAssetTools& AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
-	return AssetTools.RegisterAdvancedAssetCategory("PixelStreaming", LOCTEXT("AssetCategoryDisplayName", "PixelStreaming"));
+	return EAssetTypeCategories::Misc;
 }
 
 UObject* UPixelStreamingStreamerVideoInputMediaCaptureFactory::FactoryCreateNew(UClass* InClass, UObject* InParent, FName InName, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn)

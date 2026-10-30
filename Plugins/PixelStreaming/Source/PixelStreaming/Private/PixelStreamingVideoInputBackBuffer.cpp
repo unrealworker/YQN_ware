@@ -8,6 +8,7 @@
 #include "PixelCaptureInputFrameRHI.h"
 #include "PixelCaptureBufferFormat.h"
 
+#include "Slate/SlateViewportProvider.h"
 #include "Framework/Application/SlateApplication.h"
 
 TSharedPtr<FPixelStreamingVideoInputBackBuffer> FPixelStreamingVideoInputBackBuffer::Create()
@@ -43,9 +44,9 @@ FPixelStreamingVideoInputBackBuffer::~FPixelStreamingVideoInputBackBuffer()
 	}
 }
 
-void FPixelStreamingVideoInputBackBuffer::OnBackBufferReady(SWindow& SlateWindow, const FTexture2DRHIRef& FrameBuffer)
+void FPixelStreamingVideoInputBackBuffer::OnBackBufferReady(SWindow& SlateWindow, ISlateViewportProvider& ViewportProvider)
 {
-	OnFrame(FPixelCaptureInputFrameRHI(FrameBuffer));
+	OnFrame(FPixelCaptureInputFrameRHI(ViewportProvider.GetBackBufferResource()));
 }
 
 FString FPixelStreamingVideoInputBackBuffer::ToString()

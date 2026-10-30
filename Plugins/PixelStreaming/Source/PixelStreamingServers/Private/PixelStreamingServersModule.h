@@ -11,7 +11,6 @@ class FPixelStreamingServersModule : public IModuleInterface
 public:
 	virtual ~FPixelStreamingServersModule() = default;
 	virtual void StartupModule() override;
-	int NextPort();
 
 public:
 	static FPixelStreamingServersModule& Get();

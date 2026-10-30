@@ -16,6 +16,7 @@
 #include "Misc/Paths.h"
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
+#include "Misc/EngineVersionComparison.h"
 #include "ProfilingDebugging/CpuProfilerTrace.h"
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonSerializer.h"
@@ -34,6 +35,9 @@
 #include "Widgets/Text/SlateEditableTextLayout.h"
 #include "GenericPlatform/ITextInputMethodSystem.h"
 #include "Engine/GameViewportClient.h"
+#if WITH_DEV_AUTOMATION_TESTS
+#include "Misc/AutomationTest.h"
+#endif
 
 namespace
 {
@@ -63,7 +67,15 @@ class SGHSTwinEditableText : public SEditableText
 {
 public:
     TWeakObjectPtr<UGHSTwinHUDWidget> Owner;
-    bool IsComposing() const { return EditableTextLayout && EditableTextLayout->GetTextInputMethodContext()->IsComposing(); }
+    bool IsComposing() const
+    {
+#if UE_VERSION_OLDER_THAN(5, 8, 0)
+        return EditableTextLayout && EditableTextLayout->GetTextInputMethodContext()->IsComposing();
+#else
+        // UE 5.8 retains the old pointer only as an unset editor-only compatibility field.
+        return SlateEditableTextLayout.GetTextInputMethodContext()->IsComposing();
+#endif
+    }
 protected:
     virtual FReply OnFocusReceived(const FGeometry& Geometry,const FFocusEvent& Event) override
     { if(Owner.IsValid()) Owner->SetSearchOpen(true); return SEditableText::OnFocusReceived(Geometry,Event); }
@@ -74,6 +86,50 @@ protected:
         return SEditableText::OnKeyDown(Geometry,Event);
     }
 };
+
+#if WITH_DEV_AUTOMATION_TESTS
+namespace
+{
+class SGHSTwinIMEProbe : public SGHSTwinEditableText
+{
+public:
+    TSharedRef<ITextInputMethodContext> GetActiveIMEContext() const
+    {
+#if UE_VERSION_OLDER_THAN(5, 8, 0)
+        return EditableTextLayout->GetTextInputMethodContext();
+#else
+        return SlateEditableTextLayout.GetTextInputMethodContext();
+#endif
+    }
+};
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchIMELayout,
+    "GHS.TwinUI.Search.IMECompositionUsesActiveLayout",
+    EAutomationTestFlags::EditorContext|EAutomationTestFlags::ClientContext|EAutomationTestFlags::ProductFilter)
+bool FGHSTwinSearchIMELayout::RunTest(const FString&)
+{
+    if(!FSlateApplication::IsInitialized())
+    {
+        AddError(TEXT("Slate must be initialized to verify the actual IME composition context."));
+        return false;
+    }
+    const auto Input=SNew(SGHSTwinIMEProbe).Text(FText::FromString(TEXT("仓库"))).Font(Font(13));
+    const auto Context=Input->GetActiveIMEContext();
+    TestFalse(TEXT("Idle text is not composing"),Input->IsComposing());
+    Context->BeginComposition();
+    TestTrue(TEXT("The search guard sees the real IME composition start"),Input->IsComposing());
+    Context->UpdateCompositionRange(0,2);
+    TestTrue(TEXT("Candidate updates keep search submission and navigation guarded"),Input->IsComposing());
+    Context->EndComposition();
+    TestFalse(TEXT("Committed IME text releases the search guard"),Input->IsComposing());
+    Context->BeginComposition();
+    TestTrue(TEXT("A subsequent composition is detected without recreating the widget"),Input->IsComposing());
+    Context->EndComposition();
+    TestFalse(TEXT("The second composition also releases the guard"),Input->IsComposing());
+    return true;
+}
+#endif
 
 TSharedRef<SWidget> UGHSTwinSearchInput::RebuildWidget()
 {

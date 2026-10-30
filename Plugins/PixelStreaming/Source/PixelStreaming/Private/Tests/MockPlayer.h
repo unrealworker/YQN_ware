@@ -129,7 +129,7 @@ namespace UE::PixelStreaming
 			});
 
 			PeerConnection->OnNewDataChannel.AddLambda([this](TSharedPtr<FPixelStreamingDataChannel> NewChannel) {
-				UE_LOG(LogPixelStreaming, Log, TEXT("Player OnNewDataChannel"));
+				UE_LOGF(LogPixelStreaming, Log, "Player OnNewDataChannel");
 				DataChannel = NewChannel;
 
 				DataChannel->OnMessageReceived.AddLambda([this](uint8 Type, const webrtc::DataBuffer& RawBuffer) {
@@ -140,7 +140,7 @@ namespace UE::PixelStreaming
 			});
 
 			PeerConnection->OnIceStateChanged.AddLambda([this](webrtc::PeerConnectionInterface::IceConnectionState NewState) {
-				UE_LOG(LogPixelStreaming, Log, TEXT("Player OnIceStateChanged: %s"), UE::PixelStreaming::ToString(NewState));
+				UE_LOGF(LogPixelStreaming, Log, "Player OnIceStateChanged: %ls", UE::PixelStreaming::ToString(NewState));
 				if (NewState == webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionConnected)
 				{
 					Completed = true;
@@ -212,7 +212,7 @@ namespace UE::PixelStreaming
 		{
 			if(StreamerList.Num() != 1)
 			{
-				UE_LOG(LogPixelStreaming, Error, TEXT("Invalid number streamers connected (%d). Expected just one!"), StreamerList.Num());
+				UE_LOGF(LogPixelStreaming, Error, "Invalid number streamers connected (%d). Expected just one!", StreamerList.Num());
 			}
 
 			SignallingServerConnection->SendSubscribe(StreamerList[0]);

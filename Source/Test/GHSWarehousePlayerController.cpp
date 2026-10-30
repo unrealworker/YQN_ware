@@ -18,6 +18,7 @@
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
 #include "PixelStreamingInputComponent.h"
+#include "InputKeyEventArgs.h"
 
 namespace
 {
@@ -97,8 +98,18 @@ void AGHSWarehousePlayerController::EndPlay(const EEndPlayReason::Type EndPlayRe
     Super::EndPlay(EndPlayReason);
 }
 
+#if UE_VERSION_OLDER_THAN(5, 6, 0)
 bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
+#else
+bool AGHSWarehousePlayerController::InputKey(const FInputKeyEventArgs& Params)
+#endif
 {
+#if UE_VERSION_OLDER_THAN(5, 6, 0)
+    const double AxisDelta = Params.Delta.X;
+#else
+    // UE 5.6+ carries MouseX/MouseY/wheel displacement in AmountDepressed.
+    const double AxisDelta = Params.AmountDepressed;
+#endif
     // A second press may precede Slate's final axis batch too. Discard the old
     // click candidate rather than interpreting zero received pixels as a tap.
     if (bTwinOrbitReleasePending && (Params.Event == IE_Pressed || Params.Event == IE_DoubleClick)
@@ -110,7 +121,7 @@ bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
     const FKey Key = Params.Key;
     if (TwinHUDWidget && TraceTwinInput() && (Key == EKeys::LeftMouseButton || Key == EKeys::MouseX || Key == EKeys::MouseY))
         UE_LOG(LogTemp, Display, TEXT("GHS_TWIN_INPUT frame=%llu key=%s event=%d delta=%.2f mode=%d pending=%s releasing=%d"),
-            GFrameCounter, *Key.ToString(), int32(Params.Event), Params.Delta.X, int32(DragMode), *PendingMouse.ToString(), bTwinOrbitReleasePending);
+            GFrameCounter, *Key.ToString(), int32(Params.Event), AxisDelta, int32(DragMode), *PendingMouse.ToString(), bTwinOrbitReleasePending);
     if (TwinHUDWidget)
     {
         if(Key==EKeys::Escape && Params.Event==IE_Pressed && OrderReplay && OrderReplay->IsExitPending())
@@ -122,7 +133,7 @@ bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
             FVector2D Cursor;
             if(GetMousePosition(Cursor.X,Cursor.Y))
             {
-                if(Key==EKeys::MouseWheelAxis && TwinHUDWidget->HandleSearchWheel(Cursor,Params.Delta.X)) {CancelCameraDrag();return true;}
+                if(Key==EKeys::MouseWheelAxis && TwinHUDWidget->HandleSearchWheel(Cursor,AxisDelta)) {CancelCameraDrag();return true;}
                 if(Key==EKeys::LeftMouseButton && Params.Event==IE_Pressed && TwinHUDWidget->HandleChromeClick(Cursor)) { CancelCameraDrag(); return true; }
                 if(!TwinHUDWidget->IsScenePoint(Cursor)) { CancelCameraDrag(); return true; }
                 if(Key==EKeys::LeftMouseButton && (Params.Event==IE_Pressed || Params.Event==IE_DoubleClick)) TwinPressPosition=Cursor;
@@ -195,16 +206,16 @@ bool AGHSWarehousePlayerController::InputKey(const FInputKeyParams& Params)
     if (Key == EKeys::MouseWheelAxis)
     {
         if (DragMode == EGHSWarehouseDragMode::Pan) CancelCameraDrag();
-        Camera->ZoomSteps(float(Params.Delta.X)); return true;
+        Camera->ZoomSteps(float(AxisDelta)); return true;
     }
     if (Key == EKeys::MouseX || Key == EKeys::MouseY)
     {
         // Read viewport deltas before legacy axis sensitivity, FOV scaling and
         // mouse smoothing. The plugin supplies one predictable smoothing stage.
-        if (DragMode == EGHSWarehouseDragMode::Orbit && FMath::IsFinite(Params.Delta.X))
+        if (DragMode == EGHSWarehouseDragMode::Orbit && FMath::IsFinite(AxisDelta))
         {
-            if (Key == EKeys::MouseX) PendingMouse.X += Params.Delta.X;
-            else PendingMouse.Y -= Params.Delta.X;
+            if (Key == EKeys::MouseX) PendingMouse.X += AxisDelta;
+            else PendingMouse.Y -= AxisDelta;
         }
         return true;
     }

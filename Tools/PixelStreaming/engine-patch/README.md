@@ -1,12 +1,10 @@
 # GHS 项目级 Pixel Streaming 补丁
 
-本补丁以 UE **5.4.4，CL 35576357** 的原始 PixelStreaming 插件为基线，放在 `Plugins/PixelStreaming`，由项目插件覆盖同名引擎插件。未修改 `D:/UE/UE_5.4`。Epic 原版权头、模块结构、资源和内容保留，使用项目原有 Unreal Engine 许可。
+本补丁以 UE **5.8.4，CL 58902052** 的原始 Legacy PixelStreaming 插件为基线，放在 `Plugins/PixelStreaming`，由项目插件覆盖同名引擎插件。未修改引擎安装目录。Epic 原版权头、模块结构、资源和内容保留，使用项目原有 Unreal Engine 许可。本次由 UE5.4 补丁重新移植，未切换到 PixelStreaming2。
 
 ## 收录范围
 
-- 原插件 `Source`：235 个文件、1,033,996 字节。
-- 原 `Config` / `Content` / `Resources`：分别 675 / 61,915 / 20,440 字节。
-- 加上 `.uplugin`，原始收录总计 248 个文件、1,119,772 字节。
+- 官方原始收录总计 251 个文件、1,150,554 字节，包含 `Source`、`Config`、`Content`、`Resources` 和 `.uplugin`。
 - 不收录 `Binaries`、`Intermediate`、下载后的 WebServers 或 Node 依赖。资源中原有的小型下载脚本保留，但本任务不执行下载。
 - `source-manifest.json` 记录每个文件的原始引擎 SHA256、项目 SHA256，以及是否修改。新增 policy、测试和忽略规则的原始哈希为空。
 
@@ -25,6 +23,10 @@
 
 ## 兼容和集成
 
+- UE5.8 仍提供完整 Legacy PixelStreaming；项目的 `UPixelStreamingInput`、`SendPixelStreamingResponse` 和 `PixelStreaming.WebRTC.*` 名称继续保留。服务器和播放器协议不在本次补丁中改动。
+- 保留 UE5.8 的 `CreateVideoSource(bool bInRequireUniqueId, ...)` 与 SFU 调用参数、按分辨率的 `GetLayer({ Width, Height })`、AVCodecs `MinQuality/MaxQuality` 字段、信令连接的弱生命周期守卫，以及服务器端口探测的 bool 返回值和 `Sockets` 依赖。
+- 官方配置从 `BasePixelStreaming.ini` 更名为 `DefaultPixelStreaming.ini`；旧 AssetTypeActions 被新的 AssetDefinition 实现替代。未保留重复的旧文件。
+- 在新基线上逐项保留原 13 个修改文件及 policy/回归测试两个新增源文件：项目插件资源定位和静态库链接、可选 RTP 帧率限制、采集 worker 生命周期、硬件帧率提示和低延迟 playout。与 UE5.8 的差异由 manifest 独立记录，不将整个旧插件覆盖新引擎 API。
 - 前端 UE5.4 库的 `WebRTCFPS` 设置原最小值为 1，必须允许 0，避免 initialSettings 回写成 1 FPS。
 - 本服务通过进程级命令行或 `PixelStreaming.WebRTC.Fps` 设置统一帧率；该路径同步现有视频 sender，并用于后续 peer 和 simulcast。单独调用某个 streamer 的 `SetStreamFPS(0)` 不会改写全局编码器策略，不是本补丁支持的独立不限帧入口。
 - 0 FPS 强制 coupled，即使同时请求 decoupled；不在 0 上做除法。退出 decoupled 时唤醒并退出旧 worker。独立生命周期锁串行管理 worker，capture 回调用短锁保护事件指针；退出时先转移 runnable 所有权，释放短锁后等待线程，不持有 Tick 锁等待退出。
@@ -40,15 +42,17 @@
 
 ```powershell
 ./Tools/PixelStreaming/engine-patch/run-policy-tests.ps1
-./Tools/PixelStreaming/engine-patch/verify-patch.ps1 -EngineRoot D:/UE/UE_5.4
+./Tools/PixelStreaming/engine-patch/verify-patch.ps1 -EngineRoot D:/UE/UE_5.8
 ```
 
-第一项用 MSVC 14.38 编译并运行实际 C++ policy 测试，覆盖已有 cap 清除、正数恢复、capture coupling、零/异常值、120 FPS 采样以及时间戳倒退。生成物只写 `.test-output` 并忽略。第二项比对所有源码和引擎基线哈希，并检查实际集成点。
+第一项用 MSVC 14.44 编译并运行实际 C++ policy 测试，覆盖已有 cap 清除、正数恢复、capture coupling、零/异常值、120 FPS 采样以及时间戳倒退。生成物只写 `.test-output` 并忽略。第二项比对所有源码和引擎基线哈希，并检查新引擎 API 和实际补丁集成点。迁移前该检查已以缺少 UE5.8 unique stream-id API 失败；刷新 manifest 本身不代表源码正确。
 
 UE 自动化测试：`GHS.PixelStreaming.UncappedPolicy`。它使用真实 WebRTC `RtpEncodingParameters`、`EncodedImage` 和 `FVideoSourceGroup`，不启动服务器。必须在重新编译项目插件后的 Editor/Development 进程中运行，不能用旧引擎 DLL 代替。
 
 并发回归测试：`GHS.PixelStreaming.ConcurrentCaptureModeSwitch`。在独立 capture 回调线程运行期间往返切换 120 / 0 FPS 共 200 次，覆盖事件触发、worker 停止和重新创建的生命周期。测试临时启用 fence，结束后恢复原值与设置优先级，不连接真实服务器。
 
 结构测试和 policy 测试不能代替完整 Editor/Game 构建，以及服务器真实 WebRTC 帧率/延迟验证。由主任务统一执行构建与真实连接验证。
+
+现有播放器仍固定为 `@epicgames-ps/lib-pixelstreamingfrontend-ue5.4@1.1.6`；其 SDP 补丁有精确 SHA256 防护，不能只改版本号就换 SDK。UE5.8 Legacy 信令字段和数据通道消息 ID 保持兼容形态，但需在新发行包实测握手、H264、鼠标/键盘、中文搜索响应、断开/重连、独立实例、0/60 FPS 和码率限制后才能声明端到端兼容。UE5.8 官方 AVCodecs 的 QP 到质量换算也应随真实编码画质一起核对。
 
 修改补丁后先审查差异，再运行 `update-manifest.ps1` 刷新项目哈希；该脚本拒绝未经重新评估的引擎版本。不要把更新 manifest 当成测试通过。

@@ -3,11 +3,11 @@
 #include "../GHSWarehousePlayerController.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSMapDragState,
     "GHS.WarehouseCamera.MapDrag.Cancellation",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+    GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FGHSMapDragState::RunTest(const FString& Parameters)
 {

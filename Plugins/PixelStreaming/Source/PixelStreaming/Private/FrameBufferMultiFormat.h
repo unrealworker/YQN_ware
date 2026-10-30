@@ -32,9 +32,11 @@ namespace UE::PixelStreaming
 			return nullptr;
 		}
 
+		void SetSourceStreamId(uint32 InStreamId) { StreamId = InStreamId; }
+
 	protected:
 		TSharedPtr<FPixelCaptureCapturerMultiFormat> FrameCapturer;
-		uint32 StreamId;
+		uint32										 StreamId;
 	};
 
 	/**
@@ -43,14 +45,16 @@ namespace UE::PixelStreaming
 	class FFrameBufferMultiFormatLayered : public FFrameBufferMultiFormatBase
 	{
 	public:
-		FFrameBufferMultiFormatLayered(TSharedPtr<FPixelCaptureCapturerMultiFormat> InFrameCapturer, uint32 InStreamId);
+		FFrameBufferMultiFormatLayered(TSharedPtr<FPixelCaptureCapturerMultiFormat> InFrameCapturer, uint32 InStreamId, FIntPoint SourceResolution);
 		virtual ~FFrameBufferMultiFormatLayered() = default;
 
 		virtual int width() const override;
 		virtual int height() const override;
 
-		int GetNumLayers() const;
-		rtc::scoped_refptr<FFrameBufferMultiFormat> GetLayer(int LayerIndex) const;
+		rtc::scoped_refptr<FFrameBufferMultiFormat> GetLayer(FIntPoint Resolution) const;
+
+	private:
+		FIntPoint SourceResolution;
 	};
 
 	/**
@@ -59,7 +63,7 @@ namespace UE::PixelStreaming
 	class FFrameBufferMultiFormat : public FFrameBufferMultiFormatBase
 	{
 	public:
-		FFrameBufferMultiFormat(TSharedPtr<FPixelCaptureCapturerMultiFormat> InFrameCapturer, uint32 StreamId, int InLayerIndex);
+		FFrameBufferMultiFormat(TSharedPtr<FPixelCaptureCapturerMultiFormat> InFrameCapturer, uint32 StreamId, FIntPoint InResolution);
 		virtual ~FFrameBufferMultiFormat() = default;
 
 		virtual int width() const override;
@@ -70,7 +74,7 @@ namespace UE::PixelStreaming
 		uint32 GetSourceStreamId() const { return StreamId; }
 
 	private:
-		int32 LayerIndex;
+		FIntPoint Resolution;
 		// we want the frame buffer to always refer to the same frame. so the first request for a format
 		// will fill this cache.
 		mutable TMap<int32, TSharedPtr<IPixelCaptureOutputFrame>> CachedFormat;

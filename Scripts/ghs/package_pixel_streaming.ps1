@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
-    [string]$EngineRoot = 'D:\UE\UE_5.4',
+    [string]$EngineRoot = '',
+    [string]$CompilerVersion = '',
     [string]$ArchiveDirectory = '',
     [string]$BuildProjectFile = '',
     [ValidateSet('Development', 'Shipping')]
@@ -12,6 +13,11 @@ $ProjectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $ProjectFile = Join-Path $ProjectRoot 'Test.uproject'
 if ($BuildProjectFile) { $ProjectFile = [IO.Path]::GetFullPath($BuildProjectFile) }
 if (-not (Test-Path -LiteralPath $ProjectFile -PathType Leaf)) { throw "Project not found: $ProjectFile" }
+if (-not $EngineRoot) {
+    $Association = (Get-Content -LiteralPath $ProjectFile -Raw | ConvertFrom-Json).EngineAssociation
+    if ($Association -notmatch '^5\.\d+$') { throw 'Specify -EngineRoot for a custom engine association.' }
+    $EngineRoot = Join-Path 'D:\UE' "UE_$Association"
+}
 $Uat = Join-Path $EngineRoot 'Engine/Build/BatchFiles/RunUAT.bat'
 if (-not (Test-Path -LiteralPath $Uat)) { throw "UE AutomationTool not found: $Uat" }
 if (-not $ArchiveDirectory) { $ArchiveDirectory = Join-Path $ProjectRoot 'Deployment/GHSPixelStreaming/App' }
@@ -27,8 +33,9 @@ $UatArguments = @(
     '-target=TestGame', "-clientconfig=$Configuration", '-nocompileeditor',
     '-build', '-cook', '-stage', '-pak', '-iostore', '-archive', '-prereqs',
     '-nodebuginfo', "-archivedirectory=$ArchiveDirectory", "-map=$Map",
-    '-ubtargs=-CompilerVersion=14.38.33130', '-unattended', '-utf8output'
+    '-unattended', '-utf8output'
 )
+if ($CompilerVersion) { $UatArguments += "-ubtargs=-CompilerVersion=$CompilerVersion" }
 $StartedAt = (Get-Date).ToString('o')
 $MapFile = Join-Path (Split-Path -Parent $ProjectFile) 'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap'
 $MapHash = (Get-FileHash -LiteralPath $MapFile -Algorithm SHA256).Hash
@@ -41,6 +48,8 @@ $RuntimeExecutable = Join-Path $ArchiveDirectory "Windows/Test/Binaries/Win64/Te
     finishedAt = (Get-Date).ToString('o')
     exitCode = $PackageExitCode
     project = $ProjectFile
+    engineRoot = $EngineRoot
+    compilerOverride = $CompilerVersion
     configuration = $Configuration
     map = $Map
     mapSha256 = $MapHash

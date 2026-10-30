@@ -1,9 +1,9 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "../GHSStreamingRuntime.h"
 #include "HAL/IConsoleManager.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStreamingValidBudgetTest,"GHS.Streaming.Runtime.AcceptsFiniteOrderedBudget",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStreamingValidBudgetTest,"GHS.Streaming.Runtime.AcceptsFiniteOrderedBudget",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSStreamingValidBudgetTest::RunTest(const FString&)
 {
     GHSStreamingRuntime::FBudget Budget; FString Error;
@@ -15,7 +15,7 @@ bool FGHSStreamingValidBudgetTest::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStreamingRejectBudgetTest,"GHS.Streaming.Runtime.RejectsCommandsAndInvalidNumbersWithoutMutation",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStreamingRejectBudgetTest,"GHS.Streaming.Runtime.RejectsCommandsAndInvalidNumbersWithoutMutation",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSStreamingRejectBudgetTest::RunTest(const FString&)
 {
     const FString Base=TEXT("{\"version\":1,\"sequence\":1,\"fps\":60,\"minBitrateMbps\":8,\"maxBitrateMbps\":50");
@@ -38,7 +38,7 @@ bool FGHSStreamingRejectBudgetTest::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStreamingLiveBudgetTest,"GHS.Streaming.Runtime.AppliesLiveFrameBudgetAndRejectsReplay",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStreamingLiveBudgetTest,"GHS.Streaming.Runtime.AppliesLiveFrameBudgetAndRejectsReplay",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSStreamingLiveBudgetTest::RunTest(const FString&)
 {
     const TCHAR* Names[]={TEXT("t.MaxFPS"),TEXT("PixelStreaming.WebRTC.Fps"),TEXT("PixelStreaming.WebRTC.MinBitrate"),TEXT("PixelStreaming.WebRTC.MaxBitrate")};
@@ -69,7 +69,7 @@ bool FGHSStreamingLiveBudgetTest::RunTest(const FString&)
     for(int32 Index=0;Index<UE_ARRAY_COUNT(Names);++Index) IConsoleManager::Get().FindConsoleVariable(Names[Index])->Set(*Previous[Index],ECVF_SetByConsole);
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStreamingUncappedBudgetTest,"GHS.Streaming.Runtime.AcceptsExplicitUncappedBudget",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStreamingUncappedBudgetTest,"GHS.Streaming.Runtime.AcceptsExplicitUncappedBudget",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSStreamingUncappedBudgetTest::RunTest(const FString&)
 {
     GHSStreamingRuntime::FBudget Budget; FString Error;

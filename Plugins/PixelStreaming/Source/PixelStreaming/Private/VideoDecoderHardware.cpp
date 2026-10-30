@@ -83,7 +83,7 @@ namespace UE::PixelStreaming
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("FVideoDecoderHardware::Decode FAILED"));
+			UE_LOGF(LogTemp, Warning, "FVideoDecoderHardware::Decode FAILED");
 
 			return WEBRTC_VIDEO_CODEC_OK_REQUEST_KEYFRAME;
 		}

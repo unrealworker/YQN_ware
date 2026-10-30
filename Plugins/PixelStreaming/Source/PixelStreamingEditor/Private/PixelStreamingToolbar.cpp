@@ -34,6 +34,7 @@
 #include "PixelStreamingEditorUtils.h"
 #include "SlateFwd.h"
 #include "Widgets/Input/SNumericEntryBox.h"
+#include "EditorPixelStreamingSettings.h"
 
 #include "PixelStreamingCoderUtils.h"
 #include "Video/Encoders/Configs/VideoEncoderConfigAV1.h"
@@ -76,7 +77,8 @@ namespace UE::EditorPixelStreaming
 				IPixelStreamingEditorModule::Get().StartStreaming(EStreamTypes::LevelEditorViewport);
 			}),
 			FCanExecuteAction::CreateLambda([] {
-				if (TSharedPtr<IPixelStreamingStreamer> Streamer = IPixelStreamingModule::Get().FindStreamer("Editor"))
+				FPixelStreamingEditorModule& EditorModule = static_cast<FPixelStreamingEditorModule&>(IPixelStreamingEditorModule::Get());
+				if (TSharedPtr<IPixelStreamingStreamer> Streamer = IPixelStreamingModule::Get().FindStreamer(EditorModule.GetEditorStreamerID()))
 				{
 					return !Streamer->IsStreaming();
 				}
@@ -89,7 +91,8 @@ namespace UE::EditorPixelStreaming
 				IPixelStreamingEditorModule::Get().StartStreaming(EStreamTypes::Editor);
 			}),
 			FCanExecuteAction::CreateLambda([] {
-				if (TSharedPtr<IPixelStreamingStreamer> Streamer = IPixelStreamingModule::Get().FindStreamer("Editor"))
+				FPixelStreamingEditorModule& EditorModule = static_cast<FPixelStreamingEditorModule&>(IPixelStreamingEditorModule::Get());
+				if (TSharedPtr<IPixelStreamingStreamer> Streamer = IPixelStreamingModule::Get().FindStreamer(EditorModule.GetEditorStreamerID()))
 				{
 					return !Streamer->IsStreaming();
 				}
@@ -202,6 +205,11 @@ namespace UE::EditorPixelStreaming
 
 	void FPixelStreamingToolbar::RegisterMenus()
 	{
+		if (!GetDefault<UPixelStreamingSettings>()->EnablePixelStreamingToolbar)
+		{
+			return;
+		}
+
 		FToolMenuOwnerScoped OwnerScoped(this);
 		{
 			UToolMenu* CustomToolBar = UToolMenus::Get()->ExtendMenu("LevelEditor.LevelEditorToolBar.User");
@@ -339,7 +347,8 @@ namespace UE::EditorPixelStreaming
 					  .AutoWidth()
 						  [SNew(SEditableTextBox)
 								  .Text_Lambda([]() {
-									  TSharedPtr<IPixelStreamingStreamer> Streamer = IPixelStreamingModule::Get().FindStreamer("Editor");
+									  FPixelStreamingEditorModule& EditorModule = static_cast<FPixelStreamingEditorModule&>(IPixelStreamingEditorModule::Get());
+									  TSharedPtr<IPixelStreamingStreamer> Streamer = IPixelStreamingModule::Get().FindStreamer(EditorModule.GetEditorStreamerID());
 									  return FText::FromString(Streamer->GetSignallingServerURL());
 								  })
 								  .OnTextChanged_Lambda([](const FText& InText) {
@@ -433,7 +442,8 @@ namespace UE::EditorPixelStreaming
 				}
 				else
 				{
-					if (Streamer->GetId() == "Editor")
+					FPixelStreamingEditorModule& EditorModule = static_cast<FPixelStreamingEditorModule&>(IPixelStreamingEditorModule::Get());
+					if (Streamer->GetId() == EditorModule.GetEditorStreamerID())
 					{
 						MenuBuilder.AddMenuEntry(FPixelStreamingCommands::Get().StreamLevelEditor);
 						MenuBuilder.AddMenuEntry(FPixelStreamingCommands::Get().StreamEditor);

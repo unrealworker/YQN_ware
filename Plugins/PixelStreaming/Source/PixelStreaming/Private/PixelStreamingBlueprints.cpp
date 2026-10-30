@@ -54,14 +54,14 @@ void UPixelStreamingBlueprints::SendFile(FString FilePath, FString MimeType, FSt
 	}
 
 	TArray64<uint8> ByteData;
-	bool bSuccess = FFileHelper::LoadFileToArray(ByteData, *FilePath);
+	bool			bSuccess = FFileHelper::LoadFileToArray(ByteData, *FilePath);
 	if (bSuccess)
 	{
 		Streamer->SendFileData(ByteData, MimeType, FileExtension);
 	}
 	else
 	{
-		UE_LOG(LogPixelStreaming, Error, TEXT("FileHelper failed to load file data"));
+		UE_LOGF(LogPixelStreaming, Error, "FileHelper failed to load file data");
 	}
 }
 
@@ -79,14 +79,14 @@ void UPixelStreamingBlueprints::StreamerSendFile(FString StreamerId, FString Fil
 	}
 
 	TArray64<uint8> ByteData;
-	bool bSuccess = FFileHelper::LoadFileToArray(ByteData, *FilePath);
+	bool			bSuccess = FFileHelper::LoadFileToArray(ByteData, *FilePath);
 	if (bSuccess)
 	{
 		Streamer->SendFileData(ByteData, MimeType, FileExtension);
 	}
 	else
 	{
-		UE_LOG(LogPixelStreaming, Error, TEXT("FileHelper failed to load file data"));
+		UE_LOGF(LogPixelStreaming, Error, "FileHelper failed to load file data");
 	}
 }
 
@@ -177,9 +177,7 @@ void UPixelStreamingBlueprints::KickPlayer(FString PlayerId)
 	{
 		return;
 	}
-	PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	Streamer->KickPlayer(ToPlayerId(PlayerId));
-	PRAGMA_ENABLE_DEPRECATION_WARNINGS
 }
 
 void UPixelStreamingBlueprints::StreamerKickPlayer(FString StreamerId, FString PlayerId)
@@ -194,9 +192,7 @@ void UPixelStreamingBlueprints::StreamerKickPlayer(FString StreamerId, FString P
 	{
 		return;
 	}
-	PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	Streamer->KickPlayer(ToPlayerId(PlayerId));
-	PRAGMA_ENABLE_DEPRECATION_WARNINGS
 }
 
 void UPixelStreamingBlueprints::SetPlayerLayerPreference(FString PlayerId, int SpatialLayerId, int TemporalLayerId)
@@ -264,7 +260,7 @@ FString UPixelStreamingBlueprints::GetDefaultStreamerID()
 	IPixelStreamingModule* Module = UE::PixelStreaming::FPixelStreamingModule::GetModule();
 	if (!Module)
 	{
-		FString();
+		return FString();
 	}
 	return Module->GetDefaultStreamerID();
 }

@@ -185,6 +185,12 @@ namespace UE::PixelStreaming::Settings
 		TEXT("Whether put audio and video in the same stream (which will make WebRTC try to sync them)."),
 		ECVF_Default);
 
+	TAutoConsoleVariable<bool> CVarPixelStreamingWebRTCEnableFlexFec(
+		TEXT("PixelStreaming.WebRTC.EnableFlexFec"),
+		false,
+		TEXT("Signals support for Flexible Forward Error Correction to WebRTC."),
+		ECVF_Default);
+
 	TAutoConsoleVariable<bool> CVarPixelStreamingWebRTCDisableStats(
 		TEXT("PixelStreaming.WebRTC.DisableStats"),
 		false,
@@ -332,6 +338,15 @@ namespace UE::PixelStreaming::Settings
 		false,
 		TEXT("Use Media Capture from MediaIOFramework to capture frames rather than Pixel Streamings internal backbuffer sources."),
 		ECVF_Default);
+	
+	TAutoConsoleVariable<int32> CVarPixelStreamingQualityControllerMode(
+		TEXT("PixelStreaming.QualityControllerMode"),
+		EQualityControllerMode::GrantAllRequested,
+		TEXT("Affect data channel requests for quality controller.\n"
+			"0: allow all requests.\n"
+			"1: only allow the first request. Subsequent requests are ignored until the player with quality control disconnects."
+			)
+		);
 
 	FString DefaultStreamerID = TEXT("DefaultStreamer");
 	FString DefaultSignallingURL = TEXT("ws://127.0.0.1:8888");
@@ -506,7 +521,7 @@ namespace UE::PixelStreaming::Settings
 		if (!bSuccess)
 		{
 			// failed parsing the parameters. just ignore the parameters.
-			UE_LOG(LogPixelStreaming, Error, TEXT("Simulcast parameters malformed. Expected [Scaling_0, MinBitrate_0, MaxBitrate_0, ... , Scaling_N, MinBitrate_N, MaxBitrate_N] as [float, int, int, ... , float, int, int] etc.]"));
+			UE_LOGF(LogPixelStreaming, Error, "Simulcast parameters malformed. Expected [Scaling_0, MinBitrate_0, MaxBitrate_0, ... , Scaling_N, MinBitrate_N, MaxBitrate_N] as [float, int, int, ... , float, int, int] etc.]");
 			SimulcastParameters.Layers.Empty();
 		}
 	}
@@ -633,7 +648,7 @@ namespace UE::PixelStreaming::Settings
 	 */
 	void ConsumeStat(FPixelStreamingPlayerId PlayerId, FName StatName, float StatValue)
 	{
-		UE_LOG(LogPixelStreaming, Log, TEXT("[%s](%s) = %f"), *PlayerId, *StatName.ToString(), StatValue);
+		UE_LOGF(LogPixelStreaming, Log, "[%ls](%ls) = %f", *PlayerId, *StatName.ToString(), StatValue);
 	}
 
 	FDelegateHandle LogStatsHandle;
@@ -732,7 +747,7 @@ namespace UE::PixelStreaming::Settings
 			}
 			else
 			{
-				UE_LOG(LogPixelStreaming, Warning, TEXT("Unknown port allocator flag: %s"), *Flag);
+				UE_LOGF(LogPixelStreaming, Warning, "Unknown port allocator flag: %ls", *Flag);
 			}
 			OptionCount--;
 		}
@@ -752,7 +767,7 @@ namespace UE::PixelStreaming::Settings
 	void InitialiseSettings()
 	{
 		using namespace UE::PixelStreaming;
-		UE_LOG(LogPixelStreaming, Log, TEXT("Initialising Pixel Streaming settings."));
+		UE_LOGF(LogPixelStreaming, Log, "Initialising Pixel Streaming settings.");
 
 		FParse::Value(FCommandLine::Get(), TEXT("PixelStreamingID="), DefaultStreamerID, false);
 
@@ -808,6 +823,7 @@ namespace UE::PixelStreaming::Settings
 		CommandLineParseOption(TEXT("GHSLowLatencyPlayout"), CVarPixelStreamingGHSLowLatencyPlayout);
 		CommandLineParseOption(TEXT("PixelStreamingSendPlayerIdAsInteger"), CVarSendPlayerIdAsInteger);
 		CommandLineParseOption(TEXT("PixelStreamingWebRTCUseLegacyAudioDevice"), CVarPixelStreamingWebRTCUseLegacyAudioDevice);
+		CommandLineParseOption(TEXT("PixelStreamingWebRTCEnableFlexFec"), CVarPixelStreamingWebRTCEnableFlexFec);
 		CommandLineParseOption(TEXT("PixelStreamingDisableLatencyTester"), CVarPixelStreamingDisableLatencyTester);
 		CommandLineParseOption(TEXT("PixelStreamingVPXUseCompute"), CVarPixelStreamingVPXUseCompute);
 		CommandLineParseOption(TEXT("PixelStreamingExperimentalAudioInput"), CVarPixelStreamingExperimentalAudioInput);

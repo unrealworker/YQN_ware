@@ -48,6 +48,7 @@ namespace UE::PixelStreaming::Settings
 	extern TAutoConsoleVariable<bool> CVarPixelStreamingWebRTCDisableTransmitVideo;
 	extern TAutoConsoleVariable<bool> CVarPixelStreamingWebRTCDisableAudioSync;
 	extern TAutoConsoleVariable<bool> CVarPixelStreamingWebRTCUseLegacyAudioDevice;
+	extern TAutoConsoleVariable<bool> CVarPixelStreamingWebRTCEnableFlexFec;
 	extern TAutoConsoleVariable<bool> CVarPixelStreamingWebRTCDisableStats;
 	extern TAutoConsoleVariable<float> CVarPixelStreamingWebRTCAudioGain;
 	extern TAutoConsoleVariable<bool> CVarPixelStreamingWebRTCNegotiateCodecs;
@@ -75,6 +76,7 @@ namespace UE::PixelStreaming::Settings
 	extern TAutoConsoleVariable<bool> CVarPixelStreamingDecoupleFramerate;
 	extern TAutoConsoleVariable<float> CVarPixelStreamingDecoupleWaitFactor;
 	extern TAutoConsoleVariable<bool> CVarPixelStreamingUseMediaCapture;
+	extern TAutoConsoleVariable<int32> CVarPixelStreamingQualityControllerMode;
 	// Ends Pixel Streaming Plugin CVars
 
 	/* Pixel Streaming can limit who can send input (keyboard, mouse, etc). */
@@ -84,6 +86,12 @@ namespace UE::PixelStreaming::Settings
 		Any,
 		/* Host - Only the "host" peer can control input. */
 		Host
+	};
+	
+	enum EQualityControllerMode : int32
+	{
+		GrantAllRequested = 0,
+		GrantOnlyFirst		= 1
 	};
 
 	// Begin utility functions etc.

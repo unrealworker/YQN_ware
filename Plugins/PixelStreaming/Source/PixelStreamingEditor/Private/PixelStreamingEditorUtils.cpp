@@ -39,15 +39,17 @@ namespace UE::EditorPixelStreaming
 			case EWindowType::CursorDecorator:
 				return TEXT("CursorDecorator");
 
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
 			case EWindowType::GameWindow:
 				return TEXT("GameWindow");
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 			default:
 				return TEXT("Unknown Window Type!");
 		}
 	}
 
-	const FString HashWindow(SWindow& SlateWindow, const FTexture2DRHIRef& FrameBuffer)
+	const FString HashWindow(SWindow& SlateWindow, const FTextureRHIRef& FrameBuffer)
 	{
 		return FString::Printf(TEXT("%s-%s-%dx%d"), ToString(SlateWindow.GetType()), *SlateWindow.GetTitle().ToString(), FrameBuffer->GetSizeXY().X, FrameBuffer->GetSizeXY().Y);
 	}

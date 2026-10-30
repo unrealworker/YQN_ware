@@ -35,7 +35,7 @@ void UPixelStreamingInput::BeginPlay()
 	}
 	else
 	{
-		UE_LOG(LogPixelStreaming, Warning, TEXT("Pixel Streaming input component not added because Pixel Streaming module is not loaded. This is expected on dedicated servers."));
+		UE_LOGF(LogPixelStreaming, Warning, "Pixel Streaming input component not added because Pixel Streaming module is not loaded. This is expected on dedicated servers.");
 	}
 }
 
@@ -50,7 +50,7 @@ void UPixelStreamingInput::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	}
 	else
 	{
-		UE_LOG(LogPixelStreaming, Warning, TEXT("Pixel Streaming input component not removed because Pixel Streaming module is not loaded. This is expected on dedicated servers."));
+		UE_LOGF(LogPixelStreaming, Warning, "Pixel Streaming input component not removed because Pixel Streaming module is not loaded. This is expected on dedicated servers.");
 	}
 }
 
@@ -64,7 +64,7 @@ void UPixelStreamingInput::SendPixelStreamingResponse(const FString& Descriptor)
 	}
 	else
 	{
-		UE_LOG(LogPixelStreaming, Warning, TEXT("Pixel Streaming input component skipped sending response. This is expected on dedicated servers."));
+		UE_LOGF(LogPixelStreaming, Warning, "Pixel Streaming input component skipped sending response. This is expected on dedicated servers.");
 	}
 }
 

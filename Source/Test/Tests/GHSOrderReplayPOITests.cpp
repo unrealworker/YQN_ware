@@ -1,8 +1,8 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "../GHSReplayPOILayout.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayPOIPlacementTest,"GHS.Replay.POI.AvoidsChromeTimelineAndOtherDevices",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayPOIPlacementTest,"GHS.Replay.POI.AvoidsChromeTimelineAndOtherDevices",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayPOIPlacementTest::RunTest(const FString&)
 {
     const FBox2D Bounds(FVector2D(8,72),FVector2D(1432,880));
@@ -31,7 +31,7 @@ bool FGHSReplayPOIPlacementTest::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayPOISemanticsTest,"GHS.Replay.POI.PreservesFaultAndTaskStatus",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayPOISemanticsTest,"GHS.Replay.POI.PreservesFaultAndTaskStatus",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayPOISemanticsTest::RunTest(const FString&)
 {
     TestEqual(TEXT("Fault remains red regardless of selected route colour"),GHSReplayPOI::StatusKind(TEXT("故障停机")),GHSReplayPOI::EStatus::Fault);

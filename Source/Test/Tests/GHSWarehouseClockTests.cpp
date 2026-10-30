@@ -2,12 +2,12 @@
 
 #include "../GHSWarehouseClock.h"
 #include "Internationalization/Internationalization.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 #include "Misc/ScopeExit.h"
 
 namespace GHSWarehouseClockTests
 {
-    constexpr uint32 Flags = EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
+    constexpr auto Flags = GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
 
     struct FSample
     {

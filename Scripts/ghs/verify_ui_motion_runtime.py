@@ -1,7 +1,7 @@
 """Verify the production offline React Bits/ECharts layer in owned UE Chromium.
 
 Run an isolated UnrealEditor -game -RenderOffscreen -TwinDiagnostics process,
-with -ExecCmds="py D:/UEPro/Test/Scripts/ghs/verify_ui_motion_runtime.py".
+with -ExecCmds="py <project-root>/Scripts/ghs/verify_ui_motion_runtime.py".
 Only Saved/UIMotion is written; no scene or project settings are saved.
 """
 from datetime import datetime, timezone
@@ -13,7 +13,7 @@ import time
 import traceback
 import unreal
 
-ROOT = Path('D:/UEPro/Test')
+ROOT = Path(unreal.Paths.convert_relative_path_to_full(unreal.Paths.project_dir())).resolve()
 CLI = unreal.SystemLibrary.get_command_line()
 assert all(re.search(r'(?:^|\s)-' + flag + r'(?=\s|$)', CLI, re.I)
            for flag in ('game', 'RenderOffscreen', 'TwinDiagnostics'))

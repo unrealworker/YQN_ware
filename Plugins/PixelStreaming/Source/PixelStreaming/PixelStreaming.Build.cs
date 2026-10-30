@@ -59,6 +59,10 @@ namespace UnrealBuildTool.Rules
 
         public PixelStreaming(ReadOnlyTargetRules Target) : base(Target)
         {
+			bRequiresPlatformSDK = true;
+			
+			IWYUSupport = IWYUSupport.None;
+
             PixelStreamingProgramsDirectory = Path.Combine(PluginDirectory, "Resources", "WebServers");
             // This is so for game projects using our public headers don't have to include extra modules they might not know about.
             PublicDependencyModuleNames.AddRange(new string[]
@@ -159,6 +163,10 @@ namespace UnrealBuildTool.Rules
                 AddFolder("SignallingWebServer");
                 AddFolder("Matchmaker");
                 AddFolder("SFU");
+                AddFolder("Extras");
+                AddFolder("Signalling");
+                AddFolder("Common");
+                AddFolder("SS_Test");
 
                 RuntimeDependencies.Add("$(ProjectDir)/Samples/PixelStreaming/WebServers/get_ps_servers.bat", "$(PluginDir)/Resources/WebServers/get_ps_servers.bat", StagedFileType.NonUFS);
                 RuntimeDependencies.Add("$(ProjectDir)/Samples/PixelStreaming/WebServers/get_ps_servers.sh", "$(PluginDir)/Resources/WebServers/get_ps_servers.sh", StagedFileType.NonUFS);

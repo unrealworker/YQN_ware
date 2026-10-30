@@ -5,6 +5,12 @@
 #include "Logging/LogMacros.h"
 #include "Misc/AssertionMacros.h"
 
+// Start WebRTC Includes
+#include "PreWebRTCApi.h"
+#include "rtc_base/logging.h"
+#include "PostWebRTCApi.h"
+// End WebRTC Includes
+
 DECLARE_LOG_CATEGORY_EXTERN(LogPixelStreamingWebRTC, Log, All);
 DEFINE_LOG_CATEGORY(LogPixelStreamingWebRTC);
 
@@ -17,7 +23,7 @@ class FWebRtcLogsRedirector : public rtc::LogSink
 public:
 	explicit FWebRtcLogsRedirector(rtc::LoggingSeverity Verbosity)
 	{
-		UE_LOG(LogPixelStreamingWebRTC, Verbose, TEXT("Starting WebRTC logging"));
+		UE_LOGF(LogPixelStreamingWebRTC, Verbose, "Starting WebRTC logging");
 
 		rtc::LogMessage::AddLogToStream(this, Verbosity);
 
@@ -29,7 +35,7 @@ public:
 
 	~FWebRtcLogsRedirector() override
 	{
-		UE_LOG(LogPixelStreamingWebRTC, Log, TEXT("Stopping WebRTC logging"));
+		UE_LOGF(LogPixelStreamingWebRTC, Log, "Stopping WebRTC logging");
 
 		rtc::LogMessage::RemoveLogToStream(this);
 	}
@@ -63,28 +69,28 @@ private:
 		// but since logging should be multithread-safe, it should be thread-local member or explicitly synchronised
 		auto StrPtr = StringCast<TCHAR>(message.c_str(), Size);
 		// to zero-terminate the string
-		FString Msg{ StrPtr.Length(), StrPtr.Get() };
+		FString Msg = FString::ConstructFromPtrSize( StrPtr.Get(), StrPtr.Length() );
 
 		switch (severity)
 		{
 			case rtc::LS_VERBOSE:
 			{
-				UE_LOG(LogPixelStreamingWebRTC, Verbose, TEXT("%s"), *Msg);
+				UE_LOGF(LogPixelStreamingWebRTC, Verbose, "%ls", *Msg);
 				break;
 			}
 			case rtc::LS_INFO:
 			{
-				UE_LOG(LogPixelStreamingWebRTC, Log, TEXT("%s"), *Msg);
+				UE_LOGF(LogPixelStreamingWebRTC, Log, "%ls", *Msg);
 				break;
 			}
 			case rtc::LS_WARNING:
 			{
-				UE_LOG(LogPixelStreamingWebRTC, Warning, TEXT("%s"), *Msg);
+				UE_LOGF(LogPixelStreamingWebRTC, Warning, "%ls", *Msg);
 				break;
 			}
 			case rtc::LS_ERROR:
 			{
-				UE_LOG(LogPixelStreamingWebRTC, Error, TEXT("%s"), *Msg);
+				UE_LOGF(LogPixelStreamingWebRTC, Error, "%ls", *Msg);
 				break;
 			}
 		}
@@ -94,7 +100,7 @@ private:
 	void OnLogMessage(const std::string& message) override
 	{
 		//unimplemented();
-		UE_LOG(LogPixelStreamingWebRTC, Verbose, TEXT("%s"), *FString(message.c_str()));
+		UE_LOGF(LogPixelStreamingWebRTC, Verbose, "%ls", *FString(message.c_str()));
 	}
 };
 

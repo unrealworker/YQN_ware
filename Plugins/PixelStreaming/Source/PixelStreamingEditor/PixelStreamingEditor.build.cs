@@ -8,6 +8,8 @@ namespace UnrealBuildTool.Rules
 	{
 		public PixelStreamingEditor(ReadOnlyTargetRules Target) : base(Target)
 		{
+			bRequiresPlatformSDK = true;
+			
 			var EngineDir = Path.GetFullPath(Target.RelativeEnginePath);
 
 			PrivateDependencyModuleNames.AddRange(new string[]

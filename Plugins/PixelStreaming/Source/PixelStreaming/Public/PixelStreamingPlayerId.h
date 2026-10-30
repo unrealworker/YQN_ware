@@ -21,5 +21,5 @@ PIXELSTREAMING_API inline int32 PlayerIdToInt(FPixelStreamingPlayerId PlayerId)
 	return FCString::Atoi(*PlayerId);
 }
 
-static const FPixelStreamingPlayerId INVALID_PLAYER_ID = ToPlayerId(FString(TEXT("Invalid Player Id")));
-static const FPixelStreamingPlayerId SFU_PLAYER_ID = FString(TEXT("1"));
+PIXELSTREAMING_API extern const FPixelStreamingPlayerId INVALID_PLAYER_ID;
+PIXELSTREAMING_API extern const FPixelStreamingPlayerId SFU_PLAYER_ID;

@@ -1,8 +1,8 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "../GHSTwinLayout.h"
 #include "../GHSTwinViewport.h"
-#include "Misc/AutomationTest.h"
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinDesktopScale,"GHS.TwinUI.Layout.HighResolutionUsesDesignCoordinates",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+#include "GHSAutomationTestFlags.h"
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinDesktopScale,"GHS.TwinUI.Layout.HighResolutionUsesDesignCoordinates",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinDesktopScale::RunTest(const FString&)
 {
     const auto Desktop=FGHSTwinViewport::FromPixels(FVector2D(2560,1600));
@@ -18,7 +18,7 @@ bool FGHSTwinDesktopScale::RunTest(const FString&)
         TestTrue(TEXT("Windows DPI is normalized by the game layer and never multiplied twice"),FMath::IsNearlyEqual(PlatformDPI*(ProjectCurve/PlatformDPI)*Desktop.SlateScale(ProjectCurve),Desktop.Scale,.0001));
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinInitialGeometry,"GHS.TwinUI.Layout.InitialFrameWaitsForActualViewportGeometry",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinInitialGeometry,"GHS.TwinUI.Layout.InitialFrameWaitsForActualViewportGeometry",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinInitialGeometry::RunTest(const FString&)
 {
     const auto View=FGHSTwinViewport::FromPixels(FVector2D(2560,1600));
@@ -30,7 +30,7 @@ bool FGHSTwinInitialGeometry::RunTest(const FString&)
     TestTrue(TEXT("Noninteger design scales settle without a fixed timer"),Fractional.MatchesGeometry(Fractional.LogicalSize));
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinViewportCoordinates,"GHS.TwinUI.Layout.ProjectionInputAndSearchShareOneCoordinateSpace",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinViewportCoordinates,"GHS.TwinUI.Layout.ProjectionInputAndSearchShareOneCoordinateSpace",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinViewportCoordinates::RunTest(const FString&)
 {
     for(FVector2D Pixels:{FVector2D(2560,1600),FVector2D(2501,1563),FVector2D(3840,2160),FVector2D(1366,768)})
@@ -51,7 +51,7 @@ bool FGHSTwinViewportCoordinates::RunTest(const FString&)
     }
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinAdaptiveLayout, "GHS.TwinUI.Layout.PreservesSceneAndReadablePanel", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinAdaptiveLayout, "GHS.TwinUI.Layout.PreservesSceneAndReadablePanel", GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FGHSTwinAdaptiveLayout::RunTest(const FString& Parameters)
 {
     for (FVector2D Size : {FVector2D(3840,2160), FVector2D(2560,1440), FVector2D(1920,1080), FVector2D(1366,768), FVector2D(1024,768), FVector2D(800,600), FVector2D(600,900), FVector2D(390,844)})
@@ -70,7 +70,7 @@ bool FGHSTwinAdaptiveLayout::RunTest(const FString& Parameters)
     TestEqual(TEXT("Portrait panel becomes bottom sheet"), Portrait.PanelPosition.X, 0.);
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinPanelSlide, "GHS.TwinUI.Layout.PanelSlidesFullWidthAndReversesWithoutJump", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinPanelSlide, "GHS.TwinUI.Layout.PanelSlidesFullWidthAndReversesWithoutJump", GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FGHSTwinPanelSlide::RunTest(const FString&)
 {
     for(FVector2D Size:{FVector2D(1920,1080),FVector2D(1366,768),FVector2D(600,900)})
@@ -93,7 +93,7 @@ bool FGHSTwinPanelSlide::RunTest(const FString&)
     }
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinControlsFollowPanel, "GHS.TwinUI.Layout.SceneControlsFollowPanelDuringSlide", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinControlsFollowPanel, "GHS.TwinUI.Layout.SceneControlsFollowPanelDuringSlide", GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FGHSTwinControlsFollowPanel::RunTest(const FString&)
 {
     for(FVector2D Size:{FVector2D(3840,2160),FVector2D(1920,1080),FVector2D(1366,768),FVector2D(900,600)})
@@ -135,7 +135,7 @@ bool FGHSTwinControlsFollowPanel::RunTest(const FString&)
     }
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchFollowsPanel, "GHS.TwinUI.Layout.SceneSearchFollowsPanelDuringSlide", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinSearchFollowsPanel, "GHS.TwinUI.Layout.SceneSearchFollowsPanelDuringSlide", GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FGHSTwinSearchFollowsPanel::RunTest(const FString&)
 {
     for(FVector2D Size:{FVector2D(3840,2160),FVector2D(1920,1080),FVector2D(1366,768),FVector2D(1024,768)})

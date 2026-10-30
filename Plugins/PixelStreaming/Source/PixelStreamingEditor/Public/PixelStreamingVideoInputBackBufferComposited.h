@@ -6,6 +6,7 @@
 
 #include "Widgets/SWindow.h"
 #include "RendererInterface.h"
+#include "Slate/SlateViewportProvider.h"
 #include "Delegates/IDelegateInstance.h"
 
 /*
@@ -23,7 +24,7 @@ public:
     FOnFrameSizeChanged OnFrameSizeChanged;
 
 private:
-    // Our class to keep window and texture information. Use of this struct prevents SWindow propeties being updated composition as well
+    // Our class to keep window and texture information. Use of this struct prevents SWindow properties being updated composition as well
     // as preventing deletion of our staging textures pre composition
     class FTexturedWindow
     {
@@ -54,7 +55,7 @@ private:
     FPixelStreamingVideoInputBackBufferComposited();
     void CompositeWindows();
 
-    void OnBackBufferReady(SWindow &SlateWindow, const FTexture2DRHIRef &FrameBuffer);
+    void OnBackBufferReady(SWindow &SlateWindow, ISlateViewportProvider& ViewportProvider);
     void OnPreTick(float DeltaTime);
 
     FDelegateHandle OnBackBufferReadyToPresentHandle;

@@ -49,7 +49,7 @@ namespace UE::PixelStreaming
 				break;
 			}
 			case webrtc::SdpType::kRollback:
-				UE_LOG(LogPixelStreaming, Error, TEXT("Rollback SDP is currently unsupported. SDP is: %s"), *Sdp);
+				UE_LOGF(LogPixelStreaming, Error, "Rollback SDP is currently unsupported. SDP is: %ls", *Sdp);
 				break;
 		}
 	}
@@ -69,7 +69,7 @@ namespace UE::PixelStreaming
 
 	void FPixelStreamingSignallingConnectionObserver::OnSignallingPlayerDisconnected(FPixelStreamingPlayerId PlayerId)
 	{
-		UE_LOG(LogPixelStreaming, Log, TEXT("player %s disconnected"), *PlayerId);
+		UE_LOGF(LogPixelStreaming, Log, "player %ls disconnected", *PlayerId);
 		Streamer.DeletePlayerSession(PlayerId);
 	}
 
@@ -78,7 +78,7 @@ namespace UE::PixelStreaming
 		FPlayerContext* PlayerContext = Streamer.Players->Find(SFUId);
 		if (PlayerContext == nullptr)
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Trying to create data channels from SFU connection but no SFU connection found."));
+			UE_LOGF(LogPixelStreaming, Error, "Trying to create data channels from SFU connection but no SFU connection found.");
 			return;
 		}
 

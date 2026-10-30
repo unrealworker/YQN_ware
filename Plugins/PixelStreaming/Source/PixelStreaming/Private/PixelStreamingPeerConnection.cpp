@@ -359,7 +359,7 @@ void FPixelStreamingPeerConnection::ReceiveOffer(const FString& Sdp, const VoidC
 	}
 	else
 	{
-		UE_LOG(LogPixelStreaming, Error, TEXT("Failed to parse offer: %hs"), Error.description.c_str());
+		UE_LOGF(LogPixelStreaming, Error, "Failed to parse offer: %s", Error.description.c_str());
 		if (ErrorCallback)
 		{
 			ErrorCallback(ToString(Error.description));
@@ -379,7 +379,7 @@ void FPixelStreamingPeerConnection::ReceiveAnswer(const FString& Sdp, const Void
 	}
 	else
 	{
-		UE_LOG(LogPixelStreaming, Error, TEXT("Failed to parse answer: %hs"), Error.description.c_str());
+		UE_LOGF(LogPixelStreaming, Error, "Failed to parse answer: %s", Error.description.c_str());
 		if (ErrorCallback)
 		{
 			ErrorCallback(ToString(Error.description));
@@ -396,7 +396,7 @@ void FPixelStreamingPeerConnection::SetLocalDescription(webrtc::SessionDescripti
 		}
 	};
 	auto OnSetLocalDescriptionFail = [ErrorCallback](const FString& Error) {
-		UE_LOG(LogPixelStreaming, Error, TEXT("Failed to set local description: %s"), *Error);
+		UE_LOGF(LogPixelStreaming, Error, "Failed to set local description: %ls", *Error);
 		if (ErrorCallback)
 		{
 			ErrorCallback(Error);
@@ -422,7 +422,7 @@ void FPixelStreamingPeerConnection::SetRemoteDescription(webrtc::SessionDescript
 	};
 
 	auto OnSetRemoteDescriptionFail = [ErrorCallback](const FString& Error) {
-		UE_LOG(LogPixelStreaming, Error, TEXT("Failed to set remote description: %s"), *Error);
+		UE_LOGF(LogPixelStreaming, Error, "Failed to set remote description: %ls", *Error);
 		if (ErrorCallback)
 		{
 			ErrorCallback(Error);
@@ -689,14 +689,14 @@ void FPixelStreamingPeerConnection::AddRemoteIceCandidate(const FString& SdpMid,
 	std::unique_ptr<webrtc::IceCandidateInterface> Candidate(webrtc::CreateIceCandidate(UE::PixelStreaming::ToString(SdpMid), SdpMLineIndex, UE::PixelStreaming::ToString(Sdp), &Error));
 	if (!Candidate)
 	{
-		UE_LOG(LogPixelStreaming, Error, TEXT("Failed to create ICE candicate: %hs"), Error.description.c_str());
+		UE_LOGF(LogPixelStreaming, Error, "Failed to create ICE candicate: %s", Error.description.c_str());
 		return;
 	}
 
 	PeerConnection->AddIceCandidate(std::move(Candidate), [](webrtc::RTCError error) {
 		if (!error.ok() && !Settings::CVarPixelStreamingSuppressICECandidateErrors.GetValueOnAnyThread())
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("AddIceCandidate failed: %S"), error.message());
+			UE_LOGF(LogPixelStreaming, Error, "AddIceCandidate failed: %s", error.message());
 		}
 	});
 }
@@ -767,22 +767,22 @@ void FPixelStreamingPeerConnection::ForceVideoKeyframe()
 
 void FPixelStreamingPeerConnection::OnSignalingChange(webrtc::PeerConnectionInterface::SignalingState NewState)
 {
-	UE_LOG(LogPixelStreaming, Log, TEXT("OnSignalingChange (%s)"), UE::PixelStreaming::ToString(NewState));
+	UE_LOGF(LogPixelStreaming, Log, "OnSignalingChange (%ls)", UE::PixelStreaming::ToString(NewState));
 }
 
 void FPixelStreamingPeerConnection::OnAddStream(rtc::scoped_refptr<webrtc::MediaStreamInterface> Stream)
 {
-	UE_LOG(LogPixelStreaming, Log, TEXT("OnAddStream"));
+	UE_LOGF(LogPixelStreaming, Log, "OnAddStream");
 }
 
 void FPixelStreamingPeerConnection::OnRemoveStream(rtc::scoped_refptr<webrtc::MediaStreamInterface> Stream)
 {
-	UE_LOG(LogPixelStreaming, Log, TEXT("OnRemoveStream"));
+	UE_LOGF(LogPixelStreaming, Log, "OnRemoveStream");
 }
 
 void FPixelStreamingPeerConnection::OnDataChannel(rtc::scoped_refptr<webrtc::DataChannelInterface> Channel)
 {
-	UE_LOG(LogPixelStreaming, Log, TEXT("OnDataChannel"));
+	UE_LOGF(LogPixelStreaming, Log, "OnDataChannel");
 
 	TSharedPtr<FPixelStreamingDataChannel> NewChannel = FPixelStreamingDataChannel::Create(Channel);
 	OnNewDataChannel.Broadcast(NewChannel);
@@ -790,12 +790,12 @@ void FPixelStreamingPeerConnection::OnDataChannel(rtc::scoped_refptr<webrtc::Dat
 
 void FPixelStreamingPeerConnection::OnRenegotiationNeeded()
 {
-	UE_LOG(LogPixelStreaming, Log, TEXT("OnRenegotiationNeeded"));
+	UE_LOGF(LogPixelStreaming, Log, "OnRenegotiationNeeded");
 }
 
 void FPixelStreamingPeerConnection::OnIceConnectionChange(webrtc::PeerConnectionInterface::IceConnectionState NewState)
 {
-	UE_LOG(LogPixelStreaming, Log, TEXT("OnIceConnectionChange (%s)"), UE::PixelStreaming::ToString(NewState));
+	UE_LOGF(LogPixelStreaming, Log, "OnIceConnectionChange (%ls)", UE::PixelStreaming::ToString(NewState));
 
 	if (NewState == webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionConnected)
 	{
@@ -813,28 +813,28 @@ void FPixelStreamingPeerConnection::OnIceConnectionChange(webrtc::PeerConnection
 
 void FPixelStreamingPeerConnection::OnIceGatheringChange(webrtc::PeerConnectionInterface::IceGatheringState NewState)
 {
-	UE_LOG(LogPixelStreaming, Log, TEXT("OnIceGatheringChange (%s)"), UE::PixelStreaming::ToString(NewState));
+	UE_LOGF(LogPixelStreaming, Log, "OnIceGatheringChange (%ls)", UE::PixelStreaming::ToString(NewState));
 }
 
 void FPixelStreamingPeerConnection::OnIceCandidate(const webrtc::IceCandidateInterface* Candidate)
 {
-	// UE_LOG(LogPixelStreaming, Log, TEXT("OnIceCandidate"));
+	// UE_LOGF(LogPixelStreaming, Log, "OnIceCandidate");
 	OnEmitIceCandidate.Broadcast(Candidate);
 }
 
 void FPixelStreamingPeerConnection::OnIceCandidatesRemoved(const std::vector<cricket::Candidate>& candidates)
 {
-	UE_LOG(LogPixelStreaming, Log, TEXT("OnIceCandidatesRemoved"));
+	UE_LOGF(LogPixelStreaming, Log, "OnIceCandidatesRemoved");
 }
 
 void FPixelStreamingPeerConnection::OnIceConnectionReceivingChange(bool Receiving)
 {
-	UE_LOG(LogPixelStreaming, Log, TEXT("OnIceConnectionReceivingChange"));
+	UE_LOGF(LogPixelStreaming, Log, "OnIceConnectionReceivingChange");
 }
 
 void FPixelStreamingPeerConnection::OnTrack(rtc::scoped_refptr<webrtc::RtpTransceiverInterface> Transceiver)
 {
-	UE_LOG(LogPixelStreaming, Log, TEXT("OnTrack"));
+	UE_LOGF(LogPixelStreaming, Log, "OnTrack");
 	if (VideoSink && Transceiver->media_type() == cricket::MediaType::MEDIA_TYPE_VIDEO)
 	{
 		webrtc::VideoTrackInterface* VideoTrack = static_cast<webrtc::VideoTrackInterface*>(Transceiver->receiver()->track().get());
@@ -855,7 +855,7 @@ void FPixelStreamingPeerConnection::OnTrack(rtc::scoped_refptr<webrtc::RtpTransc
 
 void FPixelStreamingPeerConnection::OnRemoveTrack(rtc::scoped_refptr<webrtc::RtpReceiverInterface> receiver)
 {
-	UE_LOG(LogPixelStreaming, Log, TEXT("OnRemoveTrack"));
+	UE_LOGF(LogPixelStreaming, Log, "OnRemoveTrack");
 }
 
 void FPixelStreamingPeerConnection::CreateSDP(ESDPType SDPType, EReceiveMediaOption ReceiveOption, const SDPCallback& SuccessCallback, const ErrorCallback& ErrorCallback)
@@ -882,7 +882,7 @@ void FPixelStreamingPeerConnection::CreateSDP(ESDPType SDPType, EReceiveMediaOpt
 	};
 
 	auto OnCreateSDPFail = [ErrorCallback](const FString& Error) {
-		UE_LOG(LogPixelStreaming, Error, TEXT("Failed to create SDP: %s"), *Error);
+		UE_LOGF(LogPixelStreaming, Error, "Failed to create SDP: %ls", *Error);
 		if (ErrorCallback)
 		{
 			ErrorCallback(Error);
@@ -933,6 +933,11 @@ void InitializeFieldTrials()
 	if (Settings::CVarPixelStreamingWebRTCDisableFrameDropper.GetValueOnAnyThread())
 	{
 		FieldTrials += TEXT("WebRTC-FrameDropper/Disabled/");
+	}
+
+	if (Settings::CVarPixelStreamingWebRTCEnableFlexFec.GetValueOnAnyThread())
+	{
+		FieldTrials += TEXT("WebRTC-FlexFEC-03-Advertised/Enabled/WebRTC-FlexFEC-03/Enabled/");
 	}
 
 	// Parse "WebRTC-Video-Pacing/" field trial
@@ -991,12 +996,12 @@ void FPixelStreamingPeerConnection::CreatePeerConnectionFactory()
 			if (Settings::CVarPixelStreamingExperimentalAudioInput.GetValueOnAnyThread())
 			{
 				AudioDeviceModule = new rtc::RefCountedObject<FAudioDeviceModule>(AudioMixer);
-				UE_LOG(LogPixelStreaming, Log, TEXT("Using -PixelStreamingExperimentalAudioInput. Pixel Streaming audio will mix the UE submix with user audio inputs."));
+				UE_LOGF(LogPixelStreaming, Log, "Using -PixelStreamingExperimentalAudioInput. Pixel Streaming audio will mix the UE submix with user audio inputs.");
 			}
 			else
 			{
 				AudioDeviceModule = new rtc::RefCountedObject<FAudioDeviceModule>();
-				UE_LOG(LogPixelStreaming, Log, TEXT("Not using -PixelStreamingExperimentalAudioInput. Pixel Streaming audio will only transmit the UE submix."));
+				UE_LOGF(LogPixelStreaming, Log, "Not using -PixelStreamingExperimentalAudioInput. Pixel Streaming audio will only transmit the UE submix.");
 			}
 		}
 	}

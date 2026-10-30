@@ -88,11 +88,23 @@ if DEFINED UEVersion (
     SET PSInfraTagOrBranch=UE5.4
     SET IsTag=0
   )
+  if "%UEVersion%"=="5.5" (
+    SET PSInfraTagOrBranch=UE5.5
+    SET IsTag=0
+  )
+  if "%UEVersion%"=="5.6" (
+    SET PSInfraTagOrBranch=UE5.6
+    SET IsTag=0
+  )
+  if "%UEVersion%"=="5.7" (
+    SET PSInfraTagOrBranch=UE5.7
+    SET IsTag=0
+  )
 )
 
 @Rem If no arguments select a specific version, fetch the appropriate default
 if NOT DEFINED PSInfraTagOrBranch (
-    SET PSInfraTagOrBranch=UE5.4
+    SET PSInfraTagOrBranch=UE5.7
     SET IsTag=0
 )
 echo Tag or branch: !PSInfraTagOrBranch!

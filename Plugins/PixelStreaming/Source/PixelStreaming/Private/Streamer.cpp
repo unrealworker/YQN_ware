@@ -106,7 +106,7 @@ namespace UE::PixelStreaming
 		Players->Apply([this](FPixelStreamingPlayerId PlayerId, FPlayerContext& PlayerContext) {
 			if (PlayerContext.PeerConnection)
 			{
-				PlayerContext.PeerConnection->SetVideoSource(VideoSourceGroup->CreateVideoSource([this, PlayerId]() { return ShouldPeerGenerateFrames(PlayerId); }));
+				PlayerContext.PeerConnection->SetVideoSource(VideoSourceGroup->CreateVideoSource(PlayerContext.Config.IsSFU, [this, PlayerId]() { return ShouldPeerGenerateFrames(PlayerId); }));
 			}
 		});
 	}
@@ -180,7 +180,7 @@ namespace UE::PixelStreaming
 	{
 		if (CurrentSignallingServerURL.IsEmpty())
 		{
-			UE_LOG(LogPixelStreaming, Log, TEXT("Attempted to start streamer (%s) but no signalling server URL has been set. Use Streamer->SetSignallingServerURL(URL) or -PixelStreamingURL="), *StreamerId);
+			UE_LOGF(LogPixelStreaming, Log, "Attempted to start streamer (%ls) but no signalling server URL has been set. Use Streamer->SetSignallingServerURL(URL) or -PixelStreamingURL=", *StreamerId);
 			return;
 		}
 
@@ -271,6 +271,17 @@ namespace UE::PixelStreaming
 		});
 	}
 
+	void FStreamer::SendPlayerMessage(FPixelStreamingPlayerId PlayerId, uint8 Type, const FString& Descriptor)
+	{
+		if (FPlayerContext* PlayerContext = Players->Find(PlayerId))
+		{
+			if (PlayerContext->DataChannel)
+			{
+				PlayerContext->DataChannel->SendMessage(Type, Descriptor);
+			}
+		}
+	}
+
 	void FStreamer::SendFileData(const TArray64<uint8>& ByteData, FString& MimeType, FString& FileExtension)
 	{
 		// TODO this should be dispatched as an async task, but because we lock when we visit the data
@@ -289,7 +300,7 @@ namespace UE::PixelStreaming
 				// Send the contents of the file. Note to callers: consider running this on its own thread, it can take a while if the file is big.
 				if (!PlayerContext.DataChannel->SendArbitraryData(FPixelStreamingInputProtocol::FromStreamerProtocol.Find("FileContents")->GetID(), ByteData))
 				{
-					UE_LOG(LogPixelStreaming, Error, TEXT("Unable to send file data over the data channel for player %s."), *PlayerId);
+					UE_LOGF(LogPixelStreaming, Error, "Unable to send file data over the data channel for player %ls.", *PlayerId);
 				}
 			}
 		});
@@ -413,7 +424,7 @@ namespace UE::PixelStreaming
 		}
 		else
 		{
-			UE_LOG(LogPixelStreaming, Warning, TEXT("Unable to set bitrates from player %s since they are not the Quality Controller."), *PlayerId);
+			UE_LOGF(LogPixelStreaming, Warning, "Unable to set bitrates from player %ls since they are not the Quality Controller.", *PlayerId);
 		}
 	}
 
@@ -438,7 +449,7 @@ namespace UE::PixelStreaming
 		{
 			if (PlayerContext->Config.IsSFU && SFUPlayerId != INVALID_PLAYER_ID)
 			{
-				UE_LOG(LogPixelStreaming, Error, TEXT("SFU is connecting but we already have an SFU"));
+				UE_LOGF(LogPixelStreaming, Error, "SFU is connecting but we already have an SFU");
 			}
 			else
 			{
@@ -490,7 +501,7 @@ namespace UE::PixelStreaming
 			{
 				const bool AllowSimulcast = PlayerContext->Config.IsSFU;
 
-				PlayerContext->PeerConnection->SetVideoSource(VideoSourceGroup->CreateVideoSource([this, PlayerId]() { return ShouldPeerGenerateFrames(PlayerId); }));
+				PlayerContext->PeerConnection->SetVideoSource(VideoSourceGroup->CreateVideoSource(PlayerContext->Config.IsSFU, [this, PlayerId]() { return ShouldPeerGenerateFrames(PlayerId); }));
 				PlayerContext->PeerConnection->SetAudioSource(FPixelStreamingPeerConnection::GetApplicationAudioSource());
 				PlayerContext->PeerConnection->SetAudioSink(MakeShared<FAudioSink>());
 			}
@@ -600,7 +611,7 @@ namespace UE::PixelStreaming
 		}
 		else
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Failed to find player id %s for incoming answer."), *PlayerId);
+			UE_LOGF(LogPixelStreaming, Error, "Failed to find player id %ls for incoming answer.", *PlayerId);
 		}
 	}
 
@@ -775,8 +786,7 @@ namespace UE::PixelStreaming
 	{
 		if (Type == FPixelStreamingInputProtocol::ToStreamerProtocol.Find("RequestQualityControl")->GetID())
 		{
-			UE_LOG(LogPixelStreaming, Log, TEXT("Player %s has requested quality control through the data channel."), *PlayerId);
-			SetQualityController(PlayerId);
+			HandleSetQualityControllerRequest(PlayerId);
 		}
 		else if (Type == FPixelStreamingInputProtocol::ToStreamerProtocol.Find("LatencyTest")->GetID())
 		{
@@ -798,7 +808,7 @@ namespace UE::PixelStreaming
 				{
 					const size_t DescriptorSize = (RawBuffer.data.size() - 1) / sizeof(TCHAR);
 					const TCHAR* DescPtr = reinterpret_cast<const TCHAR*>(RawBuffer.data.data() + 1);
-					const FString Message(DescriptorSize, DescPtr);
+					const FString Message = FString::ConstructFromPtrSize(DescPtr, DescriptorSize);
 					PlayerContext->DataChannel->SendMessage(FPixelStreamingInputProtocol::FromStreamerProtocol.Find("TestEcho")->GetID(), Message);
 				}
 			}
@@ -867,7 +877,7 @@ namespace UE::PixelStreaming
 			{
 				if (!PlayerContext->DataChannel->SendMessage(FPixelStreamingInputProtocol::FromStreamerProtocol.Find("InitialSettings")->GetID(), FullPayload))
 				{
-					UE_LOG(LogPixelStreaming, Log, TEXT("Failed to send initial Pixel Streaming settings to player %s."), *PlayerId);
+					UE_LOGF(LogPixelStreaming, Log, "Failed to send initial Pixel Streaming settings to player %ls.", *PlayerId);
 				}
 			}
 		}
@@ -883,7 +893,7 @@ namespace UE::PixelStreaming
 			TSharedRef<TJsonWriter<>> JsonWriter = TJsonWriterFactory<>::Create(&body);
 			if (!ensure(FJsonSerializer::Serialize(ProtocolJson.ToSharedRef(), JsonWriter)))
 			{
-				UE_LOG(LogPixelStreaming, Warning, TEXT("Cannot serialize protocol json object"));
+				UE_LOGF(LogPixelStreaming, Warning, "Cannot serialize protocol json object");
 				return;
 			}
 
@@ -894,7 +904,7 @@ namespace UE::PixelStreaming
 					// Log a warning if we are unable to send our updated protocol
 					if (!PlayerContext->DataChannel->SendMessage(FPixelStreamingInputProtocol::FromStreamerProtocol.Find("Protocol")->GetID(), body))
 					{
-						UE_LOG(LogPixelStreaming, Warning, TEXT("Failed to send Pixel Streaming protocol to player %s. This player will use the default protocol specified in the front end"), *PlayerId);
+						UE_LOGF(LogPixelStreaming, Warning, "Failed to send Pixel Streaming protocol to player %ls. This player will use the default protocol specified in the front end", *PlayerId);
 					}
 				}
 			}
@@ -976,7 +986,7 @@ namespace UE::PixelStreaming
 			// In any case, we should fall back to our default setting.
 			if (Codec == EPixelStreamingCodec::Invalid)
 			{
-				UE_LOG(LogPixelStreaming, Log, TEXT("Was unable to extract a negotiated video codec from the SDP falling back to -PixelStreamingEncoderCodec"));
+				UE_LOGF(LogPixelStreaming, Log, "Was unable to extract a negotiated video codec from the SDP falling back to -PixelStreamingEncoderCodec");
 				Codec = Settings::GetSelectedCodec();
 			}
 
@@ -991,11 +1001,9 @@ namespace UE::PixelStreaming
 				case EPixelStreamingCodec::H264:
 				case EPixelStreamingCodec::AV1:
 					return (PlayerId == QualityControllingId || PlayerId == SFUPlayerId);
-					break;
 				case EPixelStreamingCodec::VP8:
 				case EPixelStreamingCodec::VP9:
 					return true;
-					break;
 				default:
 					// There should be a case for every Codec type, so this should never happen.
 					checkNoEntry();
@@ -1003,6 +1011,29 @@ namespace UE::PixelStreaming
 			}
 		}
 		return false;
+	}
+
+	void FStreamer::HandleSetQualityControllerRequest(const FPixelStreamingPlayerId& PlayerId)
+	{
+		const Settings::EQualityControllerMode QualityControlMode = static_cast<Settings::EQualityControllerMode>(
+			Settings::CVarPixelStreamingQualityControllerMode.GetValueOnAnyThread()
+			);
+		UE_LOGF(LogPixelStreaming, Verbose, "Player %ls has requested quality control through the data channel.", *PlayerId);
+		
+		switch (QualityControlMode)
+		{
+		case Settings::GrantAllRequested: SetQualityController(PlayerId); break;
+		case Settings::GrantOnlyFirst:
+			if (QualityControllingId == INVALID_PLAYER_ID || QualityControllingId == PlayerId)
+			{
+				SetQualityController(PlayerId);
+			}
+			else
+			{
+				UE_LOGF(LogPixelStreaming, Verbose, "Dropped quality control request from player %ls.", *PlayerId);
+			}
+			break;
+		}
 	}
 
 	void FStreamer::SetQualityController(FPixelStreamingPlayerId PlayerId)

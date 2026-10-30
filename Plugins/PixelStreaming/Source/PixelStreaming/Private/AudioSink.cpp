@@ -7,14 +7,9 @@ namespace UE::PixelStreaming
 {
 	FAudioSink::~FAudioSink()
 	{
-		for (auto Iter = AudioConsumers.CreateIterator(); Iter; ++Iter)
+		for (IPixelStreamingAudioConsumer* AudioConsumer : AudioConsumers)
 		{
-			IPixelStreamingAudioConsumer* AudioConsumer = Iter.ElementIt->Value;
-			Iter.RemoveCurrent();
-			if (AudioConsumer != nullptr)
-			{
-				AudioConsumer->OnConsumerRemoved();
-			}
+			AudioConsumer->OnConsumerRemoved();
 		}
 	}
 
@@ -52,9 +47,8 @@ namespace UE::PixelStreaming
 
 	void FAudioSink::RemoveAudioConsumer(IPixelStreamingAudioConsumer* AudioConsumer)
 	{
-		if (AudioConsumers.Contains(AudioConsumer))
+		if (AudioConsumers.Remove(AudioConsumer) > 0)
 		{
-			AudioConsumers.Remove(AudioConsumer);
 			AudioConsumer->OnConsumerRemoved();
 		}
 	}

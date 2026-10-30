@@ -4,10 +4,21 @@
 #include "PixelStreamingServersLog.h"
 
 namespace UE::PixelStreamingServers
-{
+{	
+	FServerBase::FServerBase()
+		: FTickableGameObject(ETickableTickType::Never)
+	{
+	}
+
+	FServerBase::~FServerBase()
+	{
+		SetTickableTickType(ETickableTickType::Never);
+	}
 
 	bool FServerBase::Launch(FLaunchArgs& InLaunchArgs)
 	{
+		SetTickableTickType(ETickableTickType::Always);
+		
 		LaunchArgs = InLaunchArgs;
 		bPollUntilReady = InLaunchArgs.bPollUntilReady;
 
@@ -31,7 +42,7 @@ namespace UE::PixelStreamingServers
 		return true;
 	}
 
-	bool FServerBase::IsAllowedToTick() const
+	bool FServerBase::IsTickable() const
 	{
 		return bAllowedToTick;
 	}
@@ -62,7 +73,7 @@ namespace UE::PixelStreamingServers
 
 			if (TestConnection())
 			{
-				UE_LOG(LogPixelStreamingServers, Log, TEXT("Connected to the server. Server is now ready.  - Broadcasting OnReady event..."));
+				UE_LOGF(LogPixelStreamingServers, Log, "Connected to the server. Server is now ready.  - Broadcasting OnReady event...");
 				OnReady.Broadcast(Endpoints);
 				// No need to poll anymore we are connected
 				bAllowedToTick = false;
@@ -71,14 +82,14 @@ namespace UE::PixelStreamingServers
 			}
 			else
 			{
-				UE_LOG(LogPixelStreamingServers, Log, TEXT("Polling again in another %.f seconds for server to become ready..."), LaunchArgs.ReconnectionIntervalSeconds);
+				UE_LOGF(LogPixelStreamingServers, Log, "Polling again in another %.f seconds for server to become ready...", LaunchArgs.ReconnectionIntervalSeconds);
 				LastReconnectionTimeSeconds = FPlatformTime::Seconds();
 			}
 		}
 		else
 		{
 			// No need to poll anymore we timed out
-			UE_LOG(LogPixelStreamingServers, Error, TEXT("Server was not ready after %.f seconds, polling timed out."), LaunchArgs.ReconnectionTimeoutSeconds);
+			UE_LOGF(LogPixelStreamingServers, Error, "Server was not ready after %.f seconds, polling timed out.", LaunchArgs.ReconnectionTimeoutSeconds);
 			bAllowedToTick = false;
 			bTimedOut = true;
 			OnFailedToReady.Broadcast();

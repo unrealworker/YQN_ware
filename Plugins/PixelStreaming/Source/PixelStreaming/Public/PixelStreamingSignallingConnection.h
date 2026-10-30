@@ -42,7 +42,6 @@ public:
 
 private:
 	void Connect(FString Url, bool bIsReconnect);
-	void KeepAlive();
 	void OnConnected();
 	void OnConnectionError(const FString& Error);
 	void OnClosed(int32 StatusCode, const FString& Reason, bool bWasClean);
@@ -73,8 +72,8 @@ private:
 	void StartReconnectTimer();
 	void StopReconnectTimer();
 
-	template <typename FmtType, typename... T>
-	void PlayerError(FPixelStreamingPlayerId PlayerId, const FmtType& Msg, T... args)
+	template <typename... T>
+	void PlayerError(FPixelStreamingPlayerId PlayerId, UE::Core::TCheckedFormatString<FString::FmtCharType, T...> Msg, T... args)
 	{
 		const FString FormattedMsg = FString::Printf(Msg, args...);
 		PlayerError(PlayerId, FormattedMsg);
@@ -103,4 +102,16 @@ private:
 	const float KEEP_ALIVE_INTERVAL = 60.0f;
 
 	TMap<FString, TFunction<void(FJsonObjectPtr)>> MessageHandlers;
+
+	// we can used WeakPtrs pointing to this SharedPtr to detect when this class is destroyed
+	// that allows the following Safe... delayed executions to safely check if the connection
+	// no longer exists.
+	TSharedPtr<int> AliveSemaphore;
+
+	/**
+	 * These templates are defined in the cpp since theyre private and we dont want to include the private
+	 * include file "Utils.h" here in this public header.
+	 */
+	template<typename T> void SafeGameThreadExecute(T&& Func);
+	template<typename T> void SafeGameThreadExecuteAndWait(uint32 Timeout, T&& Func);
 };

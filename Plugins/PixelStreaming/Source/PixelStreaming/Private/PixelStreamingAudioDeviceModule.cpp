@@ -66,7 +66,7 @@ namespace UE::PixelStreaming
 	{
 		InitRecording();
 
-		UE_LOG(LogPixelStreaming, Verbose, TEXT("Init PixelStreamingAudioDeviceModule"));
+		UE_LOGF(LogPixelStreaming, Verbose, "Init PixelStreamingAudioDeviceModule");
 		bInitialized = true;
 		return 0;
 	}
@@ -81,7 +81,7 @@ namespace UE::PixelStreaming
 		Requester->Uninitialise();
 		Capturer->Uninitialise();
 
-		UE_LOG(LogPixelStreaming, Verbose, TEXT("Terminate"));
+		UE_LOGF(LogPixelStreaming, Verbose, "Terminate");
 
 		return 0;
 	}
@@ -368,7 +368,7 @@ namespace UE::PixelStreaming
 	{
 		CHECKinitialized_();
 		FString AudioChannelStr = enable ? TEXT("stereo") : TEXT("mono");
-		UE_LOG(LogPixelStreaming, Log, TEXT("WebRTC has requested audio playout in UE be: %s"), *AudioChannelStr);
+		UE_LOGF(LogPixelStreaming, Log, "WebRTC has requested audio playout in UE be: %ls", *AudioChannelStr);
 		return 0;
 	}
 

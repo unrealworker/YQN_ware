@@ -8,6 +8,12 @@
 #include "PixelStreamingWebRTCIncludes.h"
 #include "PixelCaptureBufferFormat.h"
 
+// Forward declaration
+namespace UE::PixelStreaming
+{
+	class FVideoSource;
+}
+
 /**
  * The input of the Pixel Streaming system. Frames enter the system when OnFrame is called.
  * The input buffers might need to be converted/adapted to suit the selected video encoder.
@@ -48,7 +54,7 @@ public:
 	/**
 	 *
 	 */
-	TSharedPtr<IPixelCaptureOutputFrame> RequestFormat(int32 Format, int32 LayerIndex = -1);
+	TSharedPtr<IPixelCaptureOutputFrame> RequestFormat(int32 Format, TOptional<FIntPoint> Resolution = TOptional<FIntPoint>());
 
 	/**
 	 * This is broadcast each time a frame exits the adapt process. Used to synchronize framerates with input rates.
@@ -60,16 +66,21 @@ public:
 private:
 	int32 LastFrameWidth = -1;
 	int32 LastFrameHeight = -1;
-	bool Ready = false;
+	bool  Ready = false;
 
 	TSharedPtr<FPixelCaptureCapturerMultiFormat> FrameCapturer;
-	FDelegateHandle CaptureCompleteHandle;
-	TSet<int32> PreInitFormats;
+	FDelegateHandle								 CaptureCompleteHandle;
+	TSet<int32>									 PreInitFormats;
 
 	void CreateFrameCapturer();
 	void OnCaptureComplete();
 
+	static uint32 GetUniqueStreamId();
+
 	// video inputs need a unique stream id so we can properly divide hardware encoders between inputs
-	uint32 StreamId = 0;
+	uint32		  StreamId = 0;
 	static uint32 NextStreamId;
+
+	// FVideoSource needs to set unique StreamId
+	friend class UE::PixelStreaming::FVideoSource;
 };

@@ -195,6 +195,14 @@ public:
 	virtual void SendPlayerMessage(uint8 Type, const FString& Descriptor) = 0;
 
 	/**
+	 * @brief Send a single player connected to this streamer a message
+	 * @param PlayerId The ID of the player to which to send the message
+	 * @param Type The message type to be sent to the player
+	 * @param Descriptor The contents of the message
+	 */
+	virtual void SendPlayerMessage(FPixelStreamingPlayerId PlayerId, uint8 Type, const FString& Descriptor) = 0;
+
+	/**
 	 * @brief Send a file to the browser where we are sending video.
 	 * @param ByteData	 	- The raw byte data of the file.
 	 * @param MimeType	 	- The files Mime type. Used for reconstruction on the front end.
@@ -203,10 +211,9 @@ public:
 	virtual void SendFileData(const TArray64<uint8>& ByteData, FString& MimeType, FString& FileExtension) = 0;
 
 	/**
-	 * @brief Kick a player by player id. DEPRECATED
+	 * @brief Kick a player by player id.
 	 * @param PlayerId		- The ID of the player to kick
 	 */
-	UE_DEPRECATED(5.4, "Kick player has been deprecated, will no longer function and will be removed in future versions.")
 	virtual void KickPlayer(FPixelStreamingPlayerId PlayerId) = 0;
 
 	/**
@@ -219,7 +226,7 @@ public:
 
 	/**
 	 * @brief Get the connected players
-	 * 
+	 *
 	 * @return TArray<FPixelStreamingPlayerId> The connected players
 	 */
 	virtual TArray<FPixelStreamingPlayerId> GetConnectedPlayers() = 0;
@@ -292,7 +299,7 @@ public:
 	virtual bool GetConfigOption(const FName& OptionName, FString& OutValue) = 0;
 
 	/**
-	*/
+	 */
 	virtual void PlayerRequestsBitrate(FPixelStreamingPlayerId PlayerId, int MinBitrate, int MaxBitrate) = 0;
 
 	virtual void RefreshStreamBitrate() = 0;

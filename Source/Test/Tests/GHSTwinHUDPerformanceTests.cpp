@@ -1,8 +1,8 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "../GHSTwinHUDWidget.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinPOICadenceTest,"GHS.TwinUI.Performance.POICandidatesRespectCadenceAndInvalidation",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinPOICadenceTest,"GHS.TwinUI.Performance.POICandidatesRespectCadenceAndInvalidation",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinPOICadenceTest::RunTest(const FString&)
 {
     FGHSTwinPOIRefreshPolicy Policy;
@@ -19,7 +19,7 @@ bool FGHSTwinPOICadenceTest::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinBrowserVisibilityTest,"GHS.TwinUI.Performance.BrowserRefreshFollowsSlideVisibility",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSTwinBrowserVisibilityTest,"GHS.TwinUI.Performance.BrowserRefreshFollowsSlideVisibility",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSTwinBrowserVisibilityTest::RunTest(const FString&)
 {
     for(FVector2D Size:{FVector2D(1920,1080),FVector2D(600,900)})

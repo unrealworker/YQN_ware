@@ -11,12 +11,12 @@
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/WorldSettings.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 #include <limits>
 
 namespace GHSMannedForkliftTests
 {
-    constexpr uint32 Flags = EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
+    constexpr auto Flags = GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
     struct FFixture
     {
         UWorld* World = nullptr;

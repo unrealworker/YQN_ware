@@ -14,6 +14,13 @@ class PIXELSTREAMINGINPUT_API UPixelStreamingSettings : public UDeveloperSetting
 	GENERATED_UCLASS_BODY()
 
 public:
+	UPROPERTY(config, EditAnywhere, Category = "PixelStreaming", meta = (
+		ConfigRestartRequired = true,
+		DisplayName = "Enable Pixel Streaming Toolbar",
+		ToolTip = "Adds the Pixel Streaming toolbar to the main viewport toolbar."
+		))
+	bool EnablePixelStreamingToolbar = true;
+	
 	/**
 	 * Pixel streaming always requires various software cursors so they will be
 	 * visible in the video stream sent to the browser to allow the user to

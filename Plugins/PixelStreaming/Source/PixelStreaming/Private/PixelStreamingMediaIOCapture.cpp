@@ -15,47 +15,52 @@
 #include "RenderGraphUtils.h"
 
 void UPixelStreamingMediaIOCapture::OnRHIResourceCaptured_RenderingThread(
-	const FCaptureBaseData& InBaseData,
+	FRHICommandListImmediate& /*RHICmdList*/,
+	const FCaptureBaseData&								   InBaseData,
 	TSharedPtr<FMediaCaptureUserData, ESPMode::ThreadSafe> InUserData,
-	FTextureRHIRef InTexture)
+	FTextureRHIRef										   InTexture)
 {
 	HandleCapturedFrame(InTexture);
 }
 
 void UPixelStreamingMediaIOCapture::OnRHIResourceCaptured_AnyThread(
-	const FCaptureBaseData & InBaseData,
-	TSharedPtr<FMediaCaptureUserData,ESPMode::ThreadSafe> InUserData,
-	FTextureRHIRef InTexture)
+	const FCaptureBaseData&								   InBaseData,
+	TSharedPtr<FMediaCaptureUserData, ESPMode::ThreadSafe> InUserData,
+	FTextureRHIRef										   InTexture)
 {
 	HandleCapturedFrame(InTexture);
 }
 
 void UPixelStreamingMediaIOCapture::OnFrameCaptured_RenderingThread(
-		const FCaptureBaseData& InBaseData,
-		TSharedPtr<FMediaCaptureUserData, ESPMode::ThreadSafe> InUserData,
-		void* InBuffer,
-		int32 Width,
-		int32 Height,
-		int32 BytesPerRow)
+	const FCaptureBaseData&								   InBaseData,
+	TSharedPtr<FMediaCaptureUserData, ESPMode::ThreadSafe> InUserData,
+	void*												   InBuffer,
+	int32												   Width,
+	int32												   Height,
+	int32												   BytesPerRow)
 {
 	UpdateCaptureResolution(Width, Height);
 	// Todo: implement this if we want to support cpu readback captures
 }
 
 void UPixelStreamingMediaIOCapture::OnCustomCapture_RenderingThread(
-		FRDGBuilder& GraphBuilder, 
-		const FCaptureBaseData& InBaseData, 
-		TSharedPtr<FMediaCaptureUserData, ESPMode::ThreadSafe> InUserData, 
-		FRDGTextureRef InSourceTexture, 
-		FRDGTextureRef OutputTexture, 
-		const FRHICopyTextureInfo& CopyInfo, 
-		FVector2D CropU, 
-		FVector2D CropV) 
+	FRDGBuilder&										   GraphBuilder,
+	const FCaptureBaseData&								   InBaseData,
+	TSharedPtr<FMediaCaptureUserData, ESPMode::ThreadSafe> InUserData,
+	FRDGTextureRef										   InSourceTexture,
+	FRDGTextureRef										   OutputTexture,
+	const FRHICopyTextureInfo&							   CopyInfo,
+	FVector2D											   CropU,
+	FVector2D											   CropV)
 {
+	FGPUFenceRHIRef Fence = GDynamicRHI->RHICreateGPUFence(TEXT("UPixelStreamingMediaIOCapture Fence"));
+	if (UseExperimentalScheduling() && ShouldCaptureRHIResource())
+	{
+		Fences.Add(reinterpret_cast<uintptr_t>(OutputTexture->GetRHI()), Fence);
+	}
+
 	bool bRequiresFormatConversion = InSourceTexture->Desc.Format != OutputTexture->Desc.Format;
-	if(InSourceTexture->Desc.Format == OutputTexture->Desc.Format &&
-	   InSourceTexture->Desc.Extent.X == OutputTexture->Desc.Extent.X &&
-       InSourceTexture->Desc.Extent.Y == OutputTexture->Desc.Extent.Y)
+	if (InSourceTexture->Desc.Format == OutputTexture->Desc.Format && InSourceTexture->Desc.Extent.X == OutputTexture->Desc.Extent.X && InSourceTexture->Desc.Extent.Y == OutputTexture->Desc.Extent.Y)
 	{
 		// The formats are the same and size are the same. simple copy
 		AddDrawTexturePass(
@@ -63,27 +68,24 @@ void UPixelStreamingMediaIOCapture::OnCustomCapture_RenderingThread(
 			GetGlobalShaderMap(GMaxRHIFeatureLevel),
 			InSourceTexture,
 			OutputTexture,
-			FRDGDrawTextureInfo()
-		);
-
-		return;
+			FRDGDrawTextureInfo());
 	}
 	else
 	{
 #if PLATFORM_MAC
 		// Create a staging texture that is the same size and format as the final.
-		FRDGTextureRef StagingTexture = GraphBuilder.CreateTexture(FRDGTextureDesc::Create2D(FIntPoint(OutputTexture->Desc.Extent.X, OutputTexture->Desc.Extent.Y), OutputTexture->Desc.Format, OutputTexture->Desc.ClearValue, ETextureCreateFlags::RenderTargetable), TEXT("PixelStreamingMediaIOCapture Staging"));
+		FRDGTextureRef			   StagingTexture = GraphBuilder.CreateTexture(FRDGTextureDesc::Create2D(FIntPoint(OutputTexture->Desc.Extent.X, OutputTexture->Desc.Extent.Y), OutputTexture->Desc.Format, OutputTexture->Desc.ClearValue, ETextureCreateFlags::RenderTargetable), TEXT("PixelStreamingMediaIOCapture Staging"));
 		FScreenPassTextureViewport StagingViewport(StagingTexture);
 #endif
 
 		FScreenPassTextureViewport InputViewport(InSourceTexture);
 		FScreenPassTextureViewport OutputViewport(OutputTexture);
 
-		FGlobalShaderMap* GlobalShaderMap = GetGlobalShaderMap(GMaxRHIFeatureLevel);
+		FGlobalShaderMap*			 GlobalShaderMap = GetGlobalShaderMap(GMaxRHIFeatureLevel);
 		TShaderMapRef<FScreenPassVS> VertexShader(GlobalShaderMap);
 
 		// In cases where texture is converted from a format that doesn't have A channel, we want to force set it to 1.
-		int32 MediaConversionOperation = 0; // None
+		int32										  MediaConversionOperation = 0; // None
 		FModifyAlphaSwizzleRgbaPS::FPermutationDomain PermutationVector;
 		PermutationVector.Set<FModifyAlphaSwizzleRgbaPS::FConversionOp>(MediaConversionOperation);
 
@@ -91,17 +93,17 @@ void UPixelStreamingMediaIOCapture::OnCustomCapture_RenderingThread(
 		const FIntRect ViewRect(FIntPoint(0, 0), InSourceTexture->Desc.Extent);
 
 		TShaderMapRef<FModifyAlphaSwizzleRgbaPS> PixelShader(GlobalShaderMap, PermutationVector);
-		FModifyAlphaSwizzleRgbaPS::FParameters* PixelShaderParameters = PixelShader->AllocateAndSetParameters(
-			GraphBuilder, 
-			InSourceTexture, 
+		FModifyAlphaSwizzleRgbaPS::FParameters*	 PixelShaderParameters = PixelShader->AllocateAndSetParameters(
+			 GraphBuilder,
+			 InSourceTexture,
 #if PLATFORM_MAC
 			StagingTexture
 #else
 			OutputTexture
 #endif
-			);
-		
-		FRHIBlendState* BlendState = FScreenPassPipelineState::FDefaultBlendState::GetRHI();
+		);
+
+		FRHIBlendState*		   BlendState = FScreenPassPipelineState::FDefaultBlendState::GetRHI();
 		FRHIDepthStencilState* DepthStencilState = FScreenPassPipelineState::FDefaultDepthStencilState::GetRHI();
 
 		AddDrawScreenPass(
@@ -113,7 +115,7 @@ void UPixelStreamingMediaIOCapture::OnCustomCapture_RenderingThread(
 #else
 			OutputViewport,
 #endif
-			
+
 			InputViewport,
 			VertexShader,
 			PixelShader,
@@ -126,15 +128,23 @@ void UPixelStreamingMediaIOCapture::OnCustomCapture_RenderingThread(
 			GetGlobalShaderMap(GMaxRHIFeatureLevel),
 			StagingTexture,
 			OutputTexture,
-			FRDGDrawTextureInfo()
-		);
+			FRDGDrawTextureInfo());
 #endif
 	}
+
+	// clang-format off
+	GraphBuilder.AddPass(
+		RDG_EVENT_NAME("UPixelStreamingMediaIOCapture WriteFence"), 
+		ERDGPassFlags::NeverCull,								
+		[Fence](FRDGAsyncTask, FRHICommandList& RHICmdList) {
+			RHICmdList.WriteGPUFence(Fence);
+		});
+	// clang-format on
 }
 
 bool UPixelStreamingMediaIOCapture::InitializeCapture()
 {
-	UE_LOG(LogPixelStreaming, Log, TEXT("Initializing media capture for Pixel Streaming VCam."));
+	UE_LOGF(LogPixelStreaming, Log, "Initializing media capture for Pixel Streaming VCam.");
 	bViewportResized = false;
 	bDoGPUCopy = true;
 
@@ -153,7 +163,7 @@ bool UPixelStreamingMediaIOCapture::SupportsAnyThreadCapture() const
 {
 	EPixelStreamingCodec SelectedCodec = IPixelStreamingModule::Get().GetCodec();
 	// If we are using VP8 or VP9 we want to ensure capture happens on the render thread as we do our capture/convert to I420 there
-    bool bForceRenderThread = SelectedCodec == EPixelStreamingCodec::VP8 || SelectedCodec == EPixelStreamingCodec::VP9;
+	bool bForceRenderThread = SelectedCodec == EPixelStreamingCodec::VP8 || SelectedCodec == EPixelStreamingCodec::VP9;
 	return bForceRenderThread == false;
 }
 
@@ -163,7 +173,7 @@ ETextureCreateFlags UPixelStreamingMediaIOCapture::GetOutputTextureFlags() const
 	return TexCreate_CPUReadback;
 #else
 	ETextureCreateFlags Flags = TexCreate_RenderTargetable | TexCreate_UAV;
-	
+
 	if (RHIGetInterfaceType() == ERHIInterfaceType::Vulkan)
 	{
 		Flags |= TexCreate_External;
@@ -175,6 +185,29 @@ ETextureCreateFlags UPixelStreamingMediaIOCapture::GetOutputTextureFlags() const
 
 	return Flags;
 #endif
+}
+
+void UPixelStreamingMediaIOCapture::WaitForGPU(FRHITexture* InRHITexture)
+{
+	FGPUFenceRHIRef Fence;
+	if (!Fences.RemoveAndCopyValue(reinterpret_cast<uintptr_t>(InRHITexture), Fence))
+	{
+		UE_LOGF(LogPixelStreaming, Error, "UPixelStreamingMediaIOCapture::WaitForGPU: No associating fence!");
+		return;
+	}
+
+	while (!Fence->Poll())
+	{
+		// Exit if capture has been stopped (e.g. during PIE teardown). Without this check the
+		// loop polls forever, blocking the SyncPointWatcher thread. Kill(bWaitForThread=true)
+		// in ~FSyncPointWatcher() then deadlocks the game thread in PostCaptureCleanup.
+		if (GetState() != EMediaCaptureState::Capturing)
+		{
+			break;
+		}
+		constexpr float SleepTimeSeconds = 50 * 1E-6f;
+		FPlatformProcess::SleepNoStats(SleepTimeSeconds);
+	}
 }
 
 bool UPixelStreamingMediaIOCapture::PostInitializeCaptureViewport(TSharedPtr<FSceneViewport>& InSceneViewport)
@@ -190,22 +223,23 @@ bool UPixelStreamingMediaIOCapture::PostInitializeCaptureViewport(TSharedPtr<FSc
 
 void UPixelStreamingMediaIOCapture::ViewportResized(FViewport* Viewport, uint32 ResizeCode)
 {
+	bViewportResized = true;
+
 	// If we have not captured a frame yet, we don't care about stopping the capture due to capture size mismatch
-	if(!CaptureResolution)
+	if (!CaptureResolution)
 	{
 		return;
 	}
 
 	// If resolution of viewport is actually the same as the capture resolution no need to stop/restart capturing.
-	if(Viewport->GetSizeXY() == *CaptureResolution)
+	if (Viewport->GetSizeXY() == *CaptureResolution)
 	{
 		return;
 	}
 
-	bViewportResized = true;
-	if(GetState() == EMediaCaptureState::Capturing)
+	if (GetState() == EMediaCaptureState::Capturing)
 	{
-		UE_LOG(LogPixelStreaming, Warning, TEXT("Stopping PixelStreaming MediaIO capture because viewport was resized."));
+		UE_LOGF(LogPixelStreaming, Warning, "Stopping PixelStreaming MediaIO capture because viewport was resized.");
 		StopCapture(false);
 	}
 }
@@ -222,7 +256,7 @@ void UPixelStreamingMediaIOCapture::HandleCapturedFrame(FTextureRHIRef InTexture
 
 void UPixelStreamingMediaIOCapture::UpdateCaptureResolution(int32 Width, int32 Height)
 {
-	if(!CaptureResolution)
+	if (!CaptureResolution)
 	{
 		CaptureResolution = MakeUnique<FIntPoint>();
 	}

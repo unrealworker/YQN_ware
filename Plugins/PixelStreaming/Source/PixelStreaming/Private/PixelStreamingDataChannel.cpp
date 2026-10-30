@@ -62,7 +62,7 @@ bool FPixelStreamingDataChannel::SendArbitraryData(uint8 Type, const TArray64<ui
 
 	if (!SendChannel)
 	{
-		UE_LOG(LogPixelStreaming, Error, TEXT("Cannot send arbitrary data when data channel is null."));
+		UE_LOGF(LogPixelStreaming, Error, "Cannot send arbitrary data when data channel is null.");
 		return false;
 	}
 
@@ -104,7 +104,7 @@ bool FPixelStreamingDataChannel::SendArbitraryData(uint8 Type, const TArray64<ui
 
 		if (!SendChannel->Send(webrtc::DataBuffer(Buffer, true)))
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Failed to send data channel packet"));
+			UE_LOGF(LogPixelStreaming, Error, "Failed to send data channel packet");
 			return false;
 		}
 

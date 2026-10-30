@@ -11,6 +11,8 @@ namespace UnrealBuildTool.Rules
 	{
 		public PixelStreamingBlueprintEditor(ReadOnlyTargetRules Target) : base(Target)
 		{
+			bRequiresPlatformSDK = true;
+			
 			var EngineDir = Path.GetFullPath(Target.RelativeEnginePath);
 
 			PublicIncludePaths.AddRange(
@@ -27,6 +29,7 @@ namespace UnrealBuildTool.Rules
 
 			PrivateDependencyModuleNames.AddRange(
 				new string[] {
+					"AssetDefinition",
 					"Core",
 					"CoreUObject",
 					"SlateCore",

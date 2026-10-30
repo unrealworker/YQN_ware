@@ -8,14 +8,14 @@
 #include "Engine/World.h"
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/PlayerInput.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 #include "Slate/SObjectWidget.h"
 
 #include <limits>
 
 namespace GHSWarehouseCameraTests
 {
-    constexpr uint32 Flags = EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
+    constexpr auto Flags = GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
     constexpr float FrameSeconds = 1.0f / 60.0f;
 
     // A real disposable game World and possession, without a LocalPlayer or OS

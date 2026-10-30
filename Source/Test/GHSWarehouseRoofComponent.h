@@ -44,7 +44,10 @@ struct TEST_API FGHSWarehouseRoofTransition
     {
         if(!IsTransitioning() || !FMath::IsFinite(DeltaSeconds) || DeltaSeconds<=0.f) return;
         const float Direction=IsOpening()?1.f:-1.f;
-        Phase=FMath::Clamp(Phase+Direction*(DeltaSeconds/ActiveDuration),0.f,1.f);
+        // A full duration already reaches either endpoint; clamp before division
+        // so an unusually large finite frame cannot overflow the normalized step.
+        const float Step=FMath::Min(DeltaSeconds,ActiveDuration)/ActiveDuration;
+        Phase=FMath::Clamp(Phase+Direction*Step,0.f,1.f);
         if(IsOpening() && Phase>=1.f) State=EState::Open;
         else if(IsClosing() && Phase<=0.f) State=EState::Closed;
     }

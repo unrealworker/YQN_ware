@@ -22,7 +22,7 @@ private:
 	FPixelStreamingVideoInputViewport() = default;
 
 	bool FilterWindow(SWindow& Window);
-	void OnWindowRendered(SWindow& Window, void* Resource);
+	void OnWindowRendered(SWindow& Window);
 	void OnPIEViewportRendered(FViewport* InViewport);
 	void SubmitViewport(FViewport* InViewport);
 

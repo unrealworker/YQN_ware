@@ -31,7 +31,7 @@
 		},
 		{
             "Name": "PixelStreamingEditor",
-            "Type": "Editor",
+            "Type": "UncookedOnly",
             "LoadingPhase": "PreDefault",
             "PlatformAllowList": [ "Win64", "Linux", "Mac" ],
             "TargetDenyList": [ "Server" ]

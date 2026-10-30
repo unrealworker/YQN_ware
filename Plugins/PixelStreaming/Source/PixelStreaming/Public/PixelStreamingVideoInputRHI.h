@@ -14,5 +14,5 @@ public:
 	virtual ~FPixelStreamingVideoInputRHI() = default;
 
 protected:
-	virtual TSharedPtr<FPixelCaptureCapturer> CreateCapturer(int32 FinalFormat, float FinalScale) override;
+	virtual TSharedPtr<FPixelCaptureCapturer> CreateCapturer(int32 FinalFormat, FIntPoint Resolution) override;
 };

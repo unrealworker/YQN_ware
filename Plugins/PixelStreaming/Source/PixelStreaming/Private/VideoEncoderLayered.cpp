@@ -94,13 +94,13 @@ namespace
 			switch(Reason)
 			{
 				case EncodedImageCallback::DropReason::kDroppedByEncoder:
-					UE_LOG(LogPixelStreaming, Warning, TEXT("Frame was dropped by the encoder."))
+					UE_LOGF(LogPixelStreaming, Warning, "Frame was dropped by the encoder.")
 					break;
 				case EncodedImageCallback::DropReason::kDroppedByMediaOptimizations:
-					UE_LOG(LogPixelStreaming, Warning, TEXT("Frame was dropped due to media optimization (perhaps bitrate limits)."))
+					UE_LOGF(LogPixelStreaming, Warning, "Frame was dropped due to media optimization (perhaps bitrate limits).")
 					break;
 				default:
-					UE_LOG(LogPixelStreaming, Warning, TEXT("Frame was dropped due to unknown drop reason, perhaps we need a new case here.)."))
+					UE_LOGF(LogPixelStreaming, Warning, "Frame was dropped due to unknown drop reason, perhaps we need a new case here.).")
 			}
 		}
 
@@ -272,8 +272,7 @@ namespace UE::PixelStreaming
 
 			// extract the specific layer frame buffer
 			webrtc::VideoFrame NewFrame(input_image);
-			const int LayerIndex = StreamInfos.size() == 1 ? FrameBuffer->GetNumLayers() - 1 : StreamIdx;
-			rtc::scoped_refptr<FFrameBufferMultiFormat> LayerFrameBuffer = FrameBuffer->GetLayer(LayerIndex);
+			rtc::scoped_refptr<FFrameBufferMultiFormat> LayerFrameBuffer = FrameBuffer->GetLayer({ StreamInfos[StreamIdx].Width, StreamInfos[StreamIdx].Height });
 			NewFrame.set_video_frame_buffer(LayerFrameBuffer);
 
 			// Convert timestamp from RTP 90kHz clock.

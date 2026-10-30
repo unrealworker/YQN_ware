@@ -8,12 +8,12 @@
 #include "Components/StaticMeshComponent.h"
 #include "Materials/MaterialInterface.h"
 #include "Materials/MaterialInstanceDynamic.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 #include <limits>
 
 namespace GHSWarehouseRoofTests
 {
-constexpr uint32 Flags = EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
+constexpr auto Flags = GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
 }
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSRoofOpeningClock,

@@ -72,10 +72,10 @@ namespace UE::PixelStreaming
 			}
 
 			// For debugging to see all stats in the log
-			// UE_LOG(LogPixelStreaming, Log, TEXT("------------%s---%s------------"), *FString(Stats.id().c_str()), *FString(Stats.type()));
+			// UE_LOGF(LogPixelStreaming, Log, "------------%ls---%ls------------", *FString(Stats.id().c_str()), *FString(Stats.type()));
 			// for (const webrtc::RTCStatsMemberInterface* StatMember : StatMembers)
 			// {
-			// 	UE_LOG(LogPixelStreaming, Log, TEXT("%s"), *FString(StatMember->name()));
+			// 	UE_LOGF(LogPixelStreaming, Log, "%ls", *FString(StatMember->name()));
 			// }
 		}
 

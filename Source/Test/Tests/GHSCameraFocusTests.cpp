@@ -4,11 +4,11 @@
 #include "Camera/CameraComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 
 namespace GHSCameraFocusTests
 {
-    constexpr uint32 Flags = EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
+    constexpr auto Flags = GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
     struct FFixture
     {
         UWorld* World = nullptr;

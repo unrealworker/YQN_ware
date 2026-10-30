@@ -87,7 +87,7 @@ namespace UE::PixelStreaming
 
 			if (TempSupportedFormats.empty())
 			{
-				UE_LOG(LogPixelStreaming, Error, TEXT("Selected codec was not a supported codec, falling back to negotiating codecs..."));
+				UE_LOGF(LogPixelStreaming, Error, "Selected codec was not a supported codec, falling back to negotiating codecs...");
 			}
 			else
 			{

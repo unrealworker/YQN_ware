@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Misc/EngineVersionComparison.h"
 #include "GHSWarehousePlayerController.generated.h"
 
 class UGHSDockTruckHUDWidget;
@@ -21,7 +22,13 @@ class TEST_API AGHSWarehousePlayerController : public APlayerController
     GENERATED_BODY()
 public:
     AGHSWarehousePlayerController();
+#if UE_VERSION_OLDER_THAN(5, 6, 0)
     virtual bool InputKey(const FInputKeyParams& Params) override;
+#else
+    // Keep the engine's legacy forwarding overload accessible to existing callers.
+    using Super::InputKey;
+    virtual bool InputKey(const FInputKeyEventArgs& Params) override;
+#endif
     virtual void PlayerTick(float DeltaSeconds) override;
     virtual void FlushPressedKeys() override;
     virtual bool ShouldFlushKeysWhenViewportFocusChanges() const override { return true; }

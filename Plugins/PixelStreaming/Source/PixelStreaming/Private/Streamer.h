@@ -61,6 +61,7 @@ namespace UE::PixelStreaming
 		virtual void UnfreezeStream() override;
 
 		virtual void SendPlayerMessage(uint8 Type, const FString& Descriptor) override;
+		virtual void SendPlayerMessage(FPixelStreamingPlayerId PlayerId, uint8 Type, const FString& Descriptor) override;
 		virtual void SendFileData(const TArray64<uint8>& ByteData, FString& MimeType, FString& FileExtension) override;
 		virtual void KickPlayer(FPixelStreamingPlayerId PlayerId) override;
 		virtual void SetPlayerLayerPreference(FPixelStreamingPlayerId PlayerId, int SpatialLayerId, int TemporalLayerId) override;
@@ -111,6 +112,7 @@ namespace UE::PixelStreaming
 		void SendLatencyReport(FPixelStreamingPlayerId PlayerId) const;
 		bool ShouldPeerGenerateFrames(FPixelStreamingPlayerId PlayerId) const;
 
+		void HandleSetQualityControllerRequest(const FPixelStreamingPlayerId& PlayerId);
 		void SetQualityController(FPixelStreamingPlayerId PlayerId);
 		void TriggerMouseLeave(FString InStreamerId);
 

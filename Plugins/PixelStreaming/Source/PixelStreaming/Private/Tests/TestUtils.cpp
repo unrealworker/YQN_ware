@@ -6,6 +6,7 @@
 #include "PixelStreamingPrivate.h"
 #include "IPixelStreamingModule.h"
 #include "PixelCaptureInputFrameI420.h"
+#include "SocketUtils.h"
 #include "Streamer.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
@@ -16,6 +17,7 @@ namespace UE::PixelStreaming
 	{
 		// Start of IANA un-registerable ports (49152 - 65535)
 		static int NextStreamerPort = 49152;
+		NextStreamerPort = GetNextAvailablePort(NextStreamerPort);
 		return NextStreamerPort++;
 	}
 
@@ -23,6 +25,7 @@ namespace UE::PixelStreaming
 	{
 		// Half of IANA un-registerable ports (49152 - 65535)
 		static int NextPlayerPort = 57344;
+		NextPlayerPort = GetNextAvailablePort(NextPlayerPort);
 		return NextPlayerPort++;
 	}
 
@@ -71,10 +74,10 @@ namespace UE::PixelStreaming
 
 	bool FSendDataChannelMessageToStreamer::Update()
 	{
-		UE_LOG(LogPixelStreaming, Log, TEXT("SendDataChannelMessageToStreamer: %d, %s"), Id, *Body);
+		UE_LOGF(LogPixelStreaming, Log, "SendDataChannelMessageToStreamer: %d, %ls", Id, *Body);
 		if (!Player->DataChannel)
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("No DataChannel on player."));
+			UE_LOGF(LogPixelStreaming, Error, "No DataChannel on player.");
 		}
 		else
 		{
@@ -85,10 +88,10 @@ namespace UE::PixelStreaming
 
 	bool FSendCustomMessageToStreamer::Update()
 	{
-		UE_LOG(LogPixelStreaming, Log, TEXT("SendDataChannelMessageToStreamer: %d, %d"), Id, Body);
+		UE_LOGF(LogPixelStreaming, Log, "SendDataChannelMessageToStreamer: %d, %d", Id, Body);
 		if (!Player->DataChannel)
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("No DataChannel on player."));
+			UE_LOGF(LogPixelStreaming, Error, "No DataChannel on player.");
 		}
 		else
 		{
@@ -101,7 +104,7 @@ namespace UE::PixelStreaming
 	{
 		if (VideoSink && VideoSink->HasReceivedFrame())
 		{
-			UE_LOG(LogPixelStreaming, Log, TEXT("Successfully received streamed frame."));
+			UE_LOGF(LogPixelStreaming, Log, "Successfully received streamed frame.");
 
 			/* ----- Test resolution of frame is what we expect ---- */
 
@@ -113,11 +116,11 @@ namespace UE::PixelStreaming
 
 			if (FrameConfig.Width != VideoSink->GetReceivedWidth() || FrameConfig.Height != VideoSink->GetReceivedHeight())
 			{
-				UE_LOG(LogPixelStreaming, Error, TEXT("%s"), *WidthTestString);
+				UE_LOGF(LogPixelStreaming, Error, "%ls", *WidthTestString);
 			}
 			else
 			{
-				UE_LOG(LogPixelStreaming, Log, TEXT("%s"), *WidthTestString);
+				UE_LOGF(LogPixelStreaming, Log, "%ls", *WidthTestString);
 			}
 
 			/* ----- Test the pixels of the received frame ---- */
@@ -142,11 +145,11 @@ namespace UE::PixelStreaming
 			// Match pixel values within a tolerance as compression can result in color variations, but not much as this is a solid color.
 			if (YDelta > Tolerance || UDelta > Tolerance || VDelta > Tolerance)
 			{
-				UE_LOG(LogPixelStreaming, Error, TEXT("%s"), *PixelTestString);
+				UE_LOGF(LogPixelStreaming, Error, "%ls", *PixelTestString);
 			}
 			else
 			{
-				UE_LOG(LogPixelStreaming, Log, TEXT("%s"), *PixelTestString);
+				UE_LOGF(LogPixelStreaming, Log, "%ls", *PixelTestString);
 			}
 
 			// So we can use this sink for this test again if we want.
@@ -158,7 +161,7 @@ namespace UE::PixelStreaming
 		double DeltaTime = FPlatformTime::Seconds() - StartTime;
 		if (DeltaTime > TimeoutSeconds)
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Timed out waiting to receive a frame of video through the video sink."));
+			UE_LOGF(LogPixelStreaming, Error, "Timed out waiting to receive a frame of video through the video sink.");
 			return true;
 		}
 		return false;
@@ -169,7 +172,7 @@ namespace UE::PixelStreaming
 		// If no signalling we can early exit.
 		if (!OutPlayer->IsSignallingConnected())
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Early exiting waiting for ICE connected as player is not connected to signalling server."));
+			UE_LOGF(LogPixelStreaming, Error, "Early exiting waiting for ICE connected as player is not connected to signalling server.");
 			return true;
 		}
 
@@ -178,7 +181,7 @@ namespace UE::PixelStreaming
 			double DeltaTime = FPlatformTime::Seconds() - StartTime;
 			if (DeltaTime > TimeoutSeconds)
 			{
-				UE_LOG(LogPixelStreaming, Error, TEXT("Timed out waiting for RTC connection between streamer and player."));
+				UE_LOGF(LogPixelStreaming, Error, "Timed out waiting for RTC connection between streamer and player.");
 				return true;
 			}
 			return OutPlayer->Completed;
@@ -191,7 +194,7 @@ namespace UE::PixelStreaming
 		// If no signalling we can early exit.
 		if (!OutPlayer->IsSignallingConnected())
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Early exiting waiting for data channel as player is not connected to signalling server."));
+			UE_LOGF(LogPixelStreaming, Error, "Early exiting waiting for data channel as player is not connected to signalling server.");
 			return true;
 		}
 
@@ -200,7 +203,7 @@ namespace UE::PixelStreaming
 			double DeltaTime = FPlatformTime::Seconds() - StartTime;
 			if (DeltaTime > TimeoutSeconds)
 			{
-				UE_LOG(LogPixelStreaming, Error, TEXT("Timed out waiting for data channel between streamer and player."));
+				UE_LOGF(LogPixelStreaming, Error, "Timed out waiting for data channel between streamer and player.");
 				return true;
 			}
 			return OutPlayer->HaveDataChannel;
@@ -212,14 +215,14 @@ namespace UE::PixelStreaming
 	{
 		if (OutStreamer->IsSignallingConnected())
 		{
-			UE_LOG(LogPixelStreaming, Log, TEXT("Streamer connected to signalling server."));
+			UE_LOGF(LogPixelStreaming, Log, "Streamer connected to signalling server.");
 			return true;
 		}
 
 		double DeltaTime = FPlatformTime::Seconds() - StartTime;
 		if (DeltaTime > TimeoutSeconds)
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Timed out waiting for streamer to connect to signalling server."));
+			UE_LOGF(LogPixelStreaming, Error, "Timed out waiting for streamer to connect to signalling server.");
 			return true;
 		}
 		return false;
@@ -229,7 +232,7 @@ namespace UE::PixelStreaming
 	{
 		if (OutStreamer->IsSignallingConnected())
 		{
-			UE_LOG(LogPixelStreaming, Log, TEXT("Streamer connected to signalling server. Attempting to connect player..."));
+			UE_LOGF(LogPixelStreaming, Log, "Streamer connected to signalling server. Attempting to connect player...");
 			OutPlayer->Connect(PlayerPort);
 			return true;
 		}
@@ -237,7 +240,7 @@ namespace UE::PixelStreaming
 		double DeltaTime = FPlatformTime::Seconds() - StartTime;
 		if (DeltaTime > TimeoutSeconds)
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Timed out waiting for streamer to connect to signalling server."));
+			UE_LOGF(LogPixelStreaming, Error, "Timed out waiting for streamer to connect to signalling server.");
 			return true;
 		}
 		return false;
@@ -247,14 +250,14 @@ namespace UE::PixelStreaming
 	{
 		if (OutPlayer->IsSignallingConnected())
 		{
-			UE_LOG(LogPixelStreaming, Log, TEXT("Player connected to signalling server."));
+			UE_LOGF(LogPixelStreaming, Log, "Player connected to signalling server.");
 			return true;
 		}
 
 		double DeltaTime = FPlatformTime::Seconds() - StartTime;
 		if (DeltaTime > TimeoutSeconds)
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Timed out waiting for player to connect to signalling server."));
+			UE_LOGF(LogPixelStreaming, Error, "Timed out waiting for player to connect to signalling server.");
 			return true;
 		}
 		return false;
@@ -265,7 +268,7 @@ namespace UE::PixelStreaming
 		double DeltaTime = FPlatformTime::Seconds() - StartTime;
 		if (DeltaTime > TimeoutSeconds)
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Timed out waiting for a datachannel message."));
+			UE_LOGF(LogPixelStreaming, Error, "Timed out waiting for a datachannel message.");
 			return true;
 		}
 		return *bComplete.Get();
@@ -275,7 +278,7 @@ namespace UE::PixelStreaming
 	{
 		if(!Streamer)
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Streamer is invalid!"));
+			UE_LOGF(LogPixelStreaming, Error, "Streamer is invalid!");
 			return true;
 		}
 
@@ -296,7 +299,7 @@ namespace UE::PixelStreaming
 
         if(!bTransceiverExists)
         {
-            UE_LOG(LogPixelStreaming, Error, TEXT("Transceivers don't exist!"));
+            UE_LOGF(LogPixelStreaming, Error, "Transceivers don't exist!");
         }
 
 		return true;
@@ -396,9 +399,9 @@ namespace UE::PixelStreaming
 		bool bLaunchedSignallingServer = OutSignallingServer->Launch(LaunchArgs);
 		if (!bLaunchedSignallingServer)
 		{
-			UE_LOG(LogPixelStreaming, Error, TEXT("Failed to launch signalling server."));
+			UE_LOGF(LogPixelStreaming, Error, "Failed to launch signalling server.");
 		}
-		UE_LOG(LogPixelStreaming, Log, TEXT("Signalling server launched=%s"), bLaunchedSignallingServer ? TEXT("true") : TEXT("false"));
+		UE_LOGF(LogPixelStreaming, Log, "Signalling server launched=%ls", bLaunchedSignallingServer ? TEXT("true") : TEXT("false"));
 		return OutSignallingServer;
 	}
 

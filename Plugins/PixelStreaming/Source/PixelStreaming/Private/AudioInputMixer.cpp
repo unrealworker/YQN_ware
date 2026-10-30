@@ -168,18 +168,20 @@ namespace UE::PixelStreaming
 		if(SampleRate != InSampleRate)
 		{
 			float SampleRateConversionRatio = static_cast<float>(SampleRate) / static_cast<float>(InSampleRate);
-			UE_LOG(LogPixelStreaming, VeryVerbose, TEXT("(FAudioInput) Sample rate conversion ratio is : %f."), SampleRateConversionRatio);
+			UE_LOGF(LogPixelStreaming, VeryVerbose, "(FAudioInput) Sample rate conversion ratio is : %f.", SampleRateConversionRatio);
 			Resampler.Init(Audio::EResamplingMethod::Linear, SampleRateConversionRatio, InNumChannels);
 
-			int32 NumConvertedSamples = InSampleRate / SampleRateConversionRatio;
+			int32 NumOriginalSamples = NumSamples / InNumChannels;
+			int32 NumConvertedSamples = FMath::CeilToInt(NumSamples / InNumChannels * SampleRateConversionRatio);
 			int32 OutputSamples = INDEX_NONE;
-			AudioBuffer.AddZeroed(NumConvertedSamples);
+			AudioBuffer.AddZeroed(NumConvertedSamples * InNumChannels);
+
 			// Perform the sample rate conversion
-			int32 ErrorCode = Resampler.ProcessAudio(const_cast<float*>(InBuffer), NumSamples, false, AudioBuffer.GetData(), AudioBuffer.Num(), OutputSamples);
+			int32 ErrorCode = Resampler.ProcessAudio(const_cast<float*>(InBuffer), NumOriginalSamples, false, AudioBuffer.GetData(), NumConvertedSamples, OutputSamples);
 			verifyf(OutputSamples <= NumConvertedSamples, TEXT("OutputSamples > NumConvertedSamples"));
 			if (ErrorCode != 0)
 			{
-				UE_LOG(LogPixelStreaming, Warning, TEXT("(FAudioInput) Problem occured resampling audio data. Code: %d"), ErrorCode);
+				UE_LOGF(LogPixelStreaming, Warning, "(FAudioInput) Problem occured resampling audio data. Code: %d", ErrorCode);
 				return;
 			}
 		}

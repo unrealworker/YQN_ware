@@ -21,7 +21,7 @@ namespace UE::PixelStreaming
 	class FVideoSource : public FAdaptedVideoTrackSource
 	{
 	public:
-		FVideoSource(TSharedPtr<FPixelStreamingVideoInput> InVideoInput, const TFunction<bool()>& InShouldGenerateFramesCheck);
+		FVideoSource(bool bInRequiresUniqueId, TSharedPtr<FPixelStreamingVideoInput> InVideoInput, const TFunction<bool()>& InShouldGenerateFramesCheck);
 		virtual ~FVideoSource() = default;
 
 		void MaybePushFrame();
@@ -37,7 +37,10 @@ namespace UE::PixelStreaming
 		webrtc::MediaSourceInterface::SourceState CurrentState;
 		TSharedPtr<FPixelStreamingVideoInput> VideoInput;
 		TFunction<bool()> ShouldGenerateFramesCheck;
+		uint32 StreamId;
+		bool bRequireUniqueId;
 
+		void SetStreamId(rtc::scoped_refptr<webrtc::VideoFrameBuffer> FrameBuffer) const;
 		void PushFrame();
 		void PushEmptyFrame();
 	};

@@ -36,7 +36,7 @@ public:
 	void AddAudio(const int16_t* AudioData, int InSampleRate, size_t NChannels, size_t NFrames);
 
 	int32 GetSampleRate() { return Params.SampleRate; }
-	int32 GetNumChannels() { return Params.NumChannels; }
+	virtual int32 GetNumChannels() const override { return Params.NumChannels; }
 	void EmptyBuffers();
 	void SetParameters(const FSoundGeneratorInitParams& InitParams);
 

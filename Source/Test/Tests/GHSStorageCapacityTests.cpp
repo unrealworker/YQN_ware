@@ -1,6 +1,6 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "../GHSStorageCapacityComponent.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "HAL/FileManager.h"
@@ -18,7 +18,7 @@
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStorageCapacityPermutation,
     "GHS.StorageCapacity.CompleteStableSlotsAndExactEndpoints",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+    GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FGHSStorageCapacityPermutation::RunTest(const FString&)
 {
     for(int32 Total:{25056,7530})
@@ -53,7 +53,7 @@ bool FGHSStorageCapacityPermutation::RunTest(const FString&)
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStorageCapacityLODs,
     "GHS.StorageCapacity.AllLODsKeepCompleteCargoAndSteel",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+    GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FGHSStorageCapacityLODs::RunTest(const FString&)
 {
     TArray<TSharedPtr<FJsonValue>> LODReport;
@@ -158,7 +158,7 @@ bool FGHSStorageCapacityLODs::RunTest(const FString&)
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStorageCapacityRuntime,
     "GHS.StorageCapacity.RuntimePickingAndSliderDoNotMutateInstances",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::NonNullRHI | EAutomationTestFlags::ProductFilter)
+    GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::NonNullRHI | EAutomationTestFlags::ProductFilter)
 bool FGHSStorageCapacityRuntime::RunTest(const FString&)
 {
     UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);

@@ -20,7 +20,7 @@ import traceback
 
 import unreal
 
-ROOT = Path('D:/UEPro/Test')
+ROOT = Path(unreal.Paths.convert_relative_path_to_full(unreal.Paths.project_dir())).resolve()
 CLI = unreal.SystemLibrary.get_command_line()
 assert all(re.search(r'(?:^|\s)-' + f + r'(?=\s|$)', CLI, re.I)
            for f in ('game', 'RenderOffscreen', 'TwinDiagnostics'))
@@ -330,6 +330,58 @@ def frame_stats(values):
                 over_50ms_count=long, over_50ms_percent=long*100/count)
 
 
+def gpu_profiler_settings():
+    """Select the real engine profiler; a removed legacy switch is not a timing substitute."""
+    engine = unreal.SystemLibrary.get_engine_version()
+    legacy = unreal.SystemLibrary.get_console_variable_string_value('r.GPUStatsEnabled')
+    settings = {'r.GPUCsvStatsEnabled': 1}
+    if legacy != '':
+        mode = 'legacy'
+        settings['r.GPUStatsEnabled'] = 1
+    else:
+        version = re.match(r'(\d+)\.(\d+)', engine)
+        assert version and tuple(map(int, version.groups())) >= (5, 8), 'Unknown GPU profiler: '+engine
+        mode = 'rhi'
+    result['performance_gpu_profiler'] = dict(engine_version=engine, mode=mode, unit='ms',
+        primary_metric='GPUTime',
+        note='GPUTime is the RHI frame duration in milliseconds; GPU/Unaccounted is not GPU/Total.')
+    return settings
+
+
+def gpu_csv_evidence(names, rows):
+    """Validate native GPU timestamps without inventing the removed UE 5.8 Total column."""
+    mode = result['performance_gpu_profiler']['mode']
+    required = ('GPUTime', 'GPU/Total') if mode == 'legacy' else ('GPUTime',)
+    missing = [name for name in required if name not in names]
+    values = {}
+    def column(name):
+        samples = [float(row[names.index(name)]) for row in rows]
+        assert all(math.isfinite(v) and v >= 0 for v in samples), 'Invalid native timing: '+name
+        return samples
+    for name in required:
+        if name in names:
+            values[name] = column(name)
+    ratios = {name: sum(v > 0 for v in samples)/len(rows) for name, samples in values.items()}
+    errors = ['Missing native GPU column: '+name for name in missing]
+    errors.extend(name+' lacks positive GPU timestamps in 95% of frames' for name, ratio in ratios.items() if ratio < .95)
+    passes = []
+    pass_ratio = None
+    if mode == 'rhi':
+        # 5.8 GPUProfiler emits exclusive graphics-pass busy+wait milliseconds.
+        # These are corroborating timestamps, never summed or renamed as total GPU time.
+        passes = [name for name in names if name.startswith('GPU/') and name not in ('GPU/Total', 'GPU/Unaccounted')]
+        if not passes:
+            errors.append('Missing native GPU pass columns; GPU/Unaccounted alone is not sufficient')
+        else:
+            pass_values = [column(name) for name in passes]
+            pass_ratio = sum(any(v > 0 for v in frame) for frame in zip(*pass_values))/len(rows)
+            if pass_ratio < .95:
+                errors.append('Native GPU passes lack positive timestamps in 95% of frames')
+    return values, dict(verified=not errors, profiler=mode, unit='ms', primary_metric='GPUTime',
+        required_columns=list(required), missing_columns=missing, positive_frame_ratios=ratios,
+        gpu_pass_columns=passes, gpu_pass_positive_frame_ratio=pass_ratio, errors=errors)
+
+
 def completed_csv(path):
     try:
         with path.open('rb') as stream:
@@ -347,7 +399,7 @@ def csv_metrics(path):
     names = rows[headers[-1]]
     first = headers[0]+1 if len(headers)>1 else 0
     rows = [r for r in rows[first:headers[-1]] if r and not r[0].startswith('[')]
-    required = ('FrameTime','GameThreadTime','RenderThreadTime','GPUTime','GPU/Total')
+    required = ('FrameTime','GameThreadTime','RenderThreadTime')
     assert all(n in names for n in required), ('Actual CPU/GPU columns missing',names)
     values = {name:[] for name in required}
     for row in rows:
@@ -356,9 +408,11 @@ def csv_metrics(path):
             assert math.isfinite(value) and value>=0, (name,value)
             values[name].append(value)
     assert len(rows)>=50, 'Too few native frame samples'
-    for name in ('GPUTime','GPU/Total'):
-        assert sum(v>0 for v in values[name])>=len(rows)*.95, name+' lacks valid GPU timestamps'
+    gpu_values, evidence = gpu_csv_evidence(names, rows)
+    assert evidence['verified'], ('Actual GPU timestamps missing or invalid', evidence)
+    values.update(gpu_values)
     return dict(csv=str(path), csv_sha256=hashlib.sha256(raw).hexdigest(), metrics={k:frame_stats(v) for k,v in values.items()},
+                gpu_verified=True, gpu_evidence=evidence, timing_unit='ms', percentile_method='nearest-rank over all retained frames',
                 native_frame_time_seconds=sum(values['FrameTime'])/1000,
                 sample_window='All CSV frames between start/stop; boundary setup/drain frames are retained equally, no spikes discarded')
 
@@ -488,7 +542,14 @@ def run():
     assert all(not a.get_editor_property('hidden') for a in shell)
     command('layers',building=True)
     while not roof.is_interior_available():
-        assert not labels() and not hud.selected_id
+        p = poi()
+        assert not hud.selected_id and not p['interiorAvailable']
+        assert p['interiorLabelOpacity'] == 0
+        # The main warehouse POI fades out over 100ms. Interior equipment must
+        # remain absent and the fading warehouse entry must already be inert.
+        assert len(p['labels']) <= 1 and all(
+            item['id'] == 'WAREHOUSE:GHS' and not item['interactive']
+            and 0 <= item['opacity'] <= 1 for item in p['labels'])
         yield
     assert all(not a.get_editor_property('hidden') for a in shell) and controls()['building']
     record('rapid_shell_reverse_keeps_wall_opens_roof')
@@ -631,7 +692,7 @@ def run():
     assert restored['visible_slots_sha256']==default_slots['visible_slots_sha256']
     assert geometry_signature()==signature
     record('full_zero_default_fixed_instances_stable_positions',signature=signature)
-    temporary = {'r.GPUStatsEnabled':1,'r.GPUCsvStatsEnabled':1,'csv.CompressionMode':0,
+    temporary = {**gpu_profiler_settings(),'csv.CompressionMode':0,
                  't.MaxFPS':0,'r.VSync':0,'r.VSyncEditor':0,'t.IdleWhenNotForeground':0,
                  'Slate.bAllowThrottling':0,'r.DynamicRes.OperationMode':0,'r.ScreenPercentage':100}
     for key,value in temporary.items():

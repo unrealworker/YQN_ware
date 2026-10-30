@@ -5,6 +5,7 @@
 #include "PixelStreamingVideoInputRHI.h"
 #include "Widgets/SWindow.h"
 #include "RHI.h"
+#include "Slate/SlateViewportProvider.h"
 #include "Delegates/IDelegateInstance.h"
 
 /*
@@ -20,7 +21,7 @@ public:
 private:
 	FPixelStreamingVideoInputBackBuffer() = default;
 
-	void OnBackBufferReady(SWindow& SlateWindow, const FTexture2DRHIRef& FrameBuffer);
+	void OnBackBufferReady(SWindow& SlateWindow, ISlateViewportProvider& ViewportProvider);
 
 	FDelegateHandle DelegateHandle;
 };

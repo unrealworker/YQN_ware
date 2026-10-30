@@ -89,7 +89,7 @@ bool FPixelStreamingVideoInputViewport::FilterWindow(SWindow& InWindow)
 	return true;
 }
 
-void FPixelStreamingVideoInputViewport::OnWindowRendered(SWindow& InWindow, void* InResource)
+void FPixelStreamingVideoInputViewport::OnWindowRendered(SWindow& InWindow)
 {
 	// If there is a PIE session running then don't render level viewport
 	if (IsPIESessionRunning())
@@ -124,7 +124,7 @@ void FPixelStreamingVideoInputViewport::OnWindowRendered(SWindow& InWindow, void
 void FPixelStreamingVideoInputViewport::OnPIEViewportRendered(FViewport* InViewport)
 {
 	// If gameclient viewport is rendered and it is not PIE we are not interested
-	if (!IsPIESessionRunning())
+	if (!IsPIESessionRunning() || !InViewport || !InViewport->IsPlayInEditorViewport())
 	{
 		return;
 	}

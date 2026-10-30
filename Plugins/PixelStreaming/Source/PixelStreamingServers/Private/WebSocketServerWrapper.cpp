@@ -64,7 +64,8 @@ namespace UE::PixelStreamingServers
 	*/
 
 	FWebSocketServerWrapper::FWebSocketServerWrapper()
-		: bLaunched(false)
+		: FTickableGameObject(ETickableTickType::Never)
+		, bLaunched(false)
 	{
 
 	}
@@ -82,6 +83,8 @@ namespace UE::PixelStreamingServers
 
 	bool FWebSocketServerWrapper::Launch(uint16 Port)
 	{
+		SetTickableTickType(ETickableTickType::Always);
+
 		WSServer = FModuleManager::Get().LoadModuleChecked<IWebSocketNetworkingModule>(TEXT("WebSocketNetworking")).CreateServer();
 		
 		if(bEnableWebServer)
@@ -93,13 +96,13 @@ namespace UE::PixelStreamingServers
 		bLaunched = WSServer->Init(Port, OnClientConnectedCallback);
 		if(!bLaunched)
 		{
-			UE_LOG(LogPixelStreamingServers, Error, TEXT("Failed to launch Websocket server at ws://127.0.0.1:%d"), Port);
+			UE_LOGF(LogPixelStreamingServers, Error, "Failed to launch Websocket server at ws://127.0.0.1:%d", Port);
 			WSServer.Reset();
 			OnClientConnectedCallback.Unbind();
 		}
 		else
 		{
-			UE_LOG(LogPixelStreamingServers, Log, TEXT("Started Websocket server at ws://127.0.0.1:%d"), Port);
+			UE_LOGF(LogPixelStreamingServers, Log, "Started Websocket server at ws://127.0.0.1:%d", Port);
 		}
 		return bLaunched;
 	}
@@ -159,6 +162,8 @@ namespace UE::PixelStreamingServers
 
 	void FWebSocketServerWrapper::Stop()
 	{
+		SetTickableTickType(ETickableTickType::Never);
+		
 		bLaunched = false;
 		Connections.Empty();
 		OnClientConnectedCallback.Unbind();
@@ -178,7 +183,7 @@ namespace UE::PixelStreamingServers
 		}
 		else
 		{
-			UE_LOG(LogPixelStreamingServers, Warning, TEXT("Could not close websocket connection because there was no connection=%d."), ConnectionId);
+			UE_LOGF(LogPixelStreamingServers, Warning, "Could not close websocket connection because there was no connection=%d.", ConnectionId);
 			return false;
 		}
 	}
@@ -191,7 +196,7 @@ namespace UE::PixelStreamingServers
 		}
 		else
 		{
-			UE_LOG(LogPixelStreamingServers, Warning, TEXT("Did not send websocket message because there was no connection=%d."), ConnectionId);
+			UE_LOGF(LogPixelStreamingServers, Warning, "Did not send websocket message because there was no connection=%d.", ConnectionId);
 			return false;
 		}
 	}
@@ -209,12 +214,12 @@ namespace UE::PixelStreamingServers
 	{
 		if(!Socket)
 		{
-			UE_LOG(LogPixelStreamingServers, Error, TEXT("Websocket client connected with a null socket."));
+			UE_LOGF(LogPixelStreamingServers, Error, "Websocket client connected with a null socket.");
 			return;
 		}
 		else
 		{
-			UE_LOG(LogPixelStreamingServers, Log, TEXT("Websocket client connected. Remote=%s | Local=%s"), *Socket->RemoteEndPoint(true), *Socket->LocalEndPoint(true));
+			UE_LOGF(LogPixelStreamingServers, Log, "Websocket client connected. Remote=%ls | Local=%ls", *Socket->RemoteEndPoint(true), *Socket->LocalEndPoint(true));
 		}
 
 		// Had a new client connect over websocket, store the connection with a unique ID.

@@ -13,6 +13,7 @@
 #include "ScreenPass.h"
 #include "ScreenRendering.h"
 #include "Utils.h"
+#include "Slate/SlateViewportProvider.h"
 
 DECLARE_LOG_CATEGORY_EXTERN(LogPixelStreamingBackBufferComposited, Log, VeryVerbose);
 DEFINE_LOG_CATEGORY(LogPixelStreamingBackBufferComposited);
@@ -104,8 +105,10 @@ void FPixelStreamingVideoInputBackBufferComposited::OnPreTick(float DeltaTime)
 	}
 }
 
-void FPixelStreamingVideoInputBackBufferComposited::OnBackBufferReady(SWindow& SlateWindow, const FTexture2DRHIRef& FrameBuffer)
+void FPixelStreamingVideoInputBackBufferComposited::OnBackBufferReady(SWindow& SlateWindow, ISlateViewportProvider& ViewportProvider)
 {
+	FRHITexture* FrameBuffer = ViewportProvider.GetBackBufferResource();
+
 	/**
 	 * When we receive a texture from this delegate, the texture will undergo a two copy process.
 	 *
@@ -120,7 +123,7 @@ void FPixelStreamingVideoInputBackBufferComposited::OnBackBufferReady(SWindow& S
 	 * Finally, the composited frame is extracted from the RDG pipeline and we send it on its way through the PixelCapturer
 	 *
 	 */
-	UE_LOG(LogPixelStreamingBackBufferComposited, Verbose, TEXT("Type: %s"), *SlateWindow.GetTitle().ToString());
+	UE_LOGF(LogPixelStreamingBackBufferComposited, Verbose, "Type: %ls", *SlateWindow.GetTitle().ToString());
 
 	{
 		FScopeLock Lock(&TopLevelWindowsCriticalSection);
@@ -139,8 +142,7 @@ void FPixelStreamingVideoInputBackBufferComposited::OnBackBufferReady(SWindow& S
 		}
 
 		{
-			FRHICommandListImmediate& RHICmdList = FRHICommandListExecutor::GetImmediateCommandList();
-			FRDGBuilder GraphBuilder(RHICmdList);
+			FRDGBuilder GraphBuilder(FRHICommandListImmediate::Get());
 
 			// Register an external RDG texture from the provided frame buffer
 			FRDGTextureRef InputTexture = GraphBuilder.RegisterExternalTexture(CreateRenderTarget(FrameBuffer, *SlateWindow.GetTitle().ToString()));
@@ -182,8 +184,6 @@ void FPixelStreamingVideoInputBackBufferComposited::OnBackBufferReady(SWindow& S
 
 void FPixelStreamingVideoInputBackBufferComposited::CompositeWindows()
 {
-	FRHICommandListImmediate& RHICmdList = FRHICommandListExecutor::GetImmediateCommandList();
-
 	// Process all of the windows we will need to render. This processing step finds the extents of the
 	// composited texture as well as the top-left point
 	FIntPoint TopLeft = FIntPoint(MAX_int32, MAX_int32);
@@ -208,9 +208,10 @@ void FPixelStreamingVideoInputBackBufferComposited::CompositeWindows()
 	PermutationVector.Set<FModifyAlphaSwizzleRgbaPS::FConversionOp>(ConversionOperation);
 
 	FTextureRHIRef OutTexture = nullptr;
-	{	// FRDGBuilder uses a global allocator which can cause race conditions
+	{
+		// FRDGBuilder uses a global allocator which can cause race conditions
 		// To prevent issues its lifetime needs to end as soon as it has executed
-		FRDGBuilder GraphBuilder(RHICmdList);
+		FRDGBuilder GraphBuilder(FRHICommandListImmediate::Get());
 
 		// Clamp the texture dimensions to ensure no RHI crashes
 		// Create an RDG texture that is the size of our extent for use as the composited frame
@@ -251,7 +252,7 @@ void FPixelStreamingVideoInputBackBufferComposited::CompositeWindows()
 			ViewInitOptions.ViewRotationMatrix = FMatrix::Identity;
 			ViewInitOptions.ProjectionMatrix = FMatrix::Identity;
 
-			GetRendererModule().CreateAndInitSingleView(RHICmdList, &ViewFamily, &ViewInitOptions);
+			GetRendererModule().CreateAndInitSingleView(GraphBuilder.RHICmdList, &ViewFamily, &ViewInitOptions);
 			const FSceneView& View = *ViewFamily.Views[0];
 
 			TShaderMapRef<FModifyAlphaSwizzleRgbaPS> PixelShader(GlobalShaderMap, PermutationVector);
@@ -272,7 +273,7 @@ void FPixelStreamingVideoInputBackBufferComposited::CompositeWindows()
 			RDG_EVENT_NAME("PushCompositedFrame"),
 			PassParameters,
 			ERDGPassFlags::Readback,
-			[CompositedTexture, &OutTexture, this](FRHICommandList& RHICmdList) {
+			[CompositedTexture, &OutTexture, this](FRHICommandList&) {
 				// Our composition is complete out the underlying rhi resource
 				OutTexture = CompositedTexture->GetRHI();
 			});

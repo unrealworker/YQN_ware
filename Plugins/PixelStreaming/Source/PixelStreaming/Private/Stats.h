@@ -86,7 +86,7 @@ namespace UE::PixelStreaming
 	public:
 		FStatGroup(FName CategoryName)
 			: GroupName(CategoryName)
-			, CategoryCanvasItem(FVector2D(0, 0), FText::FromString(FString::Printf(TEXT("---%s---"), *CategoryName.ToString())), FSlateFontInfo(FSlateFontInfo(UEngine::GetSmallFont(), 15)), FLinearColor(0, 0.9, 0.1))
+			, CategoryCanvasItem(FVector2D(0, 0), FText::FromString(FString::Printf(TEXT("---%s---"), *CategoryName.ToString())), FSlateFontInfo(FSlateFontInfo(UEngine::GetSmallFont(), 15)), FLinearColor(0, 0.9f, 0.1f))
 		{
 			CategoryCanvasItem.EnableShadow(FLinearColor::Black);
 		}
@@ -160,8 +160,8 @@ namespace UE::PixelStreaming
 
 		FORCEINLINE TStatId GetStatId() const { RETURN_QUICK_DECLARE_CYCLE_STAT(PixelStreamingStats, STATGROUP_Tickables); }
 
-		double AddTimeStat(uint64 Cycles1, const FString& Label);
-		double AddTimeDeltaStat(uint64 Cycles1, uint64 Cycles2, const FString& Label);
+		double AddTimeStat(uint64 Millis, const FString& Label);
+		double AddTimeDeltaStat(uint64 Millis1, uint64 Millis2, const FString& Label);
 		void AddFrameTimingStats(const FPixelCaptureFrameMetadata& FrameMetadata);
 		void AddCanvasTile(FName Name, const FCanvasTileItem& Tile);
 
@@ -174,7 +174,6 @@ namespace UE::PixelStreaming
 		FStats();
 		void RegisterEngineHooks();
 		void PollPixelStreamingSettings();
-		void RemovePeerStat(FPixelStreamingPlayerId PlayerId);
 		void FireStatChanged(FPixelStreamingPlayerId PlayerId, FName StatName, float StatValue);
 		void UpdateConsoleAutoComplete(TArray<FAutoCompleteCommand>& AutoCompleteList);
 		void GraphValue_GameThread(FName InName, float Value, int InSamples, float InMinRange, float InMaxRange, float InRefValue);

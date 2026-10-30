@@ -190,13 +190,15 @@ namespace UE::PixelStreaming
 
 	void FStats::FireStatChanged(FPixelStreamingPlayerId PlayerId, FName StatName, float StatValue)
 	{
-		// firing off these delegates is not thread safe so we want to mutex this call.
-		FScopeLock Lock(&StatNotificationCS);
-		if (UPixelStreamingDelegates* Delegates = UPixelStreamingDelegates::GetPixelStreamingDelegates())
-		{
-			Delegates->OnStatChangedNative.Broadcast(PlayerId, StatName, StatValue);
-			Delegates->OnStatChanged.Broadcast(PlayerId, StatName, StatValue);
-		}
+		// Broadcast must be done on the GameThread because the GameThread can remove the delegates.
+		// If removing and broadcast happens simultaneously it causes a datarace failure.
+		AsyncTask(ENamedThreads::GameThread, [PlayerId, StatName, StatValue]() {
+			if (UPixelStreamingDelegates* Delegates = UPixelStreamingDelegates::GetPixelStreamingDelegates())
+			{
+				Delegates->OnStatChangedNative.Broadcast(PlayerId, StatName, StatValue);
+				Delegates->OnStatChanged.Broadcast(PlayerId, StatName, StatValue);
+			}
+		});
 	}
 
 	void FStats::UpdateConsoleAutoComplete(TArray<FAutoCompleteCommand>& AutoCompleteList)
@@ -609,9 +611,9 @@ namespace UE::PixelStreaming
 		}
 	}
 
-	double FStats::AddTimeStat(uint64 Cycles1, const FString& Label)
+	double FStats::AddTimeStat(uint64 Millis, const FString& Label)
 	{
-		const double DeltaMs = FPlatformTime::ToMilliseconds64(Cycles1);
+		const double	DeltaMs = Millis;
 		const FStatData TimeData{ FName(*Label), DeltaMs, 2, true };
 		StoreApplicationStat(TimeData);
 		return DeltaMs;
@@ -629,10 +631,10 @@ namespace UE::PixelStreaming
 
 	void FStats::AddFrameTimingStats(const FPixelCaptureFrameMetadata& FrameMetadata)
 	{
-		const double TimeCapture = AddTimeStat(FrameMetadata.CaptureTime, FString::Printf(TEXT("%s Layer %d Frame Capture Time"), *FrameMetadata.ProcessName, FrameMetadata.Layer));
-		const double TimeCPU = AddTimeStat(FrameMetadata.CaptureProcessCPUTime, FString::Printf(TEXT("%s Layer %d Frame Capture CPU Time"), *FrameMetadata.ProcessName, FrameMetadata.Layer));
-		const double TimeGPUDelay = AddTimeStat(FrameMetadata.CaptureProcessGPUDelay, FString::Printf(TEXT("%s Layer %d Frame Capture GPU Delay Time"), *FrameMetadata.ProcessName, FrameMetadata.Layer));
-		const double TimeGPU = AddTimeStat(FrameMetadata.CaptureProcessGPUTime, FString::Printf(TEXT("%s Layer %d Frame Capture GPU Time"), *FrameMetadata.ProcessName, FrameMetadata.Layer));
+		const double TimeCapture = AddTimeStat(FPlatformTime::ToMilliseconds64(FrameMetadata.CaptureEndCyles - FrameMetadata.CaptureStartCyles), FString::Printf(TEXT("%s Layer %d Frame Capture Time"), *FrameMetadata.ProcessName, FrameMetadata.Layer));
+		const double TimeCPU = AddTimeStat(FPlatformTime::ToMilliseconds64(FrameMetadata.CaptureProcessCPUEndCycles - FrameMetadata.CaptureProcessCPUStartCycles), FString::Printf(TEXT("%s Layer %d Frame Capture CPU Time"), *FrameMetadata.ProcessName, FrameMetadata.Layer));
+		const double TimeGPUDelay = AddTimeStat(FPlatformTime::ToMilliseconds64(FrameMetadata.CaptureProcessGPUEnqueueEndCycles - FrameMetadata.CaptureProcessGPUEnqueueStartCycles), FString::Printf(TEXT("%s Layer %d Frame Capture GPU Delay Time"), *FrameMetadata.ProcessName, FrameMetadata.Layer));
+		const double TimeGPU = AddTimeStat(FPlatformTime::ToMilliseconds64(FrameMetadata.CaptureProcessGPUEndCycles - FrameMetadata.CaptureProcessGPUStartCycles), FString::Printf(TEXT("%s Layer %d Frame Capture GPU Time"), *FrameMetadata.ProcessName, FrameMetadata.Layer));
 		const double TimeEncode = AddTimeDeltaStat(FrameMetadata.LastEncodeEndTime, FrameMetadata.LastEncodeStartTime, FString::Printf(TEXT("%s Layer %d Frame Encode Time"), *FrameMetadata.ProcessName, FrameMetadata.Layer));
 		const double TimePacketize = AddTimeDeltaStat(FrameMetadata.LastPacketizationEndTime, FrameMetadata.LastPacketizationStartTime, FString::Printf(TEXT("%s Layer %d Frame Packetization Time"), *FrameMetadata.ProcessName, FrameMetadata.Layer));
 

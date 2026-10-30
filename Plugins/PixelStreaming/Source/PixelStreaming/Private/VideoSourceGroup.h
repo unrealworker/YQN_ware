@@ -26,7 +26,7 @@ namespace UE::PixelStreaming
 
 		void SetCoupleFramerate(bool Couple);
 
-		rtc::scoped_refptr<webrtc::VideoTrackSourceInterface> CreateVideoSource(const TFunction<bool()>& InShouldGenerateFramesCheck);
+		rtc::scoped_refptr<webrtc::VideoTrackSourceInterface> CreateVideoSource(bool bInRequireUniqueId, const TFunction<bool()>& InShouldGenerateFramesCheck);
 		void RemoveVideoSource(const webrtc::VideoTrackSourceInterface* ToRemove);
 		void RemoveAllVideoSources();
 

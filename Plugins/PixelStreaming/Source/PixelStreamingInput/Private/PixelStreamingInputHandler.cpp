@@ -23,7 +23,7 @@
 #include "PixelStreamingInputEnums.h"
 #include "PixelStreamingInputConversion.h"
 #include "Widgets/Input/SEditableText.h"
-#include "Widgets/Input/SMultiLineEditableTextBox.h"
+#include "Widgets/Text/SMultiLineEditableText.h"
 #include "PixelStreamingInputDevice.h"
 
 #if WITH_EDITOR
@@ -78,6 +78,7 @@ namespace UE::PixelStreamingInput
 		RegisterMessageHandler("XRControllerTransform", [this](FString SourceId, FMemoryReader Ar) { HandleOnXRControllerTransform(Ar); });
 		RegisterMessageHandler("XRButtonPressed", [this](FString SourceId, FMemoryReader Ar) { HandleOnXRButtonPressed(Ar); });
 		RegisterMessageHandler("XRButtonTouched", [this](FString SourceId, FMemoryReader Ar) { HandleOnXRButtonTouched(Ar); });
+		RegisterMessageHandler("XRButtonTouchReleased", [this](FString SourceId, FMemoryReader Ar) { HandleOnXRButtonTouchReleased(Ar); });
 		RegisterMessageHandler("XRButtonReleased", [this](FString SourceId, FMemoryReader Ar) { HandleOnXRButtonReleased(Ar); });
 		RegisterMessageHandler("XRAnalog", [this](FString SourceId, FMemoryReader Ar) { HandleOnXRAnalog(Ar); });
 		RegisterMessageHandler("XRSystem", [this](FString SourceId, FMemoryReader Ar) { HandleOnXRSystem(Ar); });
@@ -259,12 +260,12 @@ namespace UE::PixelStreamingInput
 		 *
 		 * TLDR: if we're auto-saving, we'll postbone routing input until the auto save is done.
 		 */
-		if (GIsSavingPackage)
+		if (UE::IsSavingPackage())
 		{
 			return;
 		}
 #endif
-		
+
 		TouchIndicesProcessedThisFrame.Reset();
 
 		FMessage Message;
@@ -273,7 +274,7 @@ namespace UE::PixelStreamingInput
 			FMemoryReader Ar(Message.Data);
 			(*Message.Handler)(Message.SourceId, Ar);
 		}
-		
+
 		ProcessLatestAnalogInputFromThisTick();
 		BroadcastActiveTouchMoveEvents();
 	}
@@ -297,7 +298,7 @@ namespace UE::PixelStreamingInput
 		}
 		else
 		{
-			UE_LOG(LogPixelStreamingInputHandler, Warning, TEXT("No handler registered for message with id %d"), MessageType);
+			UE_LOGF(LogPixelStreamingInputHandler, Warning, "No handler registered for message with id %d", MessageType);
 		}
 	}
 
@@ -355,7 +356,7 @@ namespace UE::PixelStreamingInput
 	void FPixelStreamingInputHandler::HandleOnKeyChar(FMemoryReader Ar)
 	{
 		TPayloadOneParam<TCHAR> Payload(Ar);
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("KEY_PRESSED: Character = '%c'"), Payload.Param1);
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "KEY_PRESSED: Character = '%c'", Payload.Param1);
 		// A key char event is never repeated, so set it to false. It's value
 		// ultimately doesn't matter as this paramater isn't used later
 		MessageHandler->OnKeyChar(Payload.Param1, false);
@@ -375,7 +376,7 @@ namespace UE::PixelStreamingInput
 			uint32 Key = KeyPtr ? *KeyPtr : 0;
 			uint32 Character = CharacterPtr ? *CharacterPtr : 0;
 
-			UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("KEY_DOWN: Key = %d; Character = %d; IsRepeat = %s"), Key, Character, bIsRepeat ? TEXT("True") : TEXT("False"));
+			UE_LOGF(LogPixelStreamingInputHandler, Verbose, "KEY_DOWN: Key = %d; Character = %d; IsRepeat = %ls", Key, Character, bIsRepeat ? TEXT("True") : TEXT("False"));
 			MessageHandler->OnKeyDown((int32)Key, (int32)Character, bIsRepeat);
 		}
 	}
@@ -392,7 +393,7 @@ namespace UE::PixelStreamingInput
 			uint32 Key = KeyPtr ? *KeyPtr : 0;
 			uint32 Character = CharacterPtr ? *CharacterPtr : 0;
 
-			UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("KEY_UP: Key = %d; Character = %d"), Key, Character);
+			UE_LOGF(LogPixelStreamingInputHandler, Verbose, "KEY_UP: Key = %d; Character = %d", Key, Character);
 			MessageHandler->OnKeyUp((int32)Key, (int32)Character, false);
 		}
 	}
@@ -413,7 +414,7 @@ namespace UE::PixelStreamingInput
 				FVector2D TouchLocation = ConvertFromNormalizedScreenLocation(FVector2D(Touch.Param1 / uint16_MAX, Touch.Param2 / uint16_MAX));
 				const int32 TouchIndex = Touch.Param3;
 				const float TouchForce = Touch.Param4 / 255.0f;
-				UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("TOUCH_START: TouchIndex = %d; Pos = (%d, %d); CursorPos = (%d, %d); Force = %.3f"), TouchIndex, Touch.Param1, Touch.Param2, static_cast<int>(TouchLocation.X), static_cast<int>(TouchLocation.Y), TouchForce);
+				UE_LOGF(LogPixelStreamingInputHandler, Verbose, "TOUCH_START: TouchIndex = %d; Pos = (%d, %d); CursorPos = (%d, %d); Force = %.3f", TouchIndex, Touch.Param1, Touch.Param2, static_cast<int>(TouchLocation.X), static_cast<int>(TouchLocation.Y), TouchForce);
 
 				if (InputType == EPixelStreamingInputType::RouteToWidget)
 				{
@@ -474,7 +475,7 @@ namespace UE::PixelStreamingInput
 				FVector2D TouchLocation = ConvertFromNormalizedScreenLocation(FVector2D(Touch.Param1 / uint16_MAX, Touch.Param2 / uint16_MAX));
 				const int32 TouchIndex = Touch.Param3;
 				const float TouchForce = Touch.Param4 / 255.0f;
-				UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("TOUCH_MOVE: TouchIndex = %d; Pos = (%d, %d); CursorPos = (%d, %d); Force = %.3f"), TouchIndex, Touch.Param1, Touch.Param2, static_cast<int>(TouchLocation.X), static_cast<int>(TouchLocation.Y), TouchForce);
+				UE_LOGF(LogPixelStreamingInputHandler, Verbose, "TOUCH_MOVE: TouchIndex = %d; Pos = (%d, %d); CursorPos = (%d, %d); Force = %.3f", TouchIndex, Touch.Param1, Touch.Param2, static_cast<int>(TouchLocation.X), static_cast<int>(TouchLocation.Y), TouchForce);
 
 				FCachedTouchEvent& TouchEvent = CachedTouchEvents.FindOrAdd(TouchIndex);
 				TouchEvent.Force = TouchForce;
@@ -520,7 +521,7 @@ namespace UE::PixelStreamingInput
 				//                                                                           convert range from 0,65536 -> 0,1
 				FVector2D TouchLocation = ConvertFromNormalizedScreenLocation(FVector2D(Touch.Param1 / uint16_MAX, Touch.Param2 / uint16_MAX));
 				const int32 TouchIndex = Touch.Param3;
-				UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("TOUCH_END: TouchIndex = %d; Pos = (%d, %d); CursorPos = (%d, %d)"), Touch.Param3, Touch.Param1, Touch.Param2, static_cast<int>(TouchLocation.X), static_cast<int>(TouchLocation.Y));
+				UE_LOGF(LogPixelStreamingInputHandler, Verbose, "TOUCH_END: TouchIndex = %d; Pos = (%d, %d); CursorPos = (%d, %d)", Touch.Param3, Touch.Param1, Touch.Param2, static_cast<int>(TouchLocation.X), static_cast<int>(TouchLocation.Y));
 
 				if (InputType == EPixelStreamingInputType::RouteToWidget)
 				{
@@ -570,15 +571,30 @@ namespace UE::PixelStreamingInput
 		// Specific implementation for this method is handled per streamer
 		OnSendMessage.Broadcast("GamepadResponse", FMemoryReader(Data));
 
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("GAMEPAD_CONNECTED: ControllerId = %d"), NextControllerId);
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "GAMEPAD_CONNECTED: ControllerId = %d", NextControllerId);
 	}
 
 	void FPixelStreamingInputHandler::HandleOnControllerAnalog(FMemoryReader Ar)
 	{
 		const TPayloadThreeParam<uint8, uint8, double> Payload(Ar);
 		const FInputDeviceId ControllerId = FInputDeviceId::CreateFromInternalId((int32)Payload.Param1);
+
+		FKeyId KeyId = Payload.Param2;
+		double AxisValue = Payload.Param3;
+
+		FKey* AnalogKeyPtr = FPixelStreamingInputConverter::GamepadInputToFKey.Find(MakeTuple(KeyId, Action::Axis));
+		if(!AnalogKeyPtr)
+		{
+			return;
+		}
+
+		FAnalogValue AnalogValue;
+		AnalogValue.Value = AxisValue;
+		// Only send axes values continuously in the case of gamepad triggers
+		AnalogValue.bKeepUnlessZero = (KeyId == 5 || KeyId == 6);
+
 		// Overwrite the last data: every tick only process the latest
-		AnalogEventsReceivedThisTick.FindOrAdd(ControllerId).FindOrAdd(Payload.Param2) = Payload.Param3;
+		AnalogEventsReceivedThisTick.FindOrAdd(ControllerId).FindOrAdd(AnalogKeyPtr) = AnalogValue;
 	}
 
 	void FPixelStreamingInputHandler::HandleOnControllerButtonPressed(FMemoryReader Ar)
@@ -606,7 +622,7 @@ namespace UE::PixelStreamingInput
 		);
 		FSlateApplication::Get().ProcessKeyDownEvent(KeyEvent);
 
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("GAMEPAD_PRESSED: ControllerId = %d; KeyName = %s; IsRepeat = %s;"), ControllerId.GetId(), *ButtonPtr->ToString(), bIsRepeat ? TEXT("True") : TEXT("False"));
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "GAMEPAD_PRESSED: ControllerId = %d; KeyName = %ls; IsRepeat = %ls;", ControllerId.GetId(), *ButtonPtr->ToString(), bIsRepeat ? TEXT("True") : TEXT("False"));
 	}
 
 	void FPixelStreamingInputHandler::HandleOnControllerButtonReleased(FMemoryReader Ar)
@@ -633,7 +649,7 @@ namespace UE::PixelStreamingInput
 		);
 		FSlateApplication::Get().ProcessKeyUpEvent(KeyEvent);
 
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("GAMEPAD_RELEASED: ControllerId = %d; KeyName = %s;"), ControllerId.GetId(), *ButtonPtr->ToString());
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "GAMEPAD_RELEASED: ControllerId = %d; KeyName = %ls;", ControllerId.GetId(), *ButtonPtr->ToString());
 	}
 
 	void FPixelStreamingInputHandler::HandleOnControllerDisconnected(FMemoryReader Ar)
@@ -645,7 +661,7 @@ namespace UE::PixelStreamingInput
 		TSharedPtr<FPixelStreamingInputDevice> InputDevice = FPixelStreamingInputDevice::GetInputDevice();
 		InputDevice->OnControllerDisconnected(DisconnectedControllerId);
 
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("GAMEPAD_DISCONNECTED: ControllerId = %d"), DisconnectedControllerId);
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "GAMEPAD_DISCONNECTED: ControllerId = %d", DisconnectedControllerId);
 	}
 
 	/**
@@ -673,7 +689,7 @@ namespace UE::PixelStreamingInput
 			FSlateApplication::Get().OverridePlatformApplication(PixelStreamerApplicationWrapper->WrappedApplication);
 		}
 		bIsMouseActive = false;
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("MOUSE_LEAVE"));
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "MOUSE_LEAVE");
 	}
 
 	void FPixelStreamingInputHandler::HandleOnMouseUp(FMemoryReader Ar)
@@ -687,7 +703,7 @@ namespace UE::PixelStreamingInput
 		TPayloadThreeParam<uint8, uint16, uint16> Payload(Ar);
 
 		EMouseButtons::Type Button = static_cast<EMouseButtons::Type>(Payload.Param1);
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("MOUSE_UP: Button = %d"), Button);
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "MOUSE_UP: Button = %d", Button);
 
 		if (InputType == EPixelStreamingInputType::RouteToWidget)
 		{
@@ -733,7 +749,7 @@ namespace UE::PixelStreamingInput
 		//                                                                           convert range from 0,65536 -> 0,1
 		FVector2D ScreenLocation = ConvertFromNormalizedScreenLocation(FVector2D(Payload.Param2 / uint16_MAX, Payload.Param3 / uint16_MAX));
 		EMouseButtons::Type Button = static_cast<EMouseButtons::Type>(Payload.Param1);
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("MOUSE_DOWN: Button = %d; Pos = (%.4f, %.4f)"), Button, ScreenLocation.X, ScreenLocation.Y);
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "MOUSE_DOWN: Button = %d; Pos = (%.4f, %.4f)", Button, ScreenLocation.X, ScreenLocation.Y);
 		// Set cursor pos on mouse down - we may not have moved if this is the very first click
 		FSlateApplication& SlateApplication = FSlateApplication::Get();
 		SlateApplication.OnCursorSet();
@@ -777,7 +793,7 @@ namespace UE::PixelStreamingInput
 		FIntPoint ScreenLocation = ConvertFromNormalizedScreenLocation(FVector2D(Payload.Param1 / uint16_MAX, Payload.Param2 / uint16_MAX));
 		//                                                                 convert range from -32,768 to 32,767 -> -1,1
 		FIntPoint Delta = ConvertFromNormalizedScreenLocation(FVector2D(Payload.Param3 / int16_MAX, Payload.Param4 / int16_MAX), false);
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("MOUSE_MOVE: Pos = (%d, %d); Delta = (%d, %d)"), ScreenLocation.X, ScreenLocation.Y, Delta.X, Delta.Y);
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "MOUSE_MOVE: Pos = (%d, %d); Delta = (%d, %d)", ScreenLocation.X, ScreenLocation.Y, Delta.X, Delta.Y);
 		FSlateApplication& SlateApplication = FSlateApplication::Get();
 		SlateApplication.OnCursorSet();
 		PixelStreamerApplicationWrapper->Cursor->SetPosition(ScreenLocation.X, ScreenLocation.Y);
@@ -814,7 +830,7 @@ namespace UE::PixelStreamingInput
 		//                                                                           convert range from 0,65536 -> 0,1
 		FIntPoint ScreenLocation = ConvertFromNormalizedScreenLocation(FVector2D(Payload.Param2 / uint16_MAX, Payload.Param3 / uint16_MAX));
 		const float SpinFactor = 1 / 120.0f;
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("MOUSE_WHEEL: Delta = %d; Pos = (%d, %d)"), Payload.Param1, ScreenLocation.X, ScreenLocation.Y);
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "MOUSE_WHEEL: Delta = %d; Pos = (%d, %d)", Payload.Param1, ScreenLocation.X, ScreenLocation.Y);
 
 		if (InputType == EPixelStreamingInputType::RouteToWidget)
 		{
@@ -851,7 +867,7 @@ namespace UE::PixelStreamingInput
 		//                                                                           convert range from 0,65536 -> 0,1
 		FVector2D ScreenLocation = ConvertFromNormalizedScreenLocation(FVector2D(Payload.Param2 / uint16_MAX, Payload.Param3 / uint16_MAX));
 		EMouseButtons::Type Button = static_cast<EMouseButtons::Type>(Payload.Param1);
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("MOUSE_DOWN: Button = %d; Pos = (%.4f, %.4f)"), Button, ScreenLocation.X, ScreenLocation.Y);
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "MOUSE_DOWN: Button = %d; Pos = (%.4f, %.4f)", Button, ScreenLocation.X, ScreenLocation.Y);
 		// Force window focus
 		FSlateApplication& SlateApplication = FSlateApplication::Get();
 		SlateApplication.ProcessApplicationActivationEvent(true);
@@ -909,12 +925,22 @@ namespace UE::PixelStreamingInput
 			FPlane(Mat.M[0][1], Mat.M[1][1], Mat.M[2][1], Mat.M[3][1]),
 			FPlane(Mat.M[0][2], Mat.M[1][2], Mat.M[2][2], Mat.M[3][2]),
 			FPlane(Mat.M[0][3], Mat.M[1][3], Mat.M[2][3], Mat.M[3][3]));
-		// Extract & convert translation
+
+		// Extract scale vector and reorder coordinates to be UE coordinate system.
+		FVector ScaleVectorRaw = UEMatrix.GetScaleVector();
+		// Note: We do not invert Z scaling here because we already handle that when we rebuild translation/rot below.
+		FVector ScaleVector = FVector(ScaleVectorRaw.Z, ScaleVectorRaw.X, ScaleVectorRaw.Y);
+
+		// Temporarily remove scaling component as we need rotation axes to be unit length for proper quat conversion
+		UEMatrix.RemoveScaling();
+
+		// Extract & convert translation component to UE coordinate syste,
 		FVector Translation = FVector(-UEMatrix.M[3][2], UEMatrix.M[3][0], UEMatrix.M[3][1]) * 100.0f;
-		// Extract & convert rotation
+
+		// Extract & convert rotation component to UE coordinate system
 		FQuat RawRotation(UEMatrix);
 		FQuat Rotation(-RawRotation.Z, RawRotation.X, RawRotation.Y, -RawRotation.W);
-		return FTransform(Rotation, Translation, FVector(Mat.GetScaleVector(1.0f)));
+		return FTransform(Rotation, Translation, ScaleVector);
 	}
 
 	/**
@@ -934,9 +960,12 @@ namespace UE::PixelStreamingInput
 		// The `Ar` buffer contains the right eye projection matrix stored as 16 floats
 		FMatrix RightEyeProjectionMatrix = ExtractWebXRMatrix(Ar);
 
+		// The `Ar` buffer contains the right eye projection matrix stored as 16 floats
+		FTransform HMDTransform = WebXRMatrixToUETransform(ExtractWebXRMatrix(Ar));
+
 		if (FPixelStreamingHMD* HMD = IPixelStreamingHMDModule::Get().GetPixelStreamingHMD(); HMD != nullptr)
 		{
-			HMD->SetEyeViews(LeftEyeTransform, LeftEyeProjectionMatrix, RightEyeTransform, RightEyeProjectionMatrix);
+			HMD->SetEyeViews(LeftEyeTransform, LeftEyeProjectionMatrix, RightEyeTransform, RightEyeProjectionMatrix, HMDTransform);
 		}
 	}
 
@@ -984,10 +1013,10 @@ namespace UE::PixelStreamingInput
 		}
 
 		MessageHandler->OnControllerButtonPressed(ButtonPtr->GetFName(), DeviceMapper.GetPrimaryPlatformUser(), ControllerId, bIsRepeat);
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("XR_TOUCHED: ControllerId = %d; KeyName = %s; IsRepeat = %s;"), ControllerId.GetId(), *ButtonPtr->ToString(), bIsRepeat ? TEXT("True") : TEXT("False"));
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "XR_TOUCHED: ControllerId = %d; KeyName = %ls; IsRepeat = %ls;", ControllerId.GetId(), *ButtonPtr->ToString(), bIsRepeat ? TEXT("True") : TEXT("False"));
 	}
 
-	void FPixelStreamingInputHandler::HandleOnXRButtonPressed(FMemoryReader Ar)
+	void FPixelStreamingInputHandler::HandleOnXRButtonTouchReleased(FMemoryReader Ar)
 	{
 		TPayloadThreeParam<uint8, uint8, uint8> Payload(Ar);
 		IPlatformInputDeviceMapper& DeviceMapper = IPlatformInputDeviceMapper::Get();
@@ -998,24 +1027,53 @@ namespace UE::PixelStreamingInput
 		uint8 ButtonIdx = Payload.Param2;
 		bool bIsRepeat = Payload.Param3 != 0;
 
-		FKey* ButtonPtr = FPixelStreamingInputConverter::XRInputToFKey.Find(MakeTuple(System, Handedness, ButtonIdx, Action::Click));
+		FKey* ButtonPtr = FPixelStreamingInputConverter::XRInputToFKey.Find(MakeTuple(System, Handedness, ButtonIdx, Action::Touch));
 		if (ButtonPtr == nullptr)
 		{
 			return;
 		}
-		MessageHandler->OnControllerButtonPressed(ButtonPtr->GetFName(), DeviceMapper.GetPrimaryPlatformUser(), ControllerId, bIsRepeat);
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("XR_PRESSED: ControllerId = %d; KeyName = %s; IsRepeat = %s;"), ControllerId.GetId(), *ButtonPtr->ToString(), bIsRepeat ? TEXT("True") : TEXT("False"));
+
+		MessageHandler->OnControllerButtonReleased(ButtonPtr->GetFName(), DeviceMapper.GetPrimaryPlatformUser(), ControllerId, bIsRepeat);
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "XR_TOUCH_RELEASED: ControllerId = %d; KeyName = %ls; IsRepeat = %ls;", ControllerId.GetId(), *ButtonPtr->ToString(), bIsRepeat ? TEXT("True") : TEXT("False"));
+	}
+
+	void FPixelStreamingInputHandler::HandleOnXRButtonPressed(FMemoryReader Ar)
+	{
+		TPayloadFourParam<uint8, uint8, uint8, double> Payload(Ar);
+		IPlatformInputDeviceMapper& DeviceMapper = IPlatformInputDeviceMapper::Get();
+		FInputDeviceId ControllerId = DeviceMapper.GetDefaultInputDevice();
+
+		XRSystem System = IPixelStreamingHMDModule::Get().GetActiveXRSystem();
+		EControllerHand Handedness = static_cast<EControllerHand>(Payload.Param1);
+		uint8 ButtonIdx = Payload.Param2;
+		bool bIsRepeat = Payload.Param3 != 0;
+
+		FKey* ButtonPtr = FPixelStreamingInputConverter::XRInputToFKey.Find(MakeTuple(System, Handedness, ButtonIdx, Action::Click));
 
 		// Try and see if there is an axis associated with this button (usually the case for triggers)
-		// if so, trigger an axis movement with value 1.0
 		FKey* AxisPtr = FPixelStreamingInputConverter::XRInputToFKey.Find(MakeTuple(System, Handedness, ButtonIdx, Action::Axis));
-		if (AxisPtr == nullptr)
+
+		// Only send button click if there is no axis associated with this button or this the first press of the axis
+		if (ButtonPtr)
 		{
-			return;
+			MessageHandler->OnControllerButtonPressed(ButtonPtr->GetFName(), DeviceMapper.GetPrimaryPlatformUser(), ControllerId, bIsRepeat);
+			UE_LOGF(LogPixelStreamingInputHandler, Verbose, "XR_PRESSED: ControllerId = %d; KeyName = %ls; IsRepeat = %ls", ControllerId.GetId(), *ButtonPtr->ToString(), bIsRepeat ? TEXT("True") : TEXT("False"));
 		}
-		float AnalogValue = 1.0f;
-		MessageHandler->OnControllerAnalog(AxisPtr->GetFName(), DeviceMapper.GetPrimaryPlatformUser(), ControllerId, AnalogValue);
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("XR_ANALOG: ControllerId = %d; KeyName = %s; AnalogValue = %.4f;"), ControllerId.GetId(), *AxisPtr->ToString(), AnalogValue);
+
+		// If we have axis associate with this press then set axis value to the button press value
+		if(AxisPtr)
+		{
+			// Trigger axes are not robust to some inputs missing across frames.
+			// So to protect against this case (where PS is too slow to transmit them)
+			// we must set the `bKeepUnlessZero` flag, which allows the input to be continuously passed
+			// until a release is fired.
+			FAnalogValue AnalogValue;
+			AnalogValue.bKeepUnlessZero = true;
+			AnalogValue.Value = Payload.Param4;
+			AnalogValue.bIsRepeat = false;
+			UE_LOGF(LogPixelStreamingInputHandler, Verbose, "XR_ANALOG: ControllerId = %d; KeyName = %ls; IsRepeat = False; AnalogValue = %.4f; [Queued for Tick()]", ControllerId.GetId(), *AxisPtr->ToString(), AnalogValue.Value);
+			AnalogEventsReceivedThisTick.FindOrAdd(ControllerId).FindOrAdd(AxisPtr) = AnalogValue;
+		}
 	}
 
 	void FPixelStreamingInputHandler::HandleOnXRButtonReleased(FMemoryReader Ar)
@@ -1029,25 +1087,29 @@ namespace UE::PixelStreamingInput
 		uint8 ButtonIdx = Payload.Param2;
 		bool bIsRepeat = Payload.Param3 != 0;
 
-		FKey* ButtonPtr = FPixelStreamingInputConverter::XRInputToFKey.Find(MakeTuple(System, Handedness, ButtonIdx, Action::Click));
-		if (ButtonPtr == nullptr)
-		{
-			return;
-		}
-		MessageHandler->OnControllerButtonReleased(ButtonPtr->GetFName(), DeviceMapper.GetPrimaryPlatformUser(), ControllerId, bIsRepeat);
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("XR_RELEASED: ControllerId = %d; KeyName = %s; IsRepeat = %s;"), ControllerId.GetId(), *ButtonPtr->ToString(), bIsRepeat ? TEXT("True") : TEXT("False"));
-
 		// Try and see if there is an axis associated with this button (usually the case for triggers)
-		// if so, trigger an axis movement with value 0.0
 		FKey* AxisPtr = FPixelStreamingInputConverter::XRInputToFKey.Find(MakeTuple(System, Handedness, ButtonIdx, Action::Axis));
-		if (AxisPtr == nullptr)
+
+		// If we have axis associate with this release then set axis value to 0.0
+		if (AxisPtr)
 		{
-			return;
+			// In the case of an axes release, we should clear any analog value that is being
+			// applied across ticks.
+			FAnalogValue AnalogValue;
+			AnalogValue.bKeepUnlessZero = true;
+			AnalogValue.Value = 0.0;
+			AnalogValue.bIsRepeat = false;
+			UE_LOGF(LogPixelStreamingInputHandler, Verbose, "XR_ANALOG: ControllerId = %d; KeyName = %ls; IsRepeat = False; AnalogValue = %.4f; [Queued for Tick()]", ControllerId.GetId(), *AxisPtr->ToString(), AnalogValue.Value);
+			AnalogEventsReceivedThisTick.FindOrAdd(ControllerId).FindOrAdd(AxisPtr) = AnalogValue;
 		}
 
-		float AnalogValue = 0.0f;
-		MessageHandler->OnControllerAnalog(AxisPtr->GetFName(), DeviceMapper.GetPrimaryPlatformUser(), ControllerId, AnalogValue);
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("XR_ANALOG: ControllerId = %d; KeyName = %s; AnalogValue = %.4f;"), ControllerId.GetId(), *AxisPtr->ToString(), AnalogValue);
+		// Do the actual release after the analog trigger, as the release can cancel any further inputs
+		FKey* ButtonPtr = FPixelStreamingInputConverter::XRInputToFKey.Find(MakeTuple(System, Handedness, ButtonIdx, Action::Click));
+		if (ButtonPtr)
+		{
+			MessageHandler->OnControllerButtonReleased(ButtonPtr->GetFName(), DeviceMapper.GetPrimaryPlatformUser(), ControllerId, bIsRepeat);
+			UE_LOGF(LogPixelStreamingInputHandler, Verbose, "XR_RELEASED: ControllerId = %d; KeyName = %ls; IsRepeat = %ls;", ControllerId.GetId(), *ButtonPtr->ToString(), bIsRepeat ? TEXT("True") : TEXT("False"));
+		}
 	}
 
 	void FPixelStreamingInputHandler::HandleOnXRAnalog(FMemoryReader Ar)
@@ -1059,15 +1121,23 @@ namespace UE::PixelStreamingInput
 		XRSystem System = IPixelStreamingHMDModule::Get().GetActiveXRSystem();
 		EControllerHand Handedness = static_cast<EControllerHand>(Payload.Param1);
 		Action InputAction = static_cast<Action>(Payload.Param2 % 2);
-		FKey* ButtonPtr = FPixelStreamingInputConverter::XRInputToFKey.Find(MakeTuple(System, Handedness, Payload.Param2, InputAction));
-		if (ButtonPtr == nullptr)
+		int AxisIndex = Payload.Param2;
+		FKey* AnalogKeyPtr = FPixelStreamingInputConverter::XRInputToFKey.Find(MakeTuple(System, Handedness, AxisIndex, InputAction));
+		if (AnalogKeyPtr == nullptr)
 		{
 			return;
 		}
 
-		float AnalogValue = (float)Payload.Param3;
-		// UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("XR_ANALOG: ControllerId = %d; KeyName = %s; AnalogValue = %.4f;"), ControllerId.GetId(), *Button.ToString(), AnalogValue);
-		MessageHandler->OnControllerAnalog(ButtonPtr->GetFName(), DeviceMapper.GetPrimaryPlatformUser(), ControllerId, AnalogValue);
+		// This codepath is used for XR joysticks, which seems to be robust to temporary drops in input transmission
+		// so we can safely set `bKeepUnlessZero` to false. However, if we use this for more than joysticks we will have to conditionally set this.
+		FAnalogValue AnalogValue;
+		AnalogValue.bKeepUnlessZero = false;
+		// Y-axis is inverted in WebXR Gamepad API compared to UE
+		AnalogValue.Value = AxisIndex % 2 == 0 ? Payload.Param3 : -Payload.Param3;
+		AnalogValue.bIsRepeat = false;
+
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "XR_ANALOG: ControllerId = %d; KeyName = %ls; IsRepeat = False; AnalogValue = %.4f; [Queued for Tick()]", ControllerId.GetId(), *AnalogKeyPtr->ToString(), AnalogValue.Value);
+		AnalogEventsReceivedThisTick.FindOrAdd(ControllerId).FindOrAdd(AnalogKeyPtr) = AnalogValue;
 	}
 
 	void FPixelStreamingInputHandler::HandleOnXRSystem(FMemoryReader Ar)
@@ -1140,7 +1210,7 @@ namespace UE::PixelStreamingInput
 		Ar.Serialize(Res.GetCharArray().GetData(), Ar.TotalSize());
 
 		FString Descriptor = Res.Mid(MessageHeaderOffset);
-		UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("Command: %s"), *Descriptor);
+		UE_LOGF(LogPixelStreamingInputHandler, Verbose, "Command: %ls", *Descriptor);
 
 		// Iterate each command handler and see if the command we got matches any of the bound command names.
 		for (auto& CommandHandlersPair : CommandHandlers)
@@ -1191,7 +1261,7 @@ namespace UE::PixelStreamingInput
 				}
 				else if (bIsMultiLineEditableTextType)
 				{
-					SMultiLineEditableTextBox* TextBox = static_cast<SMultiLineEditableTextBox*>(FocusedWidget.Get());
+					SMultiLineEditableText* TextBox = static_cast<SMultiLineEditableText*>(FocusedWidget.Get());
 					TextBox->SetText(FText::FromString(Text));
 				}
 
@@ -1236,7 +1306,7 @@ namespace UE::PixelStreamingInput
 					FVector2D OutTemp = bIncludeOffset
 						? (ScreenLocation * WindowClientSize) + WindowOrigin + WindowClientOffset
 						: (ScreenLocation * WindowClientSize);
-					UE_LOG(LogPixelStreamingInputHandler, Verbose, TEXT("%.4f, %.4f"), ScreenLocation.X, ScreenLocation.Y);
+					UE_LOGF(LogPixelStreamingInputHandler, Verbose, "%.4f, %.4f", ScreenLocation.X, ScreenLocation.Y);
 					OutVector = FIntPoint((int32)OutTemp.X, (int32)OutTemp.Y);
 				}
 			}
@@ -1258,7 +1328,7 @@ namespace UE::PixelStreamingInput
 		}
 		else if (TSharedPtr<FIntPoint> ScreenSize = TargetScreenSize.Pin())
 		{
-			UE_LOG(LogPixelStreamingInputHandler, Warning, TEXT("You're using deprecated functionality by setting a target screen size. This functionality will be removed in later versions. Please use SetTargetScreenRect instead!"));
+			UE_LOGF(LogPixelStreamingInputHandler, Warning, "You're using deprecated functionality by setting a target screen size. This functionality will be removed in later versions. Please use SetTargetScreenRect instead!");
 			FIntPoint SizeInScreen = *ScreenSize;
 			FVector2D OutTemp = FVector2D(SizeInScreen) * ScreenLocation;
 			OutVector = FIntPoint((int32)OutTemp.X, (int32)OutTemp.Y);
@@ -1279,37 +1349,62 @@ namespace UE::PixelStreamingInput
 
 	void FPixelStreamingInputHandler::ProcessLatestAnalogInputFromThisTick()
 	{
-		for (auto AnalogInputIt = AnalogEventsReceivedThisTick.CreateConstIterator(); AnalogInputIt; ++AnalogInputIt)
+		for (auto AnalogInputIt = AnalogEventsReceivedThisTick.CreateIterator(); AnalogInputIt; ++AnalogInputIt)
 		{
-			for (auto FKeyIt = AnalogInputIt->Value.CreateConstIterator(); FKeyIt; ++FKeyIt)
+			for (auto FKeyIt = AnalogInputIt->Value.CreateIterator(); FKeyIt; ++FKeyIt)
 			{
-				ProcessAnalog(AnalogInputIt->Key, FKeyIt->Key, FKeyIt->Value);
+				const FInputDeviceId& ControllerId = AnalogInputIt->Key;
+				FKey* Key = FKeyIt->Key;
+				FAnalogValue AnalogValue = FKeyIt->Value;
+				bool bIsRepeat = AnalogValue.bIsRepeat;
+
+				if (!Key)
+				{
+					return;
+				}
+
+				// Pass an analog input along the engine's input processing system
+				FSlateApplication& SlateApplication = FSlateApplication::Get();
+				const FAnalogInputEvent AnalogInputEvent(
+					*Key,															/* InKey */
+					SlateApplication.GetPlatformApplication()->GetModifierKeys(),	/* InModifierKeys */
+					ControllerId,													/* InDeviceId */
+					bIsRepeat,														/* bInIsRepeat*/
+					0,																/* InCharacterCode */
+					0,																/* InKeyCode */
+					AnalogValue.Value,												/* InAnalogValue */
+					// TODO (william.belcher): This user idx should be the playerId
+					0 /* InUserIndex */
+				);
+
+				bool bHandled = FSlateApplication::Get().ProcessAnalogInputEvent(AnalogInputEvent);
+				UE_LOGF(LogPixelStreamingInputHandler, Verbose, "TICKED ANALOG Input: ControllerId = %d; KeyName = %ls; IsRepeat = %ls; AnalogValue = %.4f; Handled = %ls; [Queued for Tick()]", ControllerId.GetId(), *Key->ToString(), bIsRepeat ? TEXT("True") : TEXT("False"), AnalogValue.Value, bHandled ? TEXT("True") : TEXT("False"));
+
+				// Remove current analog key unless it has the special `bKeepUnlessZero` flag set.
+				// This flag is used to continuously apply input values across ticks because
+				// Pixel Streaming may not have transmitted an axis value in time for the next tick.
+				// But in all ordinary cases where this flag is not set, the stored analog value should
+				// be dropped from the map so the input for the axis (e.g. joystick) is only applied the frame
+				// it is received. The `bKeepUnlessZero` is used for trigger axes, where a temporary drop in
+				// input triggers UE into thinking a full press/release should occur.
+				if(!AnalogValue.bKeepUnlessZero)
+				{
+					FKeyIt.RemoveCurrent();
+				}
+				else if(AnalogValue.bKeepUnlessZero && AnalogValue.Value == 0.0)
+				{
+					// HACK: If we have zero, send it again next frame to ensure we trigger a release internally
+					// Without this release does not seem to get processed for axes inputs
+					FKeyIt->Value.bIsRepeat = true;
+					FKeyIt->Value.bKeepUnlessZero = false;
+				}
+				else
+				{
+					// We are resending the same input, signal this is the case on UE side
+					FKeyIt->Value.bIsRepeat = true;
+				}
 			}
 		}
-		AnalogEventsReceivedThisTick.Reset();
-	}
-
-	void FPixelStreamingInputHandler::ProcessAnalog(const FInputDeviceId& ControllerId, FKeyId Key, FAnalogValue AnalogValue)
-	{
-		const FKey* AxisPtr = FPixelStreamingInputConverter::GamepadInputToFKey.Find(MakeTuple(Key, Action::Axis));
-		if (!AxisPtr)
-		{
-			return;
-		}
-		
-		FSlateApplication& SlateApplication = FSlateApplication::Get();
-		const FAnalogInputEvent AnalogInputEvent(
-			*AxisPtr,														/* InKey */
-			SlateApplication.GetPlatformApplication()->GetModifierKeys(),	/* InModifierKeys */
-			ControllerId,													/* InDeviceId */
-			false,													/* bInIsRepeat*/
-			0,													/* InCharacterCode */
-			0,														/* InKeyCode */
-			AnalogValue,													/* InAnalogValue */
-			// TODO (william.belcher): This user idx should be the playerId
-			0 /* InUserIndex */
-		);
-		FSlateApplication::Get().ProcessAnalogInputEvent(AnalogInputEvent);
 	}
 
 	void FPixelStreamingInputHandler::BroadcastActiveTouchMoveEvents()

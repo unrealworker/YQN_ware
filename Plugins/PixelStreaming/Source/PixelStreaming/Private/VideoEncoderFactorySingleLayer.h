@@ -63,7 +63,7 @@ namespace UE::PixelStreaming
 
 				if (!HardwareEncoder.IsValid())
 				{
-					UE_LOG(LogPixelStreaming, Error, TEXT("Could not create encoder. Check encoder config or perhaps you used up all your HW encoders."));
+					UE_LOGF(LogPixelStreaming, Error, "Could not create encoder. Check encoder config or perhaps you used up all your HW encoders.");
 					// We could not make the encoder, so indicate the id was not set successfully.
 					return nullptr;
 				}

@@ -11,6 +11,8 @@ namespace UnrealBuildTool.Rules
 	{
 		public PixelStreamingBlueprint(ReadOnlyTargetRules Target) : base(Target)
 		{
+			bRequiresPlatformSDK = true;
+			
 			//PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 			//PrivatePCHHeaderFile = "Private/PCH.h";
 

@@ -4,11 +4,11 @@
 #include "Engine/Engine.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 
 namespace GHSDockTruckHUDDataTests
 {
-    constexpr uint32 Flags = EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
+    constexpr auto Flags = GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
 
     // Use a real runtime actor: identifying trucks must not depend on editor labels.
     struct FFixture

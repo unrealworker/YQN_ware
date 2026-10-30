@@ -20,7 +20,6 @@ namespace
 
 		TSharedPtr<IPixelStreamingStreamer> Streamer = CreateStreamer(StreamerPort);
 		TSharedPtr<FPixelStreamingVideoInputI420> VideoInput = MakeShared<FPixelStreamingVideoInputI420>();
-		VideoInput->AddOutputFormat(PixelCaptureBufferFormat::FORMAT_I420);
 		Streamer->SetVideoInput(VideoInput);
 
 		TSharedPtr<FMockPlayer> Player = CreatePlayer(FMockPlayer::EMode::AcceptOffers);

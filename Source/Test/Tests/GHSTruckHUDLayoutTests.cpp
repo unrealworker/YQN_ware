@@ -1,12 +1,12 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "../GHSTruckHUDLayout.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 #include <limits>
 
 namespace GHSTruckHUDLayoutTests
 {
 using namespace GHSTruckHUDLayout;
-constexpr uint32 Flags = EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
+constexpr auto Flags = GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter;
 const FVector2D Canvas(1200, 900);
 FItem Item(const TCHAR* Id, double X, double Y, double Width = 100.0)
 {

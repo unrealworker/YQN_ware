@@ -61,7 +61,7 @@ bool UPixelStreamingAudioComponent::StreamerListenTo(FString StreamerId, FString
 {
 	if (!IPixelStreamingModule::IsAvailable())
 	{
-		UE_LOG(LogPixelStreaming, Verbose, TEXT("Pixel Streaming audio component could not listen to anything because Pixel Streaming module is not loaded. This is expected on dedicated servers."));
+		UE_LOGF(LogPixelStreaming, Verbose, "Pixel Streaming audio component could not listen to anything because Pixel Streaming module is not loaded. This is expected on dedicated servers.");
 		return false;
 	}
 
@@ -112,13 +112,18 @@ void UPixelStreamingAudioComponent::Reset()
 {
 	PlayerToHear = FString();
 	StreamerToHear = FString();
-	SoundGenerator->bShouldGenerateAudio = false;
+
 	if (AudioSink)
 	{
 		AudioSink->RemoveAudioConsumer(this);
 	}
 	AudioSink = nullptr;
-	SoundGenerator->EmptyBuffers();
+
+	if (SoundGenerator)
+	{
+		SoundGenerator->bShouldGenerateAudio = false;
+		SoundGenerator->EmptyBuffers();
+	}
 }
 
 bool UPixelStreamingAudioComponent::IsListeningToPlayer()
@@ -188,7 +193,7 @@ void UPixelStreamingAudioComponent::TickComponent(float DeltaTime, ELevelTick Ti
 
 	if (StreamerListenTo(StreamerToHear, PlayerToHear))
 	{
-		UE_LOG(LogPixelStreaming, Log, TEXT("PixelStreaming audio component found a WebRTC peer to listen to."));
+		UE_LOGF(LogPixelStreaming, Log, "PixelStreaming audio component found a WebRTC peer to listen to.");
 	}
 }
 

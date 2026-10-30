@@ -1,6 +1,6 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "../GHSOrderReplaySession.h"
-#include "Misc/AutomationTest.h"
+#include "GHSAutomationTestFlags.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
 #include "Engine/StaticMeshActor.h"
@@ -9,7 +9,7 @@
 #include "Camera/CameraComponent.h"
 #include <limits>
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayClockTest,"GHS.Replay.Transport",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayClockTest,"GHS.Replay.Transport",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayClockTest::RunTest(const FString&)
 {
     FGHSReplayClock C;
@@ -26,7 +26,7 @@ bool FGHSReplayClockTest::RunTest(const FString&)
     C.SetRate(1);C.Playing=true;C.Advance(-1);TestEqual(TEXT("negative delta ignored"),C.Time,230.);
     return true;
 }
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayExitTest,"GHS.Replay.ExitGuard",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayExitTest,"GHS.Replay.ExitGuard",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayExitTest::RunTest(const FString&)
 {
     FGHSReplayClock C;C.Start(3600);C.Seek(230);C.SetRate(8);
@@ -45,7 +45,7 @@ bool FGHSReplayExitTest::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayCameraRestoreTest,"GHS.Replay.CameraRestoration",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayCameraRestoreTest,"GHS.Replay.CameraRestoration",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayCameraRestoreTest::RunTest(const FString&)
 {
     UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);
@@ -81,7 +81,7 @@ bool FGHSReplayCameraRestoreTest::RunTest(const FString&)
     GEngine->DestroyWorldContext(World);World->DestroyWorld(false);return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayFollowNavigationTest,"GHS.Replay.FollowNavigation",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayFollowNavigationTest,"GHS.Replay.FollowNavigation",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayFollowNavigationTest::RunTest(const FString&)
 {
     UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);
@@ -112,7 +112,7 @@ bool FGHSReplayFollowNavigationTest::RunTest(const FString&)
     GEngine->DestroyWorldContext(World);World->DestroyWorld(false);return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayWorkAreaFramingTest,"GHS.Replay.WorkAreaFraming",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayWorkAreaFramingTest,"GHS.Replay.WorkAreaFraming",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayWorkAreaFramingTest::RunTest(const FString&)
 {
     // Actual floor cargo bounds plus its loading apron, never the truck's public-road route.
@@ -137,7 +137,7 @@ bool FGHSReplayWorkAreaFramingTest::RunTest(const FString&)
     return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayRoofRestoreTest,"GHS.Replay.RoofVisibilityRestoration",EAutomationTestFlags::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayRoofRestoreTest,"GHS.Replay.RoofVisibilityRestoration",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayRoofRestoreTest::RunTest(const FString&)
 {
     UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);
