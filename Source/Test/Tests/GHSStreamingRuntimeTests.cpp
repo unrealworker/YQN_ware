@@ -41,7 +41,7 @@ bool FGHSStreamingRejectBudgetTest::RunTest(const FString&)
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStreamingLiveBudgetTest,"GHS.Streaming.Runtime.AppliesLiveFrameBudgetAndRejectsReplay",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSStreamingLiveBudgetTest::RunTest(const FString&)
 {
-    const TCHAR* Names[]={TEXT("t.MaxFPS"),TEXT("PixelStreaming.WebRTC.Fps"),TEXT("PixelStreaming.WebRTC.MinBitrate"),TEXT("PixelStreaming.WebRTC.MaxBitrate")};
+    const TCHAR* Names[]={TEXT("t.MaxFPS"),TEXT("PixelStreaming2.WebRTC.Fps"),TEXT("PixelStreaming2.WebRTC.MinBitrate"),TEXT("PixelStreaming2.WebRTC.MaxBitrate")};
     TArray<FString> Previous;
     for(const TCHAR* Name:Names)
     {
@@ -75,6 +75,40 @@ bool FGHSStreamingUncappedBudgetTest::RunTest(const FString&)
     GHSStreamingRuntime::FBudget Budget; FString Error;
     TestTrue(TEXT("Zero FPS is a supported no-cap mode"),GHSStreamingRuntime::ParseBudget(TEXT("{\"version\":1,\"sequence\":1,\"fps\":0,\"minBitrateMbps\":1,\"startBitrateMbps\":8,\"maxBitrateMbps\":24}"),Budget,Error));
     TestEqual(TEXT("Keep the no-cap sentinel"),Budget.FPS,0);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSPS2OptionsTest,"GHS.Streaming.PixelStreaming2.ValidatesLauncherOptions",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSPS2OptionsTest::RunTest(const FString&)
+{
+    GHSStreamingRuntime::FStartupOptions Options; FString Error;
+    TestTrue(TEXT("Explicit hardware and 60 real FPS"),GHSStreamingRuntime::ParseStartupOptions(TEXT("-PixelStreamingEncoder=NVIDIA -FixedFPS=60"),Options,Error));
+    TestEqual(TEXT("Hardware policy retained"),Options.Encoder,FString(TEXT("NVIDIA")));
+    TestEqual(TEXT("Fixed target retained"),Options.FixedFPS,60);
+    TestTrue(TEXT("Auto without fixed target"),GHSStreamingRuntime::ParseStartupOptions(TEXT("-PixelStreamingEncoder=Auto"),Options,Error));
+    TestEqual(TEXT("No implicit fixed target"),Options.FixedFPS,0);
+    const TCHAR* Bad[]={TEXT("-FixedFPS=0"),TEXT("-FixedFPS=60.5"),TEXT("-FixedFPS=abc"),TEXT("-FixedFPS=121"),TEXT("-PixelStreamingEncoder=unknown"),TEXT("-FixedFPS=60 -UseFixedTimeStep"),TEXT("-FixedFPS=60 -Deterministic")};
+    for(const TCHAR* Args:Bad)
+    {
+        Options.FixedFPS=37;
+        TestFalse(TEXT("Invalid settings do not silently fall back"),GHSStreamingRuntime::ParseStartupOptions(Args,Options,Error));
+        TestEqual(TEXT("Invalid settings do not mutate"),Options.FixedFPS,37);
+        TestFalse(TEXT("Explains rejection"),Error.IsEmpty());
+    }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSPS2NvidiaPolicyTest,"GHS.Streaming.PixelStreaming2.RejectsEarlySoftwareFallback",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSPS2NvidiaPolicyTest::RunTest(const FString&)
+{
+    FString Error;
+    TestTrue(TEXT("NVIDIA H264 remains valid"),GHSStreamingRuntime::ValidateNvidiaPolicy(true,true,TEXT("H264"),false,Error));
+    TestTrue(TEXT("NVIDIA AV1 remains valid when the factory retained it"),GHSStreamingRuntime::ValidateNvidiaPolicy(true,true,TEXT("AV1"),false,Error));
+    TestFalse(TEXT("A valid NVENC DLL must not hide an earlier VP8 fallback"),GHSStreamingRuntime::ValidateNvidiaPolicy(true,true,TEXT("VP8"),false,Error));
+    TestFalse(TEXT("Explain the early fallback"),Error.IsEmpty());
+    TestFalse(TEXT("Missing RHI hardware is rejected"),GHSStreamingRuntime::ValidateNvidiaPolicy(false,true,TEXT("H264"),false,Error));
+    TestFalse(TEXT("Unavailable NVENC API is rejected"),GHSStreamingRuntime::ValidateNvidiaPolicy(true,false,TEXT("H264"),false,Error));
+    TestFalse(TEXT("Software codec negotiation cannot bypass the policy"),GHSStreamingRuntime::ValidateNvidiaPolicy(true,true,TEXT("H264"),true,Error));
     return true;
 }
 #endif

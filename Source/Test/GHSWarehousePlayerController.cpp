@@ -17,7 +17,7 @@
 #include "Slate/SceneViewport.h"
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
-#include "PixelStreamingInputComponent.h"
+#include "GHSStreamingInputComponent.h"
 #include "InputKeyEventArgs.h"
 
 namespace
@@ -34,7 +34,7 @@ AGHSWarehousePlayerController::AGHSWarehousePlayerController()
     bShowMouseCursor = true;
     bEnableClickEvents = false;
     bEnableMouseOverEvents = false;
-    SearchStreamingInput=CreateDefaultSubobject<UPixelStreamingInput>(TEXT("SceneSearchStreamingInput"));
+    SearchStreamingInput=CreateDefaultSubobject<UGHSStreamingInputComponent>(TEXT("SceneSearchStreamingInput"));
     WarehouseRoof=CreateDefaultSubobject<UGHSWarehouseRoofComponent>(TEXT("WarehouseRoof"));
     StorageCapacity=CreateDefaultSubobject<UGHSStorageCapacityComponent>(TEXT("StorageCapacity"));
     OrderReplay=CreateDefaultSubobject<UGHSOrderReplaySession>(TEXT("OrderReplay"));

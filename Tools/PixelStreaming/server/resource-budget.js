@@ -17,7 +17,7 @@ class BudgetPolicy {
       // measurements show sustained pressure. Never turn an uncapped request into 5 FPS.
       this.currentFps = this.config.fps;
     }
-    if (this.config.fps === 0 || this.config.mode === 'shared' || this.config.adaptiveResourceBudget === false || count <= 1) return this.currentFps = this.config.fps;
+    if (this.config.fixedFps === true || this.config.fps === 0 || this.config.mode === 'shared' || this.config.adaptiveResourceBudget === false || count <= 1) return this.currentFps = this.config.fps;
     if (now < this.warmupUntil) return this.currentFps;
     // Every instance must acknowledge the current cap before its measurements inform another.
     // Require a new sample from every instance; repeated polling is not repeated evidence.

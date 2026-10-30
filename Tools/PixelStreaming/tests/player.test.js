@@ -1,7 +1,12 @@
 'use strict';
 const { webcrypto } = require('node:crypto');
 const test = require('node:test'); const assert = require('node:assert/strict'); const fs = require('node:fs'); const path = require('node:path'); const vm = require('node:vm');
-// Browser boundary harness: simulate the official library's public events, real page policy runs unchanged.
+// Run the new SDK's real JSON signalling protocol, with only browser media/DOM
+// substituted. This catches parsed-message/transport changes between UE versions.
+const sdkScope = { window: {}, Event, EventTarget, TextEncoder, TextDecoder, URLSearchParams, console };
+vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../player/vendor/epic-ue5.8-0.1.3.js'), 'utf8'), sdkScope);
+const realSDK = sdkScope.window['lib-pixelstreamingfrontend'];
+realSDK.Logger.InitLogging(realSDK.LogLevel.Error, false);
 async function page(initialStorage = {}, fetchHandler) {
   const elements = new Map(), store = new Map(Object.entries(initialStorage)), timers = new Map(); let timerId = 0, streaming, videoFrame, now = 100, created = 0;
   function events(object) { const listeners = new Map(); return Object.assign(object, { addEventListener(type, fn) { if (!listeners.has(type)) listeners.set(type, []); listeners.get(type).push(fn); }, fire(type, fields = {}) { const e = { type, button: 0, buttons: 1, clientX: 900, clientY: 550, shiftKey: false, defaultPrevented: false, stopped: false, preventDefault() { this.defaultPrevented = true; }, stopImmediatePropagation() { this.stopped = true; }, ...fields }; for (const fn of listeners.get(type) || []) { fn(e); if (e.stopped) break; } return e; } }); }
@@ -9,7 +14,14 @@ async function page(initialStorage = {}, fetchHandler) {
   const element = id => { if (!elements.has(id)) elements.set(id, events({ id, hidden: false, textContent: '', value: '', dataset: {}, style: {}, children: [], attributes: {}, classList: { add() {}, remove() {}, toggle() {} }, setAttribute(k, v) { this.attributes[k] = v; }, removeAttribute(k) { delete this.attributes[k]; }, append(...nodes) { this.children.push(...nodes); nodes.forEach(n => n.parentElement = this); }, replaceChildren(...nodes) { this.children = []; this.append(...nodes); }, contains(node) { return this === node || this.children.some(child => child.contains?.(node)); }, focus() { sandbox.document.activeElement = this; this.fire('focus'); }, blur() { sandbox.document.activeElement = null; this.fire('blur'); }, scrollIntoView() {}, querySelector: () => video })); return elements.get(id); };
   class Config { constructor(params) { this.settings = { ...params.initialSettings }; } setFlagEnabled(k, v) { this.settings[k] = v; } setNumericSetting(k, v) { this.settings[k] = v; } isFlagEnabled(k) { return this.settings[k]; } }
   class PixelStreaming {
-    constructor(config) { streaming = this; this.config = config; this.events = new Map(); this.protocol = new Map(); this.responses = new Map(); this.ui = []; this.closed = 0; this.connected = 0; this.input = []; this.toStreamerHandlers = new Map(['MouseDown', 'MouseUp', 'MouseMove'].map(type => [type, values => this.input.push({ type, values: [...values] })])); this.webSocketController = { signallingProtocol: { addMessageHandler: (name, cb) => this.protocol.set(name, cb) }, onClose: { addEventListener: (_name, cb) => { this.onClose = cb; } } }; }
+    constructor(config) {
+      streaming = this; this.config = config; this.events = new Map(); this.responses = new Map(); this.ui = []; this.closed = 0; this.connected = 0; this.input = [];
+      this.toStreamerHandlers = new Map(['MouseDown', 'MouseUp', 'MouseMove'].map(type => [type, values => this.input.push({ type, values: [...values] })]));
+      const transport = new realSDK.EventEmitter();
+      this.signallingProtocol = new realSDK.SignallingProtocol(transport);
+      this.protocol = { get: type => payload => transport.onMessage(JSON.stringify({ type, ...JSON.parse(payload) })) };
+      this.onClose = event => transport.emit('close', event);
+    }
     addEventListener(name, cb) { this.events.set(name, cb); } connect() { this.connected++; } reconnect() { this.connected++; } disconnect() { this.closed++; } play() {}
     emitUIInteraction(payload) { this.ui.push(JSON.parse(JSON.stringify(payload))); return true; } addResponseEventListener(name, cb) { this.responses.set(name, cb); }
   }
@@ -21,8 +33,32 @@ async function page(initialStorage = {}, fetchHandler) {
 }
 test('page automatically connects muted and does not declare success before actual video frame', async () => {
   const p = await page(); assert.equal(p.stream.connected, 1); assert.equal(p.stream.config.settings.AutoPlayVideo, true); assert.equal(p.stream.config.settings.StartVideoMuted, true); assert.equal(p.stream.config.settings.MatchViewportRes, false);
+  assert.equal(p.stream.config.settings.BrowserSendOffer, false);
+  assert.equal(p.stream.config.settings.UseCamera, false);
   p.stream.events.get('webRtcConnected')(); assert.equal(p.stats().firstFrame, false); assert.equal(p.elements.get('loading')?.hidden || false, false);
   p.frame(); assert.equal(p.stats().firstFrame, true); assert.equal(p.elements.get('loading').hidden, true); assert.equal(p.stats().width, 1920);
+});
+
+test('UE5.8 real aggregated RTC stats preserve receive, decode, jitter and selected media path diagnostics', async () => {
+  const p = await page(), aggregatedStats = new realSDK.AggregatedStats();
+  const report = (timestamp, frames, bytes) => new Map([
+    ['video', { id: 'video', type: 'inbound-rtp', kind: 'video', ssrc: 10, timestamp, framesDecoded: frames, bytesReceived: bytes, packetsReceived: frames * 10, packetsLost: 0, jitterBufferDelay: frames * .004, jitterBufferEmittedCount: frames, totalDecodeTime: frames * .001, freezeCount: 0 }],
+    ['transport', { id: 'transport', type: 'transport', selectedCandidatePairId: 'pair' }],
+    ['pair', { id: 'pair', type: 'candidate-pair', localCandidateId: 'local', remoteCandidateId: 'remote', currentRoundTripTime: .012 }],
+    ['local', { id: 'local', type: 'local-candidate', candidateType: 'host', protocol: 'udp' }],
+    ['remote', { id: 'remote', type: 'remote-candidate', candidateType: 'host', protocol: 'udp', address: '10.100.185.161' }]
+  ]);
+  for (const values of [[1000, 60, 1000000], [2000, 120, 2000000]]) {
+    aggregatedStats.processStats(report(...values));
+    p.stream.events.get('statsReceived')({ data: { aggregatedStats } });
+  }
+  assert.equal(p.stats().fps, 60);
+  assert.equal(p.stats().bitrateMbps, 8);
+  assert.equal(p.stats().rttMs, 12);
+  assert.equal(p.stats().bufferMs, 4);
+  assert.equal(p.stats().decodeMs, 1);
+  assert.equal(p.stats().networkPath, '内网地址 · UDP');
+  assert.equal(p.elements.get('stat-fps').textContent, '60.0 fps');
 });
 test('queued viewers get one bounded queue deadline and one fresh first-frame deadline when their UE starts', async () => {
   const p = await page(); const stage = payload => p.stream.protocol.get('ghsStage')(JSON.stringify(payload));
@@ -36,9 +72,9 @@ test('queued viewers get one bounded queue deadline and one fresh first-frame de
   stage({ stage: 'waitingStreamer', message: '仍在启动' }); assert.ok(p.timers.has(firstFrameDeadline));
   p.stream.events.get('webRtcDisconnected')({}); assert.ok(p.timers.has(firstFrameDeadline));
 });
-test('uncapped session sends zero to the official SDK rather than silently falling back to a fixed FPS', async () => {
+test('uncapped render session keeps a positive PS2 media capture clock without mislabelling the render limit', async () => {
   const p = await page({}, async () => ({ok: true, status: 200, json: async () => ({token:'test',mode:'independent',fps:0,minBitrateMbps:1,maxBitrateMbps:24})}));
-  assert.equal(p.stream.config.settings.WebRTCFPS, 0);
+  assert.equal(p.stream.config.settings.WebRTCFPS, 120);
   assert.match(p.elements.get('stat-limit').textContent, /无固定上限/);
 });
 
@@ -50,13 +86,13 @@ test('player attaches session bitrate policy before constructing the official st
   assert.match(p.stream.config.ghsMungeVideoSDP(sdp), /x-google-start-bitrate=5500;x-google-max-bitrate=15750/);
 });
 test('session replacement stops reconnect policy and survives page reload without taking the session back', async () => {
-  const p = await page(); p.stream.onClose({ detail: { code: 4002 } });
+  const p = await page(); p.stream.onClose({ code: 4002 });
   for (const timer of [...p.timers.values()]) if (timer.ms < 120000) timer.cb();
   assert.equal(p.stream.connected, 1); assert.ok(p.stream.closed > 0); assert.equal(p.store.get('ghsReplaced'), 'true');
   const refreshed = await page(Object.fromEntries(p.store)); assert.equal(refreshed.stream, undefined); assert.match(refreshed.elements.get('stage-title').textContent, /其他标签页/);
 });
 test('evicted page refuses automatic re-entry and transport recovery timer cannot override eviction', async () => {
-  const p = await page(); p.stream.onClose({ detail: { code: 1006 } }); p.stream.protocol.get('ghsEvicted')(JSON.stringify({ message: '被第四人替换' }));
+  const p = await page(); p.stream.onClose({ code: 1006 }); p.stream.protocol.get('ghsEvicted')(JSON.stringify({ message: '被第四人替换' }));
   for (const timer of [...p.timers.values()]) timer.cb();
   assert.equal(p.stream.connected, 1); assert.equal(p.store.get('ghsEvicted'), 'true'); assert.equal(p.stats().state, 'evicted');
   const refreshed = await page(Object.fromEntries(p.store)); assert.equal(refreshed.stream, undefined);
@@ -76,7 +112,7 @@ test('terminal presentation distinguishes stopped and replaced sessions from act
     if (storedKey) assert.equal(p.store.get(storedKey), 'true');
   }
   for (const [code, state] of [[1001, 'stopped'], [4001, 'exited'], [4002, 'exited']]) {
-    const p = await page(); p.stream.onClose({ detail: { code } }); assert.equal(p.elements.get('.card').dataset.state, state, String(code));
+    const p = await page(); p.stream.onClose({ code }); assert.equal(p.elements.get('.card').dataset.state, state, String(code));
   }
   for (const key of ['ghsEvicted', 'ghsReplaced']) {
     const p = await page({ [key]: 'true' }); assert.equal(p.elements.get('.card').dataset.state, 'exited'); assert.equal(p.stream, undefined);
@@ -268,7 +304,7 @@ test('administrator disconnect stops playback and all retries until explicit fre
   refreshed.elements.get('retry').onclick(); assert.equal(refreshed.store.size, 0);
 });
 test('full capacity is a terminal waiting state without automatic retry storm', async () => {
-  const p = await page(); p.stream.onClose({ detail: { code: 4004 } });
+  const p = await page(); p.stream.onClose({ code: 4004 });
   assert.equal(p.elements.get('.card').dataset.state, 'waiting'); assert.equal(p.elements.get('retry').hidden, false);
   assert.equal([...p.timers.values()].some(t => t.ms === 2000), false);
 });

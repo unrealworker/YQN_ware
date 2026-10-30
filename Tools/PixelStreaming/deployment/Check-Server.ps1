@@ -6,6 +6,7 @@ $root=$PSScriptRoot
 $configFile=Join-Path $root 'launcher.config.json'
 $config=Get-Content -LiteralPath $configFile -Raw -Encoding UTF8 | ConvertFrom-Json
 $required=@('runtime/node.exe','server/server.js','player/index.html','像素流服务启动器.exe','App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe','App/Windows/Engine/Binaries/Win64/EpicWebHelper.exe','App/Windows/Test/Content/GHSTwinUI/web/index.html','App/Windows/Test/Content/GHSTwinUI/data/order-replay.json','App/Windows/Test/Content/GHSNormalWarehouse/HUD/Fonts/DroidSansFallback.ttf')
+$required+=@('Install-RuntimeDependencies.ps1','App/Windows/Engine/Extras/Redist/en-us/vc_redist.x64.exe','App/Windows/Engine/Extras/Redist/en-us/GameInputRedist.msi')
 $missing=@($required | Where-Object {-not (Test-Path -LiteralPath (Join-Path $root $_) -PathType Leaf)})
 $os=Get-CimInstance Win32_OperatingSystem
 $cpus=@(Get-CimInstance Win32_Processor)
@@ -32,6 +33,7 @@ $report=[ordered]@{
     memoryGiB=[Math]::Round($os.TotalVisibleMemorySize/1MB,1)
     availableMemoryGiB=[Math]::Round($os.FreePhysicalMemory/1MB,1)
     gpu=$gpu;missingFiles=$missing
+    runtimeComponents=@{vcRuntimePresent=(Test-Path -LiteralPath (Join-Path $env:WINDIR 'System32/vcruntime140.dll'));gameInputPresent=(Test-Path -LiteralPath (Join-Path $env:WINDIR 'System32/GameInput.dll'));note='文件存在仅用于排查；版本兼容性及实际运行仍需验证。缺组件时点击启动器“安装运行组件”。'}
     networkMode=$config.networkMode;maxViewers=$config.maxViewers
     integrity=$integrity
     runtimeValidation='尚需在浏览器验证真实 DX12 渲染、NVENC 编码和输入；硬件名称不代表实际并发能力。'

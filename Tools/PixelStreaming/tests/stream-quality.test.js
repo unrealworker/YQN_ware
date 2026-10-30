@@ -3,13 +3,14 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const quality = require('../player/stream-quality');
 
-test('uncapped official SDK config accepts zero before and after streamer initial settings', () => {
-  const fps = { id: 'WebRTCFPS', _min: 1, number: 1 };
-  const config = { getNumericSettings: () => [fps], setNumericSetting(id, value) { assert.equal(id, fps.id); fps.number = Math.max(fps._min, value); } };
-  quality.configureUncapped(config, 0);
-  assert.equal(fps._min, 0); assert.equal(fps.number, 0);
-  config.setNumericSetting('WebRTCFPS', 0); assert.equal(fps.number, 0);
-  quality.configureUncapped(config, 48); assert.equal(fps.number, 0, 'finite mode is left to SDK');
+test('PS2 capture stays positive independently of an uncapped render clock', () => {
+  assert.equal(quality.captureFPS({ fps: 0 }), 120);
+  assert.equal(quality.captureFPS({ fps: 60 }), 60);
+  assert.equal(quality.captureFPS({ fps: 48 }), 48);
+  assert.equal(quality.captureFPS({ fps: 0, captureFps: 90 }), 90);
+  for (const captureFps of [0, -1, NaN, Infinity, 14, 121, 59.5]) {
+    assert.throws(() => quality.captureFPS({ fps: 60, captureFps }), /采集帧率配置无效/);
+  }
 });
 
 test('low latency hints are feature checked and a rejected hint does not break playback', () => {

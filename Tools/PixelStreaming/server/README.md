@@ -1,4 +1,4 @@
-# GHS UE5.4 Pixel Streaming service
+# GHS UE5.8 PixelStreaming2 service
 
 Start with the bundled runtime:
 
@@ -53,21 +53,21 @@ Configured ICE servers are delivered to **both UE and authenticated browsers**. 
 
 An HTTPS/WebSocket ALB forwards the webpage and signalling, not WebRTC UDP media. A private-only UE server still needs a usable media path (for example, a reachable TURN relay). Successfully loading the HTTPS page does not establish video connectivity.
 
-UE signalling stays on loopback (default TCP 8888). Each owned UE receives a random per-instance streamer token in its launch URL; upgrades must present that token, and ICE credentials are sent only after matching the owned endpoint identity. Arbitrary website Origins are rejected. The fixed loopback Origin sent by UE5.4 LibWebSockets is explicitly supported. Tokens and TURN/access secrets are redacted from operator logs. UE media uses UDP 50000–50199. Configure the external firewall/NAT with the player TCP port and these media ports. A TURN service has its own listening and relay port ranges. Merely entering a public URL cannot create an external IP, DNS record, port mapping or certificate.
+UE signalling stays on loopback (default TCP 8888). Each owned UE receives a random per-instance streamer token in its launch URL; upgrades must present that token, and ICE credentials are sent only after matching the owned endpoint identity. Arbitrary website Origins are rejected. The fixed loopback Origin sent by UE LibWebSockets is explicitly supported. Tokens and TURN/access secrets are redacted from operator logs. UE media uses UDP 50000–50199. Configure the external firewall/NAT with the player TCP port and these media ports. A TURN service has its own listening and relay port ranges. Merely entering a public URL cannot create an external IP, DNS record, port mapping or certificate.
 
 ## Rendering and process ownership
 
 Shared mode starts one UE instance. Independent mode starts one per admitted session. UE initialization is queued: only one instance is `starting` at a time; its owned streamer identity must be ready, or its failed process confirmed stopped, before the next `queued` instance starts. This reduces simultaneous initialization spikes without changing existing active viewers. Cancelling a waiting session never launches its UE. The existing eight-second reconnect grace remains. Releasing a session reaps its own child before the admission queue continues. Only still-owned PIDs are targeted; the launcher additionally uses a Windows Job Object. No process-name-wide cleanup is used.
 
-The default render target is 1920×1080, with `fps:0` meaning **no fixed render or capture frame cap**. It is not a 120/300 FPS substitute. This requires the project's patched UE5.4 PixelStreaming plugin: 0 must be supported by coupled capture and RTP sender parameters. Launch arguments disable VSync, set `t.MaxFPS 0`, keep `PixelStreaming.DecoupleFramerate 0`, and pass `PixelStreamingWebRTCFps=0`. The private runtime bridge and telemetry also preserve 0. Explicit existing FPS/bitrate settings are retained; finite caps remain 15–120.
+The default is 1920×1080 and a fixed 60 FPS target. `fixedFps:true` is incompatible with `adaptiveResourceBudget:true`. The project-owned `-FixedFPS` alias updates `t.MaxFPS` and `PixelStreaming2.WebRTC.Fps` together, without fixing simulation delta time. With fixed mode off, FPS may be 0 (uncapped rendering) or 15–120. PS2 capture negotiation remains positive (120 for uncapped rendering). Existing explicit frame and bitrate settings survive migration.
 
-New service defaults are 1 Mbps minimum, 8 Mbps starting and 24 Mbps maximum. The low minimum allows WebRTC congestion control to reduce traffic when the path cannot carry the starting rate. These values are not forced over an administrator's existing configuration. The encoder remains CBR with its existing NVENC preset; maximum QP is balanced/custom 36, clear 32 and ultra 28, allowing adaptation before frame loss. No fixed encoder target bitrate or disabled frame-dropper flag overrides WebRTC adaptation.
+`encoderAsync` maps to the native `-PixelStreamingDecoupleFramerate` capture/render decoupling setting. It is not an NVENC asynchronous-encoding switch. `encoder` accepts NVIDIA or Auto; the project-owned `-PixelStreamingEncoder` alias enforces the selected hardware policy. NVIDIA mode validates NVIDIA RHI and NVENC API support and reports a startup failure instead of silently falling back to software.
 
-`-GHSLowLatencyPlayout` opts into the project's plugin setting for zero additional playout-delay bounds; remove this argument for A/B comparison. This cannot remove network propagation delay or guarantee a particular browser buffer. Real decoded-video statistics remain necessary to verify improvement.
+The bitrate presets are balanced 1/8/24, clear 1/10/35 and ultra 1/16/50 Mbps. WebRTC controls bitrate within that range. Native PS2 encoder quality presets and min/max quality replace obsolete UE5.4 QP/rate-control flags; min quality is balanced/custom 29, clear 37, ultra 45, max 100. No forced target bitrate bypasses congestion control.
 
 Independent budgeting no longer divides FPS solely by viewer count. Finite modes retain the selected cap until warmup and consecutive fresh acknowledged actual-FPS measurements demonstrate pressure, then recover gradually. Uncapped mode stays at 0 even with automatic budgeting enabled; it does not silently introduce a cap. Queued instances do not enter the pressure calculation. The private sequenced file bridge only applies FPS/bitrate values and cannot execute arbitrary commands. GPU timings remain diagnostic and are not summed as independent render costs. No unmeasured CPU affinity, GPU selection, or forced ICE-candidate policy is added.
 
-Startup and first-video-frame deadlines remain 120 seconds. Browser rendering success is detected from an actual decoded video frame, not signalling readiness. Epic's pinned UE5.4 library continues to handle input and WebRTC.
+Startup and first-video-frame deadlines remain 120 seconds. Browser rendering success is detected from an actual decoded video frame, not signalling readiness. Epic's pinned UE5.8 library continues to handle input and WebRTC.
 
 ## Build and verification
 
@@ -80,3 +80,9 @@ node --test Tools/PixelStreaming/tests/*.test.js
 Tests exercise real local HTTP, HTTPS, WS/WSS and owned mock child processes, including ten-person admission, full-capacity refusal, manual disconnect/re-entry, unauthorized management, origin validation, private ICE configuration and the access form. Browser policy tests run the actual application source against an event harness. **They do not establish actual UE video/input, external-network connectivity, or ten-instance performance on the destination server.**
 
 `tests/fixtures/test-localhost-*.pem` is a self-signed test-only TLS identity, never copied into the deployment. Do not use it as a production certificate.
+
+## Removed comparison service
+
+The peer-stream sidecar, reverse proxy and comparison entry have been removed. `/peer-stream/` is no longer a player route. Viewer admission and revocation belong solely to this PixelStreaming2 service.
+
+The public session response separates `fps` (render target; 0 allowed) from `captureFps` (positive PS2 negotiation target; equals positive FPS or 120). The browser must not set WebRTCFPS to zero. Both new and resumed sessions carry the same target.
