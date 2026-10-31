@@ -31,7 +31,7 @@ for(const entry of fs.readdirSync(path.join(__dirname,'deployment'))){
  if(entry.endsWith('.ps1'))fs.writeFileSync(path.join(output,entry),'\ufeff'+fs.readFileSync(source,'utf8').replace(/^\ufeff/,''),'utf8');
  else fs.copyFileSync(source,path.join(output,entry));
 }
-const configuration={executablePath:'App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe',httpPort:8080,streamerPort:8888,showWindow:false,width:1920,height:1080,mode:'independent',fps:60,fixedFps:true,encoderAsync:true,encoder:'NVIDIA',minBitrateMbps:1,startBitrateMbps:8,maxBitrateMbps:24,qualityProfile:'balanced',adaptiveResourceBudget:false,maxViewers:10,networkMode:'lan',publicUrl:'',accessProtectionEnabled:false,accessCode:'',tlsCertPath:'',tlsKeyPath:'',trustProxy:false,externalTlsTermination:false,stunUrl:'',turnUrl:'',turnUsername:'',turnPassword:''};
+const configuration={executablePath:'App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe',httpPort:8080,streamerPort:8888,showWindow:false,width:1920,height:1080,mode:'independent',fps:60,fixedFps:true,encoderAsync:true,encoder:'NVIDIA',minBitrateMbps:1,startBitrateMbps:8,maxBitrateMbps:24,qualityProfile:'balanced',adaptiveResourceBudget:false,warmStandbyEnabled:false,maxViewers:5,networkMode:'lan',publicUrl:'',accessProtectionEnabled:false,accessCode:'',tlsCertPath:'',tlsKeyPath:'',trustProxy:false,externalTlsTermination:false,stunUrl:'',turnUrl:'',turnUsername:'',turnPassword:''};
 const cfgPath=path.join(output,'launcher.config.json');
 if(!fs.existsSync(cfgPath))fs.writeFileSync(cfgPath,JSON.stringify(configuration,null,2)+'\n');
 function sha(file){return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');}
@@ -43,7 +43,7 @@ for(const category of ['web','data'])for(const relative of files(path.join(repo,
  if(!fs.existsSync(target)||sha(source)!==sha(target))throw Error('运行时资源不是最新版本：'+category+'/'+relative);
  assets.push({path:category+'/'+relative,sha256:sha(source)});
 }
-const manifest={version:1,createdAt:new Date().toISOString(),sourceCommit:execFileSync('git',['rev-parse','HEAD'],{cwd:repo,encoding:'utf8'}).trim(),mapSha256:sha(path.join(repo,'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap')),defaultMaxViewers:10,engine:'5.8.4',pixelStreamingPlugin:'PixelStreaming2',sourceDirty:!!execFileSync('git',['status','--porcelain','--untracked-files=normal'],{cwd:repo,encoding:'utf8'}).trim(),prerequisites,runtimeAssets:assets,files:[]};
+const manifest={version:1,createdAt:new Date().toISOString(),sourceCommit:execFileSync('git',['rev-parse','HEAD'],{cwd:repo,encoding:'utf8'}).trim(),mapSha256:sha(path.join(repo,'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap')),defaultMaxViewers:5,engine:'5.8.4',pixelStreamingPlugin:'PixelStreaming2',sourceDirty:!!execFileSync('git',['status','--porcelain','--untracked-files=normal'],{cwd:repo,encoding:'utf8'}).trim(),prerequisites,runtimeAssets:assets,files:[]};
 for(const relative of files(output)){
  if(relative==='delivery-manifest.json'||relative==='launcher.config.json'||/^(logs|sessions|certificates)\//.test(relative)||relative.includes('/Saved/'))continue;
  const file=path.join(output,relative);

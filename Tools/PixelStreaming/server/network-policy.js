@@ -3,9 +3,11 @@ const fs = require('node:fs');
 const net = require('node:net');
 const crypto = require('node:crypto');
 
-const NETWORK_DEFAULTS = { maxViewers: 10, networkMode: 'lan', publicUrl: '', accessProtectionEnabled: false, accessCode: '', tlsCertPath: '', tlsKeyPath: '', trustProxy: false, externalTlsTermination: false, stunUrl: '', turnUrl: '', turnUsername: '', turnPassword: '' };
+const NETWORK_DEFAULTS = { maxViewers: 5, networkMode: 'lan', publicUrl: '', accessProtectionEnabled: false, accessCode: '', tlsCertPath: '', tlsKeyPath: '', trustProxy: false, externalTlsTermination: false, stunUrl: '', turnUrl: '', turnUsername: '', turnPassword: '' };
 function validateNetwork(c) {
-  if (!Number.isInteger(c.maxViewers) || c.maxViewers < 1 || c.maxViewers > 10) throw Error('人数上限必须是1至10的整数');
+  // Migrate valid older ten-seat settings downward; malformed values still fail.
+  if (Number.isInteger(c.maxViewers) && c.maxViewers > 5 && c.maxViewers <= 10) c.maxViewers = 5;
+  if (!Number.isInteger(c.maxViewers) || c.maxViewers < 1 || c.maxViewers > 5) throw Error('人数上限必须是1至5的整数');
   if (!['lan', 'public'].includes(c.networkMode)) throw Error('网络模式必须是 lan 或 public');
   if (typeof c.accessProtectionEnabled !== 'boolean') throw Error('accessProtectionEnabled 必须是布尔值');
   if (typeof c.trustProxy !== 'boolean') throw Error('trustProxy 必须是布尔值');

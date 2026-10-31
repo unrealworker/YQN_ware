@@ -209,18 +209,18 @@ test('uncapped rendering keeps a valid positive PixelStreaming2 capture negotiat
   assert.ok(args.includes('-PixelStreamingWebRTCMinBitrate=1000000'));
 });
 
-test('ten viewers share one UE; eleventh is rejected without disconnecting admitted users', async t => {
+test('five viewers share one UE; sixth is rejected without disconnecting admitted users', async t => {
   const ctx = await setup(t); const active = [];
   await until(() => ctx.service.status().instances.some(x => x.state === 'ready'));
-  for (let i = 0; i < 10; i++) active.push(await viewer(ctx));
-  await until(() => ctx.service.status().viewerCount === 10);
+  for (let i = 0; i < 5; i++) active.push(await viewer(ctx));
+  await until(() => ctx.service.status().viewerCount === 5);
   active[0].ws.send(JSON.stringify({ type: 'subscribe', streamerId: 'shared' }));
   await until(() => active[0].messages.some(x => x.type === 'offer'));
   active[0].ws.send(JSON.stringify({ type: 'answer', sdp: 'answer-from-browser' }));
   await until(() => active[0].messages.some(x => x.type === 'iceCandidate' && x.candidate.candidate === 'answer-received'));
   const rejected = await viewer(ctx); await until(() => rejected.close);
   assert.equal(rejected.close.code, 4004); assert.ok(rejected.messages.some(x => x.type === 'ghsFull' && x.reconnect === false));
-  assert.equal(ctx.service.status().viewerCount, 10); assert.equal(ctx.children.length, 1);
+  assert.equal(ctx.service.status().viewerCount, 5); assert.equal(ctx.children.length, 1);
   assert.equal(ctx.service.status().instances[0].targetFps, 60);
   assert.ok(active.every(v => !v.close));
 });
@@ -266,7 +266,7 @@ test('loopback control requires bearer token; static traversal and public manage
   assert.equal((await fetch(base + '/status')).status, 401);
   assert.equal((await fetch(base + '/status', { headers: { Authorization: 'Bearer wrong' } })).status, 401);
   const status = await fetch(base + '/status', { headers: { Authorization: 'Bearer ' + token } });
-  assert.equal(status.status, 200); assert.equal((await status.json()).maxViewers, 10);
+  assert.equal(status.status, 200); assert.equal((await status.json()).maxViewers, 5);
   assert.equal((await fetch(ctx.base + '/status')).status, 404);
   assert.equal((await fetch(ctx.base + '/%2e%2e%2fserver%2fservice.js')).status, 404);
   assert.equal((await fetch(ctx.base + '/api/session', { method: 'POST', headers: { Origin: 'http://evil.example' }, body: '{}' })).status, 403);

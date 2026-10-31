@@ -10,7 +10,7 @@ The Windows launcher supplies a fresh `GHS_CONTROL_TOKEN` (at least 24 character
 
 ## Connections and operator controls
 
-`maxViewers` defaults to **10**, configurable from 1 to 10. Both shared and independent modes count admitted browser sessions. An eleventh browser is refused with an explicit full-capacity message; existing users stay connected. A connection lost to the network holds its place for 8 seconds. Reconnecting the same token replaces only the old socket.
+`maxViewers` defaults to **5**, configurable from 1 to 5. Older valid values 6–10 migrate to 5. Both shared and independent modes count admitted browser sessions. A sixth browser is refused with an explicit full-capacity message; existing users stay connected. A connection lost to the network holds its place for 8 seconds. Reconnecting the same token replaces only the old socket.
 
 The token-protected management server binds **127.0.0.1** on a dynamic port written to the control file. Its routes are never available on the player port:
 
@@ -21,6 +21,14 @@ The token-protected management server binds **127.0.0.1** on a dynamic port writ
 Each viewer row contains `playerId`, optional `displayName`, client `address`, bounded `userAgent`, ISO UTC `connectedAt`, `instanceId`, and `state` (`starting`, `connected`, `reconnecting`, `failed`). `connected` denotes signalling subscription; actual received video/frame rate is reported in the browser. Status and logs contain neither session bearer tokens nor access/TURN secrets.
 
 A manually disconnected browser does not automatically reconnect, including on reload. The user must explicitly choose re-entry; access-code protection, when enabled, requires the code again. This is a connection-disconnect action, not a permanent identity/IP ban.
+
+### Optional pristine warm standby
+
+`warmStandbyEnabled` is a strict boolean, false when absent. In independent mode it maintains at most one pristine spare, counted inside the five-process limit. A spare must authenticate, report fresh PSO=0 metrics for a stable interval, and acknowledge its explicit 5 FPS standby budget before `warmReadyCount` becomes one. Active users retain their configured FPS, capture ceiling, resolution and bitrates. Leasing is one-way: restore the active budget and wait for its new acknowledgement before advertising the streamer. A used instance is destroyed after the ordinary disconnect grace, never recycled into the pool.
+
+Demand launches take priority. Replenishment waits until every connected subscriber has reported a real first displayed frame and remained connected for three seconds. It additionally requires fresh healthy user telemetry, free system memory of at least 8 GiB / 12%, and visible GPU free memory of at least 3 GiB / 20%. The thresholds are conservative spare-admission heuristics, not measured five-user capacity. The GPU check runs asynchronously at most every ten seconds with a three-second timeout; missing/stale GPU data suppresses additional standby while users are active. Sustained resource pressure retires an idle spare instead of lowering active users' budgets. Failed warmup retries back off from 30 to 120 seconds. Service stop cancels the pool and GPU probe.
+
+Operator status adds `warmReadyCount`, `warmStartingCount`, `warmBlockedReason` and per-instance standby state. Browser `ghsStreamingStats.startup` separates page navigation, session, readiness, subscribe, offer/answer, ICE and first displayed frame. `ghsFirstFrame` is an authenticated, bounded, once-per-subscribed-connection report used only to postpone background replenishment; it does not grant routing or change admission limits.
 
 ### Bounded UE initialization
 

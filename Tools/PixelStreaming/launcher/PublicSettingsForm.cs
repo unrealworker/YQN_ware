@@ -34,7 +34,7 @@ namespace Ghs.PixelStreaming
             TableLayoutPanel first=Table(entry),second=Table(relay);
             AddNote(first,"公网访问",true); AddNote(first,"填写服务器实际地址后启用。软件不会自动申请公网 IP、域名或配置路由器。",false);
             network.DropDownStyle=ComboBoxStyle.DropDownList; network.Items.AddRange(new object[]{"局域网 / 本机验证","公网访问"}); network.SelectedIndex=config.networkMode=="public"?1:0;
-            capacity.Minimum=1; capacity.Maximum=10; capacity.Value=Math.Max(1,Math.Min(10,config.maxViewers));
+            capacity.Minimum=1; capacity.Maximum=5; capacity.Value=Math.Max(1,Math.Min(5,config.maxViewers));
             AddField(first,"网络模式",network); AddField(first,"最多在线人数",capacity); AddField(first,"公网访问地址",address); address.Text=config.publicUrl;
             AddNote(first,"例如 https://warehouse.example.com；临时 IP 测试可用 http://公网IP:8080（未加密）。",false);
             accessProtection.Text="安全访问仓库"; accessProtection.AccessibleName=accessProtection.Text; accessProtection.Height=34; accessProtection.Checked=config.accessProtectionEnabled; AddWide(first,accessProtection);

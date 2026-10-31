@@ -1,7 +1,7 @@
 'use strict';
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { readMetrics, BudgetPolicy } = require('../server/resource-budget');
+const { readMetrics, writeBudget, BudgetPolicy } = require('../server/resource-budget');
 
 test('fixed FPS target survives sustained contention and changing connection count', () => {
   const policy = new BudgetPolicy({ mode: 'independent', fps: 60, fixedFps: true, adaptiveResourceBudget: true });
@@ -112,4 +112,24 @@ test('metrics reader only accepts fresh bounded local telemetry and tolerates at
   fs.utimesSync(file, new Date(0), new Date(0)); assert.equal(readMetrics(dir), null);
   fs.writeFileSync(file, JSON.stringify({ version: 1, sequence: 3, appliedFps: 30, actualFps: 10000 }));
   assert.equal(readMetrics(dir), null);
+});
+
+test('standby protocol preserves explicit modes and never interprets missing PSO telemetry as zero', t => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ghs-standby-protocol-'));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  const file = path.join(dir, 'metrics.json'), baseline = { version: 1, sequence: 4, appliedFps: 5, actualFps: 5 };
+  fs.writeFileSync(file, JSON.stringify(baseline));
+  assert.equal(readMetrics(dir).psoActivePrecacheRequests, null); assert.equal(readMetrics(dir).standbyMode, null);
+  for (const psoActivePrecacheRequests of [-1, .1, '0', null]) {
+    fs.writeFileSync(file, JSON.stringify({ ...baseline, psoActivePrecacheRequests, standbyMode: 'standby' }));
+    assert.equal(readMetrics(dir).psoActivePrecacheRequests, null);
+  }
+  for (const mode of ['warming', 'standby', 'active']) {
+    writeBudget(dir, {}, 5, 4, mode);
+    assert.equal(JSON.parse(fs.readFileSync(path.join(dir, 'budget.json'), 'utf8')).mode, mode);
+    fs.writeFileSync(file, JSON.stringify({ ...baseline, psoActivePrecacheRequests: 0, standbyMode: mode }));
+    assert.equal(readMetrics(dir).psoActivePrecacheRequests, 0); assert.equal(readMetrics(dir).standbyMode, mode);
+  }
+  assert.throws(() => writeBudget(dir, {}, 5, 5, 'ready'), /Invalid/);
+  writeBudget(dir, {}, 30, 6); assert.equal(Object.hasOwn(JSON.parse(fs.readFileSync(path.join(dir, 'budget.json'), 'utf8')), 'mode'), false);
 });

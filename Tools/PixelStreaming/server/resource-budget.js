@@ -59,12 +59,33 @@ function readMetrics(dir, now = Date.now()) {
     if (stat.size > 8192 || now - stat.mtimeMs > 5000 || stat.mtimeMs > now + 1000) return null;
     const m = JSON.parse(fs.readFileSync(file, 'utf8'));
     if (m.version !== 1 || !Number.isSafeInteger(m.sequence) || m.sequence < 0 || !Number.isInteger(m.appliedFps) || (m.appliedFps !== 0 && (m.appliedFps < 5 || m.appliedFps > 120)) || !Number.isFinite(m.actualFps) || m.actualFps < 0 || m.actualFps > 1000) return null;
-    return { receivedAt: stat.mtimeMs, sequence: m.sequence, appliedFps: m.appliedFps, actualFps: m.actualFps, gpuMs: Number.isFinite(m.gpuMs) && m.gpuMs > 0 && m.gpuMs <= 1000 ? m.gpuMs : null, screenPercentage: Number.isFinite(m.screenPercentage) ? m.screenPercentage : null };
+    return { receivedAt: stat.mtimeMs, sequence: m.sequence, appliedFps: m.appliedFps, actualFps: m.actualFps, gpuMs: Number.isFinite(m.gpuMs) && m.gpuMs > 0 && m.gpuMs <= 1000 ? m.gpuMs : null, screenPercentage: Number.isFinite(m.screenPercentage) ? m.screenPercentage : null,
+      psoActivePrecacheRequests: Number.isSafeInteger(m.psoActivePrecacheRequests) && m.psoActivePrecacheRequests >= 0 ? m.psoActivePrecacheRequests : null,
+      standbyMode: ['warming', 'standby', 'active'].includes(m.standbyMode) ? m.standbyMode : null };
   } catch { return null; }
 }
-function writeBudget(dir, config, fps, sequence) {
+function writeBudget(dir, config, fps, sequence, mode) {
   const file = path.join(dir, 'budget.json');
   const budget = { version: 1, sequence, fps, minBitrateMbps: config.minBitrateMbps, startBitrateMbps: config.startBitrateMbps, maxBitrateMbps: config.maxBitrateMbps };
+  if (mode !== undefined) { if (!['warming', 'standby', 'active'].includes(mode)) throw Error('Invalid standby budget mode'); budget.mode = mode; }
   fs.writeFileSync(file + '.tmp', JSON.stringify(budget)); fs.renameSync(file + '.tmp', file);
 }
-module.exports = { BudgetPolicy, readMetrics, writeBudget };
+function freshMetrics(m, now = Date.now()) { return !!m && Number.isFinite(m.receivedAt) && now >= m.receivedAt && now - m.receivedAt <= 5000; }
+function standbyHeadroom(metrics, memory, now = Date.now()) {
+  const knownMemory = Number.isFinite(memory?.freeMemoryBytes) && Number.isFinite(memory?.totalMemoryBytes) && memory.totalMemoryBytes > 0;
+  if (knownMemory && memory.freeMemoryBytes < Math.max(8 * 1024 ** 3, memory.totalMemoryBytes * .12)) return { allowed: false, reason: 'resources' };
+  const knownGpu = Number.isFinite(memory?.gpuFreeMiB) && Number.isFinite(memory?.gpuTotalMiB) && memory.gpuTotalMiB > 0 && Number.isFinite(memory?.gpuReceivedAt) && now >= memory.gpuReceivedAt && now - memory.gpuReceivedAt <= 20000;
+  if (knownGpu && memory.gpuFreeMiB < Math.max(3072, memory.gpuTotalMiB * .20)) return { allowed: false, reason: 'resources' };
+  // The first unused process can establish telemetry. Once users are active,
+  // unknown resources must never justify an extra background UE process.
+  if (!metrics.length) return { allowed: true, reason: '' };
+  if (!knownMemory) return { allowed: false, reason: 'resources' };
+  if (!knownGpu) return { allowed: false, reason: 'unknown-metrics' };
+  if (metrics.some(m => !freshMetrics(m, now) || !Number.isFinite(m.gpuMs) || m.gpuMs <= 0 || !Number.isFinite(m.actualFps) || !Number.isFinite(m.appliedFps))) return { allowed: false, reason: 'unknown-metrics' };
+  if (metrics.some(m => m.actualFps < (m.appliedFps > 0 ? m.appliedFps * .95 : 30))) return { allowed: false, reason: 'resources' };
+  // This is a conservative spare-admission heuristic, NOT measured aggregate GPU
+  // utilization. GPU timestamps may include waits: never use it to cap active users.
+  if (metrics.reduce((sum, m) => sum + m.gpuMs * m.actualFps / 1000, 0) > .6) return { allowed: false, reason: 'resources' };
+  return { allowed: true, reason: '' };
+}
+module.exports = { BudgetPolicy, readMetrics, writeBudget, freshMetrics, standbyHeadroom };

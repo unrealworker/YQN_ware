@@ -26,6 +26,7 @@ namespace Ghs.PixelStreaming
         public int maxBitrateMbps { get; set; }
         public string qualityProfile { get; set; }
         public bool adaptiveResourceBudget { get; set; }
+        public bool warmStandbyEnabled { get; set; }
         public int maxViewers { get; set; }
         public string networkMode { get; set; }
         public string publicUrl { get; set; }
@@ -39,12 +40,12 @@ namespace Ghs.PixelStreaming
         public string turnUrl { get; set; }
         public string turnUsername { get; set; }
         public string turnPassword { get; set; }
-        public LauncherConfig() { executablePath="App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe"; httpPort=8080; streamerPort=8888; width=1920; height=1080; mode="shared"; fps=60; fixedFps=true; encoderAsync=true; encoder="NVIDIA"; maxViewers=10; networkMode="lan"; publicUrl=accessCode=tlsCertPath=tlsKeyPath=stunUrl=turnUrl=turnUsername=turnPassword=""; adaptiveResourceBudget=false; ApplyQualityProfile("balanced"); }
+        public LauncherConfig() { executablePath="App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe"; httpPort=8080; streamerPort=8888; width=1920; height=1080; mode="shared"; fps=60; fixedFps=true; encoderAsync=true; encoder="NVIDIA"; maxViewers=5; networkMode="lan"; publicUrl=accessCode=tlsCertPath=tlsKeyPath=stunUrl=turnUrl=turnUsername=turnPassword=""; adaptiveResourceBudget=false; ApplyQualityProfile("balanced"); }
         public LauncherConfig Clone() { JavaScriptSerializer json=new JavaScriptSerializer(); return json.Deserialize<LauncherConfig>(json.Serialize(this)); }
         public string ResolveLocalFile(string root,string file) { return string.IsNullOrWhiteSpace(file)?"":Path.GetFullPath(Path.Combine(root,file)); }
         public void ValidateNetwork(string root)
         {
-            if(maxViewers<1 || maxViewers>10) throw new ArgumentException("在线人数上限必须为 1–10。");
+            if(maxViewers<1 || maxViewers>5) throw new ArgumentException("在线人数上限必须为 1–5。");
             if(networkMode!="lan" && networkMode!="public") throw new ArgumentException("请选择局域网或公网访问。");
             if(trustProxy && networkMode!="public") throw new ArgumentException("本机 HTTPS 反向代理仅适用于公网模式；局域网访问请关闭此选项。");
             if(externalTlsTermination && networkMode!="public") throw new ArgumentException("云负载均衡 HTTPS 仅适用于公网模式。");
@@ -111,8 +112,10 @@ namespace Ghs.PixelStreaming
             string text=File.ReadAllText(path,Encoding.UTF8); JavaScriptSerializer json=new JavaScriptSerializer();
             Dictionary<string,object> fields=json.Deserialize<Dictionary<string,object>>(text);
             if(fields==null) throw new ArgumentException("配置文件为空。");
-            foreach(string field in new[]{"accessProtectionEnabled","fixedFps","encoderAsync","adaptiveResourceBudget"}) if(fields.ContainsKey(field) && !(fields[field] is bool)) throw new ArgumentException("配置 "+field+" 必须为 true 或 false 布尔值。");
+            foreach(string field in new[]{"accessProtectionEnabled","fixedFps","encoderAsync","adaptiveResourceBudget","warmStandbyEnabled"}) if(fields.ContainsKey(field) && !(fields[field] is bool)) throw new ArgumentException("配置 "+field+" 必须为 true 或 false 布尔值。");
             LauncherConfig c=json.Deserialize<LauncherConfig>(text); if(c==null) throw new ArgumentException("配置文件为空。");
+            // Earlier releases allowed up to ten visitors. Keep valid lower limits and all other settings.
+            if(c.maxViewers>5 && c.maxViewers<=10) c.maxViewers=5;
             // Existing installations keep their explicitly selected frame budget.
             if(!fields.ContainsKey("fixedFps")) { c.fixedFps=false; if(!fields.ContainsKey("fps")) c.fps=0; if(!fields.ContainsKey("adaptiveResourceBudget")) c.adaptiveResourceBudget=true; }
             // An explicit budget always wins, including the old 8/20/35 defaults.

@@ -9,11 +9,12 @@ const crypto = require('node:crypto');
 const { performance } = require('node:perf_hooks');
 const { spawn } = require('node:child_process');
 const { WebSocketServer, WebSocket } = require('ws');
-const { BudgetPolicy, readMetrics, writeBudget } = require('./resource-budget');
+const { BudgetPolicy, readMetrics, writeBudget, freshMetrics, standbyHeadroom } = require('./resource-budget');
 const { loadMediaAddress, publicMediaCandidate } = require('./media-address');
+const { createGpuCapacityProbe } = require('./gpu-capacity');
 
 const EVICTED = '管理员已断开此连接，已停止自动重连。需要再次访问时请主动重新进入。';
-const DEFAULTS = { ...NETWORK_DEFAULTS, httpPort: 8080, streamerPort: 8888, showWindow: false, width: 1920, height: 1080, mode: 'shared', fps: 60, fixedFps: true, encoderAsync: true, encoder: 'NVIDIA', minBitrateMbps: 1, startBitrateMbps: 8, maxBitrateMbps: 24, qualityProfile: 'clear', adaptiveResourceBudget: false };
+const DEFAULTS = { ...NETWORK_DEFAULTS, httpPort: 8080, streamerPort: 8888, showWindow: false, width: 1920, height: 1080, mode: 'shared', fps: 60, fixedFps: true, encoderAsync: true, encoder: 'NVIDIA', minBitrateMbps: 1, startBitrateMbps: 8, maxBitrateMbps: 24, qualityProfile: 'clear', adaptiveResourceBudget: false, warmStandbyEnabled: false };
 function validateConfig(raw) {
   const config = { ...DEFAULTS, ...raw };
   if (Object.hasOwn(raw, 'fps') && !Object.hasOwn(raw, 'fixedFps')) { config.fixedFps = false; if (!Object.hasOwn(raw, 'adaptiveResourceBudget')) config.adaptiveResourceBudget = true; }
@@ -22,7 +23,7 @@ function validateConfig(raw) {
   if (!['shared', 'independent'].includes(config.mode)) throw Error('模式必须为 shared 或 independent');
   if (typeof config.showWindow !== 'boolean') throw Error('showWindow 必须是布尔值');
   if (typeof config.adaptiveResourceBudget !== 'boolean') throw Error('adaptiveResourceBudget 必须是布尔值');
-  for (const key of ['fixedFps', 'encoderAsync']) if (typeof config[key] !== 'boolean') throw Error(key + ' 必须是布尔值');
+  for (const key of ['fixedFps', 'encoderAsync', 'warmStandbyEnabled']) if (typeof config[key] !== 'boolean') throw Error(key + ' 必须是布尔值');
   if (!['NVIDIA', 'Auto'].includes(config.encoder)) throw Error('编码器必须为 NVIDIA 或 Auto');
   if (config.fixedFps && config.fps === 0) throw Error('固定目标帧率必须为15至120');
   if (config.fixedFps && config.adaptiveResourceBudget) throw Error('固定目标帧率与自动分配资源不能同时启用');
@@ -55,8 +56,9 @@ const send = (ws, message) => { if (ws?.readyState === WebSocket.OPEN) ws.send(J
 function parseMessage(bytes, side) {
   const m = JSON.parse(bytes);
   if (!m || typeof m !== 'object' || Array.isArray(m) || typeof m.type !== 'string') throw Error('Expected message object');
-  const allowed = side === 'player' ? ['listStreamers', 'subscribe', 'unsubscribe', 'layerPreference', 'offer', 'answer', 'iceCandidate', 'ping', 'pong'] : ['endpointId', 'offer', 'answer', 'iceCandidate', 'disconnectPlayer', 'ping', 'pong'];
+  const allowed = side === 'player' ? ['listStreamers', 'subscribe', 'unsubscribe', 'layerPreference', 'ghsFirstFrame', 'offer', 'answer', 'iceCandidate', 'ping', 'pong'] : ['endpointId', 'offer', 'answer', 'iceCandidate', 'disconnectPlayer', 'ping', 'pong'];
   if (!allowed.includes(m.type)) throw Error('Unsupported message type');
+  if (m.type === 'ghsFirstFrame' && (m.displayed !== true || !Number.isSafeInteger(m.attemptId) || m.attemptId < 1 || ['attemptElapsedMs', 'navigationTotalMs'].some(key => m[key] !== null && (!Number.isFinite(m[key]) || m[key] < 0 || m[key] > (key === 'attemptElapsedMs' ? 900000 : 86400000))))) throw Error('Invalid first-frame report');
   if (m.type === 'subscribe' && (typeof m.streamerId !== 'string' || m.streamerId.length > 100)) throw Error('Invalid streamer ID');
   if (m.type === 'endpointId' && (typeof m.id !== 'string' || m.id.length > 100)) throw Error('Invalid endpoint ID');
   // UE5.8 sends this when initializing PreferredQuality, including direct
@@ -87,6 +89,15 @@ function createService(rawConfig, options = {}) {
   const mediaAddress = loadMediaAddress(config.networkMode, options.mediaAddress);
   const logs = []; let state = 'starting', message = '正在启动服务', order = 0, nextPlayer = 1, stopPromise, admission = Promise.resolve(), heartbeat, budgetTimer, startingInstance;
   const budgetPolicy = new BudgetPolicy(config);
+  const warmEnabled = config.mode === 'independent' && config.warmStandbyEnabled;
+  const readTelemetry = options.readMetrics || readMetrics;
+  const gpuCapacity = warmEnabled && !options.resourceSnapshot ? createGpuCapacityProbe({ onLog: log }) : null;
+  const resourceSnapshot = options.resourceSnapshot || (() => ({ freeMemoryBytes: os.freemem(), totalMemoryBytes: os.totalmem(), ...gpuCapacity?.snapshot() }));
+  const warmStableMs = options.warmStableMs ?? 1000, warmBackoffMs = options.warmBackoffMs ?? 30000, activationTimeoutMs = options.activationTimeoutMs ?? 10000;
+  const firstFrameStableMs = options.firstFrameStableMs ?? 3000, resourcePressureMs = options.resourcePressureMs ?? 10000;
+  const budgetIntervalMs = options.budgetIntervalMs ?? (warmEnabled ? 500 : 2000);
+  for (const value of [warmStableMs, warmBackoffMs, activationTimeoutMs, budgetIntervalMs, firstFrameStableMs, resourcePressureMs]) if (!Number.isInteger(value) || value < 1 || value > 120000) throw Error('无效的预热时序');
+  let warmRetryAt = 0, warmFailures = 0, warmBlockedReason = warmEnabled ? '' : config.warmStandbyEnabled ? 'shared' : 'disabled';
   const reconnectGraceMs = options.reconnectGraceMs ?? 8000;
   // Internal clock overrides support bounded loopback lifecycle tests, never
   // public settings. Initialization keeps its original 120-second total budget.
@@ -135,19 +146,102 @@ function createService(rawConfig, options = {}) {
     const ws = i.pendingWS;
     if (ws) { i.identityWaitMs = identityWait(i); i.pendingWS = null; ws.terminate(); }
   }
+  function budgetAcknowledged(i, mode = i.budgetMode) { return freshMetrics(i.metrics) && i.metrics.sequence === i.sequence && i.metrics.appliedFps === i.targetFps && (!i.standbyCapable || i.metrics.standbyMode === mode); }
+  function stableWarmSample(i) { return budgetAcknowledged(i) && i.metrics.psoActivePrecacheRequests === 0 && i.metrics.actualFps >= (i.targetFps > 0 ? i.targetFps * .85 : 30); }
+  function warmAvailable(i) { return !!i.standby && i.state === 'ready' && i.ws?.readyState === WebSocket.OPEN && i.warmReady && i.budgetMode === 'standby' && stableWarmSample(i); }
+  function setBudget(i, fps, mode) {
+    if (!i.controlDir || (i.targetFps === fps && i.sequence && i.budgetMode === mode)) return;
+    writeBudget(i.controlDir, config, fps, i.sequence + 1, i.standbyCapable ? mode : undefined);
+    i.sequence++; i.targetFps = fps; i.budgetMode = mode;
+  }
+  function signalReady(i) {
+    i.state = 'ready'; i.startupStage = 'ready'; i.activationPending = false; i.readyAt = Date.now();
+    if (![...instances.values()].some(other => !other.standby && other.state === 'failed')) { state = 'running'; message = '像素流服务运行中'; }
+    for (const viewer of viewers.values()) if (viewer.instanceId === i.id) { notifyStage(viewer, 'streamerReady', '场景已启动，正在建立视频连接'); sendStreamerList(viewer); }
+  }
+  function awaitActivation(i) {
+    i.state = 'activating'; i.startupStage = 'activating'; i.activationDeadline = performance.now() + activationTimeoutMs;
+    for (const viewer of viewers.values()) if (viewer.instanceId === i.id) notifyStage(viewer, 'activatingStreamer', '预热场景已分配，正在恢复渲染帧率');
+  }
+  function claimStandby() {
+    if (!warmEnabled) return null;
+    const claimStartedAt = performance.now();
+    const i = [...instances.values()].find(candidate => candidate.standby && !['failed', 'stopping', 'reconnecting'].includes(candidate.state));
+    if (!i) return null;
+    i.metrics = readTelemetry(i.controlDir); const warmHit = warmAvailable(i), now = performance.now();
+    const timings = { instanceStartupMs: startupElapsed(i), standbyReadyAgeMs: warmHit ? Math.max(0, Math.round(now - i.warmReadyAt)) : null, admissionToLeaseMs: 0 };
+    // A pristine instance can be consumed once, even if a user beats its warmup.
+    // Never return a leased process (and its user state) to the standby pool.
+    try { setBudget(i, config.fps, 'active'); }
+    catch { i.fail?.('无法写入备用场景的激活预算'); return null; }
+    i.standby = false; i.standbyState = 'leased'; i.warmReady = false; i.activationPending = true;
+    if (i.ws?.readyState === WebSocket.OPEN && i.state === 'ready') awaitActivation(i);
+    logStartup(i, 'leased', 'warmHit=' + warmHit);
+    timings.admissionToLeaseMs = Math.max(0, Math.round(performance.now() - claimStartedAt));
+    return { instance: i, warmHit, timings };
+  }
+  function maintainStandby() {
+    if (!warmEnabled || ['stopping', 'stopped'].includes(state)) return;
+    const now = performance.now();
+    const active = [...instances.values()].filter(i => !i.standby && !['failed', 'stopping'].includes(i.state));
+    let resources; try { resources = resourceSnapshot(); } catch { resources = null; }
+    const headroom = standbyHeadroom(active.map(i => i.state === 'ready' && budgetAcknowledged(i) ? i.metrics : null), resources);
+    for (const i of instances.values()) {
+      if (!i.standby || ['queued', 'failed', 'stopping'].includes(i.state)) continue;
+      if (!i.everWarmReady && now >= i.startDeadline) { i.fail?.('备用场景在启动期限内未完成预热'); continue; }
+      if (i.state !== 'ready' || i.ws?.readyState !== WebSocket.OPEN) continue;
+      const healthy = stableWarmSample(i);
+      if (i.standbyState === 'idle') {
+        i.warmReady = healthy && i.metrics.standbyMode === 'standby';
+        if (i.warmReady && !i.everWarmReady) { i.everWarmReady = true; i.warmReadyAt = now; warmFailures = 0; logStartup(i, 'warmReady'); }
+        // Spare work is expendable. Sustained pressure retires it without
+        // reducing user budgets, while short telemetry gaps do not churn UE.
+        if (headroom.allowed) i.resourcePressureSince = undefined;
+        else {
+          i.resourcePressureSince ??= now;
+          if (now - i.resourcePressureSince >= resourcePressureMs) {
+            warmRetryAt = now + warmBackoffMs;
+            logStartup(i, 'standbyRetired', 'reason=' + headroom.reason);
+            stopInstance(i).catch(e => log('清理备用场景失败：' + e.message));
+          }
+        }
+        continue;
+      }
+      if (!healthy || i.metrics.standbyMode !== 'warming') { i.warmStableSince = undefined; continue; }
+      if (i.warmStableSince === undefined) { i.warmStableSince = i.metrics.receivedAt; i.warmLastSample = i.metrics.receivedAt; }
+      else if (i.metrics.receivedAt > i.warmLastSample && i.metrics.receivedAt - i.warmStableSince >= warmStableMs) {
+        try { setBudget(i, 5, 'standby'); i.standbyState = 'idle'; i.warmReady = false; }
+        catch { i.fail?.('无法写入备用场景的空闲预算'); }
+      }
+      i.warmLastSample = i.metrics.receivedAt;
+    }
+    if ([...instances.values()].some(i => i.standby)) { warmBlockedReason = ''; return; }
+    if (viewers.size >= config.maxViewers || instances.size >= config.maxViewers) { warmBlockedReason = 'capacity'; return; }
+    if (startingInstance || [...instances.values()].some(i => !i.standby && ['queued', 'starting', 'activating'].includes(i.state))) { warmBlockedReason = 'demand'; return; }
+    if (now < warmRetryAt) { warmBlockedReason = 'backoff'; return; }
+    if ([...viewers.values()].some(v => !v.ws || !v.subscribed || v.firstFrameReceivedAt === undefined || now - v.firstFrameReceivedAt < firstFrameStableMs)) { warmBlockedReason = 'first-frame'; return; }
+    if (!headroom.allowed) { warmBlockedReason = headroom.reason; return; }
+    warmBlockedReason = ''; startInstance('warm-' + crypto.randomBytes(6).toString('hex'), true);
+  }
   function urls() { if (config.networkMode === 'public') return [config.publicUrl + '/']; const ips = Object.values(os.networkInterfaces()).flat().filter(x => x && x.family === 'IPv4' && !x.internal).map(x => x.address); return [...new Set(ips)].map(ip => `${scheme}://${ip}:${config.httpPort}/`); }
-  function status() { return { state, message, mode: config.mode, networkMode: config.networkMode, publicUrl: config.publicUrl, accessProtectionEnabled: config.accessProtectionEnabled, tlsEnabled: !!config.tlsCertPath, trustProxy: config.trustProxy, externalTlsTermination: config.externalTlsTermination, qualityProfile: config.qualityProfile, fixedFps: config.fixedFps, captureFps: config.fps > 0 ? config.fps : 120, encoderAsync: config.encoderAsync, encoder: config.encoder, adaptiveResourceBudget: config.adaptiveResourceBudget, viewerCount: viewers.size, maxViewers: config.maxViewers,
-    viewers: [...viewers.values()].map(v => ({ playerId: v.playerId, displayName: v.displayName, address: v.address, userAgent: v.userAgent, connectedAt: v.connectedAt, state: !v.ws ? 'reconnecting' : v.subscribed ? 'connected' : instances.get(v.instanceId)?.state === 'failed' ? 'failed' : instances.get(v.instanceId)?.state === 'queued' ? 'queued' : 'starting', instanceId: v.instanceId })),
-    instances: [...instances.values()].map(i => ({ id: i.id, pid: i.child?.pid || null, state: i.state, startupStage: i.startupStage || i.state, startupElapsedMs: startupElapsed(i), identityWaitMs: identityWait(i), targetFps: i.targetFps, actualFps: i.metrics?.actualFps ?? null, gpuMs: i.metrics?.gpuMs ?? null, budgetAcknowledged: !!i.metrics && i.metrics.sequence === i.sequence, screenPercentage: i.metrics?.screenPercentage ?? null })), urls: urls(), localUrl: `${scheme}://127.0.0.1:${config.httpPort}/`, logs: [...logs] }; }
+  function status() { return { state, message, mode: config.mode, networkMode: config.networkMode, publicUrl: config.publicUrl, accessProtectionEnabled: config.accessProtectionEnabled, tlsEnabled: !!config.tlsCertPath, trustProxy: config.trustProxy, externalTlsTermination: config.externalTlsTermination, qualityProfile: config.qualityProfile, fixedFps: config.fixedFps, captureFps: config.fps > 0 ? config.fps : 120, encoderAsync: config.encoderAsync, encoder: config.encoder, adaptiveResourceBudget: config.adaptiveResourceBudget, warmStandbyEnabled: config.warmStandbyEnabled, warmReadyCount: [...instances.values()].filter(warmAvailable).length, warmStartingCount: [...instances.values()].filter(i => i.standby && !['failed', 'stopping'].includes(i.state) && !warmAvailable(i)).length, warmBlockedReason, viewerCount: viewers.size, maxViewers: config.maxViewers,
+    viewers: [...viewers.values()].map(v => ({ playerId: v.playerId, displayName: v.displayName, address: v.address, userAgent: v.userAgent, connectedAt: v.connectedAt, firstFrameReceived: v.firstFrameReceivedAt !== undefined, state: !v.ws ? 'reconnecting' : v.subscribed ? 'connected' : instances.get(v.instanceId)?.state === 'failed' ? 'failed' : instances.get(v.instanceId)?.state === 'queued' ? 'queued' : 'starting', instanceId: v.instanceId })),
+    instances: [...instances.values()].map(i => ({ id: i.id, pid: i.child?.pid || null, state: i.state, standby: !!i.standby, standbyState: i.standbyState || null, startupStage: i.startupStage || i.state, startupElapsedMs: startupElapsed(i), identityWaitMs: identityWait(i), targetFps: i.targetFps, actualFps: i.metrics?.actualFps ?? null, gpuMs: i.metrics?.gpuMs ?? null, budgetAcknowledged: budgetAcknowledged(i), psoActivePrecacheRequests: i.metrics?.psoActivePrecacheRequests ?? null, screenPercentage: i.metrics?.screenPercentage ?? null })), urls: urls(), localUrl: `${scheme}://127.0.0.1:${config.httpPort}/`, logs: [...logs] }; }
   function rebalance() {
     if (state === 'stopping' || state === 'stopped') return;
-    const active = [...instances.values()].filter(i => !['queued', 'stopping', 'failed'].includes(i.state));
-    for (const i of active) i.metrics = readMetrics(i.controlDir);
+    const running = [...instances.values()].filter(i => !['queued', 'stopping', 'failed'].includes(i.state));
+    for (const i of running) i.metrics = readTelemetry(i.controlDir);
+    const active = running.filter(i => !i.standby);
     const budgetFps = budgetPolicy.update(active.map(i => i.readyAt && Date.now() - i.readyAt >= 5000 && i.metrics?.sequence === i.sequence ? { ...i.metrics, id: i.id } : null));
-    for (const i of active) if (i.targetFps !== budgetFps || !i.sequence) {
-      try { writeBudget(i.controlDir, config, budgetFps, i.sequence + 1); i.sequence++; i.targetFps = budgetFps; }
+    for (const i of running) {
+      try { setBudget(i, i.standby ? i.standbyState === 'idle' ? 5 : config.fps : budgetFps, i.standby ? i.standbyState === 'idle' ? 'standby' : 'warming' : 'active'); }
       catch (e) { log('写入实例资源预算失败：' + e.message); }
+      if (i.state === 'activating') {
+        if (budgetAcknowledged(i, 'active')) { logStartup(i, 'activationReady'); signalReady(i); }
+        else if (performance.now() >= i.activationDeadline) i.fail?.('预热场景未在期限内确认恢复配置帧率');
+      }
     }
+    maintainStandby();
   }
   const sameOrigin = req => requestSameOrigin(req, config);
   function publicSession(s) { return { token: s.token, evicted: !!s.evicted, message: s.evicted ? EVICTED : '', mode: config.mode, maxViewers: config.maxViewers, width: config.width, height: config.height, fps: config.fps, captureFps: config.fps > 0 ? config.fps : 120, minBitrateMbps: config.minBitrateMbps, startBitrateMbps: config.startBitrateMbps, maxBitrateMbps: config.maxBitrateMbps }; }
@@ -250,7 +344,7 @@ function createService(rawConfig, options = {}) {
     let url; try { url = new URL(req.url, 'http://localhost'); } catch { return socket.destroy(); }
     const suppliedToken = url.searchParams.get('streamerToken');
     const expectedInstance = [...instances.values()].find(i => suppliedToken && secretEqual(suppliedToken, i.streamerToken));
-    if (!origins.includes(req.headers.origin) || !expectedInstance?.child || !['starting', 'ready', 'reconnecting'].includes(expectedInstance.state) || expectedInstance.pendingWS || (expectedInstance.state === 'starting' && !initializing(expectedInstance)) || ['stopping', 'stopped'].includes(state)) {
+    if (!origins.includes(req.headers.origin) || !expectedInstance?.child || !['starting', 'ready', 'activating', 'reconnecting'].includes(expectedInstance.state) || expectedInstance.pendingWS || (expectedInstance.state === 'starting' && !initializing(expectedInstance)) || ['stopping', 'stopped'].includes(state)) {
       socket.write('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n'); return socket.destroy();
     }
     streamersWS.handleUpgrade(req, socket, head, ws => {
@@ -282,11 +376,11 @@ function createService(rawConfig, options = {}) {
         logStartup(instance, 'ready');
         releaseStartupSlot(instance);
         send(ws, { type: 'config', peerConnectionOptions: { iceServers: ice } });
-        // Releasing this slot can synchronously fail the next launch. Readiness of
-        // one instance must not clear another instance's failure or explanation.
-        if (![...instances.values()].some(i => i.state === 'failed')) { state = 'running'; message = '像素流服务运行中'; }
         log('UE信令已连接：' + instance.id);
-        for (const viewer of viewers.values()) if (viewer.instanceId === instance.id) { notifyStage(viewer, 'streamerReady', '场景已启动，正在建立视频连接'); sendStreamerList(viewer); }
+        instance.metrics = readTelemetry(instance.controlDir);
+        if (instance.activationPending && !budgetAcknowledged(instance, 'active')) awaitActivation(instance);
+        else signalReady(instance);
+        rebalance();
         return;
       }
       if (m.type === 'ping') return send(ws, { type: 'pong', time: m.time });
@@ -313,14 +407,15 @@ function createService(rawConfig, options = {}) {
       }
       if (!instance || instance.ws !== ws) return;
       instance.ws = null;
-      if (!['stopping', 'failed'].includes(instance.state) && state !== 'stopping') { instance.state = 'reconnecting'; instance.startupStage = 'reconnecting'; log('UE信令连接断开：' + instance.id); for (const viewer of viewers.values()) if (viewer.instanceId === instance.id) { viewer.subscribed = false; notifyStage(viewer, 'waitingStreamer', '场景信令连接断开，等待恢复'); } }
+      if (instance.standby && !['stopping', 'failed'].includes(instance.state) && state !== 'stopping') { instance.fail?.('备用场景信令连接断开'); return; }
+      if (!['stopping', 'failed'].includes(instance.state) && state !== 'stopping') { instance.state = 'reconnecting'; instance.startupStage = 'reconnecting'; log('UE信令连接断开：' + instance.id); for (const viewer of viewers.values()) if (viewer.instanceId === instance.id) { unsubscribe(viewer); notifyStage(viewer, 'waitingStreamer', '场景信令连接断开，等待恢复'); } }
     });
     });
   });
   function notifyStage(viewer, stage, text) { send(viewer.ws, { type: 'ghsStage', stage, message: text, mode: config.mode }); }
   function sendStreamerList(viewer) { const i = instances.get(viewer.instanceId); send(viewer.ws, { type: 'streamerList', ids: i?.state === 'ready' ? [i.id] : [] }); }
   function broadcastCount() { for (const v of viewers.values()) send(v.ws, { type: 'playerCount', count: viewers.size }); }
-  function unsubscribe(v) { if (v.subscribed) send(instances.get(v.instanceId)?.ws, { type: 'playerDisconnected', playerId: v.playerId }); v.subscribed = false; }
+  function unsubscribe(v) { if (v.subscribed) send(instances.get(v.instanceId)?.ws, { type: 'playerDisconnected', playerId: v.playerId }); v.subscribed = false; v.firstFrameReceivedAt = undefined; }
   async function release(viewer, reason) {
     if (viewers.get(viewer.token) !== viewer) return;
     clearTimeout(viewer.disconnectTimer); unsubscribe(viewer); viewers.delete(viewer.token);
@@ -338,18 +433,19 @@ function createService(rawConfig, options = {}) {
       }
       // Reclaiming a process is asynchronous; a tab may have closed while we waited.
       if (ws.readyState !== WebSocket.OPEN || ['stopping', 'stopped'].includes(state)) return ws.close(1001, 'Connection ended during admission');
-      viewer = { displayName: session.displayName, address: clientAddress(req, config), userAgent: String(req.headers['user-agent'] || '').replace(/[\x00-\x1f\x7f]/g, '').slice(0, 240), connectedAt: new Date().toISOString(), token: session.token, playerId: String(nextPlayer++), order: ++order, instanceId: config.mode === 'shared' ? 'shared' : 'viewer-' + crypto.randomBytes(6).toString('hex') };
+      const claimed = config.mode === 'independent' ? claimStandby() : null;
+      viewer = { displayName: session.displayName, address: clientAddress(req, config), userAgent: String(req.headers['user-agent'] || '').replace(/[\x00-\x1f\x7f]/g, '').slice(0, 240), connectedAt: new Date().toISOString(), token: session.token, playerId: String(nextPlayer++), order: ++order, instanceId: config.mode === 'shared' ? 'shared' : claimed?.instance.id || 'viewer-' + crypto.randomBytes(6).toString('hex'), warmHit: claimed?.warmHit || false, timings: claimed?.timings || { instanceStartupMs: null, standbyReadyAgeMs: null, admissionToLeaseMs: 0 } };
       viewers.set(session.token, viewer);
-      if (config.mode === 'independent') startInstance(viewer.instanceId);
+      if (config.mode === 'independent' && !claimed) startInstance(viewer.instanceId);
     }
     clearTimeout(viewer.disconnectTimer); viewer.disconnectGeneration = (viewer.disconnectGeneration || 0) + 1; unsubscribe(viewer);
-    const previous = viewer.ws; viewer.ws = ws;
+    const previous = viewer.ws; viewer.ws = ws; viewer.firstFrameReceivedAt = undefined;
     if (previous && previous !== ws) { send(previous, { type: 'ghsSessionReplaced', message: '同一会话已在其他标签页连接，本页已停止自动重连。', reconnect: false }); previous.close(4002, 'Session reconnected'); }
-    send(ws, { type: 'ghsAdmission', playerId: viewer.playerId, mode: config.mode, instanceId: viewer.instanceId, maxViewers: config.maxViewers });
+    send(ws, { type: 'ghsAdmission', playerId: viewer.playerId, mode: config.mode, instanceId: viewer.instanceId, maxViewers: config.maxViewers, warmHit: viewer.warmHit, timings: viewer.timings });
     send(ws, { type: 'config', peerConnectionOptions: { iceServers: ice } });
     const instance = instances.get(viewer.instanceId);
     if (instance?.state === 'failed') send(ws, { type: 'ghsInstanceFailed', message: 'UE场景启动失败或意外退出，请在启动器停止后重新开启' });
-    else notifyStage(viewer, instance?.state === 'ready' ? 'streamerReady' : instance?.state === 'queued' ? 'queued' : instance?.startupStage === 'waitingIdentity' ? 'initializingStreamer' : 'waitingStreamer', instance?.state === 'ready' ? '场景已就绪，正在建立视频连接' : instance?.state === 'queued' ? '场景正在排队，前序场景就绪后开始启动' : instance?.startupStage === 'waitingIdentity' ? '场景进程已连接，正在完成资源和界面初始化' : '正在启动UE场景，等待信令连接');
+    else notifyStage(viewer, instance?.state === 'activating' ? 'activatingStreamer' : instance?.state === 'ready' ? 'streamerReady' : instance?.state === 'queued' ? 'queued' : instance?.startupStage === 'waitingIdentity' ? 'initializingStreamer' : 'waitingStreamer', instance?.state === 'activating' ? '预热场景已分配，正在恢复渲染帧率' : instance?.state === 'ready' ? '场景已就绪，正在建立视频连接' : instance?.state === 'queued' ? '场景正在排队，前序场景就绪后开始启动' : instance?.startupStage === 'waitingIdentity' ? '场景进程已连接，正在完成资源和界面初始化' : '正在启动UE场景，等待信令连接');
     log('访问者接入：' + viewer.playerId); broadcastCount();
     ws.on('message', bytes => {
       if (viewer.ws !== ws || viewers.get(viewer.token) !== viewer || session.evicted) return;
@@ -357,11 +453,22 @@ function createService(rawConfig, options = {}) {
       const instance = instances.get(viewer.instanceId);
       if (m.type === 'listStreamers') return sendStreamerList(viewer);
       if (m.type === 'ping') return send(ws, { type: 'pong', time: m.time });
+      if (m.type === 'ghsFirstFrame') {
+        if (viewer.subscribed && instance?.state === 'ready' && viewer.firstFrameReceivedAt === undefined) {
+          viewer.firstFrameReceivedAt = performance.now();
+          logStartup(instance, 'firstFrame', 'playerId=' + viewer.playerId + ' attemptId=' + m.attemptId + ' attemptElapsedMs=' + m.attemptElapsedMs + ' navigationTotalMs=' + m.navigationTotalMs);
+        }
+        return;
+      }
       // This service connects each player directly to its owned UE, not an SFU.
       if (m.type === 'layerPreference') return;
       if (m.type === 'subscribe') {
         if (m.streamerId !== viewer.instanceId || instance?.state !== 'ready') return send(ws, { type: 'warning', message: '所请求的实例不可用' });
-        if (!viewer.subscribed) { viewer.subscribed = true; send(instance.ws, { type: 'playerConnected', playerId: viewer.playerId, dataChannel: true, sfu: false, sendOffer: true }); }
+        if (!viewer.subscribed) {
+          // Gate each actual media subscription, not each repeated subscribe message.
+          viewer.firstFrameReceivedAt = undefined; viewer.subscribed = true;
+          send(instance.ws, { type: 'playerConnected', playerId: viewer.playerId, dataChannel: true, sfu: false, sendOffer: true });
+        }
         return;
       }
       if (m.type === 'unsubscribe') return unsubscribe(viewer);
@@ -376,14 +483,16 @@ function createService(rawConfig, options = {}) {
       viewer.disconnectTimer.unref();
     });
   }
-  function startInstance(id) {
-    const instance = { id, streamerToken: crypto.randomBytes(32).toString('hex'), state: 'queued', child: null, ws: null, sequence: 0, targetFps: config.fps, controlDir: null }; instances.set(id, instance);
+  function startInstance(id, standby = false) {
+    const instance = { id, streamerToken: crypto.randomBytes(32).toString('hex'), state: 'queued', child: null, ws: null, sequence: 0, targetFps: config.fps, controlDir: null, standby, standbyCapable: standby, standbyState: standby ? 'warming' : null, warmReady: false }; instances.set(id, instance);
     pumpStartupQueue(); return instance;
   }
   function pumpStartupQueue() {
     if (startingInstance || ['stopping', 'stopped'].includes(state)) return;
-    const next = [...instances.values()].find(i => i.state === 'queued');
+    const next = [...instances.values()].find(i => i.state === 'queued' && !i.standby) || [...instances.values()].find(i => i.state === 'queued');
     if (!next) return;
+    const processes = [...instances.values()].filter(i => i.child && i.child.exitCode === null && i.child.signalCode === null).length;
+    if (processes >= config.maxViewers) return;
     startingInstance = next; next.state = 'starting'; launchInstance(next);
   }
   function releaseStartupSlot(instance) {
@@ -394,7 +503,13 @@ function createService(rawConfig, options = {}) {
     const id = instance.id;
     const failed = detail => {
       if (['stopping', 'failed'].includes(instance.state) || state === 'stopping' || state === 'stopped') return;
-      clearTimeout(instance.startTimer); instance.state = 'failed'; instance.startupStage = 'failed'; instance.startEndedAt ??= performance.now(); state = 'degraded'; message = 'UE实例失败：' + detail; log(message);
+      clearTimeout(instance.startTimer); instance.state = 'failed'; instance.startupStage = 'failed'; instance.startEndedAt ??= performance.now();
+      if (instance.standby) {
+        warmRetryAt = performance.now() + Math.min(120000, warmBackoffMs * 2 ** Math.min(warmFailures++, 3)); warmBlockedReason = 'backoff';
+        log('备用场景预热失败：' + detail); closePendingIdentity(instance); instance.ws?.terminate();
+        stopInstance(instance).catch(e => log('清理备用场景失败：' + e.message)); return;
+      }
+      state = 'degraded'; message = 'UE实例失败：' + detail; log(message);
       logStartup(instance, 'failed'); closePendingIdentity(instance);
       instance.ws?.close(1011, 'UE exited');
       rebalance();
@@ -402,14 +517,19 @@ function createService(rawConfig, options = {}) {
       // Release initialization capacity only after the failed owned process is gone.
       stopProcess(instance).then(() => releaseStartupSlot(instance)).catch(e => log('清理失败实例：' + e.message));
     };
+    instance.fail = failed;
     try {
       const controlRoot = options.controlRoot || os.tmpdir(); fs.mkdirSync(controlRoot, { recursive: true });
       instance.controlDir = fs.mkdtempSync(path.join(controlRoot, 'ghs-instance-'));
+      // The initial mode must exist before UE starts; a missing warm permit budget
+      // would otherwise let the engine permanently enter active mode on its first tick.
+      setBudget(instance, config.fps, instance.standby ? 'warming' : 'active');
       rebalance();
       // PS2 capture negotiation stays positive; 0 only uncaps rendering.
       // Fixed targets prevent the private resource bridge from lowering FPS.
       instance.startedAt = performance.now(); instance.startDeadline = instance.startedAt + startupTimeoutMs; instance.startupStage = 'processStarting';
-      const child = spawnProcess(config.executablePath, buildUEArgs(config, id, instance.controlDir, instance.streamerToken), { cwd: path.dirname(config.executablePath), shell: false, windowsHide: !config.showWindow, stdio: ['ignore', 'pipe', 'pipe'] });
+      const args = buildUEArgs(config, id, instance.controlDir, instance.streamerToken); if (instance.standbyCapable) args.push('-GHSStandbyCapable');
+      const child = spawnProcess(config.executablePath, args, { cwd: path.dirname(config.executablePath), shell: false, windowsHide: !config.showWindow, stdio: ['ignore', 'pipe', 'pipe'] });
       instance.child = child; log('启动UE实例 ' + id + '，PID ' + child.pid);
       logStartup(instance, 'processStarting');
       // Immediate starts are reported after admit binds viewer.ws. Queued starts
@@ -429,11 +549,12 @@ function createService(rawConfig, options = {}) {
     else child.kill('SIGTERM');
     if (child.exitCode === null && child.signalCode === null) await new Promise((resolve, reject) => { const forceTimer = setTimeout(() => child.kill('SIGKILL'), 3000); const failTimer = setTimeout(() => reject(Error('无法确认自有UE进程退出：' + child.pid)), 8000); child.once('exit', () => { clearTimeout(forceTimer); clearTimeout(failTimer); resolve(); }); });
   }
-  async function stopInstance(instance) { if (!instance) return; instance.state = 'stopping'; instance.startupStage = 'stopping'; instance.startEndedAt ??= performance.now(); clearTimeout(instance.startTimer); closePendingIdentity(instance); instance.ws?.terminate(); await stopProcess(instance); instances.delete(instance.id); if (instance.controlDir) fs.rmSync(instance.controlDir, { recursive: true, force: true }); rebalance(); releaseStartupSlot(instance); }
+  async function stopInstance(instance) { if (!instance) return; instance.state = 'stopping'; instance.startupStage = 'stopping'; instance.startEndedAt ??= performance.now(); clearTimeout(instance.startTimer); closePendingIdentity(instance); instance.ws?.terminate(); await stopProcess(instance); instances.delete(instance.id); if (instance.controlDir) fs.rmSync(instance.controlDir, { recursive: true, force: true }); rebalance(); releaseStartupSlot(instance); pumpStartupQueue(); }
   async function start() {
     try {
       await listen(streamerServer, config.streamerPort, '127.0.0.1'); await listen(publicServer, config.httpPort, config.trustProxy ? '127.0.0.1' : '0.0.0.0'); await listen(controlServer, 0, '127.0.0.1');
       state = 'running'; message = '服务已启动'; log('网页服务 ' + scheme + '://' + (config.trustProxy ? '127.0.0.1' : '0.0.0.0') + ':' + config.httpPort + '，UE信令仅本机:' + config.streamerPort);
+      gpuCapacity?.start();
       heartbeat = setInterval(() => { pruneSessions(); for (const server of [playersWS, streamersWS]) for (const ws of server.clients) {
         // A native initialization stall may also delay pong dispatch. Only this
         // one owned pending socket shares the same absolute startup deadline.
@@ -441,8 +562,9 @@ function createService(rawConfig, options = {}) {
         if (!ws.alive && !ownedInitialization) { ws.terminate(); continue; }
         ws.alive = false; if (ws.readyState === WebSocket.OPEN) ws.ping();
       } }, heartbeatIntervalMs); heartbeat.unref();
-      budgetTimer = setInterval(rebalance, 2000); budgetTimer.unref();
+      budgetTimer = setInterval(rebalance, budgetIntervalMs); budgetTimer.unref();
       if (config.mode === 'shared') startInstance('shared');
+      else maintainStandby();
       return status();
     } catch (e) { log(e.message); await stop(); throw e; }
   }
@@ -450,6 +572,7 @@ function createService(rawConfig, options = {}) {
     if (stopPromise) return stopPromise;
     stopPromise = (async () => {
       state = 'stopping'; message = '正在清理本服务的场景实例'; clearInterval(heartbeat); clearInterval(budgetTimer);
+      gpuCapacity?.stop();
       clearTimeout(cloudAuthTimer); cloudAuthTimer = undefined;
       for (const pending of cloudAuthQueue.splice(0)) pending.finish(503);
       await admission;
