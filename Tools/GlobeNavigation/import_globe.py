@@ -148,8 +148,11 @@ textures = {}
 for key, filename in [('color','T_Earth_BaseColor'),('normal','T_Earth_Normal_UE'),('roughness','T_Earth_Roughness')]:
     texture = import_file(SOURCE/'Textures'/(filename+'.png'), filename)
     texture.set_editor_property('srgb', key == 'color')
-    texture.set_editor_property('max_texture_size', 4096 if key != 'roughness' else 2048)
-    if key == 'normal':
+    texture.set_editor_property('max_texture_size', {'color':8192,'normal':4096,'roughness':2048}[key])
+    if key == 'color':
+        texture.set_editor_property('compression_settings', u.TextureCompressionSettings.TC_BC7)
+        texture.set_editor_property('mip_gen_settings', u.TextureMipGenSettings.TMGS_SHARPEN2)
+    elif key == 'normal':
         texture.set_editor_property('compression_settings', u.TextureCompressionSettings.TC_NORMALMAP)
     elif key == 'roughness':
         texture.set_editor_property('compression_settings', u.TextureCompressionSettings.TC_GRAYSCALE)
