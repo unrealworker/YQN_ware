@@ -42,3 +42,33 @@ test('partial snapshots reuse an accepted 2000-site catalog without reading its 
  assert.equal(P.nextState(partial,{warehouses:undefined}),null);assert.equal(P.nextState(partial,{warehouses:[{id:'bad',name:null}]}),null);
  assert.ok(P.nextState(partial,{phase:'idle',selectedId:''}));assert.equal(reads,0);
 });
+test('blank scene clicks cancel selection while drags, cancellations and controls preserve it',()=>{
+ const finish={selectedId:'a',phase:'selected',blank:true};
+ let gesture=P.beginSceneGesture(100,100,'a');gesture=P.moveSceneGesture(gesture,102,103);
+ assert.equal(gesture.dragging,false);assert.equal(gesture.dx,0);assert.equal(gesture.dy,0);assert.equal(P.isBlankSceneClick(gesture,finish),true);
+ assert.equal(P.isBlankSceneClick(gesture,{...finish,blank:false}),false);assert.equal(P.isBlankSceneClick(gesture,{...finish,cancelled:true}),false);
+ assert.equal(P.isBlankSceneClick(gesture,{...finish,selectedId:'b'}),false);assert.equal(P.isBlankSceneClick(gesture,{...finish,phase:'flying'}),false);
+ gesture=P.moveSceneGesture(gesture,106,100);assert.equal(gesture.dragging,true);assert.equal(gesture.dx,6);assert.equal(gesture.dy,0);
+ gesture=P.moveSceneGesture(gesture,100,100);assert.equal(gesture.dx,-6);assert.equal(P.isBlankSceneClick(gesture,finish),false);
+ const releaseOnly=P.moveSceneGesture(P.beginSceneGesture(0,0,'a'),0,8);assert.equal(P.isBlankSceneClick(releaseOnly,finish),false);
+ assert.equal(P.isBlankSceneClick(P.beginSceneGesture(0,0,''),finish),false);
+});
+test('page motion defaults to normal and preserves an explicit reduced setting',()=>{
+ assert.equal(P.motionPreference(null),'normal');assert.equal(P.motionPreference('normal'),'normal');assert.equal(P.motionPreference('reduced'),'reduced');assert.equal(P.motionPreference('unexpected'),'normal');
+});
+test('an old idle snapshot cannot unlock an unacknowledged entry request',()=>{
+ let gate=P.entryRequestState('idle','request');
+ for(const phase of ['selected','idle','selected']){gate=P.entryRequestState(gate,phase);assert.equal(gate,'pending');}
+ gate=P.entryRequestState(gate,'loading');assert.equal(gate,'acknowledged');gate=P.entryRequestState(gate,'flying');assert.equal(gate,'acknowledged');
+ assert.equal(P.entryRequestState(gate,'warehouse'),'idle');assert.equal(P.entryRequestState('pending','error'),'idle');assert.equal(P.entryRequestState('pending','cancel'),'idle');
+ assert.equal(P.entryRequestState('acknowledged','selected'),'idle');
+});
+test('curtain copy appears only for actual covered waiting or an error',()=>{
+ for(const phase of ['flying','revealing']){
+  assert.equal(P.transitionNotice(phase,{opacity:1,waitingForDestination:false}).waiting,false);
+  assert.equal(P.transitionNotice(phase,{opacity:.8,waitingForDestination:true}).waiting,false);
+  const waiting=P.transitionNotice(phase,{opacity:1,waitingForDestination:true});assert.equal(waiting.waiting,true);assert.equal(waiting.text,'仓库正在初始化，请稍候');
+  const failure=P.transitionNotice(phase,{opacity:1,waitingForDestination:true},'加载失败');assert.equal(failure.waiting,false);assert.equal(failure.error,true);assert.equal(failure.text,'加载失败');
+ }
+ assert.equal(P.transitionNotice('warehouse',{opacity:1,waitingForDestination:true}).active,false);
+});

@@ -1,0 +1,1110 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "PLUTO",
+			"instance": "10B385544280A8F276CDF59E0DA991DD",
+			"instanceName": "PLUTO-56012",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (25H2) [10.0.26200.9711] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 5060 Laptop GPU",
+			"cPUModel": "Intel(R) Core(TM) i9-14900HX",
+			"rAMInGB": 32,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.10.31-06.52.13",
+	"succeeded": 40,
+	"succeededWithWarnings": 0,
+	"failed": 0,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.8637809157371521,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "ArcDoesNotCutThroughEarth",
+			"fullTestPath": "GHS.Globe.Flight.ArcDoesNotCutThroughEarth",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016908299177885056,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "BacksideDatelineAndPoles",
+			"fullTestPath": "GHS.Globe.Flight.BacksideDatelineAndPoles",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.015614200383424759,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CurrentLaggedPoseContinuity",
+			"fullTestPath": "GHS.Globe.Flight.CurrentLaggedPoseContinuity",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.019828800112009048,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FrameRateIndependent",
+			"fullTestPath": "GHS.Globe.Flight.FrameRateIndependent",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.017645601183176041,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "NearSurfaceStartContinuity",
+			"fullTestPath": "GHS.Globe.Flight.NearSurfaceStartContinuity",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016659699380397797,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "BrowserGeometry",
+			"fullTestPath": "GHS.Globe.BrowserGeometry",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016529299318790436,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Catalog",
+			"fullTestPath": "GHS.Globe.Catalog",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016541000455617905,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Clustering",
+			"fullTestPath": "GHS.Globe.Clustering",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.01593330129981041,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CurtainHandshake",
+			"fullTestPath": "GHS.Globe.CurtainHandshake",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016465898603200912,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Geography",
+			"fullTestPath": "GHS.Globe.Geography",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016803696751594543,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PersistentCameraOwnership",
+			"fullTestPath": "GHS.Globe.PersistentCameraOwnership",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.019267197698354721,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "RegistryIsolation",
+			"fullTestPath": "GHS.Globe.RegistryIsolation",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.011448901146650314,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "StreamExclusion",
+			"fullTestPath": "GHS.Globe.StreamExclusion",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016141001135110855,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "AllLODsKeepCompleteCargoAndSteel",
+			"fullTestPath": "GHS.StorageCapacity.AllLODsKeepCompleteCargoAndSteel",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.13699899613857269,
+			"dateTime": "2026.10.31-06.52.11",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_Pass_W36176_Capacity LOD0: pallets=6/6 boxes=6/6 triangles=7144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_Pass_W36176_Capacity LOD0",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_Pass_W36176_Capacity LOD1: pallets=6/6 boxes=6/6 triangles=3930 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_Pass_W36176_Capacity LOD1",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_Pass_W36176_Capacity LOD2: pallets=6/6 boxes=6/6 triangles=2144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_Pass_W36176_Capacity LOD2",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_Pass_W36176_Capacity LOD3: pallets=6/6 boxes=6/6 triangles=2144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_Pass_W36176_Capacity LOD3",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_Pass_W37138_Capacity LOD0: pallets=6/6 boxes=6/6 triangles=7144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_Pass_W37138_Capacity LOD0",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_Pass_W37138_Capacity LOD1: pallets=6/6 boxes=6/6 triangles=3930 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_Pass_W37138_Capacity LOD1",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_Pass_W37138_Capacity LOD2: pallets=6/6 boxes=6/6 triangles=2144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_Pass_W37138_Capacity LOD2",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_Pass_W37138_Capacity LOD3: pallets=6/6 boxes=6/6 triangles=2144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_Pass_W37138_Capacity LOD3",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_W37138_Capacity LOD0: pallets=12/12 boxes=12/12 triangles=12940 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_W37138_Capacity LOD0",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_W37138_Capacity LOD1: pallets=12/12 boxes=12/12 triangles=7116 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_W37138_Capacity LOD1",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_W37138_Capacity LOD2: pallets=12/12 boxes=12/12 triangles=3882 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_W37138_Capacity LOD2",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_W37138_Capacity LOD3: pallets=12/12 boxes=12/12 triangles=3882 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_W37138_Capacity LOD3",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_W37619_Capacity LOD0: pallets=12/12 boxes=12/12 triangles=12940 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_W37619_Capacity LOD0",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_W37619_Capacity LOD1: pallets=12/12 boxes=12/12 triangles=7116 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_W37619_Capacity LOD1",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_W37619_Capacity LOD2: pallets=12/12 boxes=12/12 triangles=3882 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_W37619_Capacity LOD2",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_A_W37619_Capacity LOD3: pallets=12/12 boxes=12/12 triangles=3882 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_A_W37619_Capacity LOD3",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_B_Pass_W36176_Capacity LOD0: pallets=18/18 boxes=18/18 triangles=9280 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_B_Pass_W36176_Capacity LOD0",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_B_Pass_W36176_Capacity LOD1: pallets=18/18 boxes=18/18 triangles=5104 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_B_Pass_W36176_Capacity LOD1",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_B_Pass_W36176_Capacity LOD2: pallets=18/18 boxes=18/18 triangles=2784 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_B_Pass_W36176_Capacity LOD2",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_B_Pass_W36176_Capacity LOD3: pallets=18/18 boxes=18/18 triangles=1670 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_B_Pass_W36176_Capacity LOD3",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_B_W37138_Capacity LOD0: pallets=36/36 boxes=36/36 triangles=17412 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_B_W37138_Capacity LOD0",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_B_W37138_Capacity LOD1: pallets=36/36 boxes=36/36 triangles=9576 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_B_W37138_Capacity LOD1",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_B_W37138_Capacity LOD2: pallets=36/36 boxes=36/36 triangles=5224 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_B_W37138_Capacity LOD2",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_B_W37138_Capacity LOD3: pallets=36/36 boxes=36/36 triangles=5224 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_B_W37138_Capacity LOD3",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_B_W37619_Capacity LOD0: pallets=36/36 boxes=36/36 triangles=17412 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_B_W37619_Capacity LOD0",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_B_W37619_Capacity LOD1: pallets=36/36 boxes=36/36 triangles=9576 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_B_W37619_Capacity LOD1",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_B_W37619_Capacity LOD2: pallets=36/36 boxes=36/36 triangles=5224 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_B_W37619_Capacity LOD2",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_B_W37619_Capacity LOD3: pallets=36/36 boxes=36/36 triangles=5224 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_B_W37619_Capacity LOD3",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_D1_Capacity LOD0: pallets=6/6 boxes=6/6 triangles=7144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_D1_Capacity LOD0",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_D1_Capacity LOD1: pallets=6/6 boxes=6/6 triangles=3930 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_D1_Capacity LOD1",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_D1_Capacity LOD2: pallets=6/6 boxes=6/6 triangles=2144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_D1_Capacity LOD2",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_D1_Capacity LOD3: pallets=6/6 boxes=6/6 triangles=2144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_D1_Capacity LOD3",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_D1_W37138_Capacity LOD0: pallets=6/6 boxes=6/6 triangles=7144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_D1_W37138_Capacity LOD0",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_D1_W37138_Capacity LOD1: pallets=6/6 boxes=6/6 triangles=3930 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_D1_W37138_Capacity LOD1",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_D1_W37138_Capacity LOD2: pallets=6/6 boxes=6/6 triangles=2144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_D1_W37138_Capacity LOD2",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_D1_W37138_Capacity LOD3: pallets=6/6 boxes=6/6 triangles=2144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_D1_W37138_Capacity LOD3",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_D1_W37619_Capacity LOD0: pallets=6/6 boxes=6/6 triangles=7144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_D1_W37619_Capacity LOD0",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_D1_W37619_Capacity LOD1: pallets=6/6 boxes=6/6 triangles=3930 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_D1_W37619_Capacity LOD1",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_D1_W37619_Capacity LOD2: pallets=6/6 boxes=6/6 triangles=2144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_D1_W37619_Capacity LOD2",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "SM_GHS_V2Rack_D1_W37619_Capacity LOD3: pallets=6/6 boxes=6/6 triangles=2144 missing_pallets=[]",
+						"context": "SM_GHS_V2Rack_D1_W37619_Capacity LOD3",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.31-06.52.12"
+				}
+			],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CompleteStableSlotsAndExactEndpoints",
+			"fullTestPath": "GHS.StorageCapacity.CompleteStableSlotsAndExactEndpoints",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.015952300280332565,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "GroundPlanePan",
+			"fullTestPath": "GHS.WarehouseCamera.Composition.GroundPlanePan",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.019011300057172775,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "StartupViewportResizeReframesOverviewOnly",
+			"fullTestPath": "GHS.WarehouseCamera.Composition.StartupViewportResizeReframesOverviewOnly",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.076762795448303223,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ZoomKeepsRemotePan",
+			"fullTestPath": "GHS.WarehouseCamera.Composition.ZoomKeepsRemotePan",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.018175400793552399,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ExplicitLongDurationAndCurrentPose",
+			"fullTestPath": "GHS.WarehouseCamera.Focus.ExplicitLongDurationAndCurrentPose",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.017445500940084457,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ExternalTargetGroundDragCannotClampOrExpandOutwards",
+			"fullTestPath": "GHS.WarehouseCamera.Focus.ExternalTargetGroundDragCannotClampOrExpandOutwards",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.01681629940867424,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "GroundPanAndLegacyResetPreserveContract",
+			"fullTestPath": "GHS.WarehouseCamera.Focus.GroundPanAndLegacyResetPreserveContract",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.018805496394634247,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "HighAltitudeOrbitZoomAndReset",
+			"fullTestPath": "GHS.WarehouseCamera.Focus.HighAltitudeOrbitZoomAndReset",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.017170600593090057,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ModelCenterAndFramingSurviveOrbitAndZoom",
+			"fullTestPath": "GHS.WarehouseCamera.Focus.ModelCenterAndFramingSurviveOrbitAndZoom",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016936499625444412,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "OrbitModeRejectsGroundPan",
+			"fullTestPath": "GHS.WarehouseCamera.Focus.OrbitModeRejectsGroundPan",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.017670698463916779,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "UnifiedEaseAndInterruption",
+			"fullTestPath": "GHS.WarehouseCamera.Focus.UnifiedEaseAndInterruption",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.018106497824192047,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ActualSpringArmControlsAggregation",
+			"fullTestPath": "GHS.WarehouseCamera.HUD.ActualSpringArmControlsAggregation",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.01650330051779747,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CancelFlushAndHome",
+			"fullTestPath": "GHS.WarehouseCamera.Input.CancelFlushAndHome",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.017645500600337982,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MiddleClickClearsTwinSelection",
+			"fullTestPath": "GHS.WarehouseCamera.Input.MiddleClickClearsTwinSelection",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.017551299184560776,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MiddleClickResetsOverview",
+			"fullTestPath": "GHS.WarehouseCamera.Input.MiddleClickResetsOverview",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.017934899777173996,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MouseGestures",
+			"fullTestPath": "GHS.WarehouseCamera.Input.MouseGestures",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.017228201031684875,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "RejectNonFiniteValues",
+			"fullTestPath": "GHS.WarehouseCamera.Input.RejectNonFiniteValues",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.017665401101112366,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "TwinFastRelease",
+			"fullTestPath": "GHS.WarehouseCamera.Input.TwinFastRelease",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.017554599791765213,
+			"dateTime": "2026.10.31-06.52.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Cancellation",
+			"fullTestPath": "GHS.WarehouseCamera.MapDrag.Cancellation",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.017502900213003159,
+			"dateTime": "2026.10.31-06.52.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FastUpgradeNeverRestartsOrSlowsOpening",
+			"fullTestPath": "GHS.WarehouseRoof.FastUpgradeNeverRestartsOrSlowsOpening",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016933400183916092,
+			"dateTime": "2026.10.31-06.52.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "InvalidDeltaAndImmediateRestoreRemainStable",
+			"fullTestPath": "GHS.WarehouseRoof.InvalidDeltaAndImmediateRestoreRemainStable",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016544599086046219,
+			"dateTime": "2026.10.31-06.52.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ManualRevealKeepsInteriorLockedUntilComplete",
+			"fullTestPath": "GHS.WarehouseRoof.ManualRevealKeepsInteriorLockedUntilComplete",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016809999942779541,
+			"dateTime": "2026.10.31-06.52.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MaterialOverrideAndIdleTickLifecycle",
+			"fullTestPath": "GHS.WarehouseRoof.MaterialOverrideAndIdleTickLifecycle",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.018401198089122772,
+			"dateTime": "2026.10.31-06.52.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MissingRoofMapDoesNotLockInteriorOrTick",
+			"fullTestPath": "GHS.WarehouseRoof.MissingRoofMapDoesNotLockInteriorOrTick",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.01676269993185997,
+			"dateTime": "2026.10.31-06.52.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PickingPreservesOfficeNotchAndTransform",
+			"fullTestPath": "GHS.WarehouseRoof.PickingPreservesOfficeNotchAndTransform",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016405899077653885,
+			"dateTime": "2026.10.31-06.52.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ReversalPreservesApertureAndRemainingTravel",
+			"fullTestPath": "GHS.WarehouseRoof.ReversalPreservesApertureAndRemainingTravel",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"10B385544280A8F276CDF59E0DA991DD"
+			],
+			"duration": 0.016697898507118225,
+			"dateTime": "2026.10.31-06.52.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

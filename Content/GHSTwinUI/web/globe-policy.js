@@ -24,13 +24,33 @@ function nextState(previous,message){
  if(!['idle','selected','loading','flying','revealing','warehouse','returning','error'].includes(candidate.phase)||!string(candidate.selectedId)||!boolean(candidate.stageVisible)
   ||!optional(message,'warehouses',catalogValid)||!projectionsValid(candidate.pois)||!projectionsValid(candidate.countries,true)||!optional(candidate,'error',string)||!optional(candidate,'reducedMotion',boolean))return null;
  const transition=candidate.transition;
- if(!object(transition)||!finite(transition.opacity)||transition.opacity<0||transition.opacity>1||!optional(transition,'progress',finite)||!optional(transition,'generation',value=>Number.isSafeInteger(value)&&value>=0)||!optional(transition,'awaitingCurtain',boolean))return null;
+ if(!object(transition)||!finite(transition.opacity)||transition.opacity<0||transition.opacity>1||!optional(transition,'progress',finite)||!optional(transition,'generation',value=>Number.isSafeInteger(value)&&value>=0)||!optional(transition,'awaitingCurtain',boolean)||!optional(transition,'waitingForDestination',boolean))return null;
  for(const key of ['width','height'])if(!optional(transition,key,value=>finite(value)&&value>=0))return null;
  if(transition.awaitingCurtain&&(!Number.isSafeInteger(transition.generation)||!(transition.width>0)||!(transition.height>0)))return null;
  if(!optional(candidate,'viewport',value=>object(value)&&finite(value.width)&&value.width>0&&finite(value.height)&&value.height>0))return null;
  return candidate;
 }
 function warehouseRegion(w){return typeof w.region==='string'&&w.region.trim()?w.region.trim():'未分区';}
+function beginSceneGesture(x,y,selectedId){return {startX:x,startY:y,x,y,selectedId,maxTravel:0,dragging:false,dx:0,dy:0};}
+function moveSceneGesture(gesture,x,y,threshold=5){
+ if(!finite(x)||!finite(y))return {...gesture,dx:0,dy:0};
+ const maxTravel=Math.max(gesture.maxTravel,Math.hypot(x-gesture.startX,y-gesture.startY)),dragging=gesture.dragging||maxTravel>=threshold;
+ return {...gesture,x,y,maxTravel,dragging,dx:dragging?x-(gesture.dragging?gesture.x:gesture.startX):0,dy:dragging?y-(gesture.dragging?gesture.y:gesture.startY):0};
+}
+function isBlankSceneClick(gesture,{cancelled=false,blank=true,selectedId='',phase='idle'}={}){
+ return !!gesture&&!cancelled&&blank&&!gesture.dragging&&!!selectedId&&gesture.selectedId===selectedId&&['idle','selected','error'].includes(phase);
+}
+function motionPreference(saved){return saved==='reduced'?'reduced':'normal';}
+function entryRequestState(current,event){
+ if(event==='request')return 'pending';
+ if(['cancel','error','warehouse'].includes(event))return 'idle';
+ if(['loading','flying','revealing'].includes(event))return 'acknowledged';
+ return current==='pending'?'pending':'idle';
+}
+function transitionNotice(phase,transition,error=''){
+ const active=['loading','flying','revealing','returning'].includes(phase),failure=active&&!!error,waiting=active&&!failure&&transition.waitingForDestination===true&&transition.opacity>=1;
+ return {active,error:failure,waiting,text:failure?error:waiting?'仓库正在初始化，请稍候':phase==='returning'?'正在返回全球':'正在进入仓库'};
+}
 // Budgets are independent of catalog size: thousands of sites never become thousands of moving DOM nodes.
 function markers(pois,selectedId,rect,cellSize=64,maxMarkers=48){
  const buckets=new Map(),selected=[];
@@ -44,5 +64,5 @@ function markers(pois,selectedId,rect,cellSize=64,maxMarkers=48){
  return selected.concat(result);
 }
 function page(warehouses,{query='',region='',ids=null,offset=0,limit=40}={}){const q=query.trim().toLocaleLowerCase(),allowed=ids?new Set(ids):null;const matches=warehouses.filter(w=>(!allowed||allowed.has(w.id))&&(!region||warehouseRegion(w)===region)&&(!q||(w.name+' '+(w.city||'')+' '+(w.address||'')).toLocaleLowerCase().includes(q)));return {total:matches.length,rows:matches.slice(offset,offset+Math.min(80,Math.max(1,limit)))};}
-return {markers,page,nextState,warehouseRegion};
+return {markers,page,nextState,warehouseRegion,beginSceneGesture,moveSceneGesture,isBlankSceneClick,motionPreference,entryRequestState,transitionNotice};
 });
