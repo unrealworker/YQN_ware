@@ -37,7 +37,7 @@ UGHSStorageCapacityComponent::UGHSStorageCapacityComponent()
 void UGHSStorageCapacityComponent::BeginPlay()
 {
     Super::BeginPlay();
-    InitializeForWorld();
+    if(!bDeferWorldInitialization)InitializeForWorld();
 }
 
 bool UGHSStorageCapacityComponent::InitializeForWorld()
@@ -285,6 +285,12 @@ FString UGHSStorageCapacityComponent::GetReportJson() const
 
 void UGHSStorageCapacityComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    ResetForWorld();
+    Super::EndPlay(EndPlayReason);
+}
+
+void UGHSStorageCapacityComponent::ResetForWorld()
+{
     if(GetWorld()) GetWorld()->GetTimerManager().ClearTimer(ShadowCacheSettleTimer);
     for(FGroup& Group:Groups) if(auto* Component=Group.Component.Get())
     {
@@ -298,5 +304,6 @@ void UGHSStorageCapacityComponent::EndPlay(const EEndPlayReason::Type EndPlayRea
     }
     for(int32 Index=0;Index<SourceMaterialSlots.Num();++Index)
         if(auto* Component=SourceMaterialSlots[Index].Key.Get()) Component->SetMaterial(SourceMaterialSlots[Index].Value,SourceMaterials[Index]);
-    Super::EndPlay(EndPlayReason);
+    Groups.Empty();GroupByComponent.Empty();RackMaterials.Empty();FloorMaterials.Empty();
+    SourceMaterials.Empty();SourceMaterialSlots.Empty();bInitialized=false;bStorageVisible=true;InitializationError.Empty();
 }

@@ -5,7 +5,6 @@
 #include "Materials/MaterialInterface.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialInstanceDynamic.h"
-#include "UObject/ConstructorHelpers.h"
 
 namespace
 {
@@ -40,15 +39,14 @@ UGHSWarehouseRoofComponent::UGHSWarehouseRoofComponent()
     {
         const FString Name=FString(TEXT("M_Scan_"))+SourceName;
         const FString Path=FString(TEXT("/Game/GHSZcoolSmartFactory/Roof/ScanReveal/"))+Name+TEXT(".")+Name;
-        ConstructorHelpers::FObjectFinderOptional<UMaterialInterface> Material(*Path);
-        DissolveTemplates.Add(Material.Get());
+        DissolveTemplates.Add(TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(Path)));
     }
 }
 
 void UGHSWarehouseRoofComponent::BeginPlay()
 {
     Super::BeginPlay();
-    InitializeRoof();
+    if(!bDeferWorldInitialization)InitializeRoof();
 }
 
 void UGHSWarehouseRoofComponent::InitializeRoof()
@@ -124,7 +122,7 @@ void UGHSWarehouseRoofComponent::ApplyDissolveMaterials()
             UMaterialInterface* Template=nullptr;
             const FString SourceName=Source && Source->GetMaterial()?Source->GetMaterial()->GetName():FString();
             for(int32 I=0;I<UE_ARRAY_COUNT(SourceNames);++I)
-                if(SourceName==SourceNames[I] && DissolveTemplates.IsValidIndex(I)) Template=DissolveTemplates[I];
+                if(SourceName==SourceNames[I] && DissolveTemplates.IsValidIndex(I)) Template=DissolveTemplates[I].LoadSynchronous();
             UMaterialInstanceDynamic* Instance=Template?UMaterialInstanceDynamic::Create(Template,this):nullptr;
             DissolveInstances.Add(Instance);
         }
@@ -256,9 +254,17 @@ bool UGHSWarehouseRoofComponent::RayHitsRoofFootprint(const FVector& Origin,cons
 
 void UGHSWarehouseRoofComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    ResetForWorld();
+    Super::EndPlay(EndPlayReason);
+}
+
+void UGHSWarehouseRoofComponent::ResetForWorld()
+{
     RestoreRoof(false);
     for(const auto& Entry:ShellActors) if(Entry.Actor.IsValid()) Entry.Actor->SetActorHiddenInGame(Entry.bOriginallyHidden);
-    Super::EndPlay(EndPlayReason);
+    ShellActors.Empty();bShellInitialized=false;bBuildingVisible=true;
+    RoofActor=nullptr;RoofMesh=nullptr;SourceMaterials.Empty();DissolveInstances.Empty();
+    Transition=FGHSWarehouseRoofTransition();SetComponentTickEnabled(false);
 }
 
 FGHSWarehouseRoofReplayState UGHSWarehouseRoofComponent::CaptureReplayState()

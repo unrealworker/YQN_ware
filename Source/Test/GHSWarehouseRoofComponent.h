@@ -83,6 +83,7 @@ class TEST_API UGHSWarehouseRoofComponent : public UActorComponent
     GENERATED_BODY()
 public:
     UGHSWarehouseRoofComponent();
+    bool bDeferWorldInitialization=false;
     virtual void TickComponent(float DeltaTime,ELevelTick TickType,FActorComponentTickFunction* ThisTickFunction) override;
 
     UFUNCTION(BlueprintCallable, Category="Warehouse Roof")
@@ -116,6 +117,8 @@ public:
     bool HitRoofRay(const FVector& Origin,const FVector& Direction) const;
     /** Called at BeginPlay; also supports headless world fixtures. */
     void InitializeRoof();
+    /** Restore runtime overrides and detach from a warehouse before streaming it out. */
+    void ResetForWorld();
     FGHSWarehouseRoofReplayState CaptureReplayState();
     void RestoreReplayState(const FGHSWarehouseRoofReplayState& Saved,bool bSavedBuilding);
     static bool RayHitsRoofFootprint(const FVector& Origin,const FVector& Direction,const FTransform& RoofTransform);
@@ -136,7 +139,7 @@ private:
     UPROPERTY(Transient) TObjectPtr<UStaticMeshComponent> RoofMesh;
     UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInterface>> SourceMaterials;
     UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInstanceDynamic>> DissolveInstances;
-    /** Hard asset references keep all six current source-shading variants in cooked builds. */
-    UPROPERTY() TArray<TObjectPtr<UMaterialInterface>> DissolveTemplates;
+    /** Soft references preserve cooker discovery without loading warehouse shading on the globe. */
+    UPROPERTY() TArray<TSoftObjectPtr<UMaterialInterface>> DissolveTemplates;
     FGHSWarehouseRoofTransition Transition;
 };

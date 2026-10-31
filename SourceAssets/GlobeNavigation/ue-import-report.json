@@ -1,0 +1,102 @@
+{
+  "map": "/Game/Maps/GHS_GlobalWarehouse",
+  "mesh": "/Game/GlobeNavigation/SM_Earth.SM_Earth",
+  "lodCount": 3,
+  "lods": [
+    {
+      "index": 0,
+      "vertices": 33151,
+      "triangles": 65024,
+      "buildScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "source": "D:\\UEPro\\Test\\SourceAssets\\GlobeNavigation\\SM_Earth_LOD0.fbx"
+    },
+    {
+      "index": 1,
+      "vertices": 8383,
+      "triangles": 16128,
+      "buildScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "source": "D:\\UEPro\\Test\\SourceAssets\\GlobeNavigation\\SM_Earth_LOD1.fbx"
+    },
+    {
+      "index": 2,
+      "vertices": 2143,
+      "triangles": 3968,
+      "buildScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "source": "D:\\UEPro\\Test\\SourceAssets\\GlobeNavigation\\SM_Earth_LOD2.fbx"
+    }
+  ],
+  "radius": 102.74065277422297,
+  "radiusUnit": "cm",
+  "actors": 5,
+  "importDataType": "FbxStaticMeshImportData",
+  "importSettings": {
+    "convert_scene": true,
+    "convert_scene_unit": true,
+    "force_front_x_axis": false,
+    "transform_vertex_to_absolute": true,
+    "bake_pivot_in_vertex": false,
+    "import_uniform_scale": 1.0,
+    "import_translation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "import_rotation": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "sourceFiles": [
+    "D:/UEPro/Test/SourceAssets/GlobeNavigation/SM_Earth_LOD0.fbx"
+  ],
+  "calibrationCentersCm": {
+    "Greenwich": [
+      100.30000305175781,
+      0.0,
+      0.0
+    ],
+    "East90": [
+      0.0,
+      -100.30000305175781,
+      0.0
+    ],
+    "North": [
+      0.0,
+      0.0,
+      100.29999923706055
+    ],
+    "GHS": [
+      -38.48258018493652,
+      74.15034484863281,
+      56.75477409362793
+    ]
+  },
+  "ueGeographicAxis": [
+    1,
+    -1,
+    1
+  ],
+  "geographicAxisCompensation": [
+    1,
+    1,
+    1
+  ],
+  "earthActorScale": [
+    100,
+    100,
+    100
+  ]
+}

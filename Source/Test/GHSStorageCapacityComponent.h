@@ -25,9 +25,11 @@ class TEST_API UGHSStorageCapacityComponent : public UActorComponent
     GENERATED_BODY()
 public:
     UGHSStorageCapacityComponent();
+    bool bDeferWorldInitialization=false;
     /** Idempotent setup; call after the map's storage components are registered. */
     UFUNCTION(BlueprintCallable, Category="Warehouse Storage")
     bool InitializeForWorld();
+    void ResetForWorld();
     /** Values are fractions [0,1], NaN/Inf preserve the previous value. */
     UFUNCTION(BlueprintCallable, Category="Warehouse Storage")
     void SetCapacity(float Rack, float Floor);

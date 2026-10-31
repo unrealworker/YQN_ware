@@ -1,0 +1,54 @@
+{
+  "generator": "Blender 5.2.2 LTS",
+  "lods": [
+    {
+      "name": "SM_Earth_LOD0",
+      "vertices": 33153,
+      "triangles": 65024,
+      "radiusMeters": 1,
+      "heightExaggerationMaxMeters": 0.024
+    },
+    {
+      "name": "SM_Earth_LOD1",
+      "vertices": 8385,
+      "triangles": 16128,
+      "radiusMeters": 1,
+      "heightExaggerationMaxMeters": 0.024
+    },
+    {
+      "name": "SM_Earth_LOD2",
+      "vertices": 2145,
+      "triangles": 3968,
+      "radiusMeters": 1,
+      "heightExaggerationMaxMeters": 0.024
+    }
+  ],
+  "coordinateConvention": "canonical geographic Cartesian: X=cos(lat)cos(lon),Y=cos(lat)sin(lon),Z=sin(lat); Blender meters; FBX authored in centimeters metadata; verify importer axis conversion",
+  "uvConvention": "u=(lon+180)/360; v=(lat+90)/180. PNG top row north.",
+  "textures": {
+    "baseColor": "Textures/T_Earth_BaseColor.png",
+    "normalUnrealDirectX": "Textures/T_Earth_Normal_UE.png",
+    "normalBlenderOpenGL": "Textures/T_Earth_Normal_OpenGL.png",
+    "roughness": "Textures/T_Earth_Roughness.png"
+  },
+  "baseRadiusUECentimeters": 100,
+  "relief": "NASA GEBCO 0-6400m scaled plus elevated land mask; max radial exaggeration2.4% for atlas legibility",
+  "camera": {
+    "longitude": -84,
+    "latitude": 17,
+    "orthographicScaleMeters": 2.17
+  },
+  "warehouse": {
+    "id": "ghs-ca-us",
+    "latitude": 34.190629582941,
+    "longitude": -117.428430792609,
+    "crs": "EPSG:4326",
+    "address": "17335 Glen Helen Pkwy, San Bernardino, California, 92407",
+    "geocoder": "Esri World Geocoding Service",
+    "matchType": "PointAddress",
+    "score": 100,
+    "insideOsmBuilding": true,
+    "osmWay": 521644442,
+    "note": "Address-level location validated inside matching OSM industrial building. Not a survey control point. Historical OSM tenant name is not asserted as current GHS tenant."
+  }
+}

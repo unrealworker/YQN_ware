@@ -56,6 +56,9 @@ public:
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Warehouse Replay")
     TObjectPtr<UGHSOrderReplaySession> OrderReplay;
     void SendSearchResponse(const FString& Json);
+    /** Also used when a warehouse becomes visible as a streamed destination. */
+    void InitializeWarehouseExperience(bool bEnableTraffic=true);
+    void ShutdownWarehouseExperience();
 protected:
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;

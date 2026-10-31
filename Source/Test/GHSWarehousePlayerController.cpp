@@ -48,23 +48,7 @@ void AGHSWarehousePlayerController::BeginPlay()
     {
         if (GetWorld()->GetMapName().Contains(TEXT("ZcoolSmartFactory")))
         {
-            CampusTraffic=GetWorld()->SpawnActor<AGHSCampusTrafficActor>();
-            if(StorageCapacity) StorageCapacity->InitializeForWorld();
-            TwinHUDWidget = CreateWidget<UGHSTwinHUDWidget>(this);
-            if (TwinHUDWidget && GetWorld()->GetGameViewport())
-            {
-                // The warehouse has its own 1080p design scale. The surrounding
-                // game layer already normalizes Windows DPI; cancel only its curve.
-                TwinViewportWidget = SNew(SDPIScaler)
-                    .DPIScale_Lambda([this]()
-                    {
-                        FVector2D Pixels(1920,1080);
-                        if(GetWorld() && GetWorld()->GetGameViewport()) GetWorld()->GetGameViewport()->GetViewportSize(Pixels);
-                        return float(FGHSTwinViewport::FromPixels(Pixels).SlateScale(UWidgetLayoutLibrary::GetViewportScale(this)));
-                    })
-                    [TwinHUDWidget->TakeWidget()];
-                GetWorld()->GetGameViewport()->AddViewportWidgetContent(TwinViewportWidget.ToSharedRef(),20);
-            }
+            InitializeWarehouseExperience();
         }
         else
         {
@@ -88,14 +72,40 @@ void AGHSWarehousePlayerController::BeginPlay()
 
 void AGHSWarehousePlayerController::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-    if(OrderReplay) OrderReplay->Stop();
     if(SearchStreamingInput) SearchStreamingInput->OnInputEvent.RemoveDynamic(this,&AGHSWarehousePlayerController::HandleStreamingInput);
+    ShutdownWarehouseExperience();
+    Super::EndPlay(EndPlayReason);
+}
+
+void AGHSWarehousePlayerController::InitializeWarehouseExperience(bool bEnableTraffic)
+{
+    if(!IsLocalController()||TwinHUDWidget)return;
+    if(WarehouseRoof){WarehouseRoof->ResetForWorld();WarehouseRoof->InitializeRoof();}
+    if(StorageCapacity){StorageCapacity->ResetForWorld();StorageCapacity->InitializeForWorld();}
+    if(bEnableTraffic)CampusTraffic=GetWorld()->SpawnActor<AGHSCampusTrafficActor>();
+    TwinHUDWidget=CreateWidget<UGHSTwinHUDWidget>(this);
+    if(TwinHUDWidget&&GetWorld()->GetGameViewport())
+    {
+        TwinViewportWidget=SNew(SDPIScaler).DPIScale_Lambda([this]()
+        {
+            FVector2D Pixels(1920,1080);
+            if(GetWorld()&&GetWorld()->GetGameViewport())GetWorld()->GetGameViewport()->GetViewportSize(Pixels);
+            return float(FGHSTwinViewport::FromPixels(Pixels).SlateScale(UWidgetLayoutLibrary::GetViewportScale(this)));
+        })[TwinHUDWidget->TakeWidget()];
+        GetWorld()->GetGameViewport()->AddViewportWidgetContent(TwinViewportWidget.ToSharedRef(),20);
+    }
+}
+
+void AGHSWarehousePlayerController::ShutdownWarehouseExperience()
+{
+    if(OrderReplay)OrderReplay->Stop();
     CancelCameraDrag();
     if (TruckHUDWidget) { TruckHUDWidget->RemoveFromParent(); TruckHUDWidget = nullptr; }
     if (TwinViewportWidget.IsValid() && GetWorld()->GetGameViewport()) GetWorld()->GetGameViewport()->RemoveViewportWidgetContent(TwinViewportWidget.ToSharedRef());
     TwinViewportWidget.Reset(); TwinHUDWidget=nullptr;
     if(CampusTraffic) { CampusTraffic->Destroy(); CampusTraffic=nullptr; }
-    Super::EndPlay(EndPlayReason);
+    if(WarehouseRoof)WarehouseRoof->ResetForWorld();
+    if(StorageCapacity)StorageCapacity->ResetForWorld();
 }
 
 #if UE_VERSION_OLDER_THAN(5, 6, 0)

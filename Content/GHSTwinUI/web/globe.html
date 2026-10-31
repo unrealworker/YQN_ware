@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>YQN海外仓 · 全球仓库</title><link rel="stylesheet" href="globe.css"></head>
+<body data-phase="idle" data-world="globe">
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="warehouse" viewBox="0 0 24 24"><path d="m2 9 10-7 10 7M4 8v14h16V8M8 22V11h8v11M8 15h8M8 18h8"/></symbol>
+<symbol id="chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+<symbol id="pin" viewBox="0 0 24 24"><path d="M19 10c0 6-7 12-7 12S5 16 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="search-icon" viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></symbol>
+<symbol id="mouse" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="6"/><path d="M12 2v8M6 10h12M12 5v2"/></symbol>
+</defs></svg>
+<header class="topbar"><div class="brand"><span class="app-icon"><i></i><i></i><i></i><i></i></span><strong>YQN海外仓</strong><span class="brand-divider"></span><span class="product-name">三维运营中心</span></div><div class="account"><span class="clock-icon">◷</span><div><span id="clock"></span><small id="date"></small></div><span class="brand-divider"></span><span class="avatar" aria-hidden="true">●</span></div></header>
+<main id="stage" aria-label="地球，拖动或方向键旋转，滚轮或加减键缩放" tabindex="0">
+  <div class="intro"><h1>从全球，抵达每一座仓库</h1><p>选择地图上的仓库，进入三维场景</p></div>
+  <div id="countries" aria-hidden="true"></div><div id="pois"></div>
+  <div class="gesture-hint"><svg aria-hidden="true"><use href="#mouse"/></svg> 拖拽旋转 · 滚轮缩放 · 点击点位选择仓库</div>
+  <nav class="map-controls" aria-label="地球视图控制"><button data-command="home" aria-label="恢复默认视角" class="compass"><span>◆</span><small>N</small></button><button data-command="zoom" data-steps="1" aria-label="放大">＋</button><button data-command="zoom" data-steps="-1" aria-label="缩小">−</button><button data-command="fullscreen" aria-label="全屏显示">⛶</button></nav>
+</main>
+<aside class="sidebar"><h2>仓库导航</h2><p class="subtitle">选择仓库，进入三维运营中心</p>
+<p id="error" role="alert"></p><div class="panel-stack"><section id="initial" class="panel-view" data-active="true">
+<div class="empty-illustration" aria-hidden="true"><svg class="mini-globe" viewBox="0 0 180 155"><defs><radialGradient id="mini-ocean" cx="30%" cy="25%" r="85%"><stop stop-color="#f1f6ff"/><stop offset="1" stop-color="#d3e2ff"/></radialGradient><clipPath id="mini-earth"><circle cx="90" cy="77" r="65"/></clipPath></defs><circle cx="90" cy="77" r="65" fill="url(#mini-ocean)"/><g clip-path="url(#mini-earth)" fill="#b9d0fa" opacity=".65"><path d="M35 32 49 25 59 27 66 20 77 25 73 35 62 39 66 47 58 53 53 64 44 64 43 73 35 65 31 52ZM58 65 68 71 71 81 80 86 85 99 78 111 73 127 66 135 62 119 57 105 57 91 51 79ZM86 17 97 13 102 22 96 32 88 34 82 26ZM100 40 111 33 122 36 130 29 148 36 154 52 143 62 134 59 130 71 117 69 113 59 102 58 98 49ZM104 64 118 65 128 75 122 87 115 100 107 94 101 81 96 73ZM130 106 143 100 153 109 148 119 135 119Z"/></g><ellipse cx="90" cy="85" rx="88" ry="20" transform="rotate(-17 90 85)" fill="none" stroke="#8caaff" stroke-width="1.2"/><path d="M136 42c0 12-15 29-15 29s-15-17-15-29a15 15 0 0 1 30 0Z" fill="#3272ff" stroke="white" stroke-width="2"/><circle cx="121" cy="42" r="5" fill="white"/></svg></div>
+<h3 class="empty-title">选择一座仓库</h3><p class="empty-copy">点击地球上的仓库点位<br>或从下方列表选择，查看仓库详情</p>
+<div class="list-section"><h3>可选仓库 <span id="count">0</span></h3><div class="filters"><select id="region" aria-label="仓库区域"><option value="">全部区域</option></select><label class="search"><svg><use href="#search-icon"/></svg><input id="search" type="search" placeholder="搜索仓库名称" aria-label="搜索仓库名称"></label></div><div id="warehouse-list"></div><p class="list-hint">选择后可查看概况并进入仓库</p></div>
+</section>
+<section id="detail" class="panel-view" data-active="false" aria-hidden="true" inert>
+<button class="breadcrumb" id="clear"><svg><use href="#pin"/></svg><span id="breadcrumb">全球 / 北美 / 美国</span></button>
+<article class="warehouse-card"><div class="photo-wrap"><img id="thumbnail" alt="仓库三维场景预览"></div><div class="card-title"><h3 id="name" tabindex="-1"></h3><span class="available"><i></i>已接入</span></div><p id="city"></p><p id="address"></p><div class="metrics"><div><small>现存数量</small><strong id="inventory">—</strong></div><div><small>库容占用</small><strong id="occupancy">—</strong></div></div><button id="enter" class="primary"><span class="state-slot"><i class="spinner"></i></span><span class="button-label">进入仓库</span><svg><use href="#chevron"/></svg></button></article>
+<div class="recent"><h3>最近访问</h3><div id="recent-list"></div><p id="recent-empty" class="list-hint">暂无最近访问</p></div>
+</section></div></aside>
+<div id="transition" aria-hidden="true" role="status" aria-live="polite" tabindex="-1"><span>正在进入仓库</span></div>
+<button id="back" class="back-button">← 返回全球</button>
+<script src="globe-policy.js"></script><script src="globe.js"></script></body></html>

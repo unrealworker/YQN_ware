@@ -1,0 +1,29 @@
+{
+  "$schema": "./warehouses.schema.json",
+  "schemaVersion": 2,
+  "coordinateSystem": "WGS84",
+  "warehouses": [
+    {
+      "id": "ghs-ca",
+      "runtimeProfile": "ghs",
+      "features": [
+        "warehouse-ui",
+        "traffic"
+      ],
+      "name": "GHS · 加州仓库",
+      "city": "San Bernardino, California",
+      "cityShort": "San Bernardino, CA",
+      "region": "北美",
+      "country": "美国",
+      "address": "17335 Glen Helen Pkwy, San Bernardino, CA 92407, USA",
+      "latitude": 34.190629582941,
+      "longitude": -117.428430792609,
+      "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
+      "thumbnail": "assets/warehouse-overview.png",
+      "inventory": null,
+      "occupancy": null,
+      "coordinateSource": "ArcGIS World Geocoder PointAddress score 100; OSM way 521644442 address and building cross-check",
+      "coordinateVerifiedAt": "2026-10-31"
+    }
+  ]
+}
