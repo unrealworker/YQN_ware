@@ -118,6 +118,7 @@ public:
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") float GetHUDScale() const { return float(Viewport.Scale); }
     UPROPERTY(BlueprintReadOnly, Category="Warehouse Twin") FString SelectedId;
     UPROPERTY(BlueprintReadOnly, Category="Warehouse Twin") bool bBrowserReady = false;
+    bool IsInitialViewReady()const{return bBrowserReady&&!bInitialViewPending;}
     UPROPERTY(BlueprintReadOnly, Category="Warehouse Twin") FString LastBrowserReport;
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool HandleChromeClick(FVector2D Position);
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") float GetPanelTransitionProgress() const { return PanelVisibilityProgress; }

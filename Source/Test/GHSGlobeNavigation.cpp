@@ -114,7 +114,7 @@ void AGHSGlobePlayerController::BeginPlay()
             const auto* Volume=Cast<APostProcessVolume>(*It);
             StageActors.Add({*It,It->IsHidden(),It->IsActorTickEnabled(),Volume&&Volume->bEnabled});
         }
-        if(It->ActorHasTag(TEXT("GHS_GlobeRoot"))){GlobeRoot=*It;GlobeCenter=It->GetActorLocation();}
+        if(It->ActorHasTag(TEXT("GHS_GlobeRoot"))){GlobeRoot=*It;GlobeCenter=It->GetActorLocation();InitialGlobeRotation=It->GetActorQuat();}
     }
     GlobeHUD=CreateWidget<UGHSGlobeHUD>(this);
     if(GlobeHUD&&GetWorld()->GetGameViewport())
@@ -155,7 +155,8 @@ void AGHSGlobePlayerController::ResetGlobeCamera(bool Immediate)
     if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))
     {
         Camera->WarehouseCamera->FieldOfView=20.f;
-        Camera->MinimumPitch=-80;Camera->MaximumPitch=80;Camera->MinimumZoom=GlobeRadius*1.12f;Camera->MaximumZoom=GlobeRadius*20;
+        Camera->SetObjectOrbitNavigationEnabled(true);
+        Camera->MinimumPitch=-80;Camera->MaximumPitch=80;Camera->MinimumZoom=GlobeRadius*2.5f;Camera->MaximumZoom=GlobeRadius*20;
         Camera->MinimumCameraHeight=0;
         // Perspective tangent sphere fit: silhouette radius is f*R/sqrt(d*d-R*R).
         // Match the reference's breathing room without clipping at narrow aspect ratios.
@@ -236,13 +237,12 @@ void AGHSGlobePlayerController::PollDestination()
 }
 void AGHSGlobePlayerController::StartFlight()
 {
-    const auto* W=Selected();if(!W)return;Phase=EPhase::Flying;PhaseTime=0;MaskOpacity=0;
+    const auto* W=Selected();if(!W)return;Phase=EPhase::Flying;PhaseTime=0;MaskOpacity=0;bArrivalStarted=false;bResettingGlobe=false;
     BeginCurtain();
     if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))
     {
-        const FVector P=Position(W->Latitude,W->Longitude),Normal=(P-GlobeCenter).GetSafeNormal();
-        Camera->MinimumZoom=GlobeRadius*.25f;
-        Camera->FocusOnTarget(P,GlobeRadius*.5f,(-Normal).Rotation(),Viewport,ScenePosition+SceneSize*.5,bReducedMotion?0:1.f);
+        Camera->FreezeCurrentPose();
+        Flight.Begin(Camera->CaptureReplayPose(),GlobeCenter,GlobeRadius,Position(W->Latitude,W->Longitude));
     }
     PushState();
 }
@@ -333,7 +333,16 @@ void AGHSGlobePlayerController::Command(const FString& Json)
         PushState();return;
     }
     if(Action==TEXT("clear")){SelectedId.Empty();Phase=EPhase::Idle;bEntryRequested=false;bPreloadRequested=false;UnloadDestination();Error.Empty();PushState();return;}
-    if(Action==TEXT("home")||Action==TEXT("reset")){bEntryRequested=false;Phase=SelectedId.IsEmpty()?EPhase::Idle:EPhase::Selected;Error.Empty();ResetGlobeCamera(bReducedMotion);PushState();return;}
+    if(Action==TEXT("home")||Action==TEXT("reset"))
+    {
+        bEntryRequested=false;bInteracting=false;Phase=SelectedId.IsEmpty()?EPhase::Idle:EPhase::Selected;Error.Empty();
+        if(GlobeRoot.IsValid())
+        {
+            ResetStartRotation=GlobeRoot->GetActorQuat();GlobeResetTime=0;bResettingGlobe=!bReducedMotion;
+            if(bReducedMotion)GlobeRoot->SetActorRotation(InitialGlobeRotation);
+        }
+        ResetGlobeCamera(bReducedMotion);PushState();return;
+    }
     if(Phase==EPhase::Loading)return;
     if(Action==TEXT("fullscreen"))
     {
@@ -349,6 +358,7 @@ void AGHSGlobePlayerController::Command(const FString& Json)
     if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))
     {
         double DX,DY,Steps;
+        if(Action==TEXT("orbit")||Action==TEXT("zoom"))bResettingGlobe=false;
         if(Action==TEXT("orbit")&&Number(O,TEXT("dx"),DX)&&Number(O,TEXT("dy"),DY))Camera->OrbitPixels(FVector2D(FMath::Clamp(DX,-500.,500.),FMath::Clamp(DY,-500.,500.)));
         if(Action==TEXT("zoom")&&Number(O,TEXT("steps"),Steps))Camera->ZoomSteps(float(FMath::Clamp(Steps,-5.,5.)));
     }
@@ -362,12 +372,18 @@ void AGHSGlobePlayerController::PlayerTick(float Dt)
     if(Destination&&!bUnloadRequested&&!Destination->IsLevelLoaded()&&Now-LoadStarted>120&&Phase!=EPhase::Warehouse)
         Fail(TEXT("仓库加载超时，可重新选择后重试"));
     if(Phase==EPhase::Loading&&bEntryRequested&&Destination&&!bUnloadRequested&&LoadedId==SelectedId&&Destination->IsLevelLoaded())StartFlight();
-    if(Phase==EPhase::Idle&&!bReducedMotion&&!bInteracting&&Now-LastInteraction>5&&GlobeRoot.IsValid())
-        GlobeRoot->AddActorWorldRotation(FRotator(0,.25f*Dt*Ease(float(Now-LastInteraction-5)/2),0));
+    if(bResettingGlobe&&GlobeRoot.IsValid())
+    {
+        GlobeResetTime+=Dt;GlobeRoot->SetActorRotation(FQuat::Slerp(ResetStartRotation,InitialGlobeRotation,Ease(GlobeResetTime/.85f)));
+        if(GlobeResetTime>=.85f)bResettingGlobe=false;
+    }
+    if(Phase==EPhase::Idle&&!bReducedMotion&&!bInteracting&&!bResettingGlobe&&Now-LastInteraction>2&&GlobeRoot.IsValid())
+        GlobeRoot->AddActorWorldRotation(FRotator(0,IdleRotationDegreesPerSecond*Dt*Ease(float(Now-LastInteraction-2)),0));
     if(Phase==EPhase::Flying)
     {
-        const float Duration=bReducedMotion?.22f:1.05f;
-        MaskOpacity=Ease((PhaseTime-Duration*.45f)/(Duration*.55f));
+        const float Duration=bReducedMotion?.22f:FGHSGlobeFlight::Duration;
+        if(!bReducedMotion)if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))Camera->RestoreReplayPose(Flight.Sample(PhaseTime/Duration));
+        MaskOpacity=Ease((PhaseTime-Duration*.68f)/(Duration*.27f));
         if(PhaseTime>=Duration&&Destination&&AwaitCurtain())
         {
             MaskOpacity=1;Destination->SetShouldBeVisible(true);
@@ -389,8 +405,10 @@ void AGHSGlobePlayerController::PlayerTick(float Dt)
         if(!Experience||!Experience->IsReady(*this)){PhaseTime=0;MaskOpacity=1;if(Now-LoadStarted>45)Fail(TEXT("仓库界面未就绪，请重试"));}
         else
         {
-            MaskOpacity=1-Ease(PhaseTime/(bReducedMotion?.18f:.65f));
-            if(MaskOpacity<=0){Phase=EPhase::Warehouse;if(GlobeHUD)GlobeHUD->SetCompact(true);PushState();}
+            if(!bArrivalStarted){Experience->BeginArrival(*this,bReducedMotion);bArrivalStarted=true;PhaseTime=0;}
+            const bool Arrived=Experience->TickArrival(*this,Dt);
+            MaskOpacity=1-Ease(PhaseTime/(bReducedMotion?.18f:.55f));
+            if(MaskOpacity<=0&&Arrived){Phase=EPhase::Warehouse;if(GlobeHUD)GlobeHUD->SetCompact(true);PushState();}
         }
     }
     if(Phase==EPhase::Returning)
@@ -512,19 +530,51 @@ void AGHSGlobePlayerController::TickSmokeTest()
     }
     else if(SmokeStep==1&&GetWorld()->GetTimeSeconds()-LastInteraction>8)
     {
-        // Five seconds of interaction cooldown plus three real seconds of idle rotation.
+        // Two seconds of interaction cooldown followed by visible, eased idle rotation.
         SmokeIdleYawEnd=GlobeRoot.IsValid()?GlobeRoot->GetActorRotation().Yaw:SmokeIdleYawStart;
         const double Travel=FMath::Abs(FMath::FindDeltaAngleDegrees(SmokeIdleYawStart,SmokeIdleYawEnd));
-        bSmokeIdleRotationVerified=GlobeRoot.IsValid()&&(bSmokeReducedMotion?Travel<.001:Travel>.05);
+        bSmokeIdleRotationVerified=GlobeRoot.IsValid()&&(bSmokeReducedMotion?Travel<.001:Travel>5.);
         if(!bSmokeIdleRotationVerified)SmokeError=TEXT("Idle globe rotation did not match the requested motion mode");
         if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))
         {
             const double BeforeYaw=Camera->DesiredRotation.Yaw,BeforeZoom=Camera->DesiredZoom;
             Command(TEXT("{\"action\":\"orbit\",\"dx\":30,\"dy\":0}"));Command(TEXT("{\"action\":\"zoom\",\"steps\":1}"));
             if(FMath::IsNearlyEqual(BeforeYaw,Camera->DesiredRotation.Yaw)||Camera->DesiredZoom>=BeforeZoom)SmokeError=TEXT("Camera orbit/zoom bridge did not change the existing camera targets");
-            ResetGlobeCamera(true);
+            for(int32 I=0;I<40;++I)Command(TEXT("{\"action\":\"zoom\",\"steps\":-5}"));
         }
         else SmokeError=TEXT("Existing warehouse camera pawn unavailable");
+        SmokeStep=12;SmokeStepStarted=Now;
+    }
+    else if(SmokeStep==12&&Now-SmokeStepStarted>2)
+    {
+        const auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn());
+        bool InsideBackground=false;
+        if(Camera)for(const auto& Entry:StageActors)if(auto* Actor=Entry.Actor.Get();Actor&&Actor->ActorHasTag(TEXT("GHS_GlobeBackground")))
+        {
+            FVector Center,Extent;Actor->GetActorBounds(false,Center,Extent);
+            InsideBackground=(Camera->WarehouseCamera->GetComponentLocation()-Center).Size()<Extent.GetMin();
+        }
+        bSmokeZoomBounds=Camera&&InsideBackground&&FMath::IsNearlyEqual(Camera->CaptureReplayPose().Distance,Camera->MaximumZoom,1.f)
+            &&Camera->GetActorLocation().Equals(GlobeCenter,.01);
+        if(!bSmokeZoomBounds)SmokeError=TEXT("Maximum zoom escaped background or moved globe pivot");
+        Snapshot(TEXT("05-maximum-zoom-out"));
+        for(int32 I=0;I<40;++I)Command(TEXT("{\"action\":\"zoom\",\"steps\":5}"));
+        SmokeStep=13;SmokeStepStarted=Now;
+    }
+    else if(SmokeStep==13&&Now-SmokeStepStarted>2)
+    {
+        const auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn());
+        bSmokeZoomBounds&=Camera&&FMath::IsNearlyEqual(Camera->CaptureReplayPose().Distance,Camera->MinimumZoom,1.f)
+            &&(Camera->WarehouseCamera->GetComponentLocation()-GlobeCenter).Size()>GlobeRadius;
+        if(!bSmokeZoomBounds)SmokeError=TEXT("Minimum zoom failed surface clearance");
+        Snapshot(TEXT("06-maximum-zoom-in"));Command(TEXT("{\"action\":\"home\"}"));SmokeStep=14;SmokeStepStarted=Now;
+    }
+    else if(SmokeStep==14&&Now-SmokeStepStarted>1.2)
+    {
+        const auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn());
+        bSmokeHomeReset=Camera&&!Camera->IsPoseTransitionActive()&&Camera->GetActorRotation().Equals(FRotator(-32,-96,0),.01)
+            &&Camera->GetActorLocation().Equals(GlobeCenter,.01)&&GlobeRoot.IsValid()&&GlobeRoot->GetActorQuat().Equals(InitialGlobeRotation,.0001);
+        if(!bSmokeHomeReset)SmokeError=TEXT("Home did not restore camera and globe orientation");
         auto Request=MakeShared<FJsonObject>();Request->SetStringField(TEXT("action"),TEXT("select"));Request->SetStringField(TEXT("id"),Registry.GetEntries()[0].Id);Command(Encode(Request));SmokeStep=2;SmokeStepStarted=Now;
     }
     else if(SmokeStep==2&&Phase==EPhase::Selected&&Now-SmokeStepStarted>3)
@@ -573,10 +623,16 @@ void AGHSGlobePlayerController::TickSmokeTest()
         Report->SetNumberField(TEXT("idleYawStart"),SmokeIdleYawStart);Report->SetNumberField(TEXT("idleYawEnd"),SmokeIdleYawEnd);
         Report->SetBoolField(TEXT("cameraFovRestored"),SmokeWarehouseFovChecks==2&&SmokeGlobeFovChecks==2);
         Report->SetBoolField(TEXT("hudRebuilt"),bSmokeHUDRebuilt);
+        Report->SetBoolField(TEXT("zoomBoundsVerified"),bSmokeZoomBounds);Report->SetBoolField(TEXT("homeResetVerified"),bSmokeHomeReset);
+        Report->SetBoolField(TEXT("flightCaptured"),bSmokeFlightCaptured);Report->SetBoolField(TEXT("arrivalCaptured"),bSmokeArrivalCaptured);
         Report->SetBoolField(TEXT("browserReady"),bReady);Report->SetBoolField(TEXT("warehouseUnloadedOnReturn"),!Destination&&!bUnloadRequested);Report->SetStringField(TEXT("scope"),TEXT("Real CEF readiness, viewport screenshots, idle rotation, camera FOV, two warehouse entry/return cycles, HUD recreation and roof reference cleanup; not OS input latency"));
         const FString Folder=FPaths::ProjectSavedDir()/TEXT("GlobeValidation");IFileManager::Get().MakeDirectory(*Folder,true);FFileHelper::SaveStringToFile(Encode(Report),*(Folder/TEXT("result.json")));
         UE_LOG(LogTemp,Display,TEXT("GHS_GLOBE_SMOKE %s"),*Encode(Report));bSmokeTest=false;FPlatformMisc::RequestExitWithStatus(false,SmokeError.IsEmpty()?0:1);
     }
+    if(!bSmokeReducedMotion&&Phase==EPhase::Flying&&PhaseTime>FGHSGlobeFlight::Duration*.5f&&!bSmokeFlightCaptured)
+    {Snapshot(TEXT("07-flight-midpoint"));bSmokeFlightCaptured=true;}
+    if(!bSmokeReducedMotion&&Phase==EPhase::Revealing&&bArrivalStarted&&PhaseTime>.65f&&!bSmokeArrivalCaptured)
+    {Snapshot(TEXT("08-warehouse-arrival"));bSmokeArrivalCaptured=true;}
 #endif
 }
 void AGHSGlobePlayerController::PushState(bool bIncludeCatalog){if(bReady&&GlobeHUD)GlobeHUD->Push(BuildState(bIncludeCatalog));}
@@ -587,12 +643,23 @@ FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
     auto Root=MakeShared<FJsonObject>();Root->SetStringField(TEXT("phase"),Names[int32(Phase)]);Root->SetStringField(TEXT("selectedId"),SelectedId);Root->SetStringField(TEXT("error"),Error);
     Root->SetBoolField(TEXT("reducedMotion"),bReducedMotion);Root->SetBoolField(TEXT("stageVisible"),bStageVisible);
     auto View=MakeShared<FJsonObject>();View->SetNumberField(TEXT("width"),Viewport.X);View->SetNumberField(TEXT("height"),Viewport.Y);Root->SetObjectField(TEXT("viewport"),View);
-    auto Transition=MakeShared<FJsonObject>();Transition->SetNumberField(TEXT("opacity"),MaskOpacity);Transition->SetNumberField(TEXT("progress"),FMath::Clamp(PhaseTime/1.05f,0.f,1.f));
+    auto Transition=MakeShared<FJsonObject>();Transition->SetNumberField(TEXT("opacity"),MaskOpacity);Transition->SetNumberField(TEXT("progress"),FMath::Clamp(PhaseTime/(bReducedMotion?.22f:FGHSGlobeFlight::Duration),0.f,1.f));
     Transition->SetNumberField(TEXT("generation"),Curtain.GetGeneration());
+    Transition->SetBoolField(TEXT("waitingForDestination"),
+        (Phase==EPhase::Flying&&PhaseTime>(bReducedMotion?.22f:FGHSGlobeFlight::Duration)+2)
+        ||(Phase==EPhase::Revealing&&!bArrivalStarted&&GetWorld()->GetTimeSeconds()-LoadStarted>2));
     Transition->SetBoolField(TEXT("awaitingCurtain"),Curtain.Active()&&!Curtain.Ready(GFrameCounter,GlobeHUD&&GlobeHUD->HasFullBrowserCoverage())&&(Phase==EPhase::Flying||(Phase==EPhase::Returning&&!bReturningCommitted)));
     Transition->SetNumberField(TEXT("width"),Curtain.GetExpectedSize().X);Transition->SetNumberField(TEXT("height"),Curtain.GetExpectedSize().Y);Root->SetObjectField(TEXT("transition"),Transition);
     TArray<TSharedPtr<FJsonValue>> Pois,Countries;
     const auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn());const FVector Eye=Camera&&Camera->WarehouseCamera?Camera->WarehouseCamera->GetComponentLocation():FVector::ZeroVector;
+    if(bIncludeCatalog&&Camera)
+    {
+        const auto Pose=Camera->CaptureReplayPose();auto Diagnostics=MakeShared<FJsonObject>();
+        Diagnostics->SetStringField(TEXT("pivot"),Pose.Pivot.ToString());Diagnostics->SetStringField(TEXT("eye"),Eye.ToString());
+        Diagnostics->SetStringField(TEXT("rotation"),Pose.Rotation.ToString());Diagnostics->SetNumberField(TEXT("distance"),Pose.Distance);
+        Diagnostics->SetNumberField(TEXT("desiredDistance"),Camera->DesiredZoom);Diagnostics->SetNumberField(TEXT("globeYaw"),GlobeRoot.IsValid()?GlobeRoot->GetActorRotation().Yaw:0);
+        Diagnostics->SetNumberField(TEXT("radiusFromCenter"),(Eye-GlobeCenter).Size());Root->SetObjectField(TEXT("camera"),Diagnostics);
+    }
     int32 PW=0,PH=0;GetViewportSize(PW,PH);
     auto Project=[&](double Lat,double Lon,TSharedRef<FJsonObject> O)
     {

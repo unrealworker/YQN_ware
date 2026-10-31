@@ -6,6 +6,7 @@
 #include "GHSWarehouseRegistry.h"
 #include "GHSWarehouseExperience.h"
 #include "GHSGlobeTransition.h"
+#include "GHSGlobeFlight.h"
 #include "Blueprint/UserWidget.h"
 #include "GHSGlobeNavigation.generated.h"
 
@@ -54,6 +55,7 @@ public:
     UFUNCTION(BlueprintPure,Category="Globe") FString GetState() const;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Globe") FVector GlobeCenter=FVector(0,0,300000);
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Globe") float GlobeRadius=10000.f;
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Globe") float IdleRotationDegreesPerSecond=1.5f;
 protected:
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type Reason) override;
@@ -88,6 +90,10 @@ private:
     };
     TArray<FStageActorState> StageActors;
     TWeakObjectPtr<AActor> GlobeRoot;
+    FQuat InitialGlobeRotation=FQuat::Identity,ResetStartRotation=FQuat::Identity;
+    FGHSGlobeFlight Flight;
+    float GlobeResetTime=0;
+    bool bResettingGlobe=false,bArrivalStarted=false;
     TSharedPtr<SWidget> GlobeViewportWidget;
     EPhase Phase=EPhase::Idle;
     FString SelectedId,LoadedId,Error;
@@ -101,6 +107,7 @@ private:
     double SmokeIdleYawStart=0,SmokeIdleYawEnd=0;
     bool bSmokeTest=false,bSmokeReducedMotion=false;
     bool bSmokeIdleRotationVerified=false,bSmokeHUDRebuilt=false,bSmokeRoofOpened=false;
+    bool bSmokeZoomBounds=false,bSmokeHomeReset=false,bSmokeFlightCaptured=false,bSmokeArrivalCaptured=false;
     TWeakObjectPtr<UGHSTwinHUDWidget> SmokePreviousHUD;
     FString SmokeError;
 };

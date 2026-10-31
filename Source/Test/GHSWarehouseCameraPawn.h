@@ -66,6 +66,9 @@ public:
     void PanPixels(FVector2D Delta, int32 ViewportWidth);
     UFUNCTION(BlueprintCallable, Category="Warehouse Camera")
     void ZoomSteps(float Steps);
+    /** Orbital experiences share orbit/zoom, but must not project their pivot onto the warehouse floor. */
+    UFUNCTION(BlueprintCallable, Category="Warehouse Camera|Focus")
+    void SetObjectOrbitNavigationEnabled(bool bEnabled);
 
     /** Orbit the actual 3D model center; panel framing is a separate camera-local offset. */
     UFUNCTION(BlueprintCallable, Category="Warehouse Camera|Focus")
@@ -116,6 +119,7 @@ private:
     bool bOverviewFraming = false;
     bool bGroundPanRecovery = false;
     bool bReplayFollowing = false;
+    bool bObjectOrbitNavigation = false;
     FVector GroundRecoveryMinimum = FVector::ZeroVector, GroundRecoveryMaximum = FVector::ZeroVector;
     bool bFlightEndsOnGround = true;
     float FlightElapsed = 0, FlightDuration = 0;

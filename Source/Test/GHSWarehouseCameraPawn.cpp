@@ -184,7 +184,7 @@ void AGHSWarehouseCameraPawn::TransitionToPose(FVector Pivot,float Distance,FRot
     bUseSceneFraming=true; bObjectPivot=!bGroundMode; bFlightEndsOnGround=bGroundMode;
     bGroundPanRecovery=false;
     ConfigureObjectRestrictions(); // Allow an elevated starting pose while returning to the ground.
-    FlightDuration=Duration<=0?0:FMath::Clamp(Duration,.7f,1.f); FlightElapsed=0;
+    FlightDuration=Duration<=0?0:FMath::Clamp(Duration,.05f,8.f); FlightElapsed=0;
     bPoseTransitionActive=FlightDuration>0;
     if(!bPoseTransitionActive)
     {
@@ -209,7 +209,7 @@ void AGHSWarehouseCameraPawn::CancelPoseTransition()
 
 void AGHSWarehouseCameraPawn::PrepareForGroundPan()
 {
-    if(bReplayFollowing) return;
+    if(bReplayFollowing || bObjectOrbitNavigation) return;
     bOverviewFraming=false;
     CancelPoseTransition();
     if(!bObjectPivot) return;
@@ -303,7 +303,7 @@ void AGHSWarehouseCameraPawn::OrbitPixels(FVector2D Delta)
 
 void AGHSWarehouseCameraPawn::PanPixels(FVector2D Delta, int32 ViewportWidth)
 {
-    if(bReplayFollowing) return;
+    if(bReplayFollowing || bObjectOrbitNavigation) return;
     if (!Finite(Delta) || ViewportWidth <= 0) return;
     if(Delta.IsNearlyZero()) return;
     PrepareForGroundPan();
@@ -328,6 +328,16 @@ void AGHSWarehouseCameraPawn::ZoomSteps(float Steps)
     // Clamp before converting to float; the plugin applies its zoom limits too.
     const double Distance = FMath::Clamp(double(DesiredZoom) * FMath::Exp(Exponent), double(MinimumZoom), double(MaximumZoom));
     SetDesiredZoom(float(Distance));
+}
+
+void AGHSWarehouseCameraPawn::SetObjectOrbitNavigationEnabled(bool bEnabled)
+{
+    bObjectOrbitNavigation=bEnabled;
+    if(!bEnabled)return; // The destination explicitly chooses its next pose and restrictions.
+    if(IsPreciseMouseDragging)TogglePreciseMouseDrag(false);
+    bGroundPanRecovery=false;
+    bObjectPivot=true;
+    ConfigureObjectRestrictions();
 }
 
 bool AGHSWarehouseCameraPawn::ShouldAggregateTruckHUD() const

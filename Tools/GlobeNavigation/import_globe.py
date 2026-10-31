@@ -212,12 +212,12 @@ u.MaterialEditingLibrary.recompile_material(sky_mat)
 assets.save_loaded_asset(sky_mat)
 sky=actors.spawn_actor_from_class(u.StaticMeshActor,center)
 sky.set_actor_label('Globe · Pale blue background')
-sky.tags=['GHS_GlobeStage']
+sky.tags=['GHS_GlobeStage','GHS_GlobeBackground']
 sky.static_mesh_component.set_static_mesh(assets.load_asset('/Engine/BasicShapes/Sphere'))
 sky.static_mesh_component.set_material(0,sky_mat)
 sky.static_mesh_component.set_cast_shadow(False)
 sky.static_mesh_component.set_collision_enabled(u.CollisionEnabled.NO_COLLISION)
-sky.set_actor_scale3d(u.Vector(3000,3000,3000))
+sky.set_actor_scale3d(u.Vector(8000,8000,8000))
 
 fill=actors.spawn_actor_from_class(u.SkyLight,center)
 fill.set_actor_label('Globe · Ambient fill')
