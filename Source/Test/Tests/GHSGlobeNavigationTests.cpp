@@ -109,7 +109,7 @@ bool FGHSGlobeCurtainTest::RunTest(const FString&)
     FGHSGlobeCurtainGate Gate;const FVector2D FullSize(1672,941);
     Gate.Begin(FullSize,0);const uint32 First=Gate.GetGeneration();
     TestFalse(TEXT("Numeric opacity alone cannot permit a world change"),Gate.Ready(100,true));
-    TestFalse(TEXT("Compact return browser cannot acknowledge full coverage"),Gate.Accept(First,FVector2D(156,44),1,10));
+    TestFalse(TEXT("Compact return browser cannot acknowledge full coverage"),Gate.Accept(First,FVector2D(200,44),1,10));
     TestFalse(TEXT("A fading curtain cannot acknowledge full coverage"),Gate.Accept(First,FullSize,.99f,10));
     TestFalse(TEXT("Malformed browser dimensions are rejected"),Gate.Accept(First,FVector2D(std::numeric_limits<double>::quiet_NaN(),941),1,10));
     TestTrue(TEXT("Current full-size opaque curtain is accepted"),Gate.Accept(First,FullSize,1,10));
@@ -152,7 +152,7 @@ bool FGHSGlobeBrowserGeometryTest::RunTest(const FString&)
     TestFalse(TEXT("Full-size surface with an offset does not cover the viewport"),Geometry::CoversFullLayout(Full,FVector2D(24,0),Full+FVector2D(24,0),false));
     FGHSGlobeCurtainGate Gate;Gate.Begin(Css,0);
     TestFalse(TEXT("Slate logical dimensions cannot substitute for CSS dimensions"),Gate.Accept(Gate.GetGeneration(),Full,1,10));
-    TestFalse(TEXT("DPI-mapped compact dimensions cannot acknowledge full coverage"),Gate.Accept(Gate.GetGeneration(),Geometry::ToCssSize(FVector2D(156,44),4.f/3.f,1.5f),1,10));
+    TestFalse(TEXT("DPI-mapped compact dimensions cannot acknowledge full coverage"),Gate.Accept(Gate.GetGeneration(),Geometry::ToCssSize(FVector2D(200,44),4.f/3.f,1.5f),1,10));
     TestTrue(TEXT("Exact CEF CSS dimensions can acknowledge"),Gate.Accept(Gate.GetGeneration(),Css,1,10));
     TestFalse(TEXT("Acknowledgement waits for native allocated coverage"),Gate.Ready(12,false));
     TestTrue(TEXT("Settled full CSS surface permits transition"),Gate.Ready(12,true));

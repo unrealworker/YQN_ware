@@ -1,0 +1,224 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "PLUTO",
+			"instance": "913677B545F4F091AF9604B46C3D9442",
+			"instanceName": "PLUTO-33044",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (25H2) [10.0.26200.9711] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 5060 Laptop GPU",
+			"cPUModel": "Intel(R) Core(TM) i9-14900HX",
+			"rAMInGB": 32,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.10.31-08.24.05",
+	"succeeded": 13,
+	"succeededWithWarnings": 0,
+	"failed": 0,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.22162832319736481,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "ArcDoesNotCutThroughEarth",
+			"fullTestPath": "GHS.Globe.Flight.ArcDoesNotCutThroughEarth",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.016408301889896393,
+			"dateTime": "2026.10.31-08.24.04",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "BacksideDatelineAndPoles",
+			"fullTestPath": "GHS.Globe.Flight.BacksideDatelineAndPoles",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.016642902046442032,
+			"dateTime": "2026.10.31-08.24.05",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CurrentLaggedPoseContinuity",
+			"fullTestPath": "GHS.Globe.Flight.CurrentLaggedPoseContinuity",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.023661501705646515,
+			"dateTime": "2026.10.31-08.24.05",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FrameRateIndependent",
+			"fullTestPath": "GHS.Globe.Flight.FrameRateIndependent",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.012280799448490143,
+			"dateTime": "2026.10.31-08.24.05",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "NearSurfaceStartContinuity",
+			"fullTestPath": "GHS.Globe.Flight.NearSurfaceStartContinuity",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.016515299677848816,
+			"dateTime": "2026.10.31-08.24.05",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "BrowserGeometry",
+			"fullTestPath": "GHS.Globe.BrowserGeometry",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.01644580066204071,
+			"dateTime": "2026.10.31-08.24.05",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Catalog",
+			"fullTestPath": "GHS.Globe.Catalog",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.016417302191257477,
+			"dateTime": "2026.10.31-08.24.05",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Clustering",
+			"fullTestPath": "GHS.Globe.Clustering",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.016817901283502579,
+			"dateTime": "2026.10.31-08.24.05",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CurtainHandshake",
+			"fullTestPath": "GHS.Globe.CurtainHandshake",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.016232799738645554,
+			"dateTime": "2026.10.31-08.24.05",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Geography",
+			"fullTestPath": "GHS.Globe.Geography",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.016895301640033722,
+			"dateTime": "2026.10.31-08.24.05",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PersistentCameraOwnership",
+			"fullTestPath": "GHS.Globe.PersistentCameraOwnership",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.020128101110458374,
+			"dateTime": "2026.10.31-08.24.05",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "RegistryIsolation",
+			"fullTestPath": "GHS.Globe.RegistryIsolation",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.016630198806524277,
+			"dateTime": "2026.10.31-08.24.05",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "StreamExclusion",
+			"fullTestPath": "GHS.Globe.StreamExclusion",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"913677B545F4F091AF9604B46C3D9442"
+			],
+			"duration": 0.016552101820707321,
+			"dateTime": "2026.10.31-08.24.05",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

@@ -73,7 +73,7 @@ void UGHSGlobeHUD::NativeTick(const FGeometry& Geometry,float Dt)
         const FVector2D BrowserCss=FGHSGlobeBrowserGeometry::ToCssSize(BrowserGeometry.GetLocalSize(),BrowserGeometry.GetAccumulatedLayoutTransform().GetScale(),WindowDpi);
         bFullBrowserCoverage=FGHSGlobeBrowserGeometry::CoversFullLayout(FullSize,Origin,End,bSmall)&&BrowserCss.Equals(FullBrowserCssSize,1.);
     }
-    if(BrowserSlot){BrowserSlot->SetPosition(bSmall?FVector2D(24,FMath::Max(70.,FullSize.Y-108.)):FVector2D::ZeroVector);BrowserSlot->SetSize(bSmall?FVector2D(156,44):FullSize);}
+    if(BrowserSlot){BrowserSlot->SetPosition(bSmall?FVector2D(24,FMath::Max(70.,FullSize.Y-108.)):FVector2D::ZeroVector);BrowserSlot->SetSize(bSmall?FVector2D(200,44):FullSize);}
 }
 void UGHSGlobeHUD::Push(const FString& Json)
 {if(Browser)Browser->Evaluate(TEXT("window.ghsGlobe&&window.ghsGlobe.receive(")+Json+TEXT(");"));}

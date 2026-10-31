@@ -49,7 +49,7 @@ function entryRequestState(current,event){
 }
 function transitionNotice(phase,transition,error=''){
  const active=['loading','flying','revealing','returning'].includes(phase),failure=active&&!!error,waiting=active&&!failure&&transition.waitingForDestination===true&&transition.opacity>=1;
- return {active,error:failure,waiting,text:failure?error:waiting?'仓库正在初始化，请稍候':phase==='returning'?'正在返回全球':'正在进入仓库'};
+ return {active,error:failure,waiting,text:failure?error:waiting?'仓库正在初始化，请稍候':phase==='returning'?'正在返回运营中心':'正在进入仓库'};
 }
 // Budgets are independent of catalog size: thousands of sites never become thousands of moving DOM nodes.
 function markers(pois,selectedId,rect,cellSize=64,maxMarkers=48){
