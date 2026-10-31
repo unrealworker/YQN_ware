@@ -10,7 +10,7 @@ let curtainFrame=0,curtainAck=null;
 let bootFrame=0,entryGate='idle';
 const motionTracks=new WeakMap(),activeMotion=new Set();
 const countryPriority=new Map(['美国','加拿大','墨西哥','巴西','智利','阿根廷','秘鲁','哥伦比亚','委内瑞拉','中国','澳大利亚','印度','俄罗斯','南非'].map((id,index)=>[id,index]));
-const countryOffsets=new Map();
+let countryVisible=new Set();
 let recent=[];try{recent=JSON.parse(localStorage.getItem('ghs-globe-recent')||'[]');if(!Array.isArray(recent))recent=[];}catch(e){}
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const icon=name=>'<svg aria-hidden="true"><use href="#'+name+'"/></svg>';
@@ -38,23 +38,23 @@ function list(){const active=$('warehouse-list').contains(document.activeElement
 function updateRecent(){const active=$('recent-list').contains(document.activeElement)?focusToken(document.activeElement):null,rows=recent.map(id=>warehouseById.get(id)).filter(Boolean);$('recent-list').innerHTML=rows.map(row).join('');$('recent-empty').hidden=rows.length>0;if(active)restoreFocus(active,$('name'));}
 function panel(active){for(const [id,on] of [['initial',!active],['detail',active]]){const el=$(id),opening=on&&el.dataset.active!=='true';el.dataset.active=String(on);el.setAttribute('aria-hidden',String(!on));if(on)el.removeAttribute('inert');else el.setAttribute('inert','');for(const node of el.querySelectorAll('button,input,select'))node.tabIndex=on?0:-1;if(opening)revealChildren(el,id==='detail'?'.breadcrumb,.photo-wrap,.card-title,.metrics,.primary,.recent':'.empty-illustration,.empty-title,.empty-copy,.list-section',35);}}
 function layoutCountries(labels,origin){
- const placed=[],measured=labels.map(({c,el})=>({c,el,rect:el.getBoundingClientRect()}));
- measured.sort((a,b)=>(countryPriority.get(a.c.id)??100)-(countryPriority.get(b.c.id)??100)||String(a.c.id).localeCompare(String(b.c.id)));
- for(const {c,el,rect} of measured){
-  const previous=countryOffsets.get(c.id),offsets=Array.from(new Set([...(Number.isFinite(previous)?[previous]:[]),0,-12,12,-24,24]));let chosen=null;
-  for(const offset of offsets){const pad=previous===null?4:2,box={left:c.x-rect.width/2-pad,right:c.x+rect.width/2+pad,top:c.y+offset-rect.height/2-pad,bottom:c.y+offset+rect.height/2+pad};
-   if(box.left<origin.left||box.right>origin.right||box.top<origin.top||box.bottom>origin.bottom||placed.some(other=>box.left<other.right&&box.right>other.left&&box.top<other.bottom&&box.bottom>other.top))continue;
-   chosen=offset;placed.push(box);break;
-  }
-  el.hidden=chosen===null;countryOffsets.set(c.id,chosen);if(chosen!==null)el.style.transform='translate(-50%,-50%) translateY('+chosen+'px)';
+ const measured=labels.map(({c,el})=>({...c,width:el.offsetWidth,height:el.offsetHeight}));
+ measured.sort((a,b)=>(countryPriority.get(a.id)??100)-(countryPriority.get(b.id)??100)||String(a.id).localeCompare(String(b.id)));
+ const nextVisible=new Set(GlobePolicy.countryLabels(measured,origin,countryVisible).map(c=>c.id));
+ for(const {c,el} of labels){
+  const visible=nextVisible.has(c.id),continuous=visible&&countryVisible.has(c.id);
+  el.style.transition=continuous&&!reducedMotion()?'transform 60ms linear':'none';
+  el.style.transform='translate3d('+(c.x-origin.left)+'px,'+(c.y-origin.top)+'px,0) translate(-50%,-50%)';
+  el.style.visibility=visible?'visible':'hidden';
  }
+ countryVisible=nextVisible;
 }
 function positionLabels(){if(state.phase==='warehouse')return;const origin=stage.getBoundingClientRect();const markers=GlobePolicy.markers(state.pois||[],state.selectedId,origin,64,48),key=markers.map(p=>p.id+':'+p.ids.join(',')).join('|');
  if(key!==markerKey){const previousIds=new Set(markerGroups.keys()),active=$('pois').contains(document.activeElement)?focusToken(document.activeElement):null;markerKey=key;markerGroups=new Map(markers.map(p=>[p.id,p.ids]));$('pois').innerHTML=markers.map(p=>{if(p.ids.length>1)return '<div class="poi" id="poi-'+esc(p.id)+'"><button class="cluster-dot" data-cluster="'+esc(p.id)+'" aria-label="查看此区域'+p.ids.length+'座仓库">'+p.ids.length+'</button></div>';const w=warehouseById.get(p.id);return w?'<div class="poi" id="poi-'+esc(w.id)+'"><span class="poi-line"></span><span class="poi-dot"></span><div class="poi-card"><button class="poi-select" data-select="'+esc(w.id)+'" aria-label="选择'+esc(w.name)+'"><span class="warehouse-icon">'+icon('warehouse')+'</span><span class="row-copy"><strong>'+esc(w.name)+'</strong></span></button><button class="poi-enter" data-enter="'+esc(w.id)+'" aria-label="进入'+esc(w.name)+'">'+icon('chevron')+'</button></div></div>':'';}).join('');for(const p of markers)if(!previousIds.has(p.id)){const node=$('poi-'+p.id);if(node)playMotion(node.querySelector('.poi-card,.cluster-dot'),[{opacity:0,transform:'translateY(6px) scale(.98)'},{opacity:1,transform:'translateY(0) scale(1)'}],{duration:220});}if(active)restoreFocus(active,stage);}
  for(const p of markers){const node=document.getElementById('poi-'+p.id);if(node){node.style.transform='translate('+(p.x-origin.left)+'px,'+(p.y-origin.top)+'px)';node.dataset.selected=String(state.selectedId===p.id);}}
 
- const countryRoot=$('countries'),labels=[],seen=new Set();for(const c of state.countries||[]){const id='country-'+c.id;seen.add(id);let el=document.getElementById(id);if(!el){el=document.createElement('span');el.id=id;el.className='country';countryRoot.appendChild(el);}if(el.textContent!==c.label)el.textContent=c.label;el.hidden=!c.visible||!Number.isFinite(c.x)||!Number.isFinite(c.y);if(!el.hidden){el.style.left=(c.x-origin.left)+'px';el.style.top=(c.y-origin.top)+'px';labels.push({c,el});}else countryOffsets.delete(c.id);}
- for(const el of countryRoot.children)if(!seen.has(el.id)){el.hidden=true;countryOffsets.delete(el.id.slice(8));}layoutCountries(labels,origin);
+ const countryRoot=$('countries'),labels=[],seen=new Set();for(const c of state.countries||[]){const id='country-'+c.id;seen.add(id);let el=document.getElementById(id);if(!el){el=document.createElement('span');el.id=id;el.className='country';el.style.left='0';el.style.top='0';countryRoot.appendChild(el);}if(el.textContent!==c.label)el.textContent=c.label;labels.push({c,el});}
+ for(const el of Array.from(countryRoot.children))if(!seen.has(el.id))el.remove();layoutCountries(labels,origin);
 }
 function receive(next){const candidate=GlobePolicy.nextState(state,next);if(!candidate)return;const catalogUpdated=candidate.warehouses!==state.warehouses;state=candidate;
  const key=catalogUpdated?JSON.stringify(state.warehouses):catalogKey,catalogChanged=key!==catalogKey;if(catalogChanged){const previousRegion=$('region').value;pageOffset=0;catalogKey=key;warehouseById=new Map(state.warehouses.map(w=>[w.id,w]));$('region').innerHTML='<option value="">全部区域</option>'+Array.from(new Set(state.warehouses.map(GlobePolicy.warehouseRegion))).map(r=>'<option>'+esc(r)+'</option>').join('');if(Array.from($('region').options).some(o=>o.value===previousRegion))$('region').value=previousRegion;markerKey="";list();updateRecent();}

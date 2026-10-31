@@ -50,6 +50,7 @@ class TEST_API AGHSGlobePlayerController : public AGHSWarehousePlayerController
 public:
     AGHSGlobePlayerController();
     virtual void PlayerTick(float DeltaSeconds) override;
+    virtual void UpdateCameraManager(float DeltaSeconds) override;
     virtual bool InputKey(const FInputKeyEventArgs& Params) override;
     UFUNCTION(BlueprintCallable,Category="Globe") void Command(const FString& Json);
     UFUNCTION(BlueprintPure,Category="Globe") FString GetState() const;

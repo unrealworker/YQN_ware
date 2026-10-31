@@ -10,6 +10,7 @@
 #include "Components/CanvasPanelSlot.h"
 #include "Camera/CameraComponent.h"
 #include "Engine/GameViewportClient.h"
+#include "Engine/LocalPlayer.h"
 #include "Engine/LevelStreamingDynamic.h"
 #include "Engine/Level.h"
 #include "Engine/PostProcessVolume.h"
@@ -31,6 +32,7 @@
 #include "Widgets/SWindow.h"
 #include "GenericPlatform/GenericWindow.h"
 #include "InputKeyEventArgs.h"
+#include "SceneView.h"
 
 namespace
 {
@@ -430,8 +432,17 @@ void AGHSGlobePlayerController::PlayerTick(float Dt)
         }
         else {MaskOpacity=1-Ease(PhaseTime/Duration);if(MaskOpacity<=0){Phase=!Error.IsEmpty()?EPhase::Error:(SelectedId.IsEmpty()?EPhase::Idle:EPhase::Selected);LastInteraction=Now;}}
     }
-    if(bReady&&Now>=NextPush){NextPush=Now+(Phase==EPhase::Warehouse?.5:1./20.);PushState();}
     if(bSmokeTest)TickSmokeTest();
+}
+
+void AGHSGlobePlayerController::UpdateCameraManager(float Dt)
+{
+    Super::UpdateCameraManager(Dt);
+    // The world updates camera caches after Pawn/SpringArm ticks. Project labels
+    // here so the same frame's globe transform and rendered view are sampled.
+    if(!IsLocalController()||!GetWorld()||!bReady||!FMath::IsFinite(Dt)||Dt<=0)return;
+    const double Now=GetWorld()->GetTimeSeconds();
+    if(Now>=NextPush){NextPush=Now+(Phase==EPhase::Warehouse?.5:1./20.);PushState();}
 }
 
 void AGHSGlobePlayerController::TickSmokeTest()
@@ -651,7 +662,15 @@ FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
     Transition->SetBoolField(TEXT("awaitingCurtain"),Curtain.Active()&&!Curtain.Ready(GFrameCounter,GlobeHUD&&GlobeHUD->HasFullBrowserCoverage())&&(Phase==EPhase::Flying||(Phase==EPhase::Returning&&!bReturningCommitted)));
     Transition->SetNumberField(TEXT("width"),Curtain.GetExpectedSize().X);Transition->SetNumberField(TEXT("height"),Curtain.GetExpectedSize().Y);Root->SetObjectField(TEXT("transition"),Transition);
     TArray<TSharedPtr<FJsonValue>> Pois,Countries;
-    const auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn());const FVector Eye=Camera&&Camera->WarehouseCamera?Camera->WarehouseCamera->GetComponentLocation():FVector::ZeroVector;
+    int32 PW=0,PH=0;GetViewportSize(PW,PH);
+    FSceneViewProjectionData ProjectionData;
+    const auto* Local=GetLocalPlayer();
+    const bool bHasProjection=bStageVisible&&PW>0&&PH>0&&Local&&Local->ViewportClient&&Local->ViewportClient->Viewport
+        &&Local->GetProjectionData(Local->ViewportClient->Viewport,ProjectionData)&&ProjectionData.IsValidViewRectangle();
+    const FMatrix ViewProjection=bHasProjection?ProjectionData.ComputeViewProjectionMatrix():FMatrix::Identity;
+    const auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn());
+    const FVector Eye=bHasProjection?ProjectionData.ViewOrigin:
+        (Camera&&Camera->WarehouseCamera?Camera->WarehouseCamera->GetComponentLocation():FVector::ZeroVector);
     if(bIncludeCatalog&&Camera)
     {
         const auto Pose=Camera->CaptureReplayPose();auto Diagnostics=MakeShared<FJsonObject>();
@@ -660,23 +679,32 @@ FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
         Diagnostics->SetNumberField(TEXT("desiredDistance"),Camera->DesiredZoom);Diagnostics->SetNumberField(TEXT("globeYaw"),GlobeRoot.IsValid()?GlobeRoot->GetActorRotation().Yaw:0);
         Diagnostics->SetNumberField(TEXT("radiusFromCenter"),(Eye-GlobeCenter).Size());Root->SetObjectField(TEXT("camera"),Diagnostics);
     }
-    int32 PW=0,PH=0;GetViewportSize(PW,PH);
+    // Reuse one projection/eye for both visibility and every point. Preserve the
+    // player-relative screen origin before converting physical pixels to CSS.
+    auto ProjectPoint=[&](const FVector& P,FVector2D& Css)
+    {
+        if(!bHasProjection||!GHSGlobe::IsSurfaceVisible(P,Eye,GlobeCenter))return false;
+        FVector2D Pixels=FVector2D::ZeroVector;
+        if(!FSceneView::ProjectWorldToScreen(P,ProjectionData.GetConstrainedViewRect(),ViewProjection,Pixels))return false;
+        Pixels-=FVector2D(ProjectionData.GetConstrainedViewRect().Min);
+        if(!PostProcessWorldToScreen(P,Pixels,true))return false;
+        Css=FVector2D(Pixels.X*Viewport.X/PW,Pixels.Y*Viewport.Y/PH);
+        return true;
+    };
     auto Project=[&](double Lat,double Lon,TSharedRef<FJsonObject> O)
     {
-        const FVector P=Position(Lat,Lon);FVector2D Pixels=FVector2D::ZeroVector;
-        const bool Visible=bStageVisible&&PW>0&&PH>0&&GHSGlobe::IsSurfaceVisible(P,Eye,GlobeCenter)&&ProjectWorldLocationToScreen(P,Pixels,true);
-        O->SetBoolField(TEXT("visible"),Visible);O->SetNumberField(TEXT("x"),Visible?Pixels.X*Viewport.X/PW:0);O->SetNumberField(TEXT("y"),Visible?Pixels.Y*Viewport.Y/PH:0);
+        FVector2D Css=FVector2D::ZeroVector;const bool Visible=ProjectPoint(Position(Lat,Lon),Css);
+        O->SetBoolField(TEXT("visible"),Visible);O->SetNumberField(TEXT("x"),Visible?Css.X:0);O->SetNumberField(TEXT("y"),Visible?Css.Y:0);
     };
     // Cull geometry first, then merge all remaining members into a bounded screen-grid payload.
     TArray<FGHSWarehouseProjectedPoint> VisiblePoints;
-    if(bStageVisible&&PW>0&&PH>0)
+    if(bHasProjection)
     {
         const FQuat Rotation=GlobeRoot.IsValid()?GlobeRoot->GetActorQuat():FQuat::Identity;
         for(const auto& W:Registry.GetEntries())
         {
-            const FVector P=GlobeCenter+Rotation.RotateVector(W.UnitPosition*(GlobeRadius*1.003));FVector2D Pixels=FVector2D::ZeroVector;
-            if(!GHSGlobe::IsSurfaceVisible(P,Eye,GlobeCenter)||!ProjectWorldLocationToScreen(P,Pixels,true))continue;
-            const FVector2D Logical(Pixels.X*Viewport.X/PW,Pixels.Y*Viewport.Y/PH);
+            const FVector P=GlobeCenter+Rotation.RotateVector(W.UnitPosition*(GlobeRadius*1.003));FVector2D Logical=FVector2D::ZeroVector;
+            if(!ProjectPoint(P,Logical))continue;
             if(Logical.X<ScenePosition.X||Logical.X>ScenePosition.X+SceneSize.X||Logical.Y<ScenePosition.Y||Logical.Y>ScenePosition.Y+SceneSize.Y)continue;
             VisiblePoints.Add({W.Id,Logical});
         }

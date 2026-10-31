@@ -72,3 +72,22 @@ test('curtain copy appears only for actual covered waiting or an error',()=>{
  }
  assert.equal(P.transitionNotice('warehouse',{opacity:1,waitingForDestination:true}).active,false);
 });
+
+test('country names keep geographic anchors while overlap hides secondary labels',()=>{
+ const rect={left:0,top:0,right:500,bottom:500};
+ const rows=[{id:'a',x:100,y:100,width:60,height:20,visible:true},{id:'b',x:150,y:100,width:60,height:20,visible:true}];
+ assert.deepEqual(P.countryLabels(rows,rect).map(c=>c.id),['a']);
+ for(let y=100;y<180;y+=.5){
+  rows[1].y=y;
+  for(const label of P.countryLabels(rows,rect))assert.equal(label.y,rows.find(r=>r.id===label.id).y);
+ }
+ assert.deepEqual(P.countryLabels([{...rows[0],visible:false},{...rows[1],x:NaN}],rect),[]);
+});
+
+test('country label visibility has clearance hysteresis at a collision boundary',()=>{
+ const rect={left:0,top:0,right:500,bottom:500},a={id:'a',x:100,y:100,width:60,height:20,visible:true};
+ const b={...a,id:'b',x:168};
+ assert.deepEqual(P.countryLabels([a,b],rect,new Set(['a','b'])).map(c=>c.id),['a','b']);
+ assert.deepEqual(P.countryLabels([a,b],rect,new Set(['a'])).map(c=>c.id),['a']);
+ assert.deepEqual(P.countryLabels([a,{...b,x:180}],rect,new Set(['a'])).map(c=>c.id),['a','b']);
+});

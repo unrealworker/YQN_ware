@@ -51,6 +51,19 @@ function transitionNotice(phase,transition,error=''){
  const active=['loading','flying','revealing','returning'].includes(phase),failure=active&&!!error,waiting=active&&!failure&&transition.waitingForDestination===true&&transition.opacity>=1;
  return {active,error:failure,waiting,text:failure?error:waiting?'仓库正在初始化，请稍候':phase==='returning'?'正在返回运营中心':'正在进入仓库'};
 }
+// Rows arrive in stable priority order. Never move a country's geographic anchor
+// to avoid a neighbour: suppress it until there is enough room to reappear.
+function countryLabels(rows,rect,previousVisible=new Set()){
+ const placed=[],visible=[];
+ for(const row of rows){
+  if(!row.visible||![row.x,row.y,row.width,row.height].every(finite)||row.width<=0||row.height<=0)continue;
+  const pad=previousVisible.has(row.id)?2:8;
+  const box={left:row.x-row.width/2-pad,right:row.x+row.width/2+pad,top:row.y-row.height/2-pad,bottom:row.y+row.height/2+pad};
+  if(box.left<rect.left||box.right>rect.right||box.top<rect.top||box.bottom>rect.bottom||placed.some(other=>box.left<other.right&&box.right>other.left&&box.top<other.bottom&&box.bottom>other.top))continue;
+  placed.push(box);visible.push(row);
+ }
+ return visible;
+}
 // Budgets are independent of catalog size: thousands of sites never become thousands of moving DOM nodes.
 function markers(pois,selectedId,rect,cellSize=64,maxMarkers=48){
  const buckets=new Map(),selected=[];
@@ -64,5 +77,5 @@ function markers(pois,selectedId,rect,cellSize=64,maxMarkers=48){
  return selected.concat(result);
 }
 function page(warehouses,{query='',region='',ids=null,offset=0,limit=40}={}){const q=query.trim().toLocaleLowerCase(),allowed=ids?new Set(ids):null;const matches=warehouses.filter(w=>(!allowed||allowed.has(w.id))&&(!region||warehouseRegion(w)===region)&&(!q||(w.name+' '+(w.city||'')+' '+(w.address||'')).toLocaleLowerCase().includes(q)));return {total:matches.length,rows:matches.slice(offset,offset+Math.min(80,Math.max(1,limit)))};}
-return {markers,page,nextState,warehouseRegion,beginSceneGesture,moveSceneGesture,isBlankSceneClick,motionPreference,entryRequestState,transitionNotice};
+return {markers,page,nextState,warehouseRegion,beginSceneGesture,moveSceneGesture,isBlankSceneClick,motionPreference,entryRequestState,transitionNotice,countryLabels};
 });
