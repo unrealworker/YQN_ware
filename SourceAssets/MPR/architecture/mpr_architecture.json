@@ -1,0 +1,1034 @@
+{
+  "schema_version": 1,
+  "units": "metres",
+  "axis": "CAD +Y; UE import X=100*x,Y=-100*y,Z=100*z",
+  "meshes": [
+    {
+      "name": "SM_MPR_Floor",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Floor.fbx",
+      "material_roles": [
+        "Floor"
+      ],
+      "bounds_m": [
+        [
+          -181.93004,
+          182.61076
+        ],
+        [
+          -93.09362,
+          83.69038
+        ],
+        [
+          -0.22,
+          0
+        ]
+      ],
+      "vertices": 32,
+      "triangles": 60
+    },
+    {
+      "name": "SM_MPR_Roof",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Roof.fbx",
+      "material_roles": [
+        "Roofs"
+      ],
+      "bounds_m": [
+        [
+          -181.93004,
+          182.61076
+        ],
+        [
+          -93.09362,
+          83.69038
+        ],
+        [
+          13.12,
+          13.4
+        ]
+      ],
+      "vertices": 32,
+      "triangles": 60
+    },
+    {
+      "name": "SM_MPR_Exterior_00",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_00.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "PaleGray"
+      ],
+      "bounds_m": [
+        [
+          -181.93004000000002,
+          -166.08044
+        ],
+        [
+          83.52038,
+          83.86038
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 24,
+      "triangles": 36
+    },
+    {
+      "name": "SM_MPR_RoofEdge",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_RoofEdge.fbx",
+      "material_roles": [
+        "Porcelain"
+      ],
+      "bounds_m": [
+        [
+          -182.12004,
+          182.80076
+        ],
+        [
+          -93.28362,
+          83.88038
+        ],
+        [
+          13.399999999999999,
+          13.82
+        ]
+      ],
+      "vertices": 128,
+      "triangles": 192
+    },
+    {
+      "name": "SM_MPR_Exterior_01",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_01.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt"
+      ],
+      "bounds_m": [
+        [
+          -166.25044,
+          -165.91044000000002
+        ],
+        [
+          74.54638,
+          83.69038
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 16,
+      "triangles": 24
+    },
+    {
+      "name": "SM_MPR_Exterior_02",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_02.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "PaleGray"
+      ],
+      "bounds_m": [
+        [
+          -166.08044,
+          166.78656
+        ],
+        [
+          74.33638,
+          74.75638
+        ],
+        [
+          -1.2,
+          13.600000000000001
+        ]
+      ],
+      "vertices": 1904,
+      "triangles": 2856
+    },
+    {
+      "name": "SM_MPR_Exterior_03",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_03.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt"
+      ],
+      "bounds_m": [
+        [
+          166.61656000000002,
+          166.95656
+        ],
+        [
+          74.54638,
+          83.58877999999999
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 16,
+      "triangles": 24
+    },
+    {
+      "name": "SM_MPR_Exterior_04",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_04.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "PaleGray"
+      ],
+      "bounds_m": [
+        [
+          166.78656,
+          182.61076000000003
+        ],
+        [
+          83.41878,
+          83.75878
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 24,
+      "triangles": 36
+    },
+    {
+      "name": "SM_MPR_Exterior_05",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_05.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "PaleGray"
+      ],
+      "bounds_m": [
+        [
+          182.44076,
+          182.78076
+        ],
+        [
+          -20.500420000000005,
+          83.58878
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 144,
+      "triangles": 216
+    },
+    {
+      "name": "SM_MPR_Exterior_06",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_06.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "PaleGray"
+      ],
+      "bounds_m": [
+        [
+          166.78656,
+          182.61076000000003
+        ],
+        [
+          -20.67042,
+          -20.330419999999997
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 24,
+      "triangles": 36
+    },
+    {
+      "name": "SM_MPR_Exterior_07",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_07.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "PaleGray"
+      ],
+      "bounds_m": [
+        [
+          166.61656000000002,
+          166.95656
+        ],
+        [
+          -50.98042,
+          -20.50042
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 40,
+      "triangles": 60
+    },
+    {
+      "name": "SM_MPR_Exterior_08",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_08.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "PaleGray"
+      ],
+      "bounds_m": [
+        [
+          150.91156,
+          166.78656
+        ],
+        [
+          -51.150420000000004,
+          -50.81042
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 24,
+      "triangles": 36
+    },
+    {
+      "name": "SM_MPR_Exterior_09",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_09.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "PaleGray"
+      ],
+      "bounds_m": [
+        [
+          150.74156000000002,
+          151.08156
+        ],
+        [
+          -66.22042,
+          -50.980419999999995
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 24,
+      "triangles": 36
+    },
+    {
+      "name": "SM_MPR_Exterior_10",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_10.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "PaleGray"
+      ],
+      "bounds_m": [
+        [
+          135.36676,
+          150.91156
+        ],
+        [
+          -66.39042,
+          -66.05042
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 24,
+      "triangles": 36
+    },
+    {
+      "name": "SM_MPR_Exterior_11",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_11.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "PaleGray"
+      ],
+      "bounds_m": [
+        [
+          135.19676,
+          135.53676
+        ],
+        [
+          -83.94962,
+          -66.22042
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 24,
+      "triangles": 36
+    },
+    {
+      "name": "SM_MPR_Exterior_12",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_12.fbx",
+      "material_roles": [
+        "Porcelain",
+        "PaleGray",
+        "Cobalt"
+      ],
+      "bounds_m": [
+        [
+          -166.08044,
+          135.36676
+        ],
+        [
+          -84.15961999999999,
+          -83.73962
+        ],
+        [
+          -1.2,
+          13.6
+        ]
+      ],
+      "vertices": 1880,
+      "triangles": 2820
+    },
+    {
+      "name": "SM_MPR_Exterior_13",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_13.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt"
+      ],
+      "bounds_m": [
+        [
+          -166.25044,
+          -165.91044000000002
+        ],
+        [
+          -93.09362,
+          -83.94962
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 16,
+      "triangles": 24
+    },
+    {
+      "name": "SM_MPR_Exterior_14",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_14.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "PaleGray"
+      ],
+      "bounds_m": [
+        [
+          -181.93004000000002,
+          -166.08044
+        ],
+        [
+          -93.26362,
+          -92.92362
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 24,
+      "triangles": 36
+    },
+    {
+      "name": "SM_MPR_Exterior_15",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_Exterior_15.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "PaleGray"
+      ],
+      "bounds_m": [
+        [
+          -182.10003999999998,
+          -181.76004
+        ],
+        [
+          -93.09362,
+          83.69037999999999
+        ],
+        [
+          -1.1999999999999993,
+          13.6
+        ]
+      ],
+      "vertices": 232,
+      "triangles": 348
+    },
+    {
+      "name": "SM_MPR_OfficePartitions",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_OfficePartitions.fbx",
+      "material_roles": [
+        "Porcelain"
+      ],
+      "bounds_m": [
+        [
+          -181.62524000000002,
+          182.30596000000003
+        ],
+        [
+          -83.64482,
+          81.98858
+        ],
+        [
+          0.0,
+          3.3
+        ]
+      ],
+      "vertices": 880,
+      "triangles": 1320
+    },
+    {
+      "name": "SM_MPR_OfficeGlazing",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_OfficeGlazing.fbx",
+      "material_roles": [
+        "Glass",
+        "Porcelain"
+      ],
+      "bounds_m": [
+        [
+          -182.14499999999998,
+          182.825
+        ],
+        [
+          48.715,
+          78.285
+        ],
+        [
+          1.15,
+          3.71
+        ]
+      ],
+      "vertices": 640,
+      "triangles": 960
+    },
+    {
+      "name": "SM_MPR_RoofPlant",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_RoofPlant.fbx",
+      "material_roles": [
+        "Detail",
+        "Skylight"
+      ],
+      "bounds_m": [
+        [
+          -169.9,
+          161.9
+        ],
+        [
+          -73.625,
+          62.625
+        ],
+        [
+          13.4,
+          13.780000000000001
+        ]
+      ],
+      "vertices": 3632,
+      "triangles": 5448
+    },
+    {
+      "name": "SM_MPR_RoofSolar",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_RoofSolar.fbx",
+      "material_roles": [
+        "Solar",
+        "Metal"
+      ],
+      "bounds_m": [
+        [
+          -13.75,
+          165.75
+        ],
+        [
+          -77.725,
+          65.725
+        ],
+        [
+          13.6,
+          13.716000000000001
+        ]
+      ],
+      "vertices": 10432,
+      "triangles": 15648
+    }
+  ],
+  "footprint_area_m2": 56408.1891,
+  "apertures": [
+    {
+      "id": "DOOR_2C93B4_2E14CA",
+      "side": 2,
+      "opening_width_m": 3.8607999999999976,
+      "height_m": 4.5
+    },
+    {
+      "id": "DOOR_2C93B4_2E0FFD",
+      "side": 2,
+      "opening_width_m": 2.946399999999997,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14C5",
+      "side": 2,
+      "opening_width_m": 2.946399999999997,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14C6",
+      "side": 2,
+      "opening_width_m": 2.946399999999997,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14C7",
+      "side": 2,
+      "opening_width_m": 2.946399999999997,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14C8",
+      "side": 2,
+      "opening_width_m": 2.946400000000004,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14C9",
+      "side": 2,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14CB",
+      "side": 2,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14CC",
+      "side": 2,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14CD",
+      "side": 2,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14CE",
+      "side": 2,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14CF",
+      "side": 2,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14D0",
+      "side": 2,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14D1",
+      "side": 2,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14D2",
+      "side": 2,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14D3",
+      "side": 2,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14D4",
+      "side": 2,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14D5",
+      "side": 2,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14D6",
+      "side": 2,
+      "opening_width_m": 2.946399999999997,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14D7",
+      "side": 2,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14D8",
+      "side": 2,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14D9",
+      "side": 2,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14DA",
+      "side": 2,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14DB",
+      "side": 2,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14DC",
+      "side": 2,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14DD",
+      "side": 2,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14DE",
+      "side": 2,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14DF",
+      "side": 2,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14E0",
+      "side": 2,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14E1",
+      "side": 2,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14E2",
+      "side": 2,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14E3",
+      "side": 2,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14E4",
+      "side": 2,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14E5",
+      "side": 2,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14E6",
+      "side": 2,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14E7",
+      "side": 2,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E14E8",
+      "side": 2,
+      "opening_width_m": 3.86080000000004,
+      "height_m": 4.5
+    },
+    {
+      "id": "DOOR_2C93B4_2E1348",
+      "side": 12,
+      "opening_width_m": 2.946399999999997,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E1343",
+      "side": 12,
+      "opening_width_m": 2.946399999999997,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E1341",
+      "side": 12,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E133C",
+      "side": 12,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E1339",
+      "side": 12,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E1336",
+      "side": 12,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E1333",
+      "side": 12,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E132F",
+      "side": 12,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E132C",
+      "side": 12,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E1326",
+      "side": 12,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E1324",
+      "side": 12,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E1321",
+      "side": 12,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E32",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E38",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E33",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E2D",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E34",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E2E",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E30",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E23",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E20",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0DEA",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E2F",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E2B",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E2A",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E28",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E24",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0DE4",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0DE0",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E1B",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E26",
+      "side": 12,
+      "opening_width_m": 2.946399999999983,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E1F",
+      "side": 12,
+      "opening_width_m": 2.9464000000000112,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0DD8",
+      "side": 12,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E27",
+      "side": 12,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0E21",
+      "side": 12,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0BD6",
+      "side": 12,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    },
+    {
+      "id": "DOOR_2C93B4_2E0AB1",
+      "side": 12,
+      "opening_width_m": 2.9464000000000397,
+      "height_m": 4.2
+    }
+  ],
+  "roof_mesh_prefixes": [
+    "SM_MPR_Roof"
+  ],
+  "skylight_count": 227,
+  "solar_cluster_count": 652,
+  "height_basis": {
+    "clear_height_m": 12.192,
+    "source": "Prologis property brochure 40ft clear",
+    "roof_surface_m": 13.4,
+    "facade_m": 13.6,
+    "office_partition_m": 3.3,
+    "external_ground_m": -1.2,
+    "display_estimates": [
+      "roof structure depth",
+      "office height",
+      "dock height",
+      "solar layout"
+    ]
+  }
+}

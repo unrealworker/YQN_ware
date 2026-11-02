@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "source_files": [
+    {
+      "path": "D:\\Data\\仓库数据\\MPR\\天工木马播种机设备\\96格口木马装配指导书-V1.0(2).docx",
+      "sha256": "72f414c3654fe48620d6fd945f92b78bb626870220f95efdd730cb63209ba0a0"
+    },
+    {
+      "path": "D:\\Data\\仓库数据\\MPR\\天工木马播种机设备\\天工96宫格木马.jpg",
+      "sha256": "a2546ef35714fef759bb9d18af66ff985297c2a44e921e0edadf64742e5d94b7"
+    },
+    {
+      "path": "D:\\Data\\仓库数据\\MPR\\天工木马播种机设备\\Snipaste_2026-10-30_16-27-55.png",
+      "sha256": "0a0d8ff1df05c9f6ae18b1abba9183de3514568d9367c1625de57dc8a0626b5d"
+    },
+    {
+      "path": "D:\\Data\\仓库数据\\MPR\\天工木马播种机设备\\Snipaste_2026-10-30_16-30-02.png",
+      "sha256": "7571ec86f8e8dd10f25697080f57ef60bdfb06111158adb1a444e3bf6654338f"
+    }
+  ],
+  "units": "metres",
+  "origin": "center of machine plan at floor",
+  "axis": "X along length, Y across two sides, Z up; FBX -Y forward Z up",
+  "confirmed": {
+    "bins": 96,
+    "columns_per_side": 12,
+    "levels": 4,
+    "sides": 2,
+    "carts": 8,
+    "cart_frame_width_m": 1.44,
+    "cart_frame_depth_m": 0.505,
+    "cart_height_m": 1.687,
+    "vertical_pitch_m": 0.445,
+    "tube_diameter_m": 0.028,
+    "caster_diameter_m": 0.063,
+    "chute_slope_deg": 20
+  },
+  "estimates": [
+    "Full machine envelope, end cabin dimensions, tray taper/thickness, slide width, screen and motor dimensions are visual reconstructions because no full machine dimensioned drawing is supplied.",
+    "Light blue bins, white structure and cobalt belts use shared GHS presentation palette; no live telemetry or movement is implied.",
+    "Placed count and machine alignment must be taken from CAD separately; PW_TG_96C_IN is not a complete 96-bin machine footprint."
+  ],
+  "material_paths": {
+    "Porcelain": "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain",
+    "Cobalt": "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt",
+    "SoftBlue": "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_SoftBlue",
+    "Metal": "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal",
+    "Charcoal": "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal",
+    "Rubber": "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Rubber",
+    "Glass": "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Glass"
+  },
+  "meshes": [
+    {
+      "name": "SM_MPR_Tiangong96",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\MPR\\equipment\\SM_MPR_Tiangong96.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -4.900000095367432,
+          4.900000095367432
+        ],
+        [
+          -1.3839999437332153,
+          1.3839999437332153
+        ],
+        [
+          0.0,
+          2.4649999141693115
+        ]
+      ],
+      "triangles": 17620,
+      "material_slots": 7,
+      "editable_parts": 1247,
+      "sha256": "e08e8d3615f5a8799b2e4154f746f62d01685c14411da258df92884f1f41547e",
+      "lod": 0,
+      "bin_count": 96
+    },
+    {
+      "name": "SM_MPR_Tiangong96_LOD1",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\MPR\\equipment\\SM_MPR_Tiangong96_LOD1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -4.900000095367432,
+          4.900000095367432
+        ],
+        [
+          -1.3839999437332153,
+          1.3839999437332153
+        ],
+        [
+          0.0,
+          2.4649999141693115
+        ]
+      ],
+      "triangles": 12820,
+      "material_slots": 7,
+      "editable_parts": 847,
+      "sha256": "75d66373c8f8300770de8d0b2c411c258117c53031a7502469254af0d591aeb2",
+      "lod": 1,
+      "bin_count": 96
+    },
+    {
+      "name": "SM_MPR_Tiangong96_LOD2",
+      "fbx": "D:\\UEPro\\Test\\SourceAssets\\MPR\\equipment\\SM_MPR_Tiangong96_LOD2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -4.900000095367432,
+          4.900000095367432
+        ],
+        [
+          -1.3524999618530273,
+          1.3524999618530273
+        ],
+        [
+          0.05000000074505806,
+          2.3499999046325684
+        ]
+      ],
+      "triangles": 6660,
+      "material_slots": 7,
+      "editable_parts": 427,
+      "sha256": "b420da118008557e5f45c474e0c1fa5a26841d1901ace00b82bc404984597730",
+      "lod": 2,
+      "bin_count": 96
+    }
+  ],
+  "recommended_lod_screen_sizes": [
+    1,
+    0.22,
+    0.065
+  ],
+  "blender": "D:\\UEPro\\Test\\SourceAssets\\MPR\\equipment\\MPR_Tiangong96.blend",
+  "preview": "D:\\UEPro\\Test\\SourceAssets\\MPR\\equipment\\mpr_sorter_preview.png",
+  "runtime_policy": "Static single mesh per machine with HISM for repeated machines; 7 slots, no Tick, no collision on decorative machine."
+}

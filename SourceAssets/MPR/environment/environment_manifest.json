@@ -1,0 +1,4651 @@
+{
+  "schema_version": 1,
+  "coordinate_frame": "Main CAD metres; +Y retained; FBX forward -Y/up Z; UE reflects Y on import",
+  "ground_z_m": -1.2,
+  "meshes": [
+    {
+      "name": "SM_MPR_Env_Car_0",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Car_0.fbx",
+      "material_roles": [
+        "Buildings",
+        "Detail",
+        "Markings",
+        "Rubber",
+        "Solar",
+        "VehicleLights"
+      ],
+      "bounds_m": [
+        [
+          -2.258,
+          2.258
+        ],
+        [
+          -0.927,
+          0.927
+        ],
+        [
+          0.055661914785550826,
+          1.48
+        ]
+      ],
+      "triangles": 584,
+      "vertices": 432,
+      "collision": false,
+      "sha256": "383591d734ee0fcde37a918d601c541719bf0e4da18890dcf89e34992805e4af",
+      "instance_only": true,
+      "source_geometry": "GHS reusable generator"
+    },
+    {
+      "name": "SM_MPR_Env_Car_1",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Car_1.fbx",
+      "material_roles": [
+        "Blue",
+        "Detail",
+        "Markings",
+        "Rubber",
+        "Solar",
+        "VehicleLights"
+      ],
+      "bounds_m": [
+        [
+          -2.258,
+          2.258
+        ],
+        [
+          -0.927,
+          0.927
+        ],
+        [
+          0.055661914785550826,
+          1.72
+        ]
+      ],
+      "triangles": 584,
+      "vertices": 432,
+      "collision": false,
+      "sha256": "b53eabeb9dc84cb5f7169df95d9ec972ba8de78f2d41c5799554c072b901e25d",
+      "instance_only": true,
+      "source_geometry": "GHS reusable generator"
+    },
+    {
+      "name": "SM_MPR_Env_Far_E_Buildings",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_E_Buildings.fbx",
+      "material_roles": [
+        "Buildings",
+        "Roofs"
+      ],
+      "bounds_m": [
+        [
+          198.3278,
+          357.54443359375
+        ],
+        [
+          -572.88886,
+          458.59272
+        ],
+        [
+          -1.2,
+          7.800000190734863
+        ]
+      ],
+      "triangles": 213,
+      "vertices": 375,
+      "collision": false,
+      "sha256": "edb1e0a498737d79ed90a365911c11d992cef104e96c00f2a2620cd9dacb8530",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_E_RailBed",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_E_RailBed.fbx",
+      "material_roles": [
+        "Detail"
+      ],
+      "bounds_m": [
+        [
+          145.317138671875,
+          473.3492431640625
+        ],
+        [
+          -185.29286193847656,
+          370.5660095214844
+        ],
+        [
+          -1.159999966621399,
+          -1.159999966621399
+        ]
+      ],
+      "triangles": 903,
+      "vertices": 2709,
+      "collision": false,
+      "sha256": "3472f1e62fe47bce706784bbecdd4f84b7a381169e022560d7d28ff1aef4ab39",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_E_Rails",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_E_Rails.fbx",
+      "material_roles": [
+        "Curbs"
+      ],
+      "bounds_m": [
+        [
+          145.9173583984375,
+          472.7584533691406
+        ],
+        [
+          -184.77615356445312,
+          370.03851318359375
+        ],
+        [
+          -1.1100000143051147,
+          -1.1100000143051147
+        ]
+      ],
+      "triangles": 1273,
+      "vertices": 3819,
+      "collision": false,
+      "sha256": "d8aa7c1fbfa32aacfe481f659b5ce839fa7ada2d69779b0d0d61a6ddacf7081d",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_E_Roads",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_E_Roads.fbx",
+      "material_roles": [
+        "Roads"
+      ],
+      "bounds_m": [
+        [
+          250.0,
+          487.6578063964844
+        ],
+        [
+          -310.8247985839844,
+          502.83990478515625
+        ],
+        [
+          -1.1649999618530273,
+          -1.1649999618530273
+        ]
+      ],
+      "triangles": 660,
+      "vertices": 1980,
+      "collision": false,
+      "sha256": "06ad296844287b49538fb835283348cad60e5cbdf6d976bc6267f38f73c63324",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_E_water",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_E_water.fbx",
+      "material_roles": [
+        "Water"
+      ],
+      "bounds_m": [
+        [
+          415.7745666503906,
+          460.91485595703125
+        ],
+        [
+          386.28460693359375,
+          479.2174987792969
+        ],
+        [
+          -1.1699999570846558,
+          -1.1699999570846558
+        ]
+      ],
+      "triangles": 43,
+      "vertices": 51,
+      "collision": false,
+      "sha256": "511fbf31b6c10303b5b36813579bb23b384a4c60d4922cd2ac03a11a05b82a60",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_N_Buildings",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_N_Buildings.fbx",
+      "material_roles": [
+        "Buildings",
+        "Roofs"
+      ],
+      "bounds_m": [
+        [
+          -142.3570556640625,
+          -87.49268
+        ],
+        [
+          490.2742614746094,
+          537.07913
+        ],
+        [
+          -1.2,
+          7.800000190734863
+        ]
+      ],
+      "triangles": 28,
+      "vertices": 50,
+      "collision": false,
+      "sha256": "f4a20f9fe6c9ce196da6ec24eecfbb862b27472ade1ca308ba7db6a57c1b41ce",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_N_Roads",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_N_Roads.fbx",
+      "material_roles": [
+        "Roads"
+      ],
+      "bounds_m": [
+        [
+          -250.0,
+          250.0
+        ],
+        [
+          240.0,
+          613.5437622070312
+        ],
+        [
+          -1.1649999618530273,
+          -1.1649999618530273
+        ]
+      ],
+      "triangles": 527,
+      "vertices": 1581,
+      "collision": false,
+      "sha256": "e0032bc0fa6db7e3b9af59ab6aa763588b30a86e09c059bc0c50d153b03bd993",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_S_Buildings",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_S_Buildings.fbx",
+      "material_roles": [
+        "Buildings",
+        "Roofs"
+      ],
+      "bounds_m": [
+        [
+          -242.87147521972656,
+          236.64766
+        ],
+        [
+          -535.005615234375,
+          -319.86325
+        ],
+        [
+          -1.2,
+          7.800000190734863
+        ]
+      ],
+      "triangles": 232,
+      "vertices": 410,
+      "collision": false,
+      "sha256": "57a5ed99b4e1e9445a7febfa821d614b17c1a56832edbbb2daf7bdcba024a745",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_S_Hardstand",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_S_Hardstand.fbx",
+      "material_roles": [
+        "Hardstand"
+      ],
+      "bounds_m": [
+        [
+          -234.578125,
+          -216.4250946044922
+        ],
+        [
+          -353.05584716796875,
+          -312.3628234863281
+        ],
+        [
+          -1.1549999713897705,
+          -1.1549999713897705
+        ]
+      ],
+      "triangles": 29,
+      "vertices": 87,
+      "collision": false,
+      "sha256": "15d01980911b736ec776658045cb8c15c170553c1af6ce15e73b3e8dfdfc46d0",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_S_RailBed",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_S_RailBed.fbx",
+      "material_roles": [
+        "Detail"
+      ],
+      "bounds_m": [
+        [
+          -202.05929565429688,
+          393.76324462890625
+        ],
+        [
+          -530.6614379882812,
+          36.48503112792969
+        ],
+        [
+          -1.159999966621399,
+          -1.159999966621399
+        ]
+      ],
+      "triangles": 974,
+      "vertices": 2922,
+      "collision": false,
+      "sha256": "bc0a5c9539d1c8e44092dd3eef3fb9eeb048dcb5537af88c5e45c9a5d2a0b51a",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_S_Rails",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_S_Rails.fbx",
+      "material_roles": [
+        "Curbs"
+      ],
+      "bounds_m": [
+        [
+          -201.488037109375,
+          393.1898193359375
+        ],
+        [
+          -530.0867919921875,
+          35.93872833251953
+        ],
+        [
+          -1.1100000143051147,
+          -1.1100000143051147
+        ]
+      ],
+      "triangles": 1662,
+      "vertices": 4986,
+      "collision": false,
+      "sha256": "6daef49d499d9165196c01aea38653c9d2cf0752b9343cd435751662065ae948",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_S_Roads",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_S_Roads.fbx",
+      "material_roles": [
+        "Roads"
+      ],
+      "bounds_m": [
+        [
+          -250.0,
+          250.0
+        ],
+        [
+          -518.558837890625,
+          -170.0
+        ],
+        [
+          -1.1649999618530273,
+          -1.1649999618530273
+        ]
+      ],
+      "triangles": 506,
+      "vertices": 1518,
+      "collision": false,
+      "sha256": "5d1e50013d135e49e915fbd42b0b7afe1256fd7b5bff5b804c7ebd3226ed0385",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_W_Buildings",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_W_Buildings.fbx",
+      "material_roles": [
+        "Buildings",
+        "Roofs"
+      ],
+      "bounds_m": [
+        [
+          -508.50556,
+          -253.89332580566406
+        ],
+        [
+          -348.7920837402344,
+          631.30136
+        ],
+        [
+          -1.2,
+          4.800000190734863
+        ]
+      ],
+      "triangles": 1646,
+      "vertices": 3160,
+      "collision": false,
+      "sha256": "7419d0eb546228e398191b8a048c76286533b40f15c8321d4ec4a20197e784ed",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_W_Hardstand",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_W_Hardstand.fbx",
+      "material_roles": [
+        "Hardstand"
+      ],
+      "bounds_m": [
+        [
+          -455.20465087890625,
+          -419.5937805175781
+        ],
+        [
+          -66.06939697265625,
+          64.01371765136719
+        ],
+        [
+          -1.1549999713897705,
+          -1.1549999713897705
+        ]
+      ],
+      "triangles": 48,
+      "vertices": 144,
+      "collision": false,
+      "sha256": "93251b29b49703ec8accdcfa281299b12c3f836b093925415f23297d7f9ab30d",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_W_RailBed",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_W_RailBed.fbx",
+      "material_roles": [
+        "Detail"
+      ],
+      "bounds_m": [
+        [
+          -526.2945556640625,
+          -492.1354675292969
+        ],
+        [
+          -430.4172668457031,
+          -404.77337646484375
+        ],
+        [
+          -1.159999966621399,
+          -1.159999966621399
+        ]
+      ],
+      "triangles": 24,
+      "vertices": 72,
+      "collision": false,
+      "sha256": "984d8e6923a9206205d7112de576631bfdb2ef029d5dcb6969d5742e4611cee6",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_W_Rails",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_W_Rails.fbx",
+      "material_roles": [
+        "Curbs"
+      ],
+      "bounds_m": [
+        [
+          -525.8212890625,
+          -492.6069030761719
+        ],
+        [
+          -429.7808837890625,
+          -405.41082763671875
+        ],
+        [
+          -1.1100000143051147,
+          -1.1100000143051147
+        ]
+      ],
+      "triangles": 41,
+      "vertices": 123,
+      "collision": false,
+      "sha256": "503c8cf18b735078bd7b2ca4c838cdb924134d23520c0a5191fe37a43753b146",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_W_Roads",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_W_Roads.fbx",
+      "material_roles": [
+        "Roads"
+      ],
+      "bounds_m": [
+        [
+          -516.8226318359375,
+          -250.0
+        ],
+        [
+          -479.51220703125,
+          629.7359008789062
+        ],
+        [
+          -1.1649999618530273,
+          -1.1649999618530273
+        ]
+      ],
+      "triangles": 633,
+      "vertices": 1899,
+      "collision": false,
+      "sha256": "2d647f5b9f652d5607a196da50c1612d76a047c99b837991a4d45e969b5ad54c",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Far_W_parks",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Far_W_parks.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -520.9674682617188,
+          -347.41839599609375
+        ],
+        [
+          -450.49322509765625,
+          10.102950096130371
+        ],
+        [
+          -1.1699999570846558,
+          -1.1699999570846558
+        ]
+      ],
+      "triangles": 54,
+      "vertices": 63,
+      "collision": false,
+      "sha256": "44b6536be7345724638e5cd6e4b00aff841bfe31b040d95ebbc1fcad8a8b991c",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_0_0",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_0_0.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -700.0,
+          -420.0
+        ],
+        [
+          -700.0,
+          -420.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "11ca7b29be63bf7f0cd212d70811f713c9ba517235f5dd64559491e48163c261",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_0_1",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_0_1.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -700.0,
+          -420.0
+        ],
+        [
+          -420.0,
+          -140.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "3ab9ce40f6e223eca10a7c2798c6a22a2033a60838d2c1a4337c9023bdeb83d3",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_0_2",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_0_2.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -700.0,
+          -420.0
+        ],
+        [
+          -140.0,
+          140.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "c95f644ea3e9c73b7163d7ea4268771f443a147c30c08f9f9f5221f0a093cd9a",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_0_3",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_0_3.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -700.0,
+          -420.0
+        ],
+        [
+          140.0,
+          420.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "103418c9d7e12c324fcc67cf081ec4445f84c4d06d2181cbf4fd7bc7369e0937",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_0_4",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_0_4.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -700.0,
+          -420.0
+        ],
+        [
+          420.0,
+          700.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "b918f883c7ece00caf421698a981aeddde452bab9c143d29a8f3bd092c3c3aaa",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_1_0",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_1_0.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -420.0,
+          -140.0
+        ],
+        [
+          -700.0,
+          -420.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "01de9285aceb1204f68cca786135248739745c6b490fdeb2747e8a4fb67e65a3",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_1_1",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_1_1.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -420.0,
+          -140.0
+        ],
+        [
+          -420.0,
+          -140.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "8edfc06e905b269a8063b8edaebeab474290f1052aaf19ec7a5d797212d4914b",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_1_2",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_1_2.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -420.0,
+          -140.0
+        ],
+        [
+          -140.0,
+          140.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "cfc108391627270cc48bbca7c83c0215c449751671d3b2b90b8e7dceb8f2a975",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_1_3",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_1_3.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -420.0,
+          -140.0
+        ],
+        [
+          140.0,
+          420.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "ee24ff45f1d586f3cb888efca68e3f906a8689528eedfe35653a3e8f683410ca",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_1_4",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_1_4.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -420.0,
+          -140.0
+        ],
+        [
+          420.0,
+          700.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "75fde059e22ea5b9427a646b325cbf596c45cccfb9bef3dea5975bdb0954576a",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_2_0",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_2_0.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -140.0,
+          140.0
+        ],
+        [
+          -700.0,
+          -420.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "c0d2a303350e0a1a9ea1e2f8412b92740a78d625325427e020a65a20ab3a4a60",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_2_1",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_2_1.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -140.0,
+          140.0
+        ],
+        [
+          -420.0,
+          -140.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "8243b58eade14054bce4306e9a803ab41716cbf5552d2f375ae8cab29909750f",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_2_2",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_2_2.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -140.0,
+          140.0
+        ],
+        [
+          -140.0,
+          140.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "bc6790989f016fbe860799e4df48e146c7724a88e93f8f89930726a5b181f067",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_2_3",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_2_3.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -140.0,
+          140.0
+        ],
+        [
+          140.0,
+          420.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "51f04a6a58a510eab084ad60a114b9f68013fd889e2b35f01ab3050037e9b048",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_2_4",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_2_4.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -140.0,
+          140.0
+        ],
+        [
+          420.0,
+          700.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "5ce87844cf188fd37cf230e8b78c1584a81293ce0a88b7f8e95f4eb3330331c7",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_3_0",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_3_0.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          140.0,
+          420.0
+        ],
+        [
+          -700.0,
+          -420.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "ee5292c5e85da4ec86fd1c27e06685b5c79037ed66e88a4474d302825affe890",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_3_1",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_3_1.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          140.0,
+          420.0
+        ],
+        [
+          -420.0,
+          -140.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "3bc4c255acc0c9b9db6b640ffccc5da466ca7b95a9349344762de1707e88dfc2",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_3_2",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_3_2.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          140.0,
+          420.0
+        ],
+        [
+          -140.0,
+          140.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "316356992b1b057b6b3c777f37acf1d9db7f7695558623470d57c2f58f148dc8",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_3_3",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_3_3.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          140.0,
+          420.0
+        ],
+        [
+          140.0,
+          420.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "e7748ffa63353f5c7ce8401046ebcdd74e3e7b907110f0dfab5387c594978b18",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_3_4",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_3_4.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          140.0,
+          420.0
+        ],
+        [
+          420.0,
+          700.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "7111ebddccb29b0b278d0ec398e9448d7c8b3754b6b67731695a884e10dedacf",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_4_0",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_4_0.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          420.0,
+          700.0
+        ],
+        [
+          -700.0,
+          -420.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "5a050d037f209e5d838052ddce90c6195e72fcbb87f3332baa316742ee41faa5",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_4_1",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_4_1.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          420.0,
+          700.0
+        ],
+        [
+          -420.0,
+          -140.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "cff6b620418d5f2b54b50a34f8ceac780fef431c1533a53e209f2b2777a2497e",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_4_2",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_4_2.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          420.0,
+          700.0
+        ],
+        [
+          -140.0,
+          140.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "c04bd7b428ede65fa08d4bed77ced05f20a64babad522d670cf9f00a4c9b9c3e",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_4_3",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_4_3.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          420.0,
+          700.0
+        ],
+        [
+          140.0,
+          420.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "6cb04f7976d2add3c9c723da4984afaf4f579732e3a1b67a2acc783b993545af",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Ground_4_4",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Ground_4_4.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          420.0,
+          700.0
+        ],
+        [
+          420.0,
+          700.0
+        ],
+        [
+          -1.525,
+          -1.275
+        ]
+      ],
+      "triangles": 12,
+      "vertices": 8,
+      "collision": false,
+      "sha256": "a57d1520869ade1bf6a5b6a4ddf8b4adf11886d73e05191f48f31b12ded97a2b",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Near_Buildings",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Near_Buildings.fbx",
+      "material_roles": [
+        "Buildings",
+        "Roofs"
+      ],
+      "bounds_m": [
+        [
+          -203.83338,
+          257.23614501953125
+        ],
+        [
+          130.11955,
+          296.7493591308594
+        ],
+        [
+          -1.2,
+          12.800000190734863
+        ]
+      ],
+      "triangles": 34,
+      "vertices": 60,
+      "collision": false,
+      "sha256": "c9db156dfba4ffddd72145cd556a6658bcc69de4343c2c00d83c316fcabcd6e1",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Near_Curbs",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Near_Curbs.fbx",
+      "material_roles": [
+        "Curbs"
+      ],
+      "bounds_m": [
+        [
+          -210.925,
+          209.925
+        ],
+        [
+          -89.0,
+          80.0
+        ],
+        [
+          -1.1800000000000002,
+          -0.9400000000000001
+        ]
+      ],
+      "triangles": 48,
+      "vertices": 32,
+      "collision": false,
+      "sha256": "d5340515e8613119fe85d8181d29c42d4a4bf6cff1a6783c73f7e1f1c98a4420",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Near_DockAprons",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Near_DockAprons.fbx",
+      "material_roles": [
+        "Ground"
+      ],
+      "bounds_m": [
+        [
+          -166.0,
+          166.0
+        ],
+        [
+          -102.05,
+          92.45
+        ],
+        [
+          -1.165,
+          -1.105
+        ]
+      ],
+      "triangles": 24,
+      "vertices": 16,
+      "collision": false,
+      "sha256": "c7eb3cf84f8e2d4d4b2717762158d12dc029e3d916e2253739e48240b878a1ac",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Near_Hardstand",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Near_Hardstand.fbx",
+      "material_roles": [
+        "Hardstand"
+      ],
+      "bounds_m": [
+        [
+          -166.0800018310547,
+          166.78599548339844
+        ],
+        [
+          -115.0,
+          132.0
+        ],
+        [
+          -1.1399999856948853,
+          -1.1399999856948853
+        ]
+      ],
+      "triangles": 5,
+      "vertices": 9,
+      "collision": false,
+      "sha256": "1662b042c2012a997e99f18a766cc0615f0d68c4a978ab78dd62866e3dfd89f2",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Near_Islands",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Near_Islands.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          -210.5,
+          209.5
+        ],
+        [
+          -65.69999999999999,
+          79.6
+        ],
+        [
+          -1.135,
+          -0.905
+        ]
+      ],
+      "triangles": 192,
+      "vertices": 128,
+      "collision": false,
+      "sha256": "cfb4e100995595df3a9de14acd0eb46a955bc8d46c4b57069e21f674208640ae",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Near_Landscape",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Near_Landscape.fbx",
+      "material_roles": [
+        "Landscape"
+      ],
+      "bounds_m": [
+        [
+          136.36676025390625,
+          191.6107635498047
+        ],
+        [
+          -88.94962310791016,
+          78.58878326416016
+        ],
+        [
+          -1.1200000047683716,
+          -1.1200000047683716
+        ]
+      ],
+      "triangles": 26,
+      "vertices": 78,
+      "collision": false,
+      "sha256": "e494abc9a95737cab55cee161fff361ffaff84763ba2d0eeee3882f6742d2f1d",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Near_Markings",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Near_Markings.fbx",
+      "material_roles": [
+        "Markings"
+      ],
+      "bounds_m": [
+        [
+          -210.5,
+          209.5
+        ],
+        [
+          -114.0,
+          121.07499694824219
+        ],
+        [
+          -1.100000023841858,
+          -1.090999960899353
+        ]
+      ],
+      "triangles": 462,
+      "vertices": 924,
+      "collision": false,
+      "sha256": "e7dbd3cf499eacd22133d5ad6d9abbbaf37f000b47f264eb7d0b15fc51b7beb6",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Near_Parking",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Near_Parking.fbx",
+      "material_roles": [
+        "Roads"
+      ],
+      "bounds_m": [
+        [
+          -211.0,
+          210.0
+        ],
+        [
+          -89.0,
+          80.0
+        ],
+        [
+          -1.15,
+          -1.1
+        ]
+      ],
+      "triangles": 24,
+      "vertices": 16,
+      "collision": false,
+      "sha256": "0798c3a47472814cdfcc8c9baa4f92aa7422d4728175071ea77a8bf5643dba34",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Near_RailBed",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Near_RailBed.fbx",
+      "material_roles": [
+        "Detail"
+      ],
+      "bounds_m": [
+        [
+          -102.05147552490234,
+          482.739990234375
+        ],
+        [
+          -512.2360229492188,
+          415.7850341796875
+        ],
+        [
+          -1.159999966621399,
+          -1.159999966621399
+        ]
+      ],
+      "triangles": 943,
+      "vertices": 2829,
+      "collision": false,
+      "sha256": "a1c6e412b27bba6cd52f1d7f71ee4f239af1071eaf5ed99b3217f6d9fe5291e2",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Near_Rails",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Near_Rails.fbx",
+      "material_roles": [
+        "Curbs"
+      ],
+      "bounds_m": [
+        [
+          -101.42454528808594,
+          482.1796875
+        ],
+        [
+          -511.7520751953125,
+          415.2253112792969
+        ],
+        [
+          -1.1100000143051147,
+          -1.1100000143051147
+        ]
+      ],
+      "triangles": 1374,
+      "vertices": 4122,
+      "collision": false,
+      "sha256": "ac340e568cb7d6f4f83a08d7187974ee3fea3d65fa3f1b351a17f05069fe9669",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Near_Roads",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Near_Roads.fbx",
+      "material_roles": [
+        "Roads"
+      ],
+      "bounds_m": [
+        [
+          -250.0,
+          250.0
+        ],
+        [
+          -170.0,
+          240.0
+        ],
+        [
+          -1.1649999618530273,
+          -1.1649999618530273
+        ]
+      ],
+      "triangles": 387,
+      "vertices": 1161,
+      "collision": false,
+      "sha256": "638a2560fb28fbb736c33bca533a43594732add653b6cb7d06399219feef9105",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Near_Sleepers",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Near_Sleepers.fbx",
+      "material_roles": [
+        "Trunk"
+      ],
+      "bounds_m": [
+        [
+          -100.73565673828125,
+          481.2316589355469
+        ],
+        [
+          -510.67657470703125,
+          414.2756042480469
+        ],
+        [
+          -1.1299999952316284,
+          -1.1299999952316284
+        ]
+      ],
+      "triangles": 1949,
+      "vertices": 5847,
+      "collision": false,
+      "sha256": "b5027d0a258abf2caf3b2f49628f8fe54b7315ca3dbe55c0dc6a198326cbe518",
+      "instance_only": false,
+      "source_geometry": "CADMapper + documented reference reconstruction"
+    },
+    {
+      "name": "SM_MPR_Env_Tree_0",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Tree_0.fbx",
+      "material_roles": [
+        "Trees",
+        "Trunk"
+      ],
+      "bounds_m": [
+        [
+          -3.8945090602675756,
+          3.945304158758108
+        ],
+        [
+          -3.3884034359700097,
+          3.530592658891256
+        ],
+        [
+          -0.009942766358846503,
+          8.6
+        ]
+      ],
+      "triangles": 1856,
+      "vertices": 946,
+      "collision": false,
+      "sha256": "0ff8f112e1dff9db221686029366679b4c308698a01df855528090b9a4eaeda9",
+      "instance_only": true,
+      "source_geometry": "GHS reusable generator"
+    },
+    {
+      "name": "SM_MPR_Env_Tree_1",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Tree_1.fbx",
+      "material_roles": [
+        "TreesLight",
+        "Trunk"
+      ],
+      "bounds_m": [
+        [
+          -3.109467956588648,
+          3.1735151205033967
+        ],
+        [
+          -3.141707061759268,
+          3.329925511114948
+        ],
+        [
+          -0.009942766358846503,
+          10.799999999999999
+        ]
+      ],
+      "triangles": 1856,
+      "vertices": 946,
+      "collision": false,
+      "sha256": "13af880d2090335fb4a3de98606c62eba3fd999903570df1065a5f37702ad231",
+      "instance_only": true,
+      "source_geometry": "GHS reusable generator"
+    },
+    {
+      "name": "SM_MPR_Env_Tree_2",
+      "fbx": "SourceAssets/MPR/environment/SM_MPR_Env_Tree_2.fbx",
+      "material_roles": [
+        "TreesDark",
+        "Trunk"
+      ],
+      "bounds_m": [
+        [
+          -3.479562074568326,
+          3.59862502651257
+        ],
+        [
+          -4.46207584718305,
+          4.590020567998538
+        ],
+        [
+          -0.009942766358846503,
+          8.7
+        ]
+      ],
+      "triangles": 1856,
+      "vertices": 946,
+      "collision": false,
+      "sha256": "e2b87dac8a40c69b714ef1867c9e03019f1092eb7ef4a3202434fe43734a7213",
+      "instance_only": true,
+      "source_geometry": "GHS reusable generator"
+    }
+  ],
+  "instances": {
+    "SM_MPR_Env_Car_1": [
+      {
+        "position_m": [
+          -207.8,
+          -84.64999999999999,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -207.8,
+          -73.05,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -207.8,
+          -49.85,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -207.8,
+          -38.25,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -207.8,
+          -15.05,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -207.8,
+          -3.4500000000000055,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -207.8,
+          19.749999999999996,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -207.8,
+          31.34999999999999,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -207.8,
+          54.55,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -207.8,
+          66.14999999999999,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          187.2,
+          -11.65,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          187.2,
+          -0.050000000000000044,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          187.2,
+          23.149999999999995,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          187.2,
+          34.75,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          187.2,
+          57.95,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          187.2,
+          69.55,
+          -1.125
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    ],
+    "SM_MPR_Env_Tree_0": [
+      {
+        "position_m": [
+          -207.8,
+          -64.35,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 286.79434846558934,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          -207.8,
+          40.05,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 310.5733464664328,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          -29.55,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 282.9225803738861,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          74.85000000000001,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 233.6494421848877,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          187.2,
+          78.25,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 218.80550232918304,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          206.8,
+          78.25,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 255.0550981526021,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          -118,
+          -124.0,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 236.07809886797332,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          -70,
+          -124.0,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 180.71202117270437,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          -22,
+          -121.6,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 6.836965702403144,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          26,
+          -119.2,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 146.38847624740433,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          74,
+          -116.8,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 91.36672613353298,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          122,
+          -114.4,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 200.33474866401963,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          -216,
+          -50,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 59.81182175812334,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          -216,
+          -5,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 218.80562391925517,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          -216,
+          40,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 275.9395435560191,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          216,
+          -10,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 303.2149023533518,
+        "scale": [
+          0.64,
+          0.64,
+          0.64
+        ]
+      },
+      {
+        "position_m": [
+          216,
+          38,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 78.48973070609372,
+        "scale": [
+          0.64,
+          0.64,
+          0.64
+        ]
+      },
+      {
+        "position_m": [
+          171,
+          -29,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 65.60173585708506,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          137,
+          -88,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 127.05292724099304,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          54.73828898565108,
+          331.57316043064986,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 219.96708779135614,
+        "scale": [
+          0.635585833657274,
+          0.635585833657274,
+          0.635585833657274
+        ]
+      },
+      {
+        "position_m": [
+          -330.3972377085977,
+          -268.46728528792255,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 312.9164888005057,
+        "scale": [
+          0.8856630047264077,
+          0.8856630047264077,
+          0.8856630047264077
+        ]
+      },
+      {
+        "position_m": [
+          375.8553529190599,
+          23.009693756527668,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 321.52863731986605,
+        "scale": [
+          0.6848145687208825,
+          0.6848145687208825,
+          0.6848145687208825
+        ]
+      },
+      {
+        "position_m": [
+          -90.45001635247843,
+          293.8533918943738,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 42.656941866824205,
+        "scale": [
+          0.6007310056116784,
+          0.6007310056116784,
+          0.6007310056116784
+        ]
+      },
+      {
+        "position_m": [
+          417.0176721655529,
+          -6.537477581470057,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 161.21915538212804,
+        "scale": [
+          0.6207977108038538,
+          0.6207977108038538,
+          0.6207977108038538
+        ]
+      },
+      {
+        "position_m": [
+          95.84907497335314,
+          331.00800284309605,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 190.9453461426999,
+        "scale": [
+          0.8227608856783947,
+          0.8227608856783947,
+          0.8227608856783947
+        ]
+      },
+      {
+        "position_m": [
+          -192.4984109277782,
+          -260.3303322582162,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 193.81593196910484,
+        "scale": [
+          0.8645959144149541,
+          0.8645959144149541,
+          0.8645959144149541
+        ]
+      },
+      {
+        "position_m": [
+          422.15246741416956,
+          202.89281193383135,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 247.4417360751497,
+        "scale": [
+          0.8422899529715256,
+          0.8422899529715256,
+          0.8422899529715256
+        ]
+      },
+      {
+        "position_m": [
+          -231.24462102925438,
+          307.87666616551303,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 307.8185776313585,
+        "scale": [
+          0.6138874733041995,
+          0.6138874733041995,
+          0.6138874733041995
+        ]
+      },
+      {
+        "position_m": [
+          271.1651815900959,
+          16.016964739795867,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 339.88745887222086,
+        "scale": [
+          0.7134071599774977,
+          0.7134071599774977,
+          0.7134071599774977
+        ]
+      },
+      {
+        "position_m": [
+          -286.24780603513267,
+          -317.8725058710979,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 291.49797078069247,
+        "scale": [
+          0.7863527636203196,
+          0.7863527636203196,
+          0.7863527636203196
+        ]
+      },
+      {
+        "position_m": [
+          297.0359165403322,
+          70.94023235332969,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 250.56009557646763,
+        "scale": [
+          0.8420274305147172,
+          0.8420274305147172,
+          0.8420274305147172
+        ]
+      },
+      {
+        "position_m": [
+          197.21256444249923,
+          299.66403301083335,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 250.3461419467341,
+        "scale": [
+          0.8752813763304803,
+          0.8752813763304803,
+          0.8752813763304803
+        ]
+      },
+      {
+        "position_m": [
+          -185.43200596045267,
+          -284.9814846645601,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 109.41746600411572,
+        "scale": [
+          0.91963097200765,
+          0.91963097200765,
+          0.91963097200765
+        ]
+      },
+      {
+        "position_m": [
+          -410.2663538433466,
+          264.58193423241596,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 269.7657535495467,
+        "scale": [
+          0.7851988446575124,
+          0.7851988446575124,
+          0.7851988446575124
+        ]
+      },
+      {
+        "position_m": [
+          278.257955927241,
+          51.062297084737054,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 161.85606375386783,
+        "scale": [
+          0.7471595528327764,
+          0.7471595528327764,
+          0.7471595528327764
+        ]
+      },
+      {
+        "position_m": [
+          -394.16604022404954,
+          403.9554559954946,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 342.68211195484844,
+        "scale": [
+          0.6651713061115944,
+          0.6651713061115944,
+          0.6651713061115944
+        ]
+      },
+      {
+        "position_m": [
+          429.8208660197773,
+          231.12329816394026,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 134.81462806556138,
+        "scale": [
+          0.7528808474193784,
+          0.7528808474193784,
+          0.7528808474193784
+        ]
+      },
+      {
+        "position_m": [
+          -348.9579827153682,
+          356.23094194458724,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 79.13933400084501,
+        "scale": [
+          0.8535660000157268,
+          0.8535660000157268,
+          0.8535660000157268
+        ]
+      },
+      {
+        "position_m": [
+          -377.8003365313502,
+          13.140738378761966,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 255.3857927157226,
+        "scale": [
+          0.6149659354993618,
+          0.6149659354993618,
+          0.6149659354993618
+        ]
+      },
+      {
+        "position_m": [
+          -20.562685452476046,
+          297.90581679749243,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 132.74470322381617,
+        "scale": [
+          0.9010169277095694,
+          0.9010169277095694,
+          0.9010169277095694
+        ]
+      },
+      {
+        "position_m": [
+          5.4774339814626956,
+          382.88661508551525,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 24.81154771415558,
+        "scale": [
+          0.6683738518749007,
+          0.6683738518749007,
+          0.6683738518749007
+        ]
+      },
+      {
+        "position_m": [
+          -323.07725609887774,
+          -108.68051462213526,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 305.4655816945594,
+        "scale": [
+          0.8677188058274965,
+          0.8677188058274965,
+          0.8677188058274965
+        ]
+      },
+      {
+        "position_m": [
+          386.75431790819016,
+          40.57195158127769,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 319.9736446405167,
+        "scale": [
+          0.7472251653105946,
+          0.7472251653105946,
+          0.7472251653105946
+        ]
+      },
+      {
+        "position_m": [
+          324.73044498738034,
+          193.29827678688582,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 81.29318459926922,
+        "scale": [
+          0.905399963760341,
+          0.905399963760341,
+          0.905399963760341
+        ]
+      },
+      {
+        "position_m": [
+          -103.8492974869842,
+          409.79882689276803,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 90.97640391139468,
+        "scale": [
+          0.7398349107509806,
+          0.7398349107509806,
+          0.7398349107509806
+        ]
+      },
+      {
+        "position_m": [
+          -340.19067872269295,
+          -139.6646289307249,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 178.67202504314145,
+        "scale": [
+          0.6277244243248438,
+          0.6277244243248438,
+          0.6277244243248438
+        ]
+      },
+      {
+        "position_m": [
+          354.0536139580395,
+          204.45900181808872,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 112.62457992374895,
+        "scale": [
+          0.8107656813317907,
+          0.8107656813317907,
+          0.8107656813317907
+        ]
+      },
+      {
+        "position_m": [
+          -277.15047054164165,
+          -299.5085881219706,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 250.42234010315292,
+        "scale": [
+          0.8393199463115553,
+          0.8393199463115553,
+          0.8393199463115553
+        ]
+      },
+      {
+        "position_m": [
+          289.6712659552553,
+          -48.75841277424223,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 343.5426151305415,
+        "scale": [
+          0.6035631590897703,
+          0.6035631590897703,
+          0.6035631590897703
+        ]
+      },
+      {
+        "position_m": [
+          -371.49688962737156,
+          -100.41278922155212,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 55.82854968623017,
+        "scale": [
+          0.7993654575782835,
+          0.7993654575782835,
+          0.7993654575782835
+        ]
+      },
+      {
+        "position_m": [
+          -345.6582305783401,
+          -1.6720351763074746,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 169.90781938578866,
+        "scale": [
+          0.8682901998778577,
+          0.8682901998778577,
+          0.8682901998778577
+        ]
+      },
+      {
+        "position_m": [
+          -428.7043951015052,
+          117.85339047230855,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 6.325110924109287,
+        "scale": [
+          0.7581406938510469,
+          0.7581406938510469,
+          0.7581406938510469
+        ]
+      },
+      {
+        "position_m": [
+          -417.9196122657488,
+          354.8487054059465,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 218.4581075386878,
+        "scale": [
+          0.7066586105033337,
+          0.7066586105033337,
+          0.7066586105033337
+        ]
+      },
+      {
+        "position_m": [
+          240.39917949734524,
+          72.7443865890462,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 59.66572339131348,
+        "scale": [
+          0.6010523315150575,
+          0.6010523315150575,
+          0.6010523315150575
+        ]
+      },
+      {
+        "position_m": [
+          233.93052778103925,
+          -105.91185370987372,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 18.838246576029626,
+        "scale": [
+          0.7382758126071338,
+          0.7382758126071338,
+          0.7382758126071338
+        ]
+      },
+      {
+        "position_m": [
+          301.08621894944736,
+          221.43852794020938,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 325.61165263894947,
+        "scale": [
+          0.676325264642564,
+          0.676325264642564,
+          0.676325264642564
+        ]
+      },
+      {
+        "position_m": [
+          206.80308883608996,
+          313.0712904094395,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 350.6702194053076,
+        "scale": [
+          0.7084800409319614,
+          0.7084800409319614,
+          0.7084800409319614
+        ]
+      },
+      {
+        "position_m": [
+          -273.51787058890676,
+          -140.38126173383986,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 306.81789145929434,
+        "scale": [
+          0.9148756821437911,
+          0.9148756821437911,
+          0.9148756821437911
+        ]
+      },
+      {
+        "position_m": [
+          -417.604849427707,
+          313.66099669574396,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 313.5629925197321,
+        "scale": [
+          0.6746539906688508,
+          0.6746539906688508,
+          0.6746539906688508
+        ]
+      },
+      {
+        "position_m": [
+          -400.15596328904445,
+          -318.73203322816494,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 170.83222164701252,
+        "scale": [
+          0.8259769029453572,
+          0.8259769029453572,
+          0.8259769029453572
+        ]
+      }
+    ],
+    "SM_MPR_Env_Tree_1": [
+      {
+        "position_m": [
+          -207.8,
+          -29.55,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 21.105443789292448,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          -207.8,
+          74.85000000000001,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 32.858652472601136,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          5.249999999999997,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 146.40467956597217,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          187.2,
+          8.649999999999999,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 144.3328797908519,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          206.8,
+          8.649999999999999,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 18.260602437182662,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          -150,
+          -124.0,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 331.98208315310967,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          -102,
+          -124.0,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 265.3585792882291,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          -54,
+          -123.2,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 322.2107477497482,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          -6,
+          -120.8,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 315.9833276000507,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          42,
+          -118.4,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 46.64829012659711,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          90,
+          -116.0,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 213.42923975531596,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          -216,
+          -80,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 141.12494254214042,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          -216,
+          -35,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 12.773543400113173,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          -216,
+          10,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 2.038439779854415,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          -216,
+          55,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 72.21010613339335,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          216,
+          6,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 193.93349766518202,
+        "scale": [
+          0.64,
+          0.64,
+          0.64
+        ]
+      },
+      {
+        "position_m": [
+          216,
+          54,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 13.857624987290214,
+        "scale": [
+          0.64,
+          0.64,
+          0.64
+        ]
+      },
+      {
+        "position_m": [
+          166,
+          -55,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 340.6449624674488,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          126,
+          -102,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 310.75024424677133,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          354.00594629672867,
+          -92.38417746756636,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 180.87476724320985,
+        "scale": [
+          0.7289338913529568,
+          0.7289338913529568,
+          0.7289338913529568
+        ]
+      },
+      {
+        "position_m": [
+          -214.27226015316396,
+          327.6942374424543,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 168.10537774400441,
+        "scale": [
+          0.6663449615922092,
+          0.6663449615922092,
+          0.6663449615922092
+        ]
+      },
+      {
+        "position_m": [
+          408.68024585895796,
+          9.749902429212682,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 157.0991598537289,
+        "scale": [
+          0.8990779459147971,
+          0.8990779459147971,
+          0.8990779459147971
+        ]
+      },
+      {
+        "position_m": [
+          342.82860682283365,
+          38.28117831048212,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 160.83920319396063,
+        "scale": [
+          0.8345314539444023,
+          0.8345314539444023,
+          0.8345314539444023
+        ]
+      },
+      {
+        "position_m": [
+          346.3360767697194,
+          13.159124553782362,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 16.68265577921115,
+        "scale": [
+          0.8033996196024598,
+          0.8033996196024598,
+          0.8033996196024598
+        ]
+      },
+      {
+        "position_m": [
+          -151.85052351709714,
+          298.07889242025647,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 4.965839667038292,
+        "scale": [
+          0.7360617454979961,
+          0.7360617454979961,
+          0.7360617454979961
+        ]
+      },
+      {
+        "position_m": [
+          387.3023643266947,
+          64.25151216640353,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 252.20323848926253,
+        "scale": [
+          0.6324307443365397,
+          0.6324307443365397,
+          0.6324307443365397
+        ]
+      },
+      {
+        "position_m": [
+          -230.57662288638033,
+          221.17262346251778,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 148.00188139739447,
+        "scale": [
+          0.8523235754508236,
+          0.8523235754508236,
+          0.8523235754508236
+        ]
+      },
+      {
+        "position_m": [
+          376.3227877956116,
+          -5.14613883038146,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 92.49504594820289,
+        "scale": [
+          0.7120448355620475,
+          0.7120448355620475,
+          0.7120448355620475
+        ]
+      },
+      {
+        "position_m": [
+          357.0892519452225,
+          -72.34754956993658,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 21.55745017581804,
+        "scale": [
+          0.7823486153986886,
+          0.7823486153986886,
+          0.7823486153986886
+        ]
+      },
+      {
+        "position_m": [
+          378.6086202841699,
+          -29.755923402363976,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 55.671790369819675,
+        "scale": [
+          0.6320158900475541,
+          0.6320158900475541,
+          0.6320158900475541
+        ]
+      },
+      {
+        "position_m": [
+          414.90380992543885,
+          21.10002525406503,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 304.98693754901154,
+        "scale": [
+          0.7122470715582605,
+          0.7122470715582605,
+          0.7122470715582605
+        ]
+      },
+      {
+        "position_m": [
+          -80.70859288403608,
+          302.3257115275244,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 102.27829638791455,
+        "scale": [
+          0.8691301228735684,
+          0.8691301228735684,
+          0.8691301228735684
+        ]
+      },
+      {
+        "position_m": [
+          -144.31453995766157,
+          360.19135246453857,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 50.99051946671424,
+        "scale": [
+          0.9244609440150369,
+          0.9244609440150369,
+          0.9244609440150369
+        ]
+      },
+      {
+        "position_m": [
+          -265.0586245450455,
+          -100.20106005728297,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 325.88221049633376,
+        "scale": [
+          0.6760821398753118,
+          0.6760821398753118,
+          0.6760821398753118
+        ]
+      },
+      {
+        "position_m": [
+          -405.4111092407819,
+          -134.15333536838483,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 291.24868781001663,
+        "scale": [
+          0.9144314692004895,
+          0.9144314692004895,
+          0.9144314692004895
+        ]
+      },
+      {
+        "position_m": [
+          -406.08766018773446,
+          283.4394215821069,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 143.17409870761966,
+        "scale": [
+          0.743577756945774,
+          0.743577756945774,
+          0.743577756945774
+        ]
+      },
+      {
+        "position_m": [
+          -116.12435818560328,
+          333.9010815796049,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 117.8935217737052,
+        "scale": [
+          0.672963718889399,
+          0.672963718889399,
+          0.672963718889399
+        ]
+      },
+      {
+        "position_m": [
+          438.27013518451724,
+          106.02543177076524,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 130.15600179792764,
+        "scale": [
+          0.7323955665429487,
+          0.7323955665429487,
+          0.7323955665429487
+        ]
+      },
+      {
+        "position_m": [
+          -360.43201975853947,
+          -294.1238091875959,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 288.9878362737742,
+        "scale": [
+          0.8259488732554316,
+          0.8259488732554316,
+          0.8259488732554316
+        ]
+      },
+      {
+        "position_m": [
+          -387.20340988033314,
+          289.1163779608636,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 334.4075194597889,
+        "scale": [
+          0.6885735148088808,
+          0.6885735148088808,
+          0.6885735148088808
+        ]
+      },
+      {
+        "position_m": [
+          361.1405958597709,
+          364.6273717159802,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 327.01488246760414,
+        "scale": [
+          0.8178220361277578,
+          0.8178220361277578,
+          0.8178220361277578
+        ]
+      },
+      {
+        "position_m": [
+          -228.76969290542877,
+          240.75458512354112,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 317.3639845992549,
+        "scale": [
+          0.9134294884426912,
+          0.9134294884426912,
+          0.9134294884426912
+        ]
+      },
+      {
+        "position_m": [
+          -378.23123163903267,
+          239.9490506311837,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 87.71651626765357,
+        "scale": [
+          0.8219620709690572,
+          0.8219620709690572,
+          0.8219620709690572
+        ]
+      },
+      {
+        "position_m": [
+          399.59771416281467,
+          349.77296767864254,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 339.3103422408815,
+        "scale": [
+          0.7099720023171958,
+          0.7099720023171958,
+          0.7099720023171958
+        ]
+      },
+      {
+        "position_m": [
+          48.84675088557623,
+          337.22301990464507,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 60.9220230638326,
+        "scale": [
+          0.841597236909985,
+          0.841597236909985,
+          0.841597236909985
+        ]
+      },
+      {
+        "position_m": [
+          134.73818252307626,
+          375.66768378733445,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 253.5417899679283,
+        "scale": [
+          0.6040086863286424,
+          0.6040086863286424,
+          0.6040086863286424
+        ]
+      },
+      {
+        "position_m": [
+          -82.52153520912111,
+          344.0791431701042,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 134.42602383658163,
+        "scale": [
+          0.7907899927422211,
+          0.7907899927422211,
+          0.7907899927422211
+        ]
+      },
+      {
+        "position_m": [
+          -419.4605985994895,
+          268.3004417577721,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 253.67560613454827,
+        "scale": [
+          0.6925397894980168,
+          0.6925397894980168,
+          0.6925397894980168
+        ]
+      },
+      {
+        "position_m": [
+          39.36629381442174,
+          353.8459345791132,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 111.09124123002519,
+        "scale": [
+          0.6556556917611664,
+          0.6556556917611664,
+          0.6556556917611664
+        ]
+      },
+      {
+        "position_m": [
+          -180.32855474815824,
+          -181.8909945161377,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 60.12330001290715,
+        "scale": [
+          0.7532174818234353,
+          0.7532174818234353,
+          0.7532174818234353
+        ]
+      },
+      {
+        "position_m": [
+          -396.1720891481832,
+          275.4263071507652,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 57.24806428917053,
+        "scale": [
+          0.6755876837465016,
+          0.6755876837465016,
+          0.6755876837465016
+        ]
+      },
+      {
+        "position_m": [
+          -315.8181406649201,
+          -100.82375967299441,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 305.3435407425955,
+        "scale": [
+          0.7779604888015214,
+          0.7779604888015214,
+          0.7779604888015214
+        ]
+      },
+      {
+        "position_m": [
+          402.2344016850393,
+          -86.67289471128998,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 160.12996678437935,
+        "scale": [
+          0.8749809811616205,
+          0.8749809811616205,
+          0.8749809811616205
+        ]
+      },
+      {
+        "position_m": [
+          322.28111952414633,
+          -12.478934502820152,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 185.207012515781,
+        "scale": [
+          0.8527611206345787,
+          0.8527611206345787,
+          0.8527611206345787
+        ]
+      },
+      {
+        "position_m": [
+          -338.60344376986745,
+          -75.95912172837609,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 110.89046099502548,
+        "scale": [
+          0.6901868531768954,
+          0.6901868531768954,
+          0.6901868531768954
+        ]
+      },
+      {
+        "position_m": [
+          -229.35786118476,
+          340.9204560765327,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 134.8575818600884,
+        "scale": [
+          0.8378778105039782,
+          0.8378778105039782,
+          0.8378778105039782
+        ]
+      },
+      {
+        "position_m": [
+          383.3742240676479,
+          -65.26153270742884,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 132.72792148896283,
+        "scale": [
+          0.9196236185681494,
+          0.9196236185681494,
+          0.9196236185681494
+        ]
+      },
+      {
+        "position_m": [
+          -334.40933080213483,
+          -251.36551482835432,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 344.5946928443081,
+        "scale": [
+          0.833541911537982,
+          0.833541911537982,
+          0.833541911537982
+        ]
+      },
+      {
+        "position_m": [
+          328.147137761219,
+          257.02124507799033,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 227.40197841762014,
+        "scale": [
+          0.6552572080641434,
+          0.6552572080641434,
+          0.6552572080641434
+        ]
+      },
+      {
+        "position_m": [
+          54.514630239096334,
+          369.57545417334757,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 316.9571940381247,
+        "scale": [
+          0.7817856772259623,
+          0.7817856772259623,
+          0.7817856772259623
+        ]
+      }
+    ],
+    "SM_MPR_Env_Tree_2": [
+      {
+        "position_m": [
+          -207.8,
+          5.249999999999997,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 273.68631863067264,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          -64.35,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 324.897277175119,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          40.05,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 134.8101520770673,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          187.2,
+          43.45,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 205.95993214599267,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          206.8,
+          43.45,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 265.35168336152566,
+        "scale": [
+          0.56,
+          0.56,
+          0.56
+        ]
+      },
+      {
+        "position_m": [
+          -134,
+          -124.0,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 257.37805197320563,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          -86,
+          -124.0,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 67.51519983474282,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          -38,
+          -122.4,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 333.48899285132256,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          10,
+          -120.0,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 229.0652898330836,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          58,
+          -117.6,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 310.5676305105914,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          106,
+          -115.2,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 27.101567055987612,
+        "scale": [
+          0.65,
+          0.65,
+          0.65
+        ]
+      },
+      {
+        "position_m": [
+          -216,
+          -65,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 110.3803182057373,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          -216,
+          -20,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 314.4269194761608,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          -216,
+          25,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 208.5750500767524,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          -216,
+          70,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 334.55613284507115,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          216,
+          22,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 355.8020528946652,
+        "scale": [
+          0.64,
+          0.64,
+          0.64
+        ]
+      },
+      {
+        "position_m": [
+          216,
+          70,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 133.31560877096143,
+        "scale": [
+          0.64,
+          0.64,
+          0.64
+        ]
+      },
+      {
+        "position_m": [
+          151,
+          -75,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 41.43313324230333,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          113,
+          -113,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 14.842399516124294,
+        "scale": [
+          0.67,
+          0.67,
+          0.67
+        ]
+      },
+      {
+        "position_m": [
+          -320.21794484636854,
+          -201.9581903899693,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 282.2671739917863,
+        "scale": [
+          0.8536157401715182,
+          0.8536157401715182,
+          0.8536157401715182
+        ]
+      },
+      {
+        "position_m": [
+          -307.9350047643963,
+          -292.89779268768166,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 222.0497103640004,
+        "scale": [
+          0.6924736965735717,
+          0.6924736965735717,
+          0.6924736965735717
+        ]
+      },
+      {
+        "position_m": [
+          371.9958258185105,
+          176.92185850342855,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 35.07722375227445,
+        "scale": [
+          0.670384777215024,
+          0.670384777215024,
+          0.670384777215024
+        ]
+      },
+      {
+        "position_m": [
+          -388.20947185164397,
+          -24.480840569083966,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 152.12448786349887,
+        "scale": [
+          0.6670282475163738,
+          0.6670282475163738,
+          0.6670282475163738
+        ]
+      },
+      {
+        "position_m": [
+          346.15693425167865,
+          123.3783723732717,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 357.05583653016413,
+        "scale": [
+          0.6228976954008677,
+          0.6228976954008677,
+          0.6228976954008677
+        ]
+      },
+      {
+        "position_m": [
+          341.99153535651965,
+          -6.3521315213046705,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 100.3962997367119,
+        "scale": [
+          0.6351165911220403,
+          0.6351165911220403,
+          0.6351165911220403
+        ]
+      },
+      {
+        "position_m": [
+          -364.82990618302915,
+          240.34702721416875,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 260.5425698142892,
+        "scale": [
+          0.7891660801054466,
+          0.7891660801054466,
+          0.7891660801054466
+        ]
+      },
+      {
+        "position_m": [
+          -58.32825388711382,
+          397.8352460007452,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 177.64927525177364,
+        "scale": [
+          0.737904280763024,
+          0.737904280763024,
+          0.737904280763024
+        ]
+      },
+      {
+        "position_m": [
+          -397.03596658474305,
+          221.94711942927108,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 248.91735740649202,
+        "scale": [
+          0.663648931424986,
+          0.663648931424986,
+          0.663648931424986
+        ]
+      },
+      {
+        "position_m": [
+          -366.99562279949794,
+          376.08030496958304,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 106.16988446762367,
+        "scale": [
+          0.6342854879891563,
+          0.6342854879891563,
+          0.6342854879891563
+        ]
+      },
+      {
+        "position_m": [
+          -247.82869476187724,
+          -256.73555665779986,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 202.3430292628495,
+        "scale": [
+          0.800878109925903,
+          0.800878109925903,
+          0.800878109925903
+        ]
+      },
+      {
+        "position_m": [
+          -268.46720882282534,
+          293.13826656775836,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 77.93691884267916,
+        "scale": [
+          0.7828060372440545,
+          0.7828060372440545,
+          0.7828060372440545
+        ]
+      },
+      {
+        "position_m": [
+          -371.56354260203346,
+          -178.02870793852716,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 180.13248764208276,
+        "scale": [
+          0.7002757788868542,
+          0.7002757788868542,
+          0.7002757788868542
+        ]
+      },
+      {
+        "position_m": [
+          -342.2204253286782,
+          157.83816195845844,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 234.92023762882,
+        "scale": [
+          0.774594753612268,
+          0.774594753612268,
+          0.774594753612268
+        ]
+      },
+      {
+        "position_m": [
+          -148.9898311067941,
+          375.8896589241325,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 306.3252089048375,
+        "scale": [
+          0.6870417676734204,
+          0.6870417676734204,
+          0.6870417676734204
+        ]
+      },
+      {
+        "position_m": [
+          -318.55779736105524,
+          359.44418008053105,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 108.2437203574666,
+        "scale": [
+          0.6718990742572606,
+          0.6718990742572606,
+          0.6718990742572606
+        ]
+      },
+      {
+        "position_m": [
+          281.98784906551646,
+          -11.60497590659179,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 230.4645950432897,
+        "scale": [
+          0.8733940516575848,
+          0.8733940516575848,
+          0.8733940516575848
+        ]
+      },
+      {
+        "position_m": [
+          383.0014229848921,
+          -95.97065238992403,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 342.1529268117305,
+        "scale": [
+          0.770418791443324,
+          0.770418791443324,
+          0.770418791443324
+        ]
+      },
+      {
+        "position_m": [
+          -273.35415513718954,
+          101.40156736290771,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 117.7342400221611,
+        "scale": [
+          0.876253900840894,
+          0.876253900840894,
+          0.876253900840894
+        ]
+      },
+      {
+        "position_m": [
+          -327.03884086371687,
+          -102.94009814509411,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 246.95906120027786,
+        "scale": [
+          0.686116740596034,
+          0.686116740596034,
+          0.686116740596034
+        ]
+      },
+      {
+        "position_m": [
+          411.0928739370603,
+          103.66146946956002,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 354.882642494661,
+        "scale": [
+          0.8444975158489305,
+          0.8444975158489305,
+          0.8444975158489305
+        ]
+      },
+      {
+        "position_m": [
+          -367.30264000992486,
+          246.7311737992908,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 319.6654450456979,
+        "scale": [
+          0.681821390614567,
+          0.681821390614567,
+          0.681821390614567
+        ]
+      },
+      {
+        "position_m": [
+          418.4623691715831,
+          303.73564465661707,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 101.4983757155957,
+        "scale": [
+          0.9237768038905065,
+          0.9237768038905065,
+          0.9237768038905065
+        ]
+      },
+      {
+        "position_m": [
+          -303.2760496943159,
+          -139.1307226373697,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 185.07546973406477,
+        "scale": [
+          0.861740990690186,
+          0.861740990690186,
+          0.861740990690186
+        ]
+      },
+      {
+        "position_m": [
+          285.1476934801685,
+          -110.29669716244237,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 331.59580860501745,
+        "scale": [
+          0.7610687237405762,
+          0.7610687237405762,
+          0.7610687237405762
+        ]
+      },
+      {
+        "position_m": [
+          -404.3111286737091,
+          354.57484814648853,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 221.70039619092128,
+        "scale": [
+          0.7851133876531344,
+          0.7851133876531344,
+          0.7851133876531344
+        ]
+      },
+      {
+        "position_m": [
+          348.4710530168894,
+          100.07907460448439,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 147.73346321878216,
+        "scale": [
+          0.9165654302686999,
+          0.9165654302686999,
+          0.9165654302686999
+        ]
+      },
+      {
+        "position_m": [
+          -421.4924264311718,
+          397.55500339483433,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 4.478381110402196,
+        "scale": [
+          0.7467048382741156,
+          0.7467048382741156,
+          0.7467048382741156
+        ]
+      },
+      {
+        "position_m": [
+          -147.46980210043148,
+          352.68503229564635,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 53.307948864967905,
+        "scale": [
+          0.6560257909485206,
+          0.6560257909485206,
+          0.6560257909485206
+        ]
+      },
+      {
+        "position_m": [
+          -33.20755792853919,
+          406.2235046334914,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 296.7116177037357,
+        "scale": [
+          0.8359283104979744,
+          0.8359283104979744,
+          0.8359283104979744
+        ]
+      },
+      {
+        "position_m": [
+          -136.26544694079382,
+          -290.1132958212679,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 24.559948144637303,
+        "scale": [
+          0.8739079510552098,
+          0.8739079510552098,
+          0.8739079510552098
+        ]
+      },
+      {
+        "position_m": [
+          -374.9472226871706,
+          -267.027804061443,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 9.136767225155985,
+        "scale": [
+          0.6083487987400067,
+          0.6083487987400067,
+          0.6083487987400067
+        ]
+      },
+      {
+        "position_m": [
+          254.3784972750817,
+          -7.4550544356305295,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 86.97469081484176,
+        "scale": [
+          0.6221970588780124,
+          0.6221970588780124,
+          0.6221970588780124
+        ]
+      },
+      {
+        "position_m": [
+          -212.18609789729243,
+          351.22075613839195,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 275.3943512876291,
+        "scale": [
+          0.8954482774335175,
+          0.8954482774335175,
+          0.8954482774335175
+        ]
+      },
+      {
+        "position_m": [
+          -376.14303254932827,
+          -301.63991757706617,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 240.62844332999757,
+        "scale": [
+          0.7186893666770229,
+          0.7186893666770229,
+          0.7186893666770229
+        ]
+      },
+      {
+        "position_m": [
+          334.30550254093953,
+          44.364666620759124,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 33.88730244545362,
+        "scale": [
+          0.7242113809969092,
+          0.7242113809969092,
+          0.7242113809969092
+        ]
+      },
+      {
+        "position_m": [
+          -130.9091120109631,
+          373.614579410362,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 128.32588207927213,
+        "scale": [
+          0.6237591987820265,
+          0.6237591987820265,
+          0.6237591987820265
+        ]
+      },
+      {
+        "position_m": [
+          369.71382860997244,
+          -90.65298381678988,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 202.5725211100885,
+        "scale": [
+          0.7255164885384977,
+          0.7255164885384977,
+          0.7255164885384977
+        ]
+      },
+      {
+        "position_m": [
+          -170.00220885727066,
+          -215.03099159888956,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 199.5166831853037,
+        "scale": [
+          0.8012888181546498,
+          0.8012888181546498,
+          0.8012888181546498
+        ]
+      },
+      {
+        "position_m": [
+          397.8552456605944,
+          -33.85377183224642,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 107.72416911658323,
+        "scale": [
+          0.7333544118159347,
+          0.7333544118159347,
+          0.7333544118159347
+        ]
+      },
+      {
+        "position_m": [
+          -275.2703927741292,
+          -133.34167625415103,
+          -1.0999999999999999
+        ],
+        "rotation_deg": 1.8477003046751594,
+        "scale": [
+          0.7935228661466357,
+          0.7935228661466357,
+          0.7935228661466357
+        ]
+      }
+    ],
+    "SM_MPR_Env_Car_0": [
+      {
+        "position_m": [
+          -186.2,
+          -84.64999999999999,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          -61.45,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          -49.85,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          -26.650000000000002,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          -15.05,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          8.150000000000002,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          19.749999999999996,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          42.95,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          54.55,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          -186.2,
+          77.74999999999999,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          206.8,
+          -11.65,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          206.8,
+          11.549999999999997,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          206.8,
+          23.149999999999995,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          206.8,
+          46.35,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "position_m": [
+          206.8,
+          57.95,
+          -1.125
+        ],
+        "rotation_deg": 180,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    ]
+  },
+  "counts": {
+    "source_road_meshes": 104,
+    "source_context_buildings": 140,
+    "source_railways": 32,
+    "parked_cars": 31,
+    "trees": 180,
+    "marked_car_spaces": 182
+  },
+  "material_palette": {
+    "Ground": [
+      0.52,
+      0.58,
+      0.66
+    ],
+    "Hardstand": [
+      0.53,
+      0.6,
+      0.68
+    ],
+    "Roads": [
+      0.17,
+      0.225,
+      0.3
+    ],
+    "ContextRoads": [
+      0.18,
+      0.235,
+      0.31
+    ],
+    "CampusRoads": [
+      0.38,
+      0.45,
+      0.52
+    ],
+    "Curbs": [
+      0.92,
+      0.95,
+      0.98
+    ],
+    "Markings": [
+      0.95,
+      0.97,
+      1.0
+    ],
+    "Buildings": [
+      0.9,
+      0.93,
+      0.98
+    ],
+    "Roofs": [
+      0.82,
+      0.87,
+      0.95
+    ],
+    "Landscape": [
+      0.47,
+      0.53,
+      0.48
+    ],
+    "Trees": [
+      0.28,
+      0.42,
+      0.24
+    ],
+    "TreesLight": [
+      0.36,
+      0.5,
+      0.3
+    ],
+    "TreesDark": [
+      0.18,
+      0.32,
+      0.15
+    ],
+    "Trunk": [
+      0.18,
+      0.15,
+      0.1
+    ],
+    "Solar": [
+      0.045,
+      0.075,
+      0.13
+    ],
+    "Glass": [
+      0.24,
+      0.34,
+      0.44
+    ],
+    "Detail": [
+      0.3,
+      0.39,
+      0.46
+    ],
+    "Blue": [
+      0.018,
+      0.075,
+      0.51
+    ],
+    "Rubber": [
+      0.018,
+      0.024,
+      0.028
+    ],
+    "VehicleLights": [
+      0.46,
+      0.035,
+      0.025
+    ],
+    "Water": [
+      0.23,
+      0.39,
+      0.46
+    ]
+  },
+  "alignment": {
+    "sourceBuildingId": "1583",
+    "targetSource": "main CAD A-WALL-EXT",
+    "mainCADOriginInches": [
+      12800,
+      8000
+    ],
+    "mainCADInchesToMetres": 0.0254,
+    "matrixConvention": "row vector [sourceX,sourceY] @ rotation + translation_m",
+    "rotation": [
+      [
+        0.21326680213394306,
+        0.976993997477754
+      ],
+      [
+        -0.976993997477754,
+        0.21326680213394317
+      ]
+    ],
+    "translation_m": [
+      270.0495980107821,
+      -596.0592568914502
+    ],
+    "rotation_deg": 77.68613576607419,
+    "scale": 1,
+    "reflection": false,
+    "rms_error_m": 0.5845932112313561,
+    "max_error_m": 0.8980047087839471,
+    "sourceVertexCorrespondence": [
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0,
+      15
+    ],
+    "targetFootprint_m": [
+      [
+        -181.93004,
+        83.69038
+      ],
+      [
+        -166.08044,
+        83.69038
+      ],
+      [
+        -166.08044,
+        74.54638
+      ],
+      [
+        166.78656,
+        74.54638
+      ],
+      [
+        166.78656,
+        83.58878
+      ],
+      [
+        182.61076,
+        83.58878
+      ],
+      [
+        182.61076,
+        -20.50042
+      ],
+      [
+        166.78656,
+        -20.50042
+      ],
+      [
+        166.78656,
+        -50.98042
+      ],
+      [
+        150.91156,
+        -50.98042
+      ],
+      [
+        150.91156,
+        -66.22042
+      ],
+      [
+        135.36676,
+        -66.22042
+      ],
+      [
+        135.36676,
+        -83.94962
+      ],
+      [
+        -166.08044,
+        -83.94962
+      ],
+      [
+        -166.08044,
+        -93.09362
+      ],
+      [
+        -181.93004,
+        -93.09362
+      ]
+    ],
+    "heightPolicy": "Assembly flattens campus to z=-1.2m, with main CAD finished floor z=0. CADMapper elevation retained only as source data; 1.2m dock difference inferred from reference, not surveyed.",
+    "referenceEvidence": [
+      "Snipaste_2026-10-30_16-02-59.png",
+      "Snipaste_2026-10-30_16-04-43.png",
+      "Snipaste_2026-10-30_16-13-26.png"
+    ]
+  },
+  "assumptions": [
+    "Context heights are inferred: adjacent warehouse 14m, other industrial 9m, homes 6m, sheds 3.2m.",
+    "Loading court and parking markings are screenshot-derived approximations; main CAD wall placement remains exact.",
+    "Exterior ground -1.2m relative to warehouse finished floor is a visual dock-level estimate, not a survey.",
+    "No exact tree/car location survey exists; perimeter planting and sparse parking follow supplied reference images."
+  ],
+  "optimization": {
+    "geometry_batches": 60,
+    "unique_triangles": 22000,
+    "instance_count": 211,
+    "material_slots": 78,
+    "tree_variants": 3,
+    "car_variants": 2,
+    "context_collision": false,
+    "partition": "Near campus and Far cardinal sectors; ground 280m tiles; road junction union removes coplanar overlaps"
+  },
+  "attribution": "Map geometry from user-supplied CADMapper export / OpenStreetMap contributors; reference screenshots are not used as textures."
+}

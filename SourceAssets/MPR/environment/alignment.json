@@ -1,0 +1,119 @@
+{
+  "sourceBuildingId": "1583",
+  "targetSource": "main CAD A-WALL-EXT",
+  "mainCADOriginInches": [
+    12800,
+    8000
+  ],
+  "mainCADInchesToMetres": 0.0254,
+  "matrixConvention": "row vector [sourceX,sourceY] @ rotation + translation_m",
+  "rotation": [
+    [
+      0.21326680213394306,
+      0.976993997477754
+    ],
+    [
+      -0.976993997477754,
+      0.21326680213394317
+    ]
+  ],
+  "translation_m": [
+    270.0495980107821,
+    -596.0592568914502
+  ],
+  "rotation_deg": 77.68613576607419,
+  "scale": 1,
+  "reflection": false,
+  "rms_error_m": 0.5845932112313561,
+  "max_error_m": 0.8980047087839471,
+  "sourceVertexCorrespondence": [
+    14,
+    13,
+    12,
+    11,
+    10,
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    0,
+    15
+  ],
+  "targetFootprint_m": [
+    [
+      -181.93004,
+      83.69038
+    ],
+    [
+      -166.08044,
+      83.69038
+    ],
+    [
+      -166.08044,
+      74.54638
+    ],
+    [
+      166.78656,
+      74.54638
+    ],
+    [
+      166.78656,
+      83.58878
+    ],
+    [
+      182.61076,
+      83.58878
+    ],
+    [
+      182.61076,
+      -20.50042
+    ],
+    [
+      166.78656,
+      -20.50042
+    ],
+    [
+      166.78656,
+      -50.98042
+    ],
+    [
+      150.91156,
+      -50.98042
+    ],
+    [
+      150.91156,
+      -66.22042
+    ],
+    [
+      135.36676,
+      -66.22042
+    ],
+    [
+      135.36676,
+      -83.94962
+    ],
+    [
+      -166.08044,
+      -83.94962
+    ],
+    [
+      -166.08044,
+      -93.09362
+    ],
+    [
+      -181.93004,
+      -93.09362
+    ]
+  ],
+  "heightPolicy": "Assembly flattens campus to z=-1.2m, with main CAD finished floor z=0. CADMapper elevation retained only as source data; 1.2m dock difference inferred from reference, not surveyed.",
+  "referenceEvidence": [
+    "Snipaste_2026-10-30_16-02-59.png",
+    "Snipaste_2026-10-30_16-04-43.png",
+    "Snipaste_2026-10-30_16-13-26.png"
+  ]
+}

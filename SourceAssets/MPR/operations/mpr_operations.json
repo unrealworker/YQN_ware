@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "units": "metres",
+  "axis": "CAD +Y; UE import X=100*x,Y=-100*y,Z=100*z",
+  "meshes": [
+    {
+      "name": "SM_MPR_Conveyor2m",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_Conveyor2m.fbx",
+      "material_roles": [
+        "Cobalt",
+        "Metal",
+        "Rubber"
+      ],
+      "bounds_m": [
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          -1.0,
+          1.0
+        ],
+        [
+          0.0,
+          1.0303108891324553
+        ]
+      ],
+      "vertices": 300,
+      "triangles": 484,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_WorkTable",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_WorkTable.fbx",
+      "material_roles": [
+        "Metal",
+        "Rubber",
+        "Cobalt",
+        "Porcelain",
+        "Charcoal",
+        "SoftBlue"
+      ],
+      "bounds_m": [
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          -0.6,
+          0.6
+        ],
+        [
+          0.0,
+          1.485
+        ]
+      ],
+      "vertices": 112,
+      "triangles": 168,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_StationChute",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_StationChute.fbx",
+      "material_roles": [
+        "Metal",
+        "Rubber",
+        "Cobalt"
+      ],
+      "bounds_m": [
+        [
+          -0.35500000000000004,
+          0.35500000000000004
+        ],
+        [
+          -0.57,
+          0.57
+        ],
+        [
+          0.0,
+          1.11
+        ]
+      ],
+      "vertices": 104,
+      "triangles": 156,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_SorterOutput",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_SorterOutput.fbx",
+      "material_roles": [
+        "Metal",
+        "Rubber",
+        "Cobalt"
+      ],
+      "bounds_m": [
+        [
+          -0.226,
+          0.226
+        ],
+        [
+          -1.19,
+          1.19
+        ],
+        [
+          0.0,
+          0.99
+        ]
+      ],
+      "vertices": 112,
+      "triangles": 168,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CartonSealer",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CartonSealer.fbx",
+      "material_roles": [
+        "Cobalt",
+        "Metal",
+        "Rubber",
+        "Porcelain",
+        "Charcoal",
+        "SoftBlue"
+      ],
+      "bounds_m": [
+        [
+          -0.616055,
+          0.616055
+        ],
+        [
+          -0.9752,
+          0.9752
+        ],
+        [
+          0.0,
+          1.74
+        ]
+      ],
+      "vertices": 336,
+      "triangles": 536,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_ConveyorSupport",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_ConveyorSupport.fbx",
+      "material_roles": [
+        "Metal",
+        "Rubber",
+        "Cobalt"
+      ],
+      "bounds_m": [
+        [
+          -0.6475,
+          0.6475
+        ],
+        [
+          -0.138,
+          0.138
+        ],
+        [
+          0.0,
+          0.9600000000000001
+        ]
+      ],
+      "vertices": 88,
+      "triangles": 132,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_ScanGate",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_ScanGate.fbx",
+      "material_roles": [
+        "Cobalt",
+        "Metal",
+        "Rubber",
+        "Porcelain",
+        "Charcoal"
+      ],
+      "bounds_m": [
+        [
+          -0.4,
+          0.4
+        ],
+        [
+          -0.7025,
+          0.7025
+        ],
+        [
+          0.0,
+          1.94
+        ]
+      ],
+      "vertices": 272,
+      "triangles": 432,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_Turn__U255",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_Turn__U255.fbx",
+      "material_roles": [
+        "Rubber",
+        "Cobalt",
+        "Metal"
+      ],
+      "bounds_m": [
+        [
+          -1.4387501081357772,
+          0.9512500000000007
+        ],
+        [
+          -1.2369100624321152,
+          1.1530899999999906
+        ],
+        [
+          0.0,
+          1.08
+        ]
+      ],
+      "vertices": 368,
+      "triangles": 488,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_Turn__U74",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_Turn__U74.fbx",
+      "material_roles": [
+        "Rubber",
+        "Cobalt",
+        "Metal"
+      ],
+      "bounds_m": [
+        [
+          -1.4387499713294563,
+          0.9512500000000148
+        ],
+        [
+          -1.2368999999999903,
+          1.153100000000008
+        ],
+        [
+          0.0,
+          1.08
+        ]
+      ],
+      "vertices": 368,
+      "triangles": 488,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_Turn__U256",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_Turn__U256.fbx",
+      "material_roles": [
+        "Rubber",
+        "Cobalt",
+        "Metal"
+      ],
+      "bounds_m": [
+        [
+          -0.9512399999999973,
+          1.4387599503410786
+        ],
+        [
+          -1.236910045703694,
+          1.1530899999999622
+        ],
+        [
+          0.0,
+          1.08
+        ]
+      ],
+      "vertices": 368,
+      "triangles": 488,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_Turn__U33",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_Turn__U33.fbx",
+      "material_roles": [
+        "Rubber",
+        "Cobalt",
+        "Metal"
+      ],
+      "bounds_m": [
+        [
+          -1.1164500000000348,
+          1.0485500976934847
+        ],
+        [
+          -0.943520000000034,
+          1.2214800564032504
+        ],
+        [
+          0.0,
+          1.08
+        ]
+      ],
+      "vertices": 368,
+      "triangles": 488,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_Turn_e3",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_Turn_e3.fbx",
+      "material_roles": [
+        "Rubber",
+        "Cobalt",
+        "Metal"
+      ],
+      "bounds_m": [
+        [
+          -0.885003160006838,
+          0.8849900458190898
+        ],
+        [
+          -0.885000079361119,
+          0.8849931600068561
+        ],
+        [
+          0.0,
+          1.08
+        ]
+      ],
+      "vertices": 368,
+      "triangles": 488,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_SorterPlatform",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_SorterPlatform.fbx",
+      "material_roles": [
+        "PaleGray",
+        "Metal"
+      ],
+      "bounds_m": [
+        [
+          -1.3059974,
+          1.3059974
+        ],
+        [
+          -19.505961,
+          19.506039
+        ],
+        [
+          0.0,
+          0.036000000000000004
+        ]
+      ],
+      "vertices": 536,
+      "triangles": 804,
+      "instance_only": true
+    }
+  ],
+  "purpose": "CAD positioned modular basic equipment; GHS material roles reused",
+  "triangle_budget_per_mesh": 1800,
+  "assumptions": [
+    "Conveyor elevation1.0m,worktop.88m,sealer1.74m estimated where no plan elevation exists.",
+    "Frame and machine geometry simplify exact CAD footprint with explicit open structure; no whole-complex bbox cuboids.",
+    "GHS shared conveyor is a fixed inclined3m unit and cannot tile measured level runs without steps; new2m straight module uses same material roles.",
+    "Complex feeder line positions are paired from measured source edges; heights and narrow internal mechanical details are simplified."
+  ]
+}
