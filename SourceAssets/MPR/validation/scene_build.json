@@ -445,45 +445,45 @@
       "lod_count": 1
     },
     {
-      "name": "SM_MPR_RoofPlant",
-      "path": "/Game/MPRWarehouse/Architecture/Meshes/SM_MPR_RoofPlant",
-      "bounds_cm": [
-        [
-          -16990.0,
-          16190.0
-        ],
-        [
-          -6262.50146484375,
-          7362.50146484375
-        ],
-        [
-          1340.0,
-          1378.0
-        ]
-      ],
-      "material_slots": 2,
-      "source_triangles": 5448,
-      "lod_count": 1
-    },
-    {
       "name": "SM_MPR_RoofSolar",
       "path": "/Game/MPRWarehouse/Architecture/Meshes/SM_MPR_RoofSolar",
       "bounds_cm": [
         [
-          -1375.0006103515625,
-          16575.0
+          -4477.2392578125,
+          16797.240234375
         ],
         [
-          -6572.50146484375,
-          7772.5
+          -6433.60107421875,
+          8183.59912109375
         ],
         [
-          1360.0,
-          1371.5999755859375
+          1352.0,
+          1360.5999755859375
         ]
       ],
       "material_slots": 2,
-      "source_triangles": 15648,
+      "source_triangles": 25578,
+      "lod_count": 1
+    },
+    {
+      "name": "SM_MPR_RoofPlant",
+      "path": "/Game/MPRWarehouse/Architecture/Meshes/SM_MPR_RoofPlant",
+      "bounds_cm": [
+        [
+          -17756.15625,
+          17485.826171875
+        ],
+        [
+          -7493.00927734375,
+          8265.58984375
+        ],
+        [
+          1340.0,
+          1359.0
+        ]
+      ],
+      "material_slots": 2,
+      "source_triangles": 9192,
       "lod_count": 1
     },
     {
@@ -533,8 +533,8 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_E_Buildings",
       "bounds_cm": [
         [
-          19832.77734375,
-          35754.44140625
+          19832.18359375,
+          35754.6640625
         ],
         [
           -45859.2734375,
@@ -542,11 +542,32 @@
         ],
         [
           -120.00000762939453,
-          780.0
+          843.0
+        ]
+      ],
+      "material_slots": 3,
+      "source_triangles": 977,
+      "lod_count": 1
+    },
+    {
+      "name": "SM_MPR_Env_Far_E_Freight",
+      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_E_Freight",
+      "bounds_cm": [
+        [
+          24669.212890625,
+          28607.25
+        ],
+        [
+          -6277.703125,
+          1737.1553955078125
+        ],
+        [
+          -75.5,
+          301.0
         ]
       ],
       "material_slots": 2,
-      "source_triangles": 213,
+      "source_triangles": 1980,
       "lod_count": 1
     },
     {
@@ -554,20 +575,20 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_E_RailBed",
       "bounds_cm": [
         [
-          14531.7158203125,
-          47334.921875
+          25000.0,
+          48323.51953125
         ],
         [
-          -37056.60546875,
-          18529.28515625
+          -41627.9765625,
+          53116.9296875
         ],
         [
           -116.0,
-          -116.0
+          -102.0
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 903,
+      "source_triangles": 3267,
       "lod_count": 1
     },
     {
@@ -575,20 +596,20 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_E_Rails",
       "bounds_cm": [
         [
-          14591.7373046875,
-          47275.84375
+          24453.658203125,
+          48220.05078125
         ],
         [
-          -37003.85546875,
-          18477.61328125
+          -41524.62109375,
+          53010.8203125
         ],
         [
-          -111.0,
-          -111.0
+          -88.5,
+          -75.5
         ]
       ],
-      "material_slots": 1,
-      "source_triangles": 1273,
+      "material_slots": 2,
+      "source_triangles": 11828,
       "lod_count": 1
     },
     {
@@ -596,20 +617,41 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_E_Roads",
       "bounds_cm": [
         [
-          24999.99609375,
-          48765.77734375
+          28499.99609375,
+          48765.390625
         ],
         [
-          -50283.9921875,
-          31082.478515625
+          -50283.60546875,
+          28896.84765625
         ],
         [
-          -116.5,
-          -116.5
+          -112.5,
+          -112.5
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 660,
+      "source_triangles": 1296,
+      "lod_count": 1
+    },
+    {
+      "name": "SM_MPR_Env_Far_E_Sleepers",
+      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_E_Sleepers",
+      "bounds_cm": [
+        [
+          24887.5546875,
+          48088.42578125
+        ],
+        [
+          -41392.7734375,
+          53030.10546875
+        ],
+        [
+          -102.0,
+          -89.0
+        ]
+      ],
+      "material_slots": 1,
+      "source_triangles": 36460,
       "lod_count": 1
     },
     {
@@ -647,11 +689,11 @@
         ],
         [
           -120.00000762939453,
-          780.0
+          796.0
         ]
       ],
-      "material_slots": 2,
-      "source_triangles": 28,
+      "material_slots": 3,
+      "source_triangles": 172,
       "lod_count": 1
     },
     {
@@ -659,20 +701,20 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_N_Roads",
       "bounds_cm": [
         [
-          -25000.00390625,
-          24999.998046875
+          -29000.005859375,
+          28499.99609375
         ],
         [
-          -61354.375,
-          -23999.998046875
+          -62973.49609375,
+          -35499.99609375
         ],
         [
-          -116.5,
-          -116.5
+          -112.5,
+          -112.5
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 527,
+      "source_triangles": 1258,
       "lod_count": 1
     },
     {
@@ -689,32 +731,11 @@
         ],
         [
           -120.00000762939453,
-          780.0
+          796.0
         ]
       ],
-      "material_slots": 2,
-      "source_triangles": 232,
-      "lod_count": 1
-    },
-    {
-      "name": "SM_MPR_Env_Far_S_Hardstand",
-      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_S_Hardstand",
-      "bounds_cm": [
-        [
-          -23457.810546875,
-          -21642.505859375
-        ],
-        [
-          31236.28515625,
-          35305.5859375
-        ],
-        [
-          -115.5,
-          -115.5
-        ]
-      ],
-      "material_slots": 1,
-      "source_triangles": 29,
+      "material_slots": 3,
+      "source_triangles": 940,
       "lod_count": 1
     },
     {
@@ -722,20 +743,20 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_S_RailBed",
       "bounds_cm": [
         [
-          -20205.927734375,
-          39376.32421875
+          -20256.416015625,
+          25000.00390625
         ],
         [
-          -3648.506591796875,
-          53066.140625
+          16999.998046875,
+          51298.87109375
         ],
         [
           -116.0,
-          -116.0
+          -102.0
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 974,
+      "source_triangles": 4543,
       "lod_count": 1
     },
     {
@@ -743,20 +764,20 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_S_Rails",
       "bounds_cm": [
         [
-          -20148.80078125,
-          39318.98046875
+          -20150.927734375,
+          25397.970703125
         ],
         [
-          -3593.876220703125,
-          53008.67578125
+          15793.28515625,
+          51200.52734375
         ],
         [
-          -111.0,
-          -111.0
+          -88.5,
+          -75.5
         ]
       ],
-      "material_slots": 1,
-      "source_triangles": 1662,
+      "material_slots": 2,
+      "source_triangles": 10532,
       "lod_count": 1
     },
     {
@@ -764,20 +785,41 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_S_Roads",
       "bounds_cm": [
         [
-          -24999.998046875,
-          25000.001953125
+          -28999.998046875,
+          28500.001953125
         ],
         [
-          16999.998046875,
-          51855.8828125
+          21999.998046875,
+          51855.4921875
         ],
         [
-          -116.5,
-          -116.5
+          -112.5,
+          -112.5
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 506,
+      "source_triangles": 1446,
+      "lod_count": 1
+    },
+    {
+      "name": "SM_MPR_Env_Far_S_Sleepers",
+      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_S_Sleepers",
+      "bounds_cm": [
+        [
+          -20126.4609375,
+          25078.962890625
+        ],
+        [
+          16909.830078125,
+          51215.74609375
+        ],
+        [
+          -102.0,
+          -89.0
+        ]
+      ],
+      "material_slots": 1,
+      "source_triangles": 24014,
       "lod_count": 1
     },
     {
@@ -794,32 +836,11 @@
         ],
         [
           -120.00000762939453,
-          480.0000305175781
+          610.0
         ]
       ],
       "material_slots": 2,
-      "source_triangles": 1646,
-      "lod_count": 1
-    },
-    {
-      "name": "SM_MPR_Env_Far_W_Hardstand",
-      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_W_Hardstand",
-      "bounds_cm": [
-        [
-          -45520.46484375,
-          -41959.37890625
-        ],
-        [
-          -6401.3681640625,
-          6606.94384765625
-        ],
-        [
-          -115.5,
-          -115.5
-        ]
-      ],
-      "material_slots": 1,
-      "source_triangles": 48,
+      "source_triangles": 2626,
       "lod_count": 1
     },
     {
@@ -827,20 +848,20 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_W_RailBed",
       "bounds_cm": [
         [
-          -52629.453125,
-          -49213.54296875
+          -52671.28515625,
+          -49171.875
         ],
         [
-          40477.34375,
-          43041.73046875
+          40421.0,
+          43097.9765625
         ],
         [
           -116.0,
-          -116.0
+          -102.0
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 24,
+      "source_triangles": 43,
       "lod_count": 1
     },
     {
@@ -848,20 +869,20 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_W_Rails",
       "bounds_cm": [
         [
-          -52582.125,
-          -49260.6875
+          -52583.890625,
+          -49258.93359375
         ],
         [
-          40541.0859375,
-          42978.09375
+          40538.71484375,
+          42980.46484375
         ],
         [
-          -111.0,
-          -111.0
+          -75.5,
+          -75.5
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 41,
+      "source_triangles": 28,
       "lod_count": 1
     },
     {
@@ -869,20 +890,41 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_W_Roads",
       "bounds_cm": [
         [
-          -51682.26171875,
-          -24999.99609375
+          -51681.96875,
+          -28999.99609375
         ],
         [
-          -62973.5859375,
-          47951.22265625
+          -57992.05078125,
+          46205.078125
         ],
         [
-          -116.5,
-          -116.5
+          -112.5,
+          -112.5
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 633,
+      "source_triangles": 864,
+      "lod_count": 1
+    },
+    {
+      "name": "SM_MPR_Env_Far_W_Sleepers",
+      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Far_W_Sleepers",
+      "bounds_cm": [
+        [
+          -52593.66796875,
+          -49427.36328125
+        ],
+        [
+          40512.890625,
+          42874.26953125
+        ],
+        [
+          -89.0,
+          -89.0
+        ]
+      ],
+      "material_slots": 1,
+      "source_triangles": 80,
       "lod_count": 1
     },
     {
@@ -1432,24 +1474,66 @@
       "lod_count": 1
     },
     {
+      "name": "SM_MPR_Env_Near_AccessLines",
+      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_AccessLines",
+      "bounds_cm": [
+        [
+          -21505.498046875,
+          37400.16015625
+        ],
+        [
+          -33405.5,
+          20303.974609375
+        ],
+        [
+          -109.5,
+          -109.5
+        ]
+      ],
+      "material_slots": 1,
+      "source_triangles": 1984,
+      "lod_count": 1
+    },
+    {
       "name": "SM_MPR_Env_Near_Buildings",
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Buildings",
       "bounds_cm": [
         [
-          -20383.337890625,
-          25723.611328125
+          -20384.37890625,
+          25724.591796875
         ],
         [
-          -29674.93359375,
-          -13011.95703125
+          -29677.416015625,
+          -13009.580078125
         ],
         [
           -120.00000762939453,
-          1280.0
+          1343.0
         ]
       ],
-      "material_slots": 2,
-      "source_triangles": 34,
+      "material_slots": 4,
+      "source_triangles": 642,
+      "lod_count": 1
+    },
+    {
+      "name": "SM_MPR_Env_Near_Centerlines",
+      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Centerlines",
+      "bounds_cm": [
+        [
+          -25497.154296875,
+          25180.86328125
+        ],
+        [
+          -35505.046875,
+          32001.61328125
+        ],
+        [
+          -109.89999389648438,
+          -109.89999389648438
+        ]
+      ],
+      "material_slots": 1,
+      "source_triangles": 7588,
       "lod_count": 1
     },
     {
@@ -1457,20 +1541,20 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Curbs",
       "bounds_cm": [
         [
-          -21092.501953125,
-          20992.5
+          -28000.0,
+          28000.001953125
         ],
         [
-          -8000.001953125,
-          8900.001953125
+          -15000.001953125,
+          22000.001953125
         ],
         [
-          -117.99999237060547,
-          -94.0
+          -104.0,
+          -104.0
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 48,
+      "source_triangles": 9242,
       "lod_count": 1
     },
     {
@@ -1478,62 +1562,62 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_DockAprons",
       "bounds_cm": [
         [
-          -16600.0,
-          16600.0
-        ],
-        [
-          -9245.0009765625,
-          10205.001953125
-        ],
-        [
-          -116.5,
-          -110.5
-        ]
-      ],
-      "material_slots": 1,
-      "source_triangles": 24,
-      "lod_count": 1
-    },
-    {
-      "name": "SM_MPR_Env_Near_Hardstand",
-      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Hardstand",
-      "bounds_cm": [
-        [
           -16608.001953125,
           16678.599609375
         ],
         [
-          -13200.0009765625,
-          11500.0009765625
+          -9340.001953125,
+          10350.0009765625
         ],
         [
-          -114.0,
-          -114.0
+          -110.5,
+          -110.5
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 5,
+      "source_triangles": 4,
       "lod_count": 1
     },
     {
-      "name": "SM_MPR_Env_Near_Islands",
-      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Islands",
+      "name": "SM_MPR_Env_Near_Edgelines",
+      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Edgelines",
       "bounds_cm": [
         [
-          -21050.0,
-          20950.0
+          -26084.162109375,
+          25544.30859375
         ],
         [
-          -7960.00146484375,
-          6570.00146484375
+          -35580.1171875,
+          32042.705078125
         ],
         [
-          -113.5,
-          -90.5
+          -109.89999389648438,
+          -109.89999389648438
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 192,
+      "source_triangles": 7588,
+      "lod_count": 1
+    },
+    {
+      "name": "SM_MPR_Env_Near_Freight",
+      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Freight",
+      "bounds_cm": [
+        [
+          14831.7548828125,
+          25088.34765625
+        ],
+        [
+          -642.5364379882812,
+          15446.1064453125
+        ],
+        [
+          -75.5,
+          301.0
+        ]
+      ],
+      "material_slots": 2,
+      "source_triangles": 5940,
       "lod_count": 1
     },
     {
@@ -1541,20 +1625,20 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Landscape",
       "bounds_cm": [
         [
-          13636.6767578125,
-          19161.076171875
+          -28500.00390625,
+          28300.001953125
         ],
         [
-          -7858.8798828125,
-          8894.9609375
+          -34500.00390625,
+          22000.001953125
         ],
         [
-          -112.0,
-          -112.0
+          -117.49999237060547,
+          -117.49999237060547
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 26,
+      "source_triangles": 8025,
       "lod_count": 1
     },
     {
@@ -1562,41 +1646,41 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Markings",
       "bounds_cm": [
         [
-          -21050.0,
-          20950.0
+          -21025.0,
+          21025.0
         ],
         [
-          -12107.5009765625,
-          11400.0009765625
+          -11905.001953125,
+          13593.5009765625
         ],
         [
-          -110.0,
-          -109.0999984741211
+          -109.19999694824219,
+          -108.00000762939453
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 462,
+      "source_triangles": 602,
       "lod_count": 1
     },
     {
-      "name": "SM_MPR_Env_Near_Parking",
-      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Parking",
+      "name": "SM_MPR_Env_Near_ParkingIslands",
+      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_ParkingIslands",
       "bounds_cm": [
         [
-          -21100.0,
-          21000.0
+          -21050.0,
+          21100.0
         ],
         [
-          -8000.001953125,
-          8900.001953125
+          -8030.001953125,
+          8730.001953125
         ],
         [
-          -115.0,
-          -110.0
+          -101.0,
+          -101.0
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 24,
+      "source_triangles": 523,
       "lod_count": 1
     },
     {
@@ -1604,20 +1688,20 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_RailBed",
       "bounds_cm": [
         [
-          -10205.1435546875,
-          48273.99609375
+          13264.4072265625,
+          25000.001953125
         ],
         [
-          -41578.5078125,
-          51223.6015625
+          -1713.3123779296875,
+          16999.998046875
         ],
         [
           -116.0,
-          -116.0
+          -102.0
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 943,
+      "source_triangles": 1175,
       "lod_count": 1
     },
     {
@@ -1625,20 +1709,41 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Rails",
       "bounds_cm": [
         [
-          -10142.4501953125,
-          48217.96484375
+          13631.046875,
+          26194.36328125
         ],
         [
-          -41522.53515625,
-          51175.20703125
+          -1082.10693359375,
+          18297.037109375
         ],
         [
-          -111.0,
-          -111.0
+          -88.5,
+          -75.5
+        ]
+      ],
+      "material_slots": 2,
+      "source_triangles": 5112,
+      "lod_count": 1
+    },
+    {
+      "name": "SM_MPR_Env_Near_Retention",
+      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Retention",
+      "bounds_cm": [
+        [
+          -23199.998046875,
+          -19700.615234375
+        ],
+        [
+          16400.65625,
+          19799.21875
+        ],
+        [
+          -121.5,
+          -121.5
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 1374,
+      "source_triangles": 86,
       "lod_count": 1
     },
     {
@@ -1646,20 +1751,41 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Roads",
       "bounds_cm": [
         [
-          -25000.001953125,
-          25000.0
+          -29000.001953125,
+          28500.001953125
         ],
         [
-          -23999.998046875,
-          17000.001953125
+          -35500.0,
+          22000.001953125
         ],
         [
-          -116.5,
-          -116.5
+          -112.5,
+          -112.5
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 387,
+      "source_triangles": 6342,
+      "lod_count": 1
+    },
+    {
+      "name": "SM_MPR_Env_Near_ShoulderHatch",
+      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_ShoulderHatch",
+      "bounds_cm": [
+        [
+          -24873.486328125,
+          25124.32421875
+        ],
+        [
+          -6177.72900390625,
+          26871.443359375
+        ],
+        [
+          -109.69999694824219,
+          -109.69999694824219
+        ]
+      ],
+      "material_slots": 1,
+      "source_triangles": 256,
       "lod_count": 1
     },
     {
@@ -1667,20 +1793,41 @@
       "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_Sleepers",
       "bounds_cm": [
         [
-          -10073.5615234375,
-          48123.1640625
+          13465.2294921875,
+          25109.53515625
         ],
         [
-          -41427.56640625,
-          51067.66015625
+          -1263.59521484375,
+          17096.02734375
         ],
         [
-          -113.0,
-          -113.0
+          -102.0,
+          -89.0
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 1949,
+      "source_triangles": 15090,
+      "lod_count": 1
+    },
+    {
+      "name": "SM_MPR_Env_Near_TrailerStands",
+      "path": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Near_TrailerStands",
+      "bounds_cm": [
+        [
+          -16199.9990234375,
+          4000.001220703125
+        ],
+        [
+          11900.0009765625,
+          13900.0009765625
+        ],
+        [
+          -110.5,
+          -110.5
+        ]
+      ],
+      "material_slots": 1,
+      "source_triangles": 4,
       "lod_count": 1
     },
     {
@@ -2127,6 +2274,291 @@
   ],
   "materials_created": [
     {
+      "path": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface",
+      "parent": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Roads.M_GHSPark_Roads",
+      "parent_sha256": "851d4065febd5edef2340f6969e7c0313d821456c034e5d5f7e73fad59af19ca",
+      "usage": "InstancedStaticMeshes",
+      "role": "ExteriorSurfaceMaster",
+      "reference_only": true
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_SiteAsphalt",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "SiteAsphalt",
+      "overrides": {
+        "color": [
+          0.105,
+          0.142,
+          0.18
+        ],
+        "roughness": 0.95,
+        "parent": "Roads"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_SiteConcrete",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "SiteConcrete",
+      "overrides": {
+        "color": [
+          0.48,
+          0.52,
+          0.54
+        ],
+        "roughness": 0.93,
+        "parent": "Hardstand"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_SiteCurb",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "SiteCurb",
+      "overrides": {
+        "color": [
+          0.62,
+          0.67,
+          0.69
+        ],
+        "roughness": 0.88,
+        "parent": "Curbs"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_SiteGrass",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "SiteGrass",
+      "overrides": {
+        "color": [
+          0.27,
+          0.345,
+          0.285
+        ],
+        "roughness": 1.0,
+        "parent": "Landscape"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_SiteBackdrop",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "SiteBackdrop",
+      "overrides": {
+        "color": [
+          0.43,
+          0.5,
+          0.54
+        ],
+        "roughness": 1.0,
+        "parent": "Ground"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_LaneWhite",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "LaneWhite",
+      "overrides": {
+        "color": [
+          0.78,
+          0.81,
+          0.79
+        ],
+        "roughness": 0.9,
+        "parent": "Markings"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_LaneYellow",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "LaneYellow",
+      "overrides": {
+        "color": [
+          0.72,
+          0.53,
+          0.18
+        ],
+        "roughness": 0.9,
+        "parent": "Markings"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_SiteWater",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "SiteWater",
+      "overrides": {
+        "color": [
+          0.115,
+          0.22,
+          0.26
+        ],
+        "roughness": 0.55,
+        "parent": "Ground"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_ContextRoof",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "ContextRoof",
+      "overrides": {
+        "color": [
+          0.24,
+          0.31,
+          0.37
+        ],
+        "roughness": 0.82,
+        "parent": "Roofs"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_ContextWall",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "ContextWall",
+      "overrides": {
+        "color": [
+          0.6,
+          0.66,
+          0.69
+        ],
+        "roughness": 0.82,
+        "parent": "Buildings"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_ContextTrim",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "ContextTrim",
+      "overrides": {
+        "color": [
+          0.39,
+          0.46,
+          0.5
+        ],
+        "roughness": 0.85,
+        "parent": "Roofs"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_ContextGlass",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "ContextGlass",
+      "overrides": {
+        "color": [
+          0.16,
+          0.23,
+          0.3
+        ],
+        "roughness": 0.5,
+        "parent": "Roofs"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_Ballast",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "Ballast",
+      "overrides": {
+        "color": [
+          0.25,
+          0.235,
+          0.215
+        ],
+        "parent": "Detail",
+        "roughness": 0.95,
+        "metallic": 0
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_Sleepers",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "Sleepers",
+      "overrides": {
+        "color": [
+          0.095,
+          0.085,
+          0.07
+        ],
+        "parent": "Detail",
+        "roughness": 0.9,
+        "metallic": 0
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_RailSteel",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "RailSteel",
+      "overrides": {
+        "color": [
+          0.27,
+          0.285,
+          0.29
+        ],
+        "parent": "Detail",
+        "roughness": 0.55,
+        "metallic": 0.65
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_FreightBody",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "FreightBody",
+      "overrides": {
+        "color": [
+          0.065,
+          0.08,
+          0.09
+        ],
+        "parent": "Detail",
+        "roughness": 0.72,
+        "metallic": 0.35
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_FreightDetail",
+      "parent": "/Game/MPRWarehouse/Materials/M_MPR_ExteriorSurface.M_MPR_ExteriorSurface",
+      "parent_sha256": "ca5ddf8e9752d5991d6f4719a909a4fe983a0efb020256a57dc133081067ff15",
+      "usage": "InstancedStaticMeshes",
+      "role": "FreightDetail",
+      "overrides": {
+        "color": [
+          0.12,
+          0.125,
+          0.12
+        ],
+        "parent": "Detail",
+        "roughness": 0.8,
+        "metallic": 0.35
+      }
+    },
+    {
       "path": "/Game/MPRWarehouse/Materials/MI_MPR_HISM_M_GHSPark_Blue",
       "parent": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Blue.M_GHSPark_Blue",
       "parent_sha256": "efedfa7213d3e13509b7d8fe3156ef241e2c43e8b1625d91892744368297774f",
@@ -2189,23 +2621,58 @@
   ],
   "groups": [
     {
+      "actor": "MPR_SM_MPR_Env_Car_0_-4_-2",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_0.SM_MPR_Env_Car_0",
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 1
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Car_0_-4_-1",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_0.SM_MPR_Env_Car_0",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 1
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Car_0_-4_0",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_0.SM_MPR_Env_Car_0",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 1
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Car_0_3_0",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_0.SM_MPR_Env_Car_0",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 1
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Car_0_3_1",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_0.SM_MPR_Env_Car_0",
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 1
+    },
+    {
       "actor": "MPR_SM_MPR_Env_Car_1_-4_-2",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_1.SM_MPR_Env_Car_1",
-      "count": 2,
+      "count": 1,
       "cull_distance_cm": 120000,
       "lods": 1
     },
     {
       "actor": "MPR_SM_MPR_Env_Car_1_-4_-1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_1.SM_MPR_Env_Car_1",
-      "count": 4,
+      "count": 5,
       "cull_distance_cm": 120000,
       "lods": 1
     },
     {
       "actor": "MPR_SM_MPR_Env_Car_1_-4_0",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_1.SM_MPR_Env_Car_1",
-      "count": 3,
+      "count": 5,
       "cull_distance_cm": 120000,
       "lods": 1
     },
@@ -2217,16 +2684,9 @@
       "lods": 1
     },
     {
-      "actor": "MPR_SM_MPR_Env_Car_1_3_-1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_1.SM_MPR_Env_Car_1",
-      "count": 2,
-      "cull_distance_cm": 120000,
-      "lods": 1
-    },
-    {
       "actor": "MPR_SM_MPR_Env_Car_1_3_0",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_1.SM_MPR_Env_Car_1",
-      "count": 3,
+      "count": 5,
       "cull_distance_cm": 120000,
       "lods": 1
     },
@@ -2238,70 +2698,35 @@
       "lods": 1
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-8_1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-7_-6",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-7_-2",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-7_0",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-7_4",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-7_5",
+      "actor": "MPR_SM_MPR_Env_Tree_0_-8_-2",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-7_6",
+      "actor": "MPR_SM_MPR_Env_Tree_0_-8_-1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-6_-5",
+      "actor": "MPR_SM_MPR_Env_Tree_0_-7_-2",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
+      "count": 3,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-6_-3",
+      "actor": "MPR_SM_MPR_Env_Tree_0_-7_-1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
+      "count": 4,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-6_-2",
+      "actor": "MPR_SM_MPR_Env_Tree_0_-7_0",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 1,
       "cull_distance_cm": 120000,
@@ -2315,44 +2740,30 @@
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-6_5",
+      "actor": "MPR_SM_MPR_Env_Tree_0_-6_0",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-5_-6",
+      "actor": "MPR_SM_MPR_Env_Tree_0_-4_-4",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-5_-5",
+      "actor": "MPR_SM_MPR_Env_Tree_0_-4_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-5_-3",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-4_-5",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_0_-4_-2",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
@@ -2366,14 +2777,35 @@
     {
       "actor": "MPR_SM_MPR_Env_Tree_0_-4_0",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 2,
+      "count": 3,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_0_-4_1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 3,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_-4_2",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 1,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_-4_3",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_-4_4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
@@ -2385,6 +2817,48 @@
       "lods": 3
     },
     {
+      "actor": "MPR_SM_MPR_Env_Tree_0_-3_-5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 3,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_-3_-3",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_-3_5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 1,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_-3_6",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_-2_-5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 3,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_-2_-4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
       "actor": "MPR_SM_MPR_Env_Tree_0_-2_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 2,
@@ -2392,35 +2866,70 @@
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-2_4",
+      "actor": "MPR_SM_MPR_Env_Tree_0_-2_5",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_0_-2_6",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_-1_-5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_-1_-4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 4,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_0_-1_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_-1_4",
+      "actor": "MPR_SM_MPR_Env_Tree_0_-1_5",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_0_-2",
+      "actor": "MPR_SM_MPR_Env_Tree_0_-1_6",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_0_-5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_0_-4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 4,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_0_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 1,
       "cull_distance_cm": 120000,
@@ -2436,12 +2945,12 @@
     {
       "actor": "MPR_SM_MPR_Env_Tree_0_0_6",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
+      "count": 6,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_1_-2",
+      "actor": "MPR_SM_MPR_Env_Tree_0_1_-4",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 1,
       "cull_distance_cm": 120000,
@@ -2450,28 +2959,28 @@
     {
       "actor": "MPR_SM_MPR_Env_Tree_0_1_5",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_0_2_-2",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_2_-1",
+      "actor": "MPR_SM_MPR_Env_Tree_0_1_6",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 4,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_2_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_3_-2",
+      "actor": "MPR_SM_MPR_Env_Tree_0_2_6",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
+      "count": 5,
       "cull_distance_cm": 120000,
       "lods": 3
     },
@@ -2485,7 +2994,7 @@
     {
       "actor": "MPR_SM_MPR_Env_Tree_0_3_0",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
@@ -2504,91 +3013,63 @@
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_3_5",
+      "actor": "MPR_SM_MPR_Env_Tree_0_5_4",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_4_-1",
+      "actor": "MPR_SM_MPR_Env_Tree_0_5_5",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_4_0",
+      "actor": "MPR_SM_MPR_Env_Tree_0_6_4",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_4_1",
+      "actor": "MPR_SM_MPR_Env_Tree_0_6_5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "count": 1,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_0_6_6",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
       "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_5_3",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 3,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_0_6_-1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_0_6_0",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "actor": "MPR_SM_MPR_Env_Tree_1_-8_-1",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_0_7_3",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_0.SM_MPR_Env_Tree_0",
+      "actor": "MPR_SM_MPR_Env_Tree_1_-8_0",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_1_-7_-5",
+      "actor": "MPR_SM_MPR_Env_Tree_1_-7_-1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
+      "count": 6,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_1_-7_-3",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_1_-7_3",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_1_-7_4",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 4,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_1_-6_-5",
+      "actor": "MPR_SM_MPR_Env_Tree_1_-7_0",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 1,
       "cull_distance_cm": 120000,
@@ -2597,12 +3078,12 @@
     {
       "actor": "MPR_SM_MPR_Env_Tree_1_-6_-2",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 2,
+      "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_1_-5_-2",
+      "actor": "MPR_SM_MPR_Env_Tree_1_-6_-1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 1,
       "cull_distance_cm": 120000,
@@ -2616,79 +3097,114 @@
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_1_-4_-2",
+      "actor": "MPR_SM_MPR_Env_Tree_1_-4_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 1,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_-4_-2",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_1_-4_-1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 2,
+      "count": 3,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_1_-4_0",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 3,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_1_-4_1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
+      "count": 3,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_1_-4_3",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_1_-4_4",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_1_-4_5",
+      "actor": "MPR_SM_MPR_Env_Tree_1_-4_2",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_1_-3_-3",
+      "actor": "MPR_SM_MPR_Env_Tree_1_-4_3",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_-4_4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_-3_-5",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_1_-3_4",
+      "actor": "MPR_SM_MPR_Env_Tree_1_-3_-4",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
+      "count": 3,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_-3_-3",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_-3_5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_1_-3_6",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
+      "count": 4,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_-2_-5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_-2_-4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_1_-2_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
@@ -2700,6 +3216,27 @@
       "lods": 3
     },
     {
+      "actor": "MPR_SM_MPR_Env_Tree_1_-2_6",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_-1_-5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_-1_-4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
       "actor": "MPR_SM_MPR_Env_Tree_1_-1_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 2,
@@ -2707,7 +3244,28 @@
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_1_0_-2",
+      "actor": "MPR_SM_MPR_Env_Tree_1_-1_5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_-1_6",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_0_-4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 6,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_0_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 1,
       "cull_distance_cm": 120000,
@@ -2723,21 +3281,28 @@
     {
       "actor": "MPR_SM_MPR_Env_Tree_1_0_6",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
+      "count": 5,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_1_1_-2",
+      "actor": "MPR_SM_MPR_Env_Tree_1_1_-4",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_1_2_-2",
+      "actor": "MPR_SM_MPR_Env_Tree_1_1_5",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_1_6",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 3,
       "cull_distance_cm": 120000,
       "lods": 3
     },
@@ -2749,7 +3314,21 @@
       "lods": 3
     },
     {
+      "actor": "MPR_SM_MPR_Env_Tree_1_2_5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 3,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
       "actor": "MPR_SM_MPR_Env_Tree_1_2_6",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 3,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_3_-1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 1,
       "cull_distance_cm": 120000,
@@ -2758,63 +3337,28 @@
     {
       "actor": "MPR_SM_MPR_Env_Tree_1_3_0",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 4,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_1_5_-2",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 2,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_1_5_-1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_1_5_0",
+      "actor": "MPR_SM_MPR_Env_Tree_1_3_1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 2,
+      "count": 3,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_1_4_4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
+      "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_1_5_4",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_1_6_-2",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
       "count": 2,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_1_6_-1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 2,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_1_6_0",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 2,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_1_6_1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
@@ -2828,175 +3372,112 @@
     {
       "actor": "MPR_SM_MPR_Env_Tree_1_6_6",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
+      "count": 3,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_1_7_1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_1.SM_MPR_Env_Tree_1",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-8_6",
+      "actor": "MPR_SM_MPR_Env_Tree_2_-8_-2",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-7_-6",
+      "actor": "MPR_SM_MPR_Env_Tree_2_-8_-1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-7_-5",
+      "actor": "MPR_SM_MPR_Env_Tree_2_-7_-2",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-7_-3",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
+      "count": 4,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_2_-7_-1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
+      "count": 3,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-7_3",
+      "actor": "MPR_SM_MPR_Env_Tree_2_-7_0",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
       "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-7_4",
+      "actor": "MPR_SM_MPR_Env_Tree_2_-6_-1",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 1,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_-6_0",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 1,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_-4_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
       "count": 2,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-7_5",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-7_6",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-6_-5",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-6_-4",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-6_-3",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-6_-2",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-6_2",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-6_5",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-5_-5",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-5_-3",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-5_1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_-5_4",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_2_-4_-2",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 2,
+      "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_2_-4_-1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
+      "count": 4,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_2_-4_0",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 3,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_2_-4_1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 4,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_-4_2",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_-4_3",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
       "count": 1,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_-4_4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
@@ -3017,14 +3498,14 @@
     {
       "actor": "MPR_SM_MPR_Env_Tree_2_-3_-4",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_2_-3_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
@@ -3038,42 +3519,126 @@
     {
       "actor": "MPR_SM_MPR_Env_Tree_2_-3_6",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 2,
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_-2_-5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_-2_-4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 3,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_2_-2_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_-2_5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 3,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_-2_6",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_-1_-5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_-1_-4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 4,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_2_-1_-3",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
+      "count": 2,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_-1_5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_2_-1_6",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 2,
+      "count": 4,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_2_0_-2",
+      "actor": "MPR_SM_MPR_Env_Tree_2_0_-5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 3,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_0_-4",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 4,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_0_-3",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 1,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_0_5",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 3,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_0_6",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
+      "actor": "MPR_SM_MPR_Env_Tree_2_1_5",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
       "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_2_1_-2",
+      "actor": "MPR_SM_MPR_Env_Tree_2_1_6",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 2,
+      "count": 3,
       "cull_distance_cm": 120000,
       "lods": 3
     },
@@ -3085,84 +3650,42 @@
       "lods": 3
     },
     {
+      "actor": "MPR_SM_MPR_Env_Tree_2_2_6",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
+      "count": 5,
+      "cull_distance_cm": 120000,
+      "lods": 3
+    },
+    {
       "actor": "MPR_SM_MPR_Env_Tree_2_3_0",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 3,
+      "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Env_Tree_2_3_1",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_4_-2",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_4_-1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
       "count": 2,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_2_5_-1",
+      "actor": "MPR_SM_MPR_Env_Tree_2_3_2",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
       "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_2_5_0",
+      "actor": "MPR_SM_MPR_Env_Tree_2_4_5",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
       "count": 1,
       "cull_distance_cm": 120000,
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Tree_2_5_1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_5_2",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_6_-2",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 2,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_6_-1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_6_1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 3
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Tree_2_6_2",
+      "actor": "MPR_SM_MPR_Env_Tree_2_5_5",
       "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
       "count": 1,
       "cull_distance_cm": 120000,
@@ -3176,46 +3699,11 @@
       "lods": 3
     },
     {
-      "actor": "MPR_SM_MPR_Env_Car_0_-4_-2",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_0.SM_MPR_Env_Car_0",
-      "count": 2,
-      "cull_distance_cm": 120000,
-      "lods": 1
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Car_0_-4_-1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_0.SM_MPR_Env_Car_0",
-      "count": 3,
-      "cull_distance_cm": 120000,
-      "lods": 1
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Car_0_-4_0",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_0.SM_MPR_Env_Car_0",
+      "actor": "MPR_SM_MPR_Env_Tree_2_6_6",
+      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Tree_2.SM_MPR_Env_Tree_2",
       "count": 4,
       "cull_distance_cm": 120000,
-      "lods": 1
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Car_0_-4_1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_0.SM_MPR_Env_Car_0",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 1
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Car_0_3_-1",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_0.SM_MPR_Env_Car_0",
-      "count": 1,
-      "cull_distance_cm": 120000,
-      "lods": 1
-    },
-    {
-      "actor": "MPR_SM_MPR_Env_Car_0_3_0",
-      "mesh": "/Game/MPRWarehouse/Environment/Meshes/SM_MPR_Env_Car_0.SM_MPR_Env_Car_0",
-      "count": 4,
-      "cull_distance_cm": 120000,
-      "lods": 1
+      "lods": 3
     },
     {
       "actor": "MPR_SM_MPR_Conveyor2m_-3_-2",
@@ -4305,8 +4793,14 @@
   "previous_map": "/Engine/Maps/Entry",
   "ghs_map_sha256_before": "1a28e3301d524bbb9aa0a32556e684d1468d4c7f095544e8a3430599e5a5aa01",
   "stage": "Equipment",
-  "actor_count": 384,
-  "instance_count": 4741,
+  "parked_truck_alignment": {
+    "local_rear_x_m": -0.19749921798706055,
+    "origin_offset_m": 0.44749921798706055,
+    "rear_clearance_m": 0.25,
+    "count": 15
+  },
+  "actor_count": 399,
+  "instance_count": 4922,
   "source_rack_count": 2867,
   "source_column_count": 164,
   "source_dock_count": 72,
@@ -4332,15 +4826,31 @@
     "TreesLight": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_TreesLight.M_GHSPark_TreesLight",
     "Trunk": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Trunk.M_GHSPark_Trunk",
     "VehicleLights": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_VehicleLights.M_GHSPark_VehicleLights",
-    "Floor": "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
-    "Roofs": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Roofs.M_GHSPark_Roofs",
-    "Skylight": "/Game/GHSZcoolSmartFactory/Roof/Materials/M_GHSRoof_Skylight.M_GHSRoof_Skylight",
-    "Curbs": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Curbs.M_GHSPark_Curbs",
     "Roads": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Roads.M_GHSPark_Roads",
-    "Water": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Solar.M_GHSPark_Solar",
     "Hardstand": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Hardstand.M_GHSPark_Hardstand",
+    "Curbs": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Curbs.M_GHSPark_Curbs",
     "Landscape": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Landscape.M_GHSPark_Landscape",
     "Ground": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Ground.M_GHSPark_Ground",
+    "Roofs": "/Game/GHSZcoolSmartFactory/Park/Materials/M_GHSPark_Roofs.M_GHSPark_Roofs",
+    "SiteAsphalt": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_SiteAsphalt.MI_MPR_Exterior_SiteAsphalt",
+    "SiteConcrete": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_SiteConcrete.MI_MPR_Exterior_SiteConcrete",
+    "SiteCurb": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_SiteCurb.MI_MPR_Exterior_SiteCurb",
+    "SiteGrass": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_SiteGrass.MI_MPR_Exterior_SiteGrass",
+    "SiteBackdrop": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_SiteBackdrop.MI_MPR_Exterior_SiteBackdrop",
+    "LaneWhite": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_LaneWhite.MI_MPR_Exterior_LaneWhite",
+    "LaneYellow": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_LaneYellow.MI_MPR_Exterior_LaneYellow",
+    "SiteWater": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_SiteWater.MI_MPR_Exterior_SiteWater",
+    "ContextRoof": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_ContextRoof.MI_MPR_Exterior_ContextRoof",
+    "ContextWall": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_ContextWall.MI_MPR_Exterior_ContextWall",
+    "ContextTrim": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_ContextTrim.MI_MPR_Exterior_ContextTrim",
+    "ContextGlass": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_ContextGlass.MI_MPR_Exterior_ContextGlass",
+    "Ballast": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_Ballast.MI_MPR_Exterior_Ballast",
+    "Sleepers": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_Sleepers.MI_MPR_Exterior_Sleepers",
+    "RailSteel": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_RailSteel.MI_MPR_Exterior_RailSteel",
+    "FreightBody": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_FreightBody.MI_MPR_Exterior_FreightBody",
+    "FreightDetail": "/Game/MPRWarehouse/Materials/MI_MPR_Exterior_FreightDetail.MI_MPR_Exterior_FreightDetail",
+    "Floor": "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+    "Skylight": "/Game/GHSZcoolSmartFactory/Roof/Materials/M_GHSRoof_Skylight.M_GHSRoof_Skylight",
     "Sky": "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Sky.M_Zcool_Sky"
   },
   "performance_policy": "60m spatial HISM batches, shared 4-LOD racks and pallets, no collision or static tick, bounded environment culling"

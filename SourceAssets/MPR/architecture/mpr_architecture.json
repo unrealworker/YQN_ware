@@ -517,30 +517,6 @@
       "triangles": 960
     },
     {
-      "name": "SM_MPR_RoofPlant",
-      "fbx": "SourceAssets/MPR/architecture/SM_MPR_RoofPlant.fbx",
-      "material_roles": [
-        "Detail",
-        "Skylight"
-      ],
-      "bounds_m": [
-        [
-          -169.9,
-          161.9
-        ],
-        [
-          -73.625,
-          62.625
-        ],
-        [
-          13.4,
-          13.780000000000001
-        ]
-      ],
-      "vertices": 3632,
-      "triangles": 5448
-    },
-    {
       "name": "SM_MPR_RoofSolar",
       "fbx": "SourceAssets/MPR/architecture/SM_MPR_RoofSolar.fbx",
       "material_roles": [
@@ -549,20 +525,44 @@
       ],
       "bounds_m": [
         [
-          -13.75,
-          165.75
+          -44.772400000000005,
+          167.97240000000002
         ],
         [
-          -77.725,
-          65.725
+          -81.83600000000001,
+          64.33599999999998
         ],
         [
-          13.6,
-          13.716000000000001
+          13.520000000000001,
+          13.606
         ]
       ],
-      "vertices": 10432,
-      "triangles": 15648
+      "vertices": 36020,
+      "triangles": 25578
+    },
+    {
+      "name": "SM_MPR_RoofPlant",
+      "fbx": "SourceAssets/MPR/architecture/SM_MPR_RoofPlant.fbx",
+      "material_roles": [
+        "Detail",
+        "Skylight"
+      ],
+      "bounds_m": [
+        [
+          -177.5615534195892,
+          174.85827390260715
+        ],
+        [
+          -82.65588207733649,
+          74.93007874418704
+        ],
+        [
+          13.4,
+          13.59
+        ]
+      ],
+      "vertices": 6128,
+      "triangles": 9192
     }
   ],
   "footprint_area_m2": 56408.1891,
@@ -1015,8 +1015,10 @@
   "roof_mesh_prefixes": [
     "SM_MPR_Roof"
   ],
-  "skylight_count": 227,
-  "solar_cluster_count": 652,
+  "skylight_count": 383,
+  "solar_cluster_count": 946,
+  "solar_module_cells": 6167,
+  "roof_layout_reference": "SourceAssets/MPR/architecture/roof_layout_reference.json",
   "height_basis": {
     "clear_height_m": 12.192,
     "source": "Prologis property brochure 40ft clear",

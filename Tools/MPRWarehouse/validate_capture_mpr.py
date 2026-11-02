@@ -27,6 +27,19 @@ assert sum(c.get_instance_count() for c in groups.values())==expected['instance_
 assert sum(c.get_instance_count() for k,c in groups.items() if k.startswith('MPR_Racks_'))==len(CAD['racks'])
 assert sum(c.get_instance_count() for k,c in groups.items() if k.startswith('MPR_Columns_'))==len(CAD['columns'])
 assert sum(c.get_instance_count() for k,c in groups.items() if k.startswith('MPR_DockDoors_'))==74
+truck_rear_errors=[]
+truck_targets=[u.Vector((r['position_m'][0]+r['outward_normal_xy'][0]*.25)*100,
+                       -(r['position_m'][1]+r['outward_normal_xy'][1]*.25)*100,0)
+               for i,r in enumerate(CAD['dock_doors']) if i%5==0]
+for label,component in groups.items():
+    if not label.startswith('MPR_ParkedTruck'):continue
+    bounds=component.static_mesh.get_bounds()
+    for i in range(component.get_instance_count()):
+        rear=u.MathLibrary.transform_location(component.get_instance_transform(i,world_space=True),u.Vector(bounds.origin.x-bounds.box_extent.x,0,0))
+        error=min(((rear.x-p.x)**2+(rear.y-p.y)**2)**.5 for p in truck_targets)
+        assert error<.5,('Truck rear is not aligned to its dock',label,i,error)
+        truck_rear_errors.append(error)
+assert len(truck_rear_errors)==len(truck_targets)
 for a in actors:
     for t in a.tags:assert not str(t).startswith(('GHS_','GHSDigitalTwin','GHSStorageGroup','TwinId=GHN')),(a.get_actor_label(),t)
     for c in a.get_components_by_class(u.StaticMeshComponent):
@@ -43,16 +56,19 @@ old_throttle=perf.get_editor_property('bThrottleCPUWhenNotForeground');perf.set_
 old_delay=u.SystemLibrary.get_console_variable_int_value('r.HighResScreenshotDelay')
 u.SystemLibrary.execute_console_command(E.get_editor_world(),'r.HighResScreenshotDelay 16')
 A.set_selected_level_actors([]);L.editor_set_game_view(True)
-views=[('01-exterior',[0,0,12],68000,-38,-70,False),
+views=[('01-exterior',[0,0,12],58000,-42,-75,False),
        ('02-context',[0,0,0],105000,-65,-70,False),
        ('03-interior',[0,0,0],56000,-65,-90,True),
        ('04-racks',[-35,-18,4],9500,-30,-55,True),
        ('05-sorting',[-112,-10,1.8],14000,-50,-80,True),
        ('06-docks',[-70,-84,2],12000,-24,-90,False),
        ('07-sorter-detail',[-108.78,-28.76,1.2],2300,-28,-55,True),
-       ('08-rack-detail',[-35,-18,4],2700,-20,-55,True)]
+       ('08-rack-detail',[-35,-18,4],2700,-20,-55,True),
+       ('09-site-roads',[65,-145,0],24000,-50,-80,False),
+       ('10-railway',[210,-125,0],23000,-48,-65,False),
+       ('11-roof',[30,-5,14],36500,-72,-90,False)]
 report=dict(success=False,map=MAP,reload_verified=True,actors=len(actors),hism_groups=len(groups),instances=expected['instance_count'],
-            no_ghs_business_tags=True,captures=[])
+            no_ghs_business_tags=True,truck_rear_alignment_max_error_cm=max(truck_rear_errors),captures=[])
 handle=None;index=0;task=None;pending=None;done=False;busy=False;start=time.monotonic()
 
 def write():(OUT/'validation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')

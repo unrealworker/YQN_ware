@@ -1,11 +1,11 @@
 {
   "success": true,
-  "mesh_count": 60,
-  "max_bounds_error_m": 6.104e-05,
+  "mesh_count": 67,
+  "max_bounds_error_m": 7.127e-05,
   "alignment_rms_m": 0.5845932112313561,
   "ground_z_m": -1.2,
-  "instances_count": 211,
-  "unique_triangles": 22000,
+  "instances_count": 392,
+  "unique_triangles": 179690,
   "checked": "Exported FBX reimport preserves meter coordinates, positive scale and material slot counts. Only source-derived environment; no UE runtime claim.",
   "meshes": [
     {
@@ -20,22 +20,32 @@
     },
     {
       "mesh": "SM_MPR_Env_Far_E_Buildings",
-      "max_bounds_error_m": 4.121e-05,
+      "max_bounds_error_m": 4.738e-05,
+      "material_slots": 3
+    },
+    {
+      "mesh": "SM_MPR_Env_Far_E_Freight",
+      "max_bounds_error_m": 2.529e-05,
       "material_slots": 2
     },
     {
       "mesh": "SM_MPR_Env_Far_E_RailBed",
-      "max_bounds_error_m": 3.052e-05,
+      "max_bounds_error_m": 4.356e-05,
       "material_slots": 1
     },
     {
       "mesh": "SM_MPR_Env_Far_E_Rails",
+      "max_bounds_error_m": 4.44e-05,
+      "material_slots": 2
+    },
+    {
+      "mesh": "SM_MPR_Env_Far_E_Roads",
       "max_bounds_error_m": 3.052e-05,
       "material_slots": 1
     },
     {
-      "mesh": "SM_MPR_Env_Far_E_Roads",
-      "max_bounds_error_m": 4.578e-05,
+      "mesh": "SM_MPR_Env_Far_E_Sleepers",
+      "max_bounds_error_m": 4.388e-05,
       "material_slots": 1
     },
     {
@@ -46,36 +56,36 @@
     {
       "mesh": "SM_MPR_Env_Far_N_Buildings",
       "max_bounds_error_m": 4.919e-05,
-      "material_slots": 2
+      "material_slots": 3
     },
     {
       "mesh": "SM_MPR_Env_Far_N_Roads",
-      "max_bounds_error_m": 4.578e-05,
+      "max_bounds_error_m": 6.104e-05,
       "material_slots": 1
     },
     {
       "mesh": "SM_MPR_Env_Far_S_Buildings",
       "max_bounds_error_m": 3.052e-05,
-      "material_slots": 2
-    },
-    {
-      "mesh": "SM_MPR_Env_Far_S_Hardstand",
-      "max_bounds_error_m": 3.052e-05,
-      "material_slots": 1
+      "material_slots": 3
     },
     {
       "mesh": "SM_MPR_Env_Far_S_RailBed",
-      "max_bounds_error_m": 3.433e-05,
+      "max_bounds_error_m": 4.578e-05,
       "material_slots": 1
     },
     {
       "mesh": "SM_MPR_Env_Far_S_Rails",
-      "max_bounds_error_m": 3.433e-05,
-      "material_slots": 1
+      "max_bounds_error_m": 3.632e-05,
+      "material_slots": 2
     },
     {
       "mesh": "SM_MPR_Env_Far_S_Roads",
       "max_bounds_error_m": 3.052e-05,
+      "material_slots": 1
+    },
+    {
+      "mesh": "SM_MPR_Env_Far_S_Sleepers",
+      "max_bounds_error_m": 2.882e-05,
       "material_slots": 1
     },
     {
@@ -84,22 +94,22 @@
       "material_slots": 2
     },
     {
-      "mesh": "SM_MPR_Env_Far_W_Hardstand",
-      "max_bounds_error_m": 3.815e-05,
-      "material_slots": 1
-    },
-    {
       "mesh": "SM_MPR_Env_Far_W_RailBed",
-      "max_bounds_error_m": 6.104e-05,
+      "max_bounds_error_m": 4.029e-05,
       "material_slots": 1
     },
     {
       "mesh": "SM_MPR_Env_Far_W_Rails",
-      "max_bounds_error_m": 6.104e-05,
+      "max_bounds_error_m": 7.127e-05,
       "material_slots": 1
     },
     {
       "mesh": "SM_MPR_Env_Far_W_Roads",
+      "max_bounds_error_m": 6.104e-05,
+      "material_slots": 1
+    },
+    {
+      "mesh": "SM_MPR_Env_Far_W_Sleepers",
       "max_bounds_error_m": 6.104e-05,
       "material_slots": 1
     },
@@ -234,33 +244,43 @@
       "material_slots": 1
     },
     {
-      "mesh": "SM_MPR_Env_Near_Buildings",
+      "mesh": "SM_MPR_Env_Near_AccessLines",
       "max_bounds_error_m": 3.052e-05,
-      "material_slots": 2
+      "material_slots": 1
+    },
+    {
+      "mesh": "SM_MPR_Env_Near_Buildings",
+      "max_bounds_error_m": 3.358e-05,
+      "material_slots": 4
+    },
+    {
+      "mesh": "SM_MPR_Env_Near_Centerlines",
+      "max_bounds_error_m": 3.052e-05,
+      "material_slots": 1
     },
     {
       "mesh": "SM_MPR_Env_Near_Curbs",
-      "max_bounds_error_m": 1.526e-05,
+      "max_bounds_error_m": 3.052e-05,
       "material_slots": 1
     },
     {
       "mesh": "SM_MPR_Env_Near_DockAprons",
-      "max_bounds_error_m": 1.831e-05,
-      "material_slots": 1
-    },
-    {
-      "mesh": "SM_MPR_Env_Near_Hardstand",
       "max_bounds_error_m": 1.526e-05,
       "material_slots": 1
     },
     {
-      "mesh": "SM_MPR_Env_Near_Islands",
-      "max_bounds_error_m": 1.373e-05,
+      "mesh": "SM_MPR_Env_Near_Edgelines",
+      "max_bounds_error_m": 3.052e-05,
       "material_slots": 1
+    },
+    {
+      "mesh": "SM_MPR_Env_Near_Freight",
+      "max_bounds_error_m": 2.148e-05,
+      "material_slots": 2
     },
     {
       "mesh": "SM_MPR_Env_Near_Landscape",
-      "max_bounds_error_m": 1.526e-05,
+      "max_bounds_error_m": 3.052e-05,
       "material_slots": 1
     },
     {
@@ -269,28 +289,43 @@
       "material_slots": 1
     },
     {
-      "mesh": "SM_MPR_Env_Near_Parking",
+      "mesh": "SM_MPR_Env_Near_ParkingIslands",
       "max_bounds_error_m": 1.526e-05,
       "material_slots": 1
     },
     {
       "mesh": "SM_MPR_Env_Near_RailBed",
-      "max_bounds_error_m": 4.578e-05,
+      "max_bounds_error_m": 2.118e-05,
       "material_slots": 1
     },
     {
       "mesh": "SM_MPR_Env_Near_Rails",
-      "max_bounds_error_m": 4.578e-05,
-      "material_slots": 1
+      "max_bounds_error_m": 2.167e-05,
+      "material_slots": 2
     },
     {
-      "mesh": "SM_MPR_Env_Near_Roads",
+      "mesh": "SM_MPR_Env_Near_Retention",
       "max_bounds_error_m": 1.526e-05,
       "material_slots": 1
     },
     {
+      "mesh": "SM_MPR_Env_Near_Roads",
+      "max_bounds_error_m": 3.052e-05,
+      "material_slots": 1
+    },
+    {
+      "mesh": "SM_MPR_Env_Near_ShoulderHatch",
+      "max_bounds_error_m": 3.052e-05,
+      "material_slots": 1
+    },
+    {
       "mesh": "SM_MPR_Env_Near_Sleepers",
-      "max_bounds_error_m": 4.578e-05,
+      "max_bounds_error_m": 2.202e-05,
+      "material_slots": 1
+    },
+    {
+      "mesh": "SM_MPR_Env_Near_TrailerStands",
+      "max_bounds_error_m": 1.526e-05,
       "material_slots": 1
     },
     {

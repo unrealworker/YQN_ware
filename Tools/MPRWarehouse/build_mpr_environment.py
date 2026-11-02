@@ -19,8 +19,12 @@ sys.path.insert(0,str(ROOT/'Saved/ParkRefinement/python_deps'))
 from park_vegetation import build_tree
 from park_vehicles import build_car
 import shapely
-from shapely.geometry import Polygon, box as polygon_box
+from shapely.geometry import Polygon, Point, box as polygon_box
 from shapely.ops import unary_union
+sys.path.insert(0,str(ROOT/'Tools/MPRWarehouse'))
+from mpr_site_roads import build_site_roads, emit_shape, MATERIALS as SITE_MATERIALS
+from mpr_context_buildings import build_context_buildings, MATERIALS as CONTEXT_MATERIALS
+from mpr_railway_detail import build_railways, PALETTE as RAIL_PALETTE, MATERIAL_PROPERTIES as RAIL_PROPERTIES
 
 G=-1.2
 DATA=defaultdict(lambda:{'vertices':[],'faces':[],'roles':[]})
@@ -31,7 +35,13 @@ PALETTE=json.loads((ROOT/'SourceAssets/GHS/Park/reference_style.json').read_text
 PALETTE.update({'Solar':[.045,.075,.13],'Glass':[.24,.34,.44],
     'Detail':[.3,.39,.46],'Blue':[.018,.075,.51],'Rubber':[.018,.024,.028],
     'VehicleLights':[.46,.035,.025],'Water':[.23,.39,.46]})
+CUSTOM_MATERIALS={**SITE_MATERIALS,
+    **{r:dict(color=p['color_linear'],roughness=p['roughness'],parent='Buildings' if r=='ContextWall' else 'Roofs') for r,p in CONTEXT_MATERIALS.items()},
+    **{r:dict(color=c,parent='Detail',**RAIL_PROPERTIES[r]) for r,c in RAIL_PALETTE.items()}}
+for role, spec in CUSTOM_MATERIALS.items():PALETTE[role]=spec['color']
 RNG=random.Random(1001)
+SITE=RAIL=CONTEXT=None
+TREE_REJECTIONS=defaultdict(int)
 COUNTS=defaultdict(int)
 BUILDING_POLYS=[]
 ROAD_POLYS=[]
@@ -92,121 +102,61 @@ def boundary_clearance(x,y,pts):
     return -best if inside((x,y),pts) else best
 
 
-def source_context():
-    for m in SOURCE['meshes']:
-        pts=m['vertices'];center=[sum(v[i] for v in pts)/len(pts) for i in (0,1)]
-        region=zone(*center);layer=m['layer']
-        if layer in ('major_roads','minor_roads','paths'):
-            role='Roads' if layer!='paths' else 'Hardstand'
-            for f in m['faces']:
-                face=Polygon([pts[i][:2] for i in f])
-                if face.area>1e-7:ROAD_TRIANGLES[role].append(face)
-            for loop in m['boundaryLoops']:
-                ROAD_POLYS.append([pts[i][:2] for i in loop[:-1]])
-            COUNTS['source_road_meshes']+=1
-        elif layer=='buildings' and m['id']!='1583':
-            if not m['footprintLoops']:continue
-            outline=[pts[i][:2] for i in m['footprintLoops'][0][:-1]]
-            BUILDING_POLYS.append(outline)
-            height=14 if m['id']=='1582' else 9 if m['footprintAreaM2']>1000 else 6 if m['footprintAreaM2']>70 else 3.2
-            # Context height inferred from building typology, never claimed surveyed.
-            name='SM_MPR_Env_'+region+'_Buildings'
-            poly(name,'Roofs',outline,G+height)
-            for a,b in zip(outline,outline[1:]+outline[:1]):
-                mesh(name,'Buildings',[(a[0],a[1],G),(b[0],b[1],G),(b[0],b[1],G+height),(a[0],a[1],G+height)],[(0,1,2,3)])
-            COUNTS['source_context_buildings']+=1
-    # Whole source tile provides the same extent as input map; simple subdivision
-    # keeps batch bounds useful without duplicating street geometry.
-    regions={'Near':polygon_box(-250,-170,250,240),'Far_E':polygon_box(250,-2000,2000,2000),
-        'Far_W':polygon_box(-2000,-2000,-250,2000),'Far_N':polygon_box(-250,240,250,2000),'Far_S':polygon_box(-250,-2000,250,-170)}
-    for role,polys in ROAD_TRIANGLES.items():
-        merged=unary_union(polys)
-        for region,clip in regions.items():
-            clipped=shapely.make_valid(merged.intersection(clip))
-            triangles=shapely.constrained_delaunay_triangles(clipped)
-            for tri in triangles.geoms:
-                if tri.area<1e-7:continue
-                poly('SM_MPR_Env_'+region+'_'+role,role,list(tri.exterior.coords)[:-1],G+.035 if role=='Roads' else G+.045)
+def build_scene_context():
+    global SITE,RAIL,CONTEXT,BUILDING_POLYS
+    api=dict(mesh=mesh,poly=poly,box=box,strip=strip,zone=zone,footprint=FOOTPRINT,include_freight=True)
+    CONTEXT=build_context_buildings(api,SOURCE,G)
+    BUILDING_POLYS=CONTEXT['footprints']
+    COUNTS.update(CONTEXT['counts'])
+    SITE=build_site_roads(api,SOURCE,G)
+    RAIL=build_railways(api,SOURCE['polylines'],G)
     for ix in range(-2,3):
         for iy in range(-2,3):
-            box('SM_MPR_Env_Ground_'+str(ix+2)+'_'+str(iy+2),'Landscape',(ix*280,iy*280,G-.2),(280,280,.25))
+            box('SM_MPR_Env_Ground_'+str(ix+2)+'_'+str(iy+2),'SiteBackdrop',(ix*280,iy*280,G-.2),(280,280,.25))
+    # Water/park footprints retain source extents. Buildings and roads always
+    # win over planted surfaces; trees use their exact same exclusion geometry.
     for line in SOURCE['polylines']:
+        if line['layer']=='railways' or len(line['vertices'])<3:continue
         pts=line['vertices'];region=zone(sum(p[0] for p in pts)/len(pts),sum(p[1] for p in pts)/len(pts))
-        if line['layer']=='railways':
-            for a,b in zip(pts,pts[1:]):
-                strip('SM_MPR_Env_'+region+'_RailBed','Detail',a,b,3.1,G+.04)
-                dx,dy=b[0]-a[0],b[1]-a[1];ln=math.hypot(dx,dy)
-                if ln<.01:continue
-                nx,ny=-dy/ln,dx/ln
-                for side in (-1,1):
-                    aa=(a[0]+nx*.718*side,a[1]+ny*.718*side);bb=(b[0]+nx*.718*side,b[1]+ny*.718*side)
-                    strip('SM_MPR_Env_'+region+'_Rails','Curbs',aa,bb,.08,G+.09)
-                if region=='Near':
-                    for k in range(int(ln/3.5)):
-                        t=(k+.5)/max(1,int(ln/3.5));cx=a[0]+dx*t;cy=a[1]+dy*t
-                        strip('SM_MPR_Env_Near_Sleepers','Trunk',(cx-nx*1.2,cy-ny*1.2),(cx+nx*1.2,cy+ny*1.2),.18,G+.07)
-            COUNTS['source_railways']+=1
-        else:
-            poly('SM_MPR_Env_'+region+'_'+line['layer'],'Water' if line['layer']=='water' else 'Landscape',pts,G+.03)
-
-
-def campus():
-    # Loading courts follow the authoritative main CAD wall coordinates.
-    poly('SM_MPR_Env_Near_Hardstand','Hardstand',[(-166.08,74.546),(166.786,74.546),(166.786,132),(-166.08,132)],G+.06)
-    poly('SM_MPR_Env_Near_Hardstand','Hardstand',[(-166.08,-83.95),(135.367,-83.95),(135.367,-102),(-110,-115),(-166.08,-115)],G+.06)
-    # Dock aprons have an intentional contrasting concrete band.
-    box('SM_MPR_Env_Near_DockAprons','Ground',(0,83.5,G+.065),(332,17.9,.06))
-    box('SM_MPR_Env_Near_DockAprons','Ground',(-15.5,-93,G+.065),(301,18.1,.06))
-    # Short-edge car parks: reference-derived asphalt/kerb/marking, not CAD-surveyed.
-    for side,xlo,xhi,ylo,yhi in [('W',-211,-183.0,-89,80),('E',184,210,-16,80)]:
-        box('SM_MPR_Env_Near_Parking','Roads',((xlo+xhi)/2,(ylo+yhi)/2,G+.075),(xhi-xlo,yhi-ylo,.05))
-        for px in (xlo+.2,xhi-.2):
-            box('SM_MPR_Env_Near_Curbs','Curbs',(px,(ylo+yhi)/2,G+.14),(.25,yhi-ylo,.24))
-        rows=[xlo+3.2,xhi-3.2]
-        for r,x in enumerate(rows):
-            for k in range(int((yhi-ylo)/2.9)):
-                y=ylo+k*2.9
-                strip('SM_MPR_Env_Near_Markings','Markings',(x-2.7,y),(x+2.7,y),.11,G+.109)
-                if k%12==8:
-                    box('SM_MPR_Env_Near_Islands','Landscape',(x,y+1.45,G+.18),(5.4,2.7,.23))
-                    add_tree(x,y+1.45, .56)
-                elif k%4==1 and (k+r)%3!=0:
-                    car='SM_MPR_Env_Car_'+str((k+r)%2)
-                    INSTANCES[car].append({'position_m':[x,y+1.45,G+.075],'rotation_deg':0 if r==0 else 180,'scale':[1,1,1]})
-                    COUNTS['parked_cars']+=1
-            COUNTS['marked_car_spaces']+=int((yhi-ylo)/2.9)
-    # Approximate trailer staging bays visible on southwest court; sparse occupancy.
-    for i in range(22):
-        x=-154+i*4.0
-        strip('SM_MPR_Env_Near_Markings','Markings',(x,-107),(x,-114),.1,G+.10)
-    for x in range(-160,163,12):
-        strip('SM_MPR_Env_Near_Markings','Markings',(x,121),(x+5,121),.15,G+.10)
-    # Narrow landscaping bordering parking and step-back facade.
-    for a,b in zip(FOOTPRINT[5:14],FOOTPRINT[6:15]):
-        if a[0]>130 and b[0]>130:
-            strip('SM_MPR_Env_Near_Landscape','Landscape',(a[0]+5,a[1]-5),(b[0]+5,b[1]-5),8,G+.08)
-    # Trees in observed perimeter/parking bands, plus moderate context clusters.
-    for x in range(-150,126,16):add_tree(x,-124+max(0,x+70)*.05,.65)
-    for y in range(-80,80,15):add_tree(-216,y,.67)
-    for y in range(-10,80,16):add_tree(216,y,.64)
-    for x,y in [(171,-29),(166,-55),(151,-75),(137,-88),(126,-102),(113,-113)]:add_tree(x,y,.67)
-    for _ in range(1500):
-        if COUNTS['trees']>=180:break
-        x=RNG.uniform(-430,440);y=RNG.uniform(-340,410)
-        if -231<x<229 and -145<y<136:continue
-        if any(boundary_clearance(x,y,p)<6 for p in BUILDING_POLYS+[FOOTPRINT]):continue
-        if any(boundary_clearance(x,y,p)<6 for p in ROAD_POLYS):continue
-        if abs(x)<220 and 125<y<230:continue
-        # Railway band is not planted.
-        if y< -140 and x> -130:continue
-        add_tree(x,y,RNG.uniform(.60,.93))
+        shape=shapely.make_valid(Polygon([p[:2] for p in pts])).difference(SITE['paved'])
+        emit_shape(api,'SM_MPR_Env_'+region+'_'+line['layer'],'SiteWater' if line['layer']=='water' else 'SiteGrass',shape,G+.03)
+    for i,row in enumerate(SITE['cars']):INSTANCES['SM_MPR_Env_Car_'+str(i%2)].append(row)
+    COUNTS['parked_cars']=len(SITE['cars'])
+    COUNTS['marked_car_spaces']=SITE['audit']['parking_spaces_drawn']
+    # Compact planting islands and continuous belts observed in the imagery.
+    # Every candidate, including deterministic rows, passes the same clearance.
+    for x,y in SITE['tree_island_centers']:add_tree(x,y,.43)
+    for y in range(-90,321,11):add_tree(-227,y,.63)
+    for x in range(-174,142,10):
+        # South landscape edge follows the real Prologis bend rather than a
+        # straight row crossing the carriageway.
+        y=-151+max(0,x+80)*.09
+        add_tree(x,y,.61)
+    for y in range(-12,91,12):add_tree(221,y,.60)
+    for x,y in [(158,-59),(169,-36),(149,-80),(134,-94),(121,-111),(110,-119)]:add_tree(x,y,.62)
+    # Muted woodland masses in photograph-backed bands, not uniform scattering.
+    patches=[(-225,-205,-140,-150),(-160,-290,70,-180),(-450,-95,-345,30),
+             (-175,335,185,415),(216,125,250,305),(285,245,425,410)]
+    for x0,y0,x1,y1 in patches:
+        for x in range(x0,x1,12):
+            for y in range(y0,y1,13):
+                if RNG.random()<.54:add_tree(x+RNG.uniform(-3,3),y+RNG.uniform(-3,3),RNG.uniform(.57,.82))
+    COUNTS['tree_candidates_rejected']=sum(TREE_REJECTIONS.values())
 
 
 def add_tree(x,y,scale):
-    for items in INSTANCES.values():
-        if any(math.hypot(p['position_m'][0]-x,p['position_m'][1]-y)<6 for p in items):return
+    radius=4.1*scale
+    crown=Point(x,y).buffer(radius+.3,quad_segs=6)
+    if crown.intersects(SITE['paved']):TREE_REJECTIONS['paved_surface']+=1;return
+    if crown.intersects(RAIL['exclusion']):TREE_REJECTIONS['railway_corridor']+=1;return
+    if crown.intersects(SITE['pond']):TREE_REJECTIONS['water']+=1;return
+    if any(crown.intersects(Polygon(p).buffer(.5)) for p in BUILDING_POLYS+[FOOTPRINT]):TREE_REJECTIONS['building']+=1;return
+    for name,items in INSTANCES.items():
+        if '_Tree_' not in name:continue
+        if any(math.hypot(p['position_m'][0]-x,p['position_m'][1]-y)<radius+4.1*p['scale'][0]+.5 for p in items):
+            TREE_REJECTIONS['other_tree']+=1;return
     variant=COUNTS['trees']%3
-    INSTANCES['SM_MPR_Env_Tree_'+str(variant)].append({'position_m':[x,y,G+.10],'rotation_deg':RNG.uniform(0,360),'scale':[scale]*3})
+    INSTANCES['SM_MPR_Env_Tree_'+str(variant)].append({'position_m':[x,y,G+.1],'rotation_deg':RNG.uniform(0,360),'scale':[scale]*3})
     COUNTS['trees']+=1
 
 
@@ -246,11 +196,17 @@ def heal_coplanar_batches():
 def main():
     bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
     bpy.context.scene.unit_settings.system='METRIC';bpy.context.scene.unit_settings.scale_length=1
-    source_context();campus();reusable_models();heal_coplanar_batches()
+    build_scene_context();reusable_models();heal_coplanar_batches()
     mats={r:material(r) for r in sorted(set(r for d in DATA.values() for r in d['roles']))}
     rows=[]
     for name,d in sorted(DATA.items()):
         if not d['faces']:continue
+        # Far railway profiles intentionally keep only their visible top.
+        # Drop unreferenced lower vertices so manifest/FBX/UE render bounds agree.
+        used=sorted({i for face in d['faces'] for i in face})
+        remap={old:new for new,old in enumerate(used)}
+        d['vertices']=[d['vertices'][i] for i in used]
+        d['faces']=[tuple(remap[i] for i in face) for face in d['faces']]
         meshdata=bpy.data.meshes.new(name);meshdata.from_pydata(d['vertices'],[],d['faces']);meshdata.update()
         obj=bpy.data.objects.new(name,meshdata);bpy.context.collection.objects.link(obj)
         roles=sorted(set(d['roles']))
@@ -277,12 +233,15 @@ def main():
     bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'MPR_Environment.blend'))
     manifest={'schema_version':1,'coordinate_frame':'Main CAD metres; +Y retained; FBX forward -Y/up Z; UE reflects Y on import',
         'ground_z_m':G,'meshes':rows,'instances':dict(INSTANCES),'counts':dict(COUNTS),
-        'material_palette':PALETTE,
+        'material_palette':PALETTE,'material_overrides':CUSTOM_MATERIALS,
+        'site_revision':2,'road_audit':SITE['audit'],'railway_audit':RAIL['stats'],
+        'tree_clearance':{'all_candidates_checked':True,'crown_road_intersections':0,'railway_intersections':0,'rejected':dict(TREE_REJECTIONS)},
+        'context_building_audit':CONTEXT['buildings'],
         'alignment':SOURCE['alignment'],
         'assumptions':['Context heights are inferred: adjacent warehouse 14m, other industrial 9m, homes 6m, sheds 3.2m.',
         'Loading court and parking markings are screenshot-derived approximations; main CAD wall placement remains exact.',
         'Exterior ground -1.2m relative to warehouse finished floor is a visual dock-level estimate, not a survey.',
-        'No exact tree/car location survey exists; perimeter planting and sparse parking follow supplied reference images.'],
+        'No exact tree/car location survey exists; compact landscape bands follow supplied images and exclude all pavement, buildings and railway corridors.'],
         'optimization':{'geometry_batches':len(rows),'unique_triangles':sum(r['triangles'] for r in rows),
         'instance_count':sum(map(len,INSTANCES.values())),'material_slots':sum(len(r['material_roles']) for r in rows),
         'tree_variants':3,'car_variants':2,'context_collision':False,'partition':'Near campus and Far cardinal sectors; ground 280m tiles; road junction union removes coplanar overlaps'},

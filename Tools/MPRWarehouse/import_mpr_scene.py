@@ -47,13 +47,90 @@ def planned_instance_materials(manifests):
     for category,path in manifests:
         for row in read(path)['meshes']:
             if row.get('instance_only') or category=='Equipment':roles.update(row['material_roles'])
-    for role in sorted(roles):
+    custom=read(SRC/'environment/environment_manifest.json').get('material_overrides',{})
+    for role in sorted(roles-set(custom)):
         mat=material(role);candidates[mat.get_path_name()]=mat
     truck=load('/Game/GHSZcoolSmartFactory/Park/Meshes/SM_GHSPark_ClosedTruck')
     for slot in truck.static_materials:
         mat=slot.material_interface;candidates[mat.get_path_name()]=mat
     return [(mat,DEST+'/Materials/MI_MPR_HISM_'+mat.get_name()) for mat in candidates.values()
             if not MATLIB.has_material_usage(mat,USAGE)]
+
+
+def exterior_material_plan():
+    specs=read(SRC/'environment/environment_manifest.json').get('material_overrides',{})
+    return [(role,spec,DEST+'/Materials/MI_MPR_Exterior_'+role) for role,spec in specs.items()]
+
+
+EXTERIOR_MASTER=DEST+'/Materials/M_MPR_ExteriorSurface'
+
+
+def preflight_materials(instance_plan,exterior_plan):
+    # Validate references and destination classes before saving any package.
+    for parent,path in instance_plan:
+        assert parent
+        if LIB.does_asset_exist(path):assert isinstance(load(path),u.MaterialInstanceConstant),path
+    for role,spec,path in exterior_plan:
+        assert isinstance(material(spec['parent']),u.MaterialInterface),role
+        assert len(spec['color'])==3 and all(math.isfinite(v) and 0<=v<=1 for v in spec['color']),role
+        if LIB.does_asset_exist(path):assert isinstance(load(path),u.MaterialInstanceConstant),path
+    if LIB.does_asset_exist(EXTERIOR_MASTER):assert isinstance(load(EXTERIOR_MASTER),u.Material)
+
+
+def create_exterior_master():
+    # Use one MPR-owned, default-lit surface with the same
+    # four physical inputs; never rewrite a shared GHS material to add parameters.
+    reference=material('Roads')
+    source=ROOT/('Content/'+reference.get_path_name().split('.')[0].removeprefix('/Game/')+'.uasset')
+    digest=hashlib.sha256(source.read_bytes()).hexdigest()
+    mat=load(EXTERIOR_MASTER) if LIB.does_asset_exist(EXTERIOR_MASTER) else TOOLS.create_asset(
+        EXTERIOR_MASTER.rsplit('/',1)[-1],EXTERIOR_MASTER.rsplit('/',1)[0],u.Material,u.MaterialFactoryNew())
+    while MATLIB.get_num_material_expressions(mat):
+        previous=MATLIB.get_num_material_expressions(mat)
+        MATLIB.delete_all_material_expressions(mat)
+        assert MATLIB.get_num_material_expressions(mat)<previous,'Cannot clear MPR material graph'
+    mat.set_editor_property('blend_mode',u.BlendMode.BLEND_OPAQUE)
+    mat.set_editor_property('shading_model',u.MaterialShadingModel.MSM_DEFAULT_LIT)
+    tint=MATLIB.create_material_expression(mat,u.MaterialExpressionVectorParameter)
+    tint.set_editor_property('parameter_name','SurfaceTint');tint.set_editor_property('default_value',u.LinearColor(.4,.5,.6,1))
+    assert MATLIB.connect_material_property(tint,'',u.MaterialProperty.MP_BASE_COLOR)
+    for name,value,prop in [('Roughness',.9,u.MaterialProperty.MP_ROUGHNESS),('Metallic',0.,u.MaterialProperty.MP_METALLIC),('Specular',.15,u.MaterialProperty.MP_SPECULAR)]:
+        node=MATLIB.create_material_expression(mat,u.MaterialExpressionScalarParameter)
+        node.set_editor_property('parameter_name',name);node.set_editor_property('default_value',value)
+        assert MATLIB.connect_material_property(node,'',prop)
+    MATLIB.set_material_usage(mat,USAGE)
+    MATLIB.recompile_material(mat)
+    assert MATLIB.get_num_material_expressions(mat)==4
+    assert LIB.save_loaded_asset(mat,only_if_is_dirty=False)
+    result['materials_created'].append(dict(path=EXTERIOR_MASTER,parent=reference.get_path_name(),parent_sha256=digest,
+        usage='InstancedStaticMeshes',role='ExteriorSurfaceMaster',reference_only=True))
+    return mat
+
+
+def create_exterior_materials(planned):
+    master=create_exterior_master()
+    for role,spec,path in planned:
+        parent=master
+        source=ROOT/('Content/'+parent.get_path_name().split('.')[0].removeprefix('/Game/')+'.uasset')
+        digest=hashlib.sha256(source.read_bytes()).hexdigest()
+        mat=load(path) if LIB.does_asset_exist(path) else TOOLS.create_asset(
+            path.rsplit('/',1)[-1],path.rsplit('/',1)[0],u.MaterialInstanceConstant,u.MaterialInstanceConstantFactoryNew())
+        assert isinstance(mat,u.MaterialInstanceConstant)
+        MATLIB.set_material_instance_parent(mat,parent)
+        # UE 5.8 setters currently return false even after applying the value.
+        # Read the effective parameter back instead of treating that as failure.
+        MATLIB.set_material_instance_vector_parameter_value(mat,'SurfaceTint',u.LinearColor(*spec['color'],1.))
+        tint=MATLIB.get_material_instance_vector_parameter_value(mat,'SurfaceTint')
+        assert max(abs(a-b) for a,b in zip([tint.r,tint.g,tint.b],spec['color']))<1e-5,role
+        for key,value in [('Roughness',spec.get('roughness',.85)),('Metallic',spec.get('metallic',0)),('Specular',.15)]:
+            MATLIB.set_material_instance_scalar_parameter_value(mat,key,float(value))
+            assert abs(MATLIB.get_material_instance_scalar_parameter_value(mat,key)-float(value))<1e-5,(role,key)
+        MATLIB.set_material_usage_override(mat,USAGE,True,True)
+        MATLIB.update_material_instance(mat)
+        assert LIB.save_loaded_asset(mat,only_if_is_dirty=False)
+        MATS[role]=mat
+        result['materials_created'].append(dict(path=path,parent=parent.get_path_name(),parent_sha256=digest,
+            usage='InstancedStaticMeshes',role=role,overrides=spec))
 
 
 def create_instance_materials(planned):
@@ -185,12 +262,18 @@ def docks():
     tiled_groups('MPR_DockDoors',mesh,rows,'Architecture/Docks',['Porcelain','Cobalt','Charcoal','SoftBlue'])
     # Sparse stationary trailers; these are visualization context, not business traffic.
     truck=reused('/Game/GHSZcoolSmartFactory/Park/Meshes/SM_GHSPark_ClosedTruck');b=truck.get_bounds()
+    # The shared truck faces local +X. Anchor its actual rear bumper 25cm
+    # outside the dock instead of leaving a fixed 11m centre offset.
+    rear_x_m=(b.origin.x-b.box_extent.x)/100
+    dock_offset=.25-rear_x_m
+    assert 0<dock_offset<20,('Unexpected shared truck bounds',rear_x_m)
     truck_rows=[]
     for i,r in enumerate(CAD['dock_doors']):
         if i%5:continue
         n=r['outward_normal_xy'];p=r['position_m'];yaw=math.degrees(math.atan2(n[1],n[0]))
-        truck_rows.append(dict(position_m=[p[0]+n[0]*11,p[1]+n[1]*11,-1.2-(b.origin.z-b.box_extent.z)/100],rotation_deg=yaw,scale=[1,1,1]))
+        truck_rows.append(dict(position_m=[p[0]+n[0]*dock_offset,p[1]+n[1]*dock_offset,-1.2-(b.origin.z-b.box_extent.z)/100],rotation_deg=yaw,scale=[1,1,1]))
     tiled_groups('MPR_ParkedTruck',truck,truck_rows,'Environment/Vehicles',cull=100000)
+    result['parked_truck_alignment']=dict(local_rear_x_m=rear_x_m,origin_offset_m=dock_offset,rear_clearance_m=.25,count=len(truck_rows))
 
 def lighting_and_camera():
     sun=A.spawn_actor_from_class(u.DirectionalLight,u.Vector(0,0,18000));sun.set_actor_label('MPR_KeyLight');tag(sun,'Lighting')
@@ -214,9 +297,9 @@ def lighting_and_camera():
     bp=load('/Game/GHSNormalWarehouse/Camera/BP_GHS_WarehouseCamera')
     cam=A.spawn_actor_from_class(bp.generated_class(),u.Vector());cam.set_actor_label('MPR_WarehouseCamera');cam.set_folder_path('MPR/Cameras')
     cam.tags=['MPRWarehouse','MPR_Camera'];cam.set_editor_property('auto_possess_player',u.AutoReceiveInput.PLAYER0)
-    for k,v in dict(overview_center=u.Vector(0,0,1200),overview_distance=68000.,overview_pitch=-38.,overview_yaw=-70.,maximum_pan=u.Vector2D(60000,50000)).items():cam.set_editor_property(k,v)
+    for k,v in dict(overview_center=u.Vector(0,0,1200),overview_distance=58000.,overview_pitch=-42.,overview_yaw=-75.,maximum_pan=u.Vector2D(60000,50000)).items():cam.set_editor_property(k,v)
     cam.reset_overview(True)
-    rot=u.Rotator(pitch=-38,yaw=-70);eye=u.Vector(0,0,1200)-u.MathLibrary.get_forward_vector(rot)*68000
+    rot=u.Rotator(pitch=-42,yaw=-75);eye=u.Vector(0,0,1200)-u.MathLibrary.get_forward_vector(rot)*58000
     view=A.spawn_actor_from_class(u.CameraActor,eye,rot);view.set_actor_label('MPR_ReviewCamera');view.set_folder_path('MPR/Cameras');view.tags=['MPRWarehouse']
     view.get_component_by_class(u.CameraComponent).set_field_of_view(56)
     E.set_level_viewport_camera_info(eye,rot)
@@ -238,7 +321,12 @@ def run():
                     for row in read(path)['meshes'] if row.get('lod',0)==0]
     instance_materials=planned_instance_materials(manifests)
     planned_assets.extend(path for _,path in instance_materials)
+    exterior_materials=exterior_material_plan()
+    planned_assets.extend(path for _,_,path in exterior_materials)
+    planned_assets.append(EXTERIOR_MASTER)
     ownership=verify_owned_scene(ROOT,owner=OWNER,map_path=MAP,planned_assets=planned_assets,allow_new=True)
+    preflight_materials(instance_materials,exterior_materials)
+    create_exterior_materials(exterior_materials)
     create_instance_materials(instance_materials)
     if LIB.does_asset_exist(MAP):
         assert L.load_level(MAP)

@@ -23,7 +23,7 @@ def main():
     capture=json.loads((SRC/'validation.json').read_text(encoding='utf-8'))
     profile=json.loads((SRC/'performance.json').read_text(encoding='utf-8'))
     assert all(d['success'] for d in (build,capture,profile))
-    assert capture['reload_verified'] and len(capture['captures'])==8
+    assert capture['reload_verified'] and len(capture['captures'])==11
     assert profile['map_unchanged'] and profile['map_sha256_after']==digest(ROOT/'Content/Maps/MPR_CAD_Warehouse.umap')
     assert build['ghs_map_sha256_before']==digest(ROOT/'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap')
     log_path=SRC/'performance-verified.log'
@@ -50,7 +50,10 @@ def main():
     hardware=[line for line in log.splitlines() if 'LogInit: OS:' in line or 'Chosen D3D12 Adapter' in line]
     summary=dict(map=build['map'],date='2026-11-02',map_sha256=profile['map_sha256_after'],
                  saved_actor_count=build['actor_count'],hism_groups=len(build['groups']),instances=build['instance_count'],
-                 mesh_count=len(build['meshes']),compatibility_material_instances=len(build['materials_created']),
+                 mesh_count=len(build['meshes']),generated_material_packages=len(build['materials_created']),
+                 compatibility_material_instances=sum('/MI_MPR_HISM_' in m['path'] for m in build['materials_created']),
+                 exterior_material_instances=sum('/MI_MPR_Exterior_' in m['path'] for m in build['materials_created']),
+                 exterior_surface_masters=sum('/M_MPR_ExteriorSurface' in m['path'] for m in build['materials_created']),
                  source_counts=dict(racks=2867,columns=164,dock_doors=72,drive_in_doors=2),
                  hardware_evidence=hardware,performance_log_sha256=digest(log_path),
                  missing_runtime_material_usage=False,ghs_map_preserved=True,images=artifacts,

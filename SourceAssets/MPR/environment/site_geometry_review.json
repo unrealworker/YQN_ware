@@ -1,0 +1,444 @@
+{
+  "success": true,
+  "time_utc": "2026-11-02T07:35:44.541032+00:00",
+  "read_only": true,
+  "scope": "Actual manifest placements against true source-tree crown vertex convex hulls; CAD interfaces and regenerated pure road/rail polygons. No asset writes or UE execution.",
+  "input_sha256": {
+    "Tools/MPRWarehouse/mpr_site_roads.py": "2ba0d55e6bb6cadf80e1c76d6eed4cd90eb20d051e50f459b0d2f55650ae24d2",
+    "Tools/MPRWarehouse/build_mpr_environment.py": "9dbd04ce254a077186e88619ed85ffb022b4155554d24b45ba60fdda5a018af0",
+    "SourceAssets/MPR/environment/environment_local.json": "c145cef7f446157f626a72b81ad42bbd27f1730d6f35e9f2c32d304099605aa6",
+    "SourceAssets/MPR/environment/environment_manifest.json": "974a4e4294935971586b9e8c398597beafced5b75be4e768c08c20ee6af052e4",
+    "SourceAssets/MPR/environment/MPR_Environment.blend": "fc8e6a40a00ea0f12b48844a0b25e8e8caa582929d9e7fb420f68b9651300be7"
+  },
+  "tree_count": 355,
+  "actual_base_tree_radii_m": {
+    "0": 4.05,
+    "1": 3.6999999999999997,
+    "2": 4.6
+  },
+  "tree_intersections": [],
+  "tree_pair_intersections": [],
+  "minimum_crown_clearance_m": {
+    "road": 0.26980703022066876,
+    "all_paved": 0.26980703022066876,
+    "parking": 0.48060793277343095,
+    "rail_corridor": 1.6497216423900483,
+    "buildings": 2.2927376882349506,
+    "pond": 6.529517597594023
+  },
+  "retained_source_road_missing_m2": 0.022882088603878994,
+  "source_road_interfaces": [
+    {
+      "source_replaced_id": "1392",
+      "interface": 0,
+      "position_m": [
+        250.71543632473546,
+        60.413257064595754
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9999999999999999,
+      "source_contact_area_m2": 52.39981841643355,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "1393",
+      "interface": 0,
+      "position_m": [
+        211.51558268845076,
+        105.67788067280381
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 1.0,
+      "source_contact_area_m2": 58.887639922331466,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "139b",
+      "interface": 0,
+      "position_m": [
+        -124.90251308840848,
+        -204.6665054966374
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.996145687567514,
+      "source_contact_area_m2": 52.39594999112196,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "1580",
+      "interface": 0,
+      "position_m": [
+        374.04402627642514,
+        334.37988110391086
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.99958776852273,
+      "source_contact_area_m2": 62.42796334040932,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "1580",
+      "interface": 1,
+      "position_m": [
+        330.75438022414755,
+        333.13844237167916
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9999999999999998,
+      "source_contact_area_m2": 83.00248039466686,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "1580",
+      "interface": 2,
+      "position_m": [
+        269.61430945111147,
+        329.4358571684183
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9873515347318861,
+      "source_contact_area_m2": 62.76981776935409,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "1580",
+      "interface": 3,
+      "position_m": [
+        190.04525694357488,
+        321.1014237250988
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9873256253700787,
+      "source_contact_area_m2": 64.14636360205543,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "1580",
+      "interface": 4,
+      "position_m": [
+        -126.02191211083657,
+        -204.31560859986718
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9995192071722928,
+      "source_contact_area_m2": 57.292349411875605,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "1580",
+      "interface": 5,
+      "position_m": [
+        -189.6519717905283,
+        321.1135801771113
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9773937608540068,
+      "source_contact_area_m2": 62.36884798936237,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "1580",
+      "interface": 6,
+      "position_m": [
+        -214.7746038690276,
+        107.28747983831136
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9792936998042698,
+      "source_contact_area_m2": 62.28544639751121,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 0,
+      "position_m": [
+        -201.72069953921587,
+        592.8716519025133
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9999999999999836,
+      "source_contact_area_m2": 62.725402878701956,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 1,
+      "position_m": [
+        -217.0739113319392,
+        527.8889299489366
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 1.0000000000000007,
+      "source_contact_area_m2": 113.59902625662637,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 2,
+      "position_m": [
+        -220.14449252720004,
+        513.9702972259013
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9999999999999982,
+      "source_contact_area_m2": 64.30187943827748,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 3,
+      "position_m": [
+        -221.72425566050163,
+        -264.6948879160191
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9609364889099917,
+      "source_contact_area_m2": 62.10367138314004,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 4,
+      "position_m": [
+        -235.90671994827693,
+        441.31998324949086
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 1.0000000000000004,
+      "source_contact_area_m2": 62.30618303769472,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 5,
+      "position_m": [
+        -235.88766597524048,
+        -189.75807235345144
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.930562453304805,
+      "source_contact_area_m2": 62.3097959829879,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 6,
+      "position_m": [
+        -238.22517060016764,
+        -159.0975345203438
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9312072168537365,
+      "source_contact_area_m2": 62.48087349217691,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 7,
+      "position_m": [
+        -239.3488189720044,
+        -129.5084515989342
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9393170562216915,
+      "source_contact_area_m2": 65.49094839075424,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 8,
+      "position_m": [
+        -241.97911549176996,
+        413.29749972546256
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 1.0000000000000002,
+      "source_contact_area_m2": 62.307381818269484,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 9,
+      "position_m": [
+        -243.77577432736842,
+        -18.329802496920117
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9740337438177776,
+      "source_contact_area_m2": 62.24982556602375,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 10,
+      "position_m": [
+        -246.68241747204354,
+        391.1684138889375
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 1.0000000000000002,
+      "source_contact_area_m2": 61.554184092447215,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 11,
+      "position_m": [
+        -251.47119358071933,
+        345.631098210362
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 1.0000000000000002,
+      "source_contact_area_m2": 62.30887305499085,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 12,
+      "position_m": [
+        -254.05193530385918,
+        245.07396876650063
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 0.9991441994175357,
+      "source_contact_area_m2": 63.546908595866746,
+      "connected_to_main_network": true
+    },
+    {
+      "source_replaced_id": "16c6",
+      "interface": 13,
+      "position_m": [
+        -254.30807186032547,
+        318.2156139897463
+      ],
+      "gap_m": 0.0,
+      "coverage_fraction": 1.0,
+      "source_contact_area_m2": 61.60437359354611,
+      "connected_to_main_network": true
+    }
+  ],
+  "parking_island_road_overlap_m2": 0.0,
+  "parking_island_outside_parcel_m2": 0.0,
+  "marking_outside_pavement_m2": 0.21601104528283815,
+  "marking_outside_pavement_regions": [
+    {
+      "area_m2": 0.21437660875907175,
+      "bounds_m": [
+        -259.81681146062084,
+        338.8761375320071,
+        -258.9529335927982,
+        341.7930110684264
+      ],
+      "centroid_m": [
+        -259.3016279000006,
+        340.5610978878094
+      ]
+    }
+  ],
+  "generated_manifest_matches_current_road_audit": true,
+  "road_paths": [
+    {
+      "name": "Prologis",
+      "length_m": 638.345291268083,
+      "max_sample_step_m": 0.6991862343158876,
+      "max_sample_turn_deg": 0.9538305456981979,
+      "length_outside_paving_m": 0.0,
+      "simple": true
+    },
+    {
+      "name": "PortReading",
+      "length_m": 676.381324278971,
+      "max_sample_step_m": 0.6997912210638366,
+      "max_sample_turn_deg": 0.719337919978188,
+      "length_outside_paving_m": 0.0,
+      "simple": true
+    },
+    {
+      "name": "WestAccess",
+      "length_m": 1142.013876612195,
+      "max_sample_step_m": 0.6996104933356833,
+      "max_sample_turn_deg": 2.4787401080813414,
+      "length_outside_paving_m": 0.0,
+      "simple": true
+    },
+    {
+      "name": "NorthCourt",
+      "length_m": 478.0000000000007,
+      "max_sample_step_m": 0.6990291262136168,
+      "max_sample_turn_deg": 0.0,
+      "length_outside_paving_m": 0.0,
+      "simple": true
+    },
+    {
+      "name": "EastAccess",
+      "length_m": 240.43220071238176,
+      "max_sample_step_m": 0.698658354442213,
+      "max_sample_turn_deg": 4.007484243530966,
+      "length_outside_paving_m": 0.0,
+      "simple": true
+    }
+  ],
+  "path_connectivity": [
+    {
+      "name": "Prologis",
+      "connected_to_prologis": true
+    },
+    {
+      "name": "PortReading",
+      "connected_to_prologis": true
+    },
+    {
+      "name": "WestAccess",
+      "connected_to_prologis": true
+    },
+    {
+      "name": "NorthCourt",
+      "connected_to_prologis": true
+    },
+    {
+      "name": "EastAccess",
+      "connected_to_prologis": true
+    }
+  ],
+  "road_connected_components": 5,
+  "near_pavement_spike_candidates": [],
+  "paving_building_intersections": [
+    {
+      "building_id": "1424",
+      "area_m2": 10.223051186501788,
+      "bounds_m": [
+        -232.87568242807816,
+        -353.05468695676575,
+        -222.0500177796868,
+        -325.95056
+      ],
+      "centroid_m": [
+        -223.9689425378434,
+        -349.2474174765613
+      ],
+      "original_source_road_overlap_m2": 9.77041068021246,
+      "new_paving_overlap_m2": 0.45384500420529256
+    },
+    {
+      "building_id": "155a",
+      "area_m2": 1.2379894835251184,
+      "bounds_m": [
+        198.3836978320197,
+        406.62580139396925,
+        198.69069910298373,
+        414.416183345999
+      ],
+      "centroid_m": [
+        198.49171087986878,
+        411.35484075279396
+      ],
+      "original_source_road_overlap_m2": 1.2382893552386078,
+      "new_paving_overlap_m2": 0.0
+    }
+  ],
+  "warnings": [
+    "Paving overlaps building footprints; source and newly introduced areas recorded separately"
+  ],
+  "geometry_limits": "Tree convex hull is conservative over leaf clusters. Narrow tips are heuristic candidates; road survey accuracy and render quality require separate visual review.",
+  "inputs_unchanged": true
+}

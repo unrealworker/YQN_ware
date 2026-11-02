@@ -302,7 +302,7 @@ def run():
         original_cvars[key]=previous;console(key+' '+str(value))
     console('DisableAllScreenMessages')
     result['capture_cvars']=cvars;result['original_cvars']=dict(original_cvars);write()
-    yield from sample('exterior',[0,0,12],68000,-38,-70,False)
+    yield from sample('exterior',[0,0,12],58000,-42,-75,False)
     yield from sample('interior',[0,0,0],56000,-65,-90,True)
     assert set(result['performance'])=={'exterior','interior'} and len(result['captures'])==2
     result['map_sha256_after']=hashlib.sha256(MAP_FILE.read_bytes()).hexdigest()
