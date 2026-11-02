@@ -1,0 +1,1001 @@
+{
+  "success": true,
+  "geometry_uv_transforms_unchanged": true,
+  "mesh_count": 25,
+  "all_instances_and_tree_positions_unchanged": true,
+  "changed_textures": [
+    "T_MPR3_grass_albedo.png",
+    "T_MPR3_grass_normal.png",
+    "T_MPR3_water_albedo.png",
+    "T_MPR3_water_normal.png"
+  ],
+  "spectra_before": {
+    "grass": {
+      "mean": 233.49566841125488,
+      "minimum": 225.0,
+      "maximum": 242.0,
+      "full": {
+        "variance": 11.536045385288162,
+        "old_wave_power_fraction": 0.21188177121091709,
+        "strongest_frequency_fraction": 0.05331298310613179
+      },
+      "mip64": {
+        "variance": 2.110616868125362,
+        "old_wave_power_fraction": 0.9831705605245701,
+        "strongest_frequency_fraction": 0.24750195170228448
+      },
+      "normal_x": {
+        "variance": 474.79034328027683,
+        "old_wave_power_fraction": 0.0016174675987655656,
+        "strongest_frequency_fraction": 0.0004071417402409071
+      },
+      "normal_y": {
+        "variance": 474.55239461721794,
+        "old_wave_power_fraction": 0.0024219067780806543,
+        "strongest_frequency_fraction": 0.0006108982266403361
+      }
+    },
+    "water": {
+      "mean": 244.50000381469727,
+      "minimum": 241.0,
+      "maximum": 248.0,
+      "full": {
+        "variance": 2.6283721923682606,
+        "old_wave_power_fraction": 0.9665174845597669,
+        "strongest_frequency_fraction": 0.3670211504272057
+      },
+      "mip64": {
+        "variance": 2.320572540149442,
+        "old_wave_power_fraction": 0.9985178804146385,
+        "strongest_frequency_fraction": 0.374294920415424
+      },
+      "normal_x": {
+        "variance": 18.501171112060547,
+        "old_wave_power_fraction": 0.9955310611062519,
+        "strongest_frequency_fraction": 0.3098501324652185
+      },
+      "normal_y": {
+        "variance": 97.44185066223145,
+        "old_wave_power_fraction": 0.9991551865631445,
+        "strongest_frequency_fraction": 0.4804587390824158
+      }
+    }
+  },
+  "spectra_after": {
+    "grass": {
+      "mean": 234.0002269744873,
+      "minimum": 232.0,
+      "maximum": 236.0,
+      "full": {
+        "variance": 0.781270929317543,
+        "old_wave_power_fraction": 0.00027278580353449014,
+        "strongest_frequency_fraction": 0.002111295337941389
+      },
+      "mip64": {
+        "variance": 0.2850983000207634,
+        "old_wave_power_fraction": 0.0007703973402166639,
+        "strongest_frequency_fraction": 0.005663331248629439
+      },
+      "normal_x": {
+        "variance": 2.460514068570774,
+        "old_wave_power_fraction": 4.091936240471699e-06,
+        "strongest_frequency_fraction": 0.00013940852723120847
+      },
+      "normal_y": {
+        "variance": 2.469423291512612,
+        "old_wave_power_fraction": 6.788288890425293e-06,
+        "strongest_frequency_fraction": 0.00019989210876855378
+      }
+    },
+    "water": {
+      "mean": 245.0,
+      "minimum": 245.0,
+      "maximum": 245.0,
+      "full": {
+        "variance": 0.0,
+        "old_wave_power_fraction": 0.0,
+        "strongest_frequency_fraction": 0.0
+      },
+      "mip64": {
+        "variance": 0.0,
+        "old_wave_power_fraction": 0.0,
+        "strongest_frequency_fraction": 0.0
+      },
+      "normal_x": {
+        "variance": 1.4720857030333718,
+        "old_wave_power_fraction": 5.190302649040055e-05,
+        "strongest_frequency_fraction": 0.0008183970817940797
+      },
+      "normal_y": {
+        "variance": 1.4473665933101074,
+        "old_wave_power_fraction": 3.640697117488417e-05,
+        "strongest_frequency_fraction": 0.0007609014951590188
+      }
+    }
+  },
+  "baseline_sine_counterexample_detected": true,
+  "blender_manifest_normal_strengths_equal": true,
+  "material_delta_limited_to_grass_and_water": true,
+  "unchanged_mesh_geometry_uv_signatures": {
+    "SM_MPR4_Site_ContinuousTerrain": {
+      "geometry_digest": "74295d88a6802b44a86abf2794844a980eca060e66c04e3eb5b0c81eb792b1a2",
+      "uv_digests": [
+        "2003bff16a134251b95ad6db31e22de3de927653944960bc9d2247a5964f3a81"
+      ],
+      "material_roles": [
+        "MPR3_Grass"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_Courts": {
+      "geometry_digest": "73dda88d2fbb43de6de191ed0f95eb6c2101ce1e8921a27ee96fd870186c033d",
+      "uv_digests": [
+        "240c800681b2f17883f72657ab5a67b53cf52e03b5cb3592efc1138db60105c2"
+      ],
+      "material_roles": [
+        "MPR3_Concrete"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_CourtSeams": {
+      "geometry_digest": "1167f7fbebc32ff25fe69aff41a40ea4908b37a8a47ebd48098b6b45800e86e6",
+      "uv_digests": [
+        "f78cac34c8395e9f3a8e0c9143dc6c58b57cb396e6d3ebd4d19debdfe4492cc5"
+      ],
+      "material_roles": [
+        "MPR3_PavingJoint"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_DockApronInfill": {
+      "geometry_digest": "75549496c0698d0104412f4b4b865a887bfff2b596d13a7a2a4033d0c7e98ab3",
+      "uv_digests": [
+        "139249baf4f31e44d939a62a17b16ccd2ddce437932605d3f4bce7834e906fff"
+      ],
+      "material_roles": [
+        "MPR3_Concrete"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_DockGuidance": {
+      "geometry_digest": "30ffb3c157a163a7b716e8bb0996588fa4746b26c3e955d2d438e632dd23a873",
+      "uv_digests": [
+        "4fd52b69ad06abe59ae45328ef5d50ead2ec749a87ced799f1b6055f49acd783"
+      ],
+      "material_roles": [
+        "MPR3_YellowLine"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_Far_E_RailBed": {
+      "geometry_digest": "1407ca78b854bb16e7525eb8363665279f64131932faa8035f6248a4eddb38a5",
+      "uv_digests": [
+        "c977208fd6315bef8a684acd801f9a2ad2862a7133ebee7d5c75197e47bc66bc"
+      ],
+      "material_roles": [
+        "MPR3_Ballast"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_Far_E_Rails": {
+      "geometry_digest": "c9730a8030cd3e520ab64124fbc9d929378c693b2307c81f969aa923ff46f777",
+      "uv_digests": [
+        "97696cda882190fb6c27388ca868379365b4042ae62612ba838ba1de21b60b95"
+      ],
+      "material_roles": [
+        "MPR3_RailSteel",
+        "MPR3_Sleepers"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_Far_E_Sleepers": {
+      "geometry_digest": "a48b6647d897f437846cf80e2af74c3994dcd24139f55a55b6da0d3a94611de7",
+      "uv_digests": [
+        "4211c4251b6467b2b499e98f1cb335f05cc55aa4495914a4e977487b0aed91cd"
+      ],
+      "material_roles": [
+        "MPR3_Sleepers"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_Far_S_RailBed": {
+      "geometry_digest": "188e191498eeafb7e08f23c2195c196df5efd555d1dc6cd6094a022c3f5fc327",
+      "uv_digests": [
+        "322df47791c7bdd4827e3d1eb26886d3ef6df06ba1898049e360e7520edf1197"
+      ],
+      "material_roles": [
+        "MPR3_Ballast"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_Far_S_Rails": {
+      "geometry_digest": "3b13921166b7d539712ec8a37fa7dbd43deab2b997b527772ada24e5afb80caa",
+      "uv_digests": [
+        "5851a501766699934b56cf58f34a255c516cf09af131c32157a3ac691462b136"
+      ],
+      "material_roles": [
+        "MPR3_RailSteel",
+        "MPR3_Sleepers"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_Far_S_Sleepers": {
+      "geometry_digest": "dbf0adce3dc6a8fa7f02c9a74081591a42c586578d82040280a005fdc1959c93",
+      "uv_digests": [
+        "744b69b0c27398d27290291b0055184a841c0875393080bbc939982ad6167a8f"
+      ],
+      "material_roles": [
+        "MPR3_Sleepers"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_FarGround": {
+      "geometry_digest": "7b785e1a300716136f158b28abd244ffc0f2644b4253c8e028517ae84515c2b9",
+      "uv_digests": [
+        "bb8811d470b7993ae250e9c60c2a34615a0cb5b7b6d94c2f0ebb2a55f0e1872f"
+      ],
+      "material_roles": [
+        "MPR3_GrassFar"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_Near_RailBed": {
+      "geometry_digest": "10de6617793869e13f2e9aad0364bb7ace0427bcdc0f67823cee2e1cbb117df0",
+      "uv_digests": [
+        "921cf1434e303b2124443588d2e9a95383a5a07570128ecd3251b2fefa9b3c30"
+      ],
+      "material_roles": [
+        "MPR3_Ballast"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_Near_Rails": {
+      "geometry_digest": "a20cf7e5f018d14734781455c4754889c438c7e6753f86b80b9433db9d291282",
+      "uv_digests": [
+        "2401cc324e863b970d4d7dfdc3f36b072552210f17284e6e6e2ba61ade1614d3"
+      ],
+      "material_roles": [
+        "MPR3_RailSteel",
+        "MPR3_Sleepers"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_Near_Sleepers": {
+      "geometry_digest": "148508faf799ef3703037a240ffb40210adbed1d34e88bfd4154d64d25724ec9",
+      "uv_digests": [
+        "ed72a5b49e19689ab100b77cf0b504fbb934022f559da612e38c3b8a79ba4563"
+      ],
+      "material_roles": [
+        "MPR3_Sleepers"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_ParkingBayLines": {
+      "geometry_digest": "b98aaca209224e51914d2985e435a5697c920854195c34ec5c403944b53cd443",
+      "uv_digests": [
+        "d8573858b53ff722f3f67a388f46e2e8d6621777ab38b55cfc0ca43b44b1e7a2"
+      ],
+      "material_roles": [
+        "MPR3_WhiteLine"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_PondWalk": {
+      "geometry_digest": "b5060f9f43275b2b11131fc35f1da654ae747840d2fa9d4981ada07c7910130a",
+      "uv_digests": [
+        "acd56a54f50da155c397e19d8d98193c04fbba9fe0d9f59263afb31f1e9df4e8"
+      ],
+      "material_roles": [
+        "MPR3_Curb"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_RailYardContinuousBallast": {
+      "geometry_digest": "9274f49dbdd2565c8fc282966611d507fcd258744d3dd4ac0ac0f4c29160a552",
+      "uv_digests": [
+        "b399a15416543295de345f02a8936c528513a592e55454b969c476384c995d34"
+      ],
+      "material_roles": [
+        "MPR3_Ballast"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_RaisedCurbs": {
+      "geometry_digest": "a1a9939bdcc0fd0cce49e8f28a47e0da34acee57b3d8d505f7738ed2f9fc6cc1",
+      "uv_digests": [
+        "9ce6ecc3bbbe64f6f71b1a6d30aee59f4efd7cf06953e8bf181cadbbe94ece0c"
+      ],
+      "material_roles": [
+        "MPR3_Curb"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_RetentionBank": {
+      "geometry_digest": "57d4f3a4ab374113fb5eb689d2f4129280d68cd8a01cd70e8eaaac744990d761",
+      "uv_digests": [
+        "b60ec9205740f67c9929f846c7de9b715cedb1e3d0d7a7534b936af729558489"
+      ],
+      "material_roles": [
+        "MPR3_Grass"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_RetentionPond": {
+      "geometry_digest": "8c7c8340eac7bceb3f40cdc7dcb8db5bbae88f039785eb088526a9e61dc8a772",
+      "uv_digests": [
+        "5143941f86bffb8f796ff13a57c95e1f45ba3e29d5fba2061424b969bbb09ba6"
+      ],
+      "material_roles": [
+        "MPR3_PondWater"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_RoadCenter": {
+      "geometry_digest": "3e81b871e6f5821fc98149fbac69ea3ae36bdba14d839fae947740bac3a6eb3b",
+      "uv_digests": [
+        "eb347d5b572b94a575374cbd8c6a906e8ab8b6ecf87f4d5b91a5a98bb14fcab5"
+      ],
+      "material_roles": [
+        "MPR3_WhiteLine"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_RoadEdges": {
+      "geometry_digest": "ed682edd603305c2b5e5c75525141d078416361ca843f2f9216b87303dc27dc9",
+      "uv_digests": [
+        "2ff14a0873613926fe3e89ecdd52125210e44bb6fb136578ec4672953daa29ee"
+      ],
+      "material_roles": [
+        "MPR3_WhiteLine"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_Roads": {
+      "geometry_digest": "1c3680731eef55e70cd63b71f401ee602b902ca8960dfc20e9ba52efffc02389",
+      "uv_digests": [
+        "e2cb36a8c8294e3e87e8baafb2a311e8cda3a671f1c002ee792703dda801ba69"
+      ],
+      "material_roles": [
+        "MPR3_Asphalt"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "SM_MPR4_Site_TrailerStands": {
+      "geometry_digest": "a4b866ace28d72d275f5ba0288b3d6451b1917208450beb1c6832dfef39e7958",
+      "uv_digests": [
+        "c0cdce896d3e520e3baa9f821fdacba7688c61abbf4509770487bf794b1d871d"
+      ],
+      "material_roles": [
+        "MPR3_YellowLine"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  },
+  "final_manifest_sha256": "5e46303382748e1c3987a8a8a867dd4cf70be5dea497d17310625aa863cc5f91",
+  "boundary": "Offline texture spectra, saved Blender geometry/UVs and manifest invariants only; actual UE appearance remains to be verified"
+}

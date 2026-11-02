@@ -1,0 +1,685 @@
+{
+  "schema_version": 1,
+  "review_status": "calibrated_aerial_geometry_reviewed_pending_UE",
+  "units": "metres",
+  "coordinate_frame": "Local ground origin; CAD +Y; vehicle +X front/-X rear; FBX -Y forward Z up",
+  "meshes": [
+    {
+      "name": "SM_MPR4_Tree_Oak",
+      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Tree_Oak.fbx",
+      "material_roles": [
+        "MPR4_Bark",
+        "MPR4_LeafMid",
+        "MPR4_LeafLight",
+        "MPR4_LeafShade"
+      ],
+      "material_triangle_counts": {
+        "MPR4_Bark": 69999,
+        "MPR4_LeafMid": 442360,
+        "MPR4_LeafLight": 279872,
+        "MPR4_LeafShade": 157768
+      },
+      "bounds_m": [
+        [
+          -6.1100077629089355,
+          6.19052267074585
+        ],
+        [
+          -5.60781717300415,
+          5.9483256340026855
+        ],
+        [
+          0.0,
+          15.8644437789917
+        ]
+      ],
+      "triangles": 949999,
+      "vertices": 1135447,
+      "sha256": "b3870e9eb5c5677362369d751738a7ee3fd025246cbee9aa9f5bd45f7fa3692f",
+      "metadata": {
+        "triangles": 949999,
+        "leaf_count": 220000,
+        "bounds_m": [
+          [
+            -6.1100077629089355,
+            6.19052267074585
+          ],
+          [
+            -5.60781717300415,
+            5.9483256340026855
+          ],
+          [
+            0.0,
+            15.8644437789917
+          ]
+        ],
+        "crown_radius_m": 6.150265216827393,
+        "height_m": 15.8644437789917,
+        "geometry": "Native oak scaffold, individual bent fine leaves in a volumetric oval canopy; no solid filler",
+        "review_status": "calibrated_aerial_geometry_reviewed",
+        "prototype": false,
+        "radial_extent_m": 6.418041146908877,
+        "crown_diameter_xy_m": 12.300530433654785,
+        "legacy_scaffold_collapsed_triangles_removed_by_fbx": 0
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "instance_only": true,
+      "collision": false
+    },
+    {
+      "name": "SM_MPR4_Trailer_White",
+      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Trailer_White.fbx",
+      "material_roles": [
+        "MPR4_ReflectAmber",
+        "MPR4_ReflectRed",
+        "MPR4_ReflectWhite",
+        "MPR4_TrailerWhite",
+        "MPR4_VehicleDark",
+        "MPR4_VehicleMetal",
+        "MPR4_VehicleRubber",
+        "MPR4_VehicleSeam"
+      ],
+      "material_triangle_counts": {
+        "MPR4_ReflectAmber": 72,
+        "MPR4_ReflectRed": 384,
+        "MPR4_ReflectWhite": 360,
+        "MPR4_TrailerWhite": 112,
+        "MPR4_VehicleDark": 2236,
+        "MPR4_VehicleMetal": 3180,
+        "MPR4_VehicleRubber": 1272,
+        "MPR4_VehicleSeam": 372
+      },
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 7988,
+      "vertices": 5112,
+      "sha256": "a1655eeac56bc9f1669119a88a8a3182c2efce8bf522c52c02429015265f91fa",
+      "metadata": {
+        "kind": "semi_trailer",
+        "color": "White",
+        "tractor_cab": false,
+        "front_axis": "+X",
+        "loading_doors": "-X",
+        "nominal_box_m": [
+          16.15,
+          2.6,
+          2.88
+        ],
+        "overall_height_m": 4.1659999999999995,
+        "ground_origin": true,
+        "roof_matches_body_color": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "instance_only": true,
+      "collision": false
+    },
+    {
+      "name": "SM_MPR4_Trailer_Blue",
+      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Trailer_Blue.fbx",
+      "material_roles": [
+        "MPR4_ReflectAmber",
+        "MPR4_ReflectRed",
+        "MPR4_ReflectWhite",
+        "MPR4_TrailerBlue",
+        "MPR4_VehicleDark",
+        "MPR4_VehicleMetal",
+        "MPR4_VehicleRubber",
+        "MPR4_VehicleSeam"
+      ],
+      "material_triangle_counts": {
+        "MPR4_ReflectAmber": 72,
+        "MPR4_ReflectRed": 384,
+        "MPR4_ReflectWhite": 360,
+        "MPR4_TrailerBlue": 112,
+        "MPR4_VehicleDark": 2236,
+        "MPR4_VehicleMetal": 3180,
+        "MPR4_VehicleRubber": 1272,
+        "MPR4_VehicleSeam": 372
+      },
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 7988,
+      "vertices": 5112,
+      "sha256": "3784903291a069739702e5a614ce1f543cecfd779854db3931d40be15970868c",
+      "metadata": {
+        "kind": "semi_trailer",
+        "color": "Blue",
+        "tractor_cab": false,
+        "front_axis": "+X",
+        "loading_doors": "-X",
+        "nominal_box_m": [
+          16.15,
+          2.6,
+          2.88
+        ],
+        "overall_height_m": 4.1659999999999995,
+        "ground_origin": true,
+        "roof_matches_body_color": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "instance_only": true,
+      "collision": false
+    },
+    {
+      "name": "SM_MPR4_Trailer_Coral",
+      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Trailer_Coral.fbx",
+      "material_roles": [
+        "MPR4_ReflectAmber",
+        "MPR4_ReflectRed",
+        "MPR4_ReflectWhite",
+        "MPR4_TrailerCoral",
+        "MPR4_VehicleDark",
+        "MPR4_VehicleMetal",
+        "MPR4_VehicleRubber",
+        "MPR4_VehicleSeam"
+      ],
+      "material_triangle_counts": {
+        "MPR4_ReflectAmber": 72,
+        "MPR4_ReflectRed": 384,
+        "MPR4_ReflectWhite": 360,
+        "MPR4_TrailerCoral": 112,
+        "MPR4_VehicleDark": 2236,
+        "MPR4_VehicleMetal": 3180,
+        "MPR4_VehicleRubber": 1272,
+        "MPR4_VehicleSeam": 372
+      },
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 7988,
+      "vertices": 5112,
+      "sha256": "65e5024ae1b0cc9e65a75745844cedcaa7850d3a5082dc90c61df9cbd62ebb79",
+      "metadata": {
+        "kind": "semi_trailer",
+        "color": "Coral",
+        "tractor_cab": false,
+        "front_axis": "+X",
+        "loading_doors": "-X",
+        "nominal_box_m": [
+          16.15,
+          2.6,
+          2.88
+        ],
+        "overall_height_m": 4.1659999999999995,
+        "ground_origin": true,
+        "roof_matches_body_color": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "instance_only": true,
+      "collision": false
+    },
+    {
+      "name": "SM_MPR4_Car_0",
+      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Car_0.fbx",
+      "material_roles": [
+        "MPR4_ReflectRed",
+        "MPR4_ReflectWhite",
+        "MPR4_VehicleGlass",
+        "MPR4_VehicleMetal",
+        "MPR4_VehicleRubber",
+        "MPR4_VehicleSeam",
+        "MPR4_VehicleWhite"
+      ],
+      "material_triangle_counts": {
+        "MPR4_ReflectRed": 24,
+        "MPR4_ReflectWhite": 12,
+        "MPR4_VehicleGlass": 12,
+        "MPR4_VehicleMetal": 412,
+        "MPR4_VehicleRubber": 248,
+        "MPR4_VehicleSeam": 176,
+        "MPR4_VehicleWhite": 80
+      },
+      "bounds_m": [
+        [
+          -2.257999897003174,
+          2.257999897003174
+        ],
+        [
+          -0.9460000395774841,
+          0.9460000395774841
+        ],
+        [
+          0.0,
+          1.4243381023406982
+        ]
+      ],
+      "triangles": 964,
+      "vertices": 660,
+      "sha256": "1e560db4c4faa33dae70fb34ca68f05323c36254d869a49327e088154090b105",
+      "metadata": {
+        "kind": "sedan",
+        "source_generator": "Scripts/ghs/park_vehicles.py",
+        "front_axis": "+X",
+        "neutral_color": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "instance_only": true,
+      "collision": false
+    },
+    {
+      "name": "SM_MPR4_Car_1",
+      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Car_1.fbx",
+      "material_roles": [
+        "MPR4_ReflectRed",
+        "MPR4_ReflectWhite",
+        "MPR4_VehicleGlass",
+        "MPR4_VehicleGray",
+        "MPR4_VehicleMetal",
+        "MPR4_VehicleRubber",
+        "MPR4_VehicleSeam"
+      ],
+      "material_triangle_counts": {
+        "MPR4_ReflectRed": 24,
+        "MPR4_ReflectWhite": 12,
+        "MPR4_VehicleGlass": 12,
+        "MPR4_VehicleGray": 80,
+        "MPR4_VehicleMetal": 412,
+        "MPR4_VehicleRubber": 248,
+        "MPR4_VehicleSeam": 176
+      },
+      "bounds_m": [
+        [
+          -2.257999897003174,
+          2.257999897003174
+        ],
+        [
+          -0.9460000395774841,
+          0.9460000395774841
+        ],
+        [
+          0.0,
+          1.6643381118774414
+        ]
+      ],
+      "triangles": 964,
+      "vertices": 660,
+      "sha256": "de30f6b2333668eb568d4699e017cb86cdfc47ac4b2d3091f1b1aef3873fe03c",
+      "metadata": {
+        "kind": "compact_suv",
+        "source_generator": "Scripts/ghs/park_vehicles.py",
+        "front_axis": "+X",
+        "neutral_color": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "instance_only": true,
+      "collision": false
+    },
+    {
+      "name": "SM_MPR4_FreightBoxcar",
+      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_FreightBoxcar.fbx",
+      "material_roles": [
+        "MPR4_FreightRoof",
+        "MPR4_FreightWhite",
+        "MPR4_ReflectAmber",
+        "MPR4_VehicleDark",
+        "MPR4_VehicleMetal"
+      ],
+      "material_triangle_counts": {
+        "MPR4_FreightRoof": 404,
+        "MPR4_FreightWhite": 132,
+        "MPR4_ReflectAmber": 144,
+        "MPR4_VehicleDark": 2208,
+        "MPR4_VehicleMetal": 2384
+      },
+      "bounds_m": [
+        [
+          -10.399999618530273,
+          10.399999618530273
+        ],
+        [
+          -1.6480000019073486,
+          1.6480000019073486
+        ],
+        [
+          0.0,
+          4.429999828338623
+        ]
+      ],
+      "triangles": 5272,
+      "vertices": 3252,
+      "sha256": "29241f9f563b1b06020cdd863c0acf51adbd9656c16b97b52dffa5ae4663af61",
+      "metadata": {
+        "kind": "rail_boxcar",
+        "body_length_m": 18.8,
+        "overall_length_m": 20.76,
+        "front_axis": "+X",
+        "estimated_dimensions": true,
+        "source": "reference multiview 01/06 white-grey freight cars"
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "instance_only": true,
+      "collision": false
+    }
+  ],
+  "instances": {},
+  "materials": {
+    "MPR4_LeafMid": {
+      "base_color": [
+        0.42,
+        0.48,
+        0.34,
+        1
+      ],
+      "roughness": 0.88,
+      "metallic": 0.0,
+      "two_sided": true,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.035
+    },
+    "MPR4_LeafLight": {
+      "base_color": [
+        0.4,
+        0.46,
+        0.34,
+        1
+      ],
+      "roughness": 0.88,
+      "metallic": 0.0,
+      "two_sided": true,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.035
+    },
+    "MPR4_LeafShade": {
+      "base_color": [
+        0.29,
+        0.35,
+        0.23,
+        1
+      ],
+      "roughness": 0.88,
+      "metallic": 0.0,
+      "two_sided": true,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.035
+    },
+    "MPR4_Bark": {
+      "base_color": [
+        0.205,
+        0.18,
+        0.135,
+        1
+      ],
+      "roughness": 0.95,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_TrailerWhite": {
+      "base_color": [
+        0.88,
+        0.9,
+        0.91,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_TrailerBlue": {
+      "base_color": [
+        0.012,
+        0.16,
+        0.43,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_TrailerCoral": {
+      "base_color": [
+        0.65,
+        0.055,
+        0.035,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_VehicleMetal": {
+      "base_color": [
+        0.38,
+        0.41,
+        0.41,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.65,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_VehicleDark": {
+      "base_color": [
+        0.065,
+        0.075,
+        0.08,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_VehicleRubber": {
+      "base_color": [
+        0.026,
+        0.03,
+        0.031,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_VehicleGlass": {
+      "base_color": [
+        0.1,
+        0.16,
+        0.2,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_VehicleWhite": {
+      "base_color": [
+        0.7,
+        0.73,
+        0.74,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_VehicleGray": {
+      "base_color": [
+        0.31,
+        0.35,
+        0.38,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_VehicleSeam": {
+      "base_color": [
+        0.25,
+        0.28,
+        0.29,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_ReflectWhite": {
+      "base_color": [
+        0.88,
+        0.89,
+        0.85,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_ReflectRed": {
+      "base_color": [
+        0.65,
+        0.035,
+        0.025,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_ReflectAmber": {
+      "base_color": [
+        0.78,
+        0.37,
+        0.035,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_FreightWhite": {
+      "base_color": [
+        0.67,
+        0.69,
+        0.68,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    },
+    "MPR4_FreightRoof": {
+      "base_color": [
+        0.57,
+        0.6,
+        0.61,
+        1
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "two_sided": false,
+      "blend_mode": "OPAQUE",
+      "subsurface": 0.0
+    }
+  },
+  "source_attribution": {
+    "author": "Simon Thommes",
+    "licensor": "Blender Studio",
+    "license": "CC-BY",
+    "source_url": "https://cloud.blender.org/",
+    "source_file": "D:\\UEPro\\Test\\SourceAssets\\MPR\\reference_v4\\props\\source\\BlenderStudio_Oak_CC-BY.blend",
+    "source_sha256": "1c93f070f41946a2a1eebb64fd7e736b3d280b7bb1c89dad1e6c36c07a7646db",
+    "license_text": "Author: Simon Thommes\n\nLicense: CC-BY\nFile and Assets by the Blender Studio https://cloud.blender.org/ ",
+    "modifications": "Native oak scaffold retained and reduced; 220000 individual fine leaves rebuilt into a continuous oval volumetric crown, approximately 12.3m wide and 15.9m high. No solid canopy filler. Muted sage palette.",
+    "source_stats": {
+      "source_leaf_sites": 3512,
+      "source_branch_vertices": 121865,
+      "source_branch_polygons": 121404,
+      "xy_scale": 1.4095607883086663,
+      "z_scale": 1.6217869879437874
+    }
+  },
+  "tree_lods": "UE Nanite area preservation and automatic fallback; explicit LOD meshes intentionally omitted"
+}

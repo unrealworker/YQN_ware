@@ -1,0 +1,36 @@
+{
+  "success": true,
+  "scope": "Trailer presentation scale and unique south CAD dock occupancy only; no UE or render changes",
+  "trailers_before": 59,
+  "trailers_after": 66,
+  "unique_south_cad_docks": 23,
+  "trees_preserved": 366,
+  "nontrailer_instances_unchanged": true,
+  "source_controls_unchanged": true,
+  "tree_placements_identical": true,
+  "layout": {
+    "scale": [
+      1.15,
+      1.2,
+      1.08
+    ],
+    "body_dimensions_m": [
+      18.572499999999998,
+      3.12,
+      4.5144
+    ],
+    "dock_center_offset_m": 9.706249999999999,
+    "south_dock_count": 23,
+    "stand_adjustments": []
+  },
+  "extra_dock_clearance_m": 0.075,
+  "clearance_reason": "CAD opening centre is 0.1524m inside exterior wall; actual trailer rear bumper overhang requires 0.075m additional stand-off to keep >=0.02m wall clearance",
+  "vehicle_collisions": 0,
+  "vehicle_offpaving": 0,
+  "stand_adjustments": [],
+  "fbx_roundtrip_success": true,
+  "mesh_count": 25,
+  "triangles": 358093,
+  "fbx_max_bounds_error_m": 0.0001220703125,
+  "manifest_sha256": "6bbd1cf3b21d54039e137f5511a331e3ecd223b0a596f6d5a6ce3938b3af2f97"
+}

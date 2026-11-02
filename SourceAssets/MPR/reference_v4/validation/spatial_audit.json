@@ -1,0 +1,714 @@
+{
+  "source_manifest_sha256": "5e46303382748e1c3987a8a8a867dd4cf70be5dea497d17310625aa863cc5f91",
+  "context_manifest_sha256": "65869c93594978a921854a1814ce6d3f6082d3003f9dc00e6fda0fce9a2a3880",
+  "reconstructed_source_hashes": {
+    "Tools/MPRWarehouse/build_mpr_reference_v4_site.py": "a162274a96c106edf7f99caf2f0acf5ee7bd0765ea78a3f2fea2ba1f182bab4d",
+    "SourceAssets/MPR/reference_v4/site/reference_site_pixels.json": "0b73678a267f0417527353b74b624227349fd61ce2e8bf876875aba35e3c7821",
+    "SourceAssets/MPR/reference_v4/context/reference_context_layout.json": "1bd47d066ce6e7677e172121b15af93b3e371b513ec855d90737b31d1da488a5"
+  },
+  "scope": "Road/water/rail geometry reconstructed from current generator inputs; vehicles and trees read from exported site manifest. Regenerate site after input changes before final acceptance.",
+  "buildings_on_roads": [],
+  "pond_paving_overlaps_m2": {
+    "pond": 0.0,
+    "pond_walk": 0.0
+  },
+  "vehicles_outside_standing_surfaces": [],
+  "vehicle_collisions": [],
+  "boxcar_collisions": [],
+  "tree_clearance_violations": [],
+  "allowed_crown_edge_overhang": [
+    {
+      "index": 0,
+      "reference_pixel": [
+        389.2925850934985,
+        312.07178057314917
+      ],
+      "crown_radius_m": 6.4,
+      "road_overlap_m2": 27.17,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 1,
+      "reference_pixel": [
+        385.6544000231146,
+        336.7976469228555
+      ],
+      "crown_radius_m": 6.37,
+      "road_overlap_m2": 25.44,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 2,
+      "reference_pixel": [
+        347.0314377765439,
+        583.7834286504753
+      ],
+      "crown_radius_m": 6.01,
+      "road_overlap_m2": 16.12,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 3,
+      "reference_pixel": [
+        471.8529334384843,
+        659.8518001334609
+      ],
+      "crown_radius_m": 5.25,
+      "road_overlap_m2": 0.9,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 13,
+      "reference_pixel": [
+        724.7614089921749,
+        637.1994418141079
+      ],
+      "crown_radius_m": 5.36,
+      "road_overlap_m2": 10.21,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 14,
+      "reference_pixel": [
+        973.7476478538248,
+        569.3530224889156
+      ],
+      "crown_radius_m": 5.52,
+      "road_overlap_m2": 17.35,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 2.77,
+      "violations": {}
+    },
+    {
+      "index": 16,
+      "reference_pixel": [
+        1118.0082675396147,
+        351.47018804642516
+      ],
+      "crown_radius_m": 6.39,
+      "road_overlap_m2": 27.73,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 17,
+      "reference_pixel": [
+        1127.5111116098017,
+        329.43167733045993
+      ],
+      "crown_radius_m": 5.91,
+      "road_overlap_m2": 19.64,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 18,
+      "reference_pixel": [
+        1137.0139556799886,
+        307.3931666144947
+      ],
+      "crown_radius_m": 6.24,
+      "road_overlap_m2": 25.13,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 54,
+      "reference_pixel": [
+        1282.3698583172186,
+        240.47165080713012
+      ],
+      "crown_radius_m": 7.24,
+      "road_overlap_m2": 0.0,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 3.69,
+      "violations": {}
+    },
+    {
+      "index": 55,
+      "reference_pixel": [
+        1270.0037415920249,
+        262.19903346447956
+      ],
+      "crown_radius_m": 6.53,
+      "road_overlap_m2": 0.0,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 4.25,
+      "violations": {}
+    },
+    {
+      "index": 78,
+      "reference_pixel": [
+        1317.9031183760044,
+        509.7127446244748
+      ],
+      "crown_radius_m": 7.12,
+      "road_overlap_m2": 27.46,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 85,
+      "reference_pixel": [
+        1221.3266223888993,
+        655.6336727325945
+      ],
+      "crown_radius_m": 6.28,
+      "road_overlap_m2": 9.57,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 132,
+      "reference_pixel": [
+        878,
+        99
+      ],
+      "crown_radius_m": 9,
+      "road_overlap_m2": 24.14,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 137,
+      "reference_pixel": [
+        924,
+        101
+      ],
+      "crown_radius_m": 9,
+      "road_overlap_m2": 49.12,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 170,
+      "reference_pixel": [
+        1692.7200019852394,
+        251.07631582671107
+      ],
+      "crown_radius_m": 7.8,
+      "road_overlap_m2": 4.92,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 193,
+      "reference_pixel": [
+        1511.4868277526984,
+        373.1251757848981
+      ],
+      "crown_radius_m": 8.7,
+      "road_overlap_m2": 20.96,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 199,
+      "reference_pixel": [
+        1407.3804491778249,
+        414.34713673492746
+      ],
+      "crown_radius_m": 8.55,
+      "road_overlap_m2": 46.65,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 200,
+      "reference_pixel": [
+        1467.8977856598483,
+        408.527999925502
+      ],
+      "crown_radius_m": 6.68,
+      "road_overlap_m2": 25.37,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 207,
+      "reference_pixel": [
+        1439.6488060677918,
+        436.61902252040215
+      ],
+      "crown_radius_m": 8.02,
+      "road_overlap_m2": 0.74,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 239,
+      "reference_pixel": [
+        220.9866780148923,
+        522.0272101370963
+      ],
+      "crown_radius_m": 6.38,
+      "road_overlap_m2": 0.0,
+      "building_overlap_m2": 0.65,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 240,
+      "reference_pixel": [
+        141.91477607057675,
+        566.5601910117562
+      ],
+      "crown_radius_m": 6.0,
+      "road_overlap_m2": 0.0,
+      "building_overlap_m2": 2.01,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 241,
+      "reference_pixel": [
+        176.0476162716151,
+        20.525059643585998
+      ],
+      "crown_radius_m": 7.95,
+      "road_overlap_m2": 35.03,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 244,
+      "reference_pixel": [
+        117.89839937187392,
+        51.23659590235962
+      ],
+      "crown_radius_m": 7.83,
+      "road_overlap_m2": 0.53,
+      "building_overlap_m2": 2.73,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 246,
+      "reference_pixel": [
+        56.08651944683294,
+        77.64627659329382
+      ],
+      "crown_radius_m": 7.43,
+      "road_overlap_m2": 0.0,
+      "building_overlap_m2": 3.65,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 247,
+      "reference_pixel": [
+        332.12010455584476,
+        78.00868259760387
+      ],
+      "crown_radius_m": 8.14,
+      "road_overlap_m2": 38.27,
+      "building_overlap_m2": 1.68,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 248,
+      "reference_pixel": [
+        391.88279656885084,
+        94.82640612594048
+      ],
+      "crown_radius_m": 8.65,
+      "road_overlap_m2": 33.22,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 251,
+      "reference_pixel": [
+        76.6488895283203,
+        140.84703117870546
+      ],
+      "crown_radius_m": 5.97,
+      "road_overlap_m2": 2.38,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 252,
+      "reference_pixel": [
+        105.91344412677623,
+        143.93748296824464
+      ],
+      "crown_radius_m": 5.98,
+      "road_overlap_m2": 8.19,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 256,
+      "reference_pixel": [
+        143.04930941553297,
+        191.2994431967848
+      ],
+      "crown_radius_m": 8.16,
+      "road_overlap_m2": 23.17,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 257,
+      "reference_pixel": [
+        204.1380792297462,
+        197.26952461856527
+      ],
+      "crown_radius_m": 7.33,
+      "road_overlap_m2": 0.0,
+      "building_overlap_m2": 2.03,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 258,
+      "reference_pixel": [
+        54.36142981996824,
+        213.80650683109536
+      ],
+      "crown_radius_m": 7.08,
+      "road_overlap_m2": 0.0,
+      "building_overlap_m2": 2.36,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 261,
+      "reference_pixel": [
+        367.40936150374597,
+        213.78481952278483
+      ],
+      "crown_radius_m": 7.42,
+      "road_overlap_m2": 7.92,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 265,
+      "reference_pixel": [
+        21.718280844935137,
+        264.56200367903
+      ],
+      "crown_radius_m": 7.47,
+      "road_overlap_m2": 17.88,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 267,
+      "reference_pixel": [
+        0.6424368941505332,
+        284.5309754396236
+      ],
+      "crown_radius_m": 6.04,
+      "road_overlap_m2": 2.01,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 268,
+      "reference_pixel": [
+        57.0474615365458,
+        286.2304874910809
+      ],
+      "crown_radius_m": 7.31,
+      "road_overlap_m2": 0.0,
+      "building_overlap_m2": 1.85,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 274,
+      "reference_pixel": [
+        91.36498179946439,
+        352.7446923521032
+      ],
+      "crown_radius_m": 5.99,
+      "road_overlap_m2": 12.22,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 276,
+      "reference_pixel": [
+        219.8534505225327,
+        355.78039002955916
+      ],
+      "crown_radius_m": 6.74,
+      "road_overlap_m2": 26.05,
+      "building_overlap_m2": 0.2,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 279,
+      "reference_pixel": [
+        190.37763063474833,
+        390.2856105835992
+      ],
+      "crown_radius_m": 5.3,
+      "road_overlap_m2": 10.05,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 280,
+      "reference_pixel": [
+        226.60018195128447,
+        411.62680383396616
+      ],
+      "crown_radius_m": 5.41,
+      "road_overlap_m2": 1.23,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 281,
+      "reference_pixel": [
+        335.0150067302576,
+        410.03687167780686
+      ],
+      "crown_radius_m": 4.95,
+      "road_overlap_m2": 2.81,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 282,
+      "reference_pixel": [
+        36.38806123924461,
+        429.26391246826256
+      ],
+      "crown_radius_m": 6.1,
+      "road_overlap_m2": 0.0,
+      "building_overlap_m2": 1.09,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 285,
+      "reference_pixel": [
+        330.20853731221894,
+        433.5530640134864
+      ],
+      "crown_radius_m": 5.63,
+      "road_overlap_m2": 5.03,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 289,
+      "reference_pixel": [
+        306.8116076870691,
+        450.62980366671496
+      ],
+      "crown_radius_m": 5.99,
+      "road_overlap_m2": 3.64,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 290,
+      "reference_pixel": [
+        329.0794119623454,
+        447.648858649198
+      ],
+      "crown_radius_m": 5.66,
+      "road_overlap_m2": 11.82,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 306,
+      "reference_pixel": [
+        306.1485680651179,
+        533.3023322256724
+      ],
+      "crown_radius_m": 6.2,
+      "road_overlap_m2": 0.76,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 320,
+      "reference_pixel": [
+        304.9246421723471,
+        578.8679267758708
+      ],
+      "crown_radius_m": 4.58,
+      "road_overlap_m2": 5.13,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 335,
+      "reference_pixel": [
+        223.4157473158224,
+        674.1110748836599
+      ],
+      "crown_radius_m": 5.09,
+      "road_overlap_m2": 11.7,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 336,
+      "reference_pixel": [
+        278.4578683086753,
+        673.4916668978974
+      ],
+      "crown_radius_m": 4.72,
+      "road_overlap_m2": 8.43,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 337,
+      "reference_pixel": [
+        131.77423413979346,
+        698.4057283967419
+      ],
+      "crown_radius_m": 5.37,
+      "road_overlap_m2": 4.35,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 338,
+      "reference_pixel": [
+        223.38803972380782,
+        698.639623883296
+      ],
+      "crown_radius_m": 5.18,
+      "road_overlap_m2": 8.36,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 340,
+      "reference_pixel": [
+        272.16753506620654,
+        691.7961614721899
+      ],
+      "crown_radius_m": 4.73,
+      "road_overlap_m2": 10.66,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 346,
+      "reference_pixel": [
+        247.4319798485022,
+        731.6852721226633
+      ],
+      "crown_radius_m": 4.1,
+      "road_overlap_m2": 0.0,
+      "building_overlap_m2": 1.27,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 350,
+      "reference_pixel": [
+        112.05763185730476,
+        725.8439139151575
+      ],
+      "crown_radius_m": 5.26,
+      "road_overlap_m2": 24.32,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 351,
+      "reference_pixel": [
+        60.53755601939608,
+        770.8053170813673
+      ],
+      "crown_radius_m": 4.79,
+      "road_overlap_m2": 13.19,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 352,
+      "reference_pixel": [
+        127.50400254951963,
+        771.0115032613187
+      ],
+      "crown_radius_m": 5.73,
+      "road_overlap_m2": 0.0,
+      "building_overlap_m2": 0.9,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    },
+    {
+      "index": 353,
+      "reference_pixel": [
+        231.1072577782338,
+        772.4627305091869
+      ],
+      "crown_radius_m": 4.71,
+      "road_overlap_m2": 12.51,
+      "building_overlap_m2": 0.0,
+      "rail_overlap_m2": 0.0,
+      "violations": {}
+    }
+  ],
+  "minimum_track_center_spacing_m": 2.677320542326907,
+  "tree_policy": "85 percent radius excludes buildings/rail; 45 percent excludes paving; 1.4m trunk excludes roads; remaining crown-edge overhang permitted",
+  "counts": {
+    "buildings": 153,
+    "road_segments": 23,
+    "parked_vehicles": 107,
+    "boxcars": 94,
+    "trees": 366
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "method": "Centered perspective overscan and integer crop; same world pose, square pixels, principal shift disabled",
+  "target_dimensions_px": [
+    1728,
+    910
+  ],
+  "overscan_dimensions_px": [
+    2006,
+    1860
+  ],
+  "crop_xywh": [
+    278,
+    949,
+    1728,
+    910
+  ],
+  "focal_length_px": 1853.8489821113578,
+  "lens_mm_for_sensor_width_36": 33.26947325822975,
+  "horizontal_fov_deg": 56.830013344323625,
+  "vertical_fov_deg": 53.28208601535889,
+  "pixel_multiplier": 2.372786935286935,
+  "maximum_integer_crop_principal_error_px": 0.04247385154873714,
+  "camera_shift": [
+    0,
+    0
+  ],
+  "usage": "Use the same camera world matrix. Render at overscan dimensions with the stated horizontal FOV or new lens; crop exact xywh to 1728x910. This is an analytic plan; UE capture is not yet verified."
+}

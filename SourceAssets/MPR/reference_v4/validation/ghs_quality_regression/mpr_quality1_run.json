@@ -1,0 +1,677 @@
+{
+	"label": "mpr_quality1",
+	"route_version": 2,
+	"process_id": 51864,
+	"variant": "baseline",
+	"runtime": "editor-game",
+	"build_configuration": "Development",
+	"render_offscreen": true,
+	"engine_version": "5.8.4-58902052+++UE5+Release-5.8",
+	"cpu": "Intel(R) Core(TM) i9-14900HX",
+	"gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+	"duration_seconds": 90,
+	"warmup_seconds": 15,
+	"route_cycle_seconds": 45,
+	"trace_enabled": false,
+	"trace_connected": false,
+	"trace_start_succeeded": false,
+	"assets_saved": false,
+	"input_scope": "Native HUD/camera public APIs; material hit uses real screen projection. Not OS input latency.",
+	"poi_mode": "all; production layout cap remains 32",
+	"status": "complete",
+	"success": true,
+	"error": "",
+	"csv": "D:/UEPro/Test/Saved/MPR/ghs_quality_regression/mpr_quality1_20261102_132400/frames.csv",
+	"elapsed_seconds": 108.74433920159936,
+	"completed_actions": 38,
+	"cargo_clicks": 2,
+	"segments": [
+		{
+			"name": "capture_begin",
+			"planned_seconds": 0,
+			"actual_seconds": 0,
+			"csv_frame": 0
+		},
+		{
+			"name": "overview",
+			"planned_seconds": 0,
+			"actual_seconds": 0.0090161971747875214,
+			"csv_frame": 1
+		},
+		{
+			"name": "all_poi",
+			"planned_seconds": 1,
+			"actual_seconds": 1.0079763978719711,
+			"csv_frame": 106
+		},
+		{
+			"name": "orbit",
+			"planned_seconds": 4,
+			"actual_seconds": 4.0065871998667717,
+			"csv_frame": 424
+		},
+		{
+			"name": "agv",
+			"planned_seconds": 12,
+			"actual_seconds": 12.006371296942234,
+			"csv_frame": 1284
+		},
+		{
+			"name": "forklift",
+			"planned_seconds": 16,
+			"actual_seconds": 16.002093899995089,
+			"csv_frame": 1720
+		},
+		{
+			"name": "racks",
+			"planned_seconds": 20,
+			"actual_seconds": 20.004571799188852,
+			"csv_frame": 2186
+		},
+		{
+			"name": "cargo_focus",
+			"planned_seconds": 24,
+			"actual_seconds": 24.010884396731853,
+			"csv_frame": 2490
+		},
+		{
+			"name": "cargo_click",
+			"planned_seconds": 26,
+			"actual_seconds": 26.003056798130274,
+			"csv_frame": 2683
+		},
+		{
+			"name": "panel_close",
+			"planned_seconds": 28,
+			"actual_seconds": 28.000594299286604,
+			"csv_frame": 2903
+		},
+		{
+			"name": "panel_open",
+			"planned_seconds": 29,
+			"actual_seconds": 29.007340297102928,
+			"csv_frame": 3017
+		},
+		{
+			"name": "page_devices",
+			"planned_seconds": 30,
+			"actual_seconds": 30.00650929659605,
+			"csv_frame": 3130
+		},
+		{
+			"name": "page_orders",
+			"planned_seconds": 31,
+			"actual_seconds": 31.002371996641159,
+			"csv_frame": 3242
+		},
+		{
+			"name": "page_inventory",
+			"planned_seconds": 32,
+			"actual_seconds": 32.002541299909353,
+			"csv_frame": 3355
+		},
+		{
+			"name": "page_alerts",
+			"planned_seconds": 33,
+			"actual_seconds": 33.005338799208403,
+			"csv_frame": 3468
+		},
+		{
+			"name": "page_trace",
+			"planned_seconds": 34,
+			"actual_seconds": 34.002121597528458,
+			"csv_frame": 3580
+		},
+		{
+			"name": "page_settings",
+			"planned_seconds": 35,
+			"actual_seconds": 35.004752896726131,
+			"csv_frame": 3693
+		},
+		{
+			"name": "page_overview",
+			"planned_seconds": 36,
+			"actual_seconds": 36.006207697093487,
+			"csv_frame": 3806
+		},
+		{
+			"name": "overview",
+			"planned_seconds": 38,
+			"actual_seconds": 38.005576498806477,
+			"csv_frame": 4032
+		},
+		{
+			"name": "all_poi",
+			"planned_seconds": 40,
+			"actual_seconds": 40.002346999943256,
+			"csv_frame": 4223
+		},
+		{
+			"name": "overview",
+			"planned_seconds": 45,
+			"actual_seconds": 45.007650099694729,
+			"csv_frame": 4745
+		},
+		{
+			"name": "all_poi",
+			"planned_seconds": 46,
+			"actual_seconds": 46.0080835968256,
+			"csv_frame": 4850
+		},
+		{
+			"name": "orbit",
+			"planned_seconds": 49,
+			"actual_seconds": 49.007100198417902,
+			"csv_frame": 5163
+		},
+		{
+			"name": "agv",
+			"planned_seconds": 57,
+			"actual_seconds": 57.007280699908733,
+			"csv_frame": 6007
+		},
+		{
+			"name": "forklift",
+			"planned_seconds": 61,
+			"actual_seconds": 61.004761099815369,
+			"csv_frame": 6440
+		},
+		{
+			"name": "racks",
+			"planned_seconds": 65,
+			"actual_seconds": 65.006183799356222,
+			"csv_frame": 6904
+		},
+		{
+			"name": "cargo_focus",
+			"planned_seconds": 69,
+			"actual_seconds": 69.012864798307419,
+			"csv_frame": 7208
+		},
+		{
+			"name": "cargo_click",
+			"planned_seconds": 71,
+			"actual_seconds": 71.004630796611309,
+			"csv_frame": 7401
+		},
+		{
+			"name": "panel_close",
+			"planned_seconds": 73,
+			"actual_seconds": 73.001224499195814,
+			"csv_frame": 7620
+		},
+		{
+			"name": "panel_open",
+			"planned_seconds": 74,
+			"actual_seconds": 74.007987797260284,
+			"csv_frame": 7732
+		},
+		{
+			"name": "page_devices",
+			"planned_seconds": 75,
+			"actual_seconds": 75.00098679959774,
+			"csv_frame": 7844
+		},
+		{
+			"name": "page_orders",
+			"planned_seconds": 76,
+			"actual_seconds": 76.006648298352957,
+			"csv_frame": 7958
+		},
+		{
+			"name": "page_inventory",
+			"planned_seconds": 77,
+			"actual_seconds": 77.00052459910512,
+			"csv_frame": 8070
+		},
+		{
+			"name": "page_alerts",
+			"planned_seconds": 78,
+			"actual_seconds": 78.001936599612236,
+			"csv_frame": 8182
+		},
+		{
+			"name": "page_trace",
+			"planned_seconds": 79,
+			"actual_seconds": 79.002758197486401,
+			"csv_frame": 8295
+		},
+		{
+			"name": "page_settings",
+			"planned_seconds": 80,
+			"actual_seconds": 80.001607298851013,
+			"csv_frame": 8407
+		},
+		{
+			"name": "page_overview",
+			"planned_seconds": 81,
+			"actual_seconds": 81.007267098873854,
+			"csv_frame": 8518
+		},
+		{
+			"name": "overview",
+			"planned_seconds": 83,
+			"actual_seconds": 83.004714298993349,
+			"csv_frame": 8744
+		},
+		{
+			"name": "all_poi",
+			"planned_seconds": 85,
+			"actual_seconds": 85.002589900046587,
+			"csv_frame": 8932
+		},
+		{
+			"name": "capture_end",
+			"planned_seconds": 90,
+			"actual_seconds": 90.006219398230314,
+			"csv_frame": 9454
+		}
+	],
+	"rhi": "D3D12",
+	"window_mode": "windowed",
+	"map": "GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
+	"viewport": [
+		1920,
+		1080
+	],
+	"equipment_count": 106,
+	"facility_count": 56,
+	"variant_setup":
+	{
+		"name": "baseline",
+		"implementation": "native-runtime-v1",
+		"applied_before_warmup": true,
+		"success": true,
+		"groups": [
+			{
+				"actor": "BP_GHS_InstanceGroup_C_16",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_CAD_PalletCargoLow",
+				"mesh": "SM_GHS_Presentation_CargoLow",
+				"kind": "floor",
+				"instances": 1904,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			},
+			{
+				"actor": "BP_GHS_InstanceGroup_C_17",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_CAD_PalletCargoHigh",
+				"mesh": "SM_GHS_Presentation_CargoHigh",
+				"kind": "floor",
+				"instances": 1900,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			},
+			{
+				"actor": "BP_GHS_InstanceGroup_C_45",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_V2_Rack_A_W37138",
+				"mesh": "SM_GHS_V2Rack_A_W37138_Capacity",
+				"kind": "rack",
+				"instances": 1065,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			},
+			{
+				"actor": "BP_GHS_InstanceGroup_C_46",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_V2_Rack_A_W37619",
+				"mesh": "SM_GHS_V2Rack_A_W37619_Capacity",
+				"kind": "rack",
+				"instances": 140,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			},
+			{
+				"actor": "BP_GHS_InstanceGroup_C_47",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_V2_Rack_B_Pass_W36176",
+				"mesh": "SM_GHS_V2Rack_B_Pass_W36176_Capacity",
+				"kind": "rack",
+				"instances": 11,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			},
+			{
+				"actor": "BP_GHS_InstanceGroup_C_48",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_V2_Rack_B_W37138",
+				"mesh": "SM_GHS_V2Rack_B_W37138_Capacity",
+				"kind": "rack",
+				"instances": 220,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			},
+			{
+				"actor": "BP_GHS_InstanceGroup_C_49",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_V2_Rack_B_W37619",
+				"mesh": "SM_GHS_V2Rack_B_W37619_Capacity",
+				"kind": "rack",
+				"instances": 44,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			},
+			{
+				"actor": "BP_GHS_InstanceGroup_C_50",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_V2_Rack_D1",
+				"mesh": "SM_GHS_V2Rack_D1_Capacity",
+				"kind": "rack",
+				"instances": 89,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			},
+			{
+				"actor": "BP_GHS_InstanceGroup_C_51",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_V2_Rack_D1_W37138",
+				"mesh": "SM_GHS_V2Rack_D1_W37138_Capacity",
+				"kind": "rack",
+				"instances": 5,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			},
+			{
+				"actor": "BP_GHS_InstanceGroup_C_52",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_V2_Rack_D1_W37619",
+				"mesh": "SM_GHS_V2Rack_D1_W37619_Capacity",
+				"kind": "rack",
+				"instances": 8,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			},
+			{
+				"actor": "BP_GHS_InstanceGroup_C_7",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_V2_Rack_A_Pass_W36176",
+				"mesh": "SM_GHS_V2Rack_A_Pass_W36176_Capacity",
+				"kind": "rack",
+				"instances": 11,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			},
+			{
+				"actor": "BP_GHS_InstanceGroup_C_8",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_CAD_PalletCargo",
+				"mesh": "SM_GHS_Presentation_CargoMid",
+				"kind": "floor",
+				"instances": 3726,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			},
+			{
+				"actor": "BP_GHS_InstanceGroup_C_9",
+				"component": "HierarchicalInstancedStaticMesh",
+				"tag": "GHSStorageGroup:GHS_V2_Rack_A_Pass_W37138",
+				"mesh": "SM_GHS_V2Rack_A_Pass_W37138_Capacity",
+				"kind": "rack",
+				"instances": 36,
+				"before":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				},
+				"after":
+				{
+					"shadow_cache_invalidation": "Auto",
+					"cast_shadow": true,
+					"collision_mode": 0
+				}
+			}
+		],
+		"traffic":
+		{
+			"runtime_before":
+			{
+				"ready": true,
+				"active": 24,
+				"capacity": 32,
+				"peak_active": 24,
+				"route_count": 6,
+				"component_count": 4,
+				"completed": 0,
+				"spawned": 24,
+				"fixed_instances": 32,
+				"collision": false,
+				"active_by_route": [
+					{
+						"id": "glen_forward",
+						"active": 4
+					},
+					{
+						"id": "glen_reverse",
+						"active": 4
+					},
+					{
+						"id": "sycamore_south_forward",
+						"active": 4
+					},
+					{
+						"id": "sycamore_north_forward",
+						"active": 4
+					},
+					{
+						"id": "i15_0_forward",
+						"active": 4
+					},
+					{
+						"id": "i15_1_forward",
+						"active": 4
+					}
+				]
+			},
+			"tick_before": true,
+			"hidden_before": false,
+			"tick_after": true,
+			"hidden_after": false
+		},
+		"capacity":
+		{
+			"initialized": true,
+			"error": "",
+			"storage_visible": true,
+			"rack_capacity": 0.80000001192092896,
+			"floor_capacity": 1,
+			"rack_total_slots": 25056,
+			"floor_total_slots": 7530,
+			"rack_visible_slots": 20045,
+			"floor_visible_groups": 7530,
+			"registered_components": 13,
+			"shared_materials": 7,
+			"initialization_scans": 2,
+			"capacity_updates": 0,
+			"parameter_writes": 14,
+			"shadow_cache_auto_components": 13,
+			"shadow_cache_refreshing_components": 0,
+			"shadow_cache_refresh_requests": 0
+		},
+		"group_count": 13,
+		"instance_count": 9159
+	},
+	"cargo_fixture_version": 2,
+	"cargo_fixture_capacity":
+	{
+		"initialized": true,
+		"error": "",
+		"storage_visible": true,
+		"rack_capacity": 0.80000001192092896,
+		"floor_capacity": 1,
+		"rack_total_slots": 25056,
+		"floor_total_slots": 7530,
+		"rack_visible_slots": 20045,
+		"floor_visible_groups": 7530,
+		"registered_components": 13,
+		"shared_materials": 7,
+		"initialization_scans": 2,
+		"capacity_updates": 0,
+		"parameter_writes": 14,
+		"shadow_cache_auto_components": 13,
+		"shadow_cache_refreshing_components": 0,
+		"shadow_cache_refresh_requests": 0
+	},
+	"cargo_fixture": "BP_GHS_InstanceGroup_C_45/HierarchicalInstancedStaticMesh/0/SM_GHS_V2Rack_A_W37138_Capacity/capacity-slots-v2",
+	"cargo_fixture_metadata": "storage-capacity.json",
+	"cargo_fixture_instance_count": 1065,
+	"cargo_fixture_slot_count": 12,
+	"cargo_fixture_visible_candidates": 12,
+	"original_cvars":
+	{
+		"r.GPUStatsEnabled": "unavailable",
+		"r.GPUCsvStatsEnabled": "0",
+		"csv.CompressionMode": "-1",
+		"t.MaxFPS": "0",
+		"r.VSync": "0",
+		"r.VSyncEditor": "0",
+		"t.IdleWhenNotForeground": "0",
+		"Slate.bAllowThrottling": "1",
+		"r.DynamicRes.OperationMode": "0",
+		"r.ScreenPercentage": "0"
+	},
+	"observed_cvars":
+	{
+		"r.ScreenPercentage": "100",
+		"r.DynamicRes.OperationMode": "0",
+		"r.AntiAliasingMethod": "4",
+		"r.Shadow.Virtual.Enable": "1",
+		"r.DynamicGlobalIlluminationMethod": "1",
+		"r.ReflectionMethod": "1",
+		"sg.ShadowQuality": "3",
+		"sg.PostProcessQuality": "3",
+		"sg.EffectsQuality": "3",
+		"sg.ViewDistanceQuality": "3",
+		"sg.TextureQuality": "3",
+		"t.MaxFPS": "0",
+		"r.VSync": "0",
+		"r.GPUCsvStatsEnabled": "1"
+	},
+	"post_process_note": "Console GI/reflection values are project defaults, not final view PP overrides. Inspect final view in GPU capture before assigning Lumen cost.",
+	"measured_seconds": 90.006219398230314,
+	"final_browser_report": "",
+	"final_poi_report": "{\r\n\t\"labels\": [\r\n\t\t{\r\n\t\t\t\"id\": \"WAREHOUSE:GHS\",\r\n\t\t\t\"icon\": \"warehouse\",\r\n\t\t\t\"x\": 582.75958251953125,\r\n\t\t\t\"y\": 367.94442749023438,\r\n\t\t\t\"width\": 228,\r\n\t\t\t\"height\": 56,\r\n\t\t\t\"opacity\": 1,\r\n\t\t\t\"interactive\": true\r\n\t\t}\r\n\t],\r\n\t\"selectionStroke\": 6,\r\n\t\"pointFilter\": \"all\",\r\n\t\"replay\": false,\r\n\t\"interiorAvailable\": false,\r\n\t\"pendingNavigation\": \"\",\r\n\t\"pendingNavigationId\": \"\",\r\n\t\"warehousePOIOpacity\": 1,\r\n\t\"interiorLabelOpacity\": 0,\r\n\t\"roofClosed\": true,\r\n\t\"roofOpening\": false,\r\n\t\"roofClosing\": false,\r\n\t\"roofTransitioning\": false,\r\n\t\"roofProgress\": 0,\r\n\t\"performance\":\r\n\t{\r\n\t\t\"candidateBuilds\": 449,\r\n\t\t\"projectionFrames\": 5017,\r\n\t\t\"pointProjections\": 119572,\r\n\t\t\"selectionProjections\": 34421,\r\n\t\t\"candidateCount\": 165,\r\n\t\t\"browserActive\": true,\r\n\t\t\"diagnostics\": false,\r\n\t\t\"worldScans\": 4,\r\n\t\t\"snapshotSerializations\": 8\r\n\t}\r\n}",
+	"variant_restored": true
+}

@@ -287,6 +287,8 @@ def run():
     result['command_line']=cli;result['engine_version']=u.SystemLibrary.get_engine_version()
     assert re.match(r'5\.8\.',result['engine_version']),'This GPU evidence check is for UE 5.8'
     result['map_sha256_before']=hashlib.sha256(MAP_FILE.read_bytes()).hexdigest()
+    result['render_quality']={key:u.SystemLibrary.get_console_variable_string_value(key) for key in
+        ('r.Nanite.MaxPixelsPerEdge','r.Nanite.AllowVoxels','r.Shadow.Virtual.Enable')}
     yield from wait('discover',discover,seconds=30)
     yield from wait('viewport_1920x1080',lambda:list(pc.get_viewport_size())==[1920,1080],seconds=10,stable=4)
     original_pawn_tick=pawn.is_actor_tick_enabled();original_view_target=pc.get_view_target();original_camera_transform=camera.get_actor_transform()
@@ -349,6 +351,7 @@ def tick(delta):
     finally:busy=False
 
 
-write()
-handle=u.register_slate_post_tick_callback(tick)
-u.log('MPR_PERFORMANCE_STARTED '+str(OUT/'performance.json'))
+if __name__=='__main__':
+    write()
+    handle=u.register_slate_post_tick_callback(tick)
+    u.log('MPR_PERFORMANCE_STARTED '+str(OUT/'performance.json'))

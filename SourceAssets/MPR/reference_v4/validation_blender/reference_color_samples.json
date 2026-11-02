@@ -1,0 +1,119 @@
+{
+  "reference": "D:\\UEPro\\Test\\SourceAssets\\MPR\\reference_v4\\references\\ChatGPT \u56fe\u50cf 2026\u5e7411\u67082\u65e5 15_56_24.png",
+  "render": "SourceAssets/MPR/reference_v4/validation_blender/Authoritative_Overview.png",
+  "regions": {
+    "bare_roof": {
+      "pixel_box": [
+        520,
+        366,
+        690,
+        425
+      ],
+      "reference_median_srgb": [
+        239.0,
+        240.0,
+        245.0
+      ],
+      "render_median_srgb": [
+        223.0,
+        225.0,
+        227.0
+      ],
+      "reference_mean_srgb": [
+        236.8026919242273,
+        238.1863409770688,
+        243.84386839481556
+      ],
+      "render_mean_srgb": [
+        221.16221335992023,
+        223.46340977068795,
+        225.82193419740778
+      ]
+    },
+    "pond": {
+      "pixel_box": [
+        350,
+        660,
+        384,
+        681
+      ],
+      "reference_median_srgb": [
+        51.0,
+        112.0,
+        130.0
+      ],
+      "render_median_srgb": [
+        66.0,
+        119.0,
+        134.0
+      ],
+      "reference_mean_srgb": [
+        51.068627450980394,
+        111.73529411764706,
+        129.89915966386553
+      ],
+      "render_mean_srgb": [
+        66.45658263305322,
+        118.72408963585434,
+        133.8501400560224
+      ]
+    },
+    "grass_south": {
+      "pixel_box": [
+        646,
+        728,
+        750,
+        770
+      ],
+      "reference_median_srgb": [
+        189.0,
+        195.0,
+        180.0
+      ],
+      "render_median_srgb": [
+        183.0,
+        189.0,
+        184.0
+      ],
+      "reference_mean_srgb": [
+        187.08836996336996,
+        192.97435897435898,
+        178.06341575091574
+      ],
+      "render_mean_srgb": [
+        179.43017399267399,
+        186.3695054945055,
+        180.4896978021978
+      ]
+    },
+    "solar_dark": {
+      "pixel_box": [
+        812,
+        481,
+        880,
+        503
+      ],
+      "reference_median_srgb": [
+        45.0,
+        84.0,
+        137.0
+      ],
+      "render_median_srgb": [
+        63.0,
+        97.0,
+        133.0
+      ],
+      "reference_mean_srgb": [
+        57.56016042780749,
+        93.86029411764706,
+        143.173128342246
+      ],
+      "render_mean_srgb": [
+        75.49933155080214,
+        106.35227272727273,
+        139.43917112299465
+      ]
+    }
+  },
+  "note": "Identical pixel boxes, median plus mean RGB. Regions may contain different detail pixels; these are review aids, not a photometric or 1:1 pass certificate."
+}

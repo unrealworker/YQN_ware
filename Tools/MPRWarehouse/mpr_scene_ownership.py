@@ -32,7 +32,7 @@ def _sha(path):
 
 
 def _package_file(root, package, map_path=DEFAULT_MAP):
-    if not isinstance(package, str) or not re.fullmatch(r'/Game/[A-Za-z0-9_/]+', package):
+    if not isinstance(package, str) or not re.fullmatch(r'/Game/[A-Za-z0-9_/-]+', package):
         raise OwnershipError('Invalid generated package path: ' + repr(package))
     if package != map_path and not package.startswith(ASSET_PREFIX):
         raise OwnershipError('Package is outside the MPR ownership scope: ' + package)

@@ -1,0 +1,90 @@
+{
+  "success": true,
+  "scope": "Two sequential 90-second runs of existing native GHS route at 1920x1080; 15-second warmup. Single run per setting, not a statistical equivalence claim.",
+  "runs": {
+    "mpr_quality025": {
+      "metrics": {
+        "FrameTime": {
+          "frames": 9172,
+          "mean_ms": 9.923959627126036,
+          "p95_ms": 14.273,
+          "p99_ms": 16.4218
+        },
+        "GameThreadTime": {
+          "frames": 9172,
+          "mean_ms": 2.4663104339293502,
+          "p95_ms": 3.0388,
+          "p99_ms": 3.7243
+        },
+        "RenderThreadTime": {
+          "frames": 9172,
+          "mean_ms": 9.914595922372438,
+          "p95_ms": 14.243,
+          "p99_ms": 16.3091
+        },
+        "GPUTime": {
+          "frames": 9172,
+          "mean_ms": 9.277942858700392,
+          "p95_ms": 13.5611,
+          "p99_ms": 15.1615
+        }
+      },
+      "completed_actions": 38,
+      "cargo_clicks": 2,
+      "csv_sha256": "77c9b19166778d3c151cbd0087c5fb8f6780a7172713a3bccd499004aaf30db3",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "engine_version": "5.8.4-58902052+++UE5+Release-5.8",
+      "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+    },
+    "mpr_quality1": {
+      "metrics": {
+        "FrameTime": {
+          "frames": 9558,
+          "mean_ms": 9.52271640510567,
+          "p95_ms": 13.5044,
+          "p99_ms": 15.114
+        },
+        "GameThreadTime": {
+          "frames": 9558,
+          "mean_ms": 2.3465467984934087,
+          "p95_ms": 2.8872,
+          "p99_ms": 3.5505
+        },
+        "RenderThreadTime": {
+          "frames": 9558,
+          "mean_ms": 9.517810169491526,
+          "p95_ms": 13.469,
+          "p99_ms": 14.9749
+        },
+        "GPUTime": {
+          "frames": 9558,
+          "mean_ms": 8.90695194601381,
+          "p95_ms": 12.8206,
+          "p99_ms": 14.0012
+        }
+      },
+      "completed_actions": 38,
+      "cargo_clicks": 2,
+      "csv_sha256": "20159c13eed68310561ab9bf1d1b99da9920fb09b7c8115522dd332bf4ece505",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "engine_version": "5.8.4-58902052+++UE5+Release-5.8",
+      "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+    }
+  },
+  "relative_change_percent": {
+    "FrameTime": {
+      "mean_ms": 4.213537450356464,
+      "p95_ms": 5.691478332987754
+    },
+    "GPUTime": {
+      "mean_ms": 4.1651837231772015,
+      "p95_ms": 5.775860724147064
+    }
+  }
+}

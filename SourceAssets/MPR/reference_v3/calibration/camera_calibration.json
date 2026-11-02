@@ -1,0 +1,637 @@
+{
+  "schema_version": 1,
+  "reference": "D:\\CodexTemp\\output\\imagegen\\industrial-saas\\multiview\\ChatGPT 图像 2026年11月2日 15_56_24.png",
+  "reference_sha256": "44a622b96a9479a98e7bca9faa87f5c84a40c56e55373654bf4b32e30f3b04cb",
+  "image_dimensions_px": [
+    1728,
+    910
+  ],
+  "coordinate_frame": "CAD metres, +X east, +Y north, Z up; pixels origin top-left",
+  "roof_plane_z_m": 13.4,
+  "ground_plane_z_m": -1.2,
+  "intrinsic_matrix": [
+    [
+      1853.8489821113578,
+      0.0,
+      725.0139212145195
+    ],
+    [
+      0.0,
+      1853.8489821113578,
+      -19.04012764448214
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "world_to_cv_camera_rotation": [
+    [
+      0.9999841870223363,
+      -0.005184457804630864,
+      -0.002178784649617801
+    ],
+    [
+      -0.004581112261165297,
+      -0.5262656558258965,
+      -0.8503078694852761
+    ],
+    [
+      0.0032617657377574352,
+      0.8503044048430011,
+      -0.526281084582052
+    ]
+  ],
+  "camera_location_m": [
+    -15.303689884899336,
+    -812.9957153112907,
+    830.7060910203874
+  ],
+  "blender_camera": {
+    "location_m": [
+      -15.303689884899336,
+      -812.9957153112907,
+      830.7060910203874
+    ],
+    "rotation_euler_xyz_rad": [
+      1.016573838162138,
+      0.0021787863734405106,
+      -0.005184493335861025
+    ],
+    "rotation_euler_xyz_deg": [
+      58.2453904901057,
+      0.12483526365875573,
+      -0.29704958705853796
+    ],
+    "matrix_world": [
+      [
+        0.9999841870223363,
+        0.004581112261165297,
+        -0.0032617657377574352,
+        -15.303689884899336
+      ],
+      [
+        -0.005184457804630864,
+        0.5262656558258965,
+        -0.8503044048430011,
+        -812.9957153112907
+      ],
+      [
+        -0.002178784649617801,
+        0.8503078694852761,
+        0.526281084582052,
+        830.7060910203874
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "type": "PERSP",
+    "lens_mm": 38.62185379398662,
+    "sensor_width_mm": 36,
+    "sensor_fit": "HORIZONTAL",
+    "shift_x": 0.0804317585564123,
+    "shift_y": -0.2743287775720383,
+    "pixel_aspect": [
+      1,
+      1
+    ],
+    "clip_start": 0.1,
+    "clip_end": 10000
+  },
+  "roof_plane_homography_world_to_image": [
+    [
+      1.6573069127658824,
+      0.5315913157103114,
+      746.5495279323758
+    ],
+    [
+      -0.005837289794753694,
+      -0.8884930076447858,
+      422.4627978932434
+    ],
+    [
+      7.638203016417532e-06,
+      0.0007465465568657529,
+      1.0
+    ]
+  ],
+  "iterations": 141,
+  "fitting_method": "Normalized DLT roof homography initialization; multistart finite-difference Levenberg-Marquardt pinhole fit with square pixels; 16 roof corners + 4 visible wall-base checks.",
+  "limitations": [
+    "Manual pixel picks are approximate (typically 1-3px), and AI-generated reference need not obey a single exact perspective camera.",
+    "CAD main-building footprint and roof13.4m/ground-1.2m are preserved as the visual scale anchor; other exterior layout is free to follow the reference.",
+    "Wall-base points have 0.65 residual weight because lower edges are less certain; principal-point offsets have weak 200px prior, focal has weak log prior to regularize one-view ambiguity.",
+    "image_to_ground intersects a ray with a horizontal plane. To place a roof-derived footprint, use z=ground_z+estimated_height; using ground z for roof pixels shifts the building.",
+    "This is an art-reference best-fit camera, not photogrammetric survey accuracy. Reprojection residuals remain visible in the diagnostic overlay."
+  ],
+  "ground_plane_camera_homography_world_to_image": [
+    [
+      1.643862847303711,
+      0.5374537038925429,
+      746.1947941840816
+    ],
+    [
+      -0.007576245406148207,
+      -0.878358057065622,
+      439.766671634174
+    ],
+    [
+      2.8886651804750295e-06,
+      0.00075304142742123,
+      1.0
+    ]
+  ],
+  "ground_plane_camera_homography_image_to_world": [
+    [
+      0.8400450130047992,
+      -0.01698944876332655,
+      -619.3658222489328
+    ],
+    [
+      -0.006144193794338392,
+      -1.1402104997742066,
+      506.0113418718343
+    ],
+    [
+      2.2002236861425885e-06,
+      0.0008586748191397206,
+      1.0
+    ]
+  ],
+  "roof_plane_camera_homography_world_to_image": [
+    [
+      1.655125638245988,
+      0.5411360236907078,
+      746.2873294669977
+    ],
+    [
+      -0.007628153427718737,
+      -0.8843760549694136,
+      422.38845343849704
+    ],
+    [
+      2.908456632105735e-06,
+      0.0007582008287556117,
+      1.0
+    ]
+  ],
+  "roof_plane_camera_homography_image_to_world": [
+    [
+      0.8253015835158719,
+      -0.01692190638967717,
+      -608.7644968977777
+    ],
+    [
+      -0.006067755897546744,
+      -1.132451416490883,
+      482.86269175045715
+    ],
+    [
+      2.200223686142588e-06,
+      0.0008586748191397206,
+      1.0
+    ]
+  ],
+  "reprojection_error_px": {
+    "roof": {
+      "rmse": 2.012803999410821,
+      "mean": 1.8759433707154587,
+      "max": 3.423564149071615
+    },
+    "wall_base": {
+      "rmse": 3.002185752741977,
+      "mean": 2.679605000301446,
+      "max": 4.284896509498245
+    },
+    "all": {
+      "rmse": 2.245824528058401,
+      "mean": 2.0366756966326562,
+      "max": 4.284896509498245
+    }
+  },
+  "unconstrained_roof_homography_error_px": {
+    "rmse": 1.9823172714563677,
+    "max": 3.342338963071105
+  },
+  "correspondences": [
+    {
+      "id": "R00",
+      "world_m": [
+        -181.93004,
+        83.69038,
+        13.4
+      ],
+      "measured_pixel": [
+        458.0,
+        329.0
+      ],
+      "projected_pixel": [
+        461.4230963152993,
+        329.05659592735236
+      ],
+      "error_px": 3.423564149071615,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R01",
+      "world_m": [
+        -166.08044,
+        83.69038,
+        13.4
+      ],
+      "measured_pixel": [
+        488.0,
+        329.0
+      ],
+      "projected_pixel": [
+        486.08210091245104,
+        328.92858492780965
+      ],
+      "error_px": 1.9192282361816917,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R02",
+      "world_m": [
+        -166.08044,
+        74.54638,
+        13.4
+      ],
+      "measured_pixel": [
+        486.0,
+        339.0
+      ],
+      "projected_pixel": [
+        484.5876981441132,
+        338.7456481642948
+      ],
+      "error_px": 1.4350231316839401,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R03",
+      "world_m": [
+        166.78656,
+        74.54638,
+        13.4
+      ],
+      "measured_pixel": [
+        1004.0,
+        336.0
+      ],
+      "projected_pixel": [
+        1005.3675692901184,
+        336.03316638184054
+      ],
+      "error_px": 1.367971407654126,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R04",
+      "world_m": [
+        166.78656,
+        83.58878,
+        13.4
+      ],
+      "measured_pixel": [
+        1002.0,
+        327.0
+      ],
+      "projected_pixel": [
+        1003.4880150986935,
+        326.35079340222404
+      ],
+      "error_px": 1.6234710162290076,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R05",
+      "world_m": [
+        182.61076,
+        83.58878,
+        13.4
+      ],
+      "measured_pixel": [
+        1031.0,
+        327.0
+      ],
+      "projected_pixel": [
+        1028.0623671417204,
+        326.22321717479156
+      ],
+      "error_px": 3.038598092473352,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R06",
+      "world_m": [
+        182.61076,
+        -20.50042,
+        13.4
+      ],
+      "measured_pixel": [
+        1053.0,
+        444.0
+      ],
+      "projected_pixel": [
+        1053.2492795801968,
+        445.8183183465574
+      ],
+      "error_px": 1.8353261068623195,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R07",
+      "world_m": [
+        166.78656,
+        -20.50042,
+        13.4
+      ],
+      "measured_pixel": [
+        1026.0,
+        444.0
+      ],
+      "projected_pixel": [
+        1026.70703292011,
+        445.9617052838825
+      ],
+      "error_px": 2.085229764541951,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R08",
+      "world_m": [
+        166.78656,
+        -50.98042,
+        13.4
+      ],
+      "measured_pixel": [
+        1034.0,
+        484.0
+      ],
+      "projected_pixel": [
+        1034.2274065923268,
+        484.7023083336364
+      ],
+      "error_px": 0.7382077984746604,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R09",
+      "world_m": [
+        150.91156,
+        -50.98042,
+        13.4
+      ],
+      "measured_pixel": [
+        1006.0,
+        484.0
+      ],
+      "projected_pixel": [
+        1006.9579511983857,
+        484.85148555201397
+      ],
+      "error_px": 1.2816778627163217,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R10",
+      "world_m": [
+        150.91156,
+        -66.22042,
+        13.4
+      ],
+      "measured_pixel": [
+        1011.0,
+        506.0
+      ],
+      "projected_pixel": [
+        1010.5238927981405,
+        504.9311817419269
+      ],
+      "error_px": 1.1700643300489555,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R11",
+      "world_m": [
+        135.36676,
+        -66.22042,
+        13.4
+      ],
+      "measured_pixel": [
+        983.0,
+        506.0
+      ],
+      "projected_pixel": [
+        983.4945238882575,
+        505.0800019232412
+      ],
+      "error_px": 1.0444856807526086,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R12",
+      "world_m": [
+        135.36676,
+        -83.94962,
+        13.4
+      ],
+      "measured_pixel": [
+        987.0,
+        531.0
+      ],
+      "projected_pixel": [
+        987.3659312373662,
+        529.0659970312705
+      ],
+      "error_px": 1.9683173406579662,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R13",
+      "world_m": [
+        -166.08044,
+        -83.94962,
+        13.4
+      ],
+      "measured_pixel": [
+        458.0,
+        533.0
+      ],
+      "projected_pixel": [
+        455.166700466715,
+        532.0187073414658
+      ],
+      "error_px": 2.9984198383492404,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R14",
+      "world_m": [
+        -166.08044,
+        -93.09362,
+        13.4
+      ],
+      "measured_pixel": [
+        455.0,
+        544.0
+      ],
+      "projected_pixel": [
+        453.23708684264665,
+        544.6947672168967
+      ],
+      "error_px": 1.894878435690259,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "R15",
+      "world_m": [
+        -181.93004,
+        -93.09362,
+        13.4
+      ],
+      "measured_pixel": [
+        423.0,
+        544.0
+      ],
+      "projected_pixel": [
+        425.01817509339816,
+        544.8519579400887
+      ],
+      "error_px": 2.1906307400593223,
+      "kind": "roof_corner"
+    },
+    {
+      "id": "B15",
+      "world_m": [
+        -181.93004,
+        -93.09362,
+        -1.2
+      ],
+      "measured_pixel": [
+        423.0,
+        563.0
+      ],
+      "projected_pixel": [
+        427.2709194250278,
+        562.6541888347225
+      ],
+      "error_px": 4.284896509498245,
+      "kind": "wall_base"
+    },
+    {
+      "id": "B14",
+      "world_m": [
+        -166.08044,
+        -93.09362,
+        -1.2
+      ],
+      "measured_pixel": [
+        455.0,
+        562.0
+      ],
+      "projected_pixel": [
+        455.2831133332223,
+        562.4972720359602
+      ],
+      "error_px": 0.5722172989313286,
+      "kind": "wall_base"
+    },
+    {
+      "id": "B12",
+      "world_m": [
+        135.36676,
+        -83.94962,
+        -1.2
+      ],
+      "measured_pixel": [
+        987.0,
+        549.0
+      ],
+      "projected_pixel": [
+        985.5167263570986,
+        546.8346381458349
+      ],
+      "error_px": 2.624670009582021,
+      "kind": "wall_base"
+    },
+    {
+      "id": "B06",
+      "world_m": [
+        182.61076,
+        -20.50042,
+        -1.2
+      ],
+      "measured_pixel": [
+        1054.0,
+        462.0
+      ],
+      "projected_pixel": [
+        1051.0349145569153,
+        463.29772188760495
+      ],
+      "error_px": 3.23663618319419,
+      "kind": "wall_base"
+    }
+  ],
+  "mapping_roundtrip_checks": [
+    {
+      "pixel": [
+        400,
+        700
+      ],
+      "plane_z_m": -1.2,
+      "world_m": [
+        -184.30036972007463,
+        -183.8966463209821,
+        -1.2000000000000455
+      ],
+      "roundtrip_error_px": 9.374856803373542e-13
+    },
+    {
+      "pixel": [
+        900,
+        800
+      ],
+      "plane_z_m": -1.2,
+      "world_m": [
+        72.87682443085598,
+        -243.75744177262493,
+        -1.2000000000000455
+      ],
+      "roundtrip_error_px": 7.190186943645084e-13
+    },
+    {
+      "pixel": [
+        1100,
+        300
+      ],
+      "plane_z_m": 14,
+      "world_m": [
+        233.1392083535627,
+        107.61753510696667,
+        14.000000000000114
+      ],
+      "roundtrip_error_px": 8.276526715781663e-13
+    },
+    {
+      "pixel": [
+        864,
+        455
+      ],
+      "plane_z_m": -1.2,
+      "world_m": [
+        70.87678371663692,
+        -12.992276663015787,
+        -1.2000000000000455
+      ],
+      "roundtrip_error_px": 6.915300366811402e-13
+    }
+  ]
+}

@@ -183,12 +183,18 @@ def import_mesh(row,category):
     if row.get('lod_files'):
         for index,filename in enumerate(row['lod_files'],1):
             assert SM.import_lod(mesh,index,str(ROOT/filename))==index
-        SM.set_lod_screen_sizes(mesh,[1.,.15,.045])
-    elif row.get('instance_only') and row.get('triangles',0)>1000:
+        SM.set_lod_screen_sizes(mesh,row.get('lod_screen_sizes',[1.,.15,.045]))
+    elif not row.get('skip_auto_lods') and row.get('instance_only') and row.get('triangles',0)>1000:
         reduction=u.StaticMeshReductionOptions()
         reduction.auto_compute_lod_screen_size=False
         reduction.reduction_settings=[u.StaticMeshReductionSettings(percent_triangles=p,screen_size=s) for p,s in [(1.,1.),(.55,.12),(.24,.04)]]
         assert SM.set_lods(mesh,reduction)>=3
+    if row.get('full_precision_uvs'):
+        for index in range(SM.get_lod_count(mesh)):
+            settings=SM.get_lod_build_settings(mesh,index)
+            settings.set_editor_property('use_full_precision_u_vs',True)
+            settings.set_editor_property('recompute_tangents',True)
+            SM.set_lod_build_settings(mesh,index,settings)
     assert LIB.save_loaded_asset(mesh,only_if_is_dirty=False)
     MESHES[row['name']]=mesh
     result['meshes'].append(dict(name=row['name'],path=target,bounds_cm=actual,material_slots=len(slots),source_triangles=row.get('triangles'),lod_count=SM.get_lod_count(mesh)))
@@ -377,6 +383,7 @@ def run():
     record_successful_build(ROOT,result,ownership)
     write();print('MPR_SCENE_BUILT',result['actor_count'],result['instance_count'])
 
-try:run()
-except Exception:
-    result['success']=False;result['error']=traceback.format_exc();write();raise
+if __name__=='__main__':
+    try:run()
+    except Exception:
+        result['success']=False;result['error']=traceback.format_exc();write();raise

@@ -1,6 +1,7 @@
-# Preserve source/validation bytes across Windows checkouts and their SHA256 evidence.
-*.dxf -text
-*.fbx -text
-*.blend -text
-*.png -text
-*.zip -text
+# Preserve byte-level hashes in generated source manifests and native CSV evidence.
+scene_ownership.json -text whitespace=trailing-space,space-before-tab,cr-at-eol
+reference_v3/**/*.json -text whitespace=trailing-space,space-before-tab,cr-at-eol
+reference_v4/**/*.json -text whitespace=trailing-space,space-before-tab,cr-at-eol
+reference_v4/**/*.csv -text whitespace=trailing-space,space-before-tab,cr-at-eol
+# Retain the third-party notice verbatim, including its original trailing space.
+reference_v4/props/LICENSE-BlenderStudio.txt -text -whitespace

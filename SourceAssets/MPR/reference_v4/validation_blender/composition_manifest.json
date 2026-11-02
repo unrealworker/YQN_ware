@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "scope": "complete external appearance only, no interior",
+  "sources": {
+    "architecture": {
+      "manifest": "SourceAssets/MPR/reference_v4/architecture/reference_shell_manifest.json",
+      "manifest_sha256": "2bf64ba2eaa4dbdcaa6465f5f5505b8426e02a84c28115d81c47e4d09be9a859",
+      "blend": "SourceAssets/MPR/reference_v4/architecture/mpr_reference_shell.blend",
+      "blend_sha256": "6a0acc9200527dfd522439c576e65cd235a5cdada0198d2b437f3427513233b8"
+    },
+    "site": {
+      "manifest": "SourceAssets/MPR/reference_v4/site/manifest.json",
+      "manifest_sha256": "5e46303382748e1c3987a8a8a867dd4cf70be5dea497d17310625aa863cc5f91",
+      "blend": "SourceAssets/MPR/reference_v4/site/MPR_ReferenceSite.blend",
+      "blend_sha256": "5f0382d92ecb9e28ee0425a7277181b7c9ccc4d83704d1d0e518ebc454b8926b"
+    },
+    "context": {
+      "manifest": "SourceAssets/MPR/reference_v4/context/manifest.json",
+      "manifest_sha256": "65869c93594978a921854a1814ce6d3f6082d3003f9dc00e6fda0fce9a2a3880",
+      "blend": "SourceAssets/MPR/reference_v4/context/mpr4_reference_context.blend",
+      "blend_sha256": "b3fb7a8a268daaee99c7df6704c463b219917ab2d07765162f508ba113546768"
+    },
+    "props": {
+      "manifest": "SourceAssets/MPR/reference_v4/props/manifest.json",
+      "manifest_sha256": "f8758bddaa37abf35fc4e517de29eb93b3d49a2241f78694d60a3a8de36917b5",
+      "blend": "SourceAssets/MPR/reference_v4/props/MPR_ReferenceV4_Props.blend",
+      "blend_sha256": "41349cea38015471ede93b325301656a5dd18dd1023d49b9d19c2d092590b9c4"
+    }
+  },
+  "geometry": {
+    "architecture": {
+      "source_meshes": 62,
+      "static_partitions": 43
+    },
+    "site": {
+      "source_meshes": 25,
+      "static_partitions": 25
+    },
+    "context": {
+      "source_meshes": 30,
+      "static_partitions": 30
+    },
+    "props": {
+      "source_meshes": 7,
+      "static_partitions": 0
+    }
+  },
+  "instances": {
+    "architecture": 727,
+    "site": 567,
+    "context": 0
+  },
+  "reference_version": 4,
+  "reference_camera_calibration": "SourceAssets/MPR/reference_v3/calibration/camera_calibration.json",
+  "reference_camera_sha256": "7b62f124158d24b6019a9f2c6faf55c9134ef3654a9eaee25eb1b989d30b85fd",
+  "temporary_tree_proxy": false,
+  "temporary_proxy_tree_count": 0,
+  "source_models_pending_visual_review": false,
+  "temporary_vehicle_proxy_names": [],
+  "tree_scale_contract": "mpr_reference_catalog.load_catalog; geometry/scale identical for review and final",
+  "interim_components": [],
+  "output": "SourceAssets/MPR/reference_v4/MPR_ReferenceExterior.blend",
+  "mesh_datablocks": 125,
+  "visible_mesh_objects": 1392,
+  "total_manifest_instances": 1294,
+  "props_display_objects_imported": false,
+  "validation_boundary": "Blender source composition and optional rendered previews only; UE acceptance is separate."
+}

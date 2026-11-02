@@ -1,0 +1,505 @@
+{
+  "success": true,
+  "map_sha256": "75036468cbea7fbbe31216514417a21937441c84abb4082ad1b42ab20369a90f",
+  "reference_sha256": "44a622b96a9479a98e7bca9faa87f5c84a40c56e55373654bf4b32e30f3b04cb",
+  "calibration_sha256": "7b62f124158d24b6019a9f2c6faf55c9134ef3654a9eaee25eb1b989d30b85fd",
+  "runtime_report_sha256": "abb65808d2048166beff20991fe671905c503b14ce3e4d269febd4c95deacf2b",
+  "archive": {
+    "runtime_overscan.png": {
+      "source": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\runtime_overscan_1793629208569894300.png",
+      "sha256": "3422c8ead0f15b0a58859f7395ad106a7039e3a0116c4e6fe63e8895d8862544",
+      "bytes": 3927379
+    },
+    "runtime_calibrated_capture.json": {
+      "source": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\runtime_calibrated_capture.json",
+      "sha256": "abb65808d2048166beff20991fe671905c503b14ce3e4d269febd4c95deacf2b",
+      "bytes": 1192
+    },
+    "runtime_calibrated.png": {
+      "sha256": "6759a1a3193919e9a407154584a92ff7473e512fc6f5e73b76a0052064d9f372",
+      "bytes": 1934850
+    }
+  },
+  "overscan_size": [
+    2006,
+    1860
+  ],
+  "crop_xywh": [
+    278,
+    949,
+    1728,
+    910
+  ],
+  "crop_rgb_pixels_identical": true,
+  "comparison_file": "SourceAssets/MPR/reference_v4/validation/reference_vs_ue_runtime.png",
+  "comparison_sha256": "a0b7f5042f90214f4d67002def74fa17dfeff45a92af2af92e34bdcb6963b8d8",
+  "comparison_size": [
+    3488,
+    1084
+  ],
+  "comparison_image_rectangles_xywh": {
+    "reference": [
+      0,
+      96,
+      1728,
+      910
+    ],
+    "ue_runtime": [
+      1760,
+      96,
+      1728,
+      910
+    ]
+  },
+  "comparison_embedded_rgb_pixels_identical": true,
+  "projection_landmarks": 20,
+  "independent_projection_method": "Actual UE camera-manager location/rotation/FOV readback; UE camera axes and centered pinhole projection with exact overscan crop. Checks geometry projection, not image feature detection.",
+  "calibration_max_error_px": 0.04247733226799268,
+  "reference_landmark_rms_px": 2.24584720044627,
+  "reference_landmark_max_error_px": 4.267955193657826,
+  "live_ue_project_world_to_screen_max_error_px": 0.04249038296223203,
+  "live_ue_project_world_to_screen_reference_rms_px": 2.2458373502257194,
+  "landmarks": [
+    {
+      "id": "R00",
+      "world_m": [
+        -181.93004,
+        83.69038,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        461.4091724968864,
+        329.09672239007796
+      ],
+      "calibrated_px": [
+        461.4230963152993,
+        329.05659592735236
+      ],
+      "reference_measured_px": [
+        458.0,
+        329.0
+      ],
+      "calibration_error_px": 0.04247358861767372,
+      "reference_error_px": 3.4105442870998073
+    },
+    {
+      "id": "R01",
+      "world_m": [
+        -166.08044,
+        83.69038,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        486.0681771304244,
+        328.9687115478755
+      ],
+      "calibrated_px": [
+        486.08210091245104,
+        328.92858492780965
+      ],
+      "reference_measured_px": [
+        488.0,
+        329.0
+      ],
+      "calibration_error_px": 0.042473725335023804,
+      "reference_error_px": 1.9320762321015579
+    },
+    {
+      "id": "R02",
+      "world_m": [
+        -166.08044,
+        74.54638,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        484.5737742972183,
+        338.7857747889743
+      ],
+      "calibrated_px": [
+        484.5876981441132,
+        338.7456481642948
+      ],
+      "reference_measured_px": [
+        486.0,
+        339.0
+      ],
+      "calibration_error_px": 0.04247375095898134,
+      "reference_error_px": 1.4422247384905762
+    },
+    {
+      "id": "R03",
+      "world_m": [
+        166.78656,
+        74.54638,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        1005.3536462117279,
+        336.07329632941764
+      ],
+      "calibrated_px": [
+        1005.3675692901184,
+        336.03316638184054
+      ],
+      "reference_measured_px": [
+        1004.0,
+        336.0
+      ],
+      "calibration_error_px": 0.042476638336946246,
+      "reference_error_px": 1.3556291596271348
+    },
+    {
+      "id": "R04",
+      "world_m": [
+        166.78656,
+        83.58878,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        1003.4740920794443,
+        326.3909233238285
+      ],
+      "calibrated_px": [
+        1003.4880150986935,
+        326.35079340222404
+      ],
+      "reference_measured_px": [
+        1002.0,
+        327.0
+      ],
+      "calibration_error_px": 0.04247659441376635,
+      "reference_error_px": 1.5949676661727485
+    },
+    {
+      "id": "R05",
+      "world_m": [
+        182.61076,
+        83.58878,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        1028.0484441587323,
+        326.26334725319634
+      ],
+      "calibrated_px": [
+        1028.0623671417204,
+        326.22321717479156
+      ],
+      "reference_measured_px": [
+        1031.0,
+        327.0
+      ],
+      "calibration_error_px": 0.042476730665876095,
+      "reference_error_px": 3.042094533951041
+    },
+    {
+      "id": "R06",
+      "world_m": [
+        182.61076,
+        -20.50042,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        1053.2353558695495,
+        445.8584487583644
+      ],
+      "calibrated_px": [
+        1053.2492795801968,
+        445.8183183465574
+      ],
+      "reference_measured_px": [
+        1053.0,
+        444.0
+      ],
+      "calibration_error_px": 0.042477284164430126,
+      "reference_error_px": 1.8732923351141662
+    },
+    {
+      "id": "R07",
+      "world_m": [
+        166.78656,
+        -20.50042,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        1026.6931091702618,
+        446.00183552634076
+      ],
+      "calibrated_px": [
+        1026.70703292011,
+        445.9617052838825
+      ],
+      "reference_measured_px": [
+        1026.0,
+        444.0
+      ],
+      "calibration_error_px": 0.0424771370220574,
+      "reference_error_px": 2.1184300310420783
+    },
+    {
+      "id": "R08",
+      "world_m": [
+        166.78656,
+        -50.98042,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        1034.213482605846,
+        484.7424386800153
+      ],
+      "calibrated_px": [
+        1034.2274065923268,
+        484.7023083336364
+      ],
+      "reference_measured_px": [
+        1034.0,
+        484.0
+      ],
+      "calibration_error_px": 0.04247731276826887,
+      "reference_error_px": 0.7725218550834914
+    },
+    {
+      "id": "R09",
+      "world_m": [
+        150.91156,
+        -50.98042,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        1006.944027171618,
+        484.89161572440753
+      ],
+      "calibrated_px": [
+        1006.9579511983857,
+        484.85148555201397
+      ],
+      "reference_measured_px": [
+        1006.0,
+        484.0
+      ],
+      "calibration_error_px": 0.04247716160200937,
+      "reference_error_px": 1.298524509111737
+    },
+    {
+      "id": "R10",
+      "world_m": [
+        150.91156,
+        -66.22042,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        1010.5099686482449,
+        504.97131196606324
+      ],
+      "calibrated_px": [
+        1010.5238927981405,
+        504.9311817419269
+      ],
+      "reference_measured_px": [
+        1011.0,
+        506.0
+      ],
+      "calibration_error_px": 0.04247725084736821,
+      "reference_error_px": 1.139442757170182
+    },
+    {
+      "id": "R11",
+      "world_m": [
+        135.36676,
+        -66.22042,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        983.4805996984239,
+        505.120131974925
+      ],
+      "calibrated_px": [
+        983.4945238882575,
+        505.0800019232412
+      ],
+      "reference_measured_px": [
+        983.0,
+        506.0
+      ],
+      "calibration_error_px": 0.04247710101535207,
+      "reference_error_px": 1.0025686069663886
+    },
+    {
+      "id": "R12",
+      "world_m": [
+        135.36676,
+        -83.94962,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        987.352006899891,
+        529.106127142283
+      ],
+      "calibrated_px": [
+        987.3659312373662,
+        529.0659970312705
+      ],
+      "reference_measured_px": [
+        987.0,
+        531.0
+      ],
+      "calibration_error_px": 0.04247720546359045,
+      "reference_error_px": 1.9263081941289055
+    },
+    {
+      "id": "R13",
+      "world_m": [
+        -166.08044,
+        -83.94962,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        455.1527753427292,
+        532.0588340569789
+      ],
+      "calibrated_px": [
+        455.166700466715,
+        532.0187073414658
+      ],
+      "reference_measured_px": [
+        458.0,
+        533.0
+      ],
+      "calibration_error_px": 0.04247425544831648,
+      "reference_error_px": 2.998746668405573
+    },
+    {
+      "id": "R14",
+      "world_m": [
+        -166.08044,
+        -93.09362,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        453.22316163490154,
+        544.7348939383669
+      ],
+      "calibrated_px": [
+        453.23708684264665,
+        544.6947672168967
+      ],
+      "reference_measured_px": [
+        455.0,
+        544.0
+      ],
+      "calibration_error_px": 0.042474288536599285,
+      "reference_error_px": 1.9228165997656042
+    },
+    {
+      "id": "R15",
+      "world_m": [
+        -181.93004,
+        -93.09362,
+        13.4
+      ],
+      "projected_from_actual_camera_readback_px": [
+        425.0042498439457,
+        544.8920844815195
+      ],
+      "calibrated_px": [
+        425.01817509339816,
+        544.8519579400887
+      ],
+      "reference_measured_px": [
+        423.0,
+        544.0
+      ],
+      "calibration_error_px": 0.04247413212195675,
+      "reference_error_px": 2.193816801632311
+    },
+    {
+      "id": "B15",
+      "world_m": [
+        -181.93004,
+        -93.09362,
+        -1.2
+      ],
+      "projected_from_actual_camera_readback_px": [
+        427.2569940651017,
+        562.6943154162218
+      ],
+      "calibrated_px": [
+        427.2709194250278,
+        562.6541888347225
+      ],
+      "reference_measured_px": [
+        423.0,
+        563.0
+      ],
+      "calibration_error_px": 0.04247420619493985,
+      "reference_error_px": 4.267955193657826
+    },
+    {
+      "id": "B14",
+      "world_m": [
+        -166.08044,
+        -93.09362,
+        -1.2
+      ],
+      "projected_from_actual_camera_readback_px": [
+        455.26918801470356,
+        562.5373987961789
+      ],
+      "calibrated_px": [
+        455.2831133332223,
+        562.4972720359602
+      ],
+      "reference_measured_px": [
+        455.0,
+        562.0
+      ],
+      "calibration_error_px": 0.04247436146067395,
+      "reference_error_px": 0.601048794520503
+    },
+    {
+      "id": "B12",
+      "world_m": [
+        135.36676,
+        -83.94962,
+        -1.2
+      ],
+      "projected_from_actual_camera_readback_px": [
+        985.5028019034476,
+        546.8747682706637
+      ],
+      "calibrated_px": [
+        985.5167263570986,
+        546.8346381458349
+      ],
+      "reference_measured_px": [
+        987.0,
+        549.0
+      ],
+      "calibration_error_px": 0.042477256599922214,
+      "reference_error_px": 2.5996561395111413
+    },
+    {
+      "id": "B06",
+      "world_m": [
+        182.61076,
+        -20.50042,
+        -1.2
+      ],
+      "projected_from_actual_camera_readback_px": [
+        1051.020990731413,
+        463.3378523104782
+      ],
+      "calibrated_px": [
+        1051.0349145569153,
+        463.29772188760495
+      ],
+      "reference_measured_px": [
+        1054.0,
+        462.0
+      ],
+      "calibration_error_px": 0.04247733226799268,
+      "reference_error_px": 3.2656308773313154
+    }
+  ],
+  "limits": "Main-warehouse calibration landmarks confirm viewpoint/projection alignment, not pixel-perfect visual reconstruction, peripheral details, lighting, foliage, shadows or performance."
+}

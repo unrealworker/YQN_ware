@@ -1,0 +1,34 @@
+{
+  "success": true,
+  "map_sha256": "75036468cbea7fbbe31216514417a21937441c84abb4082ad1b42ab20369a90f",
+  "archives": {
+    "import_report.json": {
+      "source": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4_build.json",
+      "sha256": "0a507486c6f96c4540e938a0b8b49bb5e67e286858c353ee579045ab80060130",
+      "bytes": 145561
+    },
+    "reload_validation.json": {
+      "source": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\validation.json",
+      "sha256": "44800795626a6aa34f02f784af81e78b1038816acd150c85d8f12ad83b5ea523",
+      "bytes": 21321
+    },
+    "final_pipeline.json": {
+      "source": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\final_pipeline.json",
+      "sha256": "dff95c663d5e20a3c7bf54b57b3471b765cef35377a81e85a3eb969468c47886",
+      "bytes": 784
+    }
+  },
+  "verified_five_steps": [
+    "import",
+    "reload",
+    "performance",
+    "runtime_views",
+    "runtime_capture"
+  ],
+  "same_map_runtime_reports": [
+    "performance.json",
+    "runtime_calibrated_capture.json",
+    "runtime_views/capture_report.json"
+  ],
+  "limits": "Import/reload reports preserve native format and are byte-identical to the final pipeline sources; scene visuals are reviewed separately."
+}
