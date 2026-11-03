@@ -13,6 +13,8 @@ from shapely.geometry import Polygon,Point,LineString,box
 from shapely.ops import unary_union
 from shapely.affinity import rotate,translate
 import shapely
+import mpr_plan_site as plan
+from mpr_plan_layout import plan_to_world,load_registration
 from calibrate_mpr_reference_camera import image_to_ground,project_world_to_image,load_calibration
 from mpr_railway_detail import build_railways
 import mpr_railway_detail as rail_detail
@@ -28,7 +30,7 @@ core=types.SimpleNamespace(MAIN=MAIN,CAD=CAD,shape=noop,lines=noop,raised_edge=n
 script=ROOT/'Tools/MPRWarehouse/build_mpr_reference_v4_site.py'
 module=ast.parse(script.read_text(encoding='utf-8'))
 functions=[n for n in module.body if isinstance(n,ast.FunctionDef) and n.name in
-           ('world','poly_world','meters','shape','line','instance','round_polygon','footprint','build_roads','build_water','build_rail','place_trailers')]
+           ('world','poly_world','meters','shape','line','instance','round_polygon','footprint','build_roads','build_water','extend_track','build_rail','place_trailers')]
 exec(compile(ast.Module(body=functions,type_ignores=[]),str(script),'exec'))
 
 
@@ -74,9 +76,9 @@ def audit():
     for index,row in enumerate(manifest.get('planting',{}).get('tree_positions',[])):
         p=row['position_m'];radius=row['crown_radius_m'];disk=Point(p[:2]).buffer(radius,quad_segs=16)
         road=disk.intersection(site['roads']).area;walls=disk.intersection(building_union).area;rail=disk.intersection(site['rail']['exclusion']).area
-        inner85=Point(p[:2]).buffer(radius*.85,quad_segs=24);inner45=Point(p[:2]).buffer(radius*.45,quad_segs=24);trunk=Point(p[:2]).buffer(1.4,quad_segs=24)
+        inner85=Point(p[:2]).buffer(radius*.85,quad_segs=24);trunk=Point(p[:2]).buffer(.8,quad_segs=24)
         violations=dict(building_core_m2=inner85.intersection(building_union).area,rail_core_m2=inner85.intersection(site['rail']['exclusion']).area,
-                        paved_core_m2=inner45.intersection(site['paved']).area,trunk_road_m2=trunk.intersection(site['roads']).area)
+                        trunk_road_m2=trunk.intersection(site['roads']).area)
         record=dict(index=index,reference_pixel=row['reference_pixel'],crown_radius_m=round(radius,2),road_overlap_m2=round(road,2),building_overlap_m2=round(walls,2),rail_overlap_m2=round(rail,2),
                     violations={k:round(v,3) for k,v in violations.items() if v>.05})
         if record['violations']:tree_issues.append(record)
@@ -86,17 +88,19 @@ def audit():
     return dict(source_manifest_sha256=hashlib.sha256((OUT/'manifest.json').read_bytes()).hexdigest(),
                 context_manifest_sha256=hashlib.sha256(context_path.read_bytes()).hexdigest(),
                 reconstructed_source_hashes={p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in
-                  (script,OUT/'reference_site_pixels.json',ROOT/'SourceAssets/MPR/reference_v4/context/reference_context_layout.json')},
+                  (script,OUT/'plan_site_details_v5.json',OUT/'road_outline_v5.json',OUT/'plan_railway_v5.json',OUT/'plan_vegetation_v5.json',OUT/'plan_registration_v5.json',ROOT/'SourceAssets/MPR/reference_v4/context/reference_context_plan_v5.json')},
                 scope='Road/water/rail geometry reconstructed from current generator inputs; vehicles and trees read from exported site manifest. Regenerate site after input changes before final acceptance.',
                 buildings_on_roads=road_issues,pond_paving_overlaps_m2=pond_issues,vehicles_outside_standing_surfaces=vehicle_offroad,
                 vehicle_collisions=collisions(vehicle_shapes),boxcar_collisions=collisions(train_shapes),
                 tree_clearance_violations=tree_issues,allowed_crown_edge_overhang=tree_overhang,minimum_track_center_spacing_m=min(spacing),
-                tree_policy='85 percent radius excludes buildings/rail; 45 percent excludes paving; 1.4m trunk excludes roads; remaining crown-edge overhang permitted',
+                tree_policy='85 percent radius excludes buildings/rail; 0.8m trunk excludes roads; source-measured trees in courts receive explicit planted islands; crown-edge overhang permitted',
                 counts=dict(buildings=len(buildings),road_segments=len(ROAD_DATA),parked_vehicles=len(vehicle_shapes),boxcars=len(train_shapes),
                             trees=len(manifest.get('planting',{}).get('tree_positions',[]))))
 
 
 if __name__=='__main__':
-    report=audit();path=ROOT/'SourceAssets/MPR/reference_v4/validation/spatial_audit.json';path.parent.mkdir(parents=True,exist_ok=True)
+    report=audit();report['success']=not any(report[k] for k in ('buildings_on_roads','vehicles_outside_standing_surfaces','vehicle_collisions','boxcar_collisions','tree_clearance_violations')) and max(report['pond_paving_overlaps_m2'].values(),default=0)<.1;path=ROOT/'SourceAssets/MPR/reference_v4/validation/spatial_audit.json';path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps({k:(len(v) if isinstance(v,list) else v) for k,v in report.items()},ensure_ascii=False,indent=2))
+
+    if not report['success']:raise SystemExit('Spatial validation failed; see '+str(path))

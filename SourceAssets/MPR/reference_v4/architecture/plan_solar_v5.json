@@ -1,0 +1,1775 @@
+{
+  "schema_version": 1,
+  "status": "review_ready_pixels_only",
+  "review_ready": true,
+  "source_image": "SourceAssets/MPR/reference_v4/references/all-elements-outline-20261103.png",
+  "source_sha256": "d4741b2c6790b86e7b6c8f5365e135b44c17a1c3ccb420119ac3e5ad27ecddae",
+  "image_size": [
+    1728,
+    910
+  ],
+  "coordinate_frame": "New user plan pixels, origin top-left. Register with mpr_plan_layout.plan_to_world; never the old camera.",
+  "method": {
+    "tracing": "Manual review of all 16 source fields, explicit orthogonal polygon boundaries",
+    "morphology": "NONE",
+    "review_version": "orthogonal-fields-v2",
+    "cell_grid_policy": "Fill schematic grid-cell interiors and broken-stroke false holes; source grid is not a module inventory",
+    "preserved_white_areas": "Inter-field main aisles, large C/E-shaped setbacks, west U-shaped opening, major east branch setbacks",
+    "roof_equipment_excluded_components": [
+      3,
+      4,
+      8,
+      9,
+      20,
+      22,
+      34,
+      71
+    ],
+    "boundary_uncertainty_px": 1.5
+  },
+  "field_count": 16,
+  "interior_hole_count": 0,
+  "regions": [
+    {
+      "id": "PVField_01",
+      "source_component": 1,
+      "exterior_px": [
+        [
+          778,
+          401
+        ],
+        [
+          846,
+          401
+        ],
+        [
+          846,
+          410
+        ],
+        [
+          840,
+          410
+        ],
+        [
+          840,
+          417
+        ],
+        [
+          795,
+          417
+        ],
+        [
+          795,
+          410
+        ],
+        [
+          778,
+          410
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            778,
+            401
+          ],
+          [
+            846,
+            401
+          ],
+          [
+            846,
+            410
+          ],
+          [
+            840,
+            410
+          ],
+          [
+            840,
+            417
+          ],
+          [
+            795,
+            417
+          ],
+          [
+            795,
+            410
+          ],
+          [
+            778,
+            410
+          ]
+        ]
+      ],
+      "bbox_px": [
+        778,
+        401,
+        846,
+        417
+      ],
+      "area_px2": 927.0,
+      "manual_review_note": "Two-row north array; retain broad lower-left/right setback, remove cell-edge teeth.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_02",
+      "source_component": 2,
+      "exterior_px": [
+        [
+          851,
+          402
+        ],
+        [
+          923,
+          402
+        ],
+        [
+          923,
+          428
+        ],
+        [
+          851,
+          428
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            851,
+            402
+          ],
+          [
+            923,
+            402
+          ],
+          [
+            923,
+            428
+          ],
+          [
+            851,
+            428
+          ]
+        ]
+      ],
+      "bbox_px": [
+        851,
+        402,
+        923,
+        428
+      ],
+      "area_px2": 1872.0,
+      "manual_review_note": "Continuous rectangular grid; exclude north riser and regularize shallow top-cell gap.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_03",
+      "source_component": 6,
+      "exterior_px": [
+        [
+          928,
+          407
+        ],
+        [
+          943,
+          407
+        ],
+        [
+          943,
+          451
+        ],
+        [
+          928,
+          451
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            928,
+            407
+          ],
+          [
+            943,
+            407
+          ],
+          [
+            943,
+            451
+          ],
+          [
+            928,
+            451
+          ]
+        ]
+      ],
+      "bbox_px": [
+        928,
+        407,
+        943,
+        451
+      ],
+      "area_px2": 660.0,
+      "manual_review_note": "Continuous narrow rectangular north-east array.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_04",
+      "source_component": 15,
+      "exterior_px": [
+        [
+          828,
+          422
+        ],
+        [
+          846,
+          422
+        ],
+        [
+          846,
+          472
+        ],
+        [
+          800,
+          472
+        ],
+        [
+          800,
+          463
+        ],
+        [
+          816,
+          463
+        ],
+        [
+          816,
+          452
+        ],
+        [
+          800,
+          452
+        ],
+        [
+          800,
+          430
+        ],
+        [
+          828,
+          430
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            828,
+            422
+          ],
+          [
+            846,
+            422
+          ],
+          [
+            846,
+            472
+          ],
+          [
+            800,
+            472
+          ],
+          [
+            800,
+            463
+          ],
+          [
+            816,
+            463
+          ],
+          [
+            816,
+            452
+          ],
+          [
+            800,
+            452
+          ],
+          [
+            800,
+            430
+          ],
+          [
+            828,
+            430
+          ]
+        ]
+      ],
+      "bbox_px": [
+        800,
+        422,
+        846,
+        472
+      ],
+      "area_px2": 1900.0,
+      "manual_review_note": "E-shaped field; retain large upper-left and middle-left white setbacks, fill line-grid breaks within arms.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_05",
+      "source_component": 16,
+      "exterior_px": [
+        [
+          778,
+          433
+        ],
+        [
+          796,
+          433
+        ],
+        [
+          796,
+          471
+        ],
+        [
+          778,
+          471
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            778,
+            433
+          ],
+          [
+            796,
+            433
+          ],
+          [
+            796,
+            471
+          ],
+          [
+            778,
+            471
+          ]
+        ]
+      ],
+      "bbox_px": [
+        778,
+        433,
+        796,
+        471
+      ],
+      "area_px2": 684.0,
+      "manual_review_note": "Continuous west vertical strip; remove cell-edge cracks.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_06",
+      "source_component": 18,
+      "exterior_px": [
+        [
+          851,
+          442
+        ],
+        [
+          923,
+          442
+        ],
+        [
+          923,
+          462
+        ],
+        [
+          851,
+          462
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            851,
+            442
+          ],
+          [
+            923,
+            442
+          ],
+          [
+            923,
+            462
+          ],
+          [
+            851,
+            462
+          ]
+        ]
+      ],
+      "bbox_px": [
+        851,
+        442,
+        923,
+        462
+      ],
+      "area_px2": 1440.0,
+      "manual_review_note": "Continuous two-row field; former cross-shaped hole came from broken grid strokes, not a bounded clear roof opening.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_07",
+      "source_component": 25,
+      "exterior_px": [
+        [
+          930,
+          454
+        ],
+        [
+          944,
+          454
+        ],
+        [
+          944,
+          462
+        ],
+        [
+          992,
+          462
+        ],
+        [
+          992,
+          474
+        ],
+        [
+          998,
+          474
+        ],
+        [
+          998,
+          482
+        ],
+        [
+          944,
+          482
+        ],
+        [
+          944,
+          486
+        ],
+        [
+          960,
+          486
+        ],
+        [
+          960,
+          494
+        ],
+        [
+          944,
+          494
+        ],
+        [
+          944,
+          500
+        ],
+        [
+          930,
+          500
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            930,
+            454
+          ],
+          [
+            944,
+            454
+          ],
+          [
+            944,
+            462
+          ],
+          [
+            992,
+            462
+          ],
+          [
+            992,
+            474
+          ],
+          [
+            998,
+            474
+          ],
+          [
+            998,
+            482
+          ],
+          [
+            944,
+            482
+          ],
+          [
+            944,
+            486
+          ],
+          [
+            960,
+            486
+          ],
+          [
+            960,
+            494
+          ],
+          [
+            944,
+            494
+          ],
+          [
+            944,
+            500
+          ],
+          [
+            930,
+            500
+          ]
+        ]
+      ],
+      "bbox_px": [
+        930,
+        454,
+        998,
+        500
+      ],
+      "area_px2": 1780.0,
+      "manual_review_note": "East branching field; retain large branch setbacks, fill former enclosed narrow slot and grid-cell breaks.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_08",
+      "source_component": 28,
+      "exterior_px": [
+        [
+          801,
+          476
+        ],
+        [
+          846,
+          476
+        ],
+        [
+          846,
+          519
+        ],
+        [
+          801,
+          519
+        ],
+        [
+          801,
+          509
+        ],
+        [
+          830,
+          509
+        ],
+        [
+          830,
+          496
+        ],
+        [
+          801,
+          496
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            801,
+            476
+          ],
+          [
+            846,
+            476
+          ],
+          [
+            846,
+            519
+          ],
+          [
+            801,
+            519
+          ],
+          [
+            801,
+            509
+          ],
+          [
+            830,
+            509
+          ],
+          [
+            830,
+            496
+          ],
+          [
+            801,
+            496
+          ]
+        ]
+      ],
+      "bbox_px": [
+        801,
+        476,
+        846,
+        519
+      ],
+      "area_px2": 1558.0,
+      "manual_review_note": "Large C-shaped center field; preserve its clearly empty left opening, simplify small grid-cell protrusions.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_09",
+      "source_component": 29,
+      "exterior_px": [
+        [
+          778,
+          476
+        ],
+        [
+          797,
+          476
+        ],
+        [
+          797,
+          519
+        ],
+        [
+          778,
+          519
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            778,
+            476
+          ],
+          [
+            797,
+            476
+          ],
+          [
+            797,
+            519
+          ],
+          [
+            778,
+            519
+          ]
+        ]
+      ],
+      "bbox_px": [
+        778,
+        476,
+        797,
+        519
+      ],
+      "area_px2": 817.0,
+      "manual_review_note": "Continuous west vertical rectangular strip.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_10",
+      "source_component": 30,
+      "exterior_px": [
+        [
+          851,
+          476
+        ],
+        [
+          925,
+          476
+        ],
+        [
+          925,
+          505
+        ],
+        [
+          851,
+          505
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            851,
+            476
+          ],
+          [
+            925,
+            476
+          ],
+          [
+            925,
+            505
+          ],
+          [
+            851,
+            505
+          ]
+        ]
+      ],
+      "bbox_px": [
+        851,
+        476,
+        925,
+        505
+      ],
+      "area_px2": 2146.0,
+      "manual_review_note": "Continuous multirow grid; former long narrow internal hole is broken cell-grid ink.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_11",
+      "source_component": 33,
+      "exterior_px": [
+        [
+          713,
+          487
+        ],
+        [
+          768,
+          487
+        ],
+        [
+          768,
+          521
+        ],
+        [
+          751,
+          521
+        ],
+        [
+          751,
+          505
+        ],
+        [
+          728,
+          505
+        ],
+        [
+          728,
+          521
+        ],
+        [
+          713,
+          521
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            713,
+            487
+          ],
+          [
+            768,
+            487
+          ],
+          [
+            768,
+            521
+          ],
+          [
+            751,
+            521
+          ],
+          [
+            751,
+            505
+          ],
+          [
+            728,
+            505
+          ],
+          [
+            728,
+            521
+          ],
+          [
+            713,
+            521
+          ]
+        ]
+      ],
+      "bbox_px": [
+        713,
+        487,
+        768,
+        521
+      ],
+      "area_px2": 1502.0,
+      "manual_review_note": "Explicit U-shaped west array; preserve large open lower-center roof area; exclude top riser.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_12",
+      "source_component": 39,
+      "exterior_px": [
+        [
+          930,
+          504
+        ],
+        [
+          944,
+          504
+        ],
+        [
+          944,
+          510
+        ],
+        [
+          950,
+          510
+        ],
+        [
+          950,
+          504
+        ],
+        [
+          981,
+          504
+        ],
+        [
+          981,
+          511
+        ],
+        [
+          966,
+          511
+        ],
+        [
+          966,
+          530
+        ],
+        [
+          944,
+          530
+        ],
+        [
+          944,
+          549
+        ],
+        [
+          930,
+          549
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            930,
+            504
+          ],
+          [
+            944,
+            504
+          ],
+          [
+            944,
+            510
+          ],
+          [
+            950,
+            510
+          ],
+          [
+            950,
+            504
+          ],
+          [
+            981,
+            504
+          ],
+          [
+            981,
+            511
+          ],
+          [
+            966,
+            511
+          ],
+          [
+            966,
+            530
+          ],
+          [
+            944,
+            530
+          ],
+          [
+            944,
+            549
+          ],
+          [
+            930,
+            549
+          ]
+        ]
+      ],
+      "bbox_px": [
+        930,
+        504,
+        981,
+        549
+      ],
+      "area_px2": 1271.0,
+      "manual_review_note": "East lower branching field; retain large exterior steps and the top branch gap, remove cell-size teeth.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_13",
+      "source_component": 42,
+      "exterior_px": [
+        [
+          851,
+          509
+        ],
+        [
+          924,
+          509
+        ],
+        [
+          924,
+          518
+        ],
+        [
+          851,
+          518
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            851,
+            509
+          ],
+          [
+            924,
+            509
+          ],
+          [
+            924,
+            518
+          ],
+          [
+            851,
+            518
+          ]
+        ]
+      ],
+      "bbox_px": [
+        851,
+        509,
+        924,
+        518
+      ],
+      "area_px2": 657.0,
+      "manual_review_note": "Single narrow continuous horizontal field.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_14",
+      "source_component": 49,
+      "exterior_px": [
+        [
+          851,
+          522
+        ],
+        [
+          925,
+          522
+        ],
+        [
+          925,
+          571
+        ],
+        [
+          851,
+          571
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            851,
+            522
+          ],
+          [
+            925,
+            522
+          ],
+          [
+            925,
+            571
+          ],
+          [
+            851,
+            571
+          ]
+        ]
+      ],
+      "bbox_px": [
+        851,
+        522,
+        925,
+        571
+      ],
+      "area_px2": 3626.0,
+      "manual_review_note": "Continuous south-east array; regularize broken internal rows and shallow lower-edge cell crack.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_15",
+      "source_component": 51,
+      "exterior_px": [
+        [
+          778,
+          523
+        ],
+        [
+          846,
+          523
+        ],
+        [
+          846,
+          571
+        ],
+        [
+          778,
+          571
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            778,
+            523
+          ],
+          [
+            846,
+            523
+          ],
+          [
+            846,
+            571
+          ],
+          [
+            778,
+            571
+          ]
+        ]
+      ],
+      "bbox_px": [
+        778,
+        523,
+        846,
+        571
+      ],
+      "area_px2": 3264.0,
+      "manual_review_note": "Continuous south-center array; former upper-left hole is connected white grid-cell interiors, not an equipment cutout.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    },
+    {
+      "id": "PVField_16",
+      "source_component": 52,
+      "exterior_px": [
+        [
+          674,
+          529
+        ],
+        [
+          767,
+          529
+        ],
+        [
+          767,
+          571
+        ],
+        [
+          674,
+          571
+        ]
+      ],
+      "holes_px": [],
+      "rings_px": [
+        [
+          [
+            674,
+            529
+          ],
+          [
+            767,
+            529
+          ],
+          [
+            767,
+            571
+          ],
+          [
+            674,
+            571
+          ]
+        ]
+      ],
+      "bbox_px": [
+        674,
+        529,
+        767,
+        571
+      ],
+      "area_px2": 3906.0,
+      "manual_review_note": "Continuous south-west array; exclude top riser, fill internal cell-grid void and shallow bottom teeth.",
+      "orthogonal_boundary": true,
+      "grid_cell_interiors_filled": true
+    }
+  ],
+  "roof_fixtures": [
+    {
+      "id": "RoofFixture_01",
+      "source_component": 2,
+      "center_px": [
+        1002.857,
+        387.857
+      ],
+      "bbox_px": [
+        1001,
+        385,
+        1005,
+        390
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_02",
+      "source_component": 6,
+      "center_px": [
+        763.194,
+        404.258
+      ],
+      "bbox_px": [
+        760,
+        401,
+        768,
+        406
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_03",
+      "source_component": 11,
+      "center_px": [
+        1010.5,
+        409.143
+      ],
+      "bbox_px": [
+        1008,
+        408,
+        1013,
+        410
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_04",
+      "source_component": 12,
+      "center_px": [
+        961.643,
+        412.643
+      ],
+      "bbox_px": [
+        960,
+        410,
+        964,
+        414
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_05",
+      "source_component": 13,
+      "center_px": [
+        473.294,
+        414.147
+      ],
+      "bbox_px": [
+        470,
+        411,
+        478,
+        416
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_06",
+      "source_component": 14,
+      "center_px": [
+        545.097,
+        414.226
+      ],
+      "bbox_px": [
+        541,
+        411,
+        549,
+        417
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_07",
+      "source_component": 15,
+      "center_px": [
+        614.486,
+        414.114
+      ],
+      "bbox_px": [
+        611,
+        411,
+        619,
+        416
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_08",
+      "source_component": 16,
+      "center_px": [
+        680.382,
+        414.147
+      ],
+      "bbox_px": [
+        677,
+        411,
+        685,
+        416
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_09",
+      "source_component": 17,
+      "center_px": [
+        730.406,
+        414.281
+      ],
+      "bbox_px": [
+        727,
+        411,
+        735,
+        416
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_10",
+      "source_component": 26,
+      "center_px": [
+        469.625,
+        445.094
+      ],
+      "bbox_px": [
+        467,
+        441,
+        474,
+        448
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_11",
+      "source_component": 29,
+      "center_px": [
+        614.097,
+        449.871
+      ],
+      "bbox_px": [
+        611,
+        446,
+        618,
+        452
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_12",
+      "source_component": 30,
+      "center_px": [
+        730.424,
+        449.242
+      ],
+      "bbox_px": [
+        727,
+        446,
+        735,
+        451
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_13",
+      "source_component": 31,
+      "center_px": [
+        955.579,
+        447.421
+      ],
+      "bbox_px": [
+        953,
+        446,
+        958,
+        449
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_14",
+      "source_component": 32,
+      "center_px": [
+        489.457,
+        450.771
+      ],
+      "bbox_px": [
+        486,
+        447,
+        494,
+        453
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_15",
+      "source_component": 33,
+      "center_px": [
+        543.185,
+        450.148
+      ],
+      "bbox_px": [
+        540,
+        447,
+        547,
+        452
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_16",
+      "source_component": 34,
+      "center_px": [
+        679.615,
+        450.487
+      ],
+      "bbox_px": [
+        676,
+        447,
+        684,
+        453
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_17",
+      "source_component": 45,
+      "center_px": [
+        468.371,
+        484.0
+      ],
+      "bbox_px": [
+        465,
+        480,
+        473,
+        486
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_18",
+      "source_component": 47,
+      "center_px": [
+        506.0,
+        488.818
+      ],
+      "bbox_px": [
+        503,
+        485,
+        510,
+        491
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_19",
+      "source_component": 48,
+      "center_px": [
+        581.324,
+        488.811
+      ],
+      "bbox_px": [
+        578,
+        485,
+        586,
+        491
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_20",
+      "source_component": 49,
+      "center_px": [
+        613.342,
+        488.789
+      ],
+      "bbox_px": [
+        610,
+        485,
+        618,
+        491
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_21",
+      "source_component": 50,
+      "center_px": [
+        679.447,
+        488.684
+      ],
+      "bbox_px": [
+        676,
+        485,
+        684,
+        491
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_22",
+      "source_component": 56,
+      "center_px": [
+        826.875,
+        503.625
+      ],
+      "bbox_px": [
+        825,
+        502,
+        829,
+        505
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_23",
+      "source_component": 63,
+      "center_px": [
+        730.714,
+        520.143
+      ],
+      "bbox_px": [
+        730,
+        519,
+        732,
+        521
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_24",
+      "source_component": 64,
+      "center_px": [
+        744.385,
+        520.846
+      ],
+      "bbox_px": [
+        742,
+        519,
+        747,
+        522
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_25",
+      "source_component": 66,
+      "center_px": [
+        479.378,
+        526.784
+      ],
+      "bbox_px": [
+        476,
+        523,
+        484,
+        529
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_26",
+      "source_component": 67,
+      "center_px": [
+        612.263,
+        526.816
+      ],
+      "bbox_px": [
+        609,
+        523,
+        617,
+        529
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_27",
+      "source_component": 70,
+      "center_px": [
+        542.12,
+        527.04
+      ],
+      "bbox_px": [
+        539,
+        524,
+        546,
+        529
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_28",
+      "source_component": 90,
+      "center_px": [
+        534.136,
+        561.386
+      ],
+      "bbox_px": [
+        531,
+        557,
+        539,
+        564
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_29",
+      "source_component": 91,
+      "center_px": [
+        611.256,
+        561.667
+      ],
+      "bbox_px": [
+        608,
+        558,
+        616,
+        564
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    },
+    {
+      "id": "RoofFixture_30",
+      "source_component": 102,
+      "center_px": [
+        867.438,
+        581.906
+      ],
+      "bbox_px": [
+        865,
+        576,
+        871,
+        585
+      ],
+      "position_uncertainty_px": 1.5,
+      "type": "rooftop_vent_or_small_fixture",
+      "source_policy": "Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey"
+    }
+  ],
+  "roof_fixture_count": 30,
+  "validation": {
+    "clear_aisle_samples": [
+      {
+        "id": "west_vertical_pipe_not_panels",
+        "pixel": [
+          774,
+          500
+        ],
+        "clear": true
+      },
+      {
+        "id": "central_vertical_access",
+        "pixel": [
+          848,
+          500
+        ],
+        "clear": true
+      },
+      {
+        "id": "east_vertical_access",
+        "pixel": [
+          927,
+          500
+        ],
+        "clear": true
+      },
+      {
+        "id": "north_south_horizontal_access",
+        "pixel": [
+          880,
+          436
+        ],
+        "clear": true
+      },
+      {
+        "id": "middle_horizontal_access",
+        "pixel": [
+          880,
+          469
+        ],
+        "clear": true
+      },
+      {
+        "id": "south_horizontal_access",
+        "pixel": [
+          880,
+          520
+        ],
+        "clear": true
+      },
+      {
+        "id": "west_u_shaped_void",
+        "pixel": [
+          741,
+          512
+        ],
+        "clear": true
+      },
+      {
+        "id": "center_c_notch",
+        "pixel": [
+          812,
+          507
+        ],
+        "clear": true
+      },
+      {
+        "id": "far_south_clear_roof",
+        "pixel": [
+          800,
+          582
+        ],
+        "clear": true
+      },
+      {
+        "id": "left_device",
+        "pixel": [
+          732,
+          448
+        ],
+        "clear": true
+      }
+    ],
+    "all_aisles_clear": true,
+    "no_random_fill": true,
+    "source_grid_not_module_inventory": true
+  },
+  "limitations": [
+    "Grid cells are schematic artwork, not a physical panel count.",
+    "Manually interpreted orthogonal field edges imply about 1.5px boundary uncertainty.",
+    "Sampling should require a whole module to fit exterior minus holes to preserve aisles."
+  ]
+}

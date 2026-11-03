@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "reference": "SourceAssets/MPR/reference_v4/references/building-road-outline-20261103.png",
+  "reference_sha256": "b877ec8561c2106f4c50c9b2c3ca829d9b8453f897c257bdf04f8e6f4bfe3401",
+  "image_dimensions_px": [
+    1728,
+    910
+  ],
+  "coordinate_frame": "CAD metres; X east, Y north, Z up",
+  "scale_m_per_px": [
+    0.6306778323454697,
+    -0.7219854114638118
+  ],
+  "offset_m": [
+    -463.2201897826696,
+    353.88477728856947
+  ],
+  "anchors": {
+    "x": [
+      {
+        "pixel": 444.0,
+        "cad_m": -181.93004,
+        "label": "west wall",
+        "fitted_m": -183.19923222128102,
+        "error_m": -1.2691922212810312
+      },
+      {
+        "pixel": 473.0,
+        "cad_m": -166.08044,
+        "label": "southwest return",
+        "fitted_m": -164.90957508326244,
+        "error_m": 1.170864916737571
+      },
+      {
+        "pixel": 1022.0,
+        "cad_m": 182.61076,
+        "label": "east wall",
+        "fitted_m": 181.3325548744004,
+        "error_m": -1.2782051255996123
+      },
+      {
+        "pixel": 998.0,
+        "cad_m": 166.78656,
+        "label": "east step 1",
+        "fitted_m": 166.19628689810912,
+        "error_m": -0.5902731018908867
+      },
+      {
+        "pixel": 976.0,
+        "cad_m": 150.91156,
+        "label": "east step 2",
+        "fitted_m": 152.32137458650885,
+        "error_m": 1.409814586508844
+      },
+      {
+        "pixel": 950.0,
+        "cad_m": 135.36676,
+        "label": "east step 3",
+        "fitted_m": 135.9237509455266,
+        "error_m": 0.5569909455265929
+      }
+    ],
+    "y": [
+      {
+        "pixel": 385.0,
+        "cad_m": 74.54638,
+        "label": "north long wall",
+        "fitted_m": 75.92039387500193,
+        "error_m": 1.3740138750019355
+      },
+      {
+        "pixel": 375.0,
+        "cad_m": 83.58878,
+        "label": "northeast return",
+        "fitted_m": 83.14024798964005,
+        "error_m": -0.4485320103599548
+      },
+      {
+        "pixel": 523.0,
+        "cad_m": -20.50042,
+        "label": "east step 1",
+        "fitted_m": -23.713592907004113,
+        "error_m": -3.2131729070041146
+      },
+      {
+        "pixel": 559.0,
+        "cad_m": -50.98042,
+        "label": "east step 2",
+        "fitted_m": -49.70506771970133,
+        "error_m": 1.2753522802986694
+      },
+      {
+        "pixel": 581.0,
+        "cad_m": -66.22042,
+        "label": "east step 3",
+        "fitted_m": -65.58874677190516,
+        "error_m": 0.6316732280948401
+      },
+      {
+        "pixel": 607.0,
+        "cad_m": -83.94962,
+        "label": "south long wall",
+        "fitted_m": -84.36036746996427,
+        "error_m": -0.4107474699642779
+      },
+      {
+        "pixel": 618.0,
+        "cad_m": -93.09362,
+        "label": "southwest return",
+        "fitted_m": -92.30220699606622,
+        "error_m": 0.7914130039337834
+      }
+    ]
+  },
+  "max_anchor_error_m": 3.2131729070041146,
+  "policy": "Separate X/Y scale, zero XY shear. Main CAD shell/interior unchanged. Regularize rotated building footprints; no bilinear mesh warping.",
+  "source_limitations": [
+    "Diagram is not a survey or an isotropic plan.",
+    "NW CAD return is absent from the diagram and is excluded from fitting.",
+    "Main CAD doors and shell are authoritative at interior interfaces."
+  ]
+}

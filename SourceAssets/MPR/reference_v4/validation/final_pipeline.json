@@ -1,32 +1,74 @@
 [
   {
-    "report": "Saved/MPR/reference_v4_build.json",
     "name": "import",
-    "elapsed_seconds": 143.2441862,
+    "report": "Saved/MPR/reference_v4_build.json",
+    "sha256": "388d30ec095ad1b24269510a77634b1a8a7b5e9ec328440e69913798ce314b9f",
     "success": true
   },
   {
+    "name": "reload",
     "report": "Saved/MPR/reference_v4/validation.json",
-    "elapsed_seconds": 49.4434391,
-    "success": true,
-    "name": "reload"
+    "sha256": "8466ccac36df413f1752f6edbc9816688801bd21002e3d17daa821759a96d26d",
+    "success": true
   },
   {
+    "name": "performance",
     "report": "Saved/MPR/performance.json",
-    "elapsed_seconds": 76.5794213,
-    "success": true,
-    "name": "performance"
+    "sha256": "865726d35d57c539a49bb569e502b1855dfbd2f3a998381a77187de5d7662793",
+    "success": true
   },
   {
+    "name": "runtime_views",
     "report": "Saved/MPR/reference_v4/runtime_views/capture_report.json",
-    "elapsed_seconds": 49.4583489,
-    "success": true,
-    "name": "runtime_views"
+    "sha256": "d9ca7df2be9e5e22c8234e40ff7d6cda11f7be3bcb35fbead7a3319a8ed719d8",
+    "success": true
   },
   {
+    "name": "plan_views",
+    "report": "Saved/MPR/road_v5/runtime_views/capture_report.json",
+    "sha256": "e5f64299490b52a27fb37b643cda0f277549d638b558ab7ba32118b29895585b",
+    "success": true
+  },
+  {
+    "name": "runtime_capture",
     "report": "Saved/MPR/reference_v4/runtime_calibrated_capture.json",
-    "elapsed_seconds": 34.2559041,
-    "success": true,
-    "name": "runtime_capture"
+    "sha256": "a4c3c9d3608338fcdf1438cd514ae58644785e94a8f3289c103cbb0e528e535f",
+    "success": true
+  },
+  {
+    "name": "blender",
+    "report": "SourceAssets/MPR/reference_v4/validation_blender/composition_validation.json",
+    "sha256": "0b53b4332038eb9afbfddda46d2cc152c4f5b1aa083d83b87a960aae326080c4",
+    "success": true
+  },
+  {
+    "name": "package_dependencies",
+    "report": "SourceAssets/MPR/reference_v4/validation/package_dependencies.json",
+    "sha256": "97754ecd75175bde27e727cbceb4ba6a626b609228d7a3e1f63c618c80ca0059",
+    "success": true
+  },
+  {
+    "name": "spatial_audit",
+    "report": "SourceAssets/MPR/reference_v4/validation/spatial_audit.json",
+    "sha256": "17a93c85670673c6ccce81a70116fa44650611e1127b781eb5b1bed2484bce87",
+    "success": true
+  },
+  {
+    "name": "context_geometry",
+    "report": "Saved/MPR/road_v5/context_geometry_validation.json",
+    "sha256": "4bab9cd9c64e44e11af88c5022e80ecde9def6b452217e9496a3ee0535f5c44d",
+    "success": true
+  },
+  {
+    "name": "site_fbx",
+    "report": "SourceAssets/MPR/reference_v4/validation_blender/site_fbx_validation.json",
+    "sha256": "e7fbada6f3070acdb1197892b5f31666cba694a65711dc013cf89663e30ff9a0",
+    "success": true
+  },
+  {
+    "name": "road_smoothing",
+    "report": "Saved/MPR/road_v5/road_smoothing_review.json",
+    "sha256": "c2beaa7152cb4e53f5fc9919e9a0b55607a6e5cdf948113afab99d0981559d12",
+    "success": true
   }
 ]

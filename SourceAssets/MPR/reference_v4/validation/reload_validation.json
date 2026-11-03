@@ -1,0 +1,1285 @@
+{
+  "success": true,
+  "map": "/Game/Maps/MPR_CAD_Warehouse",
+  "reload_verified": true,
+  "preservation": {
+    "success": true,
+    "protected_actors": 136,
+    "interior_actors": 136,
+    "protected_digest": "4f04d58a0e87fc58ebd1153eed4436b8f1e481a3a0572fac084113f013dbbbab",
+    "protected_assets": 45,
+    "new_exterior_actors": 238
+  },
+  "map_sha256": "089c1b196d96efeae9da4c24073681022736d6e5e4acc3a899f3b7fa7eab97b2",
+  "source_manifest_hashes": {
+    "Architecture": "81ae4862e40afe31d146c65c5570cd7a04fae22611a9255230869f5fe20d8598",
+    "Props": "f8758bddaa37abf35fc4e517de29eb93b3d49a2241f78694d60a3a8de36917b5",
+    "Site": "f0aae8a34a31d574c76f3ed69ff9075cca4598e0b01cab38ecf3d0afe12415ed",
+    "Context": "305d0f9a641453a712c7b86aaf9f04899b4740861013e24e99b076cd14dd9ca3"
+  },
+  "mesh_count": 124,
+  "mesh_audit": {
+    "SM_MPR4_Facade_00": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 312,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_00": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_01": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 216,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_01": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_02": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 10452,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_02": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_03": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 216,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_03": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_04": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 312,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_04": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_05": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 1752,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_05": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_06": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 312,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_06": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_07": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 504,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_07": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_08": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 312,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_08": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_09": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 312,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_09": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_10": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 312,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_10": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_11": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 312,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_11": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_12": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 10188,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_12": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_13": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 216,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_13": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_14": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 312,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_14": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Facade_15": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 2808,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofEdge_15": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofSkin_00": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 112,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofSkin_01": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 96,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofSkin_02": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 94,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofSkin_03": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 130,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_DockShelter": {
+      "lods": 1,
+      "slots": 4,
+      "source_triangles": 340,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RollerDock": {
+      "lods": 3,
+      "slots": 4,
+      "source_triangles": 1544,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RollerDriveIn": {
+      "lods": 3,
+      "slots": 4,
+      "source_triangles": 1984,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_DockLeveller": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 364,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Bollard": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 208,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_WallLamp": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 112,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_DockNumberPlate": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 44,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Digit_0": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 72,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Digit_1": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 24,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Digit_2": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 60,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Digit_3": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 60,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Digit_4": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 48,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Digit_5": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 60,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Digit_6": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 72,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Digit_7": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 36,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Digit_8": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 84,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Digit_9": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 72,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_OfficeGlazing_West": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 840,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_OfficeGlazing_East": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 504,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_SolarBank_00_0": {
+      "lods": 2,
+      "slots": 2,
+      "source_triangles": 12876,
+      "category": "Architecture",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_SolarBank_01_0": {
+      "lods": 2,
+      "slots": 2,
+      "source_triangles": 13494,
+      "category": "Architecture",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_SolarBank_01_1": {
+      "lods": 2,
+      "slots": 2,
+      "source_triangles": 12420,
+      "category": "Architecture",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_SolarBank_02_0": {
+      "lods": 2,
+      "slots": 2,
+      "source_triangles": 18486,
+      "category": "Architecture",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_SolarBank_02_1": {
+      "lods": 2,
+      "slots": 2,
+      "source_triangles": 14064,
+      "category": "Architecture",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofLight": {
+      "lods": 1,
+      "slots": 4,
+      "source_triangles": 144,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_RoofHVAC": {
+      "lods": 1,
+      "slots": 5,
+      "source_triangles": 504,
+      "category": "Architecture",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Tree_Oak": {
+      "lods": 1,
+      "slots": 4,
+      "source_triangles": 949999,
+      "category": "Props",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Trailer_White": {
+      "lods": 3,
+      "slots": 8,
+      "source_triangles": 7988,
+      "category": "Props",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Trailer_Blue": {
+      "lods": 3,
+      "slots": 8,
+      "source_triangles": 7988,
+      "category": "Props",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Trailer_Coral": {
+      "lods": 3,
+      "slots": 8,
+      "source_triangles": 7988,
+      "category": "Props",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Car_0": {
+      "lods": 1,
+      "slots": 7,
+      "source_triangles": 964,
+      "category": "Props",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Car_1": {
+      "lods": 1,
+      "slots": 7,
+      "source_triangles": 964,
+      "category": "Props",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_FreightBoxcar": {
+      "lods": 3,
+      "slots": 5,
+      "source_triangles": 5272,
+      "category": "Props",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_Roads": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 10311,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_Courts": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 732,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_RaisedCurbs": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 79467,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_RoadEdges": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 36100,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_RoadCenter": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 6444,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_CourtSeams": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 640,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_ParkingBayLines": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 60,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_RetentionPond": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 16,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_RetentionBank": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 101,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_PondWalk": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 468,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_RailYardContinuousBallast": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 528,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_Near_RailBed": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 2705,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_Far_E_RailBed": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 12116,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_Far_S_RailBed": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 2403,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_Far_E_Rails": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 22196,
+      "category": "Site",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_Near_Rails": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 16608,
+      "category": "Site",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_Far_S_Rails": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 3360,
+      "category": "Site",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_Far_E_Sleepers": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 18742,
+      "category": "Site",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_Near_Sleepers": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 11772,
+      "category": "Site",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_Far_S_Sleepers": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 7452,
+      "category": "Site",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_TrailerStands": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 208,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_DockApronInfill": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 389,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_FarGround": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 2,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_ContinuousTerrain": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 12469,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_PlanTreeIslands": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 1466,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_PlanTreeIslandCurbs": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 13800,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-3_2": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 3582,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-2_2": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 3060,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-4_2": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 378,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-3_1": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 12078,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-2_1": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 6606,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-4_1": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 792,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-3_0": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 6570,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-2_0": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 3960,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-3_-1": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 1962,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-2_-1": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 1584,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-4_-1": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 378,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-3_-2": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 8262,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-4_-2": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 756,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-2_-2": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 1134,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_Houses_-3_-3": {
+      "lods": 2,
+      "slots": 5,
+      "source_triangles": 378,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_northwest_l_office": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 232,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_north_office_warehouse": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 72,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_neighbor_warehouse": {
+      "lods": 1,
+      "slots": 5,
+      "source_triangles": 2404,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_west_workshop_small_01": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 72,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_west_workshop_small_02": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 72,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_west_workshop_annex": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 152,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_west_detached_industrial": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 72,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_east_industrial": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 72,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_rail_service_shed_01": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 156,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_rail_service_shed_02": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 156,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_rail_service_shed_03": {
+      "lods": 1,
+      "slots": 3,
+      "source_triangles": 156,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_TankField": {
+      "lods": 2,
+      "slots": 3,
+      "source_triangles": 5976,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_TankPads": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 1683,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Context_TankPipes": {
+      "lods": 1,
+      "slots": 2,
+      "source_triangles": 5088,
+      "category": "Context",
+      "nanite_enabled": true,
+      "nanite_max_edge_length_factor": 0.0
+    }
+  },
+  "exterior_instances": 1202,
+  "instance_world_transform_audit": {
+    "SM_MPR4_WallLamp": {
+      "count": 97,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_RollerDriveIn": {
+      "count": 2,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_Bollard": {
+      "count": 148,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_DockNumberPlate": {
+      "count": 74,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_Digit_0": {
+      "count": 16,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_Digit_1": {
+      "count": 18,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_DockShelter": {
+      "count": 72,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_RollerDock": {
+      "count": 72,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_DockLeveller": {
+      "count": 72,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_Digit_2": {
+      "count": 18,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_Digit_3": {
+      "count": 18,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_Digit_4": {
+      "count": 18,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_Digit_5": {
+      "count": 17,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_Digit_6": {
+      "count": 17,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_Digit_7": {
+      "count": 12,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_Digit_8": {
+      "count": 7,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_Digit_9": {
+      "count": 7,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_RoofLight": {
+      "count": 29,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 0.0
+      }
+    },
+    "SM_MPR4_Car_0": {
+      "count": 10,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_Car_1": {
+      "count": 15,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 4.440892098500626e-16
+      }
+    },
+    "SM_MPR4_FreightBoxcar": {
+      "count": 32,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 6.830189170012753e-06,
+        "scale": 7.771561172376096e-16
+      }
+    },
+    "SM_MPR4_Trailer_White": {
+      "count": 26,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 2.220446049250313e-16
+      }
+    },
+    "SM_MPR4_Trailer_Blue": {
+      "count": 15,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 2.220446049250313e-16
+      }
+    },
+    "SM_MPR4_Trailer_Coral": {
+      "count": 11,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 2.220446049250313e-16
+      }
+    },
+    "SM_MPR4_Tree_Oak": {
+      "count": 379,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 1.5080649355333733e-05,
+        "scale": 1.3322676295501878e-15
+      }
+    }
+  },
+  "static_identity_actors": 99,
+  "transform_tolerances": {
+    "position_cm": 0.5,
+    "rotation_deg": 0.05,
+    "scale": 0.0001
+  },
+  "captures": [
+    {
+      "name": "01-overall",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\01-overall.png",
+      "bytes": 2234860,
+      "sha256": "cadd973f2d3ceebe563b18510da9b566f66b3e7bbf05ccfc641a0fb9c136cc37"
+    },
+    {
+      "name": "02-yard-corner",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\02-yard-corner.png",
+      "bytes": 2343268,
+      "sha256": "e9fabee095023589500f75774c718db3ba299e360269aa34e158dead728a71a6"
+    },
+    {
+      "name": "03-roof",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\03-roof.png",
+      "bytes": 1965777,
+      "sha256": "bba02d2231eb468bd357857918cd43664e767feeb5865a45ea05d2055f8e3416"
+    },
+    {
+      "name": "04-docks",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\04-docks.png",
+      "bytes": 2082725,
+      "sha256": "2d4667ed87979675c97175f2e42cb4c81578a2e2b1e74685861128aebd80cfa5"
+    },
+    {
+      "name": "05-yard",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\05-yard.png",
+      "bytes": 1711952,
+      "sha256": "3c5d8cfabbb621ad9d65038678624a5cb7ef3eb17890750a37e59002393851d9"
+    },
+    {
+      "name": "06-pond",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\06-pond.png",
+      "bytes": 2067823,
+      "sha256": "064384bb923ba839b694e45e960820d889c5c36fe6d7ad29bd9254de11b3b307"
+    },
+    {
+      "name": "07-railway",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\07-railway.png",
+      "bytes": 2287860,
+      "sha256": "17533ca38c7f5910aa3ca5008e0e02bf3414aca6aa76e8aa75275e9cb613c546"
+    },
+    {
+      "name": "08-interior-preserved",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\08-interior-preserved.png",
+      "bytes": 2376885,
+      "sha256": "12d0c2802a17d23ceca0d124c06a1929c52ea2f226e4345fee220f8117a9005e"
+    }
+  ],
+  "preservation_after_capture": {
+    "success": true,
+    "protected_actors": 136,
+    "interior_actors": 136,
+    "protected_digest": "4f04d58a0e87fc58ebd1153eed4436b8f1e481a3a0572fac084113f013dbbbab",
+    "protected_assets": 45,
+    "new_exterior_actors": 238
+  },
+  "error": null,
+  "elapsed_seconds": 31.51600000000326,
+  "map_saved_by_validator": false
+}

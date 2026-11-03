@@ -1,0 +1,110 @@
+{
+  "status": "passed",
+  "input_sha256": {
+    "Tools/MPRWarehouse/mpr_plan_site.py": "1ed5ec6f87e24b7111a7bc59ee58409d705278a8bbb66b31acdd09a221bebb45",
+    "SourceAssets/MPR/reference_v4/site/road_outline_v5.json": "a1593d2ae7d3194f1f68ade7a49a62798846a72db0b3b387dee7c3f5359033b7",
+    "SourceAssets/MPR/reference_v4/site/plan_landscape_islands_v5.json": "1f54750c8c7413d88bebf27b9c18f2a60233bb4d6a5567248df7c3a402281855",
+    "SourceAssets/MPR/reference_v4/site/plan_registration_v5.json": "0abb1c238b01a6aee09d920d9746a44ab8ba25e1d8fbb0637355812c41861a21",
+    "SourceAssets/MPR/reference_v4/site/manifest.json": "f0aae8a34a31d574c76f3ed69ff9075cca4598e0b01cab38ecf3d0afe12415ed",
+    "SourceAssets/MPR/reference_v4/context/manifest.json": "305d0f9a641453a712c7b86aaf9f04899b4740861013e24e99b076cd14dd9ca3",
+    "SourceAssets/MPR/reference_v4/props/manifest.json": "f8758bddaa37abf35fc4e517de29eb93b3d49a2241f78694d60a3a8de36917b5",
+    "SourceAssets/MPR/mpr_cad_layout.json": "004f3923f292e0a60e22d677ff542e037a6cf248f6a27c348c068ecac4d9f349"
+  },
+  "scope": "Shared mathematical road source only; no Blender/UE rebuild or render. Old exported tree placements are checked explicitly.",
+  "algorithm": "Quadratic corner fillets, maximum bidirectional boundary distance 0.6px; protected image edges and annotated portals; landscape islands subtracted after smoothing.",
+  "polygons": [
+    {
+      "id": "region_002",
+      "name": "WestAndCampusRoads",
+      "valid": true,
+      "topology_before": {
+        "components": 1,
+        "holes": 14
+      },
+      "topology_after": {
+        "components": 1,
+        "holes": 14
+      },
+      "boundary_hausdorff_px": 0.6000000000000495,
+      "protected_area_change_px2": 0.0,
+      "before_turns": {
+        "count": 859,
+        "turn_p95_deg": 61.79316879122475,
+        "corners_over_30deg": 233,
+        "max_turn_deg": 179.88186468075182
+      },
+      "after_turns": {
+        "count": 7651,
+        "turn_p95_deg": 7.2126110534254915,
+        "corners_over_30deg": 7,
+        "max_turn_deg": 179.0549385383908
+      }
+    },
+    {
+      "id": "region_022",
+      "name": "EastRailLocalRoads",
+      "valid": true,
+      "topology_before": {
+        "components": 1,
+        "holes": 0
+      },
+      "topology_after": {
+        "components": 1,
+        "holes": 0
+      },
+      "boundary_hausdorff_px": 0.6000000000000241,
+      "protected_area_change_px2": 0.0,
+      "before_turns": {
+        "count": 216,
+        "turn_p95_deg": 45.821222585575754,
+        "corners_over_30deg": 35,
+        "max_turn_deg": 154.64624119165484
+      },
+      "after_turns": {
+        "count": 1936,
+        "turn_p95_deg": 5.279585873433098,
+        "corners_over_30deg": 1,
+        "max_turn_deg": 58.12310342432893
+      }
+    }
+  ],
+  "world_topology_before": {
+    "components": 2,
+    "holes": 15
+  },
+  "world_topology_after": {
+    "components": 2,
+    "holes": 15
+  },
+  "entrances": [
+    {
+      "id": "NeighborEntranceWest",
+      "is_open_entrance": true,
+      "local_geometry_change_px2": 0.0
+    },
+    {
+      "id": "NeighborEntranceEast",
+      "is_open_entrance": true,
+      "local_geometry_change_px2": 0.0
+    },
+    {
+      "id": "NorthBlockEntrance",
+      "is_open_entrance": true,
+      "local_geometry_change_px2": 0.0
+    },
+    {
+      "id": "NorthRoadBoundaryBreak",
+      "is_open_entrance": false,
+      "local_geometry_change_px2": 0.0
+    }
+  ],
+  "unchanged_road_extension_count": 25,
+  "building_overlap_m2": 0.0,
+  "island_overlap_m2": 0.0,
+  "vehicle_road_contacts": [],
+  "road_paint_outside_m2": 0.0,
+  "west_island_continuous_5m_road_corridor": true,
+  "west_corridor_min_edge_distance_m": 7.500826050447394,
+  "old_manifest_tree_contacts": [],
+  "required_next_step": "Rebuild site to refit trees and regenerate asphalt/kerbs/paint together, run spatial audit and compare the same UE close view."
+}

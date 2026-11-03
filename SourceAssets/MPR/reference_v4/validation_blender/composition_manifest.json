@@ -4,21 +4,21 @@
   "sources": {
     "architecture": {
       "manifest": "SourceAssets/MPR/reference_v4/architecture/reference_shell_manifest.json",
-      "manifest_sha256": "2bf64ba2eaa4dbdcaa6465f5f5505b8426e02a84c28115d81c47e4d09be9a859",
+      "manifest_sha256": "81ae4862e40afe31d146c65c5570cd7a04fae22611a9255230869f5fe20d8598",
       "blend": "SourceAssets/MPR/reference_v4/architecture/mpr_reference_shell.blend",
-      "blend_sha256": "6a0acc9200527dfd522439c576e65cd235a5cdada0198d2b437f3427513233b8"
+      "blend_sha256": "5fc8a66319ebcda33d5322e76c55bb4c1efbc2b2e4ad82a7cd975cbc8f0c1b59"
     },
     "site": {
       "manifest": "SourceAssets/MPR/reference_v4/site/manifest.json",
-      "manifest_sha256": "5e46303382748e1c3987a8a8a867dd4cf70be5dea497d17310625aa863cc5f91",
+      "manifest_sha256": "f0aae8a34a31d574c76f3ed69ff9075cca4598e0b01cab38ecf3d0afe12415ed",
       "blend": "SourceAssets/MPR/reference_v4/site/MPR_ReferenceSite.blend",
-      "blend_sha256": "5f0382d92ecb9e28ee0425a7277181b7c9ccc4d83704d1d0e518ebc454b8926b"
+      "blend_sha256": "1a9d02256de3cbcf8695be57396a906eb4d4c4cfa6b8d5bd3f638401944d04b1"
     },
     "context": {
       "manifest": "SourceAssets/MPR/reference_v4/context/manifest.json",
-      "manifest_sha256": "65869c93594978a921854a1814ce6d3f6082d3003f9dc00e6fda0fce9a2a3880",
+      "manifest_sha256": "305d0f9a641453a712c7b86aaf9f04899b4740861013e24e99b076cd14dd9ca3",
       "blend": "SourceAssets/MPR/reference_v4/context/mpr4_reference_context.blend",
-      "blend_sha256": "b3fb7a8a268daaee99c7df6704c463b219917ab2d07765162f508ba113546768"
+      "blend_sha256": "0156749b77fc3fae8f560f794f4298c5011dc7692f4fd241cf5f3d5853e5c1f0"
     },
     "props": {
       "manifest": "SourceAssets/MPR/reference_v4/props/manifest.json",
@@ -30,15 +30,15 @@
   "geometry": {
     "architecture": {
       "source_meshes": 62,
-      "static_partitions": 43
+      "static_partitions": 44
     },
     "site": {
-      "source_meshes": 25,
-      "static_partitions": 25
+      "source_meshes": 26,
+      "static_partitions": 26
     },
     "context": {
-      "source_meshes": 30,
-      "static_partitions": 30
+      "source_meshes": 29,
+      "static_partitions": 29
     },
     "props": {
       "source_meshes": 7,
@@ -46,8 +46,8 @@
     }
   },
   "instances": {
-    "architecture": 727,
-    "site": 567,
+    "architecture": 714,
+    "site": 488,
     "context": 0
   },
   "reference_version": 4,
@@ -61,8 +61,8 @@
   "interim_components": [],
   "output": "SourceAssets/MPR/reference_v4/MPR_ReferenceExterior.blend",
   "mesh_datablocks": 125,
-  "visible_mesh_objects": 1392,
-  "total_manifest_instances": 1294,
+  "visible_mesh_objects": 1301,
+  "total_manifest_instances": 1202,
   "props_display_objects_imported": false,
   "validation_boundary": "Blender source composition and optional rendered previews only; UE acceptance is separate."
 }

@@ -1,7 +1,7 @@
 """Reconstruct the approved reference's external layout, independent of CAD roads.
 
 The original interior and main CAD shell remain unchanged. External layout is
-explicitly measured in reference pixels and back-projected by the fitted camera.
+measured in the latest plan. Render-camera calibration is never used for plan geometry.
 """
 import sys,json,math,random
 from pathlib import Path
@@ -17,6 +17,8 @@ from shapely.geometry import Polygon,Point,LineString,box
 from shapely.ops import unary_union
 from shapely.affinity import rotate,translate
 import shapely
+import mpr_plan_site as plan
+from mpr_plan_layout import plan_to_world,load_registration
 
 OUT=ROOT/'SourceAssets/MPR/reference_v4/site';SOURCE=json.loads((OUT/'reference_site_pixels.json').read_text(encoding='utf8'))
 CAL=load_calibration();G=-1.2;RNG=random.Random(110203);COUNTS=Counter();INSTANCES=defaultdict(list)
@@ -34,209 +36,203 @@ def round_polygon(p,r=.7):
 def footprint(p,l,w,yaw):return translate(rotate(box(-l/2,-w/2,l/2,w/2),yaw,origin=(0,0)),*p[:2])
 
 def build_roads():
- for row in SOURCE['roads']:
-  controls=[world(p)[:2] for p in row['points']];width=meters(row['width_px'],row['points'][len(row['points'])//2])
-  pts=rounded_path(controls,radius=meters(row['radius_px'],row['points'][len(row['points'])//2]),max_step=.5)
-  road=LineString(pts).buffer(width/2,quad_segs=16)
-  ROAD_DATA.append(dict(name=row['name'],path=pts,width=width,geometry=road,marking=row['marking']))
- # Residential streets are explicitly measured too; context generator owns the
- # roof outlines, and can supply any additional street centerline traces.
- context=ROOT/'SourceAssets/MPR/reference_v4/context/reference_context_layout.json'
- if context.exists():
-  data=json.loads(context.read_text(encoding='utf8'))
-  for index,row in enumerate(data.get('streets',[])):
-   pixels=row.get('points',row.get('centerline_px',[]))
-   if len(pixels)<2:continue
-   pts=rounded_path([world(p)[:2] for p in pixels],radius=5,max_step=.7);width=meters(row.get('width_px',12),pixels[len(pixels)//2])
-   ROAD_DATA.append(dict(name='Residential_'+str(index),path=pts,width=width,geometry=LineString(pts).buffer(width/2,quad_segs=10),marking='none'))
- roads=unary_union([r['geometry'] for r in ROAD_DATA])
- courts={r['name']:round_polygon(poly_world(r['outline']),.8).difference(MAIN.buffer(.15)) for r in SOURCE['paving']}
- concrete=unary_union([courts[r['name']] for r in SOURCE['paving'] if r['role']=='Concrete']).difference(roads)
- asphalt=unary_union([roads]+[courts[r['name']] for r in SOURCE['paving'] if r['role']=='Asphalt'])
- allpaved=unary_union([concrete,asphalt]);asphalt=asphalt.difference(concrete)
+ roads=plan.road_geometry();details=plan.plan_details();portals=plan.portal_clearance()
+ context=json.loads((ROOT/'SourceAssets/MPR/reference_v4/context/manifest.json').read_text(encoding='utf8'))
+ buildings=unary_union([MAIN,*[Polygon(p) for p in context.get('footprints_m',[])]])
+ roads,continuations=plan.extend_road_tails(roads,blockers=buildings)
+ main_parcel=plan.named_region('MainWarehouseParcel',False)
+ north_parcel=plan.named_region('NorthWarehouseParcel',False)
+ # Leave planted perimeter strips; apron depths follow the new plan boundaries.
+ main_paved=main_parcel.buffer(-1.3,quad_segs=12).difference(MAIN.buffer(.10)).difference(plan.landscape_islands())
+ north_paved=north_parcel.buffer(-1.3,quad_segs=12).difference(buildings.buffer(.1))
+ west=plan.pixel_box(406,382,443,618).intersection(main_paved)
+ east=plan.pixel_box(1022,373,1088,524).intersection(main_paved)
+ neighbor_east=plan.pixel_box(1097,161,1173,326).intersection(north_paved)
+ south=main_paved.intersection(plan.pixel_box(425,598,1045,743))
+ north=main_paved.intersection(plan.pixel_box(435,362,1021,389))
+ neighbor=north_paved.intersection(plan.pixel_box(444,315,1102,350))
+ # Connect the actual access openings; segmentation gates must not become curbs.
+ connectors=portals.intersection(main_parcel.union(north_parcel).union(roads).buffer(.5))
+ concrete=unary_union([main_paved.difference(west.union(east)),neighbor,connectors]).difference(roads).difference(buildings.buffer(.1))
+ asphalt=unary_union([roads,west,east,neighbor_east]).difference(buildings.buffer(.1)).difference(concrete)
+ allpaved=unary_union([concrete,asphalt])
  shape('Roads','MPR3_Asphalt',asphalt,G+.08);shape('Courts','MPR3_Concrete',concrete,G+.10)
- curb=allpaved.buffer(.32,quad_segs=12).difference(allpaved).difference(MAIN.buffer(.4))
+ curb=allpaved.buffer(.28,quad_segs=16).difference(allpaved).difference(buildings.buffer(.45)).difference(portals)
+ # Outer canvas edges are intentionally open for future surrounding scenery.
+ extent=plan.pixel_box(0,0,1727,909).buffer(155);curb=curb.intersection(extent)
  core.raised_edge('RaisedCurbs',curb,G+.03,.18)
- for r in ROAD_DATA:
-  pts=r['path'];w=r['width']
-  if 'center' in r['marking']:
-   for dash in dash_segments(pts,4.0,7.8):line('RoadCenter','MPR3_WhiteLine',LineString(dash),.20,G+.102)
-  if 'edge' in r['marking']:
-   for offset in (-w/2+.6,w/2-.6):line('RoadEdges','MPR3_WhiteLine',LineString(offset_path(pts,offset)),.18,G+.102)
- for x in np.arange(-220,240,6.1):line('CourtSeams','MPR3_PavingJoint',LineString([(x,-260),(x,200)]).intersection(concrete),.12,G+.125)
- for y in np.arange(-260,201,6.1):line('CourtSeams','MPR3_PavingJoint',LineString([(-250,y),(250,y)]).intersection(concrete),.12,G+.125)
- for d in core.CAD['dock_doors']:
-  p=d['position_m'];n=d['outward_normal_xy'];t=(-n[1],n[0])
-  for sign in (-1,1):
-   # Trailer width 2.60*1.20 plus the original 0.50m marking clearance.
-   a=(p[0]+n[0]+t[0]*2.06*sign,p[1]+n[1]+t[1]*2.06*sign);b=(a[0]+n[0]*24.15,a[1]+n[1]*24.15)
-   line('DockGuidance','MPR3_YellowLine',LineString([a,b]).intersection(concrete),.19,G+.13)
- # Parking bays in the same slanted plan frame as the calibrated main building.
- for key,side in [('WestParking',-1),('EastParking',1),('NeighborEastParking',1)]:
-  p=courts[key];xmin,ymin,xmax,ymax=p.bounds
-  for bay_index,y in enumerate(np.arange(ymin+2,ymax-1,3.1)):
-   a=(xmin+.6,y);b=(xmin+6.0,y) if side<0 else (xmax-.6,y)
-   if side>0:a=(xmax-6.0,y)
-   seg=LineString([a,b]).intersection(p.buffer(-.2));line('ParkingBayLines','MPR3_WhiteLine',seg,.14,G+.102)
- for row in SOURCE.get('parking_rows',[]):
-  for i in range(row['count']):
-   if i%7==5:continue
-   f=i/max(1,row['count']-1);pixel=[a*(1-f)+b*f for a,b in zip(row['start'],row['end'])]
-   q=world(pixel,G+1.2);q[2]=G+.08;car=footprint(q,4.5,1.85,row['yaw_deg'])
-   if car.intersects(MAIN):continue
-   instance('SM_MPR4_Car_'+str(i%2),q,row['yaw_deg']);VEHICLE_SHAPES.append(car)
- return dict(roads=roads,paved=allpaved,concrete=concrete,asphalt=asphalt,courts=courts)
+ edge=roads.buffer(-.55,quad_segs=16).boundary.intersection(extent.buffer(-2)).difference(portals.buffer(1))
+ line('RoadEdges','MPR3_WhiteLine',edge,.15,G+.106)
+ for r in details['paint_guides']:
+  pts=rounded_path(plan.xy(r['points']),radius=r['radius_m'],max_step=.4)
+  ROAD_DATA.append(dict(name=r['name'],path=pts,geometry=LineString(pts),marking='center'))
+  for dash in dash_segments(pts,3.0,6.5):
+   line('RoadCenter','MPR3_WhiteLine',LineString(dash).intersection(roads.buffer(-1.5)),.16,G+.107)
+ for x in np.arange(-220,300,6.1):line('CourtSeams','MPR3_PavingJoint',LineString([(x,-220),(x,130)]).intersection(concrete),.065,G+.125)
+ for y in np.arange(-220,131,6.1):line('CourtSeams','MPR3_PavingJoint',LineString([(-250,y),(300,y)]).intersection(concrete),.065,G+.125)
+ courts=dict(SouthLoadingCourt=south,NorthLoadingCourt=north,WestParking=west,EastParking=east,NeighborLoadingCourt=neighbor,NeighborEastParking=neighbor_east)
+ for row in details['parking_rows']:
+  court=courts[row['name']]
+  for i,y in enumerate(np.arange(row['start_y'],row['end_y']+.01,row['pitch_px'])):
+   q=plan_to_world([row['x'],float(y)],G+.08)
+   line('ParkingBayLines','MPR3_WhiteLine',LineString([(q[0]-3.2,q[1]-1.55),(q[0]+3.2,q[1]-1.55)]).intersection(court),.14,G+.106)
+   if i%6==4:continue
+   car=footprint(q,4.5,1.85,row['yaw_deg'])
+   if not court.buffer(.25).contains(car) or car.intersects(buildings):continue
+   instance('SM_MPR4_Car_'+str(i%2),q,row['yaw_deg'],reference_pixel=[row['x'],float(y)])
+   VEHICLE_SHAPES.append(car)
+ COUNTS['road_boundary_components']=len(plan.read('road_outline_v5.json')['polygons_px'])
+ assert roads.intersection(MAIN).area<.01,'Plan road intersects preserved warehouse'
+ return dict(roads=roads,paved=allpaved,concrete=concrete,asphalt=asphalt,courts=courts,buildings=buildings,main_parcel=main_parcel,north_parcel=north_parcel,road_continuations=continuations)
 
 def build_water(site):
- row=SOURCE['pond'];pond=round_polygon(poly_world(row['outline']),meters(row['round_radius_px'],row['outline'][0]))
- assert pond.intersection(site['paved']).area<1.,'Reference pond overlaps the traced road'
- bank=meters(row['bank_width_px'],[350,660]);walk=meters(row['walk_width_px'],[350,660])
- inner=pond.buffer(bank);path=inner.buffer(walk).difference(inner).difference(site['paved'])
+ pond=plan.named_region('SouthWestPond',False)
+ # The measured pond parcel shares the road edge; clip its walkway to the
+ # final smoothed road surface to avoid thin coplanar strips at rounded bends.
+ ring=plan.named_region('PondEnclosingRing',False).difference(pond).difference(site['paved'])
+ assert pond.intersection(site['paved']).area<.01,'Plan pond overlaps road'
  shape('RetentionPond','MPR3_PondWater',pond,G+.015)
- shape('RetentionBank','MPR3_Grass',inner.difference(pond),G+.035)
- core.raised_edge('PondWalk',path,G+.025,.08)
+ bank=pond.buffer(.9,quad_segs=16).difference(pond).intersection(ring)
+ shape('RetentionBank','MPR3_Grass',bank,G+.035)
+ path=ring.difference(bank);core.raised_edge('PondWalk',path,G+.025,.08)
  site.update(pond=pond,pond_walk=path)
 
+
+def extend_track(points):
+ # Continue only drawing-border endpoints; internal turnout ends stay exact.
+ from mpr_plan_layout import world_to_plan
+ result=list(points)
+ for index,neighbor,insert in [(0,1,0),(-1,-2,None)]:
+  p=points[index];q=points[neighbor];pixel=world_to_plan(p)
+  if not (pixel[1]<1 or pixel[1]>908):continue
+  length=math.dist(p,q);end=(p[0]+(p[0]-q[0])/length*160,p[1]+(p[1]-q[1])/length*160)
+  if insert==0:result.insert(0,end)
+  else:result.append(end)
+ return result
+
 def build_rail(site):
- # The aerial reference uses deliberately readable dark rail heads. Preserve
- # the track centrelines/gauge while avoiding subpixel disappearing highlights.
- rail_detail.HEAD_WIDTH_M=.24
- rail_detail.RAIL_OFFSET_M=(rail_detail.GAUGE_M+rail_detail.HEAD_WIDTH_M)/2
- row=SOURCE['railway'];west=[world(p)[:2] for p in row['west_edge']];east=[world(p)[:2] for p in row['east_edge']]
+ row=plan.read('plan_railway_v5.json');assert row['status'].startswith('ready'),'Railway requires source-image review'
+ # Restore a physically readable section at the real 1435mm inner gauge.
+ rail_detail.HEAD_WIDTH_M=.09;rail_detail.RAIL_OFFSET_M=(rail_detail.GAUGE_M+rail_detail.HEAD_WIDTH_M)/2
+ ballast=unary_union([Polygon(extend_track(plan.xy(bed['west']))+list(reversed(extend_track(plan.xy(bed['east']))))).buffer(0) for bed in row['ballast_beds_px']])
+ ballast=ballast.difference(site['roads']).difference(site['buildings'])
+ shape('RailYardContinuousBallast','MPR3_Ballast',ballast,G+.11)
  lines=[]
- for lo,hi in [(0,.17),(.36,1.0)]:
-  edge=lambda f:[(a[0]*(1-f)+b[0]*f,a[1]*(1-f)+b[1]*f) for a,b in zip(west,east)]
-  shape('RailYardContinuousBallast','MPR3_Ballast',Polygon(edge(lo)+list(reversed(edge(hi)))),G+.11)
- for i in range(row['tracks']):
-  f=row['track_fractions'][i];controls=[(a[0]*(1-f)+b[0]*f,a[1]*(1-f)+b[1]*f) for a,b in zip(west,east)]
-  pts=list(LineString(rounded_path(controls,radius=45,max_step=1.)).simplify(.025).coords)
-  lines.append(dict(id=str(i),layer='railways',vertices=[[*p,0] for p in pts]))
+ for track in row['tracks']:
+  pts=list(LineString(rounded_path(extend_track(plan.xy(track['path_px'])),radius=60,max_step=.8)).simplify(.035).coords)
+  lines.append(dict(id=str(track['id']),layer='railways',vertices=[[*p,0] for p in pts]))
  rail=core.build_railways(core.API,lines,G)
- occupied=[]
- for track in rail['centerlines']:
-  if int(track['id']) not in row['boxcar_track_indices']:continue
-  curve=LineString(track['vertices'])
-  for d in np.arange(16+int(track['id'])*4,curve.length-20,row['boxcar_spacing_m']):
-   p=curve.interpolate(d);a=curve.interpolate(d-8);b=curve.interpolate(d+8);yaw=math.degrees(math.atan2(b.y-a.y,b.x-a.x))
-   scale=row.get('boxcar_scale',[1,1,1]);f=footprint((p.x,p.y),20.8*scale[0],3.3*scale[1],yaw)
-   if any(f.buffer(.05).intersects(q) for q in occupied):continue
-   occupied.append(f);instance('SM_MPR4_FreightBoxcar',[p.x,p.y,G+.34],yaw,scale=scale)
+ rail['stats']['source_policy']='Latest all-elements plan measured track paths; real 1.435m gauge; no legacy perspective inverse'
+ occupied=[];stock=row['rolling_stock'];curves={r['id']:LineString(r['vertices']) for r in rail['centerlines']}
+ placements=[dict(track_id=str(o['track_id']),center_px=o['position_px'],
+                  distance_m=curves[str(o['track_id'])].project(Point(plan.xy([o['position_px']])[0])))
+             for o in stock['placements_px']]
+ for item in placements:
+  track_id=str(item['track_id']);curve=curves[track_id]
+  d=float(item['distance_m']) if 'distance_m' in item else curve.project(Point(plan.xy([item['center_px']])[0]))
+  p=curve.interpolate(d);a=curve.interpolate(max(0,d-8));b=curve.interpolate(min(curve.length,d+8));yaw=math.degrees(math.atan2(b.y-a.y,b.x-a.x))
+  scale=stock.get('scale',[1,1,1]);f=footprint((p.x,p.y),20.8*scale[0],3.3*scale[1],yaw)
+  assert not f.intersects(site['roads']) and not f.intersects(site['buildings']),('Boxcar physical clearance',item)
+  if any(f.buffer(.05).intersects(q) for q in occupied):COUNTS['boxcar_overlap_rejected']+=1;continue
+  occupied.append(f);instance('SM_MPR4_FreightBoxcar',[p.x,p.y,G+.34],yaw,scale=scale,plan_track_id=track_id,reference_pixel=item.get('center_px'))
  site['rail']=rail;return rail
 
+
 def place_trailers(site):
- scale=(1.15,1.20,1.08);length=16.15*scale[0];width=2.60*scale[1]
- # CAD door centres sit 0.1524m inside the exterior wall; the model's rear
- # bumper extends 0.24725m beyond the scaled nominal box. A 0.075m clearance
- # correction keeps that actual bumper outside the wall by at least 0.02m.
- dock_offset=length/2+.345+.075;used_south_docks=set();stand_adjustments=[]
  props=json.loads((ROOT/'SourceAssets/MPR/reference_v4/props/manifest.json').read_text(encoding='utf8'))
  vehicle_bounds={r['name']:r['bounds_m'] for r in props['meshes']}
- def actual_shape(name,p,yaw,s):
-  b=vehicle_bounds[name];local=box(b[0][0]*s[0],b[1][0]*s[1],b[0][1]*s[0],b[1][1]*s[1])
+ used_docks=set();placed=[];omitted=[];stand_adjustments=[]
+ def actual_shape(name,p,yaw,scale):
+  b=vehicle_bounds[name];local=box(b[0][0]*scale[0],b[1][0]*scale[1],b[0][1]*scale[0],b[1][1]*scale[1])
   return translate(rotate(local,yaw,origin=(0,0)),*p[:2])
- def valid(f):return not f.intersects(MAIN) and not any(f.intersection(q).area>.01 for q in VEHICLE_SHAPES)
- for row in SOURCE['trailer_rows']:
-  centers=row.get('centers')
-  if centers is None:
-   a,b=row['start'];centers=[(a[0]+(b[0]-a[0])*i/max(1,len(row['colors'])-1),a[1]+(b[1]-a[1])*i/max(1,len(row['colors'])-1)) for i in range(len(row['colors']))]
-  for i,pixel in enumerate(centers):
-   p=world(pixel,G+4.18*scale[2]);p[2]=G+.10;yaw=-90 if row['yaw_hint']=='dock' else 90 if row['yaw_hint']=='north' else 0
-   name='SM_MPR4_Trailer_'+row['colors'][i%len(row['colors'])];meta=dict(reference_row=row['name'],reference_index=i)
-   if row['yaw_hint']=='dock':
-    # Choose the nearest unused real CAD door. Repeated nearest-door snaps
-    # previously discarded seven authored trailers as duplicate occupancy.
-    choices=sorted([(j,d) for j,d in enumerate(core.CAD['dock_doors']) if d['outward_normal_xy'][1]<-.8 and j not in used_south_docks],key=lambda jd:abs(jd[1]['position_m'][0]-p[0]))
+ def valid(f):
+  return (not f.intersects(site['buildings']) and f.intersection(site['roads']).area<.01
+          and not any(f.intersection(q).area>.01 for q in VEHICLE_SHAPES))
+ for row in plan.plan_details()['trailer_rows']:
+  for i,pixel in enumerate(row['centers']):
+   p=plan_to_world(pixel,G+.10);mode=row['mode'];name='SM_MPR4_Trailer_'+row['colors'][i%len(row['colors'])]
+   yaw=-90 if mode=='south_cad' else 90 if mode=='north_cad' else row['yaw_deg']
+   scale=[.80 if mode=='north_cad' else 1.,1.,1.];meta=dict(reference_row=row['name'],reference_index=i,reference_pixel=pixel)
+   if mode.endswith('_cad'):
+    normal=1 if mode=='north_cad' else -1
+    choices=sorted([(j,d) for j,d in enumerate(core.CAD['dock_doors']) if d['outward_normal_xy'][1]*normal>.8 and j not in used_docks],key=lambda jd:abs(jd[1]['position_m'][0]-p[0]))
     chosen=None
     for j,d in choices:
-     candidate=[d['position_m'][0],d['position_m'][1]-dock_offset,p[2]]
-     if valid(actual_shape(name,candidate,yaw,scale)):chosen=(j,d,candidate);break
-    assert chosen is not None,('No free south CAD dock',row['name'],i)
-    j,d,p=chosen;used_south_docks.add(j);meta.update(cad_dock_index=j,cad_dock_position_m=d['position_m'])
-   f=actual_shape(name,p,yaw,scale)
-   if row['yaw_hint']!='dock' and (not valid(f) or f.intersection(site['roads']).area>.05):
-    # Small local stand shifts only, ordered by minimum distance. Road control
-    # points and the source row/palette ordering remain invariant.
-    original=list(p);angle=math.radians(yaw);t=(math.cos(angle),math.sin(angle));n=(-t[1],t[0])
-    offsets=sorted([(a,b) for a in np.arange(-3,3.01,.25) for b in np.arange(-5,5.01,.25)],key=lambda ab:ab[0]**2+ab[1]**2)
-    chosen=None
-    for along,across in offsets:
-     q=[original[0]+t[0]*along+n[0]*across,original[1]+t[1]*along+n[1]*across,original[2]];qf=actual_shape(name,q,yaw,scale)
-     if valid(qf) and qf.intersection(site['roads']).area<.05:chosen=(q,qf);break
-    assert chosen is not None,('No clear nearby trailer stand',row['name'],i)
-    p,f=chosen;meta['stand_shift_m']=[p[k]-original[k] for k in range(2)];stand_adjustments.append(dict(row=row['name'],index=i,delta_m=meta['stand_shift_m']))
-   assert valid(f),('Trailer collision',row['name'],i)
-   VEHICLE_SHAPES.append(f);instance(name,p,yaw,scale=scale,**meta)
-   if row['yaw_hint']!='dock':
-    for sign in (-1,1):
-     angle=math.radians(yaw);t=(math.cos(angle),math.sin(angle));n=(-t[1],t[0]);half=length/2;side=width/2+.50
-     a=(p[0]-t[0]*half+n[0]*side*sign,p[1]-t[1]*half+n[1]*side*sign);b=(p[0]+t[0]*half+n[0]*side*sign,p[1]+t[1]*half+n[1]*side*sign)
-     line('TrailerStands','MPR3_YellowLine',LineString([a,b]).intersection(site['concrete']),.18,G+.13)
- # The far dock row is partly hidden by the main roof; keep its palette rhythm.
- for i,d in enumerate(d for d in core.CAD['dock_doors'] if d['outward_normal_xy'][1]>.8):
-  if i%6 in (2,5):continue
-  p=[d['position_m'][0],d['position_m'][1]+dock_offset,G+.10];name='SM_MPR4_Trailer_'+['White','Blue','Coral','White','Blue'][i%5]
-  f=actual_shape(name,p,90,scale)
-  assert valid(f),('North CAD dock trailer collision',i)
-  VEHICLE_SHAPES.append(f);instance(name,p,90,scale=scale,reference_row='DockNorth',reference_index=i)
- # The preserved interior fixes actual dock interfaces. Fill the occluded
- # loading apron beneath those trailers, rather than leaving wheels on grass.
- truck_pads=[];car_pads=[]
+     offset=16.15*scale[0]/2+.42
+     q=[d['position_m'][0],d['position_m'][1]+normal*offset,G+.10]
+     f=actual_shape(name,q,yaw,scale)
+     if valid(f):chosen=(j,d,q,f);break
+    if chosen is None:omitted.append(dict(row=row['name'],index=i,reason='No clear free CAD dock'));continue
+    j,d,p,f=chosen;used_docks.add(j);meta.update(cad_dock_index=j,cad_dock_position_m=d['position_m'])
+   else:
+    f=actual_shape(name,p,yaw,scale)
+    if not valid(f):
+     original=list(p);chosen=None
+     for dx,dy in sorted([(a,b) for a in np.arange(-6,6.01,.5) for b in np.arange(-8,8.01,.5)],key=lambda ab:ab[0]**2+ab[1]**2):
+      q=[original[0]+dx,original[1]+dy,original[2]];qf=actual_shape(name,q,yaw,scale)
+      if valid(qf) and site['main_parcel'].contains(qf):chosen=(q,qf);break
+     if chosen is None:omitted.append(dict(row=row['name'],index=i,reason='Image stand fails physical road/building clearance'));continue
+     p,f=chosen;meta['stand_shift_m']=[p[k]-original[k] for k in range(2)];stand_adjustments.append(meta)
+   VEHICLE_SHAPES.append(f);instance(name,p,yaw,scale=scale,**meta);placed.append(dict(name=name,**meta))
+   # Mark each occupied stall in its real frame and clip paint to the apron.
+   angle=math.radians(yaw);t=(math.cos(angle),math.sin(angle));n=(-t[1],t[0]);half=16.15*scale[0]/2
+   for sign in (-1,1):
+    a=(p[0]-t[0]*half+n[0]*1.8*sign,p[1]-t[1]*half+n[1]*1.8*sign);b=(p[0]+t[0]*half+n[0]*1.8*sign,p[1]+t[1]*half+n[1]*1.8*sign)
+    line('TrailerStands','MPR3_YellowLine',LineString([a,b]).intersection(site['concrete']),.15,G+.13)
+ pads=[]
  for name,items in INSTANCES.items():
-  if 'Trailer' not in name and 'Car_' not in name:continue
-  for item in items:
-   truck='Trailer' in name
-   pad=actual_shape(name,item['position_m'],item['rotation_deg'],item.get('scale',[1,1,1])).buffer(.7,quad_segs=8).difference(MAIN).difference(site['paved'])
-   (truck_pads if truck else car_pads).append(pad)
- for patches,label,role in [(truck_pads,'DockApronInfill','MPR3_Concrete'),(car_pads,'ParkingInfill','MPR3_Asphalt')]:
-  if patches:
-   patch=unary_union(patches);shape(label,role,patch,G+.10)
-   site['paved']=site['paved'].union(patch)
- COUNTS['south_dock_trailers']=len(used_south_docks);COUNTS['trailer_stands_adjusted']=len(stand_adjustments)
- site['trailer_layout_audit']=dict(scale=list(scale),body_dimensions_m=[length,width,4.18*scale[2]],dock_center_offset_m=dock_offset,south_dock_count=len(used_south_docks),stand_adjustments=stand_adjustments)
+  if 'Trailer' not in name:continue
+  for item in items:pads.append(actual_shape(name,item['position_m'],item['rotation_deg'],item['scale']).buffer(.5).difference(site['paved']).difference(MAIN))
+ if pads:
+  patch=unary_union(pads);shape('DockApronInfill','MPR3_Concrete',patch,G+.10);site['paved']=site['paved'].union(patch)
+ COUNTS['south_dock_trailers']=sum(r['reference_row']=='DockSouth' for r in placed)
+ COUNTS['trailer_stands_adjusted']=len(stand_adjustments)
+ site['trailer_layout_audit']=dict(policy='Latest plan positions; fixed CAD interfaces; 42ft north trailers and 53ft south trailers',placed=placed,omitted=omitted,stand_adjustments=stand_adjustments)
 
 def landscape(site):
- # All major shape boundaries follow the image; detail noise only modulates
- # ground shading and never determines tree positions or road topology.
- context_file=ROOT/'SourceAssets/MPR/reference_v4/context/manifest.json'
- building_polys=[]
- if context_file.exists():
-  context=json.loads(context_file.read_text(encoding='utf8'))
-  building_polys=[Polygon(p) for p in context.get('footprints_m',[])]
-  pads=[Polygon(p) for p in context.get('paved_footprints_m',[])]
-  if pads:site['paved']=unary_union([site['paved'],*pads])
- buildings=unary_union([MAIN,*building_polys]);excluded=unary_union([site['paved'],site['pond'].buffer(1),site['pond_walk'],site['rail']['exclusion'],buildings,*VEHICLE_SHAPES])
- bounds=poly_world([[-400,-250],[2100,-250],[2100,1250],[-400,1250]])
- shape('ContinuousTerrain','MPR3_Grass',bounds.difference(site['paved']).difference(site['pond']).difference(site['pond_walk']).difference(MAIN),G)
- ground=box(-1500,-1600,1600,1600);shape('FarGround','MPR3_GrassFar',ground,G-.08)
- occupied=[]
- def add_tree(pixel,diameter,region):
-  # Locate the crown centre at its visible canopy height, then back-project.
-  p=world(pixel,G+10.0);radius=meters(diameter,pixel,G+10.0)/2
-  radius=max(3.5,min(9,radius));disk=Point(p[:2]).buffer(min(1.4,radius*.25),quad_segs=10)
-  if disk.intersects(excluded):COUNTS['tree_rejected_clearance']+=1;return
-  crown=Point(p[:2]).buffer(radius*.85,quad_segs=12)
-  if crown.intersects(buildings) or crown.intersects(site['rail']['exclusion']):COUNTS['tree_rejected_crown']+=1;return
-  if Point(p[:2]).buffer(radius*.45,quad_segs=12).intersects(site['paved']):COUNTS['tree_rejected_road_clearance']+=1;return
-  if any(math.dist(p[:2],q[:2])<(radius+r)*.70 for q,r in occupied):return
-  occupied.append((p,radius));p[2]=G+.01
-  TREE_ROWS.append(dict(position_m=p,crown_radius_m=radius,rotation_deg=RNG.uniform(0,360),reference_pixel=list(pixel),region=region))
- for row in SOURCE['planting_rows']:
-  curve=LineString(row['path'])
-  for d in np.arange(0,curve.length,row['spacing_px']):
-   p=curve.interpolate(d);add_tree((p.x,p.y),row['crown_diameter_px']*RNG.uniform(.91,1.08),row['name'])
- measured_path=OUT/'reference_tree_canopies.json'
- measured=json.loads(measured_path.read_text(encoding='utf8')) if measured_path.exists() else {}
- for row in measured.get('canopies',[]):
-  add_tree(row['center_px'],row['diameter_px'],row.get('region','ReferenceMeasured'))
- for row in SOURCE['woodland_regions']:
-  if row['name'] in measured.get('replaced_regions',[]):continue
-  region=Polygon(row['outline']);xmin,ymin,xmax,ymax=region.bounds;pitch=row['density_px']
-  for y in np.arange(ymin,ymax,pitch*.85):
-   for x in np.arange(xmin,xmax,pitch):
-    pixel=(x+RNG.uniform(-pitch*.3,pitch*.3),y+RNG.uniform(-pitch*.3,pitch*.3))
-    if region.contains(Point(pixel)) and RNG.random()<.86:add_tree(pixel,RNG.uniform(*row['crown_diameter_px']),row['name'])
- COUNTS['reference_trees']=len(TREE_ROWS)
- return dict(exclusion_policy='Projected crown positions; conservative trunk/crown envelope excludes buildings, roads, rail and water; intended canopy overlap is allowed.',tree_positions= TREE_ROWS)
+ context=json.loads((ROOT/'SourceAssets/MPR/reference_v4/context/manifest.json').read_text(encoding='utf8'))
+ pads=[Polygon(p) for p in context.get('paved_footprints_m',[])]
+ if pads:site['paved']=unary_union([site['paved'],*pads])
+ buildings=site['buildings'];rail=site['rail']['exclusion']
+ data=plan.read('plan_vegetation_v5.json');sx,sy=load_registration()['scale_m_per_px'];radius_scale=math.sqrt(abs(sx*sy))
+ assert 'pending' not in data['status'],'Vegetation must pass source-image review'
+ accepted=[];rejected=[];adjustments=[];tree_islands=[]
+ hard=unary_union([site['roads'].buffer(.35),site['pond'],site['pond_walk'],rail,buildings,*VEHICLE_SHAPES])
+ for row in data['trees']:
+  source_position=plan_to_world(row['center_px'],G+.01)
+  source_radius=max(1.8,min(10.,row['radius_px']*radius_scale))
+  candidates=[];minimum_radius=max(1.8,source_radius*.45)
+  # Deterministic nearest fitting point/crown, preserving measured density.
+  # Small changes reconcile the two drawings; never populate unmeasured trees.
+  offsets=[(0.,0.)]+sorted([(float(a),float(b)) for a in np.arange(-5,5.01,.5) for b in np.arange(-5,5.01,.5) if .01<a*a+b*b<=25],key=lambda ab:ab[0]**2+ab[1]**2)
+  for dx,dy in offsets:
+   q=[source_position[0]+dx,source_position[1]+dy,source_position[2]];point=Point(q[:2])
+   if point.buffer(.8,quad_segs=12).intersects(hard):continue
+   radius=min(source_radius,point.distance(buildings)/.85-.04,point.distance(rail)/.85-.04,point.distance(site['roads'])/.40-.04)
+   if radius<minimum_radius:continue
+   if any(math.dist(q[:2],r[:2])<min(radius,rr)*.4 for r,rr in accepted):continue
+   shift=math.hypot(dx,dy);cost=shift*1.3+(source_radius-radius)*.6
+   candidates.append((cost,q,radius,shift))
+   if shift==0 and abs(radius-source_radius)<1e-6:break
+  if not candidates:
+   rejected.append(dict(id=row['id'],center_px=row['center_px'],reason='No physical fit within 5m and crown radius >=45% / 1.8m'));continue
+  _,p,radius,shift=min(candidates,key=lambda a:a[0])
+  if shift>.001 or abs(radius-source_radius)>.001:
+   adjustments.append(dict(id=row['id'],source_center_px=row['center_px'],source_radius_m=source_radius,position_m=p,radius_m=radius,shift_m=shift))
+  accepted.append((p,radius));TREE_ROWS.append(dict(position_m=p,crown_radius_m=radius,rotation_deg=RNG.uniform(0,360),reference_pixel=row['center_px'],source_id=row['id'],region=row.get('region','PlanMeasured')))
+  # Visible planting islands belong to this source tree, never random decoration.
+  island=Point(p[:2]).buffer(min(1.8,radius*.45),quad_segs=12).difference(hard)
+  if island.intersection(site['paved']).area>.1:tree_islands.append(island)
+ bounds=plan.pixel_box(-600,-500,2350,1450)
+ ground=box(-1800,-1800,1800,1800);shape('FarGround','MPR3_GrassFar',ground,G-.08)
+ terrain=bounds.difference(site['paved']).difference(site['pond']).difference(site['pond_walk']).difference(buildings)
+ shape('ContinuousTerrain','MPR3_Grass',terrain,G)
+ if tree_islands:
+  islands=unary_union(tree_islands);shape('PlanTreeIslands','MPR3_Grass',islands,G+.115)
+  core.raised_edge('PlanTreeIslandCurbs',islands.buffer(.16).difference(islands),G+.10,.14)
+ COUNTS['reference_trees']=len(TREE_ROWS);COUNTS['tree_rejected_clearance']=len(rejected)
+ return dict(exclusion_policy='Measured latest-plan centers; physical road/rail/building clearance, no stochastic population.',tree_positions=TREE_ROWS,rejected=rejected,fit_adjustments=adjustments,source_sha256=data['source_sha256'])
+
 
 def reference_surface_textures():
  """Override only V4 grass/water: no coherent checker or diagonal wave train.
@@ -269,13 +265,14 @@ def reference_surface_textures():
 def main():
  OUT.mkdir(parents=True,exist_ok=True);bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
  core.OUT=OUT;core.GEO=GEO;core.INSTANCES=INSTANCES;core.COUNTS=COUNTS
- core.MATERIALS['MPR3_Asphalt']['base_color']=[.18,.205,.225]
- core.MATERIALS['MPR3_Concrete']['base_color']=[.60,.62,.61]
- core.MATERIALS['MPR3_Grass']['base_color']=[.33,.38,.32]
- core.MATERIALS['MPR3_GrassFar']['base_color']=[.33,.38,.32]
+ core.MATERIALS['MPR3_Asphalt']['base_color']=[.13,.155,.19]
+ core.MATERIALS['MPR3_Concrete']['base_color']=[.52,.55,.55]
+ core.MATERIALS['MPR3_Grass']['base_color']=[.29,.39,.24]
+ core.MATERIALS['MPR3_GrassFar']['base_color']=[.29,.39,.24]
  for role in ('MPR3_Grass','MPR3_GrassFar'):core.MATERIALS[role]['normal_strength']=.06
  core.MATERIALS['MPR3_PavingJoint']['base_color']=[.42,.44,.42]
- core.MATERIALS['MPR3_Ballast']['base_color']=[.34,.35,.365]
+ core.MATERIALS['MPR3_Ballast']['base_color']=[.18,.19,.21]
+ core.MATERIALS['MPR3_Sleepers']['base_color']=[.12,.13,.14]
  core.MATERIALS['MPR3_RailSteel']['base_color']=[.07,.08,.10]
  core.MATERIALS['MPR3_RailSteel']['metallic']=.25
  core.MATERIALS['MPR3_PondWater']['base_color']=[.018,.075,.095]
@@ -285,7 +282,7 @@ def main():
  # deterministic low-level exporter with the previous experiment.
  GEO.data={name.replace('SM_MPR3_','SM_MPR4_'):roles for name,roles in GEO.data.items()}
  COUNTS.update(trailers=sum(len(v) for k,v in INSTANCES.items() if 'Trailer' in k),boxcars=len(INSTANCES['SM_MPR4_FreightBoxcar']))
- core.export(reference_surface_textures(),dict(reference_layout=SOURCE,calibration=CAL,planting=planting,trailer_layout_audit=site['trailer_layout_audit'],surface_texture_policy='V4 grass mean 234 +/-2 random multiscale variation; water albedo 245 with weak random normal; no checker/diagonal sine trains',reference_match_policy='External layout is traced directly from the user-approved image. Main interior CAD is invariant.'))
+ core.export(reference_surface_textures(),dict(reference_layout=plan.plan_details(),plan_registration=load_registration(),railway_layout=plan.read('plan_railway_v5.json'),road_boundary_source_sha256=plan.read('road_outline_v5.json')['source_sha256'],outside_plan_continuations=site['road_continuations'],landscape_semantics=plan.read('plan_landscape_islands_v5.json'),planting=planting,trailer_layout_audit=site['trailer_layout_audit'],surface_texture_policy='V4 grass mean 234 +/-2 random multiscale variation; water albedo 245 with weak random normal; no checker/diagonal sine trains',reference_match_policy='Latest plan road boundaries and measured building/tree/rail placements. Colored render defines material style; main interior CAD is invariant.'))
  print('MPR_REFERENCE_V4_SITE',dict(COUNTS))
 
 if __name__=='__main__':main()

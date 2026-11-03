@@ -1,0 +1,3 @@
+# Preserve source bytes referenced by the formal geometry audit SHA-256 values.
+build_mpr_reference_v4_site.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+mpr_plan_site.py -text whitespace=trailing-space,space-before-tab,cr-at-eol

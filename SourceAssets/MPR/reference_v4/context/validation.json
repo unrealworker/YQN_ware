@@ -1,51 +1,70 @@
 {
-  "source_manifest_sha256": "65869c93594978a921854a1814ce6d3f6082d3003f9dc00e6fda0fce9a2a3880",
-  "calibrated_source_sha256": "44a622b96a9479a98e7bca9faa87f5c84a40c56e55373654bf4b32e30f3b04cb",
+  "success": true,
+  "geometry_version": 5,
+  "source_manifest_sha256": "305d0f9a641453a712c7b86aaf9f04899b4740861013e24e99b076cd14dd9ca3",
+  "calibrated_source_sha256": "b877ec8561c2106f4c50c9b2c3ca829d9b8453f897c257bdf04f8e6f4bfe3401",
   "building_counts": {
-    "house_gable": 133,
-    "flat_industrial": 8,
+    "house_gable": 132,
+    "orthogonal_l_industrial": 2,
+    "flat_industrial": 5,
     "warehouse_deep_docks": 1,
     "sawtooth_industrial": 3,
     "cylindrical_tank": 8
   },
-  "mesh_rows": 46,
-  "lod0_meshes": 30,
-  "lod0_triangles": 68958,
-  "all_lods_triangles": 77612,
-  "tank_projection": [
+  "mesh_rows": 45,
+  "lod0_meshes": 29,
+  "lod0_triangles": 67843,
+  "all_lods_triangles": 76411,
+  "tank_geometry": [
     {
       "id": "tank_01",
-      "top_outline_max_error_px": 1.2862197421537486e-12
+      "center_error_m": 0.0,
+      "radius_error_m": 0.0,
+      "circularity_error_m": 2.4868995751603507e-14
     },
     {
       "id": "tank_02",
-      "top_outline_max_error_px": 1.5294999738073e-12
+      "center_error_m": 0.0,
+      "radius_error_m": 0.0,
+      "circularity_error_m": 5.3290705182007514e-14
     },
     {
       "id": "tank_03",
-      "top_outline_max_error_px": 1.4559018921847493e-12
+      "center_error_m": 0.0,
+      "radius_error_m": 0.0,
+      "circularity_error_m": 2.842170943040401e-14
     },
     {
       "id": "tank_04",
-      "top_outline_max_error_px": 1.2297111682519208e-12
+      "center_error_m": 0.0,
+      "radius_error_m": 0.0,
+      "circularity_error_m": 2.842170943040401e-14
     },
     {
       "id": "tank_05",
-      "top_outline_max_error_px": 1.4244919937188647e-12
+      "center_error_m": 0.0,
+      "radius_error_m": 0.0,
+      "circularity_error_m": 3.197442310920451e-14
     },
     {
       "id": "tank_06",
-      "top_outline_max_error_px": 1.5294999738073e-12
+      "center_error_m": 0.0,
+      "radius_error_m": 0.0,
+      "circularity_error_m": 5.3290705182007514e-14
     },
     {
       "id": "tank_07",
-      "top_outline_max_error_px": 1.368970808788651e-12
+      "center_error_m": 0.0,
+      "radius_error_m": 0.0,
+      "circularity_error_m": 3.375077994860476e-14
     },
     {
       "id": "tank_08",
-      "top_outline_max_error_px": 1.368970808788651e-12
+      "center_error_m": 0.0,
+      "radius_error_m": 0.0,
+      "circularity_error_m": 2.3092638912203256e-14
     }
   ],
   "errors": [],
-  "limits": "Geometric projection verification and context-only Blender render; not final UE visual acceptance. Heights and unseen details remain visual estimates."
+  "limits": "Source dependency and physical geometry verification; not final UE visual acceptance. Heights and unseen facade details remain visual estimates."
 }

@@ -16,15 +16,17 @@ sys.path.insert(0,str(ROOT/'Saved/ParkRefinement/python_deps'))
 sys.path.insert(0,str(ROOT/'Scripts/ghs'))
 from mpr_blender_common import Geometry, PALETTE
 from calibrate_mpr_reference_camera import image_to_ground, load_calibration
-from shapely.geometry import Polygon,LineString
+from shapely.geometry import Polygon,LineString,MultiPoint
 from shapely.ops import unary_union,triangulate
 from park_curves import rounded_path
+from mpr_context_rectification import infer_plan_layout,rectangle
+from mpr_plan_layout import plan_to_world,load_registration
 
 OUT=ROOT/'SourceAssets/MPR/reference_v4/context'
 G=Geometry()
 MATERIALS={
  'MPR4_ContextWall':dict(base_color=[.72,.735,.72],roughness=.88),
- 'MPR4_ContextRoof':dict(base_color=[.78,.79,.785],roughness=.85),
+ 'MPR4_ContextRoof':dict(base_color=[.43,.47,.50],roughness=.85),
  'MPR4_ContextTrim':dict(base_color=[.57,.59,.58],roughness=.88),
  'MPR4_ContextGlass':dict(base_color=[.31,.36,.365],roughness=.42),
  'MPR4_ContextPaving':dict(base_color=[.54,.565,.55],roughness=.95),
@@ -45,7 +47,7 @@ def roof(name,x,y,width,depth,eave,ridge,axis='x'):
     box(name,T,(x,y,ridge+.025),(width+.12,.14,.09))
 
 
-def house(name,width,depth,eave,ridge,variant=0,lod=0):
+def house(name,width,depth,eave,ridge,variant=0,lod=0,compact=False):
     box(name,W,(0,0,eave/2),(width,depth,eave))
     roof(name,0,0,width+.38,depth+.38,eave,ridge)
     if lod:return
@@ -65,16 +67,16 @@ def house(name,width,depth,eave,ridge,variant=0,lod=0):
             box(name,V,(sx*(width/2+.065),yy,2.2),(.025,1.08,1.12))
     if variant==1:
         # Attached garage extends the front silhouette without a detached prop.
-        gx=width*.25;gw=width*.43
-        box(name,W,(gx,front-.6,1.55),(gw,1.2,3.1))
-        box(name,R,(gx,front-.65,3.16),(gw+.2,1.45,.15))
-        box(name,T,(gx,front-1.22,1.4),(gw-.35,.045,2.5))
-        for z in (.6,1.2,1.8,2.4):box(name,W,(gx,front-1.25,z),(gw-.5,.025,.035))
+        gx=width*.25;gw=width*.43;projection=.45 if compact else 1.2
+        box(name,W,(gx,front-projection/2,1.55),(gw,projection,3.1))
+        box(name,R,(gx,front-projection/2-.05,3.16),(gw+.2,projection+.25,.15))
+        box(name,T,(gx,front-projection-.02,1.4),(gw-.35,.045,2.5))
+        for z in (.6,1.2,1.8,2.4):box(name,W,(gx,front-projection-.05,z),(gw-.5,.025,.035))
     else:
-        px=-width*.22;pw=3.1
-        box(name,P,(px,front-.75,.17),(pw,1.6,.34))
-        box(name,R,(px,front-.8,2.9),(pw+.18,1.8,.18))
-        for sx in (-1,1):box(name,W,(px+sx*(pw/2-.15),front-1.45,1.55),(.13,.13,2.65))
+        px=-width*.22;pw=min(3.1,width*.48);projection=.50 if compact else 1.6
+        box(name,P,(px,front-projection/2,.17),(pw,projection,.34))
+        box(name,R,(px,front-projection/2-.05,2.9),(pw+.18,projection+.20,.18))
+        for sx in (-1,1):box(name,W,(px+sx*(pw/2-.15),front-projection+.15,1.55),(.13,.13,2.65))
     box(name,T,(width*.24,depth*.16,ridge-.20),(.55,.65,1.0))
 
 
@@ -147,7 +149,15 @@ def context_paving(layout,ground,calibration):
 
 
 def warehouse(name,outline,height,dock_edge=None,docks=0):
-    G.prism(name,W,outline,0,height)
+    if not dock_edge:
+        G.prism(name,W,outline,0,height)
+    else:
+        # A solid prism would occupy the loading cavity. Build the perimeter
+        # walls explicitly and leave the actual front bay openings empty.
+        for a,b in zip(outline,outline[1:]+outline[:1]):
+            same=(math.dist(a,dock_edge[0])+math.dist(b,dock_edge[1])<.05 or
+                  math.dist(a,dock_edge[1])+math.dist(b,dock_edge[0])<.05)
+            if not same:G.segment(name,W,a,b,.40,height/2,height)
     # Facade recesses are actual open geometry in front of the rear wall,
     # separated by projecting columns and a clear overhead canopy.
     cx=sum(p[0] for p in outline)/len(outline);cy=sum(p[1] for p in outline)/len(outline)
@@ -157,17 +167,18 @@ def warehouse(name,outline,height,dock_edge=None,docks=0):
         a,b=dock_edge;dx,dy=b[0]-a[0],b[1]-a[1];length=math.hypot(dx,dy);tx,ty=dx/length,dy/length
         nx,ny=ty,-tx
         if nx*(cx-a[0])+ny*(cy-a[1])>0:nx,ny=-nx,-ny
-        yaw=math.degrees(math.atan2(ty,tx));span=(length-10)/docks
+        yaw=math.degrees(math.atan2(ty,tx));span=length/docks;opening_height=min(6.2,height*.48);recess_depth=3.4
+        # Continuous upper wall and eave, above genuine cavities.
+        box(name,W,((a[0]+b[0])/2,(a[1]+b[1])/2,(height+opening_height)/2),
+            (length,.42,height-opening_height),yaw)
         for k in range(docks):
-            s=5+(k+.5)*span;x=a[0]+tx*s;y=a[1]+ty*s
-            # A 2.1 m-deep loading recess has a rear door, projecting piers,
-            # a deep canopy and a concrete platform to read in the overview.
-            box(name,V,(x+nx*.05,y+ny*.05,height*.25),(min(span-1,6.0),.08,height*.44),yaw)
-            box(name,T,(x+nx*.25,y+ny*.25,2.1),(3.4,.13,3.8),yaw)
-            box(name,W,(x+nx*2.1,y+ny*2.1,height*.48),(span-.1,4.3,.48),yaw)
+            s=(k+.5)*span;x=a[0]+tx*s;y=a[1]+ty*s
+            box(name,T,(x-nx*recess_depth,y-ny*recess_depth,opening_height/2),(span-.4,.30,opening_height),yaw)
+            box(name,V,(x-nx*(recess_depth-.17),y-ny*(recess_depth-.17),2.4),(min(span-1,6.0),.06,4.5),yaw)
+            box(name,W,(x-nx*1.35,y-ny*1.35,opening_height+.12),(span,4.5,.24),yaw)
             for sign in (-1,1):
-                box(name,W,(x+nx*1.1+tx*sign*(span/2-.23),y+ny*1.1+ty*sign*(span/2-.23),height*.24),(.46,2.35,height*.48),yaw)
-            box(name,P,(x+nx*2.2,y+ny*2.2,.28),(span-.12,4.6,.56),yaw)
+                box(name,W,(x-nx*1.65+tx*sign*(span/2-.23),y-ny*1.65+ty*sign*(span/2-.23),opening_height/2),(.46,3.7,opening_height),yaw)
+            box(name,P,(x-nx*1.5,y-ny*1.5,.22),(span-.12,4.3,.44),yaw)
         xs=[p[0] for p in outline];ys=[p[1] for p in outline]
         for i in range(7):
             for j in range(2):
@@ -188,6 +199,152 @@ def minimum_rectangle(points):
     _,center,size,yaw=best
     if size[1]>size[0]:size=list(reversed(size));yaw+=90
     return center,size,yaw
+
+
+def plan_context_paving(layout):
+    from mpr_plan_site import road_geometry
+    road=road_geometry();data=json.loads((ROOT/'SourceAssets/MPR/reference_v4/site/road_outline_v5.json').read_text(encoding='utf8'))
+    parcels=[];parcel_by_id={}
+    for row in data['parcels_px']:
+        polygon=Polygon(row['exterior']).buffer(0)
+        if polygon.is_empty or polygon.geom_type!='Polygon':continue
+        parcels.append(polygon)
+        parcel_by_id[row['id']]=polygon
+    from shapely.geometry import Point
+    selected=[]
+    # The three southern parcel outlines touch tank circles through raster
+    # gaps and the canvas border. Their exterior then follows part of a tank
+    # circumference, which incorrectly removes its own foundation. Restore
+    # each visible convex outer parcel; the exact road surface clips it below.
+    tank_groups=[('region_174',['tank_01']),('region_188',['tank_02','tank_03']),
+                 ('region_208',['tank_04','tank_05']),('region_207',['tank_06','tank_07','tank_08'])]
+    tanks={r['id']:r for r in layout['tanks']}
+    for region,ids in tank_groups:
+        parcel=parcel_by_id[region].convex_hull
+        extensions=[]
+        for id in ids:
+            row=tanks[id];x,y=row['pixel_center'];radius=row['pixel_radius']
+            if y+radius>909:
+                # Continue the cropped foundation beyond the drawing; never
+                # truncate a true circular tank at the image bottom edge.
+                extensions.append(Point(x,y).buffer(radius+4,quad_segs=24))
+        selected.append(unary_union([parcel,*extensions]).convex_hull)
+    point=Point(1140,800);choices=[p for p in parcels if p.area>4000 and p.covers(point)]
+    if choices:selected.append(min(choices,key=lambda p:p.area))
+    world=unary_union([Polygon([p[:2]for p in plan_to_world(list(p.exterior.coords)[:-1])]) for p in selected]).difference(road.buffer(.20))
+    parts=list(world.geoms) if hasattr(world,'geoms') else [world];ground=-1.2
+    for poly in parts:
+        for tri in triangulate(poly):
+            if poly.covers(tri):G.mesh('SM_MPR4_Context_TankPads',P,[(x,y,ground+.12)for x,y in list(tri.exterior.coords)[:-1]],[(0,1,2)])
+        inner=poly.buffer(-1.1,join_style=2)
+        if inner.is_empty or inner.geom_type!='Polygon':continue
+        pts=list(inner.exterior.coords)
+        for a,b in zip(pts,pts[1:]):
+            G.segment('SM_MPR4_Context_TankPads',T,a,b,.25,ground+.18,.22)
+            G.segment('SM_MPR4_Context_TankPipes',R,a,b,.16,ground+1.25,.16)
+            length=math.dist(a,b)
+            for i in range(int(length/10)+1):
+                t=i/max(1,int(length/10));x=a[0]*(1-t)+b[0]*t;y=a[1]*(1-t)+b[1]*t
+                box('SM_MPR4_Context_TankPipes',T,(x,y,ground+.65),(.16,.16,1.3))
+    return [list(p.exterior.coords)[:-1]for p in parts]
+
+
+def mapped_plan_context():
+    """Physical plan geometry: no inverse perspective and no quad deformation."""
+    global G
+    G=Geometry();layout_path=OUT/'reference_context_plan_v5.json'
+    layout=json.loads(layout_path.read_text(encoding='utf8'));frames=infer_plan_layout(layout);ground=-1.2;world_rows=[]
+    from mpr_plan_site import road_geometry
+    road=road_geometry().buffer(.45);house_frames=[f for f in frames.values()if f['type']=='house_gable']
+    for frame in house_frames:
+        current=Polygon(frame['footprint_m'])
+        if current.intersection(road).area<.001:continue
+        others=[Polygon(f['footprint_m']).buffer(3.0)for f in house_frames if f is not frame]
+        candidates=[];origin=list(frame['center_m']);original_size=list(frame['size_m'])
+        # Local translation/size correction only. Clipped edge houses need a
+        # little outward continuation; no XY shear or relocation across blocks.
+        for shrink in (1.,.97,.94,.90):
+            size=[v*shrink for v in original_size]
+            for step in range(0,15):
+                distance=step*.5
+                for i in range(16 if step else 1):
+                    angle=i*math.tau/16;center=[origin[0]+distance*math.cos(angle),origin[1]+distance*math.sin(angle)]
+                    outline=rectangle(center,size,math.radians(frame['yaw_deg']));poly=Polygon(outline)
+                    if poly.intersection(road).area>.001:continue
+                    if any(poly.intersection(p).area>.001 for p in others):continue
+                    candidates.append((distance+30*(1-shrink),center,size,outline,shrink))
+                if candidates and min(x[0]for x in candidates)<=distance:break
+        if not candidates:raise RuntimeError('No physical road setback for '+frame['id'])
+        _,center,size,outline,shrink=min(candidates,key=lambda x:x[0]);frame.update(center_m=center,size_m=size,footprint_m=outline,
+            road_setback_adjustment=dict(source_center_m=origin,translation_m=math.dist(origin,center),uniform_scale=shrink,clearance_m=.45))
+        frame.update(area_m2=math.prod(size),area_ratio=math.prod(size)/frame['source_area_m2'])
+    for index,row in enumerate(layout['houses']+layout['industrial']):
+        frame=frames[row['id']];height=frame['height_m'];points=frame['footprint_m'];cx,cy=frame['center_m']
+        if row['type']=='house_gable':
+            # Keep the complete geometry, including eaves, ridge cap and front
+            # canopy, inside the cleared parcel rectangle. A minimum body-size
+            # clamp here would silently undo the tight-row separation pass.
+            width,depth=frame['size_m'];width-=.60;depth-=1.50
+            if min(width,depth)<2.5:raise RuntimeError('House too small after clearance: '+row['id'])
+            rise=min(height-3.0,max(1.1,depth*.5*math.tan(math.radians(24))));eave=height-rise
+            name='SM_MPR4_Context_Houses_%d_%d'%(math.floor(cx/150),math.floor(cy/150));yaw=math.radians(frame['yaw_deg']);c,s=math.cos(yaw),math.sin(yaw)
+            geometry_ranges={};actual_points=[]
+            for lod in (0,1):
+                temporary='PlanHouseLocal';house(temporary,width,depth,eave,height,index%3==1,lod,compact=True)
+                geometry=G.data.pop(temporary);target=name+('_LOD1' if lod else '')
+                for role,(vertices,faces) in geometry.items():
+                    world_vertices=[(cx+c*x-s*y,cy+s*x+c*y,ground+z)for x,y,z in vertices]
+                    if not lod:
+                        geometry_ranges[role]=dict(role_vertex_start=len(G.data[target][role][0]),vertex_count=len(vertices))
+                        actual_points.extend(world_vertices)
+                    G.mesh(target,role,world_vertices,faces)
+            frame.update(eave_height_m=eave,ridge_height_m=height,roof_pitch_deg=math.degrees(math.atan2(rise,depth/2)),
+                         complete_geometry_footprint_m=list(MultiPoint([p[:2]for p in actual_points]).convex_hull.exterior.coords)[:-1],
+                         body_size_m=[width,depth],mesh_vertex_ranges=geometry_ranges)
+        else:
+            name='SM_MPR4_Context_'+row['id'];edge=None
+            if row.get('dock_facade_pixel_edge'):edge=[p[:2]for p in plan_to_world(row['dock_facade_pixel_edge'])]
+            warehouse(name,points,height,edge,row.get('dock_count',0))
+            if row['type']=='sawtooth_industrial':
+                a,b,c,d=points
+                for k in range(1,8):
+                    t=k/8;aa=[a[i]*(1-t)+b[i]*t for i in (0,1)];bb=[d[i]*(1-t)+c[i]*t for i in (0,1)]
+                    G.segment(name,T,aa,bb,.14,height+.23,.18)
+            for role,(vertices,faces) in G.data[name].items():G.data[name][role][0]=[(x,y,z+ground)for x,y,z in vertices]
+        world_rows.append(dict(id=row['id'],type=row['type'],mesh=name,footprint_m=points,estimated_height_m=height,
+                               placement_method=frame['placement_method'],physical_frame=frame))
+    registration=load_registration();scale=math.sqrt(abs(math.prod(registration['scale_m_per_px'])))
+    for row in layout['tanks']:
+        center=plan_to_world(row['pixel_center']);radius=row['pixel_radius']*scale;name='SM_MPR4_Context_TankField'
+        for lod in (0,1):
+            temporary='PlanTankLocal';tank(temporary,radius,row['height_m'],lod);geometry=G.data.pop(temporary)
+            for role,(vertices,faces) in geometry.items():G.mesh(name+('_LOD1' if lod else ''),role,[(x+center[0],y+center[1],z+ground)for x,y,z in vertices],faces)
+        footprint=[[center[0]+radius*math.cos(i*math.tau/64),center[1]+radius*math.sin(i*math.tau/64)]for i in range(64)]
+        world_rows.append(dict(id=row['id'],type='cylindrical_tank',mesh=name,footprint_m=footprint,estimated_height_m=row['height_m'],
+                               radius_m=radius,center_m=center,placement_method='New plan center; physical circular cylinder; geometric-mean pixel scale preserves plan area without XY ellipse distortion'))
+    # Resolve role-relative indices to saved Blender mesh vertex ranges. This
+    # makes the independent audit inspect the delivered mesh, not idealized
+    # footprint metadata, after batching neighbouring houses for performance.
+    for row in world_rows:
+        if row['type']!='house_gable':continue
+        offset=0;ranges=row['physical_frame']['mesh_vertex_ranges']
+        for role,(vertices,faces) in G.data[row['mesh']].items():
+            if role in ranges:ranges[role]['saved_vertex_start']=offset+ranges[role]['role_vertex_start']
+            offset+=len(vertices)
+    paved=plan_context_paving(layout)
+    manifest=G.export(OUT,'mpr4_reference_context',dict(materials=MATERIALS,instances={},source_pixel_layout=layout_path.relative_to(ROOT).as_posix(),
+        plan_registration='SourceAssets/MPR/reference_v4/site/plan_registration_v5.json',plan_registration_sha256=hashlib.sha256((ROOT/'SourceAssets/MPR/reference_v4/site/plan_registration_v5.json').read_bytes()).hexdigest(),
+        source_policy='Latest user orthographic plan governs placement; true orthogonal houses and concave industrial footprints; no perspective warp. Main CAD interior unchanged.'))
+    names={r['name']:r for r in manifest['meshes']}
+    for name,row in names.items():
+        row['instance_only']=name.endswith('_LOD1');row['lod']=1 if name.endswith('_LOD1') else 0;row['collision']=False
+        row['sha256']=hashlib.sha256((ROOT/row['fbx']).read_bytes()).hexdigest()
+        if name+'_LOD1' in names:row['lod_files']=[names[name+'_LOD1']['fbx']];row['lod_screen_sizes']=[1.,.09]
+    manifest.update(context_buildings=world_rows,footprints_m=[r['footprint_m']for r in world_rows],paved_footprints_m=paved,
+                    geometry_version=5,physical_geometry_policy='Rigid local frames with orthogonal walls and planar gable faces; true circles for tanks; concave L/notch floor plans preserved')
+    (OUT/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf8')
+    (OUT/'reference_context_ground_layout.json').write_text(json.dumps(dict(schema_version=5,buildings=world_rows,plan_registration_sha256=manifest['plan_registration_sha256']),ensure_ascii=False,indent=2),encoding='utf8')
+    print('MPR5_PLAN_CONTEXT_READY',len(world_rows))
 
 
 def mapped_context():
@@ -272,7 +429,9 @@ def main():
     OUT.mkdir(parents=True,exist_ok=True)
     samples='--samples-only' in sys.argv
     if not samples:
-        mapped_context();return
+        if (OUT/'reference_context_plan_v5.json').exists():mapped_plan_context()
+        else:mapped_context()
+        return
     specs=[('Cottage',10,8,3.8,5.9,0),('Garage',11.2,8.8,4.0,6.3,1),('LongGable',14,8.2,4.2,6.4,2)]
     for style,w,d,e,r,v in specs:
         house('SM_MPR4_Context_'+style,w,d,e,r,v)

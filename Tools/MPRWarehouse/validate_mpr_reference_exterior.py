@@ -214,7 +214,7 @@ def audit_scene():
             mesh_paths[row['name']] = mesh.get_path_name()
             if not row.get('instance_only'):
                 static_expected.add(row['name'])
-            if 'Tree' in row['name']:
+            if category=='Props' and 'Tree' in row['name']:
                 nanite=SM.get_nanite_settings(mesh)
                 assert nanite.enabled and nanite.shape_preservation==u.NaniteShapePreservation.PRESERVE_AREA, ('Foliage detail preservation',row['name'])
                 assert abs(nanite.max_edge_length_factor)<1e-6,('Foliage area preservation without edge constraint',row['name'])
@@ -238,7 +238,10 @@ def audit_scene():
             b = row['bounds_m']
             expected = [[v * 100 for v in b[0]], [-b[1][1] * 100, -b[1][0] * 100], [v * 100 for v in b[2]]]
             assert max(abs(x - y) for aa, bb in zip(actual, expected) for x, y in zip(aa, bb)) < 2, ('Axis/scale mismatch', row['name'])
-            meshes[row['name']] = {'lods': lod_count, 'slots': len(slots), 'source_triangles': row.get('triangles')}
+            nanite = SM.get_nanite_settings(mesh)
+            meshes[row['name']] = {'lods': lod_count, 'slots': len(slots), 'source_triangles': row.get('triangles'),
+                                  'category': category, 'nanite_enabled': bool(nanite.enabled),
+                                  'nanite_max_edge_length_factor': float(nanite.max_edge_length_factor)}
     for role, spec in specs.items():
         mi = u.EditorAssetLibrary.load_asset(material_path(role))
         assert isinstance(mi, u.MaterialInstanceConstant), ('Missing material instance', role)
@@ -286,8 +289,26 @@ def audit_scene():
     assert dict(static_counts) == {name:1 for name in static_expected}, ('Static world-mesh coverage mismatch', dict(static_counts), sorted(static_expected))
     transform_audit = {name:assert_instance_world_transforms(rows, world_instances[name], label=name)
                        for name, rows in catalog['instances'].items()}
+    registry=u.AssetRegistryHelpers.get_asset_registry()
+    registry.search_all_assets(synchronous_search=True)
+    options=u.AssetRegistryDependencyOptions(include_soft_package_references=True,
+        include_hard_package_references=True,include_searchable_names=False,
+        include_soft_management_references=True,include_hard_management_references=True)
+    dependencies=set();pending_packages=[MAP]
+    while pending_packages:
+        name=pending_packages.pop()
+        if name in dependencies:continue
+        dependencies.add(name)
+        pending_packages.extend(str(p) for p in registry.get_dependencies(name,options)
+                                if str(p).startswith('/Game/') and str(p) not in dependencies)
+    assert not any(p.startswith('/Game/MPRWarehouse/ReferenceV3/') for p in dependencies)
+    dependency_report=dict(success=True,map_sha256=sha(ROOT/'Content/Maps/MPR_CAD_Warehouse.umap'),
+        recursive_map_dependencies=sorted(dependencies),v3_dependencies=0,assets_modified=False)
+    (SRC/'validation/package_dependencies.json').write_text(json.dumps(dependency_report,indent=2),encoding='utf8')
     by_label = {a.get_actor_label(): a for a in actors}
     return dict(success=False, map=MAP, reload_verified=True, preservation=preserved,
+                map_sha256=dependency_report['map_sha256'],
+                source_manifest_hashes={category:sha(path) for category,path in catalog['paths']},
                 mesh_count=len(meshes), mesh_audit=meshes, exterior_instances=sum(counts.values()),
                 instance_world_transform_audit=transform_audit, static_identity_actors=sum(static_counts.values()),
                 transform_tolerances=dict(position_cm=POSITION_TOLERANCE_CM,rotation_deg=ROTATION_TOLERANCE_DEG,scale=SCALE_TOLERANCE),

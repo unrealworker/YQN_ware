@@ -207,29 +207,26 @@ for x,y0,y1,nx in [(-181.93004,50,80,-1),(182.61076,62,80,1)]:
   for off in [-1.22,0,1.22]:g.box(n,'MPR4_Aluminium',(x+nx*.225,y+off,2.6),(.045,.055,2.55))
   for zz in [1.34,3.87]:g.box(n,'MPR4_Aluminium',(x+nx*.225,y,zz),(.045,2.50,.055))
 
-# Authority is the new overview and closeups. Old photo-traced banks are not reused.
-overview=REF/'ChatGPT 图像 2026年11月2日 15_56_24.png'
-control_cad=[[-181.93004,83.69038],[182.61076,83.58878],[135.36676,-83.94962],[-181.93004,-93.09362]]
-control_px=[[458,330],[1036,328],[982,530],[421,544]]
-eq=[];rhs=[]
-for (x,y),(u,v) in zip(control_cad,control_px):
- eq.extend([[x,y,1,0,0,0,-u*x,-u*y],[0,0,0,x,y,1,-v*x,-v*y]]);rhs.extend([u,v])
-hom=np.array(json.loads((ROOT/'SourceAssets/MPR/reference_v3/calibration/camera_calibration.json').read_text(encoding='utf8'))['roof_plane_camera_homography_world_to_image'])
-im=bpy.data.images.load(str(overview),check_existing=False);iw,ih=im.size
-pix=np.empty(iw*ih*4,dtype=np.float32);im.pixels.foreach_get(pix);pix=pix.reshape(ih,iw,4)[::-1,:,:3]*255
-def blue(x,y):
- q=hom@np.array([x,y,1]);u,v=np.rint(q[:2]/q[2]).astype(int)
- if not 1<u<iw-2 or not 1<v<ih-2:return False
- r,gg,b=np.median(pix[v-1:v+2,u-1:u+2],axis=(0,1))
- return b-r>16 and b-gg>4 and (r+gg+b)/3<160
-
+# The latest all-elements plan governs PV fields and equipment positions.
+# Retain physical CAD shell and regular physical panel geometry; never warp a
+# rooftop mesh to a perspective illustration.
+sys.path.insert(0,str(ROOT/'Saved/ParkRefinement/python_deps'))
+from shapely.geometry import Polygon,Point,box as shape_box
+from shapely.ops import unary_union
+from mpr_plan_layout import plan_to_world,load_registration
+solar_path=OUT/'plan_solar_v5.json'
+solar_plan=json.loads(solar_path.read_text(encoding='utf8'))
+assert solar_plan.get('review_ready'), 'Solar plan needs visual review'
+def plan_xy(points):return [v[:2] for v in plan_to_world(points)]
+solar_area=unary_union([Polygon(plan_xy(r['exterior_px']),[plan_xy(h) for h in r.get('holes_px',[])]) for r in solar_plan['regions']])
 pitch_x=1.12;pitch_y=1.95;ox=-60;oy=-79
 grid={}
 for ix in range(210):
  x=ox+ix*pitch_x
  for iy in range(78):
   y=oy+iy*pitch_y
-  if clear(x,y,2.1,2.1) and sum(blue(x+dx,y+dy) for dx,dy in [(0,0),(-.24,-.38),(.24,.38)])>=2:grid[(ix,iy)]=(x,y)
+  if clear(x,y,2.1,2.1) and solar_area.covers(shape_box(x-.50,y-.90,x+.50,y+.90)):
+   grid[(ix,iy)]=(x,y)
 # Filter tiny blue roof vent/cap artifacts while preserving holes/white passages.
 todo=set(grid);keep=set()
 while todo:
@@ -279,7 +276,6 @@ for ix in range(210):
       (xx-.085,yi,ROOF+.02),(xx+.085,yi,ROOF+.02),(xx+.085,yi,ROOF+.195),(xx-.085,yi,ROOF+.195),
       (xx-.085,yi+.10,ROOF+.195),(xx+.085,yi+.10,ROOF+.195)],[(0,1,2,3),(4,5,6,7),(7,6,9,8)])
   strips.append(dict(x=x,y0=y0,y1=y1,width=w,modules=len(run)))
-bpy.data.images.remove(im)
 
 n='SM_MPR4_RoofLight'
 g.box(n,'MPR4_IndustrialBlue',(0,0,.16),(1.85,1.35,.32),bevel=.025)
@@ -297,16 +293,15 @@ for x in [-.55,.55]:
   a=math.radians(i*72);g.box(n,'MPR4_Aluminium',(x+math.cos(a)*.22,math.sin(a)*.22,1.076),(.32,.075,.018),i*72)
 for z in [.40,.50,.60,.70,.80]:g.box(n,'MPR4_JointSeal',(0,-.816,z),(1.75,.025,.024))
 rooflights=[]
-for ix,x in enumerate(np.arange(-161,174,28)):
- for iy,y in enumerate(np.arange(-66,74,23)):
-  if not clear(x,y,5,5):continue
-  if any(abs(x-s['x'])<s['width']/2+1.8 and s['y0']-1.8<y<s['y1']+1.8 for s in strips):continue
-  rooflights.append([float(x),float(y)])
-  add('SM_MPR4_RoofHVAC' if (ix+iy*2)%11==0 else 'SM_MPR4_RoofLight',(x,y,ROOF),scale=(2,2,2),source='reference enlarged rooftop fixture; visual size estimate')
+for i,row in enumerate(solar_plan.get('roof_fixtures',[])):
+ x,y,_=plan_to_world(row['center_px'],ROOF)
+ if not clear(x,y,2.5,2.5) or solar_area.buffer(.3).contains(Point(x,y)):continue
+ rooflights.append([float(x),float(y)])
+ add('SM_MPR4_RoofHVAC' if row.get('type')=='hvac' else 'SM_MPR4_RoofLight',(x,y,ROOF),scale=(1.35,1.35,1.35),source='Latest all-elements plan measured fixture',source_pixel=row['center_px'])
 
 # Plane preview is geometry-driven; copy-independent reference calibration is explicit.
 svg=['<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="850" viewBox="0 0 1500 850">',
- '<rect width="1500" height="850" fill="#dce6ed"/>','<text x="55" y="40" font-family="Arial" font-size="23" fill="#12334b">MPR Reference V3 - CAD shell / reference-image solar fields</text>']
+ '<rect width="1500" height="850" fill="#dce6ed"/>','<text x="55" y="40" font-family="Arial" font-size="23" fill="#12334b">MPR - CAD shell / latest plan solar fields</text>']
 def sx(x):return 60+(x+190)*3.6
 def sy(y):return 85+(95-y)*3.6
 svg.append('<polygon points="'+' '.join(f'{sx(x):.1f},{sy(y):.1f}' for x,y in fp)+'" fill="#f6f7f9" stroke="#2676ab" stroke-width="3"/>')
@@ -324,12 +319,11 @@ metadata=dict(reference_version=4,roof_seam_visual_width_m=.15,roof_grid_pitch_m
   preserved='CAD main footprint, 72 dock/2 drive-in opening widths/centres, existing internal floor/columns/partitions/equipment',
   replace_old_prefixes=['SM_MPR_Exterior_','SM_MPR_Roof','SM_MPR_OfficeGlazing'],
   module_front='local -Y; origin at wall centerline and dock floor, except ground bollard/roof modules'),
- references=references,roof_layout=dict(source=overview.name,cad_control_points_m=control_cad,image_control_points_px=control_px,
-  homography=hom.tolist(),visual_module_count=len(grid),continuous_strip_count=len(strips),strips=strips,fixture_positions_m=rooflights),
+ references=references,roof_layout=dict(source=solar_path.relative_to(ROOT).as_posix(),source_sha256=hashlib.sha256(solar_path.read_bytes()).hexdigest(),plan_registration=load_registration(),visual_module_count=len(grid),continuous_strip_count=len(strips),strips=strips,fixture_positions_m=rooflights),
  assumptions=['Reference-generated images govern appearance; CAD governs physical plan. No survey accuracy claimed for image-derived appearance.',
   'Dock/shell heights retain the existing 13.4m roof / 13.6m facade and -1.2m external-ground interfaces; the references do not establish engineering dimensions.',
   'PV module pitch, fixtures, fabric, lamps and number plates are visual estimates; numbers 01-74 are visualization ordering, not verified operating door IDs.',
-  'New roof solar layout is sampled from the latest overview using four CAD-corresponding roof corners, cross-checked with images 01/05/06; cell counts are not a capacity inventory.',
+  'Solar field outlines and rooftop equipment are measured from the latest all-elements plan; regular 1.12 x 1.95m module pitch, cell counts are not a capacity inventory.',
   'Office glazing is an external facade layer at existing office interfaces; it does not create new CAD door openings.'],
  replaced_assets_are_not_modified=True)
 manifest=g.export(OUT,metadata,instances)

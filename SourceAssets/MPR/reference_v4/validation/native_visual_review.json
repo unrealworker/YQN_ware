@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "status": "review_complete_with_visual_residuals",
+  "map_sha256": "089c1b196d96efeae9da4c24073681022736d6e5e4acc3a899f3b7fa7eab97b2",
+  "source_report_hashes": {
+    "Saved/MPR/reference_v4/runtime_views/capture_report.json": "d9ca7df2be9e5e22c8234e40ff7d6cda11f7be3bcb35fbead7a3319a8ed719d8",
+    "Saved/MPR/road_v5/runtime_views/capture_report.json": "e5f64299490b52a27fb37b643cda0f277549d638b558ab7ba32118b29895585b"
+  },
+  "images": [
+    {
+      "name": "01-overall",
+      "path": "Saved/MPR/reference_v4/runtime_views/01-overall_1793673474286783000.png",
+      "sha256": "6c530448c09299ffdd7deb6fbef0a4141506a880f4e6c7f2df59542990623257"
+    },
+    {
+      "name": "02-yard-corner",
+      "path": "Saved/MPR/reference_v4/runtime_views/02-yard-corner_1793673477871235900.png",
+      "sha256": "7f4e476dc54897362a20d1417d676f0048e9ff7a39998cf06cc9fc90350ab445"
+    },
+    {
+      "name": "03-roof",
+      "path": "Saved/MPR/reference_v4/runtime_views/03-roof_1793673481162225000.png",
+      "sha256": "7cd960c970b3666dbf3e711d507791b0150c9033de87025a68331c1e19a1d06c"
+    },
+    {
+      "name": "04-docks",
+      "path": "Saved/MPR/reference_v4/runtime_views/04-docks_1793673484460086600.png",
+      "sha256": "7c7e16d54a2b168dfe63a4aebd90a8e412ad36b2c475c8b724e0a0049fa50d1f"
+    },
+    {
+      "name": "05-yard",
+      "path": "Saved/MPR/reference_v4/runtime_views/05-yard_1793673487741838600.png",
+      "sha256": "36d5e5f2082e208041912c07f751330b8f4f511632ba0ac56e89f4b61be3e7e1"
+    },
+    {
+      "name": "06-pond",
+      "path": "Saved/MPR/reference_v4/runtime_views/06-pond_1793673491023706100.png",
+      "sha256": "483521fbab958a7722cc6418fec5381986c2d53039193d30f6f42a4afa1b5bf9"
+    },
+    {
+      "name": "07-railway",
+      "path": "Saved/MPR/reference_v4/runtime_views/07-railway_1793673494318333500.png",
+      "sha256": "c225e9c44614f8d9bd53ace6a991fa0817050cd0c7e51c77edc2fe4362587578"
+    },
+    {
+      "name": "08-interior-preserved",
+      "path": "Saved/MPR/reference_v4/runtime_views/08-interior-preserved_1793673497600654500.png",
+      "sha256": "5b97943e5a0b5b2721435b5797ca0296420e22bd996434bb71124042b7bbce5b"
+    },
+    {
+      "name": "09-plan-overview",
+      "path": "Saved/MPR/road_v5/runtime_views/09-plan-overview_1793673558082735200.png",
+      "sha256": "b5d6cae72d9abdda48f003f15447e240563f05413a682653fecde4b5a3934501"
+    },
+    {
+      "name": "10-houses-close",
+      "path": "Saved/MPR/road_v5/runtime_views/10-houses-close_1793673561659985100.png",
+      "sha256": "6cd4ac393ee29801d12a270abd31f0f62c92d4a737018814e586e0b7566649e4"
+    },
+    {
+      "name": "11-houses-reverse",
+      "path": "Saved/MPR/road_v5/runtime_views/11-houses-reverse_1793673564957065000.png",
+      "sha256": "8ae89b3688d44d9b1d3ae25a4eccea3268c1ade8bfbf7a9f0b762bd237eae636"
+    },
+    {
+      "name": "12-neighbor-docks",
+      "path": "Saved/MPR/road_v5/runtime_views/12-neighbor-docks_1793673568223873000.png",
+      "sha256": "a25638f88e02658852b860c7301667438467b439c74f6dd55f51c2655d36fb26"
+    },
+    {
+      "name": "13-east-context",
+      "path": "Saved/MPR/road_v5/runtime_views/13-east-context_1793673571476289000.png",
+      "sha256": "1b4efd46a3a4741fd44c766f4635ec39a345a430f84c62654aecb2bb815fe22b"
+    }
+  ],
+  "inspected_original_count": 4,
+  "geometry_findings": [
+    {
+      "views": [
+        "10-houses-close",
+        "11-houses-reverse"
+      ],
+      "result": "The reviewed front and reverse views show straight roof ridges, planar roof facets and vertical walls; the earlier visibly sheared house forms are no longer evident. This agrees with saved geometry invariants, not a pixel-perfect source claim."
+    },
+    {
+      "views": [
+        "03-roof"
+      ],
+      "result": "Large PV fields now have clean orthogonal boundaries; U/C/E-shaped openings and main aisles remain clear. Local grid-stroke false holes are absent."
+    },
+    {
+      "views": [
+        "04-docks",
+        "05-yard"
+      ],
+      "result": "Dock seals, roller doors, bollards, stand markings and trailers are present; standing apron remains visually connected."
+    },
+    {
+      "views": [
+        "07-railway"
+      ],
+      "result": "Rail pairs, sleepers, branches and boxcars are visually distinguishable; track-bed material remains simplified."
+    },
+    {
+      "views": [
+        "08-interior-preserved"
+      ],
+      "result": "Existing warehouse interior is visibly present after hiding roof; unchanged-content guarantee comes from preservation digest, not image alone."
+    },
+    {
+      "views": [
+        "09-plan-overview",
+        "13-east-context"
+      ],
+      "result": "New plan-scale layout is represented with true rectangular houses and circular tanks. A read-only footprint test found all 8 tank footprints contained in context paved surfaces; slight apparent edge proximity in perspective is not measured overlap."
+    },
+    {
+      "views": [
+        "06-pond",
+        "10-houses-close",
+        "11-houses-reverse",
+        "13-east-context"
+      ],
+      "result": "Final road fillets visibly round the larger residential-junction and eastern-road corners while keeping buildings straight. The pond-road border remains distinct after walkway clipping. Narrow source contour micro-offsets are still visible in some straight-road edges; the close pond perimeter remains faceted."
+    }
+  ],
+  "residuals": [
+    {
+      "id": "curb_local_kinks",
+      "severity": "visible",
+      "views": [
+        "10-houses-close",
+        "11-houses-reverse",
+        "13-east-context"
+      ],
+      "description": "Large residential-junction and bend corners are now rounded; small inherited contour offsets and narrow local wiggles remain visible near parts of the straight road edges. They are less pronounced than the prior sharp polygon corners.",
+      "description_zh": "住宅路口及大弯转角已圆顺；部分直路边缘仍保留线稿中的微小偏移与局部起伏，未宣称完全无折点。"
+    },
+    {
+      "id": "context_simplification",
+      "severity": "style_difference",
+      "views": [
+        "12-neighbor-docks",
+        "13-east-context"
+      ],
+      "description": "Northern neighboring warehouse dock facade and tank assets are simplified; close views have lower detail and contrast than the main warehouse."
+    },
+    {
+      "id": "pale_foliage",
+      "severity": "style_difference",
+      "views": [
+        "06-pond",
+        "07-railway",
+        "10-houses-close"
+      ],
+      "description": "Actual UE foliage appears paler and finer-grained than Blender overview/reference appearance."
+    },
+    {
+      "id": "reference_external_tails",
+      "severity": "reference_external_scope",
+      "views": [
+        "02-yard-corner",
+        "12-neighbor-docks"
+      ],
+      "description": "Some hard road end caps remain visible beyond the supplied reference extent, especially in low context view."
+    },
+    {
+      "id": "close_pond_faceting",
+      "severity": "visible",
+      "views": [
+        "06-pond"
+      ],
+      "description": "The pond walkway is clipped away from the final road; pond and walk edges still show polygon facets at close range.",
+      "description_zh": "池边步道已与最终道路分离；池塘及步道周界在近景下仍可见多边形折面。"
+    },
+    {
+      "id": "high_key_interior",
+      "severity": "preserved_existing_scene",
+      "views": [
+        "08-interior-preserved"
+      ],
+      "description": "Interior retained under current lighting appears high-key/low contrast in overhead view; not altered as part of exterior work."
+    }
+  ],
+  "limits": [
+    "Visual review covered these 13 static native images, not a continuous camera path or all possible viewpoints.",
+    "No claim of perfect 1:1 reconstruction, user acceptance or Pixel Streaming performance.",
+    "These findings do not authorize input changes after validation.",
+    "After the last local road correction, only the four affected close views were re-reviewed; unchanged-region conclusions retain the explicitly recorded preceding full-review provenance."
+  ],
+  "reviewed_in_this_revision": [
+    "06-pond",
+    "10-houses-close",
+    "11-houses-reverse",
+    "13-east-context"
+  ],
+  "previous_full_review": {
+    "map_sha256": "15fc691084a14572b55e65ea973bfc0404a4f863a2772ec99c315c5fe0285f69",
+    "inspected_original_count": 13,
+    "images": [
+      {
+        "name": "01-overall",
+        "path": "Saved/MPR/reference_v4/runtime_views/01-overall_1793671299175705700.png",
+        "sha256": "b1c687ce646b15124595edac828eccf17b805e5d97d55e8ad26c5d78b70e7268"
+      },
+      {
+        "name": "02-yard-corner",
+        "path": "Saved/MPR/reference_v4/runtime_views/02-yard-corner_1793671302746492100.png",
+        "sha256": "6151154e2f4a17ab950f7ef8570ac8902f901f256bff8ed7efd116d03d26f128"
+      },
+      {
+        "name": "03-roof",
+        "path": "Saved/MPR/reference_v4/runtime_views/03-roof_1793671306024718500.png",
+        "sha256": "c308a13c6d6805a0e37266bf8f199a524aed0013697f0464866a7df72b3f2a3e"
+      },
+      {
+        "name": "04-docks",
+        "path": "Saved/MPR/reference_v4/runtime_views/04-docks_1793671309284075700.png",
+        "sha256": "0986bfe8900e73b0a13a85c65c605b2354201c235feba121037a73d5275933ad"
+      },
+      {
+        "name": "05-yard",
+        "path": "Saved/MPR/reference_v4/runtime_views/05-yard_1793671312550084900.png",
+        "sha256": "37985a2500f90bdbfc073929c35df19da2d41b1ada1e1b0090b0c03f804e1ca9"
+      },
+      {
+        "name": "06-pond",
+        "path": "Saved/MPR/reference_v4/runtime_views/06-pond_1793671315820051000.png",
+        "sha256": "1944840460d2e04321c5e4cbf9760d045a74b3abeecbee21890fc28ca0e3dbdf"
+      },
+      {
+        "name": "07-railway",
+        "path": "Saved/MPR/reference_v4/runtime_views/07-railway_1793671319089779500.png",
+        "sha256": "c11b75aee44c8ebb9f43dedff4f5ef497d7fdbbdd2b52625dfca75d7f98c2ef5"
+      },
+      {
+        "name": "08-interior-preserved",
+        "path": "Saved/MPR/reference_v4/runtime_views/08-interior-preserved_1793671322367210400.png",
+        "sha256": "df2ebb64c52af3e19df145e970772bdaac6354f002e4a0348ec224759ff40602"
+      },
+      {
+        "name": "09-plan-overview",
+        "path": "Saved/MPR/road_v5/runtime_views/09-plan-overview_1793671382065355300.png",
+        "sha256": "202cd27dfcb21b8e104879150e8ddf53fcbdebfe9f069de95aea18a00cb3a474"
+      },
+      {
+        "name": "10-houses-close",
+        "path": "Saved/MPR/road_v5/runtime_views/10-houses-close_1793671385628091800.png",
+        "sha256": "5caf7f08f623c27b6267fa6a540e72e69676a3be043e67bb51460c3a1974358c"
+      },
+      {
+        "name": "11-houses-reverse",
+        "path": "Saved/MPR/road_v5/runtime_views/11-houses-reverse_1793671388982703500.png",
+        "sha256": "68ccb1ea922dda6ebbe2edaba5258032fa998399eb89dca48da91682befbfa2b"
+      },
+      {
+        "name": "12-neighbor-docks",
+        "path": "Saved/MPR/road_v5/runtime_views/12-neighbor-docks_1793671392238431400.png",
+        "sha256": "78328d276e5afe86ef7d894c02190e64cd62db07ce6c1461e374483a39a8cbc3"
+      },
+      {
+        "name": "13-east-context",
+        "path": "Saved/MPR/road_v5/runtime_views/13-east-context_1793671395474866700.png",
+        "sha256": "c8ff83c48474f513cef055ac50e4ab5fcc4cb4f134f7ada0cb28a9dc8bf1a0dd"
+      }
+    ]
+  },
+  "review_scope": "All 13 current image hashes are bound. After the final road/pond-walk-only edit, four affected native close views were re-inspected. Prior full review findings for unchanged architecture/materials/props are retained explicitly, not counted as 13 fresh visual inspections."
+}
