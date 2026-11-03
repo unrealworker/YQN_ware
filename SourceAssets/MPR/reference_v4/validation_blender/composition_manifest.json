@@ -4,27 +4,27 @@
   "sources": {
     "architecture": {
       "manifest": "SourceAssets/MPR/reference_v4/architecture/reference_shell_manifest.json",
-      "manifest_sha256": "81ae4862e40afe31d146c65c5570cd7a04fae22611a9255230869f5fe20d8598",
+      "manifest_sha256": "dd46d34784a43cec7c85c674206917a127bc9cb7dbdd159ba8164d19ec5ae0f6",
       "blend": "SourceAssets/MPR/reference_v4/architecture/mpr_reference_shell.blend",
-      "blend_sha256": "5fc8a66319ebcda33d5322e76c55bb4c1efbc2b2e4ad82a7cd975cbc8f0c1b59"
+      "blend_sha256": "177f1d1999c87fed6f49e774194d92bafd96139072c0dbce08240af48095aaeb"
     },
     "site": {
       "manifest": "SourceAssets/MPR/reference_v4/site/manifest.json",
-      "manifest_sha256": "f0aae8a34a31d574c76f3ed69ff9075cca4598e0b01cab38ecf3d0afe12415ed",
+      "manifest_sha256": "2179263159f2a0c516b82f6de8bb0dd8f113b32ba5b00dd6735cd55aeff875ca",
       "blend": "SourceAssets/MPR/reference_v4/site/MPR_ReferenceSite.blend",
-      "blend_sha256": "1a9d02256de3cbcf8695be57396a906eb4d4c4cfa6b8d5bd3f638401944d04b1"
+      "blend_sha256": "845096dd76bd47b7adbb2232b6a92c1a0c85a31748737ccb57f31253aff81c3d"
     },
     "context": {
       "manifest": "SourceAssets/MPR/reference_v4/context/manifest.json",
-      "manifest_sha256": "305d0f9a641453a712c7b86aaf9f04899b4740861013e24e99b076cd14dd9ca3",
+      "manifest_sha256": "70e257dc3e7a2335998feed5aa4727b32bb6266bb620a4a42d780c0d3c616767",
       "blend": "SourceAssets/MPR/reference_v4/context/mpr4_reference_context.blend",
-      "blend_sha256": "0156749b77fc3fae8f560f794f4298c5011dc7692f4fd241cf5f3d5853e5c1f0"
+      "blend_sha256": "d76b8d7bd1a9ca33ba2d4731af3833e41dbf539e87b4ef8a855e510d3350b08c"
     },
     "props": {
       "manifest": "SourceAssets/MPR/reference_v4/props/manifest.json",
-      "manifest_sha256": "f8758bddaa37abf35fc4e517de29eb93b3d49a2241f78694d60a3a8de36917b5",
+      "manifest_sha256": "50e5eb8af400eb96e63d289ab054393e71f2dc9b8f47e9ada0f8f14cd2f303a6",
       "blend": "SourceAssets/MPR/reference_v4/props/MPR_ReferenceV4_Props.blend",
-      "blend_sha256": "41349cea38015471ede93b325301656a5dd18dd1023d49b9d19c2d092590b9c4"
+      "blend_sha256": "bbf19a9dc4c0c1bf769d51334bb41f7b08e0e49f0236bf06f3e34bbefb93077a"
     }
   },
   "geometry": {
@@ -33,21 +33,21 @@
       "static_partitions": 44
     },
     "site": {
-      "source_meshes": 26,
-      "static_partitions": 26
+      "source_meshes": 30,
+      "static_partitions": 30
     },
     "context": {
       "source_meshes": 29,
       "static_partitions": 29
     },
     "props": {
-      "source_meshes": 7,
+      "source_meshes": 9,
       "static_partitions": 0
     }
   },
   "instances": {
-    "architecture": 714,
-    "site": 488,
+    "architecture": 880,
+    "site": 564,
     "context": 0
   },
   "reference_version": 4,
@@ -60,9 +60,9 @@
   "tree_scale_contract": "mpr_reference_catalog.load_catalog; geometry/scale identical for review and final",
   "interim_components": [],
   "output": "SourceAssets/MPR/reference_v4/MPR_ReferenceExterior.blend",
-  "mesh_datablocks": 125,
-  "visible_mesh_objects": 1301,
-  "total_manifest_instances": 1202,
+  "mesh_datablocks": 131,
+  "visible_mesh_objects": 1547,
+  "total_manifest_instances": 1444,
   "props_display_objects_imported": false,
   "validation_boundary": "Blender source composition and optional rendered previews only; UE acceptance is separate."
 }

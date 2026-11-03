@@ -8,7 +8,7 @@ from pathlib import Path
 import bpy,numpy as np
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(Path(__file__).parent))
-from mpr_reference_shell_v4_lib import Geometry,make_textures
+from mpr_reference_shell_v4_lib import Geometry,make_textures,solar_lod_screen_sizes
 
 OUT=ROOT/'SourceAssets/MPR/reference_v4/architecture'
 REF=ROOT/'SourceAssets/MPR/reference_v4/references'
@@ -19,7 +19,7 @@ textures=make_textures(OUT/'textures')
 materials={
  'MPR4_FacadeWhite':dict(color=[.80,.82,.85],roughness=.72,uv_tile_m=2,textures=textures['paint'],normal_strength=.12),
  'MPR4_IndustrialBlue':dict(color=[.009,.155,.43],roughness=.46,metallic=.18,uv_tile_m=2,textures=textures['paint'],normal_strength=.08),
- 'MPR4_RoofMembrane':dict(color=[.91,.935,.97],roughness=.76,uv_tile_m=3,textures=textures['paint'],normal_strength=.14),
+ 'MPR4_RoofMembrane':dict(color=[1.,1.,1.],roughness=.76,uv_tile_m=3,textures=textures['paint'],normal_strength=.14),
  'MPR4_RoofSeam':dict(color=[.39,.46,.54],roughness=.88),
  'MPR4_JointSeal':dict(color=[.23,.27,.31],roughness=.87),
  'MPR4_Aluminium':dict(color=[.61,.66,.72],roughness=.31,metallic=.78),
@@ -30,14 +30,17 @@ materials={
  'MPR4_SafetyYellow':dict(color=[1.0,.63,.015],roughness=.44,metallic=.08),
  'MPR4_ReflectiveWhite':dict(color=[.89,.92,.95],roughness=.28,metallic=.10),
  'MPR4_CheckerSteel':dict(color=[.48,.54,.60],roughness=.48,metallic=.80,uv_tile_m=.45,textures=textures['checker'],normal_strength=.75),
- 'MPR4_SolarCells':dict(color=[.70,.88,1.0],roughness=.31,metallic=.72,uv_tile_m=1,textures=textures['solar'],normal_strength=.08,
+ 'MPR4_SolarFrame':dict(color=[.25,.32,.40],roughness=.55,metallic=.50),
+ 'MPR4_SolarMid':dict(color=[.58,.83,1.0],roughness=.58,metallic=.35,uv_tile_m=1,textures=textures['solar_mid'],normal_strength=0.),
+ 'MPR4_SolarFar':dict(color=[.58,.83,1.0],roughness=.68,metallic=.25,uv_tile_m=8,textures=textures['solar_far'],normal_strength=0.),
+ 'MPR4_SolarCells':dict(color=[.58,.83,1.0],roughness=.50,metallic=.50,uv_tile_m=1,textures=textures['solar'],normal_strength=.03,
                        uv_note='Each 1.0528 x 1.872 m module repeats UV 0..1; texture contains 6x12 visual cells.'),
  'MPR4_LampLens':dict(color=[.86,.91,1.0],roughness=.21,emission=.7),
 }
 for m in materials.values():
  m.setdefault('metallic',0);m['color_space']='linear RGB tint; albedo PNG sRGB, normal PNG NonColor';m['texture_blend']='multiply albedo by color'
  if 'normal' in m.get('textures',{}):m['normal_convention']='OpenGL';m['ue_flip_green_channel']=True
-g=Geometry(materials);instances={};apertures=[]
+g=Geometry(materials);instances={};apertures=[];facade_bands=[]
 def add(n,p,yaw=0,scale=(1,1,1),**extra):
  instances.setdefault(n,[]).append(dict(position_m=[round(v,6) for v in p],rotation_deg=yaw,scale=list(scale),**extra))
 
@@ -73,12 +76,15 @@ for side,(a,b) in enumerate(zip(fp,fp[1:]+fp[:1])):
    apertures.append(dict(id=d['id'],side=side,opening_width_m=d['opening_width_m'],height_m=h,
                         wall_position_m=[*pt(t),0],cad_position_m=p,dock=dock))
  cuts.sort(key=lambda c:c[0]);xs=sorted(set([0.,length]+[min(length,i*6.1) for i in range(1,math.ceil(length/6.1))]+[v for c in cuts for v in c[:2]]))
+ blue_height=4.5 if any(c[4] for c in cuts) else 1.4
+ facade_bands.append(dict(side=side,dock_facade=any(c[4]for c in cuts),blue_top_z_m=blue_height,
+                          unchanged_cad_wall_endpoints=[a,b],aperture_ids=[c[3]['id']for c in cuts]))
  for lo,hi in zip(xs,xs[1:]):
   if hi-lo<.003:continue
   mid=(lo+hi)/2;cut=next((c for c in cuts if c[0]-.001<mid<c[1]+.001),None)
   for za,zb in zip([-1.2,0,1.4,4.2,4.5,7.7,11.4], [0,1.4,4.2,4.5,7.7,11.4,13.6]):
    if cut and za>=(-.001 if cut[4] else -1.201) and zb<=cut[2]+.001:continue
-   role='MPR4_IndustrialBlue' if zb<=1.4001 else 'MPR4_FacadeWhite'
+   role='MPR4_IndustrialBlue' if zb<=blue_height+.0001 else 'MPR4_FacadeWhite'
    g.segment(name,role,pt(lo),pt(hi),.3048,(za+zb)/2,zb-za)
  # Shallow exterior panel expansion joints. Real aperture geometry stays open.
  for t in [i*6.1 for i in range(1,math.ceil(length/6.1))]:
@@ -207,7 +213,7 @@ for x,y0,y1,nx in [(-181.93004,50,80,-1),(182.61076,62,80,1)]:
   for off in [-1.22,0,1.22]:g.box(n,'MPR4_Aluminium',(x+nx*.225,y+off,2.6),(.045,.055,2.55))
   for zz in [1.34,3.87]:g.box(n,'MPR4_Aluminium',(x+nx*.225,y,zz),(.045,2.50,.055))
 
-# The latest all-elements plan governs PV fields and equipment positions.
+# The latest actual aerial roof photograph governs PV fields and devices.
 # Retain physical CAD shell and regular physical panel geometry; never warp a
 # rooftop mesh to a perspective illustration.
 sys.path.insert(0,str(ROOT/'Saved/ParkRefinement/python_deps'))
@@ -225,7 +231,7 @@ for ix in range(210):
  x=ox+ix*pitch_x
  for iy in range(78):
   y=oy+iy*pitch_y
-  if clear(x,y,2.1,2.1) and solar_area.covers(shape_box(x-.50,y-.90,x+.50,y+.90)):
+  if clear(x,y,2.1,2.1) and solar_area.covers(shape_box(x-.5264,y-.946,x+.5264,y+.946)):
    grid[(ix,iy)]=(x,y)
 # Filter tiny blue roof vent/cap artifacts while preserving holes/white passages.
 todo=set(grid);keep=set()
@@ -236,7 +242,7 @@ while todo:
   for key in [(a-1,b),(a+1,b),(a,b-1),(a,b+1)]:
    if key in todo:todo.remove(key);queue.append(key)
  if len(cluster)>=12:keep.update(cluster)
-grid={k:grid[k] for k in sorted(keep)};strips=[]
+grid={k:grid[k] for k in sorted(keep)};strips=[];solar_support={}
 for ix in range(210):
  rows=sorted(y for x,y in grid if x==ix);runs=[]
  for iy in rows:
@@ -253,29 +259,50 @@ for ix in range(210):
      [(-dx,-dy,-dz),(dx,-dy,-dz),(dx,dy,-dz),(-dx,dy,-dz),
       (-dx,-dy,dz),(dx,-dy,dz),(dx,dy,dz),(-dx,dy,dz)]]
   base_faces=[(0,3,2,1),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7)]
-  g.mesh(n,'MPR4_Aluminium',base_vertices,base_faces)
-  # Far LOD uses the same open-top base and unchanged textured cell plane.
-  lod=n+'_LOD1';g.mesh(lod,'MPR4_Aluminium',base_vertices,base_faces)
-  g.mesh(lod,'MPR4_SolarCells',[(x-w/2+.02,y0+.02,z),(x+w/2-.02,y0+.02,z),(x+w/2-.02,y1-.02,z),(x-w/2+.02,y1-.02,z)],[(0,1,2,3)],
-         [[(0,0),(1,0),(1,len(run)),(0,len(run))]])
-  # Continuous blue cell plane repeats per module, with separate silver perimeter.
+  g.mesh(n,'MPR4_SolarFrame',base_vertices,base_faces)
+  solar_support.setdefault(n,[]).append(shape_box(x-w/2+.02,y0+.02,x+w/2-.02,y1-.02))
+  # Near geometry keeps modules, frames and supports; the two farther levels
+  # merge only subpixel strip gaps and retain all measured clearance holes.
   g.mesh(n,'MPR4_SolarCells',[(x-w/2+.02,y0+.02,z),(x+w/2-.02,y0+.02,z),(x+w/2-.02,y1-.02,z),(x-w/2+.02,y1-.02,z)],[(0,1,2,3)],
          [[(0,0),(1,0),(1,len(run)),(0,len(run))]])
-  for xx in [x-w/2+.006,x+w/2-.006]:g.box(n,'MPR4_Aluminium',(xx,(y0+y1)/2,z+.006),(.012,y1-y0,.02))
+  for xx in [x-w/2+.006,x+w/2-.006]:g.box(n,'MPR4_SolarFrame',(xx,(y0+y1)/2,z+.006),(.012,y1-y0,.02))
   for iy in run[:-1]:
    yy=oy+(iy+.5)*pitch_y
-   g.mesh(n,'MPR4_Aluminium',[(x-w/2,yy-.013,z+.020),(x+w/2,yy-.013,z+.020),
+   g.mesh(n,'MPR4_SolarFrame',[(x-w/2,yy-.013,z+.020),(x+w/2,yy-.013,z+.020),
      (x+w/2,yy+.013,z+.020),(x-w/2,yy+.013,z+.020),
      (x-w/2,yy-.013,z-.01),(x+w/2,yy-.013,z-.01),
      (x+w/2,yy+.013,z-.01),(x-w/2,yy+.013,z-.01)],[(0,1,2,3),(4,5,1,0),(3,2,6,7)])
   # Feet at strip ends and every 4 modules; geometry batched, not independent Actors.
   for yi in [y0+.12]+[oy+(r+.5)*pitch_y for r in run[3:-1:4]]+[y1-.12]:
    for xx in [x-w*.36,x+w*.36]:
-    g.mesh(n,'MPR4_Aluminium',[(xx-.11,yi-.13,ROOF+.02),(xx+.11,yi-.13,ROOF+.02),
+    g.mesh(n,'MPR4_SolarFrame',[(xx-.11,yi-.13,ROOF+.02),(xx+.11,yi-.13,ROOF+.02),
       (xx+.11,yi+.13,ROOF+.02),(xx-.11,yi+.13,ROOF+.02),
       (xx-.085,yi,ROOF+.02),(xx+.085,yi,ROOF+.02),(xx+.085,yi,ROOF+.195),(xx-.085,yi,ROOF+.195),
       (xx-.085,yi+.10,ROOF+.195),(xx+.085,yi+.10,ROOF+.195)],[(0,1,2,3),(4,5,6,7),(7,6,9,8)])
   strips.append(dict(x=x,y0=y0,y1=y1,width=w,modules=len(run)))
+
+solar_lod_audit=[]
+for name,rectangles in sorted(solar_support.items()):
+ near=unary_union(rectangles)
+ # 0.1072m is the blue-to-blue inter-strip gap. Closing at 0.055m fills
+ # this sampling lattice, not the metre-scale access/equipment openings.
+ merged=near.buffer(.055,join_style=2).buffer(-.055,join_style=2).intersection(solar_area)
+ assert merged.is_valid and near.difference(merged).area<1e-5
+ assert merged.difference(solar_area).area<1e-6
+ # Narrow grey-blue mounting channels occupy only the sub-module gaps, below
+ # the cells. They remove white-roof streaks without filling real aisles or
+ # introducing a second coplanar cap. The measured holes stay excluded.
+ channel=merged.difference(near).intersection(solar_area)
+ if not channel.is_empty:
+  g.solar_surface(name,'MPR4_SolarMid',channel,ROOF+.10,(pitch_x,pitch_y),(ox-pitch_x/2,oy-pitch_y/2))
+ for lod,role,period in [(1,'MPR4_SolarMid',(pitch_x,pitch_y)),(2,'MPR4_SolarFar',(8.,8.))]:
+  origin=(ox-pitch_x/2,oy-pitch_y/2) if lod==1 else (0.,0.)
+  g.solar_surface(name+f'_LOD{lod}',role,merged,ROOF+.24,period,origin)
+ solar_lod_audit.append(dict(name=name,near_blue_area_m2=near.area,merged_blue_area_m2=merged.area,
+  tiny_strip_gaps_merged_m2=merged.area-near.area,maximum_closing_radius_m=.055,
+  near_mounting_channels_area_m2=channel.area,near_channel_height_m=ROOF+.10,cell_to_channel_vertical_clearance_m=.14,
+  clearance_policy='Subtract identical aerial source solar_area with all measured enclosed holes and open notches; no macro outline or aisle expansion',
+  intermediate_far_same_geometry=True))
 
 n='SM_MPR4_RoofLight'
 g.box(n,'MPR4_IndustrialBlue',(0,0,.16),(1.85,1.35,.32),bevel=.025)
@@ -295,9 +322,11 @@ for z in [.40,.50,.60,.70,.80]:g.box(n,'MPR4_JointSeal',(0,-.816,z),(1.75,.025,.
 rooflights=[]
 for i,row in enumerate(solar_plan.get('roof_fixtures',[])):
  x,y,_=plan_to_world(row['center_px'],ROOF)
- if not clear(x,y,2.5,2.5) or solar_area.buffer(.3).contains(Point(x,y)):continue
+ scale=row.get('visual_scale',1.0 if row.get('clearance_id') else 1.35)
+ fixture_box=shape_box(x-.925*scale,y-.675*scale,x+.925*scale,y+.675*scale)
+ if not clear(x,y,2.5,2.5) or solar_area.buffer(.04).intersects(fixture_box):continue
  rooflights.append([float(x),float(y)])
- add('SM_MPR4_RoofHVAC' if row.get('type')=='hvac' else 'SM_MPR4_RoofLight',(x,y,ROOF),scale=(1.35,1.35,1.35),source='Latest all-elements plan measured fixture',source_pixel=row['center_px'])
+ add('SM_MPR4_RoofHVAC' if row.get('type')=='hvac' else 'SM_MPR4_RoofLight',(x,y,ROOF),scale=(scale,scale,scale),source='Latest all-elements plan measured fixture',source_pixel=row['center_px'],clearance_id=row.get('clearance_id'))
 
 # Plane preview is geometry-driven; copy-independent reference calibration is explicit.
 svg=['<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="850" viewBox="0 0 1500 850">',
@@ -326,12 +355,25 @@ metadata=dict(reference_version=4,roof_seam_visual_width_m=.15,roof_grid_pitch_m
   'Solar field outlines and rooftop equipment are measured from the latest all-elements plan; regular 1.12 x 1.95m module pitch, cell counts are not a capacity inventory.',
   'Office glazing is an external facade layer at existing office interfaces; it does not create new CAD door openings.'],
  replaced_assets_are_not_modified=True)
+metadata['facade_blue_bands']=facade_bands
+metadata['solar_lod_policy']=dict(version=7,levels=['Near physical modules and recessed mounting channels','Intermediate merged module finish','Far continuous low-frequency finish'],
+ reference_screen_sizes=[1.,.9,.35],reference_bounds_radius_m=70.,threshold_rule='Each nonzero LOD threshold scales by actual bank bounds radius / 70m; equal physical detail distance, not one threshold for unequal banks.',
+ threshold_validation='Final native camera zoom/orbit validation required after import.',
+ intermediate_module_grid=dict(pitch_m=[pitch_x,pitch_y],uv_origin_m=[ox-pitch_x/2,oy-pitch_y/2],
+  seam_width_fraction=.10,falloff='Periodic smoothstep; linear-light blend; no 6x12 cell lines',
+  texture_linear_gain=[1.6/.58,1.58/.83,1.4],unchanged_material_tint=[.58,.83,1.]),
+ clearance_count=len(solar_plan.get('clearances',[])),banks=solar_lod_audit,
+ material_policy='Solar-only frame/cells/mid/far; shared aluminium and non-solar finishes unchanged.',
+ far_geometry_policy='Merge only the 10.72cm blue-to-blue strip lattice; preserve metre-scale measured holes and macro boundaries.')
 manifest=g.export(OUT,metadata,instances)
 manifest['schema_version']=4
 byname={r['name']:r for r in manifest['meshes']}
 for r in manifest['meshes']:
- r['lod']=1 if r['name'].endswith('_LOD1') else 0
+ r['lod']=int(r['name'][-1]) if r['name'].endswith(('_LOD1','_LOD2')) else 0
  if r['name'].startswith('SM_MPR4_SolarBank') and r['lod']==0:
-  lo=byname[r['name']+'_LOD1'];r.update(lod_files=[lo['fbx']],lod_triangles=[r['triangles'],lo['triangles']],lod_screen_sizes=[1,.30])
+  levels=[r,byname[r['name']+'_LOD1'],byname[r['name']+'_LOD2']]
+  r.update(lod_files=[l['fbx']for l in levels[1:]],lod_triangles=[l['triangles']for l in levels],lod_screen_sizes=solar_lod_screen_sizes(r['bounds_m']),
+           lod_material_roles=[l['material_roles']for l in levels],
+           all_lod_material_roles=list(dict.fromkeys(role for l in levels for role in l['material_roles'])))
 (OUT/'reference_shell_manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2,default=lambda v:v.item() if isinstance(v,np.generic) else str(v)),encoding='utf8')
 print('MPR_REFERENCE_SHELL_COMPLETE',json.dumps(manifest['optimization']))

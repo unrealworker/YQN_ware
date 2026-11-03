@@ -1163,63 +1163,294 @@
       "path": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_00_0",
       "bounds_cm": [
         [
-          -3812.6396484375,
+          -4148.6396484375,
           2004.6405029296875
         ],
         [
-          -189.6001739501953,
-          5654.6005859375
+          980.3998413085938,
+          7799.6005859375
         ],
         [
-          1342.0,
+          1341.39990234375,
           1366.0
         ]
       ],
-      "material_slots": 2,
-      "source_triangles": 12876,
-      "lod_count": 2
+      "material_slots": 4,
+      "source_triangles": 18006,
+      "lod_count": 3,
+      "explicit_lod_audit": {
+        "imported_slot_roles_before": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "slot_roles_after": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "lods": [
+          {
+            "lod": 0,
+            "screen_size": 1.0,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              },
+              {
+                "section": 1,
+                "slot_index": 1,
+                "role": "MPR4_SolarCells",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarCells.MI_MPR4_SolarCells"
+              },
+              {
+                "section": 2,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid.MI_MPR4_SolarMid"
+              }
+            ]
+          },
+          {
+            "lod": 1,
+            "screen_size": 0.5904667973518372,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid.MI_MPR4_SolarMid"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              }
+            ]
+          },
+          {
+            "lod": 2,
+            "screen_size": 0.22962598502635956,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 3,
+                "role": "MPR4_SolarFar",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFar.MI_MPR4_SolarFar"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              }
+            ]
+          }
+        ],
+        "removed_unused_or_duplicate_slot_count": 0
+      }
     },
     {
       "name": "SM_MPR4_SolarBank_01_0",
       "path": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_01_0",
       "bounds_cm": [
         [
-          2011.3599853515625,
-          7940.640625
+          2011.360107421875,
+          7940.64111328125
         ],
         [
-          -969.6007080078125,
-          5654.60009765625
+          -189.60069274902344,
+          7799.60009765625
         ],
         [
-          1342.0,
+          1341.39990234375,
           1366.0
         ]
       ],
-      "material_slots": 2,
-      "source_triangles": 13494,
-      "lod_count": 2
+      "material_slots": 4,
+      "source_triangles": 21014,
+      "lod_count": 3,
+      "explicit_lod_audit": {
+        "imported_slot_roles_before": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "slot_roles_after": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "lods": [
+          {
+            "lod": 0,
+            "screen_size": 1.0,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              },
+              {
+                "section": 1,
+                "slot_index": 1,
+                "role": "MPR4_SolarCells",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarCells.MI_MPR4_SolarCells"
+              },
+              {
+                "section": 2,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid.MI_MPR4_SolarMid"
+              }
+            ]
+          },
+          {
+            "lod": 1,
+            "screen_size": 0.6395840048789978,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid.MI_MPR4_SolarMid"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              }
+            ]
+          },
+          {
+            "lod": 2,
+            "screen_size": 0.24872711300849915,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 3,
+                "role": "MPR4_SolarFar",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFar.MI_MPR4_SolarFar"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              }
+            ]
+          }
+        ],
+        "removed_unused_or_duplicate_slot_count": 0
+      }
     },
     {
       "name": "SM_MPR4_SolarBank_01_1",
       "path": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_01_1",
       "bounds_cm": [
         [
-          2795.359375,
+          2683.359375,
           7940.64013671875
         ],
         [
           -6429.6005859375,
-          389.599609375
+          -585.4002685546875
         ],
         [
-          1342.0,
+          1341.39990234375,
           1366.0
         ]
       ],
-      "material_slots": 2,
-      "source_triangles": 12420,
-      "lod_count": 2
+      "material_slots": 4,
+      "source_triangles": 14212,
+      "lod_count": 3,
+      "explicit_lod_audit": {
+        "imported_slot_roles_before": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "slot_roles_after": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "lods": [
+          {
+            "lod": 0,
+            "screen_size": 1.0,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              },
+              {
+                "section": 1,
+                "slot_index": 1,
+                "role": "MPR4_SolarCells",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarCells.MI_MPR4_SolarCells"
+              },
+              {
+                "section": 2,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid.MI_MPR4_SolarMid"
+              }
+            ]
+          },
+          {
+            "lod": 1,
+            "screen_size": 0.5053457021713257,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid.MI_MPR4_SolarMid"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              }
+            ]
+          },
+          {
+            "lod": 2,
+            "screen_size": 0.19652333855628967,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 3,
+                "role": "MPR4_SolarFar",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFar.MI_MPR4_SolarFar"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              }
+            ]
+          }
+        ],
+        "removed_unused_or_duplicate_slot_count": 0
+      }
     },
     {
       "name": "SM_MPR4_SolarBank_02_0",
@@ -1227,20 +1458,97 @@
       "bounds_cm": [
         [
           7947.3603515625,
-          15444.6396484375
+          16900.638671875
         ],
         [
-          -969.60107421875,
-          5654.599609375
+          -1944.60107421875,
+          7799.599609375
         ],
         [
-          1342.0,
+          1341.39990234375,
           1366.0
         ]
       ],
-      "material_slots": 2,
-      "source_triangles": 18486,
-      "lod_count": 2
+      "material_slots": 4,
+      "source_triangles": 29862,
+      "lod_count": 3,
+      "explicit_lod_audit": {
+        "imported_slot_roles_before": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "slot_roles_after": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "lods": [
+          {
+            "lod": 0,
+            "screen_size": 1.0,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              },
+              {
+                "section": 1,
+                "slot_index": 1,
+                "role": "MPR4_SolarCells",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarCells.MI_MPR4_SolarCells"
+              },
+              {
+                "section": 2,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid.MI_MPR4_SolarMid"
+              }
+            ]
+          },
+          {
+            "lod": 1,
+            "screen_size": 0.8506903648376465,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid.MI_MPR4_SolarMid"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              }
+            ]
+          },
+          {
+            "lod": 2,
+            "screen_size": 0.33082401752471924,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 3,
+                "role": "MPR4_SolarFar",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFar.MI_MPR4_SolarFar"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              }
+            ]
+          }
+        ],
+        "removed_unused_or_duplicate_slot_count": 0
+      }
     },
     {
       "name": "SM_MPR4_SolarBank_02_1",
@@ -1251,17 +1559,94 @@
           16564.638671875
         ],
         [
-          -6234.60107421875,
-          584.5989379882812
+          -6429.60107421875,
+          1754.5987548828125
         ],
         [
-          1342.0,
+          1341.39990234375,
           1366.0
         ]
       ],
-      "material_slots": 2,
-      "source_triangles": 14064,
-      "lod_count": 2
+      "material_slots": 4,
+      "source_triangles": 17256,
+      "lod_count": 3,
+      "explicit_lod_audit": {
+        "imported_slot_roles_before": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "slot_roles_after": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "lods": [
+          {
+            "lod": 0,
+            "screen_size": 1.0,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              },
+              {
+                "section": 1,
+                "slot_index": 1,
+                "role": "MPR4_SolarCells",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarCells.MI_MPR4_SolarCells"
+              },
+              {
+                "section": 2,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid.MI_MPR4_SolarMid"
+              }
+            ]
+          },
+          {
+            "lod": 1,
+            "screen_size": 0.7639979124069214,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid.MI_MPR4_SolarMid"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              }
+            ]
+          },
+          {
+            "lod": 2,
+            "screen_size": 0.29711028933525085,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 3,
+                "role": "MPR4_SolarFar",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFar.MI_MPR4_SolarFar"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame.MI_MPR4_SolarFrame"
+              }
+            ]
+          }
+        ],
+        "removed_unused_or_duplicate_slot_count": 0
+      }
     },
     {
       "name": "SM_MPR4_RoofLight",
@@ -1327,69 +1712,6 @@
       "lod_count": 1
     },
     {
-      "name": "SM_MPR4_Trailer_White",
-      "path": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Trailer_White",
-      "bounds_cm": [
-        [
-          -829.0,
-          810.25
-        ],
-        [
-          -133.4999542236328,
-          133.50006103515625
-        ],
-        [
-          0.0,
-          416.5999755859375
-        ]
-      ],
-      "material_slots": 8,
-      "source_triangles": 7988,
-      "lod_count": 3
-    },
-    {
-      "name": "SM_MPR4_Trailer_Blue",
-      "path": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Trailer_Blue",
-      "bounds_cm": [
-        [
-          -829.0,
-          810.25
-        ],
-        [
-          -133.4999542236328,
-          133.50006103515625
-        ],
-        [
-          0.0,
-          416.5999755859375
-        ]
-      ],
-      "material_slots": 8,
-      "source_triangles": 7988,
-      "lod_count": 3
-    },
-    {
-      "name": "SM_MPR4_Trailer_Coral",
-      "path": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Trailer_Coral",
-      "bounds_cm": [
-        [
-          -829.0,
-          810.25
-        ],
-        [
-          -133.4999542236328,
-          133.50006103515625
-        ],
-        [
-          0.0,
-          416.5999755859375
-        ]
-      ],
-      "material_slots": 8,
-      "source_triangles": 7988,
-      "lod_count": 3
-    },
-    {
       "name": "SM_MPR4_Car_0",
       "path": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Car_0",
       "bounds_cm": [
@@ -1432,6 +1754,90 @@
       "lod_count": 1
     },
     {
+      "name": "SM_MPR4_Trailer_White",
+      "path": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Trailer_White",
+      "bounds_cm": [
+        [
+          -829.0,
+          810.25
+        ],
+        [
+          -133.4999542236328,
+          133.50006103515625
+        ],
+        [
+          0.0,
+          416.5999755859375
+        ]
+      ],
+      "material_slots": 8,
+      "source_triangles": 2206,
+      "lod_count": 3
+    },
+    {
+      "name": "SM_MPR4_Trailer_Blue",
+      "path": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Trailer_Blue",
+      "bounds_cm": [
+        [
+          -829.0,
+          810.25
+        ],
+        [
+          -133.4999542236328,
+          133.50006103515625
+        ],
+        [
+          0.0,
+          416.5999755859375
+        ]
+      ],
+      "material_slots": 8,
+      "source_triangles": 2206,
+      "lod_count": 3
+    },
+    {
+      "name": "SM_MPR4_Trailer_Coral",
+      "path": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Trailer_Coral",
+      "bounds_cm": [
+        [
+          -829.0,
+          810.25
+        ],
+        [
+          -133.4999542236328,
+          133.50006103515625
+        ],
+        [
+          0.0,
+          416.5999755859375
+        ]
+      ],
+      "material_slots": 8,
+      "source_triangles": 2206,
+      "lod_count": 3
+    },
+    {
+      "name": "SM_MPR4_Tractor",
+      "path": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Tractor",
+      "bounds_cm": [
+        [
+          -205.0,
+          465.59991455078125
+        ],
+        [
+          -150.00003051757812,
+          149.99996948242188
+        ],
+        [
+          0.0,
+          338.5
+        ]
+      ],
+      "material_slots": 7,
+      "source_triangles": 4360,
+      "lod_count": 3
+    },
+    {
       "name": "SM_MPR4_FreightBoxcar",
       "path": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_FreightBoxcar",
       "bounds_cm": [
@@ -1440,8 +1846,8 @@
           1040.0
         ],
         [
-          -164.80007934570312,
-          164.80007934570312
+          -163.50001525878906,
+          163.50001525878906
         ],
         [
           0.0,
@@ -1449,7 +1855,28 @@
         ]
       ],
       "material_slots": 5,
-      "source_triangles": 5272,
+      "source_triangles": 1784,
+      "lod_count": 3
+    },
+    {
+      "name": "SM_MPR4_Locomotive",
+      "path": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Locomotive",
+      "bounds_cm": [
+        [
+          -1040.0,
+          1040.0
+        ],
+        [
+          -162.5000762939453,
+          162.5000762939453
+        ],
+        [
+          0.0,
+          441.0
+        ]
+      ],
+      "material_slots": 6,
+      "source_triangles": 1912,
       "lod_count": 3
     },
     {
@@ -1457,12 +1884,12 @@
       "path": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_Roads",
       "bounds_cm": [
         [
-          -62012.0703125,
-          78116.6171875
+          -46353.5546875,
+          62627.578125
         ],
         [
-          -50977.33203125,
-          46127.703125
+          -35424.58203125,
+          30276.099609375
         ],
         [
           -112.0,
@@ -1470,7 +1897,7 @@
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 10311,
+      "source_triangles": 10253,
       "lod_count": 1
     },
     {
@@ -1478,12 +1905,12 @@
       "path": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_Courts",
       "bounds_cm": [
         [
-          -22158.064453125,
-          23955.486328125
+          -21868.021484375,
+          23664.7734375
         ],
         [
           -25583.375,
-          17022.326171875
+          16732.294921875
         ],
         [
           -110.0,
@@ -1491,7 +1918,7 @@
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 732,
+      "source_triangles": 699,
       "lod_count": 1
     },
     {
@@ -1499,12 +1926,12 @@
       "path": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_RaisedCurbs",
       "bounds_cm": [
         [
-          -61822.0234375,
-          78096.046875
+          -46322.01953125,
+          62596.046875
         ],
         [
-          -50888.4765625,
-          45740.0
+          -35388.48046875,
+          30240.0
         ],
         [
           -116.99999237060547,
@@ -1512,7 +1939,7 @@
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 79467,
+      "source_triangles": 75041,
       "lod_count": 1
     },
     {
@@ -1520,12 +1947,12 @@
       "path": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_RoadEdges",
       "bounds_cm": [
         [
-          -61623.38671875,
-          77897.78125
+          -46322.01953125,
+          62596.046875
         ],
         [
-          -50690.3359375,
-          45540.71484375
+          -35388.48046875,
+          30240.0
         ],
         [
           -109.4000015258789,
@@ -1533,8 +1960,101 @@
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 36100,
+      "source_triangles": 52096,
       "lod_count": 1
+    },
+    {
+      "name": "SM_MPR4_Site_RoadTerminalCurbs",
+      "path": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_RoadTerminalCurbs",
+      "bounds_cm": [
+        [
+          -52249.50390625,
+          69038.8828125
+        ],
+        [
+          -41905.69921875,
+          36793.69921875
+        ],
+        [
+          -119.79000854492188,
+          -99.0
+        ]
+      ],
+      "material_slots": 1,
+      "source_triangles": 4167,
+      "lod_count": 1,
+      "vertex_color_fade": {
+        "import_option": "REPLACE",
+        "source": {
+          "attribute": "EdgeFade",
+          "channel": "R",
+          "zero": "original surface",
+          "one": "ground surface",
+          "opaque": true
+        }
+      }
+    },
+    {
+      "name": "SM_MPR4_Site_RoadTerminalRoads",
+      "path": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_RoadTerminalRoads",
+      "bounds_cm": [
+        [
+          -52221.515625,
+          69010.90625
+        ],
+        [
+          -41877.70703125,
+          36765.69921875
+        ],
+        [
+          -119.92000579833984,
+          -112.0
+        ]
+      ],
+      "material_slots": 1,
+      "source_triangles": 1740,
+      "lod_count": 1,
+      "vertex_color_fade": {
+        "import_option": "REPLACE",
+        "source": {
+          "attribute": "EdgeFade",
+          "channel": "R",
+          "zero": "original surface",
+          "one": "ground surface",
+          "opaque": true
+        }
+      }
+    },
+    {
+      "name": "SM_MPR4_Site_RoadTerminalEdges",
+      "path": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_RoadTerminalEdges",
+      "bounds_cm": [
+        [
+          -52153.234375,
+          68952.1484375
+        ],
+        [
+          -41819.6875,
+          36713.15625
+        ],
+        [
+          -119.89400482177734,
+          -109.4000015258789
+        ]
+      ],
+      "material_slots": 1,
+      "source_triangles": 5422,
+      "lod_count": 1,
+      "vertex_color_fade": {
+        "import_option": "REPLACE",
+        "source": {
+          "attribute": "EdgeFade",
+          "channel": "R",
+          "zero": "original surface",
+          "one": "ground surface",
+          "opaque": true
+        }
+      }
     },
     {
       "name": "SM_MPR4_Site_RoadCenter",
@@ -1562,12 +2082,12 @@
       "path": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_CourtSeams",
       "bounds_cm": [
         [
-          -22155.6015625,
-          23954.4296875
+          -21865.599609375,
+          23664.39453125
         ],
         [
           -12645.939453125,
-          17022.181640625
+          16732.181640625
         ],
         [
           -107.50000762939453,
@@ -1575,7 +2095,7 @@
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 640,
+      "source_triangles": 630,
       "lod_count": 1
     },
     {
@@ -1646,12 +2166,12 @@
       "path": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_PondWalk",
       "bounds_cm": [
         [
-          -24410.693359375,
-          -17229.1640625
+          -24426.80859375,
+          -17151.345703125
         ],
         [
-          11674.94140625,
-          18562.533203125
+          11621.51953125,
+          18642.5234375
         ],
         [
           -117.49999237060547,
@@ -1659,7 +2179,7 @@
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 468,
+      "source_triangles": 726,
       "lod_count": 1
     },
     {
@@ -1680,7 +2200,7 @@
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 528,
+      "source_triangles": 529,
       "lod_count": 1
     },
     {
@@ -1877,7 +2397,7 @@
       "path": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_TrailerStands",
       "bounds_cm": [
         [
-          -16641.5234375,
+          -16241.5244140625,
           15408.1953125
         ],
         [
@@ -1898,12 +2418,12 @@
       "path": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_DockApronInfill",
       "bounds_cm": [
         [
-          -16637.525390625,
+          -14612.22265625,
           15404.1953125
         ],
         [
           -7464.63916015625,
-          15740.7080078125
+          8404.9638671875
         ],
         [
           -110.0,
@@ -1911,7 +2431,7 @@
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 389,
+      "source_triangles": 216,
       "lod_count": 1
     },
     {
@@ -1953,7 +2473,28 @@
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 12469,
+      "source_triangles": 11701,
+      "lod_count": 1
+    },
+    {
+      "name": "SM_MPR4_Site_CampusPlanting",
+      "path": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_CampusPlanting",
+      "bounds_cm": [
+        [
+          -23488.072265625,
+          24085.173828125
+        ],
+        [
+          -9654.5927734375,
+          17152.287109375
+        ],
+        [
+          -118.79999542236328,
+          -118.79999542236328
+        ]
+      ],
+      "material_slots": 1,
+      "source_triangles": 739,
       "lod_count": 1
     },
     {
@@ -1966,7 +2507,7 @@
         ],
         [
           -19901.396484375,
-          17068.462890625
+          15434.96875
         ],
         [
           -108.5,
@@ -1974,7 +2515,7 @@
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 1466,
+      "source_triangles": 1380,
       "lod_count": 1
     },
     {
@@ -1987,7 +2528,7 @@
         ],
         [
           -19917.36328125,
-          17084.453125
+          15450.935546875
         ],
         [
           -110.0,
@@ -1995,7 +2536,7 @@
         ]
       ],
       "material_slots": 1,
-      "source_triangles": 13800,
+      "source_triangles": 12960,
       "lod_count": 1
     },
     {
@@ -2234,7 +2775,7 @@
       "path": "/Game/MPRWarehouse/ReferenceV4/Context/Meshes/SM_MPR4_Context_Houses_-3_-2",
       "bounds_cm": [
         [
-          -45675.51171875,
+          -45710.8671875,
           -29953.955078125
         ],
         [
@@ -2583,7 +3124,7 @@
         ]
       ],
       "material_slots": 2,
-      "source_triangles": 1683,
+      "source_triangles": 2537,
       "lod_count": 1
     },
     {
@@ -2604,7 +3145,7 @@
         ]
       ],
       "material_slots": 2,
-      "source_triangles": 5088,
+      "source_triangles": 6612,
       "lod_count": 1
     }
   ],
@@ -2638,6 +3179,26 @@
       "path": "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_CheckerPlate_Normal",
       "kind": "texture",
       "source": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_CheckerPlate_Normal.png"
+    },
+    {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarMid_Base",
+      "kind": "texture",
+      "source": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_SolarMid_Base.png"
+    },
+    {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarMid_Normal",
+      "kind": "texture",
+      "source": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_SolarMid_Normal.png"
+    },
+    {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarFar_Base",
+      "kind": "texture",
+      "source": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_SolarFar_Base.png"
+    },
+    {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarFar_Normal",
+      "kind": "texture",
+      "source": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_SolarFar_Normal.png"
     },
     {
       "path": "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarCells_Base",
@@ -2702,12 +3263,26 @@
     {
       "path": "/Game/MPRWarehouse/ReferenceV4/Materials/M_MPR4_PBRSolid",
       "kind": "material_master",
-      "textured": false
+      "textured": false,
+      "vertex_color_terminal": false
     },
     {
       "path": "/Game/MPRWarehouse/ReferenceV4/Materials/M_MPR4_PBRTextured",
       "kind": "material_master",
-      "textured": true
+      "textured": true,
+      "vertex_color_terminal": false
+    },
+    {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/M_MPR4_PBRSolidTerminal",
+      "kind": "material_master",
+      "textured": false,
+      "vertex_color_terminal": true
+    },
+    {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/M_MPR4_PBRTexturedTerminal",
+      "kind": "material_master",
+      "textured": true,
+      "vertex_color_terminal": true
     },
     {
       "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_FacadeWhite",
@@ -2763,9 +3338,9 @@
       "role": "MPR4_RoofMembrane",
       "parameters": {
         "color": [
-          0.91,
-          0.935,
-          0.97
+          1.0,
+          1.0,
+          1.0
         ],
         "roughness": 0.76,
         "uv_tile_m": 3,
@@ -2973,23 +3548,88 @@
       }
     },
     {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame",
+      "kind": "material_instance",
+      "role": "MPR4_SolarFrame",
+      "parameters": {
+        "color": [
+          0.25,
+          0.32,
+          0.4
+        ],
+        "roughness": 0.55,
+        "metallic": 0.5,
+        "color_space": "linear RGB tint; albedo PNG sRGB, normal PNG NonColor",
+        "texture_blend": "multiply albedo by color",
+        "normal_convention": "OpenGL"
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid",
+      "kind": "material_instance",
+      "role": "MPR4_SolarMid",
+      "parameters": {
+        "color": [
+          0.58,
+          0.83,
+          1.0
+        ],
+        "roughness": 0.58,
+        "metallic": 0.35,
+        "uv_tile_m": 1,
+        "textures": {
+          "albedo": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_SolarMid_Base.png",
+          "normal": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_SolarMid_Normal.png"
+        },
+        "normal_strength": 0.0,
+        "color_space": "linear RGB tint; albedo PNG sRGB, normal PNG NonColor",
+        "texture_blend": "multiply albedo by color",
+        "normal_convention": "OpenGL",
+        "ue_flip_green_channel": true
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFar",
+      "kind": "material_instance",
+      "role": "MPR4_SolarFar",
+      "parameters": {
+        "color": [
+          0.58,
+          0.83,
+          1.0
+        ],
+        "roughness": 0.68,
+        "metallic": 0.25,
+        "uv_tile_m": 8,
+        "textures": {
+          "albedo": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_SolarFar_Base.png",
+          "normal": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_SolarFar_Normal.png"
+        },
+        "normal_strength": 0.0,
+        "color_space": "linear RGB tint; albedo PNG sRGB, normal PNG NonColor",
+        "texture_blend": "multiply albedo by color",
+        "normal_convention": "OpenGL",
+        "ue_flip_green_channel": true
+      }
+    },
+    {
       "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarCells",
       "kind": "material_instance",
       "role": "MPR4_SolarCells",
       "parameters": {
         "color": [
-          0.7,
-          0.88,
+          0.58,
+          0.83,
           1.0
         ],
-        "roughness": 0.31,
-        "metallic": 0.72,
+        "roughness": 0.5,
+        "metallic": 0.5,
         "uv_tile_m": 1,
         "textures": {
           "albedo": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_SolarCells_Base.png",
           "normal": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_SolarCells_Normal.png"
         },
-        "normal_strength": 0.08,
+        "normal_strength": 0.03,
         "uv_note": "Each 1.0528 x 1.872 m module repeats UV 0..1; texture contains 6x12 visual cells.",
         "color_space": "linear RGB tint; albedo PNG sRGB, normal PNG NonColor",
         "texture_blend": "multiply albedo by color",
@@ -3021,9 +3661,9 @@
       "role": "MPR4_LeafMid",
       "parameters": {
         "base_color": [
-          0.42,
-          0.48,
-          0.34,
+          0.26,
+          0.33,
+          0.255,
           1
         ],
         "roughness": 0.88,
@@ -3039,9 +3679,9 @@
       "role": "MPR4_LeafLight",
       "parameters": {
         "base_color": [
+          0.35,
           0.4,
-          0.46,
-          0.34,
+          0.32,
           1
         ],
         "roughness": 0.88,
@@ -3057,9 +3697,9 @@
       "role": "MPR4_LeafShade",
       "parameters": {
         "base_color": [
-          0.29,
-          0.35,
-          0.23,
+          0.19,
+          0.26,
+          0.19,
           1
         ],
         "roughness": 0.88,
@@ -3381,9 +4021,9 @@
       "role": "MPR3_Concrete",
       "parameters": {
         "base_color": [
-          0.52,
-          0.55,
-          0.55
+          0.46,
+          0.43,
+          0.43
         ],
         "roughness": 0.91,
         "texture": "concrete",
@@ -3417,9 +4057,9 @@
       "role": "MPR3_Grass",
       "parameters": {
         "base_color": [
-          0.29,
-          0.39,
-          0.24
+          0.34,
+          0.37,
+          0.28
         ],
         "roughness": 0.98,
         "texture": "grass",
@@ -3436,9 +4076,9 @@
       "role": "MPR3_GrassFar",
       "parameters": {
         "base_color": [
-          0.29,
-          0.39,
-          0.24
+          0.34,
+          0.37,
+          0.28
         ],
         "roughness": 0.98,
         "texture": "grass",
@@ -3611,6 +4251,113 @@
       }
     },
     {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_CampusPlanting",
+      "kind": "material_instance",
+      "role": "MPR4_CampusPlanting",
+      "parameters": {
+        "base_color": [
+          0.22,
+          0.3,
+          0.16
+        ],
+        "roughness": 0.98,
+        "texture": "grass",
+        "normal_strength": 0.06,
+        "textures": {
+          "albedo": "SourceAssets/MPR/reference_v4/site/textures/T_MPR3_grass_albedo.png",
+          "normal": "SourceAssets/MPR/reference_v4/site/textures/T_MPR3_grass_normal.png"
+        }
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_TerminalAsphalt",
+      "kind": "material_instance",
+      "role": "MPR4_TerminalAsphalt",
+      "parameters": {
+        "base_color": [
+          0.13,
+          0.155,
+          0.19
+        ],
+        "roughness": 0.94,
+        "texture": "asphalt",
+        "vertex_color_fade": {
+          "attribute": "EdgeFade",
+          "channel": "R",
+          "ground_role": "MPR3_Grass",
+          "ground_base_color": [
+            0.34,
+            0.37,
+            0.28
+          ],
+          "ground_texture": "grass",
+          "ground_roughness": 0.98,
+          "opaque": true
+        },
+        "textures": {
+          "albedo": "SourceAssets/MPR/reference_v4/site/textures/T_MPR3_asphalt_albedo.png",
+          "normal": "SourceAssets/MPR/reference_v4/site/textures/T_MPR3_asphalt_normal.png"
+        }
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_TerminalCurb",
+      "kind": "material_instance",
+      "role": "MPR4_TerminalCurb",
+      "parameters": {
+        "base_color": [
+          0.69,
+          0.71,
+          0.68
+        ],
+        "roughness": 0.9,
+        "texture": "concrete",
+        "vertex_color_fade": {
+          "attribute": "EdgeFade",
+          "channel": "R",
+          "ground_role": "MPR3_Grass",
+          "ground_base_color": [
+            0.34,
+            0.37,
+            0.28
+          ],
+          "ground_texture": "grass",
+          "ground_roughness": 0.98,
+          "opaque": true
+        },
+        "textures": {
+          "albedo": "SourceAssets/MPR/reference_v4/site/textures/T_MPR3_concrete_albedo.png",
+          "normal": "SourceAssets/MPR/reference_v4/site/textures/T_MPR3_concrete_normal.png"
+        }
+      }
+    },
+    {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_TerminalWhiteLine",
+      "kind": "material_instance",
+      "role": "MPR4_TerminalWhiteLine",
+      "parameters": {
+        "base_color": [
+          0.81,
+          0.82,
+          0.78
+        ],
+        "roughness": 0.85,
+        "vertex_color_fade": {
+          "attribute": "EdgeFade",
+          "channel": "R",
+          "ground_role": "MPR3_Grass",
+          "ground_base_color": [
+            0.34,
+            0.37,
+            0.28
+          ],
+          "ground_texture": "grass",
+          "ground_roughness": 0.98,
+          "opaque": true
+        }
+      }
+    },
+    {
       "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_ContextWall",
       "kind": "material_instance",
       "role": "MPR4_ContextWall",
@@ -3629,9 +4376,9 @@
       "role": "MPR4_ContextRoof",
       "parameters": {
         "base_color": [
-          0.43,
+          0.45,
           0.47,
-          0.5
+          0.515
         ],
         "roughness": 0.85
       }
@@ -4142,28 +4889,28 @@
     {
       "actor": "MPR4_MPR4_RoofLight_-1_-1",
       "mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_RoofLight.SM_MPR4_RoofLight",
-      "count": 6,
+      "count": 30,
       "cull_distance_cm": 0,
       "lods": 1
     },
     {
       "actor": "MPR4_MPR4_RoofLight_-1_0",
       "mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_RoofLight.SM_MPR4_RoofLight",
-      "count": 16,
+      "count": 29,
       "cull_distance_cm": 0,
       "lods": 1
     },
     {
       "actor": "MPR4_MPR4_RoofLight_0_-1",
       "mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_RoofLight.SM_MPR4_RoofLight",
-      "count": 3,
+      "count": 47,
       "cull_distance_cm": 0,
       "lods": 1
     },
     {
       "actor": "MPR4_MPR4_RoofLight_0_0",
       "mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_RoofLight.SM_MPR4_RoofLight",
-      "count": 4,
+      "count": 89,
       "cull_distance_cm": 0,
       "lods": 1
     },
@@ -4226,21 +4973,21 @@
     {
       "actor": "MPR4_MPR4_FreightBoxcar_0_-2",
       "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_FreightBoxcar.SM_MPR4_FreightBoxcar",
-      "count": 3,
+      "count": 5,
       "cull_distance_cm": 0,
       "lods": 3
     },
     {
       "actor": "MPR4_MPR4_FreightBoxcar_1_-2",
       "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_FreightBoxcar.SM_MPR4_FreightBoxcar",
-      "count": 2,
+      "count": 3,
       "cull_distance_cm": 0,
       "lods": 3
     },
     {
       "actor": "MPR4_MPR4_FreightBoxcar_1_-1",
       "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_FreightBoxcar.SM_MPR4_FreightBoxcar",
-      "count": 5,
+      "count": 9,
       "cull_distance_cm": 0,
       "lods": 3
     },
@@ -4252,30 +4999,58 @@
       "lods": 3
     },
     {
+      "actor": "MPR4_MPR4_FreightBoxcar_2_-1",
+      "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_FreightBoxcar.SM_MPR4_FreightBoxcar",
+      "count": 1,
+      "cull_distance_cm": 0,
+      "lods": 3
+    },
+    {
       "actor": "MPR4_MPR4_FreightBoxcar_2_0",
       "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_FreightBoxcar.SM_MPR4_FreightBoxcar",
-      "count": 9,
+      "count": 14,
       "cull_distance_cm": 0,
       "lods": 3
     },
     {
       "actor": "MPR4_MPR4_FreightBoxcar_2_1",
       "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_FreightBoxcar.SM_MPR4_FreightBoxcar",
-      "count": 6,
+      "count": 11,
       "cull_distance_cm": 0,
       "lods": 3
     },
     {
       "actor": "MPR4_MPR4_FreightBoxcar_3_1",
       "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_FreightBoxcar.SM_MPR4_FreightBoxcar",
-      "count": 4,
+      "count": 6,
       "cull_distance_cm": 0,
       "lods": 3
     },
     {
       "actor": "MPR4_MPR4_FreightBoxcar_3_2",
       "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_FreightBoxcar.SM_MPR4_FreightBoxcar",
-      "count": 2,
+      "count": 3,
+      "cull_distance_cm": 0,
+      "lods": 3
+    },
+    {
+      "actor": "MPR4_MPR4_Locomotive_0_-2",
+      "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Locomotive.SM_MPR4_Locomotive",
+      "count": 1,
+      "cull_distance_cm": 0,
+      "lods": 3
+    },
+    {
+      "actor": "MPR4_MPR4_Locomotive_1_-1",
+      "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Locomotive.SM_MPR4_Locomotive",
+      "count": 1,
+      "cull_distance_cm": 0,
+      "lods": 3
+    },
+    {
+      "actor": "MPR4_MPR4_Locomotive_1_0",
+      "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Locomotive.SM_MPR4_Locomotive",
+      "count": 1,
       "cull_distance_cm": 0,
       "lods": 3
     },
@@ -4304,6 +5079,34 @@
       "actor": "MPR4_MPR4_Trailer_White_0_0",
       "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Trailer_White.SM_MPR4_Trailer_White",
       "count": 6,
+      "cull_distance_cm": 0,
+      "lods": 3
+    },
+    {
+      "actor": "MPR4_MPR4_Tractor_-1_-1",
+      "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Tractor.SM_MPR4_Tractor",
+      "count": 24,
+      "cull_distance_cm": 0,
+      "lods": 3
+    },
+    {
+      "actor": "MPR4_MPR4_Tractor_-1_0",
+      "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Tractor.SM_MPR4_Tractor",
+      "count": 9,
+      "cull_distance_cm": 0,
+      "lods": 3
+    },
+    {
+      "actor": "MPR4_MPR4_Tractor_0_-1",
+      "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Tractor.SM_MPR4_Tractor",
+      "count": 6,
+      "cull_distance_cm": 0,
+      "lods": 3
+    },
+    {
+      "actor": "MPR4_MPR4_Tractor_0_0",
+      "mesh": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Tractor.SM_MPR4_Tractor",
+      "count": 13,
       "cull_distance_cm": 0,
       "lods": 3
     },
@@ -4625,250 +5428,401 @@
   ],
   "stage": "saved",
   "replaced_actor_guids": [
-    "0019142340914395DC939585A4F71FCA",
-    "0040465B4AB24D18DFF02C94C7F5EDDD",
-    "00522D10437CDA025680F49EE153DB61",
-    "006437624066DD6AAF87ACB2E97DB5A4",
-    "017DE82C44B0EB7F08F5D9A3437F6166",
-    "02A47F3445BAFF7D75667F962B9BCADD",
-    "054172AD4D279282CDA241AFCABEA0A6",
-    "057C6BD4409BD29CA9B0DDAF33DECAEA",
-    "061D94D34BC409B63564359486A6DB27",
-    "06DA570F46A86D68FA30C7B7D534F331",
-    "07370D6C4AC891CC726C7E90AFC42EF3",
-    "07C52BC147EFC1B6864034929D04A735",
-    "09F488B64588B1C2C365959BC2717E2E",
-    "0B5E19894C3C1EDDD179558009A55226",
-    "0C3A471B483A760E425A4FA5510B2784",
-    "0DE995594F0FB3A946DA46B2A74DE122",
-    "0E5FCE7C4B02AB53575FD88A24AD9798",
-    "0E8F13F44FA2A6C4BA472E9A05C37065",
-    "0EF91D6842878679CCD54293BF6FB389",
-    "0F104638407C2B24FCDF439B05001E82",
-    "0F4F24724143AA2673FFC48BDF31E6D8",
-    "0FC2E08245D90733CDAB3BB98361F855",
-    "10EFDF0B417B0CBC414C08A61DF0B7E1",
-    "11A82AA14FEEF2B9C75ED8ADDD2FE622",
-    "13492CF9401C2D9367845D8EF0FAA01A",
-    "134B002345C758D377C922B801EAE6C9",
-    "14353DEA42CCA82690EB37AAE811A49A",
-    "1438E0AD4B7D1E81E6FDC2AE9B81542D",
-    "1505D12F4FEAAEF7F87C4B8C6593E38B",
-    "17BBDAD943B490C671F5C6971AF7CCC8",
-    "17E406964C08B5382BB3A6A0CDC19D36",
-    "1A859DCE44F038F81AA2388D66B18AFC",
-    "1ACC45DD4495BFF2BDBC77B7F8339898",
-    "1ACEF58244490B68DCC052AAD781119B",
-    "1CAC5B1D43C619623BDB3AAF2EE96761",
-    "1D2AF7F84739F254C792A5AE29AF6143",
-    "1D3530EF4E0EEBF60F62E4BED2BF1D6B",
-    "203B87F4439A5188DA4134A1BA5945E7",
-    "210BA19D4CCDBAAC4012259F74646DB7",
-    "211D16D1426E7E372C7189A6A4C87C5C",
-    "21BCE60248C2685B7ADE1AA27FE035DE",
-    "2257C51A495FFC3AB3149696CCE489EB",
-    "231973D94329108C82776491FB8B2256",
-    "23895B6E47F87697F0C39F9FBBEC18F7",
-    "24501E8640BDFBAF800853B4286A3CB7",
-    "250AD18B4A85DED522E175A4231A1B80",
-    "254670834C1DE8C95CA9B38E993CFFD9",
-    "2592BFFE4BC79AD5836813973EE0F869",
-    "25C0FF204A6C5F3ACE34DE8F3467F823",
-    "25ED242D40D4A7233725D88BDC07712B",
-    "281A39FE48194E65582EB8B422AA4772",
-    "303B13284CD8502DDC2E70B1F0D49C2C",
-    "308A5DA04C0D1ACA4DA026A4241420AF",
-    "30C4973E461B83E7FA0E57943DB725FF",
-    "31ABAD814FCE4A0CA85AADBE54C2EFB6",
-    "3560065D49F7D8569D3EE5BF457DB26C",
-    "36EC2F254EED10E5D9EECC8128099075",
-    "3815703845AC73A113311E9983A65CAD",
-    "38FD7523473079CF2EA781AA353E9AEB",
-    "39FAE6964C3CFB03202990894793E512",
-    "3A9DF55449891A79DC77BDB2DD1BCDAA",
-    "3B608BF8462CA2234D29A5996E6D7C53",
-    "3EF2065F4380A99C099768AC06904E9A",
-    "3F300B824B2A0FE563552794CF6664F5",
-    "3FE106664B29A7849DCD01BE2523038A",
-    "419B16CE4F3823CAF1F47E99E73E160C",
-    "422D1CAE42631C08112BBDBE2CBA20D0",
-    "44AF7A3741535A5E21602E80D588EEF2",
-    "44BADBED46161F8F79A0FB88675C83CE",
-    "4741C85A4FC1D22FA1D1ACAF70E2C811",
-    "47E2A6A244B863D102DE73AAA4139B68",
-    "47ED618343172DEE2E7E7B80B33B6708",
-    "483858BD42BB7E9327F51982645BC156",
-    "4CCCF5374FDE5A9256648ABC2F77C820",
-    "4E53469B404E7064CB52FE9701A2514D",
-    "4EEE2CEC417BBBDF72F8069B032AD947",
-    "51D790DC489B718DECA164B31094C2E0",
-    "52B7011B41EDFA3AC595B8AF8EFA2249",
-    "543002AD45C10535980EA58BCCB38907",
-    "547052FB4B30C87DD6D37E9D2DF12857",
-    "5662E3C34427B83E9AD2169CC0F2EB63",
-    "578C693B4891FD768E1BDEA7FC004896",
-    "57A605CE46C86C4552E6BBBA9390F650",
-    "57FDACC54B0B3163A87B2DA3A75C59D7",
-    "59218F9E4B8647BFBBE29DB54DF2E9E7",
-    "5983F8A347381AF603643A82885D7992",
-    "59D4E4024394DEBE69ACAA9FEEDC10CB",
-    "5CF567A642D77243F66AE8BFC9307E54",
-    "5D8A02AF4AD637AAD367E6A902DC9BFE",
-    "606C9DCB479687CB82EC85A042931F97",
-    "61491DC54BA74F7A13A7E5916950FC7F",
-    "62FF61384D0EEB00DA5FEF956CE52DD9",
-    "63213EDA44BFBD6D2ECBEBB995374599",
-    "66725827442E5BAC229C08893DD1FC95",
-    "6A0C3C20453CFB393B2BEE99100A7FBF",
-    "6A1B482044531B603AAD1EB68678452B",
-    "6A5845F540D68C86993277AC3C358F9D",
-    "6B40358D417C78BC59E729B8A85B80E2",
-    "6C3D4DB544F7A514413E4CB2439D6234",
-    "6E42007C465B57332FCFA58F8B975E0F",
-    "6F78CA3F4DF75F12A375FE9434D413AF",
-    "7121134149C4C0BBCBBCA18A78678397",
-    "720B74324821FB49E78005BFD9F89003",
-    "7240C0AF4236AF107AD43C8634515166",
-    "725221F84F7BDF0E076BB58D95F7BD8A",
-    "765DEBD941F2D2FD144BF08C1AD8ED5B",
-    "76FA51FC485FEDEEE001559D0427CFE0",
-    "792A012A48DD22B27902C6AC57864DE5",
-    "7A1508D14A9B696C9BB640A95C39644A",
-    "7C36D1EE4B4F7C106B1CF5BEE8A11F96",
-    "7D41D41C4E24BEB28905829F7166FD82",
-    "7E84290C4637946B2AD9FCBEC6496351",
-    "7E9566684F1748F0DF17FA86A7FEC9F5",
-    "7F58D0F44B33A8A98F7957832F5EDC20",
-    "7FBB8E934B3AD644C4A87DA755A5EA60",
-    "8061D5804346C071CD8A5D9FE19DF7EA",
-    "80E6DB1642E1068DB5050985E307B2C4",
-    "8155236E430E53D80A32C49B29F2BBD2",
-    "821B6E25424ECB684EC1B2B7A073C63B",
-    "8279889344A3764A6C5C5B9FFA0E369C",
-    "82F6B65A4E8F89E8A3B0A8B42ABAB9FC",
-    "8434A06A49B3ADB32A40F288DC79AD7D",
-    "84605339489FB4318420FFA1EED5B67F",
-    "84EBB75E4B4F81FA568685A7887597AC",
-    "868AA12340D431420D7AB4864609C1B5",
-    "87AF667747B47D3A0F71C4B60D4CBFE0",
-    "88E88F964481C9C1C6159C92078581E1",
-    "8A4837C14E617CA640912387D5B993AD",
-    "8A66EF1C4B3E3C7C2C8C958C0F7BBAB6",
-    "8A71E7414C99D83DB866E58458C4F13E",
-    "8AEF9BB24105C0810ECBADA7C88FE87D",
-    "8BD7CC5B4129ECC8EDAC6C92E2EE0DC9",
-    "8E3EC2044877F48CD47C8097D5A1DB7F",
-    "8EA6F9B344B1FDE8135E468BCC005222",
-    "8F75F1124EBA4D09B0DB0DA92AB0F69F",
-    "8FE73A4F448CB5E6851F889DC6D3469A",
-    "90B42AB746FCD786FA108F927A93D929",
-    "917B46A9418A02B253348E9B611F0AB7",
-    "940654484ABA0FC2B4D582BF4C487009",
-    "95D10B084B1DF3A1827972B16135DE64",
-    "9649A6774CFBBDE6C0BA20A0E83854FB",
-    "97C29F50460AF7ADED59DDBE660F6C42",
-    "98DCEA904D14BB9A5ADCD797B21077C5",
-    "996368E64F6B334809110D8B71EDCFC7",
-    "9C31D0F64E2BBD5D87FCE2986CDE0E82",
-    "9D3E5B7E43B3329E3AB5F59F3512A20B",
-    "9D82600747E9C437431828A2FCAF3A8C",
-    "9F0A74404F8C4C215824429298AF396B",
-    "9F1C5BE44AB03DCF023307BEC6BB16C7",
-    "9F43F8CC438399440FBC88AAE020B835",
-    "A076FBBC4E8490F5BB3EE8AC44A4CF35",
-    "A26E298D4B33EA0CF75972AFA8384B65",
-    "A26EB3874B5C48A8AD4051A9B40DA538",
-    "A33CAB58403D6CF6DDE23EB78B810950",
-    "A42B335D44F7B1CEE13E2EBDB04CD5E4",
-    "A610C610432E2557772C1E9F0D275953",
-    "A8905ECB4858CA4D24989B88004AB61B",
-    "A92085CB45FD53CBDA4F348C1F515DDA",
-    "A97EDE9946AE902ADDA77DAB965356C0",
-    "AB5CD02C4EE895F290C9A6A3296AC9C4",
-    "ABAFFE9A4EE96875DAB208A9BAF7E075",
-    "AD2537DF42DB30EFCA6604A0B13556F5",
-    "ADAE71E34CEC965108AB15AE6DB0A4AB",
-    "AF96B3284EA1E2857CB296ABE981A787",
-    "B089F6AF4F2356A5DF56E7BE3CAD9485",
-    "B0FCBD8A4135F79A1094D882DC7030BD",
-    "B2D97DBC494F8DFE134F439376644028",
-    "B2EA895A418DBF6A12E75197B80F3F5A",
-    "B324D9B04B6D48E36931EABDFA2006FF",
-    "B35500C343738F36ED1AD086CDCE93F5",
-    "B3F704DA494D0FBFF4FB1FA51522385F",
-    "B40AEB11480CF872481E3193AEC88C56",
-    "B43F70204C4AD774E922FBA7ABA44B15",
-    "B49A6DFE485065E381358EA58E09664C",
-    "B88A7B5A43D9872B6F15E18C31B031F9",
-    "BA84C7674BB55EBF92B3189790544B33",
-    "BE87A36A4DA3CE2E176F8794B3CAFCEE",
-    "BF1D228E41A6F996C9B650A48934FF46",
-    "BF3B82FC4E2888AC95AB37B0ED6EF194",
-    "BFD09EBD4CD528A7B09F3CBE80C345F4",
-    "C016E4D74CB3E422080A32BBFFAE7B0D",
-    "C04EFEFC4B383D537897EE96A42468CB",
-    "C06A42F5472F5ADB72C377942515C63B",
-    "C254A64F4E4946B3DEC94ABBF7BBC177",
-    "C266C1D341A391DF5FE4DABE714EF262",
-    "C2725EF74CEC8F3E3F52868E24D2E57B",
-    "C2B6D9F34D727A2F61315AB1240AB483",
-    "C540507F494BBFFBCC3361A68C552711",
-    "C58C82A448386FFFE2188B8E5B32792A",
-    "C7E8F4034EE57126386BAFA37B802074",
-    "CBEDEB724D69BD15B6C2A8A27232E071",
-    "CD5A92AD40A856389430F58E4183F2D0",
-    "CF336D3A4CA574188C778E89C33DDE9C",
-    "CFAB1CF2410B6AF72C6B8D97CFAFFC3C",
-    "D154263B4F008D1E6F0D1D8B883C3154",
-    "D2EB5D0149AC2F6CF74E7A9E231B5F8A",
-    "D35C748C4AA0FE0213A5F486DEBEDB7B",
-    "D557C1BC4D2B044EA21C67A47632C9C8",
-    "D66AC69F4526C8C6D3A52BAA5B161D0B",
-    "D89865B944302FAB4927D18224A4E9A4",
-    "DBD9E65F49A1F23CD046E8B67BA0EE8A",
-    "DDF39CBA465BC388713A9BA70D9721B3",
-    "DE75E21942CF54FB7BE5CD9BE6E5C12A",
-    "DF8494684DE1B2A03133DAB4DE0E3438",
-    "DFA42D854C585A49ADA8BA970B18A53C",
-    "DFDFBA8D40F83B3CB7B77FB3604F25C9",
-    "E15A24444FBE1A95851164964D0FBB8A",
-    "E1AF4CE743FB67E5B72AA0A282AACD91",
-    "E1BD39F94E3D59B6F1EEE1AC2115C455",
-    "E38F62F1408B479ED6AFB4938E176969",
-    "E4FAB5A24B018FD86A5E7EAFB46375F3",
-    "E52362C342269D15B493B287A433C7C4",
-    "E65A2DD04D4A3487A651E8ABFF2AD309",
-    "E6618C2E459526F57FC31DBB92485B0A",
-    "EB27BB1B4B5BB1451B32299BB599E0CC",
-    "EB33708648E7EEB84E11B5A16F4FD53E",
-    "ED48926F45C3DC239B9BB887722144D6",
-    "EEB96716427F8BEB9BBFABADCC06105D",
-    "EF6DEC2E4C3ECB4BA060B9967435E571",
-    "F0797E7043CCBE89F8B48CB9F8CCEFEF",
-    "F0FA116540BAED92E4949DAB4FD3DD1A",
-    "F12A61F14BA9971613816F938D8B4F49",
-    "F3E853804EA74CE8295968BDBA4B3D28",
-    "F40B86CA4455F0B2E9FF55A24C6C780B",
-    "F5022C5C45B5683BAA2DA7A81E5DD65F",
-    "F536FECB4DDD73EFAE17BCAC9C8D4CA9",
-    "F67808AF41BAD00ABCB901AE4A3D9490",
-    "F751AE1F403731E23704A9A0E11BD9B8",
-    "F752981C4A92A9D1ABB68988C1E829A3",
-    "F91E7A2F40C7BEACDCC684B93F317781",
-    "FAAA7C614018E4CED63CF996FCDF25CF",
-    "FB272C414711B7F084436EB46D64E721",
-    "FBCA935F4B173373E9F6BABF52E0126B",
-    "FD2D07664297C49040FC8BAF94F329AA",
-    "FE42FEA34D59ECBFF4AEE6ACF3A83758",
-    "FE604BD742920DDDE6966D95CC6014FD",
-    "FFA1F2D34C93BA03F11DF7ABB673601E",
-    "FFCD61E64BE07C89C8CD30A1432ED59F"
+    "00B7162E43DAE1757F18E3B46DD494E0",
+    "00ED44354C063BB4CAB4989CEB64D120",
+    "0156FFE24F8141F1B6C13B8B15C837DB",
+    "04C06816449013F8861A2DA7D23B3C18",
+    "05E65C1D4AE3947E6AF499B62D07CFA2",
+    "06CBF1AD45249EE630CE7A954DC97E62",
+    "08FE4D9F4A87B5626F7C979229B81F3C",
+    "0ABC9233437DC84C109881ADCE51A2AC",
+    "0ACCFE7E435496712D43899C1F7293D2",
+    "0B3869F3444113076BE7D5B66D00431A",
+    "0D13443842B28B21720B25B769462D48",
+    "0D2AC6E64D2CAB56564E02BBDA8F6BDA",
+    "0E3135CE45ACB795721FDA9055F2B55B",
+    "0E729E81482C8CF3809D9ABE19C77B95",
+    "0EA6D26248CC3235E8C5F385A912214A",
+    "0F438F4544050AE5B4AC08B0CED27047",
+    "107030AA4DFF80E69CD3288AC9E0EC6A",
+    "11EE1711410FD4CCC1467394916E54F0",
+    "134C266E40CEFB73AC6A2AAFBD12C473",
+    "13BD3D11466241C66CB6A38C17113282",
+    "14C2149641660F8FBB0C63B04736EE82",
+    "170E20CA48052CEECD35019DFE974EF2",
+    "172CE5724F7E270E528E748299751336",
+    "18D27C2543BEF32266815B9F78992269",
+    "19B1ED194B82DEE53E22D684E5CECB7F",
+    "1B03C0184A55F6B01C7D189ADE1FDA8F",
+    "1B151C984BDCAC86864E47BE408FF5BB",
+    "1BB31D3645551A74197B6A8915E5439A",
+    "1DD4FA774584278C889782A55520D48F",
+    "1ED990D94FB776EF52A1628985228305",
+    "2296C2734C79FF1A711C1DB461541AAE",
+    "232FD53E48F2E44D1B07DBB4971EF45E",
+    "24715F6E4C8BB69402546BB6F1255666",
+    "28C286144177D17146E5D7AE8BE40655",
+    "28FF50AE4AFF66D3D178B683C97E65E3",
+    "2C0EBBDE47BE97F3CDA39AAE4BAA14EE",
+    "2CD315C045148252D0DCD2B48E264D41",
+    "2DE1139447B37E8F0692ACB6067C504E",
+    "2E1F888C4DE8EF1C6D9EB2B1691CC19B",
+    "2E317043428F9918C2823780BC9E51A4",
+    "2ED619C942BE20D2C8296E9D9B72D212",
+    "2F7332864563853FDE62E2AF1AA111CC",
+    "306FD65D45819B2E1D0E559527525EE0",
+    "307D8B6D43AE0FB28D19799E689CECB3",
+    "30F614494821F74A92BDB6880A9A6606",
+    "3138404F4BFE00B6533B2791DC53A882",
+    "346A1CAC48024B882897F1A4BFB18C1A",
+    "355FD18B40FD3ACFFB7CF3AB70D88005",
+    "35C266584513EC01FFF1C9971CC505A6",
+    "376A0A7648EEC97330787CB6D147E4FE",
+    "38B36B70476BF23E9C55B8A8EF2EA617",
+    "393295DF40640677CBA10E8BE6871320",
+    "3A1692F04345E417599FD99A940792ED",
+    "3AB082FC4C462EF95E3152B4317FE505",
+    "3B9429D246064A1101E34E8235E74D76",
+    "3BE11C994B4E72BA260C3DA41792CF46",
+    "3DF6C8854EB4935946008EAC8839A06E",
+    "3E77D21B49A6EB8EB5CF7EA5701F5008",
+    "3EBEDB0B4AC069D56DB411AC48550300",
+    "3F75FE1B4B8E0E09FFA07BB7F1125A0E",
+    "3F796F5C4D5106962ECF28930DDEA1BF",
+    "400663174ABB4E979E75E1A516238284",
+    "40D61D7747AA5A47C5CAC7AB8CFB7E3B",
+    "445DF3FA499765E55E54D28E1FE54FA4",
+    "45D15EAA464C08E46606F18AAC835A39",
+    "46468A134D80694DBC3A9FB12EC6FA25",
+    "4759AF104784D515B6C180AA7B53B6E8",
+    "487AF55446EAA288F651B591A5079DB4",
+    "48AA889A4CF9D1483A8BFBA3DA18FED0",
+    "4AEF78FF4E6A773D5C078683C0335E43",
+    "4C626E95473D2A48F5DE7EAB15368A25",
+    "4CAF695A45EAC2865B97BDB5738E069E",
+    "4E26BCE24D863DC1FCC14EA64A479044",
+    "4F36731347F52C3376D09D99024D1C9B",
+    "501FB03B4BA6BC847134DD81748567BB",
+    "50C799584537D8D948078992563BCEF9",
+    "50FFAEFD4EF5DE6FF343A1A66DB06327",
+    "51852EFE43734C1955F00D8CFD89395F",
+    "556427E04466CABD1B3BAD91CE510C00",
+    "58C6EC6B4E17F15008A36B9F6735F066",
+    "5ABE598A4E39FEA7EC7099963E1997E0",
+    "5AEF69FF454DB89AE837A98BDDFC896A",
+    "5BFD30E84BA339F2D61657842C1BD610",
+    "5DCAC40B4CCD48CB7D7BF386AE0FA1FD",
+    "612B18094F408D9D6690508C6C553123",
+    "626DB5AF45543D30B4AFF0919B6B6D2A",
+    "67431DD14BA100BDCA04E5AFD75B73DA",
+    "6873A326416A32BD270A2191D1040B7E",
+    "68FE06764376DF10FA469A9B236B5893",
+    "69328DE8460E2E94273D5F92CAAC817E",
+    "6A082C724FE6A3C73251718C47B692C0",
+    "6A70E4DC42D42E13C9A72DB33B292DAD",
+    "6C6FFA5546AB71199642E2A84C09AE30",
+    "6E75457F4B6551B8D3DA2884CCF7590B",
+    "6FB474AB445B5F0132F4D5BA9BC720E0",
+    "722AC886487EB56A009252AE7DBB9BB7",
+    "72D84C1D4413F7B6B6152288740F9AB9",
+    "73DA582D4A41BAA6406A09AD39E63F73",
+    "741CE0764EBFB37EA43385B7961AFF6C",
+    "74217C7F488FF58008D1028359CFE1F4",
+    "769EA7DB47C95DE1A1D447BF26D218D4",
+    "79CFE98241C06957D747E4B88AB3AE91",
+    "79D1E88840216F25189D55835EEEFAA4",
+    "7A77C0874D8E93D9A0323093B80A0451",
+    "7BDDAE754F56D08BF05E78B393ED3BB1",
+    "7C0F17B34DBF7129B5553EB47E2C8CD7",
+    "7C283BD74C6F2A1EEE57839D841CF41D",
+    "7C8AB5BF4416685498DA8CB4DDE2A5DB",
+    "7D4CB5924BB5FC1EDDD2618FB7CD63E8",
+    "7E4A73154D9A6AD73E83CBB31507D24B",
+    "7E958CDA43FE73C2B1A1BD97459F54BB",
+    "7EF988EB4DBB016AEEFB40B3A50C8D88",
+    "7F5FDA7A4586358CF26DCCAF44FFC1AD",
+    "7FEFF6D44603CA583BAF028EAFA70F84",
+    "805926DB4704F6E9686E1AA9E9B27ABF",
+    "82AFDB454E63A36D97DC3DA6BEF788BC",
+    "84734D3D4F9E7DC45F6B508F78FD526F",
+    "8594FD564F6C012090607889CC7653D5",
+    "8611E0144F7145C720E1209656A686ED",
+    "8706C92E4DF90F52DDE9678E540E0161",
+    "871CB2BB4BE847AD7892C4B44C81A3D3",
+    "88E774B6447FCEECECB6FAA6F9B5D569",
+    "8920D63D4BB400BF7819F9B9B3CDFE9A",
+    "8945FE4A4AD24FF34FC1C9BD44A71F0D",
+    "897EFAB74CB578F10D397EA8E963DD54",
+    "8991DA9E4F1D5A8944295AAC0E2252DA",
+    "89D4249A436DAC86F86ECF9A88E7CA5E",
+    "8A8CC60E4F948613B36987BD920A7539",
+    "8B61D3BA45A89205B529C39384C3AEA3",
+    "8CD09C4F4533762FD38E5A900AE26B30",
+    "8FD15FB04E17FAEA7B814F9467335FA3",
+    "90D3A7434926DBC119D389B9953F2E33",
+    "91261F4C450971BEE57270B9B460D89E",
+    "9165E7464FE225D5D7555694B5B83360",
+    "9307956E4B7802068CC22BA38A8D9C6F",
+    "947ED46C41711D9A881897BD8751762F",
+    "957C5E08407504B764E81792D9C21993",
+    "97C6BCA048BA971CAC6D05ACFF04E66C",
+    "9944572F4C13F25D855745928B969384",
+    "999BC08B44303D3DD025D7977A6AFBD8",
+    "99A98CA6458D2DD08C9E758BC56114C2",
+    "9AC55BA3426077C1244C5DB9EBEE2D24",
+    "9B1E3A464FE595E0B4B8AB9FC5B19BC1",
+    "9C17A9DB473CF8D99A848E814E03C34F",
+    "9C6556FE4D545BF4B006FD9596EA9CBD",
+    "9D1B57804B2CD1D565BB218BD57B897A",
+    "9F02A5BA4A7ABA11CF5128B59EFDAFC4",
+    "9F50F0914CC6005565CB7BB73F4595EE",
+    "9F7886304D5FF9A3E3C6CFADAE21A578",
+    "9FF6CAF54B7293C947B9CF94952D58B1",
+    "A040404F456675D34F60CBA1CAC71B29",
+    "A052B3244120F4B983D6138B9F8D9BC2",
+    "A1C2DB7142A312D3FB2CF0A7B237028D",
+    "A1C8316F45142D9A9CE9E48B78DDAC56",
+    "A5514A3446D62A78591DD5B44899E6CD",
+    "A73DAA324B3DEB200ABD18825FDEB3BE",
+    "A7E07D0947A8CC474E91D09ED692702B",
+    "A8872DA445E73247DC115E94F35682BB",
+    "A916FD9541966EC44C10D5925D972079",
+    "ABA3B5F5499DFFEB00D554BC30F25F54",
+    "AD7218E8464D8042E808DF84BE4E6F8B",
+    "AD75A26A4356F217676162893EE02C49",
+    "AE38B97F40AC8D591A78D097315DB50B",
+    "AE9364D54316C6950D54F2B1340D42E2",
+    "B1BE6C584F64F80AF33C138349E48F2B",
+    "B327956C43E9D5C02B9476806E9330E5",
+    "B3E2FC464BC4B45D0E8AB6AAC3BA0732",
+    "B43D374E45D256464B7BF09B538EDECD",
+    "B4BE48D74BDD1691084AD68EAA3D534D",
+    "B4DF4FBE41405C9B6F4AED83E06F4138",
+    "B61915F94C7C0396FA2038A9EB5E084B",
+    "BC415A274CAF8FAB179874950E329455",
+    "BCFFDE704507F60174AC5AB6382A9E8F",
+    "BDC6A42C4D1BA67C216014ADFDCD1E4F",
+    "BE9A5711407E79BC02918F9DC01616C1",
+    "BF4182E14B9A553092E3AF9669A64BC6",
+    "BF4AF716480A44A582EC42B0FD3E07C8",
+    "C01C4800425E6F2D99A03A877534F3AD",
+    "C1666A0A4F0BE1099785E7A861606BB4",
+    "C1D9553D446735FED1A57387AED62CA5",
+    "C3938CE14DC3C694156680825EE13B6D",
+    "C485F6E94208389144D69288E388E475",
+    "C541F26E482C0A687692239DB8329A4C",
+    "C62AA35F447F9649DBF7D39735DE4FAC",
+    "C680ED624F0F0ECA64BBAFAFBB7B0314",
+    "C918505D42DB01C13BA3C4A3611D4BE1",
+    "C91931714C5984D153F1869F4E9CBADD",
+    "C93CE5F645E9A63744A6AC943EAEA182",
+    "CA3D437B4E2B05D778E2F7875BB74394",
+    "CAEF0ACA47C8EA329A58E1BC6B78641B",
+    "CB1CF72D4E7FF9205809A69B23ED8C76",
+    "CC6BC1494C0A16DCF16E41BEF99678A7",
+    "CF6B67784151AF2E6E5326BEFB74300D",
+    "CF8895114370EC73030E0091A9F676F5",
+    "D2EF42C440E5FA1701D8B5A69AC1E8FF",
+    "D36DE5CE4446F176F8FB3393E802F6D7",
+    "D39C544247B74B237E653D8264BBEB14",
+    "D4E4DA804109EEC99662ADB8F2EE9662",
+    "D514898242DCAA4714296190F5538164",
+    "D52884FB45E4E9E0D7A908B1207B2A59",
+    "D696C0F649ED2110D7F0B293BC50E194",
+    "D7B43E6A4350D0249CC231A06B65B343",
+    "D812B41043ADF70EE40202835ABBA420",
+    "D89A183C4DBE46EADA6B6597F86CB16F",
+    "D94115A54F95FB56D4DEB792641B0A44",
+    "DAD4EA264BAA1B5DDFAC449A6BA32EE8",
+    "DAE654ED49941358A3ECCF88F91B6E64",
+    "DC08838C46B8F8DC5DA25EAD8D0F79F3",
+    "DC3B706B4E0D0CAE3C61CD91880647AA",
+    "DCDC4E054EE4D37B07DA628F6A7C6328",
+    "E14840964AEBB408A90A6E92B5AA1948",
+    "E2D00768408A4FDD95091AA3720BC55F",
+    "E31130214AC2FA6E980BAF8B2494BFE9",
+    "E4655178404CFA48328A20A0C0F11129",
+    "E6C7F99F412AC69281C3B4B72C68537C",
+    "E6CA13584AEDED354F12949F092E5D63",
+    "E79CFB7641D8B018861CEBBA6842307A",
+    "E7E7D74B4B649E3AAB94CDBF066CB6A9",
+    "EC1692394644CD2627FA8A8CB83AA30E",
+    "EDA497B24DE08670246C3C9278658458",
+    "EDEC7D094E67C5905A889A8D9FD64954",
+    "EF78CEAF4529E7E082456B89C48E74D9",
+    "F0E0680D4D05D8518B87B9B2BEF9BFB1",
+    "F1DFB1D3423C7870D8C90AB912CA56A9",
+    "F34D1E454DB7A17BF5C2788BC66EBD5B",
+    "F44A03BC4B0D92B317F879A772A46241",
+    "F4E0FDF3420848B26A323EA64B057095",
+    "F5647B684B782AA41F342F9BC5112B70",
+    "F5BC509C488184E3404F0D8783AE5C68",
+    "F942D4C0406B55451870C3B57A47E825",
+    "F99BFD354BEA3915E923BA8981A522FC",
+    "FA0CB1FC4CAA99BC4CE5D0819D3C135D",
+    "FB586F844BED3A9990822F9F2980133C",
+    "FD14B35B484975CF4E03DCA9B87BA5F6",
+    "FD618B44437D9A38F0FD52AF255954B1",
+    "FEC906A544E5E440C1C866B85764853D",
+    "FF2E090B4006AF3958A20F83AC0CD2C1",
+    "FFFD97704720FD83B0AB58B712CAF8D2"
   ],
   "before_snapshot": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v3_interior_before.json",
   "transaction": {
-    "id": "20261103T023331944004Z_6010e5d13251",
-    "directory": "D:\\UEPro\\Test\\Saved\\MPR\\reference_transactions\\20261103T023331944004Z_6010e5d13251",
-    "manifest": "D:\\UEPro\\Test\\Saved\\MPR\\reference_transactions\\20261103T023331944004Z_6010e5d13251\\transaction.json"
+    "id": "20261103T111506829967Z_564d3b8dec7e",
+    "directory": "D:\\UEPro\\Test\\Saved\\MPR\\reference_transactions\\20261103T111506829967Z_564d3b8dec7e",
+    "manifest": "D:\\UEPro\\Test\\Saved\\MPR\\reference_transactions\\20261103T111506829967Z_564d3b8dec7e\\transaction.json"
+  },
+  "pv_texture_audit": {
+    "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarMid_Base": {
+      "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+      "filter": "<TextureFilter.TF_DEFAULT: 3>",
+      "lod_bias": 0,
+      "never_stream": false,
+      "virtual_texture_streaming": false,
+      "max_texture_size": 2048,
+      "srgb": true,
+      "note": "Configured mip generation policy; resident mip count requires separate runtime observation."
+    },
+    "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarMid_Normal": {
+      "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+      "filter": "<TextureFilter.TF_DEFAULT: 3>",
+      "lod_bias": 0,
+      "never_stream": false,
+      "virtual_texture_streaming": false,
+      "max_texture_size": 2048,
+      "srgb": false,
+      "note": "Configured mip generation policy; resident mip count requires separate runtime observation."
+    },
+    "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarFar_Base": {
+      "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+      "filter": "<TextureFilter.TF_DEFAULT: 3>",
+      "lod_bias": 0,
+      "never_stream": false,
+      "virtual_texture_streaming": false,
+      "max_texture_size": 2048,
+      "srgb": true,
+      "note": "Configured mip generation policy; resident mip count requires separate runtime observation."
+    },
+    "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarFar_Normal": {
+      "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+      "filter": "<TextureFilter.TF_DEFAULT: 3>",
+      "lod_bias": 0,
+      "never_stream": false,
+      "virtual_texture_streaming": false,
+      "max_texture_size": 2048,
+      "srgb": false,
+      "note": "Configured mip generation policy; resident mip count requires separate runtime observation."
+    },
+    "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarCells_Base": {
+      "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+      "filter": "<TextureFilter.TF_DEFAULT: 3>",
+      "lod_bias": 0,
+      "never_stream": false,
+      "virtual_texture_streaming": false,
+      "max_texture_size": 2048,
+      "srgb": true,
+      "note": "Configured mip generation policy; resident mip count requires separate runtime observation."
+    },
+    "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarCells_Normal": {
+      "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+      "filter": "<TextureFilter.TF_DEFAULT: 3>",
+      "lod_bias": 0,
+      "never_stream": false,
+      "virtual_texture_streaming": false,
+      "max_texture_size": 2048,
+      "srgb": false,
+      "note": "Configured mip generation policy; resident mip count requires separate runtime observation."
+    }
+  },
+  "pv_material_audit": {
+    "MPR4_SolarFrame": {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame",
+      "override_dithered_lod_transition": true,
+      "dithered_lod_transition": true,
+      "roughness": 0.550000011920929,
+      "metallic": 0.5
+    },
+    "MPR4_SolarMid": {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid",
+      "override_dithered_lod_transition": true,
+      "dithered_lod_transition": true,
+      "roughness": 0.5799999833106995,
+      "metallic": 0.3499999940395355
+    },
+    "MPR4_SolarFar": {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFar",
+      "override_dithered_lod_transition": true,
+      "dithered_lod_transition": true,
+      "roughness": 0.6800000071525574,
+      "metallic": 0.25
+    },
+    "MPR4_SolarCells": {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarCells",
+      "override_dithered_lod_transition": true,
+      "dithered_lod_transition": true,
+      "roughness": 0.5,
+      "metallic": 0.5
+    }
+  },
+  "road_terminal_material_audit": {
+    "MPR4_TerminalAsphalt": {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_TerminalAsphalt",
+      "parent": "/Game/MPRWarehouse/ReferenceV4/Materials/M_MPR4_PBRTexturedTerminal.M_MPR4_PBRTexturedTerminal",
+      "vertex_channel": "R",
+      "start": 0,
+      "end": 1,
+      "ground_role": "MPR3_Grass",
+      "ground_color": [
+        0.34,
+        0.37,
+        0.28
+      ],
+      "opaque": true,
+      "ground_uv_scale_cm": [
+        0.0016666666666666668,
+        -0.0016666666666666668,
+        0
+      ]
+    },
+    "MPR4_TerminalCurb": {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_TerminalCurb",
+      "parent": "/Game/MPRWarehouse/ReferenceV4/Materials/M_MPR4_PBRTexturedTerminal.M_MPR4_PBRTexturedTerminal",
+      "vertex_channel": "R",
+      "start": 0,
+      "end": 1,
+      "ground_role": "MPR3_Grass",
+      "ground_color": [
+        0.34,
+        0.37,
+        0.28
+      ],
+      "opaque": true,
+      "ground_uv_scale_cm": [
+        0.0016666666666666668,
+        -0.0016666666666666668,
+        0
+      ]
+    },
+    "MPR4_TerminalWhiteLine": {
+      "path": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_TerminalWhiteLine",
+      "parent": "/Game/MPRWarehouse/ReferenceV4/Materials/M_MPR4_PBRSolidTerminal.M_MPR4_PBRSolidTerminal",
+      "vertex_channel": "R",
+      "start": 0,
+      "end": 1,
+      "ground_role": "MPR3_Grass",
+      "ground_color": [
+        0.34,
+        0.37,
+        0.28
+      ],
+      "opaque": true,
+      "ground_uv_scale_cm": [
+        0.0016666666666666668,
+        -0.0016666666666666668,
+        0
+      ]
+    }
   },
   "roof_group_labels": [
     "MPR4_MPR4_RoofLight_-1_-1",
@@ -4882,7 +5836,7 @@
     "interior_actors": 136,
     "protected_digest": "4f04d58a0e87fc58ebd1153eed4436b8f1e481a3a0572fac084113f013dbbbab",
     "protected_assets": 45,
-    "new_exterior_actors": 238
+    "new_exterior_actors": 250
   },
   "retained_owned_packages": [
     "/Game/MPRWarehouse/Architecture/Meshes/SM_MPR_Exterior_00",
@@ -5032,6 +5986,6 @@
     "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_DockGuidance",
     "/Game/MPRWarehouse/Storage/Meshes/SM_MPR_Rack_42D_192"
   ],
-  "actor_count": 376,
-  "instance_count": 1202
+  "actor_count": 388,
+  "instance_count": 1444
 }

@@ -8,6 +8,17 @@ from mathutils.geometry import tessellate_polygon
 
 ROOT = Path(__file__).resolve().parents[2]
 
+def solar_lod_screen_sizes(bounds):
+    """Equal physical-detail distance across differently sized SolarBanks.
+
+    UE screen size is proportional to the bounds sphere radius. A common
+    threshold made the largest bank keep fine gaps a third longer than the
+    smallest. Keep the existing 70 m reference budget and scale each bank.
+    Camera FOV/LOD factor still controls all banks consistently at runtime.
+    """
+    radius=math.sqrt(sum(((hi-lo)*.5)**2 for lo,hi in bounds))
+    return [1.,.9*radius/70.,.35*radius/70.]
+
 def png(path, pixels):
     a=np.clip(pixels,0,255).astype(np.uint8)
     if a.ndim==2:a=np.repeat(a[:,:,None],3,axis=2)
@@ -49,14 +60,43 @@ def make_textures(out):
     tile=(np.floor(u*6)*7+np.floor(v*12)*11)%13
     base+=((tile-6)*.7)[:,:,None]
     base+=rng.random((h,w,1))*4
-    thin=(np.mod(xx,8)<.7);base[thin]+=8
+    # Detail remains readable nearby without almost-white subpixel glints.
+    thin=(np.mod(xx,8)<.7);base[thin]+=2
     bus=(np.abs(cx-.27)<.009)|(np.abs(cx-.73)<.009)
-    base[bus]=[106,142,172]
+    base[bus]=[34,67,101]
     seam=(cx<.016)|(cy<.011)|(cx>.984)|(cy>.989)
     corner=(np.minimum(cx,1-cx)+np.minimum(cy,1-cy))<.075
-    base[seam|corner]=[170,188,202]
+    base[seam|corner]=[63,91,119]
     specs['solar']={'albedo':save('T_MPR4_SolarCells_Base',base),
                     'normal':save('T_MPR4_SolarCells_Normal',normal(seam.astype(float)*.018,1.0))}
+    # Exactly one physical module per tile: no 6x12 cell/bus pattern at the
+    # intermediate distance. A periodic smooth border spans 10% of the tile
+    # across its seam (0.112m on X, close to the 0.1072m real strip gap).
+    # Blend and apply the native-preview gain in linear light; retain the
+    # existing bounded material tint instead of baking an overbright tint.
+    def decode_srgb(a):
+        a=np.asarray(a,dtype=float)/255
+        return np.where(a<=.04045,a/12.92,((a+.055)/1.055)**2.4)
+    def encode_srgb(a):
+        a=np.clip(a,0,1)
+        return 255*np.where(a<=.0031308,a*12.92,1.055*a**(1/2.4)-.055)
+    gain=np.array([1.6/.58,1.58/.83,1.4])
+    mu=(xx+.5)/w;mv=(yy+.5)/h
+    distance=np.minimum(np.minimum(mu,1-mu),np.minimum(mv,1-mv))
+    t=np.clip(distance/.05,0,1);border=1-t*t*(3-2*t)
+    body=decode_srgb([21,51,85]);edge=decode_srgb([36,70,105])
+    mid=encode_srgb((body+(edge-body)*border[:,:,None])*gain)
+    flat=np.zeros((h,w,3));flat[:]=[128,128,255]
+    specs['solar_mid']={'albedo':save('T_MPR4_SolarMid_Base',mid),
+                        'normal':save('T_MPR4_SolarMid_Normal',flat)}
+    # Far surface has no periodic grid. Its low-frequency finish converges to
+    # the same blue mean under mip filtering rather than a lattice of glints.
+    fy,fx=np.mgrid[:128,:128];far=np.zeros((128,128,3));far[:]=[23,54,87]
+    variation=.65*np.cos(2*math.pi*fx/128)+.45*np.cos(2*math.pi*fy/128)
+    far=encode_srgb(decode_srgb(far+variation[:,:,None])*gain)
+    far_normal=np.zeros_like(far);far_normal[:]=[128,128,255]
+    specs['solar_far']={'albedo':save('T_MPR4_SolarFar_Base',far),
+                        'normal':save('T_MPR4_SolarFar_Normal',far_normal)}
     return specs
 
 class Geometry:
@@ -111,6 +151,26 @@ class Geometry:
         f=[tuple(reversed(range(segments))),tuple(range(segments,segments*2))]+[(i,(i+1)%segments,(i+1)%segments+segments,i+segments) for i in range(segments)]
         self.mesh(n,r,v,f)
 
+    def solar_surface(self,name,role,polygon,z,uv_period=(1.12,1.95),uv_origin=(0.,0.)):
+        """Constrained triangles preserve holes; UVs stay continuous per bank."""
+        import shapely
+        from shapely.geometry.polygon import orient
+        assert polygon.is_valid and not polygon.is_empty
+        parts=[polygon] if polygon.geom_type=='Polygon' else list(polygon.geoms)
+        for part in parts:
+            part=orient(part,sign=1.)
+            triangles=shapely.constrained_delaunay_triangles(part)
+            assert abs(sum(t.area for t in triangles.geoms)-part.area)<1e-6
+            for triangle in triangles.geoms:
+                p=list(triangle.exterior.coords)[:-1]
+                if sum(a[0]*b[1]-b[0]*a[1]for a,b in zip(p,p[1:]+p[:1]))<0:p.reverse()
+                self.mesh(name,role,[(x,y,z)for x,y in p],[(0,1,2)],
+                          [[((x-uv_origin[0])/uv_period[0],(y-uv_origin[1])/uv_period[1])for x,y in p]])
+            for ring in [part.exterior,*part.interiors]:
+                for a,b in zip(ring.coords,list(ring.coords)[1:]):
+                    self.mesh(name,'MPR4_SolarFrame',[(a[0],a[1],z-.086),(b[0],b[1],z-.086),
+                         (b[0],b[1],z),(a[0],a[1],z)],[(0,1,2,3)])
+
     def material(self,role,texture_root):
         spec=self.materials[role];m=bpy.data.materials.new(role);m.use_nodes=True
         bs=next(n for n in m.node_tree.nodes if n.type=='BSDF_PRINCIPLED');bs.inputs['Base Color'].default_value=(*spec['color'],1)
@@ -160,7 +220,7 @@ class Geometry:
                 bounds_m=[[min(v[i] for v in verts),max(v[i] for v in verts)] for i in range(3)],
                 vertices=len(verts),triangles=len(data.loop_triangles),instance_only=instanced,collision=False,tick=False,uv_channels=1))
         for name,obj in objs.items():
-            if name.endswith('_LOD1'):
+            if name.endswith(('_LOD1','_LOD2')):
                 obj.hide_render=True;obj.hide_viewport=True
         for name,placements in instances.items():
             assert name in objs,name

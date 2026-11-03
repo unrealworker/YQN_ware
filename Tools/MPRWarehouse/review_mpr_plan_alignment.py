@@ -99,8 +99,8 @@ def main():
     bounds={r['name']:r['bounds_m']for r in data['props']['meshes']}
     trailer_rows=[];trailer_errors=[];railcar_rows=[];railcar_errors=[]
     for name,instances in site.get('instances',{}).items():
-        is_railcar='FreightBoxcar'in name
-        if 'Trailer' not in name and not is_railcar:continue
+        is_railcar=any(v in name for v in ('FreightBoxcar','Locomotive'))
+        if 'Trailer' not in name and 'Tractor' not in name and not is_railcar:continue
         for i,row in enumerate(instances):
             points=world_to_plan(actual_instance_polygon(row,bounds[name]),reg)
             color=(135,90,20,230)if is_railcar else(235,110,10,220)
@@ -112,6 +112,8 @@ def main():
                 (railcar_errors if is_railcar else trailer_errors).append(error)
             (railcar_rows if is_railcar else trailer_rows).append(dict(mesh=name,instance_index=i,reference_row=row.get('reference_row'),plan_track_id=row.get('plan_track_id'),
                 projected_center_px=actual,reference_pixel=target,center_error_px=error,
+                assembly_id=row.get('assembly_id'),consist_id=row.get('consist_id'),consist_index=row.get('consist_index'),
+                coupling_joint_distances_m=row.get('coupling_joint_distances_m'),wheel_path_error_m=row.get('wheel_path_error_m'),
                 cad_dock_index=row.get('cad_dock_index'),stand_shift_m=row.get('stand_shift_m'),projected_outline_px=points))
     target_mask=Image.new('1',im.size);td=ImageDraw.Draw(target_mask)
     for row in data['solar']['regions']:
@@ -151,13 +153,16 @@ def main():
         output_image=dict(path=(OUT/'plan_alignment.png').relative_to(ROOT).as_posix(),sha256=sha(OUT/'plan_alignment.png')),
         inputs={k:dict(path=p.relative_to(ROOT).as_posix(),sha256=sha(p))for k,p in paths.items()},
         freshness_checks=current_checks,coordinate_mapping='world_to_plan from independent XY registration; no perspective image inverse',
-        counts=dict(context_buildings=len(building_rows),trees=len(tree_rows),trailers=len(trailer_rows),rail_tracks=len(railway_rows),railcars=len(railcar_rows),solar_strips=len(arch['roof_layout']['strips']),roof_fixtures=len(fixture_rows)),
+        counts=dict(context_buildings=len(building_rows),trees=len(tree_rows),trailers=sum('Trailer' in r['mesh'] for r in trailer_rows),
+            tractors=sum('Tractor' in r['mesh'] for r in trailer_rows),rail_tracks=len(railway_rows),railcars=len(railcar_rows),
+            locomotives=sum('Locomotive' in r['mesh'] for r in railcar_rows),solar_strips=len(arch['roof_layout']['strips']),roof_fixtures=len(fixture_rows)),
         building_boundary_regularization=stats([r['boundary_displacement_px_max']for r in building_rows if 'boundary_displacement_px_max'in r]),
         tree_center_error=stats(tree_errors),trailer_reference_center_displacement=stats(trailer_errors),railcar_reference_center_displacement=stats(railcar_errors),fixture_center_error=stats(fixture_errors),
         solar_raster_diagnostic=dict(target_px=int(b.sum()),projected_modules_px=int(a.sum()),outside_target_px=int((a&~b).sum()),
             sampled_target_fraction=float((a&b).sum()/max(1,b.sum())),
             caution='One-pixel raster rounding and actual inter-module gaps affect these counts; use polygon/module fit validation for correctness'),
-        trees_rejected=site['planting'].get('rejected',[]),trailer_layout_audit=site.get('trailer_layout_audit'),
+        trees_rejected=site['planting'].get('rejected',[]),trailer_layout_audit=site.get('trailer_layout_audit'),rail_consist_audit=site.get('rail_consist_audit'),
+        railcar_placement_policy='Continuous consists within the measured occupied track intervals; isolated image-symbol centres are not final placement targets. Actual exported tractor, trailer, locomotive and freight-car bounds are drawn.',
         buildings=building_rows,trees=tree_rows,trailers=trailer_rows,railway_tracks=railway_rows,railcars=railcar_rows,roof_fixtures=fixture_rows,
         omitted_roof_fixture_sources=[r for r in targets if r['id']not in seen_fixture_targets],
         limitations=['Layout metadata and source road polygons are audited; this does not independently inspect imported Unreal or exported FBX triangle geometry.',

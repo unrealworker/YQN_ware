@@ -260,7 +260,7 @@ def textures():
    path=out/('T_MPR3_'+kind+'_'+channel+'.png');png(path,data);result[kind][channel]=path.relative_to(ROOT).as_posix()
  return result
 
-def export(tex,metadata):
+def export(tex,metadata,vertex_fade=None):
  mats={}
  for role,spec in MATERIALS.items():
   mat=bpy.data.materials.new(role);mat.use_nodes=True;bs=next(n for n in mat.node_tree.nodes if n.type=='BSDF_PRINCIPLED')
@@ -273,6 +273,27 @@ def export(tex,metadata):
    mat.node_tree.links.new(t.outputs['Color'],mult.inputs[1]);mat.node_tree.links.new(mult.outputs['Color'],bs.inputs['Base Color'])
    nt=mat.node_tree.nodes.new('ShaderNodeTexImage');nt.image=bpy.data.images.load(str(ROOT/channels['normal']));nt.image.colorspace_settings.name='Non-Color'
    nm=mat.node_tree.nodes.new('ShaderNodeNormalMap');nm.inputs['Strength'].default_value=spec.get('normal_strength',.55);mat.node_tree.links.new(nt.outputs['Color'],nm.inputs['Color']);mat.node_tree.links.new(nm.outputs['Normal'],bs.inputs['Normal'])
+  fade_spec=spec.get('vertex_color_fade')
+  if fade_spec:
+   # Optional MPR-owned terminal material. Existing callers and shared GHS
+   # materials are unchanged; endpoints use actual grass albedo and no alpha.
+   original=bs.inputs['Base Color'].links[0].from_socket if bs.inputs['Base Color'].is_linked else None
+   color=mat.node_tree.nodes.new('ShaderNodeVertexColor');color.layer_name='EdgeFade'
+   ground=mat.node_tree.nodes.new('ShaderNodeTexImage');ground.image=bpy.data.images.load(str(ROOT/tex['grass']['albedo']))
+   ground_mult=mat.node_tree.nodes.new('ShaderNodeMixRGB');ground_mult.blend_type='MULTIPLY';ground_mult.inputs[0].default_value=1
+   ground_mult.inputs[2].default_value=(*fade_spec['ground_base_color'],1);mat.node_tree.links.new(ground.outputs['Color'],ground_mult.inputs[1])
+   mix=mat.node_tree.nodes.new('ShaderNodeMixRGB');mix.blend_type='MIX';mix.inputs[1].default_value=(*spec['base_color'],1)
+   if original:mat.node_tree.links.new(original,mix.inputs[1])
+   mat.node_tree.links.new(color.outputs['Color'],mix.inputs[0]);mat.node_tree.links.new(ground_mult.outputs[0],mix.inputs[2]);mat.node_tree.links.new(mix.outputs[0],bs.inputs['Base Color'])
+   # Use the same world-space 6m grass tiling as continuous terrain.
+   geometry=mat.node_tree.nodes.new('ShaderNodeNewGeometry');scale=mat.node_tree.nodes.new('ShaderNodeVectorMath');scale.operation='SCALE';scale.inputs['Scale'].default_value=1/6
+   mat.node_tree.links.new(geometry.outputs['Position'],scale.inputs[0]);mat.node_tree.links.new(scale.outputs['Vector'],ground.inputs['Vector'])
+   rough=mat.node_tree.nodes.new('ShaderNodeMapRange');rough.inputs['From Min'].default_value=0;rough.inputs['From Max'].default_value=1
+   rough.inputs['To Min'].default_value=spec['roughness'];rough.inputs['To Max'].default_value=fade_spec['ground_roughness']
+   mat.node_tree.links.new(color.outputs['Color'],rough.inputs['Value']);mat.node_tree.links.new(rough.outputs['Result'],bs.inputs['Roughness'])
+   if bs.inputs['Normal'].is_linked:
+    prior=bs.inputs['Normal'].links[0].from_socket;normal_mix=mat.node_tree.nodes.new('ShaderNodeMixRGB')
+    mat.node_tree.links.new(color.outputs['Color'],normal_mix.inputs[0]);mat.node_tree.links.new(prior,normal_mix.inputs[1]);mat.node_tree.links.new(geometry.outputs['Normal'],normal_mix.inputs[2]);mat.node_tree.links.new(normal_mix.outputs[0],bs.inputs['Normal'])
   mats[role]=mat
  rows=[]
  for name,roles in GEO.data.items():
@@ -281,6 +302,8 @@ def export(tex,metadata):
    off=len(verts);verts.extend(vv);faces.extend(tuple(i+off for i in f) for f in ff);face_roles.extend([role]*len(ff))
   if not faces:continue
   used=sorted({i for f in faces for i in f});remap={v:i for i,v in enumerate(used)};verts=[verts[i] for i in used];faces=[tuple(remap[i] for i in f) for f in faces]
+  if vertex_fade is not None and any(MATERIALS[r].get('vertex_color_fade')for r in roles):
+   verts=[(x,y,G+(z-G)*(1-.99*vertex_fade(name,(x,y,z))))for x,y,z in verts]
   data=bpy.data.meshes.new(name);data.from_pydata(verts,[],faces);data.update();obj=bpy.data.objects.new(name,data);bpy.context.collection.objects.link(obj)
   # Float32 storage can collapse tiny Shapely sliver triangles. Remove only
   # zero-area faces before export/statistics so FBX and source counts agree.
@@ -295,9 +318,18 @@ def export(tex,metadata):
    f.material_index=keys.index(r);axis=max(range(3),key=lambda a:abs(f.normal[a]));a,b=[v for v in range(3) if v!=axis];period=6 if 'Grass' in r else 3
    for li in f.loop_indices:
     v=data.vertices[data.loops[li].vertex_index].co;uv.data[li].uv=(v[a]/period,v[b]/period)
+  fade_range=None
+  if vertex_fade is not None and any(MATERIALS[r].get('vertex_color_fade')for r in keys):
+   colors=data.color_attributes.new(name='EdgeFade',type='FLOAT_COLOR',domain='POINT');data.color_attributes.active_color=colors
+   values=[]
+   for v in data.vertices:
+    value=float(vertex_fade(name,tuple(v.co)));assert 0<=value<=1;colors.data[v.index].color=(value,value,value,1);values.append(value)
+   fade_range=[min(values),max(values)]
   bpy.ops.object.select_all(action='DESELECT');obj.select_set(True);bpy.context.view_layer.objects.active=obj
-  fbx=OUT/(name+'.fbx');bpy.ops.export_scene.fbx(filepath=str(fbx),use_selection=True,object_types={'MESH'},axis_forward='-Y',axis_up='Z',apply_unit_scale=True,bake_anim=False,mesh_smooth_type='FACE',add_leaf_bones=False)
-  data.calc_loop_triangles();rows.append(dict(name=name,fbx=fbx.relative_to(ROOT).as_posix(),material_roles=keys,bounds_m=[[min(v[i] for v in verts),max(v[i] for v in verts)] for i in range(3)],vertices=len(verts),triangles=len(data.loop_triangles),sha256=hashlib.sha256(fbx.read_bytes()).hexdigest(),instance_only=False))
+  fbx=OUT/(name+'.fbx');bpy.ops.export_scene.fbx(filepath=str(fbx),use_selection=True,object_types={'MESH'},axis_forward='-Y',axis_up='Z',apply_unit_scale=True,bake_anim=False,mesh_smooth_type='FACE',add_leaf_bones=False,colors_type='LINEAR')
+  data.calc_loop_triangles();row=dict(name=name,fbx=fbx.relative_to(ROOT).as_posix(),material_roles=keys,bounds_m=[[min(v[i] for v in verts),max(v[i] for v in verts)] for i in range(3)],vertices=len(verts),triangles=len(data.loop_triangles),sha256=hashlib.sha256(fbx.read_bytes()).hexdigest(),instance_only=False)
+  if fade_range is not None:row.update(vertex_color_fade=dict(attribute='EdgeFade',channel='R',zero='original surface',one='ground surface',opaque=True),vertex_color_attribute='EdgeFade',vertex_color_domain='POINT',vertex_color_encoding='LINEAR_RGB_EQUAL',vertex_color_range=fade_range,disable_shadow_casting=True)
+  rows.append(row)
  bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'MPR_ReferenceSite.blend'))
  manifest=dict(schema_version=3,coordinate_frame='CAD metres +Y; FBX -Y/Z; UE reflects Y once',ground_z_m=G,meshes=rows,instances=dict(INSTANCES),materials=MATERIALS,counts=dict(COUNTS),**metadata)
  (OUT/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')

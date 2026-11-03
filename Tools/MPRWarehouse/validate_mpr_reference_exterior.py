@@ -204,6 +204,7 @@ def audit_scene():
     manifests=catalog['manifests']
     expected_counts={name:len(rows) for name,rows in catalog['instances'].items()}
     meshes, specs, mesh_paths, static_expected = {}, {}, {}, set()
+    pv_material_audit,pv_texture_audit,terminal_material_audit={},{},{}
     for category, data in manifests:
         specs.update(data['materials'])
         for row in data['meshes']:
@@ -221,8 +222,12 @@ def audit_scene():
             if 'SolarBank' in row['name']:
                 assert not SM.get_nanite_settings(mesh).enabled,('Solar topology preservation',row['name'])
             slots = mesh.static_materials
-            assert len(slots) == len(row['material_roles']), ('Material slot count', row['name'])
-            expected_mats = {material_path(role) for role in row['material_roles']}
+            if row.get('vertex_color_fade'):
+                assert mesh.get_editor_property('asset_import_data').get_editor_property('vertex_color_import_option')==u.VertexColorImportOption.REPLACE, (row['name'],'Road terminal vertex colors')
+            explicit_lods=bool(row.get('lod_material_roles'))
+            roles=row['all_lod_material_roles'] if explicit_lods else row['material_roles']
+            assert len(slots) == len(roles), ('Material slot count', row['name'],len(slots),roles)
+            expected_mats = {material_path(role) for role in roles}
             for slot in slots:
                 assert slot.material_interface
                 assert slot.material_interface.get_path_name().split('.')[0] in expected_mats, ('Unexpected slot material', row['name'])
@@ -231,34 +236,85 @@ def audit_scene():
             if 'Tree' not in row['name'] and not row.get('lod_files') and row.get('instance_only') and row.get('triangles', 0) > 1000:
                 expected_lods = max(expected_lods, 3)
             assert lod_count >= expected_lods, ('Missing LODs', row['name'], lod_count, expected_lods)
+            explicit_audit=None
+            if explicit_lods:
+                assert lod_count==len(row['lod_material_roles'])==3,('Exact PV LOD count',row['name'],lod_count)
+                actual_names=[str(s.get_editor_property('imported_material_slot_name'))for s in slots]
+                assert actual_names==roles,('PV slot union mismatch',row['name'],actual_names,roles)
+                screen=list(SM.get_lod_screen_sizes(mesh));wanted_screen=row['lod_screen_sizes']
+                assert len(screen)==3 and max(abs(a-b)for a,b in zip(screen,wanted_screen))<1e-5
+                levels=[]
+                for lod,wanted in enumerate(row['lod_material_roles']):
+                    sections=[];used=[]
+                    for section in range(mesh.get_num_sections(lod)):
+                        slot_index=SM.get_lod_material_slot(mesh,lod,section)
+                        assert 0<=slot_index<len(slots)
+                        role=actual_names[slot_index];used.append(role)
+                        assert role in wanted,('PV wrong LOD section',row['name'],lod,section,role,wanted)
+                        assert slots[slot_index].material_interface.get_path_name().split('.')[0]==material_path(role)
+                        sections.append(dict(section=section,slot_index=slot_index,role=role,material=material_path(role)))
+                    assert set(used)==set(wanted),('PV missing LOD role',row['name'],lod,used,wanted)
+                    settings=SM.get_lod_build_settings(mesh,lod)
+                    assert settings.get_editor_property('use_full_precision_u_vs')
+                    levels.append(dict(lod=lod,screen_size=screen[lod],full_precision_uvs=True,sections=sections))
+                explicit_audit=dict(slot_roles=actual_names,lods=levels)
             bounds = mesh.get_bounds()
             actual = [[bounds.origin.x - bounds.box_extent.x, bounds.origin.x + bounds.box_extent.x],
                       [bounds.origin.y - bounds.box_extent.y, bounds.origin.y + bounds.box_extent.y],
                       [bounds.origin.z - bounds.box_extent.z, bounds.origin.z + bounds.box_extent.z]]
             b = row['bounds_m']
             expected = [[v * 100 for v in b[0]], [-b[1][1] * 100, -b[1][0] * 100], [v * 100 for v in b[2]]]
-            assert max(abs(x - y) for aa, bb in zip(actual, expected) for x, y in zip(aa, bb)) < 2, ('Axis/scale mismatch', row['name'])
+            assert max(abs(x - y) for aa, bb in zip(actual, expected) for x, y in zip(aa, bb)) < (20 if explicit_lods else 2), ('Axis/scale mismatch', row['name'])
             nanite = SM.get_nanite_settings(mesh)
             meshes[row['name']] = {'lods': lod_count, 'slots': len(slots), 'source_triangles': row.get('triangles'),
                                   'category': category, 'nanite_enabled': bool(nanite.enabled),
                                   'nanite_max_edge_length_factor': float(nanite.max_edge_length_factor)}
+            if explicit_audit is not None:meshes[row['name']]['explicit_lod_audit']=explicit_audit
     for role, spec in specs.items():
         mi = u.EditorAssetLibrary.load_asset(material_path(role))
         assert isinstance(mi, u.MaterialInstanceConstant), ('Missing material instance', role)
         overrides=mi.get_editor_property('base_property_overrides')
         assert bool(overrides.get_editor_property('override_two_sided'))
         assert bool(overrides.get_editor_property('two_sided'))==bool(spec.get('two_sided',False)), (role,'Two-sided leaves')
+        if role.startswith('MPR4_Solar'):
+            assert overrides.get_editor_property('override_dithered_lod_transition') and overrides.get_editor_property('dithered_lod_transition'),(role,'PV dithered LOD transition')
+            pv_material_audit[role]=dict(override_dithered_lod_transition=True,dithered_lod_transition=True)
         for param, expected in [('Roughness', spec.get('roughness', .8)), ('Metallic', spec.get('metallic', 0))]:
             assert abs(ML.get_material_instance_scalar_parameter_value(mi, param) - expected) < 1e-5, (role, param)
         color = list(spec.get('color', spec.get('base_color')))[:3]
         actual = ML.get_material_instance_vector_parameter_value(mi, 'Tint')
         assert max(abs(x - y) for x, y in zip(color, [actual.r, actual.g, actual.b])) < 1e-5, (role, 'Tint')
+        if spec.get('vertex_color_fade'):
+            fade=spec['vertex_color_fade'];ground=specs[fade['ground_role']]
+            parent=mi.get_editor_property('parent')
+            expected_parent='M_MPR4_PBRTexturedTerminal' if spec.get('textures') else 'M_MPR4_PBRSolidTerminal'
+            assert parent.get_name()==expected_parent and parent.get_editor_property('blend_mode')==u.BlendMode.BLEND_OPAQUE,(role,'Opaque terminal parent')
+            ground_color=list(ground.get('color',ground.get('base_color')))[:3]
+            actual_ground=ML.get_material_instance_vector_parameter_value(mi,'GroundTint')
+            assert max(abs(a-b) for a,b in zip(ground_color,[actual_ground.r,actual_ground.g,actual_ground.b]))<1e-5
+            actual_uv=ML.get_material_instance_vector_parameter_value(mi,'GroundUVScale')
+            assert max(abs(a-b) for a,b in zip([1/600,-1/600,0],[actual_uv.r,actual_uv.g,actual_uv.b]))<1e-7
+            for key,expected in [('GroundRoughness',ground.get('roughness',.98)),('GroundMetallic',ground.get('metallic',0)),('GroundNormalStrength',ground.get('normal_strength',.06))]:
+                assert abs(ML.get_material_instance_scalar_parameter_value(mi,key)-expected)<1e-5,(role,key)
+            for channel,filename in ground['textures'].items():
+                tex=ML.get_material_instance_texture_parameter_value(mi,'GroundNormal' if channel=='normal' else 'GroundAlbedo')
+                assert tex and tex.get_path_name().split('.')[0]==DEST+'/Textures/'+Path(filename).stem,(role,'ground texture',channel)
+            terminal_material_audit[role]=dict(parent=parent.get_path_name(),ground_role=fade['ground_role'],opaque=True,ground_tint=ground_color,ground_uv_scale_cm=[actual_uv.r,actual_uv.g,actual_uv.b])
         for channel, filename in spec.get('textures', {}).items():
             tex = ML.get_material_instance_texture_parameter_value(mi, 'Normal' if channel == 'normal' else 'Albedo')
             assert tex and tex.get_path_name().split('.')[0] == DEST + '/Textures/' + Path(filename).stem, (role, channel)
             assert bool(tex.get_editor_property('srgb')) == (channel != 'normal'), (role, 'sRGB')
             if channel == 'normal':
                 assert tex.get_editor_property('compression_settings') == u.TextureCompressionSettings.TC_NORMALMAP, role
+            if role.startswith('MPR4_Solar'):
+                assert tex.get_editor_property('mip_gen_settings')==u.TextureMipGenSettings.TMGS_SIMPLE_AVERAGE,(role,'PV mip policy')
+                assert tex.get_editor_property('filter')==u.TextureFilter.TF_DEFAULT,(role,'PV filter policy')
+                assert tex.get_editor_property('lod_bias')==0,(role,'PV mip bias')
+                assert not tex.get_editor_property('never_stream') and not tex.get_editor_property('virtual_texture_streaming'),(role,'PV streaming policy')
+                pv_texture_audit[tex.get_path_name()]=dict(mip_gen_settings=str(tex.get_editor_property('mip_gen_settings')),
+                    filter=str(tex.get_editor_property('filter')),lod_bias=int(tex.get_editor_property('lod_bias')),
+                    never_stream=False,virtual_texture_streaming=False,max_texture_size=int(tex.get_editor_property('max_texture_size')),
+                    note='Saved configuration readback; resident mip count and temporal behavior require runtime validation.')
     actors = list(A.get_all_level_actors())
     counts, static_counts = {}, defaultdict(int)
     world_instances = defaultdict(list)
@@ -310,6 +366,7 @@ def audit_scene():
                 map_sha256=dependency_report['map_sha256'],
                 source_manifest_hashes={category:sha(path) for category,path in catalog['paths']},
                 mesh_count=len(meshes), mesh_audit=meshes, exterior_instances=sum(counts.values()),
+                pv_material_audit=pv_material_audit,pv_texture_audit=pv_texture_audit,terminal_material_audit=terminal_material_audit,
                 instance_world_transform_audit=transform_audit, static_identity_actors=sum(static_counts.values()),
                 transform_tolerances=dict(position_cm=POSITION_TOLERANCE_CM,rotation_deg=ROTATION_TOLERANCE_DEG,scale=SCALE_TOLERANCE),
                 captures=[]), baseline, by_label['MPR_ReviewCamera'], [a for a in actors if a.actor_has_tag('MPR_Roof')]

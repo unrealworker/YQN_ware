@@ -27,36 +27,68 @@ def package(path):return ROOT/('Content/'+path.split('.')[0].removeprefix('/Game
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def save(asset):assert LIB.save_loaded_asset(asset,only_if_is_dirty=False),asset.get_path_name()
 
+def pv_texture_readback(tex):
+ return dict(mip_gen_settings=str(tex.get_editor_property('mip_gen_settings')),
+  filter=str(tex.get_editor_property('filter')),lod_bias=int(tex.get_editor_property('lod_bias')),
+  never_stream=bool(tex.get_editor_property('never_stream')),
+  virtual_texture_streaming=bool(tex.get_editor_property('virtual_texture_streaming')),
+  max_texture_size=int(tex.get_editor_property('max_texture_size')),
+  srgb=bool(tex.get_editor_property('srgb')),
+  note='Configured mip generation policy; resident mip count requires separate runtime observation.')
+
 def expression(mat,klass,**props):
  n=ML.create_material_expression(mat,klass)
  for k,v in props.items():n.set_editor_property(k,v)
  return n
 def connect(a,out,b,inp):assert ML.connect_material_expressions(a,out,b,inp),(a,b,inp)
-def material_graph(textured,defaults):
- name='M_MPR4_PBRTextured' if textured else 'M_MPR4_PBRSolid';path=DEST+'/Materials/'+name
+def material_graph(textured,defaults,terminal=False):
+ name=('M_MPR4_PBRTextured' if textured else 'M_MPR4_PBRSolid')+('Terminal' if terminal else '');path=DEST+'/Materials/'+name
  mat=base.load(path) if LIB.does_asset_exist(path) else TOOLS.create_asset(name,DEST+'/Materials',u.Material,u.MaterialFactoryNew())
  while ML.get_num_material_expressions(mat):
   count=ML.get_num_material_expressions(mat);ML.delete_all_material_expressions(mat);assert ML.get_num_material_expressions(mat)<count
  mat.set_editor_property('blend_mode',u.BlendMode.BLEND_OPAQUE);mat.set_editor_property('shading_model',u.MaterialShadingModel.MSM_DEFAULT_LIT)
  tint=expression(mat,u.MaterialExpressionVectorParameter,parameter_name='Tint',default_value=u.LinearColor(.7,.7,.7,1))
  color=tint
+ flat=expression(mat,u.MaterialExpressionConstant3Vector,constant=u.LinearColor(0,0,1,1))
+ surface_normal=flat
  if textured:
   albedo=expression(mat,u.MaterialExpressionTextureSampleParameter2D,parameter_name='Albedo',texture=defaults['albedo'])
   mul=expression(mat,u.MaterialExpressionMultiply);connect(albedo,'RGB',mul,'A');connect(tint,'RGB',mul,'B');color=mul
   normal=expression(mat,u.MaterialExpressionTextureSampleParameter2D,parameter_name='Normal',texture=defaults['normal'],sampler_type=u.MaterialSamplerType.SAMPLERTYPE_NORMAL)
-  flat=expression(mat,u.MaterialExpressionConstant3Vector,constant=u.LinearColor(0,0,1,1))
   alpha=expression(mat,u.MaterialExpressionScalarParameter,parameter_name='NormalStrength',default_value=.2)
   lerp=expression(mat,u.MaterialExpressionLinearInterpolate);connect(flat,'',lerp,'A');connect(normal,'RGB',lerp,'B');connect(alpha,'',lerp,'Alpha')
-  assert ML.connect_material_property(lerp,'',u.MaterialProperty.MP_NORMAL)
+  surface_normal=lerp
+ if terminal:
+  # Match the underlying MPR grass in world coordinates, including its
+  # actual albedo/normal. A fixed end tint would leave a visible rectangle.
+  vertex=expression(mat,u.MaterialExpressionVertexColor)
+  position=expression(mat,u.MaterialExpressionWorldPosition)
+  scale=expression(mat,u.MaterialExpressionVectorParameter,parameter_name='GroundUVScale',default_value=u.LinearColor(1/600,-1/600,0,1))
+  mul=expression(mat,u.MaterialExpressionMultiply);connect(position,'',mul,'A');connect(scale,'RGB',mul,'B')
+  # ComponentMask exposes its sole input without a named pin in UE 5.8.
+  uv=expression(mat,u.MaterialExpressionComponentMask,r=True,g=True,b=False,a=False);connect(mul,'',uv,'')
+  ground=expression(mat,u.MaterialExpressionTextureSampleParameter2D,parameter_name='GroundAlbedo',texture=defaults['albedo']);connect(uv,'',ground,'')
+  gt=expression(mat,u.MaterialExpressionVectorParameter,parameter_name='GroundTint',default_value=u.LinearColor(.34,.37,.28,1))
+  gm=expression(mat,u.MaterialExpressionMultiply);connect(ground,'RGB',gm,'A');connect(gt,'RGB',gm,'B')
+  blend=expression(mat,u.MaterialExpressionLinearInterpolate);connect(color,'',blend,'A');connect(gm,'',blend,'B');connect(vertex,'R',blend,'Alpha');color=blend
+  gn=expression(mat,u.MaterialExpressionTextureSampleParameter2D,parameter_name='GroundNormal',texture=defaults['normal'],sampler_type=u.MaterialSamplerType.SAMPLERTYPE_NORMAL);connect(uv,'',gn,'')
+  gs=expression(mat,u.MaterialExpressionScalarParameter,parameter_name='GroundNormalStrength',default_value=.06)
+  gnl=expression(mat,u.MaterialExpressionLinearInterpolate);connect(flat,'',gnl,'A');connect(gn,'RGB',gnl,'B');connect(gs,'',gnl,'Alpha')
+  nl=expression(mat,u.MaterialExpressionLinearInterpolate);connect(surface_normal,'',nl,'A');connect(gnl,'',nl,'B');connect(vertex,'R',nl,'Alpha');surface_normal=nl
+ assert ML.connect_material_property(surface_normal,'',u.MaterialProperty.MP_NORMAL)
  assert ML.connect_material_property(color,'',u.MaterialProperty.MP_BASE_COLOR)
  for name,value,prop in [('Roughness',.8,u.MaterialProperty.MP_ROUGHNESS),('Metallic',0,u.MaterialProperty.MP_METALLIC),('Specular',.25,u.MaterialProperty.MP_SPECULAR)]:
-  node=expression(mat,u.MaterialExpressionScalarParameter,parameter_name=name,default_value=value);assert ML.connect_material_property(node,'',prop)
+  node=expression(mat,u.MaterialExpressionScalarParameter,parameter_name=name,default_value=value)
+  if terminal:
+   target=expression(mat,u.MaterialExpressionScalarParameter,parameter_name='Ground'+name,default_value=.98 if name=='Roughness' else 0 if name=='Metallic' else .25)
+   blend=expression(mat,u.MaterialExpressionLinearInterpolate);connect(node,'',blend,'A');connect(target,'',blend,'B');connect(vertex,'R',blend,'Alpha');node=blend
+  assert ML.connect_material_property(node,'',prop)
  emission=expression(mat,u.MaterialExpressionScalarParameter,parameter_name='Emission',default_value=0.)
  em=expression(mat,u.MaterialExpressionMultiply);connect(tint,'RGB',em,'A');connect(emission,'',em,'B');assert ML.connect_material_property(em,'',u.MaterialProperty.MP_EMISSIVE_COLOR)
  ML.set_material_usage(mat,base.USAGE)
  mat.set_editor_property('used_with_nanite',True)
  ML.recompile_material(mat);save(mat)
- R['materials_created'].append(dict(path=path,kind='material_master',textured=textured));return mat
+ R['materials_created'].append(dict(path=path,kind='material_master',textured=textured,vertex_color_terminal=terminal));return mat
 
 def import_textures(specs):
  paths={}
@@ -71,7 +103,18 @@ def import_textures(specs):
    if channel=='normal':
     tex.set_editor_property('compression_settings',u.TextureCompressionSettings.TC_NORMALMAP)
     tex.set_editor_property('flip_green_channel',options[1]=='OpenGL')
-   tex.set_editor_property('max_texture_size',2048);save(tex)
+   tex.set_editor_property('max_texture_size',2048)
+   if role.startswith('MPR4_Solar'):
+    # Per-texture defaults only; no project-wide anisotropy, AA or LOD bias.
+    tex.set_editor_property('mip_gen_settings',u.TextureMipGenSettings.TMGS_SIMPLE_AVERAGE)
+    tex.set_editor_property('filter',u.TextureFilter.TF_DEFAULT)
+    tex.set_editor_property('lod_bias',0)
+    tex.set_editor_property('never_stream',False)
+    tex.set_editor_property('virtual_texture_streaming',False)
+    assert tex.get_editor_property('mip_gen_settings')==u.TextureMipGenSettings.TMGS_SIMPLE_AVERAGE
+    assert tex.get_editor_property('filter')==u.TextureFilter.TF_DEFAULT
+    R.setdefault('pv_texture_audit',{})[path]=pv_texture_readback(tex)
+   save(tex)
    paths[source]=dict(asset=tex,options=options);R['materials_created'].append(dict(path=path,kind='texture',source=source))
  return paths
 
@@ -79,14 +122,20 @@ def create_materials(specs):
  textures=import_textures(specs)
  sample=next(s for s in specs.values() if s.get('textures',{}).get('normal'))
  defaults={k:textures[v]['asset'] for k,v in sample['textures'].items()}
- masters={False:material_graph(False,defaults),True:material_graph(True,defaults)}
+ masters={(False,False):material_graph(False,defaults),(True,False):material_graph(True,defaults)}
+ for textured in {bool(spec.get('textures')) for spec in specs.values() if spec.get('vertex_color_fade')}:
+  masters[(textured,True)]=material_graph(textured,defaults,terminal=True)
  for role,spec in specs.items():
   name=material_name(role);path=DEST+'/Materials/'+name
   mi=base.load(path) if LIB.does_asset_exist(path) else TOOLS.create_asset(name,DEST+'/Materials',u.MaterialInstanceConstant,u.MaterialInstanceConstantFactoryNew())
-  ML.set_material_instance_parent(mi,masters[bool(spec.get('textures'))])
+  fade=spec.get('vertex_color_fade')
+  ML.set_material_instance_parent(mi,masters[(bool(spec.get('textures')),bool(fade))])
   overrides=mi.get_editor_property('base_property_overrides')
   overrides.set_editor_property('override_two_sided',True)
   overrides.set_editor_property('two_sided',bool(spec.get('two_sided',False)))
+  if role.startswith('MPR4_Solar'):
+   overrides.set_editor_property('override_dithered_lod_transition',True)
+   overrides.set_editor_property('dithered_lod_transition',True)
   mi.set_editor_property('base_property_overrides',overrides)
   color=list(spec.get('color',spec.get('base_color')))[:3]
   ML.set_material_instance_vector_parameter_value(mi,'Tint',u.LinearColor(*color,1));v=ML.get_material_instance_vector_parameter_value(mi,'Tint')
@@ -99,7 +148,24 @@ def create_materials(specs):
   for channel,source in spec.get('textures',{}).items():
    key='Normal' if channel=='normal' else 'Albedo';ML.set_material_instance_texture_parameter_value(mi,key,textures[source]['asset'])
    assert ML.get_material_instance_texture_parameter_value(mi,key)==textures[source]['asset']
+  if fade:
+   assert fade['channel']=='R' and fade.get('opaque') is True
+   ground=specs[fade['ground_role']];ground_color=list(ground.get('color',ground.get('base_color')))[:3]
+   ML.set_material_instance_vector_parameter_value(mi,'GroundTint',u.LinearColor(*ground_color,1))
+   ML.set_material_instance_vector_parameter_value(mi,'GroundUVScale',u.LinearColor(1/600,-1/600,0,1))
+   for key,value in [('GroundRoughness',ground.get('roughness',.98)),('GroundMetallic',ground.get('metallic',0)),('GroundSpecular',ground.get('specular',.25)),('GroundNormalStrength',ground.get('normal_strength',.06))]:
+    ML.set_material_instance_scalar_parameter_value(mi,key,float(value))
+   for channel,source in ground['textures'].items():
+    key='GroundNormal' if channel=='normal' else 'GroundAlbedo';ML.set_material_instance_texture_parameter_value(mi,key,textures[source]['asset'])
+    assert ML.get_material_instance_texture_parameter_value(mi,key)==textures[source]['asset']
+   R.setdefault('road_terminal_material_audit',{})[role]=dict(path=path,parent=masters[(bool(spec.get('textures')),True)].get_path_name(),vertex_channel='R',start=0,end=1,ground_role=fade['ground_role'],ground_color=ground_color,opaque=True,ground_uv_scale_cm=[1/600,-1/600,0])
   ML.set_material_usage_override(mi,base.USAGE,True,True);ML.update_material_instance(mi);save(mi)
+  if role.startswith('MPR4_Solar'):
+   actual=mi.get_editor_property('base_property_overrides')
+   assert actual.get_editor_property('override_dithered_lod_transition') and actual.get_editor_property('dithered_lod_transition')
+   R.setdefault('pv_material_audit',{})[role]=dict(path=path,override_dithered_lod_transition=True,dithered_lod_transition=True,
+    roughness=float(ML.get_material_instance_scalar_parameter_value(mi,'Roughness')),
+    metallic=float(ML.get_material_instance_scalar_parameter_value(mi,'Metallic')))
   base.MATS[role]=mi;R['materials_created'].append(dict(path=path,kind='material_instance',role=role,parameters=spec))
 
 def tag(actor,folder,extra=()):
@@ -148,6 +214,7 @@ def run():
  planned=[DEST+'/'+c+'/Meshes/'+r['name'] for c,r in rows]
  planned += [DEST+'/Materials/'+material_name(role) for role in specs]
  planned += [DEST+'/Materials/M_MPR4_PBRTextured',DEST+'/Materials/M_MPR4_PBRSolid']
+ planned += [DEST+'/Materials/'+('M_MPR4_PBRTexturedTerminal' if textured else 'M_MPR4_PBRSolidTerminal') for textured in {bool(spec.get('textures')) for spec in specs.values() if spec.get('vertex_color_fade')}]
  planned += list({DEST+'/Textures/'+Path(p).stem for spec in specs.values() for p in spec.get('textures',{}).values()})
  token=verify_owned_scene(ROOT,planned_assets=sorted(set(oldpackages+planned)))
  NEW_PACKAGES=[p for p in planned if not package(p).exists()]

@@ -1,0 +1,32 @@
+{
+  "schema_version": 2,
+  "status": "source_tangent_terminal_fade_no_authored_connections",
+  "policy": "Continue each cropped road only along its measured source tangent and width. Never connect separate source exits or invent loops, collectors, branches, or junctions. Shorten before conflicts and fade into the existing ground.",
+  "canvas_px": [
+    0,
+    0,
+    1727,
+    909
+  ],
+  "extension_m": 65.0,
+  "fade_length_m": 30.0,
+  "fade_sample_step_m": 2.0,
+  "terminal_clearance_m": 0.5,
+  "ground_color": [
+    0.34,
+    0.37,
+    0.28
+  ],
+  "ghs_reference": {
+    "geometry_source": "Scripts/ghs/build_context_transition.py",
+    "material_source": "Scripts/ghs/apply_context_transition.py",
+    "verified_fix": "Scripts/ghs/build_road_terminal_junction_fix.py",
+    "method": "Source endpoint tangent; nominal 65m extension; final 30m smoothstep EdgeFade RGB from 0 to 1; opaque base-color blend to ground; MPR owns independent assets."
+  },
+  "notes": [
+    "Previous seven closed collectors and fifteen invented branches are removed entirely.",
+    "Authoritative image interior is unchanged. Open faded ends are intentional; do not convert them into closed streets.",
+    "All source exits retain their measured width, including narrow raster-cropped mouths.",
+    "No GHS material, asset, map or source is modified."
+  ]
+}

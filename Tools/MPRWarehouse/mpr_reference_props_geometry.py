@@ -163,7 +163,7 @@ def wheel(m,x,y,z,radius,width,lod=0,steel=False):
     m.branch('VehicleDark',(bx,face_y,bz),(bx,face_y+sign*.014,bz),.025,.025,5)
 
 
-def trailer(color,lod):
+def trailer(color,lod,coupled=False):
  m=Mesh();role={'White':'TrailerWhite','Blue':'TrailerBlue','Coral':'TrailerCoral'}[color]
  length,width=16.15,2.60;half=length/2;bottom,top=1.25,4.13
  m.box(role,(0,0,(bottom+top)/2),(length,width,top-bottom),.028 if lod==0 else 0)
@@ -178,11 +178,11 @@ def trailer(color,lod):
  m.box('VehicleDark',(-4.95,0,.92),(3.0,1.9,.18))
  for x in (-5.65,-4.32):
   for y in (-1.16,-.91,.91,1.16):wheel(m,x,y,.51,.51,.22,lod)
- # Parked, uncoupled landing gear at the front, not a tractor/cab substitute.
+ # Connected combinations retract their landing gear above the pavement.
  for side in (-1,1):
-  m.box('VehicleDark',(4.85,side*.84,.59),(.13,.13,1.12))
-  m.box('VehicleMetal',(4.85,side*.84,.025),(.48,.34,.05))
-  if lod<2:m.branch('VehicleDark',(4.4,side*.84,1.05),(4.85,side*.84,.36),.035,.035,6)
+  m.box('VehicleDark',(4.85,side*.84,.91 if coupled else .59),(.13,.13,.48 if coupled else 1.12))
+  m.box('VehicleMetal',(4.85,side*.84,.67 if coupled else .025),(.48,.34,.05))
+  if lod<2:m.branch('VehicleDark',(4.4,side*.84,1.05),(4.85,side*.84,.73 if coupled else .36),.035,.035,6)
  m.branch('VehicleMetal',(6.55,0,1.03),(6.55,0,.88),.055,.055,8)
  # Rear dual doors and hardware. -X is the loading end.
  for side in (-1,1):
@@ -211,7 +211,7 @@ def trailer(color,lod):
      z=1.47+k*.39
      m.branch('VehicleMetal',(x,side*1.305,z),(x,side*1.312,z),.008,.008,4)
   for x in (-6.9,-3.3,-.3,2.7,5.7):m.box('VehicleMetal',(x,0,1.12),(.08,2.40,.07))
- return m,dict(kind='semi_trailer',color=color,tractor_cab=False,front_axis='+X',loading_doors='-X',nominal_box_m=[length,width,top-bottom],overall_height_m=top+.036,ground_origin=True)
+ return m,dict(kind='semi_trailer',color=color,tractor_cab=False,coupled_to_separate_tractor=coupled,landing_gear='retracted' if coupled else 'extended',kingpin_x_m=6.55,wheel_contact_z_m=0.,front_axis='+X',loading_doors='-X',nominal_box_m=[length,width,top-bottom],overall_height_m=top+.036,ground_origin=True)
 
 
 def freight(lod):

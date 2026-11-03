@@ -1,42 +1,103 @@
 {
   "success": true,
-  "mesh_count": 26,
+  "mesh_count": 30,
   "checks": [
     {
       "name": "SM_MPR4_Site_Roads",
-      "triangles": 10311,
-      "source_triangles": 10311,
+      "triangles": 10253,
+      "source_triangles": 10253,
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 6.103515625e-05,
-      "minimum_triangle_area_m2": 8.632615208625793e-05
+      "minimum_triangle_area_m2": 8.632615208625793e-05,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_Courts",
-      "triangles": 732,
-      "source_triangles": 732,
+      "triangles": 699,
+      "source_triangles": 699,
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 1.52587890625e-05,
-      "minimum_triangle_area_m2": 1.687611802481115e-05
+      "minimum_triangle_area_m2": 1.687611802481115e-05,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_RaisedCurbs",
-      "triangles": 79467,
-      "source_triangles": 79467,
+      "triangles": 75041,
+      "source_triangles": 75041,
       "triangle_match": true,
       "material_slots": 1,
-      "bounds_error_m": 6.103515625e-05,
-      "minimum_triangle_area_m2": 5.553010851144791e-06
+      "bounds_error_m": 4.9371586783308885e-05,
+      "minimum_triangle_area_m2": 5.553010851144791e-06,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_RoadEdges",
-      "triangles": 36100,
-      "source_triangles": 36100,
+      "triangles": 52096,
+      "source_triangles": 52096,
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 6.103515625e-05,
-      "minimum_triangle_area_m2": 3.2139942049980164e-06
+      "minimum_triangle_area_m2": 2.2491440176963806e-07,
+      "vertex_color_fade": null
+    },
+    {
+      "name": "SM_MPR4_Site_RoadTerminalCurbs",
+      "triangles": 4167,
+      "source_triangles": 4167,
+      "triangle_match": true,
+      "material_slots": 1,
+      "bounds_error_m": 6.103515625e-05,
+      "minimum_triangle_area_m2": 5.606561899185181e-07,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "domain": "CORNER",
+        "color_count": 12501,
+        "range": [
+          0.0,
+          1.0
+        ],
+        "intermediate_color_count": 3246
+      }
+    },
+    {
+      "name": "SM_MPR4_Site_RoadTerminalRoads",
+      "triangles": 1740,
+      "source_triangles": 1740,
+      "triangle_match": true,
+      "material_slots": 1,
+      "bounds_error_m": 6.103515625e-05,
+      "minimum_triangle_area_m2": 0.0003865257021971047,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "domain": "CORNER",
+        "color_count": 5220,
+        "range": [
+          0.0,
+          1.0
+        ],
+        "intermediate_color_count": 1752
+      }
+    },
+    {
+      "name": "SM_MPR4_Site_RoadTerminalEdges",
+      "triangles": 5422,
+      "source_triangles": 5422,
+      "triangle_match": true,
+      "material_slots": 1,
+      "bounds_error_m": 6.103515625e-05,
+      "minimum_triangle_area_m2": 8.270144462585449e-07,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "domain": "CORNER",
+        "color_count": 16266,
+        "range": [
+          0.0,
+          1.0
+        ],
+        "intermediate_color_count": 4658
+      }
     },
     {
       "name": "SM_MPR4_Site_RoadCenter",
@@ -45,16 +106,18 @@
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 6.103515625e-05,
-      "minimum_triangle_area_m2": 9.432900696992874e-05
+      "minimum_triangle_area_m2": 9.432900696992874e-05,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_CourtSeams",
-      "triangles": 640,
-      "source_triangles": 640,
+      "triangles": 630,
+      "source_triangles": 630,
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 2.288818359375e-05,
-      "minimum_triangle_area_m2": 0.002077261684462428
+      "minimum_triangle_area_m2": 0.007646780461072922,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_ParkingBayLines",
@@ -63,7 +126,8 @@
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 1.9073486328125e-05,
-      "minimum_triangle_area_m2": 0.4479976296424866
+      "minimum_triangle_area_m2": 0.4479976296424866,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_RetentionPond",
@@ -72,7 +136,8 @@
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 1.52587890625e-05,
-      "minimum_triangle_area_m2": 0.4282462000846863
+      "minimum_triangle_area_m2": 0.4282462000846863,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_RetentionBank",
@@ -81,25 +146,28 @@
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 1.52587890625e-05,
-      "minimum_triangle_area_m2": 0.018456535413861275
+      "minimum_triangle_area_m2": 0.018456535413861275,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_PondWalk",
-      "triangles": 468,
-      "source_triangles": 468,
+      "triangles": 726,
+      "source_triangles": 726,
       "triangle_match": true,
       "material_slots": 1,
-      "bounds_error_m": 1.52587890625e-05,
-      "minimum_triangle_area_m2": 0.0016410185489803553
+      "bounds_error_m": 1.6716234938485286e-05,
+      "minimum_triangle_area_m2": 4.961073864251375e-05,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_RailYardContinuousBallast",
-      "triangles": 528,
-      "source_triangles": 528,
+      "triangles": 529,
+      "source_triangles": 529,
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 6.103515625e-05,
-      "minimum_triangle_area_m2": 1.227025032043457
+      "minimum_triangle_area_m2": 1.227025032043457,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_Near_RailBed",
@@ -108,7 +176,8 @@
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 2.2072876230794236e-05,
-      "minimum_triangle_area_m2": 1.5279510989785194e-10
+      "minimum_triangle_area_m2": 1.5279510989785194e-10,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_Far_E_RailBed",
@@ -117,7 +186,8 @@
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 7.04896713727976e-05,
-      "minimum_triangle_area_m2": 2.6193447411060333e-10
+      "minimum_triangle_area_m2": 2.6193447411060333e-10,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_Far_S_RailBed",
@@ -126,7 +196,8 @@
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 2.9009830655013502e-05,
-      "minimum_triangle_area_m2": 4.656612873077393e-10
+      "minimum_triangle_area_m2": 4.656612873077393e-10,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_Far_E_Rails",
@@ -135,7 +206,8 @@
       "triangle_match": true,
       "material_slots": 2,
       "bounds_error_m": 6.975403385922618e-05,
-      "minimum_triangle_area_m2": 0.016193419694900513
+      "minimum_triangle_area_m2": 0.016193419694900513,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_Near_Rails",
@@ -144,7 +216,8 @@
       "triangle_match": true,
       "material_slots": 2,
       "bounds_error_m": 2.312029516815528e-05,
-      "minimum_triangle_area_m2": 0.0157860666513443
+      "minimum_triangle_area_m2": 0.0157860666513443,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_Far_S_Rails",
@@ -153,7 +226,8 @@
       "triangle_match": true,
       "material_slots": 2,
       "bounds_error_m": 3.200941060299556e-05,
-      "minimum_triangle_area_m2": 0.02298184111714363
+      "minimum_triangle_area_m2": 0.02298184111714363,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_Far_E_Sleepers",
@@ -162,7 +236,8 @@
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 5.6907168527686736e-05,
-      "minimum_triangle_area_m2": 0.16899752616882324
+      "minimum_triangle_area_m2": 0.16899752616882324,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_Near_Sleepers",
@@ -171,7 +246,8 @@
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 3.48745010114726e-05,
-      "minimum_triangle_area_m2": 0.16899822652339935
+      "minimum_triangle_area_m2": 0.16899822652339935,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_Far_S_Sleepers",
@@ -180,7 +256,8 @@
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 2.7461684112495277e-05,
-      "minimum_triangle_area_m2": 0.16899874806404114
+      "minimum_triangle_area_m2": 0.16899874806404114,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_TrailerStands",
@@ -189,16 +266,18 @@
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 1.52587890625e-05,
-      "minimum_triangle_area_m2": 0.11525218188762665
+      "minimum_triangle_area_m2": 0.9689604043960571,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_DockApronInfill",
-      "triangles": 389,
-      "source_triangles": 389,
+      "triangles": 216,
+      "source_triangles": 216,
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 1.52587890625e-05,
-      "minimum_triangle_area_m2": 8.390983566641808e-06
+      "minimum_triangle_area_m2": 8.390983566641808e-06,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_FarGround",
@@ -207,37 +286,51 @@
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 0.0001220703125,
-      "minimum_triangle_area_m2": 6480000.0
+      "minimum_triangle_area_m2": 6480000.0,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_ContinuousTerrain",
-      "triangles": 12469,
-      "source_triangles": 12469,
+      "triangles": 11701,
+      "source_triangles": 11701,
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 6.103515625e-05,
-      "minimum_triangle_area_m2": 5.553010851144791e-06
+      "minimum_triangle_area_m2": 3.02738044410944e-06,
+      "vertex_color_fade": null
+    },
+    {
+      "name": "SM_MPR4_Site_CampusPlanting",
+      "triangles": 739,
+      "source_triangles": 739,
+      "triangle_match": true,
+      "material_slots": 1,
+      "bounds_error_m": 2.288818359375e-05,
+      "minimum_triangle_area_m2": 0.0003273487091064453,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_PlanTreeIslands",
-      "triangles": 1466,
-      "source_triangles": 1466,
+      "triangles": 1380,
+      "source_triangles": 1380,
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 3.0517578125e-05,
-      "minimum_triangle_area_m2": 0.0020682159811258316
+      "minimum_triangle_area_m2": 0.0020682159811258316,
+      "vertex_color_fade": null
     },
     {
       "name": "SM_MPR4_Site_PlanTreeIslandCurbs",
-      "triangles": 13800,
-      "source_triangles": 13800,
+      "triangles": 12960,
+      "source_triangles": 12960,
       "triangle_match": true,
       "material_slots": 1,
       "bounds_error_m": 2.9332101689760748e-05,
-      "minimum_triangle_area_m2": 0.0006287536816671491
+      "minimum_triangle_area_m2": 0.001462897751480341,
+      "vertex_color_fade": null
     }
   ],
-  "source_manifest_sha256": "f0aae8a34a31d574c76f3ed69ff9075cca4598e0b01cab38ecf3d0afe12415ed",
+  "source_manifest_sha256": "2179263159f2a0c516b82f6de8bb0dd8f113b32ba5b00dd6735cd55aeff875ca",
   "max_bounds_error_m": 0.0001220703125,
   "validation_boundary": "Offline FBX geometry/material/unit/UV verification only, not UE or visual acceptance."
 }

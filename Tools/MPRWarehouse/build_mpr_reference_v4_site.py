@@ -35,6 +35,35 @@ def round_polygon(p,r=.7):
  return inner.buffer(r,quad_segs=16) if not inner.is_empty else p
 def footprint(p,l,w,yaw):return translate(rotate(box(-l/2,-w/2,l/2,w/2),yaw,origin=(0,0)),*p[:2])
 
+def terminal_fade_at(name,point):
+ # Widths vary by source mouth. Nearest centreline could select an adjacent
+ # narrow street while a vertex still belongs to a broad ribbon.
+ p=Point(point[:2]);row,_=min(TERMINAL_SUPPORT,key=lambda pair:pair[1].distance(p))
+ return plan.terminal_fade(row,point)
+
+TERMINAL_ROWS=[]
+TERMINAL_SUPPORT=[]
+
+def terminal_surfaces(asphalt,curb,edge,rows):
+ """Three batched, vertex-faded meshes, clipped and sampled at <=2m steps."""
+ TERMINAL_ROWS[:]=rows;TERMINAL_SUPPORT[:]=[(r,plan.terminal_shape(r))for r in rows]
+ bounds=plan.pixel_box(*plan.read('outside_road_connections_v5.json')['canvas_px'])
+ for row in rows:
+  origin=np.asarray(row['origin_m']);direction=np.asarray(row['direction']);normal=np.array([-direction[1],direction[0]])
+  support=plan.terminal_shape(row).buffer(.5,quad_segs=8).difference(bounds)
+  surfaces=[('RoadTerminalRoads','MPR4_TerminalAsphalt',asphalt.intersection(support),G+.08),
+            ('RoadTerminalCurbs','MPR4_TerminalCurb',curb.intersection(support),G+.21),
+            ('RoadTerminalEdges','MPR4_TerminalWhiteLine',edge.intersection(support),G+.106)]
+  # A flat road triangle over the whole fade would interpolate only its two
+  # endpoints. Real 2m sections preserve the GHS smoothstep in vertex colors.
+  points=np.vstack([shapely.get_coordinates(geometry)for _,_,geometry,_ in surfaces if not geometry.is_empty])
+  projected=(points-origin)@direction;start=min(0.,float(projected.min()));end=max(row['length_m'],float(projected.max()))
+  stations=sorted(set([start,0.,row['fade_start_m'],row['length_m'],end,*np.arange(start,end,2.)]))
+  half=row['width_m']+3.
+  for a,b in zip(stations,stations[1:]):
+   clip=Polygon([origin+direction*a-normal*half,origin+direction*b-normal*half,origin+direction*b+normal*half,origin+direction*a+normal*half])
+   for name,role,geometry,z in surfaces:shape(name,role,geometry.intersection(clip),z)
+
 def build_roads():
  roads=plan.road_geometry();details=plan.plan_details();portals=plan.portal_clearance()
  context=json.loads((ROOT/'SourceAssets/MPR/reference_v4/context/manifest.json').read_text(encoding='utf8'))
@@ -43,7 +72,19 @@ def build_roads():
  main_parcel=plan.named_region('MainWarehouseParcel',False)
  north_parcel=plan.named_region('NorthWarehouseParcel',False)
  # Leave planted perimeter strips; apron depths follow the new plan boundaries.
- main_paved=main_parcel.buffer(-1.3,quad_segs=12).difference(MAIN.buffer(.10)).difference(plan.landscape_islands())
+ # Reference campus perimeter is a darker planted strip, with all measured
+ # access portals left open. Do not cover parking, aprons or road lanes.
+ campus_planting=main_parcel.difference(main_parcel.buffer(-4.2,quad_segs=16)).difference(portals.buffer(1.0)).difference(roads)
+ campus_planting=unary_union([campus_planting,plan.landscape_islands().intersection(main_parcel.buffer(12))]).difference(roads).difference(MAIN.buffer(.10))
+ # North is an active loading face, not an external landscaping boundary.
+ # Preserve the continuous CAD dock apron, full tractor envelopes and a 5m
+ # forward buffer. Do not remove trucks to make a decorative ring fit.
+ cad=json.loads((ROOT/'SourceAssets/MPR/mpr_cad_layout.json').read_text(encoding='utf8'))
+ north_docks=[d['position_m']for d in cad['dock_doors']if d['outward_normal_xy'][1]>.8]
+ north_work=box(min(p[0]for p in north_docks)-12.,min(p[1]for p in north_docks)-.2,
+                max(p[0]for p in north_docks)+12.,max(p[1]for p in north_docks)+22.).intersection(main_parcel).difference(MAIN.buffer(.10))
+ campus_planting=campus_planting.difference(north_work)
+ main_paved=unary_union([main_parcel.buffer(-1.3,quad_segs=12),north_work]).difference(MAIN.buffer(.10)).difference(campus_planting)
  north_paved=north_parcel.buffer(-1.3,quad_segs=12).difference(buildings.buffer(.1))
  west=plan.pixel_box(406,382,443,618).intersection(main_paved)
  east=plan.pixel_box(1022,373,1088,524).intersection(main_paved)
@@ -56,13 +97,19 @@ def build_roads():
  concrete=unary_union([main_paved.difference(west.union(east)),neighbor,connectors]).difference(roads).difference(buildings.buffer(.1))
  asphalt=unary_union([roads,west,east,neighbor_east]).difference(buildings.buffer(.1)).difference(concrete)
  allpaved=unary_union([concrete,asphalt])
- shape('Roads','MPR3_Asphalt',asphalt,G+.08);shape('Courts','MPR3_Concrete',concrete,G+.10)
+ drawing=plan.pixel_box(*plan.read('outside_road_connections_v5.json')['canvas_px'])
+ # Smoothed original crop mouths can extend a fraction beyond the raster
+ # rectangle. Preserve those original faces too, rather than dropping them.
+ source_surface=drawing.union(plan.road_geometry())
+ shape('Roads','MPR3_Asphalt',asphalt.intersection(source_surface),G+.08);shape('Courts','MPR3_Concrete',concrete,G+.10)
  curb=allpaved.buffer(.28,quad_segs=16).difference(allpaved).difference(buildings.buffer(.45)).difference(portals)
  # Outer canvas edges are intentionally open for future surrounding scenery.
- extent=plan.pixel_box(0,0,1727,909).buffer(155);curb=curb.intersection(extent)
- core.raised_edge('RaisedCurbs',curb,G+.03,.18)
+ extent=drawing.buffer(70);curb=curb.intersection(extent)
+ core.raised_edge('RaisedCurbs',curb.intersection(drawing),G+.03,.18)
  edge=roads.buffer(-.55,quad_segs=16).boundary.intersection(extent.buffer(-2)).difference(portals.buffer(1))
- line('RoadEdges','MPR3_WhiteLine',edge,.15,G+.106)
+ paint=edge.buffer(.075,quad_segs=8)
+ shape('RoadEdges','MPR3_WhiteLine',paint.intersection(drawing),G+.106)
+ terminal_surfaces(asphalt.difference(source_surface),curb.difference(drawing),paint.difference(drawing),continuations)
  for r in details['paint_guides']:
   pts=rounded_path(plan.xy(r['points']),radius=r['radius_m'],max_step=.4)
   ROAD_DATA.append(dict(name=r['name'],path=pts,geometry=LineString(pts),marking='center'))
@@ -83,19 +130,23 @@ def build_roads():
    VEHICLE_SHAPES.append(car)
  COUNTS['road_boundary_components']=len(plan.read('road_outline_v5.json')['polygons_px'])
  assert roads.intersection(MAIN).area<.01,'Plan road intersects preserved warehouse'
- return dict(roads=roads,paved=allpaved,concrete=concrete,asphalt=asphalt,courts=courts,buildings=buildings,main_parcel=main_parcel,north_parcel=north_parcel,road_continuations=continuations)
+ return dict(roads=roads,paved=allpaved,concrete=concrete,asphalt=asphalt,courts=courts,buildings=buildings,main_parcel=main_parcel,north_parcel=north_parcel,road_continuations=continuations,campus_planting=campus_planting,north_dock_apron=north_work)
 
 def build_water(site):
  pond=plan.named_region('SouthWestPond',False)
  # The measured pond parcel shares the road edge; clip its walkway to the
  # final smoothed road surface to avoid thin coplanar strips at rounded bends.
- ring=plan.named_region('PondEnclosingRing',False).difference(pond).difference(site['paved'])
+ source_ring=plan.named_region('PondEnclosingRing',False)
+ # Fill raster-derived inward notches and tiny grass wedges, then clip to
+ # the real neighbouring pavement. The water outline itself is unchanged.
+ walk_envelope=source_ring.convex_hull.buffer(.8,quad_segs=24)
+ ring=walk_envelope.difference(pond).difference(site['paved'])
  assert pond.intersection(site['paved']).area<.01,'Plan pond overlaps road'
  shape('RetentionPond','MPR3_PondWater',pond,G+.015)
  bank=pond.buffer(.9,quad_segs=16).difference(pond).intersection(ring)
  shape('RetentionBank','MPR3_Grass',bank,G+.035)
  path=ring.difference(bank);core.raised_edge('PondWalk',path,G+.025,.08)
- site.update(pond=pond,pond_walk=path)
+ site.update(pond=pond,pond_walk=path,pond_walk_repair=dict(source_area_m2=source_ring.area,filled_envelope_area_m2=walk_envelope.area,walk_area_m2=path.area,water_outline_changed=False,paved_overlap_m2=path.intersection(site['paved']).area))
 
 
 def extend_track(points):
@@ -123,30 +174,72 @@ def build_rail(site):
   lines.append(dict(id=str(track['id']),layer='railways',vertices=[[*p,0] for p in pts]))
  rail=core.build_railways(core.API,lines,G)
  rail['stats']['source_policy']='Latest all-elements plan measured track paths; real 1.435m gauge; no legacy perspective inverse'
- occupied=[];stock=row['rolling_stock'];curves={r['id']:LineString(r['vertices']) for r in rail['centerlines']}
- placements=[dict(track_id=str(o['track_id']),center_px=o['position_px'],
-                  distance_m=curves[str(o['track_id'])].project(Point(plan.xy([o['position_px']])[0])))
-             for o in stock['placements_px']]
- for item in placements:
-  track_id=str(item['track_id']);curve=curves[track_id]
-  d=float(item['distance_m']) if 'distance_m' in item else curve.project(Point(plan.xy([item['center_px']])[0]))
-  p=curve.interpolate(d);a=curve.interpolate(max(0,d-8));b=curve.interpolate(min(curve.length,d+8));yaw=math.degrees(math.atan2(b.y-a.y,b.x-a.x))
-  scale=stock.get('scale',[1,1,1]);f=footprint((p.x,p.y),20.8*scale[0],3.3*scale[1],yaw)
-  assert not f.intersects(site['roads']) and not f.intersects(site['buildings']),('Boxcar physical clearance',item)
-  if any(f.buffer(.05).intersects(q) for q in occupied):COUNTS['boxcar_overlap_rejected']+=1;continue
-  occupied.append(f);instance('SM_MPR4_FreightBoxcar',[p.x,p.y,G+.34],yaw,scale=scale,plan_track_id=track_id,reference_pixel=item.get('center_px'))
+ props=json.loads((ROOT/'SourceAssets/MPR/reference_v4/props/manifest.json').read_text(encoding='utf8'))
+ meta={r['name']:r for r in props['meshes']};stock=row['rolling_stock']
+ curves={r['id']:LineString(r['vertices']) for r in rail['centerlines']};occupied=[];consists=[]
+ # Keep the occupied source intervals, replacing isolated image-symbol centres
+ # with coupled 20.76m stock. Every coupling joint lies on the same track curve.
+ for track_id in stock['track_ids']:
+  curve=curves[track_id]
+  observed=[curve.project(Point(plan.xy([r['position_px']])[0])) for r in stock['placements_px'] if r['track_id']==track_id]
+  assert observed,('Missing occupied interval',track_id)
+  start=max(0,min(observed)-10.38);end=min(curve.length,max(observed)+10.38)
+  joints=[start]
+  while joints[-1]+20.76<end:
+   lo=joints[-1]+20.76;hi=min(end,lo+5.)
+   origin=curve.interpolate(joints[-1])
+   if origin.distance(curve.interpolate(hi))<20.76:break
+   for _ in range(35):
+    mid=(lo+hi)/2
+    if origin.distance(curve.interpolate(mid))<20.76:lo=mid
+    else:hi=mid
+   joints.append((lo+hi)/2)
+  assert len(joints)>=3,('Too short train interval',track_id)
+  cars=[]
+  for i,(da,db) in enumerate(zip(joints,joints[1:])):
+   a=curve.interpolate(da);b=curve.interpolate(db);p=((a.x+b.x)/2,(a.y+b.y)/2)
+   yaw=math.degrees(math.atan2(b.y-a.y,b.x-a.x));ang=math.radians(yaw)
+   name='SM_MPR4_Locomotive' if i==len(joints)-2 else 'SM_MPR4_FreightBoxcar'
+   bb=meta[name]['metadata']['collision_body_bounds_m']
+   f=translate(rotate(box(bb[0][0],bb[1][0],bb[0][1],bb[1][1]),yaw,origin=(0,0)),*p)
+   assert not f.intersects(site['roads']) and not f.intersects(site['buildings']),('Train clearance',track_id,i)
+   assert not any(f.intersection(q).area>.01 for q in occupied),('Train bodies overlap',track_id,i)
+   # Rail-head top is G+.39+.055; prototype wheel low point is exactly zero.
+   z=G+.445
+   # Check both physical wheel treads, including their lateral offset from the
+   # chord. A 0.16m wheel has a 0.096m full-radius contact band; the 0.09m rail
+   # head must retain at least 5mm of contact at the tightest curved axle.
+   wheel_path_errors=[abs(curve.distance(Point(p[0]+math.cos(ang)*x-math.sin(ang)*y,p[1]+math.sin(ang)*x+math.cos(ang)*y))-rail_detail.RAIL_OFFSET_M)
+                      for x in (-7.2,-5.4,5.4,7.2) for y in (-rail_detail.RAIL_OFFSET_M,rail_detail.RAIL_OFFSET_M)]
+   contact_limit=.16*.30+rail_detail.HEAD_WIDTH_M/2-.005
+   assert max(wheel_path_errors)<contact_limit,('Wheel loses rail-head contact',track_id,i,wheel_path_errors,contact_limit)
+   occupied.append(f)
+   instance(name,[*p,z],yaw,plan_track_id=track_id,consist_id=track_id,consist_index=i,
+            track_distance_m=(da+db)/2,coupling_joint_distances_m=[da,db],
+            rail_contact_world_z_m=z,wheel_path_error_m=max(wheel_path_errors))
+   cars.append(dict(mesh=name,index=i,position_m=[*p,z],rotation_deg=yaw,coupling_joint_distances_m=[da,db],wheel_path_error_m=max(wheel_path_errors)))
+  consists.append(dict(id=track_id,occupied_source_interval_m=[start,end],cars=cars,coupler_joint_gap_m=0.,
+                       note='Continuous train inferred within approved occupied track interval; individual schematic roof symbols are no longer placement targets.'))
+ COUNTS['locomotives']=len(INSTANCES['SM_MPR4_Locomotive'])
+ site['rail_consist_audit']=dict(policy='Continuous shared-module consists; exact chord-length coupler joints, raised rail contact, measured track curves',consists=consists)
  site['rail']=rail;return rail
 
 
 def place_trailers(site):
  props=json.loads((ROOT/'SourceAssets/MPR/reference_v4/props/manifest.json').read_text(encoding='utf8'))
  vehicle_bounds={r['name']:r['bounds_m'] for r in props['meshes']}
- used_docks=set();placed=[];omitted=[];stand_adjustments=[]
+ used_docks=set();placed=[];omitted=[];stand_adjustments=[];contact_checks=[]
  def actual_shape(name,p,yaw,scale):
   b=vehicle_bounds[name];local=box(b[0][0]*scale[0],b[1][0]*scale[1],b[0][1]*scale[0],b[1][1]*scale[1])
   return translate(rotate(local,yaw,origin=(0,0)),*p[:2])
+ def tractor_pose(p,yaw,scale):
+  angle=math.radians(yaw);k=6.55*scale[0]
+  return [p[0]+math.cos(angle)*k,p[1]+math.sin(angle)*k,p[2]]
+ def combination_shape(name,p,yaw,scale):
+  return actual_shape(name,p,yaw,scale).union(actual_shape('SM_MPR4_Tractor',tractor_pose(p,yaw,scale),yaw,[1,1,1]))
  def valid(f):
   return (not f.intersects(site['buildings']) and f.intersection(site['roads']).area<.01
+          and f.intersection(site['campus_planting']).area<.01
           and not any(f.intersection(q).area>.01 for q in VEHICLE_SHAPES))
  for row in plan.plan_details()['trailer_rows']:
   for i,pixel in enumerate(row['centers']):
@@ -160,20 +253,27 @@ def place_trailers(site):
     for j,d in choices:
      offset=16.15*scale[0]/2+.42
      q=[d['position_m'][0],d['position_m'][1]+normal*offset,G+.10]
-     f=actual_shape(name,q,yaw,scale)
+     f=combination_shape(name,q,yaw,scale)
      if valid(f):chosen=(j,d,q,f);break
     if chosen is None:omitted.append(dict(row=row['name'],index=i,reason='No clear free CAD dock'));continue
     j,d,p,f=chosen;used_docks.add(j);meta.update(cad_dock_index=j,cad_dock_position_m=d['position_m'])
    else:
-    f=actual_shape(name,p,yaw,scale)
+    f=combination_shape(name,p,yaw,scale)
     if not valid(f):
      original=list(p);chosen=None
-     for dx,dy in sorted([(a,b) for a in np.arange(-6,6.01,.5) for b in np.arange(-8,8.01,.5)],key=lambda ab:ab[0]**2+ab[1]**2):
-      q=[original[0]+dx,original[1]+dy,original[2]];qf=actual_shape(name,q,yaw,scale)
+     # Full articulated vehicles need more depth than the reference's trailer
+     # symbols. Find the nearest clear stand within 14m, never move CAD docks.
+     for dx,dy in sorted([(a,b) for a in np.arange(-14,14.01,.5) for b in np.arange(-14,14.01,.5) if a*a+b*b<=14*14],key=lambda ab:ab[0]**2+ab[1]**2):
+      q=[original[0]+dx,original[1]+dy,original[2]];qf=combination_shape(name,q,yaw,scale)
       if valid(qf) and site['main_parcel'].contains(qf):chosen=(q,qf);break
      if chosen is None:omitted.append(dict(row=row['name'],index=i,reason='Image stand fails physical road/building clearance'));continue
      p,f=chosen;meta['stand_shift_m']=[p[k]-original[k] for k in range(2)];stand_adjustments.append(meta)
-   VEHICLE_SHAPES.append(f);instance(name,p,yaw,scale=scale,**meta);placed.append(dict(name=name,**meta))
+   assembly_id=row['name']+'_'+str(i);meta['assembly_id']=assembly_id
+   tractor_p=tractor_pose(p,yaw,scale)
+   VEHICLE_SHAPES.append(f);instance(name,p,yaw,scale=scale,**meta)
+   instance('SM_MPR4_Tractor',tractor_p,yaw,assembly_id=assembly_id,coupled_trailer=name,reference_row=row['name'],reference_index=i,wheel_contact_world_z_m=G+.10)
+   placed.append(dict(name=name,tractor_mesh='SM_MPR4_Tractor',tractor_position_m=tractor_p,position_m=p,rotation_deg=yaw,**meta))
+   contact_checks.append(dict(assembly_id=assembly_id,ground_z_m=G+.10,trailer_wheel_min_z_m=p[2]+vehicle_bounds[name][2][0],tractor_wheel_min_z_m=tractor_p[2]+vehicle_bounds['SM_MPR4_Tractor'][2][0]))
    # Mark each occupied stall in its real frame and clip paint to the apron.
    angle=math.radians(yaw);t=(math.cos(angle),math.sin(angle));n=(-t[1],t[0]);half=16.15*scale[0]/2
    for sign in (-1,1):
@@ -181,13 +281,16 @@ def place_trailers(site):
     line('TrailerStands','MPR3_YellowLine',LineString([a,b]).intersection(site['concrete']),.15,G+.13)
  pads=[]
  for name,items in INSTANCES.items():
-  if 'Trailer' not in name:continue
+  if 'Trailer' not in name and 'Tractor' not in name:continue
   for item in items:pads.append(actual_shape(name,item['position_m'],item['rotation_deg'],item['scale']).buffer(.5).difference(site['paved']).difference(MAIN))
  if pads:
-  patch=unary_union(pads);shape('DockApronInfill','MPR3_Concrete',patch,G+.10);site['paved']=site['paved'].union(patch)
+  patch=unary_union(pads).difference(site['campus_planting']).difference(site['roads']).difference(site['buildings'])
+  shape('DockApronInfill','MPR3_Concrete',patch,G+.10);site['paved']=site['paved'].union(patch)
+ COUNTS['tractors']=len(INSTANCES['SM_MPR4_Tractor'])
+ assert all(abs(c[k]-c['ground_z_m'])<.001 for c in contact_checks for k in ('trailer_wheel_min_z_m','tractor_wheel_min_z_m')),'Vehicle wheel-ground mismatch'
  COUNTS['south_dock_trailers']=sum(r['reference_row']=='DockSouth' for r in placed)
  COUNTS['trailer_stands_adjusted']=len(stand_adjustments)
- site['trailer_layout_audit']=dict(policy='Latest plan positions; fixed CAD interfaces; 42ft north trailers and 53ft south trailers',placed=placed,omitted=omitted,stand_adjustments=stand_adjustments)
+ site['trailer_layout_audit']=dict(policy='Latest plan positions with grounded GHS-derived tractor cabs; fixed CAD interfaces; 42ft north trailers and 53ft south trailers; combined footprints checked',placed=placed,omitted=omitted,stand_adjustments=stand_adjustments,wheel_contact_checks=contact_checks)
 
 def landscape(site):
  context=json.loads((ROOT/'SourceAssets/MPR/reference_v4/context/manifest.json').read_text(encoding='utf8'))
@@ -225,8 +328,12 @@ def landscape(site):
   if island.intersection(site['paved']).area>.1:tree_islands.append(island)
  bounds=plan.pixel_box(-600,-500,2350,1450)
  ground=box(-1800,-1800,1800,1800);shape('FarGround','MPR3_GrassFar',ground,G-.08)
- terrain=bounds.difference(site['paved']).difference(site['pond']).difference(site['pond_walk']).difference(buildings)
+ # Keep real grass beneath fading road ends; the opaque terminal surface
+ # lowers smoothly toward it. The source drawing's paved areas stay cut out.
+ drawing=plan.pixel_box(*plan.read('outside_road_connections_v5.json')['canvas_px'])
+ terrain=bounds.difference(site['paved'].intersection(drawing)).difference(site['pond']).difference(site['pond_walk']).difference(buildings).difference(site['campus_planting'])
  shape('ContinuousTerrain','MPR3_Grass',terrain,G)
+ shape('CampusPlanting','MPR4_CampusPlanting',site['campus_planting'],G+.012)
  if tree_islands:
   islands=unary_union(tree_islands);shape('PlanTreeIslands','MPR3_Grass',islands,G+.115)
   core.raised_edge('PlanTreeIslandCurbs',islands.buffer(.16).difference(islands),G+.10,.14)
@@ -266,10 +373,13 @@ def main():
  OUT.mkdir(parents=True,exist_ok=True);bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
  core.OUT=OUT;core.GEO=GEO;core.INSTANCES=INSTANCES;core.COUNTS=COUNTS
  core.MATERIALS['MPR3_Asphalt']['base_color']=[.13,.155,.19]
- core.MATERIALS['MPR3_Concrete']['base_color']=[.52,.55,.55]
- core.MATERIALS['MPR3_Grass']['base_color']=[.29,.39,.24]
- core.MATERIALS['MPR3_GrassFar']['base_color']=[.29,.39,.24]
+ core.MATERIALS['MPR3_Concrete']['base_color']=[.46,.43,.43]
+ core.MATERIALS['MPR3_Grass']['base_color']=[.34,.37,.28]
+ core.MATERIALS['MPR3_GrassFar']['base_color']=[.34,.37,.28]
  for role in ('MPR3_Grass','MPR3_GrassFar'):core.MATERIALS[role]['normal_strength']=.06
+ core.MATERIALS['MPR4_CampusPlanting']=dict(base_color=[.22,.30,.16],roughness=.98,texture='grass',normal_strength=.06)
+ for source,target in [('MPR3_Asphalt','MPR4_TerminalAsphalt'),('MPR3_Curb','MPR4_TerminalCurb'),('MPR3_WhiteLine','MPR4_TerminalWhiteLine')]:
+  core.MATERIALS[target]=dict(core.MATERIALS[source],vertex_color_fade=dict(attribute='EdgeFade',channel='R',ground_role='MPR3_Grass',ground_base_color=core.MATERIALS['MPR3_Grass']['base_color'],ground_texture='grass',ground_roughness=.98,opaque=True))
  core.MATERIALS['MPR3_PavingJoint']['base_color']=[.42,.44,.42]
  core.MATERIALS['MPR3_Ballast']['base_color']=[.18,.19,.21]
  core.MATERIALS['MPR3_Sleepers']['base_color']=[.12,.13,.14]
@@ -282,7 +392,7 @@ def main():
  # deterministic low-level exporter with the previous experiment.
  GEO.data={name.replace('SM_MPR3_','SM_MPR4_'):roles for name,roles in GEO.data.items()}
  COUNTS.update(trailers=sum(len(v) for k,v in INSTANCES.items() if 'Trailer' in k),boxcars=len(INSTANCES['SM_MPR4_FreightBoxcar']))
- core.export(reference_surface_textures(),dict(reference_layout=plan.plan_details(),plan_registration=load_registration(),railway_layout=plan.read('plan_railway_v5.json'),road_boundary_source_sha256=plan.read('road_outline_v5.json')['source_sha256'],outside_plan_continuations=site['road_continuations'],landscape_semantics=plan.read('plan_landscape_islands_v5.json'),planting=planting,trailer_layout_audit=site['trailer_layout_audit'],surface_texture_policy='V4 grass mean 234 +/-2 random multiscale variation; water albedo 245 with weak random normal; no checker/diagonal sine trains',reference_match_policy='Latest plan road boundaries and measured building/tree/rail placements. Colored render defines material style; main interior CAD is invariant.'))
+ core.export(reference_surface_textures(),dict(reference_layout=plan.plan_details(),plan_registration=load_registration(),railway_layout=plan.read('plan_railway_v5.json'),road_boundary_source_sha256=plan.read('road_outline_v5.json')['source_sha256'],outside_plan_continuations=site['road_continuations'],road_terminal_fade=dict(config=plan.read('outside_road_connections_v5.json'),attribute='EdgeFade',encoding='LINEAR_RGB_EQUAL',zero='source surface',one='actual grass albedo and tint',opaque=True,max_longitudinal_vertex_spacing_m=2.,ground_z_m=G,terminal_height_fraction=.01),pond_walk_repair=site['pond_walk_repair'],campus_planting=dict(area_m2=site['campus_planting'].area,role='MPR4_CampusPlanting',access_portals_preserved=True),landscape_semantics=plan.read('plan_landscape_islands_v5.json'),planting=planting,trailer_layout_audit=site['trailer_layout_audit'],rail_consist_audit=site['rail_consist_audit'],surface_texture_policy='V4 grass mean 234 +/-2 random multiscale variation; water albedo 245 with weak random normal; no checker/diagonal sine trains',reference_match_policy='Latest plan road boundaries and measured building/tree/rail placements. Colored render defines material style; main interior CAD is invariant.'),vertex_fade=terminal_fade_at)
  print('MPR_REFERENCE_V4_SITE',dict(COUNTS))
 
 if __name__=='__main__':main()

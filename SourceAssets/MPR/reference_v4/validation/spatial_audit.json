@@ -1,8 +1,8 @@
 {
-  "source_manifest_sha256": "f0aae8a34a31d574c76f3ed69ff9075cca4598e0b01cab38ecf3d0afe12415ed",
-  "context_manifest_sha256": "305d0f9a641453a712c7b86aaf9f04899b4740861013e24e99b076cd14dd9ca3",
+  "source_manifest_sha256": "2179263159f2a0c516b82f6de8bb0dd8f113b32ba5b00dd6735cd55aeff875ca",
+  "context_manifest_sha256": "70e257dc3e7a2335998feed5aa4727b32bb6266bb620a4a42d780c0d3c616767",
   "reconstructed_source_hashes": {
-    "Tools/MPRWarehouse/build_mpr_reference_v4_site.py": "88f29e1e2c1487c65c0d0105321305397d9bbfd3ccab5a33834eed1c93d5e584",
+    "Tools/MPRWarehouse/build_mpr_reference_v4_site.py": "6ddfad9239529ec2e6879e8b2a9735be3f62bb03802668e2c38ad5ca4b491f8c",
     "SourceAssets/MPR/reference_v4/site/plan_site_details_v5.json": "c41d1da50b1539ac9ea73866c3192b06535f587929262295f9b9563521e94533",
     "SourceAssets/MPR/reference_v4/site/road_outline_v5.json": "a1593d2ae7d3194f1f68ade7a49a62798846a72db0b3b387dee7c3f5359033b7",
     "SourceAssets/MPR/reference_v4/site/plan_railway_v5.json": "b23e79aecbff81adf307c2f4fc6f4b801d243f73735fbfb6499da37f3b5332be",
@@ -19,6 +19,886 @@
   "vehicles_outside_standing_surfaces": [],
   "vehicle_collisions": [],
   "boxcar_collisions": [],
+  "vehicle_wheel_support_issues": [],
+  "articulated_vehicle_assemblies": 52,
+  "rail_consist_audit": {
+    "policy": "Continuous shared-module consists; exact chord-length coupler joints, raised rail contact, measured track curves",
+    "consists": [
+      {
+        "id": "NorthFreightSiding",
+        "occupied_source_interval_m": [
+          159.8732186723587,
+          512.4910299096798
+        ],
+        "cars": [
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 0,
+            "position_m": [
+              500.237165037699,
+              345.49527000363275,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.02400034529497,
+            "coupling_joint_distances_m": [
+              159.8732186723587,
+              180.63321867243144
+            ],
+            "wheel_path_error_m": 4.196643033083092e-14
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 1,
+            "position_m": [
+              488.321069855389,
+              328.4957325941864,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.03428702711915,
+            "coupling_joint_distances_m": [
+              180.63321867243144,
+              201.39322082167655
+            ],
+            "wheel_path_error_m": 0.0031562633607246093
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 2,
+            "position_m": [
+              476.3936507063489,
+              311.5041426408709,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.1003645423864,
+            "coupling_joint_distances_m": [
+              201.39322082167655,
+              222.1532208217493
+            ],
+            "wheel_path_error_m": 3.83026943495679e-14
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 3,
+            "position_m": [
+              464.4564336090118,
+              294.519430456849,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.1003645423864,
+            "coupling_joint_distances_m": [
+              222.1532208217493,
+              242.91322082182205
+            ],
+            "wheel_path_error_m": 4.107825191113079e-14
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 4,
+            "position_m": [
+              452.5192165116747,
+              277.53471827282704,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.10036454238653,
+            "coupling_joint_distances_m": [
+              242.91322082182205,
+              263.6732208218948
+            ],
+            "wheel_path_error_m": 5.695444116327053e-14
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 5,
+            "position_m": [
+              440.5720017122336,
+              260.5570414857613,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.1678444547477,
+            "coupling_joint_distances_m": [
+              263.6732208218948,
+              284.4332266098463
+            ],
+            "wheel_path_error_m": 0.005865705786368469
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 6,
+            "position_m": [
+              428.61077247269236,
+              243.58923164099286,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.19497136514194,
+            "coupling_joint_distances_m": [
+              284.4332266098463,
+              305.19322660991907
+            ],
+            "wheel_path_error_m": 3.930189507173054e-14
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 7,
+            "position_m": [
+              416.612772185819,
+              226.6474496153026,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.41651610533233,
+            "coupling_joint_distances_m": [
+              305.19322660991907,
+              325.95333579199314
+            ],
+            "wheel_path_error_m": 0.01942389579175019
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 8,
+            "position_m": [
+              404.5159410236578,
+              209.77624144616775,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.86531490606846,
+            "coupling_joint_distances_m": [
+              325.95333579199314,
+              346.71334479606344
+            ],
+            "wheel_path_error_m": 0.007352318733111263
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 9,
+            "position_m": [
+              392.3695968888537,
+              192.94046088795335,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.75257600680862,
+            "coupling_joint_distances_m": [
+              346.71334479606344,
+              367.47337034275097
+            ],
+            "wheel_path_error_m": 0.010478378195901028
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 10,
+            "position_m": [
+              380.2573690590638,
+              176.08012074011882,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.63327877688992,
+            "coupling_joint_distances_m": [
+              367.47337034275097,
+              388.2333703428237
+            ],
+            "wheel_path_error_m": 4.873879078104437e-14
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 11,
+            "position_m": [
+              368.160572586959,
+              159.20869198320833,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.6476871160094,
+            "coupling_joint_distances_m": [
+              388.2333703428237,
+              408.9933725937867
+            ],
+            "wheel_path_error_m": 0.0037280846842507875
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 12,
+            "position_m": [
+              356.0281542558048,
+              142.36291147210423,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.87557029643125,
+            "coupling_joint_distances_m": [
+              408.9933725937867,
+              429.7534255642861
+            ],
+            "wheel_path_error_m": 0.018499980411297745
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 13,
+            "position_m": [
+              343.77101076486827,
+              125.6079940497255,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.49947501935105,
+            "coupling_joint_distances_m": [
+              429.7534255642861,
+              450.5134782607729
+            ],
+            "wheel_path_error_m": 0.018374653422004172
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 14,
+            "position_m": [
+              331.4292920327884,
+              108.91489636365037,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.45382940907973,
+            "coupling_joint_distances_m": [
+              450.5134782607729,
+              471.2735147339115
+            ],
+            "wheel_path_error_m": 0.00865150822655214
+          },
+          {
+            "mesh": "SM_MPR4_Locomotive",
+            "index": 15,
+            "position_m": [
+              319.0912911731789,
+              92.21904893081052,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.47394997319596,
+            "coupling_joint_distances_m": [
+              471.2735147339115,
+              492.0344461601685
+            ],
+            "wheel_path_error_m": 0.07547558141933663
+          }
+        ],
+        "coupler_joint_gap_m": 0.0,
+        "note": "Continuous train inferred within approved occupied track interval; individual schematic roof symbols are no longer placement targets."
+      },
+      {
+        "id": "MainFreight",
+        "occupied_source_interval_m": [
+          6.069221997886364,
+          410.10692007784087
+        ],
+        "cars": [
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 0,
+            "position_m": [
+              494.7759165219652,
+              282.6717441328817,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.12256509921691,
+            "coupling_joint_distances_m": [
+              6.069221997886364,
+              26.829221997959124
+            ],
+            "wheel_path_error_m": 5.240252676230739e-14
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 1,
+            "position_m": [
+              482.83210871288463,
+              265.69166595220486,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.1226359176692,
+            "coupling_joint_distances_m": [
+              26.829221997959124,
+              47.58922200094227
+            ],
+            "wheel_path_error_m": 2.1729147203775057e-05
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 2,
+            "position_m": [
+              470.8616225503971,
+              248.73041612706152,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.30280595948243,
+            "coupling_joint_distances_m": [
+              47.58922200094227,
+              68.34925059159944
+            ],
+            "wheel_path_error_m": 0.011497213478584456
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 3,
+            "position_m": [
+              458.84812988940826,
+              231.7995805679237,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.4133893689264,
+            "coupling_joint_distances_m": [
+              68.34925059159944,
+              89.10925059167221
+            ],
+            "wheel_path_error_m": 3.930189507173054e-14
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 4,
+            "position_m": [
+              446.8182985895177,
+              214.8803383006354,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.4133893689265,
+            "coupling_joint_distances_m": [
+              89.10925059167221,
+              109.86925059174497
+            ],
+            "wheel_path_error_m": 2.864375403532904e-14
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 5,
+            "position_m": [
+              434.78846728962714,
+              197.96109603334713,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.4133893689265,
+            "coupling_joint_distances_m": [
+              109.86925059174497,
+              130.62925059181774
+            ],
+            "wheel_path_error_m": 4.241051954068098e-14
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 6,
+            "position_m": [
+              422.74317217265605,
+              181.05287007502466,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.51819175450973,
+            "coupling_joint_distances_m": [
+              130.62925059181774,
+              151.38930286353414
+            ],
+            "wheel_path_error_m": 0.017368417338536002
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 7,
+            "position_m": [
+              410.6138117166431,
+              164.2050491621468,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.98478692710754,
+            "coupling_joint_distances_m": [
+              151.38930286353414,
+              172.14931844230526
+            ],
+            "wheel_path_error_m": 0.008040774000408257
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 8,
+            "position_m": [
+              398.3740768491898,
+              147.43710904913218,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.27026090890547,
+            "coupling_joint_distances_m": [
+              172.14931844230526,
+              192.9093289017126
+            ],
+            "wheel_path_error_m": 0.008066505489325415
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 9,
+            "position_m": [
+              386.0867458452234,
+              130.7039370663802,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.310139476195,
+            "coupling_joint_distances_m": [
+              192.9093289017126,
+              213.66932890178535
+            ],
+            "wheel_path_error_m": 5.184741524999481e-14
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 10,
+            "position_m": [
+              373.7956596603739,
+              113.97352183502296,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.29597468000658,
+            "coupling_joint_distances_m": [
+              213.66932890178535,
+              234.4293318497851
+            ],
+            "wheel_path_error_m": 0.0039011916507375455
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 11,
+            "position_m": [
+              361.5455014258814,
+              97.21318453462592,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.0302875011915,
+            "coupling_joint_distances_m": [
+              234.4293318497851,
+              255.1893463665574
+            ],
+            "wheel_path_error_m": 0.00894223107553227
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 12,
+            "position_m": [
+              349.17618400015624,
+              80.54168577561926,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -127.11639920817574,
+            "coupling_joint_distances_m": [
+              255.1893463665574,
+              275.950985965698
+            ],
+            "wheel_path_error_m": 0.0830473920872955
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 13,
+            "position_m": [
+              336.3878157613641,
+              64.19159661612663,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -128.94571600760148,
+            "coupling_joint_distances_m": [
+              275.950985965698,
+              296.711064200505
+            ],
+            "wheel_path_error_m": 0.017938049735048422
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 14,
+            "position_m": [
+              323.4450924209036,
+              47.960610922076924,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -128.1925845435614,
+            "coupling_joint_distances_m": [
+              296.711064200505,
+              317.4724411796308
+            ],
+            "wheel_path_error_m": 0.07098630969283015
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 15,
+            "position_m": [
+              310.84359923012084,
+              31.46537384599351,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.56326321880518,
+            "coupling_joint_distances_m": [
+              317.4724411796308,
+              338.23251080872615
+            ],
+            "wheel_path_error_m": 0.017513573181974773
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 16,
+            "position_m": [
+              298.5296161801274,
+              14.751933304865531,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.20018045708669,
+            "coupling_joint_distances_m": [
+              338.23251080872615,
+              358.9925147004176
+            ],
+            "wheel_path_error_m": 0.004768634175171815
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 17,
+            "position_m": [
+              286.2980259618696,
+              -2.0219891194944575,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.99908634004694,
+            "coupling_joint_distances_m": [
+              358.9925147004176,
+              379.7525203737
+            ],
+            "wheel_path_error_m": 0.0059457373717640705
+          },
+          {
+            "mesh": "SM_MPR4_Locomotive",
+            "index": 18,
+            "position_m": [
+              273.97960366795235,
+              -18.73166317679958,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.79641778085939,
+            "coupling_joint_distances_m": [
+              379.7525203737,
+              400.5137175204029
+            ],
+            "wheel_path_error_m": 0.07686639037083776
+          }
+        ],
+        "coupler_joint_gap_m": 0.0,
+        "note": "Continuous train inferred within approved occupied track interval; individual schematic roof symbols are no longer placement targets."
+      },
+      {
+        "id": "MainEastInner",
+        "occupied_source_interval_m": [
+          528.0164632422252,
+          978.4370399213793
+        ],
+        "cars": [
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 0,
+            "position_m": [
+              338.973637331107,
+              45.862627611000136,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.81908707202474,
+            "coupling_joint_distances_m": [
+              528.0164632422252,
+              548.7764860409291
+            ],
+            "wheel_path_error_m": 0.01061997630549516
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 1,
+            "position_m": [
+              326.8531082378448,
+              29.008277547961796,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.62327301603958,
+            "coupling_joint_distances_m": [
+              548.7764860409291,
+              569.5364861281678
+            ],
+            "wheel_path_error_m": 0.0004181340502475983
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 2,
+            "position_m": [
+              314.73534457395147,
+              12.151932284382411,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -125.80026420712804,
+            "coupling_joint_distances_m": [
+              569.5364861281678,
+              590.2965369115143
+            ],
+            "wheel_path_error_m": 0.0144620157780313
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 3,
+            "position_m": [
+              302.54694044620237,
+              -4.653345714432389,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.1044163838871,
+            "coupling_joint_distances_m": [
+              590.2965369115143,
+              611.0565654780153
+            ],
+            "wheel_path_error_m": 0.010899219296945262
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 4,
+            "position_m": [
+              290.27298047775,
+              -21.396252526429137,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.3846899334616,
+            "coupling_joint_distances_m": [
+              611.0565654780153,
+              631.8166022033386
+            ],
+            "wheel_path_error_m": 0.012413483378204582
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 5,
+            "position_m": [
+              277.9153132942274,
+              -38.07746442423796,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -126.67840518012606,
+            "coupling_joint_distances_m": [
+              631.8166022033386,
+              652.5766447338574
+            ],
+            "wheel_path_error_m": 0.013014647793954781
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 6,
+            "position_m": [
+              265.44634802643293,
+              -54.6755111746817,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -127.1516078087046,
+            "coupling_joint_distances_m": [
+              652.5766447338574,
+              673.3367683891208
+            ],
+            "wheel_path_error_m": 0.023977887410113197
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 7,
+            "position_m": [
+              252.81932865885364,
+              -71.15347416665989,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -127.77409256719928,
+            "coupling_joint_distances_m": [
+              673.3367683891208,
+              694.0968501254097
+            ],
+            "wheel_path_error_m": 0.018264053009669823
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 8,
+            "position_m": [
+              240.0239736289142,
+              -87.50114893404323,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -128.3266111616362,
+            "coupling_joint_distances_m": [
+              694.0968501254097,
+              714.8569096351032
+            ],
+            "wheel_path_error_m": 0.019011698403404997
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 9,
+            "position_m": [
+              227.03805283000554,
+              -103.6975358057585,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -129.11719249454816,
+            "coupling_joint_distances_m": [
+              714.8569096351032,
+              735.617161961166
+            ],
+            "wheel_path_error_m": 0.034690898626888234
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 10,
+            "position_m": [
+              213.91177334857554,
+              -119.7809751972971,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -129.32107628028038,
+            "coupling_joint_distances_m": [
+              735.617161961166,
+              756.3772390497186
+            ],
+            "wheel_path_error_m": 0.022264104697843345
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 11,
+            "position_m": [
+              200.86310700015295,
+              -135.92691126349754,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -128.56715342349102,
+            "coupling_joint_distances_m": [
+              756.3772390497186,
+              777.1373656337005
+            ],
+            "wheel_path_error_m": 0.021307760193947534
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 12,
+            "position_m": [
+              187.9703719538056,
+              -152.1980809127258,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -128.21712158648114,
+            "coupling_joint_distances_m": [
+              777.1373656337005,
+              797.8974120340101
+            ],
+            "wheel_path_error_m": 0.01603715826801866
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 13,
+            "position_m": [
+              175.18024248786617,
+              -168.55001282208323,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -127.84638452697607,
+            "coupling_joint_distances_m": [
+              797.8974120340101,
+              818.6574171161938
+            ],
+            "wheel_path_error_m": 0.0032380954063409018
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 14,
+            "position_m": [
+              162.26772357056132,
+              -184.80406878999798,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -129.08215655117135,
+            "coupling_joint_distances_m": [
+              818.6574171161938,
+              839.418384825032
+            ],
+            "wheel_path_error_m": 0.0624435183144334
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 15,
+            "position_m": [
+              148.97291134812752,
+              -200.74624301788091,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -130.5699816261562,
+            "coupling_joint_distances_m": [
+              839.418384825032,
+              860.178790107731
+            ],
+            "wheel_path_error_m": 0.04211479476716096
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 16,
+            "position_m": [
+              135.285515373816,
+              -216.35303191313938,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -131.93254778583852,
+            "coupling_joint_distances_m": [
+              860.178790107731,
+              880.9393392438244
+            ],
+            "wheel_path_error_m": 0.05131941016710584
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 17,
+            "position_m": [
+              121.20930702137636,
+              -231.60955503492877,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -133.45890830760032,
+            "coupling_joint_distances_m": [
+              880.9393392438244,
+              901.699725513573
+            ],
+            "wheel_path_error_m": 0.04171652936189785
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 18,
+            "position_m": [
+              106.87992759598316,
+              -246.63093051721353,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -133.83989305621773,
+            "coupling_joint_distances_m": [
+              901.699725513573,
+              922.4597255136457
+            ],
+            "wheel_path_error_m": 1.5210055437364645e-14
+          },
+          {
+            "mesh": "SM_MPR4_FreightBoxcar",
+            "index": 19,
+            "position_m": [
+              92.48926119048241,
+              -261.5937535345264,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -133.9267773491553,
+            "coupling_joint_distances_m": [
+              922.4597255136457,
+              943.2197326021019
+            ],
+            "wheel_path_error_m": 0.005698118681029762
+          },
+          {
+            "mesh": "SM_MPR4_Locomotive",
+            "index": 20,
+            "position_m": [
+              78.07992141360481,
+              -276.5385995880931,
+              -0.7549999999999999
+            ],
+            "rotation_deg": -133.9829690369582,
+            "coupling_joint_distances_m": [
+              943.2197326021019,
+              963.9797326021746
+            ],
+            "wheel_path_error_m": 3.452793606584237e-14
+          }
+        ],
+        "coupler_joint_gap_m": 0.0,
+        "note": "Continuous train inferred within approved occupied track interval; individual schematic roof symbols are no longer placement targets."
+      }
+    ]
+  },
   "tree_clearance_violations": [],
   "allowed_crown_edge_overhang": [
     {
@@ -988,7 +1868,7 @@
     "buildings": 151,
     "road_segments": 20,
     "parked_vehicles": 77,
-    "boxcars": 32,
+    "boxcars": 56,
     "trees": 379
   },
   "success": true

@@ -1,269 +1,700 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "status": "review_complete_with_visual_residuals",
-  "map_sha256": "089c1b196d96efeae9da4c24073681022736d6e5e4acc3a899f3b7fa7eab97b2",
+  "reviewed_at_utc": "2026-11-03T11:42:24.026093+00:00",
+  "map_sha256": "ea0eb9fd1c41725d282530b4429e7109f7c148473468fe86748e40bb2d401bb7",
   "source_report_hashes": {
-    "Saved/MPR/reference_v4/runtime_views/capture_report.json": "d9ca7df2be9e5e22c8234e40ff7d6cda11f7be3bcb35fbead7a3319a8ed719d8",
-    "Saved/MPR/road_v5/runtime_views/capture_report.json": "e5f64299490b52a27fb37b643cda0f277549d638b558ab7ba32118b29895585b"
+    "Saved/MPR/reference_v4/runtime_views/capture_report.json": "b8c3f199b16032b1f4ec97f25a445cdc77c1980a8ef8ea38def353aa0da0d173",
+    "Saved/MPR/road_v5/runtime_views/capture_report.json": "00703337930ee224698a23190d668b70d49369995ca5b5057f7c168e6bd41207",
+    "Saved/MPR/road_v5/outside_views/capture_report.json": "afc45e22522e52f635ede48b15ee707c1cc821dd06560d5e0287e3c2f127193f",
+    "Saved/MPR/feedback_v7/detail_views/capture_report.json": "096c28f2dcf59bb44140774bfaad77ad6970b59a7f00ef4c84f254690691633c",
+    "Saved/MPR/solar_motion/final/capture_report.json": "b987db598569cbd2d994504d1141997aeca1fc4fa82f104df025a35d61b307de",
+    "Saved/MPR/solar_motion/far/capture_report.json": "a67ea8ee41984029f6bd7ce60f78ad75c5503239131754993ba8b6dab404cdeb",
+    "Saved/MPR/reference_v4/runtime_calibrated_capture.json": "ab63eacba7dc6508fdda03ff05eff5b6e178863c0618b75b0106090eefc3c530",
+    "Saved/MPR/style_review/final_tone_metrics.json": "8cc53ca3063afecc8a70278eba4cb2e9fe04cfeca1b35906c6237f3cc2523f89",
+    "Saved/MPR/pv_v6/native_review/review.json": "e2d81498ccb14c84854ea9df636feebe07f4b317402bb756a0e551c3710bb10b",
+    "Saved/MPR/solar_motion/review/solar_motion_review.json": "532eef0b6cfb6c8f25e26f361b559da84c9a29ebf5ec5d74e962a3e512860e6e",
+    "Saved/MPR/reference_v4/validation.json": "7631106659637064aae5386ff3e03dd5151bbf40d00706d04ddeb910d9d4a359"
   },
   "images": [
     {
       "name": "01-overall",
-      "path": "Saved/MPR/reference_v4/runtime_views/01-overall_1793673474286783000.png",
-      "sha256": "6c530448c09299ffdd7deb6fbef0a4141506a880f4e6c7f2df59542990623257"
+      "path": "Saved/MPR/reference_v4/runtime_views/01-overall_1793704810552131200.png",
+      "sha256": "baf8d1b965cbc71d321a252eb49ae0675ca818df5091e241a1e077307160a43d"
     },
     {
       "name": "02-yard-corner",
-      "path": "Saved/MPR/reference_v4/runtime_views/02-yard-corner_1793673477871235900.png",
-      "sha256": "7f4e476dc54897362a20d1417d676f0048e9ff7a39998cf06cc9fc90350ab445"
+      "path": "Saved/MPR/reference_v4/runtime_views/02-yard-corner_1793704814135676700.png",
+      "sha256": "c9be6a50a00faf12935926417d1161ceb8f4d2a48b767375247d76b69efbded7"
     },
     {
       "name": "03-roof",
-      "path": "Saved/MPR/reference_v4/runtime_views/03-roof_1793673481162225000.png",
-      "sha256": "7cd960c970b3666dbf3e711d507791b0150c9033de87025a68331c1e19a1d06c"
+      "path": "Saved/MPR/reference_v4/runtime_views/03-roof_1793704817409556100.png",
+      "sha256": "5a47329608b0b5bd0c9a1ad722632f6819a819ec64e8b301cfa99a22e6c1643a"
     },
     {
       "name": "04-docks",
-      "path": "Saved/MPR/reference_v4/runtime_views/04-docks_1793673484460086600.png",
-      "sha256": "7c7e16d54a2b168dfe63a4aebd90a8e412ad36b2c475c8b724e0a0049fa50d1f"
+      "path": "Saved/MPR/reference_v4/runtime_views/04-docks_1793704820663479300.png",
+      "sha256": "02651e96607ace26c9006f15bb29f5218ef78fa6bc9c44d3f9c4ee1ca5b5dc70"
     },
     {
       "name": "05-yard",
-      "path": "Saved/MPR/reference_v4/runtime_views/05-yard_1793673487741838600.png",
-      "sha256": "36d5e5f2082e208041912c07f751330b8f4f511632ba0ac56e89f4b61be3e7e1"
+      "path": "Saved/MPR/reference_v4/runtime_views/05-yard_1793704823946090900.png",
+      "sha256": "972dd646f04ebc19ba680c8fe8bbb7658c613d54a02586c3abbd1659812e0135"
     },
     {
       "name": "06-pond",
-      "path": "Saved/MPR/reference_v4/runtime_views/06-pond_1793673491023706100.png",
-      "sha256": "483521fbab958a7722cc6418fec5381986c2d53039193d30f6f42a4afa1b5bf9"
+      "path": "Saved/MPR/reference_v4/runtime_views/06-pond_1793704827225006300.png",
+      "sha256": "91036d27cc60b2f4afffedabb82804e7fadd0e0607e111877038e54957dd4229"
     },
     {
       "name": "07-railway",
-      "path": "Saved/MPR/reference_v4/runtime_views/07-railway_1793673494318333500.png",
-      "sha256": "c225e9c44614f8d9bd53ace6a991fa0817050cd0c7e51c77edc2fe4362587578"
+      "path": "Saved/MPR/reference_v4/runtime_views/07-railway_1793704830504543600.png",
+      "sha256": "c3661396969c721070c2797600e5614aab77395f184b746ac42ab80b3f05b0e1"
     },
     {
       "name": "08-interior-preserved",
-      "path": "Saved/MPR/reference_v4/runtime_views/08-interior-preserved_1793673497600654500.png",
-      "sha256": "5b97943e5a0b5b2721435b5797ca0296420e22bd996434bb71124042b7bbce5b"
+      "path": "Saved/MPR/reference_v4/runtime_views/08-interior-preserved_1793704833791618000.png",
+      "sha256": "dfabceb435ef010b8872f89a50463ea642e43e329871729bdeba9da17e536458"
     },
     {
       "name": "09-plan-overview",
-      "path": "Saved/MPR/road_v5/runtime_views/09-plan-overview_1793673558082735200.png",
-      "sha256": "b5d6cae72d9abdda48f003f15447e240563f05413a682653fecde4b5a3934501"
+      "path": "Saved/MPR/road_v5/runtime_views/09-plan-overview_1793704894290140400.png",
+      "sha256": "3d4495b32e2a52e1ee5e7df9c851b52f86dcb0fb4afab1f580fdd3454a2e73ed"
     },
     {
       "name": "10-houses-close",
-      "path": "Saved/MPR/road_v5/runtime_views/10-houses-close_1793673561659985100.png",
-      "sha256": "6cd4ac393ee29801d12a270abd31f0f62c92d4a737018814e586e0b7566649e4"
+      "path": "Saved/MPR/road_v5/runtime_views/10-houses-close_1793704897878232000.png",
+      "sha256": "b7144e3102ca9bcb241790f67cbec714da8118b082451d2858addc4be795d1aa"
     },
     {
       "name": "11-houses-reverse",
-      "path": "Saved/MPR/road_v5/runtime_views/11-houses-reverse_1793673564957065000.png",
-      "sha256": "8ae89b3688d44d9b1d3ae25a4eccea3268c1ade8bfbf7a9f0b762bd237eae636"
+      "path": "Saved/MPR/road_v5/runtime_views/11-houses-reverse_1793704901252303900.png",
+      "sha256": "898966eecbdb8c09edb967a57ea0a178d3aab2e2a8122005077d5746468e93a3"
     },
     {
       "name": "12-neighbor-docks",
-      "path": "Saved/MPR/road_v5/runtime_views/12-neighbor-docks_1793673568223873000.png",
-      "sha256": "a25638f88e02658852b860c7301667438467b439c74f6dd55f51c2655d36fb26"
+      "path": "Saved/MPR/road_v5/runtime_views/12-neighbor-docks_1793704904533254300.png",
+      "sha256": "b166b7676439ce432817856722c68d8260f928748cd44098353a1190856d6455"
     },
     {
       "name": "13-east-context",
-      "path": "Saved/MPR/road_v5/runtime_views/13-east-context_1793673571476289000.png",
-      "sha256": "1b4efd46a3a4741fd44c766f4635ec39a345a430f84c62654aecb2bb815fe22b"
+      "path": "Saved/MPR/road_v5/runtime_views/13-east-context_1793704907787989000.png",
+      "sha256": "7648b53387d6bd6c145f3aca7ab2b454992e4f5fee8896a24c323563cacec13b"
+    },
+    {
+      "name": "14-complete-context",
+      "path": "Saved/MPR/road_v5/outside_views/14-complete-context_1793704934899299900.png",
+      "sha256": "3e39f1d2fe5e5900bcc6f4b7beb5e41081ea4d4347647781cdfb6c0a166d1fe5"
+    },
+    {
+      "name": "15-northwest-context",
+      "path": "Saved/MPR/road_v5/outside_views/15-northwest-context_1793704938471324900.png",
+      "sha256": "d87922ea9907b3850738a16135feca43385e7eb3eee9094c5a613f358eb91b8e"
+    },
+    {
+      "name": "16-southwest-context",
+      "path": "Saved/MPR/road_v5/outside_views/16-southwest-context_1793704941708922200.png",
+      "sha256": "4446853fe5fe8d7ea86420ec0a47e80171867757b85229c10f760c5657bd95ab"
+    },
+    {
+      "name": "17-northeast-context",
+      "path": "Saved/MPR/road_v5/outside_views/17-northeast-context_1793704944972380400.png",
+      "sha256": "28e1e6171576deaad9b2d8b072e8c1b0de5c685d491b7cbc7ea70c44ebf9f157"
+    },
+    {
+      "name": "18-southeast-context",
+      "path": "Saved/MPR/road_v5/outside_views/18-southeast-context_1793704948252834100.png",
+      "sha256": "cefe4e5b951545458ed2560a6b87fe412fcebe77b481e67c716867cd90c66e53"
+    },
+    {
+      "name": "19-truck-whole",
+      "path": "Saved/MPR/feedback_v7/detail_views/19-truck-whole_1793704975067674800.png",
+      "sha256": "466a3374b38bedf0615dc471251a516b3cda85c43a133476f194f209c9b4fe4c"
+    },
+    {
+      "name": "20-truck-cab-wheel",
+      "path": "Saved/MPR/feedback_v7/detail_views/20-truck-cab-wheel_1793704978676042500.png",
+      "sha256": "999441e0a5c065c6dd29840c1a68018ad077ac62591bbdac55500316d866646c"
+    },
+    {
+      "name": "21-locomotive-whole",
+      "path": "Saved/MPR/feedback_v7/detail_views/21-locomotive-whole_1793704981981092700.png",
+      "sha256": "49115a1bfd3c0093182cab3db1fe7528a2d50213606c5640757b2a40003c3284"
+    },
+    {
+      "name": "22-rail-coupling-wheel",
+      "path": "Saved/MPR/feedback_v7/detail_views/22-rail-coupling-wheel_1793704985326463200.png",
+      "sha256": "a4b700c82a49cd1044e3aae3c9978cead8a2029685801a669db81d735c2ed26d"
+    },
+    {
+      "name": "23-train-consist",
+      "path": "Saved/MPR/feedback_v7/detail_views/23-train-consist_1793704988629695500.png",
+      "sha256": "49a00c0b8829b8074b93d7a4dcc763b8fcb3067138a3e7e00f20b26944c26a02"
+    },
+    {
+      "name": "24-pond-paving",
+      "path": "Saved/MPR/feedback_v7/detail_views/24-pond-paving_1793704991911959700.png",
+      "sha256": "106e9e6a77d1a1a1115802f0d8cf8ae888355476e16c3fa281ced33db203792f"
+    },
+    {
+      "name": "25-campus-planting",
+      "path": "Saved/MPR/feedback_v7/detail_views/25-campus-planting_1793704995197879400.png",
+      "sha256": "8ef40b4049c8225baef8459028a410560d00f1ba9f982b1042eeb91277666052"
     }
   ],
-  "inspected_original_count": 4,
+  "inspected_original_count": 25,
+  "reviewed_in_this_revision": [
+    "01-overall",
+    "02-yard-corner",
+    "03-roof",
+    "04-docks",
+    "05-yard",
+    "06-pond",
+    "07-railway",
+    "08-interior-preserved",
+    "09-plan-overview",
+    "10-houses-close",
+    "11-houses-reverse",
+    "12-neighbor-docks",
+    "13-east-context",
+    "14-complete-context",
+    "15-northwest-context",
+    "16-southwest-context",
+    "17-northeast-context",
+    "18-southeast-context",
+    "19-truck-whole",
+    "20-truck-cab-wheel",
+    "21-locomotive-whole",
+    "22-rail-coupling-wheel",
+    "23-train-consist",
+    "24-pond-paving",
+    "25-campus-planting"
+  ],
+  "review_scope": "All 25 current static native UE PNGs, the exact calibrated crop and 11 selected native motion-pose PNGs were freshly visually inspected. Acceptance concerns this repair scope, not pixel-perfect equivalence or continuous-motion flicker freedom.",
+  "calibrated_review": {
+    "raw_image": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\runtime_overscan_1793704868201904200.png",
+    "raw_sha256": "57404bda0d96430ffa50f68a0c126307df0ff01756f99c5823a6f3f6c758081b",
+    "crop": [
+      278,
+      949,
+      1728,
+      910
+    ],
+    "derived_crop": "Saved/MPR/style_review/final_runtime_calibrated.png",
+    "crop_sha256": "8bc4fdb8915d47d2ab3f71e0cca70d1836cad8407a372bd817a28f89aafc253d",
+    "resampled": false
+  },
   "geometry_findings": [
     {
       "views": [
-        "10-houses-close",
-        "11-houses-reverse"
+        "01-overall",
+        "03-roof",
+        "09-plan-overview"
       ],
-      "result": "The reviewed front and reverse views show straight roof ridges, planar roof facets and vertical walls; the earlier visibly sheared house forms are no longer evident. This agrees with saved geometry invariants, not a pixel-perfect source claim."
+      "result": "主仓白屋顶、蓝色立面、深色月台及彩色车辆形成主体层次。光伏的新阶梯边缘、贯通通道与大孔洞可辨认；与最新实景布局对应，不再沿用旧通用矩形块。主体层次较基线改善，但仍不等同参考渲染的丰富度。"
     },
     {
       "views": [
-        "03-roof"
-      ],
-      "result": "Large PV fields now have clean orthogonal boundaries; U/C/E-shaped openings and main aisles remain clear. Local grid-stroke false holes are absent."
-    },
-    {
-      "views": [
+        "02-yard-corner",
         "04-docks",
-        "05-yard"
+        "05-yard",
+        "19-truck-whole",
+        "20-truck-cab-wheel"
       ],
-      "result": "Dock seals, roller doors, bollards, stand markings and trailers are present; standing apron remains visually connected."
+      "result": "整车已包含车头、前轮、双后轴、驾驶室玻璃与台阶。19/20近景轮胎底部与铺地及接触阴影相接，未观察到浮空或埋地；车头与挂车有合理间隔。场景52整车数量由manifest和空间审计提供，不仅凭图片计数。"
     },
     {
       "views": [
-        "07-railway"
+        "07-railway",
+        "21-locomotive-whole",
+        "22-rail-coupling-wheel",
+        "23-train-consist"
       ],
-      "result": "Rail pairs, sleepers, branches and boxcars are visually distinguishable; track-bed material remains simplified."
+      "result": "列车已形成随轨道走向的连续编组，机车可辨认；22近景相邻车钩连接、车体保留间隙，轮对落在轨面。53货车厢和3机车的数量由manifest审计提供。"
+    },
+    {
+      "views": [
+        "06-pond",
+        "24-pond-paving",
+        "25-campus-planting"
+      ],
+      "result": "池塘外侧步道形成闭合连续环带，先前草地楔入和铺地破口未再看到。主仓绿带与装卸铺地区分开，北装卸车辆前方作业面保留；水岸近景仍可见折面。"
+    },
+    {
+      "views": [
+        "14-complete-context",
+        "15-northwest-context",
+        "16-southwest-context",
+        "17-northeast-context",
+        "18-southeast-context"
+      ],
+      "result": "外围道路采用向匹配草地逐渐淡出的收口，已不见旧的长尖角、交叉破片或人为闭合大环。铁路远端仍保留简化道床截断，不能把道路渐变等同整个外围环境无缝。"
+    },
+    {
+      "views": [
+        "10-houses-close",
+        "11-houses-reverse",
+        "12-neighbor-docks",
+        "13-east-context"
+      ],
+      "result": "住宅体量与屋脊方向规整；邻仓及油罐沿用简化低对比风格。住宅支路局部路缘微小台阶、邻仓表面平整感与树冠颗粒仍可见。"
     },
     {
       "views": [
         "08-interior-preserved"
       ],
-      "result": "Existing warehouse interior is visibly present after hiding roof; unchanged-content guarantee comes from preservation digest, not image alone."
-    },
-    {
-      "views": [
-        "09-plan-overview",
-        "13-east-context"
-      ],
-      "result": "New plan-scale layout is represented with true rectangular houses and circular tanks. A read-only footprint test found all 8 tank footprints contained in context paved surfaces; slight apparent edge proximity in perspective is not measured overlap."
-    },
-    {
-      "views": [
-        "06-pond",
-        "10-houses-close",
-        "11-houses-reverse",
-        "13-east-context"
-      ],
-      "result": "Final road fillets visibly round the larger residential-junction and eastern-road corners while keeping buildings straight. The pond-road border remains distinct after walkway clipping. Narrow source contour micro-offsets are still visible in some straight-road edges; the close pond perimeter remains faceted."
+      "result": "内部货架与通道在当前图中仍可辨认；真正的内部保存一致性由重载报告protected digest验证，图片本身不能证明逐资产一致。该内部画面仍偏亮，属于保留范围。"
     }
   ],
   "residuals": [
     {
-      "id": "curb_local_kinks",
-      "severity": "visible",
-      "views": [
-        "10-houses-close",
-        "11-houses-reverse",
-        "13-east-context"
-      ],
-      "description": "Large residential-junction and bend corners are now rounded; small inherited contour offsets and narrow local wiggles remain visible near parts of the straight road edges. They are less pronounced than the prior sharp polygon corners.",
-      "description_zh": "住宅路口及大弯转角已圆顺；部分直路边缘仍保留线稿中的微小偏移与局部起伏，未宣称完全无折点。"
-    },
-    {
-      "id": "context_simplification",
-      "severity": "style_difference",
-      "views": [
-        "12-neighbor-docks",
-        "13-east-context"
-      ],
-      "description": "Northern neighboring warehouse dock facade and tank assets are simplified; close views have lower detail and contrast than the main warehouse."
-    },
-    {
-      "id": "pale_foliage",
-      "severity": "style_difference",
-      "views": [
-        "06-pond",
-        "07-railway",
-        "10-houses-close"
-      ],
-      "description": "Actual UE foliage appears paler and finer-grained than Blender overview/reference appearance."
-    },
-    {
-      "id": "reference_external_tails",
-      "severity": "reference_external_scope",
+      "id": "pv_near_far_detail",
+      "severity": "non_blocking_visual_residual",
       "views": [
         "02-yard-corner",
-        "12-neighbor-docks"
+        "03-roof",
+        "25-campus-planting"
       ],
-      "description": "Some hard road end caps remain visible beyond the supplied reference extent, especially in low context view."
+      "description": "Near banks still resolve fine white frames while distant banks resolve a smoother blue surface; slight same-frame detail and luminance differences remain. Selected transition poses do not show the former pronounced bank-level white seam jump. This is not a zero-flicker claim.",
+      "description_zh": "02/25同帧仍可见近处细白框、远处连续蓝面的细节和亮度差异。选取的切换姿态未再出现旧版显著的整块白缝跳变，但不能据此宣称实时运动零闪烁。"
     },
     {
-      "id": "close_pond_faceting",
-      "severity": "visible",
+      "id": "main_focus_reference_tone_gap",
+      "severity": "non_blocking_reference_gap",
       "views": [
-        "06-pond"
+        "01-overall",
+        "09-plan-overview"
       ],
-      "description": "The pond walkway is clipped away from the final road; pond and walk edges still show polygon facets at close range.",
-      "description_zh": "池边步道已与最终道路分离；池塘及步道周界在近景下仍可见多边形折面。"
+      "description": "Fixed calibrated ROIs show roof/apron contrast improved to 9.80 L* from 6.19, below reference14.66; blue facade coverage12.91% is above baseline7.54% and below reference19.26%. Trees remain pale and ground shadows darker than reference. These are semantic samples, not a scene fidelity score.",
+      "description_zh": "固定校准ROI中屋顶与作业区明度差从6.19提升到9.80，参考为14.66；蓝色立面比例从7.54%提升到12.91%，参考为19.26%。树冠仍较浅，投影仍比参考深；这些指标只描述固定语义样本，不代表全场景还原度。"
     },
     {
-      "id": "high_key_interior",
-      "severity": "preserved_existing_scene",
+      "id": "near_vehicle_facets",
+      "severity": "non_blocking_detail_simplification",
       "views": [
-        "08-interior-preserved"
+        "20-truck-cab-wheel",
+        "21-locomotive-whole",
+        "22-rail-coupling-wheel"
       ],
-      "description": "Interior retained under current lighting appears high-key/low contrast in overhead view; not altered as part of exterior work."
+      "description": "Close views reveal low-sided tire/wheel outlines and simple coupler and generic locomotive forms. Shared modules support scene performance; they are not engineering-accurate vehicle replicas.",
+      "description_zh": "近景车轮轮廓可见低面折线，车钩与通用机车形体保持简化；共享模块用于场景性能，不是工程级车辆复刻。"
+    },
+    {
+      "id": "pond_waterline_facets",
+      "severity": "non_blocking_detail_simplification",
+      "views": [
+        "06-pond",
+        "24-pond-paving"
+      ],
+      "description": "Pond paving is closed but the waterline remains faceted at close range, following the stylized source outline.",
+      "description_zh": "池边铺地已闭合，但近景水岸仍沿风格化源轮廓呈折面。"
+    },
+    {
+      "id": "minor_context_curb_steps",
+      "severity": "non_blocking_detail_simplification",
+      "views": [
+        "10-houses-close",
+        "11-houses-reverse"
+      ],
+      "description": "Small curb offsets/steps remain around some residential junctions. Houses and context materials remain simplified.",
+      "description_zh": "部分住宅支路交口仍存在小路缘台阶；周边建筑与材质保持简化。"
+    },
+    {
+      "id": "far_railway_plain_ends",
+      "severity": "reference_external_scope",
+      "views": [
+        "14-complete-context",
+        "17-northeast-context"
+      ],
+      "description": "Railway outside the modeled core continues as a plain ballast strip and ends abruptly at the far extent. Road tails fade but the railway boundary is still simplified.",
+      "description_zh": "核心场地外的铁路仍延伸为简化道床并在远端截断；道路已渐隐，铁路外围边界仍是简化处理。"
     }
   ],
-  "limits": [
-    "Visual review covered these 13 static native images, not a continuous camera path or all possible viewpoints.",
-    "No claim of perfect 1:1 reconstruction, user acceptance or Pixel Streaming performance.",
-    "These findings do not authorize input changes after validation.",
-    "After the last local road correction, only the four affected close views were re-reviewed; unchanged-region conclusions retain the explicitly recorded preceding full-review provenance."
+  "resolved_prior_residuals": [
+    {
+      "id": "pv_near_mid_transition_needs_revision",
+      "status": "no_blocker_observed_in_current_selected_samples",
+      "evidence_views": [
+        "03-roof",
+        "final058",
+        "final059",
+        "final060",
+        "final061",
+        "final071"
+      ],
+      "description": "Current bank details are materially more consistent than blocked2b33. Fine grids appear with proximity rather than the previous pronounced bank-level white-seam switch; near/far detail residual is retained separately."
+    },
+    {
+      "id": "disconnected_rail_cars_and_missing_truck_fronts",
+      "status": "resolved_in_reviewed_views",
+      "evidence_views": [
+        "19-truck-whole",
+        "20-truck-cab-wheel",
+        "21-locomotive-whole",
+        "22-rail-coupling-wheel",
+        "23-train-consist"
+      ],
+      "description": "Native current detail views show complete articulated trucks and coupled rail consists with wheel support."
+    },
+    {
+      "id": "exterior_road_spikes",
+      "status": "resolved_in_reviewed_views",
+      "evidence_views": [
+        "14-complete-context",
+        "15-northwest-context",
+        "16-southwest-context",
+        "17-northeast-context",
+        "18-southeast-context"
+      ],
+      "description": "Current road ends blend into the surrounding ground; previous sharp divergent triangles are absent."
+    },
+    {
+      "id": "pond_paving_gaps",
+      "status": "resolved_in_reviewed_views",
+      "evidence_views": [
+        "06-pond",
+        "24-pond-paving"
+      ],
+      "description": "Continuous outer pond paving has replaced prior breaks and grass wedges."
+    }
   ],
-  "reviewed_in_this_revision": [
-    "06-pond",
-    "10-houses-close",
-    "11-houses-reverse",
-    "13-east-context"
-  ],
-  "previous_full_review": {
-    "map_sha256": "15fc691084a14572b55e65ea973bfc0404a4f863a2772ec99c315c5fe0285f69",
-    "inspected_original_count": 13,
-    "images": [
-      {
-        "name": "01-overall",
-        "path": "Saved/MPR/reference_v4/runtime_views/01-overall_1793671299175705700.png",
-        "sha256": "b1c687ce646b15124595edac828eccf17b805e5d97d55e8ad26c5d78b70e7268"
+  "tone_comparison": {
+    "path": "Saved/MPR/style_review/final_tone_metrics.json",
+    "sha256": "8cc53ca3063afecc8a70278eba4cb2e9fe04cfeca1b35906c6237f3cc2523f89",
+    "contrast": {
+      "reference": {
+        "roof_minus_apron": 14.66,
+        "roof_minus_neighbor": 8.05,
+        "roof_minus_grass": 16.81
       },
-      {
-        "name": "02-yard-corner",
-        "path": "Saved/MPR/reference_v4/runtime_views/02-yard-corner_1793671302746492100.png",
-        "sha256": "6151154e2f4a17ab950f7ef8570ac8902f901f256bff8ed7efd116d03d26f128"
+      "baseline": {
+        "roof_minus_apron": 6.19,
+        "roof_minus_neighbor": 6.19,
+        "roof_minus_grass": 12.54
       },
-      {
-        "name": "03-roof",
-        "path": "Saved/MPR/reference_v4/runtime_views/03-roof_1793671306024718500.png",
-        "sha256": "c308a13c6d6805a0e37266bf8f199a524aed0013697f0464866a7df72b3f2a3e"
-      },
-      {
-        "name": "04-docks",
-        "path": "Saved/MPR/reference_v4/runtime_views/04-docks_1793671309284075700.png",
-        "sha256": "0986bfe8900e73b0a13a85c65c605b2354201c235feba121037a73d5275933ad"
-      },
-      {
-        "name": "05-yard",
-        "path": "Saved/MPR/reference_v4/runtime_views/05-yard_1793671312550084900.png",
-        "sha256": "37985a2500f90bdbfc073929c35df19da2d41b1ada1e1b0090b0c03f804e1ca9"
-      },
-      {
-        "name": "06-pond",
-        "path": "Saved/MPR/reference_v4/runtime_views/06-pond_1793671315820051000.png",
-        "sha256": "1944840460d2e04321c5e4cbf9760d045a74b3abeecbee21890fc28ca0e3dbdf"
-      },
-      {
-        "name": "07-railway",
-        "path": "Saved/MPR/reference_v4/runtime_views/07-railway_1793671319089779500.png",
-        "sha256": "c11b75aee44c8ebb9f43dedff4f5ef497d7fdbbdd2b52625dfca75d7f98c2ef5"
-      },
-      {
-        "name": "08-interior-preserved",
-        "path": "Saved/MPR/reference_v4/runtime_views/08-interior-preserved_1793671322367210400.png",
-        "sha256": "df2ebb64c52af3e19df145e970772bdaac6354f002e4a0348ec224759ff40602"
-      },
-      {
-        "name": "09-plan-overview",
-        "path": "Saved/MPR/road_v5/runtime_views/09-plan-overview_1793671382065355300.png",
-        "sha256": "202cd27dfcb21b8e104879150e8ddf53fcbdebfe9f069de95aea18a00cb3a474"
-      },
-      {
-        "name": "10-houses-close",
-        "path": "Saved/MPR/road_v5/runtime_views/10-houses-close_1793671385628091800.png",
-        "sha256": "5caf7f08f623c27b6267fa6a540e72e69676a3be043e67bb51460c3a1974358c"
-      },
-      {
-        "name": "11-houses-reverse",
-        "path": "Saved/MPR/road_v5/runtime_views/11-houses-reverse_1793671388982703500.png",
-        "sha256": "68ccb1ea922dda6ebbe2edaba5258032fa998399eb89dca48da91682befbfa2b"
-      },
-      {
-        "name": "12-neighbor-docks",
-        "path": "Saved/MPR/road_v5/runtime_views/12-neighbor-docks_1793671392238431400.png",
-        "sha256": "78328d276e5afe86ef7d894c02190e64cd62db07ce6c1461e374483a39a8cbc3"
-      },
-      {
-        "name": "13-east-context",
-        "path": "Saved/MPR/road_v5/runtime_views/13-east-context_1793671395474866700.png",
-        "sha256": "c8ff83c48474f513cef055ac50e4ab5fcc4cb4f134f7ada0cb28a9dc8bf1a0dd"
+      "final": {
+        "roof_minus_apron": 9.8,
+        "roof_minus_neighbor": 6.72,
+        "roof_minus_grass": 13.17
       }
-    ]
+    },
+    "front_blue_band": {
+      "roi": [
+        426,
+        532,
+        982,
+        570
+      ],
+      "reference_percent": 19.26,
+      "baseline_percent": 7.54,
+      "final_percent": 12.91
+    },
+    "scope": "Same fixed semantic ROIs and filters as initial tone_metrics; final calibrated native crop. Static tone check, not geometry fidelity or dynamic quality."
   },
-  "review_scope": "All 13 current image hashes are bound. After the final road/pond-walk-only edit, four affected native close views were re-inspected. Prior full review findings for unchanged architecture/materials/props are retained explicitly, not counted as 13 fresh visual inspections."
+  "dynamic_review": {
+    "status": "review_complete_with_visual_residuals",
+    "scope": "11 listed native original pose PNGs inspected as stills, not continuous real-time motion; independent PV review is separately attributed.",
+    "inspected_images": [
+      {
+        "label": "final",
+        "index": 0,
+        "path": "Saved/MPR/solar_motion/final/000_1793705009312540200.png",
+        "sha256": "6e3bf04c6cb17dcfff6fd28ee82e03ab2012ef05d03d957ee90abd757592babc",
+        "inspection": "native original PNG"
+      },
+      {
+        "label": "final",
+        "index": 48,
+        "path": "Saved/MPR/solar_motion/final/048_1793705009312540200.png",
+        "sha256": "576c3ab9f9c4278490e97d05389798f39be5447195afe11feb374d53fb623c63",
+        "inspection": "native original PNG"
+      },
+      {
+        "label": "final",
+        "index": 58,
+        "path": "Saved/MPR/solar_motion/final/058_1793705009312540200.png",
+        "sha256": "a41817b3093b769f0e04c800c1db53ba7a1f20e33f03fe8d99e92729df341a01",
+        "inspection": "native original PNG"
+      },
+      {
+        "label": "final",
+        "index": 59,
+        "path": "Saved/MPR/solar_motion/final/059_1793705009312540200.png",
+        "sha256": "08a00f7657ba58360148675090e1109bbe33ebcbae033b76a70031f8e1a0cab2",
+        "inspection": "native original PNG"
+      },
+      {
+        "label": "final",
+        "index": 60,
+        "path": "Saved/MPR/solar_motion/final/060_1793705009312540200.png",
+        "sha256": "0deb27f7ee5cabc0f71a241b74820c560944972b1553bd5045fa1d84f54181b2",
+        "inspection": "native original PNG"
+      },
+      {
+        "label": "final",
+        "index": 61,
+        "path": "Saved/MPR/solar_motion/final/061_1793705009312540200.png",
+        "sha256": "44dd26fe6f1a66612eba07a690f956bf216beb7ff0b300e4d22a17156eef4ede",
+        "inspection": "native original PNG"
+      },
+      {
+        "label": "final",
+        "index": 71,
+        "path": "Saved/MPR/solar_motion/final/071_1793705009312540200.png",
+        "sha256": "d4c01c80207a0cd3f7c87b19b28c5f7026ed5e751b5559ab4bbef1eea5c12438",
+        "inspection": "native original PNG"
+      },
+      {
+        "label": "final",
+        "index": 95,
+        "path": "Saved/MPR/solar_motion/final/095_1793705009312540200.png",
+        "sha256": "035fa67e965e95b0969ee299221ab94e4e2635df697912b81a0cf36d91bb6e95",
+        "inspection": "native original PNG"
+      },
+      {
+        "label": "far",
+        "index": 0,
+        "path": "Saved/MPR/solar_motion/far/000_1793705072795617800.png",
+        "sha256": "b561eee7ded7540a033f0fbb012d906a0a750a59e814e1bcf7d996584087caae",
+        "inspection": "native original PNG"
+      },
+      {
+        "label": "far",
+        "index": 11,
+        "path": "Saved/MPR/solar_motion/far/011_1793705072795617800.png",
+        "sha256": "d89ad98e8974c17dd683cdc8acae47c8d7c3edffce0c129eafde174228a31f5c",
+        "inspection": "native original PNG"
+      },
+      {
+        "label": "far",
+        "index": 23,
+        "path": "Saved/MPR/solar_motion/far/023_1793705072795617800.png",
+        "sha256": "6ca094285e7a8ca3a274d983cf06926d88078704d138bcb22e5e8148ff4279d8",
+        "inspection": "native original PNG"
+      }
+    ],
+    "findings": [
+      "final058/059/060/061 retain macro holes and stepped silhouettes. Fine panel lines gain definition on approach; the prior obvious alternating bank-level bright seam pattern was not seen in these selected current poses.",
+      "final071 shows individual panel frames and gaps. final048/095 and far000/011/023 reduce fine grids to continuous blue fields while retaining major access holes.",
+      "Fine frames/high-frequency detail remain, and selected static poses cannot prove flicker-free movement or exclude unsampled transitions."
+    ],
+    "independent_pv_review": {
+      "path": "Saved/MPR/pv_v6/native_review/review.json",
+      "sha256": "e2d81498ccb14c84854ea9df636feebe07f4b317402bb756a0e551c3710bb10b",
+      "status": "review_complete_with_visual_residuals",
+      "selected_sample_count": 24,
+      "blocker_found": false,
+      "attribution": "Separate pv_transition_fix agent reviewed24 selected samples, mainly contact sheets with3 native originals; not counted as this reviewer's direct originals."
+    },
+    "independent_pv_review_embedded": {
+      "status": "review_complete_with_visual_residuals",
+      "map_sha256": "ea0eb9fd1c41725d282530b4429e7109f7c148473468fe86748e40bb2d401bb7",
+      "reviewed_at_utc": "2026-11-03T11:29:41.771357+00:00",
+      "source_reports": {
+        "Saved/MPR/solar_motion/final/capture_report.json": "b987db598569cbd2d994504d1141997aeca1fc4fa82f104df025a35d61b307de",
+        "Saved/MPR/solar_motion/far/capture_report.json": "a67ea8ee41984029f6bd7ce60f78ad75c5503239131754993ba8b6dab404cdeb",
+        "Saved/MPR/solar_motion/review/solar_motion_review.json": "532eef0b6cfb6c8f25e26f361b559da84c9a29ebf5ec5d74e962a3e512860e6e",
+        "Saved/MPR/reference_v4/validation.json": "7631106659637064aae5386ff3e03dd5151bbf40d00706d04ddeb910d9d4a359"
+      },
+      "inspected_images": [
+        {
+          "label": "final",
+          "index": 0,
+          "path": "Saved/MPR/solar_motion/final/000_1793705009312540200.png",
+          "sha256": "6e3bf04c6cb17dcfff6fd28ee82e03ab2012ef05d03d957ee90abd757592babc",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 12,
+          "path": "Saved/MPR/solar_motion/final/012_1793705009312540200.png",
+          "sha256": "8a089ad0d8ffe20bff3f0291f82c2903009f1c35cb95f284c49ad389a45efd6b",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 36,
+          "path": "Saved/MPR/solar_motion/final/036_1793705009312540200.png",
+          "sha256": "8d83e0492054c9467f7b2d328a2d8b012d5e995cf21d4eb30b0939c783995d7f",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 56,
+          "path": "Saved/MPR/solar_motion/final/056_1793705009312540200.png",
+          "sha256": "15ec45043e9d917e2dae141b98b957a150abb7ed0a8ad47cb663a9c6c954bd60",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 57,
+          "path": "Saved/MPR/solar_motion/final/057_1793705009312540200.png",
+          "sha256": "280198f3801592c499607f850e07939595f6d3fa90c3a2518c5da1b604420365",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 58,
+          "path": "Saved/MPR/solar_motion/final/058_1793705009312540200.png",
+          "sha256": "a41817b3093b769f0e04c800c1db53ba7a1f20e33f03fe8d99e92729df341a01",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 59,
+          "path": "Saved/MPR/solar_motion/final/059_1793705009312540200.png",
+          "sha256": "08a00f7657ba58360148675090e1109bbe33ebcbae033b76a70031f8e1a0cab2",
+          "inspection": "contact sheet; original 1920x1080 additionally inspected for final59/final71/far11"
+        },
+        {
+          "label": "final",
+          "index": 60,
+          "path": "Saved/MPR/solar_motion/final/060_1793705009312540200.png",
+          "sha256": "0deb27f7ee5cabc0f71a241b74820c560944972b1553bd5045fa1d84f54181b2",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 61,
+          "path": "Saved/MPR/solar_motion/final/061_1793705009312540200.png",
+          "sha256": "44dd26fe6f1a66612eba07a690f956bf216beb7ff0b300e4d22a17156eef4ede",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 62,
+          "path": "Saved/MPR/solar_motion/final/062_1793705009312540200.png",
+          "sha256": "2893f321a65e720b19be90aaeb96bb43a989d8a6b4c97df8cf661722e381dfa3",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 70,
+          "path": "Saved/MPR/solar_motion/final/070_1793705009312540200.png",
+          "sha256": "687ef5e2ed38836cc12ae54380989403371efea0d7ed274331bbe0f7f44e2439",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 71,
+          "path": "Saved/MPR/solar_motion/final/071_1793705009312540200.png",
+          "sha256": "d4c01c80207a0cd3f7c87b19b28c5f7026ed5e751b5559ab4bbef1eea5c12438",
+          "inspection": "contact sheet; original 1920x1080 additionally inspected for final59/final71/far11"
+        },
+        {
+          "label": "final",
+          "index": 85,
+          "path": "Saved/MPR/solar_motion/final/085_1793705009312540200.png",
+          "sha256": "ff069aeb3fb62b88d5e0fd6fee52cdf8516f72ed8d33836b5fffe7f6e807dc65",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 86,
+          "path": "Saved/MPR/solar_motion/final/086_1793705009312540200.png",
+          "sha256": "1b994724f4dabcefd4cc13ae3d3b616e34bef1705e9466b333277f1c8db845d5",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 90,
+          "path": "Saved/MPR/solar_motion/final/090_1793705009312540200.png",
+          "sha256": "83b0b15eecd30f62f93fb9a387c632a1f024c8a882d54a38c2b48afce7e1e4f9",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "final",
+          "index": 95,
+          "path": "Saved/MPR/solar_motion/final/095_1793705009312540200.png",
+          "sha256": "035fa67e965e95b0969ee299221ab94e4e2635df697912b81a0cf36d91bb6e95",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "far",
+          "index": 0,
+          "path": "Saved/MPR/solar_motion/far/000_1793705072795617800.png",
+          "sha256": "b561eee7ded7540a033f0fbb012d906a0a750a59e814e1bcf7d996584087caae",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "far",
+          "index": 6,
+          "path": "Saved/MPR/solar_motion/far/006_1793705072795617800.png",
+          "sha256": "93c468466af3a35e739c5338b500364a973e63d4f0ba303eef01500e0ee9ed3c",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "far",
+          "index": 8,
+          "path": "Saved/MPR/solar_motion/far/008_1793705072795617800.png",
+          "sha256": "c142251b7df5f8820f3eeab550f82a7011ce395dd28fa8b02bc21bcbc8ed4a65",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "far",
+          "index": 10,
+          "path": "Saved/MPR/solar_motion/far/010_1793705072795617800.png",
+          "sha256": "62bbc0fc3be35366e9f004732314d44ce25edce1d8c8211eed5f3c48c7406a48",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "far",
+          "index": 11,
+          "path": "Saved/MPR/solar_motion/far/011_1793705072795617800.png",
+          "sha256": "d89ad98e8974c17dd683cdc8acae47c8d7c3edffce0c129eafde174228a31f5c",
+          "inspection": "contact sheet; original 1920x1080 additionally inspected for final59/final71/far11"
+        },
+        {
+          "label": "far",
+          "index": 12,
+          "path": "Saved/MPR/solar_motion/far/012_1793705072795617800.png",
+          "sha256": "572ec69391ac7b1958d1d4d4148ee5c2cfe34cae11a2b80e4a5ed64c2165ddc2",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "far",
+          "index": 15,
+          "path": "Saved/MPR/solar_motion/far/015_1793705072795617800.png",
+          "sha256": "6cb97b67c989602a041f16b7e200e9ccf882e5d79b53259b4f6f5a50aff5dd25",
+          "inspection": "contact sheet"
+        },
+        {
+          "label": "far",
+          "index": 23,
+          "path": "Saved/MPR/solar_motion/far/023_1793705072795617800.png",
+          "sha256": "6ca094285e7a8ca3a274d983cf06926d88078704d138bcb22e5e8148ff4279d8",
+          "inspection": "contact sheet"
+        }
+      ],
+      "analysis_strip_area_coverage_fraction": 1.0,
+      "observations_zh": [
+        "当前近中景下各SolarBank网格密度和亮度一致，旧版一半弱格、一半密白竖缝的明显断层未再出现。",
+        "56至62及85至86缩放采样中，细格随靠近逐渐出现，未见明显整块白闪、缺失板块或孔洞被填；近级框线仍存在，不等于完全没有子像素变化。",
+        "最近71原图可分辨独立矩形板块、细框与下部间隙，实际照片阶梯边界和贯通凹口保持。",
+        "far0/6/8/10/11/12/15/23显示拉远到1250m及返回过程中宏观孔与阵列保留，颜色没有明显整区突然变黑或变白。"
+      ],
+      "residuals_zh": [
+        "远景细格会转为连续蓝面，仍与实景照片的像素细节不同。",
+        "近景仍有细框与高频电池纹理，不能从固定姿态截图保证实时运动完全无闪烁。",
+        "实景注册有2.10m锚点残差；照片图钉遮挡处局部轮廓经过连续性推断。"
+      ],
+      "blocker_found_in_reviewed_samples": false,
+      "flicker_free_claim": false,
+      "limitations": [
+        "24 selected native pose samples inspected as contact sheets, with three original-size source images additionally inspected; not every frame manually reviewed.",
+        "Native configured LOD/material settings read back; actual selected LOD per frame was not instrumented.",
+        "0.15s pose settling is not continuous real-time video. Historical baseline lacks newly added south-array area; metrics describe shared blue support only."
+      ]
+    },
+    "flicker_free_claim": false,
+    "blocker_found_in_reviewed_samples": false
+  },
+  "limits": [
+    "All25 current static native images and exact calibrated crop were manually inspected. Motion inspection is limited to the11 explicitly listed native poses; another reviewer's24 samples are separate evidence.",
+    "Captures settle for0.15s at discrete camera poses; no continuous real-time video proof, frame-rate claim or zero-flicker claim follows from this review.",
+    "Camera registration and fixed ROI contrast support composition/tone checks, not perfect1:1 fidelity. Current PV shape follows the newer actual rooftop photo; the older render remains a style reference.",
+    "Spatial collision, ground support, actor counts and preserved-interior equality require the separately bound source/reload audits. Visual inspection alone is not exhaustive geometric verification.",
+    "Current reports/images are bound to map ea0eb9fd. Prior2b33 needs_revision observations remain archived and are not substituted as current evidence."
+  ]
 }

@@ -19,8 +19,18 @@ for row in m['meshes']:
  assert error<.0003,(row['name'],error)
  assert len(ob.data.uv_layers)==1,row['name']
  assert all(math.isfinite(c) for v in ob.data.vertices for c in v.co)
+ fade_audit=None
+ if row.get('vertex_color_fade'):
+  colors=ob.data.color_attributes.get('EdgeFade') or ob.data.color_attributes.active_color
+  assert colors and len(colors.data)>0,(row['name'],'Missing EdgeFade after FBX roundtrip')
+  values=[tuple(c.color) for c in colors.data]
+  assert all(all(math.isfinite(v) and -.0001<=v<=1.0001 for v in c) for c in values)
+  lo=min(c[0] for c in values);hi=max(c[0] for c in values)
+  assert lo<.005 and hi>.99,(row['name'],'Fade must include both road and grass endpoints',lo,hi)
+  assert max(max(c[:3])-min(c[:3]) for c in values)<.005,(row['name'],'RGB fade channel mismatch')
+  fade_audit=dict(attribute=colors.name,domain=colors.domain,color_count=len(values),range=[lo,hi],intermediate_color_count=sum(.005<c[0]<.99 for c in values))
  checks.append(dict(name=row['name'],triangles=len(ob.data.loop_triangles),source_triangles=row['triangles'],triangle_match=triangle_match,
-                    material_slots=len(row['material_roles']),bounds_error_m=error,minimum_triangle_area_m2=min(t.area for t in ob.data.loop_triangles)))
+                    material_slots=len(row['material_roles']),bounds_error_m=error,minimum_triangle_area_m2=min(t.area for t in ob.data.loop_triangles),vertex_color_fade=fade_audit))
 out=OUT/'validation_blender';out.mkdir(parents=True,exist_ok=True)
 (out/'site_fbx_validation.json').write_text(json.dumps(dict(success=all(r['triangle_match'] for r in checks),mesh_count=len(checks),checks=checks,
  source_manifest_sha256=hashlib.sha256((OUT/'site/manifest.json').read_bytes()).hexdigest(),max_bounds_error_m=max(r['bounds_error_m'] for r in checks),

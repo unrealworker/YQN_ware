@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "scope": "CPU AST execution of the actual road/water builder functions; not Blender or UE visual acceptance.",
+  "source_sha256": {
+    "Tools/MPRWarehouse/build_mpr_reference_v4_site.py": "6ddfad9239529ec2e6879e8b2a9735be3f62bb03802668e2c38ad5ca4b491f8c",
+    "Tools/MPRWarehouse/mpr_plan_site.py": "53a863daecdcb00d8d84c65aa923764ff469b0c4a21be1b57cdd9f788ba2f64e",
+    "SourceAssets/MPR/reference_v4/site/manifest.json": "2179263159f2a0c516b82f6de8bb0dd8f113b32ba5b00dd6735cd55aeff875ca",
+    "SourceAssets/MPR/reference_v4/context/manifest.json": "70e257dc3e7a2335998feed5aa4727b32bb6266bb620a4a42d780c0d3c616767",
+    "SourceAssets/MPR/mpr_cad_layout.json": "004f3923f292e0a60e22d677ff542e037a6cf248f6a27c348c068ecac4d9f349",
+    "SourceAssets/MPR/reference_v4/site/road_outline_v5.json": "a1593d2ae7d3194f1f68ade7a49a62798846a72db0b3b387dee7c3f5359033b7",
+    "SourceAssets/MPR/reference_v4/site/plan_landscape_islands_v5.json": "1f54750c8c7413d88bebf27b9c18f2a60233bb4d6a5567248df7c3a402281855",
+    "SourceAssets/MPR/reference_v4/site/plan_site_details_v5.json": "c41d1da50b1539ac9ea73866c3192b06535f587929262295f9b9563521e94533",
+    "SourceAssets/MPR/reference_v4/site/outside_road_connections_v5.json": "004c052b173b1fe051b10906efb7b903801afaf3bca590b6d7eb829b4640f0cd",
+    "SourceAssets/MPR/reference_v4/site/plan_registration_v5.json": "0abb1c238b01a6aee09d920d9746a44ab8ba25e1d8fbb0637355812c41861a21"
+  },
+  "checks": {
+    "road_overlap_m2": 0.0,
+    "portal_overlap_m2": 0.0,
+    "building_overlap_m2": 0.0,
+    "planting_paved_overlap_m2": 0.0,
+    "pond_water_changed_m2": 0.0,
+    "pond_walk_road_overlap_m2": 2.375814214010966e-15,
+    "pond_walk_water_overlap_m2": 0.0,
+    "parked_car_planting_overlap_m2": 0.0,
+    "pond_walk_preserved_tree_root_overlap_m2": 0.0,
+    "north_dock_apron_planting_overlap_m2": 0.0,
+    "north_dock_apron_unpaved_m2": 2.629665641073788e-14
+  },
+  "terminal_emitted_road_coverage_error_m2": 0.0,
+  "terminal_surface_pieces": 2371,
+  "terminal_color_ranges": {
+    "MPR4_TerminalAsphalt": [
+      0.0,
+      1.0
+    ],
+    "MPR4_TerminalCurb": [
+      0.0,
+      1.0
+    ],
+    "MPR4_TerminalWhiteLine": [
+      0.0,
+      1.0
+    ]
+  },
+  "campus_planting_area_m2": 6453.712292362592,
+  "main_parcel_green_fraction": 0.044216830874963656,
+  "parking_cars": 25,
+  "pond_walk_repair": {
+    "source_area_m2": 3686.5669505842047,
+    "filled_envelope_area_m2": 3887.9514704996504,
+    "walk_area_m2": 1540.7857042072746,
+    "water_outline_changed": false,
+    "paved_overlap_m2": 2.375814214010966e-15
+  },
+  "open_access_portals": 4
+}

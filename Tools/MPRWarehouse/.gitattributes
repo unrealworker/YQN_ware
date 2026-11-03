@@ -1,3 +1,15 @@
 # Preserve source bytes referenced by the formal geometry audit SHA-256 values.
 build_mpr_reference_v4_site.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
 mpr_plan_site.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+build_mpr_reference_shell_v4.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+mpr_reference_shell_v4_lib.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+capture_mpr_solar_motion.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+capture_mpr_solar_far.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+review_mpr_solar_motion.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+profile_mpr_runtime.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+validate_mpr_outside_roads.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+build_mpr_reference_site.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+capture_mpr_detail_views.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+mpr_transport_v6_geometry.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+validate_mpr_campus_surfaces.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+extract_mpr_plan_solar.py -text whitespace=trailing-space,space-before-tab,cr-at-eol

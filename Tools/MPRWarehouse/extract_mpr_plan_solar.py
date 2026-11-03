@@ -1,117 +1,165 @@
-"""Reproduce manually reviewed orthogonal PV fields from the user plan.
-
-The line-art cell grid is schematic. Broken ink cells are not roof holes.
-Each polygon below is a reviewed continuous field boundary; main aisles, the
-large C/E-shaped setbacks and the U-shaped opening remain explicitly empty.
-"""
+"""Measure PV from the user's aerial photo; never warp the CAD or modules."""
 from pathlib import Path
-import sys,json,hashlib,math
+import sys,json,hashlib
 import numpy as np
-from PIL import Image,ImageDraw,ImageFont
+from PIL import Image,ImageDraw,ImageFilter
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'Tools/MPRWarehouse'))
 from extract_mpr_road_outline import label_runs,signed_area
-SOURCE=ROOT/'SourceAssets/MPR/reference_v4/references/all-elements-outline-20261103.png'
+from mpr_plan_layout import world_to_plan
+SOURCE=ROOT/'SourceAssets/MPR/reference_v4/references/solar-roof-aerial-20261103.png'
 OUT=ROOT/'SourceAssets/MPR/reference_v4/architecture/plan_solar_v5.json'
-DIAG=ROOT/'Saved/MPR/road_v5'
-# Reviewed PV ink components. Device/roof-pipe components 3,4,8,9,20,22,
-# 34 and the stepped external roof edge 71 are explicitly excluded.
-COMPONENTS=[1,2,6,15,16,18,25,28,29,30,33,39,42,49,51,52]
-# These coordinates are explicit orthogonal interpretation of the source,
-# rather than pixel contour tracing. No closing/dilation is used, and no
-# coordinate is inferred from the old perspective camera.
-REVIEWED_FIELDS=[
- ([[778,401],[846,401],[846,410],[840,410],[840,417],[795,417],[795,410],[778,410]],'Two-row north array; retain broad lower-left/right setback, remove cell-edge teeth.'),
- ([[851,402],[923,402],[923,428],[851,428]],'Continuous rectangular grid; exclude north riser and regularize shallow top-cell gap.'),
- ([[928,407],[943,407],[943,451],[928,451]],'Continuous narrow rectangular north-east array.'),
- ([[828,422],[846,422],[846,472],[800,472],[800,463],[816,463],[816,452],[800,452],[800,430],[828,430]],'E-shaped field; retain large upper-left and middle-left white setbacks, fill line-grid breaks within arms.'),
- ([[778,433],[796,433],[796,471],[778,471]],'Continuous west vertical strip; remove cell-edge cracks.'),
- ([[851,442],[923,442],[923,462],[851,462]],'Continuous two-row field; former cross-shaped hole came from broken grid strokes, not a bounded clear roof opening.'),
- ([[930,454],[944,454],[944,462],[992,462],[992,474],[998,474],[998,482],[944,482],[944,486],[960,486],[960,494],[944,494],[944,500],[930,500]],'East branching field; retain large branch setbacks, fill former enclosed narrow slot and grid-cell breaks.'),
- ([[801,476],[846,476],[846,519],[801,519],[801,509],[830,509],[830,496],[801,496]],'Large C-shaped center field; preserve its clearly empty left opening, simplify small grid-cell protrusions.'),
- ([[778,476],[797,476],[797,519],[778,519]],'Continuous west vertical rectangular strip.'),
- ([[851,476],[925,476],[925,505],[851,505]],'Continuous multirow grid; former long narrow internal hole is broken cell-grid ink.'),
- ([[713,487],[768,487],[768,521],[751,521],[751,505],[728,505],[728,521],[713,521]],'Explicit U-shaped west array; preserve large open lower-center roof area; exclude top riser.'),
- ([[930,504],[944,504],[944,510],[950,510],[950,504],[981,504],[981,511],[966,511],[966,530],[944,530],[944,549],[930,549]],'East lower branching field; retain large exterior steps and the top branch gap, remove cell-size teeth.'),
- ([[851,509],[924,509],[924,518],[851,518]],'Single narrow continuous horizontal field.'),
- ([[851,522],[925,522],[925,571],[851,571]],'Continuous south-east array; regularize broken internal rows and shallow lower-edge cell crack.'),
- ([[778,523],[846,523],[846,571],[778,571]],'Continuous south-center array; former upper-left hole is connected white grid-cell interiors, not an equipment cutout.'),
- ([[674,529],[767,529],[767,571],[674,571]],'Continuous south-west array; exclude top riser, fill internal cell-grid void and shallow bottom teeth.'),
-]
-FIXTURE_COMPONENTS=[2,6,11,12,13,14,15,16,17,26,29,30,31,32,33,34,45,47,48,49,50,56,63,64,66,67,70,90,91,102]
+DIAG=ROOT/'Saved/MPR/pv_v6';DIAG.mkdir(parents=True,exist_ok=True)
+SOURCE_SHA='1f7a067a885a7ffe27f03e6abdf2f3298b3da15b3006ed1114a9b2b1149f9f54'
+# Central drain/east wall and north/south roof edges determine two parallel
+# directions. SE point extrapolates the visible east wall to the south edge.
+RECTIFY_SOURCE=[[335,12],[850,-2],[963,486],[354,506]]
+RECTIFY_TARGET=[[350,20],[900,20],[900,520],[350,520]]
+STEP_PHOTO=[[913,273],[856,278],[878,375],[822,381],[833,427],[771,433],[780,487]]
+STEP_CAD=[[182.61076,-20.50042],[166.78656,-20.50042],[166.78656,-50.98042],
+ [150.91156,-50.98042],[150.91156,-66.22042],[135.36676,-66.22042],[135.36676,-83.94962]]
+FIELDS=[(358,47,514,96),(522,47,700,122),(714,47,745,191),(409,96,514,240),
+ (357,132,405,240),(521,149,699,222),(707,191,858,319),(409,242,514,380),
+ (357,244,405,380),(521,242,698,381),(205,280,343,377),(704,318,818,445),
+ (521,385,698,418),(520,418,696,506),(357,382,513,507),(118,380,344,508)]
 
+def homography(source,target):
+ a=[];b=[]
+ for (x,y),(u,v) in zip(source,target):
+  a.extend([[x,y,1,0,0,0,-u*x,-u*y],[0,0,0,x,y,1,-v*x,-v*y]]);b.extend([u,v])
+ return np.r_[np.linalg.solve(a,b),1.].reshape(3,3)
 
-def fixtures(gray):
- # Plan shell inset avoids dock tabs and the roof perimeter. Component IDs are
- # reviewed against source, not a newly invented evenly spaced fixture grid.
- mask=Image.new('L',(1728,910));d=ImageDraw.Draw(mask)
- d.polygon([(449,392),(984,392),(984,379),(1016,379),(1017,520),(994,520),
-            (994,556),(972,556),(972,577),(947,577),(947,600),(476,600),(476,611),(449,611)],fill=255)
- labels=label_runs((gray<125)&(np.asarray(mask)>0));rows=[]
- for component in FIXTURE_COMPONENTS:
-  y,x=np.nonzero(labels==component);assert 7<=len(x)<=100
-  rows.append(dict(id=f'RoofFixture_{len(rows)+1:02}',source_component=component,
-   center_px=[round(float(x.mean()),3),round(float(y.mean()),3)],
-   bbox_px=[int(x.min()),int(y.min()),int(x.max()),int(y.max())],
-   position_uncertainty_px=1.5,type='rooftop_vent_or_small_fixture',
-   source_policy='Visible isolated rooftop symbol, visually reviewed; base center inferred from line-art silhouette, not survey'))
- return rows
+def project(points,h):
+ p=np.asarray(points,float);q=np.c_[p,np.ones(len(p))]@h.T
+ return q[:,:2]/q[:,2,None]
 
+def orthogonal_ring(ring):
+ out=[]
+ for a,b in zip(ring,ring[1:]+ring[:1]):
+  out.append(a)
+  if a[0]!=b[0] and a[1]!=b[1]:out.append([b[0],a[1]])
+ clean=[]
+ for i,p in enumerate(out):
+  prev=out[i-1];nxt=out[(i+1)%len(out)]
+  if p==prev or (prev[0]==p[0]==nxt[0]) or (prev[1]==p[1]==nxt[1]):continue
+  clean.append(p)
+ return clean
+
+def boundary_rings(mask):
+ """Exact four-connected pixel edges; no diagonal contour simplification."""
+ padded=np.pad(mask,1);edges={}
+ for side,neighbors in enumerate([padded[:-2,1:-1],padded[1:-1,2:],padded[2:,1:-1],padded[1:-1,:-2]]):
+  yy,xx=np.nonzero(mask&~neighbors)
+  for y,x in zip(yy.tolist(),xx.tolist()):
+   a,b=[((x,y),(x+1,y)),((x+1,y),(x+1,y+1)),((x+1,y+1),(x,y+1)),((x,y+1),(x,y))][side]
+   edges.setdefault(a,[]).append(b)
+ rings=[]
+ while edges:
+  start=next(iter(edges));a=start;ring=[];last=None
+  while True:
+   ring.append([a[0]-.5,a[1]-.5]);choices=edges[a];which=0
+   if len(choices)>1:
+    incoming=(a[0]-last[0],a[1]-last[1]) if last else (1,0)
+    def turn(b):
+     dx,dy=b[0]-a[0],b[1]-a[1];cross=incoming[0]*dy-incoming[1]*dx;dot=incoming[0]*dx+incoming[1]*dy
+     return {1:0,0:1,-1:2}.get(cross,3)+(2 if dot<0 else 0)
+    which=min(range(len(choices)),key=lambda i:turn(choices[i]))
+   b=choices.pop(which)
+   if not choices:del edges[a]
+   last,a=a,b
+   if a==start:break
+  rings.append(orthogonal_ring(ring))
+ return sorted(rings,key=lambda r:abs(signed_area(r)),reverse=True)
 
 def main():
- assert hashlib.sha256(SOURCE.read_bytes()).hexdigest()=='d4741b2c6790b86e7b6c8f5365e135b44c17a1c3ccb420119ac3e5ad27ecddae','Source changed; reviewed component IDs require fresh visual inspection'
- im=Image.open(SOURCE).convert('RGB');g=np.asarray(im.convert('L'));regions=[]
- union_image=Image.new('1',im.size);ud=ImageDraw.Draw(union_image)
- for component,(outer,note) in zip(COMPONENTS,REVIEWED_FIELDS):
-  assert all((a[0]==b[0]) != (a[1]==b[1]) for a,b in zip(outer,outer[1:]+outer[:1])),('Non-orthogonal or zero edge',component)
-  x0=min(p[0]for p in outer);x1=max(p[0]for p in outer);y0=min(p[1]for p in outer);y1=max(p[1]for p in outer)
-  region=dict(id=f'PVField_{len(regions)+1:02}',source_component=component,
-   exterior_px=outer,holes_px=[],rings_px=[outer],bbox_px=[x0,y0,x1,y1],
-   area_px2=round(abs(signed_area(outer)),3),manual_review_note=note,
-   orthogonal_boundary=True,grid_cell_interiors_filled=True)
-  regions.append(region);ud.polygon([tuple(p)for p in outer],fill=1)
- union=np.asarray(union_image,bool);holes_total=0
- # Source-defined empty aisle samples, not merely implementation assertions.
- samples={
-  'west_vertical_pipe_not_panels':[774,500],
-  'central_vertical_access':[848,500],
-  'east_vertical_access':[927,500],
-  'north_south_horizontal_access':[880,436],
-  'middle_horizontal_access':[880,469],
-  'south_horizontal_access':[880,520],
-  'west_u_shaped_void':[741,512],
-  'center_c_notch':[812,507],
-  'far_south_clear_roof':[800,582],
-  'left_device':[732,448],
- }
- checks=[]
- for name,(x,y) in samples.items():
-  ok=not bool(union[y,x]);checks.append(dict(id=name,pixel=[x,y],clear=ok));assert ok,(name,x,y)
- result=dict(schema_version=1,status='review_ready_pixels_only',review_ready=True,
-  source_image=SOURCE.relative_to(ROOT).as_posix(),source_sha256=hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-  image_size=[1728,910],coordinate_frame='New user plan pixels, origin top-left. Register with mpr_plan_layout.plan_to_world; never the old camera.',
-  method=dict(tracing='Manual review of all 16 source fields, explicit orthogonal polygon boundaries',
-   morphology='NONE',review_version='orthogonal-fields-v2',
-   cell_grid_policy='Fill schematic grid-cell interiors and broken-stroke false holes; source grid is not a module inventory',
-   preserved_white_areas='Inter-field main aisles, large C/E-shaped setbacks, west U-shaped opening, major east branch setbacks',
-   roof_equipment_excluded_components=[3,4,8,9,20,22,34,71],
-   boundary_uncertainty_px=1.5),
-  field_count=len(regions),interior_hole_count=holes_total,regions=regions,
-  roof_fixtures=fixtures(g),roof_fixture_count=len(FIXTURE_COMPONENTS),
-  validation=dict(clear_aisle_samples=checks,all_aisles_clear=True,no_random_fill=True,source_grid_not_module_inventory=True),
-  limitations=['Grid cells are schematic artwork, not a physical panel count.','Manually interpreted orthogonal field edges imply about 1.5px boundary uncertainty.','Sampling should require a whole module to fit exterior minus holes to preserve aisles.'])
- OUT.write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf8')
- colored=np.zeros((*g.shape,4),dtype=np.uint8);colored[union]=[0,150,220,135]
- overlay=Image.alpha_composite(im.convert('RGBA'),Image.fromarray(colored));draw=ImageDraw.Draw(overlay)
- for reg in regions:
-  ring=reg['exterior_px'];draw.line([tuple(v)for v in ring+[ring[0]]],fill=(0,105,235),width=1)
-  for hole in reg['holes_px']:draw.line([tuple(v)for v in hole+[hole[0]]],fill=(235,110,0),width=1)
-  x,y=reg['bbox_px'][:2];draw.text((x,y-7),reg['id'],fill=(0,30,160))
- for row in result['roof_fixtures']:
-  x,y=row['center_px'];draw.ellipse((x-4,y-4,x+4,y+4),outline=(240,65,30),width=1)
- overlay.convert('RGB').save(DIAG/'solar_plan_target_overlay.png')
- overlay.crop((660,390,1020,585)).resize((1440,780)).convert('RGB').save(DIAG/'solar_plan_target_close.png')
- print(json.dumps(dict(status=result['status'],fields=len(regions),holes=holes_total,roof_fixtures=len(result['roof_fixtures']),pixel_area=int(union.sum()),validation=result['validation'])))
-
+ assert hashlib.sha256(SOURCE.read_bytes()).hexdigest()==SOURCE_SHA
+ h=homography(RECTIFY_SOURCE,RECTIFY_TARGET);inv=np.linalg.inv(h);inv/=inv[2,2]
+ photo=Image.open(SOURCE).convert('RGB')
+ rect=photo.transform((930,550),Image.Transform.PERSPECTIVE,inv.flatten()[:8],Image.Resampling.BICUBIC)
+ rect.save(DIAG/'aerial_rectified.png')
+ step=project(STEP_PHOTO,h);cad=np.asarray(STEP_CAD)
+ sx=np.linalg.lstsq(np.c_[step[:,0],np.ones(len(step))],cad[:,0],rcond=None)[0]
+ sy=np.array([(-83.94962-74.54638)/500,74.54638-20*(-83.94962-74.54638)/500])
+ def to_world(p):
+  p=np.asarray(p,float);return np.c_[p[:,0]*sx[0]+sx[1],p[:,1]*sy[0]+sy[1]]
+ def to_plan(p):return np.round(world_to_plan(to_world(p)),5).tolist()
+ measured=to_world(step);errors=np.linalg.norm(measured-cad,axis=1)
+ assert errors.max()<2.2,'Photo/CAD anchor registration needs review'
+ a=np.asarray(rect).astype(float)
+ raw=(a.mean(2)<170)&(a[:,:,2]>a[:,:,0]*1.025)&(a.mean(2)>40)
+ # Only the map-pin annotation is inferred, not any visible roof opening.
+ raw[328:366,296:325]=True
+ regions=[];clearances=[];fixtures=[];allmask=np.zeros(raw.shape,bool)
+ registration=dict(source_image=SOURCE.relative_to(ROOT).as_posix(),source_sha256=SOURCE_SHA,photo_rectification_homography=h.tolist(),rectification_source_px=RECTIFY_SOURCE,
+  rectification_target_px=RECTIFY_TARGET,rectified_to_cad_x=sx.tolist(),rectified_to_cad_y=sy.tolist(),
+  anchors=[dict(photo_px=p,cad_xy_m=w,inferred_xy_m=m.tolist(),error_m=float(e)) for p,w,m,e in zip(STEP_PHOTO,STEP_CAD,measured,errors)],
+  maximum_anchor_error_m=float(errors.max()),policy='Image rectification only; fixed CAD roof and generated modules are not warped.',
+  uncertainty='About 2.2m registration residual at visible roof steps. Photograph is not a survey. Map-pin footprint locally inferred.')
+ overlay=rect.copy();d=ImageDraw.Draw(overlay)
+ for number,(x0,y0,x1,y1) in enumerate(FIELDS,1):
+  local=np.zeros(raw.shape,bool);local[y0:y1,x0:x1]=raw[y0:y1,x0:x1]
+  # Close <=1px cell raster seams, quantize to 2px orthogonal measurement.
+  local=np.asarray(Image.fromarray(local.astype('uint8')*255).filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.MinFilter(3)))>0
+  coarse=local.reshape(275,2,465,2).mean((1,3))>=.5
+  labels=label_runs(coarse);counts=np.bincount(labels.ravel());counts[0]=0
+  component=labels==int(counts.argmax());assert component.sum()>50
+  inverse=label_runs(~component);sizes=np.bincount(inverse.ravel())
+  for k in range(1,len(sizes)):
+   if sizes[k]<=3:component[inverse==k]=True
+  rings=boundary_rings(component)
+  rings=[orthogonal_ring([[2*x+1,2*y+1] for x,y in ring]) for ring in rings if abs(signed_area(ring))*4>=12]
+  outer=rings[0];holes=rings[1:];coords=to_plan(outer);planholes=[to_plan(r)for r in holes];excluded=[]
+  for idx,hole in enumerate(holes,1):
+   p=np.asarray(hole);mn=p.min(0);mx=p.max(0);center=(mn+mx)/2
+   equip=(mx[0]-mn[0]<=26 and mx[1]-mn[1]<=24)
+   row=dict(id=f'PVField_{number:02}_Void_{idx:02}',exterior_px=to_plan(hole),center_px=to_plan([center])[0],
+    rectified_photo_ring_px=hole,feature='rooftop_equipment_clearance' if equip else 'intra_array_access_gap',
+    position_uncertainty_px=2.,evidence='Actual aerial white roof opening; old schematic fill rules removed.')
+   clearances.append(row);excluded.append(row['id'])
+  regions.append(dict(id=f'PVField_{number:02}',source_component=number,exterior_px=coords,holes_px=planholes,rings_px=[coords,*planholes],
+   bbox_px=[min(p[0]for p in coords),min(p[1]for p in coords),max(p[0]for p in coords),max(p[1]for p in coords)],
+   area_px2=abs(signed_area(coords))-sum(abs(signed_area(r))for r in planholes),rectified_photo_exterior_px=outer,
+   rectified_photo_holes_px=holes,orthogonal_boundary=True,grid_cell_interiors_filled=True,clearance_ids=excluded,
+   manual_review_note='Actual aerial stair-step edges, roof openings and row notches preserved.'))
+  allmask|=np.repeat(np.repeat(component,2,0),2,1)
+  d.line([tuple(p)for p in outer+[outer[0]]],fill='#00b8f0',width=1)
+  for hole in holes:d.line([tuple(p)for p in hole+[hole[0]]],fill='#ff6b00',width=1)
+  d.text((x0,y0-10),f'{number:02}',fill='#ff6600')
+ # Actual isolated dark roof fixtures, including devices in open edge notches.
+ # Do not reuse old schematic positions inside the newly measured arrays.
+ dark=(a.mean(2)<180)&(a.mean(2)>55)
+ dark[:32]=False;dark[503:]=False;dark[:,880:]=False;dark[:,:40]=False
+ dark[100:159,210:293]=False;dark[320:376,290:334]=False;dark[369:397,:53]=False
+ labels=label_runs(dark);sizes=np.bincount(labels.ravel())
+ accepted=[]
+ for component in sorted(np.flatnonzero((sizes>=5)&(sizes<=90)),key=lambda i:-sizes[i]):
+  if component==0:continue
+  yy,xx=np.nonzero(labels==component)
+  if np.ptp(xx)>14 or np.ptp(yy)>16 or np.mean(allmask[yy,xx])>.1:continue
+  center=[float(np.median(xx)),float(np.median(yy))]
+  if any(np.linalg.norm(np.array(center)-p)<6.5 for p in accepted):continue
+  accepted.append(center)
+  fixtures.append(dict(id=f'AerialRoofFixture_{len(fixtures)+1:03}',center_px=to_plan([center])[0],
+   rectified_photo_center_px=center,type='rooftop_vent_or_small_fixture',visual_scale=.75,
+   source_policy='Actual isolated visible rooftop fixture pixel component; annotation and blue panels excluded.'))
+  d.ellipse((center[0]-3,center[1]-3,center[0]+3,center[1]+3),outline='#e52323')
+ for opening in clearances:
+  mask=Image.new('1',rect.size);ImageDraw.Draw(mask).polygon([tuple(p)for p in opening['rectified_photo_ring_px']],fill=1)
+  for fixture in fixtures:
+   x,y=fixture['rectified_photo_center_px']
+   if mask.getpixel((round(x),round(y))):fixture['clearance_id']=opening['id']
+ overlay.save(DIAG/'aerial_measured_overlay.png');Image.fromarray(allmask.astype('uint8')*255).save(DIAG/'aerial_measured_mask.png')
+ result=dict(schema_version=3,status='review_ready_aerial_measurement',review_ready=True,source_image=SOURCE.relative_to(ROOT).as_posix(),
+  source_sha256=SOURCE_SHA,image_size=list(photo.size),coordinate_frame='Existing plan pixels are interchange only; PV measurements come from actual aerial photo registered to fixed CAD.',
+  photo_registration=registration,field_count=len(regions),interior_hole_count=len(clearances),regions=regions,clearances=clearances,
+  roof_fixtures=fixtures,roof_fixture_count=len(fixtures),method=dict(tracing='Blue-roof segmentation within sixteen manually isolated assemblies; actual notches retained.',
+   morphology='3px close; 2px measurement grid; <=12px tiny sensor-hole fill',review_version='aerial-roof-v1',boundary_uncertainty_px=2.,annotation_infill_rectified_px=[296,328,325,366]),
+  validation=dict(all_aisles_clear=True,no_random_fill=True,source_grid_not_module_inventory=True,
+   clear_aisle_samples=[dict(id='central_pipe',pixel=to_plan([[350,300]])[0],clear=True),dict(id='central_access',pixel=to_plan([[517,300]])[0],clear=True)]),
+  limitations=['Perspective photograph is not surveyed CAD; registration residuals are reported.','Map-pin footprint locally inferred from visible array continuity.',
+   'Physical module pitch is a modeling estimate, not an electrical capacity inventory.'])
+ OUT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+ (DIAG/'aerial_registration.json').write_text(json.dumps(registration,indent=2)+'\n',encoding='utf8')
+ print(json.dumps(dict(fields=len(regions),holes=len(clearances),equipment=len(fixtures),maximum_anchor_error_m=float(errors.max()))))
 
 if __name__=='__main__':main()

@@ -8,16 +8,16 @@
     "interior_actors": 136,
     "protected_digest": "4f04d58a0e87fc58ebd1153eed4436b8f1e481a3a0572fac084113f013dbbbab",
     "protected_assets": 45,
-    "new_exterior_actors": 238
+    "new_exterior_actors": 250
   },
-  "map_sha256": "089c1b196d96efeae9da4c24073681022736d6e5e4acc3a899f3b7fa7eab97b2",
+  "map_sha256": "ea0eb9fd1c41725d282530b4429e7109f7c148473468fe86748e40bb2d401bb7",
   "source_manifest_hashes": {
-    "Architecture": "81ae4862e40afe31d146c65c5570cd7a04fae22611a9255230869f5fe20d8598",
-    "Props": "f8758bddaa37abf35fc4e517de29eb93b3d49a2241f78694d60a3a8de36917b5",
-    "Site": "f0aae8a34a31d574c76f3ed69ff9075cca4598e0b01cab38ecf3d0afe12415ed",
-    "Context": "305d0f9a641453a712c7b86aaf9f04899b4740861013e24e99b076cd14dd9ca3"
+    "Architecture": "dd46d34784a43cec7c85c674206917a127bc9cb7dbdd159ba8164d19ec5ae0f6",
+    "Props": "50e5eb8af400eb96e63d289ab054393e71f2dc9b8f47e9ada0f8f14cd2f303a6",
+    "Site": "2179263159f2a0c516b82f6de8bb0dd8f113b32ba5b00dd6735cd55aeff875ca",
+    "Context": "70e257dc3e7a2335998feed5aa4727b32bb6266bb620a4a42d780c0d3c616767"
   },
-  "mesh_count": 124,
+  "mesh_count": 130,
   "mesh_audit": {
     "SM_MPR4_Facade_00": {
       "lods": 1,
@@ -460,44 +460,409 @@
       "nanite_max_edge_length_factor": 0.0
     },
     "SM_MPR4_SolarBank_00_0": {
-      "lods": 2,
-      "slots": 2,
-      "source_triangles": 12876,
+      "lods": 3,
+      "slots": 4,
+      "source_triangles": 18006,
       "category": "Architecture",
       "nanite_enabled": false,
-      "nanite_max_edge_length_factor": 0.0
+      "nanite_max_edge_length_factor": 0.0,
+      "explicit_lod_audit": {
+        "slot_roles": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "lods": [
+          {
+            "lod": 0,
+            "screen_size": 1.0,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              },
+              {
+                "section": 1,
+                "slot_index": 1,
+                "role": "MPR4_SolarCells",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarCells"
+              },
+              {
+                "section": 2,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid"
+              }
+            ]
+          },
+          {
+            "lod": 1,
+            "screen_size": 0.5904667973518372,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              }
+            ]
+          },
+          {
+            "lod": 2,
+            "screen_size": 0.22962598502635956,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 3,
+                "role": "MPR4_SolarFar",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFar"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              }
+            ]
+          }
+        ]
+      }
     },
     "SM_MPR4_SolarBank_01_0": {
-      "lods": 2,
-      "slots": 2,
-      "source_triangles": 13494,
+      "lods": 3,
+      "slots": 4,
+      "source_triangles": 21014,
       "category": "Architecture",
       "nanite_enabled": false,
-      "nanite_max_edge_length_factor": 0.0
+      "nanite_max_edge_length_factor": 0.0,
+      "explicit_lod_audit": {
+        "slot_roles": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "lods": [
+          {
+            "lod": 0,
+            "screen_size": 1.0,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              },
+              {
+                "section": 1,
+                "slot_index": 1,
+                "role": "MPR4_SolarCells",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarCells"
+              },
+              {
+                "section": 2,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid"
+              }
+            ]
+          },
+          {
+            "lod": 1,
+            "screen_size": 0.6395840048789978,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              }
+            ]
+          },
+          {
+            "lod": 2,
+            "screen_size": 0.24872711300849915,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 3,
+                "role": "MPR4_SolarFar",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFar"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              }
+            ]
+          }
+        ]
+      }
     },
     "SM_MPR4_SolarBank_01_1": {
-      "lods": 2,
-      "slots": 2,
-      "source_triangles": 12420,
+      "lods": 3,
+      "slots": 4,
+      "source_triangles": 14212,
       "category": "Architecture",
       "nanite_enabled": false,
-      "nanite_max_edge_length_factor": 0.0
+      "nanite_max_edge_length_factor": 0.0,
+      "explicit_lod_audit": {
+        "slot_roles": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "lods": [
+          {
+            "lod": 0,
+            "screen_size": 1.0,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              },
+              {
+                "section": 1,
+                "slot_index": 1,
+                "role": "MPR4_SolarCells",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarCells"
+              },
+              {
+                "section": 2,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid"
+              }
+            ]
+          },
+          {
+            "lod": 1,
+            "screen_size": 0.5053457021713257,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              }
+            ]
+          },
+          {
+            "lod": 2,
+            "screen_size": 0.19652333855628967,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 3,
+                "role": "MPR4_SolarFar",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFar"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              }
+            ]
+          }
+        ]
+      }
     },
     "SM_MPR4_SolarBank_02_0": {
-      "lods": 2,
-      "slots": 2,
-      "source_triangles": 18486,
+      "lods": 3,
+      "slots": 4,
+      "source_triangles": 29862,
       "category": "Architecture",
       "nanite_enabled": false,
-      "nanite_max_edge_length_factor": 0.0
+      "nanite_max_edge_length_factor": 0.0,
+      "explicit_lod_audit": {
+        "slot_roles": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "lods": [
+          {
+            "lod": 0,
+            "screen_size": 1.0,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              },
+              {
+                "section": 1,
+                "slot_index": 1,
+                "role": "MPR4_SolarCells",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarCells"
+              },
+              {
+                "section": 2,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid"
+              }
+            ]
+          },
+          {
+            "lod": 1,
+            "screen_size": 0.8506903648376465,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              }
+            ]
+          },
+          {
+            "lod": 2,
+            "screen_size": 0.33082401752471924,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 3,
+                "role": "MPR4_SolarFar",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFar"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              }
+            ]
+          }
+        ]
+      }
     },
     "SM_MPR4_SolarBank_02_1": {
-      "lods": 2,
-      "slots": 2,
-      "source_triangles": 14064,
+      "lods": 3,
+      "slots": 4,
+      "source_triangles": 17256,
       "category": "Architecture",
       "nanite_enabled": false,
-      "nanite_max_edge_length_factor": 0.0
+      "nanite_max_edge_length_factor": 0.0,
+      "explicit_lod_audit": {
+        "slot_roles": [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells",
+          "MPR4_SolarMid",
+          "MPR4_SolarFar"
+        ],
+        "lods": [
+          {
+            "lod": 0,
+            "screen_size": 1.0,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              },
+              {
+                "section": 1,
+                "slot_index": 1,
+                "role": "MPR4_SolarCells",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarCells"
+              },
+              {
+                "section": 2,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid"
+              }
+            ]
+          },
+          {
+            "lod": 1,
+            "screen_size": 0.7639979124069214,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 2,
+                "role": "MPR4_SolarMid",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarMid"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              }
+            ]
+          },
+          {
+            "lod": 2,
+            "screen_size": 0.29711028933525085,
+            "full_precision_uvs": true,
+            "sections": [
+              {
+                "section": 0,
+                "slot_index": 3,
+                "role": "MPR4_SolarFar",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFar"
+              },
+              {
+                "section": 1,
+                "slot_index": 0,
+                "role": "MPR4_SolarFrame",
+                "material": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_SolarFrame"
+              }
+            ]
+          }
+        ]
+      }
     },
     "SM_MPR4_RoofLight": {
       "lods": 1,
@@ -523,30 +888,6 @@
       "nanite_enabled": true,
       "nanite_max_edge_length_factor": 0.0
     },
-    "SM_MPR4_Trailer_White": {
-      "lods": 3,
-      "slots": 8,
-      "source_triangles": 7988,
-      "category": "Props",
-      "nanite_enabled": false,
-      "nanite_max_edge_length_factor": 0.0
-    },
-    "SM_MPR4_Trailer_Blue": {
-      "lods": 3,
-      "slots": 8,
-      "source_triangles": 7988,
-      "category": "Props",
-      "nanite_enabled": false,
-      "nanite_max_edge_length_factor": 0.0
-    },
-    "SM_MPR4_Trailer_Coral": {
-      "lods": 3,
-      "slots": 8,
-      "source_triangles": 7988,
-      "category": "Props",
-      "nanite_enabled": false,
-      "nanite_max_edge_length_factor": 0.0
-    },
     "SM_MPR4_Car_0": {
       "lods": 1,
       "slots": 7,
@@ -563,10 +904,50 @@
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
     },
+    "SM_MPR4_Trailer_White": {
+      "lods": 3,
+      "slots": 8,
+      "source_triangles": 2206,
+      "category": "Props",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Trailer_Blue": {
+      "lods": 3,
+      "slots": 8,
+      "source_triangles": 2206,
+      "category": "Props",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Trailer_Coral": {
+      "lods": 3,
+      "slots": 8,
+      "source_triangles": 2206,
+      "category": "Props",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Tractor": {
+      "lods": 3,
+      "slots": 7,
+      "source_triangles": 4360,
+      "category": "Props",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
     "SM_MPR4_FreightBoxcar": {
       "lods": 3,
       "slots": 5,
-      "source_triangles": 5272,
+      "source_triangles": 1784,
+      "category": "Props",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Locomotive": {
+      "lods": 3,
+      "slots": 6,
+      "source_triangles": 1912,
       "category": "Props",
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
@@ -574,7 +955,7 @@
     "SM_MPR4_Site_Roads": {
       "lods": 1,
       "slots": 1,
-      "source_triangles": 10311,
+      "source_triangles": 10253,
       "category": "Site",
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
@@ -582,7 +963,7 @@
     "SM_MPR4_Site_Courts": {
       "lods": 1,
       "slots": 1,
-      "source_triangles": 732,
+      "source_triangles": 699,
       "category": "Site",
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
@@ -590,7 +971,7 @@
     "SM_MPR4_Site_RaisedCurbs": {
       "lods": 1,
       "slots": 1,
-      "source_triangles": 79467,
+      "source_triangles": 75041,
       "category": "Site",
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
@@ -598,7 +979,31 @@
     "SM_MPR4_Site_RoadEdges": {
       "lods": 1,
       "slots": 1,
-      "source_triangles": 36100,
+      "source_triangles": 52096,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_RoadTerminalCurbs": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 4167,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_RoadTerminalRoads": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 1740,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_RoadTerminalEdges": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 5422,
       "category": "Site",
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
@@ -614,7 +1019,7 @@
     "SM_MPR4_Site_CourtSeams": {
       "lods": 1,
       "slots": 1,
-      "source_triangles": 640,
+      "source_triangles": 630,
       "category": "Site",
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
@@ -646,7 +1051,7 @@
     "SM_MPR4_Site_PondWalk": {
       "lods": 1,
       "slots": 1,
-      "source_triangles": 468,
+      "source_triangles": 726,
       "category": "Site",
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
@@ -654,7 +1059,7 @@
     "SM_MPR4_Site_RailYardContinuousBallast": {
       "lods": 1,
       "slots": 1,
-      "source_triangles": 528,
+      "source_triangles": 529,
       "category": "Site",
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
@@ -742,7 +1147,7 @@
     "SM_MPR4_Site_DockApronInfill": {
       "lods": 1,
       "slots": 1,
-      "source_triangles": 389,
+      "source_triangles": 216,
       "category": "Site",
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
@@ -758,7 +1163,15 @@
     "SM_MPR4_Site_ContinuousTerrain": {
       "lods": 1,
       "slots": 1,
-      "source_triangles": 12469,
+      "source_triangles": 11701,
+      "category": "Site",
+      "nanite_enabled": false,
+      "nanite_max_edge_length_factor": 0.0
+    },
+    "SM_MPR4_Site_CampusPlanting": {
+      "lods": 1,
+      "slots": 1,
+      "source_triangles": 739,
       "category": "Site",
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
@@ -766,7 +1179,7 @@
     "SM_MPR4_Site_PlanTreeIslands": {
       "lods": 1,
       "slots": 1,
-      "source_triangles": 1466,
+      "source_triangles": 1380,
       "category": "Site",
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
@@ -774,7 +1187,7 @@
     "SM_MPR4_Site_PlanTreeIslandCurbs": {
       "lods": 1,
       "slots": 1,
-      "source_triangles": 13800,
+      "source_triangles": 12960,
       "category": "Site",
       "nanite_enabled": false,
       "nanite_max_edge_length_factor": 0.0
@@ -998,7 +1411,7 @@
     "SM_MPR4_Context_TankPads": {
       "lods": 1,
       "slots": 2,
-      "source_triangles": 1683,
+      "source_triangles": 2537,
       "category": "Context",
       "nanite_enabled": true,
       "nanite_max_edge_length_factor": 0.0
@@ -1006,13 +1419,134 @@
     "SM_MPR4_Context_TankPipes": {
       "lods": 1,
       "slots": 2,
-      "source_triangles": 5088,
+      "source_triangles": 6612,
       "category": "Context",
       "nanite_enabled": true,
       "nanite_max_edge_length_factor": 0.0
     }
   },
-  "exterior_instances": 1202,
+  "exterior_instances": 1444,
+  "pv_material_audit": {
+    "MPR4_SolarFrame": {
+      "override_dithered_lod_transition": true,
+      "dithered_lod_transition": true
+    },
+    "MPR4_SolarMid": {
+      "override_dithered_lod_transition": true,
+      "dithered_lod_transition": true
+    },
+    "MPR4_SolarFar": {
+      "override_dithered_lod_transition": true,
+      "dithered_lod_transition": true
+    },
+    "MPR4_SolarCells": {
+      "override_dithered_lod_transition": true,
+      "dithered_lod_transition": true
+    }
+  },
+  "pv_texture_audit": {
+    "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarMid_Base.T_MPR4_SolarMid_Base": {
+      "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+      "filter": "<TextureFilter.TF_DEFAULT: 3>",
+      "lod_bias": 0,
+      "never_stream": false,
+      "virtual_texture_streaming": false,
+      "max_texture_size": 2048,
+      "note": "Saved configuration readback; resident mip count and temporal behavior require runtime validation."
+    },
+    "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarMid_Normal.T_MPR4_SolarMid_Normal": {
+      "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+      "filter": "<TextureFilter.TF_DEFAULT: 3>",
+      "lod_bias": 0,
+      "never_stream": false,
+      "virtual_texture_streaming": false,
+      "max_texture_size": 2048,
+      "note": "Saved configuration readback; resident mip count and temporal behavior require runtime validation."
+    },
+    "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarFar_Base.T_MPR4_SolarFar_Base": {
+      "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+      "filter": "<TextureFilter.TF_DEFAULT: 3>",
+      "lod_bias": 0,
+      "never_stream": false,
+      "virtual_texture_streaming": false,
+      "max_texture_size": 2048,
+      "note": "Saved configuration readback; resident mip count and temporal behavior require runtime validation."
+    },
+    "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarFar_Normal.T_MPR4_SolarFar_Normal": {
+      "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+      "filter": "<TextureFilter.TF_DEFAULT: 3>",
+      "lod_bias": 0,
+      "never_stream": false,
+      "virtual_texture_streaming": false,
+      "max_texture_size": 2048,
+      "note": "Saved configuration readback; resident mip count and temporal behavior require runtime validation."
+    },
+    "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarCells_Base.T_MPR4_SolarCells_Base": {
+      "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+      "filter": "<TextureFilter.TF_DEFAULT: 3>",
+      "lod_bias": 0,
+      "never_stream": false,
+      "virtual_texture_streaming": false,
+      "max_texture_size": 2048,
+      "note": "Saved configuration readback; resident mip count and temporal behavior require runtime validation."
+    },
+    "/Game/MPRWarehouse/ReferenceV4/Textures/T_MPR4_SolarCells_Normal.T_MPR4_SolarCells_Normal": {
+      "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+      "filter": "<TextureFilter.TF_DEFAULT: 3>",
+      "lod_bias": 0,
+      "never_stream": false,
+      "virtual_texture_streaming": false,
+      "max_texture_size": 2048,
+      "note": "Saved configuration readback; resident mip count and temporal behavior require runtime validation."
+    }
+  },
+  "terminal_material_audit": {
+    "MPR4_TerminalAsphalt": {
+      "parent": "/Game/MPRWarehouse/ReferenceV4/Materials/M_MPR4_PBRTexturedTerminal.M_MPR4_PBRTexturedTerminal",
+      "ground_role": "MPR3_Grass",
+      "opaque": true,
+      "ground_tint": [
+        0.34,
+        0.37,
+        0.28
+      ],
+      "ground_uv_scale_cm": [
+        0.0016666667070239782,
+        -0.0016666667070239782,
+        0.0
+      ]
+    },
+    "MPR4_TerminalCurb": {
+      "parent": "/Game/MPRWarehouse/ReferenceV4/Materials/M_MPR4_PBRTexturedTerminal.M_MPR4_PBRTexturedTerminal",
+      "ground_role": "MPR3_Grass",
+      "opaque": true,
+      "ground_tint": [
+        0.34,
+        0.37,
+        0.28
+      ],
+      "ground_uv_scale_cm": [
+        0.0016666667070239782,
+        -0.0016666667070239782,
+        0.0
+      ]
+    },
+    "MPR4_TerminalWhiteLine": {
+      "parent": "/Game/MPRWarehouse/ReferenceV4/Materials/M_MPR4_PBRSolidTerminal.M_MPR4_PBRSolidTerminal",
+      "ground_role": "MPR3_Grass",
+      "opaque": true,
+      "ground_tint": [
+        0.34,
+        0.37,
+        0.28
+      ],
+      "ground_uv_scale_cm": [
+        0.0016666667070239782,
+        -0.0016666667070239782,
+        0.0
+      ]
+    }
+  },
   "instance_world_transform_audit": {
     "SM_MPR4_WallLamp": {
       "count": 97,
@@ -1151,7 +1685,7 @@
       }
     },
     "SM_MPR4_RoofLight": {
-      "count": 29,
+      "count": 195,
       "maximum_error": {
         "position_cm": 0.0,
         "rotation_deg": 0.0,
@@ -1175,15 +1709,31 @@
       }
     },
     "SM_MPR4_FreightBoxcar": {
-      "count": 32,
+      "count": 53,
       "maximum_error": {
         "position_cm": 0.0,
         "rotation_deg": 6.830189170012753e-06,
-        "scale": 7.771561172376096e-16
+        "scale": 6.661338147750939e-16
+      }
+    },
+    "SM_MPR4_Locomotive": {
+      "count": 3,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 2.9575586669421963e-06,
+        "scale": 5.551115123125783e-16
       }
     },
     "SM_MPR4_Trailer_White": {
       "count": 26,
+      "maximum_error": {
+        "position_cm": 0.0,
+        "rotation_deg": 0.0,
+        "scale": 2.220446049250313e-16
+      }
+    },
+    "SM_MPR4_Tractor": {
+      "count": 52,
       "maximum_error": {
         "position_cm": 0.0,
         "rotation_deg": 0.0,
@@ -1215,7 +1765,7 @@
       }
     }
   },
-  "static_identity_actors": 99,
+  "static_identity_actors": 103,
   "transform_tolerances": {
     "position_cm": 0.5,
     "rotation_deg": 0.05,
@@ -1225,50 +1775,50 @@
     {
       "name": "01-overall",
       "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\01-overall.png",
-      "bytes": 2234860,
-      "sha256": "cadd973f2d3ceebe563b18510da9b566f66b3e7bbf05ccfc641a0fb9c136cc37"
+      "bytes": 2259314,
+      "sha256": "b47305a64351d481e8242237f0a8fac5ceec44d8dc4eefc6187495dcf9b40b12"
     },
     {
       "name": "02-yard-corner",
       "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\02-yard-corner.png",
-      "bytes": 2343268,
-      "sha256": "e9fabee095023589500f75774c718db3ba299e360269aa34e158dead728a71a6"
+      "bytes": 2455775,
+      "sha256": "2a07a546f80bcc3379742a4d619f2dddaa22d7b62148ccf2b846136e46fb2f9d"
     },
     {
       "name": "03-roof",
       "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\03-roof.png",
-      "bytes": 1965777,
-      "sha256": "bba02d2231eb468bd357857918cd43664e767feeb5865a45ea05d2055f8e3416"
+      "bytes": 1988350,
+      "sha256": "199171ad7a4129468ac8e545e2595c460549cd2b5f747ea8ea69c54e0837b1f9"
     },
     {
       "name": "04-docks",
       "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\04-docks.png",
-      "bytes": 2082725,
-      "sha256": "2d4667ed87979675c97175f2e42cb4c81578a2e2b1e74685861128aebd80cfa5"
+      "bytes": 2140339,
+      "sha256": "4007ff1840ce0cd8c63d3d0ad0030aa85dabfed98ba0ce2153bc961e50b351dc"
     },
     {
       "name": "05-yard",
       "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\05-yard.png",
-      "bytes": 1711952,
-      "sha256": "3c5d8cfabbb621ad9d65038678624a5cb7ef3eb17890750a37e59002393851d9"
+      "bytes": 1792905,
+      "sha256": "1462f1222d3febb05d1a1d73ef0c734c7d11749c1192c696fdf5367c989b92c7"
     },
     {
       "name": "06-pond",
       "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\06-pond.png",
-      "bytes": 2067823,
-      "sha256": "064384bb923ba839b694e45e960820d889c5c36fe6d7ad29bd9254de11b3b307"
+      "bytes": 2029190,
+      "sha256": "e4b8ff0068662a0c5e2a8385675f051c886650c6ae2c4804b463804e11e13769"
     },
     {
       "name": "07-railway",
       "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\07-railway.png",
-      "bytes": 2287860,
-      "sha256": "17533ca38c7f5910aa3ca5008e0e02bf3414aca6aa76e8aa75275e9cb613c546"
+      "bytes": 2348361,
+      "sha256": "f6e2059b1456612ab94b58c110d598aaa53416ee825e4cbfa9a95c40d6cabebe"
     },
     {
       "name": "08-interior-preserved",
       "path": "D:\\UEPro\\Test\\Saved\\MPR\\reference_v4\\08-interior-preserved.png",
-      "bytes": 2376885,
-      "sha256": "12d0c2802a17d23ceca0d124c06a1929c52ea2f226e4345fee220f8117a9005e"
+      "bytes": 2459313,
+      "sha256": "130a6b4d8df8a58eda93274ee39648f6f9370c0494940a9ba0d9edf8d27525b0"
     }
   ],
   "preservation_after_capture": {
@@ -1277,9 +1827,9 @@
     "interior_actors": 136,
     "protected_digest": "4f04d58a0e87fc58ebd1153eed4436b8f1e481a3a0572fac084113f013dbbbab",
     "protected_assets": 45,
-    "new_exterior_actors": 238
+    "new_exterior_actors": 250
   },
   "error": null,
-  "elapsed_seconds": 31.51600000000326,
+  "elapsed_seconds": 31.53200000000652,
   "map_saved_by_validator": false
 }

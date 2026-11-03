@@ -1,7 +1,7 @@
 {
   "success": true,
   "map": "/Game/Maps/MPR_CAD_Warehouse",
-  "run_id": "20261103_023625_530091",
+  "run_id": "20261103_111841_755874",
   "assets_saved": false,
   "performance": {
     "exterior": {
@@ -26,52 +26,52 @@
       "warmup_seconds": 15,
       "sample_wall_seconds": 15.0,
       "native_csv": {
-        "path": "D:\\UEPro\\Test\\Saved\\Profiling\\CSV\\MPR_20261103_023625_530091_exterior.csv",
-        "sha256": "d594e96edf02c8bbc9f93fc55cf8b891222ff9976410f7b997459861b8962192",
+        "path": "D:\\UEPro\\Test\\Saved\\Profiling\\CSV\\MPR_20261103_111841_755874_exterior.csv",
+        "sha256": "dacea623fcae0d5b37b31db3bfa018fad3fc6cc64a19b0514f33e936b5a1b4f7",
         "timing_unit": "ms",
-        "frame_count": 1280,
-        "native_frame_time_seconds": 15.006143600000005,
+        "frame_count": 1338,
+        "native_frame_time_seconds": 15.018270600000005,
         "metrics": {
           "FrameTime": {
-            "count": 1280,
-            "mean_ms": 11.7235496875,
-            "median_ms": 11.64745,
-            "p95_ms": 13.0908,
-            "p99_ms": 13.7859,
-            "max_ms": 19.4204,
-            "over_16_67ms_count": 1,
+            "count": 1338,
+            "mean_ms": 11.224417488789237,
+            "median_ms": 11.219000000000001,
+            "p95_ms": 12.3045,
+            "p99_ms": 12.8101,
+            "max_ms": 15.8232,
+            "over_16_67ms_count": 0,
             "over_33_33ms_count": 0,
             "over_50ms_count": 0
           },
           "GameThreadTime": {
-            "count": 1280,
-            "mean_ms": 1.81886265625,
-            "median_ms": 1.80935,
-            "p95_ms": 2.1166,
-            "p99_ms": 2.3029,
-            "max_ms": 6.7603,
+            "count": 1338,
+            "mean_ms": 1.8686734678624815,
+            "median_ms": 1.8596,
+            "p95_ms": 2.1161,
+            "p99_ms": 2.2544,
+            "max_ms": 13.2924,
             "over_16_67ms_count": 0,
             "over_33_33ms_count": 0,
             "over_50ms_count": 0
           },
           "RenderThreadTime": {
-            "count": 1280,
-            "mean_ms": 11.720853671875,
-            "median_ms": 11.6496,
-            "p95_ms": 13.061,
-            "p99_ms": 13.7212,
-            "max_ms": 15.675,
+            "count": 1338,
+            "mean_ms": 11.22350553064275,
+            "median_ms": 11.20975,
+            "p95_ms": 12.2806,
+            "p99_ms": 12.8136,
+            "max_ms": 13.5109,
             "over_16_67ms_count": 0,
             "over_33_33ms_count": 0,
             "over_50ms_count": 0
           },
           "GPUTime": {
-            "count": 1280,
-            "mean_ms": 11.168661171875,
-            "median_ms": 11.0186,
-            "p95_ms": 12.2031,
-            "p99_ms": 12.7922,
-            "max_ms": 14.072,
+            "count": 1338,
+            "mean_ms": 10.674081763826607,
+            "median_ms": 10.66005,
+            "p95_ms": 11.0637,
+            "p99_ms": 11.2075,
+            "max_ms": 11.5099,
             "over_16_67ms_count": 0,
             "over_33_33ms_count": 0,
             "over_50ms_count": 0
@@ -178,52 +178,52 @@
       "warmup_seconds": 15,
       "sample_wall_seconds": 15.0,
       "native_csv": {
-        "path": "D:\\UEPro\\Test\\Saved\\Profiling\\CSV\\MPR_20261103_023625_530091_interior.csv",
-        "sha256": "22de36dfeb79a4085228d58533fc9be3c941534c8c162deef7c444f325741c6b",
+        "path": "D:\\UEPro\\Test\\Saved\\Profiling\\CSV\\MPR_20261103_111841_755874_interior.csv",
+        "sha256": "3e8e938374e1744b1adf2eff30c7e7a8d978be72ea74be77536eab16f39d9846",
         "timing_unit": "ms",
-        "frame_count": 1113,
-        "native_frame_time_seconds": 15.00325989999999,
+        "frame_count": 1146,
+        "native_frame_time_seconds": 14.990392799999997,
         "metrics": {
           "FrameTime": {
-            "count": 1113,
-            "mean_ms": 13.480017879604672,
-            "median_ms": 13.3933,
-            "p95_ms": 14.9959,
-            "p99_ms": 15.7313,
-            "max_ms": 23.4647,
+            "count": 1146,
+            "mean_ms": 13.080621989528796,
+            "median_ms": 13.091650000000001,
+            "p95_ms": 14.1416,
+            "p99_ms": 14.721,
+            "max_ms": 24.9776,
             "over_16_67ms_count": 2,
             "over_33_33ms_count": 0,
             "over_50ms_count": 0
           },
           "GameThreadTime": {
-            "count": 1113,
-            "mean_ms": 1.8920805031446541,
-            "median_ms": 1.8733,
-            "p95_ms": 2.1642,
-            "p99_ms": 2.3515,
-            "max_ms": 23.2381,
+            "count": 1146,
+            "mean_ms": 1.907014485165794,
+            "median_ms": 1.885,
+            "p95_ms": 2.1864,
+            "p99_ms": 2.3572,
+            "max_ms": 24.5165,
             "over_16_67ms_count": 1,
             "over_33_33ms_count": 0,
             "over_50ms_count": 0
           },
           "RenderThreadTime": {
-            "count": 1113,
-            "mean_ms": 13.468613836477987,
-            "median_ms": 13.3977,
-            "p95_ms": 14.9388,
-            "p99_ms": 15.5618,
-            "max_ms": 16.3228,
-            "over_16_67ms_count": 0,
+            "count": 1146,
+            "mean_ms": 13.072391186736475,
+            "median_ms": 13.0861,
+            "p95_ms": 14.0828,
+            "p99_ms": 14.5494,
+            "max_ms": 17.0783,
+            "over_16_67ms_count": 1,
             "over_33_33ms_count": 0,
             "over_50ms_count": 0
           },
           "GPUTime": {
-            "count": 1113,
-            "mean_ms": 12.83153899371069,
-            "median_ms": 12.7247,
-            "p95_ms": 13.8614,
-            "p99_ms": 14.3509,
-            "max_ms": 15.0007,
+            "count": 1146,
+            "mean_ms": 12.442123734729494,
+            "median_ms": 12.4362,
+            "p95_ms": 12.8291,
+            "p99_ms": 13.023,
+            "max_ms": 13.3992,
             "over_16_67ms_count": 0,
             "over_33_33ms_count": 0,
             "over_50ms_count": 0
@@ -312,8 +312,8 @@
   "captures": [
     {
       "state": "exterior",
-      "path": "D:\\UEPro\\Test\\Saved\\MPR\\performance_20261103_023625_530091_exterior.png",
-      "sha256": "240a00d37b3fb5be01a255e4ee6275f016a33813152488535ab17edf2b8d994d",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\performance_20261103_111841_755874_exterior.png",
+      "sha256": "6bb9b034c49358a262285b66a1aeceec9f9d0e7caddb414d0f8bd77f3009e688",
       "size": [
         1920,
         1080
@@ -340,8 +340,8 @@
     },
     {
       "state": "interior",
-      "path": "D:\\UEPro\\Test\\Saved\\MPR\\performance_20261103_023625_530091_interior.png",
-      "sha256": "0226d1c182ec7cb6b44766f0de819821f60eb2128ea20c4603da8efd8cf17f40",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\performance_20261103_111841_755874_interior.png",
+      "sha256": "d21a240d308726fc6b0cc4ded7f21d0dff448d871b28433f10fd881abe19cf2c",
       "size": [
         1920,
         1080
@@ -373,10 +373,10 @@
   "timing_source": "Native CSV FrameTime, GameThreadTime, RenderThreadTime, GPUTime. Python/Slate callback intervals are not used as frame/GPU timing.",
   "deadline_seconds": 150,
   "stage": "complete",
-  "elapsed_seconds": 62.98499999998603,
+  "elapsed_seconds": 63.0,
   "command_line": "/Game/Maps/MPR_CAD_Warehouse -unattended -NoSplash -NoSound -RenderOffscreen -NoLiveCoding -ExecCmds=\"py D:/UEPro/Test/Tools/MPRWarehouse/profile_mpr_runtime.py\" -game -ForceRes -ResX=1920 -ResY=1080 -MPRProfile -abslog=D:/UEPro/Test/Saved/MPR/reference_v4_performance.log",
   "engine_version": "5.8.4-58902052+++UE5+Release-5.8",
-  "map_sha256_before": "089c1b196d96efeae9da4c24073681022736d6e5e4acc3a899f3b7fa7eab97b2",
+  "map_sha256_before": "ea0eb9fd1c41725d282530b4429e7109f7c148473468fe86748e40bb2d401bb7",
   "render_quality": {
     "r.Nanite.MaxPixelsPerEdge": "0.25",
     "r.Nanite.AllowVoxels": "0",
@@ -389,7 +389,7 @@
     "pawn_class": "/Game/GHSNormalWarehouse/Camera/BP_GHS_WarehouseCamera.BP_GHS_WarehouseCamera_C",
     "camera": "/Game/Maps/MPR_CAD_Warehouse.MPR_CAD_Warehouse:PersistentLevel.CameraActor_0",
     "roof_actor_count": 30,
-    "actor_count": 391,
+    "actor_count": 403,
     "ghs_hud_absent": true,
     "ghs_business_actors_absent": true,
     "business_state_before_camera_changes": {
@@ -438,9 +438,9 @@
     },
     "after_zoom": {
       "position_cm": [
-        -10794.339847723575,
-        40285.0247458695,
-        37552.36501458268
+        -10784.806243455088,
+        40249.44485036027,
+        37519.19861511359
       ],
       "rotation_deg": [
         -41.99999999999995,
@@ -455,14 +455,14 @@
     },
     "after_orbit": {
       "position_cm": [
-        -16346.103998881401,
-        35306.35652037913,
-        37486.68004286266
+        -16324.827285114581,
+        35302.96644324395,
+        37468.39007276427
       ],
       "rotation_deg": [
-        -43.935069040195216,
-        -65.15685106754658,
-        -1.3249982007574419e-14
+        -43.929937315394135,
+        -65.18319524019842,
+        -8.832559155307013e-15
       ],
       "viewport": [
         1920,
@@ -488,8 +488,8 @@
       "view_target": "/Game/Maps/MPR_CAD_Warehouse.MPR_CAD_Warehouse:PersistentLevel.BP_GHS_WarehouseCamera_C_0"
     },
     "baseline_distance_cm": 57999.99999999996,
-    "zoom_distance_cm": 56121.128906249956,
-    "orbit_yaw_delta_deg": 9.843148932453289,
+    "zoom_distance_cm": 56071.56249999996,
+    "orbit_yaw_delta_deg": 9.816804759801443,
     "reset_position_error_cm": 0.0
   },
   "profiling_camera_policy": "Static MPR_ReviewCamera is the view target; shared pawn retains its original enabled tick. No business/controller/component tick is suppressed.",
@@ -513,7 +513,7 @@
     "r.DynamicRes.OperationMode": "0",
     "r.ScreenPercentage": "0"
   },
-  "map_sha256_after": "089c1b196d96efeae9da4c24073681022736d6e5e4acc3a899f3b7fa7eab97b2",
+  "map_sha256_after": "ea0eb9fd1c41725d282530b4429e7109f7c148473468fe86748e40bb2d401bb7",
   "map_unchanged": true,
   "error": null,
   "restore_errors": []

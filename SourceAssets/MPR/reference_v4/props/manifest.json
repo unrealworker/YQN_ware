@@ -35,7 +35,7 @@
       ],
       "triangles": 949999,
       "vertices": 1135447,
-      "sha256": "b3870e9eb5c5677362369d751738a7ee3fd025246cbee9aa9f5bd45f7fa3692f",
+      "sha256": "b41ee4ccc09d901fa12984f9f6abbe52f6ac9380d2814ed1903bf8c87c1470a2",
       "metadata": {
         "triangles": 949999,
         "leaf_count": 220000,
@@ -61,195 +61,6 @@
         "radial_extent_m": 6.418041146908877,
         "crown_diameter_xy_m": 12.300530433654785,
         "legacy_scaffold_collapsed_triangles_removed_by_fbx": 0
-      },
-      "origin_m": [
-        0,
-        0,
-        0
-      ],
-      "instance_only": true,
-      "collision": false
-    },
-    {
-      "name": "SM_MPR4_Trailer_White",
-      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Trailer_White.fbx",
-      "material_roles": [
-        "MPR4_ReflectAmber",
-        "MPR4_ReflectRed",
-        "MPR4_ReflectWhite",
-        "MPR4_TrailerWhite",
-        "MPR4_VehicleDark",
-        "MPR4_VehicleMetal",
-        "MPR4_VehicleRubber",
-        "MPR4_VehicleSeam"
-      ],
-      "material_triangle_counts": {
-        "MPR4_ReflectAmber": 72,
-        "MPR4_ReflectRed": 384,
-        "MPR4_ReflectWhite": 360,
-        "MPR4_TrailerWhite": 112,
-        "MPR4_VehicleDark": 2236,
-        "MPR4_VehicleMetal": 3180,
-        "MPR4_VehicleRubber": 1272,
-        "MPR4_VehicleSeam": 372
-      },
-      "bounds_m": [
-        [
-          -8.289999961853027,
-          8.102499961853027
-        ],
-        [
-          -1.3350000381469727,
-          1.3350000381469727
-        ],
-        [
-          0.0,
-          4.165999889373779
-        ]
-      ],
-      "triangles": 7988,
-      "vertices": 5112,
-      "sha256": "a1655eeac56bc9f1669119a88a8a3182c2efce8bf522c52c02429015265f91fa",
-      "metadata": {
-        "kind": "semi_trailer",
-        "color": "White",
-        "tractor_cab": false,
-        "front_axis": "+X",
-        "loading_doors": "-X",
-        "nominal_box_m": [
-          16.15,
-          2.6,
-          2.88
-        ],
-        "overall_height_m": 4.1659999999999995,
-        "ground_origin": true,
-        "roof_matches_body_color": true
-      },
-      "origin_m": [
-        0,
-        0,
-        0
-      ],
-      "instance_only": true,
-      "collision": false
-    },
-    {
-      "name": "SM_MPR4_Trailer_Blue",
-      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Trailer_Blue.fbx",
-      "material_roles": [
-        "MPR4_ReflectAmber",
-        "MPR4_ReflectRed",
-        "MPR4_ReflectWhite",
-        "MPR4_TrailerBlue",
-        "MPR4_VehicleDark",
-        "MPR4_VehicleMetal",
-        "MPR4_VehicleRubber",
-        "MPR4_VehicleSeam"
-      ],
-      "material_triangle_counts": {
-        "MPR4_ReflectAmber": 72,
-        "MPR4_ReflectRed": 384,
-        "MPR4_ReflectWhite": 360,
-        "MPR4_TrailerBlue": 112,
-        "MPR4_VehicleDark": 2236,
-        "MPR4_VehicleMetal": 3180,
-        "MPR4_VehicleRubber": 1272,
-        "MPR4_VehicleSeam": 372
-      },
-      "bounds_m": [
-        [
-          -8.289999961853027,
-          8.102499961853027
-        ],
-        [
-          -1.3350000381469727,
-          1.3350000381469727
-        ],
-        [
-          0.0,
-          4.165999889373779
-        ]
-      ],
-      "triangles": 7988,
-      "vertices": 5112,
-      "sha256": "3784903291a069739702e5a614ce1f543cecfd779854db3931d40be15970868c",
-      "metadata": {
-        "kind": "semi_trailer",
-        "color": "Blue",
-        "tractor_cab": false,
-        "front_axis": "+X",
-        "loading_doors": "-X",
-        "nominal_box_m": [
-          16.15,
-          2.6,
-          2.88
-        ],
-        "overall_height_m": 4.1659999999999995,
-        "ground_origin": true,
-        "roof_matches_body_color": true
-      },
-      "origin_m": [
-        0,
-        0,
-        0
-      ],
-      "instance_only": true,
-      "collision": false
-    },
-    {
-      "name": "SM_MPR4_Trailer_Coral",
-      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Trailer_Coral.fbx",
-      "material_roles": [
-        "MPR4_ReflectAmber",
-        "MPR4_ReflectRed",
-        "MPR4_ReflectWhite",
-        "MPR4_TrailerCoral",
-        "MPR4_VehicleDark",
-        "MPR4_VehicleMetal",
-        "MPR4_VehicleRubber",
-        "MPR4_VehicleSeam"
-      ],
-      "material_triangle_counts": {
-        "MPR4_ReflectAmber": 72,
-        "MPR4_ReflectRed": 384,
-        "MPR4_ReflectWhite": 360,
-        "MPR4_TrailerCoral": 112,
-        "MPR4_VehicleDark": 2236,
-        "MPR4_VehicleMetal": 3180,
-        "MPR4_VehicleRubber": 1272,
-        "MPR4_VehicleSeam": 372
-      },
-      "bounds_m": [
-        [
-          -8.289999961853027,
-          8.102499961853027
-        ],
-        [
-          -1.3350000381469727,
-          1.3350000381469727
-        ],
-        [
-          0.0,
-          4.165999889373779
-        ]
-      ],
-      "triangles": 7988,
-      "vertices": 5112,
-      "sha256": "65e5024ae1b0cc9e65a75745844cedcaa7850d3a5082dc90c61df9cbd62ebb79",
-      "metadata": {
-        "kind": "semi_trailer",
-        "color": "Coral",
-        "tractor_cab": false,
-        "front_axis": "+X",
-        "loading_doors": "-X",
-        "nominal_box_m": [
-          16.15,
-          2.6,
-          2.88
-        ],
-        "overall_height_m": 4.1659999999999995,
-        "ground_origin": true,
-        "roof_matches_body_color": true
       },
       "origin_m": [
         0,
@@ -296,7 +107,7 @@
       ],
       "triangles": 964,
       "vertices": 660,
-      "sha256": "1e560db4c4faa33dae70fb34ca68f05323c36254d869a49327e088154090b105",
+      "sha256": "040eea8ad088667d5f5773d6cc8312fb965e710c51bb91cdcd4de8c7a826c103",
       "metadata": {
         "kind": "sedan",
         "source_generator": "Scripts/ghs/park_vehicles.py",
@@ -348,12 +159,277 @@
       ],
       "triangles": 964,
       "vertices": 660,
-      "sha256": "de30f6b2333668eb568d4699e017cb86cdfc47ac4b2d3091f1b1aef3873fe03c",
+      "sha256": "bcc24fd1b55fd867f2a85fa82e7e3652e7464092e37fa6f2fe92e8d680f6dd00",
       "metadata": {
         "kind": "compact_suv",
         "source_generator": "Scripts/ghs/park_vehicles.py",
         "front_axis": "+X",
         "neutral_color": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "instance_only": true,
+      "collision": false
+    },
+    {
+      "name": "SM_MPR4_Trailer_White",
+      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Trailer_White.fbx",
+      "material_roles": [
+        "MPR4_ReflectAmber",
+        "MPR4_ReflectRed",
+        "MPR4_ReflectWhite",
+        "MPR4_TrailerWhite",
+        "MPR4_VehicleDark",
+        "MPR4_VehicleMetal",
+        "MPR4_VehicleRubber",
+        "MPR4_VehicleSeam"
+      ],
+      "material_triangle_counts": {
+        "MPR4_ReflectAmber": 72,
+        "MPR4_ReflectRed": 384,
+        "MPR4_ReflectWhite": 360,
+        "MPR4_TrailerWhite": 46,
+        "MPR4_VehicleDark": 124,
+        "MPR4_VehicleMetal": 448,
+        "MPR4_VehicleRubber": 760,
+        "MPR4_VehicleSeam": 12
+      },
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 2206,
+      "vertices": 1440,
+      "sha256": "a38a039abbd58aa24f3161eff848a713498ce80886a445e971ff1eb7ca775ff6",
+      "metadata": {
+        "kind": "semi_trailer",
+        "color": "White",
+        "tractor_cab": false,
+        "coupled_to_separate_tractor": true,
+        "landing_gear": "retracted",
+        "kingpin_x_m": 6.55,
+        "wheel_contact_z_m": 0.0,
+        "front_axis": "+X",
+        "loading_doors": "-X",
+        "nominal_box_m": [
+          16.15,
+          2.6,
+          2.88
+        ],
+        "overall_height_m": 4.1659999999999995,
+        "ground_origin": true,
+        "roof_matches_body_color": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "instance_only": true,
+      "collision": false
+    },
+    {
+      "name": "SM_MPR4_Trailer_Blue",
+      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Trailer_Blue.fbx",
+      "material_roles": [
+        "MPR4_ReflectAmber",
+        "MPR4_ReflectRed",
+        "MPR4_ReflectWhite",
+        "MPR4_TrailerBlue",
+        "MPR4_VehicleDark",
+        "MPR4_VehicleMetal",
+        "MPR4_VehicleRubber",
+        "MPR4_VehicleSeam"
+      ],
+      "material_triangle_counts": {
+        "MPR4_ReflectAmber": 72,
+        "MPR4_ReflectRed": 384,
+        "MPR4_ReflectWhite": 360,
+        "MPR4_TrailerBlue": 46,
+        "MPR4_VehicleDark": 124,
+        "MPR4_VehicleMetal": 448,
+        "MPR4_VehicleRubber": 760,
+        "MPR4_VehicleSeam": 12
+      },
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 2206,
+      "vertices": 1440,
+      "sha256": "1f10dad8c5636fb075af5d126ee9a1c89751fa8847d7cbb61fec65d3a6663919",
+      "metadata": {
+        "kind": "semi_trailer",
+        "color": "Blue",
+        "tractor_cab": false,
+        "coupled_to_separate_tractor": true,
+        "landing_gear": "retracted",
+        "kingpin_x_m": 6.55,
+        "wheel_contact_z_m": 0.0,
+        "front_axis": "+X",
+        "loading_doors": "-X",
+        "nominal_box_m": [
+          16.15,
+          2.6,
+          2.88
+        ],
+        "overall_height_m": 4.1659999999999995,
+        "ground_origin": true,
+        "roof_matches_body_color": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "instance_only": true,
+      "collision": false
+    },
+    {
+      "name": "SM_MPR4_Trailer_Coral",
+      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Trailer_Coral.fbx",
+      "material_roles": [
+        "MPR4_ReflectAmber",
+        "MPR4_ReflectRed",
+        "MPR4_ReflectWhite",
+        "MPR4_TrailerCoral",
+        "MPR4_VehicleDark",
+        "MPR4_VehicleMetal",
+        "MPR4_VehicleRubber",
+        "MPR4_VehicleSeam"
+      ],
+      "material_triangle_counts": {
+        "MPR4_ReflectAmber": 72,
+        "MPR4_ReflectRed": 384,
+        "MPR4_ReflectWhite": 360,
+        "MPR4_TrailerCoral": 46,
+        "MPR4_VehicleDark": 124,
+        "MPR4_VehicleMetal": 448,
+        "MPR4_VehicleRubber": 760,
+        "MPR4_VehicleSeam": 12
+      },
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 2206,
+      "vertices": 1440,
+      "sha256": "73a3d860b374ee380114c54521fa532a4b2f7f676f2c79576acad450236e8880",
+      "metadata": {
+        "kind": "semi_trailer",
+        "color": "Coral",
+        "tractor_cab": false,
+        "coupled_to_separate_tractor": true,
+        "landing_gear": "retracted",
+        "kingpin_x_m": 6.55,
+        "wheel_contact_z_m": 0.0,
+        "front_axis": "+X",
+        "loading_doors": "-X",
+        "nominal_box_m": [
+          16.15,
+          2.6,
+          2.88
+        ],
+        "overall_height_m": 4.1659999999999995,
+        "ground_origin": true,
+        "roof_matches_body_color": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "instance_only": true,
+      "collision": false
+    },
+    {
+      "name": "SM_MPR4_Tractor",
+      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Tractor.fbx",
+      "material_roles": [
+        "MPR4_ReflectWhite",
+        "MPR4_TrailerBlue",
+        "MPR4_VehicleDark",
+        "MPR4_VehicleGlass",
+        "MPR4_VehicleMetal",
+        "MPR4_VehicleRubber",
+        "MPR4_VehicleWhite"
+      ],
+      "material_triangle_counts": {
+        "MPR4_ReflectWhite": 216,
+        "MPR4_TrailerBlue": 324,
+        "MPR4_VehicleDark": 80,
+        "MPR4_VehicleGlass": 252,
+        "MPR4_VehicleMetal": 1760,
+        "MPR4_VehicleRubber": 1444,
+        "MPR4_VehicleWhite": 284
+      },
+      "bounds_m": [
+        [
+          -2.049999952316284,
+          4.655999183654785
+        ],
+        [
+          -1.5,
+          1.5
+        ],
+        [
+          0.0,
+          3.384999990463257
+        ]
+      ],
+      "triangles": 4360,
+      "vertices": 2426,
+      "sha256": "97e1a304edf3ba36ecd8c80318face4f76636364fa670f8c0d488fbf864e57e7",
+      "metadata": {
+        "kind": "tractor_unit",
+        "front_axis": "+X",
+        "origin": "fifth-wheel ground projection",
+        "axle_centers_x_m": [
+          -0.88,
+          0.48,
+          3.43
+        ],
+        "wheel_radius_m": 0.51,
+        "wheel_contact_z_m": 0.0,
+        "coupler_height_m": 1.22,
+        "cab_source": "D:\\UEPro\\Test\\SourceAssets\\GHS_Normal\\TrucksLong\\dock_truck_long.blend",
+        "cab_source_sha256": "9f488bba3a1f513fc265c7a10f4ec27ca57c29ae80233870dd3ce949eaf6c802",
+        "cab_reused_part_count": 32,
+        "ground_origin": true,
+        "estimated_dimensions": true
       },
       "origin_m": [
         0,
@@ -375,10 +451,10 @@
       ],
       "material_triangle_counts": {
         "MPR4_FreightRoof": 404,
-        "MPR4_FreightWhite": 132,
+        "MPR4_FreightWhite": 36,
         "MPR4_ReflectAmber": 144,
-        "MPR4_VehicleDark": 2208,
-        "MPR4_VehicleMetal": 2384
+        "MPR4_VehicleDark": 96,
+        "MPR4_VehicleMetal": 1104
       },
       "bounds_m": [
         [
@@ -386,24 +462,127 @@
           10.399999618530273
         ],
         [
-          -1.6480000019073486,
-          1.6480000019073486
+          -1.6349999904632568,
+          1.6349999904632568
         ],
         [
           0.0,
           4.429999828338623
         ]
       ],
-      "triangles": 5272,
-      "vertices": 3252,
-      "sha256": "29241f9f563b1b06020cdd863c0acf51adbd9656c16b97b52dffa5ae4663af61",
+      "triangles": 1784,
+      "vertices": 1156,
+      "sha256": "a73b485f60128e98425a9a94d4624975b1fcf40602233c335bf39655a897b451",
       "metadata": {
         "kind": "rail_boxcar",
         "body_length_m": 18.8,
         "overall_length_m": 20.76,
         "front_axis": "+X",
         "estimated_dimensions": true,
-        "source": "reference multiview 01/06 white-grey freight cars"
+        "source": "reference multiview 01/06 white-grey freight cars",
+        "ground_origin": true,
+        "rail_contact_z_m": 0.0,
+        "coupler_x_m": [
+          -10.38,
+          10.38
+        ],
+        "bogie_centers_x_m": [
+          -6.3,
+          6.3
+        ],
+        "wheel_radius_m": 0.48,
+        "wheel_axis_gauge_m": 1.525,
+        "collision_body_bounds_m": [
+          [
+            -9.4,
+            9.4
+          ],
+          [
+            -1.64,
+            1.64
+          ],
+          [
+            1.22,
+            4.43
+          ]
+        ],
+        "continuous_consist": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "instance_only": true,
+      "collision": false
+    },
+    {
+      "name": "SM_MPR4_Locomotive",
+      "fbx": "SourceAssets/MPR/reference_v4/props/SM_MPR4_Locomotive.fbx",
+      "material_roles": [
+        "MPR4_FreightRoof",
+        "MPR4_ReflectWhite",
+        "MPR4_VehicleDark",
+        "MPR4_VehicleGlass",
+        "MPR4_VehicleGray",
+        "MPR4_VehicleMetal"
+      ],
+      "material_triangle_counts": {
+        "MPR4_FreightRoof": 56,
+        "MPR4_ReflectWhite": 24,
+        "MPR4_VehicleDark": 156,
+        "MPR4_VehicleGlass": 48,
+        "MPR4_VehicleGray": 132,
+        "MPR4_VehicleMetal": 1496
+      },
+      "bounds_m": [
+        [
+          -10.399999618530273,
+          10.399999618530273
+        ],
+        [
+          -1.625,
+          1.625
+        ],
+        [
+          0.0,
+          4.409999847412109
+        ]
+      ],
+      "triangles": 1912,
+      "vertices": 1200,
+      "sha256": "d07b97af72abd8e7e6d462dc7b991d5ffc3cd1b7905566e320d8e18ed2bf4712",
+      "metadata": {
+        "kind": "diesel_locomotive",
+        "front_axis": "+X",
+        "ground_origin": true,
+        "rail_contact_z_m": 0.0,
+        "coupler_x_m": [
+          -10.38,
+          10.38
+        ],
+        "bogie_centers_x_m": [
+          -6.3,
+          6.3
+        ],
+        "collision_body_bounds_m": [
+          [
+            -9.5,
+            9.5
+          ],
+          [
+            -1.55,
+            1.55
+          ],
+          [
+            0.81,
+            4.41
+          ]
+        ],
+        "wheel_radius_m": 0.48,
+        "wheel_axis_gauge_m": 1.525,
+        "estimated_dimensions": true,
+        "policy": "Generic neutral low-poly yard locomotive; no invented operator branding"
       },
       "origin_m": [
         0,
@@ -418,9 +597,9 @@
   "materials": {
     "MPR4_LeafMid": {
       "base_color": [
-        0.42,
-        0.48,
-        0.34,
+        0.26,
+        0.33,
+        0.255,
         1
       ],
       "roughness": 0.88,
@@ -431,9 +610,9 @@
     },
     "MPR4_LeafLight": {
       "base_color": [
+        0.35,
         0.4,
-        0.46,
-        0.34,
+        0.32,
         1
       ],
       "roughness": 0.88,
@@ -444,9 +623,9 @@
     },
     "MPR4_LeafShade": {
       "base_color": [
-        0.29,
-        0.35,
-        0.23,
+        0.19,
+        0.26,
+        0.19,
         1
       ],
       "roughness": 0.88,
@@ -681,5 +860,55 @@
       "z_scale": 1.6217869879437874
     }
   },
-  "tree_lods": "UE Nanite area preservation and automatic fallback; explicit LOD meshes intentionally omitted"
+  "tree_lods": "UE Nanite area preservation and automatic fallback; explicit LOD meshes intentionally omitted",
+  "transport_revision": "v6_grounded_tractor_and_continuous_consists",
+  "transport_validation": {
+    "source_checks": [
+      {
+        "name": "SM_MPR4_Trailer_White",
+        "triangles": 2206,
+        "bounds_error_m": 0.0,
+        "minimum_z_m": 0.0,
+        "sha256": "a38a039abbd58aa24f3161eff848a713498ce80886a445e971ff1eb7ca775ff6"
+      },
+      {
+        "name": "SM_MPR4_Trailer_Blue",
+        "triangles": 2206,
+        "bounds_error_m": 0.0,
+        "minimum_z_m": 0.0,
+        "sha256": "1f10dad8c5636fb075af5d126ee9a1c89751fa8847d7cbb61fec65d3a6663919"
+      },
+      {
+        "name": "SM_MPR4_Trailer_Coral",
+        "triangles": 2206,
+        "bounds_error_m": 0.0,
+        "minimum_z_m": 0.0,
+        "sha256": "73a3d860b374ee380114c54521fa532a4b2f7f676f2c79576acad450236e8880"
+      },
+      {
+        "name": "SM_MPR4_Tractor",
+        "triangles": 4360,
+        "bounds_error_m": 0.0,
+        "minimum_z_m": 0.0,
+        "sha256": "97e1a304edf3ba36ecd8c80318face4f76636364fa670f8c0d488fbf864e57e7"
+      },
+      {
+        "name": "SM_MPR4_FreightBoxcar",
+        "triangles": 1784,
+        "bounds_error_m": 0.0,
+        "minimum_z_m": 0.0,
+        "sha256": "a73b485f60128e98425a9a94d4624975b1fcf40602233c335bf39655a897b451"
+      },
+      {
+        "name": "SM_MPR4_Locomotive",
+        "triangles": 1912,
+        "bounds_error_m": 0.0,
+        "minimum_z_m": 0.0,
+        "sha256": "d07b97af72abd8e7e6d462dc7b991d5ffc3cd1b7905566e320d8e18ed2bf4712"
+      }
+    ],
+    "reviewed_tree_unchanged": true,
+    "tree_fbx_sha256": "b41ee4ccc09d901fa12984f9f6abbe52f6ac9380d2814ed1903bf8c87c1470a2",
+    "visual_review_complete": false
+  }
 }

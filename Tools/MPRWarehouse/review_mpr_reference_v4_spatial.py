@@ -25,6 +25,7 @@ SOURCE=json.loads((OUT/'reference_site_pixels.json').read_text(encoding='utf-8')
 CAD=json.loads((ROOT/'SourceAssets/MPR/mpr_cad_layout.json').read_text(encoding='utf-8'));MAIN=Polygon(CAD['footprint_outline_m'])
 COUNTS=Counter();INSTANCES=defaultdict(list);ROAD_DATA=[];TREE_ROWS=[];VEHICLE_SHAPES=[];RNG=random.Random(110203)
 noop=lambda *a,**kw:None
+terminal_surfaces=noop
 API=dict(mesh=noop,poly=noop,box=noop,strip=noop,zone=lambda *p:'Near',footprint=CAD['footprint_outline_m'],include_freight=False)
 core=types.SimpleNamespace(MAIN=MAIN,CAD=CAD,shape=noop,lines=noop,raised_edge=noop,build_railways=build_railways,API=API)
 script=ROOT/'Tools/MPRWarehouse/build_mpr_reference_v4_site.py'
@@ -49,22 +50,33 @@ def audit():
                    for r in ROAD_DATA if building.intersection(r['geometry']).area>.5]
             road_issues.append(dict(building=name,overlap_m2=round(building.intersection(site['roads']).area,2),roads=roads))
     pond_issues={key:round(site[key].intersection(site['paved']).area,3) for key in ('pond','pond_walk')}
-    vehicle_shapes=[];vehicle_offroad=[];train_shapes=[]
+    vehicle_shapes=[];vehicle_offroad=[];train_shapes=[];assemblies=defaultdict(list);wheel_issues=[]
     props=json.loads((ROOT/'SourceAssets/MPR/reference_v4/props/manifest.json').read_text(encoding='utf-8'))
     bounds={r['name']:r['bounds_m'] for r in props['meshes']}
+    mesh_metadata={r['name']:r.get('metadata',{}) for r in props['meshes']}
     for name,rows in manifest.get('instances',{}).items():
         for index,row in enumerate(rows):
             p=row['position_m'];yaw=row.get('rotation_deg',0)
-            if not any(v in name for v in ('Trailer','_Car_','FreightBoxcar')):continue
+            if not any(v in name for v in ('Trailer','Tractor','_Car_','FreightBoxcar','Locomotive')):continue
             bb=bounds[name];scale=row.get('scale',[1,1,1])
+            is_train=any(v in name for v in ('FreightBoxcar','Locomotive'))
+            support=G+.445 if is_train else G+.08 if '_Car_' in name else G+.10
+            low=p[2]+bb[2][0]*scale[2]
+            if 'Car_' not in name and abs(low-support)>.001:wheel_issues.append(dict(mesh=name,index=index,wheel_low_z_m=low,support_z_m=support))
+            # Coupler faces intentionally touch; rigid wagon bodies may never overlap.
+            if is_train:bb=mesh_metadata[name]['collision_body_bounds_m']
             poly=box(bb[0][0]*scale[0],bb[1][0]*scale[1],bb[0][1]*scale[0],bb[1][1]*scale[1])
             poly=translate(rotate(poly,yaw,origin=(0,0)),*p[:2])
             record=(name,index,poly)
-            if 'Freight' in name:train_shapes.append(record);continue
-            vehicle_shapes.append(record)
+            if is_train:train_shapes.append(record);continue
+            if row.get('assembly_id'):assemblies[row['assembly_id']].append(record)
+            else:vehicle_shapes.append(record)
             off=poly.difference(site['paved']).area;intrusion=poly.intersection(site['roads']).area
             if off>.25 or intrusion>.5:
                 vehicle_offroad.append(dict(mesh=name,index=index,position_m=p,off_paved_m2=round(off,2),road_intrusion_m2=round(intrusion,2)))
+    for identity,parts in assemblies.items():
+        assert len(parts)==2 and any('Tractor' in p[0] for p in parts) and any('Trailer' in p[0] for p in parts),('Incomplete articulated vehicle',identity)
+        vehicle_shapes.append(('ArticulatedTruck',identity,unary_union([p[2] for p in parts])))
     def collisions(rows):
         result=[]
         for i,(name,index,poly) in enumerate(rows):
@@ -91,7 +103,8 @@ def audit():
                   (script,OUT/'plan_site_details_v5.json',OUT/'road_outline_v5.json',OUT/'plan_railway_v5.json',OUT/'plan_vegetation_v5.json',OUT/'plan_registration_v5.json',ROOT/'SourceAssets/MPR/reference_v4/context/reference_context_plan_v5.json')},
                 scope='Road/water/rail geometry reconstructed from current generator inputs; vehicles and trees read from exported site manifest. Regenerate site after input changes before final acceptance.',
                 buildings_on_roads=road_issues,pond_paving_overlaps_m2=pond_issues,vehicles_outside_standing_surfaces=vehicle_offroad,
-                vehicle_collisions=collisions(vehicle_shapes),boxcar_collisions=collisions(train_shapes),
+                vehicle_collisions=collisions(vehicle_shapes),boxcar_collisions=collisions(train_shapes),vehicle_wheel_support_issues=wheel_issues,
+                articulated_vehicle_assemblies=len(assemblies),rail_consist_audit=manifest.get('rail_consist_audit'),
                 tree_clearance_violations=tree_issues,allowed_crown_edge_overhang=tree_overhang,minimum_track_center_spacing_m=min(spacing),
                 tree_policy='85 percent radius excludes buildings/rail; 0.8m trunk excludes roads; source-measured trees in courts receive explicit planted islands; crown-edge overhang permitted',
                 counts=dict(buildings=len(buildings),road_segments=len(ROAD_DATA),parked_vehicles=len(vehicle_shapes),boxcars=len(train_shapes),
@@ -99,7 +112,7 @@ def audit():
 
 
 if __name__=='__main__':
-    report=audit();report['success']=not any(report[k] for k in ('buildings_on_roads','vehicles_outside_standing_surfaces','vehicle_collisions','boxcar_collisions','tree_clearance_violations')) and max(report['pond_paving_overlaps_m2'].values(),default=0)<.1;path=ROOT/'SourceAssets/MPR/reference_v4/validation/spatial_audit.json';path.parent.mkdir(parents=True,exist_ok=True)
+    report=audit();report['success']=not any(report[k] for k in ('buildings_on_roads','vehicles_outside_standing_surfaces','vehicle_collisions','boxcar_collisions','tree_clearance_violations','vehicle_wheel_support_issues')) and max(report['pond_paving_overlaps_m2'].values(),default=0)<.1;path=ROOT/'SourceAssets/MPR/reference_v4/validation/spatial_audit.json';path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps({k:(len(v) if isinstance(v,list) else v) for k,v in report.items()},ensure_ascii=False,indent=2))
 

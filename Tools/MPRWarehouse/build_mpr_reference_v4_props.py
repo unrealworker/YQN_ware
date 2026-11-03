@@ -16,6 +16,7 @@ sys.dont_write_bytecode=True
 sys.path.insert(0,str(ROOT/'Tools/MPRWarehouse'))
 sys.path.insert(0,str(ROOT/'Scripts/ghs'))
 from mpr_reference_props_geometry import trailer,car,freight,PALETTE
+PALETTE=dict(PALETTE,LeafMid=(.26,.33,.255),LeafLight=(.35,.40,.32),LeafShade=(.19,.26,.19))
 
 
 def extract_oak():
@@ -54,7 +55,8 @@ def mesh_object(name,vv,ff,roles,face_roles,mats,smooth=False):
 
 
 def make_materials():
- colors={'MPR4_LeafMid':(.42,.48,.34),'MPR4_LeafLight':(.55,.60,.44),'MPR4_LeafShade':(.29,.35,.23),'MPR4_Bark':(.17,.145,.105)}
+ colors={'MPR4_'+key:PALETTE[key]for key in ('LeafMid','LeafLight','LeafShade')}
+ colors['MPR4_Bark']=(.17,.145,.105)
  colors.update({'MPR4_'+k:v for k,v in PALETTE.items() if not k.startswith(('Leaf','Bark'))})
  mats={};specs={}
  for role,color in colors.items():
@@ -222,6 +224,58 @@ def finalize_reviewed():
  print('V4_REVIEWED_GEOMETRY_FROZEN',flush=True);render(tree);print('V4_REVIEWED_PALETTE_RENDERS_READY',flush=True)
 
 
+def rebuild_vehicles_only():
+ """Replace vehicle modules in the reviewed library without rebuilding foliage."""
+ from mpr_transport_v6_geometry import tractor,connected_boxcar,locomotive
+ manifest=json.loads((OUT/'manifest.json').read_text(encoding='utf8'))
+ tree_row=next(r for r in manifest['meshes'] if r['name']=='SM_MPR4_Tree_Oak')
+ tree_hash=hashlib.sha256((ROOT/tree_row['fbx']).read_bytes()).hexdigest()
+ bpy.ops.wm.open_mainfile(filepath=str(OUT/'MPR_ReferenceV4_Props.blend'))
+ tree=bpy.data.objects['SM_MPR4_Tree_Oak'];tree_vertices=[tuple(v.co) for v in tree.data.vertices]
+ mats={role:bpy.data.materials[role] for role in manifest['materials']}
+ builders=[('SM_MPR4_Trailer_'+color,lambda color=color:trailer(color,1,coupled=True)) for color in ('White','Blue','Coral')]
+ builders += [('SM_MPR4_Tractor',tractor),('SM_MPR4_FreightBoxcar',connected_boxcar),('SM_MPR4_Locomotive',locomotive)]
+ changes=[]
+ for name,builder in builders:
+  old=bpy.data.objects.get(name)
+  if old:bpy.data.objects.remove(old,do_unlink=True)
+  data,meta=builder()
+  if 'Trailer_' in name:
+   target=name.rsplit('_',1)[-1];data.roles=['Trailer'+target if role=='TrailerWhite' else role for role in data.roles]
+   meta['roof_matches_body_color']=True
+  roles=sorted({'MPR4_'+r for r in data.roles})
+  ob=mesh_object(name,data.vertices,data.faces,roles,['MPR4_'+r for r in data.roles],mats)
+  for polygon,smooth in zip(ob.data.polygons,data.smooth):polygon.use_smooth=smooth
+  row=export(ob,meta);ob.hide_render=True;ob.hide_set(True)
+  manifest['meshes']=[r for r in manifest['meshes'] if r['name']!=name]+[row];changes.append(row)
+ checks=[]
+ for row in changes:
+  before=set(bpy.data.objects);bpy.ops.import_scene.fbx(filepath=str(ROOT/row['fbx']))
+  imported=[ob for ob in bpy.data.objects if ob not in before and ob.type=='MESH'];assert len(imported)==1
+  check=imported[0];check.data.calc_loop_triangles();actual=bounds(check)
+  err=max(abs(actual[i][j]-row['bounds_m'][i][j]) for i in range(3) for j in range(2))
+  assert err<.001 and len(check.data.loop_triangles)==row['triangles'],name
+  assert abs(actual[2][0])<.001,('Wheel-contact origin',row['name'],actual[2])
+  assert row['triangles']<24000,('Vehicle triangle budget',row['name'],row['triangles'])
+  checks.append(dict(name=row['name'],triangles=row['triangles'],bounds_error_m=err,minimum_z_m=actual[2][0],sha256=row['sha256']))
+  for ob in list(bpy.data.objects):
+   if ob not in before:bpy.data.objects.remove(ob,do_unlink=True)
+ assert [tuple(v.co) for v in tree.data.vertices]==tree_vertices,'Reviewed tree vertices changed'
+ assert hashlib.sha256((ROOT/tree_row['fbx']).read_bytes()).hexdigest()==tree_hash,'Reviewed tree FBX changed'
+ bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'MPR_ReferenceV4_Props.blend'))
+ manifest['transport_revision']='v6_grounded_tractor_and_continuous_consists'
+ manifest['transport_validation']=dict(source_checks=checks,reviewed_tree_unchanged=True,tree_fbx_sha256=tree_hash,visual_review_complete=False)
+ (OUT/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf8')
+ (OUT/'transport_validation.json').write_text(json.dumps(manifest['transport_validation'],ensure_ascii=False,indent=2),encoding='utf8')
+ validation=json.loads((OUT/'validation.json').read_text(encoding='utf8'))
+ prior={r['name']:r for r in validation['roundtrips']}
+ for row in checks:prior[row['name']]=row
+ validation.update(success=True,roundtrips=list(prior.values()),vehicle_geometry_unchanged=False,transport_revision=manifest['transport_revision'])
+ (OUT/'validation.json').write_text(json.dumps(validation,ensure_ascii=False,indent=2),encoding='utf8')
+ print('MPR_TRANSPORT_V6_SOURCE_READY '+json.dumps(checks),flush=True)
+
+
 if __name__=='__main__':
- if '--finalize-existing' in sys.argv:finalize_reviewed()
+ if '--vehicles-only' in sys.argv:rebuild_vehicles_only()
+ elif '--finalize-existing' in sys.argv:finalize_reviewed()
  else:main()

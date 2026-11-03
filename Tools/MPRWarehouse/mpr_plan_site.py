@@ -95,16 +95,11 @@ def smooth_road_polygon_px(row):
 def landscape_islands():
     return unary_union([polygon(r) for r in read('plan_landscape_islands_v5.json')['polygons_px']])
 
-def extend_road_tails(roads,distance=160.,blockers=None):
-    """Continue cropped outlets beyond the drawing, without changing its interior.
-
-    The continuation is stylistic context, explicitly not measured road data.
-    Two inward cross sections estimate outlet direction. Individual lanes are
-    never inferred from black line thickness or merged through a land parcel.
-    """
+def _road_outlets(roads):
+    """Measure the unchanged plan exits, including cropped narrow side streets."""
     bounds=pixel_box(-.5,-.5,1727.5,909.5);xmin,ymin,xmax,ymax=bounds.bounds
-    rows=[];parts=[]
-    for axis,edge,sign in [(0,xmin,-1),(0,xmax,1),(1,ymin,-1),(1,ymax,1)]:
+    rows=[]
+    for edge_name,axis,edge,sign in [('left',0,xmin,-1),('right',0,xmax,1),('bottom',1,ymin,-1),('top',1,ymax,1)]:
         def section(inset):
             a=edge-sign*inset
             line=LineString([(a,ymin-1),(a,ymax+1)]) if axis==0 else LineString([(xmin-1,a),(xmax+1,a)])
@@ -119,13 +114,81 @@ def extend_road_tails(roads,distance=160.,blockers=None):
             if length<1e-5:continue
             direction=(dx/length,dy/length)
             if direction[axis]*sign<.25:continue
-            a,b=list(segment.coords)[0],list(segment.coords)[-1]
-            quad=Polygon([a,b,(b[0]+direction[0]*distance,b[1]+direction[1]*distance),(a[0]+direction[0]*distance,a[1]+direction[1]*distance)])
-            extension=quad.difference(bounds)
-            if blockers is not None and extension.buffer(1.).intersects(blockers):continue
-            parts.append(extension)
-            rows.append(dict(origin_m=[outer.x,outer.y],direction=list(direction),length_m=distance))
-    return unary_union([roads,*parts]),rows
+            rows.append(dict(origin_m=[outer.x,outer.y],direction=list(direction),edge=edge_name,
+                             section_m=[list(p) for p in segment.coords],width_m=segment.length*abs(direction[axis])))
+    return rows
+
+
+def terminal_shape(row):
+    """Constant source-width ribbon with an exact oblique source mouth."""
+    origin=np.asarray(row['origin_m']);direction=np.asarray(row['direction']);normal=np.array([-direction[1],direction[0]])
+    length=row['length_m'];width=row['width_m'];end=origin+direction*length
+    a=origin+direction*min(4.,length)
+    ribbon=Polygon([origin-normal*width*.5,end-normal*width*.5,end+normal*width*.5,origin+normal*width*.5])
+    mouth=Polygon([*row['section_m'],a-normal*width*.5,a+normal*width*.5]).convex_hull
+    return unary_union([ribbon,mouth])
+
+
+def terminal_fade(row,point):
+    distance=float(np.dot(np.asarray(point[:2])-row['origin_m'],row['direction']))
+    start=row['fade_start_m'];length=row['length_m']
+    t=max(0.,min(1.,(distance-start)/max(length-start,1e-9)))
+    return t*t*(3.-2.*t)
+
+
+def extend_road_tails(roads,distance=None,blockers=None):
+    """Preserve source tangents; open ends fade, never close to another street."""
+    import shapely
+    config=read('outside_road_connections_v5.json');bounds=pixel_box(*config['canvas_px'])
+    assert config['status']=='source_tangent_terminal_fade_no_authored_connections'
+    assert 'groups' not in config and 'collectors' not in config and 'branches' not in config
+    length=float(config['extension_m'] if distance is None else distance)
+    assert 0<length<=config['extension_m']
+    rows=[]
+    for i,outlet in enumerate(_road_outlets(roads)):
+        rows.append(dict(outlet,id='SourceTerminal_%02d'%i,kind='source_tangent_fade',length_m=length,shortened_for=[]))
+    tracks=[]
+    for track in read('plan_railway_v5.json')['tracks']:
+        points=xy(track['path_px']);a=np.asarray(points[0]);b=np.asarray(points[-1])
+        da=(a-points[1]);da/=np.linalg.norm(da);db=(b-points[-2]);db/=np.linalg.norm(db)
+        tracks.append(LineString([a+da*160.,*points,b+db*160.]).buffer(2.,quad_segs=8))
+    hard=unary_union([*tracks,*([] if blockers is None else [blockers.buffer(.35)])])
+    def first_station(row,geometry):
+        coords=shapely.get_coordinates(geometry)
+        return min((float(np.dot(p-row['origin_m'],row['direction'])) for p in coords),default=length)
+    clearance=float(config['terminal_clearance_m'])
+    for row in rows:
+        hit=terminal_shape(row).difference(bounds).intersection(hard)
+        if hit.area>1e-8:
+            row['length_m']=max(1.5,first_station(row,hit)-clearance)
+            row['shortened_for'].append('preserved_building_or_rail')
+    # Clip before mutual contact; never bend an inferred road into a junction.
+    for _ in range(4):
+        changed=False
+        for i,row in enumerate(rows):
+            for other in rows[i+1:]:
+                hit=terminal_shape(row).intersection(terminal_shape(other)).difference(bounds.buffer(.01))
+                if hit.area<=1e-8:continue
+                for item in (row,other):
+                    station=first_station(item,hit)-clearance
+                    assert station>1.,('Source road mouths overlap beyond plan',row['id'],other['id'])
+                    if station<item['length_m']:
+                        item['length_m']=station;item['shortened_for'].append('other_source_terminal');changed=True
+        if not changed:break
+    parts=[]
+    for row in rows:
+        row['end_m']=(np.asarray(row['origin_m'])+np.asarray(row['direction'])*row['length_m']).tolist()
+        row['path_m']=[row['origin_m'],row['end_m']]
+        row['fade_start_m']=max(0.,row['length_m']-config['fade_length_m'])
+        row['fade_end_m']=row['length_m'];row['fade_rgb_endpoints']=[0.,1.]
+        row['shortened_for']=sorted(set(row['shortened_for']))
+        part=terminal_shape(row).difference(bounds)
+        assert part.intersection(hard).area<1e-7,('Terminal clearance failed',row['id'])
+        parts.append(part)
+    addition=unary_union(parts);result=unary_union([roads,addition])
+    assert result.is_valid and result.symmetric_difference(roads).intersection(bounds).area<1e-7
+    return result,rows
+
 
 def portal_clearance():
     return unary_union([LineString(xy(r['ends_px'])).buffer(2.2,cap_style=2)

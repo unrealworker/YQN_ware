@@ -1,0 +1,731 @@
+{
+  "success": true,
+  "scope": "CPU source generation/geometry/texture audit only; no Blender export, UE LOD/mip readback, temporal video or visual acceptance yet.",
+  "source_sha256": {
+    "Tools/MPRWarehouse/build_mpr_reference_shell_v4.py": "1f8b32a28c6fbcede1c74fb4086b35a3cb036efaea1eadd8285e1bd9b663defc",
+    "Tools/MPRWarehouse/mpr_reference_shell_v4_lib.py": "bdb775039884dfc1f61197a6cff80dac85dda5a14847628052fffa4126567316",
+    "SourceAssets/MPR/reference_v4/architecture/plan_solar_v5.json": "89843b52af1ab4d736d645c401ec92fb6c27b70becc31399d8d4aeb9c6d0d4d3",
+    "SourceAssets/MPR/reference_v4/references/solar-roof-aerial-20261103.png": "1f7a067a885a7ffe27f03e6abdf2f3298b3da15b3006ed1114a9b2b1149f9f54",
+    "Tools/MPRWarehouse/extract_mpr_plan_solar.py": "5d8caa8b2714a40cf51464258100d15cee35f7719cc57386782b7502ba7f9399"
+  },
+  "fields": 16,
+  "clearances": 18,
+  "device_clearances": 16,
+  "unchanged_macro_outlines": true,
+  "macro_outline_scope": "Unchanged from current aerial measurement; user explicitly superseded old schematic outlines.",
+  "aerial_source_sha256": "1f7a067a885a7ffe27f03e6abdf2f3298b3da15b3006ed1114a9b2b1149f9f54",
+  "photo_registration_max_error_m": 2.099937498212158,
+  "preserved_cad_apertures": 74,
+  "facade_blue_bands": [
+    {
+      "side": 0,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          -181.93004,
+          83.69038
+        ],
+        [
+          -166.08044,
+          83.69038
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 1,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          -166.08044,
+          83.69038
+        ],
+        [
+          -166.08044,
+          74.54638
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 2,
+      "dock_facade": true,
+      "blue_top_z_m": 4.5,
+      "unchanged_cad_wall_endpoints": [
+        [
+          -166.08044,
+          74.54638
+        ],
+        [
+          166.78656,
+          74.54638
+        ]
+      ],
+      "aperture_ids": [
+        "DOOR_2C93B4_2E14CA",
+        "DOOR_2C93B4_2E0FFD",
+        "DOOR_2C93B4_2E14C5",
+        "DOOR_2C93B4_2E14C6",
+        "DOOR_2C93B4_2E14C7",
+        "DOOR_2C93B4_2E14C8",
+        "DOOR_2C93B4_2E14C9",
+        "DOOR_2C93B4_2E14CB",
+        "DOOR_2C93B4_2E14CC",
+        "DOOR_2C93B4_2E14CD",
+        "DOOR_2C93B4_2E14CE",
+        "DOOR_2C93B4_2E14CF",
+        "DOOR_2C93B4_2E14D0",
+        "DOOR_2C93B4_2E14D1",
+        "DOOR_2C93B4_2E14D2",
+        "DOOR_2C93B4_2E14D3",
+        "DOOR_2C93B4_2E14D4",
+        "DOOR_2C93B4_2E14D5",
+        "DOOR_2C93B4_2E14D6",
+        "DOOR_2C93B4_2E14D7",
+        "DOOR_2C93B4_2E14D8",
+        "DOOR_2C93B4_2E14D9",
+        "DOOR_2C93B4_2E14DA",
+        "DOOR_2C93B4_2E14DB",
+        "DOOR_2C93B4_2E14DC",
+        "DOOR_2C93B4_2E14DD",
+        "DOOR_2C93B4_2E14DE",
+        "DOOR_2C93B4_2E14DF",
+        "DOOR_2C93B4_2E14E0",
+        "DOOR_2C93B4_2E14E1",
+        "DOOR_2C93B4_2E14E2",
+        "DOOR_2C93B4_2E14E3",
+        "DOOR_2C93B4_2E14E4",
+        "DOOR_2C93B4_2E14E5",
+        "DOOR_2C93B4_2E14E6",
+        "DOOR_2C93B4_2E14E7",
+        "DOOR_2C93B4_2E14E8"
+      ]
+    },
+    {
+      "side": 3,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          166.78656,
+          74.54638
+        ],
+        [
+          166.78656,
+          83.58878
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 4,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          166.78656,
+          83.58878
+        ],
+        [
+          182.61076,
+          83.58878
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 5,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          182.61076,
+          83.58878
+        ],
+        [
+          182.61076,
+          -20.50042
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 6,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          182.61076,
+          -20.50042
+        ],
+        [
+          166.78656,
+          -20.50042
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 7,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          166.78656,
+          -20.50042
+        ],
+        [
+          166.78656,
+          -50.98042
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 8,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          166.78656,
+          -50.98042
+        ],
+        [
+          150.91156,
+          -50.98042
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 9,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          150.91156,
+          -50.98042
+        ],
+        [
+          150.91156,
+          -66.22042
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 10,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          150.91156,
+          -66.22042
+        ],
+        [
+          135.36676,
+          -66.22042
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 11,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          135.36676,
+          -66.22042
+        ],
+        [
+          135.36676,
+          -83.94962
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 12,
+      "dock_facade": true,
+      "blue_top_z_m": 4.5,
+      "unchanged_cad_wall_endpoints": [
+        [
+          135.36676,
+          -83.94962
+        ],
+        [
+          -166.08044,
+          -83.94962
+        ]
+      ],
+      "aperture_ids": [
+        "DOOR_2C93B4_2E1348",
+        "DOOR_2C93B4_2E1343",
+        "DOOR_2C93B4_2E1341",
+        "DOOR_2C93B4_2E133C",
+        "DOOR_2C93B4_2E1339",
+        "DOOR_2C93B4_2E1336",
+        "DOOR_2C93B4_2E1333",
+        "DOOR_2C93B4_2E132F",
+        "DOOR_2C93B4_2E132C",
+        "DOOR_2C93B4_2E1326",
+        "DOOR_2C93B4_2E1324",
+        "DOOR_2C93B4_2E1321",
+        "DOOR_2C93B4_2E0E32",
+        "DOOR_2C93B4_2E0E38",
+        "DOOR_2C93B4_2E0E33",
+        "DOOR_2C93B4_2E0E2D",
+        "DOOR_2C93B4_2E0E34",
+        "DOOR_2C93B4_2E0E2E",
+        "DOOR_2C93B4_2E0E30",
+        "DOOR_2C93B4_2E0E23",
+        "DOOR_2C93B4_2E0E20",
+        "DOOR_2C93B4_2E0DEA",
+        "DOOR_2C93B4_2E0E2F",
+        "DOOR_2C93B4_2E0E2B",
+        "DOOR_2C93B4_2E0E2A",
+        "DOOR_2C93B4_2E0E28",
+        "DOOR_2C93B4_2E0E24",
+        "DOOR_2C93B4_2E0DE4",
+        "DOOR_2C93B4_2E0DE0",
+        "DOOR_2C93B4_2E0E1B",
+        "DOOR_2C93B4_2E0E26",
+        "DOOR_2C93B4_2E0E1F",
+        "DOOR_2C93B4_2E0DD8",
+        "DOOR_2C93B4_2E0E27",
+        "DOOR_2C93B4_2E0E21",
+        "DOOR_2C93B4_2E0BD6",
+        "DOOR_2C93B4_2E0AB1"
+      ]
+    },
+    {
+      "side": 13,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          -166.08044,
+          -83.94962
+        ],
+        [
+          -166.08044,
+          -93.09362
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 14,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          -166.08044,
+          -93.09362
+        ],
+        [
+          -181.93004,
+          -93.09362
+        ]
+      ],
+      "aperture_ids": []
+    },
+    {
+      "side": 15,
+      "dock_facade": false,
+      "blue_top_z_m": 1.4,
+      "unchanged_cad_wall_endpoints": [
+        [
+          -181.93004,
+          -93.09362
+        ],
+        [
+          -181.93004,
+          83.69038
+        ]
+      ],
+      "aperture_ids": []
+    }
+  ],
+  "module_uv_alignment_max_error_m": 4.263256414560601e-14,
+  "facade_geometry_checks": [
+    {
+      "mesh": "SM_MPR4_Facade_00",
+      "bounds_unchanged": true,
+      "triangles": 312
+    },
+    {
+      "mesh": "SM_MPR4_Facade_01",
+      "bounds_unchanged": true,
+      "triangles": 216
+    },
+    {
+      "mesh": "SM_MPR4_Facade_02",
+      "bounds_unchanged": true,
+      "triangles": 10452
+    },
+    {
+      "mesh": "SM_MPR4_Facade_03",
+      "bounds_unchanged": true,
+      "triangles": 216
+    },
+    {
+      "mesh": "SM_MPR4_Facade_04",
+      "bounds_unchanged": true,
+      "triangles": 312
+    },
+    {
+      "mesh": "SM_MPR4_Facade_05",
+      "bounds_unchanged": true,
+      "triangles": 1752
+    },
+    {
+      "mesh": "SM_MPR4_Facade_06",
+      "bounds_unchanged": true,
+      "triangles": 312
+    },
+    {
+      "mesh": "SM_MPR4_Facade_07",
+      "bounds_unchanged": true,
+      "triangles": 504
+    },
+    {
+      "mesh": "SM_MPR4_Facade_08",
+      "bounds_unchanged": true,
+      "triangles": 312
+    },
+    {
+      "mesh": "SM_MPR4_Facade_09",
+      "bounds_unchanged": true,
+      "triangles": 312
+    },
+    {
+      "mesh": "SM_MPR4_Facade_10",
+      "bounds_unchanged": true,
+      "triangles": 312
+    },
+    {
+      "mesh": "SM_MPR4_Facade_11",
+      "bounds_unchanged": true,
+      "triangles": 312
+    },
+    {
+      "mesh": "SM_MPR4_Facade_12",
+      "bounds_unchanged": true,
+      "triangles": 10188
+    },
+    {
+      "mesh": "SM_MPR4_Facade_13",
+      "bounds_unchanged": true,
+      "triangles": 216
+    },
+    {
+      "mesh": "SM_MPR4_Facade_14",
+      "bounds_unchanged": true,
+      "triangles": 312
+    },
+    {
+      "mesh": "SM_MPR4_Facade_15",
+      "bounds_unchanged": true,
+      "triangles": 2808
+    }
+  ],
+  "placed_roof_devices": 195,
+  "placed_array_devices": 9,
+  "unchanged_non_pv_textures": [
+    "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_PaintedPanel_Base.png",
+    "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_PaintedPanel_Normal.png",
+    "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_DockFabric_Base.png",
+    "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_DockFabric_Normal.png",
+    "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_CheckerPlate_Base.png",
+    "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_CheckerPlate_Normal.png"
+  ],
+  "unchanged_non_pv_materials_except_authorized_roof_tint": true,
+  "authorized_roof_membrane_tint": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "banks": [
+    {
+      "name": "SM_MPR4_SolarBank_00_0",
+      "triangles": 18006,
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells",
+        "MPR4_SolarMid"
+      ],
+      "top_area_m2": 2241.6039072,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_00_0_LOD1",
+      "triangles": 324,
+      "material_roles": [
+        "MPR4_SolarMid",
+        "MPR4_SolarFrame"
+      ],
+      "top_area_m2": 2462.2768224000006,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_00_0_LOD2",
+      "triangles": 324,
+      "material_roles": [
+        "MPR4_SolarFar",
+        "MPR4_SolarFrame"
+      ],
+      "top_area_m2": 2462.2768224000006,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_01_0",
+      "triangles": 21014,
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells",
+        "MPR4_SolarMid"
+      ],
+      "top_area_m2": 2535.759513599998,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_01_0_LOD1",
+      "triangles": 482,
+      "material_roles": [
+        "MPR4_SolarMid",
+        "MPR4_SolarFrame"
+      ],
+      "top_area_m2": 2775.2400256,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_01_0_LOD2",
+      "triangles": 482,
+      "material_roles": [
+        "MPR4_SolarFar",
+        "MPR4_SolarFrame"
+      ],
+      "top_area_m2": 2775.2400256,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_01_1",
+      "triangles": 14212,
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells",
+        "MPR4_SolarMid"
+      ],
+      "top_area_m2": 1224.4427903999983,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_01_1_LOD1",
+      "triangles": 412,
+      "material_roles": [
+        "MPR4_SolarMid",
+        "MPR4_SolarFrame"
+      ],
+      "top_area_m2": 1337.8275872000006,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_01_1_LOD2",
+      "triangles": 412,
+      "material_roles": [
+        "MPR4_SolarFar",
+        "MPR4_SolarFrame"
+      ],
+      "top_area_m2": 1337.8275872000006,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_02_0",
+      "triangles": 29862,
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells",
+        "MPR4_SolarMid"
+      ],
+      "top_area_m2": 2601.0202943999666,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_02_0_LOD1",
+      "triangles": 824,
+      "material_roles": [
+        "MPR4_SolarMid",
+        "MPR4_SolarFrame"
+      ],
+      "top_area_m2": 2847.5414879999967,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_02_0_LOD2",
+      "triangles": 824,
+      "material_roles": [
+        "MPR4_SolarFar",
+        "MPR4_SolarFrame"
+      ],
+      "top_area_m2": 2847.5414879999967,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_02_1",
+      "triangles": 17256,
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells",
+        "MPR4_SolarMid"
+      ],
+      "top_area_m2": 1309.6739615999843,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_02_1_LOD1",
+      "triangles": 634,
+      "material_roles": [
+        "MPR4_SolarMid",
+        "MPR4_SolarFrame"
+      ],
+      "top_area_m2": 1425.8088671999985,
+      "source_clearance_overlap_m2": 0.0
+    },
+    {
+      "name": "SM_MPR4_SolarBank_02_1_LOD2",
+      "triangles": 634,
+      "material_roles": [
+        "MPR4_SolarFar",
+        "MPR4_SolarFrame"
+      ],
+      "top_area_m2": 1425.8088671999985,
+      "source_clearance_overlap_m2": 0.0
+    }
+  ],
+  "solar_lod_audit": [
+    {
+      "name": "SM_MPR4_SolarBank_00_0",
+      "near_blue_area_m2": 2241.6039072,
+      "merged_blue_area_m2": 2462.2768224000006,
+      "tiny_strip_gaps_merged_m2": 220.67291520000072,
+      "maximum_closing_radius_m": 0.055,
+      "near_mounting_channels_area_m2": 220.67291519999938,
+      "near_channel_height_m": 13.5,
+      "cell_to_channel_vertical_clearance_m": 0.14,
+      "clearance_policy": "Subtract identical aerial source solar_area with all measured enclosed holes and open notches; no macro outline or aisle expansion",
+      "intermediate_far_same_geometry": true
+    },
+    {
+      "name": "SM_MPR4_SolarBank_01_0",
+      "near_blue_area_m2": 2535.759513599998,
+      "merged_blue_area_m2": 2775.2400255999996,
+      "tiny_strip_gaps_merged_m2": 239.48051200000145,
+      "maximum_closing_radius_m": 0.055,
+      "near_mounting_channels_area_m2": 239.48051200000356,
+      "near_channel_height_m": 13.5,
+      "cell_to_channel_vertical_clearance_m": 0.14,
+      "clearance_policy": "Subtract identical aerial source solar_area with all measured enclosed holes and open notches; no macro outline or aisle expansion",
+      "intermediate_far_same_geometry": true
+    },
+    {
+      "name": "SM_MPR4_SolarBank_01_1",
+      "near_blue_area_m2": 1224.4427903999983,
+      "merged_blue_area_m2": 1337.8275872000004,
+      "tiny_strip_gaps_merged_m2": 113.38479680000205,
+      "maximum_closing_radius_m": 0.055,
+      "near_mounting_channels_area_m2": 113.38479680000208,
+      "near_channel_height_m": 13.5,
+      "cell_to_channel_vertical_clearance_m": 0.14,
+      "clearance_policy": "Subtract identical aerial source solar_area with all measured enclosed holes and open notches; no macro outline or aisle expansion",
+      "intermediate_far_same_geometry": true
+    },
+    {
+      "name": "SM_MPR4_SolarBank_02_0",
+      "near_blue_area_m2": 2601.0202943999666,
+      "merged_blue_area_m2": 2847.5414879999976,
+      "tiny_strip_gaps_merged_m2": 246.52119360003098,
+      "maximum_closing_radius_m": 0.055,
+      "near_mounting_channels_area_m2": 246.52119360002135,
+      "near_channel_height_m": 13.5,
+      "cell_to_channel_vertical_clearance_m": 0.14,
+      "clearance_policy": "Subtract identical aerial source solar_area with all measured enclosed holes and open notches; no macro outline or aisle expansion",
+      "intermediate_far_same_geometry": true
+    },
+    {
+      "name": "SM_MPR4_SolarBank_02_1",
+      "near_blue_area_m2": 1309.6739615999843,
+      "merged_blue_area_m2": 1425.808867199998,
+      "tiny_strip_gaps_merged_m2": 116.13490560001378,
+      "maximum_closing_radius_m": 0.055,
+      "near_mounting_channels_area_m2": 116.13490560001479,
+      "near_channel_height_m": 13.5,
+      "cell_to_channel_vertical_clearance_m": 0.14,
+      "clearance_policy": "Subtract identical aerial source solar_area with all measured enclosed holes and open notches; no macro outline or aisle expansion",
+      "intermediate_far_same_geometry": true
+    }
+  ],
+  "reference_screen_sizes": [
+    1,
+    0.9,
+    0.35
+  ],
+  "reference_bounds_radius_m": 70.0,
+  "normalized_bank_lod_thresholds": [
+    {
+      "mesh": "SM_MPR4_SolarBank_00_0",
+      "bounds_radius_m": 45.92519693980636,
+      "screen_sizes": [
+        1.0,
+        0.5904668177975104,
+        0.2296259846990318
+      ]
+    },
+    {
+      "mesh": "SM_MPR4_SolarBank_01_0",
+      "bounds_radius_m": 49.74542268349923,
+      "screen_sizes": [
+        1.0,
+        0.6395840059307044,
+        0.24872711341749612
+      ]
+    },
+    {
+      "mesh": "SM_MPR4_SolarBank_01_1",
+      "bounds_radius_m": 39.30466632551407,
+      "screen_sizes": [
+        1.0,
+        0.5053457098994666,
+        0.19652333162757032
+      ]
+    },
+    {
+      "mesh": "SM_MPR4_SolarBank_02_0",
+      "bounds_radius_m": 66.16480589376802,
+      "screen_sizes": [
+        1.0,
+        0.8506903614913032,
+        0.33082402946884004
+      ]
+    },
+    {
+      "mesh": "SM_MPR4_SolarBank_02_1",
+      "bounds_radius_m": 59.42206017094998,
+      "screen_sizes": [
+        1.0,
+        0.7639979164836427,
+        0.29711030085474993
+      ]
+    }
+  ],
+  "visual_modules": 5077,
+  "continuous_strips": 957,
+  "dynamic_validation_required": [
+    "Force near/mid/far and compare silhouettes/clearances",
+    "Actual 1920x1080 orbit and continuous zoom across each LOD threshold",
+    "Read back mip/filter/LOD settings and measure pixel-aligned temporal stability"
+  ]
+}

@@ -26,7 +26,7 @@ OUT=ROOT/'SourceAssets/MPR/reference_v4/context'
 G=Geometry()
 MATERIALS={
  'MPR4_ContextWall':dict(base_color=[.72,.735,.72],roughness=.88),
- 'MPR4_ContextRoof':dict(base_color=[.43,.47,.50],roughness=.85),
+ 'MPR4_ContextRoof':dict(base_color=[.45,.47,.515],roughness=.85),
  'MPR4_ContextTrim':dict(base_color=[.57,.59,.58],roughness=.88),
  'MPR4_ContextGlass':dict(base_color=[.31,.36,.365],roughness=.42),
  'MPR4_ContextPaving':dict(base_color=[.54,.565,.55],roughness=.95),

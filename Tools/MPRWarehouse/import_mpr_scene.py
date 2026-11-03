@@ -156,6 +156,55 @@ def instance_material(mat):
     return compatible
 
 
+def bind_explicit_lod_materials(mesh,row):
+    """Bind name-addressed LOD sections and remove only unused/duplicate slots.
+
+    UE5.8 exposes StaticMaterials + Get/SetLODMaterialSlot + GetNumSections.
+    RemoveUnusedMaterialSlots is C++-only; no unsupported Python call is used.
+    Read every section's imported role before compacting, then restore its map.
+    """
+    levels=row['lod_material_roles'];expected=row['all_lod_material_roles']
+    assert SM.get_lod_count(mesh)==len(levels),(row['name'],'Explicit LOD count')
+    slots=list(mesh.static_materials);roles=[str(s.get_editor_property('imported_material_slot_name')) for s in slots]
+    section_roles=[]
+    for lod,wanted in enumerate(levels):
+        current=[]
+        for section in range(mesh.get_num_sections(lod)):
+            index=SM.get_lod_material_slot(mesh,lod,section)
+            assert 0<=index<len(slots),(row['name'],lod,section,'Invalid material index',index)
+            role=roles[index];assert role in wanted,(row['name'],lod,section,'Unexpected imported role',role,wanted)
+            current.append(role)
+        assert set(current)==set(wanted),(row['name'],lod,'Missing material section',current,wanted)
+        section_roles.append(current)
+    assert set(role for current in section_roles for role in current)==set(expected)
+    compact=[]
+    for role in expected:
+        slot=slots[roles.index(role)];slot.material_interface=material(role)
+        slot.set_editor_property('material_slot_name',role)
+        # ImportedMaterialSlotName is read-only in UE 5.8. Reuse the
+        # already name-matched FBX slot without rewriting import metadata.
+        assert str(slot.get_editor_property('imported_material_slot_name'))==role
+        compact.append(slot)
+    mesh.set_editor_property('static_materials',compact)
+    for lod,current in enumerate(section_roles):
+        for section,role in enumerate(current):SM.set_lod_material_slot(mesh,expected.index(role),lod,section)
+    screen=row['lod_screen_sizes'];assert SM.set_lod_screen_sizes(mesh,screen)
+    actual_screen=list(SM.get_lod_screen_sizes(mesh))
+    assert len(actual_screen)==len(screen) and max(abs(a-b)for a,b in zip(actual_screen,screen))<1e-5
+    readback=[];current_slots=list(mesh.static_materials)
+    assert len(current_slots)==len(expected)
+    for lod,current in enumerate(section_roles):
+        sections=[]
+        for section,role in enumerate(current):
+            index=SM.get_lod_material_slot(mesh,lod,section);slot=current_slots[index]
+            assert str(slot.get_editor_property('imported_material_slot_name'))==role
+            assert slot.material_interface==material(role)
+            sections.append(dict(section=section,slot_index=index,role=role,material=slot.material_interface.get_path_name()))
+        readback.append(dict(lod=lod,screen_size=actual_screen[lod],sections=sections))
+    return dict(imported_slot_roles_before=roles,slot_roles_after=expected,lods=readback,
+                removed_unused_or_duplicate_slot_count=len(slots)-len(compact))
+
+
 def import_mesh(row,category):
     target=DEST+'/'+category+'/Meshes/'+row['name'];fbx=ROOT/row['fbx']
     assert fbx.is_file(),fbx
@@ -163,15 +212,26 @@ def import_mesh(row,category):
     task.destination_name=row['name'];task.automated=True;task.replace_existing=True;task.replace_existing_settings=True;task.save=False
     opts=u.FbxImportUI();opts.import_mesh=True;opts.import_as_skeletal=False;opts.import_materials=False;opts.import_textures=False
     opts.import_animations=False;opts.mesh_type_to_import=u.FBXImportType.FBXIT_STATIC_MESH;opts.automated_import_should_detect_type=False
+    explicit_lods=bool(row.get('lod_material_roles'))
+    if explicit_lods:
+        assert len(row['lod_material_roles'])==1+len(row.get('lod_files',[]))
+        opts.set_editor_property('reset_to_fbx_on_material_conflict',True)
     data=opts.static_mesh_import_data;data.combine_meshes=True;data.auto_generate_collision=False;data.generate_lightmap_u_vs=False
     data.convert_scene=True;data.convert_scene_unit=True;data.force_front_x_axis=False
     data.normal_import_method=u.FBXNormalImportMethod.FBXNIM_IMPORT_NORMALS
     data.normal_generation_method=u.FBXNormalGenerationMethod.BUILT_IN
+    if row.get('vertex_color_fade'):
+        data.vertex_color_import_option=u.VertexColorImportOption.REPLACE
     task.options=opts;task.factory=u.FbxFactory();TOOLS.import_asset_tasks([task])
     mesh=load(target);slots=mesh.static_materials
-    assert len(slots)==len(row['material_roles']),(row['name'],len(slots),row['material_roles'])
+    if not explicit_lods:assert len(slots)==len(row['material_roles']),(row['name'],len(slots),row['material_roles'])
     for i,slot in enumerate(slots):
         imported=str(slot.get_editor_property('imported_material_slot_name'))
+        if explicit_lods:
+            # Reimport can retain now-unused slots from previous LODs. Bind
+            # known roles now; final section audit below decides what survives.
+            if imported not in row['all_lod_material_roles']:continue
+            slot.material_interface=material(imported);slots[i]=slot;continue
         role=imported if imported in row['material_roles'] else row['material_roles'][i]
         mat=material(role)
         slot.material_interface=instance_material(mat) if row.get('instance_only') or category=='Equipment' else mat
@@ -179,11 +239,11 @@ def import_mesh(row,category):
     mesh.set_editor_property('static_materials',slots)
     b=mesh.get_bounds();actual=[[b.origin.x-b.box_extent.x,b.origin.x+b.box_extent.x],[b.origin.y-b.box_extent.y,b.origin.y+b.box_extent.y],[b.origin.z-b.box_extent.z,b.origin.z+b.box_extent.z]]
     expected=row['bounds_m'];expected=[[expected[0][0]*100,expected[0][1]*100],[-expected[1][1]*100,-expected[1][0]*100],[expected[2][0]*100,expected[2][1]*100]]
-    assert max(abs(a-b) for aa,bb in zip(actual,expected) for a,b in zip(aa,bb))<2.0,(row['name'],'axis/scale',actual,expected)
+    if not explicit_lods:assert max(abs(a-b) for aa,bb in zip(actual,expected) for a,b in zip(aa,bb))<2.0,(row['name'],'axis/scale',actual,expected)
     if row.get('lod_files'):
         for index,filename in enumerate(row['lod_files'],1):
             assert SM.import_lod(mesh,index,str(ROOT/filename))==index
-        SM.set_lod_screen_sizes(mesh,row.get('lod_screen_sizes',[1.,.15,.045]))
+        assert SM.set_lod_screen_sizes(mesh,row.get('lod_screen_sizes',[1.,.15,.045]))
     elif not row.get('skip_auto_lods') and row.get('instance_only') and row.get('triangles',0)>1000:
         reduction=u.StaticMeshReductionOptions()
         reduction.auto_compute_lod_screen_size=False
@@ -195,9 +255,21 @@ def import_mesh(row,category):
             settings.set_editor_property('use_full_precision_u_vs',True)
             settings.set_editor_property('recompute_tangents',True)
             SM.set_lod_build_settings(mesh,index,settings)
+    lod_audit=bind_explicit_lod_materials(mesh,row) if explicit_lods else None
+    if explicit_lods:
+        # Inspect final bounds after replacing all retained old LODs. The
+        # coarse levels omit centimetre-scale frames/feet, never CAD features.
+        b=mesh.get_bounds();actual=[[b.origin.x-b.box_extent.x,b.origin.x+b.box_extent.x],[b.origin.y-b.box_extent.y,b.origin.y+b.box_extent.y],[b.origin.z-b.box_extent.z,b.origin.z+b.box_extent.z]]
+        assert max(abs(a-b) for aa,bb in zip(actual,expected) for a,b in zip(aa,bb))<20.0,(row['name'],'explicit LOD axis/scale',actual,expected)
+    slots=mesh.static_materials
     assert LIB.save_loaded_asset(mesh,only_if_is_dirty=False)
     MESHES[row['name']]=mesh
     result['meshes'].append(dict(name=row['name'],path=target,bounds_cm=actual,material_slots=len(slots),source_triangles=row.get('triangles'),lod_count=SM.get_lod_count(mesh)))
+    if row.get('vertex_color_fade'):
+        actual_import=mesh.get_editor_property('asset_import_data')
+        assert actual_import.get_editor_property('vertex_color_import_option')==u.VertexColorImportOption.REPLACE
+        result['meshes'][-1]['vertex_color_fade']=dict(import_option='REPLACE',source=row['vertex_color_fade'])
+    if lod_audit is not None:result['meshes'][-1]['explicit_lod_audit']=lod_audit
     return mesh
 
 def tag(a,folder,extra=()):

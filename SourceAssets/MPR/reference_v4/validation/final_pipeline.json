@@ -2,73 +2,124 @@
   {
     "name": "import",
     "report": "Saved/MPR/reference_v4_build.json",
-    "sha256": "388d30ec095ad1b24269510a77634b1a8a7b5e9ec328440e69913798ce314b9f",
+    "sha256": "9ee895445a587d2dfd9ed466b5cb3497fda726563b6e26653060ab1708658e6c",
     "success": true
   },
   {
     "name": "reload",
     "report": "Saved/MPR/reference_v4/validation.json",
-    "sha256": "8466ccac36df413f1752f6edbc9816688801bd21002e3d17daa821759a96d26d",
+    "sha256": "7631106659637064aae5386ff3e03dd5151bbf40d00706d04ddeb910d9d4a359",
     "success": true
   },
   {
     "name": "performance",
     "report": "Saved/MPR/performance.json",
-    "sha256": "865726d35d57c539a49bb569e502b1855dfbd2f3a998381a77187de5d7662793",
+    "sha256": "081eb4b07b0e287c0823f0651e453656f676bb0b1d909b14df3342d8c21b37a8",
     "success": true
   },
   {
     "name": "runtime_views",
     "report": "Saved/MPR/reference_v4/runtime_views/capture_report.json",
-    "sha256": "d9ca7df2be9e5e22c8234e40ff7d6cda11f7be3bcb35fbead7a3319a8ed719d8",
+    "sha256": "b8c3f199b16032b1f4ec97f25a445cdc77c1980a8ef8ea38def353aa0da0d173",
     "success": true
   },
   {
     "name": "plan_views",
     "report": "Saved/MPR/road_v5/runtime_views/capture_report.json",
-    "sha256": "e5f64299490b52a27fb37b643cda0f277549d638b558ab7ba32118b29895585b",
+    "sha256": "00703337930ee224698a23190d668b70d49369995ca5b5057f7c168e6bd41207",
+    "success": true
+  },
+  {
+    "name": "outside_views",
+    "report": "Saved/MPR/road_v5/outside_views/capture_report.json",
+    "sha256": "afc45e22522e52f635ede48b15ee707c1cc821dd06560d5e0287e3c2f127193f",
+    "success": true
+  },
+  {
+    "name": "detail_views",
+    "report": "Saved/MPR/feedback_v7/detail_views/capture_report.json",
+    "sha256": "096c28f2dcf59bb44140774bfaad77ad6970b59a7f00ef4c84f254690691633c",
     "success": true
   },
   {
     "name": "runtime_capture",
     "report": "Saved/MPR/reference_v4/runtime_calibrated_capture.json",
-    "sha256": "a4c3c9d3608338fcdf1438cd514ae58644785e94a8f3289c103cbb0e528e535f",
+    "sha256": "ab63eacba7dc6508fdda03ff05eff5b6e178863c0618b75b0106090eefc3c530",
     "success": true
   },
   {
     "name": "blender",
     "report": "SourceAssets/MPR/reference_v4/validation_blender/composition_validation.json",
-    "sha256": "0b53b4332038eb9afbfddda46d2cc152c4f5b1aa083d83b87a960aae326080c4",
+    "sha256": "de4dcbc7a7b64dc870967216d31c4d1d98bd436fb0c29ec415455f42e1a24753",
     "success": true
   },
   {
     "name": "package_dependencies",
     "report": "SourceAssets/MPR/reference_v4/validation/package_dependencies.json",
-    "sha256": "97754ecd75175bde27e727cbceb4ba6a626b609228d7a3e1f63c618c80ca0059",
+    "sha256": "16ee9461e109f9b38e177d117d2dc043ffd552640b2e9674121ac2e4e7c7ea68",
     "success": true
   },
   {
     "name": "spatial_audit",
     "report": "SourceAssets/MPR/reference_v4/validation/spatial_audit.json",
-    "sha256": "17a93c85670673c6ccce81a70116fa44650611e1127b781eb5b1bed2484bce87",
+    "sha256": "fe604cfdf7bbfce52ee0c266cb30a79c6b70fb36f86aaa777ee4f01f568e6b8f",
     "success": true
   },
   {
     "name": "context_geometry",
     "report": "Saved/MPR/road_v5/context_geometry_validation.json",
-    "sha256": "4bab9cd9c64e44e11af88c5022e80ecde9def6b452217e9496a3ee0535f5c44d",
+    "sha256": "f7974c10e8422bd08d1727f54aafe940dfcbb768dea8759e8df7e89503ed2833",
     "success": true
   },
   {
     "name": "site_fbx",
     "report": "SourceAssets/MPR/reference_v4/validation_blender/site_fbx_validation.json",
-    "sha256": "e7fbada6f3070acdb1197892b5f31666cba694a65711dc013cf89663e30ff9a0",
+    "sha256": "d0c4f09ac5165e4288b752cff97539496c519abcbb91c7ba17f6375635426eef",
     "success": true
   },
   {
     "name": "road_smoothing",
     "report": "Saved/MPR/road_v5/road_smoothing_review.json",
-    "sha256": "c2beaa7152cb4e53f5fc9919e9a0b55607a6e5cdf948113afab99d0981559d12",
+    "sha256": "14a360cf55946e85e13b288b7dd8802761e5b676eb2592c65bf7d299c43d40e5",
     "success": true
+  },
+  {
+    "name": "outside_geometry",
+    "report": "Saved/MPR/road_v5/outside_road_review.json",
+    "sha256": "546739da5c852e5517c864be92ee78e1b874ff4ec8705c2c159681cb35e74fbe",
+    "success": true
+  },
+  {
+    "name": "campus_surfaces",
+    "report": "Saved/MPR/road_v5/campus_surface_review.json",
+    "sha256": "bc6412a7f90303f18b500536c1efdc5d238ab029b5c627ff92bfde3e7854c68e",
+    "success": true
+  },
+  {
+    "name": "transport_geometry",
+    "report": "SourceAssets/MPR/reference_v4/props/transport_validation.json",
+    "sha256": "7b4d056e3151c3acfa162e4dd09bdfe20a601a279fe925c2e95c5d8e187db71c",
+    "success": true
+  },
+  {
+    "name": "pv_source",
+    "report": "Saved/MPR/pv_v6/source_audit.json",
+    "sha256": "3bd8ef40e0b405e74d4ed35e464f7d5fc243c0233b8a65fcc5d05235b2934c78",
+    "success": true,
+    "evidence_scope": "auxiliary_cpu_source_audit_not_final_geometry_or_runtime"
+  },
+  {
+    "name": "solar_motion",
+    "report": "Saved/MPR/solar_motion/review/solar_motion_review.json",
+    "sha256": "532eef0b6cfb6c8f25e26f361b559da84c9a29ebf5ec5d74e962a3e512860e6e",
+    "success": true,
+    "evidence_scope": "paired_native_pose_samples_not_realtime_video_or_flicker_free_claim"
+  },
+  {
+    "name": "motion_far",
+    "report": "Saved/MPR/solar_motion/far/capture_report.json",
+    "sha256": "a67ea8ee41984029f6bd7ce60f78ad75c5503239131754993ba8b6dab404cdeb",
+    "success": true,
+    "evidence_scope": "24_native_far_pose_samples_not_active_LOD_readback_or_flicker_free_claim"
   }
 ]

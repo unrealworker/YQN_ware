@@ -1,0 +1,716 @@
+{
+  "success": true,
+  "map_sha256": "ea0eb9fd1c41725d282530b4429e7109f7c148473468fe86748e40bb2d401bb7",
+  "source_snapshot_sha256": "7b06370d3fb1ab2fd8f4ed8d0f8f2748d1763f2e3c161aa410b7387c7541bd8c",
+  "reports": {
+    "import": {
+      "path": "Saved/MPR/reference_v4_build.json",
+      "sha256": "9ee895445a587d2dfd9ed466b5cb3497fda726563b6e26653060ab1708658e6c"
+    },
+    "reload": {
+      "path": "Saved/MPR/reference_v4/validation.json",
+      "sha256": "7631106659637064aae5386ff3e03dd5151bbf40d00706d04ddeb910d9d4a359"
+    },
+    "performance": {
+      "path": "Saved/MPR/performance.json",
+      "sha256": "081eb4b07b0e287c0823f0651e453656f676bb0b1d909b14df3342d8c21b37a8"
+    },
+    "runtime_views": {
+      "path": "Saved/MPR/reference_v4/runtime_views/capture_report.json",
+      "sha256": "b8c3f199b16032b1f4ec97f25a445cdc77c1980a8ef8ea38def353aa0da0d173"
+    },
+    "plan_views": {
+      "path": "Saved/MPR/road_v5/runtime_views/capture_report.json",
+      "sha256": "00703337930ee224698a23190d668b70d49369995ca5b5057f7c168e6bd41207"
+    },
+    "outside_views": {
+      "path": "Saved/MPR/road_v5/outside_views/capture_report.json",
+      "sha256": "afc45e22522e52f635ede48b15ee707c1cc821dd06560d5e0287e3c2f127193f"
+    },
+    "detail_views": {
+      "path": "Saved/MPR/feedback_v7/detail_views/capture_report.json",
+      "sha256": "096c28f2dcf59bb44140774bfaad77ad6970b59a7f00ef4c84f254690691633c"
+    },
+    "runtime_capture": {
+      "path": "Saved/MPR/reference_v4/runtime_calibrated_capture.json",
+      "sha256": "ab63eacba7dc6508fdda03ff05eff5b6e178863c0618b75b0106090eefc3c530"
+    },
+    "blender": {
+      "path": "SourceAssets/MPR/reference_v4/validation_blender/composition_validation.json",
+      "sha256": "de4dcbc7a7b64dc870967216d31c4d1d98bd436fb0c29ec415455f42e1a24753"
+    },
+    "blender_manifest": {
+      "path": "SourceAssets/MPR/reference_v4/validation_blender/composition_manifest.json",
+      "sha256": "aff712597a52998d40f20b09e61d88c11b96f3018ad739f042b4922379ea0c22"
+    },
+    "plan_alignment": {
+      "path": "SourceAssets/MPR/reference_v4/validation/plan_alignment.json",
+      "sha256": "b879d7a90abd630aacb8f67bcb26c49bb9a140fd010930822e139fd8e5b6d936"
+    },
+    "package_dependencies": {
+      "path": "SourceAssets/MPR/reference_v4/validation/package_dependencies.json",
+      "sha256": "16ee9461e109f9b38e177d117d2dc043ffd552640b2e9674121ac2e4e7c7ea68"
+    },
+    "spatial_audit": {
+      "path": "SourceAssets/MPR/reference_v4/validation/spatial_audit.json",
+      "sha256": "fe604cfdf7bbfce52ee0c266cb30a79c6b70fb36f86aaa777ee4f01f568e6b8f"
+    },
+    "context_geometry": {
+      "path": "Saved/MPR/road_v5/context_geometry_validation.json",
+      "sha256": "f7974c10e8422bd08d1727f54aafe940dfcbb768dea8759e8df7e89503ed2833"
+    },
+    "native_visual_review": {
+      "path": "Saved/MPR/road_v5/native_visual_review.json",
+      "sha256": "a895cad7cea9d5ffbd2cb116a24ed29ea137b1c9b86c7bf8458dc4ae29a12f0b"
+    },
+    "site_fbx": {
+      "path": "SourceAssets/MPR/reference_v4/validation_blender/site_fbx_validation.json",
+      "sha256": "d0c4f09ac5165e4288b752cff97539496c519abcbb91c7ba17f6375635426eef"
+    },
+    "road_smoothing": {
+      "path": "Saved/MPR/road_v5/road_smoothing_review.json",
+      "sha256": "14a360cf55946e85e13b288b7dd8802761e5b676eb2592c65bf7d299c43d40e5"
+    },
+    "outside_geometry": {
+      "path": "Saved/MPR/road_v5/outside_road_review.json",
+      "sha256": "546739da5c852e5517c864be92ee78e1b874ff4ec8705c2c159681cb35e74fbe"
+    },
+    "campus_surfaces": {
+      "path": "Saved/MPR/road_v5/campus_surface_review.json",
+      "sha256": "bc6412a7f90303f18b500536c1efdc5d238ab029b5c627ff92bfde3e7854c68e"
+    },
+    "transport_geometry": {
+      "path": "SourceAssets/MPR/reference_v4/props/transport_validation.json",
+      "sha256": "7b4d056e3151c3acfa162e4dd09bdfe20a601a279fe925c2e95c5d8e187db71c"
+    },
+    "pv_source": {
+      "path": "Saved/MPR/pv_v6/source_audit.json",
+      "sha256": "3bd8ef40e0b405e74d4ed35e464f7d5fc243c0233b8a65fcc5d05235b2934c78"
+    },
+    "solar_motion": {
+      "path": "Saved/MPR/solar_motion/review/solar_motion_review.json",
+      "sha256": "532eef0b6cfb6c8f25e26f361b559da84c9a29ebf5ec5d74e962a3e512860e6e"
+    },
+    "motion_baseline": {
+      "path": "Saved/MPR/solar_motion/baseline/capture_report.json",
+      "sha256": "377cdd6c79fc32bd150a2b7fa40a3bdd741f1d88928c61145cd3f925ea7554a2"
+    },
+    "motion_final": {
+      "path": "Saved/MPR/solar_motion/final/capture_report.json",
+      "sha256": "b987db598569cbd2d994504d1141997aeca1fc4fa82f104df025a35d61b307de"
+    },
+    "motion_far": {
+      "path": "Saved/MPR/solar_motion/far/capture_report.json",
+      "sha256": "a67ea8ee41984029f6bd7ce60f78ad75c5503239131754993ba8b6dab404cdeb"
+    }
+  },
+  "archives": {
+    "import_report.json": {
+      "source": "Saved/MPR/reference_v4_build.json",
+      "sha256": "9ee895445a587d2dfd9ed466b5cb3497fda726563b6e26653060ab1708658e6c",
+      "bytes": 173649
+    },
+    "reload_validation.json": {
+      "source": "Saved/MPR/reference_v4/validation.json",
+      "sha256": "7631106659637064aae5386ff3e03dd5151bbf40d00706d04ddeb910d9d4a359",
+      "bytes": 53337
+    },
+    "performance.json": {
+      "source": "Saved/MPR/performance.json",
+      "sha256": "081eb4b07b0e287c0823f0651e453656f676bb0b1d909b14df3342d8c21b37a8",
+      "bytes": 17565
+    },
+    "runtime_calibrated_capture.json": {
+      "source": "Saved/MPR/reference_v4/runtime_calibrated_capture.json",
+      "sha256": "ab63eacba7dc6508fdda03ff05eff5b6e178863c0618b75b0106090eefc3c530",
+      "bytes": 1192
+    },
+    "runtime_views/capture_report.json": {
+      "source": "Saved/MPR/reference_v4/runtime_views/capture_report.json",
+      "sha256": "b8c3f199b16032b1f4ec97f25a445cdc77c1980a8ef8ea38def353aa0da0d173",
+      "bytes": 5975
+    },
+    "plan_views/capture_report.json": {
+      "source": "Saved/MPR/road_v5/runtime_views/capture_report.json",
+      "sha256": "00703337930ee224698a23190d668b70d49369995ca5b5057f7c168e6bd41207",
+      "bytes": 3852
+    },
+    "outside_views/capture_report.json": {
+      "source": "Saved/MPR/road_v5/outside_views/capture_report.json",
+      "sha256": "afc45e22522e52f635ede48b15ee707c1cc821dd06560d5e0287e3c2f127193f",
+      "bytes": 3864
+    },
+    "detail_views/capture_report.json": {
+      "source": "Saved/MPR/feedback_v7/detail_views/capture_report.json",
+      "sha256": "096c28f2dcf59bb44140774bfaad77ad6970b59a7f00ef4c84f254690691633c",
+      "bytes": 5692
+    },
+    "package_dependencies.json": {
+      "source": "SourceAssets/MPR/reference_v4/validation/package_dependencies.json",
+      "sha256": "16ee9461e109f9b38e177d117d2dc043ffd552640b2e9674121ac2e4e7c7ea68",
+      "bytes": 19344
+    },
+    "spatial_audit.json": {
+      "source": "SourceAssets/MPR/reference_v4/validation/spatial_audit.json",
+      "sha256": "fe604cfdf7bbfce52ee0c266cb30a79c6b70fb36f86aaa777ee4f01f568e6b8f",
+      "bytes": 51389
+    },
+    "context_geometry_validation.json": {
+      "source": "Saved/MPR/road_v5/context_geometry_validation.json",
+      "sha256": "f7974c10e8422bd08d1727f54aafe940dfcbb768dea8759e8df7e89503ed2833",
+      "bytes": 197977
+    },
+    "native_visual_review.json": {
+      "source": "Saved/MPR/road_v5/native_visual_review.json",
+      "sha256": "a895cad7cea9d5ffbd2cb116a24ed29ea137b1c9b86c7bf8458dc4ae29a12f0b",
+      "bytes": 32674
+    },
+    "final_tone_metrics.json": {
+      "source": "Saved/MPR/style_review/final_tone_metrics.json",
+      "sha256": "8cc53ca3063afecc8a70278eba4cb2e9fe04cfeca1b35906c6237f3cc2523f89",
+      "bytes": 11105
+    },
+    "solar_motion/native_pv_review.json": {
+      "source": "Saved/MPR/pv_v6/native_review/review.json",
+      "sha256": "e2d81498ccb14c84854ea9df636feebe07f4b317402bb756a0e551c3710bb10b",
+      "bytes": 8645
+    },
+    "site_fbx_validation.json": {
+      "source": "SourceAssets/MPR/reference_v4/validation_blender/site_fbx_validation.json",
+      "sha256": "d0c4f09ac5165e4288b752cff97539496c519abcbb91c7ba17f6375635426eef",
+      "bytes": 10311
+    },
+    "road_smoothing_review.json": {
+      "source": "Saved/MPR/road_v5/road_smoothing_review.json",
+      "sha256": "14a360cf55946e85e13b288b7dd8802761e5b676eb2592c65bf7d299c43d40e5",
+      "bytes": 4000
+    },
+    "outside_road_review.json": {
+      "source": "Saved/MPR/road_v5/outside_road_review.json",
+      "sha256": "546739da5c852e5517c864be92ee78e1b874ff4ec8705c2c159681cb35e74fbe",
+      "bytes": 9713
+    },
+    "campus_surface_review.json": {
+      "source": "Saved/MPR/road_v5/campus_surface_review.json",
+      "sha256": "bc6412a7f90303f18b500536c1efdc5d238ab029b5c627ff92bfde3e7854c68e",
+      "bytes": 2665
+    },
+    "transport_geometry_validation.json": {
+      "source": "SourceAssets/MPR/reference_v4/props/transport_validation.json",
+      "sha256": "7b4d056e3151c3acfa162e4dd09bdfe20a601a279fe925c2e95c5d8e187db71c",
+      "bytes": 1514
+    },
+    "pv_source_audit.json": {
+      "source": "Saved/MPR/pv_v6/source_audit.json",
+      "sha256": "3bd8ef40e0b405e74d4ed35e464f7d5fc243c0233b8a65fcc5d05235b2934c78",
+      "bytes": 19592
+    },
+    "solar_motion/solar_motion_review.json": {
+      "source": "Saved/MPR/solar_motion/review/solar_motion_review.json",
+      "sha256": "532eef0b6cfb6c8f25e26f361b559da84c9a29ebf5ec5d74e962a3e512860e6e",
+      "bytes": 214589
+    },
+    "solar_motion/baseline_capture_report.json": {
+      "source": "Saved/MPR/solar_motion/baseline/capture_report.json",
+      "sha256": "377cdd6c79fc32bd150a2b7fa40a3bdd741f1d88928c61145cd3f925ea7554a2",
+      "bytes": 101767
+    },
+    "solar_motion/final_capture_report.json": {
+      "source": "Saved/MPR/solar_motion/final/capture_report.json",
+      "sha256": "b987db598569cbd2d994504d1141997aeca1fc4fa82f104df025a35d61b307de",
+      "bytes": 103526
+    },
+    "solar_motion/far/capture_report.json": {
+      "source": "Saved/MPR/solar_motion/far/capture_report.json",
+      "sha256": "a67ea8ee41984029f6bd7ce60f78ad75c5503239131754993ba8b6dab404cdeb",
+      "bytes": 27396
+    },
+    "validation_run_context.json": {
+      "source": "Saved/MPR/road_v5/validation_run_context.json",
+      "sha256": "7b06370d3fb1ab2fd8f4ed8d0f8f2748d1763f2e3c161aa410b7387c7541bd8c",
+      "bytes": 48756
+    },
+    "solar_motion/native_sampled_comparison.mp4": {
+      "source": "Saved/MPR/solar_motion/review/native_sampled_comparison.mp4",
+      "sha256": "9f99d7d9245d63d8c817702b9f30d6c8f661a5391dfeb4e3caee6e7fcbf5a3d2",
+      "bytes": 7642937
+    },
+    "solar_motion/final_panel_interior_mask.png": {
+      "source": "Saved/MPR/solar_motion/review/final_panel_interior_mask.png",
+      "sha256": "a19ee165a1b8cb84731c1662b8a17ce982850a6184e9a06746028abc4dd7630b",
+      "bytes": 4711
+    },
+    "solar_motion/analysis_rectified_000.png": {
+      "source": "Saved/MPR/solar_motion/review/analysis_rectified_000.png",
+      "sha256": "740f93b3ae69d9fc95080768729c0caea5b51fdc92641169cd1cdbb35ef3cd09",
+      "bytes": 1660870
+    },
+    "solar_motion/analysis_rectified_048.png": {
+      "source": "Saved/MPR/solar_motion/review/analysis_rectified_048.png",
+      "sha256": "8c5f485a4081d0920180742daf186373b6b569f6aaddc288f3d94ea0eab6ae4d",
+      "bytes": 1389641
+    },
+    "solar_motion/analysis_rectified_095.png": {
+      "source": "Saved/MPR/solar_motion/review/analysis_rectified_095.png",
+      "sha256": "8e868f10fc7b6ebe604d2b03dc9a6c17bccf624413a96345122a54cced60ac90",
+      "bytes": 1369661
+    },
+    "solar_motion/shared_support_048.png": {
+      "source": "Saved/MPR/solar_motion/review/shared_support_048.png",
+      "sha256": "0eeadf52296f528bc4d25d52b10c288c605a06ae7b936d7a2a69335913ba50d9",
+      "bytes": 7013
+    },
+    "solar_motion/far/000.png": {
+      "source": "Saved/MPR/solar_motion/far/000_1793705072795617800.png",
+      "sha256": "b561eee7ded7540a033f0fbb012d906a0a750a59e814e1bcf7d996584087caae",
+      "bytes": 2938416
+    },
+    "solar_motion/far/011.png": {
+      "source": "Saved/MPR/solar_motion/far/011_1793705072795617800.png",
+      "sha256": "d89ad98e8974c17dd683cdc8acae47c8d7c3edffce0c129eafde174228a31f5c",
+      "bytes": 2543977
+    },
+    "solar_motion/far/023.png": {
+      "source": "Saved/MPR/solar_motion/far/023_1793705072795617800.png",
+      "sha256": "6ca094285e7a8ca3a274d983cf06926d88078704d138bcb22e5e8148ff4279d8",
+      "bytes": 2867276
+    },
+    "runtime_views/01-overall.png": {
+      "source": "Saved/MPR/reference_v4/runtime_views/01-overall_1793704810552131200.png",
+      "sha256": "baf8d1b965cbc71d321a252eb49ae0675ca818df5091e241a1e077307160a43d",
+      "bytes": 2854403
+    },
+    "runtime_views/02-yard-corner.png": {
+      "source": "Saved/MPR/reference_v4/runtime_views/02-yard-corner_1793704814135676700.png",
+      "sha256": "c9be6a50a00faf12935926417d1161ceb8f4d2a48b767375247d76b69efbded7",
+      "bytes": 2878938
+    },
+    "runtime_views/03-roof.png": {
+      "source": "Saved/MPR/reference_v4/runtime_views/03-roof_1793704817409556100.png",
+      "sha256": "5a47329608b0b5bd0c9a1ad722632f6819a819ec64e8b301cfa99a22e6c1643a",
+      "bytes": 2700026
+    },
+    "runtime_views/04-docks.png": {
+      "source": "Saved/MPR/reference_v4/runtime_views/04-docks_1793704820663479300.png",
+      "sha256": "02651e96607ace26c9006f15bb29f5218ef78fa6bc9c44d3f9c4ee1ca5b5dc70",
+      "bytes": 2491967
+    },
+    "runtime_views/05-yard.png": {
+      "source": "Saved/MPR/reference_v4/runtime_views/05-yard_1793704823946090900.png",
+      "sha256": "972dd646f04ebc19ba680c8fe8bbb7658c613d54a02586c3abbd1659812e0135",
+      "bytes": 2486290
+    },
+    "runtime_views/06-pond.png": {
+      "source": "Saved/MPR/reference_v4/runtime_views/06-pond_1793704827225006300.png",
+      "sha256": "91036d27cc60b2f4afffedabb82804e7fadd0e0607e111877038e54957dd4229",
+      "bytes": 2607805
+    },
+    "runtime_views/07-railway.png": {
+      "source": "Saved/MPR/reference_v4/runtime_views/07-railway_1793704830504543600.png",
+      "sha256": "c3661396969c721070c2797600e5614aab77395f184b746ac42ab80b3f05b0e1",
+      "bytes": 3005481
+    },
+    "runtime_views/08-interior-preserved.png": {
+      "source": "Saved/MPR/reference_v4/runtime_views/08-interior-preserved_1793704833791618000.png",
+      "sha256": "dfabceb435ef010b8872f89a50463ea642e43e329871729bdeba9da17e536458",
+      "bytes": 3028245
+    },
+    "plan_views/09-plan-overview.png": {
+      "source": "Saved/MPR/road_v5/runtime_views/09-plan-overview_1793704894290140400.png",
+      "sha256": "3d4495b32e2a52e1ee5e7df9c851b52f86dcb0fb4afab1f580fdd3454a2e73ed",
+      "bytes": 2797660
+    },
+    "plan_views/10-houses-close.png": {
+      "source": "Saved/MPR/road_v5/runtime_views/10-houses-close_1793704897878232000.png",
+      "sha256": "b7144e3102ca9bcb241790f67cbec714da8118b082451d2858addc4be795d1aa",
+      "bytes": 2388929
+    },
+    "plan_views/11-houses-reverse.png": {
+      "source": "Saved/MPR/road_v5/runtime_views/11-houses-reverse_1793704901252303900.png",
+      "sha256": "898966eecbdb8c09edb967a57ea0a178d3aab2e2a8122005077d5746468e93a3",
+      "bytes": 2282589
+    },
+    "plan_views/12-neighbor-docks.png": {
+      "source": "Saved/MPR/road_v5/runtime_views/12-neighbor-docks_1793704904533254300.png",
+      "sha256": "b166b7676439ce432817856722c68d8260f928748cd44098353a1190856d6455",
+      "bytes": 1813778
+    },
+    "plan_views/13-east-context.png": {
+      "source": "Saved/MPR/road_v5/runtime_views/13-east-context_1793704907787989000.png",
+      "sha256": "7648b53387d6bd6c145f3aca7ab2b454992e4f5fee8896a24c323563cacec13b",
+      "bytes": 2203104
+    },
+    "outside_views/14-complete-context.png": {
+      "source": "Saved/MPR/road_v5/outside_views/14-complete-context_1793704934899299900.png",
+      "sha256": "3e39f1d2fe5e5900bcc6f4b7beb5e41081ea4d4347647781cdfb6c0a166d1fe5",
+      "bytes": 2312572
+    },
+    "outside_views/15-northwest-context.png": {
+      "source": "Saved/MPR/road_v5/outside_views/15-northwest-context_1793704938471324900.png",
+      "sha256": "d87922ea9907b3850738a16135feca43385e7eb3eee9094c5a613f358eb91b8e",
+      "bytes": 2028201
+    },
+    "outside_views/16-southwest-context.png": {
+      "source": "Saved/MPR/road_v5/outside_views/16-southwest-context_1793704941708922200.png",
+      "sha256": "4446853fe5fe8d7ea86420ec0a47e80171867757b85229c10f760c5657bd95ab",
+      "bytes": 2433726
+    },
+    "outside_views/17-northeast-context.png": {
+      "source": "Saved/MPR/road_v5/outside_views/17-northeast-context_1793704944972380400.png",
+      "sha256": "28e1e6171576deaad9b2d8b072e8c1b0de5c685d491b7cbc7ea70c44ebf9f157",
+      "bytes": 2595104
+    },
+    "outside_views/18-southeast-context.png": {
+      "source": "Saved/MPR/road_v5/outside_views/18-southeast-context_1793704948252834100.png",
+      "sha256": "cefe4e5b951545458ed2560a6b87fe412fcebe77b481e67c716867cd90c66e53",
+      "bytes": 2024400
+    },
+    "detail_views/19-truck-whole.png": {
+      "source": "Saved/MPR/feedback_v7/detail_views/19-truck-whole_1793704975067674800.png",
+      "sha256": "466a3374b38bedf0615dc471251a516b3cda85c43a133476f194f209c9b4fe4c",
+      "bytes": 2656113
+    },
+    "detail_views/20-truck-cab-wheel.png": {
+      "source": "Saved/MPR/feedback_v7/detail_views/20-truck-cab-wheel_1793704978676042500.png",
+      "sha256": "999441e0a5c065c6dd29840c1a68018ad077ac62591bbdac55500316d866646c",
+      "bytes": 2591303
+    },
+    "detail_views/21-locomotive-whole.png": {
+      "source": "Saved/MPR/feedback_v7/detail_views/21-locomotive-whole_1793704981981092700.png",
+      "sha256": "49115a1bfd3c0093182cab3db1fe7528a2d50213606c5640757b2a40003c3284",
+      "bytes": 3298726
+    },
+    "detail_views/22-rail-coupling-wheel.png": {
+      "source": "Saved/MPR/feedback_v7/detail_views/22-rail-coupling-wheel_1793704985326463200.png",
+      "sha256": "a4b700c82a49cd1044e3aae3c9978cead8a2029685801a669db81d735c2ed26d",
+      "bytes": 3014940
+    },
+    "detail_views/23-train-consist.png": {
+      "source": "Saved/MPR/feedback_v7/detail_views/23-train-consist_1793704988629695500.png",
+      "sha256": "49a00c0b8829b8074b93d7a4dcc763b8fcb3067138a3e7e00f20b26944c26a02",
+      "bytes": 2914806
+    },
+    "detail_views/24-pond-paving.png": {
+      "source": "Saved/MPR/feedback_v7/detail_views/24-pond-paving_1793704991911959700.png",
+      "sha256": "106e9e6a77d1a1a1115802f0d8cf8ae888355476e16c3fa281ced33db203792f",
+      "bytes": 2597649
+    },
+    "detail_views/25-campus-planting.png": {
+      "source": "Saved/MPR/feedback_v7/detail_views/25-campus-planting_1793704995197879400.png",
+      "sha256": "8ef40b4049c8225baef8459028a410560d00f1ba9f982b1042eeb91277666052",
+      "bytes": 2659320
+    },
+    "runtime_overscan.png": {
+      "source": "Saved/MPR/reference_v4/runtime_overscan_1793704868201904200.png",
+      "sha256": "57404bda0d96430ffa50f68a0c126307df0ff01756f99c5823a6f3f6c758081b",
+      "bytes": 3884449
+    },
+    "performance_exterior.csv": {
+      "source": "Saved/Profiling/CSV/MPR_20261103_111841_755874_exterior.csv",
+      "sha256": "dacea623fcae0d5b37b31db3bfa018fad3fc6cc64a19b0514f33e936b5a1b4f7",
+      "bytes": 2558549
+    },
+    "performance_interior.csv": {
+      "source": "Saved/Profiling/CSV/MPR_20261103_111841_755874_interior.csv",
+      "sha256": "3e8e938374e1744b1adf2eff30c7e7a8d978be72ea74be77536eab16f39d9846",
+      "bytes": 2204482
+    },
+    "performance_exterior.png": {
+      "source": "Saved/MPR/performance_20261103_111841_755874_exterior.png",
+      "sha256": "6bb9b034c49358a262285b66a1aeceec9f9d0e7caddb414d0f8bd77f3009e688",
+      "bytes": 2935652
+    },
+    "performance_interior.png": {
+      "source": "Saved/MPR/performance_20261103_111841_755874_interior.png",
+      "sha256": "d21a240d308726fc6b0cc4ded7f21d0dff448d871b28433f10fd881abe19cf2c",
+      "bytes": 2955206
+    },
+    "plan_railway_validation.json": {
+      "source": "Saved/MPR/road_v5/railway_validation.json",
+      "sha256": "0ccc438cf6691f06df7ab7b2c5623bb26c9a75336a10cbcbc574245e78e04cab",
+      "bytes": 406
+    },
+    "plan_site_paint_validation.json": {
+      "source": "Saved/MPR/road_v5/site_paint_refinement_validation.json",
+      "sha256": "4c2389d019409af9ce790847e9898cb36b69069a39871bafd30750fae771c273",
+      "bytes": 4478
+    }
+  },
+  "style_comparison_reference": {
+    "path": "SourceAssets/MPR/reference_v4/references/style-focus-20261103.png",
+    "sha256": "0757bdd1b4be4f9e4e8b68b334b22b860a1270b6033764d3cb9f3f7c6f8f5530",
+    "resolution": [
+      1728,
+      910
+    ],
+    "resized": false
+  },
+  "context_geometry_source_binding": {
+    "manifest_sha256": "70e257dc3e7a2335998feed5aa4727b32bb6266bb620a4a42d780c0d3c616767",
+    "blend_sha256": "d76b8d7bd1a9ca33ba2d4731af3833e41dbf539e87b4ef8a855e510d3350b08c",
+    "method": "Native context report matches manifest hash and was produced after both saved source files; unchanged run envelope binds their current hashes. Native context report does not itself embed a blend hash."
+  },
+  "limits": "Source/report/hash/archive consistency only; not visual acceptance, Pixel Streaming or performance equivalence.",
+  "motion_evidence": {
+    "source_pngs_verified": 192,
+    "source_pngs_archived": 0,
+    "selected_diagnostics": 5,
+    "native_files_verified": {
+      "Saved/MPR/solar_motion/baseline/000.png": "ce51db984063292c70fccf02919366d9ac73899d2a25b30d679967424a29cc9b",
+      "Saved/MPR/solar_motion/baseline/001.png": "6d63a63532916d3b3323562dff700eaf63d3a0a029a440acc42cb087efc4e6c3",
+      "Saved/MPR/solar_motion/baseline/002.png": "0caa21106a3871b9ae1863f1bb6dda7e47e034908759c34d7470707eb31e7274",
+      "Saved/MPR/solar_motion/baseline/003.png": "27f02ecb8ac1ec07b97456f663a3ff001b13ca75779b9f5c70ef511836eb0ce9",
+      "Saved/MPR/solar_motion/baseline/004.png": "89c0eda7cd8f5c90f988dc842f77f6e6ea43a0276c3bdfeec7eda413e3e075bf",
+      "Saved/MPR/solar_motion/baseline/005.png": "52e185f3fa3e54a80abb8bcf4ed7196ea66d8d66ded7c2b036a83255b48baf64",
+      "Saved/MPR/solar_motion/baseline/006.png": "cf075c6d4cc874a2227db64d7230c4b65d6d157d5bfdd2dd22dbe34294a99c6c",
+      "Saved/MPR/solar_motion/baseline/007.png": "fbb4d615e132e272341df24f1efc61f8b460d827cad6c4ffd18be5a0995fb250",
+      "Saved/MPR/solar_motion/baseline/008.png": "09ec9dbd3df09ec39f45313a7429fc1b37896425969af051f3a2698f61606994",
+      "Saved/MPR/solar_motion/baseline/009.png": "a70c093f46eabf049aefea7cc6361df99be927e0d0aacff0e2c239baf87a61f3",
+      "Saved/MPR/solar_motion/baseline/010.png": "d2b1ca0c62abdab0634ccf08c8c0cba566d501b5244e6ec9eea80991fcea9c61",
+      "Saved/MPR/solar_motion/baseline/011.png": "27f611cbe32507b16cb4092605ad5085674e7fdb2feaa6b0c1a06e1f5dfe2a1a",
+      "Saved/MPR/solar_motion/baseline/012.png": "169f35a876c5732ad5dd3907fde74948603005ca271dcf0fe0560f6f00a051cb",
+      "Saved/MPR/solar_motion/baseline/013.png": "2b4b0cd236a30c170a9afe88fc1ec4128bd5b38ca93320b24d1cde0302795b41",
+      "Saved/MPR/solar_motion/baseline/014.png": "a089c46fd78df6557979c3b27e4ef1216ebf5e6f35f70a92a2f8803f63bfe4c8",
+      "Saved/MPR/solar_motion/baseline/015.png": "c04f15e58195bb3a3dfcb13646f6491ca52be865bba9341cf84be1dced6127e2",
+      "Saved/MPR/solar_motion/baseline/016.png": "59c5401d9a5d205aa93701598d4203f172f217818433f25403a18b90db0a3919",
+      "Saved/MPR/solar_motion/baseline/017.png": "bc22ea7eda8f4143c5d28890f78e82e9f114733e113ccc1f399ff94d48987a98",
+      "Saved/MPR/solar_motion/baseline/018.png": "5893ff138a5923a3c9afce6cd3cbd7fd9dd2ac31eb02d6f5a5614e54646608af",
+      "Saved/MPR/solar_motion/baseline/019.png": "41c37e8b2fa2c225222c4591d4217e7d694803043075a512fdb6e6ac4223bb5d",
+      "Saved/MPR/solar_motion/baseline/020.png": "99274f35369b7c0a61ec55c4b10a518206951c6cce9b65ffa48f2e35d8599673",
+      "Saved/MPR/solar_motion/baseline/021.png": "58d4a9b73258f24bd07d6996f6f3995bbd359050385deec7c3ed78e4855146d3",
+      "Saved/MPR/solar_motion/baseline/022.png": "ecd38a7d183dee7b5387cc06c19bc75389e00e9c0109533c2e19c4d636ab2dc1",
+      "Saved/MPR/solar_motion/baseline/023.png": "beb7d99f80ca6f418c4d06bec15f928b4b26050787cddb8bb6e93ea6038f90eb",
+      "Saved/MPR/solar_motion/baseline/024.png": "2cc6228089e409318aca92784588c358c33b5c174ae65b68c9dd3bb334c3ed9d",
+      "Saved/MPR/solar_motion/baseline/025.png": "1c411871cda2284e7185a0c012c9048b73706a99028914d0d7bc725d95e8a9a7",
+      "Saved/MPR/solar_motion/baseline/026.png": "d7d498de9f17447807fcc521045efaad80bf1767f7ebf68f0a7325d54ab9d081",
+      "Saved/MPR/solar_motion/baseline/027.png": "a5237bbfb1f1fa9dab5dcf592cf5cb69021ea3834294d3f8478183017200fdfe",
+      "Saved/MPR/solar_motion/baseline/028.png": "b3e5c4644929d33598448a1185600caad9613637716d5222ae659c64e978c385",
+      "Saved/MPR/solar_motion/baseline/029.png": "955d5fdf6259bb8659cbc8983b1f303fef06d1a45307f580f42ae1e4fb5daf8b",
+      "Saved/MPR/solar_motion/baseline/030.png": "d993071f534d29683ad1283321ef1d9c6e01760d674c27d85812379d44bbf6e9",
+      "Saved/MPR/solar_motion/baseline/031.png": "68871ddf6a16f0e3a7f044ddb87665ef7207f0fc493b17a1837a17371d94e556",
+      "Saved/MPR/solar_motion/baseline/032.png": "35c26de98334eada8c1236583013c944d2f3c3e106133b3f700f2cec1a3a6143",
+      "Saved/MPR/solar_motion/baseline/033.png": "a1266abb267559e5f3cabeffcbe8e147339f39441ffdc3d6ad4664026c20024d",
+      "Saved/MPR/solar_motion/baseline/034.png": "bc8062a7c0a4292686bbd0d6e0b0cc4cb02589514faeec97d277857d48488835",
+      "Saved/MPR/solar_motion/baseline/035.png": "c8a3df037b16a1b0d14b8ee0ae832d67dc7c9a1b46282b265127ccfc0f14d5a9",
+      "Saved/MPR/solar_motion/baseline/036.png": "5b704b5cc12174d4e454c67673385d862c07cb5a6456ea8bcb0bb005b38cc6eb",
+      "Saved/MPR/solar_motion/baseline/037.png": "277adea2020a5dade0c41f9dc130b7928d94d4351ac0fa14bf3e62d2a38c3f4e",
+      "Saved/MPR/solar_motion/baseline/038.png": "d8eae9464659638524d087dc6273dffc8d13f8ce0e81f5bccca60573b75f7c53",
+      "Saved/MPR/solar_motion/baseline/039.png": "ff3b599cd27f0893797dd1f1cd863b6e78a976cc384737045090c34ffe504326",
+      "Saved/MPR/solar_motion/baseline/040.png": "b4066364f2be33210bd332466510e12afdeac7db856bc4d482233fcb92dba352",
+      "Saved/MPR/solar_motion/baseline/041.png": "6693785cd0b142ba1a28fec1b797483545555c7b4d27b8246874d00d9feba2cf",
+      "Saved/MPR/solar_motion/baseline/042.png": "7d741abea294cf21e608870486407fb918f0bea58e87fe939c5ff24c05d456b2",
+      "Saved/MPR/solar_motion/baseline/043.png": "b94c8531846930dc3fb6cf266ac47a4d9ef2539f860ae6d3400a0eceed02bfc6",
+      "Saved/MPR/solar_motion/baseline/044.png": "f897a76251af95e5dd4be67ab54be0ade1c7e2730186ae66b19150936e9611ad",
+      "Saved/MPR/solar_motion/baseline/045.png": "69cf61e5011d15057d1b6dd51beca821f11cee564d5b9782fd82655d4bc04713",
+      "Saved/MPR/solar_motion/baseline/046.png": "8d785ab6c79c81bbb618b05da12449ad83e1b9543122720c49c01b7fe21f1022",
+      "Saved/MPR/solar_motion/baseline/047.png": "336fbde79c747268f685f5938100cb4d2f2480e3cd621fbacdf0d68a69f2fc3d",
+      "Saved/MPR/solar_motion/baseline/048.png": "0c77d99416212008f82c2a7e974b63b67bd829f1ccc645b6dde2689d1a26f461",
+      "Saved/MPR/solar_motion/baseline/049.png": "260ef5e6c8937824da76087908ea157a0a257858b8a0303dfb853391e499f559",
+      "Saved/MPR/solar_motion/baseline/050.png": "a1d3c5b7656d6dc689776fccd522ac6071e685c14930f077854cc6a9145ce809",
+      "Saved/MPR/solar_motion/baseline/051.png": "7b6db5cae79b9c21c9560a36e428b49101d3f9a81e4aa16d46e0953ae5471626",
+      "Saved/MPR/solar_motion/baseline/052.png": "260f29423f495d2b827b0dc7d35084b2c40263c01426aeb1bd5454a95c5e8506",
+      "Saved/MPR/solar_motion/baseline/053.png": "bfb131c3a40a86429d716827b7cb77e413a62192f148fabb3c205be2dd8fc939",
+      "Saved/MPR/solar_motion/baseline/054.png": "286daaf2673696e8ec5932f9ae0828a66dc2ddd753b270cd82f4ed1f676997cf",
+      "Saved/MPR/solar_motion/baseline/055.png": "fde3a46b7ae04503c16939c033309c1b0c15535d1af5dd584ebae102ba14410e",
+      "Saved/MPR/solar_motion/baseline/056.png": "cb13abf9cbfd27a24e3d4b58adadd01ae822dbde790f8cf5e4e3aaf0972f83db",
+      "Saved/MPR/solar_motion/baseline/057.png": "98ac7018297b3ca51443faa5b7395562164d0ffe2d60addeeb3817c204215c05",
+      "Saved/MPR/solar_motion/baseline/058.png": "88204ce430e7e0bb4c3afdaa09cd1e0cd39e6bccf82cbfc533d5f3406151c6c8",
+      "Saved/MPR/solar_motion/baseline/059.png": "9fa986a17c7f27c737a6c6cb5754ae01d3a8fae39c39bcef817ec517319ba5ed",
+      "Saved/MPR/solar_motion/baseline/060.png": "571765b5593b6128aab0e784de3d2e18686abbd8d0b29366233939565180d176",
+      "Saved/MPR/solar_motion/baseline/061.png": "65c39a732bdff3cb6c3c234bee5de306a0bf9039a18b305f1a0deca17a63f84f",
+      "Saved/MPR/solar_motion/baseline/062.png": "5169d05851abe9cae2c4d07f4338d7e5cb20fbfa3232cf3ab34140e89611d3ff",
+      "Saved/MPR/solar_motion/baseline/063.png": "95f510db266289c8354930cbf6285cc76ee8699a7a1736b7f07b89c0f8281dbc",
+      "Saved/MPR/solar_motion/baseline/064.png": "f4fb3196cb31fdd5073070a49daa5e099758ebae4d281ef6d9135b3171268d98",
+      "Saved/MPR/solar_motion/baseline/065.png": "f77e6819f3f07ba08e39c032e1109a4de5c7b43317ff21a4ddd434cfedcb9509",
+      "Saved/MPR/solar_motion/baseline/066.png": "2e5ff066d346165d25d1fe98f200f5c586c904b03f378f38dbb8a02289b46943",
+      "Saved/MPR/solar_motion/baseline/067.png": "cd76cc4706c2e93912e2cd8ed7c3f254f9eb733590dced843dd1b6d5fcc19048",
+      "Saved/MPR/solar_motion/baseline/068.png": "c1bbb17cf11276845080741c163251215d9375fe0b3da43749392b24159fda99",
+      "Saved/MPR/solar_motion/baseline/069.png": "8661442b35b14e548b5b9e2c1fd7656a0fe4aeb606b14462d96ae71c26cf9881",
+      "Saved/MPR/solar_motion/baseline/070.png": "392f12329a282b4c5b78526b3a0f1eff2768d3706ec3b9755ebb9350968bd788",
+      "Saved/MPR/solar_motion/baseline/071.png": "9ea8fcdcbecc80352dedf4916ab8407e0ff51a96a678ec739bb00e66f6767000",
+      "Saved/MPR/solar_motion/baseline/072.png": "99761d78c1b61efc29e10f5b0832a0c19522688d60c14d610bde077950c4f487",
+      "Saved/MPR/solar_motion/baseline/073.png": "89eb8a97cf76d0e23ed0e2086729e4fda8329571f306357f6d4c78c28d6080ab",
+      "Saved/MPR/solar_motion/baseline/074.png": "9bea258299ff49d3705eecfbf64af174ecadb6b22813fb8771c47d259893e429",
+      "Saved/MPR/solar_motion/baseline/075.png": "182ebadf37bb5b98c606b5864c8d03e7eaa55d943bd5cbf28d7e249f51366a14",
+      "Saved/MPR/solar_motion/baseline/076.png": "d6e89b807029830f8bff77b47abc29a5b20cc5eee96ce46af1800a8af32dcd71",
+      "Saved/MPR/solar_motion/baseline/077.png": "eb126e6f7ef452deed083c9402f30f853e215e074ba37c5ec9de49be4b7115f7",
+      "Saved/MPR/solar_motion/baseline/078.png": "d0de79ec98e07e071737286279ba07c6e794e473f9b27c75429fd1822d6d1225",
+      "Saved/MPR/solar_motion/baseline/079.png": "edc23419948c6fb5470ebc4b24ef1e30347ee9f659147c3b76d8bd926948cfe3",
+      "Saved/MPR/solar_motion/baseline/080.png": "38d1639340ba09d1382db74ef7b1a0bde87ae6bad1dc4e2c5692b6f0f6cac62c",
+      "Saved/MPR/solar_motion/baseline/081.png": "f85a8c9b980d390d2ff7e53d1e807eb44d6e6270aa3b3e361a50786e47de2c51",
+      "Saved/MPR/solar_motion/baseline/082.png": "a6c127f6730b832e3b278dd7fb0449352802b638d7e6677780592e852cfce45b",
+      "Saved/MPR/solar_motion/baseline/083.png": "162e24777043e85d0db27b8904ff4416a2976918f1db609c4671eeb737a8f553",
+      "Saved/MPR/solar_motion/baseline/084.png": "3ae33a7d38fb133907d72b60a979f0c03049b51dd46a53d967cb451bdad473fa",
+      "Saved/MPR/solar_motion/baseline/085.png": "d083b1dcbf48ebf72c2340875ac2ed7e42f74b1022c909cd6addcbdca54b43e7",
+      "Saved/MPR/solar_motion/baseline/086.png": "6091f0df3afbe1e36f61f7cf78140adec11cef902d61d4b4f0629d0600a2d846",
+      "Saved/MPR/solar_motion/baseline/087.png": "e2ace4fe1c8b154ef841ddd0e21417cd9cf111f302320e3e19b5d3dcbaec59cf",
+      "Saved/MPR/solar_motion/baseline/088.png": "cb525f185061886fba89893729f4177c190188e3e77a2042e45990bc8bb1f49b",
+      "Saved/MPR/solar_motion/baseline/089.png": "2aafb23d2a34cfb11aabd0c676389cccc255aa79381158f4b245547d02b2f840",
+      "Saved/MPR/solar_motion/baseline/090.png": "72aa1e39b18065cfbaa4d8cd34aace4d878d3751f3292901d0e3be97667eeec4",
+      "Saved/MPR/solar_motion/baseline/091.png": "7a8e923e267ea3db25807518f6f85a0ea8b2bc123748cbc69088a2847ca6ab5e",
+      "Saved/MPR/solar_motion/baseline/092.png": "f6b61c9c9bd778e866ce9bdc8139b9d2f2a0619da6b947baf877623f4be3a052",
+      "Saved/MPR/solar_motion/baseline/093.png": "a669ad5c79ac290747fe0f3e0291250a5a65eea3c14f554dadb9a0179b05777c",
+      "Saved/MPR/solar_motion/baseline/094.png": "d6d2a4d4b6d3826a2ef57590cbcb1d99858d03f2354409bf83927c2ad12cfb81",
+      "Saved/MPR/solar_motion/baseline/095.png": "dacc76002380141da385ef4940ba77e682d2d9565d405ac9e312b911689925df",
+      "Saved/MPR/solar_motion/final/000_1793705009312540200.png": "6e3bf04c6cb17dcfff6fd28ee82e03ab2012ef05d03d957ee90abd757592babc",
+      "Saved/MPR/solar_motion/final/001_1793705009312540200.png": "12226d2e91e36d2ad055e5513adb0eb50eee54d8da9a2bdeef382360855858a4",
+      "Saved/MPR/solar_motion/final/002_1793705009312540200.png": "f44d591c761c3b9fe526af34da10951fc1585bb77f98dd4f9b84dd222f24dad3",
+      "Saved/MPR/solar_motion/final/003_1793705009312540200.png": "d7c3b077cb78f6ed14fc81696c69204267329a8dab0faac0d11a730f2a30ca0b",
+      "Saved/MPR/solar_motion/final/004_1793705009312540200.png": "54d9409863d7fecc71533ed7adbf8fc3c480c26f040a587a5b4ec5b075d4fa63",
+      "Saved/MPR/solar_motion/final/005_1793705009312540200.png": "d19776b0039631fa32240551a902b4c93c2295f8a05c7df58edcd20c6d3d8ed3",
+      "Saved/MPR/solar_motion/final/006_1793705009312540200.png": "f541e4fb91ddd086d83d21a67e3285835b2c6ed20334378d7083f923de56054e",
+      "Saved/MPR/solar_motion/final/007_1793705009312540200.png": "a417707044271d9533738c6855965bb2750380f69b36228654591dfea5a608f0",
+      "Saved/MPR/solar_motion/final/008_1793705009312540200.png": "04e74479774c9fff526a81e64383b06133510f6b0664b39b582679e44e94c0b7",
+      "Saved/MPR/solar_motion/final/009_1793705009312540200.png": "a9ae44fee94033213157e00693dcff4a59a21b464050f6ffc49753ba96ddb5b8",
+      "Saved/MPR/solar_motion/final/010_1793705009312540200.png": "afd49736ef69d72074efc6d2cab401217831c9ae646d40e33ce7dc804b2c8e21",
+      "Saved/MPR/solar_motion/final/011_1793705009312540200.png": "fbf232c9d579028671054f1585e6b3a7e0559d544459d6ed441f9bef832bf3da",
+      "Saved/MPR/solar_motion/final/012_1793705009312540200.png": "8a089ad0d8ffe20bff3f0291f82c2903009f1c35cb95f284c49ad389a45efd6b",
+      "Saved/MPR/solar_motion/final/013_1793705009312540200.png": "14236c143e92a690b654b67e5c960748cf9745c84ddb3ac210c168278b33b730",
+      "Saved/MPR/solar_motion/final/014_1793705009312540200.png": "df8ab421492ff4b12b9af609787f5ccd81fa214479b75a47c2171b33c634e012",
+      "Saved/MPR/solar_motion/final/015_1793705009312540200.png": "e874122f499607fe523cbfbbb706978fd573290a5b138be26b754f9efa75b47b",
+      "Saved/MPR/solar_motion/final/016_1793705009312540200.png": "c6b865d27c0b53482b24a380c089d59959a2e07b10a407ec6430d4cc4b95b5d5",
+      "Saved/MPR/solar_motion/final/017_1793705009312540200.png": "9478f04ee2d0cefe100aae0a1b6b9d51a2eaa90bf20ac0995ed045247da4aa15",
+      "Saved/MPR/solar_motion/final/018_1793705009312540200.png": "cb68ae793ec4012ed3ff676ac70ed0b1729219a784a14dc3737e6649b30559d5",
+      "Saved/MPR/solar_motion/final/019_1793705009312540200.png": "e467f54c956e6c8082ce8969733fa75289638e2b953fffe27d729ac48c1497e3",
+      "Saved/MPR/solar_motion/final/020_1793705009312540200.png": "72847c17308fa3083cd1d9a88d8f6e38514b7e5ead7dd5ef93b051a4b4bfc7b3",
+      "Saved/MPR/solar_motion/final/021_1793705009312540200.png": "ef212dd9af1caff297912536e7aa268486b83528131c07d058e5f5170039ae9d",
+      "Saved/MPR/solar_motion/final/022_1793705009312540200.png": "4b88a25e0d5dc6491d0a4a80532db6d2c921f2309abcc3a742835ffccbfb0367",
+      "Saved/MPR/solar_motion/final/023_1793705009312540200.png": "b4667cc1321b600320974641d35914da5e4f39ab8ed0a02d58642677745ae1ec",
+      "Saved/MPR/solar_motion/final/024_1793705009312540200.png": "4ae316be4bcc35b6d04eccfb89ef932b469b9870721e37ec68047bfd229fd0ee",
+      "Saved/MPR/solar_motion/final/025_1793705009312540200.png": "84168330b17cf89604f279c770c6262c71d1fb209acb4fd3293fb962663cc895",
+      "Saved/MPR/solar_motion/final/026_1793705009312540200.png": "21beddbe080108124c1e43b7f499911acdafb5b9bdcd096b0f93acb068553ac4",
+      "Saved/MPR/solar_motion/final/027_1793705009312540200.png": "4caa67232523b9177ad44ed9f1730355660cdf6bb1f5ef45ab19227bf72928f4",
+      "Saved/MPR/solar_motion/final/028_1793705009312540200.png": "40049518d1d9044247df3be46822673c25e9deb911d6545717497497926f56e9",
+      "Saved/MPR/solar_motion/final/029_1793705009312540200.png": "e7bf61624292168b9ce3246d2e41b10cd68bee7f786370fd465b6edb0b8869d5",
+      "Saved/MPR/solar_motion/final/030_1793705009312540200.png": "67d6dde68ebfcbdb99338c380aa04207ee385111881140ca517bc2cb96c33ece",
+      "Saved/MPR/solar_motion/final/031_1793705009312540200.png": "ab19bb657ab4c6da8dc5d927ac775a506d9b2d3e066aab94c549243d81832ff9",
+      "Saved/MPR/solar_motion/final/032_1793705009312540200.png": "2f70f59f298a3e4e5506069a5c017c7fe096514131192022c7d4d212401b4a80",
+      "Saved/MPR/solar_motion/final/033_1793705009312540200.png": "86996d775fb5c13e19d6b83a104b9f2ba50c9a996fa83a2b33985d5b91774041",
+      "Saved/MPR/solar_motion/final/034_1793705009312540200.png": "3e813bbcad25aaf2b1804c2e50e332af9bbfcd3b23d7dcb86eceb30874c19458",
+      "Saved/MPR/solar_motion/final/035_1793705009312540200.png": "afaca92930f71bc1fce55669db86ee65ca322eed3d2af5e1ea429a9c9bcbcf07",
+      "Saved/MPR/solar_motion/final/036_1793705009312540200.png": "8d83e0492054c9467f7b2d328a2d8b012d5e995cf21d4eb30b0939c783995d7f",
+      "Saved/MPR/solar_motion/final/037_1793705009312540200.png": "2c8fa9836b28c4af2009e0b9935d68775d1a705ef47560b1406768d42f5780d5",
+      "Saved/MPR/solar_motion/final/038_1793705009312540200.png": "c6b4f3a5e83da01f2efa9dd16628a5d9b1453fe5421795a571026b92fdacc72b",
+      "Saved/MPR/solar_motion/final/039_1793705009312540200.png": "c1c75fb6a56892f9755af09be78aaa5525d1e54af28a448872c13293821a6ed2",
+      "Saved/MPR/solar_motion/final/040_1793705009312540200.png": "50b52c9f8e24ab52d3f6fe94b5f47fcfdd673cf0792bc5f6ddf9cf97e5c88d94",
+      "Saved/MPR/solar_motion/final/041_1793705009312540200.png": "7e13d5b574d6b35ca076b15e7154f8e663dfdb54a01f1ed97cc59e92072cd3f9",
+      "Saved/MPR/solar_motion/final/042_1793705009312540200.png": "aaff8f1a27f19451e8fa60f5faddb579a71b0d859b20bfe4406d1b517847dc9a",
+      "Saved/MPR/solar_motion/final/043_1793705009312540200.png": "a31354905d0cbdf24f49845fc90ed78861952eba3076a546bc82578af710e4bc",
+      "Saved/MPR/solar_motion/final/044_1793705009312540200.png": "09ed1ef2936799bb69ff9efd31e9eac5ab53155ea9f5ea6f6f167243ef12fcec",
+      "Saved/MPR/solar_motion/final/045_1793705009312540200.png": "ab8848f72a29fdf24fd62a2ee6fd88c8df3a2ff1f3ce645c3f7453a6f96e6efe",
+      "Saved/MPR/solar_motion/final/046_1793705009312540200.png": "837cfcbbf72ad61799c63dfac1bd240e9e20b1fe65920d9201cf1670821e364e",
+      "Saved/MPR/solar_motion/final/047_1793705009312540200.png": "0a29e385ba9743e88c25ae7831e4cb8437a4dc00355ada77bbd02023e3bf1d26",
+      "Saved/MPR/solar_motion/final/048_1793705009312540200.png": "576c3ab9f9c4278490e97d05389798f39be5447195afe11feb374d53fb623c63",
+      "Saved/MPR/solar_motion/final/049_1793705009312540200.png": "307331349ec392d4bc96f87fba66005491de957da7cd19f4a5d9157bd1fa22c1",
+      "Saved/MPR/solar_motion/final/050_1793705009312540200.png": "9aed09d282300a3dab2cd3722ef7bddc3abe8dc0ee0af86721af3e015aaf1ec5",
+      "Saved/MPR/solar_motion/final/051_1793705009312540200.png": "484c2b835e933445533956a277aac8e01b8676851c1ad9cb4daf980ab4b150b7",
+      "Saved/MPR/solar_motion/final/052_1793705009312540200.png": "07c15846fd030b6a58037bedb697943416d42d522247e96be0e66c26c2d46a1c",
+      "Saved/MPR/solar_motion/final/053_1793705009312540200.png": "ff958a9a28d3e82524d8cb90531d0c61ef4d614fa81485065675470e0b046974",
+      "Saved/MPR/solar_motion/final/054_1793705009312540200.png": "9bb22677a668aec813b83370a710c65a7a1aa22ad42fd1498d8b6c9aa4fe9cc7",
+      "Saved/MPR/solar_motion/final/055_1793705009312540200.png": "9b1e5c576b638d52a97323dc0a59b18a6a0467844d17fd21c33bbe5d1c0609df",
+      "Saved/MPR/solar_motion/final/056_1793705009312540200.png": "15ec45043e9d917e2dae141b98b957a150abb7ed0a8ad47cb663a9c6c954bd60",
+      "Saved/MPR/solar_motion/final/057_1793705009312540200.png": "280198f3801592c499607f850e07939595f6d3fa90c3a2518c5da1b604420365",
+      "Saved/MPR/solar_motion/final/058_1793705009312540200.png": "a41817b3093b769f0e04c800c1db53ba7a1f20e33f03fe8d99e92729df341a01",
+      "Saved/MPR/solar_motion/final/059_1793705009312540200.png": "08a00f7657ba58360148675090e1109bbe33ebcbae033b76a70031f8e1a0cab2",
+      "Saved/MPR/solar_motion/final/060_1793705009312540200.png": "0deb27f7ee5cabc0f71a241b74820c560944972b1553bd5045fa1d84f54181b2",
+      "Saved/MPR/solar_motion/final/061_1793705009312540200.png": "44dd26fe6f1a66612eba07a690f956bf216beb7ff0b300e4d22a17156eef4ede",
+      "Saved/MPR/solar_motion/final/062_1793705009312540200.png": "2893f321a65e720b19be90aaeb96bb43a989d8a6b4c97df8cf661722e381dfa3",
+      "Saved/MPR/solar_motion/final/063_1793705009312540200.png": "ae8d6eecd46a78f1d6dd90325275b26555dcb54b1b0d2f06ba94732e0ab71e4f",
+      "Saved/MPR/solar_motion/final/064_1793705009312540200.png": "ca8895f3d466bc70bd0bab142df47781995d460820ee961723633604a4691090",
+      "Saved/MPR/solar_motion/final/065_1793705009312540200.png": "86088211513b387e9ba363689db06c72e2d1b4e519276eec8e486dd3b74cccf2",
+      "Saved/MPR/solar_motion/final/066_1793705009312540200.png": "5b5aa35e775fc605f656ae911c6c1bca0b624871b28238b1e7cdab631a40bf23",
+      "Saved/MPR/solar_motion/final/067_1793705009312540200.png": "f75b2e3c67af3ff8e18dbd83a53592d68d516578dfbab15cd622e1b84557af30",
+      "Saved/MPR/solar_motion/final/068_1793705009312540200.png": "fc36bb135e263bc8062f79443b4840d734927c2e706f323a92386b2a98799680",
+      "Saved/MPR/solar_motion/final/069_1793705009312540200.png": "6a1958f7d8a678ba4ef5a67fd350145c902e2cdb9d882bcf982cc60dc992db20",
+      "Saved/MPR/solar_motion/final/070_1793705009312540200.png": "687ef5e2ed38836cc12ae54380989403371efea0d7ed274331bbe0f7f44e2439",
+      "Saved/MPR/solar_motion/final/071_1793705009312540200.png": "d4c01c80207a0cd3f7c87b19b28c5f7026ed5e751b5559ab4bbef1eea5c12438",
+      "Saved/MPR/solar_motion/final/072_1793705009312540200.png": "56be54d5625d2556acb9ec1c3e62d842be8ff9c9797db762070a95ff0c962225",
+      "Saved/MPR/solar_motion/final/073_1793705009312540200.png": "cc45c7427e0f7dabae25a7d8f6abdbb36897268fa81f9019db6acc43df4b77a1",
+      "Saved/MPR/solar_motion/final/074_1793705009312540200.png": "2befb1d21ff64cfb34598565cb66e9ece984c7f4f676e174c395837905f7655a",
+      "Saved/MPR/solar_motion/final/075_1793705009312540200.png": "8e4516b6954a88a448d18e55b37a8bc2bb56855d4ca9ddc3e929c9c162c68317",
+      "Saved/MPR/solar_motion/final/076_1793705009312540200.png": "bf3c46385fa689125e98fad98a341bfc08a135749b964de0f6913362e9df571c",
+      "Saved/MPR/solar_motion/final/077_1793705009312540200.png": "ec388c9b1ca5f1af3737e25e5f41d48d056d311c7e8e194e2b1776642d4e4a0c",
+      "Saved/MPR/solar_motion/final/078_1793705009312540200.png": "19fb48e5152318a5533b2a36a0e1b40353004a1ebece0567f954aa65e1f615a8",
+      "Saved/MPR/solar_motion/final/079_1793705009312540200.png": "16a77a38ca6ab851d6499c5497be7b99170e24c477d08622affd88b2385001fb",
+      "Saved/MPR/solar_motion/final/080_1793705009312540200.png": "f31d0d158e8b0124f2bc3327112484f56cede766e5d34369adbc0dfe280e77f7",
+      "Saved/MPR/solar_motion/final/081_1793705009312540200.png": "370cae171d951784a41c62232b95ab9b458f09751f5fe1bb10b67cd7e05f8969",
+      "Saved/MPR/solar_motion/final/082_1793705009312540200.png": "c72a33a0d6eb60d52c9ce79652cf34395f02c7e72375364a50589574a049f1c7",
+      "Saved/MPR/solar_motion/final/083_1793705009312540200.png": "e00b3c9143fe352d786e849f1ed64e09596c7f3ab537a623356ed5010c7d962c",
+      "Saved/MPR/solar_motion/final/084_1793705009312540200.png": "0086a44d314b6563cd7fb4d9f23c8a12474dbaf38899b858e0f2c68d04e7cd69",
+      "Saved/MPR/solar_motion/final/085_1793705009312540200.png": "ff069aeb3fb62b88d5e0fd6fee52cdf8516f72ed8d33836b5fffe7f6e807dc65",
+      "Saved/MPR/solar_motion/final/086_1793705009312540200.png": "1b994724f4dabcefd4cc13ae3d3b616e34bef1705e9466b333277f1c8db845d5",
+      "Saved/MPR/solar_motion/final/087_1793705009312540200.png": "489ca8b7d0c04a3d30fd2fca2540b167eb0c5e755bc8641f615c7d86a8a6da57",
+      "Saved/MPR/solar_motion/final/088_1793705009312540200.png": "2c17f8953f1f805962a4c8962db4ca8cdaf8d3b292aacab0138ae543f0c6cfb7",
+      "Saved/MPR/solar_motion/final/089_1793705009312540200.png": "31a2b531d86443135aa9634205ac304dac8b85a04a17ea2f8350af2e71fec12a",
+      "Saved/MPR/solar_motion/final/090_1793705009312540200.png": "83b0b15eecd30f62f93fb9a387c632a1f024c8a882d54a38c2b48afce7e1e4f9",
+      "Saved/MPR/solar_motion/final/091_1793705009312540200.png": "a188cdbf1edd80fde7d869ce0d382e93f6b2f35c9c3000c8cd276f54634b827e",
+      "Saved/MPR/solar_motion/final/092_1793705009312540200.png": "42c4e7318354b256f84b8b9581fea2486fb316c101c3322baf93ba475e5eb707",
+      "Saved/MPR/solar_motion/final/093_1793705009312540200.png": "f2909248181e843c04d3512d168c5e66ea6dd45802fea41e40d9f0b5582a6059",
+      "Saved/MPR/solar_motion/final/094_1793705009312540200.png": "8783200b4ac80911c48bc022b49e19aafbf12245f7d9b3b15cb32c02b1b6e289",
+      "Saved/MPR/solar_motion/final/095_1793705009312540200.png": "035fa67e965e95b0969ee299221ab94e4e2635df697912b81a0cf36d91bb6e95",
+      "Saved/MPR/solar_motion/review/native_sampled_comparison.mp4": "9f99d7d9245d63d8c817702b9f30d6c8f661a5391dfeb4e3caee6e7fcbf5a3d2",
+      "Saved/MPR/solar_motion/review/final_panel_interior_mask.png": "a19ee165a1b8cb84731c1662b8a17ce982850a6184e9a06746028abc4dd7630b",
+      "Saved/MPR/solar_motion/review/analysis_rectified_000.png": "740f93b3ae69d9fc95080768729c0caea5b51fdc92641169cd1cdbb35ef3cd09",
+      "Saved/MPR/solar_motion/review/analysis_rectified_048.png": "8c5f485a4081d0920180742daf186373b6b569f6aaddc288f3d94ea0eab6ae4d",
+      "Saved/MPR/solar_motion/review/analysis_rectified_095.png": "8e868f10fc7b6ebe604d2b03dc9a6c17bccf624413a96345122a54cced60ac90",
+      "Saved/MPR/solar_motion/review/shared_support_048.png": "0eeadf52296f528bc4d25d52b10c288c605a06ae7b936d7a2a69335913ba50d9"
+    },
+    "flicker_free_claim": false,
+    "scope": "Paired native pose samples; MP4 is illustrative sampled playback, not real-time footage. Original frames remain in Saved."
+  },
+  "far_motion_evidence": {
+    "source_pngs_verified": 24,
+    "source_pngs_archived": 3,
+    "selected_indices": [
+      0,
+      11,
+      23
+    ],
+    "native_files_verified": {
+      "Saved/MPR/solar_motion/far/000_1793705072795617800.png": "b561eee7ded7540a033f0fbb012d906a0a750a59e814e1bcf7d996584087caae",
+      "Saved/MPR/solar_motion/far/001_1793705072795617800.png": "275fca0b0643de113d834ba39b74c243b11fe90d2dafce8ab208c56fbd92d97e",
+      "Saved/MPR/solar_motion/far/002_1793705072795617800.png": "6eec662e5f719a6cd46d3ae1460e7631434323a28fe3cbecf9e6aaa96bb10672",
+      "Saved/MPR/solar_motion/far/003_1793705072795617800.png": "be79083d35736a34a5a81cce0aae41d2fd0da60e2a15b8d1ab18137772b697c1",
+      "Saved/MPR/solar_motion/far/004_1793705072795617800.png": "d0a455f07629c755644640e1e1564314bd00b15fa3289dc9a8e4a254d3836530",
+      "Saved/MPR/solar_motion/far/005_1793705072795617800.png": "4e9b0005f3958a483f61d181d832ee1c8e2512a2e07c603b2f21c22c80458b97",
+      "Saved/MPR/solar_motion/far/006_1793705072795617800.png": "93c468466af3a35e739c5338b500364a973e63d4f0ba303eef01500e0ee9ed3c",
+      "Saved/MPR/solar_motion/far/007_1793705072795617800.png": "9b46105a6311ee8db36314daee0000b6209e70174d122f48b595300316b25c5c",
+      "Saved/MPR/solar_motion/far/008_1793705072795617800.png": "c142251b7df5f8820f3eeab550f82a7011ce395dd28fa8b02bc21bcbc8ed4a65",
+      "Saved/MPR/solar_motion/far/009_1793705072795617800.png": "96b78d0c7b795986b8bfa7fd238d5ffcb9ca2d80edd035ed018611a8044463aa",
+      "Saved/MPR/solar_motion/far/010_1793705072795617800.png": "62bbc0fc3be35366e9f004732314d44ce25edce1d8c8211eed5f3c48c7406a48",
+      "Saved/MPR/solar_motion/far/011_1793705072795617800.png": "d89ad98e8974c17dd683cdc8acae47c8d7c3edffce0c129eafde174228a31f5c",
+      "Saved/MPR/solar_motion/far/012_1793705072795617800.png": "572ec69391ac7b1958d1d4d4148ee5c2cfe34cae11a2b80e4a5ed64c2165ddc2",
+      "Saved/MPR/solar_motion/far/013_1793705072795617800.png": "c7ece6a8614f38720d26238d01c70fe215dcf1eccf09e10246b24e0299ad55ea",
+      "Saved/MPR/solar_motion/far/014_1793705072795617800.png": "f8062fbe2229e0319e1e4e9f82e4a27e8b4bb26ba203f5a7690396e1d7788ee0",
+      "Saved/MPR/solar_motion/far/015_1793705072795617800.png": "6cb97b67c989602a041f16b7e200e9ccf882e5d79b53259b4f6f5a50aff5dd25",
+      "Saved/MPR/solar_motion/far/016_1793705072795617800.png": "8bc28cae61ae54b15a5e97ee496c5dea4a19f99809376c540f01806e8064e72b",
+      "Saved/MPR/solar_motion/far/017_1793705072795617800.png": "6e161cddb142b6ea7aac698f4cb57b766118898421dd6f593869d82bbb2b287a",
+      "Saved/MPR/solar_motion/far/018_1793705072795617800.png": "9115974fc6606a66033866a8547f57e4c9356d9db06475437cc94e3111eb7cfb",
+      "Saved/MPR/solar_motion/far/019_1793705072795617800.png": "fc31f82f8a80c02daa0e4b480b2a40ecb93496d5c34d81cf594c92ee1b1855eb",
+      "Saved/MPR/solar_motion/far/020_1793705072795617800.png": "98994329b1e630ac48fd8d30ea497f76d8f21125156230abf732842a946a8483",
+      "Saved/MPR/solar_motion/far/021_1793705072795617800.png": "c4e241e7ddd4470fd9045bd60c544a6930419f204e0cae969443926238989666",
+      "Saved/MPR/solar_motion/far/022_1793705072795617800.png": "aec2ec2da8ce71727c33cb51537d0c5bef59b78c3111efc303bcd30cb32634f7",
+      "Saved/MPR/solar_motion/far/023_1793705072795617800.png": "6ca094285e7a8ca3a274d983cf06926d88078704d138bcb22e5e8148ff4279d8"
+    },
+    "capture_tool_sha256": "35d3c02424ea640bc1e999901001bd9e53134963be4c1bb910c4fc0ae1964de2",
+    "base_capture_tool_sha256": "fac469824851b70012d980b1c15c24f875ef9b6e0eaf7421a14d59dd213a64ca",
+    "flicker_free_claim": false,
+    "scope": "Native samples at 700 to 1250 to 700 metres; coverage only, not actual per-frame LOD readback or continuous real-time footage."
+  },
+  "obsolete_candidates_not_deleted": [
+    "SourceAssets/MPR/reference_v4/validation/MPR_20261102_131501_024251_exterior.csv",
+    "SourceAssets/MPR/reference_v4/validation/MPR_20261102_131501_024251_interior.csv",
+    "SourceAssets/MPR/reference_v4/validation/MPR_20261102_134319_637435_exterior.csv",
+    "SourceAssets/MPR/reference_v4/validation/MPR_20261102_134319_637435_interior.csv",
+    "SourceAssets/MPR/reference_v4/validation/performance_20261102_131501_024251_exterior.png",
+    "SourceAssets/MPR/reference_v4/validation/performance_20261102_131501_024251_interior.png",
+    "SourceAssets/MPR/reference_v4/validation/performance_20261102_134319_637435_exterior.png",
+    "SourceAssets/MPR/reference_v4/validation/performance_20261102_134319_637435_interior.png",
+    "SourceAssets/MPR/reference_v4/validation/ghs_quality_regression/comparison.json",
+    "SourceAssets/MPR/reference_v4/validation/ghs_quality_regression/mpr_quality025_frames.csv",
+    "SourceAssets/MPR/reference_v4/validation/ghs_quality_regression/mpr_quality025_run.json",
+    "SourceAssets/MPR/reference_v4/validation/ghs_quality_regression/mpr_quality1_frames.csv",
+    "SourceAssets/MPR/reference_v4/validation/ghs_quality_regression/mpr_quality1_run.json"
+  ],
+  "source_files_checked": 206
+}
