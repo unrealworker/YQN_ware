@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -247,7 +247,11 @@ namespace Ghs.PixelStreaming
         private void EnsureCustomQuality() { if(quality.Items.Count<4) quality.Items.Add("自定义码率"); }
         private static decimal Clamp(int value,NumericUpDown control) { return Math.Max(control.Minimum,Math.Min(control.Maximum,value)); }
         private string SelectedQualityProfile { get { return quality.SelectedIndex==0?"balanced":quality.SelectedIndex==2?"ultra":quality.SelectedIndex==3?"custom":"clear"; } }
-        private LauncherConfig ReadSettings() { return new LauncherConfig {maxViewers=baseline.maxViewers,networkMode=baseline.networkMode,publicUrl=baseline.publicUrl,accessProtectionEnabled=accessProtection.Checked,accessCode=baseline.accessCode,tlsCertPath=baseline.tlsCertPath,tlsKeyPath=baseline.tlsKeyPath,trustProxy=baseline.trustProxy,externalTlsTermination=baseline.externalTlsTermination,stunUrl=baseline.stunUrl,turnUrl=baseline.turnUrl,turnUsername=baseline.turnUsername,turnPassword=baseline.turnPassword,executablePath=executable.Text.Trim(),httpPort=(int)httpPort.Value,streamerPort=(int)streamerPort.Value,width=(int)renderWidth.Value,height=(int)renderHeight.Value,showWindow=showWindow.Checked,mode=mode.SelectedIndex==1?"independent":"shared",fps=(int)fpsLimit.Value,fixedFps=fixedFps.Checked,encoderAsync=encoderAsync.Checked,encoder=encoder.SelectedIndex==1?"Auto":"NVIDIA",minBitrateMbps=(int)minBitrate.Value,startBitrateMbps=(int)startBitrate.Value,maxBitrateMbps=(int)maxBitrate.Value,qualityProfile=SelectedQualityProfile,adaptiveResourceBudget=adaptiveResources.Checked,warmStandbyEnabled=warmStandby.Checked}; }
+        private LauncherConfig ReadSettings()
+        {
+            // Clone the loaded baseline so backend-only deployment fields survive UI edits.
+            LauncherConfig c=baseline.Clone(); c.accessProtectionEnabled=accessProtection.Checked; c.executablePath=executable.Text.Trim(); c.httpPort=(int)httpPort.Value; c.streamerPort=(int)streamerPort.Value; c.width=(int)renderWidth.Value; c.height=(int)renderHeight.Value; c.showWindow=showWindow.Checked; c.mode=mode.SelectedIndex==1?"independent":"shared"; c.fps=(int)fpsLimit.Value; c.fixedFps=fixedFps.Checked; c.encoderAsync=encoderAsync.Checked; c.encoder=encoder.SelectedIndex==1?"Auto":"NVIDIA"; c.minBitrateMbps=(int)minBitrate.Value; c.startBitrateMbps=(int)startBitrate.Value; c.maxBitrateMbps=(int)maxBitrate.Value; c.qualityProfile=SelectedQualityProfile; c.adaptiveResourceBudget=adaptiveResources.Checked; c.warmStandbyEnabled=warmStandby.Checked; return c;
+        }
         private void ApplyAccessSettings(LauncherConfig value) { baseline=value; accessProtection.Checked=value.accessProtectionEnabled; UpdateNetworkSummary(); UpdateModeHint(); UpdateAccessHint(); }
         private void UpdateAccessHint() { accessHint.Text=(accessProtection.Checked?"已开启 · 访客需输入访问码":"已关闭 · 访客直接进入仓库")+(accessProtection.Enabled?"；下次启动生效":"；停止服务后可修改"); }
         private string FrameLimitHint { get { return fpsLimit.Value==0?"渲染不限帧 / 流送最高 120 FPS":(fixedFps.Checked?"固定目标 ":"帧率上限 ")+fpsLimit.Value+" FPS"; } }
@@ -347,14 +351,14 @@ namespace Ghs.PixelStreaming
         private void OpenUrl(string url) { try { Uri uri; if(!Uri.TryCreate(url,UriKind.Absolute,out uri) || (uri.Scheme!="http" && uri.Scheme!="https")) throw new ArgumentException("访问地址无效。"); Process.Start(new ProcessStartInfo(uri.AbsoluteUri) {UseShellExecute=true}); } catch(Exception ex) { ShowError(ex); } }
         private void ConfigureFirewall()
         {
-            if(baseline.externalTlsTermination) { AppendLog("云负载均衡模式：请由管理员将网页端口限制为 ALB 回源来源；未修改防火墙。"); return; }
+            if(baseline.externalTlsTermination) { AppendLog("云负载均衡模式：请由管理员将网页端口限制为 ALB 回源及已批准的备用入口访问来源；未修改防火墙。"); return; }
             try { LauncherConfig c=ReadSettings(); c.Validate(root,false); bool internet=c.networkMode=="public"; string filename=internet?"Enable-PublicAccess.ps1":"Enable-LanAccess.ps1"; string script=Path.Combine(root,filename); if(!File.Exists(script)) throw new FileNotFoundException("缺少 "+filename+"，请保留完整部署目录。"); if(MessageBox.Show(this,internet?"将请求 Windows 管理员授权，允许公网访问配置的网页及视频端口。\r\n还需在路由器 / 云安全组设置映射；本操作不会申请公网 IP。":"将请求 Windows 管理员授权，仅允许本地子网访问网页和视频端口。","配置访问防火墙",MessageBoxButtons.OKCancel,MessageBoxIcon.Information)!=DialogResult.OK) return;
                 string args="-NoProfile -ExecutionPolicy Bypass -File "+OwnedProcess.QuoteArgument(script)+" -HttpPort "+c.httpPort+" -ApplicationPath "+OwnedProcess.QuoteArgument(c.ResolveExecutable(root))+(internet && c.trustProxy?" -TrustProxy":""); Process.Start(new ProcessStartInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System),"WindowsPowerShell","v1.0","powershell.exe"),args) {UseShellExecute=true,Verb="runas",WorkingDirectory=root}); AppendLog("已请求配置访问防火墙，请查看 Windows 授权窗口与脚本结果。");
             } catch(System.ComponentModel.Win32Exception ex) { AppendLog(ex.NativeErrorCode==1223?"已取消防火墙授权。":ex.Message); } catch(Exception ex) { ShowError(ex); }
         }
         private void UpdateNetworkSummary()
         {
-            bool internet=baseline.networkMode=="public",cloud=baseline.externalTlsTermination; networkSummary.Text=(cloud?"云负载均衡 HTTPS":internet?"公网访问":"局域网验证")+" · 最多 "+baseline.maxViewers+" 人\r\n"+(cloud?"网页端口仅允许 ALB 回源来源":internet?"入口 / 访问码 / HTTPS / TURN":"公网地址可稍后配置"); firewall.Text=cloud?"回源规则需配置":internet?"配置公网防火墙":"配置内网访问"; UpdateModeHint(); UpdateControls();
+            bool internet=baseline.networkMode=="public",cloud=baseline.externalTlsTermination; networkSummary.Text=(cloud?"云负载均衡 HTTPS":internet?"公网访问":"局域网验证")+" · 最多 "+baseline.maxViewers+" 人\r\n"+(cloud?(!string.IsNullOrEmpty(baseline.backupPublicUrl)?"HTTPS 主入口 + HTTP 备用 · 按来源放行":"网页端口仅允许 ALB 回源来源"):internet?"入口 / 访问码 / HTTPS / TURN":"公网地址可稍后配置"); firewall.Text=cloud?"回源规则需配置":internet?"配置公网防火墙":"配置内网访问"; UpdateModeHint(); UpdateControls();
         }
         private void ApplyViewers(ViewerStatus[] current)
         {

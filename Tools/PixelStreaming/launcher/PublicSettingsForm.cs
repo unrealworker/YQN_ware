@@ -16,7 +16,7 @@ namespace Ghs.PixelStreaming
         private readonly CheckBox accessProtection=new ToggleCheckBox(),reveal=new CheckBox();
         private readonly RoundedButton generate=new RoundedButton();
         private readonly Label accessHint=new Label();
-        private readonly TextBox address=new TextBox(),code=new TextBox(),cert=new TextBox(),key=new TextBox(),stun=new TextBox(),turn=new TextBox(),username=new TextBox(),password=new TextBox();
+        private readonly TextBox address=new TextBox(),backupAddress=new TextBox(),code=new TextBox(),cert=new TextBox(),key=new TextBox(),stun=new TextBox(),turn=new TextBox(),username=new TextBox(),password=new TextBox();
         private readonly Label tlsHint=new Label();
         private Panel certField,keyField;
         private readonly Label error=new Label();
@@ -37,6 +37,8 @@ namespace Ghs.PixelStreaming
             capacity.Minimum=1; capacity.Maximum=5; capacity.Value=Math.Max(1,Math.Min(5,config.maxViewers));
             AddField(first,"网络模式",network); AddField(first,"最多在线人数",capacity); AddField(first,"公网访问地址",address); address.Text=config.publicUrl;
             AddNote(first,"例如 https://warehouse.example.com；临时 IP 测试可用 http://公网IP:8080（未加密）。",false);
+            AddField(first,"HTTP 备用入口",backupAddress); backupAddress.Text=config.backupPublicUrl; backupAddress.AccessibleName="HTTP 备用入口（可选）";
+            AddNote(first,"可选，留空即停用。仅适用于公网 + 云负载均衡 HTTPS 主入口，例如 http://47.96.135.179:8080。\n备用 HTTP 会明文传输访问码、令牌和信令；仅向实际需要直连的来源开放网页端口。",false);
             accessProtection.Text="安全访问仓库"; accessProtection.AccessibleName=accessProtection.Text; accessProtection.Height=34; accessProtection.Checked=config.accessProtectionEnabled; AddWide(first,accessProtection);
             accessHint.AutoSize=true; accessHint.MaximumSize=new Size(900,0); accessHint.ForeColor=LauncherTheme.Muted; accessHint.Font=new Font("Microsoft YaHei UI",9F); AddWide(first,accessHint);
             code.Text=config.accessCode; code.UseSystemPasswordChar=true; AddField(first,"访问码（至少12位）",code);
@@ -50,7 +52,7 @@ namespace Ghs.PixelStreaming
             tlsMode.SelectedIndex=config.externalTlsTermination?3:config.trustProxy?2:!string.IsNullOrWhiteSpace(config.tlsCertPath)?1:0; AddField(first,"HTTPS 接入方式",tlsMode);
             tlsHint.AutoSize=true; tlsHint.MaximumSize=new Size(900,0); tlsHint.ForeColor=LauncherTheme.Muted; tlsHint.Font=new Font("Microsoft YaHei UI",9F); AddWide(first,tlsHint);
             cert.Text=config.tlsCertPath; key.Text=config.tlsKeyPath; certField=AddFile(first,"证书 PEM",cert); keyField=AddFile(first,"私钥 PEM",key);
-            network.SelectedIndexChanged+=delegate { UpdateTlsMode(); }; tlsMode.SelectedIndexChanged+=delegate { UpdateTlsMode(); }; UpdateTlsMode();
+            network.SelectedIndexChanged+=delegate { UpdateTlsMode(); }; tlsMode.SelectedIndexChanged+=delegate { UpdateTlsMode(); }; address.TextChanged+=delegate { UpdateTlsMode(); }; UpdateTlsMode();
             AddNote(second,"STUN / TURN 网络穿透",true); AddNote(second,"跨运营商、移动网络或严格防火墙环境建议配置 TURN。请填写你自建或供应商提供的中继服务，启动器不包含 TURN 服务器。",false);
             stun.Text=config.stunUrl; turn.Text=config.turnUrl; username.Text=config.turnUsername; password.Text=config.turnPassword; password.UseSystemPasswordChar=true;
             AddField(second,"STUN 地址（可选）",stun); AddNote(second,"格式：stun:stun.example.com:3478",false); AddField(second,"TURN 地址（可选）",turn); AddNote(second,"格式：turn:turn.example.com:3478?transport=udp 或 turns:turn.example.com:5349?transport=tcp",false); AddField(second,"TURN 用户名",username); AddField(second,"TURN 密码",password);
@@ -61,7 +63,7 @@ namespace Ghs.PixelStreaming
         internal LauncherConfig Read()
         {
             if(tlsMode.SelectedIndex==1 && (string.IsNullOrWhiteSpace(cert.Text) || string.IsNullOrWhiteSpace(key.Text))) throw new ArgumentException("选择原生 HTTPS 时，请同时选择本机证书和私钥。");
-            LauncherConfig c=original.Clone(); c.networkMode=network.SelectedIndex==1?"public":"lan"; c.maxViewers=(int)capacity.Value; c.publicUrl=address.Text.Trim(); c.accessProtectionEnabled=accessProtection.Checked; c.accessCode=code.Text; c.tlsCertPath=tlsMode.SelectedIndex==1?cert.Text.Trim():""; c.tlsKeyPath=tlsMode.SelectedIndex==1?key.Text.Trim():""; c.trustProxy=network.SelectedIndex==1 && tlsMode.SelectedIndex==2; c.externalTlsTermination=network.SelectedIndex==1 && tlsMode.SelectedIndex==3; c.stunUrl=stun.Text.Trim(); c.turnUrl=turn.Text.Trim(); c.turnUsername=username.Text.Trim(); c.turnPassword=password.Text; return c;
+            LauncherConfig c=original.Clone(); c.networkMode=network.SelectedIndex==1?"public":"lan"; c.maxViewers=(int)capacity.Value; c.publicUrl=address.Text.Trim(); c.backupPublicUrl=backupAddress.Enabled?backupAddress.Text:""; c.accessProtectionEnabled=accessProtection.Checked; c.accessCode=code.Text; c.tlsCertPath=tlsMode.SelectedIndex==1?cert.Text.Trim():""; c.tlsKeyPath=tlsMode.SelectedIndex==1?key.Text.Trim():""; c.trustProxy=network.SelectedIndex==1 && tlsMode.SelectedIndex==2; c.externalTlsTermination=network.SelectedIndex==1 && tlsMode.SelectedIndex==3; c.stunUrl=stun.Text.Trim(); c.turnUrl=turn.Text.Trim(); c.turnUsername=username.Text.Trim(); c.turnPassword=password.Text; return c;
         }
         private void UpdateAccessProtection()
         {
@@ -73,10 +75,12 @@ namespace Ghs.PixelStreaming
         {
             if(network.SelectedIndex!=1 && tlsMode.SelectedIndex>=2) tlsMode.SelectedIndex=0;
             certField.Enabled=keyField.Enabled=tlsMode.SelectedIndex==1;
+            Uri primary; backupAddress.Enabled=network.SelectedIndex==1 && tlsMode.SelectedIndex==3 && Uri.TryCreate(address.Text.Trim(),UriKind.Absolute,out primary) && primary.Scheme=="https";
+            if(!backupAddress.Enabled) backupAddress.Clear();
             switch(tlsMode.SelectedIndex) {
                 case 1: tlsHint.Text="证书与私钥成对选择，原生 HTTPS 使用启动器的网页端口。"; break;
                 case 2: tlsHint.Text="仅适用于同一台服务器上的 HTTPS 反向代理。网页服务仅监听 127.0.0.1；代理需保留公网 Host 并支持 WebSocket。"; break;
-                case 3: tlsHint.Text="证书由云负载均衡管理，HTTP 回源到服务器网页端口，无需本机证书。仅允许 ALB 回源来源访问该端口；需保留公网 Host 并支持 WebSocket。\n不自动信任转发 IP，在线用户来源地址可能显示为负载均衡地址。"; break;
+                case 3: tlsHint.Text="证书由云负载均衡管理，HTTP 回源到服务器网页端口，无需本机证书。需保留公网 Host 并支持 WebSocket。\n网页端口仅允许 ALB 回源及已批准的备用入口访问来源；不自动信任转发 IP。"; break;
                 default: tlsHint.Text="HTTP 仅用于本机、局域网或临时验证，公网访问码和通信未加密。两种代理方式仅在公网模式可选。"; break;
             }
         }

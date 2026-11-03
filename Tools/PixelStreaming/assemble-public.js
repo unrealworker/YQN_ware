@@ -31,7 +31,7 @@ for(const entry of fs.readdirSync(path.join(__dirname,'deployment'))){
  if(entry.endsWith('.ps1'))fs.writeFileSync(path.join(output,entry),'\ufeff'+fs.readFileSync(source,'utf8').replace(/^\ufeff/,''),'utf8');
  else fs.copyFileSync(source,path.join(output,entry));
 }
-const configuration={executablePath:'App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe',httpPort:8080,streamerPort:8888,showWindow:false,width:1920,height:1080,mode:'independent',fps:60,fixedFps:true,encoderAsync:true,encoder:'NVIDIA',minBitrateMbps:1,startBitrateMbps:8,maxBitrateMbps:24,qualityProfile:'balanced',adaptiveResourceBudget:false,warmStandbyEnabled:false,maxViewers:5,networkMode:'lan',publicUrl:'',accessProtectionEnabled:false,accessCode:'',tlsCertPath:'',tlsKeyPath:'',trustProxy:false,externalTlsTermination:false,stunUrl:'',turnUrl:'',turnUsername:'',turnPassword:''};
+const configuration={executablePath:'App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe',httpPort:8080,streamerPort:8888,showWindow:false,width:1920,height:1080,mode:'independent',fps:60,fixedFps:true,encoderAsync:true,encoder:'NVIDIA',minBitrateMbps:1,startBitrateMbps:8,maxBitrateMbps:24,qualityProfile:'balanced',adaptiveResourceBudget:false,warmStandbyEnabled:false,maxViewers:5,networkMode:'lan',publicUrl:'',backupPublicUrl:'',accessProtectionEnabled:false,accessCode:'',tlsCertPath:'',tlsKeyPath:'',trustProxy:false,externalTlsTermination:false,stunUrl:'',turnUrl:'',turnUsername:'',turnPassword:''};
 const cfgPath=path.join(output,'launcher.config.json');
 if(!fs.existsSync(cfgPath))fs.writeFileSync(cfgPath,JSON.stringify(configuration,null,2)+'\n');
 function sha(file){return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');}

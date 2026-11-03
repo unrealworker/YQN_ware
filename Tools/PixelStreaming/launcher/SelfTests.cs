@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -266,6 +266,50 @@ namespace Ghs.PixelStreaming
                     Assert(list.Items[1].SubItems[1].Text=="排队中" && list.Items[1].SubItems[1].ForeColor==LauncherTheme.Amber,"Queued instance state was not presented");
                     ListView viewers=(ListView)typeof(MainForm).GetField("connections",flags).GetValue(form); Assert(viewers.Items[0].SubItems[2].Text=="排队中","Queued viewer state was not presented");
                     fps.Value=14; c=(LauncherConfig)typeof(MainForm).GetMethod("ReadSettings",flags).Invoke(form,null); c.executablePath=Executable; Throws<ArgumentException>(delegate {c.Validate(scratch,false);});
+                }
+            });
+            Test("dual origin defaults empty and survives launcher save clone and runtime handoff",delegate {
+                Assert(ConfigValues(Config()).ContainsKey("backupPublicUrl") && (string)ConfigValues(Config())["backupPublicUrl"]=="","New configuration must explicitly disable backup origin");
+                string fixture=FixtureRoot(),file=Path.Combine(fixture,"launcher.config.json"); File.WriteAllText(file,"{\"networkMode\":\"lan\"}"); Assert((string)ConfigValues(LauncherConfig.Load(file))["backupPublicUrl"]=="","Legacy file enabled backup origin");
+                LauncherConfig source=FixtureConfig(); source.networkMode="public"; source.publicUrl="https://warehouse-sim.iyunquna.com"; source.externalTlsTermination=true; source.accessCode="fixture-only-preserved-code";
+                var values=ConfigValues(source); values["backupPublicUrl"]="http://47.96.135.179:8080"; LauncherConfig c=new JavaScriptSerializer().Deserialize<LauncherConfig>(new JavaScriptSerializer().Serialize(values)); c.Validate(fixture,false); c.Save(file); c=LauncherConfig.Load(file).Clone();
+                Assert((string)ConfigValues(c)["backupPublicUrl"]==values["backupPublicUrl"].ToString() && c.accessCode==source.accessCode,"Backup or credentials lost in persistence");
+                using(ServiceSession session=new ServiceSession(fixture)) { session.Start(c); string runtime=Directory.GetFiles(Path.Combine(fixture,"sessions"),"config.json",SearchOption.AllDirectories)[0]; LauncherConfig child=LauncherConfig.Load(runtime); Assert((string)ConfigValues(child)["backupPublicUrl"]==values["backupPublicUrl"].ToString() && child.publicUrl==source.publicUrl && child.externalTlsTermination && !child.trustProxy,"Dual origin missing from real runtime config"); session.Stop(); }
+            });
+            Test("dual origin JSON rejects nonstring values without coercion",delegate {
+                string file=Path.Combine(scratch,"backup-types.json"); foreach(string invalid in new[]{"null","0","1","true","{}","[]"}) { File.WriteAllText(file,"{\"backupPublicUrl\":"+invalid+"}"); Throws<ArgumentException>(delegate {LauncherConfig.Load(file);}); }
+            });
+            Test("backup origin canonical scheme host and default port reach saved and runtime configuration",delegate {
+                string fixture=FixtureRoot(),file=Path.Combine(fixture,"launcher.config.json"); LauncherConfig c=FixtureConfig(); c.networkMode="public"; c.publicUrl="https://warehouse-sim.iyunquna.com"; c.externalTlsTermination=true;
+                using(PublicSettingsForm access=new PublicSettingsForm(fixture,c)) { TextBox backup=(TextBox)typeof(PublicSettingsForm).GetField("backupAddress",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(access); backup.Text="HTTP://BACKUP.Example.COM:80/"; c=access.Read(); }
+                c.Validate(fixture,false); Assert(c.backupPublicUrl=="http://backup.example.com","Origin was not canonicalized"); c.Save(file); c=LauncherConfig.Load(file); Assert(c.backupPublicUrl=="http://backup.example.com","Saved origin was not canonical");
+                using(ServiceSession session=new ServiceSession(fixture)) { session.Start(c); string runtime=Directory.GetFiles(Path.Combine(fixture,"sessions"),"config.json",SearchOption.AllDirectories)[0]; Assert(LauncherConfig.Load(runtime).backupPublicUrl=="http://backup.example.com","Runtime received uppercase or noncanonical origin"); session.Stop(); }
+            });
+            Test("deployment-only fields survive load clone GUI edits save and runtime handoff",delegate {
+                string fixture=FixtureRoot(),file=Path.Combine(fixture,"launcher.config.json"); var values=ConfigValues(FixtureConfig()); values["networkMode"]="public"; values["publicUrl"]="https://warehouse-sim.iyunquna.com"; values["backupPublicUrl"]="http://47.96.135.179:8080"; values["externalTlsTermination"]=true;
+                values["publicMediaAddress"]="47.96.135.179"; values["customDeployment"] = new Dictionary<string,object>{{"mediaPort",50000},{"preserve",true}}; values["fps"]=30; values["warmStandbyEnabled"]=true; values["encoderAsync"]=true;
+                File.WriteAllText(file,new JavaScriptSerializer().Serialize(values)); LauncherConfig c=LauncherConfig.Load(file).Clone(); BindingFlags flags=BindingFlags.Instance|BindingFlags.NonPublic;
+                using(PublicSettingsForm access=new PublicSettingsForm(fixture,c)) c=access.Read();
+                using(MainForm main=new MainForm()) { typeof(MainForm).GetMethod("ApplyAccessSettings",flags).Invoke(main,new object[]{c}); c=(LauncherConfig)typeof(MainForm).GetMethod("ReadSettings",flags).Invoke(main,null); }
+                c.executablePath=Executable; c.httpPort=FreePort(); c.streamerPort=FreePort(); c.Save(file); var saved=new JavaScriptSerializer().Deserialize<Dictionary<string,object>>(File.ReadAllText(file)); Assert(saved["publicMediaAddress"].ToString()=="47.96.135.179" && ((Dictionary<string,object>)saved["customDeployment"])["preserve"].Equals(true),"UI/save dropped backend-only fields");
+                using(ServiceSession session=new ServiceSession(fixture)) { session.Start(c); string runtime=Directory.GetFiles(Path.Combine(fixture,"sessions"),"config.json",SearchOption.AllDirectories)[0]; var child=new JavaScriptSerializer().Deserialize<Dictionary<string,object>>(File.ReadAllText(runtime)); Assert(child["publicMediaAddress"].ToString()=="47.96.135.179" && ((Dictionary<string,object>)child["customDeployment"])["mediaPort"].Equals(50000),"Runtime dropped backend-only fields"); session.Stop(); }
+            });
+            Test("backup origin accepts only complete HTTP origins with ALB HTTPS primary",delegate {
+                JavaScriptSerializer originJson=new JavaScriptSerializer(); var values=ConfigValues(Config()); values["networkMode"]="public"; values["publicUrl"]="https://warehouse-sim.iyunquna.com"; values["externalTlsTermination"]=true;
+                foreach(string url in new[]{"http://47.96.135.179:8080","http://47.96.135.179:8080/","http://backup.example.com","http://[2001:db8::1]:8080"}) { values["backupPublicUrl"]=url; originJson.Deserialize<LauncherConfig>(originJson.Serialize(values)).ValidateNetwork(scratch); }
+                foreach(string url in new[]{"https://47.96.135.179:8080","http://user:pass@47.96.135.179:8080","http://47.96.135.179:8080/path","http://47.96.135.179:8080?","http://47.96.135.179:8080#","http://*.example.com:8080","http://47.96.135.179:0","http://47.96.135.179:65536","http://47.96.135.179:","http://47.96.135.179:8080//"," http://47.96.135.179:8080","http://47.96.135.179:8080 ","http://47.96.135.179:\t8080","http://47.96.135.179:8080\r\n","http://47.96.135.179:8080\0","http://47.96.135.179:8080/..","http://47.96.135.179:8080/%2e","http://47.96.135.179:8080\\","http://backup..example.com:8080","http://warehouse-sim.iyunquna.com","http://warehouse-sim.iyunquna.com:80"}) { values["backupPublicUrl"]=url; LauncherConfig c=originJson.Deserialize<LauncherConfig>(originJson.Serialize(values)); Throws<ArgumentException>(delegate {c.ValidateNetwork(scratch);}); }
+                values["backupPublicUrl"]="http://47.96.135.179:8080";
+                values["externalTlsTermination"]=false; Throws<ArgumentException>(delegate {originJson.Deserialize<LauncherConfig>(originJson.Serialize(values)).ValidateNetwork(scratch);});
+                values["externalTlsTermination"]=true; values["networkMode"]="lan"; Throws<ArgumentException>(delegate {originJson.Deserialize<LauncherConfig>(originJson.Serialize(values)).ValidateNetwork(scratch);});
+                values["networkMode"]="public"; values["publicUrl"]="http://warehouse-sim.iyunquna.com"; Throws<ArgumentException>(delegate {originJson.Deserialize<LauncherConfig>(originJson.Serialize(values)).ValidateNetwork(scratch);});
+            });
+            Test("GUI backup entry persists through main settings and mode changes cannot silently enable it",delegate {
+                BindingFlags flags=BindingFlags.Instance|BindingFlags.NonPublic; LauncherConfig c=Config(); c.networkMode="public"; c.publicUrl="https://warehouse-sim.iyunquna.com"; c.externalTlsTermination=true;
+                using(PublicSettingsForm form=new PublicSettingsForm(scratch,c)) {
+                    FieldInfo f=typeof(PublicSettingsForm).GetField("backupAddress",flags); Assert(f!=null,"Backup address input missing"); TextBox backup=(TextBox)f.GetValue(form); Assert(backup.Enabled,"ALB backup input is disabled"); backup.Text="http://47.96.135.179:8080"; LauncherConfig saved=form.Read(); saved.ValidateNetwork(scratch);
+                    using(MainForm main=new MainForm()) { typeof(MainForm).GetMethod("ApplyAccessSettings",flags).Invoke(main,new object[]{saved}); LauncherConfig roundtrip=(LauncherConfig)typeof(MainForm).GetMethod("ReadSettings",flags).Invoke(main,null); Assert((string)ConfigValues(roundtrip)["backupPublicUrl"]==backup.Text,"Main form dropped backup origin"); Assert(((Label)typeof(MainForm).GetField("networkSummary",flags).GetValue(main)).Text.Contains("备用"),"Dual entry not visible in main summary"); }
+                    ((ComboBox)typeof(PublicSettingsForm).GetField("tlsMode",flags).GetValue(form)).SelectedIndex=0; Assert(!backup.Enabled,"Non-ALB mode left backup input enabled"); Assert((string)ConfigValues(form.Read())["backupPublicUrl"]=="","Non-ALB mode transmitted a stale backup");
+                    ((ComboBox)typeof(PublicSettingsForm).GetField("tlsMode",flags).GetValue(form)).SelectedIndex=3; Assert(backup.Text=="","Reenabling ALB silently reactivated backup"); backup.Text="http://47.96.135.179:\t8080"; Throws<ArgumentException>(delegate {form.Read().ValidateNetwork(scratch);});
                 }
             });
             Test("cloud HTTPS termination accepts private HTTP backhaul and survives configuration save and clone",delegate {

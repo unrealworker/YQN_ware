@@ -73,6 +73,11 @@ namespace Ghs.PixelStreaming
                 LauncherConfig cloudBaseline=new LauncherConfig {networkMode="public",externalTlsTermination=true,publicUrl="https://warehouse-sim.iyunquna.com",accessCode="fixture-only-not-real",maxViewers=5};
                 Set(form,"baseline",cloudBaseline); Call(form,"UpdateNetworkSummary"); Call(form,"SetStatus","○  服务未启动",LauncherTheme.Muted); ((Label)Field(form,"portFeedback")).Text="尚未检测端口 · 启动时自动检查"; ((Label)Field(form,"portFeedback")).ForeColor=LauncherTheme.Muted; Capture(form,Path.Combine(directory,stem+"-cloud-idle.png"),captures);
                 if(((Button)Field(form,"firewall")).Enabled) throw new InvalidOperationException("Cloud mode must not offer automatic broad firewall rules.");
+                cloudBaseline.backupPublicUrl="http://47.96.135.179:8080"; Call(form,"UpdateNetworkSummary");
+                typeof(ServiceSession).GetField("state",Private).SetValue(session,"running");
+                Call(form,"ApplyStatus",new ServiceStatus {state="running",mode="independent",viewerCount=0,maxViewers=5,viewers=new ViewerStatus[0],instances=new InstanceStatus[0],urls=new[]{cloudBaseline.publicUrl,cloudBaseline.backupPublicUrl},logs=new string[0]});
+                Capture(form,Path.Combine(directory,stem+"-dual-origin.png"),captures);
+                typeof(ServiceSession).GetField("state",Private).SetValue(session,"idle");
                 form.Close(); Application.DoEvents();
             }
             LauncherConfig sample=new LauncherConfig {networkMode="public",maxViewers=5,publicUrl="https://warehouse.example.com",accessCode="fixture-only-not-real",trustProxy=true,stunUrl="stun:stun.example.com:3478",turnUrl="turn:relay.example.com:3478?transport=udp",turnUsername="fixture",turnPassword="fixture-only-not-real"};
@@ -92,12 +97,19 @@ namespace Ghs.PixelStreaming
                 }
                 settings.Close();
             }
-            sample.trustProxy=false; sample.externalTlsTermination=true; sample.publicUrl="https://warehouse-sim.iyunquna.com";
+            sample.trustProxy=false; sample.externalTlsTermination=true; sample.publicUrl="https://warehouse-sim.iyunquna.com"; sample.backupPublicUrl="http://47.96.135.179:8080";
             using(PublicSettingsForm settings=new PublicSettingsForm(directory,sample)) {
                 settings.ShowInTaskbar=false; settings.StartPosition=FormStartPosition.Manual; settings.Location=new Point(-30000,-30000); settings.Show(); Application.DoEvents();
                 string file=stem+"-cloud-https.png"; using(Bitmap image=new Bitmap(settings.Width,settings.Height)) { settings.DrawToBitmap(image,new Rectangle(Point.Empty,image.Size)); image.Save(Path.Combine(directory,file),ImageFormat.Png); }
                 captures.Add(new {file=file,width=settings.Width,height=settings.Height,fixtureOnly=true});
-                LauncherConfig read=settings.Read(); if(!read.externalTlsTermination || read.trustProxy || read.tlsCertPath!="" || read.tlsKeyPath!="") throw new InvalidOperationException("Cloud settings fixture did not preserve HTTP backhaul mode."); settings.Close();
+                LauncherConfig read=settings.Read(); if(!read.externalTlsTermination || read.trustProxy || read.tlsCertPath!="" || read.tlsKeyPath!="" || read.backupPublicUrl!=sample.backupPublicUrl) throw new InvalidOperationException("Cloud settings fixture did not preserve both origins and HTTP backhaul mode.");
+                TextBox backup=(TextBox)typeof(PublicSettingsForm).GetField("backupAddress",Private).GetValue(settings); if(!backup.Enabled) throw new InvalidOperationException("Backup origin should be editable for ALB HTTPS.");
+                foreach(Control control in settings.Controls) if(control is TabControl) ((TabControl)control).TabPages[0].ScrollControlIntoView(backup); Application.DoEvents();
+                file=stem+"-cloud-dual-origin.png"; using(Bitmap image=new Bitmap(settings.Width,settings.Height)) { settings.DrawToBitmap(image,new Rectangle(Point.Empty,image.Size)); image.Save(Path.Combine(directory,file),ImageFormat.Png); }
+                captures.Add(new {file=file,width=settings.Width,height=settings.Height,fixtureOnly=true});
+                settings.ClientSize=new Size(640,480); Application.DoEvents(); foreach(Control control in settings.Controls) if(control is TabControl) ((TabControl)control).TabPages[0].ScrollControlIntoView(backup); Application.DoEvents();
+                file=stem+"-cloud-https-compact.png"; using(Bitmap image=new Bitmap(settings.Width,settings.Height)) { settings.DrawToBitmap(image,new Rectangle(Point.Empty,image.Size)); image.Save(Path.Combine(directory,file),ImageFormat.Png); }
+                captures.Add(new {file=file,width=settings.Width,height=settings.Height,fixtureOnly=true}); settings.Close();
             }
             File.WriteAllText(Path.Combine(directory,stem+"-report.json"),new JavaScriptSerializer().Serialize(new {fixtureOnly=true,capturedAt=DateTime.UtcNow.ToString("o"),captures=captures})); return 0;
         }

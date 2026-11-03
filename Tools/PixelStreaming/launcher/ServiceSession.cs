@@ -43,6 +43,7 @@ namespace Ghs.PixelStreaming
                     LogPath=Path.Combine(root,"logs","server-"+sessionId+".log");
                     byte[] random=new byte[32]; using(RandomNumberGenerator generator=RandomNumberGenerator.Create()) generator.GetBytes(random); token=Convert.ToBase64String(random);
                     string configPath=Path.Combine(sessionDirectory,"config.json"); string controlPath=Path.Combine(sessionDirectory,"control.json");
+                    // Clone retains the optional backup origin and backend-only deployment fields.
                     LauncherConfig runtime=config.Clone(); runtime.executablePath=config.ResolveExecutable(root); runtime.tlsCertPath=config.ResolveLocalFile(root,config.tlsCertPath); runtime.tlsKeyPath=config.ResolveLocalFile(root,config.tlsKeyPath); runtime.Save(configPath);
                     ThrowIfCanceled();
                     process=OwnedProcess.Start(node,new[]{server,"--config",configPath,"--control-file",controlPath},root,new Dictionary<string,string>{{"GHS_CONTROL_TOKEN",token}},LogPath);
