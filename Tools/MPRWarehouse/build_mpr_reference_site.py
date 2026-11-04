@@ -260,7 +260,7 @@ def textures():
    path=out/('T_MPR3_'+kind+'_'+channel+'.png');png(path,data);result[kind][channel]=path.relative_to(ROOT).as_posix()
  return result
 
-def export(tex,metadata,vertex_fade=None):
+def export(tex,metadata,vertex_fade=None,flatten_fade=True):
  mats={}
  for role,spec in MATERIALS.items():
   mat=bpy.data.materials.new(role);mat.use_nodes=True;bs=next(n for n in mat.node_tree.nodes if n.type=='BSDF_PRINCIPLED')
@@ -302,7 +302,7 @@ def export(tex,metadata,vertex_fade=None):
    off=len(verts);verts.extend(vv);faces.extend(tuple(i+off for i in f) for f in ff);face_roles.extend([role]*len(ff))
   if not faces:continue
   used=sorted({i for f in faces for i in f});remap={v:i for i,v in enumerate(used)};verts=[verts[i] for i in used];faces=[tuple(remap[i] for i in f) for f in faces]
-  if vertex_fade is not None and any(MATERIALS[r].get('vertex_color_fade')for r in roles):
+  if flatten_fade and vertex_fade is not None and any(MATERIALS[r].get('vertex_color_fade')for r in roles):
    verts=[(x,y,G+(z-G)*(1-.99*vertex_fade(name,(x,y,z))))for x,y,z in verts]
   data=bpy.data.meshes.new(name);data.from_pydata(verts,[],faces);data.update();obj=bpy.data.objects.new(name,data);bpy.context.collection.objects.link(obj)
   # Float32 storage can collapse tiny Shapely sliver triangles. Remove only

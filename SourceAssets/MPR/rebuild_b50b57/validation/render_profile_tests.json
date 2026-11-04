@@ -1,0 +1,74 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "PLUTO",
+			"instance": "46AA08E547DCE7E872AE4DB9508723CF",
+			"instanceName": "PLUTO-31104",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (25H2) [10.0.26200.9711] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 5060 Laptop GPU",
+			"cPUModel": "Intel(R) Core(TM) i9-14900HX",
+			"rAMInGB": 32,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.11.04-15.07.55",
+	"succeeded": 3,
+	"succeededWithWarnings": 0,
+	"failed": 0,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.034405600279569626,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "ExternalChangesWin",
+			"fullTestPath": "Environment.RenderProfile.ExternalChangesWin",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"46AA08E547DCE7E872AE4DB9508723CF"
+			],
+			"duration": 0.0011320002377033234,
+			"dateTime": "2026.11.04-15.07.55",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "InvalidRequestsAndCleanup",
+			"fullTestPath": "Environment.RenderProfile.InvalidRequestsAndCleanup",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"46AA08E547DCE7E872AE4DB9508723CF"
+			],
+			"duration": 0.016699902713298798,
+			"dateTime": "2026.11.04-15.07.55",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MaxLeaseAndRestore",
+			"fullTestPath": "Environment.RenderProfile.MaxLeaseAndRestore",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"46AA08E547DCE7E872AE4DB9508723CF"
+			],
+			"duration": 0.016573697328567505,
+			"dateTime": "2026.11.04-15.07.55",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

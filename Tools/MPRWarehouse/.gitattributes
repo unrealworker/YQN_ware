@@ -13,3 +13,5 @@ capture_mpr_detail_views.py -text whitespace=trailing-space,space-before-tab,cr-
 mpr_transport_v6_geometry.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
 validate_mpr_campus_surfaces.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
 extract_mpr_plan_solar.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+# Independent B50B57 rebuild audit records include tool hashes.
+*rebuild*.py -text whitespace=trailing-space,space-before-tab,cr-at-eol

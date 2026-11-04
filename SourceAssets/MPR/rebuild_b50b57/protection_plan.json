@@ -1,0 +1,4890 @@
+{
+  "schema_version": 1,
+  "source_map": "/Game/Maps/MPR_CAD_Warehouse",
+  "new_map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "namespace": "/Game/MPRWarehouse/RebuildB50B57",
+  "source_map_sha256": "b7237b66ea830f29db959d258e85b5bdd01919c390ee1fb8382f93c0169e664a",
+  "source_actor_digest": "56af6a5a62d34f94c5b2e2615e4bef6175cfb87b41b124609f8a97411d1687a6",
+  "counts": {
+    "remove_old_exterior": 353,
+    "keep_main_attachments": 66,
+    "keep_interior": 136,
+    "keep_lighting": 4,
+    "keep_main_shell": 48,
+    "keep_camera": 2
+  },
+  "actors": [
+    {
+      "guid": "009FCEFF4961A2DEBF6BBEAEA6DAEB39",
+      "name": "StaticMeshActor_246",
+      "label": "SM_MPRE_WhiteEdges_4_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "61ad6b546836f5a0a284506b60eaa44fdab98834ae63005700cb5488c9dadd64"
+    },
+    {
+      "guid": "00C913F747BD36CDC59389A0D875F961",
+      "name": "StaticMeshActor_209",
+      "label": "SM_MPRE_Curblines_3_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "57ac898afa5519ea9a27e4d0b9ccfe3fc6dba5336fff39e53838845369230472"
+    },
+    {
+      "guid": "01844B4D49FCC5D0F913BF93A41AED6F",
+      "name": "StaticMeshActor_288",
+      "label": "SM_MPRE_Context_-6_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "b6d93f89c76c1e093a325d7eea20dbe14c736d298f8cd5438b3a44b03a6b75ec"
+    },
+    {
+      "guid": "01ADF6014A41B500A04F70A97D276544",
+      "name": "BP_GHS_InstanceGroup_C_39",
+      "label": "MPR4_MPR4_Digit_3_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "2ec32a5dac66527f7c054fa96db16b2783ed03e081e6d70c7a4c6bdf443d0203"
+    },
+    {
+      "guid": "02594DAC4FE9AE764BE072A7EC15E22D",
+      "name": "BP_GHS_InstanceGroup_C_204",
+      "label": "MPR_SM_MPR_Turn__U74_-3_1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "23512f828403ecdb0423decc827c76c42c02f2e24f2c04a9278bbd329916f7e7"
+    },
+    {
+      "guid": "031C72294D077AB153D3378D7D2DE4F8",
+      "name": "BP_GHS_InstanceGroup_C_42",
+      "label": "MPR4_MPR4_Digit_4_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "639be72c6bf9904718dfd130e8264b90f947019da8203a279bf285b56aed6c79"
+    },
+    {
+      "guid": "0327741547CC18772167678472BA2015",
+      "name": "BP_GHS_InstanceGroup_C_106",
+      "label": "MPR4_MPR4_Tree_Oak_-4_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "eb3d21b7d2a560a11716445adac015c329be5d9dad3e0ffced55e5c0da85c42d"
+    },
+    {
+      "guid": "03460CDB40BDC83A36523BBAE63077C7",
+      "name": "BP_GHS_InstanceGroup_C_294",
+      "label": "MPRE_SM_MPR4_Tree_Oak_2_3",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "6ab4e9e601dea012ca36d9e87ffa2487f8a17038277920b3a79df8007a32b888"
+    },
+    {
+      "guid": "03BCF90440198E4C35628B89D05E3F02",
+      "name": "BP_GHS_InstanceGroup_C_252",
+      "label": "MPR_Columns_-3_-2",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "771a161b34b074c69a534a11654cafdab2589de36e8910afbda190957885f9c4"
+    },
+    {
+      "guid": "03DA2BA742D2BE1FF1EC29954D3D1E6D",
+      "name": "StaticMeshActor_106",
+      "label": "SM_MPRE_Roads_-3_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "431384bc67e3328a46a279d64ea06072f10023555651c36f10ee818ef55f1d97"
+    },
+    {
+      "guid": "040A1B5C4D5968E84A0CFB896E0B211C",
+      "name": "BP_GHS_InstanceGroup_C_63",
+      "label": "MPR4_MPR4_Digit_9_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "f134cfb93abab8f927083802f0f231bd8d086842d03cbe7867014a4ee953b3e2"
+    },
+    {
+      "guid": "0437166B489EFA48E1C01F8540678CDF",
+      "name": "StaticMeshActor_258",
+      "label": "SM_MPRE_RoadDashes_-3_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "88eab21c3de18332dfb7ca9bff7e253e42d70143c5893e399b710c1149640583"
+    },
+    {
+      "guid": "0450D62846A0EDEB00662A95AA122F6D",
+      "name": "StaticMeshActor_242",
+      "label": "SM_MPRE_WhiteEdges_2_-5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "912044cfa5ae74415efabce15760563f8e4354308b99e4cca9e0124ebf4e9fd4"
+    },
+    {
+      "guid": "04ABFEA34519FC97D4A0779B442D61EC",
+      "name": "BP_GHS_InstanceGroup_C_47",
+      "label": "MPR4_MPR4_Digit_5_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "64b00d2a14fab5cb3922959e4593d786b62518a7381ef20e961dac36993d6fe0"
+    },
+    {
+      "guid": "04B20E2F4E03436CFF68D98DD4F62C80",
+      "name": "BP_GHS_InstanceGroup_C_212",
+      "label": "MPR_SM_MPR_SorterCAD64_-2_-1",
+      "folder": "MPR/Equipment",
+      "action": "keep_interior",
+      "record_digest": "bbc87da5d15019d1f7571f1bae479956b919315ca4a823dc7b26056269286437"
+    },
+    {
+      "guid": "0512EDD94B0F29B63C211980146D4776",
+      "name": "BP_GHS_InstanceGroup_C_222",
+      "label": "MPR_Racks_-2_-1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "b176ce78880f29aef361db312724fca12d26d07f1a43292625d1d6b73dfd1234"
+    },
+    {
+      "guid": "05327842496088021B2BC896E7C69972",
+      "name": "StaticMeshActor_266",
+      "label": "SM_MPRE_RoadDashes_2_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "6575b49548ae8b6ef91e5cc267bdeeacaa36d66d318031d6c035fa03deab83a3"
+    },
+    {
+      "guid": "0536C189492221D6BB2E1488AFAB3599",
+      "name": "StaticMeshActor_179",
+      "label": "SM_MPRE_Curblines_2_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "26690c40b3d648d6e6085100ba22881733e961b4dc51a85da09639e553fb26cc"
+    },
+    {
+      "guid": "057533014046624308A0B99F57140784",
+      "name": "StaticMeshActor_50",
+      "label": "MPR4_Site_RoadEdges",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "259737748a8759376719048cdb8bdad88d85b086e7aed0ffc10cd9cde1c77326"
+    },
+    {
+      "guid": "073B121844A89194761BB48055AD3188",
+      "name": "PostProcessVolume_0",
+      "label": "MPR4_ReferenceStyle",
+      "folder": "MPR/ReferenceV4/Lighting",
+      "action": "keep_lighting",
+      "record_digest": "b0e1d9d30f029073924c278e00f66940de8fdb6ba6d55464b4ba5a40c873d4a0"
+    },
+    {
+      "guid": "07524785477649D4C3DCC9BD8C2174B3",
+      "name": "BP_GHS_InstanceGroup_C_190",
+      "label": "MPR_SM_MPR_StationChute_0_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "a9961d7e09ce13e64b477e4e8c3d9f82518340f4162ac3d46735b558623eba3f"
+    },
+    {
+      "guid": "07EDC514498E2BF0F0F923BA2C1EC72F",
+      "name": "BP_GHS_InstanceGroup_C_153",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-1_2",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "9efd65149be26a50ebd9c0f3bfc129e9c720c78788bce6c1d8a0d9acebebb8d2"
+    },
+    {
+      "guid": "080C2C22427DC9C0EFCB1FA3ACB65E46",
+      "name": "BP_GHS_InstanceGroup_C_28",
+      "label": "MPR4_MPR4_RollerDock_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "87bfc88f2aabed3c5dfdaeb2f46ef1a0eb50e983e295f35b7c6ed61b32f8ae3e"
+    },
+    {
+      "guid": "08B64ECC416E413DD3C70083CCA5B63D",
+      "name": "BP_GHS_InstanceGroup_C_182",
+      "label": "MPR_SM_MPR_StationChute_-3_-2",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "be8234f295cbe10a9f5a57a1ede0ee70c87271526df04e66b22de8322ed15006"
+    },
+    {
+      "guid": "08D29AF44337220F032C639B591EE5B9",
+      "name": "BP_GHS_InstanceGroup_C_145",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-3_3",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "7fc53bcd93c5ca9a0495f3deffa83fcf91dc05cf4313f5d14430326a6d52e84c"
+    },
+    {
+      "guid": "092358494A3FAD551470DD86EED231DC",
+      "name": "StaticMeshActor_84",
+      "label": "SM_MPRE_Rail_-1_-4_Sleepers",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "eb11d393348fec29c1d19b658699b4b51b148571e0cb866fbf9d7147352ea633"
+    },
+    {
+      "guid": "098DB33F4094AAE65EFB50AFC10E4BEB",
+      "name": "BP_GHS_InstanceGroup_C_211",
+      "label": "MPR_SM_MPR_SorterPlatform_-2_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "58437e9d0871708ed773ecc067182ca758844af38eb6ccdb104f733357a60d51"
+    },
+    {
+      "guid": "09A7225B49E2724E0494808228866615",
+      "name": "StaticMeshActor_148",
+      "label": "SM_MPRE_Curblines_-4_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "c294a9fac3d906074689b81bd42c731162dfc3c0c16ac89397ae6335d20680e6"
+    },
+    {
+      "guid": "09B602DF40A31EAA1DF1578C11779A07",
+      "name": "StaticMeshActor_68",
+      "label": "MPR4_Site_Near_Sleepers",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "b8aac2215b99b95f6b396e05dac186634db9a9e6058073e72596922cf74c42f0"
+    },
+    {
+      "guid": "09D8B647450816B990B96492AA1173AD",
+      "name": "BP_GHS_InstanceGroup_C_15",
+      "label": "MPR4_MPR4_Digit_0_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "c605a4cd677e9916954a004b7f769290cdb650f2126ae2a1bba4d89621b39702"
+    },
+    {
+      "guid": "0AB60AF045EDC0AD7D940FACC58F97CC",
+      "name": "StaticMeshActor_171",
+      "label": "SM_MPRE_Curblines_0_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "c710bb0b6e806d573c377b401698f1d5bf2354ebb633c4f4613795bb36e0b522"
+    },
+    {
+      "guid": "0B534F7346D38672E4928ABDD52C3284",
+      "name": "StaticMeshActor_15",
+      "label": "MPR4_Facade_07",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "898d3b7f0f3411f0b9b68d490dbf4252ddba5afa5518a72c18eef9cf2084086e"
+    },
+    {
+      "guid": "0B7A73494D3C8C49BB5CBFBD500E0610",
+      "name": "StaticMeshActor_170",
+      "label": "SM_MPRE_Curblines_0_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "08ef946099c12f31d0b82d33af061231273500ce7f22b88458329b8cd84fad90"
+    },
+    {
+      "guid": "0BD5F72A446822C339A9F28E9285B1CE",
+      "name": "BP_GHS_InstanceGroup_C_259",
+      "label": "MPR_Columns_-1_-1",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "c266b741964117d005e8fc6c685d21a7881580607536c7acba79df53420c0430"
+    },
+    {
+      "guid": "0C716DB14BE52E21FA332283B63A3FB2",
+      "name": "StaticMeshActor_17",
+      "label": "MPR4_Facade_08",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "e7e0b3324e938e99c9256af04d99fdcde5676d2cc149cb7b1b6e4d1b03a9a263"
+    },
+    {
+      "guid": "0CCFA6E744184A41B9E1CCB424F14B5B",
+      "name": "BP_GHS_InstanceGroup_C_262",
+      "label": "MPR_Columns_0_-1",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "4f8fd2305f3b2657c2b5612b8fbe94b753802497e68d2abdaaeeb87c53604435"
+    },
+    {
+      "guid": "0D4FAA26463BB69A9D4AD68A27DC3372",
+      "name": "StaticMeshActor_54",
+      "label": "MPR4_Site_RoadCenter",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "a9c53724f918b2a1c16e7d63c4d26aab5a010aa79f468c32aa139fe8e707f624"
+    },
+    {
+      "guid": "0DBAD7D5427DA30D1D15338CD2FA6D9D",
+      "name": "StaticMeshActor_220",
+      "label": "SM_MPRE_WhiteEdges_-3_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "1188c2bdaac32feeb6e23fc1698e6fe5ea3d452a30824c954e1b94dad78efe55"
+    },
+    {
+      "guid": "0DCDD8284001B7D85843659F9433CC3D",
+      "name": "StaticMeshActor_253",
+      "label": "SM_MPRE_RoadDashes_-4_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "d45fa469ccd26b38f8f818a05fe9c4ac5ee2434ae9fd231f49e6529d43a5fda6"
+    },
+    {
+      "guid": "0E46FBE1416887AA0EC1CAAEDABC41D8",
+      "name": "BP_GHS_InstanceGroup_C_213",
+      "label": "MPR_SM_MPR_SorterCAD64_-2_0",
+      "folder": "MPR/Equipment",
+      "action": "keep_interior",
+      "record_digest": "89b391e8c42a8f1609545165000ea0cfe6c97c0d875fdbdab5f145fa113b3d95"
+    },
+    {
+      "guid": "0E794B2047EF97EE6BE528A50114D21A",
+      "name": "BP_GHS_InstanceGroup_C_166",
+      "label": "MPR_SM_MPR_Conveyor2m_2_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "6e34e69ead3f89f5761ed555a69fac944c8c23d5d38a984811977c5a69d9827d"
+    },
+    {
+      "guid": "0FF0AA9F427A9F697C4FE094F2DE7D39",
+      "name": "StaticMeshActor_64",
+      "label": "MPR4_Site_Far_E_Rails",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "0679dfd4da8c2dda5f9cce197b1b65489db33fb7623fd242f102998ce2ee93bd"
+    },
+    {
+      "guid": "1014C1074A5E91DFF2DE08AB63F75C94",
+      "name": "BP_GHS_InstanceGroup_C_144",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-3_2",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "db89d609114e9d4378a830abdad2747694d26b96f2c5ba4205fabfabf4c9172a"
+    },
+    {
+      "guid": "108BEC3C48484C3FE9FE2BB66AADEAD6",
+      "name": "StaticMeshActor_198",
+      "label": "MPR4_Context_east_industrial",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "5529593afff8469b17d570cfdc5b5f188527b782c245eec8aed600735141158e"
+    },
+    {
+      "guid": "10A8C83F4FA75E7AAB7BA1B327D43243",
+      "name": "StaticMeshActor_1",
+      "label": "MPR4_Facade_00",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "0f12c78ca96359ad8ac8a9b969fea8660fc1799f712233a1d5445a0448f5416a"
+    },
+    {
+      "guid": "115296CE4775EF21709409935F274CDD",
+      "name": "StaticMeshActor_129",
+      "label": "SM_MPRE_Roads_2_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "c5b567fe12a6b0b1cffc2002074cb812619ae4df8c49559c2f9ede8aac4f8c89"
+    },
+    {
+      "guid": "11BEC352410A58A0DFD7D9A72AE77ED4",
+      "name": "BP_GHS_InstanceGroup_C_36",
+      "label": "MPR4_MPR4_Digit_2_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "3dcbb27dcf65bd7cb7c834b3fe54e7ab2e4022d5a68eb3b0c7500b6c3455da7b"
+    },
+    {
+      "guid": "11DB08C3417DD98C191AA5817C0F2949",
+      "name": "StaticMeshActor_283",
+      "label": "SM_MPRE_Context_-5_-1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "60efc67c33ba81a24ead5e9fc798e422f084d1bce5b4aa9d9256f22b49f89dfe"
+    },
+    {
+      "guid": "1215A4EB426AED1524348B95F4BF6D16",
+      "name": "BP_GHS_InstanceGroup_C_48",
+      "label": "MPR4_MPR4_Digit_5_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "84d05d74878fd6c9b4be23b2c5b2890c6ee5cc26eb63ab9cec316dd1d7dbd9d8"
+    },
+    {
+      "guid": "121D1DD943E685DBD8A577A22A1A1A00",
+      "name": "BP_GHS_InstanceGroup_C_297",
+      "label": "MPRE_SM_MPR4_Tree_Oak_4_1",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "6b3aeadfba31fe4b05698a58c8000f0cf2048d1ab1edd13d9951f915615b8f99"
+    },
+    {
+      "guid": "12F423D945AB7183C99670AE20163A08",
+      "name": "BP_GHS_InstanceGroup_C_216",
+      "label": "MPR_SM_MPR_SorterShort10_-2_-1",
+      "folder": "MPR/Equipment",
+      "action": "keep_interior",
+      "record_digest": "5c805788f6e2518ac9220dd3912adfc6a36f1ff9ea3d317c85fd61b910408908"
+    },
+    {
+      "guid": "132279F94F60EBECB51261ACA0942426",
+      "name": "BP_GHS_InstanceGroup_C_69",
+      "label": "MPR4_MPR4_RoofLight_0_0",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "8a56f66fb8c58736b9180bb64fc3e212989fe6c678b81cc294b4dc551c9a995a"
+    },
+    {
+      "guid": "13A7AEB84CB00592F9631B86A8174898",
+      "name": "StaticMeshActor_14",
+      "label": "MPR4_RoofEdge_06",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "2d61244acc776a4041a3ce7412d6bbec0757228f17f027c8d82ca0c46f8590bc"
+    },
+    {
+      "guid": "13E0DD614066E55D8D8D6FB449D50E7B",
+      "name": "StaticMeshActor_268",
+      "label": "SM_MPRE_RoadDashes_4_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "c111732107515ddb03852c7ab83b1f373a4b506c82360112e52ceef32b46b7a2"
+    },
+    {
+      "guid": "14A40C5048B0D01B833141BB3D0190B2",
+      "name": "BP_GHS_InstanceGroup_C_251",
+      "label": "MPR_Pallets_2_0",
+      "folder": "MPR/Storage/Floor",
+      "action": "keep_interior",
+      "record_digest": "04ceb49c01186a34df0e7856b5ffcc3c49e06cb4a72fe4ea155454a549bf13e2"
+    },
+    {
+      "guid": "14C4C33E469D32C0C4F8F48E3A897EBA",
+      "name": "BP_GHS_InstanceGroup_C_76",
+      "label": "MPR4_MPR4_Car_1_1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "8ac99d189146a114fe4fbde2302a03333a564068d3357dc347b997b3fd0b4259"
+    },
+    {
+      "guid": "14D47ECF4B73E41AEE2C0A84A7D62F73",
+      "name": "BP_GHS_InstanceGroup_C_227",
+      "label": "MPR_Racks_-1_0",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "92bc25921580fd42534fc060948d21559bf56e4a4cb696ebc20992f241094455"
+    },
+    {
+      "guid": "153A4FCF454E7A2A888697AEE31D65A3",
+      "name": "BP_GHS_InstanceGroup_C_100",
+      "label": "MPR4_MPR4_Trailer_Blue_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "7548c294144129f43d4079c9747482c3a94b6d8c0bcf4eb72df61d9f8b32ca0c"
+    },
+    {
+      "guid": "15798F024726F2CF8F3B919785586FE6",
+      "name": "BP_GHS_InstanceGroup_C_226",
+      "label": "MPR_Racks_-1_-1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "85a3ef976370f3bd76c34ca8d8b0d5b9e4534ce9e908ff7b7592911d767cdbcb"
+    },
+    {
+      "guid": "17E916A14C6C91DC4C09379619F7C71C",
+      "name": "BP_GHS_InstanceGroup_C_73",
+      "label": "MPR4_MPR4_Car_0_1_1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "2ab126a7c76018b3b7a374e4bf12971d78fe2efe8613462541f16e6ca48ca5ff"
+    },
+    {
+      "guid": "1956B8F0431710A5BDC2F996FCAE204A",
+      "name": "BP_GHS_InstanceGroup_C_103",
+      "label": "MPR4_MPR4_Trailer_Coral_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "954a40b7c35f0fdb008cfd7bd26dadd8d2eac6bbb48ab150e988922c5a41261f"
+    },
+    {
+      "guid": "19EB4286465E50B75C353DB3C60CB958",
+      "name": "StaticMeshActor_161",
+      "label": "MPR4_Context_Houses_-4_1",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "2a83c17f1bd913dbb3930c1ee9966e68acb77858ff023543aa954d6a09121af6"
+    },
+    {
+      "guid": "1A23EFD04AEB9F286AFF23875F1C2BBF",
+      "name": "StaticMeshActor_269",
+      "label": "SM_MPRE_Context_3_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "ab2f13f83dbbe1d2344fc72c7679065bbc9d1fc33a9e0d8cb58db4be800542d3"
+    },
+    {
+      "guid": "1A90C22C4C4A86E564C1A5B08C578369",
+      "name": "BP_GHS_InstanceGroup_C_35",
+      "label": "MPR4_MPR4_Digit_2_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "ee96058236feb0349caa5e053799ebff7f44d888d867200734e10d4b6e0e93ba"
+    },
+    {
+      "guid": "1AD03126436BF3EBE8DA279DEFADF27F",
+      "name": "BP_GHS_InstanceGroup_C_72",
+      "label": "MPR4_MPR4_Car_0_1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "ab1ad31b646ae545c9b142324936bbd097080d37697e0f009bb48aa4d7a42b7a"
+    },
+    {
+      "guid": "1B3971394372731937249898EC892F7D",
+      "name": "BP_GHS_InstanceGroup_C_169",
+      "label": "MPR_SM_MPR_WorkTable_-3_1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "5cf5009a6b562135cf931e1b271aff7420ae0fa5129ac6afbbff44c374b53f03"
+    },
+    {
+      "guid": "1C3BC30747149A0C4FCDC1968D785071",
+      "name": "StaticMeshActor_30",
+      "label": "MPR4_RoofEdge_13",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "4b0c2d54f09d9d5dd85cac575d0b043f3c02b62ad01df08f04f74cfb68994b02"
+    },
+    {
+      "guid": "1C57F3D9479F501FE840FDBF5212A768",
+      "name": "BP_GHS_InstanceGroup_C_128",
+      "label": "MPR4_MPR4_Tree_Oak_2_-2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "37ab312b4ede5ae18f0bd840541af18208c9f4b01079974ad9781d45584cb5a5"
+    },
+    {
+      "guid": "1C6CED21493197ABA71586838385FA6B",
+      "name": "BP_GHS_InstanceGroup_C_220",
+      "label": "MPR_Racks_-3_0",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "b77f1fd08c2a5736b3a39fd1381174bc4e8cc8f007ef0778a71a6ab5b02ed856"
+    },
+    {
+      "guid": "1CEFD51242C1ED2D76ADA3A592C8B6C2",
+      "name": "BP_GHS_InstanceGroup_C_162",
+      "label": "MPR_SM_MPR_Conveyor2m_-1_-2",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "94bba106eb7921abd47811fa675a110739d41c28c2ed55241f03a8d1d60a1fef"
+    },
+    {
+      "guid": "1D65FEFB4C1BFA6F6F7E5C9C2DBDD5D3",
+      "name": "BP_GHS_InstanceGroup_C_1",
+      "label": "MPR4_MPR4_WallLamp_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "48bc62bf8c9505138377202c31e1da379a44303b89e23e402ad48b9a5cffec01"
+    },
+    {
+      "guid": "1DDF4C6041337B656D1FFCB4826A9AD5",
+      "name": "StaticMeshActor_257",
+      "label": "SM_MPRE_RoadDashes_-4_1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "2e154f5a21bed469f5a39b669fa240b87c7b676642c4f4396924b9c8fc800a2d"
+    },
+    {
+      "guid": "1F3E8B7A4E85936D6A2DC48BA32B11A8",
+      "name": "StaticMeshActor_215",
+      "label": "SM_MPRE_WhiteEdges_-4_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "0a1e0c6e9dfb60f8f635b991d24bca9544357764546e88695772dd937bc7099b"
+    },
+    {
+      "guid": "1FCB7DA74FF1698779536EB0323F9ACF",
+      "name": "BP_GHS_InstanceGroup_C_27",
+      "label": "MPR4_MPR4_RollerDock_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "ad33da9fd00b2d0064ce4e9b74bce4361e6dd27ee26db791adccad9a16b9c0e3"
+    },
+    {
+      "guid": "202C96964E2828F09D3C94A45C403D0A",
+      "name": "StaticMeshActor_146",
+      "label": "SM_MPRE_Curblines_-4_0",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "1cf53d5c43397d0cf633833b2ac24ce4438227f4a7301651f6ac26b4dcd776bb"
+    },
+    {
+      "guid": "21556A984A15782B1F449186B918107E",
+      "name": "StaticMeshActor_244",
+      "label": "SM_MPRE_WhiteEdges_2_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "fc09e5cf8af7cef646bc77eb312c9e72b422bc47c2f4a9122128f07e6dd2716f"
+    },
+    {
+      "guid": "2200EF61488632BB3D283E9A717ACE6E",
+      "name": "BP_GHS_InstanceGroup_C_256",
+      "label": "MPR_Columns_-2_-1",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "4d0e25b4fc236229020f4a26b4edf76b3a2543e6871b664358bc76ae83d251d0"
+    },
+    {
+      "guid": "225D92344B64DA71D47CCAABB6BA1DE9",
+      "name": "BP_GHS_InstanceGroup_C_139",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-4_-1",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "607aa25459b6128024c5226d9453efd5008ede2bff7bbece9c1290bff88bcf47"
+    },
+    {
+      "guid": "229B55FC4570F5A625B2BE91E28F1798",
+      "name": "BP_GHS_InstanceGroup_C_224",
+      "label": "MPR_Racks_-2_1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "2701d054263d854c1790af7b38d4fc78c8b9e0ffce34ae204235ecc5f329cd5a"
+    },
+    {
+      "guid": "23B2874A4D55EADD28A4DDBB8758C10D",
+      "name": "StaticMeshActor_26",
+      "label": "MPR4_RoofEdge_11",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "fdfb4a48368ca6a78adeb7fad447a4e52bf70e0bf437c331732df03d3ecd615f"
+    },
+    {
+      "guid": "23C2385B45FDF80C203810AE20E45D6F",
+      "name": "StaticMeshActor_293",
+      "label": "SM_MPRE_Context_-3_5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "6ba55fda9997027257002944878041e072636f1207225eb82e488b1c71bfee66"
+    },
+    {
+      "guid": "25FB460F445EBEEC5E69EAB1EAA8D471",
+      "name": "StaticMeshActor_66",
+      "label": "MPR4_Site_Far_S_Rails",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "6870356344a351a1c169b10a2e2737bad05a8872300bd9c2d9d162babe0035ec"
+    },
+    {
+      "guid": "26FA07BA406C7A5E22A2CD88CC133E51",
+      "name": "StaticMeshActor_49",
+      "label": "MPR4_Site_RaisedCurbs",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "964c8f2c1b5e15b15461f67ef5b600d63c764737fe509c1287ccc6db3ce90d0f"
+    },
+    {
+      "guid": "27028C2A4B54D9EA32A3098104224FE2",
+      "name": "StaticMeshActor_74",
+      "label": "MPR4_Site_CampusPlanting",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "7a1a6e73743d80cba535a91fa915914333ff3d14d6806070c5a89002e6e49380"
+    },
+    {
+      "guid": "2707FAD14F90328667FACD8304D06756",
+      "name": "StaticMeshActor_6",
+      "label": "MPR4_RoofEdge_02",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "4c0350af175aa9216eb08a16189c6c89183ed15ccc585f62b79211d37f0db867"
+    },
+    {
+      "guid": "2732CB8B4E74D8C8369D49AC8EAC77BB",
+      "name": "StaticMeshActor_78",
+      "label": "MPR4_Context_Houses_-2_2",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "fb39b953d7edbc3ad2b35dc93bc21c7c1803ea0eb7bffedec463c9fa6c9fef6d"
+    },
+    {
+      "guid": "274A72DD486D8DD3DAA9E7A26833F574",
+      "name": "StaticMeshActor_185",
+      "label": "MPR4_Context_Houses_-2_-1",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "aa3c7dc5d4f90a77d50296a1198e0001f22a8d29bebbd8f0127736cdb1b1bda1"
+    },
+    {
+      "guid": "280C51D74E009D4D7F3A1ABF3877C00D",
+      "name": "StaticMeshActor_264",
+      "label": "SM_MPRE_RoadDashes_1_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "426b200079b34ec857ebdd8dc57fcc5c779d244e2369658b20978d1fdcf93e5b"
+    },
+    {
+      "guid": "28A4CBCA40962E74361D0E8CEC72C752",
+      "name": "StaticMeshActor_235",
+      "label": "SM_MPRE_WhiteEdges_0_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "4e0424aaaa1f52595e2ac18f92ae978ff6f04fe04ffa4730c1f96c01b06fd4cb"
+    },
+    {
+      "guid": "28C6B29E4A0A002E7D78D495A7382CA7",
+      "name": "StaticMeshActor_291",
+      "label": "SM_MPRE_Context_-2_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "5ef483006edb836b0b3d630f5df78bdb668728de2810f4aa00d7c2ddf032a9d9"
+    },
+    {
+      "guid": "28CE82B4482C90C13A89FAB81AECB65A",
+      "name": "StaticMeshActor_139",
+      "label": "SM_MPRE_Curblines_-6_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "87bbef0c7ea241a10437e083a93b92b24cb6ffbc1dca16f2a3bc840ee87f9db2"
+    },
+    {
+      "guid": "2970623D45930F1AD73A8F84350DC86F",
+      "name": "StaticMeshActor_79",
+      "label": "SM_MPRE_Rail_-2_-4_RailBed",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "0996f3a3356ac1a95c5d37115571265d5f73a4c0b9c1d6aa7a57d829883fe7ab"
+    },
+    {
+      "guid": "299D9B644ADFB8C363B86F8956AE3A23",
+      "name": "StaticMeshActor_87",
+      "label": "SM_MPRE_CrossingDeck_-1_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "b0057da8ccc1cf48c75f5a1d0969861f51816df33813d84141a0912104b15bb4"
+    },
+    {
+      "guid": "29D7265B42BF70B70F6E43AAF792B9FB",
+      "name": "BP_GHS_InstanceGroup_C_2",
+      "label": "MPR4_MPR4_WallLamp_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "c231587c389f89d5cd72b31fff90e152ad18148c8c07e5d8175a80f407df7b49"
+    },
+    {
+      "guid": "29EF93E64FEB0131B94451970F955F72",
+      "name": "BP_GHS_InstanceGroup_C_210",
+      "label": "MPR_SM_GHS_Shared_Conveyor_-2_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "bf3677d350b26fe3a5ce0941c0c73c480fcc4818e18e4c86a9fd2816abc0f31b"
+    },
+    {
+      "guid": "2ACDBD8648D8FD64C9026DA1464F018A",
+      "name": "BP_GHS_InstanceGroup_C_265",
+      "label": "MPR_Columns_1_-1",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "b0233ed7cb010a4a65b29795d448021c93f1670794ab0bfc1e2b4396bf630a08"
+    },
+    {
+      "guid": "2B1CE9254824467441EACCAF885AFD0A",
+      "name": "StaticMeshActor_48",
+      "label": "MPR4_Site_Courts",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "2bdcee052c5cdece80a5c07467a915ed23fc8369be6ad794f689c2dc5182190d"
+    },
+    {
+      "guid": "2B23BB4F43A72C57EFD12B813C9848D4",
+      "name": "BP_GHS_InstanceGroup_C_118",
+      "label": "MPR4_MPR4_Tree_Oak_0_-3",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "dfa7677ba7a75c034e6f2a9531464871d76e5ba79c1018179419b22d5f071538"
+    },
+    {
+      "guid": "2B6CC8164D932D26A413D39AE5378A85",
+      "name": "BP_GHS_InstanceGroup_C_168",
+      "label": "MPR_SM_MPR_WorkTable_-3_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "a4b36ee2a3a4849ad1c75ff8af66e4d31495806b96df82d2b17fa967dc430768"
+    },
+    {
+      "guid": "2C6F476B4E3DDB652ECC939542415F22",
+      "name": "StaticMeshActor_168",
+      "label": "SM_MPRE_Curblines_-1_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "52215e9fb8a8a3a605db6eee6c87c875736b4024728f3cb195b303e88e7d1371"
+    },
+    {
+      "guid": "2D2463DA45074EE279B990A9A42CA040",
+      "name": "StaticMeshActor_16",
+      "label": "MPR4_RoofEdge_07",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "bc802761f5baa3bbbcbb5c708dcd27986fdbefbc91e888d0bab798c8de921eca"
+    },
+    {
+      "guid": "2D838AEC4AC31ABB87E50AA6FD756CFD",
+      "name": "StaticMeshActor_23",
+      "label": "MPR4_Facade_10",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "990b55644fc7a0580916f5328a370b9679864264a1b420b4d72cd265ecae271d"
+    },
+    {
+      "guid": "2D91D55E4D77A02D8CB05DB4F50A3EA6",
+      "name": "BP_GHS_InstanceGroup_C_193",
+      "label": "MPR_SM_MPR_ScanGate_-2_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "77d53eafeb6333efca75c79b58bc5333033801c54473991b871f0dfa21d03e45"
+    },
+    {
+      "guid": "2E805F2F46A048F3BA25F8B3D2A5DFBF",
+      "name": "StaticMeshActor_22",
+      "label": "MPR4_RoofEdge_09",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "8e33f171416d52e098ef9bf055fe10eca42a1dad8fc059be4d9dc56a1561509a"
+    },
+    {
+      "guid": "2E9F820645A2E16E3E75628EA54EB082",
+      "name": "StaticMeshActor_59",
+      "label": "MPR4_Site_PondWalk",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "30ff576d2c3367da6da8c6acab2c2a5ef4ec353447b67f82eb6019b88caf23c6"
+    },
+    {
+      "guid": "2F2E5A1D4EEE5A8E37280A87FBFD8550",
+      "name": "StaticMeshActor_34",
+      "label": "MPR4_RoofEdge_15",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "19b95b8c8f2d0d12fda8205e1e67957c6da2e963b791333bd9152229d8646d36"
+    },
+    {
+      "guid": "2F3C43204D0783A8532E08B7F1D8652C",
+      "name": "BP_GHS_InstanceGroup_C_51",
+      "label": "MPR4_MPR4_Digit_6_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "569f33e14070a8ac99dfb3b02b6b33b4dd0a74c444471dbea9dc02fabd4677b7"
+    },
+    {
+      "guid": "2F82483642681CD3303824A09BDEC0DF",
+      "name": "BP_GHS_InstanceGroup_C_264",
+      "label": "MPR_Columns_1_-2",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "f62ffeb1c1c6e0658c440a42f33ea028b6ba1b51a4e866488a038d01190518ba"
+    },
+    {
+      "guid": "2F84EE534150F7AEF33C0983CA3F4BAD",
+      "name": "StaticMeshActor_77",
+      "label": "MPR4_Context_Houses_-3_2",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "34a99860edf394ada7aecc3d3e9b3d2e1b5469b4fbc95294c8314f26bd665a2f"
+    },
+    {
+      "guid": "2FB4D54543F4D370FFE6E5B217F0F4ED",
+      "name": "BP_GHS_InstanceGroup_C_246",
+      "label": "MPR_Pallets_-3_-2",
+      "folder": "MPR/Storage/Floor",
+      "action": "keep_interior",
+      "record_digest": "9a7f114e8cfff46295285b795974e69bb96ea733518b55ef5e37b8eba566e39c"
+    },
+    {
+      "guid": "2FD2EF3E40A3BC8FDA09E7BF3C683FF1",
+      "name": "BP_GHS_InstanceGroup_C_199",
+      "label": "MPR_SM_MPR_SorterOutput_1_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "2b40ae396c2bf16a7d12fbb24adf79017f721ee6f293f46ad168da80988bac75"
+    },
+    {
+      "guid": "30E15B3041660A7E315A478DAD297F0F",
+      "name": "StaticMeshActor_229",
+      "label": "SM_MPRE_WhiteEdges_-1_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "4f3c83242c2b7d191d4676c9fe1958320526be0bf3cc1d6b1e2aca9a775a6c6c"
+    },
+    {
+      "guid": "3100B304432A1199D5C405B4CD19BADB",
+      "name": "BP_GHS_InstanceGroup_C_4",
+      "label": "MPR4_MPR4_RollerDriveIn_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "0ea67b570dec42c978bda5163ff2f5e855cf80ed2d6490a7388736a500f30ec3"
+    },
+    {
+      "guid": "3191DEA646C4AA5C3546A794B7D5FA12",
+      "name": "BP_GHS_InstanceGroup_C_121",
+      "label": "MPR4_MPR4_Tree_Oak_0_1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "7639aab1bf34774c945f93434ab5ae6a8e8f839e5b7ef95916136dafa86bd4ba"
+    },
+    {
+      "guid": "31B15FE1466CC0129F0D32824274F41B",
+      "name": "StaticMeshActor_97",
+      "label": "SM_MPRE_Roads_-5_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "7374dcd39e82f255ece38da90ba2fefbc671bad2af0bd49c496e84eced9c21f9"
+    },
+    {
+      "guid": "31CCFD814F99A3147A531CB389974E97",
+      "name": "StaticMeshActor_265",
+      "label": "SM_MPRE_RoadDashes_1_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "3dffabc07064e13957770444e0b03c36325f194a7e0458d3ddfc113309f5b98c"
+    },
+    {
+      "guid": "322BAEE24046F1C1B634C0B1102D2E7F",
+      "name": "StaticMeshActor_76",
+      "label": "MPR4_Site_PlanTreeIslandCurbs",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "26c6cc50875994f393cf4d801e675b19a25ff9158b2709164de174bf6d8117b4"
+    },
+    {
+      "guid": "3291DE624A617C5549C52F96D639E44C",
+      "name": "BP_GHS_InstanceGroup_C_293",
+      "label": "MPRE_SM_MPR4_Tree_Oak_2_2",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "8581c226aa30bc3272acae9c8b9fa6c286aa3a2b8c869e8b87206c627bed553d"
+    },
+    {
+      "guid": "332BAE9C42429F5FC74A04937E70C69A",
+      "name": "StaticMeshActor_290",
+      "label": "SM_MPRE_Context_-2_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "13d9b1f9ad3e5a31b15e3b2cb6ef8439b212030cbb1241e10e0910500dc4f56a"
+    },
+    {
+      "guid": "33754EEE4D654C7F2B473F8CD361804A",
+      "name": "BP_GHS_InstanceGroup_C_104",
+      "label": "MPR4_MPR4_Trailer_Coral_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "7394e9a041bb9941cb6364d2d025b07541b43d2505ecf152a6dba86e26f8ee54"
+    },
+    {
+      "guid": "3396042648F405FFC512DDBFF04E4A9C",
+      "name": "StaticMeshActor_126",
+      "label": "SM_MPRE_Roads_1_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "cc5dea57572b3a6e02c2c4f35138ad4d517a2c5d80523ff9e1632ef99aa58545"
+    },
+    {
+      "guid": "33CCDA5E4F22F86927CB8E86D5C0338F",
+      "name": "BP_GHS_InstanceGroup_C_187",
+      "label": "MPR_SM_MPR_StationChute_-2_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "83ee8daa5fe571a53baecf554cd32a03f16afc9f36da63c3a948714aab7f6dd6"
+    },
+    {
+      "guid": "33D871484BBA8C965CFA7984BF4FA8CF",
+      "name": "StaticMeshActor_186",
+      "label": "MPR4_Context_Houses_-4_-1",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "79e1ddc7dfc03535b511d5b2461283ec4367b079df3f41deda9646b2d2ec1e41"
+    },
+    {
+      "guid": "3405A3A245186A612310A2A4C43067AB",
+      "name": "StaticMeshActor_91",
+      "label": "SM_MPRE_Water_2_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "8cf307e9057b4e558686fcec8b3351d4b4ee9edea554f595acbfdb104efd2e00"
+    },
+    {
+      "guid": "34508A4044873EE5731500AB7873AC10",
+      "name": "StaticMeshActor_130",
+      "label": "SM_MPRE_Roads_2_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "681fdaadaf2737e2a2a0942d0b023f19d804b8639b8a8b492c7aeaded2269b83"
+    },
+    {
+      "guid": "34AB1DBF4668B0A8F3F404A9E870C32B",
+      "name": "BP_GHS_InstanceGroup_C_150",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-2_4",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "67ad312a022eda4c2f86c6283fccbf9aee0a71eecba07be8a8d11c98f28abd84"
+    },
+    {
+      "guid": "3524C4F646EB43298E30DBAAEC10DACD",
+      "name": "BP_GHS_InstanceGroup_C_43",
+      "label": "MPR4_MPR4_Digit_4_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "7e8ae6ae8996b90db97961faa1a290175d21c895c2b0fdb71d4bc9fa53c31561"
+    },
+    {
+      "guid": "36105F9A40EEE11F57454D98AD3E6B3B",
+      "name": "StaticMeshActor_55",
+      "label": "MPR4_Site_CourtSeams",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "89e234d9f1bcfef073a5f81236de179db2929f17ec11d1fd074cad554ec7ddf1"
+    },
+    {
+      "guid": "371D71CE470BBC87304D9AB1FD27C8AE",
+      "name": "BP_GHS_InstanceGroup_C_257",
+      "label": "MPR_Columns_-2_0",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "c8454af8eb08059b1b3b7a3662555f096f52ac54df475db54f4b84f5ee1badcd"
+    },
+    {
+      "guid": "37D5BE47476EA3F8899794AD447A5642",
+      "name": "StaticMeshActor_88",
+      "label": "SM_MPRE_CrossingRamp_-1_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "3c4a8fc86fcb7360a80ca15af863b43c9357b7df74bfc245f0b855a7e4d4c7c6"
+    },
+    {
+      "guid": "37EFF298442EF1FF5EE6F3BB5FCF5562",
+      "name": "BP_GHS_InstanceGroup_C_117",
+      "label": "MPR4_MPR4_Tree_Oak_-1_2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "876a5938a0feede85a1d8f6690b771ba88b80e88842221dc42ae0204913acc93"
+    },
+    {
+      "guid": "3852BF6149A6A778957C0EAD0E15977F",
+      "name": "StaticMeshActor_212",
+      "label": "SM_MPRE_WhiteEdges_-5_-1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "01f6bca80f76e82cac02d5b7b22dadfd36027f9349b2a1ede9ce152069f6545c"
+    },
+    {
+      "guid": "386217CA4AAC89E76C7C899EBAD51338",
+      "name": "StaticMeshActor_252",
+      "label": "SM_MPRE_WhiteEdges_3_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "e75b598feb26c72fa11373eeedd683cb60740e0350ca1caac4a90c81d22248c5"
+    },
+    {
+      "guid": "395132564C79DF3A1CEB0DA3657E2139",
+      "name": "BP_GHS_InstanceGroup_C_272",
+      "label": "MPR_ColumnBases_-3_0",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "3efd9c6099d02b815fd368caed78680bc574acf5f5b3b5b27cbe82adb355a98e"
+    },
+    {
+      "guid": "39AD2EB44A9EDAEEEBACD2A72B3C4CB4",
+      "name": "BP_GHS_InstanceGroup_C_155",
+      "label": "MPR_SM_MPR_Conveyor2m_-3_-2",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "09f3a4b57811d553e0e114ea08ba915c4e19d7b0772f2ceaba5df8b29feb85ce"
+    },
+    {
+      "guid": "39DD8888487D716A6EC45DB1123252D4",
+      "name": "StaticMeshActor_145",
+      "label": "SM_MPRE_Curblines_-4_-1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "e8aed4c9786afe5d062efeec80356d2ffa7c27c795a74db47c9170add73c2367"
+    },
+    {
+      "guid": "3AD735C14012DE1ED8456895ECCFA128",
+      "name": "BP_GHS_InstanceGroup_C_130",
+      "label": "MPR4_MPR4_Tree_Oak_2_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "db984ee41dbaa27d1121747999d1225b354c0a99cb2752712ec484cf2ba4f4b6"
+    },
+    {
+      "guid": "3AE2D552484DDD3020EDE59AA9FF6FC3",
+      "name": "BP_GHS_InstanceGroup_C_277",
+      "label": "MPR_ColumnBases_-1_-1",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "31cf493afd31d2a4c0a2c0a61028b18bdac6a8d54ffde95003bf39c22ae41bd1"
+    },
+    {
+      "guid": "3B0EF1534510CB54B01E8080E06AEE3B",
+      "name": "BP_GHS_InstanceGroup_C_68",
+      "label": "MPR4_MPR4_RoofLight_0_-1",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "a152876231ce5b234b9de11e6e8126c0a8d21796c46e7684c5329afd2960d20b"
+    },
+    {
+      "guid": "3B23A665431AF7963BDECE9C1FC83DAE",
+      "name": "BP_GHS_InstanceGroup_C_292",
+      "label": "MPRE_SM_MPR4_Tree_Oak_1_3",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "d3feeb85645ba0465c7090e29fd3c7771ac4ba51298bfec8b63dabbe6a4206f9"
+    },
+    {
+      "guid": "3BB871B742CC218E8A4D38BF863C2A07",
+      "name": "StaticMeshActor_136",
+      "label": "SM_MPRE_Roads_-2_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "74eafb2b5225616d0868a9ab0dce13ef1d956f71ca24a254134f5254e2c3a28f"
+    },
+    {
+      "guid": "3C11E558440FA37A3C4F579D44676460",
+      "name": "StaticMeshActor_279",
+      "label": "SM_MPRE_Context_-3_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "59beaa5cab79cf9b4dfb5928d38841b7c92a71208ceaa5966eeab1c5c943b045"
+    },
+    {
+      "guid": "3C73DAB04AD66E1B16B92A887C543445",
+      "name": "BP_GHS_InstanceGroup_C_10",
+      "label": "MPR4_MPR4_DockNumberPlate_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "51ec673e2fa782d01cf1440dcf9a96b6a2011d5b46f44c1286e96a8aee31ba55"
+    },
+    {
+      "guid": "3CB170E4424115354994E4BD4AE05B50",
+      "name": "BP_GHS_InstanceGroup_C_188",
+      "label": "MPR_SM_MPR_StationChute_-2_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "fb1819a5ce811d8d868c0b2ac18ae84a6de32d3101ace4b75106533fa7ed1b97"
+    },
+    {
+      "guid": "3D07E0584AE579B3F87A44B617CBFF87",
+      "name": "StaticMeshActor_43",
+      "label": "MPR4_SolarBank_01_1",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "432e2ef611910c864cb0ba9b6850d9d24af6118a269390748275becd24f2ffeb"
+    },
+    {
+      "guid": "3D93BCA14403DF703EA85888AE5B8B20",
+      "name": "BP_GHS_InstanceGroup_C_17",
+      "label": "MPR4_MPR4_Digit_0_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "4c524a1fb90e4d9fa48a51fc9578616f73f0644a8d47eb38cb738d640102ffaa"
+    },
+    {
+      "guid": "3E404EE34AA3DA38810055AFEBCBDF6D",
+      "name": "BP_GHS_InstanceGroup_C_112",
+      "label": "MPR4_MPR4_Tree_Oak_-2_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "497c4e5b3bab9f25cc6ef993fd0832da1d104ad851d56728735f9de805900bbf"
+    },
+    {
+      "guid": "3E847C2F46168348485CE69F36873DD6",
+      "name": "StaticMeshActor_149",
+      "label": "SM_MPRE_Curblines_-3_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "a443da385bb9c54fa43f3c20dd12651a6f75cde9dcd05d50308a887932750502"
+    },
+    {
+      "guid": "3F3B21D24543055FE5AE3EA2FCDDEE44",
+      "name": "BP_GHS_InstanceGroup_C_164",
+      "label": "MPR_SM_MPR_Conveyor2m_0_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "e1dc898cc8460313b8527e92b8268a9432b11ba5cfc85d58f9dd5a510d32513f"
+    },
+    {
+      "guid": "3F44E85F4660046739EB12B755E0A6C5",
+      "name": "BP_GHS_InstanceGroup_C_274",
+      "label": "MPR_ColumnBases_-2_-1",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "b9fb0a1b3a3d97cbb372b025b4435d3bad1247564425f0c02bb7a65689941052"
+    },
+    {
+      "guid": "4080CEC8474D22C1227FCEB526710981",
+      "name": "StaticMeshActor_100",
+      "label": "SM_MPRE_Roads_-4_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "998ef48f97db45b874d7eea9b08a37537828875644c9f52e922c68bab991fa47"
+    },
+    {
+      "guid": "40858502417FC02F6818249BA9B0FA2B",
+      "name": "StaticMeshActor_181",
+      "label": "SM_MPRE_Curblines_2_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "ceca47fcb356d331def12c3f2509d7342d55fdc507c707f8b91e54dba707df36"
+    },
+    {
+      "guid": "40B51B6C4F92B5AA29BF1BBEBE85E8B8",
+      "name": "StaticMeshActor_219",
+      "label": "SM_MPRE_WhiteEdges_-4_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "5d3774541667419397aef5a73479a1ab08d856b2b974febbc9c212728d6e5b9a"
+    },
+    {
+      "guid": "41CEC50B44FDC0D9EED4B28C108D8B34",
+      "name": "BP_GHS_InstanceGroup_C_137",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-4_-3",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "d1bf3515c5ee3e737139d5ed4b5827a514ed3908a0cb38bd1ff06bafb073c154"
+    },
+    {
+      "guid": "41ED8DED426E0DB24731CD9BF2CAE618",
+      "name": "BP_GHS_InstanceGroup_C_403",
+      "label": "MPR4_MPR4_Tree_Oak_3_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "bb26386a9e32635b3db233d5eef0e7bdf2043f9fbd677911546fbb1f11e64de3"
+    },
+    {
+      "guid": "41F6CDB2401F97C6AE005382BFD990B8",
+      "name": "BP_GHS_InstanceGroup_C_94",
+      "label": "MPR4_MPR4_Tractor_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "90eacda7941aae6ddd79d65d038b685c4581a837955c3dcdced0bdd762755127"
+    },
+    {
+      "guid": "425AA0A6448EE7AE54628DA206623C8E",
+      "name": "BP_GHS_InstanceGroup_C_59",
+      "label": "MPR4_MPR4_Digit_8_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "77a0a64580e5d3d58c77e9e40cd0582dd5193562eb1bf9e6171ed63c28e7e591"
+    },
+    {
+      "guid": "428307424A725FE7CA7312AEEE173E2E",
+      "name": "StaticMeshActor_239",
+      "label": "SM_MPRE_WhiteEdges_1_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "39c49a6c08af0a4fc6fd0fef23b83531ef3ed78e91826c73bf1169bc17c00dbe"
+    },
+    {
+      "guid": "42D209B44D31AAA221327A8B5D64DE95",
+      "name": "BP_GHS_InstanceGroup_C_115",
+      "label": "MPR4_MPR4_Tree_Oak_-1_-2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "23336ae7b8ec32295b8eb19936ba22abdf3a122fad62e1eb8c9f33e8debf4b8c"
+    },
+    {
+      "guid": "4418621D4DEADCF55E8D80B9999DA876",
+      "name": "StaticMeshActor_223",
+      "label": "SM_MPRE_WhiteEdges_-3_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "fb20010d75ab094813a8e870b285b2b19f963f8d38b17c7cf8230c584ad82ce2"
+    },
+    {
+      "guid": "44428F12475A400DCA5F4A9583F19DF2",
+      "name": "BP_GHS_InstanceGroup_C_203",
+      "label": "MPR_SM_MPR_Turn__U255_-3_1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "797e78f1e503f3e0575246facbc041fc8c8d46ec145b177c63329b1fcb0da256"
+    },
+    {
+      "guid": "44A5051848B6A3C5722902AB8592E677",
+      "name": "StaticMeshActor_114",
+      "label": "SM_MPRE_Roads_-2_5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "08647db38cd3bd481d8e480264e9fd09ea8cb18bce77913805b1963fe6223d2a"
+    },
+    {
+      "guid": "44CF4FAC41D7C4637F67A0924271E6DF",
+      "name": "StaticMeshActor_47",
+      "label": "MPR4_Site_Roads",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "5c6172887cce2d20bc0b53b863588aaa334e389668a8e850369a349c62ff758e"
+    },
+    {
+      "guid": "44F00913493623DD5B831187F1558279",
+      "name": "StaticMeshActor_165",
+      "label": "SM_MPRE_Curblines_-1_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "51f8b548fc21dea3d25f4637eab3e93f2609e9e709754a97cf0f0887767dc3ad"
+    },
+    {
+      "guid": "4628D73047B7818231550CBBECD7139B",
+      "name": "StaticMeshActor_227",
+      "label": "SM_MPRE_WhiteEdges_-2_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "b60b22d0020802e199c11a13d11dfc89435abaff82dd69897c66c6941ce0ae23"
+    },
+    {
+      "guid": "46C9C65F49B60CA32A78AB867C1F0E43",
+      "name": "StaticMeshActor_205",
+      "label": "MPR4_Context_TankPipes",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "d46017e3a62d50305e2abe779502ae49fa61664c9467544ab0c768b703e4a377"
+    },
+    {
+      "guid": "472BF61340EC1D8D7EA066B6F2319DF5",
+      "name": "BP_GHS_InstanceGroup_C_50",
+      "label": "MPR4_MPR4_Digit_6_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "ca52776a21583cf207cf19e88a5e370df21f8ced885efb286cf7138b9fe4d55b"
+    },
+    {
+      "guid": "476955734A33FBFF8FBDC09A0794761F",
+      "name": "BP_GHS_InstanceGroup_C_250",
+      "label": "MPR_Pallets_-1_-1",
+      "folder": "MPR/Storage/Floor",
+      "action": "keep_interior",
+      "record_digest": "0c4a2fac9ce365a56b19004fc38524ac7384e91d28626227d8eaeb4a1d455d02"
+    },
+    {
+      "guid": "476EE7734E7E0D621E7763BA672629AE",
+      "name": "BP_GHS_InstanceGroup_C_183",
+      "label": "MPR_SM_MPR_StationChute_-3_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "d740c4b7c08b64ea0185de98d948013fd1e0129c359be1c5feae7c4ecf6dad4e"
+    },
+    {
+      "guid": "47DED19E4BB20D98B9663B9C4E489952",
+      "name": "BP_GHS_InstanceGroup_C_172",
+      "label": "MPR_SM_MPR_WorkTable_-2_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "b5e0f909cb0866d7c2544d19eb6967a4c7df43863bcbef6a8d74d1744c242fe3"
+    },
+    {
+      "guid": "48ECF9694EA5E974F6C1DF87436FF147",
+      "name": "StaticMeshActor_255",
+      "label": "SM_MPRE_RoadDashes_-4_-1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "168a2162f5fa2321b1865a1b9c4a931d9dc81ebec3c31ec999b1580467e4a439"
+    },
+    {
+      "guid": "4936BB10418C5EF0818943ABE88BA06A",
+      "name": "BP_GHS_InstanceGroup_C_108",
+      "label": "MPR4_MPR4_Tree_Oak_-3_-2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "ee2ad588a0aad7951e4523fe2b10a2c736f36311ba39f88c9410825e9313ac57"
+    },
+    {
+      "guid": "49496CD941B337020D5E55862FEFD798",
+      "name": "StaticMeshActor_273",
+      "label": "SM_MPRE_Context_2_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "ae8963a4be72fb4a9207e1dfc2720335c5e4917dee29ee6938c8fd01ceb8d321"
+    },
+    {
+      "guid": "4964515C4F85A338502D55A7B27C6686",
+      "name": "BP_GHS_InstanceGroup_C_409",
+      "label": "MPR4_MPR4_Tree_Oak_4_1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "092fe3bb5500edb8cd170843dbcf505f20c491c3bf62ac16b7bb9d99ebf0a540"
+    },
+    {
+      "guid": "49A34D81486133AB0D90C58C9CCE6DC9",
+      "name": "StaticMeshActor_89",
+      "label": "SM_MPRE_CrossingRamp_-1_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "c00fc7acd086b5e7cd9c3772a6795bfb23111438457900ce2e5f1b26fcebb3c3"
+    },
+    {
+      "guid": "49C3063948FA5689D7A2B4965C76ADC7",
+      "name": "BP_GHS_InstanceGroup_C_45",
+      "label": "MPR4_MPR4_Digit_4_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "c453b33cf2945edec0958f910607d13f211d74385aed8fd3812755c3aa0775f3"
+    },
+    {
+      "guid": "49DBF09F4FE694F847277785068D711A",
+      "name": "BP_GHS_InstanceGroup_C_44",
+      "label": "MPR4_MPR4_Digit_4_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "72da7bf8833e85a77f05e7365ed25ebd38a3df9ed318cbfd7b4842c1ee50d3b7"
+    },
+    {
+      "guid": "4A1385EC4D18DB946BE650ADFC12FAD2",
+      "name": "StaticMeshActor_2",
+      "label": "MPR4_RoofEdge_00",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "db67b41ed8a3bed7e1e636746c7926753596bebd55839c265bbefc1f711fa5cd"
+    },
+    {
+      "guid": "4BA845DE4B93178AFCE91DB33AE55019",
+      "name": "BP_GHS_InstanceGroup_C_135",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-5_-2",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "0ce291816157ecfdabecba4d664dae65aa16e19193413de7225472ec4797ca0b"
+    },
+    {
+      "guid": "4C2DB55846F56C3A018016BD9E682B1A",
+      "name": "StaticMeshActor_163",
+      "label": "MPR4_Context_Houses_-2_0",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "77156b484213abef753a02fabb718c0862c4860e2d25f71f92e411e4757d4d58"
+    },
+    {
+      "guid": "4D82F6C24C9E32774A84229ADD08D8D3",
+      "name": "StaticMeshActor_267",
+      "label": "SM_MPRE_RoadDashes_3_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "dcf52bf96b53f0bb0d620c412bc614bf1ee1e141d2b9373b2bcab3ee294ac579"
+    },
+    {
+      "guid": "4EB2D7034907546CC24E4AA9786FC47C",
+      "name": "StaticMeshActor_222",
+      "label": "SM_MPRE_WhiteEdges_-3_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "e67fa5387282aea7f1c6785856a19e3637c9d3bbc04f8ea1d4d107fbde7f2090"
+    },
+    {
+      "guid": "4FA100B94C129A445FC637A0CA4C93AC",
+      "name": "BP_GHS_InstanceGroup_C_64",
+      "label": "MPR4_MPR4_Digit_9_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "70afe46d9473878060ac23e9950cf249db79fee206ea7422908f2f42269ff287"
+    },
+    {
+      "guid": "503AD3C14BD4D8987AF7BF9B1744F896",
+      "name": "StaticMeshActor_197",
+      "label": "MPR4_Context_west_detached_industrial",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "fb581f82c4e9db10f6671bbd2112c5c5fed60d4198b4dd0d5debbaf01288c9e4"
+    },
+    {
+      "guid": "5077C7EB4949C342D154FC883E106B2D",
+      "name": "StaticMeshActor_156",
+      "label": "SM_MPRE_Curblines_-2_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "cdf3c38072907258e338c2ef2fda32f92e8e573ac4b1714adfe53cfde07f43b5"
+    },
+    {
+      "guid": "50E4C3B245F94AA6DB82CBA6AA18CB79",
+      "name": "StaticMeshActor_69",
+      "label": "MPR4_Site_Far_S_Sleepers",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "67415b506a221eccbbbd50153f38a545b3d4dfd8beea67d5f5fdc2a2eca1b10e"
+    },
+    {
+      "guid": "51014AD945AB96D442CC309F0361AE0C",
+      "name": "BP_GHS_InstanceGroup_C_71",
+      "label": "MPR4_MPR4_Car_0_-2_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "21ac25c76297851d8089b2dd9f048931ad3714a67ca41b861404e143d7431e71"
+    },
+    {
+      "guid": "514AE0B5440154DA0616FDBE709A7D1A",
+      "name": "StaticMeshActor_280",
+      "label": "SM_MPRE_Context_-4_1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "07355db5721aa6cfe07045b496ac954713ca7351eaefaa43a6cee6838f1a9465"
+    },
+    {
+      "guid": "518D68014AC7836AF20C35B185E0A77F",
+      "name": "BP_GHS_InstanceGroup_C_9",
+      "label": "MPR4_MPR4_Bollard_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "e30450aad89d6e6101d6f377c6493b442405e14e8e50a515156a39c847e1c0c2"
+    },
+    {
+      "guid": "537C27E343B6EF10624B2D9728D1008D",
+      "name": "StaticMeshActor_213",
+      "label": "SM_MPRE_WhiteEdges_-5_0",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "16ae339147c046cba90bdbb46235253a6f4559a22dcbe3dd031b2f7c313b4bcb"
+    },
+    {
+      "guid": "54B10A3941446E3CE452B9B85F19AF97",
+      "name": "StaticMeshActor_250",
+      "label": "SM_MPRE_WhiteEdges_-2_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "4c120b2c76d876a8cbb158435ace2e5f17d884db4547e5642394f6c078219df0"
+    },
+    {
+      "guid": "555BB2CE4027024ED509E0B9BB2D871C",
+      "name": "BP_GHS_InstanceGroup_C_60",
+      "label": "MPR4_MPR4_Digit_8_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "d7a9e16826102f8995d7ff2c80e6722cc207c9fe2e3c18c5889385f791cc83e1"
+    },
+    {
+      "guid": "55BB402448C0AB82A79D368E6AEABC34",
+      "name": "StaticMeshActor_12",
+      "label": "MPR4_RoofEdge_05",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "b1d2a2db2d556207ef6f3a559cfdf5da2616f4bc849d08775749bb2dfef426da"
+    },
+    {
+      "guid": "5617D2564830F0215294E18EC7400E39",
+      "name": "BP_GHS_InstanceGroup_C_65",
+      "label": "MPR4_MPR4_Digit_9_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "75f0cc3143f9280b39333cd828b5147f3478bd68f14cd2d225c58b83dd8138eb"
+    },
+    {
+      "guid": "5625A9C74DA24153B11B458A3CFA0503",
+      "name": "StaticMeshActor_228",
+      "label": "SM_MPRE_WhiteEdges_-2_5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "a38f8f0958861efd5938d38d4b8404f0e84e92aa45cd4fc388dd5a8d43d6116e"
+    },
+    {
+      "guid": "56A7F3904E7EF6E1B244E798F037522D",
+      "name": "BP_GHS_InstanceGroup_C_238",
+      "label": "MPR_Racks_2_-1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "4ebcbcdabc9288fa90c211afe601376dc1bd4b9f4cc2cebb607ecfc60c1c14ab"
+    },
+    {
+      "guid": "56F7F0C44FFC529D954F55A1EC3438BA",
+      "name": "BP_GHS_InstanceGroup_C_239",
+      "label": "MPR_Racks_2_0",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "decbd858a2db556e41d1eab22a21cc419ce091191e907c0bde951ba01fe36055"
+    },
+    {
+      "guid": "570856F3429DAA759B43B8A7212E5AF0",
+      "name": "StaticMeshActor_133",
+      "label": "SM_MPRE_Roads_-5_1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "d33b986e0117a6dcc910d2263f7e6a3efa12c84edbea1c7ad687035ef053a0bd"
+    },
+    {
+      "guid": "576E5C28421EEF30FF8001AF893F956C",
+      "name": "BP_GHS_InstanceGroup_C_275",
+      "label": "MPR_ColumnBases_-2_0",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "1b46748acacda71317e11cca5c67b2923d0129f865137b059d25e383c281b1d7"
+    },
+    {
+      "guid": "579D1DF1488EB644796446A39D0E2152",
+      "name": "StaticMeshActor_231",
+      "label": "SM_MPRE_WhiteEdges_-1_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "493c8a427a2e6f7f8394eae002cc84a2bdf5be1ec3bdb926dae51e4c83e06468"
+    },
+    {
+      "guid": "57D6ABAA494E1DD6C37C42BCBDD89595",
+      "name": "StaticMeshActor_202",
+      "label": "SM_MPRE_Curblines_-3_5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "ff73216078e33d2dbdea83300c972e9c4615039179ebb46ab3d11fad6458aa0a"
+    },
+    {
+      "guid": "587C5B8E49440887E005B090C07113DF",
+      "name": "BP_GHS_InstanceGroup_C_85",
+      "label": "MPR4_MPR4_FreightBoxcar_3_1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "018c40de7dd67ac62374de47ae38a1b620db91eb45f2d2fa8a150b4285a75cab"
+    },
+    {
+      "guid": "58AA257047434BF974D2E0B000971772",
+      "name": "StaticMeshActor_183",
+      "label": "SM_MPRE_Curblines_-5_1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "eb6c26e99e927cf8a706382bb272a64647acc5a024a2018cd9c2ac43cabf51c2"
+    },
+    {
+      "guid": "58DED5B142EF8EB3444AC6A33226333C",
+      "name": "StaticMeshActor_24",
+      "label": "MPR4_RoofEdge_10",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "bd33bc4217b75e646d364288ceb4a0810d45e4ac4f4556e07602e35fa096a893"
+    },
+    {
+      "guid": "58FE33FD41EF688ED7BE5F98ECCC941E",
+      "name": "StaticMeshActor_188",
+      "label": "MPR4_Context_Houses_-4_-2",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "350f1a95d8e4895953271720e1c66a9d4fbd40a359a3da8eb218be554877f0a9"
+    },
+    {
+      "guid": "59D01F4646BCD76B6762B8A34712414B",
+      "name": "BP_GHS_InstanceGroup_C_173",
+      "label": "MPR_SM_MPR_WorkTable_-1_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "8ecc92115c53b68c440c4296f9e809bc296e095c7aab2ecc952781dbf16bf996"
+    },
+    {
+      "guid": "5A4C7CC34B4E31AC2C542793735E5D7E",
+      "name": "BP_GHS_InstanceGroup_C_236",
+      "label": "MPR_Racks_1_1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "018add32f43860f02b6821f003dea5dc5553fe1fe0c51b8f6233423d534db8ba"
+    },
+    {
+      "guid": "5AC945CE45ADF3947C0529868EF5E2F7",
+      "name": "BP_GHS_InstanceGroup_C_194",
+      "label": "MPR_SM_MPR_ScanGate_1_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "57701ab192247bd49bad57e4df5d7378057b59138fea9e86db776208c88791f1"
+    },
+    {
+      "guid": "5B177F6747BC5A0957AB1B88ACE5C3CC",
+      "name": "BP_GHS_InstanceGroup_C_110",
+      "label": "MPR4_MPR4_Tree_Oak_-3_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "171684d411af9538e1a8d694d93056feb09284654d0920725f864367bad5ea85"
+    },
+    {
+      "guid": "5B3D68BF4613FD23A35303A3688F30F5",
+      "name": "BP_GHS_InstanceGroup_C_55",
+      "label": "MPR4_MPR4_Digit_7_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "76b2f568aa582401642cddc93c5559687a53a03a29b97f5b925fbb6df8236ffa"
+    },
+    {
+      "guid": "5BEE50DD47101CFF7F886FAF89CF53C6",
+      "name": "BP_GHS_InstanceGroup_C_279",
+      "label": "MPR_ColumnBases_0_-2",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "ce9c6002c77b3c4ab93185e05c20ee832b3638933fe97dcf00f50dbdabb311d0"
+    },
+    {
+      "guid": "5BF767C347213D50A67EC8A6C27BDFE8",
+      "name": "StaticMeshActor_277",
+      "label": "SM_MPRE_Context_-2_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "bb54599d798d7f2cf2ab9fb81706906a5e81c0ea20668f673f9d1f94eab7cee4"
+    },
+    {
+      "guid": "5CF3F05042CF8A13B00F89B797AE62A9",
+      "name": "BP_GHS_InstanceGroup_C_19",
+      "label": "MPR4_MPR4_Digit_1_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "8cc4c892c427854bfd1cb20673c5b8c160412fef15ba7cf9d56faab0a6ab66f4"
+    },
+    {
+      "guid": "5D2454D54681B8DF8D6734AAD0D2074E",
+      "name": "BP_GHS_InstanceGroup_C_26",
+      "label": "MPR4_MPR4_RollerDock_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "7eceedb47867434b0fce12d1dae581d76f740ba68e1398d14be965cc6d96a37f"
+    },
+    {
+      "guid": "5D4636A04FC2A939F5093F954CE4A093",
+      "name": "BP_GHS_InstanceGroup_C_46",
+      "label": "MPR4_MPR4_Digit_5_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "e2fa2907c4a1bee3741be8af97e776ce3f60eb0bee1ea161dbe5e9c9a3055880"
+    },
+    {
+      "guid": "5D46EE1D4F6B42EFAE90FD81989B8951",
+      "name": "StaticMeshActor_151",
+      "label": "SM_MPRE_Curblines_-3_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "fc0c82c8d1bb1f3d9fc450fdcf7974fba5af38c2fef1039bc7ac540484eea61d"
+    },
+    {
+      "guid": "5D97A5AE413A7D4FBE3C55AEA5DE8895",
+      "name": "StaticMeshActor_71",
+      "label": "MPR4_Site_DockApronInfill",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "cb1b2765518b727da424ce847eb5f7dd884d0e797023d892fe316574321e6a41"
+    },
+    {
+      "guid": "5E1EC3C64CECF1B437F23EAC4B358093",
+      "name": "StaticMeshActor_230",
+      "label": "SM_MPRE_WhiteEdges_-1_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "6a621333e782896c14f3860ed38faf0d047fcc5497b7781692fafd3e72bdbf24"
+    },
+    {
+      "guid": "5E39267B463A2F7ED01E909ED402125C",
+      "name": "BP_GHS_InstanceGroup_C_143",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-3_-3",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "9f7ddf2d515fd07d5514fd15467278604535a332ad0dc9e0612885bd003427c2"
+    },
+    {
+      "guid": "5EF97C3B42D5D866D53514BC3C4BA14E",
+      "name": "StaticMeshActor_160",
+      "label": "MPR4_Context_Houses_-2_1",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "6a5eb2b1ab35f0987c49ea55756bc55aefc0bca23049b5fc609119221c38dd10"
+    },
+    {
+      "guid": "5F0049CA441DDB3AD0592A8C0AF7E381",
+      "name": "BP_GHS_InstanceGroup_C_261",
+      "label": "MPR_Columns_0_-2",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "44258dc7da0fd97a9d908e83a62427fad149e80451759ef6bcef8d0b328ef8da"
+    },
+    {
+      "guid": "5F612BFA40967F97F11D438198961722",
+      "name": "StaticMeshActor_94",
+      "label": "SM_MPRE_WaterBank_2_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "8c4a884baa1e2b97aa0909ca36dfffb44a5fbeee750fa2c2fc98e2a6e20b8121"
+    },
+    {
+      "guid": "5F9057DC4674CB8D06E050A5E26DADC6",
+      "name": "BP_GHS_InstanceGroup_C_258",
+      "label": "MPR_Columns_-1_-2",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "b3ac6cd6eece0cf4066f27f10c559a990bb3303563b59f5b55d48c809c1f4302"
+    },
+    {
+      "guid": "5FF3992F404AADD9A2B0A0AF205ED209",
+      "name": "BP_GHS_InstanceGroup_C_111",
+      "label": "MPR4_MPR4_Tree_Oak_-2_-2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "a34c82b10c8e0a415ffc7250013857aef12515f195fe9ed74f3101619018c60a"
+    },
+    {
+      "guid": "5FFD3E1A43333713726FE6843C489BA4",
+      "name": "StaticMeshActor_111",
+      "label": "SM_MPRE_Roads_-2_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "c095a8d52ff02eb28d31b81bba2adfad45d301558782a4103a61d6b1eedfd3bb"
+    },
+    {
+      "guid": "602FCB644643804AD6B9D98A0C4D0020",
+      "name": "StaticMeshActor_132",
+      "label": "SM_MPRE_Roads_4_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "aa06a259f67f5d5ec940f404b978b29f48bd4bfe792c8eacfb42db28eecb8b90"
+    },
+    {
+      "guid": "6047B9AB4DA9DBCE08149981AD3AA796",
+      "name": "StaticMeshActor_104",
+      "label": "SM_MPRE_Roads_-4_1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "f397897eb984fac90f5ab42f6fb1aff014ffa7375f32895032b0a63ef1b8fa26"
+    },
+    {
+      "guid": "61C327F54013517CD9F4ECBD0A74D1EE",
+      "name": "BP_GHS_InstanceGroup_C_201",
+      "label": "MPR_SM_MPR_CartonSealer_-1_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "287308a205c2cfd18f6aac5ed251c492da95042059cb4541ab6019cb6beed733"
+    },
+    {
+      "guid": "62427CB24A155815E64614BB0F445593",
+      "name": "BP_GHS_InstanceGroup_C_131",
+      "label": "MPR4_MPR4_Tree_Oak_2_1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "04ec7ef08f0e8a2b968e3b93c1ede51a45f75dd65529c97908b49c9a77132996"
+    },
+    {
+      "guid": "625317CB49407499E038C3929CED11B6",
+      "name": "StaticMeshActor_187",
+      "label": "MPR4_Context_Houses_-3_-2",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "92889260dad01abc597c67f6fb59485bf76513bbdb4f879daa6feb913e6ae6df"
+    },
+    {
+      "guid": "6286CCAF48EC6B468653EC990D254B74",
+      "name": "BP_GHS_InstanceGroup_C_161",
+      "label": "MPR_SM_MPR_Conveyor2m_-2_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "47cef56525361edb8afcc368d092bd5111c870336329ce4687ddeba69e35675f"
+    },
+    {
+      "guid": "62DDE21E4F4BF964FBA4D7949809C6ED",
+      "name": "BP_GHS_InstanceGroup_C_83",
+      "label": "MPR4_MPR4_FreightBoxcar_2_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "ee2f02fc74b83cc0ce8de4892e124b52596ede7c6e49fc493b2171f6f8a8913a"
+    },
+    {
+      "guid": "6337E2B54B07913681DEDA990D23AE63",
+      "name": "BP_GHS_InstanceGroup_C_154",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-1_4",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "8dd82cbc191ea6199707213e1e96eca61b912953ccd9f0d54c5db3b1b2dfcb43"
+    },
+    {
+      "guid": "638A448A4A38196528B664BEB24A208B",
+      "name": "BP_GHS_InstanceGroup_C_126",
+      "label": "MPR4_MPR4_Tree_Oak_1_1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "c5c1cf4ea1bd235d902366516d645e272dff6594436b63c20386062440e7bfeb"
+    },
+    {
+      "guid": "63EB559D40A35575C8A62983BA85E8F4",
+      "name": "StaticMeshActor_80",
+      "label": "SM_MPRE_Rail_-1_-4_RailBed",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "811aa36d497af7ebdbd25afaa06f9a7a26263b0c21ae5a77d2de8e1365d671d3"
+    },
+    {
+      "guid": "643BABBB4250816F8551FE8CA3B555E6",
+      "name": "BP_GHS_InstanceGroup_C_14",
+      "label": "MPR4_MPR4_Digit_0_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "c55978d328d9854c451f0f922882f53a824edc75476583f648473ed7a1914924"
+    },
+    {
+      "guid": "64AB3C664837939100A431896A2B417A",
+      "name": "BP_GHS_InstanceGroup_C_78",
+      "label": "MPR4_MPR4_FreightBoxcar_0_-2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "7ca2e0ff43298f6946ba3b2f5b4f034f6a431e61bb1f37cce2a0c24c2bd9c2df"
+    },
+    {
+      "guid": "6587D0A046192D7DDF9098873CEA8592",
+      "name": "StaticMeshActor_93",
+      "label": "SM_MPRE_WaterBank_2_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "ff2f9996b68ca8a6c9d13b2b97db24d72d0240953118e93f1282ffab702cff29"
+    },
+    {
+      "guid": "65971AE946323497E2C91792B4A76024",
+      "name": "StaticMeshActor_135",
+      "label": "SM_MPRE_Roads_-3_5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "1913b8089ef31b21e367da5cf32a954f15dcfd26e0ad2a4e685c80ba7e4f5014"
+    },
+    {
+      "guid": "65A1861C4320B285CC6ECC819589AC2D",
+      "name": "BP_GHS_InstanceGroup_C_165",
+      "label": "MPR_SM_MPR_Conveyor2m_1_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "b1d4c9f991dc788922059c34d61debbe12ef05de7a4563a3f3fc4771ccd5a207"
+    },
+    {
+      "guid": "65A65DE64A057CE28F8F3D86C7A8E1B5",
+      "name": "BP_GHS_InstanceGroup_C_283",
+      "label": "MPR_ColumnBases_1_-1",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "f4bed8f448a3df53169000466e200829d14c48ac737ceed18341143196ccb825"
+    },
+    {
+      "guid": "661AF7474F2C9A5BDDA23C9FC334F67F",
+      "name": "StaticMeshActor_118",
+      "label": "SM_MPRE_Roads_-1_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "a9c049d6a0649a8e21fe262f7432fc256b999a325450bab013b26e7f56a3d2d8"
+    },
+    {
+      "guid": "6636F1274067AF08496B21A51E967A38",
+      "name": "BP_GHS_InstanceGroup_C_20",
+      "label": "MPR4_MPR4_Digit_1_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "3d17cb97aa0b4c93e8f4ee03da96e70dc02be6a053cf55b9562ead151fd90747"
+    },
+    {
+      "guid": "6666AE6841F0403628E73095CE9514A6",
+      "name": "BP_GHS_InstanceGroup_C_124",
+      "label": "MPR4_MPR4_Tree_Oak_1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "84be9779bb49a4dd0e03e666b075625dc22fd1f273270e452b79b3373bf25b11"
+    },
+    {
+      "guid": "66A6F1E345BD8ACCFA9538B3CE2ED33C",
+      "name": "BP_GHS_InstanceGroup_C_70",
+      "label": "MPR4_MPR4_Car_0_-2_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "be3c69efc4872e4d1694050d2cb37a9f7c875352695a48372b5f6cbcd55eae60"
+    },
+    {
+      "guid": "66E161314CB4CBBE96F7B9A16EEDB2AD",
+      "name": "StaticMeshActor_243",
+      "label": "SM_MPRE_WhiteEdges_2_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "9b2be34e39d35facf791f09216daf0631e6aaeb4001052466c49c015a36681ef"
+    },
+    {
+      "guid": "66EA7CFE480F661B12C9E2ABE219E94D",
+      "name": "BP_GHS_InstanceGroup_C_225",
+      "label": "MPR_Racks_-1_-2",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "4e435f1582f87d36de01be98846d312fa343f99ecebed205333d25618121021a"
+    },
+    {
+      "guid": "671846E5432A363A16A961A15392C859",
+      "name": "StaticMeshActor_201",
+      "label": "MPR4_Context_rail_service_shed_03",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "aaf8dbb0965555487cf1da8c9ac8f6afa850434ba19e66b46c27bbc9bcd44d49"
+    },
+    {
+      "guid": "672B1EC34EBAE7420C58BB8462E8257C",
+      "name": "BP_GHS_WarehouseCamera_C_0",
+      "label": "MPR_WarehouseCamera",
+      "folder": "MPR/Cameras",
+      "action": "keep_camera",
+      "record_digest": "df07996ad925fb7cf9873e2698c567fc0de9195c040d011e43f7957da06b5516"
+    },
+    {
+      "guid": "67BC9D424E71BCE4989ACE89FB091D27",
+      "name": "BP_GHS_InstanceGroup_C_405",
+      "label": "MPR4_MPR4_Tree_Oak_3_2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "5f714b0b1a5fe01bd275aae2eaa205bd3e49db1d595867f731ed2a58d134d110"
+    },
+    {
+      "guid": "6827CEB8443099739FDD1ABDC34B8646",
+      "name": "StaticMeshActor_117",
+      "label": "SM_MPRE_Roads_-1_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "1d1ce024d9e18f95119ed6f06a29bcecda6f53ef8df590aed2d343cd1199e517"
+    },
+    {
+      "guid": "68AA67FE47095F2608A2369A74F09E6D",
+      "name": "BP_GHS_InstanceGroup_C_79",
+      "label": "MPR4_MPR4_FreightBoxcar_1_-2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "dcab6aa002a2192223b88af1f1e348457d7491b53e4293b5778d1cdec71dd3b5"
+    },
+    {
+      "guid": "68C4B5A34401C462FAADDEB6D151E576",
+      "name": "BP_GHS_InstanceGroup_C_134",
+      "label": "MPR4_MPR4_Tree_Oak_3_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "12eca71ddcd6784b66db46d84334486f669e3a6a238ad80064ee381337cde108"
+    },
+    {
+      "guid": "6900AE674729BFCA46ECBAB3C912CB8A",
+      "name": "BP_GHS_InstanceGroup_C_269",
+      "label": "MPR_Columns_2_0",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "b3855de5c6d9b74bc6be6f576a3ad7416d8c65ebf8ee4bf46d95e3a11a14e1bb"
+    },
+    {
+      "guid": "6923B11B4BA023F0243FC4A98009E0FF",
+      "name": "StaticMeshActor_147",
+      "label": "SM_MPRE_Curblines_-4_1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "f7369deaa231d491454271ff3e3ec8443ec9edf3534cf294d04d7ee33914b539"
+    },
+    {
+      "guid": "6A3F09BE45337A01245E9F8D5824DFC6",
+      "name": "BP_GHS_InstanceGroup_C_223",
+      "label": "MPR_Racks_-2_0",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "ad8464724fe99bdef30074a4c392ac67096a40e1554fbf8d5af542fd33ca2099"
+    },
+    {
+      "guid": "6AC556DC4E4FA26AC478C281C28B5649",
+      "name": "BP_GHS_InstanceGroup_C_97",
+      "label": "MPR4_MPR4_Tractor_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "c62adf8ce5d206c7597f2b0cc23105cfc04f2dee1ac0c611efc019d8638496ed"
+    },
+    {
+      "guid": "6B4219EE41A139C52E99B1B78C14BD16",
+      "name": "BP_GHS_InstanceGroup_C_123",
+      "label": "MPR4_MPR4_Tree_Oak_1_-2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "0e1b2960a00017bd3904081ac7c9abd13c09f9745006f3191b0f73d6ace1753d"
+    },
+    {
+      "guid": "6B73EE0140D58CE38DA710BD79F33741",
+      "name": "BP_GHS_InstanceGroup_C_86",
+      "label": "MPR4_MPR4_FreightBoxcar_3_2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "5d96141ab0021dfffae791fb58935f6f2d78f1df43a49e30909f87789e3a933f"
+    },
+    {
+      "guid": "6BBE018847030EC896717E899424B3BC",
+      "name": "BP_GHS_InstanceGroup_C_74",
+      "label": "MPR4_MPR4_Car_1_-2_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "f3650c8efad36894160b356b1ba77af6378dcdde5ab475ba08daa3c12ee10396"
+    },
+    {
+      "guid": "6BCD29364BC5713F25B05380AE797968",
+      "name": "StaticMeshActor_294",
+      "label": "SM_MPRE_Context_-2_5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "4964bb8aaa789ba9014fa1d2741e1982fbc770811f9d8892043aaac5e4c79ccb"
+    },
+    {
+      "guid": "6BFC4DFA47EDD3F7466152B3A937F7AA",
+      "name": "BP_GHS_InstanceGroup_C_206",
+      "label": "MPR_SM_MPR_Turn__U33_0_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "4688f20f19313a087a4e24031ec9d3a34c8e6f926d17b14ca34830c322465743"
+    },
+    {
+      "guid": "6C12443B48105C034E175787EA5D4972",
+      "name": "StaticMeshActor_162",
+      "label": "MPR4_Context_Houses_-3_0",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "51c6e946f2fe7ae5852e30b19df1a31d622d9af78e855cbb9085e61018a87571"
+    },
+    {
+      "guid": "6C29E0704AE156AF771D59A43F9803F6",
+      "name": "StaticMeshActor_157",
+      "label": "SM_MPRE_Curblines_-2_5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "a5a80d4de46736e4cf88ce5a712d15e4ee9d9377c18f16951e8af09251093d1e"
+    },
+    {
+      "guid": "6C3EFA054DC0B4A207AAF289F5E4B14A",
+      "name": "BP_GHS_InstanceGroup_C_80",
+      "label": "MPR4_MPR4_FreightBoxcar_1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "36a5fa6a09fcbd47606cbdb1dff209a1dfa3979365e59ff91e6530f1599c70d9"
+    },
+    {
+      "guid": "6C5C372A40EFE81E5C1141915149812E",
+      "name": "StaticMeshActor_247",
+      "label": "SM_MPRE_WhiteEdges_-5_1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "eda79168874e2c8ab12832fe23b8693498d5142613700d12385cdd80e9693f7f"
+    },
+    {
+      "guid": "6D06EFD44EBC0E26C92408AF4F2E026D",
+      "name": "StaticMeshActor_158",
+      "label": "MPR4_Context_Houses_-4_2",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "408476584143ea4e84bae8acc6b2460020b333dae4c6ab82ba6115c7babe36fe"
+    },
+    {
+      "guid": "6D152319479F50E6F2C5478DE692D1F0",
+      "name": "BP_GHS_InstanceGroup_C_181",
+      "label": "MPR_SM_MPR_ConveyorSupport_-1_1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "3a42aa003744cfc9fc0cb3c1517d0877180c9efaa660b63f1a5669d4487c3e23"
+    },
+    {
+      "guid": "6D1F6B0040572E413DE088AF276BDF88",
+      "name": "StaticMeshActor_251",
+      "label": "SM_MPRE_WhiteEdges_3_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "cef96152b698c8ca2cf46cc5d23bc6c9cde73872dd708e455e1748a7f73617ec"
+    },
+    {
+      "guid": "6D399AD847464500E241F6B5A39BE558",
+      "name": "BP_GHS_InstanceGroup_C_13",
+      "label": "MPR4_MPR4_DockNumberPlate_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "c36502c80c7fad39959a7a029ddce64642d8318b644f7e46bf36690fa7ae25d8"
+    },
+    {
+      "guid": "6D49A8E646B5D4BA3272CBA9848938DF",
+      "name": "BP_GHS_InstanceGroup_C_157",
+      "label": "MPR_SM_MPR_Conveyor2m_-3_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "9c9814c47be499219c7b79c22ca20f042b255d6194313e965efd01c4de26f526"
+    },
+    {
+      "guid": "6DAC07324DF02BB85758CEBE27900D18",
+      "name": "BP_GHS_InstanceGroup_C_53",
+      "label": "MPR4_MPR4_Digit_6_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "75fb452b57f702e0769d156e203ce7d1791f30381e68497e501ec0ed06370131"
+    },
+    {
+      "guid": "6EF12B5B4F6D35C94C9D0A82CE8F0EFE",
+      "name": "StaticMeshActor_83",
+      "label": "SM_MPRE_Rail_-1_-3_Sleepers",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "0fa926024eda450e8e69951aaaf481a4cc087af12d9fe91f070eb6d73e2a1750"
+    },
+    {
+      "guid": "702ADFD54A63A9247608B4A04498BF88",
+      "name": "StaticMeshActor_240",
+      "label": "SM_MPRE_WhiteEdges_1_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "db8fbc52f4bbc64a7870703f5385d5dac57d351a1df6a4610eac6be88f22cc1d"
+    },
+    {
+      "guid": "70BC9784423D4390554AA680A6DA9D1C",
+      "name": "StaticMeshActor_53",
+      "label": "MPR4_Site_RoadTerminalEdges",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "3f46e90102cc48c7f6e259fb22d2aa3a44c4ffc4d9855a922d85870ec81bb58e"
+    },
+    {
+      "guid": "718891314380BAE3D0973D90F82CF7EE",
+      "name": "BP_GHS_InstanceGroup_C_40",
+      "label": "MPR4_MPR4_Digit_3_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "bd9deab247b3c479660ecb6e4529b4db18b6c5a953a68b4824e9ef33fe463e85"
+    },
+    {
+      "guid": "7280F6BF4C31FF0210FF73937691AAD3",
+      "name": "BP_GHS_InstanceGroup_C_209",
+      "label": "MPR_SM_GHS_Shared_Conveyor_-2_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "1f634a7364101ccf03c7d878ee713a2476a4593f35c14a181758be787252164e"
+    },
+    {
+      "guid": "748F749344C6910E487CE6B48637FF35",
+      "name": "StaticMeshActor_152",
+      "label": "SM_MPRE_Curblines_-3_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "10fd4b9683d91b30eb4a70b41dd56b47dec0bfd23d3f11704b3eb50ccaf4bdab"
+    },
+    {
+      "guid": "751FE90B420E22F042B21BA3D38A3918",
+      "name": "StaticMeshActor_234",
+      "label": "SM_MPRE_WhiteEdges_0_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "c18ce782d4686e62cbb4f4c5e6caf9ad9984b11cc34e463a683a5f478f3da6f8"
+    },
+    {
+      "guid": "755F04DD40D1A8B0F81E7A95DEE5FF87",
+      "name": "StaticMeshActor_72",
+      "label": "MPR4_Site_FarGround",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "12e1d7f8d1ecb0fcda06d14d046cc14b0c56efcad8cea0b5f8c8d510e500a5f7"
+    },
+    {
+      "guid": "75651F9B45F3FCB87EBB058A17224016",
+      "name": "StaticMeshActor_261",
+      "label": "SM_MPRE_RoadDashes_-2_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "a87c4caee82d6ba1f9dddabe99d6ff95b4cfa4112159de25a51d0960e8952bf5"
+    },
+    {
+      "guid": "75BF708047F92242CA76DE9372F63506",
+      "name": "StaticMeshActor_218",
+      "label": "SM_MPRE_WhiteEdges_-4_1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "bacb822112224da49942d33819e016992c80116bd0fbb7fb592de974ff796afb"
+    },
+    {
+      "guid": "75F7F5EF4AAFF6B1A6B47B9CEB775A75",
+      "name": "StaticMeshActor_131",
+      "label": "SM_MPRE_Roads_2_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "ccdaaa683f050868ec13ebad40ae398a9b089ddb8e648a6c0e78e007bcdc5d5a"
+    },
+    {
+      "guid": "7698477D42D4CCD9334284B11407F31A",
+      "name": "BP_GHS_InstanceGroup_C_119",
+      "label": "MPR4_MPR4_Tree_Oak_0_-2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "5c2a161b6b695303e57c50ed85062ecefa98a48aba2fd73185d18e8a9d6ce92e"
+    },
+    {
+      "guid": "770D7F2048906151AE222B89712F2F50",
+      "name": "BP_GHS_InstanceGroup_C_291",
+      "label": "MPRE_SM_MPR4_Tree_Oak_1_2",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "2f977e1ae9416cb519bb305cf8c14d77e037adee4816a1902d8aac0179b853c6"
+    },
+    {
+      "guid": "7725EA624373C9A2E757BC9FDD23DE15",
+      "name": "BP_GHS_InstanceGroup_C_278",
+      "label": "MPR_ColumnBases_-1_0",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "a23df962020e7a716952bd524351bf2614bff02b1db92c4bb54510a5ffd690d2"
+    },
+    {
+      "guid": "7736BFE04C551AC48B82FFABC952883E",
+      "name": "BP_GHS_InstanceGroup_C_96",
+      "label": "MPR4_MPR4_Tractor_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "26c8407b8afcccecefdcf79c999ec3dc68e7936df1fb50227e8e6c7a960f77ce"
+    },
+    {
+      "guid": "77ADD2A7493008CA8036689A6C87E144",
+      "name": "StaticMeshActor_155",
+      "label": "SM_MPRE_Curblines_-2_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "7d4dea23957685931a7e261c5c2a1d9692227e5773575443c9c10fd4510229c9"
+    },
+    {
+      "guid": "7847A27042B816EABCE240881D291105",
+      "name": "StaticMeshActor_289",
+      "label": "SM_MPRE_Context_-3_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "048144d8d5fe866243ca798c95c8f4d76c30fd9a74f1ff66bf1c6b07b039377e"
+    },
+    {
+      "guid": "789150F9458202288368AE818B97CCF8",
+      "name": "BP_GHS_InstanceGroup_C_132",
+      "label": "MPR4_MPR4_Tree_Oak_2_2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "5324155d98d8a9351da45d656039e63ad7029008bc396eb08077f45b3321191b"
+    },
+    {
+      "guid": "78EBD61B4AEF9B46FC8078A76C4188A2",
+      "name": "StaticMeshActor_62",
+      "label": "MPR4_Site_Far_E_RailBed",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "d4a67e2cb0086d092f7fbd8e809c138f4bf0429d13ce2c043dd862d067b4de2d"
+    },
+    {
+      "guid": "79D3C5BC40AE2F827A41BC98B5829065",
+      "name": "StaticMeshActor_142",
+      "label": "SM_MPRE_Curblines_-5_0",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "212d785f57605a7a531128b927714f6ee61e143af18094491610fb084c529300"
+    },
+    {
+      "guid": "7AF1D7054445434458CC8491BD00F8F3",
+      "name": "StaticMeshActor_210",
+      "label": "SM_MPRE_WhiteEdges_-6_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "183f727b21ab1c5f234028fc56ab1a471a01befd1caa9a242c3be3d2158d33eb"
+    },
+    {
+      "guid": "7B22A0FF42FBC821C2243E86E17F7656",
+      "name": "StaticMeshActor_248",
+      "label": "SM_MPRE_WhiteEdges_-4_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "5aca3dc771ef58715cd6d24a061062848dc86974b6a56f232bc0aed47632233b"
+    },
+    {
+      "guid": "7B4AFBC84638543C5770BA8FA39F7BA0",
+      "name": "BP_GHS_InstanceGroup_C_198",
+      "label": "MPR_SM_MPR_SorterOutput_-2_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "ca3bfee9e12ba15e4d678db24c45e9d0d75d409fecf831d05b3002fd0d9ceddb"
+    },
+    {
+      "guid": "7BF8CC3A4AE9EEABCE812BABF2FF2F31",
+      "name": "BP_GHS_InstanceGroup_C_185",
+      "label": "MPR_SM_MPR_StationChute_-3_1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "8642ac2f7f778be36f781e3fff0640c052c53747206857a84efe3342452fb124"
+    },
+    {
+      "guid": "7CADDFDA465FBE9C87CFFCAFAD206E60",
+      "name": "StaticMeshActor_37",
+      "label": "MPR4_RoofSkin_02",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "b666777b1f54d91807b926fa0d50994802b3125a727d218dbc3d138b3a0ab9de"
+    },
+    {
+      "guid": "7D34468844188B43DA59C0986E4CF273",
+      "name": "StaticMeshActor_60",
+      "label": "MPR4_Site_RailYardContinuousBallast",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "67cabaedc8bd81b1530880332b81fa05a10a6367019a4b093130d6e9519a7902"
+    },
+    {
+      "guid": "7D8DA9C64B18D09BD9CAA58743048654",
+      "name": "BP_GHS_InstanceGroup_C_52",
+      "label": "MPR4_MPR4_Digit_6_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "f59541ccd34581407af99dd059d7a528e697bda44a25eb717969800f00af62c2"
+    },
+    {
+      "guid": "7DC7188D4F4E32D9B5E22996B7904913",
+      "name": "BP_GHS_InstanceGroup_C_248",
+      "label": "MPR_Pallets_-2_0",
+      "folder": "MPR/Storage/Floor",
+      "action": "keep_interior",
+      "record_digest": "f6463f107fcb954ca61d4d0b10ba23ab914633e65c603e3df6e587eee9332b2d"
+    },
+    {
+      "guid": "7DF143254124ED7A91C1AA8BC2979D11",
+      "name": "StaticMeshActor_96",
+      "label": "SM_MPRE_Roads_-6_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "fc83b4add560cf628e113e8cf34faf86c6477bd4c890b0e2a4c41767362bc5f3"
+    },
+    {
+      "guid": "7E1E26B542A5C2B978B907A98D7CC31F",
+      "name": "StaticMeshActor_182",
+      "label": "SM_MPRE_Curblines_4_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "fe9282adfe47376dedf22db13608f63da92a8830153ca6fec553253b1f34398d"
+    },
+    {
+      "guid": "7ED783124C108A359CFC1D843B1BFC60",
+      "name": "StaticMeshActor_3",
+      "label": "MPR4_Facade_01",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "1583bf7683a98a0b3a7ea9c4fd861266a4b5089dcb96540c1317dedccb3d3a1d"
+    },
+    {
+      "guid": "7F3DD71C44F240443D8F5687CF071C29",
+      "name": "StaticMeshActor_284",
+      "label": "SM_MPRE_Context_-5_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "2bf9a255b854a42126be9c59ba659cfe370ac6d8166e493e0c6e9925beef356b"
+    },
+    {
+      "guid": "7F6EF6484889F718560F93864DB8B1E6",
+      "name": "BP_GHS_InstanceGroup_C_171",
+      "label": "MPR_SM_MPR_WorkTable_-2_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "7706994e3cbbeeae0b47fdb10f6ed22cbb4bc5f7a6db49f27712b8137e6691dc"
+    },
+    {
+      "guid": "800BDFED464BC01385A4CB97FB77C862",
+      "name": "StaticMeshActor_271",
+      "label": "SM_MPRE_Context_-1_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "af58656554467d7e1bc756f3fd2f7bfb1fc70e80a99e5816646f09dc17be8bde"
+    },
+    {
+      "guid": "8025E85040EE606FE1FA528561CD3BE0",
+      "name": "StaticMeshActor_38",
+      "label": "MPR4_RoofSkin_03",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "808c4111380a246c046a308989d15a642594c66b4f5aae6cf1e7dba8782981ca"
+    },
+    {
+      "guid": "8036AAEE421ADEB4A6A1D0853538330A",
+      "name": "BP_GHS_InstanceGroup_C_160",
+      "label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "307fdb5e7eccebe29c8746eead3850149f53c1c06f1f549d0019c648896b3379"
+    },
+    {
+      "guid": "805839D249A7DFB451698487C305C343",
+      "name": "StaticMeshActor_65",
+      "label": "MPR4_Site_Near_Rails",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "3f3b45e14ed7edc1cc29cdd179b17d079869d2001aa882596dced2fd342c8140"
+    },
+    {
+      "guid": "807B7F34449B78F8F8B8DEB1F9EC2780",
+      "name": "BP_GHS_InstanceGroup_C_243",
+      "label": "MPR_Racks_192_2_-1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "0c90e8402da8796057e2ed2a460f2a66fbc427914b5f7be0269ea0ef9059c819"
+    },
+    {
+      "guid": "8173074041615986808B9EBACA3FCA31",
+      "name": "StaticMeshActor_32",
+      "label": "MPR4_RoofEdge_14",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "1b283732d395c83e0d46134730a1c3e4dab4f9296484ed4d5f0ef57e05fb8b01"
+    },
+    {
+      "guid": "81A8A0114B14661CF25344A87F9A5897",
+      "name": "StaticMeshActor_51",
+      "label": "MPR4_Site_RoadTerminalCurbs",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "a64eb6542941411014f159a388d37a9a57446ea8a9165f44335c0bf1cfe3b00f"
+    },
+    {
+      "guid": "81EEBCE948903438F9892D95B4234032",
+      "name": "StaticMeshActor_175",
+      "label": "SM_MPRE_Curblines_1_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "81c52bdc22194fe2f3e6c483321248547744a93881aa8798e6e9fab2b55a5c6e"
+    },
+    {
+      "guid": "829C1E484391D03D5A3878B243383EA5",
+      "name": "StaticMeshActor_108",
+      "label": "SM_MPRE_Roads_-3_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "6df9f7171e8e2408ea0e55e2d7ea05b18aa7b3536bb08600321feb2b439c47ad"
+    },
+    {
+      "guid": "83DD5D35434052DCCF717CBB68AAF4EF",
+      "name": "StaticMeshActor_110",
+      "label": "SM_MPRE_Roads_-2_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "696104465f3f5e15af5db4aaa2bc59d259bee254ea0b495d437cc6bc25e675d4"
+    },
+    {
+      "guid": "83DE02B24AC3D0F7CC087391AB405158",
+      "name": "StaticMeshActor_52",
+      "label": "MPR4_Site_RoadTerminalRoads",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "01a3e896b1d5304c05d942ba99f684c9c5c1b419d3b51ff7d3ad23f8e99a5787"
+    },
+    {
+      "guid": "845B26944CEC8E4BC26BFFA5733A3721",
+      "name": "BP_GHS_InstanceGroup_C_237",
+      "label": "MPR_Racks_2_-2",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "aee126a8014a7cac7a12f10584bf8b6dc332c696d0ef3f1a1e35cfc69e7c4d20"
+    },
+    {
+      "guid": "8497C65647D7B2B57E8336A107F083E5",
+      "name": "BP_GHS_InstanceGroup_C_8",
+      "label": "MPR4_MPR4_Bollard_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "891d8672d4b1214dddbed63b6cddebcdee841bd34eb65298c2b340dd694be1a9"
+    },
+    {
+      "guid": "84A8C51441C6318A65AC92AA85355815",
+      "name": "StaticMeshActor_0",
+      "label": "MPR_Floor",
+      "folder": "MPR/Architecture",
+      "action": "keep_interior",
+      "record_digest": "8e906516d3b08ba8d91b96378f12803e6d39e1f4d9383a6b3360afaaad32a4f0"
+    },
+    {
+      "guid": "859164214D6E4914AF50FFA2E1668FDB",
+      "name": "BP_GHS_InstanceGroup_C_66",
+      "label": "MPR4_MPR4_RoofLight_-1_-1",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "ac885d4e8ec51e5f72d689e733abc1439a30e35c71cc2114a9f646a5347a01b7"
+    },
+    {
+      "guid": "85B775614DF264024EED1DAB8722618F",
+      "name": "BP_GHS_InstanceGroup_C_249",
+      "label": "MPR_Pallets_-1_-2",
+      "folder": "MPR/Storage/Floor",
+      "action": "keep_interior",
+      "record_digest": "8eeb87a2a9b6cad24a639734a0665ed25a5cd2084921185ce4b45a52402ff5d4"
+    },
+    {
+      "guid": "85E5690F4125CBBAB83568ACB533466C",
+      "name": "StaticMeshActor_56",
+      "label": "MPR4_Site_ParkingBayLines",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "b9473c9216cf508bc88fc600dbdf49878d05fb7d30d741a2266928b9f121c22f"
+    },
+    {
+      "guid": "870D8ECA4E0A1118A995D58788A5E4C3",
+      "name": "StaticMeshActor_143",
+      "label": "SM_MPRE_Curblines_-4_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "8abe8e1b047216934be2b9b07ca27067dd762b4bc1c6adde2df08ca35bcbd775"
+    },
+    {
+      "guid": "87486BE841543C5B6E1C3294729A1436",
+      "name": "BP_GHS_InstanceGroup_C_228",
+      "label": "MPR_Racks_-1_1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "af1cce16e4cf334fe0059d475d834d39dff19fd0dff617e428c788884ed0996e"
+    },
+    {
+      "guid": "88557F4E4FE2D5F7823026AE9129ABA3",
+      "name": "StaticMeshActor_237",
+      "label": "SM_MPRE_WhiteEdges_0_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "d715b0ccf19c7683655040650553884608fc9e71c6f0abbbb65820e47d891993"
+    },
+    {
+      "guid": "8862CE504F0BFD6F5EBDA7A37BDA5B14",
+      "name": "StaticMeshActor_276",
+      "label": "SM_MPRE_Context_0_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "129285c30f7abd1e38e1dc6ef08531943408cc8473e700dbbd969ec9407f15b0"
+    },
+    {
+      "guid": "8865628E4428DC783753AE87A10411A1",
+      "name": "BP_GHS_InstanceGroup_C_138",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-4_-2",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "68c5835359b4d7ea2a6f49390d8c5f63bd8174b94a06ea5822086366b68edb34"
+    },
+    {
+      "guid": "88F8E1944E376E56D873F985D174BCD1",
+      "name": "BP_GHS_InstanceGroup_C_207",
+      "label": "MPR_SM_MPR_Turn__U33_1_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "09372d8081c3e0f0a699f1ffb647b5f2ec9023e65fd6645dfc4568d6d39a70bf"
+    },
+    {
+      "guid": "89091F9A4BC35E541A72EE960EA1E65E",
+      "name": "BP_GHS_InstanceGroup_C_298",
+      "label": "MPRE_SM_MPR4_Tree_Oak_4_2",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "ee46d05293507af829f4f702c87a56623cafdd64e42e9ab48a24643048b88c53"
+    },
+    {
+      "guid": "8993FACA4765FAB615A482B656EAC1D3",
+      "name": "BP_GHS_InstanceGroup_C_156",
+      "label": "MPR_SM_MPR_Conveyor2m_-3_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "175b9ee423204e098402c8179916929c86afd52c369ec53d67eac0ff20ee3c1b"
+    },
+    {
+      "guid": "89C53B4441F4C4814FE505B9EE589181",
+      "name": "BP_GHS_InstanceGroup_C_404",
+      "label": "MPR4_MPR4_Tree_Oak_3_1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "734fad6bd18d26c918bb17edd773710784b2b4c00c4ce013e6c1a358cf79502f"
+    },
+    {
+      "guid": "8A57BA1C4C6F48CED8FAEC868DA2FE0A",
+      "name": "StaticMeshActor_95",
+      "label": "SM_MPRE_WaterBank_3_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "f320343fd09335f94eddade4fc6bf539f4a7db22efed7aa3511e8b4abfc6631b"
+    },
+    {
+      "guid": "8A66F95D45FADF3224641299058B5E8E",
+      "name": "StaticMeshActor_174",
+      "label": "SM_MPRE_Curblines_1_-5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "5a175e02ed7472c4b390c9c632260b5b26a741e1cb26901d07e67c58e4174095"
+    },
+    {
+      "guid": "8B5CFB924D1EDB36A82E8E8A8E7A3909",
+      "name": "BP_GHS_InstanceGroup_C_116",
+      "label": "MPR4_MPR4_Tree_Oak_-1_1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "a2b4893b3c3a2773a1e4d98a3442574ce4d6cda3c5ba962fa3802ef8090eb852"
+    },
+    {
+      "guid": "8B60E5CF41BEFE18658E1497811AA9F5",
+      "name": "BP_GHS_InstanceGroup_C_18",
+      "label": "MPR4_MPR4_Digit_1_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "debc01161a7940483fcebb18104944bf5856256867550e407ec2b38738ab5dd0"
+    },
+    {
+      "guid": "8C1AD44A4B7C60BFA672E18BFA067B19",
+      "name": "BP_GHS_InstanceGroup_C_38",
+      "label": "MPR4_MPR4_Digit_3_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "fa9acb43f01a7c990c8892d306e16bb592cbb007f8a3e668dfcf07f74bdc8e74"
+    },
+    {
+      "guid": "8C32F62549EB1AA3F14BC182ECC3B95A",
+      "name": "BP_GHS_InstanceGroup_C_234",
+      "label": "MPR_Racks_1_-1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "f87f88d2b4cc119ffda31be79e7b02e5e775b86f563b77b882553c5241952124"
+    },
+    {
+      "guid": "8C72D20842CD5164F4961D9811C12594",
+      "name": "StaticMeshActor_208",
+      "label": "SM_MPRE_Curblines_3_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "6e07e8dc2fb1d1eb13de2ccb24071f5ee270e6d02184da490429dea89b2576df"
+    },
+    {
+      "guid": "8CEB799E4443DE3A015A94A26369567D",
+      "name": "BP_GHS_InstanceGroup_C_202",
+      "label": "MPR_SM_MPR_CartonSealer_2_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "00a673b59b44f5000701c78747e3ac8d99e380116a05d968af346af322995b11"
+    },
+    {
+      "guid": "8D71821C45F5486070EFE39AA040558A",
+      "name": "StaticMeshActor_90",
+      "label": "SM_MPRE_Water_2_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "489b9fffca7e1ebf8b2f67ddcec654bd5979dc4df767825feae245dca96d80d7"
+    },
+    {
+      "guid": "8D9E435B4AB173719881549B8B3FC16F",
+      "name": "BP_GHS_InstanceGroup_C_268",
+      "label": "MPR_Columns_2_-1",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "793f7d8c7799875f7072846ca8036baefe52658fbb7ee8996fb9879fde5badfd"
+    },
+    {
+      "guid": "8E058502426DDDE5D22EE386C7E9B491",
+      "name": "StaticMeshActor_57",
+      "label": "MPR4_Site_RetentionPond",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "2b887fa6ce8ed755de4bf71058a506a05d003fb11986372e068ef7f9e2bd3ce9"
+    },
+    {
+      "guid": "8E11B45141284AEC5FC1C19F3A2C35E6",
+      "name": "BP_GHS_InstanceGroup_C_99",
+      "label": "MPR4_MPR4_Trailer_Blue_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "7c377e1893136d5ad8e50a6a4d1dfc66c072223f2b4b8e76e6340f68540e2690"
+    },
+    {
+      "guid": "8E2FCD5248A005FE280E6C8C051A050E",
+      "name": "BP_GHS_InstanceGroup_C_56",
+      "label": "MPR4_MPR4_Digit_7_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "4fbbea8c4ed772644eb1f592725a334f37796ffdb1cadc0d12669bfc0f0d183e"
+    },
+    {
+      "guid": "8EB0DB114D3184ADCCF358A15EC7BA67",
+      "name": "BP_GHS_InstanceGroup_C_200",
+      "label": "MPR_SM_MPR_SorterOutput_2_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "83af68509c749f3054c4dccd4befaf699c38092647e9b80411e50fbbc9d43033"
+    },
+    {
+      "guid": "8EFD707145351BD1BA90F8B06385B7A4",
+      "name": "StaticMeshActor_29",
+      "label": "MPR4_Facade_13",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "f514ebc21c37578a1df7e8aaabe0b277a551868a25dacf8c9cb132e29c9288e7"
+    },
+    {
+      "guid": "8FC26E5E4431FCB87F0D42AF95636EB0",
+      "name": "StaticMeshActor_154",
+      "label": "SM_MPRE_Curblines_-2_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "6d1124c3824eab7aa37883b8d94dfb4fa3465b348411ce92682ea7c58e5d0c86"
+    },
+    {
+      "guid": "90626EEB46B50C0C29E9E989C8FE6ECA",
+      "name": "BP_GHS_InstanceGroup_C_77",
+      "label": "MPR4_MPR4_Car_1_1_1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "453256b792e7c53326a77795b37c59630db9eef9eacd96a607a69a762aeae8b3"
+    },
+    {
+      "guid": "90A61DF047735DED53AE1B842447202E",
+      "name": "StaticMeshActor_275",
+      "label": "SM_MPRE_Context_1_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "fcf45d1355cd01129ba880575d50aa514cd64debe38498a32549c3db629d22f3"
+    },
+    {
+      "guid": "90B9A82E4B2F6D28DA97C6A29EB74F15",
+      "name": "BP_GHS_InstanceGroup_C_101",
+      "label": "MPR4_MPR4_Trailer_Blue_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "e11db6d82c9f2bfbbf400f315fea0df52d1a3ebb11d42652322db98f3c2032e2"
+    },
+    {
+      "guid": "911091C842E924718D758A8A496DD3BD",
+      "name": "BP_GHS_InstanceGroup_C_158",
+      "label": "MPR_SM_MPR_Conveyor2m_-3_1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "8ec3aa49fd20683dcd7d6f51eec12be5a5610ddb89be5e8590f63155a460a31a"
+    },
+    {
+      "guid": "91614ACE43C4118037C4939243DE4B0D",
+      "name": "BP_GHS_InstanceGroup_C_90",
+      "label": "MPR4_MPR4_Trailer_White_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "66de6ca430f30aeb4a8c6ca0ed0c3fef1cb5b7cd2714d52661837c6a09730816"
+    },
+    {
+      "guid": "923FBFC8492D5B29886CE39470FCD8F9",
+      "name": "BP_GHS_InstanceGroup_C_54",
+      "label": "MPR4_MPR4_Digit_7_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "e99f62a3051fcf8a9c4e4fb3862e25283a5d2d61ffe6952c11d4b89481ab331f"
+    },
+    {
+      "guid": "9273D4474885E3B81A727E9073EA015E",
+      "name": "StaticMeshActor_259",
+      "label": "SM_MPRE_RoadDashes_-3_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "68c57d5b52e55adae4d8879711d18e8d2020f74ef7aeaf1b1b12d69c4677f132"
+    },
+    {
+      "guid": "92AF9300446893D89A6654BFBD593353",
+      "name": "BP_GHS_InstanceGroup_C_300",
+      "label": "MPRE_SM_MPR4_Tree_Oak_5_2",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "89477161a33184da258b24ce82b17f02658cd854d5bf69c47bee672a4732a10f"
+    },
+    {
+      "guid": "92B45ADA4E2031B6DBF1AD809B67BB7A",
+      "name": "BP_GHS_InstanceGroup_C_296",
+      "label": "MPRE_SM_MPR4_Tree_Oak_4_0",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "7c6376612ca47e7e2699bdd7eb5b2863c97913f5b4c5c528910e38bca11833d2"
+    },
+    {
+      "guid": "939AA25A47789CB99020DB9432F50E31",
+      "name": "StaticMeshActor_169",
+      "label": "SM_MPRE_Curblines_-1_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "1317db07688b01d3df5b2e062eb5ca565a2858e12cd93048367c1f4d0b7c58dd"
+    },
+    {
+      "guid": "940B0E4342E187D70917B5B8E34E9456",
+      "name": "StaticMeshActor_39",
+      "label": "MPR4_OfficeGlazing_West",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "d6bb48f9cbebfbc300c24a674c641083c3265f640ca1eddf6bc0ecc65ef81d83"
+    },
+    {
+      "guid": "94267618403717C4BB5BB88CA23492D1",
+      "name": "BP_GHS_InstanceGroup_C_280",
+      "label": "MPR_ColumnBases_0_-1",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "22d1404d052f20ad8c8167df6ee4ec8c5734e1a6616799ccec5d86281240c914"
+    },
+    {
+      "guid": "9466D19E46AD1541AB082D8874EE33F6",
+      "name": "BP_GHS_InstanceGroup_C_235",
+      "label": "MPR_Racks_1_0",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "4245d1f2f7fbc40d5fac0954823663fcc96eaf7d56f211fa8f33a09a60402796"
+    },
+    {
+      "guid": "9478CE7B45650993329C3CB643F603E0",
+      "name": "StaticMeshActor_196",
+      "label": "MPR4_Context_west_workshop_annex",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "33ae5957ebebda88665b770e30e5bf663f99922d67fe46ff4e16c2cc8d8895fd"
+    },
+    {
+      "guid": "958534004FFC11DBFA2BFDABE54DE148",
+      "name": "BP_GHS_InstanceGroup_C_263",
+      "label": "MPR_Columns_0_0",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "94189f4d630f6e0faa48fad1217f4e1cc3164878370f5d24b42c38328a801a58"
+    },
+    {
+      "guid": "95C059274320D652A817848F4E389A33",
+      "name": "BP_GHS_InstanceGroup_C_221",
+      "label": "MPR_Racks_-2_-2",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "ea1e421a637aa8fe7c98bf78b70bc95857cbc463121f95d87cf82a26fc9239f7"
+    },
+    {
+      "guid": "95E2B1D446EEDC52DCF9A6935CC8FF3B",
+      "name": "BP_GHS_InstanceGroup_C_21",
+      "label": "MPR4_MPR4_Digit_1_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "b613dae45883ca5f19598a9687621d0cac171ecbe8b6f0767d1078f0d497fa6e"
+    },
+    {
+      "guid": "96C761D9418BA86012873F902D64FE55",
+      "name": "StaticMeshActor_193",
+      "label": "MPR4_Context_neighbor_warehouse",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "27c55c8353c87a08780178e75cd0d2914513e108ab96b0cdc5ffe6628b8c42f9"
+    },
+    {
+      "guid": "96F4B70D44368D4803EED6BB4E4BD4B6",
+      "name": "StaticMeshActor_272",
+      "label": "SM_MPRE_Context_2_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "7c444fd30a1f13955b09c87af2754b51dedb20312038a71440c1be4341af8dba"
+    },
+    {
+      "guid": "971E17354E5BA94E84747E8F0A998D6A",
+      "name": "StaticMeshActor_61",
+      "label": "MPR4_Site_Near_RailBed",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "67134f16d33db1e7412401826a93cc32b17a5d6f504813c9623036c66c570431"
+    },
+    {
+      "guid": "9836BF654256649B4C12F8B6B16F5E27",
+      "name": "BP_GHS_InstanceGroup_C_93",
+      "label": "MPR4_MPR4_Trailer_White_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "0c9ee7d194fa063a5b51231aeb8c1169244518d7dcbd5f90c04d094dfbb104e3"
+    },
+    {
+      "guid": "984F104246FB57F10940BAA0F3467BDC",
+      "name": "StaticMeshActor_101",
+      "label": "SM_MPRE_Roads_-4_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "a46fb5f9a569d05b5d20dadf751c6af877d61467c175b7bb7dfe5aa9f9f807b2"
+    },
+    {
+      "guid": "98A715584F198CC42F55E2BD76FBEE75",
+      "name": "StaticMeshActor_226",
+      "label": "SM_MPRE_WhiteEdges_-2_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "7e17f18b304b41f10bd404703770a3e7d1c220205ee46053d0b9d4c18a6e4d49"
+    },
+    {
+      "guid": "9B43729D431C00C97BE637ACE6BA19C1",
+      "name": "BP_GHS_InstanceGroup_C_34",
+      "label": "MPR4_MPR4_Digit_2_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "045917767f071196a00aa5a4b9a0eaf71018adbe259cf8108c0e0b658ece63df"
+    },
+    {
+      "guid": "9C971A07486E959639DDF4861749C387",
+      "name": "SkyLight_0",
+      "label": "MPR4_Ambient",
+      "folder": "MPR/ReferenceV4/Lighting",
+      "action": "keep_lighting",
+      "record_digest": "d51e3a9cce1be479bfd6157efed37feab52d7b0dc961d46ad68a294de5c9020d"
+    },
+    {
+      "guid": "9CE085D241EC8EB3092190AC94A0E42B",
+      "name": "StaticMeshActor_176",
+      "label": "SM_MPRE_Curblines_1_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "e92f787713fd0484d9c6a7ff95096cc45ea7eb2aee1e4ff4cd253392da56cbae"
+    },
+    {
+      "guid": "9D99329A45CF06B18AE945B956DC4A47",
+      "name": "BP_GHS_InstanceGroup_C_195",
+      "label": "MPR_SM_MPR_ScanGate_2_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "1f21145ce7550cfee038eb747ce95da3522ff0a4211f97740914112cbc9508d3"
+    },
+    {
+      "guid": "9DB07D0E441619562C7CF6BB47F2E58E",
+      "name": "StaticMeshActor_199",
+      "label": "MPR4_Context_rail_service_shed_01",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "add3ccbb10d125a5f06b4e6a3cee129bfd3cd5dd5b0d41e44700219d805716ae"
+    },
+    {
+      "guid": "9DDFA7AC4DFA8E9F3CCE8A8174990D59",
+      "name": "StaticMeshActor_11",
+      "label": "MPR4_Facade_05",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "d3e01b545ccf7697132a2371ab2904e8c65d562e32c527adf9f08964b7f4b177"
+    },
+    {
+      "guid": "9E44E2FE478CEA2076AC98B49AA99B29",
+      "name": "StaticMeshActor_216",
+      "label": "SM_MPRE_WhiteEdges_-4_-1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "564f13ca1ed4ada7366559926eda20fec4426693bbe780ff15929606e0ffdfa7"
+    },
+    {
+      "guid": "9EFD1CE14F400E340C05CF99A233E650",
+      "name": "StaticMeshActor_125",
+      "label": "SM_MPRE_Roads_1_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "45d7eefb3815b0a0fa4c3990b902462c8bfd2b295617470493f96e11ec193503"
+    },
+    {
+      "guid": "A07BE47046141ABA6DBAC3B6DF0356A8",
+      "name": "StaticMeshActor_173",
+      "label": "SM_MPRE_Curblines_0_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "1e1685d766c1c933954c58855581c73889adeaa07199010d1ce19000ef2dfb77"
+    },
+    {
+      "guid": "A116994443AB39775763C184D2668A66",
+      "name": "BP_GHS_InstanceGroup_C_247",
+      "label": "MPR_Pallets_-3_-1",
+      "folder": "MPR/Storage/Floor",
+      "action": "keep_interior",
+      "record_digest": "2f4d0ed28db084db0380a50f7089bcafa4bc520b3e85e965653c89ac7168c743"
+    },
+    {
+      "guid": "A1236C5443F129AC2DD45B94A99A4C5A",
+      "name": "StaticMeshActor_33",
+      "label": "MPR4_Facade_15",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "8831af1d7885f4ceba3c8219d540add9e070b60aa02b98f1fe17f5c64d954a62"
+    },
+    {
+      "guid": "A1FE036F43D4FE2017C86185E9181AD8",
+      "name": "StaticMeshActor_109",
+      "label": "SM_MPRE_Roads_-3_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "b682dabf3ee3f8343c3900dc991bfc73cc32ca37e5617ece594df6f3d6197237"
+    },
+    {
+      "guid": "A2BBA641403539B976CBF693759CF7B3",
+      "name": "BP_GHS_InstanceGroup_C_192",
+      "label": "MPR_SM_MPR_StationChute_2_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "cb7a5a31263b962d2b2df40f80a3211994137ad7922022b627a8b71ae6d9063e"
+    },
+    {
+      "guid": "A30C950C4A37F909DB96B3B9E090B56B",
+      "name": "BP_GHS_InstanceGroup_C_214",
+      "label": "MPR_SM_MPR_SorterCAD120_-2_0",
+      "folder": "MPR/Equipment",
+      "action": "keep_interior",
+      "record_digest": "56b4e56d77050596f99dce299e018768811e8115f0328702041e112d0dde09bb"
+    },
+    {
+      "guid": "A3F9A0FE474D31B705DCF791ED3C1D6C",
+      "name": "BP_GHS_InstanceGroup_C_113",
+      "label": "MPR4_MPR4_Tree_Oak_-2_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "e6104428b730275ae4d1ab20bc02f420aa64ae874ced9fa0d76064cef02d24d8"
+    },
+    {
+      "guid": "A410B41F4570D877C39D3E9984B2815A",
+      "name": "BP_GHS_InstanceGroup_C_255",
+      "label": "MPR_Columns_-2_-2",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "cad18fbcf7d248d338e09586ce9325b22c876fc751fa249af7f8ef0de24c92af"
+    },
+    {
+      "guid": "A525926B45EAD41BE68AA1B15B74DDA1",
+      "name": "BP_GHS_InstanceGroup_C_91",
+      "label": "MPR4_MPR4_Trailer_White_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "7fdea3faa3be40fbb32e80f9b8f567cea1573251733b10a2f0e175de93da3b64"
+    },
+    {
+      "guid": "A52733BF4269AB82EF9C1AAF1564AB23",
+      "name": "BP_GHS_InstanceGroup_C_37",
+      "label": "MPR4_MPR4_Digit_2_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "714aa70c975516f1a9b3b3b4539ee7f221cebe1542248e3b0b64829573fd6f4b"
+    },
+    {
+      "guid": "A5F794CD4025E253C2296699EFD24015",
+      "name": "StaticMeshActor_27",
+      "label": "MPR4_Facade_12",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "8ae48216308ce5a8f524556ad2e15e861a32ffbb819f21cedb72bb13bf247d2d"
+    },
+    {
+      "guid": "A70E5DFE45ADF86C2312F7A9650BA70E",
+      "name": "BP_GHS_InstanceGroup_C_276",
+      "label": "MPR_ColumnBases_-1_-2",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "86d173746a902dfa06089293d0d2f51ab93e2d67cccc79780531828c8c202b21"
+    },
+    {
+      "guid": "A77B5AFC4190E8D7ED468F9853B99533",
+      "name": "BP_GHS_InstanceGroup_C_167",
+      "label": "MPR_SM_MPR_WorkTable_-3_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "099d47982f2bf72eccb50366b538bed61a700398453d8a13e417d50c7a038b80"
+    },
+    {
+      "guid": "A7FB4A6A47F9A8C1EE952BB2FF04AD4B",
+      "name": "BP_GHS_InstanceGroup_C_84",
+      "label": "MPR4_MPR4_FreightBoxcar_2_1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "408e6f1674c3a3af062586aa5d109902e387fb52ad538776332a866877eada08"
+    },
+    {
+      "guid": "A88F18E4461CE247337F6A88502E2435",
+      "name": "StaticMeshActor_35",
+      "label": "MPR4_RoofSkin_00",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "c70087a60b68f81308f3cb5f52d0fa78e891205aca22480369b39fceb1434029"
+    },
+    {
+      "guid": "A8C5B61245BF89FF4B540DA6E391EB8D",
+      "name": "BP_GHS_InstanceGroup_C_142",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-4_2",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "89a0bc5a117d44a4dfd4b419e35f3b5adabd94057db4c854c6178826c7984bd0"
+    },
+    {
+      "guid": "A9072D3C45C5E59E515F4791B33688F0",
+      "name": "StaticMeshActor_189",
+      "label": "MPR4_Context_Houses_-2_-2",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "be3c35dab33fd8f1aeade74c00a4aa1f5de73e1a317ee4318f4becb332becc3b"
+    },
+    {
+      "guid": "A97528564E9F044E05361FBABAF12FC8",
+      "name": "StaticMeshActor_200",
+      "label": "MPR4_Context_rail_service_shed_02",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "57925a71fca396f612068501a5e2d2544b16a06a29ce27bea6231016f7a7876a"
+    },
+    {
+      "guid": "A99051F344842C72177BD693ED04FD8F",
+      "name": "StaticMeshActor_249",
+      "label": "SM_MPRE_WhiteEdges_-3_5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "e8d03f6a1c7ddf8b7eeb067dd29d6047721a37494d0d9eb64842e1bae52d0caf"
+    },
+    {
+      "guid": "A9BA9ABD44FDDD6798D785A0C30E375D",
+      "name": "BP_GHS_InstanceGroup_C_107",
+      "label": "MPR4_MPR4_Tree_Oak_-4_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "1706e407990bc07b816a1f1a92868ea4bb647e85e7348af8478ffe15af35249f"
+    },
+    {
+      "guid": "A9C626754236FF9E046530BE8ED89016",
+      "name": "BP_GHS_InstanceGroup_C_233",
+      "label": "MPR_Racks_1_-2",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "0840877031cf9851ad7b316cb5e5b3afea7ff0fb81ee44a4623aa6fd41c2f551"
+    },
+    {
+      "guid": "A9F0A5574790CE8CBE6462AD7D4249F5",
+      "name": "StaticMeshActor_19",
+      "label": "MPR_OfficePartitions",
+      "folder": "MPR/Architecture",
+      "action": "keep_interior",
+      "record_digest": "831accdb21e62537f82ac5b825cf4987ab821e304eedcc43c027a0694f5f224a"
+    },
+    {
+      "guid": "AA97A10B48AF9D6FF72AE483AFA87C02",
+      "name": "BP_GHS_InstanceGroup_C_287",
+      "label": "MPR_ColumnBases_2_0",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "2b4caf0b062ce317430f54fa4dee33edcde58199a30536d38a0f7959fe1cf3d8"
+    },
+    {
+      "guid": "AAA4E7F34F2DCCA7826541B7D8A5FD68",
+      "name": "StaticMeshActor_184",
+      "label": "SM_MPRE_Curblines_-4_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "5c07f6dec8932f9af2882cdb54c0cde5f38909d6ec13854b5c657b54e64e5238"
+    },
+    {
+      "guid": "ABA086404AFFD590E3B2B6A06C4B56CF",
+      "name": "StaticMeshActor_232",
+      "label": "SM_MPRE_WhiteEdges_-1_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "80be97c74bcfb6865b8ff94870b011a394ddb059a85dae6a8b6c61c9ee7bf833"
+    },
+    {
+      "guid": "ABA946C9444275DB8425A2B797F280F3",
+      "name": "BP_GHS_InstanceGroup_C_61",
+      "label": "MPR4_MPR4_Digit_8_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "febcd327f558487b916c78a266e4a4dddf94fe8264f5392456f7b677065c16ee"
+    },
+    {
+      "guid": "AE322CA8412EB2E1201FF7A7785DB2DA",
+      "name": "BP_GHS_InstanceGroup_C_232",
+      "label": "MPR_Racks_0_1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "3c6bafad26b23474670335d53755b033a6be66ab1075f9933a02dc93e3d8f994"
+    },
+    {
+      "guid": "AE5D7E044EFED22FC3F414BD0FA61C00",
+      "name": "BP_GHS_InstanceGroup_C_32",
+      "label": "MPR4_MPR4_DockLeveller_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "8c1df2f140d622bde48156b2ad6323e10ee5eead7af8cf46b1cbdf2032b05aac"
+    },
+    {
+      "guid": "AEB0F34B41531CDAD7081C8D04B53C7A",
+      "name": "StaticMeshActor_166",
+      "label": "SM_MPRE_Curblines_-1_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "909b0d5e67b6d8b0ac11fbc00a83982a6319ffebe0ee65411debe7cbbe18dfb9"
+    },
+    {
+      "guid": "AF46098A481408744F977683CFA0F700",
+      "name": "BP_GHS_InstanceGroup_C_407",
+      "label": "MPR4_MPR4_Tree_Oak_4_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "e44448f329f96a83ccb999141aacd1807c287c34c3f11193b16d3cc31efeec5b"
+    },
+    {
+      "guid": "B0892B4E49B5C55D8E2B7BAEE6EAF74D",
+      "name": "BP_GHS_InstanceGroup_C_189",
+      "label": "MPR_SM_MPR_StationChute_-1_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "eb4cf2e405bece7d00786bb618fb53ce00ab382d113ab2d005c5a180dcfebb59"
+    },
+    {
+      "guid": "B129C59A4D3801C81447109818272919",
+      "name": "StaticMeshActor_86",
+      "label": "SM_MPRE_CrossingDeck_-1_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "f1d93c184b6a64aa15b30323cde3c72c95b296e12d8aef678ab2a7580d778985"
+    },
+    {
+      "guid": "B1EC393F4EA196DEC41648883A44842D",
+      "name": "BP_GHS_InstanceGroup_C_0",
+      "label": "MPR4_MPR4_WallLamp_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "9452be7a8cc8d86acf17f2a240c86cc4d60d0b102acd4bc08e5a044a6ccd6d15"
+    },
+    {
+      "guid": "B23C9CDA437147A6FEFD92B24BE40CCD",
+      "name": "StaticMeshActor_4",
+      "label": "MPR4_RoofEdge_01",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "af79728d7e1ba8ee3448d018f23b3eb3ee6d36156f6864b7a13c60b2876526bd"
+    },
+    {
+      "guid": "B2439FCE44AF6DC8D01CE981800A33D4",
+      "name": "StaticMeshActor_190",
+      "label": "MPR4_Context_Houses_-3_-3",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "48618e6dbac967d4ee75ca24c8a340551752444983619b458db8e19b7cd5d40d"
+    },
+    {
+      "guid": "B2451B8C44761F81DBEBACA9E689A954",
+      "name": "BP_GHS_InstanceGroup_C_408",
+      "label": "MPR4_MPR4_Tree_Oak_4_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "6f891d2ff5afae052546c4fab466bb54dd81800843fd09572c6de704e4a9a222"
+    },
+    {
+      "guid": "B27F94554D684984FD18D6A2E45ED6F5",
+      "name": "BP_GHS_InstanceGroup_C_290",
+      "label": "MPRE_SM_MPR4_Tree_Oak_0_4",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "c8d6326ac2d8f8a861f63d461a469c2d5f547b4d9a9cb8a78abedb85e8fbf013"
+    },
+    {
+      "guid": "B283DB3A4A365AC0AF4932BE8F423771",
+      "name": "StaticMeshActor_150",
+      "label": "SM_MPRE_Curblines_-3_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "ecb0e13fcfa1eeb6c3fa3eaf322c0a1b0cc2a55b38b472bc573ff32b1704f12f"
+    },
+    {
+      "guid": "B2DAA510476CDEB832DBA280A13798FB",
+      "name": "BP_GHS_InstanceGroup_C_49",
+      "label": "MPR4_MPR4_Digit_5_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "089c4c342619cbb79b906c13ff8b3e9555629d6a9746f32cda7ee8c641c0ec97"
+    },
+    {
+      "guid": "B2F2C7CF4D762A2D4E3024BAB376F396",
+      "name": "StaticMeshActor_67",
+      "label": "MPR4_Site_Far_E_Sleepers",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "3a4e1907b4e9fb6e57f2f6c1d6a894ece21ecefbb9e165b1772a8ec3804ce356"
+    },
+    {
+      "guid": "B39C9AE444E5F1F65AD2118CF551CA24",
+      "name": "BP_GHS_InstanceGroup_C_87",
+      "label": "MPR4_MPR4_Locomotive_0_-2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "8430709d0132ce385c6c2ccab29c4fd209425752f2dbd84637c80cd4a4fe0019"
+    },
+    {
+      "guid": "B3DA40FA4EE08DEEABEFB9BAE53D290A",
+      "name": "StaticMeshActor_105",
+      "label": "SM_MPRE_Roads_-4_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "9fbd9ee39d1d8df96ee4574560eb87ffc2b1a3cd7d635d4b00259e3e5d9cfd44"
+    },
+    {
+      "guid": "B4A404CE48B607D9309816976968E2F3",
+      "name": "BP_GHS_InstanceGroup_C_7",
+      "label": "MPR4_MPR4_Bollard_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "c9ec5a7d0837713a1c6a6ded30b3299c020c41fb69bf5f7aae0847ac476c0f9d"
+    },
+    {
+      "guid": "B4EB86C9457F3D8FD658859A9C566B0A",
+      "name": "BP_GHS_InstanceGroup_C_254",
+      "label": "MPR_Columns_-3_0",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "cc2c94ae6a7644f56fd297776de39bbe67e1128e583922f4044ceda948826917"
+    },
+    {
+      "guid": "B53E1BF94AB759342A4F589233D51EA2",
+      "name": "BP_GHS_InstanceGroup_C_163",
+      "label": "MPR_SM_MPR_Conveyor2m_-1_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "57be336b2d51e035c3144ac6e78f245b275133d1992eb1551206bf3addcbd720"
+    },
+    {
+      "guid": "B56CECDA49630658C300BDB2CFDC02D4",
+      "name": "StaticMeshActor_236",
+      "label": "SM_MPRE_WhiteEdges_0_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "2ee33f8b6312485b551ca579e83ac6416584bcb8c9bdbc225b963b2f6edf6224"
+    },
+    {
+      "guid": "B588EA5D4678D5D774B9D8A3FE28969F",
+      "name": "BP_GHS_InstanceGroup_C_25",
+      "label": "MPR4_MPR4_DockShelter_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "489d87163ff86f064f80e88fe446d5945036a69b1a1e23052d8a0dea140848dc"
+    },
+    {
+      "guid": "B68AC22E4D4B120213C6FF93AEA28E06",
+      "name": "StaticMeshActor_45",
+      "label": "MPR4_SolarBank_02_1",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "526c01daebab7119c99cd05099e81d61df4df301dc4f8b7067ff7efe03a8fd5d"
+    },
+    {
+      "guid": "B77E43454C72EEA551C58B812DF7A350",
+      "name": "StaticMeshActor_256",
+      "label": "SM_MPRE_RoadDashes_-4_0",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "5d3f5cf9af38f17757c4f930d4f40615e0f950c07e0129f1b8f5d7d4f39ef9bf"
+    },
+    {
+      "guid": "B797C9CF489E5BFA032AE5AD3EEBEF9E",
+      "name": "BP_GHS_InstanceGroup_C_125",
+      "label": "MPR4_MPR4_Tree_Oak_1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "7fb688a6f9aa7ca6c6d69f3523c1dabaee32aade4d46f4ee259acfb61d92882b"
+    },
+    {
+      "guid": "B8B16E5E42E16DE582D764BD8DB09283",
+      "name": "StaticMeshActor_263",
+      "label": "SM_MPRE_RoadDashes_0_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "9491930f38daff913b24e6df360f5eceb3b362b5f49787f08a91655ec1886c59"
+    },
+    {
+      "guid": "B8F45583421395C13E7F7C9EE7F9C3B9",
+      "name": "StaticMeshActor_278",
+      "label": "SM_MPRE_Context_-3_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "7f2a537089a1577c94fbb6cd1f27035fbbb38880847bd95162c3afe5efe0acdf"
+    },
+    {
+      "guid": "B923DD184327FE1E8BA80382472C3F43",
+      "name": "StaticMeshActor_214",
+      "label": "SM_MPRE_WhiteEdges_-4_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "19abd5e66e966b92f0b822a0dd30ee95ab8deb5820a7f22b34f3b486ab6259d7"
+    },
+    {
+      "guid": "B98C59944E532AF7BBFDF48BCA1E2050",
+      "name": "BP_GHS_InstanceGroup_C_253",
+      "label": "MPR_Columns_-3_-1",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "77137a1be5b30cc92777c614f157bcada8c0cac86a10984676b390a5af929222"
+    },
+    {
+      "guid": "B9AA54A74997EE0B464BC4884A9896B1",
+      "name": "BP_GHS_InstanceGroup_C_30",
+      "label": "MPR4_MPR4_DockLeveller_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "33d5f80df300f82d3186e7797526408e32cad14db87abe6349f01bf0a6cc81ea"
+    },
+    {
+      "guid": "B9C97288408D7C345387098C88EF9690",
+      "name": "BP_GHS_InstanceGroup_C_260",
+      "label": "MPR_Columns_-1_0",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "0d51806c09a0b387fb9c4198ae7f2d1393fedc6b17aa47b2ddc5cbee77885388"
+    },
+    {
+      "guid": "BAA1DDC946F535483DC3F9867D7E0147",
+      "name": "StaticMeshActor_36",
+      "label": "MPR4_RoofSkin_01",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "3b6db78a244190f567154d1eda98788a3308451a9c6b497fce73d5bc3363f1d9"
+    },
+    {
+      "guid": "BB31508D44D6F7A67874CDA50D3A7942",
+      "name": "BP_GHS_InstanceGroup_C_105",
+      "label": "MPR4_MPR4_Trailer_Coral_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "a3743cd19d53512ae8fb0e967b490e18a820f515439601c1c050514982fc595a"
+    },
+    {
+      "guid": "BB63DB4A44C26A843D5A76BD3C95F6AA",
+      "name": "BP_GHS_InstanceGroup_C_244",
+      "label": "MPR_Pallets_-4_-2",
+      "folder": "MPR/Storage/Floor",
+      "action": "keep_interior",
+      "record_digest": "0746aa62ab19357f73aec92e7f9f9e528fd10b743f40d9131daaa912be8ef0c3"
+    },
+    {
+      "guid": "BB7986BA4FBCB268799A5C889CCD251D",
+      "name": "BP_GHS_InstanceGroup_C_82",
+      "label": "MPR4_MPR4_FreightBoxcar_2_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "7cfea55289bb9d44e0d710da8cab8983d5f4be76cc9e1d8b839d4ecac452bc17"
+    },
+    {
+      "guid": "BC217E8B43B202CB7FE238B6F4B6556B",
+      "name": "StaticMeshActor_41",
+      "label": "MPR4_SolarBank_00_0",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "abe0417860213f1f61b94228af07b6c4637bbdd8acc9f3dc83d096827f390602"
+    },
+    {
+      "guid": "BCBBEDBC48E1F6D2AEE0C2846437CF4A",
+      "name": "BP_GHS_InstanceGroup_C_218",
+      "label": "MPR_Racks_-3_-2",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "8ba11258571890b1e5c983d8ee7742b6391a3b569d6fe19cf3f1dfb312097d11"
+    },
+    {
+      "guid": "BD68BE3044AF6EF46B4407B97779A262",
+      "name": "BP_GHS_InstanceGroup_C_196",
+      "label": "MPR_SM_MPR_SorterOutput_-2_-2",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "8c882b4538f6cc719ac520140625eabfbdc80387ddae998686b5a680555bcfb8"
+    },
+    {
+      "guid": "BDF444A647E9B58F812AD2A98477CB4A",
+      "name": "BP_GHS_InstanceGroup_C_288",
+      "label": "MPRE_SM_MPR4_Tree_Oak_0_2",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "6a5f18f59ea0fde927f435c396303e4e2de2b87f96be73759199ff1864f7b4a6"
+    },
+    {
+      "guid": "BE046FBD488590B5397A539D7555C4C4",
+      "name": "BP_GHS_InstanceGroup_C_75",
+      "label": "MPR4_MPR4_Car_1_-2_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "843d7126a7c4e90bdecb1f60083059558f91e1018bc80ad211a475ff12848d32"
+    },
+    {
+      "guid": "BED9FC294F970EA5B7809BBA0682C7EE",
+      "name": "BP_GHS_InstanceGroup_C_33",
+      "label": "MPR4_MPR4_DockLeveller_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "ea6df422559c22c969fadea11121aa2204bfd979b3ddee53de00ed2ea80a5bae"
+    },
+    {
+      "guid": "BF81206944716FB7B36E25B2F8123DE8",
+      "name": "BP_GHS_InstanceGroup_C_282",
+      "label": "MPR_ColumnBases_1_-2",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "8bd5e45ee03bf1b4c6acd127088101d4c88af1b9702ccee87bebbf05d4970919"
+    },
+    {
+      "guid": "BFBCF5F0494A26C08824CFA5E529DD40",
+      "name": "StaticMeshActor_81",
+      "label": "SM_MPRE_Rail_-1_-3_RailBed",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "0b6f9a90197c8e7b22f76ac24f962ecd3e4aa535b0deff65990c5adea4c1e83a"
+    },
+    {
+      "guid": "C002B1B14ECE92A59CE6BA955519CF0F",
+      "name": "StaticMeshActor_285",
+      "label": "SM_MPRE_Context_-4_-1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "4bc7420e9384f3c283e60672c5901b2d39248005271250153b8d5c4fdce15fc3"
+    },
+    {
+      "guid": "C0671C3B49EB39AC6C8B40B83AE17FD8",
+      "name": "StaticMeshActor_18",
+      "label": "MPR4_RoofEdge_08",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "e93e96f0ebe86ee15e394aaf8ea021fc5f92bb0c2c06dab8e04efbd0870cbb19"
+    },
+    {
+      "guid": "C12AB5AA499B85301B894E8FA30FA86B",
+      "name": "BP_GHS_InstanceGroup_C_295",
+      "label": "MPRE_SM_MPR4_Tree_Oak_3_2",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "8162fd2151dd0b1dd2ee9e1f06a8d4426f3c4ec60f756472a85991ed44313738"
+    },
+    {
+      "guid": "C13ACAFD4F9A4A0FFD52F3B8E29FD9CE",
+      "name": "StaticMeshActor_282",
+      "label": "SM_MPRE_Context_-5_1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "f0c13640e5c3d3cf1354669868f1cbe3320321a2fc87cf61fd4110ca1d81dcdf"
+    },
+    {
+      "guid": "C14986EB4BD417953212BD9FE3D60FCB",
+      "name": "StaticMeshActor_233",
+      "label": "SM_MPRE_WhiteEdges_-1_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "113ddc0a534fea262a30e07b42040c1bd73cb3f32328c3135bec0c13212fd9ba"
+    },
+    {
+      "guid": "C14EF53F43C7B005E394B6B9095B85FB",
+      "name": "BP_GHS_InstanceGroup_C_267",
+      "label": "MPR_Columns_2_-2",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "af248c7a055779eb951d2f2f1f529492515bf0406e32f7163f7eea52b54b0956"
+    },
+    {
+      "guid": "C15E1DE44C4FB7F1B21E92A77A8BE9EE",
+      "name": "StaticMeshActor_121",
+      "label": "SM_MPRE_Roads_0_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "02fcb99ba03489cffe1b6f599d01358df9a2754ed726edf9118ece319a0ed1dd"
+    },
+    {
+      "guid": "C237A72E4D6DE8F04043F2B55E6EEEC0",
+      "name": "StaticMeshActor_120",
+      "label": "SM_MPRE_Roads_0_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "c62e608c6f683436434b20d33d7a76f6eac77b04ffca26590ceaccde39dbca2f"
+    },
+    {
+      "guid": "C2AF8A274D72775009F46B86766E9951",
+      "name": "BP_GHS_InstanceGroup_C_175",
+      "label": "MPR_SM_MPR_WorkTable_1_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "2c19dd773d027bba8be5523a7c19b00d4d508363032e4f32b074fd9489c6306d"
+    },
+    {
+      "guid": "C3224FD244EBEDF565171AB46EE52630",
+      "name": "StaticMeshActor_195",
+      "label": "MPR4_Context_west_workshop_small_02",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "e224821fa555095d980790f3c5344b7f9d808dba03038ab74d9615a057150b13"
+    },
+    {
+      "guid": "C398FDE4419714DDF36B73AB222EE32F",
+      "name": "StaticMeshActor_58",
+      "label": "MPR4_Site_RetentionBank",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "05baaa93777df10bfb25a2114272532aedf315fc9079ca428aa150f019a49744"
+    },
+    {
+      "guid": "C3D4E4704A9F840564ADB1BDB7DE0EF9",
+      "name": "StaticMeshActor_75",
+      "label": "MPR4_Site_PlanTreeIslands",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "22e206aeee55c758dfa20ad9fcc024bf355ab1aa878194c1a1849694da115017"
+    },
+    {
+      "guid": "C3E308A74112AAD02234608D0EDD8A82",
+      "name": "StaticMeshActor_73",
+      "label": "MPR4_Site_ContinuousTerrain",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "62367980107cf1496af0eeba26e45ddbf98693d3c76762ba52aeb8739641356e"
+    },
+    {
+      "guid": "C3F545EB404856011D6BC4BA158D453D",
+      "name": "BP_GHS_InstanceGroup_C_245",
+      "label": "MPR_Pallets_-4_-1",
+      "folder": "MPR/Storage/Floor",
+      "action": "keep_interior",
+      "record_digest": "70defc235a7540f46a99d28b8e5e6e7c4fafd9b6cf8f57d6beba19783c52b47f"
+    },
+    {
+      "guid": "C41C2207452C32BA4FE257B5F3C12B45",
+      "name": "BP_GHS_InstanceGroup_C_81",
+      "label": "MPR4_MPR4_FreightBoxcar_1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "db82907042b7d46838f5e4532ab6f0cfd8f01d775ad2545bd0d9d59f0a6e8a05"
+    },
+    {
+      "guid": "C4D8AA374B5B1ED433C4C7AFFC1937B4",
+      "name": "BP_GHS_InstanceGroup_C_5",
+      "label": "MPR4_MPR4_RollerDriveIn_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "679b4e3057d9399be7241fc6d11126d393634ed418c559f42f0eac3eab8f8ba7"
+    },
+    {
+      "guid": "C553D6A0444742A3EACAF9A6032457C0",
+      "name": "StaticMeshActor_98",
+      "label": "SM_MPRE_Roads_-5_-1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "9140adb842f142e4727ad7b99a940ce626e876c937b591cf53fc21efbb65b34c"
+    },
+    {
+      "guid": "C56357D84435F7C9B6AADC8DA9907250",
+      "name": "StaticMeshActor_99",
+      "label": "SM_MPRE_Roads_-5_0",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "09fcc3192928a2241e80831ab6799f8804553ffe828152eb69f9e1e956eb19ca"
+    },
+    {
+      "guid": "C62537AF447C8CBBF61064BB6F79A80D",
+      "name": "BP_GHS_InstanceGroup_C_127",
+      "label": "MPR4_MPR4_Tree_Oak_1_2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "d100472cbd1df620676b9db65789726f9ac76814a5470a0a404031e22177599b"
+    },
+    {
+      "guid": "C6906F1D4157845C8D65498811244358",
+      "name": "StaticMeshActor_113",
+      "label": "SM_MPRE_Roads_-2_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "14a5fbecbc00189b8229785f7b63945b771ec74ce01b685c1b49236132c86134"
+    },
+    {
+      "guid": "C706604544A0A75D3425D2A0963E7A0B",
+      "name": "BP_GHS_InstanceGroup_C_152",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-1_-3",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "ef52f4c7e563923dc263c1dc46056ba865404413e8410122d06a6b61f765225a"
+    },
+    {
+      "guid": "C729C0C84F48B3F203314F854F8E92F6",
+      "name": "StaticMeshActor_102",
+      "label": "SM_MPRE_Roads_-4_-1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "f34e2f6489e9c11c87ecefa9d57d27b4a799b8cd3e0d5e3e8c4121fbf0d0c069"
+    },
+    {
+      "guid": "C7A2C03142EDF52631BA0B8A48610C1E",
+      "name": "StaticMeshActor_92",
+      "label": "SM_MPRE_Water_3_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "64016f5c931068c1542e33cf313d5873d60b6cd34d0fcd98c8f0646c62f73a38"
+    },
+    {
+      "guid": "C7BD2BEB41095B0B59873AA3D64DD765",
+      "name": "StaticMeshActor_42",
+      "label": "MPR4_SolarBank_01_0",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "6de64bcbcbb3523aa500364320700c2c38427257c5fbaeb03999b6767835177e"
+    },
+    {
+      "guid": "C7BEB19C419DDD33875618A8107370CA",
+      "name": "BP_GHS_InstanceGroup_C_215",
+      "label": "MPR_SM_MPR_SorterShort10_-2_-2",
+      "folder": "MPR/Equipment",
+      "action": "keep_interior",
+      "record_digest": "6bafb4f3925d66ba090608511e2822bb47d6cd5d43162312416bfbebf77160a4"
+    },
+    {
+      "guid": "C81E42D94C9E233769C07F949D00946D",
+      "name": "BP_GHS_InstanceGroup_C_148",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-2_2",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "7987dea9a18b39cd10cbffc4740e5e128182c136e526fd7492f097a46b936092"
+    },
+    {
+      "guid": "C86F29AF4E15BF25068ABEB746A2053F",
+      "name": "BP_GHS_InstanceGroup_C_205",
+      "label": "MPR_SM_MPR_Turn__U256_-3_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "05d40eadff84fa90038507d64badc57b19ccf603f28ff3d93880ab4bf157d88c"
+    },
+    {
+      "guid": "C9A4D9E7416B31A0B35BCD9CDBA98137",
+      "name": "BP_GHS_InstanceGroup_C_159",
+      "label": "MPR_SM_MPR_Conveyor2m_-2_-2",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "52fd24eb40171ccf22b9882c8125892609320aca0970c3fe34ee7cb70b6b2a6b"
+    },
+    {
+      "guid": "CA0E76C740B954EB1DF0C4B9710C3D48",
+      "name": "StaticMeshActor_141",
+      "label": "SM_MPRE_Curblines_-5_-1",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "32506e0aa749141df82d90c362de977a49a4f5bc13f147fc16c232cbc02a6a58"
+    },
+    {
+      "guid": "CA182C2E46CDEA8D5D6F34B7860F808A",
+      "name": "BP_GHS_InstanceGroup_C_299",
+      "label": "MPRE_SM_MPR4_Tree_Oak_5_1",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "5b08439285b9f254cacf6693da71290af0742b8d5cfb1002f651c112a3757ce1"
+    },
+    {
+      "guid": "CA25C2964DD477CFEE7E4A8197F42F25",
+      "name": "StaticMeshActor_159",
+      "label": "MPR4_Context_Houses_-3_1",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "5dadfd23fdb1d78206a14af4903393e414a613c6fb8999aae2972b93131a79e8"
+    },
+    {
+      "guid": "CA4775AB46204979655EDA918B04AFAA",
+      "name": "StaticMeshActor_203",
+      "label": "MPR4_Context_TankField",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "620234efa236aceb81a2980269e2168d90906e73d8ba8947cb33510b9c64c656"
+    },
+    {
+      "guid": "CA57EEA346F9A00ED3E5E39B45AA6AD8",
+      "name": "BP_GHS_InstanceGroup_C_191",
+      "label": "MPR_SM_MPR_StationChute_1_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "f6f2321ba9daeb27eb0c9cadf6fda8759d3d8e658dc02cfd3c764231b90e8acf"
+    },
+    {
+      "guid": "CB41A12B4C6FAFD8078EFDB44CEC9F2B",
+      "name": "BP_GHS_InstanceGroup_C_23",
+      "label": "MPR4_MPR4_DockShelter_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "50f98fc7ede4ffc50703c0a3368b42d96d9381e2d7e84b89cc9b540adbe3f65b"
+    },
+    {
+      "guid": "CB64A1D14E4A7BA7F38FEF84582C9284",
+      "name": "BP_GHS_InstanceGroup_C_176",
+      "label": "MPR_SM_MPR_WorkTable_2_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "a269db60041e6240bea1f37a96033136223912884c1122835776689ad9451919"
+    },
+    {
+      "guid": "CBA04A6741B77F56B7A83A8AF016AFA8",
+      "name": "StaticMeshActor_153",
+      "label": "SM_MPRE_Curblines_-2_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "35e8c0e28ed92d20fe196f7273661ed4c7a8382855dab2cf1568819b2e465ae6"
+    },
+    {
+      "guid": "CBE6448C453AE125A1FA0899147E45A5",
+      "name": "StaticMeshActor_44",
+      "label": "MPR4_SolarBank_02_0",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "903da584e200c2ed997781b0d0719f2a92a968b998c697046bf6ed80aa33fdf9"
+    },
+    {
+      "guid": "CBF2A14249F1F1A1F14AEDBD48C1FDEC",
+      "name": "StaticMeshActor_107",
+      "label": "SM_MPRE_Roads_-3_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "31cfaa795592eb5211966f453b4b8c138c3d61dd8e3d6a769d9c0edce785a09a"
+    },
+    {
+      "guid": "CC3EAE484C36A187F1E095B5956B363E",
+      "name": "StaticMeshActor_180",
+      "label": "SM_MPRE_Curblines_2_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "a4cdeb8f250ff9757360e56e024537f145cdec8db58f67d220a111c240092b09"
+    },
+    {
+      "guid": "CD87EFCC4437D2DF69EBEE9DA6A31C7F",
+      "name": "BP_GHS_InstanceGroup_C_281",
+      "label": "MPR_ColumnBases_0_0",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "26ae19bea39f6ad28a8ff43dabc2ceec0ed6a0d94bfc2c4926e7c64b5174734f"
+    },
+    {
+      "guid": "CD94B81741B5444897F3B6B7FA49AB37",
+      "name": "BP_GHS_InstanceGroup_C_197",
+      "label": "MPR_SM_MPR_SorterOutput_-2_-1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "1bd44240ae9c561ecaddbc391775c317f9fbba3d9173425949c47c19b441e83b"
+    },
+    {
+      "guid": "CE349B1E47DE887E6CB522B0AB9044A1",
+      "name": "StaticMeshActor_123",
+      "label": "SM_MPRE_Roads_0_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "f9fa5e0208defea5b2f70f8f7ed3c83449a235ef85666c999e7e01e1eb6d1d5a"
+    },
+    {
+      "guid": "CEA7B37E478FCE5EBC2328BFA05F3E24",
+      "name": "StaticMeshActor_134",
+      "label": "SM_MPRE_Roads_-4_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "7238b476e13081bead65784d6609af28f4d76603c8bc9f595f9d65d572871f8d"
+    },
+    {
+      "guid": "CEC5A8584B4F2833F5B0E5A7B5519410",
+      "name": "StaticMeshActor_262",
+      "label": "SM_MPRE_RoadDashes_-1_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "7b9f900e0b240a73e801b9fa5df1b932b265d56082f64ea649f19c7f9720b50a"
+    },
+    {
+      "guid": "CECC790D49E21779028ED096AC299B82",
+      "name": "BP_GHS_InstanceGroup_C_140",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-4_0",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "ca0d57e3deaec519709a6c945506a0c38575be98b59072b39bc319eaf249eb4d"
+    },
+    {
+      "guid": "CF4880EF4E04B2D181CFA6A421141D31",
+      "name": "BP_GHS_InstanceGroup_C_170",
+      "label": "MPR_SM_MPR_WorkTable_-2_-2",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "74191b47cbc55115e85cfc71dba30b69a9f628e4695b4faa0864dae9c77f89d7"
+    },
+    {
+      "guid": "CFB26EEE4F2A1DDE4B3DA2B696F3D124",
+      "name": "BP_GHS_InstanceGroup_C_217",
+      "label": "MPR_Racks_-4_-2",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "2517098167da1e043209e29a6efcca8b3270263736c1ad17990b5a39a8f5da9f"
+    },
+    {
+      "guid": "CFCD742B458A088FB2F87BAE2741CC5C",
+      "name": "BP_GHS_InstanceGroup_C_177",
+      "label": "MPR_SM_MPR_ConveyorSupport_-3_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "661676187ae3d2c591c29bf57eaed3faefc51b5a129cc08a7fd680a0780e14df"
+    },
+    {
+      "guid": "CFCDE77B41D6458D45D202B23858C853",
+      "name": "BP_GHS_InstanceGroup_C_151",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-2_5",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "11d0b8032f5d5379fda6f251e6cd10a17a065a1db3f3b97286957cef0c38d17b"
+    },
+    {
+      "guid": "CFEA89A14EDF6454ADBBE48747891741",
+      "name": "StaticMeshActor_116",
+      "label": "SM_MPRE_Roads_-1_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "962112c7cd5ea039991bddfb8edfff7ddb8a18ce73d5727e3e0ebc009dcbf5a0"
+    },
+    {
+      "guid": "D010EC44444E2BDA48893795E42FF326",
+      "name": "BP_GHS_InstanceGroup_C_29",
+      "label": "MPR4_MPR4_RollerDock_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "ae4498359e5d673672e9db90eff72964a80f8cee4023717828dbbd20ccb00576"
+    },
+    {
+      "guid": "D1E1DDCA4CB82465BD5FE3A72D0D6F56",
+      "name": "StaticMeshActor_13",
+      "label": "MPR4_Facade_06",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "10f459477616572c8faa382acc2472a32e27f547d14a92e3d98f67169a24ab69"
+    },
+    {
+      "guid": "D28CA3144AD40B8180E0A6ABE229FC45",
+      "name": "BP_GHS_InstanceGroup_C_58",
+      "label": "MPR4_MPR4_Digit_8_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "959601727c0d0a87b973f6a6d623ff601b04e5a022542f4641fe0e3eefaeee4a"
+    },
+    {
+      "guid": "D2ECE8B94CE837BB50E7F098CA7C353C",
+      "name": "CameraActor_0",
+      "label": "MPR_ReviewCamera",
+      "folder": "MPR/Cameras",
+      "action": "keep_camera",
+      "record_digest": "2b832ff755a517473f93cc1ca217cf54f62bb02fd3651201eef99e7426fe9bcb"
+    },
+    {
+      "guid": "D35735D34B680FCD22D847A5E08D8A70",
+      "name": "StaticMeshActor_46",
+      "label": "MPR4_RoofHVAC",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "61ff35601bf6f3a77f8b886f83f52da472905af312473a727f75dc600885bd4e"
+    },
+    {
+      "guid": "D3761DDC4735EF8CB19DFAB306EAD37C",
+      "name": "BP_GHS_InstanceGroup_C_289",
+      "label": "MPRE_SM_MPR4_Tree_Oak_0_3",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "e584a33de70f697e33af241c3ae7b8d80d1840acae28da467bb9b7eb40124938"
+    },
+    {
+      "guid": "D39EB6A344C2309F2E7A20BCFD4659E5",
+      "name": "StaticMeshActor_238",
+      "label": "SM_MPRE_WhiteEdges_1_-5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "73d116a119a22e1038d46204f1003a9e8a86115b75c176391f5be736ed772f92"
+    },
+    {
+      "guid": "D3FF21A2411516EED0B3B8A322855596",
+      "name": "StaticMeshActor_122",
+      "label": "SM_MPRE_Roads_0_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "b5791e9e58f1a967379a474bf2c01a025a7f2893a3f8d1851591634e42f71709"
+    },
+    {
+      "guid": "D45F628B4D9CE31AE1BE57834E29E93B",
+      "name": "BP_GHS_InstanceGroup_C_406",
+      "label": "MPR4_MPR4_Tree_Oak_4_-2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "8282d9feb3b6cd4f26a70625a17c6ccb39e4ac895597af0f843c2f749a51020f"
+    },
+    {
+      "guid": "D4E2E5324EA484A4908E05AB6FA43F58",
+      "name": "BP_GHS_InstanceGroup_C_129",
+      "label": "MPR4_MPR4_Tree_Oak_2_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "001e57e4760206edd4027f4fcf5556ef322369ceef3100a7721705b8f21ba428"
+    },
+    {
+      "guid": "D59965704746B0EFAC93B19A97D6BB21",
+      "name": "BP_GHS_InstanceGroup_C_410",
+      "label": "MPR4_MPR4_Tree_Oak_4_2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "b0f9a051503d31c566c77a32b8eef8a04cecba21b43256a81fec4e39a8538033"
+    },
+    {
+      "guid": "D6D13E164605395368CDDBB11603E1B3",
+      "name": "StaticMeshActor_20",
+      "label": "MPR_OfficeGlazing",
+      "folder": "MPR/Architecture",
+      "action": "keep_interior",
+      "record_digest": "2c71bda1c5e0b312b5c2b6125ec9b7c8b70762d97b4c85df4183f4804d53fc2a"
+    },
+    {
+      "guid": "D6D1F3B34850DCA11E9DEA89FBAFA07E",
+      "name": "BP_GHS_InstanceGroup_C_284",
+      "label": "MPR_ColumnBases_1_0",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "183caf6ebdf653499d57856c3162f0537587a6aff5780156f5f917ceac2df6c1"
+    },
+    {
+      "guid": "D83381A545BA9332E5DF55A5C898B363",
+      "name": "StaticMeshActor_85",
+      "label": "SM_MPRE_Rail_-2_-4_Sleepers",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "7eee32ecd93569e5ee794dbe6f86f840faa661dca6f1f867dbba4a5b04adc3ae"
+    },
+    {
+      "guid": "D93CDFAC46C084B99D84DC8E8958FF21",
+      "name": "BP_GHS_InstanceGroup_C_208",
+      "label": "MPR_SM_MPR_Turn_e3_-1_-2",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "480bbbf145c0847ea5d967ae321368500d2aa6bcf0c2ece13d06a530236d3b35"
+    },
+    {
+      "guid": "D94E83D74348D6EAC0A8FA81C8592741",
+      "name": "BP_GHS_InstanceGroup_C_16",
+      "label": "MPR4_MPR4_Digit_0_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "f098c16b78aa0f5a6989885827e1f572863aaec9c5301a5e97faddb7050120cf"
+    },
+    {
+      "guid": "D99BF0EE48DA4BC9F762D19C8E984ACC",
+      "name": "StaticMeshActor_211",
+      "label": "SM_MPRE_WhiteEdges_-5_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "c8733525596d611f4fd31a1c599326a60a1681324097eabcb299577c18addf6b"
+    },
+    {
+      "guid": "DAEEDB0D4EBF6B598FF2FE88A9919E61",
+      "name": "BP_GHS_InstanceGroup_C_120",
+      "label": "MPR4_MPR4_Tree_Oak_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "5d682531408e3744e1bfdb1c1104b32b0d13086b179e0591f8cd8f3c01233a59"
+    },
+    {
+      "guid": "DAF7BD894E78BDB01ABA999E755F1809",
+      "name": "BP_GHS_InstanceGroup_C_3",
+      "label": "MPR4_MPR4_WallLamp_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "60a5c2d0eebc7504c622b0ab9b919e50a89978f06edb349ad6724a9da14a8d64"
+    },
+    {
+      "guid": "DB7C72694BFA825EFB70E0B6FF4FACBD",
+      "name": "StaticMeshActor_260",
+      "label": "SM_MPRE_RoadDashes_-2_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "3ec2551bfc59bde4aae02db70671e6cc550a3b8b4b07042419e7aeea7a5ffa3c"
+    },
+    {
+      "guid": "DB8079D74D855BA40088248D2DD343C0",
+      "name": "StaticMeshActor_292",
+      "label": "SM_MPRE_Context_-3_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "aed1f7f71ba682d38a806ae0d0c26b358f3303bc1e86ba5af8b34a9321e32c83"
+    },
+    {
+      "guid": "DB91827E43D2EA6BA22B9A91F27E7936",
+      "name": "StaticMeshActor_225",
+      "label": "SM_MPRE_WhiteEdges_-2_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "e5bbf8e9d95592c92d01ba38fea3824f691b9e8b180e710b1a445c1bccdf5fb4"
+    },
+    {
+      "guid": "DD7C82D34E183381DFE7D4BE22C90B02",
+      "name": "StaticMeshActor_10",
+      "label": "MPR4_RoofEdge_04",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "34d794a97a16c0aca4b6a437e96b65475cc3134eaaac0fbc62d32846151ff40b"
+    },
+    {
+      "guid": "DE0822984276E7BF7E0394B02517067C",
+      "name": "StaticMeshActor_112",
+      "label": "SM_MPRE_Roads_-2_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "ea702035e21cc9fabbc4a18c0108e868f718aeb0572d730004bfd0e9c77594b5"
+    },
+    {
+      "guid": "DE77999F4687B408060FB1967E7C44F0",
+      "name": "BP_GHS_InstanceGroup_C_6",
+      "label": "MPR4_MPR4_Bollard_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "98b746c5cb4cd5c8e0ffb46d933da5624eed5f0f65efdca868ba3b174b669237"
+    },
+    {
+      "guid": "DF453AC5405C6DC8E0996283B67FB97A",
+      "name": "StaticMeshActor_9",
+      "label": "MPR4_Facade_04",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "2f3a164876e747a3d140eb4c1dca972dcf4fe8828d0ba3cbe87a6dc3b76e1a05"
+    },
+    {
+      "guid": "DF66229D495866AB1143C7A119642833",
+      "name": "StaticMeshActor_281",
+      "label": "SM_MPRE_Context_-4_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "cc65df7ed7c2bd5fe79bbed92d4ea0e8e1c21d66a87538aceb5239ad2914b725"
+    },
+    {
+      "guid": "DF736B0F49B63B7958C7FC98143D9135",
+      "name": "StaticMeshActor_177",
+      "label": "SM_MPRE_Curblines_1_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "a40d6c1b579c07b7ee419538815e5e33490e332608cdf85847fec8463c761666"
+    },
+    {
+      "guid": "DFCB677D4ED4E485C57BF1BACF762197",
+      "name": "StaticMeshActor_70",
+      "label": "MPR4_Site_TrailerStands",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "92e4ef677a091a692c275c544624b114c27617133e652f12f815c7a2aaf3e127"
+    },
+    {
+      "guid": "E063AEAB479223362D639E88936FECDA",
+      "name": "BP_GHS_InstanceGroup_C_229",
+      "label": "MPR_Racks_0_-2",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "d2edc4836e6df6fd42ff5b0dae1250d0cc8fa89f46dc620509d377b133eb4805"
+    },
+    {
+      "guid": "E0F32533491DAE4C3587049F13400DAC",
+      "name": "StaticMeshActor_270",
+      "label": "SM_MPRE_Context_-2_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "00d024c23cbbfcc5cb4809ac9e479e80b010c6979e53ccd11f38f1764e124ad0"
+    },
+    {
+      "guid": "E0F385EB4A55E6323AB62EB960F162C9",
+      "name": "BP_GHS_InstanceGroup_C_41",
+      "label": "MPR4_MPR4_Digit_3_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "7d8c67f08d1830239b400403481939f3a08ac9bce84032f0dea6d95f44e8f7c9"
+    },
+    {
+      "guid": "E12EBB5F4CA9917E8856B08BD177D358",
+      "name": "StaticMeshActor_191",
+      "label": "MPR4_Context_northwest_l_office",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "b95f673c8ae389685e903381fa35b3957c1d03bc5710e19c9e67762638d270a5"
+    },
+    {
+      "guid": "E1DDF6CF436B1C8753A1B99EFD9D8B64",
+      "name": "StaticMeshActor_221",
+      "label": "SM_MPRE_WhiteEdges_-3_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "ea711a50f2b3f302e47fc741732f8d4128d8d140e1abfc17105d49cd80021952"
+    },
+    {
+      "guid": "E210149B40E567E214ABB1B1FE794798",
+      "name": "BP_GHS_InstanceGroup_C_102",
+      "label": "MPR4_MPR4_Trailer_Coral_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "e4302e85ca9633fe849e1b782a7cfe0aa922bc50caab0728fdd98b1393afd8b0"
+    },
+    {
+      "guid": "E2F402CE466DA323B7D3BB9BD7C2ADE5",
+      "name": "StaticMeshActor_124",
+      "label": "SM_MPRE_Roads_1_-5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "510ed2f7aead55cdf829484de6cb16b96483df2fb9271ec5e1293523ed97908b"
+    },
+    {
+      "guid": "E31471D64A16909FD8B813B687746A11",
+      "name": "StaticMeshActor_167",
+      "label": "SM_MPRE_Curblines_-1_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "8be561f735ce856cac94fc592d9ddafc9238d3001c3cf4e4f24770dcffe449f8"
+    },
+    {
+      "guid": "E32B3BAE4C770BDBD789FF947753A66B",
+      "name": "BP_GHS_InstanceGroup_C_12",
+      "label": "MPR4_MPR4_DockNumberPlate_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "a1a83254c5efa1990b458d5c7b5b71616a3a0d0dbc2c05ac07c0f22c792d966b"
+    },
+    {
+      "guid": "E338A8664BB3F170B4699ABF9513D78C",
+      "name": "StaticMeshActor_274",
+      "label": "SM_MPRE_Context_1_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "13a261140c6a4c04e8e5ff8e645c4d5a1708a12ef720a20b3143b45d94b74070"
+    },
+    {
+      "guid": "E3BF2FF7469209DB4BB394AF97694D07",
+      "name": "BP_GHS_InstanceGroup_C_136",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-5_-1",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "88da5317ebc26990d94fcd79b25d3efc3860434782feab73a74cf208587161d7"
+    },
+    {
+      "guid": "E3CB6E8C44821334BA1F018765757118",
+      "name": "StaticMeshActor_217",
+      "label": "SM_MPRE_WhiteEdges_-4_0",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "ec91f125e6653d3ef0a3a7c43869cf0bac2c8dce6983ad1cc4bd036a6ad422f2"
+    },
+    {
+      "guid": "E3E0EFBE42B3968C7203879342428B96",
+      "name": "BP_GHS_InstanceGroup_C_266",
+      "label": "MPR_Columns_1_0",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "412d644c71c8aafc5fcb6c63b0b5ca004c2b870c46e53b696bef1888eaf8e874"
+    },
+    {
+      "guid": "E50FFCCE42FE7C6E2742C7AB221A3CAB",
+      "name": "StaticMeshActor_192",
+      "label": "MPR4_Context_north_office_warehouse",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "a215d88385f13787443c454aee53c2b0279ac1ba4d69e92dffdc64f15284b57a"
+    },
+    {
+      "guid": "E5EB58A1419E8C7EF2EB0E86F059256F",
+      "name": "StaticMeshActor_286",
+      "label": "SM_MPRE_Context_-4_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "8163cf2346fc675a555c6bed0802921205f20f928ab83e066f9486c50f9866fe"
+    },
+    {
+      "guid": "E63B3C4C49E27B66DF591082169B592E",
+      "name": "BP_GHS_InstanceGroup_C_147",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-2_-3",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "aec565e4ae671b44a882d6e7ad5d5694b28d5e59312bd67b64aa5fb29a014b4b"
+    },
+    {
+      "guid": "E779EBE84F358F0D7B66469CC06DB46F",
+      "name": "BP_GHS_InstanceGroup_C_149",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-2_3",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "3bb7ecff565377819066904314be03a55833a8f99acb23d652dc09ece3cd5380"
+    },
+    {
+      "guid": "E7CC23C8462E1F09430AF5AD5A98F5DF",
+      "name": "StaticMeshActor_245",
+      "label": "SM_MPRE_WhiteEdges_2_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "4697739afdfa143061ceaea72d6ed77e5b32ed0a70ff466bf7af988c580ab792"
+    },
+    {
+      "guid": "E7E0D27F4DA0D336FF08638977813577",
+      "name": "StaticMeshActor_115",
+      "label": "SM_MPRE_Roads_-1_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "9392cd98a3e03af712bd823e922c300b3ff7b0b66f032d8a5a4bf2f35be9d0cf"
+    },
+    {
+      "guid": "E80518F54372A49D8E3F2A94CEBB391E",
+      "name": "BP_GHS_InstanceGroup_C_22",
+      "label": "MPR4_MPR4_DockShelter_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "7b1206f9965b19b99ada14fa66308b84acabd57479c5aa9339a1acabee4b3a50"
+    },
+    {
+      "guid": "E88DE0AA40A1A7EC9B9AB4A1397518AA",
+      "name": "BP_GHS_InstanceGroup_C_231",
+      "label": "MPR_Racks_0_0",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "704147d2d872a05f29556cc9be49f0dbb0c8622d70dd71ad8cd895b862ad737b"
+    },
+    {
+      "guid": "E8B2474046E7EFA7C6926DA168EBE5C9",
+      "name": "BP_GHS_InstanceGroup_C_240",
+      "label": "MPR_Racks_2_1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "ca3221150795bfb4df756d9906451fc3c519432d53041d2f8719f10cd9eddd59"
+    },
+    {
+      "guid": "E8BBE32E40FFB9F7A8977895E74364F8",
+      "name": "BP_GHS_InstanceGroup_C_92",
+      "label": "MPR4_MPR4_Trailer_White_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "d30f3ef45f069d99ce82b1876c0532c36bb7d15760af686ebf3b65af37d57b89"
+    },
+    {
+      "guid": "E8F8C6A44BBDC70B5D283D85312A5B32",
+      "name": "StaticMeshActor_224",
+      "label": "SM_MPRE_WhiteEdges_-2_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "9f14417157ae4b6a0f6831755eb3641ce9858e404f9996a0ccbc94000611d3a1"
+    },
+    {
+      "guid": "E90B316040A6552FBC05789F370F4A97",
+      "name": "BP_GHS_InstanceGroup_C_186",
+      "label": "MPR_SM_MPR_StationChute_-2_-2",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "d95204ad1da81424692646c9babb85aa90e62271c2daebc96174cb20c99e061b"
+    },
+    {
+      "guid": "E9895B61467C9CA14C50A18024E8D9FB",
+      "name": "StaticMeshActor_7",
+      "label": "MPR4_Facade_03",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "5aa6b5301b6c5022db75d0efc344b9fd5e3a2ad531fa4348480311640448bd1e"
+    },
+    {
+      "guid": "EAE7A20841112DAE01BA0395014B0849",
+      "name": "BP_GHS_InstanceGroup_C_24",
+      "label": "MPR4_MPR4_DockShelter_0_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "08c23e2f959de9ae40dceac917f8f208f0f45fe2d31956e9fb07b9445866fcd4"
+    },
+    {
+      "guid": "EAE8C13846923DF5125D56859AC3F02F",
+      "name": "BP_GHS_InstanceGroup_C_109",
+      "label": "MPR4_MPR4_Tree_Oak_-3_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "6ea71ad5d659a0d5cefd8c92293a33115c88e64e076d6bd560c6496e65770e10"
+    },
+    {
+      "guid": "EC126B4B433DCE94B47183927D23EC3F",
+      "name": "BP_GHS_InstanceGroup_C_122",
+      "label": "MPR4_MPR4_Tree_Oak_0_2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "8337da533f7bbebb9ed8bc9564aa809384bec2277cc51c43e3165cd2614ceaa4"
+    },
+    {
+      "guid": "EC60CDBC43EDBEF99DFFDCA50BC5BA62",
+      "name": "BP_GHS_InstanceGroup_C_146",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-2_-4",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "d5756b2f2a6e51ae612ab91b9571beebb8d71e5f3ce41a12799e475e2994138d"
+    },
+    {
+      "guid": "ECD6E1514CCD4E37423ADFB1DE4B6709",
+      "name": "BP_GHS_InstanceGroup_C_174",
+      "label": "MPR_SM_MPR_WorkTable_0_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "4f95f6511eab09bbf40d8aa09cc9a1ac311148f0cdb8afbf4d94e74039eb2cce"
+    },
+    {
+      "guid": "ED016F9E41D0A2D67ADE1498716FCFD7",
+      "name": "StaticMeshActor_25",
+      "label": "MPR4_Facade_11",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "a4e48e597b49d0c4e0f18bea7f764d597ebceb35d137ca3abfb87c57f7b425c4"
+    },
+    {
+      "guid": "EF3726334CEDD6D5AE801F9DCCD450B0",
+      "name": "StaticMeshActor_119",
+      "label": "SM_MPRE_Roads_-1_4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "8c81e6ddc1d1874fdcee525aa8abc7e39db681c132b10992e908bf577a6c945e"
+    },
+    {
+      "guid": "EFD270D441109461A6705EBF652FC014",
+      "name": "BP_GHS_InstanceGroup_C_242",
+      "label": "MPR_Racks_192_1_-1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "df08b5932ca852b3f8e819004338c5eb07f0b4a870a8353dda689ff463e1da32"
+    },
+    {
+      "guid": "EFDEFDDB445565DDE55AAC9BE016B61F",
+      "name": "StaticMeshActor_31",
+      "label": "MPR4_Facade_14",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "439a5436e97b8340bf61cfbe6237ed3d2fa32b34bceb21d7aadaaeda9ff13a88"
+    },
+    {
+      "guid": "F0074808453AB3E4D80AC6BBD87CE89F",
+      "name": "BP_GHS_InstanceGroup_C_141",
+      "label": "MPRE_SM_MPR4_Tree_Oak_-4_1",
+      "folder": "MPR/ExtensionB50B57/Vegetation",
+      "action": "remove_old_exterior",
+      "record_digest": "c910cc5a1d097120418964de0c449e5f9a10bde157567d5abda98733663806d1"
+    },
+    {
+      "guid": "F0CAECE04685E2FFDAFC4F82409DFF27",
+      "name": "BP_GHS_InstanceGroup_C_270",
+      "label": "MPR_ColumnBases_-3_-2",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "86ea111a00e7472c4c6efbd2224dad907298c9d8ce408ef5c8544e09e9815bf9"
+    },
+    {
+      "guid": "F122C86B488E448DF4AB329A822D244F",
+      "name": "StaticMeshActor_82",
+      "label": "SM_MPRE_Rail_-1_-4_Rails",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "fb69263f3438b62550663b2825a0078c49e265b67a0743eb311ba081a470fc5c"
+    },
+    {
+      "guid": "F18919E244806B47C144B0A38AD2DE6E",
+      "name": "StaticMeshActor_172",
+      "label": "SM_MPRE_Curblines_0_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "9039483d8da0127a72fa2ddb0af10a9114efbe344bbdebf57a0a4ed533765e0f"
+    },
+    {
+      "guid": "F1A3A30C45B682BA75B0E2BE8084DF4E",
+      "name": "StaticMeshActor_164",
+      "label": "MPR4_Context_Houses_-3_-1",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "3e39bd653cb2e26f6bd175baad16dcd27a773daa03c7f016a19f5b10d0012571"
+    },
+    {
+      "guid": "F1DE73014E2734BE8F23499CBBD1FA8E",
+      "name": "BP_GHS_InstanceGroup_C_180",
+      "label": "MPR_SM_MPR_ConveyorSupport_-2_1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "b7f6b66978cbd5a92fcc0da60cb9cab6d5e4b81985db00a14157c30584f75f48"
+    },
+    {
+      "guid": "F25E5CD24B9122449A76C3A8B73E3F06",
+      "name": "BP_GHS_InstanceGroup_C_95",
+      "label": "MPR4_MPR4_Tractor_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "a12c5a03c149eaac4e4c580b289c484c01a5122daaf01d4ff6a41dc146d8b149"
+    },
+    {
+      "guid": "F36B79B14CDB2912AA5D75A92BFDFAF1",
+      "name": "StaticMeshActor_8",
+      "label": "MPR4_RoofEdge_03",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "b8411f8cbf30c02644946d5494ff9c7f348a37968f050f925c75a54e7c6a5790"
+    },
+    {
+      "guid": "F3F035C6471AB9C18335DCA63276BE17",
+      "name": "BP_GHS_InstanceGroup_C_98",
+      "label": "MPR4_MPR4_Trailer_Blue_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "da6b21b366e6c4ae969310996c4eecd09ca48eeb5684f26cbe31c68a9f09c0a7"
+    },
+    {
+      "guid": "F405335444A2DAA8C28BC8B8F228B221",
+      "name": "BP_GHS_InstanceGroup_C_114",
+      "label": "MPR4_MPR4_Tree_Oak_-2_1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "ed901936d911a10901889ae5181614679e4df35efae40eb9ad66e21eb5f2bea6"
+    },
+    {
+      "guid": "F45455B74738E9E3158416B206ABE581",
+      "name": "StaticMeshActor_194",
+      "label": "MPR4_Context_west_workshop_small_01",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "1cd96dd2a75b13cb183a5e69cce9b3d506deef1b589845c60d41182cde371bc0"
+    },
+    {
+      "guid": "F49F2ECF41CF99581CD213BB9CB18CAF",
+      "name": "StaticMeshActor_28",
+      "label": "MPR4_RoofEdge_12",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "a491eb6c0ee0f74d6f4436a7dcaeabd7c2ab703c6c451451b520402ed44573d2"
+    },
+    {
+      "guid": "F4A92065457168E4E1B3C18C31AA935C",
+      "name": "BP_GHS_InstanceGroup_C_31",
+      "label": "MPR4_MPR4_DockLeveller_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "7ca5b1cc16d410bca3e8be627ee27cff7b6005319cce676b7ce0ac0de426926a"
+    },
+    {
+      "guid": "F50116C248AD623570A98C8682FB2A80",
+      "name": "BP_GHS_InstanceGroup_C_133",
+      "label": "MPR4_MPR4_Tree_Oak_3_-2",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "720962935f3033f87678221a7876d5726a578bb255ea92ee31feb27ca7b47e50"
+    },
+    {
+      "guid": "F52682654EB2EBF85783079355E702AB",
+      "name": "BP_GHS_InstanceGroup_C_89",
+      "label": "MPR4_MPR4_Locomotive_1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "c30c1d86ba1eb29931d1174eb6bec401b8f8f1bbda34f000312aed61b3ad5702"
+    },
+    {
+      "guid": "F56BC8E940854415FC140196278D72C8",
+      "name": "StaticMeshActor_5",
+      "label": "MPR4_Facade_02",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "af0be40110ea82e9175f543e13dc9e9ea74cbde05758260735f4822ead6a3220"
+    },
+    {
+      "guid": "F580466948751FE1C862BFA00121873F",
+      "name": "StaticMeshActor_254",
+      "label": "SM_MPRE_RoadDashes_-4_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "f1cff9e70f306060fd41a692040d708e6b75a4a0edfb8f2a28d49132a831e7d9"
+    },
+    {
+      "guid": "F583DFC847BF329E27458A8DC8157DEF",
+      "name": "BP_GHS_InstanceGroup_C_62",
+      "label": "MPR4_MPR4_Digit_9_-1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "0495cff29b3c85c5b8d655da1c3fe36cd0c213365b6cd2a879b156f2a30e490b"
+    },
+    {
+      "guid": "F5B4B3C941F07605E9212284F1D13B1B",
+      "name": "BP_GHS_InstanceGroup_C_11",
+      "label": "MPR4_MPR4_DockNumberPlate_-1_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "88a6b69582254cfe6d038537a471b4d187e8ddd8d795cf3f9e73e162ff1c0e9b"
+    },
+    {
+      "guid": "F6677AB74E989CEC28D3C0B2BC78D202",
+      "name": "BP_GHS_InstanceGroup_C_57",
+      "label": "MPR4_MPR4_Digit_7_0_0",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "keep_main_attachments",
+      "record_digest": "98371df19e991c8a2eb6bd4ec55b452a6f4e707c0730b842029c035d2df5b678"
+    },
+    {
+      "guid": "F6D8A08E46C9262E2B08B699F9E7803D",
+      "name": "StaticMeshActor_206",
+      "label": "MPR4_StudioSky",
+      "folder": "MPR/ReferenceV4/Lighting",
+      "action": "keep_lighting",
+      "record_digest": "1d26e581a143622d39345e11e381e16c62b2f10116d527a137612e6eefdc25fd"
+    },
+    {
+      "guid": "F6DE10CB43C4E765BC4B519CFC7BC795",
+      "name": "StaticMeshActor_40",
+      "label": "MPR4_OfficeGlazing_East",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "7c269dcf6bf915cb2712cc1084facb7105deee77e524b2baf973795ab9b02978"
+    },
+    {
+      "guid": "F76BFC10446EE1B5BDAD54AF48E9B545",
+      "name": "StaticMeshActor_241",
+      "label": "SM_MPRE_WhiteEdges_1_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "6b7eae58acae5722ce63ed33c5d1e6eb23c1b2874c6b02f9a9ac4a87b0c30a18"
+    },
+    {
+      "guid": "F7F638D244CBB30158D3859FED25FAEA",
+      "name": "StaticMeshActor_204",
+      "label": "MPR4_Context_TankPads",
+      "folder": "MPR/ReferenceV4/Context",
+      "action": "remove_old_exterior",
+      "record_digest": "3efbd813ee5c37e69b383a09fe8a0d38b94d9f331bc94895cc30fc7e96c67c7c"
+    },
+    {
+      "guid": "F8012F2F4DA6EF06FEDE49A64F3CFCEB",
+      "name": "BP_GHS_InstanceGroup_C_271",
+      "label": "MPR_ColumnBases_-3_-1",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "94b92a84e52583ea35aa80643031b2653ae1070200ecffce39972800dc4a3e3b"
+    },
+    {
+      "guid": "F8DB86484B1689EA67E06FBF9547CE8D",
+      "name": "BP_GHS_InstanceGroup_C_88",
+      "label": "MPR4_MPR4_Locomotive_1_-1",
+      "folder": "MPR/ReferenceV4/Props",
+      "action": "remove_old_exterior",
+      "record_digest": "b156c7af2a428b7cdcc256d2a5be017a4df90e65c6f7ce6f785d6855664be832"
+    },
+    {
+      "guid": "F8F66A624BD97D05CC40D3B3BBAF6E2E",
+      "name": "BP_GHS_InstanceGroup_C_230",
+      "label": "MPR_Racks_0_-1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "a1df8aeba00a5e32076e0492ce66277699f4da4c2bbb2506bd5a0103ddf48980"
+    },
+    {
+      "guid": "F985A90D4BBCE53C084C42B600826F4C",
+      "name": "StaticMeshActor_144",
+      "label": "SM_MPRE_Curblines_-4_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "c48b718b2c4fd3551f9f86a1472aec50472c694c5cb18122997f20928ae0e13e"
+    },
+    {
+      "guid": "FA6010A941904E59838906AB8B18294E",
+      "name": "BP_GHS_InstanceGroup_C_219",
+      "label": "MPR_Racks_-3_-1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "dd798acdcaa0342933f199e6b29a061339c67abb113cfec18893e532d7ed53d9"
+    },
+    {
+      "guid": "FAD00F004D6AFDEE6CC10488819683E4",
+      "name": "DirectionalLight_0",
+      "label": "MPR4_KeyLight",
+      "folder": "MPR/ReferenceV4/Lighting",
+      "action": "keep_lighting",
+      "record_digest": "64b5f72215be8f1fa48cf6ab4755927ee39f5973a80aede73e7ddf570dcaf0e0"
+    },
+    {
+      "guid": "FAE030DD4EF2A01237A88AB123C77676",
+      "name": "StaticMeshActor_138",
+      "label": "SM_MPRE_Roads_3_2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "0a3c60692bd6e019b47051ea4adf05293a6ac4e07826ede25726d9dfa1cff475"
+    },
+    {
+      "guid": "FB014FDB4C9FD4DDF85E86B52E6652B8",
+      "name": "BP_GHS_InstanceGroup_C_178",
+      "label": "MPR_SM_MPR_ConveyorSupport_-3_1",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "4a63f0db499948bdbf669162b37b8dc6d88a211481d9da86ab36e6db685d8242"
+    },
+    {
+      "guid": "FBE5AD464C0865268901859240757368",
+      "name": "StaticMeshActor_287",
+      "label": "SM_MPRE_Context_-4_-3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "5c728239393963bf3bcf34cceacbc219049a3931decc8e5211c1d6ea9ed42d16"
+    },
+    {
+      "guid": "FC636BD74AA54827F8FED0908B1B37A2",
+      "name": "BP_GHS_InstanceGroup_C_273",
+      "label": "MPR_ColumnBases_-2_-2",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "1b1deb93b3bcca774532a94bb894a1dd5c7f6c0108c8cdf3daea077c37092e6f"
+    },
+    {
+      "guid": "FC6731484C0DD3918CDF869C12838E80",
+      "name": "StaticMeshActor_178",
+      "label": "SM_MPRE_Curblines_2_-5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "f645748eed9f07323bb5fe32555243d1509b11076f2dbe6eb459f2cca77840c5"
+    },
+    {
+      "guid": "FCC2456D44B532AB85F54BA23B9CECF8",
+      "name": "StaticMeshActor_127",
+      "label": "SM_MPRE_Roads_1_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "dd4b6c712a4cb5ff0e0e0d56b235a899e0e3fb1242830013234cb24997295cc6"
+    },
+    {
+      "guid": "FCD209E74490BEAD218E1DA71303F773",
+      "name": "StaticMeshActor_207",
+      "label": "SM_MPRE_Curblines_-2_-4",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "9ddb853ede553a998ec9459921629bbc8c3cbbb3f3afe1a096ce5268ca9a04fc"
+    },
+    {
+      "guid": "FE095DE640F075870EB070B7685DF9F9",
+      "name": "BP_GHS_InstanceGroup_C_241",
+      "label": "MPR_Racks_192_0_-1",
+      "folder": "MPR/Storage/Racks",
+      "action": "keep_interior",
+      "record_digest": "5ba8d996ac16ad7de6fd9627243ab38beb53b360d88d0153316ccc079cfc58da"
+    },
+    {
+      "guid": "FE0E060C4C072CE78B0C37BE4CAEF4B1",
+      "name": "StaticMeshActor_140",
+      "label": "SM_MPRE_Curblines_-5_-2",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "830a32935909d91a7fe0a538ec9b6ab8d0f7875b40fe06c5857be3fe4e06fa2f"
+    },
+    {
+      "guid": "FE2084E84CC3248DD8F66288AFE2A577",
+      "name": "StaticMeshActor_137",
+      "label": "SM_MPRE_Roads_3_3",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "7bc01c3dd47f7a7cce057ce24c6e395e245397dd66b0fdf54546da7fa75875b4"
+    },
+    {
+      "guid": "FE2ED2F64B0A723C738694A024703DB7",
+      "name": "StaticMeshActor_21",
+      "label": "MPR4_Facade_09",
+      "folder": "MPR/ReferenceV4/Architecture",
+      "action": "keep_main_shell",
+      "record_digest": "414236b0f3804c01438f4cfbe523ed1fed43ab88f0f7a9ed6893f077a21e986b"
+    },
+    {
+      "guid": "FE3089024F681DB7A8A70A89EB33B792",
+      "name": "StaticMeshActor_103",
+      "label": "SM_MPRE_Roads_-4_0",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "0f3e961bb798c2400989b5db15066c29e3b795fbe061a57105aba1e8ee616b54"
+    },
+    {
+      "guid": "FE644C0341D24B60DF3F82BC78071547",
+      "name": "BP_GHS_InstanceGroup_C_179",
+      "label": "MPR_SM_MPR_ConveyorSupport_-2_-2",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "f7a3a8e00f631d914b4933a65d77fc0f62cf511471d23a884d266203b3fdcb7f"
+    },
+    {
+      "guid": "FEDEA0D248263C4B4A6835A0B59830D0",
+      "name": "BP_GHS_InstanceGroup_C_184",
+      "label": "MPR_SM_MPR_StationChute_-3_0",
+      "folder": "MPR/Operations",
+      "action": "keep_interior",
+      "record_digest": "f395f8a3f6573ee98e1b3308fe6460003d667907d4e7ba00672bb05780585407"
+    },
+    {
+      "guid": "FF01246847852615309D4C8990136EF7",
+      "name": "BP_GHS_InstanceGroup_C_286",
+      "label": "MPR_ColumnBases_2_-1",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "9816426193e763a4209cee5e94f8d4476e43d2dc75077aeada466ba5e9ac4ddf"
+    },
+    {
+      "guid": "FF66DE964E36E3D18DD759B385E7D9AA",
+      "name": "StaticMeshActor_128",
+      "label": "SM_MPRE_Roads_2_-5",
+      "folder": "MPR/ExtensionB50B57/Geometry",
+      "action": "remove_old_exterior",
+      "record_digest": "dac919010deadd306874f72186cb491ec1c8005508fbb29c92aada2f1ceb7cba"
+    },
+    {
+      "guid": "FF7D839E4320C62B4FACEFBBE33E724F",
+      "name": "BP_GHS_InstanceGroup_C_67",
+      "label": "MPR4_MPR4_RoofLight_-1_0",
+      "folder": "MPR/ReferenceV4/Architecture/RemovableRoof",
+      "action": "keep_main_shell",
+      "record_digest": "36eea5cb22c3658cc0b66bd2a4d700f43a56e44fcba3f1430641531308c09cff"
+    },
+    {
+      "guid": "FFDAD1B74750F4D32045988E31FE1D72",
+      "name": "StaticMeshActor_63",
+      "label": "MPR4_Site_Far_S_RailBed",
+      "folder": "MPR/ReferenceV4/Site",
+      "action": "remove_old_exterior",
+      "record_digest": "194507d33633e57f72d8ea6bb4d80139036ed5d804f97cce1cd6b96e0253f983"
+    },
+    {
+      "guid": "FFE48742430B660D74CC79850DEA628B",
+      "name": "BP_GHS_InstanceGroup_C_285",
+      "label": "MPR_ColumnBases_2_-2",
+      "folder": "MPR/Architecture/Columns",
+      "action": "keep_interior",
+      "record_digest": "ac9c19e5e77e8d7f358b2721078afa98552a9101415c02c06de7412d25b60389"
+    }
+  ]
+}

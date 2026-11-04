@@ -1,0 +1,10 @@
+# Manifests and audit records reference exact bytes; preserve them on checkout.
+*.json -text whitespace=trailing-space,space-before-tab,cr-at-eol
+*.txt -text -whitespace
+*.png -text
+*.fbx -text
+*.blend -text
+*.gz -text
+*.md -text whitespace=trailing-space,space-before-tab,cr-at-eol
+*.log -text whitespace=trailing-space,space-before-tab,cr-at-eol
+*.svg -text whitespace=trailing-space,space-before-tab,cr-at-eol

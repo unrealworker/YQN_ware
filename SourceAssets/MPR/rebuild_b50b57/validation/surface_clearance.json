@@ -1,0 +1,903 @@
+{
+  "success": true,
+  "method": "Binary FBX + Shapely STRtree + float64 triangle planes",
+  "scope": "Every saved triangle centroid and three edge midpoints; no native ray precision dependency",
+  "assets_saved": false,
+  "groups": {
+    "asphalt_over_actual_terrain": {
+      "objects": 68,
+      "triangles": 54060,
+      "samples": 216240,
+      "opaque_samples": 200815,
+      "outer_fade_samples": 15425,
+      "covered_by_crossing_samples": 0,
+      "missing_reference_samples": 0,
+      "boundary_tolerance_samples": 32,
+      "minimum_opaque_clearance_m": 0.07999658203956783,
+      "minimum_outer_clearance_m": 0.07999997863586494,
+      "failures": 0,
+      "worst_samples": [
+        {
+          "mesh": "SM_MPRR_Roads_-3_3",
+          "triangle": 731,
+          "sample": "edge20",
+          "xyz_m": [
+            -392.29368591308594,
+            552.7372741699219,
+            0.7829208672046661
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999658203956783
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_3",
+          "triangle": 756,
+          "sample": "edge01",
+          "xyz_m": [
+            -392.29368591308594,
+            552.7372741699219,
+            0.7829208672046661
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999658203956783
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_4",
+          "triangle": 36,
+          "sample": "edge20",
+          "xyz_m": [
+            -361.04833984375,
+            615.5311279296875,
+            1.1305018067359924
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999662702440924
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_4",
+          "triangle": 44,
+          "sample": "edge20",
+          "xyz_m": [
+            -361.04833984375,
+            615.5311279296875,
+            1.1305018067359924
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999662702440924
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_3",
+          "triangle": 731,
+          "sample": "centroid",
+          "xyz_m": [
+            -392.8197530110677,
+            552.656514485677,
+            0.7270614107449849
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999699160092821
+        },
+        {
+          "mesh": "SM_MPRR_Roads_1_-2",
+          "triangle": 367,
+          "sample": "edge12",
+          "xyz_m": [
+            190.6082000732422,
+            -227.93679809570312,
+            -3.252740502357483
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999699232142587
+        },
+        {
+          "mesh": "SM_MPRR_Roads_1_-2",
+          "triangle": 364,
+          "sample": "edge01",
+          "xyz_m": [
+            190.6082000732422,
+            -227.93679809570312,
+            -3.252740502357483
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999699232142587
+        },
+        {
+          "mesh": "SM_MPRR_Roads_1_-2",
+          "triangle": 365,
+          "sample": "edge01",
+          "xyz_m": [
+            190.45359802246094,
+            -228.9990463256836,
+            -3.254846215248108
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999700780234908
+        },
+        {
+          "mesh": "SM_MPRR_Roads_1_-2",
+          "triangle": 367,
+          "sample": "edge01",
+          "xyz_m": [
+            190.45359802246094,
+            -228.9990463256836,
+            -3.254846215248108
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999700780234908
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_4",
+          "triangle": 466,
+          "sample": "edge01",
+          "xyz_m": [
+            -339.4899444580078,
+            691.2094421386719,
+            -0.3849758058786392
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999711867716164
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_3",
+          "triangle": 735,
+          "sample": "edge12",
+          "xyz_m": [
+            -393.5902862548828,
+            553.0249328613281,
+            0.6234794855117798
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999716438528315
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_3",
+          "triangle": 731,
+          "sample": "edge01",
+          "xyz_m": [
+            -393.5902862548828,
+            553.0249328613281,
+            0.6234794855117798
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999716438528315
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_3",
+          "triangle": 731,
+          "sample": "edge12",
+          "xyz_m": [
+            -392.5752868652344,
+            552.2073364257812,
+            0.7747838795185089
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.0799972283779502
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_4",
+          "triangle": 472,
+          "sample": "edge01",
+          "xyz_m": [
+            -340.1197967529297,
+            688.6919860839844,
+            -0.3265194892883301
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999729877994138
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_4",
+          "triangle": 41,
+          "sample": "edge12",
+          "xyz_m": [
+            -361.5667419433594,
+            616.9754943847656,
+            0.9999735057353973
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999730817814132
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_4",
+          "triangle": 37,
+          "sample": "edge01",
+          "xyz_m": [
+            -361.5667419433594,
+            616.9754943847656,
+            0.9999735057353973
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999730817814132
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_4",
+          "triangle": 44,
+          "sample": "centroid",
+          "xyz_m": [
+            -360.1879577636719,
+            615.6650187174479,
+            1.2270817756652832
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999735105491612
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-4_2",
+          "triangle": 296,
+          "sample": "edge20",
+          "xyz_m": [
+            -494.9962921142578,
+            365.5347442626953,
+            -0.8215528130531311
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999736782093891
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-4_2",
+          "triangle": 294,
+          "sample": "edge20",
+          "xyz_m": [
+            -494.9962921142578,
+            365.5347442626953,
+            -0.8215528130531311
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999736782093891
+        },
+        {
+          "mesh": "SM_MPRR_Roads_-3_4",
+          "triangle": 468,
+          "sample": "edge12",
+          "xyz_m": [
+            -340.74964904785156,
+            686.1745300292969,
+            -0.26806310564279556
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.06,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.07999754593794645
+        }
+      ]
+    },
+    "white_edges_over_actual_asphalt": {
+      "objects": 68,
+      "triangles": 68435,
+      "samples": 273740,
+      "opaque_samples": 247951,
+      "outer_fade_samples": 25789,
+      "covered_by_crossing_samples": 0,
+      "missing_reference_samples": 0,
+      "boundary_tolerance_samples": 33,
+      "minimum_opaque_clearance_m": 0.02499545929571556,
+      "minimum_outer_clearance_m": 0.024999887823862865,
+      "failures": 0,
+      "worst_samples": [
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_4",
+          "triangle": 130,
+          "sample": "edge12",
+          "xyz_m": [
+            -350.8815002441406,
+            669.4334411621094,
+            -0.5377325713634491
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02499545929571556
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_4",
+          "triangle": 111,
+          "sample": "edge12",
+          "xyz_m": [
+            -350.8815002441406,
+            669.4334411621094,
+            -0.5377325713634491
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02499545929571556
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_-2",
+          "triangle": 581,
+          "sample": "edge01",
+          "xyz_m": [
+            -422.4602508544922,
+            -284.78919982910156,
+            -0.5111692696809769
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.024995770952160767
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_-2",
+          "triangle": 582,
+          "sample": "edge20",
+          "xyz_m": [
+            -422.4602508544922,
+            -284.78919982910156,
+            -0.5111692696809769
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.024995770952160767
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-4_1",
+          "triangle": 799,
+          "sample": "edge01",
+          "xyz_m": [
+            -489.8501434326172,
+            287.3668975830078,
+            0.11475436016917229
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.024995788778123876
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-4_1",
+          "triangle": 807,
+          "sample": "edge01",
+          "xyz_m": [
+            -489.8501434326172,
+            287.3668975830078,
+            0.11475436016917229
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.024995788778123876
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_4",
+          "triangle": 628,
+          "sample": "edge01",
+          "xyz_m": [
+            -339.09234619140625,
+            674.1826782226562,
+            0.5810084491968155
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.024996016150897082
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_4",
+          "triangle": 95,
+          "sample": "edge20",
+          "xyz_m": [
+            -354.1305389404297,
+            654.1517333984375,
+            -0.10014708340167999
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.024996205742817662
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_4",
+          "triangle": 628,
+          "sample": "centroid",
+          "xyz_m": [
+            -339.3489278157552,
+            674.1949869791666,
+            0.5489814380804697
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.024996277391161503
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_-2",
+          "triangle": 582,
+          "sample": "centroid",
+          "xyz_m": [
+            -422.38773600260413,
+            -284.7225341796875,
+            -0.5050475895404816
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.024996310292560886
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_4",
+          "triangle": 628,
+          "sample": "edge12",
+          "xyz_m": [
+            -339.8864440917969,
+            674.285888671875,
+            0.47862790524959564
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02499637853461334
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_4",
+          "triangle": 645,
+          "sample": "edge20",
+          "xyz_m": [
+            -339.8864440917969,
+            674.285888671875,
+            0.47862790524959564
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02499637853461334
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_3",
+          "triangle": 383,
+          "sample": "edge20",
+          "xyz_m": [
+            -370.1302032470703,
+            580.5787353515625,
+            1.7178040146827698
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02499639844572621
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_3",
+          "triangle": 382,
+          "sample": "edge01",
+          "xyz_m": [
+            -370.1302032470703,
+            580.5787353515625,
+            1.7178040146827698
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02499639844572621
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_4",
+          "triangle": 90,
+          "sample": "edge12",
+          "xyz_m": [
+            -355.2326965332031,
+            649.3477783203125,
+            0.022035307716578245
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02499642382855715
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_4",
+          "triangle": 88,
+          "sample": "edge12",
+          "xyz_m": [
+            -355.2326965332031,
+            649.3477783203125,
+            0.022035307716578245
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02499642382855715
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_4",
+          "triangle": 630,
+          "sample": "edge20",
+          "xyz_m": [
+            -339.0679931640625,
+            674.1163940429688,
+            0.5873079597949982
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.024996437487986745
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_4",
+          "triangle": 628,
+          "sample": "edge20",
+          "xyz_m": [
+            -339.0679931640625,
+            674.1163940429688,
+            0.5873079597949982
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.024996437487986745
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_-3_4",
+          "triangle": 629,
+          "sample": "edge20",
+          "xyz_m": [
+            -337.4554443359375,
+            673.8436889648438,
+            0.7983686625957489
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.024996442553891884
+        },
+        {
+          "mesh": "SM_MPRR_WhiteEdges_1_3",
+          "triangle": 181,
+          "sample": "edge20",
+          "xyz_m": [
+            289.2596435546875,
+            468.95729064941406,
+            -1.7756708264350891
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02499652778086947
+        }
+      ]
+    },
+    "dashes_over_actual_asphalt": {
+      "objects": 67,
+      "triangles": 9606,
+      "samples": 38424,
+      "opaque_samples": 36213,
+      "outer_fade_samples": 2211,
+      "covered_by_crossing_samples": 0,
+      "missing_reference_samples": 0,
+      "boundary_tolerance_samples": 14,
+      "minimum_opaque_clearance_m": 0.02699574223109022,
+      "minimum_outer_clearance_m": 0.026999950408935547,
+      "failures": 0,
+      "worst_samples": [
+        {
+          "mesh": "SM_MPRR_RoadDashes_-4_1",
+          "triangle": 200,
+          "sample": "edge12",
+          "xyz_m": [
+            -492.47149658203125,
+            288.57875061035156,
+            0.13551677763462067
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02699574223109022
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-4_1",
+          "triangle": 198,
+          "sample": "edge20",
+          "xyz_m": [
+            -492.47149658203125,
+            288.57875061035156,
+            0.13551677763462067
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02699574223109022
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-3_-2",
+          "triangle": 12,
+          "sample": "centroid",
+          "xyz_m": [
+            -423.45230102539057,
+            -281.28253173828125,
+            -0.6041459242502848
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.0269957431698018
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-3_-2",
+          "triangle": 12,
+          "sample": "edge12",
+          "xyz_m": [
+            -423.72645568847656,
+            -281.7012481689453,
+            -0.5935450494289398
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.026995810221567274
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-2_2",
+          "triangle": 273,
+          "sample": "edge20",
+          "xyz_m": [
+            -171.20489501953125,
+            316.52635192871094,
+            -1.762529969215393
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02699605751211598
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-4_1",
+          "triangle": 198,
+          "sample": "centroid",
+          "xyz_m": [
+            -492.521494547526,
+            288.47407023111975,
+            0.13714122772216797
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.026996058307325765
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-3_4",
+          "triangle": 38,
+          "sample": "edge12",
+          "xyz_m": [
+            -347.20298767089844,
+            672.7403869628906,
+            -0.28929978609085083
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.026996126232140205
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-4_1",
+          "triangle": 197,
+          "sample": "edge01",
+          "xyz_m": [
+            -492.57659912109375,
+            288.43565368652344,
+            0.1381688043475151
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02699621153581283
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-4_1",
+          "triangle": 198,
+          "sample": "edge01",
+          "xyz_m": [
+            -492.57659912109375,
+            288.43565368652344,
+            0.1381688043475151
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02699621153581283
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-3_-2",
+          "triangle": 12,
+          "sample": "edge20",
+          "xyz_m": [
+            -423.2888488769531,
+            -281.09214782714844,
+            -0.6107743978500366
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.026996211582151153
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-3_-2",
+          "triangle": 14,
+          "sample": "edge20",
+          "xyz_m": [
+            -423.2888488769531,
+            -281.09214782714844,
+            -0.6107743978500366
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.026996211582151153
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-4_1",
+          "triangle": 198,
+          "sample": "edge12",
+          "xyz_m": [
+            -492.5163879394531,
+            288.4078063964844,
+            0.13773810118436813
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02699622115507405
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-3_-3",
+          "triangle": 56,
+          "sample": "edge12",
+          "xyz_m": [
+            -351.42185974121094,
+            -313.726806640625,
+            -1.3143360018730164
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02699622738342944
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-4_1",
+          "triangle": 197,
+          "sample": "edge12",
+          "xyz_m": [
+            -492.6289978027344,
+            288.4741516113281,
+            0.13840239495038986
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.026996323413524898
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-4_1",
+          "triangle": 197,
+          "sample": "centroid",
+          "xyz_m": [
+            -492.6264953613281,
+            288.40433756510413,
+            0.13906497259934741
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02699644576228176
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-3_-2",
+          "triangle": 12,
+          "sample": "edge01",
+          "xyz_m": [
+            -423.3415985107422,
+            -281.05419921875,
+            -0.608118325471878
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.026996517929207542
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-3_3",
+          "triangle": 39,
+          "sample": "edge01",
+          "xyz_m": [
+            -374.2827453613281,
+            548.1648254394531,
+            1.906537652015686
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.026996613668391678
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-2_2",
+          "triangle": 273,
+          "sample": "centroid",
+          "xyz_m": [
+            -170.70482889811197,
+            316.546396891276,
+            -1.7937448024749756
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02699661382444485
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-3_4",
+          "triangle": 38,
+          "sample": "centroid",
+          "xyz_m": [
+            -347.19242350260413,
+            672.993896484375,
+            -0.3014791011810303
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02699676342352042
+        },
+        {
+          "mesh": "SM_MPRR_RoadDashes_-4_1",
+          "triangle": 197,
+          "sample": "edge20",
+          "xyz_m": [
+            -492.67388916015625,
+            288.30320739746094,
+            0.14062371850013733
+          ],
+          "fade": 0.0,
+          "threshold_m": 0.015,
+          "boundary_tolerance_used": false,
+          "clearance_m": 0.02699680233750873
+        }
+      ]
+    }
+  },
+  "failures": [],
+  "blend_sha256": "5b53549292d0681a6bb66e968d322f7d9dbc01aeeb2c5f915a81d49e428c3b78",
+  "manifest_sha256": "fcb4361c556b00b99ce31885c1fa7121dbecc553b8b782a63dc02b607fe821c8",
+  "numeric_tolerance_m": 4e-05,
+  "xy_boundary_tolerance_m": 0.0002,
+  "threshold_opaque_road_terrain_m": 0.06,
+  "threshold_opaque_paint_road_m": 0.015,
+  "failure_sample_count": 0,
+  "blend_unchanged": true,
+  "manifest_unchanged": true
+}

@@ -1,0 +1,850 @@
+{
+  "schema_version": 1,
+  "units": "metres",
+  "coordinate_frame": "CAD +Y, UE import reflects Y once",
+  "rebuild_namespace": "/Game/MPRWarehouse/RebuildB50B57",
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "meshes": [
+    {
+      "name": "SM_MPRR_SolarBank_00_0",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_00_0.fbx",
+      "sha256": "4f016cdec582512659f5cac010c2a210c81ad670958616f7c05d00bcde94893b",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells"
+      ],
+      "bounds_m": [
+        [
+          -41.519999999999996,
+          20.080000000000013
+        ],
+        [
+          -79.975,
+          -9.774999999999991
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "vertices": 480,
+      "triangles": 672,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false,
+      "lod_files": [
+        "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_00_0_LOD1.fbx",
+        "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_00_0_LOD2.fbx"
+      ],
+      "lod_sha256": [
+        "9c5b619e5c3d598ea92c7768fb23c17d30962232ebbfcfaf2110a57d0b3b6910",
+        "c914291f36416bcf463f8343892562547b164169190ca54febae0ef7bac055c2"
+      ],
+      "lod_triangles": [
+        672,
+        96,
+        96
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.6003976156137647,
+        0.2334879616275751
+      ],
+      "lod_material_roles": [
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells"
+        ],
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarMid"
+        ],
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarFar"
+        ]
+      ],
+      "all_lod_material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells",
+        "MPR4_SolarMid",
+        "MPR4_SolarFar"
+      ],
+      "retained_actor_label": "MPR4_SolarBank_00_0",
+      "retained_mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_00_0"
+    },
+    {
+      "name": "SM_MPRR_SolarBank_01_0",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_0.fbx",
+      "sha256": "27bbd67a7d6f1c36d830d7672045e069d7996b3e3546543ed5854e886836514a",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells"
+      ],
+      "bounds_m": [
+        [
+          20.080000000000013,
+          80.56
+        ],
+        [
+          -79.975,
+          -0.024999999999991473
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "vertices": 840,
+      "triangles": 1176,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false,
+      "lod_files": [
+        "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_0_LOD1.fbx",
+        "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_0_LOD2.fbx"
+      ],
+      "lod_sha256": [
+        "c43a6cfa660e31ce30087f01f3e4f6122a73b14b58183af534884495512c5e7b",
+        "40ab5607cd65fa65f2cf628ba461737b121d8ee6207e446bada90fca6f113310"
+      ],
+      "lod_triangles": [
+        1176,
+        168,
+        168
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.6444588644018502,
+        0.2506228917118306
+      ],
+      "lod_material_roles": [
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells"
+        ],
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarMid"
+        ],
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarFar"
+        ]
+      ],
+      "all_lod_material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells",
+        "MPR4_SolarMid",
+        "MPR4_SolarFar"
+      ],
+      "retained_actor_label": "MPR4_SolarBank_01_0",
+      "retained_mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_01_0"
+    },
+    {
+      "name": "SM_MPRR_SolarBank_01_1",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_1.fbx",
+      "sha256": "d9e1db3e9e50179d80c705da552b8d58fabb7c67d1759fd8d6178764c6c3a22f",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells"
+      ],
+      "bounds_m": [
+        [
+          26.80000000000001,
+          80.56
+        ],
+        [
+          -0.024999999999991473,
+          64.32499999999999
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "vertices": 900,
+      "triangles": 1260,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false,
+      "lod_files": [
+        "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_1_LOD1.fbx",
+        "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_1_LOD2.fbx"
+      ],
+      "lod_sha256": [
+        "b5496bbacce49f4f3cc5b2459230d011c863ba8cdefa5ba92628d8c66998e2ae",
+        "83ca265c391ff84459dca936db3a5e492923b1cbaefc67ebe3557c52f51f068e"
+      ],
+      "lod_triangles": [
+        1260,
+        180,
+        180
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.539047142071554,
+        0.20962944413893764
+      ],
+      "lod_material_roles": [
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells"
+        ],
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarMid"
+        ],
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarFar"
+        ]
+      ],
+      "all_lod_material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells",
+        "MPR4_SolarMid",
+        "MPR4_SolarFar"
+      ],
+      "retained_actor_label": "MPR4_SolarBank_01_1",
+      "retained_mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_01_1"
+    },
+    {
+      "name": "SM_MPRR_SolarBank_02_0",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_0.fbx",
+      "sha256": "c5ebc808cd77926a5c1a6ad27bf07c77f9d643811f6ea185f9e37e6fc7ec7fbd",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells"
+      ],
+      "bounds_m": [
+        [
+          79.44,
+          169.04000000000002
+        ],
+        [
+          -74.125,
+          -0.024999999999991473
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "vertices": 900,
+      "triangles": 1260,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false,
+      "lod_files": [
+        "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_0_LOD1.fbx",
+        "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_0_LOD2.fbx"
+      ],
+      "lod_sha256": [
+        "d16f3d9621ef8f2abe802a3194c29d7d64504bd6d59854b9c12203bc9821c866",
+        "7e69f85094c183b5c3a7238c44369b8179e79142887dbe26db0c656bf4369cf4"
+      ],
+      "lod_triangles": [
+        1260,
+        180,
+        180
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.7474587804470205,
+        0.29067841461828575
+      ],
+      "lod_material_roles": [
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells"
+        ],
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarMid"
+        ],
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarFar"
+        ]
+      ],
+      "all_lod_material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells",
+        "MPR4_SolarMid",
+        "MPR4_SolarFar"
+      ],
+      "retained_actor_label": "MPR4_SolarBank_02_0",
+      "retained_mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_02_0"
+    },
+    {
+      "name": "SM_MPRR_SolarBank_02_1",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_1.fbx",
+      "sha256": "c33feacebf603c2cc55dc93e26437f1c86d1fdbe0729b01e1c8fcce04e2bc8d6",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells"
+      ],
+      "bounds_m": [
+        [
+          79.44,
+          169.04000000000002
+        ],
+        [
+          -0.024999999999991473,
+          64.32499999999999
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "vertices": 420,
+      "triangles": 588,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false,
+      "lod_files": [
+        "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_1_LOD1.fbx",
+        "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_1_LOD2.fbx"
+      ],
+      "lod_sha256": [
+        "c472fa7b821eaa537821844a0b61c87564d3e0b43e65a0a7fde7b24503aba746",
+        "415fb2ab383e27ec5adfb0643497e824c13b91246c0f5658de53f0f98f218713"
+      ],
+      "lod_triangles": [
+        588,
+        84,
+        84
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.7091603918546991,
+        0.27578459683238293
+      ],
+      "lod_material_roles": [
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarCells"
+        ],
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarMid"
+        ],
+        [
+          "MPR4_SolarFrame",
+          "MPR4_SolarFar"
+        ]
+      ],
+      "all_lod_material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells",
+        "MPR4_SolarMid",
+        "MPR4_SolarFar"
+      ],
+      "retained_actor_label": "MPR4_SolarBank_02_1",
+      "retained_mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_02_1"
+    }
+  ],
+  "export_meshes": [
+    {
+      "name": "SM_MPRR_SolarBank_00_0",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_00_0.fbx",
+      "sha256": "4f016cdec582512659f5cac010c2a210c81ad670958616f7c05d00bcde94893b",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells"
+      ],
+      "bounds_m": [
+        [
+          -41.519999999999996,
+          20.080000000000013
+        ],
+        [
+          -79.975,
+          -9.774999999999991
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "vertices": 480,
+      "triangles": 672,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_00_0_LOD1",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_00_0_LOD1.fbx",
+      "sha256": "9c5b619e5c3d598ea92c7768fb23c17d30962232ebbfcfaf2110a57d0b3b6910",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarMid"
+      ],
+      "bounds_m": [
+        [
+          -41.519999999999996,
+          20.080000000000013
+        ],
+        [
+          -79.975,
+          -9.774999999999991
+        ],
+        [
+          13.56,
+          13.64
+        ]
+      ],
+      "vertices": 96,
+      "triangles": 96,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_00_0_LOD2",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_00_0_LOD2.fbx",
+      "sha256": "c914291f36416bcf463f8343892562547b164169190ca54febae0ef7bac055c2",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarFar"
+      ],
+      "bounds_m": [
+        [
+          -41.519999999999996,
+          20.080000000000013
+        ],
+        [
+          -79.975,
+          -9.774999999999991
+        ],
+        [
+          13.56,
+          13.64
+        ]
+      ],
+      "vertices": 96,
+      "triangles": 96,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_01_0",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_0.fbx",
+      "sha256": "27bbd67a7d6f1c36d830d7672045e069d7996b3e3546543ed5854e886836514a",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells"
+      ],
+      "bounds_m": [
+        [
+          20.080000000000013,
+          80.56
+        ],
+        [
+          -79.975,
+          -0.024999999999991473
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "vertices": 840,
+      "triangles": 1176,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_01_0_LOD1",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_0_LOD1.fbx",
+      "sha256": "c43a6cfa660e31ce30087f01f3e4f6122a73b14b58183af534884495512c5e7b",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarMid"
+      ],
+      "bounds_m": [
+        [
+          20.080000000000013,
+          80.56
+        ],
+        [
+          -79.975,
+          -0.024999999999991473
+        ],
+        [
+          13.56,
+          13.64
+        ]
+      ],
+      "vertices": 168,
+      "triangles": 168,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_01_0_LOD2",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_0_LOD2.fbx",
+      "sha256": "40ab5607cd65fa65f2cf628ba461737b121d8ee6207e446bada90fca6f113310",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarFar"
+      ],
+      "bounds_m": [
+        [
+          20.080000000000013,
+          80.56
+        ],
+        [
+          -79.975,
+          -0.024999999999991473
+        ],
+        [
+          13.56,
+          13.64
+        ]
+      ],
+      "vertices": 168,
+      "triangles": 168,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_01_1",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_1.fbx",
+      "sha256": "d9e1db3e9e50179d80c705da552b8d58fabb7c67d1759fd8d6178764c6c3a22f",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells"
+      ],
+      "bounds_m": [
+        [
+          26.80000000000001,
+          80.56
+        ],
+        [
+          -0.024999999999991473,
+          64.32499999999999
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "vertices": 900,
+      "triangles": 1260,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_01_1_LOD1",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_1_LOD1.fbx",
+      "sha256": "b5496bbacce49f4f3cc5b2459230d011c863ba8cdefa5ba92628d8c66998e2ae",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarMid"
+      ],
+      "bounds_m": [
+        [
+          26.80000000000001,
+          80.56
+        ],
+        [
+          -0.024999999999991473,
+          64.32499999999999
+        ],
+        [
+          13.56,
+          13.64
+        ]
+      ],
+      "vertices": 180,
+      "triangles": 180,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_01_1_LOD2",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_1_LOD2.fbx",
+      "sha256": "83ca265c391ff84459dca936db3a5e492923b1cbaefc67ebe3557c52f51f068e",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarFar"
+      ],
+      "bounds_m": [
+        [
+          26.80000000000001,
+          80.56
+        ],
+        [
+          -0.024999999999991473,
+          64.32499999999999
+        ],
+        [
+          13.56,
+          13.64
+        ]
+      ],
+      "vertices": 180,
+      "triangles": 180,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_02_0",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_0.fbx",
+      "sha256": "c5ebc808cd77926a5c1a6ad27bf07c77f9d643811f6ea185f9e37e6fc7ec7fbd",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells"
+      ],
+      "bounds_m": [
+        [
+          79.44,
+          169.04000000000002
+        ],
+        [
+          -74.125,
+          -0.024999999999991473
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "vertices": 900,
+      "triangles": 1260,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_02_0_LOD1",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_0_LOD1.fbx",
+      "sha256": "d16f3d9621ef8f2abe802a3194c29d7d64504bd6d59854b9c12203bc9821c866",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarMid"
+      ],
+      "bounds_m": [
+        [
+          79.44,
+          169.04000000000002
+        ],
+        [
+          -74.125,
+          -0.024999999999991473
+        ],
+        [
+          13.56,
+          13.64
+        ]
+      ],
+      "vertices": 180,
+      "triangles": 180,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_02_0_LOD2",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_0_LOD2.fbx",
+      "sha256": "7e69f85094c183b5c3a7238c44369b8179e79142887dbe26db0c656bf4369cf4",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarFar"
+      ],
+      "bounds_m": [
+        [
+          79.44,
+          169.04000000000002
+        ],
+        [
+          -74.125,
+          -0.024999999999991473
+        ],
+        [
+          13.56,
+          13.64
+        ]
+      ],
+      "vertices": 180,
+      "triangles": 180,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_02_1",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_1.fbx",
+      "sha256": "c33feacebf603c2cc55dc93e26437f1c86d1fdbe0729b01e1c8fcce04e2bc8d6",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarCells"
+      ],
+      "bounds_m": [
+        [
+          79.44,
+          169.04000000000002
+        ],
+        [
+          -0.024999999999991473,
+          64.32499999999999
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "vertices": 420,
+      "triangles": 588,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_02_1_LOD1",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_1_LOD1.fbx",
+      "sha256": "c472fa7b821eaa537821844a0b61c87564d3e0b43e65a0a7fde7b24503aba746",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarMid"
+      ],
+      "bounds_m": [
+        [
+          79.44,
+          169.04000000000002
+        ],
+        [
+          -0.024999999999991473,
+          64.32499999999999
+        ],
+        [
+          13.56,
+          13.64
+        ]
+      ],
+      "vertices": 84,
+      "triangles": 84,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    },
+    {
+      "name": "SM_MPRR_SolarBank_02_1_LOD2",
+      "category": "Architecture",
+      "fbx": "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_1_LOD2.fbx",
+      "sha256": "415fb2ab383e27ec5adfb0643497e824c13b91246c0f5658de53f0f98f218713",
+      "material_roles": [
+        "MPR4_SolarFrame",
+        "MPR4_SolarFar"
+      ],
+      "bounds_m": [
+        [
+          79.44,
+          169.04000000000002
+        ],
+        [
+          -0.024999999999991473,
+          64.32499999999999
+        ],
+        [
+          13.56,
+          13.64
+        ]
+      ],
+      "vertices": 84,
+      "triangles": 84,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "full_precision_uvs": true,
+      "nanite": false
+    }
+  ],
+  "blend": "SourceAssets/MPR/rebuild_b50b57/solar/MPR_B50B57_Solar.blend",
+  "blend_sha256": "443889e3daa693e4ce0a7da07200fbe7f3d34b1b21a701ddc4b24bb6bbef5717",
+  "layout": "SourceAssets/MPR/rebuild_b50b57/solar/layout.json",
+  "layout_sha256": "12028594cca747719fa72a3daa54cf84939a3dd470a63e4739dfd83c50fede82",
+  "geometry_payload_sha256": "908170322356e45657e1ce093701f97c365b5b452e5e02dc748c01615d58c4f9",
+  "input_hashes": {
+    "previous_plan.json": "89843b52af1ab4d736d645c401ec92fb6c27b70becc31399d8d4aeb9c6d0d4d3",
+    "previous_architecture.json": "dd46d34784a43cec7c85c674206917a127bc9cb7dbdd159ba8164d19ec5ae0f6",
+    "cad_layout.json": "004f3923f292e0a60e22d677ff542e037a6cf248f6a27c348c068ecac4d9f349"
+  },
+  "material_policy": "Reuse four existing roles; frame source read-only, Cells/Mid/Far use independent rebuild instances",
+  "all_lod_material_roles": [
+    "MPR4_SolarFrame",
+    "MPR4_SolarCells",
+    "MPR4_SolarMid",
+    "MPR4_SolarFar"
+  ],
+  "existing_actor_transforms_unchanged": true,
+  "old_assets_modified": false
+}

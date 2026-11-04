@@ -1,0 +1,254 @@
+{
+  "success": true,
+  "map_sha256": "da4144734d1bac198f88912ac3769788b63516854edefdedf13fc599dbff60fd",
+  "source_manifest_sha256": "fcb4361c556b00b99ce31885c1fa7121dbecc553b8b782a63dc02b607fe821c8",
+  "original_map_unchanged": true,
+  "old_content_files_unchanged": 1805,
+  "retained_actor_count": 256,
+  "files": {
+    "import_report.json": {
+      "sha256": "a6ff0f12a0fd22c97ade43f74ac8488b67e09933e2b83d6206a6f075606c44d6",
+      "source_sha256": "a6ff0f12a0fd22c97ade43f74ac8488b67e09933e2b83d6206a6f075606c44d6",
+      "bytes": 712815
+    },
+    "reload_report.json": {
+      "sha256": "ab5814a4916793b1c0447f26708ebbc72b3545ec70128be546ed8998969022ed",
+      "source_sha256": "ab5814a4916793b1c0447f26708ebbc72b3545ec70128be546ed8998969022ed",
+      "bytes": 173069
+    },
+    "blender_validation.json": {
+      "sha256": "57ebfd11b2dc7707cf1466e7495356292eb0ab0bd10cfdb2a3a7b03ea6f750f8",
+      "source_sha256": "57ebfd11b2dc7707cf1466e7495356292eb0ab0bd10cfdb2a3a7b03ea6f750f8",
+      "bytes": 421064
+    },
+    "road_validation.json": {
+      "sha256": "1aacd26093a06fdb69f2148eff7d63cf8100791edc3de372ecf18e9a73e763b1",
+      "source_sha256": "1aacd26093a06fdb69f2148eff7d63cf8100791edc3de372ecf18e9a73e763b1",
+      "bytes": 104850
+    },
+    "cpu_import_preflight.json": {
+      "sha256": "c6baa5869d1652c9bae35238d648a1f480be420b72dc6c903b0d67de31a7a4f2",
+      "source_sha256": "c6baa5869d1652c9bae35238d648a1f480be420b72dc6c903b0d67de31a7a4f2",
+      "bytes": 12473
+    },
+    "surface_clearance.json": {
+      "sha256": "d7e2f16ed4bce8c524c15f535a404ae045b6441c4a0c761ea7e3ba1a7a517bf4",
+      "source_sha256": "d7e2f16ed4bce8c524c15f535a404ae045b6441c4a0c761ea7e3ba1a7a517bf4",
+      "bytes": 26649
+    },
+    "source_snapshot.json.gz": {
+      "sha256": "102cd393045b71322ae557c00b86f1235c2ffd07b80fb831452bdcd7fb2dd2df",
+      "source_sha256": "4a0f8480ca538751730c9522c90bc04e5b9bde39284d373bc3800f98a6186f09",
+      "bytes": 202809
+    },
+    "old_content_hashes.json.gz": {
+      "sha256": "e569de424d2e492b0aa578cc978f9e886437cc896d100f1dbeebd9251d445968",
+      "source_sha256": "d3054e16a5438703a7bc18556501042638d48356d15809a462539ed1f8b6fa59",
+      "bytes": 85254
+    },
+    "old_ownership_hashes.json.gz": {
+      "sha256": "cf022eb5e6bbb39e896dff0cff24d09663004a2d030384fe070d83328a181903",
+      "source_sha256": "ffbd6032c481ea9510e2409eed6323a9a5879bdbb2c92fcb3b8d31bfb52aa4b7",
+      "bytes": 187
+    },
+    "after_import.json.gz": {
+      "sha256": "a6921e0d426982aa36dfd32b8c6b949c5b6b8cbc21356219969fd66f56515827",
+      "source_sha256": "db142f14ad22fabcf456a2aaa4d883d077c6274cebd8019b71545cd42471f481",
+      "bytes": 277016
+    },
+    "after_reload_observed.json.gz": {
+      "sha256": "5096fec6384f71e2f3f8d45a191c73b100c30a1a0da413e4bc1355ea14cee7af",
+      "source_sha256": "ee4d983931f81add0c5daa400614b5fae223d9569ceb8ba427543712f03b4bee",
+      "bytes": 234562
+    },
+    "after_reload_normalized.json.gz": {
+      "sha256": "33ded3534321506b45a74d5c1270ffe23ec980d484c0702bb79644cb0072947e",
+      "source_sha256": "bbb867aab52c5361dcd9fdb89311ba92958a8ba6072f4163f5bc30b4f4e1c56e",
+      "bytes": 235608
+    },
+    "runtime_views/capture_report.json": {
+      "sha256": "16dfa804fb579dff05952302b0c93a182142575f80036786c95668d97b015cb0",
+      "source_sha256": "16dfa804fb579dff05952302b0c93a182142575f80036786c95668d97b015cb0",
+      "bytes": 15661
+    },
+    "runtime_views/01-main-aerial.png": {
+      "sha256": "3437027b41a632bb776af51e12801f1357b9d37661daa6037f57219b3fc3032c",
+      "source_sha256": "3437027b41a632bb776af51e12801f1357b9d37661daa6037f57219b3fc3032c",
+      "bytes": 3026201
+    },
+    "runtime_views/02-full-surroundings.png": {
+      "sha256": "5a987e9fa015e3355ecb45f450e28715d9d264a41a20d80b3aa2bff7c56dc0bc",
+      "source_sha256": "5a987e9fa015e3355ecb45f450e28715d9d264a41a20d80b3aa2bff7c56dc0bc",
+      "bytes": 2752037
+    },
+    "runtime_views/03-north-context.png": {
+      "sha256": "77dfb4a509ea36a3db56da7a505ed6e283c16e38e95dd32b46893f83d832d948",
+      "source_sha256": "77dfb4a509ea36a3db56da7a505ed6e283c16e38e95dd32b46893f83d832d948",
+      "bytes": 2600141
+    },
+    "runtime_views/04-west-residential.png": {
+      "sha256": "f563dae827dcbcc5651a06989fe38267fe70dc4626517a81a4bf06803efca6cf",
+      "source_sha256": "f563dae827dcbcc5651a06989fe38267fe70dc4626517a81a4bf06803efca6cf",
+      "bytes": 2690479
+    },
+    "runtime_views/05-south-surroundings.png": {
+      "sha256": "b494fe6ed8f3041ba67d8d07ccd77d6ca1498d9d6d6151d21cf32febdd30612c",
+      "source_sha256": "b494fe6ed8f3041ba67d8d07ccd77d6ca1498d9d6d6151d21cf32febdd30612c",
+      "bytes": 2904184
+    },
+    "runtime_views/06-east-rail-yard.png": {
+      "sha256": "5807a9bd8822515f6c8f317977661fa63980e2823bf52756aef985316b972844",
+      "source_sha256": "5807a9bd8822515f6c8f317977661fa63980e2823bf52756aef985316b972844",
+      "bytes": 3034440
+    },
+    "runtime_views/07-west-houses-close.png": {
+      "sha256": "b403c4111e9993e591ab28f5f302a551c956dd822d45f7c70be54d09a9dcda79",
+      "source_sha256": "b403c4111e9993e591ab28f5f302a551c956dd822d45f7c70be54d09a9dcda79",
+      "bytes": 2599359
+    },
+    "runtime_views/08-dock-vehicles.png": {
+      "sha256": "819b2700e5baf8af694c7f2438f558f32f3f955da22844e08f2cf7f03a51e6ed",
+      "source_sha256": "819b2700e5baf8af694c7f2438f558f32f3f955da22844e08f2cf7f03a51e6ed",
+      "bytes": 2786953
+    },
+    "runtime_views/09-north-warehouse.png": {
+      "sha256": "9559741c63da92a06ae0a49a602d282a45e5d9a78f8613670469d215d94b8583",
+      "source_sha256": "9559741c63da92a06ae0a49a602d282a45e5d9a78f8613670469d215d94b8583",
+      "bytes": 2347717
+    },
+    "runtime_views/10-interior-preserved.png": {
+      "sha256": "931c6c8af35f8d64027c95edfb610434a91f3b93894cbf8fc852bf8b06d5064b",
+      "source_sha256": "931c6c8af35f8d64027c95edfb610434a91f3b93894cbf8fc852bf8b06d5064b",
+      "bytes": 3235930
+    },
+    "runtime_views/11-main-reverse.png": {
+      "sha256": "3945fcac554690ac767732db9c4152aa253900c6ed14483a87a3081018a0f5ed",
+      "source_sha256": "3945fcac554690ac767732db9c4152aa253900c6ed14483a87a3081018a0f5ed",
+      "bytes": 2815993
+    },
+    "runtime_views/12-south-rail-crossing.png": {
+      "sha256": "895f45a32ef9dbff9426e207a21e596afd31ea8c3b438c334fba4bafb7608035",
+      "source_sha256": "895f45a32ef9dbff9426e207a21e596afd31ea8c3b438c334fba4bafb7608035",
+      "bytes": 2556661
+    },
+    "runtime_views/13-northeast-edge.png": {
+      "sha256": "f6c7e0d7598556e066ffae9965a87dbd993e49af5ee6a90b73b365d2da40e173",
+      "source_sha256": "f6c7e0d7598556e066ffae9965a87dbd993e49af5ee6a90b73b365d2da40e173",
+      "bytes": 2302175
+    },
+    "runtime_views/14-west-edge.png": {
+      "sha256": "7b51ab0c40d9e378c67f90862eae12a357b4ce9a7c696a479904b88364a2b998",
+      "source_sha256": "7b51ab0c40d9e378c67f90862eae12a357b4ce9a7c696a479904b88364a2b998",
+      "bytes": 2382007
+    },
+    "runtime_views/15-lumen-aerial.png": {
+      "sha256": "6f44c799bf4ad38f31d97c21bc5d8d22641c2d27892ea74935026df0a5be476b",
+      "source_sha256": "6f44c799bf4ad38f31d97c21bc5d8d22641c2d27892ea74935026df0a5be476b",
+      "bytes": 2524033
+    },
+    "runtime_views/16-lumen-docks.png": {
+      "sha256": "f6bcc5b9b122d3d2c7162d43bff664326e76d17ba658350894d2508b95c58232",
+      "source_sha256": "f6bcc5b9b122d3d2c7162d43bff664326e76d17ba658350894d2508b95c58232",
+      "bytes": 2470912
+    },
+    "runtime_views/17-solar-overview.png": {
+      "sha256": "a5be6b2b191fd58785d7fa81dadcd1b8b4cdbe5609b1b21347a9f6359e524be2",
+      "source_sha256": "a5be6b2b191fd58785d7fa81dadcd1b8b4cdbe5609b1b21347a9f6359e524be2",
+      "bytes": 2609902
+    },
+    "runtime_views/18-solar-close.png": {
+      "sha256": "53548fbe539fe75a92cdfa72fbe29eae75dd435fb24902307957474f63e704db",
+      "source_sha256": "53548fbe539fe75a92cdfa72fbe29eae75dd435fb24902307957474f63e704db",
+      "bytes": 2730873
+    },
+    "runtime_views/19-solar-reverse.png": {
+      "sha256": "785041a871f635ef09b67bf77021e471cf184af1183afd00f0c6d261a23bbcb3",
+      "source_sha256": "785041a871f635ef09b67bf77021e471cf184af1183afd00f0c6d261a23bbcb3",
+      "bytes": 2705005
+    },
+    "performance.json": {
+      "sha256": "7b4243081ca0af03bae673faa80a7717152ae3350486d0521223ee66aded7645",
+      "source_sha256": "7b4243081ca0af03bae673faa80a7717152ae3350486d0521223ee66aded7645",
+      "bytes": 18040
+    },
+    "render_profile_tests.json": {
+      "sha256": "6751c6decff5065198ab6b5f45d02280b5b2ab10716c18852094f16a1497f205",
+      "source_sha256": "6751c6decff5065198ab6b5f45d02280b5b2ab10716c18852094f16a1497f205",
+      "bytes": 1885
+    },
+    "build.log": {
+      "sha256": "1f1c343e421570a611b04742eba50d887ad36688e73ac493097fca3c77087c71",
+      "source_sha256": "1f1c343e421570a611b04742eba50d887ad36688e73ac493097fca3c77087c71",
+      "bytes": 2507
+    },
+    "solar/geometry_validation.json": {
+      "sha256": "39e642563d93ad9e69f79a94e2e4b725bc761ae13639028cceceb67c4184c0a6",
+      "source_sha256": "39e642563d93ad9e69f79a94e2e4b725bc761ae13639028cceceb67c4184c0a6",
+      "bytes": 1543
+    },
+    "solar/blender_validation.json": {
+      "sha256": "cdea4be30cb2546d125fded943734fcdfd1987134491d674c96ec7ae37276209",
+      "source_sha256": "cdea4be30cb2546d125fded943734fcdfd1987134491d674c96ec7ae37276209",
+      "bytes": 4032
+    },
+    "solar/source_fbx_validation.json": {
+      "sha256": "b8c78a3c8f4360137031d911d1e20d51158c5ec409cfb3ca74afe6d3be9a1d27",
+      "source_sha256": "b8c78a3c8f4360137031d911d1e20d51158c5ec409cfb3ca74afe6d3be9a1d27",
+      "bytes": 4795
+    },
+    "csv/exterior.csv.gz": {
+      "sha256": "eac2e3139648119a9fe4f35c562e946d77afaf162b78b6fd46c93ff176ffb931",
+      "source_sha256": "1a353933e0cbbb1fbc62e64be1ae3a460e688e34c4e4e907f1b65f02c195c220",
+      "bytes": 558750
+    },
+    "csv/interior.csv.gz": {
+      "sha256": "c65cb389b62e097a3d4ad78c236d05fb6b271831a0d25d4b56115501fef47c1f",
+      "source_sha256": "629d1be7b9dcc6b80d41aa3f888f58d4cc3d7341c5431b64dd276f7b88a9744b",
+      "bytes": 421560
+    },
+    "visual_review.md": {
+      "sha256": "e88d7a3d40dc50157fe3063ccef7c1ea7e8aaeb65a7e1f89c62c2e671536fe5f",
+      "source_sha256": "e88d7a3d40dc50157fe3063ccef7c1ea7e8aaeb65a7e1f89c62c2e671536fe5f",
+      "bytes": 6064
+    }
+  },
+  "approved_solar_mesh_replacements": 5,
+  "solar_manifest_sha256": "1cb15a5139e652cd2af28f5556a73715db1f4a43171f399746ba7b150e396903",
+  "source_tools": {
+    "Tools/MPRWarehouse/archive_mpr_rebuild_attempt.py": "9b426e18ede01d42a49e0c4edee929675ac66f8f4449235da9595c26598c0d1d",
+    "Tools/MPRWarehouse/archive_mpr_rebuild_validation.py": "256f90cad45fd8cba4426f9e1de13c3b831035287d70bac49155cb2cdc0a4be3",
+    "Tools/MPRWarehouse/build_mpr_rebuild.py": "1c721aebfc270baa7cbb8ba4be346e1ac1369b1cce4a353d16729b9af43a0da2",
+    "Tools/MPRWarehouse/build_mpr_rebuild_solar.py": "ba70d6c72a93650de99ca18f91afcde8286fdfe95f6b7e7420f2b7566e070bc1",
+    "Tools/MPRWarehouse/capture_mpr_rebuild_views.py": "393102e48d2fd349dc0e99d5c006edff8fc1d748241cb8dac2f1d36586b82556",
+    "Tools/MPRWarehouse/export_mpr_rebuild.py": "6e6afd45599a46de37c6cd6a683e5795c6dc935fd2b9d610d0b5879250ab757e",
+    "Tools/MPRWarehouse/export_mpr_rebuild_solar.py": "3ea34b8ca1098b635671b07aa8ae29342a0359de79eeccca5c838a0379d85eee",
+    "Tools/MPRWarehouse/import_mpr_rebuild.py": "bee07439b31e3d704d097aee2e0b99da5e0a817bcea7c9676fbd5c4432560543",
+    "Tools/MPRWarehouse/mpr_rebuild_context.py": "ff373c6676a3b8d381f8af21c4df9ccb8fae246030f044cf593945a72b0eb1cd",
+    "Tools/MPRWarehouse/mpr_rebuild_materials.py": "082eb45af404fbf2e840b0be6b59ea563bd88e4ae8610ff0c40c468e373af84d",
+    "Tools/MPRWarehouse/mpr_rebuild_roads.py": "d13c4114163a4c95bd877c4531029a25de377591ee4d9851e462b2902d72ded1",
+    "Tools/MPRWarehouse/mpr_rebuild_style.py": "56cbbbaad87b2bcb4b48f87325021cc80192a7af0336612e754dbeb7669283f6",
+    "Tools/MPRWarehouse/preflight_mpr_rebuild.py": "d0af7758ca7d02bc8cdffc5e83458abce84cba3a223da605bef3f87106d6d2d5",
+    "Tools/MPRWarehouse/profile_mpr_rebuild.py": "61ca2e550378d803687d429353ce9c4451f72a5cdd8cb6021efc35d688837a7b",
+    "Tools/MPRWarehouse/rebuild_preservation.py": "50dc6b53291b55dd640a151d1fcdece59f7e366adff84380e5b36b5a4ab09651",
+    "Tools/MPRWarehouse/register_mpr_rebuild_solar.py": "333cf5cd2b79a1c40dbe412750263e9ca989c0618f2ac48729eb4b2b836bd5f6",
+    "Tools/MPRWarehouse/render_mpr_rebuild_solar_plan.py": "c51e0bfb857b29c2bd2649879f9a80786d0ba55d611591c330b0d2c81ea167ad",
+    "Tools/MPRWarehouse/run_mpr_rebuild_blender_validation.py": "8e2318c401b19f12a2c6cdbfdb18c3dc70ef73aaf0b5e362f733ae380d050886",
+    "Tools/MPRWarehouse/run_mpr_rebuild_geometry.py": "6c05e75b35c6e3b2fa6f00e478f03ac8071ea1c25b9d8cb99cdcc398b92232b6",
+    "Tools/MPRWarehouse/test_mpr_rebuild_solar.py": "4df30d298207b93d3d3055fec7feae08bb2e8472e3a5f7fd327445d631d9e14c",
+    "Tools/MPRWarehouse/test_rebuild_archive.py": "249ab4926840f9e9dc63dc7b4985e68c6bc1bcf9c81ad261751cd71ec279d66e",
+    "Tools/MPRWarehouse/test_rebuild_preservation.py": "9610800f1a6969ff7f434273e8c2dfcd81d120189102cc68cef8093289d00f0c",
+    "Tools/MPRWarehouse/validate_mpr_rebuild.py": "b6ddf3488f9932feadfce325899390ec23f00a18680cf4a0f2c7955393ea2db3",
+    "Tools/MPRWarehouse/validate_mpr_rebuild_roads.py": "fd65e70841938e7f48d2e7a678bae8adc80f4ac8b8d54731bc1a473fea999730",
+    "Tools/MPRWarehouse/validate_mpr_rebuild_solar.py": "2c70f09fea6926fdbcc7124a8bbed1b395568d9bcf41f342dadbb3586e112bb5",
+    "Tools/MPRWarehouse/validate_mpr_rebuild_surface_clearance.py": "b44971d12bb653cf4c26802f44c9ab2c706f295668c80fc2e642311cf005083c",
+    "Tools/MPRWarehouse/verify_mpr_rebuild_blender.py": "18c7d246b6290b3b55f6277cd674697bf0318fd4f84a0213f17624b842f875ba"
+  },
+  "renderer_sources": {
+    "Source/Test/EnvironmentRenderProfile.cpp": "ea0f065d8611f33be382ee166418901ff320ff18da717572845abc8785d4d39b",
+    "Source/Test/EnvironmentRenderProfile.h": "75bebbd0747a30e78fb2cc48fe215b8215bb5f267f902cdd7102d2931cdd3bfd",
+    "Source/Test/EnvironmentRenderProfileLease.cpp": "2c3f67ef2263c2754d2b3a8e95a9bc1553850fb7246e905359d3f3a12d755563",
+    "Source/Test/EnvironmentRenderProfileLease.h": "8d48c1734f3b84f2555e558aee6e3e5b65042916c711f1f6f9f586de6766efd8",
+    "Source/Test/Tests/EnvironmentRenderProfileTests.cpp": "ad6f50d61acc8cd255aa4a28b86dcbc99643ff258eef3c4406db60b81440b506"
+  },
+  "scope": "Native UE5.8 1920x1080 single-instance validation, not Pixel Streaming/network validation"
+}

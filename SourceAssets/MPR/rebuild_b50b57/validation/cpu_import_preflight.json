@@ -1,0 +1,268 @@
+{
+  "success": true,
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "namespace": "/Game/MPRWarehouse/RebuildB50B57",
+  "manifest_sha256": "fcb4361c556b00b99ce31885c1fa7121dbecc553b8b782a63dc02b607fe821c8",
+  "meshes": 564,
+  "triangles": 610856,
+  "fbx_hashes_verified": 579,
+  "solar_meshes": 5,
+  "solar_source_files": {
+    "SourceAssets/MPR/rebuild_b50b57/solar/manifest.json": "1cb15a5139e652cd2af28f5556a73715db1f4a43171f399746ba7b150e396903",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_00_0.fbx": "4f016cdec582512659f5cac010c2a210c81ad670958616f7c05d00bcde94893b",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_00_0_LOD1.fbx": "9c5b619e5c3d598ea92c7768fb23c17d30962232ebbfcfaf2110a57d0b3b6910",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_00_0_LOD2.fbx": "c914291f36416bcf463f8343892562547b164169190ca54febae0ef7bac055c2",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_0.fbx": "27bbd67a7d6f1c36d830d7672045e069d7996b3e3546543ed5854e886836514a",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_0_LOD1.fbx": "c43a6cfa660e31ce30087f01f3e4f6122a73b14b58183af534884495512c5e7b",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_0_LOD2.fbx": "40ab5607cd65fa65f2cf628ba461737b121d8ee6207e446bada90fca6f113310",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_1.fbx": "d9e1db3e9e50179d80c705da552b8d58fabb7c67d1759fd8d6178764c6c3a22f",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_1_LOD1.fbx": "b5496bbacce49f4f3cc5b2459230d011c863ba8cdefa5ba92628d8c66998e2ae",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_01_1_LOD2.fbx": "83ca265c391ff84459dca936db3a5e492923b1cbaefc67ebe3557c52f51f068e",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_0.fbx": "c5ebc808cd77926a5c1a6ad27bf07c77f9d643811f6ea185f9e37e6fc7ec7fbd",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_0_LOD1.fbx": "d16f3d9621ef8f2abe802a3194c29d7d64504bd6d59854b9c12203bc9821c866",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_0_LOD2.fbx": "7e69f85094c183b5c3a7238c44369b8179e79142887dbe26db0c656bf4369cf4",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_1.fbx": "c33feacebf603c2cc55dc93e26437f1c86d1fdbe0729b01e1c8fcce04e2bc8d6",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_1_LOD1.fbx": "c472fa7b821eaa537821844a0b61c87564d3e0b43e65a0a7fde7b24503aba746",
+    "SourceAssets/MPR/rebuild_b50b57/solar/SM_MPRR_SolarBank_02_1_LOD2.fbx": "415fb2ab383e27ec5adfb0643497e824c13b91246c0f5658de53f0f98f218713"
+  },
+  "retained_mesh_overrides": [
+    {
+      "source_guid": "BC217E8B43B202CB7FE238B6F4B6556B",
+      "component_name": "StaticMeshComponent0",
+      "source_mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_00_0.SM_MPR4_SolarBank_00_0",
+      "target_mesh": "/Game/MPRWarehouse/RebuildB50B57/Architecture/Meshes/SM_MPRR_SolarBank_00_0.SM_MPRR_SolarBank_00_0"
+    },
+    {
+      "source_guid": "C7BD2BEB41095B0B59873AA3D64DD765",
+      "component_name": "StaticMeshComponent0",
+      "source_mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_01_0.SM_MPR4_SolarBank_01_0",
+      "target_mesh": "/Game/MPRWarehouse/RebuildB50B57/Architecture/Meshes/SM_MPRR_SolarBank_01_0.SM_MPRR_SolarBank_01_0"
+    },
+    {
+      "source_guid": "3D07E0584AE579B3F87A44B617CBFF87",
+      "component_name": "StaticMeshComponent0",
+      "source_mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_01_1.SM_MPR4_SolarBank_01_1",
+      "target_mesh": "/Game/MPRWarehouse/RebuildB50B57/Architecture/Meshes/SM_MPRR_SolarBank_01_1.SM_MPRR_SolarBank_01_1"
+    },
+    {
+      "source_guid": "CBE6448C453AE125A1FA0899147E45A5",
+      "component_name": "StaticMeshComponent0",
+      "source_mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_02_0.SM_MPR4_SolarBank_02_0",
+      "target_mesh": "/Game/MPRWarehouse/RebuildB50B57/Architecture/Meshes/SM_MPRR_SolarBank_02_0.SM_MPRR_SolarBank_02_0"
+    },
+    {
+      "source_guid": "B68AC22E4D4B120213C6FF93AEA28E06",
+      "component_name": "StaticMeshComponent0",
+      "source_mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_SolarBank_02_1.SM_MPR4_SolarBank_02_1",
+      "target_mesh": "/Game/MPRWarehouse/RebuildB50B57/Architecture/Meshes/SM_MPRR_SolarBank_02_1.SM_MPRR_SolarBank_02_1"
+    }
+  ],
+  "input_hashes_verified": {
+    "topoexport-B50B57.blend": "9caf3439299f1b4f38d8ee88b6a5877e9a92c213ae926c99b40c5302583718d1",
+    "source_geometry.json": "6334aa7a95001b5f16a33c0425fdb0c132506566f176369c623ce465ab9c5414",
+    "registration.json": "63020ee599f7fd32d8a28d7747a2ffe4c6c7b58b91f6abc9538a471df64bcae1",
+    "LICENSE-topoexport.txt": "9b355512aa278c28aed0db81cb92bfb89d51b860de9227d63a9f7aaceab89f07",
+    "visual_reference.png": "0757bdd1b4be4f9e4e8b68b334b22b860a1270b6033764d3cb9f3f7c6f8f5530"
+  },
+  "reused_assets_verified": {
+    "SM_MPR4_FreightBoxcar": {
+      "asset": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_FreightBoxcar",
+      "sha256": "e9aa6b3e1a8ac380526ec8a329e28bda0c4cd75dd55e3be7c61e738eea017248"
+    },
+    "SM_MPR4_Locomotive": {
+      "asset": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Locomotive",
+      "sha256": "ef27477129a15af38a920bbd797300d1204b1e3d2feb3f0c52a2c5cf65c66bc1"
+    },
+    "SM_MPR4_Trailer_White": {
+      "asset": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Trailer_White",
+      "sha256": "cd5ed72d00cfbfd58a668808ae3d4133cfa4004fe196d280c11539430702c2b7"
+    },
+    "SM_MPR4_Tractor": {
+      "asset": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Tractor",
+      "sha256": "76004614c38bc664f75cbe6a1154d41fcb7a705218c024eec59e6d9185a4b52b"
+    },
+    "SM_MPR4_Trailer_Blue": {
+      "asset": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Trailer_Blue",
+      "sha256": "f2e2433a8b134ede69118379c7e86ad3dbd4ac4da77283f3ae6f4d69f654f355"
+    },
+    "SM_MPR4_Trailer_Coral": {
+      "asset": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Trailer_Coral",
+      "sha256": "551b5b5a053075a55094b7d83eba0b5ec156b537e3f980bb7349a1e31818237a"
+    },
+    "SM_MPR4_Car_0": {
+      "asset": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Car_0",
+      "sha256": "c2c9e03e1e2df0322217aa3c88691ff4d65ddedf598193824ae07b9ef0474c15"
+    },
+    "SM_MPR4_Car_1": {
+      "asset": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Car_1",
+      "sha256": "ddbeb63bcfff1c86a9efa25997138d64bb94d37f40c2434429e0fb6d4c5907bd"
+    },
+    "SM_MPR4_Tree_Oak": {
+      "asset": "/Game/MPRWarehouse/ReferenceV4/Props/Meshes/SM_MPR4_Tree_Oak",
+      "sha256": "66b0aae6c2eb26ba854cf2f744008b6d68e12083c3c000ec97fd4e7c71bd9e56"
+    }
+  },
+  "protection_plan_sha256": "d562c0a3a6de80f20bac093179f4b42b312e60706a8f12721e4184eaa79da905",
+  "source_map": "/Game/Maps/MPR_CAD_Warehouse",
+  "source_map_sha256": "b7237b66ea830f29db959d258e85b5bdd01919c390ee1fb8382f93c0169e664a",
+  "source_actor_count": 609,
+  "plan_counts": {
+    "remove_old_exterior": 353,
+    "keep_main_attachments": 66,
+    "keep_interior": 136,
+    "keep_lighting": 4,
+    "keep_main_shell": 48,
+    "keep_camera": 2
+  },
+  "instances": {
+    "SM_MPR4_FreightBoxcar": 45,
+    "SM_MPR4_Locomotive": 3,
+    "SM_MPR4_Trailer_White": 15,
+    "SM_MPR4_Tractor": 29,
+    "SM_MPR4_Trailer_Blue": 8,
+    "SM_MPR4_Trailer_Coral": 6,
+    "SM_MPR4_Car_0": 13,
+    "SM_MPR4_Car_1": 6,
+    "SM_MPR4_Tree_Oak": 1282
+  },
+  "pitched_instances": 48,
+  "lighting_overrides": [
+    {
+      "actor_label": "MPR4_KeyLight",
+      "component_name": "LightComponent0",
+      "property": "intensity",
+      "value": 3.8
+    },
+    {
+      "actor_label": "MPR4_KeyLight",
+      "component_name": "LightComponent0",
+      "property": "light_source_angle",
+      "value": 3.0
+    },
+    {
+      "actor_label": "MPR4_KeyLight",
+      "component_name": "LightComponent0",
+      "property": "light_color",
+      "value": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "actor_label": "MPR4_KeyLight",
+      "component_name": "LightComponent0",
+      "property": "use_temperature",
+      "value": false
+    },
+    {
+      "actor_label": "MPR4_KeyLight",
+      "component_name": "LightComponent0",
+      "property": "indirect_lighting_intensity",
+      "value": 1.0
+    },
+    {
+      "actor_label": "MPR4_KeyLight",
+      "component_name": "LightComponent0",
+      "property": "cast_shadows",
+      "value": true
+    },
+    {
+      "actor_label": "MPR4_Ambient",
+      "component_name": "SkyLightComponent0",
+      "property": "intensity",
+      "value": 1.0
+    },
+    {
+      "actor_label": "MPR4_Ambient",
+      "component_name": "SkyLightComponent0",
+      "property": "light_color",
+      "value": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "actor_label": "MPR4_Ambient",
+      "component_name": "SkyLightComponent0",
+      "property": "cast_shadows",
+      "value": true
+    },
+    {
+      "actor_label": "MPR4_ReferenceStyle",
+      "property": "settings",
+      "value": {
+        "override_auto_exposure_method": true,
+        "auto_exposure_method": {
+          "enum": "AutoExposureMethod.AEM_HISTOGRAM"
+        },
+        "override_auto_exposure_min_brightness": true,
+        "override_auto_exposure_max_brightness": true,
+        "auto_exposure_min_brightness": 0.3,
+        "auto_exposure_max_brightness": 0.3,
+        "override_auto_exposure_bias": true,
+        "auto_exposure_bias": 0.0,
+        "override_bloom_intensity": true,
+        "bloom_intensity": 0.0,
+        "override_color_grading_intensity": true,
+        "color_grading_intensity": 0.0,
+        "override_color_grading_lut": true,
+        "color_grading_lut": null,
+        "override_local_exposure_highlight_contrast_scale": true,
+        "local_exposure_highlight_contrast_scale": 1.0,
+        "override_local_exposure_shadow_contrast_scale": true,
+        "local_exposure_shadow_contrast_scale": 1.0,
+        "override_local_exposure_detail_strength": true,
+        "local_exposure_detail_strength": 1.0,
+        "override_local_exposure_middle_grey_bias": true,
+        "local_exposure_middle_grey_bias": 0.0,
+        "override_dynamic_global_illumination_method": true,
+        "dynamic_global_illumination_method": {
+          "enum": "DynamicGlobalIlluminationMethod.LUMEN"
+        },
+        "override_reflection_method": true,
+        "reflection_method": {
+          "enum": "ReflectionMethod.LUMEN"
+        },
+        "override_lumen_scene_view_distance": true,
+        "lumen_scene_view_distance": 200000.0,
+        "override_lumen_max_trace_distance": true,
+        "lumen_max_trace_distance": 100000.0,
+        "override_color_saturation": false,
+        "override_color_saturation_shadows": false,
+        "override_color_saturation_midtones": false,
+        "override_color_saturation_highlights": false,
+        "override_color_contrast": false,
+        "override_color_contrast_shadows": false,
+        "override_color_contrast_midtones": false,
+        "override_color_contrast_highlights": false,
+        "override_color_gamma": false,
+        "override_color_gamma_shadows": false,
+        "override_color_gamma_midtones": false,
+        "override_color_gamma_highlights": false,
+        "override_color_gain": false,
+        "override_color_gain_shadows": false,
+        "override_color_gain_midtones": false,
+        "override_color_gain_highlights": false,
+        "override_color_offset": false,
+        "override_color_offset_shadows": false,
+        "override_color_offset_midtones": false,
+        "override_color_offset_highlights": false,
+        "override_white_temp": false,
+        "override_white_tint": false,
+        "override_scene_color_tint": false,
+        "override_film_slope": false,
+        "override_film_toe": false,
+        "override_film_shoulder": false,
+        "override_film_black_clip": false,
+        "override_film_white_clip": false,
+        "override_lumen_scene_detail": true,
+        "lumen_scene_detail": 4.0
+      }
+    }
+  ],
+  "scope": "CPU source/hash preflight only; native import/reload validated separately"
+}
