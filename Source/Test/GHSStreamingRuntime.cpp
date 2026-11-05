@@ -12,6 +12,7 @@
 #include "Misc/FileHelper.h"
 #include "Misc/Parse.h"
 #include "Misc/Paths.h"
+#include "PipelineStateCache.h"
 #include "RenderTimer.h"
 #include "NVENC.h"
 #include "IPixelStreaming2Module.h"
@@ -30,6 +31,8 @@ FStartupOptions StartupOptions;
 FDelegateHandle EngineReadyHandle,SoftwareFallbackHandle;
 bool bNVENCValidated=false;
 bool bStartupRejected=false;
+bool bStandbyLeased=false;
+FString StandbyMode=TEXT("active");
 
 void RejectStartup(const FString& Reason)
 {
@@ -69,7 +72,8 @@ bool ValidBudget(const FBudget& Budget)
 {
     return Budget.Sequence>0 && Budget.Sequence<=9007199254740991LL && (Budget.FPS==0 || (Budget.FPS>=5 && Budget.FPS<=120))
         && FMath::IsFinite(Budget.MinBitrateMbps) && FMath::IsFinite(Budget.MaxBitrateMbps)
-        && Budget.MinBitrateMbps>=1 && Budget.MaxBitrateMbps<=200 && Budget.MinBitrateMbps<=Budget.MaxBitrateMbps;
+        && Budget.MinBitrateMbps>=1 && Budget.MaxBitrateMbps<=200 && Budget.MinBitrateMbps<=Budget.MaxBitrateMbps
+        && (Budget.Mode==TEXT("active") || Budget.Mode==TEXT("warming") || Budget.Mode==TEXT("standby"));
 }
 
 bool AtomicWrite(const FString& Destination,const FString& Json)
@@ -148,10 +152,18 @@ public:
             AddCVar(TEXT("appliedFps"),TEXT("t.MaxFPS"));
             AddCVar(TEXT("captureFps"),TEXT("PixelStreaming2.WebRTC.Fps"));
             AddCVar(TEXT("decoupledCapture"),TEXT("PixelStreaming2.DecoupleFramerate"));
+            // Read the engine's effective settings in Shipping as well as Development.
+            // A small compiler pool retains all precaching; the remaining count lets
+            // startup/first-interaction checks distinguish compilation from rendering.
+            Metrics->SetBoolField(TEXT("psoPrecachingEnabled"),PipelineStateCache::IsPSOPrecachingEnabled());
+            AddCVar(TEXT("psoPrecompileThreadPoolSize"),TEXT("r.pso.PrecompileThreadPoolSize"));
+            AddCVar(TEXT("psoPrecompileThreadPoolPercent"),TEXT("r.pso.PrecompileThreadPoolPercentOfHardwareThreads"));
+            Metrics->SetNumberField(TEXT("psoActivePrecacheRequests"),PipelineStateCache::NumActivePrecacheRequests());
             Metrics->SetStringField(TEXT("streamingPlugin"),TEXT("PixelStreaming2"));
             Metrics->SetStringField(TEXT("encoderPolicy"),StartupOptions.Encoder);
             Metrics->SetBoolField(TEXT("nvencApiValidated"),bNVENCValidated);
             Metrics->SetNumberField(TEXT("fixedTargetFps"),StartupOptions.FixedFPS);
+            Metrics->SetStringField(TEXT("standbyMode"),StandbyMode);
             AddCVar(TEXT("screenPercentage"),TEXT("r.ScreenPercentage"));
             // Report the effective AA history independently from the native
             // render percentage, so a remote quality check cannot confuse them.
@@ -195,7 +207,7 @@ bool ParseBudget(const FString& Json,FBudget& Out,FString& Error)
     TSharedPtr<FJsonObject> Root;
     if(!FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Json),Root) || !Root)
     { Error=TEXT("Budget must be a complete JSON object"); return false; }
-    static const TSet<FString> Allowed={TEXT("version"),TEXT("sequence"),TEXT("fps"),TEXT("minBitrateMbps"),TEXT("startBitrateMbps"),TEXT("maxBitrateMbps")};
+    static const TSet<FString> Allowed={TEXT("version"),TEXT("sequence"),TEXT("fps"),TEXT("minBitrateMbps"),TEXT("startBitrateMbps"),TEXT("maxBitrateMbps"),TEXT("mode")};
     for(const auto& Pair:Root->Values)
         if(!Allowed.Contains(FString(Pair.Key.Len(), *Pair.Key))) { Error=TEXT("Budget contains an unsupported field"); return false; }
     double Version=0,Sequence=0,FPS=0,Min=0,Max=0;
@@ -217,7 +229,28 @@ bool ParseBudget(const FString& Json,FBudget& Out,FString& Error)
         { Error=TEXT("Start bitrate must be between min and max; it applies at process startup only"); return false; }
     }
     FBudget Parsed; Parsed.Sequence=int64(Sequence); Parsed.FPS=int32(FPS); Parsed.MinBitrateMbps=Min; Parsed.MaxBitrateMbps=Max;
+    if(Root->HasField(TEXT("mode")))
+    {
+        const auto& Mode=Root->Values[TEXT("mode")];
+        if(!Mode.IsValid() || Mode->Type!=EJson::String || !Mode->TryGetString(Parsed.Mode)
+            || (Parsed.Mode!=TEXT("warming") && Parsed.Mode!=TEXT("standby") && Parsed.Mode!=TEXT("active")))
+        { Error=TEXT("Budget mode must be warming, standby or active"); return false; }
+    }
     Out=Parsed; return true;
+}
+
+bool ValidateBudgetTransition(const FBudget& Budget,const FStartupOptions& Options,bool bAlreadyLeased,FString& Error)
+{
+    Error.Reset();
+    if(!ValidBudget(Budget)) { Error=TEXT("Invalid runtime budget"); return false; }
+    const bool bStandby=Budget.Mode==TEXT("standby");
+    if(Budget.Mode!=TEXT("active") && (!Options.bStandbyCapable || bAlreadyLeased))
+    { Error=TEXT("Only an explicitly permitted pristine instance may warm or enter standby"); return false; }
+    if(bStandby && Budget.FPS!=5)
+    { Error=TEXT("Standby uses exactly 5 render FPS"); return false; }
+    if(!bStandby && Options.FixedFPS>0 && Budget.FPS!=Options.FixedFPS)
+    { Error=TEXT("Fixed FPS is enabled; active or warming budgets cannot change its target"); return false; }
+    return true;
 }
 
 bool ApplyBudget(const FBudget& Budget,int64& LastSequence,FString& Error)
@@ -225,8 +258,7 @@ bool ApplyBudget(const FBudget& Budget,int64& LastSequence,FString& Error)
     Error.Reset();
     if(!ValidBudget(Budget) || Budget.Sequence<=LastSequence)
     { Error=TEXT("Invalid or already acknowledged budget"); return false; }
-    if(StartupOptions.FixedFPS>0 && Budget.FPS!=StartupOptions.FixedFPS)
-    { Error=TEXT("Fixed FPS is enabled; adaptive budgets cannot change its target"); return false; }
+    if(!ValidateBudgetTransition(Budget,StartupOptions,bStandbyLeased,Error)) return false;
     auto* FrameLimit=IConsoleManager::Get().FindConsoleVariable(TEXT("t.MaxFPS"));
     auto* MinBitrate=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming2.WebRTC.MinBitrate"));
     auto* MaxBitrate=IConsoleManager::Get().FindConsoleVariable(TEXT("PixelStreaming2.WebRTC.MaxBitrate"));
@@ -242,6 +274,8 @@ bool ApplyBudget(const FBudget& Budget,int64& LastSequence,FString& Error)
     else { MinBitrate->Set(Min,ECVF_SetByConsole); MaxBitrate->Set(Max,ECVF_SetByConsole); }
     if(FrameLimit->GetInt()!=Budget.FPS || MinBitrate->GetInt()!=Min || MaxBitrate->GetInt()!=Max)
     { Error=TEXT("Runtime did not acknowledge the requested budget"); return false; }
+    StandbyMode=Budget.Mode;
+    if(Budget.Mode==TEXT("active")) bStandbyLeased=true;
     LastSequence=Budget.Sequence; return true;
 }
 
@@ -249,6 +283,7 @@ bool ParseStartupOptions(const TCHAR* CommandLine,FStartupOptions& Out,FString& 
 {
     Error.Reset();
     FStartupOptions Parsed;
+    Parsed.bStandbyCapable=FParse::Param(CommandLine,TEXT("GHSStandbyCapable"));
     FParse::Value(CommandLine,TEXT("PixelStreamingEncoder="),Parsed.Encoder);
     if(Parsed.Encoder.Equals(TEXT("NVIDIA"),ESearchCase::IgnoreCase)) Parsed.Encoder=TEXT("NVIDIA");
     else if(Parsed.Encoder.Equals(TEXT("Auto"),ESearchCase::IgnoreCase)) Parsed.Encoder=TEXT("Auto");
@@ -282,6 +317,8 @@ void Startup()
     if(Bridge) return;
     FString StartupError;
     if(!ParseStartupOptions(FCommandLine::Get(),StartupOptions,StartupError)) { RejectStartup(StartupError); return; }
+    StandbyMode=StartupOptions.bStandbyCapable?TEXT("warming"):TEXT("active");
+    bStandbyLeased=false;
     if(StartupOptions.FixedFPS>0)
     {
         auto* FrameLimit=IConsoleManager::Get().FindConsoleVariable(TEXT("t.MaxFPS"));

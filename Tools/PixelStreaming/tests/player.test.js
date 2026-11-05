@@ -7,10 +7,11 @@ const sdkScope = { window: {}, Event, EventTarget, TextEncoder, TextDecoder, URL
 vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../player/vendor/epic-ue5.8-0.1.3.js'), 'utf8'), sdkScope);
 const realSDK = sdkScope.window['lib-pixelstreamingfrontend'];
 realSDK.Logger.InitLogging(realSDK.LogLevel.Error, false);
-async function page(initialStorage = {}, fetchHandler) {
-  const elements = new Map(), store = new Map(Object.entries(initialStorage)), timers = new Map(); let timerId = 0, streaming, videoFrame, now = 100, created = 0;
+async function page(initialStorage = {}, fetchHandler, options = {}) {
+  const elements = new Map(), store = new Map(Object.entries(initialStorage)), timers = new Map(), frameCallbacks = new Map(), animationCallbacks = new Map(); let timerId = 0, streaming, now = 100, created = 0, frameId = 0;
   function events(object) { const listeners = new Map(); return Object.assign(object, { addEventListener(type, fn) { if (!listeners.has(type)) listeners.set(type, []); listeners.get(type).push(fn); }, fire(type, fields = {}) { const e = { type, button: 0, buttons: 1, clientX: 900, clientY: 550, shiftKey: false, defaultPrevented: false, stopped: false, preventDefault() { this.defaultPrevented = true; }, stopImmediatePropagation() { this.stopped = true; }, ...fields }; for (const fn of listeners.get(type) || []) { fn(e); if (e.stopped) break; } return e; } }); }
-  const video = events({ videoWidth: 1920, videoHeight: 1080, readyState: 3, paused: false, dataset: {}, play: () => Promise.resolve(), getBoundingClientRect: () => ({ left: 100, top: 50, width: 1600, height: 1000 }), requestVideoFrameCallback(fn) { videoFrame = fn; } });
+  const video = events({ videoWidth: 1920, videoHeight: 1080, readyState: 3, paused: false, currentTime: 0, totalVideoFrames: 0, getVideoPlaybackQuality() { return { totalVideoFrames: this.totalVideoFrames }; }, dataset: {}, play: () => Promise.resolve(), getBoundingClientRect: () => ({ left: 100, top: 50, width: 1600, height: 1000 }), requestVideoFrameCallback(fn) { frameCallbacks.set(++frameId, fn); return frameId; }, cancelVideoFrameCallback(id) { frameCallbacks.delete(id); } });
+  if (options.videoFrameCallback === false) delete video.requestVideoFrameCallback;
   const element = id => { if (!elements.has(id)) elements.set(id, events({ id, hidden: false, textContent: '', value: '', dataset: {}, style: {}, children: [], attributes: {}, classList: { add() {}, remove() {}, toggle() {} }, setAttribute(k, v) { this.attributes[k] = v; }, removeAttribute(k) { delete this.attributes[k]; }, append(...nodes) { this.children.push(...nodes); nodes.forEach(n => n.parentElement = this); }, replaceChildren(...nodes) { this.children = []; this.append(...nodes); }, contains(node) { return this === node || this.children.some(child => child.contains?.(node)); }, focus() { sandbox.document.activeElement = this; this.fire('focus'); }, blur() { sandbox.document.activeElement = null; this.fire('blur'); }, scrollIntoView() {}, querySelector: () => video })); return elements.get(id); };
   class Config { constructor(params) { this.settings = { ...params.initialSettings }; } setFlagEnabled(k, v) { this.settings[k] = v; } setNumericSetting(k, v) { this.settings[k] = v; } isFlagEnabled(k) { return this.settings[k]; } }
   class PixelStreaming {
@@ -18,6 +19,7 @@ async function page(initialStorage = {}, fetchHandler) {
       streaming = this; this.config = config; this.events = new Map(); this.responses = new Map(); this.ui = []; this.closed = 0; this.connected = 0; this.input = [];
       this.toStreamerHandlers = new Map(['MouseDown', 'MouseUp', 'MouseMove'].map(type => [type, values => this.input.push({ type, values: [...values] })]));
       const transport = new realSDK.EventEmitter();
+      this.sent = []; transport.sendMessage = message => this.sent.push(JSON.parse(message));
       this.signallingProtocol = new realSDK.SignallingProtocol(transport);
       this.protocol = { get: type => payload => transport.onMessage(JSON.stringify({ type, ...JSON.parse(payload) })) };
       this.onClose = event => transport.emit('close', event);
@@ -25,12 +27,144 @@ async function page(initialStorage = {}, fetchHandler) {
     addEventListener(name, cb) { this.events.set(name, cb); } connect() { this.connected++; } reconnect() { this.connected++; } disconnect() { this.closed++; } play() {}
     emitUIInteraction(payload) { this.ui.push(JSON.parse(JSON.stringify(payload))); return true; } addResponseEventListener(name, cb) { this.responses.set(name, cb); }
   }
-  const sandbox = { window: events({ crypto: webcrypto, 'lib-pixelstreamingfrontend': { Config, PixelStreaming, Flags: { StartVideoMuted: 'StartVideoMuted', WaitForStreamer: 'WaitForStreamer', KeyboardInput: 'KeyboardInput' }, NumericParameters: { MaxReconnectAttempts: 'MaxReconnectAttempts' } } }), document: events({ body: element('body'), getElementById: element, querySelector: element, querySelectorAll: () => Array.from({length: 5}, (_, i) => element('stage-' + (i + 1))), createElement: tag => element(tag + ++created) }), sessionStorage: { getItem: k => store.get(k) || null, setItem: (k, v) => store.set(k, v), removeItem: k => store.delete(k) }, location: { protocol: 'http:', host: 'test:8080', reload() {} }, performance: { now: () => now }, MutationObserver: class { observe() {} }, setTimeout: (cb, ms) => { timers.set(++timerId, { cb, ms }); return timerId; }, clearTimeout: id => timers.delete(id), fetch: fetchHandler || (async () => ({ ok: true, status: 200, json: async () => ({ token: 'token123', mode: 'shared', fps: 60, minBitrateMbps: 8, maxBitrateMbps: 35 }) })), console };
+  const sandbox = { window: events({ crypto: webcrypto, requestAnimationFrame(fn) { animationCallbacks.set(++frameId, fn); return frameId; }, cancelAnimationFrame(id) { animationCallbacks.delete(id); }, 'lib-pixelstreamingfrontend': { Config, PixelStreaming, Flags: { StartVideoMuted: 'StartVideoMuted', WaitForStreamer: 'WaitForStreamer', KeyboardInput: 'KeyboardInput' }, NumericParameters: { MaxReconnectAttempts: 'MaxReconnectAttempts' } } }), document: events({ hidden: false, visibilityState: 'visible', body: element('body'), getElementById: element, querySelector: element, querySelectorAll: () => Array.from({length: 5}, (_, i) => element('stage-' + (i + 1))), createElement: tag => element(tag + ++created) }), sessionStorage: { getItem: k => store.get(k) || null, setItem: (k, v) => store.set(k, v), removeItem: k => store.delete(k) }, location: { protocol: 'http:', host: 'test:8080', reload() {} }, performance: { now: () => now }, MutationObserver: class { observe() {} }, setTimeout: (cb, ms) => { timers.set(++timerId, { cb, ms }); return timerId; }, clearTimeout: id => timers.delete(id), fetch: fetchHandler || (async () => ({ ok: true, status: 200, json: async () => ({ token: 'token123', mode: 'shared', fps: 60, minBitrateMbps: 8, maxBitrateMbps: 35 }) })), console };
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../player/stream-quality.js'), 'utf8'), sandbox);
   const searchPath = path.join(__dirname, '../player/scene-search.js'); if (fs.existsSync(searchPath)) vm.runInNewContext(fs.readFileSync(searchPath, 'utf8'), sandbox);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../player/app.js'), 'utf8'), sandbox); await new Promise(r => setImmediate(r));
-  return { elements, store, timers, window: sandbox.window, document: sandbox.document, video, get stream() { return streaming; }, frame() { videoFrame(); }, stats: () => sandbox.window.ghsStreamingStats, advance(ms) { now += ms; }, reply(fields = {}) { const state = { type: 'ghs.sceneSearch', clientId: streaming.ui.at(-1)?.clientId, requestId: streaming.ui.at(-1)?.requestId || 0, viewport: { width: 1920, height: 1080 }, rect: { x: 1100, y: 90, width: 420, height: 48 }, visible: true, open: false, query: '', results: [], total: 0, selectedIndex: 0, ...fields }; for (const cb of streaming.responses.values()) cb(JSON.stringify(state)); } };
+  return { elements, store, timers, frameCallbacks, animationCallbacks, window: sandbox.window, document: sandbox.document, video, get stream() { return streaming; }, frame() { const callbacks = [...frameCallbacks.values()]; frameCallbacks.clear(); for (const fn of callbacks) fn(now, { presentedFrames: 1 }); }, animationFrame() { const callbacks = [...animationCallbacks.values()]; animationCallbacks.clear(); for (const fn of callbacks) fn(now); }, stats: () => sandbox.window.ghsStreamingStats, advance(ms) { now += ms; }, reply(fields = {}) { const state = { type: 'ghs.sceneSearch', clientId: streaming.ui.at(-1)?.clientId, requestId: streaming.ui.at(-1)?.requestId || 0, viewport: { width: 1920, height: 1080 }, rect: { x: 1100, y: 90, width: 420, height: 48 }, visible: true, open: false, query: '', results: [], total: 0, selectedIndex: 0, ...fields }; for (const cb of streaming.responses.values()) cb(JSON.stringify(state)); } };
 }
+
+test('older browsers verify visible advancing video in animation frames without accepting metadata or playing alone', async () => {
+  const p = await page({}, undefined, { videoFrameCallback: false });
+  p.video.fire('loadedmetadata'); p.video.fire('playing'); p.animationFrame();
+  assert.equal(p.stats().firstFrame, false); assert.equal(p.animationCallbacks.size, 1);
+  p.document.hidden = true; p.document.visibilityState = 'hidden'; p.video.currentTime = 1; p.animationFrame();
+  assert.equal(p.stats().firstFrame, false);
+  p.document.hidden = false; p.document.visibilityState = 'visible'; p.animationFrame();
+  assert.equal(p.stats().firstFrame, false, 'hidden-tab progress alone is not proof of a visible frame');
+  p.advance(40); p.video.currentTime = 2; p.animationFrame();
+  assert.equal(p.stats().firstFrame, true); assert.equal(p.stats().startup.firstDisplayedEvidence, 'animation-frame-progress');
+  assert.equal(p.stats().startup.firstDecodedEvidence, 'playback-progress');
+  assert.equal(p.animationCallbacks.size, 0); assert.equal(p.stream.sent.filter(m => m.type === 'ghsFirstFrame').length, 1);
+});
+
+test('fallback accepts an actual video-frame counter advance and cancels its observer when disconnected', async () => {
+  const p = await page({}, undefined, { videoFrameCallback: false });
+  p.video.totalVideoFrames = 1; p.video.paused = true; p.animationFrame(); assert.equal(p.stats().firstFrame, false);
+  p.video.paused = false; p.animationFrame(); assert.equal(p.stats().firstFrame, false);
+  p.video.totalVideoFrames = 2; p.advance(30); p.animationFrame(); assert.equal(p.stats().firstFrame, true);
+  const stopped = await page({}, undefined, { videoFrameCallback: false });
+  const stale = [...stopped.animationCallbacks.values()][0];
+  stopped.stream.protocol.get('ghsKicked')(JSON.stringify({ message: 'Disconnected' }));
+  assert.equal(stopped.animationCallbacks.size, 0); stopped.video.totalVideoFrames = 4; stale();
+  assert.equal(stopped.stats().firstFrame, false); assert.equal(stopped.stream.sent.length, 0);
+});
+
+test('first-frame diagnostics isolate admission, SDP, ICE and presentation without exposing signalling secrets', async () => {
+  const p = await page(); const receive = (type, fields) => p.stream.protocol.get(type)(JSON.stringify(fields));
+  p.advance(20); p.stream.signallingProtocol.transport.emit('open', {});
+  p.advance(10); receive('ghsAdmission', { instanceId: 'viewer-123', warmHit: true, timings: { instanceStartupMs: 12500, standbyReadyAgeMs: 4000, admissionToLeaseMs: 5, secret: 'private' } });
+  p.advance(100); receive('ghsStage', { stage: 'activatingStreamer', message: 'Activating' });
+  p.advance(400); receive('ghsStage', { stage: 'streamerReady', message: 'Ready' });
+  p.advance(2); p.stream.signallingProtocol.sendMessage({ type: 'subscribe', streamerId: 'viewer-123' });
+  p.advance(30); receive('offer', { sdp: 'private-sdp', token: 'private-token' });
+  p.advance(8); p.stream.signallingProtocol.sendMessage({ type: 'answer', sdp: 'private-answer' });
+  p.advance(5); p.stream.signallingProtocol.sendMessage({ type: 'iceCandidate', candidate: { candidate: 'private-address' } });
+  p.advance(7); receive('iceCandidate', { candidate: { candidate: 'private-remote-address' } });
+  p.advance(500); p.stream.events.get('webRtcConnected')();
+  p.advance(20); p.video.fire('playing'); assert.equal(p.stats().firstFrame, false);
+  p.advance(10); p.frame();
+  const snapshot = p.stats(), startup = snapshot.startup;
+  assert.equal(startup.attemptId, 1);
+  assert.equal(startup.stageMs.sessionRequest, 0); assert.equal(startup.stageMs.sessionReady, 0);
+  assert.equal(startup.stageMs.admission, 30); assert.equal(startup.stageMs.ready, 530);
+  assert.equal(startup.stageMs.subscribe, 532); assert.equal(startup.stageMs.offer, 562);
+  assert.equal(startup.stageMs.answer, 570); assert.equal(startup.stageMs.localIce, 575);
+  assert.equal(startup.stageMs.remoteIce, 582); assert.equal(startup.stageMs.iceConnected, 1082);
+  assert.equal(startup.stageMs.firstDisplayed, 1112); assert.equal(snapshot.firstFrameMs, 1112);
+  assert.equal(startup.navigationTotalMs, 1212); assert.equal(startup.appInitNavigationMs, 100); assert.equal(startup.attemptStartNavigationMs, 100);
+  assert.equal(startup.intervalMs.readyToSubscribe, 2); assert.equal(startup.intervalMs.readyToFirstDisplayed, 582);
+  assert.equal(startup.intervalMs.iceToFirstDisplayed, 30);
+  assert.equal(startup.server.warmHit, true); assert.equal(startup.server.instanceStartupMs, 12500);
+  assert.equal(startup.firstDecodedEvidence, 'video-frame-callback');
+  assert.throws(() => { startup.stageMs.ready = 999; }, TypeError);
+  assert.throws(() => { startup.server.warmHit = false; }, TypeError);
+  assert.doesNotMatch(JSON.stringify(startup), /private|token|sdp/i);
+  p.advance(3000); assert.equal(p.stats().startup.elapsedMs, 1112); assert.equal(p.stats().startup.navigationTotalMs, 1212);
+});
+
+test('reconnecting on the same video creates a fresh attempt and ignores a stale presentation callback', async () => {
+  const p = await page(); const previousFrame = [...p.frameCallbacks.values()][0];
+  p.advance(400); p.frame(); assert.equal(p.stats().firstFrameMs, 400);
+  p.stream.events.get('webRtcDisconnected')({}); p.stream.onClose({ code: 1006 });
+  p.advance(2000); [...p.timers.values()].find(t => t.ms === 2000).cb();
+  assert.equal(p.stats().startup.attemptId, 2); assert.equal(p.stats().firstFrameMs, null);
+  assert.equal(p.stats().startup.stageMs.ready, null);
+  previousFrame(); assert.equal(p.stats().firstFrame, false);
+  assert.equal(p.frameCallbacks.size, 1, 'the reused video needs exactly one new presentation callback');
+  p.frame(); assert.equal(p.stats().firstFrame, false, 'a buffered old frame must not complete the new connection before its ICE connects');
+  p.advance(80); p.stream.events.get('webRtcConnected')();
+  p.advance(40); p.frame();
+  assert.equal(p.stats().firstFrame, true); assert.equal(p.stats().firstFrameMs, 120);
+  assert.equal(p.stats().startup.stageMs.firstDisplayed, 120);
+  assert.equal(p.stats().startup.intervalMs.iceToFirstDisplayed, 40);
+});
+
+test('same-peer recovery does not count old cumulative decoded frames as the new attempt first decode', async () => {
+  const p = await page(), stats = new realSDK.AggregatedStats();
+  function report(decoded, aggregatedStats = stats) {
+    aggregatedStats.processStats(new Map([['video', { id: 'video', type: 'inbound-rtp', kind: 'video', ssrc: 10, timestamp: decoded * 100, framesDecoded: decoded, bytesReceived: decoded * 1000 }]]));
+    p.stream.events.get('statsReceived')({ data: { aggregatedStats } });
+  }
+  p.stream.events.get('webRtcConnected')(); report(60); p.frame();
+  p.stream.events.get('webRtcDisconnected')({}); p.advance(1000); p.stream.events.get('webRtcConnected')();
+  report(60); assert.equal(p.stats().startup.stageMs.firstDecoded, null);
+  p.advance(50); report(61); assert.equal(p.stats().startup.stageMs.firstDecoded, 50); assert.equal(p.stats().firstFrame, false);
+  p.frame(); p.stream.events.get('webRtcDisconnected')({}); p.stream.events.get('webRtcConnected')();
+  report(1, new realSDK.AggregatedStats()); assert.equal(p.stats().startup.stageMs.firstDecoded, 0, 'a new peer stats object has its own zero baseline');
+});
+
+test('same-socket unsubscribe and UE signalling recovery each require and report a new displayed frame', async () => {
+  const p = await page(), send = message => p.stream.signallingProtocol.sendMessage(message);
+  send({ type: 'subscribe', streamerId: 'viewer-123' }); p.frame();
+  send({ type: 'subscribe', streamerId: 'viewer-123' });
+  assert.equal(p.stats().startup.attemptId, 1, 'duplicate subscription is not a new media attempt');
+  send({ type: 'unsubscribe' }); send({ type: 'subscribe', streamerId: 'viewer-123' });
+  assert.equal(p.stats().firstFrame, false); assert.equal(p.stats().startup.attemptId, 2);
+  p.stream.events.get('webRtcConnected')(); p.frame();
+  assert.equal(p.stream.sent.filter(m => m.type === 'ghsFirstFrame').length, 2);
+  p.stream.protocol.get('ghsStage')(JSON.stringify({ stage: 'waitingStreamer', message: 'Reconnecting' }));
+  assert.equal(p.stats().firstFrame, false);
+  p.stream.protocol.get('ghsStage')(JSON.stringify({ stage: 'streamerReady', message: 'Ready' }));
+  send({ type: 'subscribe', streamerId: 'viewer-123' }); p.stream.events.get('webRtcConnected')(); p.frame();
+  assert.equal(p.stats().startup.attemptId, 3);
+  assert.equal(p.stream.sent.filter(m => m.type === 'ghsFirstFrame').length, 3);
+});
+
+test('administrative disconnect prevents pending video callbacks from reporting a first frame', async () => {
+  const p = await page(), callback = [...p.frameCallbacks.values()][0];
+  p.stream.protocol.get('ghsKicked')(JSON.stringify({ message: 'Disconnected' }));
+  p.advance(900); callback();
+  assert.equal(p.stats().firstFrame, false);
+  assert.equal(p.stats().startup.stageMs.firstDisplayed, null);
+  assert.equal(p.stream.sent.some(m => m.type === 'ghsFirstFrame'), false);
+});
+
+test('only a displayed video frame releases warm-pool replenishment and the signal is sent once on the authenticated protocol', async () => {
+  const p = await page(); p.stream.events.get('webRtcConnected')(); p.video.fire('playing');
+  assert.equal(p.stream.sent.some(m => m.type === 'ghsFirstFrame'), false);
+  p.advance(450); p.frame(); p.frame(); p.video.fire('playing');
+  const messages = p.stream.sent.filter(m => m.type === 'ghsFirstFrame');
+  assert.equal(messages.length, 1); assert.equal(messages[0].displayed, true); assert.equal(messages[0].attemptElapsedMs, 450);
+  assert.equal(messages[0].attemptId, 1); assert.equal(messages[0].navigationTotalMs, 550);
+  assert.equal(p.stats().startup.frameSignalSent, true);
+});
+
+test('a transport closing at first display cannot hide a successfully rendered frame', async () => {
+  const p = await page(); p.stream.signallingProtocol.transport.sendMessage = () => { throw new Error('closing'); };
+  assert.doesNotThrow(() => p.frame());
+  assert.equal(p.stats().firstFrame, true); assert.equal(p.stats().startup.frameSignalSent, false);
+});
 test('page automatically connects muted and does not declare success before actual video frame', async () => {
   const p = await page(); assert.equal(p.stream.connected, 1); assert.equal(p.stream.config.settings.AutoPlayVideo, true); assert.equal(p.stream.config.settings.StartVideoMuted, true); assert.equal(p.stream.config.settings.MatchViewportRes, false);
   assert.equal(p.stream.config.settings.BrowserSendOffer, false);
@@ -39,8 +173,17 @@ test('page automatically connects muted and does not declare success before actu
   p.frame(); assert.equal(p.stats().firstFrame, true); assert.equal(p.elements.get('loading').hidden, true); assert.equal(p.stats().width, 1920);
 });
 
+test('the player uses the new five-viewer fallback but respects an explicit server limit', async () => {
+  const p = await page(); p.stream.events.get('playerCount')({ data: { count: 1 } });
+  assert.equal(p.elements.get('viewer-count').textContent, '1 / 5');
+  const custom = await page({}, async () => ({ ok: true, status: 200, json: async () => ({ token: 'test', mode: 'independent', fps: 60, maxViewers: 3, minBitrateMbps: 1, maxBitrateMbps: 24 }) }));
+  custom.stream.events.get('playerCount')({ data: { count: 1 } });
+  assert.equal(custom.elements.get('viewer-count').textContent, '1 / 3');
+});
+
 test('UE5.8 real aggregated RTC stats preserve receive, decode, jitter and selected media path diagnostics', async () => {
   const p = await page(), aggregatedStats = new realSDK.AggregatedStats();
+  p.stream.events.get('webRtcConnected')();
   const report = (timestamp, frames, bytes) => new Map([
     ['video', { id: 'video', type: 'inbound-rtp', kind: 'video', ssrc: 10, timestamp, framesDecoded: frames, bytesReceived: bytes, packetsReceived: frames * 10, packetsLost: 0, jitterBufferDelay: frames * .004, jitterBufferEmittedCount: frames, totalDecodeTime: frames * .001, freezeCount: 0 }],
     ['transport', { id: 'transport', type: 'transport', selectedCandidatePairId: 'pair' }],
@@ -49,9 +192,15 @@ test('UE5.8 real aggregated RTC stats preserve receive, decode, jitter and selec
     ['remote', { id: 'remote', type: 'remote-candidate', candidateType: 'host', protocol: 'udp', address: '10.100.185.161' }]
   ]);
   for (const values of [[1000, 60, 1000000], [2000, 120, 2000000]]) {
+    p.advance(1000);
     aggregatedStats.processStats(report(...values));
     p.stream.events.get('statsReceived')({ data: { aggregatedStats } });
   }
+  assert.equal(p.stats().startup.stageMs.firstDecoded, 1000);
+  assert.equal(p.stats().startup.firstDecodedEvidence, 'rtc-stats');
+  assert.equal(p.stats().firstFrame, false); assert.equal(p.stats().startup.stageMs.firstDisplayed, null);
+  assert.equal(p.frameCallbacks.size, 1, 'stats must not register duplicate presentation callbacks');
+  p.frame(); assert.equal(p.stats().startup.stageMs.firstDisplayed, 2000);
   assert.equal(p.stats().fps, 60);
   assert.equal(p.stats().bitrateMbps, 8);
   assert.equal(p.stats().rttMs, 12);

@@ -111,4 +111,37 @@ bool FGHSPS2NvidiaPolicyTest::RunTest(const FString&)
     TestFalse(TEXT("Software codec negotiation cannot bypass the policy"),GHSStreamingRuntime::ValidateNvidiaPolicy(true,true,TEXT("H264"),true,Error));
     return true;
 }
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStandbyBudgetParsingTest,"GHS.Streaming.Runtime.ParsesExplicitStandbyBudget",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSStandbyBudgetParsingTest::RunTest(const FString&)
+{
+    GHSStreamingRuntime::FBudget Budget; FString Error;
+    TestTrue(TEXT("Accept explicit low-load standby budget"),GHSStreamingRuntime::ParseBudget(TEXT("{\"version\":1,\"sequence\":1,\"fps\":5,\"mode\":\"standby\",\"minBitrateMbps\":1,\"maxBitrateMbps\":24}"),Budget,Error));
+    TestEqual(TEXT("Preserve standby mode"),Budget.Mode,FString(TEXT("standby")));
+    TestTrue(TEXT("Accept active restore budget"),GHSStreamingRuntime::ParseBudget(TEXT("{\"version\":1,\"sequence\":2,\"fps\":30,\"mode\":\"active\",\"minBitrateMbps\":1,\"maxBitrateMbps\":24}"),Budget,Error));
+    TestFalse(TEXT("Reject unrecognized mode"),GHSStreamingRuntime::ParseBudget(TEXT("{\"version\":1,\"sequence\":3,\"fps\":5,\"mode\":\"paused\",\"minBitrateMbps\":1,\"maxBitrateMbps\":24}"),Budget,Error));
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStandbyLifecyclePolicyTest,"GHS.Streaming.Runtime.EnforcesOneWayStandbyLease",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSStandbyLifecyclePolicyTest::RunTest(const FString&)
+{
+    using namespace GHSStreamingRuntime;
+    FBudget Budget; Budget.Sequence=1; Budget.FPS=5; Budget.Mode=TEXT("standby");
+    FStartupOptions Options; Options.FixedFPS=30; FString Error;
+    TestFalse(TEXT("Ordinary fixed FPS process cannot idle"),ValidateBudgetTransition(Budget,Options,false,Error));
+    TestTrue(TEXT("Explicit startup permission parses"),ParseStartupOptions(TEXT("-FixedFPS=30 -GHSStandbyCapable"),Options,Error));
+    TestTrue(TEXT("Pristine permitted process can idle"),ValidateBudgetTransition(Budget,Options,false,Error));
+    Budget.FPS=6;
+    TestFalse(TEXT("Standby is not an arbitrary override of fixed target"),ValidateBudgetTransition(Budget,Options,false,Error));
+    Budget.Mode=TEXT("warming"); Budget.FPS=30;
+    TestTrue(TEXT("Warmup retains original FPS"),ValidateBudgetTransition(Budget,Options,false,Error));
+    Budget.Mode=TEXT("active"); Budget.FPS=5;
+    TestFalse(TEXT("Active lease cannot remain at idle FPS"),ValidateBudgetTransition(Budget,Options,false,Error));
+    Budget.FPS=30;
+    TestTrue(TEXT("Active lease restores configured FPS"),ValidateBudgetTransition(Budget,Options,false,Error));
+    Budget.Mode=TEXT("standby"); Budget.FPS=5;
+    TestFalse(TEXT("Leased state cannot be reused for another viewer"),ValidateBudgetTransition(Budget,Options,true,Error));
+    Budget.Mode=TEXT("warming"); Budget.FPS=30;
+    TestFalse(TEXT("Leased state cannot re-enter warmup"),ValidateBudgetTransition(Budget,Options,true,Error));
+    return true;
+}
 #endif

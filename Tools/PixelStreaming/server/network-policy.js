@@ -3,16 +3,18 @@ const fs = require('node:fs');
 const net = require('node:net');
 const crypto = require('node:crypto');
 
-const NETWORK_DEFAULTS = { maxViewers: 10, networkMode: 'lan', publicUrl: '', accessProtectionEnabled: false, accessCode: '', tlsCertPath: '', tlsKeyPath: '', trustProxy: false, externalTlsTermination: false, stunUrl: '', turnUrl: '', turnUsername: '', turnPassword: '' };
+const NETWORK_DEFAULTS = { maxViewers: 5, networkMode: 'lan', publicUrl: '', backupPublicUrl: '', accessProtectionEnabled: false, accessCode: '', tlsCertPath: '', tlsKeyPath: '', trustProxy: false, externalTlsTermination: false, stunUrl: '', turnUrl: '', turnUsername: '', turnPassword: '' };
 function validateNetwork(c) {
-  if (!Number.isInteger(c.maxViewers) || c.maxViewers < 1 || c.maxViewers > 10) throw Error('人数上限必须是1至10的整数');
+  // Migrate valid older ten-seat settings downward; malformed values still fail.
+  if (Number.isInteger(c.maxViewers) && c.maxViewers > 5 && c.maxViewers <= 10) c.maxViewers = 5;
+  if (!Number.isInteger(c.maxViewers) || c.maxViewers < 1 || c.maxViewers > 5) throw Error('人数上限必须是1至5的整数');
   if (!['lan', 'public'].includes(c.networkMode)) throw Error('网络模式必须是 lan 或 public');
   if (typeof c.accessProtectionEnabled !== 'boolean') throw Error('accessProtectionEnabled 必须是布尔值');
   if (typeof c.trustProxy !== 'boolean') throw Error('trustProxy 必须是布尔值');
   if (typeof c.externalTlsTermination !== 'boolean') throw Error('externalTlsTermination 必须是布尔值');
   if (c.trustProxy && c.networkMode !== 'public') throw Error('本机反向代理仅适用于公网模式');
   if (c.externalTlsTermination && c.networkMode !== 'public') throw Error('云负载均衡 HTTPS 仅适用于公网模式');
-  for (const key of ['publicUrl', 'accessCode', 'tlsCertPath', 'tlsKeyPath', 'stunUrl', 'turnUrl', 'turnUsername', 'turnPassword']) {
+  for (const key of ['publicUrl', 'backupPublicUrl', 'accessCode', 'tlsCertPath', 'tlsKeyPath', 'stunUrl', 'turnUrl', 'turnUsername', 'turnPassword']) {
     if (typeof c[key] !== 'string' || c[key].length > 4096 || /[\r\n\0]/.test(c[key])) throw Error('无效网络配置：' + key);
   }
   if (c.publicUrl) {
@@ -29,6 +31,19 @@ function validateNetwork(c) {
   if (c.networkMode === 'public') {
     if (c.publicUrl.startsWith('https:') && !c.tlsCertPath && !c.trustProxy && !c.externalTlsTermination) throw Error('HTTPS 公网地址需要证书、本机反向代理或云负载均衡 HTTPS');
     if (c.publicUrl.startsWith('http:') && (c.tlsCertPath || c.trustProxy || c.externalTlsTermination)) throw Error('已启用 HTTPS 接入，公网地址应使用 https://');
+  }
+  if (c.backupPublicUrl) {
+    if (c.networkMode !== 'public' || !c.externalTlsTermination || !c.publicUrl.startsWith('https://')) throw Error('HTTP 备用地址仅适用于公网云负载均衡 HTTPS 主入口');
+    // Parse the raw string first: URL alone silently strips whitespace/control
+    // characters and accepts empty queries, credentials or alternate slashes.
+    const match = /^http:\/\/(\[[a-fA-F0-9:]+\]|[a-zA-Z0-9.-]+)(?::([0-9]{1,5}))?\/?$/.exec(c.backupPublicUrl);
+    if (!match || /[\s\x00-\x1f\x7f]/.test(c.backupPublicUrl)) throw Error('HTTP 备用地址只能包含协议、域名或IP和端口');
+    const host = match[1];
+    if (!host.startsWith('[') && (host.length > 253 || !host.split('.').every(label => /^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$/.test(label)))) throw Error('HTTP 备用地址的域名或IP无效');
+    if (match[2] && (+match[2] < 1 || +match[2] > 65535)) throw Error('HTTP 备用地址端口必须是1至65535');
+    let url; try { url = new URL(c.backupPublicUrl); } catch { throw Error('HTTP 备用地址必须是完整的 http:// 地址'); }
+    if (url.host === new URL(c.publicUrl).host) throw Error('HTTP 备用地址的主机和端口不能与 HTTPS 主入口相同');
+    c.backupPublicUrl = url.origin;
   }
   for (const [key, schemes] of [['stunUrl', ['stun:', 'stuns:']], ['turnUrl', ['turn:', 'turns:']]]) {
     if (!c[key]) continue;
@@ -61,10 +76,12 @@ function sameOrigin(req, c) {
   if (c.networkMode === 'public') {
     // Disabling the access-code gate never disables browser Origin/Host guards.
     // WebSockets still require a server-issued session token in every mode.
-    const expectedHost = new URL(c.publicUrl).host;
     const local = loopback(req.socket.remoteAddress) && ['127.0.0.1:' + c.httpPort, 'localhost:' + c.httpPort].includes(req.headers.host);
-    if (req.headers.host !== expectedHost && !local) return false;
-    return !req.headers.origin || req.headers.origin === c.publicUrl || (local && req.headers.origin === native);
+    if (local && (!req.headers.origin || req.headers.origin === c.publicUrl || req.headers.origin === native)) return true;
+    // Each allowed Host belongs to exactly one browser Origin. Never combine
+    // independently allowed Hosts and Origins into a cross-origin allowlist.
+    return [c.publicUrl, c.backupPublicUrl].filter(Boolean).some(origin =>
+      req.headers.host === new URL(origin).host && (!req.headers.origin || req.headers.origin === origin));
   }
   return !req.headers.origin || req.headers.origin === native;
 }

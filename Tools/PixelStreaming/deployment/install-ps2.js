@@ -9,6 +9,7 @@ const MANAGED = ['App', 'server', 'player', 'runtime', 'node_modules'];
 const EXE = 'App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe';
 const REQUIRED = [EXE, 'server/server.js', 'player/index.html', 'runtime/node.exe', 'node_modules/ws/package.json', '像素流服务启动器.exe'];
 const PROTECTED = new Set(['launcher.config.json', 'delivery-manifest.json', '_updates', 'logs', 'sessions', 'certificates', 'peerstream']);
+const MEDIA_SETTINGS = 'server/media-address.json';
 const MIGRATION = { encoderAsync: true, encoder: 'NVIDIA', fixedFps: true, fps: 60, adaptiveResourceBudget: false, executablePath: EXE };
 const same = (a, b) => process.platform === 'win32' ? a.toLowerCase() === b.toLowerCase() : a === b;
 const within = (root, item) => same(root, item) || (process.platform === 'win32' ? item.toLowerCase().startsWith(root.toLowerCase() + path.sep) : item.startsWith(root + path.sep));
@@ -80,7 +81,7 @@ function inspect(source, target) {
     const parts = relativePath(entry.path), key = entry.path.toLowerCase();
     if (names.has(key)) throw Error('交付清单包含重复文件路径');
     names.add(key);
-    if (PROTECTED.has(parts[0].toLowerCase()) || (parts.length > 1 && !MANAGED.includes(parts[0])) || (parts.length === 1 && MANAGED.includes(parts[0]))) throw Error('交付清单试图覆盖非受管路径：' + entry.path);
+    if (key === MEDIA_SETTINGS || PROTECTED.has(parts[0].toLowerCase()) || (parts.length > 1 && !MANAGED.includes(parts[0])) || (parts.length === 1 && MANAGED.includes(parts[0]))) throw Error('交付清单试图覆盖非受管路径：' + entry.path);
     if (parts.length === 1) units.add(parts[0]);
     verifyFile(sourceRoot, entry);
   }
@@ -119,7 +120,7 @@ function preserveServerSettings(plan, staged) {
       const file = path.join(dir, entry.name), name = relative + '/' + entry.name;
       noLinks(file);
       if (entry.isDirectory()) walk(file, name);
-      else if (entry.isFile() && !plan.names.has(name.toLowerCase()) && (oldOwned ? !oldOwned.has(name.toLowerCase()) : /(?:\.json|\.pem|\.crt|\.cer|\.pfx|\.p12|\.key|\.ini|\.conf|\.config|\.env)$/i.test(name))) {
+      else if (entry.isFile() && !plan.names.has(name.toLowerCase()) && (name.toLowerCase() === MEDIA_SETTINGS || (oldOwned ? !oldOwned.has(name.toLowerCase()) : /(?:\.json|\.pem|\.crt|\.cer|\.pfx|\.p12|\.key|\.ini|\.conf|\.config|\.env)$/i.test(name)))) {
         const destination = path.join(staged, ...relativePath(name));
         fs.mkdirSync(path.dirname(destination), { recursive: true }); fs.copyFileSync(file, destination); count++;
       }
@@ -136,6 +137,8 @@ function install(options, dependencies = {}) {
   assertStopped(plan.target, processList());
   const configFile = path.join(plan.target, 'launcher.config.json');
   const configExisted = !!stat(configFile), configHash = configExisted ? hashFile(configFile) : null;
+  const mediaFile = path.join(plan.target, ...MEDIA_SETTINGS.split('/')); noLinks(mediaFile);
+  const mediaHash = stat(mediaFile) ? hashFile(mediaFile) : null;
   const defaultsFile = path.join(plan.source, 'launcher.config.json');
   noLinks(defaultsFile);
   const configuration = configExisted ? jsonObject(configFile, '现有启动器配置') : stat(defaultsFile) ? jsonObject(defaultsFile, '新包启动器配置') : {};
@@ -160,6 +163,8 @@ function install(options, dependencies = {}) {
     writeJSON(path.join(staged, 'launcher.config.json'), nextConfiguration);
     assertStopped(plan.target, processList());
     if ((stat(configFile) ? hashFile(configFile) : null) !== configHash) throw Error('准备期间配置发生变化，请重新执行更新');
+    noLinks(mediaFile);
+    if ((stat(mediaFile) ? hashFile(mediaFile) : null) !== mediaHash) throw Error('准备期间媒体配置发生变化，请重新执行更新');
     for (const unit of [...plan.units, 'launcher.config.json', 'delivery-manifest.json']) {
       const target = path.join(plan.target, unit), source = path.join(staged, unit), saved = path.join(backup, unit);
       noLinks(target); noLinks(source); noLinks(saved);

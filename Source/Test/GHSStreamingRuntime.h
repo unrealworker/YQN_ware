@@ -11,6 +11,7 @@ namespace GHSStreamingRuntime
         int32 FPS = 0; // Zero removes only the render cap; PS2 retains its positive negotiated capture ceiling.
         double MinBitrateMbps = 1;
         double MaxBitrateMbps = 35;
+        FString Mode = TEXT("active");
     };
 
     bool ParseBudget(const FString& Json, FBudget& Out, FString& Error);
@@ -19,7 +20,9 @@ namespace GHSStreamingRuntime
     {
         FString Encoder = TEXT("Auto");
         int32 FixedFPS = 0;
+        bool bStandbyCapable = false;
     };
+    bool ValidateBudgetTransition(const FBudget& Budget, const FStartupOptions& Options, bool bAlreadyLeased, FString& Error);
     bool ParseStartupOptions(const TCHAR* CommandLine, FStartupOptions& Out, FString& Error);
     bool ValidateNvidiaPolicy(bool bNvidiaRHI, bool bNVENCAPIAvailable, const FString& ActualCodec, bool bNegotiateCodecs, FString& Error);
     void Startup();

@@ -26,9 +26,11 @@ namespace Ghs.PixelStreaming
         public int maxBitrateMbps { get; set; }
         public string qualityProfile { get; set; }
         public bool adaptiveResourceBudget { get; set; }
+        public bool warmStandbyEnabled { get; set; }
         public int maxViewers { get; set; }
         public string networkMode { get; set; }
         public string publicUrl { get; set; }
+        public string backupPublicUrl { get; set; }
         public bool accessProtectionEnabled { get; set; }
         public string accessCode { get; set; }
         public string tlsCertPath { get; set; }
@@ -39,19 +41,35 @@ namespace Ghs.PixelStreaming
         public string turnUrl { get; set; }
         public string turnUsername { get; set; }
         public string turnPassword { get; set; }
-        public LauncherConfig() { executablePath="App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe"; httpPort=8080; streamerPort=8888; width=1920; height=1080; mode="shared"; fps=60; fixedFps=true; encoderAsync=true; encoder="NVIDIA"; maxViewers=10; networkMode="lan"; publicUrl=accessCode=tlsCertPath=tlsKeyPath=stunUrl=turnUrl=turnUsername=turnPassword=""; adaptiveResourceBudget=false; ApplyQualityProfile("balanced"); }
-        public LauncherConfig Clone() { JavaScriptSerializer json=new JavaScriptSerializer(); return json.Deserialize<LauncherConfig>(json.Serialize(this)); }
+        // Preserve deployment-specific settings that a newer backend may understand.
+        private Dictionary<string,object> additionalSettings=new Dictionary<string,object>(StringComparer.Ordinal);
+        public LauncherConfig() { executablePath="App/Windows/Test/Binaries/Win64/TestGame-Win64-Shipping.exe"; httpPort=8080; streamerPort=8888; width=1920; height=1080; mode="shared"; fps=60; fixedFps=true; encoderAsync=true; encoder="NVIDIA"; maxViewers=5; networkMode="lan"; publicUrl=backupPublicUrl=accessCode=tlsCertPath=tlsKeyPath=stunUrl=turnUrl=turnUsername=turnPassword=""; adaptiveResourceBudget=false; ApplyQualityProfile("balanced"); }
+        private string Serialize()
+        {
+            JavaScriptSerializer json=new JavaScriptSerializer(); Dictionary<string,object> values=json.Deserialize<Dictionary<string,object>>(json.Serialize(this));
+            foreach(var item in additionalSettings) if(!values.ContainsKey(item.Key)) values[item.Key]=item.Value;
+            return json.Serialize(values);
+        }
+        private static LauncherConfig Deserialize(string text,JavaScriptSerializer json,Dictionary<string,object> fields)
+        {
+            LauncherConfig c=json.Deserialize<LauncherConfig>(text); if(c==null) throw new ArgumentException("配置文件为空。");
+            HashSet<string> known=new HashSet<string>(StringComparer.Ordinal); foreach(var property in typeof(LauncherConfig).GetProperties()) known.Add(property.Name);
+            foreach(var item in fields) if(!known.Contains(item.Key)) c.additionalSettings[item.Key]=item.Value;
+            return c;
+        }
+        public LauncherConfig Clone() { JavaScriptSerializer json=new JavaScriptSerializer(); string text=Serialize(); return Deserialize(text,json,json.Deserialize<Dictionary<string,object>>(text)); }
         public string ResolveLocalFile(string root,string file) { return string.IsNullOrWhiteSpace(file)?"":Path.GetFullPath(Path.Combine(root,file)); }
         public void ValidateNetwork(string root)
         {
-            if(maxViewers<1 || maxViewers>10) throw new ArgumentException("在线人数上限必须为 1–10。");
+            if(maxViewers<1 || maxViewers>5) throw new ArgumentException("在线人数上限必须为 1–5。");
             if(networkMode!="lan" && networkMode!="public") throw new ArgumentException("请选择局域网或公网访问。");
             if(trustProxy && networkMode!="public") throw new ArgumentException("本机 HTTPS 反向代理仅适用于公网模式；局域网访问请关闭此选项。");
             if(externalTlsTermination && networkMode!="public") throw new ArgumentException("云负载均衡 HTTPS 仅适用于公网模式。");
-            foreach(string value in new[]{publicUrl,accessCode,tlsCertPath,tlsKeyPath,stunUrl,turnUrl,turnUsername,turnPassword}) if(value==null || value.Length>4096 || value.IndexOfAny(new[]{'\r','\n','\0'})>=0) throw new ArgumentException("网络配置不能包含换行、空字符或超过 4096 个字符。");
+            foreach(string value in new[]{publicUrl,backupPublicUrl,accessCode,tlsCertPath,tlsKeyPath,stunUrl,turnUrl,turnUsername,turnPassword}) if(value==null || value.Length>4096 || value.IndexOfAny(new[]{'\r','\n','\0'})>=0) throw new ArgumentException("网络配置不能包含换行、空字符或超过 4096 个字符。");
             Uri url;
             if(!string.IsNullOrEmpty(publicUrl) && (!Uri.TryCreate(publicUrl,UriKind.Absolute,out url) || (url.Scheme!="https" && url.Scheme!="http") || !string.IsNullOrEmpty(url.UserInfo) || (url.AbsolutePath!="/" && url.AbsolutePath!="") || !string.IsNullOrEmpty(url.Query) || !string.IsNullOrEmpty(url.Fragment))) throw new ArgumentException("公网地址须为完整 HTTP / HTTPS 地址，不含路径、账号、查询或片段。");
             if(networkMode=="public" && string.IsNullOrWhiteSpace(publicUrl)) throw new ArgumentException("公网模式需要填写公网访问地址。");
+            ValidateBackupOrigin();
             if(accessProtectionEnabled && (string.IsNullOrWhiteSpace(accessCode) || accessCode.Length<12)) throw new ArgumentException("开启安全访问仓库后，需要设置至少 12 位访问码。");
             if(string.IsNullOrWhiteSpace(tlsCertPath)!=string.IsNullOrWhiteSpace(tlsKeyPath)) throw new ArgumentException("HTTPS 证书与私钥需要成对选择。");
             if(trustProxy && !string.IsNullOrWhiteSpace(tlsCertPath)) throw new ArgumentException("本机反向代理与原生 HTTPS 证书不可同时启用。");
@@ -62,6 +80,20 @@ namespace Ghs.PixelStreaming
             ValidateIce(stunUrl,new[]{"stun:","stuns:"},"STUN"); ValidateIce(turnUrl,new[]{"turn:","turns:"},"TURN");
             if(!string.IsNullOrWhiteSpace(turnUrl) && (string.IsNullOrWhiteSpace(turnUsername) || string.IsNullOrWhiteSpace(turnPassword))) throw new ArgumentException("TURN 中继需要填写用户名和密码。");
             if(string.IsNullOrWhiteSpace(turnUrl) && (!string.IsNullOrEmpty(turnUsername) || !string.IsNullOrEmpty(turnPassword))) throw new ArgumentException("已填写 TURN 账号，请同时填写 TURN 服务地址。");
+        }
+        private void ValidateBackupOrigin()
+        {
+            if(backupPublicUrl=="") return;
+            Uri primary,backup;
+            if(networkMode!="public" || !externalTlsTermination || !Uri.TryCreate(publicUrl,UriKind.Absolute,out primary) || primary.Scheme!="https") throw new ArgumentException("HTTP 备用入口仅适用于公网模式下的云负载均衡 HTTPS 主入口。");
+            // Validate the original text before Uri normalizes whitespace, slashes or dot segments.
+            foreach(char ch in backupPublicUrl) if(char.IsWhiteSpace(ch) || char.IsControl(ch)) throw new ArgumentException("HTTP 备用入口不能包含空白或控制字符。");
+            if(!System.Text.RegularExpressions.Regex.IsMatch(backupPublicUrl,@"^http://(?:[a-zA-Z0-9.-]+|\[[a-fA-F0-9:]+\])(?::[0-9]{1,5})?/?$",System.Text.RegularExpressions.RegexOptions.IgnoreCase) || !Uri.TryCreate(backupPublicUrl,UriKind.Absolute,out backup) || backup.Scheme!="http" || backup.Port<1 || backup.Port>65535 || !string.IsNullOrEmpty(backup.UserInfo)) throw new ArgumentException("备用入口须为完整 HTTP 地址，不含账号、路径、查询、片段或通配符，端口为 1–65535。");
+            if(backup.HostNameType==UriHostNameType.Dns) foreach(string label in backup.Host.Split('.')) if(!System.Text.RegularExpressions.Regex.IsMatch(label,@"^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$")) throw new ArgumentException("备用入口主机名格式无效。");
+            if(backup.HostNameType!=UriHostNameType.Dns && backup.HostNameType!=UriHostNameType.IPv4 && backup.HostNameType!=UriHostNameType.IPv6) throw new ArgumentException("备用入口需要有效的域名或 IP 地址。");
+            if(string.Equals(primary.Authority,backup.Authority,StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("主入口与备用入口不能使用相同的请求 Host。");
+            // Persist one canonical origin for the backend's case-sensitive scheme parser.
+            backupPublicUrl=backup.GetLeftPart(UriPartial.Authority);
         }
         private static void ValidateIce(string value,string[] schemes,string label)
         {
@@ -102,7 +134,7 @@ namespace Ghs.PixelStreaming
         {
             string absolute=Path.GetFullPath(path); Directory.CreateDirectory(Path.GetDirectoryName(absolute));
             string temp=absolute+"."+Guid.NewGuid().ToString("N")+".tmp";
-            try { File.WriteAllText(temp,new JavaScriptSerializer().Serialize(this),new UTF8Encoding(false)); if(File.Exists(absolute)) File.Replace(temp,absolute,null); else File.Move(temp,absolute); }
+            try { File.WriteAllText(temp,Serialize(),new UTF8Encoding(false)); if(File.Exists(absolute)) File.Replace(temp,absolute,null); else File.Move(temp,absolute); }
             finally { if(File.Exists(temp)) File.Delete(temp); }
         }
         public static LauncherConfig Load(string path)
@@ -111,8 +143,11 @@ namespace Ghs.PixelStreaming
             string text=File.ReadAllText(path,Encoding.UTF8); JavaScriptSerializer json=new JavaScriptSerializer();
             Dictionary<string,object> fields=json.Deserialize<Dictionary<string,object>>(text);
             if(fields==null) throw new ArgumentException("配置文件为空。");
-            foreach(string field in new[]{"accessProtectionEnabled","fixedFps","encoderAsync","adaptiveResourceBudget"}) if(fields.ContainsKey(field) && !(fields[field] is bool)) throw new ArgumentException("配置 "+field+" 必须为 true 或 false 布尔值。");
-            LauncherConfig c=json.Deserialize<LauncherConfig>(text); if(c==null) throw new ArgumentException("配置文件为空。");
+            if(fields.ContainsKey("backupPublicUrl") && !(fields["backupPublicUrl"] is string)) throw new ArgumentException("配置 backupPublicUrl 必须为字符串，停用时请留空。");
+            foreach(string field in new[]{"accessProtectionEnabled","fixedFps","encoderAsync","adaptiveResourceBudget","warmStandbyEnabled"}) if(fields.ContainsKey(field) && !(fields[field] is bool)) throw new ArgumentException("配置 "+field+" 必须为 true 或 false 布尔值。");
+            LauncherConfig c=Deserialize(text,json,fields);
+            // Earlier releases allowed up to ten visitors. Keep valid lower limits and all other settings.
+            if(c.maxViewers>5 && c.maxViewers<=10) c.maxViewers=5;
             // Existing installations keep their explicitly selected frame budget.
             if(!fields.ContainsKey("fixedFps")) { c.fixedFps=false; if(!fields.ContainsKey("fps")) c.fps=0; if(!fields.ContainsKey("adaptiveResourceBudget")) c.adaptiveResourceBudget=true; }
             // An explicit budget always wins, including the old 8/20/35 defaults.

@@ -57,6 +57,7 @@ for (const directory of [playerVendor, path.join(target, 'player/vendor')]) {
 fs.copyFileSync(path.join(root, 'vendor/sdp/LICENSE'), path.join(playerVendor, 'LICENSE-sdp.txt'));
 fs.copyFileSync(path.join(root, 'node_modules/ws/LICENSE'), path.join(playerVendor, 'LICENSE-ws.txt'));
 fs.copyFileSync(path.join(root, 'node_modules/@protobuf-ts/runtime/LICENSE'), path.join(playerVendor, 'LICENSE-protobuf-ts-runtime.txt'));
-for (const folder of ['server', 'player', 'node_modules/ws']) fs.cpSync(path.join(root, folder), path.join(target, folder), { recursive: true });
+// Server EIP mappings belong to the destination host, never the build machine.
+for (const folder of ['server', 'player', 'node_modules/ws']) fs.cpSync(path.join(root, folder), path.join(target, folder), { recursive: true, filter: source => path.relative(root, source).replace(/\\/g, '/').toLowerCase() !== 'server/media-address.json' });
 for (const file of ['dependency-pins.json', 'package.json']) fs.copyFileSync(path.join(root, file), path.join(target, file));
 console.log('已构建并复制服务、播放器、ws依赖到 ' + target);

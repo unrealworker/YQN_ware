@@ -209,18 +209,18 @@ test('uncapped rendering keeps a valid positive PixelStreaming2 capture negotiat
   assert.ok(args.includes('-PixelStreamingWebRTCMinBitrate=1000000'));
 });
 
-test('ten viewers share one UE; eleventh is rejected without disconnecting admitted users', async t => {
+test('five viewers share one UE; sixth is rejected without disconnecting admitted users', async t => {
   const ctx = await setup(t); const active = [];
   await until(() => ctx.service.status().instances.some(x => x.state === 'ready'));
-  for (let i = 0; i < 10; i++) active.push(await viewer(ctx));
-  await until(() => ctx.service.status().viewerCount === 10);
+  for (let i = 0; i < 5; i++) active.push(await viewer(ctx));
+  await until(() => ctx.service.status().viewerCount === 5);
   active[0].ws.send(JSON.stringify({ type: 'subscribe', streamerId: 'shared' }));
   await until(() => active[0].messages.some(x => x.type === 'offer'));
   active[0].ws.send(JSON.stringify({ type: 'answer', sdp: 'answer-from-browser' }));
   await until(() => active[0].messages.some(x => x.type === 'iceCandidate' && x.candidate.candidate === 'answer-received'));
   const rejected = await viewer(ctx); await until(() => rejected.close);
   assert.equal(rejected.close.code, 4004); assert.ok(rejected.messages.some(x => x.type === 'ghsFull' && x.reconnect === false));
-  assert.equal(ctx.service.status().viewerCount, 10); assert.equal(ctx.children.length, 1);
+  assert.equal(ctx.service.status().viewerCount, 5); assert.equal(ctx.children.length, 1);
   assert.equal(ctx.service.status().instances[0].targetFps, 60);
   assert.ok(active.every(v => !v.close));
 });
@@ -266,7 +266,7 @@ test('loopback control requires bearer token; static traversal and public manage
   assert.equal((await fetch(base + '/status')).status, 401);
   assert.equal((await fetch(base + '/status', { headers: { Authorization: 'Bearer wrong' } })).status, 401);
   const status = await fetch(base + '/status', { headers: { Authorization: 'Bearer ' + token } });
-  assert.equal(status.status, 200); assert.equal((await status.json()).maxViewers, 10);
+  assert.equal(status.status, 200); assert.equal((await status.json()).maxViewers, 5);
   assert.equal((await fetch(ctx.base + '/status')).status, 404);
   assert.equal((await fetch(ctx.base + '/%2e%2e%2fserver%2fservice.js')).status, 404);
   assert.equal((await fetch(ctx.base + '/api/session', { method: 'POST', headers: { Origin: 'http://evil.example' }, body: '{}' })).status, 403);
@@ -593,6 +593,59 @@ test('cloud TLS termination never trusts forwarded client addresses, even from l
   assert.equal(clientAddress(req, config), '10.0.0.10');
   req.socket.remoteAddress = '127.0.0.1'; assert.equal(clientAddress(req, config), '127.0.0.1');
   req.headers.host = 'evil.example'; assert.equal(sameOrigin(req, config), false);
+});
+
+for (const protectedAccess of [false, true]) test(`dual origins share sessions, websocket admission and capacity with access protection ${protectedAccess}`, async t => {
+  const primary = 'https://warehouse.example', backup = 'http://47.96.135.179:8080';
+  const ctx = await setup(t, 'shared', 0, { networkMode: 'public', publicUrl: primary, backupPublicUrl: backup,
+    externalTlsTermination: true, accessProtectionEnabled: protectedAccess, accessCode: 'test-only-access-code', maxViewers: 2 });
+  const pairs = [primary, backup].map(origin => ({ Host: new URL(origin).host, Origin: origin }));
+  const request = (headers, body = {}) => new Promise((resolve, reject) => {
+    const req = require('node:http').request(ctx.base + '/api/session', { method: 'POST', headers, timeout: 5000 }, res => {
+      let text = ''; res.on('data', b => text += b); res.on('end', () => resolve({ status: res.statusCode, body: JSON.parse(text) }));
+    });
+    req.on('error', reject); req.on('timeout', () => req.destroy(Error('dual origin HTTP timeout'))); req.end(JSON.stringify(body));
+  });
+  const deniedWebsocket = (headers, sessionToken) => new Promise((resolve, reject) => {
+    const ws = new WebSocket(ctx.base.replace('http:', 'ws:') + '/ws?token=' + sessionToken, { headers, handshakeTimeout: 5000 });
+    ws.on('unexpected-response', (_req, res) => { res.resume(); resolve(res.statusCode); ws.terminate(); });
+    ws.on('error', () => {}); ws.on('open', () => { ws.terminate(); reject(Error('unauthorized websocket admitted')); });
+  });
+  const connect = async (headers, sessionToken) => {
+    const ws = new WebSocket(ctx.base.replace('http:', 'ws:') + '/ws?token=' + sessionToken, { headers, handshakeTimeout: 5000 });
+    const messages = []; ws.on('message', bytes => messages.push(JSON.parse(bytes))); await once(ws, 'open');
+    return { ws, messages };
+  };
+  const sessions = [];
+  for (const headers of pairs) {
+    assert.equal((await request(headers)).status, protectedAccess ? 401 : 200);
+    assert.equal((await request(headers, { accessCode: 'wrong' })).status, protectedAccess ? 401 : 200);
+    const result = await request(headers, { accessCode: ctx.config.accessCode }); assert.equal(result.status, 200);
+    sessions.push(result.body);
+    assert.equal((await request({ Host: headers.Host }, { token: result.body.token })).status, 200, 'missing Origin still accepts the configured Host');
+    assert.equal(await deniedWebsocket(headers, 'forged-token'), 403);
+    assert.equal(await deniedWebsocket(headers, ''), 403);
+  }
+  const invalidPairs = [
+    { ...pairs[0], Origin: backup }, { ...pairs[1], Origin: primary },
+    { ...pairs[0], Host: 'evil.example' }, { ...pairs[1], Host: '47.96.135.179:8081' }, { Host: '47.96.135.179:8081' },
+    { Host: 'evil.example', 'X-Forwarded-Host': pairs[0].Host, 'X-Forwarded-Proto': 'https' }
+  ];
+  for (const headers of invalidPairs) {
+    assert.equal((await request(headers, { token: sessions[0].token })).status, 403);
+    assert.equal(await deniedWebsocket(headers, sessions[0].token), 403);
+  }
+  assert.equal((await request(pairs[1], { token: sessions[0].token })).body.token, sessions[0].token, 'both origins use the same session store');
+  const first = await connect(pairs[0], sessions[0].token), second = await connect(pairs[1], sessions[1].token);
+  await until(() => [first, second].every(v => v.messages.some(m => m.type === 'ghsAdmission')));
+  const thirdSession = await request(pairs[1], { accessCode: ctx.config.accessCode }); assert.equal(thirdSession.status, 200);
+  const third = await connect({ Host: pairs[1].Host }, thirdSession.body.token);
+  await until(() => third.messages.some(m => m.type === 'ghsFull'));
+  const status = ctx.service.status();
+  assert.equal(status.viewerCount, 2, 'the backup must not create a separate viewer allowance');
+  assert.equal(status.maxViewers, 2); assert.equal(status.backupPublicUrl, backup);
+  assert.deepEqual(status.urls, [primary + '/', backup + '/']);
+  assert.equal(status.trustProxy, false);
 });
 
 async function cloudCodeRequest(ctx, accessCode, headers = {}) {

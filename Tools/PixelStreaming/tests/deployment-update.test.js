@@ -81,6 +81,25 @@ test('new installation uses package defaults plus required PS2 settings', t => {
   assert.equal(configuration.executablePath, EXE);
 });
 
+test('deployment-owned media address is preserved byte-for-byte even if a legacy manifest claimed it', t => {
+  const f = fixture(t), relative = 'server/media-address.json', contents = '{ "privateIp": "10.1.2.3", "publicIp": "8.8.4.4" }\r\n';
+  write(f.target, relative, contents); write(f.target, 'delivery-manifest.json', JSON.stringify({ files: [{ path: relative }] }));
+  const result = f.run(); assert.equal(fs.readFileSync(path.join(f.target, relative), 'utf8'), contents);
+  assert.equal(result.preservedServerFiles, 1); assert.equal(fs.readFileSync(path.join(result.backup, relative), 'utf8'), contents);
+});
+
+test('new packages cannot claim or replace deployment-specific media address settings', t => {
+  const f = fixture(t), relative = 'server/media-address.json'; write(f.source, relative, '{}');
+  f.manifest.files.push({ path: relative, bytes: 2, sha256: hashFile(path.join(f.source, relative)) }); f.saveManifest();
+  assert.throws(() => f.run(), /覆盖|部署/); assert.deepEqual(fs.readdirSync(f.target), []);
+});
+
+test('media address changes during staging abort before replacing any application files', t => {
+  const f = fixture(t); write(f.target, EXE, 'original'); write(f.target, 'server/media-address.json', '{"version":1}'); let checks = 0;
+  assert.throws(() => f.run('apply', { processes() { if (++checks === 2) write(f.target, 'server/media-address.json', '{"version":2}'); return []; } }), /配置发生变化/);
+  assert.equal(fs.readFileSync(path.join(f.target, EXE), 'utf8'), 'original'); assert.equal(fs.readFileSync(path.join(f.target, 'server/media-address.json'), 'utf8'), '{"version":2}');
+});
+
 test('a configuration change during staging aborts before replacing the application', t => {
   const f = fixture(t); write(f.target, EXE, 'original'); write(f.target, 'launcher.config.json', '{"networkMode":"lan"}');
   let checks = 0;

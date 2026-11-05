@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -19,7 +19,8 @@ namespace Ghs.PixelStreaming
         private readonly TextBox executable=new TextBox();
         private readonly NumericUpDown httpPort=Number(1,65535,8080),streamerPort=Number(1,65535,8888),renderWidth=Number(320,7680,1920),renderHeight=Number(320,7680,1080);
         private readonly NumericUpDown fpsLimit=Number(0,120,60),minBitrate=Number(1,200,1),startBitrate=Number(1,200,8),maxBitrate=Number(1,200,24);
-        private readonly CheckBox showWindow=new ToggleCheckBox(),adaptiveResources=new ToggleCheckBox(),accessProtection=new ToggleCheckBox(),fixedFps=new ToggleCheckBox(),encoderAsync=new ToggleCheckBox();
+        private readonly CheckBox showWindow=new ToggleCheckBox(),adaptiveResources=new ToggleCheckBox(),accessProtection=new ToggleCheckBox(),fixedFps=new ToggleCheckBox(),encoderAsync=new ToggleCheckBox(),warmStandby=new ToggleCheckBox();
+        private readonly Label warmHint=new Label(),warmStatus=new Label();
         private readonly ComboBox mode=new ComboBox(),quality=new ComboBox(),urls=new ComboBox(),encoder=new ComboBox();
         private readonly Label encodingHint=new Label(),frameHint=new Label();
         private readonly Label modeHint=new Label(),qualityHint=new Label(),resolutionHint=new Label(),status=new Label(),viewers=new Label(),portFeedback=new Label(),pathFeedback=new Label();
@@ -76,6 +77,7 @@ namespace Ghs.PixelStreaming
             copy.Click+=delegate { if(urls.SelectedItem!=null) { try { Clipboard.SetText(urls.SelectedItem.ToString()); AppendLog("访问地址已复制。"); } catch(Exception ex) { ShowError(ex); } } };
             open.Click+=delegate { if(urls.SelectedItem!=null) OpenUrl(urls.SelectedItem.ToString()); };
             mode.SelectedIndexChanged+=delegate { UpdateModeHint(); }; adaptiveResources.CheckedChanged+=delegate { UpdateModeHint(); };
+            warmStandby.CheckedChanged+=delegate { UpdateWarmHint(); };
             fixedFps.CheckedChanged+=delegate { if(!loadingSettings && fixedFps.Checked) { adaptiveResources.Checked=false; if(fpsLimit.Value<15) fpsLimit.Value=60; } UpdateModeHint(); UpdateControls(); };
             quality.SelectedIndexChanged+=delegate { ApplySelectedQualityProfile(); }; fpsLimit.ValueChanged+=delegate { UpdateModeHint(); UpdateQualityHint(); };
             httpPort.ValueChanged+=delegate { ClearPortFeedback(); }; streamerPort.ValueChanged+=delegate { ClearPortFeedback(); };
@@ -124,18 +126,20 @@ namespace Ghs.PixelStreaming
             modeLabel=AddLabel(settings,"访问模式",10,false,Navy); mode.Items.AddRange(new object[]{"共享场景","每人独立"}); mode.Visible=false; settings.Controls.Add(mode);
             settings.Controls.Add(sharedMode); settings.Controls.Add(independentMode); sharedMode.AccessibleRole=AccessibleRole.RadioButton; independentMode.AccessibleRole=AccessibleRole.RadioButton; sharedMode.Click+=delegate { mode.SelectedIndex=0; }; independentMode.Click+=delegate { mode.SelectedIndex=1; };
             SetupLabel(modeHint,settings,"",9,false,Muted); modeHint.TextAlign=ContentAlignment.TopLeft;
+            warmStandby.Text="保留 1 个预热实例"; warmStandby.AccessibleName=warmStandby.Text; warmStandby.AccessibleDescription="仅独立模式有效；占用额外显卡和内存资源，停止服务后可修改。"; settings.Controls.Add(warmStandby); SetupLabel(warmHint,settings,"",9,false,Muted);
             adaptiveResources.Text="按连接人数自动分配资源"; adaptiveResources.AccessibleName=adaptiveResources.Text; adaptiveResources.AccessibleDescription="独立模式按连接数调整目标帧率，实际帧率取决于负载。"; settings.Controls.Add(adaptiveResources);
             SetupLabel(adaptiveHint,settings,"优先保持清晰度，按实际负载调整目标帧率。",9,false,Muted); settings.Controls.Add(advanced); settings.Controls.Add(advancedFields); advancedFields.Visible=false;
             AddLabel(advancedFields,"最低 Mbps",9,false,Navy).Name="minLabel"; Field(minBitrate,advancedFields,"最低码率 Mbps"); AddLabel(advancedFields,"起始 Mbps",9,false,Navy).Name="startLabel"; Field(startBitrate,advancedFields,"起始码率 Mbps"); AddLabel(advancedFields,"最高 Mbps",9,false,Navy).Name="maxLabel"; Field(maxBitrate,advancedFields,"最高码率 Mbps"); AddLabel(advancedFields,"码率按网络质量自动调整，保留原生分辨率。",9,false,Muted).Name="fpsHelp";
             foreach(NumericUpDown value in new[]{minBitrate,startBitrate,maxBitrate}) value.ValueChanged+=delegate { if(loadingSettings) return; EnsureCustomQuality(); quality.SelectedIndex=3; UpdateQualityHint(); };
             advanced.Click+=delegate { advancedFields.Visible=!advancedFields.Visible; advanced.Text=advancedFields.Visible?"收起高级参数  ⌃":"高级画面参数  ⌄"; PerformLayout(); if(advancedFields.Visible) body.AutoScrollPosition=new Point(0,Math.Max(0,S(1190)-body.ClientSize.Height)); };
             accessProtection.Text="安全访问仓库"; accessProtection.AccessibleName=accessProtection.Text; accessProtection.AccessibleDescription="开启后访客需要访问码；停止服务后可修改，下次启动生效。"; settings.Controls.Add(accessProtection); SetupLabel(accessHint,settings,"",9,false,Muted);
-            settings.Controls.Add(publicSettings); SetupLabel(networkSummary,settings,"局域网验证 · 最多 10 人",9,false,Muted); networkSummary.TextAlign=ContentAlignment.TopLeft;
+            settings.Controls.Add(publicSettings); SetupLabel(networkSummary,settings,"局域网验证 · 最多 5 人",9,false,Muted); networkSummary.TextAlign=ContentAlignment.TopLeft;
             foreach(Control label in new[]{pathLabel,httpLabel,streamLabel,resolutionLabel,qualityLabel,modeLabel}) configLabels.Add(label);
             monitorCard.Controls.Add(previewFrame); previewFrame.Controls.Add(preview); preview.Dock=DockStyle.Fill; preview.SizeMode=PictureBoxSizeMode.Zoom; preview.BackColor=Color.FromArgb(224,230,237); preview.AccessibleName="GHS 主仓库场景预览（静态图片）";
             using(Stream stream=Assembly.GetExecutingAssembly().GetManifestResourceStream("Ghs.PixelStreaming.warehouse-overview.png")) { if(stream!=null) using(Image source=Image.FromStream(stream)) preview.Image=new Bitmap(source); }
             SetupLabel(sceneTitle,monitorCard,"GHS · 主仓库",11,true,Navy); SetupLabel(previewCaption,monitorCard,"场景预览",9,false,Muted); SetupLabel(sceneMode,monitorCard,"",9,false,Muted); divider.BackColor=LauncherTheme.Border; monitorCard.Controls.Add(divider);
-            SetupLabel(status,monitorCard,"○  服务未启动",12,true,Navy); SetupLabel(viewers,monitorCard,"0 / 10 在线",9,false,Muted); viewers.TextAlign=ContentAlignment.MiddleRight;
+            SetupLabel(status,monitorCard,"○  服务未启动",12,true,Navy); SetupLabel(viewers,monitorCard,"0 / 5 在线",9,false,Muted); viewers.TextAlign=ContentAlignment.MiddleRight;
+            SetupLabel(warmStatus,monitorCard,"预热 · 未开启",9,false,Muted); warmStatus.AccessibleName="预热实例运行状态";
             SetupLabel(healthMessage,monitorCard,"",10,false,LauncherTheme.Amber); healthMessage.TextAlign=ContentAlignment.MiddleLeft; healthMessage.BackColor=Color.FromArgb(255,249,236); healthMessage.Padding=new Padding(8);
             SetupLabel(emptyHint,monitorCard,"启动后显示可用访问地址",10,false,Muted); SetupLabel(capacityHint,monitorCard,"支持内网验证与可配置公网访问。\r\n达到人数上限后拒绝新连接，已有用户不受影响。",9,false,Muted);
             SetupLabel(connectionLabel,monitorCard,"访问地址",9,false,Muted); urls.Font=new Font(Font.FontFamily,9F); urls.DropDownWidth=420; Field(urls,monitorCard,"访问地址"); monitorCard.Controls.Add(copy); monitorCard.Controls.Add(open);
@@ -161,7 +165,7 @@ namespace Ghs.PixelStreaming
                 Place(header,0,0,width,56); Place(header.Controls["mark"],24,5,32,46); Place(header.Controls["title"],60,0,width-220,56);
                 Place(minimize,width-116,8,36,40); Place(maximize,width-80,8,36,40); Place(close,width-44,8,36,40);
                 int drawer=logDrawer.Visible?210:0; Place(footer,0,height-84,width,84); Place(body,0,56,width,Math.Max(100,height-140-drawer));
-                int configHeight=advancedFields.Visible?1058:926, requiredHeight=Math.Max(configHeight,session.State=="running" || startBusy || stopBusy?760:490),bodyHeight=Math.Max((int)(body.ClientSize.Height/layoutScale),requiredHeight+144);
+                int configHeight=advancedFields.Visible?1130:998, requiredHeight=Math.Max(configHeight,session.State=="running" || startBusy || stopBusy?760:490),bodyHeight=Math.Max((int)(body.ClientSize.Height/layoutScale),requiredHeight+144);
                 int available=Math.Max(1000,width)-(requiredHeight+144>height-140-drawer?(int)Math.Ceiling(SystemInformation.VerticalScrollBarWidth/layoutScale)+2:0);
                 body.AutoScrollMinSize=new Size(width<1000?S(1000):0,S(requiredHeight+144)); content.SetBounds(body.AutoScrollPosition.X,body.AutoScrollPosition.Y,S(available)-1,S(bodyHeight));
                 Place(sectionTitle,32,28,available-64,36); Place(pageSubtitle,32,68,available-64,24);
@@ -184,10 +188,11 @@ namespace Ghs.PixelStreaming
             Place(settings.Controls["encoderLabel"],0,370,half,24); Place(fieldHosts[encoder],0,398,half,44); Place(encoderAsync,half+20,398,half,32); Place(encodingHint,half+20,435,half,24);
             Place(fixedFps,0,470,half,32); Place(fieldHosts[fpsLimit],half+20,468,105,40); Place(frameHint,0,510,w,26);
             Place(modeLabel,0,546,w,24); Place(sharedMode,0,574,half,46); Place(independentMode,half+20,574,half,46); Place(modeHint,0,630,w,38);
-            Place(adaptiveResources,0,672,w,32); Place(adaptiveHint,0,708,w,30); Place(advanced,w-158,790,158,30);
-            Place(accessProtection,0,744,w,32); Place(accessHint,48,778,w-210,25);
-            Place(publicSettings,0,812,174,40); Place(networkSummary,190,814,w-190,42);
-            if(advancedFields.Visible) { Place(advancedFields,0,880,w,94); int q=(w-24)/3; string[] names={"minLabel","startLabel","maxLabel"}; Control[] fields={minBitrate,startBitrate,maxBitrate}; for(int i=0;i<3;i++) { Place(advancedFields.Controls[names[i]],(q+12)*i,0,q,23); Place(fieldHosts[fields[i]],(q+12)*i,27,q,40); } Place(advancedFields.Controls["fpsHelp"],0,73,w,26); }
+            Place(warmStandby,0,672,w,32); Place(warmHint,0,708,w,30);
+            Place(adaptiveResources,0,744,w,32); Place(adaptiveHint,0,780,w,30); Place(advanced,w-158,862,158,30);
+            Place(accessProtection,0,816,w,32); Place(accessHint,48,850,w-210,25);
+            Place(publicSettings,0,884,174,40); Place(networkSummary,190,886,w-190,42);
+            if(advancedFields.Visible) { Place(advancedFields,0,952,w,94); int q=(w-24)/3; string[] names={"minLabel","startLabel","maxLabel"}; Control[] fields={minBitrate,startBitrate,maxBitrate}; for(int i=0;i<3;i++) { Place(advancedFields.Controls[names[i]],(q+12)*i,0,q,23); Place(fieldHosts[fields[i]],(q+12)*i,27,q,40); } Place(advancedFields.Controls["fpsHelp"],0,73,w,26); }
         }
         private void LayoutMonitor(int w)
         {
@@ -196,7 +201,7 @@ namespace Ghs.PixelStreaming
             if(running) {
                 int thumb=Math.Min(144,(int)(w*.38F)); Place(status,x,22,w-106,30); Place(viewers,x+w-106,22,106,30); Place(previewFrame,x,66,thumb,84); Place(sceneTitle,x+thumb+16,70,w-thumb-16,28); Place(sceneMode,x+thumb+16,100,w-thumb-16,24); Place(previewCaption,x+thumb+16,126,w-thumb-16,24); Place(divider,x,166,w,1);
                 Place(connectionLabel,x,178,w,24); Place(fieldHosts[urls],x,206,w-70,40); Place(copy,x+w-62,206,62,40); Place(open,x,258,w,38);
-                Place(sessionsTitle,x,310,w,26); Place(connections,x,346,w,245);
+                Place(warmStatus,x,302,w,24); Place(sessionsTitle,x,332,w,26); Place(connections,x,368,w,223);
                 if(connections.Columns.Count==4) { int ip=Math.Max(100,(int)(w*.34F)); connections.Columns[0].Width=S(Math.Max(60,w-ip-130)); connections.Columns[1].Width=S(ip); connections.Columns[2].Width=S(56); connections.Columns[3].Width=S(58); }
                 Place(selectedViewerHint,x,598,w-150,42); Place(disconnect,x+w-146,598,146,38);
                 Place(fpsColumnHint,x,645,w,22); Place(instances,x,670,w,54);
@@ -206,7 +211,7 @@ namespace Ghs.PixelStreaming
                 Place(previewFrame,x,24,w,180); Place(sceneTitle,x,220,w-80,32); Place(previewCaption,x+w-80,220,80,32); Place(divider,x,268,w,1); Place(status,x,286,w,32); Place(emptyHint,x,328,w,28); Place(capacityHint,x,368,w,60); Place(firewall,x,438,116,32); Place(logsFolder,x+120,438,w-120,32);
                 Place(installRuntime,x,484,142,40); Place(runtimeHint,x+158,482,w-158,48);
             }
-            connections.Visible=running; disconnect.Visible=running; selectedViewerHint.Visible=running; viewers.Visible=running; sceneMode.Visible=running && !degradedStatus; connectionLabel.Visible=running; fieldHosts[urls].Visible=running; copy.Visible=running; open.Visible=running; sessionsTitle.Visible=running; fpsColumnHint.Visible=running; instances.Visible=running; sessionHint.Visible=running; details.Visible=running;
+            warmStatus.Visible=running; connections.Visible=running; disconnect.Visible=running; selectedViewerHint.Visible=running; viewers.Visible=running; sceneMode.Visible=running && !degradedStatus; connectionLabel.Visible=running; fieldHosts[urls].Visible=running; copy.Visible=running; open.Visible=running; sessionsTitle.Visible=running; fpsColumnHint.Visible=running; instances.Visible=running; sessionHint.Visible=running; details.Visible=running;
             healthMessage.Visible=running && degradedStatus; previewFrame.Visible=sceneTitle.Visible=previewCaption.Visible=!healthMessage.Visible; if(healthMessage.Visible) Place(healthMessage,x,66,w,84);
             emptyHint.Visible=!running; capacityHint.Visible=!running; firewall.Visible=!running; logsFolder.Visible=!running; installRuntime.Visible=runtimeHint.Visible=!running; if(!running) monitorCard.Height=S(548);
         }
@@ -237,12 +242,16 @@ namespace Ghs.PixelStreaming
             executable.Text=baseline.executablePath; httpPort.Value=Clamp(baseline.httpPort,httpPort); streamerPort.Value=Clamp(baseline.streamerPort,streamerPort); renderWidth.Value=Clamp(baseline.width,renderWidth); renderHeight.Value=Clamp(baseline.height,renderHeight); showWindow.Checked=baseline.showWindow; mode.SelectedIndex=baseline.mode=="independent"?1:0;
             fpsLimit.Value=Clamp(baseline.fps,fpsLimit); minBitrate.Value=Clamp(baseline.minBitrateMbps,minBitrate); startBitrate.Value=Clamp(baseline.startBitrateMbps,startBitrate); maxBitrate.Value=Clamp(baseline.maxBitrateMbps,maxBitrate);
             if(baseline.qualityProfile=="custom") { EnsureCustomQuality(); quality.SelectedIndex=3; } else quality.SelectedIndex=baseline.qualityProfile=="balanced"?0:baseline.qualityProfile=="ultra"?2:1;
-            fixedFps.Checked=baseline.fixedFps; encoderAsync.Checked=baseline.encoderAsync; encoder.SelectedIndex=baseline.encoder=="Auto"?1:0; adaptiveResources.Checked=baseline.adaptiveResourceBudget; accessProtection.Checked=baseline.accessProtectionEnabled; loadingSettings=false; UpdateModeHint(); UpdateQualityHint(); UpdateNetworkSummary(); UpdateAccessHint(); AppendLog("请选择程序并启动服务；公网访问需先配置实际地址与网络。");
+            fixedFps.Checked=baseline.fixedFps; encoderAsync.Checked=baseline.encoderAsync; encoder.SelectedIndex=baseline.encoder=="Auto"?1:0; adaptiveResources.Checked=baseline.adaptiveResourceBudget; warmStandby.Checked=baseline.warmStandbyEnabled; accessProtection.Checked=baseline.accessProtectionEnabled; loadingSettings=false; UpdateModeHint(); UpdateQualityHint(); UpdateNetworkSummary(); UpdateAccessHint(); AppendLog("请选择程序并启动服务；公网访问需先配置实际地址与网络。");
         }
         private void EnsureCustomQuality() { if(quality.Items.Count<4) quality.Items.Add("自定义码率"); }
         private static decimal Clamp(int value,NumericUpDown control) { return Math.Max(control.Minimum,Math.Min(control.Maximum,value)); }
         private string SelectedQualityProfile { get { return quality.SelectedIndex==0?"balanced":quality.SelectedIndex==2?"ultra":quality.SelectedIndex==3?"custom":"clear"; } }
-        private LauncherConfig ReadSettings() { return new LauncherConfig {maxViewers=baseline.maxViewers,networkMode=baseline.networkMode,publicUrl=baseline.publicUrl,accessProtectionEnabled=accessProtection.Checked,accessCode=baseline.accessCode,tlsCertPath=baseline.tlsCertPath,tlsKeyPath=baseline.tlsKeyPath,trustProxy=baseline.trustProxy,externalTlsTermination=baseline.externalTlsTermination,stunUrl=baseline.stunUrl,turnUrl=baseline.turnUrl,turnUsername=baseline.turnUsername,turnPassword=baseline.turnPassword,executablePath=executable.Text.Trim(),httpPort=(int)httpPort.Value,streamerPort=(int)streamerPort.Value,width=(int)renderWidth.Value,height=(int)renderHeight.Value,showWindow=showWindow.Checked,mode=mode.SelectedIndex==1?"independent":"shared",fps=(int)fpsLimit.Value,fixedFps=fixedFps.Checked,encoderAsync=encoderAsync.Checked,encoder=encoder.SelectedIndex==1?"Auto":"NVIDIA",minBitrateMbps=(int)minBitrate.Value,startBitrateMbps=(int)startBitrate.Value,maxBitrateMbps=(int)maxBitrate.Value,qualityProfile=SelectedQualityProfile,adaptiveResourceBudget=adaptiveResources.Checked}; }
+        private LauncherConfig ReadSettings()
+        {
+            // Clone the loaded baseline so backend-only deployment fields survive UI edits.
+            LauncherConfig c=baseline.Clone(); c.accessProtectionEnabled=accessProtection.Checked; c.executablePath=executable.Text.Trim(); c.httpPort=(int)httpPort.Value; c.streamerPort=(int)streamerPort.Value; c.width=(int)renderWidth.Value; c.height=(int)renderHeight.Value; c.showWindow=showWindow.Checked; c.mode=mode.SelectedIndex==1?"independent":"shared"; c.fps=(int)fpsLimit.Value; c.fixedFps=fixedFps.Checked; c.encoderAsync=encoderAsync.Checked; c.encoder=encoder.SelectedIndex==1?"Auto":"NVIDIA"; c.minBitrateMbps=(int)minBitrate.Value; c.startBitrateMbps=(int)startBitrate.Value; c.maxBitrateMbps=(int)maxBitrate.Value; c.qualityProfile=SelectedQualityProfile; c.adaptiveResourceBudget=adaptiveResources.Checked; c.warmStandbyEnabled=warmStandby.Checked; return c;
+        }
         private void ApplyAccessSettings(LauncherConfig value) { baseline=value; accessProtection.Checked=value.accessProtectionEnabled; UpdateNetworkSummary(); UpdateModeHint(); UpdateAccessHint(); }
         private void UpdateAccessHint() { accessHint.Text=(accessProtection.Checked?"已开启 · 访客需输入访问码":"已关闭 · 访客直接进入仓库")+(accessProtection.Enabled?"；下次启动生效":"；停止服务后可修改"); }
         private string FrameLimitHint { get { return fpsLimit.Value==0?"渲染不限帧 / 流送最高 120 FPS":(fixedFps.Checked?"固定目标 ":"帧率上限 ")+fpsLimit.Value+" FPS"; } }
@@ -264,6 +273,13 @@ namespace Ghs.PixelStreaming
             adaptiveHint.Text=fpsLimit.Value==0?(separate?"不按人数限帧；无固定上限，实例排队启动。":"无固定帧率上限；共享模式渲染一套场景。"):(separate?(adaptiveResources.Checked?"保持清晰度，按连接数分配目标帧率。":"各实例保留目标上限，实际帧率取决于负载。") : "共享模式渲染一套场景，不按人数均分帧率。"); resolutionHint.Text="原生分辨率 · "+FrameLimitHint;
             if(fixedFps.Checked) adaptiveHint.Text="固定目标模式下不自动降帧；实际帧率取决于场景与硬件。";
             frameHint.Text=fixedFps.Checked?"固定渲染与流送目标，不改变回放速度。":"0 = 渲染不限帧；15–120 = 上限，可启用自动资源分配。";
+            UpdateWarmHint();
+        }
+        private void UpdateWarmHint()
+        {
+            bool separate=mode.SelectedIndex==1;
+            warmStandby.Enabled=separate && session.State=="idle" && !startBusy && !stopBusy && !closing && !runtimeInstallBusy;
+            warmHint.Text=separate?"缩短等待；占用额外显卡与内存资源，下次启动生效。":"仅独立模式生效；将占用额外显卡与内存资源。";
         }
         private void UpdateQualityHint()
         {
@@ -285,6 +301,7 @@ namespace Ghs.PixelStreaming
             bool runtimeFilesReady=RuntimePrerequisites.MissingFiles(root).Length==0; installRuntime.Enabled=canConfigure && runtimeFilesReady; installRuntime.Text=runtimeInstallBusy?"正在安装…":"安装运行组件"; runtimeHint.Text=runtimeInstallBusy?"请完成 Windows 授权\r\n及安装程序提示":runtimeFilesReady?"UE5.8 · VC++ x64 / GameInput\r\n按需安装，不会自动重启":"运行组件安装包不完整\r\n请复制完整交付目录";
             foreach(Control control in new Control[]{showWindow,adaptiveResources,accessProtection,fixedFps,encoderAsync,mode,browse,sharedMode,independentMode,advanced,publicSettings}) control.Enabled=canConfigure;
             adaptiveResources.Enabled=canConfigure && !fixedFps.Checked;
+            UpdateWarmHint();
             UpdateAccessHint();
             stop.Enabled=!idle && !stopBusy && !closing; start.Visible=idle; stop.Visible=!idle; stop.Text=stopBusy?"正在停止…":startBusy?"取消启动":"□  停止服务"; copy.Enabled=open.Enabled=urls.Items.Count>0 && session.State=="running" && !closing;
             pageSubtitle.Text=idle?"配置访问入口，管理当前连接与运行资源。":startBusy?"正在准备服务，可取消本次启动。":stopBusy?"正在断开访问并回收本次启动的程序。":"服务运行中，停止服务后可修改配置。"; footerHint.Text=idle?"启动时自动保存配置":"停止将断开访问并关闭本次启动的程序";
@@ -316,7 +333,10 @@ namespace Ghs.PixelStreaming
         }
         private void ApplyStatus(ServiceStatus s)
         {
-            onlineViewers=s.viewerCount; viewers.Text=s.viewerCount+" / "+(s.maxViewers>0?s.maxViewers:10)+" 在线"; degradedStatus=s.state=="degraded" || s.state=="error"; healthMessage.Text=degradedStatus?(string.IsNullOrWhiteSpace(s.message)?"部分实例未能正常运行，请查看运行详情与日志。":s.message):""; SetStatus(s.state=="error"?"服务异常 · 请查看日志":s.state=="degraded"?"部分实例异常":"✓  服务运行中",LauncherTheme.StateInk(s.state));
+            onlineViewers=s.viewerCount; viewers.Text=s.viewerCount+" / "+(s.maxViewers>0?s.maxViewers:5)+" 在线"; degradedStatus=s.state=="degraded" || s.state=="error"; healthMessage.Text=degradedStatus?(string.IsNullOrWhiteSpace(s.message)?"部分实例未能正常运行，请查看运行详情与日志。":s.message):""; SetStatus(s.state=="error"?"服务异常 · 请查看日志":s.state=="degraded"?"部分实例异常":"✓  服务运行中",LauncherTheme.StateInk(s.state));
+            warmStatus.Text=s.mode!="independent"?"预热 · 仅独立模式生效":!s.warmStandbyEnabled?"预热 · 未开启":"预热就绪 "+s.warmReadyCount+" · 准备中 "+s.warmStartingCount;
+            if(s.mode=="independent" && s.warmStandbyEnabled && s.warmReadyCount==0 && s.warmStartingCount==0 && s.warmBlockedReason=="first-frame") warmStatus.Text+=" · 等待用户首帧稳定";
+            warmStatus.ForeColor=s.warmStandbyEnabled && s.warmReadyCount>0?LauncherTheme.BlueInk:Muted;
             string selected=urls.SelectedItem as string; string[] current=s.urls ?? new string[0]; if(!urls.Items.Cast<string>().SequenceEqual(current)) { urls.Items.Clear(); urls.Items.AddRange(current); if(selected!=null && urls.Items.Contains(selected)) urls.SelectedItem=selected; else if(urls.Items.Count>0) urls.SelectedIndex=0; }
             instances.BeginUpdate(); instances.Items.Clear(); foreach(InstanceStatus item in s.instances ?? new InstanceStatus[0]) { string fps=(item.actualFps.HasValue?item.actualFps.Value.ToString("0.0",System.Globalization.CultureInfo.InvariantCulture):"—")+" / "+(item.targetFps==0?"无固定上限":item.targetFps>0?item.targetFps.ToString():"—"); ListViewItem row=new ListViewItem(new[]{item.id,StateText(item.state),fps}); row.UseItemStyleForSubItems=false; row.SubItems[1].ForeColor=LauncherTheme.StateInk(item.state); row.ToolTipText="PID "+(item.pid.HasValue?item.pid.Value.ToString(System.Globalization.CultureInfo.InvariantCulture):"等待分配")+" · 实际 / 当前目标 FPS："+fps; instances.Items.Add(row); } instances.EndUpdate(); instances.ShowItemToolTips=true;
             sessionHint.Text=s.viewerCount==0?"等待访问者连接。实际帧率在画面就绪后显示。":(fpsLimit.Value==0?(mode.SelectedIndex==1?"无固定上限；实例排队启动，不按人数限帧。":"无固定上限；所有访问者共享视角与操作。"):mode.SelectedIndex==1 && adaptiveResources.Checked?"当前按 "+Math.Max(1,(s.instances??new InstanceStatus[0]).Length)+" 个独立场景分配资源。":"当前"+(mode.SelectedIndex==1?"每位访问者独立操作。":"所有访问者共享视角与操作。"))+"\r\n实际帧率取决于场景、显卡与网络。";
@@ -331,14 +351,14 @@ namespace Ghs.PixelStreaming
         private void OpenUrl(string url) { try { Uri uri; if(!Uri.TryCreate(url,UriKind.Absolute,out uri) || (uri.Scheme!="http" && uri.Scheme!="https")) throw new ArgumentException("访问地址无效。"); Process.Start(new ProcessStartInfo(uri.AbsoluteUri) {UseShellExecute=true}); } catch(Exception ex) { ShowError(ex); } }
         private void ConfigureFirewall()
         {
-            if(baseline.externalTlsTermination) { AppendLog("云负载均衡模式：请由管理员将网页端口限制为 ALB 回源来源；未修改防火墙。"); return; }
+            if(baseline.externalTlsTermination) { AppendLog("云负载均衡模式：请由管理员将网页端口限制为 ALB 回源及已批准的备用入口访问来源；未修改防火墙。"); return; }
             try { LauncherConfig c=ReadSettings(); c.Validate(root,false); bool internet=c.networkMode=="public"; string filename=internet?"Enable-PublicAccess.ps1":"Enable-LanAccess.ps1"; string script=Path.Combine(root,filename); if(!File.Exists(script)) throw new FileNotFoundException("缺少 "+filename+"，请保留完整部署目录。"); if(MessageBox.Show(this,internet?"将请求 Windows 管理员授权，允许公网访问配置的网页及视频端口。\r\n还需在路由器 / 云安全组设置映射；本操作不会申请公网 IP。":"将请求 Windows 管理员授权，仅允许本地子网访问网页和视频端口。","配置访问防火墙",MessageBoxButtons.OKCancel,MessageBoxIcon.Information)!=DialogResult.OK) return;
                 string args="-NoProfile -ExecutionPolicy Bypass -File "+OwnedProcess.QuoteArgument(script)+" -HttpPort "+c.httpPort+" -ApplicationPath "+OwnedProcess.QuoteArgument(c.ResolveExecutable(root))+(internet && c.trustProxy?" -TrustProxy":""); Process.Start(new ProcessStartInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System),"WindowsPowerShell","v1.0","powershell.exe"),args) {UseShellExecute=true,Verb="runas",WorkingDirectory=root}); AppendLog("已请求配置访问防火墙，请查看 Windows 授权窗口与脚本结果。");
             } catch(System.ComponentModel.Win32Exception ex) { AppendLog(ex.NativeErrorCode==1223?"已取消防火墙授权。":ex.Message); } catch(Exception ex) { ShowError(ex); }
         }
         private void UpdateNetworkSummary()
         {
-            bool internet=baseline.networkMode=="public",cloud=baseline.externalTlsTermination; networkSummary.Text=(cloud?"云负载均衡 HTTPS":internet?"公网访问":"局域网验证")+" · 最多 "+baseline.maxViewers+" 人\r\n"+(cloud?"网页端口仅允许 ALB 回源来源":internet?"入口 / 访问码 / HTTPS / TURN":"公网地址可稍后配置"); firewall.Text=cloud?"回源规则需配置":internet?"配置公网防火墙":"配置内网访问"; UpdateModeHint(); UpdateControls();
+            bool internet=baseline.networkMode=="public",cloud=baseline.externalTlsTermination; networkSummary.Text=(cloud?"云负载均衡 HTTPS":internet?"公网访问":"局域网验证")+" · 最多 "+baseline.maxViewers+" 人\r\n"+(cloud?(!string.IsNullOrEmpty(baseline.backupPublicUrl)?"HTTPS 主入口 + HTTP 备用 · 按来源放行":"网页端口仅允许 ALB 回源来源"):internet?"入口 / 访问码 / HTTPS / TURN":"公网地址可稍后配置"); firewall.Text=cloud?"回源规则需配置":internet?"配置公网防火墙":"配置内网访问"; UpdateModeHint(); UpdateControls();
         }
         private void ApplyViewers(ViewerStatus[] current)
         {
