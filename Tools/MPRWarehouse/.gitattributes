@@ -21,3 +21,6 @@ archive_mpr_legacy_retirement.py -text whitespace=trailing-space,space-before-ta
 test_retire_mpr_legacy_assets.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
 validate_mpr_current.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
 test_mpr_current.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+# Transport revision evidence records the exact tool bytes.
+*mpr_transport*.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+validate_mpr_current_reload.py -text whitespace=trailing-space,space-before-tab,cr-at-eol

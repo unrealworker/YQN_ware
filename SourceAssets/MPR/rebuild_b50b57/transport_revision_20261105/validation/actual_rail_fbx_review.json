@@ -1,0 +1,126 @@
+{
+  "success": true,
+  "source": "Actual saved binary FBXs; includes retained base minus manifest removals, no native engine",
+  "sleepers": {
+    "components": 6044,
+    "all_shapes": "0.23 x 2.60 x 0.13 m; all 3-face raised box profile",
+    "depth_m_range": [
+      0.12999987602233887,
+      0.13000011444091797
+    ],
+    "near_or_far_sheet_profiles_remaining": 0,
+    "centers_within_0_42m": 0,
+    "cross_tile_duplicate_triangles": 0
+  },
+  "rail_web": {
+    "components": 13054,
+    "head_components": 13054,
+    "raised_web_thickness_m_range": [
+      0.07499980926513672,
+      0.07500052452087402
+    ],
+    "new_material_slot_meshes": [
+      "SM_MPRR_Rail_-1_-4_Rails",
+      "SM_MPRR_Rail_3_-2_Rails",
+      "SM_MPRR_Rail_2_-4_Rails",
+      "SM_MPRR_Rail_1_-4_Rails",
+      "SM_MPRR_Rail_1_-3_Rails",
+      "SM_MPRR_Rail_3_2_Rails",
+      "SM_MPRR_Rail_4_2_Rails",
+      "SM_MPRR_Rail_2_2_Rails"
+    ],
+    "new_slot_semantics": "MPR3_Sleepers is dark longitudinal rail web; 0.075m height, not transverse sleeper boxes",
+    "cross_tile_head_overlap_pairs": [
+      {
+        "meshes": [
+          "SM_MPRR_Rail_0_-3_Rails",
+          "SM_MPRR_Rail_0_-2_Rails"
+        ],
+        "overlap_m2": 0.0026092233093728463,
+        "centroid_cad_m": [
+          77.75191320041155,
+          -299.305427701485
+        ],
+        "nearby_source_tracks": [
+          {
+            "id": "TPX_RAILWAYS_AXES_EB8",
+            "distance_m": 0.7250551091516891,
+            "distance_to_end_m": 14.741090709197541
+          },
+          {
+            "id": "TPX_RAILWAYS_AXES_EF3",
+            "distance_m": 0.7250329321605868,
+            "distance_to_end_m": 205.46134655749543
+          }
+        ]
+      },
+      {
+        "meshes": [
+          "SM_MPRR_Rail_1_-1_Rails",
+          "SM_MPRR_Rail_1_0_Rails"
+        ],
+        "overlap_m2": 0.004561295825386792,
+        "centroid_cad_m": [
+          255.50880582409383,
+          -1.2732332884183266
+        ],
+        "nearby_source_tracks": [
+          {
+            "id": "TPX_RAILWAYS_AXES_FCA",
+            "distance_m": 0.7633910246270251,
+            "distance_to_end_m": 81.73588806120011
+          },
+          {
+            "id": "TPX_RAILWAYS_AXES_12CF",
+            "distance_m": 0.7632942929588428,
+            "distance_to_end_m": 0.7637221792736147
+          }
+        ]
+      },
+      {
+        "meshes": [
+          "SM_MPRR_Rail_3_-2_Rails",
+          "SM_MPRR_Rail_3_-1_Rails"
+        ],
+        "overlap_m2": 0.011191519239542713,
+        "centroid_cad_m": [
+          527.1073643949737,
+          -149.3249368373684
+        ],
+        "nearby_source_tracks": [
+          {
+            "id": "TPX_RAILWAYS_AXES_1317",
+            "distance_m": 0.763130517144938,
+            "distance_to_end_m": 0.7659732510262103
+          },
+          {
+            "id": "TPX_RAILWAYS_AXES_131E",
+            "distance_m": 0.763130766901975,
+            "distance_to_end_m": 0.7659732510262103
+          }
+        ]
+      }
+    ]
+  },
+  "branch_absence": {
+    "TPX_RAILWAYS_AXES_E6F": {
+      "source_length_m": 281.4876238573793,
+      "exclusive_removed_length_m": 274.6642791033492,
+      "test_strip_m2": 1538.70784816038,
+      "bed_residual_m2": 0.0,
+      "one_metre_spaced_centerline_samples": 275,
+      "residual_hits": 0
+    },
+    "TPX_RAILWAYS_AXES_E9C": {
+      "source_length_m": 258.1411228906,
+      "exclusive_removed_length_m": 243.47622018055856,
+      "test_strip_m2": 1376.7431485896182,
+      "bed_residual_m2": 0.0,
+      "one_metre_spaced_centerline_samples": 244,
+      "residual_hits": 0
+    }
+  },
+  "no_original_or_content_mutation": true,
+  "old_railbed_effective_count": 0,
+  "actual_fbx_files_checked": 63
+}

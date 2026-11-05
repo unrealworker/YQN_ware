@@ -1,0 +1,629 @@
+{
+  "schema_version": 1,
+  "success": true,
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "map_sha256": "5285b73b07f3cd46cfff7a379001eadb7ae1b8e0b7e69d8c6da71c4972639daa",
+  "baseline_map_sha256": "0768f8b11746666a11d2c97ffc2e14d422e19bc0c5fc83274c5e4fbdbfe47dd7",
+  "revised_mesh_count": 89,
+  "final_content_hashes": {
+    "Content/Maps/MPR_CAD_Warehouse_B50B57.umap": "5285b73b07f3cd46cfff7a379001eadb7ae1b8e0b7e69d8c6da71c4972639daa",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_-1_-4_Rails.uasset": "c0053742f974835d33eccc369953631ea72b4bf1d0d1e6d521120a37d64e2f33",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_-1_-4_Sleepers.uasset": "dc6850609bc34cebfc0c134a24d967567baa86c8e4a81288e33c2135c443583f",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_0_-3_Rails.uasset": "52e41ade49ecca77c92c8333aadbcac645e46def7f158aec2b00efc8a2f0dd36",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_0_-2_Rails.uasset": "4ba8db143d191a45f9c9f9ad0296caaa4fdc82cc12c96299cd21903e14a193b5",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_1_-2_Rails.uasset": "8cfb27045d1ae253273f88b170f1a664c88ed1bebb51d2a98d0755b63f9890c4",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_1_-1_Rails.uasset": "e0a6812cd43c55c7810cbeda0387efd94f1d81b8c5fed76a449ac855bbbe8431",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_0_-3_Sleepers.uasset": "8f1828a9c1d96515859befcf605bc28a6d3e0f5d22d232b0423a152041e3e69d",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_0_-2_Sleepers.uasset": "8fee19899bc8c12d248232b51ee2d2761bdd7978b1ecde499832fc5ad9f86684",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_1_-2_Sleepers.uasset": "5aff2506914fd713541561e7490da934d45074c7bfeeda6421a4effb16d022f8",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_1_-1_Sleepers.uasset": "54f95611951b0617fc197886596a62a6a5e4fc974d7d4ba10ace22b339bf9f3c",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_-1_-3_Rails.uasset": "66005d4e3dad94240bba08c788f17af78421d5d6048dc8291fd8ecb944ec252e",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_2_-1_Rails.uasset": "8e789fbe6ddceb74b4e3e5cf902ed54147b73d69946fb01b4782bef812529e1c",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_2_0_Rails.uasset": "10e5113b99f59a85f44a1349843b7fc323f63716d24ecd7e19841960fb3079f0",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_-1_-3_Sleepers.uasset": "b931d33dc1c242efc01655da7fbe31b87cd7be9e681b73ee440f09b04623de55",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_2_-1_Sleepers.uasset": "ca9240d30c55a72e731404e6ce285e71c04688ca9a28d2381b33d4b6d83c9047",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_2_0_Sleepers.uasset": "57296a05671a97d3a3e5c51917c0c885ddc9906479319ca6f3380f709392def6",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_-2_Rails.uasset": "b110c7599994a74749001fdeac161b4aa9fdc5a537d3fb02acdcabeafae55611",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_-1_Rails.uasset": "18e0e42fc7b2e80830a03e8ce7061e858a7a01e7c7e198b14ad83ea3963a53b3",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_-2_Sleepers.uasset": "331b5428c45146354367e42d08e9ea5c874513d99bf24f77146a76ab5d4e9da4",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_-1_Sleepers.uasset": "b53732450c16f2fce00a7fdc6d16800a130c8af667f04bd0824e2cb02e3f991f",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_2_-4_Rails.uasset": "6d76a7ae3cb2b5654dc13f38098ec8286c3e8e57e623fa3a77ba3c95f6fb2c9b",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_1_-4_Rails.uasset": "0d885b6a04d0822b618f4567d9e8d1a75f4cb859abcbc89bccc91262b183575e",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_1_-3_Rails.uasset": "31977a15eaca6f2ba87f282f646ba16324b067d3b0da5ca0e959915404d95167",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_2_-4_Sleepers.uasset": "140c2a4fdd65080ace5817a516f5f1621c40c277f97b9f2664c81eae2cc1fa80",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_1_-4_Sleepers.uasset": "0e967e5e396c2e41291219096a5ecb769811331963775db38349ad3e9858cc08",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_1_-3_Sleepers.uasset": "5bdbe8e1ffe1be39803503306b8e65f7bb0651182bb66a3bcca7aed43122a365",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_1_0_Rails.uasset": "8dd0f149caa631acca518e4bcd622f8cec50381966e281b2f89c800c20d21294",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_2_1_Rails.uasset": "3adc525d06a5bd124df77813aac63a90f78e0a4d026771fbc7d3cfcf39e497f5",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_1_Rails.uasset": "b32d05dfb5f07e6926ccd77959c4499c78358a7d454fb0e4d683da2f3c0e7bd9",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_2_Rails.uasset": "4c93a92529e9419b9104bf6adb6a9707c4b91515d3dd47af47d26c160c22f3f6",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_4_2_Rails.uasset": "91856abe2aa9e5fa143af2b9087a9feae43a1a611b7092b73181659ae6b7a821",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_1_0_Sleepers.uasset": "a9063bd2dd4e358c54214deecf2ca1b232d3f48819a974db7d02fe547db1c540",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_2_1_Sleepers.uasset": "3ee7cc164523c97da7bbae28fc2815f0417dc35b31c3445b16d56a1c2021f1c2",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_1_Sleepers.uasset": "067653103e65770e00706bdfe1ccdda2376c7bc3b594274abf2fceb75cee5417",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_2_Sleepers.uasset": "d1646dc09cbc464ca2aa83da5b5c5b1e5dba4e7f90ab73a07fc08b1615605803",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_4_2_Sleepers.uasset": "1bfa8e97f193e2f4c977e137d74ffc70d6058ad24bd20e7522ed656e7310348d",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_0_-1_Rails.uasset": "22381fbc063f1836b935385d2ff7e120712bddbd8ed705dc159c2d9bfa4a5ea2",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_2_2_Rails.uasset": "d7345ab0f5693ca0147f4dbe9350ca4d3e75a57d8b748c4b231667bc887f5ec0",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_0_-1_Sleepers.uasset": "5d997155df1fb3e838b9007b086bedeb4acedce345bcaa2109a15902db59a09d",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_2_2_Sleepers.uasset": "b0231de3700ba0aed426f810aa4bf0fa76390cebe9568c513d8f1c6fe743b157",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_0_Rails.uasset": "89c964fc77f6052262174c2247df6e12d06cc1595f4774b67436a303b9275924",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_0_Sleepers.uasset": "585eec18fedfbdaf4876c4013a5917cc25953bad73d7ea43148768a9075a5013",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_-1_-4.uasset": "0ac0ffab72a3e4e24ce6185a5d288b260790a769b6be0e325b923b7fc62cc481",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_-1_-3.uasset": "48f1e1878e87f4df9bac27ca40848881f8d2267ae3cd7523a395531a66da9401",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_0_-3.uasset": "fcdb66101470dea52df956b221e386cb6db105e8a70626b5b29e78d8f16e347a",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_0_-2.uasset": "1fb8ff4d7a6eb802f3fca5cea9a1cf74c3fb88106a2a72b66c95e3505cb2fd62",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_0_-1.uasset": "3eb79f205f4e39be25b15e774bd581834ad9f6a57ac26460e30f7abcc6ddb2ab",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_1_-4.uasset": "879845658927890c2ee235cf91a6b91e11d1121a65a1cadd1137ebcf0b297048",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_1_-3.uasset": "1a2d9cb70c48e2e734cc27b5bb789d16997415975d71550994e50adde7697d20",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_1_-2.uasset": "951dc4b3a8521a47b1bedd7c61e41299d043d36e22792a8402f582458c991f81",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_1_-1.uasset": "250d777979238251aa8a13008b48967a57f8ffa3bca5140e6822e16650fcdad8",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_1_0.uasset": "16480ed64277528d2a36bc64b31c26493ff535f147d51d94608dbb8cf29edb81",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_2_-4.uasset": "074e5a6c831e1a30bde5186a606c97ddcabed43a1d4e6f2f5712768a93263b80",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_2_-1.uasset": "495031dafe3414e3067657e3be461b007eb1930661e236f5a586dca092f1982b",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_2_0.uasset": "83d224a34e16a65b8fbbe725f44eeab2e5baea8334316ac90bac0b3960f419b4",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_2_1.uasset": "47a4d6c40c83e04b998eab3cf3bb8ce533aefe71efd287124155d247def70335",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_2_2.uasset": "0e4b5e3c70459839b9f8dac03661333241380a0fc5397a6e2428b502413a2144",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_3_-2.uasset": "b6d83e0c36b77de47c80171068e5f0e1b040ca9ffcfa2881677197a4b8fe4f61",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_3_-1.uasset": "e47a1ae6d35ab31471b15402e613d0a682085eb204a0ced8a6513d7d9de30814",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_3_0.uasset": "dc106eebdb416e7eb6438e0020fcfcc86553909b13462f604a0521006eab2b32",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_3_1.uasset": "8987967cc929dc14dc524b3d2b73ff24167d964d8293ae3cae4adb73be927a71",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_3_2.uasset": "3c4ace5b0409d4eba905af137117259fde2f15c88a42b8421c4c2ee5a7589ce9",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_4_2.uasset": "0cb88043786a1fcf5b4d08e11559d68f2fdf0e930bb692dc9ef5cf1a2dced82c",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingDeck_0_-3.uasset": "32fb6f1e11b3af63641d5515b0347a1fe4cf163ba0e4de3657788a57e4eb70bf",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingRamp_0_-3.uasset": "82bd558649e959f5eff9e3c416aa999baa41d158986c806df813e2d80357d4f2",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Roads_-2_-3.uasset": "3f4facb9b9b67f7d12f83e72806a70b915d51e7bbdc3bb651b8edcbf611c7671",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Roads_-2_-2.uasset": "2ab95fec3dcbd25c14722e50caac5e3b7f71867374369552d408aa3202cd2cb7",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Roads_-1_-4.uasset": "557dcc6cdb01abbe7f4b1eb6595eb550601008da2855d21ee51aee98abd6651e",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Roads_-1_-3.uasset": "ba6bf471042790ff565f182d9acb2507dc05c22af8daa4bd0d39f4480014fa64",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Roads_0_-3.uasset": "0a7d82572761f61a742a1d44fea97e9646d8e1ee676afcc573da30dca6d74a18",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Roads_0_-2.uasset": "8b6c883462be91b1049dc821d662f9c35a657736309ec6e559cd66c4cccfa9c2",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_-2_-3.uasset": "fe2b671c5dc2deb8fadfd5bbe6a056fbcd332b4e61da7f7d14fbac081f959d81",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_-2_-2.uasset": "abbb34c6088d05859e9e1e77a542c252384dda77b37e72140bfc12c7c395d70e",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_-1_-4.uasset": "c0c88f367efc7b2be06fe9b5dcdc166fe63a3f7dff809cabf0e9a8b42e98ef5a",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_-1_-3.uasset": "f8948e64e35349d4a6b854958dc4ea6a32581b740c9cd6de1f2246d75c79751c",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_0_-3.uasset": "903256348a50aeb1d816ca6bcfbc1bfbfbfc8e52acf07fcb35aa84bd61754c5b",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_0_-2.uasset": "e8b40cec6ff8b3f1f78b0f828c8f1015d0979f1c2c1b498c43b1d772656a3b89",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_-2_-3.uasset": "14c41c38ebf5f9d9ca8cb1eeaf63d9ad705d4a600649ab6549686f01a5e84660",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_-2_-2.uasset": "ee9b74565ceb73595572c9a2a659d958a547fcd775d59a31265d9a8a3724d722",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_-1_-4.uasset": "945fedf1971ec9225f4cbb78958dd4bd0153c28853b1fb5520486f7172d5762a",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_-1_-3.uasset": "da0f72cc16ae95a1eed991a893d64cac5b29610380488934373780ddf2208973",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_0_-3.uasset": "f276c2cba9ffc8d1e533036b2674d28e9c97b646d9ae23a4cbf0decb38b5d4bd",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_0_-2.uasset": "1b729c7c04608d53e0c6e6c9fb434293fde264d979f984532331e194cf975ee5",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_-2_-3.uasset": "2006231bc593670ccb391f71f8dd26b4fdb421755c363dc0da066e4afd98313b",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_-2_-2.uasset": "d771ae29535fa542b0d3a0aa607bfa9825fe99e50ef62fc43890a1b8fd225d12",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_-1_-4.uasset": "1943f69b48dad95b60dc1ed342bb9b547d0742dcd0c44d1ded716a0a6694f7f6",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_-1_-3.uasset": "b991cf8d5a91d52d92bb4fac528e0978ac870a85c23bd49f314cc3b8119523c9",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_0_-3.uasset": "d7ee8e9b6fd77a51e58a5c9d2ea0744af9f0ecd820cd13a7ab8d786e05fa0225",
+    "Content/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_0_-2.uasset": "cb0a0bf966c9b7047d8352b4b18b57e9b350ab7f3591c0f527fd969b2d6370a3"
+  },
+  "source_manifest_sha256": "2444776b784b165e735f653cfcff0c2c42f454539b20bd695dd20c75c81d9e57",
+  "source_blend_sha256": "c29b78c78f182fa50eca658a94a8a5ebac923618898b688bceb8923fb5ce861c",
+  "apply_sha256": "0a2e6363ea6fb24ad8c79b2b0ace725df96766a6901ed12f27829a1c97fd9736",
+  "reload_sha256": "c580768202a2eced0a439ae014f7069a665919ed4ac7d342a1978b7778a8b8f9",
+  "capture_report_sha256": "5985615cd00209b38e445be2eb5de793c79d5e1465e07bac3d6b634233eca69d",
+  "actual_rail_fbx_review_sha256": "57ce450094915ceead16e3ab971e5c803161aa99bec43c576c2fb8d45356cf01",
+  "color_inspection_v2_sha256": "3a1f4f5341a449b348b49e8619b04b2c7ab1b18156ddb55a0385af05e78133ff",
+  "color_probe_sha256": "dfc7bfd9239f9d6f2b63d5bce75a0672e90111cefc0ab9868112bee23edfa8e7",
+  "final_recovery_sha256": "0a2e6363ea6fb24ad8c79b2b0ace725df96766a6901ed12f27829a1c97fd9736",
+  "recovery_evidence_sources": {
+    "transport_apply.json": {
+      "sha256": "559dcb40f1dbe798e3500b340d83d12cb2fd8718092b89cdd9b5e720953573b4",
+      "archived_files": [
+        "attempt_history/transport_apply_failed_interchange.json.gz",
+        "attempt_history/transport_apply_failed_interchange_final.json.gz"
+      ]
+    },
+    "transport_resume_apply.json": {
+      "sha256": "a10e775ceb25c0a9377bb26fbca599f110b6b3bb6b37f5f9f477d339bc4da7aa",
+      "archived_files": [
+        "attempt_history/transport_apply_failed_legacy_settings.json.gz",
+        "attempt_history/transport_resume_apply.json.gz"
+      ]
+    },
+    "transport_color_probe.json": {
+      "sha256": "dfc7bfd9239f9d6f2b63d5bce75a0672e90111cefc0ab9868112bee23edfa8e7",
+      "archived_files": [
+        "color_policy/transport_color_probe.json.gz"
+      ]
+    }
+  },
+  "preservation": {
+    "core_actor_count": 256,
+    "actor_count": 877,
+    "core_actor_digest": "655d861c23e0f144ad8b969a98def7f2045a2a5c4d7c9dabec41beae4e75c1fe",
+    "actor_digest": "ff0de2c76d89580ce3451889806d4e823b3c9bbe124ab2eeed0bfac4c8b37571",
+    "removed_transport_actors": [
+      "0425EA3B4D4D5306526916BF95B8BE17",
+      "073697144FCA74539775AE9859EE848C",
+      "0A368FDE4C108F714CA130B2683D91BE",
+      "13CB6AF74484AAD69E50B3AC2B7D0C91",
+      "1F1AF00E4C6044CDDFE9E5BAD8C0DB21",
+      "2982C3F44DACD6283D04B793B070A5F2",
+      "3347A3C84407C1D68951EEBDC9F85FB0",
+      "374EDF2F44E912387A9AD4B23282380D",
+      "482BA4CB4981BA4CC2C522BDD237164F",
+      "49F0A1E148B752A4768D2CB3242F0D21",
+      "4E9663114A3A867BAC06AAADCC4426E5",
+      "5CF2F9E14DD6D33A109980A9C28ACB32",
+      "5D2929B7472997501CCDB982B4D01F99",
+      "635F3F2143F1D05F627553AE3DEFBCAD",
+      "66FE4E6C4866A86B466F139417396B55",
+      "6F87A87C42CA0F260E2E7092106CA908",
+      "76F3B9274758859F0C7B1E9BBAEF3C81",
+      "77DC62814177DDA58CF0C7886E57A3EA",
+      "78A67DBB4C90229389A0E99136E53005",
+      "8EB063654FE6D7B606A62A8246EAA9D8",
+      "937839A14422E1D36A87AA901980A191",
+      "A07CADE6459EEC9380DBBF9C85D4EADD",
+      "A2C679F9401E0DD18AF9888488DE452A",
+      "A36F2F6C4352F594F05C76B80AC22CFD",
+      "C14FA7D24AD6458EAA3199863062AE90",
+      "C1E066E14FD839EFB20686B6FAAF9F61",
+      "C59CDA334DEFEC854F777E9F13B67813",
+      "C7014FCE43511E23B7C742AD9B2570BD"
+    ],
+    "added_transport_actors": [],
+    "unchanged_existing_actors": 877
+  },
+  "native_triangle_count": 249476,
+  "backup_entities_archived": false,
+  "canonical_apply_complete": true,
+  "independent_reload_complete": true,
+  "runtime_view_count": 7,
+  "attempt_history_is_not_acceptance": true,
+  "source_tools": {
+    "Tools/MPRWarehouse/archive_mpr_transport_validation.py": "1276a2d371e90c1805a712c6a81b743f4c740686e2c9d617f799e565ba8c0909",
+    "Tools/MPRWarehouse/apply_mpr_transport_revision.py": "60fec0fbf564fb89ff13d6a333165d8ef35f0cb843ca4576e9a22fad92a36f0c",
+    "Tools/MPRWarehouse/recover_mpr_transport_revision.py": "2b5fef566b4c6bd68bafeb43e441cf095a596df975d0c786310c5ce2f6213792",
+    "Tools/MPRWarehouse/probe_mpr_transport_colors.py": "92e42bc0bb7324f7b597b84c4b636f64562e287aeb3a26c83ad4a83f3d051e88",
+    "Tools/MPRWarehouse/import_mpr_scene.py": "1124f853b13951ca0480157cd9a97d831f8a8131017e725fcae6228b051ad201",
+    "Tools/MPRWarehouse/validate_mpr_current.py": "b2293e6359340b001097c3d63a8a03b0bf173683bf26512ca679a68b3221d5fa",
+    "Tools/MPRWarehouse/validate_mpr_current_reload.py": "cb999a661c4723e2bff05317cb098530db6650a344607ac31d8da7a676f5fd20",
+    "Tools/MPRWarehouse/capture_mpr_transport_views.py": "e5bfad5b745fa65a29bf5243b4b3bf913b69eb1bf83c095e5b297744eb04f324",
+    "Tools/MPRWarehouse/verify_mpr_transport_blender.py": "7d9b5006aa0946e070bc970a5675c265990143242fa0dc806902e4c9738fedca"
+  },
+  "files": {
+    "transport_apply.json.gz": {
+      "sha256": "7a067585f7c09c83deb4d9e2e6bd126046f7ce24ab8648884f902b8e20422ea3",
+      "bytes": 28917,
+      "source": "Saved/MPR/cleanup_20261105/transport_apply.json",
+      "source_sha256": "0a2e6363ea6fb24ad8c79b2b0ace725df96766a6901ed12f27829a1c97fd9736",
+      "source_bytes": 204024,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "reload/current_validation.json.gz": {
+      "sha256": "48e97bee11fef8ff02d453853671bc033187da6e89e9c95c28a34dcab209dcff",
+      "bytes": 44767,
+      "source": "Saved/MPR/cleanup_20261105/reload/current_validation.json",
+      "source_sha256": "c580768202a2eced0a439ae014f7069a665919ed4ac7d342a1978b7778a8b8f9",
+      "source_bytes": 214670,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "reload/current_snapshot.json.gz": {
+      "sha256": "3ab6e77f35fe12173a74097c12bfcb2b957161cdb3c490e8f54e3900a625d378",
+      "bytes": 232805,
+      "source": "Saved/MPR/cleanup_20261105/reload/current_snapshot.json",
+      "source_sha256": "20975c24675b370290d0f24739e54882c7d92f1329918ec429394bcc06f3ed99",
+      "source_bytes": 2681284,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "runtime_views/capture_report.json": {
+      "sha256": "5985615cd00209b38e445be2eb5de793c79d5e1465e07bac3d6b634233eca69d",
+      "bytes": 6266,
+      "source": "Saved/MPR/cleanup_20261105/transport/runtime_views/capture_report.json",
+      "source_sha256": "5985615cd00209b38e445be2eb5de793c79d5e1465e07bac3d6b634233eca69d",
+      "source_bytes": 6266,
+      "compression": null,
+      "role": "evidence"
+    },
+    "runtime_views/01-main-aerial-preserved.png": {
+      "sha256": "ffcedf57a76532ac65ff058ebc9a83884eb3f2919abcfc5142546ecc0fb5927e",
+      "bytes": 2990838,
+      "source": "Saved/MPR/cleanup_20261105/transport/runtime_views/01-main-aerial-preserved_1793863204600657000.png",
+      "source_sha256": "ffcedf57a76532ac65ff058ebc9a83884eb3f2919abcfc5142546ecc0fb5927e",
+      "source_bytes": 2990838,
+      "compression": null,
+      "role": "evidence"
+    },
+    "runtime_views/02-removed-west-spurs.png": {
+      "sha256": "f975e9f320384ec5b6f9deff84b1e042dcdc749608de9e5824e02051cd01840c",
+      "bytes": 2610513,
+      "source": "Saved/MPR/cleanup_20261105/transport/runtime_views/02-removed-west-spurs_1793863208207773100.png",
+      "source_sha256": "f975e9f320384ec5b6f9deff84b1e042dcdc749608de9e5824e02051cd01840c",
+      "source_bytes": 2610513,
+      "compression": null,
+      "role": "evidence"
+    },
+    "runtime_views/03-two-road-junctions.png": {
+      "sha256": "76a3639851ffec414c630785fe490802cd344c0f58a7367576c482c0a3720623",
+      "bytes": 2665318,
+      "source": "Saved/MPR/cleanup_20261105/transport/runtime_views/03-two-road-junctions_1793863211519691000.png",
+      "source_sha256": "76a3639851ffec414c630785fe490802cd344c0f58a7367576c482c0a3720623",
+      "source_bytes": 2665318,
+      "compression": null,
+      "role": "evidence"
+    },
+    "runtime_views/04-former-sleeper-density-boundary.png": {
+      "sha256": "ad3268dcf9a8afc394caf96b1440019b25a7df90354f190b8354e71c8d5f89f8",
+      "bytes": 2900128,
+      "source": "Saved/MPR/cleanup_20261105/transport/runtime_views/04-former-sleeper-density-boundary_1793863214833443500.png",
+      "source_sha256": "ad3268dcf9a8afc394caf96b1440019b25a7df90354f190b8354e71c8d5f89f8",
+      "source_bytes": 2900128,
+      "compression": null,
+      "role": "evidence"
+    },
+    "runtime_views/05-railbed-seam-close.png": {
+      "sha256": "438d98ebd968253364e1fa6bb20ca65d8c1f49d547fd3d6e2ad1a670c302e338",
+      "bytes": 3001513,
+      "source": "Saved/MPR/cleanup_20261105/transport/runtime_views/05-railbed-seam-close_1793863218163519900.png",
+      "source_sha256": "438d98ebd968253364e1fa6bb20ca65d8c1f49d547fd3d6e2ad1a670c302e338",
+      "source_bytes": 3001513,
+      "compression": null,
+      "role": "evidence"
+    },
+    "runtime_views/06-railbed-northeast-low.png": {
+      "sha256": "95f158c9572210cdaa4db82273dd5da81441e1a5c98433a5533282cdb540a507",
+      "bytes": 2870622,
+      "source": "Saved/MPR/cleanup_20261105/transport/runtime_views/06-railbed-northeast-low_1793863221494399300.png",
+      "source_sha256": "95f158c9572210cdaa4db82273dd5da81441e1a5c98433a5533282cdb540a507",
+      "source_bytes": 2870622,
+      "compression": null,
+      "role": "evidence"
+    },
+    "runtime_views/07-interior-preserved.png": {
+      "sha256": "5036f8571d794bf4a4376f44d8212c07464039152071f8519ff86fc1445a38ef",
+      "bytes": 3208994,
+      "source": "Saved/MPR/cleanup_20261105/transport/runtime_views/07-interior-preserved_1793863224817906100.png",
+      "source_sha256": "5036f8571d794bf4a4376f44d8212c07464039152071f8519ff86fc1445a38ef",
+      "source_bytes": 3208994,
+      "compression": null,
+      "role": "evidence"
+    },
+    "geometry_validation.json": {
+      "sha256": "3e668ddd94830109d413ae0e5e764352be9f03b1b35ee2683dbf530d8c3b0834",
+      "bytes": 1773,
+      "source": "Saved/MPR/cleanup_20261105/transport/geometry_validation.json",
+      "source_sha256": "3e668ddd94830109d413ae0e5e764352be9f03b1b35ee2683dbf530d8c3b0834",
+      "source_bytes": 1773,
+      "compression": null,
+      "role": "evidence"
+    },
+    "saved_fbx_clearance.json": {
+      "sha256": "51ff0f09a2b45c725e264ba9d139c472755ffbc5244e5d890e136911a39b8751",
+      "bytes": 557,
+      "source": "Saved/MPR/cleanup_20261105/transport/saved_fbx_clearance.json",
+      "source_sha256": "51ff0f09a2b45c725e264ba9d139c472755ffbc5244e5d890e136911a39b8751",
+      "source_bytes": 557,
+      "compression": null,
+      "role": "evidence"
+    },
+    "geometry_payload.json.gz": {
+      "sha256": "d011a0635bd69f82e663ec3159b70a39cd4a0d5dab8f423e4187e688e2be3884",
+      "bytes": 5330476,
+      "source": "Saved/MPR/cleanup_20261105/transport/geometry_payload.json.gz",
+      "source_sha256": "d011a0635bd69f82e663ec3159b70a39cd4a0d5dab8f423e4187e688e2be3884",
+      "source_bytes": 5330476,
+      "compression": null,
+      "role": "evidence"
+    },
+    "geometry_audit_before_export.json.gz": {
+      "sha256": "75959b431ddaae2f7857fede72dda259e18247d086b309fa98835b53bf52b86a",
+      "bytes": 32547,
+      "source": "Saved/MPR/cleanup_20261105/transport/geometry_audit.json",
+      "source_sha256": "be55947ce1149f91dc0e194bcd2f68fb9dfb57513786ae441fd612bc59702b8a",
+      "source_bytes": 157217,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "geometry_audit.json.gz": {
+      "sha256": "9cbc99a91195729662e8d4eed34fcf53d8edc1fa59f09363f95e5ff39e7446ee",
+      "bytes": 32686,
+      "source": "SourceAssets/MPR/rebuild_b50b57/transport_revision_20261105/geometry_audit.json",
+      "source_sha256": "09dc8a2f7d24045fd0363f8faf12f4dffe9cd394bda42b14ad03b1deb6d0967a",
+      "source_bytes": 157438,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "layout.json.gz": {
+      "sha256": "c0f8296cfc2b478714f9057a97880b29934ac43712a4c0055c9228bd7dd6f86f",
+      "bytes": 2726218,
+      "source": "Saved/MPR/cleanup_20261105/transport/layout.json",
+      "source_sha256": "7dc44f7b52bb7674046eab79a12c9e1337c57f6237dacff52add74f14d1e8720",
+      "source_bytes": 13897151,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "road_preview.json.gz": {
+      "sha256": "bcf90453abf80a8b7c3160fc531eaf12a8be45a9eac09551f3ef3a570a9e79f4",
+      "bytes": 2744630,
+      "source": "Saved/MPR/cleanup_20261105/transport/road_preview.json",
+      "source_sha256": "ff7aed14e68eb52543a083a5b215c802d0c17ff6ad8e7cb58e9aa0b48aebb687",
+      "source_bytes": 13983769,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "actual_rail_fbx_review.json": {
+      "sha256": "57ce450094915ceead16e3ab971e5c803161aa99bec43c576c2fb8d45356cf01",
+      "bytes": 3826,
+      "source": "Saved/MPR/cleanup_20261105/transport/actual_rail_fbx_review.json",
+      "source_sha256": "57ce450094915ceead16e3ab971e5c803161aa99bec43c576c2fb8d45356cf01",
+      "source_bytes": 3826,
+      "compression": null,
+      "role": "evidence"
+    },
+    "color_policy/transport_color_inspection_v2_scene.json.gz": {
+      "sha256": "3f6736b7e121bfa2c8181bd8f1e59567b4fd09264da3aaeebbfb454ae866ecda",
+      "bytes": 277028,
+      "source": "Saved/MPR/cleanup_20261105/transport_color_inspection_v2_scene.json",
+      "source_sha256": "e02baef8f7c9df667986d6895bd4c200952937fe5f4acec6048cc205bed1f19e",
+      "source_bytes": 5616472,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "color_policy/transport_color_inspection_v2_content.json.gz": {
+      "sha256": "882bc28afbc96a4eed857cc2685f54ebde6fd7faebd47339388ad0b1c147862a",
+      "bytes": 95378,
+      "source": "Saved/MPR/cleanup_20261105/transport_color_inspection_v2_content.json",
+      "source_sha256": "5ec203e71ad4e9e4c81889d0fc5701673d7892b92f0737aac3a65c85b783b9f7",
+      "source_bytes": 341278,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "color_policy/transport_color_inspection_v2.json.gz": {
+      "sha256": "4a8b25c3f9dcb595df693df02b4e7f71817e68802108fbec08f9361a656cbd15",
+      "bytes": 1588,
+      "source": "Saved/MPR/cleanup_20261105/transport_color_inspection_v2.json",
+      "source_sha256": "3a1f4f5341a449b348b49e8619b04b2c7ab1b18156ddb55a0385af05e78133ff",
+      "source_bytes": 3848,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "color_policy/transport_color_probe.json.gz": {
+      "sha256": "be3cd884254cf8dc3759f7baadf94582e434490ce6325340bad468f3fbf05117",
+      "bytes": 2136,
+      "source": "Saved/MPR/cleanup_20261105/transport_color_probe.json",
+      "source_sha256": "dfc7bfd9239f9d6f2b63d5bce75a0672e90111cefc0ab9868112bee23edfa8e7",
+      "source_bytes": 7616,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "color_policy/transport_color_probe_content_after.json.gz": {
+      "sha256": "31d86ae832e8d4c0e27eb60740f009379de49131ece91fd10cdd685450f62e71",
+      "bytes": 95376,
+      "source": "Saved/MPR/cleanup_20261105/transport_color_probe_content_after.json",
+      "source_sha256": "46a5e8d29832455c307a77f20f5c5225a6bd4a8e27a00ea9c412ff382f525dd8",
+      "source_bytes": 341278,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "recovery/final_recovery.json.gz": {
+      "sha256": "7a067585f7c09c83deb4d9e2e6bd126046f7ce24ab8648884f902b8e20422ea3",
+      "bytes": 28917,
+      "source": "Saved/MPR/cleanup_20261105/transport_recovery_complete.json",
+      "source_sha256": "0a2e6363ea6fb24ad8c79b2b0ace725df96766a6901ed12f27829a1c97fd9736",
+      "source_bytes": 204024,
+      "compression": "gzip",
+      "role": "successful_final_recovery"
+    },
+    "native_validation/validation.json.gz": {
+      "sha256": "30d338e8a442a3e83b1655334122b03fc3d5f38ca8bf572f7f45ba60dd503e85",
+      "bytes": 4653,
+      "source": "Saved/MPR/cleanup_20261105/transport/native_validation/validation.json",
+      "source_sha256": "c6033eae0f66c10dbd1feadc7b5f0af30e3a6fac5fabf356e33b7cae31aaa04d",
+      "source_bytes": 61720,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "native_validation/20261105T052138.684147Z/000_030.json.gz": {
+      "sha256": "afb337f7b6f84c4e01bdc5e57979aa176d21ac7f2ee10c9bf87473744fdd24f4",
+      "bytes": 1919,
+      "source": "Saved/MPR/cleanup_20261105/transport/native_validation/20261105T052138.684147Z/000_030.json",
+      "source_sha256": "1d78ca699c05bb7f9db23676c96cbe4b1c5c50023a89c4f33cd8404216b3253a",
+      "source_bytes": 21253,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "native_validation/20261105T052138.684147Z/000_030.log.gz": {
+      "sha256": "4ca2145131ac6aa07647a650e418ed92cc57cd9da1afb65de693e0585d0ab638",
+      "bytes": 281,
+      "source": "Saved/MPR/cleanup_20261105/transport/native_validation/20261105T052138.684147Z/000_030.log",
+      "source_sha256": "505f3e11a3cf1d80fc5897faa57725e438023a7908f54b08aa0b8379b1ca7787",
+      "source_bytes": 879,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "native_validation/20261105T052138.684147Z/030_060.json.gz": {
+      "sha256": "16f3f65a39fa5365d0b8a046088d16f019d584bd36e09a2df15f8ee53132c246",
+      "bytes": 1859,
+      "source": "Saved/MPR/cleanup_20261105/transport/native_validation/20261105T052138.684147Z/030_060.json",
+      "source_sha256": "24ccdcff010a6d8e47b2a0b08b8d58bdc3c47c833dd0ee68b021632ade40f1a9",
+      "source_bytes": 20405,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "native_validation/20261105T052138.684147Z/030_060.log.gz": {
+      "sha256": "1c0d35212198bfea47a3d738b309441fd33196586e0fc4ccd6c5ba927699c62d",
+      "bytes": 281,
+      "source": "Saved/MPR/cleanup_20261105/transport/native_validation/20261105T052138.684147Z/030_060.log",
+      "source_sha256": "8d7ba16a99bb40f958931a3ff5f2faef37552a72fbb8a237bfd80e6bbcea04a6",
+      "source_bytes": 879,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "native_validation/20261105T052138.684147Z/060_089.json.gz": {
+      "sha256": "3d300eeecdc267e6e19e861fdc468eb96f86198628369b5090bd488c8d72eac7",
+      "bytes": 1784,
+      "source": "Saved/MPR/cleanup_20261105/transport/native_validation/20261105T052138.684147Z/060_089.json",
+      "source_sha256": "199ecb371b295d95ab0597f2ae84b32d8c2fcff7e4d52d32b48b1968137addc2",
+      "source_bytes": 19762,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "native_validation/20261105T052138.684147Z/060_089.log.gz": {
+      "sha256": "e8f815a436a5942ea6185fe8c7790acebd3ccbb4b2cd34c6daf5780dcae74859",
+      "bytes": 281,
+      "source": "Saved/MPR/cleanup_20261105/transport/native_validation/20261105T052138.684147Z/060_089.log",
+      "source_sha256": "882e3394b109b10cd161ca1f3e1c919bee2e877ba8bb7965f31c588e28d389c1",
+      "source_bytes": 860,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "transport_before.json.gz": {
+      "sha256": "b0b7e659a41cca31ecc1787b51c31bac40d93d2190a8623a7e49f3b78dec29a8",
+      "bytes": 276922,
+      "source": "Saved/MPR/cleanup_20261105/transport_before.json",
+      "source_sha256": "313c1caf34f9e5cfe8d1ad9db28349a88f8815a27c2f51d06b9f4f0892338a66",
+      "source_bytes": 5615681,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "transport_after.json.gz": {
+      "sha256": "65429210a47f1ce6e66d3f5f8fb33b1370b55ae9c9c4af5e55442f9150936109",
+      "bytes": 275015,
+      "source": "Saved/MPR/cleanup_20261105/transport_after.json",
+      "source_sha256": "7ca91f66a4ca53315dbc552e26be23770f1ceb0c386b9afc1e730ae8296ec131",
+      "source_bytes": 5561938,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "transport_content_before.json.gz": {
+      "sha256": "ada6c8f7ca1a362e6b02eb03046a3e88a58d66d2275b5a00836999e16b3b1d5f",
+      "bytes": 95360,
+      "source": "Saved/MPR/cleanup_20261105/transport_content_before.json",
+      "source_sha256": "dcd93020ea5a755fdc258e59709a52612fceca9feab5253cc0ba1913e7922f61",
+      "source_bytes": 341230,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "transport_sources_before.json.gz": {
+      "sha256": "1e5d9df6517fe7ef27b763901f6255c172a2784abc28ee5ae2feef7a1a9efc06",
+      "bytes": 83403,
+      "source": "Saved/MPR/cleanup_20261105/transport_sources_before.json",
+      "source_sha256": "d633927d1f5f28ee0ac4b91ea9ef06513d8f06bdaf00714155639d23ca5c5da4",
+      "source_bytes": 249796,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "transport_preflight.json.gz": {
+      "sha256": "146cb85431abb3e1f5b5f3b3c7a24d9734995eba73cdf81515c92229c9e83bdf",
+      "bytes": 3610,
+      "source": "Saved/MPR/cleanup_20261105/transport_preflight.json",
+      "source_sha256": "c4daec4bb267fc3f15c6e4b17a16f1de0c60071d12c8f73d4188e9b4c60efe3b",
+      "source_bytes": 12884,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "transport_backup_manifest.json.gz": {
+      "sha256": "4d6ea3a3be740beb926d65e5d3af6319c4898622b8eb72c2f6e73188651b27b6",
+      "bytes": 4606,
+      "source": "Saved/MPR/cleanup_20261105/transport_backup/manifest.json",
+      "source_sha256": "57058857099362c6671fc95b5ec2e41b204df29528b2dc676b4d959576c5adc3",
+      "source_bytes": 17612,
+      "compression": "gzip",
+      "role": "evidence"
+    },
+    "attempt_history/transport_apply_failed_interchange.json.gz": {
+      "sha256": "1c53a5ef2d883e566b936173d280efb90243c1a7f3f96245ab6651fbbca0f889",
+      "bytes": 4150,
+      "source": "Saved/MPR/cleanup_20261105/transport_apply_failed_interchange.json",
+      "source_sha256": "559dcb40f1dbe798e3500b340d83d12cb2fd8718092b89cdd9b5e720953573b4",
+      "source_bytes": 18479,
+      "compression": "gzip",
+      "role": "attempt_history_not_final_success"
+    },
+    "attempt_history/transport_apply_failed_interchange_final.json.gz": {
+      "sha256": "1c53a5ef2d883e566b936173d280efb90243c1a7f3f96245ab6651fbbca0f889",
+      "bytes": 4150,
+      "source": "Saved/MPR/cleanup_20261105/transport_apply_failed_interchange_final.json",
+      "source_sha256": "559dcb40f1dbe798e3500b340d83d12cb2fd8718092b89cdd9b5e720953573b4",
+      "source_bytes": 18479,
+      "compression": "gzip",
+      "role": "attempt_history_not_final_success"
+    },
+    "attempt_history/transport_apply_failed_legacy_settings.json.gz": {
+      "sha256": "93466b79e92531597e4ddf83766ef53086a8ba5c5472898f03f04b28a780905e",
+      "bytes": 10704,
+      "source": "Saved/MPR/cleanup_20261105/transport_apply_failed_legacy_settings.json",
+      "source_sha256": "a10e775ceb25c0a9377bb26fbca599f110b6b3bb6b37f5f9f477d339bc4da7aa",
+      "source_bytes": 39065,
+      "compression": "gzip",
+      "role": "attempt_history_not_final_success"
+    },
+    "attempt_history/transport_color_inspection.json.gz": {
+      "sha256": "4924e8fcc392aaefc4cd786a7b790954c611bcc3acdfe1f13f6c2ec3786a2891",
+      "bytes": 1581,
+      "source": "Saved/MPR/cleanup_20261105/transport_color_inspection.json",
+      "source_sha256": "c5e8532593264b97c94af2d9cb2c4652119bd609ee609de5bf43b701a3c98993",
+      "source_bytes": 3825,
+      "compression": "gzip",
+      "role": "attempt_history_not_final_success"
+    },
+    "attempt_history/transport_color_inspection_content.json.gz": {
+      "sha256": "882bc28afbc96a4eed857cc2685f54ebde6fd7faebd47339388ad0b1c147862a",
+      "bytes": 95378,
+      "source": "Saved/MPR/cleanup_20261105/transport_color_inspection_content.json",
+      "source_sha256": "5ec203e71ad4e9e4c81889d0fc5701673d7892b92f0737aac3a65c85b783b9f7",
+      "source_bytes": 341278,
+      "compression": "gzip",
+      "role": "attempt_history_not_final_success"
+    },
+    "attempt_history/transport_color_inspection_scene.json.gz": {
+      "sha256": "3f6736b7e121bfa2c8181bd8f1e59567b4fd09264da3aaeebbfb454ae866ecda",
+      "bytes": 277028,
+      "source": "Saved/MPR/cleanup_20261105/transport_color_inspection_scene.json",
+      "source_sha256": "e02baef8f7c9df667986d6895bd4c200952937fe5f4acec6048cc205bed1f19e",
+      "source_bytes": 5616472,
+      "compression": "gzip",
+      "role": "attempt_history_not_final_success"
+    },
+    "attempt_history/transport_color_metadata.json.gz": {
+      "sha256": "d114a6ab215d9520c3ff93c25479e1ab7d26c42aef39d389663a2c19cd8cee72",
+      "bytes": 1565,
+      "source": "Saved/MPR/cleanup_20261105/transport_color_metadata.json",
+      "source_sha256": "43924a09d2ea4a2330254795564fea87604e125e952f72550d307856cd71decc",
+      "source_bytes": 4212,
+      "compression": "gzip",
+      "role": "attempt_history_not_final_success"
+    },
+    "attempt_history/transport_recovery_apply.json.gz": {
+      "sha256": "95e551fc30609655216d3fa2b1222992a3dc39af94cfcc6627a3a61126fad233",
+      "bytes": 4435,
+      "source": "Saved/MPR/cleanup_20261105/transport_recovery_apply.json",
+      "source_sha256": "583310c24ff5838fc0a541295c871af5efde24d8c0268902a1b180e6a4dbc75f",
+      "source_bytes": 16859,
+      "compression": "gzip",
+      "role": "attempt_history_not_final_success"
+    },
+    "attempt_history/transport_resume_apply.json.gz": {
+      "sha256": "93466b79e92531597e4ddf83766ef53086a8ba5c5472898f03f04b28a780905e",
+      "bytes": 10704,
+      "source": "Saved/MPR/cleanup_20261105/transport_resume_apply.json",
+      "source_sha256": "a10e775ceb25c0a9377bb26fbca599f110b6b3bb6b37f5f9f477d339bc4da7aa",
+      "source_bytes": 39065,
+      "compression": "gzip",
+      "role": "attempt_history_not_final_success"
+    },
+    "attempt_history/transport_resume_before.json.gz": {
+      "sha256": "3f6736b7e121bfa2c8181bd8f1e59567b4fd09264da3aaeebbfb454ae866ecda",
+      "bytes": 277028,
+      "source": "Saved/MPR/cleanup_20261105/transport_resume_before.json",
+      "source_sha256": "e02baef8f7c9df667986d6895bd4c200952937fe5f4acec6048cc205bed1f19e",
+      "source_bytes": 5616472,
+      "compression": "gzip",
+      "role": "attempt_history_not_final_success"
+    },
+    "attempt_history/transport_resume_plan.json.gz": {
+      "sha256": "2365d325713fd9dbc52a16765cf98fdb673dc4a5a1dfb11f99fab3e61c68545c",
+      "bytes": 102587,
+      "source": "Saved/MPR/cleanup_20261105/transport_resume_plan.json",
+      "source_sha256": "41c3430d03a2fbd3b778d615d709df7bc308a14ae133d4f8729b2fb33f0cf536",
+      "source_bytes": 382225,
+      "compression": "gzip",
+      "role": "attempt_history_not_final_success"
+    }
+  }
+}

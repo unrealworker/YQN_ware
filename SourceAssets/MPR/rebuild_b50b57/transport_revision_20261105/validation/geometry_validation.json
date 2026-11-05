@@ -1,0 +1,64 @@
+{
+  "success": true,
+  "checks": {
+    "source_bytes_unchanged": true,
+    "28_retained_rail_sources_exact": true,
+    "no_instance_or_nontransport_payload": true,
+    "roads_outside_local_mask_exact": true,
+    "road_components_and_holes_unchanged": [
+      6,
+      59
+    ],
+    "source_environment_layout_unchanged": true,
+    "uniform_2_25m_sleepers": true,
+    "bed_gap_or_overlap_m2": {
+      "xy_snap_tolerance_m": 0.0002,
+      "gap_wider_than_tolerance": 0.0,
+      "boundary_rounding_area": 0.2493620535035477,
+      "overlap": 0.00010297483822796494
+    },
+    "uniform_sleeper_boxes": 6044,
+    "measured_sleeper_spacing_m": {
+      "samples": 6016,
+      "median": 2.25,
+      "p05": 2.2499999999998863,
+      "p95": 2.2500000000001137
+    }
+  },
+  "surface_groups": {
+    "bed": {
+      "samples": 94268,
+      "minimum_clearance_m": 0.17999736192971727,
+      "missing_terrain": 0,
+      "under_clearance": 0
+    },
+    "roads": {
+      "samples": 30872,
+      "minimum_clearance_m": 0.079995788945316,
+      "missing_terrain": 0,
+      "under_clearance": 0
+    },
+    "white": {
+      "samples": 51648,
+      "minimum_clearance_m": 0.10499862227271617,
+      "missing_terrain": 0,
+      "under_clearance": 0
+    },
+    "dash": {
+      "samples": 4672,
+      "minimum_clearance_m": 0.10699979881889732,
+      "missing_terrain": 0,
+      "under_clearance": 0
+    },
+    "curb": {
+      "samples": 37284,
+      "minimum_clearance_m": 0.19999953938824744,
+      "missing_terrain": 0,
+      "under_clearance": 0
+    }
+  },
+  "payload_sha256": "d011a0635bd69f82e663ec3159b70a39cd4a0d5dab8f423e4187e688e2be3884",
+  "patch_meshes": 89,
+  "removed_old_meshes": 29,
+  "preserved_transport_meshes": 275
+}
