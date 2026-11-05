@@ -1,0 +1,454 @@
+{
+  "success": true,
+  "run_id": "20261105T111450992814Z",
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "assets_saved": false,
+  "scope": "Owned UnrealEditor -game offscreen viewport; not PIE, packaged-game, Pixel Streaming, or concurrent-user performance acceptance.",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "warmup_seconds_per_view": 12.0,
+  "sample_seconds": 15.0,
+  "deadline_seconds": 180.0,
+  "timing_source": "Native CSV FrameTime, GameThreadTime, RenderThreadTime and GPUTime; Python/Slate intervals are never frame timing.",
+  "captures": [
+    {
+      "name": "01-tail-crossing",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\transport_cleanup_20261105\\views\\round2\\00_01-tail-crossing_20261105T111450992814Z.png",
+      "sha256": "60ac4193aeb7210524a43d65677ec3e674ffedd37cff5b81ee91a9bfa95b8229",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "camera": {
+        "position_cm": [
+          53500.0,
+          21660.453761468932,
+          10665.528555590005
+        ],
+        "rotation_deg": [
+          -64.00000000000001,
+          -90.0,
+          -0.0
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+        "horizontal_fov_deg": 50.0
+      },
+      "configured_view": [
+        "01-tail-crossing",
+        [
+          535,
+          -164,
+          -1.2
+        ],
+        12000,
+        -64,
+        -90,
+        false
+      ],
+      "roof_hidden": false,
+      "temporal_warmup_seconds": 12.0,
+      "outside_performance_window": true
+    },
+    {
+      "name": "02-orphan-white-face",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\transport_cleanup_20261105\\views\\round2\\01_02-orphan-white-face_20261105T111450992814Z.png",
+      "sha256": "f4ef845f9614f45ee0f602105713aafe7a1f8b960ecdecdc2d19c26904da7d71",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "camera": {
+        "position_cm": [
+          4400.0,
+          32290.508283680072,
+          7385.054539300879
+        ],
+        "rotation_deg": [
+          -62.000000000000064,
+          -90.0,
+          -0.0
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+        "horizontal_fov_deg": 50.0
+      },
+      "configured_view": [
+        "02-orphan-white-face",
+        [
+          44,
+          -283,
+          -1.2
+        ],
+        8500,
+        -62,
+        -90,
+        false
+      ],
+      "roof_hidden": false,
+      "temporal_warmup_seconds": 12.0,
+      "outside_performance_window": true
+    },
+    {
+      "name": "03-second-orphan-face",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\transport_cleanup_20261105\\views\\round2\\02_03-second-orphan-face_20261105T111450992814Z.png",
+      "sha256": "884889f9b7a0ea2dcb3ba1af5630a686a26804fdef7de7cf9730096c71ad23c4",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "camera": {
+        "position_cm": [
+          -9400.0,
+          42449.412454129,
+          5722.1613009445855
+        ],
+        "rotation_deg": [
+          -64.00000000000001,
+          -90.0,
+          -0.0
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+        "horizontal_fov_deg": 50.0
+      },
+      "configured_view": [
+        "03-second-orphan-face",
+        [
+          -94,
+          -396,
+          -1.2
+        ],
+        6500,
+        -64,
+        -90,
+        false
+      ],
+      "roof_hidden": false,
+      "temporal_warmup_seconds": 12.0,
+      "outside_performance_window": true
+    },
+    {
+      "name": "01-overview",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\transport_cleanup_20261105\\views\\round2\\03_01-overview_20261105T111450992814Z.png",
+      "sha256": "19f0630794fd31f806be004e1be20b0ef3e60d9758f5ca4f0e9e58ccb47ea27e",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "camera": {
+        "position_cm": [
+          6499.999999999996,
+          68222.7622858224,
+          86681.18289673942
+        ],
+        "rotation_deg": [
+          -52.00000000000001,
+          -89.99999999999997,
+          -0.0
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+        "horizontal_fov_deg": 50.0
+      },
+      "configured_view": [
+        "01-overview",
+        [
+          65,
+          -5,
+          0
+        ],
+        110000,
+        -52,
+        -90,
+        false
+      ],
+      "roof_hidden": false,
+      "temporal_warmup_seconds": 12.0,
+      "outside_performance_window": true
+    },
+    {
+      "name": "02-docks-parking",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\transport_cleanup_20261105\\views\\round2\\04_02-docks-parking_20261105T111450992814Z.png",
+      "sha256": "d553b33ca21d1ab3c82a6f0bcdb9f277952ff415bdb88ba86fc71a8f30d1d4d5",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "camera": {
+        "position_cm": [
+          -6380.771273758888,
+          36221.989279675654,
+          36042.68994871564
+        ],
+        "rotation_deg": [
+          -55.0,
+          -87.99999999999999,
+          -0.0
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+        "horizontal_fov_deg": 50.0
+      },
+      "configured_view": [
+        "02-docks-parking",
+        [
+          -55,
+          -110,
+          0
+        ],
+        44000,
+        -55,
+        -88,
+        false
+      ],
+      "roof_hidden": false,
+      "temporal_warmup_seconds": 12.0,
+      "outside_performance_window": true
+    },
+    {
+      "name": "03-north-west",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\transport_cleanup_20261105\\views\\round2\\05_03-north-west_20261105T111450992814Z.png",
+      "sha256": "f8e397aabd45b3205064581c96a435aac52653e915b006f3247a1e8decffce9c",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "camera": {
+        "position_cm": [
+          2973.724357344223,
+          17033.227828089002,
+          41554.35671166488
+        ],
+        "rotation_deg": [
+          -57.99999999999999,
+          -114.99999999999997,
+          -6.0019608573124645e-15
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+        "horizontal_fov_deg": 50.0
+      },
+      "configured_view": [
+        "03-north-west",
+        [
+          -80,
+          65,
+          0
+        ],
+        49000,
+        -58,
+        -115,
+        false
+      ],
+      "roof_hidden": false,
+      "temporal_warmup_seconds": 12.0,
+      "outside_performance_window": true
+    }
+  ],
+  "performance": null,
+  "config_sha256": "e876c2a3ab71414f4c291bca06125c044973a96bdfc3b0b55dba6883705d3a3d",
+  "config": {
+    "stage": "round2",
+    "views": [
+      [
+        "01-tail-crossing",
+        [
+          535,
+          -164,
+          -1.2
+        ],
+        12000,
+        -64,
+        -90,
+        false
+      ],
+      [
+        "02-orphan-white-face",
+        [
+          44,
+          -283,
+          -1.2
+        ],
+        8500,
+        -62,
+        -90,
+        false
+      ],
+      [
+        "03-second-orphan-face",
+        [
+          -94,
+          -396,
+          -1.2
+        ],
+        6500,
+        -64,
+        -90,
+        false
+      ],
+      [
+        "01-overview",
+        [
+          65,
+          -5,
+          0
+        ],
+        110000,
+        -52,
+        -90,
+        false
+      ],
+      [
+        "02-docks-parking",
+        [
+          -55,
+          -110,
+          0
+        ],
+        44000,
+        -55,
+        -88,
+        false
+      ],
+      [
+        "03-north-west",
+        [
+          -80,
+          65,
+          0
+        ],
+        49000,
+        -58,
+        -115,
+        false
+      ]
+    ],
+    "fov": 50,
+    "profile": false
+  },
+  "stage": "round2",
+  "engine_version": "5.8.4-58902052+++UE5+Release-5.8",
+  "map_sha256_before": "104c6072a655818520fba7909fbbd25ea177018624de9a41b1f0bdef71da3457",
+  "script_sha256": "31e4b964594c3b0e2c2b5c138d8b1fa2df94e1412d9fd97d96f3b914689fab28",
+  "coordinate_convention": "View targets are CAD metres; UE target=(x,-y,z)*100 cm",
+  "launch_flags": [
+    "own",
+    "game",
+    "RenderOffscreen",
+    "MPRProfile"
+  ],
+  "phase": "complete",
+  "elapsed_seconds": 74.60900000000402,
+  "runtime_fixture": {
+    "world": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57",
+    "controller_class": "/Script/Test.GHSWarehousePlayerController",
+    "pawn": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_WarehouseCamera_C_0",
+    "pawn_class": "/Game/GHSNormalWarehouse/Camera/BP_GHS_WarehouseCamera.BP_GHS_WarehouseCamera_C",
+    "camera": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+    "roof_actor_count": 30,
+    "actor_count": 892,
+    "ghs_hud_absent": true,
+    "ghs_business_actors_absent": true,
+    "business_state_before_camera_changes": {
+      "controller_tick_enabled": true,
+      "pawn_tick_enabled": true,
+      "hud_properties_checked": [
+        "twin_hud_widget",
+        "truck_hud_widget"
+      ],
+      "both_hud_references_null": true,
+      "campus_traffic_null": true,
+      "roof_component_tick_enabled": false,
+      "roof_component_has_ghs_roof": false,
+      "storage_component_tick_enabled": false,
+      "storage_initialized": false,
+      "replay_component_tick_enabled": false,
+      "replay_active": false
+    }
+  },
+  "runtime_state_before": {
+    "controller_tick_enabled": true,
+    "pawn_tick_enabled": true,
+    "hud_properties_checked": [
+      "twin_hud_widget",
+      "truck_hud_widget"
+    ],
+    "both_hud_references_null": true,
+    "campus_traffic_null": true,
+    "roof_component_tick_enabled": false,
+    "roof_component_has_ghs_roof": false,
+    "storage_component_tick_enabled": false,
+    "storage_initialized": false,
+    "replay_component_tick_enabled": false,
+    "replay_active": false
+  },
+  "capture_cvars": {
+    "r.GPUCsvStatsEnabled": 1,
+    "csv.CompressionMode": 0,
+    "t.MaxFPS": 0,
+    "r.VSync": 0,
+    "t.IdleWhenNotForeground": 0,
+    "Slate.bAllowThrottling": 0,
+    "r.DynamicRes.OperationMode": 0,
+    "r.ScreenPercentage": 100
+  },
+  "original_cvars": {
+    "r.GPUCsvStatsEnabled": "0",
+    "csv.CompressionMode": "-1",
+    "t.MaxFPS": "0",
+    "r.VSync": "0",
+    "t.IdleWhenNotForeground": "0",
+    "Slate.bAllowThrottling": "1",
+    "r.DynamicRes.OperationMode": "0",
+    "r.ScreenPercentage": "0"
+  },
+  "render_quality": {
+    "r.Nanite.MaxPixelsPerEdge": "0.25",
+    "r.Nanite.AllowVoxels": "0",
+    "r.Shadow.Virtual.Enable": "1",
+    "r.RayTracing": "0",
+    "r.Lumen.HardwareRayTracing": "1",
+    "r.LumenScene.GlobalSDF.ClipmapExtent": "5000"
+  },
+  "runtime_state_after": {
+    "controller_tick_enabled": true,
+    "pawn_tick_enabled": true,
+    "hud_properties_checked": [
+      "twin_hud_widget",
+      "truck_hud_widget"
+    ],
+    "both_hud_references_null": true,
+    "campus_traffic_null": true,
+    "roof_component_tick_enabled": false,
+    "roof_component_has_ghs_roof": false,
+    "storage_component_tick_enabled": false,
+    "storage_initialized": false,
+    "replay_component_tick_enabled": false,
+    "replay_active": false
+  },
+  "map_sha256_after": "104c6072a655818520fba7909fbbd25ea177018624de9a41b1f0bdef71da3457",
+  "map_unchanged": true,
+  "error": null,
+  "restore_errors": []
+}

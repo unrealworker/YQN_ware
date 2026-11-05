@@ -1,0 +1,1716 @@
+{
+  "success": true,
+  "mode": "transport",
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "started_utc": "2026-11-05T11:09:35.185355+00:00",
+  "transport": {
+    "success": true,
+    "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+    "map_saved": false,
+    "namespace": "/Game/MPRWarehouse/TransportCleanup20261105",
+    "manifest_sha256": "d9a39f2678cb4998a8e74dc0f5b8fbbc03ec8e27deb50c4ec8cf7787e631b83b",
+    "assets": [
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Rail_3_-1_Rails",
+        "reused": false,
+        "fbx_sha256": "d5422108d7a4a6a383ad91c9ec37ced929e27da00bcc3534c95cdc6b62fd7f12",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_RailSteel",
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_Sleepers"
+        ],
+        "lod_triangles": [
+          2904
+        ],
+        "bounds_cm": [
+          [
+            44866.61328125,
+            51062.921875
+          ],
+          [
+            7815.2119140625,
+            13779.7109375
+          ],
+          [
+            -387.0378112792969,
+            -231.2021942138672
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            44866.61489897999,
+            51062.9212174387
+          ],
+          [
+            7815.21611360071,
+            13779.715307353405
+          ],
+          [
+            -387.03779666921656,
+            -231.20218524620276
+          ]
+        ],
+        "max_error_cm": 0.0043698534045688575
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Rail_3_-1_Sleepers",
+        "reused": false,
+        "fbx_sha256": "07a9d2a999752d0b6918ca86a558671404260cd66f42a237af7cf127fb9225af",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_Sleepers"
+        ],
+        "lod_triangles": [
+          300
+        ],
+        "bounds_cm": [
+          [
+            45072.84765625,
+            51085.0
+          ],
+          [
+            7878.78076171875,
+            13790.3203125
+          ],
+          [
+            -397.5762939453125,
+            -246.28431701660156
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            45072.84719163998,
+            51085.001483685206
+          ],
+          [
+            7878.784760140802,
+            13790.323911134974
+          ],
+          [
+            -397.5762759979163,
+            -246.28432771114495
+          ]
+        ],
+        "max_error_cm": 0.003998422052063688
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RailCorridor_3_-1",
+        "reused": false,
+        "fbx_sha256": "f1410d9e65443466b36750cbf1a3a19e814fff1b950efc5d24e7e9322216bff3",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_Ballast"
+        ],
+        "lod_triangles": [
+          296
+        ],
+        "bounds_cm": [
+          [
+            45000.0,
+            51233.44921875
+          ],
+          [
+            7602.90576171875,
+            13916.8154296875
+          ],
+          [
+            -401.7873229980469,
+            -256.123291015625
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            45000.0,
+            51233.450000000004
+          ],
+          [
+            7602.91,
+            13916.820000000002
+          ],
+          [
+            -401.7873154345226,
+            -256.12327931292964
+          ]
+        ],
+        "max_error_cm": 0.004570312501527951
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingDeck_-1_-3",
+        "reused": false,
+        "fbx_sha256": "fd890c2cccadb10c8a495f08d1db6f17a281692df668d3a4a655b38b8e0c1266",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_Concrete"
+        ],
+        "lod_triangles": [
+          65
+        ],
+        "bounds_cm": [
+          [
+            -1188.8763427734375,
+            0.0035804419312626123
+          ],
+          [
+            40663.171875,
+            41924.30859375
+          ],
+          [
+            -162.1417694091797,
+            -142.86106872558594
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            -1188.8799999999999,
+            0.0
+          ],
+          [
+            40663.170000000006,
+            41924.310000000005
+          ],
+          [
+            -162.14176857190557,
+            -142.86106309489688
+          ]
+        ],
+        "max_error_cm": 0.0036572265623817657
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingDeck_0_-2",
+        "reused": false,
+        "fbx_sha256": "c73a3535dad129580305ab83386fa5e9addcd30a2d623269f176aa717d0b8ff2",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_Concrete"
+        ],
+        "lod_triangles": [
+          356
+        ],
+        "bounds_cm": [
+          [
+            10108.1328125,
+            14895.7802734375
+          ],
+          [
+            14999.9990234375,
+            30000.0
+          ],
+          [
+            -257.5646057128906,
+            -145.07000732421875
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            10108.13,
+            14895.779999999999
+          ],
+          [
+            15000.0,
+            30000.0
+          ],
+          [
+            -257.5646009487557,
+            -145.06999890025932
+          ]
+        ],
+        "max_error_cm": 0.0028125000008003553
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingRamp_-1_-3",
+        "reused": false,
+        "fbx_sha256": "027cae794faafa08f7fd9548adfc6dce07ee35c17967ae3a2149eb5bc1e9ff18",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_Asphalt"
+        ],
+        "lod_triangles": [
+          108
+        ],
+        "bounds_cm": [
+          [
+            -1353.0263671875,
+            0.0036075077950954437
+          ],
+          [
+            40955.48046875,
+            42163.51171875
+          ],
+          [
+            -199.09193420410156,
+            -142.86106872558594
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            -1353.03,
+            0.0
+          ],
+          [
+            40955.48,
+            42163.51
+          ],
+          [
+            -199.0919341876215,
+            -142.86106309489688
+          ]
+        ],
+        "max_error_cm": 0.003632812499972715
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingRamp_0_-2",
+        "reused": false,
+        "fbx_sha256": "5d2e5b059d5286bf68cb7f4848c74c11de4c360d6f4f1fc609be0d6ef413e3c5",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_Asphalt"
+        ],
+        "lod_triangles": [
+          585
+        ],
+        "bounds_cm": [
+          [
+            10152.5322265625,
+            14710.1708984375
+          ],
+          [
+            14999.9990234375,
+            30000.0
+          ],
+          [
+            -293.3348083496094,
+            -145.070068359375
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            10152.53,
+            14710.17
+          ],
+          [
+            15000.0,
+            30000.0
+          ],
+          [
+            -293.3348028709057,
+            -145.07007915976976
+          ]
+        ],
+        "max_error_cm": 0.002226562499345164
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_3_-2",
+        "reused": false,
+        "fbx_sha256": "063a2857c5a8cd205a69c1a980df2a951079bcb6f0c0f47428057e42f78ee67f",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalAsphalt"
+        ],
+        "lod_triangles": [
+          86
+        ],
+        "bounds_cm": [
+          [
+            49182.76953125,
+            51000.0
+          ],
+          [
+            14999.9951171875,
+            16629.89453125
+          ],
+          [
+            -243.54244995117188,
+            -155.64447021484375
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            49182.77,
+            51000.0
+          ],
+          [
+            15000.0,
+            16629.9
+          ],
+          [
+            -243.5424587939328,
+            -155.6444767934908
+          ]
+        ],
+        "max_error_cm": 0.0054687500014551915
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_3_-1",
+        "reused": false,
+        "fbx_sha256": "ecde4a828221c85263e2072727bfaeef16489a1549c94dbf11069dc540b94cd2",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalAsphalt"
+        ],
+        "lod_triangles": [
+          471
+        ],
+        "bounds_cm": [
+          [
+            45000.0,
+            51000.0
+          ],
+          [
+            10261.81640625,
+            14999.99609375
+          ],
+          [
+            -317.4684753417969,
+            -209.7194366455078
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            45000.0,
+            51000.0
+          ],
+          [
+            10261.82,
+            15000.0
+          ],
+          [
+            -317.46847116508843,
+            -209.71943634345016
+          ]
+        ],
+        "max_error_cm": 0.00390625
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_-1_-3",
+        "reused": false,
+        "fbx_sha256": "8b848b40580a54b5647ef122bb3ac598314b4b93b0af1bb439f542e432e9b55e",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalAsphalt"
+        ],
+        "lod_triangles": [
+          894
+        ],
+        "bounds_cm": [
+          [
+            -14999.9970703125,
+            0.0036377282813191414
+          ],
+          [
+            33879.66796875,
+            45000.0
+          ],
+          [
+            -204.52737426757812,
+            -104.73015594482422
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            -15000.0,
+            0.0
+          ],
+          [
+            33879.67,
+            45000.0
+          ],
+          [
+            -204.5273887057211,
+            -104.7301525018044
+          ]
+        ],
+        "max_error_cm": 0.0036377282813191414
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_0_-2",
+        "reused": false,
+        "fbx_sha256": "70c5981a88c41741ccedb49aa27e69a94b2a555322f6ba87b4cbc92a027416aa",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalAsphalt"
+        ],
+        "lod_triangles": [
+          716
+        ],
+        "bounds_cm": [
+          [
+            0.001311341649852693,
+            15000.001953125
+          ],
+          [
+            14999.9990234375,
+            30000.0
+          ],
+          [
+            -326.8551940917969,
+            -129.667724609375
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            0.0,
+            15000.0
+          ],
+          [
+            15000.0,
+            30000.0
+          ],
+          [
+            -326.8552043400206,
+            -129.66772739942886
+          ]
+        ],
+        "max_error_cm": 0.001953125
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_3_-2",
+        "reused": false,
+        "fbx_sha256": "752dd10f9384b1c9260b94d5381f8c037805c3627c76a33bccda8c00a810080e",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalCurb"
+        ],
+        "lod_triangles": [
+          127
+        ],
+        "bounds_cm": [
+          [
+            49148.14453125,
+            51024.0
+          ],
+          [
+            14999.9951171875,
+            16653.896484375
+          ],
+          [
+            -224.83282470703125,
+            -142.4996795654297
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            49148.14,
+            51024.0
+          ],
+          [
+            15000.0,
+            16653.899999999998
+          ],
+          [
+            -224.8328222111793,
+            -142.49969062406134
+          ]
+        ],
+        "max_error_cm": 0.0048828125
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_3_-1",
+        "reused": false,
+        "fbx_sha256": "5f030708bbdb2d44656ed85c32ec3f4a4fe568715ffb879eebed2090566a8f0f",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalCurb"
+        ],
+        "lod_triangles": [
+          377
+        ],
+        "bounds_cm": [
+          [
+            45000.0,
+            51024.0
+          ],
+          [
+            10237.1064453125,
+            14999.99609375
+          ],
+          [
+            -306.64788818359375,
+            -196.79031372070312
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            45000.0,
+            51024.0
+          ],
+          [
+            10237.11,
+            15000.0
+          ],
+          [
+            -306.6478835234336,
+            -196.79031125416816
+          ]
+        ],
+        "max_error_cm": 0.00390625
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_-1_-3",
+        "reused": false,
+        "fbx_sha256": "d8c2f7434682f7c40544cc4b896086c8b38a54d63882000dcf918cfe1b3e938a",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalCurb"
+        ],
+        "lod_triangles": [
+          966
+        ],
+        "bounds_cm": [
+          [
+            -14999.9970703125,
+            0.003640787210315466
+          ],
+          [
+            33837.6484375,
+            45000.0
+          ],
+          [
+            -190.19789123535156,
+            -92.66632080078125
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            -15000.0,
+            0.0
+          ],
+          [
+            33837.65,
+            45000.0
+          ],
+          [
+            -190.19788757435234,
+            -92.66631974243383
+          ]
+        ],
+        "max_error_cm": 0.003640787210315466
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_0_-2",
+        "reused": false,
+        "fbx_sha256": "317b7ccce74e3009152bd4aec2d57d07e2c93c3c01728897e1bdbf0b61f8798d",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalCurb"
+        ],
+        "lod_triangles": [
+          600
+        ],
+        "bounds_cm": [
+          [
+            0.0013546273112297058,
+            15000.001953125
+          ],
+          [
+            14999.9990234375,
+            30000.0
+          ],
+          [
+            -315.5223693847656,
+            -118.88284301757812
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            0.0,
+            15000.0
+          ],
+          [
+            15000.0,
+            30000.0
+          ],
+          [
+            -315.522363714778,
+            -118.8828487797859
+          ]
+        ],
+        "max_error_cm": 0.001953125
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_3_-2",
+        "reused": false,
+        "fbx_sha256": "4fe0c91050c6f3be44c6fef77c1312fcc10f874c21c46dcc40df2ff6c9579fb1",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ],
+        "lod_triangles": [
+          101
+        ],
+        "bounds_cm": [
+          [
+            49234.7109375,
+            50964.00390625
+          ],
+          [
+            14999.9951171875,
+            16550.724609375
+          ],
+          [
+            -235.67874145507812,
+            -157.07797241210938
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            49234.71,
+            50964.0
+          ],
+          [
+            15000.0,
+            16550.73
+          ],
+          [
+            -235.67875330832217,
+            -157.077983524399
+          ]
+        ],
+        "max_error_cm": 0.0053906249995634425
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_3_-1",
+        "reused": false,
+        "fbx_sha256": "8856434b553dca4a22bcec84544d335b5e1444f50368756467e2a8eb62fc4a81",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ],
+        "lod_triangles": [
+          490
+        ],
+        "bounds_cm": [
+          [
+            45000.0,
+            50964.00390625
+          ],
+          [
+            10298.8857421875,
+            14999.99609375
+          ],
+          [
+            -313.2002258300781,
+            -208.61312866210938
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            45000.0,
+            50964.0
+          ],
+          [
+            10298.89,
+            15000.0
+          ],
+          [
+            -313.2002065564323,
+            -208.6131239773732
+          ]
+        ],
+        "max_error_cm": 0.004257812499417923
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_-1_-3",
+        "reused": false,
+        "fbx_sha256": "a80b068ab68b8f1ca9f59f991d2c2f2941e071ddfd0d8842509bd86e308546ad",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ],
+        "lod_triangles": [
+          1262
+        ],
+        "bounds_cm": [
+          [
+            -14999.9970703125,
+            0.003633140353485942
+          ],
+          [
+            33942.69140625,
+            45000.0
+          ],
+          [
+            -201.05853271484375,
+            -102.32591247558594
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            -15000.0,
+            0.0
+          ],
+          [
+            33942.69,
+            45000.0
+          ],
+          [
+            -201.05852933364363,
+            -102.32591491170425
+          ]
+        ],
+        "max_error_cm": 0.003633140353485942
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_0_-2",
+        "reused": false,
+        "fbx_sha256": "e851d9b72cbae97d91f311b9598362944a6fd02b855b0f3059190b9307cf4dc1",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ],
+        "lod_triangles": [
+          515
+        ],
+        "bounds_cm": [
+          [
+            0.0013503916561603546,
+            15000.001953125
+          ],
+          [
+            14999.9990234375,
+            30000.0
+          ],
+          [
+            -323.35430908203125,
+            -127.93299102783203
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            0.0,
+            15000.0
+          ],
+          [
+            15000.0,
+            30000.0
+          ],
+          [
+            -323.3543123180388,
+            -127.93298674461863
+          ]
+        ],
+        "max_error_cm": 0.001953125
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_3_-2",
+        "reused": false,
+        "fbx_sha256": "0e8162bf89135f7d6f956427807d4393b5a984451e556f183697dc43528cc5db",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ],
+        "lod_triangles": [
+          22
+        ],
+        "bounds_cm": [
+          [
+            49832.48046875,
+            50786.59375
+          ],
+          [
+            15000.125,
+            15901.2646484375
+          ],
+          [
+            -238.42153930664062,
+            -183.75103759765625
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            49832.479999999996,
+            50786.590000000004
+          ],
+          [
+            15000.13,
+            15901.27
+          ],
+          [
+            -238.421539680972,
+            -183.7510339146697
+          ]
+        ],
+        "max_error_cm": 0.0053515625004365575
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_3_-1",
+        "reused": false,
+        "fbx_sha256": "b3b7c6741a917096a6564e3c38e73f07b4312802e9500f1b0ffd3afc1387d9c8",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ],
+        "lod_triangles": [
+          77
+        ],
+        "bounds_cm": [
+          [
+            45037.03125,
+            51000.0
+          ],
+          [
+            10611.3466796875,
+            14706.46484375
+          ],
+          [
+            -299.0296936035156,
+            -219.9759521484375
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            45037.03,
+            51000.0
+          ],
+          [
+            10611.35,
+            14706.47
+          ],
+          [
+            -299.02969594522216,
+            -219.97595953756104
+          ]
+        ],
+        "max_error_cm": 0.005156249999345164
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_-1_-3",
+        "reused": false,
+        "fbx_sha256": "28d549a64e5302618428d2cafc8334c82ea602871044c51165bc3a7e2dd109eb",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ],
+        "lod_triangles": [
+          150
+        ],
+        "bounds_cm": [
+          [
+            -14709.34765625,
+            -335.3869323730469
+          ],
+          [
+            35153.2890625,
+            45000.0
+          ],
+          [
+            -189.3968505859375,
+            -106.19483947753906
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            -14709.35,
+            -335.39
+          ],
+          [
+            35153.29,
+            45000.0
+          ],
+          [
+            -189.39685843030685,
+            -106.19483925208802
+          ]
+        ],
+        "max_error_cm": 0.0030676269531113576
+      },
+      {
+        "package": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_0_-2",
+        "reused": false,
+        "fbx_sha256": "d7de57379158d2890fd8ad695884eb822a39e787c5a0156c515b44675431b3f5",
+        "material_references": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ],
+        "lod_triangles": [
+          99
+        ],
+        "bounds_cm": [
+          [
+            3481.24267578125,
+            14737.302734375
+          ],
+          [
+            14999.9990234375,
+            29806.849609375
+          ],
+          [
+            -311.2433166503906,
+            -170.39236450195312
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            3481.24,
+            14737.3
+          ],
+          [
+            15000.0,
+            29806.85
+          ],
+          [
+            -311.24332856785117,
+            -170.39236532078755
+          ]
+        ],
+        "max_error_cm": 0.0027343750007275958
+      }
+    ],
+    "changed_components": [
+      {
+        "guid": "48B16AC14ED9EEAD9AF577A6D3D8E826",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_472",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_CrossingDeck_-1_-3",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingDeck_-1_-3",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingDeck_-1_-3",
+        "materials": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR3_Concrete"
+        ]
+      },
+      {
+        "guid": "9A836BF24C17D58EB9F916829883A981",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_474",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_CrossingDeck_0_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingDeck_0_-2",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingDeck_0_-2",
+        "materials": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR3_Concrete"
+        ]
+      },
+      {
+        "guid": "2957947B4419BEF57D9165A984433011",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_487",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_CrossingRamp_-1_-3",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingRamp_-1_-3",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingRamp_-1_-3",
+        "materials": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR3_Asphalt"
+        ]
+      },
+      {
+        "guid": "ED3A9C284A1E72950AB98AA431DE0CF7",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_489",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_CrossingRamp_0_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingRamp_0_-2",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingRamp_0_-2",
+        "materials": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR3_Asphalt"
+        ]
+      },
+      {
+        "guid": "06582D2E40C8C14AA4FDEDADB5EC5AD8",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_637",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_Curblines_-1_-3",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_-1_-3",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_-1_-3",
+        "materials": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalCurb"
+        ]
+      },
+      {
+        "guid": "EA31C63942C298D35BBDBB8A41231DA9",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_645",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_Curblines_0_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_0_-2",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_0_-2",
+        "materials": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalCurb"
+        ]
+      },
+      {
+        "guid": "C1A3359A49B4026F20A766AD47259A49",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_668",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_Curblines_3_-1",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_3_-1",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_3_-1",
+        "materials": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalCurb"
+        ]
+      },
+      {
+        "guid": "15D221C54BFF3DB5051680A04C138E6A",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_667",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_Curblines_3_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_3_-2",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_3_-2",
+        "materials": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalCurb"
+        ]
+      },
+      {
+        "guid": "2D868205452A5D0EF1B4F69A270A2CF5",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_467",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_RailCorridor_3_-1",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_3_-1",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RailCorridor_3_-1",
+        "materials": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_Ballast"
+        ]
+      },
+      {
+        "guid": "A83A0671469E30807C9E7AB11C2A85DA",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_424",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_Rail_3_-1_Rails",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_-1_Rails",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Rail_3_-1_Rails",
+        "materials": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_RailSteel",
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_Sleepers"
+        ]
+      },
+      {
+        "guid": "2A4D9D6747C593657E61D2955AF38362",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_426",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_Rail_3_-1_Sleepers",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_-1_Sleepers",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Rail_3_-1_Sleepers",
+        "materials": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_Sleepers"
+        ]
+      },
+      {
+        "guid": "2DBF5C86409CD12BA13D5887EE0B4CA9",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_773",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_RoadDashes_-1_-3",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_-1_-3",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_-1_-3",
+        "materials": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ]
+      },
+      {
+        "guid": "A52661344040C98F3C1251BDDB6C6B5B",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_781",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_RoadDashes_0_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_0_-2",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_0_-2",
+        "materials": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ]
+      },
+      {
+        "guid": "5C8956944FC67BD3D4768E9B86840A47",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_804",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_RoadDashes_3_-1",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_3_-1",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_3_-1",
+        "materials": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ]
+      },
+      {
+        "guid": "EC73ACE74CB8ECCAA27C059C57FDE443",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_803",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_RoadDashes_3_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_3_-2",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_3_-2",
+        "materials": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ]
+      },
+      {
+        "guid": "F717280F4687CBB4C9C01DB591CB14A9",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_569",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_Roads_-1_-3",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Roads_-1_-3",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_-1_-3",
+        "materials": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalAsphalt"
+        ]
+      },
+      {
+        "guid": "74B384774B185D800F7AC78E997A91B3",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_577",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_Roads_0_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Roads_0_-2",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_0_-2",
+        "materials": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalAsphalt"
+        ]
+      },
+      {
+        "guid": "96EC428D4210371F451EDEBE236FEE73",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_600",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_Roads_3_-1",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Roads_3_-1",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_3_-1",
+        "materials": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalAsphalt"
+        ]
+      },
+      {
+        "guid": "E1C547464AA2450D8DF3B09254C3BED8",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_599",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_Roads_3_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Roads_3_-2",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_3_-2",
+        "materials": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalAsphalt"
+        ]
+      },
+      {
+        "guid": "5B2BD45C47CDE1BA355FBD9BE888EC50",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_705",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_WhiteEdges_-1_-3",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_-1_-3",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_-1_-3",
+        "materials": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ]
+      },
+      {
+        "guid": "98786ECC48EAD8C723FC75B08FDCF751",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_713",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_WhiteEdges_0_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_0_-2",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_0_-2",
+        "materials": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ]
+      },
+      {
+        "guid": "8A9769F145DE981CC9E09B96B6E3D371",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_736",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_WhiteEdges_3_-1",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_3_-1",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_3_-1",
+        "materials": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ]
+      },
+      {
+        "guid": "A9C01EC84F415D2EF9EDC08DB42B7AD9",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_735",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_WhiteEdges_3_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_3_-2",
+        "after_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_3_-2",
+        "materials": [
+          "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR4_TerminalWhiteLine"
+        ]
+      }
+    ],
+    "deleted_actors": [
+      {
+        "guid": "91DA60384C2AB90E081DC4931B6CB492",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_483",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_CrossingDeck_3_-1",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingDeck_3_-1"
+      },
+      {
+        "guid": "8DF22AF743BC1EF4813FD887C4DE02D7",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_482",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_CrossingDeck_3_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingDeck_3_-2"
+      },
+      {
+        "guid": "E852737D448E776F529A5D9D8C8AC9E5",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_498",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_CrossingRamp_3_-1",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingRamp_3_-1"
+      },
+      {
+        "guid": "6818D3424A1CF6781DB18F8CCA12F302",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_497",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_CrossingRamp_3_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingRamp_3_-2"
+      },
+      {
+        "guid": "3B7A6DB44B9E0F3076B1B2A3B3EA563B",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_466",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_RailCorridor_3_-2",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_3_-2"
+      },
+      {
+        "guid": "FC74939B4D5B1BBF6CD42FB96E231F05",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_423",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_Rail_3_-2_Rails",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_-2_Rails"
+      },
+      {
+        "guid": "A1A29C8B48BAAEDD360EC8B971A619D1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_425",
+        "component": "StaticMeshComponent0",
+        "name": "SM_MPRR_Rail_3_-2_Sleepers",
+        "before_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_-2_Sleepers"
+      }
+    ],
+    "deleted_guids": [
+      "91DA60384C2AB90E081DC4931B6CB492",
+      "8DF22AF743BC1EF4813FD887C4DE02D7",
+      "E852737D448E776F529A5D9D8C8AC9E5",
+      "6818D3424A1CF6781DB18F8CCA12F302",
+      "3B7A6DB44B9E0F3076B1B2A3B3EA563B",
+      "FC74939B4D5B1BBF6CD42FB96E231F05",
+      "A1A29C8B48BAAEDD360EC8B971A619D1"
+    ],
+    "replaced_mesh_names": [
+      "SM_MPRR_CrossingDeck_-1_-3",
+      "SM_MPRR_CrossingDeck_0_-2",
+      "SM_MPRR_CrossingRamp_-1_-3",
+      "SM_MPRR_CrossingRamp_0_-2",
+      "SM_MPRR_Curblines_-1_-3",
+      "SM_MPRR_Curblines_0_-2",
+      "SM_MPRR_Curblines_3_-1",
+      "SM_MPRR_Curblines_3_-2",
+      "SM_MPRR_RailCorridor_3_-1",
+      "SM_MPRR_Rail_3_-1_Rails",
+      "SM_MPRR_Rail_3_-1_Sleepers",
+      "SM_MPRR_RoadDashes_-1_-3",
+      "SM_MPRR_RoadDashes_0_-2",
+      "SM_MPRR_RoadDashes_3_-1",
+      "SM_MPRR_RoadDashes_3_-2",
+      "SM_MPRR_Roads_-1_-3",
+      "SM_MPRR_Roads_0_-2",
+      "SM_MPRR_Roads_3_-1",
+      "SM_MPRR_Roads_3_-2",
+      "SM_MPRR_WhiteEdges_-1_-3",
+      "SM_MPRR_WhiteEdges_0_-2",
+      "SM_MPRR_WhiteEdges_3_-1",
+      "SM_MPRR_WhiteEdges_3_-2"
+    ],
+    "removed_mesh_names": [
+      "SM_MPRR_CrossingDeck_3_-1",
+      "SM_MPRR_CrossingDeck_3_-2",
+      "SM_MPRR_CrossingRamp_3_-1",
+      "SM_MPRR_CrossingRamp_3_-2",
+      "SM_MPRR_RailCorridor_3_-2",
+      "SM_MPRR_Rail_3_-2_Rails",
+      "SM_MPRR_Rail_3_-2_Sleepers"
+    ],
+    "already_applied": false
+  },
+  "preservation": {
+    "success": true,
+    "before_actors": 884,
+    "after_actors": 877,
+    "changed_components": [
+      {
+        "guid": "06582D2E40C8C14AA4FDEDADB5EC5AD8",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "15D221C54BFF3DB5051680A04C138E6A",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "2957947B4419BEF57D9165A984433011",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "2A4D9D6747C593657E61D2955AF38362",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "2D868205452A5D0EF1B4F69A270A2CF5",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "2DBF5C86409CD12BA13D5887EE0B4CA9",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "48B16AC14ED9EEAD9AF577A6D3D8E826",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "5B2BD45C47CDE1BA355FBD9BE888EC50",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "5C8956944FC67BD3D4768E9B86840A47",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "74B384774B185D800F7AC78E997A91B3",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "8A9769F145DE981CC9E09B96B6E3D371",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "96EC428D4210371F451EDEBE236FEE73",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "98786ECC48EAD8C723FC75B08FDCF751",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "9A836BF24C17D58EB9F916829883A981",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "A52661344040C98F3C1251BDDB6C6B5B",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "A83A0671469E30807C9E7AB11C2A85DA",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "A9C01EC84F415D2EF9EDC08DB42B7AD9",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "C1A3359A49B4026F20A766AD47259A49",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "E1C547464AA2450D8DF3B09254C3BED8",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "EA31C63942C298D35BBDBB8A41231DA9",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "EC73ACE74CB8ECCAA27C059C57FDE443",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "ED3A9C284A1E72950AB98AA431DE0CF7",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "F717280F4687CBB4C9C01DB591CB14A9",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      }
+    ],
+    "deleted_actors": [
+      {
+        "guid": "3B7A6DB44B9E0F3076B1B2A3B3EA563B",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_3_-2.SM_MPRR_RailCorridor_3_-2"
+      },
+      {
+        "guid": "6818D3424A1CF6781DB18F8CCA12F302",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingRamp_3_-2.SM_MPRR_CrossingRamp_3_-2"
+      },
+      {
+        "guid": "8DF22AF743BC1EF4813FD887C4DE02D7",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingDeck_3_-2.SM_MPRR_CrossingDeck_3_-2"
+      },
+      {
+        "guid": "91DA60384C2AB90E081DC4931B6CB492",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingDeck_3_-1.SM_MPRR_CrossingDeck_3_-1"
+      },
+      {
+        "guid": "A1A29C8B48BAAEDD360EC8B971A619D1",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_-2_Sleepers.SM_MPRR_Rail_3_-2_Sleepers"
+      },
+      {
+        "guid": "E852737D448E776F529A5D9D8C8AC9E5",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingRamp_3_-1.SM_MPRR_CrossingRamp_3_-1"
+      },
+      {
+        "guid": "FC74939B4D5B1BBF6CD42FB96E231F05",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_-2_Rails.SM_MPRR_Rail_3_-2_Rails"
+      }
+    ],
+    "new_actor_ids": [],
+    "unchanged_actors": 854
+  },
+  "content": {
+    "protected_existing_packages": 1804,
+    "new_packages": {
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingDeck_-1_-3.uasset": "cd92be7fa00d6d75f6f64e35ba2e1be245873ad8e7a28e1fd36445fc40d2687a",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingDeck_0_-2.uasset": "b962d9e6044baf20307d87537a359dd863d49f3c53340917bcc46d51ea1a36fe",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingRamp_-1_-3.uasset": "ec0e806871da4f8123c8bd7e2e3fa4dc3f743a51808f2e1cbffc885a77642354",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingRamp_0_-2.uasset": "0f1dcf26f8a29d92b49240f77d8b037cb186b6d8f2ee942f7c263ebbdee279a1",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_-1_-3.uasset": "3917dfa9f7d0f1e1f4c967e52e29aedfae626511d0a8ab8424d86a2d22600b51",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_0_-2.uasset": "8b1b24c61eae432fe68bb90cf9c5c073968971499681a7d564ddf263539e882f",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_3_-1.uasset": "9d670fb28f2ee01ee1f2c8000310a08fa53b36ef0e1455ff8277b4b49776e91a",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_3_-2.uasset": "e7b600edf9afba710398ade8be1e4c3bd5de558e2eb2db537aba046a7e9654b8",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Rail_3_-1_Rails.uasset": "026a6b356f2bc857904432fcee8093e5c2b2a1fd531a0cf8529ff801d2df5904",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Rail_3_-1_Sleepers.uasset": "d04f4f7d23697627b0f95ac04801ac67cf81a0e9a7da95f75c12923e66bb5025",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RailCorridor_3_-1.uasset": "2597600e360b743f016ccb760d9e346d16cf358fa01e216fcbb833eb8de2bd5a",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_-1_-3.uasset": "c65c98faa9f32acc81b54450278c1ed2174aff538e4f624e51ef6a213c54347a",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_0_-2.uasset": "5a560cc1c119e6b2a59638190eabce9d61537ccefffc3fa21dfcee7527926d6f",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_3_-1.uasset": "ccb56ae6ec4601528f353469530f17d217008fe3036850edf5f2486407515ed4",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_3_-2.uasset": "287366dd146ca66352423cc2752ffed2350035f1a36132e56da11972520a5bb9",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_-1_-3.uasset": "66647a6f0fbdb14770dde4851fb5a7f687d44d0a29ea0a2dbe5c280f9fb19f10",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_0_-2.uasset": "ca98dea05b211548d6de9a75a7815fd674edff5a9d7ce9e9f88caa4456732bb9",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_3_-1.uasset": "174187205d77b60a3a2de7923de64f03ced74e95288f2771526c5c26c881e1d4",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_3_-2.uasset": "7074b5bcb85c2eef5a04def3037ebbb21fbcb861f6ffaaf7562d17ffa6381e0e",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_-1_-3.uasset": "54fb2085d7ab1bd6b24a298f9dca9262f9c857961ea46d18f965bf048a4b18ff",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_0_-2.uasset": "03a876fc6dc60ffbe881206ed0f82f39510693bbc7924e1c214f4500f1b99698",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_3_-1.uasset": "e766d56248ac56eab6b2b4786a4a7211eeb7c85272a0dd03801901cd84e3833e",
+      "Content/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_3_-2.uasset": "3f32877079ccfe15a40bd2a6e1d5f8da7a6779819dccc93307f29ce67bfd2740"
+    },
+    "map_sha256": "104c6072a655818520fba7909fbbd25ea177018624de9a41b1f0bdef71da3457"
+  },
+  "preservation_after_save": {
+    "success": true,
+    "before_actors": 884,
+    "after_actors": 877,
+    "changed_components": [
+      {
+        "guid": "06582D2E40C8C14AA4FDEDADB5EC5AD8",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "15D221C54BFF3DB5051680A04C138E6A",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "2957947B4419BEF57D9165A984433011",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "2A4D9D6747C593657E61D2955AF38362",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "2D868205452A5D0EF1B4F69A270A2CF5",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "2DBF5C86409CD12BA13D5887EE0B4CA9",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "48B16AC14ED9EEAD9AF577A6D3D8E826",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "5B2BD45C47CDE1BA355FBD9BE888EC50",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "5C8956944FC67BD3D4768E9B86840A47",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "74B384774B185D800F7AC78E997A91B3",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "8A9769F145DE981CC9E09B96B6E3D371",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "96EC428D4210371F451EDEBE236FEE73",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "98786ECC48EAD8C723FC75B08FDCF751",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "9A836BF24C17D58EB9F916829883A981",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "A52661344040C98F3C1251BDDB6C6B5B",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "A83A0671469E30807C9E7AB11C2A85DA",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "A9C01EC84F415D2EF9EDC08DB42B7AD9",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "C1A3359A49B4026F20A766AD47259A49",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "E1C547464AA2450D8DF3B09254C3BED8",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "EA31C63942C298D35BBDBB8A41231DA9",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "EC73ACE74CB8ECCAA27C059C57FDE443",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "ED3A9C284A1E72950AB98AA431DE0CF7",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "F717280F4687CBB4C9C01DB591CB14A9",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      }
+    ],
+    "deleted_actors": [
+      {
+        "guid": "3B7A6DB44B9E0F3076B1B2A3B3EA563B",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RailCorridor_3_-2.SM_MPRR_RailCorridor_3_-2"
+      },
+      {
+        "guid": "6818D3424A1CF6781DB18F8CCA12F302",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingRamp_3_-2.SM_MPRR_CrossingRamp_3_-2"
+      },
+      {
+        "guid": "8DF22AF743BC1EF4813FD887C4DE02D7",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingDeck_3_-2.SM_MPRR_CrossingDeck_3_-2"
+      },
+      {
+        "guid": "91DA60384C2AB90E081DC4931B6CB492",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingDeck_3_-1.SM_MPRR_CrossingDeck_3_-1"
+      },
+      {
+        "guid": "A1A29C8B48BAAEDD360EC8B971A619D1",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_-2_Sleepers.SM_MPRR_Rail_3_-2_Sleepers"
+      },
+      {
+        "guid": "E852737D448E776F529A5D9D8C8AC9E5",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingRamp_3_-1.SM_MPRR_CrossingRamp_3_-1"
+      },
+      {
+        "guid": "FC74939B4D5B1BBF6CD42FB96E231F05",
+        "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Rail_3_-2_Rails.SM_MPRR_Rail_3_-2_Rails"
+      }
+    ],
+    "new_actor_ids": [],
+    "unchanged_actors": 854
+  }
+}

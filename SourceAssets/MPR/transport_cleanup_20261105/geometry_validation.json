@@ -1,0 +1,111 @@
+{
+  "success": true,
+  "checks": {
+    "all_old_transport_sources_byte_identical": true,
+    "only_reviewed_tiles_and_transport_categories": true,
+    "surface_coverage_gap_wider_than_0_2mm": false,
+    "surface_boundary_rounding_area_m2": {
+      "SM_MPRR_CrossingDeck_3_-2": 0.0,
+      "SM_MPRR_CrossingDeck_3_-1": 0.0,
+      "SM_MPRR_CrossingDeck_-1_-3": 0.0008898890385199997,
+      "SM_MPRR_CrossingDeck_0_-2": 0.004086510523274257,
+      "SM_MPRR_CrossingRamp_3_-2": 0.0,
+      "SM_MPRR_CrossingRamp_3_-1": 0.0,
+      "SM_MPRR_CrossingRamp_-1_-3": 0.0008560389061752483,
+      "SM_MPRR_CrossingRamp_0_-2": 0.004061770223840227,
+      "SM_MPRR_Roads_3_-2": 0.0008893161650287402,
+      "SM_MPRR_Roads_3_-1": 0.006757159198688251,
+      "SM_MPRR_Roads_-1_-3": 0.01378244820695913,
+      "SM_MPRR_Roads_0_-2": 0.01123203734471611,
+      "SM_MPRR_Curblines_3_-2": 0.0014766336997440305,
+      "SM_MPRR_Curblines_3_-1": 0.011188718996385757,
+      "SM_MPRR_Curblines_-1_-3": 0.028875228401809894,
+      "SM_MPRR_Curblines_0_-2": 0.02297425912719958,
+      "SM_MPRR_WhiteEdges_3_-2": 0.0015849926209379258,
+      "SM_MPRR_WhiteEdges_3_-1": 0.013865780363186024,
+      "SM_MPRR_WhiteEdges_-1_-3": 0.02891231252683786,
+      "SM_MPRR_WhiteEdges_0_-2": 0.019466672595088382,
+      "SM_MPRR_RoadDashes_3_-2": 0.00023335728993940127,
+      "SM_MPRR_RoadDashes_3_-1": 0.0017987324660320493,
+      "SM_MPRR_RoadDashes_-1_-3": 0.0037746804267267536,
+      "SM_MPRR_RoadDashes_0_-2": 0.0030854587719040248,
+      "SM_MPRR_RailCorridor_3_-2": 0.0,
+      "SM_MPRR_RailCorridor_3_-1": 0.003796489977062592
+    },
+    "two_stale_crossings_removed_and_road_refilled": [
+      {
+        "old_white_area_m2": 85.72325563212507,
+        "remaining_white_area_m2": 0.0,
+        "road_refill_hole_m2": 0.0
+      },
+      {
+        "old_white_area_m2": 23.2932865973562,
+        "remaining_white_area_m2": 0.0,
+        "road_refill_hole_m2": 0.0
+      }
+    ]
+  },
+  "surface_groups": {
+    "RailCorridor": {
+      "samples": 1184,
+      "minimum_clearance_m": 0.17999999998865235,
+      "missing_terrain": 0,
+      "under_clearance": 0
+    },
+    "Roads": {
+      "samples": 8668,
+      "minimum_clearance_m": 0.079995788945316,
+      "missing_terrain": 0,
+      "under_clearance": 0
+    },
+    "WhiteEdges": {
+      "samples": 9472,
+      "minimum_clearance_m": 0.10499862227271617,
+      "missing_terrain": 0,
+      "under_clearance": 0
+    },
+    "RoadDashes": {
+      "samples": 1392,
+      "minimum_clearance_m": 0.10699999999999754,
+      "missing_terrain": 0,
+      "under_clearance": 0
+    },
+    "Curblines": {
+      "samples": 8280,
+      "minimum_clearance_m": 0.19999911891153865,
+      "missing_terrain": 0,
+      "under_clearance": 0
+    },
+    "CrossingDeck": {
+      "samples": 1684,
+      "minimum_clearance_m": 0.3749995273398592,
+      "missing_terrain": 0,
+      "under_clearance": 0
+    },
+    "CrossingRamp": {
+      "samples": 2772,
+      "minimum_clearance_m": 0.07999999999999918,
+      "missing_terrain": 0,
+      "under_clearance": 0
+    }
+  },
+  "removed_mesh_names": [
+    "SM_MPRR_CrossingDeck_3_-1",
+    "SM_MPRR_CrossingDeck_3_-2",
+    "SM_MPRR_CrossingRamp_3_-1",
+    "SM_MPRR_CrossingRamp_3_-2",
+    "SM_MPRR_RailCorridor_3_-2",
+    "SM_MPRR_Rail_3_-2_Rails",
+    "SM_MPRR_Rail_3_-2_Sleepers"
+  ],
+  "payload_sha256": "7d4e906c14134977a0962aa5a79b6845ec7f67845401f51a20be688360ea1c52",
+  "patch_meshes": 23,
+  "source_triangles": 11567,
+  "native_fbx_validation": {
+    "meshes": 23,
+    "triangles": 11567,
+    "maximum_bound_error_m": 2.734375004820322e-05,
+    "all_mesh_hashes_valid": true,
+    "all_surface_projections_match": true
+  }
+}

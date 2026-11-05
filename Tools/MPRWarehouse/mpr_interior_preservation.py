@@ -120,7 +120,10 @@ def capture_editor_snapshot(u, *, project_root, expected_map=MAP, hash_assets=Tr
     actor_sub = u.get_editor_subsystem(u.EditorActorSubsystem)
     level_sub = u.get_editor_subsystem(u.LevelEditorSubsystem)
     editor_sub = u.get_editor_subsystem(u.UnrealEditorSubsystem)
-    if level_sub.is_in_play_in_editor():
+    # The LevelEditor UI module is absent in an owned Python commandlet;
+    # querying its PIE state there can dereference a null editor tab manager.
+    commandlet = '-run=pythonscript' in u.SystemLibrary.get_command_line().lower()
+    if not commandlet and level_sub.is_in_play_in_editor():
         raise PreservationError('Snapshot requires the non-PIE editor world')
     world = editor_sub.get_editor_world()
     current_map = world.get_path_name().split('.')[0]

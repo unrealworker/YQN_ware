@@ -41,6 +41,17 @@ def polygons(g):
     return [p for c in getattr(g,'geoms',[])for p in polygons(c)]
 def topological_signature(g):return [len(polygons(g)),sum(len(p.interiors)for p in polygons(g))]
 
+def geometry_intersects_impact(roles, old_row, impact):
+    """Include vanished parts: a rebuilt mesh's smaller bounds are insufficient."""
+    points=np.asarray([v for vv,ff in roles.values() for v in vv])
+    bounds=[]
+    if len(points):
+        bounds.append(box(points[:,0].min(),points[:,1].min(),points[:,0].max(),points[:,1].max()))
+    if old_row is not None:
+        old=old_row['bounds_m']
+        bounds.append(box(old[0][0],old[1][0],old[0][1],old[1][1]))
+    return any(region.intersects(impact) for region in bounds)
+
 def curve(points,trim=5.):
     """Quadratic corner rounding without overshoot, exact chain endpoints."""
     points=[np.array(p[:2],float)for p in points];out=[points[0].tolist()]
@@ -169,9 +180,7 @@ def main():
     impact=unary_union([shape(road_audit['mask']).buffer(1.5),*[LineString(r['points_m']).buffer(7.)for r in old_rails if r['id']in REMOVED]])
     full_geometry=b.GEO.data;selected={};unchanged=[]
     for name,roles in full_geometry.items():
-        points=np.asarray([v for vv,ff in roles.values()for v in vv])
-        bounds=box(points[:,0].min(),points[:,1].min(),points[:,0].max(),points[:,1].max())
-        if name.startswith(('SM_MPRR_Rail_','SM_MPRR_RailCorridor_'))or bounds.intersects(impact):selected[name]=roles
+        if name.startswith(('SM_MPRR_Rail_','SM_MPRR_RailCorridor_'))or geometry_intersects_impact(roles,old_rows.get(name),impact):selected[name]=roles
         else:unchanged.append(name)
     audit=dict(success=True,source_hashes=initial_hashes,removed_rail_ids=sorted(REMOVED),
         retained_rail_ids=[r['id']for r in layout['rail_centerlines']],road=road_audit,
