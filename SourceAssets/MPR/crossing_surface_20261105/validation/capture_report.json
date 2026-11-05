@@ -1,0 +1,505 @@
+{
+  "success": true,
+  "run_id": "20261105T125903880371Z",
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "assets_saved": false,
+  "scope": "Owned UnrealEditor -game offscreen viewport; not PIE, packaged-game, Pixel Streaming, or concurrent-user performance acceptance.",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "warmup_seconds_per_view": 12.0,
+  "sample_seconds": 15.0,
+  "deadline_seconds": 180.0,
+  "timing_source": "Native CSV FrameTime, GameThreadTime, RenderThreadTime and GPUTime; Python/Slate intervals are never frame timing.",
+  "captures": [
+    {
+      "name": "01-overview",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\crossing_surface_20261105\\views\\round2\\00_01-overview_20261105T125903880371Z.png",
+      "sha256": "72b72ba921e540882ffd04d9194260187d5f343e496f5be31ca26ec9d780d7b9",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "camera": {
+        "position_cm": [
+          6499.999999999996,
+          68222.7622858224,
+          86681.18289673942
+        ],
+        "rotation_deg": [
+          -52.00000000000001,
+          -89.99999999999997,
+          -0.0
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+        "horizontal_fov_deg": 50.0
+      },
+      "configured_view": [
+        "01-overview",
+        [
+          65,
+          -5,
+          0
+        ],
+        110000,
+        -52,
+        -90,
+        false
+      ],
+      "roof_hidden": false,
+      "temporal_warmup_seconds": 12.0,
+      "outside_performance_window": true
+    },
+    {
+      "name": "02-docks-parking",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\crossing_surface_20261105\\views\\round2\\01_02-docks-parking_20261105T125903880371Z.png",
+      "sha256": "4249d671621deafb48c7ad5c51cc7f425d224e6805ece4ec5df76a121940a18e",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "camera": {
+        "position_cm": [
+          -6380.771273758888,
+          36221.989279675654,
+          36042.68994871564
+        ],
+        "rotation_deg": [
+          -55.0,
+          -87.99999999999999,
+          -0.0
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+        "horizontal_fov_deg": 50.0
+      },
+      "configured_view": [
+        "02-docks-parking",
+        [
+          -55,
+          -110,
+          0
+        ],
+        44000,
+        -55,
+        -88,
+        false
+      ],
+      "roof_hidden": false,
+      "temporal_warmup_seconds": 12.0,
+      "outside_performance_window": true
+    },
+    {
+      "name": "03-north-west",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\crossing_surface_20261105\\views\\round2\\02_03-north-west_20261105T125903880371Z.png",
+      "sha256": "c1f80c0a86b2e8155c21f88063547b1b1630c181b6b888db154a208427d77a26",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "camera": {
+        "position_cm": [
+          2973.724357344223,
+          17033.227828089002,
+          41554.35671166488
+        ],
+        "rotation_deg": [
+          -57.99999999999999,
+          -114.99999999999997,
+          -6.0019608573124645e-15
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+        "horizontal_fov_deg": 50.0
+      },
+      "configured_view": [
+        "03-north-west",
+        [
+          -80,
+          65,
+          0
+        ],
+        49000,
+        -58,
+        -115,
+        false
+      ],
+      "roof_hidden": false,
+      "temporal_warmup_seconds": 12.0,
+      "outside_performance_window": true
+    },
+    {
+      "name": "04-road-rail-crossing",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\crossing_surface_20261105\\views\\round2\\03_04-road-rail-crossing_20261105T125903880371Z.png",
+      "sha256": "3e67464bf2a7a38b04915f94522faafb2366936c8201228719e6fe86096fa1c3",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "camera": {
+        "position_cm": [
+          -3158.5634068535455,
+          40805.775512374195,
+          9345.481763884825
+        ],
+        "rotation_deg": [
+          -64.99999999999996,
+          -11.999999999999995,
+          -1.8814583806455145e-15
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+        "horizontal_fov_deg": 50.0
+      },
+      "configured_view": [
+        "04-road-rail-crossing",
+        [
+          11.819585,
+          -398.831691,
+          -1.7075
+        ],
+        10500,
+        -65,
+        -12,
+        false
+      ],
+      "roof_hidden": false,
+      "temporal_warmup_seconds": 12.0,
+      "outside_performance_window": true
+    }
+  ],
+  "performance": {
+    "view": "01-overview",
+    "camera": {
+      "position_cm": [
+        6499.999999999996,
+        68222.7622858224,
+        86681.18289673942
+      ],
+      "rotation_deg": [
+        -52.00000000000001,
+        -89.99999999999997,
+        -0.0
+      ],
+      "viewport": [
+        1920,
+        1080
+      ],
+      "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+      "horizontal_fov_deg": 50.0
+    },
+    "roof_hidden": false,
+    "sample_wall_seconds": 15.0,
+    "warmup_seconds": 12.0,
+    "native_csv": {
+      "path": "D:\\UEPro\\Test\\Saved\\Profiling\\CSV\\MPR_SITE_round2_20261105T125903880371Z.csv",
+      "sha256": "714dca0f3e48204307056c5ecda0cf200ab3bbeaa48e9e5d141e4e5d1cd80aa2",
+      "timing_unit": "ms",
+      "frame_count": 1501,
+      "native_frame_time_seconds": 14.997259099999992,
+      "metrics": {
+        "FrameTime": {
+          "count": 1501,
+          "mean_ms": 9.991511725516322,
+          "median_ms": 9.9134,
+          "p95_ms": 11.2664,
+          "p99_ms": 12.4903,
+          "max_ms": 17.5733,
+          "over_16_67ms_count": 1,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GameThreadTime": {
+          "count": 1501,
+          "mean_ms": 1.8539430379746837,
+          "median_ms": 1.8346,
+          "p95_ms": 2.1821,
+          "p99_ms": 2.3638,
+          "max_ms": 8.0097,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "RenderThreadTime": {
+          "count": 1501,
+          "mean_ms": 9.989436109260492,
+          "median_ms": 9.9179,
+          "p95_ms": 11.191,
+          "p99_ms": 12.2938,
+          "max_ms": 13.1726,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GPUTime": {
+          "count": 1501,
+          "mean_ms": 9.303879347101931,
+          "median_ms": 9.2122,
+          "p95_ms": 9.5619,
+          "p99_ms": 11.4722,
+          "max_ms": 11.9195,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        }
+      },
+      "gpu_verified": true,
+      "gpu_evidence": {
+        "mode": "UE5.8 RHI",
+        "primary_metric": "GPUTime",
+        "positive_frame_ratio": 1.0,
+        "gpu_pass_positive_frame_ratio": 1.0,
+        "pass_columns": [
+          "GPU/RayTracingGeometry",
+          "GPU/DistanceFields",
+          "GPU/GlobalDistanceFieldUpdate",
+          "GPU/AllocateRendertargets",
+          "GPU/VisibilityCommands",
+          "GPU/UpdateLumenSceneBuffers",
+          "GPU/NaniteStreaming",
+          "GPU/NaniteReadback",
+          "GPU/FXSystemPreRender",
+          "GPU/GPUSceneUpdate",
+          "GPU/BuildRenderingCommandsDeferred",
+          "GPU/Prepass",
+          "GPU/NaniteVisBuffer",
+          "GPU/NaniteBasePass",
+          "GPU/HZB",
+          "GPU/BeginOcclusionTests",
+          "GPU/LightGrid",
+          "GPU/LightFunctionAtlasGeneration",
+          "GPU/LumenSceneUpdate",
+          "GPU/BuildRenderingCommands",
+          "GPU/LumenScreenProbeGather",
+          "GPU/Basepass",
+          "GPU/RenderDeferredLighting",
+          "GPU/ShadowDepths",
+          "GPU/LumenReflections",
+          "GPU/TranslucentLighting",
+          "GPU/Lights",
+          "GPU/ShadowProjection",
+          "GPU/DistanceFieldShadows",
+          "GPU/TemporalSuperResolution",
+          "GPU/PostRenderOpsFX",
+          "GPU/FXSystemPostRenderOpaque",
+          "GPU/Translucency",
+          "GPU/Postprocessing",
+          "GPU/VirtualTextureUpdate",
+          "GPU/SlateUI"
+        ]
+      },
+      "window": "All finalized native CSV frames between start and stop, including boundary frames; no spikes removed.",
+      "percentile_method": "nearest-rank"
+    },
+    "average_fps": 100.08495485685116,
+    "fps_formula": "native frame count / sum of native FrameTime seconds",
+    "runtime_state_before": {
+      "controller_tick_enabled": true,
+      "pawn_tick_enabled": true,
+      "hud_properties_checked": [
+        "twin_hud_widget",
+        "truck_hud_widget"
+      ],
+      "both_hud_references_null": true,
+      "campus_traffic_null": true,
+      "roof_component_tick_enabled": false,
+      "roof_component_has_ghs_roof": false,
+      "storage_component_tick_enabled": false,
+      "storage_initialized": false,
+      "replay_component_tick_enabled": false,
+      "replay_active": false
+    },
+    "runtime_state_after": {
+      "controller_tick_enabled": true,
+      "pawn_tick_enabled": true,
+      "hud_properties_checked": [
+        "twin_hud_widget",
+        "truck_hud_widget"
+      ],
+      "both_hud_references_null": true,
+      "campus_traffic_null": true,
+      "roof_component_tick_enabled": false,
+      "roof_component_has_ghs_roof": false,
+      "storage_component_tick_enabled": false,
+      "storage_initialized": false,
+      "replay_component_tick_enabled": false,
+      "replay_active": false
+    },
+    "pawn_tick_suppressed": false,
+    "controller_tick_suppressed": false
+  },
+  "config_sha256": "31abd3526c2c78677cb64461a89bf1b9819e3cc8867bb6b777e4a0828854219e",
+  "config": {
+    "stage": "round2",
+    "views": [
+      [
+        "01-overview",
+        [
+          65,
+          -5,
+          0
+        ],
+        110000,
+        -52,
+        -90,
+        false
+      ],
+      [
+        "02-docks-parking",
+        [
+          -55,
+          -110,
+          0
+        ],
+        44000,
+        -55,
+        -88,
+        false
+      ],
+      [
+        "03-north-west",
+        [
+          -80,
+          65,
+          0
+        ],
+        49000,
+        -58,
+        -115,
+        false
+      ],
+      [
+        "04-road-rail-crossing",
+        [
+          11.819585,
+          -398.831691,
+          -1.7075
+        ],
+        10500,
+        -65,
+        -12,
+        false
+      ]
+    ],
+    "fov": 50.0,
+    "profile": true
+  },
+  "stage": "round2",
+  "engine_version": "5.8.4-58902052+++UE5+Release-5.8",
+  "map_sha256_before": "af180e0575b3c671c5c69df1e0b26421175a6ff6588d6cef09b393737bc51237",
+  "script_sha256": "39602b3b550ed2e499ecb5f5b8fb3844b4f32e1449cdb98f4721fe1cc87a85d4",
+  "coordinate_convention": "View targets are CAD metres; UE target=(x,-y,z)*100 cm",
+  "launch_flags": [
+    "own",
+    "game",
+    "RenderOffscreen",
+    "MPRProfile"
+  ],
+  "phase": "complete",
+  "elapsed_seconds": 65.78100000000268,
+  "runtime_fixture": {
+    "world": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57",
+    "controller_class": "/Script/Test.GHSWarehousePlayerController",
+    "pawn": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_WarehouseCamera_C_0",
+    "pawn_class": "/Game/GHSNormalWarehouse/Camera/BP_GHS_WarehouseCamera.BP_GHS_WarehouseCamera_C",
+    "camera": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+    "roof_actor_count": 30,
+    "actor_count": 893,
+    "ghs_hud_absent": true,
+    "ghs_business_actors_absent": true,
+    "business_state_before_camera_changes": {
+      "controller_tick_enabled": true,
+      "pawn_tick_enabled": true,
+      "hud_properties_checked": [
+        "twin_hud_widget",
+        "truck_hud_widget"
+      ],
+      "both_hud_references_null": true,
+      "campus_traffic_null": true,
+      "roof_component_tick_enabled": false,
+      "roof_component_has_ghs_roof": false,
+      "storage_component_tick_enabled": false,
+      "storage_initialized": false,
+      "replay_component_tick_enabled": false,
+      "replay_active": false
+    }
+  },
+  "runtime_state_before": {
+    "controller_tick_enabled": true,
+    "pawn_tick_enabled": true,
+    "hud_properties_checked": [
+      "twin_hud_widget",
+      "truck_hud_widget"
+    ],
+    "both_hud_references_null": true,
+    "campus_traffic_null": true,
+    "roof_component_tick_enabled": false,
+    "roof_component_has_ghs_roof": false,
+    "storage_component_tick_enabled": false,
+    "storage_initialized": false,
+    "replay_component_tick_enabled": false,
+    "replay_active": false
+  },
+  "capture_cvars": {
+    "r.GPUCsvStatsEnabled": 1,
+    "csv.CompressionMode": 0,
+    "t.MaxFPS": 0,
+    "r.VSync": 0,
+    "t.IdleWhenNotForeground": 0,
+    "Slate.bAllowThrottling": 0,
+    "r.DynamicRes.OperationMode": 0,
+    "r.ScreenPercentage": 100
+  },
+  "original_cvars": {
+    "r.GPUCsvStatsEnabled": "0",
+    "csv.CompressionMode": "-1",
+    "t.MaxFPS": "0",
+    "r.VSync": "0",
+    "t.IdleWhenNotForeground": "0",
+    "Slate.bAllowThrottling": "1",
+    "r.DynamicRes.OperationMode": "0",
+    "r.ScreenPercentage": "0"
+  },
+  "render_quality": {
+    "r.Nanite.MaxPixelsPerEdge": "0.25",
+    "r.Nanite.AllowVoxels": "0",
+    "r.Shadow.Virtual.Enable": "1",
+    "r.RayTracing": "0",
+    "r.Lumen.HardwareRayTracing": "1",
+    "r.LumenScene.GlobalSDF.ClipmapExtent": "5000"
+  },
+  "runtime_state_after": {
+    "controller_tick_enabled": true,
+    "pawn_tick_enabled": true,
+    "hud_properties_checked": [
+      "twin_hud_widget",
+      "truck_hud_widget"
+    ],
+    "both_hud_references_null": true,
+    "campus_traffic_null": true,
+    "roof_component_tick_enabled": false,
+    "roof_component_has_ghs_roof": false,
+    "storage_component_tick_enabled": false,
+    "storage_initialized": false,
+    "replay_component_tick_enabled": false,
+    "replay_active": false
+  },
+  "map_sha256_after": "af180e0575b3c671c5c69df1e0b26421175a6ff6588d6cef09b393737bc51237",
+  "map_unchanged": true,
+  "error": null,
+  "restore_errors": []
+}

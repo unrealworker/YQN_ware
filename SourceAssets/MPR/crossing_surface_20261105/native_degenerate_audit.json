@@ -1,0 +1,854 @@
+{
+  "schema_version": 1,
+  "success": true,
+  "mesh": "SM_MPRR_CrossingRamp_0_-3",
+  "scope": "Read-only numeric audit of the preserved Crossing_04 ramp source geometry",
+  "conclusion": "Supporting evidence for precision/degenerate removal during native mesh building; this does not prove a one-to-one match between these source faces and every removed render triangle.",
+  "source": {
+    "before_file": "Saved/MPR/crossing_surface_20261105/ramp_normals/SM_MPRR_CrossingRamp_0_-3.before.fbx",
+    "after_file": "SourceAssets/MPR/crossing_surface_20261105/SM_MPRR_CrossingRamp_0_-3.fbx",
+    "before_fbx_sha256": "997b432902abafa4bc6dc2bcbf7b9b82be24f16e13f5a627e0db57cfffcf5365",
+    "after_fbx_sha256": "252285047e1303a9813fad28474aaf4e46387a406fc6b16e8bc0147e88f0cc5d",
+    "source_triangles_before": 1211,
+    "source_triangles_after": 1211,
+    "source_face_vertices_sha256": "cf44d267529de58c0eeecb9e643a2b92d1c9c47b48f3dda73fac983237853183",
+    "positions_topology_and_material_regions_exact": false,
+    "positions_faces_sha256": "29b8baf1386344f200d17d8ec56dbbef31b7586051146b93c9679de93ce27e50",
+    "positions_topology_exact": true,
+    "material_region_change_authorized_face_count": 115
+  },
+  "native_observations": {
+    "provenance": "Root agent reported current UE observations during this task; not independently queried by this audit",
+    "previous_built_lod_triangles": 1205,
+    "refined_built_lod_triangles": 1199,
+    "delta": -6,
+    "other_ramp_native_triangles": 108
+  },
+  "measurement_method": {
+    "units": "Source CAD metres; comparison coordinates are float32(source_position * 100) centimetres",
+    "tiny_edge_threshold_m": 1e-06,
+    "geometry_coordinates_and_material_roles_match_before_after": true,
+    "ignored_native_details": [
+      "FBX SDK conversion order",
+      "actual UE MeshDescription/render index correspondence",
+      "native build cache and detailed per-vertex tangent/UV welding decisions"
+    ]
+  },
+  "tiny_triangle_summary": {
+    "count": 22,
+    "minimum_shortest_edge_m": 1.1920928955078125e-07,
+    "maximum_shortest_edge_m": 9.5367431640625e-07,
+    "total_projected_area_m2": 5.05572825204581e-06
+  },
+  "float32_coincidence_summary": {
+    "count": 6,
+    "source_face_indices": [
+      210,
+      218,
+      245,
+      1045,
+      1048,
+      1083
+    ],
+    "total_projected_area_m2": 1.4674296835437417e-06
+  },
+  "engine_evidence": [
+    {
+      "path": "D:/UE/UE_5.8/Engine/Source/Developer/MeshUtilities/Private/MeshUtilities.cpp",
+      "line": 2296,
+      "observation": "AreVerticesEqual compares position, tangents/normals, colour and UVs before merging vertices."
+    },
+    {
+      "path": "D:/UE/UE_5.8/Engine/Source/Developer/MeshUtilities/Private/MeshUtilities.cpp",
+      "line": 2359,
+      "observation": "BuildStaticMeshVertexAndIndexBuffers skips triangles with equal corner positions."
+    },
+    {
+      "path": "D:/UE/UE_5.8/Engine/Source/Developer/MeshUtilities/Private/MeshUtilities.cpp",
+      "line": 2388,
+      "observation": "Vertices that pass attribute equality may reuse an existing vertex index."
+    },
+    {
+      "path": "D:/UE/UE_5.8/Engine/Source/Developer/MeshUtilities/Private/MeshUtilities.cpp",
+      "line": 2408,
+      "observation": "Triangles whose output vertex indices repeat are rejected."
+    },
+    {
+      "path": "D:/UE/UE_5.8/Engine/Source/Runtime/Core/Public/Math/UnrealMathUtility.h",
+      "line": 201,
+      "observation": "UE_THRESH_POINTS_ARE_SAME is 0.00002 UE units; unit conversion and build settings determine how it applies."
+    }
+  ],
+  "validation_guidance": "Keep source topology/position/UV/material hashes as invariants; record native built triangle counts separately. Verify visible surface coverage, material slots, bounds and smooth shading in the unchanged camera view, then reload the saved assets/map. Do not require native triangle count to equal FBX source polygon triangulation count.",
+  "tiny_triangles": [
+    {
+      "source_face_index": 210,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 2.2436038019093124e-08,
+      "projected_xy_area_m2": 1.5599653124809265e-08,
+      "altitude_m": 1.6000663952449712e-07,
+      "identical_vertex_pair_after_float32_cm": true,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.857462882995605,
+          -392.522216796875,
+          -1.7125244140625
+        ],
+        [
+          13.857463836669922,
+          -392.522216796875,
+          -1.7125244140625
+        ],
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ]
+      ]
+    },
+    {
+      "source_face_index": 211,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 5.944470657446553e-08,
+      "projected_xy_area_m2": 5.8687874116003513e-08,
+      "altitude_m": 6.494579577255835e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ],
+        [
+          13.715049743652344,
+          -392.6125793457031,
+          -1.69853675365448
+        ],
+        [
+          13.71505069732666,
+          -392.6125793457031,
+          -1.69853675365448
+        ]
+      ]
+    },
+    {
+      "source_face_index": 214,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 2.3618634567151014e-08,
+      "projected_xy_area_m2": 1.7535057850182056e-08,
+      "altitude_m": 1.7207029965364024e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.851016998291016,
+          -392.5262756347656,
+          -1.7118899822235107
+        ],
+        [
+          13.851017951965332,
+          -392.5262756347656,
+          -1.7118899822235107
+        ],
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ]
+      ]
+    },
+    {
+      "source_face_index": 215,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 5.7556054122394415e-08,
+      "projected_xy_area_m2": 5.672336556017399e-08,
+      "altitude_m": 6.215661191595722e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ],
+        [
+          13.721457481384277,
+          -392.60845947265625,
+          -1.6991647481918335
+        ],
+        [
+          13.721458435058594,
+          -392.60845947265625,
+          -1.6991647481918335
+        ]
+      ]
+    },
+    {
+      "source_face_index": 218,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 5.4910387172637684e-08,
+      "projected_xy_area_m2": 5.3958501666784286e-08,
+      "altitude_m": 5.818496193971828e-07,
+      "identical_vertex_pair_after_float32_cm": true,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ],
+        [
+          13.730544090270996,
+          -392.6026611328125,
+          -1.7000559568405151
+        ],
+        [
+          13.730545043945312,
+          -392.6026611328125,
+          -1.7000559568405151
+        ]
+      ]
+    },
+    {
+      "source_face_index": 221,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 1.1920928955078125e-07,
+      "area_3d_m2": 1.13438869402626e-08,
+      "projected_xy_area_m2": 0.0,
+      "altitude_m": 1.1842221059219302e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": true,
+      "source_vertices_m": [
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ],
+        [
+          13.73696517944336,
+          -392.59857177734375,
+          -1.7006860971450806
+        ],
+        [
+          13.73696517944336,
+          -392.59857177734375,
+          -1.7006862163543701
+        ]
+      ]
+    },
+    {
+      "source_face_index": 238,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 9.374996056974093e-08,
+      "projected_xy_area_m2": 9.355426300317049e-08,
+      "altitude_m": 9.485267661546348e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.601511001586914,
+          -392.6856994628906,
+          -1.6914039850234985
+        ],
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ],
+        [
+          13.601510047912598,
+          -392.6856994628906,
+          -1.6914039850234985
+        ]
+      ]
+    },
+    {
+      "source_face_index": 241,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 1.702911034555337e-07,
+      "projected_xy_area_m2": 1.702865120023489e-07,
+      "altitude_m": 8.076668450519984e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.356768608093262,
+          -392.84661865234375,
+          -1.681329607963562
+        ],
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ],
+        [
+          13.356767654418945,
+          -392.84661865234375,
+          -1.681329607963562
+        ]
+      ]
+    },
+    {
+      "source_face_index": 242,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 9.571705560418966e-08,
+      "projected_xy_area_m2": 9.553332347422838e-08,
+      "altitude_m": 9.513207573788518e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.595129013061523,
+          -392.6898498535156,
+          -1.6911386251449585
+        ],
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ],
+        [
+          13.595128059387207,
+          -392.6898498535156,
+          -1.6911386251449585
+        ]
+      ]
+    },
+    {
+      "source_face_index": 245,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 1.6828394740594307e-07,
+      "projected_xy_area_m2": 1.6827834770083427e-07,
+      "altitude_m": 8.114593485135445e-07,
+      "identical_vertex_pair_after_float32_cm": true,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.363096237182617,
+          -392.8424072265625,
+          -1.6815861463546753
+        ],
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ],
+        [
+          13.3630952835083,
+          -392.8424072265625,
+          -1.6815861463546753
+        ]
+      ]
+    },
+    {
+      "source_face_index": 252,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 1.1920928955078125e-07,
+      "area_3d_m2": 1.7738492898467313e-08,
+      "projected_xy_area_m2": 0.0,
+      "altitude_m": 1.1917159084148701e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": true,
+      "source_vertices_m": [
+        [
+          13.475700378417969,
+          -392.7678527832031,
+          -1.6861933469772339
+        ],
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ],
+        [
+          13.475700378417969,
+          -392.7678527832031,
+          -1.6861932277679443
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1043,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 6.501504290850352e-07,
+      "projected_xy_area_m2": 6.469781510531902e-07,
+      "altitude_m": 8.308080661998881e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.71505069732666,
+          -392.6125793457031,
+          -1.69853675365448
+        ],
+        [
+          13.715049743652344,
+          -392.6125793457031,
+          -1.69853675365448
+        ],
+        [
+          14.483499526977539,
+          -393.9693908691406,
+          -1.833063006401062
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1044,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 6.520759923335653e-07,
+      "projected_xy_area_m2": 6.489426596090198e-07,
+      "altitude_m": 8.330610558213192e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.721458435058594,
+          -392.60845947265625,
+          -1.6991647481918335
+        ],
+        [
+          13.721457481384277,
+          -392.60845947265625,
+          -1.6991647481918335
+        ],
+        [
+          14.483499526977539,
+          -393.9693908691406,
+          -1.833063006401062
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1045,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 6.547863281354715e-07,
+      "projected_xy_area_m2": 6.517075235024095e-07,
+      "altitude_m": 8.362146025587743e-07,
+      "identical_vertex_pair_after_float32_cm": true,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.730545043945312,
+          -392.6026611328125,
+          -1.7000559568405151
+        ],
+        [
+          13.730544090270996,
+          -392.6026611328125,
+          -1.7000559568405151
+        ],
+        [
+          14.483499526977539,
+          -393.9693908691406,
+          -1.833063006401062
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1046,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 1.1920928955078125e-07,
+      "area_3d_m2": 9.303783903463167e-08,
+      "projected_xy_area_m2": 0.0,
+      "altitude_m": 1.1878289605169392e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": true,
+      "source_vertices_m": [
+        [
+          13.73696517944336,
+          -392.59857177734375,
+          -1.7006862163543701
+        ],
+        [
+          13.73696517944336,
+          -392.59857177734375,
+          -1.7006860971450806
+        ],
+        [
+          14.483499526977539,
+          -393.9693908691406,
+          -1.833063006401062
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1047,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 5.445603258450637e-08,
+      "projected_xy_area_m2": 4.243338480591774e-08,
+      "altitude_m": 1.7065925990858406e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.851017951965332,
+          -392.5262756347656,
+          -1.7118899822235107
+        ],
+        [
+          13.851016998291016,
+          -392.5262756347656,
+          -1.7118899822235107
+        ],
+        [
+          14.478899955749512,
+          -392.4372863769531,
+          -1.783466100692749
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1048,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 5.276736770302887e-08,
+      "projected_xy_area_m2": 4.049798008054495e-08,
+      "altitude_m": 1.671935216690511e-07,
+      "identical_vertex_pair_after_float32_cm": true,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.857463836669922,
+          -392.522216796875,
+          -1.7125244140625
+        ],
+        [
+          13.857462882995605,
+          -392.522216796875,
+          -1.7125244140625
+        ],
+        [
+          14.478899955749512,
+          -392.4372863769531,
+          -1.783466100692749
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1083,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 5.422201206610085e-07,
+      "projected_xy_area_m2": 5.373876774683595e-07,
+      "altitude_m": 6.793235656345294e-07,
+      "identical_vertex_pair_after_float32_cm": true,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.363096237182617,
+          -392.8424072265625,
+          -1.6815861463546753
+        ],
+        [
+          13.3630952835083,
+          -392.8424072265625,
+          -1.6815861463546753
+        ],
+        [
+          14.483499526977539,
+          -393.9693908691406,
+          -1.833063006401062
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1086,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 6.158275572055604e-07,
+      "projected_xy_area_m2": 6.121117621660233e-07,
+      "altitude_m": 7.875450702943378e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.601511001586914,
+          -392.6856994628906,
+          -1.6914039850234985
+        ],
+        [
+          13.601510047912598,
+          -392.6856994628906,
+          -1.6914039850234985
+        ],
+        [
+          14.483499526977539,
+          -393.9693908691406,
+          -1.833063006401062
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1088,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 5.402462889749979e-07,
+      "projected_xy_area_m2": 5.353795131668448e-07,
+      "altitude_m": 6.762111552303645e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.356767654418945,
+          -392.84661865234375,
+          -1.681329607963562
+        ],
+        [
+          14.483499526977539,
+          -393.9693908691406,
+          -1.833063006401062
+        ],
+        [
+          13.356768608093262,
+          -392.84661865234375,
+          -1.681329607963562
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1090,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 1.1920928955078125e-07,
+      "area_3d_m2": 9.347393579972532e-08,
+      "projected_xy_area_m2": 0.0,
+      "altitude_m": 1.1868991736181011e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": true,
+      "source_vertices_m": [
+        [
+          13.475700378417969,
+          -392.7678527832031,
+          -1.6861932277679443
+        ],
+        [
+          14.483499526977539,
+          -393.9693908691406,
+          -1.833063006401062
+        ],
+        [
+          13.475700378417969,
+          -392.7678527832031,
+          -1.6861933469772339
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1091,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 6.138744128527185e-07,
+      "projected_xy_area_m2": 6.101327016949654e-07,
+      "altitude_m": 7.849293381295289e-07,
+      "identical_vertex_pair_after_float32_cm": false,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.595128059387207,
+          -392.6898498535156,
+          -1.6911386251449585
+        ],
+        [
+          14.483499526977539,
+          -393.9693908691406,
+          -1.833063006401062
+        ],
+        [
+          13.595129013061523,
+          -392.6898498535156,
+          -1.6911386251449585
+        ]
+      ]
+    }
+  ],
+  "float32_coincident_triangles": [
+    {
+      "source_face_index": 210,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 2.2436038019093124e-08,
+      "projected_xy_area_m2": 1.5599653124809265e-08,
+      "altitude_m": 1.6000663952449712e-07,
+      "identical_vertex_pair_after_float32_cm": true,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.857462882995605,
+          -392.522216796875,
+          -1.7125244140625
+        ],
+        [
+          13.857463836669922,
+          -392.522216796875,
+          -1.7125244140625
+        ],
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ]
+      ]
+    },
+    {
+      "source_face_index": 218,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 5.4910387172637684e-08,
+      "projected_xy_area_m2": 5.3958501666784286e-08,
+      "altitude_m": 5.818496193971828e-07,
+      "identical_vertex_pair_after_float32_cm": true,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ],
+        [
+          13.730544090270996,
+          -392.6026611328125,
+          -1.7000559568405151
+        ],
+        [
+          13.730545043945312,
+          -392.6026611328125,
+          -1.7000559568405151
+        ]
+      ]
+    },
+    {
+      "source_face_index": 245,
+      "material_role": "MPR3_Asphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 1.6828394740594307e-07,
+      "projected_xy_area_m2": 1.6827834770083427e-07,
+      "altitude_m": 8.114593485135445e-07,
+      "identical_vertex_pair_after_float32_cm": true,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.363096237182617,
+          -392.8424072265625,
+          -1.6815861463546753
+        ],
+        [
+          13.581000328063965,
+          -392.489501953125,
+          -1.6787071228027344
+        ],
+        [
+          13.3630952835083,
+          -392.8424072265625,
+          -1.6815861463546753
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1045,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 6.547863281354715e-07,
+      "projected_xy_area_m2": 6.517075235024095e-07,
+      "altitude_m": 8.362146025587743e-07,
+      "identical_vertex_pair_after_float32_cm": true,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.730545043945312,
+          -392.6026611328125,
+          -1.7000559568405151
+        ],
+        [
+          13.730544090270996,
+          -392.6026611328125,
+          -1.7000559568405151
+        ],
+        [
+          14.483499526977539,
+          -393.9693908691406,
+          -1.833063006401062
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1048,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 5.276736770302887e-08,
+      "projected_xy_area_m2": 4.049798008054495e-08,
+      "altitude_m": 1.671935216690511e-07,
+      "identical_vertex_pair_after_float32_cm": true,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.857463836669922,
+          -392.522216796875,
+          -1.7125244140625
+        ],
+        [
+          13.857462882995605,
+          -392.522216796875,
+          -1.7125244140625
+        ],
+        [
+          14.478899955749512,
+          -392.4372863769531,
+          -1.783466100692749
+        ]
+      ]
+    },
+    {
+      "source_face_index": 1083,
+      "material_role": "MPR4_TerminalAsphalt",
+      "shortest_edge_m": 9.5367431640625e-07,
+      "area_3d_m2": 5.422201206610085e-07,
+      "projected_xy_area_m2": 5.373876774683595e-07,
+      "altitude_m": 6.793235656345294e-07,
+      "identical_vertex_pair_after_float32_cm": true,
+      "vertex_pair_within_ue_double_cm_threshold": false,
+      "source_vertices_m": [
+        [
+          13.363096237182617,
+          -392.8424072265625,
+          -1.6815861463546753
+        ],
+        [
+          13.3630952835083,
+          -392.8424072265625,
+          -1.6815861463546753
+        ],
+        [
+          14.483499526977539,
+          -393.9693908691406,
+          -1.833063006401062
+        ]
+      ]
+    }
+  ],
+  "phase": "Final material cleanup; prior normal-refinement native count observations retained as historical observations",
+  "initial_phase_source": {
+    "before_file": "Saved/MPR/crossing_surface_20261105/ramp_normals/SM_MPRR_CrossingRamp_0_-3.before.fbx",
+    "after_file": "SourceAssets/MPR/crossing_surface_20261105/SM_MPRR_CrossingRamp_0_-3.fbx",
+    "before_fbx_sha256": "997b432902abafa4bc6dc2bcbf7b9b82be24f16e13f5a627e0db57cfffcf5365",
+    "after_fbx_sha256": "2d70584959793e8d4588f63c6bf4cf29932117ee0332c2a85b290045bc84531c",
+    "source_triangles_before": 1211,
+    "source_triangles_after": 1211,
+    "source_face_vertices_sha256": "0531751704b04d92dbc786940f21b2d089b7964d63e867e4362a7e350f1bcfa3",
+    "positions_topology_and_material_regions_exact": true
+  }
+}

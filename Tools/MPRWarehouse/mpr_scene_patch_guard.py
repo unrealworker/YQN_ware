@@ -345,6 +345,22 @@ def verify_reload(u, mode):
                 require(roles == row['material_roles'], 'Reloaded solar material slots differ')
                 report['solar_native_readback']['meshes'].append(dict(package=solar.mesh_path(row),
                     triangles=triangles, material_roles=roles))
+        if mode == 'crossing':
+            import mpr_crossing_surface as crossing
+            manifest = crossing.source_inputs()
+            refined = {r['package']: r for r in read(out/'normal_refinement.json')['assets']} if (out/'normal_refinement.json').exists() else {}
+            report['crossing_native_readback'] = []
+            for row in manifest['meshes']:
+                path = crossing.DEST+'/Meshes/'+row['name']
+                mesh = u.EditorAssetLibrary.load_asset(path)
+                require(u.EditorAssetLibrary.get_metadata_tag(mesh, crossing.TAG_SHA) == row['sha256'], 'Reloaded crossing source hash differs')
+                roles = [str(s.get_editor_property('imported_material_slot_name')) for s in mesh.static_materials]
+                require(roles == row['material_roles'], 'Reloaded crossing slots differ')
+                triangles = mesh.get_num_triangles(0)
+                if path in refined:
+                    require(triangles == refined[path]['triangles'], 'Reloaded refined ramp render count differs')
+                report['crossing_native_readback'].append(dict(package=path, triangles=triangles,
+                    material_roles=roles, source_sha256=row['sha256'], **crossing.check_bounds(mesh, row)))
         require(guard.sha(MAP_FILE) == sha_before, 'Verification changed the map file')
         write(out/'reload_snapshot.json.gz', current)
         report.update(success=True, map_unchanged=True)

@@ -1,0 +1,390 @@
+{
+  "success": true,
+  "mode": "crossing",
+  "read_only": true,
+  "preservation": {
+    "success": true,
+    "before_actors": 878,
+    "after_actors": 878,
+    "changed_components": [
+      {
+        "guid": "48B16AC14ED9EEAD9AF577A6D3D8E826",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh",
+          "materials"
+        ]
+      },
+      {
+        "guid": "C1A53C81476724A9BABE0AA7445F6E80",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh",
+          "materials"
+        ]
+      },
+      {
+        "guid": "2957947B4419BEF57D9165A984433011",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh",
+          "materials"
+        ]
+      },
+      {
+        "guid": "B55FDBC14385E972A2F50BADCB0275C7",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh",
+          "materials"
+        ]
+      },
+      {
+        "guid": "58EB3E5141EA84DA91C2328408EF040C",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "6E730EAF44E7EAE526F6B8B40D068C49",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "16846ED94D3BBA63D2F9159664CFD0C1",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      },
+      {
+        "guid": "8887AFD04735F5602C6F2DA4A9A53FEC",
+        "component": "StaticMeshComponent0",
+        "fields": [
+          "mesh"
+        ]
+      }
+    ],
+    "deleted_actors": [],
+    "new_actor_ids": [],
+    "unchanged_actors": 870
+  },
+  "content": {
+    "protected_existing_packages": 1841,
+    "new_packages": {
+      "Content/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingDeck_-1_-3.uasset": "761ddf4ff7126658610fa3fe2cdd0113448dbd854ebb6320c1f9fdccd7505730",
+      "Content/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingDeck_0_-3.uasset": "28e87da7322983eca42f06c532e5fcede1ec58902861239d009ad5452980f35a",
+      "Content/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingRamp_-1_-3.uasset": "eab6100559b450c32edd7c25a136dffc71607698d549fbff11d683d2be9540e6",
+      "Content/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingRamp_0_-3.uasset": "1bb7b5ebc12d7bcc9ee04cd114c64efad0efd07fcf85b269b5c3b5779c2d72c0",
+      "Content/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_Rail_-1_-3_Sleepers.uasset": "f98d9ee1a1dbd04874946b643229d42d1ef981879d5c4dd0b3f1f0f76948739f",
+      "Content/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_Rail_0_-3_Sleepers.uasset": "56f6b2da8e7f71028b9db756a34188d224ebed3f5f53dcbd62ae67a4beed9dc9",
+      "Content/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_RailCorridor_-1_-3.uasset": "95d79c5bb5f7891d772814a178c60622b575c0fdacf40b6076b380e221047a61",
+      "Content/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_RailCorridor_0_-3.uasset": "48a99aa343e5bcc6ee3780cb173431d33c2d1ecc3d457d7c4dc1c88df76b0435"
+    },
+    "map_sha256": "af180e0575b3c671c5c69df1e0b26421175a6ff6588d6cef09b393737bc51237"
+  },
+  "crossing_native_readback": [
+    {
+      "package": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingDeck_-1_-3",
+      "triangles": 65,
+      "material_roles": [
+        "MPR4_TerminalAsphalt"
+      ],
+      "source_sha256": "bebe4470306823248233a15e9ee051f9251971f43b1f2f334042acf56c27f81f",
+      "bounds_cm": [
+        [
+          -1188.8763427734375,
+          0.0035804419312626123
+        ],
+        [
+          40663.171875,
+          41924.30859375
+        ],
+        [
+          -162.1417694091797,
+          -142.86106872558594
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -1188.8799667358398,
+          0.0
+        ],
+        [
+          40663.17138671875,
+          41924.310302734375
+        ],
+        [
+          -162.14176416397095,
+          -142.86106824874878
+        ]
+      ],
+      "max_error_cm": 0.00362396240234375
+    },
+    {
+      "package": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingDeck_0_-3",
+      "triangles": 805,
+      "material_roles": [
+        "MPR3_Concrete",
+        "MPR4_TerminalAsphalt"
+      ],
+      "source_sha256": "c209e98b58ae6089a15f849229269e67191cd76e14d6858ecde7f2f0d0d718a4",
+      "bounds_cm": [
+        [
+          0.003554887603968382,
+          10152.5322265625
+        ],
+        [
+          30000.0,
+          40955.48046875
+        ],
+        [
+          -258.5452575683594,
+          -143.83021545410156
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          0.0,
+          10152.529907226562
+        ],
+        [
+          30000.0,
+          40955.48095703125
+        ],
+        [
+          -258.54525566101074,
+          -143.83021593093872
+        ]
+      ],
+      "max_error_cm": 0.003554887603968382
+    },
+    {
+      "package": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingRamp_-1_-3",
+      "triangles": 108,
+      "material_roles": [
+        "MPR4_TerminalAsphalt"
+      ],
+      "source_sha256": "10c0e365af7916da61772911fcdf0a48c770e9e9f2fedae97fc157eb880be726",
+      "bounds_cm": [
+        [
+          -1353.023681640625,
+          0.006230853497982025
+        ],
+        [
+          40955.48046875,
+          42163.51171875
+        ],
+        [
+          -199.09193420410156,
+          -142.86106872558594
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -1353.030014038086,
+          0.0
+        ],
+        [
+          40955.48095703125,
+          42163.51013183594
+        ],
+        [
+          -199.09193515777588,
+          -142.86106824874878
+        ]
+      ],
+      "max_error_cm": 0.0063323974609375
+    },
+    {
+      "package": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingRamp_0_-3",
+      "triangles": 1199,
+      "material_roles": [
+        "MPR3_Asphalt",
+        "MPR4_TerminalAsphalt"
+      ],
+      "source_sha256": "252285047e1303a9813fad28474aaf4e46387a406fc6b16e8bc0147e88f0cc5d",
+      "bounds_cm": [
+        [
+          0.006184105761349201,
+          10482.8740234375
+        ],
+        [
+          29999.998046875,
+          41265.078125
+        ],
+        [
+          -295.8951110839844,
+          -144.2792205810547
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          0.0,
+          10482.869720458984
+        ],
+        [
+          30000.0,
+          41265.07873535156
+        ],
+        [
+          -295.8951234817505,
+          -144.27921772003174
+        ]
+      ],
+      "max_error_cm": 0.006184105761349201
+    },
+    {
+      "package": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_RailCorridor_-1_-3",
+      "triangles": 749,
+      "material_roles": [
+        "MPR3_Ballast"
+      ],
+      "source_sha256": "bce8b57a5305adc7189c8b65d833fc0ffd3423562b0f75c76c01cc87947f45ee",
+      "bounds_cm": [
+        [
+          -6393.49609375,
+          0.0035548850428313017
+        ],
+        [
+          35519.2890625,
+          45000.0
+        ],
+        [
+          -176.11337280273438,
+          -87.47660827636719
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -6393.500137329102,
+          0.0
+        ],
+        [
+          35519.29016113281,
+          45000.0
+        ],
+        [
+          -176.11337900161743,
+          -87.47661113739014
+        ]
+      ],
+      "max_error_cm": 0.0040435791015625
+    },
+    {
+      "package": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_RailCorridor_0_-3",
+      "triangles": 1951,
+      "material_roles": [
+        "MPR3_Ballast"
+      ],
+      "source_sha256": "84547d2debe0377b8624d202da7ca41487ef2137c51b2acc3a9cf2e36ac2d7f8",
+      "bounds_cm": [
+        [
+          0.0031051950063556433,
+          15000.00390625
+        ],
+        [
+          30000.0,
+          40663.14453125
+        ],
+        [
+          -282.2975769042969,
+          -76.7813491821289
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          0.0,
+          15000.0
+        ],
+        [
+          30000.0,
+          40663.14392089844
+        ],
+        [
+          -282.29756355285645,
+          -76.7813503742218
+        ]
+      ],
+      "max_error_cm": 0.00390625
+    },
+    {
+      "package": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_Rail_-1_-3_Sleepers",
+      "triangles": 1309,
+      "material_roles": [
+        "MPR3_Sleepers"
+      ],
+      "source_sha256": "9a5921001c5f1dda17d8273a54d0ac79e059f8a443e89b2b8f2877aae790516e",
+      "bounds_cm": [
+        [
+          -6048.5283203125,
+          106.41452026367188
+        ],
+        [
+          35979.875,
+          45093.0234375
+        ],
+        [
+          -173.8411102294922,
+          -77.0491943359375
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -6048.5321044921875,
+          106.41108751296997
+        ],
+        [
+          35979.87365722656,
+          45093.023681640625
+        ],
+        [
+          -173.84110689163208,
+          -77.04919576644897
+        ]
+      ],
+      "max_error_cm": 0.0037841796875
+    },
+    {
+      "package": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_Rail_0_-3_Sleepers",
+      "triangles": 2440,
+      "material_roles": [
+        "MPR3_Sleepers"
+      ],
+      "source_sha256": "4e268557d646b5ac5653c214ca85db13364a996a8dd67784ff28b8f422b5aff2",
+      "bounds_cm": [
+        [
+          -86.87643432617188,
+          14991.541015625
+        ],
+        [
+          29917.326171875,
+          40674.828125
+        ],
+        [
+          -276.7274475097656,
+          -74.27491760253906
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -86.87991499900818,
+          14991.537475585938
+        ],
+        [
+          29917.327880859375,
+          40674.82821599029
+        ],
+        [
+          -276.72746181488037,
+          -74.27491545677185
+        ]
+      ],
+      "max_error_cm": 0.0035400390625
+    }
+  ],
+  "map_unchanged": true
+}

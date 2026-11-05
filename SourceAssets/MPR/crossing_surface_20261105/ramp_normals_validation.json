@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "meshes": {
+    "SM_MPRR_CrossingRamp_-1_-3": {
+      "approved_previous_sha256": "78dbf9ae7d381a30f341dbe52084a0d15ec3a10c4f1df5685f259862e6368fdc",
+      "new_sha256": "10c0e365af7916da61772911fcdf0a48c770e9e9f2fedae97fc157eb880be726",
+      "source_face_vertices_sha256": "89abecd8926f78051c9b8a650e83cfb06ac7377ea7358218859bda3821afa02e",
+      "positions_topology_material_regions_exact": true,
+      "unchanged_nonlocal_normal_max_error": 0.0,
+      "shared_vertex_normal_max_error": 0.0,
+      "changed_local_corners": 323,
+      "uv_coordinates_exact": true,
+      "native_material_slot_names": [
+        "MPR4_TerminalAsphalt"
+      ]
+    },
+    "SM_MPRR_CrossingRamp_0_-3": {
+      "approved_previous_sha256": "2d70584959793e8d4588f63c6bf4cf29932117ee0332c2a85b290045bc84531c",
+      "new_sha256": "252285047e1303a9813fad28474aaf4e46387a406fc6b16e8bc0147e88f0cc5d",
+      "positions_topology_exact": true,
+      "material_regions_change_explicitly_approved": true,
+      "approved_material_face_count": 115,
+      "positions_faces_sha256": "29b8baf1386344f200d17d8ec56dbbef31b7586051146b93c9679de93ce27e50",
+      "uv_coordinates_exact": true,
+      "edge_fade_colors_exact": true,
+      "native_material_slot_names": [
+        "MPR3_Asphalt",
+        "MPR4_TerminalAsphalt"
+      ],
+      "nonlocal_old_material_normals_exact": true
+    }
+  },
+  "initial_phase_meshes": {
+    "SM_MPRR_CrossingRamp_0_-3": {
+      "approved_previous_sha256": "997b432902abafa4bc6dc2bcbf7b9b82be24f16e13f5a627e0db57cfffcf5365",
+      "new_sha256": "2d70584959793e8d4588f63c6bf4cf29932117ee0332c2a85b290045bc84531c",
+      "source_face_vertices_sha256": "0531751704b04d92dbc786940f21b2d089b7964d63e867e4362a7e350f1bcfa3",
+      "positions_topology_material_regions_exact": true,
+      "unchanged_nonlocal_normal_max_error": 0.0,
+      "shared_vertex_normal_max_error": 0.0,
+      "changed_local_corners": 1172,
+      "uv_coordinates_exact": true,
+      "native_material_slot_names": [
+        "MPR3_Asphalt",
+        "MPR4_TerminalAsphalt"
+      ]
+    }
+  }
+}

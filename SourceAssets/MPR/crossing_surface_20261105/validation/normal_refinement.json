@@ -1,0 +1,133 @@
+{
+  "success": true,
+  "assets": [
+    {
+      "package": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingRamp_-1_-3",
+      "reused": true,
+      "source_sha256": "10c0e365af7916da61772911fcdf0a48c770e9e9f2fedae97fc157eb880be726",
+      "triangles": 108,
+      "previous_native_triangles": 108,
+      "source_triangles": 108,
+      "local_ballast_clipping": false,
+      "vertices_moved": false,
+      "bounds_cm": [
+        [
+          -1353.023681640625,
+          0.006230853497982025
+        ],
+        [
+          40955.48046875,
+          42163.51171875
+        ],
+        [
+          -199.09193420410156,
+          -142.86106872558594
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -1353.030014038086,
+          0.0
+        ],
+        [
+          40955.48095703125,
+          42163.51013183594
+        ],
+        [
+          -199.09193515777588,
+          -142.86106824874878
+        ]
+      ],
+      "max_error_cm": 0.0063323974609375
+    },
+    {
+      "package": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingRamp_0_-3",
+      "reused": true,
+      "source_sha256": "252285047e1303a9813fad28474aaf4e46387a406fc6b16e8bc0147e88f0cc5d",
+      "triangles": 1199,
+      "previous_native_triangles": 1205,
+      "source_triangles": 1211,
+      "local_ballast_clipping": false,
+      "vertices_moved": false,
+      "bounds_cm": [
+        [
+          0.006184105761349201,
+          10482.8740234375
+        ],
+        [
+          29999.998046875,
+          41265.078125
+        ],
+        [
+          -295.8951110839844,
+          -144.2792205810547
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          0.0,
+          10482.869720458984
+        ],
+        [
+          30000.0,
+          41265.07873535156
+        ],
+        [
+          -295.8951234817505,
+          -144.27921772003174
+        ]
+      ],
+      "max_error_cm": 0.006184105761349201
+    },
+    {
+      "package": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_RailCorridor_0_-3",
+      "reused": false,
+      "before_sha256": "e3e9b1dc57773745a4f4f662796ca8f5612a81a557dcf79a495241d2458db341",
+      "after_sha256": "84547d2debe0377b8624d202da7ca41487ef2137c51b2acc3a9cf2e36ac2d7f8",
+      "triangles": 1951,
+      "previous_native_triangles": 1899,
+      "source_triangles": 1955,
+      "material_slots": [
+        "MPR3_Ballast"
+      ],
+      "vertices_moved": false,
+      "local_ballast_clipping": true,
+      "bounds_cm": [
+        [
+          0.0031051950063556433,
+          15000.00390625
+        ],
+        [
+          30000.0,
+          40663.14453125
+        ],
+        [
+          -282.2975769042969,
+          -76.7813491821289
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          0.0,
+          15000.0
+        ],
+        [
+          30000.0,
+          40663.14392089844
+        ],
+        [
+          -282.29756355285645,
+          -76.7813503742218
+        ]
+      ],
+      "max_error_cm": 0.00390625
+    }
+  ],
+  "map_saved": false,
+  "actor_changes": [],
+  "road_ramp_rail_positions_unchanged": true,
+  "geometry_unchanged": false,
+  "clipped_ballast_meshes": [
+    "SM_MPRR_RailCorridor_0_-3"
+  ]
+}
