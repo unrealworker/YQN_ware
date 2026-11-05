@@ -1,0 +1,70 @@
+{
+  "bounds_m": [
+    [
+      -6.1100077629089355,
+      6.19052267074585
+    ],
+    [
+      -5.60781717300415,
+      5.9483256340026855
+    ],
+    [
+      0.0,
+      15.8644437789917
+    ]
+  ],
+  "origin_m": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "scale": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "vertices": 5666,
+  "triangles": 11292,
+  "radial_extent_m": 6.4180411992666615,
+  "nonmanifold_edges": 0,
+  "material_roles": [
+    "Bark",
+    "LeafMid",
+    "LeafLight",
+    "LeafShade"
+  ],
+  "material_triangle_counts": {
+    "Bark": 492,
+    "LeafMid": 9506,
+    "LeafShade": 918,
+    "LeafLight": 376
+  },
+  "success": true,
+  "name": "SM_MPRSC_Tree_Canopy",
+  "coordinate_frame": "Local metres, ground origin; FBX -Y forward, +Z up",
+  "units": "metres",
+  "source_reference_bounds_m": [
+    [
+      -6.1100077629089355,
+      6.19052267074585
+    ],
+    [
+      -5.60781717300415,
+      5.9483256340026855
+    ],
+    [
+      0.0,
+      15.8644437789917
+    ]
+  ],
+  "original_triangles": 949999,
+  "triangle_reduction_percent": 98.81136716986018,
+  "source_manifest_sha256": "50e5eb8af400eb96e63d289ab054393e71f2dc9b8f47e9ada0f8f14cd2f303a6",
+  "fbx_sha256": "acaea4f1815d56faa327b722164c705925be69aafacab528b8445901b7b18f1d",
+  "fbx_roundtrip_bounds_error_m": 0.0,
+  "fbx_roundtrip_triangles": 11292,
+  "shader": "Opaque default-lit, no cards, no wind tick, roughness .93",
+  "geometry": "One closed, smoothly connected perturbed canopy envelope with broad organic lobes and a closed branch scaffold",
+  "original_assets_modified": false,
+  "seed": 51052026
+}

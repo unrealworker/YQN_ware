@@ -1,0 +1,2222 @@
+{
+  "schema_version": 1,
+  "success": true,
+  "apply_requested": true,
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "imports": [
+    {
+      "package": "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPR3_Concrete",
+      "reused": false,
+      "fbx_sha256": "b45df7d9f946c7b88a26e56cf9be47058aea25e4a99e7088d5d51cda2f897da6",
+      "material_roles": [
+        "MPR3_Concrete"
+      ],
+      "lod_triangles": [
+        2644
+      ],
+      "bounds_cm": [
+        [
+          -19493.00390625,
+          19561.076171875
+        ],
+        [
+          -9669.0361328125,
+          15746.708984375
+        ],
+        [
+          -183.4871063232422,
+          -80.34549713134766
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -19493.004,
+          19561.076
+        ],
+        [
+          -9669.038,
+          15746.706900000001
+        ],
+        [
+          -183.4871,
+          -80.3455
+        ]
+      ],
+      "max_error_cm": 0.002084374998958083
+    },
+    {
+      "package": "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPRSC_Walkway",
+      "reused": false,
+      "fbx_sha256": "4d09c5d824ffec8ffe30f8f3c130beaddd34b81ba8d17f3930135b1c54189e8a",
+      "material_roles": [
+        "MPRSC_Walkway"
+      ],
+      "lod_triangles": [
+        96
+      ],
+      "bounds_cm": [
+        [
+          -18473.00390625,
+          -18238.001953125
+        ],
+        [
+          -7969.0361328125,
+          8909.36328125
+        ],
+        [
+          -112.5,
+          -112.5
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -18473.004,
+          -18238.004
+        ],
+        [
+          -7969.0380000000005,
+          8909.362000000001
+        ],
+        [
+          -112.5,
+          -112.5
+        ]
+      ],
+      "max_error_cm": 0.0020468750008149073
+    },
+    {
+      "package": "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPRR_CampusGreen",
+      "reused": false,
+      "fbx_sha256": "941d6de6d1104f0bf51e6c62864aea895253bf1d9e1416316591bea9ca58e020",
+      "material_roles": [
+        "MPRR_CampusGreen"
+      ],
+      "lod_triangles": [
+        1299
+      ],
+      "bounds_cm": [
+        [
+          -19973.005859375,
+          20041.076171875
+        ],
+        [
+          -10212.001953125,
+          16226.708984375
+        ],
+        [
+          -196.74659729003906,
+          -69.60430145263672
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -19973.004,
+          20041.076
+        ],
+        [
+          -10212.0,
+          16226.7069
+        ],
+        [
+          -196.7466,
+          -69.6043
+        ]
+      ],
+      "max_error_cm": 0.0020843750007770723
+    },
+    {
+      "package": "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPRSC_ParkingAsphalt",
+      "reused": false,
+      "fbx_sha256": "041c655ce4455e7a0a2dc591fb71af37efb0bd018095182a93805a7e8b7b5984",
+      "material_roles": [
+        "MPRSC_ParkingAsphalt"
+      ],
+      "lod_triangles": [
+        84
+      ],
+      "bounds_cm": [
+        [
+          -19183.005859375,
+          19251.076171875
+        ],
+        [
+          -3295.63623046875,
+          8894.36328125
+        ],
+        [
+          -112.5,
+          -112.5
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -19183.004,
+          19251.076
+        ],
+        [
+          -3295.6380000000004,
+          8894.362
+        ],
+        [
+          -112.5,
+          -112.5
+        ]
+      ],
+      "max_error_cm": 0.0018593749991850927
+    },
+    {
+      "package": "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPR3_YellowLine",
+      "reused": false,
+      "fbx_sha256": "a88104a771e48a41b8f9c5a7f1cbb72e543084b7ec11712671ed4460df264e6c",
+      "material_roles": [
+        "MPR3_YellowLine"
+      ],
+      "lod_triangles": [
+        8500
+      ],
+      "bounds_cm": [
+        [
+          -14599.22265625,
+          15391.1953125
+        ],
+        [
+          -9653.1787109375,
+          10679.72265625
+        ],
+        [
+          -110.30000305175781,
+          -110.30000305175781
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -14599.224,
+          15391.196
+        ],
+        [
+          -9653.178,
+          10679.722
+        ],
+        [
+          -110.3,
+          -110.3
+        ]
+      ],
+      "max_error_cm": 0.001343750000160071
+    },
+    {
+      "package": "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPR3_WhiteLine",
+      "reused": false,
+      "fbx_sha256": "445f268a470b557df6b152565cf930fdb0ccfdfb37f6c83fa19a805865195013",
+      "material_roles": [
+        "MPR3_WhiteLine"
+      ],
+      "lod_triangles": [
+        2288
+      ],
+      "bounds_cm": [
+        [
+          -19163.00390625,
+          19231.076171875
+        ],
+        [
+          -3280.636474609375,
+          15737.708984375
+        ],
+        [
+          -111.04539489746094,
+          -78.73819732666016
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -19163.004,
+          19231.075999999997
+        ],
+        [
+          -3280.638,
+          15737.706900000001
+        ],
+        [
+          -111.0454,
+          -78.7382
+        ]
+      ],
+      "max_error_cm": 0.002084374998958083
+    },
+    {
+      "package": "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPR4_TerminalCurb",
+      "reused": false,
+      "fbx_sha256": "9618673b353c9abd60bb86434a83e366c786ca74f29603f7835c16629c003e45",
+      "material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "lod_triangles": [
+        25860
+      ],
+      "bounds_cm": [
+        [
+          -19967.005859375,
+          20035.076171875
+        ],
+        [
+          -10190.6298828125,
+          16220.70703125
+        ],
+        [
+          -196.6590118408203,
+          -51.153202056884766
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -19967.004,
+          20035.076
+        ],
+        [
+          -10190.627700000001,
+          16220.706900000001
+        ],
+        [
+          -196.659,
+          -51.15320000000001
+        ]
+      ],
+      "max_error_cm": 0.0021828124990861397
+    },
+    {
+      "package": "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_Tree_Canopy",
+      "reused": true,
+      "fbx_sha256": "acaea4f1815d56faa327b722164c705925be69aafacab528b8445901b7b18f1d",
+      "material_roles": [
+        "Bark",
+        "LeafMid",
+        "LeafLight",
+        "LeafShade"
+      ],
+      "bounds_cm": [
+        [
+          -611.0007934570312,
+          619.05224609375
+        ],
+        [
+          -594.8325805664062,
+          560.78173828125
+        ],
+        [
+          0.0,
+          1586.4443359375
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -611.0007762908936,
+          619.052267074585
+        ],
+        [
+          -594.8325634002686,
+          560.781717300415
+        ],
+        [
+          0.0,
+          1586.44437789917
+        ]
+      ],
+      "max_error_cm": 4.1961669921875e-05
+    }
+  ],
+  "hidden_components": [
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_502",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_MainApron_-2_-2"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_503",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_MainApron_-2_-1"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_504",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_MainApron_-2_0"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_505",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_MainApron_-1_-2"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_506",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_MainApron_-1_-1"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_507",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_MainApron_-1_0"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_508",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_MainApron_0_-1"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_509",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_MainApron_0_0"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_510",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_MainApron_1_-1"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_511",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_MainApron_1_0"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_512",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CampusGreen_-2_-2"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_513",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CampusGreen_-2_-1"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_514",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CampusGreen_-2_0"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_515",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CampusGreen_-1_-2"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_516",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CampusGreen_-1_-1"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_517",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CampusGreen_-1_0"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_518",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CampusGreen_0_-1"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_519",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CampusGreen_0_0"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_520",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CampusGreen_1_-1"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_521",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CampusGreen_1_0"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_522",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_DockLines_-1_-1"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_523",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_DockLines_-1_0"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_524",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_DockLines_0_-1"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_525",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_DockLines_0_0"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_526",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_DockLines_1_0"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_527",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_ParkingLines_-2_-1"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_528",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_ParkingLines_-2_0"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_529",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_ParkingLines_1_-1"
+    },
+    {
+      "actor": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_530",
+      "component": "StaticMeshComponent0",
+      "mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_ParkingLines_1_0"
+    }
+  ],
+  "tree_changes": [
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_344",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 30,
+      "source_id": "CampusRow_-18_0",
+      "before_world_cm": [
+        -15000.0,
+        16000.0,
+        -108.551
+      ],
+      "target_world_cm": [
+        -15000.0,
+        16000.0,
+        -108.551
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -15000.0,
+        16000.0,
+        -108.551
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_354",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 32,
+      "source_id": "CampusRow_-17_0",
+      "before_world_cm": [
+        -16500.0,
+        14750.0,
+        -118.33309999999999
+      ],
+      "target_world_cm": [
+        -16500.0,
+        14750.0,
+        -118.33309999999999
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -16500.0,
+        14750.0,
+        -118.33309999999999
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 0,
+      "source_id": "CampusRow_-17_1",
+      "before_world_cm": [
+        -14463.095831748353,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -14463.095831748353,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -14463.095831748353,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 1,
+      "source_id": "CampusRow_-16_1",
+      "before_world_cm": [
+        -13618.889253297562,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -13618.889253297562,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -13618.889253297562,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 2,
+      "source_id": "CampusRow_-15_1",
+      "before_world_cm": [
+        -12744.328422382085,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -12744.328422382085,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -12744.328422382085,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 3,
+      "source_id": "CampusRow_-14_1",
+      "before_world_cm": [
+        -11911.977107709268,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -11911.977107709268,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -11911.977107709268,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 4,
+      "source_id": "CampusRow_-13_1",
+      "before_world_cm": [
+        -11051.891411920518,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -11051.891411920518,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -11051.891411920518,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 5,
+      "source_id": "CampusRow_-12_1",
+      "before_world_cm": [
+        -10183.618021617554,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -10183.618021617554,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -10183.618021617554,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 6,
+      "source_id": "CampusRow_-11_1",
+      "before_world_cm": [
+        -9331.66330986695,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -9331.66330986695,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -9331.66330986695,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 7,
+      "source_id": "CampusRow_-10_1",
+      "before_world_cm": [
+        -8503.115595910493,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -8503.115595910493,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -8503.115595910493,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 8,
+      "source_id": "CampusRow_-9_1",
+      "before_world_cm": [
+        -7662.018189586704,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -7662.018189586704,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -7662.018189586704,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 9,
+      "source_id": "CampusRow_-8_1",
+      "before_world_cm": [
+        -6799.300790731632,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -6799.300790731632,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -6799.300790731632,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 10,
+      "source_id": "CampusRow_-7_1",
+      "before_world_cm": [
+        -5941.363470491805,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -5941.363470491805,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -5941.363470491805,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 11,
+      "source_id": "CampusRow_-6_1",
+      "before_world_cm": [
+        -5098.065903312076,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -5098.065903312076,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -5098.065903312076,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 12,
+      "source_id": "CampusRow_-5_1",
+      "before_world_cm": [
+        -4234.912945023951,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -4234.912945023951,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -4234.912945023951,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 13,
+      "source_id": "CampusRow_-4_1",
+      "before_world_cm": [
+        -3403.7073360345576,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -3403.7073360345576,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -3403.7073360345576,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 14,
+      "source_id": "CampusRow_-3_1",
+      "before_world_cm": [
+        -2568.1824373635886,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -2568.1824373635886,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -2568.1824373635886,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 15,
+      "source_id": "CampusRow_-2_1",
+      "before_world_cm": [
+        -1695.920573541876,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -1695.920573541876,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -1695.920573541876,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 16,
+      "source_id": "CampusRow_-1_1",
+      "before_world_cm": [
+        -860.79562029587,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -860.79562029587,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        -860.79562029587,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 0,
+      "source_id": "CampusRow_0_1",
+      "before_world_cm": [
+        15.162757475665481,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        15.162757475665481,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        15.162757475665481,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 1,
+      "source_id": "CampusRow_1_1",
+      "before_world_cm": [
+        847.7822251659312,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        847.7822251659312,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        847.7822251659312,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 2,
+      "source_id": "CampusRow_2_1",
+      "before_world_cm": [
+        1707.2622389782364,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        1707.2622389782364,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        1707.2622389782364,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 3,
+      "source_id": "CampusRow_3_0",
+      "before_world_cm": [
+        2564.490366437121,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        2564.490366437121,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        2564.490366437121,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 4,
+      "source_id": "CampusRow_4_0",
+      "before_world_cm": [
+        3412.2830213588386,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        3412.2830213588386,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        3412.2830213588386,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 5,
+      "source_id": "CampusRow_5_0",
+      "before_world_cm": [
+        4254.713038975538,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        4254.713038975538,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        4254.713038975538,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 6,
+      "source_id": "CampusRow_6_0",
+      "before_world_cm": [
+        5090.54881717324,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        5090.54881717324,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        5090.54881717324,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 7,
+      "source_id": "CampusRow_7_0",
+      "before_world_cm": [
+        5959.80302707986,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        5959.80302707986,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        5959.80302707986,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 8,
+      "source_id": "CampusRow_8_0",
+      "before_world_cm": [
+        6808.32396734234,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        6808.32396734234,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        6808.32396734234,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 9,
+      "source_id": "CampusRow_9_0",
+      "before_world_cm": [
+        7630.5116422848105,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        7630.5116422848105,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        7630.5116422848105,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 10,
+      "source_id": "CampusRow_10_0",
+      "before_world_cm": [
+        8485.82650470683,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        8485.82650470683,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        8485.82650470683,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 11,
+      "source_id": "CampusRow_11_0",
+      "before_world_cm": [
+        9358.119847818305,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        9358.119847818305,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        9358.119847818305,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 12,
+      "source_id": "CampusRow_12_1",
+      "before_world_cm": [
+        10190.578076366935,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        10190.578076366935,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        10190.578076366935,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 13,
+      "source_id": "CampusRow_13_1",
+      "before_world_cm": [
+        11034.260837092126,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        11034.260837092126,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        11034.260837092126,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 14,
+      "source_id": "CampusRow_14_1",
+      "before_world_cm": [
+        11900.708997030908,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        11900.708997030908,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        11900.708997030908,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 15,
+      "source_id": "CampusRow_15_1",
+      "before_world_cm": [
+        12754.464044157525,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        12754.464044157525,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        12754.464044157525,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 16,
+      "source_id": "CampusRow_16_1",
+      "before_world_cm": [
+        13612.07257396357,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        13612.07257396357,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        13612.07257396357,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 17,
+      "source_id": "CampusRow_17_0",
+      "before_world_cm": [
+        14430.74193244817,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        14430.74193244817,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        14430.74193244817,
+        -9930.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_366",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 0,
+      "source_id": "CampusRow_18_0",
+      "before_world_cm": [
+        18250.0,
+        3750.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        18250.0,
+        3750.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        18250.0,
+        3750.0,
+        -119.0
+      ]
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_366",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 1,
+      "source_id": "CampusRow_19_0",
+      "before_world_cm": [
+        18250.0,
+        5750.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        18250.0,
+        5750.0,
+        -119.0
+      ],
+      "already_applied": true,
+      "after_world_cm": [
+        18250.0,
+        5750.0,
+        -119.0
+      ]
+    }
+  ],
+  "map_saved": true,
+  "attempt_directory": "D:\\UEPro\\Test\\Saved\\MPR\\site_completion_20261105\\round2_20261105T101508176192Z",
+  "phase": "complete",
+  "source_hashes": {
+    "SourceAssets/MPR/site_completion_20261105/site_plan.json": "86c56ef9ea8225db37f5685e77231dcde6381c51a96963c9b9f1406b4301a595",
+    "SourceAssets/MPR/site_completion_20261105/geometry/manifest.json": "61d6ffd95acb0c42528b3cd16c14f6713dda52ac09e27c05b4b7612e7c870c73",
+    "SourceAssets/MPR/site_completion_20261105/tree/geometry_audit.json": "0362686e105bebc7082911c153b5153641fac16bf6c0e27200652a240e56f73a"
+  },
+  "original_assets_count": 1794,
+  "existing_actors": 883,
+  "tree_groups": 63,
+  "tree_count": 1282,
+  "material_mapping": {
+    "MPR3_Concrete": "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR3_Concrete",
+    "MPRSC_Walkway": "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPRSC_Walkway",
+    "MPRR_CampusGreen": "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPRR_CampusGreen",
+    "MPRSC_ParkingAsphalt": "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPRSC_ParkingAsphalt",
+    "MPR3_YellowLine": "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_YellowLine",
+    "MPR3_WhiteLine": "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPR3_WhiteLine",
+    "MPR4_TerminalCurb": "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalCurb",
+    "Bark": "/Game/MPRWarehouse/RebuildB50B57/Materials/MI_MPRR_Bark",
+    "LeafMid": "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPRR_LeafMid",
+    "LeafLight": "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPRR_LeafLight",
+    "LeafShade": "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPRR_LeafShade"
+  },
+  "allowed_content_packages": [
+    "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPRSC_ParkingAsphalt",
+    "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPRSC_Walkway",
+    "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPR3_Concrete",
+    "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPR3_WhiteLine",
+    "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPR3_YellowLine",
+    "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPR4_TerminalCurb",
+    "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPRR_CampusGreen",
+    "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPRSC_ParkingAsphalt",
+    "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPRSC_Walkway",
+    "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_Tree_Canopy",
+    "/Game/Maps/MPR_CAD_Warehouse_B50B57"
+  ],
+  "planned_tree_relocations": [
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_344",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 30,
+      "source_id": "CampusRow_-18_0",
+      "before_world_cm": [
+        -15000.0,
+        16000.0,
+        -108.551
+      ],
+      "target_world_cm": [
+        -15000.0,
+        16000.0,
+        -108.551
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_354",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 32,
+      "source_id": "CampusRow_-17_0",
+      "before_world_cm": [
+        -16500.0,
+        14750.0,
+        -118.33309999999999
+      ],
+      "target_world_cm": [
+        -16500.0,
+        14750.0,
+        -118.33309999999999
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 0,
+      "source_id": "CampusRow_-17_1",
+      "before_world_cm": [
+        -14463.095831748353,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -14463.095831748353,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 1,
+      "source_id": "CampusRow_-16_1",
+      "before_world_cm": [
+        -13618.889253297562,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -13618.889253297562,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 2,
+      "source_id": "CampusRow_-15_1",
+      "before_world_cm": [
+        -12744.328422382085,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -12744.328422382085,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 3,
+      "source_id": "CampusRow_-14_1",
+      "before_world_cm": [
+        -11911.977107709268,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -11911.977107709268,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 4,
+      "source_id": "CampusRow_-13_1",
+      "before_world_cm": [
+        -11051.891411920518,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -11051.891411920518,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 5,
+      "source_id": "CampusRow_-12_1",
+      "before_world_cm": [
+        -10183.618021617554,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -10183.618021617554,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 6,
+      "source_id": "CampusRow_-11_1",
+      "before_world_cm": [
+        -9331.66330986695,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -9331.66330986695,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 7,
+      "source_id": "CampusRow_-10_1",
+      "before_world_cm": [
+        -8503.115595910493,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -8503.115595910493,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 8,
+      "source_id": "CampusRow_-9_1",
+      "before_world_cm": [
+        -7662.018189586704,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -7662.018189586704,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 9,
+      "source_id": "CampusRow_-8_1",
+      "before_world_cm": [
+        -6799.300790731632,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -6799.300790731632,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 10,
+      "source_id": "CampusRow_-7_1",
+      "before_world_cm": [
+        -5941.363470491805,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -5941.363470491805,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 11,
+      "source_id": "CampusRow_-6_1",
+      "before_world_cm": [
+        -5098.065903312076,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -5098.065903312076,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 12,
+      "source_id": "CampusRow_-5_1",
+      "before_world_cm": [
+        -4234.912945023951,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -4234.912945023951,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 13,
+      "source_id": "CampusRow_-4_1",
+      "before_world_cm": [
+        -3403.7073360345576,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -3403.7073360345576,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 14,
+      "source_id": "CampusRow_-3_1",
+      "before_world_cm": [
+        -2568.1824373635886,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -2568.1824373635886,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 15,
+      "source_id": "CampusRow_-2_1",
+      "before_world_cm": [
+        -1695.920573541876,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -1695.920573541876,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_356",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 16,
+      "source_id": "CampusRow_-1_1",
+      "before_world_cm": [
+        -860.79562029587,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        -860.79562029587,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 0,
+      "source_id": "CampusRow_0_1",
+      "before_world_cm": [
+        15.162757475665481,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        15.162757475665481,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 1,
+      "source_id": "CampusRow_1_1",
+      "before_world_cm": [
+        847.7822251659312,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        847.7822251659312,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 2,
+      "source_id": "CampusRow_2_1",
+      "before_world_cm": [
+        1707.2622389782364,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        1707.2622389782364,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 3,
+      "source_id": "CampusRow_3_0",
+      "before_world_cm": [
+        2564.490366437121,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        2564.490366437121,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 4,
+      "source_id": "CampusRow_4_0",
+      "before_world_cm": [
+        3412.2830213588386,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        3412.2830213588386,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 5,
+      "source_id": "CampusRow_5_0",
+      "before_world_cm": [
+        4254.713038975538,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        4254.713038975538,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 6,
+      "source_id": "CampusRow_6_0",
+      "before_world_cm": [
+        5090.54881717324,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        5090.54881717324,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 7,
+      "source_id": "CampusRow_7_0",
+      "before_world_cm": [
+        5959.80302707986,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        5959.80302707986,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 8,
+      "source_id": "CampusRow_8_0",
+      "before_world_cm": [
+        6808.32396734234,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        6808.32396734234,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 9,
+      "source_id": "CampusRow_9_0",
+      "before_world_cm": [
+        7630.5116422848105,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        7630.5116422848105,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 10,
+      "source_id": "CampusRow_10_0",
+      "before_world_cm": [
+        8485.82650470683,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        8485.82650470683,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 11,
+      "source_id": "CampusRow_11_0",
+      "before_world_cm": [
+        9358.119847818305,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        9358.119847818305,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 12,
+      "source_id": "CampusRow_12_1",
+      "before_world_cm": [
+        10190.578076366935,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        10190.578076366935,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 13,
+      "source_id": "CampusRow_13_1",
+      "before_world_cm": [
+        11034.260837092126,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        11034.260837092126,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 14,
+      "source_id": "CampusRow_14_1",
+      "before_world_cm": [
+        11900.708997030908,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        11900.708997030908,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 15,
+      "source_id": "CampusRow_15_1",
+      "before_world_cm": [
+        12754.464044157525,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        12754.464044157525,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 16,
+      "source_id": "CampusRow_16_1",
+      "before_world_cm": [
+        13612.07257396357,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        13612.07257396357,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_362",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 17,
+      "source_id": "CampusRow_17_0",
+      "before_world_cm": [
+        14430.74193244817,
+        -9930.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        14430.74193244817,
+        -9930.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_366",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 0,
+      "source_id": "CampusRow_18_0",
+      "before_world_cm": [
+        18250.0,
+        3750.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        18250.0,
+        3750.0,
+        -119.0
+      ],
+      "already_applied": true
+    },
+    {
+      "key": [
+        "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_366",
+        "HierarchicalInstancedStaticMesh"
+      ],
+      "index": 1,
+      "source_id": "CampusRow_19_0",
+      "before_world_cm": [
+        18250.0,
+        5750.0,
+        -119.0
+      ],
+      "target_world_cm": [
+        18250.0,
+        5750.0,
+        -119.0
+      ],
+      "already_applied": true
+    }
+  ],
+  "old_components": 29,
+  "preserved_instance_counts": {
+    "SM_MPR4_Car_0": 13,
+    "SM_MPR4_Car_1": 6,
+    "SM_MPR4_FreightBoxcar": 45,
+    "SM_MPR4_Locomotive": 3,
+    "SM_MPR4_Tractor": 29,
+    "SM_MPR4_Trailer_Blue": 8,
+    "SM_MPR4_Trailer_Coral": 6,
+    "SM_MPR4_Trailer_White": 15,
+    "SM_MPR4_Tree_Oak": 1282
+  },
+  "unsaved_content_before": [],
+  "unsaved_maps_before": [],
+  "map_before_sha256": "a741751760900e05e8c660615be985e0f2291a0d2c074214778db8188f6246d5",
+  "map_sha256": "4af5f606c7032f3d60fc3ec6bc8bcf7d13e51980a95da119f91f31b3b68017c9",
+  "new_actors": 1,
+  "total_actors": 884,
+  "trees_moved": 0,
+  "trees_already_at_target": 39,
+  "unchanged_tree_instances": 1282,
+  "all_other_existing_actor_state_preserved": true,
+  "original_assets_unchanged": true,
+  "new_meshes": 8,
+  "site_mesh_actors": 7,
+  "original_actor_tags_unchanged": true,
+  "final_tree_count": 1282,
+  "original_content_changes": {}
+}

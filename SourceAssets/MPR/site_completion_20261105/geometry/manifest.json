@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "units": "metres",
+  "axis": "CAD +Y; UE import X=100*x,Y=-100*y,Z=100*z",
+  "meshes": [
+    {
+      "name": "SM_MPRSC_MPR3_Concrete",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPR3_Concrete.fbx",
+      "material_roles": [
+        "MPR3_Concrete"
+      ],
+      "bounds_m": [
+        [
+          -194.93004,
+          195.61076
+        ],
+        [
+          -157.467069,
+          96.69038
+        ],
+        [
+          -1.834871,
+          -0.803455
+        ]
+      ],
+      "vertices": 7932,
+      "triangles": 2644,
+      "sha256": "b45df7d9f946c7b88a26e56cf9be47058aea25e4a99e7088d5d51cda2f897da6",
+      "category": "Site"
+    },
+    {
+      "name": "SM_MPRSC_MPRSC_Walkway",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPRSC_Walkway.fbx",
+      "material_roles": [
+        "MPRSC_Walkway"
+      ],
+      "bounds_m": [
+        [
+          -184.73004,
+          -182.38004
+        ],
+        [
+          -89.09362,
+          79.69038
+        ],
+        [
+          -1.125,
+          -1.125
+        ]
+      ],
+      "vertices": 291,
+      "triangles": 97,
+      "sha256": "4d09c5d824ffec8ffe30f8f3c130beaddd34b81ba8d17f3930135b1c54189e8a",
+      "category": "Site"
+    },
+    {
+      "name": "SM_MPRSC_MPRR_CampusGreen",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPRR_CampusGreen.fbx",
+      "material_roles": [
+        "MPRR_CampusGreen"
+      ],
+      "bounds_m": [
+        [
+          -199.73004,
+          200.41076
+        ],
+        [
+          -162.267069,
+          102.12
+        ],
+        [
+          -1.967466,
+          -0.696043
+        ]
+      ],
+      "vertices": 3897,
+      "triangles": 1299,
+      "sha256": "941d6de6d1104f0bf51e6c62864aea895253bf1d9e1416316591bea9ca58e020",
+      "category": "Site"
+    },
+    {
+      "name": "SM_MPRSC_MPRSC_ParkingAsphalt",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPRSC_ParkingAsphalt.fbx",
+      "material_roles": [
+        "MPRSC_ParkingAsphalt"
+      ],
+      "bounds_m": [
+        [
+          -191.83004,
+          192.51076
+        ],
+        [
+          -88.94362,
+          32.95638
+        ],
+        [
+          -1.125,
+          -1.125
+        ]
+      ],
+      "vertices": 252,
+      "triangles": 84,
+      "sha256": "041c655ce4455e7a0a2dc591fb71af37efb0bd018095182a93805a7e8b7b5984",
+      "category": "Site"
+    },
+    {
+      "name": "SM_MPRSC_MPR3_YellowLine",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPR3_YellowLine.fbx",
+      "material_roles": [
+        "MPR3_YellowLine"
+      ],
+      "bounds_m": [
+        [
+          -145.99224,
+          153.91196
+        ],
+        [
+          -106.79722,
+          96.53178
+        ],
+        [
+          -1.103,
+          -1.103
+        ]
+      ],
+      "vertices": 17000,
+      "triangles": 8500,
+      "sha256": "a88104a771e48a41b8f9c5a7f1cbb72e543084b7ec11712671ed4460df264e6c",
+      "category": "Site"
+    },
+    {
+      "name": "SM_MPRSC_MPR3_WhiteLine",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPR3_WhiteLine.fbx",
+      "material_roles": [
+        "MPR3_WhiteLine"
+      ],
+      "bounds_m": [
+        [
+          -191.63004,
+          192.31076
+        ],
+        [
+          -157.377069,
+          32.80638
+        ],
+        [
+          -1.110454,
+          -0.787382
+        ]
+      ],
+      "vertices": 4576,
+      "triangles": 2288,
+      "sha256": "445f268a470b557df6b152565cf930fdb0ccfdfb37f6c83fa19a805865195013",
+      "category": "Site"
+    },
+    {
+      "name": "SM_MPRSC_MPR4_TerminalCurb",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPR4_TerminalCurb.fbx",
+      "material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "bounds_m": [
+        [
+          -199.67004,
+          200.35076
+        ],
+        [
+          -162.20706900000002,
+          101.906277
+        ],
+        [
+          -1.96659,
+          -0.5115320000000001
+        ]
+      ],
+      "vertices": 17240,
+      "triangles": 25860,
+      "sha256": "9618673b353c9abd60bb86434a83e366c786ca74f29603f7835c16629c003e45",
+      "category": "Site"
+    }
+  ],
+  "plan_sha256": "86c56ef9ea8225db37f5685e77231dcde6381c51a96963c9b9f1406b4301a595",
+  "source_plan": "SourceAssets/MPR/site_completion_20261105/site_plan.json"
+}

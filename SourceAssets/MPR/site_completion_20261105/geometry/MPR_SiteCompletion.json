@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "units": "metres",
+  "axis": "CAD +Y; UE import X=100*x,Y=-100*y,Z=100*z",
+  "meshes": [
+    {
+      "name": "SM_MPRSC_MPR3_Concrete",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPR3_Concrete.fbx",
+      "material_roles": [
+        "MPR3_Concrete"
+      ],
+      "bounds_m": [
+        [
+          -194.93004,
+          195.61076
+        ],
+        [
+          -157.467069,
+          96.69038
+        ],
+        [
+          -1.834871,
+          -0.803455
+        ]
+      ],
+      "vertices": 7932,
+      "triangles": 2644
+    },
+    {
+      "name": "SM_MPRSC_MPRSC_Walkway",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPRSC_Walkway.fbx",
+      "material_roles": [
+        "MPRSC_Walkway"
+      ],
+      "bounds_m": [
+        [
+          -184.73004,
+          -182.38004
+        ],
+        [
+          -89.09362,
+          79.69038
+        ],
+        [
+          -1.125,
+          -1.125
+        ]
+      ],
+      "vertices": 291,
+      "triangles": 97
+    },
+    {
+      "name": "SM_MPRSC_MPRR_CampusGreen",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPRR_CampusGreen.fbx",
+      "material_roles": [
+        "MPRR_CampusGreen"
+      ],
+      "bounds_m": [
+        [
+          -199.73004,
+          200.41076
+        ],
+        [
+          -162.267069,
+          102.12
+        ],
+        [
+          -1.967466,
+          -0.696043
+        ]
+      ],
+      "vertices": 3897,
+      "triangles": 1299
+    },
+    {
+      "name": "SM_MPRSC_MPRSC_ParkingAsphalt",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPRSC_ParkingAsphalt.fbx",
+      "material_roles": [
+        "MPRSC_ParkingAsphalt"
+      ],
+      "bounds_m": [
+        [
+          -191.83004,
+          192.51076
+        ],
+        [
+          -88.94362,
+          32.95638
+        ],
+        [
+          -1.125,
+          -1.125
+        ]
+      ],
+      "vertices": 252,
+      "triangles": 84
+    },
+    {
+      "name": "SM_MPRSC_MPR3_YellowLine",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPR3_YellowLine.fbx",
+      "material_roles": [
+        "MPR3_YellowLine"
+      ],
+      "bounds_m": [
+        [
+          -145.99224,
+          153.91196
+        ],
+        [
+          -106.79722,
+          96.53178
+        ],
+        [
+          -1.103,
+          -1.103
+        ]
+      ],
+      "vertices": 17000,
+      "triangles": 8500
+    },
+    {
+      "name": "SM_MPRSC_MPR3_WhiteLine",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPR3_WhiteLine.fbx",
+      "material_roles": [
+        "MPR3_WhiteLine"
+      ],
+      "bounds_m": [
+        [
+          -191.63004,
+          192.31076
+        ],
+        [
+          -157.377069,
+          32.80638
+        ],
+        [
+          -1.110454,
+          -0.787382
+        ]
+      ],
+      "vertices": 4576,
+      "triangles": 2288
+    },
+    {
+      "name": "SM_MPRSC_MPR4_TerminalCurb",
+      "fbx": "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPR4_TerminalCurb.fbx",
+      "material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "bounds_m": [
+        [
+          -199.67004,
+          200.35076
+        ],
+        [
+          -162.20706900000002,
+          101.906277
+        ],
+        [
+          -1.96659,
+          -0.5115320000000001
+        ]
+      ],
+      "vertices": 17240,
+      "triangles": 25860
+    }
+  ],
+  "plan_sha256": "86c56ef9ea8225db37f5685e77231dcde6381c51a96963c9b9f1406b4301a595",
+  "source_plan": "SourceAssets/MPR/site_completion_20261105/site_plan.json"
+}
