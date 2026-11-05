@@ -1,0 +1,1928 @@
+{
+  "schema_version": 1,
+  "units": "metres",
+  "coordinate_frame": "Local ground-centred origin, CAD +Y, vehicle front +X / rear doors -X, FBX forward -Y/up Z; UE reflects Y",
+  "meshes": [
+    {
+      "name": "SM_MPR3_Tree_0",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_0.fbx",
+      "lod": 0,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -3.2816720008850098,
+          3.21346378326416
+        ],
+        [
+          -2.993699789047241,
+          3.129570722579956
+        ],
+        [
+          0.0,
+          8.800000190734863
+        ]
+      ],
+      "triangles": 16492,
+      "vertices": 10080,
+      "sha256": "dfcd1857c069dd1fe269c5275dadc8e3556ad5c6a0648dd1a6dc29a14df8efc0",
+      "instance_only": true,
+      "collision": false,
+      "metadata": {
+        "kind": "tree",
+        "variant": "Broadleaf",
+        "height_m": 8.8,
+        "crown_radius_m": 3.35,
+        "opacity": "opaque solid foliage",
+        "wind_tick": false,
+        "alpha_cards": false,
+        "seed": 7381
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "mesh_long_x": false,
+      "lod_files": [
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_0_LOD1.fbx",
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_0_LOD2.fbx"
+      ],
+      "lod_triangles": [
+        16492,
+        2048,
+        628
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.18,
+        0.045
+      ]
+    },
+    {
+      "name": "SM_MPR3_Tree_1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_1.fbx",
+      "lod": 0,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -2.65010404586792,
+          2.7382068634033203
+        ],
+        [
+          -2.6324496269226074,
+          2.481233596801758
+        ],
+        [
+          0.0,
+          10.399999618530273
+        ]
+      ],
+      "triangles": 16172,
+      "vertices": 9880,
+      "sha256": "536962b0015ab81b69623c6ab1c5731d0449accb9b05b5edd814afec5acbc714",
+      "instance_only": true,
+      "collision": false,
+      "metadata": {
+        "kind": "tree",
+        "variant": "Upright",
+        "height_m": 10.4,
+        "crown_radius_m": 2.75,
+        "opacity": "opaque solid foliage",
+        "wind_tick": false,
+        "alpha_cards": false,
+        "seed": 8082
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "mesh_long_x": false,
+      "lod_files": [
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_1_LOD1.fbx",
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_1_LOD2.fbx"
+      ],
+      "lod_triangles": [
+        16172,
+        2048,
+        628
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.18,
+        0.045
+      ]
+    },
+    {
+      "name": "SM_MPR3_Tree_2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_2.fbx",
+      "lod": 0,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -3.6469430923461914,
+          3.543259859085083
+        ],
+        [
+          -3.2807631492614746,
+          3.2956771850585938
+        ],
+        [
+          0.0,
+          7.599999904632568
+        ]
+      ],
+      "triangles": 16812,
+      "vertices": 10280,
+      "sha256": "bbb8322e2a28bdcd66dac8b99dc7cc2d5e76b0903c366d0f36558530833aaa7a",
+      "instance_only": true,
+      "collision": false,
+      "metadata": {
+        "kind": "tree",
+        "variant": "Spreading",
+        "height_m": 7.6,
+        "crown_radius_m": 3.65,
+        "opacity": "opaque solid foliage",
+        "wind_tick": false,
+        "alpha_cards": false,
+        "seed": 8783
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "mesh_long_x": false,
+      "lod_files": [
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_2_LOD1.fbx",
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_2_LOD2.fbx"
+      ],
+      "lod_triangles": [
+        16812,
+        2048,
+        628
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.18,
+        0.045
+      ]
+    },
+    {
+      "name": "SM_MPR3_Bush_0",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Bush_0.fbx",
+      "lod": 0,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -0.9610925316810608,
+          1.089454174041748
+        ],
+        [
+          -1.0559251308441162,
+          1.0018912553787231
+        ],
+        [
+          0.0,
+          1.350000023841858
+        ]
+      ],
+      "triangles": 5232,
+      "vertices": 3214,
+      "sha256": "203b8037842f43566b76428dc7d02d8fbae455166a4f5c7a52b89932e342b34d",
+      "instance_only": true,
+      "collision": false,
+      "metadata": {
+        "kind": "shrub",
+        "variant": "LowMound",
+        "height_m": 1.35,
+        "crown_radius_m": 1.1,
+        "opacity": "opaque solid foliage",
+        "wind_tick": false,
+        "alpha_cards": false,
+        "seed": 8481
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "mesh_long_x": true,
+      "lod_files": [
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Bush_0_LOD1.fbx",
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Bush_0_LOD2.fbx"
+      ],
+      "lod_triangles": [
+        5232,
+        960,
+        252
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.18,
+        0.045
+      ]
+    },
+    {
+      "name": "SM_MPR3_Bush_1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Bush_1.fbx",
+      "lod": 0,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -1.6491873264312744,
+          1.4080008268356323
+        ],
+        [
+          -1.4513331651687622,
+          1.3510158061981201
+        ],
+        [
+          0.0,
+          1.899999976158142
+        ]
+      ],
+      "triangles": 5872,
+      "vertices": 3614,
+      "sha256": "2d45755de768e3633c6caafe4e6e8623a5cd29e992e8bb09e130be50dd801946",
+      "instance_only": true,
+      "collision": false,
+      "metadata": {
+        "kind": "shrub",
+        "variant": "MixedCluster",
+        "height_m": 1.9,
+        "crown_radius_m": 1.65,
+        "opacity": "opaque solid foliage",
+        "wind_tick": false,
+        "alpha_cards": false,
+        "seed": 9182
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "mesh_long_x": true,
+      "lod_files": [
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Bush_1_LOD1.fbx",
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Bush_1_LOD2.fbx"
+      ],
+      "lod_triangles": [
+        5872,
+        960,
+        252
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.18,
+        0.045
+      ]
+    },
+    {
+      "name": "SM_MPR3_Trailer_White",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_White.fbx",
+      "lod": 0,
+      "material_roles": [
+        "ReflectAmber",
+        "ReflectRed",
+        "ReflectWhite",
+        "TrailerWhite",
+        "VehicleDark",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 7988,
+      "vertices": 5112,
+      "sha256": "fc5b1772a70f69a5b2378d685875100a69400492c90bd23011d0b737e333a5b0",
+      "instance_only": true,
+      "collision": false,
+      "metadata": {
+        "kind": "semi_trailer",
+        "color": "White",
+        "tractor_cab": false,
+        "front_axis": "+X",
+        "loading_doors": "-X",
+        "nominal_box_m": [
+          16.15,
+          2.6,
+          2.88
+        ],
+        "overall_height_m": 4.1659999999999995,
+        "ground_origin": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "mesh_long_x": true,
+      "lod_files": [
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_White_LOD1.fbx",
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_White_LOD2.fbx"
+      ],
+      "lod_triangles": [
+        7988,
+        2208,
+        624
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.18,
+        0.045
+      ]
+    },
+    {
+      "name": "SM_MPR3_Trailer_Blue",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_Blue.fbx",
+      "lod": 0,
+      "material_roles": [
+        "ReflectAmber",
+        "ReflectRed",
+        "ReflectWhite",
+        "TrailerBlue",
+        "TrailerWhite",
+        "VehicleDark",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 7988,
+      "vertices": 5112,
+      "sha256": "ffcbcd7bd8f225d171e8ee38e5a45c1ce655da659d12f59273038f40fa0a0c05",
+      "instance_only": true,
+      "collision": false,
+      "metadata": {
+        "kind": "semi_trailer",
+        "color": "Blue",
+        "tractor_cab": false,
+        "front_axis": "+X",
+        "loading_doors": "-X",
+        "nominal_box_m": [
+          16.15,
+          2.6,
+          2.88
+        ],
+        "overall_height_m": 4.1659999999999995,
+        "ground_origin": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "mesh_long_x": true,
+      "lod_files": [
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_Blue_LOD1.fbx",
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_Blue_LOD2.fbx"
+      ],
+      "lod_triangles": [
+        7988,
+        2208,
+        624
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.18,
+        0.045
+      ]
+    },
+    {
+      "name": "SM_MPR3_Trailer_Coral",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_Coral.fbx",
+      "lod": 0,
+      "material_roles": [
+        "ReflectAmber",
+        "ReflectRed",
+        "ReflectWhite",
+        "TrailerCoral",
+        "TrailerWhite",
+        "VehicleDark",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 7988,
+      "vertices": 5112,
+      "sha256": "4cf2f4f339afc1bbf8e09c6fd1de30caa08e5d540eca31b6574bf91db8f635bd",
+      "instance_only": true,
+      "collision": false,
+      "metadata": {
+        "kind": "semi_trailer",
+        "color": "Coral",
+        "tractor_cab": false,
+        "front_axis": "+X",
+        "loading_doors": "-X",
+        "nominal_box_m": [
+          16.15,
+          2.6,
+          2.88
+        ],
+        "overall_height_m": 4.1659999999999995,
+        "ground_origin": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "mesh_long_x": true,
+      "lod_files": [
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_Coral_LOD1.fbx",
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_Coral_LOD2.fbx"
+      ],
+      "lod_triangles": [
+        7988,
+        2208,
+        624
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.18,
+        0.045
+      ]
+    },
+    {
+      "name": "SM_MPR3_Car_0",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Car_0.fbx",
+      "lod": 0,
+      "material_roles": [
+        "ReflectRed",
+        "ReflectWhite",
+        "VehicleGlass",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam",
+        "VehicleWhite"
+      ],
+      "bounds_m": [
+        [
+          -2.257999897003174,
+          2.257999897003174
+        ],
+        [
+          -0.9460000395774841,
+          0.9460000395774841
+        ],
+        [
+          0.0,
+          1.4243381023406982
+        ]
+      ],
+      "triangles": 964,
+      "vertices": 672,
+      "sha256": "5f25e92cd2a9af09ee00affde41cb10b044502b010d857f5b2541d20c180728a",
+      "instance_only": true,
+      "collision": false,
+      "metadata": {
+        "kind": "sedan",
+        "source_generator": "Scripts/ghs/park_vehicles.py",
+        "front_axis": "+X",
+        "neutral_color": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "mesh_long_x": true,
+      "lod_files": [
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Car_0_LOD1.fbx",
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Car_0_LOD2.fbx"
+      ],
+      "lod_triangles": [
+        964,
+        584,
+        262
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.18,
+        0.045
+      ]
+    },
+    {
+      "name": "SM_MPR3_Car_1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Car_1.fbx",
+      "lod": 0,
+      "material_roles": [
+        "ReflectRed",
+        "ReflectWhite",
+        "VehicleGlass",
+        "VehicleGray",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -2.257999897003174,
+          2.257999897003174
+        ],
+        [
+          -0.9460000395774841,
+          0.9460000395774841
+        ],
+        [
+          0.0,
+          1.6643381118774414
+        ]
+      ],
+      "triangles": 964,
+      "vertices": 672,
+      "sha256": "aae45e80c8761bd13ea8d242d0d8dfa5d29d676230dc64cd7f85d48f08741a63",
+      "instance_only": true,
+      "collision": false,
+      "metadata": {
+        "kind": "compact_suv",
+        "source_generator": "Scripts/ghs/park_vehicles.py",
+        "front_axis": "+X",
+        "neutral_color": true
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "mesh_long_x": true,
+      "lod_files": [
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Car_1_LOD1.fbx",
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_Car_1_LOD2.fbx"
+      ],
+      "lod_triangles": [
+        964,
+        584,
+        262
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.18,
+        0.045
+      ]
+    },
+    {
+      "name": "SM_MPR3_FreightBoxcar",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_FreightBoxcar.fbx",
+      "lod": 0,
+      "material_roles": [
+        "FreightRoof",
+        "FreightWhite",
+        "ReflectAmber",
+        "VehicleDark",
+        "VehicleMetal"
+      ],
+      "bounds_m": [
+        [
+          -10.399999618530273,
+          10.399999618530273
+        ],
+        [
+          -1.6480000019073486,
+          1.6480000019073486
+        ],
+        [
+          0.0,
+          4.429999828338623
+        ]
+      ],
+      "triangles": 5272,
+      "vertices": 3252,
+      "sha256": "5dc305be425e08434df3d63c80efaeff539ffce0531abb0b0e7165f26e7477ed",
+      "instance_only": true,
+      "collision": false,
+      "metadata": {
+        "kind": "rail_boxcar",
+        "body_length_m": 18.8,
+        "overall_length_m": 20.76,
+        "front_axis": "+X",
+        "estimated_dimensions": true,
+        "source": "reference multiview 01/06 white-grey freight cars"
+      },
+      "origin_m": [
+        0,
+        0,
+        0
+      ],
+      "mesh_long_x": true,
+      "lod_files": [
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_FreightBoxcar_LOD1.fbx",
+        "SourceAssets/MPR/reference_v3/props/SM_MPR3_FreightBoxcar_LOD2.fbx"
+      ],
+      "lod_triangles": [
+        5272,
+        1784,
+        656
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.18,
+        0.045
+      ]
+    }
+  ],
+  "lod_details": [
+    {
+      "name": "SM_MPR3_Tree_0",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_0.fbx",
+      "lod": 0,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -3.2816720008850098,
+          3.21346378326416
+        ],
+        [
+          -2.993699789047241,
+          3.129570722579956
+        ],
+        [
+          0.0,
+          8.800000190734863
+        ]
+      ],
+      "triangles": 16492,
+      "vertices": 10080,
+      "sha256": "dfcd1857c069dd1fe269c5275dadc8e3556ad5c6a0648dd1a6dc29a14df8efc0"
+    },
+    {
+      "name": "SM_MPR3_Tree_0_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_0_LOD1.fbx",
+      "lod": 1,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -3.2467730045318604,
+          3.197462320327759
+        ],
+        [
+          -3.0878403186798096,
+          3.3442864418029785
+        ],
+        [
+          0.0,
+          8.800000190734863
+        ]
+      ],
+      "triangles": 2048,
+      "vertices": 1290,
+      "sha256": "67109bf4d853d5b418321367b1829da8b4dab1c60a76d2a6f62b0cf99ead6e44"
+    },
+    {
+      "name": "SM_MPR3_Tree_0_LOD2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_0_LOD2.fbx",
+      "lod": 2,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -3.160706043243408,
+          3.340381383895874
+        ],
+        [
+          -3.1764016151428223,
+          3.2257964611053467
+        ],
+        [
+          0.0,
+          8.800000190734863
+        ]
+      ],
+      "triangles": 628,
+      "vertices": 370,
+      "sha256": "ce41bd064838742e652d4bf1419119bc48e2e4258851c4875c25b05833844c1c"
+    },
+    {
+      "name": "SM_MPR3_Tree_1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_1.fbx",
+      "lod": 0,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -2.65010404586792,
+          2.7382068634033203
+        ],
+        [
+          -2.6324496269226074,
+          2.481233596801758
+        ],
+        [
+          0.0,
+          10.399999618530273
+        ]
+      ],
+      "triangles": 16172,
+      "vertices": 9880,
+      "sha256": "536962b0015ab81b69623c6ab1c5731d0449accb9b05b5edd814afec5acbc714"
+    },
+    {
+      "name": "SM_MPR3_Tree_1_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_1_LOD1.fbx",
+      "lod": 1,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -2.533548355102539,
+          2.747978687286377
+        ],
+        [
+          -2.506427049636841,
+          2.4718871116638184
+        ],
+        [
+          0.0,
+          10.399999618530273
+        ]
+      ],
+      "triangles": 2048,
+      "vertices": 1290,
+      "sha256": "f0652c1685a6cab410fccccf82d9c57a9a076c444a33a7cd7c3493c5fb1932ac"
+    },
+    {
+      "name": "SM_MPR3_Tree_1_LOD2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_1_LOD2.fbx",
+      "lod": 2,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -2.6361522674560547,
+          2.67248272895813
+        ],
+        [
+          -2.5189781188964844,
+          2.6199653148651123
+        ],
+        [
+          0.0,
+          10.399999618530273
+        ]
+      ],
+      "triangles": 628,
+      "vertices": 370,
+      "sha256": "6356fe7b9d970952d6400894c2ed781dcd5b4697e3176ffd21a30ce8bf432e10"
+    },
+    {
+      "name": "SM_MPR3_Tree_2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_2.fbx",
+      "lod": 0,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -3.6469430923461914,
+          3.543259859085083
+        ],
+        [
+          -3.2807631492614746,
+          3.2956771850585938
+        ],
+        [
+          0.0,
+          7.599999904632568
+        ]
+      ],
+      "triangles": 16812,
+      "vertices": 10280,
+      "sha256": "bbb8322e2a28bdcd66dac8b99dc7cc2d5e76b0903c366d0f36558530833aaa7a"
+    },
+    {
+      "name": "SM_MPR3_Tree_2_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_2_LOD1.fbx",
+      "lod": 1,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -3.0359132289886475,
+          3.4898183345794678
+        ],
+        [
+          -3.2548460960388184,
+          3.466318130493164
+        ],
+        [
+          0.0,
+          7.599999904632568
+        ]
+      ],
+      "triangles": 2048,
+      "vertices": 1290,
+      "sha256": "de81b924e8ed9ef36ed8c2f7cb72ac7a8b2396d1623ea33d63f4d1ddb75bdf8d"
+    },
+    {
+      "name": "SM_MPR3_Tree_2_LOD2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Tree_2_LOD2.fbx",
+      "lod": 2,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -3.5514063835144043,
+          3.6259913444519043
+        ],
+        [
+          -3.3511431217193604,
+          3.400509834289551
+        ],
+        [
+          0.0,
+          7.599999904632568
+        ]
+      ],
+      "triangles": 628,
+      "vertices": 370,
+      "sha256": "f3730e0f6eab8cf1eb6e839ae54e6b39ec88bccf80bde3979e6d44f063d41abc"
+    },
+    {
+      "name": "SM_MPR3_Bush_0",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Bush_0.fbx",
+      "lod": 0,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -0.9610925316810608,
+          1.089454174041748
+        ],
+        [
+          -1.0559251308441162,
+          1.0018912553787231
+        ],
+        [
+          0.0,
+          1.350000023841858
+        ]
+      ],
+      "triangles": 5232,
+      "vertices": 3214,
+      "sha256": "203b8037842f43566b76428dc7d02d8fbae455166a4f5c7a52b89932e342b34d"
+    },
+    {
+      "name": "SM_MPR3_Bush_0_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Bush_0_LOD1.fbx",
+      "lod": 1,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -0.9244059920310974,
+          1.0857633352279663
+        ],
+        [
+          -1.0582033395767212,
+          0.9051842093467712
+        ],
+        [
+          0.0,
+          1.350000023841858
+        ]
+      ],
+      "triangles": 960,
+      "vertices": 598,
+      "sha256": "e4f1bc91c94d2573c3fdc2889af97977967465dcb61a82d9875e64f75f77b21b"
+    },
+    {
+      "name": "SM_MPR3_Bush_0_LOD2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Bush_0_LOD2.fbx",
+      "lod": 2,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -0.8361268639564514,
+          1.100000023841858
+        ],
+        [
+          -1.0268363952636719,
+          0.9096521139144897
+        ],
+        [
+          0.0,
+          1.350000023841858
+        ]
+      ],
+      "triangles": 252,
+      "vertices": 154,
+      "sha256": "89b639bb03136f3c00f86a15c712c1b05104d4284db5c33344fdf38955069142"
+    },
+    {
+      "name": "SM_MPR3_Bush_1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Bush_1.fbx",
+      "lod": 0,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -1.6491873264312744,
+          1.4080008268356323
+        ],
+        [
+          -1.4513331651687622,
+          1.3510158061981201
+        ],
+        [
+          0.0,
+          1.899999976158142
+        ]
+      ],
+      "triangles": 5872,
+      "vertices": 3614,
+      "sha256": "2d45755de768e3633c6caafe4e6e8623a5cd29e992e8bb09e130be50dd801946"
+    },
+    {
+      "name": "SM_MPR3_Bush_1_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Bush_1_LOD1.fbx",
+      "lod": 1,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -1.2567930221557617,
+          1.4280152320861816
+        ],
+        [
+          -1.3097071647644043,
+          1.4602878093719482
+        ],
+        [
+          0.0,
+          1.899999976158142
+        ]
+      ],
+      "triangles": 960,
+      "vertices": 598,
+      "sha256": "8ed6c672a17e713b7da8fa76d82532dd833482d722c728824fbf159c78c8a96f"
+    },
+    {
+      "name": "SM_MPR3_Bush_1_LOD2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Bush_1_LOD2.fbx",
+      "lod": 2,
+      "material_roles": [
+        "Bark",
+        "LeafDark",
+        "LeafLight",
+        "LeafSage"
+      ],
+      "bounds_m": [
+        [
+          -1.5522576570510864,
+          1.649999976158142
+        ],
+        [
+          -1.582932710647583,
+          1.3105920553207397
+        ],
+        [
+          0.0,
+          1.899999976158142
+        ]
+      ],
+      "triangles": 252,
+      "vertices": 154,
+      "sha256": "6b863095bcbe211036b3fd00565b2a3af7c2da3e9ba5c0d76dad8ff66f08cc1b"
+    },
+    {
+      "name": "SM_MPR3_Trailer_White",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_White.fbx",
+      "lod": 0,
+      "material_roles": [
+        "ReflectAmber",
+        "ReflectRed",
+        "ReflectWhite",
+        "TrailerWhite",
+        "VehicleDark",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 7988,
+      "vertices": 5112,
+      "sha256": "fc5b1772a70f69a5b2378d685875100a69400492c90bd23011d0b737e333a5b0"
+    },
+    {
+      "name": "SM_MPR3_Trailer_White_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_White_LOD1.fbx",
+      "lod": 1,
+      "material_roles": [
+        "ReflectAmber",
+        "ReflectRed",
+        "ReflectWhite",
+        "TrailerWhite",
+        "VehicleDark",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 2208,
+      "vertices": 1444,
+      "sha256": "2c50915163ecb9903207bc2250f426b296b2cdf6749a524e79f4db3ba490d721"
+    },
+    {
+      "name": "SM_MPR3_Trailer_White_LOD2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_White_LOD2.fbx",
+      "lod": 2,
+      "material_roles": [
+        "ReflectAmber",
+        "ReflectRed",
+        "ReflectWhite",
+        "TrailerWhite",
+        "VehicleDark",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -8.274999618530273,
+          8.102499961853027
+        ],
+        [
+          -1.3220000267028809,
+          1.3220000267028809
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 624,
+      "vertices": 456,
+      "sha256": "2bea3d1a95015ddb63bf68e3fb3c49cd6a5e66fbf1e0dd556572594859eed738"
+    },
+    {
+      "name": "SM_MPR3_Trailer_Blue",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_Blue.fbx",
+      "lod": 0,
+      "material_roles": [
+        "ReflectAmber",
+        "ReflectRed",
+        "ReflectWhite",
+        "TrailerBlue",
+        "TrailerWhite",
+        "VehicleDark",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 7988,
+      "vertices": 5112,
+      "sha256": "ffcbcd7bd8f225d171e8ee38e5a45c1ce655da659d12f59273038f40fa0a0c05"
+    },
+    {
+      "name": "SM_MPR3_Trailer_Blue_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_Blue_LOD1.fbx",
+      "lod": 1,
+      "material_roles": [
+        "ReflectAmber",
+        "ReflectRed",
+        "ReflectWhite",
+        "TrailerBlue",
+        "TrailerWhite",
+        "VehicleDark",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 2208,
+      "vertices": 1444,
+      "sha256": "93cbd209ba2740f71e4b7a2925039f85edb03091a6936eb3b35ab12006268e78"
+    },
+    {
+      "name": "SM_MPR3_Trailer_Blue_LOD2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_Blue_LOD2.fbx",
+      "lod": 2,
+      "material_roles": [
+        "ReflectAmber",
+        "ReflectRed",
+        "ReflectWhite",
+        "TrailerBlue",
+        "TrailerWhite",
+        "VehicleDark",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -8.274999618530273,
+          8.102499961853027
+        ],
+        [
+          -1.3220000267028809,
+          1.3220000267028809
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 624,
+      "vertices": 456,
+      "sha256": "370b15598134abb268fcb636561b1c837e4add39d061724443af25ae91dda76d"
+    },
+    {
+      "name": "SM_MPR3_Trailer_Coral",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_Coral.fbx",
+      "lod": 0,
+      "material_roles": [
+        "ReflectAmber",
+        "ReflectRed",
+        "ReflectWhite",
+        "TrailerCoral",
+        "TrailerWhite",
+        "VehicleDark",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 7988,
+      "vertices": 5112,
+      "sha256": "4cf2f4f339afc1bbf8e09c6fd1de30caa08e5d540eca31b6574bf91db8f635bd"
+    },
+    {
+      "name": "SM_MPR3_Trailer_Coral_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_Coral_LOD1.fbx",
+      "lod": 1,
+      "material_roles": [
+        "ReflectAmber",
+        "ReflectRed",
+        "ReflectWhite",
+        "TrailerCoral",
+        "TrailerWhite",
+        "VehicleDark",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -8.289999961853027,
+          8.102499961853027
+        ],
+        [
+          -1.3350000381469727,
+          1.3350000381469727
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 2208,
+      "vertices": 1444,
+      "sha256": "5afc724f6261a249f45b18287e9f5a863f29e9ccbaf3eb7479279b9e5a782cdf"
+    },
+    {
+      "name": "SM_MPR3_Trailer_Coral_LOD2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Trailer_Coral_LOD2.fbx",
+      "lod": 2,
+      "material_roles": [
+        "ReflectAmber",
+        "ReflectRed",
+        "ReflectWhite",
+        "TrailerCoral",
+        "TrailerWhite",
+        "VehicleDark",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -8.274999618530273,
+          8.102499961853027
+        ],
+        [
+          -1.3220000267028809,
+          1.3220000267028809
+        ],
+        [
+          0.0,
+          4.165999889373779
+        ]
+      ],
+      "triangles": 624,
+      "vertices": 456,
+      "sha256": "2fe57e13ffce6b658303c4ef1c1c5bf803d657f06ca8baddde34f0236873da09"
+    },
+    {
+      "name": "SM_MPR3_Car_0",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Car_0.fbx",
+      "lod": 0,
+      "material_roles": [
+        "ReflectRed",
+        "ReflectWhite",
+        "VehicleGlass",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam",
+        "VehicleWhite"
+      ],
+      "bounds_m": [
+        [
+          -2.257999897003174,
+          2.257999897003174
+        ],
+        [
+          -0.9460000395774841,
+          0.9460000395774841
+        ],
+        [
+          0.0,
+          1.4243381023406982
+        ]
+      ],
+      "triangles": 964,
+      "vertices": 672,
+      "sha256": "5f25e92cd2a9af09ee00affde41cb10b044502b010d857f5b2541d20c180728a"
+    },
+    {
+      "name": "SM_MPR3_Car_0_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Car_0_LOD1.fbx",
+      "lod": 1,
+      "material_roles": [
+        "ReflectRed",
+        "ReflectWhite",
+        "VehicleGlass",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam",
+        "VehicleWhite"
+      ],
+      "bounds_m": [
+        [
+          -2.257999897003174,
+          2.257999897003174
+        ],
+        [
+          -0.9269999861717224,
+          0.9269999861717224
+        ],
+        [
+          0.0,
+          1.4243381023406982
+        ]
+      ],
+      "triangles": 584,
+      "vertices": 432,
+      "sha256": "5961049de53ea8a14a50537870a666083aec4dfd9e009a3e34a97663f9e1de51"
+    },
+    {
+      "name": "SM_MPR3_Car_0_LOD2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Car_0_LOD2.fbx",
+      "lod": 2,
+      "material_roles": [
+        "ReflectRed",
+        "ReflectWhite",
+        "VehicleGlass",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam",
+        "VehicleWhite"
+      ],
+      "bounds_m": [
+        [
+          -2.250999927520752,
+          2.250999927520752
+        ],
+        [
+          -0.9240000247955322,
+          0.9240000247955322
+        ],
+        [
+          0.0,
+          1.440000057220459
+        ]
+      ],
+      "triangles": 262,
+      "vertices": 196,
+      "sha256": "82ae90c51470ae24227aaadc97c20bc2368a00550517ebccd923bb32d3293cc9"
+    },
+    {
+      "name": "SM_MPR3_Car_1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Car_1.fbx",
+      "lod": 0,
+      "material_roles": [
+        "ReflectRed",
+        "ReflectWhite",
+        "VehicleGlass",
+        "VehicleGray",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -2.257999897003174,
+          2.257999897003174
+        ],
+        [
+          -0.9460000395774841,
+          0.9460000395774841
+        ],
+        [
+          0.0,
+          1.6643381118774414
+        ]
+      ],
+      "triangles": 964,
+      "vertices": 672,
+      "sha256": "aae45e80c8761bd13ea8d242d0d8dfa5d29d676230dc64cd7f85d48f08741a63"
+    },
+    {
+      "name": "SM_MPR3_Car_1_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Car_1_LOD1.fbx",
+      "lod": 1,
+      "material_roles": [
+        "ReflectRed",
+        "ReflectWhite",
+        "VehicleGlass",
+        "VehicleGray",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -2.257999897003174,
+          2.257999897003174
+        ],
+        [
+          -0.9269999861717224,
+          0.9269999861717224
+        ],
+        [
+          0.0,
+          1.6643381118774414
+        ]
+      ],
+      "triangles": 584,
+      "vertices": 432,
+      "sha256": "a8b5ed97439a84f9550b69db9570f1f3eb73c2a57886ada6f163c53f821d185a"
+    },
+    {
+      "name": "SM_MPR3_Car_1_LOD2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_Car_1_LOD2.fbx",
+      "lod": 2,
+      "material_roles": [
+        "ReflectRed",
+        "ReflectWhite",
+        "VehicleGlass",
+        "VehicleGray",
+        "VehicleMetal",
+        "VehicleRubber",
+        "VehicleSeam"
+      ],
+      "bounds_m": [
+        [
+          -2.250999927520752,
+          2.250999927520752
+        ],
+        [
+          -0.9240000247955322,
+          0.9240000247955322
+        ],
+        [
+          0.0,
+          1.6799999475479126
+        ]
+      ],
+      "triangles": 262,
+      "vertices": 196,
+      "sha256": "90cb0820b56545b78ac7dfc36dee61e95226d60cea4d327aecc02027bb0da002"
+    },
+    {
+      "name": "SM_MPR3_FreightBoxcar",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_FreightBoxcar.fbx",
+      "lod": 0,
+      "material_roles": [
+        "FreightRoof",
+        "FreightWhite",
+        "ReflectAmber",
+        "VehicleDark",
+        "VehicleMetal"
+      ],
+      "bounds_m": [
+        [
+          -10.399999618530273,
+          10.399999618530273
+        ],
+        [
+          -1.6480000019073486,
+          1.6480000019073486
+        ],
+        [
+          0.0,
+          4.429999828338623
+        ]
+      ],
+      "triangles": 5272,
+      "vertices": 3252,
+      "sha256": "5dc305be425e08434df3d63c80efaeff539ffce0531abb0b0e7165f26e7477ed"
+    },
+    {
+      "name": "SM_MPR3_FreightBoxcar_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_FreightBoxcar_LOD1.fbx",
+      "lod": 1,
+      "material_roles": [
+        "FreightRoof",
+        "FreightWhite",
+        "ReflectAmber",
+        "VehicleDark",
+        "VehicleMetal"
+      ],
+      "bounds_m": [
+        [
+          -10.399999618530273,
+          10.399999618530273
+        ],
+        [
+          -1.6349999904632568,
+          1.6349999904632568
+        ],
+        [
+          0.0,
+          4.429999828338623
+        ]
+      ],
+      "triangles": 1784,
+      "vertices": 1156,
+      "sha256": "7b3a522d0dca1eb8b3065938fb67c278c95f3051c68c99ade542447d2ab74124"
+    },
+    {
+      "name": "SM_MPR3_FreightBoxcar_LOD2",
+      "fbx": "SourceAssets/MPR/reference_v3/props/SM_MPR3_FreightBoxcar_LOD2.fbx",
+      "lod": 2,
+      "material_roles": [
+        "FreightRoof",
+        "FreightWhite",
+        "ReflectAmber",
+        "VehicleDark",
+        "VehicleMetal"
+      ],
+      "bounds_m": [
+        [
+          -10.399999618530273,
+          10.399999618530273
+        ],
+        [
+          -1.6349999904632568,
+          1.6349999904632568
+        ],
+        [
+          0.0,
+          4.429999828338623
+        ]
+      ],
+      "triangles": 656,
+      "vertices": 468,
+      "sha256": "a4a3dc2a1dea7b0ba44bcd01c7225a9f62635b7a28ee4bedd65f502472542a87"
+    }
+  ],
+  "materials": {
+    "LeafSage": {
+      "base_color": [
+        0.29,
+        0.355,
+        0.255,
+        1.0
+      ],
+      "roughness": 0.86,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "LeafLight": {
+      "base_color": [
+        0.4,
+        0.46,
+        0.34,
+        1.0
+      ],
+      "roughness": 0.86,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "LeafDark": {
+      "base_color": [
+        0.18,
+        0.235,
+        0.155,
+        1.0
+      ],
+      "roughness": 0.86,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "Bark": {
+      "base_color": [
+        0.205,
+        0.18,
+        0.135,
+        1.0
+      ],
+      "roughness": 0.86,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "TrailerWhite": {
+      "base_color": [
+        0.78,
+        0.8,
+        0.79,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.25,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "TrailerBlue": {
+      "base_color": [
+        0.025,
+        0.205,
+        0.4,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.25,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "TrailerCoral": {
+      "base_color": [
+        0.6,
+        0.205,
+        0.16,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.25,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "VehicleMetal": {
+      "base_color": [
+        0.38,
+        0.41,
+        0.41,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.72,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "VehicleDark": {
+      "base_color": [
+        0.065,
+        0.075,
+        0.08,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "VehicleRubber": {
+      "base_color": [
+        0.026,
+        0.03,
+        0.031,
+        1.0
+      ],
+      "roughness": 0.94,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "VehicleGlass": {
+      "base_color": [
+        0.1,
+        0.16,
+        0.2,
+        1.0
+      ],
+      "roughness": 0.19,
+      "metallic": 0.4,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "VehicleWhite": {
+      "base_color": [
+        0.7,
+        0.73,
+        0.74,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "VehicleGray": {
+      "base_color": [
+        0.31,
+        0.35,
+        0.38,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "VehicleSeam": {
+      "base_color": [
+        0.25,
+        0.28,
+        0.29,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "ReflectWhite": {
+      "base_color": [
+        0.88,
+        0.89,
+        0.85,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "ReflectRed": {
+      "base_color": [
+        0.65,
+        0.035,
+        0.025,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "ReflectAmber": {
+      "base_color": [
+        0.78,
+        0.37,
+        0.035,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "FreightWhite": {
+      "base_color": [
+        0.67,
+        0.69,
+        0.68,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    },
+    "FreightRoof": {
+      "base_color": [
+        0.57,
+        0.6,
+        0.61,
+        1.0
+      ],
+      "roughness": 0.68,
+      "metallic": 0.0,
+      "blend_mode": "OPAQUE",
+      "two_sided": false
+    }
+  },
+  "optimization": {
+    "shared_static_assets": 11,
+    "lod_count": 3,
+    "opaque_foliage": true,
+    "alpha_cards": false,
+    "wind_tick": false,
+    "all_instances_expected": true,
+    "collision": false
+  },
+  "references": [
+    "D:/CodexTemp/output/imagegen/industrial-saas/multiview/01-front-left-aerial.png",
+    "D:/CodexTemp/output/imagegen/industrial-saas/multiview/04-loading-dock-closeup.png",
+    "D:/CodexTemp/output/imagegen/industrial-saas/multiview/06-yard-corner-closeup.png"
+  ],
+  "assumptions": [
+    "Vehicles and trees reconstruct the supplied art reference, not surveyed fleet models or botanical species.",
+    "53ft dry-van box dimensions are visual nominal dimensions. No tractor cab is present.",
+    "Railway boxcar is approximately 20m including couplers."
+  ]
+}

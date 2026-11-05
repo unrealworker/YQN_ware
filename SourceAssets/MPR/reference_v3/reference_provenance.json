@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "user_approved_appearance_source": "D:\\CodexTemp\\output\\imagegen\\industrial-saas\\multiview",
+  "references": [
+    {
+      "path": "D:\\CodexTemp\\output\\imagegen\\industrial-saas\\multiview\\01-front-left-aerial.png",
+      "bytes": 2787724,
+      "sha256": "27c2dbda3583e0c59aac82de54ff2eea7a0ef77061306d0ce6d0b63350236bd0",
+      "role": "appearance and visible detail"
+    },
+    {
+      "path": "D:\\CodexTemp\\output\\imagegen\\industrial-saas\\multiview\\02-railway-side-aerial.png",
+      "bytes": 3031957,
+      "sha256": "66798f2ce074509136ebd52e10a42f27927e1a3a225111e4632221e67dcf4623",
+      "role": "appearance and visible detail"
+    },
+    {
+      "path": "D:\\CodexTemp\\output\\imagegen\\industrial-saas\\multiview\\03-rear-oblique-aerial.png",
+      "bytes": 2627677,
+      "sha256": "3e71ba624764b642f1ed634faa5c3cd458b22e1c661dc545000aacaedca588dd",
+      "role": "appearance and visible detail"
+    },
+    {
+      "path": "D:\\CodexTemp\\output\\imagegen\\industrial-saas\\multiview\\04-loading-dock-closeup.png",
+      "bytes": 2224960,
+      "sha256": "3b63527932c42aa247e59f80e04523bb02e07fc9a030fd0fa4e5eb2500b9b2e1",
+      "role": "appearance and visible detail"
+    },
+    {
+      "path": "D:\\CodexTemp\\output\\imagegen\\industrial-saas\\multiview\\05-rooftop-solar-closeup.png",
+      "bytes": 2636627,
+      "sha256": "81705e313ecf2f9e8689cd75d6935906d935070b91e273d914c45504fac97f51",
+      "role": "appearance and visible detail"
+    },
+    {
+      "path": "D:\\CodexTemp\\output\\imagegen\\industrial-saas\\multiview\\06-yard-corner-closeup.png",
+      "bytes": 2799610,
+      "sha256": "9b5f8f7439993e438f441ac2d1474342a8b1456cd2e51ca5b80393c2d48670e0",
+      "role": "appearance and visible detail"
+    },
+    {
+      "path": "D:\\CodexTemp\\output\\imagegen\\industrial-saas\\multiview\\ChatGPT 图像 2026年11月2日 15_56_24.png",
+      "bytes": 2890450,
+      "sha256": "44a622b96a9479a98e7bca9faa87f5c84a40c56e55373654bf4b32e30f3b04cb",
+      "role": "site composition"
+    }
+  ],
+  "layout_sources": [
+    {
+      "path": "SourceAssets\\MPR\\mpr_cad_layout.json",
+      "sha256": "004f3923f292e0a60e22d677ff542e037a6cf248f6a27c348c068ecac4d9f349"
+    },
+    {
+      "path": "SourceAssets\\MPR\\environment\\environment_local.json",
+      "sha256": "c145cef7f446157f626a72b81ad42bbd27f1730d6f35e9f2c32d304099605aa6"
+    }
+  ],
+  "scope": "Replace main-building exterior and all MPR outdoor actors, preserve existing interior actors and dependency bytes. Continue unpictured areas in the same visual language.",
+  "evidence_limits": "Multiview images are appearance concepts. CAD is authoritative for the main footprint/openings and aligned surrounding positions. Landscaping, vehicle occupancy and facade details are visual estimates."
+}

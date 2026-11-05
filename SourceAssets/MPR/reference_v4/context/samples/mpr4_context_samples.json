@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "units": "metres",
+  "axis": "CAD +Y; UE import X=100*x,Y=-100*y,Z=100*z",
+  "meshes": [
+    {
+      "name": "SM_MPR4_Context_Cottage",
+      "fbx": "SourceAssets/MPR/reference_v4/context/samples/SM_MPR4_Context_Cottage.fbx",
+      "material_roles": [
+        "MPR4_ContextWall",
+        "MPR4_ContextRoof",
+        "MPR4_ContextTrim",
+        "MPR4_ContextGlass",
+        "MPR4_ContextPaving"
+      ],
+      "bounds_m": [
+        [
+          -5.25,
+          5.25
+        ],
+        [
+          -5.7,
+          4.255000000000001
+        ],
+        [
+          0.0,
+          6.2
+        ]
+      ],
+      "vertices": 260,
+      "triangles": 378
+    },
+    {
+      "name": "SM_MPR4_Context_Cottage_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v4/context/samples/SM_MPR4_Context_Cottage_LOD1.fbx",
+      "material_roles": [
+        "MPR4_ContextWall",
+        "MPR4_ContextRoof",
+        "MPR4_ContextTrim"
+      ],
+      "bounds_m": [
+        [
+          -5.25,
+          5.25
+        ],
+        [
+          -4.255000000000001,
+          4.255000000000001
+        ],
+        [
+          0.0,
+          5.970000000000001
+        ]
+      ],
+      "vertices": 44,
+      "triangles": 54
+    },
+    {
+      "name": "SM_MPR4_Context_Garage",
+      "fbx": "SourceAssets/MPR/reference_v4/context/samples/SM_MPR4_Context_Garage.fbx",
+      "material_roles": [
+        "MPR4_ContextWall",
+        "MPR4_ContextRoof",
+        "MPR4_ContextTrim",
+        "MPR4_ContextGlass"
+      ],
+      "bounds_m": [
+        [
+          -5.85,
+          5.85
+        ],
+        [
+          -5.775,
+          4.655000000000001
+        ],
+        [
+          0.0,
+          6.6
+        ]
+      ],
+      "vertices": 284,
+      "triangles": 414
+    },
+    {
+      "name": "SM_MPR4_Context_Garage_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v4/context/samples/SM_MPR4_Context_Garage_LOD1.fbx",
+      "material_roles": [
+        "MPR4_ContextWall",
+        "MPR4_ContextRoof",
+        "MPR4_ContextTrim"
+      ],
+      "bounds_m": [
+        [
+          -5.85,
+          5.85
+        ],
+        [
+          -4.655000000000001,
+          4.655000000000001
+        ],
+        [
+          0.0,
+          6.37
+        ]
+      ],
+      "vertices": 44,
+      "triangles": 54
+    },
+    {
+      "name": "SM_MPR4_Context_LongGable",
+      "fbx": "SourceAssets/MPR/reference_v4/context/samples/SM_MPR4_Context_LongGable.fbx",
+      "material_roles": [
+        "MPR4_ContextWall",
+        "MPR4_ContextRoof",
+        "MPR4_ContextTrim",
+        "MPR4_ContextGlass",
+        "MPR4_ContextPaving"
+      ],
+      "bounds_m": [
+        [
+          -7.25,
+          7.25
+        ],
+        [
+          -5.8,
+          4.355
+        ],
+        [
+          0.0,
+          6.7
+        ]
+      ],
+      "vertices": 260,
+      "triangles": 378
+    },
+    {
+      "name": "SM_MPR4_Context_LongGable_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v4/context/samples/SM_MPR4_Context_LongGable_LOD1.fbx",
+      "material_roles": [
+        "MPR4_ContextWall",
+        "MPR4_ContextRoof",
+        "MPR4_ContextTrim"
+      ],
+      "bounds_m": [
+        [
+          -7.25,
+          7.25
+        ],
+        [
+          -4.355,
+          4.355
+        ],
+        [
+          0.0,
+          6.470000000000001
+        ]
+      ],
+      "vertices": 44,
+      "triangles": 54
+    },
+    {
+      "name": "SM_MPR4_Context_Tank",
+      "fbx": "SourceAssets/MPR/reference_v4/context/samples/SM_MPR4_Context_Tank.fbx",
+      "material_roles": [
+        "MPR4_ContextWall",
+        "MPR4_ContextRoof",
+        "MPR4_ContextTrim"
+      ],
+      "bounds_m": [
+        [
+          -12.35,
+          12.51
+        ],
+        [
+          -12.35,
+          12.35
+        ],
+        [
+          0,
+          12.15
+        ]
+      ],
+      "vertices": 416,
+      "triangles": 756
+    },
+    {
+      "name": "SM_MPR4_Context_Tank_LOD1",
+      "fbx": "SourceAssets/MPR/reference_v4/context/samples/SM_MPR4_Context_Tank_LOD1.fbx",
+      "material_roles": [
+        "MPR4_ContextWall",
+        "MPR4_ContextRoof",
+        "MPR4_ContextTrim"
+      ],
+      "bounds_m": [
+        [
+          -12.35,
+          12.35
+        ],
+        [
+          -12.35,
+          12.35
+        ],
+        [
+          0,
+          12.15
+        ]
+      ],
+      "vertices": 96,
+      "triangles": 180
+    },
+    {
+      "name": "SM_MPR4_Context_NeighborSample",
+      "fbx": "SourceAssets/MPR/reference_v4/context/samples/SM_MPR4_Context_NeighborSample.fbx",
+      "material_roles": [
+        "MPR4_ContextWall",
+        "MPR4_ContextRoof",
+        "MPR4_ContextTrim",
+        "MPR4_ContextGlass",
+        "MPR4_ContextPaving"
+      ],
+      "bounds_m": [
+        [
+          -28.085,
+          28.085
+        ],
+        [
+          -16.5,
+          12.085000000000004
+        ],
+        [
+          0,
+          12.600000000000001
+        ]
+      ],
+      "vertices": 448,
+      "triangles": 672
+    }
+  ],
+  "materials": {
+    "MPR4_ContextWall": {
+      "base_color": [
+        0.72,
+        0.735,
+        0.72
+      ],
+      "roughness": 0.88
+    },
+    "MPR4_ContextRoof": {
+      "base_color": [
+        0.78,
+        0.79,
+        0.785
+      ],
+      "roughness": 0.85
+    },
+    "MPR4_ContextTrim": {
+      "base_color": [
+        0.57,
+        0.59,
+        0.58
+      ],
+      "roughness": 0.88
+    },
+    "MPR4_ContextGlass": {
+      "base_color": [
+        0.31,
+        0.36,
+        0.365
+      ],
+      "roughness": 0.42
+    },
+    "MPR4_ContextPaving": {
+      "base_color": [
+        0.54,
+        0.565,
+        0.55
+      ],
+      "roughness": 0.95
+    }
+  },
+  "source": "reference_context_layout.json",
+  "scope": "Context only; no MPR interior assets",
+  "samples_only": true
+}

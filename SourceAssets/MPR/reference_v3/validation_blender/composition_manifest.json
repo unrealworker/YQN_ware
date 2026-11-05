@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "scope": "complete external appearance only, no interior",
+  "sources": {
+    "architecture": {
+      "manifest": "SourceAssets/MPR/reference_v3/architecture/reference_shell_manifest.json",
+      "manifest_sha256": "c4375e182ca489534d48254863957cfe06bb6e0de26c1da416151fc045802de8",
+      "blend": "SourceAssets/MPR/reference_v3/architecture/mpr_reference_shell.blend",
+      "blend_sha256": "69d7dcc87f34e8f1150c3c5f9ad80888df653f992eb4216ddccdc9c4d483c052"
+    },
+    "site": {
+      "manifest": "SourceAssets/MPR/reference_v3/site/manifest.json",
+      "manifest_sha256": "c51641a823fc0aedd24eca6ae23530924632242f37205283d85bc7abc8abe90c",
+      "blend": "SourceAssets/MPR/reference_v3/site/MPR_ReferenceSite.blend",
+      "blend_sha256": "d2d24865e0ecc411f5ad9561062985121867bfcfd79e6c7cfe207ee6adde52a5"
+    },
+    "props": {
+      "manifest": "SourceAssets/MPR/reference_v3/props/manifest.json",
+      "manifest_sha256": "acecb6456cd0bce4c948a90de7959d216f819fbbafda1158540f75edc046c715",
+      "blend": "SourceAssets/MPR/reference_v3/props/MPR_Reference_Props.blend",
+      "blend_sha256": "85d2c292876e47d9fe65c2fd2da43fad8d5f8549e71cc5cc3edee9ac6b1dbc26"
+    }
+  },
+  "geometry": {
+    "architecture": {
+      "source_meshes": 63,
+      "static_partitions": 44
+    },
+    "site": {
+      "source_meshes": 66,
+      "static_partitions": 66
+    },
+    "props": {
+      "source_meshes": 11,
+      "static_partitions": 0
+    }
+  },
+  "instances": {
+    "architecture": 726,
+    "site": 3993
+  },
+  "output": "SourceAssets/MPR/reference_v3/MPR_ReferenceExterior.blend",
+  "mesh_datablocks": 141,
+  "visible_mesh_objects": 4829,
+  "total_manifest_instances": 4719,
+  "props_display_objects_imported": false,
+  "validation_boundary": "Blender source composition and optional rendered previews only; UE acceptance is separate."
+}

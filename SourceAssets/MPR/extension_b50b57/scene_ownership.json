@@ -1,0 +1,1599 @@
+{
+  "schema_version": 1,
+  "owner": "mpr-extension-b50b57",
+  "namespace": "/Game/MPRWarehouse/ExtensionB50B57",
+  "map": "/Game/Maps/MPR_CAD_Warehouse",
+  "importer": "Tools/MPRWarehouse/import_mpr_extension.py",
+  "baseline_map_sha256": "ea0eb9fd1c41725d282530b4429e7109f7c148473468fe86748e40bb2d401bb7",
+  "pre_save_map_sha256": "ea0eb9fd1c41725d282530b4429e7109f7c148473468fe86748e40bb2d401bb7",
+  "post_save_map_sha256": "b7237b66ea830f29db959d258e85b5bdd01919c390ee1fb8382f93c0169e664a",
+  "source_manifest_sha256": "446ca4c4b9c678ed5b3a6beccadd70929bdc57c80e58475de9e9cb07235249e5",
+  "source_files": {
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Rail_-2_-4_RailBed.fbx": "cdaf60b53a9ca38b6c8443a6e40a320d45362c4f7460b642d573b86524641a0d",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Rail_-1_-4_RailBed.fbx": "ec07ac528378c61c8709a5e47c45026fda328755c404a30de6758af7cbf8b284",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Rail_-1_-3_RailBed.fbx": "3c0dc947c5d9f544e6d1796da93fccb5eeb3f5764d79bece62b6211e8c9076a9",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Rail_-1_-4_Rails.fbx": "b1b5fe5350782efaf43f7817a26237ae7cd38edc0813e70c77a1fb38ec72d6e0",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Rail_-1_-3_Sleepers.fbx": "0edefe703e46a8305a1d1b5e0040199077541a19ef9571952b302209c53a6e9a",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Rail_-1_-4_Sleepers.fbx": "493f345a1f5920b20f428cfa1b0f2504a5b8739909cd94ca1e50879092f5ad84",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Rail_-2_-4_Sleepers.fbx": "d6f1a56209d1fca0fddfe7fba0e7988415c97e737fcbd75ca23eceecf5377373",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_CrossingDeck_-1_-4.fbx": "fad6ac4a68ecc429b84ae541c0d675b9bf795953f3125d7ba6d9aff8a2fe9d5b",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_CrossingDeck_-1_-3.fbx": "84165691cbed6de2b70488d228f7779c3e9ad9dd80bd9ea3b90020304e7e0e63",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_CrossingRamp_-1_-4.fbx": "1a437556428fecd61e586d36711a28c4677570167f7eba6909e5a3a2cf4b5ce3",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_CrossingRamp_-1_-3.fbx": "15df6c2ac435602ebf2a34943b77056b1a363e2278ea6f62622f6fbc264b2e24",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Water_2_2.fbx": "8bd2afcac0c12e46c95f0108c46b11c93028422474b7d3449bdb640727971e98",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Water_2_3.fbx": "d2cd3a2581a4f5eaf63327142cf5149fb593bf7e86a0bf262d7eeab4ec3d9ea1",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Water_3_2.fbx": "30b006e1aec043e206f8cf48b14e31216efc7764a348ae7717e82cc695f6fa62",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WaterBank_2_2.fbx": "6ce169805e42b1d1fd60f11aa6a3a8080f659a5f6246ef981aa648e8113a9bba",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WaterBank_2_3.fbx": "d78ad5d265e14cf38204513a628a344cbb27a009cff50056c207ebbeb8df92c4",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WaterBank_3_2.fbx": "0e66378dcfaa13ac0819b971fc954bf8dcc956bf927a5cec3fb4234ece7fade6",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-6_-2.fbx": "742919e8bb56457d71f3d4f45f35fce0cbf1d9d97c68811fad1947cccfe06510",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-5_-2.fbx": "33c0cd8884dea5b310fb21e488516bd6b495ed2bdb422706bf1c102d9cd94535",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-5_-1.fbx": "6554c4b7c3ec733d473f14c46f187d7a1fd0c0ed66d48b15b60594f1e7325394",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-5_0.fbx": "ccb648dc5857bffe5688de51b07994d18927537c811a632216b49d6a5db633d6",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-4_-3.fbx": "7dbba5d9a351a231ada01d91cf4002744242d6b3274e25f6c8c5b26fccce8001",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-4_-2.fbx": "e56298d166c14c5cd912600bc2a567b07ed1432359911bf45012dc79653511a7",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-4_-1.fbx": "d169a6379b930966fbc39f133c3f86192dbcd5488276cc1d5b524e4bb8929274",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-4_0.fbx": "56013cf00ca559a9298e9b37d25a3be19a1226c4240c667c12e91635bec9cc34",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-4_1.fbx": "37a848d3e17c875b536433210bca4b9db7d576200e1a87e5043ff57aa7abbab6",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-4_2.fbx": "5af404217df92dfeaa44946fa24deb1c946cb03cd15b9b42d61c1e16b1c6743e",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-3_-3.fbx": "3b375569354ea4a9b934687eace25c88e825cee06baf64e0a09b1cadfd868bce",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-3_2.fbx": "c6750af7de0ad318cb0324609f534e5bec522e77a40b5d690c90954b7159a1b0",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-3_3.fbx": "5469ab60aa64fc678c52d12df2cb0a5057f87c6e80661332b0c5be1bb16c0c1b",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-3_4.fbx": "67130be690aa618cb69a5303aad17f1cee8ef4375c432b45908d073e9e8706d4",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-2_-3.fbx": "434715952e198a5aebd83a35381fbee5db7f5faca847062a7b44d1559fc023c9",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-2_2.fbx": "8a750a0a5c1e86fcc43220c4ffce714a9cfc01ab8ba791e1c19a37e026bbff61",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-2_3.fbx": "9b5b0f2487380bf3914331beaed466036689db9023c8452faf4f87736fdb93b6",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-2_4.fbx": "d1bc56d6d8fc09b91fea140538b566d07262d4a86edeeb653489f7998c329d61",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-2_5.fbx": "1a2f7682c0c6cba379dd717df0ba5d60ab4910d80421e974c1ca0333c56b9637",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-1_-4.fbx": "3d949f0e0c184bc0342e2bc5b779243a59320204c3262068c5c80bf6d44f348e",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-1_-3.fbx": "4f16fc3b7c2dfede896acf97173390e01f6650b6816a8d00290602d9f9752d7e",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-1_2.fbx": "6b7565b0f1b7f701f81c2849e7c003cc3aa5667ca568f3556209cd10f5e9d7c3",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-1_3.fbx": "133a978c81421eefb884f9257633ed7dd0694414454c4dad38a81fdc5515777f",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-1_4.fbx": "1ebafe5b73f3be6925ef3a6b3102b8e996b30912c227220e4e4cf241932a777a",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_0_-3.fbx": "3fbdacacc8dfdbc033abb7358fa04bcc6ebff445df68fbff4e6aac57ac054a01",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_0_2.fbx": "2535671addc601b3e22c90153052d17476e49bf8951492f5536606a6646ed010",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_0_3.fbx": "38ac930a762287271d6ff3588a48a54dd33451c875759c796df0e4e6ab8a0e4d",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_0_4.fbx": "2bb2dd1f1032850a022a5304852eee4d518e9f9d3fcb18f5ecede6281d423470",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_1_-5.fbx": "1c6d96c40b947b9dd75094e2455313b530ff0ba6839043d36b0526fdebaa9781",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_1_-3.fbx": "8c08317fe759a7d30c75e57f101d13858de5c35035f67ef1ad4d73fdc6cd29bf",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_1_2.fbx": "85a00ed0ce5e26892511fc34d37d254c6ad2a7abf5630579bf0cf8a9530cecd1",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_1_3.fbx": "192b82f72619b06d063b20357abef604bb2b745cc7dd049695ce1d9a8b08b9e0",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_2_-5.fbx": "bbdca41bd87b73339085dc96bb14a950efc225319172a27ad823086af52008d1",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_2_-4.fbx": "93bc1f1fca1da72c5895fc59231e8e5e2dfff465b4b8b589246a454abcb0860c",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_2_2.fbx": "1121c5a8b12bf1b941884bc2f9b03f17fe4b11b3449e877b83ecf8d71edef083",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_2_3.fbx": "bf590b60964d2eece83f28d9dc4ddde12236951f6986212ce9c8f8af45240e0b",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_4_2.fbx": "8247172b6cc13a53d0d5cc5854e9d6285dbd872a2c13a4a9eac08c86addcf152",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-5_1.fbx": "1471798dcf105f56d2f1599627695185014d7d5206fbcfb1850506a3281b251c",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-4_3.fbx": "2f59ac4992c88737d982c3b91c27c9b18dedfcd80a0b9179d710372adeb9bbac",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-3_5.fbx": "7f469062d2896ddc5ec1db082b73d93ebb22fad315f96d7ced00a3a9d006c03d",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_-2_-4.fbx": "8b5789e9d2cabe2fbb79c925320fb13630b34ae7e6f32b3ed48a3fb5500454e7",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_3_3.fbx": "df9bec59962797be74d1429d50bdd5d348f79d9ef86a885e7f6f8def9dcac8cd",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Roads_3_2.fbx": "2ee3d7d8781e1e1dc32dfe5a5946c857dd2c7796cba1b41b4166514535925280",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-6_-2.fbx": "9d9bd1bca4c4774931d3de45fa5166dfeae5d811ca58337c69a3c857f17b89a2",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-5_-2.fbx": "98da0fea0d7d687c3cc328b2e6f73ed6bf32bac666cf2bc7bfd0de4dd464aa17",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-5_-1.fbx": "e96816ad3eddf9e0049b3778e46cf90e73e916b142b9d10b793b1d80633284bc",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-5_0.fbx": "4ad0721169f2372eef15f0d827f87f5bdf83de4dbf73cce6b8ead411db6c7db1",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-4_-3.fbx": "c105464b3369db5281216ac8a079845d4716854e3d034682ef438b050c078d65",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-4_-2.fbx": "891730fe159ce7cc4534614a4dae8c899536d76b0e2cd92dee1cf24dc78e28fa",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-4_-1.fbx": "1cb67175ac0b0be095c34580dd8f249e83ae6b2592fde02af696619de7529234",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-4_0.fbx": "2e565c039aaa5e977c57584b09236a73c30a77c27a97e501fd407ac7bd96763c",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-4_1.fbx": "7acefd90e1af9997ce64367d72c91151f9c2679f5a2da7763fc03729d9704a24",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-4_2.fbx": "e88664818053aad32f3f25a583c653b0c206df56bbefc7df4c9d8e1ce5fadedd",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-3_-3.fbx": "1f3934e44c90858ee892599947e2755610a642c5fc68d7bdf9f7b76f540f1e79",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-3_2.fbx": "b4535839a77b4796ebbd84d683e54026e42c02f78d65e215ab6a571ecc8c8f88",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-3_3.fbx": "9e3676afaf76362b2d1f753f72d75b0853303d00fb2948eacf0b854e3f337d22",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-3_4.fbx": "c74740086b605083a39d8f7c969f9526a2901e82cbb596c20699f3f29e38ebb7",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-2_-3.fbx": "68a7e5ef3f72f4f0135845e7b26fa7ce284beeee983a0be9e21d8a7cebf736f0",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-2_2.fbx": "733b953e06805a2e3a5b74096b5d86b367c7684f24ac2162bf1efc2e819888f0",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-2_3.fbx": "17adab31f28d948bda69522eaf0243a79a84800f09ae15c41e14dd02481080d3",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-2_4.fbx": "e211413a6956ccf47b1082cc7fe5f25350c147852db24c5f1c5d688a4cdc7bc1",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-2_5.fbx": "d3bf584a448678147b11d8752b38e1d7429cb196693805ccc5bacb18981075c4",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-1_-4.fbx": "266f4c402743068abe945e85d1e7e74d158fcde180ccfe30d5e11f267b3887d9",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-1_-3.fbx": "f0bfd988e671e10f72638e064300eecca597c3783c9e49ed70ddb75cdcddf1f9",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-1_2.fbx": "5e51d9f28cda7b466834f02c7b0927a32673a07c8a631fcc89071b8fef2379b2",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-1_3.fbx": "d4ce0f6a358ff7425d9a09780dde1a4044146d264e0d443713e722a4a32dc631",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-1_4.fbx": "b53cdd47583f729c6b7c5279fa4eed038a0a3fc6f7fadd29acdb8e16dbda691b",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_0_-3.fbx": "96e4334bbf7656184259bc5d04cf3224daf250a547e06ec6e608b6bb2ceb39f7",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_0_2.fbx": "7d96de1a92d2d91b7cdaf49e0b416f3be3aee33c9f5e1464cddf663ab1ce14d4",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_0_3.fbx": "eb1fd6ec395e16f8c3705a329189931369bc8c8a08d8b2c4ded2a3fb3b245052",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_0_4.fbx": "ff89fccdd289573e13f3dd04e9d3034b50454cfba23cc1d211925b75e8978943",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_1_-5.fbx": "ee4d070821bc9eebcc5acc554a1a66ceb699ad2785cc869c3f08590ca2164bd2",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_1_-3.fbx": "9113f06899962f784a102ed1900f328c3582c05d13cf1602ce8000ae79f07838",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_1_2.fbx": "ef2b695638494586f477a02a6c00ce0755bc2e1eabd7090b0689f4143fbf2610",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_1_3.fbx": "4c8c67debbcb2b223a7019f4605046b226cca829991f56dbe50507cfe2b4a1ff",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_2_-5.fbx": "0b3a5361429e32e160a948f322a2143aaa94d820f36bca382d0ba471daf6ca8a",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_2_-4.fbx": "0cd7ad37a92ea12a9af67a72bd1a7cc236cf4ff26450b758bf05698d182f4253",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_2_2.fbx": "e27e0b340bb8b56d354f499f3c67507979879d24d10e04cb7da8dc6a00f69cf3",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_2_3.fbx": "89bc3fd87659b4f579738c9b5d43c7b9a09b2f12ebd3497500b7e3a879f16bf2",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_4_2.fbx": "207abb9595d489cf4870ad909299518c8d35a337d50ab6b9bd013491c31b975d",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-5_1.fbx": "07692abe89b5dcb42d5aa04220719c3a88ab88a3f024d4e877b236253b9dd837",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-4_3.fbx": "a18d114e7deb949cd6be97d4ecc480e1c5b6be38cd2971e9daa9042ad18cdf73",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-3_5.fbx": "91cb69650440c29c05854e9b8b129ab3565841f32ab29f09a0ac5025a95499b3",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_-2_-4.fbx": "d313902818be16d32b2d9bf88bbeab5b020fb013909d236d07e0dc37c80d6036",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_3_3.fbx": "b54ccf39942832171d48aa71eba8207f431a56198a8e5c882d8cf73cdf313284",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Curblines_3_2.fbx": "5c63a8e65b1a325a12081361d71aec8fb9351a00a968a3d431ebeb1d4ea1dba2",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-6_-2.fbx": "78433237c19e85c70510d7e7c4312129ff7343a20ce1096ea96a9ecb81e4d820",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-5_-2.fbx": "184c485e5d68ac06662e9df1b8f656dcbc79ecbc28d32ee22f61ccc30ae6e93a",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-5_-1.fbx": "0b7b7fcdf1d93aff20daf5ffb1a5d8b9284828318121c753e9dcb3ced7856d45",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-5_0.fbx": "bd3798145bff262849b1417c5d9464f0881d3cc6d5f94348956307468ca7012c",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-4_-3.fbx": "3228a523870aa6f99a4b8ee16b0d7fee7c066f894682cefb7d5379393f36c60a",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-4_-2.fbx": "a27760c5a230e281f7d33d75f74c2cb239cabaf6c865e05748c564adb53b5193",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-4_-1.fbx": "1544306c428ed2df59eff06c1f2720706070134ff93503a8f987e4791beedec1",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-4_0.fbx": "6ee83d72853e7bc92bf8e36e955ce653b6c1fed690ae95aed012cab7b24f5995",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-4_1.fbx": "18f93f95713ba6279a25cea9315aeacf9f857722fcb5f99455d82a62afe17470",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-4_2.fbx": "3139388a280d28e60081e01220238866483ef28348820874714322dbf7b1a57e",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-3_-3.fbx": "2f2d667fd7dc4be0c75554ca68121e4fdf008172ce9990c9383eb6cfbc651ecd",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-3_2.fbx": "2ba0382a452961be31f09aabf329f9d097fef0e694dd5e0248dab37dfda23490",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-3_3.fbx": "4d4c6002d9889e293ade1d21286edbd271c51d8f3ea11f3422acab67881f08ec",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-3_4.fbx": "5ecf496e7d2c57709f102b92f45058b9d894a4a5f8aa56b986b8dedee0a302cf",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-2_-3.fbx": "60dbb59180f35a31b363682d2669e9fdb10c9393f4cb298a70139cc83c2c5936",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-2_2.fbx": "ba447c86f713580979b555d674a0204f3abbfa7b909052edd1d3156653051367",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-2_3.fbx": "08e69598363b36e0c0a2f96537ffe670f5f137cf57c724d770d3163b5a737946",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-2_4.fbx": "11b7340d6b9e38d1e6c5cb505c72195147561b293ab258257978571e22e5feba",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-2_5.fbx": "2708122b446b0a95b56722db17dd6dde52d138624f12e711ce8b81e7291930f3",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-1_-4.fbx": "c9c92fc7d97edf2679243e22ecd6f7716d77de3e323330be779f51db0b07fc00",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-1_-3.fbx": "c1554142e0e3381cfee225095ae4b3867ced90041eb3757a2eab232a6e3f2122",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-1_2.fbx": "3e08deb3f3a11c41054873fa8358bef686b19a2cdb42cdf28fe7e83d5c17477e",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-1_3.fbx": "8119a3d79189a6b62f8a69357f8cb363fa483dc0ca5411ac6386c29f602296ca",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-1_4.fbx": "78ad9ea4bf645a94e976fda9c7fde84bc46b6d819434bce62719a449fc312a0a",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_0_-3.fbx": "9dcba6c16dc5f5db5942518421975f46a619f743ba073367bd6556d7193f8041",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_0_2.fbx": "f977b982330b54f6a50fd12583c31f925a586f40e4cf27c4a697653b25b421df",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_0_3.fbx": "819bd5b748498ea151f8f907b09e6195c4e871c51835297eea65a248e5425b0b",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_0_4.fbx": "8fd44375695a32f1c1813af24a340e3ae1ce6843aa65a5818743ebf5325796d4",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_1_-5.fbx": "7bac1ddfa395882863a65d9e0bb778cf8a1fbda1d86388a6fe7fc5e9cd9564af",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_1_-3.fbx": "65d29dcae7654ec7b16a252e4a3b92619cf9ea2e5374c2b8f5c36ba45ea7d666",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_1_2.fbx": "88995d4d11d626a3f5cc5165792893f9a59000b82e6e5b1720d2bbc05356e341",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_1_3.fbx": "670ab9418ccf6ab789b5d39454387df14cd5a0217cbd857efd178329162cbdd5",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_2_-5.fbx": "db8ee60edf9e3f92c0d6c5d689736cc41e3f9c913081282e5e5b439b30c14a14",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_2_-4.fbx": "9d951a67312dedf0cf65a03497e62df022ea7cd88d03259bb19a40cd59244794",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_2_2.fbx": "fc3ae3286c9a6b862363844a02712b0954401894c92d9d9821a6ec589791de72",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_2_3.fbx": "19527d8e1ce237f33605d6d0f23814b237be3cbe0c21cbedc4b60f1059cc11c6",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_4_2.fbx": "57eb92ca9d7ea789a479e7a33a1f2d9c3232f80ef3fb38164c778a867bfee67d",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-5_1.fbx": "39d41ba62736f046f583e0d1ac42356d3f34706fadbc2c0139a080e5c3e957b5",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-4_3.fbx": "5f6b39a6f2220433fa43b7c4f89795e1fde95498b2d74300ebc9525e0fadab1f",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-3_5.fbx": "a35b080ce33a9a40881f437d20f19f847453debd9ba3325d77c11da21e4fdc42",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_-2_-4.fbx": "fd1a2cb101874e70d6e8c48e0aee96e4247f703ca1b8fa00256e4c495bb2a418",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_3_3.fbx": "dbb59dc5e4881e65e6798a5d9ee2151e76e6e0f3fd85db4a1ac9b32ba082d141",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_WhiteEdges_3_2.fbx": "a5cbb632e496e0e0fdf196845bb61fa4b9d32dd942ee5f5534cd2a09694749e6",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_-4_-3.fbx": "e0071858ea05b07443a25f4a51268942cf515235b5bee9a04a31689c7841428c",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_-4_-2.fbx": "9016ea2271b591e4daf7cec5420fe797ec34f2b2c08c69872e444356ec1cb88a",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_-4_-1.fbx": "89b1f86bc291f762c8aa7b4d686ac6dc176ef725ab4884a956b63879f500d877",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_-4_0.fbx": "04149f9e89e82dd5fb4cea579a56dde507d75500115f96b1bdf2e05b629a0da5",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_-4_1.fbx": "e8195870c62e6d34ee945ce92dfaa3b2a4cba9a1850d3bf074da91c0a1908541",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_-3_-3.fbx": "817000c6783e9f7b72674acac36d761a07be6ba84ebd92090561ae9b1e78cf8c",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_-3_2.fbx": "851eead915df49bb675a1e233f49e1d6c3fea4e87c1ae9dd0209ce226cb70411",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_-2_-3.fbx": "c819965ce1e0cfabc2929b46cea532ef24474c64ea5447dfac7f98ab0b48fd60",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_-2_2.fbx": "4e5ab0c55b6c08f7ca5168be4a2ed749ea73bdbd26a891b6730f0d8245459caf",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_-1_2.fbx": "623dee60e06625572f55cccae0b04c493faa97f69002861e53b08f3e8a80de01",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_0_-3.fbx": "60b5467e3660cd2ec824f5778320f16119b7716079801c744dd66f19c3250521",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_1_-3.fbx": "9ad71e8360f542dc1c7c16fded5e484262adfa25f2992dd5d74f210e6eebcf42",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_1_2.fbx": "82871686bb4db139ea06797b94e656d727a3cf90c8e64ef26905ecde23485c54",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_2_2.fbx": "3bae7cb3826756764c14af0a1d285004e2574b9e1ad9766c022f996e19685ab3",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_3_2.fbx": "c19da4de85ae54ae05a0f52ade90a73bc335fe97ba5695a5fc138a267c02765c",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_RoadDashes_4_2.fbx": "00bec7dee6b3c3f3441a9037b0869b4c2c74d405ab9edc7ac4e9cdca4a23e775",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_ReplacementTerminalRoads.fbx": "7c45d3c6506999a131e04b50027d103adee2fda70e98edbe3723c88bea8e7b93",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_ReplacementTerminalCurbs.fbx": "a6a234cc64f421cde13190f1b5e6df03fdb9637f58e4646bac0dd336607b42ce",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_ReplacementTerminalEdges.fbx": "31e9dd9681617f02db13cfd72fdee69e52603902104494ac71a33015dd1e52ce",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_3_-3.fbx": "026bc4c490bc0ea7ac689787d7f783f551f1906e581ecf1ec07bec649c17318f",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-2_4.fbx": "53a2b0ea12c8fe32737485932dc1b451aa8d637db12bff225089e6a3d4026f22",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-1_3.fbx": "e38446cdb98db101b614b60af0bf84df5436bc8412d3359f9a302d4b5e71b2b6",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_2_-3.fbx": "fd0949a01cb9bc7596385f864511d83c7d3c41100150fe7f53eb6422775c7a10",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_2_-4.fbx": "64060bee7c2355942b82b3e2cb1d4b8e979c2fc264df2d28563617b281f5219a",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_1_-3.fbx": "e565f153976c494a1a7666c320637acf56517785c99131f60be98ebb8b5046d2",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_1_-4.fbx": "e226e20cc4dc60f6a624ac24bef924bdc599f9603de51efa77b9e08169c655fe",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_0_-4.fbx": "97b8ab3e2557274d44d18f974c5a12755b011fc9e11fac31224b2f39b52b3b6b",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-2_-3.fbx": "760003ac483b767c4a239b2fa0afd63af997b143bdefd7655ea06a59bc7b69b5",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-3_-3.fbx": "34a8810527dc6f2490c3c334f020d8864a2bc87d128f25a63f4748d828b3bd0a",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-3_2.fbx": "1f7d13b36f4c8eef170ddece2d7fb565c8e1d096de0f9055110679578b6b5b26",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-4_1.fbx": "3df373e1b8bc06aade7151c20a606c9a88c191fd99c09fb223886c44a1e4cc88",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-4_2.fbx": "d54665fbb36aa422169663e540dabeb82c0f6a8a8c070847401f3184a44e936a",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-5_1.fbx": "a212d5821e0a305ee720630acd14436afa243825457c406c06f6df09e0de5386",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-5_-1.fbx": "36852ec2f0b4ca48dbc585b02de9dd1bd50882d43d44db030f31d025e0a78ab6",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-5_-2.fbx": "95f3b8a7b27833d615c67999e6839c534b9a85d9d46bf0569ba2a7e4132cee9e",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-4_-1.fbx": "2f52617530c5aa3d79f6fac5492678796be89817a98f66a55d29ebb799106ff9",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-4_-2.fbx": "858e2c07ce2f0fd8abd6ee4a27907252b33db8e26cd23db89760b252bcac8f33",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-4_-3.fbx": "e60706da367e2440e85b97b7096d96b3f71150407cabb4084216399244d153b2",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-6_-2.fbx": "ce8dd43b2917e4b1993bd76fbe9ad16bb55f573ee0fedab93dea5f9ed6f5f981",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-3_3.fbx": "2fc9d8e7d815800e86f0d009a593999cb694d8f0dac3672c13e39609ce6c4e5d",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-2_2.fbx": "5cde2b23c7dd98b01e33c575ae316700f6c51fc3f645adb845f213ec88be18d9",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-2_3.fbx": "2201f5014ace5b3dd061f07f8b9d287b1f967761a8047c24b8d8432df6295a85",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-3_4.fbx": "624ed02dd0479fc344b221086594b4f70eafcb6c5a4dd78376b78b8abb95f768",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-3_5.fbx": "40a212fb9f6acb02cc1aacd68e80a9918bc5847c717804b3e03c5d0825a603fd",
+    "SourceAssets/MPR/extension_b50b57/SM_MPRE_Context_-2_5.fbx": "9ea7fa6928f03a5aeb9b0b0a6158994e20490d34b40a8b764aec12ebf4a45a07"
+  },
+  "packages": [
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-1_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-1_3.uasset": "84b293cea731cbd88cbadb6ae8f4e76f5ab409d93c6b91e48eb6f6aa9f83a176"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-2_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-2_-3.uasset": "71b1ee27d1f173f65be36cc4dc6649c63d3039accf66db5c3f3c4f94c3e110a8"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-2_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-2_2.uasset": "dc29e2caadfef5fd14987eaf4308e1b4d808d2a67846f10b92197b6d16d86a10"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-2_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-2_3.uasset": "d782546489302feb84680cbe9912abcea31f4cc604986c4ae52890c5f73eb804"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-2_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-2_4.uasset": "40c37c1ddb61dcf840df34f71c6f9b82c053da6ac0538fcfcd0036be0cc57088"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-2_5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-2_5.uasset": "25149a0717cfdf6bc1f44960dc6d40b4049f14729120b7cffca70835cea01c4b"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-3_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-3_-3.uasset": "7a2b911e089046860412f1b5b8b4ecde5000e645e60927bbf870cc5cc9e9bcf1"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-3_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-3_2.uasset": "a241cf35e84d0f6cfcbb05626864b405aaa9cc95de6c5f933883304557ede107"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-3_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-3_3.uasset": "44533d5288cd7360552bf344f57f2a194df7c7144838a509be7b3306d80e2ff5"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-3_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-3_4.uasset": "baf1cd6515404a7fd8bc97520ea45ca91fb835dc898734f1612135baa3af5cbb"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-3_5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-3_5.uasset": "88de9830c6247709874e884bd3a710ad341ab4e2d73543ceb66fa518ed3d8314"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-4_-1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-4_-1.uasset": "26a1045aa528da83ecaf7a1b5b2031d393d7dc22340ab4fb9e12e42f7ba3bb31"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-4_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-4_-2.uasset": "50c0aff181695c103421604a19b0fc9aabf3062cd7d2a4f6bfba868504c2f2dc"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-4_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-4_-3.uasset": "536df6b95242fc7de67ab8c0e14918eeb9dc39ff8b0ae763b028d157b20aafe1"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-4_1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-4_1.uasset": "53415dc5655b593ed8f53940f6ce6f63dcebb91729f519627d9a3e2fd82c88dd"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-4_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-4_2.uasset": "b3fde966854117eca2dc2534a7a4ebbbe2947d23fffb7824a9beff88cfae00a2"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-5_-1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-5_-1.uasset": "f7019b0597e42a830a55879183b61f77e0c9987314d18c7db0e37467a7b1ea85"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-5_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-5_-2.uasset": "e7252163bb50284d725c124491564e95f290e5c0dd86ac82b2f9b6f132a2a090"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-5_1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-5_1.uasset": "39abeb5d11c0ba67e5c8073ce90eb3b7cd0287f3db8aec071c579aa9b1b3a994"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-6_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_-6_-2.uasset": "6a4f43ebe29c95f99dcc6387242ec3d820a6c0d67d00de46657963bca1ef4139"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_0_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_0_-4.uasset": "7170ebb439e86a94d0d0a5d361d706aa2d7ad50d7db3eddce0a2e5fb8852e157"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_1_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_1_-3.uasset": "d67aabe6be5ef6685a59cf0a993d7bcd96b3ee6b97c04b6aa6109e7a6c171a29"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_1_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_1_-4.uasset": "ddb3f9a9ef1173ab8dff21baa34608fe383e379e4620a67509b32943a352a344"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_2_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_2_-3.uasset": "26ab45f8e51b10cf29b227e01a054454365e15278eb3a6c3332de5bfeb192ffa"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_2_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_2_-4.uasset": "cc833bec0fd21e0113d5c602da78c425b48731677eae372e3d5ac34148e7bc80"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_3_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Context_3_-3.uasset": "0b3d22964bc1b7dd7e926608bd9611c0d13db9894a1e6a8daba10054ecdf2db3"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_CrossingDeck_-1_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_CrossingDeck_-1_-3.uasset": "89c7e6102bf3d82d35305b91f08e9c99aadf57d6ecb568c76940c6a85d2bf0a0"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_CrossingDeck_-1_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_CrossingDeck_-1_-4.uasset": "572ce10f16a9d4eaaa66eeea2ec11567f79f9d590482e76833d58b7cbaf926fa"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_CrossingRamp_-1_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_CrossingRamp_-1_-3.uasset": "de657498aec112c98fe8fd0159198fd6573d15aa0ef6a9e26697ab6404fd88ef"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_CrossingRamp_-1_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_CrossingRamp_-1_-4.uasset": "3661fb74bd8beb2915d28eb01c8f3dbb45a8622a4aebb8f6dbf742995302a312"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-1_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-1_-3.uasset": "8eede4be478d3d11f82f6920c0cb14dabc24bb2c0befdc5de431e2de1f8b668c"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-1_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-1_-4.uasset": "778cc371dc9b076de4c0e636da84756e65234fb1e517a70c2e2558488bb8310f"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-1_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-1_2.uasset": "650b07bf651e90a21c37b829bac3cc6d10f96f9b3d8e8a8c637796cfd8a76b82"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-1_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-1_3.uasset": "eb181291b9daa8f97c31a42e7d431137de73a7109722f39f5c185198672ed5c0"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-1_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-1_4.uasset": "fa44e477dd5ea3d46a569fa29c615985ba32c7140acc97219b6fd9ec7f657987"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-2_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-2_-3.uasset": "c8639219360552d62299059a735f1c007cfb6539742f9b288171d7799239dc7f"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-2_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-2_-4.uasset": "3b2a4ba15876037ad52aaf20cd9345c2513f4ac079ff23233a9606e3b45edf59"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-2_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-2_2.uasset": "8a5dd83771980abc5c2ae310c1405d0d5bca42800bd3afed6d65eadabd21bc25"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-2_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-2_3.uasset": "60d747290d15d13af5b6efe34aa6d2868a5c2b433ecf9113aad96293d9296563"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-2_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-2_4.uasset": "408eaf6b1835f7f0e03e4f2cb1e01682e5059a4c1500cfde9216cfb46f6da224"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-2_5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-2_5.uasset": "86ff025a6f4f36a6e4b5d612233f5d61df3090947833821f2c91d9cd5d757d41"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-3_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-3_-3.uasset": "06e361ab3903e060e131a59a6f997acb02d08cc9665b7d0f4cabbe07d3a1b249"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-3_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-3_2.uasset": "d80bc117bca72db455b4ebb30e9255165a94ff570e066661c95fc9b7c1bc50ec"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-3_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-3_3.uasset": "77c83717c1a8f8a06a47aec1bf5c08f762f8b8fc08d598ad24ecb29a875392aa"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-3_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-3_4.uasset": "d317e787e2e42d5535e28cea5ba0d7e8722e6e06cb3bcc02bbc6b505e5b8bded"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-3_5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-3_5.uasset": "f3a0f940d7f589e7401945a25ff0823efbe78e547b97326a9e51c794bef0850c"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_-1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_-1.uasset": "29bd62a84ecd74364591bb54b8f80c2ebb122053a08c4b5d0c4bb25ce8e350cc"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_-2.uasset": "20839530399f52839ca635856508c71b9307aee567335de271735be385c1cbf6"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_-3.uasset": "ae2ac1d6b25513b7997ab4ee59766eca0b5dcbcb4729bb4aeb334234dce45dd5"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_0",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_0.uasset": "a3178f3ff61c0cc010cea0386e11fe111f8f8471d8b458d2d7a4fa9bea03eea5"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_1.uasset": "43404272ce9d07f0a72707e55bb89cc785d58e1df1aa10e53f5f23055b43ee18"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_2.uasset": "d7ec6a14883c081357c7c7656a779b08fdb381cac612dc76286ab5f50ae7dda0"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-4_3.uasset": "cc9f44ab8b9dfd7063e0201d49e49e890c5d2ef5ab912a914bd116b480d17cee"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-5_-1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-5_-1.uasset": "a52cd731d05472d5e64cbe6b86a2cf74d27df396a58a3623d5488f3e9c1fd06f"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-5_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-5_-2.uasset": "920ed9b631e8d6260bb3ce221c558b2e31480bfcee5e343de45795e243cca071"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-5_0",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-5_0.uasset": "24e38db6a56955b0d083d909860caaa2fb577a457b6053e6537711fc6dcefe22"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-5_1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-5_1.uasset": "fb6289ae63c7124dd58e1b295bab1695bca2b2f2a9f93a532d07873e7b300059"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-6_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_-6_-2.uasset": "753b925c780a07a17d56de0499f5b2889032d6b212d36b59055e7da7663d3880"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_0_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_0_-3.uasset": "6964b406951454d9928ac069744b261d466b1a6ac4583bac2b1f6f62aea45086"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_0_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_0_2.uasset": "447644ce8dac8d57af7e42bf7279e7545b6ce256efff40ee5894983d0a432dca"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_0_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_0_3.uasset": "647362dd09d78be9e69f1a86c79a3264efbc9cece9cb658e736f82165ae26569"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_0_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_0_4.uasset": "3d35ca8bec17854567e2d3b6962db0d4566b431491dfa310bd6be33b7807ff74"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_1_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_1_-3.uasset": "c2dc0e93aa7a6b5f855d7021366f4127493f5e79b4f60681901a1ee5793d1b5a"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_1_-5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_1_-5.uasset": "50bd64e59c4c8d0a182a0973dfdb2537df62bf8ce141b8e49533256bd2d2876a"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_1_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_1_2.uasset": "7b4462d5fc05fe4c0949ffe4c61b1cb5181dd1a196f3096e3ce280a05aac4b8b"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_1_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_1_3.uasset": "5ebe3d9ad4fa85cf8a407ce452eb340c4735f708a97edb4659a506f53fa01def"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_2_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_2_-4.uasset": "7ad634ddb2fedd386943898573bf21a75062e6e321822777253b30223f01c200"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_2_-5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_2_-5.uasset": "e0f13f7aa3dd67e76770fc79dffc6295e4c23f18b1fb4ce10b4da056622a8238"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_2_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_2_2.uasset": "7c2d9a59a9e3d82fc1b67d35c7a27b53cfde3e9a991c6d18d2e58adc2b8ce5a5"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_2_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_2_3.uasset": "cd8e46de6f510ef5f56db9ef2281a732ceca05860594a6ee2c82d579c60bfe90"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_3_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_3_2.uasset": "418725717168b8ef8d713d4c4f9e521b2b003791b859611d12c7f591a2ab4e82"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_3_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_3_3.uasset": "f881ebf86de017b5a61f0912447c037193a1faaa53337b4a30fd5e001e711786"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_4_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Curblines_4_2.uasset": "97f7b560378a16ec8eb5b514f358a8b53da13b060fa96c0f3f93085f455daac4"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-1_-3_RailBed",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-1_-3_RailBed.uasset": "0b4868d43c740a8d1e8571fa973fefc11c4359f0710881fe163f3e0a143020e6"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-1_-3_Sleepers",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-1_-3_Sleepers.uasset": "0d51bfe6ed53fef32464fc4f2fdc1510538dfc0c1118ed9cf06e7bddd108dd3e"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-1_-4_RailBed",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-1_-4_RailBed.uasset": "df98c6dbace869c5c015d69b7b5db3d1a0de6d6241b4109df28a828e299d6d18"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-1_-4_Rails",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-1_-4_Rails.uasset": "55b64a9749d605fabe1b9d281e49725bb9ed312cf7f30e4b161e43412c2a51f6"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-1_-4_Sleepers",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-1_-4_Sleepers.uasset": "194944e8b206de55e9d213ea85d26352e9b73c11ea322a8bd765966acf3840dd"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-2_-4_RailBed",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-2_-4_RailBed.uasset": "d4b7f69b4d2f5213e490920d1ead2e1df0ba42764a5419cf2d62a354eeca825d"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-2_-4_Sleepers",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Rail_-2_-4_Sleepers.uasset": "b7ec8cc74682874d93ec831c10d59595b6194f117ee3293ea28a48e14a57e9c1"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_ReplacementTerminalCurbs",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_ReplacementTerminalCurbs.uasset": "11724b34c7f953a758a34cd462bb00ac2e38fefb99fdebbbf01bb3a4136e02d3"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_ReplacementTerminalEdges",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_ReplacementTerminalEdges.uasset": "50a600d82fcfdfa1f56bcf09bd036df0b5c7c7aa0a19ca108ae2f3dd16ab1c02"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_ReplacementTerminalRoads",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_ReplacementTerminalRoads.uasset": "4d9799e1433846678ac391d97401153326d9c644f07806c3ad2c641f30b7dcf1"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-1_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-1_2.uasset": "8ad53526da0b63858f48041fec91f6b1dcf75710e1b117eeea606f1fd2916eec"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-2_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-2_-3.uasset": "5f365772e500dada67c5f2bdb49a2d3a42fd9f2407501341c4825bdead20e3f6"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-2_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-2_2.uasset": "366e0e8606230a656b355c2de070fd700089ffd215476507f21eb242edd140d9"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-3_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-3_-3.uasset": "12850e82ab26be3077f131c31033a99411bbe07a2f691cb965f8115798fe96a4"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-3_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-3_2.uasset": "f626d825cb40363d442cf83eb2a8609c3ec734b96d3fd09dea0cf4dd4e32d600"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-4_-1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-4_-1.uasset": "520fcac2530e50b62e34a9b372e19eff1758fbc58bae5e8ba37cd4d4ba018c96"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-4_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-4_-2.uasset": "1d3822e2fb2cb3dffb8e013af9ce7410666ba5fe8cba10bb2ce9e749c5bfcc05"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-4_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-4_-3.uasset": "4bf4842036e2ac64ed6d6be614a00526b21e471fc7eb62e8897c31a6c9e032e1"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-4_0",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-4_0.uasset": "762ad090883ee77b688c0d707d17cfa4829fea3ac6fe6a560899f69efc0126b4"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-4_1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_-4_1.uasset": "45b510190c9093de4bbbd7ddd08a017ed8a080cee096628c80ee960972195dc9"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_0_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_0_-3.uasset": "e428abbef3dbc74cfbb5dca5ea24ba3fc31e9cea78cda3215ab244d42696f5c0"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_1_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_1_-3.uasset": "4adf13efa41953f651766dae68888fed7be0660795ca8100966bf9c205a96503"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_1_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_1_2.uasset": "f59355377d5bd898fe2e98e6f53cf7a658425d90c87e031f96f38067b8099bef"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_2_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_2_2.uasset": "86eb1022fe73a9d6b72031f1801bd716ff377e4b245d331ffe0d8c041f80f3cc"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_3_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_3_2.uasset": "99177a5db95a8e67d1d680abe6c04834f440389e1515d3ae5dda0cec9e15ef73"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_4_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_RoadDashes_4_2.uasset": "7dfb1c7854d22cb08ce34eb8e1145eeb21558cb3871e8bc3e92840b553ba9eb1"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-1_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-1_-3.uasset": "818633893ae9117ab325f6588f6998a698d83f3bc462b88adf463620e98cde37"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-1_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-1_-4.uasset": "3217f51a53563b3593607c205bc0413c040fd3e0db5993599604ed8d93150ae1"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-1_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-1_2.uasset": "e3715329ebd6340543d3fb5c1e3d91362f7cf796517a0dc0812c8b9b2173ffd8"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-1_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-1_3.uasset": "60760cc860b6de4af1cbfc222703488d4948fce21a2d71bb3322e6f7deda424f"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-1_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-1_4.uasset": "1115e64f2fe50fd2990e7546d6009bb84fffde5c4bfdb32f93430804ec2c1cc9"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-2_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-2_-3.uasset": "f95f29b8b4027e0952ec324b54cb73925bc0f957e27801ccda93ad750ff0582a"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-2_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-2_-4.uasset": "cea36bdc517777a207ed08d9563794490b066471f1bee4e9bb57ed5e489cbba2"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-2_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-2_2.uasset": "bacbae73943e98660e0843e3cdba89e6d8c2b2447e5bed7b9f4772c47ccae06d"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-2_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-2_3.uasset": "786d51fb750cad6a7444f12d09b627650fbfb806311d48f64bf9da4a992c1320"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-2_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-2_4.uasset": "319390322860fb8a0ff4b41254797d1c887245b8093f90e02c0c21d7a13f7fc2"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-2_5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-2_5.uasset": "c43cae7e4819af48b7d1538232f88f175ddc5c67573ede699d8a355c6b31ceee"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-3_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-3_-3.uasset": "5549306c3f1bd0b8bc41cad4d297a5a294a799793e10440b2a012912151a9a1d"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-3_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-3_2.uasset": "6fe4b617b8f57ee9fe44c3799a0749aedeb385cc07fb8a9597d49d1872d12a35"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-3_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-3_3.uasset": "9a99c478d133cfd542727fa09024d32198add1e0706f4e3128a80bc6727195e6"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-3_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-3_4.uasset": "faa1751391a9233c91397378626bc2d5d24305c81ee5d22b8101dc69436b665e"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-3_5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-3_5.uasset": "fe97b95951f8a8a9977f4b9e52e6ebd32b4b09c2e64ea0ba45f654969e4810ed"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_-1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_-1.uasset": "de790cd8646c7a63c5c27a5cd455f69f01c34bbccc59b2018800540f15049f34"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_-2.uasset": "a1f09f85cedcb432e013e01feb8707f2a9c01406113ec7c57735f736bc47ae0a"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_-3.uasset": "6e73e323762dfffeeb79b273e64a262e91f5f394849e0b6343b8d2ddb1bcc64c"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_0",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_0.uasset": "d608fc8ce121a21d9303a92887e5c26401cae75c4a83dfd0dd8355d7d9201cb9"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_1.uasset": "93023590fdf0dd2be68be1a40334951aee0f7c1333b470401e14f8617d1a0bdb"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_2.uasset": "06ee8b5fa0acd340009c54aa36c18e5074d444c2933fef595fe2bac93a1d9332"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-4_3.uasset": "8e80217e8b6567ab5e9c59195a071050e2b78472d43f0b90f7ed62e9d4b77ecb"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-5_-1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-5_-1.uasset": "ca569c6e69689c50f588b238fe7d11bf5a174a10ee0c5ea04172deb1bc53d1e0"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-5_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-5_-2.uasset": "1f83a017b52a0d808ee39261e1d050eaa16a6632530982ee05d17c37e0be3644"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-5_0",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-5_0.uasset": "f8d46cf820b21daf80f6848572042002b394f0771ced75e3abbbbe2020a575a3"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-5_1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-5_1.uasset": "7bab3d4998dbf293a792cf927b377a7abd6f609ea2fa94efd528846aa745b447"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-6_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_-6_-2.uasset": "4481edba666ff2e9dd4dcbab074f84915dcb2cd3da28e74736c0712816f7c03e"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_0_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_0_-3.uasset": "59db8c2306da7d13ecfec8feada253ca476d45be9b220982ee1540bfcf2921a6"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_0_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_0_2.uasset": "4b2ce8a717ff550b7588115c829a0f57d74b625adf9572446af15d84e78e5a59"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_0_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_0_3.uasset": "a4e323f79b55dceceb36dc4ebee946035f6d3e274d8bb9b9e31ad3247e349b16"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_0_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_0_4.uasset": "2629b5eb1fec333a116654139a3715e231d7911b64cc85b331133acc79a51edb"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_1_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_1_-3.uasset": "16a2f2f66139cc57c682759aa3b333c0421ffc400cdee592e41aa13fbbd2a454"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_1_-5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_1_-5.uasset": "0d56af67dd4434be2af26ace7ee3d46acb33435ac3915691f48e5e344f0ef136"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_1_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_1_2.uasset": "625f3190d1aaf5312474701c4271ba18a83937bf357403fa385825277d25cda3"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_1_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_1_3.uasset": "11d8fd99e0026cd7f06ff666c09d25d45e98999dfde0d6bcf64a5a2292858761"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_2_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_2_-4.uasset": "387f98347dbf97591c397b562b7e58a1d2976e0b21f18843edebea5af1e6c487"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_2_-5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_2_-5.uasset": "c8402e0a56113cbcd9f4a53e6a18c3e4c42ec9faa30d218b43e51966a6ecebb4"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_2_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_2_2.uasset": "9fa8c0403ca01b643d79b5a8638bf2bd008c855a916455c97808354a0ef45014"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_2_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_2_3.uasset": "4fb073806a52d773b327c28dcffe49325249d07c130fc29a4896154458ffac0b"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_3_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_3_2.uasset": "87191c0461ff31ae719daad35e70d8a1bca0622da0e2bb58ae684e1275124722"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_3_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_3_3.uasset": "6b4f677ca73de035901d24cb22747aee0d31973e16c2bb6027a1ef88f3e849f7"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_4_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Roads_4_2.uasset": "75ea52711e85aa3361095bde8a8f2c6fc1c3363bcbaff83910609f2281b5bada"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WaterBank_2_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WaterBank_2_2.uasset": "d13fd1619a9b94368f6feafc9049a9bef45aa816cee8b53e1849bd89b48eefc1"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WaterBank_2_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WaterBank_2_3.uasset": "3e2af8c4e4007f39921e2d51f9cac8d2a1cc5e8e9f30b79778163e9820a2d462"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WaterBank_3_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WaterBank_3_2.uasset": "9eb4627fb72344c47bf9bdd8f5bacf73cba162172b7a0aaea41341dd5b6dfa6f"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Water_2_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Water_2_2.uasset": "1257222f5a3620758b046928d76e3cda9482f40c921f83610753e58d8a96ee55"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Water_2_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Water_2_3.uasset": "8d0877f22d7ba10eb31c2658c6b6e49c0664b07094ea3899f3ad232f4a12f4c9"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Water_3_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_Water_3_2.uasset": "03c68afb00e397978b51810f8b0a514a8cd4fe25db03eef20b80096df477b646"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-1_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-1_-3.uasset": "348b5a05194962b793689582d3d48708a6ff24ca043e77ae8316f142baaaae24"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-1_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-1_-4.uasset": "3f46b87c2631e2040f4f0b6714a1478a21b5b7dbea988acaad5f2f2cdc6073b3"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-1_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-1_2.uasset": "76b4c915658583255d9b55fdd6cc8094bb42a113c6cfd8b47e5984993dc9ef52"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-1_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-1_3.uasset": "1a2aac083e3be15e66facbf01b73940d3a3beb763b1caf17e1e391464fd76013"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-1_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-1_4.uasset": "02d0b14233ac65c90972d1dd28034bd72fd9972c7f1a44c2fc9dd701c3763bfb"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-2_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-2_-3.uasset": "e760191891c786ecafb143ea212d38d1ef4b80e1a079985cf839713cb8a3267a"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-2_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-2_-4.uasset": "32ffbe1a407fac0a19503940c5daab7e798e0e0e51f7fc7a256111ac50f2eb86"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-2_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-2_2.uasset": "ad45b277ebb42b8a2d19427e48c91151eb40da04eaa530db5411647ea43d4f20"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-2_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-2_3.uasset": "5c648b8e218ba5007656199d1e2ff95c6662282f3d07a065775e7c88308aaa83"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-2_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-2_4.uasset": "b50e1e460d050e8a4b7ba11f0c854cd289225b069307aba7d1e9e190a2d13fae"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-2_5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-2_5.uasset": "89ad722c4eda130d8b5ae94f0749ebf002cf5dc71610a4fc170a35182fc0a922"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-3_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-3_-3.uasset": "b4df7e0e2b5067eeeb293b96a0ee9b4a2dcdd8375840344f7e8f323a42662309"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-3_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-3_2.uasset": "40ceba7c8776f68cb8c3548b10c68cf714f2e2cf792f25f4d4acef7e27cdca30"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-3_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-3_3.uasset": "db4e05486c9621d6bc4c6e45aacfbac86209c6cc8da43766fb910ceb67fed354"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-3_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-3_4.uasset": "833f605f77a338c1c8f0073b9c5de6536b73cd808cb849599901f7d40502878e"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-3_5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-3_5.uasset": "29399849cfb645517b256d1750c5a82bd668c4e52e8fe5337040d4b1193d5f61"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_-1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_-1.uasset": "ff616168b2dbd13d3014f8312d6cdfeb93d39d95ce985d399150cda6ad353763"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_-2.uasset": "0c82e8bd62aaf95cb522dbdd0b47cdb47ef35a9331d2d7e066a5685d9b2e1f9e"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_-3.uasset": "be79f4020b76a641f7157ee608ce0ae0427f28e0b72ee0df9759d817194177a6"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_0",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_0.uasset": "68bb684c21844ec1e50d612e47e017aa3ec9c83fa08a13f3ac861a397a3c65e4"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_1.uasset": "7a2f67bc355a0a3bd7c1b4c342f997687bde3d23f0da9e41f696685ffa369b8b"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_2.uasset": "efd9ad5a757bb4862dddf8e9f237eb2256c2ab09e40924f362ec3083f3dd12aa"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-4_3.uasset": "8e1ad09650ac086f0800b50fdc33562986436dad5522edc9ca35273270370adf"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-5_-1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-5_-1.uasset": "a123b13b89d8a16e607f93fc0872487bd7750aa149b62c3de32d399aa8bf105f"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-5_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-5_-2.uasset": "7879246ce9efe82b859b01238fc7d12f2460452b900731d5d011d42a941564a9"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-5_0",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-5_0.uasset": "5beb6a4a9a8394b19cbdb8200436380fe9904833b5a2bf87daffce1ec2ff126d"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-5_1",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-5_1.uasset": "90aacac23d96678b93dc4900898c65e631471416eb6a77525b3fc3fbd7be38e7"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-6_-2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_-6_-2.uasset": "556673780219c76f655083cae356afe2448a2de7ff7dec87e137501c079ec4e4"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_0_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_0_-3.uasset": "c3bcabfb3252749574208f3e5a28c18c21106fde445beb6ed3abf5029f53ec40"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_0_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_0_2.uasset": "5737ed934d2755dc424e45946a4054d15933d6bd22e4577327e5506d00d50133"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_0_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_0_3.uasset": "db94c319d33343e25c4d2bf3e3bea25912b39475a59050cf1cc1a32d405d4b64"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_0_4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_0_4.uasset": "6e654d3bef6ca6c8785fca90fcec3ab5bf32477b77411eecc4297c51c292baf2"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_1_-3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_1_-3.uasset": "7c7e5cff772b0d27f5557d6b5974ef3a79247edca940b2eac1f9d14467f10122"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_1_-5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_1_-5.uasset": "e05202169b97641a31135cec4385a2d90f14f93d682b43161f159421948b3f80"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_1_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_1_2.uasset": "9309626c1f2160bd16225d5d9464695cb19a53d04153133d125738adb3b7a34a"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_1_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_1_3.uasset": "874f8e8b9130b4779274594d6e9add5dbfcc796a681f5aadb926e04188910845"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_2_-4",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_2_-4.uasset": "af3a97a67ef0aedfde98d6c2ce96c888716d5e091f1e705e859eddc0aea38258"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_2_-5",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_2_-5.uasset": "b6a6de44b3134c2203113381f63d3d4c66d911ed098f2caee79ce231176d50a6"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_2_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_2_2.uasset": "f742cadb84e6af12befadd021a8ca9055fe0c9f4022642231f07508af93e03ea"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_2_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_2_3.uasset": "40a49ac94d8fe192b4f925f7b9d7d29b22ab411d7ffb9d7b9507e488928da8fe"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_3_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_3_2.uasset": "f4cde0e5df329b5d9ef0fb50037939e73c3b7b76147c3737e91dd649335e3c0f"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_3_3",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_3_3.uasset": "9483e1fc98de01a6136170592bbc35d5a67c8ca3d820a903e5b2e4c8abd8bc40"
+      }
+    },
+    {
+      "package": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_4_2",
+      "files": {
+        "Content/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_WhiteEdges_4_2.uasset": "093f9fbdb2811e2ef4cec8c3c51159246b8e1a9a79638694fe216587611259c5"
+      }
+    }
+  ],
+  "original_owned_packages_digest": "4ecfa22cec0420edcce541b648148df89ff3bd6412f2f45a952b878a4cb34864",
+  "original_owned_package_count": 364,
+  "original_ownership_sha256": "c12a3928a1d603c24363667221b7259f1170ccbd13e310b209556dc6561f5aa7",
+  "new_actor_guids": [
+    "009FCEFF4961A2DEBF6BBEAEA6DAEB39",
+    "00C913F747BD36CDC59389A0D875F961",
+    "01844B4D49FCC5D0F913BF93A41AED6F",
+    "03460CDB40BDC83A36523BBAE63077C7",
+    "03DA2BA742D2BE1FF1EC29954D3D1E6D",
+    "0437166B489EFA48E1C01F8540678CDF",
+    "0450D62846A0EDEB00662A95AA122F6D",
+    "05327842496088021B2BC896E7C69972",
+    "0536C189492221D6BB2E1488AFAB3599",
+    "07EDC514498E2BF0F0F923BA2C1EC72F",
+    "08D29AF44337220F032C639B591EE5B9",
+    "092358494A3FAD551470DD86EED231DC",
+    "09A7225B49E2724E0494808228866615",
+    "0AB60AF045EDC0AD7D940FACC58F97CC",
+    "0B7A73494D3C8C49BB5CBFBD500E0610",
+    "0DBAD7D5427DA30D1D15338CD2FA6D9D",
+    "0DCDD8284001B7D85843659F9433CC3D",
+    "1014C1074A5E91DFF2DE08AB63F75C94",
+    "115296CE4775EF21709409935F274CDD",
+    "11DB08C3417DD98C191AA5817C0F2949",
+    "121D1DD943E685DBD8A577A22A1A1A00",
+    "13E0DD614066E55D8D8D6FB449D50E7B",
+    "1A23EFD04AEB9F286AFF23875F1C2BBF",
+    "1DDF4C6041337B656D1FFCB4826A9AD5",
+    "1F3E8B7A4E85936D6A2DC48BA32B11A8",
+    "202C96964E2828F09D3C94A45C403D0A",
+    "21556A984A15782B1F449186B918107E",
+    "225D92344B64DA71D47CCAABB6BA1DE9",
+    "23C2385B45FDF80C203810AE20E45D6F",
+    "280C51D74E009D4D7F3A1ABF3877C00D",
+    "28A4CBCA40962E74361D0E8CEC72C752",
+    "28C6B29E4A0A002E7D78D495A7382CA7",
+    "28CE82B4482C90C13A89FAB81AECB65A",
+    "2970623D45930F1AD73A8F84350DC86F",
+    "299D9B644ADFB8C363B86F8956AE3A23",
+    "2C6F476B4E3DDB652ECC939542415F22",
+    "30E15B3041660A7E315A478DAD297F0F",
+    "31B15FE1466CC0129F0D32824274F41B",
+    "31CCFD814F99A3147A531CB389974E97",
+    "3291DE624A617C5549C52F96D639E44C",
+    "332BAE9C42429F5FC74A04937E70C69A",
+    "3396042648F405FFC512DDBFF04E4A9C",
+    "3405A3A245186A612310A2A4C43067AB",
+    "34508A4044873EE5731500AB7873AC10",
+    "34AB1DBF4668B0A8F3F404A9E870C32B",
+    "37D5BE47476EA3F8899794AD447A5642",
+    "3852BF6149A6A778957C0EAD0E15977F",
+    "386217CA4AAC89E76C7C899EBAD51338",
+    "39DD8888487D716A6EC45DB1123252D4",
+    "3B23A665431AF7963BDECE9C1FC83DAE",
+    "3BB871B742CC218E8A4D38BF863C2A07",
+    "3C11E558440FA37A3C4F579D44676460",
+    "3E847C2F46168348485CE69F36873DD6",
+    "4080CEC8474D22C1227FCEB526710981",
+    "40858502417FC02F6818249BA9B0FA2B",
+    "40B51B6C4F92B5AA29BF1BBEBE85E8B8",
+    "41CEC50B44FDC0D9EED4B28C108D8B34",
+    "428307424A725FE7CA7312AEEE173E2E",
+    "4418621D4DEADCF55E8D80B9999DA876",
+    "44A5051848B6A3C5722902AB8592E677",
+    "44F00913493623DD5B831187F1558279",
+    "4628D73047B7818231550CBBECD7139B",
+    "48ECF9694EA5E974F6C1DF87436FF147",
+    "49496CD941B337020D5E55862FEFD798",
+    "49A34D81486133AB0D90C58C9CCE6DC9",
+    "4BA845DE4B93178AFCE91DB33AE55019",
+    "4D82F6C24C9E32774A84229ADD08D8D3",
+    "4EB2D7034907546CC24E4AA9786FC47C",
+    "5077C7EB4949C342D154FC883E106B2D",
+    "514AE0B5440154DA0616FDBE709A7D1A",
+    "537C27E343B6EF10624B2D9728D1008D",
+    "54B10A3941446E3CE452B9B85F19AF97",
+    "5625A9C74DA24153B11B458A3CFA0503",
+    "570856F3429DAA759B43B8A7212E5AF0",
+    "579D1DF1488EB644796446A39D0E2152",
+    "57D6ABAA494E1DD6C37C42BCBDD89595",
+    "58AA257047434BF974D2E0B000971772",
+    "5BF767C347213D50A67EC8A6C27BDFE8",
+    "5D46EE1D4F6B42EFAE90FD81989B8951",
+    "5E1EC3C64CECF1B437F23EAC4B358093",
+    "5E39267B463A2F7ED01E909ED402125C",
+    "5F612BFA40967F97F11D438198961722",
+    "5FFD3E1A43333713726FE6843C489BA4",
+    "602FCB644643804AD6B9D98A0C4D0020",
+    "6047B9AB4DA9DBCE08149981AD3AA796",
+    "6337E2B54B07913681DEDA990D23AE63",
+    "63EB559D40A35575C8A62983BA85E8F4",
+    "6587D0A046192D7DDF9098873CEA8592",
+    "65971AE946323497E2C91792B4A76024",
+    "661AF7474F2C9A5BDDA23C9FC334F67F",
+    "66E161314CB4CBBE96F7B9A16EEDB2AD",
+    "6827CEB8443099739FDD1ABDC34B8646",
+    "6923B11B4BA023F0243FC4A98009E0FF",
+    "6BCD29364BC5713F25B05380AE797968",
+    "6C29E0704AE156AF771D59A43F9803F6",
+    "6C5C372A40EFE81E5C1141915149812E",
+    "6D1F6B0040572E413DE088AF276BDF88",
+    "6EF12B5B4F6D35C94C9D0A82CE8F0EFE",
+    "702ADFD54A63A9247608B4A04498BF88",
+    "748F749344C6910E487CE6B48637FF35",
+    "751FE90B420E22F042B21BA3D38A3918",
+    "75651F9B45F3FCB87EBB058A17224016",
+    "75BF708047F92242CA76DE9372F63506",
+    "75F7F5EF4AAFF6B1A6B47B9CEB775A75",
+    "770D7F2048906151AE222B89712F2F50",
+    "77ADD2A7493008CA8036689A6C87E144",
+    "7847A27042B816EABCE240881D291105",
+    "79D3C5BC40AE2F827A41BC98B5829065",
+    "7AF1D7054445434458CC8491BD00F8F3",
+    "7B22A0FF42FBC821C2243E86E17F7656",
+    "7DF143254124ED7A91C1AA8BC2979D11",
+    "7E1E26B542A5C2B978B907A98D7CC31F",
+    "7F3DD71C44F240443D8F5687CF071C29",
+    "800BDFED464BC01385A4CB97FB77C862",
+    "81EEBCE948903438F9892D95B4234032",
+    "829C1E484391D03D5A3878B243383EA5",
+    "83DD5D35434052DCCF717CBB68AAF4EF",
+    "870D8ECA4E0A1118A995D58788A5E4C3",
+    "88557F4E4FE2D5F7823026AE9129ABA3",
+    "8862CE504F0BFD6F5EBDA7A37BDA5B14",
+    "8865628E4428DC783753AE87A10411A1",
+    "89091F9A4BC35E541A72EE960EA1E65E",
+    "8A57BA1C4C6F48CED8FAEC868DA2FE0A",
+    "8A66F95D45FADF3224641299058B5E8E",
+    "8C72D20842CD5164F4961D9811C12594",
+    "8D71821C45F5486070EFE39AA040558A",
+    "8FC26E5E4431FCB87F0D42AF95636EB0",
+    "90A61DF047735DED53AE1B842447202E",
+    "9273D4474885E3B81A727E9073EA015E",
+    "92AF9300446893D89A6654BFBD593353",
+    "92B45ADA4E2031B6DBF1AD809B67BB7A",
+    "939AA25A47789CB99020DB9432F50E31",
+    "96F4B70D44368D4803EED6BB4E4BD4B6",
+    "984F104246FB57F10940BAA0F3467BDC",
+    "98A715584F198CC42F55E2BD76FBEE75",
+    "9CE085D241EC8EB3092190AC94A0E42B",
+    "9E44E2FE478CEA2076AC98B49AA99B29",
+    "9EFD1CE14F400E340C05CF99A233E650",
+    "A07BE47046141ABA6DBAC3B6DF0356A8",
+    "A1FE036F43D4FE2017C86185E9181AD8",
+    "A8C5B61245BF89FF4B540DA6E391EB8D",
+    "A99051F344842C72177BD693ED04FD8F",
+    "AAA4E7F34F2DCCA7826541B7D8A5FD68",
+    "ABA086404AFFD590E3B2B6A06C4B56CF",
+    "AEB0F34B41531CDAD7081C8D04B53C7A",
+    "B129C59A4D3801C81447109818272919",
+    "B27F94554D684984FD18D6A2E45ED6F5",
+    "B283DB3A4A365AC0AF4932BE8F423771",
+    "B3DA40FA4EE08DEEABEFB9BAE53D290A",
+    "B56CECDA49630658C300BDB2CFDC02D4",
+    "B77E43454C72EEA551C58B812DF7A350",
+    "B8B16E5E42E16DE582D764BD8DB09283",
+    "B8F45583421395C13E7F7C9EE7F9C3B9",
+    "B923DD184327FE1E8BA80382472C3F43",
+    "BDF444A647E9B58F812AD2A98477CB4A",
+    "BFBCF5F0494A26C08824CFA5E529DD40",
+    "C002B1B14ECE92A59CE6BA955519CF0F",
+    "C12AB5AA499B85301B894E8FA30FA86B",
+    "C13ACAFD4F9A4A0FFD52F3B8E29FD9CE",
+    "C14986EB4BD417953212BD9FE3D60FCB",
+    "C15E1DE44C4FB7F1B21E92A77A8BE9EE",
+    "C237A72E4D6DE8F04043F2B55E6EEEC0",
+    "C553D6A0444742A3EACAF9A6032457C0",
+    "C56357D84435F7C9B6AADC8DA9907250",
+    "C6906F1D4157845C8D65498811244358",
+    "C706604544A0A75D3425D2A0963E7A0B",
+    "C729C0C84F48B3F203314F854F8E92F6",
+    "C7A2C03142EDF52631BA0B8A48610C1E",
+    "C81E42D94C9E233769C07F949D00946D",
+    "CA0E76C740B954EB1DF0C4B9710C3D48",
+    "CA182C2E46CDEA8D5D6F34B7860F808A",
+    "CBA04A6741B77F56B7A83A8AF016AFA8",
+    "CBF2A14249F1F1A1F14AEDBD48C1FDEC",
+    "CC3EAE484C36A187F1E095B5956B363E",
+    "CE349B1E47DE887E6CB522B0AB9044A1",
+    "CEA7B37E478FCE5EBC2328BFA05F3E24",
+    "CEC5A8584B4F2833F5B0E5A7B5519410",
+    "CECC790D49E21779028ED096AC299B82",
+    "CFCDE77B41D6458D45D202B23858C853",
+    "CFEA89A14EDF6454ADBBE48747891741",
+    "D3761DDC4735EF8CB19DFAB306EAD37C",
+    "D39EB6A344C2309F2E7A20BCFD4659E5",
+    "D3FF21A2411516EED0B3B8A322855596",
+    "D83381A545BA9332E5DF55A5C898B363",
+    "D99BF0EE48DA4BC9F762D19C8E984ACC",
+    "DB7C72694BFA825EFB70E0B6FF4FACBD",
+    "DB8079D74D855BA40088248D2DD343C0",
+    "DB91827E43D2EA6BA22B9A91F27E7936",
+    "DE0822984276E7BF7E0394B02517067C",
+    "DF66229D495866AB1143C7A119642833",
+    "DF736B0F49B63B7958C7FC98143D9135",
+    "E0F32533491DAE4C3587049F13400DAC",
+    "E1DDF6CF436B1C8753A1B99EFD9D8B64",
+    "E2F402CE466DA323B7D3BB9BD7C2ADE5",
+    "E31471D64A16909FD8B813B687746A11",
+    "E338A8664BB3F170B4699ABF9513D78C",
+    "E3BF2FF7469209DB4BB394AF97694D07",
+    "E3CB6E8C44821334BA1F018765757118",
+    "E5EB58A1419E8C7EF2EB0E86F059256F",
+    "E63B3C4C49E27B66DF591082169B592E",
+    "E779EBE84F358F0D7B66469CC06DB46F",
+    "E7CC23C8462E1F09430AF5AD5A98F5DF",
+    "E7E0D27F4DA0D336FF08638977813577",
+    "E8F8C6A44BBDC70B5D283D85312A5B32",
+    "EC60CDBC43EDBEF99DFFDCA50BC5BA62",
+    "EF3726334CEDD6D5AE801F9DCCD450B0",
+    "F0074808453AB3E4D80AC6BBD87CE89F",
+    "F122C86B488E448DF4AB329A822D244F",
+    "F18919E244806B47C144B0A38AD2DE6E",
+    "F580466948751FE1C862BFA00121873F",
+    "F76BFC10446EE1B5BDAD54AF48E9B545",
+    "F985A90D4BBCE53C084C42B600826F4C",
+    "FAE030DD4EF2A01237A88AB123C77676",
+    "FBE5AD464C0865268901859240757368",
+    "FC6731484C0DD3918CDF869C12838E80",
+    "FCC2456D44B532AB85F54BA23B9CECF8",
+    "FCD209E74490BEAD218E1DA71303F773",
+    "FE0E060C4C072CE78B0C37BE4CAEF4B1",
+    "FE2084E84CC3248DD8F66288AFE2A577",
+    "FE3089024F681DB7A8A70A89EB33B792",
+    "FF66DE964E36E3D18DD759B385E7D9AA"
+  ],
+  "allowed_mesh_replacements": [
+    {
+      "actor_guid": "70BC9784423D4390554AA680A6DA9D1C",
+      "component_name": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_RoadTerminalEdges.SM_MPR4_Site_RoadTerminalEdges",
+      "new_mesh": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_ReplacementTerminalEdges.SM_MPRE_ReplacementTerminalEdges"
+    },
+    {
+      "actor_guid": "81A8A0114B14661CF25344A87F9A5897",
+      "component_name": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_RoadTerminalCurbs.SM_MPR4_Site_RoadTerminalCurbs",
+      "new_mesh": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_ReplacementTerminalCurbs.SM_MPRE_ReplacementTerminalCurbs"
+    },
+    {
+      "actor_guid": "83DE02B24AC3D0F7CC087391AB405158",
+      "component_name": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/ReferenceV4/Site/Meshes/SM_MPR4_Site_RoadTerminalRoads.SM_MPR4_Site_RoadTerminalRoads",
+      "new_mesh": "/Game/MPRWarehouse/ExtensionB50B57/Meshes/SM_MPRE_ReplacementTerminalRoads.SM_MPRE_ReplacementTerminalRoads"
+    }
+  ],
+  "actor_snapshot_digest": "8831a80a2d2290455de317a0870f4f15b749367c69809e81bef91de6de6313e5"
+}
