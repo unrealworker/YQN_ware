@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 import gzip
 import importlib
 import json
+import math
 from pathlib import Path
 import shutil
 import traceback
@@ -18,7 +19,8 @@ import rebuild_preservation as guard
 ROOT = Path(__file__).resolve().parents[2]
 MAP = '/Game/Maps/MPR_CAD_Warehouse_B50B57'
 MAP_FILE = ROOT/'Content/Maps/MPR_CAD_Warehouse_B50B57.umap'
-FOLDERS = {'transport': 'transport_cleanup_20261105', 'hierarchy': 'hierarchy_20261105'}
+FOLDERS = {'transport': 'transport_cleanup_20261105', 'hierarchy': 'hierarchy_20261105',
+           'crossing': 'crossing_surface_20261105'}
 
 
 def read(path):
@@ -168,6 +170,26 @@ def validate_delta(before, after, mode, *, commandlet_compat=False):
         require(seen == replacements | removals and len(replacements) == 23 and len(removals) == 7,
                 'Transport target set must match all 23 replacements and 7 removals')
         require(set(b) == set(expected), 'Unexpected actor creation/deletion')
+    elif mode == 'crossing':
+        plan = read(ROOT/'SourceAssets/MPR/crossing_surface_20261105/manifest.json')
+        require(len(plan['mesh_mappings']) == 8 and not plan['remove_mesh_names'], 'Unexpected crossing scope')
+        require(set(a) == set(b), 'Crossing must preserve every Actor')
+        for spec in plan['mesh_mappings']:
+            matches = [(r, c) for r in expected.values() for c in r['components']
+                       if c.get('mesh') == obj(spec['old_mesh'])]
+            require(len(matches) == 1, 'Crossing source identity changed')
+            row, c = matches[0]
+            materials = dict(zip(spec['old_material_roles'], c['materials']))
+            fields = ['mesh']
+            if spec['material_reference_mesh']:
+                references = [c for r in a.values() for c in r['components']
+                              if c.get('mesh') == obj(spec['material_reference_mesh'])]
+                require(len(references) == 1 and len(references[0]['materials']) == 1, 'Ambiguous road material reference')
+                materials['MPR4_TerminalAsphalt'] = references[0]['materials'][0]
+                fields.append('materials')
+            c['mesh'] = obj(spec['new_mesh'])
+            c['materials'] = [materials[role] for role in spec['new_material_roles']]
+            changed.append(dict(guid=row['guid'], component=c['name'], fields=fields))
     elif mode == 'hierarchy':
         solar = read(ROOT/'SourceAssets/MPR/hierarchy_20261105/solar/manifest.json')
         for spec in solar['meshes']:
@@ -209,6 +231,11 @@ def validate_delta(before, after, mode, *, commandlet_compat=False):
         for tr, spec in zip(trees[0]['instance_transforms'], plan['infill']):
             target = [spec['position_m'][0]*100, -spec['position_m'][1]*100, spec['position_m'][2]*100]
             require(not differences(tr['translation_cm'], target) and not differences(tr['scale'], spec['scale']), 'Infill location/size differs from approved clearances')
+            angle = math.radians(-spec['rotation_deg'])/2
+            rotation = [0., 0., math.sin(angle), math.cos(angle)]
+            error = min(max(abs(x-y) for x, y in zip(tr['rotation_xyzw'], rotation)),
+                        max(abs(x+y) for x, y in zip(tr['rotation_xyzw'], rotation)))
+            require(error < 1e-6, 'Infill rotation differs from reviewed plan')
         new = [added['guid']]
         expected[added['guid']] = added
     else:
@@ -230,8 +257,9 @@ def check_content(before, mode):
     map_rel = MAP_FILE.relative_to(ROOT).as_posix()
     errors = [p for p, h in before.items() if p != map_rel and current.get(p) != h]
     require(not errors, 'Pre-existing shared assets changed: '+str(errors[:10]))
-    prefixes = ('Content/MPRWarehouse/TransportCleanup20261105/',) if mode == 'transport' else (
-        'Content/MPRWarehouse/Hierarchy/', 'Content/MPRWarehouse/Hierarchy20261105/')
+    prefixes = {'transport': ('Content/MPRWarehouse/TransportCleanup20261105/',),
+                'crossing': ('Content/MPRWarehouse/CrossingSurface20261105/',),
+                'hierarchy': ('Content/MPRWarehouse/Hierarchy/', 'Content/MPRWarehouse/Hierarchy20261105/')}[mode]
     new = {p: h for p, h in current.items() if p not in before}
     require(all(p.startswith(prefixes) for p in new), 'New packages escaped patch namespaces')
     return dict(protected_existing_packages=len(before)-1, new_packages=new, map_sha256=current[map_rel])
@@ -258,6 +286,9 @@ def run(u, mode):
         if mode == 'transport':
             module = importlib.import_module('mpr_transport_cleanup')
             report['transport'] = importlib.reload(module).apply(u)
+        elif mode == 'crossing':
+            module = importlib.import_module('mpr_crossing_surface')
+            report['crossing'] = importlib.reload(module).apply(u)
         else:
             for name in ('mpr_solar_hierarchy', 'mpr_campus_hierarchy'):
                 report[name] = importlib.reload(importlib.import_module(name)).apply(u)
@@ -297,6 +328,23 @@ def verify_reload(u, mode):
         errors = differences(aa, bb)
         require(not errors, 'Reload differs from saved state: '+json.dumps(errors[:30]))
         report['content'] = check_content(read(out/'content_before.json.gz'), mode)
+        if mode == 'hierarchy':
+            import mpr_solar_hierarchy as solar
+            manifest, source = solar.source_contract()
+            report['solar_native_readback'] = dict(source=source,
+                materials=[solar.material_audit(u, u.EditorAssetLibrary.load_asset(solar.material_path(role)), spec)
+                           for role, spec in manifest['materials'].items()],
+                meshes=[])
+            # StaticMeshEditorSubsystem requires the editor UI module. Read the
+            # serialized StaticMesh directly in the NullRHI commandlet.
+            for row in manifest['meshes']:
+                mesh = u.EditorAssetLibrary.load_asset(solar.mesh_path(row))
+                triangles = [mesh.get_num_triangles(i) for i in range(3)]
+                require(triangles == row['lod_triangles'], 'Reloaded solar LOD geometry differs')
+                roles = [str(s.get_editor_property('imported_material_slot_name')) for s in mesh.static_materials]
+                require(roles == row['material_roles'], 'Reloaded solar material slots differ')
+                report['solar_native_readback']['meshes'].append(dict(package=solar.mesh_path(row),
+                    triangles=triangles, material_roles=roles))
         require(guard.sha(MAP_FILE) == sha_before, 'Verification changed the map file')
         write(out/'reload_snapshot.json.gz', current)
         report.update(success=True, map_unchanged=True)

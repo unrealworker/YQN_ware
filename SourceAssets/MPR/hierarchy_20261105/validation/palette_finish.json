@@ -1,0 +1,523 @@
+{
+  "success": true,
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "map_saved": false,
+  "source": {
+    "manifest_sha256": "54f6d3b081c337cf3a0db812719726992141f04ee2aaf73dea674856360916fb",
+    "checked_source_files": {
+      "SourceAssets/MPR/hierarchy_20261105/solar/manifest.json": "54f6d3b081c337cf3a0db812719726992141f04ee2aaf73dea674856360916fb",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_00_0.fbx": "4b64d667c90c85b960ca9e992200cbcf91798106ca3b62f54d076655fc7936be",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_00_0_LOD1.fbx": "f1a5dc6946cc46aa035a82cd05a5f6c524bb2174184aa71c84e020074edbbfc9",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_00_0_LOD2.fbx": "44e44cb44ac5322488dec5b84152e74ddaa8347eb3b2d5c09eaf6c91a30888e6",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_0.fbx": "8803cbb5b3ef3880c39d36983d35e23cfbd5e96f2268b5f823cf3540200bead2",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_0_LOD1.fbx": "567e54bd501c15610ff07772357af560594272c57042baafe2f8ee13207dcd36",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_0_LOD2.fbx": "12cb9ded39df33c816dca191f6c3b50160d164b2d3dc066639255af2191528b2",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_1.fbx": "798f332a53c990363ac0c947cd71910904046d36d8254880ad1326f543a5ce49",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_1_LOD1.fbx": "7d4b12ea9e1c4399284385ae36bebc1251cbda0f2bc30c538cca930d3b5883ef",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_1_LOD2.fbx": "997dff207558b1e7a8db655eb7e3188d47286cde1f9dec3b2209a3bcb793b5d3",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_0.fbx": "9e94aefa3408395f704682341103730703aa2172c137a86250a5b2317c4e39c5",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_0_LOD1.fbx": "7c7b41ff7a5669a350e812a8ac385c2f23726b46e2c26825c01fe2faf6039de9",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_0_LOD2.fbx": "482329fe038384ccb3f7b4f64c555cd3b9539f6fdd303c4eb2c10b532d7b0b87",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_1.fbx": "2f5b16d05f75b55c2f9488116b8d796e6e119d97d4ecb8164d1abcda7505fba9",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_1_LOD1.fbx": "ecb2f36c9bd7cc5dae7f5e1b974045463e700ba780a1c354f839b9b8afdd402c",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_1_LOD2.fbx": "eccf9de58de9762bf2d65f3d8ddf6ea9c09edbf6d57e1ad4c81da9a3e22b5e87"
+    },
+    "geometry_validation_sha256": "ad510fb7c414e4e749453e53ea22c786d39fbb44bf14b27933dd621826b3f368",
+    "silhouette_validation_sha256": "1c283a612081a5b60f339b5bb88507840d6e9e5aa9ffffb5ccd8e40739f62f9c",
+    "final_palette_sha256": "815a729d809c38681fc5904fe49dbaf470543701aebfcf3dac6c6a6644940693",
+    "final_palette": {
+      "schema_version": 1,
+      "owner": "mpr-solar-hierarchy-20261105",
+      "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+      "namespace": "/Game/MPRWarehouse/Hierarchy20261105",
+      "original_manifest_sha256": "54f6d3b081c337cf3a0db812719726992141f04ee2aaf73dea674856360916fb",
+      "original_materials_sha256": "7d8db8123c0115f93cc7f2dd237c446399f0505a5920b192bf1bbab77f12c5e0",
+      "cell_roles": [
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "cell_linear_multiplier": 0.7,
+      "frame_policy": "unchanged",
+      "preserve_geometry": true
+    }
+  },
+  "materials": [
+    {
+      "role": "MPRH_SolarFrame",
+      "changed": false,
+      "before_base_color": [
+        0.20863686501979828,
+        0.3049873113632202,
+        0.3915724754333496
+      ],
+      "after_base_color": [
+        0.20863687014525575,
+        0.3049873140698863,
+        0.39157247774972326
+      ],
+      "before_source_digest": "ef9db9b39fb21befa366f41706f86819fe38c52b34600664454ad38e265e9848",
+      "after_source_digest": "ef9db9b39fb21befa366f41706f86819fe38c52b34600664454ad38e265e9848",
+      "package": "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarFrame",
+      "parameters": {
+        "source_srgb_hex": "#7E96A8",
+        "base_color": [
+          0.20863687014525575,
+          0.3049873140698863,
+          0.39157247774972326
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "specular": 0.15,
+        "emission": 0.0,
+        "normal_strength": 0.0
+      },
+      "expression_count": 4,
+      "opaque": true,
+      "default_lit": true
+    },
+    {
+      "role": "MPRH_SolarCells",
+      "changed": true,
+      "before_base_color": [
+        0.012983032502233982,
+        0.07421357184648514,
+        0.18782077729701996
+      ],
+      "after_base_color": [
+        0.009088122639521109,
+        0.051949497866104734,
+        0.1314745406104745
+      ],
+      "before_source_digest": "fcd7285457832a7dfa2409d82167a867082aef5b1700212e2ba17dfd162dd110",
+      "after_source_digest": "7ea6fb14696820ea7468fa429cd98b69dc99b9996e9d98559f54e1d848314beb",
+      "package": "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarCells",
+      "parameters": {
+        "source_srgb_hex": "#1E4D78",
+        "base_color": [
+          0.009088122639521109,
+          0.051949497866104734,
+          0.1314745406104745
+        ],
+        "roughness": 0.62,
+        "metallic": 0.0,
+        "specular": 0.18,
+        "emission": 0.0,
+        "normal_strength": 0.0
+      },
+      "expression_count": 4,
+      "opaque": true,
+      "default_lit": true
+    },
+    {
+      "role": "MPRH_SolarCellsLight",
+      "changed": true,
+      "before_base_color": [
+        0.01599629409611225,
+        0.08228270709514618,
+        0.2015562504529953
+      ],
+      "after_base_color": [
+        0.01119740535585674,
+        0.057597894990870355,
+        0.14108937765607793
+      ],
+      "before_source_digest": "786838c112074682706ad25346fc72792fc8af4be907eebf5a80444da76ddc2c",
+      "after_source_digest": "22ee74fe66047997d374433bd3758834ef6c42b363db333d994c486b7322a23d",
+      "package": "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarCellsLight",
+      "parameters": {
+        "source_srgb_hex": "#22517C",
+        "base_color": [
+          0.01119740535585674,
+          0.057597894990870355,
+          0.14108937765607793
+        ],
+        "roughness": 0.62,
+        "metallic": 0.0,
+        "specular": 0.18,
+        "emission": 0.0,
+        "normal_strength": 0.0
+      },
+      "expression_count": 4,
+      "opaque": true,
+      "default_lit": true
+    },
+    {
+      "role": "MPRH_SolarCellsShade",
+      "changed": true,
+      "before_base_color": [
+        0.010960093699395657,
+        0.06301001459360123,
+        0.16513219475746155
+      ],
+      "after_base_color": [
+        0.007672065804541771,
+        0.04410701235721737,
+        0.11559253615116731
+      ],
+      "before_source_digest": "b74cf81046b0486174c1d598279b918209e8911af5d74d9161cfc1847ff28968",
+      "after_source_digest": "8c591f6076ee02613b73c47f43a99aa4b301ac6b12ae15405e50b505917603c6",
+      "package": "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarCellsShade",
+      "parameters": {
+        "source_srgb_hex": "#1B4771",
+        "base_color": [
+          0.007672065804541771,
+          0.04410701235721737,
+          0.11559253615116731
+        ],
+        "roughness": 0.62,
+        "metallic": 0.0,
+        "specular": 0.18,
+        "emission": 0.0,
+        "normal_strength": 0.0
+      },
+      "expression_count": 4,
+      "opaque": true,
+      "default_lit": true
+    }
+  ],
+  "meshes": [
+    {
+      "metadata_changed": true,
+      "before_source_digest": "59057c3fc294d42d6e3eb57d84b64b813d10088624b5f9be5a9ca3b8a490e1d7",
+      "after_source_digest": "4b976ccaa85e19f79ed785a4a4c72e9c97874827324dba55fe978aff1edbd568",
+      "geometry_unchanged": true,
+      "package": "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_00_0",
+      "bounds_cm": [
+        [
+          -4147.99951171875,
+          1996.0006103515625
+        ],
+        [
+          986.4998168945312,
+          7988.50048828125
+        ],
+        [
+          1341.39990234375,
+          1366.0
+        ]
+      ],
+      "bounds_error_cm": 0.0006103515613631316,
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 17622,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 1.0
+        },
+        {
+          "lod": 1,
+          "triangles": 5172,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 0.6659005284309387
+        },
+        {
+          "lod": 2,
+          "triangles": 5172,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 0.23229089379310608
+        }
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "nanite": false,
+      "collision": false
+    },
+    {
+      "metadata_changed": true,
+      "before_source_digest": "33fc3383e3b9b7e36fd0138675c01ec5f29194ee43261c69249d913b83d907a2",
+      "after_source_digest": "d86e893beccf2b0fec26940c3d36b6776f56a899b5612bdc82a20c35cd77445c",
+      "geometry_unchanged": true,
+      "package": "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_01_0",
+      "bounds_cm": [
+        [
+          2020.0001220703125,
+          8052.0
+        ],
+        [
+          8.499306678771973,
+          7988.5
+        ],
+        [
+          1341.39990234375,
+          1366.0
+        ]
+      ],
+      "bounds_error_cm": 0.0006933212274624623,
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 21126,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 1.0
+        },
+        {
+          "lod": 1,
+          "triangles": 6276,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 0.7150716185569763
+        },
+        {
+          "lod": 2,
+          "triangles": 6276,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 0.24944357573986053
+        }
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "nanite": false,
+      "collision": false
+    },
+    {
+      "metadata_changed": true,
+      "before_source_digest": "aedb43c40d7fdc4e7e11f5eeb53b798a8adcacef15dbaf170cf94f69435e72e3",
+      "after_source_digest": "a415e54eac8861fdc256cc9b6479d0f6c42a36ba37782f54b1c790c7c19a461b",
+      "geometry_unchanged": true,
+      "package": "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_01_1",
+      "bounds_cm": [
+        [
+          2683.999755859375,
+          8051.99951171875
+        ],
+        [
+          -6426.50048828125,
+          -6.500235080718994
+        ],
+        [
+          1341.39990234375,
+          1366.0
+        ]
+      ],
+      "bounds_error_cm": 0.00048828125,
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 12666,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 1.0
+        },
+        {
+          "lod": 1,
+          "triangles": 3876,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 0.5982128977775574
+        },
+        {
+          "lod": 2,
+          "triangles": 3876,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 0.2086789309978485
+        }
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "nanite": false,
+      "collision": false
+    },
+    {
+      "metadata_changed": true,
+      "before_source_digest": "47dfc3fd0360edac864ad6572bbb3547b8d3ccdca1135175e876f9719af2f65f",
+      "after_source_digest": "0a06edff6d7306d689a3aec12136a827357eec29e328cfa3405691ee865a59f4",
+      "geometry_unchanged": true,
+      "package": "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_02_0",
+      "bounds_cm": [
+        [
+          7948.00048828125,
+          16892.0
+        ],
+        [
+          8.498523712158203,
+          7403.49951171875
+        ],
+        [
+          1341.39990234375,
+          1366.0
+        ]
+      ],
+      "bounds_error_cm": 0.0014762878412319935,
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 20590,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 1.0
+        },
+        {
+          "lod": 1,
+          "triangles": 6140,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 0.8295844197273254
+        },
+        {
+          "lod": 2,
+          "triangles": 6140,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 0.2893899083137512
+        }
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "nanite": false,
+      "collision": false
+    },
+    {
+      "metadata_changed": true,
+      "before_source_digest": "47aaaabe6ea626f3b0467766c86f708f70aded341ac86276124d0a6d6f16da29",
+      "after_source_digest": "b64dc6d31843c198638e7e5c5adc2ac8973bd7ae67f7773afb548184d50e2a09",
+      "geometry_unchanged": true,
+      "package": "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_02_1",
+      "bounds_cm": [
+        [
+          7948.0,
+          16892.0
+        ],
+        [
+          -6426.5009765625,
+          -6.50069522857666
+        ],
+        [
+          1341.39990234375,
+          1366.0
+        ]
+      ],
+      "bounds_error_cm": 0.0009765625,
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 8316,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 1.0
+        },
+        {
+          "lod": 1,
+          "triangles": 2496,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 0.7870082259178162
+        },
+        {
+          "lod": 2,
+          "triangles": 2496,
+          "section_roles": [
+            "MPRH_SolarFrame",
+            "MPRH_SolarCells",
+            "MPRH_SolarCellsLight",
+            "MPRH_SolarCellsShade"
+          ],
+          "screen_size": 0.27453774213790894
+        }
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "nanite": false,
+      "collision": false
+    }
+  ],
+  "new_assets_created": [],
+  "packages_saved": [
+    "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarCells",
+    "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarCellsLight",
+    "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarCellsShade",
+    "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_00_0",
+    "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_01_0",
+    "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_01_1",
+    "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_02_0",
+    "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_02_1"
+  ],
+  "map_unchanged": true,
+  "frame_unchanged": true,
+  "geometry_unchanged": true,
+  "material_change_count": 3,
+  "actor_references_unchanged": true,
+  "final_preflight_success": true
+}
