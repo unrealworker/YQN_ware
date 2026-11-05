@@ -15,3 +15,9 @@ validate_mpr_campus_surfaces.py -text whitespace=trailing-space,space-before-tab
 extract_mpr_plan_solar.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
 # Independent B50B57 rebuild audit records include tool hashes.
 *rebuild*.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+# Current-scene retirement reports bind these tools by byte hash.
+retire_mpr_legacy_assets.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+archive_mpr_legacy_retirement.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+test_retire_mpr_legacy_assets.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+validate_mpr_current.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+test_mpr_current.py -text whitespace=trailing-space,space-before-tab,cr-at-eol

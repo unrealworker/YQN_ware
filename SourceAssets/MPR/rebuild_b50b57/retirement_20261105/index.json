@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "success": true,
+  "event": "MPR legacy retirement 2026-11-05",
+  "evidence_is_historical": true,
+  "contains_later_transport_changes": false,
+  "old_map": "/Game/Maps/MPR_CAD_Warehouse",
+  "preserved_map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "map_sha256": "0768f8b11746666a11d2c97ffc2e14d422e19bc0c5fc83274c5e4fbdbfe47dd7",
+  "candidate_packages": 770,
+  "deleted_packages": 626,
+  "deleted_files": 626,
+  "retained_shared_legacy_packages": 144,
+  "retained_content_files": 1843,
+  "preserved_actors": 905,
+  "preserved_scene_snapshot_sha256": "313c1caf34f9e5cfe8d1ad9db28349a88f8815a27c2f51d06b9f4f0892338a66",
+  "backup_files_included": false,
+  "source_models_deleted": false,
+  "original_validation_and_ownership_modified": false,
+  "execution_tool_sha256": "f18f26d5c83def1ce13fcac657cb568edfca66a1a640c331fc8c9169f58acb8f",
+  "archive_tool_sha256": "2444b3d8a4358bd72b7721c831796cbced6203ad2aedaa83ceff263b6b3b7228",
+  "files": {
+    "legacy_audit.json.gz": {
+      "sha256": "35bd0b6a83c403a5a14d313b9d63272c6fcb8363ee4681eaee12027285df9bd3",
+      "bytes": 235640,
+      "source": "Saved/MPR/cleanup_20261105/legacy_audit.json",
+      "source_sha256": "182c340285477ba5c3513ae2b338610374679cefc88033263d21c8456fe2dcad",
+      "source_bytes": 1989515,
+      "compression": "gzip"
+    },
+    "legacy_predelete.json.gz": {
+      "sha256": "009097b57af8b5074f5cd34f2c47cb55a30c6c61ed748b8adabb35240a1181f4",
+      "bytes": 235641,
+      "source": "Saved/MPR/cleanup_20261105/legacy_predelete.json",
+      "source_sha256": "992395205a469d8fec78066f7d5c6655229c60a1890a1371f1328afa44c122ec",
+      "source_bytes": 1989519,
+      "compression": "gzip"
+    },
+    "legacy_delete.json.gz": {
+      "sha256": "1684ab5a3300e942a7ad8b7f54eb2cd7c16b0f548c44b14a6b142d1ab2977e8d",
+      "bytes": 143914,
+      "source": "Saved/MPR/cleanup_20261105/legacy_delete.json",
+      "source_sha256": "98466cacc99d5dfad04c926408cf129a27b4eb381f1d8b963e9de73dc5647d33",
+      "source_bytes": 540611,
+      "compression": "gzip"
+    },
+    "legacy_delete_progress.json.gz": {
+      "sha256": "f8a01d7168f9a87e2e5543a884fa3b5835bd38fe26b58c016132e755d4d393ee",
+      "bytes": 9005,
+      "source": "Saved/MPR/cleanup_20261105/legacy_delete_progress.json",
+      "source_sha256": "fbf9085642333e02d3676d82f22af5b021481a04ff55cf1d2fde2e5b6d37fd98",
+      "source_bytes": 143535,
+      "compression": "gzip"
+    },
+    "backup_manifest.json.gz": {
+      "sha256": "9a1374904259f00d4176ea973c4fe00f02fd02e877d42d3d945c31b8fce85d5b",
+      "bytes": 32104,
+      "source": "Saved/MPR/cleanup_20261105/backup_manifest.json",
+      "source_sha256": "fc895ca3c8e29786c11f3902fe1fc0d1764372a5b6f9ef272ff02a41e845e327",
+      "source_bytes": 124936,
+      "compression": "gzip"
+    },
+    "legacy_audit_scene_snapshot.json.gz": {
+      "sha256": "b0b7e659a41cca31ecc1787b51c31bac40d93d2190a8623a7e49f3b78dec29a8",
+      "bytes": 276922,
+      "source": "Saved/MPR/cleanup_20261105/legacy_audit_scene_snapshot.json",
+      "source_sha256": "313c1caf34f9e5cfe8d1ad9db28349a88f8815a27c2f51d06b9f4f0892338a66",
+      "source_bytes": 5615681,
+      "compression": "gzip"
+    },
+    "legacy_predelete_scene_snapshot.json.gz": {
+      "sha256": "b0b7e659a41cca31ecc1787b51c31bac40d93d2190a8623a7e49f3b78dec29a8",
+      "bytes": 276922,
+      "source": "Saved/MPR/cleanup_20261105/legacy_predelete_scene_snapshot.json",
+      "source_sha256": "313c1caf34f9e5cfe8d1ad9db28349a88f8815a27c2f51d06b9f4f0892338a66",
+      "source_bytes": 5615681,
+      "compression": "gzip"
+    },
+    "legacy_after_scene_snapshot.json.gz": {
+      "sha256": "b0b7e659a41cca31ecc1787b51c31bac40d93d2190a8623a7e49f3b78dec29a8",
+      "bytes": 276922,
+      "source": "Saved/MPR/cleanup_20261105/legacy_after_scene_snapshot.json",
+      "source_sha256": "313c1caf34f9e5cfe8d1ad9db28349a88f8815a27c2f51d06b9f4f0892338a66",
+      "source_bytes": 5615681,
+      "compression": "gzip"
+    },
+    "after_cleanup/current_validation.json.gz": {
+      "sha256": "dd393f5f04307f37e0988ddb9b61fd778671f3239fcc222b15bfaa28c4b9a460",
+      "bytes": 40848,
+      "source": "Saved/MPR/cleanup_20261105/after_cleanup/current_validation.json",
+      "source_sha256": "30d0ce45e3e1eb8f69fc38d09d623747cc66047d56d4275e160d50b4b379aa97",
+      "source_bytes": 192041,
+      "compression": "gzip"
+    },
+    "after_cleanup/current_snapshot.json.gz": {
+      "sha256": "60192968cab9e8f3aa276fbba1bae6acc580f7a433d96621794f6a46b0ac9398",
+      "bytes": 234498,
+      "source": "Saved/MPR/cleanup_20261105/after_cleanup/current_snapshot.json",
+      "source_sha256": "00827e56af39f6aa651bfafc9b8a9c5e59d8f07279ab2daf6fcde492f5173c88",
+      "source_bytes": 2714105,
+      "compression": "gzip"
+    },
+    "README.md": {
+      "sha256": "630b188ab68697187d6c9631c781f92bf1f5faa5c46c3a434e917459191662c6",
+      "bytes": 1568
+    }
+  }
+}
