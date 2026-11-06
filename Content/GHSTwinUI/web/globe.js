@@ -4,7 +4,9 @@ const $=id=>document.getElementById(id),stage=$('stage');
 let motionMode='normal';try{motionMode=GlobePolicy.motionPreference(localStorage.getItem('ghs-globe-motion'));}catch(e){}
 let state={phase:'idle',stageVisible:true,selectedId:'',warehouses:[],pois:[],countries:[],transition:{opacity:0}},catalogKey='',selectedKey='',lastPhase='',pointer=null,dx=0,dy=0,dragFrame=0,ready=false;
 let warehouseById=new Map();
-let clusterIds=null,pageOffset=0,markerKey="",markerGroups=new Map();
+let clusterIds=null,pageOffset=0,markerKey=null,markerGroups=new Map();
+const markerNodes=new Map();
+let markerViewport='';
 let selectionSource=null,pendingFocus=null,focusFrame=0,interactionActive=false,windowFocused=true;
 let curtainFrame=0,curtainAck=null;
 let bootFrame=0,entryGate='idle';
@@ -49,15 +51,38 @@ function layoutCountries(labels,origin){
  }
  countryVisible=nextVisible;
 }
-function positionLabels(){if(state.phase==='warehouse')return;const origin=stage.getBoundingClientRect();const markers=GlobePolicy.markers(state.pois||[],state.selectedId,origin,64,48),key=markers.map(p=>p.id+':'+p.ids.join(',')).join('|');
- if(key!==markerKey){const previousIds=new Set(markerGroups.keys()),active=$('pois').contains(document.activeElement)?focusToken(document.activeElement):null;markerKey=key;markerGroups=new Map(markers.map(p=>[p.id,p.ids]));$('pois').innerHTML=markers.map(p=>{if(p.ids.length>1)return '<div class="poi" id="poi-'+esc(p.id)+'"><button class="cluster-dot" data-cluster="'+esc(p.id)+'" aria-label="查看此区域'+p.ids.length+'座仓库">'+p.ids.length+'</button></div>';const w=warehouseById.get(p.id);return w?'<div class="poi" id="poi-'+esc(w.id)+'"><span class="poi-line"></span><span class="poi-dot"></span><div class="poi-card"><button class="poi-select" data-select="'+esc(w.id)+'" aria-label="选择'+esc(w.name)+'"><span class="warehouse-icon">'+icon('warehouse')+'</span><span class="row-copy"><strong>'+esc(w.name)+'</strong></span></button><button class="poi-enter" data-enter="'+esc(w.id)+'" aria-label="进入'+esc(w.name)+'">'+icon('chevron')+'</button></div></div>':'';}).join('');for(const p of markers)if(!previousIds.has(p.id)){const node=$('poi-'+p.id);if(node)playMotion(node.querySelector('.poi-card,.cluster-dot'),[{opacity:0,transform:'translateY(6px) scale(.98)'},{opacity:1,transform:'translateY(0) scale(1)'}],{duration:220});}if(active)restoreFocus(active,stage);}
- for(const p of markers){const node=document.getElementById('poi-'+p.id);if(node){node.style.transform='translate('+(p.x-origin.left)+'px,'+(p.y-origin.top)+'px)';node.dataset.selected=String(state.selectedId===p.id);}}
+function markerContent(p){
+ if(p.ids.length>1)return '<button class="cluster-dot" data-cluster="'+esc(p.id)+'" aria-label="查看此区域'+p.ids.length+'座仓库">'+p.ids.length+'</button>';
+ const w=warehouseById.get(p.id);return w?'<span class="poi-line"></span><span class="poi-dot"></span><div class="poi-card"><button class="poi-select" data-select="'+esc(w.id)+'" aria-label="选择'+esc(w.name)+'"><span class="warehouse-icon">'+icon('warehouse')+'</span><span class="row-copy"><strong>'+esc(w.name)+'</strong></span></button><button class="poi-enter" data-enter="'+esc(w.id)+'" aria-label="进入'+esc(w.name)+'">'+icon('chevron')+'</button></div>':'';
+}
+function positionLabels(){if(state.phase==='warehouse'){markerViewport='';return;}const origin=stage.getBoundingClientRect();const markers=GlobePolicy.markers(state.pois||[],state.selectedId,origin,64,48),key=markers.map(p=>p.id+':'+p.ids.join(',')).join('|');
+ const viewportKey=[origin.left,origin.top,origin.width,origin.height].join(','),sameViewport=viewportKey===markerViewport;
+ markerViewport=viewportKey;
+ if(key!==markerKey){
+  const active=$('pois').contains(document.activeElement)?focusToken(document.activeElement):null;markerKey=key;markerGroups=new Map(markers.map(p=>[p.id,p.ids]));
+  // Keep surviving anchors (and their in-flight transforms/focus) when another POI is culled or clustered.
+  for(const [id,entry] of markerNodes)if(!markerGroups.has(id)){entry.node.remove();markerNodes.delete(id);}
+  for(const p of markers){
+   let entry=markerNodes.get(p.id);const fresh=!entry,content=markerContent(p);
+   if(fresh){const node=document.createElement('div');node.className='poi';node.id='poi-'+p.id;entry={node,content:null};markerNodes.set(p.id,entry);$('pois').appendChild(node);}
+   if(entry.content!==content){entry.node.innerHTML=content;entry.content=content;}
+   if(fresh)playMotion(entry.node.querySelector('.poi-card,.cluster-dot'),[{opacity:0,transform:'translateY(6px) scale(.98)'},{opacity:1,transform:'translateY(0) scale(1)'}],{duration:220});
+  }
+  if(active)restoreFocus(active,stage);
+ }
+ for(const p of markers){const node=markerNodes.get(p.id)?.node;if(node){
+  // Native projection arrives at 20 Hz. Interpolate only continuous visible anchors,
+  // on their own layer; never let the reduced-motion wildcard extend tracking to 120 ms.
+  const continuous=sameViewport&&!!node.style.transform&&state.stageVisible&&!reducedMotion();
+  node.style.setProperty('transition',continuous?'transform 60ms linear':'none','important');
+  node.style.transform='translate3d('+(p.x-origin.left)+'px,'+(p.y-origin.top)+'px,0)';node.dataset.selected=String(state.selectedId===p.id);
+ }}
 
  const countryRoot=$('countries'),labels=[],seen=new Set();for(const c of state.countries||[]){const id='country-'+c.id;seen.add(id);let el=document.getElementById(id);if(!el){el=document.createElement('span');el.id=id;el.className='country';el.style.left='0';el.style.top='0';countryRoot.appendChild(el);}if(el.textContent!==c.label)el.textContent=c.label;labels.push({c,el});}
  for(const el of Array.from(countryRoot.children))if(!seen.has(el.id))el.remove();layoutCountries(labels,origin);
 }
 function receive(next){const candidate=GlobePolicy.nextState(state,next);if(!candidate)return;const catalogUpdated=candidate.warehouses!==state.warehouses;state=candidate;
- const key=catalogUpdated?JSON.stringify(state.warehouses):catalogKey,catalogChanged=key!==catalogKey;if(catalogChanged){const previousRegion=$('region').value;pageOffset=0;catalogKey=key;warehouseById=new Map(state.warehouses.map(w=>[w.id,w]));$('region').innerHTML='<option value="">全部区域</option>'+Array.from(new Set(state.warehouses.map(GlobePolicy.warehouseRegion))).map(r=>'<option>'+esc(r)+'</option>').join('');if(Array.from($('region').options).some(o=>o.value===previousRegion))$('region').value=previousRegion;markerKey="";list();updateRecent();}
+ const key=catalogUpdated?JSON.stringify(state.warehouses):catalogKey,catalogChanged=key!==catalogKey;if(catalogChanged){const previousRegion=$('region').value;pageOffset=0;catalogKey=key;warehouseById=new Map(state.warehouses.map(w=>[w.id,w]));$('region').innerHTML='<option value="">全部区域</option>'+Array.from(new Set(state.warehouses.map(GlobePolicy.warehouseRegion))).map(r=>'<option>'+esc(r)+'</option>').join('');if(Array.from($('region').options).some(o=>o.value===previousRegion))$('region').value=previousRegion;markerKey=null;list();updateRecent();}
  const w=warehouseById.get(state.selectedId);if((state.selectedId||'')!==selectedKey||catalogChanged){const losingFocus=$(w?'initial':'detail').contains(document.activeElement);selectedKey=state.selectedId||'';panel(!!w);if(w){$('name').textContent=w.name;$('city').textContent=w.city;$('address').textContent=w.address;$('thumbnail').src=w.thumbnail||'assets/warehouse-overview.png';$('thumbnail').alt=w.name+'三维场景预览';$('breadcrumb').textContent='全球 / '+GlobePolicy.warehouseRegion(w)+' / '+(w.country||'未标注国家');}if(losingFocus&&!pendingFocus)pendingFocus=w?{type:'detail',id:w.id}:{type:'source'};}
  if(w){$('inventory').textContent=typeof w.inventory==='number'?w.inventory.toLocaleString('en-US'):'—';$('occupancy').textContent=typeof w.occupancy==='number'?(w.occupancy*100).toFixed(1)+'%':'—';}
  const phase=state.phase||'idle',busy=['loading','flying','revealing'].includes(phase);entryGate=GlobePolicy.entryRequestState(entryGate,phase);document.body.dataset.phase=phase;document.body.dataset.world=state.stageVisible===false?'warehouse':'globe';document.body.dataset.exiting=String(['flying','revealing','warehouse'].includes(phase));$('enter').disabled=false;$('enter').setAttribute('aria-disabled',String(busy));$('enter').setAttribute('aria-busy',String(busy));if(phase==='error'&&pendingFocus&&pendingFocus.type==='back')pendingFocus=w?{type:'detail',id:w.id}:{type:'source'};if(phase==='warehouse'&&state.error&&pendingFocus)pendingFocus={type:'back'};renderEntryLabel(busy?'正在进入':'进入仓库');
