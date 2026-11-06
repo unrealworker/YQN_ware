@@ -1,0 +1,369 @@
+{
+  "success": true,
+  "ground_manifest_sha256": "be8f765d33d2fc2aacd5d1584932fb56ad7e768a1a7a5f5fc103c09bd4a01ff1",
+  "coordinate_policy": "Source FBX CAD metres; native render-buffer FBX CAD centimetres divided by 100.",
+  "method": "Independent binary FBX decoding, float32 UE normal test, source-polygon capacity matching, footprint and terrain checks.",
+  "point_match_tolerance_m": 5e-05,
+  "thresholds": {
+    "ue_import_cross_squared_cm4": 1e-08,
+    "ue_point_equality_cm": 2e-05
+  },
+  "meshes": [
+    {
+      "name": "SM_MPRLG_CampusGreen",
+      "source_fbx_sha256": "e97215144f5dbc4056a5ccf75b9d5f77d479e10a1c2c5cb00518e07f33330661",
+      "native_fbx_sha256": "cd8420acc55805d6b7d8583130302ed2ae7fed2c8f3654b4880266ca9cc57471",
+      "asset_sha256": "ae64845b32a4579cbaf273466505b5ca159f80d672293a9a8db2331335e60d79",
+      "native_fbx": "Saved\\MPR\\landscape_layout_20261106\\native\\SM_MPRLG_CampusGreen.fbx",
+      "source_triangles": 2345,
+      "native_triangles": 2336,
+      "rejected_source_polygons": [
+        {
+          "source_polygon": 589,
+          "source_triangle": 589,
+          "source_vertices_m": [
+            [
+              -167.3302459716797,
+              -144.79652404785156,
+              -1.1522120237350464
+            ],
+            [
+              -167.33456420898438,
+              -144.77484130859375,
+              -1.1522400379180908
+            ],
+            [
+              -167.33456420898438,
+              -144.77484130859375,
+              -1.1522400379180908
+            ]
+          ],
+          "source_area_m2": 0.0,
+          "xy_area_m2": 0.0,
+          "ue_float32_cross_squared_cm4": 0.0,
+          "equal_corners": true,
+          "reason": "zero-area source triangle"
+        },
+        {
+          "source_polygon": 637,
+          "source_triangle": 637,
+          "source_vertices_m": [
+            [
+              -162.8086395263672,
+              -143.59075927734375,
+              -1.1537129878997803
+            ],
+            [
+              -162.8080596923828,
+              -143.59475708007812,
+              -1.153710961341858
+            ],
+            [
+              -162.8080596923828,
+              -143.59475708007812,
+              -1.153710961341858
+            ]
+          ],
+          "source_area_m2": 0.0,
+          "xy_area_m2": 0.0,
+          "ue_float32_cross_squared_cm4": 0.0,
+          "equal_corners": true,
+          "reason": "zero-area source triangle"
+        },
+        {
+          "source_polygon": 1657,
+          "source_triangle": 1657,
+          "source_vertices_m": [
+            [
+              27.927473068237305,
+              -141.52542114257812,
+              -1.183603048324585
+            ],
+            [
+              27.927473068237305,
+              -141.52542114257812,
+              -1.183603048324585
+            ],
+            [
+              27.927473068237305,
+              -141.52542114257812,
+              -1.183603048324585
+            ]
+          ],
+          "source_area_m2": 0.0,
+          "xy_area_m2": 0.0,
+          "ue_float32_cross_squared_cm4": 0.0,
+          "equal_corners": true,
+          "reason": "zero-area source triangle"
+        },
+        {
+          "source_polygon": 1660,
+          "source_triangle": 1660,
+          "source_vertices_m": [
+            [
+              27.927473068237305,
+              -141.52542114257812,
+              -1.183603048324585
+            ],
+            [
+              25.2344970703125,
+              -138.213623046875,
+              -1.1627910137176514
+            ],
+            [
+              27.927473068237305,
+              -141.52542114257812,
+              -1.183603048324585
+            ]
+          ],
+          "source_area_m2": 0.0,
+          "xy_area_m2": 0.0,
+          "ue_float32_cross_squared_cm4": 0.0,
+          "equal_corners": true,
+          "reason": "zero-area source triangle"
+        },
+        {
+          "source_polygon": 2169,
+          "source_triangle": 2169,
+          "source_vertices_m": [
+            [
+              180.95306396484375,
+              -65.43881225585938,
+              -1.1549999713897705
+            ],
+            [
+              180.95306396484375,
+              -65.43881225585938,
+              -1.1549999713897705
+            ],
+            [
+              179.83248901367188,
+              -64.0912857055664,
+              -1.1549999713897705
+            ]
+          ],
+          "source_area_m2": 0.0,
+          "xy_area_m2": 0.0,
+          "ue_float32_cross_squared_cm4": 0.0,
+          "equal_corners": true,
+          "reason": "zero-area source triangle"
+        },
+        {
+          "source_polygon": 2184,
+          "source_triangle": 2184,
+          "source_vertices_m": [
+            [
+              179.83248901367188,
+              -64.0912857055664,
+              -1.1549999713897705
+            ],
+            [
+              180.95306396484375,
+              -65.43881225585938,
+              -1.1549999713897705
+            ],
+            [
+              180.95306396484375,
+              -65.43881225585938,
+              -1.1549999713897705
+            ]
+          ],
+          "source_area_m2": 0.0,
+          "xy_area_m2": 0.0,
+          "ue_float32_cross_squared_cm4": 0.0,
+          "equal_corners": true,
+          "reason": "zero-area source triangle"
+        },
+        {
+          "source_polygon": 2252,
+          "source_triangle": 2252,
+          "source_vertices_m": [
+            [
+              195.7307586669922,
+              -29.579734802246094,
+              -1.1549999713897705
+            ],
+            [
+              199.6263427734375,
+              -31.203922271728516,
+              -1.1549999713897705
+            ],
+            [
+              199.6263427734375,
+              -31.203922271728516,
+              -1.1549999713897705
+            ]
+          ],
+          "source_area_m2": 0.0,
+          "xy_area_m2": 0.0,
+          "ue_float32_cross_squared_cm4": 0.0,
+          "equal_corners": true,
+          "reason": "zero-area source triangle"
+        },
+        {
+          "source_polygon": 2259,
+          "source_triangle": 2259,
+          "source_vertices_m": [
+            [
+              195.7307586669922,
+              -29.579734802246094,
+              -1.1549999713897705
+            ],
+            [
+              199.6263427734375,
+              -31.203922271728516,
+              -1.1549999713897705
+            ],
+            [
+              199.6263427734375,
+              -31.203922271728516,
+              -1.1549999713897705
+            ]
+          ],
+          "source_area_m2": 0.0,
+          "xy_area_m2": 0.0,
+          "ue_float32_cross_squared_cm4": 0.0,
+          "equal_corners": true,
+          "reason": "zero-area source triangle"
+        },
+        {
+          "source_polygon": 2269,
+          "source_triangle": 2269,
+          "source_vertices_m": [
+            [
+              200.21238708496094,
+              -24.23346519470215,
+              -1.1549999713897705
+            ],
+            [
+              200.21238708496094,
+              -24.23346519470215,
+              -1.1549999713897705
+            ],
+            [
+              200.4107666015625,
+              -24.606538772583008,
+              -1.1549999713897705
+            ]
+          ],
+          "source_area_m2": 0.0,
+          "xy_area_m2": 0.0,
+          "ue_float32_cross_squared_cm4": 0.0,
+          "equal_corners": true,
+          "reason": "zero-area source triangle"
+        }
+      ],
+      "all_surviving_source_polygons_accounted": true,
+      "all_native_faces_mapped": true,
+      "maximum_native_vertex_distance_m": 2.899653150485297e-05,
+      "maximum_source_polygon_area_difference_m2": 8.78125060363999e-05,
+      "maximum_terrain_height_error_m": 1.2598475012809418e-06,
+      "terrain_sample_count": 9336,
+      "footprint_hausdorff_m": 2.7294515682439726e-05,
+      "footprint_symmetric_difference_m2": 0.016419466044387095,
+      "removed_triangle_surface_area_m2": 0.0,
+      "removed_triangle_xy_area_union_m2": 0.0
+    },
+    {
+      "name": "SM_MPRLG_LandscapeCurb",
+      "source_fbx_sha256": "289a0242a43e07566c9aca203c27d3c15889f4c0af1ceb865e78f1426de8d3ec",
+      "native_fbx_sha256": "4960d12b5006780056bf9566c6e116c146dc38d97088a4d37ed2b73cc8b88060",
+      "asset_sha256": "8c32e9777d90aeee3a5fc93c17abc7303e8afec24299358d9c33ff9e3dc33b64",
+      "native_fbx": "Saved\\MPR\\landscape_layout_20261106\\native\\SM_MPRLG_LandscapeCurb.fbx",
+      "source_triangles": 29616,
+      "native_triangles": 29614,
+      "rejected_source_polygons": [
+        {
+          "source_polygon": 9700,
+          "source_triangle": 10042,
+          "source_vertices_m": [
+            [
+              200.21603393554688,
+              89.76983642578125,
+              -0.9649999737739563
+            ],
+            [
+              200.21617126464844,
+              89.76995086669922,
+              -0.9649999737739563
+            ],
+            [
+              200.2169647216797,
+              89.77069091796875,
+              -0.9649999737739563
+            ]
+          ],
+          "source_area_m2": 5.413312464952469e-09,
+          "xy_area_m2": 5.413312464952469e-09,
+          "ue_float32_cross_squared_cm4": 5.820766091346741e-09,
+          "equal_corners": false,
+          "reason": "UE GetSafeNormal squared-cross cutoff"
+        },
+        {
+          "source_polygon": 9701,
+          "source_triangle": 10043,
+          "source_vertices_m": [
+            [
+              200.2169647216797,
+              89.77069091796875,
+              -1.1649999618530273
+            ],
+            [
+              200.21617126464844,
+              89.76995086669922,
+              -1.1649999618530273
+            ],
+            [
+              200.21603393554688,
+              89.76983642578125,
+              -1.1649999618530273
+            ]
+          ],
+          "source_area_m2": 5.413312464952469e-09,
+          "xy_area_m2": 5.413312464952469e-09,
+          "ue_float32_cross_squared_cm4": 5.820766091346741e-09,
+          "equal_corners": false,
+          "reason": "UE GetSafeNormal squared-cross cutoff"
+        }
+      ],
+      "all_surviving_source_polygons_accounted": true,
+      "all_native_faces_mapped": true,
+      "maximum_native_vertex_distance_m": 3.0223213522840202e-05,
+      "maximum_source_polygon_area_difference_m2": 6.967104276944802e-05,
+      "maximum_terrain_height_error_m": 1.1469936246344403e-06,
+      "terrain_sample_count": 24336,
+      "footprint_hausdorff_m": 3.0223189448760453e-05,
+      "footprint_symmetric_difference_m2": 0.023411734596305668,
+      "removed_triangle_surface_area_m2": 1.0826624929904938e-08,
+      "removed_triangle_xy_area_union_m2": 5.413312464952469e-09
+    }
+  ],
+  "engine_evidence": [
+    {
+      "path": "D:\\UE\\UE_5.8\\Engine\\Source\\Editor\\UnrealEd\\Private\\Fbx\\FbxStaticMeshImport.cpp",
+      "lines": [
+        365,
+        372,
+        879,
+        881
+      ],
+      "sha256": "d6e42f80894f87e580dd72fc2ee7f9a46e312dde1ab006f18f01a068408523c6"
+    },
+    {
+      "path": "D:\\UE\\UE_5.8\\Engine\\Source\\Developer\\MeshBuilder\\Private\\StaticMeshBuilder.cpp",
+      "lines": [
+        1644,
+        1674
+      ],
+      "sha256": "ac4845329704bd8f9b1ffbe1b26c9adf0ffce864fa690521308c0792dcce6508"
+    },
+    {
+      "path": "D:\\UE\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Public\\Math\\UnrealMathUtility.h",
+      "lines": [
+        130,
+        201
+      ],
+      "sha256": "42feaa58fe6da3d00cbd11a9255e303cd88aeadf8caac4a800f9f141fd2218b1"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "plan_sha256": "044416bcf7e796ad2d70e9a98f69089a4beaada64ef711d95f58a90a8f81621b",
+  "manifest_sha256": "be8f765d33d2fc2aacd5d1584932fb56ad7e768a1a7a5f5fc103c09bd4a01ff1",
+  "checks": {
+    "green_hard_overlap_m2": 0.0,
+    "green_road_overlap_m2": 0.0,
+    "green_rail_overlap_m2": 0.0,
+    "new_green_blocked_overlap_m2": 0.0,
+    "raised_outside_green_m2": 0.0,
+    "raised_operating_overlap_m2": 0.0,
+    "raised_mouth_overlap_m2": 0.0,
+    "raised_vehicle_overlap_m2": 0.0,
+    "old_green_area_m2": 4171.182774403791,
+    "new_green_area_m2": 5848.954027706269,
+    "additions_area_m2": 1685.5573451577325,
+    "corner_rounding_removed_m2": 7.786091855264699,
+    "removed_fragments_m2": 2.2642089708909836,
+    "old_islands": 10,
+    "new_islands": 11,
+    "wheel_stops_preserved": 19,
+    "landscape_curb_sections": 24,
+    "ground_offset_m": 0.045,
+    "curb_base_offset_m": 0.035,
+    "curb_top_offset_m": 0.235,
+    "new_actors": 0,
+    "replaced_mesh_components": 2
+  },
+  "native_binary_fbx": [
+    {
+      "name": "SM_MPRLG_CampusGreen",
+      "triangles": 2345,
+      "material_roles": [
+        "MPRR_CampusGreen"
+      ],
+      "footprint_error_m2": 0.005573926724843326,
+      "max_terrain_offset_error_m": 6.974361753259162e-07,
+      "preserved_wheel_stop_triangles": 0
+    },
+    {
+      "name": "SM_MPRLG_LandscapeCurb",
+      "triangles": 29616,
+      "material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "footprint_error_m2": 0.010818396851049569,
+      "max_terrain_offset_error_m": 7.066889619045114e-07,
+      "preserved_wheel_stop_triangles": 684
+    }
+  ]
+}

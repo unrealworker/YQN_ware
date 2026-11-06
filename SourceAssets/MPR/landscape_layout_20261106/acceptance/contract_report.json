@@ -1,0 +1,103 @@
+{
+  "success": true,
+  "tests": [
+    {
+      "name": "real_source_contract",
+      "passed": true,
+      "trees": 1002
+    },
+    {
+      "name": "wrong_map",
+      "passed": true,
+      "error": "Wrong landscape map"
+    },
+    {
+      "name": "stale_baseline",
+      "passed": true,
+      "error": "Stale vegetation baseline"
+    },
+    {
+      "name": "wrong_tree_mesh",
+      "passed": true,
+      "error": "Unreviewed tree mesh"
+    },
+    {
+      "name": "failed_vegetation_validation",
+      "passed": true,
+      "error": "Vegetation geometry validation failed"
+    },
+    {
+      "name": "vegetation_protected_overlap",
+      "passed": true,
+      "error": "Vegetation geometry validation failed"
+    },
+    {
+      "name": "vegetation_crown_collision",
+      "passed": true,
+      "error": "Vegetation geometry validation failed"
+    },
+    {
+      "name": "stale_source_hash",
+      "passed": true,
+      "error": "Source changed: Saved/MPR/landscape_layout_20261106/before.json.gz"
+    },
+    {
+      "name": "source_path_escape",
+      "passed": true,
+      "error": "Source changed: ../escape.bin"
+    },
+    {
+      "name": "omitted_tree_group",
+      "passed": true,
+      "error": "Tree component scope changed"
+    },
+    {
+      "name": "duplicate_tree_group",
+      "passed": true,
+      "error": "Tree component scope changed"
+    },
+    {
+      "name": "invalid_colour_mask",
+      "passed": true,
+      "error": "Invalid tree colour mask"
+    },
+    {
+      "name": "invalid_tree_scale",
+      "passed": true,
+      "error": "Invalid tree scale"
+    },
+    {
+      "name": "invalid_tree_pitch",
+      "passed": true,
+      "error": "Only normalized yaw rotations are reviewed"
+    },
+    {
+      "name": "wrong_asset_namespace",
+      "passed": true,
+      "error": "Unexpected landscape asset namespace"
+    },
+    {
+      "name": "bad_fbx_hash",
+      "passed": true,
+      "error": "FBX source changed"
+    },
+    {
+      "name": "bad_ground_source",
+      "passed": true,
+      "error": "Ground scope must be exactly the green and curb meshes"
+    },
+    {
+      "name": "stale_ground_report",
+      "passed": true,
+      "error": "Ground geometry validation is missing or stale"
+    },
+    {
+      "name": "failed_ground_report",
+      "passed": true,
+      "error": "Ground geometry validation is missing or stale"
+    }
+  ],
+  "script_sha256": "8bc3ec194ce13cdd7f20ad4ea56c0bffa42da42782d8ef5af8f206ac4ee62fcf",
+  "vegetation_sha256": "8c89f3bf850c1d00f7ebd987bee22e58b26c8169c0ec8ac1d5de416496b39246",
+  "ground_sha256": "be8f765d33d2fc2aacd5d1584932fb56ad7e768a1a7a5f5fc103c09bd4a01ff1"
+}

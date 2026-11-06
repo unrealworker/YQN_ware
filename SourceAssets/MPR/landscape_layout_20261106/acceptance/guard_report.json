@@ -1,0 +1,102 @@
+{
+  "success": true,
+  "tests": [
+    {
+      "name": "expected_scene_passes",
+      "passed": true,
+      "result": {
+        "success": true,
+        "actor_count": 855,
+        "tree_groups": 64,
+        "trees": 1002,
+        "changed_actors": 66,
+        "unchanged_actors": 789
+      }
+    },
+    {
+      "name": "unrelated_actor_move",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/0002337D422A972D503256BEC60817D9/transform/translation_cm/0: 0.0 -> 12345.0']"
+    },
+    {
+      "name": "unrelated_actor_hidden",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/0002337D422A972D503256BEC60817D9/hidden: False -> True']"
+    },
+    {
+      "name": "tree_actor_hidden",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/01A5440A46B5A25CCCFD1889F0F42EB5/hidden: False -> True']"
+    },
+    {
+      "name": "tree_component_hidden",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/01A5440A46B5A25CCCFD1889F0F42EB5/components/1/hidden_in_game: False -> True']"
+    },
+    {
+      "name": "tree_component_scaled",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/01A5440A46B5A25CCCFD1889F0F42EB5/components/1/transform/scale/0: 1.0 -> 2.0']"
+    },
+    {
+      "name": "tree_instance_scaled",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/01A5440A46B5A25CCCFD1889F0F42EB5/components/1/instance_transforms/0/scale/0: 0.4830134154255994 -> 0.99']"
+    },
+    {
+      "name": "tree_instance_moved",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/01A5440A46B5A25CCCFD1889F0F42EB5/components/1/instance_transforms/0/translation_cm/0: 49074.725999999995 -> 99999.0']"
+    },
+    {
+      "name": "tree_mask_changed",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/01A5440A46B5A25CCCFD1889F0F42EB5/components/1/custom_data/0: 0 -> 1']"
+    },
+    {
+      "name": "tree_material_changed",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/01A5440A46B5A25CCCFD1889F0F42EB5/components/1/materials/2: /Game/MPRWarehouse/Hierarchy/Materials/MI_MPRH_LeafLight.MI_MPRH_LeafLight -> /Game/Bad.Bad']"
+    },
+    {
+      "name": "tree_mesh_changed",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/01A5440A46B5A25CCCFD1889F0F42EB5/components/1/mesh: /Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_Tree_Canopy.SM_MPRSC_Tree_Canopy -> /Game/Bad.Bad']"
+    },
+    {
+      "name": "world_settings_changed",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/world_to_meters: 100.0 -> 99.0']"
+    },
+    {
+      "name": "world_coverage_actor_removed",
+      "passed": true,
+      "error": "Unreviewed scene change: [': length differs']"
+    },
+    {
+      "name": "actor_removed",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/FFEF07834B203010E00E6C9847D926A2: missing/added']"
+    },
+    {
+      "name": "actor_added",
+      "passed": true,
+      "error": "Unreviewed scene change: ['/BAD_GUID: missing/added']"
+    },
+    {
+      "name": "quaternion_sign_equivalence",
+      "passed": true,
+      "result": {
+        "success": true,
+        "actor_count": 855,
+        "tree_groups": 64,
+        "trees": 1002,
+        "changed_actors": 66,
+        "unchanged_actors": 789
+      }
+    }
+  ],
+  "script_sha256": "8bc3ec194ce13cdd7f20ad4ea56c0bffa42da42782d8ef5af8f206ac4ee62fcf",
+  "vegetation_sha256": "8c89f3bf850c1d00f7ebd987bee22e58b26c8169c0ec8ac1d5de416496b39246",
+  "ground_sha256": "be8f765d33d2fc2aacd5d1584932fb56ad7e768a1a7a5f5fc103c09bd4a01ff1"
+}

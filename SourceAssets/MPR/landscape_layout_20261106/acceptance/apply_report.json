@@ -1,0 +1,104 @@
+{
+  "success": true,
+  "vegetation_sha256": "8c89f3bf850c1d00f7ebd987bee22e58b26c8169c0ec8ac1d5de416496b39246",
+  "ground_sha256": "be8f765d33d2fc2aacd5d1584932fb56ad7e768a1a7a5f5fc103c09bd4a01ff1",
+  "imports": [
+    {
+      "package": "/Game/MPRWarehouse/LandscapeLayout20261106/Meshes/SM_MPRLG_CampusGreen",
+      "reused": false,
+      "fbx_sha256": "e97215144f5dbc4056a5ccf75b9d5f77d479e10a1c2c5cb00518e07f33330661",
+      "material_references": [
+        "/Game/MPRWarehouse/Hierarchy/Materials/MI_MPRH_CampusGreen"
+      ],
+      "lod_triangles": [
+        2336
+      ],
+      "bounds_cm": [
+        [
+          -20800.0,
+          20730.0
+        ],
+        [
+          -10212.001953125,
+          16226.708984375
+        ],
+        [
+          -196.46470642089844,
+          -69.60430145263672
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -20800.0,
+          20730.0
+        ],
+        [
+          -10212.0,
+          16226.7069
+        ],
+        [
+          -196.4647,
+          -69.6043
+        ]
+      ],
+      "max_error_cm": 0.0020843750007770723
+    },
+    {
+      "package": "/Game/MPRWarehouse/LandscapeLayout20261106/Meshes/SM_MPRLG_LandscapeCurb",
+      "reused": false,
+      "fbx_sha256": "289a0242a43e07566c9aca203c27d3c15889f4c0af1ceb865e78f1426de8d3ec",
+      "material_references": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalCurb"
+      ],
+      "lod_triangles": [
+        29614
+      ],
+      "bounds_cm": [
+        [
+          -20792.0,
+          20722.0
+        ],
+        [
+          -10202.111328125,
+          16218.708984375
+        ],
+        [
+          -197.0275115966797,
+          -50.84720230102539
+        ]
+      ],
+      "expected_bounds_cm": [
+        [
+          -20792.0,
+          20722.0
+        ],
+        [
+          -10202.1098,
+          16218.706900000001
+        ],
+        [
+          -197.0275,
+          -50.8472
+        ]
+      ],
+      "max_error_cm": 0.002084374998958083
+    }
+  ],
+  "preservation": {
+    "success": true,
+    "actor_count": 855,
+    "tree_groups": 64,
+    "trees": 1002,
+    "changed_actors": 66,
+    "unchanged_actors": 789
+  },
+  "content": {
+    "success": true,
+    "protected_packages": 1879,
+    "new_packages": {
+      "Content/MPRWarehouse/LandscapeLayout20261106/Meshes/SM_MPRLG_CampusGreen.uasset": "ae64845b32a4579cbaf273466505b5ca159f80d672293a9a8db2331335e60d79",
+      "Content/MPRWarehouse/LandscapeLayout20261106/Meshes/SM_MPRLG_LandscapeCurb.uasset": "8c32e9777d90aeee3a5fc93c17abc7303e8afec24299358d9c33ff9e3dc33b64"
+    }
+  },
+  "map_sha256": "93c0dceac7b5982736b9a390d369a5d54cd16f664a8101c186e23df0c2718b02"
+}

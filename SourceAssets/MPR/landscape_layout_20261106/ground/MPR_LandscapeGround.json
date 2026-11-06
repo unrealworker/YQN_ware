@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "units": "metres",
+  "axis": "CAD +Y; UE import X=100*x,Y=-100*y,Z=100*z",
+  "meshes": [
+    {
+      "name": "SM_MPRLG_CampusGreen",
+      "fbx": "SourceAssets/MPR/landscape_layout_20261106/ground/SM_MPRLG_CampusGreen.fbx",
+      "material_roles": [
+        "MPRR_CampusGreen"
+      ],
+      "bounds_m": [
+        [
+          -208.0,
+          207.3
+        ],
+        [
+          -162.267069,
+          102.12
+        ],
+        [
+          -1.964647,
+          -0.696043
+        ]
+      ],
+      "vertices": 7035,
+      "triangles": 2345
+    },
+    {
+      "name": "SM_MPRLG_LandscapeCurb",
+      "fbx": "SourceAssets/MPR/landscape_layout_20261106/ground/SM_MPRLG_LandscapeCurb.fbx",
+      "material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "bounds_m": [
+        [
+          -207.92,
+          207.22
+        ],
+        [
+          -162.187069,
+          102.021098
+        ],
+        [
+          -1.970275,
+          -0.508472
+        ]
+      ],
+      "vertices": 70262,
+      "triangles": 29616
+    }
+  ],
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "namespace": "/Game/MPRWarehouse/LandscapeLayout20261106",
+  "plan_sha256": "044416bcf7e796ad2d70e9a98f69089a4beaada64ef711d95f58a90a8f81621b",
+  "source_hashes": {
+    "SourceAssets/MPR/site_completion_20261105/site_plan.json": "86c56ef9ea8225db37f5685e77231dcde6381c51a96963c9b9f1406b4301a595",
+    "SourceAssets/MPR/city_road_removal_20261106/layout.json": "33f992bc8b844fd1daa3cfc6163bc5990ead804749f39606c2efc2382d5d3d3c",
+    "SourceAssets/MPR/rebuild_b50b57/manifest.json": "fcb4361c556b00b99ce31885c1fa7121dbecc553b8b782a63dc02b607fe821c8",
+    "SourceAssets/MPR/site_completion_20261105/geometry/manifest.json": "61d6ffd95acb0c42528b3cd16c14f6713dda52ac09e27c05b4b7612e7c870c73",
+    "SourceAssets/MPR/mpr_cad_layout.json": "004f3923f292e0a60e22d677ff542e037a6cf248f6a27c348c068ecac4d9f349",
+    "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPRR_CampusGreen.fbx": "941d6de6d1104f0bf51e6c62864aea895253bf1d9e1416316591bea9ca58e020",
+    "SourceAssets/MPR/site_completion_20261105/geometry/SM_MPRSC_MPR4_TerminalCurb.fbx": "9618673b353c9abd60bb86434a83e366c786ca74f29603f7835c16629c003e45",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_-2_0.fbx": "5cdd01aa716c6c29f82164b2bacb6ffac51e39b40fb6af323d9c6b743acef35b",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_-2_-1.fbx": "0aa33370b7170f19e5a3319f21981b8efccb31fac21a9dcb45fb0876a3dd56c0",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_-2_-2.fbx": "e64ddfa5294ccd7988aeb1eac76db26c0bf0c477ae6475262ff5586c018f22a5",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_-1_0.fbx": "426a224d18cd613116f6269e466fbce9f18d05610f0a9ee94beac7fbc06945ce",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_-1_-1.fbx": "dfceba8b95735cf1b0728e2fb168493269bdba6fd1f050357781c4697e4dc0dc",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_-1_-2.fbx": "097eb18871f4f8130b0749fa463cace26aaede5ca1d744b89b1e79b962b0ee36",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_0_0.fbx": "0eb8b1e04296ad0fe12f4294f7afc7ded294d301ce44a9ab6f82b735347bf083",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_0_-1.fbx": "5c7f1a772d597c2d8e6acdc3e380acdcb9f7e526f37700045c84f00647a6f3e2",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_1_0.fbx": "63e368b0ce8b8295b30e1148e7d8db50832b222a2c3aa0178a3c210da051e70d",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_1_-1.fbx": "2a1ef0e7ff2a55a6024a3a571a25fef63b1135714a78af8e2ee17b9a79026c87"
+  },
+  "mesh_mappings": [
+    {
+      "name": "SM_MPRLG_CampusGreen",
+      "old_mesh": "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPRR_CampusGreen",
+      "new_mesh": "/Game/MPRWarehouse/LandscapeLayout20261106/Meshes/SM_MPRLG_CampusGreen",
+      "guid": "8AACBD08462839D9FDF1A79A307C9952",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_49",
+      "component": "StaticMeshComponent0",
+      "label": "MPRSC_MPRR_CampusGreen",
+      "materials": [
+        "/Game/MPRWarehouse/Hierarchy/Materials/MI_MPRH_CampusGreen.MI_MPRH_CampusGreen"
+      ],
+      "material_roles": [
+        "MPRR_CampusGreen"
+      ]
+    },
+    {
+      "name": "SM_MPRLG_LandscapeCurb",
+      "old_mesh": "/Game/MPRWarehouse/SiteComplete/Meshes/SM_MPRSC_MPR4_TerminalCurb",
+      "new_mesh": "/Game/MPRWarehouse/LandscapeLayout20261106/Meshes/SM_MPRLG_LandscapeCurb",
+      "guid": "C94C2FD34ED0F1C629D760902547EEE7",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_52",
+      "component": "StaticMeshComponent0",
+      "label": "MPRSC_MPR4_TerminalCurb",
+      "materials": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalCurb.MI_SC_MPR4_TerminalCurb"
+      ],
+      "material_roles": [
+        "MPR4_TerminalCurb"
+      ]
+    }
+  ],
+  "new_actors": 0,
+  "replace_mesh_references_only": true
+}
