@@ -1,13 +1,22 @@
 """Low-poly CAD-positioned operating equipment, split into reusable HISM modules."""
 from pathlib import Path
-import sys,json,math,collections
+import sys,json,math,collections,argparse
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(Path(__file__).parent))
 from mpr_blender_common import Geometry
-OUT=ROOT/'SourceAssets/MPR/operations';OUT.mkdir(parents=True,exist_ok=True)
+from mpr_cad_semantics import DRAFTING_SYMBOLS,turn_requires_reflection,reflected_mesh_roles,covered_drive_detail
+from mpr_conveyor_detail_geometry import add_cad_detail_meshes
+from mpr_cad_feed_geometry import add_feed_meshes
+parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,default=ROOT/'SourceAssets/MPR/operations')
+args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+OUT=args.output;OUT.mkdir(parents=True,exist_ok=True)
 layout=json.loads((ROOT/'SourceAssets/MPR/mpr_cad_layout.json').read_text(encoding='utf8'))
+feed_evidence=json.loads((ROOT/'SourceAssets/MPR/operations/cad_loose_feed_geometry.json').read_text(encoding='utf8'))
+loose_feeds=feed_evidence['feeds']
 evidence={x['block']:x for x in json.loads((ROOT/'SourceAssets/MPR/mpr_cad_operations_lines.json').read_text(encoding='utf8'))} if (ROOT/'SourceAssets/MPR/mpr_cad_operations_lines.json').exists() else {}
-g=Geometry();instances=[];omitted=[]
+g=Geometry();instances=[];omitted=[];merged_drive_units=[]
+cad_details=add_cad_detail_meshes(g)
+feed_specs=add_feed_meshes(g,feed_evidence)
 def box(n,r,p,s):g.box(n,r,p,s)
 def legset(n,w,l,z=.87):
  for x in (-w*.4,w*.4):
@@ -25,9 +34,6 @@ def rollers(n,w,l,z=1):
  legset(n,w,l,z-.1)
 conv='SM_MPR_Conveyor2m';rollers(conv,1,2)
 table='SM_MPR_WorkTable';legset(table,1,1.2,.83);box(table,'Porcelain',(0,0,.88),(1,1.2,.1));box(table,'Cobalt',(0,.43,1.12),(.04,.04,.43));box(table,'Charcoal',(0,.43,1.35),(.38,.055,.27));box(table,'SoftBlue',(0,.397,1.35),(.32,.015,.21))
-chute='SM_MPR_StationChute';legset(chute,.7,1.14,.52)
-g.mesh(chute,'Metal',[(-.35,-.57,.52),(.35,-.57,.52),(.35,.57,.95),(-.35,.57,.95),(-.35,-.57,.49),(.35,-.57,.49),(.35,.57,.92),(-.35,.57,.92)],[(0,1,2,3),(7,6,5,4),(0,4,5,1),(3,2,6,7),(0,3,7,4),(1,5,6,2)])
-for x in (-.34,.34):g.mesh(chute,'Cobalt',[(x-.015,-.57,.52),(x+.015,-.57,.52),(x+.015,.57,.95),(x-.015,.57,.95),(x-.015,-.57,.68),(x+.015,-.57,.68),(x+.015,.57,1.11),(x-.015,.57,1.11)],[(0,1,2,3),(4,7,6,5),(0,4,5,1),(2,6,7,3),(0,3,7,4),(1,5,6,2)])
 output='SM_MPR_SorterOutput';legset(output,.415,2.38,.76)
 box(output,'Metal',(0,0,.82),(.415,2.38,.055));box(output,'Rubber',(0,0,.857),(.35,2.30,.02))
 for x in (-.19,.19):box(output,'Cobalt',(x,0,.93),(.035,2.38,.12))
@@ -53,17 +59,24 @@ def conveyor(v):
 for v in layout['conveyor_runs']:conveyor(v)
 for v in layout['equipment']:
  k=v['kind'];w,l=v['size_m'];n=v['block']
- if k=='workstation':fromcad(v,table,(1,1.2))
- elif k=='station_chute':fromcad(v,chute,(.7,1.14))
+ if n in DRAFTING_SYMBOLS:continue
+ drive=covered_drive_detail(v,layout['conveyor_runs'])
+ if drive:
+  merged_drive_units.append(drive);continue
+ if n in cad_details:
+  detail=cad_details[n];fromcad(v,detail['mesh'],detail['native_size_m'])
+ elif k=='workstation':fromcad(v,table,(1,1.2))
  elif k=='sorter_output':fromcad(v,output,(.415,2.38))
  elif k=='carton_sealer':fromcad(v,sealer,(1.23211,1.9504))
  elif k=='machine_support' and min(w,l)<.3:
   vv=dict(v);vv['size_m']=[max(w,l),min(w,l)];vv['rotation_deg']=v['rotation_deg']+(90 if l>w else 0);fromcad(vv,support,(1.295,.2))
- elif n.startswith('*U13') and abs(w-.55)<.02 and abs(l-1.1)<.02:fromcad(v,output,(.415,2.38))
+ elif n.startswith('*U13') and abs(w-.55)<.02 and abs(l-1.1)<.02:
+  spec=feed_specs['__terminal__'];fromcad(v,spec['mesh'],spec['native_size_m'])
+  instances[-1]['height_basis']='H:1500 feed-line continuation; endpoint assignment is display interpretation'
  elif n=='扫码1200':fromcad(v,scan,(.8,1.405))
  elif n=='GIE2':fromcad(v,table,(1,1.2))
  elif n in ('*U951','*U953','*U949','*U950'):fromcad(v,table,(1,1.2))
- elif n in ('*U1656','*U258','*U259','*U1198','物流猫摆轮分拣机M5A10','BAILUN 202506040917','Y型汇流机'):
+ elif n in ('*U1656','*U258','*U259','*U1198','物流猫摆轮分拣机M5A10','BAILUN 202506040917'):
   conveyor(v)
  elif n in ('*U1368','*U1369'):fromcad(v,scan,(.8,1.405))
  elif n=='自动开箱机':fromcad(v,sealer,(1.23211,1.9504))
@@ -103,7 +116,14 @@ for row in list(omitted):
  if n not in ('*U255','*U74','*U256','*U33','e3'):continue
  if n not in curves:curves[n]=make_turn(n)
  if curves[n]:
-  v=next(x for x in layout['equipment'] if x['id']==row['id']);add(curves[n],[*v['position_m'],0],v['rotation_deg'],source=v['source_handles'],kind='cad_arc_conveyor');handled.add(row['id'])
+  v=next(x for x in layout['equipment'] if x['id']==row['id'])
+  reference=next(x for x in layout['equipment'] if x['id']==evidence[n]['placement']['id'])
+  if n=='*U33':assert 'planar_handedness' in reference and 'planar_handedness' in v,'U33 CAD reflection evidence is required'
+  mesh=curves[n]
+  if turn_requires_reflection(reference,v):
+   mesh=curves[n]+'_Reflected'
+   if mesh not in g.data:g.data[mesh]=reflected_mesh_roles(g.data[curves[n]])
+  add(mesh,[*v['position_m'],0],v['rotation_deg'],source=v['source_handles'],kind='cad_arc_conveyor');handled.add(row['id'])
 # Empty CAD rectangles are operating-zone reservations, not solid machinery.
 zone_names={'*U1073','*U1072','*U1294','*U1295','*U1324','*U1114','*U1115','*U1116','*U1117','*U1528','*U1326'}
 zones=[];additional_pallets=[];merged_supports=[]
@@ -168,6 +188,9 @@ box(platform,'PaleGray',(0,0,.015),(2.5999948,38.999922,.03))
 for y in [i*.65-19.499961 for i in range(61)]:box(platform,'Metal',(0,y,.033),(2.5999948,.012,.006))
 for x in (-1.2999974,-.6499974,0,.6500026,1.2999974):box(platform,'Metal',(x,0,.033),(.012,38.999922,.006))
 add(platform,[-108.4858347,-54.387945,0],source=['2D41B7'],kind='CAD sorter floor grid; floor level')
+for feed in loose_feeds:
+ spec=feed_specs[feed['id']];fromcad(feed,spec['mesh'],spec['native_size_m'])
+ instances[-1]['height_basis']=feed['height_policy']
 omitted=[v for v in omitted if v['id'] not in handled]
 deduplicated={}
 for row in instances:
@@ -179,5 +202,5 @@ manifest=g.export(OUT,'mpr_operations',{'purpose':'CAD positioned modular basic 
 for row in manifest['meshes']:row['instance_only']=True
 (OUT/'mpr_operations.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf8')
 assert all(x['triangles']<1800 for x in manifest['meshes'])
-(OUT/'instances.json').write_text(json.dumps({'schema_version':1,'coordinate_system':'CAD local metres; UE apply X*100,Y*-100,Z*100,yaw*-1 once','instances':instances,'additional_pallet_positions':additional_pallets,'reserved_zones':zones,'merged_supports':merged_supports,'unmodeled_components':omitted,'counts_by_mesh':dict(collections.Counter(v['mesh'] for v in instances))},ensure_ascii=False,indent=2),encoding='utf8')
+(OUT/'instances.json').write_text(json.dumps({'schema_version':1,'coordinate_system':'CAD local metres; UE apply X*100,Y*-100,Z*100,yaw*-1 once','instances':instances,'additional_pallet_positions':additional_pallets,'reserved_zones':zones,'merged_supports':merged_supports,'merged_drive_units':merged_drive_units,'recovered_loose_feeds':loose_feeds,'unmodeled_components':omitted,'drafting_symbols':layout.get('drafting_symbols',[]),'counts_by_mesh':dict(collections.Counter(v['mesh'] for v in instances))},ensure_ascii=False,indent=2),encoding='utf8')
 print('MPR_OPERATIONS_INSTANCES',len(instances),'REVIEW',len(omitted))

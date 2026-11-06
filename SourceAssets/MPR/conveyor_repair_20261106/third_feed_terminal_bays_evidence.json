@@ -1,0 +1,299 @@
+{
+  "scope": "Only two adjoining terminal compartments in omitted 2CC719. Do not add them to the other two lines.",
+  "items": [
+    {
+      "id": "terminal_bay_0_9",
+      "source_handles": [
+        "2CC719",
+        "1E23E7",
+        "1E23E8",
+        "1E23E9",
+        "1E23EA"
+      ],
+      "kind": "terminal_attachment_bay_outline",
+      "source_edges": [
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23E7"
+          ],
+          "points_m": [
+            [
+              68.95099307,
+              57.95356852
+            ],
+            [
+              68.95099307,
+              57.14356852
+            ]
+          ]
+        },
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23E8"
+          ],
+          "points_m": [
+            [
+              68.95099307,
+              57.14356852
+            ],
+            [
+              69.85099307,
+              57.14356852
+            ]
+          ]
+        },
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23E9"
+          ],
+          "points_m": [
+            [
+              69.85099307,
+              57.14356852
+            ],
+            [
+              69.85099307,
+              57.95356852
+            ]
+          ]
+        },
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23EA"
+          ],
+          "points_m": [
+            [
+              69.85099307,
+              57.95356852
+            ],
+            [
+              68.95099307,
+              57.95356852
+            ]
+          ]
+        }
+      ],
+      "source_polygon_m": [
+        [
+          68.95099307,
+          57.14356852
+        ],
+        [
+          69.85099307,
+          57.14356852
+        ],
+        [
+          69.85099307,
+          57.95356852
+        ],
+        [
+          68.95099307,
+          57.95356852
+        ]
+      ],
+      "bounds_m": [
+        [
+          68.95099307,
+          57.14356852
+        ],
+        [
+          69.85099307,
+          57.95356852
+        ]
+      ],
+      "center_m": [
+        69.40099307,
+        57.54856852
+      ],
+      "size_m": [
+        0.9000000000000057,
+        0.8099999999999952
+      ],
+      "needs_missing_footprint": true,
+      "semantic_certainty": "Two adjoining terminal equipment compartments are certain; conveyor belt, roller, box contents and height are not specified by these bare LINE rectangles."
+    },
+    {
+      "id": "terminal_bay_0_6",
+      "source_handles": [
+        "2CC719",
+        "1E23E9",
+        "1E23EB",
+        "1E23EC",
+        "1E23ED"
+      ],
+      "kind": "terminal_attachment_bay_outline",
+      "source_edges": [
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23E9"
+          ],
+          "points_m": [
+            [
+              69.85099307,
+              57.14356852
+            ],
+            [
+              69.85099307,
+              57.95356852
+            ]
+          ]
+        },
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23EB"
+          ],
+          "points_m": [
+            [
+              69.85099307,
+              57.95356852
+            ],
+            [
+              70.45099307,
+              57.95356852
+            ]
+          ]
+        },
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23EC"
+          ],
+          "points_m": [
+            [
+              70.45099307,
+              57.95356852
+            ],
+            [
+              70.45099307,
+              57.14356852
+            ]
+          ]
+        },
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23ED"
+          ],
+          "points_m": [
+            [
+              70.45099307,
+              57.14356852
+            ],
+            [
+              69.85099307,
+              57.14356852
+            ]
+          ]
+        }
+      ],
+      "source_polygon_m": [
+        [
+          69.85099307,
+          57.14356852
+        ],
+        [
+          70.45099307,
+          57.14356852
+        ],
+        [
+          70.45099307,
+          57.95356852
+        ],
+        [
+          69.85099307,
+          57.95356852
+        ]
+      ],
+      "bounds_m": [
+        [
+          69.85099307,
+          57.14356852
+        ],
+        [
+          70.45099307,
+          57.95356852
+        ]
+      ],
+      "center_m": [
+        70.15099307,
+        57.54856852
+      ],
+      "size_m": [
+        0.5999999999999943,
+        0.8099999999999952
+      ],
+      "needs_missing_footprint": true,
+      "semantic_certainty": "Two adjoining terminal equipment compartments are certain; conveyor belt, roller, box contents and height are not specified by these bare LINE rectangles."
+    }
+  ],
+  "source_neighbors": {
+    "upstream_end_cap": {
+      "h": [
+        "2CC719",
+        "1E23DF"
+      ],
+      "t": "LINE",
+      "layer": "0",
+      "p": [
+        [
+          68.94669866,
+          57.13904564
+        ],
+        [
+          68.94669833,
+          57.96087726
+        ]
+      ],
+      "closed": false
+    },
+    "downstream_terminal_1m": {
+      "h": [
+        "2CC719",
+        "1E241C"
+      ],
+      "t": "LWPOLYLINE",
+      "layer": "0",
+      "p": [
+        [
+          71.48578123,
+          57.14246115
+        ],
+        [
+          71.48578123,
+          57.93746115
+        ],
+        [
+          70.48578123,
+          57.93746115
+        ],
+        [
+          70.48578123,
+          57.14246115
+        ],
+        [
+          71.48578123,
+          57.14246115
+        ],
+        [
+          71.48578123,
+          57.14246115
+        ]
+      ],
+      "closed": true
+    }
+  },
+  "seams_m": {
+    "previous_outer_endcap_to_bay": 0.004294409999999971,
+    "last_sorter_module_to_bay": 0.3043010899999956,
+    "bay_to_1m_terminal": 0.034788160000005064
+  },
+  "existing_duplicate_audit": "No top-level equipment INSERT or direct loose geometry occupies the two footprints. Intersecting non-local bboxes only warehouse outline and two unrelated annotation-block giant bboxes. The actual parent is omitted 2CC719. No GIE2 proxy here.",
+  "other_lines": "Right contains only endcaps 2CB22D/2CB230 then final rectangle 2CB252; left contains 2CC5F2/2CC5F5 then 2CC617. Neither original top-level line has these .9m/.6m compartments.",
+  "recommendation": "Restore as two neutral terminal attachment bays (or a single 1.5m attachment with a divider at .9m), with visible shared boundary. Do not make an uninterrupted black conveyor belt; no source belt/roller/arrow/height evidence exists in this footprint."
+}

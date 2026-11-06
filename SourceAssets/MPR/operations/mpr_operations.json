@@ -4,6 +4,363 @@
   "axis": "CAD +Y; UE import X=100*x,Y=-100*y,Z=100*z",
   "meshes": [
     {
+      "name": "SM_MPR_CollectionCellsCAD",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CollectionCellsCAD.fbx",
+      "material_roles": [
+        "Cobalt",
+        "Porcelain",
+        "Metal",
+        "Charcoal"
+      ],
+      "bounds_m": [
+        [
+          -0.20750078035726693,
+          0.20749788903353794
+        ],
+        [
+          -1.190004170350441,
+          1.1899949495756046
+        ],
+        [
+          0.0,
+          0.99
+        ]
+      ],
+      "vertices": 560,
+      "triangles": 1064,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_YMergeCAD",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_YMergeCAD.fbx",
+      "material_roles": [
+        "Metal",
+        "Cobalt",
+        "Charcoal"
+      ],
+      "bounds_m": [
+        [
+          -0.4429102734403102,
+          0.4550624494942605
+        ],
+        [
+          -0.609669646757744,
+          0.6096666067908495
+        ],
+        [
+          0.0,
+          1.035
+        ]
+      ],
+      "vertices": 480,
+      "triangles": 816,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CADFeedRise120",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CADFeedRise120.fbx",
+      "material_roles": [
+        "Metal",
+        "Rubber",
+        "Cobalt"
+      ],
+      "bounds_m": [
+        [
+          -0.4301900000000001,
+          0.4301900000000001
+        ],
+        [
+          -1.4,
+          1.4
+        ],
+        [
+          0.0,
+          1.25
+        ]
+      ],
+      "vertices": 112,
+      "triangles": 168,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CADFeedRise150",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CADFeedRise150.fbx",
+      "material_roles": [
+        "Metal",
+        "Rubber",
+        "Cobalt"
+      ],
+      "bounds_m": [
+        [
+          -0.44000000000000006,
+          0.44000000000000006
+        ],
+        [
+          -1.095,
+          1.095
+        ],
+        [
+          0.0,
+          1.55
+        ]
+      ],
+      "vertices": 112,
+      "triangles": 168,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CADFeedBelt",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CADFeedBelt.fbx",
+      "material_roles": [
+        "Metal",
+        "Rubber",
+        "Cobalt"
+      ],
+      "bounds_m": [
+        [
+          -0.44000000000000006,
+          0.44000000000000006
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.55
+        ]
+      ],
+      "vertices": 112,
+      "triangles": 168,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CADFeedTerminal",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CADFeedTerminal.fbx",
+      "material_roles": [
+        "Metal",
+        "Rubber",
+        "Cobalt"
+      ],
+      "bounds_m": [
+        [
+          -0.2075,
+          0.2075
+        ],
+        [
+          -1.19,
+          1.19
+        ],
+        [
+          0.0,
+          1.55
+        ]
+      ],
+      "vertices": 112,
+      "triangles": 168,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CADFeedCap",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CADFeedCap.fbx",
+      "material_roles": [
+        "Metal",
+        "Rubber"
+      ],
+      "bounds_m": [
+        [
+          -0.3975,
+          0.3975
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.5
+        ]
+      ],
+      "vertices": 88,
+      "triangles": 132,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CADFeedTerminalBay",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CADFeedTerminalBay.fbx",
+      "material_roles": [
+        "Metal",
+        "Rubber"
+      ],
+      "bounds_m": [
+        [
+          -0.405,
+          0.405
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          0.0,
+          1.5
+        ]
+      ],
+      "vertices": 88,
+      "triangles": 132,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CADFeedTransfer_2CB2DE",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CADFeedTransfer_2CB2DE.fbx",
+      "material_roles": [
+        "Metal"
+      ],
+      "bounds_m": [
+        [
+          -0.40202750000000265,
+          0.4019425000000041
+        ],
+        [
+          -0.07747000000000528,
+          0.07746999999999107
+        ],
+        [
+          1.175,
+          1.2
+        ]
+      ],
+      "vertices": 8,
+      "triangles": 12,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CADFeedTransfer_2CC6A3",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CADFeedTransfer_2CC6A3.fbx",
+      "material_roles": [
+        "Metal"
+      ],
+      "bounds_m": [
+        [
+          -0.4019425000000041,
+          0.40202750000000265
+        ],
+        [
+          -0.07747000000000528,
+          0.07746999999999107
+        ],
+        [
+          1.175,
+          1.2
+        ]
+      ],
+      "vertices": 8,
+      "triangles": 12,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CADFeedTransfer_2CC7B0",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CADFeedTransfer_2CC7B0.fbx",
+      "material_roles": [
+        "Metal"
+      ],
+      "bounds_m": [
+        [
+          -0.4020266075000052,
+          0.40194590250000317
+        ],
+        [
+          -0.07747058999999726,
+          0.07747058999999726
+        ],
+        [
+          1.175,
+          1.2
+        ]
+      ],
+      "vertices": 8,
+      "triangles": 12,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CADFeedChevron_2CB2DE",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CADFeedChevron_2CB2DE.fbx",
+      "material_roles": [
+        "Metal",
+        "Cobalt",
+        "Charcoal"
+      ],
+      "bounds_m": [
+        [
+          -0.4422449999999998,
+          0.4423057650000004
+        ],
+        [
+          -0.7154799999999994,
+          0.7154799999999994
+        ],
+        [
+          0.0,
+          1.5
+        ]
+      ],
+      "vertices": 640,
+      "triangles": 1096,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CADFeedChevron_2CC6A3",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CADFeedChevron_2CC6A3.fbx",
+      "material_roles": [
+        "Metal",
+        "Cobalt",
+        "Charcoal"
+      ],
+      "bounds_m": [
+        [
+          -0.4423057650000004,
+          0.4422449999999998
+        ],
+        [
+          -0.7154799999999994,
+          0.7154799999999994
+        ],
+        [
+          0.0,
+          1.5
+        ]
+      ],
+      "vertices": 640,
+      "triangles": 1096,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_CADFeedChevron_2CC7B0",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_CADFeedChevron_2CC7B0.fbx",
+      "material_roles": [
+        "Metal",
+        "Cobalt",
+        "Charcoal"
+      ],
+      "bounds_m": [
+        [
+          -0.44090470500000123,
+          0.4423057650000004
+        ],
+        [
+          -0.7154799199999999,
+          0.7154799199999999
+        ],
+        [
+          0.0,
+          1.5
+        ]
+      ],
+      "vertices": 640,
+      "triangles": 1096,
+      "instance_only": true
+    },
+    {
       "name": "SM_MPR_Conveyor2m",
       "fbx": "SourceAssets/MPR/operations/SM_MPR_Conveyor2m.fbx",
       "material_roles": [
@@ -56,32 +413,6 @@
       ],
       "vertices": 112,
       "triangles": 168,
-      "instance_only": true
-    },
-    {
-      "name": "SM_MPR_StationChute",
-      "fbx": "SourceAssets/MPR/operations/SM_MPR_StationChute.fbx",
-      "material_roles": [
-        "Metal",
-        "Rubber",
-        "Cobalt"
-      ],
-      "bounds_m": [
-        [
-          -0.35500000000000004,
-          0.35500000000000004
-        ],
-        [
-          -0.57,
-          0.57
-        ],
-        [
-          0.0,
-          1.11
-        ]
-      ],
-      "vertices": 104,
-      "triangles": 156,
       "instance_only": true
     },
     {
@@ -287,6 +618,32 @@
         [
           -0.943520000000034,
           1.2214800564032504
+        ],
+        [
+          0.0,
+          1.08
+        ]
+      ],
+      "vertices": 368,
+      "triangles": 488,
+      "instance_only": true
+    },
+    {
+      "name": "SM_MPR_Turn__U33_Reflected",
+      "fbx": "SourceAssets/MPR/operations/SM_MPR_Turn__U33_Reflected.fbx",
+      "material_roles": [
+        "Rubber",
+        "Cobalt",
+        "Metal"
+      ],
+      "bounds_m": [
+        [
+          -1.1164500000000348,
+          1.0485500976934847
+        ],
+        [
+          -1.2214800564032504,
+          0.943520000000034
         ],
         [
           0.0,

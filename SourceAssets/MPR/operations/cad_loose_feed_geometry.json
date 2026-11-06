@@ -1,0 +1,6816 @@
+{
+  "schema_version": 1,
+  "source": "D:\\Data\\仓库数据\\MPR\\平面布局图_MPR规划图V1.1_ALL-IN-ONE_0921.dxf",
+  "source_sha256": "c316aafe183162c5bef636885b59cc1000c3eecf50d8be645490b4716c6af863",
+  "coordinate_system": "local CAD XY metres. UE X=x*100, Y=-y*100. Source x=(DXF X-12800)*.0254, y=(DXF Y-8000)*.0254.",
+  "source_evidence_sha256": "26f6e352c70f0ace8fce7a0b9304785514ff1b9a0ef9ae755e6e9cc118ff6d04",
+  "feeds": [
+    {
+      "id": "2CB2DE_entrance",
+      "curve_handle": "2CB2DE",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2C9FAD",
+        "2C9FAE",
+        "2C9FAB",
+        "2C9FAC"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2C9FAD"
+          ],
+          "points_m": [
+            [
+              112.88553,
+              60.31945
+            ],
+            [
+              115.68585,
+              60.31945
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2C9FAE"
+          ],
+          "points_m": [
+            [
+              115.6866,
+              59.51962
+            ],
+            [
+              112.88553,
+              59.51962
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2C9FAB"
+          ],
+          "points_m": [
+            [
+              112.88553,
+              60.34945
+            ],
+            [
+              115.68553,
+              60.34945
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2C9FAC"
+          ],
+          "points_m": [
+            [
+              115.68553,
+              59.48945
+            ],
+            [
+              112.88553,
+              59.48907
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          112.88553,
+          59.51962
+        ],
+        [
+          115.6866,
+          59.51962
+        ],
+        [
+          115.6866,
+          60.31945
+        ],
+        [
+          112.88553,
+          60.31945
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          112.88553,
+          59.919535
+        ],
+        [
+          115.6866,
+          59.919535
+        ]
+      ],
+      "length_m": 2.8010699999999957,
+      "belt_width_m": 0.79983,
+      "outer_width_m": 0.8603799999999993,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "nominal_length_m": 2.799999999999997,
+      "nominal_axis_endpoints_m": [
+        [
+          112.88553,
+          59.919535
+        ],
+        [
+          115.68553,
+          59.919535
+        ]
+      ],
+      "render_axis_endpoints_m": [
+        [
+          112.88553,
+          59.919535
+        ],
+        [
+          115.68553,
+          59.919535
+        ]
+      ],
+      "position_m": [
+        114.28553,
+        59.919535
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8603799999999993,
+        2.799999999999997
+      ],
+      "mesh_key": "rise120",
+      "port_heights_m": [
+        1.0,
+        1.2
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC6A3_entrance",
+      "curve_handle": "2CC6A3",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CB357",
+        "2CB358",
+        "2CB355",
+        "2CB356"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CB357"
+          ],
+          "points_m": [
+            [
+              97.80921,
+              60.31945
+            ],
+            [
+              95.0089,
+              60.31945
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CB358"
+          ],
+          "points_m": [
+            [
+              95.00814,
+              59.51962
+            ],
+            [
+              97.80921,
+              59.51962
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CB355"
+          ],
+          "points_m": [
+            [
+              97.80921,
+              60.34945
+            ],
+            [
+              95.00921,
+              60.34945
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CB356"
+          ],
+          "points_m": [
+            [
+              95.00921,
+              59.48945
+            ],
+            [
+              97.80921,
+              59.48907
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          95.00814,
+          59.51962
+        ],
+        [
+          97.80921,
+          59.51962
+        ],
+        [
+          97.80921,
+          60.31945
+        ],
+        [
+          95.00814,
+          60.31945
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          95.00814,
+          59.919535
+        ],
+        [
+          97.80921,
+          59.919535
+        ]
+      ],
+      "length_m": 2.8010699999999957,
+      "belt_width_m": 0.79983,
+      "outer_width_m": 0.8603799999999993,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "nominal_length_m": 2.799999999999997,
+      "nominal_axis_endpoints_m": [
+        [
+          95.00921,
+          59.919535
+        ],
+        [
+          97.80921,
+          59.919535
+        ]
+      ],
+      "render_axis_endpoints_m": [
+        [
+          97.80921,
+          59.919535
+        ],
+        [
+          95.00921,
+          59.919535
+        ]
+      ],
+      "position_m": [
+        96.40921,
+        59.919535
+      ],
+      "rotation_deg": 90,
+      "size_m": [
+        0.8603799999999993,
+        2.799999999999997
+      ],
+      "mesh_key": "rise120",
+      "port_heights_m": [
+        1.0,
+        1.2
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC7B0_entrance",
+      "curve_handle": "2CC7B0",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CC719",
+        "1E10AB",
+        "1E10AC",
+        "1E10A9",
+        "1E10AA"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CC719",
+            "1E10AB"
+          ],
+          "points_m": [
+            [
+              48.13955735,
+              57.94391286
+            ],
+            [
+              50.93987209,
+              57.94391286
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CC719",
+            "1E10AC"
+          ],
+          "points_m": [
+            [
+              50.9406259,
+              57.14407427
+            ],
+            [
+              48.13955735,
+              57.14407427
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CC719",
+            "1E10A9"
+          ],
+          "points_m": [
+            [
+              48.13955735,
+              57.97391187
+            ],
+            [
+              50.93955729,
+              57.97391187
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CC719",
+            "1E10AA"
+          ],
+          "points_m": [
+            [
+              50.93955729,
+              57.11391187
+            ],
+            [
+              48.13955735,
+              57.11352662
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          48.13955735,
+          57.14407427
+        ],
+        [
+          50.9406259,
+          57.14407427
+        ],
+        [
+          50.9406259,
+          57.94391286
+        ],
+        [
+          48.13955735,
+          57.94391286
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          48.13955735,
+          57.543993564999994
+        ],
+        [
+          50.9406259,
+          57.543993564999994
+        ]
+      ],
+      "length_m": 2.8010685500000037,
+      "belt_width_m": 0.7998385900000002,
+      "outer_width_m": 0.8603852500000002,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "nominal_length_m": 2.7999999400000064,
+      "nominal_axis_endpoints_m": [
+        [
+          48.13955735,
+          57.543993564999994
+        ],
+        [
+          50.93955729,
+          57.543993564999994
+        ]
+      ],
+      "render_axis_endpoints_m": [
+        [
+          48.13955735,
+          57.543993564999994
+        ],
+        [
+          50.93955729,
+          57.543993564999994
+        ]
+      ],
+      "position_m": [
+        49.53955732,
+        57.543993564999994
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8603852500000002,
+        2.7999999400000064
+      ],
+      "mesh_key": "rise120",
+      "port_heights_m": [
+        1.0,
+        1.2
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CB2DE_slope_2_19",
+      "curve_handle": "2CB2DE",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CA607",
+        "2CA608",
+        "2CA609",
+        "2CA60A"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CA607"
+          ],
+          "points_m": [
+            [
+              118.03047,
+              60.32359
+            ],
+            [
+              115.84047,
+              60.32359
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CA608"
+          ],
+          "points_m": [
+            [
+              118.03047,
+              59.52359
+            ],
+            [
+              115.84047,
+              59.52359
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CA609"
+          ],
+          "points_m": [
+            [
+              118.03035,
+              60.36359
+            ],
+            [
+              115.84035,
+              60.36359
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CA60A"
+          ],
+          "points_m": [
+            [
+              118.03082,
+              59.48359
+            ],
+            [
+              115.84047,
+              59.48359
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          115.84047,
+          59.52359
+        ],
+        [
+          118.03047,
+          59.52359
+        ],
+        [
+          118.03047,
+          60.32359
+        ],
+        [
+          115.84047,
+          60.32359
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          115.84047,
+          59.923590000000004
+        ],
+        [
+          118.03047,
+          59.923590000000004
+        ]
+      ],
+      "length_m": 2.1899999999999977,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": 0.8800000000000026,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "render_axis_endpoints_m": [
+        [
+          115.84047,
+          59.923590000000004
+        ],
+        [
+          118.03047,
+          59.923590000000004
+        ]
+      ],
+      "position_m": [
+        116.93547,
+        59.923590000000004
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8800000000000026,
+        2.1899999999999977
+      ],
+      "mesh_key": "rise150",
+      "port_heights_m": [
+        1.2,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC6A3_slope_2_19",
+      "curve_handle": "2CC6A3",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CB9B1",
+        "2CB9B2",
+        "2CB9B3",
+        "2CB9B4"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CB9B1"
+          ],
+          "points_m": [
+            [
+              92.66427,
+              60.32359
+            ],
+            [
+              94.85427,
+              60.32359
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CB9B2"
+          ],
+          "points_m": [
+            [
+              92.66427,
+              59.52359
+            ],
+            [
+              94.85427,
+              59.52359
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CB9B3"
+          ],
+          "points_m": [
+            [
+              92.66439,
+              60.36359
+            ],
+            [
+              94.85439,
+              60.36359
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CB9B4"
+          ],
+          "points_m": [
+            [
+              92.66392,
+              59.48359
+            ],
+            [
+              94.85427,
+              59.48359
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          92.66427,
+          59.52359
+        ],
+        [
+          94.85427,
+          59.52359
+        ],
+        [
+          94.85427,
+          60.32359
+        ],
+        [
+          92.66427,
+          60.32359
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          92.66427,
+          59.923590000000004
+        ],
+        [
+          94.85427,
+          59.923590000000004
+        ]
+      ],
+      "length_m": 2.1899999999999977,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": 0.8800000000000026,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "render_axis_endpoints_m": [
+        [
+          94.85427,
+          59.923590000000004
+        ],
+        [
+          92.66427,
+          59.923590000000004
+        ]
+      ],
+      "position_m": [
+        93.75927,
+        59.923590000000004
+      ],
+      "rotation_deg": 90,
+      "size_m": [
+        0.8800000000000026,
+        2.1899999999999977
+      ],
+      "mesh_key": "rise150",
+      "port_heights_m": [
+        1.2,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC7B0_slope_2_19",
+      "curve_handle": "2CC7B0",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CC719",
+        "1E174D",
+        "1E174E",
+        "1E174F",
+        "1E1750"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CC719",
+            "1E174D"
+          ],
+          "points_m": [
+            [
+              53.28449847,
+              57.94804678
+            ],
+            [
+              51.09449847,
+              57.94804678
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CC719",
+            "1E174E"
+          ],
+          "points_m": [
+            [
+              53.28449847,
+              57.14804678
+            ],
+            [
+              51.09449847,
+              57.14804678
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CC719",
+            "1E174F"
+          ],
+          "points_m": [
+            [
+              53.28437574,
+              57.98804602
+            ],
+            [
+              51.09437574,
+              57.98804602
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CC719",
+            "1E1750"
+          ],
+          "points_m": [
+            [
+              53.28484468,
+              57.10805277
+            ],
+            [
+              51.09449847,
+              57.10805277
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          51.09449847,
+          57.14804678
+        ],
+        [
+          53.28449847,
+          57.14804678
+        ],
+        [
+          53.28449847,
+          57.94804678
+        ],
+        [
+          51.09449847,
+          57.94804678
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          51.09449847,
+          57.54804678
+        ],
+        [
+          53.28449847,
+          57.54804678
+        ]
+      ],
+      "length_m": 2.190000000000005,
+      "belt_width_m": 0.7999999999999972,
+      "outer_width_m": 0.8799932499999983,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "render_axis_endpoints_m": [
+        [
+          51.09449847,
+          57.54804678
+        ],
+        [
+          53.28449847,
+          57.54804678
+        ]
+      ],
+      "position_m": [
+        52.189498470000004,
+        57.54804678
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8799932499999983,
+        2.190000000000005
+      ],
+      "mesh_key": "rise150",
+      "port_heights_m": [
+        1.2,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CB2DE_belt_1_46",
+      "curve_handle": "2CB2DE",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CA611",
+        "2CA612",
+        "2CA613",
+        "2CA614"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CA611"
+          ],
+          "points_m": [
+            [
+              120.93461,
+              60.32787
+            ],
+            [
+              119.47474,
+              60.32787
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CA612"
+          ],
+          "points_m": [
+            [
+              120.93461,
+              59.52787
+            ],
+            [
+              119.47474,
+              59.52787
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CA613"
+          ],
+          "points_m": [
+            [
+              120.93461,
+              60.36787
+            ],
+            [
+              119.47461,
+              60.36787
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CA614"
+          ],
+          "points_m": [
+            [
+              120.93461,
+              59.48787
+            ],
+            [
+              119.47474,
+              59.48787
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          119.47474,
+          59.52787
+        ],
+        [
+          120.93461,
+          59.52787
+        ],
+        [
+          120.93461,
+          60.32787
+        ],
+        [
+          119.47474,
+          60.32787
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          119.47474,
+          59.92787
+        ],
+        [
+          120.93461,
+          59.92787
+        ]
+      ],
+      "length_m": 1.4598700000000093,
+      "belt_width_m": 0.7999999999999972,
+      "outer_width_m": 0.8800000000000026,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "render_axis_endpoints_m": [
+        [
+          119.47474,
+          59.92787
+        ],
+        [
+          120.93461,
+          59.92787
+        ]
+      ],
+      "position_m": [
+        120.20467500000001,
+        59.92787
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8800000000000026,
+        1.4598700000000093
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC6A3_belt_1_46",
+      "curve_handle": "2CC6A3",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CB9BB",
+        "2CB9BC",
+        "2CB9BD",
+        "2CB9BE"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CB9BB"
+          ],
+          "points_m": [
+            [
+              89.76013,
+              60.32787
+            ],
+            [
+              91.22001,
+              60.32787
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CB9BC"
+          ],
+          "points_m": [
+            [
+              89.76013,
+              59.52787
+            ],
+            [
+              91.22001,
+              59.52787
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CB9BD"
+          ],
+          "points_m": [
+            [
+              89.76013,
+              60.36787
+            ],
+            [
+              91.22013,
+              60.36787
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CB9BE"
+          ],
+          "points_m": [
+            [
+              89.76013,
+              59.48787
+            ],
+            [
+              91.22001,
+              59.48787
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          89.76013,
+          59.52787
+        ],
+        [
+          91.22001,
+          59.52787
+        ],
+        [
+          91.22001,
+          60.32787
+        ],
+        [
+          89.76013,
+          60.32787
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          89.76013,
+          59.92787
+        ],
+        [
+          91.22001,
+          59.92787
+        ]
+      ],
+      "length_m": 1.4598799999999983,
+      "belt_width_m": 0.7999999999999972,
+      "outer_width_m": 0.8800000000000026,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "render_axis_endpoints_m": [
+        [
+          91.22001,
+          59.92787
+        ],
+        [
+          89.76013,
+          59.92787
+        ]
+      ],
+      "position_m": [
+        90.49007,
+        59.92787
+      ],
+      "rotation_deg": 90,
+      "size_m": [
+        0.8800000000000026,
+        1.4598799999999983
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC7B0_belt_1_46",
+      "curve_handle": "2CC7B0",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CC719",
+        "1E1758",
+        "1E1759",
+        "1E175A",
+        "1E175B"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CC719",
+            "1E1758"
+          ],
+          "points_m": [
+            [
+              56.1886363,
+              57.95232611
+            ],
+            [
+              54.72875903,
+              57.95232611
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CC719",
+            "1E1759"
+          ],
+          "points_m": [
+            [
+              56.1886363,
+              57.15232611
+            ],
+            [
+              54.72875903,
+              57.15232611
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CC719",
+            "1E175A"
+          ],
+          "points_m": [
+            [
+              56.1886363,
+              57.99232536
+            ],
+            [
+              54.7286363,
+              57.99232536
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CC719",
+            "1E175B"
+          ],
+          "points_m": [
+            [
+              56.1886363,
+              57.11233211
+            ],
+            [
+              54.72875903,
+              57.11233211
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          54.72875903,
+          57.15232611
+        ],
+        [
+          56.1886363,
+          57.15232611
+        ],
+        [
+          56.1886363,
+          57.95232611
+        ],
+        [
+          54.72875903,
+          57.95232611
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          54.72875903,
+          57.552326109999996
+        ],
+        [
+          56.1886363,
+          57.552326109999996
+        ]
+      ],
+      "length_m": 1.4598772699999998,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": 0.8799932500000054,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "render_axis_endpoints_m": [
+        [
+          54.72875903,
+          57.552326109999996
+        ],
+        [
+          56.1886363,
+          57.552326109999996
+        ]
+      ],
+      "position_m": [
+        55.458697665,
+        57.552326109999996
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8799932500000054,
+        1.4598772699999998
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CB2DE_belt_2_19",
+      "curve_handle": "2CB2DE",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CA61B",
+        "2CA61C",
+        "2CA61D",
+        "2CA61E"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CA61B"
+          ],
+          "points_m": [
+            [
+              124.93557,
+              60.33393
+            ],
+            [
+              122.74557,
+              60.33393
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CA61C"
+          ],
+          "points_m": [
+            [
+              124.93557,
+              59.53393
+            ],
+            [
+              122.74557,
+              59.53393
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CA61D"
+          ],
+          "points_m": [
+            [
+              124.93544,
+              60.37393
+            ],
+            [
+              122.74544,
+              60.37393
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CA61E"
+          ],
+          "points_m": [
+            [
+              124.93557,
+              59.49394
+            ],
+            [
+              122.74591,
+              59.49394
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          122.74557,
+          59.53393
+        ],
+        [
+          124.93557,
+          59.53393
+        ],
+        [
+          124.93557,
+          60.33393
+        ],
+        [
+          122.74557,
+          60.33393
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          122.74557,
+          59.933930000000004
+        ],
+        [
+          124.93557,
+          59.933930000000004
+        ]
+      ],
+      "length_m": 2.1899999999999977,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": 0.8799899999999994,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "render_axis_endpoints_m": [
+        [
+          122.74557,
+          59.933930000000004
+        ],
+        [
+          124.93557,
+          59.933930000000004
+        ]
+      ],
+      "position_m": [
+        123.84057,
+        59.933930000000004
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8799899999999994,
+        2.1899999999999977
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC6A3_belt_2_19",
+      "curve_handle": "2CC6A3",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CB9C5",
+        "2CB9C6",
+        "2CB9C7",
+        "2CB9C8"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CB9C5"
+          ],
+          "points_m": [
+            [
+              85.75918,
+              60.33393
+            ],
+            [
+              87.94918,
+              60.33393
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CB9C6"
+          ],
+          "points_m": [
+            [
+              85.75918,
+              59.53393
+            ],
+            [
+              87.94918,
+              59.53393
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CB9C7"
+          ],
+          "points_m": [
+            [
+              85.7593,
+              60.37393
+            ],
+            [
+              87.9493,
+              60.37393
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CB9C8"
+          ],
+          "points_m": [
+            [
+              85.75918,
+              59.49394
+            ],
+            [
+              87.94883,
+              59.49394
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          85.75918,
+          59.53393
+        ],
+        [
+          87.94918,
+          59.53393
+        ],
+        [
+          87.94918,
+          60.33393
+        ],
+        [
+          85.75918,
+          60.33393
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          85.75918,
+          59.933930000000004
+        ],
+        [
+          87.94918,
+          59.933930000000004
+        ]
+      ],
+      "length_m": 2.1899999999999977,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": 0.8799899999999994,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "render_axis_endpoints_m": [
+        [
+          87.94918,
+          59.933930000000004
+        ],
+        [
+          85.75918,
+          59.933930000000004
+        ]
+      ],
+      "position_m": [
+        86.85418,
+        59.933930000000004
+      ],
+      "rotation_deg": 90,
+      "size_m": [
+        0.8799899999999994,
+        2.1899999999999977
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC7B0_belt_2_19",
+      "curve_handle": "2CC7B0",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CC719",
+        "1E1763",
+        "1E1764",
+        "1E1765",
+        "1E1766"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CC719",
+            "1E1763"
+          ],
+          "points_m": [
+            [
+              60.1895896,
+              57.95839203
+            ],
+            [
+              57.9995896,
+              57.95839203
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CC719",
+            "1E1764"
+          ],
+          "points_m": [
+            [
+              60.1895896,
+              57.15839203
+            ],
+            [
+              57.9995896,
+              57.15839203
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CC719",
+            "1E1765"
+          ],
+          "points_m": [
+            [
+              60.18946687,
+              57.99839127
+            ],
+            [
+              57.99946687,
+              57.99839127
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CC719",
+            "1E1766"
+          ],
+          "points_m": [
+            [
+              60.1895896,
+              57.11839802
+            ],
+            [
+              57.99993581,
+              57.11839802
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          57.9995896,
+          57.15839203
+        ],
+        [
+          60.1895896,
+          57.15839203
+        ],
+        [
+          60.1895896,
+          57.95839203
+        ],
+        [
+          57.9995896,
+          57.95839203
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          57.9995896,
+          57.55839203
+        ],
+        [
+          60.1895896,
+          57.55839203
+        ]
+      ],
+      "length_m": 2.1899999999999977,
+      "belt_width_m": 0.7999999999999972,
+      "outer_width_m": 0.8799932499999983,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "render_axis_endpoints_m": [
+        [
+          57.9995896,
+          57.55839203
+        ],
+        [
+          60.1895896,
+          57.55839203
+        ]
+      ],
+      "position_m": [
+        59.0945896,
+        57.55839203
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8799932499999983,
+        2.1899999999999977
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CB2DE_belt_0_73",
+      "curve_handle": "2CB2DE",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CB248",
+        "2CB249",
+        "2CB24A",
+        "2CB24B"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CB248"
+          ],
+          "points_m": [
+            [
+              125.66909,
+              60.33256
+            ],
+            [
+              124.93897,
+              60.33256
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CB249"
+          ],
+          "points_m": [
+            [
+              125.66909,
+              59.53256
+            ],
+            [
+              124.93897,
+              59.53256
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CB24A"
+          ],
+          "points_m": [
+            [
+              125.66897,
+              60.37256
+            ],
+            [
+              124.93897,
+              60.37256
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CB24B"
+          ],
+          "points_m": [
+            [
+              125.66944,
+              59.49257
+            ],
+            [
+              124.93897,
+              59.49257
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          124.93897,
+          59.53256
+        ],
+        [
+          125.66909,
+          59.53256
+        ],
+        [
+          125.66909,
+          60.33256
+        ],
+        [
+          124.93897,
+          60.33256
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          124.93897,
+          59.932559999999995
+        ],
+        [
+          125.66909,
+          59.932559999999995
+        ]
+      ],
+      "length_m": 0.7301199999999994,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": 0.8799899999999994,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "next_source_handles": [
+        "2CA6A4"
+      ],
+      "next_source_deck_width_m": 0.55,
+      "render_axis_endpoints_m": [
+        [
+          124.93897,
+          59.932559999999995
+        ],
+        [
+          125.66909,
+          59.932559999999995
+        ]
+      ],
+      "position_m": [
+        125.30403,
+        59.932559999999995
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8799899999999994,
+        0.7301199999999994
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC6A3_belt_0_73",
+      "curve_handle": "2CC6A3",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CC60D",
+        "2CC60E",
+        "2CC60F",
+        "2CC610"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CC60D"
+          ],
+          "points_m": [
+            [
+              85.02566,
+              60.33256
+            ],
+            [
+              85.75578,
+              60.33256
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CC60E"
+          ],
+          "points_m": [
+            [
+              85.02566,
+              59.53256
+            ],
+            [
+              85.75578,
+              59.53256
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CC60F"
+          ],
+          "points_m": [
+            [
+              85.02578,
+              60.37256
+            ],
+            [
+              85.75578,
+              60.37256
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CC610"
+          ],
+          "points_m": [
+            [
+              85.02531,
+              59.49257
+            ],
+            [
+              85.75578,
+              59.49257
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          85.02566,
+          59.53256
+        ],
+        [
+          85.75578,
+          59.53256
+        ],
+        [
+          85.75578,
+          60.33256
+        ],
+        [
+          85.02566,
+          60.33256
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          85.02566,
+          59.932559999999995
+        ],
+        [
+          85.75578,
+          59.932559999999995
+        ]
+      ],
+      "length_m": 0.7301199999999994,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": 0.8799899999999994,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "next_source_handles": [
+        "2CBA4E"
+      ],
+      "next_source_deck_width_m": 0.55,
+      "render_axis_endpoints_m": [
+        [
+          85.75578,
+          59.932559999999995
+        ],
+        [
+          85.02566,
+          59.932559999999995
+        ]
+      ],
+      "position_m": [
+        85.39072,
+        59.932559999999995
+      ],
+      "rotation_deg": 90,
+      "size_m": [
+        0.8799899999999994,
+        0.7301199999999994
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC7B0_belt_0_73",
+      "curve_handle": "2CC7B0",
+      "kind": "flat_belt",
+      "source_handles": [
+        "2CC719",
+        "1E240F",
+        "1E2410",
+        "1E2411",
+        "1E2412"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_upper",
+          "source_handles": [
+            "2CC719",
+            "1E240F"
+          ],
+          "points_m": [
+            [
+              60.92311395,
+              57.95701782
+            ],
+            [
+              60.19299122,
+              57.95701782
+            ]
+          ]
+        },
+        {
+          "role": "inner_lower",
+          "source_handles": [
+            "2CC719",
+            "1E2410"
+          ],
+          "points_m": [
+            [
+              60.92311395,
+              57.15701782
+            ],
+            [
+              60.19299122,
+              57.15701782
+            ]
+          ]
+        },
+        {
+          "role": "outer_upper",
+          "source_handles": [
+            "2CC719",
+            "1E2411"
+          ],
+          "points_m": [
+            [
+              60.92299122,
+              57.99701707
+            ],
+            [
+              60.19299122,
+              57.99701707
+            ]
+          ]
+        },
+        {
+          "role": "outer_lower",
+          "source_handles": [
+            "2CC719",
+            "1E2412"
+          ],
+          "points_m": [
+            [
+              60.92346016,
+              57.11702381
+            ],
+            [
+              60.19299122,
+              57.11702381
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          60.19299122,
+          57.15701782
+        ],
+        [
+          60.92311395,
+          57.15701782
+        ],
+        [
+          60.92311395,
+          57.95701782
+        ],
+        [
+          60.19299122,
+          57.95701782
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          60.19299122,
+          57.55701782
+        ],
+        [
+          60.92311395,
+          57.55701782
+        ]
+      ],
+      "length_m": 0.7301227299999979,
+      "belt_width_m": 0.7999999999999972,
+      "outer_width_m": 0.8799932599999991,
+      "note": "Source plan rectangle, no repeated roller lines. Minor drafted endpoint deviations are retained in source_edges. H labels indicate variable elevation on first two sections; this record proves XY only.",
+      "next_source_handles": [
+        "2CC719",
+        "1E17EC"
+      ],
+      "next_source_deck_width_m": 0.55,
+      "render_axis_endpoints_m": [
+        [
+          60.19299122,
+          57.55701782
+        ],
+        [
+          60.92311395,
+          57.55701782
+        ]
+      ],
+      "position_m": [
+        60.558052585,
+        57.55701782
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8799932599999991,
+        0.7301227299999979
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CB2DE_inline_drive",
+      "curve_handle": "2CB2DE",
+      "kind": "chevron_roller_section",
+      "source_handles": [
+        "2CA3B2",
+        "2CA58D",
+        "2CA16B",
+        "2CA15B"
+      ],
+      "source_edges": [
+        {
+          "role": "outer_0",
+          "source_handles": [
+            "2CA3B2"
+          ],
+          "points_m": [
+            [
+              119.46882,
+              60.35794
+            ],
+            [
+              118.03922,
+              60.36644
+            ]
+          ]
+        },
+        {
+          "role": "outer_1",
+          "source_handles": [
+            "2CA58D"
+          ],
+          "points_m": [
+            [
+              119.47018,
+              59.49456
+            ],
+            [
+              118.05683,
+              59.48615
+            ]
+          ]
+        },
+        {
+          "role": "outer_2",
+          "source_handles": [
+            "2CA16B"
+          ],
+          "points_m": [
+            [
+              118.03922,
+              60.36784
+            ],
+            [
+              118.03922,
+              59.48335
+            ]
+          ]
+        },
+        {
+          "role": "outer_3",
+          "source_handles": [
+            "2CA15B"
+          ],
+          "points_m": [
+            [
+              119.46813,
+              60.32487
+            ],
+            [
+              119.46813,
+              59.52587
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          118.03922,
+          59.48335
+        ],
+        [
+          119.47018,
+          59.48335
+        ],
+        [
+          119.47018,
+          60.36784
+        ],
+        [
+          118.03922,
+          60.36784
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          118.03922,
+          59.925595
+        ],
+        [
+          119.47018,
+          59.925595
+        ]
+      ],
+      "length_m": 1.430959999999999,
+      "belt_width_m": 0.8844899999999996,
+      "outer_width_m": 0.8844899999999996,
+      "note": "Actual source shows densely repeated V-shaped roller segments. Outer envelope is exact support bounds, not the Rubber/belt width. Use a chevron roller model and preserve source geometry.",
+      "render_axis_endpoints_m": [
+        [
+          118.03922,
+          59.925595
+        ],
+        [
+          119.47018,
+          59.925595
+        ]
+      ],
+      "position_m": [
+        118.7547,
+        59.925595
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8844899999999996,
+        1.430959999999999
+      ],
+      "mesh_key": "chevron",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC6A3_inline_drive",
+      "curve_handle": "2CC6A3",
+      "kind": "chevron_roller_section",
+      "source_handles": [
+        "2CB75C",
+        "2CB937",
+        "2CB514",
+        "2CB505"
+      ],
+      "source_edges": [
+        {
+          "role": "outer_0",
+          "source_handles": [
+            "2CB75C"
+          ],
+          "points_m": [
+            [
+              91.22592,
+              60.35794
+            ],
+            [
+              92.65553,
+              60.36644
+            ]
+          ]
+        },
+        {
+          "role": "outer_1",
+          "source_handles": [
+            "2CB937"
+          ],
+          "points_m": [
+            [
+              91.22457,
+              59.49456
+            ],
+            [
+              92.63791,
+              59.48615
+            ]
+          ]
+        },
+        {
+          "role": "outer_2",
+          "source_handles": [
+            "2CB514"
+          ],
+          "points_m": [
+            [
+              92.65553,
+              60.36784
+            ],
+            [
+              92.65553,
+              59.48335
+            ]
+          ]
+        },
+        {
+          "role": "outer_3",
+          "source_handles": [
+            "2CB505"
+          ],
+          "points_m": [
+            [
+              91.22662,
+              60.32487
+            ],
+            [
+              91.22662,
+              59.52587
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          91.22457,
+          59.48335
+        ],
+        [
+          92.65553,
+          59.48335
+        ],
+        [
+          92.65553,
+          60.36784
+        ],
+        [
+          91.22457,
+          60.36784
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          91.22457,
+          59.925595
+        ],
+        [
+          92.65553,
+          59.925595
+        ]
+      ],
+      "length_m": 1.430959999999999,
+      "belt_width_m": 0.8844899999999996,
+      "outer_width_m": 0.8844899999999996,
+      "note": "Actual source shows densely repeated V-shaped roller segments. Outer envelope is exact support bounds, not the Rubber/belt width. Use a chevron roller model and preserve source geometry.",
+      "render_axis_endpoints_m": [
+        [
+          92.65553,
+          59.925595
+        ],
+        [
+          91.22457,
+          59.925595
+        ]
+      ],
+      "position_m": [
+        91.94005,
+        59.925595
+      ],
+      "rotation_deg": 90,
+      "size_m": [
+        0.8844899999999996,
+        1.430959999999999
+      ],
+      "mesh_key": "chevron",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC7B0_inline_drive",
+      "curve_handle": "2CC7B0",
+      "kind": "chevron_roller_section",
+      "source_handles": [
+        "2CC719",
+        "1E14C9",
+        "1E16D3",
+        "1E1266"
+      ],
+      "source_edges": [
+        {
+          "role": "outer_0",
+          "source_handles": [
+            "2CC719",
+            "1E14C9"
+          ],
+          "points_m": [
+            [
+              54.72284819,
+              57.9824027
+            ],
+            [
+              53.29324332,
+              57.99090119
+            ]
+          ]
+        },
+        {
+          "role": "outer_1",
+          "source_handles": [
+            "2CC719",
+            "1E16D3"
+          ],
+          "points_m": [
+            [
+              54.72420316,
+              57.11901312
+            ],
+            [
+              53.31085574,
+              57.11061128
+            ]
+          ]
+        },
+        {
+          "role": "outer_2",
+          "source_handles": [
+            "2CC719",
+            "1E1266"
+          ],
+          "points_m": [
+            [
+              54.7221494,
+              57.94932349
+            ],
+            [
+              54.7221494,
+              57.15032347
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          53.29324332,
+          57.11061128
+        ],
+        [
+          54.72420316,
+          57.11061128
+        ],
+        [
+          54.72420316,
+          57.99090119
+        ],
+        [
+          53.29324332,
+          57.99090119
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          53.29324332,
+          57.550756235
+        ],
+        [
+          54.72420316,
+          57.550756235
+        ]
+      ],
+      "length_m": 1.4309598399999999,
+      "belt_width_m": 0.8802899100000019,
+      "outer_width_m": 0.8802899100000019,
+      "note": "Actual source shows densely repeated V-shaped roller segments. Outer envelope is exact support bounds, not the Rubber/belt width. Use a chevron roller model and preserve source geometry.",
+      "render_axis_endpoints_m": [
+        [
+          53.29324332,
+          57.550756235
+        ],
+        [
+          54.72420316,
+          57.550756235
+        ]
+      ],
+      "position_m": [
+        54.00872324,
+        57.550756235
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8802899100000019,
+        1.4309598399999999
+      ],
+      "mesh_key": "chevron",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC7B0_weigh_belt_a",
+      "curve_handle": "2CC7B0",
+      "kind": "dynamic_weighing_belt",
+      "source_handles": [
+        "2CC719",
+        "1E1761",
+        "F3BFF",
+        "F3C00",
+        "F3BFC",
+        "F3BFB"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_0",
+          "source_handles": [
+            "2CC719",
+            "1E1761",
+            "F3BFF"
+          ],
+          "points_m": [
+            [
+              56.19759876,
+              57.95736242
+            ],
+            [
+              56.19759876,
+              57.15736242
+            ]
+          ]
+        },
+        {
+          "role": "inner_1",
+          "source_handles": [
+            "2CC719",
+            "1E1761",
+            "F3C00"
+          ],
+          "points_m": [
+            [
+              57.09219876,
+              57.95736242
+            ],
+            [
+              57.09219876,
+              57.15736242
+            ]
+          ]
+        },
+        {
+          "role": "inner_2",
+          "source_handles": [
+            "2CC719",
+            "1E1761",
+            "F3BFC"
+          ],
+          "points_m": [
+            [
+              57.07339876,
+              57.95736242
+            ],
+            [
+              56.21639876,
+              57.95736242
+            ]
+          ]
+        },
+        {
+          "role": "inner_3",
+          "source_handles": [
+            "2CC719",
+            "1E1761",
+            "F3BFB"
+          ],
+          "points_m": [
+            [
+              57.07339876,
+              57.15736242
+            ],
+            [
+              56.21639876,
+              57.15736242
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          56.19759876,
+          57.15736242
+        ],
+        [
+          57.09219876,
+          57.15736242
+        ],
+        [
+          57.09219876,
+          57.95736242
+        ],
+        [
+          56.19759876,
+          57.95736242
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          56.19759876,
+          57.557362420000004
+        ],
+        [
+          57.09219876,
+          57.557362420000004
+        ]
+      ],
+      "length_m": 0.8946000000000041,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": null,
+      "note": "Exact source W800 belt dynamic scale deck corners. Source outer frame is irregular; do not use whole block bbox. Plain deck may reuse neighbouring frame thickness as modelling approximation.",
+      "transform_evidence": {
+        "nested_source_parent": {
+          "5": "2CC719",
+          "330": "1F",
+          "100": "AcDbBlockReference",
+          "8": "W_EQUIPMENT",
+          "370": "    -2",
+          "2": "物流猫",
+          "10": "-57468.35167626906",
+          "20": "454448.872846638",
+          "30": "0.0"
+        },
+        "nested_source_child": {
+          "5": "1E1761",
+          "330": "1E1068",
+          "100": "AcDbBlockReference",
+          "8": "0",
+          "2": "W800二段式动态称",
+          "10": "55343.45143966342",
+          "20": "-446811.0148495163",
+          "30": "0.0",
+          "41": "0.0393700787401575",
+          "42": "0.0393700787401575",
+          "43": "0.0393700787401575"
+        },
+        "target_insert": {
+          "5": "1E1761",
+          "330": "1E1068",
+          "100": "AcDbBlockReference",
+          "8": "0",
+          "2": "W800二段式动态称",
+          "10": "55343.45143966342",
+          "20": "-446811.0148495163",
+          "30": "0.0",
+          "41": "0.0393700787401575",
+          "42": "0.0393700787401575",
+          "43": "0.0393700787401575"
+        }
+      },
+      "render_axis_endpoints_m": [
+        [
+          56.19759876,
+          57.557362420000004
+        ],
+        [
+          57.09219876,
+          57.557362420000004
+        ]
+      ],
+      "position_m": [
+        56.644898760000004,
+        57.557362420000004
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.88,
+        0.8946000000000041
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "frame_width_assumption": "0.88m outer frame matches adjacent W800 equipment; source proves the 0.8m weighing deck, not complete casing.",
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC7B0_weigh_belt_b",
+      "curve_handle": "2CC7B0",
+      "kind": "dynamic_weighing_belt",
+      "source_handles": [
+        "2CC719",
+        "1E1761",
+        "F3C2D",
+        "F3C2E",
+        "F3C2A",
+        "F3C29"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_0",
+          "source_handles": [
+            "2CC719",
+            "1E1761",
+            "F3C2D"
+          ],
+          "points_m": [
+            [
+              57.09559876,
+              57.95736242
+            ],
+            [
+              57.09559876,
+              57.15736242
+            ]
+          ]
+        },
+        {
+          "role": "inner_1",
+          "source_handles": [
+            "2CC719",
+            "1E1761",
+            "F3C2E"
+          ],
+          "points_m": [
+            [
+              57.99719876,
+              57.95736242
+            ],
+            [
+              57.99719876,
+              57.15736242
+            ]
+          ]
+        },
+        {
+          "role": "inner_2",
+          "source_handles": [
+            "2CC719",
+            "1E1761",
+            "F3C2A"
+          ],
+          "points_m": [
+            [
+              57.97839876,
+              57.95736242
+            ],
+            [
+              57.11439876,
+              57.95736242
+            ]
+          ]
+        },
+        {
+          "role": "inner_3",
+          "source_handles": [
+            "2CC719",
+            "1E1761",
+            "F3C29"
+          ],
+          "points_m": [
+            [
+              57.97839876,
+              57.15736242
+            ],
+            [
+              57.11439876,
+              57.15736242
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          57.09559876,
+          57.15736242
+        ],
+        [
+          57.99719876,
+          57.15736242
+        ],
+        [
+          57.99719876,
+          57.95736242
+        ],
+        [
+          57.09559876,
+          57.95736242
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          57.09559876,
+          57.557362420000004
+        ],
+        [
+          57.99719876,
+          57.557362420000004
+        ]
+      ],
+      "length_m": 0.901600000000002,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": null,
+      "note": "Exact source W800 belt dynamic scale deck corners. Source outer frame is irregular; do not use whole block bbox. Plain deck may reuse neighbouring frame thickness as modelling approximation.",
+      "transform_evidence": {
+        "nested_source_parent": {
+          "5": "2CC719",
+          "330": "1F",
+          "100": "AcDbBlockReference",
+          "8": "W_EQUIPMENT",
+          "370": "    -2",
+          "2": "物流猫",
+          "10": "-57468.35167626906",
+          "20": "454448.872846638",
+          "30": "0.0"
+        },
+        "nested_source_child": {
+          "5": "1E1761",
+          "330": "1E1068",
+          "100": "AcDbBlockReference",
+          "8": "0",
+          "2": "W800二段式动态称",
+          "10": "55343.45143966342",
+          "20": "-446811.0148495163",
+          "30": "0.0",
+          "41": "0.0393700787401575",
+          "42": "0.0393700787401575",
+          "43": "0.0393700787401575"
+        },
+        "target_insert": {
+          "5": "1E1761",
+          "330": "1E1068",
+          "100": "AcDbBlockReference",
+          "8": "0",
+          "2": "W800二段式动态称",
+          "10": "55343.45143966342",
+          "20": "-446811.0148495163",
+          "30": "0.0",
+          "41": "0.0393700787401575",
+          "42": "0.0393700787401575",
+          "43": "0.0393700787401575"
+        }
+      },
+      "render_axis_endpoints_m": [
+        [
+          57.09559876,
+          57.557362420000004
+        ],
+        [
+          57.99719876,
+          57.557362420000004
+        ]
+      ],
+      "position_m": [
+        57.54639876,
+        57.557362420000004
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.88,
+        0.901600000000002
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "frame_width_assumption": "0.88m outer frame matches adjacent W800 equipment; source proves the 0.8m weighing deck, not complete casing.",
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CB2DE_weigh_belt_a",
+      "curve_handle": "2CB2DE",
+      "kind": "dynamic_weighing_belt",
+      "source_handles": [
+        "2CA619",
+        "F3BFF",
+        "F3C00",
+        "F3BFC",
+        "F3BFB"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_0",
+          "source_handles": [
+            "2CA619",
+            "F3BFF"
+          ],
+          "points_m": [
+            [
+              120.94357488227485,
+              60.33290448885662
+            ],
+            [
+              120.94357488227485,
+              59.532904488856616
+            ]
+          ]
+        },
+        {
+          "role": "inner_1",
+          "source_handles": [
+            "2CA619",
+            "F3C00"
+          ],
+          "points_m": [
+            [
+              121.83817488227487,
+              60.33290448885662
+            ],
+            [
+              121.83817488227487,
+              59.532904488856616
+            ]
+          ]
+        },
+        {
+          "role": "inner_2",
+          "source_handles": [
+            "2CA619",
+            "F3BFC"
+          ],
+          "points_m": [
+            [
+              121.81937488227486,
+              60.33290448885662
+            ],
+            [
+              120.96237488227484,
+              60.33290448885662
+            ]
+          ]
+        },
+        {
+          "role": "inner_3",
+          "source_handles": [
+            "2CA619",
+            "F3BFB"
+          ],
+          "points_m": [
+            [
+              121.81937488227486,
+              59.532904488856616
+            ],
+            [
+              120.96237488227484,
+              59.532904488856616
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          120.94357488227485,
+          59.532904488856616
+        ],
+        [
+          121.83817488227487,
+          59.532904488856616
+        ],
+        [
+          121.83817488227487,
+          60.33290448885662
+        ],
+        [
+          120.94357488227485,
+          60.33290448885662
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          120.94357488227485,
+          59.93290448885662
+        ],
+        [
+          121.83817488227487,
+          59.93290448885662
+        ]
+      ],
+      "length_m": 0.8946000000000254,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": null,
+      "note": "Exact source W800 belt dynamic scale deck corners. Source outer frame is irregular; do not use whole block bbox. Plain deck may reuse neighbouring frame thickness as modelling approximation.",
+      "transform_evidence": {
+        "nested_source_parent": {
+          "5": "2CC719",
+          "330": "1F",
+          "100": "AcDbBlockReference",
+          "8": "W_EQUIPMENT",
+          "370": "    -2",
+          "2": "物流猫",
+          "10": "-57468.35167626906",
+          "20": "454448.872846638",
+          "30": "0.0"
+        },
+        "nested_source_child": {
+          "5": "1E1761",
+          "330": "1E1068",
+          "100": "AcDbBlockReference",
+          "8": "0",
+          "2": "W800二段式动态称",
+          "10": "55343.45143966342",
+          "20": "-446811.0148495163",
+          "30": "0.0",
+          "41": "0.0393700787401575",
+          "42": "0.0393700787401575",
+          "43": "0.0393700787401575"
+        },
+        "target_insert": {
+          "5": "2CA619",
+          "330": "1F",
+          "100": "AcDbBlockReference",
+          "8": "W_EQUIPMENT",
+          "2": "W800二段式动态称",
+          "10": "424.1539414366707",
+          "20": "7731.383275423197",
+          "30": "0.0",
+          "41": "0.0393700787401575",
+          "42": "0.0393700787401575",
+          "43": "0.0393700787401575"
+        }
+      },
+      "render_axis_endpoints_m": [
+        [
+          120.94357488227485,
+          59.93290448885662
+        ],
+        [
+          121.83817488227487,
+          59.93290448885662
+        ]
+      ],
+      "position_m": [
+        121.39087488227486,
+        59.93290448885662
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.88,
+        0.8946000000000254
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "frame_width_assumption": "0.88m outer frame matches adjacent W800 equipment; source proves the 0.8m weighing deck, not complete casing.",
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CB2DE_weigh_belt_b",
+      "curve_handle": "2CB2DE",
+      "kind": "dynamic_weighing_belt",
+      "source_handles": [
+        "2CA619",
+        "F3C2D",
+        "F3C2E",
+        "F3C2A",
+        "F3C29"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_0",
+          "source_handles": [
+            "2CA619",
+            "F3C2D"
+          ],
+          "points_m": [
+            [
+              121.84157488227477,
+              60.33290448885662
+            ],
+            [
+              121.84157488227477,
+              59.532904488856616
+            ]
+          ]
+        },
+        {
+          "role": "inner_1",
+          "source_handles": [
+            "2CA619",
+            "F3C2E"
+          ],
+          "points_m": [
+            [
+              122.74317488227477,
+              60.33290448885662
+            ],
+            [
+              122.74317488227477,
+              59.532904488856616
+            ]
+          ]
+        },
+        {
+          "role": "inner_2",
+          "source_handles": [
+            "2CA619",
+            "F3C2A"
+          ],
+          "points_m": [
+            [
+              122.72437488227476,
+              60.33290448885662
+            ],
+            [
+              121.86037488227477,
+              60.33290448885662
+            ]
+          ]
+        },
+        {
+          "role": "inner_3",
+          "source_handles": [
+            "2CA619",
+            "F3C29"
+          ],
+          "points_m": [
+            [
+              122.72437488227476,
+              59.532904488856616
+            ],
+            [
+              121.86037488227477,
+              59.532904488856616
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          121.84157488227477,
+          59.532904488856616
+        ],
+        [
+          122.74317488227477,
+          59.532904488856616
+        ],
+        [
+          122.74317488227477,
+          60.33290448885662
+        ],
+        [
+          121.84157488227477,
+          60.33290448885662
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          121.84157488227477,
+          59.93290448885662
+        ],
+        [
+          122.74317488227477,
+          59.93290448885662
+        ]
+      ],
+      "length_m": 0.901600000000002,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": null,
+      "note": "Exact source W800 belt dynamic scale deck corners. Source outer frame is irregular; do not use whole block bbox. Plain deck may reuse neighbouring frame thickness as modelling approximation.",
+      "transform_evidence": {
+        "nested_source_parent": {
+          "5": "2CC719",
+          "330": "1F",
+          "100": "AcDbBlockReference",
+          "8": "W_EQUIPMENT",
+          "370": "    -2",
+          "2": "物流猫",
+          "10": "-57468.35167626906",
+          "20": "454448.872846638",
+          "30": "0.0"
+        },
+        "nested_source_child": {
+          "5": "1E1761",
+          "330": "1E1068",
+          "100": "AcDbBlockReference",
+          "8": "0",
+          "2": "W800二段式动态称",
+          "10": "55343.45143966342",
+          "20": "-446811.0148495163",
+          "30": "0.0",
+          "41": "0.0393700787401575",
+          "42": "0.0393700787401575",
+          "43": "0.0393700787401575"
+        },
+        "target_insert": {
+          "5": "2CA619",
+          "330": "1F",
+          "100": "AcDbBlockReference",
+          "8": "W_EQUIPMENT",
+          "2": "W800二段式动态称",
+          "10": "424.1539414366707",
+          "20": "7731.383275423197",
+          "30": "0.0",
+          "41": "0.0393700787401575",
+          "42": "0.0393700787401575",
+          "43": "0.0393700787401575"
+        }
+      },
+      "render_axis_endpoints_m": [
+        [
+          121.84157488227477,
+          59.93290448885662
+        ],
+        [
+          122.74317488227477,
+          59.93290448885662
+        ]
+      ],
+      "position_m": [
+        122.29237488227477,
+        59.93290448885662
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.88,
+        0.901600000000002
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "frame_width_assumption": "0.88m outer frame matches adjacent W800 equipment; source proves the 0.8m weighing deck, not complete casing.",
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC6A3_weigh_belt_a",
+      "curve_handle": "2CC6A3",
+      "kind": "dynamic_weighing_belt",
+      "source_handles": [
+        "2CB9C3",
+        "F3BFF",
+        "F3C00",
+        "F3BFC",
+        "F3BFB"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_0",
+          "source_handles": [
+            "2CB9C3",
+            "F3BFF"
+          ],
+          "points_m": [
+            [
+              89.7511708095043,
+              60.33290448885662
+            ],
+            [
+              89.7511708095043,
+              59.532904488856616
+            ]
+          ]
+        },
+        {
+          "role": "inner_1",
+          "source_handles": [
+            "2CB9C3",
+            "F3C00"
+          ],
+          "points_m": [
+            [
+              88.85657080950428,
+              60.33290448885662
+            ],
+            [
+              88.85657080950428,
+              59.532904488856616
+            ]
+          ]
+        },
+        {
+          "role": "inner_2",
+          "source_handles": [
+            "2CB9C3",
+            "F3BFC"
+          ],
+          "points_m": [
+            [
+              88.87537080950429,
+              60.33290448885662
+            ],
+            [
+              89.73237080950429,
+              60.33290448885662
+            ]
+          ]
+        },
+        {
+          "role": "inner_3",
+          "source_handles": [
+            "2CB9C3",
+            "F3BFB"
+          ],
+          "points_m": [
+            [
+              88.87537080950429,
+              59.532904488856616
+            ],
+            [
+              89.73237080950429,
+              59.532904488856616
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          88.85657080950428,
+          59.532904488856616
+        ],
+        [
+          89.7511708095043,
+          59.532904488856616
+        ],
+        [
+          89.7511708095043,
+          60.33290448885662
+        ],
+        [
+          88.85657080950428,
+          60.33290448885662
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          88.85657080950428,
+          59.93290448885662
+        ],
+        [
+          89.7511708095043,
+          59.93290448885662
+        ]
+      ],
+      "length_m": 0.8946000000000254,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": null,
+      "note": "Exact source W800 belt dynamic scale deck corners. Source outer frame is irregular; do not use whole block bbox. Plain deck may reuse neighbouring frame thickness as modelling approximation.",
+      "transform_evidence": {
+        "nested_source_parent": {
+          "5": "2CC719",
+          "330": "1F",
+          "100": "AcDbBlockReference",
+          "8": "W_EQUIPMENT",
+          "370": "    -2",
+          "2": "物流猫",
+          "10": "-57468.35167626906",
+          "20": "454448.872846638",
+          "30": "0.0"
+        },
+        "nested_source_child": {
+          "5": "1E1761",
+          "330": "1E1068",
+          "100": "AcDbBlockReference",
+          "8": "0",
+          "2": "W800二段式动态称",
+          "10": "55343.45143966342",
+          "20": "-446811.0148495163",
+          "30": "0.0",
+          "41": "0.0393700787401575",
+          "42": "0.0393700787401575",
+          "43": "0.0393700787401575"
+        },
+        "target_insert": {
+          "5": "2CB9C3",
+          "330": "1F",
+          "100": "AcDbBlockReference",
+          "8": "W_EQUIPMENT",
+          "2": "W800二段式动态称",
+          "10": "33470.91478658613",
+          "20": "7731.383275423197",
+          "30": "0.0",
+          "41": "-0.0393700787401575",
+          "42": "0.0393700787401575",
+          "43": "0.0393700787401575"
+        }
+      },
+      "render_axis_endpoints_m": [
+        [
+          89.7511708095043,
+          59.93290448885662
+        ],
+        [
+          88.85657080950428,
+          59.93290448885662
+        ]
+      ],
+      "position_m": [
+        89.30387080950429,
+        59.93290448885662
+      ],
+      "rotation_deg": 90,
+      "size_m": [
+        0.88,
+        0.8946000000000254
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "frame_width_assumption": "0.88m outer frame matches adjacent W800 equipment; source proves the 0.8m weighing deck, not complete casing.",
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "id": "2CC6A3_weigh_belt_b",
+      "curve_handle": "2CC6A3",
+      "kind": "dynamic_weighing_belt",
+      "source_handles": [
+        "2CB9C3",
+        "F3C2D",
+        "F3C2E",
+        "F3C2A",
+        "F3C29"
+      ],
+      "source_edges": [
+        {
+          "role": "inner_0",
+          "source_handles": [
+            "2CB9C3",
+            "F3C2D"
+          ],
+          "points_m": [
+            [
+              88.85317080950438,
+              60.33290448885662
+            ],
+            [
+              88.85317080950438,
+              59.532904488856616
+            ]
+          ]
+        },
+        {
+          "role": "inner_1",
+          "source_handles": [
+            "2CB9C3",
+            "F3C2E"
+          ],
+          "points_m": [
+            [
+              87.95157080950437,
+              60.33290448885662
+            ],
+            [
+              87.95157080950437,
+              59.532904488856616
+            ]
+          ]
+        },
+        {
+          "role": "inner_2",
+          "source_handles": [
+            "2CB9C3",
+            "F3C2A"
+          ],
+          "points_m": [
+            [
+              87.97037080950439,
+              60.33290448885662
+            ],
+            [
+              88.83437080950436,
+              60.33290448885662
+            ]
+          ]
+        },
+        {
+          "role": "inner_3",
+          "source_handles": [
+            "2CB9C3",
+            "F3C29"
+          ],
+          "points_m": [
+            [
+              87.97037080950439,
+              59.532904488856616
+            ],
+            [
+              88.83437080950436,
+              59.532904488856616
+            ]
+          ]
+        }
+      ],
+      "belt_polygon_m": [
+        [
+          87.95157080950437,
+          59.532904488856616
+        ],
+        [
+          88.85317080950438,
+          59.532904488856616
+        ],
+        [
+          88.85317080950438,
+          60.33290448885662
+        ],
+        [
+          87.95157080950437,
+          60.33290448885662
+        ]
+      ],
+      "axis_endpoints_m": [
+        [
+          87.95157080950437,
+          59.93290448885662
+        ],
+        [
+          88.85317080950438,
+          59.93290448885662
+        ]
+      ],
+      "length_m": 0.901600000000002,
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": null,
+      "note": "Exact source W800 belt dynamic scale deck corners. Source outer frame is irregular; do not use whole block bbox. Plain deck may reuse neighbouring frame thickness as modelling approximation.",
+      "transform_evidence": {
+        "nested_source_parent": {
+          "5": "2CC719",
+          "330": "1F",
+          "100": "AcDbBlockReference",
+          "8": "W_EQUIPMENT",
+          "370": "    -2",
+          "2": "物流猫",
+          "10": "-57468.35167626906",
+          "20": "454448.872846638",
+          "30": "0.0"
+        },
+        "nested_source_child": {
+          "5": "1E1761",
+          "330": "1E1068",
+          "100": "AcDbBlockReference",
+          "8": "0",
+          "2": "W800二段式动态称",
+          "10": "55343.45143966342",
+          "20": "-446811.0148495163",
+          "30": "0.0",
+          "41": "0.0393700787401575",
+          "42": "0.0393700787401575",
+          "43": "0.0393700787401575"
+        },
+        "target_insert": {
+          "5": "2CB9C3",
+          "330": "1F",
+          "100": "AcDbBlockReference",
+          "8": "W_EQUIPMENT",
+          "2": "W800二段式动态称",
+          "10": "33470.91478658613",
+          "20": "7731.383275423197",
+          "30": "0.0",
+          "41": "-0.0393700787401575",
+          "42": "0.0393700787401575",
+          "43": "0.0393700787401575"
+        }
+      },
+      "render_axis_endpoints_m": [
+        [
+          88.85317080950438,
+          59.93290448885662
+        ],
+        [
+          87.95157080950437,
+          59.93290448885662
+        ]
+      ],
+      "position_m": [
+        88.40237080950438,
+        59.93290448885662
+      ],
+      "rotation_deg": 90,
+      "size_m": [
+        0.88,
+        0.901600000000002
+      ],
+      "mesh_key": "belt",
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "frame_width_assumption": "0.88m outer frame matches adjacent W800 equipment; source proves the 0.8m weighing deck, not complete casing.",
+      "height_policy": "1.0m existing curve endpoint -> 1.2m -> 1.5m H:1500. Ordered endpoint elevations are a presentation interpretation of CAD H ranges; no source 3D endpoint Z values."
+    },
+    {
+      "curve_handle": "2CB2DE",
+      "source_edges": [
+        {
+          "role": "transition_frame",
+          "source_handles": [
+            "2C9FBC"
+          ],
+          "points_m": [
+            [
+              115.98665,
+              60.31946
+            ],
+            [
+              115.98666,
+              59.49012
+            ]
+          ]
+        },
+        {
+          "role": "transition_frame",
+          "source_handles": [
+            "2C9FBD"
+          ],
+          "points_m": [
+            [
+              115.98665,
+              59.49012
+            ],
+            [
+              115.68665,
+              59.49018
+            ]
+          ]
+        },
+        {
+          "role": "transition_frame",
+          "source_handles": [
+            "2C9FBE"
+          ],
+          "points_m": [
+            [
+              115.98665,
+              60.31946
+            ],
+            [
+              115.68664,
+              59.48945
+            ]
+          ]
+        },
+        {
+          "role": "transition_frame",
+          "source_handles": [
+            "2C9FBF"
+          ],
+          "points_m": [
+            [
+              115.98666,
+              59.49012
+            ],
+            [
+              115.68446,
+              60.31945
+            ]
+          ]
+        }
+      ],
+      "source_corner_envelope_m": [
+        [
+          115.68446,
+          59.48945
+        ],
+        [
+          115.98666,
+          59.48945
+        ],
+        [
+          115.98666,
+          60.31946
+        ],
+        [
+          115.68446,
+          60.31946
+        ]
+      ],
+      "interpretation": "Measured crossed transfer-frame location. Thin bridge skin is a display interpretation, clipped to the actual gap; no duplicate deck over the following belt.",
+      "id": "2CB2DE_transition",
+      "kind": "source_transfer_frame",
+      "source_handles": [
+        "2C9FBC",
+        "2C9FBD",
+        "2C9FBE",
+        "2C9FBF"
+      ],
+      "mesh_key": "transfer",
+      "position_m": [
+        115.763,
+        59.92156250000001
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.8000000000000043,
+        0.1549399999999963
+      ],
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": 0.8000000000000043,
+      "render_axis_endpoints_m": [
+        [
+          115.68553,
+          59.919535
+        ],
+        [
+          115.84047,
+          59.923590000000004
+        ]
+      ],
+      "port_heights_m": [
+        1.2,
+        1.2
+      ],
+      "render_polygon_m": [
+        [
+          115.68553,
+          59.51962
+        ],
+        [
+          115.68553,
+          60.31945
+        ],
+        [
+          115.84047,
+          60.32359000000001
+        ],
+        [
+          115.84047,
+          59.52359
+        ]
+      ],
+      "height_policy": "Source H range interpreted to preserve adjacent carrying-surface heights; transfer skin is a display assumption."
+    },
+    {
+      "curve_handle": "2CC6A3",
+      "source_edges": [
+        {
+          "role": "transition_frame",
+          "source_handles": [
+            "2CB366"
+          ],
+          "points_m": [
+            [
+              94.7081,
+              60.31946
+            ],
+            [
+              94.70809,
+              59.49012
+            ]
+          ]
+        },
+        {
+          "role": "transition_frame",
+          "source_handles": [
+            "2CB367"
+          ],
+          "points_m": [
+            [
+              94.7081,
+              59.49012
+            ],
+            [
+              95.0081,
+              59.49018
+            ]
+          ]
+        },
+        {
+          "role": "transition_frame",
+          "source_handles": [
+            "2CB368"
+          ],
+          "points_m": [
+            [
+              94.7081,
+              60.31946
+            ],
+            [
+              95.00811,
+              59.48945
+            ]
+          ]
+        },
+        {
+          "role": "transition_frame",
+          "source_handles": [
+            "2CB369"
+          ],
+          "points_m": [
+            [
+              94.70809,
+              59.49012
+            ],
+            [
+              95.01029,
+              60.31945
+            ]
+          ]
+        }
+      ],
+      "source_corner_envelope_m": [
+        [
+          94.70809,
+          59.48945
+        ],
+        [
+          95.01029,
+          59.48945
+        ],
+        [
+          95.01029,
+          60.31946
+        ],
+        [
+          94.70809,
+          60.31946
+        ]
+      ],
+      "interpretation": "Measured crossed transfer-frame location. Thin bridge skin is a display interpretation, clipped to the actual gap; no duplicate deck over the following belt.",
+      "id": "2CC6A3_transition",
+      "kind": "source_transfer_frame",
+      "source_handles": [
+        "2CB366",
+        "2CB367",
+        "2CB368",
+        "2CB369"
+      ],
+      "mesh_key": "transfer",
+      "position_m": [
+        94.93173999999999,
+        59.92156250000001
+      ],
+      "rotation_deg": 90,
+      "size_m": [
+        0.8000000000000043,
+        0.1549399999999963
+      ],
+      "belt_width_m": 0.8000000000000043,
+      "outer_width_m": 0.8000000000000043,
+      "render_axis_endpoints_m": [
+        [
+          95.00921,
+          59.919535
+        ],
+        [
+          94.85427,
+          59.923590000000004
+        ]
+      ],
+      "port_heights_m": [
+        1.2,
+        1.2
+      ],
+      "render_polygon_m": [
+        [
+          95.00921,
+          59.51962
+        ],
+        [
+          95.00921,
+          60.31945
+        ],
+        [
+          94.85427,
+          60.32359000000001
+        ],
+        [
+          94.85427,
+          59.52359
+        ]
+      ],
+      "height_policy": "Source H range interpreted to preserve adjacent carrying-surface heights; transfer skin is a display assumption."
+    },
+    {
+      "curve_handle": "2CC7B0",
+      "source_edges": [
+        {
+          "role": "transition_frame",
+          "source_handles": [
+            "2CC719",
+            "1E10BC"
+          ],
+          "points_m": [
+            [
+              51.24067044,
+              57.94391655
+            ],
+            [
+              51.24068062,
+              57.11458131
+            ]
+          ]
+        },
+        {
+          "role": "transition_frame",
+          "source_handles": [
+            "2CC719",
+            "1E10BD"
+          ],
+          "points_m": [
+            [
+              51.24067007,
+              57.11458132
+            ],
+            [
+              50.94067007,
+              57.1146426
+            ]
+          ]
+        },
+        {
+          "role": "transition_frame",
+          "source_handles": [
+            "2CC719",
+            "1E10BE"
+          ],
+          "points_m": [
+            [
+              51.24066921,
+              57.94391655
+            ],
+            [
+              50.94066252,
+              57.11391203
+            ]
+          ]
+        },
+        {
+          "role": "transition_frame",
+          "source_handles": [
+            "2CC719",
+            "1E10BF"
+          ],
+          "points_m": [
+            [
+              51.24068062,
+              57.11458131
+            ],
+            [
+              50.93848003,
+              57.94391283
+            ]
+          ]
+        }
+      ],
+      "source_corner_envelope_m": [
+        [
+          50.93848003,
+          57.11391203
+        ],
+        [
+          51.24068062,
+          57.11391203
+        ],
+        [
+          51.24068062,
+          57.94391655
+        ],
+        [
+          50.93848003,
+          57.94391655
+        ]
+      ],
+      "interpretation": "Measured crossed transfer-frame location. Thin bridge skin is a display interpretation, clipped to the actual gap; no duplicate deck over the following belt.",
+      "id": "2CC7B0_transition",
+      "kind": "source_transfer_frame",
+      "source_handles": [
+        "2CC719",
+        "1E10BC",
+        "1E10BD",
+        "1E10BE",
+        "1E10BF"
+      ],
+      "mesh_key": "transfer",
+      "position_m": [
+        51.01702788,
+        57.54602017249999
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.7999999999999972,
+        0.15494117999999446
+      ],
+      "belt_width_m": 0.7999999999999972,
+      "outer_width_m": 0.7999999999999972,
+      "render_axis_endpoints_m": [
+        [
+          50.93955729,
+          57.543993564999994
+        ],
+        [
+          51.09449847,
+          57.54804678
+        ]
+      ],
+      "port_heights_m": [
+        1.2,
+        1.2
+      ],
+      "render_polygon_m": [
+        [
+          50.93955729,
+          57.14407426999999
+        ],
+        [
+          50.93955729,
+          57.94391286
+        ],
+        [
+          51.09449847,
+          57.94804678
+        ],
+        [
+          51.09449847,
+          57.14804678
+        ]
+      ],
+      "height_policy": "Source H range interpreted to preserve adjacent carrying-surface heights; transfer skin is a display assumption."
+    },
+    {
+      "source_handles": [
+        "2CC719",
+        "1E17EC"
+      ],
+      "existing_equivalent": "SM_MPR_SorterOutput; same 1.1m by .55m source footprint as 2CA6A4",
+      "bounds_m": [
+        [
+          60.9329812,
+          57.27761313
+        ],
+        [
+          62.0329812,
+          57.82761313
+        ]
+      ],
+      "center_m": [
+        61.4829812,
+        57.55261313
+      ],
+      "size_m": [
+        0.5500000000000043,
+        1.1000000000000014
+      ],
+      "source_geometry_count": 152,
+      "id": "2CC7B0_terminal_0",
+      "curve_handle": "2CC7B0",
+      "kind": "source_sorter_terminal",
+      "mesh_key": "terminal",
+      "position_m": [
+        61.4829812,
+        57.55261313
+      ],
+      "rotation_deg": -90,
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "render_axis_endpoints_m": [
+        [
+          60.9329812,
+          57.55261313
+        ],
+        [
+          62.0329812,
+          57.55261313
+        ]
+      ],
+      "height_policy": "H:1500 working-line interpretation; exact XY matches nested source. Terminal internals are a simplified display."
+    },
+    {
+      "source_handles": [
+        "2CC719",
+        "1E18ED"
+      ],
+      "existing_equivalent": "SM_MPR_SorterOutput; same 1.1m by .55m source footprint as 2CA6A4",
+      "bounds_m": [
+        [
+          62.03515425,
+          57.2778204
+        ],
+        [
+          63.13515425,
+          57.8278204
+        ]
+      ],
+      "center_m": [
+        62.58515425,
+        57.5528204
+      ],
+      "size_m": [
+        0.5499999999999972,
+        1.1000000000000014
+      ],
+      "source_geometry_count": 152,
+      "id": "2CC7B0_terminal_1",
+      "curve_handle": "2CC7B0",
+      "kind": "source_sorter_terminal",
+      "mesh_key": "terminal",
+      "position_m": [
+        62.58515425,
+        57.5528204
+      ],
+      "rotation_deg": -90,
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "render_axis_endpoints_m": [
+        [
+          62.03515425,
+          57.5528204
+        ],
+        [
+          63.13515425,
+          57.5528204
+        ]
+      ],
+      "height_policy": "H:1500 working-line interpretation; exact XY matches nested source. Terminal internals are a simplified display."
+    },
+    {
+      "source_handles": [
+        "2CC719",
+        "1E19EE"
+      ],
+      "existing_equivalent": "SM_MPR_SorterOutput; same 1.1m by .55m source footprint as 2CA6A4",
+      "bounds_m": [
+        [
+          63.13918662,
+          57.27824306
+        ],
+        [
+          64.23918662,
+          57.82824306
+        ]
+      ],
+      "center_m": [
+        63.68918662,
+        57.55324306
+      ],
+      "size_m": [
+        0.5499999999999972,
+        1.1000000000000014
+      ],
+      "source_geometry_count": 152,
+      "id": "2CC7B0_terminal_2",
+      "curve_handle": "2CC7B0",
+      "kind": "source_sorter_terminal",
+      "mesh_key": "terminal",
+      "position_m": [
+        63.68918662,
+        57.55324306
+      ],
+      "rotation_deg": -90,
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "render_axis_endpoints_m": [
+        [
+          63.13918662,
+          57.55324306
+        ],
+        [
+          64.23918662,
+          57.55324306
+        ]
+      ],
+      "height_policy": "H:1500 working-line interpretation; exact XY matches nested source. Terminal internals are a simplified display."
+    },
+    {
+      "source_handles": [
+        "2CC719",
+        "1E1AEF"
+      ],
+      "existing_equivalent": "SM_MPR_SorterOutput; same 1.1m by .55m source footprint as 2CA6A4",
+      "bounds_m": [
+        [
+          64.24106312,
+          57.27838627
+        ],
+        [
+          65.34106312,
+          57.82838627
+        ]
+      ],
+      "center_m": [
+        64.79106312,
+        57.553386270000004
+      ],
+      "size_m": [
+        0.5500000000000043,
+        1.0999999999999943
+      ],
+      "source_geometry_count": 152,
+      "id": "2CC7B0_terminal_3",
+      "curve_handle": "2CC7B0",
+      "kind": "source_sorter_terminal",
+      "mesh_key": "terminal",
+      "position_m": [
+        64.79106312,
+        57.553386270000004
+      ],
+      "rotation_deg": -90,
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "render_axis_endpoints_m": [
+        [
+          64.24106312,
+          57.553386270000004
+        ],
+        [
+          65.34106312,
+          57.553386270000004
+        ]
+      ],
+      "height_policy": "H:1500 working-line interpretation; exact XY matches nested source. Terminal internals are a simplified display."
+    },
+    {
+      "source_handles": [
+        "2CC719",
+        "1E1BF0"
+      ],
+      "existing_equivalent": "SM_MPR_SorterOutput; same 1.1m by .55m source footprint as 2CA6A4",
+      "bounds_m": [
+        [
+          65.34360124,
+          57.27823014
+        ],
+        [
+          66.44360124,
+          57.82823014
+        ]
+      ],
+      "center_m": [
+        65.89360124000001,
+        57.55323014
+      ],
+      "size_m": [
+        0.5500000000000043,
+        1.1000000000000085
+      ],
+      "source_geometry_count": 152,
+      "id": "2CC7B0_terminal_4",
+      "curve_handle": "2CC7B0",
+      "kind": "source_sorter_terminal",
+      "mesh_key": "terminal",
+      "position_m": [
+        65.89360124000001,
+        57.55323014
+      ],
+      "rotation_deg": -90,
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "render_axis_endpoints_m": [
+        [
+          65.34360124,
+          57.55323014
+        ],
+        [
+          66.44360124,
+          57.55323014
+        ]
+      ],
+      "height_policy": "H:1500 working-line interpretation; exact XY matches nested source. Terminal internals are a simplified display."
+    },
+    {
+      "source_handles": [
+        "2CC719",
+        "1E1CF1"
+      ],
+      "existing_equivalent": "SM_MPR_SorterOutput; same 1.1m by .55m source footprint as 2CA6A4",
+      "bounds_m": [
+        [
+          66.44554083,
+          57.27832777
+        ],
+        [
+          67.54554083,
+          57.82832777
+        ]
+      ],
+      "center_m": [
+        66.99554083,
+        57.553327769999996
+      ],
+      "size_m": [
+        0.5500000000000043,
+        1.0999999999999943
+      ],
+      "source_geometry_count": 152,
+      "id": "2CC7B0_terminal_5",
+      "curve_handle": "2CC7B0",
+      "kind": "source_sorter_terminal",
+      "mesh_key": "terminal",
+      "position_m": [
+        66.99554083,
+        57.553327769999996
+      ],
+      "rotation_deg": -90,
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "render_axis_endpoints_m": [
+        [
+          66.44554083,
+          57.553327769999996
+        ],
+        [
+          67.54554083,
+          57.553327769999996
+        ]
+      ],
+      "height_policy": "H:1500 working-line interpretation; exact XY matches nested source. Terminal internals are a simplified display."
+    },
+    {
+      "source_handles": [
+        "2CC719",
+        "1E1DF2"
+      ],
+      "existing_equivalent": "SM_MPR_SorterOutput; same 1.1m by .55m source footprint as 2CA6A4",
+      "bounds_m": [
+        [
+          67.54669198,
+          57.27839842
+        ],
+        [
+          68.64669198,
+          57.82839842
+        ]
+      ],
+      "center_m": [
+        68.09669198,
+        57.55339842
+      ],
+      "size_m": [
+        0.5499999999999972,
+        1.0999999999999943
+      ],
+      "source_geometry_count": 152,
+      "id": "2CC7B0_terminal_6",
+      "curve_handle": "2CC7B0",
+      "kind": "source_sorter_terminal",
+      "mesh_key": "terminal",
+      "position_m": [
+        68.09669198,
+        57.55339842
+      ],
+      "rotation_deg": -90,
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "render_axis_endpoints_m": [
+        [
+          67.54669198,
+          57.55339842
+        ],
+        [
+          68.64669198,
+          57.55339842
+        ]
+      ],
+      "height_policy": "H:1500 working-line interpretation; exact XY matches nested source. Terminal internals are a simplified display."
+    },
+    {
+      "id": "2CB2DE_terminal_cap",
+      "curve_handle": "2CB2DE",
+      "kind": "source_terminal_cap",
+      "source_handles": [
+        "2CB252"
+      ],
+      "mesh_key": "cap",
+      "source_edges": [
+        {
+          "type": "LWPOLYLINE",
+          "layer": "W_EQUIPMENT",
+          "source_handles": [
+            "2CB252"
+          ],
+          "points_m": [
+            [
+              134.73176,
+              59.518
+            ],
+            [
+              134.73176,
+              60.313
+            ],
+            [
+              133.73176,
+              60.313
+            ],
+            [
+              133.73176,
+              59.518
+            ],
+            [
+              134.73176,
+              59.518
+            ],
+            [
+              134.73176,
+              59.518
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "source_polygon_m": [
+        [
+          134.73176,
+          59.518
+        ],
+        [
+          134.73176,
+          60.313
+        ],
+        [
+          133.73176,
+          60.313
+        ],
+        [
+          133.73176,
+          59.518
+        ],
+        [
+          134.73176,
+          59.518
+        ],
+        [
+          134.73176,
+          59.518
+        ]
+      ],
+      "render_polygon_m": [
+        [
+          133.73176,
+          59.518
+        ],
+        [
+          134.73176,
+          59.518
+        ],
+        [
+          134.73176,
+          60.313
+        ],
+        [
+          133.73176,
+          60.313
+        ]
+      ],
+      "position_m": [
+        134.23176,
+        59.9155
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.7950000000000017,
+        1.0
+      ],
+      "belt_width_m": 0.7950000000000017,
+      "outer_width_m": 0.7950000000000017,
+      "render_axis_endpoints_m": [
+        [
+          133.73176,
+          59.9155
+        ],
+        [
+          134.73176,
+          59.9155
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "interpretation": "Exact 1m closed terminal rectangle. Display as terminal receiving surface, not evidence of powered rollers or continuation beyond it.",
+      "height_policy": "Source H range interpreted to preserve adjacent carrying-surface heights; transfer skin is a display assumption."
+    },
+    {
+      "id": "2CC6A3_terminal_cap",
+      "curve_handle": "2CC6A3",
+      "kind": "source_terminal_cap",
+      "source_handles": [
+        "2CC617"
+      ],
+      "mesh_key": "cap",
+      "source_edges": [
+        {
+          "type": "LWPOLYLINE",
+          "layer": "W_EQUIPMENT",
+          "source_handles": [
+            "2CC617"
+          ],
+          "points_m": [
+            [
+              75.96299,
+              59.52661
+            ],
+            [
+              75.96299,
+              60.32161
+            ],
+            [
+              76.96299,
+              60.32161
+            ],
+            [
+              76.96299,
+              59.52661
+            ],
+            [
+              75.96299,
+              59.52661
+            ],
+            [
+              75.96299,
+              59.52661
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "source_polygon_m": [
+        [
+          75.96299,
+          59.52661
+        ],
+        [
+          75.96299,
+          60.32161
+        ],
+        [
+          76.96299,
+          60.32161
+        ],
+        [
+          76.96299,
+          59.52661
+        ],
+        [
+          75.96299,
+          59.52661
+        ],
+        [
+          75.96299,
+          59.52661
+        ]
+      ],
+      "render_polygon_m": [
+        [
+          75.96299,
+          59.52661
+        ],
+        [
+          76.96299,
+          59.52661
+        ],
+        [
+          76.96299,
+          60.32161
+        ],
+        [
+          75.96299,
+          60.32161
+        ]
+      ],
+      "position_m": [
+        76.46299,
+        59.92411
+      ],
+      "rotation_deg": 90,
+      "size_m": [
+        0.7950000000000017,
+        1.0
+      ],
+      "belt_width_m": 0.7950000000000017,
+      "outer_width_m": 0.7950000000000017,
+      "render_axis_endpoints_m": [
+        [
+          76.96299,
+          59.92411
+        ],
+        [
+          75.96299,
+          59.92411
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "interpretation": "Exact 1m closed terminal rectangle. Display as terminal receiving surface, not evidence of powered rollers or continuation beyond it.",
+      "height_policy": "Source H range interpreted to preserve adjacent carrying-surface heights; transfer skin is a display assumption."
+    },
+    {
+      "id": "2CC7B0_terminal_cap",
+      "curve_handle": "2CC7B0",
+      "kind": "source_terminal_cap",
+      "source_handles": [
+        "2CC719",
+        "1E241C"
+      ],
+      "mesh_key": "cap",
+      "source_edges": [
+        {
+          "source_handles": [
+            "2CC719",
+            "1E241C"
+          ],
+          "source_polygon_m": [
+            [
+              71.48578123,
+              57.14246115
+            ],
+            [
+              71.48578123,
+              57.93746115
+            ],
+            [
+              70.48578123,
+              57.93746115
+            ],
+            [
+              70.48578123,
+              57.14246115
+            ],
+            [
+              71.48578123,
+              57.14246115
+            ],
+            [
+              71.48578123,
+              57.14246115
+            ]
+          ],
+          "note": "Closed terminal rectangle 1.0 by .795m after source output array plus .9m and .6m terminal boxes; no source conveyor continues from its far end in this block."
+        }
+      ],
+      "source_polygon_m": [
+        [
+          71.48578123,
+          57.14246115
+        ],
+        [
+          71.48578123,
+          57.93746115
+        ],
+        [
+          70.48578123,
+          57.93746115
+        ],
+        [
+          70.48578123,
+          57.14246115
+        ],
+        [
+          71.48578123,
+          57.14246115
+        ],
+        [
+          71.48578123,
+          57.14246115
+        ]
+      ],
+      "render_polygon_m": [
+        [
+          70.48578123,
+          57.14246115
+        ],
+        [
+          71.48578123,
+          57.14246115
+        ],
+        [
+          71.48578123,
+          57.93746115
+        ],
+        [
+          70.48578123,
+          57.93746115
+        ]
+      ],
+      "position_m": [
+        70.98578123,
+        57.539961149999996
+      ],
+      "rotation_deg": -90,
+      "size_m": [
+        0.7949999999999946,
+        1.0
+      ],
+      "belt_width_m": 0.7949999999999946,
+      "outer_width_m": 0.7949999999999946,
+      "render_axis_endpoints_m": [
+        [
+          70.48578123,
+          57.539961149999996
+        ],
+        [
+          71.48578123,
+          57.539961149999996
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "interpretation": "Exact 1m closed terminal rectangle. Display as terminal receiving surface, not evidence of powered rollers or continuation beyond it.",
+      "height_policy": "Source H range interpreted to preserve adjacent carrying-surface heights; transfer skin is a display assumption."
+    },
+    {
+      "id": "2CC7B0_terminal_bay_0_9",
+      "source_handles": [
+        "2CC719",
+        "1E23E7",
+        "1E23E8",
+        "1E23E9",
+        "1E23EA"
+      ],
+      "kind": "terminal_attachment_bay_outline",
+      "source_edges": [
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23E7"
+          ],
+          "points_m": [
+            [
+              68.95099307,
+              57.95356852
+            ],
+            [
+              68.95099307,
+              57.14356852
+            ]
+          ]
+        },
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23E8"
+          ],
+          "points_m": [
+            [
+              68.95099307,
+              57.14356852
+            ],
+            [
+              69.85099307,
+              57.14356852
+            ]
+          ]
+        },
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23E9"
+          ],
+          "points_m": [
+            [
+              69.85099307,
+              57.14356852
+            ],
+            [
+              69.85099307,
+              57.95356852
+            ]
+          ]
+        },
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23EA"
+          ],
+          "points_m": [
+            [
+              69.85099307,
+              57.95356852
+            ],
+            [
+              68.95099307,
+              57.95356852
+            ]
+          ]
+        }
+      ],
+      "source_polygon_m": [
+        [
+          68.95099307,
+          57.14356852
+        ],
+        [
+          69.85099307,
+          57.14356852
+        ],
+        [
+          69.85099307,
+          57.95356852
+        ],
+        [
+          68.95099307,
+          57.95356852
+        ]
+      ],
+      "bounds_m": [
+        [
+          68.95099307,
+          57.14356852
+        ],
+        [
+          69.85099307,
+          57.95356852
+        ]
+      ],
+      "center_m": [
+        69.40099307,
+        57.54856852
+      ],
+      "size_m": [
+        0.8099999999999952,
+        0.9000000000000057
+      ],
+      "needs_missing_footprint": true,
+      "semantic_certainty": "Two adjoining terminal equipment compartments are certain; conveyor belt, roller, box contents and height are not specified by these bare LINE rectangles.",
+      "curve_handle": "2CC7B0",
+      "mesh_key": "bay",
+      "position_m": [
+        69.40099307,
+        57.54856852
+      ],
+      "rotation_deg": -90,
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "render_axis_endpoints_m": [
+        [
+          68.95099307,
+          57.54856852
+        ],
+        [
+          69.85099307,
+          57.54856852
+        ]
+      ],
+      "height_policy": "Neutral terminal attachment footprint at adjoining H:1500 display height; no belt or roller mechanism is inferred."
+    },
+    {
+      "id": "2CC7B0_terminal_bay_0_6",
+      "source_handles": [
+        "2CC719",
+        "1E23E9",
+        "1E23EB",
+        "1E23EC",
+        "1E23ED"
+      ],
+      "kind": "terminal_attachment_bay_outline",
+      "source_edges": [
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23E9"
+          ],
+          "points_m": [
+            [
+              69.85099307,
+              57.14356852
+            ],
+            [
+              69.85099307,
+              57.95356852
+            ]
+          ]
+        },
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23EB"
+          ],
+          "points_m": [
+            [
+              69.85099307,
+              57.95356852
+            ],
+            [
+              70.45099307,
+              57.95356852
+            ]
+          ]
+        },
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23EC"
+          ],
+          "points_m": [
+            [
+              70.45099307,
+              57.95356852
+            ],
+            [
+              70.45099307,
+              57.14356852
+            ]
+          ]
+        },
+        {
+          "source_handles": [
+            "2CC719",
+            "1E23ED"
+          ],
+          "points_m": [
+            [
+              70.45099307,
+              57.14356852
+            ],
+            [
+              69.85099307,
+              57.14356852
+            ]
+          ]
+        }
+      ],
+      "source_polygon_m": [
+        [
+          69.85099307,
+          57.14356852
+        ],
+        [
+          70.45099307,
+          57.14356852
+        ],
+        [
+          70.45099307,
+          57.95356852
+        ],
+        [
+          69.85099307,
+          57.95356852
+        ]
+      ],
+      "bounds_m": [
+        [
+          69.85099307,
+          57.14356852
+        ],
+        [
+          70.45099307,
+          57.95356852
+        ]
+      ],
+      "center_m": [
+        70.15099307,
+        57.54856852
+      ],
+      "size_m": [
+        0.8099999999999952,
+        0.5999999999999943
+      ],
+      "needs_missing_footprint": true,
+      "semantic_certainty": "Two adjoining terminal equipment compartments are certain; conveyor belt, roller, box contents and height are not specified by these bare LINE rectangles.",
+      "curve_handle": "2CC7B0",
+      "mesh_key": "bay",
+      "position_m": [
+        70.15099307,
+        57.54856852
+      ],
+      "rotation_deg": -90,
+      "port_heights_m": [
+        1.5,
+        1.5
+      ],
+      "render_axis_endpoints_m": [
+        [
+          69.85099307,
+          57.54856852
+        ],
+        [
+          70.45099307,
+          57.54856852
+        ]
+      ],
+      "height_policy": "Neutral terminal attachment footprint at adjoining H:1500 display height; no belt or roller mechanism is inferred."
+    }
+  ],
+  "height_labels": [
+    {
+      "text": "H:500-1200",
+      "position_m": [
+        114.79751,
+        59.98851
+      ],
+      "layer": "W_EQUIPMENT",
+      "handle": "2D3FDF"
+    },
+    {
+      "text": "H:1500",
+      "position_m": [
+        120.51284,
+        60.0187
+      ],
+      "layer": "W_EQUIPMENT",
+      "handle": "2D3FE0"
+    },
+    {
+      "text": "H:1500",
+      "position_m": [
+        124.1339,
+        59.98976
+      ],
+      "layer": "W_EQUIPMENT",
+      "handle": "2D3FE1"
+    },
+    {
+      "text": "H:1200-1500",
+      "position_m": [
+        117.3932,
+        59.97725
+      ],
+      "layer": "W_EQUIPMENT",
+      "handle": "2D3FE9"
+    },
+    {
+      "text": "H:500-1200",
+      "position_m": [
+        95.89724,
+        59.98851
+      ],
+      "layer": "W_EQUIPMENT",
+      "handle": "2D3FED"
+    },
+    {
+      "text": "H:1500",
+      "position_m": [
+        90.18191,
+        60.0187
+      ],
+      "layer": "W_EQUIPMENT",
+      "handle": "2D3FEE"
+    },
+    {
+      "text": "H:1500",
+      "position_m": [
+        86.56084,
+        59.98976
+      ],
+      "layer": "W_EQUIPMENT",
+      "handle": "2D3FEF"
+    },
+    {
+      "text": "H:1200-1500",
+      "position_m": [
+        93.30154,
+        59.97725
+      ],
+      "layer": "W_EQUIPMENT",
+      "handle": "2D3FF7"
+    },
+    {
+      "handle": "2CC719/1E10B1",
+      "text": "H:500-1200",
+      "position_m": [
+        50.05152981,
+        57.61296389
+      ],
+      "layer": "0"
+    },
+    {
+      "handle": "2CC719/1E23FB",
+      "text": "H:1500",
+      "position_m": [
+        55.76686034,
+        57.6431601
+      ],
+      "layer": "0"
+    },
+    {
+      "handle": "2CC719/1E23FC",
+      "text": "H:1500",
+      "position_m": [
+        59.38792506,
+        57.61421808
+      ],
+      "layer": "0"
+    },
+    {
+      "handle": "2CC719/1E2419",
+      "text": "H:1200-1500",
+      "position_m": [
+        52.64722712,
+        57.6017075
+      ],
+      "layer": "0"
+    }
+  ],
+  "height_interpretation": "Local planar H annotations are exact. Inferring 0.5->1.2->1.5m along the first two stages is plausible, but no source endpoint Z or slope arrow proves that assignment. Do not call a constant 1m deck CAD-height-conformant.",
+  "verified_existing_port": {
+    "curve_handle": "2CC7DB",
+    "port_m": [
+      48.139557348883,
+      48.344882250413015
+    ],
+    "next_source_handles": [
+      "2CC71A",
+      "2CC741"
+    ]
+  },
+  "tail_status": {
+    "2CB2DE": "After 0.73m deck, source continues into existing output-module INSERTs; not an original terminal.",
+    "2CC6A3": "Mirrored output modules likewise continue; not an original terminal.",
+    "2CC7B0": "Entire 2CC719 is omitted, including subsequent output-module array and terminal boxes. First feed subassembly is not the source terminal."
+  },
+  "existing_terminal_policy": "Replace fourteen existing sorter-terminal proxies in place with the same XY/width, H:1500 top and ground-reaching supports; they are not additions.",
+  "chevron_reference": {
+    "reference_position_m": [
+      54.00872324,
+      57.550756235
+    ],
+    "reference_rotation_deg": -90,
+    "native_size_m": [
+      0.88448987,
+      1.43095984
+    ],
+    "source_parent_handle": "2CC719",
+    "source_file": "u33_nested_feed_2CC719.json",
+    "rollers": [
+      {
+        "axis_world_m": [
+          [
+            54.64439738,
+            57.22080356
+          ],
+          [
+            54.520860735,
+            57.521410175
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.64510325,
+              57.28485613
+            ],
+            [
+              54.5470337,
+              57.52349263
+            ]
+          ],
+          [
+            [
+              54.64369151,
+              57.15675099
+            ],
+            [
+              54.49468777,
+              57.51932772
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E10CA",
+          "1E10CE",
+          "1E10CB",
+          "1E10CF"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.599294395,
+            57.13850565
+          ],
+          [
+            54.44193672,
+            57.52141019
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.6224179,
+              57.14800845
+            ],
+            [
+              54.4681097,
+              57.52349259
+            ]
+          ],
+          [
+            [
+              54.57617089,
+              57.12900285
+            ],
+            [
+              54.41576374,
+              57.51932779
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E1134",
+          "1E1135"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.528948745,
+            57.117631595
+          ],
+          [
+            54.36301273,
+            57.521410200000005
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.55489722,
+              57.12026028
+            ],
+            [
+              54.38918573,
+              57.52349255
+            ]
+          ],
+          [
+            [
+              54.50300027,
+              57.11500291
+            ],
+            [
+              54.33683973,
+              57.51932785
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E1147",
+          "1E1148"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.451231515,
+            57.114695165
+          ],
+          [
+            54.28408873,
+            57.521410215
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.47819441,
+              57.11485545
+            ],
+            [
+              54.31026176,
+              57.52349251
+            ]
+          ],
+          [
+            [
+              54.42426862,
+              57.11453488
+            ],
+            [
+              54.2579157,
+              57.51932792
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E115B",
+          "1E115C"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.372499864999995,
+            57.114227135
+          ],
+          [
+            54.205164745,
+            57.52141023
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.39946275,
+              57.11438742
+            ],
+            [
+              54.2313378,
+              57.52349247
+            ]
+          ],
+          [
+            [
+              54.34553698,
+              57.11406685
+            ],
+            [
+              54.17899169,
+              57.51932799
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E1169",
+          "1E116A"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.293768224999994,
+            57.113759105
+          ],
+          [
+            54.126240755,
+            57.521410235
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.32073111,
+              57.11391939
+            ],
+            [
+              54.15241383,
+              57.52349242
+            ]
+          ],
+          [
+            [
+              54.26680534,
+              57.11359882
+            ],
+            [
+              54.10006768,
+              57.51932805
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E1179",
+          "1E117A"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.21503658,
+            57.113291065
+          ],
+          [
+            54.04731676,
+            57.52141025
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.24199947,
+              57.11345135
+            ],
+            [
+              54.07348985,
+              57.52349238
+            ]
+          ],
+          [
+            [
+              54.18807369,
+              57.11313078
+            ],
+            [
+              54.02114367,
+              57.51932812
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E118B",
+          "1E118C"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.13630493,
+            57.112823035
+          ],
+          [
+            53.968392765000004,
+            57.521410259999996
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.16326782,
+              57.11298332
+            ],
+            [
+              53.99456588,
+              57.52349234
+            ]
+          ],
+          [
+            [
+              54.10934204,
+              57.11266275
+            ],
+            [
+              53.94221965,
+              57.51932818
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E1199",
+          "1E119A"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.05757328,
+            57.112355005
+          ],
+          [
+            53.88946878,
+            57.521410275
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.08453617,
+              57.11251529
+            ],
+            [
+              53.91564192,
+              57.5234923
+            ]
+          ],
+          [
+            [
+              54.03061039,
+              57.11219472
+            ],
+            [
+              53.86329564,
+              57.51932825
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E11A9",
+          "1E11AA"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.97884164,
+            57.111886975
+          ],
+          [
+            53.81054479,
+            57.52141029
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.00580453,
+              57.11204726
+            ],
+            [
+              53.83671795,
+              57.52349226
+            ]
+          ],
+          [
+            [
+              53.95187875,
+              57.11172669
+            ],
+            [
+              53.78437163,
+              57.51932832
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E11B9",
+          "1E11BA"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.900109994999994,
+            57.111418945
+          ],
+          [
+            53.731620795,
+            57.5214103
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.92707289,
+              57.11157923
+            ],
+            [
+              53.75779398,
+              57.52349222
+            ]
+          ],
+          [
+            [
+              53.8731471,
+              57.11125866
+            ],
+            [
+              53.70544761,
+              57.51932838
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E11CB",
+          "1E11CC"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.821378345,
+            57.110950915000004
+          ],
+          [
+            53.652696785,
+            57.521410315
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.84834124,
+              57.1111112
+            ],
+            [
+              53.67886999,
+              57.52349218
+            ]
+          ],
+          [
+            [
+              53.79441545,
+              57.11079063
+            ],
+            [
+              53.62652358,
+              57.51932845
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E11DB",
+          "1E11DC"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.742646695000005,
+            57.110482875
+          ],
+          [
+            53.5737728,
+            57.521410325000005
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.76960958,
+              57.11064316
+            ],
+            [
+              53.59994602,
+              57.52349214
+            ]
+          ],
+          [
+            [
+              53.71568381,
+              57.11032259
+            ],
+            [
+              53.54759958,
+              57.51932851
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E11E9",
+          "1E11EA"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.663915055000004,
+            57.110014845
+          ],
+          [
+            53.494848815,
+            57.52141034
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.69087793,
+              57.11017513
+            ],
+            [
+              53.52102205,
+              57.5234921
+            ]
+          ],
+          [
+            [
+              53.63695218,
+              57.10985456
+            ],
+            [
+              53.46867558,
+              57.51932858
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E11F9",
+          "1E11FA"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.58518342,
+            57.109546815
+          ],
+          [
+            53.415924845000006,
+            57.521410355
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.61214631,
+              57.1097071
+            ],
+            [
+              53.44209811,
+              57.52349206
+            ]
+          ],
+          [
+            [
+              53.55822053,
+              57.10938653
+            ],
+            [
+              53.38975158,
+              57.51932865
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E1209",
+          "1E120A"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.506451775,
+            57.109078785
+          ],
+          [
+            53.3648037,
+            57.453756569999996
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.53341466,
+              57.10923907
+            ],
+            [
+              53.36317411,
+              57.52349202
+            ]
+          ],
+          [
+            [
+              53.47948889,
+              57.1089185
+            ],
+            [
+              53.36643329,
+              57.38402112
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E1219",
+          "1E121A"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.427720105000006,
+            57.108610755
+          ],
+          [
+            53.356474340000005,
+            57.281975849999995
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.454683,
+              57.10877104
+            ],
+            [
+              53.34657064,
+              57.37184505
+            ]
+          ],
+          [
+            [
+              53.40075721,
+              57.10845047
+            ],
+            [
+              53.36637804,
+              57.19210665
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E1122",
+          "1E1123"
+        ],
+        "angle_deg": 112.3406028024504,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.520860735,
+            57.578236785
+          ],
+          [
+            54.64439738,
+            57.878843395000004
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.5470337,
+              57.57615433
+            ],
+            [
+              54.64510325,
+              57.81479083
+            ]
+          ],
+          [
+            [
+              54.49468777,
+              57.58031924
+            ],
+            [
+              54.64369151,
+              57.94289596
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E10D8",
+          "1E10DF",
+          "1E10D7",
+          "1E10DE"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.44193672,
+            57.578236770000004
+          ],
+          [
+            54.599294395,
+            57.961141305
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.4681097,
+              57.57615437
+            ],
+            [
+              54.6224179,
+              57.95163851
+            ]
+          ],
+          [
+            [
+              54.41576374,
+              57.58031917
+            ],
+            [
+              54.57617089,
+              57.9706441
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E1131",
+          "1E1130"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.36301273,
+            57.578236755
+          ],
+          [
+            54.52904418,
+            57.982247584999996
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.38918573,
+              57.57615441
+            ],
+            [
+              54.55489722,
+              57.97938667
+            ]
+          ],
+          [
+            [
+              54.33683973,
+              57.5803191
+            ],
+            [
+              54.50319114,
+              57.9851085
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E114A",
+          "1E1149"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.28408873,
+            57.578236745
+          ],
+          [
+            54.451422385,
+            57.985416245
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.31026176,
+              57.57615445
+            ],
+            [
+              54.47838528,
+              57.98525596
+            ]
+          ],
+          [
+            [
+              54.2579157,
+              57.58031904
+            ],
+            [
+              54.42445949,
+              57.98557653
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E115A",
+          "1E1159"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.205164745,
+            57.57823673
+          ],
+          [
+            54.372690735000006,
+            57.985884275000004
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.2313378,
+              57.57615449
+            ],
+            [
+              54.39965362,
+              57.98572399
+            ]
+          ],
+          [
+            [
+              54.17899169,
+              57.58031897
+            ],
+            [
+              54.34572785,
+              57.98604456
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E116C",
+          "1E116B"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.126240755,
+            57.57823672
+          ],
+          [
+            54.293959095000005,
+            57.98635231
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.15241383,
+              57.57615453
+            ],
+            [
+              54.32092198,
+              57.98619203
+            ]
+          ],
+          [
+            [
+              54.10006768,
+              57.58031891
+            ],
+            [
+              54.26699621,
+              57.98651259
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E117C",
+          "1E117B"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            54.04731676,
+            57.578236704999995
+          ],
+          [
+            54.21522745,
+            57.986820345
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              54.07348985,
+              57.57615457
+            ],
+            [
+              54.24219034,
+              57.98666006
+            ]
+          ],
+          [
+            [
+              54.02114367,
+              57.58031884
+            ],
+            [
+              54.18826456,
+              57.98698063
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E118A",
+          "1E1189"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.968392765000004,
+            57.57823669
+          ],
+          [
+            54.1364958,
+            57.987288375
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.99456588,
+              57.57615461
+            ],
+            [
+              54.16345869,
+              57.98712809
+            ]
+          ],
+          [
+            [
+              53.94221965,
+              57.58031877
+            ],
+            [
+              54.10953291,
+              57.98744866
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E119C",
+          "1E119B"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.88946878,
+            57.578236685
+          ],
+          [
+            54.05776415,
+            57.987756405
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.91564192,
+              57.57615466
+            ],
+            [
+              54.08472704,
+              57.98759612
+            ]
+          ],
+          [
+            [
+              53.86329564,
+              57.58031871
+            ],
+            [
+              54.03080126,
+              57.98791669
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E11AC",
+          "1E11AB"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.81054479,
+            57.578236669999995
+          ],
+          [
+            53.97903251,
+            57.988224435
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.83671795,
+              57.5761547
+            ],
+            [
+              54.0059954,
+              57.98806415
+            ]
+          ],
+          [
+            [
+              53.78437163,
+              57.58031864
+            ],
+            [
+              53.95206962,
+              57.98838472
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E11BC",
+          "1E11BB"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.731620795,
+            57.578236655
+          ],
+          [
+            53.900300865000006,
+            57.988692465
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.75779398,
+              57.57615474
+            ],
+            [
+              53.92726376,
+              57.98853218
+            ]
+          ],
+          [
+            [
+              53.70544761,
+              57.58031857
+            ],
+            [
+              53.87333797,
+              57.98885275
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E11CA",
+          "1E11C9"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.652696785,
+            57.578236645000004
+          ],
+          [
+            53.821569215,
+            57.989160495
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.67886999,
+              57.57615478
+            ],
+            [
+              53.84853211,
+              57.98900021
+            ]
+          ],
+          [
+            [
+              53.62652358,
+              57.58031851
+            ],
+            [
+              53.79460632,
+              57.98932078
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E11DA",
+          "1E11D9"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.5737728,
+            57.57823663
+          ],
+          [
+            53.742837565,
+            57.989628535
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.59994602,
+              57.57615482
+            ],
+            [
+              53.76980045,
+              57.98946825
+            ]
+          ],
+          [
+            [
+              53.54759958,
+              57.58031844
+            ],
+            [
+              53.71587468,
+              57.98978882
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E11EC",
+          "1E11EB"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.494848815,
+            57.57823662
+          ],
+          [
+            53.66410593,
+            57.990096565
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.52102205,
+              57.57615486
+            ],
+            [
+              53.69106881,
+              57.98993628
+            ]
+          ],
+          [
+            [
+              53.46867558,
+              57.58031838
+            ],
+            [
+              53.63714305,
+              57.99025685
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E11FC",
+          "1E11FB"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.415924845000006,
+            57.578236605
+          ],
+          [
+            53.58537429,
+            57.990564595
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.44209811,
+              57.5761549
+            ],
+            [
+              53.61233718,
+              57.99040431
+            ]
+          ],
+          [
+            [
+              53.38975158,
+              57.58031831
+            ],
+            [
+              53.5584114,
+              57.99072488
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E120C",
+          "1E120B"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.3648037,
+            57.645890390000005
+          ],
+          [
+            53.506642645,
+            57.991032625
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.36317411,
+              57.57615494
+            ],
+            [
+              53.53360553,
+              57.99087234
+            ]
+          ],
+          [
+            [
+              53.36643329,
+              57.71562584
+            ],
+            [
+              53.47967976,
+              57.99119291
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E121C",
+          "1E121B"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      },
+      {
+        "axis_world_m": [
+          [
+            53.356474340000005,
+            57.817671105
+          ],
+          [
+            53.427910975,
+            57.991500655
+          ]
+        ],
+        "source_edge_segments_m": [
+          [
+            [
+              53.34657064,
+              57.7278019
+            ],
+            [
+              53.45487387,
+              57.99134037
+            ]
+          ],
+          [
+            [
+              53.36637804,
+              57.90754031
+            ],
+            [
+              53.40094808,
+              57.99166094
+            ]
+          ]
+        ],
+        "source_handles": [
+          "1E1125",
+          "1E1124"
+        ],
+        "angle_deg": 67.6593966814643,
+        "diameter_m": 0.05
+      }
+    ],
+    "diameter_m": 0.05,
+    "count": 34,
+    "height_policy": "CAD plan contains roller edges, working height 1.5m follows H:1500 display alignment; radial mesh is presentation geometry."
+  },
+  "terminal_bays_evidence": {
+    "scope": "Only two adjoining terminal compartments in omitted 2CC719. Do not add them to the other two lines.",
+    "items": [
+      {
+        "id": "2CC7B0_terminal_bay_0_9",
+        "source_handles": [
+          "2CC719",
+          "1E23E7",
+          "1E23E8",
+          "1E23E9",
+          "1E23EA"
+        ],
+        "kind": "terminal_attachment_bay_outline",
+        "source_edges": [
+          {
+            "source_handles": [
+              "2CC719",
+              "1E23E7"
+            ],
+            "points_m": [
+              [
+                68.95099307,
+                57.95356852
+              ],
+              [
+                68.95099307,
+                57.14356852
+              ]
+            ]
+          },
+          {
+            "source_handles": [
+              "2CC719",
+              "1E23E8"
+            ],
+            "points_m": [
+              [
+                68.95099307,
+                57.14356852
+              ],
+              [
+                69.85099307,
+                57.14356852
+              ]
+            ]
+          },
+          {
+            "source_handles": [
+              "2CC719",
+              "1E23E9"
+            ],
+            "points_m": [
+              [
+                69.85099307,
+                57.14356852
+              ],
+              [
+                69.85099307,
+                57.95356852
+              ]
+            ]
+          },
+          {
+            "source_handles": [
+              "2CC719",
+              "1E23EA"
+            ],
+            "points_m": [
+              [
+                69.85099307,
+                57.95356852
+              ],
+              [
+                68.95099307,
+                57.95356852
+              ]
+            ]
+          }
+        ],
+        "source_polygon_m": [
+          [
+            68.95099307,
+            57.14356852
+          ],
+          [
+            69.85099307,
+            57.14356852
+          ],
+          [
+            69.85099307,
+            57.95356852
+          ],
+          [
+            68.95099307,
+            57.95356852
+          ]
+        ],
+        "bounds_m": [
+          [
+            68.95099307,
+            57.14356852
+          ],
+          [
+            69.85099307,
+            57.95356852
+          ]
+        ],
+        "center_m": [
+          69.40099307,
+          57.54856852
+        ],
+        "size_m": [
+          0.8099999999999952,
+          0.9000000000000057
+        ],
+        "needs_missing_footprint": true,
+        "semantic_certainty": "Two adjoining terminal equipment compartments are certain; conveyor belt, roller, box contents and height are not specified by these bare LINE rectangles.",
+        "curve_handle": "2CC7B0",
+        "mesh_key": "bay",
+        "position_m": [
+          69.40099307,
+          57.54856852
+        ],
+        "rotation_deg": -90,
+        "port_heights_m": [
+          1.5,
+          1.5
+        ],
+        "render_axis_endpoints_m": [
+          [
+            68.95099307,
+            57.54856852
+          ],
+          [
+            69.85099307,
+            57.54856852
+          ]
+        ],
+        "height_policy": "Neutral terminal attachment footprint at adjoining H:1500 display height; no belt or roller mechanism is inferred."
+      },
+      {
+        "id": "2CC7B0_terminal_bay_0_6",
+        "source_handles": [
+          "2CC719",
+          "1E23E9",
+          "1E23EB",
+          "1E23EC",
+          "1E23ED"
+        ],
+        "kind": "terminal_attachment_bay_outline",
+        "source_edges": [
+          {
+            "source_handles": [
+              "2CC719",
+              "1E23E9"
+            ],
+            "points_m": [
+              [
+                69.85099307,
+                57.14356852
+              ],
+              [
+                69.85099307,
+                57.95356852
+              ]
+            ]
+          },
+          {
+            "source_handles": [
+              "2CC719",
+              "1E23EB"
+            ],
+            "points_m": [
+              [
+                69.85099307,
+                57.95356852
+              ],
+              [
+                70.45099307,
+                57.95356852
+              ]
+            ]
+          },
+          {
+            "source_handles": [
+              "2CC719",
+              "1E23EC"
+            ],
+            "points_m": [
+              [
+                70.45099307,
+                57.95356852
+              ],
+              [
+                70.45099307,
+                57.14356852
+              ]
+            ]
+          },
+          {
+            "source_handles": [
+              "2CC719",
+              "1E23ED"
+            ],
+            "points_m": [
+              [
+                70.45099307,
+                57.14356852
+              ],
+              [
+                69.85099307,
+                57.14356852
+              ]
+            ]
+          }
+        ],
+        "source_polygon_m": [
+          [
+            69.85099307,
+            57.14356852
+          ],
+          [
+            70.45099307,
+            57.14356852
+          ],
+          [
+            70.45099307,
+            57.95356852
+          ],
+          [
+            69.85099307,
+            57.95356852
+          ]
+        ],
+        "bounds_m": [
+          [
+            69.85099307,
+            57.14356852
+          ],
+          [
+            70.45099307,
+            57.95356852
+          ]
+        ],
+        "center_m": [
+          70.15099307,
+          57.54856852
+        ],
+        "size_m": [
+          0.8099999999999952,
+          0.5999999999999943
+        ],
+        "needs_missing_footprint": true,
+        "semantic_certainty": "Two adjoining terminal equipment compartments are certain; conveyor belt, roller, box contents and height are not specified by these bare LINE rectangles.",
+        "curve_handle": "2CC7B0",
+        "mesh_key": "bay",
+        "position_m": [
+          70.15099307,
+          57.54856852
+        ],
+        "rotation_deg": -90,
+        "port_heights_m": [
+          1.5,
+          1.5
+        ],
+        "render_axis_endpoints_m": [
+          [
+            69.85099307,
+            57.54856852
+          ],
+          [
+            70.45099307,
+            57.54856852
+          ]
+        ],
+        "height_policy": "Neutral terminal attachment footprint at adjoining H:1500 display height; no belt or roller mechanism is inferred."
+      }
+    ],
+    "source_neighbors": {
+      "upstream_end_cap": {
+        "h": [
+          "2CC719",
+          "1E23DF"
+        ],
+        "t": "LINE",
+        "layer": "0",
+        "p": [
+          [
+            68.94669866,
+            57.13904564
+          ],
+          [
+            68.94669833,
+            57.96087726
+          ]
+        ],
+        "closed": false
+      },
+      "downstream_terminal_1m": {
+        "h": [
+          "2CC719",
+          "1E241C"
+        ],
+        "t": "LWPOLYLINE",
+        "layer": "0",
+        "p": [
+          [
+            71.48578123,
+            57.14246115
+          ],
+          [
+            71.48578123,
+            57.93746115
+          ],
+          [
+            70.48578123,
+            57.93746115
+          ],
+          [
+            70.48578123,
+            57.14246115
+          ],
+          [
+            71.48578123,
+            57.14246115
+          ],
+          [
+            71.48578123,
+            57.14246115
+          ]
+        ],
+        "closed": true
+      }
+    },
+    "seams_m": {
+      "previous_outer_endcap_to_bay": 0.004294409999999971,
+      "last_sorter_module_to_bay": 0.3043010899999956,
+      "bay_to_1m_terminal": 0.034788160000005064
+    },
+    "existing_duplicate_audit": "No top-level equipment INSERT or direct loose geometry occupies the two footprints. Intersecting non-local bboxes only warehouse outline and two unrelated annotation-block giant bboxes. The actual parent is omitted 2CC719. No GIE2 proxy here.",
+    "other_lines": "Right contains only endcaps 2CB22D/2CB230 then final rectangle 2CB252; left contains 2CC5F2/2CC5F5 then 2CC617. Neither original top-level line has these .9m/.6m compartments.",
+    "recommendation": "Restore as two neutral terminal attachment bays (or a single 1.5m attachment with a divider at .9m), with visible shared boundary. Do not make an uninterrupted black conveyor belt; no source belt/roller/arrow/height evidence exists in this footprint."
+  }
+}

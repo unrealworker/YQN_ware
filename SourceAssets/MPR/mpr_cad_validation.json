@@ -9,11 +9,12 @@
     "drive_in_doors": 2,
     "pedestrian_doors": 80,
     "office_walls": 110,
-    "equipment": 667,
+    "equipment": 494,
     "excluded": 535,
     "conveyor_runs": 49,
     "charging_bays": 104,
     "texts": 41,
+    "drafting_symbols": 173,
     "assumptions": 5
   },
   "footprint_area_m2": 56408.1891,
@@ -21,14 +22,15 @@
   "all_rack_centers_inside": true,
   "dock_counts_match_property_brochure": true,
   "equipment_kinds": {
-    "specialized_equipment": 160,
-    "machine_support": 70,
+    "specialized_equipment": 150,
+    "conveyor_drive_detail": 9,
+    "machine_support": 61,
     "workstation": 108,
-    "station_chute": 164,
     "complex_assembly": 10,
     "tiangong_96_infeed": 1,
-    "sorter_output": 146,
-    "carton_sealer": 8
+    "collection_cells": 146,
+    "carton_sealer": 8,
+    "y_merge": 1
   },
   "header_unit_conflict_resolved": true
 }

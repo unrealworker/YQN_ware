@@ -19,12 +19,13 @@ DXF AC1032、INSUNITS=4（毫米）与实际几何冲突。标准 `RACK_42D_144B
 
 ## 设备覆盖及简化
 
-`operations/instances.json` 包含1029个实例，13个新增模块共5320三角形（唯一模型合计，不是运行时整场面数）。使用HISM、无tick、无碰撞；材质角色对应GHS蓝白银灰。
+`operations/instances.json` 经2026-11-06原CAD语义复核后包含886个实例，27个模块共11792三角形（唯一模型合计，不是运行时整场面数）。使用HISM、无tick、无碰撞；材质角色对应GHS蓝白银灰。变更证据与原图解释见 `conveyor_repair_20261106/README.md`。
 
 - 49条顶层直输送CAD模块分段为不大于2m的可复用开架模型，另根据复杂总成平行边提取干线。
 - 5种弯道用实际CAD圆弧圆心、半径和旋转重建，配套支腿避免再次重复。
-- 工作台、溜槽、分拣出口、封箱/开箱、扫描架、支架由实际二维占地约束，保留开架结构；高度及内部机械细节为展示估计。
+- 工作台、分格收集框、分拣出口、封箱/开箱、扫描架、支架由实际二维占地约束，保留开架结构；高度及内部机械细节为展示估计。164处 `terwrq434` 为人员图例、9处 `*U257/*U1667` 为箭头，独立保存在 `drafting_symbols`，不生成槽体或支架；9处重复驱动辊面合并到已有干线。
 - 3条坡道复用`/Game/GHSDigitalTwin/Meshes/SM_GHS_Shared_Conveyor`；其固定坡度不适合整段水平流水线，水平模块单独制作并沿用共享材质。
+- 另外三条U33弯道后的供包线由稳定原CAD边线 `operations/cad_loose_feed_geometry.json` 补回39个组件，包含两级爬升、34辊V形段、动态秤、分拣末端及中性附件。局部H标注约束范围，入口1.0→1.2→1.5m为衔接既有曲线的展示解释；后段1.5m。14个原有末端模块同步适配高度，平面位置不变，支腿落地。
 - 14234123、480、小黄人三组格口支机由`equipment/`的独立CAD提取和适配模型负责，operations仅处理主干/入料和地面网格，不重复支机。96格参考装配书与CAD实际格口行列不同，不能把每支线都当成96格。
 - 13条保留区域/三视图注记保存在reserved_zones。CAD仅空矩形的作业留白不生成假机器，3视图不生成多台设备。
 
@@ -38,7 +39,7 @@ DXF AC1032、INSUNITS=4（毫米）与实际几何冲突。标准 `RACK_42D_144B
 
 1. `record_mpr_source_provenance.py`：只读记录原始资料和复用的GHS生成器/参数文件的大小、路径、SHA256。执行前先与已提交的 `source_provenance.json` 比较原文件校验值；记录新校验值不等于接受新的图纸版本。
 2. Python：`mpr_cad_inspect.py`（目录证据，可选）→ `mpr_cad_extract.py` → `mpr_cad_refine.py` → `mpr_cad_preview.py`（平面预览，可选）。主文件路径写在提取脚本的 `SOURCE` 常量，迁移资料位置时仅修改该路径，不修改源图。
-3. Python：`mpr_cad_equipment_details.py` 和 `mpr_cad_operations_detail.py` 提取复杂设备的精简几何证据。二者内部也会调用主提取器生成本地缓存。作业设备提取固定44个已核验的源INSERT句柄，不依赖已完成实例中的“未建模”列表；可用 `--output Saved/MPR/cad-rebuild-check` 将设备证据输出到隔离目录作比较。
+3. Python：`mpr_cad_equipment_details.py` 和 `mpr_cad_operations_detail.py` 提取复杂设备的精简几何证据。二者内部也会调用主提取器生成本地缓存。作业设备提取固定44个已核验的源INSERT句柄，不依赖已完成实例中的“未建模”列表；可用 `--output Saved/MPR/cad-rebuild-check` 将设备证据输出到隔离目录作比较。四分格和Y汇流的稳定边线输入为 `operations/cad_detail_geometry.json`；CAD提取保留 `planar_handedness`，用于U33弯道的镜像适配。
 4. Python：`extract_mpr_sorter_placements.py` → `inspect_sorter_children.py` → `finalize_mpr_sorter_placements.py`。保留 `equipment/sorter_cad_groups.json`、`equipment/sorter_child_bounds.json` 作为可复用的测量输入；最后一步补充短支机行间距摆位。
 5. Python：`mpr_environment_extract.py` → `mpr_environment_align.py`。环境提取默认读取仓库内559KB的CADMapper副本；其SHA256已与用户原始环境DXF核对一致。
 6. 独立后台Blender：`build_mpr_architecture.py`、`build_mpr_environment.py`、`build_mpr_rack192.py`、`build_mpr_operations.py`；分拣设备依次运行 `build_mpr_sorter.py` → `build_mpr_sorter_variants.py`。例如 `blender --background --factory-startup --python Tools/MPRWarehouse/build_mpr_operations.py`。96格参考机生成脚本读取原始装配书/照片做来源校验，所需路径和hash见 `source_provenance.json` 与 `equipment/sorter_manifest.json`。

@@ -1,5 +1,6 @@
 """Turn extracted CAD entities into a compact, source-traceable scene interface."""
-import pathlib,json,math,collections,hashlib
+import pathlib,json,math,collections,hashlib,os
+from mpr_cad_semantics import DRAFTING_SYMBOLS,DRIVE_DETAIL_BLOCKS
 ROOT=pathlib.Path(__file__).resolve().parents[2];OUT=ROOT/'SourceAssets/MPR'
 d=json.loads((OUT/'mpr_cad_extracted.json').read_text(encoding='utf8'))
 foot=[[-181.93004,83.69038],[-166.08044,83.69038],[-166.08044,74.54638],[166.78656,74.54638],[166.78656,83.58878],[182.61076,83.58878],[182.61076,-20.50042],[166.78656,-20.50042],[166.78656,-50.98042],[150.91156,-50.98042],[150.91156,-66.22042],[135.36676,-66.22042],[135.36676,-83.94962],[-166.08044,-83.94962],[-166.08044,-93.09362],[-181.93004,-93.09362]]
@@ -53,8 +54,14 @@ for i,s in enumerate(segs):
  if key in seen:continue
  seen.add(key)
  out['office_walls'].append({'id':'WALL_'+str(len(out['office_walls'])),'points_m':[[round(c,5) for c in p] for p in (a,b)],'thickness_m':round(thick,5),'height_m':None,'source_handles':s['g']['source_handles']+t['g']['source_handles'],'method':'paired CAD faces; measured overlap and thickness; not a full wall survey'})
+out['drafting_symbols']=[]
 for v in d['equipment']:
  n=v['block'];w,h=v['size_m'];short=min(w,h);long=max(w,h)
+ if n in DRAFTING_SYMBOLS:
+  if inside(v['position_m']):
+   category,reason=DRAFTING_SYMBOLS[n]
+   out['drafting_symbols'].append(dict(clean(v),kind=category,classification_confidence='verified original CAD symbol geometry',reason=reason))
+  continue
  if n.startswith('SW_CENTERMARK'):
   out['excluded'].append({'id':v['id'],'reason':'Drafting center-mark symbol, not physical equipment'});continue
  if not inside(v['position_m']):
@@ -65,12 +72,13 @@ for v in d['equipment']:
  elif n in ('FL_PALLET_48W_40D_STD','GYL_YQN'):
   out['pallet_positions'].append(x);continue
  elif n=='A$Cb1177cf1':x['kind']='workstation';x['classification_confidence']='repeated adjacent-to-conveyor station footprint'
- elif n=='terwrq434':x['kind']='station_chute';x['classification_confidence']='repeated mirrored chute footprint adjacent to workstation'
- elif n=='321321':x['kind']='sorter_output';x['classification_confidence']='repeated narrow 2.3798m branch; exact structure unconfirmed'
+ elif n=='321321':x['kind']='collection_cells';x['classification_confidence']='verified four independent CAD frames; continuous belt or drive is not implied'
+ elif n=='Y型汇流机':x['kind']='y_merge';x['classification_confidence']='verified paired V-pattern oblique rollers within the measured outer frame'
+ elif n in DRIVE_DETAIL_BLOCKS:x['kind']='conveyor_drive_detail';x['classification_confidence']='verified drive/motor detail over an existing conveyor; outer envelope is not a second transport deck'
  elif (abs(short-1.06)<.01 or abs(short-1.26)<.01 or abs(short-.88)<.01) and long>2:
   x['kind']='conveyor_run';x['classification_confidence']='measured rectangular straight conveyor module'
   out['conveyor_runs'].append(x);continue
- elif n in ('*U1668','*U257','*U1667') or short<.25:x['kind']='machine_support';x['classification_confidence']='narrow support/rail footprint'
+ elif n=='*U1668' or short<.25:x['kind']='machine_support';x['classification_confidence']='narrow support/rail footprint'
  elif long>15 and short>5:x['kind']='complex_assembly';x['classification_confidence']='large detailed assembly; do not replace whole bbox with solid machine'
  out['equipment'].append(x)
 # Explicit charger bay rectangles, including rotated rectangles, separate from machine casings.
@@ -83,7 +91,9 @@ for g in d['loose_geometry']:
  ctr=[sum(p[i] for p in ps)/4 for i in (0,1)]
  if inside(ctr):out['charging_bays'].append({'id':'BAY_'+g['source_handles'][0],'points_m':ps,'position_m':ctr,'source_handles':g['source_handles'],'note':'CAD parking/bay rectangle; charger casing dimensions not implied'})
 out['assumptions']=['DXF header millimetres conflicts with geometry; 42-inch rack depth and 600-unit/50ft column spacing establish 0.0254m per CAD unit.','CAD equipment elevations and rack elevation examples are outside plan; height is null pending mapped dimensional evidence.','Exterior wall upper heights come from property documentation, not this 2D CAD.','Dock geometry is 72 measured 2.8448m leaves plus two 3.7592m drive-in leaves; pedestrian swing-door symbols are separate.','Equipment classifications retain confidence; complex assembly bounding boxes must not become solid boxes.']
-(OUT/'mpr_cad_layout.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf8')
+layout_path=OUT/'mpr_cad_layout.json';layout_pending=OUT/'mpr_cad_layout.pending.json'
+layout_pending.write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf8')
+os.replace(layout_pending,layout_path)
 counts={k:len(v) for k,v in out.items() if isinstance(v,list)}
 assert len(out['racks'])==2867
 assert len(out['columns'])==164

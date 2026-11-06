@@ -1,0 +1,60 @@
+{
+  "success": true,
+  "capture_run_id": "20261106T114145651237Z",
+  "map_sha256": "e7113f70dc4a1b518cac1a481a6a96ea40639791f8bbef540ee9a07051f22c9a",
+  "reviewed_captures": [
+    "workflow_overview",
+    "east_branches",
+    "west_mirrored_stations",
+    "east_plan",
+    "mirrored_curve_pair",
+    "v_roller_merge",
+    "north_feed_lines_complete",
+    "third_feed_line_complete"
+  ],
+  "matched_before_view_count": 6,
+  "supplemental_views": [
+    "north_feed_lines_complete",
+    "third_feed_line_complete"
+  ],
+  "checks": {
+    "original_six_cameras_resolution_and_exposure_match_before": true,
+    "all_eight_images_visually_reviewed": true,
+    "map_not_saved_or_changed": true,
+    "false_person_chutes_absent_in_east_and_west_views": true,
+    "four_independent_cells_visible_in_cad_321321_rows": true,
+    "mirrored_U33_curves_turn_opposite_and_both_connect_to_recovered_feed_lines": true,
+    "Y_merge_has_two_diagonal_roller_banks_and_open_transfer_ends": true,
+    "both_north_feed_lines_visible_from_U33_curves_to_source_end_caps": true,
+    "third_recovered_feed_line_and_source_terminal_structures_visible": true,
+    "slope_transfer_plates_present_at_source_gaps": true,
+    "visible_support_legs_reach_floor": true,
+    "new_material_checkerboards_inverted_faces_or_missing_sections_observed": false
+  },
+  "visual_notes": [
+    "North supplemental view shows both complete mirrored feeds, slope transitions, roller/belt sections, narrower terminal arrays and separate pale source caps.",
+    "Third supplemental view shows the recovered nested feed, terminal array and its neutral end structures. A structural column partially occludes the V-roller area in this fixed view.",
+    "The thin bright strip at each initial slope junction is the metal transfer plate across the CAD gap, not exposed floor.",
+    "Narrower terminal mechanisms and neutral end structures preserve the measured CAD plan; no unsupported continuous belt was added through the source frame-only regions."
+  ],
+  "limitations": [
+    "Visual review covers the eight listed views, with local column occlusion noted. Separate geometry/port checks establish dimensions and junctions.",
+    "The CAD provides planar geometry; endpoint heights, radial roller sections and supports remain explicitly documented display assumptions.",
+    "The 15-second FPS sample is from an owned 1920x1080 native game while the user editor is running, not an isolated-hardware benchmark. All finalized frames including spikes are retained."
+  ],
+  "performance_summary": {
+    "fps": 101.74592405228171,
+    "duration_s": 14.998143800000003,
+    "frames": 1526,
+    "mean_frame_ms": 9.82840353866317,
+    "p95_frame_ms": 11.0174,
+    "p99_frame_ms": 11.8545,
+    "gpu_verified": true,
+    "native_csv_path": "D:\\UEPro\\Test\\Saved\\Profiling\\CSV\\MPR_CONVEYOR_20261106T114145651237Z.csv"
+  },
+  "owned_process_pid": 28608,
+  "owned_process_normal_exit_log_time": "2026-11-06 19:42:53 +08:00",
+  "owned_process_absent_after_capture": true,
+  "user_editor_process_not_operated": 20248,
+  "user_editor_process_still_running": true
+}

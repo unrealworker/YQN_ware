@@ -1,0 +1,112 @@
+{
+  "success": true,
+  "meshes": {
+    "SM_MPR_CollectionCellsCAD": {
+      "bounds_m": [
+        [
+          -0.20750078035726693,
+          0.20749788903353794
+        ],
+        [
+          -1.190004170350441,
+          1.1899949495756046
+        ],
+        [
+          0.0,
+          0.99
+        ]
+      ],
+      "vertices": 560,
+      "zero_area_faces": 0,
+      "invalid_indices": 0,
+      "independent_cell_clearances_m": [
+        0.02548179132699635,
+        0.025481781326162203,
+        0.02548179132699635
+      ]
+    },
+    "SM_MPR_YMergeCAD": {
+      "bounds_m": [
+        [
+          -0.4429102734403102,
+          0.4550624494942605
+        ],
+        [
+          -0.609669646757744,
+          0.6096666067908495
+        ],
+        [
+          0.0,
+          1.035
+        ]
+      ],
+      "vertices": 480,
+      "zero_area_faces": 0,
+      "invalid_indices": 0,
+      "roller_banks": {
+        "65deg": 12,
+        "115deg": 12
+      }
+    }
+  },
+  "source_sha256": "c316aafe183162c5bef636885b59cc1000c3eecf50d8be645490b4716c6af863",
+  "manifest": {
+    "schema_version": 1,
+    "units": "metres",
+    "axis": "CAD +Y; UE import X=100*x,Y=-100*y,Z=100*z",
+    "meshes": [
+      {
+        "name": "SM_MPR_CollectionCellsCAD",
+        "fbx": "Saved/MPR/conveyor_repair_20261106/detail_validation/SM_MPR_CollectionCellsCAD.fbx",
+        "material_roles": [
+          "Cobalt",
+          "Porcelain",
+          "Metal",
+          "Charcoal"
+        ],
+        "bounds_m": [
+          [
+            -0.20750078035726693,
+            0.20749788903353794
+          ],
+          [
+            -1.190004170350441,
+            1.1899949495756046
+          ],
+          [
+            0.0,
+            0.99
+          ]
+        ],
+        "vertices": 560,
+        "triangles": 1064
+      },
+      {
+        "name": "SM_MPR_YMergeCAD",
+        "fbx": "Saved/MPR/conveyor_repair_20261106/detail_validation/SM_MPR_YMergeCAD.fbx",
+        "material_roles": [
+          "Metal",
+          "Cobalt",
+          "Charcoal"
+        ],
+        "bounds_m": [
+          [
+            -0.4429102734403102,
+            0.4550624494942605
+          ],
+          [
+            -0.609669646757744,
+            0.6096666067908495
+          ],
+          [
+            0.0,
+            1.035
+          ]
+        ],
+        "vertices": 480,
+        "triangles": 816
+      }
+    ],
+    "height_policy": "2D CAD has no machine elevation; retain existing display surface heights"
+  }
+}

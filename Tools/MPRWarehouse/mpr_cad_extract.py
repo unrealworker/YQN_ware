@@ -5,6 +5,7 @@ sys.path.insert(0,str(ROOT/'Scripts/_vendor/cad'))
 import ezdxf
 from ezdxf.math import Matrix44,BoundingBox
 from PIL import Image,ImageDraw,ImageFont
+from mpr_cad_semantics import planar_handedness
 logging.disable(logging.WARNING)
 SOURCE=pathlib.Path(r'D:\Data\仓库数据\MPR\平面布局图_MPR规划图V1.1_ALL-IN-ONE_0921.dxf')
 OUT=ROOT/'SourceAssets/MPR';OUT.mkdir(parents=True,exist_ok=True)
@@ -53,7 +54,7 @@ def item(e,mat=None,chain=(),layer=None):
  if not bb.has_data:return None
  center=mt.transform(bb.center);a=mt.transform_direction((1,0,0));b=mt.transform_direction((0,1,0))
  world=BoundingBox(mt.transform_vertices(bb.cube_vertices()))
- return {'id':'CAD_'+'_'.join(chain+(e.dxf.handle,)),'block':e.dxf.name,'position_m':xy(center),'center_dxf':[center.x,center.y],'size_m':[round(bb.size.x*a.magnitude*scale,5),round(bb.size.y*b.magnitude*scale,5)],'rotation_deg':round(math.degrees(math.atan2(a.y,a.x)),6),'layer':layer or e.dxf.layer,'source_handles':list(chain+(e.dxf.handle,)),'bounds_dxf':[list(world.extmin)[:2],list(world.extmax)[:2]],'local_bounds_dxf':[list(bb.extmin),list(bb.extmax)]}
+ return {'id':'CAD_'+'_'.join(chain+(e.dxf.handle,)),'block':e.dxf.name,'position_m':xy(center),'center_dxf':[center.x,center.y],'size_m':[round(bb.size.x*a.magnitude*scale,5),round(bb.size.y*b.magnitude*scale,5)],'rotation_deg':round(math.degrees(math.atan2(a.y,a.x)),6),'planar_handedness':planar_handedness(a,b),'layer':layer or e.dxf.layer,'source_handles':list(chain+(e.dxf.handle,)),'bounds_dxf':[list(world.extmin)[:2],list(world.extmax)[:2]],'local_bounds_dxf':[list(bb.extmin),list(bb.extmax)]}
 out={'source':str(SOURCE),'header_units':doc.units,'units':'inches (physical scale verified against rack nominal sizes and 50ft column spacing; DXF header says mm)','units_to_m':scale,'origin_dxf_xy':origin,'clip_dxf':clip,'racks':[],'columns':[],'equipment':[],'doors':[],'architecture':[],'texts':[],'all_insert_groups':[],'base_inserts':[]}
 def recurse(entities,mat,chain,inherit='0',depth=0):
  for e in entities:
