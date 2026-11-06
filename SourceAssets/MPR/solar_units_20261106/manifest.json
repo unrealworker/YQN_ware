@@ -1,0 +1,1979 @@
+{
+  "success": true,
+  "schema_version": 1,
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "namespace": "/Game/MPRWarehouse/SolarUnits20261106",
+  "units": "metres",
+  "axis": "CAD +Y; UE X=100*x,Y=-100*y,Z=100*z",
+  "meshes": [
+    {
+      "name": "SM_MPRSU_SolarBank_00_0",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_00_0.fbx",
+      "sha256": "ffd29842a901a50f3de72dc6f6cde844e94e8b60fca4312abfd74aa438f1f540",
+      "bank": "00_0",
+      "lod": 0,
+      "triangles": 2544,
+      "bounds_m": [
+        [
+          -41.48,
+          20.040000000000013
+        ],
+        [
+          -79.93499999999999,
+          -9.81499999999999
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "category": "Architecture",
+      "lod_files": [
+        "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_00_0_LOD1.fbx",
+        "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_00_0_LOD2.fbx"
+      ],
+      "lod_sha256": [
+        "cebbc4a0825a114714c008f703af025fda2a53ba944a89187cfeba11e0d4bf59",
+        "6735a64b3d2bed163d22134dd8d4855ea878bfc76548f67b861fe153ffe7226a"
+      ],
+      "lod_triangles": [
+        2544,
+        864,
+        864
+      ],
+      "lod_material_roles": [
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ],
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ],
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ]
+      ],
+      "all_lod_material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.6659005552539407,
+        0.2322908913676537
+      ],
+      "retained_actor_label": "MPR4_SolarBank_00_0",
+      "source_mesh": "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_00_0",
+      "collision": false,
+      "nanite": false,
+      "full_precision_uvs": true,
+      "instance_only": false
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_01_0",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_01_0.fbx",
+      "sha256": "53f5a289d0b278e998901f169709ea7b1d8f179026121dc561e733e1037b7dc9",
+      "bank": "01_0",
+      "lod": 0,
+      "triangles": 3990,
+      "bounds_m": [
+        [
+          20.12000000000001,
+          80.52
+        ],
+        [
+          -79.93499999999999,
+          -0.06499999999999148
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "category": "Architecture",
+      "lod_files": [
+        "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_01_0_LOD1.fbx",
+        "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_01_0_LOD2.fbx"
+      ],
+      "lod_sha256": [
+        "9fac1a67999793427553f06c8d9796063d822bbfd07b0648accfe247939dfa03",
+        "f6a8346f399ee1b212da139c14e0801e83e6a3bf583f1103d15e1a15c15044b6"
+      ],
+      "lod_triangles": [
+        3990,
+        1380,
+        1380
+      ],
+      "lod_material_roles": [
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ],
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ],
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ]
+      ],
+      "all_lod_material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.7150716012097996,
+        0.24944358181737197
+      ],
+      "retained_actor_label": "MPR4_SolarBank_01_0",
+      "source_mesh": "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_01_0",
+      "collision": false,
+      "nanite": false,
+      "full_precision_uvs": true,
+      "instance_only": false
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_01_1",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_01_1.fbx",
+      "sha256": "cbb859faaf85cc0d4fe32334bc7b9de6d0189445e69f23c79483a2052989b4c3",
+      "bank": "01_1",
+      "lod": 0,
+      "triangles": 2586,
+      "bounds_m": [
+        [
+          26.84000000000001,
+          80.52
+        ],
+        [
+          0.015000000000008527,
+          64.28499999999998
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "category": "Architecture",
+      "lod_files": [
+        "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_01_1_LOD1.fbx",
+        "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_01_1_LOD2.fbx"
+      ],
+      "lod_sha256": [
+        "05c846657bc8e4826ebafd1dd47b18e301df37bf4d774de0aab618304a6e4629",
+        "25b9f2163cb5f2f7bfd1054efa2ee40bcb71d80355707781f63f2b99c82b66ff"
+      ],
+      "lod_triangles": [
+        2586,
+        996,
+        996
+      ],
+      "lod_material_roles": [
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ],
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ],
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ]
+      ],
+      "all_lod_material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.5982129257063642,
+        0.20867892757198753
+      ],
+      "retained_actor_label": "MPR4_SolarBank_01_1",
+      "source_mesh": "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_01_1",
+      "collision": false,
+      "nanite": false,
+      "full_precision_uvs": true,
+      "instance_only": false
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_02_0",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_02_0.fbx",
+      "sha256": "1c9c503e25ed5b370ec2a9086e40c97cc2caf04004aebc1058819beb94a427b4",
+      "bank": "02_0",
+      "lod": 0,
+      "triangles": 3440,
+      "bounds_m": [
+        [
+          79.48,
+          169.00000000000003
+        ],
+        [
+          -74.085,
+          -0.06499999999999148
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "category": "Architecture",
+      "lod_files": [
+        "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_02_0_LOD1.fbx",
+        "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_02_0_LOD2.fbx"
+      ],
+      "lod_sha256": [
+        "e35a8d43b23d910eb2e6083b310e694f5c04dba92221374df6d9cfc8b075dd75",
+        "045273993843bbbf2030122c3f3a9b9ba881c1fdc3b72b3fe5e406a7c644b4b9"
+      ],
+      "lod_triangles": [
+        3440,
+        1240,
+        1240
+      ],
+      "lod_material_roles": [
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ],
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ],
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ]
+      ],
+      "all_lod_material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.8295844422010317,
+        0.2893899216980343
+      ],
+      "retained_actor_label": "MPR4_SolarBank_02_0",
+      "source_mesh": "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_02_0",
+      "collision": false,
+      "nanite": false,
+      "full_precision_uvs": true,
+      "instance_only": false
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_02_1",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_02_1.fbx",
+      "sha256": "7d1e025f12ce31d5fdc2a665866645df40fd045f7bfe5a88b41534a23624a035",
+      "bank": "02_1",
+      "lod": 0,
+      "triangles": 1526,
+      "bounds_m": [
+        [
+          79.48,
+          169.00000000000003
+        ],
+        [
+          0.015000000000008527,
+          64.28499999999998
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "category": "Architecture",
+      "lod_files": [
+        "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_02_1_LOD1.fbx",
+        "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_02_1_LOD2.fbx"
+      ],
+      "lod_sha256": [
+        "638630d1e852c6b351e8eb04aae17403086fae70363d8ef281a553b746030c4c",
+        "fc8fc8d822726948115368d56c96efd93ad2beecd88961293d3c9546600b8dea"
+      ],
+      "lod_triangles": [
+        1526,
+        556,
+        556
+      ],
+      "lod_material_roles": [
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ],
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ],
+        [
+          "MPRH_SolarFrame",
+          "MPRH_SolarCells",
+          "MPRH_SolarCellsLight",
+          "MPRH_SolarCellsShade"
+        ]
+      ],
+      "all_lod_material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "lod_screen_sizes": [
+        1.0,
+        0.7870082026068754,
+        0.27453774509542167
+      ],
+      "retained_actor_label": "MPR4_SolarBank_02_1",
+      "source_mesh": "/Game/MPRWarehouse/Hierarchy20261105/Meshes/SM_MPRH_SolarBank_02_1",
+      "collision": false,
+      "nanite": false,
+      "full_precision_uvs": true,
+      "instance_only": false
+    }
+  ],
+  "export_meshes": [
+    {
+      "name": "SM_MPRSU_SolarBank_00_0",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_00_0.fbx",
+      "sha256": "ffd29842a901a50f3de72dc6f6cde844e94e8b60fca4312abfd74aa438f1f540",
+      "bank": "00_0",
+      "lod": 0,
+      "triangles": 2544,
+      "bounds_m": [
+        [
+          -41.48,
+          20.040000000000013
+        ],
+        [
+          -79.93499999999999,
+          -9.81499999999999
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_00_0_LOD1",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_00_0_LOD1.fbx",
+      "sha256": "cebbc4a0825a114714c008f703af025fda2a53ba944a89187cfeba11e0d4bf59",
+      "bank": "00_0",
+      "lod": 1,
+      "triangles": 864,
+      "bounds_m": [
+        [
+          -41.48,
+          20.040000000000013
+        ],
+        [
+          -79.93499999999999,
+          -9.81499999999999
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_00_0_LOD2",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_00_0_LOD2.fbx",
+      "sha256": "6735a64b3d2bed163d22134dd8d4855ea878bfc76548f67b861fe153ffe7226a",
+      "bank": "00_0",
+      "lod": 2,
+      "triangles": 864,
+      "bounds_m": [
+        [
+          -41.48,
+          20.040000000000013
+        ],
+        [
+          -79.93499999999999,
+          -9.81499999999999
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_01_0",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_01_0.fbx",
+      "sha256": "53f5a289d0b278e998901f169709ea7b1d8f179026121dc561e733e1037b7dc9",
+      "bank": "01_0",
+      "lod": 0,
+      "triangles": 3990,
+      "bounds_m": [
+        [
+          20.12000000000001,
+          80.52
+        ],
+        [
+          -79.93499999999999,
+          -0.06499999999999148
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_01_0_LOD1",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_01_0_LOD1.fbx",
+      "sha256": "9fac1a67999793427553f06c8d9796063d822bbfd07b0648accfe247939dfa03",
+      "bank": "01_0",
+      "lod": 1,
+      "triangles": 1380,
+      "bounds_m": [
+        [
+          20.12000000000001,
+          80.52
+        ],
+        [
+          -79.93499999999999,
+          -0.06499999999999148
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_01_0_LOD2",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_01_0_LOD2.fbx",
+      "sha256": "f6a8346f399ee1b212da139c14e0801e83e6a3bf583f1103d15e1a15c15044b6",
+      "bank": "01_0",
+      "lod": 2,
+      "triangles": 1380,
+      "bounds_m": [
+        [
+          20.12000000000001,
+          80.52
+        ],
+        [
+          -79.93499999999999,
+          -0.06499999999999148
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_01_1",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_01_1.fbx",
+      "sha256": "cbb859faaf85cc0d4fe32334bc7b9de6d0189445e69f23c79483a2052989b4c3",
+      "bank": "01_1",
+      "lod": 0,
+      "triangles": 2586,
+      "bounds_m": [
+        [
+          26.84000000000001,
+          80.52
+        ],
+        [
+          0.015000000000008527,
+          64.28499999999998
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_01_1_LOD1",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_01_1_LOD1.fbx",
+      "sha256": "05c846657bc8e4826ebafd1dd47b18e301df37bf4d774de0aab618304a6e4629",
+      "bank": "01_1",
+      "lod": 1,
+      "triangles": 996,
+      "bounds_m": [
+        [
+          26.84000000000001,
+          80.52
+        ],
+        [
+          0.015000000000008527,
+          64.28499999999998
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_01_1_LOD2",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_01_1_LOD2.fbx",
+      "sha256": "25b9f2163cb5f2f7bfd1054efa2ee40bcb71d80355707781f63f2b99c82b66ff",
+      "bank": "01_1",
+      "lod": 2,
+      "triangles": 996,
+      "bounds_m": [
+        [
+          26.84000000000001,
+          80.52
+        ],
+        [
+          0.015000000000008527,
+          64.28499999999998
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_02_0",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_02_0.fbx",
+      "sha256": "1c9c503e25ed5b370ec2a9086e40c97cc2caf04004aebc1058819beb94a427b4",
+      "bank": "02_0",
+      "lod": 0,
+      "triangles": 3440,
+      "bounds_m": [
+        [
+          79.48,
+          169.00000000000003
+        ],
+        [
+          -74.085,
+          -0.06499999999999148
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_02_0_LOD1",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_02_0_LOD1.fbx",
+      "sha256": "e35a8d43b23d910eb2e6083b310e694f5c04dba92221374df6d9cfc8b075dd75",
+      "bank": "02_0",
+      "lod": 1,
+      "triangles": 1240,
+      "bounds_m": [
+        [
+          79.48,
+          169.00000000000003
+        ],
+        [
+          -74.085,
+          -0.06499999999999148
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_02_0_LOD2",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_02_0_LOD2.fbx",
+      "sha256": "045273993843bbbf2030122c3f3a9b9ba881c1fdc3b72b3fe5e406a7c644b4b9",
+      "bank": "02_0",
+      "lod": 2,
+      "triangles": 1240,
+      "bounds_m": [
+        [
+          79.48,
+          169.00000000000003
+        ],
+        [
+          -74.085,
+          -0.06499999999999148
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_02_1",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_02_1.fbx",
+      "sha256": "7d1e025f12ce31d5fdc2a665866645df40fd045f7bfe5a88b41534a23624a035",
+      "bank": "02_1",
+      "lod": 0,
+      "triangles": 1526,
+      "bounds_m": [
+        [
+          79.48,
+          169.00000000000003
+        ],
+        [
+          0.015000000000008527,
+          64.28499999999998
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_02_1_LOD1",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_02_1_LOD1.fbx",
+      "sha256": "638630d1e852c6b351e8eb04aae17403086fae70363d8ef281a553b746030c4c",
+      "bank": "02_1",
+      "lod": 1,
+      "triangles": 556,
+      "bounds_m": [
+        [
+          79.48,
+          169.00000000000003
+        ],
+        [
+          0.015000000000008527,
+          64.28499999999998
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    },
+    {
+      "name": "SM_MPRSU_SolarBank_02_1_LOD2",
+      "fbx": "SourceAssets/MPR/solar_units_20261106/SM_MPRSU_SolarBank_02_1_LOD2.fbx",
+      "sha256": "fc8fc8d822726948115368d56c96efd93ad2beecd88961293d3c9546600b8dea",
+      "bank": "02_1",
+      "lod": 2,
+      "triangles": 556,
+      "bounds_m": [
+        [
+          79.48,
+          169.00000000000003
+        ],
+        [
+          0.015000000000008527,
+          64.28499999999998
+        ],
+        [
+          13.414,
+          13.66
+        ]
+      ],
+      "material_roles": [
+        "MPRH_SolarFrame",
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ]
+    }
+  ],
+  "material_roles": [
+    "MPRH_SolarFrame",
+    "MPRH_SolarCells",
+    "MPRH_SolarCellsLight",
+    "MPRH_SolarCellsShade"
+  ],
+  "materials": {
+    "MPRH_SolarFrame": {
+      "source_srgb_hex": "#7E96A8",
+      "base_color": [
+        0.20863687014525575,
+        0.3049873140698863,
+        0.39157247774972326
+      ],
+      "roughness": 0.7,
+      "metallic": 0.0,
+      "specular": 0.15,
+      "emission": 0.0,
+      "normal_strength": 0.0
+    },
+    "MPRH_SolarCells": {
+      "source_srgb_hex": "#1E4D78",
+      "base_color": [
+        0.009088122639521109,
+        0.051949497866104734,
+        0.1314745406104745
+      ],
+      "roughness": 0.62,
+      "metallic": 0.0,
+      "specular": 0.18,
+      "emission": 0.0,
+      "normal_strength": 0.0
+    },
+    "MPRH_SolarCellsLight": {
+      "source_srgb_hex": "#22517C",
+      "base_color": [
+        0.01119740535585674,
+        0.057597894990870355,
+        0.14108937765607793
+      ],
+      "roughness": 0.62,
+      "metallic": 0.0,
+      "specular": 0.18,
+      "emission": 0.0,
+      "normal_strength": 0.0
+    },
+    "MPRH_SolarCellsShade": {
+      "source_srgb_hex": "#1B4771",
+      "base_color": [
+        0.007672065804541771,
+        0.04410701235721737,
+        0.11559253615116731
+      ],
+      "roughness": 0.62,
+      "metallic": 0.0,
+      "specular": 0.18,
+      "emission": 0.0,
+      "normal_strength": 0.0
+    }
+  },
+  "material_paths": {
+    "MPRH_SolarFrame": "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarFrame",
+    "MPRH_SolarCells": "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarCells",
+    "MPRH_SolarCellsLight": "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarCellsLight",
+    "MPRH_SolarCellsShade": "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarCellsShade"
+  },
+  "source_hashes": {
+    "SourceAssets/MPR/rebuild_b50b57/solar/layout.json": "12028594cca747719fa72a3daa54cf84939a3dd470a63e4739dfd83c50fede82",
+    "SourceAssets/MPR/hierarchy_20261105/solar/manifest.json": "54f6d3b081c337cf3a0db812719726992141f04ee2aaf73dea674856360916fb",
+    "SourceAssets/MPR/hierarchy_20261105/solar/final_palette.json": "815a729d809c38681fc5904fe49dbaf470543701aebfcf3dac6c6a6644940693",
+    "SourceAssets/MPR/hierarchy_20261105/solar/module_layout.json": "1422464ee348524526192289363ef647b62b973189927d95446ddb3bb6123214",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_00_0.fbx": "4b64d667c90c85b960ca9e992200cbcf91798106ca3b62f54d076655fc7936be",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_00_0_LOD1.fbx": "f1a5dc6946cc46aa035a82cd05a5f6c524bb2174184aa71c84e020074edbbfc9",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_00_0_LOD2.fbx": "44e44cb44ac5322488dec5b84152e74ddaa8347eb3b2d5c09eaf6c91a30888e6",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_0.fbx": "8803cbb5b3ef3880c39d36983d35e23cfbd5e96f2268b5f823cf3540200bead2",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_0_LOD1.fbx": "567e54bd501c15610ff07772357af560594272c57042baafe2f8ee13207dcd36",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_0_LOD2.fbx": "12cb9ded39df33c816dca191f6c3b50160d164b2d3dc066639255af2191528b2",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_1.fbx": "798f332a53c990363ac0c947cd71910904046d36d8254880ad1326f543a5ce49",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_1_LOD1.fbx": "7d4b12ea9e1c4399284385ae36bebc1251cbda0f2bc30c538cca930d3b5883ef",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_1_LOD2.fbx": "997dff207558b1e7a8db655eb7e3188d47286cde1f9dec3b2209a3bcb793b5d3",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_0.fbx": "9e94aefa3408395f704682341103730703aa2172c137a86250a5b2317c4e39c5",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_0_LOD1.fbx": "7c7b41ff7a5669a350e812a8ac385c2f23726b46e2c26825c01fe2faf6039de9",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_0_LOD2.fbx": "482329fe038384ccb3f7b4f64c555cd3b9539f6fdd303c4eb2c10b532d7b0b87",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_1.fbx": "2f5b16d05f75b55c2f9488116b8d796e6e119d97d4ecb8164d1abcda7505fba9",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_1_LOD1.fbx": "ecb2f36c9bd7cc5dae7f5e1b974045463e700ba780a1c354f839b9b8afdd402c",
+    "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_1_LOD2.fbx": "eccf9de58de9762bf2d65f3d8ddf6ea9c09edbf6d57e1ad4c81da9a3e22b5e87"
+  },
+  "original_layout": "SourceAssets/MPR/rebuild_b50b57/solar/layout.json",
+  "preserved_blocks": {
+    "00_0": [
+      {
+        "grid": [
+          17,
+          3,
+          47,
+          5
+        ],
+        "bounds_m": [
+          -41.519999999999996,
+          -74.125,
+          -7.919999999999995,
+          -70.225
+        ],
+        "modules": 60
+      },
+      {
+        "grid": [
+          17,
+          0,
+          72,
+          3
+        ],
+        "bounds_m": [
+          -41.519999999999996,
+          -79.975,
+          20.080000000000013,
+          -74.125
+        ],
+        "modules": 165
+      },
+      {
+        "grid": [
+          17,
+          5,
+          72,
+          12
+        ],
+        "bounds_m": [
+          -41.519999999999996,
+          -70.225,
+          20.080000000000013,
+          -56.574999999999996
+        ],
+        "modules": 385
+      },
+      {
+        "grid": [
+          17,
+          14,
+          72,
+          19
+        ],
+        "bounds_m": [
+          -41.519999999999996,
+          -52.675,
+          20.080000000000013,
+          -42.925
+        ],
+        "modules": 275
+      },
+      {
+        "grid": [
+          39,
+          23,
+          47,
+          26
+        ],
+        "bounds_m": [
+          -16.879999999999995,
+          -35.12499999999999,
+          -7.919999999999995,
+          -29.275
+        ],
+        "modules": 24
+      },
+      {
+        "grid": [
+          39,
+          29,
+          72,
+          36
+        ],
+        "bounds_m": [
+          -16.879999999999995,
+          -23.424999999999997,
+          20.080000000000013,
+          -9.774999999999991
+        ],
+        "modules": 231
+      },
+      {
+        "grid": [
+          51,
+          3,
+          72,
+          5
+        ],
+        "bounds_m": [
+          -3.4399999999999977,
+          -74.125,
+          20.080000000000013,
+          -70.225
+        ],
+        "modules": 42
+      },
+      {
+        "grid": [
+          51,
+          23,
+          72,
+          26
+        ],
+        "bounds_m": [
+          -3.4399999999999977,
+          -35.12499999999999,
+          20.080000000000013,
+          -29.275
+        ],
+        "modules": 63
+      }
+    ],
+    "01_0": [
+      {
+        "grid": [
+          72,
+          0,
+          73,
+          12
+        ],
+        "bounds_m": [
+          20.080000000000013,
+          -79.975,
+          21.200000000000003,
+          -56.574999999999996
+        ],
+        "modules": 12
+      },
+      {
+        "grid": [
+          72,
+          14,
+          73,
+          19
+        ],
+        "bounds_m": [
+          20.080000000000013,
+          -52.675,
+          21.200000000000003,
+          -42.925
+        ],
+        "modules": 5
+      },
+      {
+        "grid": [
+          72,
+          23,
+          73,
+          26
+        ],
+        "bounds_m": [
+          20.080000000000013,
+          -35.12499999999999,
+          21.200000000000003,
+          -29.275
+        ],
+        "modules": 3
+      },
+      {
+        "grid": [
+          72,
+          29,
+          73,
+          36
+        ],
+        "bounds_m": [
+          20.080000000000013,
+          -23.424999999999997,
+          21.200000000000003,
+          -9.774999999999991
+        ],
+        "modules": 7
+      },
+      {
+        "grid": [
+          78,
+          22,
+          89,
+          41
+        ],
+        "bounds_m": [
+          26.80000000000001,
+          -37.074999999999996,
+          39.120000000000005,
+          -0.024999999999991473
+        ],
+        "modules": 209
+      },
+      {
+        "grid": [
+          78,
+          1,
+          116,
+          19
+        ],
+        "bounds_m": [
+          26.80000000000001,
+          -78.02499999999999,
+          69.36000000000001,
+          -42.925
+        ],
+        "modules": 684
+      },
+      {
+        "grid": [
+          91,
+          22,
+          117,
+          26
+        ],
+        "bounds_m": [
+          41.360000000000014,
+          -37.074999999999996,
+          70.48000000000002,
+          -29.275
+        ],
+        "modules": 104
+      },
+      {
+        "grid": [
+          91,
+          29,
+          117,
+          41
+        ],
+        "bounds_m": [
+          41.360000000000014,
+          -23.424999999999997,
+          70.48000000000002,
+          -0.024999999999991473
+        ],
+        "modules": 312
+      },
+      {
+        "grid": [
+          120,
+          3,
+          125,
+          14
+        ],
+        "bounds_m": [
+          73.84,
+          -74.125,
+          79.44,
+          -52.675
+        ],
+        "modules": 55
+      },
+      {
+        "grid": [
+          120,
+          16,
+          125,
+          19
+        ],
+        "bounds_m": [
+          73.84,
+          -48.77499999999999,
+          79.44,
+          -42.925
+        ],
+        "modules": 15
+      },
+      {
+        "grid": [
+          120,
+          22,
+          125,
+          24
+        ],
+        "bounds_m": [
+          73.84,
+          -37.074999999999996,
+          79.44,
+          -33.175
+        ],
+        "modules": 10
+      },
+      {
+        "grid": [
+          120,
+          38,
+          125,
+          41
+        ],
+        "bounds_m": [
+          73.84,
+          -5.875,
+          79.44,
+          -0.024999999999991473
+        ],
+        "modules": 15
+      },
+      {
+        "grid": [
+          120,
+          24,
+          126,
+          26
+        ],
+        "bounds_m": [
+          73.84,
+          -33.175,
+          80.56,
+          -29.275
+        ],
+        "modules": 12
+      },
+      {
+        "grid": [
+          120,
+          28,
+          126,
+          35
+        ],
+        "bounds_m": [
+          73.84,
+          -25.374999999999993,
+          80.56,
+          -11.724999999999994
+        ],
+        "modules": 42
+      }
+    ],
+    "01_1": [
+      {
+        "grid": [
+          78,
+          44,
+          88,
+          45
+        ],
+        "bounds_m": [
+          26.80000000000001,
+          5.825000000000003,
+          38.0,
+          7.775000000000006
+        ],
+        "modules": 10
+      },
+      {
+        "grid": [
+          78,
+          41,
+          89,
+          42
+        ],
+        "bounds_m": [
+          26.80000000000001,
+          -0.024999999999991473,
+          39.120000000000005,
+          1.9249999999999972
+        ],
+        "modules": 11
+      },
+      {
+        "grid": [
+          78,
+          45,
+          89,
+          53
+        ],
+        "bounds_m": [
+          26.80000000000001,
+          7.775000000000006,
+          39.120000000000005,
+          23.375
+        ],
+        "modules": 88
+      },
+      {
+        "grid": [
+          78,
+          55,
+          89,
+          61
+        ],
+        "bounds_m": [
+          26.80000000000001,
+          27.275000000000006,
+          39.120000000000005,
+          38.97500000000001
+        ],
+        "modules": 66
+      },
+      {
+        "grid": [
+          83,
+          53,
+          89,
+          55
+        ],
+        "bounds_m": [
+          32.400000000000006,
+          23.375,
+          39.120000000000005,
+          27.275000000000006
+        ],
+        "modules": 12
+      },
+      {
+        "grid": [
+          85,
+          73,
+          106,
+          74
+        ],
+        "bounds_m": [
+          34.64,
+          62.375,
+          58.16000000000001,
+          64.32499999999999
+        ],
+        "modules": 21
+      },
+      {
+        "grid": [
+          85,
+          67,
+          117,
+          73
+        ],
+        "bounds_m": [
+          34.64,
+          50.67500000000001,
+          70.48000000000002,
+          62.375
+        ],
+        "modules": 192
+      },
+      {
+        "grid": [
+          91,
+          41,
+          117,
+          42
+        ],
+        "bounds_m": [
+          41.360000000000014,
+          -0.024999999999991473,
+          70.48000000000002,
+          1.9249999999999972
+        ],
+        "modules": 26
+      },
+      {
+        "grid": [
+          91,
+          49,
+          117,
+          61
+        ],
+        "bounds_m": [
+          41.360000000000014,
+          15.575000000000003,
+          70.48000000000002,
+          38.97500000000001
+        ],
+        "modules": 312
+      },
+      {
+        "grid": [
+          92,
+          44,
+          117,
+          47
+        ],
+        "bounds_m": [
+          42.480000000000004,
+          5.825000000000003,
+          70.48000000000002,
+          11.674999999999997
+        ],
+        "modules": 75
+      },
+      {
+        "grid": [
+          110,
+          73,
+          117,
+          74
+        ],
+        "bounds_m": [
+          62.640000000000015,
+          62.375,
+          70.48000000000002,
+          64.32499999999999
+        ],
+        "modules": 7
+      },
+      {
+        "grid": [
+          120,
+          41,
+          125,
+          42
+        ],
+        "bounds_m": [
+          73.84,
+          -0.024999999999991473,
+          79.44,
+          1.9249999999999972
+        ],
+        "modules": 5
+      },
+      {
+        "grid": [
+          120,
+          47,
+          126,
+          51
+        ],
+        "bounds_m": [
+          73.84,
+          11.674999999999997,
+          80.56,
+          19.47500000000001
+        ],
+        "modules": 24
+      },
+      {
+        "grid": [
+          120,
+          54,
+          126,
+          57
+        ],
+        "bounds_m": [
+          73.84,
+          25.325000000000003,
+          80.56,
+          31.174999999999997
+        ],
+        "modules": 18
+      },
+      {
+        "grid": [
+          121,
+          70,
+          125,
+          73
+        ],
+        "bounds_m": [
+          74.96000000000001,
+          56.525000000000006,
+          79.44,
+          62.375
+        ],
+        "modules": 12
+      }
+    ],
+    "02_0": [
+      {
+        "grid": [
+          125,
+          22,
+          144,
+          23
+        ],
+        "bounds_m": [
+          79.44,
+          -37.074999999999996,
+          100.72000000000003,
+          -35.12499999999999
+        ],
+        "modules": 19
+      },
+      {
+        "grid": [
+          125,
+          3,
+          163,
+          14
+        ],
+        "bounds_m": [
+          79.44,
+          -74.125,
+          122.00000000000003,
+          -52.675
+        ],
+        "modules": 418
+      },
+      {
+        "grid": [
+          125,
+          16,
+          163,
+          19
+        ],
+        "bounds_m": [
+          79.44,
+          -48.77499999999999,
+          122.00000000000003,
+          -42.925
+        ],
+        "modules": 114
+      },
+      {
+        "grid": [
+          125,
+          23,
+          164,
+          24
+        ],
+        "bounds_m": [
+          79.44,
+          -35.12499999999999,
+          123.12,
+          -33.175
+        ],
+        "modules": 39
+      },
+      {
+        "grid": [
+          125,
+          38,
+          164,
+          41
+        ],
+        "bounds_m": [
+          79.44,
+          -5.875,
+          123.12,
+          -0.024999999999991473
+        ],
+        "modules": 117
+      },
+      {
+        "grid": [
+          126,
+          24,
+          164,
+          26
+        ],
+        "bounds_m": [
+          80.56,
+          -33.175,
+          123.12,
+          -29.275
+        ],
+        "modules": 76
+      },
+      {
+        "grid": [
+          126,
+          28,
+          164,
+          35
+        ],
+        "bounds_m": [
+          80.56,
+          -25.374999999999993,
+          123.12,
+          -11.724999999999994
+        ],
+        "modules": 266
+      },
+      {
+        "grid": [
+          148,
+          22,
+          164,
+          23
+        ],
+        "bounds_m": [
+          105.20000000000002,
+          -37.074999999999996,
+          123.12,
+          -35.12499999999999
+        ],
+        "modules": 16
+      },
+      {
+        "grid": [
+          168,
+          11,
+          178,
+          12
+        ],
+        "bounds_m": [
+          127.60000000000002,
+          -58.52499999999999,
+          138.8,
+          -56.574999999999996
+        ],
+        "modules": 10
+      },
+      {
+        "grid": [
+          168,
+          12,
+          181,
+          14
+        ],
+        "bounds_m": [
+          127.60000000000002,
+          -56.574999999999996,
+          142.16000000000003,
+          -52.675
+        ],
+        "modules": 26
+      },
+      {
+        "grid": [
+          168,
+          14,
+          187,
+          16
+        ],
+        "bounds_m": [
+          127.60000000000002,
+          -52.675,
+          148.88000000000002,
+          -48.77499999999999
+        ],
+        "modules": 38
+      },
+      {
+        "grid": [
+          168,
+          16,
+          195,
+          19
+        ],
+        "bounds_m": [
+          127.60000000000002,
+          -48.77499999999999,
+          157.84000000000003,
+          -42.925
+        ],
+        "modules": 81
+      },
+      {
+        "grid": [
+          168,
+          22,
+          195,
+          26
+        ],
+        "bounds_m": [
+          127.60000000000002,
+          -37.074999999999996,
+          157.84000000000003,
+          -29.275
+        ],
+        "modules": 108
+      },
+      {
+        "grid": [
+          168,
+          38,
+          205,
+          41
+        ],
+        "bounds_m": [
+          127.60000000000002,
+          -5.875,
+          169.04000000000002,
+          -0.024999999999991473
+        ],
+        "modules": 111
+      },
+      {
+        "grid": [
+          185,
+          11,
+          187,
+          14
+        ],
+        "bounds_m": [
+          146.64000000000001,
+          -58.52499999999999,
+          148.88000000000002,
+          -52.675
+        ],
+        "modules": 6
+      }
+    ],
+    "02_1": [
+      {
+        "grid": [
+          125,
+          41,
+          164,
+          42
+        ],
+        "bounds_m": [
+          79.44,
+          -0.024999999999991473,
+          123.12,
+          1.9249999999999972
+        ],
+        "modules": 39
+      },
+      {
+        "grid": [
+          125,
+          70,
+          165,
+          73
+        ],
+        "bounds_m": [
+          79.44,
+          56.525000000000006,
+          124.24000000000001,
+          62.375
+        ],
+        "modules": 120
+      },
+      {
+        "grid": [
+          126,
+          47,
+          150,
+          51
+        ],
+        "bounds_m": [
+          80.56,
+          11.674999999999997,
+          107.44000000000003,
+          19.47500000000001
+        ],
+        "modules": 96
+      },
+      {
+        "grid": [
+          126,
+          54,
+          164,
+          57
+        ],
+        "bounds_m": [
+          80.56,
+          25.325000000000003,
+          123.12,
+          31.174999999999997
+        ],
+        "modules": 114
+      },
+      {
+        "grid": [
+          153,
+          47,
+          164,
+          51
+        ],
+        "bounds_m": [
+          110.80000000000001,
+          11.674999999999997,
+          123.12,
+          19.47500000000001
+        ],
+        "modules": 44
+      },
+      {
+        "grid": [
+          168,
+          41,
+          205,
+          42
+        ],
+        "bounds_m": [
+          127.60000000000002,
+          -0.024999999999991473,
+          169.04000000000002,
+          1.9249999999999972
+        ],
+        "modules": 37
+      },
+      {
+        "grid": [
+          170,
+          52,
+          176,
+          74
+        ],
+        "bounds_m": [
+          129.84,
+          21.424999999999997,
+          136.56,
+          64.32499999999999
+        ],
+        "modules": 132
+      }
+    ]
+  },
+  "preserved_device_count": 195,
+  "original_module_cell_count": 5636,
+  "visual_unit_count": 905,
+  "standard_merge_cells": [
+    3,
+    2
+  ],
+  "standard_pitch_m": [
+    3.3600000000000003,
+    3.9
+  ],
+  "gap_m": 0.08,
+  "frame_width_m": 0.015,
+  "unit_shapes": [
+    {
+      "cells": [
+        1,
+        2
+      ],
+      "count": 9
+    },
+    {
+      "cells": [
+        1,
+        3
+      ],
+      "count": 3
+    },
+    {
+      "cells": [
+        2,
+        1
+      ],
+      "count": 3
+    },
+    {
+      "cells": [
+        2,
+        2
+      ],
+      "count": 55
+    },
+    {
+      "cells": [
+        2,
+        3
+      ],
+      "count": 10
+    },
+    {
+      "cells": [
+        3,
+        1
+      ],
+      "count": 70
+    },
+    {
+      "cells": [
+        3,
+        2
+      ],
+      "count": 556
+    },
+    {
+      "cells": [
+        3,
+        3
+      ],
+      "count": 181
+    },
+    {
+      "cells": [
+        4,
+        1
+      ],
+      "count": 6
+    },
+    {
+      "cells": [
+        4,
+        2
+      ],
+      "count": 5
+    },
+    {
+      "cells": [
+        4,
+        3
+      ],
+      "count": 7
+    }
+  ],
+  "banks": [
+    {
+      "bank": "00_0",
+      "visual_units": 168,
+      "original_blocks": 8
+    },
+    {
+      "bank": "01_0",
+      "visual_units": 261,
+      "original_blocks": 14
+    },
+    {
+      "bank": "01_1",
+      "visual_units": 159,
+      "original_blocks": 15
+    },
+    {
+      "bank": "02_0",
+      "visual_units": 220,
+      "original_blocks": 15
+    },
+    {
+      "bank": "02_1",
+      "visual_units": 97,
+      "original_blocks": 7
+    }
+  ],
+  "minimum_device_clearance_m": 0.9150279999999995,
+  "required_device_clearance_m": 0.85,
+  "old_module_coverage_fraction": 0.6632442669703165,
+  "new_unit_coverage_fraction": 0.9567606984924171,
+  "new_blue_coverage_fraction": 0.9407885872998549,
+  "source_assets_unchanged": true,
+  "unit_layout_sha256": "31029b3635b6b80935c5b3ef8bc585a7add59b152e622fe382b5b68372d4b91e",
+  "previous_source_contract": {
+    "manifest_sha256": "54f6d3b081c337cf3a0db812719726992141f04ee2aaf73dea674856360916fb",
+    "checked_source_files": {
+      "SourceAssets/MPR/hierarchy_20261105/solar/manifest.json": "54f6d3b081c337cf3a0db812719726992141f04ee2aaf73dea674856360916fb",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_00_0.fbx": "4b64d667c90c85b960ca9e992200cbcf91798106ca3b62f54d076655fc7936be",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_00_0_LOD1.fbx": "f1a5dc6946cc46aa035a82cd05a5f6c524bb2174184aa71c84e020074edbbfc9",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_00_0_LOD2.fbx": "44e44cb44ac5322488dec5b84152e74ddaa8347eb3b2d5c09eaf6c91a30888e6",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_0.fbx": "8803cbb5b3ef3880c39d36983d35e23cfbd5e96f2268b5f823cf3540200bead2",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_0_LOD1.fbx": "567e54bd501c15610ff07772357af560594272c57042baafe2f8ee13207dcd36",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_0_LOD2.fbx": "12cb9ded39df33c816dca191f6c3b50160d164b2d3dc066639255af2191528b2",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_1.fbx": "798f332a53c990363ac0c947cd71910904046d36d8254880ad1326f543a5ce49",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_1_LOD1.fbx": "7d4b12ea9e1c4399284385ae36bebc1251cbda0f2bc30c538cca930d3b5883ef",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_01_1_LOD2.fbx": "997dff207558b1e7a8db655eb7e3188d47286cde1f9dec3b2209a3bcb793b5d3",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_0.fbx": "9e94aefa3408395f704682341103730703aa2172c137a86250a5b2317c4e39c5",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_0_LOD1.fbx": "7c7b41ff7a5669a350e812a8ac385c2f23726b46e2c26825c01fe2faf6039de9",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_0_LOD2.fbx": "482329fe038384ccb3f7b4f64c555cd3b9539f6fdd303c4eb2c10b532d7b0b87",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_1.fbx": "2f5b16d05f75b55c2f9488116b8d796e6e119d97d4ecb8164d1abcda7505fba9",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_1_LOD1.fbx": "ecb2f36c9bd7cc5dae7f5e1b974045463e700ba780a1c354f839b9b8afdd402c",
+      "SourceAssets/MPR/hierarchy_20261105/solar/SM_MPRH_SolarBank_02_1_LOD2.fbx": "eccf9de58de9762bf2d65f3d8ddf6ea9c09edbf6d57e1ad4c81da9a3e22b5e87"
+    },
+    "geometry_validation_sha256": "ad510fb7c414e4e749453e53ea22c786d39fbb44bf14b27933dd621826b3f368",
+    "silhouette_validation_sha256": "1c283a612081a5b60f339b5bb88507840d6e9e5aa9ffffb5ccd8e40739f62f9c",
+    "final_palette_sha256": "815a729d809c38681fc5904fe49dbaf470543701aebfcf3dac6c6a6644940693",
+    "final_palette": {
+      "schema_version": 1,
+      "owner": "mpr-solar-hierarchy-20261105",
+      "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+      "namespace": "/Game/MPRWarehouse/Hierarchy20261105",
+      "original_manifest_sha256": "54f6d3b081c337cf3a0db812719726992141f04ee2aaf73dea674856360916fb",
+      "original_materials_sha256": "7d8db8123c0115f93cc7f2dd237c446399f0505a5920b192bf1bbab77f12c5e0",
+      "cell_roles": [
+        "MPRH_SolarCells",
+        "MPRH_SolarCellsLight",
+        "MPRH_SolarCellsShade"
+      ],
+      "cell_linear_multiplier": 0.7,
+      "frame_policy": "unchanged",
+      "preserve_geometry": true
+    }
+  },
+  "blend": "SourceAssets/MPR/solar_units_20261106/MPR_Solar_Units.blend"
+}
