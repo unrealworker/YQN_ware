@@ -208,20 +208,35 @@ def csv_complete(path):
 def parse_csv(path):
     raw=path.read_bytes();rows=list(csv.reader(io.StringIO(raw.decode('utf-8-sig'))))
     headers=[i for i,row in enumerate(rows) if row and row[0]=='EVENTS']
-    assert headers,'CSV lacks finalized header'
+    assert 1<=len(headers)<=2,'CSV lacks finalized header or contains unexpected headers'
     names=rows[headers[-1]];first=headers[0]+1 if len(headers)>1 else 0
-    frames=[r for r in rows[first:headers[-1]] if r and not r[0].startswith('[')]
+    initial_names=rows[headers[0]]
+    assert initial_names==names[:len(initial_names)],'CSV final header does not extend its initial header'
+    frames=rows[first:headers[-1]]
     required=('FrameTime','GameThreadTime','RenderThreadTime','GPUTime')
-    assert all(name in names for name in required),(path,'Missing native timing columns',names)
-    def column(name):
-        values=[float(row[names.index(name)]) for row in frames]
+    assert all(initial_names.count(name)==1 for name in required),(path,'Missing/ambiguous initial native timing columns',initial_names)
+    # UE5.8 FCsvStreamWriter appends VisibleSeries as they are registered and
+    # writes only the current series for each row. Its final header may therefore
+    # be wider than earlier rows. Accept only that append-only shape; truncation
+    # after a column has appeared, or loss of any initial column, remains invalid.
+    previous_width=len(initial_names)
+    for index,row in enumerate(frames):
+        assert previous_width<=len(row)<=len(names),('CSV row width is invalid',index,previous_width,len(row),len(names))
+        previous_width=len(row)
+    def column(name,allow_unregistered=False):
+        index=names.index(name)
+        assert allow_unregistered or all(index<len(row) for row in frames),'Missing native timing '+name
+        values=[float(row[index]) if index<len(row) else 0.0 for row in frames]
         assert all(math.isfinite(v) and v>=0 for v in values),'Invalid timing '+name
         return values
     values={name:column(name) for name in required}
     positive=sum(v>0 for v in values['GPUTime'])/max(1,len(frames))
     passes=[n for n in names if n.startswith('GPU/') and n not in ('GPU/Total','GPU/Unaccounted')]
     assert passes,'No native GPU pass timestamps; GPU/Unaccounted is not total GPU time'
-    pass_values=[column(n) for n in passes]
+    pass_values=[column(n,allow_unregistered=True) for n in passes]
+    late_pass_zero_fill={n:sum(names.index(n)>=len(row) for row in frames)
+                        for n in passes if names.index(n)>=len(initial_names)}
+    late_pass_zero_fill={n:count for n,count in late_pass_zero_fill.items() if count}
     pass_positive=sum(any(v>0 for v in frame) for frame in zip(*pass_values))/max(1,len(frames))
     assert positive>=.95 and pass_positive>=.95,('Insufficient positive GPU timestamps',positive,pass_positive)
     native_seconds=sum(values['FrameTime'])/1000
@@ -229,7 +244,8 @@ def parse_csv(path):
     return {'path':str(path),'sha256':hashlib.sha256(raw).hexdigest(),'timing_unit':'ms','frame_count':len(frames),
         'native_frame_time_seconds':native_seconds,'metrics':{n:stats(v) for n,v in values.items()},
         'gpu_verified':True,'gpu_evidence':{'mode':'UE5.8 RHI','primary_metric':'GPUTime','positive_frame_ratio':positive,
-            'gpu_pass_positive_frame_ratio':pass_positive,'pass_columns':passes},
+            'gpu_pass_positive_frame_ratio':pass_positive,'pass_columns':passes,
+            'unregistered_tail_pass_zero_fill_counts':late_pass_zero_fill},
         'window':'All finalized native CSV frames between start and stop, including boundary frames; no spikes removed.',
         'percentile_method':'nearest-rank'}
 
