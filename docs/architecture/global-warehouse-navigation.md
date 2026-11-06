@@ -57,7 +57,11 @@ flowchart LR
 
 `Tools/GlobeNavigation/tests/policy.test.cjs` 用2000点验证前端预算、背面剔除、聚合与分页。UE `GHS.Globe.*` 验证目录和地理策略；独立 `-game -GlobeSmokeTest` 验证真实CEF、相机命令、仓库流送和返回，并保存截图。该入口不能关闭用户Editor或PIE。
 
-本次只接入一个真实仓库，不创建虚假的第二仓库冒充验收。多仓库目录压力测试验证算法预算，不代表2000个仓库地图的内容兼容性或服务器并发容量。后续功能扩大时，每个业务模块应有独立数据订阅、进入/退出清理及刷新频率预算；新增仓库不得默认全量订阅所有业务。
+当前目录包含 GHS 加州仓库与 MPR 新泽西仓库。多仓库目录压力测试验证算法预算，不代表2000个仓库地图的内容兼容性或服务器并发容量。后续功能扩大时，每个业务模块应有独立数据订阅、进入/退出清理及刷新频率预算；新增仓库不得默认全量订阅所有业务。
+
+MPR（`mpr-nj`）地址为 `1001 W Middlesex Ave, Port Reading, NJ 07064, USA`，地图为 `/Game/Maps/MPR_CAD_Warehouse_B50B57`。POI、列表、详情卡及选择/进入交互复用 GHS 的公共视图；场景通过 `generic` 适配器进入，空能力列表避免启用加州仓库专属业务。入口焦点为 `[6500,500,0]` cm，距离 `95000` cm、俯角 `-52°`、偏航 `-90°`，配合通用相机的 56° 视野。缩略图使用该场景 2026-11-06 的原生概览截图。
+
+MPR 经纬度 `40.568197,-74.242175` 使用 [Woodbridge Block 1095 / Lot 1.01 的公开地块定位](https://njpropertyrecords.com/property/1225_1095_1.01)，地址由 [Prologis 业主资料](https://prologis.getbynder.com/m/30d8742808ae0f7d/original/Prologis-Port-Reading_1001-Middlesex-Avenue.pdf)交叉核对。该点用于全球导航，精度为仓库场地定位，尚非测绘楼心；未使用城市中心替代。
 
 编辑目录时由相邻的 `warehouses.schema.json` 提供编辑器字段提示。新增业务能力必须同步实现适配器、目录能力白名单与测试；不允许仅在JSON写一个尚未实现的功能名。GHS现有订单/设备功能仍封装在 `warehouse-ui`，下阶段按业务域逐步拆分。真实库存接口未接入全球目录时显示 `—`，不把设计稿示例数字当实时数据。
 
