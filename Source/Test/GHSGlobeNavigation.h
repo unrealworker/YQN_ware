@@ -16,6 +16,7 @@ class ULevelStreamingDynamic;
 class AGHSWarehouseCameraPawn;
 class AGHSGlobeWarehouseMarkers;
 class AGHSGlobeCountryLabels;
+class SGHSGlobeWarehouseOverlay;
 
 /** Reuses the warehouse CEF surface, with a small return control inside the warehouse. */
 UCLASS()
@@ -25,6 +26,7 @@ class TEST_API UGHSGlobeHUD : public UUserWidget
 public:
     void Push(const FString& Json);
     void SetCompact(bool bCompact);
+    void ShowWarehouseCluster(const TArray<FString>& Ids);
     FVector2D GetFullSize()const{return FullSize;}
     FVector2D GetFullBrowserCssSize()const{return FullBrowserCssSize;}
     bool HasFullBrowserCoverage()const{return !bSmall&&bFullBrowserCoverage;}
@@ -77,6 +79,7 @@ private:
     FVector Position(double Latitude,double Longitude) const;
     const FGHSGlobeWarehouse* Selected() const;
     void PushState(bool bIncludeCatalog=false);
+    void UpdateGlobeAnnotations();
     FString BuildState(bool bIncludeCatalog)const;
     void TickSmokeTest();
     UPROPERTY(Transient) TObjectPtr<UGHSGlobeHUD> GlobeHUD;
@@ -100,6 +103,8 @@ private:
     float GlobeResetTime=0;
     bool bResettingGlobe=false,bArrivalStarted=false;
     TSharedPtr<SWidget> GlobeViewportWidget;
+    TSharedPtr<SGHSGlobeWarehouseOverlay> WarehouseOverlay;
+    bool bNativeAnnotationInteraction=false;
     EPhase Phase=EPhase::Idle;
     FString SelectedId,LoadedId,Error;
     FVector2D Viewport=FVector2D(1920,1080),ScenePosition=FVector2D(0,64),SceneSize=FVector2D(1420,1016);

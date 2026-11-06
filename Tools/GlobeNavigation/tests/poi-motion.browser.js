@@ -11,7 +11,7 @@
  const rect=document.getElementById('stage').getBoundingClientRect();
  const x=rect.left+rect.width*.4,y=rect.top+rect.height*.5;
  const point=(id,px,visible=true)=>({id,ids:[id],x:px,y,visible});
- const send=(pois,extra={})=>receive({phase:'idle',stageVisible:true,selectedId:'',pois,countries:[],transition:{opacity:0},...extra});
+ const send=(pois,extra={})=>receive({phase:'idle',stageVisible:true,selectedId:'',pois,countries:[],nativeWarehouseAnnotations:false,nativeCountryLabels:false,transition:{opacity:0},...extra});
  const node=()=>document.getElementById('poi-a');
  const position=()=>node().getBoundingClientRect().left;
  const originalMotion=document.body.dataset.reduced==='true'?'reduced':'normal';
@@ -72,6 +72,11 @@
  check('nearby warehouse cluster remains selectable',!!cluster&&cluster.textContent==='2'&&!!document.getElementById('clear-cluster')&&clusteredCommands.some(c=>c.action==='clear'),{count:cluster&&cluster.textContent,commands:clusteredCommands});
  commandsFrom(()=>document.getElementById('clear-cluster')?.click());
  check('test cleanup releases the synthetic cluster filter',!document.getElementById('clear-cluster')&&document.querySelectorAll('#warehouse-list [data-select]').length===2,{});
+ send([point('a',x)],{nativeWarehouseAnnotations:true,nativeCountryLabels:true,countries:[{id:'country-a',label:'国家',x,y,visible:true}]});
+ check('native annotations suppress duplicate browser labels and points',document.querySelectorAll('#pois .poi,#countries .country').length===0,{});
+ window.ghsGlobe.showCluster({ids:['a','b','not-in-catalog']});
+ check('native cluster uses the existing sidebar list',!!document.getElementById('clear-cluster')&&document.querySelectorAll('#warehouse-list [data-select]').length===2,{});
+ commandsFrom(()=>document.getElementById('clear-cluster')?.click());
  send([],{warehouses:[]});
  check('empty catalog removes the old clickable markers',document.querySelectorAll('#pois .poi').length===0,{});
  return {success:results.every(r=>r.pass),results};

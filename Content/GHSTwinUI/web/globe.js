@@ -53,10 +53,10 @@ function layoutCountries(labels,origin){
 }
 function markerContent(p){
  if(p.ids.length>1)return '<button class="cluster-dot" data-cluster="'+esc(p.id)+'" aria-label="查看此区域'+p.ids.length+'座仓库">'+p.ids.length+'</button>';
- // The geographic point is an emissive decal on the globe; this overlay only labels it.
+ // Browser preview fallback; the live globe renders the complete POI in native Slate.
  const w=warehouseById.get(p.id);return w?'<div class="poi-card"><button class="poi-select" data-select="'+esc(w.id)+'" aria-label="选择'+esc(w.name)+'"><span class="warehouse-icon">'+icon('warehouse')+'</span><span class="row-copy"><strong>'+esc(w.name)+'</strong></span></button><button class="poi-enter" data-enter="'+esc(w.id)+'" aria-label="进入'+esc(w.name)+'">'+icon('chevron')+'</button></div>':'';
 }
-function positionLabels(){if(state.phase==='warehouse'){markerViewport='';return;}const origin=stage.getBoundingClientRect();const markers=GlobePolicy.markers(state.pois||[],state.selectedId,origin,64,48),key=markers.map(p=>p.id+':'+p.ids.join(',')).join('|');
+function positionLabels(){if(state.phase==='warehouse'){markerViewport='';return;}const origin=stage.getBoundingClientRect();const markers=state.nativeWarehouseAnnotations?[]:GlobePolicy.markers(state.pois||[],state.selectedId,origin,64,48),key=markers.map(p=>p.id+':'+p.ids.join(',')).join('|');
  const viewportKey=[origin.left,origin.top,origin.width,origin.height].join(','),sameViewport=viewportKey===markerViewport;
  markerViewport=viewportKey;
  if(key!==markerKey){
@@ -109,6 +109,7 @@ function motionChanged(){const limited=reducedMotion();document.body.dataset.red
 function setMotionPreference(value){motionMode=GlobePolicy.motionPreference(value);try{localStorage.setItem('ghs-globe-motion',motionMode);}catch(e){}motionChanged();}
 const beijingClock=new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit',weekday:'long',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
 function clock(){const parts=Object.fromEntries(beijingClock.formatToParts(new Date()).map(part=>[part.type,part.value]));$('clock').textContent='北京时间 '+parts.hour+':'+parts.minute;$('date').textContent=parts.year+'.'+parts.month+'.'+parts.day+' · '+parts.weekday;}clock();setInterval(clock,1000);
-window.ghsGlobe={receive,setMotionPreference};window.addEventListener('resize',()=>{curtainAck=null;viewport();queueCurtain();});viewport();panel(false);motionChanged();
+function showCluster(payload){const ids=payload&&payload.ids;if(!Array.isArray(ids))return;clusterIds=ids.filter(id=>warehouseById.has(id));if(!clusterIds.length){clusterIds=null;return;}pageOffset=0;entryGate=GlobePolicy.entryRequestState(entryGate,'cancel');pendingFocus={type:'list'};panel(false);list();queueFocus();}
+window.ghsGlobe={receive,setMotionPreference,showCluster};window.addEventListener('resize',()=>{curtainAck=null;viewport();queueCurtain();});viewport();panel(false);motionChanged();
 const handshake=setInterval(()=>{if(!bridge())return;if(!ready){ready=true;command('ready');viewport();motionChanged();syncInteraction(true);}if(bridge().getstate)Promise.resolve(bridge().getstate()).then(receive).catch(()=>{});clearInterval(handshake);},100);
 })();

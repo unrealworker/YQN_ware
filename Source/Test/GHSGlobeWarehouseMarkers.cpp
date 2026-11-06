@@ -1,13 +1,38 @@
 #include "GHSGlobeWarehouseMarkers.h"
 
-#include "Components/DecalComponent.h"
 #include "Components/SceneComponent.h"
-#include "Materials/MaterialInterface.h"
+#include "Components/StaticMeshComponent.h"
+#include "Engine/StaticMesh.h"
+#include "StaticMeshResources.h"
 
 namespace
 {
-const FLinearColor IdleColor(.015f, .26f, 1.f);
-const FLinearColor SelectedColor(.025f, .65f, 1.f);
+struct FSurfaceTriangle
+{
+    FVector A, B, C, Center;
+    double RadiusSquared;
+};
+
+bool FindSurface(const TArray<FSurfaceTriangle>& Triangles, const FVector& Direction, double RayLength, FVector& OutPosition)
+{
+    double FarthestHit = 0;
+    for (const auto& Triangle : Triangles)
+    {
+        // Reject triangles whose bounds cannot intersect this radial ray before
+        // doing barycentric work. This also skips the opposite hemisphere.
+        const double Along = FVector::DotProduct(Triangle.Center, Direction);
+        if (Along <= 0 || Triangle.Center.SizeSquared() - Along * Along > Triangle.RadiusSquared + 1.e-6)
+            continue;
+        FVector Hit, Normal;
+        if (FMath::SegmentTriangleIntersection(FVector::ZeroVector, Direction * RayLength,
+            Triangle.A, Triangle.B, Triangle.C, Hit, Normal))
+        {
+            const double Distance = FVector::DotProduct(Hit, Direction);
+            if (Distance > FarthestHit) { FarthestHit = Distance; OutPosition = Hit; }
+        }
+    }
+    return FarthestHit > 0;
+}
 }
 
 AGHSGlobeWarehouseMarkers::AGHSGlobeWarehouseMarkers()
@@ -15,62 +40,62 @@ AGHSGlobeWarehouseMarkers::AGHSGlobeWarehouseMarkers()
     PrimaryActorTick.bCanEverTick = false;
     SetRootComponent(CreateDefaultSubobject<USceneComponent>(TEXT("SurfaceMarkerRoot")));
     RootComponent->SetMobility(EComponentMobility::Movable);
-    // SM_Earth has a 100x import scale. Only inherit its rotation and translation;
-    // geographic radii and decal dimensions below are already in world units.
-    RootComponent->SetAbsolute(false, false, true);
     Tags.Add(TEXT("GHS_GlobeWarehouseMarkers"));
 }
 
 void AGHSGlobeWarehouseMarkers::Initialize(AActor* GlobeRoot, float GlobeRadius, const TArray<FGHSGlobeWarehouse>& Warehouses)
 {
-    for (auto& Entry : Markers)
-        if (Entry.Value) Entry.Value->DestroyComponent();
-    Markers.Reset();
-    SelectedId.Reset();
+    LocalAnchors.Reset();
+    EarthMesh.Reset();
     if (!IsValid(GlobeRoot) || !GlobeRoot->GetRootComponent() || !FMath::IsFinite(GlobeRadius) || GlobeRadius <= 0.f)
         return;
-
-    AttachToActor(GlobeRoot, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-    SetActorRelativeLocation(FVector::ZeroVector);
-    SetActorRelativeRotation(FRotator::ZeroRotator);
-    SetActorScale3D(FVector::OneVector);
-
-    auto* Material = LoadObject<UMaterialInterface>(nullptr,
-        TEXT("/Game/GlobeNavigation/Materials/M_WarehouseSurfaceGlow.M_WarehouseSurfaceGlow"));
-    if (!Material)
+    AttachToActor(GlobeRoot, FAttachmentTransformRules::SnapToTargetIncludingScale);
+    auto* Component = GlobeRoot->FindComponentByClass<UStaticMeshComponent>();
+    UStaticMesh* Mesh = Component ? Component->GetStaticMesh() : nullptr;
+    const auto* RenderData = Mesh ? Mesh->GetRenderData() : nullptr;
+    if (!Mesh || !Mesh->bAllowCPUAccess || !RenderData || RenderData->LODResources.IsEmpty())
     {
-        UE_LOG(LogTemp, Error, TEXT("GHS globe warehouse glow material is missing"));
+        UE_LOG(LogTemp, Error, TEXT("GHS globe surface anchors require an Earth mesh with Allow CPU Access enabled"));
         return;
     }
+    const auto& LOD = RenderData->LODResources[0];
+    const auto& Positions = LOD.VertexBuffers.PositionVertexBuffer;
+    if (!Positions.GetVertexData() || LOD.IndexBuffer.GetIndexDataSize() == 0)
+    {
+        UE_LOG(LogTemp, Error, TEXT("GHS globe surface anchor CPU geometry is unavailable"));
+        return;
+    }
+    const auto Indices = LOD.IndexBuffer.GetArrayView();
+    TArray<FSurfaceTriangle> Triangles;
+    Triangles.Reserve(Indices.Num() / 3);
+    for (int32 I = 0; I + 2 < Indices.Num(); I += 3)
+    {
+        const FVector A(Positions.VertexPosition(Indices[I]));
+        const FVector B(Positions.VertexPosition(Indices[I + 1]));
+        const FVector C(Positions.VertexPosition(Indices[I + 2]));
+        const FVector Center = (A + B + C) / 3.;
+        Triangles.Add({A, B, C, Center, FMath::Max3((A - Center).SizeSquared(), (B - Center).SizeSquared(), (C - Center).SizeSquared())});
+    }
+    EarthMesh = Component;
+    const double RayLength = Mesh->GetBounds().SphereRadius * 2.;
     for (const auto& Warehouse : Warehouses)
     {
-        if (Markers.Contains(Warehouse.Id) || !GHSGlobe::ValidCoordinates(Warehouse.Latitude, Warehouse.Longitude))
+        if (LocalAnchors.Contains(Warehouse.Id) || !GHSGlobe::ValidCoordinates(Warehouse.Latitude, Warehouse.Longitude))
             continue;
-        const FVector Direction = GHSGlobe::ToSphere(Warehouse.Latitude, Warehouse.Longitude, 1.);
-        auto* Marker = NewObject<UDecalComponent>(this, NAME_None, RF_Transient);
-        AddInstanceComponent(Marker);
-        Marker->SetupAttachment(RootComponent);
-        Marker->ComponentTags.Add(TEXT("GHS_GlobeWarehouseGlow"));
-        Marker->ComponentTags.Add(FName(*(TEXT("Warehouse:") + Warehouse.Id)));
-        Marker->SetRelativeLocation(Direction * (GlobeRadius * 1.015));
-        Marker->SetRelativeRotation((-Direction).Rotation());
-        // This shallow volume spans the actual relief and all Earth LODs. The
-        // emissive disk is shaded on the mesh surface, never at this box center.
-        Marker->DecalSize = FVector(GlobeRadius * .04, GlobeRadius * .03, GlobeRadius * .03);
-        Marker->SetFadeScreenSize(0.f);
-        Marker->SetDecalMaterial(Material);
-        Marker->SetDecalColor(IdleColor);
-        Marker->RegisterComponent();
-        Markers.Add(Warehouse.Id, Marker);
+        FVector Local;
+        // Exact imported-mesh coordinates include relief. An invented radius
+        // offset would visually drift away from the map at oblique views.
+        if (FindSurface(Triangles, GHSGlobe::ToSphere(Warehouse.Latitude, Warehouse.Longitude, 1.), RayLength, Local))
+            LocalAnchors.Add(Warehouse.Id, Local);
+        else
+            UE_LOG(LogTemp, Error, TEXT("GHS globe mesh has no surface for warehouse %s"), *Warehouse.Id);
     }
 }
 
-void AGHSGlobeWarehouseMarkers::SetSelectedWarehouse(const FString& WarehouseId)
+bool AGHSGlobeWarehouseMarkers::GetWorldAnchor(const FString& WarehouseId, FVector& OutPosition) const
 {
-    if (SelectedId == WarehouseId) return;
-    if (const auto* Previous = Markers.Find(SelectedId); Previous && *Previous)
-        (*Previous)->SetDecalColor(IdleColor);
-    SelectedId = WarehouseId;
-    if (const auto* Selected = Markers.Find(SelectedId); Selected && *Selected)
-        (*Selected)->SetDecalColor(SelectedColor);
+    const FVector* Local = LocalAnchors.Find(WarehouseId);
+    if (!Local || !EarthMesh.IsValid()) return false;
+    OutPosition = EarthMesh->GetComponentTransform().TransformPosition(*Local);
+    return true;
 }

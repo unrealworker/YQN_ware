@@ -98,6 +98,8 @@ try:
         for key, value in [('convert_scene',True),('convert_scene_unit',True),('force_front_x_axis',False),('transform_vertex_to_absolute',True),('bake_pivot_in_vertex',False),('import_uniform_scale',1.0),('import_translation',u.Vector(0,0,0)),('import_rotation',u.Rotator(0,0,0))]:
             previous_import.set_editor_property(key, value)
     mesh = import_file(lod_sources[0], 'SM_Earth', opts)
+    # Native fixed-pixel POIs cache their exact radial intersection with Earth relief.
+    mesh.set_editor_property('allow_cpu_access', True)
     if not isinstance(mesh.get_editor_property('asset_import_data'), u.FbxStaticMeshImportData):
         raise RuntimeError('Earth did not use the calibrated FBX importer')
     # ImportLOD does not accept a factory and may otherwise use Interchange,

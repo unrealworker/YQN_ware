@@ -1,6 +1,7 @@
 #include "GHSGlobeNavigation.h"
 #include "GHSGlobeWarehouseMarkers.h"
 #include "GHSGlobeCountryLabels.h"
+#include "SGHSGlobeWarehouseOverlay.h"
 #include "GHSWarehouseCameraPawn.h"
 #include "GHSWarehouseRoofComponent.h"
 #include "GHSStorageCapacityComponent.h"
@@ -82,6 +83,13 @@ void UGHSGlobeHUD::NativeTick(const FGeometry& Geometry,float Dt)
 void UGHSGlobeHUD::Push(const FString& Json)
 {if(Browser)Browser->Evaluate(TEXT("window.ghsGlobe&&window.ghsGlobe.receive(")+Json+TEXT(");"));}
 void UGHSGlobeHUD::SetCompact(bool Value){bSmall=Value;}
+void UGHSGlobeHUD::ShowWarehouseCluster(const TArray<FString>& Ids)
+{
+    auto Payload=MakeShared<FJsonObject>();TArray<TSharedPtr<FJsonValue>> Values;
+    for(const auto& Id:Ids)Values.Add(MakeShared<FJsonValueString>(Id));
+    Payload->SetArrayField(TEXT("ids"),Values);
+    if(Browser)Browser->Evaluate(TEXT("window.ghsGlobe&&window.ghsGlobe.showCluster(")+Encode(Payload)+TEXT(");"));
+}
 
 AGHSGlobeGameMode::AGHSGlobeGameMode(){PlayerControllerClass=AGHSGlobePlayerController::StaticClass();}
 AGHSGlobePlayerController::AGHSGlobePlayerController()
@@ -147,6 +155,14 @@ void AGHSGlobePlayerController::BeginPlay()
             return float(FGHSTwinViewport::FromPixels(Pixels).SlateScale(UWidgetLayoutLibrary::GetViewportScale(this)));
         })[GlobeHUD->TakeWidget()];
         GetWorld()->GetGameViewport()->AddViewportWidgetContent(GlobeViewportWidget.ToSharedRef(),50);
+        auto MarkerCommand=[this](const TCHAR* Action,const FString& Id)
+        {auto Message=MakeShared<FJsonObject>();Message->SetStringField(TEXT("action"),Action);Message->SetStringField(TEXT("id"),Id);Command(Encode(Message));};
+        SAssignNew(WarehouseOverlay,SGHSGlobeWarehouseOverlay)
+            .OnSelect_Lambda([this,MarkerCommand](const FString& Id){MarkerCommand(SelectedId==Id?TEXT("enter"):TEXT("select"),Id);})
+            .OnEnter_Lambda([MarkerCommand](const FString& Id){MarkerCommand(TEXT("enter"),Id);})
+            .OnCluster_Lambda([this](const TArray<FString>& Ids){Command(TEXT("{\"action\":\"clear\"}"));if(GlobeHUD)GlobeHUD->ShowWarehouseCluster(Ids);})
+            .OnInteraction_Lambda([this](bool Active){bNativeAnnotationInteraction=Active;if(GetWorld())LastInteraction=GetWorld()->GetTimeSeconds();});
+        GetWorld()->GetGameViewport()->AddViewportWidgetContent(WarehouseOverlay.ToSharedRef(),51);
     }
     LastInteraction=GetWorld()->GetTimeSeconds();ResetGlobeCamera(true);
 #if !UE_BUILD_SHIPPING
@@ -165,6 +181,8 @@ void AGHSGlobePlayerController::EndPlay(const EEndPlayReason::Type Reason)
     {SetStageVisible(true);UnloadDestination();}
     if(WarehouseMarkers){WarehouseMarkers->Destroy();WarehouseMarkers=nullptr;}
     if(CountryLabels){CountryLabels->Destroy();CountryLabels=nullptr;}
+    if(WarehouseOverlay&&GetWorld()&&GetWorld()->GetGameViewport())GetWorld()->GetGameViewport()->RemoveViewportWidgetContent(WarehouseOverlay.ToSharedRef());
+    WarehouseOverlay.Reset();
     if(GlobeViewportWidget&&GetWorld()&&GetWorld()->GetGameViewport())GetWorld()->GetGameViewport()->RemoveViewportWidgetContent(GlobeViewportWidget.ToSharedRef());
     GlobeViewportWidget.Reset();GlobeHUD=nullptr;Super::EndPlay(Reason);
 }
@@ -351,13 +369,13 @@ void AGHSGlobePlayerController::Command(const FString& Json)
     if(Action==TEXT("select")||Action==TEXT("enter"))
     {
         FString Id;if(!O->TryGetStringField(TEXT("id"),Id)||!Registry.Find(Id))return;
-        SelectedId=Id;if(WarehouseMarkers)WarehouseMarkers->SetSelectedWarehouse(SelectedId);
+        SelectedId=Id;
         Error.Empty();Phase=EPhase::Selected;bPreloadRequested=true;PreloadSelected();
         if(Action==TEXT("enter")&&Phase!=EPhase::Error){bEntryRequested=true;Phase=EPhase::Loading;if(Destination&&!bUnloadRequested&&LoadedId==SelectedId&&Destination->IsLevelLoaded())StartFlight();}
         if(bUnloadTimedOut)Error=TEXT("上一仓库仍在释放资源，释放完成后会自动继续，请稍候");
         PushState();return;
     }
-    if(Action==TEXT("clear")){SelectedId.Empty();if(WarehouseMarkers)WarehouseMarkers->SetSelectedWarehouse(SelectedId);Phase=EPhase::Idle;bEntryRequested=false;bPreloadRequested=false;UnloadDestination();Error.Empty();PushState();return;}
+    if(Action==TEXT("clear")){SelectedId.Empty();Phase=EPhase::Idle;bEntryRequested=false;bPreloadRequested=false;UnloadDestination();Error.Empty();PushState();return;}
     if(Action==TEXT("home")||Action==TEXT("reset"))
     {
         bEntryRequested=false;bInteracting=false;Phase=SelectedId.IsEmpty()?EPhase::Idle:EPhase::Selected;Error.Empty();
@@ -402,7 +420,7 @@ void AGHSGlobePlayerController::PlayerTick(float Dt)
         GlobeResetTime+=Dt;GlobeRoot->SetActorRotation(FQuat::Slerp(ResetStartRotation,InitialGlobeRotation,Ease(GlobeResetTime/.85f)));
         if(GlobeResetTime>=.85f)bResettingGlobe=false;
     }
-    if(Phase==EPhase::Idle&&!bReducedMotion&&!bInteracting&&!bResettingGlobe&&Now-LastInteraction>2&&GlobeRoot.IsValid())
+    if(Phase==EPhase::Idle&&!bReducedMotion&&!bInteracting&&!bNativeAnnotationInteraction&&!bResettingGlobe&&Now-LastInteraction>2&&GlobeRoot.IsValid())
         GlobeRoot->AddActorWorldRotation(FRotator(0,IdleRotationDegreesPerSecond*Dt*Ease(float(Now-LastInteraction-2)),0));
     if(Phase==EPhase::Flying)
     {
@@ -464,8 +482,44 @@ void AGHSGlobePlayerController::UpdateCameraManager(float Dt)
     // The world updates camera caches after Pawn/SpringArm ticks. Project labels
     // here so the same frame's globe transform and rendered view are sampled.
     if(!IsLocalController()||!GetWorld()||!bReady||!FMath::IsFinite(Dt)||Dt<=0)return;
+    UpdateGlobeAnnotations();
     const double Now=GetWorld()->GetTimeSeconds();
     if(Now>=NextPush){NextPush=Now+(Phase==EPhase::Warehouse?.5:1./20.);PushState();}
+}
+
+void AGHSGlobePlayerController::UpdateGlobeAnnotations()
+{
+    if(!WarehouseOverlay)return;
+    const bool Visible=bStageVisible&&(Phase==EPhase::Idle||Phase==EPhase::Selected||Phase==EPhase::Loading||Phase==EPhase::Error);
+    if(!Visible){WarehouseOverlay->SetMarkers({});return;}
+    int32 Width=0,Height=0;GetViewportSize(Width,Height);
+    auto* Local=GetLocalPlayer();FSceneViewProjectionData Projection;
+    if(!WarehouseMarkers||Width<=0||Height<=0||!Local||!Local->ViewportClient||!Local->ViewportClient->Viewport
+        ||!Local->GetProjectionData(Local->ViewportClient->Viewport,Projection)||!Projection.IsValidViewRectangle())
+    {WarehouseOverlay->SetMarkers({});return;}
+    const FVector2D Scale(Width/Viewport.X,Height/Viewport.Y);
+    const FSlateRect Scene(ScenePosition.X*Scale.X,ScenePosition.Y*Scale.Y,
+        (ScenePosition.X+SceneSize.X)*Scale.X,(ScenePosition.Y+SceneSize.Y)*Scale.Y);
+    WarehouseOverlay->SetSceneRect(Scene);
+    const FMatrix Matrix=Projection.ComputeViewProjectionMatrix();
+    TArray<FGHSWarehouseProjectedPoint> Points;
+    for(const auto& W:Registry.GetEntries())
+    {
+        FVector Anchor;FVector2D Pixels;
+        if(!WarehouseMarkers->GetWorldAnchor(W.Id,Anchor)||!GHSGlobe::IsSurfaceVisible(Anchor,Projection.ViewOrigin,GlobeCenter)
+            ||!FSceneView::ProjectWorldToScreen(Anchor,Projection.GetConstrainedViewRect(),Matrix,Pixels))continue;
+        Pixels-=FVector2D(Projection.GetConstrainedViewRect().Min);
+        if(!PostProcessWorldToScreen(Anchor,Pixels,true)||Pixels.X<Scene.Left||Pixels.X>Scene.Right||Pixels.Y<Scene.Top||Pixels.Y>Scene.Bottom)continue;
+        Points.Add({W.Id,Pixels});
+    }
+    TArray<FGHSGlobeScreenMarker> Markers;
+    for(const auto& Cluster:GHSClusterWarehousePoints(Points,SelectedId,48))
+    {
+        FGHSGlobeScreenMarker Marker;Marker.Id=Cluster.Id;Marker.Ids=Cluster.Ids;Marker.PointPixels=Cluster.Position;Marker.bSelected=Cluster.Id==SelectedId;
+        if(const auto* Warehouse=Registry.Find(Cluster.Id))Marker.Name=Warehouse->Name;
+        Markers.Add(MoveTemp(Marker));
+    }
+    WarehouseOverlay->SetMarkers(Markers);
 }
 
 void AGHSGlobePlayerController::TickSmokeTest()
@@ -681,6 +735,7 @@ FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
     static const TCHAR* Names[]={TEXT("idle"),TEXT("selected"),TEXT("loading"),TEXT("flying"),TEXT("revealing"),TEXT("warehouse"),TEXT("returning"),TEXT("error")};
     auto Root=MakeShared<FJsonObject>();Root->SetStringField(TEXT("phase"),Names[int32(Phase)]);Root->SetStringField(TEXT("selectedId"),SelectedId);Root->SetStringField(TEXT("error"),Error);
     Root->SetBoolField(TEXT("reducedMotion"),bReducedMotion);Root->SetBoolField(TEXT("stageVisible"),bStageVisible);
+    Root->SetBoolField(TEXT("nativeWarehouseAnnotations"),WarehouseOverlay.IsValid());
     Root->SetBoolField(TEXT("nativeCountryLabels"),CountryLabels!=nullptr);
     auto View=MakeShared<FJsonObject>();View->SetNumberField(TEXT("width"),Viewport.X);View->SetNumberField(TEXT("height"),Viewport.Y);Root->SetObjectField(TEXT("viewport"),View);
     auto Transition=MakeShared<FJsonObject>();Transition->SetNumberField(TEXT("opacity"),MaskOpacity);Transition->SetNumberField(TEXT("progress"),FMath::Clamp(PhaseTime/(bReducedMotion?.22f:FGHSGlobeFlight::Duration),0.f,1.f));
@@ -729,10 +784,10 @@ FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
     TArray<FGHSWarehouseProjectedPoint> VisiblePoints;
     if(bHasProjection)
     {
-        const FQuat Rotation=GlobeRoot.IsValid()?GlobeRoot->GetActorQuat():FQuat::Identity;
         for(const auto& W:Registry.GetEntries())
         {
-            const FVector P=GlobeCenter+Rotation.RotateVector(W.UnitPosition*(GlobeRadius*1.003));FVector2D Logical=FVector2D::ZeroVector;
+            FVector P;FVector2D Logical=FVector2D::ZeroVector;
+            if(!WarehouseMarkers||!WarehouseMarkers->GetWorldAnchor(W.Id,P))continue;
             if(!ProjectPoint(P,Logical))continue;
             if(Logical.X<ScenePosition.X||Logical.X>ScenePosition.X+SceneSize.X||Logical.Y<ScenePosition.Y||Logical.Y>ScenePosition.Y+SceneSize.Y)continue;
             VisiblePoints.Add({W.Id,Logical});
