@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "namespace": "/Game/MPRWarehouse/RoadGap20261106",
+  "meshes": [
+    {
+      "name": "SM_MPR_A50_RoadGap",
+      "fbx": "SourceAssets/MPR/road_gap_20261106/SM_MPR_A50_RoadGap.fbx",
+      "sha256": "7a834d6aa01d8402769f8cbaf4f08a29923c08803366f799830957218b603725",
+      "triangles": 181,
+      "vertices": 543,
+      "material_roles": [
+        "MPR4_TerminalAsphalt"
+      ],
+      "bounds_m": [
+        [
+          0.0,
+          37.966400146484375
+        ],
+        [
+          -354.5519104003906,
+          -300.0
+        ],
+        [
+          -2.2770700454711914,
+          -1.6935131549835205
+        ]
+      ],
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "full_precision_uvs": true,
+      "instance_only": false
+    }
+  ],
+  "source_hashes": {
+    "SourceAssets/MPR/rebuild_b50b57/transport_revision_20261105/SM_MPRR_Roads_0_-3.fbx": "ce27bf4d0943167b62c57ba137a1f020c5b05b86dc6ddab0ab9b0cc5b529d849",
+    "SourceAssets/MPR/transport_cleanup_20261105/layout.json": "b4cdda5ed178f5f579a3e71f89800e3a27767ebba83e184a4bfe94e9ae2b0777"
+  },
+  "road_gap": true,
+  "road_id": "TPX_ROADS_AXES_A50",
+  "actor_label": "MPR_A50_RoadGap_20261106",
+  "transform": {
+    "translation_cm": [
+      0,
+      0,
+      0
+    ],
+    "rotation_xyzw": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "material_reference_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_-1_-3",
+  "expected_effective_material": "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalAsphalt",
+  "expected_missing_source_package": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Roads_0_-3",
+  "expected_actor_count_change": 1,
+  "selected_source_face_count": 181,
+  "restored_area_m2": 511.78960753284423,
+  "plan_sha256": "4486a2bba1c2ce44596915b13d62ae981f05059b81de3a5235dbc500172f9a51"
+}

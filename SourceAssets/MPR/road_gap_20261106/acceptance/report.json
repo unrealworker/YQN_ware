@@ -1,0 +1,66 @@
+{
+  "success": true,
+  "mode": "gap",
+  "apply": {
+    "success": true,
+    "assets": [
+      {
+        "package": "/Game/MPRWarehouse/RoadGap20261106/Meshes/SM_MPR_A50_RoadGap",
+        "reused": false,
+        "fbx_sha256": "7a834d6aa01d8402769f8cbaf4f08a29923c08803366f799830957218b603725",
+        "material_references": [
+          "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_TerminalAsphalt"
+        ],
+        "lod_triangles": [
+          181
+        ],
+        "bounds_cm": [
+          [
+            0.0029618549160659313,
+            3796.642578125
+          ],
+          [
+            30000.0,
+            35455.19140625
+          ],
+          [
+            -227.70700073242188,
+            -169.351318359375
+          ]
+        ],
+        "expected_bounds_cm": [
+          [
+            0.0,
+            3796.6400146484375
+          ],
+          [
+            30000.0,
+            35455.19104003906
+          ],
+          [
+            -227.70700454711914,
+            -169.35131549835205
+          ]
+        ],
+        "max_error_cm": 0.0029618549160659313
+      }
+    ]
+  },
+  "preservation": {
+    "success": true,
+    "before_actors": 854,
+    "after_actors": 855,
+    "changed": [
+      "F37CB40A430FF4D7C8C1AA8B124C2FB9"
+    ],
+    "deleted": [],
+    "unchanged_actors": 854
+  },
+  "content": {
+    "success": true,
+    "new_packages": {
+      "Content/MPRWarehouse/RoadGap20261106/Meshes/SM_MPR_A50_RoadGap.uasset": "872f6b8b968a782bdc1454de982f0f4717d706f22fa96403cb308ab559a2ddf0"
+    },
+    "protected_packages": 1873
+  }
+}

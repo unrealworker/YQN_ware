@@ -1,0 +1,1393 @@
+{
+  "schema_version": 1,
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "namespace": "/Game/MPRWarehouse/CityRoadRemoval20261106",
+  "meshes": [
+    {
+      "name": "SM_MPRR_Rail_-1_-3_Sleepers",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_Rail_-1_-3_Sleepers.fbx",
+      "material_roles": [
+        "MPR3_Sleepers"
+      ],
+      "bounds_m": [
+        [
+          -60.485321044921875,
+          1.0641108751296997
+        ],
+        [
+          -450.93023681640625,
+          -359.7987365722656
+        ],
+        [
+          -1.7976280450820923,
+          -0.7704919576644897
+        ]
+      ],
+      "vertices": 2835,
+      "triangles": 1367,
+      "sha256": "1153b24e5cad9ba24b250bf69ae3db0b9597721b82e8c924e74566ee00289dea",
+      "instance_only": false,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "9a5921001c5f1dda17d8273a54d0ac79e059f8a443e89b2b8f2877aae790516e"
+    },
+    {
+      "name": "SM_MPRR_Rail_0_-3_Sleepers",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_Rail_0_-3_Sleepers.fbx",
+      "material_roles": [
+        "MPR3_Sleepers"
+      ],
+      "bounds_m": [
+        [
+          -0.8687991499900818,
+          149.91537475585938
+        ],
+        [
+          -408.1787109375,
+          -299.17327880859375
+        ],
+        [
+          -2.7672746181488037,
+          -0.7427491545677185
+        ]
+      ],
+      "vertices": 5224,
+      "triangles": 2552,
+      "sha256": "2c6b454f7dcd1d6885f83ce2462b414a72f658c9be7fa77a302faa5bbec09007",
+      "instance_only": false,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "4e268557d646b5ac5653c214ca85db13364a996a8dd67784ff28b8f422b5aff2"
+    },
+    {
+      "name": "SM_MPRR_RailCorridor_-1_-3",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_RailCorridor_-1_-3.fbx",
+      "material_roles": [
+        "MPR3_Ballast"
+      ],
+      "bounds_m": [
+        [
+          -63.935001373291016,
+          0.0
+        ],
+        [
+          -450.0,
+          -355.1929016113281
+        ],
+        [
+          -1.8567734956741333,
+          -0.8747661113739014
+        ]
+      ],
+      "vertices": 2571,
+      "triangles": 857,
+      "sha256": "2794b1c32aff6ec5960840e46840f69dafb144ae0eb5cd93d5cfdb64e73e621e",
+      "instance_only": false,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "bce8b57a5305adc7189c8b65d833fc0ffd3423562b0f75c76c01cc87947f45ee"
+    },
+    {
+      "name": "SM_MPRR_RailCorridor_0_-3",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_RailCorridor_0_-3.fbx",
+      "material_roles": [
+        "MPR3_Ballast"
+      ],
+      "bounds_m": [
+        [
+          0.0,
+          150.0
+        ],
+        [
+          -411.2318115234375,
+          -300.0
+        ],
+        [
+          -2.8229756355285645,
+          -0.767813503742218
+        ]
+      ],
+      "vertices": 6945,
+      "triangles": 2315,
+      "sha256": "5fe78c60c7ada578e120ff2769e4e6b6c48ae9858811cda62a499b3d02f0e9a5",
+      "instance_only": false,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "84547d2debe0377b8624d202da7ca41487ef2137c51b2acc3a9cf2e36ac2d7f8",
+      "corridor_residual_cleanup": true
+    },
+    {
+      "name": "SM_MPRR_CrossingDeck_0_-2",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_CrossingDeck_0_-2.fbx",
+      "material_roles": [
+        "MPR3_Concrete"
+      ],
+      "bounds_m": [
+        [
+          112.33670043945312,
+          148.95779418945312
+        ],
+        [
+          -198.48899841308594,
+          -150.0
+        ],
+        [
+          -2.467825174331665,
+          -1.450700044631958
+        ]
+      ],
+      "vertices": 738,
+      "triangles": 246,
+      "sha256": "71a718a03d06598ef74a8c25b349ca353d7d6c848f9e80d859572ee7cd07a883",
+      "instance_only": false,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "c73a3535dad129580305ab83386fa5e9addcd30a2d623269f176aa717d0b8ff2"
+    },
+    {
+      "name": "SM_MPRR_CrossingRamp_0_-2",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_CrossingRamp_0_-2.fbx",
+      "material_roles": [
+        "MPR3_Asphalt"
+      ],
+      "bounds_m": [
+        [
+          109.93840026855469,
+          147.10169982910156
+        ],
+        [
+          -200.40199279785156,
+          -150.0
+        ],
+        [
+          -2.7670400142669678,
+          -1.4507007598876953
+        ]
+      ],
+      "vertices": 1212,
+      "triangles": 404,
+      "sha256": "42b1a46dadbd26e469cc0986c649284a29fe5c0f63e63ecba69380bad49e003a",
+      "instance_only": false,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "5d2e5b059d5286bf68cb7f4848c74c11de4c360d6f4f1fc609be0d6ef413e3c5"
+    },
+    {
+      "name": "SM_MPRR_Roads_-1_-4",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_Roads_-1_-4.fbx",
+      "material_roles": [
+        "MPR4_TerminalAsphalt"
+      ],
+      "bounds_m": [
+        [
+          -150.0,
+          -90.34359741210938
+        ],
+        [
+          -514.0037841796875,
+          -450.0
+        ],
+        [
+          -1.1200000047683716,
+          -0.9932631254196167
+        ]
+      ],
+      "vertices": 672,
+      "triangles": 224,
+      "sha256": "fe1076a12ef5c0d98431ce5ecc0c2bf54a6e72e450ed2ec6f867e25f0012998c",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.9999999999999969
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "c354a7250ff9fe14d823b101b17ef77cff3a235e201f935f9e8886d710e9e4e2"
+    },
+    {
+      "name": "SM_MPRR_Roads_-1_-3",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_Roads_-1_-3.fbx",
+      "material_roles": [
+        "MPR4_TerminalAsphalt"
+      ],
+      "bounds_m": [
+        [
+          -150.0,
+          0.0
+        ],
+        [
+          -450.0,
+          -338.79669189453125
+        ],
+        [
+          -1.8414016962051392,
+          -1.0473015308380127
+        ]
+      ],
+      "vertices": 2286,
+      "triangles": 762,
+      "sha256": "5d4b29e1a3076226cb6797a6637a68dd2aedc3e6573de697c4714ce8eed60c56",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "8b848b40580a54b5647ef122bb3ac598314b4b93b0af1bb439f542e432e9b55e"
+    },
+    {
+      "name": "SM_MPRR_Roads_0_-2",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_Roads_0_-2.fbx",
+      "material_roles": [
+        "MPR4_TerminalAsphalt"
+      ],
+      "bounds_m": [
+        [
+          0.0,
+          144.1486053466797
+        ],
+        [
+          -300.0,
+          -150.0
+        ],
+        [
+          -2.8304152488708496,
+          -1.2966772317886353
+        ]
+      ],
+      "vertices": 1746,
+      "triangles": 582,
+      "sha256": "57c73eca337a0ccecb6dc28fadd1118be35a7829b4820058dd204f70468071fa",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "70c5981a88c41741ccedb49aa27e69a94b2a555322f6ba87b4cbc92a027416aa"
+    },
+    {
+      "name": "SM_MPRR_Curblines_-1_-4",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_Curblines_-1_-4.fbx",
+      "material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "bounds_m": [
+        [
+          -150.0,
+          -90.10310363769531
+        ],
+        [
+          -514.107177734375,
+          -450.0
+        ],
+        [
+          -1.0,
+          -0.8716686367988586
+        ]
+      ],
+      "vertices": 894,
+      "triangles": 298,
+      "sha256": "05722b797e780abcdb1aec03d3de12d251ca80bba192ae5e2f38ee72c08011a5",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.9999999999999969
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "b855ed50a85130b1831fa19d89519ab9d5c1e05264e899fae044780e1651fb5d"
+    },
+    {
+      "name": "SM_MPRR_Curblines_-1_-3",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_Curblines_-1_-3.fbx",
+      "material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "bounds_m": [
+        [
+          -150.0,
+          0.0
+        ],
+        [
+          -450.0,
+          -338.3764953613281
+        ],
+        [
+          -1.7258284091949463,
+          -0.9266632199287415
+        ]
+      ],
+      "vertices": 2499,
+      "triangles": 833,
+      "sha256": "e86c6724885281d2a2de30461219be891f3b653b14acf2c782453b9be6ece45c",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "d8c2f7434682f7c40544cc4b896086c8b38a54d63882000dcf918cfe1b3e938a"
+    },
+    {
+      "name": "SM_MPRR_Curblines_0_-3",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_Curblines_0_-3.fbx",
+      "material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "bounds_m": [
+        [
+          0.0,
+          150.0
+        ],
+        [
+          -381.03680419921875,
+          -300.0
+        ],
+        [
+          -2.159600257873535,
+          -1.3264323472976685
+        ]
+      ],
+      "vertices": 696,
+      "triangles": 232,
+      "sha256": "4d667249f7f7066987e1646beca4f0b69be54fb0f62b723503c9e633d59d3b95",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "61484eb53ed347dd04a3eeca1e83ac2f682d720b4ce3b4629671034f76c0af4e"
+    },
+    {
+      "name": "SM_MPRR_Curblines_0_-2",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_Curblines_0_-2.fbx",
+      "material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "bounds_m": [
+        [
+          0.0,
+          149.25860595703125
+        ],
+        [
+          -300.0,
+          -150.0
+        ],
+        [
+          -2.7135026454925537,
+          -1.188828468322754
+        ]
+      ],
+      "vertices": 1344,
+      "triangles": 448,
+      "sha256": "a783e2c27d0df669f377a95b72eabae39fdc4c67a03ee5d309decaa599d20095",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "317b7ccce74e3009152bd4aec2d57d07e2c93c3c01728897e1bdbf0b61f8798d"
+    },
+    {
+      "name": "SM_MPRR_Curblines_1_-2",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_Curblines_1_-2.fbx",
+      "material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "bounds_m": [
+        [
+          161.7009055856088,
+          300.0
+        ],
+        [
+          -300.0,
+          -154.09210205078125
+        ],
+        [
+          -3.400911569595337,
+          -1.3514043092727661
+        ]
+      ],
+      "vertices": 2043,
+      "triangles": 681,
+      "sha256": "3ab2bc562bee2762e554b0dfd7f8a0a0eebdab20f592e1903dd8850f30bcb6b6",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "f16423d706b0e1abfff18a2c8924425395109afc55a047313762ead5ff5a9a3e"
+    },
+    {
+      "name": "SM_MPRR_WhiteEdges_-1_-4",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_WhiteEdges_-1_-4.fbx",
+      "material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "bounds_m": [
+        [
+          -118.20050048828125,
+          -90.70439910888672
+        ],
+        [
+          -513.5418701171875,
+          -450.0
+        ],
+        [
+          -1.0950000286102295,
+          -0.9706547856330872
+        ]
+      ],
+      "vertices": 1053,
+      "triangles": 351,
+      "sha256": "23173233956e3994de43746a5b40148c48160666913d4a45175013582091732e",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.9993318314161019
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "e5f78d5a702208cfb0775d091d6471bab8adce870829ac6a5dc43129df97870e"
+    },
+    {
+      "name": "SM_MPRR_WhiteEdges_-1_-3",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_WhiteEdges_-1_-3.fbx",
+      "material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "bounds_m": [
+        [
+          -150.0,
+          0.0
+        ],
+        [
+          -450.0,
+          -339.4269104003906
+        ],
+        [
+          -1.8097625970840454,
+          -1.023259162902832
+        ]
+      ],
+      "vertices": 3465,
+      "triangles": 1155,
+      "sha256": "218074ffb09e2609f20418a0b1233bd62dfc10cc09b2fb3bd5d1149c3aec0d1e",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "a80b068ab68b8f1ca9f59f991d2c2f2941e071ddfd0d8842509bd86e308546ad"
+    },
+    {
+      "name": "SM_MPRR_WhiteEdges_0_-3",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_WhiteEdges_0_-3.fbx",
+      "material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "bounds_m": [
+        [
+          0.0,
+          150.0
+        ],
+        [
+          -380.2803955078125,
+          -300.0
+        ],
+        [
+          -2.248274803161621,
+          -1.4343162775039673
+        ]
+      ],
+      "vertices": 801,
+      "triangles": 267,
+      "sha256": "43feb31f2fad5cce312c2dbaf58ff8552a7ff7b88708b00e859eb2b1e8ca380f",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "25ce6c95022426336a147f7d43404c9e2228ead7420d05ba092f430cf2fd7cd9"
+    },
+    {
+      "name": "SM_MPRR_WhiteEdges_0_-2",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_WhiteEdges_0_-2.fbx",
+      "material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "bounds_m": [
+        [
+          0.0,
+          138.281005859375
+        ],
+        [
+          -300.0,
+          -150.0
+        ],
+        [
+          -2.8007853031158447,
+          -1.2793298959732056
+        ]
+      ],
+      "vertices": 1203,
+      "triangles": 401,
+      "sha256": "e797c3df3867ffbe1456d81f54b4d3cd82a953a99560f4a487076e15213285fe",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "e851d9b72cbae97d91f311b9598362944a6fd02b855b0f3059190b9307cf4dc1"
+    },
+    {
+      "name": "SM_MPRR_WhiteEdges_1_-2",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_WhiteEdges_1_-2.fbx",
+      "material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "bounds_m": [
+        [
+          162.1706983236439,
+          300.0
+        ],
+        [
+          -300.0,
+          -154.6927032470703
+        ],
+        [
+          -3.48964786529541,
+          -1.4655743837356567
+        ]
+      ],
+      "vertices": 2076,
+      "triangles": 692,
+      "sha256": "9abe000e149eeb62b514e70e9b704d22eb0df0ee818af68c68d3a542f015b85c",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "b6812b4fa966ec9c6b96220112ad30d30579517dc187aae292929dee7b602b04"
+    },
+    {
+      "name": "SM_MPRR_RoadDashes_-1_-4",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_RoadDashes_-1_-4.fbx",
+      "material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "bounds_m": [
+        [
+          -114.98729705810547,
+          -93.71589660644531
+        ],
+        [
+          -511.0627136230469,
+          -452.75860595703125
+        ],
+        [
+          -1.093000054359436,
+          -0.9846654534339905
+        ]
+      ],
+      "vertices": 117,
+      "triangles": 39,
+      "sha256": "7ef0f16f12d9e98432a3d2b521e0a785c4c96e4cede65532f3b83473beb24637",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.9815510286492766
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "b8293720bd82b3cc9d65c655f48d2678faf6a792266fa381f26cc4bb4d7adbd2"
+    },
+    {
+      "name": "SM_MPRR_RoadDashes_-1_-3",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_RoadDashes_-1_-3.fbx",
+      "material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "bounds_m": [
+        [
+          -147.093505859375,
+          -3.3538999557495117
+        ],
+        [
+          -445.7818908691406,
+          -351.53289794921875
+        ],
+        [
+          -1.7020727396011353,
+          -1.0619484186172485
+        ]
+      ],
+      "vertices": 363,
+      "triangles": 121,
+      "sha256": "525e9152e7d5e38781c6e3e6e51704727b4856cae9acd713bebe1a6608c3cc4b",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "28d549a64e5302618428d2cafc8334c82ea602871044c51165bc3a7e2dd109eb"
+    },
+    {
+      "name": "SM_MPRR_RoadDashes_0_-3",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_RoadDashes_0_-3.fbx",
+      "material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "bounds_m": [
+        [
+          0.538100004196167,
+          149.73350524902344
+        ],
+        [
+          -376.21630859375,
+          -302.285888671875
+        ],
+        [
+          -2.187838554382324,
+          -1.4809173345565796
+        ]
+      ],
+      "vertices": 105,
+      "triangles": 35,
+      "sha256": "6307144019e323647a4b5e45404b07e164f5e2a21033d2aec15d2daef0df3b76",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "4a5c028688832276738cd661305d6e82074dff63f6196915017987c8bec2ddd6"
+    },
+    {
+      "name": "SM_MPRR_RoadDashes_0_-2",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_RoadDashes_0_-2.fbx",
+      "material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "bounds_m": [
+        [
+          34.812400817871094,
+          143.4001007080078
+        ],
+        [
+          -296.6145935058594,
+          -150.0
+        ],
+        [
+          -2.7449898719787598,
+          -1.7039237022399902
+        ]
+      ],
+      "vertices": 219,
+      "triangles": 73,
+      "sha256": "bf4033bd999191e37de2116fe25a861453fceafbcbdbd4cf93575cdc77637df8",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "d7de57379158d2890fd8ad695884eb822a39e787c5a0156c515b44675431b3f5"
+    },
+    {
+      "name": "SM_MPRR_RoadDashes_1_-2",
+      "fbx": "SourceAssets/MPR/city_road_removal_20261106/SM_MPRR_RoadDashes_1_-2.fbx",
+      "material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "bounds_m": [
+        [
+          164.3826714829084,
+          300.0
+        ],
+        [
+          -298.2958984375,
+          -157.78030395507812
+        ],
+        [
+          -3.4489657878875732,
+          -1.4879924058914185
+        ]
+      ],
+      "vertices": 381,
+      "triangles": 127,
+      "sha256": "695362adaa18a354989064efdd5a6c8a50c6a8c77392a1169160347e26741a3f",
+      "instance_only": false,
+      "vertex_color_fade": {
+        "attribute": "EdgeFade",
+        "channel": "R",
+        "zero": "original surface",
+        "one": "ground surface",
+        "opaque": true
+      },
+      "vertex_color_attribute": "EdgeFade",
+      "vertex_color_domain": "POINT",
+      "vertex_color_encoding": "LINEAR_RGB_EQUAL",
+      "vertex_color_range": [
+        0.0,
+        0.0
+      ],
+      "disable_shadow_casting": true,
+      "category": "Site",
+      "full_precision_uvs": true,
+      "approved_previous_sha256": "7cc2b0a030c0974cc5727012697c9e8150505e5e5eea6588875230db88a6ab02"
+    }
+  ],
+  "mesh_mappings": [
+    {
+      "name": "SM_MPRR_Rail_-1_-3_Sleepers",
+      "guid": "16846ED94D3BBA63D2F9159664CFD0C1",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_408",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_Rail_-1_-3_Sleepers",
+      "old_material_roles": [
+        "MPR3_Sleepers"
+      ],
+      "old_source_sha256": "9a5921001c5f1dda17d8273a54d0ac79e059f8a443e89b2b8f2877aae790516e",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_Rail_-1_-3_Sleepers",
+      "new_material_roles": [
+        "MPR3_Sleepers"
+      ]
+    },
+    {
+      "name": "SM_MPRR_Rail_0_-3_Sleepers",
+      "guid": "8887AFD04735F5602C6F2DA4A9A53FEC",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_413",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_Rail_0_-3_Sleepers",
+      "old_material_roles": [
+        "MPR3_Sleepers"
+      ],
+      "old_source_sha256": "4e268557d646b5ac5653c214ca85db13364a996a8dd67784ff28b8f422b5aff2",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_Rail_0_-3_Sleepers",
+      "new_material_roles": [
+        "MPR3_Sleepers"
+      ]
+    },
+    {
+      "name": "SM_MPRR_RailCorridor_-1_-3",
+      "guid": "58EB3E5141EA84DA91C2328408EF040C",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_452",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_RailCorridor_-1_-3",
+      "old_material_roles": [
+        "MPR3_Ballast"
+      ],
+      "old_source_sha256": "bce8b57a5305adc7189c8b65d833fc0ffd3423562b0f75c76c01cc87947f45ee",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_RailCorridor_-1_-3",
+      "new_material_roles": [
+        "MPR3_Ballast"
+      ]
+    },
+    {
+      "name": "SM_MPRR_RailCorridor_0_-3",
+      "guid": "6E730EAF44E7EAE526F6B8B40D068C49",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_453",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_RailCorridor_0_-3",
+      "old_material_roles": [
+        "MPR3_Ballast"
+      ],
+      "old_source_sha256": "84547d2debe0377b8624d202da7ca41487ef2137c51b2acc3a9cf2e36ac2d7f8",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_RailCorridor_0_-3",
+      "new_material_roles": [
+        "MPR3_Ballast"
+      ]
+    },
+    {
+      "name": "SM_MPRR_CrossingDeck_0_-2",
+      "guid": "9A836BF24C17D58EB9F916829883A981",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_474",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingDeck_0_-2",
+      "old_material_roles": [
+        "MPR3_Concrete"
+      ],
+      "old_source_sha256": "c73a3535dad129580305ab83386fa5e9addcd30a2d623269f176aa717d0b8ff2",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_CrossingDeck_0_-2",
+      "new_material_roles": [
+        "MPR3_Concrete"
+      ]
+    },
+    {
+      "name": "SM_MPRR_CrossingRamp_0_-2",
+      "guid": "ED3A9C284A1E72950AB98AA431DE0CF7",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_489",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_CrossingRamp_0_-2",
+      "old_material_roles": [
+        "MPR3_Asphalt"
+      ],
+      "old_source_sha256": "5d2e5b059d5286bf68cb7f4848c74c11de4c360d6f4f1fc609be0d6ef413e3c5",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_CrossingRamp_0_-2",
+      "new_material_roles": [
+        "MPR3_Asphalt"
+      ]
+    },
+    {
+      "name": "SM_MPRR_Roads_-1_-4",
+      "guid": "072F1E92446BBB735934DA9F727CB298",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_568",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Roads_-1_-4",
+      "old_material_roles": [
+        "MPR4_TerminalAsphalt"
+      ],
+      "old_source_sha256": "c354a7250ff9fe14d823b101b17ef77cff3a235e201f935f9e8886d710e9e4e2",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_Roads_-1_-4",
+      "new_material_roles": [
+        "MPR4_TerminalAsphalt"
+      ]
+    },
+    {
+      "name": "SM_MPRR_Roads_-1_-3",
+      "guid": "F717280F4687CBB4C9C01DB591CB14A9",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_569",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_-1_-3",
+      "old_material_roles": [
+        "MPR4_TerminalAsphalt"
+      ],
+      "old_source_sha256": "8b848b40580a54b5647ef122bb3ac598314b4b93b0af1bb439f542e432e9b55e",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_Roads_-1_-3",
+      "new_material_roles": [
+        "MPR4_TerminalAsphalt"
+      ]
+    },
+    {
+      "name": "SM_MPRR_Roads_0_-2",
+      "guid": "74B384774B185D800F7AC78E997A91B3",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_577",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Roads_0_-2",
+      "old_material_roles": [
+        "MPR4_TerminalAsphalt"
+      ],
+      "old_source_sha256": "70c5981a88c41741ccedb49aa27e69a94b2a555322f6ba87b4cbc92a027416aa",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_Roads_0_-2",
+      "new_material_roles": [
+        "MPR4_TerminalAsphalt"
+      ]
+    },
+    {
+      "name": "SM_MPRR_Curblines_-1_-4",
+      "guid": "D63528F34C52BAB68DB6B4A9DCD1D15E",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_636",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_-1_-4",
+      "old_material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "old_source_sha256": "b855ed50a85130b1831fa19d89519ab9d5c1e05264e899fae044780e1651fb5d",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_Curblines_-1_-4",
+      "new_material_roles": [
+        "MPR4_TerminalCurb"
+      ]
+    },
+    {
+      "name": "SM_MPRR_Curblines_-1_-3",
+      "guid": "06582D2E40C8C14AA4FDEDADB5EC5AD8",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_637",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_-1_-3",
+      "old_material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "old_source_sha256": "d8c2f7434682f7c40544cc4b896086c8b38a54d63882000dcf918cfe1b3e938a",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_Curblines_-1_-3",
+      "new_material_roles": [
+        "MPR4_TerminalCurb"
+      ]
+    },
+    {
+      "name": "SM_MPRR_Curblines_0_-3",
+      "guid": "977B9B694EB6420EC74A6B988C5C4024",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_644",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_0_-3",
+      "old_material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "old_source_sha256": "61484eb53ed347dd04a3eeca1e83ac2f682d720b4ce3b4629671034f76c0af4e",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_Curblines_0_-3",
+      "new_material_roles": [
+        "MPR4_TerminalCurb"
+      ]
+    },
+    {
+      "name": "SM_MPRR_Curblines_0_-2",
+      "guid": "EA31C63942C298D35BBDBB8A41231DA9",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_645",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_Curblines_0_-2",
+      "old_material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "old_source_sha256": "317b7ccce74e3009152bd4aec2d57d07e2c93c3c01728897e1bdbf0b61f8798d",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_Curblines_0_-2",
+      "new_material_roles": [
+        "MPR4_TerminalCurb"
+      ]
+    },
+    {
+      "name": "SM_MPRR_Curblines_1_-2",
+      "guid": "26ADEC3F4FF207829FDC57B85D676E39",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_653",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_Curblines_1_-2",
+      "old_material_roles": [
+        "MPR4_TerminalCurb"
+      ],
+      "old_source_sha256": "f16423d706b0e1abfff18a2c8924425395109afc55a047313762ead5ff5a9a3e",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_Curblines_1_-2",
+      "new_material_roles": [
+        "MPR4_TerminalCurb"
+      ]
+    },
+    {
+      "name": "SM_MPRR_WhiteEdges_-1_-4",
+      "guid": "FBEC474F4AD1859E8AAD0C9F0090ECC8",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_704",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_-1_-4",
+      "old_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "old_source_sha256": "e5f78d5a702208cfb0775d091d6471bab8adce870829ac6a5dc43129df97870e",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_WhiteEdges_-1_-4",
+      "new_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ]
+    },
+    {
+      "name": "SM_MPRR_WhiteEdges_-1_-3",
+      "guid": "5B2BD45C47CDE1BA355FBD9BE888EC50",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_705",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_-1_-3",
+      "old_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "old_source_sha256": "a80b068ab68b8f1ca9f59f991d2c2f2941e071ddfd0d8842509bd86e308546ad",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_WhiteEdges_-1_-3",
+      "new_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ]
+    },
+    {
+      "name": "SM_MPRR_WhiteEdges_0_-3",
+      "guid": "FA0CE3354BF40089C45A5992F234518D",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_712",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_0_-3",
+      "old_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "old_source_sha256": "25ce6c95022426336a147f7d43404c9e2228ead7420d05ba092f430cf2fd7cd9",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_WhiteEdges_0_-3",
+      "new_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ]
+    },
+    {
+      "name": "SM_MPRR_WhiteEdges_0_-2",
+      "guid": "98786ECC48EAD8C723FC75B08FDCF751",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_713",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_WhiteEdges_0_-2",
+      "old_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "old_source_sha256": "e851d9b72cbae97d91f311b9598362944a6fd02b855b0f3059190b9307cf4dc1",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_WhiteEdges_0_-2",
+      "new_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ]
+    },
+    {
+      "name": "SM_MPRR_WhiteEdges_1_-2",
+      "guid": "A070DB904DCC278BFC046197C9839030",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_721",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_WhiteEdges_1_-2",
+      "old_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "old_source_sha256": "b6812b4fa966ec9c6b96220112ad30d30579517dc187aae292929dee7b602b04",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_WhiteEdges_1_-2",
+      "new_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ]
+    },
+    {
+      "name": "SM_MPRR_RoadDashes_-1_-4",
+      "guid": "35C90BC54430EDB8F91CC3B383D4151C",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_772",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_-1_-4",
+      "old_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "old_source_sha256": "b8293720bd82b3cc9d65c655f48d2678faf6a792266fa381f26cc4bb4d7adbd2",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_RoadDashes_-1_-4",
+      "new_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ]
+    },
+    {
+      "name": "SM_MPRR_RoadDashes_-1_-3",
+      "guid": "2DBF5C86409CD12BA13D5887EE0B4CA9",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_773",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_-1_-3",
+      "old_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "old_source_sha256": "28d549a64e5302618428d2cafc8334c82ea602871044c51165bc3a7e2dd109eb",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_RoadDashes_-1_-3",
+      "new_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ]
+    },
+    {
+      "name": "SM_MPRR_RoadDashes_0_-3",
+      "guid": "23C57DBA45DFBE033F3D0782F8EE9F14",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_780",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_0_-3",
+      "old_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "old_source_sha256": "4a5c028688832276738cd661305d6e82074dff63f6196915017987c8bec2ddd6",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_RoadDashes_0_-3",
+      "new_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ]
+    },
+    {
+      "name": "SM_MPRR_RoadDashes_0_-2",
+      "guid": "A52661344040C98F3C1251BDDB6C6B5B",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_781",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/TransportCleanup20261105/Meshes/SM_MPRR_RoadDashes_0_-2",
+      "old_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "old_source_sha256": "d7de57379158d2890fd8ad695884eb822a39e787c5a0156c515b44675431b3f5",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_RoadDashes_0_-2",
+      "new_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ]
+    },
+    {
+      "name": "SM_MPRR_RoadDashes_1_-2",
+      "guid": "3D3602924B5BF35E19A6C482D28E4D21",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_789",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_RoadDashes_1_-2",
+      "old_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ],
+      "old_source_sha256": "7cc2b0a030c0974cc5727012697c9e8150505e5e5eea6588875230db88a6ab02",
+      "new_mesh": "/Game/MPRWarehouse/CityRoadRemoval20261106/Meshes/SM_MPRR_RoadDashes_1_-2",
+      "new_material_roles": [
+        "MPR4_TerminalWhiteLine"
+      ]
+    }
+  ],
+  "remove_mesh_names": [
+    "SM_MPRR_CrossingDeck_-1_-3",
+    "SM_MPRR_CrossingDeck_0_-3",
+    "SM_MPRR_CrossingDeck_1_-2",
+    "SM_MPRR_CrossingRamp_-1_-3",
+    "SM_MPRR_CrossingRamp_0_-3",
+    "SM_MPRR_CrossingRamp_1_-2"
+  ],
+  "removals": [
+    {
+      "name": "SM_MPRR_CrossingDeck_-1_-3",
+      "guid": "48B16AC14ED9EEAD9AF577A6D3D8E826",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_472",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingDeck_-1_-3",
+      "old_material_roles": [
+        "MPR4_TerminalAsphalt"
+      ],
+      "old_source_sha256": "bebe4470306823248233a15e9ee051f9251971f43b1f2f334042acf56c27f81f"
+    },
+    {
+      "name": "SM_MPRR_CrossingDeck_0_-3",
+      "guid": "C1A53C81476724A9BABE0AA7445F6E80",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_473",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingDeck_0_-3",
+      "old_material_roles": [
+        "MPR3_Concrete",
+        "MPR4_TerminalAsphalt"
+      ],
+      "old_source_sha256": "c209e98b58ae6089a15f849229269e67191cd76e14d6858ecde7f2f0d0d718a4"
+    },
+    {
+      "name": "SM_MPRR_CrossingDeck_1_-2",
+      "guid": "2DC23864481548C7F60E2F8730528F74",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_476",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingDeck_1_-2",
+      "old_material_roles": [
+        "MPR3_Concrete"
+      ],
+      "old_source_sha256": "dbe591a4a2866858705660b51e96a4910ab5f563ef1c5facdd11efcc7e5ccaaf"
+    },
+    {
+      "name": "SM_MPRR_CrossingRamp_-1_-3",
+      "guid": "2957947B4419BEF57D9165A984433011",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_487",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingRamp_-1_-3",
+      "old_material_roles": [
+        "MPR4_TerminalAsphalt"
+      ],
+      "old_source_sha256": "10c0e365af7916da61772911fcdf0a48c770e9e9f2fedae97fc157eb880be726"
+    },
+    {
+      "name": "SM_MPRR_CrossingRamp_0_-3",
+      "guid": "B55FDBC14385E972A2F50BADCB0275C7",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_488",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/CrossingSurface20261105/Meshes/SM_MPRR_CrossingRamp_0_-3",
+      "old_material_roles": [
+        "MPR3_Asphalt",
+        "MPR4_TerminalAsphalt"
+      ],
+      "old_source_sha256": "252285047e1303a9813fad28474aaf4e46387a406fc6b16e8bc0147e88f0cc5d"
+    },
+    {
+      "name": "SM_MPRR_CrossingRamp_1_-2",
+      "guid": "1A29A5224998D01CFF322BBEA7B022C9",
+      "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.StaticMeshActor_491",
+      "component": "StaticMeshComponent0",
+      "old_mesh": "/Game/MPRWarehouse/RebuildB50B57/Site/Meshes/SM_MPRR_CrossingRamp_1_-2",
+      "old_material_roles": [
+        "MPR3_Asphalt"
+      ],
+      "old_source_sha256": "e08b7a9929c59d85c0073a7a8fb63bf259bd789c17c748a2c9723f665af36f36"
+    }
+  ],
+  "baseline": "Saved/MPR/road_solar_20261106/live_before.json.gz",
+  "source_generated_triangles": 15062,
+  "audit": "geometry_validation.json"
+}

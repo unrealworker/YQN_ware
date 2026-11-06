@@ -1,0 +1,238 @@
+{
+  "success": true,
+  "run_id": "20261106T030146624153Z",
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "assets_saved": false,
+  "scope": "Owned UnrealEditor -game offscreen viewport; not PIE, packaged-game, Pixel Streaming, or concurrent-user performance acceptance.",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "warmup_seconds_per_view": 12.0,
+  "sample_seconds": 15.0,
+  "deadline_seconds": 180.0,
+  "timing_source": "Native CSV FrameTime, GameThreadTime, RenderThreadTime and GPUTime; Python/Slate intervals are never frame timing.",
+  "captures": [
+    {
+      "name": "03-city-road",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\road_solar_20261106\\views\\round2\\00_03-city-road_20261106T030146624153Z.png",
+      "sha256": "7f53ac18bf873ddd3f309607b4ca2c61668675064ab14f207fe2b60478197dc4",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "camera": {
+        "position_cm": [
+          24030.170964910023,
+          46790.01017554203,
+          60880.020351084044
+        ],
+        "rotation_deg": [
+          -70.0,
+          -140.0,
+          -0.0
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+        "horizontal_fov_deg": 50.0
+      },
+      "configured_view": [
+        "03-city-road",
+        [
+          70,
+          -325,
+          -2
+        ],
+        65000,
+        -70,
+        -140,
+        false
+      ],
+      "roof_hidden": false,
+      "temporal_warmup_seconds": 12.0,
+      "outside_performance_window": true
+    },
+    {
+      "name": "05-retained-f97",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\road_solar_20261106\\views\\round2\\01_05-retained-f97_20261106T030146624153Z.png",
+      "sha256": "a0cc1e531e51c0e8ed8d89d6ab02c6aa885b55caede3da5579e79a94ae0b0167",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "camera": {
+        "position_cm": [
+          -3158.5634068535437,
+          40805.775512374195,
+          9345.481763884825
+        ],
+        "rotation_deg": [
+          -64.99999999999996,
+          -11.999999999999995,
+          -1.8814583806455145e-15
+        ],
+        "viewport": [
+          1920,
+          1080
+        ],
+        "view_target": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+        "horizontal_fov_deg": 50.0
+      },
+      "configured_view": [
+        "05-retained-f97",
+        [
+          11.819585,
+          -398.831691,
+          -1.7075
+        ],
+        10500,
+        -65,
+        -12,
+        false
+      ],
+      "roof_hidden": false,
+      "temporal_warmup_seconds": 12.0,
+      "outside_performance_window": true
+    }
+  ],
+  "performance": null,
+  "config_sha256": "1003f1602529092ac0899d582210e2a7cc81e3b2226176301e3ef9e9c9be01fc",
+  "config": {
+    "stage": "round2",
+    "views": [
+      [
+        "03-city-road",
+        [
+          70,
+          -325,
+          -2
+        ],
+        65000,
+        -70,
+        -140,
+        false
+      ],
+      [
+        "05-retained-f97",
+        [
+          11.819585,
+          -398.831691,
+          -1.7075
+        ],
+        10500,
+        -65,
+        -12,
+        false
+      ]
+    ],
+    "fov": 50.0,
+    "profile": false
+  },
+  "stage": "round2",
+  "engine_version": "5.8.4-58902052+++UE5+Release-5.8",
+  "map_sha256_before": "dc5e9fb28c84f7563d5c86f8bf7d29d810d43294adb805c61ef548714b6e859d",
+  "script_sha256": "dff414389d4e085b9ed5d6ae5bf2873090c4ddd6d021d4cc7b1b45658d4f444b",
+  "coordinate_convention": "View targets are CAD metres; UE target=(x,-y,z)*100 cm",
+  "launch_flags": [
+    "own",
+    "game",
+    "RenderOffscreen",
+    "MPRProfile"
+  ],
+  "phase": "complete",
+  "elapsed_seconds": 25.468999999997322,
+  "runtime_fixture": {
+    "world": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57",
+    "controller_class": "/Script/Test.GHSWarehousePlayerController",
+    "pawn": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_WarehouseCamera_C_0",
+    "pawn_class": "/Game/GHSNormalWarehouse/Camera/BP_GHS_WarehouseCamera.BP_GHS_WarehouseCamera_C",
+    "camera": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.CameraActor_0",
+    "roof_actor_count": 30,
+    "actor_count": 869,
+    "ghs_hud_absent": true,
+    "ghs_business_actors_absent": true,
+    "business_state_before_camera_changes": {
+      "controller_tick_enabled": true,
+      "pawn_tick_enabled": true,
+      "hud_properties_checked": [
+        "twin_hud_widget",
+        "truck_hud_widget"
+      ],
+      "both_hud_references_null": true,
+      "campus_traffic_null": true,
+      "roof_component_tick_enabled": false,
+      "roof_component_has_ghs_roof": false,
+      "storage_component_tick_enabled": false,
+      "storage_initialized": false,
+      "replay_component_tick_enabled": false,
+      "replay_active": false
+    }
+  },
+  "runtime_state_before": {
+    "controller_tick_enabled": true,
+    "pawn_tick_enabled": true,
+    "hud_properties_checked": [
+      "twin_hud_widget",
+      "truck_hud_widget"
+    ],
+    "both_hud_references_null": true,
+    "campus_traffic_null": true,
+    "roof_component_tick_enabled": false,
+    "roof_component_has_ghs_roof": false,
+    "storage_component_tick_enabled": false,
+    "storage_initialized": false,
+    "replay_component_tick_enabled": false,
+    "replay_active": false
+  },
+  "capture_cvars": {
+    "r.GPUCsvStatsEnabled": 1,
+    "csv.CompressionMode": 0,
+    "t.MaxFPS": 0,
+    "r.VSync": 0,
+    "t.IdleWhenNotForeground": 0,
+    "Slate.bAllowThrottling": 0,
+    "r.DynamicRes.OperationMode": 0,
+    "r.ScreenPercentage": 100
+  },
+  "original_cvars": {
+    "r.GPUCsvStatsEnabled": "0",
+    "csv.CompressionMode": "-1",
+    "t.MaxFPS": "0",
+    "r.VSync": "0",
+    "t.IdleWhenNotForeground": "0",
+    "Slate.bAllowThrottling": "1",
+    "r.DynamicRes.OperationMode": "0",
+    "r.ScreenPercentage": "0"
+  },
+  "render_quality": {
+    "r.Nanite.MaxPixelsPerEdge": "0.25",
+    "r.Nanite.AllowVoxels": "0",
+    "r.Shadow.Virtual.Enable": "1",
+    "r.RayTracing": "0",
+    "r.Lumen.HardwareRayTracing": "1",
+    "r.LumenScene.GlobalSDF.ClipmapExtent": "5000"
+  },
+  "runtime_state_after": {
+    "controller_tick_enabled": true,
+    "pawn_tick_enabled": true,
+    "hud_properties_checked": [
+      "twin_hud_widget",
+      "truck_hud_widget"
+    ],
+    "both_hud_references_null": true,
+    "campus_traffic_null": true,
+    "roof_component_tick_enabled": false,
+    "roof_component_has_ghs_roof": false,
+    "storage_component_tick_enabled": false,
+    "storage_initialized": false,
+    "replay_component_tick_enabled": false,
+    "replay_active": false
+  },
+  "map_sha256_after": "dc5e9fb28c84f7563d5c86f8bf7d29d810d43294adb805c61ef548714b6e859d",
+  "map_unchanged": true,
+  "error": null,
+  "restore_errors": []
+}
