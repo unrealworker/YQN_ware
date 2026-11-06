@@ -53,7 +53,8 @@ function layoutCountries(labels,origin){
 }
 function markerContent(p){
  if(p.ids.length>1)return '<button class="cluster-dot" data-cluster="'+esc(p.id)+'" aria-label="查看此区域'+p.ids.length+'座仓库">'+p.ids.length+'</button>';
- const w=warehouseById.get(p.id);return w?'<span class="poi-line"></span><span class="poi-dot"></span><div class="poi-card"><button class="poi-select" data-select="'+esc(w.id)+'" aria-label="选择'+esc(w.name)+'"><span class="warehouse-icon">'+icon('warehouse')+'</span><span class="row-copy"><strong>'+esc(w.name)+'</strong></span></button><button class="poi-enter" data-enter="'+esc(w.id)+'" aria-label="进入'+esc(w.name)+'">'+icon('chevron')+'</button></div>':'';
+ // The geographic point is an emissive decal on the globe; this overlay only labels it.
+ const w=warehouseById.get(p.id);return w?'<div class="poi-card"><button class="poi-select" data-select="'+esc(w.id)+'" aria-label="选择'+esc(w.name)+'"><span class="warehouse-icon">'+icon('warehouse')+'</span><span class="row-copy"><strong>'+esc(w.name)+'</strong></span></button><button class="poi-enter" data-enter="'+esc(w.id)+'" aria-label="进入'+esc(w.name)+'">'+icon('chevron')+'</button></div>':'';
 }
 function positionLabels(){if(state.phase==='warehouse'){markerViewport='';return;}const origin=stage.getBoundingClientRect();const markers=GlobePolicy.markers(state.pois||[],state.selectedId,origin,64,48),key=markers.map(p=>p.id+':'+p.ids.join(',')).join('|');
  const viewportKey=[origin.left,origin.top,origin.width,origin.height].join(','),sameViewport=viewportKey===markerViewport;

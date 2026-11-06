@@ -14,6 +14,7 @@ class UGHSTwinBrowser;
 class UCanvasPanelSlot;
 class ULevelStreamingDynamic;
 class AGHSWarehouseCameraPawn;
+class AGHSGlobeWarehouseMarkers;
 
 /** Reuses the warehouse CEF surface, with a small return control inside the warehouse. */
 UCLASS()
@@ -80,6 +81,7 @@ private:
     UPROPERTY(Transient) TObjectPtr<UGHSGlobeHUD> GlobeHUD;
     UPROPERTY(Transient) TObjectPtr<ULevelStreamingDynamic> Destination;
     UPROPERTY(Transient) TObjectPtr<AGHSWarehouseCameraPawn> PersistentCamera;
+    UPROPERTY(Transient) TObjectPtr<AGHSGlobeWarehouseMarkers> WarehouseMarkers;
     FGHSWarehouseRegistry Registry;
     TUniquePtr<IGHSWarehouseExperience> Experience;
     FGHSGlobeCurtainGate Curtain;

@@ -1,4 +1,5 @@
 #include "GHSGlobeNavigation.h"
+#include "GHSGlobeWarehouseMarkers.h"
 #include "GHSWarehouseCameraPawn.h"
 #include "GHSWarehouseRoofComponent.h"
 #include "GHSStorageCapacityComponent.h"
@@ -118,6 +119,18 @@ void AGHSGlobePlayerController::BeginPlay()
         }
         if(It->ActorHasTag(TEXT("GHS_GlobeRoot"))){GlobeRoot=*It;GlobeCenter=It->GetActorLocation();InitialGlobeRotation=It->GetActorQuat();}
     }
+    if(GlobeRoot.IsValid())
+    {
+        FActorSpawnParameters Params;
+        Params.Owner=this;Params.OverrideLevel=GetWorld()->PersistentLevel;
+        Params.ObjectFlags|=RF_Transient;
+        WarehouseMarkers=GetWorld()->SpawnActor<AGHSGlobeWarehouseMarkers>(Params);
+        if(WarehouseMarkers)
+        {
+            WarehouseMarkers->Initialize(GlobeRoot.Get(),GlobeRadius,Registry.GetEntries());
+            StageActors.Add({WarehouseMarkers,false,false,false});
+        }
+    }
     GlobeHUD=CreateWidget<UGHSGlobeHUD>(this);
     if(GlobeHUD&&GetWorld()->GetGameViewport())
     {
@@ -143,6 +156,7 @@ void AGHSGlobePlayerController::EndPlay(const EEndPlayReason::Type Reason)
     // Controller replacement within a live world must not orphan its streamed destination.
     if(GetWorld()&&(Reason==EEndPlayReason::Destroyed||Reason==EEndPlayReason::RemovedFromWorld))
     {SetStageVisible(true);UnloadDestination();}
+    if(WarehouseMarkers){WarehouseMarkers->Destroy();WarehouseMarkers=nullptr;}
     if(GlobeViewportWidget&&GetWorld()&&GetWorld()->GetGameViewport())GetWorld()->GetGameViewport()->RemoveViewportWidgetContent(GlobeViewportWidget.ToSharedRef());
     GlobeViewportWidget.Reset();GlobeHUD=nullptr;Super::EndPlay(Reason);
 }
@@ -329,12 +343,13 @@ void AGHSGlobePlayerController::Command(const FString& Json)
     if(Action==TEXT("select")||Action==TEXT("enter"))
     {
         FString Id;if(!O->TryGetStringField(TEXT("id"),Id)||!Registry.Find(Id))return;
-        SelectedId=Id;Error.Empty();Phase=EPhase::Selected;bPreloadRequested=true;PreloadSelected();
+        SelectedId=Id;if(WarehouseMarkers)WarehouseMarkers->SetSelectedWarehouse(SelectedId);
+        Error.Empty();Phase=EPhase::Selected;bPreloadRequested=true;PreloadSelected();
         if(Action==TEXT("enter")&&Phase!=EPhase::Error){bEntryRequested=true;Phase=EPhase::Loading;if(Destination&&!bUnloadRequested&&LoadedId==SelectedId&&Destination->IsLevelLoaded())StartFlight();}
         if(bUnloadTimedOut)Error=TEXT("上一仓库仍在释放资源，释放完成后会自动继续，请稍候");
         PushState();return;
     }
-    if(Action==TEXT("clear")){SelectedId.Empty();Phase=EPhase::Idle;bEntryRequested=false;bPreloadRequested=false;UnloadDestination();Error.Empty();PushState();return;}
+    if(Action==TEXT("clear")){SelectedId.Empty();if(WarehouseMarkers)WarehouseMarkers->SetSelectedWarehouse(SelectedId);Phase=EPhase::Idle;bEntryRequested=false;bPreloadRequested=false;UnloadDestination();Error.Empty();PushState();return;}
     if(Action==TEXT("home")||Action==TEXT("reset"))
     {
         bEntryRequested=false;bInteracting=false;Phase=SelectedId.IsEmpty()?EPhase::Idle:EPhase::Selected;Error.Empty();
