@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "scope": "MPR shared GHS warehouse label, roof dissolve and camera interaction; independent code review plus task-focused automation evidence",
+  "source_report": "Saved/MPR/roof_interaction_20261106/automation/index.json",
+  "source_sha256": "418331f5bcf912756c7fca7f2d4d5ce1c4e13820bc0c2e97a76d2d097709206b",
+  "report_created_on": "2026.11.06-07.57.38",
+  "whole_suite": {
+    "total": 164,
+    "succeeded": 162,
+    "succeeded_with_warnings": 0,
+    "failed": 2,
+    "not_run": 0,
+    "all_passed": false
+  },
+  "task_subset": {
+    "succeeded": 43,
+    "failed": 0,
+    "warnings": 0,
+    "errors": 0,
+    "groups": {
+      "warehouse_roof": 9,
+      "warehouse_camera": 19,
+      "twin_ui_layout": 10,
+      "twin_hud_roof_motion": 2,
+      "registry_isolation": 1,
+      "replay_roof_and_camera_restoration": 2
+    },
+    "passed_tests": [
+      "GHS.Globe.RegistryIsolation",
+      "GHS.Replay.CameraRestoration",
+      "GHS.Replay.RoofVisibilityRestoration",
+      "GHS.TwinHUD.RoofActivationAndInteriorLabelFades",
+      "GHS.TwinHUD.RoofReversalHidesLabelsAndDoesNotReviveEntrance",
+      "GHS.TwinUI.Layout.AddressClockReflowsAndKeepsInputBounds",
+      "GHS.TwinUI.Layout.AddressClockTextFitsActualFont",
+      "GHS.TwinUI.Layout.HighResolutionUsesDesignCoordinates",
+      "GHS.TwinUI.Layout.InitialFrameWaitsForActualViewportGeometry",
+      "GHS.TwinUI.Layout.PanelSlidesFullWidthAndReversesWithoutJump",
+      "GHS.TwinUI.Layout.PreservesSceneAndReadablePanel",
+      "GHS.TwinUI.Layout.ProjectionInputAndSearchShareOneCoordinateSpace",
+      "GHS.TwinUI.Layout.RoofInspectionKeepsFullScene",
+      "GHS.TwinUI.Layout.SceneControlsFollowPanelDuringSlide",
+      "GHS.TwinUI.Layout.SceneSearchFollowsPanelDuringSlide",
+      "GHS.WarehouseCamera.Composition.GroundPlanePan",
+      "GHS.WarehouseCamera.Composition.StartupViewportResizeReframesOverviewOnly",
+      "GHS.WarehouseCamera.Composition.ZoomKeepsRemotePan",
+      "GHS.WarehouseCamera.Focus.ExplicitLongDurationAndCurrentPose",
+      "GHS.WarehouseCamera.Focus.ExternalTargetGroundDragCannotClampOrExpandOutwards",
+      "GHS.WarehouseCamera.Focus.GroundPanAndLegacyResetPreserveContract",
+      "GHS.WarehouseCamera.Focus.HighAltitudeOrbitZoomAndReset",
+      "GHS.WarehouseCamera.Focus.ModelCenterAndFramingSurviveOrbitAndZoom",
+      "GHS.WarehouseCamera.Focus.OrbitModeRejectsGroundPan",
+      "GHS.WarehouseCamera.Focus.SiteSpecificOverviewSharesNavigation",
+      "GHS.WarehouseCamera.Focus.UnifiedEaseAndInterruption",
+      "GHS.WarehouseCamera.HUD.ActualSpringArmControlsAggregation",
+      "GHS.WarehouseCamera.Input.CancelFlushAndHome",
+      "GHS.WarehouseCamera.Input.MiddleClickClearsTwinSelection",
+      "GHS.WarehouseCamera.Input.MiddleClickResetsOverview",
+      "GHS.WarehouseCamera.Input.MouseGestures",
+      "GHS.WarehouseCamera.Input.RejectNonFiniteValues",
+      "GHS.WarehouseCamera.Input.TwinFastRelease",
+      "GHS.WarehouseCamera.MapDrag.Cancellation",
+      "GHS.WarehouseRoof.FastUpgradeNeverRestartsOrSlowsOpening",
+      "GHS.WarehouseRoof.InvalidDeltaAndImmediateRestoreRemainStable",
+      "GHS.WarehouseRoof.ManualRevealKeepsInteriorLockedUntilComplete",
+      "GHS.WarehouseRoof.MaterialOverrideAndIdleTickLifecycle",
+      "GHS.WarehouseRoof.MissingRoofMapDoesNotLockInteriorOrTick",
+      "GHS.WarehouseRoof.MPRPickingPreservesSteppedFootprint",
+      "GHS.WarehouseRoof.MPRSkinsSolarAndInstancedLightsShareRevealAndRestore",
+      "GHS.WarehouseRoof.PickingPreservesOfficeNotchAndTransform",
+      "GHS.WarehouseRoof.ReversalPreservesApertureAndRemainingTravel"
+    ]
+  },
+  "other_task_failures": [
+    {
+      "test": "GHS.Globe.CountrySurfaceLabels",
+      "state": "Fail",
+      "errors": 2,
+      "warnings": 1,
+      "cause": "Missing /Game/GlobeNavigation/Materials/M_CountrySurfaceLabel; configured country decal count expected 14 but was 0.",
+      "attribution": "Concurrent globe surface-label work; outside the MPR interaction changes."
+    },
+    {
+      "test": "GHS.Globe.SurfaceMarkers",
+      "state": "Fail",
+      "errors": 4,
+      "warnings": 0,
+      "cause": "Earth static mesh lacks Allow CPU Access; surface anchor count expected 2 but was 0, and the warehouse surface intersection assertion failed.",
+      "attribution": "Concurrent globe surface-marker asset work; outside the MPR interaction changes."
+    }
+  ],
+  "code_review": {
+    "mode": "Read-only review; this summary is the only reviewer-authored file.",
+    "findings": [
+      {
+        "priority": "P2",
+        "file": "Source/Test/GHSGlobeNavigation.cpp",
+        "symbol": "AGHSGlobePlayerController::TickSmokeTest / CheckReturned",
+        "issue": "The return smoke check still reflected the removed RoofActor member, causing a false failure after the multipart roof refactor.",
+        "status": "Fixed in the reviewed working tree.",
+        "resolution": "Checks RoofMesh is null, RoofParts has zero entries, and captured multipart visibility state is empty; preserves strong-reference cleanup validation."
+      }
+    ],
+    "checked": [
+      "MPR footprint matches all 16 CAD points after Y mirroring and centimetre conversion; roof plane 1340 cm matches the shell generator.",
+      "Multipart roof state retains source materials and dynamic instances through UPROPERTY; HISM components participate in the shared scan and restore.",
+      "MPR material-template resolution fails before replacing materials or opening when any required template is unavailable.",
+      "Replay and world reset restore per-part visibility and original material objects; GHS footprint, dissolve timing and click-without-camera-flight behavior remain intact.",
+      "Inspection HUD does not create the GHS business browser, refresh business scene data or spawn traffic; MPR entry camera and Home overview retain catalog values.",
+      "git diff --check passed during the independent review."
+    ]
+  },
+  "limits": [
+    "This file records automation and code-review evidence only; native rendering, frame-rate captures and globe-to-MPR round-trip results are recorded separately.",
+    "Passing the selected 43 tests does not mean the complete 164-test suite passed."
+  ]
+}

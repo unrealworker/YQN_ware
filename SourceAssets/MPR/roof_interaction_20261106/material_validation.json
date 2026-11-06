@@ -1,0 +1,62 @@
+{
+  "success": true,
+  "variants": [
+    {
+      "source": "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarCells",
+      "target": "/Game/MPRWarehouse/Roof/ScanReveal/M_Scan_M_MPRH_SolarCells",
+      "source_sha256": "6e130c62fde0cefc2110b539d3e7fdab7c2e12c4b15e41024039c7d2121f90db",
+      "reused": false,
+      "expression_count": 21
+    },
+    {
+      "source": "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarCellsLight",
+      "target": "/Game/MPRWarehouse/Roof/ScanReveal/M_Scan_M_MPRH_SolarCellsLight",
+      "source_sha256": "fa353e3d57c5dedc48281f947ed548d8a22927507104d0d5e6e824048c438b15",
+      "reused": false,
+      "expression_count": 21
+    },
+    {
+      "source": "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarCellsShade",
+      "target": "/Game/MPRWarehouse/Roof/ScanReveal/M_Scan_M_MPRH_SolarCellsShade",
+      "source_sha256": "3b7f1edc1ea7834f4c8e51e544117963730f090c0ed6f88d428e8df3bb80cd01",
+      "reused": false,
+      "expression_count": 21
+    },
+    {
+      "source": "/Game/MPRWarehouse/Hierarchy20261105/Materials/M_MPRH_SolarFrame",
+      "target": "/Game/MPRWarehouse/Roof/ScanReveal/M_Scan_M_MPRH_SolarFrame",
+      "source_sha256": "7e51f132e3f0354d3a13da33414fb2c16953dcb3f329b9982da8f72a8b449c11",
+      "reused": false,
+      "expression_count": 21
+    },
+    {
+      "source": "/Game/MPRWarehouse/RebuildB50B57/Materials/M_MPR4_PBRTextured",
+      "target": "/Game/MPRWarehouse/Roof/ScanReveal/M_Scan_M_MPR4_PBRTextured",
+      "source_sha256": "15175ddc22ad54a5fd15f405606a6ae19e83dcadad90c7b25f25f51f0fd830d2",
+      "reused": false,
+      "expression_count": 30
+    },
+    {
+      "source": "/Game/MPRWarehouse/ReferenceV4/Materials/M_MPR4_PBRSolid",
+      "target": "/Game/MPRWarehouse/Roof/ScanReveal/M_Scan_M_MPR4_PBRSolid",
+      "source_sha256": "57bd88c718d349646bb2a4e082e80b904b0f1918ff47a743d852ea2050d2683b",
+      "reused": false,
+      "expression_count": 25
+    }
+  ],
+  "shader_sha256": "dc6f67c195b7f715d0b2b988a1c7631041ab10acbf26338d2410d7f640be7b1e",
+  "shader": "Scripts/ghs/roof_scan_shader.hlsl",
+  "new_assets": {
+    "Content/MPRWarehouse/Roof/ScanReveal/M_Scan_M_MPR4_PBRSolid.uasset": "9d3aff8e451c9bbc64019023c8857f247589783cd7929fac5ae8ff729a9919c7",
+    "Content/MPRWarehouse/Roof/ScanReveal/M_Scan_M_MPR4_PBRTextured.uasset": "07add8659fcff064b1ca7de8d02f72e5245b03daa4e5b4301c80c11933ef689e",
+    "Content/MPRWarehouse/Roof/ScanReveal/M_Scan_M_MPRH_SolarCells.uasset": "effffaa95f0d6686dbad2f829de820e24c8209f349c1239b90dcbf890137765b",
+    "Content/MPRWarehouse/Roof/ScanReveal/M_Scan_M_MPRH_SolarCellsLight.uasset": "484658a22837bcf59380e855edebb91def0b90ea2a8dc04dd5fe8091bcab908e",
+    "Content/MPRWarehouse/Roof/ScanReveal/M_Scan_M_MPRH_SolarCellsShade.uasset": "57771b6163e8e2079208734e221368ae58f8316dda43ec135c010643dc0b28a3",
+    "Content/MPRWarehouse/Roof/ScanReveal/M_Scan_M_MPRH_SolarFrame.uasset": "dbe9bf3b31440559c61383e81cea4c704cd89d5fa4ef19a994d671a4acd31b70"
+  },
+  "protected_packages": 1884,
+  "map_unchanged": true,
+  "originals_unchanged": true,
+  "manual_seconds": 0.8,
+  "restore_seconds": 0.55
+}

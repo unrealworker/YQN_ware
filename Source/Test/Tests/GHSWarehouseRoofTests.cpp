@@ -6,6 +6,7 @@
 #include "Engine/StaticMeshActor.h"
 #include "Engine/StaticMesh.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/HierarchicalInstancedStaticMeshComponent.h"
 #include "Materials/MaterialInterface.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "GHSAutomationTestFlags.h"
@@ -168,6 +169,123 @@ bool FGHSRoofRayShape::RunTest(const FString&)
     TestTrue(TEXT("Picking follows roof rotation, scale and translation"),
         UGHSWarehouseRoofComponent::RayHitsRoofFootprint(Moved.TransformPosition(FVector(0,0,5000)),
             Moved.TransformVector(FVector(0,0,-1)).GetSafeNormal(),Moved));
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMPRRoofRayShape,
+    "GHS.WarehouseRoof.MPRPickingPreservesSteppedFootprint", GHSWarehouseRoofTests::Flags)
+bool FMPRRoofRayShape::RunTest(const FString&)
+{
+    const auto Hit=[](double X,double Y)
+    { return UGHSWarehouseRoofComponent::RayHitsMPRRoofFootprint(FVector(X,Y,5000),FVector(0,0,-1),FTransform::Identity); };
+    TestTrue(TEXT("Main roof is clickable without physics"),Hit(0,0));
+    TestTrue(TEXT("Northwest projecting corner included"),Hit(-17500,-8000));
+    TestFalse(TEXT("North central setback excluded"),Hit(0,-8000));
+    TestTrue(TEXT("Eastern first tier included"),Hit(17500,1000));
+    TestFalse(TEXT("Outside eastern first step excluded"),Hit(17500,3000));
+    TestTrue(TEXT("Eastern middle tier included"),Hit(16000,4000));
+    TestFalse(TEXT("Outside middle step excluded"),Hit(16000,6000));
+    TestTrue(TEXT("Eastern lower tier included"),Hit(14500,6000));
+    TestFalse(TEXT("Outside lowest step excluded"),Hit(14500,7500));
+    TestTrue(TEXT("Southwest projecting corner included"),Hit(-17500,9000));
+    TestFalse(TEXT("Southern apron excluded"),Hit(0,9000));
+    TestFalse(TEXT("Background warehouse excluded"),Hit(0,-20000));
+    TestFalse(TEXT("Upward ray is not a hit"),UGHSWarehouseRoofComponent::RayHitsMPRRoofFootprint(
+        FVector(0,0,5000),FVector(0,0,1),FTransform::Identity));
+    TestFalse(TEXT("Parallel ray is not a hit"),UGHSWarehouseRoofComponent::RayHitsMPRRoofFootprint(
+        FVector(0,0,5000),FVector(1,0,0),FTransform::Identity));
+    const FTransform Moved(FRotator(0,37,0),FVector(400,-600,170),FVector(1.2,.8,1.1));
+    TestTrue(TEXT("MPR click plane follows placement transform"),UGHSWarehouseRoofComponent::RayHitsMPRRoofFootprint(
+        Moved.TransformPosition(FVector(0,0,5000)),Moved.TransformVector(FVector(0,0,-1)).GetSafeNormal(),Moved));
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMPRRoofMultiPartLifecycle,
+    "GHS.WarehouseRoof.MPRSkinsSolarAndInstancedLightsShareRevealAndRestore", GHSWarehouseRoofTests::Flags)
+bool FMPRRoofMultiPartLifecycle::RunTest(const FString&)
+{
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);
+    if(!TestNotNull(TEXT("Fixture world"),World) || !GEngine) return false;
+    GEngine->CreateNewWorldContext(EWorldType::Game).SetCurrentWorld(World);
+    World->InitializeActorsForPlay(FURL());
+    auto* Skin=LoadObject<UStaticMesh>(nullptr,TEXT("/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_RoofSkin_00.SM_MPR4_RoofSkin_00"));
+    auto* Solar=LoadObject<UStaticMesh>(nullptr,TEXT("/Game/MPRWarehouse/SolarUnits20261106/Meshes/SM_MPRSU_SolarBank_00_0.SM_MPRSU_SolarBank_00_0"));
+    auto* Light=LoadObject<UStaticMesh>(nullptr,TEXT("/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_RoofLight.SM_MPR4_RoofLight"));
+    TestNotNull(TEXT("Real MPR skin asset"),Skin);TestNotNull(TEXT("Real MPR photovoltaic asset"),Solar);TestNotNull(TEXT("Real MPR roof light asset"),Light);
+    AStaticMeshActor* Main=World->SpawnActor<AStaticMeshActor>();Main->Tags.Add(TEXT("MPR_Roof"));
+    Main->GetStaticMeshComponent()->SetStaticMesh(Skin);
+    AStaticMeshActor* PV=World->SpawnActor<AStaticMeshActor>();PV->Tags.Add(TEXT("MPR_Roof"));
+    PV->GetStaticMeshComponent()->SetStaticMesh(Solar);
+    AStaticMeshActor* HiddenPV=World->SpawnActor<AStaticMeshActor>();HiddenPV->Tags.Add(TEXT("MPR_Roof"));
+    HiddenPV->GetStaticMeshComponent()->SetStaticMesh(Solar);
+    HiddenPV->SetActorHiddenInGame(true);HiddenPV->GetStaticMeshComponent()->SetVisibility(false);
+    HiddenPV->GetStaticMeshComponent()->SetHiddenInGame(true);
+    AActor* Lights=World->SpawnActor<AActor>();Lights->Tags.Add(TEXT("MPR_Roof"));
+    auto* Instances=NewObject<UHierarchicalInstancedStaticMeshComponent>(Lights);
+    Lights->AddInstanceComponent(Instances);Lights->SetRootComponent(Instances);
+    Instances->SetStaticMesh(Light);Instances->RegisterComponent();
+    Instances->AddInstance(FTransform(FVector(-12000,1000,1340)));
+    Instances->AddInstance(FTransform(FVector(-10000,2000,1340)));
+    AStaticMeshActor* Context=World->SpawnActor<AStaticMeshActor>();
+    Context->GetStaticMeshComponent()->SetStaticMesh(Skin);
+    // Unrelated, untagged background buildings must not share the reveal.
+    auto* Source=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_RoofMembrane.MI_SC_MPR4_RoofMembrane"));
+    TestNotNull(TEXT("MPR material override source"),Source);
+    auto* Original=Source?UMaterialInstanceDynamic::Create(Source,Main):nullptr;
+    const FLinearColor UserTint(.41f,.63f,.71f,1.f);
+    if(Original) {Original->SetVectorParameterValue(TEXT("Tint"),UserTint);Original->SetScalarParameterValue(TEXT("Roughness"),.37f);}
+    Main->GetStaticMeshComponent()->SetMaterial(0,Original);
+    const TArray<UStaticMeshComponent*> Meshes={Main->GetStaticMeshComponent(),PV->GetStaticMeshComponent(),Instances,HiddenPV->GetStaticMeshComponent()};
+    TArray<TArray<UMaterialInterface*>> Sources;
+    for(auto* Mesh:Meshes)
+    {
+        TArray<UMaterialInterface*> Row;
+        for(int32 Slot=0;Slot<Mesh->GetNumMaterials();++Slot) Row.Add(Mesh->GetMaterial(Slot));
+        Sources.Add(Row);
+    }
+    AActor* Owner=World->SpawnActor<AActor>();
+    auto* Component=NewObject<UGHSWarehouseRoofComponent>(Owner);
+    Owner->AddInstanceComponent(Component);Component->RegisterComponent();Component->InitializeRoof();Owner->DispatchBeginPlay();
+    TestTrue(TEXT("MPR roof group discovered"),Component->HasRoof());
+    TestTrue(TEXT("MPR opening resolves every material template"),Component->OpenRoof());
+    Component->TickComponent(.4f,LEVELTICK_All,nullptr);
+    FVector4 FirstCenter(0,0,0,0),FirstAxis(0,0,0,0);bool bFirst=true;
+    for(auto* Mesh:Meshes) for(int32 Slot=0;Slot<Mesh->GetNumMaterials();++Slot)
+    {
+        auto* MID=Cast<UMaterialInstanceDynamic>(Mesh->GetMaterial(Slot));
+        if(!TestNotNull(TEXT("Every skin, photovoltaic and HISM slot has a private reveal"),MID)) continue;
+        TestTrue(TEXT("Every MPR reveal is masked"),MID->GetBlendMode()==BLEND_Masked);
+        TestEqual(TEXT("Every slot shares the same clock"),MID->K2_GetScalarParameterValue(TEXT("RoofOpenProgress")),.5f);
+        const auto Center=MID->K2_GetVectorParameterValue(TEXT("RoofCenter"));
+        const auto Axis=MID->K2_GetVectorParameterValue(TEXT("RoofAxisInvExtent"));
+        if(bFirst) {FirstCenter=FVector4(Center.R,Center.G,Center.B,Center.A);FirstAxis=FVector4(Axis.R,Axis.G,Axis.B,Axis.A);bFirst=false;}
+        TestTrue(TEXT("Separate pieces use the same scan center"),FVector4(Center.R,Center.G,Center.B,Center.A).Equals(FirstCenter));
+        TestTrue(TEXT("Separate pieces use the same scan axis and extent"),FVector4(Axis.R,Axis.G,Axis.B,Axis.A).Equals(FirstAxis));
+    }
+    if(auto* MID=Cast<UMaterialInstanceDynamic>(Main->GetStaticMeshComponent()->GetMaterial(0)))
+        TestTrue(TEXT("MPR private material preserves the user tint"),MID->K2_GetVectorParameterValue(TEXT("Tint")).Equals(UserTint));
+    const auto Saved=Component->CaptureReplayState();
+    Component->TickComponent(.4f,LEVELTICK_All,nullptr);
+    TestTrue(TEXT("All three roof actors hide at the same endpoint"),Main->IsHidden() && PV->IsHidden() && Lights->IsHidden());
+    TestFalse(TEXT("Background warehouse stays visible"),Context->IsHidden());
+    TestFalse(TEXT("Opened group does not tick"),Component->IsComponentTickEnabled());
+    TestEqual(TEXT("HISM instances are preserved"),Instances->GetInstanceCount(),2);
+    Component->RestoreReplayState(Saved,true);
+    TestEqual(TEXT("Replay restores partial reveal"),Component->GetOpenProgress(),.5f);
+    TestTrue(TEXT("Replay restores every roof actor visibility"),!Main->IsHidden() && !PV->IsHidden() && !Lights->IsHidden());
+    Component->RestoreRoof();Component->TickComponent(.275f,LEVELTICK_All,nullptr);
+    TestTrue(TEXT("Animated close completes"),Component->IsRoofClosed());
+    for(int32 I=0;I<Meshes.Num();++I) for(int32 Slot=0;Slot<Sources[I].Num();++Slot)
+        TestTrue(TEXT("Close restores each original material object"),Meshes[I]->GetMaterial(Slot)==Sources[I][Slot]);
+    Component->OpenRoof();Component->TickComponent(.2f,LEVELTICK_All,nullptr);Component->ResetForWorld();
+    TestFalse(TEXT("World teardown detaches the whole group"),Component->HasRoof());
+    TestFalse(TEXT("World teardown stops ticking"),Component->IsComponentTickEnabled());
+    for(int32 I=0;I<Meshes.Num();++I) for(int32 Slot=0;Slot<Sources[I].Num();++Slot)
+        TestTrue(TEXT("Teardown restores each original material object"),Meshes[I]->GetMaterial(Slot)==Sources[I][Slot]);
+    TestTrue(TEXT("Teardown restores every actor"),!Main->IsHidden() && !PV->IsHidden() && !Lights->IsHidden());
+    TestTrue(TEXT("Teardown preserves authored hidden and invisible parts"),HiddenPV->IsHidden() &&
+        !HiddenPV->GetStaticMeshComponent()->IsVisible() && HiddenPV->GetStaticMeshComponent()->bHiddenInGame);
+    GEngine->DestroyWorldContext(World);World->DestroyWorld(false);
     return true;
 }
 

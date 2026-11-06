@@ -35,6 +35,12 @@ struct FGHSTwinLayout
         }
         return L;
     }
+    static FGHSTwinLayout RoofInspection(FVector2D Viewport)
+    {
+        FGHSTwinLayout L;L.HeaderHeight=0;L.ScenePosition=FVector2D::ZeroVector;
+        L.SceneSize=FVector2D(FMath::Max(1.,Viewport.X),FMath::Max(1.,Viewport.Y));
+        L.PanelPosition=L.SceneSize;L.PanelSize=FVector2D::ZeroVector;return L;
+    }
     bool IsScenePoint(FVector2D P) const
     {
         return P.X >= ScenePosition.X && P.Y >= ScenePosition.Y && P.X < ScenePosition.X+SceneSize.X && P.Y < ScenePosition.Y+SceneSize.Y;

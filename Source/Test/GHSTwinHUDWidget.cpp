@@ -187,6 +187,7 @@ TSharedRef<SWidget> UGHSTwinHUDWidget::RebuildWidget()
     Root->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
     Root->SetClipping(EWidgetClipping::ClipToBounds);
     WidgetTree->RootWidget=Root;
+    if(bRoofInspectionOnly) return Super::RebuildWidget();
     Panel=WidgetTree->ConstructWidget<UGHSTwinBrowser>(UGHSTwinBrowser::StaticClass(),TEXT("BusinessPanel"));
     PanelSlot=Root->AddChildToCanvas(Panel);
     PanelSlot->SetPosition(FVector2D(1440,64)); PanelSlot->SetSize(FVector2D(480,1016));
@@ -214,12 +215,19 @@ void UGHSTwinHUDWidget::NativeConstruct()
     if (Panel) Panel->Bind(this);
     if (ReplayOverlay) ReplayOverlay->Bind(this);
     bDiagnostics=FParse::Param(FCommandLine::Get(),TEXT("TwinDiagnostics"));
+    if(bRoofInspectionOnly) return;
     SceneData.Refresh(GetWorld(),true);
     NextRefresh=GetWorld()->GetTimeSeconds()+2;
     UE_LOG(LogTemp,Display,TEXT("GHS_TWIN_UI_STARTED %s"),*GetWorld()->GetMapName());
 }
 void UGHSTwinHUDWidget::NativeDestruct() { SceneData.Refresh(nullptr); PreviousPositions.Empty(); LabelAges.Empty(); Labels.Empty(); VisibleLabels.Empty(); PreviousVisibleLabels.Empty(); Super::NativeDestruct(); }
-FString UGHSTwinHUDWidget::GetSnapshot() const { return SceneData.SnapshotJson(SelectedId); }
+FString UGHSTwinHUDWidget::GetSnapshot() const
+{
+    if(!bRoofInspectionOnly) return SceneData.SnapshotJson(SelectedId);
+    auto Snapshot=MakeShared<FJsonObject>();Snapshot->SetStringField(TEXT("mode"),TEXT("roof-inspection"));
+    Snapshot->SetStringField(TEXT("warehouse"),WarehouseTitle);
+    FString Json;FJsonSerializer::Serialize(Snapshot,TJsonWriterFactory<>::Create(&Json));return Json;
+}
 void UGHSTwinHUDWidget::EvaluateDiagnostics(const FString& Script,bool bReplay)
 {
     auto* Target=bReplay?ReplayOverlay.Get():Panel.Get();
@@ -233,8 +241,11 @@ FString UGHSTwinHUDWidget::GetSceneControlsState() const
     Json->SetBoolField(TEXT("building"),!R || R->IsBuildingVisible());
     Json->SetBoolField(TEXT("racks"),bRacks);Json->SetBoolField(TEXT("equipment"),bEquipment);Json->SetBoolField(TEXT("pois"),bShowPOIs);
     Json->SetStringField(TEXT("density"),Density);Json->SetNumberField(TEXT("sequence"),double(SettingsSequence));
-    Json->SetNumberField(TEXT("rackCapacity"),Capacity?Capacity->GetRackCapacity():.8);
-    Json->SetNumberField(TEXT("floorCapacity"),Capacity?Capacity->GetFloorCapacity():1.);
+    if(!bRoofInspectionOnly)
+    {
+        Json->SetNumberField(TEXT("rackCapacity"),Capacity?Capacity->GetRackCapacity():.8);
+        Json->SetNumberField(TEXT("floorCapacity"),Capacity?Capacity->GetFloorCapacity():1.);
+    }
     Json->SetBoolField(TEXT("roofClosed"),R && R->IsRoofClosed());Json->SetBoolField(TEXT("roofOpening"),R && R->IsOpening());
     Json->SetBoolField(TEXT("roofClosing"),R && R->IsClosing());
     FString Text;FJsonSerializer::Serialize(Json,TJsonWriterFactory<>::Create(&Text));return Text;
@@ -334,6 +345,7 @@ bool UGHSTwinHUDWidget::IsScenePoint(FVector2D Position) const
 {
     if(bInitialLayoutPending) return false;
     Position=Viewport.ToLogical(Position);
+    if(bRoofInspectionOnly) return Layout.IsScenePoint(Position) && !Inside(Position,ViewSize-FVector2D(60,156),FVector2D(40,132));
     if(IsReplayActive() && ReplayOverlaySlot && Inside(Position,ReplayOverlaySlot->GetPosition(),ReplayOverlaySlot->GetSize())) return false;
     if(auto* Replay=ReplaySession();Replay && Replay->IsExitPending()) return false;
     if(!Inside(Position,FVector2D(0,Layout.HeaderHeight),FVector2D(ViewSize.X,ViewSize.Y-Layout.HeaderHeight))) return false;
@@ -363,6 +375,7 @@ void UGHSTwinHUDWidget::SearchChanged(const FText& Text)
 { PendingSearchText=Text.ToString().Left(128); bSearchPending=!bStreamSearchApplying; }
 void UGHSTwinHUDWidget::SetSearchOpen(bool bOpen)
 {
+    if(bRoofInspectionOnly) return;
     bSearchOpen=bOpen;bSearchStateDirty=true;if(!bStreamSearchApplying) {SearchRequestId=0;SearchClientId.Empty();}
     if(bOpen) {bSearchIsRemote=bStreamSearchApplying;bWarehouseMenuOpen=false;RefreshSearch();}
     PushSearchState(true);
@@ -449,6 +462,7 @@ void UGHSTwinHUDWidget::PushSearchState(bool bForce)
 }
 void UGHSTwinHUDWidget::HandleStreamSearch(const FString& Json)
 {
+    if(bRoofInspectionOnly) return;
     if(Json.Len()>4096) return;
     // The UE 5.4 browser frontend can reserve UTF-8-sized space while writing
     // UTF-16 code units. Chinese payloads consequently arrive with raw NUL
@@ -493,6 +507,15 @@ void UGHSTwinHUDWidget::Command(const FString& Json)
     TSharedPtr<FJsonObject> Object;
     if(Json.Len()>16384 || !FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Json),Object) || !Object) return;
     FString Action,Id; Object->TryGetStringField(TEXT("action"),Action); Object->TryGetStringField(TEXT("id"),Id);
+    if(bRoofInspectionOnly)
+    {
+        if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwningPlayer())) PC->CancelCameraDrag();
+        if(Action==TEXT("overview")) Overview();
+        else if(Action==TEXT("openWarehouse")) OpenWarehouse();
+        else if(Action==TEXT("zoomIn") || Action==TEXT("zoomOut"))
+            if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn())) Cam->ZoomSteps(Action==TEXT("zoomIn")?1:-1);
+        return;
+    }
     if(Action.StartsWith(TEXT("replay"))) {HandleReplayCommand(Action,Object);return;}
     if(IsReplayActive() && Action!=TEXT("report") && Action!=TEXT("ready") && Action!=TEXT("zoomIn") && Action!=TEXT("zoomOut") && Action!=TEXT("clear"))
         if(GuardReplayOperation(Json)) return;
@@ -621,7 +644,7 @@ void UGHSTwinHUDWidget::UpdateWarehousePOI()
     const FVector2D Size=WarehousePOISize;
     FVector2D At=Anchor-FVector2D(Size.X*.5,104);
     At.X=FMath::Clamp(At.X,Layout.ScenePosition.X+12,FMath::Max(Layout.ScenePosition.X+12,Layout.ScenePosition.X+Layout.SceneSize.X-Size.X-12));
-    At.Y=FMath::Max(At.Y,Layout.HeaderHeight+112.);
+    At.Y=FMath::Max(At.Y,bRoofInspectionOnly?12.:Layout.HeaderHeight+112.);
     if(!Layout.IsScenePoint(At+Size)) return;
     if(IsSceneSearchVisible() && At.X<GetSceneSearchPosition().X+GetSceneSearchSize().X && At.X+Size.X>GetSceneSearchPosition().X && At.Y<GetSceneSearchPosition().Y+GetSceneSearchSize().Y) return;
     WarehousePOIPosition=At; WarehousePOIAnchor=Anchor; bWarehousePOIVisible=true;
@@ -645,7 +668,7 @@ void UGHSTwinHUDWidget::Overview()
     POICadence.Invalidate();
     if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn()))
     {
-        const auto Destination=FGHSTwinLayout::Calculate(ViewSize,bPanelCollapsed);
+        const auto Destination=bRoofInspectionOnly?FGHSTwinLayout::RoofInspection(ViewSize):FGHSTwinLayout::Calculate(ViewSize,bPanelCollapsed);
         Cam->FrameOverview(ViewSize,Destination.ScenePosition,Destination.SceneSize,bInitialViewPending?0.f:.85f);
     }
 }
@@ -687,6 +710,17 @@ bool UGHSTwinHUDWidget::HandleChromeClick(FVector2D Position)
     if(bInitialLayoutPending) return false;
     if(auto* Replay=ReplaySession();Replay && Replay->IsExitPending()) return true;
     Position=Viewport.ToLogical(Position);
+    if(bRoofInspectionOnly)
+    {
+        const FVector2D At=ViewSize-FVector2D(60,156);
+        for(int32 I=0;I<3;++I) if(Inside(Position,At+FVector2D(0,I*46),FVector2D(40,40)))
+        {
+            if(I==0) Overview();
+            else if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn())) Cam->ZoomSteps(I==1?1:-1);
+            return true;
+        }
+        return false;
+    }
     if(IsSceneSearchVisible() && bSearchOpen && !bSearchIsRemote && Inside(Position,SearchLayout().Position,SearchLayout().Size))
     {
         const int32 Row=SearchLayout().RowAt(Position),Index=Row==INDEX_NONE?INDEX_NONE:SearchFirstVisible+Row;
@@ -772,6 +806,18 @@ void UGHSTwinHUDWidget::NativeTick(const FGeometry& Geometry,float DeltaSeconds)
     // This is a geometry condition, not a timer, and does not alter later resizes.
     if(bInitialLayoutPending && !Viewport.MatchesGeometry(AllocatedSize)) return;
     bInitialLayoutPending=false;
+    if(bRoofInspectionOnly)
+    {
+        const bool bResized=!ViewSize.Equals(AllocatedSize,.5);
+        ViewSize=AllocatedSize;Viewport.LogicalSize=ViewSize;Layout=FGHSTwinLayout::RoofInspection(ViewSize);
+        if(bInitialViewPending && GetOwningPlayerPawn()) {Overview();bInitialViewPending=false;}
+        else if(bResized)
+            if(auto* Cam=Cast<AGHSWarehouseCameraPawn>(GetOwningPlayerPawn());Cam && Cam->IsOverviewFraming())
+                Cam->FrameOverview(ViewSize,Layout.ScenePosition,Layout.SceneSize,0.f);
+        const auto* R=Roof();
+        RoofHUDMotion.Advance(R&&R->IsRoofClosed(),R&&R->IsOpening(),R&&R->IsInteriorAvailable(),DeltaSeconds);
+        UpdateWarehousePOI();return;
+    }
     // Menus use the approved 160ms fade/short slide; the drawer retains its 420ms motion.
     WarehouseMenuProgress=FMath::FInterpConstantTo(WarehouseMenuProgress,bWarehouseMenuOpen?1.f:0.f,DeltaSeconds,1.f/.16f);
     SearchMenuProgress=bSearchIsRemote?0.f:FMath::FInterpConstantTo(SearchMenuProgress,bSearchOpen?1.f:0.f,DeltaSeconds,1.f/.16f);
@@ -1105,7 +1151,8 @@ FString UGHSTwinHUDWidget::GetPOIReport() const
     TArray<TSharedPtr<FJsonValue>> Items;
     if(ShouldDrawWarehousePOI())
     {
-        auto Item=MakeShared<FJsonObject>();Item->SetStringField(TEXT("id"),TEXT("WAREHOUSE:GHS"));
+        auto Item=MakeShared<FJsonObject>();Item->SetStringField(TEXT("id"),bRoofInspectionOnly?TEXT("WAREHOUSE:MPR"):TEXT("WAREHOUSE:GHS"));
+        Item->SetStringField(TEXT("title"),WarehouseTitle);
         Item->SetStringField(TEXT("icon"),TEXT("warehouse"));Item->SetNumberField(TEXT("x"),WarehousePOIPosition.X);Item->SetNumberField(TEXT("y"),WarehousePOIPosition.Y);
         Item->SetNumberField(TEXT("width"),WarehousePOISize.X);Item->SetNumberField(TEXT("height"),WarehousePOISize.Y);Items.Add(MakeShared<FJsonValueObject>(Item));
         Item->SetNumberField(TEXT("opacity"),RoofHUDMotion.WarehouseOpacity());Item->SetBoolField(TEXT("interactive"),Roof()->IsRoofClosed());
@@ -1140,7 +1187,7 @@ FString UGHSTwinHUDWidget::GetPOIReport() const
     Root->SetNumberField(TEXT("interiorLabelOpacity"),IsInteriorAvailable()?RoofHUDMotion.InteriorOpacity():0.f);
     if(const auto* R=Roof())
     {Root->SetBoolField(TEXT("roofClosed"),R->IsRoofClosed());Root->SetBoolField(TEXT("roofOpening"),R->IsOpening());Root->SetBoolField(TEXT("roofClosing"),R->IsClosing());Root->SetBoolField(TEXT("roofTransitioning"),R->IsTransitioning());Root->SetNumberField(TEXT("roofProgress"),R->GetOpenProgress());}
-    if(bDiagnostics)
+    if(bDiagnostics && !bRoofInspectionOnly)
     {
         const auto Header=FGHSTwinHeaderLayout::Calculate(ViewSize.X);
         auto Clock=MakeShared<FJsonObject>();
@@ -1179,6 +1226,46 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
     { Color.A*=DrawOpacity;FSlateDrawElement::MakeText(Elements,++Layer,G.ToPaintGeometry(FVector2D(600,Size+10),FSlateLayoutTransform(At)),Value,Font(Size),ESlateDrawEffect::None,Color); };
     auto Line=[&](FVector2D A,FVector2D B,FLinearColor Color,float Width=1.f)
     { FSlateDrawElement::MakeLines(Elements,++Layer,G.ToPaintGeometry(),TArray<FVector2D>{A,B},ESlateDrawEffect::None,Color,true,Width); };
+    auto DrawWarehousePOI=[&]()
+    {
+        if(ShouldDrawWarehousePOI())
+        {
+            DrawOpacity=RoofHUDMotion.WarehouseOpacity();
+            const FVector2D At=WarehousePOIPosition,Anchor=WarehousePOIAnchor,Size=WarehousePOISize;
+            const FLinearColor Blue=C(TEXT("356BFA"));
+            Line(At+FVector2D(Size.X*.5,Size.Y),Anchor,Blue.CopyWithNewOpacity(.65f*DrawOpacity),1.25f);
+            Box(Anchor-FVector2D(15,7),FVector2D(30,14),FLinearColor::White,7,Blue.CopyWithNewOpacity(.45f));
+            Box(Anchor-FVector2D(3,3),FVector2D(6,6),Blue,3);
+            Box(At+FVector2D(0,3),Size,FLinearColor(.05,.10,.18,.065),10);
+            Box(At,Size,FLinearColor::White,10,bWarehousePOIHovered?Blue:C(TEXT("D6DFEC")),bWarehousePOIHovered?2.f:1.f);
+            Box(At+FVector2D(12,14),FVector2D(28,28),C(TEXT("EDF3FF")),7);
+            const FVector2D Icon=At+FVector2D(15,17);
+            auto WarehouseLine=[&](FVector2D A,FVector2D B){Line(Icon+A,Icon+B,Blue.CopyWithNewOpacity(DrawOpacity),1.5f);};
+            WarehouseLine({0,7},{11,1});WarehouseLine({11,1},{22,7});WarehouseLine({2,7},{2,21});WarehouseLine({20,7},{20,21});WarehouseLine({2,21},{20,21});
+            WarehouseLine({7,21},{7,11});WarehouseLine({7,11},{15,11});WarehouseLine({15,11},{15,21});WarehouseLine({7,15},{15,15});
+            const FString Status=Roof()->IsOpening()?TEXT("正在打开"):TEXT("点击查看");
+            const auto Title=GHSTwinTypography::Measure(WarehouseTitle,Font(14));
+            const auto Subtitle=GHSTwinTypography::Measure(Status,Font(12));
+            Text(At+FVector2D(52,7+Title.CenteredOriginY(22)),WarehouseTitle,14,C(TEXT("25364B")));
+            Text(At+FVector2D(52,30+Subtitle.CenteredOriginY(18)),Status,12,C(TEXT("536478")));
+            Line(At+FVector2D(204,22),At+FVector2D(210,28),Blue.CopyWithNewOpacity(DrawOpacity),1.5f);Line(At+FVector2D(210,28),At+FVector2D(204,34),Blue.CopyWithNewOpacity(DrawOpacity),1.5f);
+            DrawOpacity=1.f;
+        }
+    };
+    if(bRoofInspectionOnly)
+    {
+        DrawWarehousePOI();
+        const FVector2D Controls=ViewSize-FVector2D(60,156);
+        const TCHAR* Captions[]={TEXT("复位"),TEXT("+"),TEXT("-")};
+        for(int32 I=0;I<3;++I)
+        {
+            const FVector2D At=Controls+FVector2D(0,I*46);
+            Box(At,FVector2D(40,40),FLinearColor::White,10,C(TEXT("D6DFEC")));
+            const int32 Size=I==0?12:22;const auto Metrics=GHSTwinTypography::Measure(Captions[I],Font(Size));
+            Text(At+FVector2D((40-Metrics.Size.X)*.5,Metrics.CenteredOriginY(40)),Captions[I],Size,C(TEXT("356BFA")));
+        }
+        return Layer;
+    }
     const auto Header=FGHSTwinHeaderLayout::Calculate(ViewSize.X);
     const FLinearColor HeaderMuted=C(TEXT("B3C1D1")),HeaderIcon=C(TEXT("8BAFFF"));
     auto HeaderText=[&](FVector2D At,const FString& Value,int Size,double RowHeight,FLinearColor Ink)
@@ -1240,29 +1327,7 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
         const FLinearColor Blue=C(TEXT("356BFA"));
         for(const float Width:{9.f,6.f}) for(int I=0;I<4;++I) {const FVector2D P(I&1?Max.X:Min.X,I&2?Max.Y:Min.Y);const FLinearColor Ink=Width>6?FLinearColor::White:Blue;Line(P,P+FVector2D(I&1?-28:28,0),Ink,Width);Line(P,P+FVector2D(0,I&2?-28:28),Ink,Width);}
     }
-    if(ShouldDrawWarehousePOI())
-    {
-        DrawOpacity=RoofHUDMotion.WarehouseOpacity();
-        const FVector2D At=WarehousePOIPosition,Anchor=WarehousePOIAnchor,Size=WarehousePOISize;
-        const FLinearColor Blue=C(TEXT("356BFA"));
-        Line(At+FVector2D(Size.X*.5,Size.Y),Anchor,Blue.CopyWithNewOpacity(.65f*DrawOpacity),1.25f);
-        Box(Anchor-FVector2D(15,7),FVector2D(30,14),FLinearColor::White,7,Blue.CopyWithNewOpacity(.45f));
-        Box(Anchor-FVector2D(3,3),FVector2D(6,6),Blue,3);
-        Box(At+FVector2D(0,3),Size,FLinearColor(.05,.10,.18,.065),10);
-        Box(At,Size,FLinearColor::White,10,bWarehousePOIHovered?Blue:C(TEXT("D6DFEC")),bWarehousePOIHovered?2.f:1.f);
-        Box(At+FVector2D(12,14),FVector2D(28,28),C(TEXT("EDF3FF")),7);
-        const FVector2D Icon=At+FVector2D(15,17);
-        auto WarehouseLine=[&](FVector2D A,FVector2D B){Line(Icon+A,Icon+B,Blue.CopyWithNewOpacity(DrawOpacity),1.5f);};
-        WarehouseLine({0,7},{11,1});WarehouseLine({11,1},{22,7});WarehouseLine({2,7},{2,21});WarehouseLine({20,7},{20,21});WarehouseLine({2,21},{20,21});
-        WarehouseLine({7,21},{7,11});WarehouseLine({7,11},{15,11});WarehouseLine({15,11},{15,21});WarehouseLine({7,15},{15,15});
-        const FString Status=Roof()->IsOpening()?TEXT("正在打开"):TEXT("点击查看");
-        const auto Title=GHSTwinTypography::Measure(TEXT("GHS · 主仓库"),Font(14));
-        const auto Subtitle=GHSTwinTypography::Measure(Status,Font(12));
-        Text(At+FVector2D(52,7+Title.CenteredOriginY(22)),TEXT("GHS · 主仓库"),14,C(TEXT("25364B")));
-        Text(At+FVector2D(52,30+Subtitle.CenteredOriginY(18)),Status,12,C(TEXT("536478")));
-        Line(At+FVector2D(204,22),At+FVector2D(210,28),Blue.CopyWithNewOpacity(DrawOpacity),1.5f);Line(At+FVector2D(210,28),At+FVector2D(204,34),Blue.CopyWithNewOpacity(DrawOpacity),1.5f);
-        DrawOpacity=1.f;
-    }
+    DrawWarehousePOI();
     // Render stems beneath every card. A tag moved below its anchor connects
     // from the top edge; neither its stem nor its anchor may overwrite text.
     if(IsInteriorAvailable()) for(const int32 Index:VisibleLabels)

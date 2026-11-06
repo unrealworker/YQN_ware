@@ -47,7 +47,7 @@ bool GHSGlobe::ParseCatalog(const FString& Json,TArray<FGHSGlobeWarehouse>& Out,
         for(const auto& F:*Features)
         {
             FString Feature;
-            if(!F->TryGetString(Feature)||W.RuntimeProfile==TEXT("generic")||(Feature!=TEXT("warehouse-ui")&&Feature!=TEXT("traffic"))||W.Features.Contains(Feature))
+            if(!F->TryGetString(Feature)||(W.RuntimeProfile==TEXT("generic")?Feature!=TEXT("roof-inspection"):(Feature!=TEXT("warehouse-ui")&&Feature!=TEXT("traffic")))||W.Features.Contains(Feature))
             {Error=TEXT("仓库 features 包含未实现、不兼容或重复的能力");return false;}
             W.Features.Add(Feature);
         }

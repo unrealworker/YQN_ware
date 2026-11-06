@@ -151,4 +151,5 @@ def main():
     assert report['success'],report.get('error')
     unreal.log('GHS_ROOF_DISSOLVE_MATERIALS_READY')
 
-main()
+if __name__ == '__main__':
+    main()

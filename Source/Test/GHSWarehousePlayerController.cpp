@@ -4,6 +4,9 @@
 #include "GHSTwinHUDWidget.h"
 #include "GHSTwinViewport.h"
 #include "GHSWarehouseRoofComponent.h"
+#include "GHSWarehouseExperience.h"
+#include "Misc/FileHelper.h"
+#include "Misc/Paths.h"
 #include "GHSStorageCapacityComponent.h"
 #include "GHSCampusTrafficActor.h"
 #include "GHSOrderReplaySession.h"
@@ -56,6 +59,8 @@ void AGHSWarehousePlayerController::BeginPlay()
             if (TruckHUDWidget) TruckHUDWidget->AddToViewport(20);
         }
     }
+    bMPRExperiencePending=IsLocalController() && GetWorld()->GetMapName().Contains(TEXT("MPR_CAD_Warehouse_B50B57"))
+        && !FParse::Param(FCommandLine::Get(),TEXT("MPRProfile"));
     FInputModeGameAndUI Mode;
     Mode.SetHideCursorDuringCapture(true);
     Mode.SetLockMouseToViewportBehavior(EMouseLockMode::LockOnCapture);
@@ -77,13 +82,14 @@ void AGHSWarehousePlayerController::EndPlay(const EEndPlayReason::Type EndPlayRe
     Super::EndPlay(EndPlayReason);
 }
 
-void AGHSWarehousePlayerController::InitializeWarehouseExperience(bool bEnableTraffic)
+void AGHSWarehousePlayerController::InitializeWarehouseExperience(bool bEnableTraffic,bool bRoofInspectionOnly,const FString& WarehouseTitle)
 {
     if(!IsLocalController()||TwinHUDWidget)return;
     if(WarehouseRoof){WarehouseRoof->ResetForWorld();WarehouseRoof->InitializeRoof();}
-    if(StorageCapacity){StorageCapacity->ResetForWorld();StorageCapacity->InitializeForWorld();}
-    if(bEnableTraffic)CampusTraffic=GetWorld()->SpawnActor<AGHSCampusTrafficActor>();
+    if(StorageCapacity){StorageCapacity->ResetForWorld();if(!bRoofInspectionOnly)StorageCapacity->InitializeForWorld();}
+    if(bEnableTraffic && !bRoofInspectionOnly)CampusTraffic=GetWorld()->SpawnActor<AGHSCampusTrafficActor>();
     TwinHUDWidget=CreateWidget<UGHSTwinHUDWidget>(this);
+    if(TwinHUDWidget && bRoofInspectionOnly) TwinHUDWidget->ConfigureRoofInspection(WarehouseTitle);
     if(TwinHUDWidget&&GetWorld()->GetGameViewport())
     {
         TwinViewportWidget=SNew(SDPIScaler).DPIScale_Lambda([this]()
@@ -235,6 +241,24 @@ bool AGHSWarehousePlayerController::InputKey(const FInputKeyEventArgs& Params)
 void AGHSWarehousePlayerController::PlayerTick(float DeltaSeconds)
 {
     Super::PlayerTick(DeltaSeconds);
+    if(bMPRExperiencePending && GetPawn())
+    {
+        bMPRExperiencePending=false;
+        FString Catalog,Error;FGHSWarehouseRegistry Registry;
+        if(FFileHelper::LoadFileToString(Catalog,*(FPaths::ProjectContentDir()/TEXT("GHSTwinUI/data/warehouses.json"))) && Registry.Load(Catalog,Error))
+        {
+            for(const auto& Definition:Registry.GetEntries()) if(Definition.Map==TEXT("/Game/Maps/MPR_CAD_Warehouse_B50B57"))
+            {
+                if(auto Experience=IGHSWarehouseExperience::Create(Definition))
+                {
+                    FVector2D Size(1920,1080);if(GetWorld()->GetGameViewport())GetWorld()->GetGameViewport()->GetViewportSize(Size);
+                    Experience->Enter(*this,Size);
+                }
+                break;
+            }
+        }
+        else UE_LOG(LogTemp,Warning,TEXT("MPR_INSPECTION_CATALOG_ERROR %s"),*Error);
+    }
     if (ULocalPlayer* Local = GetLocalPlayer())
     {
         FViewport* Viewport = Local->ViewportClient ? Local->ViewportClient->Viewport : nullptr;

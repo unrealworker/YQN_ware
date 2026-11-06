@@ -96,6 +96,9 @@ class TEST_API UGHSTwinHUDWidget : public UUserWidget
 {
     GENERATED_BODY()
 public:
+    /** Shared roof/POI and camera controls without GHS operational data or browsers. */
+    void ConfigureRoofInspection(const FString& Title) { bRoofInspectionOnly=true;WarehouseTitle=Title;bBrowserActive=false; }
+    bool IsRoofInspectionOnly() const { return bRoofInspectionOnly; }
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") void Command(const FString& Json);
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetSnapshot() const;
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") FString GetSceneControlsState() const;
@@ -118,7 +121,7 @@ public:
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") float GetHUDScale() const { return float(Viewport.Scale); }
     UPROPERTY(BlueprintReadOnly, Category="Warehouse Twin") FString SelectedId;
     UPROPERTY(BlueprintReadOnly, Category="Warehouse Twin") bool bBrowserReady = false;
-    bool IsInitialViewReady()const{return bBrowserReady&&!bInitialViewPending;}
+    bool IsInitialViewReady()const{return (bRoofInspectionOnly||bBrowserReady)&&!bInitialViewPending;}
     UPROPERTY(BlueprintReadOnly, Category="Warehouse Twin") FString LastBrowserReport;
     UFUNCTION(BlueprintCallable, Category="Warehouse Twin") bool HandleChromeClick(FVector2D Position);
     UFUNCTION(BlueprintPure, Category="Warehouse Twin") float GetPanelTransitionProgress() const { return PanelVisibilityProgress; }
@@ -207,6 +210,8 @@ private:
     FVector2D ViewSize = FVector2D(1920,1080);
     double NextRefresh = 0;
     bool bPanelCollapsed = false, bShowPOIs = true, bEquipment = true, bRacks = true;
+    bool bRoofInspectionOnly=false;
+    FString WarehouseTitle=TEXT("GHS · 主仓库");
     bool bInitialViewPending = true;
     bool bInitialLayoutPending = true;
     bool bBrowserActive=true,bDiagnostics=false;

@@ -68,6 +68,17 @@ bool FGHSGlobeRegistryIsolationTest::RunTest(const FString&)
     TestNotNull(TEXT("Failed reload preserves active identity"),Registry.Find(TEXT("future-warehouse")));
     TestFalse(TEXT("Generic cannot opt into unsupported GHS features"),Registry.Load(Generic.Replace(TEXT("\"features\":[]"),TEXT("\"features\":[\"traffic\"]")),Error));
     TestFalse(TEXT("Future schema cannot silently change meaning"),Registry.Load(Generic.Replace(TEXT("\"schemaVersion\":2"),TEXT("\"schemaVersion\":3")),Error));
+    const FString Inspection=Generic.Replace(TEXT("\"features\":[]"),TEXT("\"features\":[\"roof-inspection\"]"));
+    TestTrue(TEXT("Generic can explicitly opt into roof inspection without GHS business data"),Registry.Load(Inspection,Error));
+    const auto* InspectionDefinition=Registry.Find(TEXT("future-warehouse"));
+    if(TestNotNull(TEXT("Inspection entry is indexed"),InspectionDefinition))
+    {
+        const auto InspectionAdapter=IGHSWarehouseExperience::Create(*InspectionDefinition);
+        TestTrue(TEXT("Inspection adapter owns the shared roof HUD lifecycle"),InspectionAdapter&&InspectionAdapter->UsesWarehouseHUD());
+        TestFalse(TEXT("Inspection cannot silently enable campus traffic"),InspectionDefinition->Features.Contains(TEXT("traffic")));
+    }
+    TestFalse(TEXT("Generic cannot request operational warehouse UI"),Registry.Load(Generic.Replace(TEXT("\"features\":[]"),TEXT("\"features\":[\"warehouse-ui\"]")),Error));
+    TestFalse(TEXT("Duplicate inspection capability is rejected"),Registry.Load(Inspection.Replace(TEXT("[\"roof-inspection\"]"),TEXT("[\"roof-inspection\",\"roof-inspection\"]")),Error));
     return true;
 }
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSGlobeStreamExclusionTest,"GHS.Globe.StreamExclusion",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)

@@ -1,0 +1,861 @@
+{
+  "success": true,
+  "run_id": "20261106T080317282318Z",
+  "checks": [
+    {
+      "name": "direct_entry_ghs_camera_and_single_mpr_warehouse_label",
+      "passed": true,
+      "actor_count": 870,
+      "roof_parts": 30,
+      "camera_class": "/Game/GHSNormalWarehouse/Camera/BP_GHS_WarehouseCamera.BP_GHS_WarehouseCamera_C",
+      "controller_class": "/Script/Test.GHSWarehousePlayerController",
+      "label": {
+        "id": "WAREHOUSE:MPR",
+        "title": "MPR · 主仓储",
+        "icon": "warehouse",
+        "x": 622.3607788085938,
+        "y": 291.4573059082031,
+        "width": 228,
+        "height": 56,
+        "opacity": 1,
+        "interactive": true
+      },
+      "scene": {
+        "labels": [
+          {
+            "id": "WAREHOUSE:MPR",
+            "title": "MPR · 主仓储",
+            "icon": "warehouse",
+            "x": 622.3607788085938,
+            "y": 291.4573059082031,
+            "width": 228,
+            "height": 56,
+            "opacity": 1,
+            "interactive": true
+          }
+        ],
+        "selectionStroke": 6,
+        "pointFilter": "all",
+        "replay": false,
+        "interiorAvailable": false,
+        "pendingNavigation": "",
+        "pendingNavigationId": "",
+        "warehousePOIOpacity": 1,
+        "interiorLabelOpacity": 0,
+        "roofClosed": true,
+        "roofOpening": false,
+        "roofClosing": false,
+        "roofTransitioning": false,
+        "roofProgress": 0,
+        "performance": {
+          "candidateBuilds": 0,
+          "projectionFrames": 0,
+          "pointProjections": 0,
+          "selectionProjections": 0,
+          "candidateCount": 0,
+          "browserActive": false,
+          "diagnostics": true,
+          "worldScans": 0,
+          "snapshotSerializations": 0
+        }
+      }
+    },
+    {
+      "name": "poi_click_opens_all_roof_parts",
+      "passed": true,
+      "seconds": 0.807035006582737,
+      "samples": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.11685550212860107,
+          0.14606937766075134,
+          0.05777563899755478
+        ],
+        [
+          0.12040289863944054,
+          0.15050362050533295,
+          0.06113579869270325
+        ],
+        [
+          0.12752220034599304,
+          0.1594027429819107,
+          0.0681271031498909
+        ],
+        [
+          0.31598900258541107,
+          0.39498624205589294,
+          0.34479549527168274
+        ],
+        [
+          0.3250376023352146,
+          0.4062969982624054,
+          0.3610909879207611
+        ],
+        [
+          0.3357830047607422,
+          0.41972875595092773,
+          0.3806275725364685
+        ],
+        [
+          0.3460894040763378,
+          0.43261176347732544,
+          0.39952969551086426
+        ],
+        [
+          0.5827183090150356,
+          0.7283978462219238,
+          0.8187677264213562
+        ],
+        [
+          0.5970562063157558,
+          0.7463202476501465,
+          0.8395900726318359
+        ],
+        [
+          0.612436406314373,
+          0.7655454874038696,
+          0.8608686327934265
+        ],
+        [
+          0.6236237064003944,
+          0.7795296311378479,
+          0.8756113052368164
+        ],
+        [
+          0.6427769064903259,
+          0.8034711480140686,
+          0.8993105292320251
+        ],
+        [
+          0.6539235077798367,
+          0.8174043893814087,
+          0.9121524691581726
+        ],
+        [
+          0.6675731092691422,
+          0.8344663977622986,
+          0.9268676042556763
+        ],
+        [
+          0.6825905069708824,
+          0.8532381653785706,
+          0.9417051076889038
+        ],
+        [
+          0.69540860876441,
+          0.8692607879638672,
+          0.9531911611557007
+        ],
+        [
+          0.7103747092187405,
+          0.8879684209823608,
+          0.965158998966217
+        ],
+        [
+          0.7223804071545601,
+          0.9029755592346191,
+          0.9735854864120483
+        ],
+        [
+          0.7354263067245483,
+          0.9192829132080078,
+          0.9815060496330261
+        ],
+        [
+          0.7522161081433296,
+          0.940270185470581,
+          0.9897232055664062
+        ],
+        [
+          0.7648307085037231,
+          0.9560384154319763,
+          0.9943720698356628
+        ],
+        [
+          0.7795476093888283,
+          0.9744345545768738,
+          0.998072624206543
+        ],
+        [
+          0.7910135090351105,
+          0.9887669086456299,
+          0.9996243119239807
+        ],
+        [
+          0.807035006582737,
+          1.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "overview_restores_roof",
+      "passed": true,
+      "seconds": 0.5558552965521812,
+      "samples": [
+        [
+          0.0,
+          1.0,
+          1.0
+        ],
+        [
+          0.06140049919486046,
+          0.88836270570755,
+          0.9653940200805664
+        ],
+        [
+          0.06426509842276573,
+          0.8831543326377869,
+          0.9622318744659424
+        ],
+        [
+          0.06877709925174713,
+          0.8749507069587708,
+          0.956998884677887
+        ],
+        [
+          0.0761117972433567,
+          0.8616148829460144,
+          0.947848916053772
+        ],
+        [
+          0.08749239891767502,
+          0.8409228920936584,
+          0.9321344494819641
+        ],
+        [
+          0.09887799993157387,
+          0.8202217817306519,
+          0.9146603345870972
+        ],
+        [
+          0.11374649778008461,
+          0.7931881546974182,
+          0.889377772808075
+        ],
+        [
+          0.12436819821596146,
+          0.7738759517669678,
+          0.869728147983551
+        ],
+        [
+          0.13539939746260643,
+          0.7538192272186279,
+          0.8480246663093567
+        ],
+        [
+          0.14807329699397087,
+          0.730775773525238,
+          0.8215826153755188
+        ],
+        [
+          0.1593477986752987,
+          0.7102766633033752,
+          0.7968196868896484
+        ],
+        [
+          0.17025789991021156,
+          0.6904401183128357,
+          0.7718465924263
+        ],
+        [
+          0.18264369666576385,
+          0.6679204702377319,
+          0.7424108982086182
+        ],
+        [
+          0.1934489980340004,
+          0.6482744812965393,
+          0.7158920168876648
+        ],
+        [
+          0.20579569786787033,
+          0.6258259415626526,
+          0.6847546696662903
+        ],
+        [
+          0.21884719654917717,
+          0.6020959615707397,
+          0.6510155200958252
+        ],
+        [
+          0.23016609996557236,
+          0.5815161466598511,
+          0.6211909055709839
+        ],
+        [
+          0.24203409999608994,
+          0.5599379539489746,
+          0.5894762277603149
+        ],
+        [
+          0.2542113997042179,
+          0.5377973914146423,
+          0.5565880537033081
+        ],
+        [
+          0.26511329784989357,
+          0.5179757475852966,
+          0.5269519686698914
+        ],
+        [
+          0.27792759984731674,
+          0.49467700719833374,
+          0.4920157790184021
+        ],
+        [
+          0.2887345999479294,
+          0.4750279188156128,
+          0.46257302165031433
+        ],
+        [
+          0.2997426986694336,
+          0.4550131857395172,
+          0.43270188570022583
+        ],
+        [
+          0.31223009899258614,
+          0.4323088228702545,
+          0.39908358454704285
+        ],
+        [
+          0.3227439969778061,
+          0.41319262981414795,
+          0.371097207069397
+        ],
+        [
+          0.3336820974946022,
+          0.3933051824569702,
+          0.34238696098327637
+        ],
+        [
+          0.3465640991926193,
+          0.36988335847854614,
+          0.30923089385032654
+        ],
+        [
+          0.35760559886693954,
+          0.3498079180717468,
+          0.2814878225326538
+        ],
+        [
+          0.36793549731373787,
+          0.3310262858867645,
+          0.2561885416507721
+        ],
+        [
+          0.3784803971648216,
+          0.3118537366390228,
+          0.23110099136829376
+        ],
+        [
+          0.39104269817471504,
+          0.28901317715644836,
+          0.20230410993099213
+        ],
+        [
+          0.40156329795718193,
+          0.2698848247528076,
+          0.17919781804084778
+        ],
+        [
+          0.4142550975084305,
+          0.24680882692337036,
+          0.15267528593540192
+        ],
+        [
+          0.42441389709711075,
+          0.22833828628063202,
+          0.13260474801063538
+        ],
+        [
+          0.4351014979183674,
+          0.20890629291534424,
+          0.11269140988588333
+        ],
+        [
+          0.44809789955616,
+          0.18527647852897644,
+          0.09026201069355011
+        ],
+        [
+          0.4589726999402046,
+          0.1655041128396988,
+          0.07310798764228821
+        ],
+        [
+          0.4693278968334198,
+          0.14667648077011108,
+          0.058230772614479065
+        ],
+        [
+          0.48194769769907,
+          0.12373138964176178,
+          0.04213985055685043
+        ],
+        [
+          0.49275219812989235,
+          0.10408684611320496,
+          0.03024684637784958
+        ],
+        [
+          0.5033312998712063,
+          0.08485211431980133,
+          0.020377792418003082
+        ],
+        [
+          0.5151129998266697,
+          0.06343084573745728,
+          0.011559993028640747
+        ],
+        [
+          0.5251203998923302,
+          0.04523557424545288,
+          0.005953644402325153
+        ],
+        [
+          0.535039197653532,
+          0.027201397344470024,
+          0.002179494360461831
+        ],
+        [
+          0.5465773977339268,
+          0.006222851574420929,
+          0.00011568970512598753
+        ],
+        [
+          0.5558552965521812,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "name": "shared_orbit_pan_zoom_and_overview_reset",
+      "passed": true,
+      "final_camera": [
+        26521.618148740592,
+        43669.60173615608,
+        37734.249237381446,
+        -40.5614377617833,
+        -112.83867732286582,
+        -8.37308530632782e-15
+      ]
+    },
+    {
+      "name": "all_materials_and_saved_assets_preserved",
+      "passed": true,
+      "saved_assets": 14
+    }
+  ],
+  "captures": [
+    {
+      "name": "01_closed",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\roof_interaction_20261106\\runtime\\01_closed_20261106T080317282318Z.png",
+      "sha256": "86d99ac640b1b82c6c835340d5758be1e339a0462198d13bab428aad0a2e405c",
+      "progress": 0.0,
+      "camera": [
+        26521.622493794544,
+        43669.598653942216,
+        37734.25058571968,
+        -40.56143951416012,
+        -112.8386840820312,
+        -8.373085525523577e-15
+      ],
+      "poi": {
+        "labels": [
+          {
+            "id": "WAREHOUSE:MPR",
+            "title": "MPR · 主仓储",
+            "icon": "warehouse",
+            "x": 622.3607788085938,
+            "y": 291.4573059082031,
+            "width": 228,
+            "height": 56,
+            "opacity": 1,
+            "interactive": true
+          }
+        ],
+        "selectionStroke": 6,
+        "pointFilter": "all",
+        "replay": false,
+        "interiorAvailable": false,
+        "pendingNavigation": "",
+        "pendingNavigationId": "",
+        "warehousePOIOpacity": 1,
+        "interiorLabelOpacity": 0,
+        "roofClosed": true,
+        "roofOpening": false,
+        "roofClosing": false,
+        "roofTransitioning": false,
+        "roofProgress": 0,
+        "performance": {
+          "candidateBuilds": 0,
+          "projectionFrames": 0,
+          "pointProjections": 0,
+          "selectionProjections": 0,
+          "candidateCount": 0,
+          "browserActive": false,
+          "diagnostics": true,
+          "worldScans": 0,
+          "snapshotSerializations": 0
+        }
+      },
+      "archived_path": "SourceAssets/MPR/roof_interaction_20261106/01_closed.png"
+    },
+    {
+      "name": "03_open",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\roof_interaction_20261106\\runtime\\03_open_20261106T080317282318Z.png",
+      "sha256": "cbecb3ecf62a28370876604d45891aa2b6ca14e8fbc2dfd56ed0eeea1d43bfa1",
+      "progress": 1.0,
+      "camera": [
+        26521.622493794544,
+        43669.598653942216,
+        37734.25058571968,
+        -40.56143951416012,
+        -112.8386840820312,
+        -8.373085525523577e-15
+      ],
+      "poi": {
+        "labels": [],
+        "selectionStroke": 6,
+        "pointFilter": "all",
+        "replay": false,
+        "interiorAvailable": true,
+        "pendingNavigation": "",
+        "pendingNavigationId": "",
+        "warehousePOIOpacity": 0,
+        "interiorLabelOpacity": 1,
+        "roofClosed": false,
+        "roofOpening": false,
+        "roofClosing": false,
+        "roofTransitioning": false,
+        "roofProgress": 1,
+        "performance": {
+          "candidateBuilds": 0,
+          "projectionFrames": 0,
+          "pointProjections": 0,
+          "selectionProjections": 0,
+          "candidateCount": 0,
+          "browserActive": false,
+          "diagnostics": true,
+          "worldScans": 0,
+          "snapshotSerializations": 0
+        }
+      },
+      "archived_path": "SourceAssets/MPR/roof_interaction_20261106/03_open.png"
+    },
+    {
+      "name": "02_mid_scan",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\roof_interaction_20261106\\runtime\\02_mid_scan_20261106T080317282318Z.png",
+      "sha256": "14d9084873336d0ca21e241a8e529fb3fce3049723cff199c494dfb7a8b01469",
+      "progress": 0.4806227385997772,
+      "camera": [
+        26521.618148740592,
+        43669.60173615608,
+        37734.249237381446,
+        -40.5614377617833,
+        -112.83867732286582,
+        -8.37308530632782e-15
+      ],
+      "poi": {
+        "labels": [],
+        "selectionStroke": 6,
+        "pointFilter": "all",
+        "replay": false,
+        "interiorAvailable": false,
+        "pendingNavigation": "",
+        "pendingNavigationId": "",
+        "warehousePOIOpacity": 0,
+        "interiorLabelOpacity": 0,
+        "roofClosed": false,
+        "roofOpening": true,
+        "roofClosing": false,
+        "roofTransitioning": true,
+        "roofProgress": 0.4806227385997772,
+        "performance": {
+          "candidateBuilds": 0,
+          "projectionFrames": 0,
+          "pointProjections": 0,
+          "selectionProjections": 0,
+          "candidateCount": 0,
+          "browserActive": false,
+          "diagnostics": true,
+          "worldScans": 0,
+          "snapshotSerializations": 0
+        }
+      },
+      "archived_path": "SourceAssets/MPR/roof_interaction_20261106/02_mid_scan.png"
+    },
+    {
+      "name": "04_restored",
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\roof_interaction_20261106\\runtime\\04_restored_20261106T080317282318Z.png",
+      "sha256": "491fd722e8369617d8220778312b5d0d014e9d70bc7c3f1d66c7b41ad9bad926",
+      "progress": 0.0,
+      "camera": [
+        26521.618148740592,
+        43669.60173615608,
+        37734.249237381446,
+        -40.5614377617833,
+        -112.83867732286582,
+        -8.37308530632782e-15
+      ],
+      "poi": {
+        "labels": [
+          {
+            "id": "WAREHOUSE:MPR",
+            "title": "MPR · 主仓储",
+            "icon": "warehouse",
+            "x": 622.3607788085938,
+            "y": 291.4573059082031,
+            "width": 228,
+            "height": 56,
+            "opacity": 1,
+            "interactive": true
+          }
+        ],
+        "selectionStroke": 6,
+        "pointFilter": "all",
+        "replay": false,
+        "interiorAvailable": false,
+        "pendingNavigation": "",
+        "pendingNavigationId": "",
+        "warehousePOIOpacity": 1,
+        "interiorLabelOpacity": 0,
+        "roofClosed": true,
+        "roofOpening": false,
+        "roofClosing": false,
+        "roofTransitioning": false,
+        "roofProgress": 0,
+        "performance": {
+          "candidateBuilds": 0,
+          "projectionFrames": 0,
+          "pointProjections": 0,
+          "selectionProjections": 0,
+          "candidateCount": 0,
+          "browserActive": false,
+          "diagnostics": true,
+          "worldScans": 0,
+          "snapshotSerializations": 0
+        }
+      },
+      "archived_path": "SourceAssets/MPR/roof_interaction_20261106/04_restored.png"
+    }
+  ],
+  "performance": {
+    "closed": {
+      "path": "D:\\UEPro\\Test\\Saved\\Profiling\\CSV\\MPR_INTERACTION_closed_20261106T080317282318Z.csv",
+      "sha256": "a346108160d307980e9d9ea7d49d8994c85016a49874ff67aa9e5225201798f6",
+      "timing_unit": "ms",
+      "frame_count": 1819,
+      "native_frame_time_seconds": 14.999519400000011,
+      "metrics": {
+        "FrameTime": {
+          "count": 1819,
+          "mean_ms": 8.246024958768555,
+          "median_ms": 7.9974,
+          "p95_ms": 10.2144,
+          "p99_ms": 11.6323,
+          "max_ms": 15.5702,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GameThreadTime": {
+          "count": 1819,
+          "mean_ms": 1.9259079714128642,
+          "median_ms": 1.9022,
+          "p95_ms": 2.4023,
+          "p99_ms": 2.7582,
+          "max_ms": 6.5761,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "RenderThreadTime": {
+          "count": 1819,
+          "mean_ms": 8.244742001099505,
+          "median_ms": 7.9639,
+          "p95_ms": 10.2012,
+          "p99_ms": 11.3728,
+          "max_ms": 15.4074,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GPUTime": {
+          "count": 1819,
+          "mean_ms": 7.445074106652006,
+          "median_ms": 7.1056,
+          "p95_ms": 9.2298,
+          "p99_ms": 10.5061,
+          "max_ms": 14.5048,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        }
+      },
+      "gpu_verified": true,
+      "gpu_evidence": {
+        "mode": "UE5.8 RHI",
+        "primary_metric": "GPUTime",
+        "positive_frame_ratio": 1.0,
+        "gpu_pass_positive_frame_ratio": 1.0,
+        "pass_columns": [
+          "GPU/RayTracingGeometry",
+          "GPU/DistanceFields",
+          "GPU/GlobalDistanceFieldUpdate",
+          "GPU/AllocateRendertargets",
+          "GPU/VisibilityCommands",
+          "GPU/UpdateLumenSceneBuffers",
+          "GPU/NaniteStreaming",
+          "GPU/NaniteReadback",
+          "GPU/FXSystemPreRender",
+          "GPU/GPUSceneUpdate",
+          "GPU/BuildRenderingCommandsDeferred",
+          "GPU/Prepass",
+          "GPU/NaniteVisBuffer",
+          "GPU/NaniteBasePass",
+          "GPU/HZB",
+          "GPU/BeginOcclusionTests",
+          "GPU/LightGrid",
+          "GPU/LightFunctionAtlasGeneration",
+          "GPU/LumenSceneUpdate",
+          "GPU/BuildRenderingCommands",
+          "GPU/LumenScreenProbeGather",
+          "GPU/Basepass",
+          "GPU/RenderDeferredLighting",
+          "GPU/ShadowDepths",
+          "GPU/LumenReflections",
+          "GPU/TranslucentLighting",
+          "GPU/Lights",
+          "GPU/ShadowProjection",
+          "GPU/DistanceFieldShadows",
+          "GPU/TemporalSuperResolution",
+          "GPU/PostRenderOpsFX",
+          "GPU/FXSystemPostRenderOpaque",
+          "GPU/Translucency",
+          "GPU/Postprocessing",
+          "GPU/VirtualTextureUpdate",
+          "GPU/SlateUI"
+        ],
+        "unregistered_tail_pass_zero_fill_counts": {}
+      },
+      "window": "All finalized native CSV frames between start and stop, including boundary frames; no spikes removed.",
+      "percentile_method": "nearest-rank",
+      "fps": 121.27055217515827,
+      "archived_path": "SourceAssets/MPR/roof_interaction_20261106/closed_native.csv.gz"
+    },
+    "open": {
+      "path": "D:\\UEPro\\Test\\Saved\\Profiling\\CSV\\MPR_INTERACTION_open_20261106T080317282318Z.csv",
+      "sha256": "deb75fa05c1ac1cd8d33469bc5fce06b34fcf83a98699182daaebe19b7780abb",
+      "timing_unit": "ms",
+      "frame_count": 1317,
+      "native_frame_time_seconds": 15.004624999999994,
+      "metrics": {
+        "FrameTime": {
+          "count": 1317,
+          "mean_ms": 11.393033409263477,
+          "median_ms": 11.1012,
+          "p95_ms": 13.2146,
+          "p99_ms": 14.5544,
+          "max_ms": 18.471,
+          "over_16_67ms_count": 3,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GameThreadTime": {
+          "count": 1317,
+          "mean_ms": 1.7805662110858012,
+          "median_ms": 1.7683,
+          "p95_ms": 2.1035,
+          "p99_ms": 2.4498,
+          "max_ms": 5.5963,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "RenderThreadTime": {
+          "count": 1317,
+          "mean_ms": 11.3911807896735,
+          "median_ms": 11.0543,
+          "p95_ms": 13.1764,
+          "p99_ms": 14.5212,
+          "max_ms": 18.565,
+          "over_16_67ms_count": 3,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GPUTime": {
+          "count": 1317,
+          "mean_ms": 10.633893925588458,
+          "median_ms": 10.2594,
+          "p95_ms": 12.3365,
+          "p99_ms": 13.5703,
+          "max_ms": 16.8401,
+          "over_16_67ms_count": 2,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        }
+      },
+      "gpu_verified": true,
+      "gpu_evidence": {
+        "mode": "UE5.8 RHI",
+        "primary_metric": "GPUTime",
+        "positive_frame_ratio": 1.0,
+        "gpu_pass_positive_frame_ratio": 1.0,
+        "pass_columns": [
+          "GPU/RayTracingGeometry",
+          "GPU/DistanceFields",
+          "GPU/GlobalDistanceFieldUpdate",
+          "GPU/AllocateRendertargets",
+          "GPU/VisibilityCommands",
+          "GPU/UpdateLumenSceneBuffers",
+          "GPU/NaniteStreaming",
+          "GPU/NaniteReadback",
+          "GPU/FXSystemPreRender",
+          "GPU/GPUSceneUpdate",
+          "GPU/BuildRenderingCommandsDeferred",
+          "GPU/Prepass",
+          "GPU/NaniteVisBuffer",
+          "GPU/NaniteBasePass",
+          "GPU/HZB",
+          "GPU/BeginOcclusionTests",
+          "GPU/LightGrid",
+          "GPU/LightFunctionAtlasGeneration",
+          "GPU/LumenSceneUpdate",
+          "GPU/BuildRenderingCommands",
+          "GPU/LumenScreenProbeGather",
+          "GPU/Basepass",
+          "GPU/RenderDeferredLighting",
+          "GPU/ShadowDepths",
+          "GPU/LumenReflections",
+          "GPU/TranslucentLighting",
+          "GPU/Lights",
+          "GPU/ShadowProjection",
+          "GPU/DistanceFieldShadows",
+          "GPU/TemporalSuperResolution",
+          "GPU/PostRenderOpsFX",
+          "GPU/FXSystemPostRenderOpaque",
+          "GPU/Translucency",
+          "GPU/Postprocessing",
+          "GPU/VirtualTextureUpdate",
+          "GPU/SlateUI"
+        ],
+        "unregistered_tail_pass_zero_fill_counts": {}
+      },
+      "window": "All finalized native CSV frames between start and stop, including boundary frames; no spikes removed.",
+      "percentile_method": "nearest-rank",
+      "fps": 87.7729366778577,
+      "archived_path": "SourceAssets/MPR/roof_interaction_20261106/open_native.csv.gz"
+    }
+  },
+  "assets_saved": false,
+  "stage": "complete",
+  "map_sha256": "4dd68cb727c4a87a473cb65baa7abeaf7793409f73cb7620100d650033f27b75",
+  "performance_scope": "Local UE5.8 standalone editor-game RenderOffscreen, 1920x1080, uncapped, 15 seconds per state after warmup; native CSV frame/GPU times. Not packaged or Pixel Streaming throughput."
+}

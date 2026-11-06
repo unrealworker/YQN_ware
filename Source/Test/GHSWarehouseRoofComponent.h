@@ -71,9 +71,28 @@ private:
 struct FGHSWarehouseRoofReplayState
 {
     struct FShellVisibility { TWeakObjectPtr<AActor> Actor; bool Hidden=false,OriginalHidden=false; };
+    struct FRoofVisibility
+    {
+        TWeakObjectPtr<AActor> Actor;
+        TWeakObjectPtr<UStaticMeshComponent> Mesh;
+        bool ActorHidden=false,MeshVisible=true,MeshHidden=false;
+    };
     FGHSWarehouseRoofTransition Transition;
     TArray<FShellVisibility> Shells;
+    TArray<FRoofVisibility> Roofs;
     bool HasRoofVisibility=false,RoofHidden=false,MeshVisible=true,MeshHidden=false,TickEnabled=false;
+};
+
+/** A roof may include separate skins, photovoltaic banks and instanced roof lights. */
+USTRUCT()
+struct FGHSWarehouseRoofPart
+{
+    GENERATED_BODY()
+    UPROPERTY(Transient) TObjectPtr<AActor> Actor;
+    UPROPERTY(Transient) TObjectPtr<UStaticMeshComponent> Mesh;
+    UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInterface>> SourceMaterials;
+    UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInstanceDynamic>> DissolveInstances;
+    bool bActorHidden=false,bMeshVisible=true,bMeshHidden=false;
 };
 
 /** The architecture roof has no equipment identity and never changes its saved asset. */
@@ -113,6 +132,8 @@ public:
     float GetTransitionDuration() const { return Transition.GetDuration(); }
     UFUNCTION(BlueprintPure, Category="Warehouse Roof")
     FVector GetPOIWorldLocation() const;
+    /** Main roof bounds only; excludes solar banks and rooftop equipment. */
+    FBox GetRoofWorldBounds() const;
 
     bool HitRoofRay(const FVector& Origin,const FVector& Direction) const;
     /** Called at BeginPlay; also supports headless world fixtures. */
@@ -122,6 +143,7 @@ public:
     FGHSWarehouseRoofReplayState CaptureReplayState();
     void RestoreReplayState(const FGHSWarehouseRoofReplayState& Saved,bool bSavedBuilding);
     static bool RayHitsRoofFootprint(const FVector& Origin,const FVector& Direction,const FTransform& RoofTransform);
+    static bool RayHitsMPRRoofFootprint(const FVector& Origin,const FVector& Direction,const FTransform& RoofTransform);
 
 protected:
     virtual void BeginPlay() override;
@@ -132,13 +154,13 @@ private:
     struct FShellActor { TWeakObjectPtr<AActor> Actor; bool bOriginallyHidden=false; };
     TArray<FShellActor> ShellActors;
     bool bShellInitialized=false,bBuildingVisible=true;
-    void ApplyDissolveMaterials();
+    bool ApplyDissolveMaterials();
     void UpdateDissolveMaterials();
     void RestoreSourceMaterials();
-    UPROPERTY(Transient) TObjectPtr<AActor> RoofActor;
+    void SetRoofHidden(bool bHidden);
     UPROPERTY(Transient) TObjectPtr<UStaticMeshComponent> RoofMesh;
-    UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInterface>> SourceMaterials;
-    UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInstanceDynamic>> DissolveInstances;
+    UPROPERTY(Transient) TArray<FGHSWarehouseRoofPart> RoofParts;
+    bool bMPRRoof=false;
     /** Soft references preserve cooker discovery without loading warehouse shading on the globe. */
     UPROPERTY() TArray<TSoftObjectPtr<UMaterialInterface>> DissolveTemplates;
     FGHSWarehouseRoofTransition Transition;

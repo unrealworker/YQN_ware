@@ -24,7 +24,7 @@
           "map": {"type": "string", "pattern": "^/Game/Maps/[A-Za-z0-9_/]+$"},
           "thumbnail": {"type": "string", "pattern": "^assets/"},
           "runtimeProfile": {"enum": ["ghs", "generic"]},
-          "features": {"type": "array", "uniqueItems": true, "items": {"enum": ["warehouse-ui", "traffic"]}},
+          "features": {"type": "array", "uniqueItems": true, "items": {"enum": ["warehouse-ui", "traffic", "roof-inspection"]}},
           "entryCamera": {
             "type": "object", "required": ["x", "y", "z", "distance", "pitch", "yaw"],
             "properties": {
@@ -38,8 +38,8 @@
           }
         },
         "allOf": [
-          {"if": {"properties": {"runtimeProfile": {"const": "generic"}}}, "then": {"required": ["entryCamera"], "properties": {"features": {"maxItems": 0}}}},
-          {"if": {"properties": {"runtimeProfile": {"const": "ghs"}}}, "then": {"properties": {"features": {"contains": {"const": "warehouse-ui"}}}}}
+          {"if": {"properties": {"runtimeProfile": {"const": "generic"}}}, "then": {"required": ["entryCamera"], "properties": {"features": {"items": {"const": "roof-inspection"}}}}},
+          {"if": {"properties": {"runtimeProfile": {"const": "ghs"}}}, "then": {"properties": {"features": {"items": {"enum": ["warehouse-ui", "traffic"]}, "contains": {"const": "warehouse-ui"}}}}}
         ]
       }
     }

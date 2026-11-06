@@ -516,14 +516,19 @@ void AGHSGlobePlayerController::TickSmokeTest()
         if(WarehouseRoof)
         {
             const auto RoofState=WarehouseRoof->CaptureReplayState();
-            if(RoofState.HasRoofVisibility||!RoofState.Shells.IsEmpty()||RoofState.TickEnabled||!FMath::IsNearlyZero(WarehouseRoof->GetOpenProgress()))
+            if(RoofState.HasRoofVisibility||!RoofState.Roofs.IsEmpty()||!RoofState.Shells.IsEmpty()||RoofState.TickEnabled||!FMath::IsNearlyZero(WarehouseRoof->GetOpenProgress()))
                 SmokeError=TEXT("Return retained roof transition or shell state");
             // HasRoof() alone could hide a stale strong reference to a pending-kill actor.
-            for(const FName Name:{FName(TEXT("RoofActor")),FName(TEXT("RoofMesh"))})
+            const auto* MeshProperty=FindFProperty<FObjectPropertyBase>(WarehouseRoof->GetClass(),TEXT("RoofMesh"));
+            if(!MeshProperty||MeshProperty->GetObjectPropertyValue_InContainer(WarehouseRoof))
+                SmokeError=TEXT("Return retained the strong roof component reference");
+            const auto* PartsProperty=FindFProperty<FArrayProperty>(WarehouseRoof->GetClass(),TEXT("RoofParts"));
+            if(!PartsProperty)
+                SmokeError=TEXT("Roof part lifetime validation property is missing");
+            else
             {
-                const auto* Property=FindFProperty<FObjectPropertyBase>(WarehouseRoof->GetClass(),Name);
-                if(!Property||Property->GetObjectPropertyValue_InContainer(WarehouseRoof))
-                    SmokeError=TEXT("Return retained a strong roof actor/component reference");
+                const FScriptArrayHelper Parts(PartsProperty,PartsProperty->ContainerPtrToValuePtr<void>(WarehouseRoof));
+                if(Parts.Num()!=0)SmokeError=TEXT("Return retained strong roof actor/component/material references");
             }
         }
         if(SmokeError.IsEmpty())++SmokeCycles;

@@ -55,18 +55,28 @@ public:
         if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(C.GetPawn()))
         {
             Camera->SetObjectOrbitNavigationEnabled(false);
-            Camera->WarehouseCamera->FieldOfView=GetDefault<AGHSWarehouseCameraPawn>()->WarehouseCamera->FieldOfView;
+            const auto* Default=GetDefault<AGHSWarehouseCameraPawn>();
+            Camera->WarehouseCamera->FieldOfView=Default->WarehouseCamera->FieldOfView;
+            Camera->OrbitDegreesPerPixel=Default->OrbitDegreesPerPixel;Camera->PitchDegreesPerPixel=Default->PitchDegreesPerPixel;
+            Camera->WheelZoomExponent=Default->WheelZoomExponent;Camera->MaximumPan=Default->MaximumPan;
+            Camera->RotationLagSpeed=Default->RotationLagSpeed;Camera->MovementLagSpeed=Default->MovementLagSpeed;Camera->ZoomLagSpeed=Default->ZoomLagSpeed;
             Camera->MinimumPitch=-80;Camera->MaximumPitch=-15;Camera->MinimumZoom=900;Camera->MaximumZoom=95000;Camera->MinimumCameraHeight=150;
             Camera->OverviewCenter=Definition.EntryPivot;Camera->OverviewDistance=Definition.EntryDistance;
             Camera->OverviewPitch=Definition.EntryRotation.Pitch;Camera->OverviewYaw=Definition.EntryRotation.Yaw;
-            Camera->FocusOnTarget(Definition.EntryPivot,Definition.EntryDistance,Definition.EntryRotation,Viewport,Viewport*.5,0);
+            if(UsesWarehouseHUD()) Camera->FrameOverview(Viewport,FVector2D::ZeroVector,Viewport,0);
+            else Camera->FocusOnTarget(Definition.EntryPivot,Definition.EntryDistance,Definition.EntryRotation,Viewport,Viewport*.5,0);
+        }
+        if(UsesWarehouseHUD())
+        {
+            FString Brand=Definition.Name;Definition.Name.Split(TEXT(" · "),&Brand,nullptr);
+            C.InitializeWarehouseExperience(false,true,Brand+TEXT(" · 主仓储"));
         }
     }
-    bool IsReady(const AGHSWarehousePlayerController&)const override{return true;}
+    bool IsReady(const AGHSWarehousePlayerController& C)const override{return !UsesWarehouseHUD()||(C.TwinHUDWidget&&C.TwinHUDWidget->IsInitialViewReady());}
     void BeginArrival(AGHSWarehousePlayerController& C,bool Reduced)override{Arrival.Begin(C,Reduced);}
     bool TickArrival(AGHSWarehousePlayerController& C,float Dt)override{return Arrival.Tick(C,Dt);}
-    void Exit(AGHSWarehousePlayerController&)override{}
-    bool UsesWarehouseHUD()const override{return false;}
+    void Exit(AGHSWarehousePlayerController& C)override{if(UsesWarehouseHUD())C.ShutdownWarehouseExperience();}
+    bool UsesWarehouseHUD()const override{return Definition.Features.Contains(TEXT("roof-inspection"));}
 private:
     FGHSGlobeWarehouse Definition;
     FArrival Arrival;
@@ -102,7 +112,7 @@ private:
 }
 TUniquePtr<IGHSWarehouseExperience> IGHSWarehouseExperience::Create(const FGHSGlobeWarehouse& W)
 {
-    if(W.RuntimeProfile==TEXT("generic")&&W.Features.IsEmpty())return MakeUnique<FGenericExperience>(W);
+    if(W.RuntimeProfile==TEXT("generic")&&(W.Features.IsEmpty()||(W.Features.Num()==1&&W.Features.Contains(TEXT("roof-inspection")))))return MakeUnique<FGenericExperience>(W);
     if(W.RuntimeProfile==TEXT("ghs")&&W.Features.Contains(TEXT("warehouse-ui")))return MakeUnique<FGHSExperience>(W.Features.Contains(TEXT("traffic")));
     return nullptr;
 }

@@ -1,6 +1,9 @@
 #if WITH_DEV_AUTOMATION_TESTS
 
 #include "../GHSWarehouseCameraPawn.h"
+#include "../GHSWarehousePlayerController.h"
+#include "../GHSWarehouseExperience.h"
+#include "GameFramework/PlayerInput.h"
 #include "Camera/CameraComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
@@ -291,5 +294,41 @@ bool FGHSCameraExplicitFlightDuration::RunTest(const FString&)
     F.Tick(.1f);
     TestFalse(TEXT("Explicit short flights are not expanded to 0.7 seconds"),F.Camera->IsPoseTransitionActive());
     return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSCameraSiteOverview,
+    "GHS.WarehouseCamera.Focus.SiteSpecificOverviewSharesNavigation", GHSCameraFocusTests::Flags)
+bool FGHSCameraSiteOverview::RunTest(const FString&)
+{
+    GHSCameraFocusTests::FFixture F;
+    if(!TestNotNull(TEXT("Camera fixture"),F.Camera)) return false;
+    auto* Controller=F.World->SpawnActor<AGHSWarehousePlayerController>();
+    if(!TestNotNull(TEXT("Shared warehouse controller"),Controller)) return false;
+    Controller->PlayerInput=NewObject<UPlayerInput>(Controller);Controller->Possess(F.Camera);
+    FGHSGlobeWarehouse Definition;Definition.RuntimeProfile=TEXT("generic");
+    Definition.EntryPivot=FVector(9410.439688,3040.512713,0);Definition.EntryDistance=58029.207224f;
+    Definition.EntryRotation=FRotator(-40.561438,-112.838687,0);
+    const auto Experience=IGHSWarehouseExperience::Create(Definition);
+    if(!TestTrue(TEXT("Site adapter exists"),bool(Experience))) return false;
+    // Deliberately emulate previous destination overrides: Enter restores the GHS controls.
+    F.Camera->OrbitDegreesPerPixel=.8f;F.Camera->WheelZoomExponent=.4f;F.Camera->MaximumPan=FVector2D(1,1);
+    Experience->Enter(*Controller,FVector2D(1920,1080));
+    const auto* Default=GetDefault<AGHSWarehouseCameraPawn>();
+    TestEqual(TEXT("Site keeps GHS orbit sensitivity"),F.Camera->OrbitDegreesPerPixel,Default->OrbitDegreesPerPixel);
+    TestEqual(TEXT("Site keeps GHS wheel behavior"),F.Camera->WheelZoomExponent,Default->WheelZoomExponent);
+    TestTrue(TEXT("Pan restrictions are site-relative with GHS extents"),F.Camera->MaximumPan.Equals(Default->MaximumPan));
+    F.Camera->ResetOverview(true);
+    const auto Initial=F.Camera->CaptureReplayPose();
+    F.Camera->OrbitPixels(FVector2D(80,20));F.Camera->ZoomSteps(2);F.Settle();
+    TestFalse(TEXT("Shared orbit changes site heading"),F.Camera->GetActorRotation().Equals(Initial.Rotation,.1));
+    TestTrue(TEXT("Shared wheel zoom moves toward the site"),F.Camera->SpringArmComponent->TargetArmLength<Initial.Distance);
+    F.Camera->PanPixels(FVector2D(70,30),1920);F.Settle();
+    TestFalse(TEXT("Ground pan moves the local pivot"),F.Camera->GetActorLocation().Equals(Definition.EntryPivot,1));
+    TestEqual(TEXT("Ground navigation remains on the local floor"),F.Camera->GetActorLocation().Z,0.);
+    F.Camera->ResetOverview(true);
+    TestTrue(TEXT("Home returns to this site's entry pivot, never GHS coordinates"),F.Camera->GetActorLocation().Equals(Definition.EntryPivot,.01));
+    TestTrue(TEXT("Home restores this site's heading and pitch"),F.Camera->GetActorRotation().Equals(Definition.EntryRotation,.01));
+    TestNearlyEqual(TEXT("Home restores this site's distance"),F.Camera->SpringArmComponent->TargetArmLength,Definition.EntryDistance,.1f);
+    TestFalse(TEXT("Home exits object-centered orbit"),F.Camera->UsesObjectPivot());
+    Experience->Exit(*Controller);Controller->UnPossess();return true;
 }
 #endif

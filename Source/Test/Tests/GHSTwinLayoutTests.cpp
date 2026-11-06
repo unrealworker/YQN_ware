@@ -179,4 +179,17 @@ bool FGHSTwinSearchFollowsPanel::RunTest(const FString&)
     }
     return true;
 }
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSRoofInspectionLayout,"GHS.TwinUI.Layout.RoofInspectionKeepsFullScene",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSRoofInspectionLayout::RunTest(const FString&)
+{
+    for(FVector2D Pixels:{FVector2D(1920,1080),FVector2D(2560,1600),FVector2D(1366,768)})
+    {
+        const auto View=FGHSTwinViewport::FromPixels(Pixels);
+        const auto Layout=FGHSTwinLayout::RoofInspection(View.LogicalSize);
+        TestTrue(TEXT("Inspection occupies the whole scene without a business drawer"),Layout.ScenePosition.IsNearlyZero() && Layout.SceneSize.Equals(View.LogicalSize) && Layout.PanelSize.IsNearlyZero());
+        TestTrue(TEXT("Top and side remain navigable without invisible GHS header"),Layout.IsScenePoint(FVector2D(1,1)) && Layout.IsScenePoint(View.LogicalSize-FVector2D(1,1)));
+        TestFalse(TEXT("Outside viewport remains excluded"),Layout.IsScenePoint(View.LogicalSize));
+    }
+    return true;
+}
 #endif

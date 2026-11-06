@@ -5,11 +5,15 @@
 #include "Materials/MaterialInterface.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialInstanceDynamic.h"
+#include "Misc/CommandLine.h"
+#include "Misc/Parse.h"
 
 namespace
 {
 constexpr const TCHAR* SourceNames[]={TEXT("M_GHSRoof_Roof"),TEXT("M_GHSRoof_Seams"),
     TEXT("M_GHSRoof_Blue"),TEXT("M_GHSRoof_Skylight"),TEXT("M_GHSRoof_Detail"),TEXT("M_GHSFacade_Glass")};
+constexpr const TCHAR* MPRSourceNames[]={TEXT("M_MPR4_PBRSolid"),TEXT("M_MPR4_PBRTextured"),
+    TEXT("M_MPRH_SolarCells"),TEXT("M_MPRH_SolarCellsLight"),TEXT("M_MPRH_SolarCellsShade"),TEXT("M_MPRH_SolarFrame")};
 
 // SourceAssets/GHS/MainRoof/roof_manifest.json: exact CAD outline, including
 // the southwest office extension and southeast diagonal. Mesh-local cm.
@@ -19,12 +23,21 @@ const FVector2D Outline[]={
     FVector2D(-19321.145,5888.181),FVector2D(20158.2115,5888.181),
     FVector2D(22665.055,5193.3623)};
 
-bool ContainsRoofPoint(const FVector2D& P)
+// SourceAssets/MPR/mpr_cad_layout.json, CAD metres mirrored to UE centimetres.
+const FVector2D MPROutline[]={
+    {-18193.004,-8369.038},{-16608.044,-8369.038},{-16608.044,-7454.638},
+    {16678.656,-7454.638},{16678.656,-8358.878},{18261.076,-8358.878},
+    {18261.076,2050.042},{16678.656,2050.042},{16678.656,5098.042},
+    {15091.156,5098.042},{15091.156,6622.042},{13536.676,6622.042},
+    {13536.676,8394.962},{-16608.044,8394.962},{-16608.044,9309.362},{-18193.004,9309.362}};
+
+template <SIZE_T N>
+bool ContainsPoint(const FVector2D& P,const FVector2D (&Points)[N])
 {
     bool Inside=false;
-    for(int32 I=0,J=UE_ARRAY_COUNT(Outline)-1;I<UE_ARRAY_COUNT(Outline);J=I++)
+    for(int32 I=0,J=N-1;I<N;J=I++)
     {
-        const FVector2D A=Outline[I],B=Outline[J];
+        const FVector2D A=Points[I],B=Points[J];
         if((A.Y>P.Y)!=(B.Y>P.Y) && P.X<(B.X-A.X)*(P.Y-A.Y)/(B.Y-A.Y)+A.X) Inside=!Inside;
     }
     return Inside;
@@ -39,6 +52,12 @@ UGHSWarehouseRoofComponent::UGHSWarehouseRoofComponent()
     {
         const FString Name=FString(TEXT("M_Scan_"))+SourceName;
         const FString Path=FString(TEXT("/Game/GHSZcoolSmartFactory/Roof/ScanReveal/"))+Name+TEXT(".")+Name;
+        DissolveTemplates.Add(TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(Path)));
+    }
+    for(const TCHAR* SourceName:MPRSourceNames)
+    {
+        const FString Name=FString(TEXT("M_Scan_"))+SourceName;
+        const FString Path=FString(TEXT("/Game/MPRWarehouse/Roof/ScanReveal/"))+Name+TEXT(".")+Name;
         DissolveTemplates.Add(TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(Path)));
     }
 }
@@ -57,7 +76,7 @@ void UGHSWarehouseRoofComponent::InitializeRoof()
         bShellInitialized=true;
         for(TActorIterator<AActor> It(GetWorld());It;++It)
         {
-            if(It->ActorHasTag(TEXT("GHS_WarehouseRoof"))) continue;
+            if(It->ActorHasTag(TEXT("GHS_WarehouseRoof")) || It->ActorHasTag(TEXT("MPR_Roof"))) continue;
             bool bShell=It->ActorHasTag(TEXT("GHS_OfficeFacade")) || It->ActorHasTag(TEXT("ZcoolSequentialDockNumber"));
             TInlineComponentArray<UStaticMeshComponent*> Meshes(*It);
             for(auto* Mesh:Meshes) if(Mesh->GetStaticMesh())
@@ -69,24 +88,46 @@ void UGHSWarehouseRoofComponent::InitializeRoof()
         }
     }
     if(HasRoof()) return;
+    RoofParts.Empty();RoofMesh=nullptr;bMPRRoof=false;
+    bool bHasGHSRoof=false;
+    for(TActorIterator<AActor> It(GetWorld());It;++It)
+        bHasGHSRoof|=It->ActorHasTag(TEXT("GHS_WarehouseRoof"));
+    // Existing performance captures intentionally exclude interaction and HUD setup.
+    if(!bHasGHSRoof && FParse::Param(FCommandLine::Get(),TEXT("MPRProfile"))) return;
+    bMPRRoof=!bHasGHSRoof;
+    const FName Tag=bMPRRoof?TEXT("MPR_Roof"):TEXT("GHS_WarehouseRoof");
     for(TActorIterator<AActor> It(GetWorld());It;++It)
     {
-        if(!It->ActorHasTag(TEXT("GHS_WarehouseRoof"))) continue;
-        UStaticMeshComponent* Mesh=It->FindComponentByClass<UStaticMeshComponent>();
-        if(!Mesh || !Mesh->GetStaticMesh()) continue;
-        RoofActor=*It;
-        RoofMesh=Mesh;
-        SourceMaterials.Reset();
-        DissolveInstances.Reset();
-        for(int32 Slot=0;Slot<Mesh->GetNumMaterials();++Slot) SourceMaterials.Add(Mesh->GetMaterial(Slot));
-        RestoreRoof(false);
-        return;
+        if(!It->ActorHasTag(Tag)) continue;
+        TInlineComponentArray<UStaticMeshComponent*> Meshes(*It);
+        for(UStaticMeshComponent* Mesh:Meshes)
+        {
+            if(!Mesh || !Mesh->GetStaticMesh()) continue;
+            auto& Part=RoofParts.AddDefaulted_GetRef();
+            Part.Actor=*It;Part.Mesh=Mesh;
+            Part.bActorHidden=It->IsHidden();Part.bMeshVisible=Mesh->IsVisible();Part.bMeshHidden=Mesh->bHiddenInGame;
+            for(int32 Slot=0;Slot<Mesh->GetNumMaterials();++Slot) Part.SourceMaterials.Add(Mesh->GetMaterial(Slot));
+            if(!bMPRRoof || Mesh->GetStaticMesh()->GetName()==TEXT("SM_MPR4_RoofSkin_00")) RoofMesh=Mesh;
+        }
     }
+    // A tagged roof device alone must not turn unrelated geometry into a building.
+    if(!RoofMesh) {RoofParts.Empty();bMPRRoof=false;return;}
+    RestoreRoof(false);
 }
 
 bool UGHSWarehouseRoofComponent::HasRoof() const
 {
-    return IsValid(RoofActor) && IsValid(RoofMesh) && RoofMesh->GetStaticMesh()!=nullptr;
+    return IsValid(RoofMesh) && RoofMesh->GetStaticMesh()!=nullptr && !RoofParts.IsEmpty();
+}
+
+void UGHSWarehouseRoofComponent::SetRoofHidden(bool bHidden)
+{
+    for(auto& Part:RoofParts) if(IsValid(Part.Actor) && IsValid(Part.Mesh))
+    {
+        Part.Actor->SetActorHiddenInGame(Part.bActorHidden || bHidden);
+        Part.Mesh->SetVisibility(Part.bMeshVisible);
+        Part.Mesh->SetHiddenInGame(Part.bMeshHidden);
+    }
 }
 
 bool UGHSWarehouseRoofComponent::OpenRoof(bool bFast)
@@ -94,47 +135,62 @@ bool UGHSWarehouseRoofComponent::OpenRoof(bool bFast)
     if(!HasRoof()) InitializeRoof();
     if(!HasRoof()) return false;
     if(Transition.IsOpen()) return true;
+    // Do not start an MPR reveal with an unresolved material: that would leave
+    // opaque pieces floating above the interior until the end of the animation.
+    if(!ApplyDissolveMaterials()) return false;
     Transition.Open(bFast);
     if(Transition.IsOpen())
     {
-        RoofActor->SetActorHiddenInGame(true);
+        SetRoofHidden(true);
         RestoreSourceMaterials();
         UpdateShellVisibility();
         SetComponentTickEnabled(false);
         return true;
     }
-    ApplyDissolveMaterials();
     UpdateDissolveMaterials();
-    RoofActor->SetActorHiddenInGame(false);
-    RoofMesh->SetVisibility(true,true);
+    SetRoofHidden(false);
     UpdateShellVisibility();
     SetComponentTickEnabled(true);
     return true;
 }
 
-void UGHSWarehouseRoofComponent::ApplyDissolveMaterials()
+bool UGHSWarehouseRoofComponent::ApplyDissolveMaterials()
 {
-    if(!HasRoof()) return;
-    if(DissolveInstances.IsEmpty())
+    if(!HasRoof()) return false;
+    bool bComplete=true;
+    for(auto& Part:RoofParts)
     {
-        for(UMaterialInterface* Source:SourceMaterials)
+        if(!IsValid(Part.Mesh)) continue;
+        if(Part.DissolveInstances.IsEmpty())
         {
-            UMaterialInterface* Template=nullptr;
-            const FString SourceName=Source && Source->GetMaterial()?Source->GetMaterial()->GetName():FString();
-            for(int32 I=0;I<UE_ARRAY_COUNT(SourceNames);++I)
-                if(SourceName==SourceNames[I] && DissolveTemplates.IsValidIndex(I)) Template=DissolveTemplates[I].LoadSynchronous();
-            UMaterialInstanceDynamic* Instance=Template?UMaterialInstanceDynamic::Create(Template,this):nullptr;
-            DissolveInstances.Add(Instance);
+            for(UMaterialInterface* Source:Part.SourceMaterials)
+            {
+                UMaterialInterface* Template=nullptr;
+                const FString SourceName=Source && Source->GetMaterial()?Source->GetMaterial()->GetName():FString();
+                const FString TemplateName=TEXT("M_Scan_")+SourceName;
+                for(const auto& Candidate:DissolveTemplates)
+                    if(Candidate.GetAssetName()==TemplateName) {Template=Candidate.LoadSynchronous();break;}
+                Part.DissolveInstances.Add(Template?UMaterialInstanceDynamic::Create(Template,this):nullptr);
+            }
         }
+        for(UMaterialInstanceDynamic* Instance:Part.DissolveInstances) bComplete&=IsValid(Instance);
     }
-    for(int32 Slot=0;Slot<DissolveInstances.Num();++Slot)
+    if(bMPRRoof && !bComplete)
     {
-        UMaterialInstanceDynamic* Instance=DissolveInstances[Slot];
-        if(!Instance) continue;
-        if(SourceMaterials.IsValidIndex(Slot) && SourceMaterials[Slot])
-            Instance->CopyMaterialUniformParameters(SourceMaterials[Slot]);
-        RoofMesh->SetMaterial(Slot,Instance);
+        UE_LOG(LogTemp,Warning,TEXT("MPR roof reveal requires all source-matched scan materials"));
+        for(auto& Part:RoofParts) Part.DissolveInstances.Empty();
+        return false;
     }
+    for(auto& Part:RoofParts) if(IsValid(Part.Mesh))
+        for(int32 Slot=0;Slot<Part.DissolveInstances.Num();++Slot)
+        {
+            UMaterialInstanceDynamic* Instance=Part.DissolveInstances[Slot];
+            if(!Instance) continue;
+            if(Part.SourceMaterials.IsValidIndex(Slot) && Part.SourceMaterials[Slot])
+                Instance->CopyMaterialUniformParameters(Part.SourceMaterials[Slot]);
+            Part.Mesh->SetMaterial(Slot,Instance);
+        }
+    return true;
 }
 
 void UGHSWarehouseRoofComponent::SetBuildingVisible(bool bVisible)
@@ -153,8 +209,8 @@ void UGHSWarehouseRoofComponent::UpdateShellVisibility()
 
 void UGHSWarehouseRoofComponent::RestoreSourceMaterials()
 {
-    if(!RoofMesh) return;
-    for(int32 Slot=0;Slot<SourceMaterials.Num();++Slot) RoofMesh->SetMaterial(Slot,SourceMaterials[Slot]);
+    for(auto& Part:RoofParts) if(IsValid(Part.Mesh))
+        for(int32 Slot=0;Slot<Part.SourceMaterials.Num();++Slot) Part.Mesh->SetMaterial(Slot,Part.SourceMaterials[Slot]);
 }
 
 void UGHSWarehouseRoofComponent::RestoreRoof(bool bAnimate)
@@ -169,8 +225,7 @@ void UGHSWarehouseRoofComponent::RestoreRoof(bool bAnimate)
         UpdateDissolveMaterials();
     }
     else RestoreSourceMaterials();
-    RoofActor->SetActorHiddenInGame(false);
-    RoofMesh->SetVisibility(true,true);
+    SetRoofHidden(false);
 }
 
 void UGHSWarehouseRoofComponent::TickComponent(float DeltaTime,ELevelTick TickType,FActorComponentTickFunction* ThisTickFunction)
@@ -182,7 +237,7 @@ void UGHSWarehouseRoofComponent::TickComponent(float DeltaTime,ELevelTick TickTy
     UpdateDissolveMaterials();
     if(Transition.IsOpen())
     {
-        RoofActor->SetActorHiddenInGame(true);
+        SetRoofHidden(true);
         UpdateShellVisibility();
         RestoreSourceMaterials();
         SetComponentTickEnabled(false);
@@ -195,16 +250,33 @@ void UGHSWarehouseRoofComponent::TickComponent(float DeltaTime,ELevelTick TickTy
     }
 }
 
+FBox UGHSWarehouseRoofComponent::GetRoofWorldBounds() const
+{
+    FBox Bounds(ForceInit);
+    for(const auto& Part:RoofParts) if(IsValid(Part.Mesh) && Part.Mesh->GetStaticMesh())
+    {
+        // Devices and solar panels must not shift the building label or scan axis.
+        if(bMPRRoof && !Part.Mesh->GetStaticMesh()->GetName().StartsWith(TEXT("SM_MPR4_RoofSkin_"))) continue;
+        Bounds+=Part.Mesh->GetStaticMesh()->GetBoundingBox().TransformBy(Part.Mesh->GetComponentTransform());
+    }
+    return Bounds;
+}
+
 void UGHSWarehouseRoofComponent::UpdateDissolveMaterials()
 {
     if(!HasRoof()) return;
     const FBox Bounds=RoofMesh->GetStaticMesh()->GetBoundingBox();
     const FTransform Transform=RoofMesh->GetComponentTransform();
     const FVector LocalAxis=Bounds.GetExtent().X>=Bounds.GetExtent().Y?FVector::ForwardVector:FVector::RightVector;
-    const FVector Axis=Transform.TransformVector(LocalAxis).GetSafeNormal();
-    const double HalfExtent=Transform.TransformVector(LocalAxis*(Bounds.GetExtent()|LocalAxis)).Length();
-    const FVector Center=Transform.TransformPosition(Bounds.GetCenter());
-    for(UMaterialInstanceDynamic* Instance:DissolveInstances)
+    FVector Axis=Transform.TransformVector(LocalAxis).GetSafeNormal();
+    double HalfExtent=Transform.TransformVector(LocalAxis*(Bounds.GetExtent()|LocalAxis)).Length();
+    FVector Center=Transform.TransformPosition(Bounds.GetCenter());
+    if(bMPRRoof)
+    {
+        const FBox Building=GetRoofWorldBounds();
+        Axis=FVector::ForwardVector;HalfExtent=Building.GetExtent().X;Center=Building.GetCenter();
+    }
+    for(const auto& Part:RoofParts) for(UMaterialInstanceDynamic* Instance:Part.DissolveInstances)
     {
         if(!Instance) continue;
         Instance->SetScalarParameterValue(TEXT("RoofOpenProgress"),Transition.Progress());
@@ -216,6 +288,11 @@ void UGHSWarehouseRoofComponent::UpdateDissolveMaterials()
 FVector UGHSWarehouseRoofComponent::GetPOIWorldLocation() const
 {
     if(!HasRoof()) return FVector::ZeroVector;
+    if(bMPRRoof)
+    {
+        const FBox Bounds=GetRoofWorldBounds();
+        FVector Point=Bounds.GetCenter();Point.Z=Bounds.Max.Z+20.;return Point;
+    }
     const FBox Bounds=RoofMesh->GetStaticMesh()->GetBoundingBox();
     FVector Point=Bounds.GetCenter();Point.Z=Bounds.Max.Z+20.;
     return RoofMesh->GetComponentTransform().TransformPosition(Point);
@@ -223,7 +300,20 @@ FVector UGHSWarehouseRoofComponent::GetPOIWorldLocation() const
 
 bool UGHSWarehouseRoofComponent::HitRoofRay(const FVector& Origin,const FVector& Direction) const
 {
-    return HasRoof() && !Transition.IsOpen() && RayHitsRoofFootprint(Origin,Direction,RoofMesh->GetComponentTransform());
+    if(!HasRoof() || Transition.IsOpen()) return false;
+    return bMPRRoof?RayHitsMPRRoofFootprint(Origin,Direction,RoofMesh->GetComponentTransform()):
+                    RayHitsRoofFootprint(Origin,Direction,RoofMesh->GetComponentTransform());
+}
+
+bool UGHSWarehouseRoofComponent::RayHitsMPRRoofFootprint(const FVector& Origin,const FVector& Direction,const FTransform& RoofTransform)
+{
+    if(Origin.ContainsNaN() || Direction.ContainsNaN() || Direction.IsNearlyZero()) return false;
+    const FVector O=RoofTransform.InverseTransformPosition(Origin),D=RoofTransform.InverseTransformVector(Direction);
+    if(FMath::Abs(D.Z)<UE_SMALL_NUMBER) return false;
+    const double T=(1340.-O.Z)/D.Z;
+    if(T<0. || !FMath::IsFinite(T)) return false;
+    const FVector P=O+D*T;
+    return ContainsPoint(FVector2D(P.X,P.Y),MPROutline);
 }
 
 bool UGHSWarehouseRoofComponent::RayHitsRoofFootprint(const FVector& Origin,const FVector& Direction,const FTransform& RoofTransform)
@@ -244,7 +334,7 @@ bool UGHSWarehouseRoofComponent::RayHitsRoofFootprint(const FVector& Origin,cons
         const double T=(A*O.Y+B-O.Z)/Denom;
         if(T<0. || !FMath::IsFinite(T)) return false;
         const FVector P=O+D*T;
-        return P.Y>=MinY && P.Y<=MaxY && ContainsRoofPoint(FVector2D(P.X,P.Y));
+        return P.Y>=MinY && P.Y<=MaxY && ContainsPoint(FVector2D(P.X,P.Y),Outline);
     };
     return HitPlane(Slope,1040.-Slope*RidgeY,LowY,RidgeY)
         || HitPlane(-Slope,1040.+Slope*RidgeY,RidgeY,HighY)
@@ -263,7 +353,7 @@ void UGHSWarehouseRoofComponent::ResetForWorld()
     RestoreRoof(false);
     for(const auto& Entry:ShellActors) if(Entry.Actor.IsValid()) Entry.Actor->SetActorHiddenInGame(Entry.bOriginallyHidden);
     ShellActors.Empty();bShellInitialized=false;bBuildingVisible=true;
-    RoofActor=nullptr;RoofMesh=nullptr;SourceMaterials.Empty();DissolveInstances.Empty();
+    RoofMesh=nullptr;RoofParts.Empty();bMPRRoof=false;
     Transition=FGHSWarehouseRoofTransition();SetComponentTickEnabled(false);
 }
 
@@ -277,8 +367,10 @@ FGHSWarehouseRoofReplayState UGHSWarehouseRoofComponent::CaptureReplayState()
         Saved.Shells.Add({Entry.Actor,Entry.Actor->IsHidden(),Entry.bOriginallyHidden});
     }
     Saved.HasRoofVisibility=HasRoof();
-    if(Saved.HasRoofVisibility)
-    {Saved.RoofHidden=RoofActor->IsHidden();Saved.MeshVisible=RoofMesh->IsVisible();Saved.MeshHidden=RoofMesh->bHiddenInGame;}
+    for(const auto& Part:RoofParts) if(IsValid(Part.Actor) && IsValid(Part.Mesh))
+        Saved.Roofs.Add({Part.Actor,Part.Mesh,Part.Actor->IsHidden(),Part.Mesh->IsVisible(),Part.Mesh->bHiddenInGame != 0});
+    if(!Saved.Roofs.IsEmpty())
+    {Saved.RoofHidden=Saved.Roofs[0].ActorHidden;Saved.MeshVisible=Saved.Roofs[0].MeshVisible;Saved.MeshHidden=Saved.Roofs[0].MeshHidden;}
     return Saved;
 }
 
@@ -287,10 +379,14 @@ void UGHSWarehouseRoofComponent::RestoreReplayState(const FGHSWarehouseRoofRepla
     Transition=Saved.Transition;bBuildingVisible=bSavedBuilding;
     if(HasRoof())
     {
-        RoofActor->SetActorHiddenInGame(Saved.HasRoofVisibility?Saved.RoofHidden:Transition.IsOpen());
+        SetRoofHidden(Transition.IsOpen());
         if(Transition.IsTransitioning()) {ApplyDissolveMaterials();UpdateDissolveMaterials();}
         else RestoreSourceMaterials();
-        if(Saved.HasRoofVisibility) {RoofMesh->SetVisibility(Saved.MeshVisible);RoofMesh->SetHiddenInGame(Saved.MeshHidden);}
+        for(const auto& State:Saved.Roofs) if(State.Actor.IsValid() && State.Mesh.IsValid())
+        {
+            State.Actor->SetActorHiddenInGame(State.ActorHidden);
+            State.Mesh->SetVisibility(State.MeshVisible);State.Mesh->SetHiddenInGame(State.MeshHidden);
+        }
     }
     for(const auto& State:Saved.Shells) if(State.Actor.IsValid())
     {

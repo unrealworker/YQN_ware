@@ -57,13 +57,14 @@ public:
     TObjectPtr<UGHSOrderReplaySession> OrderReplay;
     void SendSearchResponse(const FString& Json);
     /** Also used when a warehouse becomes visible as a streamed destination. */
-    void InitializeWarehouseExperience(bool bEnableTraffic=true);
+    void InitializeWarehouseExperience(bool bEnableTraffic=true,bool bRoofInspectionOnly=false,const FString& WarehouseTitle=TEXT("GHS · 主仓库"));
     void ShutdownWarehouseExperience();
 protected:
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void OnUnPossess() override;
 private:
+    bool bMPRExperiencePending=false;
     UFUNCTION() void HandleStreamingInput(const FString& Descriptor);
     UPROPERTY(Transient) TObjectPtr<UGHSStreamingInputComponent> SearchStreamingInput;
     void ConsumeOrbitMotion();
