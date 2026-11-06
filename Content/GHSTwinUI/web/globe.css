@@ -39,3 +39,7 @@ body[data-reduced=true] .panel-view,body[data-reduced=true] .sidebar,body[data-r
 
 #transition[data-waiting=true] span{opacity:1;max-width:min(640px,85vw);padding:24px;text-align:center;line-height:1.6;transition-duration:160ms}
 #transition[data-waiting=false][data-error=false] span{opacity:0;transition-duration:0ms}
+
+/* Only the outgoing photograph is overlaid; the card's layout never animates. */
+.photo-wrap{position:relative}
+.photo-wrap .thumbnail-outgoing{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transform-origin:center}

@@ -1,5 +1,13 @@
 const test=require('node:test'),assert=require('node:assert/strict');
 const P=require('../../../Content/GHSTwinUI/web/globe-policy.js');
+
+test('selection input origin is optional for old hosts and restricted to known modalities',()=>{
+ const base={phase:'selected',stageVisible:true,selectedId:'a',warehouses:[{id:'a',name:'A'}],pois:[],countries:[],transition:{opacity:0}};
+ assert.ok(P.nextState(base,{}));
+ for(const selectionInputSource of ['pointer','keyboard','unknown'])assert.equal(P.nextState(base,{selectionInputSource}).selectionInputSource,selectionInputSource);
+ for(const selectionInputSource of [null,true,0,'mouse',{},[]])assert.equal(P.nextState(base,{selectionInputSource}),null);
+ assert.equal(P.nextState({...base,selectionInputSource:'pointer'},{selectedId:'b'}).selectionInputSource,'unknown');
+});
 test('two thousand warehouses stay within moving DOM budget and preserve selected POI',()=>{
  const sites=Array.from({length:2000},(_,i)=>({id:'w'+i,x:10+i%1000,y:10+i%700,visible:true}));
  const result=P.markers(sites,'w1999',{left:0,top:0,right:1200,bottom:900});

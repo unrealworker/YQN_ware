@@ -20,10 +20,12 @@ function projectionsValid(rows,countries=false){
 function nextState(previous,message){
  if(typeof message==='string'){try{message=JSON.parse(message);}catch(e){return null;}}
  if(!object(message))return null;const candidate={...previous,...message};
+ if(Object.prototype.hasOwnProperty.call(message,'selectedId')&&message.selectedId!==previous.selectedId&&!Object.prototype.hasOwnProperty.call(message,'selectionInputSource'))candidate.selectionInputSource='unknown';
  // Previous is an accepted state (or the trusted local initial state). Revalidate only a transmitted catalog.
  if(!['idle','selected','loading','flying','revealing','warehouse','returning','error'].includes(candidate.phase)||!string(candidate.selectedId)||!boolean(candidate.stageVisible)
   ||!optional(message,'warehouses',catalogValid)||!projectionsValid(candidate.pois)||!projectionsValid(candidate.countries,true)||!optional(candidate,'error',string)||!optional(candidate,'reducedMotion',boolean)
-  ||!optional(candidate,'nativeWarehouseAnnotations',boolean)||!optional(candidate,'nativeCountryLabels',boolean))return null;
+  ||!optional(candidate,'nativeWarehouseAnnotations',boolean)||!optional(candidate,'nativeCountryLabels',boolean)
+  ||!optional(candidate,'selectionInputSource',value=>['pointer','keyboard','unknown'].includes(value)))return null;
  const transition=candidate.transition;
  if(!object(transition)||!finite(transition.opacity)||transition.opacity<0||transition.opacity>1||!optional(transition,'progress',finite)||!optional(transition,'generation',value=>Number.isSafeInteger(value)&&value>=0)||!optional(transition,'awaitingCurtain',boolean)||!optional(transition,'waitingForDestination',boolean))return null;
  for(const key of ['width','height'])if(!optional(transition,key,value=>finite(value)&&value>=0))return null;
