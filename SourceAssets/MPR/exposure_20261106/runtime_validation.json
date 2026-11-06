@@ -1,0 +1,187 @@
+{
+  "success": true,
+  "run_id": "20261106T085252238021Z",
+  "captures": [
+    {
+      "name": "final_exterior",
+      "ev100": 0.6000000238418579,
+      "camera": [
+        26521.622493794544,
+        43669.598653942216,
+        37734.25058571968,
+        -40.56143951416012,
+        -112.8386840820312,
+        -8.373085525523577e-15
+      ],
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\exposure_20261106\\final\\final_exterior_20261106T085252238021Z.png",
+      "sha256": "07cb3b1555267e3d0f08aa64f0dd704422f5d8c6a567da8bdbdc806b56a21c1a",
+      "archived_path": "SourceAssets/MPR/exposure_20261106/after_exterior.png"
+    },
+    {
+      "name": "final_open_overview",
+      "ev100": 0.6000000238418579,
+      "camera": [
+        26521.622493794544,
+        43669.598653942216,
+        37734.25058571968,
+        -40.56143951416012,
+        -112.8386840820312,
+        -8.373085525523577e-15
+      ],
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\exposure_20261106\\final\\final_open_overview_20261106T085252238021Z.png",
+      "sha256": "6c303d931d0e54d8ebc780e5f1c584adfcc115a5da235c4bb3ebf7f60d8ac103",
+      "archived_path": "SourceAssets/MPR/exposure_20261106/after_open_overview.png"
+    },
+    {
+      "name": "final_interior",
+      "ev100": 0.6000000238418579,
+      "camera": [
+        999.9999999999891,
+        14160.213932490129,
+        18524.247332954605,
+        -51.999999999999986,
+        -89.99999999999993,
+        -0.0
+      ],
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\exposure_20261106\\final\\final_interior_20261106T085252238021Z.png",
+      "sha256": "4c873b1d6d49b9adcec4c96badcfe79f7244bcb959a31f275ae48edf9f8f6044",
+      "archived_path": "SourceAssets/MPR/exposure_20261106/after_interior.png"
+    },
+    {
+      "name": "final_sorter_detail",
+      "ev100": 0.6000000238418579,
+      "camera": [
+        -12762.6645586853,
+        9862.311101832845,
+        10904.622203665695,
+        -50.00000000000001,
+        -79.99999999999994,
+        -9.896129401170447e-15
+      ],
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\exposure_20261106\\final\\final_sorter_detail_20261106T085252238021Z.png",
+      "sha256": "32cf92e9e459dc6c6b8a19375fc473b7ffc72336164c3b9af0762c0b1c7d0f72",
+      "archived_path": "SourceAssets/MPR/exposure_20261106/after_sorter_detail.png"
+    }
+  ],
+  "assets_saved": false,
+  "map_before": "0dee9e0dce26371c768cc6611d7d1fb1d9327412a9605951b4372b35b5858dd0",
+  "stage": "complete",
+  "before_settings": {
+    "auto_exposure_method": "<AutoExposureMethod.AEM_HISTOGRAM: 0>",
+    "auto_exposure_min_brightness": "0.6000000238418579",
+    "auto_exposure_max_brightness": "0.6000000238418579",
+    "auto_exposure_bias": "0.0",
+    "bloom_intensity": "0.0"
+  },
+  "lights": [
+    {
+      "label": "MPR4_KeyLight",
+      "intensity": 5.0
+    }
+  ],
+  "performance": {
+    "path": "D:\\UEPro\\Test\\Saved\\Profiling\\CSV\\MPR_EXPOSURE_20261106T085252238021Z.csv",
+    "sha256": "55ca0f6b22e9b5cd49d3088d463efff83051364b21c9e737b2059902436ab620",
+    "timing_unit": "ms",
+    "frame_count": 861,
+    "native_frame_time_seconds": 14.998088300000003,
+    "metrics": {
+      "FrameTime": {
+        "count": 861,
+        "mean_ms": 17.419382462253193,
+        "median_ms": 17.4065,
+        "p95_ms": 19.8449,
+        "p99_ms": 21.5406,
+        "max_ms": 29.0806,
+        "over_16_67ms_count": 585,
+        "over_33_33ms_count": 0,
+        "over_50ms_count": 0
+      },
+      "GameThreadTime": {
+        "count": 861,
+        "mean_ms": 1.8630058072009292,
+        "median_ms": 1.8358,
+        "p95_ms": 2.1648,
+        "p99_ms": 2.484,
+        "max_ms": 12.8138,
+        "over_16_67ms_count": 0,
+        "over_33_33ms_count": 0,
+        "over_50ms_count": 0
+      },
+      "RenderThreadTime": {
+        "count": 861,
+        "mean_ms": 17.41657212543554,
+        "median_ms": 17.3811,
+        "p95_ms": 19.7687,
+        "p99_ms": 21.2406,
+        "max_ms": 28.9624,
+        "over_16_67ms_count": 580,
+        "over_33_33ms_count": 0,
+        "over_50ms_count": 0
+      },
+      "GPUTime": {
+        "count": 861,
+        "mean_ms": 16.643339140534263,
+        "median_ms": 16.6024,
+        "p95_ms": 18.8219,
+        "p99_ms": 19.9267,
+        "max_ms": 23.6443,
+        "over_16_67ms_count": 411,
+        "over_33_33ms_count": 0,
+        "over_50ms_count": 0
+      }
+    },
+    "gpu_verified": true,
+    "gpu_evidence": {
+      "mode": "UE5.8 RHI",
+      "primary_metric": "GPUTime",
+      "positive_frame_ratio": 1.0,
+      "gpu_pass_positive_frame_ratio": 1.0,
+      "pass_columns": [
+        "GPU/RayTracingGeometry",
+        "GPU/DistanceFields",
+        "GPU/GlobalDistanceFieldUpdate",
+        "GPU/AllocateRendertargets",
+        "GPU/VisibilityCommands",
+        "GPU/UpdateLumenSceneBuffers",
+        "GPU/NaniteStreaming",
+        "GPU/NaniteReadback",
+        "GPU/FXSystemPreRender",
+        "GPU/GPUSceneUpdate",
+        "GPU/BuildRenderingCommandsDeferred",
+        "GPU/Prepass",
+        "GPU/NaniteVisBuffer",
+        "GPU/NaniteBasePass",
+        "GPU/HZB",
+        "GPU/BeginOcclusionTests",
+        "GPU/LightGrid",
+        "GPU/LightFunctionAtlasGeneration",
+        "GPU/LumenSceneUpdate",
+        "GPU/BuildRenderingCommands",
+        "GPU/LumenScreenProbeGather",
+        "GPU/Basepass",
+        "GPU/RenderDeferredLighting",
+        "GPU/ShadowDepths",
+        "GPU/LumenReflections",
+        "GPU/TranslucentLighting",
+        "GPU/Lights",
+        "GPU/ShadowProjection",
+        "GPU/DistanceFieldShadows",
+        "GPU/TemporalSuperResolution",
+        "GPU/PostRenderOpsFX",
+        "GPU/FXSystemPostRenderOpaque",
+        "GPU/Translucency",
+        "GPU/Postprocessing",
+        "GPU/VirtualTextureUpdate",
+        "GPU/SlateUI"
+      ],
+      "unregistered_tail_pass_zero_fill_counts": {}
+    },
+    "window": "All finalized native CSV frames between start and stop, including boundary frames; no spikes removed.",
+    "percentile_method": "nearest-rank",
+    "fps": 57.407316371113765,
+    "archived_path": "SourceAssets/MPR/exposure_20261106/interior_native.csv.gz",
+    "scope": "UE5.8 local RenderOffscreen game,1920x1080,sorter close-up,15-second native CSV; user editor also running; not comparable to prior overview-only sample."
+  },
+  "map_unchanged": true
+}
