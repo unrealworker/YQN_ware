@@ -1,0 +1,47 @@
+{
+  "success": true,
+  "plan_sha256": "7dcab37b914e65dc467c5b2ea277649b9843425bf218985331b5f9ebb99e3a16",
+  "manifest_sha256": "c8895d1bce25e2d32219b08cf60ee13db207d0e3b74ec36ea203a380f3d0411b",
+  "original_fbx_triangles_preserved": 2345,
+  "checks": {
+    "existing_green_overlap_m2": 0.0,
+    "roads_overlap_m2": 0.0,
+    "rail_overlap_m2": 0.0,
+    "main_building_overlap_m2": 0.0,
+    "operating_area_overlap_m2": 0.0,
+    "parking_mouths_overlap_m2": 0.0,
+    "vehicles_overlap_m2": 0.0,
+    "south_hard_overlap_m2": 0.0,
+    "original_green_area_m2": 5848.954035469901,
+    "south_addition_area_m2": 2665.236417764335,
+    "east_addition_area_m2": 1932.7817186847178,
+    "new_green_area_m2": 10446.972171918955,
+    "old_triangles_preserved": 2345,
+    "east_concrete_overlap_m2": 1704.0207513785458,
+    "east_min_concrete_clearance_m": 0.025,
+    "south_offset_m": 0.045,
+    "east_offset_m": 0.1,
+    "road_setback_m": 0.4,
+    "facade_setback_m": 1.0,
+    "new_actors": 0,
+    "replaced_mesh_components": 1
+  },
+  "additions": [
+    {
+      "id": "SouthWedge",
+      "triangles": 707,
+      "footprint_error_m2": 0.0014287552684852216,
+      "outside_tolerance_m2": 0.0,
+      "missing_outside_tolerance_m2": 0.0,
+      "terrain_offset_error_m": 7.372955149326232e-07
+    },
+    {
+      "id": "EastSteps",
+      "triangles": 543,
+      "footprint_error_m2": 0.0012117339861514903,
+      "outside_tolerance_m2": 0.0,
+      "missing_outside_tolerance_m2": 0.0,
+      "terrain_offset_error_m": 2.3841857904605135e-08
+    }
+  ]
+}

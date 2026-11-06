@@ -1,0 +1,367 @@
+{
+  "success": true,
+  "plan_sha256": "7dcab37b914e65dc467c5b2ea277649b9843425bf218985331b5f9ebb99e3a16",
+  "manifest_sha256": "c8895d1bce25e2d32219b08cf60ee13db207d0e3b74ec36ea203a380f3d0411b",
+  "source_fbx_sha256": "422f56ed5bc84d4a6986486264d8a7a8319831c51f799ead5cbe035be56947c0",
+  "native_fbx_sha256": "86aeb1a33e304c281c0b1c2de7335ea330f60b41f07587c4447d833046286678",
+  "asset_sha256": "4311f7cd31a383f3516750768f125dbd6db14f02df9cc0a2816e6ec75b761cdc",
+  "native_fbx": "Saved/MPR/green_extension_20261106/native/SM_MPRGE_CampusGreen.fbx",
+  "export_source_mesh": false,
+  "method": "Binary render-buffer FBX divided by 100; exact source triangle preservation, UE float32 degeneracy test, one-to-one retained-face mapping, terrain and footprint containment.",
+  "native_point_match_tolerance_m": 5e-05,
+  "footprint_tolerance_m": 0.0001,
+  "source_triangles": 3595,
+  "native_triangles": 3583,
+  "all_retained_source_faces_accounted": true,
+  "all_native_faces_mapped": true,
+  "original_source_triangles_preserved": 2345,
+  "maximum_native_vertex_distance_m": 2.899653150485297e-05,
+  "rejected_surface_area_m2": 0.0,
+  "rejected_xy_area_m2": 0.0,
+  "groups": [
+    {
+      "id": "CampusGreen",
+      "source_triangles": 2345,
+      "native_triangles": 2336,
+      "rejected_triangles": 9,
+      "rejected_surface_area_m2": 0.0,
+      "source_area_m2": 5848.954035469901,
+      "native_area_m2": 5848.9543344285,
+      "footprint_symmetric_difference_m2": 0.016481937212070925,
+      "missing_outside_point1mm_m2": 0.0,
+      "outside_point1mm_m2": 0.0,
+      "max_terrain_height_error_m": 1.2598475012809418e-06,
+      "max_triangle_area_difference_m2": 8.78125060363999e-05
+    },
+    {
+      "id": "SouthWedge",
+      "source_triangles": 707,
+      "native_triangles": 706,
+      "rejected_triangles": 1,
+      "rejected_surface_area_m2": 0.0,
+      "source_area_m2": 2665.236440554849,
+      "native_area_m2": 2665.2365933340666,
+      "footprint_symmetric_difference_m2": 0.0037132772014627762,
+      "missing_outside_point1mm_m2": 0.0,
+      "outside_point1mm_m2": 0.0,
+      "max_terrain_height_error_m": 2.1194409653285673e-06,
+      "max_triangle_area_difference_m2": 7.63249972450808e-05
+    },
+    {
+      "id": "EastSteps",
+      "source_triangles": 543,
+      "native_triangles": 541,
+      "rejected_triangles": 2,
+      "rejected_surface_area_m2": 0.0,
+      "source_area_m2": 1932.7817115331484,
+      "native_area_m2": 1932.7821210634224,
+      "footprint_symmetric_difference_m2": 0.0035188062311306556,
+      "missing_outside_point1mm_m2": 0.0,
+      "outside_point1mm_m2": 0.0,
+      "max_terrain_height_error_m": 4.768371572594354e-08,
+      "max_triangle_area_difference_m2": 6.012003867184035e-05
+    }
+  ],
+  "rejected_source_triangles": [
+    {
+      "source_triangle": 589,
+      "group": "CampusGreen",
+      "source_vertices_m": [
+        [
+          -167.3302459716797,
+          -144.79652404785156,
+          -1.1522120237350464
+        ],
+        [
+          -167.33456420898438,
+          -144.77484130859375,
+          -1.1522400379180908
+        ],
+        [
+          -167.33456420898438,
+          -144.77484130859375,
+          -1.1522400379180908
+        ]
+      ],
+      "surface_area_m2": 0.0,
+      "xy_area_m2": 0.0,
+      "ue_float32_cross_squared_cm4": 0.0,
+      "equal_corners": true
+    },
+    {
+      "source_triangle": 637,
+      "group": "CampusGreen",
+      "source_vertices_m": [
+        [
+          -162.8086395263672,
+          -143.59075927734375,
+          -1.1537129878997803
+        ],
+        [
+          -162.8080596923828,
+          -143.59475708007812,
+          -1.153710961341858
+        ],
+        [
+          -162.8080596923828,
+          -143.59475708007812,
+          -1.153710961341858
+        ]
+      ],
+      "surface_area_m2": 0.0,
+      "xy_area_m2": 0.0,
+      "ue_float32_cross_squared_cm4": 0.0,
+      "equal_corners": true
+    },
+    {
+      "source_triangle": 1657,
+      "group": "CampusGreen",
+      "source_vertices_m": [
+        [
+          27.927473068237305,
+          -141.52542114257812,
+          -1.183603048324585
+        ],
+        [
+          27.927473068237305,
+          -141.52542114257812,
+          -1.183603048324585
+        ],
+        [
+          27.927473068237305,
+          -141.52542114257812,
+          -1.183603048324585
+        ]
+      ],
+      "surface_area_m2": 0.0,
+      "xy_area_m2": 0.0,
+      "ue_float32_cross_squared_cm4": 0.0,
+      "equal_corners": true
+    },
+    {
+      "source_triangle": 1660,
+      "group": "CampusGreen",
+      "source_vertices_m": [
+        [
+          27.927473068237305,
+          -141.52542114257812,
+          -1.183603048324585
+        ],
+        [
+          25.2344970703125,
+          -138.213623046875,
+          -1.1627910137176514
+        ],
+        [
+          27.927473068237305,
+          -141.52542114257812,
+          -1.183603048324585
+        ]
+      ],
+      "surface_area_m2": 0.0,
+      "xy_area_m2": 0.0,
+      "ue_float32_cross_squared_cm4": 0.0,
+      "equal_corners": true
+    },
+    {
+      "source_triangle": 2169,
+      "group": "CampusGreen",
+      "source_vertices_m": [
+        [
+          180.95306396484375,
+          -65.43881225585938,
+          -1.1549999713897705
+        ],
+        [
+          180.95306396484375,
+          -65.43881225585938,
+          -1.1549999713897705
+        ],
+        [
+          179.83248901367188,
+          -64.0912857055664,
+          -1.1549999713897705
+        ]
+      ],
+      "surface_area_m2": 0.0,
+      "xy_area_m2": 0.0,
+      "ue_float32_cross_squared_cm4": 0.0,
+      "equal_corners": true
+    },
+    {
+      "source_triangle": 2184,
+      "group": "CampusGreen",
+      "source_vertices_m": [
+        [
+          179.83248901367188,
+          -64.0912857055664,
+          -1.1549999713897705
+        ],
+        [
+          180.95306396484375,
+          -65.43881225585938,
+          -1.1549999713897705
+        ],
+        [
+          180.95306396484375,
+          -65.43881225585938,
+          -1.1549999713897705
+        ]
+      ],
+      "surface_area_m2": 0.0,
+      "xy_area_m2": 0.0,
+      "ue_float32_cross_squared_cm4": 0.0,
+      "equal_corners": true
+    },
+    {
+      "source_triangle": 2252,
+      "group": "CampusGreen",
+      "source_vertices_m": [
+        [
+          195.7307586669922,
+          -29.579734802246094,
+          -1.1549999713897705
+        ],
+        [
+          199.6263427734375,
+          -31.203922271728516,
+          -1.1549999713897705
+        ],
+        [
+          199.6263427734375,
+          -31.203922271728516,
+          -1.1549999713897705
+        ]
+      ],
+      "surface_area_m2": 0.0,
+      "xy_area_m2": 0.0,
+      "ue_float32_cross_squared_cm4": 0.0,
+      "equal_corners": true
+    },
+    {
+      "source_triangle": 2259,
+      "group": "CampusGreen",
+      "source_vertices_m": [
+        [
+          195.7307586669922,
+          -29.579734802246094,
+          -1.1549999713897705
+        ],
+        [
+          199.6263427734375,
+          -31.203922271728516,
+          -1.1549999713897705
+        ],
+        [
+          199.6263427734375,
+          -31.203922271728516,
+          -1.1549999713897705
+        ]
+      ],
+      "surface_area_m2": 0.0,
+      "xy_area_m2": 0.0,
+      "ue_float32_cross_squared_cm4": 0.0,
+      "equal_corners": true
+    },
+    {
+      "source_triangle": 2269,
+      "group": "CampusGreen",
+      "source_vertices_m": [
+        [
+          200.21238708496094,
+          -24.23346519470215,
+          -1.1549999713897705
+        ],
+        [
+          200.21238708496094,
+          -24.23346519470215,
+          -1.1549999713897705
+        ],
+        [
+          200.4107666015625,
+          -24.606538772583008,
+          -1.1549999713897705
+        ]
+      ],
+      "surface_area_m2": 0.0,
+      "xy_area_m2": 0.0,
+      "ue_float32_cross_squared_cm4": 0.0,
+      "equal_corners": true
+    },
+    {
+      "source_triangle": 3025,
+      "group": "SouthWedge",
+      "source_vertices_m": [
+        [
+          27.941083908081055,
+          -141.62449645996094,
+          -1.1842399835586548
+        ],
+        [
+          27.927473068237305,
+          -141.52542114257812,
+          -1.183603048324585
+        ],
+        [
+          27.927473068237305,
+          -141.52542114257812,
+          -1.183603048324585
+        ]
+      ],
+      "surface_area_m2": 0.0,
+      "xy_area_m2": 0.0,
+      "ue_float32_cross_squared_cm4": 0.0,
+      "equal_corners": true
+    },
+    {
+      "source_triangle": 3504,
+      "group": "EastSteps",
+      "source_vertices_m": [
+        [
+          180.95306396484375,
+          -65.43881225585938,
+          -1.100000023841858
+        ],
+        [
+          180.95306396484375,
+          -65.43881225585938,
+          -1.100000023841858
+        ],
+        [
+          181.03904724121094,
+          -65.4898681640625,
+          -1.100000023841858
+        ]
+      ],
+      "surface_area_m2": 0.0,
+      "xy_area_m2": 0.0,
+      "ue_float32_cross_squared_cm4": 0.0,
+      "equal_corners": true
+    },
+    {
+      "source_triangle": 3586,
+      "group": "EastSteps",
+      "source_vertices_m": [
+        [
+          200.21238708496094,
+          -24.23346519470215,
+          -1.100000023841858
+        ],
+        [
+          200.21238708496094,
+          -24.23346519470215,
+          -1.100000023841858
+        ],
+        [
+          197.59115600585938,
+          -22.34488868713379,
+          -1.100000023841858
+        ]
+      ],
+      "surface_area_m2": 0.0,
+      "xy_area_m2": 0.0,
+      "ue_float32_cross_squared_cm4": 0.0,
+      "equal_corners": true
+    }
+  ]
+}

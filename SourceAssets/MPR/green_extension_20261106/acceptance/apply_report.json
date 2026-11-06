@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "manifest_sha256": "c8895d1bce25e2d32219b08cf60ee13db207d0e3b74ec36ea203a380f3d0411b",
+  "import": {
+    "package": "/Game/MPRWarehouse/GreenExtension20261106/Meshes/SM_MPRGE_CampusGreen",
+    "reused": false,
+    "fbx_sha256": "422f56ed5bc84d4a6986486264d8a7a8319831c51f799ead5cbe035be56947c0",
+    "material_references": [
+      "/Game/MPRWarehouse/Hierarchy/Materials/MI_MPRH_CampusGreen"
+    ],
+    "lod_triangles": [
+      3583
+    ],
+    "bounds_cm": [
+      [
+        -20800.0,
+        20730.0
+      ],
+      [
+        -10212.001953125,
+        19546.87890625
+      ],
+      [
+        -196.46470642089844,
+        -53.82830047607422
+      ]
+    ],
+    "expected_bounds_cm": [
+      [
+        -20800.0,
+        20730.0
+      ],
+      [
+        -10212.0,
+        19546.8781
+      ],
+      [
+        -196.4647,
+        -53.8283
+      ]
+    ],
+    "max_error_cm": 0.001953125
+  },
+  "preservation": {
+    "success": true,
+    "actor_count": 855,
+    "changed_mesh_references": 1,
+    "unchanged_actors": 854,
+    "material_unchanged": "/Game/MPRWarehouse/Hierarchy/Materials/MI_MPRH_CampusGreen"
+  },
+  "content": {
+    "success": true,
+    "unchanged_packages": 1881,
+    "new_mesh": {
+      "Content/MPRWarehouse/GreenExtension20261106/Meshes/SM_MPRGE_CampusGreen.uasset": "4311f7cd31a383f3516750768f125dbd6db14f02df9cc0a2816e6ec75b761cdc"
+    }
+  },
+  "map_sha256": "4dd68cb727c4a87a473cb65baa7abeaf7793409f73cb7620100d650033f27b75"
+}

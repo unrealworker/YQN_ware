@@ -1,0 +1,73 @@
+{
+  "success": true,
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "map_sha256": "4dd68cb727c4a87a473cb65baa7abeaf7793409f73cb7620100d650033f27b75",
+  "baseline_map_sha256": "93c0dceac7b5982736b9a390d369a5d54cd16f664a8101c186e23df0c2718b02",
+  "material": "/Game/MPRWarehouse/Hierarchy/Materials/MI_MPRH_CampusGreen",
+  "unchanged_actors": 854,
+  "changed_mesh_references": 1,
+  "existing_material_unchanged": true,
+  "added_area_m2": 4598.018136449054,
+  "views": [
+    {
+      "name": "01-overview",
+      "before": "SourceAssets/MPR/landscape_layout_20261106/acceptance/after_01-overview.png",
+      "after": "SourceAssets/MPR/green_extension_20261106/acceptance/after_01-overview.png",
+      "before_sha256": "a73e3cdf74884357c2ee32074d469a64b2953718389cade692b1ea0ea7ac1c77",
+      "after_sha256": "467c8dbf6f31edb988b7ba1f3ffb1ba998e95a920316e0ec51f192929cfcafcd",
+      "same_camera": true,
+      "resolution": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "name": "02-campus",
+      "before": "SourceAssets/MPR/landscape_layout_20261106/acceptance/after_02-campus.png",
+      "after": "SourceAssets/MPR/green_extension_20261106/acceptance/after_02-campus.png",
+      "before_sha256": "58658cdb241b3947844803e226968dbf648dcdd3376192647ac90547f8c2d79d",
+      "after_sha256": "16e107bcaf67fbdfaceda29570f23cbab4cf08927daa4f596b1026d9863e062c",
+      "same_camera": true,
+      "resolution": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "name": "04-foreground",
+      "before": "SourceAssets/MPR/landscape_layout_20261106/acceptance/after_04-foreground.png",
+      "after": "SourceAssets/MPR/green_extension_20261106/acceptance/after_04-foreground.png",
+      "before_sha256": "a47c6468aa0883c9dcee4e720776ee7beb68c30f2d71eb4857ea183801b635be",
+      "after_sha256": "3d2f0caddbe108835fd7cd992bf79063f14362dcd7ab4f2191a5aa66024f4e08",
+      "same_camera": true,
+      "resolution": [
+        1920,
+        1080
+      ]
+    }
+  ],
+  "performance": {
+    "fps": 98.72333122616837,
+    "frame_count": 1480,
+    "seconds": 14.991390399999993,
+    "frame_time": {
+      "count": 1480,
+      "mean_ms": 10.129317837837839,
+      "median_ms": 10.0933,
+      "p95_ms": 11.1058,
+      "p99_ms": 11.6469,
+      "max_ms": 16.191,
+      "over_16_67ms_count": 0,
+      "over_33_33ms_count": 0,
+      "over_50ms_count": 0
+    },
+    "scope": "Owned UnrealEditor -game offscreen viewport; not PIE, packaged-game, Pixel Streaming, or concurrent-user performance acceptance."
+  },
+  "concurrent_capture_note": "A separate UnrealEditor process was observed during the prior capture (PID 42476); repeat capture started after only original editor PID 14400 remained. Prior 5.594 FPS sample retained and excluded from isolated result.",
+  "source_hashes": {
+    "plan.json": "7dcab37b914e65dc467c5b2ea277649b9843425bf218985331b5f9ebb99e3a16",
+    "manifest.json": "c8895d1bce25e2d32219b08cf60ee13db207d0e3b74ec36ea203a380f3d0411b",
+    "geometry_validation.json": "db7cda7d2a23a406492f70fedb049d8798caa3fe0db3f0663b9180e5020c3044",
+    "native_validation.json": "1c19e7467b04a271d4e0295f0fbf0fd53181bbfd88bd3117a19d960a827ab9cb"
+  }
+}

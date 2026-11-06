@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "units": "metres",
+  "axis": "CAD +Y; UE import X=100*x,Y=-100*y,Z=100*z",
+  "meshes": [
+    {
+      "name": "SM_MPRGE_CampusGreen",
+      "fbx": "SourceAssets/MPR/green_extension_20261106/SM_MPRGE_CampusGreen.fbx",
+      "material_roles": [
+        "MPRR_CampusGreen"
+      ],
+      "bounds_m": [
+        [
+          -208.0,
+          207.3
+        ],
+        [
+          -195.468781,
+          102.12
+        ],
+        [
+          -1.964647,
+          -0.538283
+        ]
+      ],
+      "vertices": 10785,
+      "triangles": 3595,
+      "sha256": "422f56ed5bc84d4a6986486264d8a7a8319831c51f799ead5cbe035be56947c0",
+      "category": "Site",
+      "full_precision_uvs": true
+    }
+  ],
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "namespace": "/Game/MPRWarehouse/GreenExtension20261106",
+  "plan_sha256": "7dcab37b914e65dc467c5b2ea277649b9843425bf218985331b5f9ebb99e3a16",
+  "source_hashes": {
+    "SourceAssets/MPR/site_completion_20261105/site_plan.json": "86c56ef9ea8225db37f5685e77231dcde6381c51a96963c9b9f1406b4301a595",
+    "SourceAssets/MPR/city_road_removal_20261106/layout.json": "33f992bc8b844fd1daa3cfc6163bc5990ead804749f39606c2efc2382d5d3d3c",
+    "SourceAssets/MPR/rebuild_b50b57/manifest.json": "fcb4361c556b00b99ce31885c1fa7121dbecc553b8b782a63dc02b607fe821c8",
+    "SourceAssets/MPR/landscape_layout_20261106/ground/plan.json": "044416bcf7e796ad2d70e9a98f69089a4beaada64ef711d95f58a90a8f81621b",
+    "SourceAssets/MPR/landscape_layout_20261106/ground/manifest.json": "be8f765d33d2fc2aacd5d1584932fb56ad7e768a1a7a5f5fc103c09bd4a01ff1",
+    "SourceAssets/MPR/mpr_cad_layout.json": "004f3923f292e0a60e22d677ff542e037a6cf248f6a27c348c068ecac4d9f349",
+    "SourceAssets/MPR/landscape_layout_20261106/ground/SM_MPRLG_CampusGreen.fbx": "e97215144f5dbc4056a5ccf75b9d5f77d479e10a1c2c5cb00518e07f33330661",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_-2_-2.fbx": "e64ddfa5294ccd7988aeb1eac76db26c0bf0c477ae6475262ff5586c018f22a5",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_-1_-1.fbx": "dfceba8b95735cf1b0728e2fb168493269bdba6fd1f050357781c4697e4dc0dc",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_-1_-2.fbx": "097eb18871f4f8130b0749fa463cace26aaede5ca1d744b89b1e79b962b0ee36",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_0_-1.fbx": "5c7f1a772d597c2d8e6acdc3e380acdcb9f7e526f37700045c84f00647a6f3e2",
+    "SourceAssets/MPR/rebuild_b50b57/SM_MPRR_Terrain_1_-1.fbx": "2a1ef0e7ff2a55a6024a3a571a25fef63b1135714a78af8e2ee17b9a79026c87"
+  },
+  "new_actors": 0,
+  "replace_mesh_references_only": true
+}
