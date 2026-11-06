@@ -79,7 +79,7 @@ function positionLabels(){if(state.phase==='warehouse'){markerViewport='';return
   node.style.transform='translate3d('+(p.x-origin.left)+'px,'+(p.y-origin.top)+'px,0)';node.dataset.selected=String(state.selectedId===p.id);
  }}
 
- const countryRoot=$('countries'),labels=[],seen=new Set();for(const c of state.countries||[]){const id='country-'+c.id;seen.add(id);let el=document.getElementById(id);if(!el){el=document.createElement('span');el.id=id;el.className='country';el.style.left='0';el.style.top='0';countryRoot.appendChild(el);}if(el.textContent!==c.label)el.textContent=c.label;labels.push({c,el});}
+ const countryRoot=$('countries'),labels=[],seen=new Set();for(const c of state.nativeCountryLabels?[]:(state.countries||[])){const id='country-'+c.id;seen.add(id);let el=document.getElementById(id);if(!el){el=document.createElement('span');el.id=id;el.className='country';el.style.left='0';el.style.top='0';countryRoot.appendChild(el);}if(el.textContent!==c.label)el.textContent=c.label;labels.push({c,el});}
  for(const el of Array.from(countryRoot.children))if(!seen.has(el.id))el.remove();layoutCountries(labels,origin);
 }
 function receive(next){const candidate=GlobePolicy.nextState(state,next);if(!candidate)return;const catalogUpdated=candidate.warehouses!==state.warehouses;state=candidate;

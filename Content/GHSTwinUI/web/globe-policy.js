@@ -22,7 +22,8 @@ function nextState(previous,message){
  if(!object(message))return null;const candidate={...previous,...message};
  // Previous is an accepted state (or the trusted local initial state). Revalidate only a transmitted catalog.
  if(!['idle','selected','loading','flying','revealing','warehouse','returning','error'].includes(candidate.phase)||!string(candidate.selectedId)||!boolean(candidate.stageVisible)
-  ||!optional(message,'warehouses',catalogValid)||!projectionsValid(candidate.pois)||!projectionsValid(candidate.countries,true)||!optional(candidate,'error',string)||!optional(candidate,'reducedMotion',boolean))return null;
+  ||!optional(message,'warehouses',catalogValid)||!projectionsValid(candidate.pois)||!projectionsValid(candidate.countries,true)||!optional(candidate,'error',string)||!optional(candidate,'reducedMotion',boolean)
+  ||!optional(candidate,'nativeCountryLabels',boolean))return null;
  const transition=candidate.transition;
  if(!object(transition)||!finite(transition.opacity)||transition.opacity<0||transition.opacity>1||!optional(transition,'progress',finite)||!optional(transition,'generation',value=>Number.isSafeInteger(value)&&value>=0)||!optional(transition,'awaitingCurtain',boolean)||!optional(transition,'waitingForDestination',boolean))return null;
  for(const key of ['width','height'])if(!optional(transition,key,value=>finite(value)&&value>=0))return null;

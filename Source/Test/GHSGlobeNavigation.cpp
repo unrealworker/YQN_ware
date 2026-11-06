@@ -1,5 +1,6 @@
 #include "GHSGlobeNavigation.h"
 #include "GHSGlobeWarehouseMarkers.h"
+#include "GHSGlobeCountryLabels.h"
 #include "GHSWarehouseCameraPawn.h"
 #include "GHSWarehouseRoofComponent.h"
 #include "GHSStorageCapacityComponent.h"
@@ -130,6 +131,12 @@ void AGHSGlobePlayerController::BeginPlay()
             WarehouseMarkers->Initialize(GlobeRoot.Get(),GlobeRadius,Registry.GetEntries());
             StageActors.Add({WarehouseMarkers,false,false,false});
         }
+        CountryLabels=GetWorld()->SpawnActor<AGHSGlobeCountryLabels>(Params);
+        if(CountryLabels)
+        {
+            CountryLabels->Initialize(GlobeRoot.Get(),GlobeRadius);
+            StageActors.Add({CountryLabels,false,false,false});
+        }
     }
     GlobeHUD=CreateWidget<UGHSGlobeHUD>(this);
     if(GlobeHUD&&GetWorld()->GetGameViewport())
@@ -157,6 +164,7 @@ void AGHSGlobePlayerController::EndPlay(const EEndPlayReason::Type Reason)
     if(GetWorld()&&(Reason==EEndPlayReason::Destroyed||Reason==EEndPlayReason::RemovedFromWorld))
     {SetStageVisible(true);UnloadDestination();}
     if(WarehouseMarkers){WarehouseMarkers->Destroy();WarehouseMarkers=nullptr;}
+    if(CountryLabels){CountryLabels->Destroy();CountryLabels=nullptr;}
     if(GlobeViewportWidget&&GetWorld()&&GetWorld()->GetGameViewport())GetWorld()->GetGameViewport()->RemoveViewportWidgetContent(GlobeViewportWidget.ToSharedRef());
     GlobeViewportWidget.Reset();GlobeHUD=nullptr;Super::EndPlay(Reason);
 }
@@ -673,6 +681,7 @@ FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
     static const TCHAR* Names[]={TEXT("idle"),TEXT("selected"),TEXT("loading"),TEXT("flying"),TEXT("revealing"),TEXT("warehouse"),TEXT("returning"),TEXT("error")};
     auto Root=MakeShared<FJsonObject>();Root->SetStringField(TEXT("phase"),Names[int32(Phase)]);Root->SetStringField(TEXT("selectedId"),SelectedId);Root->SetStringField(TEXT("error"),Error);
     Root->SetBoolField(TEXT("reducedMotion"),bReducedMotion);Root->SetBoolField(TEXT("stageVisible"),bStageVisible);
+    Root->SetBoolField(TEXT("nativeCountryLabels"),CountryLabels!=nullptr);
     auto View=MakeShared<FJsonObject>();View->SetNumberField(TEXT("width"),Viewport.X);View->SetNumberField(TEXT("height"),Viewport.Y);Root->SetObjectField(TEXT("viewport"),View);
     auto Transition=MakeShared<FJsonObject>();Transition->SetNumberField(TEXT("opacity"),MaskOpacity);Transition->SetNumberField(TEXT("progress"),FMath::Clamp(PhaseTime/(bReducedMotion?.22f:FGHSGlobeFlight::Duration),0.f,1.f));
     Transition->SetNumberField(TEXT("generation"),Curtain.GetGeneration());

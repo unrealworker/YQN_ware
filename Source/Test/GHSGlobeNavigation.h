@@ -15,6 +15,7 @@ class UCanvasPanelSlot;
 class ULevelStreamingDynamic;
 class AGHSWarehouseCameraPawn;
 class AGHSGlobeWarehouseMarkers;
+class AGHSGlobeCountryLabels;
 
 /** Reuses the warehouse CEF surface, with a small return control inside the warehouse. */
 UCLASS()
@@ -82,6 +83,7 @@ private:
     UPROPERTY(Transient) TObjectPtr<ULevelStreamingDynamic> Destination;
     UPROPERTY(Transient) TObjectPtr<AGHSWarehouseCameraPawn> PersistentCamera;
     UPROPERTY(Transient) TObjectPtr<AGHSGlobeWarehouseMarkers> WarehouseMarkers;
+    UPROPERTY(Transient) TObjectPtr<AGHSGlobeCountryLabels> CountryLabels;
     FGHSWarehouseRegistry Registry;
     TUniquePtr<IGHSWarehouseExperience> Experience;
     FGHSGlobeCurtainGate Curtain;
