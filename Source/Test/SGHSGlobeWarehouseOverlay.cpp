@@ -334,9 +334,12 @@ int32 SGHSGlobeWarehouseOverlay::OnPaint(const FPaintArgs& Args, const FGeometry
     auto Circle = [&](FVector2D Center, float Diameter, FLinearColor Fill)
     {
         const FSlateRoundedBoxBrush Brush(FLinearColor::White, Diameter * Unit * .5f);
+        // Keep odd/even diameter layers on the same continuous screen anchor.
+        // Independent pixel rounding makes the rim and core jump out of phase
+        // during slow globe rotation; the rounded-box shader handles edge AA.
         FSlateDrawElement::MakeBox(Elements, ++Layer,
             G.ToPaintGeometry(FVector2D(Diameter) * Unit, FSlateLayoutTransform((Center - FVector2D(Diameter * .5)) * Unit)),
-            &Brush, ESlateDrawEffect::None, Fill * Tint);
+            &Brush, ESlateDrawEffect::NoPixelSnapping, Fill * Tint);
     };
     for (const FString& Id : OrderedIds)
     {

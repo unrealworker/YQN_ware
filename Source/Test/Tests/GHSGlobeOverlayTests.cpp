@@ -5,6 +5,10 @@
 #include "Widgets/Input/SButton.h"
 #include "Input/Events.h"
 #include "InputCoreTypes.h"
+#include "Input/HittestGrid.h"
+#include "Rendering/DrawElements.h"
+#include "Types/PaintArgs.h"
+#include "Widgets/SWindow.h"
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSGlobeOverlayGeometryTest, "GHS.Globe.PixelOverlayGeometry", GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FGHSGlobeOverlayGeometryTest::RunTest(const FString&)
@@ -38,6 +42,71 @@ bool FGHSGlobeOverlayGeometryTest::RunTest(const FString&)
         && FMath::IsNearlyEqual(Right.LineEnd.Y, Right.CardPosition.Y, .0001));
     const auto Repeat = FGHSGlobePOIGeometry::AvoidOverlaps(RightPoint, Scene, Occupied);
     TestTrue(TEXT("Unchanged inputs do not swap label sides between frames"), Repeat.CardPosition.Equals(Right.CardPosition));
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSGlobeOverlaySubpixelTest, "GHS.Globe.PixelOverlaySubpixelMotion", GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+bool FGHSGlobeOverlaySubpixelTest::RunTest(const FString&)
+{
+    if (!TestTrue(TEXT("Slate application is available"), FSlateApplication::IsInitialized())) return false;
+    // Paint the real overlay without opening an OS window. Snapping even- and
+    // odd-diameter circles separately makes the white rim wobble on a slow orbit.
+    const auto Window = SNew(SWindow).ClientSize(FVector2D(1920, 1080));
+    const auto Overlay = SNew(SGHSGlobeWarehouseOverlay);
+    FGHSGlobeScreenMarker Marker;
+    Marker.Id = TEXT("subpixel"); Marker.Name = TEXT("Warehouse"); Marker.Ids = {Marker.Id};
+    float MaxAnchorError = 0, MaxSeparation = 0, MaxStepError = 0, MaxSizeError = 0;
+    for (const float Dpi : {1.f, 1.25f, 1.5f, 2.f})
+    {
+        const FGeometry Geometry = FGeometry::MakeRoot(FVector2D(1920, 1080) / Dpi, FSlateLayoutTransform(Dpi));
+        FVector2f PreviousCenters[2];
+        float PreviousOffset = 0;
+        bool bHavePrevious = false;
+        for (const float Offset : {.01f, .24f, .49f, .51f, .76f, .99f})
+        {
+            Marker.PointPixels = FVector2D(600 + Offset, 500 + Offset);
+            Overlay->SetMarkers({Marker});
+            Overlay->SlatePrepass(Dpi);
+            FHittestGrid Grid;
+            Grid.SetHittestArea(FVector2D::ZeroVector, FVector2D(1920, 1080));
+            FSlateWindowElementList Elements(Window);
+            const FPaintArgs Args(nullptr, Grid, FVector2D::ZeroVector, 0, 1.f / 60.f);
+            Overlay->Paint(Args, Geometry, FSlateRect(0, 0, 1920, 1080), Elements, 0, FWidgetStyle(), true);
+            FVector2f Centers[2];
+            bool Found[2] = {false, false};
+            for (const auto& Circle : Elements.GetUncachedDrawElements().Get<(uint8)EElementType::ET_RoundedBox>())
+            {
+                const FVector2f Size = Circle.GetLocalSize();
+                const float Diameter = Size.X * Circle.GetScale();
+                const int32 Index = FMath::IsNearlyEqual(Diameter, 20.f, .001f) ? 0 :
+                    (FMath::IsNearlyEqual(Diameter, 15.f, .001f) ? 1 : INDEX_NONE);
+                if (Index == INDEX_NONE || !FMath::IsNearlyEqual(Size.X, Size.Y, .001f)) continue;
+                // Use the actual emitted transform and the same vertex creation
+                // path as Slate's box batcher, including its chosen rounding.
+                const auto Rounding = Circle.IsPixelSnapped() ? ESlateVertexRounding::Enabled : ESlateVertexRounding::Disabled;
+                const auto Vertex = [&](FVector2f Position)
+                {
+                    return FSlateVertex::Make(Circle.GetRenderTransform(), Position, FVector2f::ZeroVector,
+                        FColor::White, FColor(), Rounding).Position;
+                };
+                const FVector2f TopLeft = Vertex(FVector2f::ZeroVector), BottomRight = Vertex(Size);
+                Centers[Index] = (TopLeft + BottomRight) * .5f; Found[Index] = true;
+                MaxAnchorError = FMath::Max(MaxAnchorError, (Centers[Index] - FVector2f(Marker.PointPixels)).Size());
+                MaxSizeError = FMath::Max(MaxSizeError, (BottomRight - TopLeft - FVector2f(Index == 0 ? 20.f : 15.f)).Size());
+                if (bHavePrevious)
+                    MaxStepError = FMath::Max(MaxStepError,
+                        (Centers[Index] - PreviousCenters[Index] - FVector2f(Offset - PreviousOffset)).Size());
+            }
+            if (!TestTrue(TEXT("Real paint emits both the white rim and blue core"), Found[0] && Found[1])) return false;
+            MaxSeparation = FMath::Max(MaxSeparation, (Centers[0] - Centers[1]).Size());
+            PreviousCenters[0] = Centers[0]; PreviousCenters[1] = Centers[1];
+            PreviousOffset = Offset; bHavePrevious = true;
+        }
+    }
+    TestTrue(FString::Printf(TEXT("Point stays on its projected anchor at every subpixel phase (max %.4f px)"), MaxAnchorError), MaxAnchorError < .001f);
+    TestTrue(FString::Printf(TEXT("Rim and core stay concentric while moving (max %.4f px)"), MaxSeparation), MaxSeparation < .001f);
+    TestTrue(FString::Printf(TEXT("Crossing half-pixel boundaries has no discrete jumps (max %.4f px)"), MaxStepError), MaxStepError < .001f);
+    TestTrue(FString::Printf(TEXT("Physical diameters remain constant at every DPI (max %.4f px)"), MaxSizeError), MaxSizeError < .001f);
     return true;
 }
 
