@@ -79,7 +79,7 @@ private:
     FVector Position(double Latitude,double Longitude) const;
     const FGHSGlobeWarehouse* Selected() const;
     void PushState(bool bIncludeCatalog=false);
-    void UpdateGlobeAnnotations();
+    void UpdateGlobeAnnotations(float DeltaSeconds);
     FString BuildState(bool bIncludeCatalog)const;
     void TickSmokeTest();
     UPROPERTY(Transient) TObjectPtr<UGHSGlobeHUD> GlobeHUD;
@@ -105,8 +105,10 @@ private:
     TSharedPtr<SWidget> GlobeViewportWidget;
     TSharedPtr<SGHSGlobeWarehouseOverlay> WarehouseOverlay;
     bool bNativeAnnotationInteraction=false;
+    bool bAnnotationSceneTransition=false;
     EPhase Phase=EPhase::Idle;
     FString SelectedId,LoadedId,Error;
+    FString SelectionInputSource=TEXT("unknown"),AnnotationInputSource=TEXT("unknown");
     FVector2D Viewport=FVector2D(1920,1080),ScenePosition=FVector2D(0,64),SceneSize=FVector2D(1420,1016);
     double LastInteraction=0,LoadStarted=0,NextPush=0;
     float PhaseTime=0,MaskOpacity=0;

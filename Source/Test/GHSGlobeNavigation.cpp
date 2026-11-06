@@ -155,11 +155,11 @@ void AGHSGlobePlayerController::BeginPlay()
             return float(FGHSTwinViewport::FromPixels(Pixels).SlateScale(UWidgetLayoutLibrary::GetViewportScale(this)));
         })[GlobeHUD->TakeWidget()];
         GetWorld()->GetGameViewport()->AddViewportWidgetContent(GlobeViewportWidget.ToSharedRef(),50);
-        auto MarkerCommand=[this](const TCHAR* Action,const FString& Id)
-        {auto Message=MakeShared<FJsonObject>();Message->SetStringField(TEXT("action"),Action);Message->SetStringField(TEXT("id"),Id);Command(Encode(Message));};
+        auto MarkerCommand=[this](const TCHAR* Action,const FString& Id,const FString& Source)
+        {auto Message=MakeShared<FJsonObject>();Message->SetStringField(TEXT("action"),Action);Message->SetStringField(TEXT("id"),Id);Message->SetStringField(TEXT("inputSource"),Source);Command(Encode(Message));};
         SAssignNew(WarehouseOverlay,SGHSGlobeWarehouseOverlay)
-            .OnSelect_Lambda([this,MarkerCommand](const FString& Id){MarkerCommand(SelectedId==Id?TEXT("enter"):TEXT("select"),Id);})
-            .OnEnter_Lambda([MarkerCommand](const FString& Id){MarkerCommand(TEXT("enter"),Id);})
+            .OnSelect_Lambda([this,MarkerCommand](const FString& Id,const FString& Source){MarkerCommand(SelectedId==Id?TEXT("enter"):TEXT("select"),Id,Source);})
+            .OnEnter_Lambda([MarkerCommand](const FString& Id,const FString& Source){MarkerCommand(TEXT("enter"),Id,Source);})
             .OnCluster_Lambda([this](const TArray<FString>& Ids){Command(TEXT("{\"action\":\"clear\"}"));if(GlobeHUD)GlobeHUD->ShowWarehouseCluster(Ids);})
             .OnInteraction_Lambda([this](bool Active){bNativeAnnotationInteraction=Active;if(GetWorld())LastInteraction=GetWorld()->GetTimeSeconds();});
         GetWorld()->GetGameViewport()->AddViewportWidgetContent(WarehouseOverlay.ToSharedRef(),51);
@@ -280,6 +280,8 @@ void AGHSGlobePlayerController::PollDestination()
 void AGHSGlobePlayerController::StartFlight()
 {
     const auto* W=Selected();if(!W)return;Phase=EPhase::Flying;PhaseTime=0;MaskOpacity=0;bArrivalStarted=false;bResettingGlobe=false;
+    bAnnotationSceneTransition=true;
+    if(WarehouseOverlay)WarehouseOverlay->SetPresentation(false,false,bReducedMotion,AnnotationInputSource==TEXT("keyboard"));
     BeginCurtain();
     if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))
     {
@@ -319,6 +321,8 @@ void AGHSGlobePlayerController::SetStageVisible(bool Visible)
 {
     if(bStageVisible==Visible)return;
     bStageVisible=Visible;
+    if(!Visible&&WarehouseOverlay)
+    {WarehouseOverlay->SetPresentation(false,false,bReducedMotion,true);WarehouseOverlay->SetMarkers({});}
     for(auto& Entry:StageActors)if(auto* Actor=Entry.Actor.Get())
     {
         auto* Volume=Cast<APostProcessVolume>(Actor);
@@ -332,6 +336,8 @@ void AGHSGlobePlayerController::Command(const FString& Json)
 {
     if(Json.Len()>8192)return;TSharedPtr<FJsonObject> O;FString Action;
     if(!FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Json),O)||!O||!O->TryGetStringField(TEXT("action"),Action))return;
+    FString InputSource;O->TryGetStringField(TEXT("inputSource"),InputSource);
+    if(InputSource!=TEXT("pointer")&&InputSource!=TEXT("keyboard"))InputSource=TEXT("unknown");
     if(Action==TEXT("ready")){bReady=true;PushState(true);return;}
     if(Action==TEXT("reducedMotion")){O->TryGetBoolField(TEXT("enabled"),bReducedMotion);return;}
     if(Action==TEXT("curtainReady"))
@@ -362,14 +368,15 @@ void AGHSGlobePlayerController::Command(const FString& Json)
         }return;
     }
     if(Action==TEXT("back")&&Phase==EPhase::Warehouse)
-    {Phase=EPhase::Returning;PhaseTime=0;MaskOpacity=0;bReturningApplied=false;bReturningCommitted=false;bPreloadRequested=false;Error.Empty();if(GlobeHUD)GlobeHUD->SetCompact(false);CancelCameraDrag();BeginCurtain();PushState();return;}
+    {AnnotationInputSource=InputSource;bAnnotationSceneTransition=true;if(WarehouseOverlay)WarehouseOverlay->SetPresentation(false,false,bReducedMotion,true);Phase=EPhase::Returning;PhaseTime=0;MaskOpacity=0;bReturningApplied=false;bReturningCommitted=false;bPreloadRequested=false;Error.Empty();if(GlobeHUD)GlobeHUD->SetCompact(false);CancelCameraDrag();BeginCurtain();PushState();return;}
     if(Phase==EPhase::Warehouse||Phase==EPhase::Flying||Phase==EPhase::Revealing||Phase==EPhase::Returning)return;
     LastInteraction=GetWorld()->GetTimeSeconds();
     if(Action==TEXT("interaction")){O->TryGetBoolField(TEXT("active"),bInteracting);return;}
     if(Action==TEXT("select")||Action==TEXT("enter"))
     {
         FString Id;if(!O->TryGetStringField(TEXT("id"),Id)||!Registry.Find(Id))return;
-        SelectedId=Id;
+        SelectedId=Id;SelectionInputSource=InputSource;
+        if(Action==TEXT("enter"))AnnotationInputSource=InputSource;
         Error.Empty();Phase=EPhase::Selected;bPreloadRequested=true;PreloadSelected();
         if(Action==TEXT("enter")&&Phase!=EPhase::Error){bEntryRequested=true;Phase=EPhase::Loading;if(Destination&&!bUnloadRequested&&LoadedId==SelectedId&&Destination->IsLevelLoaded())StartFlight();}
         if(bUnloadTimedOut)Error=TEXT("上一仓库仍在释放资源，释放完成后会自动继续，请稍候");
@@ -482,21 +489,29 @@ void AGHSGlobePlayerController::UpdateCameraManager(float Dt)
     // The world updates camera caches after Pawn/SpringArm ticks. Project labels
     // here so the same frame's globe transform and rendered view are sampled.
     if(!IsLocalController()||!GetWorld()||!bReady||!FMath::IsFinite(Dt)||Dt<=0)return;
-    UpdateGlobeAnnotations();
+    UpdateGlobeAnnotations(Dt);
     const double Now=GetWorld()->GetTimeSeconds();
     if(Now>=NextPush){NextPush=Now+(Phase==EPhase::Warehouse?.5:1./20.);PushState();}
 }
 
-void AGHSGlobePlayerController::UpdateGlobeAnnotations()
+void AGHSGlobePlayerController::UpdateGlobeAnnotations(float DeltaSeconds)
 {
     if(!WarehouseOverlay)return;
-    const bool Visible=bStageVisible&&(Phase==EPhase::Idle||Phase==EPhase::Selected||Phase==EPhase::Loading||Phase==EPhase::Error);
-    if(!Visible){WarehouseOverlay->SetMarkers({});return;}
+    const bool Visible=Phase==EPhase::Idle||Phase==EPhase::Selected||Phase==EPhase::Loading||Phase==EPhase::Error;
+    if(!bStageVisible||(!Visible&&Phase!=EPhase::Flying))
+    {WarehouseOverlay->SetPresentation(false,false,bReducedMotion,true);WarehouseOverlay->SetMarkers({});return;}
     int32 Width=0,Height=0;GetViewportSize(Width,Height);
     auto* Local=GetLocalPlayer();FSceneViewProjectionData Projection;
     if(!WarehouseMarkers||Width<=0||Height<=0||!Local||!Local->ViewportClient||!Local->ViewportClient->Viewport
         ||!Local->GetProjectionData(Local->ViewportClient->Viewport,Projection)||!Projection.IsValidViewRectangle())
-    {WarehouseOverlay->SetMarkers({});return;}
+    {WarehouseOverlay->SetPresentation(false,false,bReducedMotion,true);WarehouseOverlay->SetMarkers({});return;}
+    // Only scene transitions use this clock. The return starts after the CEF
+    // curtain has gone, so this overlay (above CEF) cannot leak through it.
+    WarehouseOverlay->SetPresentation(Visible,Visible,bReducedMotion,
+        !bAnnotationSceneTransition||AnnotationInputSource==TEXT("keyboard"));
+    WarehouseOverlay->AdvancePresentation(DeltaSeconds);
+    if(Visible&&WarehouseOverlay->GetAnnotationOpacity()>=1.f)bAnnotationSceneTransition=false;
+    if(!Visible&&WarehouseOverlay->GetAnnotationOpacity()<=0.f){WarehouseOverlay->SetMarkers({});return;}
     const FVector2D Scale(Width/Viewport.X,Height/Viewport.Y);
     const FSlateRect Scene(ScenePosition.X*Scale.X,ScenePosition.Y*Scale.Y,
         (ScenePosition.X+SceneSize.X)*Scale.X,(ScenePosition.Y+SceneSize.Y)*Scale.Y);
@@ -737,6 +752,7 @@ FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
     Root->SetBoolField(TEXT("reducedMotion"),bReducedMotion);Root->SetBoolField(TEXT("stageVisible"),bStageVisible);
     Root->SetBoolField(TEXT("nativeWarehouseAnnotations"),WarehouseOverlay.IsValid());
     Root->SetBoolField(TEXT("nativeCountryLabels"),CountryLabels!=nullptr);
+    Root->SetStringField(TEXT("selectionInputSource"),SelectionInputSource);
     auto View=MakeShared<FJsonObject>();View->SetNumberField(TEXT("width"),Viewport.X);View->SetNumberField(TEXT("height"),Viewport.Y);Root->SetObjectField(TEXT("viewport"),View);
     auto Transition=MakeShared<FJsonObject>();Transition->SetNumberField(TEXT("opacity"),MaskOpacity);Transition->SetNumberField(TEXT("progress"),FMath::Clamp(PhaseTime/(bReducedMotion?.22f:FGHSGlobeFlight::Duration),0.f,1.f));
     Transition->SetNumberField(TEXT("generation"),Curtain.GetGeneration());
@@ -761,6 +777,8 @@ FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
         Diagnostics->SetStringField(TEXT("pivot"),Pose.Pivot.ToString());Diagnostics->SetStringField(TEXT("eye"),Eye.ToString());
         Diagnostics->SetStringField(TEXT("rotation"),Pose.Rotation.ToString());Diagnostics->SetNumberField(TEXT("distance"),Pose.Distance);
         Diagnostics->SetNumberField(TEXT("desiredDistance"),Camera->DesiredZoom);Diagnostics->SetNumberField(TEXT("globeYaw"),GlobeRoot.IsValid()?GlobeRoot->GetActorRotation().Yaw:0);
+        Diagnostics->SetNumberField(TEXT("annotationOpacity"),WarehouseOverlay?WarehouseOverlay->GetAnnotationOpacity():0.f);
+        Diagnostics->SetBoolField(TEXT("annotationInteractive"),WarehouseOverlay&&WarehouseOverlay->IsAnnotationInteractive());
         Diagnostics->SetNumberField(TEXT("radiusFromCenter"),(Eye-GlobeCenter).Size());Root->SetObjectField(TEXT("camera"),Diagnostics);
     }
     // Reuse one projection/eye for both visibility and every point. Preserve the

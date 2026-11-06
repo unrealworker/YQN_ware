@@ -27,7 +27,20 @@ struct TEST_API FGHSGlobePOIGeometry
         const TArray<FSlateRect>& Occupied, bool bCluster = false);
 };
 
-DECLARE_DELEGATE_OneParam(FGHSGlobeMarkerAction, const FString&);
+/** Scene-transition alpha only: geographic positions never enter this clock. */
+struct TEST_API FGHSGlobeAnnotationFade
+{
+    float Opacity = 1.f;
+    float Target = 1.f;
+    float Start = 1.f;
+    float Elapsed = 0.f;
+    float Duration = 0.f;
+    static float StandardEase(float Progress);
+    void SetVisible(bool bVisible, bool bReducedMotion, bool bImmediate = false);
+    void Advance(float DeltaSeconds);
+};
+
+DECLARE_DELEGATE_TwoParams(FGHSGlobeMarkerAction, const FString&, const FString&);
 DECLARE_DELEGATE_OneParam(FGHSGlobeClusterAction, const TArray<FString>&);
 DECLARE_DELEGATE_OneParam(FGHSGlobeOverlayInteraction, bool);
 
@@ -45,6 +58,10 @@ public:
     void Construct(const FArguments& Args);
     void SetMarkers(const TArray<FGHSGlobeScreenMarker>& InMarkers);
     void SetSceneRect(const FSlateRect& InSceneRect);
+    void SetPresentation(bool bVisible, bool bInteractive, bool bReducedMotion, bool bImmediate = false);
+    void AdvancePresentation(float DeltaSeconds);
+    float GetAnnotationOpacity() const { return Fade.Opacity; }
+    bool IsAnnotationInteractive() const { return bAnnotationInteractive; }
     virtual void Tick(const FGeometry& Geometry, double Time, float DeltaTime) override;
     virtual int32 OnPaint(const FPaintArgs& Args, const FGeometry& Geometry, const FSlateRect& CullingRect,
         FSlateWindowElementList& Elements, int32 Layer, const FWidgetStyle& Style, bool bParentEnabled) const override;
@@ -57,6 +74,8 @@ private:
     FSlateRect SceneRect = FSlateRect(0, 0, 1920, 1080);
     float PixelUnit = 1.f;
     bool bWasInteracting = false;
+    bool bAnnotationInteractive = true;
+    FGHSGlobeAnnotationFade Fade;
     FGHSGlobeMarkerAction OnSelect, OnEnter;
     FGHSGlobeClusterAction OnCluster;
     FGHSGlobeOverlayInteraction OnInteraction;
