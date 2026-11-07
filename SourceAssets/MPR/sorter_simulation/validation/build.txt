@@ -1,0 +1,116 @@
+Log started at 11/07/2026 11:59:38 (2026-11-07T03:59:38Z)
+Resolved project argument D:/UEPro/Test/Test.uproject to D:\UEPro\Test\Test.uproject
+No config file at C:\ProgramData\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+No config file at C:\Users\28109\AppData\Local\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+No config file at C:\Users\28109\Documents\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Configuration will be read from:
+  C:\Users\28109\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Reading configuration file from cache (D:\UEPro\Test\Intermediate\Build\XmlConfigCache.bin): C:\Users\28109\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Reading configuration file from cache (D:\UEPro\Test\Intermediate\Build\XmlConfigCache.bin): D:\UEPro\Test\Saved\UnrealBuildTool\BuildConfiguration.xml
+Reading configuration file from cache (D:\UEPro\Test\Intermediate\Build\XmlConfigCache.bin): C:\Users\28109\AppData\Local\UnrealEngine\Intermediate\Build\UnrealBuildTool.Env.BuildConfiguration.xml
+Setting temp directory to 'C:\Users\28109\AppData\Local\Temp\UnrealBuildTool\cbf7755b'
+    Registering build platform: UnrealBuildTool.AndroidPlatformFactory
+    Registering build platform: UnrealBuildTool.IOSPlatformFactory
+    Registering build platform: UnrealBuildTool.LinuxPlatformFactory
+    Registering build platform: UnrealBuildTool.MacPlatformFactory
+    Registering build platform: UnrealBuildTool.TVOSPlatformFactory
+    Registering build platform: UnrealBuildTool.WindowsPlatformFactory
+Found Windows 10 SDK root at C:\Program Files\Windows Kits\10 (1)
+Found Windows 10 SDK root at C:\Program Files (x86)\Windows Kits\10 (2)
+Found Windows 10 SDK version 10.0.26100.0 at C:\Program Files (x86)\Windows Kits\10
+Found Universal CRT version 10.0.26100.0 at C:\Program Files (x86)\Windows Kits\10
+Win64 Installed SDK(s): MinVersion_Sdk=10.0.19041.0, MaxVersion_Sdk=10.9.99999.0, CurrentVersion_Sdk=10.0.26100.0, Version_AutoSdk=10.0.22621.0, CurrentVersion_AutoSdk=
+        Registering build platform: Win64 - buildable: True
+    Registering build platform: UnrealBuildTool.VisionOSPlatformFactory
+Command line: D:\UE\UE_5.8\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll TestEditor Win64 Development -Project=D:/UEPro/Test/Test.uproject -WaitMutex -NoHotReloadFromIDE -NoLiveCoding
+Log file: C:\Users\28109\AppData\Local\UnrealBuildTool\Log.txt
+Deleting old log file: C:\Users\28109\AppData\Local\UnrealBuildTool\Log-backup-2026.10.15-03.01.58.txt
+Deleting old log file: C:\Users\28109\AppData\Local\UnrealBuildTool\Log-backup-2026.10.15-03.01.58.json
+
+Determining max actions to execute in parallel (24 physical cores, 32 logical cores)
+  Executing up to 24 processes, one per physical core
+  Requested 1.5 GB memory per action, 31.73 GB available: limiting max parallel actions to 21
+Using 'git status' to determine working set for adaptive non-unity build (D:\UEPro\Test).
+UbaStorageServer - Database loaded from C:\ProgramData\Epic\UnrealBuildAccelerator\cas\casdb (v32) in <1ms (contained 0 entries estimated to 0b)
+UbaServer - Listening on 0.0.0.0:1345
+Skipping D:\UE\UE_5.8\Engine\Intermediate\Build\BuildRules\UE5Rules.dll: File is installed
+Skipping D:\UE\UE_5.8\Engine\Intermediate\Build\BuildRules\UE5ProgramRules.dll: File is installed
+Building UnrealEditor - TestEditor - Win64 - Development
+D:\UEPro\Test\Test.uproject does not list plugin 'AVCodecsCore' as a dependency, but module 'Test' depends on 'AVCodecsCore'.
+D:\UEPro\Test\Test.uproject does not list plugin 'NVCodecs' as a dependency, but module 'Test' depends on 'NVENC'.
+Generated code is up to date.
+Deleting outdated item: D:\UEPro\Test\Binaries\Win64\UnrealEditor-Test.pdb
+Deleting outdated item: D:\UEPro\Test\Intermediate\Build\Win64\x64\UnrealEditor\Development\Test\UnrealEditor-Test.lib
+Building TestEditor...
+===== Toolchain Information =====
+Using ISPC compiler (D:\UE\UE_5.8\Engine\Source\ThirdParty\Intel\ISPC\bin\Windows\ispc.exe)
+  Intel(r) Implicit SPMD Program Compiler (Intel(r) ISPC), 1.24.0 (build commit  @ 20250404, LLVM 18.1.2)
+Using Visual Studio 14.44.35229 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207) and Windows 10.0.26100.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+[Adaptive Build] Excluded from Test unity file: MPRSorterHUDWidget.cpp, MPRSorterSimulation.cpp, MPRSorterSimulationActor.cpp, MPRSorterLayoutTests.cpp, MPRSorterSimulationTests.cpp
+===== End Toolchain Information =====
+Using Unreal Build Accelerator local executor to run 5 action(s)
+  CPU 24 physical cores, 32 logical cores
+  Memory 31.73 GB physical, 36.41 GB/67.73 GB committed
+  UBA Storage capacity 40 GB
+  UBA RootDir C:\ProgramData\Epic\UnrealBuildAccelerator
+Cache bucket 1044665665 used. Action: Compile [x64] MPRSorterHUDWidget.cpp ()
+Cache bucket 416513229 used. Action: Link [x64] UnrealEditor-Test.dll ()
+All processes queued
+[1/5] Compile [x64] MPRSorterHUDWidget.cpp
+D:\UEPro\Test\Source\Test\MPRSorterHUDWidget.cpp(19,26): warning C4996: 'FSlateFontInfo::FSlateFontInfo': Use constructor with FCompositeFont instead. - Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+    return FSlateFontInfo(FPaths::ProjectContentDir()/TEXT("GHSNormalWarehouse/HUD/Fonts/DroidSansFallback.ttf"),Size);
+                         ^
+[2/5] Compile [x64] MPRSorterSimulationActor.cpp
+[3/5] Link [x64] UnrealEditor-Test.lib
+  正在创建库 D:/UEPro/Test/Intermediate/Build/Win64/x64/UnrealEditor/Development/Test/UnrealEditor-Test.lib 和对象 D:/UEPro/Test/Intermediate/Build/Win64/x64/UnrealEditor/Development/Test/UnrealEditor-Test.exp
+[4/5] Link [x64] UnrealEditor-Test.dll
+[5/5] WriteMetadata TestEditor.target [NoUba]
+
+Total time in Unreal Build Accelerator local executor: 5.17 seconds
+Output binary: D:\UE\UE_5.8\Engine\Binaries\Win64\UnrealEditor.exe
+UbaStorageServer - Database saved in <1ms (0 file entries, 0 cas entries. deleted 0 dropped cas files)
+WriteFileIfChanged() wrote 0 changed files of 1 requested writes.
+
+Timeline:
+[  0.000]  +0.210 Main
+   0.010          [  0.010]  +0.060 Apply XmlConfig
+   0.072          [  0.072]  +0.030 AddTelemetry
+   0.118          [  0.118]  +0.092 RegisterPlatforms
+[  0.235]  +0.023 ParseCommandLine
+[  0.309]  +0.106 LoadMakefile
+   0.344          [  0.034]  +0.021 EngineRulesPlugins
+   0.367          [  0.057]  +0.007 EngineRulesFetchDirs
+   0.381          [  0.071]  +0.006 EngineRulesAssembly
+   0.387          [  0.078]  +0.000 ProgramRulesAssembly
+   0.388          [  0.079]  +0.003 ProjectRulesAssembly
+   0.392          [  0.082]  +0.181 CreateTargetRules
+   0.425             0.115          [  0.032]  +0.000 FindPlugins
+   0.451             0.141          [  0.059]  +0.046 MakefileValid
+[  0.612]  +0.008 CppDependencyCache
+[  0.625]  +0.036 TestEditor Win64 Development
+[  0.662]  +0.014 UHTWait
+   0.663          [  0.000]  +0.012 UHTManifest
+   0.676          [  0.013]  +0.010 UHTTimestamps
+[  0.691]  +0.002 CppDependencyCache
+[  0.694]  +0.082 Preparing ActionGraph
+   0.703          [  0.008]  +0.003 LinkActions
+   0.706             0.012          [  0.003]  +0.000 DetectActionGraphCycles
+   0.707          [  0.012]  +0.000 GatherPrerequisiteActions
+   0.708          [  0.014]  +0.000 CppDependencyCacheWait
+   0.709          [  0.014]  +0.048 GatherOutdatedActions
+   0.760          [  0.065]  +0.013 LinkActions
+   0.760             0.065          [  0.000]  +0.000 DetectActionGraphCycles
+   0.774          [  0.080]  +0.001 DeleteOutdatedProducedItems
+   0.775          [  0.081]  +0.000 SaveActionHistory
+   0.776          [  0.082]  +0.000 CreateDirectoriesForProducedItems
+[  0.786]  +0.095 GarbageCollect
+[  0.882]  +5.072 <unknown>
+[  5.954]  +0.000 Deploying targets
+[  5.956]  +0.000 DisconnectCache
+[  5.959]  +0.010 SaveCasTable
+[  5.971]  +0.072 Saving caches
+[  6.044]  +0.002 TelemetryService.FlushEvents
+[  6.047]
+
+Result: Succeeded
+Total execution time: 6.05 seconds

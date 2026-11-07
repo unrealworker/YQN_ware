@@ -1,0 +1,38 @@
+{
+  "scope": "Read-only final production source review; documentation updated separately.",
+  "blockers_found": [],
+  "source_hashes": {
+    "Source/Test/MPRSorterSimulation.h": "fcd97d7a5350ed4638bb02dd9974683b18ec90b630de07cfa8e72536a2b14206",
+    "Source/Test/MPRSorterSimulation.cpp": "7b9385d8f86b4f84a21403d042fc464adf7101e1189508b5c920cfaf6c7d5b86",
+    "Source/Test/MPRSorterSimulationActor.h": "c115c59dc75bc348ab394baba7a02efe0c8931fd5e358723b3aa7d9156652f28",
+    "Source/Test/MPRSorterSimulationActor.cpp": "fbb441e893b202ce2fa0962c1f9ae8da04bf886e06732a4e23d3af57d5cb1fd0",
+    "Source/Test/MPRSorterHUDWidget.h": "70f51e781c2bf6f8fe1175b0a199b0ffbff7c34e1cb67640d9961feaa3fe2cba",
+    "Source/Test/MPRSorterHUDWidget.cpp": "edf6460bfcc06d718079ab5261af513e138278517f7ddf579ee5b56e823d6537"
+  },
+  "evidence": {
+    "ue_automation_passed": 10,
+    "ue_automation_failed": 0,
+    "native_checks_passed": 13,
+    "runtime_run": "20261107T043513235298Z",
+    "scope_regression_tests_passed": 9,
+    "independent_reload": true,
+    "current_map_and_five_new_asset_hashes_match_saved_report": true
+  },
+  "reviewed": [
+    "Reserved interlock in ClearBin, SettleEvents, NextEventSeconds",
+    "quarter-loop shared phases and local-to-world transform once",
+    "four-stage continuous tilted discharge matching sampled path",
+    "fixed instance pools and change-only bin updates",
+    "native HUD all-machine control copy and original GHS focus/roof API",
+    "private asset whitelist and exact three-HISM-group mutation boundary"
+  ],
+  "limits": [
+    "Actual OS mouse click and camera-event leakage not tested because authorization timed out. API behavior was tested.",
+    "15-second 1920x1080 near-view performance sample is not an overview, isolated-hardware or streaming benchmark.",
+    "AABB and parcel surface checks are animation validation, not all-angle manufacturing clearance certification."
+  ],
+  "preexisting_unrelated_modified_files": [
+    "Config/DefaultEditor.ini",
+    "Content/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.uasset"
+  ]
+}

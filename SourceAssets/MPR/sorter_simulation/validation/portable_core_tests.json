@@ -1,0 +1,75 @@
+{
+  "success": true,
+  "scope": "Portable execution of the exact UE test bodies with a minimal automation assertion adapter; full UE build/automation remains root-owned.",
+  "files": {
+    "Source/Test/MPRSorterSimulation.h": "fcd97d7a5350ed4638bb02dd9974683b18ec90b630de07cfa8e72536a2b14206",
+    "Source/Test/MPRSorterSimulation.cpp": "7b9385d8f86b4f84a21403d042fc464adf7101e1189508b5c920cfaf6c7d5b86",
+    "Source/Test/Tests/MPRSorterSimulationTests.cpp": "ac9e90833a70cbc93e2fd6df419fb7b228a8004e2f38c75d60d4d06797cb78d9"
+  },
+  "compiler_environment": "C:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/Tools/VsDevCmd.bat -arch=x64 -host_arch=x64",
+  "compile_flags": [
+    "/std:c++17",
+    "/EHsc",
+    "/W4",
+    "/DWITH_DEV_AUTOMATION_TESTS=1"
+  ],
+  "green_command": "cmd /c compile_green.cmd",
+  "green_exit_code": 0,
+  "tests": 9,
+  "failed": 0,
+  "compiler_warnings": 0,
+  "red_command": "cmd /c compile_red.cmd",
+  "red_exit_code": 1,
+  "red_failed": 7,
+  "red_method": "Deliberate missing-motion mutation compiled from a Saved copy. Tests were authored before production implementation, but the first execution was deferred until the parent authorized portable compilation. This is a mutation sensitivity check, not a claim of pre-implementation observed failure.",
+  "coverage": [
+    "profile validation",
+    "deterministic frame partition",
+    "shared phase and bounded carriers",
+    "unique parcel IDs and conservation",
+    "pause/reset/1x2x4x",
+    "full bin stop/recovery",
+    "simultaneous lift/travel and height-gated unloading",
+    "large step exact events",
+    "12 second collection and reserved capacity",
+    "occupied bin collection deadline during active unloading"
+  ],
+  "semantics": {
+    "scheduler": "deterministic demonstration orders, no real order source",
+    "carrier_count": 4,
+    "shared_phase": true,
+    "paused_reset": true,
+    "collection": "entire occupied bin after configured collection interval from first delivery; defer an expired or manual pickup while unloading is reserved; re-enable restarts full interval",
+    "invalid_delta": "NaN/negative/over 86400 simulation seconds rejected, no silent truncation",
+    "occupancy_reservation": "reserved before unload, counted complete only at unload finish"
+  },
+  "unreal_editor_operated": false,
+  "full_ue_build_run": false,
+  "committed": false,
+  "core_default_bin_capacity": 3,
+  "green_log": "collection_race_green.log",
+  "validated_at_utc": "2026-11-07T03:45:07.720218+00:00",
+  "collection_unload_race": {
+    "red_log": "collection_race_red.log",
+    "red_exit_code": 1,
+    "red_failed_tests": 1,
+    "red_method": "New regression executed against unchanged buggy production core before fix; original eight tests passed and new ninth test failed six assertions.",
+    "green_log": "collection_race_green.log",
+    "green_exit_code": 0,
+    "tests": 9,
+    "failed": 0,
+    "changes": [
+      "Reject manual ClearBin while Reserved > 0 without changing any bin state",
+      "Defer automatic collection until Reserved == 0",
+      "Ignore expired reserved pickup timer in event scheduling; continue countdown while unloading"
+    ],
+    "coverage": [
+      "occupied bin with active reservation and deadline inside unload",
+      "manual pickup refusal preserves state",
+      "expired timer does not cause zero-step stall",
+      "occupied stack unchanged until unloading complete",
+      "deferred pickup counts both parcels exactly once",
+      "large/small/event-split frame equivalence"
+    ]
+  }
+}

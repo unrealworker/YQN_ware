@@ -1,0 +1,377 @@
+{
+  "schema_version": 1,
+  "researched_on": "2026-11-07",
+  "source_doc": "D:\\Data\\仓库数据\\MPR\\天工木马播种机设备\\96格口木马装配指导书-V1.0(2).docx",
+  "source_doc_sha256": "72f414c3654fe48620d6fd945f92b78bb626870220f95efdd730cb63209ba0a0",
+  "locator_method": "Pnnn numbers enumerate w:p elements in word/document.xml body in XML order, including table paragraphs. Figure numbers are the original caption text, not guessed pages.",
+  "source_files": [
+    {
+      "path": "D:\\Data\\仓库数据\\MPR\\天工木马播种机设备\\96格口木马装配指导书-V1.0(2).docx",
+      "bytes": 4079606,
+      "sha256": "72f414c3654fe48620d6fd945f92b78bb626870220f95efdd730cb63209ba0a0"
+    },
+    {
+      "path": "D:\\Data\\仓库数据\\MPR\\天工木马播种机设备\\Snipaste_2026-10-30_16-27-55.png",
+      "bytes": 3751365,
+      "sha256": "0a0d8ff1df05c9f6ae18b1abba9183de3514568d9367c1625de57dc8a0626b5d"
+    },
+    {
+      "path": "D:\\Data\\仓库数据\\MPR\\天工木马播种机设备\\Snipaste_2026-10-30_16-30-02.png",
+      "bytes": 3415068,
+      "sha256": "7571ec86f8e8dd10f25697080f57ef60bdfb06111158adb1a444e3bf6654338f"
+    },
+    {
+      "path": "D:\\Data\\仓库数据\\MPR\\天工木马播种机设备\\天工96宫格木马.jpg",
+      "bytes": 329319,
+      "sha256": "a2546ef35714fef759bb9d18af66ff985297c2a44e921e0edadf64742e5d94b7"
+    },
+    {
+      "path": "D:\\Data\\仓库数据\\MPR\\天工木马播种机设备\\天工96宫格木马.png",
+      "bytes": 19835655,
+      "sha256": "af62fbfa9f0315d5b49de4ff67931d6509d97f6cc5511431031ced34baea25d9"
+    },
+    {
+      "path": "D:\\Data\\仓库数据\\MPR\\天工木马播种机设备\\天工96宫格木马1.png",
+      "bytes": 781303,
+      "sha256": "c576d0494b99df842b9aca79420ea9322caafc0a803504a86695d8c73065e5de"
+    }
+  ],
+  "archived_figures": [
+    {
+      "figure": 16,
+      "original_docx_media": "word/media/image29.png",
+      "archived_file": "figure-16-main-chain-drive.png",
+      "role": "主链电机、链轮、链条与张紧机构",
+      "bytes": 247444,
+      "sha256": "e109a8ed5e67ff1048c3a44c843e236f2ca641e566afbd26a061bf0dd29152f3"
+    },
+    {
+      "figure": 17,
+      "original_docx_media": "word/media/image30.png",
+      "archived_file": "figure-17-lift-carriage-side.png",
+      "role": "导向轮、立柱、升降同步带和短带托盘侧视",
+      "bytes": 41677,
+      "sha256": "34a7ab836630d41fa78ed70e26edf59f6f3207770971c90c5d604ffc45eb46cc"
+    },
+    {
+      "figure": 17,
+      "original_docx_media": "word/media/image31.png",
+      "archived_file": "figure-17-lift-carriage-perspective.png",
+      "role": "升降小车和短带托盘透视",
+      "bytes": 79899,
+      "sha256": "ce44f8f26c698c53343b8f2a04a8df0fed3ab655c083ffa0dc5759fc62435740"
+    },
+    {
+      "figure": 22,
+      "original_docx_media": "word/media/image36.png",
+      "archived_file": "figure-22-system-plan.png",
+      "role": "水平闭环、两侧固定接料结构和间隙要求",
+      "bytes": 122501,
+      "sha256": "b6b3f15ef9502ca3f9d151ebda8f9a8403b964555e202cf4799afda3aca52b5b"
+    }
+  ],
+  "facts": [
+    {
+      "id": "source_scope",
+      "claim": "这是96格口木马的机械装配指导书，版本V1.0，日期2024-10-30；不包含业务控制流程说明。",
+      "confidence_basis": "explicit_document",
+      "paragraphs": [
+        "P004",
+        "P014",
+        "P016",
+        "P078"
+      ],
+      "figures": [],
+      "source_excerpt": [
+        "96格口木马装配指导书",
+        "2024年10月30日",
+        "V1.0",
+        "本手册是木马设备装配指导说明书。手册中详细阐述了木马设备的系统构成、装配方法、装配注意事项等信息。"
+      ],
+      "limits": null
+    },
+    {
+      "id": "fixed_chutes",
+      "claim": "固定滑槽组件为四层，每层有挡板；滑槽焊件初始安装角度20度。",
+      "confidence_basis": "explicit_document",
+      "paragraphs": [
+        "P142",
+        "P143"
+      ],
+      "figures": [
+        1
+      ],
+      "source_excerpt": [
+        "如图1所示，安装四个滑槽焊件3，其中，焊件3与水平面的安装初始角度均设置为20°；安装螺钉型号：内六角圆柱头螺钉M6×70、平垫圈6×1.6、锁紧螺母M6。",
+        "如图1所示，每层滑槽焊件3均安装滑槽挡板4、5、10；安装螺钉型号：内六角圆柱头螺钉M6×16、弹性垫圈6×1.6。"
+      ],
+      "limits": null
+    },
+    {
+      "id": "rfid",
+      "claim": "每层滑槽焊件下设RFID安装架及RFID读写器。",
+      "confidence_basis": "explicit_document",
+      "paragraphs": [
+        "P145",
+        "P146"
+      ],
+      "figures": [
+        3
+      ],
+      "source_excerpt": [
+        "如图3所示，在每层滑槽焊件3的下方安装RFID安装架6，安装螺钉型号：内六角圆柱头螺钉M6×16、弹性垫圈6×1.6、平垫圈6×1.6。",
+        "如图3所示，将RFID读写器12安装到RFID安装架6上，通过内六角圆柱头螺钉M4×20顶紧安装，注意：安装牢固即可，安装时避免螺钉损坏读卡器。"
+      ],
+      "limits": "未定义标签安装对象、标签编码、数据协议或订单绑定规则。"
+    },
+    {
+      "id": "lights",
+      "claim": "滑槽框架上装灯带安装板与盖板。",
+      "confidence_basis": "explicit_document",
+      "paragraphs": [
+        "P158",
+        "P162"
+      ],
+      "figures": [
+        6,
+        7
+      ],
+      "source_excerpt": [
+        "如图6所示，安装灯带安装板16，安装螺钉型号：内六角圆柱头螺钉M6×16、平垫圈6×1.6。",
+        "如图7所示，在完成灯带电气连线工作后，安装灯带盖板17，注意安装方向，安装螺钉型号：内六角圆柱头螺钉M6×16、平垫圈6×1.6。"
+      ],
+      "limits": "没有灯色、闪烁、满箱/完成状态含义。"
+    },
+    {
+      "id": "bin_cart",
+      "claim": "料框小车共8组；图8、9中每组3列4层，即12箱。图22中双侧各4组，96格可由8×12核对。",
+      "confidence_basis": "explicit_text_and_visual_count",
+      "paragraphs": [
+        "P169"
+      ],
+      "figures": [
+        8,
+        9,
+        22
+      ],
+      "source_excerpt": [
+        "如图8所示，按照图中尺寸完成料框小车的安装工作，数量8组。装配整体效果图如图9所示。"
+      ],
+      "limits": "96仅证明此手册配置，不证明场景CAD每台同为96格。"
+    },
+    {
+      "id": "cart_dimensions",
+      "claim": "图8标注料框车宽1440mm、深505mm，4层相邻层距445mm（3×445=1335mm）；轮子直径63mm并带刹车。",
+      "confidence_basis": "dimensioned_drawing",
+      "paragraphs": [],
+      "figures": [
+        8
+      ],
+      "source_excerpt": [],
+      "limits": "这些是料框车尺寸，不是托盘卸料中心Z；不能直接用445mm推导所有场景模型的绝对卸料高度。"
+    },
+    {
+      "id": "loading_station",
+      "claim": "端部有上包台、台面挡边、显示器、扫码头及打印机安装架。",
+      "confidence_basis": "explicit_document",
+      "paragraphs": [
+        "P174",
+        "P177",
+        "P183",
+        "P186"
+      ],
+      "figures": [
+        10,
+        11,
+        13,
+        14
+      ],
+      "source_excerpt": [
+        "如图10所示，从框架内侧安装上包台架1。安装螺钉型号：内六角圆柱头螺钉M12×70、弹性垫圈12×3.1、平垫圈12×2.5。",
+        "如图11所示，将护罩2、显示器支杆5和打印机安装架7安装在上包台架1上。安装螺钉型号：内六角圆柱头螺钉M8×16、弹性垫圈8×2.1、平垫圈8×1.6。",
+        "如图13所示，将台面3和挡边4安装在上包台架1上，安装螺钉型号：内六角平圆头螺钉M6×10、平垫圈6×1.6；将扫码头支架6安装在显示器支杆5上，安装螺钉型号：内六角圆柱头螺钉M6×16、弹性垫圈6×1.6、平垫圈6×1.6。",
+        "如图14所示，安装显示器悬臂支架8和显示器9，安装螺钉型号：内六角圆柱头螺钉M5×16、弹性垫圈5×1.3、平垫圈5×1；安装扫码头10，安装螺钉型号：内六角圆柱头螺钉M3×10。"
+      ],
+      "limits": "文档不定义上包动作时序、条码字段或打印触发逻辑。"
+    },
+    {
+      "id": "horizontal_drive",
+      "claim": "主链电机输出轴装链轮，电机组件位于驱动端部框架，通过链条传动并设置张紧机构。",
+      "confidence_basis": "explicit_document",
+      "paragraphs": [
+        "P191",
+        "P194"
+      ],
+      "figures": [
+        15,
+        16
+      ],
+      "source_excerpt": [
+        "如图15所示，将链轮1通过平键2和螺栓组3（外六角螺栓M16×35、弹性垫圈16×4.1、大垫圈16×5）安装在电机输出轴上。注意：链轮紧定螺钉需紧固。",
+        "如图16所示，将电机组件通过螺栓组4（外六角螺栓M12×30、弹性垫圈12×3.1、平垫圈12×2.5）安装到驱动端部框架上，暂不紧固；将张紧座6安装到端部框架上，安装螺钉型号：内六角圆柱头螺钉M6×25、弹性垫圈6×1.6；安装链条5，并通过螺钉7（内六角圆柱头螺钉M10×45）进行链条张紧，直至链条有足够张紧力；紧固所有螺钉及螺母。"
+      ],
+      "limits": null
+    },
+    {
+      "id": "horizontal_loop",
+      "claim": "图19/22可见两端半圆回转、两侧平行直线轨道构成水平长圆闭环；模组立柱沿此闭环行走，侧面格口框架不随主链转动。",
+      "confidence_basis": "mechanical_drawings_inference",
+      "paragraphs": [
+        "P202",
+        "P206"
+      ],
+      "figures": [
+        18,
+        19,
+        22
+      ],
+      "source_excerpt": [
+        "如图18所示，两端链轮段及中间段所有地脚初始高度均设置为85mm。",
+        "如图19所示，将激光水平仪稳定放置在设备一侧，通过微调该侧地脚高度，确保轨道面与水平仪光线高度差一致（误差：±1mm）。注意：如果调平后，轨道面接缝处仍存在微小高度差，可用角磨机等工具进行打磨。"
+      ],
+      "limits": "未给主链旋转方向、速度、载具数量、连续或间歇控制节拍。"
+    },
+    {
+      "id": "vertical_carriage",
+      "claim": "每个模组的小车由导向轮组件安装在型材立柱上，经固定板和张紧板与升降同步带连接，可沿立柱升降。",
+      "confidence_basis": "explicit_document",
+      "paragraphs": [
+        "P198"
+      ],
+      "figures": [
+        17
+      ],
+      "source_excerpt": [
+        "如图17所示，将小车1通过导向轮组件2安装到型材立柱3上，注意：确保导向轮与小车安装板的端面平齐；通过固定板6及张紧板5将小车1连接在升降同步带4上，并通过螺钉7（内六角圆柱头螺钉M5×50）进行张紧，确保同步带4有足够张紧力。"
+      ],
+      "limits": null
+    },
+    {
+      "id": "onboard_belt",
+      "claim": "图17的小车具有短输送带、端部滚筒和侧挡板；整机图中小车托面朝向侧面的固定滑槽。",
+      "confidence_basis": "visual_component_identification",
+      "paragraphs": [],
+      "figures": [
+        17,
+        22
+      ],
+      "source_excerpt": [],
+      "limits": "侧向驱动卸料由结构推断；手册没有说明带速、双向性、卸料传感器和动作延迟。"
+    },
+    {
+      "id": "clearance",
+      "claim": "任意升降状态下，模组小车与滑槽最小间距大于20mm。",
+      "confidence_basis": "explicit_document",
+      "paragraphs": [
+        "P217"
+      ],
+      "figures": [
+        22
+      ],
+      "source_excerpt": [
+        "如图22所示，将滑槽组件与设备框架连接在一起，注意：保证每个模组小车在任意升降时与滑槽的最小间距＞20mm。"
+      ],
+      "limits": "This is the original manual assembly requirement. Presentation AABB sweeps do not certify all-angle physical manufacturing clearance; this feature is workflow animation, not mechanical validation."
+    },
+    {
+      "id": "output_removal",
+      "claim": "料框放在带脚轮的小车上，作业过程中是固定接料位；可移动料框车为后续人工移走/更换提供结构。",
+      "confidence_basis": "visual_structure_and_inference",
+      "paragraphs": [
+        "P169"
+      ],
+      "figures": [
+        8,
+        9
+      ],
+      "source_excerpt": [
+        "如图8所示，按照图中尺寸完成料框小车的安装工作，数量8组。装配整体效果图如图9所示。"
+      ],
+      "limits": "文档无自动换箱机构或完成订单后换箱流程。"
+    }
+  ],
+  "official_sources": [
+    {
+      "url": "https://www.tgjqr.com/products/3d-sorter-pro/",
+      "title": "木马分拣机 | 天工机器人",
+      "retrieved_on": "2026-11-07",
+      "summary": "官方说明以升降载具把商品送到目标格口，支持单柱单车/双车、模块化多层结构及料箱/流利架/滑槽等格口形式。设备长度和载具配置随项目而定；机械效率与项目运行数据需分别评估。",
+      "do_not_infer": "页面最大机械效率 24500 件/时和可定制格口数不代表 MPR 实际参数；也不证明场景 22 台设备的具体型号或控制时序。"
+    },
+    {
+      "url": "https://www.tgjqr.com/solutions/intelligent-seeding/",
+      "title": "智能播种方案 | 天工机器人",
+      "retrieved_on": "2026-11-07",
+      "summary": "官方方案按门店、订单或目的地归集，支持人工/自动供件及多种识别方式。格口、料箱和上游拣选及下游复核包装需按业务配置。",
+      "do_not_infer": "不据此认定一单一格、具体 RFID 标签对象、满箱策略或任何 WMS/PLC 接口已在本地实现。"
+    }
+  ],
+  "configuration_warning": "96格手册图4/22为12列×4层×2侧。独立天工96宫格木马.jpg可见每侧8列的不同构型，文件名不是配置证明。不得仅凭资料名、旧网格名或本报告将现有关卡64/120格模型声明为已证96格真机。短5列单层线也不能自动视为同种木马。",
+  "unconfirmed_business_rules": [
+    "一个订单是否固定一个格口",
+    "多订单共享箱或订单跨箱策略",
+    "波次规则/订单完成判定",
+    "满箱/异常/取消/补货处理",
+    "WMS/WCS/PLC协议",
+    "RFID标签究竟属于哪种对象",
+    "格口灯色及闪烁协议",
+    "运行方向/速度/加速度/停止方式/载具数/吞吐量/商品限重尺寸"
+  ],
+  "implementation_proposal": {
+    "basis": "Agent implementation proposal for the user-authorized existing MPR scene demonstration, not a vendor commissioning specification.",
+    "target_map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+    "included": {
+      "cad64": 18,
+      "cad120": 4
+    },
+    "excluded": {
+      "Short10": 30,
+      "standalone96_not_placed": true
+    },
+    "retain": [
+      "existing machine transforms",
+      "existing fixed outlet shells and bins",
+      "GHS camera and roof dissolve behavior",
+      "unrelated scene content"
+    ],
+    "motion": "Four travelling columns share a common closed-chain phase at quarter-loop spacing. Each tray lifts to its own destination; aligned trays unload sideways through a fixed chute. The demonstration can stop the common chain to wait for scanning, lift, discharge or capacity.",
+    "business": "Repeatable synthetic destination sequence and unique parcel IDs. No real order, SKU allocation, WMS, WCS, PLC or measured throughput.",
+    "defaults": {
+      "BinCapacity": 3,
+      "CollectSeconds": 12,
+      "AutoCollect": true,
+      "Rate": 1,
+      "AllowedRates": [
+        1,
+        2,
+        4
+      ],
+      "ParcelSizeCm": [
+        22,
+        16,
+        5
+      ]
+    },
+    "defaults_are": "Configurable visualization settings, not original equipment parameters.",
+    "ui": [
+      "start/pause",
+      "reset",
+      "speed",
+      "focus device",
+      "simulated collection toggle",
+      "clear full bins"
+    ],
+    "invariants": [
+      "unique active parcel ID qualified by machine/reset epoch",
+      "bin occupancy plus reservations never exceeds capacity",
+      "spawned equals completed plus active",
+      "completed equals in-bin plus collected",
+      "pause freezes all motion and timers",
+      "reset clears demo state and returns paused 1x",
+      "accepted large time steps process all boundary events"
+    ],
+    "collection_interlock": "ClearBin rejects Reserved>0. An expired automatic collection waits for unloading to finish; NextEventSeconds excludes its expired timer while reserved, preserving stable stack height and positive time progress.",
+    "ui_scope": "HUD text: 演示数据 · 全部设备同步控制. Playback/rate/reset/collection/clear-full act on all 22 machines; navigation and statistics refer to the selected machine. Native APIs were tested; OS pointer input was not tested because authorization timed out."
+  },
+  "archive_policy": "Only four original embedded PNGs are copied. Full extraction, contact sheets and helper scripts remain under Saved/MPR/sorter_sim_20261107/research; original DOCX and large promotional PNGs are not duplicated."
+}

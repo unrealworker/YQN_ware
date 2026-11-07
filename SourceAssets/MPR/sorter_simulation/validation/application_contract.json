@@ -1,0 +1,1021 @@
+{
+  "plan": [
+    {
+      "actor_guid": "04B20E2F4E03436CFF68D98DD4F62C80",
+      "component_name": "HierarchicalInstancedStaticMesh",
+      "profile": "cad64",
+      "old_mesh": "/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64",
+      "new_mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimBody64.SM_MPR_SorterSimBody64",
+      "original_actor": {
+        "guid": "04B20E2F4E03436CFF68D98DD4F62C80",
+        "path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212",
+        "name": "BP_GHS_InstanceGroup_C_212",
+        "class": "/Game/GHSDigitalTwin/Blueprints/BP_GHS_InstanceGroup.BP_GHS_InstanceGroup_C",
+        "label": "MPR_SM_MPR_SorterCAD64_-2_-1",
+        "folder": "MPR/Equipment",
+        "tags": [
+          "MPRWarehouse",
+          "mpr-cad-scene-v1",
+          "InstanceCount=17"
+        ],
+        "transform": {
+          "translation_cm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "attachment_parent": null,
+        "hidden": false,
+        "tick_enabled": false,
+        "collision_enabled": false,
+        "components": [
+          {
+            "name": "BillboardComponent_1",
+            "class": "/Script/Engine.BillboardComponent",
+            "tags": [],
+            "transform": {
+              "translation_cm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                0.5,
+                0.5,
+                0.5
+              ]
+            },
+            "attach_parent": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212.DefaultSceneRoot",
+            "mobility": "<ComponentMobility.MOVABLE: 2>",
+            "visible": true,
+            "hidden_in_game": true
+          },
+          {
+            "name": "DefaultSceneRoot",
+            "class": "/Script/Engine.SceneComponent",
+            "tags": [],
+            "transform": {
+              "translation_cm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "attach_parent": null,
+            "mobility": "<ComponentMobility.STATIC: 0>",
+            "visible": true,
+            "hidden_in_game": false
+          },
+          {
+            "name": "HierarchicalInstancedStaticMesh",
+            "class": "/Script/Engine.HierarchicalInstancedStaticMeshComponent",
+            "tags": [],
+            "transform": {
+              "translation_cm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "attach_parent": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212.DefaultSceneRoot",
+            "mobility": "<ComponentMobility.STATIC: 0>",
+            "visible": true,
+            "hidden_in_game": false,
+            "mesh": "/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64",
+            "materials": [
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_SoftBlue.M_Zcool_SoftBlue",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal.M_Zcool_Metal",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Rubber.M_Zcool_Rubber",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Glass.M_Zcool_Glass"
+            ],
+            "collision_profile": "NoCollision",
+            "cast_shadow": true,
+            "instance_count": 17,
+            "instance_transforms": [
+              {
+                "translation_cm": [
+                  -10878.083257623894,
+                  2875.8014147010244,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -10878.083257623903,
+                  2560.801414701022,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -10878.08325762391,
+                  2245.8014147010235,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -10878.083257623917,
+                  1930.8014147010213,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -10878.083257623925,
+                  1615.801414701025,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -10878.083257623934,
+                  1300.8014147010224,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -10878.08325762394,
+                  985.8014147010235,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -10878.083257623948,
+                  670.8014147010224,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -10878.083257623955,
+                  355.8014147010213,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -9979.958536264474,
+                  2244.80141470101,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -9979.958536264481,
+                  1929.8014147010101,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -9979.958536264494,
+                  1614.80141470101,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -9979.958536264496,
+                  1299.80141470101,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -9979.958536264507,
+                  984.8014147010099,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -9979.958536264516,
+                  669.8014147010099,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -9979.958536264521,
+                  354.80141470100995,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -9979.95853626453,
+                  39.801414701009975,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              }
+            ],
+            "num_custom_data_floats": 0,
+            "custom_data": []
+          }
+        ],
+        "classification": "interior"
+      },
+      "instance_count": 17,
+      "new_materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_SoftBlue.M_Zcool_SoftBlue",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal.M_Zcool_Metal",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Rubber.M_Zcool_Rubber",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Glass.M_Zcool_Glass"
+      ]
+    },
+    {
+      "actor_guid": "0E46FBE1416887AA0EC1CAAEDABC41D8",
+      "component_name": "HierarchicalInstancedStaticMesh",
+      "profile": "cad64",
+      "old_mesh": "/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64",
+      "new_mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimBody64.SM_MPR_SorterSimBody64",
+      "original_actor": {
+        "guid": "0E46FBE1416887AA0EC1CAAEDABC41D8",
+        "path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_213",
+        "name": "BP_GHS_InstanceGroup_C_213",
+        "class": "/Game/GHSDigitalTwin/Blueprints/BP_GHS_InstanceGroup.BP_GHS_InstanceGroup_C",
+        "label": "MPR_SM_MPR_SorterCAD64_-2_0",
+        "folder": "MPR/Equipment",
+        "tags": [
+          "MPRWarehouse",
+          "mpr-cad-scene-v1",
+          "InstanceCount=1"
+        ],
+        "transform": {
+          "translation_cm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "attachment_parent": null,
+        "hidden": false,
+        "tick_enabled": false,
+        "collision_enabled": false,
+        "components": [
+          {
+            "name": "BillboardComponent_1",
+            "class": "/Script/Engine.BillboardComponent",
+            "tags": [],
+            "transform": {
+              "translation_cm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                0.5,
+                0.5,
+                0.5
+              ]
+            },
+            "attach_parent": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_213.DefaultSceneRoot",
+            "mobility": "<ComponentMobility.MOVABLE: 2>",
+            "visible": true,
+            "hidden_in_game": true
+          },
+          {
+            "name": "DefaultSceneRoot",
+            "class": "/Script/Engine.SceneComponent",
+            "tags": [],
+            "transform": {
+              "translation_cm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "attach_parent": null,
+            "mobility": "<ComponentMobility.STATIC: 0>",
+            "visible": true,
+            "hidden_in_game": false
+          },
+          {
+            "name": "HierarchicalInstancedStaticMesh",
+            "class": "/Script/Engine.HierarchicalInstancedStaticMeshComponent",
+            "tags": [],
+            "transform": {
+              "translation_cm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "attach_parent": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_213.DefaultSceneRoot",
+            "mobility": "<ComponentMobility.STATIC: 0>",
+            "visible": true,
+            "hidden_in_game": false,
+            "mesh": "/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64",
+            "materials": [
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_SoftBlue.M_Zcool_SoftBlue",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal.M_Zcool_Metal",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Rubber.M_Zcool_Rubber",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Glass.M_Zcool_Glass"
+            ],
+            "collision_profile": "NoCollision",
+            "cast_shadow": true,
+            "instance_count": 1,
+            "instance_transforms": [
+              {
+                "translation_cm": [
+                  -9979.95853626526,
+                  -275.19858529899346,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              }
+            ],
+            "num_custom_data_floats": 0,
+            "custom_data": []
+          }
+        ],
+        "classification": "interior"
+      },
+      "instance_count": 1,
+      "new_materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_SoftBlue.M_Zcool_SoftBlue",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal.M_Zcool_Metal",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Rubber.M_Zcool_Rubber",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Glass.M_Zcool_Glass"
+      ]
+    },
+    {
+      "actor_guid": "A30C950C4A37F909DB96B3B9E090B56B",
+      "component_name": "HierarchicalInstancedStaticMesh",
+      "profile": "cad120",
+      "old_mesh": "/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD120.SM_MPR_SorterCAD120",
+      "new_mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimBody120.SM_MPR_SorterSimBody120",
+      "original_actor": {
+        "guid": "A30C950C4A37F909DB96B3B9E090B56B",
+        "path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_214",
+        "name": "BP_GHS_InstanceGroup_C_214",
+        "class": "/Game/GHSDigitalTwin/Blueprints/BP_GHS_InstanceGroup.BP_GHS_InstanceGroup_C",
+        "label": "MPR_SM_MPR_SorterCAD120_-2_0",
+        "folder": "MPR/Equipment",
+        "tags": [
+          "MPRWarehouse",
+          "mpr-cad-scene-v1",
+          "InstanceCount=4"
+        ],
+        "transform": {
+          "translation_cm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "attachment_parent": null,
+        "hidden": false,
+        "tick_enabled": false,
+        "collision_enabled": false,
+        "components": [
+          {
+            "name": "BillboardComponent_1",
+            "class": "/Script/Engine.BillboardComponent",
+            "tags": [],
+            "transform": {
+              "translation_cm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                0.5,
+                0.5,
+                0.5
+              ]
+            },
+            "attach_parent": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_214.DefaultSceneRoot",
+            "mobility": "<ComponentMobility.MOVABLE: 2>",
+            "visible": true,
+            "hidden_in_game": true
+          },
+          {
+            "name": "DefaultSceneRoot",
+            "class": "/Script/Engine.SceneComponent",
+            "tags": [],
+            "transform": {
+              "translation_cm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "attach_parent": null,
+            "mobility": "<ComponentMobility.STATIC: 0>",
+            "visible": true,
+            "hidden_in_game": false
+          },
+          {
+            "name": "HierarchicalInstancedStaticMesh",
+            "class": "/Script/Engine.HierarchicalInstancedStaticMeshComponent",
+            "tags": [],
+            "transform": {
+              "translation_cm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "attach_parent": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_214.DefaultSceneRoot",
+            "mobility": "<ComponentMobility.STATIC: 0>",
+            "visible": true,
+            "hidden_in_game": false,
+            "mesh": "/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD120.SM_MPR_SorterCAD120",
+            "materials": [
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_SoftBlue.M_Zcool_SoftBlue",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal.M_Zcool_Metal",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Rubber.M_Zcool_Rubber",
+              "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Glass.M_Zcool_Glass"
+            ],
+            "collision_profile": "NoCollision",
+            "cast_shadow": true,
+            "instance_count": 4,
+            "instance_transforms": [
+              {
+                "translation_cm": [
+                  -10687.777788862653,
+                  -1427.763326898141,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -10687.777788862653,
+                  -1823.148561775842,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -11617.178332280864,
+                  -1866.3602615364666,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "translation_cm": [
+                  -11617.178332280864,
+                  -1470.9750266588167,
+                  0.0
+                ],
+                "rotation_xyzw": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              }
+            ],
+            "num_custom_data_floats": 0,
+            "custom_data": []
+          }
+        ],
+        "classification": "interior"
+      },
+      "instance_count": 4,
+      "new_materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_SoftBlue.M_Zcool_SoftBlue",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal.M_Zcool_Metal",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Rubber.M_Zcool_Rubber",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Glass.M_Zcool_Glass"
+      ]
+    }
+  ],
+  "controller_guid": "D980FF064FF8A6AD3ABC259B08A04812",
+  "controller_properties": {
+    "layout_json": "{\"schema_version\":1,\"units\":\"UE cm\",\"axis_contract\":\"Local mesh/profile axes are UE X,Y,Z; apply world_transform once. Source Blender Y was negated exactly once at import.\",\"snapshot_map\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57\",\"snapshot_map_file_sha256\":\"e7113f70dc4a1b518cac1a481a6a96ea40639791f8bbef540ee9a07051f22c9a\",\"machines\":[{\"id\":\"2C9A89_BRANCH_1\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":0,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-10878.083257623894,2875.8014147010244,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_2\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":1,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-10878.083257623903,2560.801414701022,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_3\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":2,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-10878.08325762391,2245.8014147010235,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_4\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":3,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-10878.083257623917,1930.8014147010213,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_5\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":4,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-10878.083257623925,1615.801414701025,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_6\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":5,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-10878.083257623934,1300.8014147010224,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_7\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":6,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-10878.08325762394,985.8014147010235,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_8\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":7,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-10878.083257623948,670.8014147010224,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_9\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":8,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-10878.083257623955,355.8014147010213,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_10\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":9,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-9979.958536264474,2244.80141470101,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_11\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":10,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-9979.958536264481,1929.8014147010101,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_12\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":11,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-9979.958536264494,1614.80141470101,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_13\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":12,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-9979.958536264496,1299.80141470101,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_14\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":13,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-9979.958536264507,984.8014147010099,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_15\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":14,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-9979.958536264516,669.8014147010099,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_16\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":15,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-9979.958536264521,354.80141470100995,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_17\",\"profile\":\"cad64\",\"actor_guid\":\"04B20E2F4E03436CFF68D98DD4F62C80\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_-1\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_212\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":16,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-9979.95853626453,39.801414701009975,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9A89_BRANCH_18\",\"profile\":\"cad64\",\"actor_guid\":\"0E46FBE1416887AA0EC1CAAEDABC41D8\",\"actor_label\":\"MPR_SM_MPR_SorterCAD64_-2_0\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_213\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":0,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64.SM_MPR_SorterCAD64\",\"world_transform\":{\"translation_cm\":[-9979.95853626526,-275.19858529899346,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9A89\",\"cad_child_handle\":null,\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9AE5_BRANCH_1\",\"profile\":\"cad120\",\"actor_guid\":\"A30C950C4A37F909DB96B3B9E090B56B\",\"actor_label\":\"MPR_SM_MPR_SorterCAD120_-2_0\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_214\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":0,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD120.SM_MPR_SorterCAD120\",\"world_transform\":{\"translation_cm\":[-10687.777788862653,-1427.763326898141,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9AE5\",\"cad_child_handle\":\"115C27\",\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9AE5_BRANCH_2\",\"profile\":\"cad120\",\"actor_guid\":\"A30C950C4A37F909DB96B3B9E090B56B\",\"actor_label\":\"MPR_SM_MPR_SorterCAD120_-2_0\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_214\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":1,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD120.SM_MPR_SorterCAD120\",\"world_transform\":{\"translation_cm\":[-10687.777788862653,-1823.148561775842,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9AE5\",\"cad_child_handle\":\"115C28\",\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9AE5_BRANCH_3\",\"profile\":\"cad120\",\"actor_guid\":\"A30C950C4A37F909DB96B3B9E090B56B\",\"actor_label\":\"MPR_SM_MPR_SorterCAD120_-2_0\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_214\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":2,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD120.SM_MPR_SorterCAD120\",\"world_transform\":{\"translation_cm\":[-11617.178332280864,-1866.3602615364666,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9AE5\",\"cad_child_handle\":\"115C29\",\"infeed_is_presentation_loop_start\":true},{\"id\":\"2C9AE5_BRANCH_4\",\"profile\":\"cad120\",\"actor_guid\":\"A30C950C4A37F909DB96B3B9E090B56B\",\"actor_label\":\"MPR_SM_MPR_SorterCAD120_-2_0\",\"actor_path\":\"/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_214\",\"component_name\":\"HierarchicalInstancedStaticMesh\",\"instance_index\":3,\"original_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD120.SM_MPR_SorterCAD120\",\"world_transform\":{\"translation_cm\":[-11617.178332280864,-1470.9750266588167,0.0],\"rotation_xyzw\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0]},\"cad_source_handle\":\"2C9AE5\",\"cad_child_handle\":\"115C2A\",\"infeed_is_presentation_loop_start\":true}],\"profiles\":{\"cad64\":{\"id\":\"cad64\",\"static_mesh\":\"/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimBody64\",\"tower_mesh\":\"/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimTower\",\"tray_mesh\":\"/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimTray\",\"source_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD64\",\"modeled_columns\":8,\"modeled_levels\":4,\"sides\":2,\"modeled_capacity\":64,\"plan_length_cm\":626.23,\"plan_width_cm\":209.60000000000002,\"track_half_straight_cm\":254.11499999999995,\"track_radius_cm\":28.999999999999996,\"track_length_cm\":1198.6723739082079,\"track_start_cm\":[283.11499999999995,0,0],\"track_direction\":\"CCW\",\"tower_count\":4,\"tower_phase_offsets\":[0,0.25,0.5,0.75],\"tower_height_cm\":212,\"tower_column_inward_offset_cm\":16,\"tray_size_cm\":[32,25],\"tray_surface_local_z_cm\":0,\"parcel_recommended_size_cm\":[25,20,14],\"tray_carry_z_range_cm\":[15,190],\"column_x_cm\":[-231.10063076019287,-165.07187485694885,-99.04312789440155,-33.01437422633171,33.01437422633171,99.04312789440155,165.07187485694885,231.10063076019287],\"levels\":[{\"level\":0,\"chute_entry_z_cm\":38.2699191570282,\"tray_carry_z_cm\":39.7699191570282,\"bin_floor_z_cm\":12.7999997317791,\"bin_rim_z_cm\":30.000001192092896},{\"level\":1,\"chute_entry_z_cm\":82.76991844177246,\"tray_carry_z_cm\":84.26991844177246,\"bin_floor_z_cm\":57.29999976158142,\"bin_rim_z_cm\":74.50000047683716},{\"level\":2,\"chute_entry_z_cm\":127.2699236869812,\"tray_carry_z_cm\":128.7699236869812,\"bin_floor_z_cm\":101.79999904632568,\"bin_rim_z_cm\":119.0000057220459},{\"level\":3,\"chute_entry_z_cm\":171.769917011261,\"tray_carry_z_cm\":173.269917011261,\"bin_floor_z_cm\":146.30000429153444,\"bin_rim_z_cm\":163.49999904632568}],\"bins\":[{\"side\":0,\"column\":0,\"level\":0,\"chute_entry_cm\":[-231.10063076019287,46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[-231.10063076019287,60.80021262168884,33.139618582057764],\"bin_drop_cm\":[-231.10063076019287,78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-250.85062980651855,52.99599766731262,11.999999731779099],[-211.3506317138672,103.29999923706055,30.000001192092896]],\"original_bin_object\":\"Bin_-1_1_1\",\"original_chute_object\":\"Chute\"},{\"side\":0,\"column\":0,\"level\":1,\"chute_entry_cm\":[-231.10063076019287,46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[-231.10063076019287,60.80021262168884,77.63961786680204],\"bin_drop_cm\":[-231.10063076019287,78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-250.85062980651855,52.99599766731262,56.49999976158142],[-211.3506317138672,103.29999923706055,74.50000047683716]],\"original_bin_object\":\"Bin_-1_1_2\",\"original_chute_object\":\"Chute.001\"},{\"side\":0,\"column\":0,\"level\":2,\"chute_entry_cm\":[-231.10063076019287,46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[-231.10063076019287,60.80021262168884,122.13961715154629],\"bin_drop_cm\":[-231.10063076019287,78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-250.85062980651855,52.99599766731262,100.99999904632568],[-211.3506317138672,103.29999923706055,119.0000057220459]],\"original_bin_object\":\"Bin_-1_1_3\",\"original_chute_object\":\"Chute.002\"},{\"side\":0,\"column\":0,\"level\":3,\"chute_entry_cm\":[-231.10063076019287,46.1917906999588,171.769917011261],\"chute_outlet_cm\":[-231.10063076019287,60.80021262168884,166.63962239675502],\"bin_drop_cm\":[-231.10063076019287,78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-250.85062980651855,52.99599766731262,145.50000429153442],[-211.3506317138672,103.29999923706055,163.49999904632568]],\"original_bin_object\":\"Bin_-1_1_4\",\"original_chute_object\":\"Chute.003\"},{\"side\":0,\"column\":1,\"level\":0,\"chute_entry_cm\":[-165.07187485694885,46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[-165.07187485694885,60.80021262168884,33.139618582057764],\"bin_drop_cm\":[-165.07187485694885,78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-184.821879863739,52.99599766731262,11.999999731779099],[-145.3218698501587,103.29999923706055,30.000001192092896]],\"original_bin_object\":\"Bin_-1_2_1\",\"original_chute_object\":\"Chute.004\"},{\"side\":0,\"column\":1,\"level\":1,\"chute_entry_cm\":[-165.07187485694885,46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[-165.07187485694885,60.80021262168884,77.63961786680204],\"bin_drop_cm\":[-165.07187485694885,78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-184.821879863739,52.99599766731262,56.49999976158142],[-145.3218698501587,103.29999923706055,74.50000047683716]],\"original_bin_object\":\"Bin_-1_2_2\",\"original_chute_object\":\"Chute.005\"},{\"side\":0,\"column\":1,\"level\":2,\"chute_entry_cm\":[-165.07187485694885,46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[-165.07187485694885,60.80021262168884,122.13961715154629],\"bin_drop_cm\":[-165.07187485694885,78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-184.821879863739,52.99599766731262,100.99999904632568],[-145.3218698501587,103.29999923706055,119.0000057220459]],\"original_bin_object\":\"Bin_-1_2_3\",\"original_chute_object\":\"Chute.006\"},{\"side\":0,\"column\":1,\"level\":3,\"chute_entry_cm\":[-165.07187485694885,46.1917906999588,171.769917011261],\"chute_outlet_cm\":[-165.07187485694885,60.80021262168884,166.63962239675502],\"bin_drop_cm\":[-165.07187485694885,78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-184.821879863739,52.99599766731262,145.50000429153442],[-145.3218698501587,103.29999923706055,163.49999904632568]],\"original_bin_object\":\"Bin_-1_2_4\",\"original_chute_object\":\"Chute.007\"},{\"side\":0,\"column\":2,\"level\":0,\"chute_entry_cm\":[-99.04312789440155,46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[-99.04312789440155,60.80021262168884,33.139618582057764],\"bin_drop_cm\":[-99.04312789440155,78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-118.79312992095947,52.99599766731262,11.999999731779099],[-79.29312586784363,103.29999923706055,30.000001192092896]],\"original_bin_object\":\"Bin_-1_3_1\",\"original_chute_object\":\"Chute.008\"},{\"side\":0,\"column\":2,\"level\":1,\"chute_entry_cm\":[-99.04312789440155,46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[-99.04312789440155,60.80021262168884,77.63961786680204],\"bin_drop_cm\":[-99.04312789440155,78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-118.79312992095947,52.99599766731262,56.49999976158142],[-79.29312586784363,103.29999923706055,74.50000047683716]],\"original_bin_object\":\"Bin_-1_3_2\",\"original_chute_object\":\"Chute.009\"},{\"side\":0,\"column\":2,\"level\":2,\"chute_entry_cm\":[-99.04312789440155,46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[-99.04312789440155,60.80021262168884,122.13961715154629],\"bin_drop_cm\":[-99.04312789440155,78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-118.79312992095947,52.99599766731262,100.99999904632568],[-79.29312586784363,103.29999923706055,119.0000057220459]],\"original_bin_object\":\"Bin_-1_3_3\",\"original_chute_object\":\"Chute.010\"},{\"side\":0,\"column\":2,\"level\":3,\"chute_entry_cm\":[-99.04312789440155,46.1917906999588,171.769917011261],\"chute_outlet_cm\":[-99.04312789440155,60.80021262168884,166.63962239675502],\"bin_drop_cm\":[-99.04312789440155,78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-118.79312992095947,52.99599766731262,145.50000429153442],[-79.29312586784363,103.29999923706055,163.49999904632568]],\"original_bin_object\":\"Bin_-1_3_4\",\"original_chute_object\":\"Chute.011\"},{\"side\":0,\"column\":3,\"level\":0,\"chute_entry_cm\":[-33.01437422633171,46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[-33.01437422633171,60.80021262168884,33.139618582057764],\"bin_drop_cm\":[-33.01437422633171,78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-52.764374017715454,52.99599766731262,11.999999731779099],[-13.264374434947968,103.29999923706055,30.000001192092896]],\"original_bin_object\":\"Bin_-1_4_1\",\"original_chute_object\":\"Chute.012\"},{\"side\":0,\"column\":3,\"level\":1,\"chute_entry_cm\":[-33.01437422633171,46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[-33.01437422633171,60.80021262168884,77.63961786680204],\"bin_drop_cm\":[-33.01437422633171,78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-52.764374017715454,52.99599766731262,56.49999976158142],[-13.264374434947968,103.29999923706055,74.50000047683716]],\"original_bin_object\":\"Bin_-1_4_2\",\"original_chute_object\":\"Chute.013\"},{\"side\":0,\"column\":3,\"level\":2,\"chute_entry_cm\":[-33.01437422633171,46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[-33.01437422633171,60.80021262168884,122.13961715154629],\"bin_drop_cm\":[-33.01437422633171,78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-52.764374017715454,52.99599766731262,100.99999904632568],[-13.264374434947968,103.29999923706055,119.0000057220459]],\"original_bin_object\":\"Bin_-1_4_3\",\"original_chute_object\":\"Chute.014\"},{\"side\":0,\"column\":3,\"level\":3,\"chute_entry_cm\":[-33.01437422633171,46.1917906999588,171.769917011261],\"chute_outlet_cm\":[-33.01437422633171,60.80021262168884,166.63962239675502],\"bin_drop_cm\":[-33.01437422633171,78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-52.764374017715454,52.99599766731262,145.50000429153442],[-13.264374434947968,103.29999923706055,163.49999904632568]],\"original_bin_object\":\"Bin_-1_4_4\",\"original_chute_object\":\"Chute.015\"},{\"side\":0,\"column\":4,\"level\":0,\"chute_entry_cm\":[33.01437422633171,46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[33.01437422633171,60.80021262168884,33.139618582057764],\"bin_drop_cm\":[33.01437422633171,78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[13.264374434947968,52.99599766731262,11.999999731779099],[52.764374017715454,103.29999923706055,30.000001192092896]],\"original_bin_object\":\"Bin_-1_5_1\",\"original_chute_object\":\"Chute.016\"},{\"side\":0,\"column\":4,\"level\":1,\"chute_entry_cm\":[33.01437422633171,46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[33.01437422633171,60.80021262168884,77.63961786680204],\"bin_drop_cm\":[33.01437422633171,78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[13.264374434947968,52.99599766731262,56.49999976158142],[52.764374017715454,103.29999923706055,74.50000047683716]],\"original_bin_object\":\"Bin_-1_5_2\",\"original_chute_object\":\"Chute.017\"},{\"side\":0,\"column\":4,\"level\":2,\"chute_entry_cm\":[33.01437422633171,46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[33.01437422633171,60.80021262168884,122.13961715154629],\"bin_drop_cm\":[33.01437422633171,78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[13.264374434947968,52.99599766731262,100.99999904632568],[52.764374017715454,103.29999923706055,119.0000057220459]],\"original_bin_object\":\"Bin_-1_5_3\",\"original_chute_object\":\"Chute.018\"},{\"side\":0,\"column\":4,\"level\":3,\"chute_entry_cm\":[33.01437422633171,46.1917906999588,171.769917011261],\"chute_outlet_cm\":[33.01437422633171,60.80021262168884,166.63962239675502],\"bin_drop_cm\":[33.01437422633171,78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[13.264374434947968,52.99599766731262,145.50000429153442],[52.764374017715454,103.29999923706055,163.49999904632568]],\"original_bin_object\":\"Bin_-1_5_4\",\"original_chute_object\":\"Chute.019\"},{\"side\":0,\"column\":5,\"level\":0,\"chute_entry_cm\":[99.04312789440155,46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[99.04312789440155,60.80021262168884,33.139618582057764],\"bin_drop_cm\":[99.04312789440155,78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[79.29312586784363,52.99599766731262,11.999999731779099],[118.79312992095947,103.29999923706055,30.000001192092896]],\"original_bin_object\":\"Bin_-1_6_1\",\"original_chute_object\":\"Chute.020\"},{\"side\":0,\"column\":5,\"level\":1,\"chute_entry_cm\":[99.04312789440155,46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[99.04312789440155,60.80021262168884,77.63961786680204],\"bin_drop_cm\":[99.04312789440155,78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[79.29312586784363,52.99599766731262,56.49999976158142],[118.79312992095947,103.29999923706055,74.50000047683716]],\"original_bin_object\":\"Bin_-1_6_2\",\"original_chute_object\":\"Chute.021\"},{\"side\":0,\"column\":5,\"level\":2,\"chute_entry_cm\":[99.04312789440155,46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[99.04312789440155,60.80021262168884,122.13961715154629],\"bin_drop_cm\":[99.04312789440155,78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[79.29312586784363,52.99599766731262,100.99999904632568],[118.79312992095947,103.29999923706055,119.0000057220459]],\"original_bin_object\":\"Bin_-1_6_3\",\"original_chute_object\":\"Chute.022\"},{\"side\":0,\"column\":5,\"level\":3,\"chute_entry_cm\":[99.04312789440155,46.1917906999588,171.769917011261],\"chute_outlet_cm\":[99.04312789440155,60.80021262168884,166.63962239675502],\"bin_drop_cm\":[99.04312789440155,78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[79.29312586784363,52.99599766731262,145.50000429153442],[118.79312992095947,103.29999923706055,163.49999904632568]],\"original_bin_object\":\"Bin_-1_6_4\",\"original_chute_object\":\"Chute.023\"},{\"side\":0,\"column\":6,\"level\":0,\"chute_entry_cm\":[165.07187485694885,46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[165.07187485694885,60.80021262168884,33.139618582057764],\"bin_drop_cm\":[165.07187485694885,78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[145.3218698501587,52.99599766731262,11.999999731779099],[184.821879863739,103.29999923706055,30.000001192092896]],\"original_bin_object\":\"Bin_-1_7_1\",\"original_chute_object\":\"Chute.024\"},{\"side\":0,\"column\":6,\"level\":1,\"chute_entry_cm\":[165.07187485694885,46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[165.07187485694885,60.80021262168884,77.63961786680204],\"bin_drop_cm\":[165.07187485694885,78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[145.3218698501587,52.99599766731262,56.49999976158142],[184.821879863739,103.29999923706055,74.50000047683716]],\"original_bin_object\":\"Bin_-1_7_2\",\"original_chute_object\":\"Chute.025\"},{\"side\":0,\"column\":6,\"level\":2,\"chute_entry_cm\":[165.07187485694885,46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[165.07187485694885,60.80021262168884,122.13961715154629],\"bin_drop_cm\":[165.07187485694885,78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[145.3218698501587,52.99599766731262,100.99999904632568],[184.821879863739,103.29999923706055,119.0000057220459]],\"original_bin_object\":\"Bin_-1_7_3\",\"original_chute_object\":\"Chute.026\"},{\"side\":0,\"column\":6,\"level\":3,\"chute_entry_cm\":[165.07187485694885,46.1917906999588,171.769917011261],\"chute_outlet_cm\":[165.07187485694885,60.80021262168884,166.63962239675502],\"bin_drop_cm\":[165.07187485694885,78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[145.3218698501587,52.99599766731262,145.50000429153442],[184.821879863739,103.29999923706055,163.49999904632568]],\"original_bin_object\":\"Bin_-1_7_4\",\"original_chute_object\":\"Chute.027\"},{\"side\":0,\"column\":7,\"level\":0,\"chute_entry_cm\":[231.10063076019287,46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[231.10063076019287,60.80021262168884,33.139618582057764],\"bin_drop_cm\":[231.10063076019287,78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[211.3506317138672,52.99599766731262,11.999999731779099],[250.85062980651855,103.29999923706055,30.000001192092896]],\"original_bin_object\":\"Bin_-1_8_1\",\"original_chute_object\":\"Chute.028\"},{\"side\":0,\"column\":7,\"level\":1,\"chute_entry_cm\":[231.10063076019287,46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[231.10063076019287,60.80021262168884,77.63961786680204],\"bin_drop_cm\":[231.10063076019287,78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[211.3506317138672,52.99599766731262,56.49999976158142],[250.85062980651855,103.29999923706055,74.50000047683716]],\"original_bin_object\":\"Bin_-1_8_2\",\"original_chute_object\":\"Chute.029\"},{\"side\":0,\"column\":7,\"level\":2,\"chute_entry_cm\":[231.10063076019287,46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[231.10063076019287,60.80021262168884,122.13961715154629],\"bin_drop_cm\":[231.10063076019287,78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[211.3506317138672,52.99599766731262,100.99999904632568],[250.85062980651855,103.29999923706055,119.0000057220459]],\"original_bin_object\":\"Bin_-1_8_3\",\"original_chute_object\":\"Chute.030\"},{\"side\":0,\"column\":7,\"level\":3,\"chute_entry_cm\":[231.10063076019287,46.1917906999588,171.769917011261],\"chute_outlet_cm\":[231.10063076019287,60.80021262168884,166.63962239675502],\"bin_drop_cm\":[231.10063076019287,78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[211.3506317138672,52.99599766731262,145.50000429153442],[250.85062980651855,103.29999923706055,163.49999904632568]],\"original_bin_object\":\"Bin_-1_8_4\",\"original_chute_object\":\"Chute.031\"},{\"side\":1,\"column\":0,\"level\":0,\"chute_entry_cm\":[-231.10063076019287,-46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[-231.10063076019287,-60.80021262168884,33.139618582057764],\"bin_drop_cm\":[-231.10063076019287,-78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-250.85062980651855,-103.29999923706055,11.999999731779099],[-211.3506317138672,-52.99599766731262,30.000001192092896]],\"original_bin_object\":\"Bin_1_1_1\",\"original_chute_object\":\"Chute.032\"},{\"side\":1,\"column\":0,\"level\":1,\"chute_entry_cm\":[-231.10063076019287,-46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[-231.10063076019287,-60.80021262168884,77.63961786680204],\"bin_drop_cm\":[-231.10063076019287,-78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-250.85062980651855,-103.29999923706055,56.49999976158142],[-211.3506317138672,-52.99599766731262,74.50000047683716]],\"original_bin_object\":\"Bin_1_1_2\",\"original_chute_object\":\"Chute.033\"},{\"side\":1,\"column\":0,\"level\":2,\"chute_entry_cm\":[-231.10063076019287,-46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[-231.10063076019287,-60.80021262168884,122.13961715154629],\"bin_drop_cm\":[-231.10063076019287,-78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-250.85062980651855,-103.29999923706055,100.99999904632568],[-211.3506317138672,-52.99599766731262,119.0000057220459]],\"original_bin_object\":\"Bin_1_1_3\",\"original_chute_object\":\"Chute.034\"},{\"side\":1,\"column\":0,\"level\":3,\"chute_entry_cm\":[-231.10063076019287,-46.1917906999588,171.769917011261],\"chute_outlet_cm\":[-231.10063076019287,-60.80021262168884,166.63962239675502],\"bin_drop_cm\":[-231.10063076019287,-78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-250.85062980651855,-103.29999923706055,145.50000429153442],[-211.3506317138672,-52.99599766731262,163.49999904632568]],\"original_bin_object\":\"Bin_1_1_4\",\"original_chute_object\":\"Chute.035\"},{\"side\":1,\"column\":1,\"level\":0,\"chute_entry_cm\":[-165.07187485694885,-46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[-165.07187485694885,-60.80021262168884,33.139618582057764],\"bin_drop_cm\":[-165.07187485694885,-78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-184.821879863739,-103.29999923706055,11.999999731779099],[-145.3218698501587,-52.99599766731262,30.000001192092896]],\"original_bin_object\":\"Bin_1_2_1\",\"original_chute_object\":\"Chute.036\"},{\"side\":1,\"column\":1,\"level\":1,\"chute_entry_cm\":[-165.07187485694885,-46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[-165.07187485694885,-60.80021262168884,77.63961786680204],\"bin_drop_cm\":[-165.07187485694885,-78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-184.821879863739,-103.29999923706055,56.49999976158142],[-145.3218698501587,-52.99599766731262,74.50000047683716]],\"original_bin_object\":\"Bin_1_2_2\",\"original_chute_object\":\"Chute.037\"},{\"side\":1,\"column\":1,\"level\":2,\"chute_entry_cm\":[-165.07187485694885,-46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[-165.07187485694885,-60.80021262168884,122.13961715154629],\"bin_drop_cm\":[-165.07187485694885,-78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-184.821879863739,-103.29999923706055,100.99999904632568],[-145.3218698501587,-52.99599766731262,119.0000057220459]],\"original_bin_object\":\"Bin_1_2_3\",\"original_chute_object\":\"Chute.038\"},{\"side\":1,\"column\":1,\"level\":3,\"chute_entry_cm\":[-165.07187485694885,-46.1917906999588,171.769917011261],\"chute_outlet_cm\":[-165.07187485694885,-60.80021262168884,166.63962239675502],\"bin_drop_cm\":[-165.07187485694885,-78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-184.821879863739,-103.29999923706055,145.50000429153442],[-145.3218698501587,-52.99599766731262,163.49999904632568]],\"original_bin_object\":\"Bin_1_2_4\",\"original_chute_object\":\"Chute.039\"},{\"side\":1,\"column\":2,\"level\":0,\"chute_entry_cm\":[-99.04312789440155,-46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[-99.04312789440155,-60.80021262168884,33.139618582057764],\"bin_drop_cm\":[-99.04312789440155,-78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-118.79312992095947,-103.29999923706055,11.999999731779099],[-79.29312586784363,-52.99599766731262,30.000001192092896]],\"original_bin_object\":\"Bin_1_3_1\",\"original_chute_object\":\"Chute.040\"},{\"side\":1,\"column\":2,\"level\":1,\"chute_entry_cm\":[-99.04312789440155,-46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[-99.04312789440155,-60.80021262168884,77.63961786680204],\"bin_drop_cm\":[-99.04312789440155,-78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-118.79312992095947,-103.29999923706055,56.49999976158142],[-79.29312586784363,-52.99599766731262,74.50000047683716]],\"original_bin_object\":\"Bin_1_3_2\",\"original_chute_object\":\"Chute.041\"},{\"side\":1,\"column\":2,\"level\":2,\"chute_entry_cm\":[-99.04312789440155,-46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[-99.04312789440155,-60.80021262168884,122.13961715154629],\"bin_drop_cm\":[-99.04312789440155,-78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-118.79312992095947,-103.29999923706055,100.99999904632568],[-79.29312586784363,-52.99599766731262,119.0000057220459]],\"original_bin_object\":\"Bin_1_3_3\",\"original_chute_object\":\"Chute.042\"},{\"side\":1,\"column\":2,\"level\":3,\"chute_entry_cm\":[-99.04312789440155,-46.1917906999588,171.769917011261],\"chute_outlet_cm\":[-99.04312789440155,-60.80021262168884,166.63962239675502],\"bin_drop_cm\":[-99.04312789440155,-78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-118.79312992095947,-103.29999923706055,145.50000429153442],[-79.29312586784363,-52.99599766731262,163.49999904632568]],\"original_bin_object\":\"Bin_1_3_4\",\"original_chute_object\":\"Chute.043\"},{\"side\":1,\"column\":3,\"level\":0,\"chute_entry_cm\":[-33.01437422633171,-46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[-33.01437422633171,-60.80021262168884,33.139618582057764],\"bin_drop_cm\":[-33.01437422633171,-78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-52.764374017715454,-103.29999923706055,11.999999731779099],[-13.264374434947968,-52.99599766731262,30.000001192092896]],\"original_bin_object\":\"Bin_1_4_1\",\"original_chute_object\":\"Chute.044\"},{\"side\":1,\"column\":3,\"level\":1,\"chute_entry_cm\":[-33.01437422633171,-46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[-33.01437422633171,-60.80021262168884,77.63961786680204],\"bin_drop_cm\":[-33.01437422633171,-78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-52.764374017715454,-103.29999923706055,56.49999976158142],[-13.264374434947968,-52.99599766731262,74.50000047683716]],\"original_bin_object\":\"Bin_1_4_2\",\"original_chute_object\":\"Chute.045\"},{\"side\":1,\"column\":3,\"level\":2,\"chute_entry_cm\":[-33.01437422633171,-46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[-33.01437422633171,-60.80021262168884,122.13961715154629],\"bin_drop_cm\":[-33.01437422633171,-78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-52.764374017715454,-103.29999923706055,100.99999904632568],[-13.264374434947968,-52.99599766731262,119.0000057220459]],\"original_bin_object\":\"Bin_1_4_3\",\"original_chute_object\":\"Chute.046\"},{\"side\":1,\"column\":3,\"level\":3,\"chute_entry_cm\":[-33.01437422633171,-46.1917906999588,171.769917011261],\"chute_outlet_cm\":[-33.01437422633171,-60.80021262168884,166.63962239675502],\"bin_drop_cm\":[-33.01437422633171,-78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-52.764374017715454,-103.29999923706055,145.50000429153442],[-13.264374434947968,-52.99599766731262,163.49999904632568]],\"original_bin_object\":\"Bin_1_4_4\",\"original_chute_object\":\"Chute.047\"},{\"side\":1,\"column\":4,\"level\":0,\"chute_entry_cm\":[33.01437422633171,-46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[33.01437422633171,-60.80021262168884,33.139618582057764],\"bin_drop_cm\":[33.01437422633171,-78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[13.264374434947968,-103.29999923706055,11.999999731779099],[52.764374017715454,-52.99599766731262,30.000001192092896]],\"original_bin_object\":\"Bin_1_5_1\",\"original_chute_object\":\"Chute.048\"},{\"side\":1,\"column\":4,\"level\":1,\"chute_entry_cm\":[33.01437422633171,-46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[33.01437422633171,-60.80021262168884,77.63961786680204],\"bin_drop_cm\":[33.01437422633171,-78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[13.264374434947968,-103.29999923706055,56.49999976158142],[52.764374017715454,-52.99599766731262,74.50000047683716]],\"original_bin_object\":\"Bin_1_5_2\",\"original_chute_object\":\"Chute.049\"},{\"side\":1,\"column\":4,\"level\":2,\"chute_entry_cm\":[33.01437422633171,-46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[33.01437422633171,-60.80021262168884,122.13961715154629],\"bin_drop_cm\":[33.01437422633171,-78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[13.264374434947968,-103.29999923706055,100.99999904632568],[52.764374017715454,-52.99599766731262,119.0000057220459]],\"original_bin_object\":\"Bin_1_5_3\",\"original_chute_object\":\"Chute.050\"},{\"side\":1,\"column\":4,\"level\":3,\"chute_entry_cm\":[33.01437422633171,-46.1917906999588,171.769917011261],\"chute_outlet_cm\":[33.01437422633171,-60.80021262168884,166.63962239675502],\"bin_drop_cm\":[33.01437422633171,-78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[13.264374434947968,-103.29999923706055,145.50000429153442],[52.764374017715454,-52.99599766731262,163.49999904632568]],\"original_bin_object\":\"Bin_1_5_4\",\"original_chute_object\":\"Chute.051\"},{\"side\":1,\"column\":5,\"level\":0,\"chute_entry_cm\":[99.04312789440155,-46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[99.04312789440155,-60.80021262168884,33.139618582057764],\"bin_drop_cm\":[99.04312789440155,-78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[79.29312586784363,-103.29999923706055,11.999999731779099],[118.79312992095947,-52.99599766731262,30.000001192092896]],\"original_bin_object\":\"Bin_1_6_1\",\"original_chute_object\":\"Chute.052\"},{\"side\":1,\"column\":5,\"level\":1,\"chute_entry_cm\":[99.04312789440155,-46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[99.04312789440155,-60.80021262168884,77.63961786680204],\"bin_drop_cm\":[99.04312789440155,-78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[79.29312586784363,-103.29999923706055,56.49999976158142],[118.79312992095947,-52.99599766731262,74.50000047683716]],\"original_bin_object\":\"Bin_1_6_2\",\"original_chute_object\":\"Chute.053\"},{\"side\":1,\"column\":5,\"level\":2,\"chute_entry_cm\":[99.04312789440155,-46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[99.04312789440155,-60.80021262168884,122.13961715154629],\"bin_drop_cm\":[99.04312789440155,-78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[79.29312586784363,-103.29999923706055,100.99999904632568],[118.79312992095947,-52.99599766731262,119.0000057220459]],\"original_bin_object\":\"Bin_1_6_3\",\"original_chute_object\":\"Chute.054\"},{\"side\":1,\"column\":5,\"level\":3,\"chute_entry_cm\":[99.04312789440155,-46.1917906999588,171.769917011261],\"chute_outlet_cm\":[99.04312789440155,-60.80021262168884,166.63962239675502],\"bin_drop_cm\":[99.04312789440155,-78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[79.29312586784363,-103.29999923706055,145.50000429153442],[118.79312992095947,-52.99599766731262,163.49999904632568]],\"original_bin_object\":\"Bin_1_6_4\",\"original_chute_object\":\"Chute.055\"},{\"side\":1,\"column\":6,\"level\":0,\"chute_entry_cm\":[165.07187485694885,-46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[165.07187485694885,-60.80021262168884,33.139618582057764],\"bin_drop_cm\":[165.07187485694885,-78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[145.3218698501587,-103.29999923706055,11.999999731779099],[184.821879863739,-52.99599766731262,30.000001192092896]],\"original_bin_object\":\"Bin_1_7_1\",\"original_chute_object\":\"Chute.056\"},{\"side\":1,\"column\":6,\"level\":1,\"chute_entry_cm\":[165.07187485694885,-46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[165.07187485694885,-60.80021262168884,77.63961786680204],\"bin_drop_cm\":[165.07187485694885,-78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[145.3218698501587,-103.29999923706055,56.49999976158142],[184.821879863739,-52.99599766731262,74.50000047683716]],\"original_bin_object\":\"Bin_1_7_2\",\"original_chute_object\":\"Chute.057\"},{\"side\":1,\"column\":6,\"level\":2,\"chute_entry_cm\":[165.07187485694885,-46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[165.07187485694885,-60.80021262168884,122.13961715154629],\"bin_drop_cm\":[165.07187485694885,-78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[145.3218698501587,-103.29999923706055,100.99999904632568],[184.821879863739,-52.99599766731262,119.0000057220459]],\"original_bin_object\":\"Bin_1_7_3\",\"original_chute_object\":\"Chute.058\"},{\"side\":1,\"column\":6,\"level\":3,\"chute_entry_cm\":[165.07187485694885,-46.1917906999588,171.769917011261],\"chute_outlet_cm\":[165.07187485694885,-60.80021262168884,166.63962239675502],\"bin_drop_cm\":[165.07187485694885,-78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[145.3218698501587,-103.29999923706055,145.50000429153442],[184.821879863739,-52.99599766731262,163.49999904632568]],\"original_bin_object\":\"Bin_1_7_4\",\"original_chute_object\":\"Chute.059\"},{\"side\":1,\"column\":7,\"level\":0,\"chute_entry_cm\":[231.10063076019287,-46.1917906999588,38.2699191570282],\"chute_outlet_cm\":[231.10063076019287,-60.80021262168884,33.139618582057764],\"bin_drop_cm\":[231.10063076019287,-78.14799845218658,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[211.3506317138672,-103.29999923706055,11.999999731779099],[250.85062980651855,-52.99599766731262,30.000001192092896]],\"original_bin_object\":\"Bin_1_8_1\",\"original_chute_object\":\"Chute.060\"},{\"side\":1,\"column\":7,\"level\":1,\"chute_entry_cm\":[231.10063076019287,-46.1917906999588,82.76991844177246],\"chute_outlet_cm\":[231.10063076019287,-60.80021262168884,77.63961786680204],\"bin_drop_cm\":[231.10063076019287,-78.14799845218658,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[211.3506317138672,-103.29999923706055,56.49999976158142],[250.85062980651855,-52.99599766731262,74.50000047683716]],\"original_bin_object\":\"Bin_1_8_2\",\"original_chute_object\":\"Chute.061\"},{\"side\":1,\"column\":7,\"level\":2,\"chute_entry_cm\":[231.10063076019287,-46.1917906999588,127.2699236869812],\"chute_outlet_cm\":[231.10063076019287,-60.80021262168884,122.13961715154629],\"bin_drop_cm\":[231.10063076019287,-78.14799845218658,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[211.3506317138672,-103.29999923706055,100.99999904632568],[250.85062980651855,-52.99599766731262,119.0000057220459]],\"original_bin_object\":\"Bin_1_8_3\",\"original_chute_object\":\"Chute.062\"},{\"side\":1,\"column\":7,\"level\":3,\"chute_entry_cm\":[231.10063076019287,-46.1917906999588,171.769917011261],\"chute_outlet_cm\":[231.10063076019287,-60.80021262168884,166.63962239675502],\"bin_drop_cm\":[231.10063076019287,-78.14799845218658,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[211.3506317138672,-103.29999923706055,145.50000429153442],[250.85062980651855,-52.99599766731262,163.49999904632568]],\"original_bin_object\":\"Bin_1_8_4\",\"original_chute_object\":\"Chute.063\"}],\"infeed_end_x_cm\":283.11499999999995,\"infeed_height_cm\":103.5,\"infeed_tray_local_cm\":[283.11499999999995,0,103.5],\"capacity_basis\":\"Retained scene model parameters. CAD horizontal columns are evidenced; four vertical levels and vendor identity are not surveyed.\",\"path_basis\":\"Presentation motion path fitted inside the retained scene footprint, not surveyed drive-chain dimensions.\"},\"cad120\":{\"id\":\"cad120\",\"static_mesh\":\"/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimBody120\",\"tower_mesh\":\"/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimTower\",\"tray_mesh\":\"/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimTray\",\"source_mesh\":\"/Game/MPRWarehouse/Equipment/Meshes/SM_MPR_SorterCAD120\",\"modeled_columns\":15,\"modeled_levels\":4,\"sides\":2,\"modeled_capacity\":120,\"plan_length_cm\":734.65363278,\"plan_width_cm\":219.20020006000001,\"track_half_straight_cm\":315.32681639,\"track_radius_cm\":33.5,\"track_length_cm\":1471.7939733505161,\"track_start_cm\":[348.82681639,0,0],\"track_direction\":\"CCW\",\"tower_count\":4,\"tower_phase_offsets\":[0,0.25,0.5,0.75],\"tower_height_cm\":212,\"tower_column_inward_offset_cm\":16,\"tray_size_cm\":[32,25],\"tray_surface_local_z_cm\":0,\"parcel_recommended_size_cm\":[25,20,14],\"tray_carry_z_range_cm\":[15,190],\"column_x_cm\":[-303.63835096359253,-260.26145219802856,-216.88454747200012,-173.50763082504272,-130.13072609901428,-86.7538183927536,-43.3769091963768,0.0,43.3769091963768,86.7538183927536,130.13072609901428,173.50763082504272,216.88454747200012,260.26145219802856,303.63835096359253],\"levels\":[{\"level\":0,\"chute_entry_z_cm\":38.2699191570282,\"tray_carry_z_cm\":39.7699191570282,\"bin_floor_z_cm\":12.7999997317791,\"bin_rim_z_cm\":30.000001192092896},{\"level\":1,\"chute_entry_z_cm\":82.76991844177246,\"tray_carry_z_cm\":84.26991844177246,\"bin_floor_z_cm\":57.29999976158142,\"bin_rim_z_cm\":74.50000047683716},{\"level\":2,\"chute_entry_z_cm\":127.2699236869812,\"tray_carry_z_cm\":128.7699236869812,\"bin_floor_z_cm\":101.79999904632568,\"bin_rim_z_cm\":119.0000057220459},{\"level\":3,\"chute_entry_z_cm\":171.769917011261,\"tray_carry_z_cm\":173.269917011261,\"bin_floor_z_cm\":146.30000429153444,\"bin_rim_z_cm\":163.49999904632568}],\"bins\":[{\"side\":0,\"column\":0,\"level\":0,\"chute_entry_cm\":[-303.63835096359253,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-303.63835096359253,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-303.63835096359253,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-323.3748435974121,57.600098848342896,11.999999731779099],[-283.90185832977295,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_1_1.003\",\"original_chute_object\":\"Chute.192\"},{\"side\":0,\"column\":0,\"level\":1,\"chute_entry_cm\":[-303.63835096359253,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-303.63835096359253,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-303.63835096359253,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-323.3748435974121,57.600098848342896,56.49999976158142],[-283.90185832977295,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_1_2.003\",\"original_chute_object\":\"Chute.193\"},{\"side\":0,\"column\":0,\"level\":2,\"chute_entry_cm\":[-303.63835096359253,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-303.63835096359253,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-303.63835096359253,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-323.3748435974121,57.600098848342896,100.99999904632568],[-283.90185832977295,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_1_3.003\",\"original_chute_object\":\"Chute.194\"},{\"side\":0,\"column\":0,\"level\":3,\"chute_entry_cm\":[-303.63835096359253,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-303.63835096359253,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-303.63835096359253,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-323.3748435974121,57.600098848342896,145.50000429153442],[-283.90185832977295,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_1_4.003\",\"original_chute_object\":\"Chute.195\"},{\"side\":0,\"column\":1,\"level\":0,\"chute_entry_cm\":[-260.26145219802856,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-260.26145219802856,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-260.26145219802856,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-279.99794483184814,57.600098848342896,11.999999731779099],[-240.52495956420898,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_2_1.003\",\"original_chute_object\":\"Chute.196\"},{\"side\":0,\"column\":1,\"level\":1,\"chute_entry_cm\":[-260.26145219802856,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-260.26145219802856,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-260.26145219802856,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-279.99794483184814,57.600098848342896,56.49999976158142],[-240.52495956420898,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_2_2.003\",\"original_chute_object\":\"Chute.197\"},{\"side\":0,\"column\":1,\"level\":2,\"chute_entry_cm\":[-260.26145219802856,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-260.26145219802856,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-260.26145219802856,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-279.99794483184814,57.600098848342896,100.99999904632568],[-240.52495956420898,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_2_3.003\",\"original_chute_object\":\"Chute.198\"},{\"side\":0,\"column\":1,\"level\":3,\"chute_entry_cm\":[-260.26145219802856,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-260.26145219802856,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-260.26145219802856,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-279.99794483184814,57.600098848342896,145.50000429153442],[-240.52495956420898,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_2_4.003\",\"original_chute_object\":\"Chute.199\"},{\"side\":0,\"column\":2,\"level\":0,\"chute_entry_cm\":[-216.88454747200012,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-216.88454747200012,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-216.88454747200012,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-236.62104606628418,57.600098848342896,11.999999731779099],[-197.14804887771606,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_3_1.003\",\"original_chute_object\":\"Chute.200\"},{\"side\":0,\"column\":2,\"level\":1,\"chute_entry_cm\":[-216.88454747200012,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-216.88454747200012,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-216.88454747200012,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-236.62104606628418,57.600098848342896,56.49999976158142],[-197.14804887771606,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_3_2.003\",\"original_chute_object\":\"Chute.201\"},{\"side\":0,\"column\":2,\"level\":2,\"chute_entry_cm\":[-216.88454747200012,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-216.88454747200012,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-216.88454747200012,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-236.62104606628418,57.600098848342896,100.99999904632568],[-197.14804887771606,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_3_3.003\",\"original_chute_object\":\"Chute.202\"},{\"side\":0,\"column\":2,\"level\":3,\"chute_entry_cm\":[-216.88454747200012,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-216.88454747200012,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-216.88454747200012,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-236.62104606628418,57.600098848342896,145.50000429153442],[-197.14804887771606,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_3_4.003\",\"original_chute_object\":\"Chute.203\"},{\"side\":0,\"column\":3,\"level\":0,\"chute_entry_cm\":[-173.50763082504272,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-173.50763082504272,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-173.50763082504272,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-193.2441234588623,57.600098848342896,11.999999731779099],[-153.77113819122314,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_4_1.003\",\"original_chute_object\":\"Chute.204\"},{\"side\":0,\"column\":3,\"level\":1,\"chute_entry_cm\":[-173.50763082504272,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-173.50763082504272,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-173.50763082504272,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-193.2441234588623,57.600098848342896,56.49999976158142],[-153.77113819122314,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_4_2.003\",\"original_chute_object\":\"Chute.205\"},{\"side\":0,\"column\":3,\"level\":2,\"chute_entry_cm\":[-173.50763082504272,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-173.50763082504272,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-173.50763082504272,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-193.2441234588623,57.600098848342896,100.99999904632568],[-153.77113819122314,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_4_3.003\",\"original_chute_object\":\"Chute.206\"},{\"side\":0,\"column\":3,\"level\":3,\"chute_entry_cm\":[-173.50763082504272,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-173.50763082504272,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-173.50763082504272,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-193.2441234588623,57.600098848342896,145.50000429153442],[-153.77113819122314,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_4_4.003\",\"original_chute_object\":\"Chute.207\"},{\"side\":0,\"column\":4,\"level\":0,\"chute_entry_cm\":[-130.13072609901428,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-130.13072609901428,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-130.13072609901428,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-149.86722469329834,57.600098848342896,11.999999731779099],[-110.39422750473022,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_5_1.003\",\"original_chute_object\":\"Chute.208\"},{\"side\":0,\"column\":4,\"level\":1,\"chute_entry_cm\":[-130.13072609901428,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-130.13072609901428,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-130.13072609901428,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-149.86722469329834,57.600098848342896,56.49999976158142],[-110.39422750473022,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_5_2.003\",\"original_chute_object\":\"Chute.209\"},{\"side\":0,\"column\":4,\"level\":2,\"chute_entry_cm\":[-130.13072609901428,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-130.13072609901428,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-130.13072609901428,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-149.86722469329834,57.600098848342896,100.99999904632568],[-110.39422750473022,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_5_3.003\",\"original_chute_object\":\"Chute.210\"},{\"side\":0,\"column\":4,\"level\":3,\"chute_entry_cm\":[-130.13072609901428,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-130.13072609901428,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-130.13072609901428,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-149.86722469329834,57.600098848342896,145.50000429153442],[-110.39422750473022,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_5_4.003\",\"original_chute_object\":\"Chute.211\"},{\"side\":0,\"column\":5,\"level\":0,\"chute_entry_cm\":[-86.7538183927536,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-86.7538183927536,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-86.7538183927536,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-106.49031400680542,57.600098848342896,11.999999731779099],[-67.01732277870178,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_6_1.003\",\"original_chute_object\":\"Chute.212\"},{\"side\":0,\"column\":5,\"level\":1,\"chute_entry_cm\":[-86.7538183927536,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-86.7538183927536,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-86.7538183927536,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-106.49031400680542,57.600098848342896,56.49999976158142],[-67.01732277870178,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_6_2.003\",\"original_chute_object\":\"Chute.213\"},{\"side\":0,\"column\":5,\"level\":2,\"chute_entry_cm\":[-86.7538183927536,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-86.7538183927536,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-86.7538183927536,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-106.49031400680542,57.600098848342896,100.99999904632568],[-67.01732277870178,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_6_3.003\",\"original_chute_object\":\"Chute.214\"},{\"side\":0,\"column\":5,\"level\":3,\"chute_entry_cm\":[-86.7538183927536,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-86.7538183927536,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-86.7538183927536,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-106.49031400680542,57.600098848342896,145.50000429153442],[-67.01732277870178,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_6_4.003\",\"original_chute_object\":\"Chute.215\"},{\"side\":0,\"column\":6,\"level\":0,\"chute_entry_cm\":[-43.3769091963768,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-43.3769091963768,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-43.3769091963768,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-63.1134033203125,57.600098848342896,11.999999731779099],[-23.6404150724411,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_7_1.003\",\"original_chute_object\":\"Chute.216\"},{\"side\":0,\"column\":6,\"level\":1,\"chute_entry_cm\":[-43.3769091963768,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-43.3769091963768,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-43.3769091963768,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-63.1134033203125,57.600098848342896,56.49999976158142],[-23.6404150724411,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_7_2.003\",\"original_chute_object\":\"Chute.217\"},{\"side\":0,\"column\":6,\"level\":2,\"chute_entry_cm\":[-43.3769091963768,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-43.3769091963768,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-43.3769091963768,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-63.1134033203125,57.600098848342896,100.99999904632568],[-23.6404150724411,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_7_3.003\",\"original_chute_object\":\"Chute.218\"},{\"side\":0,\"column\":6,\"level\":3,\"chute_entry_cm\":[-43.3769091963768,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-43.3769091963768,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-43.3769091963768,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-63.1134033203125,57.600098848342896,145.50000429153442],[-23.6404150724411,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_7_4.003\",\"original_chute_object\":\"Chute.219\"},{\"side\":0,\"column\":7,\"level\":0,\"chute_entry_cm\":[0.0,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[0.0,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[0.0,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-19.7364941239357,57.600098848342896,11.999999731779099],[19.7364941239357,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_8_1.003\",\"original_chute_object\":\"Chute.220\"},{\"side\":0,\"column\":7,\"level\":1,\"chute_entry_cm\":[0.0,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[0.0,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[0.0,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-19.7364941239357,57.600098848342896,56.49999976158142],[19.7364941239357,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_8_2.003\",\"original_chute_object\":\"Chute.221\"},{\"side\":0,\"column\":7,\"level\":2,\"chute_entry_cm\":[0.0,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[0.0,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[0.0,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-19.7364941239357,57.600098848342896,100.99999904632568],[19.7364941239357,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_8_3.003\",\"original_chute_object\":\"Chute.222\"},{\"side\":0,\"column\":7,\"level\":3,\"chute_entry_cm\":[0.0,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[0.0,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[0.0,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-19.7364941239357,57.600098848342896,145.50000429153442],[19.7364941239357,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_8_4.003\",\"original_chute_object\":\"Chute.223\"},{\"side\":0,\"column\":8,\"level\":0,\"chute_entry_cm\":[43.3769091963768,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[43.3769091963768,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[43.3769091963768,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[23.6404150724411,57.600098848342896,11.999999731779099],[63.1134033203125,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_9_1\",\"original_chute_object\":\"Chute.224\"},{\"side\":0,\"column\":8,\"level\":1,\"chute_entry_cm\":[43.3769091963768,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[43.3769091963768,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[43.3769091963768,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[23.6404150724411,57.600098848342896,56.49999976158142],[63.1134033203125,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_9_2\",\"original_chute_object\":\"Chute.225\"},{\"side\":0,\"column\":8,\"level\":2,\"chute_entry_cm\":[43.3769091963768,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[43.3769091963768,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[43.3769091963768,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[23.6404150724411,57.600098848342896,100.99999904632568],[63.1134033203125,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_9_3\",\"original_chute_object\":\"Chute.226\"},{\"side\":0,\"column\":8,\"level\":3,\"chute_entry_cm\":[43.3769091963768,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[43.3769091963768,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[43.3769091963768,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[23.6404150724411,57.600098848342896,145.50000429153442],[63.1134033203125,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_9_4\",\"original_chute_object\":\"Chute.227\"},{\"side\":0,\"column\":9,\"level\":0,\"chute_entry_cm\":[86.7538183927536,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[86.7538183927536,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[86.7538183927536,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[67.01732277870178,57.600098848342896,11.999999731779099],[106.49031400680542,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_10_1\",\"original_chute_object\":\"Chute.228\"},{\"side\":0,\"column\":9,\"level\":1,\"chute_entry_cm\":[86.7538183927536,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[86.7538183927536,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[86.7538183927536,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[67.01732277870178,57.600098848342896,56.49999976158142],[106.49031400680542,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_10_2\",\"original_chute_object\":\"Chute.229\"},{\"side\":0,\"column\":9,\"level\":2,\"chute_entry_cm\":[86.7538183927536,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[86.7538183927536,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[86.7538183927536,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[67.01732277870178,57.600098848342896,100.99999904632568],[106.49031400680542,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_10_3\",\"original_chute_object\":\"Chute.230\"},{\"side\":0,\"column\":9,\"level\":3,\"chute_entry_cm\":[86.7538183927536,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[86.7538183927536,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[86.7538183927536,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[67.01732277870178,57.600098848342896,145.50000429153442],[106.49031400680542,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_10_4\",\"original_chute_object\":\"Chute.231\"},{\"side\":0,\"column\":10,\"level\":0,\"chute_entry_cm\":[130.13072609901428,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[130.13072609901428,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[130.13072609901428,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[110.39422750473022,57.600098848342896,11.999999731779099],[149.86722469329834,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_11_1\",\"original_chute_object\":\"Chute.232\"},{\"side\":0,\"column\":10,\"level\":1,\"chute_entry_cm\":[130.13072609901428,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[130.13072609901428,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[130.13072609901428,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[110.39422750473022,57.600098848342896,56.49999976158142],[149.86722469329834,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_11_2\",\"original_chute_object\":\"Chute.233\"},{\"side\":0,\"column\":10,\"level\":2,\"chute_entry_cm\":[130.13072609901428,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[130.13072609901428,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[130.13072609901428,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[110.39422750473022,57.600098848342896,100.99999904632568],[149.86722469329834,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_11_3\",\"original_chute_object\":\"Chute.234\"},{\"side\":0,\"column\":10,\"level\":3,\"chute_entry_cm\":[130.13072609901428,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[130.13072609901428,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[130.13072609901428,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[110.39422750473022,57.600098848342896,145.50000429153442],[149.86722469329834,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_11_4\",\"original_chute_object\":\"Chute.235\"},{\"side\":0,\"column\":11,\"level\":0,\"chute_entry_cm\":[173.50763082504272,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[173.50763082504272,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[173.50763082504272,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[153.77113819122314,57.600098848342896,11.999999731779099],[193.2441234588623,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_12_1\",\"original_chute_object\":\"Chute.236\"},{\"side\":0,\"column\":11,\"level\":1,\"chute_entry_cm\":[173.50763082504272,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[173.50763082504272,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[173.50763082504272,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[153.77113819122314,57.600098848342896,56.49999976158142],[193.2441234588623,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_12_2\",\"original_chute_object\":\"Chute.237\"},{\"side\":0,\"column\":11,\"level\":2,\"chute_entry_cm\":[173.50763082504272,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[173.50763082504272,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[173.50763082504272,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[153.77113819122314,57.600098848342896,100.99999904632568],[193.2441234588623,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_12_3\",\"original_chute_object\":\"Chute.238\"},{\"side\":0,\"column\":11,\"level\":3,\"chute_entry_cm\":[173.50763082504272,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[173.50763082504272,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[173.50763082504272,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[153.77113819122314,57.600098848342896,145.50000429153442],[193.2441234588623,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_12_4\",\"original_chute_object\":\"Chute.239\"},{\"side\":0,\"column\":12,\"level\":0,\"chute_entry_cm\":[216.88454747200012,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[216.88454747200012,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[216.88454747200012,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[197.14804887771606,57.600098848342896,11.999999731779099],[236.62104606628418,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_13_1\",\"original_chute_object\":\"Chute.240\"},{\"side\":0,\"column\":12,\"level\":1,\"chute_entry_cm\":[216.88454747200012,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[216.88454747200012,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[216.88454747200012,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[197.14804887771606,57.600098848342896,56.49999976158142],[236.62104606628418,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_13_2\",\"original_chute_object\":\"Chute.241\"},{\"side\":0,\"column\":12,\"level\":2,\"chute_entry_cm\":[216.88454747200012,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[216.88454747200012,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[216.88454747200012,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[197.14804887771606,57.600098848342896,100.99999904632568],[236.62104606628418,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_13_3\",\"original_chute_object\":\"Chute.242\"},{\"side\":0,\"column\":12,\"level\":3,\"chute_entry_cm\":[216.88454747200012,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[216.88454747200012,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[216.88454747200012,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[197.14804887771606,57.600098848342896,145.50000429153442],[236.62104606628418,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_13_4\",\"original_chute_object\":\"Chute.243\"},{\"side\":0,\"column\":13,\"level\":0,\"chute_entry_cm\":[260.26145219802856,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[260.26145219802856,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[260.26145219802856,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[240.52495956420898,57.600098848342896,11.999999731779099],[279.99794483184814,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_14_1\",\"original_chute_object\":\"Chute.244\"},{\"side\":0,\"column\":13,\"level\":1,\"chute_entry_cm\":[260.26145219802856,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[260.26145219802856,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[260.26145219802856,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[240.52495956420898,57.600098848342896,56.49999976158142],[279.99794483184814,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_14_2\",\"original_chute_object\":\"Chute.245\"},{\"side\":0,\"column\":13,\"level\":2,\"chute_entry_cm\":[260.26145219802856,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[260.26145219802856,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[260.26145219802856,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[240.52495956420898,57.600098848342896,100.99999904632568],[279.99794483184814,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_14_3\",\"original_chute_object\":\"Chute.246\"},{\"side\":0,\"column\":13,\"level\":3,\"chute_entry_cm\":[260.26145219802856,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[260.26145219802856,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[260.26145219802856,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[240.52495956420898,57.600098848342896,145.50000429153442],[279.99794483184814,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_14_4\",\"original_chute_object\":\"Chute.247\"},{\"side\":0,\"column\":14,\"level\":0,\"chute_entry_cm\":[303.63835096359253,50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[303.63835096359253,65.40430784225464,33.139618582057764],\"bin_drop_cm\":[303.63835096359253,82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[283.90185832977295,57.600098848342896,11.999999731779099],[323.3748435974121,108.10010433197021,30.000001192092896]],\"original_bin_object\":\"Bin_-1_15_1\",\"original_chute_object\":\"Chute.248\"},{\"side\":0,\"column\":14,\"level\":1,\"chute_entry_cm\":[303.63835096359253,50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[303.63835096359253,65.40430784225464,77.63961786680204],\"bin_drop_cm\":[303.63835096359253,82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[283.90185832977295,57.600098848342896,56.49999976158142],[323.3748435974121,108.10010433197021,74.50000047683716]],\"original_bin_object\":\"Bin_-1_15_2\",\"original_chute_object\":\"Chute.249\"},{\"side\":0,\"column\":14,\"level\":2,\"chute_entry_cm\":[303.63835096359253,50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[303.63835096359253,65.40430784225464,122.13961715154629],\"bin_drop_cm\":[303.63835096359253,82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[283.90185832977295,57.600098848342896,100.99999904632568],[323.3748435974121,108.10010433197021,119.0000057220459]],\"original_bin_object\":\"Bin_-1_15_3\",\"original_chute_object\":\"Chute.250\"},{\"side\":0,\"column\":14,\"level\":3,\"chute_entry_cm\":[303.63835096359253,50.795888900756836,171.769917011261],\"chute_outlet_cm\":[303.63835096359253,65.40430784225464,166.63962239675502],\"bin_drop_cm\":[303.63835096359253,82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[283.90185832977295,57.600098848342896,145.50000429153442],[323.3748435974121,108.10010433197021,163.49999904632568]],\"original_bin_object\":\"Bin_-1_15_4\",\"original_chute_object\":\"Chute.251\"},{\"side\":1,\"column\":0,\"level\":0,\"chute_entry_cm\":[-303.63835096359253,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-303.63835096359253,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-303.63835096359253,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-323.3748435974121,-108.10010433197021,11.999999731779099],[-283.90185832977295,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_1_1.003\",\"original_chute_object\":\"Chute.252\"},{\"side\":1,\"column\":0,\"level\":1,\"chute_entry_cm\":[-303.63835096359253,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-303.63835096359253,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-303.63835096359253,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-323.3748435974121,-108.10010433197021,56.49999976158142],[-283.90185832977295,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_1_2.003\",\"original_chute_object\":\"Chute.253\"},{\"side\":1,\"column\":0,\"level\":2,\"chute_entry_cm\":[-303.63835096359253,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-303.63835096359253,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-303.63835096359253,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-323.3748435974121,-108.10010433197021,100.99999904632568],[-283.90185832977295,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_1_3.003\",\"original_chute_object\":\"Chute.254\"},{\"side\":1,\"column\":0,\"level\":3,\"chute_entry_cm\":[-303.63835096359253,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-303.63835096359253,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-303.63835096359253,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-323.3748435974121,-108.10010433197021,145.50000429153442],[-283.90185832977295,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_1_4.003\",\"original_chute_object\":\"Chute.255\"},{\"side\":1,\"column\":1,\"level\":0,\"chute_entry_cm\":[-260.26145219802856,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-260.26145219802856,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-260.26145219802856,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-279.99794483184814,-108.10010433197021,11.999999731779099],[-240.52495956420898,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_2_1.003\",\"original_chute_object\":\"Chute.256\"},{\"side\":1,\"column\":1,\"level\":1,\"chute_entry_cm\":[-260.26145219802856,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-260.26145219802856,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-260.26145219802856,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-279.99794483184814,-108.10010433197021,56.49999976158142],[-240.52495956420898,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_2_2.003\",\"original_chute_object\":\"Chute.257\"},{\"side\":1,\"column\":1,\"level\":2,\"chute_entry_cm\":[-260.26145219802856,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-260.26145219802856,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-260.26145219802856,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-279.99794483184814,-108.10010433197021,100.99999904632568],[-240.52495956420898,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_2_3.003\",\"original_chute_object\":\"Chute.258\"},{\"side\":1,\"column\":1,\"level\":3,\"chute_entry_cm\":[-260.26145219802856,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-260.26145219802856,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-260.26145219802856,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-279.99794483184814,-108.10010433197021,145.50000429153442],[-240.52495956420898,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_2_4.003\",\"original_chute_object\":\"Chute.259\"},{\"side\":1,\"column\":2,\"level\":0,\"chute_entry_cm\":[-216.88454747200012,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-216.88454747200012,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-216.88454747200012,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-236.62104606628418,-108.10010433197021,11.999999731779099],[-197.14804887771606,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_3_1.003\",\"original_chute_object\":\"Chute.260\"},{\"side\":1,\"column\":2,\"level\":1,\"chute_entry_cm\":[-216.88454747200012,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-216.88454747200012,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-216.88454747200012,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-236.62104606628418,-108.10010433197021,56.49999976158142],[-197.14804887771606,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_3_2.003\",\"original_chute_object\":\"Chute.261\"},{\"side\":1,\"column\":2,\"level\":2,\"chute_entry_cm\":[-216.88454747200012,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-216.88454747200012,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-216.88454747200012,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-236.62104606628418,-108.10010433197021,100.99999904632568],[-197.14804887771606,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_3_3.003\",\"original_chute_object\":\"Chute.262\"},{\"side\":1,\"column\":2,\"level\":3,\"chute_entry_cm\":[-216.88454747200012,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-216.88454747200012,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-216.88454747200012,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-236.62104606628418,-108.10010433197021,145.50000429153442],[-197.14804887771606,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_3_4.003\",\"original_chute_object\":\"Chute.263\"},{\"side\":1,\"column\":3,\"level\":0,\"chute_entry_cm\":[-173.50763082504272,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-173.50763082504272,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-173.50763082504272,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-193.2441234588623,-108.10010433197021,11.999999731779099],[-153.77113819122314,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_4_1.003\",\"original_chute_object\":\"Chute.264\"},{\"side\":1,\"column\":3,\"level\":1,\"chute_entry_cm\":[-173.50763082504272,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-173.50763082504272,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-173.50763082504272,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-193.2441234588623,-108.10010433197021,56.49999976158142],[-153.77113819122314,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_4_2.003\",\"original_chute_object\":\"Chute.265\"},{\"side\":1,\"column\":3,\"level\":2,\"chute_entry_cm\":[-173.50763082504272,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-173.50763082504272,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-173.50763082504272,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-193.2441234588623,-108.10010433197021,100.99999904632568],[-153.77113819122314,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_4_3.003\",\"original_chute_object\":\"Chute.266\"},{\"side\":1,\"column\":3,\"level\":3,\"chute_entry_cm\":[-173.50763082504272,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-173.50763082504272,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-173.50763082504272,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-193.2441234588623,-108.10010433197021,145.50000429153442],[-153.77113819122314,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_4_4.003\",\"original_chute_object\":\"Chute.267\"},{\"side\":1,\"column\":4,\"level\":0,\"chute_entry_cm\":[-130.13072609901428,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-130.13072609901428,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-130.13072609901428,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-149.86722469329834,-108.10010433197021,11.999999731779099],[-110.39422750473022,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_5_1.003\",\"original_chute_object\":\"Chute.268\"},{\"side\":1,\"column\":4,\"level\":1,\"chute_entry_cm\":[-130.13072609901428,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-130.13072609901428,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-130.13072609901428,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-149.86722469329834,-108.10010433197021,56.49999976158142],[-110.39422750473022,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_5_2.003\",\"original_chute_object\":\"Chute.269\"},{\"side\":1,\"column\":4,\"level\":2,\"chute_entry_cm\":[-130.13072609901428,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-130.13072609901428,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-130.13072609901428,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-149.86722469329834,-108.10010433197021,100.99999904632568],[-110.39422750473022,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_5_3.003\",\"original_chute_object\":\"Chute.270\"},{\"side\":1,\"column\":4,\"level\":3,\"chute_entry_cm\":[-130.13072609901428,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-130.13072609901428,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-130.13072609901428,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-149.86722469329834,-108.10010433197021,145.50000429153442],[-110.39422750473022,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_5_4.003\",\"original_chute_object\":\"Chute.271\"},{\"side\":1,\"column\":5,\"level\":0,\"chute_entry_cm\":[-86.7538183927536,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-86.7538183927536,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-86.7538183927536,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-106.49031400680542,-108.10010433197021,11.999999731779099],[-67.01732277870178,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_6_1.003\",\"original_chute_object\":\"Chute.272\"},{\"side\":1,\"column\":5,\"level\":1,\"chute_entry_cm\":[-86.7538183927536,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-86.7538183927536,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-86.7538183927536,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-106.49031400680542,-108.10010433197021,56.49999976158142],[-67.01732277870178,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_6_2.003\",\"original_chute_object\":\"Chute.273\"},{\"side\":1,\"column\":5,\"level\":2,\"chute_entry_cm\":[-86.7538183927536,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-86.7538183927536,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-86.7538183927536,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-106.49031400680542,-108.10010433197021,100.99999904632568],[-67.01732277870178,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_6_3.003\",\"original_chute_object\":\"Chute.274\"},{\"side\":1,\"column\":5,\"level\":3,\"chute_entry_cm\":[-86.7538183927536,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-86.7538183927536,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-86.7538183927536,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-106.49031400680542,-108.10010433197021,145.50000429153442],[-67.01732277870178,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_6_4.003\",\"original_chute_object\":\"Chute.275\"},{\"side\":1,\"column\":6,\"level\":0,\"chute_entry_cm\":[-43.3769091963768,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[-43.3769091963768,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[-43.3769091963768,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-63.1134033203125,-108.10010433197021,11.999999731779099],[-23.6404150724411,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_7_1.003\",\"original_chute_object\":\"Chute.276\"},{\"side\":1,\"column\":6,\"level\":1,\"chute_entry_cm\":[-43.3769091963768,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[-43.3769091963768,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[-43.3769091963768,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-63.1134033203125,-108.10010433197021,56.49999976158142],[-23.6404150724411,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_7_2.003\",\"original_chute_object\":\"Chute.277\"},{\"side\":1,\"column\":6,\"level\":2,\"chute_entry_cm\":[-43.3769091963768,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[-43.3769091963768,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[-43.3769091963768,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-63.1134033203125,-108.10010433197021,100.99999904632568],[-23.6404150724411,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_7_3.003\",\"original_chute_object\":\"Chute.278\"},{\"side\":1,\"column\":6,\"level\":3,\"chute_entry_cm\":[-43.3769091963768,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[-43.3769091963768,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[-43.3769091963768,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-63.1134033203125,-108.10010433197021,145.50000429153442],[-23.6404150724411,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_7_4.003\",\"original_chute_object\":\"Chute.279\"},{\"side\":1,\"column\":7,\"level\":0,\"chute_entry_cm\":[0.0,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[0.0,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[0.0,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[-19.7364941239357,-108.10010433197021,11.999999731779099],[19.7364941239357,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_8_1.003\",\"original_chute_object\":\"Chute.280\"},{\"side\":1,\"column\":7,\"level\":1,\"chute_entry_cm\":[0.0,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[0.0,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[0.0,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[-19.7364941239357,-108.10010433197021,56.49999976158142],[19.7364941239357,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_8_2.003\",\"original_chute_object\":\"Chute.281\"},{\"side\":1,\"column\":7,\"level\":2,\"chute_entry_cm\":[0.0,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[0.0,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[0.0,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[-19.7364941239357,-108.10010433197021,100.99999904632568],[19.7364941239357,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_8_3.003\",\"original_chute_object\":\"Chute.282\"},{\"side\":1,\"column\":7,\"level\":3,\"chute_entry_cm\":[0.0,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[0.0,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[0.0,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[-19.7364941239357,-108.10010433197021,145.50000429153442],[19.7364941239357,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_8_4.003\",\"original_chute_object\":\"Chute.283\"},{\"side\":1,\"column\":8,\"level\":0,\"chute_entry_cm\":[43.3769091963768,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[43.3769091963768,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[43.3769091963768,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[23.6404150724411,-108.10010433197021,11.999999731779099],[63.1134033203125,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_9_1\",\"original_chute_object\":\"Chute.284\"},{\"side\":1,\"column\":8,\"level\":1,\"chute_entry_cm\":[43.3769091963768,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[43.3769091963768,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[43.3769091963768,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[23.6404150724411,-108.10010433197021,56.49999976158142],[63.1134033203125,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_9_2\",\"original_chute_object\":\"Chute.285\"},{\"side\":1,\"column\":8,\"level\":2,\"chute_entry_cm\":[43.3769091963768,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[43.3769091963768,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[43.3769091963768,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[23.6404150724411,-108.10010433197021,100.99999904632568],[63.1134033203125,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_9_3\",\"original_chute_object\":\"Chute.286\"},{\"side\":1,\"column\":8,\"level\":3,\"chute_entry_cm\":[43.3769091963768,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[43.3769091963768,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[43.3769091963768,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[23.6404150724411,-108.10010433197021,145.50000429153442],[63.1134033203125,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_9_4\",\"original_chute_object\":\"Chute.287\"},{\"side\":1,\"column\":9,\"level\":0,\"chute_entry_cm\":[86.7538183927536,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[86.7538183927536,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[86.7538183927536,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[67.01732277870178,-108.10010433197021,11.999999731779099],[106.49031400680542,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_10_1\",\"original_chute_object\":\"Chute.288\"},{\"side\":1,\"column\":9,\"level\":1,\"chute_entry_cm\":[86.7538183927536,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[86.7538183927536,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[86.7538183927536,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[67.01732277870178,-108.10010433197021,56.49999976158142],[106.49031400680542,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_10_2\",\"original_chute_object\":\"Chute.289\"},{\"side\":1,\"column\":9,\"level\":2,\"chute_entry_cm\":[86.7538183927536,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[86.7538183927536,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[86.7538183927536,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[67.01732277870178,-108.10010433197021,100.99999904632568],[106.49031400680542,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_10_3\",\"original_chute_object\":\"Chute.290\"},{\"side\":1,\"column\":9,\"level\":3,\"chute_entry_cm\":[86.7538183927536,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[86.7538183927536,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[86.7538183927536,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[67.01732277870178,-108.10010433197021,145.50000429153442],[106.49031400680542,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_10_4\",\"original_chute_object\":\"Chute.291\"},{\"side\":1,\"column\":10,\"level\":0,\"chute_entry_cm\":[130.13072609901428,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[130.13072609901428,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[130.13072609901428,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[110.39422750473022,-108.10010433197021,11.999999731779099],[149.86722469329834,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_11_1\",\"original_chute_object\":\"Chute.292\"},{\"side\":1,\"column\":10,\"level\":1,\"chute_entry_cm\":[130.13072609901428,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[130.13072609901428,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[130.13072609901428,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[110.39422750473022,-108.10010433197021,56.49999976158142],[149.86722469329834,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_11_2\",\"original_chute_object\":\"Chute.293\"},{\"side\":1,\"column\":10,\"level\":2,\"chute_entry_cm\":[130.13072609901428,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[130.13072609901428,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[130.13072609901428,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[110.39422750473022,-108.10010433197021,100.99999904632568],[149.86722469329834,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_11_3\",\"original_chute_object\":\"Chute.294\"},{\"side\":1,\"column\":10,\"level\":3,\"chute_entry_cm\":[130.13072609901428,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[130.13072609901428,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[130.13072609901428,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[110.39422750473022,-108.10010433197021,145.50000429153442],[149.86722469329834,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_11_4\",\"original_chute_object\":\"Chute.295\"},{\"side\":1,\"column\":11,\"level\":0,\"chute_entry_cm\":[173.50763082504272,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[173.50763082504272,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[173.50763082504272,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[153.77113819122314,-108.10010433197021,11.999999731779099],[193.2441234588623,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_12_1\",\"original_chute_object\":\"Chute.296\"},{\"side\":1,\"column\":11,\"level\":1,\"chute_entry_cm\":[173.50763082504272,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[173.50763082504272,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[173.50763082504272,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[153.77113819122314,-108.10010433197021,56.49999976158142],[193.2441234588623,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_12_2\",\"original_chute_object\":\"Chute.297\"},{\"side\":1,\"column\":11,\"level\":2,\"chute_entry_cm\":[173.50763082504272,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[173.50763082504272,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[173.50763082504272,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[153.77113819122314,-108.10010433197021,100.99999904632568],[193.2441234588623,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_12_3\",\"original_chute_object\":\"Chute.298\"},{\"side\":1,\"column\":11,\"level\":3,\"chute_entry_cm\":[173.50763082504272,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[173.50763082504272,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[173.50763082504272,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[153.77113819122314,-108.10010433197021,145.50000429153442],[193.2441234588623,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_12_4\",\"original_chute_object\":\"Chute.299\"},{\"side\":1,\"column\":12,\"level\":0,\"chute_entry_cm\":[216.88454747200012,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[216.88454747200012,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[216.88454747200012,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[197.14804887771606,-108.10010433197021,11.999999731779099],[236.62104606628418,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_13_1\",\"original_chute_object\":\"Chute.300\"},{\"side\":1,\"column\":12,\"level\":1,\"chute_entry_cm\":[216.88454747200012,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[216.88454747200012,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[216.88454747200012,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[197.14804887771606,-108.10010433197021,56.49999976158142],[236.62104606628418,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_13_2\",\"original_chute_object\":\"Chute.301\"},{\"side\":1,\"column\":12,\"level\":2,\"chute_entry_cm\":[216.88454747200012,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[216.88454747200012,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[216.88454747200012,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[197.14804887771606,-108.10010433197021,100.99999904632568],[236.62104606628418,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_13_3\",\"original_chute_object\":\"Chute.302\"},{\"side\":1,\"column\":12,\"level\":3,\"chute_entry_cm\":[216.88454747200012,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[216.88454747200012,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[216.88454747200012,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[197.14804887771606,-108.10010433197021,145.50000429153442],[236.62104606628418,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_13_4\",\"original_chute_object\":\"Chute.303\"},{\"side\":1,\"column\":13,\"level\":0,\"chute_entry_cm\":[260.26145219802856,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[260.26145219802856,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[260.26145219802856,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[240.52495956420898,-108.10010433197021,11.999999731779099],[279.99794483184814,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_14_1\",\"original_chute_object\":\"Chute.304\"},{\"side\":1,\"column\":13,\"level\":1,\"chute_entry_cm\":[260.26145219802856,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[260.26145219802856,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[260.26145219802856,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[240.52495956420898,-108.10010433197021,56.49999976158142],[279.99794483184814,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_14_2\",\"original_chute_object\":\"Chute.305\"},{\"side\":1,\"column\":13,\"level\":2,\"chute_entry_cm\":[260.26145219802856,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[260.26145219802856,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[260.26145219802856,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[240.52495956420898,-108.10010433197021,100.99999904632568],[279.99794483184814,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_14_3\",\"original_chute_object\":\"Chute.306\"},{\"side\":1,\"column\":13,\"level\":3,\"chute_entry_cm\":[260.26145219802856,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[260.26145219802856,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[260.26145219802856,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[240.52495956420898,-108.10010433197021,145.50000429153442],[279.99794483184814,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_14_4\",\"original_chute_object\":\"Chute.307\"},{\"side\":1,\"column\":14,\"level\":0,\"chute_entry_cm\":[303.63835096359253,-50.795888900756836,38.2699191570282],\"chute_outlet_cm\":[303.63835096359253,-65.40430784225464,33.139618582057764],\"bin_drop_cm\":[303.63835096359253,-82.85010159015656,12.7999997317791],\"bin_rim_z_cm\":30.000001192092896,\"bin_bounds_cm\":[[283.90185832977295,-108.10010433197021,11.999999731779099],[323.3748435974121,-57.600098848342896,30.000001192092896]],\"original_bin_object\":\"Bin_1_15_1\",\"original_chute_object\":\"Chute.308\"},{\"side\":1,\"column\":14,\"level\":1,\"chute_entry_cm\":[303.63835096359253,-50.795888900756836,82.76991844177246],\"chute_outlet_cm\":[303.63835096359253,-65.40430784225464,77.63961786680204],\"bin_drop_cm\":[303.63835096359253,-82.85010159015656,57.29999976158142],\"bin_rim_z_cm\":74.50000047683716,\"bin_bounds_cm\":[[283.90185832977295,-108.10010433197021,56.49999976158142],[323.3748435974121,-57.600098848342896,74.50000047683716]],\"original_bin_object\":\"Bin_1_15_2\",\"original_chute_object\":\"Chute.309\"},{\"side\":1,\"column\":14,\"level\":2,\"chute_entry_cm\":[303.63835096359253,-50.795888900756836,127.2699236869812],\"chute_outlet_cm\":[303.63835096359253,-65.40430784225464,122.13961715154629],\"bin_drop_cm\":[303.63835096359253,-82.85010159015656,101.79999904632568],\"bin_rim_z_cm\":119.0000057220459,\"bin_bounds_cm\":[[283.90185832977295,-108.10010433197021,100.99999904632568],[323.3748435974121,-57.600098848342896,119.0000057220459]],\"original_bin_object\":\"Bin_1_15_3\",\"original_chute_object\":\"Chute.310\"},{\"side\":1,\"column\":14,\"level\":3,\"chute_entry_cm\":[303.63835096359253,-50.795888900756836,171.769917011261],\"chute_outlet_cm\":[303.63835096359253,-65.40430784225464,166.63962239675502],\"bin_drop_cm\":[303.63835096359253,-82.85010159015656,146.30000429153444],\"bin_rim_z_cm\":163.49999904632568,\"bin_bounds_cm\":[[283.90185832977295,-108.10010433197021,145.50000429153442],[323.3748435974121,-57.600098848342896,163.49999904632568]],\"original_bin_object\":\"Bin_1_15_4\",\"original_chute_object\":\"Chute.311\"}],\"infeed_end_x_cm\":348.82681639,\"infeed_height_cm\":103.5,\"infeed_tray_local_cm\":[348.82681639,0,103.5],\"capacity_basis\":\"Retained scene model parameters. CAD horizontal columns are evidenced; four vertical levels and vendor identity are not surveyed.\",\"path_basis\":\"Presentation motion path fitted inside the retained scene footprint, not surveyed drive-chain dimensions.\"}},\"excluded_meshes\":[\"SM_MPR_SorterShort10\",\"SM_MPR_Tiangong96\"],\"mechanism\":\"Closed-chain travelling columns; one vertically positioned short-belt tray per column; lateral discharge to fixed chutes and bins.\",\"limitations\":[\"This is a scene-model demonstration, not PLC/process telemetry or confirmed production capacity.\",\"Four trays per machine, speed, flow direction, loading port and timing are presentation choices.\",\"Original CAD instance positions, bin positions, chutes and modelled levels are retained.\"]}",
+    "auto_start": true,
+    "tower_mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimTower.SM_MPR_SorterSimTower",
+    "tray_mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimTray.SM_MPR_SorterSimTray",
+    "parcel_material": "/Game/MPRWarehouse/SorterSimulation/Materials/M_MPR_SorterParcel.M_MPR_SorterParcel",
+    "active_material": "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cyan.M_Zcool_Cyan",
+    "full_material": "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_SafetyAmber.M_Zcool_SafetyAmber"
+  },
+  "overrides": {
+    "04B20E2F4E03436CFF68D98DD4F62C80": [
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_SoftBlue.M_Zcool_SoftBlue",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal.M_Zcool_Metal",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Rubber.M_Zcool_Rubber",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Glass.M_Zcool_Glass"
+    ],
+    "0E46FBE1416887AA0EC1CAAEDABC41D8": [
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_SoftBlue.M_Zcool_SoftBlue",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal.M_Zcool_Metal",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Rubber.M_Zcool_Rubber",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Glass.M_Zcool_Glass"
+    ],
+    "A30C950C4A37F909DB96B3B9E090B56B": [
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_SoftBlue.M_Zcool_SoftBlue",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal.M_Zcool_Metal",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Rubber.M_Zcool_Rubber",
+      "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Glass.M_Zcool_Glass"
+    ]
+  },
+  "import_audit": [
+    {
+      "path": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimBody64.SM_MPR_SorterSimBody64",
+      "bounds_cm": [
+        [
+          -309.864990234375,
+          309.864990234375
+        ],
+        [
+          -104.70002746582031,
+          104.70002746582031
+        ],
+        [
+          0.0,
+          231.75001525878906
+        ]
+      ],
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "lod_count": 3,
+      "source_sha256": "2eb075d4ac9316c708aadf1d75415f2b289464547d5fa047ad70eef3052b7640"
+    },
+    {
+      "path": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimBody120.SM_MPR_SorterSimBody120",
+      "bounds_cm": [
+        [
+          -364.0768127441406,
+          364.0768127441406
+        ],
+        [
+          -109.50012969970703,
+          109.50012969970703
+        ],
+        [
+          0.0,
+          231.75001525878906
+        ]
+      ],
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "lod_count": 3,
+      "source_sha256": "599b7c6b39f188a0d28d4dc69a3bc7622f6294f4b2c02888e3a99b8f32dae858"
+    },
+    {
+      "path": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimTower.SM_MPR_SorterSimTower",
+      "bounds_cm": [
+        [
+          -9.75,
+          9.750001907348633
+        ],
+        [
+          -8.523720680386759e-07,
+          22.0
+        ],
+        [
+          0.0,
+          211.99998474121094
+        ]
+      ],
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "lod_count": 1,
+      "source_sha256": "3d32c561da05a98cd81fc9e5ab36cbad644617191af2d9c862471101baf14e09"
+    },
+    {
+      "path": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimTray.SM_MPR_SorterSimTray",
+      "bounds_cm": [
+        [
+          -16.0,
+          16.0
+        ],
+        [
+          -12.500000953674316,
+          16.75
+        ],
+        [
+          -8.5,
+          3.0
+        ]
+      ],
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "lod_count": 1,
+      "source_sha256": "4b9f990c807175c9e9596d5d89b8d9ca5e8a80cd881e397ff80b229caae9e70e"
+    }
+  ],
+  "allowed_new_files": [
+    "Content/MPRWarehouse/SorterSimulation/Materials/M_MPR_SorterParcel",
+    "Content/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimBody120",
+    "Content/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimBody64",
+    "Content/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimTower",
+    "Content/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimTray"
+  ],
+  "layout_sha256": "b24de5cded5c595c76dd2d3489b0b77c45b0bde53a8c0bf7296c4687caaa1d7e",
+  "manifest_sha256": "b2ace28d12780af48eab04465c1befc98605593ec390975a77d57007a09758b2"
+}

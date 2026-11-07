@@ -1,0 +1,208 @@
+{
+  "status": "passed",
+  "fbx": [
+    {
+      "mesh": "SM_MPR_SorterSimBody64",
+      "triangles": 8688,
+      "material_slots": 7,
+      "fbx_sha256": "2eb075d4ac9316c708aadf1d75415f2b289464547d5fa047ad70eef3052b7640",
+      "bounds_error_m": 2.384185791015625e-07,
+      "ue_bounds_cm": [
+        [
+          -309.86499786376953,
+          -104.70002889633179,
+          0.0
+        ],
+        [
+          309.86499786376953,
+          104.70002889633179,
+          231.7500114440918
+        ]
+      ]
+    },
+    {
+      "mesh": "SM_MPR_SorterSimBody64_LOD1",
+      "triangles": 6272,
+      "material_slots": 7,
+      "fbx_sha256": "d93eb1365d81230217be5c065d6761d3e37ec9db2dec9c788332f44c78cad997",
+      "bounds_error_m": 2.384185791015625e-07,
+      "ue_bounds_cm": [
+        [
+          -309.86499786376953,
+          -104.70002889633179,
+          0.0
+        ],
+        [
+          309.86499786376953,
+          104.70002889633179,
+          231.7500114440918
+        ]
+      ]
+    },
+    {
+      "mesh": "SM_MPR_SorterSimBody64_LOD2",
+      "triangles": 3648,
+      "material_slots": 7,
+      "fbx_sha256": "722aa89a5b2914f710d79ae88e55570faff3778904c9e009547be8aea16837ee",
+      "bounds_error_m": 2.384185791015625e-07,
+      "ue_bounds_cm": [
+        [
+          -309.86499786376953,
+          -104.70002889633179,
+          0.0
+        ],
+        [
+          309.86499786376953,
+          104.70002889633179,
+          231.7500114440918
+        ]
+      ]
+    },
+    {
+      "mesh": "SM_MPR_SorterSimBody120",
+      "triangles": 14160,
+      "material_slots": 7,
+      "fbx_sha256": "599b7c6b39f188a0d28d4dc69a3bc7622f6294f4b2c02888e3a99b8f32dae858",
+      "bounds_error_m": 2.384185791015625e-07,
+      "ue_bounds_cm": [
+        [
+          -364.0768051147461,
+          -109.5001220703125,
+          0.0
+        ],
+        [
+          364.0768051147461,
+          109.5001220703125,
+          231.7500114440918
+        ]
+      ]
+    },
+    {
+      "mesh": "SM_MPR_SorterSimBody120_LOD1",
+      "triangles": 10480,
+      "material_slots": 7,
+      "fbx_sha256": "1e4cf694ab65bd4baadc18ac4b096b5e9ead0063ab8d497d78db45c0b6af7932",
+      "bounds_error_m": 2.384185791015625e-07,
+      "ue_bounds_cm": [
+        [
+          -364.0768051147461,
+          -109.5001220703125,
+          0.0
+        ],
+        [
+          364.0768051147461,
+          109.5001220703125,
+          231.7500114440918
+        ]
+      ]
+    },
+    {
+      "mesh": "SM_MPR_SorterSimBody120_LOD2",
+      "triangles": 5840,
+      "material_slots": 7,
+      "fbx_sha256": "0b9142764b503592de5bbbb1efba5f63fae2bafab9366c0a82f5e494ba704230",
+      "bounds_error_m": 2.384185791015625e-07,
+      "ue_bounds_cm": [
+        [
+          -364.0768051147461,
+          -109.5001220703125,
+          0.0
+        ],
+        [
+          364.0768051147461,
+          109.5001220703125,
+          231.7500114440918
+        ]
+      ]
+    },
+    {
+      "mesh": "SM_MPR_SorterSimTower",
+      "triangles": 168,
+      "material_slots": 7,
+      "fbx_sha256": "3d32c561da05a98cd81fc9e5ab36cbad644617191af2d9c862471101baf14e09",
+      "bounds_error_m": 2.2351741790771484e-08,
+      "ue_bounds_cm": [
+        [
+          -9.749999642372131,
+          -8.523720396169665e-07,
+          0.0
+        ],
+        [
+          9.75000187754631,
+          22.00000137090683,
+          211.9999885559082
+        ]
+      ]
+    },
+    {
+      "mesh": "SM_MPR_SorterSimTray",
+      "triangles": 84,
+      "material_slots": 7,
+      "fbx_sha256": "4b9f990c807175c9e9596d5d89b8d9ca5e8a80cd881e397ff80b229caae9e70e",
+      "bounds_error_m": 1.4901161193847656e-08,
+      "ue_bounds_cm": [
+        [
+          -16.00000113248825,
+          -12.50000149011612,
+          -8.500000089406967
+        ],
+        [
+          16.00000113248825,
+          16.750000417232513,
+          2.9999999329447746
+        ]
+      ]
+    }
+  ],
+  "bin_alignment": [
+    {
+      "profile": "cad64",
+      "slots": 64,
+      "rim_corner_tests": 256,
+      "max_error_m": 2.384185791015625e-07
+    },
+    {
+      "profile": "cad120",
+      "slots": 120,
+      "rim_corner_tests": 480,
+      "max_error_m": 2.980232238769531e-07
+    }
+  ],
+  "motion": [
+    {
+      "profile": "cad64",
+      "loop_samples": 512,
+      "vertical_samples": 41,
+      "evaluated_tray_poses": 20992,
+      "fixed_object_obstacles": 512,
+      "bearing_guide_segments_excluded": 68,
+      "max_swept_half_extent_m": [
+        2.9856423563956245,
+        0.4447605402023628
+      ],
+      "original_half_footprint_m": [
+        3.13115,
+        1.048
+      ]
+    },
+    {
+      "profile": "cad120",
+      "loop_samples": 512,
+      "vertical_samples": 41,
+      "evaluated_tray_poses": 20992,
+      "fixed_object_obstacles": 896,
+      "bearing_guide_segments_excluded": 68,
+      "max_swept_half_extent_m": [
+        3.640282409661825,
+        0.48673805437451945
+      ],
+      "original_half_footprint_m": [
+        3.6732681638999995,
+        1.0960010003
+      ]
+    }
+  ],
+  "collisions": [],
+  "axis_probe": "Actual FBX Tower becomes UE local Y[0,22]cm; Tray Y[-12.5,16.75]cm after exactly one reflection.",
+  "limitation": "Conservative whole-part AABB sweep against fixed frame/bin/chute geometry; bearing guide contact interfaces excluded. Runtime trajectory must use this exact profile and tangent orientation."
+}
