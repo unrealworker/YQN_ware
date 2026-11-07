@@ -1,0 +1,149 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "PLUTO",
+			"instance": "70EDF4B54F3E1A3D1E3BE2BF80ED5167",
+			"instanceName": "PLUTO-49892",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (25H2) [10.0.26200.9711] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 5060 Laptop GPU",
+			"cPUModel": "Intel(R) Core(TM) i9-14900HX",
+			"rAMInGB": 32,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.11.07-06.28.57",
+	"succeeded": 8,
+	"succeededWithWarnings": 0,
+	"failed": 0,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.2629677951335907,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "CADCartProfiles",
+			"fullTestPath": "MPR.Sorter.CADCartProfiles",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"70EDF4B54F3E1A3D1E3BE2BF80ED5167"
+			],
+			"duration": 0.016629699617624283,
+			"dateTime": "2026.11.07-06.28.56",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Configuration",
+			"fullTestPath": "MPR.Sorter.Configuration",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"70EDF4B54F3E1A3D1E3BE2BF80ED5167"
+			],
+			"duration": 0.016688201576471329,
+			"dateTime": "2026.11.07-06.28.56",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DeterministicFramePartition",
+			"fullTestPath": "MPR.Sorter.DeterministicFramePartition",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"70EDF4B54F3E1A3D1E3BE2BF80ED5167"
+			],
+			"duration": 0.016399700194597244,
+			"dateTime": "2026.11.07-06.28.56",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FullCartExchangeLifecycle",
+			"fullTestPath": "MPR.Sorter.FullCartExchangeLifecycle",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"70EDF4B54F3E1A3D1E3BE2BF80ED5167"
+			],
+			"duration": 0.016374800354242325,
+			"dateTime": "2026.11.07-06.28.56",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "InfeedHandoffAndReservations",
+			"fullTestPath": "MPR.Sorter.InfeedHandoffAndReservations",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"70EDF4B54F3E1A3D1E3BE2BF80ED5167"
+			],
+			"duration": 0.019355699419975281,
+			"dateTime": "2026.11.07-06.28.56",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "LayoutValidation",
+			"fullTestPath": "MPR.Sorter.LayoutValidation",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"70EDF4B54F3E1A3D1E3BE2BF80ED5167"
+			],
+			"duration": 0.14432379603385925,
+			"dateTime": "2026.11.07-06.28.56",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PauseRateResetAndInvalidInput",
+			"fullTestPath": "MPR.Sorter.PauseRateResetAndInvalidInput",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"70EDF4B54F3E1A3D1E3BE2BF80ED5167"
+			],
+			"duration": 0.016835000365972519,
+			"dateTime": "2026.11.07-06.28.57",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SharedAislePermit",
+			"fullTestPath": "MPR.Sorter.SharedAislePermit",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"70EDF4B54F3E1A3D1E3BE2BF80ED5167"
+			],
+			"duration": 0.016360897570848465,
+			"dateTime": "2026.11.07-06.28.57",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

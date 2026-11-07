@@ -1,0 +1,13 @@
+{
+  "result": "Succeeded",
+  "target": "TestEditor Win64 Development",
+  "engine": "UE 5.8.4-58902052",
+  "command": "Build.bat TestEditor Win64 Development -Project=D:/UEPro/Test/Test.uproject -WaitMutex -NoHotReloadFromIDE -NoLiveCoding",
+  "binary_sha256": "54da306b7cd709cedae9d9ab918cfc1b5d8814d02ef908076647ef38125779c0",
+  "ue_tests_passed": 8,
+  "ue_tests_failed": 0,
+  "known_warnings": [
+    "Existing AVCodecsCore/NVCodecs dependency declarations",
+    "Existing deprecated SlateFontInfo constructor"
+  ]
+}

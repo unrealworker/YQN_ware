@@ -38,20 +38,38 @@ bool FMPRSorterLayoutValidation::RunTest(const FString&)
     Valid->LayoutJson=Original;
     if(!TestTrue(TEXT("Real archived layout is accepted"),Valid->LoadLayout()))return false;
     TestEqual(TEXT("Exactly 22 machines parsed"),Valid->Machines.Num(),22);
-    int32 Bins=0,Count64=0,Count120=0;
+    int32 Bins=0,Count64=0,Count120=0,Carts=0,PositiveInfeed=0,NegativeInfeed=0;
     for(const auto& M:Valid->Machines)
-    {Bins+=M.Bins.Num();Count64+=M.Profile==TEXT("cad64");Count120+=M.Profile==TEXT("cad120");}
+    {
+        Bins+=M.Bins.Num();Carts+=M.Carts.Num();Count64+=M.Profile==TEXT("cad64");Count120+=M.Profile==TEXT("cad120");
+        PositiveInfeed+=M.InfeedSide>0;NegativeInfeed+=M.InfeedSide<0;
+        TestTrue(TEXT("loading point faces the shared conveyor"),(M.Pickup.X-M.Entry.X)*M.InfeedSide>20);
+        const auto& C=M.Simulation.GetConfig();
+        TestEqual(TEXT("CAD cart grouping is explicit"),C.CartColumns,M.Profile==TEXT("cad64")?4:5);
+        for(int32 Side=0;Side<2;++Side)for(int32 Column=0;Column<C.Columns;++Column)
+        {
+            double Heading;const FVector At=AMPRSorterSimulationActor::PointOnLoop(C.DestinationDistances01[size_t(Side*C.Columns+Column)]+M.LoadFraction,M.Half,M.Radius,Heading);
+            const auto& Bin=M.Bins[(Side*C.Columns+Column)*C.Levels];
+            TestTrue(TEXT("load phase rebase preserves the physical target column and side"),FMath::Abs(At.X-Bin.Entry.X)<.01&&(Side==0?At.Y>0:At.Y<0));
+        }
+    }
     TestEqual(TEXT("Exactly 1632 scene bins parsed"),Bins,1632);
     TestEqual(TEXT("18 CAD64 machines retained"),Count64,18);
     TestEqual(TEXT("4 CAD120 machines retained"),Count120,4);
+    TestEqual(TEXT("96 independent carts parsed"),Carts,96);
+    TestEqual(TEXT("eleven positive-X loading ends"),PositiveInfeed,11);
+    TestEqual(TEXT("eleven negative-X loading ends"),NegativeInfeed,11);
 
-    const TCHAR* Names[]={TEXT("missing profiles"),TEXT("null final world transform"),TEXT("null CAD120 level"),TEXT("duplicate CAD120 bin")};
-    for(int32 Case=0;Case<4;++Case)
+    const TCHAR* Names[]={TEXT("missing profiles"),TEXT("null final world transform"),TEXT("null CAD120 level"),TEXT("duplicate CAD120 bin"),TEXT("missing cart mesh"),TEXT("wrong cart grouping"),TEXT("invalid infeed side")};
+    for(int32 Case=0;Case<7;++Case)
     {
         TSharedPtr<FJsonObject> Root;
         if(!TestTrue(TEXT("Fresh fixture JSON parses"),FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Original),Root))||!Root)return false;
         if(Case==0)Root->RemoveField(TEXT("profiles"));
         else if(Case==1)Root->GetArrayField(TEXT("machines")).Last()->AsObject()->SetField(TEXT("world_transform"),MakeShared<FJsonValueNull>());
+        else if(Case==6)Root->GetArrayField(TEXT("machines"))[0]->AsObject()->SetNumberField(TEXT("infeed_side_local_x"),0);
+        else if(Case==4)Root->GetObjectField(TEXT("profiles"))->GetObjectField(TEXT("cad120"))->GetArrayField(TEXT("carts"))[0]->AsObject()->RemoveField(TEXT("mesh"));
+        else if(Case==5)Root->GetObjectField(TEXT("profiles"))->GetObjectField(TEXT("cad64"))->SetArrayField(TEXT("cart_column_groups"),{MakeShared<FJsonValueNumber>(3),MakeShared<FJsonValueNumber>(5)});
         else
         {
             const auto Profile=Root->GetObjectField(TEXT("profiles"))->GetObjectField(TEXT("cad120"));
@@ -76,6 +94,34 @@ bool FMPRSorterLayoutValidation::RunTest(const FString&)
     Valid->LayoutJson=Original;
     TestTrue(TEXT("Valid reparse still succeeds"),Valid->LoadLayout());
     TestEqual(TEXT("Successful reparse replaces instead of appending"),Valid->Machines.Num(),22);
+    // The native large-delta entry point and a frame-driven fleet must share
+    // one aisle coordinator, rather than advancing each machine an entire run.
+    for(auto& M:Valid->Machines)M.Simulation.SetPlaying(true);
+    TestTrue(TEXT("fleet advances a full deterministic sample"),Valid->AdvanceFleet(800));
+    int32 ActiveExchanges=0;uint64 Exchanged=0;
+    for(const auto& M:Valid->Machines)
+    {
+        Exchanged+=M.Simulation.GetStats().ExchangedCarts;
+        for(const auto& C:M.Simulation.GetCarts())ActiveExchanges+=C.State!=MPRSorter::CartPhase::Receiving&&C.State!=MPRSorter::CartPhase::FullWaiting;
+    }
+    TestTrue(TEXT("shared aisle admits at most one moving cart"),ActiveExchanges<=1);
+    TestTrue(TEXT("shared aisle eventually releases complete cart exchanges"),Exchanged>0);
+    bool SawHandoff=false;
+    for(int32 Step=0;Step<1600&&!SawHandoff;++Step)
+    {
+        Valid->AdvanceFleet(.05);
+        for(const auto& M:Valid->Machines)for(int32 I=0;I<M.Carts.Num();++I)
+        {
+            const auto& C=M.Simulation.GetCarts()[size_t(I)];
+            if(C.State!=MPRSorter::CartPhase::Handoff)continue;
+            SawHandoff=true;const auto& P=M.Carts[I];
+            const FVector Expected(-M.InfeedSide*P.OutboundEndX-P.Origin.X,(P.Side==0?1.:-1.)*P.Retreat,0);
+            TestTrue(TEXT("hidden handoff retains the exit location instead of snapping back to dock"),Valid->CartOffset(M,I).Equals(Expected,.001));
+            TestTrue(TEXT("handoff retains the complete old cart load with no reserved deliveries"),C.Occupancy==C.Capacity&&C.Reserved==0&&C.ParcelIds.size()==size_t(C.Occupancy));
+            TestTrue(TEXT("handoff still owns the shared aisle"),M.Simulation.IsExchangePermitted()&&M.Simulation.GetStats().ChainStopped);
+        }
+    }
+    TestTrue(TEXT("fleet presents a separate whole-cart handoff interval"),SawHandoff);
     return true;
 }
 #endif

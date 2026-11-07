@@ -93,7 +93,7 @@ TSharedRef<SWidget> UMPRSorterHUDWidget::RebuildWidget()
                 [SNew(STextBlock).Font(MPRFont(11)).ColorAndOpacity(Muted)
                     .Text_Lambda([this](){return FText::FromString(bCollapsed?TEXT("展开"):TEXT("收起"));})]]]
         +SVerticalBox::Slot().AutoHeight().Padding(0,3,0,0)
-        [SNew(STextBlock).Text(FText::FromString(TEXT("演示数据 · 全部设备同步控制"))).Font(MPRFont(11)).ColorAndOpacity(Muted)]
+        [SNew(STextBlock).Text(FText::FromString(TEXT("演示数据 · 人工接驳 / 整组换车"))).Font(MPRFont(11)).ColorAndOpacity(Muted)]
         +SVerticalBox::Slot().AutoHeight().Padding(0,8,0,0)
         [SNew(SVerticalBox).Visibility_Lambda([this](){return bCollapsed?EVisibility::Collapsed:EVisibility::Visible;})
             +SVerticalBox::Slot().AutoHeight()
@@ -103,7 +103,7 @@ TSharedRef<SWidget> UMPRSorterHUDWidget::RebuildWidget()
             [SNew(SBox).HeightOverride(20)[SNew(STextBlock).Font(MPRFont(12)).ColorAndOpacity(Blue)
                 .Text(Read(&AMPRSorterSimulationActor::GetStatusText,TEXT("等待初始化")))]]
             +SVerticalBox::Slot().AutoHeight()
-            [SNew(SBox).HeightOverride(46)[SNew(STextBlock).Font(MPRFont(12)).ColorAndOpacity(Ink).AutoWrapText(true)
+            [SNew(SBox).HeightOverride(66)[SNew(STextBlock).Font(MPRFont(12)).ColorAndOpacity(Ink).AutoWrapText(true)
                 .Text(Read(&AMPRSorterSimulationActor::GetProgressText,TEXT("")))
                 .ToolTipText(Read(&AMPRSorterSimulationActor::GetProgressText,TEXT("")))]]
             +SVerticalBox::Slot().AutoHeight()
@@ -137,9 +137,12 @@ TSharedRef<SWidget> UMPRSorterHUDWidget::RebuildWidget()
                 [SNew(SCheckBox).IsFocusable(false).IsEnabled_Lambda(Ready)
                     .IsChecked_Lambda([this](){return Owner.IsValid()&&Owner->IsAutomaticCollection()?ECheckBoxState::Checked:ECheckBoxState::Unchecked;})
                     .OnCheckStateChanged_Lambda([this](ECheckBoxState State){if(auto* A=Owner.Get();A&&A->IsReady())A->SetAutomaticCollection(State==ECheckBoxState::Checked);})
-                    [SNew(STextBlock).Font(MPRFont(12)).ColorAndOpacity(Ink).Text(FText::FromString(TEXT("自动取箱 · 12秒")))]]
+                    [SNew(STextBlock).Font(MPRFont(12)).ColorAndOpacity(Ink).Text(FText::FromString(TEXT("自动换整车")))]]
                 +SHorizontalBox::Slot().FillWidth(1)
-                [Button(StaticCaption(TEXT("清空满格")),[](AMPRSorterSimulationActor& A){A.ClearFullBins();})]]]];
+                [Button(StaticCaption(TEXT("更换满车")),[](AMPRSorterSimulationActor& A){A.ClearFullBins();})]]]
+            +SVerticalBox::Slot().AutoHeight().Padding(0,5,0,0)
+            [SNew(STextBlock).Font(MPRFont(10)).ColorAndOpacity(Muted)
+                .Text(FText::FromString(TEXT("播放控制全部设备；手动换车作用当前设备。")))]];
 
     // The caller may reserve a taller viewport slot. Only this top-aligned,
     // content-sized border draws and hit-tests; the unused area stays transparent.

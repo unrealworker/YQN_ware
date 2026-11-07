@@ -26,12 +26,15 @@ import build_mpr_sorter as g
 SOURCE=ROOT/'SourceAssets/MPR/equipment'
 OUT=ROOT/'SourceAssets/MPR/sorter_simulation'
 REMOVED={'MainBelt','BeltSeam','BeltRail','EndMachinery','EndCobaltBand',
-         'InspectionWindow','MonitorBody','MonitorGlass','ServiceHandle','BaseShoe'}
+         'InspectionWindow','MonitorBody','MonitorGlass','ServiceHandle','BaseShoe',
+         'CartRail','OuterCartRail','D28Leg','Caster'}
 NAMES={'SM_MPR_SorterCAD64':('cad64','SM_MPR_SorterSimBody64'),
        'SM_MPR_SorterCAD120':('cad120','SM_MPR_SorterSimBody120')}
 TOWER='SM_MPR_SorterSimTower'
 TRAY='SM_MPR_SorterSimTray'
 PACKAGE='/Game/MPRWarehouse/SorterSimulation/Meshes/'
+CART_COLUMN_GROUPS={'cad64':[4,4],'cad120':[5,5,5]}
+CART_EXIT_EXTENSION_CM=100.
 
 
 def sha(path):
@@ -100,7 +103,7 @@ def profile_from_source(mesh,spec):
         levels.append(dict(level=level,chute_entry_z_cm=sample['chute_entry_cm'][2],
                            tray_carry_z_cm=sample['chute_entry_cm'][2]+1.5,
                            bin_floor_z_cm=sample['bin_drop_cm'][2],bin_rim_z_cm=sample['bin_rim_z_cm']))
-    return dict(id=profile_id,static_mesh=PACKAGE+body,tower_mesh=PACKAGE+TOWER,tray_mesh=PACKAGE+TRAY,
+    profile=dict(id=profile_id,static_mesh=PACKAGE+body,tower_mesh=PACKAGE+TOWER,tray_mesh=PACKAGE+TRAY,
                 source_mesh=PACKAGE.replace('SorterSimulation','Equipment')+mesh,
                 modeled_columns=spec['columns'],modeled_levels=4,sides=2,modeled_capacity=len(slots),
                 plan_length_cm=spec['length']*100,plan_width_cm=spec['width']*100,
@@ -116,6 +119,24 @@ def profile_from_source(mesh,spec):
                 infeed_tray_local_cm=[(half+radius)*100,0,103.5],
                 capacity_basis='Retained scene model parameters. CAD horizontal columns are evidenced; four vertical levels and vendor identity are not surveyed.',
                 path_basis='Presentation motion path fitted inside the retained scene footprint, not surveyed drive-chain dimensions.')
+    profile['cart_column_groups']=CART_COLUMN_GROUPS[profile_id]
+    profile['cart_grouping_basis']='Source CAD separate caster-supported frames: 2C9A89 has 4+4 columns per side; 2C9AE5 has 5+5+5. Heights retain the existing scene interpretation; not the separate 96-bin manual model.'
+    profile['carts']=[]
+    for side in range(2):
+        first=0
+        for count in CART_COLUMN_GROUPS[profile_id]:
+            indices=[i for i,b in enumerate(slots) if b['side']==side and first<=b['column']<first+count]
+            selected=[slots[i] for i in indices]
+            cx=(min(b['bin_bounds_cm'][0][0] for b in selected)+max(b['bin_bounds_cm'][1][0] for b in selected))/2
+            cy=(min(b['bin_bounds_cm'][0][1] for b in selected)+max(b['bin_bounds_cm'][1][1] for b in selected))/2
+            index=len(profile['carts']);name='SM_MPR_SorterSimCart'+('64' if profile_id=='cad64' else '120')+'_'+str(index)
+            profile['carts'].append(dict(index=index,side=side,first_column=first,column_count=count,
+                                         mesh=PACKAGE+name,local_origin_cm=[cx,cy,0],bin_indices=indices,
+                                         retreat_distance_cm=65.,bounds_cm=None,outbound_end_x_cm=None))
+            for i in indices:slots[i]['cart_index']=index
+            first+=count
+        assert first==spec['columns']
+    return profile
 
 
 def open_body(mesh,spec,profile,lod):
@@ -124,7 +145,7 @@ def open_body(mesh,spec,profile,lod):
     removed=[];retained=[]
     for obj in source.objects:
         semantic=obj.name.split('.')[0]
-        if semantic in REMOVED:
+        if semantic in REMOVED or semantic.startswith('Bin_'):
             removed.append(obj.name);continue
         copy=obj.copy();copy.data=obj.data.copy();col.objects.link(copy);copy.hide_set(False);copy.hide_render=False
         retained.append(obj.name)
@@ -140,7 +161,69 @@ def open_body(mesh,spec,profile,lod):
         for y in (-frame_y,frame_y):
             add_box('EndGuidePost',(x,y,1.14),(.035,.035,2.28),'Metal',col)
         add_box('EndGuideCrossbeam',(x,0,2.295),(.045,2*frame_y+.035,.045),'Porcelain',col)
+    # Chutes remain supported while a full bin cart withdraws. Keep support
+    # posts inside the bin edge and outside the moving-tray envelope.
+    inner=min(abs(b['bin_bounds_cm'][0 if b['side']==0 else 1][1]) for b in profile['bins'])/100
+    support_y=inner-.030
+    active=spec['length']-2*spec['end'];pitch=active/spec['columns']
+    boundaries=[-active/2];used=0
+    for count in profile['cart_column_groups']:
+        used+=count;boundaries.append(-active/2+used*pitch)
+    for side in (-1,1):
+        for i,x in enumerate(boundaries):
+            add_box('FixedChutePost_'+str(side)+'_'+str(i),(x,side*support_y,1.125),(.025,.025,2.25),'Metal',col)
     return col,dict(removed_source_objects=removed,retained_source_objects=retained)
+
+
+def cart_geometry(mesh,profile,cart,lod):
+    """An entire original group of bins plus its removable wheeled frame."""
+    source=bpy.data.collections[mesh+'_Editable_LOD'+str(lod)]
+    name=cart['mesh'].split('/')[-1]
+    col=bpy.data.collections.new(name+'_Editable_LOD'+str(lod));bpy.context.scene.collection.children.link(col)
+    origin=Vector((cart['local_origin_cm'][0]/100,-cart['local_origin_cm'][1]/100,0))
+    cad_side=-1 if cart['side']==0 else 1
+    for obj in source.objects:
+        semantic=obj.name.split('.')[0]
+        found=re.match(r'Bin_(-?1)_(\d+)_(\d+)(?:_Rim)?$',semantic)
+        if not found:continue
+        side,column,_=map(int,found.groups())
+        if side!=cad_side or not cart['first_column']<=column-1<cart['first_column']+cart['column_count']:continue
+        copy=obj.copy();copy.data=obj.data.copy();col.objects.link(copy);copy.location-=origin
+        copy.hide_set(False);copy.hide_render=False
+    assert col.objects
+    selected=[profile['bins'][i] for i in cart['bin_indices']]
+    xs=[p[0]/100-origin.x for b in selected for p in b['bin_bounds_cm']]
+    ys=[-p[1]/100-origin.y for b in selected for p in b['bin_bounds_cm']]
+    # The 15-column profile has only 38.8mm between adjacent bin shells.
+    # Frame ends/casters must fit that gap without overlapping another cart.
+    xmin,xmax=min(xs)-.012,max(xs)+.012
+    # The inlet-side upright stays in the gap between chutes. It must not
+    # cross the chute while pulling the complete cart out sideways.
+    if cad_side<0:ymin,ymax=min(ys)-.016,max(ys)-.010
+    else:ymin,ymax=min(ys)+.010,max(ys)+.016
+    top=max(b['bin_rim_z_cm'] for b in selected)/100+.025
+    for x in (xmin,xmax):
+        for y in (ymin,ymax):
+            add_box('CartPost',(x,y,(top+.065)/2),(.010,.020,top-.065),'Metal',col)
+            wheel_x=x+(.040 if x==xmin else -.040)
+            add_box('CartWheelFork',(wheel_x,y,.0675),(.032,.032,.035),'Metal',col)
+            g.rod('CartCaster',(wheel_x-.012,y,.030),(wheel_x+.012,y,.030),.030,'Rubber',col,sides=(12,8,4)[lod])
+    for level in range(profile['modeled_levels']):
+        z=next(b['bin_bounds_cm'][0][2]/100 for b in selected if b['level']==level)-.018
+        for y in (ymin,ymax):add_box('CartShelfRail',((xmin+xmax)/2,y,z),(xmax-xmin,.022,.028),'Metal',col)
+        for x in (xmin,xmax):add_box('CartShelfCrossbar',(x,(ymin+ymax)/2,z),(.010,ymax-ymin,.028),'Metal',col)
+    if lod==0:
+        outer_y=ymin if cad_side<0 else ymax
+        add_box('CartHandle',((xmin+xmax)/2,outer_y,top),(xmax-xmin,.026,.026),'Cobalt',col)
+    if lod==0:
+        bpy.context.view_layer.update()
+        pts=[ue_cm(o.matrix_world@v.co) for o in col.objects for v in o.data.vertices]
+        cart['bounds_cm']=[[min(p[k] for p in pts) for k in range(3)],[max(p[k] for p in pts) for k in range(3)]]
+        half=max(abs(cart['bounds_cm'][0][0]),abs(cart['bounds_cm'][1][0]))
+        # The extra metre stays clear on all 96 audited warehouse routes;
+        # 150/250cm would intersect the independent container rows.
+        cart['outbound_end_x_cm']=profile['plan_length_cm']/2+half+40.+CART_EXIT_EXTENSION_CM
+    return col
 
 
 def dynamic_parts():
@@ -171,6 +254,8 @@ def dynamic_parts():
 def build_layout(profiles):
     source=json.loads((SOURCE/'sorter_instances.json').read_text(encoding='utf8'))
     snapshot=ROOT/'SourceAssets/MPR/conveyor_repair_20261106/after_scene.json.gz'
+    latest=ROOT/'Saved/MPR/full_workflow_20261107/conveyor_application/after.json.gz'
+    if latest.is_file():snapshot=latest
     with gzip.open(snapshot,'rt',encoding='utf8') as stream:scene=json.load(stream)
     available=[]
     for actor in scene['actors']:
@@ -180,6 +265,8 @@ def build_layout(profiles):
             for index,transform in enumerate(component.get('instance_transforms',[])):
                 available.append((mesh,actor,component,index,transform))
     machines=[]
+    ports_path=OUT/'cad_manual_ports.json'
+    ports={r['machine_id']:r for r in json.loads(ports_path.read_text(encoding='utf8'))['rows']}
     for mesh, (profile_id,_) in NAMES.items():
         for row in source['instances'][mesh]:
             point=ue_cm(row['position_m'])
@@ -187,19 +274,26 @@ def build_layout(profiles):
             assert len(matches)==1,(row['id'],len(matches))
             _,actor,component,index,transform=matches[0]
             assert transform['scale']==[1.,1.,1.] and all(abs(q)<1e-7 for q in transform['rotation_xyzw'][:3])
+            port=ports[row['id']]
             machines.append(dict(id=row['id'],profile=profile_id,actor_guid=actor['guid'],actor_label=actor['label'],
                                  actor_path=actor['path'],component_name=component['name'],instance_index=index,
                                  original_mesh=component['mesh'],world_transform=transform,
                                  cad_source_handle=row['source_handle'],cad_child_handle=row['child_handle'],
-                                 infeed_is_presentation_loop_start=True))
+                                 infeed_is_presentation_loop_start=True,
+                                 infeed_side_local_x=port['infeed_side_local_x'],pickup_ue_cm=port['pickup_ue_cm'],
+                                 entry_ue_cm=port['entry_ue_cm'],transfer_mode=port['transfer_mode'],
+                                 infeed_evidence_level=port['evidence_level']))
     assert len(machines)==22
-    return dict(schema_version=1,units='UE cm',axis_contract='Local mesh/profile axes are UE X,Y,Z; apply world_transform once. Source Blender Y was negated exactly once at import.',
+    return dict(schema_version=2,units='UE cm',axis_contract='Local mesh/profile axes are UE X,Y,Z; apply world_transform once. Source Blender Y was negated exactly once at import.',
                 snapshot_map=scene['map'],snapshot_map_file_sha256=scene['map_file_sha256'],
+                placement_snapshot=snapshot.relative_to(ROOT).as_posix(),
                 machines=machines,profiles=profiles,excluded_meshes=['SM_MPR_SorterShort10','SM_MPR_Tiangong96'],
-                mechanism='Closed-chain travelling columns; one vertically positioned short-belt tray per column; lateral discharge to fixed chutes and bins.',
+                mechanism='Closed-chain travelling columns; vertically positioned short-belt tray; fixed chutes discharge into independently exchangeable whole bin carts.',
                 limitations=['This is a scene-model demonstration, not PLC/process telemetry or confirmed production capacity.',
                              'Four trays per machine, speed, flow direction, loading port and timing are presentation choices.',
-                             'Original CAD instance positions, bin positions, chutes and modelled levels are retained.'])
+                             'Original CAD instance positions, bin positions, chutes and modelled levels are retained.',
+                             'Whole-cart removal uses CAD column grouping. 65cm retreat and an end staging point are demonstration paths, not a surveyed operator route.',
+                             'Adjacent facing carts must reserve their shared aisle; concurrent opposing exchanges are not proven safe.'])
 
 
 def main():
@@ -223,6 +317,15 @@ def main():
             record=g.export(col,name+('' if lod==0 else '_LOD'+str(lod)));record.update(lod=lod,kind='static_body',profile=profile_id)
             rows.append(record)
             for obj in col.objects:obj.hide_render=lod!=0;obj.hide_set(lod!=0)
+        for cart in profile['carts']:
+            name=cart['mesh'].split('/')[-1]
+            for lod in range(3):
+                col=cart_geometry(mesh,profile,cart,lod)
+                record=g.export(col,name+('' if lod==0 else '_LOD'+str(lod)))
+                record.update(lod=lod,kind='cart',profile=profile_id,cart_index=cart['index'],
+                              pivot='Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot')
+                rows.append(record)
+                for obj in col.objects:obj.hide_render=True;obj.hide_set(lod!=0)
     tower,tray=dynamic_parts()
     for col,name in ((tower,TOWER),(tray,TRAY)):
         record=g.export(col,name);record.update(lod=0,kind='dynamic_part',pivot='ground Z0' if name==TOWER else 'carrying surface Z0')
@@ -234,13 +337,14 @@ def main():
     for row in rows:
         row['fbx']=str(Path(row['fbx']).relative_to(ROOT)).replace('\\','/')
     for row in rows:
-        if row['kind']=='static_body' and row['lod']==0:
-            row['lod_files']=[r['fbx'] for r in rows if r.get('profile')==row['profile'] and r['lod']>0]
-    manifest=dict(schema_version=1,meshes=rows,profiles=profiles,source_static_body_changes=source_edits,
+        if row['kind'] in ('static_body','cart') and row['lod']==0:
+            row['lod_files']=[r['fbx'] for r in rows if r['kind']==row['kind'] and r.get('profile')==row['profile'] and r.get('cart_index')==row.get('cart_index') and r['lod']>0]
+    manifest=dict(schema_version=2,meshes=rows,profiles=profiles,source_static_body_changes=source_edits,
                   blender=(out/'MPR_SorterSimulation.blend').relative_to(ROOT).as_posix(),
                   preview=(out/'asset_preview.png').relative_to(ROOT).as_posix(),
                   source_files=[dict(path=str(source_blend),sha256=source_sha),
-                                dict(path=str(SOURCE/'sorter_instances.json'),sha256=sha(SOURCE/'sorter_instances.json'))],
+                                dict(path=str(SOURCE/'sorter_instances.json'),sha256=sha(SOURCE/'sorter_instances.json')),
+                                dict(path=str(OUT/'cad_manual_ports.json'),sha256=sha(OUT/'cad_manual_ports.json'))],
                   material_paths={r:'/Game/GHSZcoolSmartFactory/Materials/M_Zcool_'+r for r in g.ROLES},
                   axis_contract='FBX source metres CAD +Y; UE import makes X=100*x,Y=-100*y,Z=100*z. Profiles already use UE local cm.',
                   dynamic_axes='Local +X is CCW path tangent; local +Y is inward left normal. Tray is centred; no outward assumption.',

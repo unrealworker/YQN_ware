@@ -6,6 +6,7 @@
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Components/SceneComponent.h"
 #include "Engine/StaticMesh.h"
+#include "Engine/World.h"
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonReader.h"
@@ -13,8 +14,11 @@
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
 #include "UObject/ConstructorHelpers.h"
+#include "UObject/UObjectGlobals.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
 #include "ProfilingDebugging/CpuProfilerTrace.h"
+#include "Math/RotationMatrix.h"
+#include "Materials/MaterialInterface.h"
 
 namespace
 {
@@ -25,6 +29,7 @@ FString PhaseName(MPRSorter::CarrierPhase Phase)
     switch(Phase)
     {
     case MPRSorter::CarrierPhase::Scan:return TEXT("上包识别");
+    case MPRSorter::CarrierPhase::Induct:return TEXT("人工持货接驳");
     case MPRSorter::CarrierPhase::LoadedTravel:return TEXT("行走 / 升降");
     case MPRSorter::CarrierPhase::Lift:return TEXT("格口就位");
     case MPRSorter::CarrierPhase::Unload:return TEXT("侧向投料");
@@ -38,8 +43,24 @@ FString ReasonName(MPRSorter::BlockReason Reason)
     case MPRSorter::BlockReason::Scanning:return TEXT("上包识别");
     case MPRSorter::BlockReason::Lifting:return TEXT("等待托盘就位");
     case MPRSorter::BlockReason::Unloading:return TEXT("侧向投料");
-    case MPRSorter::BlockReason::FullBin:return TEXT("满格等待取箱");
+    case MPRSorter::BlockReason::FullBin:return TEXT("满车等待更换");
+    case MPRSorter::BlockReason::Inducting:return TEXT("人工接驳");
+    case MPRSorter::BlockReason::CartExchange:return TEXT("停稳 / 整车更换");
+    case MPRSorter::BlockReason::WaitingInfeed:return TEXT("等待来货");
     default:return TEXT("闭环运行");
+    }
+}
+FString CartPhaseName(MPRSorter::CartPhase Phase)
+{
+    switch(Phase)
+    {
+    case MPRSorter::CartPhase::FullWaiting:return TEXT("满车待换");
+    case MPRSorter::CartPhase::Withdrawing:return TEXT("满车退出");
+    case MPRSorter::CartPhase::Outbound:return TEXT("满车转出");
+    case MPRSorter::CartPhase::Handoff:return TEXT("满车交接 / 等待空车");
+    case MPRSorter::CartPhase::EmptyArriving:return TEXT("空车入位");
+    case MPRSorter::CartPhase::Docking:return TEXT("对位 / 确认");
+    default:return TEXT("在位收货");
     }
 }
 TArray<TSharedPtr<FJsonValue>> XYZ(const FVector& P)
@@ -54,11 +75,48 @@ AMPRSorterSimulationActor::AMPRSorterSimulationActor()
     SetRootComponent(CreateDefaultSubobject<USceneComponent>(TEXT("SorterSimulationRoot")));
     Towers=MakeInstances(TEXT("MovingColumns"));Trays=MakeInstances(TEXT("LiftTrays"));
     Parcels=MakeInstances(TEXT("MovingParcels"));BinParcels=MakeInstances(TEXT("CollectedParcels"));
+    InfeedParcels=MakeInstances(TEXT("InfeedParcels"));
     ActiveLights=MakeInstances(TEXT("ActiveCells"));FullLights=MakeInstances(TEXT("FullCells"));
+    WorkerCloth=MakeInstances(TEXT("OperatorClothing"));WorkerSkin=MakeInstances(TEXT("OperatorSkin"));
+    WorkerHelmet=MakeInstances(TEXT("OperatorHelmets"));WorkerBoots=MakeInstances(TEXT("OperatorBoots"));
     static ConstructorHelpers::FObjectFinder<UStaticMesh> Cube(TEXT("/Engine/BasicShapes/Cube"));
-    for(auto* Component:{Parcels.Get(),BinParcels.Get(),ActiveLights.Get(),FullLights.Get()}) Component->SetStaticMesh(Cube.Object);
+    static ConstructorHelpers::FObjectFinder<UStaticMesh> Sphere(TEXT("/Engine/BasicShapes/Sphere"));
+    for(auto* Component:{Parcels.Get(),InfeedParcels.Get(),BinParcels.Get(),ActiveLights.Get(),FullLights.Get(),WorkerCloth.Get(),WorkerBoots.Get()}) Component->SetStaticMesh(Cube.Object);
+    WorkerSkin->SetStaticMesh(Sphere.Object);WorkerHelmet->SetStaticMesh(Sphere.Object);
+    static ConstructorHelpers::FObjectFinder<UMaterialInterface> Skin(TEXT("/Game/GHSNormalWarehouse/MannedForklift/Materials/M_MF_WorkerV3_Skin"));
+    static ConstructorHelpers::FObjectFinder<UMaterialInterface> Navy(TEXT("/Game/GHSNormalWarehouse/MannedForklift/Materials/M_MF_WorkerV3_Navy"));
+    static ConstructorHelpers::FObjectFinder<UMaterialInterface> Helmet(TEXT("/Game/GHSNormalWarehouse/MannedForklift/Materials/M_MF_WorkerV3_Helmet"));
+    static ConstructorHelpers::FObjectFinder<UMaterialInterface> Rubber(TEXT("/Game/GHSNormalWarehouse/MannedForklift/Materials/M_MF_WorkerV3_Rubber"));
+    WorkerClothMaterial=Navy.Object;WorkerSkinMaterial=Skin.Object;
+    WorkerHelmetMaterial=Helmet.Object;WorkerBootMaterial=Rubber.Object;
     SetActorEnableCollision(false);
 }
+
+void AMPRSorterSimulationActor::ClearCartInstances()
+{
+    // Preview components are never serialized as scene instances. Destroy every
+    // owned transient cart component as well as the tracked references, covering
+    // editor reconstruction/PIE duplication where transient properties reset.
+    TArray<UInstancedStaticMeshComponent*> Owned;
+    GetComponents<UInstancedStaticMeshComponent>(Owned);
+    for(auto* C:Owned)if(C&&C->GetFName().ToString().StartsWith(TEXT("RuntimeCart_"))&&C->HasAnyFlags(RF_Transient))
+        C->DestroyComponent();
+    RuntimeCartComponents.Reset();
+}
+
+#if WITH_EDITOR
+void AMPRSorterSimulationActor::OnConstruction(const FTransform& Transform)
+{
+    Super::OnConstruction(Transform);
+    if(!GetWorld()||GetWorld()->IsGameWorld())return;
+    ClearCartInstances();Machines.Reset();Error.Empty();bReady=false;
+    // New actors and incremental property assignment legitimately have partial
+    // inputs. Keep them silent and leave gameplay initialization to BeginPlay.
+    if(LayoutJson.IsEmpty()||CartMeshes.IsEmpty())return;
+    if(LoadLayout())BuildCartInstances(true);
+    bReady=false;
+}
+#endif
 
 UInstancedStaticMeshComponent* AMPRSorterSimulationActor::MakeInstances(const TCHAR* Name)
 {
@@ -111,7 +169,7 @@ bool AMPRSorterSimulationActor::LoadLayout()
     if(LayoutJson.Len()>2000000||!FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(LayoutJson),Root)||!Root)
         return Fail(TEXT("设备布局数据无效"));
     int32 Schema;FString Units;FObject Profiles;const FArray* Rows=nullptr;
-    if(!Integer(Root,TEXT("schema_version"),Schema,1,1)||!Root->TryGetStringField(TEXT("units"),Units)||Units!=TEXT("UE cm")
+    if(!Integer(Root,TEXT("schema_version"),Schema,2,2)||!Root->TryGetStringField(TEXT("units"),Units)||Units!=TEXT("UE cm")
        ||!Object(Root,TEXT("profiles"),Profiles)||!Array(Root,TEXT("machines"),Rows)||Rows->Num()!=22)
         return Fail(TEXT("设备布局版本、单位或设备清单无效"));
     // Parse transactionally: malformed editable JSON must not leave a partial fleet.
@@ -134,6 +192,16 @@ bool AMPRSorterSimulationActor::LoadLayout()
         FQuat Rotation(Qx,Qy,Qz,Qw);
         if(Location.GetAbsMax()>1.e8||Scale.GetMin()<=0||Scale.GetMax()>100||!Rotation.IsNormalized())return Fail(TEXT("设备变换范围无效"));
         M.World=FTransform(Rotation,Location,Scale);
+        int32 InfeedSide;
+        FVector PickupWorld,EntryWorld;
+        if(!Integer(Row,TEXT("infeed_side_local_x"),InfeedSide,-1,1)||InfeedSide==0
+           ||!Vector(Row,TEXT("pickup_ue_cm"),PickupWorld)||!Vector(Row,TEXT("entry_ue_cm"),EntryWorld))
+            return Fail(TEXT("设备朝向或人工接驳点缺失"));
+        M.InfeedSide=InfeedSide;M.LoadFraction=InfeedSide>0?0.:.5;
+        M.Pickup=M.World.InverseTransformPosition(PickupWorld);M.Entry=M.World.InverseTransformPosition(EntryWorld);
+        if(M.Pickup.GetAbsMax()>2000||M.Entry.GetAbsMax()>2000||(M.Pickup.X-M.Entry.X)*M.InfeedSide<20
+           ||(M.Pickup-M.Entry).Size()>150)return Fail(TEXT("人工接驳点不符合当前设备范围"));
+        M.FeedStart=M.Pickup-FVector(0,120,0);
         MPRSorter::Config C;int32 Levels,Sides,Capacity,TowerCount;
         if(!Number(P,TEXT("track_half_straight_cm"),M.Half)||!Number(P,TEXT("track_radius_cm"),M.Radius)
            ||M.Half<100||M.Half>500||M.Radius<20||M.Radius>50
@@ -143,6 +211,8 @@ bool AMPRSorterSimulationActor::LoadLayout()
            ||!Integer(P,TEXT("tower_count"),TowerCount,4,4)||!Number(P,TEXT("infeed_height_cm"),C.LoadHeightCm)||C.LoadHeightCm<15||C.LoadHeightCm>190)
             return Fail(TEXT("设备轨道、层数或容量配置无效"));
         C.Levels=Levels;C.BinCapacity=BinCapacity;C.LoopLengthCm=4*M.Half+2*PI*M.Radius;
+        C.CartColumns=Is64?4:5;C.InfeedCapacity=3;C.InfeedTravelSeconds=3.6;C.InfeedSpacingSeconds=1.2;
+        C.InductSeconds=1.6;
         C.ChainSpeedCmS=40;C.LiftSpeedCmS=55;C.ScanSeconds=.5;C.UnloadSeconds=1.2;C.CollectSeconds=12;C.AutoCollect=true;
         const FArray* LevelRows=nullptr;const FArray* Columns=nullptr;const FArray* BinRows=nullptr;
         if(!Array(P,TEXT("levels"),LevelRows)||LevelRows->Num()!=4||!Array(P,TEXT("column_x_cm"),Columns)||Columns->Num()!=C.Columns
@@ -163,7 +233,8 @@ bool AMPRSorterSimulationActor::LoadLayout()
         }
         for(int32 Side=0;Side<2;++Side)for(double At:ColumnPositions)
         {
-            C.DestinationDistances01.push_back((Side==0?Quarter+M.Half-At:Quarter+2*M.Half+PI*M.Radius+At+M.Half)/C.LoopLengthCm);
+            const double Physical=(Side==0?Quarter+M.Half-At:Quarter+2*M.Half+PI*M.Radius+At+M.Half)/C.LoopLengthCm;
+            C.DestinationDistances01.push_back(FMath::Fmod(Physical-M.LoadFraction+1.,1.));
         }
         M.Bins.SetNum(2*C.Columns*C.Levels);TSet<int32> BinKeys;
         for(const auto& V:*BinRows)
@@ -186,6 +257,35 @@ bool AMPRSorterSimulationActor::LoadLayout()
         }
         if(BinKeys.Num()!=M.Bins.Num())return Fail(TEXT("格口清单不完整"));
         std::string Message;if(!M.Simulation.Initialize(C,Message)) { Error=UTF8_TO_TCHAR(Message.c_str());return false; }
+        const FArray* CartRows=nullptr;const FArray* Groups=nullptr;
+        if(!Array(P,TEXT("cart_column_groups"),Groups)||Groups->Num()!=(Is64?2:3)
+           ||!Array(P,TEXT("carts"),CartRows)||CartRows->Num()!=int32(M.Simulation.GetCarts().size()))
+            return Fail(TEXT("独立料框车分组缺失"));
+        for(const auto& Group:*Groups){double Width;if(!ValueNumber(Group,Width)||Width!=C.CartColumns)return Fail(TEXT("料框车分组不符合 CAD"));}
+        for(int32 CartIndex=0;CartIndex<CartRows->Num();++CartIndex)
+        {
+            FObject Cart;FCartPoint Point;int32 Index;const FArray* Bounds=nullptr;
+            if(!ValueObject((*CartRows)[CartIndex],Cart)||!Integer(Cart,TEXT("index"),Index,CartIndex,CartIndex)
+               ||!Integer(Cart,TEXT("side"),Point.Side,0,1)||!Integer(Cart,TEXT("first_column"),Point.FirstColumn,0,C.Columns-1)
+               ||!Integer(Cart,TEXT("column_count"),Point.ColumnCount,C.CartColumns,C.CartColumns)
+               ||!Cart->TryGetStringField(TEXT("mesh"),Point.MeshPath)||!Point.MeshPath.StartsWith(TEXT("/Game/MPRWarehouse/"))
+               ||!Vector(Cart,TEXT("local_origin_cm"),Point.Origin)||!Array(Cart,TEXT("bounds_cm"),Bounds)||Bounds->Num()!=2
+               ||!Number(Cart,TEXT("retreat_distance_cm"),Point.Retreat)||!Number(Cart,TEXT("outbound_end_x_cm"),Point.OutboundEndX))
+                return Fail(TEXT("独立料框车网格、位置或路线无效"));
+            double V[6];for(int32 B=0;B<2;++B)
+            {
+                const FArray* Values=nullptr;
+                if(!(*Bounds)[B]||!(*Bounds)[B]->TryGetArray(Values)||!Values||Values->Num()!=3)return Fail(TEXT("料框车包围盒无效"));
+                for(int32 Axis=0;Axis<3;++Axis)if(!ValueNumber((*Values)[Axis],V[B*3+Axis]))return Fail(TEXT("料框车包围盒坐标无效"));
+            }
+            Point.BoundsMin=FVector(V[0],V[1],V[2]);Point.BoundsMax=FVector(V[3],V[4],V[5]);
+            const auto& CoreCart=M.Simulation.GetCarts()[size_t(CartIndex)];
+            if(Point.Side!=CoreCart.Side||Point.FirstColumn!=CoreCart.FirstColumn||Point.ColumnCount!=CoreCart.ColumnCount
+               ||Point.Origin.GetAbsMax()>1000||FMath::Abs(Point.Origin.Z)>.1||Point.Retreat<30||Point.Retreat>100
+               ||Point.OutboundEndX<M.Half||Point.OutboundEndX>2000||(Point.BoundsMax-Point.BoundsMin).GetMin()<=0)
+                return Fail(TEXT("料框车索引、停靠或退出范围无效"));
+            M.Carts.Add(MoveTemp(Point));
+        }
         M.BinOffset=Offset;Offset+=M.Bins.Num();M.CachedBinState.Init(INDEX_NONE,M.Bins.Num());Parsed.Add(MoveTemp(M));
     }
     if(Count64!=18||Count120!=4||Offset!=1632)return Fail(TEXT("设备类型数量不符合已保存场景"));
@@ -195,16 +295,28 @@ bool AMPRSorterSimulationActor::LoadLayout()
 void AMPRSorterSimulationActor::BeginPlay()
 {
     Super::BeginPlay();
+    ClearCartInstances();
     // This actor is saved only in MPR; no registry or GHS default behavior changes.
     bReady=TowerMesh&&TrayMesh&&ParcelMaterial&&ActiveMaterial&&FullMaterial&&LoadLayout();
     if(!bReady) { Error=Error.IsEmpty()?TEXT("仿真资产或布局缺失"):Error;UE_LOG(LogTemp,Error,TEXT("MPR_SORTER: %s"),*Error);SetActorTickEnabled(false);return; }
     Towers->SetStaticMesh(TowerMesh);Trays->SetStaticMesh(TrayMesh);
-    Parcels->SetMaterial(0,ParcelMaterial);BinParcels->SetMaterial(0,ParcelMaterial);
+    Parcels->SetMaterial(0,ParcelMaterial);InfeedParcels->SetMaterial(0,ParcelMaterial);BinParcels->SetMaterial(0,ParcelMaterial);
     ActiveLights->SetMaterial(0,ActiveMaterial);FullLights->SetMaterial(0,FullMaterial);
+    WorkerCloth->SetMaterial(0,WorkerClothMaterial);WorkerSkin->SetMaterial(0,WorkerSkinMaterial);
+    WorkerHelmet->SetMaterial(0,WorkerHelmetMaterial);WorkerBoots->SetMaterial(0,WorkerBootMaterial);
     ActiveLights->SetCastShadow(false);FullLights->SetCastShadow(false);
     const FTransform Hidden(FQuat::Identity,FVector::ZeroVector,FVector::ZeroVector);
     for(auto& M:Machines)
     {
+        M.FeedOffset=InfeedParcels->GetInstanceCount();M.WorkerOffset=WorkerHelmet->GetInstanceCount();
+        for(int32 I=0;I<M.Simulation.GetConfig().InfeedCapacity;++I)InfeedParcels->AddInstance(Hidden);
+        for(int32 Worker=0;Worker<2;++Worker)
+        {
+            for(int32 I=0;I<10;++I)WorkerCloth->AddInstance(Hidden);
+            for(int32 I=0;I<3;++I)WorkerSkin->AddInstance(Hidden);
+            for(int32 I=0;I<2;++I)WorkerBoots->AddInstance(Hidden);
+            WorkerHelmet->AddInstance(Hidden);
+        }
         for(int32 I=0;I<MPRSorter::CarrierCount;++I){Towers->AddInstance(Hidden);Trays->AddInstance(Hidden);Parcels->AddInstance(Hidden);}
         for(int32 I=0;I<M.Bins.Num();++I)
         {
@@ -213,8 +325,49 @@ void AMPRSorterSimulationActor::BeginPlay()
         }
         M.Simulation.SetPlaying(bAutoStart);
     }
+    if(!BuildCartInstances()){bReady=false;SetActorTickEnabled(false);UE_LOG(LogTemp,Error,TEXT("MPR_SORTER: %s"),*Error);return;}
     UpdateInstances();AttachPanel();
-    UE_LOG(LogTemp,Display,TEXT("MPR_SORTER: ready, 22 machines, 88 circulating lift carriers, 1632 scene cells; demonstration data."));
+    UE_LOG(LogTemp,Display,TEXT("MPR_SORTER: ready, 22 machines, 96 removable carts, manual infeed, 1632 scene cells; demonstration data."));
+}
+
+bool AMPRSorterSimulationActor::BuildCartInstances(bool bEditorPreview)
+{
+    // Resolve the complete asset set before creating any components, so partial
+    // editor property assignment cannot leave half a preview behind.
+    TMap<FString,UStaticMesh*> Resolved;
+    for(const auto& M:Machines)for(const auto& Cart:M.Carts)if(!Resolved.Contains(Cart.MeshPath))
+    {
+        UStaticMesh* Mesh=nullptr;
+        for(const auto& Candidate:CartMeshes)if(Candidate)
+        {
+            const FString Path=Candidate->GetPathName();FString Package,Asset;Path.Split(TEXT("."),&Package,&Asset);
+            if(Path==Cart.MeshPath||Package==Cart.MeshPath){Mesh=Candidate;break;}
+        }
+        if(!Mesh){Error=FString::Printf(TEXT("缺少料框车强引用：%s"),*Cart.MeshPath);return false;}
+        Resolved.Add(Cart.MeshPath,Mesh);
+    }
+    TMap<FString,int32> Components;
+    for(auto& M:Machines)for(auto& Cart:M.Carts)
+    {
+        int32 ComponentIndex=INDEX_NONE;
+        if(const int32* Existing=Components.Find(Cart.MeshPath))ComponentIndex=*Existing;
+        else
+        {
+            UStaticMesh* Mesh=Resolved.FindChecked(Cart.MeshPath);
+            const FName BaseName(*FString::Printf(TEXT("RuntimeCart_%02d"),RuntimeCartComponents.Num()));
+            const FName Name=MakeUniqueObjectName(this,UInstancedStaticMeshComponent::StaticClass(),BaseName);
+            const EObjectFlags Flags=bEditorPreview?EObjectFlags(RF_Transient|RF_DuplicateTransient|RF_TextExportTransient):RF_Transient;
+            auto* C=NewObject<UInstancedStaticMeshComponent>(this,Name,Flags);
+            C->CreationMethod=EComponentCreationMethod::Instance;
+            C->SetupAttachment(RootComponent);C->SetMobility(EComponentMobility::Movable);C->SetStaticMesh(Mesh);
+            C->SetCollisionEnabled(ECollisionEnabled::NoCollision);C->SetGenerateOverlapEvents(false);
+            C->SetCanEverAffectNavigation(false);C->bAffectDistanceFieldLighting=false;C->bAffectDynamicIndirectLighting=false;
+            C->SetCastShadow(true);C->RegisterComponent();ComponentIndex=RuntimeCartComponents.Add(C);Components.Add(Cart.MeshPath,ComponentIndex);
+        }
+        Cart.ComponentIndex=ComponentIndex;
+        Cart.InstanceIndex=RuntimeCartComponents[ComponentIndex]->AddInstance(FTransform(FQuat::Identity,Cart.Origin)*M.World,true);
+    }
+    return true;
 }
 
 FVector AMPRSorterSimulationActor::PointOnLoop(double Fraction,double H,double R,double& Heading)
@@ -228,6 +381,89 @@ FVector AMPRSorterSimulationActor::PointOnLoop(double Fraction,double H,double R
     S-=2*H;const double A=PI*1.5+S/R;Heading=A+PI*.5;return FVector(H+R*FMath::Cos(A),R*FMath::Sin(A),0);
 }
 
+FVector AMPRSorterSimulationActor::CartOffset(const FMachine& M,int32 Index) const
+{
+    const auto& C=M.Simulation.GetCarts()[size_t(Index)];const auto& P=M.Carts[Index];
+    const double Side=P.Side==0?1.:-1.;const double T=FMath::Clamp(C.Progress01,0.,1.);
+    const FVector Retreated(0,Side*P.Retreat,0),Exit(-M.InfeedSide*P.OutboundEndX-P.Origin.X,Side*P.Retreat,0);
+    switch(C.State)
+    {
+    case MPRSorter::CartPhase::Withdrawing:return FMath::Lerp(FVector::ZeroVector,Retreated,T);
+    case MPRSorter::CartPhase::Outbound:return FMath::Lerp(Retreated,Exit,T);
+    case MPRSorter::CartPhase::Handoff:return Exit;
+    case MPRSorter::CartPhase::EmptyArriving:return T<.7?FMath::Lerp(Exit,Retreated,T/.7):FMath::Lerp(Retreated,FVector::ZeroVector,(T-.7)/.3);
+    default:return FVector::ZeroVector;
+    }
+}
+FVector AMPRSorterSimulationActor::FeedPoint(const FMachine& M,double Progress) const
+{return FMath::Lerp(M.FeedStart,M.Pickup,FMath::Clamp(Progress,0.,1.))+FVector(0,0,PackageSize.Z*.5+.3);}
+FVector AMPRSorterSimulationActor::CarrierParcelPoint(const FMachine& M,const MPRSorter::Carrier& C,FQuat& Turn) const
+{
+    double Heading;FVector At=PointOnLoop(C.Distance01+M.LoadFraction,M.Half,M.Radius,Heading);At.Z=C.LiftHeightCm;
+    Turn=FQuat(FVector::UpVector,Heading);
+    FVector Parcel=At+FVector(0,0,PackageSize.Z*.5+.3);
+    if(C.State==MPRSorter::CarrierPhase::Scan){Turn=FQuat::Identity;return FeedPoint(M,1);}
+    if(C.State==MPRSorter::CarrierPhase::Induct)
+    {
+        const double T=FMath::Clamp(C.InductProgress,0.,1.);Turn=FQuat::Slerp(FQuat::Identity,Turn,T);
+        // Hands retain the same parcel throughout the CAD gap; the slight lift
+        // is an operator transfer, not an unsupported package moving on a belt.
+        return FMath::Lerp(FeedPoint(M,1),Parcel,T)+FVector(0,0,12*FMath::Sin(PI*T));
+    }
+    if(C.State==MPRSorter::CarrierPhase::Unload)
+    {
+        const int32 Index=M.Simulation.BinIndex(C.Target);const auto& P=M.Bins[Index];
+        const auto& B=M.Simulation.GetBins()[size_t(Index)];const double T=FMath::Clamp(C.UnloadProgress,0.,1.);
+        const double Side=C.Target.Side==0?1.:-1.,Slope=FMath::DegreesToRadians(20.);
+        const FVector Normal(0,Side*FMath::Sin(Slope),FMath::Cos(Slope));
+        const FVector Entry=P.Entry+Normal*(PackageSize.Z*.5+.4),Outlet=P.Outlet+Normal*(PackageSize.Z*.5+.4);
+        const FVector Above(P.Drop.X,P.Drop.Y,P.RimZ+PackageSize.Z*.5+1);
+        const FVector Rest=P.Drop+FVector(0,0,PackageSize.Z*(B.Occupancy+.5)+.3);double Tilt=0;
+        if(T<.35){const double F=T/.35;Tilt=F;Parcel=FMath::Lerp(Parcel,Entry,F)+FVector(0,0,1.5*FMath::Sin(PI*F));}
+        else if(T<.65){Tilt=1;Parcel=FMath::Lerp(Entry,Outlet,(T-.35)/.30);}
+        else if(T<.82){const double F=(T-.65)/.17;Tilt=1-F;Parcel=FMath::Lerp(Outlet,Above,F);}
+        else Parcel=FMath::Lerp(Above,Rest,(T-.82)/.18);
+        Turn=FQuat(FVector::ForwardVector,-Side*Slope*Tilt);
+    }
+    return Parcel;
+}
+void AMPRSorterSimulationActor::UpdateWorker(int32 Index,const FMachine& M,const FVector& Feet,
+    const FVector& LeftHand,const FVector& RightHand,double Heading,double Step,bool Visible)
+{
+    const FTransform Hidden(FQuat::Identity,FVector::ZeroVector,FVector::ZeroVector);
+    if(!Visible)
+    {
+        for(int32 I=0;I<10;++I)WorkerCloth->UpdateInstanceTransform(Index*10+I,Hidden,true,false,true);
+        for(int32 I=0;I<3;++I)WorkerSkin->UpdateInstanceTransform(Index*3+I,Hidden,true,false,true);
+        for(int32 I=0;I<2;++I)WorkerBoots->UpdateInstanceTransform(Index*2+I,Hidden,true,false,true);
+        WorkerHelmet->UpdateInstanceTransform(Index,Hidden,true,false,true);return;
+    }
+    const FQuat Facing(FVector::UpVector,Heading);
+    auto At=[&](const FVector& P){return Feet+Facing.RotateVector(P);};
+    auto Box=[&](UInstancedStaticMeshComponent* C,int32 Slot,const FVector& P,const FVector& Size,const FQuat& R)
+    {C->UpdateInstanceTransform(Slot,FTransform(R,P,Size/100.)*M.World,true,false,true);};
+    auto Limb=[&](int32 Slot,const FVector& A,const FVector& B,double Width)
+    {
+        const FVector Delta=B-A;const FQuat Rotation=FRotationMatrix::MakeFromZ(Delta.GetSafeNormal()).ToQuat();
+        Box(WorkerCloth,Index*10+Slot,(A+B)*.5,FVector(Width,Width,Delta.Size()),Rotation);
+    };
+    Box(WorkerCloth,Index*10,At(FVector(0,0,124)),FVector(22,32,42),Facing);
+    Box(WorkerCloth,Index*10+1,At(FVector(0,0,94)),FVector(22,30,18),Facing);
+    for(int32 Side=0;Side<2;++Side)
+    {
+        const double Sign=Side==0?-1.:1.,Stride=Sign*Step;
+        const FVector Hip=At(FVector(0,Sign*9,88)),Knee=At(FVector(Stride*.45,Sign*9,49));
+        const FVector Ankle=At(FVector(Stride,Sign*9,10));
+        Limb(2+Side*2,Hip,Knee,12);Limb(3+Side*2,Knee,Ankle,10);
+        Box(WorkerBoots,Index*2+Side,At(FVector(Stride+5,Sign*9,5)),FVector(26,12,10),Facing);
+        const FVector Shoulder=At(FVector(0,Sign*18,141)),Hand=Side==0?LeftHand:RightHand;
+        const FVector Elbow=(Shoulder+Hand)*.5+Facing.RotateVector(FVector(-5,Sign*8,-8));
+        Limb(6+Side*2,Shoulder,Elbow,10);Limb(7+Side*2,Elbow,Hand,8);
+        Box(WorkerSkin,Index*3+1+Side,Hand,FVector(9,8,8),Facing);
+    }
+    Box(WorkerSkin,Index*3,At(FVector(1,0,154)),FVector(21,20,23),Facing);
+    Box(WorkerHelmet,Index,At(FVector(1,0,167)),FVector(24,23,9),Facing);
+}
 void AMPRSorterSimulationActor::UpdateInstances()
 {
     TRACE_CPUPROFILER_EVENT_SCOPE(MPRSorter_Presentation);
@@ -235,65 +471,81 @@ void AMPRSorterSimulationActor::UpdateInstances()
     int32 CarrierIndex=0;bool BinsChanged=false;
     for(auto& M:Machines)
     {
-        const auto& Bins=M.Simulation.GetBins();
+        const auto& Bins=M.Simulation.GetBins();const auto& Carts=M.Simulation.GetCarts();const auto& Queue=M.Simulation.GetInfeedQueue();
+        const MPRSorter::Carrier* HandCarrier=nullptr;
+        for(int32 I=0;I<M.Simulation.GetConfig().InfeedCapacity;++I)
+        {
+            const FTransform Transform=I<int32(Queue.size())?FTransform(FQuat::Identity,FeedPoint(M,Queue[size_t(I)].Progress01),PackageSize/100.)*M.World:Hidden;
+            InfeedParcels->UpdateInstanceTransform(M.FeedOffset+I,Transform,true,false,true);
+        }
         for(const auto& Carrier:M.Simulation.GetCarriers())
         {
-            double Heading;FVector At=PointOnLoop(Carrier.Distance01,M.Half,M.Radius,Heading);
+            double Heading;FVector At=PointOnLoop(Carrier.Distance01+M.LoadFraction,M.Half,M.Radius,Heading);
             const FQuat Turn(FVector::UpVector,Heading);
             Towers->UpdateInstanceTransform(CarrierIndex,FTransform(Turn,At)*M.World,true,false,true);
-            At.Z=Carrier.LiftHeightCm;
-            Trays->UpdateInstanceTransform(CarrierIndex,FTransform(Turn,At)*M.World,true,false,true);
+            At.Z=Carrier.LiftHeightCm;Trays->UpdateInstanceTransform(CarrierIndex,FTransform(Turn,At)*M.World,true,false,true);
             if(Carrier.ParcelId)
             {
-                FVector Parcel=At+FVector(0,0,PackageSize.Z*.5+.3);FQuat ParcelTurn=Turn;
-                if(Carrier.State==MPRSorter::CarrierPhase::Unload)
-                {
-                    const int32 Bin=M.Simulation.BinIndex(Carrier.Target);const auto& P=M.Bins[Bin];
-                    const double T=FMath::Clamp(Carrier.UnloadProgress,0.,1.);
-                    const double Side=Carrier.Target.Side==0?1.:-1.;
-                    const double Slope=FMath::DegreesToRadians(20.);
-                    const FVector Normal(0,Side*FMath::Sin(Slope),FMath::Cos(Slope));
-                    const FVector Entry=P.Entry+Normal*(PackageSize.Z*.5+.4);
-                    const FVector Outlet=P.Outlet+Normal*(PackageSize.Z*.5+.4);
-                    // Cross the chute above the real bin rim before settling into it.
-                    const FVector Above(P.Drop.X,P.Drop.Y,P.RimZ+PackageSize.Z*.5+1);
-                    const FVector Rest=P.Drop+FVector(0,0,PackageSize.Z*(Bins[Bin].Occupancy+.5)+.3);
-                    double Tilt=0;
-                    if(T<.35)
-                    {
-                        const double F=T/.35;Tilt=F;
-                        Parcel=FMath::Lerp(Parcel,Entry,F)+FVector(0,0,1.5*FMath::Sin(PI*F));
-                    }
-                    else if(T<.65){Tilt=1;Parcel=FMath::Lerp(Entry,Outlet,(T-.35)/.30);}
-                    else if(T<.82){const double F=(T-.65)/.17;Tilt=1-F;Parcel=FMath::Lerp(Outlet,Above,F);}
-                    else Parcel=FMath::Lerp(Above,Rest,(T-.82)/.18);
-                    // Follow the actual 20-degree chute. The short handoff arc clears
-                    // the tray lip while the parcel rotates continuously onto it.
-                    ParcelTurn=FQuat(FVector::ForwardVector,-Side*Slope*Tilt);
-                }
-                Parcels->UpdateInstanceTransform(CarrierIndex,FTransform(ParcelTurn,Parcel,PackageSize/100)*M.World,true,false,true);
+                FQuat ParcelTurn;const FVector Parcel=CarrierParcelPoint(M,Carrier,ParcelTurn);
+                Parcels->UpdateInstanceTransform(CarrierIndex,FTransform(ParcelTurn,Parcel,PackageSize/100.)*M.World,true,false,true);
+                if(Carrier.State==MPRSorter::CarrierPhase::Scan||Carrier.State==MPRSorter::CarrierPhase::Induct)HandCarrier=&Carrier;
             }
             else Parcels->UpdateInstanceTransform(CarrierIndex,Hidden,true,false,true);
             ++CarrierIndex;
         }
+        int32 MovingCart=INDEX_NONE;
+        for(int32 I=0;I<M.Carts.Num();++I)
+        {
+            const auto& P=M.Carts[I];const auto& C=Carts[size_t(I)];const FVector Offset=CartOffset(M,I);
+            const FVector CartScale=C.State==MPRSorter::CartPhase::Handoff?FVector::ZeroVector:FVector::OneVector;
+            RuntimeCartComponents[P.ComponentIndex]->UpdateInstanceTransform(P.InstanceIndex,FTransform(FQuat::Identity,P.Origin+Offset,CartScale)*M.World,true,false,true);
+            if(C.State!=MPRSorter::CartPhase::Receiving&&C.State!=MPRSorter::CartPhase::FullWaiting)MovingCart=I;
+        }
+        if(MovingCart==INDEX_NONE&&M.Simulation.IsExchangePermitted())for(int32 I=0;I<M.Carts.Num();++I)
+            if(Carts[size_t(I)].State==MPRSorter::CartPhase::FullWaiting){MovingCart=I;break;}
         for(int32 I=0;I<M.Bins.Num();++I)
         {
-            const auto& Bin=Bins[I];const int32 State=Bin.Occupancy+8*Bin.Reserved;
-            if(M.CachedBinState[I]==State)continue;
-            M.CachedBinState[I]=State;BinsChanged=true;
-            const int32 Slot=M.BinOffset+I;const auto& P=M.Bins[I];
+            const auto& Bin=Bins[size_t(I)];const auto& Cart=Carts[size_t(Bin.CartId)];
+            const int32 State=Bin.Occupancy+8*Bin.Reserved+256*int32(Cart.State);
+            const bool Moving=Cart.State==MPRSorter::CartPhase::Withdrawing||Cart.State==MPRSorter::CartPhase::Outbound||Cart.State==MPRSorter::CartPhase::EmptyArriving;
+            if(M.CachedBinState[I]==State&&!Moving)continue;
+            M.CachedBinState[I]=State;BinsChanged=true;const int32 Slot=M.BinOffset+I;const auto& P=M.Bins[I];
+            const FVector Offset=CartOffset(M,Bin.CartId);
             for(int32 J=0;J<BinCapacity;++J)
             {
-                const FVector At=P.Drop+FVector(0,0,PackageSize.Z*(J+.5)+.3);
-                BinParcels->UpdateInstanceTransform(Slot*BinCapacity+J,J<Bin.Occupancy?FTransform(FQuat::Identity,At,PackageSize/100)*M.World:Hidden,true,false,true);
+                const FVector At=P.Drop+Offset+FVector(0,0,PackageSize.Z*(J+.5)+.3);
+                BinParcels->UpdateInstanceTransform(Slot*BinCapacity+J,J<Bin.Occupancy&&Cart.State!=MPRSorter::CartPhase::Handoff?FTransform(FQuat::Identity,At,PackageSize/100.)*M.World:Hidden,true,false,true);
             }
-            const FVector Signal=P.Outlet+FVector(0,0,3);
-            const FTransform Light=FTransform(FQuat::Identity,Signal,FVector(.15,.04,.025))*M.World;
-            ActiveLights->UpdateInstanceTransform(Slot,(Bin.Reserved>0||Bin.Occupancy>0)&&Bin.Occupancy<BinCapacity?Light:Hidden,true,false,true);
+            const FVector Signal=P.Outlet+FVector(0,0,3);const FTransform Light=FTransform(FQuat::Identity,Signal,FVector(.15,.04,.025))*M.World;
+            const bool Docked=Cart.State==MPRSorter::CartPhase::Receiving||Cart.State==MPRSorter::CartPhase::FullWaiting;
+            ActiveLights->UpdateInstanceTransform(Slot,Docked&&(Bin.Reserved>0||Bin.Occupancy>0)&&Bin.Occupancy<BinCapacity?Light:Hidden,true,false,true);
             FullLights->UpdateInstanceTransform(Slot,Bin.Occupancy>=BinCapacity?Light:Hidden,true,false,true);
         }
+        // An operator stands in the actual manual gap, offset beside the carried
+        // package. Hands and the package share the same continuous trajectory.
+        double LoadHeading;const FVector Load=PointOnLoop(M.LoadFraction,M.Half,M.Radius,LoadHeading);
+        FVector Hand=FeedPoint(M,1);double Progress=0;FQuat HandTurn=FQuat::Identity;
+        if(HandCarrier){Hand=CarrierParcelPoint(M,*HandCarrier,HandTurn);Progress=HandCarrier->InductProgress;}
+        FVector Feet((M.Pickup.X+Load.X)*.5,Hand.Y-39,0);
+        Feet.X+=HandCarrier&&HandCarrier->State==MPRSorter::CarrierPhase::Induct?-M.InfeedSide*8*FMath::Sin(PI*Progress):0;
+        const double Walk=HandCarrier&&HandCarrier->State==MPRSorter::CarrierPhase::Induct?5*FMath::Sin(4*PI*Progress):0;
+        const FVector Left=Hand+HandTurn.RotateVector(FVector(PackageSize.X*.55,0,-2)),Right=Hand+HandTurn.RotateVector(FVector(-PackageSize.X*.55,0,-2));
+        UpdateWorker(M.WorkerOffset,M,Feet,Left,Right,PI*.5,Walk,true);
+        if(MovingCart!=INDEX_NONE&&Carts[size_t(MovingCart)].State!=MPRSorter::CartPhase::Handoff)
+        {
+            const auto& P=M.Carts[MovingCart];const auto& C=Carts[size_t(MovingCart)];const FVector Offset=CartOffset(M,MovingCart);
+            const double Side=P.Side==0?1.:-1.,Outer=Side>0?P.BoundsMax.Y:-P.BoundsMin.Y;
+            const FVector Body=P.Origin+Offset+FVector(0,Side*(Outer+18),0);
+            const FVector Grip=P.Origin+Offset+FVector(0,Side*(Outer-2),105);
+            // Side grip keeps a narrow body in the verified aisle instead of
+            // placing an invisible AMR beneath, or a worker inside, the cart.
+            const double Stride=(C.State==MPRSorter::CartPhase::FullWaiting||C.State==MPRSorter::CartPhase::Docking)?0:2*FMath::Sin(C.Progress01*10*PI);
+            UpdateWorker(M.WorkerOffset+1,M,Body,Grip+FVector(-22*Side,0,0),Grip+FVector(22*Side,0,0),-Side*PI*.5,Stride,true);
+        }
+        else UpdateWorker(M.WorkerOffset+1,M,FVector::ZeroVector,FVector::ZeroVector,FVector::ZeroVector,0,0,false);
     }
-    for(auto* C:{Towers.Get(),Trays.Get(),Parcels.Get()})C->MarkRenderStateDirty();
+    for(auto* C:{Towers.Get(),Trays.Get(),Parcels.Get(),InfeedParcels.Get(),WorkerCloth.Get(),WorkerSkin.Get(),WorkerHelmet.Get(),WorkerBoots.Get()})C->MarkRenderStateDirty();
+    for(auto& C:RuntimeCartComponents)C->MarkRenderStateDirty();
     if(BinsChanged)for(auto* C:{BinParcels.Get(),ActiveLights.Get(),FullLights.Get()})C->MarkRenderStateDirty();
 }
 
@@ -303,7 +555,7 @@ void AMPRSorterSimulationActor::AttachPanel()
     auto* PC=Cast<AGHSWarehousePlayerController>(UGameplayStatics::GetPlayerController(this,0));
     if(!PC||!PC->IsLocalController())return;
     Panel=CreateWidget<UMPRSorterHUDWidget>(PC,UMPRSorterHUDWidget::StaticClass());
-    if(Panel){Panel->InitializeSorter(this);Panel->AddToViewport(80);Panel->SetDesiredSizeInViewport(FVector2D(360,350));Panel->SetPositionInViewport(FVector2D(20,80),false);}
+    if(Panel){Panel->InitializeSorter(this);Panel->AddToViewport(80);Panel->SetDesiredSizeInViewport(FVector2D(360,390));Panel->SetPositionInViewport(FVector2D(20,80),false);}
 }
 
 void AMPRSorterSimulationActor::Tick(float DeltaSeconds)
@@ -311,7 +563,47 @@ void AMPRSorterSimulationActor::Tick(float DeltaSeconds)
     Super::Tick(DeltaSeconds);if(!bReady)return;
     AttachPanel();UpdateFocus();
     if(bAutomaticAdvance&&IsSimulationPlaying())
-    { for(auto& M:Machines)M.Simulation.Advance(DeltaSeconds);UpdateInstances(); }
+    { AdvanceFleet(DeltaSeconds);UpdateInstances(); }
+}
+void AMPRSorterSimulationActor::ScheduleCartExchange()
+{
+    if(Machines.IsValidIndex(ExchangeOwner))
+    {
+        const auto& S=Machines[ExchangeOwner].Simulation;bool StillRequested=false;
+        for(const auto& C:S.GetCarts())StillRequested|=(C.State!=MPRSorter::CartPhase::Receiving&&C.State!=MPRSorter::CartPhase::FullWaiting)
+            ||(C.State==MPRSorter::CartPhase::FullWaiting&&(S.IsAutoCollectEnabled()||C.ExchangeRequested||C.Progress01>0));
+        if(!StillRequested){NextExchangeMachine=(ExchangeOwner+1)%Machines.Num();ExchangeOwner=INDEX_NONE;}
+    }
+    if(Machines.IsValidIndex(ExchangeOwner)
+       &&Machines[ExchangeOwner].Simulation.GetStats().ExchangedCarts!=OwnerCompletedExchanges)
+    {
+        NextExchangeMachine=(ExchangeOwner+1)%Machines.Num();ExchangeOwner=INDEX_NONE;
+    }
+    if(ExchangeOwner==INDEX_NONE)
+    {
+        for(int32 N=0;N<Machines.Num();++N)
+        {
+            const int32 Index=(NextExchangeMachine+N)%Machines.Num();const auto& S=Machines[Index].Simulation;
+            bool Requested=false;for(const auto& C:S.GetCarts())
+                Requested|=C.State==MPRSorter::CartPhase::FullWaiting&&(S.IsAutoCollectEnabled()||C.ExchangeRequested);
+            if(Requested){ExchangeOwner=Index;OwnerCompletedExchanges=S.GetStats().ExchangedCarts;break;}
+        }
+    }
+    // One entire cart trip owns the shared narrow aisle. Other machines may
+    // continue receiving but cannot withdraw an opposing cart into this path.
+    for(int32 I=0;I<Machines.Num();++I)Machines[I].Simulation.SetExchangePermit(I==ExchangeOwner);
+}
+bool AMPRSorterSimulationActor::AdvanceFleet(double WallSeconds)
+{
+    if(!FMath::IsFinite(WallSeconds)||WallSeconds<0||WallSeconds*GetSimulationRate()>86400)return false;
+    double Remaining=WallSeconds;const double MaxStep=.1/GetSimulationRate();
+    while(Remaining>1.e-12)
+    {
+        ScheduleCartExchange();const double Step=FMath::Min(Remaining,MaxStep);
+        for(auto& M:Machines)if(!M.Simulation.Advance(Step))return false;
+        Remaining=FMath::Max(0.,Remaining-Step);
+    }
+    ScheduleCartExchange();return true;
 }
 void AMPRSorterSimulationActor::EndPlay(const EEndPlayReason::Type Reason)
 { if(Panel){Panel->RemoveFromParent();Panel=nullptr;}Super::EndPlay(Reason); }
@@ -319,11 +611,16 @@ bool AMPRSorterSimulationActor::IsSimulationPlaying() const { return bReady&&Mac
 bool AMPRSorterSimulationActor::IsAutomaticCollection() const { return bReady&&Machines[0].Simulation.IsAutoCollectEnabled(); }
 double AMPRSorterSimulationActor::GetSimulationRate() const { return bReady?Machines[0].Simulation.GetRate():1.; }
 void AMPRSorterSimulationActor::SetSimulationPlaying(bool Playing) { for(auto& M:Machines)M.Simulation.SetPlaying(Playing); }
-void AMPRSorterSimulationActor::ResetSimulation(){for(auto& M:Machines){M.Simulation.Reset();M.CachedBinState.Init(INDEX_NONE,M.Bins.Num());}if(bReady)UpdateInstances();}
+void AMPRSorterSimulationActor::ResetSimulation(){ExchangeOwner=INDEX_NONE;NextExchangeMachine=0;OwnerCompletedExchanges=0;for(auto& M:Machines){M.Simulation.Reset();M.CachedBinState.Init(INDEX_NONE,M.Bins.Num());}ScheduleCartExchange();if(bReady)UpdateInstances();}
 void AMPRSorterSimulationActor::SetSimulationRate(double Rate){for(auto& M:Machines)M.Simulation.SetRate(Rate);}
 void AMPRSorterSimulationActor::SetAutomaticCollection(bool Enabled){for(auto& M:Machines)M.Simulation.SetAutoCollect(Enabled);}
 void AMPRSorterSimulationActor::ClearFullBins()
-{for(auto& M:Machines){const auto Copy=M.Simulation.GetBins();for(const auto& B:Copy)if(B.Occupancy>=B.Capacity)M.Simulation.ClearBin(B.Target);}if(bReady)UpdateInstances();}
+{
+    if(!Machines.IsValidIndex(SelectedMachine))return;
+    auto& S=Machines[SelectedMachine].Simulation;
+    for(const auto& C:S.GetCarts())if(C.State==MPRSorter::CartPhase::FullWaiting)S.RequestCartExchange(C.Index);
+    if(bReady)UpdateInstances();
+}
 void AMPRSorterSimulationActor::FocusMachine(int32 Index)
 {
     if(!Machines.IsValidIndex(Index))return;SelectedMachine=Index;PendingFocus=Index;
@@ -345,20 +642,22 @@ void AMPRSorterSimulationActor::UpdateFocus()
 void AMPRSorterSimulationActor::SetPanelVisible(bool Visible){if(Panel)Panel->SetVisibility(Visible?ESlateVisibility::SelfHitTestInvisible:ESlateVisibility::Collapsed);}
 void AMPRSorterSimulationActor::SetAutomaticAdvanceForDiagnostics(bool Enabled){if(Diagnostics())bAutomaticAdvance=Enabled;}
 bool AMPRSorterSimulationActor::AdvanceSimulationForDiagnostics(double Seconds)
-{if(!Diagnostics()||!bReady||!FMath::IsFinite(Seconds)||Seconds<0||Seconds*GetSimulationRate()>86400)return false;for(auto& M:Machines)if(!M.Simulation.Advance(Seconds))return false;UpdateInstances();return true;}
+{if(!Diagnostics()||!bReady||!AdvanceFleet(Seconds))return false;UpdateInstances();return true;}
 FString AMPRSorterSimulationActor::GetMachineTitle() const
-{if(!bReady)return Error;return FString::Printf(TEXT("木马 %02d / %d · 场景格口 %d"),SelectedMachine+1,Machines.Num(),Machines[SelectedMachine].Bins.Num());}
+{if(!bReady)return Error;return FString::Printf(TEXT("木马 %02d / %d · %d 格口 · %d 车"),SelectedMachine+1,Machines.Num(),Machines[SelectedMachine].Bins.Num(),Machines[SelectedMachine].Carts.Num());}
 FString AMPRSorterSimulationActor::GetStatusText() const
 {if(!bReady)return Error;return FString::Printf(TEXT("%s · %.0f× · %s"),IsSimulationPlaying()?TEXT("运行中"):TEXT("已暂停"),GetSimulationRate(),*ReasonName(Machines[SelectedMachine].Simulation.GetStats().Reason));}
 FString AMPRSorterSimulationActor::GetProgressText() const
 {
     if(!bReady)return TEXT("初始化中");const auto& S=Machines[SelectedMachine].Simulation.GetStats();int32 Occupied=0,Full=0;
-    for(const auto& B:Machines[SelectedMachine].Simulation.GetBins()){Occupied+=B.Occupancy;Full+=B.Occupancy>=B.Capacity;}
-    return FString::Printf(TEXT("已投 %llu   在途 %d   待取 %d\n已取 %llu   满格 %d   仿真 %.1f s"),static_cast<unsigned long long>(S.Completed),S.Active,Occupied,static_cast<unsigned long long>(S.Collected),Full,S.SimTime);
+    for(const auto& C:Machines[SelectedMachine].Simulation.GetCarts()){Occupied+=C.Occupancy;Full+=C.State==MPRSorter::CartPhase::FullWaiting;}
+    return FString::Printf(TEXT("来货排队 %d   搬运中 %d   已入箱 %llu\n当前车载 %d   已转出 %llu   换车 %llu\n满车待换 %d   演示时间 %.1f s"),S.Queued,S.Active,static_cast<unsigned long long>(S.Completed),Occupied,static_cast<unsigned long long>(S.Collected),static_cast<unsigned long long>(S.ExchangedCarts),Full,S.SimTime);
 }
 FString AMPRSorterSimulationActor::GetCarrierText() const
 {
     if(!bReady)return TEXT("");
+    for(const auto& C:Machines[SelectedMachine].Simulation.GetCarts())if(C.State!=MPRSorter::CartPhase::Receiving)
+        return FString::Printf(TEXT("%s侧 %d号料框车 · %s · %d/%d件"),C.Side==0?TEXT("A"):TEXT("B"),C.Index+1,*CartPhaseName(C.State),C.Occupancy,C.Capacity);
     for(const auto& C:Machines[SelectedMachine].Simulation.GetCarriers())if(C.ParcelId)
         return FString::Printf(TEXT("包裹 %04llu → %s侧 %02d列 %d层 · %s"),static_cast<unsigned long long>(C.ParcelId),C.Target.Side==0?TEXT("A"):TEXT("B"),C.Target.Column+1,C.Target.Level+1,*PhaseName(C.State));
     return TEXT("空载回环 · 等待上包");
@@ -367,36 +666,102 @@ FString AMPRSorterSimulationActor::GetCarrierText() const
 FString AMPRSorterSimulationActor::GetSimulationReportJson() const
 {
     auto Root=MakeShared<FJsonObject>();Root->SetBoolField(TEXT("ready"),bReady);Root->SetStringField(TEXT("error"),Error);
-    Root->SetStringField(TEXT("data_mode"),TEXT("demonstration"));Root->SetNumberField(TEXT("machine_count"),Machines.Num());
-    Root->SetBoolField(TEXT("playing"),IsSimulationPlaying());Root->SetNumberField(TEXT("rate"),GetSimulationRate());
-    Root->SetBoolField(TEXT("automatic_collection"),IsAutomaticCollection());Root->SetNumberField(TEXT("selected_machine"),SelectedMachine);
-    Root->SetNumberField(TEXT("components"),6);Root->SetNumberField(TEXT("tower_instances"),Towers->GetInstanceCount());
-    Root->SetNumberField(TEXT("tray_instances"),Trays->GetInstanceCount());Root->SetNumberField(TEXT("parcel_instances"),Parcels->GetInstanceCount());
-    Root->SetNumberField(TEXT("bin_parcel_instances"),BinParcels->GetInstanceCount());Root->SetBoolField(TEXT("panel_attached"),Panel!=nullptr);
-    TArray<TSharedPtr<FJsonValue>> Rows;uint64 Spawned=0,Completed=0,Collected=0;int32 Active=0,Occupancy=0;
+    Root->SetStringField(TEXT("data_mode"),TEXT("demonstration"));Root->SetNumberField(TEXT("schema_version"),2);
+    Root->SetNumberField(TEXT("machine_count"),Machines.Num());Root->SetBoolField(TEXT("playing"),IsSimulationPlaying());
+    Root->SetNumberField(TEXT("rate"),GetSimulationRate());Root->SetBoolField(TEXT("automatic_collection"),IsAutomaticCollection());
+    Root->SetNumberField(TEXT("selected_machine"),SelectedMachine);Root->SetNumberField(TEXT("components"),11+RuntimeCartComponents.Num());
+    Root->SetNumberField(TEXT("tower_instances"),Towers->GetInstanceCount());Root->SetNumberField(TEXT("tray_instances"),Trays->GetInstanceCount());
+    Root->SetNumberField(TEXT("parcel_instances"),Parcels->GetInstanceCount());Root->SetNumberField(TEXT("infeed_instances"),InfeedParcels->GetInstanceCount());
+    Root->SetNumberField(TEXT("worker_slots"),WorkerHelmet->GetInstanceCount());Root->SetNumberField(TEXT("bin_parcel_instances"),BinParcels->GetInstanceCount());
+    Root->SetBoolField(TEXT("panel_attached"),Panel!=nullptr);
+    auto Ids=[](const std::vector<uint64_t>& Values)
+    {TArray<TSharedPtr<FJsonValue>> Result;for(uint64_t Id:Values)Result.Add(MakeShared<FJsonValueNumber>(double(Id)));return Result;};
+    auto Transform=[](const FTransform& T)
+    {
+        auto Result=MakeShared<FJsonObject>();Result->SetArrayField(TEXT("translation_cm"),XYZ(T.GetLocation()));
+        Result->SetArrayField(TEXT("scale"),XYZ(T.GetScale3D()));const FQuat Q=T.GetRotation();
+        Result->SetArrayField(TEXT("rotation_xyzw"),{MakeShared<FJsonValueNumber>(Q.X),MakeShared<FJsonValueNumber>(Q.Y),MakeShared<FJsonValueNumber>(Q.Z),MakeShared<FJsonValueNumber>(Q.W)});return Result;
+    };
+    TArray<TSharedPtr<FJsonValue>> Rows;uint64 Spawned=0,Completed=0,Collected=0,Exchanges=0;int32 Active=0,Occupancy=0,Queued=0,CartCount=0;
+    bool Unique=true;int32 ActiveExchanges=0,WaitingExchanges=0;
     for(const auto& M:Machines)
     {
         const auto& S=M.Simulation.GetStats();auto Row=MakeShared<FJsonObject>();Row->SetStringField(TEXT("id"),M.Id);Row->SetStringField(TEXT("profile"),M.Profile);
         Row->SetNumberField(TEXT("sim_time"),S.SimTime);Row->SetNumberField(TEXT("phase"),S.ChainPhase01);
-        Row->SetNumberField(TEXT("spawned"),double(S.Spawned));Row->SetNumberField(TEXT("completed"),double(S.Completed));Row->SetNumberField(TEXT("collected"),double(S.Collected));Row->SetNumberField(TEXT("active"),S.Active);
-        Row->SetStringField(TEXT("block_reason"),ReasonName(S.Reason));int32 Count=0,Full=0;
+        Row->SetNumberField(TEXT("spawned"),double(S.Spawned));Row->SetNumberField(TEXT("completed"),double(S.Completed));
+        Row->SetNumberField(TEXT("collected"),double(S.Collected));Row->SetNumberField(TEXT("active"),S.Active);Row->SetNumberField(TEXT("queued"),S.Queued);
+        Row->SetNumberField(TEXT("exchanged_carts"),double(S.ExchangedCarts));Row->SetNumberField(TEXT("load_fraction"),M.LoadFraction);
+        Row->SetNumberField(TEXT("infeed_side_local_x"),M.InfeedSide);Row->SetArrayField(TEXT("pickup_world_cm"),XYZ(M.World.TransformPosition(M.Pickup)));
+        Row->SetArrayField(TEXT("entry_world_cm"),XYZ(M.World.TransformPosition(M.Entry)));
+        Row->SetStringField(TEXT("transfer_mode"),TEXT("manual_handoff_demo"));Row->SetStringField(TEXT("block_reason"),ReasonName(S.Reason));
+        Row->SetBoolField(TEXT("chain_stopped"),S.ChainStopped);int32 Count=0,Full=0;TSet<uint64> Seen;
+        Row->SetBoolField(TEXT("exchange_permitted"),M.Simulation.IsExchangePermitted());
+        auto Own=[&Seen,&Unique](uint64 Id){if(!Id||Seen.Contains(Id))Unique=false;else Seen.Add(Id);};
+        TArray<TSharedPtr<FJsonValue>> Feed;
+        for(const auto& P:M.Simulation.GetInfeedQueue())
+        {
+            Own(P.ParcelId);auto Item=MakeShared<FJsonObject>();Item->SetNumberField(TEXT("parcel_id"),double(P.ParcelId));
+            Item->SetNumberField(TEXT("progress01"),P.Progress01);Item->SetArrayField(TEXT("world_cm"),XYZ(M.World.TransformPosition(FeedPoint(M,P.Progress01))));
+            Feed.Add(MakeShared<FJsonValueObject>(Item));
+        }
+        Row->SetArrayField(TEXT("infeed"),Feed);
         TArray<TSharedPtr<FJsonValue>> Cells;
         for(const auto& B:M.Simulation.GetBins())
-        {Count+=B.Occupancy;Full+=B.Occupancy>=B.Capacity;if(B.Occupancy||B.Reserved){auto Cell=MakeShared<FJsonObject>();Cell->SetNumberField(TEXT("side"),B.Target.Side);Cell->SetNumberField(TEXT("column"),B.Target.Column);Cell->SetNumberField(TEXT("level"),B.Target.Level);Cell->SetNumberField(TEXT("occupancy"),B.Occupancy);Cell->SetNumberField(TEXT("reserved"),B.Reserved);Cells.Add(MakeShared<FJsonValueObject>(Cell));}}
+        {
+            Count+=B.Occupancy;Full+=B.Occupancy>=B.Capacity;for(uint64 Id:B.ParcelIds)Own(Id);
+            if(B.Occupancy||B.Reserved)
+            {
+                auto Cell=MakeShared<FJsonObject>();Cell->SetNumberField(TEXT("side"),B.Target.Side);Cell->SetNumberField(TEXT("column"),B.Target.Column);
+                Cell->SetNumberField(TEXT("level"),B.Target.Level);Cell->SetNumberField(TEXT("cart_index"),B.CartId);
+                Cell->SetNumberField(TEXT("occupancy"),B.Occupancy);Cell->SetNumberField(TEXT("reserved"),B.Reserved);Cell->SetArrayField(TEXT("parcel_ids"),Ids(B.ParcelIds));
+                Cells.Add(MakeShared<FJsonValueObject>(Cell));
+            }
+        }
         Row->SetNumberField(TEXT("occupancy"),Count);Row->SetNumberField(TEXT("full_bins"),Full);Row->SetArrayField(TEXT("cells"),Cells);
         TArray<TSharedPtr<FJsonValue>> Carriers;
         for(const auto& C:M.Simulation.GetCarriers())
         {
-            auto Item=MakeShared<FJsonObject>();Item->SetNumberField(TEXT("parcel_id"),double(C.ParcelId));Item->SetStringField(TEXT("state"),PhaseName(C.State));
-            Item->SetNumberField(TEXT("distance01"),C.Distance01);Item->SetNumberField(TEXT("lift_cm"),C.LiftHeightCm);Item->SetNumberField(TEXT("unload_progress"),C.UnloadProgress);
+            if(C.ParcelId)Own(C.ParcelId);auto Item=MakeShared<FJsonObject>();Item->SetNumberField(TEXT("parcel_id"),double(C.ParcelId));
+            Item->SetStringField(TEXT("state"),PhaseName(C.State));Item->SetNumberField(TEXT("state_code"),int32(C.State));
+            Item->SetNumberField(TEXT("distance01"),C.Distance01);Item->SetNumberField(TEXT("lift_cm"),C.LiftHeightCm);
+            Item->SetNumberField(TEXT("scan_progress"),C.ScanProgress);Item->SetNumberField(TEXT("induct_progress"),C.InductProgress);
+            Item->SetNumberField(TEXT("unload_progress"),C.UnloadProgress);Item->SetNumberField(TEXT("target_cart"),C.TargetCartIndex);
+            Item->SetNumberField(TEXT("target_cart_generation"),double(C.TargetCartGeneration));
             Item->SetNumberField(TEXT("side"),C.Target.Side);Item->SetNumberField(TEXT("column"),C.Target.Column);Item->SetNumberField(TEXT("level"),C.Target.Level);
-            double Heading;FVector Point=PointOnLoop(C.Distance01,M.Half,M.Radius,Heading);Point.Z=C.LiftHeightCm;
-            Item->SetArrayField(TEXT("tray_world_cm"),XYZ(M.World.TransformPosition(Point)));Carriers.Add(MakeShared<FJsonValueObject>(Item));
+            double Heading;FVector Point=PointOnLoop(C.Distance01+M.LoadFraction,M.Half,M.Radius,Heading);Point.Z=C.LiftHeightCm;
+            Item->SetArrayField(TEXT("tray_world_cm"),XYZ(M.World.TransformPosition(Point)));
+            if(C.ParcelId){FQuat Turn;Item->SetArrayField(TEXT("parcel_world_cm"),XYZ(M.World.TransformPosition(CarrierParcelPoint(M,C,Turn))));}
+            Carriers.Add(MakeShared<FJsonValueObject>(Item));
         }
-        Row->SetArrayField(TEXT("carriers"),Carriers);Rows.Add(MakeShared<FJsonValueObject>(Row));
-        Spawned+=S.Spawned;Completed+=S.Completed;Collected+=S.Collected;Active+=S.Active;Occupancy+=Count;
+        Row->SetArrayField(TEXT("carriers"),Carriers);TArray<TSharedPtr<FJsonValue>> Carts;
+        for(int32 I=0;I<M.Carts.Num();++I)
+        {
+            const auto& P=M.Carts[I];const auto& C=M.Simulation.GetCarts()[size_t(I)];auto Item=MakeShared<FJsonObject>();
+            ActiveExchanges+=C.State!=MPRSorter::CartPhase::Receiving&&C.State!=MPRSorter::CartPhase::FullWaiting;
+            WaitingExchanges+=C.State==MPRSorter::CartPhase::FullWaiting;
+            Item->SetNumberField(TEXT("index"),C.Index);Item->SetNumberField(TEXT("side"),C.Side);Item->SetNumberField(TEXT("first_column"),C.FirstColumn);
+            Item->SetNumberField(TEXT("column_count"),C.ColumnCount);Item->SetNumberField(TEXT("generation"),double(C.Generation));
+            Item->SetStringField(TEXT("state"),CartPhaseName(C.State));Item->SetNumberField(TEXT("state_code"),int32(C.State));
+            const bool Visible=C.State!=MPRSorter::CartPhase::Handoff;
+            Item->SetBoolField(TEXT("visible"),Visible);
+            Item->SetStringField(TEXT("physical_cart_id"),FString::Printf(TEXT("%s/cart-%d/generation-%llu"),*M.Id,C.Index,static_cast<unsigned long long>(C.Generation)));
+            Item->SetNumberField(TEXT("progress01"),C.Progress01);Item->SetNumberField(TEXT("occupancy"),C.Occupancy);
+            Item->SetNumberField(TEXT("capacity"),C.Capacity);Item->SetNumberField(TEXT("reserved"),C.Reserved);Item->SetNumberField(TEXT("collected"),double(C.Collected));
+            Item->SetArrayField(TEXT("parcel_ids"),Ids(C.ParcelIds));Item->SetArrayField(TEXT("last_outbound_parcel_ids"),Ids(C.LastOutboundParcelIds));
+            Item->SetStringField(TEXT("mesh"),P.MeshPath);Item->SetArrayField(TEXT("local_offset_cm"),XYZ(CartOffset(M,I)));
+            Item->SetObjectField(TEXT("world_transform"),Transform(FTransform(FQuat::Identity,P.Origin+CartOffset(M,I))*M.World));
+            Item->SetObjectField(TEXT("render_world_transform"),Transform(FTransform(FQuat::Identity,P.Origin+CartOffset(M,I),Visible?FVector::OneVector:FVector::ZeroVector)*M.World));
+            Carts.Add(MakeShared<FJsonValueObject>(Item));
+        }
+        Row->SetArrayField(TEXT("carts"),Carts);Rows.Add(MakeShared<FJsonValueObject>(Row));CartCount+=M.Carts.Num();
+        Spawned+=S.Spawned;Completed+=S.Completed;Collected+=S.Collected;Active+=S.Active;Occupancy+=Count;Queued+=S.Queued;Exchanges+=S.ExchangedCarts;
     }
-    Root->SetArrayField(TEXT("machines"),Rows);Root->SetNumberField(TEXT("spawned"),double(Spawned));Root->SetNumberField(TEXT("completed"),double(Completed));Root->SetNumberField(TEXT("collected"),double(Collected));Root->SetNumberField(TEXT("active"),Active);Root->SetNumberField(TEXT("occupancy"),Occupancy);
-    Root->SetBoolField(TEXT("conserved"),Spawned==Completed+Active&&Completed==Collected+Occupancy);
+    Root->SetArrayField(TEXT("machines"),Rows);Root->SetNumberField(TEXT("cart_count"),CartCount);Root->SetNumberField(TEXT("spawned"),double(Spawned));
+    Root->SetNumberField(TEXT("completed"),double(Completed));Root->SetNumberField(TEXT("collected"),double(Collected));Root->SetNumberField(TEXT("active"),Active);
+    Root->SetNumberField(TEXT("queued"),Queued);Root->SetNumberField(TEXT("occupancy"),Occupancy);Root->SetNumberField(TEXT("exchanged_carts"),double(Exchanges));
+    Root->SetBoolField(TEXT("conserved"),Spawned==Completed+Active+Queued&&Completed==Collected+Occupancy);
+    Root->SetBoolField(TEXT("unique_parcel_ownership"),Unique);
+    Root->SetNumberField(TEXT("active_exchange_count"),ActiveExchanges);Root->SetNumberField(TEXT("waiting_exchange_count"),WaitingExchanges);
+    Root->SetNumberField(TEXT("exchange_owner_machine"),ExchangeOwner);Root->SetBoolField(TEXT("shared_aisle_mutex_valid"),ActiveExchanges<=1);
     FString Result;FJsonSerializer::Serialize(Root,TJsonWriterFactory<>::Create(&Result));return Result;
 }

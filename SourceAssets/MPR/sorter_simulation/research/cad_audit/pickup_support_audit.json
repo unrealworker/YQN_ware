@@ -1,0 +1,1926 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "date": "2026-11-07",
+  "machine_count": 22,
+  "source": {
+    "scene_snapshot": "Saved/MPR/full_workflow_20261107/conveyor_application/after.json.gz",
+    "scene_snapshot_sha256": "1af083320d6b16fe150c42a3c5770fd13289b98b2f868ef285031aa80a7f67af",
+    "scene_map_sha256": "d96ac9c2b8a1c891ae26020e76a2c7303430eee6b68cbddb8ab5b8931cae63e7",
+    "layout": "SourceAssets/MPR/sorter_simulation/layout.json",
+    "layout_sha256": "b84c004e174b8c258f61f3878781fc18e609b3957e32a34596d1d5e99a0447ab",
+    "geometry_script": "Tools/MPRWarehouse/build_mpr_operations.py:32-37",
+    "mesh_manifest": "SourceAssets/MPR/operations/mpr_operations.json",
+    "geometry_basis": "SM_MPR_Conveyor2m: native X bounds +/-50 cm, side-frame width 7 cm, roller span +/-43 cm; roller center Z=100 cm, radius=3.5 cm, six radial segments => upper planar surface Z=100+3.5*sin(pi/3)."
+  },
+  "assumptions": [
+    "Calibration aligns the current display geometry; it does not establish actual installation height, flow direction, or a PLC endpoint.",
+    "CAD source edge is preserved separately; calibrated pickup is the center of the 22x16x5 cm demonstration parcel, not a change to CAD geometry.",
+    "The 120 cm local queue and manual handoff are presentation choices; source evidence only establishes the inward shared-spine side.",
+    "Coverage tests use the current conveyor rail footprint and actual roller width. Normal individual roller gaps are not interpreted as missing conveyor."
+  ],
+  "profiles": {
+    "cad64": {
+      "count": 18,
+      "spine_center_x_cm": -10430,
+      "scale": [
+        1.26,
+        0.95,
+        1
+      ],
+      "minimum_inboard_cm": 20.12,
+      "inboard_cm": 22,
+      "remaining_lateral_cm": 2.18
+    },
+    "cad120": {
+      "count": 4,
+      "spine_center_x_cm": -11152,
+      "scale": [
+        1.06,
+        0.81,
+        1
+      ],
+      "minimum_inboard_cm": 18.72,
+      "inboard_cm": 22,
+      "remaining_lateral_cm": 3.58
+    }
+  },
+  "machines": [
+    {
+      "machine_id": "2C9A89_BRANCH_1",
+      "profile": "cad64",
+      "infeed_side_local_x": 1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 36,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            2820.301,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10493.0,
+        2875.8014147010244,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10471.0,
+        2875.8014147010244,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10482.0,
+        -10460.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        2755.8014147010244,
+        2875.8014147010244
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        2747.8014147010244,
+        2883.8014147010244
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 36,
+          "y_interval_cm": [
+            2725.301,
+            2915.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_2",
+      "profile": "cad64",
+      "infeed_side_local_x": 1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 37,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            2630.301,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10493.0,
+        2560.801414701022,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10471.0,
+        2560.801414701022,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10482.0,
+        -10460.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        2440.801414701022,
+        2560.801414701022
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        2432.801414701022,
+        2568.801414701022
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 38,
+          "y_interval_cm": [
+            2345.301,
+            2535.301
+          ]
+        },
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 37,
+          "y_interval_cm": [
+            2535.301,
+            2725.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_3",
+      "profile": "cad64",
+      "infeed_side_local_x": 1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 39,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            2250.301,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10493.0,
+        2245.8014147010235,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10471.0,
+        2245.8014147010235,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10482.0,
+        -10460.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        2125.8014147010235,
+        2245.8014147010235
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        2117.8014147010235,
+        2253.8014147010235
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 40,
+          "y_interval_cm": [
+            1965.301,
+            2155.301
+          ]
+        },
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 39,
+          "y_interval_cm": [
+            2155.301,
+            2345.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_4",
+      "profile": "cad64",
+      "infeed_side_local_x": 1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 41,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            1870.301,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10493.0,
+        1930.8014147010213,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10471.0,
+        1930.8014147010213,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10482.0,
+        -10460.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        1810.8014147010213,
+        1930.8014147010213
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        1802.8014147010213,
+        1938.8014147010213
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 41,
+          "y_interval_cm": [
+            1775.301,
+            1965.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_5",
+      "profile": "cad64",
+      "infeed_side_local_x": 1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 42,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            1680.301,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10493.0,
+        1615.801414701025,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10471.0,
+        1615.801414701025,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10482.0,
+        -10460.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        1495.801414701025,
+        1615.801414701025
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        1487.801414701025,
+        1623.801414701025
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 43,
+          "y_interval_cm": [
+            1395.301,
+            1585.301
+          ]
+        },
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 42,
+          "y_interval_cm": [
+            1585.301,
+            1775.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_6",
+      "profile": "cad64",
+      "infeed_side_local_x": 1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 44,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            1300.301,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10493.0,
+        1300.8014147010224,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10471.0,
+        1300.8014147010224,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10482.0,
+        -10460.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        1180.8014147010224,
+        1300.8014147010224
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        1172.8014147010224,
+        1308.8014147010224
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 45,
+          "y_interval_cm": [
+            1015.3009999999999,
+            1205.301
+          ]
+        },
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 44,
+          "y_interval_cm": [
+            1205.301,
+            1395.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_7",
+      "profile": "cad64",
+      "infeed_side_local_x": 1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 46,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            920.301,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10493.0,
+        985.8014147010235,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10471.0,
+        985.8014147010235,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10482.0,
+        -10460.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        865.8014147010235,
+        985.8014147010235
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        857.8014147010235,
+        993.8014147010235
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 46,
+          "y_interval_cm": [
+            825.301,
+            1015.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_8",
+      "profile": "cad64",
+      "infeed_side_local_x": 1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 47,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            730.3009999999999,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10493.0,
+        670.8014147010224,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10471.0,
+        670.8014147010224,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10482.0,
+        -10460.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        550.8014147010224,
+        670.8014147010224
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        542.8014147010224,
+        678.8014147010224
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 48,
+          "y_interval_cm": [
+            445.30100000000004,
+            635.301
+          ]
+        },
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 47,
+          "y_interval_cm": [
+            635.3009999999999,
+            825.3009999999999
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_9",
+      "profile": "cad64",
+      "infeed_side_local_x": 1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 49,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            350.30100000000004,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10493.0,
+        355.8014147010213,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10471.0,
+        355.8014147010213,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10482.0,
+        -10460.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        235.80141470102132,
+        355.8014147010213
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        227.80141470102132,
+        363.8014147010213
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 50,
+          "y_interval_cm": [
+            65.30100000000002,
+            255.30100000000002
+          ]
+        },
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 49,
+          "y_interval_cm": [
+            255.30100000000004,
+            445.30100000000004
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_10",
+      "profile": "cad64",
+      "infeed_side_local_x": -1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 39,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            2250.301,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10367.0,
+        2244.80141470101,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10389.0,
+        2244.80141470101,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10400.0,
+        -10378.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        2124.80141470101,
+        2244.80141470101
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        2116.80141470101,
+        2252.80141470101
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 40,
+          "y_interval_cm": [
+            1965.301,
+            2155.301
+          ]
+        },
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 39,
+          "y_interval_cm": [
+            2155.301,
+            2345.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_11",
+      "profile": "cad64",
+      "infeed_side_local_x": -1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 41,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            1870.301,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10367.0,
+        1929.8014147010101,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10389.0,
+        1929.8014147010101,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10400.0,
+        -10378.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        1809.8014147010101,
+        1929.8014147010101
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        1801.8014147010101,
+        1937.8014147010101
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 41,
+          "y_interval_cm": [
+            1775.301,
+            1965.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_12",
+      "profile": "cad64",
+      "infeed_side_local_x": -1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 42,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            1680.301,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10367.0,
+        1614.80141470101,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10389.0,
+        1614.80141470101,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10400.0,
+        -10378.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        1494.80141470101,
+        1614.80141470101
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        1486.80141470101,
+        1622.80141470101
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 43,
+          "y_interval_cm": [
+            1395.301,
+            1585.301
+          ]
+        },
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 42,
+          "y_interval_cm": [
+            1585.301,
+            1775.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_13",
+      "profile": "cad64",
+      "infeed_side_local_x": -1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 44,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            1300.301,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10367.0,
+        1299.80141470101,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10389.0,
+        1299.80141470101,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10400.0,
+        -10378.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        1179.80141470101,
+        1299.80141470101
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        1171.80141470101,
+        1307.80141470101
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 45,
+          "y_interval_cm": [
+            1015.3009999999999,
+            1205.301
+          ]
+        },
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 44,
+          "y_interval_cm": [
+            1205.301,
+            1395.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_14",
+      "profile": "cad64",
+      "infeed_side_local_x": -1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 46,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            920.301,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10367.0,
+        984.8014147010099,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10389.0,
+        984.8014147010099,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10400.0,
+        -10378.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        864.8014147010099,
+        984.8014147010099
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        856.8014147010099,
+        992.8014147010099
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 46,
+          "y_interval_cm": [
+            825.301,
+            1015.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_15",
+      "profile": "cad64",
+      "infeed_side_local_x": -1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 47,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            730.3009999999999,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10367.0,
+        669.8014147010099,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10389.0,
+        669.8014147010099,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10400.0,
+        -10378.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        549.8014147010099,
+        669.8014147010099
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        541.8014147010099,
+        677.8014147010099
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 48,
+          "y_interval_cm": [
+            445.30100000000004,
+            635.301
+          ]
+        },
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 47,
+          "y_interval_cm": [
+            635.3009999999999,
+            825.3009999999999
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_16",
+      "profile": "cad64",
+      "infeed_side_local_x": -1,
+      "spine": {
+        "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 49,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            350.30100000000004,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10367.0,
+        354.80141470100995,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10389.0,
+        354.80141470100995,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10400.0,
+        -10378.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        234.80141470100995,
+        354.80141470100995
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        226.80141470100995,
+        362.80141470100995
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 50,
+          "y_interval_cm": [
+            65.30100000000002,
+            255.30100000000002
+          ]
+        },
+        {
+          "actor_guid": "8036AAEE421ADEB4A6A1D0853538330A",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_-1",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 49,
+          "y_interval_cm": [
+            255.30100000000004,
+            445.30100000000004
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_17",
+      "profile": "cad64",
+      "infeed_side_local_x": -1,
+      "spine": {
+        "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 140,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            -29.698999999999998,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10367.0,
+        39.801414701009975,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10389.0,
+        39.801414701009975,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10400.0,
+        -10378.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        -80.19858529899003,
+        39.801414701009975
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        -88.19858529899003,
+        47.801414701009975
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 140,
+          "y_interval_cm": [
+            -124.699,
+            65.301
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_18",
+      "profile": "cad64",
+      "infeed_side_local_x": -1,
+      "spine": {
+        "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 141,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -10430.0,
+            -219.699,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.26,
+            0.95,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -10367.0,
+        -275.19858529899346,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -10389.0,
+        -275.19858529899346,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 20.12,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -10484.18,
+        -10375.82
+      ],
+      "parcel_x_interval_cm": [
+        -10400.0,
+        -10378.0
+      ],
+      "lateral_clearance_cm": 2.180000000000291,
+      "queue_center_y_interval_cm": [
+        -395.19858529899346,
+        -275.19858529899346
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        -403.19858529899346,
+        -267.19858529899346
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 142,
+          "y_interval_cm": [
+            -504.699,
+            -314.699
+          ]
+        },
+        {
+          "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 141,
+          "y_interval_cm": [
+            -314.699,
+            -124.69900000000001
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9AE5_BRANCH_1",
+      "profile": "cad120",
+      "infeed_side_local_x": -1,
+      "spine": {
+        "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 144,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -11152.0,
+            -1474.737,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.06,
+            0.81,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -11099.0,
+        -1427.763326898141,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -11121.0,
+        -1427.763326898141,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 18.720000000000002,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -11197.58,
+        -11106.42
+      ],
+      "parcel_x_interval_cm": [
+        -11132.0,
+        -11110.0
+      ],
+      "lateral_clearance_cm": 3.5799999999999272,
+      "queue_center_y_interval_cm": [
+        -1547.763326898141,
+        -1427.763326898141
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        -1555.763326898141,
+        -1419.763326898141
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 145,
+          "y_interval_cm": [
+            -1717.737,
+            -1555.737
+          ]
+        },
+        {
+          "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 144,
+          "y_interval_cm": [
+            -1555.737,
+            -1393.737
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9AE5_BRANCH_2",
+      "profile": "cad120",
+      "infeed_side_local_x": -1,
+      "spine": {
+        "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 146,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -11152.0,
+            -1798.7369999999999,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.06,
+            0.81,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -11099.0,
+        -1823.148561775842,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -11121.0,
+        -1823.148561775842,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 18.720000000000002,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -11197.58,
+        -11106.42
+      ],
+      "parcel_x_interval_cm": [
+        -11132.0,
+        -11110.0
+      ],
+      "lateral_clearance_cm": 3.5799999999999272,
+      "queue_center_y_interval_cm": [
+        -1943.148561775842,
+        -1823.148561775842
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        -1951.148561775842,
+        -1815.148561775842
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 147,
+          "y_interval_cm": [
+            -2041.7369999999999,
+            -1879.7369999999999
+          ]
+        },
+        {
+          "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 146,
+          "y_interval_cm": [
+            -1879.7369999999999,
+            -1717.7369999999999
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9AE5_BRANCH_3",
+      "profile": "cad120",
+      "infeed_side_local_x": 1,
+      "spine": {
+        "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 146,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -11152.0,
+            -1798.7369999999999,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.06,
+            0.81,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -11205.0,
+        -1866.3602615364666,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -11183.0,
+        -1866.3602615364666,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 18.720000000000002,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -11197.58,
+        -11106.42
+      ],
+      "parcel_x_interval_cm": [
+        -11194.0,
+        -11172.0
+      ],
+      "lateral_clearance_cm": 3.5799999999999272,
+      "queue_center_y_interval_cm": [
+        -1986.3602615364666,
+        -1866.3602615364666
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        -1994.3602615364666,
+        -1858.3602615364666
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 147,
+          "y_interval_cm": [
+            -2041.7369999999999,
+            -1879.7369999999999
+          ]
+        },
+        {
+          "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 146,
+          "y_interval_cm": [
+            -1879.7369999999999,
+            -1717.7369999999999
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    },
+    {
+      "machine_id": "2C9AE5_BRANCH_4",
+      "profile": "cad120",
+      "infeed_side_local_x": 1,
+      "spine": {
+        "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+        "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+        "component": "HierarchicalInstancedStaticMesh",
+        "instance_index": 144,
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m.SM_MPR_Conveyor2m",
+        "world_transform": {
+          "translation_cm": [
+            -11152.0,
+            -1474.737,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.06,
+            0.81,
+            1.0
+          ]
+        }
+      },
+      "old_edge_pickup_ue_cm": [
+        -11205.0,
+        -1470.9750266588167,
+        100.0
+      ],
+      "calibrated_pickup_ue_cm": [
+        -11183.0,
+        -1470.9750266588167,
+        103.03108891324554
+      ],
+      "inboard_offset_cm": 22.0,
+      "minimum_inboard_with_03cm_margin": 18.720000000000002,
+      "roller_surface_z_cm": 103.03108891324554,
+      "parcel_half_width_x_cm": 11.0,
+      "parcel_half_length_y_cm": 8.0,
+      "parcel_center_z_cm": 105.83108891324554,
+      "parcel_bottom_z_cm": 103.33108891324554,
+      "vertical_clearance_cm": 0.3,
+      "roller_x_interval_cm": [
+        -11197.58,
+        -11106.42
+      ],
+      "parcel_x_interval_cm": [
+        -11194.0,
+        -11172.0
+      ],
+      "lateral_clearance_cm": 3.5799999999999272,
+      "queue_center_y_interval_cm": [
+        -1590.9750266588167,
+        -1470.9750266588167
+      ],
+      "queue_expanded_footprint_y_interval_cm": [
+        -1598.9750266588167,
+        -1462.9750266588167
+      ],
+      "covering_spine_segments": [
+        {
+          "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 145,
+          "y_interval_cm": [
+            -1717.737,
+            -1555.737
+          ]
+        },
+        {
+          "actor_guid": "6286CCAF48EC6B468653EC990D254B74",
+          "actor_label": "MPR_SM_MPR_Conveyor2m_-2_0",
+          "component": "HierarchicalInstancedStaticMesh",
+          "instance_index": 144,
+          "y_interval_cm": [
+            -1555.737,
+            -1393.737
+          ]
+        }
+      ],
+      "queue_footprint_within_spine": true
+    }
+  ]
+}

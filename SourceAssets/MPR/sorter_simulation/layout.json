@@ -1,9 +1,9 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "units": "UE cm",
   "axis_contract": "Local mesh/profile axes are UE X,Y,Z; apply world_transform once. Source Blender Y was negated exactly once at import.",
   "snapshot_map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
-  "snapshot_map_file_sha256": "e7113f70dc4a1b518cac1a481a6a96ea40639791f8bbef540ee9a07051f22c9a",
+  "snapshot_map_file_sha256": "d96ac9c2b8a1c891ae26020e76a2c7303430eee6b68cbddb8ab5b8931cae63e7",
   "machines": [
     {
       "id": "2C9A89_BRANCH_1",
@@ -34,7 +34,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": 1,
+      "pickup_ue_cm": [
+        -10471.0,
+        2875.8014147010244,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983445,
+        2875.8014147010244,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_2",
@@ -65,7 +78,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": 1,
+      "pickup_ue_cm": [
+        -10471.0,
+        2560.801414701022,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983452,
+        2560.801414701022,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_3",
@@ -96,7 +122,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": 1,
+      "pickup_ue_cm": [
+        -10471.0,
+        2245.8014147010235,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983463,
+        2245.8014147010235,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_4",
@@ -127,7 +166,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": 1,
+      "pickup_ue_cm": [
+        -10471.0,
+        1930.8014147010213,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.01297898347,
+        1930.8014147010213,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_5",
@@ -158,7 +210,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": 1,
+      "pickup_ue_cm": [
+        -10471.0,
+        1615.801414701025,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983475,
+        1615.801414701025,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_6",
@@ -189,7 +254,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": 1,
+      "pickup_ue_cm": [
+        -10471.0,
+        1300.8014147010224,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983485,
+        1300.8014147010224,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_7",
@@ -220,7 +298,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": 1,
+      "pickup_ue_cm": [
+        -10471.0,
+        985.8014147010235,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983494,
+        985.8014147010235,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_8",
@@ -251,7 +342,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": 1,
+      "pickup_ue_cm": [
+        -10471.0,
+        670.8014147010224,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.0129789835,
+        670.8014147010224,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_9",
@@ -282,7 +386,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": 1,
+      "pickup_ue_cm": [
+        -10471.0,
+        355.8014147010213,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983508,
+        355.8014147010213,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_10",
@@ -313,7 +430,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": -1,
+      "pickup_ue_cm": [
+        -10389.0,
+        2244.80141470101,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264472,
+        2244.80141470101,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_11",
@@ -344,7 +474,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": -1,
+      "pickup_ue_cm": [
+        -10389.0,
+        1929.8014147010101,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264481,
+        1929.8014147010101,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_12",
@@ -375,7 +518,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": -1,
+      "pickup_ue_cm": [
+        -10389.0,
+        1614.80141470101,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264492,
+        1614.80141470101,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_13",
@@ -406,7 +562,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": -1,
+      "pickup_ue_cm": [
+        -10389.0,
+        1299.80141470101,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264495,
+        1299.80141470101,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_14",
@@ -437,7 +606,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": -1,
+      "pickup_ue_cm": [
+        -10389.0,
+        984.8014147010099,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264505,
+        984.8014147010099,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_15",
@@ -468,7 +650,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": -1,
+      "pickup_ue_cm": [
+        -10389.0,
+        669.8014147010099,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264514,
+        669.8014147010099,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_16",
@@ -499,7 +694,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": -1,
+      "pickup_ue_cm": [
+        -10389.0,
+        354.80141470100995,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264517,
+        354.80141470100995,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_17",
@@ -530,7 +738,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": -1,
+      "pickup_ue_cm": [
+        -10389.0,
+        39.801414701009975,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264528,
+        39.801414701009975,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9A89_BRANCH_18",
@@ -561,7 +782,20 @@
       },
       "cad_source_handle": "2C9A89",
       "cad_child_handle": null,
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": -1,
+      "pickup_ue_cm": [
+        -10389.0,
+        -275.19858529899346,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536265258,
+        -275.19858529899346,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9AE5_BRANCH_1",
@@ -592,7 +826,20 @@
       },
       "cad_source_handle": "2C9AE5",
       "cad_child_handle": "115C27",
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": -1,
+      "pickup_ue_cm": [
+        -11121.0,
+        -1427.763326898141,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -11055.104605252614,
+        -1427.763326898141,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9AE5_BRANCH_2",
@@ -623,7 +870,20 @@
       },
       "cad_source_handle": "2C9AE5",
       "cad_child_handle": "115C28",
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": -1,
+      "pickup_ue_cm": [
+        -11121.0,
+        -1823.148561775842,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -11055.104605252614,
+        -1823.148561775842,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9AE5_BRANCH_3",
@@ -654,7 +914,20 @@
       },
       "cad_source_handle": "2C9AE5",
       "cad_child_handle": "115C29",
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": 1,
+      "pickup_ue_cm": [
+        -11183.0,
+        -1866.3602615364666,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -11249.851515890901,
+        -1866.3602615364666,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     },
     {
       "id": "2C9AE5_BRANCH_4",
@@ -685,7 +958,20 @@
       },
       "cad_source_handle": "2C9AE5",
       "cad_child_handle": "115C2A",
-      "infeed_is_presentation_loop_start": true
+      "infeed_is_presentation_loop_start": true,
+      "infeed_side_local_x": 1,
+      "pickup_ue_cm": [
+        -11183.0,
+        -1470.9750266588167,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -11249.851515890901,
+        -1470.9750266588167,
+        100.0
+      ],
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "infeed_evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints."
     }
   ],
   "profiles": {
@@ -807,7 +1093,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_1",
-          "original_chute_object": "Chute"
+          "original_chute_object": "Chute",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -842,7 +1129,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_2",
-          "original_chute_object": "Chute.001"
+          "original_chute_object": "Chute.001",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -877,7 +1165,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_3",
-          "original_chute_object": "Chute.002"
+          "original_chute_object": "Chute.002",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -912,7 +1201,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_4",
-          "original_chute_object": "Chute.003"
+          "original_chute_object": "Chute.003",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -947,7 +1237,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_1",
-          "original_chute_object": "Chute.004"
+          "original_chute_object": "Chute.004",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -982,7 +1273,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_2",
-          "original_chute_object": "Chute.005"
+          "original_chute_object": "Chute.005",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -1017,7 +1309,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_3",
-          "original_chute_object": "Chute.006"
+          "original_chute_object": "Chute.006",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -1052,7 +1345,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_4",
-          "original_chute_object": "Chute.007"
+          "original_chute_object": "Chute.007",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -1087,7 +1381,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_1",
-          "original_chute_object": "Chute.008"
+          "original_chute_object": "Chute.008",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -1122,7 +1417,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_2",
-          "original_chute_object": "Chute.009"
+          "original_chute_object": "Chute.009",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -1157,7 +1453,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_3",
-          "original_chute_object": "Chute.010"
+          "original_chute_object": "Chute.010",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -1192,7 +1489,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_4",
-          "original_chute_object": "Chute.011"
+          "original_chute_object": "Chute.011",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -1227,7 +1525,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_1",
-          "original_chute_object": "Chute.012"
+          "original_chute_object": "Chute.012",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -1262,7 +1561,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_2",
-          "original_chute_object": "Chute.013"
+          "original_chute_object": "Chute.013",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -1297,7 +1597,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_3",
-          "original_chute_object": "Chute.014"
+          "original_chute_object": "Chute.014",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -1332,7 +1633,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_4",
-          "original_chute_object": "Chute.015"
+          "original_chute_object": "Chute.015",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -1367,7 +1669,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_1",
-          "original_chute_object": "Chute.016"
+          "original_chute_object": "Chute.016",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1402,7 +1705,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_2",
-          "original_chute_object": "Chute.017"
+          "original_chute_object": "Chute.017",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1437,7 +1741,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_3",
-          "original_chute_object": "Chute.018"
+          "original_chute_object": "Chute.018",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1472,7 +1777,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_4",
-          "original_chute_object": "Chute.019"
+          "original_chute_object": "Chute.019",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1507,7 +1813,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_1",
-          "original_chute_object": "Chute.020"
+          "original_chute_object": "Chute.020",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1542,7 +1849,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_2",
-          "original_chute_object": "Chute.021"
+          "original_chute_object": "Chute.021",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1577,7 +1885,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_3",
-          "original_chute_object": "Chute.022"
+          "original_chute_object": "Chute.022",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1612,7 +1921,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_4",
-          "original_chute_object": "Chute.023"
+          "original_chute_object": "Chute.023",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1647,7 +1957,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_1",
-          "original_chute_object": "Chute.024"
+          "original_chute_object": "Chute.024",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1682,7 +1993,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_2",
-          "original_chute_object": "Chute.025"
+          "original_chute_object": "Chute.025",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1717,7 +2029,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_3",
-          "original_chute_object": "Chute.026"
+          "original_chute_object": "Chute.026",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1752,7 +2065,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_4",
-          "original_chute_object": "Chute.027"
+          "original_chute_object": "Chute.027",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1787,7 +2101,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_1",
-          "original_chute_object": "Chute.028"
+          "original_chute_object": "Chute.028",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1822,7 +2137,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_2",
-          "original_chute_object": "Chute.029"
+          "original_chute_object": "Chute.029",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1857,7 +2173,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_3",
-          "original_chute_object": "Chute.030"
+          "original_chute_object": "Chute.030",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1892,7 +2209,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_4",
-          "original_chute_object": "Chute.031"
+          "original_chute_object": "Chute.031",
+          "cart_index": 1
         },
         {
           "side": 1,
@@ -1927,7 +2245,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_1",
-          "original_chute_object": "Chute.032"
+          "original_chute_object": "Chute.032",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1962,7 +2281,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_2",
-          "original_chute_object": "Chute.033"
+          "original_chute_object": "Chute.033",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1997,7 +2317,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_3",
-          "original_chute_object": "Chute.034"
+          "original_chute_object": "Chute.034",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2032,7 +2353,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_4",
-          "original_chute_object": "Chute.035"
+          "original_chute_object": "Chute.035",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2067,7 +2389,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_1",
-          "original_chute_object": "Chute.036"
+          "original_chute_object": "Chute.036",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2102,7 +2425,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_2",
-          "original_chute_object": "Chute.037"
+          "original_chute_object": "Chute.037",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2137,7 +2461,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_3",
-          "original_chute_object": "Chute.038"
+          "original_chute_object": "Chute.038",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2172,7 +2497,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_4",
-          "original_chute_object": "Chute.039"
+          "original_chute_object": "Chute.039",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2207,7 +2533,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_1",
-          "original_chute_object": "Chute.040"
+          "original_chute_object": "Chute.040",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2242,7 +2569,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_2",
-          "original_chute_object": "Chute.041"
+          "original_chute_object": "Chute.041",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2277,7 +2605,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_3",
-          "original_chute_object": "Chute.042"
+          "original_chute_object": "Chute.042",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2312,7 +2641,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_4",
-          "original_chute_object": "Chute.043"
+          "original_chute_object": "Chute.043",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2347,7 +2677,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_1",
-          "original_chute_object": "Chute.044"
+          "original_chute_object": "Chute.044",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2382,7 +2713,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_2",
-          "original_chute_object": "Chute.045"
+          "original_chute_object": "Chute.045",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2417,7 +2749,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_3",
-          "original_chute_object": "Chute.046"
+          "original_chute_object": "Chute.046",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2452,7 +2785,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_4",
-          "original_chute_object": "Chute.047"
+          "original_chute_object": "Chute.047",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2487,7 +2821,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_1",
-          "original_chute_object": "Chute.048"
+          "original_chute_object": "Chute.048",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2522,7 +2857,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_2",
-          "original_chute_object": "Chute.049"
+          "original_chute_object": "Chute.049",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2557,7 +2893,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_3",
-          "original_chute_object": "Chute.050"
+          "original_chute_object": "Chute.050",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2592,7 +2929,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_4",
-          "original_chute_object": "Chute.051"
+          "original_chute_object": "Chute.051",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2627,7 +2965,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_1",
-          "original_chute_object": "Chute.052"
+          "original_chute_object": "Chute.052",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2662,7 +3001,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_2",
-          "original_chute_object": "Chute.053"
+          "original_chute_object": "Chute.053",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2697,7 +3037,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_3",
-          "original_chute_object": "Chute.054"
+          "original_chute_object": "Chute.054",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2732,7 +3073,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_4",
-          "original_chute_object": "Chute.055"
+          "original_chute_object": "Chute.055",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2767,7 +3109,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_1",
-          "original_chute_object": "Chute.056"
+          "original_chute_object": "Chute.056",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2802,7 +3145,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_2",
-          "original_chute_object": "Chute.057"
+          "original_chute_object": "Chute.057",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2837,7 +3181,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_3",
-          "original_chute_object": "Chute.058"
+          "original_chute_object": "Chute.058",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2872,7 +3217,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_4",
-          "original_chute_object": "Chute.059"
+          "original_chute_object": "Chute.059",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2907,7 +3253,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_1",
-          "original_chute_object": "Chute.060"
+          "original_chute_object": "Chute.060",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2942,7 +3289,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_2",
-          "original_chute_object": "Chute.061"
+          "original_chute_object": "Chute.061",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2977,7 +3325,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_3",
-          "original_chute_object": "Chute.062"
+          "original_chute_object": "Chute.062",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -3012,7 +3361,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_4",
-          "original_chute_object": "Chute.063"
+          "original_chute_object": "Chute.063",
+          "cart_index": 3
         }
       ],
       "infeed_end_x_cm": 283.11499999999995,
@@ -3023,7 +3373,190 @@
         103.5
       ],
       "capacity_basis": "Retained scene model parameters. CAD horizontal columns are evidenced; four vertical levels and vendor identity are not surveyed.",
-      "path_basis": "Presentation motion path fitted inside the retained scene footprint, not surveyed drive-chain dimensions."
+      "path_basis": "Presentation motion path fitted inside the retained scene footprint, not surveyed drive-chain dimensions.",
+      "cart_column_groups": [
+        4,
+        4
+      ],
+      "cart_grouping_basis": "Source CAD separate caster-supported frames: 2C9A89 has 4+4 columns per side; 2C9AE5 has 5+5+5. Heights retain the existing scene interpretation; not the separate 96-bin manual model.",
+      "carts": [
+        {
+          "index": 0,
+          "side": 0,
+          "first_column": 0,
+          "column_count": 4,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart64_0",
+          "local_origin_cm": [
+            -132.05750212073326,
+            78.14799845218658,
+            0
+          ],
+          "bin_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -120.49312591552734,
+              -27.15199589729309,
+              0.0
+            ],
+            [
+              120.49312591552734,
+              29.752004146575928,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 573.6081259155274
+        },
+        {
+          "index": 1,
+          "side": 0,
+          "first_column": 4,
+          "column_count": 4,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart64_1",
+          "local_origin_cm": [
+            132.05750212073326,
+            78.14799845218658,
+            0
+          ],
+          "bin_indices": [
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -120.49312591552734,
+              -27.15199589729309,
+              0.0
+            ],
+            [
+              120.49312591552734,
+              29.752004146575928,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 573.6081259155274
+        },
+        {
+          "index": 2,
+          "side": 1,
+          "first_column": 0,
+          "column_count": 4,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart64_2",
+          "local_origin_cm": [
+            -132.05750212073326,
+            -78.14799845218658,
+            0
+          ],
+          "bin_indices": [
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -120.49312591552734,
+              -29.752004146575928,
+              0.0
+            ],
+            [
+              120.49312591552734,
+              27.15199589729309,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 573.6081259155274
+        },
+        {
+          "index": 3,
+          "side": 1,
+          "first_column": 4,
+          "column_count": 4,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart64_3",
+          "local_origin_cm": [
+            132.05750212073326,
+            -78.14799845218658,
+            0
+          ],
+          "bin_indices": [
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -120.49312591552734,
+              -29.752004146575928,
+              0.0
+            ],
+            [
+              120.49312591552734,
+              27.15199589729309,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 573.6081259155274
+        }
+      ]
     },
     "cad120": {
       "id": "cad120",
@@ -3150,7 +3683,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_1.003",
-          "original_chute_object": "Chute.192"
+          "original_chute_object": "Chute.192",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3185,7 +3719,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_2.003",
-          "original_chute_object": "Chute.193"
+          "original_chute_object": "Chute.193",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3220,7 +3755,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_3.003",
-          "original_chute_object": "Chute.194"
+          "original_chute_object": "Chute.194",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3255,7 +3791,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_4.003",
-          "original_chute_object": "Chute.195"
+          "original_chute_object": "Chute.195",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3290,7 +3827,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_1.003",
-          "original_chute_object": "Chute.196"
+          "original_chute_object": "Chute.196",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3325,7 +3863,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_2.003",
-          "original_chute_object": "Chute.197"
+          "original_chute_object": "Chute.197",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3360,7 +3899,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_3.003",
-          "original_chute_object": "Chute.198"
+          "original_chute_object": "Chute.198",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3395,7 +3935,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_4.003",
-          "original_chute_object": "Chute.199"
+          "original_chute_object": "Chute.199",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3430,7 +3971,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_1.003",
-          "original_chute_object": "Chute.200"
+          "original_chute_object": "Chute.200",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3465,7 +4007,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_2.003",
-          "original_chute_object": "Chute.201"
+          "original_chute_object": "Chute.201",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3500,7 +4043,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_3.003",
-          "original_chute_object": "Chute.202"
+          "original_chute_object": "Chute.202",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3535,7 +4079,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_4.003",
-          "original_chute_object": "Chute.203"
+          "original_chute_object": "Chute.203",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3570,7 +4115,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_1.003",
-          "original_chute_object": "Chute.204"
+          "original_chute_object": "Chute.204",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3605,7 +4151,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_2.003",
-          "original_chute_object": "Chute.205"
+          "original_chute_object": "Chute.205",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3640,7 +4187,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_3.003",
-          "original_chute_object": "Chute.206"
+          "original_chute_object": "Chute.206",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3675,7 +4223,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_4.003",
-          "original_chute_object": "Chute.207"
+          "original_chute_object": "Chute.207",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3710,7 +4259,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_1.003",
-          "original_chute_object": "Chute.208"
+          "original_chute_object": "Chute.208",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3745,7 +4295,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_2.003",
-          "original_chute_object": "Chute.209"
+          "original_chute_object": "Chute.209",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3780,7 +4331,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_3.003",
-          "original_chute_object": "Chute.210"
+          "original_chute_object": "Chute.210",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3815,7 +4367,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_4.003",
-          "original_chute_object": "Chute.211"
+          "original_chute_object": "Chute.211",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3850,7 +4403,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_1.003",
-          "original_chute_object": "Chute.212"
+          "original_chute_object": "Chute.212",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3885,7 +4439,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_2.003",
-          "original_chute_object": "Chute.213"
+          "original_chute_object": "Chute.213",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3920,7 +4475,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_3.003",
-          "original_chute_object": "Chute.214"
+          "original_chute_object": "Chute.214",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3955,7 +4511,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_4.003",
-          "original_chute_object": "Chute.215"
+          "original_chute_object": "Chute.215",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3990,7 +4547,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_1.003",
-          "original_chute_object": "Chute.216"
+          "original_chute_object": "Chute.216",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4025,7 +4583,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_2.003",
-          "original_chute_object": "Chute.217"
+          "original_chute_object": "Chute.217",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4060,7 +4619,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_3.003",
-          "original_chute_object": "Chute.218"
+          "original_chute_object": "Chute.218",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4095,7 +4655,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_4.003",
-          "original_chute_object": "Chute.219"
+          "original_chute_object": "Chute.219",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4130,7 +4691,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_1.003",
-          "original_chute_object": "Chute.220"
+          "original_chute_object": "Chute.220",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4165,7 +4727,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_2.003",
-          "original_chute_object": "Chute.221"
+          "original_chute_object": "Chute.221",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4200,7 +4763,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_3.003",
-          "original_chute_object": "Chute.222"
+          "original_chute_object": "Chute.222",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4235,7 +4799,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_4.003",
-          "original_chute_object": "Chute.223"
+          "original_chute_object": "Chute.223",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4270,7 +4835,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_9_1",
-          "original_chute_object": "Chute.224"
+          "original_chute_object": "Chute.224",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4305,7 +4871,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_9_2",
-          "original_chute_object": "Chute.225"
+          "original_chute_object": "Chute.225",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4340,7 +4907,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_9_3",
-          "original_chute_object": "Chute.226"
+          "original_chute_object": "Chute.226",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4375,7 +4943,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_9_4",
-          "original_chute_object": "Chute.227"
+          "original_chute_object": "Chute.227",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4410,7 +4979,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_10_1",
-          "original_chute_object": "Chute.228"
+          "original_chute_object": "Chute.228",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4445,7 +5015,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_10_2",
-          "original_chute_object": "Chute.229"
+          "original_chute_object": "Chute.229",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4480,7 +5051,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_10_3",
-          "original_chute_object": "Chute.230"
+          "original_chute_object": "Chute.230",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4515,7 +5087,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_10_4",
-          "original_chute_object": "Chute.231"
+          "original_chute_object": "Chute.231",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4550,7 +5123,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_11_1",
-          "original_chute_object": "Chute.232"
+          "original_chute_object": "Chute.232",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4585,7 +5159,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_11_2",
-          "original_chute_object": "Chute.233"
+          "original_chute_object": "Chute.233",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4620,7 +5195,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_11_3",
-          "original_chute_object": "Chute.234"
+          "original_chute_object": "Chute.234",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4655,7 +5231,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_11_4",
-          "original_chute_object": "Chute.235"
+          "original_chute_object": "Chute.235",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4690,7 +5267,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_12_1",
-          "original_chute_object": "Chute.236"
+          "original_chute_object": "Chute.236",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4725,7 +5303,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_12_2",
-          "original_chute_object": "Chute.237"
+          "original_chute_object": "Chute.237",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4760,7 +5339,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_12_3",
-          "original_chute_object": "Chute.238"
+          "original_chute_object": "Chute.238",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4795,7 +5375,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_12_4",
-          "original_chute_object": "Chute.239"
+          "original_chute_object": "Chute.239",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4830,7 +5411,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_13_1",
-          "original_chute_object": "Chute.240"
+          "original_chute_object": "Chute.240",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4865,7 +5447,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_13_2",
-          "original_chute_object": "Chute.241"
+          "original_chute_object": "Chute.241",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4900,7 +5483,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_13_3",
-          "original_chute_object": "Chute.242"
+          "original_chute_object": "Chute.242",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4935,7 +5519,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_13_4",
-          "original_chute_object": "Chute.243"
+          "original_chute_object": "Chute.243",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4970,7 +5555,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_14_1",
-          "original_chute_object": "Chute.244"
+          "original_chute_object": "Chute.244",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -5005,7 +5591,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_14_2",
-          "original_chute_object": "Chute.245"
+          "original_chute_object": "Chute.245",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -5040,7 +5627,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_14_3",
-          "original_chute_object": "Chute.246"
+          "original_chute_object": "Chute.246",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -5075,7 +5663,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_14_4",
-          "original_chute_object": "Chute.247"
+          "original_chute_object": "Chute.247",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -5110,7 +5699,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_15_1",
-          "original_chute_object": "Chute.248"
+          "original_chute_object": "Chute.248",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -5145,7 +5735,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_15_2",
-          "original_chute_object": "Chute.249"
+          "original_chute_object": "Chute.249",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -5180,7 +5771,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_15_3",
-          "original_chute_object": "Chute.250"
+          "original_chute_object": "Chute.250",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -5215,7 +5807,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_15_4",
-          "original_chute_object": "Chute.251"
+          "original_chute_object": "Chute.251",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -5250,7 +5843,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_1.003",
-          "original_chute_object": "Chute.252"
+          "original_chute_object": "Chute.252",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5285,7 +5879,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_2.003",
-          "original_chute_object": "Chute.253"
+          "original_chute_object": "Chute.253",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5320,7 +5915,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_3.003",
-          "original_chute_object": "Chute.254"
+          "original_chute_object": "Chute.254",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5355,7 +5951,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_4.003",
-          "original_chute_object": "Chute.255"
+          "original_chute_object": "Chute.255",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5390,7 +5987,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_1.003",
-          "original_chute_object": "Chute.256"
+          "original_chute_object": "Chute.256",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5425,7 +6023,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_2.003",
-          "original_chute_object": "Chute.257"
+          "original_chute_object": "Chute.257",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5460,7 +6059,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_3.003",
-          "original_chute_object": "Chute.258"
+          "original_chute_object": "Chute.258",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5495,7 +6095,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_4.003",
-          "original_chute_object": "Chute.259"
+          "original_chute_object": "Chute.259",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5530,7 +6131,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_1.003",
-          "original_chute_object": "Chute.260"
+          "original_chute_object": "Chute.260",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5565,7 +6167,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_2.003",
-          "original_chute_object": "Chute.261"
+          "original_chute_object": "Chute.261",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5600,7 +6203,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_3.003",
-          "original_chute_object": "Chute.262"
+          "original_chute_object": "Chute.262",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5635,7 +6239,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_4.003",
-          "original_chute_object": "Chute.263"
+          "original_chute_object": "Chute.263",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5670,7 +6275,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_1.003",
-          "original_chute_object": "Chute.264"
+          "original_chute_object": "Chute.264",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5705,7 +6311,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_2.003",
-          "original_chute_object": "Chute.265"
+          "original_chute_object": "Chute.265",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5740,7 +6347,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_3.003",
-          "original_chute_object": "Chute.266"
+          "original_chute_object": "Chute.266",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5775,7 +6383,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_4.003",
-          "original_chute_object": "Chute.267"
+          "original_chute_object": "Chute.267",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5810,7 +6419,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_1.003",
-          "original_chute_object": "Chute.268"
+          "original_chute_object": "Chute.268",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5845,7 +6455,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_2.003",
-          "original_chute_object": "Chute.269"
+          "original_chute_object": "Chute.269",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5880,7 +6491,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_3.003",
-          "original_chute_object": "Chute.270"
+          "original_chute_object": "Chute.270",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5915,7 +6527,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_4.003",
-          "original_chute_object": "Chute.271"
+          "original_chute_object": "Chute.271",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5950,7 +6563,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_1.003",
-          "original_chute_object": "Chute.272"
+          "original_chute_object": "Chute.272",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5985,7 +6599,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_2.003",
-          "original_chute_object": "Chute.273"
+          "original_chute_object": "Chute.273",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6020,7 +6635,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_3.003",
-          "original_chute_object": "Chute.274"
+          "original_chute_object": "Chute.274",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6055,7 +6671,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_4.003",
-          "original_chute_object": "Chute.275"
+          "original_chute_object": "Chute.275",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6090,7 +6707,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_1.003",
-          "original_chute_object": "Chute.276"
+          "original_chute_object": "Chute.276",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6125,7 +6743,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_2.003",
-          "original_chute_object": "Chute.277"
+          "original_chute_object": "Chute.277",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6160,7 +6779,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_3.003",
-          "original_chute_object": "Chute.278"
+          "original_chute_object": "Chute.278",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6195,7 +6815,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_4.003",
-          "original_chute_object": "Chute.279"
+          "original_chute_object": "Chute.279",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6230,7 +6851,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_1.003",
-          "original_chute_object": "Chute.280"
+          "original_chute_object": "Chute.280",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6265,7 +6887,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_2.003",
-          "original_chute_object": "Chute.281"
+          "original_chute_object": "Chute.281",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6300,7 +6923,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_3.003",
-          "original_chute_object": "Chute.282"
+          "original_chute_object": "Chute.282",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6335,7 +6959,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_4.003",
-          "original_chute_object": "Chute.283"
+          "original_chute_object": "Chute.283",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6370,7 +6995,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_9_1",
-          "original_chute_object": "Chute.284"
+          "original_chute_object": "Chute.284",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6405,7 +7031,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_9_2",
-          "original_chute_object": "Chute.285"
+          "original_chute_object": "Chute.285",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6440,7 +7067,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_9_3",
-          "original_chute_object": "Chute.286"
+          "original_chute_object": "Chute.286",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6475,7 +7103,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_9_4",
-          "original_chute_object": "Chute.287"
+          "original_chute_object": "Chute.287",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6510,7 +7139,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_10_1",
-          "original_chute_object": "Chute.288"
+          "original_chute_object": "Chute.288",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6545,7 +7175,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_10_2",
-          "original_chute_object": "Chute.289"
+          "original_chute_object": "Chute.289",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6580,7 +7211,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_10_3",
-          "original_chute_object": "Chute.290"
+          "original_chute_object": "Chute.290",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6615,7 +7247,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_10_4",
-          "original_chute_object": "Chute.291"
+          "original_chute_object": "Chute.291",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6650,7 +7283,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_11_1",
-          "original_chute_object": "Chute.292"
+          "original_chute_object": "Chute.292",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6685,7 +7319,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_11_2",
-          "original_chute_object": "Chute.293"
+          "original_chute_object": "Chute.293",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6720,7 +7355,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_11_3",
-          "original_chute_object": "Chute.294"
+          "original_chute_object": "Chute.294",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6755,7 +7391,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_11_4",
-          "original_chute_object": "Chute.295"
+          "original_chute_object": "Chute.295",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6790,7 +7427,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_12_1",
-          "original_chute_object": "Chute.296"
+          "original_chute_object": "Chute.296",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6825,7 +7463,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_12_2",
-          "original_chute_object": "Chute.297"
+          "original_chute_object": "Chute.297",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6860,7 +7499,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_12_3",
-          "original_chute_object": "Chute.298"
+          "original_chute_object": "Chute.298",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6895,7 +7535,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_12_4",
-          "original_chute_object": "Chute.299"
+          "original_chute_object": "Chute.299",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6930,7 +7571,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_13_1",
-          "original_chute_object": "Chute.300"
+          "original_chute_object": "Chute.300",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6965,7 +7607,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_13_2",
-          "original_chute_object": "Chute.301"
+          "original_chute_object": "Chute.301",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -7000,7 +7643,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_13_3",
-          "original_chute_object": "Chute.302"
+          "original_chute_object": "Chute.302",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -7035,7 +7679,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_13_4",
-          "original_chute_object": "Chute.303"
+          "original_chute_object": "Chute.303",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -7070,7 +7715,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_14_1",
-          "original_chute_object": "Chute.304"
+          "original_chute_object": "Chute.304",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -7105,7 +7751,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_14_2",
-          "original_chute_object": "Chute.305"
+          "original_chute_object": "Chute.305",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -7140,7 +7787,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_14_3",
-          "original_chute_object": "Chute.306"
+          "original_chute_object": "Chute.306",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -7175,7 +7823,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_14_4",
-          "original_chute_object": "Chute.307"
+          "original_chute_object": "Chute.307",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -7210,7 +7859,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_15_1",
-          "original_chute_object": "Chute.308"
+          "original_chute_object": "Chute.308",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -7245,7 +7895,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_15_2",
-          "original_chute_object": "Chute.309"
+          "original_chute_object": "Chute.309",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -7280,7 +7931,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_15_3",
-          "original_chute_object": "Chute.310"
+          "original_chute_object": "Chute.310",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -7315,7 +7967,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_15_4",
-          "original_chute_object": "Chute.311"
+          "original_chute_object": "Chute.311",
+          "cart_index": 5
         }
       ],
       "infeed_end_x_cm": 348.82681639,
@@ -7326,17 +7979,316 @@
         103.5
       ],
       "capacity_basis": "Retained scene model parameters. CAD horizontal columns are evidenced; four vertical levels and vendor identity are not surveyed.",
-      "path_basis": "Presentation motion path fitted inside the retained scene footprint, not surveyed drive-chain dimensions."
+      "path_basis": "Presentation motion path fitted inside the retained scene footprint, not surveyed drive-chain dimensions.",
+      "cart_column_groups": [
+        5,
+        5,
+        5
+      ],
+      "cart_grouping_basis": "Source CAD separate caster-supported frames: 2C9A89 has 4+4 columns per side; 2C9AE5 has 5+5+5. Heights retain the existing scene interpretation; not the separate 96-bin manual model.",
+      "carts": [
+        {
+          "index": 0,
+          "side": 0,
+          "first_column": 0,
+          "column_count": 5,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart120_0",
+          "local_origin_cm": [
+            -216.88453555107117,
+            82.85010159015656,
+            0
+          ],
+          "bin_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -108.19029808044434,
+              -27.249997854232788,
+              0.0
+            ],
+            [
+              108.19031000137329,
+              29.850006103515625,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 615.5171263913733
+        },
+        {
+          "index": 1,
+          "side": 0,
+          "first_column": 5,
+          "column_count": 5,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart120_1",
+          "local_origin_cm": [
+            0.0,
+            82.85010159015656,
+            0
+          ],
+          "bin_indices": [
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -108.19031000137329,
+              -27.249997854232788,
+              0.0
+            ],
+            [
+              108.19031000137329,
+              29.850006103515625,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 615.5171263913733
+        },
+        {
+          "index": 2,
+          "side": 0,
+          "first_column": 10,
+          "column_count": 5,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart120_2",
+          "local_origin_cm": [
+            216.88453555107117,
+            82.85010159015656,
+            0
+          ],
+          "bin_indices": [
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -108.19031000137329,
+              -27.249997854232788,
+              0.0
+            ],
+            [
+              108.19029808044434,
+              29.850006103515625,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 615.5171263913733
+        },
+        {
+          "index": 3,
+          "side": 1,
+          "first_column": 0,
+          "column_count": 5,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart120_3",
+          "local_origin_cm": [
+            -216.88453555107117,
+            -82.85010159015656,
+            0
+          ],
+          "bin_indices": [
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -108.19029808044434,
+              -29.850006103515625,
+              0.0
+            ],
+            [
+              108.19031000137329,
+              27.249997854232788,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 615.5171263913733
+        },
+        {
+          "index": 4,
+          "side": 1,
+          "first_column": 5,
+          "column_count": 5,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart120_4",
+          "local_origin_cm": [
+            0.0,
+            -82.85010159015656,
+            0
+          ],
+          "bin_indices": [
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -108.19031000137329,
+              -29.850006103515625,
+              0.0
+            ],
+            [
+              108.19031000137329,
+              27.249997854232788,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 615.5171263913733
+        },
+        {
+          "index": 5,
+          "side": 1,
+          "first_column": 10,
+          "column_count": 5,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart120_5",
+          "local_origin_cm": [
+            216.88453555107117,
+            -82.85010159015656,
+            0
+          ],
+          "bin_indices": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -108.19031000137329,
+              -29.850006103515625,
+              0.0
+            ],
+            [
+              108.19029808044434,
+              27.249997854232788,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 615.5171263913733
+        }
+      ]
     }
   },
   "excluded_meshes": [
     "SM_MPR_SorterShort10",
     "SM_MPR_Tiangong96"
   ],
-  "mechanism": "Closed-chain travelling columns; one vertically positioned short-belt tray per column; lateral discharge to fixed chutes and bins.",
+  "mechanism": "Closed-chain travelling columns; vertically positioned short-belt tray; fixed chutes discharge into independently exchangeable whole bin carts.",
   "limitations": [
     "This is a scene-model demonstration, not PLC/process telemetry or confirmed production capacity.",
     "Four trays per machine, speed, flow direction, loading port and timing are presentation choices.",
-    "Original CAD instance positions, bin positions, chutes and modelled levels are retained."
-  ]
+    "Original CAD instance positions, bin positions, chutes and modelled levels are retained.",
+    "Whole-cart removal uses CAD column grouping. 65cm retreat and an end staging point are demonstration paths, not a surveyed operator route.",
+    "Adjacent facing carts must reserve their shared aisle; concurrent opposing exchanges are not proven safe."
+  ],
+  "placement_snapshot": "Saved/MPR/full_workflow_20261107/conveyor_application/after.json.gz"
 }

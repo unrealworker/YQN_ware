@@ -1,0 +1,141 @@
+{
+  "native_csv": {
+    "path": "D:\\UEPro\\Test\\Saved\\Profiling\\CSV\\MPR_FULL_WORKFLOW_20261107T070915208038Z.csv",
+    "sha256": "b49519b1861bfbcd4d66a3b11da966e6e4dd2464e005454af783c41a0ba2cb4f",
+    "timing_unit": "ms",
+    "frame_count": 1876,
+    "native_frame_time_seconds": 15.000513100000012,
+    "metrics": {
+      "FrameTime": {
+        "count": 1876,
+        "mean_ms": 7.996009115138593,
+        "median_ms": 7.96905,
+        "p95_ms": 8.8421,
+        "p99_ms": 9.2391,
+        "max_ms": 23.7402,
+        "over_16_67ms_count": 1,
+        "over_33_33ms_count": 0,
+        "over_50ms_count": 0
+      },
+      "GameThreadTime": {
+        "count": 1876,
+        "mean_ms": 2.592402398720682,
+        "median_ms": 2.53525,
+        "p95_ms": 3.0388,
+        "p99_ms": 3.4457,
+        "max_ms": 23.6787,
+        "over_16_67ms_count": 1,
+        "over_33_33ms_count": 0,
+        "over_50ms_count": 0
+      },
+      "RenderThreadTime": {
+        "count": 1876,
+        "mean_ms": 7.987270469083155,
+        "median_ms": 7.969799999999999,
+        "p95_ms": 8.7971,
+        "p99_ms": 9.1828,
+        "max_ms": 10.2621,
+        "over_16_67ms_count": 0,
+        "over_33_33ms_count": 0,
+        "over_50ms_count": 0
+      },
+      "GPUTime": {
+        "count": 1876,
+        "mean_ms": 7.349339552238806,
+        "median_ms": 7.29535,
+        "p95_ms": 7.9477,
+        "p99_ms": 8.2602,
+        "max_ms": 8.4631,
+        "over_16_67ms_count": 0,
+        "over_33_33ms_count": 0,
+        "over_50ms_count": 0
+      }
+    },
+    "gpu_verified": true,
+    "gpu_evidence": {
+      "mode": "UE5.8 RHI",
+      "primary_metric": "GPUTime",
+      "positive_frame_ratio": 1.0,
+      "gpu_pass_positive_frame_ratio": 1.0,
+      "pass_columns": [
+        "GPU/RayTracingGeometry",
+        "GPU/DistanceFields",
+        "GPU/GlobalDistanceFieldUpdate",
+        "GPU/AllocateRendertargets",
+        "GPU/VisibilityCommands",
+        "GPU/UpdateLumenSceneBuffers",
+        "GPU/GPUSceneUpdate",
+        "GPU/NaniteStreaming",
+        "GPU/NaniteReadback",
+        "GPU/FXSystemPreRender",
+        "GPU/BuildRenderingCommandsDeferred",
+        "GPU/Prepass",
+        "GPU/NaniteVisBuffer",
+        "GPU/NaniteBasePass",
+        "GPU/HZB",
+        "GPU/BeginOcclusionTests",
+        "GPU/LightGrid",
+        "GPU/LightFunctionAtlasGeneration",
+        "GPU/LumenSceneUpdate",
+        "GPU/BuildRenderingCommands",
+        "GPU/LumenScreenProbeGather",
+        "GPU/Basepass",
+        "GPU/RenderDeferredLighting",
+        "GPU/ShadowDepths",
+        "GPU/LumenReflections",
+        "GPU/TranslucentLighting",
+        "GPU/Lights",
+        "GPU/ShadowProjection",
+        "GPU/DistanceFieldShadows",
+        "GPU/TemporalSuperResolution",
+        "GPU/PostRenderOpsFX",
+        "GPU/FXSystemPostRenderOpaque",
+        "GPU/Translucency",
+        "GPU/Postprocessing",
+        "GPU/VirtualTextureUpdate",
+        "GPU/SlateUI"
+      ],
+      "unregistered_tail_pass_zero_fill_counts": {}
+    },
+    "window": "All finalized native CSV frames between start and stop, including boundary frames; no spikes removed.",
+    "percentile_method": "nearest-rank",
+    "fps": 125.0623886992238
+  },
+  "sampled_wall_seconds": 15.0,
+  "camera": [
+    -11104.873826989722,
+    -2766.3651940859536,
+    903.1117647630501,
+    -29.00000000000003,
+    64.99999999999997,
+    -1.818250066572422e-15
+  ],
+  "actor_auto_tick": true,
+  "manual_steps": 0,
+  "report_reads_during_sample": 0,
+  "precondition_advance_simulation_seconds": 80,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "hud_visible": true,
+  "before": {
+    "spawned": 238,
+    "completed": 106,
+    "collected": 0,
+    "active": 66,
+    "queued": 66,
+    "occupancy": 106,
+    "exchanged_carts": 0
+  },
+  "after": {
+    "spawned": 269,
+    "completed": 146,
+    "collected": 0,
+    "active": 57,
+    "queued": 66,
+    "occupancy": 146,
+    "exchanged_carts": 0
+  },
+  "scope": "One local owned native game, 22 machines, 96 carts, 44 operator slots and HUD; not a streaming or isolated hardware benchmark."
+}

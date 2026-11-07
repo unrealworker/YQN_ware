@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "meshes": [
     {
       "name": "SM_MPR_SorterSimBody64",
@@ -19,18 +19,18 @@
           3.0986499786376953
         ],
         [
-          -1.0470000505447388,
-          1.0470000505447388
+          -0.6182627081871033,
+          0.6182627081871033
         ],
         [
           0.0,
           2.317500114440918
         ]
       ],
-      "triangles": 8688,
+      "triangles": 4600,
       "material_slots": 7,
-      "editable_parts": 580,
-      "sha256": "2eb075d4ac9316c708aadf1d75415f2b289464547d5fa047ad70eef3052b7640",
+      "editable_parts": 338,
+      "sha256": "a6ea304b6f79e12829bcdea74203452869e2e9dadd8beecd3b3dd51b0b62a5df",
       "lod": 0,
       "kind": "static_body",
       "profile": "cad64",
@@ -57,18 +57,18 @@
           3.0986499786376953
         ],
         [
-          -1.0470000505447388,
-          1.0470000505447388
+          -0.6182627081871033,
+          0.6182627081871033
         ],
         [
           0.0,
           2.317500114440918
         ]
       ],
-      "triangles": 6272,
+      "triangles": 4120,
       "material_slots": 7,
-      "editable_parts": 408,
-      "sha256": "d93eb1365d81230217be5c065d6761d3e37ec9db2dec9c788332f44c78cad997",
+      "editable_parts": 314,
+      "sha256": "7118c740419886caab8e7ba3c78210234e036f5b1508f3ba405b6f90230ca14d",
       "lod": 1,
       "kind": "static_body",
       "profile": "cad64"
@@ -91,21 +91,469 @@
           3.0986499786376953
         ],
         [
-          -1.0470000505447388,
-          1.0470000505447388
+          -0.6080021262168884,
+          0.6080021262168884
         ],
         [
           0.0,
           2.317500114440918
         ]
       ],
-      "triangles": 3648,
+      "triangles": 1496,
       "material_slots": 7,
-      "editable_parts": 200,
-      "sha256": "722aa89a5b2914f710d79ae88e55570faff3778904c9e009547be8aea16837ee",
+      "editable_parts": 106,
+      "sha256": "3fa2de62a87d7b79e1cd613706049c42408c0d6c3c1dabe28917ba43f9eb21de",
       "lod": 2,
       "kind": "static_body",
       "profile": "cad64"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart64_0",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_0.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.2049312591552734,
+          1.2049312591552734
+        ],
+        [
+          -0.2975200414657593,
+          0.2715199589729309
+        ],
+        [
+          0.0,
+          1.6729999780654907
+        ]
+      ],
+      "triangles": 1308,
+      "material_slots": 7,
+      "editable_parts": 77,
+      "sha256": "2742863fa81f1323470189c6eea977f527813d4dc07f3a99322c243a7634b0db",
+      "lod": 0,
+      "kind": "cart",
+      "profile": "cad64",
+      "cart_index": 0,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot",
+      "lod_files": [
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_0_LOD1.fbx",
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_0_LOD2.fbx"
+      ]
+    },
+    {
+      "name": "SM_MPR_SorterSimCart64_0_LOD1",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_0_LOD1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.2049312591552734,
+          1.2049312591552734
+        ],
+        [
+          -0.2975200414657593,
+          0.2715199589729309
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 848,
+      "material_slots": 7,
+      "editable_parts": 44,
+      "sha256": "3d52a8ed7259bf90c4e00fc549dd0df7da75dfd791d3248e1a4fa6f6bdb110f0",
+      "lod": 1,
+      "kind": "cart",
+      "profile": "cad64",
+      "cart_index": 0,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart64_0_LOD2",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_0_LOD2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.2049312591552734,
+          1.2049312591552734
+        ],
+        [
+          -0.2975200414657593,
+          0.2715199589729309
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 784,
+      "material_slots": 7,
+      "editable_parts": 44,
+      "sha256": "9fea691711850ee0b07a7fc15160564aab8056865c7121b7b4b1c6fb9750b75a",
+      "lod": 2,
+      "kind": "cart",
+      "profile": "cad64",
+      "cart_index": 0,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart64_1",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.2049312591552734,
+          1.2049312591552734
+        ],
+        [
+          -0.2975200414657593,
+          0.2715199589729309
+        ],
+        [
+          0.0,
+          1.6729999780654907
+        ]
+      ],
+      "triangles": 1308,
+      "material_slots": 7,
+      "editable_parts": 77,
+      "sha256": "566a15b4f1047aa04475248f85cec5a328beb249ed88237ec5ed5b6d2807bb87",
+      "lod": 0,
+      "kind": "cart",
+      "profile": "cad64",
+      "cart_index": 1,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot",
+      "lod_files": [
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_1_LOD1.fbx",
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_1_LOD2.fbx"
+      ]
+    },
+    {
+      "name": "SM_MPR_SorterSimCart64_1_LOD1",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_1_LOD1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.2049312591552734,
+          1.2049312591552734
+        ],
+        [
+          -0.2975200414657593,
+          0.2715199589729309
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 848,
+      "material_slots": 7,
+      "editable_parts": 44,
+      "sha256": "59299559f1496087e87239f3dce5a1923c7eb15a5426bb744b18fffea8082437",
+      "lod": 1,
+      "kind": "cart",
+      "profile": "cad64",
+      "cart_index": 1,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart64_1_LOD2",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_1_LOD2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.2049312591552734,
+          1.2049312591552734
+        ],
+        [
+          -0.2975200414657593,
+          0.2715199589729309
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 784,
+      "material_slots": 7,
+      "editable_parts": 44,
+      "sha256": "1d96b9e32678b32b700dbebb6e2b8497577a7eb6077d7bd27ace77cf25341b27",
+      "lod": 2,
+      "kind": "cart",
+      "profile": "cad64",
+      "cart_index": 1,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart64_2",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.2049312591552734,
+          1.2049312591552734
+        ],
+        [
+          -0.2715199589729309,
+          0.2975200414657593
+        ],
+        [
+          0.0,
+          1.6729999780654907
+        ]
+      ],
+      "triangles": 1308,
+      "material_slots": 7,
+      "editable_parts": 77,
+      "sha256": "e5cb881661a73fb08ae0ce20737fce4eaa647353ac11191c29e99f4430350a04",
+      "lod": 0,
+      "kind": "cart",
+      "profile": "cad64",
+      "cart_index": 2,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot",
+      "lod_files": [
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_2_LOD1.fbx",
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_2_LOD2.fbx"
+      ]
+    },
+    {
+      "name": "SM_MPR_SorterSimCart64_2_LOD1",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_2_LOD1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.2049312591552734,
+          1.2049312591552734
+        ],
+        [
+          -0.2715199589729309,
+          0.2975200414657593
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 848,
+      "material_slots": 7,
+      "editable_parts": 44,
+      "sha256": "64fc6cac710dae21a5d9a6a2e28a914af05c0924e4da05564946f12b7b95c2d0",
+      "lod": 1,
+      "kind": "cart",
+      "profile": "cad64",
+      "cart_index": 2,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart64_2_LOD2",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_2_LOD2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.2049312591552734,
+          1.2049312591552734
+        ],
+        [
+          -0.2715199589729309,
+          0.2975200414657593
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 784,
+      "material_slots": 7,
+      "editable_parts": 44,
+      "sha256": "4a61da1eb1708d83aafa7417ca2079802300585792c1745f272b04d5c292561b",
+      "lod": 2,
+      "kind": "cart",
+      "profile": "cad64",
+      "cart_index": 2,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart64_3",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_3.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.2049312591552734,
+          1.2049312591552734
+        ],
+        [
+          -0.2715199589729309,
+          0.2975200414657593
+        ],
+        [
+          0.0,
+          1.6729999780654907
+        ]
+      ],
+      "triangles": 1308,
+      "material_slots": 7,
+      "editable_parts": 77,
+      "sha256": "dd40088a9b3e154338c287301e8bc801652a431d5b7165a786873550d548d697",
+      "lod": 0,
+      "kind": "cart",
+      "profile": "cad64",
+      "cart_index": 3,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot",
+      "lod_files": [
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_3_LOD1.fbx",
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_3_LOD2.fbx"
+      ]
+    },
+    {
+      "name": "SM_MPR_SorterSimCart64_3_LOD1",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_3_LOD1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.2049312591552734,
+          1.2049312591552734
+        ],
+        [
+          -0.2715199589729309,
+          0.2975200414657593
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 848,
+      "material_slots": 7,
+      "editable_parts": 44,
+      "sha256": "97d6fa794a395656668d8b3d59f55345e2d41179165e24195b66f739ed2ee7d5",
+      "lod": 1,
+      "kind": "cart",
+      "profile": "cad64",
+      "cart_index": 3,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart64_3_LOD2",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart64_3_LOD2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.2049312591552734,
+          1.2049312591552734
+        ],
+        [
+          -0.2715199589729309,
+          0.2975200414657593
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 784,
+      "material_slots": 7,
+      "editable_parts": 44,
+      "sha256": "943617c3dc984d7edefe15ba280737125185e5c4fe7e8997d1aa85710d656101",
+      "lod": 2,
+      "kind": "cart",
+      "profile": "cad64",
+      "cart_index": 3,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
     },
     {
       "name": "SM_MPR_SorterSimBody120",
@@ -125,18 +573,18 @@
           3.640768051147461
         ],
         [
-          -1.095000982284546,
-          1.095000982284546
+          -0.664303719997406,
+          0.664303719997406
         ],
         [
           0.0,
           2.317500114440918
         ]
       ],
-      "triangles": 14160,
+      "triangles": 7312,
       "material_slots": 7,
-      "editable_parts": 964,
-      "sha256": "599b7c6b39f188a0d28d4dc69a3bc7622f6294f4b2c02888e3a99b8f32dae858",
+      "editable_parts": 564,
+      "sha256": "05ffa19e0ebe2d156f603d095672a92524c85f298b2ca3aa0fe4d053b220e519",
       "lod": 0,
       "kind": "static_body",
       "profile": "cad120",
@@ -163,18 +611,18 @@
           3.640768051147461
         ],
         [
-          -1.095000982284546,
-          1.095000982284546
+          -0.664303719997406,
+          0.664303719997406
         ],
         [
           0.0,
           2.317500114440918
         ]
       ],
-      "triangles": 10480,
+      "triangles": 6832,
       "material_slots": 7,
-      "editable_parts": 684,
-      "sha256": "1e4cf694ab65bd4baadc18ac4b096b5e9ead0063ab8d497d78db45c0b6af7932",
+      "editable_parts": 540,
+      "sha256": "879c1129cb427e34caba6f709da4ab281d2e491abf83ec67e011b35d1c90540b",
       "lod": 1,
       "kind": "static_body",
       "profile": "cad120"
@@ -197,21 +645,693 @@
           3.640768051147461
         ],
         [
-          -1.095000982284546,
-          1.095000982284546
+          -0.6540430784225464,
+          0.6540430784225464
         ],
         [
           0.0,
           2.317500114440918
         ]
       ],
-      "triangles": 5840,
+      "triangles": 2192,
       "material_slots": 7,
-      "editable_parts": 308,
-      "sha256": "0b9142764b503592de5bbbb1efba5f63fae2bafab9366c0a82f5e494ba704230",
+      "editable_parts": 164,
+      "sha256": "de2004f8ec4c3e34001a1f5d01b019f4d27c041cf9468a7169f56376a7ec1181",
       "lod": 2,
       "kind": "static_body",
       "profile": "cad120"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_0",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_0.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.0819029808044434,
+          1.081903100013733
+        ],
+        [
+          -0.29850006103515625,
+          0.2724999785423279
+        ],
+        [
+          0.0,
+          1.6729999780654907
+        ]
+      ],
+      "triangles": 1516,
+      "material_slots": 7,
+      "editable_parts": 89,
+      "sha256": "84f1836d7ec17da922b4ad71a71ae07ac99f6537861b3933090029ee7d31ddfc",
+      "lod": 0,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 0,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot",
+      "lod_files": [
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_0_LOD1.fbx",
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_0_LOD2.fbx"
+      ]
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_0_LOD1",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_0_LOD1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.0819029808044434,
+          1.081903100013733
+        ],
+        [
+          -0.29850006103515625,
+          0.2724999785423279
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 960,
+      "material_slots": 7,
+      "editable_parts": 48,
+      "sha256": "133e76e75f308222571e0132801347559120a04b0eca7b2ad68b6060c43f0bd3",
+      "lod": 1,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 0,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_0_LOD2",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_0_LOD2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.0819029808044434,
+          1.081903100013733
+        ],
+        [
+          -0.29850006103515625,
+          0.2724999785423279
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 896,
+      "material_slots": 7,
+      "editable_parts": 48,
+      "sha256": "c81351ead4722644e6c32e49923028ab1d7858ecb123ed1189b7b3cc66580549",
+      "lod": 2,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 0,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_1",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.081903100013733,
+          1.081903100013733
+        ],
+        [
+          -0.29850006103515625,
+          0.2724999785423279
+        ],
+        [
+          0.0,
+          1.6729999780654907
+        ]
+      ],
+      "triangles": 1516,
+      "material_slots": 7,
+      "editable_parts": 89,
+      "sha256": "afae815f85e43c3ed1bfd429c15de4d33965ba32d069dea69cd6a396276b8c29",
+      "lod": 0,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 1,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot",
+      "lod_files": [
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_1_LOD1.fbx",
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_1_LOD2.fbx"
+      ]
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_1_LOD1",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_1_LOD1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.081903100013733,
+          1.081903100013733
+        ],
+        [
+          -0.29850006103515625,
+          0.2724999785423279
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 960,
+      "material_slots": 7,
+      "editable_parts": 48,
+      "sha256": "e23b72740ed57098c83496ecd38be2c2a88a889bd9c148f8822d92965fcf7e5b",
+      "lod": 1,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 1,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_1_LOD2",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_1_LOD2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.081903100013733,
+          1.081903100013733
+        ],
+        [
+          -0.29850006103515625,
+          0.2724999785423279
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 896,
+      "material_slots": 7,
+      "editable_parts": 48,
+      "sha256": "f1fd9f4a975d10635c4af66742235e908b056f11fae74ecfd42d4c1219bd8048",
+      "lod": 2,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 1,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_2",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.081903100013733,
+          1.0819029808044434
+        ],
+        [
+          -0.29850006103515625,
+          0.2724999785423279
+        ],
+        [
+          0.0,
+          1.6729999780654907
+        ]
+      ],
+      "triangles": 1516,
+      "material_slots": 7,
+      "editable_parts": 89,
+      "sha256": "99589b260547496e133ae79f4a3a43fddbf6372eb59a1e002050858a37cde38e",
+      "lod": 0,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 2,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot",
+      "lod_files": [
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_2_LOD1.fbx",
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_2_LOD2.fbx"
+      ]
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_2_LOD1",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_2_LOD1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.081903100013733,
+          1.0819029808044434
+        ],
+        [
+          -0.29850006103515625,
+          0.2724999785423279
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 960,
+      "material_slots": 7,
+      "editable_parts": 48,
+      "sha256": "1b6b8f1e21df1f4a2fe536d789f5660eaf32da7c435ff1c8c699d2abff343a5b",
+      "lod": 1,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 2,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_2_LOD2",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_2_LOD2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.081903100013733,
+          1.0819029808044434
+        ],
+        [
+          -0.29850006103515625,
+          0.2724999785423279
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 896,
+      "material_slots": 7,
+      "editable_parts": 48,
+      "sha256": "3d2a9be7583878a8864f3737733fe6864910144b6adf1128fa7a399a632f094e",
+      "lod": 2,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 2,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_3",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_3.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.0819029808044434,
+          1.081903100013733
+        ],
+        [
+          -0.2724999785423279,
+          0.29850006103515625
+        ],
+        [
+          0.0,
+          1.6729999780654907
+        ]
+      ],
+      "triangles": 1516,
+      "material_slots": 7,
+      "editable_parts": 89,
+      "sha256": "6da59b37f1a7a40d2567a2f04ffbf166215cc3239e0f7f699944354175b7dea9",
+      "lod": 0,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 3,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot",
+      "lod_files": [
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_3_LOD1.fbx",
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_3_LOD2.fbx"
+      ]
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_3_LOD1",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_3_LOD1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.0819029808044434,
+          1.081903100013733
+        ],
+        [
+          -0.2724999785423279,
+          0.29850006103515625
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 960,
+      "material_slots": 7,
+      "editable_parts": 48,
+      "sha256": "de5f678b63bc367b34d1d9d403879c2800ee26ca7e9d3a5833b2078e3c6a8880",
+      "lod": 1,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 3,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_3_LOD2",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_3_LOD2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.0819029808044434,
+          1.081903100013733
+        ],
+        [
+          -0.2724999785423279,
+          0.29850006103515625
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 896,
+      "material_slots": 7,
+      "editable_parts": 48,
+      "sha256": "ffa6a110ef6fae06a35941bf35d2eaab31821cf998b1e965441bb2db20259b99",
+      "lod": 2,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 3,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_4",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_4.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.081903100013733,
+          1.081903100013733
+        ],
+        [
+          -0.2724999785423279,
+          0.29850006103515625
+        ],
+        [
+          0.0,
+          1.6729999780654907
+        ]
+      ],
+      "triangles": 1516,
+      "material_slots": 7,
+      "editable_parts": 89,
+      "sha256": "ca59dd59952295dda5875fcfd5a925d06a2fde3bde1eacc77e4d943e731a1c84",
+      "lod": 0,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 4,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot",
+      "lod_files": [
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_4_LOD1.fbx",
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_4_LOD2.fbx"
+      ]
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_4_LOD1",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_4_LOD1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.081903100013733,
+          1.081903100013733
+        ],
+        [
+          -0.2724999785423279,
+          0.29850006103515625
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 960,
+      "material_slots": 7,
+      "editable_parts": 48,
+      "sha256": "40581a3a6fdbca85dab11189b1551ba74a3aedcb22c47b3be0111361921e4652",
+      "lod": 1,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 4,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_4_LOD2",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_4_LOD2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.081903100013733,
+          1.081903100013733
+        ],
+        [
+          -0.2724999785423279,
+          0.29850006103515625
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 896,
+      "material_slots": 7,
+      "editable_parts": 48,
+      "sha256": "fa1217c4cc84b2bce76ff9702b644f2c97671d41ecc0aa87e123b98acf30d8b3",
+      "lod": 2,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 4,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_5",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_5.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.081903100013733,
+          1.0819029808044434
+        ],
+        [
+          -0.2724999785423279,
+          0.29850006103515625
+        ],
+        [
+          0.0,
+          1.6729999780654907
+        ]
+      ],
+      "triangles": 1516,
+      "material_slots": 7,
+      "editable_parts": 89,
+      "sha256": "b2478974be8dd44351b33906d5717eec1d4da1b577eb92ccfb48c688fc807b51",
+      "lod": 0,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 5,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot",
+      "lod_files": [
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_5_LOD1.fbx",
+        "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_5_LOD2.fbx"
+      ]
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_5_LOD1",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_5_LOD1.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.081903100013733,
+          1.0819029808044434
+        ],
+        [
+          -0.2724999785423279,
+          0.29850006103515625
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 960,
+      "material_slots": 7,
+      "editable_parts": 48,
+      "sha256": "1d2607d42075c30e284cb9ce08636b70c0f76b2c27a83c60c0ba9cd82f1c9407",
+      "lod": 1,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 5,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
+    },
+    {
+      "name": "SM_MPR_SorterSimCart120_5_LOD2",
+      "fbx": "SourceAssets/MPR/sorter_simulation/SM_MPR_SorterSimCart120_5_LOD2.fbx",
+      "material_roles": [
+        "Porcelain",
+        "Cobalt",
+        "SoftBlue",
+        "Metal",
+        "Charcoal",
+        "Rubber",
+        "Glass"
+      ],
+      "bounds_m": [
+        [
+          -1.081903100013733,
+          1.0819029808044434
+        ],
+        [
+          -0.2724999785423279,
+          0.29850006103515625
+        ],
+        [
+          0.0,
+          1.659999966621399
+        ]
+      ],
+      "triangles": 896,
+      "material_slots": 7,
+      "editable_parts": 48,
+      "sha256": "3f7d9c0bbab03d822eb8c24a20df9ed889f363c05fa62b96aa80c10cfd56003d",
+      "lod": 2,
+      "kind": "cart",
+      "profile": "cad120",
+      "cart_index": 5,
+      "pivot": "Cart local_origin_cm in profile; mesh geometry local to this ground-level pivot"
     },
     {
       "name": "SM_MPR_SorterSimTower",
@@ -242,7 +1362,7 @@
       "triangles": 168,
       "material_slots": 7,
       "editable_parts": 10,
-      "sha256": "3d32c561da05a98cd81fc9e5ab36cbad644617191af2d9c862471101baf14e09",
+      "sha256": "71eda1adeedb99b5de616b8c105bec097f5b79b04e60f02f1420a03059687c48",
       "lod": 0,
       "kind": "dynamic_part",
       "pivot": "ground Z0"
@@ -276,7 +1396,7 @@
       "triangles": 84,
       "material_slots": 7,
       "editable_parts": 7,
-      "sha256": "4b9f990c807175c9e9596d5d89b8d9ca5e8a80cd881e397ff80b229caae9e70e",
+      "sha256": "6c613a790ef38b24c7bf78495ff49383ae781bbb784b15289cad4e0b62ef5f9f",
       "lod": 0,
       "kind": "dynamic_part",
       "pivot": "carrying surface Z0"
@@ -401,7 +1521,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_1",
-          "original_chute_object": "Chute"
+          "original_chute_object": "Chute",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -436,7 +1557,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_2",
-          "original_chute_object": "Chute.001"
+          "original_chute_object": "Chute.001",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -471,7 +1593,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_3",
-          "original_chute_object": "Chute.002"
+          "original_chute_object": "Chute.002",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -506,7 +1629,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_4",
-          "original_chute_object": "Chute.003"
+          "original_chute_object": "Chute.003",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -541,7 +1665,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_1",
-          "original_chute_object": "Chute.004"
+          "original_chute_object": "Chute.004",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -576,7 +1701,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_2",
-          "original_chute_object": "Chute.005"
+          "original_chute_object": "Chute.005",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -611,7 +1737,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_3",
-          "original_chute_object": "Chute.006"
+          "original_chute_object": "Chute.006",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -646,7 +1773,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_4",
-          "original_chute_object": "Chute.007"
+          "original_chute_object": "Chute.007",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -681,7 +1809,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_1",
-          "original_chute_object": "Chute.008"
+          "original_chute_object": "Chute.008",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -716,7 +1845,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_2",
-          "original_chute_object": "Chute.009"
+          "original_chute_object": "Chute.009",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -751,7 +1881,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_3",
-          "original_chute_object": "Chute.010"
+          "original_chute_object": "Chute.010",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -786,7 +1917,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_4",
-          "original_chute_object": "Chute.011"
+          "original_chute_object": "Chute.011",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -821,7 +1953,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_1",
-          "original_chute_object": "Chute.012"
+          "original_chute_object": "Chute.012",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -856,7 +1989,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_2",
-          "original_chute_object": "Chute.013"
+          "original_chute_object": "Chute.013",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -891,7 +2025,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_3",
-          "original_chute_object": "Chute.014"
+          "original_chute_object": "Chute.014",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -926,7 +2061,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_4",
-          "original_chute_object": "Chute.015"
+          "original_chute_object": "Chute.015",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -961,7 +2097,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_1",
-          "original_chute_object": "Chute.016"
+          "original_chute_object": "Chute.016",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -996,7 +2133,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_2",
-          "original_chute_object": "Chute.017"
+          "original_chute_object": "Chute.017",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1031,7 +2169,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_3",
-          "original_chute_object": "Chute.018"
+          "original_chute_object": "Chute.018",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1066,7 +2205,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_4",
-          "original_chute_object": "Chute.019"
+          "original_chute_object": "Chute.019",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1101,7 +2241,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_1",
-          "original_chute_object": "Chute.020"
+          "original_chute_object": "Chute.020",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1136,7 +2277,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_2",
-          "original_chute_object": "Chute.021"
+          "original_chute_object": "Chute.021",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1171,7 +2313,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_3",
-          "original_chute_object": "Chute.022"
+          "original_chute_object": "Chute.022",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1206,7 +2349,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_4",
-          "original_chute_object": "Chute.023"
+          "original_chute_object": "Chute.023",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1241,7 +2385,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_1",
-          "original_chute_object": "Chute.024"
+          "original_chute_object": "Chute.024",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1276,7 +2421,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_2",
-          "original_chute_object": "Chute.025"
+          "original_chute_object": "Chute.025",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1311,7 +2457,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_3",
-          "original_chute_object": "Chute.026"
+          "original_chute_object": "Chute.026",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1346,7 +2493,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_4",
-          "original_chute_object": "Chute.027"
+          "original_chute_object": "Chute.027",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1381,7 +2529,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_1",
-          "original_chute_object": "Chute.028"
+          "original_chute_object": "Chute.028",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1416,7 +2565,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_2",
-          "original_chute_object": "Chute.029"
+          "original_chute_object": "Chute.029",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1451,7 +2601,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_3",
-          "original_chute_object": "Chute.030"
+          "original_chute_object": "Chute.030",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -1486,7 +2637,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_4",
-          "original_chute_object": "Chute.031"
+          "original_chute_object": "Chute.031",
+          "cart_index": 1
         },
         {
           "side": 1,
@@ -1521,7 +2673,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_1",
-          "original_chute_object": "Chute.032"
+          "original_chute_object": "Chute.032",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1556,7 +2709,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_2",
-          "original_chute_object": "Chute.033"
+          "original_chute_object": "Chute.033",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1591,7 +2745,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_3",
-          "original_chute_object": "Chute.034"
+          "original_chute_object": "Chute.034",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1626,7 +2781,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_4",
-          "original_chute_object": "Chute.035"
+          "original_chute_object": "Chute.035",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1661,7 +2817,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_1",
-          "original_chute_object": "Chute.036"
+          "original_chute_object": "Chute.036",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1696,7 +2853,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_2",
-          "original_chute_object": "Chute.037"
+          "original_chute_object": "Chute.037",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1731,7 +2889,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_3",
-          "original_chute_object": "Chute.038"
+          "original_chute_object": "Chute.038",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1766,7 +2925,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_4",
-          "original_chute_object": "Chute.039"
+          "original_chute_object": "Chute.039",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1801,7 +2961,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_1",
-          "original_chute_object": "Chute.040"
+          "original_chute_object": "Chute.040",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1836,7 +2997,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_2",
-          "original_chute_object": "Chute.041"
+          "original_chute_object": "Chute.041",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1871,7 +3033,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_3",
-          "original_chute_object": "Chute.042"
+          "original_chute_object": "Chute.042",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1906,7 +3069,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_4",
-          "original_chute_object": "Chute.043"
+          "original_chute_object": "Chute.043",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1941,7 +3105,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_1",
-          "original_chute_object": "Chute.044"
+          "original_chute_object": "Chute.044",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -1976,7 +3141,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_2",
-          "original_chute_object": "Chute.045"
+          "original_chute_object": "Chute.045",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2011,7 +3177,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_3",
-          "original_chute_object": "Chute.046"
+          "original_chute_object": "Chute.046",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2046,7 +3213,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_4",
-          "original_chute_object": "Chute.047"
+          "original_chute_object": "Chute.047",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -2081,7 +3249,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_1",
-          "original_chute_object": "Chute.048"
+          "original_chute_object": "Chute.048",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2116,7 +3285,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_2",
-          "original_chute_object": "Chute.049"
+          "original_chute_object": "Chute.049",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2151,7 +3321,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_3",
-          "original_chute_object": "Chute.050"
+          "original_chute_object": "Chute.050",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2186,7 +3357,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_4",
-          "original_chute_object": "Chute.051"
+          "original_chute_object": "Chute.051",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2221,7 +3393,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_1",
-          "original_chute_object": "Chute.052"
+          "original_chute_object": "Chute.052",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2256,7 +3429,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_2",
-          "original_chute_object": "Chute.053"
+          "original_chute_object": "Chute.053",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2291,7 +3465,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_3",
-          "original_chute_object": "Chute.054"
+          "original_chute_object": "Chute.054",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2326,7 +3501,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_4",
-          "original_chute_object": "Chute.055"
+          "original_chute_object": "Chute.055",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2361,7 +3537,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_1",
-          "original_chute_object": "Chute.056"
+          "original_chute_object": "Chute.056",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2396,7 +3573,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_2",
-          "original_chute_object": "Chute.057"
+          "original_chute_object": "Chute.057",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2431,7 +3609,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_3",
-          "original_chute_object": "Chute.058"
+          "original_chute_object": "Chute.058",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2466,7 +3645,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_4",
-          "original_chute_object": "Chute.059"
+          "original_chute_object": "Chute.059",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2501,7 +3681,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_1",
-          "original_chute_object": "Chute.060"
+          "original_chute_object": "Chute.060",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2536,7 +3717,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_2",
-          "original_chute_object": "Chute.061"
+          "original_chute_object": "Chute.061",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2571,7 +3753,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_3",
-          "original_chute_object": "Chute.062"
+          "original_chute_object": "Chute.062",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -2606,7 +3789,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_4",
-          "original_chute_object": "Chute.063"
+          "original_chute_object": "Chute.063",
+          "cart_index": 3
         }
       ],
       "infeed_end_x_cm": 283.11499999999995,
@@ -2617,7 +3801,190 @@
         103.5
       ],
       "capacity_basis": "Retained scene model parameters. CAD horizontal columns are evidenced; four vertical levels and vendor identity are not surveyed.",
-      "path_basis": "Presentation motion path fitted inside the retained scene footprint, not surveyed drive-chain dimensions."
+      "path_basis": "Presentation motion path fitted inside the retained scene footprint, not surveyed drive-chain dimensions.",
+      "cart_column_groups": [
+        4,
+        4
+      ],
+      "cart_grouping_basis": "Source CAD separate caster-supported frames: 2C9A89 has 4+4 columns per side; 2C9AE5 has 5+5+5. Heights retain the existing scene interpretation; not the separate 96-bin manual model.",
+      "carts": [
+        {
+          "index": 0,
+          "side": 0,
+          "first_column": 0,
+          "column_count": 4,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart64_0",
+          "local_origin_cm": [
+            -132.05750212073326,
+            78.14799845218658,
+            0
+          ],
+          "bin_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -120.49312591552734,
+              -27.15199589729309,
+              0.0
+            ],
+            [
+              120.49312591552734,
+              29.752004146575928,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 573.6081259155274
+        },
+        {
+          "index": 1,
+          "side": 0,
+          "first_column": 4,
+          "column_count": 4,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart64_1",
+          "local_origin_cm": [
+            132.05750212073326,
+            78.14799845218658,
+            0
+          ],
+          "bin_indices": [
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -120.49312591552734,
+              -27.15199589729309,
+              0.0
+            ],
+            [
+              120.49312591552734,
+              29.752004146575928,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 573.6081259155274
+        },
+        {
+          "index": 2,
+          "side": 1,
+          "first_column": 0,
+          "column_count": 4,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart64_2",
+          "local_origin_cm": [
+            -132.05750212073326,
+            -78.14799845218658,
+            0
+          ],
+          "bin_indices": [
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -120.49312591552734,
+              -29.752004146575928,
+              0.0
+            ],
+            [
+              120.49312591552734,
+              27.15199589729309,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 573.6081259155274
+        },
+        {
+          "index": 3,
+          "side": 1,
+          "first_column": 4,
+          "column_count": 4,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart64_3",
+          "local_origin_cm": [
+            132.05750212073326,
+            -78.14799845218658,
+            0
+          ],
+          "bin_indices": [
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -120.49312591552734,
+              -29.752004146575928,
+              0.0
+            ],
+            [
+              120.49312591552734,
+              27.15199589729309,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 573.6081259155274
+        }
+      ]
     },
     "cad120": {
       "id": "cad120",
@@ -2744,7 +4111,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_1.003",
-          "original_chute_object": "Chute.192"
+          "original_chute_object": "Chute.192",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -2779,7 +4147,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_2.003",
-          "original_chute_object": "Chute.193"
+          "original_chute_object": "Chute.193",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -2814,7 +4183,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_3.003",
-          "original_chute_object": "Chute.194"
+          "original_chute_object": "Chute.194",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -2849,7 +4219,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_1_4.003",
-          "original_chute_object": "Chute.195"
+          "original_chute_object": "Chute.195",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -2884,7 +4255,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_1.003",
-          "original_chute_object": "Chute.196"
+          "original_chute_object": "Chute.196",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -2919,7 +4291,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_2.003",
-          "original_chute_object": "Chute.197"
+          "original_chute_object": "Chute.197",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -2954,7 +4327,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_3.003",
-          "original_chute_object": "Chute.198"
+          "original_chute_object": "Chute.198",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -2989,7 +4363,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_2_4.003",
-          "original_chute_object": "Chute.199"
+          "original_chute_object": "Chute.199",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3024,7 +4399,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_1.003",
-          "original_chute_object": "Chute.200"
+          "original_chute_object": "Chute.200",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3059,7 +4435,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_2.003",
-          "original_chute_object": "Chute.201"
+          "original_chute_object": "Chute.201",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3094,7 +4471,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_3.003",
-          "original_chute_object": "Chute.202"
+          "original_chute_object": "Chute.202",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3129,7 +4507,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_3_4.003",
-          "original_chute_object": "Chute.203"
+          "original_chute_object": "Chute.203",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3164,7 +4543,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_1.003",
-          "original_chute_object": "Chute.204"
+          "original_chute_object": "Chute.204",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3199,7 +4579,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_2.003",
-          "original_chute_object": "Chute.205"
+          "original_chute_object": "Chute.205",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3234,7 +4615,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_3.003",
-          "original_chute_object": "Chute.206"
+          "original_chute_object": "Chute.206",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3269,7 +4651,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_4_4.003",
-          "original_chute_object": "Chute.207"
+          "original_chute_object": "Chute.207",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3304,7 +4687,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_1.003",
-          "original_chute_object": "Chute.208"
+          "original_chute_object": "Chute.208",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3339,7 +4723,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_2.003",
-          "original_chute_object": "Chute.209"
+          "original_chute_object": "Chute.209",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3374,7 +4759,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_3.003",
-          "original_chute_object": "Chute.210"
+          "original_chute_object": "Chute.210",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3409,7 +4795,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_5_4.003",
-          "original_chute_object": "Chute.211"
+          "original_chute_object": "Chute.211",
+          "cart_index": 0
         },
         {
           "side": 0,
@@ -3444,7 +4831,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_1.003",
-          "original_chute_object": "Chute.212"
+          "original_chute_object": "Chute.212",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3479,7 +4867,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_2.003",
-          "original_chute_object": "Chute.213"
+          "original_chute_object": "Chute.213",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3514,7 +4903,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_3.003",
-          "original_chute_object": "Chute.214"
+          "original_chute_object": "Chute.214",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3549,7 +4939,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_6_4.003",
-          "original_chute_object": "Chute.215"
+          "original_chute_object": "Chute.215",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3584,7 +4975,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_1.003",
-          "original_chute_object": "Chute.216"
+          "original_chute_object": "Chute.216",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3619,7 +5011,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_2.003",
-          "original_chute_object": "Chute.217"
+          "original_chute_object": "Chute.217",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3654,7 +5047,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_3.003",
-          "original_chute_object": "Chute.218"
+          "original_chute_object": "Chute.218",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3689,7 +5083,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_7_4.003",
-          "original_chute_object": "Chute.219"
+          "original_chute_object": "Chute.219",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3724,7 +5119,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_1.003",
-          "original_chute_object": "Chute.220"
+          "original_chute_object": "Chute.220",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3759,7 +5155,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_2.003",
-          "original_chute_object": "Chute.221"
+          "original_chute_object": "Chute.221",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3794,7 +5191,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_3.003",
-          "original_chute_object": "Chute.222"
+          "original_chute_object": "Chute.222",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3829,7 +5227,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_8_4.003",
-          "original_chute_object": "Chute.223"
+          "original_chute_object": "Chute.223",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3864,7 +5263,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_9_1",
-          "original_chute_object": "Chute.224"
+          "original_chute_object": "Chute.224",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3899,7 +5299,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_9_2",
-          "original_chute_object": "Chute.225"
+          "original_chute_object": "Chute.225",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3934,7 +5335,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_9_3",
-          "original_chute_object": "Chute.226"
+          "original_chute_object": "Chute.226",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -3969,7 +5371,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_9_4",
-          "original_chute_object": "Chute.227"
+          "original_chute_object": "Chute.227",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4004,7 +5407,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_10_1",
-          "original_chute_object": "Chute.228"
+          "original_chute_object": "Chute.228",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4039,7 +5443,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_10_2",
-          "original_chute_object": "Chute.229"
+          "original_chute_object": "Chute.229",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4074,7 +5479,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_10_3",
-          "original_chute_object": "Chute.230"
+          "original_chute_object": "Chute.230",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4109,7 +5515,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_10_4",
-          "original_chute_object": "Chute.231"
+          "original_chute_object": "Chute.231",
+          "cart_index": 1
         },
         {
           "side": 0,
@@ -4144,7 +5551,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_11_1",
-          "original_chute_object": "Chute.232"
+          "original_chute_object": "Chute.232",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4179,7 +5587,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_11_2",
-          "original_chute_object": "Chute.233"
+          "original_chute_object": "Chute.233",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4214,7 +5623,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_11_3",
-          "original_chute_object": "Chute.234"
+          "original_chute_object": "Chute.234",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4249,7 +5659,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_11_4",
-          "original_chute_object": "Chute.235"
+          "original_chute_object": "Chute.235",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4284,7 +5695,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_12_1",
-          "original_chute_object": "Chute.236"
+          "original_chute_object": "Chute.236",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4319,7 +5731,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_12_2",
-          "original_chute_object": "Chute.237"
+          "original_chute_object": "Chute.237",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4354,7 +5767,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_12_3",
-          "original_chute_object": "Chute.238"
+          "original_chute_object": "Chute.238",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4389,7 +5803,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_12_4",
-          "original_chute_object": "Chute.239"
+          "original_chute_object": "Chute.239",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4424,7 +5839,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_13_1",
-          "original_chute_object": "Chute.240"
+          "original_chute_object": "Chute.240",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4459,7 +5875,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_13_2",
-          "original_chute_object": "Chute.241"
+          "original_chute_object": "Chute.241",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4494,7 +5911,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_13_3",
-          "original_chute_object": "Chute.242"
+          "original_chute_object": "Chute.242",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4529,7 +5947,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_13_4",
-          "original_chute_object": "Chute.243"
+          "original_chute_object": "Chute.243",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4564,7 +5983,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_14_1",
-          "original_chute_object": "Chute.244"
+          "original_chute_object": "Chute.244",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4599,7 +6019,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_14_2",
-          "original_chute_object": "Chute.245"
+          "original_chute_object": "Chute.245",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4634,7 +6055,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_14_3",
-          "original_chute_object": "Chute.246"
+          "original_chute_object": "Chute.246",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4669,7 +6091,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_14_4",
-          "original_chute_object": "Chute.247"
+          "original_chute_object": "Chute.247",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4704,7 +6127,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_15_1",
-          "original_chute_object": "Chute.248"
+          "original_chute_object": "Chute.248",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4739,7 +6163,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_15_2",
-          "original_chute_object": "Chute.249"
+          "original_chute_object": "Chute.249",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4774,7 +6199,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_15_3",
-          "original_chute_object": "Chute.250"
+          "original_chute_object": "Chute.250",
+          "cart_index": 2
         },
         {
           "side": 0,
@@ -4809,7 +6235,8 @@
             ]
           ],
           "original_bin_object": "Bin_-1_15_4",
-          "original_chute_object": "Chute.251"
+          "original_chute_object": "Chute.251",
+          "cart_index": 2
         },
         {
           "side": 1,
@@ -4844,7 +6271,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_1.003",
-          "original_chute_object": "Chute.252"
+          "original_chute_object": "Chute.252",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -4879,7 +6307,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_2.003",
-          "original_chute_object": "Chute.253"
+          "original_chute_object": "Chute.253",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -4914,7 +6343,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_3.003",
-          "original_chute_object": "Chute.254"
+          "original_chute_object": "Chute.254",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -4949,7 +6379,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_1_4.003",
-          "original_chute_object": "Chute.255"
+          "original_chute_object": "Chute.255",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -4984,7 +6415,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_1.003",
-          "original_chute_object": "Chute.256"
+          "original_chute_object": "Chute.256",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5019,7 +6451,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_2.003",
-          "original_chute_object": "Chute.257"
+          "original_chute_object": "Chute.257",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5054,7 +6487,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_3.003",
-          "original_chute_object": "Chute.258"
+          "original_chute_object": "Chute.258",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5089,7 +6523,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_2_4.003",
-          "original_chute_object": "Chute.259"
+          "original_chute_object": "Chute.259",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5124,7 +6559,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_1.003",
-          "original_chute_object": "Chute.260"
+          "original_chute_object": "Chute.260",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5159,7 +6595,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_2.003",
-          "original_chute_object": "Chute.261"
+          "original_chute_object": "Chute.261",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5194,7 +6631,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_3.003",
-          "original_chute_object": "Chute.262"
+          "original_chute_object": "Chute.262",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5229,7 +6667,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_3_4.003",
-          "original_chute_object": "Chute.263"
+          "original_chute_object": "Chute.263",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5264,7 +6703,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_1.003",
-          "original_chute_object": "Chute.264"
+          "original_chute_object": "Chute.264",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5299,7 +6739,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_2.003",
-          "original_chute_object": "Chute.265"
+          "original_chute_object": "Chute.265",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5334,7 +6775,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_3.003",
-          "original_chute_object": "Chute.266"
+          "original_chute_object": "Chute.266",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5369,7 +6811,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_4_4.003",
-          "original_chute_object": "Chute.267"
+          "original_chute_object": "Chute.267",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5404,7 +6847,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_1.003",
-          "original_chute_object": "Chute.268"
+          "original_chute_object": "Chute.268",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5439,7 +6883,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_2.003",
-          "original_chute_object": "Chute.269"
+          "original_chute_object": "Chute.269",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5474,7 +6919,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_3.003",
-          "original_chute_object": "Chute.270"
+          "original_chute_object": "Chute.270",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5509,7 +6955,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_5_4.003",
-          "original_chute_object": "Chute.271"
+          "original_chute_object": "Chute.271",
+          "cart_index": 3
         },
         {
           "side": 1,
@@ -5544,7 +6991,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_1.003",
-          "original_chute_object": "Chute.272"
+          "original_chute_object": "Chute.272",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5579,7 +7027,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_2.003",
-          "original_chute_object": "Chute.273"
+          "original_chute_object": "Chute.273",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5614,7 +7063,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_3.003",
-          "original_chute_object": "Chute.274"
+          "original_chute_object": "Chute.274",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5649,7 +7099,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_6_4.003",
-          "original_chute_object": "Chute.275"
+          "original_chute_object": "Chute.275",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5684,7 +7135,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_1.003",
-          "original_chute_object": "Chute.276"
+          "original_chute_object": "Chute.276",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5719,7 +7171,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_2.003",
-          "original_chute_object": "Chute.277"
+          "original_chute_object": "Chute.277",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5754,7 +7207,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_3.003",
-          "original_chute_object": "Chute.278"
+          "original_chute_object": "Chute.278",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5789,7 +7243,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_7_4.003",
-          "original_chute_object": "Chute.279"
+          "original_chute_object": "Chute.279",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5824,7 +7279,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_1.003",
-          "original_chute_object": "Chute.280"
+          "original_chute_object": "Chute.280",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5859,7 +7315,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_2.003",
-          "original_chute_object": "Chute.281"
+          "original_chute_object": "Chute.281",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5894,7 +7351,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_3.003",
-          "original_chute_object": "Chute.282"
+          "original_chute_object": "Chute.282",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5929,7 +7387,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_8_4.003",
-          "original_chute_object": "Chute.283"
+          "original_chute_object": "Chute.283",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5964,7 +7423,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_9_1",
-          "original_chute_object": "Chute.284"
+          "original_chute_object": "Chute.284",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -5999,7 +7459,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_9_2",
-          "original_chute_object": "Chute.285"
+          "original_chute_object": "Chute.285",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6034,7 +7495,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_9_3",
-          "original_chute_object": "Chute.286"
+          "original_chute_object": "Chute.286",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6069,7 +7531,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_9_4",
-          "original_chute_object": "Chute.287"
+          "original_chute_object": "Chute.287",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6104,7 +7567,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_10_1",
-          "original_chute_object": "Chute.288"
+          "original_chute_object": "Chute.288",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6139,7 +7603,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_10_2",
-          "original_chute_object": "Chute.289"
+          "original_chute_object": "Chute.289",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6174,7 +7639,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_10_3",
-          "original_chute_object": "Chute.290"
+          "original_chute_object": "Chute.290",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6209,7 +7675,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_10_4",
-          "original_chute_object": "Chute.291"
+          "original_chute_object": "Chute.291",
+          "cart_index": 4
         },
         {
           "side": 1,
@@ -6244,7 +7711,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_11_1",
-          "original_chute_object": "Chute.292"
+          "original_chute_object": "Chute.292",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6279,7 +7747,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_11_2",
-          "original_chute_object": "Chute.293"
+          "original_chute_object": "Chute.293",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6314,7 +7783,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_11_3",
-          "original_chute_object": "Chute.294"
+          "original_chute_object": "Chute.294",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6349,7 +7819,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_11_4",
-          "original_chute_object": "Chute.295"
+          "original_chute_object": "Chute.295",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6384,7 +7855,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_12_1",
-          "original_chute_object": "Chute.296"
+          "original_chute_object": "Chute.296",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6419,7 +7891,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_12_2",
-          "original_chute_object": "Chute.297"
+          "original_chute_object": "Chute.297",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6454,7 +7927,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_12_3",
-          "original_chute_object": "Chute.298"
+          "original_chute_object": "Chute.298",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6489,7 +7963,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_12_4",
-          "original_chute_object": "Chute.299"
+          "original_chute_object": "Chute.299",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6524,7 +7999,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_13_1",
-          "original_chute_object": "Chute.300"
+          "original_chute_object": "Chute.300",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6559,7 +8035,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_13_2",
-          "original_chute_object": "Chute.301"
+          "original_chute_object": "Chute.301",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6594,7 +8071,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_13_3",
-          "original_chute_object": "Chute.302"
+          "original_chute_object": "Chute.302",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6629,7 +8107,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_13_4",
-          "original_chute_object": "Chute.303"
+          "original_chute_object": "Chute.303",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6664,7 +8143,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_14_1",
-          "original_chute_object": "Chute.304"
+          "original_chute_object": "Chute.304",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6699,7 +8179,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_14_2",
-          "original_chute_object": "Chute.305"
+          "original_chute_object": "Chute.305",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6734,7 +8215,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_14_3",
-          "original_chute_object": "Chute.306"
+          "original_chute_object": "Chute.306",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6769,7 +8251,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_14_4",
-          "original_chute_object": "Chute.307"
+          "original_chute_object": "Chute.307",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6804,7 +8287,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_15_1",
-          "original_chute_object": "Chute.308"
+          "original_chute_object": "Chute.308",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6839,7 +8323,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_15_2",
-          "original_chute_object": "Chute.309"
+          "original_chute_object": "Chute.309",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6874,7 +8359,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_15_3",
-          "original_chute_object": "Chute.310"
+          "original_chute_object": "Chute.310",
+          "cart_index": 5
         },
         {
           "side": 1,
@@ -6909,7 +8395,8 @@
             ]
           ],
           "original_bin_object": "Bin_1_15_4",
-          "original_chute_object": "Chute.311"
+          "original_chute_object": "Chute.311",
+          "cart_index": 5
         }
       ],
       "infeed_end_x_cm": 348.82681639,
@@ -6920,20 +8407,564 @@
         103.5
       ],
       "capacity_basis": "Retained scene model parameters. CAD horizontal columns are evidenced; four vertical levels and vendor identity are not surveyed.",
-      "path_basis": "Presentation motion path fitted inside the retained scene footprint, not surveyed drive-chain dimensions."
+      "path_basis": "Presentation motion path fitted inside the retained scene footprint, not surveyed drive-chain dimensions.",
+      "cart_column_groups": [
+        5,
+        5,
+        5
+      ],
+      "cart_grouping_basis": "Source CAD separate caster-supported frames: 2C9A89 has 4+4 columns per side; 2C9AE5 has 5+5+5. Heights retain the existing scene interpretation; not the separate 96-bin manual model.",
+      "carts": [
+        {
+          "index": 0,
+          "side": 0,
+          "first_column": 0,
+          "column_count": 5,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart120_0",
+          "local_origin_cm": [
+            -216.88453555107117,
+            82.85010159015656,
+            0
+          ],
+          "bin_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -108.19029808044434,
+              -27.249997854232788,
+              0.0
+            ],
+            [
+              108.19031000137329,
+              29.850006103515625,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 615.5171263913733
+        },
+        {
+          "index": 1,
+          "side": 0,
+          "first_column": 5,
+          "column_count": 5,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart120_1",
+          "local_origin_cm": [
+            0.0,
+            82.85010159015656,
+            0
+          ],
+          "bin_indices": [
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -108.19031000137329,
+              -27.249997854232788,
+              0.0
+            ],
+            [
+              108.19031000137329,
+              29.850006103515625,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 615.5171263913733
+        },
+        {
+          "index": 2,
+          "side": 0,
+          "first_column": 10,
+          "column_count": 5,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart120_2",
+          "local_origin_cm": [
+            216.88453555107117,
+            82.85010159015656,
+            0
+          ],
+          "bin_indices": [
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -108.19031000137329,
+              -27.249997854232788,
+              0.0
+            ],
+            [
+              108.19029808044434,
+              29.850006103515625,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 615.5171263913733
+        },
+        {
+          "index": 3,
+          "side": 1,
+          "first_column": 0,
+          "column_count": 5,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart120_3",
+          "local_origin_cm": [
+            -216.88453555107117,
+            -82.85010159015656,
+            0
+          ],
+          "bin_indices": [
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -108.19029808044434,
+              -29.850006103515625,
+              0.0
+            ],
+            [
+              108.19031000137329,
+              27.249997854232788,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 615.5171263913733
+        },
+        {
+          "index": 4,
+          "side": 1,
+          "first_column": 5,
+          "column_count": 5,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart120_4",
+          "local_origin_cm": [
+            0.0,
+            -82.85010159015656,
+            0
+          ],
+          "bin_indices": [
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -108.19031000137329,
+              -29.850006103515625,
+              0.0
+            ],
+            [
+              108.19031000137329,
+              27.249997854232788,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 615.5171263913733
+        },
+        {
+          "index": 5,
+          "side": 1,
+          "first_column": 10,
+          "column_count": 5,
+          "mesh": "/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimCart120_5",
+          "local_origin_cm": [
+            216.88453555107117,
+            -82.85010159015656,
+            0
+          ],
+          "bin_indices": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119
+          ],
+          "retreat_distance_cm": 65.0,
+          "bounds_cm": [
+            [
+              -108.19031000137329,
+              -29.850006103515625,
+              0.0
+            ],
+            [
+              108.19029808044434,
+              27.249997854232788,
+              167.29999780654907
+            ]
+          ],
+          "outbound_end_x_cm": 615.5171263913733
+        }
+      ]
     }
   },
   "source_static_body_changes": {
     "cad64": {
       "removed_source_objects": [
+        "Bin_-1_1_1",
+        "Bin_-1_1_1_Rim",
+        "Bin_-1_1_1_Rim.001",
+        "Bin_-1_1_2",
+        "Bin_-1_1_2_Rim",
+        "Bin_-1_1_2_Rim.001",
+        "Bin_-1_1_3",
+        "Bin_-1_1_3_Rim",
+        "Bin_-1_1_3_Rim.001",
+        "Bin_-1_1_4",
+        "Bin_-1_1_4_Rim",
+        "Bin_-1_1_4_Rim.001",
+        "Bin_-1_2_1",
+        "Bin_-1_2_1_Rim",
+        "Bin_-1_2_1_Rim.001",
+        "Bin_-1_2_2",
+        "Bin_-1_2_2_Rim",
+        "Bin_-1_2_2_Rim.001",
+        "Bin_-1_2_3",
+        "Bin_-1_2_3_Rim",
+        "Bin_-1_2_3_Rim.001",
+        "Bin_-1_2_4",
+        "Bin_-1_2_4_Rim",
+        "Bin_-1_2_4_Rim.001",
+        "Bin_-1_3_1",
+        "Bin_-1_3_1_Rim",
+        "Bin_-1_3_1_Rim.001",
+        "Bin_-1_3_2",
+        "Bin_-1_3_2_Rim",
+        "Bin_-1_3_2_Rim.001",
+        "Bin_-1_3_3",
+        "Bin_-1_3_3_Rim",
+        "Bin_-1_3_3_Rim.001",
+        "Bin_-1_3_4",
+        "Bin_-1_3_4_Rim",
+        "Bin_-1_3_4_Rim.001",
+        "Bin_-1_4_1",
+        "Bin_-1_4_1_Rim",
+        "Bin_-1_4_1_Rim.001",
+        "Bin_-1_4_2",
+        "Bin_-1_4_2_Rim",
+        "Bin_-1_4_2_Rim.001",
+        "Bin_-1_4_3",
+        "Bin_-1_4_3_Rim",
+        "Bin_-1_4_3_Rim.001",
+        "Bin_-1_4_4",
+        "Bin_-1_4_4_Rim",
+        "Bin_-1_4_4_Rim.001",
+        "Bin_-1_5_1",
+        "Bin_-1_5_1_Rim",
+        "Bin_-1_5_1_Rim.001",
+        "Bin_-1_5_2",
+        "Bin_-1_5_2_Rim",
+        "Bin_-1_5_2_Rim.001",
+        "Bin_-1_5_3",
+        "Bin_-1_5_3_Rim",
+        "Bin_-1_5_3_Rim.001",
+        "Bin_-1_5_4",
+        "Bin_-1_5_4_Rim",
+        "Bin_-1_5_4_Rim.001",
+        "Bin_-1_6_1",
+        "Bin_-1_6_1_Rim",
+        "Bin_-1_6_1_Rim.001",
+        "Bin_-1_6_2",
+        "Bin_-1_6_2_Rim",
+        "Bin_-1_6_2_Rim.001",
+        "Bin_-1_6_3",
+        "Bin_-1_6_3_Rim",
+        "Bin_-1_6_3_Rim.001",
+        "Bin_-1_6_4",
+        "Bin_-1_6_4_Rim",
+        "Bin_-1_6_4_Rim.001",
+        "Bin_-1_7_1",
+        "Bin_-1_7_1_Rim",
+        "Bin_-1_7_1_Rim.001",
+        "Bin_-1_7_2",
+        "Bin_-1_7_2_Rim",
+        "Bin_-1_7_2_Rim.001",
+        "Bin_-1_7_3",
+        "Bin_-1_7_3_Rim",
+        "Bin_-1_7_3_Rim.001",
+        "Bin_-1_7_4",
+        "Bin_-1_7_4_Rim",
+        "Bin_-1_7_4_Rim.001",
+        "Bin_-1_8_1",
+        "Bin_-1_8_1_Rim",
+        "Bin_-1_8_1_Rim.001",
+        "Bin_-1_8_2",
+        "Bin_-1_8_2_Rim",
+        "Bin_-1_8_2_Rim.001",
+        "Bin_-1_8_3",
+        "Bin_-1_8_3_Rim",
+        "Bin_-1_8_3_Rim.001",
+        "Bin_-1_8_4",
+        "Bin_-1_8_4_Rim",
+        "Bin_-1_8_4_Rim.001",
+        "CartRail",
+        "OuterCartRail",
         "BeltRail",
+        "CartRail.001",
+        "OuterCartRail.001",
         "BeltRail.001",
+        "CartRail.002",
+        "OuterCartRail.002",
         "BeltRail.002",
+        "CartRail.003",
+        "OuterCartRail.003",
         "BeltRail.003",
+        "D28Leg",
+        "Caster",
+        "D28Leg.001",
+        "Caster.001",
+        "D28Leg.002",
+        "Caster.002",
+        "D28Leg.003",
+        "Caster.003",
+        "D28Leg.004",
+        "Caster.004",
+        "D28Leg.005",
+        "Caster.005",
+        "D28Leg.006",
+        "Caster.006",
+        "D28Leg.007",
+        "Caster.007",
+        "D28Leg.008",
+        "Caster.008",
+        "D28Leg.009",
+        "Caster.009",
+        "Bin_1_1_1",
+        "Bin_1_1_1_Rim",
+        "Bin_1_1_1_Rim.001",
+        "Bin_1_1_2",
+        "Bin_1_1_2_Rim",
+        "Bin_1_1_2_Rim.001",
+        "Bin_1_1_3",
+        "Bin_1_1_3_Rim",
+        "Bin_1_1_3_Rim.001",
+        "Bin_1_1_4",
+        "Bin_1_1_4_Rim",
+        "Bin_1_1_4_Rim.001",
+        "Bin_1_2_1",
+        "Bin_1_2_1_Rim",
+        "Bin_1_2_1_Rim.001",
+        "Bin_1_2_2",
+        "Bin_1_2_2_Rim",
+        "Bin_1_2_2_Rim.001",
+        "Bin_1_2_3",
+        "Bin_1_2_3_Rim",
+        "Bin_1_2_3_Rim.001",
+        "Bin_1_2_4",
+        "Bin_1_2_4_Rim",
+        "Bin_1_2_4_Rim.001",
+        "Bin_1_3_1",
+        "Bin_1_3_1_Rim",
+        "Bin_1_3_1_Rim.001",
+        "Bin_1_3_2",
+        "Bin_1_3_2_Rim",
+        "Bin_1_3_2_Rim.001",
+        "Bin_1_3_3",
+        "Bin_1_3_3_Rim",
+        "Bin_1_3_3_Rim.001",
+        "Bin_1_3_4",
+        "Bin_1_3_4_Rim",
+        "Bin_1_3_4_Rim.001",
+        "Bin_1_4_1",
+        "Bin_1_4_1_Rim",
+        "Bin_1_4_1_Rim.001",
+        "Bin_1_4_2",
+        "Bin_1_4_2_Rim",
+        "Bin_1_4_2_Rim.001",
+        "Bin_1_4_3",
+        "Bin_1_4_3_Rim",
+        "Bin_1_4_3_Rim.001",
+        "Bin_1_4_4",
+        "Bin_1_4_4_Rim",
+        "Bin_1_4_4_Rim.001",
+        "Bin_1_5_1",
+        "Bin_1_5_1_Rim",
+        "Bin_1_5_1_Rim.001",
+        "Bin_1_5_2",
+        "Bin_1_5_2_Rim",
+        "Bin_1_5_2_Rim.001",
+        "Bin_1_5_3",
+        "Bin_1_5_3_Rim",
+        "Bin_1_5_3_Rim.001",
+        "Bin_1_5_4",
+        "Bin_1_5_4_Rim",
+        "Bin_1_5_4_Rim.001",
+        "Bin_1_6_1",
+        "Bin_1_6_1_Rim",
+        "Bin_1_6_1_Rim.001",
+        "Bin_1_6_2",
+        "Bin_1_6_2_Rim",
+        "Bin_1_6_2_Rim.001",
+        "Bin_1_6_3",
+        "Bin_1_6_3_Rim",
+        "Bin_1_6_3_Rim.001",
+        "Bin_1_6_4",
+        "Bin_1_6_4_Rim",
+        "Bin_1_6_4_Rim.001",
+        "Bin_1_7_1",
+        "Bin_1_7_1_Rim",
+        "Bin_1_7_1_Rim.001",
+        "Bin_1_7_2",
+        "Bin_1_7_2_Rim",
+        "Bin_1_7_2_Rim.001",
+        "Bin_1_7_3",
+        "Bin_1_7_3_Rim",
+        "Bin_1_7_3_Rim.001",
+        "Bin_1_7_4",
+        "Bin_1_7_4_Rim",
+        "Bin_1_7_4_Rim.001",
+        "Bin_1_8_1",
+        "Bin_1_8_1_Rim",
+        "Bin_1_8_1_Rim.001",
+        "Bin_1_8_2",
+        "Bin_1_8_2_Rim",
+        "Bin_1_8_2_Rim.001",
+        "Bin_1_8_3",
+        "Bin_1_8_3_Rim",
+        "Bin_1_8_3_Rim.001",
+        "Bin_1_8_4",
+        "Bin_1_8_4_Rim",
+        "Bin_1_8_4_Rim.001",
+        "CartRail.004",
+        "OuterCartRail.004",
         "BeltRail.004",
+        "CartRail.005",
+        "OuterCartRail.005",
         "BeltRail.005",
+        "CartRail.006",
+        "OuterCartRail.006",
         "BeltRail.006",
+        "CartRail.007",
+        "OuterCartRail.007",
         "BeltRail.007",
+        "D28Leg.010",
+        "Caster.010",
+        "D28Leg.011",
+        "Caster.011",
+        "D28Leg.012",
+        "Caster.012",
+        "D28Leg.013",
+        "Caster.013",
+        "D28Leg.014",
+        "Caster.014",
+        "D28Leg.015",
+        "Caster.015",
+        "D28Leg.016",
+        "Caster.016",
+        "D28Leg.017",
+        "Caster.017",
+        "D28Leg.018",
+        "Caster.018",
+        "D28Leg.019",
+        "Caster.019",
         "MainBelt",
         "BeltSeam",
         "BeltSeam.001",
@@ -6978,524 +9009,684 @@
         "BaseShoe.001"
       ],
       "retained_source_objects": [
-        "Bin_-1_1_1",
-        "Bin_-1_1_1_Rim",
-        "Bin_-1_1_1_Rim.001",
         "Chute",
         "ChuteIndicator",
         "ChuteRim",
         "ChuteRim.001",
-        "Bin_-1_1_2",
-        "Bin_-1_1_2_Rim",
-        "Bin_-1_1_2_Rim.001",
         "Chute.001",
         "ChuteIndicator.001",
         "ChuteRim.002",
         "ChuteRim.003",
-        "Bin_-1_1_3",
-        "Bin_-1_1_3_Rim",
-        "Bin_-1_1_3_Rim.001",
         "Chute.002",
         "ChuteIndicator.002",
         "ChuteRim.004",
         "ChuteRim.005",
-        "Bin_-1_1_4",
-        "Bin_-1_1_4_Rim",
-        "Bin_-1_1_4_Rim.001",
         "Chute.003",
         "ChuteIndicator.003",
         "ChuteRim.006",
         "ChuteRim.007",
-        "Bin_-1_2_1",
-        "Bin_-1_2_1_Rim",
-        "Bin_-1_2_1_Rim.001",
         "Chute.004",
         "ChuteIndicator.004",
         "ChuteRim.008",
         "ChuteRim.009",
-        "Bin_-1_2_2",
-        "Bin_-1_2_2_Rim",
-        "Bin_-1_2_2_Rim.001",
         "Chute.005",
         "ChuteIndicator.005",
         "ChuteRim.010",
         "ChuteRim.011",
-        "Bin_-1_2_3",
-        "Bin_-1_2_3_Rim",
-        "Bin_-1_2_3_Rim.001",
         "Chute.006",
         "ChuteIndicator.006",
         "ChuteRim.012",
         "ChuteRim.013",
-        "Bin_-1_2_4",
-        "Bin_-1_2_4_Rim",
-        "Bin_-1_2_4_Rim.001",
         "Chute.007",
         "ChuteIndicator.007",
         "ChuteRim.014",
         "ChuteRim.015",
-        "Bin_-1_3_1",
-        "Bin_-1_3_1_Rim",
-        "Bin_-1_3_1_Rim.001",
         "Chute.008",
         "ChuteIndicator.008",
         "ChuteRim.016",
         "ChuteRim.017",
-        "Bin_-1_3_2",
-        "Bin_-1_3_2_Rim",
-        "Bin_-1_3_2_Rim.001",
         "Chute.009",
         "ChuteIndicator.009",
         "ChuteRim.018",
         "ChuteRim.019",
-        "Bin_-1_3_3",
-        "Bin_-1_3_3_Rim",
-        "Bin_-1_3_3_Rim.001",
         "Chute.010",
         "ChuteIndicator.010",
         "ChuteRim.020",
         "ChuteRim.021",
-        "Bin_-1_3_4",
-        "Bin_-1_3_4_Rim",
-        "Bin_-1_3_4_Rim.001",
         "Chute.011",
         "ChuteIndicator.011",
         "ChuteRim.022",
         "ChuteRim.023",
-        "Bin_-1_4_1",
-        "Bin_-1_4_1_Rim",
-        "Bin_-1_4_1_Rim.001",
         "Chute.012",
         "ChuteIndicator.012",
         "ChuteRim.024",
         "ChuteRim.025",
-        "Bin_-1_4_2",
-        "Bin_-1_4_2_Rim",
-        "Bin_-1_4_2_Rim.001",
         "Chute.013",
         "ChuteIndicator.013",
         "ChuteRim.026",
         "ChuteRim.027",
-        "Bin_-1_4_3",
-        "Bin_-1_4_3_Rim",
-        "Bin_-1_4_3_Rim.001",
         "Chute.014",
         "ChuteIndicator.014",
         "ChuteRim.028",
         "ChuteRim.029",
-        "Bin_-1_4_4",
-        "Bin_-1_4_4_Rim",
-        "Bin_-1_4_4_Rim.001",
         "Chute.015",
         "ChuteIndicator.015",
         "ChuteRim.030",
         "ChuteRim.031",
-        "Bin_-1_5_1",
-        "Bin_-1_5_1_Rim",
-        "Bin_-1_5_1_Rim.001",
         "Chute.016",
         "ChuteIndicator.016",
         "ChuteRim.032",
         "ChuteRim.033",
-        "Bin_-1_5_2",
-        "Bin_-1_5_2_Rim",
-        "Bin_-1_5_2_Rim.001",
         "Chute.017",
         "ChuteIndicator.017",
         "ChuteRim.034",
         "ChuteRim.035",
-        "Bin_-1_5_3",
-        "Bin_-1_5_3_Rim",
-        "Bin_-1_5_3_Rim.001",
         "Chute.018",
         "ChuteIndicator.018",
         "ChuteRim.036",
         "ChuteRim.037",
-        "Bin_-1_5_4",
-        "Bin_-1_5_4_Rim",
-        "Bin_-1_5_4_Rim.001",
         "Chute.019",
         "ChuteIndicator.019",
         "ChuteRim.038",
         "ChuteRim.039",
-        "Bin_-1_6_1",
-        "Bin_-1_6_1_Rim",
-        "Bin_-1_6_1_Rim.001",
         "Chute.020",
         "ChuteIndicator.020",
         "ChuteRim.040",
         "ChuteRim.041",
-        "Bin_-1_6_2",
-        "Bin_-1_6_2_Rim",
-        "Bin_-1_6_2_Rim.001",
         "Chute.021",
         "ChuteIndicator.021",
         "ChuteRim.042",
         "ChuteRim.043",
-        "Bin_-1_6_3",
-        "Bin_-1_6_3_Rim",
-        "Bin_-1_6_3_Rim.001",
         "Chute.022",
         "ChuteIndicator.022",
         "ChuteRim.044",
         "ChuteRim.045",
-        "Bin_-1_6_4",
-        "Bin_-1_6_4_Rim",
-        "Bin_-1_6_4_Rim.001",
         "Chute.023",
         "ChuteIndicator.023",
         "ChuteRim.046",
         "ChuteRim.047",
-        "Bin_-1_7_1",
-        "Bin_-1_7_1_Rim",
-        "Bin_-1_7_1_Rim.001",
         "Chute.024",
         "ChuteIndicator.024",
         "ChuteRim.048",
         "ChuteRim.049",
-        "Bin_-1_7_2",
-        "Bin_-1_7_2_Rim",
-        "Bin_-1_7_2_Rim.001",
         "Chute.025",
         "ChuteIndicator.025",
         "ChuteRim.050",
         "ChuteRim.051",
-        "Bin_-1_7_3",
-        "Bin_-1_7_3_Rim",
-        "Bin_-1_7_3_Rim.001",
         "Chute.026",
         "ChuteIndicator.026",
         "ChuteRim.052",
         "ChuteRim.053",
-        "Bin_-1_7_4",
-        "Bin_-1_7_4_Rim",
-        "Bin_-1_7_4_Rim.001",
         "Chute.027",
         "ChuteIndicator.027",
         "ChuteRim.054",
         "ChuteRim.055",
-        "Bin_-1_8_1",
-        "Bin_-1_8_1_Rim",
-        "Bin_-1_8_1_Rim.001",
         "Chute.028",
         "ChuteIndicator.028",
         "ChuteRim.056",
         "ChuteRim.057",
-        "Bin_-1_8_2",
-        "Bin_-1_8_2_Rim",
-        "Bin_-1_8_2_Rim.001",
         "Chute.029",
         "ChuteIndicator.029",
         "ChuteRim.058",
         "ChuteRim.059",
-        "Bin_-1_8_3",
-        "Bin_-1_8_3_Rim",
-        "Bin_-1_8_3_Rim.001",
         "Chute.030",
         "ChuteIndicator.030",
         "ChuteRim.060",
         "ChuteRim.061",
-        "Bin_-1_8_4",
-        "Bin_-1_8_4_Rim",
-        "Bin_-1_8_4_Rim.001",
         "Chute.031",
         "ChuteIndicator.031",
         "ChuteRim.062",
         "ChuteRim.063",
-        "CartRail",
-        "OuterCartRail",
-        "CartRail.001",
-        "OuterCartRail.001",
-        "CartRail.002",
-        "OuterCartRail.002",
-        "CartRail.003",
-        "OuterCartRail.003",
-        "D28Leg",
-        "Caster",
-        "D28Leg.001",
-        "Caster.001",
-        "D28Leg.002",
-        "Caster.002",
-        "D28Leg.003",
-        "Caster.003",
-        "D28Leg.004",
-        "Caster.004",
-        "D28Leg.005",
-        "Caster.005",
-        "D28Leg.006",
-        "Caster.006",
-        "D28Leg.007",
-        "Caster.007",
-        "D28Leg.008",
-        "Caster.008",
-        "D28Leg.009",
-        "Caster.009",
         "Header",
-        "Bin_1_1_1",
-        "Bin_1_1_1_Rim",
-        "Bin_1_1_1_Rim.001",
         "Chute.032",
         "ChuteIndicator.032",
         "ChuteRim.064",
         "ChuteRim.065",
-        "Bin_1_1_2",
-        "Bin_1_1_2_Rim",
-        "Bin_1_1_2_Rim.001",
         "Chute.033",
         "ChuteIndicator.033",
         "ChuteRim.066",
         "ChuteRim.067",
-        "Bin_1_1_3",
-        "Bin_1_1_3_Rim",
-        "Bin_1_1_3_Rim.001",
         "Chute.034",
         "ChuteIndicator.034",
         "ChuteRim.068",
         "ChuteRim.069",
-        "Bin_1_1_4",
-        "Bin_1_1_4_Rim",
-        "Bin_1_1_4_Rim.001",
         "Chute.035",
         "ChuteIndicator.035",
         "ChuteRim.070",
         "ChuteRim.071",
-        "Bin_1_2_1",
-        "Bin_1_2_1_Rim",
-        "Bin_1_2_1_Rim.001",
         "Chute.036",
         "ChuteIndicator.036",
         "ChuteRim.072",
         "ChuteRim.073",
-        "Bin_1_2_2",
-        "Bin_1_2_2_Rim",
-        "Bin_1_2_2_Rim.001",
         "Chute.037",
         "ChuteIndicator.037",
         "ChuteRim.074",
         "ChuteRim.075",
-        "Bin_1_2_3",
-        "Bin_1_2_3_Rim",
-        "Bin_1_2_3_Rim.001",
         "Chute.038",
         "ChuteIndicator.038",
         "ChuteRim.076",
         "ChuteRim.077",
-        "Bin_1_2_4",
-        "Bin_1_2_4_Rim",
-        "Bin_1_2_4_Rim.001",
         "Chute.039",
         "ChuteIndicator.039",
         "ChuteRim.078",
         "ChuteRim.079",
-        "Bin_1_3_1",
-        "Bin_1_3_1_Rim",
-        "Bin_1_3_1_Rim.001",
         "Chute.040",
         "ChuteIndicator.040",
         "ChuteRim.080",
         "ChuteRim.081",
-        "Bin_1_3_2",
-        "Bin_1_3_2_Rim",
-        "Bin_1_3_2_Rim.001",
         "Chute.041",
         "ChuteIndicator.041",
         "ChuteRim.082",
         "ChuteRim.083",
-        "Bin_1_3_3",
-        "Bin_1_3_3_Rim",
-        "Bin_1_3_3_Rim.001",
         "Chute.042",
         "ChuteIndicator.042",
         "ChuteRim.084",
         "ChuteRim.085",
-        "Bin_1_3_4",
-        "Bin_1_3_4_Rim",
-        "Bin_1_3_4_Rim.001",
         "Chute.043",
         "ChuteIndicator.043",
         "ChuteRim.086",
         "ChuteRim.087",
-        "Bin_1_4_1",
-        "Bin_1_4_1_Rim",
-        "Bin_1_4_1_Rim.001",
         "Chute.044",
         "ChuteIndicator.044",
         "ChuteRim.088",
         "ChuteRim.089",
-        "Bin_1_4_2",
-        "Bin_1_4_2_Rim",
-        "Bin_1_4_2_Rim.001",
         "Chute.045",
         "ChuteIndicator.045",
         "ChuteRim.090",
         "ChuteRim.091",
-        "Bin_1_4_3",
-        "Bin_1_4_3_Rim",
-        "Bin_1_4_3_Rim.001",
         "Chute.046",
         "ChuteIndicator.046",
         "ChuteRim.092",
         "ChuteRim.093",
-        "Bin_1_4_4",
-        "Bin_1_4_4_Rim",
-        "Bin_1_4_4_Rim.001",
         "Chute.047",
         "ChuteIndicator.047",
         "ChuteRim.094",
         "ChuteRim.095",
-        "Bin_1_5_1",
-        "Bin_1_5_1_Rim",
-        "Bin_1_5_1_Rim.001",
         "Chute.048",
         "ChuteIndicator.048",
         "ChuteRim.096",
         "ChuteRim.097",
-        "Bin_1_5_2",
-        "Bin_1_5_2_Rim",
-        "Bin_1_5_2_Rim.001",
         "Chute.049",
         "ChuteIndicator.049",
         "ChuteRim.098",
         "ChuteRim.099",
-        "Bin_1_5_3",
-        "Bin_1_5_3_Rim",
-        "Bin_1_5_3_Rim.001",
         "Chute.050",
         "ChuteIndicator.050",
         "ChuteRim.100",
         "ChuteRim.101",
-        "Bin_1_5_4",
-        "Bin_1_5_4_Rim",
-        "Bin_1_5_4_Rim.001",
         "Chute.051",
         "ChuteIndicator.051",
         "ChuteRim.102",
         "ChuteRim.103",
-        "Bin_1_6_1",
-        "Bin_1_6_1_Rim",
-        "Bin_1_6_1_Rim.001",
         "Chute.052",
         "ChuteIndicator.052",
         "ChuteRim.104",
         "ChuteRim.105",
-        "Bin_1_6_2",
-        "Bin_1_6_2_Rim",
-        "Bin_1_6_2_Rim.001",
         "Chute.053",
         "ChuteIndicator.053",
         "ChuteRim.106",
         "ChuteRim.107",
-        "Bin_1_6_3",
-        "Bin_1_6_3_Rim",
-        "Bin_1_6_3_Rim.001",
         "Chute.054",
         "ChuteIndicator.054",
         "ChuteRim.108",
         "ChuteRim.109",
-        "Bin_1_6_4",
-        "Bin_1_6_4_Rim",
-        "Bin_1_6_4_Rim.001",
         "Chute.055",
         "ChuteIndicator.055",
         "ChuteRim.110",
         "ChuteRim.111",
-        "Bin_1_7_1",
-        "Bin_1_7_1_Rim",
-        "Bin_1_7_1_Rim.001",
         "Chute.056",
         "ChuteIndicator.056",
         "ChuteRim.112",
         "ChuteRim.113",
-        "Bin_1_7_2",
-        "Bin_1_7_2_Rim",
-        "Bin_1_7_2_Rim.001",
         "Chute.057",
         "ChuteIndicator.057",
         "ChuteRim.114",
         "ChuteRim.115",
-        "Bin_1_7_3",
-        "Bin_1_7_3_Rim",
-        "Bin_1_7_3_Rim.001",
         "Chute.058",
         "ChuteIndicator.058",
         "ChuteRim.116",
         "ChuteRim.117",
-        "Bin_1_7_4",
-        "Bin_1_7_4_Rim",
-        "Bin_1_7_4_Rim.001",
         "Chute.059",
         "ChuteIndicator.059",
         "ChuteRim.118",
         "ChuteRim.119",
-        "Bin_1_8_1",
-        "Bin_1_8_1_Rim",
-        "Bin_1_8_1_Rim.001",
         "Chute.060",
         "ChuteIndicator.060",
         "ChuteRim.120",
         "ChuteRim.121",
-        "Bin_1_8_2",
-        "Bin_1_8_2_Rim",
-        "Bin_1_8_2_Rim.001",
         "Chute.061",
         "ChuteIndicator.061",
         "ChuteRim.122",
         "ChuteRim.123",
-        "Bin_1_8_3",
-        "Bin_1_8_3_Rim",
-        "Bin_1_8_3_Rim.001",
         "Chute.062",
         "ChuteIndicator.062",
         "ChuteRim.124",
         "ChuteRim.125",
-        "Bin_1_8_4",
-        "Bin_1_8_4_Rim",
-        "Bin_1_8_4_Rim.001",
         "Chute.063",
         "ChuteIndicator.063",
         "ChuteRim.126",
         "ChuteRim.127",
-        "CartRail.004",
-        "OuterCartRail.004",
-        "CartRail.005",
-        "OuterCartRail.005",
-        "CartRail.006",
-        "OuterCartRail.006",
-        "CartRail.007",
-        "OuterCartRail.007",
-        "D28Leg.010",
-        "Caster.010",
-        "D28Leg.011",
-        "Caster.011",
-        "D28Leg.012",
-        "Caster.012",
-        "D28Leg.013",
-        "Caster.013",
-        "D28Leg.014",
-        "Caster.014",
-        "D28Leg.015",
-        "Caster.015",
-        "D28Leg.016",
-        "Caster.016",
-        "D28Leg.017",
-        "Caster.017",
-        "D28Leg.018",
-        "Caster.018",
-        "D28Leg.019",
-        "Caster.019",
         "Header.001"
       ]
     },
     "cad120": {
       "removed_source_objects": [
+        "Bin_-1_1_1.003",
+        "Bin_-1_1_1_Rim.002",
+        "Bin_-1_1_1_Rim.003",
+        "Bin_-1_1_2.003",
+        "Bin_-1_1_2_Rim.002",
+        "Bin_-1_1_2_Rim.003",
+        "Bin_-1_1_3.003",
+        "Bin_-1_1_3_Rim.002",
+        "Bin_-1_1_3_Rim.003",
+        "Bin_-1_1_4.003",
+        "Bin_-1_1_4_Rim.002",
+        "Bin_-1_1_4_Rim.003",
+        "Bin_-1_2_1.003",
+        "Bin_-1_2_1_Rim.002",
+        "Bin_-1_2_1_Rim.003",
+        "Bin_-1_2_2.003",
+        "Bin_-1_2_2_Rim.002",
+        "Bin_-1_2_2_Rim.003",
+        "Bin_-1_2_3.003",
+        "Bin_-1_2_3_Rim.002",
+        "Bin_-1_2_3_Rim.003",
+        "Bin_-1_2_4.003",
+        "Bin_-1_2_4_Rim.002",
+        "Bin_-1_2_4_Rim.003",
+        "Bin_-1_3_1.003",
+        "Bin_-1_3_1_Rim.002",
+        "Bin_-1_3_1_Rim.003",
+        "Bin_-1_3_2.003",
+        "Bin_-1_3_2_Rim.002",
+        "Bin_-1_3_2_Rim.003",
+        "Bin_-1_3_3.003",
+        "Bin_-1_3_3_Rim.002",
+        "Bin_-1_3_3_Rim.003",
+        "Bin_-1_3_4.003",
+        "Bin_-1_3_4_Rim.002",
+        "Bin_-1_3_4_Rim.003",
+        "Bin_-1_4_1.003",
+        "Bin_-1_4_1_Rim.002",
+        "Bin_-1_4_1_Rim.003",
+        "Bin_-1_4_2.003",
+        "Bin_-1_4_2_Rim.002",
+        "Bin_-1_4_2_Rim.003",
+        "Bin_-1_4_3.003",
+        "Bin_-1_4_3_Rim.002",
+        "Bin_-1_4_3_Rim.003",
+        "Bin_-1_4_4.003",
+        "Bin_-1_4_4_Rim.002",
+        "Bin_-1_4_4_Rim.003",
+        "Bin_-1_5_1.003",
+        "Bin_-1_5_1_Rim.002",
+        "Bin_-1_5_1_Rim.003",
+        "Bin_-1_5_2.003",
+        "Bin_-1_5_2_Rim.002",
+        "Bin_-1_5_2_Rim.003",
+        "Bin_-1_5_3.003",
+        "Bin_-1_5_3_Rim.002",
+        "Bin_-1_5_3_Rim.003",
+        "Bin_-1_5_4.003",
+        "Bin_-1_5_4_Rim.002",
+        "Bin_-1_5_4_Rim.003",
+        "Bin_-1_6_1.003",
+        "Bin_-1_6_1_Rim.002",
+        "Bin_-1_6_1_Rim.003",
+        "Bin_-1_6_2.003",
+        "Bin_-1_6_2_Rim.002",
+        "Bin_-1_6_2_Rim.003",
+        "Bin_-1_6_3.003",
+        "Bin_-1_6_3_Rim.002",
+        "Bin_-1_6_3_Rim.003",
+        "Bin_-1_6_4.003",
+        "Bin_-1_6_4_Rim.002",
+        "Bin_-1_6_4_Rim.003",
+        "Bin_-1_7_1.003",
+        "Bin_-1_7_1_Rim.002",
+        "Bin_-1_7_1_Rim.003",
+        "Bin_-1_7_2.003",
+        "Bin_-1_7_2_Rim.002",
+        "Bin_-1_7_2_Rim.003",
+        "Bin_-1_7_3.003",
+        "Bin_-1_7_3_Rim.002",
+        "Bin_-1_7_3_Rim.003",
+        "Bin_-1_7_4.003",
+        "Bin_-1_7_4_Rim.002",
+        "Bin_-1_7_4_Rim.003",
+        "Bin_-1_8_1.003",
+        "Bin_-1_8_1_Rim.002",
+        "Bin_-1_8_1_Rim.003",
+        "Bin_-1_8_2.003",
+        "Bin_-1_8_2_Rim.002",
+        "Bin_-1_8_2_Rim.003",
+        "Bin_-1_8_3.003",
+        "Bin_-1_8_3_Rim.002",
+        "Bin_-1_8_3_Rim.003",
+        "Bin_-1_8_4.003",
+        "Bin_-1_8_4_Rim.002",
+        "Bin_-1_8_4_Rim.003",
+        "Bin_-1_9_1",
+        "Bin_-1_9_1_Rim",
+        "Bin_-1_9_1_Rim.001",
+        "Bin_-1_9_2",
+        "Bin_-1_9_2_Rim",
+        "Bin_-1_9_2_Rim.001",
+        "Bin_-1_9_3",
+        "Bin_-1_9_3_Rim",
+        "Bin_-1_9_3_Rim.001",
+        "Bin_-1_9_4",
+        "Bin_-1_9_4_Rim",
+        "Bin_-1_9_4_Rim.001",
+        "Bin_-1_10_1",
+        "Bin_-1_10_1_Rim",
+        "Bin_-1_10_1_Rim.001",
+        "Bin_-1_10_2",
+        "Bin_-1_10_2_Rim",
+        "Bin_-1_10_2_Rim.001",
+        "Bin_-1_10_3",
+        "Bin_-1_10_3_Rim",
+        "Bin_-1_10_3_Rim.001",
+        "Bin_-1_10_4",
+        "Bin_-1_10_4_Rim",
+        "Bin_-1_10_4_Rim.001",
+        "Bin_-1_11_1",
+        "Bin_-1_11_1_Rim",
+        "Bin_-1_11_1_Rim.001",
+        "Bin_-1_11_2",
+        "Bin_-1_11_2_Rim",
+        "Bin_-1_11_2_Rim.001",
+        "Bin_-1_11_3",
+        "Bin_-1_11_3_Rim",
+        "Bin_-1_11_3_Rim.001",
+        "Bin_-1_11_4",
+        "Bin_-1_11_4_Rim",
+        "Bin_-1_11_4_Rim.001",
+        "Bin_-1_12_1",
+        "Bin_-1_12_1_Rim",
+        "Bin_-1_12_1_Rim.001",
+        "Bin_-1_12_2",
+        "Bin_-1_12_2_Rim",
+        "Bin_-1_12_2_Rim.001",
+        "Bin_-1_12_3",
+        "Bin_-1_12_3_Rim",
+        "Bin_-1_12_3_Rim.001",
+        "Bin_-1_12_4",
+        "Bin_-1_12_4_Rim",
+        "Bin_-1_12_4_Rim.001",
+        "Bin_-1_13_1",
+        "Bin_-1_13_1_Rim",
+        "Bin_-1_13_1_Rim.001",
+        "Bin_-1_13_2",
+        "Bin_-1_13_2_Rim",
+        "Bin_-1_13_2_Rim.001",
+        "Bin_-1_13_3",
+        "Bin_-1_13_3_Rim",
+        "Bin_-1_13_3_Rim.001",
+        "Bin_-1_13_4",
+        "Bin_-1_13_4_Rim",
+        "Bin_-1_13_4_Rim.001",
+        "Bin_-1_14_1",
+        "Bin_-1_14_1_Rim",
+        "Bin_-1_14_1_Rim.001",
+        "Bin_-1_14_2",
+        "Bin_-1_14_2_Rim",
+        "Bin_-1_14_2_Rim.001",
+        "Bin_-1_14_3",
+        "Bin_-1_14_3_Rim",
+        "Bin_-1_14_3_Rim.001",
+        "Bin_-1_14_4",
+        "Bin_-1_14_4_Rim",
+        "Bin_-1_14_4_Rim.001",
+        "Bin_-1_15_1",
+        "Bin_-1_15_1_Rim",
+        "Bin_-1_15_1_Rim.001",
+        "Bin_-1_15_2",
+        "Bin_-1_15_2_Rim",
+        "Bin_-1_15_2_Rim.001",
+        "Bin_-1_15_3",
+        "Bin_-1_15_3_Rim",
+        "Bin_-1_15_3_Rim.001",
+        "Bin_-1_15_4",
+        "Bin_-1_15_4_Rim",
+        "Bin_-1_15_4_Rim.001",
+        "CartRail.024",
+        "OuterCartRail.024",
         "BeltRail.024",
+        "CartRail.025",
+        "OuterCartRail.025",
         "BeltRail.025",
+        "CartRail.026",
+        "OuterCartRail.026",
         "BeltRail.026",
+        "CartRail.027",
+        "OuterCartRail.027",
         "BeltRail.027",
+        "D28Leg.060",
+        "Caster.020",
+        "D28Leg.061",
+        "Caster.021",
+        "D28Leg.062",
+        "Caster.022",
+        "D28Leg.063",
+        "Caster.023",
+        "D28Leg.064",
+        "Caster.024",
+        "D28Leg.065",
+        "Caster.025",
+        "D28Leg.066",
+        "Caster.026",
+        "D28Leg.067",
+        "Caster.027",
+        "Bin_1_1_1.003",
+        "Bin_1_1_1_Rim.002",
+        "Bin_1_1_1_Rim.003",
+        "Bin_1_1_2.003",
+        "Bin_1_1_2_Rim.002",
+        "Bin_1_1_2_Rim.003",
+        "Bin_1_1_3.003",
+        "Bin_1_1_3_Rim.002",
+        "Bin_1_1_3_Rim.003",
+        "Bin_1_1_4.003",
+        "Bin_1_1_4_Rim.002",
+        "Bin_1_1_4_Rim.003",
+        "Bin_1_2_1.003",
+        "Bin_1_2_1_Rim.002",
+        "Bin_1_2_1_Rim.003",
+        "Bin_1_2_2.003",
+        "Bin_1_2_2_Rim.002",
+        "Bin_1_2_2_Rim.003",
+        "Bin_1_2_3.003",
+        "Bin_1_2_3_Rim.002",
+        "Bin_1_2_3_Rim.003",
+        "Bin_1_2_4.003",
+        "Bin_1_2_4_Rim.002",
+        "Bin_1_2_4_Rim.003",
+        "Bin_1_3_1.003",
+        "Bin_1_3_1_Rim.002",
+        "Bin_1_3_1_Rim.003",
+        "Bin_1_3_2.003",
+        "Bin_1_3_2_Rim.002",
+        "Bin_1_3_2_Rim.003",
+        "Bin_1_3_3.003",
+        "Bin_1_3_3_Rim.002",
+        "Bin_1_3_3_Rim.003",
+        "Bin_1_3_4.003",
+        "Bin_1_3_4_Rim.002",
+        "Bin_1_3_4_Rim.003",
+        "Bin_1_4_1.003",
+        "Bin_1_4_1_Rim.002",
+        "Bin_1_4_1_Rim.003",
+        "Bin_1_4_2.003",
+        "Bin_1_4_2_Rim.002",
+        "Bin_1_4_2_Rim.003",
+        "Bin_1_4_3.003",
+        "Bin_1_4_3_Rim.002",
+        "Bin_1_4_3_Rim.003",
+        "Bin_1_4_4.003",
+        "Bin_1_4_4_Rim.002",
+        "Bin_1_4_4_Rim.003",
+        "Bin_1_5_1.003",
+        "Bin_1_5_1_Rim.002",
+        "Bin_1_5_1_Rim.003",
+        "Bin_1_5_2.003",
+        "Bin_1_5_2_Rim.002",
+        "Bin_1_5_2_Rim.003",
+        "Bin_1_5_3.003",
+        "Bin_1_5_3_Rim.002",
+        "Bin_1_5_3_Rim.003",
+        "Bin_1_5_4.003",
+        "Bin_1_5_4_Rim.002",
+        "Bin_1_5_4_Rim.003",
+        "Bin_1_6_1.003",
+        "Bin_1_6_1_Rim.002",
+        "Bin_1_6_1_Rim.003",
+        "Bin_1_6_2.003",
+        "Bin_1_6_2_Rim.002",
+        "Bin_1_6_2_Rim.003",
+        "Bin_1_6_3.003",
+        "Bin_1_6_3_Rim.002",
+        "Bin_1_6_3_Rim.003",
+        "Bin_1_6_4.003",
+        "Bin_1_6_4_Rim.002",
+        "Bin_1_6_4_Rim.003",
+        "Bin_1_7_1.003",
+        "Bin_1_7_1_Rim.002",
+        "Bin_1_7_1_Rim.003",
+        "Bin_1_7_2.003",
+        "Bin_1_7_2_Rim.002",
+        "Bin_1_7_2_Rim.003",
+        "Bin_1_7_3.003",
+        "Bin_1_7_3_Rim.002",
+        "Bin_1_7_3_Rim.003",
+        "Bin_1_7_4.003",
+        "Bin_1_7_4_Rim.002",
+        "Bin_1_7_4_Rim.003",
+        "Bin_1_8_1.003",
+        "Bin_1_8_1_Rim.002",
+        "Bin_1_8_1_Rim.003",
+        "Bin_1_8_2.003",
+        "Bin_1_8_2_Rim.002",
+        "Bin_1_8_2_Rim.003",
+        "Bin_1_8_3.003",
+        "Bin_1_8_3_Rim.002",
+        "Bin_1_8_3_Rim.003",
+        "Bin_1_8_4.003",
+        "Bin_1_8_4_Rim.002",
+        "Bin_1_8_4_Rim.003",
+        "Bin_1_9_1",
+        "Bin_1_9_1_Rim",
+        "Bin_1_9_1_Rim.001",
+        "Bin_1_9_2",
+        "Bin_1_9_2_Rim",
+        "Bin_1_9_2_Rim.001",
+        "Bin_1_9_3",
+        "Bin_1_9_3_Rim",
+        "Bin_1_9_3_Rim.001",
+        "Bin_1_9_4",
+        "Bin_1_9_4_Rim",
+        "Bin_1_9_4_Rim.001",
+        "Bin_1_10_1",
+        "Bin_1_10_1_Rim",
+        "Bin_1_10_1_Rim.001",
+        "Bin_1_10_2",
+        "Bin_1_10_2_Rim",
+        "Bin_1_10_2_Rim.001",
+        "Bin_1_10_3",
+        "Bin_1_10_3_Rim",
+        "Bin_1_10_3_Rim.001",
+        "Bin_1_10_4",
+        "Bin_1_10_4_Rim",
+        "Bin_1_10_4_Rim.001",
+        "Bin_1_11_1",
+        "Bin_1_11_1_Rim",
+        "Bin_1_11_1_Rim.001",
+        "Bin_1_11_2",
+        "Bin_1_11_2_Rim",
+        "Bin_1_11_2_Rim.001",
+        "Bin_1_11_3",
+        "Bin_1_11_3_Rim",
+        "Bin_1_11_3_Rim.001",
+        "Bin_1_11_4",
+        "Bin_1_11_4_Rim",
+        "Bin_1_11_4_Rim.001",
+        "Bin_1_12_1",
+        "Bin_1_12_1_Rim",
+        "Bin_1_12_1_Rim.001",
+        "Bin_1_12_2",
+        "Bin_1_12_2_Rim",
+        "Bin_1_12_2_Rim.001",
+        "Bin_1_12_3",
+        "Bin_1_12_3_Rim",
+        "Bin_1_12_3_Rim.001",
+        "Bin_1_12_4",
+        "Bin_1_12_4_Rim",
+        "Bin_1_12_4_Rim.001",
+        "Bin_1_13_1",
+        "Bin_1_13_1_Rim",
+        "Bin_1_13_1_Rim.001",
+        "Bin_1_13_2",
+        "Bin_1_13_2_Rim",
+        "Bin_1_13_2_Rim.001",
+        "Bin_1_13_3",
+        "Bin_1_13_3_Rim",
+        "Bin_1_13_3_Rim.001",
+        "Bin_1_13_4",
+        "Bin_1_13_4_Rim",
+        "Bin_1_13_4_Rim.001",
+        "Bin_1_14_1",
+        "Bin_1_14_1_Rim",
+        "Bin_1_14_1_Rim.001",
+        "Bin_1_14_2",
+        "Bin_1_14_2_Rim",
+        "Bin_1_14_2_Rim.001",
+        "Bin_1_14_3",
+        "Bin_1_14_3_Rim",
+        "Bin_1_14_3_Rim.001",
+        "Bin_1_14_4",
+        "Bin_1_14_4_Rim",
+        "Bin_1_14_4_Rim.001",
+        "Bin_1_15_1",
+        "Bin_1_15_1_Rim",
+        "Bin_1_15_1_Rim.001",
+        "Bin_1_15_2",
+        "Bin_1_15_2_Rim",
+        "Bin_1_15_2_Rim.001",
+        "Bin_1_15_3",
+        "Bin_1_15_3_Rim",
+        "Bin_1_15_3_Rim.001",
+        "Bin_1_15_4",
+        "Bin_1_15_4_Rim",
+        "Bin_1_15_4_Rim.001",
+        "CartRail.028",
+        "OuterCartRail.028",
         "BeltRail.028",
+        "CartRail.029",
+        "OuterCartRail.029",
         "BeltRail.029",
+        "CartRail.030",
+        "OuterCartRail.030",
         "BeltRail.030",
+        "CartRail.031",
+        "OuterCartRail.031",
         "BeltRail.031",
+        "D28Leg.068",
+        "Caster.028",
+        "D28Leg.069",
+        "Caster.029",
+        "D28Leg.070",
+        "Caster.030",
+        "D28Leg.071",
+        "Caster.031",
+        "D28Leg.072",
+        "Caster.032",
+        "D28Leg.073",
+        "Caster.033",
+        "D28Leg.074",
+        "Caster.034",
+        "D28Leg.075",
+        "Caster.035",
         "MainBelt.012",
         "BeltSeam.024",
         "BeltSeam.025",
@@ -7540,899 +9731,493 @@
         "BaseShoe.007"
       ],
       "retained_source_objects": [
-        "Bin_-1_1_1.003",
-        "Bin_-1_1_1_Rim.002",
-        "Bin_-1_1_1_Rim.003",
         "Chute.192",
         "ChuteIndicator.128",
         "ChuteRim.256",
         "ChuteRim.257",
-        "Bin_-1_1_2.003",
-        "Bin_-1_1_2_Rim.002",
-        "Bin_-1_1_2_Rim.003",
         "Chute.193",
         "ChuteIndicator.129",
         "ChuteRim.258",
         "ChuteRim.259",
-        "Bin_-1_1_3.003",
-        "Bin_-1_1_3_Rim.002",
-        "Bin_-1_1_3_Rim.003",
         "Chute.194",
         "ChuteIndicator.130",
         "ChuteRim.260",
         "ChuteRim.261",
-        "Bin_-1_1_4.003",
-        "Bin_-1_1_4_Rim.002",
-        "Bin_-1_1_4_Rim.003",
         "Chute.195",
         "ChuteIndicator.131",
         "ChuteRim.262",
         "ChuteRim.263",
-        "Bin_-1_2_1.003",
-        "Bin_-1_2_1_Rim.002",
-        "Bin_-1_2_1_Rim.003",
         "Chute.196",
         "ChuteIndicator.132",
         "ChuteRim.264",
         "ChuteRim.265",
-        "Bin_-1_2_2.003",
-        "Bin_-1_2_2_Rim.002",
-        "Bin_-1_2_2_Rim.003",
         "Chute.197",
         "ChuteIndicator.133",
         "ChuteRim.266",
         "ChuteRim.267",
-        "Bin_-1_2_3.003",
-        "Bin_-1_2_3_Rim.002",
-        "Bin_-1_2_3_Rim.003",
         "Chute.198",
         "ChuteIndicator.134",
         "ChuteRim.268",
         "ChuteRim.269",
-        "Bin_-1_2_4.003",
-        "Bin_-1_2_4_Rim.002",
-        "Bin_-1_2_4_Rim.003",
         "Chute.199",
         "ChuteIndicator.135",
         "ChuteRim.270",
         "ChuteRim.271",
-        "Bin_-1_3_1.003",
-        "Bin_-1_3_1_Rim.002",
-        "Bin_-1_3_1_Rim.003",
         "Chute.200",
         "ChuteIndicator.136",
         "ChuteRim.272",
         "ChuteRim.273",
-        "Bin_-1_3_2.003",
-        "Bin_-1_3_2_Rim.002",
-        "Bin_-1_3_2_Rim.003",
         "Chute.201",
         "ChuteIndicator.137",
         "ChuteRim.274",
         "ChuteRim.275",
-        "Bin_-1_3_3.003",
-        "Bin_-1_3_3_Rim.002",
-        "Bin_-1_3_3_Rim.003",
         "Chute.202",
         "ChuteIndicator.138",
         "ChuteRim.276",
         "ChuteRim.277",
-        "Bin_-1_3_4.003",
-        "Bin_-1_3_4_Rim.002",
-        "Bin_-1_3_4_Rim.003",
         "Chute.203",
         "ChuteIndicator.139",
         "ChuteRim.278",
         "ChuteRim.279",
-        "Bin_-1_4_1.003",
-        "Bin_-1_4_1_Rim.002",
-        "Bin_-1_4_1_Rim.003",
         "Chute.204",
         "ChuteIndicator.140",
         "ChuteRim.280",
         "ChuteRim.281",
-        "Bin_-1_4_2.003",
-        "Bin_-1_4_2_Rim.002",
-        "Bin_-1_4_2_Rim.003",
         "Chute.205",
         "ChuteIndicator.141",
         "ChuteRim.282",
         "ChuteRim.283",
-        "Bin_-1_4_3.003",
-        "Bin_-1_4_3_Rim.002",
-        "Bin_-1_4_3_Rim.003",
         "Chute.206",
         "ChuteIndicator.142",
         "ChuteRim.284",
         "ChuteRim.285",
-        "Bin_-1_4_4.003",
-        "Bin_-1_4_4_Rim.002",
-        "Bin_-1_4_4_Rim.003",
         "Chute.207",
         "ChuteIndicator.143",
         "ChuteRim.286",
         "ChuteRim.287",
-        "Bin_-1_5_1.003",
-        "Bin_-1_5_1_Rim.002",
-        "Bin_-1_5_1_Rim.003",
         "Chute.208",
         "ChuteIndicator.144",
         "ChuteRim.288",
         "ChuteRim.289",
-        "Bin_-1_5_2.003",
-        "Bin_-1_5_2_Rim.002",
-        "Bin_-1_5_2_Rim.003",
         "Chute.209",
         "ChuteIndicator.145",
         "ChuteRim.290",
         "ChuteRim.291",
-        "Bin_-1_5_3.003",
-        "Bin_-1_5_3_Rim.002",
-        "Bin_-1_5_3_Rim.003",
         "Chute.210",
         "ChuteIndicator.146",
         "ChuteRim.292",
         "ChuteRim.293",
-        "Bin_-1_5_4.003",
-        "Bin_-1_5_4_Rim.002",
-        "Bin_-1_5_4_Rim.003",
         "Chute.211",
         "ChuteIndicator.147",
         "ChuteRim.294",
         "ChuteRim.295",
-        "Bin_-1_6_1.003",
-        "Bin_-1_6_1_Rim.002",
-        "Bin_-1_6_1_Rim.003",
         "Chute.212",
         "ChuteIndicator.148",
         "ChuteRim.296",
         "ChuteRim.297",
-        "Bin_-1_6_2.003",
-        "Bin_-1_6_2_Rim.002",
-        "Bin_-1_6_2_Rim.003",
         "Chute.213",
         "ChuteIndicator.149",
         "ChuteRim.298",
         "ChuteRim.299",
-        "Bin_-1_6_3.003",
-        "Bin_-1_6_3_Rim.002",
-        "Bin_-1_6_3_Rim.003",
         "Chute.214",
         "ChuteIndicator.150",
         "ChuteRim.300",
         "ChuteRim.301",
-        "Bin_-1_6_4.003",
-        "Bin_-1_6_4_Rim.002",
-        "Bin_-1_6_4_Rim.003",
         "Chute.215",
         "ChuteIndicator.151",
         "ChuteRim.302",
         "ChuteRim.303",
-        "Bin_-1_7_1.003",
-        "Bin_-1_7_1_Rim.002",
-        "Bin_-1_7_1_Rim.003",
         "Chute.216",
         "ChuteIndicator.152",
         "ChuteRim.304",
         "ChuteRim.305",
-        "Bin_-1_7_2.003",
-        "Bin_-1_7_2_Rim.002",
-        "Bin_-1_7_2_Rim.003",
         "Chute.217",
         "ChuteIndicator.153",
         "ChuteRim.306",
         "ChuteRim.307",
-        "Bin_-1_7_3.003",
-        "Bin_-1_7_3_Rim.002",
-        "Bin_-1_7_3_Rim.003",
         "Chute.218",
         "ChuteIndicator.154",
         "ChuteRim.308",
         "ChuteRim.309",
-        "Bin_-1_7_4.003",
-        "Bin_-1_7_4_Rim.002",
-        "Bin_-1_7_4_Rim.003",
         "Chute.219",
         "ChuteIndicator.155",
         "ChuteRim.310",
         "ChuteRim.311",
-        "Bin_-1_8_1.003",
-        "Bin_-1_8_1_Rim.002",
-        "Bin_-1_8_1_Rim.003",
         "Chute.220",
         "ChuteIndicator.156",
         "ChuteRim.312",
         "ChuteRim.313",
-        "Bin_-1_8_2.003",
-        "Bin_-1_8_2_Rim.002",
-        "Bin_-1_8_2_Rim.003",
         "Chute.221",
         "ChuteIndicator.157",
         "ChuteRim.314",
         "ChuteRim.315",
-        "Bin_-1_8_3.003",
-        "Bin_-1_8_3_Rim.002",
-        "Bin_-1_8_3_Rim.003",
         "Chute.222",
         "ChuteIndicator.158",
         "ChuteRim.316",
         "ChuteRim.317",
-        "Bin_-1_8_4.003",
-        "Bin_-1_8_4_Rim.002",
-        "Bin_-1_8_4_Rim.003",
         "Chute.223",
         "ChuteIndicator.159",
         "ChuteRim.318",
         "ChuteRim.319",
-        "Bin_-1_9_1",
-        "Bin_-1_9_1_Rim",
-        "Bin_-1_9_1_Rim.001",
         "Chute.224",
         "ChuteIndicator.160",
         "ChuteRim.320",
         "ChuteRim.321",
-        "Bin_-1_9_2",
-        "Bin_-1_9_2_Rim",
-        "Bin_-1_9_2_Rim.001",
         "Chute.225",
         "ChuteIndicator.161",
         "ChuteRim.322",
         "ChuteRim.323",
-        "Bin_-1_9_3",
-        "Bin_-1_9_3_Rim",
-        "Bin_-1_9_3_Rim.001",
         "Chute.226",
         "ChuteIndicator.162",
         "ChuteRim.324",
         "ChuteRim.325",
-        "Bin_-1_9_4",
-        "Bin_-1_9_4_Rim",
-        "Bin_-1_9_4_Rim.001",
         "Chute.227",
         "ChuteIndicator.163",
         "ChuteRim.326",
         "ChuteRim.327",
-        "Bin_-1_10_1",
-        "Bin_-1_10_1_Rim",
-        "Bin_-1_10_1_Rim.001",
         "Chute.228",
         "ChuteIndicator.164",
         "ChuteRim.328",
         "ChuteRim.329",
-        "Bin_-1_10_2",
-        "Bin_-1_10_2_Rim",
-        "Bin_-1_10_2_Rim.001",
         "Chute.229",
         "ChuteIndicator.165",
         "ChuteRim.330",
         "ChuteRim.331",
-        "Bin_-1_10_3",
-        "Bin_-1_10_3_Rim",
-        "Bin_-1_10_3_Rim.001",
         "Chute.230",
         "ChuteIndicator.166",
         "ChuteRim.332",
         "ChuteRim.333",
-        "Bin_-1_10_4",
-        "Bin_-1_10_4_Rim",
-        "Bin_-1_10_4_Rim.001",
         "Chute.231",
         "ChuteIndicator.167",
         "ChuteRim.334",
         "ChuteRim.335",
-        "Bin_-1_11_1",
-        "Bin_-1_11_1_Rim",
-        "Bin_-1_11_1_Rim.001",
         "Chute.232",
         "ChuteIndicator.168",
         "ChuteRim.336",
         "ChuteRim.337",
-        "Bin_-1_11_2",
-        "Bin_-1_11_2_Rim",
-        "Bin_-1_11_2_Rim.001",
         "Chute.233",
         "ChuteIndicator.169",
         "ChuteRim.338",
         "ChuteRim.339",
-        "Bin_-1_11_3",
-        "Bin_-1_11_3_Rim",
-        "Bin_-1_11_3_Rim.001",
         "Chute.234",
         "ChuteIndicator.170",
         "ChuteRim.340",
         "ChuteRim.341",
-        "Bin_-1_11_4",
-        "Bin_-1_11_4_Rim",
-        "Bin_-1_11_4_Rim.001",
         "Chute.235",
         "ChuteIndicator.171",
         "ChuteRim.342",
         "ChuteRim.343",
-        "Bin_-1_12_1",
-        "Bin_-1_12_1_Rim",
-        "Bin_-1_12_1_Rim.001",
         "Chute.236",
         "ChuteIndicator.172",
         "ChuteRim.344",
         "ChuteRim.345",
-        "Bin_-1_12_2",
-        "Bin_-1_12_2_Rim",
-        "Bin_-1_12_2_Rim.001",
         "Chute.237",
         "ChuteIndicator.173",
         "ChuteRim.346",
         "ChuteRim.347",
-        "Bin_-1_12_3",
-        "Bin_-1_12_3_Rim",
-        "Bin_-1_12_3_Rim.001",
         "Chute.238",
         "ChuteIndicator.174",
         "ChuteRim.348",
         "ChuteRim.349",
-        "Bin_-1_12_4",
-        "Bin_-1_12_4_Rim",
-        "Bin_-1_12_4_Rim.001",
         "Chute.239",
         "ChuteIndicator.175",
         "ChuteRim.350",
         "ChuteRim.351",
-        "Bin_-1_13_1",
-        "Bin_-1_13_1_Rim",
-        "Bin_-1_13_1_Rim.001",
         "Chute.240",
         "ChuteIndicator.176",
         "ChuteRim.352",
         "ChuteRim.353",
-        "Bin_-1_13_2",
-        "Bin_-1_13_2_Rim",
-        "Bin_-1_13_2_Rim.001",
         "Chute.241",
         "ChuteIndicator.177",
         "ChuteRim.354",
         "ChuteRim.355",
-        "Bin_-1_13_3",
-        "Bin_-1_13_3_Rim",
-        "Bin_-1_13_3_Rim.001",
         "Chute.242",
         "ChuteIndicator.178",
         "ChuteRim.356",
         "ChuteRim.357",
-        "Bin_-1_13_4",
-        "Bin_-1_13_4_Rim",
-        "Bin_-1_13_4_Rim.001",
         "Chute.243",
         "ChuteIndicator.179",
         "ChuteRim.358",
         "ChuteRim.359",
-        "Bin_-1_14_1",
-        "Bin_-1_14_1_Rim",
-        "Bin_-1_14_1_Rim.001",
         "Chute.244",
         "ChuteIndicator.180",
         "ChuteRim.360",
         "ChuteRim.361",
-        "Bin_-1_14_2",
-        "Bin_-1_14_2_Rim",
-        "Bin_-1_14_2_Rim.001",
         "Chute.245",
         "ChuteIndicator.181",
         "ChuteRim.362",
         "ChuteRim.363",
-        "Bin_-1_14_3",
-        "Bin_-1_14_3_Rim",
-        "Bin_-1_14_3_Rim.001",
         "Chute.246",
         "ChuteIndicator.182",
         "ChuteRim.364",
         "ChuteRim.365",
-        "Bin_-1_14_4",
-        "Bin_-1_14_4_Rim",
-        "Bin_-1_14_4_Rim.001",
         "Chute.247",
         "ChuteIndicator.183",
         "ChuteRim.366",
         "ChuteRim.367",
-        "Bin_-1_15_1",
-        "Bin_-1_15_1_Rim",
-        "Bin_-1_15_1_Rim.001",
         "Chute.248",
         "ChuteIndicator.184",
         "ChuteRim.368",
         "ChuteRim.369",
-        "Bin_-1_15_2",
-        "Bin_-1_15_2_Rim",
-        "Bin_-1_15_2_Rim.001",
         "Chute.249",
         "ChuteIndicator.185",
         "ChuteRim.370",
         "ChuteRim.371",
-        "Bin_-1_15_3",
-        "Bin_-1_15_3_Rim",
-        "Bin_-1_15_3_Rim.001",
         "Chute.250",
         "ChuteIndicator.186",
         "ChuteRim.372",
         "ChuteRim.373",
-        "Bin_-1_15_4",
-        "Bin_-1_15_4_Rim",
-        "Bin_-1_15_4_Rim.001",
         "Chute.251",
         "ChuteIndicator.187",
         "ChuteRim.374",
         "ChuteRim.375",
-        "CartRail.024",
-        "OuterCartRail.024",
-        "CartRail.025",
-        "OuterCartRail.025",
-        "CartRail.026",
-        "OuterCartRail.026",
-        "CartRail.027",
-        "OuterCartRail.027",
-        "D28Leg.060",
-        "Caster.020",
-        "D28Leg.061",
-        "Caster.021",
-        "D28Leg.062",
-        "Caster.022",
-        "D28Leg.063",
-        "Caster.023",
-        "D28Leg.064",
-        "Caster.024",
-        "D28Leg.065",
-        "Caster.025",
-        "D28Leg.066",
-        "Caster.026",
-        "D28Leg.067",
-        "Caster.027",
         "Header.006",
-        "Bin_1_1_1.003",
-        "Bin_1_1_1_Rim.002",
-        "Bin_1_1_1_Rim.003",
         "Chute.252",
         "ChuteIndicator.188",
         "ChuteRim.376",
         "ChuteRim.377",
-        "Bin_1_1_2.003",
-        "Bin_1_1_2_Rim.002",
-        "Bin_1_1_2_Rim.003",
         "Chute.253",
         "ChuteIndicator.189",
         "ChuteRim.378",
         "ChuteRim.379",
-        "Bin_1_1_3.003",
-        "Bin_1_1_3_Rim.002",
-        "Bin_1_1_3_Rim.003",
         "Chute.254",
         "ChuteIndicator.190",
         "ChuteRim.380",
         "ChuteRim.381",
-        "Bin_1_1_4.003",
-        "Bin_1_1_4_Rim.002",
-        "Bin_1_1_4_Rim.003",
         "Chute.255",
         "ChuteIndicator.191",
         "ChuteRim.382",
         "ChuteRim.383",
-        "Bin_1_2_1.003",
-        "Bin_1_2_1_Rim.002",
-        "Bin_1_2_1_Rim.003",
         "Chute.256",
         "ChuteIndicator.192",
         "ChuteRim.384",
         "ChuteRim.385",
-        "Bin_1_2_2.003",
-        "Bin_1_2_2_Rim.002",
-        "Bin_1_2_2_Rim.003",
         "Chute.257",
         "ChuteIndicator.193",
         "ChuteRim.386",
         "ChuteRim.387",
-        "Bin_1_2_3.003",
-        "Bin_1_2_3_Rim.002",
-        "Bin_1_2_3_Rim.003",
         "Chute.258",
         "ChuteIndicator.194",
         "ChuteRim.388",
         "ChuteRim.389",
-        "Bin_1_2_4.003",
-        "Bin_1_2_4_Rim.002",
-        "Bin_1_2_4_Rim.003",
         "Chute.259",
         "ChuteIndicator.195",
         "ChuteRim.390",
         "ChuteRim.391",
-        "Bin_1_3_1.003",
-        "Bin_1_3_1_Rim.002",
-        "Bin_1_3_1_Rim.003",
         "Chute.260",
         "ChuteIndicator.196",
         "ChuteRim.392",
         "ChuteRim.393",
-        "Bin_1_3_2.003",
-        "Bin_1_3_2_Rim.002",
-        "Bin_1_3_2_Rim.003",
         "Chute.261",
         "ChuteIndicator.197",
         "ChuteRim.394",
         "ChuteRim.395",
-        "Bin_1_3_3.003",
-        "Bin_1_3_3_Rim.002",
-        "Bin_1_3_3_Rim.003",
         "Chute.262",
         "ChuteIndicator.198",
         "ChuteRim.396",
         "ChuteRim.397",
-        "Bin_1_3_4.003",
-        "Bin_1_3_4_Rim.002",
-        "Bin_1_3_4_Rim.003",
         "Chute.263",
         "ChuteIndicator.199",
         "ChuteRim.398",
         "ChuteRim.399",
-        "Bin_1_4_1.003",
-        "Bin_1_4_1_Rim.002",
-        "Bin_1_4_1_Rim.003",
         "Chute.264",
         "ChuteIndicator.200",
         "ChuteRim.400",
         "ChuteRim.401",
-        "Bin_1_4_2.003",
-        "Bin_1_4_2_Rim.002",
-        "Bin_1_4_2_Rim.003",
         "Chute.265",
         "ChuteIndicator.201",
         "ChuteRim.402",
         "ChuteRim.403",
-        "Bin_1_4_3.003",
-        "Bin_1_4_3_Rim.002",
-        "Bin_1_4_3_Rim.003",
         "Chute.266",
         "ChuteIndicator.202",
         "ChuteRim.404",
         "ChuteRim.405",
-        "Bin_1_4_4.003",
-        "Bin_1_4_4_Rim.002",
-        "Bin_1_4_4_Rim.003",
         "Chute.267",
         "ChuteIndicator.203",
         "ChuteRim.406",
         "ChuteRim.407",
-        "Bin_1_5_1.003",
-        "Bin_1_5_1_Rim.002",
-        "Bin_1_5_1_Rim.003",
         "Chute.268",
         "ChuteIndicator.204",
         "ChuteRim.408",
         "ChuteRim.409",
-        "Bin_1_5_2.003",
-        "Bin_1_5_2_Rim.002",
-        "Bin_1_5_2_Rim.003",
         "Chute.269",
         "ChuteIndicator.205",
         "ChuteRim.410",
         "ChuteRim.411",
-        "Bin_1_5_3.003",
-        "Bin_1_5_3_Rim.002",
-        "Bin_1_5_3_Rim.003",
         "Chute.270",
         "ChuteIndicator.206",
         "ChuteRim.412",
         "ChuteRim.413",
-        "Bin_1_5_4.003",
-        "Bin_1_5_4_Rim.002",
-        "Bin_1_5_4_Rim.003",
         "Chute.271",
         "ChuteIndicator.207",
         "ChuteRim.414",
         "ChuteRim.415",
-        "Bin_1_6_1.003",
-        "Bin_1_6_1_Rim.002",
-        "Bin_1_6_1_Rim.003",
         "Chute.272",
         "ChuteIndicator.208",
         "ChuteRim.416",
         "ChuteRim.417",
-        "Bin_1_6_2.003",
-        "Bin_1_6_2_Rim.002",
-        "Bin_1_6_2_Rim.003",
         "Chute.273",
         "ChuteIndicator.209",
         "ChuteRim.418",
         "ChuteRim.419",
-        "Bin_1_6_3.003",
-        "Bin_1_6_3_Rim.002",
-        "Bin_1_6_3_Rim.003",
         "Chute.274",
         "ChuteIndicator.210",
         "ChuteRim.420",
         "ChuteRim.421",
-        "Bin_1_6_4.003",
-        "Bin_1_6_4_Rim.002",
-        "Bin_1_6_4_Rim.003",
         "Chute.275",
         "ChuteIndicator.211",
         "ChuteRim.422",
         "ChuteRim.423",
-        "Bin_1_7_1.003",
-        "Bin_1_7_1_Rim.002",
-        "Bin_1_7_1_Rim.003",
         "Chute.276",
         "ChuteIndicator.212",
         "ChuteRim.424",
         "ChuteRim.425",
-        "Bin_1_7_2.003",
-        "Bin_1_7_2_Rim.002",
-        "Bin_1_7_2_Rim.003",
         "Chute.277",
         "ChuteIndicator.213",
         "ChuteRim.426",
         "ChuteRim.427",
-        "Bin_1_7_3.003",
-        "Bin_1_7_3_Rim.002",
-        "Bin_1_7_3_Rim.003",
         "Chute.278",
         "ChuteIndicator.214",
         "ChuteRim.428",
         "ChuteRim.429",
-        "Bin_1_7_4.003",
-        "Bin_1_7_4_Rim.002",
-        "Bin_1_7_4_Rim.003",
         "Chute.279",
         "ChuteIndicator.215",
         "ChuteRim.430",
         "ChuteRim.431",
-        "Bin_1_8_1.003",
-        "Bin_1_8_1_Rim.002",
-        "Bin_1_8_1_Rim.003",
         "Chute.280",
         "ChuteIndicator.216",
         "ChuteRim.432",
         "ChuteRim.433",
-        "Bin_1_8_2.003",
-        "Bin_1_8_2_Rim.002",
-        "Bin_1_8_2_Rim.003",
         "Chute.281",
         "ChuteIndicator.217",
         "ChuteRim.434",
         "ChuteRim.435",
-        "Bin_1_8_3.003",
-        "Bin_1_8_3_Rim.002",
-        "Bin_1_8_3_Rim.003",
         "Chute.282",
         "ChuteIndicator.218",
         "ChuteRim.436",
         "ChuteRim.437",
-        "Bin_1_8_4.003",
-        "Bin_1_8_4_Rim.002",
-        "Bin_1_8_4_Rim.003",
         "Chute.283",
         "ChuteIndicator.219",
         "ChuteRim.438",
         "ChuteRim.439",
-        "Bin_1_9_1",
-        "Bin_1_9_1_Rim",
-        "Bin_1_9_1_Rim.001",
         "Chute.284",
         "ChuteIndicator.220",
         "ChuteRim.440",
         "ChuteRim.441",
-        "Bin_1_9_2",
-        "Bin_1_9_2_Rim",
-        "Bin_1_9_2_Rim.001",
         "Chute.285",
         "ChuteIndicator.221",
         "ChuteRim.442",
         "ChuteRim.443",
-        "Bin_1_9_3",
-        "Bin_1_9_3_Rim",
-        "Bin_1_9_3_Rim.001",
         "Chute.286",
         "ChuteIndicator.222",
         "ChuteRim.444",
         "ChuteRim.445",
-        "Bin_1_9_4",
-        "Bin_1_9_4_Rim",
-        "Bin_1_9_4_Rim.001",
         "Chute.287",
         "ChuteIndicator.223",
         "ChuteRim.446",
         "ChuteRim.447",
-        "Bin_1_10_1",
-        "Bin_1_10_1_Rim",
-        "Bin_1_10_1_Rim.001",
         "Chute.288",
         "ChuteIndicator.224",
         "ChuteRim.448",
         "ChuteRim.449",
-        "Bin_1_10_2",
-        "Bin_1_10_2_Rim",
-        "Bin_1_10_2_Rim.001",
         "Chute.289",
         "ChuteIndicator.225",
         "ChuteRim.450",
         "ChuteRim.451",
-        "Bin_1_10_3",
-        "Bin_1_10_3_Rim",
-        "Bin_1_10_3_Rim.001",
         "Chute.290",
         "ChuteIndicator.226",
         "ChuteRim.452",
         "ChuteRim.453",
-        "Bin_1_10_4",
-        "Bin_1_10_4_Rim",
-        "Bin_1_10_4_Rim.001",
         "Chute.291",
         "ChuteIndicator.227",
         "ChuteRim.454",
         "ChuteRim.455",
-        "Bin_1_11_1",
-        "Bin_1_11_1_Rim",
-        "Bin_1_11_1_Rim.001",
         "Chute.292",
         "ChuteIndicator.228",
         "ChuteRim.456",
         "ChuteRim.457",
-        "Bin_1_11_2",
-        "Bin_1_11_2_Rim",
-        "Bin_1_11_2_Rim.001",
         "Chute.293",
         "ChuteIndicator.229",
         "ChuteRim.458",
         "ChuteRim.459",
-        "Bin_1_11_3",
-        "Bin_1_11_3_Rim",
-        "Bin_1_11_3_Rim.001",
         "Chute.294",
         "ChuteIndicator.230",
         "ChuteRim.460",
         "ChuteRim.461",
-        "Bin_1_11_4",
-        "Bin_1_11_4_Rim",
-        "Bin_1_11_4_Rim.001",
         "Chute.295",
         "ChuteIndicator.231",
         "ChuteRim.462",
         "ChuteRim.463",
-        "Bin_1_12_1",
-        "Bin_1_12_1_Rim",
-        "Bin_1_12_1_Rim.001",
         "Chute.296",
         "ChuteIndicator.232",
         "ChuteRim.464",
         "ChuteRim.465",
-        "Bin_1_12_2",
-        "Bin_1_12_2_Rim",
-        "Bin_1_12_2_Rim.001",
         "Chute.297",
         "ChuteIndicator.233",
         "ChuteRim.466",
         "ChuteRim.467",
-        "Bin_1_12_3",
-        "Bin_1_12_3_Rim",
-        "Bin_1_12_3_Rim.001",
         "Chute.298",
         "ChuteIndicator.234",
         "ChuteRim.468",
         "ChuteRim.469",
-        "Bin_1_12_4",
-        "Bin_1_12_4_Rim",
-        "Bin_1_12_4_Rim.001",
         "Chute.299",
         "ChuteIndicator.235",
         "ChuteRim.470",
         "ChuteRim.471",
-        "Bin_1_13_1",
-        "Bin_1_13_1_Rim",
-        "Bin_1_13_1_Rim.001",
         "Chute.300",
         "ChuteIndicator.236",
         "ChuteRim.472",
         "ChuteRim.473",
-        "Bin_1_13_2",
-        "Bin_1_13_2_Rim",
-        "Bin_1_13_2_Rim.001",
         "Chute.301",
         "ChuteIndicator.237",
         "ChuteRim.474",
         "ChuteRim.475",
-        "Bin_1_13_3",
-        "Bin_1_13_3_Rim",
-        "Bin_1_13_3_Rim.001",
         "Chute.302",
         "ChuteIndicator.238",
         "ChuteRim.476",
         "ChuteRim.477",
-        "Bin_1_13_4",
-        "Bin_1_13_4_Rim",
-        "Bin_1_13_4_Rim.001",
         "Chute.303",
         "ChuteIndicator.239",
         "ChuteRim.478",
         "ChuteRim.479",
-        "Bin_1_14_1",
-        "Bin_1_14_1_Rim",
-        "Bin_1_14_1_Rim.001",
         "Chute.304",
         "ChuteIndicator.240",
         "ChuteRim.480",
         "ChuteRim.481",
-        "Bin_1_14_2",
-        "Bin_1_14_2_Rim",
-        "Bin_1_14_2_Rim.001",
         "Chute.305",
         "ChuteIndicator.241",
         "ChuteRim.482",
         "ChuteRim.483",
-        "Bin_1_14_3",
-        "Bin_1_14_3_Rim",
-        "Bin_1_14_3_Rim.001",
         "Chute.306",
         "ChuteIndicator.242",
         "ChuteRim.484",
         "ChuteRim.485",
-        "Bin_1_14_4",
-        "Bin_1_14_4_Rim",
-        "Bin_1_14_4_Rim.001",
         "Chute.307",
         "ChuteIndicator.243",
         "ChuteRim.486",
         "ChuteRim.487",
-        "Bin_1_15_1",
-        "Bin_1_15_1_Rim",
-        "Bin_1_15_1_Rim.001",
         "Chute.308",
         "ChuteIndicator.244",
         "ChuteRim.488",
         "ChuteRim.489",
-        "Bin_1_15_2",
-        "Bin_1_15_2_Rim",
-        "Bin_1_15_2_Rim.001",
         "Chute.309",
         "ChuteIndicator.245",
         "ChuteRim.490",
         "ChuteRim.491",
-        "Bin_1_15_3",
-        "Bin_1_15_3_Rim",
-        "Bin_1_15_3_Rim.001",
         "Chute.310",
         "ChuteIndicator.246",
         "ChuteRim.492",
         "ChuteRim.493",
-        "Bin_1_15_4",
-        "Bin_1_15_4_Rim",
-        "Bin_1_15_4_Rim.001",
         "Chute.311",
         "ChuteIndicator.247",
         "ChuteRim.494",
         "ChuteRim.495",
-        "CartRail.028",
-        "OuterCartRail.028",
-        "CartRail.029",
-        "OuterCartRail.029",
-        "CartRail.030",
-        "OuterCartRail.030",
-        "CartRail.031",
-        "OuterCartRail.031",
-        "D28Leg.068",
-        "Caster.028",
-        "D28Leg.069",
-        "Caster.029",
-        "D28Leg.070",
-        "Caster.030",
-        "D28Leg.071",
-        "Caster.031",
-        "D28Leg.072",
-        "Caster.032",
-        "D28Leg.073",
-        "Caster.033",
-        "D28Leg.074",
-        "Caster.034",
-        "D28Leg.075",
-        "Caster.035",
         "Header.007"
       ]
     }
   },
+  "blender": "SourceAssets/MPR/sorter_simulation/MPR_SorterSimulation.blend",
+  "preview": "SourceAssets/MPR/sorter_simulation/asset_preview.png",
   "source_files": [
     {
       "path": "D:\\UEPro\\Test\\SourceAssets\\MPR\\equipment\\MPR_SorterCADVariants.blend",
@@ -8441,6 +10226,10 @@
     {
       "path": "D:\\UEPro\\Test\\SourceAssets\\MPR\\equipment\\sorter_instances.json",
       "sha256": "324ac612a4603d18c2e9adbf8b0faff2ce26fd3b7b912d08e70987057760723c"
+    },
+    {
+      "path": "D:\\UEPro\\Test\\SourceAssets\\MPR\\sorter_simulation\\cad_manual_ports.json",
+      "sha256": "e91c60d48eac6598299c4c19000d1b9a582526a6b0429442e85c950e3693c43e"
     }
   ],
   "material_paths": {
@@ -8454,7 +10243,5 @@
   },
   "axis_contract": "FBX source metres CAD +Y; UE import makes X=100*x,Y=-100*y,Z=100*z. Profiles already use UE local cm.",
   "dynamic_axes": "Local +X is CCW path tangent; local +Y is inward left normal. Tray is centred; no outward assumption.",
-  "safety": "No decorative collision; reuse grouped instancing; simulation actors manage bounded shared updates.",
-  "blender": "SourceAssets/MPR/sorter_simulation/MPR_SorterSimulation.blend",
-  "preview": "SourceAssets/MPR/sorter_simulation/asset_preview.png"
+  "safety": "No decorative collision; reuse grouped instancing; simulation actors manage bounded shared updates."
 }

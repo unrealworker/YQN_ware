@@ -1,0 +1,996 @@
+{
+  "schema_version": 1,
+  "central_spine_axis_source": "Existing central lines are simplified from source parent CAD; no disconnected ramp is treated as conveyor link",
+  "rows": [
+    {
+      "machine_id": "2C9A89_BRANCH_1",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -108.78083257623894,
+        -28.758014147010243,
+        0
+      ],
+      "infeed_side_local_x": 1,
+      "infeed_bounds_midpoint_cad_m": [
+        -105.65012978983444,
+        -28.758014147010243,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -104.92999999999999,
+        -28.758014147010243,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10471.0,
+        2875.8014147010244,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983445,
+        2875.8014147010244,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.72013,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_2",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -108.78083257623902,
+        -25.608014147010223,
+        0
+      ],
+      "infeed_side_local_x": 1,
+      "infeed_bounds_midpoint_cad_m": [
+        -105.65012978983452,
+        -25.608014147010223,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -104.92999999999999,
+        -25.608014147010223,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10471.0,
+        2560.801414701022,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983452,
+        2560.801414701022,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.72013,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_3",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -108.78083257623909,
+        -22.458014147010235,
+        0
+      ],
+      "infeed_side_local_x": 1,
+      "infeed_bounds_midpoint_cad_m": [
+        -105.65012978983462,
+        -22.458014147010235,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -104.92999999999999,
+        -22.458014147010235,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10471.0,
+        2245.8014147010235,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983463,
+        2245.8014147010235,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.72013,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_4",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -108.78083257623918,
+        -19.308014147010212,
+        0
+      ],
+      "infeed_side_local_x": 1,
+      "infeed_bounds_midpoint_cad_m": [
+        -105.65012978983471,
+        -19.308014147010212,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -104.92999999999999,
+        -19.308014147010212,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10471.0,
+        1930.8014147010213,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.01297898347,
+        1930.8014147010213,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.72013,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_5",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -108.78083257623925,
+        -16.15801414701025,
+        0
+      ],
+      "infeed_side_local_x": 1,
+      "infeed_bounds_midpoint_cad_m": [
+        -105.65012978983475,
+        -16.15801414701025,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -104.92999999999999,
+        -16.15801414701025,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10471.0,
+        1615.801414701025,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983475,
+        1615.801414701025,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.72013,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_6",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -108.78083257623933,
+        -13.008014147010224,
+        0
+      ],
+      "infeed_side_local_x": 1,
+      "infeed_bounds_midpoint_cad_m": [
+        -105.65012978983485,
+        -13.008014147010224,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -104.92999999999999,
+        -13.008014147010224,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10471.0,
+        1300.8014147010224,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983485,
+        1300.8014147010224,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.72013,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_7",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -108.7808325762394,
+        -9.858014147010236,
+        0
+      ],
+      "infeed_side_local_x": 1,
+      "infeed_bounds_midpoint_cad_m": [
+        -105.65012978983493,
+        -9.858014147010236,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -104.92999999999999,
+        -9.858014147010236,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10471.0,
+        985.8014147010235,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983494,
+        985.8014147010235,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.72013,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_8",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -108.78083257623948,
+        -6.708014147010224,
+        0
+      ],
+      "infeed_side_local_x": 1,
+      "infeed_bounds_midpoint_cad_m": [
+        -105.65012978983499,
+        -6.708014147010224,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -104.92999999999999,
+        -6.708014147010224,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10471.0,
+        670.8014147010224,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.0129789835,
+        670.8014147010224,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.72013,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_9",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -108.78083257623955,
+        -3.558014147010213,
+        0
+      ],
+      "infeed_side_local_x": 1,
+      "infeed_bounds_midpoint_cad_m": [
+        -105.65012978983508,
+        -3.558014147010213,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -104.92999999999999,
+        -3.558014147010213,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10471.0,
+        355.8014147010213,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10565.012978983508,
+        355.8014147010213,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.72013,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_10",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -99.79958536264473,
+        -22.4480141470101,
+        0
+      ],
+      "infeed_side_local_x": -1,
+      "infeed_bounds_midpoint_cad_m": [
+        -102.93073536264473,
+        -22.4480141470101,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -103.67,
+        -22.4480141470101,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10389.0,
+        2244.80141470101,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264472,
+        2244.80141470101,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.73926,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_11",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -99.79958536264482,
+        -19.2980141470101,
+        0
+      ],
+      "infeed_side_local_x": -1,
+      "infeed_bounds_midpoint_cad_m": [
+        -102.93073536264481,
+        -19.2980141470101,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -103.67,
+        -19.2980141470101,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10389.0,
+        1929.8014147010101,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264481,
+        1929.8014147010101,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.73926,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_12",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -99.79958536264493,
+        -16.148014147010098,
+        0
+      ],
+      "infeed_side_local_x": -1,
+      "infeed_bounds_midpoint_cad_m": [
+        -102.93073536264491,
+        -16.148014147010098,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -103.67,
+        -16.148014147010098,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10389.0,
+        1614.80141470101,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264492,
+        1614.80141470101,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.73926,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_13",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -99.79958536264496,
+        -12.9980141470101,
+        0
+      ],
+      "infeed_side_local_x": -1,
+      "infeed_bounds_midpoint_cad_m": [
+        -102.93073536264495,
+        -12.9980141470101,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -103.67,
+        -12.9980141470101,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10389.0,
+        1299.80141470101,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264495,
+        1299.80141470101,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.73926,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_14",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -99.79958536264506,
+        -9.8480141470101,
+        0
+      ],
+      "infeed_side_local_x": -1,
+      "infeed_bounds_midpoint_cad_m": [
+        -102.93073536264504,
+        -9.8480141470101,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -103.67,
+        -9.8480141470101,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10389.0,
+        984.8014147010099,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264505,
+        984.8014147010099,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.73926,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_15",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -99.79958536264516,
+        -6.698014147010099,
+        0
+      ],
+      "infeed_side_local_x": -1,
+      "infeed_bounds_midpoint_cad_m": [
+        -102.93073536264514,
+        -6.698014147010099,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -103.67,
+        -6.698014147010099,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10389.0,
+        669.8014147010099,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264514,
+        669.8014147010099,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.73926,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_16",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -99.79958536264522,
+        -3.5480141470100994,
+        0
+      ],
+      "infeed_side_local_x": -1,
+      "infeed_bounds_midpoint_cad_m": [
+        -102.93073536264518,
+        -3.5480141470100994,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -103.67,
+        -3.5480141470100994,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10389.0,
+        354.80141470100995,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264517,
+        354.80141470100995,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.73926,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_17",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -99.7995853626453,
+        -0.39801414701009974,
+        0
+      ],
+      "infeed_side_local_x": -1,
+      "infeed_bounds_midpoint_cad_m": [
+        -102.93073536264528,
+        -0.39801414701009974,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -103.67,
+        -0.39801414701009974,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10389.0,
+        39.801414701009975,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536264528,
+        39.801414701009975,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.73926,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9A89_BRANCH_18",
+      "source_handle": "2C9A89",
+      "child_handle": null,
+      "mesh": "SM_MPR_SorterCAD64",
+      "position_cad_m": [
+        -99.79958536265259,
+        2.7519858529899346,
+        0
+      ],
+      "infeed_side_local_x": -1,
+      "infeed_bounds_midpoint_cad_m": [
+        -102.93073536265257,
+        2.7519858529899346,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -103.67,
+        2.7519858529899346,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -10389.0,
+        -275.19858529899346,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -10293.073536265258,
+        -275.19858529899346,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9A89",
+      "plan_clearance_m": 0.73926,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9AE5_BRANCH_1",
+      "source_handle": "2C9AE5",
+      "child_handle": "115C27",
+      "mesh": "SM_MPR_SorterCAD120",
+      "position_cad_m": [
+        -106.87777788862653,
+        14.277633268981411,
+        0
+      ],
+      "infeed_side_local_x": -1,
+      "infeed_bounds_midpoint_cad_m": [
+        -110.55104605252615,
+        14.277633268981411,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -110.99,
+        14.277633268981411,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -11121.0,
+        -1427.763326898141,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -11055.104605252614,
+        -1427.763326898141,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9AE5",
+      "plan_clearance_m": 0.43895,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9AE5_BRANCH_2",
+      "source_handle": "2C9AE5",
+      "child_handle": "115C28",
+      "mesh": "SM_MPR_SorterCAD120",
+      "position_cad_m": [
+        -106.87777788862653,
+        18.23148561775842,
+        0
+      ],
+      "infeed_side_local_x": -1,
+      "infeed_bounds_midpoint_cad_m": [
+        -110.55104605252615,
+        18.23148561775842,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -110.99,
+        18.23148561775842,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -11121.0,
+        -1823.148561775842,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -11055.104605252614,
+        -1823.148561775842,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9AE5",
+      "plan_clearance_m": 0.43895,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9AE5_BRANCH_3",
+      "source_handle": "2C9AE5",
+      "child_handle": "115C29",
+      "mesh": "SM_MPR_SorterCAD120",
+      "position_cad_m": [
+        -116.17178332280864,
+        18.663602615364667,
+        0
+      ],
+      "infeed_side_local_x": 1,
+      "infeed_bounds_midpoint_cad_m": [
+        -112.49851515890902,
+        18.663602615364667,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -112.05,
+        18.663602615364667,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -11183.0,
+        -1866.3602615364666,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -11249.851515890901,
+        -1866.3602615364666,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9AE5",
+      "plan_clearance_m": 0.44852,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    },
+    {
+      "machine_id": "2C9AE5_BRANCH_4",
+      "source_handle": "2C9AE5",
+      "child_handle": "115C2A",
+      "mesh": "SM_MPR_SorterCAD120",
+      "position_cad_m": [
+        -116.17178332280864,
+        14.709750266588166,
+        0
+      ],
+      "infeed_side_local_x": 1,
+      "infeed_bounds_midpoint_cad_m": [
+        -112.49851515890902,
+        14.709750266588166,
+        1.0
+      ],
+      "pickup_line_edge_cad_m": [
+        -112.05,
+        14.709750266588166,
+        1.0
+      ],
+      "pickup_ue_cm": [
+        -11183.0,
+        -1470.9750266588167,
+        103.03108891324554
+      ],
+      "entry_ue_cm": [
+        -11249.851515890901,
+        -1470.9750266588167,
+        100.0
+      ],
+      "line_source_cad_handle": "2C9AE5",
+      "plan_clearance_m": 0.44852,
+      "transfer_mode": "manual_handoff_from_shared_parent_spine; no physical bridging belt",
+      "evidence_level": "Parent CAD establishes machine bank and central spine; inward X side is verified from plan. Exact entry Y/Z, operating direction, employee role and pickup route remain display assumptions, not confirmed controller endpoints.",
+      "verification_required": "Use actual tray surface height at runtime; hands carry box over floor gap; do not slide package through air; do not put source onto cart slot directly.",
+      "pickup_surface_calibration": {
+        "mesh": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+        "inward_from_cad_edge_cm": 22.0,
+        "actual_roller_top_cm": 103.03108891324554,
+        "package_width_cm": 22.0,
+        "minimum_roller_edge_clearance_cm": 2.18,
+        "basis": "Conveyor2m cylinder radius 3.5cm, centre Z100cm, six-sided crown; side beam 7cm, largest width scale1.26. Every 120cm pickup approach checked against existing central conveyor instances."
+      }
+    }
+  ]
+}

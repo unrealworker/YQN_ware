@@ -1,0 +1,150 @@
+{
+  "success": true,
+  "scope": "Synthetic Python contract/readback fault injection only; Unreal game not launched.",
+  "valid_fixtures": 4,
+  "actual_mock_readback": {
+    "carts": 4,
+    "visible_boxes": 48,
+    "carriers": 4,
+    "queue_slots": 3,
+    "handoffs": 0,
+    "hidden_handoff_carts": 0,
+    "hidden_handoff_loaded_boxes": 0,
+    "hidden_exchange_worker_slots": 0,
+    "max_position_error_cm": 0.0
+  },
+  "handoff_mock_readback": {
+    "carts": 4,
+    "visible_boxes": 0,
+    "carriers": 4,
+    "queue_slots": 3,
+    "handoffs": 0,
+    "hidden_handoff_carts": 1,
+    "hidden_handoff_loaded_boxes": 48,
+    "hidden_exchange_worker_slots": 16,
+    "max_position_error_cm": 0.0
+  },
+  "faults_rejected": 30,
+  "faults": [
+    {
+      "name": "reserved_plus_occupied_exceeds_capacity",
+      "rejected": true
+    },
+    {
+      "name": "fleet_conservation",
+      "rejected": true
+    },
+    {
+      "name": "duplicate_parcel_ownership",
+      "rejected": true
+    },
+    {
+      "name": "cart_manifest_missing_id",
+      "rejected": true
+    },
+    {
+      "name": "invalid_full_cart_capacity",
+      "rejected": true
+    },
+    {
+      "name": "premature_empty_arriving",
+      "rejected": true
+    },
+    {
+      "name": "wrong_shared_aisle_owner",
+      "rejected": true
+    },
+    {
+      "name": "invalid_cart_generation",
+      "rejected": true
+    },
+    {
+      "name": "reported_cart_count_wrong",
+      "rejected": true
+    },
+    {
+      "name": "reported_queue_slots_wrong",
+      "rejected": true
+    },
+    {
+      "name": "two_simultaneous_cart_exchanges",
+      "rejected": true
+    },
+    {
+      "name": "infeed_over_capacity",
+      "rejected": true
+    },
+    {
+      "name": "duplicate_queue_id",
+      "rejected": true
+    },
+    {
+      "name": "cart_moves_but_cargo_stays",
+      "rejected": true
+    },
+    {
+      "name": "actual_cart_transform_wrong",
+      "rejected": true
+    },
+    {
+      "name": "occupied_box_disappears",
+      "rejected": true
+    },
+    {
+      "name": "unowned_queue_box_visible",
+      "rejected": true
+    },
+    {
+      "name": "loaded_box_visible_during_handoff",
+      "rejected": true
+    },
+    {
+      "name": "cart_visible_during_handoff",
+      "rejected": true
+    },
+    {
+      "name": "exchange_worker_visible_during_handoff",
+      "rejected": true
+    },
+    {
+      "name": "infeed_worker_hidden_with_exchange_worker",
+      "rejected": true
+    },
+    {
+      "name": "deposit_while_cart_absent",
+      "rejected": true
+    },
+    {
+      "name": "generation_increases_before_handoff",
+      "rejected": true
+    },
+    {
+      "name": "instant_clear_before_outbound",
+      "rejected": true
+    },
+    {
+      "name": "manual_exchange_on_unselected_machine",
+      "rejected": true
+    },
+    {
+      "name": "queue_advances_while_cart_absent",
+      "rejected": true
+    },
+    {
+      "name": "new_generation_still_cannot_admit_before_docking",
+      "rejected": true
+    },
+    {
+      "name": "exchange_count_before_docking",
+      "rejected": true
+    },
+    {
+      "name": "parcel_materializes_without_queue",
+      "rejected": true
+    },
+    {
+      "name": "parcel_skips_manual_handoff",
+      "rejected": true
+    }
+  ]
+}

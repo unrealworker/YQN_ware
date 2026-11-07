@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-11-07T07:04:13.216751+00:00",
+  "status": "Direct crash path identified; mitigation prepared. Final native rerun is owned by root and is not asserted successful here.",
+  "crash": {
+    "process_id": 53132,
+    "process_seconds_since_start": 89,
+    "thread": "GameThread",
+    "exception": "EXCEPTION_ACCESS_VIOLATION 0x0000000000000000",
+    "is_oom": false,
+    "last_completed_png": "cad64_00_04_docking_empty.png",
+    "last_persisted_report_elapsed_seconds": 78.01500000001397,
+    "persisted_infeed_frames": 192,
+    "persisted_exchange_frames": 85,
+    "later_exchange_pngs_on_disk": 90,
+    "evidence": [
+      {
+        "path": "D:\\UEPro\\Test\\Saved\\Crashes\\UECC-Windows-836B62A4431E781FCBE8F1A7F13A40FC_0000\\CrashContext.runtime-xml",
+        "bytes": 170231,
+        "sha256": "c7c797b3d2ce62bd1668b30827a11d43d65347bb8b0424f5b64e475b1a1b150d"
+      },
+      {
+        "path": "D:\\UEPro\\Test\\Saved\\Crashes\\UECC-Windows-836B62A4431E781FCBE8F1A7F13A40FC_0000\\UEMinidump.dmp",
+        "bytes": 1554606,
+        "sha256": "b028a0c214acb1aa23d92740f1f25dde74b32e426de9191970d83eaa6a5cc6e6"
+      },
+      {
+        "path": "D:\\UEPro\\Test\\Saved\\Crashes\\UECC-Windows-836B62A4431E781FCBE8F1A7F13A40FC_0000\\runtime_final.log",
+        "bytes": 377673,
+        "sha256": "186d8baaef850ab716f9810b8ec08ac0cc3df2d532efa7cfa8ab6425a9deb75c"
+      },
+      {
+        "path": "D:\\UEPro\\Test\\Saved\\MPR\\full_workflow_20261107\\runtime\\20261107T064056680233Z\\report.json",
+        "bytes": 3130490,
+        "sha256": "030d695d13f9700cee8d90aa8de6e81bbc68be8564fa1e86220909d14ad9edd8"
+      }
+    ]
+  },
+  "native_frame_analysis": {
+    "source": "Independent minidump frame analysis by /root/tiangong_cart_workflow_research, cross-checked against the installed CPython 3.11.8 json/encoder.py and disassembly.",
+    "faulting_indirect_call": "python311.dll+0x15FAF: call rdx; RDX=0, RIP=0",
+    "opcode": {
+      "value": 93,
+      "name": "FOR_ITER",
+      "register": "RDI=0x5D"
+    },
+    "unexpected_object": "R13 points to a PyCell_Type closure cell; Py_TYPE at DLL+0x420690, tp_iternext at type offset 0xE0 is NULL.",
+    "python_frame": {
+      "frame_address": "0x1917c554b70",
+      "f_code": "0x191613bf000",
+      "co_firstlineno": 334,
+      "instruction_offset": 278,
+      "function": "json.encoder._iterencode_dict",
+      "source_line": 357
+    },
+    "subsequent_python_frames": [
+      "dict offset902 SEND",
+      "list offset564 SEND",
+      "dict offset902 SEND",
+      "list offset564 SEND",
+      "dict offset902 SEND",
+      "_iterencode firstline414 offset344",
+      "encode firstline183 offset234",
+      "workflow line540",
+      "run line787",
+      "tick line838"
+    ],
+    "conclusion": "The direct failing operation is the Python generator JSON encoder invoked by write(indent=2), not equivalent(), ordinary recursion overflow, or a C++ sorter simulation stack.",
+    "limit": "The exact earlier cause of the invalid closure-cell iterator is not proven. This diagnosis does not exclude preceding native memory corruption."
+  },
+  "eliminated_or_unproven_hypotheses": {
+    "ordinary_stack_overflow": "Not supported: exception is null indirect call; saved report maximum container depth is 7.",
+    "cyclic_json_data": "No evidence: saved report is finite plain JSON; circular checks remain enabled.",
+    "slate_callback_lifetime": "PySlate.cpp retains a NewReference in the bound lambda; crash contains one PythonScriptPlugin/Slate entry. No evidence of a dangling callback or nested Slate reentry.",
+    "budget_timeout": "Not the crash cause: process crashed at 89 seconds and emitted no Python timeout exception."
+  },
+  "isolated_encoder_comparison": {
+    "interpreter": "D:/UE/UE_5.8/Engine/Binaries/ThirdParty/Python3/Win64/python.exe",
+    "version": "3.11.8 db85d51; MSC v.1937 64 bit AMD64",
+    "probe": {
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\full_workflow_20261107\\python_encoder_probe.py",
+      "bytes": 1167,
+      "sha256": "7d38c842224a7507f3170d5c29a3aaab8e7284c99d5d82f1399aaa486c3bdac5"
+    },
+    "input_report": "D:\\UEPro\\Test\\Saved\\MPR\\full_workflow_20261107\\runtime\\20261107T064056680233Z\\report.json",
+    "iterations_per_mode": 40,
+    "pretty": {
+      "indent": 2,
+      "encoder": "Python nested _iterencode generators",
+      "elapsed_seconds": 3.919,
+      "output_utf8_bytes": 3007985,
+      "exit_code": 0
+    },
+    "compact": {
+      "indent": null,
+      "separators": [
+        ",",
+        ":"
+      ],
+      "encoder": "CPython _json.Encoder C implementation",
+      "elapsed_seconds": 1.211,
+      "output_utf8_bytes": 1516966,
+      "exit_code": 0
+    },
+    "decoded_payloads_equal": true,
+    "circular_reference_negative_case_rejected": true,
+    "nan_negative_case_rejected": true,
+    "limit": "Neither isolated mode reproduced the native crash; the comparison validates JSON equivalence and exercises the alternative encoder, not full Unreal process correctness."
+  },
+  "mitigation": {
+    "validator": {
+      "path": "D:\\UEPro\\Test\\Tools\\MPRWarehouse\\verify_mpr_full_sorter_runtime.py",
+      "bytes": 48135,
+      "sha256": "56001c257157bc9ce540d66cf0c6103072ba091bcc80384576c823866676f541"
+    },
+    "changes": [
+      "Use indent=None with compact separators to select the C encoder, retaining check_circular=True and allow_nan=False.",
+      "Enable faulthandler to OUT/python_fault.log with a process-lifetime global file reference.",
+      "Flush breadcrumb entries around ISM readback, screenshot request/completion, and report encode/write boundaries."
+    ],
+    "unchanged": [
+      "C++ code",
+      "simulation conservation checks",
+      "cart exchange and recovery assertions",
+      "equivalent() implementation"
+    ],
+    "native_retest_status": "Pending root-owned final run at artifact creation."
+  }
+}

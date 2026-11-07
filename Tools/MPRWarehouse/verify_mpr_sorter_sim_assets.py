@@ -45,8 +45,10 @@ def transformed(points,xy,yaw,z=0):
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,default=SRC/'geometry_validation.json')
+    global SRC
+    parser=argparse.ArgumentParser();parser.add_argument('--source',type=Path,default=SRC);parser.add_argument('--output',type=Path)
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+    SRC=args.source;args.output=args.output or SRC/'geometry_validation.json'
     manifest=json.loads((SRC/'manifest.json').read_text(encoding='utf8'))
     layout=json.loads((SRC/'layout.json').read_text(encoding='utf8'))
     mesh_data={};roundtrip=[]
@@ -73,7 +75,12 @@ def main():
     # one Y reflection. An asymmetric tower above catches double/no reflection.
     bin_checks=[]
     for key,profile in layout['profiles'].items():
-        mesh=profile['static_mesh'].split('/')[-1];points=mesh_data[mesh]
+        points=[];all_bin_indices=[]
+        for cart in profile['carts']:
+            origin=[v/100 for v in cart['local_origin_cm']]
+            points += [tuple(p[k]+origin[k] for k in range(3)) for p in mesh_data[cart['mesh'].split('/')[-1]]]
+            all_bin_indices += cart['bin_indices']
+        assert sorted(all_bin_indices)==list(range(len(profile['bins'])))
         tree=KDTree(len(points))
         for i,p in enumerate(points):tree.insert(p,i)
         tree.balance();errors=[]
@@ -85,15 +92,54 @@ def main():
         assert max(errors)<.00001,(key,max(errors))
         bin_checks.append(dict(profile=key,slots=len(profile['bins']),rim_corner_tests=len(errors),max_error_m=max(errors)))
     bpy.ops.wm.open_mainfile(filepath=str(SRC/'MPR_SorterSimulation.blend'))
-    collisions=[];motion_checks=[]
+    collisions=[];motion_checks=[];cart_checks=[];cart_collisions=[]
     for key,profile in layout['profiles'].items():
         mesh=profile['static_mesh'].split('/')[-1];col=bpy.data.collections[mesh+'_Editable_LOD0']
         fixed=[];guide_count=0
         for obj in col.objects:
+            assert not obj.name.split('.')[0].startswith('Bin_'),obj.name
             # Drive/guide surfaces are bearing interfaces, not obstacle volumes.
             if obj.name.startswith(('LowerGuide','UpperGuide')):guide_count+=1;continue
             pts=[obj.matrix_world@v.co for v in obj.data.vertices]
             fixed.append((obj.name,bounds([(p.x,-p.y,p.z) for p in pts])))
+        docked_cart_objects=[]
+        for cart in profile['carts']:
+            cname=cart['mesh'].split('/')[-1];origin=[v/100 for v in cart['local_origin_cm']]
+            ccol=bpy.data.collections[cname+'_Editable_LOD0'];parts=[]
+            for obj in ccol.objects:
+                pts=[obj.matrix_world@v.co for v in obj.data.vertices]
+                cb=bounds([(p.x+origin[0],-p.y+origin[1],p.z) for p in pts]);parts.append((obj.name,cb))
+            docked_cart_objects.append((cart,parts))
+        static_only=list(fixed)
+        for cart,parts in docked_cart_objects:fixed += [(str(cart['index'])+':'+name,box) for name,box in parts]
+        # Withdraw each complete cart laterally before travelling along the
+        # aisle. Test actual component boxes, not a solid box around open bins.
+        for cart,parts in docked_cart_objects:
+            sign=1 if cart['local_origin_cm'][1]>0 else -1
+            cartbb=bounds(mesh_data[cart['mesh'].split('/')[-1]])
+            for k in range(3):
+                assert abs(cartbb[0][k]*100-cart['bounds_cm'][0][k])<.002
+                assert abs(cartbb[1][k]*100-cart['bounds_cm'][1][k])<.002
+            others=static_only+[(str(c['index'])+':'+n,b) for c,p in docked_cart_objects if c['index']!=cart['index'] for n,b in p]
+            tests=0
+            for step in range(33):
+                offset=sign*cart['retreat_distance_cm']/100*step/32
+                for name,box in parts:
+                    moved=[[p[0],p[1]+offset,p[2]] for p in box]
+                    for obstacle,bb in others:
+                        tests+=1
+                        if intersects(moved,bb,epsilon=.0005):cart_collisions.append(dict(profile=key,cart=cart['index'],step=step,part=name,obstacle=obstacle))
+            # Retreated whole-cart AABB is now outside all docked carts and
+            # machine frame. Check the longitudinal leg in both directions.
+            origin=[v/100 for v in cart['local_origin_cm']]
+            for direction in (-1,1):
+                target=direction*cart['outbound_end_x_cm']/100
+                for step in range(33):
+                    x=origin[0]+(target-origin[0])*step/32
+                    moved=[[p[0]+x,p[1]+origin[1]+sign*cart['retreat_distance_cm']/100,p[2]] for p in cartbb]
+                    for obstacle,bb in others:
+                        if intersects(moved,bb,epsilon=.0005):cart_collisions.append(dict(profile=key,cart=cart['index'],longitudinal_step=step,direction=direction,obstacle=obstacle))
+            cart_checks.append(dict(profile=key,cart_index=cart['index'],bin_count=len(cart['bin_indices']),columns=cart['column_count'],withdraw_samples=33,outbound_samples=66,component_pair_tests=tests,frame_foot_z_cm=cartbb[0][2]*100))
         heights=[.15+i*.05 for i in range(36)]+[p['tray_carry_z_cm']/100 for p in profile['levels']]+[1.035]
         footprint=[profile['plan_length_cm']/200,profile['plan_width_cm']/200]
         max_extent=[0,0]
@@ -116,13 +162,14 @@ def main():
                                   evaluated_tray_poses=512*len(heights),fixed_object_obstacles=len(fixed),
                                   bearing_guide_segments_excluded=guide_count,max_swept_half_extent_m=max_extent,
                                   original_half_footprint_m=footprint))
-    result=dict(status='passed' if not collisions else 'failed',fbx=roundtrip,bin_alignment=bin_checks,
-                motion=motion_checks,collisions=collisions,
+    result=dict(status='passed' if not collisions and not cart_collisions else 'failed',fbx=roundtrip,bin_alignment=bin_checks,
+                motion=motion_checks,collisions=collisions,carts=cart_checks,cart_collisions=cart_collisions,
                 axis_probe='Actual FBX Tower becomes UE local Y[0,22]cm; Tray Y[-12.5,16.75]cm after exactly one reflection.',
-                limitation='Conservative whole-part AABB sweep against fixed frame/bin/chute geometry; bearing guide contact interfaces excluded. Runtime trajectory must use this exact profile and tangent orientation.')
+                limitation='Conservative moving-part AABB sweeps within each machine; bearing guide interfaces excluded. Cart extraction tests do not certify surrounding warehouse aisles or concurrent opposing carts. Runtime must reserve shared aisles and use this exact profile.')
     args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf8')
-    print(json.dumps(dict(status=result['status'],fbx=len(roundtrip),motion=motion_checks,collision_count=len(collisions),first_collisions=collisions[:8])))
+    print(json.dumps(dict(status=result['status'],fbx=len(roundtrip),motion=motion_checks,collision_count=len(collisions),cart_collision_count=len(cart_collisions),first_collisions=collisions[:8],first_cart_collisions=cart_collisions[:8])))
     assert not collisions,collisions[:8]
+    assert not cart_collisions,cart_collisions[:8]
 
 
 if __name__=='__main__':main()
