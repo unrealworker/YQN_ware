@@ -46,7 +46,14 @@
         "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_D",
         "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA",
         "/Game/Characters/Mannequins/Textures/Shared/T_UE_Logo_M"
-      ]
+      ],
+      "project_override": {
+        "parameter_type": "static_switch",
+        "parameter": "Logo?",
+        "value": false,
+        "reason": "Remove chest Unreal emblem at user request; preserve all other parameters."
+      },
+      "project_sha256": "0e0f3329f8bca5c6db0419a2d45a195977320fdc1047e39b155ab64b1e8bb38f"
     },
     {
       "package": "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple",
@@ -193,5 +200,5 @@
       "source": "D:/UE/UE_5.8/Engine/Source/Runtime/Engine/Classes/Engine/SkeletalMesh.h:1288-1299"
     }
   ],
-  "purpose": "Official UE 5.8 Third Person Manny for existing MPR sorter workers. Original assets copied byte-for-byte; no ThirdPerson GameMode/input/map imported."
+  "purpose": "Official UE 5.8 Third Person Manny for existing MPR sorter workers. Original package paths retained; MI_Manny_02_New disables the Logo? switch. No ThirdPerson GameMode/input/map imported."
 }
