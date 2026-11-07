@@ -7,6 +7,7 @@ from mpr_blender_common import Geometry
 from mpr_cad_semantics import DRAFTING_SYMBOLS,turn_requires_reflection,reflected_mesh_roles,covered_drive_detail
 from mpr_conveyor_detail_geometry import add_cad_detail_meshes
 from mpr_cad_feed_geometry import add_feed_meshes
+from full_conveyor_geometry import add_meshes as add_audited_conveyor_meshes,MARKER_MESH
 parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,default=ROOT/'SourceAssets/MPR/operations')
 args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
 OUT=args.output;OUT.mkdir(parents=True,exist_ok=True)
@@ -17,6 +18,7 @@ evidence={x['block']:x for x in json.loads((ROOT/'SourceAssets/MPR/mpr_cad_opera
 g=Geometry();instances=[];omitted=[];merged_drive_units=[]
 cad_details=add_cad_detail_meshes(g)
 feed_specs=add_feed_meshes(g,feed_evidence)
+audited_conveyor_specs=add_audited_conveyor_meshes(g,json.loads((ROOT/'SourceAssets/MPR/conveyor_audit_20261107/cad_source_evidence.json').read_text(encoding='utf8')))
 def box(n,r,p,s):g.box(n,r,p,s)
 def legset(n,w,l,z=.87):
  for x in (-w*.4,w*.4):
@@ -65,6 +67,8 @@ for v in layout['equipment']:
   merged_drive_units.append(drive);continue
  if n in cad_details:
   detail=cad_details[n];fromcad(v,detail['mesh'],detail['native_size_m'])
+ elif n=='A$Cb1177cf1':
+  fromcad(v,MARKER_MESH,(1,1.2));instances[-1]['kind']='cad_floor_placeholder';instances[-1]['height_basis']='CAD rectangle and cross at floor level; operational meaning unconfirmed'
  elif k=='workstation':fromcad(v,table,(1,1.2))
  elif k=='sorter_output':fromcad(v,output,(.415,2.38))
  elif k=='carton_sealer':fromcad(v,sealer,(1.23211,1.9504))
@@ -145,8 +149,10 @@ for v in layout['equipment']:
   elif n in ('*U952','*U372'):fromcad(v,table,(1,1.2))
   handled.add(v['id'])
  if n in ('供包爬坡','供包爬坡机'):
-  # Reuse the GHS inclined conveyor; adjust measured run footprint, retaining its slope.
-  add('/Game/GHSDigitalTwin/Meshes/SM_GHS_Shared_Conveyor',[*v['position_m'],.021],v['rotation_deg'],(v['size_m'][0]/1.054911,v['size_m'][1]/3.026911,1),v['source_handles'],'reused_inclined_conveyor');handled.add(v['id'])
+  # Preserve the source belt boundary/axis. The CAD envelope is not a deck.
+  spec=audited_conveyor_specs[v['source_handles'][0]]
+  add(spec['mesh'],spec['position_m'],spec['rotation_deg'],source=v['source_handles'],kind='cad_supply_belt')
+  instances[-1]['height_basis']=spec['height_basis'];handled.add(v['id'])
  if n in ('0.0393700787401575','13131'):
   zones.append({'source_handles':v['source_handles'],'classification':'Four-view equipment illustration; not four physical machines'});handled.add(v['id'])
  if n=='作业工人':handled.add(v['id'])

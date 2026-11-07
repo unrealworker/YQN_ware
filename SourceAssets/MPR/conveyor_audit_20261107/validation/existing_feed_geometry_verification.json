@@ -1,0 +1,1237 @@
+{
+  "source_sha256": "c316aafe183162c5bef636885b59cc1000c3eecf50d8be645490b4716c6af863",
+  "evidence_sha256": "7c1f67e4da56de7cd94cdecf6870f4642945b19609c0162c68258f38b8a800da",
+  "arc_evidence_sha256": "a43489eff182c8f983e4e4589f29a22fd511175361ab11e286f98457186b0841",
+  "new_feed_count": 39,
+  "mesh_checks": [
+    {
+      "mesh": "SM_MPR_CADFeedBelt",
+      "triangles": 168,
+      "fbx_sha256": "b2612c11b31daab9119b038bb00eecc5879333843a2516dab28c7fd84f187bd9",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_CADFeedCap",
+      "triangles": 132,
+      "fbx_sha256": "1ad2f8564c9e31932e22bcb27bf05977e3249a5ef8448ac908d6d1a76d1a7ebf",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_CADFeedChevron_2CB2DE",
+      "triangles": 1096,
+      "fbx_sha256": "c5d105497ace73fa90ad6ad1a430b7f43e13e356ba0cc9e435f3953d5cdc1ebe",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_CADFeedChevron_2CC6A3",
+      "triangles": 1096,
+      "fbx_sha256": "48e1a8ec0acd3fb4a4380546857907280a37724e9be9cf40797e2de7ca004535",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_CADFeedChevron_2CC7B0",
+      "triangles": 1096,
+      "fbx_sha256": "445e52f83c3cf60b5167fd43f5d9396760799d2451322d2ccfbf4336349583a7",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_CADFeedRise120",
+      "triangles": 168,
+      "fbx_sha256": "c148488a85741dfc34d8bbbf23e6cf08ef80bfa8851270aa8330dc3ecff7f458",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_CADFeedRise150",
+      "triangles": 168,
+      "fbx_sha256": "8f491d582637ab975dfa2333d1ebb3d184d2ba81dd0f74c4d081635450887d45",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_CADFeedTerminal",
+      "triangles": 168,
+      "fbx_sha256": "20e953c76480c1053496c9b359a5d4482a0dffa904d3204248040a82c311ea7a",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_CADFeedTerminalBay",
+      "triangles": 132,
+      "fbx_sha256": "cd5a530d91396f8a8368b305904d77a9c2f5770dc9383be00b98af4a680662f3",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_CADFeedTransfer_2CB2DE",
+      "triangles": 12,
+      "fbx_sha256": "ec9ba039e8c406477c01a18b14d13626f92499061ae24196bc54521cb80062c3",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_CADFeedTransfer_2CC6A3",
+      "triangles": 12,
+      "fbx_sha256": "866a1c2ef1bcd4928b0cda16e8edbe3e4feee2b2a86dcc32ff0899e31b716273",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_CADFeedTransfer_2CC7B0",
+      "triangles": 12,
+      "fbx_sha256": "cdbea9e80f8c11f38d9389b09324d33f004c02350576c773ee3433a865c91d0e",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_Turn__U33",
+      "triangles": 488,
+      "fbx_sha256": "328715d299b20dcb70483cbad4d3bfa6f42c0439fbc5292f52d1d6297865a2ce",
+      "zero_degenerate_faces": true
+    },
+    {
+      "mesh": "SM_MPR_Turn__U33_Reflected",
+      "triangles": 488,
+      "fbx_sha256": "4ea1b8ee147a02e9f5181c397803dc2c123a329c613bbe54df41ab158e435096",
+      "zero_degenerate_faces": true
+    }
+  ],
+  "feed_checks": [
+    {
+      "id": "2CB2DE_entrance",
+      "mesh": "SM_MPR_CADFeedRise120",
+      "source_edge_error_m": 0.0010700238418621666,
+      "actual_surface_bounds_m": [
+        [
+          112.88553002384185,
+          59.51962487105369,
+          1.0
+        ],
+        [
+          115.68552997615814,
+          60.3194551289463,
+          1.2000000476837158
+        ]
+      ],
+      "port_heights_m": [
+        1.0,
+        1.2
+      ]
+    },
+    {
+      "id": "2CC6A3_entrance",
+      "mesh": "SM_MPR_CADFeedRise120",
+      "source_edge_error_m": 0.0010700238418621666,
+      "actual_surface_bounds_m": [
+        [
+          95.00921002384186,
+          59.51962487105369,
+          1.0
+        ],
+        [
+          97.80920997615814,
+          60.3194551289463,
+          1.2000000476837158
+        ]
+      ],
+      "port_heights_m": [
+        1.0,
+        1.2
+      ]
+    },
+    {
+      "id": "2CC7B0_entrance",
+      "mesh": "SM_MPR_CADFeedRise120",
+      "source_edge_error_m": 0.0010659238418568862,
+      "actual_surface_bounds_m": [
+        [
+          48.13956002384186,
+          57.14407247156292,
+          1.0
+        ],
+        [
+          50.939559976158144,
+          57.94390752843708,
+          1.2000000476837158
+        ]
+      ],
+      "port_heights_m": [
+        1.0,
+        1.2
+      ]
+    },
+    {
+      "id": "2CB2DE_slope_2_19",
+      "mesh": "SM_MPR_CADFeedRise150",
+      "source_edge_error_m": 9.536743306171047e-08,
+      "actual_surface_bounds_m": [
+        [
+          115.84046997138977,
+          59.523589904632566,
+          1.2000000476837158
+        ],
+        [
+          118.03047002861022,
+          60.32359009536743,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.2,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC6A3_slope_2_19",
+      "mesh": "SM_MPR_CADFeedRise150",
+      "source_edge_error_m": 9.536743306171047e-08,
+      "actual_surface_bounds_m": [
+        [
+          92.66426997138977,
+          59.523589904632566,
+          1.2000000476837158
+        ],
+        [
+          94.85427002861023,
+          60.32359009536743,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.2,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_slope_2_19",
+      "mesh": "SM_MPR_CADFeedRise150",
+      "source_edge_error_m": 6.324633332610574e-06,
+      "actual_surface_bounds_m": [
+        [
+          51.09449997138977,
+          57.148053104633334,
+          1.2000000476837158
+        ],
+        [
+          53.28450002861023,
+          57.94804689536667,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.2,
+        1.5
+      ]
+    },
+    {
+      "id": "2CB2DE_belt_1_46",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 5.087015026106201e-06,
+      "actual_surface_bounds_m": [
+        [
+          119.47474491298496,
+          59.52786996423721,
+          1.5
+        ],
+        [
+          120.93461508701503,
+          60.327870035762786,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC6A3_belt_1_46",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 8.701563558588532e-08,
+      "actual_surface_bounds_m": [
+        [
+          89.76012991298437,
+          59.52786996423721,
+          1.5
+        ],
+        [
+          91.22001008701564,
+          60.327870035762786,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_belt_1_46",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 7.0542374999149615e-06,
+      "actual_surface_bounds_m": [
+        [
+          54.728761412984554,
+          57.1523331642375,
+          1.5
+        ],
+        [
+          56.18863858701545,
+          57.9523268357625,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CB2DE_belt_2_19",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 4.364237611298449e-06,
+      "actual_surface_bounds_m": [
+        [
+          122.74556986946583,
+          59.5339343642376,
+          1.5
+        ],
+        [
+          124.93557013053417,
+          60.33392563576239,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC6A3_belt_2_19",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 4.364237611298449e-06,
+      "actual_surface_bounds_m": [
+        [
+          85.75917986946583,
+          59.5339343642376,
+          1.5
+        ],
+        [
+          87.94918013053417,
+          60.33392563576239,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_belt_2_19",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 5.194237495231846e-06,
+      "actual_surface_bounds_m": [
+        [
+          57.99958986946582,
+          57.1583931642375,
+          1.5
+        ],
+        [
+          60.18959013053417,
+          57.958386835762504,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CB2DE_belt_0_73",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 4.364237611298449e-06,
+      "actual_surface_bounds_m": [
+        [
+          124.93896995648146,
+          59.53256436423761,
+          1.5
+        ],
+        [
+          125.66909004351854,
+          60.3325556357624,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC6A3_belt_0_73",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 4.364237611298449e-06,
+      "actual_surface_bounds_m": [
+        [
+          85.02565995648146,
+          59.53256436423761,
+          1.5
+        ],
+        [
+          85.75578004351854,
+          60.3325556357624,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_belt_0_73",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 5.344237500537474e-06,
+      "actual_surface_bounds_m": [
+        [
+          60.19298845648128,
+          57.1570231642375,
+          1.5
+        ],
+        [
+          60.92311154351872,
+          57.9570168357625,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CB2DE_inline_drive",
+      "mesh": "SM_MPR_CADFeedChevron_2CB2DE",
+      "source_edge_error_m": null,
+      "actual_surface_bounds_m": [
+        [
+          118.10245108098984,
+          59.483454473590854,
+          1.5
+        ],
+        [
+          119.39037411899567,
+          60.366344370222095,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC6A3_inline_drive",
+      "mesh": "SM_MPR_CADFeedChevron_2CC6A3",
+      "source_edge_error_m": null,
+      "actual_surface_bounds_m": [
+        [
+          91.30437588100433,
+          59.48345459280014,
+          1.5
+        ],
+        [
+          92.59229891901016,
+          60.366344489431384,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_inline_drive",
+      "mesh": "SM_MPR_CADFeedChevron_2CC7B0",
+      "source_edge_error_m": null,
+      "actual_surface_bounds_m": [
+        [
+          53.356471080989834,
+          57.10861447359085,
+          1.5
+        ],
+        [
+          54.64439411899566,
+          57.99150437022209,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_weigh_belt_a",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 2.4557627824606243e-06,
+      "actual_surface_bounds_m": [
+        [
+          56.197599946677684,
+          57.157359964237216,
+          1.5
+        ],
+        [
+          57.092200053322316,
+          57.95736003576279,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_weigh_belt_b",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 2.4557627824606243e-06,
+      "actual_surface_bounds_m": [
+        [
+          57.09559994626045,
+          57.157359964237216,
+          1.5
+        ],
+        [
+          57.99720005373955,
+          57.95736003576279,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CB2DE_weigh_belt_a",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 4.935597146982218e-06,
+      "actual_surface_bounds_m": [
+        [
+          120.9435699466777,
+          59.53289996423721,
+          1.5
+        ],
+        [
+          121.83817005332232,
+          60.33290003576278,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CB2DE_weigh_belt_b",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 4.936014306622383e-06,
+      "actual_surface_bounds_m": [
+        [
+          121.84156994626046,
+          59.53289996423721,
+          1.5
+        ],
+        [
+          122.74317005373955,
+          60.33290003576278,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC6A3_weigh_belt_a",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 4.52461940625426e-06,
+      "actual_surface_bounds_m": [
+        [
+          88.8565699466777,
+          59.53289996423721,
+          1.5
+        ],
+        [
+          89.75117005332231,
+          60.33290003576278,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC6A3_weigh_belt_b",
+      "mesh": "SM_MPR_CADFeedBelt",
+      "source_edge_error_m": 4.52461940625426e-06,
+      "actual_surface_bounds_m": [
+        [
+          87.95156994626046,
+          59.53289996423721,
+          1.5
+        ],
+        [
+          88.85317005373955,
+          60.33290003576278,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CB2DE_transition",
+      "mesh": "SM_MPR_CADFeedTransfer_2CB2DE",
+      "source_edge_error_m": null,
+      "actual_surface_bounds_m": [
+        [
+          115.68552996563912,
+          59.51961750846863,
+          1.2000000476837158
+        ],
+        [
+          115.84047003436089,
+          60.32358748775482,
+          1.2000000476837158
+        ]
+      ],
+      "port_heights_m": [
+        1.2,
+        1.2
+      ]
+    },
+    {
+      "id": "2CC6A3_transition",
+      "mesh": "SM_MPR_CADFeedTransfer_2CC6A3",
+      "source_edge_error_m": null,
+      "actual_surface_bounds_m": [
+        [
+          94.85426996563912,
+          59.51961750846863,
+          1.2000000476837158
+        ],
+        [
+          95.00921003436089,
+          60.32358748775482,
+          1.2000000476837158
+        ]
+      ],
+      "port_heights_m": [
+        1.2,
+        1.2
+      ]
+    },
+    {
+      "id": "2CC7B0_transition",
+      "mesh": "SM_MPR_CADFeedTransfer_2CC7B0",
+      "source_edge_error_m": null,
+      "actual_surface_bounds_m": [
+        [
+          50.939559369592665,
+          57.144074111003874,
+          1.2000000476837158
+        ],
+        [
+          51.09450063040733,
+          57.94804659368515,
+          1.2000000476837158
+        ]
+      ],
+      "port_heights_m": [
+        1.2,
+        1.2
+      ]
+    },
+    {
+      "id": "2CC7B0_terminal_0",
+      "mesh": "SM_MPR_CADFeedTerminal",
+      "source_edge_error_m": 1.3764464412702182e-06,
+      "actual_surface_bounds_m": [
+        [
+          60.93297982355356,
+          57.32068219071004,
+          1.5
+        ],
+        [
+          62.032980176446436,
+          57.784537809289965,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_terminal_1",
+      "mesh": "SM_MPR_CADFeedTerminal",
+      "source_edge_error_m": 4.426446437832965e-06,
+      "actual_surface_bounds_m": [
+        [
+          62.03514982355356,
+          57.32089219071003,
+          1.5
+        ],
+        [
+          63.13515017644644,
+          57.78474780928996,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_terminal_2",
+      "mesh": "SM_MPR_CADFeedTerminal",
+      "source_edge_error_m": 3.556446444008543e-06,
+      "actual_surface_bounds_m": [
+        [
+          63.139189823553565,
+          57.32131219071004,
+          1.5
+        ],
+        [
+          64.23919017644644,
+          57.785167809289966,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_terminal_3",
+      "mesh": "SM_MPR_CADFeedTerminal",
+      "source_edge_error_m": 3.2964464367069013e-06,
+      "actual_surface_bounds_m": [
+        [
+          64.24105982355357,
+          57.32146219071004,
+          1.5
+        ],
+        [
+          65.34106017644643,
+          57.785317809289964,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_terminal_4",
+      "mesh": "SM_MPR_CADFeedTerminal",
+      "source_edge_error_m": 1.416446423263551e-06,
+      "actual_surface_bounds_m": [
+        [
+          65.34359982355357,
+          57.321302190710036,
+          1.5
+        ],
+        [
+          66.44360017644644,
+          57.78515780928996,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_terminal_5",
+      "mesh": "SM_MPR_CADFeedTerminal",
+      "source_edge_error_m": 1.0064464248671356e-06,
+      "actual_surface_bounds_m": [
+        [
+          66.44553982355357,
+          57.32140219071004,
+          1.5
+        ],
+        [
+          67.54554017644644,
+          57.785257809289966,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_terminal_6",
+      "mesh": "SM_MPR_CADFeedTerminal",
+      "source_edge_error_m": 2.1564464418588614e-06,
+      "actual_surface_bounds_m": [
+        [
+          67.54668982355356,
+          57.32147219071004,
+          1.5
+        ],
+        [
+          68.64669017644643,
+          57.78532780928997,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CB2DE_terminal_cap",
+      "mesh": "SM_MPR_CADFeedCap",
+      "source_edge_error_m": 5.960464477539063e-08,
+      "actual_surface_bounds_m": [
+        [
+          133.73175994039536,
+          59.51799996185303,
+          1.4299999475479126
+        ],
+        [
+          134.73176005960465,
+          60.313000038146974,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC6A3_terminal_cap",
+      "mesh": "SM_MPR_CADFeedCap",
+      "source_edge_error_m": 5.960464477539063e-08,
+      "actual_surface_bounds_m": [
+        [
+          75.96298994039536,
+          59.526609961853026,
+          1.4299999475479126
+        ],
+        [
+          76.96299005960465,
+          60.32161003814697,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_terminal_cap",
+      "mesh": "SM_MPR_CADFeedCap",
+      "source_edge_error_m": 1.2896046399646366e-06,
+      "actual_surface_bounds_m": [
+        [
+          70.48577994039536,
+          57.14245996185303,
+          1.4299999475479126
+        ],
+        [
+          71.48578005960465,
+          57.93746003814697,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_terminal_bay_0_9",
+      "mesh": "SM_MPR_CADFeedTerminalBay",
+      "source_edge_error_m": 3.12364417709432e-06,
+      "actual_surface_bounds_m": [
+        [
+          68.95098994635582,
+          57.14356996900558,
+          1.4299999475479126
+        ],
+        [
+          69.85099005364417,
+          57.95357003099441,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "id": "2CC7B0_terminal_bay_0_6",
+      "mesh": "SM_MPR_CADFeedTerminalBay",
+      "source_edge_error_m": 3.1057628007147287e-06,
+      "actual_surface_bounds_m": [
+        [
+          69.8509899642372,
+          57.14356996900558,
+          1.4299999475479126
+        ],
+        [
+          70.45099003576279,
+          57.95357003099441,
+          1.5
+        ]
+      ],
+      "port_heights_m": [
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "curve_feed_port_checks": [
+    {
+      "curve_handle": "2CB2DE",
+      "source_inner_arc_endpoints_m": [
+        [
+          112.88553347115813,
+          59.51953563716071
+        ],
+        [
+          112.88553347115813,
+          60.31953563716071
+        ]
+      ],
+      "actual_feed_port_m": [
+        [
+          112.88553002384185,
+          59.51962487105369,
+          1.0
+        ],
+        [
+          112.88553002384185,
+          60.31945489052772,
+          1.0
+        ]
+      ],
+      "edge_errors_m": [
+        8.930045714837563e-05,
+        8.082018762988787e-05
+      ],
+      "actual_retained_curve_port_m": [
+        [
+          112.88553004055024,
+          59.46954010173321,
+          1.0
+        ],
+        [
+          112.88552992134095,
+          60.42454009994507,
+          1.0
+        ]
+      ],
+      "height_step_m": 0.0
+    },
+    {
+      "curve_handle": "2CC6A3",
+      "source_inner_arc_endpoints_m": [
+        [
+          97.80921222062092,
+          59.51953563716071
+        ],
+        [
+          97.80921222062092,
+          60.31953563716071
+        ]
+      ],
+      "actual_feed_port_m": [
+        [
+          97.80920997615814,
+          59.51962510947227,
+          1.0
+        ],
+        [
+          97.80920997615814,
+          60.3194551289463,
+          1.0
+        ]
+      ],
+      "edge_errors_m": [
+        8.950045893703123e-05,
+        8.053949466320833e-05
+      ],
+      "actual_retained_curve_port_m": [
+        [
+          97.80920984024048,
+          60.42453986152649,
+          1.0
+        ],
+        [
+          97.80920995944977,
+          59.46953989311695,
+          1.0
+        ]
+      ],
+      "height_step_m": 0.0
+    },
+    {
+      "curve_handle": "2CC7B0",
+      "source_inner_arc_endpoints_m": [
+        [
+          48.139557348882995,
+          57.14488225041148
+        ],
+        [
+          48.139557348882995,
+          57.94488225041148
+        ]
+      ],
+      "actual_feed_port_m": [
+        [
+          48.13956002384186,
+          57.14407247156292,
+          1.0
+        ],
+        [
+          48.13956002384186,
+          57.943907290017066,
+          1.0
+        ]
+      ],
+      "edge_errors_m": [
+        0.0008097832666665414,
+        0.0009749640639963826
+      ],
+      "actual_retained_curve_port_m": [
+        [
+          48.13956004055023,
+          57.09488010173321,
+          1.0
+        ],
+        [
+          48.13955992134094,
+          58.04988009994507,
+          1.0
+        ]
+      ],
+      "height_step_m": 0.0
+    }
+  ],
+  "adjacent_surface_checks": [
+    {
+      "upstream": "2CB2DE_entrance",
+      "downstream": "2CB2DE_transition",
+      "actual_carrying_surface_gap_m": -1.0519016768739675e-08,
+      "source_frame_gap_m": 0.0,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CB2DE_transition",
+      "downstream": "2CB2DE_slope_2_19",
+      "actual_carrying_surface_gap_m": -6.29711252031484e-08,
+      "source_frame_gap_m": 0.0,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CB2DE_slope_2_19",
+      "downstream": "2CB2DE_inline_drive",
+      "actual_carrying_surface_gap_m": 0.07198105237961272,
+      "source_frame_gap_m": null,
+      "height_step_m": 0.0,
+      "note": "Source V-roller ends are open between discrete rollers"
+    },
+    {
+      "upstream": "2CB2DE_inline_drive",
+      "downstream": "2CB2DE_belt_1_46",
+      "actual_carrying_surface_gap_m": 0.0843707939892937,
+      "source_frame_gap_m": null,
+      "height_step_m": 0.0,
+      "note": "Source V-roller ends are open between discrete rollers"
+    },
+    {
+      "upstream": "2CB2DE_belt_1_46",
+      "downstream": "2CB2DE_weigh_belt_a",
+      "actual_carrying_surface_gap_m": 0.008954859662665626,
+      "source_frame_gap_m": 0.008964882274838715,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CB2DE_weigh_belt_a",
+      "downstream": "2CB2DE_weigh_belt_b",
+      "actual_carrying_surface_gap_m": 0.0033998929381482412,
+      "source_frame_gap_m": 0.0033999999998997055,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CB2DE_weigh_belt_b",
+      "downstream": "2CB2DE_belt_2_19",
+      "actual_carrying_surface_gap_m": 0.0023998157262781206,
+      "source_frame_gap_m": 0.0023951177252286016,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CB2DE_belt_2_19",
+      "downstream": "2CB2DE_belt_0_73",
+      "actual_carrying_surface_gap_m": 0.00339982594728383,
+      "source_frame_gap_m": 0.0033999999999991815,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CC6A3_entrance",
+      "downstream": "2CC6A3_transition",
+      "actual_carrying_surface_gap_m": -1.051903097959439e-08,
+      "source_frame_gap_m": -0.0,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CC6A3_transition",
+      "downstream": "2CC6A3_slope_2_19",
+      "actual_carrying_surface_gap_m": -6.297111099229369e-08,
+      "source_frame_gap_m": -0.0,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CC6A3_slope_2_19",
+      "downstream": "2CC6A3_inline_drive",
+      "actual_carrying_surface_gap_m": 0.07197105237960955,
+      "source_frame_gap_m": null,
+      "height_step_m": 0.0,
+      "note": "Source V-roller ends are open between discrete rollers"
+    },
+    {
+      "upstream": "2CC6A3_inline_drive",
+      "downstream": "2CC6A3_belt_1_46",
+      "actual_carrying_surface_gap_m": 0.08436579398869526,
+      "source_frame_gap_m": null,
+      "height_step_m": 0.0,
+      "note": "Source V-roller ends are open between discrete rollers"
+    },
+    {
+      "upstream": "2CC6A3_belt_1_46",
+      "downstream": "2CC6A3_weigh_belt_a",
+      "actual_carrying_surface_gap_m": 0.008959859662056147,
+      "source_frame_gap_m": 0.008959190495701819,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CC6A3_weigh_belt_a",
+      "downstream": "2CC6A3_weigh_belt_b",
+      "actual_carrying_surface_gap_m": 0.0033998929381482412,
+      "source_frame_gap_m": 0.0033999999998997055,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CC6A3_weigh_belt_b",
+      "downstream": "2CC6A3_belt_2_19",
+      "actual_carrying_surface_gap_m": 0.0023898157262891573,
+      "source_frame_gap_m": 0.0023908095043765343,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CC6A3_belt_2_19",
+      "downstream": "2CC6A3_belt_0_73",
+      "actual_carrying_surface_gap_m": 0.00339982594728383,
+      "source_frame_gap_m": 0.0033999999999991815,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CC7B0_entrance",
+      "downstream": "2CC7B0_transition",
+      "actual_carrying_surface_gap_m": -6.065654787335006e-07,
+      "source_frame_gap_m": 0.0,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CC7B0_transition",
+      "downstream": "2CC7B0_slope_2_19",
+      "actual_carrying_surface_gap_m": -6.590175587461999e-07,
+      "source_frame_gap_m": 0.0,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CC7B0_slope_2_19",
+      "downstream": "2CC7B0_inline_drive",
+      "actual_carrying_surface_gap_m": 0.07197105237960244,
+      "source_frame_gap_m": null,
+      "height_step_m": 0.0,
+      "note": "Source V-roller ends are open between discrete rollers"
+    },
+    {
+      "upstream": "2CC7B0_inline_drive",
+      "downstream": "2CC7B0_belt_1_46",
+      "actual_carrying_surface_gap_m": 0.08436729398889042,
+      "source_frame_gap_m": null,
+      "height_step_m": 0.0,
+      "note": "Source V-roller ends are open between discrete rollers"
+    },
+    {
+      "upstream": "2CC7B0_belt_1_46",
+      "downstream": "2CC7B0_weigh_belt_a",
+      "actual_carrying_surface_gap_m": 0.0089613596622371,
+      "source_frame_gap_m": 0.00896245999999934,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CC7B0_weigh_belt_a",
+      "downstream": "2CC7B0_weigh_belt_b",
+      "actual_carrying_surface_gap_m": 0.0033998929381340304,
+      "source_frame_gap_m": 0.0033999999999991815,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CC7B0_weigh_belt_b",
+      "downstream": "2CC7B0_belt_2_19",
+      "actual_carrying_surface_gap_m": 0.0023898157262749464,
+      "source_frame_gap_m": 0.0023908399999967855,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    },
+    {
+      "upstream": "2CC7B0_belt_2_19",
+      "downstream": "2CC7B0_belt_0_73",
+      "actual_carrying_surface_gap_m": 0.0033983259471099814,
+      "source_frame_gap_m": 0.003401620000005323,
+      "height_step_m": 0.0,
+      "note": "Original drafted machine clearance retained"
+    }
+  ],
+  "height_note": "Local planar H annotations are exact. Inferring 0.5->1.2->1.5m along the first two stages is plausible, but no source endpoint Z or slope arrow proves that assignment. Do not call a constant 1m deck CAD-height-conformant.",
+  "note": "FBX vertices checked against original CAD edge records. Z uses explicit H-range endpoint interpretation; tiny drafted machine clearances are retained."
+}

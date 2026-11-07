@@ -71,7 +71,7 @@ for v in d['equipment']:
  elif n=='PKG_CARTON_SEALER':x['kind']='carton_sealer';x['classification_confidence']='named block'
  elif n in ('FL_PALLET_48W_40D_STD','GYL_YQN'):
   out['pallet_positions'].append(x);continue
- elif n=='A$Cb1177cf1':x['kind']='workstation';x['classification_confidence']='repeated adjacent-to-conveyor station footprint'
+ elif n=='A$Cb1177cf1':x['kind']='floor_placeholder';x['classification_confidence']='verified rectangle plus two diagonal lines only; floor placeholder, no table or screen evidence'
  elif n=='321321':x['kind']='collection_cells';x['classification_confidence']='verified four independent CAD frames; continuous belt or drive is not implied'
  elif n=='Y型汇流机':x['kind']='y_merge';x['classification_confidence']='verified paired V-pattern oblique rollers within the measured outer frame'
  elif n in DRIVE_DETAIL_BLOCKS:x['kind']='conveyor_drive_detail';x['classification_confidence']='verified drive/motor detail over an existing conveyor; outer envelope is not a second transport deck'

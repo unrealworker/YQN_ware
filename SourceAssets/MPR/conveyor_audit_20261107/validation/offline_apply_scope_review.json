@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "changed_groups": 10,
+  "replaced_instances": 111,
+  "new_groups": 5,
+  "retained_instances_in_changed_groups": 52,
+  "unrelated_actors_protected": 877,
+  "candidate_exact_scope_passed": true,
+  "destructive_mutations_rejected": [
+    "move_untargeted_instance_inside_changed_group",
+    "drop_untargeted_instance_inside_changed_group",
+    "change_untargeted_material_override",
+    "move_unrelated_actor",
+    "delete_unrelated_actor",
+    "unexpected_new_actor",
+    "change_new_instance_position",
+    "change_new_instance_shadow",
+    "change_world_settings",
+    "duplicate_removal_index",
+    "out_of_range_removal_index",
+    "stale_original_transform"
+  ],
+  "live_unreal_used": false,
+  "limitations": [
+    "No runtime material usage/import validation in offline test.",
+    "New actor render properties outside snapshot schema require separate stored render_properties reload checks."
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "units": "metres",
+  "axis": "CAD +Y; UE import X=100*x,Y=-100*y,Z=100*z",
+  "meshes": [
+    {
+      "name": "SM_MPR_CADFloorPlaceholder",
+      "fbx": "SourceAssets/MPR/conveyor_audit_20261107/SM_MPR_CADFloorPlaceholder.fbx",
+      "material_roles": [
+        "Charcoal"
+      ],
+      "bounds_m": [
+        [
+          -0.506,
+          0.506
+        ],
+        [
+          -0.606,
+          0.6060000000000001
+        ],
+        [
+          0.01,
+          0.014
+        ]
+      ],
+      "vertices": 48,
+      "triangles": 72
+    },
+    {
+      "name": "SM_MPR_CADSupplyBelt_2CCF62",
+      "fbx": "SourceAssets/MPR/conveyor_audit_20261107/SM_MPR_CADSupplyBelt_2CCF62.fbx",
+      "material_roles": [
+        "Rubber",
+        "Cobalt",
+        "Metal",
+        "Charcoal"
+      ],
+      "bounds_m": [
+        [
+          -1.1573912300000018,
+          1.157390719999995
+        ],
+        [
+          -0.5297107299999999,
+          0.52971155
+        ],
+        [
+          0.0,
+          1.07
+        ]
+      ],
+      "vertices": 168,
+      "triangles": 252
+    },
+    {
+      "name": "SM_MPR_CADSupplyBelt_2CCF66",
+      "fbx": "SourceAssets/MPR/conveyor_audit_20261107/SM_MPR_CADSupplyBelt_2CCF66.fbx",
+      "material_roles": [
+        "Rubber",
+        "Cobalt",
+        "Metal",
+        "Charcoal"
+      ],
+      "bounds_m": [
+        [
+          -1.1573943899999932,
+          1.1573875599999894
+        ],
+        [
+          -0.5297160599999993,
+          0.5297062299999995
+        ],
+        [
+          0.0,
+          1.07
+        ]
+      ],
+      "vertices": 168,
+      "triangles": 252
+    },
+    {
+      "name": "SM_MPR_CADSupplyBelt_2E7F10",
+      "fbx": "SourceAssets/MPR/conveyor_audit_20261107/SM_MPR_CADSupplyBelt_2E7F10.fbx",
+      "material_roles": [
+        "Rubber",
+        "Cobalt",
+        "Metal",
+        "Charcoal"
+      ],
+      "bounds_m": [
+        [
+          -1.4256013599999875,
+          1.3956009400000084
+        ],
+        [
+          -0.45950263999999963,
+          0.4344973599999976
+        ],
+        [
+          0.0,
+          1.07
+        ]
+      ],
+      "vertices": 112,
+      "triangles": 168
+    }
+  ],
+  "owner": "mpr-conveyor-audit-20261107",
+  "source_sha256": "c316aafe183162c5bef636885b59cc1000c3eecf50d8be645490b4716c6af863",
+  "scope": "3 CAD supply belts + 108 crossed ground markers only"
+}

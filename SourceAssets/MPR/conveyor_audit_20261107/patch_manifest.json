@@ -1,0 +1,5658 @@
+{
+  "schema_version": 1,
+  "owner": "mpr-conveyor-audit-20261107",
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "snapshot_source": "SourceAssets/MPR/sorter_simulation/validation/scene_after.json.gz",
+  "snapshot_sha256": "50edd6b9f2314d3e7ba41d3afa0b068313598b757a325972663519dc25e38065",
+  "destination": "/Game/MPRWarehouse/ConveyorAudit20261107",
+  "geometry_manifest": "SourceAssets/MPR/conveyor_audit_20261107/MPR_CADConveyorAudit.json",
+  "replacement_count": 111,
+  "source_counts": {
+    "supply_belts": 3,
+    "floor_placeholders": 108
+  },
+  "replace": [
+    {
+      "source_handle": "2C965C",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 0,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -15449.868,
+            -6057.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -154.49868,
+          60.57763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C965C"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C965E",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 1,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -15449.868,
+            -6154.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -154.49868,
+          61.5445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C965E"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9662",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 2,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -15449.868,
+            -5507.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -154.49868,
+          55.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9662"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9664",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 3,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -15449.868,
+            -5604.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -154.49868,
+          56.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9664"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9668",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 4,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -15449.868,
+            -4957.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -154.49868,
+          49.57763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9668"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C966A",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 5,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -15449.868,
+            -5054.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -154.49868,
+          50.5445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C966A"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C966F",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 6,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -15449.868,
+            -4554.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -154.49868,
+          45.5445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C966F"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9671",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 2,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -15449.868,
+            -6607.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -154.49868,
+          66.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9671"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9673",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 3,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -15449.868,
+            -6704.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -154.49868,
+          67.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9673"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C969C",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 4,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -16112.723,
+            -6057.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -161.12723,
+          60.57763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C969C"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C969E",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 5,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -16112.723,
+            -6154.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -161.12723,
+          61.5445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C969E"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C96A2",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 7,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -16112.723,
+            -5507.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -161.12723,
+          55.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C96A2"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C96A4",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 8,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -16112.723,
+            -5604.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -161.12723,
+          56.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C96A4"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C96A8",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 9,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -16112.723,
+            -4957.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -161.12723,
+          49.57763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C96A8"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C96AA",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 10,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -16112.723,
+            -5054.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -161.12723,
+          50.5445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C96AA"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C96AF",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 11,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -16112.723,
+            -4554.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -161.12723,
+          45.5445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C96AF"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C96B1",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 6,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -16112.723,
+            -6607.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -161.12723,
+          66.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C96B1"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C96B3",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 7,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -16112.723,
+            -6704.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -161.12723,
+          67.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C96B3"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C974D",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 8,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14930.723,
+            -6207.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -149.30723,
+          62.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C974D"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C974F",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 9,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14930.723,
+            -6304.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -149.30723,
+          63.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C974F"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9753",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 12,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14930.723,
+            -5807.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -149.30723,
+          58.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9753"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9755",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 13,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14930.723,
+            -5904.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -149.30723,
+          59.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9755"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9759",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 14,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14930.723,
+            -5407.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -149.30723,
+          54.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9759"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C975B",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 15,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14930.723,
+            -5504.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -149.30723,
+          55.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C975B"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C975F",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 16,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14930.723,
+            -5007.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -149.30723,
+          50.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C975F"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9761",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 17,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14930.723,
+            -5104.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -149.30723,
+          51.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9761"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9766",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 18,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14930.723,
+            -4684.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -149.30723,
+          46.8445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9766"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9768",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 10,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14267.868000000002,
+            -6207.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.67868,
+          62.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9768"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C976A",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 11,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14267.868000000002,
+            -6304.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.67868,
+          63.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C976A"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C976E",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 19,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14267.868000000002,
+            -5807.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.67868,
+          58.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C976E"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9770",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 20,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14267.868000000002,
+            -5904.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.67868,
+          59.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9770"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9774",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 21,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14267.868000000002,
+            -5407.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.67868,
+          54.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9774"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9776",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 22,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14267.868000000002,
+            -5504.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.67868,
+          55.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9776"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C977B",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 23,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14267.868000000002,
+            -5104.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.67868,
+          51.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C977B"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C977D",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 12,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14930.723,
+            -6607.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -149.30723,
+          66.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C977D"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C977F",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 13,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14930.723,
+            -6704.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -149.30723,
+          67.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C977F"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9783",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 14,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14267.868000000002,
+            -6607.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.67868,
+          66.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9783"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9785",
+      "remove": {
+        "actor_guid": "1B3971394372731937249898EC892F7D",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_169",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 15,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14267.868000000002,
+            -6704.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.67868,
+          67.0445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9785"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C98A1",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 24,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14267.868000000002,
+            -5007.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.67868,
+          50.07763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C98A1"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C99B7",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 25,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14930.723,
+            -4587.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -149.30723,
+          45.87763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C99B7"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C99BA",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 26,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14267.868000000002,
+            -4587.763,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.67868,
+          45.87763,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C99BA"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C99BD",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 27,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14267.868000000002,
+            -4684.45,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.67868,
+          46.8445,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C99BD"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C99BF",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 28,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14276.639,
+            -3952.6789999999996,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            1.0,
+            -6.123233995736767e-17
+          ],
+          "scale": [
+            0.9668699999999996,
+            0.9668749999999996,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -142.76639,
+          39.52679,
+          0
+        ],
+        "rotation_deg": 180.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C99BF"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C99C2",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 29,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -14179.952,
+            -3952.6789999999996,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.96687,
+            0.966875,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -141.79952,
+          39.52679,
+          0
+        ],
+        "rotation_deg": 0.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C99C2"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9AB9",
+      "remove": {
+        "actor_guid": "A77B5AFC4190E8D7ED468F9853B99533",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_167",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 0,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -12262.987,
+            564.6370000000001,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.96687,
+            0.966875,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -122.62987,
+          -5.64637,
+          0
+        ],
+        "rotation_deg": -0.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9AB9"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9ABA",
+      "remove": {
+        "actor_guid": "A77B5AFC4190E8D7ED468F9853B99533",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_167",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 1,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -12262.987,
+            448.61199999999997,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.96687,
+            0.966875,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -122.62987,
+          -4.48612,
+          0
+        ],
+        "rotation_deg": -0.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9ABA"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2C9ABB",
+      "remove": {
+        "actor_guid": "A77B5AFC4190E8D7ED468F9853B99533",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_167",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 2,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -12262.987,
+            332.587,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.96687,
+            0.966875,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -122.62987,
+          -3.32587,
+          0
+        ],
+        "rotation_deg": -0.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2C9ABB"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2CCFF0",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 34,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -13818.905,
+            -3952.6789999999996,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.96687,
+            0.966875,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -138.18905,
+          39.52679,
+          0
+        ],
+        "rotation_deg": 0.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2CCFF0"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2CCFF3",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 35,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -13915.593,
+            -3952.6789999999996,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            1.0,
+            -6.123233995736767e-17
+          ],
+          "scale": [
+            0.9668699999999996,
+            0.9668749999999996,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -139.15593,
+          39.52679,
+          0
+        ],
+        "rotation_deg": 180.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2CCFF3"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2CCFF6",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 36,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -13361.705,
+            -3952.6789999999996,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.96687,
+            0.966875,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -133.61705,
+          39.52679,
+          0
+        ],
+        "rotation_deg": 0.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2CCFF6"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2CCFF9",
+      "remove": {
+        "actor_guid": "2B6CC8164D932D26A413D39AE5378A85",
+        "actor_label": "MPR_SM_MPR_WorkTable_-3_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_168",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 37,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -13458.393,
+            -3952.6789999999996,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            1.0,
+            -6.123233995736767e-17
+          ],
+          "scale": [
+            0.9668699999999996,
+            0.9668749999999996,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -134.58393,
+          39.52679,
+          0
+        ],
+        "rotation_deg": 180.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2CCFF9"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D437C",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 0,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -10082.093,
+            3537.297,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -100.82093,
+          -35.37297,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D437C"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D437D",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 1,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -10081.614,
+            3633.9840000000004,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -100.81614,
+          -36.33984,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D437D"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D437E",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 2,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -10082.093,
+            3730.672,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -100.82093,
+          -37.30672,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D437E"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D437F",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 3,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -9966.068,
+            3537.297,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -99.66068,
+          -35.37297,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D437F"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4380",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 4,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -9965.589,
+            3633.9840000000004,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -99.65589,
+          -36.33984,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4380"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4381",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 5,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -9966.068,
+            3730.672,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -99.66068,
+          -37.30672,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4381"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4382",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 6,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -9850.043,
+            3537.297,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -98.50043,
+          -35.37297,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4382"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4383",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 7,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -9849.564,
+            3633.9840000000004,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -98.49564,
+          -36.33984,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4383"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4384",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 8,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -9850.043,
+            3730.672,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -98.50043,
+          -37.30672,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4384"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4385",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 9,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11515.510999999999,
+            3537.297,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -115.15511,
+          -35.37297,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4385"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4386",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 10,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11515.99,
+            3633.9840000000004,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -115.1599,
+          -36.33984,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4386"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4387",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 11,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11515.510999999999,
+            3730.672,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -115.15511,
+          -37.30672,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4387"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4388",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 12,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11631.536,
+            3537.297,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -116.31536,
+          -35.37297,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4388"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4389",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 13,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11632.015,
+            3633.9840000000004,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -116.32015,
+          -36.33984,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4389"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D438A",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 14,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11631.536,
+            3730.672,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -116.31536,
+          -37.30672,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D438A"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D438B",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 15,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11747.56,
+            3537.297,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -117.4756,
+          -35.37297,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D438B"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D438C",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 16,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11748.04,
+            3633.9840000000004,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -117.4804,
+          -36.33984,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D438C"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D438D",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 17,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11747.56,
+            3730.672,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -117.4756,
+          -37.30672,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D438D"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D438E",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 0,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -10476.457,
+            7154.456,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -104.76457,
+          -71.54456,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D438E"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D438F",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 1,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -10475.978000000001,
+            7251.143,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -104.75978,
+          -72.51143,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D438F"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4390",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 2,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -10476.457,
+            7347.830999999999,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -104.76457,
+          -73.47831,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4390"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4391",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 3,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -10360.433,
+            7154.456,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -103.60433,
+          -71.54456,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4391"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4392",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 4,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -10359.953,
+            7251.143,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -103.59953,
+          -72.51143,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4392"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4393",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 5,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -10360.433,
+            7347.830999999999,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -103.60433,
+          -73.47831,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4393"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4394",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 6,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -10244.408,
+            7154.456,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -102.44408,
+          -71.54456,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4394"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4395",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 7,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -10243.928,
+            7251.143,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -102.43928,
+          -72.51143,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4395"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4396",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 8,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -10244.408,
+            7347.830999999999,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -102.44408,
+          -73.47831,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4396"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4397",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 9,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11250.679,
+            7090.728,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -112.50679,
+          -70.90728,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4397"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4398",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 10,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11251.158,
+            7187.415,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -112.51158,
+          -71.87415,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4398"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4399",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 11,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11250.679,
+            7284.102,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -112.50679,
+          -72.84102,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4399"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D439A",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 12,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11366.704,
+            7090.728,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -113.66704,
+          -70.90728,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D439A"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D439B",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 13,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11367.183,
+            7187.415,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -113.67183,
+          -71.87415,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D439B"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D439C",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 14,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11366.704,
+            7284.102,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -113.66704,
+          -72.84102,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D439C"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D439D",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 15,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11482.729000000001,
+            7090.728,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -114.82729,
+          -70.90728,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D439D"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D439E",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 16,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11483.208,
+            7187.415,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -114.83208,
+          -71.87415,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D439E"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D439F",
+      "remove": {
+        "actor_guid": "CF4880EF4E04B2D181CFA6A421141D31",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-2",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_170",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 17,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11482.729000000001,
+            7284.102,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -114.82729,
+          -72.84102,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D439F"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D43D8",
+      "remove": {
+        "actor_guid": "47DED19E4BB20D98B9663B9C4E489952",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_172",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 3,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -8784.446,
+            -3363.472,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.96687,
+            0.966875,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -87.84446,
+          33.63472,
+          0
+        ],
+        "rotation_deg": -0.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D43D8"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D43D9",
+      "remove": {
+        "actor_guid": "47DED19E4BB20D98B9663B9C4E489952",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_172",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 4,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -8784.446,
+            -3479.497,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.96687,
+            0.966875,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -87.84446,
+          34.79497,
+          0
+        ],
+        "rotation_deg": -0.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D43D9"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D442F",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 18,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11863.585000000001,
+            3537.297,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -118.63585,
+          -35.37297,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D442F"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4430",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 19,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11864.064999999999,
+            3633.9840000000004,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -118.64065,
+          -36.33984,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4430"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4431",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 20,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11863.585000000001,
+            3730.672,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -118.63585,
+          -37.30672,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4431"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4432",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 21,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11984.429,
+            3537.297,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -119.84429,
+          -35.37297,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4432"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4433",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 22,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11984.908,
+            3633.9840000000004,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -119.84908,
+          -36.33984,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4433"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2D4434",
+      "remove": {
+        "actor_guid": "7F6EF6484889F718560F93864DB8B1E6",
+        "actor_label": "MPR_SM_MPR_WorkTable_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_171",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 23,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            -11984.429,
+            3730.672,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          -119.84429,
+          -37.30672,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2D4434"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E4655",
+      "remove": {
+        "actor_guid": "ECD6E1514CCD4E37423ADFB1DE4B6709",
+        "actor_label": "MPR_SM_MPR_WorkTable_0_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_174",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 4,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            5277.731,
+            -5155.398,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            1.0,
+            -6.123233995736767e-17
+          ],
+          "scale": [
+            0.9668699999999996,
+            0.9668749999999996,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          52.77731,
+          51.55398,
+          0
+        ],
+        "rotation_deg": 180.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E4655"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E4657",
+      "remove": {
+        "actor_guid": "ECD6E1514CCD4E37423ADFB1DE4B6709",
+        "actor_label": "MPR_SM_MPR_WorkTable_0_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_174",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 5,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            5374.418,
+            -5155.398,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.96687,
+            0.966875,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          53.74418,
+          51.55398,
+          0
+        ],
+        "rotation_deg": -0.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E4657"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E465B",
+      "remove": {
+        "actor_guid": "ECD6E1514CCD4E37423ADFB1DE4B6709",
+        "actor_label": "MPR_SM_MPR_WorkTable_0_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_174",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 6,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            5277.731,
+            -4513.5779999999995,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            1.0,
+            -6.123233995736767e-17
+          ],
+          "scale": [
+            0.9668699999999996,
+            0.9668749999999996,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          52.77731,
+          45.13578,
+          0
+        ],
+        "rotation_deg": 180.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E465B"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E465D",
+      "remove": {
+        "actor_guid": "ECD6E1514CCD4E37423ADFB1DE4B6709",
+        "actor_label": "MPR_SM_MPR_WorkTable_0_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_174",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 7,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            5374.418,
+            -4513.5779999999995,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.96687,
+            0.966875,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          53.74418,
+          45.13578,
+          0
+        ],
+        "rotation_deg": 0.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E465D"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E4662",
+      "remove": {
+        "actor_guid": "ECD6E1514CCD4E37423ADFB1DE4B6709",
+        "actor_label": "MPR_SM_MPR_WorkTable_0_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_174",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 8,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            5025.218,
+            -5155.398,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.96687,
+            0.966875,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          50.25218,
+          51.55398,
+          0
+        ],
+        "rotation_deg": -0.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E4662"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E4665",
+      "remove": {
+        "actor_guid": "ECD6E1514CCD4E37423ADFB1DE4B6709",
+        "actor_label": "MPR_SM_MPR_WorkTable_0_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_174",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 9,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            5025.218,
+            -4513.5779999999995,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.96687,
+            0.966875,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          50.25218,
+          45.13578,
+          0
+        ],
+        "rotation_deg": 0.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E4665"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E9461",
+      "remove": {
+        "actor_guid": "ECD6E1514CCD4E37423ADFB1DE4B6709",
+        "actor_label": "MPR_SM_MPR_WorkTable_0_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_174",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 10,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            4928.531,
+            -5155.398,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            1.0,
+            -6.123233995736767e-17
+          ],
+          "scale": [
+            0.9668699999999996,
+            0.9668749999999996,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          49.28531,
+          51.55398,
+          0
+        ],
+        "rotation_deg": 180.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E9461"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E9463",
+      "remove": {
+        "actor_guid": "ECD6E1514CCD4E37423ADFB1DE4B6709",
+        "actor_label": "MPR_SM_MPR_WorkTable_0_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_174",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 11,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            4928.531,
+            -4513.5779999999995,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            1.0,
+            -6.123233995736767e-17
+          ],
+          "scale": [
+            0.9668699999999996,
+            0.9668749999999996,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          49.28531,
+          45.13578,
+          0
+        ],
+        "rotation_deg": 180.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E9463"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E9467",
+      "remove": {
+        "actor_guid": "C2AF8A274D72775009F46B86766E9951",
+        "actor_label": "MPR_SM_MPR_WorkTable_1_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_175",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 30,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            10261.831,
+            -4174.008,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          102.61831,
+          41.74008,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E9467"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E946B",
+      "remove": {
+        "actor_guid": "C2AF8A274D72775009F46B86766E9951",
+        "actor_label": "MPR_SM_MPR_WorkTable_1_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_175",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 31,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            8458.306,
+            -4156.418,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          84.58306,
+          41.56418,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E946B"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E946D",
+      "remove": {
+        "actor_guid": "C2AF8A274D72775009F46B86766E9951",
+        "actor_label": "MPR_SM_MPR_WorkTable_1_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_175",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 32,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            9620.010999999999,
+            -4174.008,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          96.20011,
+          41.74008,
+          0
+        ],
+        "rotation_deg": -90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E946D"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E94B5",
+      "remove": {
+        "actor_guid": "C2AF8A274D72775009F46B86766E9951",
+        "actor_label": "MPR_SM_MPR_WorkTable_1_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_175",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 33,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            10261.831,
+            -4070.6960000000004,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          102.61831,
+          40.70696,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E94B5"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E94BA",
+      "remove": {
+        "actor_guid": "C2AF8A274D72775009F46B86766E9951",
+        "actor_label": "MPR_SM_MPR_WorkTable_1_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_175",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 34,
+        "expected_mesh_path": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_WorkTable.SM_MPR_WorkTable",
+        "expected_transform": {
+          "translation_cm": [
+            9100.126,
+            -4156.418,
+            0.0
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "scale": [
+            0.9668700000000002,
+            0.9668750000000003,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADFloorPlaceholder",
+        "position_m": [
+          91.00126,
+          41.56418,
+          0
+        ],
+        "rotation_deg": 90.0,
+        "scale": [
+          0.96687,
+          0.966875,
+          1
+        ],
+        "source_handles": [
+          "2E94BA"
+        ],
+        "kind": "cad_floor_placeholder",
+        "height_basis": "CAD rectangle and cross at floor level; operational meaning unconfirmed",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2CCF62",
+      "remove": {
+        "actor_guid": "29EF93E64FEB0131B94451970F955F72",
+        "actor_label": "MPR_SM_GHS_Shared_Conveyor_-2_0",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_210",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 0,
+        "expected_mesh_path": "/Game/GHSDigitalTwin/Meshes/SM_GHS_Shared_Conveyor.SM_GHS_Shared_Conveyor",
+        "expected_transform": {
+          "translation_cm": [
+            -10737.526,
+            -200.16899999999998,
+            2.1
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            0.7071067811865476,
+            0.7071067811865475
+          ],
+          "scale": [
+            0.9891070000000002,
+            0.7753050000000002,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADSupplyBelt_2CCF62",
+        "position_m": [
+          -107.37526,
+          2.00169,
+          0
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "source_handles": [
+          "2CCF62"
+        ],
+        "kind": "cad_supply_belt",
+        "belt_boundary_source_handles": [
+          "1E2EE4",
+          "1E2F21",
+          "1E2ED9",
+          "1E2F0F"
+        ],
+        "belt_endpoints_cad_m": [
+          [
+            -108.53265123,
+            2.00169041,
+            0.74
+          ],
+          [
+            -106.21786928,
+            2.00169041,
+            1.0
+          ]
+        ],
+        "source_xy_bounds_m": [
+          [
+            -108.54865123,
+            1.47997927
+          ],
+          [
+            -106.20186928,
+            2.52340155
+          ]
+        ],
+        "height_basis": "display-only 0.74m to 1.0m; source CAD has no validated elevation",
+        "flow_basis": "unconfirmed; no connected upstream/downstream inferred",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2CCF66",
+      "remove": {
+        "actor_guid": "7280F6BF4C31FF0210FF73937691AAD3",
+        "actor_label": "MPR_SM_GHS_Shared_Conveyor_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_209",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 0,
+        "expected_mesh_path": "/Game/GHSDigitalTwin/Meshes/SM_GHS_Shared_Conveyor.SM_GHS_Shared_Conveyor",
+        "expected_transform": {
+          "translation_cm": [
+            -10113.565,
+            2805.388,
+            2.1
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            -0.7071067811865476,
+            0.7071067811865475
+          ],
+          "scale": [
+            0.9891070000000002,
+            0.7753050000000002,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADSupplyBelt_2CCF66",
+        "position_m": [
+          -101.13565,
+          -28.05388,
+          0
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "source_handles": [
+          "2CCF66"
+        ],
+        "kind": "cad_supply_belt",
+        "belt_boundary_source_handles": [
+          "1E2EE4",
+          "1E2F21",
+          "1E2ED9",
+          "1E2F0F"
+        ],
+        "belt_endpoints_cad_m": [
+          [
+            -102.29304438999999,
+            -28.05388492,
+            1.0
+          ],
+          [
+            -99.97826244000001,
+            -28.05388492,
+            0.74
+          ]
+        ],
+        "source_xy_bounds_m": [
+          [
+            -102.30904439,
+            -28.57559606
+          ],
+          [
+            -99.96226244,
+            -27.53217377
+          ]
+        ],
+        "height_basis": "display-only 0.74m to 1.0m; source CAD has no validated elevation",
+        "flow_basis": "unconfirmed; no connected upstream/downstream inferred",
+        "collision": false,
+        "tick": false
+      }
+    },
+    {
+      "source_handle": "2E7F10",
+      "remove": {
+        "actor_guid": "7280F6BF4C31FF0210FF73937691AAD3",
+        "actor_label": "MPR_SM_GHS_Shared_Conveyor_-2_-1",
+        "actor_path": "/Game/Maps/MPR_CAD_Warehouse_B50B57.MPR_CAD_Warehouse_B50B57:PersistentLevel.BP_GHS_InstanceGroup_C_209",
+        "component_name": "HierarchicalInstancedStaticMesh",
+        "instance_index": 1,
+        "expected_mesh_path": "/Game/GHSDigitalTwin/Meshes/SM_GHS_Shared_Conveyor.SM_GHS_Shared_Conveyor",
+        "expected_transform": {
+          "translation_cm": [
+            -10426.005000000001,
+            3684.552,
+            2.1
+          ],
+          "rotation_xyzw": [
+            0.0,
+            0.0,
+            1.0,
+            -6.123233995736767e-17
+          ],
+          "scale": [
+            2.7027969999999986,
+            0.32871799999999984,
+            1.0
+          ]
+        }
+      },
+      "add": {
+        "mesh": "SM_MPR_CADSupplyBelt_2E7F10",
+        "position_m": [
+          -104.26005,
+          -36.84552,
+          0
+        ],
+        "rotation_deg": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "source_handles": [
+          "2E7F10"
+        ],
+        "kind": "cad_supply_belt",
+        "belt_boundary_source_handles": [
+          "2E7CE9"
+        ],
+        "belt_endpoints_cad_m": [
+          [
+            -105.28624309,
+            -36.85802264,
+            1.0
+          ],
+          [
+            -102.86444906,
+            -36.85802264,
+            0.74
+          ]
+        ],
+        "source_xy_bounds_m": [
+          [
+            -105.68565136,
+            -37.34302264
+          ],
+          [
+            -102.83444265,
+            -36.34802264
+          ]
+        ],
+        "height_basis": "display-only 0.74m to 1.0m; source CAD has no validated elevation",
+        "flow_basis": "unconfirmed; no connected upstream/downstream inferred",
+        "collision": false,
+        "tick": false
+      }
+    }
+  ],
+  "apply_contract": [
+    "Check map and all 111 expected actor GUID/component/index/mesh/transform before mutation.",
+    "Within each HISM remove indexes in descending order, never delete the whole actor if other instances remain.",
+    "Import only the 4 listed private FBX assets; assign role materials without modifying shared material assets.",
+    "Add the 111 replacements, mirroring CAD Y and yaw exactly once; preserve all non-target actor properties, components and instances.",
+    "Do not regenerate scene, do not change camera, lighting, roof, sorters, line routes or shared GHS mesh.",
+    "No animation path is declared by this geometry patch."
+  ]
+}
