@@ -1,0 +1,197 @@
+{
+  "source": "UE 5.8 official ThirdPerson template High/Characters",
+  "source_root": "D:/UE/UE_5.8/Templates/TemplateResources/High/Characters/Content",
+  "destination_root": "D:/UEPro/Test/Content/Characters",
+  "count": 14,
+  "bytes": 43840971,
+  "assets": [
+    {
+      "package": "/Game/Characters/Mannequins/Materials/M_Mannequin",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Materials\\M_Mannequin.uasset",
+      "destination": "Content/Characters/Mannequins/Materials/M_Mannequin.uasset",
+      "size": 59292,
+      "sha256": "d7ffe412d906380bd5bd4462f464b2a1fe48fdb79b9077f29bd0f958a782035c",
+      "game_references": [
+        "/Game/Characters/Mannequins/Materials/M_Mannequin",
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_BN",
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_D",
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA",
+        "/Game/Characters/Mannequins/Textures/Shared/T_UE_Logo_M"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Materials/Manny/MI_Manny_01_New",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Materials\\Manny\\MI_Manny_01_New.uasset",
+      "destination": "Content/Characters/Mannequins/Materials/Manny/MI_Manny_01_New.uasset",
+      "size": 17963,
+      "sha256": "9f1e4ed382304d020b750c81505140fc1de4d339b0909430adb5380a6bb89b65",
+      "game_references": [
+        "/Game/Characters/Mannequins/Materials/M_Mannequin",
+        "/Game/Characters/Mannequins/Materials/Manny/MI_Manny_01_New",
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_BN",
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_D",
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Materials/Manny/MI_Manny_02_New",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Materials\\Manny\\MI_Manny_02_New.uasset",
+      "destination": "Content/Characters/Mannequins/Materials/Manny/MI_Manny_02_New.uasset",
+      "size": 18706,
+      "sha256": "26389db06f0b7928b487494bef3320d6b0e6bccd58193bccedd67c2c89132a46",
+      "game_references": [
+        "/Game/Characters/Mannequins/Materials/Manny/MI_Manny_01_New",
+        "/Game/Characters/Mannequins/Materials/Manny/MI_Manny_02_New",
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_BN",
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_D",
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA",
+        "/Game/Characters/Mannequins/Textures/Shared/T_UE_Logo_M"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Meshes\\SKM_Manny_Simple.uasset",
+      "destination": "Content/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset",
+      "size": 15825101,
+      "sha256": "be9f011191ee1887b97cd13bce09886a6066c2fd62c619991070ec142184e1bf",
+      "game_references": [
+        "/Game/Characters/Mannequins/Materials/Manny/MI_Manny_01_New",
+        "/Game/Characters/Mannequins/Materials/Manny/MI_Manny_02_New",
+        "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple",
+        "/Game/Characters/Mannequins/Meshes/SK_Mannequin",
+        "/Game/Characters/Mannequins/Rigs/CR_Mannequin_Body",
+        "/Game/Characters/Mannequins/Rigs/PA_Mannequin"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Meshes/SK_Mannequin",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Meshes\\SK_Mannequin.uasset",
+      "destination": "Content/Characters/Mannequins/Meshes/SK_Mannequin.uasset",
+      "size": 191198,
+      "sha256": "22029d47455f24471195b26a0e04a1e1389f27d6a924e88c9f46a0f600c9a530",
+      "game_references": [
+        "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple",
+        "/Game/Characters/Mannequins/Meshes/SKM_Quinn_Simple",
+        "/Game/Characters/Mannequins/Meshes/SK_Mannequin"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Rigs/PA_Mannequin",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Rigs\\PA_Mannequin.uasset",
+      "destination": "Content/Characters/Mannequins/Rigs/PA_Mannequin.uasset",
+      "size": 301538,
+      "sha256": "c0ceaf003947088ff076555b81a46e5ccb11149c94025eb2a9e74263fbaa0d67",
+      "game_references": [
+        "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple",
+        "/Game/Characters/Mannequins/Rigs/PA_Mannequin"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_BN",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Textures\\Manny\\T_Manny_01_BN.uasset",
+      "destination": "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_BN.uasset",
+      "size": 1422785,
+      "sha256": "2f623209571ecbd8185b5b463786be033c3284190b4fc7b249e8d1d2ed995fd8",
+      "game_references": [
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_BN"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_D",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Textures\\Manny\\T_Manny_01_D.uasset",
+      "destination": "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_D.uasset",
+      "size": 699555,
+      "sha256": "6ae0f4f9908c30ecc9aedf1ebb442e4983e526a7832ec791542064c7853f9999",
+      "game_references": [
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_D"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Textures\\Manny\\T_Manny_01_MRA.uasset",
+      "destination": "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA.uasset",
+      "size": 712594,
+      "sha256": "3e42e888aed8aefff68da7d7dda4f177c5647b19473e4e913f61375c1319abd8",
+      "game_references": [
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_BN",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Textures\\Manny\\T_Manny_02_BN.uasset",
+      "destination": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_BN.uasset",
+      "size": 20999487,
+      "sha256": "c9575d21c9e2872b3358c0efb9e202535ce2efce94c338b9d3bd04cb9831e353",
+      "game_references": [
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_BN"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_D",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Textures\\Manny\\T_Manny_02_D.uasset",
+      "destination": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_D.uasset",
+      "size": 1036712,
+      "sha256": "474728713232c6833f55c041548f555bc62c5c49e74082a5d16e68a5ce488cfe",
+      "game_references": [
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_D"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Textures\\Manny\\T_Manny_02_MRA.uasset",
+      "destination": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA.uasset",
+      "size": 1059559,
+      "sha256": "6697972eaf2dfe201923dba6a302f024b0ef4c4e46b4ecf578178717098e8277",
+      "game_references": [
+        "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Textures/Shared/T_UE_Logo_M",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Textures\\Shared\\T_UE_Logo_M.uasset",
+      "destination": "Content/Characters/Mannequins/Textures/Shared/T_UE_Logo_M.uasset",
+      "size": 59927,
+      "sha256": "34e6fa3414c04a86b7a5287e5569ea9d6e53c319d6e7dbfc8b09dab5b70611a6",
+      "game_references": [
+        "/Game/Characters/Mannequins/Textures/Shared/T_UE_Logo_M"
+      ]
+    },
+    {
+      "package": "/Game/Characters/Mannequins/Anims/Unarmed/MM_Idle",
+      "source": "D:\\UE\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Anims\\Unarmed\\MM_Idle.uasset",
+      "destination": "Content/Characters/Mannequins/Anims/Unarmed/MM_Idle.uasset",
+      "size": 1436554,
+      "sha256": "11ee7fdeb84db89c1a66785b43b9bfc1415782122b8ac229517f4c5125d9cb0d",
+      "game_references": [
+        "/Game/Characters/Mannequins/Anims/Unarmed/MM_Idle",
+        "/Game/Characters/Mannequins/Meshes/SK_Mannequin"
+      ]
+    }
+  ],
+  "omitted_references": [
+    "/Game/Characters/Mannequins/Meshes/SKM_Quinn_Simple",
+    "/Game/Characters/Mannequins/Rigs/CR_Mannequin_Body"
+  ],
+  "notes": [
+    "Only Manny mesh, skeleton, physics asset and its complete material and texture chain. No animation or Blueprint dependencies.",
+    "The omitted Quinn skeleton preview and Manny default ControlRig properties are TSoftObjectPtr fields within WITH_EDITORONLY_DATA in installed Engine headers. They are not required by custom runtime PoseableMesh rendering; set preview to Manny and default rig to null after import if editor asset opening should avoid missing soft-reference warnings.",
+    "All /Engine material function dependencies remain in Engine Content. Keep exact /Game/Characters/Mannequins/... package paths.",
+    "Texture T_Manny_02_N exists in source but is not referenced by these materials. Correct texture normal sources here are *_BN.",
+    "No Content files copied or changed by this audit."
+  ],
+  "reference_risk_evidence": [
+    {
+      "reference": "SKM_Quinn_Simple",
+      "property": "USkeleton::PreviewSkeletalMesh",
+      "kind": "TSoftObjectPtr<USkeletalMesh> under WITH_EDITORONLY_DATA",
+      "source": "D:/UE/UE_5.8/Engine/Source/Runtime/Engine/Classes/Animation/Skeleton.h:574-578"
+    },
+    {
+      "reference": "CR_Mannequin_Body",
+      "property": "USkeletalMesh::DefaultAnimatingRig",
+      "kind": "TSoftObjectPtr<UObject> under WITH_EDITORONLY_DATA",
+      "source": "D:/UE/UE_5.8/Engine/Source/Runtime/Engine/Classes/Engine/SkeletalMesh.h:1288-1299"
+    }
+  ],
+  "purpose": "Official UE 5.8 Third Person Manny for existing MPR sorter workers. Original assets copied byte-for-byte; no ThirdPerson GameMode/input/map imported."
+}

@@ -1,0 +1,246 @@
+{
+  "success": true,
+  "branch": "master",
+  "official_assets": 14,
+  "actor_workers": 44,
+  "visible_infeed_workers": 22,
+  "max_visible_exchange_workers": 1,
+  "map_unchanged_sha256": "63c265c7c48029b1b512e47c1552082b3069ddadc7d14b94047d00c614b04602",
+  "automation_passed": 13,
+  "runtime_checks": 16,
+  "cad_pose_samples": 902,
+  "performance": {
+    "native_csv": {
+      "path": "D:\\UEPro\\Test\\Saved\\Profiling\\CSV\\MPR_FULL_WORKFLOW_20261107T092954475691Z.csv",
+      "sha256": "37a22454d042f579a28a69349abc1ef3c2fb79c0b12127667302267e2558c9a3",
+      "timing_unit": "ms",
+      "frame_count": 1648,
+      "native_frame_time_seconds": 14.996061899999994,
+      "metrics": {
+        "FrameTime": {
+          "count": 1648,
+          "mean_ms": 9.099552123786408,
+          "median_ms": 8.806000000000001,
+          "p95_ms": 10.9524,
+          "p99_ms": 11.5562,
+          "max_ms": 25.9329,
+          "over_16_67ms_count": 1,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GameThreadTime": {
+          "count": 1648,
+          "mean_ms": 3.306545873786408,
+          "median_ms": 3.232,
+          "p95_ms": 3.8405,
+          "p99_ms": 4.2601,
+          "max_ms": 25.887,
+          "over_16_67ms_count": 1,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "RenderThreadTime": {
+          "count": 1648,
+          "mean_ms": 9.087950970873786,
+          "median_ms": 8.8021,
+          "p95_ms": 10.8955,
+          "p99_ms": 11.3946,
+          "max_ms": 12.1063,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GPUTime": {
+          "count": 1648,
+          "mean_ms": 8.422654308252428,
+          "median_ms": 8.209,
+          "p95_ms": 9.7356,
+          "p99_ms": 10.1284,
+          "max_ms": 11.0184,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        }
+      },
+      "gpu_verified": true,
+      "gpu_evidence": {
+        "mode": "UE5.8 RHI",
+        "primary_metric": "GPUTime",
+        "positive_frame_ratio": 1.0,
+        "gpu_pass_positive_frame_ratio": 1.0,
+        "pass_columns": [
+          "GPU/RayTracingGeometry",
+          "GPU/DistanceFields",
+          "GPU/GlobalDistanceFieldUpdate",
+          "GPU/AllocateRendertargets",
+          "GPU/VisibilityCommands",
+          "GPU/UpdateLumenSceneBuffers",
+          "GPU/GPUSceneUpdate",
+          "GPU/NaniteStreaming",
+          "GPU/NaniteReadback",
+          "GPU/FXSystemPreRender",
+          "GPU/BuildRenderingCommandsDeferred",
+          "GPU/Prepass",
+          "GPU/RenderVelocities",
+          "GPU/NaniteVisBuffer",
+          "GPU/NaniteBasePass",
+          "GPU/HZB",
+          "GPU/BeginOcclusionTests",
+          "GPU/LightGrid",
+          "GPU/LightFunctionAtlasGeneration",
+          "GPU/LumenSceneUpdate",
+          "GPU/LumenScreenProbeGather",
+          "GPU/Basepass",
+          "GPU/RenderDeferredLighting",
+          "GPU/ShadowDepths",
+          "GPU/LumenReflections",
+          "GPU/TranslucentLighting",
+          "GPU/Lights",
+          "GPU/ShadowProjection",
+          "GPU/DistanceFieldShadows",
+          "GPU/TemporalSuperResolution",
+          "GPU/PostRenderOpsFX",
+          "GPU/FXSystemPostRenderOpaque",
+          "GPU/Translucency",
+          "GPU/Postprocessing",
+          "GPU/VirtualTextureUpdate",
+          "GPU/SlateUI",
+          "GPU/BuildRenderingCommands"
+        ],
+        "unregistered_tail_pass_zero_fill_counts": {}
+      },
+      "window": "All finalized native CSV frames between start and stop, including boundary frames; no spikes removed.",
+      "percentile_method": "nearest-rank",
+      "fps": 109.89551863612944
+    },
+    "sampled_wall_seconds": 15.0,
+    "camera": [
+      -11104.873826989722,
+      -2766.3651940859536,
+      903.1117647630501,
+      -28.99999999999999,
+      64.99999999999999,
+      -1.8182500665724218e-15
+    ],
+    "actor_auto_tick": true,
+    "manual_steps": 0,
+    "report_reads_during_sample": 0,
+    "precondition_advance_simulation_seconds": 80,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "hud_visible": true,
+    "before": {
+      "spawned": 238,
+      "completed": 106,
+      "collected": 0,
+      "active": 66,
+      "queued": 66,
+      "occupancy": 106,
+      "exchanged_carts": 0
+    },
+    "after": {
+      "spawned": 269,
+      "completed": 146,
+      "collected": 0,
+      "active": 57,
+      "queued": 66,
+      "occupancy": 146,
+      "exchanged_carts": 0
+    },
+    "scope": "One local owned native game, 22 machines, 96 carts, 44 operator slots and HUD; not a streaming or isolated hardware benchmark."
+  },
+  "clips": [
+    {
+      "path": "MPR_Manny_sorting.mp4",
+      "duration_seconds": 7,
+      "source_fps": 24,
+      "output_fps": 24,
+      "frames": 168
+    },
+    {
+      "path": "MPR_Manny_cart_exchange.mp4",
+      "duration_seconds": 22,
+      "source_fps": 6,
+      "output_fps": 30,
+      "frames": 660
+    }
+  ],
+  "visual_review": {
+    "images": [
+      "01_pickup.png",
+      "02_place.png",
+      "03_release.png",
+      "04_full_cart.png",
+      "05_empty_cart.png"
+    ],
+    "observations": [
+      "Official Manny mesh replaces the primitive workers.",
+      "Hands grasp the same parcel, turn and release; foot placement stays in the CAD gap.",
+      "Whole-cart worker keeps hands on the frame; full-out and empty-in remain distinct phases.",
+      "No newly visible disconnected limbs or hovering feet in the inspected angles."
+    ]
+  },
+  "limitations": [
+    "Procedural presentation driven by the existing demonstration workflow, not vendor motion capture or PLC timing.",
+    "Frame-rate sample is this local native 1920x1080 run, not a Pixel Streaming benchmark."
+  ],
+  "files": [
+    {
+      "path": "01_pickup.png",
+      "sha256": "244dae88c9716bacdb08efbbdb4fb373878df5ca5c08c34a012f5393cd64254d",
+      "bytes": 3448140
+    },
+    {
+      "path": "02_place.png",
+      "sha256": "4d8d267453c407320f438714232291bd9c9db984bead67fde9183cc94f738d0b",
+      "bytes": 3438190
+    },
+    {
+      "path": "03_release.png",
+      "sha256": "51b1f57411a342acf554413f1b48e8af4bcec960aaa0ed27deee466a786ec0bb",
+      "bytes": 3453886
+    },
+    {
+      "path": "04_full_cart.png",
+      "sha256": "2e8f5f451ad7a54835995cbf38ba7f859f010d84b9fdcf0a0fa5db2a0c66430d",
+      "bytes": 3083590
+    },
+    {
+      "path": "05_empty_cart.png",
+      "sha256": "fcbe0145f41ed985c5c3a70d4e1795c04be1e6709f418f47f8a71e240b3c3196",
+      "bytes": 3053311
+    },
+    {
+      "path": "automation.json",
+      "sha256": "be2fbcca5d419990318fa030be91c9580f60a5a36d3b2190498928ac52062999",
+      "bytes": 6357
+    },
+    {
+      "path": "editor_reload.json",
+      "sha256": "c9607ed8e601d5416485d9cdb4ed7f96e3efc07e54ed66873a556b394d5e0a16",
+      "bytes": 414
+    },
+    {
+      "path": "MPR_Manny_cart_exchange.mp4",
+      "sha256": "2ea0da6b70da65d44dfa3745a8fc22f9b0130853c19bcf65d066be4dbea53e91",
+      "bytes": 9210509
+    },
+    {
+      "path": "MPR_Manny_sorting.mp4",
+      "sha256": "b9c830b59d4201dbfdf20c7beb7bc0e7f4bcfc2d0190a140ed09f930335ed3bc",
+      "bytes": 4401893
+    },
+    {
+      "path": "performance.csv",
+      "sha256": "37a22454d042f579a28a69349abc1ef3c2fb79c0b12127667302267e2558c9a3",
+      "bytes": 3338252
+    },
+    {
+      "path": "runtime.json",
+      "sha256": "cc549e15175cba39ad1a6f19067db6e8c179ff37103f15c0bebc80def52fb3d3",
+      "bytes": 1258881
+    }
+  ]
+}

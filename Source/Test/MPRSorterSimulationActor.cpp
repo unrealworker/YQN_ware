@@ -1,5 +1,8 @@
 #include "MPRSorterSimulationActor.h"
 #include "MPRSorterHUDWidget.h"
+#include "MPRWorkerPoseComponent.h"
+#include "Engine/SkeletalMesh.h"
+#include "Animation/AnimSequence.h"
 #include "GHSWarehousePlayerController.h"
 #include "GHSWarehouseCameraPawn.h"
 #include "GHSWarehouseRoofComponent.h"
@@ -89,6 +92,9 @@ AMPRSorterSimulationActor::AMPRSorterSimulationActor()
     static ConstructorHelpers::FObjectFinder<UMaterialInterface> Rubber(TEXT("/Game/GHSNormalWarehouse/MannedForklift/Materials/M_MF_WorkerV3_Rubber"));
     WorkerClothMaterial=Navy.Object;WorkerSkinMaterial=Skin.Object;
     WorkerHelmetMaterial=Helmet.Object;WorkerBootMaterial=Rubber.Object;
+    static ConstructorHelpers::FObjectFinder<USkeletalMesh> Manny(TEXT("/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple"));
+    static ConstructorHelpers::FObjectFinder<UAnimSequence> Idle(TEXT("/Game/Characters/Mannequins/Anims/Unarmed/MM_Idle"));
+    WorkerMesh=Manny.Object;WorkerIdle=Idle.Object;
     SetActorEnableCollision(false);
 }
 
@@ -297,26 +303,20 @@ void AMPRSorterSimulationActor::BeginPlay()
     Super::BeginPlay();
     ClearCartInstances();
     // This actor is saved only in MPR; no registry or GHS default behavior changes.
-    bReady=TowerMesh&&TrayMesh&&ParcelMaterial&&ActiveMaterial&&FullMaterial&&LoadLayout();
+    bReady=TowerMesh&&TrayMesh&&ParcelMaterial&&ActiveMaterial&&FullMaterial&&WorkerMesh&&WorkerIdle&&LoadLayout();
     if(!bReady) { Error=Error.IsEmpty()?TEXT("仿真资产或布局缺失"):Error;UE_LOG(LogTemp,Error,TEXT("MPR_SORTER: %s"),*Error);SetActorTickEnabled(false);return; }
     Towers->SetStaticMesh(TowerMesh);Trays->SetStaticMesh(TrayMesh);
     Parcels->SetMaterial(0,ParcelMaterial);InfeedParcels->SetMaterial(0,ParcelMaterial);BinParcels->SetMaterial(0,ParcelMaterial);
     ActiveLights->SetMaterial(0,ActiveMaterial);FullLights->SetMaterial(0,FullMaterial);
-    WorkerCloth->SetMaterial(0,WorkerClothMaterial);WorkerSkin->SetMaterial(0,WorkerSkinMaterial);
-    WorkerHelmet->SetMaterial(0,WorkerHelmetMaterial);WorkerBoots->SetMaterial(0,WorkerBootMaterial);
+    // Retain serialized legacy components for map compatibility, but never draw
+    // the old primitive workers alongside the official skeletal characters.
+    for(auto* C:{WorkerCloth.Get(),WorkerSkin.Get(),WorkerHelmet.Get(),WorkerBoots.Get()})C->ClearInstances();
     ActiveLights->SetCastShadow(false);FullLights->SetCastShadow(false);
     const FTransform Hidden(FQuat::Identity,FVector::ZeroVector,FVector::ZeroVector);
     for(auto& M:Machines)
     {
-        M.FeedOffset=InfeedParcels->GetInstanceCount();M.WorkerOffset=WorkerHelmet->GetInstanceCount();
+        M.FeedOffset=InfeedParcels->GetInstanceCount();
         for(int32 I=0;I<M.Simulation.GetConfig().InfeedCapacity;++I)InfeedParcels->AddInstance(Hidden);
-        for(int32 Worker=0;Worker<2;++Worker)
-        {
-            for(int32 I=0;I<10;++I)WorkerCloth->AddInstance(Hidden);
-            for(int32 I=0;I<3;++I)WorkerSkin->AddInstance(Hidden);
-            for(int32 I=0;I<2;++I)WorkerBoots->AddInstance(Hidden);
-            WorkerHelmet->AddInstance(Hidden);
-        }
         for(int32 I=0;I<MPRSorter::CarrierCount;++I){Towers->AddInstance(Hidden);Trays->AddInstance(Hidden);Parcels->AddInstance(Hidden);}
         for(int32 I=0;I<M.Bins.Num();++I)
         {
@@ -325,7 +325,7 @@ void AMPRSorterSimulationActor::BeginPlay()
         }
         M.Simulation.SetPlaying(bAutoStart);
     }
-    if(!BuildCartInstances()){bReady=false;SetActorTickEnabled(false);UE_LOG(LogTemp,Error,TEXT("MPR_SORTER: %s"),*Error);return;}
+    if(!BuildCartInstances()||!BuildWorkers()){bReady=false;SetActorTickEnabled(false);UE_LOG(LogTemp,Error,TEXT("MPR_SORTER: %s"),*Error);return;}
     UpdateInstances();AttachPanel();
     UE_LOG(LogTemp,Display,TEXT("MPR_SORTER: ready, 22 machines, 96 removable carts, manual infeed, 1632 scene cells; demonstration data."));
 }
@@ -427,42 +427,35 @@ FVector AMPRSorterSimulationActor::CarrierParcelPoint(const FMachine& M,const MP
     }
     return Parcel;
 }
-void AMPRSorterSimulationActor::UpdateWorker(int32 Index,const FMachine& M,const FVector& Feet,
-    const FVector& LeftHand,const FVector& RightHand,double Heading,double Step,bool Visible)
+bool AMPRSorterSimulationActor::BuildWorkers()
 {
-    const FTransform Hidden(FQuat::Identity,FVector::ZeroVector,FVector::ZeroVector);
-    if(!Visible)
+    for(auto& C:RuntimeWorkers)if(C)C->DestroyComponent();
+    RuntimeWorkers.Reset();
+    for(auto& M:Machines)
     {
-        for(int32 I=0;I<10;++I)WorkerCloth->UpdateInstanceTransform(Index*10+I,Hidden,true,false,true);
-        for(int32 I=0;I<3;++I)WorkerSkin->UpdateInstanceTransform(Index*3+I,Hidden,true,false,true);
-        for(int32 I=0;I<2;++I)WorkerBoots->UpdateInstanceTransform(Index*2+I,Hidden,true,false,true);
-        WorkerHelmet->UpdateInstanceTransform(Index,Hidden,true,false,true);return;
+        M.WorkerOffset=RuntimeWorkers.Num();
+        for(int32 WorkerRole=0;WorkerRole<2;++WorkerRole)
+        {
+            const FName Name(*FString::Printf(TEXT("MannyWorker_%02d"),RuntimeWorkers.Num()));
+            auto* C=NewObject<UMPRWorkerPoseComponent>(this,Name,RF_Transient);
+            C->CreationMethod=EComponentCreationMethod::Instance;C->SetupAttachment(RootComponent);
+            C->RegisterComponent();RuntimeWorkers.Add(C);
+            if(!C->InitializeWorker(WorkerMesh,WorkerIdle))
+            {Error=TEXT("官方第三人称人物骨骼初始化失败");return false;}
+        }
     }
-    const FQuat Facing(FVector::UpVector,Heading);
-    auto At=[&](const FVector& P){return Feet+Facing.RotateVector(P);};
-    auto Box=[&](UInstancedStaticMeshComponent* C,int32 Slot,const FVector& P,const FVector& Size,const FQuat& R)
-    {C->UpdateInstanceTransform(Slot,FTransform(R,P,Size/100.)*M.World,true,false,true);};
-    auto Limb=[&](int32 Slot,const FVector& A,const FVector& B,double Width)
-    {
-        const FVector Delta=B-A;const FQuat Rotation=FRotationMatrix::MakeFromZ(Delta.GetSafeNormal()).ToQuat();
-        Box(WorkerCloth,Index*10+Slot,(A+B)*.5,FVector(Width,Width,Delta.Size()),Rotation);
-    };
-    Box(WorkerCloth,Index*10,At(FVector(0,0,124)),FVector(22,32,42),Facing);
-    Box(WorkerCloth,Index*10+1,At(FVector(0,0,94)),FVector(22,30,18),Facing);
-    for(int32 Side=0;Side<2;++Side)
-    {
-        const double Sign=Side==0?-1.:1.,Stride=Sign*Step;
-        const FVector Hip=At(FVector(0,Sign*9,88)),Knee=At(FVector(Stride*.45,Sign*9,49));
-        const FVector Ankle=At(FVector(Stride,Sign*9,10));
-        Limb(2+Side*2,Hip,Knee,12);Limb(3+Side*2,Knee,Ankle,10);
-        Box(WorkerBoots,Index*2+Side,At(FVector(Stride+5,Sign*9,5)),FVector(26,12,10),Facing);
-        const FVector Shoulder=At(FVector(0,Sign*18,141)),Hand=Side==0?LeftHand:RightHand;
-        const FVector Elbow=(Shoulder+Hand)*.5+Facing.RotateVector(FVector(-5,Sign*8,-8));
-        Limb(6+Side*2,Shoulder,Elbow,10);Limb(7+Side*2,Elbow,Hand,8);
-        Box(WorkerSkin,Index*3+1+Side,Hand,FVector(9,8,8),Facing);
-    }
-    Box(WorkerSkin,Index*3,At(FVector(1,0,154)),FVector(21,20,23),Facing);
-    Box(WorkerHelmet,Index,At(FVector(1,0,167)),FVector(24,23,9),Facing);
+    return true;
+}
+void AMPRSorterSimulationActor::UpdateWorker(int32 Index,const FMachine& M,const FMPRWorkerPoseInput& Local)
+{
+    if(!RuntimeWorkers.IsValidIndex(Index))return;
+    FMPRWorkerPoseInput World=Local;
+    World.BodyWorld=Local.BodyWorld*M.World;
+    World.LeftPalmWorld=M.World.TransformPosition(Local.LeftPalmWorld);
+    World.RightPalmWorld=M.World.TransformPosition(Local.RightPalmWorld);
+    World.MoveDirectionWorld=M.World.TransformVectorNoScale(Local.MoveDirectionWorld);
+    World.SimulationTime=M.Simulation.GetStats().SimTime;
+    RuntimeWorkers[Index]->ApplyWorkerPose(World);
 }
 void AMPRSorterSimulationActor::UpdateInstances()
 {
@@ -521,30 +514,103 @@ void AMPRSorterSimulationActor::UpdateInstances()
             ActiveLights->UpdateInstanceTransform(Slot,Docked&&(Bin.Reserved>0||Bin.Occupancy>0)&&Bin.Occupancy<BinCapacity?Light:Hidden,true,false,true);
             FullLights->UpdateInstanceTransform(Slot,Bin.Occupancy>=BinCapacity?Light:Hidden,true,false,true);
         }
-        // An operator stands in the actual manual gap, offset beside the carried
-        // package. Hands and the package share the same continuous trajectory.
+        // Anatomical hands follow the same parcel, while the body steps beside
+        // the feed gap. No cargo is attached to or duplicated by the character.
+        const double Now=M.Simulation.GetStats().SimTime;
+        auto Ease=[](double T){T=FMath::Clamp(T,0.,1.);return T*T*(3.-2.*T);};
         double LoadHeading;const FVector Load=PointOnLoop(M.LoadFraction,M.Half,M.Radius,LoadHeading);
-        FVector Hand=FeedPoint(M,1);double Progress=0;FQuat HandTurn=FQuat::Identity;
-        if(HandCarrier){Hand=CarrierParcelPoint(M,*HandCarrier,HandTurn);Progress=HandCarrier->InductProgress;}
-        FVector Feet((M.Pickup.X+Load.X)*.5,Hand.Y-39,0);
-        Feet.X+=HandCarrier&&HandCarrier->State==MPRSorter::CarrierPhase::Induct?-M.InfeedSide*8*FMath::Sin(PI*Progress):0;
-        const double Walk=HandCarrier&&HandCarrier->State==MPRSorter::CarrierPhase::Induct?5*FMath::Sin(4*PI*Progress):0;
-        const FVector Left=Hand+HandTurn.RotateVector(FVector(PackageSize.X*.55,0,-2)),Right=Hand+HandTurn.RotateVector(FVector(-PackageSize.X*.55,0,-2));
-        UpdateWorker(M.WorkerOffset,M,Feet,Left,Right,PI*.5,Walk,true);
+        FVector Home(M.Pickup.X-M.InfeedSide*50.,M.Pickup.Y-27.,0);
+        FVector DestinationFeet(M.Entry.X+M.InfeedSide*28.,M.Pickup.Y-27.,0);
+        if(M.Profile==TEXT("cad120")){Home.X=(Home.X+DestinationFeet.X)*.5;DestinationFeet=Home;}
+        const FVector TransferDirection=(DestinationFeet-Home).GetSafeNormal();
+        FVector Feet=Home,Hand=FeedPoint(M,1);
+        const double HomeHeading=FMath::Atan2(27.,M.Pickup.X-Home.X);
+        double BodyHeading=HomeHeading;
+        auto Relax=[&](const FVector& Body,double Heading,double Side)
+        {return Body+FQuat(FVector::UpVector,Heading).RotateVector(FVector(25,Side*18,107));};
+        FMPRWorkerPoseInput Sort;
+        Sort.LeftPalmWorld=Relax(Feet,BodyHeading,-1);Sort.RightPalmWorld=Relax(Feet,BodyHeading,1);
+        Sort.GripAlpha=0;Sort.TorsoLeanDegrees=3;
+        if(HandCarrier)
+        {
+            FQuat Turn;Hand=CarrierParcelPoint(M,*HandCarrier,Turn);
+            const bool Carry=HandCarrier->State==MPRSorter::CarrierPhase::Induct;
+            const double Progress=Carry?HandCarrier->InductProgress:0.;
+            Feet=FMath::Lerp(Home,DestinationFeet,Progress);
+            BodyHeading=FMath::Atan2(Hand.Y-Feet.Y,Hand.X-Feet.X);
+            // Grip the two box faces on the worker's left/right, even while the
+            // body turns between the conveyor and the lift. No crossed arms.
+            const FVector LeftAxis(FMath::Sin(BodyHeading),-FMath::Cos(BodyHeading),0);
+            const FVector Axis=Turn.UnrotateVector(LeftAxis).GetAbs();
+            const double HalfWidth=FMath::Min(Axis.X>1.e-5?PackageSize.X*.5/Axis.X:1000.,Axis.Y>1.e-5?PackageSize.Y*.5/Axis.Y:1000.);
+            const FVector L=Hand+LeftAxis*(HalfWidth+.25)-FVector(0,0,.5),R=Hand-LeftAxis*(HalfWidth+.25)-FVector(0,0,.5);
+            if(!Carry)
+            {
+                const double Reach=Ease(HandCarrier->ScanProgress);
+                Sort.LeftPalmWorld=FMath::Lerp(Relax(Feet,BodyHeading,-1),L,Reach);
+                Sort.RightPalmWorld=FMath::Lerp(Relax(Feet,BodyHeading,1),R,Reach);
+                Sort.GripAlpha=Ease((HandCarrier->ScanProgress-.55)/.45);
+                Sort.TorsoLeanDegrees=FMath::Lerp(3.,16.,Reach);
+            }
+            else
+            {
+                Sort.LeftPalmWorld=L;Sort.RightPalmWorld=R;Sort.GripAlpha=1.;Sort.TorsoLeanDegrees=16.;
+                Sort.bWalking=M.Profile!=TEXT("cad120");Sort.GaitBlend=.35*Ease(Progress/.15)*Ease((1.-Progress)/.15);
+                Sort.TravelDistanceCm=FVector::Dist2D(Feet,Home);Sort.MoveDirectionWorld=TransferDirection;
+
+            }
+        }
+        else if(Now-M.Simulation.GetStats().LastInductCompletedTime<1.15)
+        {
+            // Reconstruct the true end pose from the simulation event time.
+            // Rendering fewer frames must not change release timing or stance.
+            const double Elapsed=FMath::Max(0.,Now-M.Simulation.GetStats().LastInductCompletedTime);
+            const double Release=Ease(Elapsed/.32),Return=Ease((Elapsed-.25)/.9);
+            const FVector EndHand=Load+FVector(0,0,M.Simulation.GetConfig().LoadHeightCm+PackageSize.Z*.5+.3);
+            const double EndHeading=FMath::Atan2(27.,Load.X-DestinationFeet.X);
+            const FVector LeftAxis(FMath::Sin(EndHeading),-FMath::Cos(EndHeading),0);
+            const FVector Axis=FQuat(FVector::UpVector,LoadHeading).UnrotateVector(LeftAxis).GetAbs();
+            const double HalfWidth=FMath::Min(Axis.X>1.e-5?PackageSize.X*.5/Axis.X:1000.,Axis.Y>1.e-5?PackageSize.Y*.5/Axis.Y:1000.);
+            Feet=FMath::Lerp(DestinationFeet,Home,Return);BodyHeading=FMath::Lerp(EndHeading,HomeHeading,Return);
+            Sort.LeftPalmWorld=FMath::Lerp(EndHand+LeftAxis*(HalfWidth+.25)-FVector(0,0,.5),Relax(Feet,BodyHeading,-1),Release);
+            Sort.RightPalmWorld=FMath::Lerp(EndHand-LeftAxis*(HalfWidth+.25)-FVector(0,0,.5),Relax(Feet,BodyHeading,1),Release);
+            Sort.GripAlpha=1.-Release;Sort.TorsoLeanDegrees=FMath::Lerp(16.,3.,Release);
+            Sort.bWalking=Elapsed>.25&&M.Profile!=TEXT("cad120");Sort.GaitBlend=.35*Ease((Elapsed-.25)/.15)*Ease((1.15-Elapsed)/.15);
+            Sort.TravelDistanceCm=FVector::Dist2D(DestinationFeet,Feet);Sort.MoveDirectionWorld=-TransferDirection;
+        }
+        Sort.BodyWorld=FTransform(FQuat(FVector::UpVector,BodyHeading),Feet);
+        UpdateWorker(M.WorkerOffset,M,Sort);
+        FMPRWorkerPoseInput Push;Push.bVisible=false;
         if(MovingCart!=INDEX_NONE&&Carts[size_t(MovingCart)].State!=MPRSorter::CartPhase::Handoff)
         {
             const auto& P=M.Carts[MovingCart];const auto& C=Carts[size_t(MovingCart)];const FVector Offset=CartOffset(M,MovingCart);
             const double Side=P.Side==0?1.:-1.,Outer=Side>0?P.BoundsMax.Y:-P.BoundsMin.Y;
-            const FVector Body=P.Origin+Offset+FVector(0,Side*(Outer+18),0);
+            const FVector Body=P.Origin+Offset+FVector(0,Side*(Outer+20),0);
             const FVector Grip=P.Origin+Offset+FVector(0,Side*(Outer-2),105);
-            // Side grip keeps a narrow body in the verified aisle instead of
-            // placing an invisible AMR beneath, or a worker inside, the cart.
-            const double Stride=(C.State==MPRSorter::CartPhase::FullWaiting||C.State==MPRSorter::CartPhase::Docking)?0:2*FMath::Sin(C.Progress01*10*PI);
-            UpdateWorker(M.WorkerOffset+1,M,Body,Grip+FVector(-22*Side,0,0),Grip+FVector(22*Side,0,0),-Side*PI*.5,Stride,true);
+            Push.bVisible=true;Push.bPushGrip=true;Push.GripAlpha=1.;Push.TorsoLeanDegrees=8.;
+            Push.BodyWorld=FTransform(FQuat(FVector::UpVector,-Side*PI*.5),Body);
+            Push.LeftPalmWorld=Grip+FVector(-22*Side,0,0);Push.RightPalmWorld=Grip+FVector(22*Side,0,0);
+            const double Along=FMath::Abs(-M.InfeedSide*P.OutboundEndX-P.Origin.X);
+            if(C.State==MPRSorter::CartPhase::Withdrawing)
+            {Push.bWalking=true;Push.TravelDistanceCm=P.Retreat*C.Progress01;Push.MoveDirectionWorld=FVector(0,Side,0);}
+            else if(C.State==MPRSorter::CartPhase::Outbound)
+            {Push.bWalking=true;Push.TravelDistanceCm=Along*C.Progress01;Push.MoveDirectionWorld=FVector(-M.InfeedSide,0,0);}
+            else if(C.State==MPRSorter::CartPhase::EmptyArriving)
+            {
+                Push.bWalking=true;
+                if(C.Progress01<.7){Push.TravelDistanceCm=Along*C.Progress01/.7;Push.MoveDirectionWorld=FVector(M.InfeedSide,0,0);}
+                else{Push.TravelDistanceCm=P.Retreat*(C.Progress01-.7)/.3;Push.MoveDirectionWorld=FVector(0,-Side,0);}
+            }
         }
-        else UpdateWorker(M.WorkerOffset+1,M,FVector::ZeroVector,FVector::ZeroVector,FVector::ZeroVector,0,0,false);
+        if(MovingCart!=INDEX_NONE)
+        {
+            const auto& Cart=Carts[size_t(MovingCart)];double T=Cart.Progress01;
+            if(Cart.State==MPRSorter::CartPhase::EmptyArriving)T=T<.7?T/.7:(T-.7)/.3;
+            Push.GaitBlend=Ease(T/.12)*Ease((1.-T)/.12);
+        }
+        UpdateWorker(M.WorkerOffset+1,M,Push);
     }
-    for(auto* C:{Towers.Get(),Trays.Get(),Parcels.Get(),InfeedParcels.Get(),WorkerCloth.Get(),WorkerSkin.Get(),WorkerHelmet.Get(),WorkerBoots.Get()})C->MarkRenderStateDirty();
+    for(auto* C:{Towers.Get(),Trays.Get(),Parcels.Get(),InfeedParcels.Get()})C->MarkRenderStateDirty();
     for(auto& C:RuntimeCartComponents)C->MarkRenderStateDirty();
     if(BinsChanged)for(auto* C:{BinParcels.Get(),ActiveLights.Get(),FullLights.Get()})C->MarkRenderStateDirty();
 }
@@ -669,10 +735,10 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
     Root->SetStringField(TEXT("data_mode"),TEXT("demonstration"));Root->SetNumberField(TEXT("schema_version"),2);
     Root->SetNumberField(TEXT("machine_count"),Machines.Num());Root->SetBoolField(TEXT("playing"),IsSimulationPlaying());
     Root->SetNumberField(TEXT("rate"),GetSimulationRate());Root->SetBoolField(TEXT("automatic_collection"),IsAutomaticCollection());
-    Root->SetNumberField(TEXT("selected_machine"),SelectedMachine);Root->SetNumberField(TEXT("components"),11+RuntimeCartComponents.Num());
+    Root->SetNumberField(TEXT("selected_machine"),SelectedMachine);Root->SetNumberField(TEXT("components"),11+RuntimeCartComponents.Num()+RuntimeWorkers.Num());
     Root->SetNumberField(TEXT("tower_instances"),Towers->GetInstanceCount());Root->SetNumberField(TEXT("tray_instances"),Trays->GetInstanceCount());
     Root->SetNumberField(TEXT("parcel_instances"),Parcels->GetInstanceCount());Root->SetNumberField(TEXT("infeed_instances"),InfeedParcels->GetInstanceCount());
-    Root->SetNumberField(TEXT("worker_slots"),WorkerHelmet->GetInstanceCount());Root->SetNumberField(TEXT("bin_parcel_instances"),BinParcels->GetInstanceCount());
+    Root->SetNumberField(TEXT("worker_slots"),RuntimeWorkers.Num());Root->SetNumberField(TEXT("bin_parcel_instances"),BinParcels->GetInstanceCount());
     Root->SetBoolField(TEXT("panel_attached"),Panel!=nullptr);
     auto Ids=[](const std::vector<uint64_t>& Values)
     {TArray<TSharedPtr<FJsonValue>> Result;for(uint64_t Id:Values)Result.Add(MakeShared<FJsonValueNumber>(double(Id)));return Result;};
@@ -682,12 +748,31 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
         Result->SetArrayField(TEXT("scale"),XYZ(T.GetScale3D()));const FQuat Q=T.GetRotation();
         Result->SetArrayField(TEXT("rotation_xyzw"),{MakeShared<FJsonValueNumber>(Q.X),MakeShared<FJsonValueNumber>(Q.Y),MakeShared<FJsonValueNumber>(Q.Z),MakeShared<FJsonValueNumber>(Q.W)});return Result;
     };
+    if(Diagnostics())
+    {
+        TArray<TSharedPtr<FJsonValue>> Workers;
+        for(int32 I=0;I<RuntimeWorkers.Num();++I)
+        {
+            const auto* C=RuntimeWorkers[I].Get();auto Row=MakeShared<FJsonObject>();
+            Row->SetNumberField(TEXT("index"),I);Row->SetBoolField(TEXT("visible"),C->IsVisible());
+            Row->SetBoolField(TEXT("ready"),C->IsWorkerPoseReady());Row->SetNumberField(TEXT("bone_count"),C->GetNumBones());
+            Row->SetStringField(TEXT("mesh"),C->GetSkinnedAsset()->GetPathName());
+            Row->SetObjectField(TEXT("transform"),Transform(C->GetComponentTransform()));
+            Row->SetArrayField(TEXT("left_palm"),XYZ(C->GetPalmWorld(true)));Row->SetArrayField(TEXT("right_palm"),XYZ(C->GetPalmWorld(false)));
+            Row->SetArrayField(TEXT("left_sole"),XYZ(C->GetFootSoleWorld(true)));Row->SetArrayField(TEXT("right_sole"),XYZ(C->GetFootSoleWorld(false)));
+            Row->SetNumberField(TEXT("left_error_cm"),C->GetPalmContactErrorCm(true));Row->SetNumberField(TEXT("right_error_cm"),C->GetPalmContactErrorCm(false));
+            Row->SetNumberField(TEXT("limb_length_error_cm"),C->GetMaximumLimbLengthErrorCm());
+            Workers.Add(MakeShared<FJsonValueObject>(Row));
+        }
+        Root->SetArrayField(TEXT("skeletal_workers"),Workers);
+        Root->SetNumberField(TEXT("legacy_worker_instances"),WorkerCloth->GetInstanceCount()+WorkerSkin->GetInstanceCount()+WorkerHelmet->GetInstanceCount()+WorkerBoots->GetInstanceCount());
+    }
     TArray<TSharedPtr<FJsonValue>> Rows;uint64 Spawned=0,Completed=0,Collected=0,Exchanges=0;int32 Active=0,Occupancy=0,Queued=0,CartCount=0;
     bool Unique=true;int32 ActiveExchanges=0,WaitingExchanges=0;
     for(const auto& M:Machines)
     {
         const auto& S=M.Simulation.GetStats();auto Row=MakeShared<FJsonObject>();Row->SetStringField(TEXT("id"),M.Id);Row->SetStringField(TEXT("profile"),M.Profile);
-        Row->SetNumberField(TEXT("sim_time"),S.SimTime);Row->SetNumberField(TEXT("phase"),S.ChainPhase01);
+        Row->SetNumberField(TEXT("sim_time"),S.SimTime);Row->SetNumberField(TEXT("last_induct_completed_time"),S.LastInductCompletedTime);Row->SetNumberField(TEXT("phase"),S.ChainPhase01);
         Row->SetNumberField(TEXT("spawned"),double(S.Spawned));Row->SetNumberField(TEXT("completed"),double(S.Completed));
         Row->SetNumberField(TEXT("collected"),double(S.Collected));Row->SetNumberField(TEXT("active"),S.Active);Row->SetNumberField(TEXT("queued"),S.Queued);
         Row->SetNumberField(TEXT("exchanged_carts"),double(S.ExchangedCarts));Row->SetNumberField(TEXT("load_fraction"),M.LoadFraction);

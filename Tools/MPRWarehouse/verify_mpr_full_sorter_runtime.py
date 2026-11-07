@@ -102,6 +102,15 @@ def verify_state(value):
     assert value['tower_instances'] == value['tray_instances'] == value['parcel_instances'] == 88
     assert value['infeed_instances'] == 66 and value['worker_slots'] == 44
     assert value['bin_parcel_instances'] == 1632*3
+    assert value['legacy_worker_instances'] == 0
+    assert len(value['skeletal_workers']) == 44
+    for worker in value['skeletal_workers']:
+        assert worker['ready'] and worker['bone_count'] == 89
+        assert worker['mesh'].endswith('SKM_Manny_Simple.SKM_Manny_Simple')
+        if worker['visible']:
+            assert max(worker['left_error_cm'],worker['right_error_cm']) < .1, ('Skeletal hand reach',worker)
+            assert worker['limb_length_error_cm'] < .03
+            assert min(worker['left_sole'][2],worker['right_sole'][2]) < 1. and min(worker['left_sole'][2],worker['right_sole'][2]) > -.1
     assert value['conserved'] and value['unique_parcel_ownership'] and value['shared_aisle_mutex_valid']
     assert value['spawned'] == value['completed']+value['active']+value['queued']
     assert value['completed'] == value['collected']+value['occupancy']
@@ -288,7 +297,7 @@ def bind_instances(value):
             cart_instances[(mi, cart['index'])] = (by_mesh[mesh], counts[mesh])
             counts[mesh] += 1
     assert sum(counts.values()) == 96 and len(by_mesh) == 10
-    assert value['components'] == len(components) == 11+len(by_mesh)
+    assert value['components'] == len(components)+44 == 11+len(by_mesh)+44
     assert all(by_mesh[mesh].get_instance_count() == count for mesh, count in counts.items())
     assert components['ActiveCells'].get_instance_count() == components['FullCells'].get_instance_count() == 1632
     report['instance_pool'] = {name: c.get_instance_count() for name, c in components.items()}
@@ -300,8 +309,11 @@ def transform_values(transform):
 
 
 def all_render_transforms():
-    return {name: [transform_values(c.get_instance_transform(i, world_space=True))
+    values = {name: [transform_values(c.get_instance_transform(i, world_space=True))
                    for i in range(c.get_instance_count())] for name, c in components.items()}
+    for c in sim.get_components_by_class(u.MPRWorkerPoseComponent):
+        values[c.get_name()] = [transform_values(c.get_bone_transform_by_name(c.get_bone_name(i), u.BoneSpaces.WORLD_SPACE)) for i in range(c.get_num_bones())]
+    return values
 
 
 def instance(component, index):
@@ -330,11 +342,13 @@ def verify_rendered(value, machine_indices):
             if carrier['parcel_id']:
                 assert math.dist(xyz(package.translation), carrier['parcel_world_cm']) < .03
                 if carrier['state_code'] == 5:
-                    hands = [xyz(instance(components['OperatorSkin'], mi*6+j).translation) for j in (1, 2)]
+                    worker = value['skeletal_workers'][mi*2]
+                    hands = [worker['left_palm'], worker['right_palm']]
+                    assert max(worker['left_error_cm'],worker['right_error_cm']) < .1, ('Hand cannot reach carton',mi,worker)
                     midpoint = [(hands[0][a]+hands[1][a])/2 for a in range(3)]
                     parcel = carrier['parcel_world_cm']
-                    assert abs(math.dist(hands[0], hands[1])-PACKAGE_CM[0]*1.1) < .05
-                    assert math.dist(midpoint, [parcel[0], parcel[1], parcel[2]-2]) < .05
+                    assert 16 <= math.dist(hands[0], hands[1]) <= 28
+                    assert math.dist(midpoint, [parcel[0], parcel[1], parcel[2]-.5]) < .1
                     hands_checked += 1
             carrier_checked += 1
         for qi in range(3):
@@ -361,12 +375,9 @@ def verify_rendered(value, machine_indices):
                 # The second operator belongs to cart exchange. The first
                 # infeed operator must remain present during the handoff dwell.
                 worker = mi*2+1
-                for name, slots in (('OperatorClothing', 10), ('OperatorSkin', 3),
-                                    ('OperatorBoots', 2), ('OperatorHelmets', 1)):
-                    for wi in range(slots):
-                        assert not visible(instance(components[name], worker*slots+wi)), ('Exchange worker visible during handoff', mi, name, wi)
-                        hidden_exchange_worker_slots += 1
-                assert visible(instance(components['OperatorHelmets'], mi*2)), 'Infeed operator hidden during cart handoff'
+                assert not value['skeletal_workers'][worker]['visible'], ('Exchange worker visible during handoff', mi)
+                hidden_exchange_worker_slots += 1
+                assert value['skeletal_workers'][mi*2]['visible'], 'Infeed operator hidden during cart handoff'
             cart_checked += 1
         cells = {(c['side'], c['column'], c['level']): c for c in machine['cells']}
         for source in profile['bins']:
@@ -562,7 +573,7 @@ def recovery_sample(machine):
                           for c in machine['carriers']])
 
 
-def workflow(mi, side, sequence=False):
+def workflow(mi, side, sequence=False, record_infeed=True):
     sim.reset_simulation()
     sim.set_automatic_collection(False)
     yield from focus(mi, side)
@@ -574,7 +585,7 @@ def workflow(mi, side, sequence=False):
     trace_parcel(trace, current, mi)
     assert current['machines'][mi]['infeed'][0]['parcel_id'] == 1
     yield from capture(prefix+'_01_receiving_queue', mi, current)
-    if sequence:
+    if sequence and record_infeed:
         # Record a genuine reset-to-first-delivery passage in the same fixed
         # view. Later fast-forward to full-cart exchange is a separate segment.
         sim.reset_simulation()

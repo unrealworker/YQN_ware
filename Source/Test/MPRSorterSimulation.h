@@ -83,6 +83,8 @@ struct Stats
     uint64_t Spawned=0,Completed=0,Collected=0;
     int Active=0;
     double SimTime=0,ChainPhase01=0,BlockedSeconds=0;
+    // Exact simulation-clock event boundary, independent of presentation frames.
+    double LastInductCompletedTime=-100.;
     bool ChainStopped=false;
     BlockReason Reason=BlockReason::None;
     int Queued=0;

@@ -7,6 +7,10 @@
 class UInstancedStaticMeshComponent;
 class UMaterialInterface;
 class UMPRSorterHUDWidget;
+class UMPRWorkerPoseComponent;
+class USkeletalMesh;
+class UAnimSequence;
+struct FMPRWorkerPoseInput;
 
 /** MPR-only, source-fitted demonstration of a circulating lift sorter. */
 UCLASS(NotBlueprintable)
@@ -31,6 +35,8 @@ public:
     UPROPERTY(EditAnywhere, Category="MPR Sorter|Operators") TObjectPtr<UMaterialInterface> WorkerClothMaterial;
     UPROPERTY(EditAnywhere, Category="MPR Sorter|Operators") TObjectPtr<UMaterialInterface> WorkerHelmetMaterial;
     UPROPERTY(EditAnywhere, Category="MPR Sorter|Operators") TObjectPtr<UMaterialInterface> WorkerBootMaterial;
+    UPROPERTY(EditAnywhere, Category="MPR Sorter|Operators") TObjectPtr<USkeletalMesh> WorkerMesh;
+    UPROPERTY(EditAnywhere, Category="MPR Sorter|Operators") TObjectPtr<UAnimSequence> WorkerIdle;
     UPROPERTY(EditAnywhere, Category="MPR Sorter") bool bAutoStart=true;
     UFUNCTION(BlueprintCallable, Category="MPR Sorter") void SetSimulationPlaying(bool bPlaying);
     UFUNCTION(BlueprintCallable, Category="MPR Sorter") void ResetSimulation();
@@ -76,6 +82,7 @@ private:
         MPRSorter::Simulation Simulation;
         int32 BinOffset=0,FeedOffset=0,WorkerOffset=0;
         TArray<int32> CachedBinState;
+
     };
     bool LoadLayout();
     void UpdateInstances();
@@ -84,8 +91,8 @@ private:
     FVector CartOffset(const FMachine& Machine,int32 CartIndex) const;
     FVector FeedPoint(const FMachine& Machine,double Progress) const;
     FVector CarrierParcelPoint(const FMachine& Machine,const MPRSorter::Carrier& Carrier,FQuat& Turn) const;
-    void UpdateWorker(int32 Index,const FMachine& Machine,const FVector& Feet,const FVector& LeftHand,
-                      const FVector& RightHand,double Heading,double Step,bool bVisible);
+    void UpdateWorker(int32 Index,const FMachine& Machine,const FMPRWorkerPoseInput& Input);
+    bool BuildWorkers();
     bool BuildCartInstances(bool bEditorPreview=false);
     void ClearCartInstances();
     bool AdvanceFleet(double WallSeconds);
@@ -104,6 +111,7 @@ private:
     UPROPERTY(VisibleAnywhere) TObjectPtr<UInstancedStaticMeshComponent> WorkerHelmet;
     UPROPERTY(VisibleAnywhere) TObjectPtr<UInstancedStaticMeshComponent> WorkerBoots;
     UPROPERTY(Transient,DuplicateTransient) TArray<TObjectPtr<UInstancedStaticMeshComponent>> RuntimeCartComponents;
+    UPROPERTY(Transient,DuplicateTransient) TArray<TObjectPtr<UMPRWorkerPoseComponent>> RuntimeWorkers;
     UPROPERTY(Transient) TObjectPtr<UMPRSorterHUDWidget> Panel;
     TArray<FMachine> Machines;
     FString Error;

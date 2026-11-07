@@ -33,7 +33,8 @@ bool MPRSame(const MPRSorter::Simulation& A,const MPRSorter::Simulation& B)
     const auto& X=A.GetStats();const auto& Y=B.GetStats();
     if(X.Spawned!=Y.Spawned||X.Completed!=Y.Completed||X.Collected!=Y.Collected||X.Active!=Y.Active
        ||X.Queued!=Y.Queued||X.ExchangedCarts!=Y.ExchangedCarts||X.Reason!=Y.Reason||X.ChainStopped!=Y.ChainStopped
-       ||X.WaitingForCart!=Y.WaitingForCart||!Near(X.SimTime,Y.SimTime)||!Near(X.ChainPhase01,Y.ChainPhase01,1.e-8))return false;
+       ||X.WaitingForCart!=Y.WaitingForCart||!Near(X.SimTime,Y.SimTime)||!Near(X.ChainPhase01,Y.ChainPhase01,1.e-8)
+       ||!Near(X.LastInductCompletedTime,Y.LastInductCompletedTime))return false;
     for(int I=0;I<MPRSorter::CarrierCount;++I)
     {
         const auto& P=A.GetCarriers()[I];const auto& Q=B.GetCarriers()[I];
@@ -206,6 +207,50 @@ bool FMPRSorterInfeed::RunTest(const FString&)
     TestTrue(TEXT("a single full bin does not claim a full cart or erase contents"),S.GetStats().Completed==1&&!S.ClearBin({0,0,0})&&S.GetStats().Collected==0&&MPRConserved(S));
     return true;
 }
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMPRSorterInductClock,"MPR.Sorter.InductionCompletionClock",MPRFlags)
+bool FMPRSorterInductClock::RunTest(const FString&)
+{
+    const auto Config=MPRFixture();std::string Error;
+    MPRSorter::Simulation Boundary,Large,Fine,Rate;
+    bool Good=Boundary.Initialize(Config,Error)&&Large.Initialize(Config,Error)
+        &&Fine.Initialize(Config,Error)&&Rate.Initialize(Config,Error);
+    TestTrue(TEXT("induction completion has no event before startup"),Good&&Near(Boundary.GetStats().LastInductCompletedTime,-100.));
+    if(!Good)return false;
+    Boundary.SetPlaying(true);Large.SetPlaying(true);Fine.SetPlaying(true);Rate.SetPlaying(true);
+    double Expected=-1.;
+    for(int I=0;I<2000&&Expected<0.;++I)
+    {
+        Good&=Boundary.Advance(.01);
+        for(const auto& C:Boundary.GetCarriers())if(C.State==MPRSorter::CarrierPhase::Induct)
+            Expected=Boundary.GetStats().SimTime+(1.-C.InductProgress)*Config.InductSeconds;
+    }
+    TestTrue(TEXT("fixture enters its first real induction"),Good&&Expected>0.);
+    if(Expected<=0.)return false;
+    Good&=Boundary.Advance(Expected-Boundary.GetStats().SimTime-.0001);
+    TestTrue(TEXT("timestamp is not published before the induction boundary"),Good&&Near(Boundary.GetStats().LastInductCompletedTime,-100.));
+    Good&=Boundary.Advance(.0002);
+    TestTrue(TEXT("crossing the boundary records event time rather than frame end"),Good
+        &&Near(Boundary.GetStats().LastInductCompletedTime,Expected,1.e-8)
+        &&Boundary.GetStats().SimTime>Boundary.GetStats().LastInductCompletedTime);
+
+    const double End=Expected+.25;
+    Good&=Large.Advance(End);
+    while(Good&&Fine.GetStats().SimTime<End-1.e-10)
+        Good&=Fine.Advance(std::min(.013,End-Fine.GetStats().SimTime));
+    Good&=Rate.Advance(Expected*.5)&&Rate.SetRate(4.)&&Rate.Advance((End-Rate.GetStats().SimTime)/4.);
+    TestTrue(TEXT("large small and rate-changing steps produce the same completion clock and cargo state"),Good
+        &&Near(Large.GetStats().LastInductCompletedTime,Expected,1.e-8)
+        &&MPRSame(Large,Fine)&&MPRSame(Large,Rate)
+        &&MPRConserved(Large)&&MPRConserved(Fine)&&MPRConserved(Rate));
+    Boundary.SetPlaying(false);const double Paused=Boundary.GetStats().LastInductCompletedTime;
+    TestTrue(TEXT("pause preserves the completed induction event"),Boundary.Advance(30.)&&Near(Boundary.GetStats().LastInductCompletedTime,Paused));
+    Boundary.Reset();
+    TestTrue(TEXT("reset clears the completion epoch to its sentinel"),Near(Boundary.GetStats().LastInductCompletedTime,-100.)
+        &&Near(Boundary.GetStats().SimTime,0.)&&!Boundary.IsPlaying()&&Boundary.GetRate()==1.);
+    Boundary.SetPlaying(true);Good=Boundary.Advance(End);
+    TestTrue(TEXT("reset then replay restores the same event clock"),Good&&MPRSame(Boundary,Large));
+    return true;
+}
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMPRSorterPauseReset,"MPR.Sorter.PauseRateResetAndInvalidInput",MPRFlags)
 bool FMPRSorterPauseReset::RunTest(const FString&)
 {
@@ -262,7 +307,7 @@ bool FMPRSorterExchangePermit::RunTest(const FString&)
 int main()
 {
     FMPRSorterConfiguration().RunTest("");FMPRSorterFrameEquivalence().RunTest("");FMPRSorterWholeCart().RunTest("");
-    FMPRSorterInfeed().RunTest("");FMPRSorterPauseReset().RunTest("");FMPRSorterSceneProfiles().RunTest("");FMPRSorterExchangePermit().RunTest("");
+    FMPRSorterInfeed().RunTest("");FMPRSorterInductClock().RunTest("");FMPRSorterPauseReset().RunTest("");FMPRSorterSceneProfiles().RunTest("");FMPRSorterExchangePermit().RunTest("");
     auto C=MPRFixture();C.BinCapacity=3;C.ChainSpeedCmS=40;
     MPRSorter::Simulation S;std::string E;S.Initialize(C,E);S.SetPlaying(true);
     double Full=-1,Out=-1,Docked=-1;

@@ -203,7 +203,7 @@ void Simulation::SettleEvents()
                 break;
             case CarrierPhase::Induct:
                 if(PhaseElapsed[I]>=Settings.InductSeconds-TimeTolerance)
-                {C.InductProgress=1;C.State=CarrierPhase::LoadedTravel;PhaseElapsed[I]=0;Changed=true;}
+                {C.InductProgress=1;C.State=CarrierPhase::LoadedTravel;Totals.LastInductCompletedTime=Totals.SimTime;PhaseElapsed[I]=0;Changed=true;}
                 break;
             case CarrierPhase::LoadedTravel:
                 if(std::abs(C.Distance01-TargetDistance(C))<=PositionTolerance)
