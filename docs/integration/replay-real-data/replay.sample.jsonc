@@ -1,0 +1,209 @@
+// 回放明细返回样例：建议上游交付格式，不是当前演示 JSON 的直接替换文件。
+// 本示例：2 台人工叉车（1 台执行任务、1 台待命）、1 台卡车、1 个托盘。
+// 坐标和业务均为构造样例，未与场景标定。真实数据不能照抄这些坐标。
+// 为便于阅读只列动作关键点；实际应提供可用的完整历史轨迹，转弯不能只有两端点。
+{
+  "schemaVersion": "ghs.replay.detail.v1", // 数据格式版本
+  "isTest": true, // 样例标记；真实且核验通过后才设 false
+  "warehouseId": "GHS_CA_US", // 仓库编码
+  "displayTimeZone": "America/Los_Angeles", // 展示时区，自动处理夏令时
+  "query": { // 与订单索引使用同一时间段
+    "startUtc": "2026-11-09T17:00:00.000Z", // 包含起点
+    "endUtc": "2026-11-09T18:00:00.000Z" // 不包含终点事件；允许用终点状态采样封闭插值区间
+  },
+  "selectedOrderId": "SAMPLE-OUT-001", // 用户选中的订单，用于关联与突出显示
+  "scope": "WAREHOUSE_INTERVAL", // 回放本仓库此时间段内的全部回放设备，不只过滤选中订单的设备
+  "complete": true, // 表示样例响应已完整交付；不是定位精度/核验通过的含义
+  "nextCursor": null, // 分块/分页时填下一块游标；完整返回为 null
+  "coordinateSystem": { // 所有位置和朝向使用同一坐标约定
+    "frameId": "GHS_LOCAL_DEMO", // 定位地图坐标系 ID；这里只是示例坐标系
+    "mapVersion": "demo-map-v1", // 定位地图版本，防止地图修改后错位
+    "unit": "m", // 位置/货叉高度单位：米；对接时转为 UE 厘米
+    "xAxis": "示例仓库纵向", // +X 的实际方向；交付时写清与现场平面图的关系
+    "yAxis": "示例仓库横向", // +Y 的实际方向；不能只写 X/Y 而不说明方向
+    "zAxis": "UP", // +Z 向上；统一的地面基准为 0
+    "headingConvention": "0=+X;90=+Y", // 车头朝向角，单位度，沿 +X 向 +Y 为正；不是速度方向
+    "calibrationId": null // 与 UE 场景的标定版本；当前样例未标定，真实接入前必须补齐
+  },
+  "locations": [ // 业务货位/月台/等待点；需与场景位置做一次映射
+    {
+      "locationId": "STACK-A-01", // 货位/工位唯一编码
+      "name": "地堆 A 区 01 位", // 中文显示名称
+      "type": "FLOOR_STORAGE", // 类型：FLOOR_STORAGE 地堆、DOCK 月台、WAITING_POINT 等待点
+      "positionM": [10, 10, 0], // [x,y,z]，本坐标系米；货位锚点为托盘底面中心
+      "headingDeg": 0 // 货位内托盘朝向；单位度
+    },
+    { "locationId": "DOCK-075", "name": "75 号月台", "type": "DOCK", "positionM": [80, 50, 0], "headingDeg": 0 },
+    { "locationId": "WAIT-02", "name": "叉车等待位 02", "type": "WAITING_POINT", "positionM": [15, 20, 0], "headingDeg": 0 }
+  ],
+  "devices": [ // 稳定的设备主数据；不需要提供 UE 资源路径
+    {
+      "deviceId": "FL-001", // 设备唯一编码，所有表以此关联；不是数组下标
+      "name": "人工叉车 01", // POI 与设备列表显示名
+      "deviceType": "MANUAL_FORKLIFT", // MANUAL_FORKLIFT 人工叉车、LOADING_TRUCK 装卸卡车
+      "modelCode": "FORKLIFT_STANDARD", // 外观型号编码，由项目映射到已有模型
+      "positionReference": "CHASSIS_CENTER_GROUND", // 定位点是底盘中心在地面的投影；若是 UWB 标签位置，需提供安装偏移
+      "capacityPallets": 1, // 托盘容量；业务容量，不能沿用假数据硬编码
+      "attachmentSlots": [ // 可承载托盘的挂点；挂点由项目侧标定，或由已知机械尺寸提供
+        {
+          "slotId": "FORKS", // 本设备内唯一挂点 ID
+          "offsetM": [2, 0, 0], // 相对设备位置参考点的局部偏移，单位米；此处只是示例
+          "headingOffsetDeg": 0, // 托盘相对车身的角度偏移
+          "usesForkHeight": true // 托盘高度是否再叠加 forkHeightM
+        }
+      ]
+    },
+    {
+      "deviceId": "FL-002", "name": "人工叉车 02", "deviceType": "MANUAL_FORKLIFT",
+      "modelCode": "FORKLIFT_STANDARD", "positionReference": "CHASSIS_CENTER_GROUND", "capacityPallets": 1,
+      "attachmentSlots": [{ "slotId": "FORKS", "offsetM": [2, 0, 0], "headingOffsetDeg": 0, "usesForkHeight": true }]
+    },
+    {
+      "deviceId": "TR-001", "name": "装卸卡车 A", "deviceType": "LOADING_TRUCK",
+      "modelCode": "TRUCK_STANDARD", "positionReference": "CHASSIS_CENTER_GROUND", "capacityPallets": 1,
+      "attachmentSlots": [{ "slotId": "CARGO-01", "offsetM": [-4, 0, 1.2], "headingOffsetDeg": 0, "usesForkHeight": false }]
+    }
+  ],
+  "pallets": [ // 真实托盘身份；若没有托盘 ID，后续只能使用明确标记的示意托盘
+    {
+      "palletId": "PALLET-001", // 托盘唯一编码；同一托盘从取货到装车保持不变
+      "name": "托盘 001", // 展示名称
+      "modelCode": "BLUE_PALLET_WITH_CARGO", // 载荷外观编码，由项目映射蓝色托盘模型
+      "dimensionsM": [1.2, 1, 0.8] // [长,宽,总高]，包含托盘和货物；可用统一车型/载荷规格映射
+    }
+  ],
+  "tasks": [ // 将订单、设备、托盘、取货位和目标卡车联系起来
+    {
+      "taskId": "TASK-001", // 作业任务唯一编号，一张订单可有多个任务
+      "orderId": "SAMPLE-OUT-001", // 所属订单
+      "deviceId": "FL-001", // 执行设备
+      "palletId": "PALLET-001", // 本次搬运托盘
+      "sourceLocationId": "STACK-A-01", // 取货货位
+      "destinationDeviceId": "TR-001", // 放货到目标卡车；若放到货位可为 null
+      "destinationSlotId": "CARGO-01", // 目标车厢内的挂点/托位；由项目映射
+      "destinationLocationId": "DOCK-075", // 目标业务区域/月台
+      "startedAtUtc": "2026-11-09T17:01:00.000Z", // 实际任务开始
+      "endedAtUtc": "2026-11-09T17:20:00.000Z" // 实际任务完成；未完成为 null
+    }
+  ],
+  "initialState": { // 查询起点事件应用前的状态；不能遗漏此前已载货的情况
+    "atUtc": "2026-11-09T17:00:00.000Z", // 必须等于 query.startUtc
+    "eventBoundary": "BEFORE_START_EVENTS", // 快照不含恰好 startUtc 的事件；随后按顺序应用起点事件一次
+    "activeFaults": [], // 起点前已发生且未恢复的故障；每项提供 eventId、deviceId、faultCode、startedAtUtc、message，含义同事件字段
+    "palletStates": [
+      {
+        "palletId": "PALLET-001", // 关联托盘
+        "present": true, // 是否在回放空间中存在；与设备在线/离线不同
+        "holder": { // 初始归属；叉车已载货时应填 device，而非强制放回货位
+          "type": "location", // location=业务位置，device=设备上的挂点
+          "id": "STACK-A-01", // locationId 或 deviceId；本样例每个 location 是一个独立托位/层位
+          "slotId": null // holder 为 device 时必填有效挂点；货位为 null
+        }
+      }
+    ]
+  },
+  "deviceTracks": [ // 每个设备一条轨迹；采样按时间严格升序，包含起点状态及终点状态
+    {
+      "deviceId": "FL-001", // 关联设备主数据
+      "samples": [
+        {
+          "timeUtc": "2026-11-09T17:00:00.000Z", // 采集时间，不是数据入库时间；UTC ISO 8601，精确到毫秒
+          "positionM": [8, 10, 0], // 定位参考点 [x,y,z]，单位米
+          "headingDeg": 0, // 车头方向；未知为 null，倒车时不能简单按运动方向推断
+          "forkHeightM": 0, // 托盘底面相对货叉零位的抬升量；仅叉车有效，未知为 null
+          "doorOpenRatio": null, // 卡车门开度 0=关闭、1=打开；叉车不适用为 null
+          "present": true, // 是否仍在可回放空间；驶出场景后 false
+          "status": "IDLE", // 作业状态枚举，见说明文档；文字本身不驱动动画
+          "taskId": null, // 当前执行的任务；无任务为 null
+          "quality": "sample" // sample=样例、measured=实测、estimated=推算、missing=缺失
+        },
+        // 同名字段沿用上面的注释。取货时位置保持，forkHeightM 从 0 提升至 0.3。
+        { "timeUtc": "2026-11-09T17:01:00.000Z", "positionM": [8,10,0], "headingDeg": 0, "forkHeightM": 0, "doorOpenRatio": null, "present": true, "status": "PICKING", "taskId": "TASK-001", "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:01:05.000Z", "positionM": [8,10,0], "headingDeg": 0, "forkHeightM": 0.3, "doorOpenRatio": null, "present": true, "status": "CARRYING", "taskId": "TASK-001", "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:03:00.000Z", "positionM": [30,10,0], "headingDeg": 0, "forkHeightM": 0.3, "doorOpenRatio": null, "present": true, "status": "CARRYING", "taskId": "TASK-001", "quality": "sample" },
+        // 故障期间两个端点保持同一姿态，不能只添加“故障事件”却仍在移动。
+        { "timeUtc": "2026-11-09T17:05:00.000Z", "positionM": [30,10,0], "headingDeg": 0, "forkHeightM": 0.3, "doorOpenRatio": null, "present": true, "status": "FAULT", "taskId": "TASK-001", "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:07:00.000Z", "positionM": [30,10,0], "headingDeg": 0, "forkHeightM": 0.3, "doorOpenRatio": null, "present": true, "status": "CARRYING", "taskId": "TASK-001", "quality": "sample" },
+        // 圆弧关键点仅用于说明格式，不能作为已校验无碰撞的真实路线。
+        { "timeUtc": "2026-11-09T17:10:00.000Z", "positionM": [46,10,0], "headingDeg": 0, "forkHeightM": 0.3, "doorOpenRatio": null, "present": true, "status": "CARRYING", "taskId": "TASK-001", "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:10:02.000Z", "positionM": [48.828427,11.171573,0], "headingDeg": 45, "forkHeightM": 0.3, "doorOpenRatio": null, "present": true, "status": "CARRYING", "taskId": "TASK-001", "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:10:04.000Z", "positionM": [50,14,0], "headingDeg": 90, "forkHeightM": 0.3, "doorOpenRatio": null, "present": true, "status": "CARRYING", "taskId": "TASK-001", "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:15:00.000Z", "positionM": [50,46,0], "headingDeg": 90, "forkHeightM": 0.3, "doorOpenRatio": null, "present": true, "status": "CARRYING", "taskId": "TASK-001", "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:15:02.000Z", "positionM": [51.171573,48.828427,0], "headingDeg": 45, "forkHeightM": 0.3, "doorOpenRatio": null, "present": true, "status": "CARRYING", "taskId": "TASK-001", "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:15:04.000Z", "positionM": [54,50,0], "headingDeg": 0, "forkHeightM": 0.3, "doorOpenRatio": null, "present": true, "status": "CARRYING", "taskId": "TASK-001", "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:19:50.000Z", "positionM": [74,50,0], "headingDeg": 0, "forkHeightM": 0.3, "doorOpenRatio": null, "present": true, "status": "DROPPING", "taskId": "TASK-001", "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:20:00.000Z", "positionM": [74,50,0], "headingDeg": 0, "forkHeightM": 1.2, "doorOpenRatio": null, "present": true, "status": "IDLE", "taskId": null, "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:20:05.000Z", "positionM": [74,50,0], "headingDeg": 0, "forkHeightM": 0, "doorOpenRatio": null, "present": true, "status": "IDLE", "taskId": null, "quality": "sample" },
+        { "timeUtc": "2026-11-09T18:00:00.000Z", "positionM": [74,50,0], "headingDeg": 0, "forkHeightM": 0, "doorOpenRatio": null, "present": true, "status": "IDLE", "taskId": null, "quality": "sample" }
+      ]
+    },
+    {
+      "deviceId": "FL-002", // 本时间段没有任务，仍提供起点状态；静止设备不产生行驶轨迹
+      "samples": [
+        { "timeUtc": "2026-11-09T17:00:00.000Z", "positionM": [15,20,0], "headingDeg": 0, "forkHeightM": 0, "doorOpenRatio": null, "present": true, "status": "IDLE", "taskId": null, "quality": "sample" },
+        { "timeUtc": "2026-11-09T18:00:00.000Z", "positionM": [15,20,0], "headingDeg": 0, "forkHeightM": 0, "doorOpenRatio": null, "present": true, "status": "IDLE", "taskId": null, "quality": "sample" }
+      ]
+    },
+    {
+      "deviceId": "TR-001", // 卡车必须也有轨迹，才能还原装满离场；不要求绘制其地面轨迹线
+      "samples": [
+        { "timeUtc": "2026-11-09T17:00:00.000Z", "positionM": [80,50,0], "headingDeg": 0, "forkHeightM": null, "doorOpenRatio": 1, "present": true, "status": "WAITING", "taskId": null, "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:20:00.000Z", "positionM": [80,50,0], "headingDeg": 0, "forkHeightM": null, "doorOpenRatio": 1, "present": true, "status": "WAITING", "taskId": null, "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:21:00.000Z", "positionM": [80,50,0], "headingDeg": 0, "forkHeightM": null, "doorOpenRatio": 1, "present": true, "status": "WAITING", "taskId": null, "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:21:04.000Z", "positionM": [80,50,0], "headingDeg": 0, "forkHeightM": null, "doorOpenRatio": 0, "present": true, "status": "WAITING", "taskId": null, "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:22:00.000Z", "positionM": [80,50,0], "headingDeg": 0, "forkHeightM": null, "doorOpenRatio": 0, "present": true, "status": "DEPARTING", "taskId": null, "quality": "sample" },
+        { "timeUtc": "2026-11-09T17:25:00.000Z", "positionM": [180,50,0], "headingDeg": 0, "forkHeightM": null, "doorOpenRatio": 0, "present": false, "status": "LEFT_SITE", "taskId": null, "quality": "sample" },
+        { "timeUtc": "2026-11-09T18:00:00.000Z", "positionM": [180,50,0], "headingDeg": 0, "forkHeightM": null, "doorOpenRatio": 0, "present": false, "status": "LEFT_SITE", "taskId": null, "quality": "sample" }
+      ]
+    }
+  ],
+  "events": [ // 关键事件按时间升序；同毫秒按 sequence 排序，事件 ID 唯一，用于去重
+    {
+      "eventId": "EVT-001", // 全局唯一事件 ID
+      "timeUtc": "2026-11-09T17:01:00.000Z", // 真实发生时间，非收到事件的时间
+      "sequence": 1, // 同一毫秒的确定性顺序，从小到大应用
+      "type": "PICKUP_COMPLETED", // 本样例约定此刻托盘归属交接完成，随后抬升；实际时点以系统定义为准
+      "deviceId": "FL-001", // 主执行设备
+      "orderId": "SAMPLE-OUT-001", // 关联订单；非订单事件允许 null
+      "taskId": "TASK-001", // 关联任务；无任务允许 null
+      "palletId": "PALLET-001", // 关联托盘；非装卸事件可 null
+      "fromHolder": { "type": "location", "id": "STACK-A-01", "slotId": null }, // 交接前托盘归属
+      "toHolder": { "type": "device", "id": "FL-001", "slotId": "FORKS" }, // 交接后托盘归属
+      "severity": "info", // info 提示、warning 警告、error 故障
+      "message": "人工叉车 01 取货交接完成", // 时间轴和事件列表中文说明
+      "faultCode": null, // 故障码；非故障事件 null
+      "relatedEventId": null // 恢复事件填对应故障事件 ID，其余 null
+    },
+    {
+      "eventId": "EVT-002", "timeUtc": "2026-11-09T17:05:00.000Z", "sequence": 1,
+      "type": "FAULT_STARTED", "deviceId": "FL-001", "orderId": "SAMPLE-OUT-001", "taskId": "TASK-001",
+      "palletId": null, "fromHolder": null, "toHolder": null, "severity": "error",
+      "message": "人工叉车 01 故障停机", "faultCode": "DEMO-DRIVE-01", "relatedEventId": null
+    },
+    {
+      "eventId": "EVT-003", "timeUtc": "2026-11-09T17:07:00.000Z", "sequence": 1,
+      "type": "FAULT_CLEARED", "deviceId": "FL-001", "orderId": "SAMPLE-OUT-001", "taskId": "TASK-001",
+      "palletId": null, "fromHolder": null, "toHolder": null, "severity": "info",
+      "message": "人工叉车 01 故障解除", "faultCode": "DEMO-DRIVE-01", "relatedEventId": "EVT-002"
+    },
+    {
+      "eventId": "EVT-004", "timeUtc": "2026-11-09T17:20:00.000Z", "sequence": 1,
+      "type": "DROPOFF_COMPLETED", "deviceId": "FL-001", "orderId": "SAMPLE-OUT-001", "taskId": "TASK-001", "palletId": "PALLET-001",
+      "fromHolder": { "type": "device", "id": "FL-001", "slotId": "FORKS" },
+      "toHolder": { "type": "device", "id": "TR-001", "slotId": "CARGO-01" },
+      "severity": "info", "message": "人工叉车 01 放货完成，托盘已装入卡车 A", "faultCode": null, "relatedEventId": null
+    },
+    {
+      "eventId": "EVT-005", "timeUtc": "2026-11-09T17:22:00.000Z", "sequence": 1,
+      "type": "TRUCK_DEPARTED", "deviceId": "TR-001", "orderId": "SAMPLE-OUT-001", "taskId": null,
+      "palletId": null, "fromHolder": null, "toHolder": null, "severity": "info",
+      "message": "装卸卡车 A 装载完成后发车", "faultCode": null, "relatedEventId": null
+    },
+    {
+      "eventId": "EVT-006", "timeUtc": "2026-11-09T17:25:00.000Z", "sequence": 1,
+      "type": "TRUCK_LEFT_SITE", "deviceId": "TR-001", "orderId": "SAMPLE-OUT-001", "taskId": null,
+      "palletId": null, "fromHolder": null, "toHolder": null, "severity": "info",
+      "message": "装卸卡车 A 已驶出回放区域", "faultCode": null, "relatedEventId": null
+    }
+  ]
+}

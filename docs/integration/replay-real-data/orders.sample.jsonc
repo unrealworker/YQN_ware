@@ -1,0 +1,24 @@
+// 订单索引返回样例：建议交付格式，尚未接入当前程序。
+// JSONC 中的 // 是中文注释；配套 orders.sample.json 是无注释的标准 JSON。
+{
+  "schemaVersion": "ghs.replay.orders.v1", // 数据格式版本；不是引擎版本
+  "isTest": true, // 本文件为示例数据；真实且核验通过的数据才设为 false
+  "warehouseId": "GHS_CA_US", // 仓库唯一编码，与回放明细一致
+  "displayTimeZone": "America/Los_Angeles", // 页面显示时区；传输时间统一使用 UTC
+  "query": { // 用户选择的时间段，至少 1 小时
+    "startUtc": "2026-11-09T17:00:00.000Z", // 起点，包含；当地 2026-11-09 09:00 PST
+    "endUtc": "2026-11-09T18:00:00.000Z" // 终点，不包含业务事件；当地 10:00 PST
+  },
+  "orders": [ // 返回时间段内有作业记录的订单；跨越查询边界的订单也应返回
+    {
+      "orderId": "SAMPLE-OUT-001", // 订单唯一编号；真实数据沿用业务系统编号
+      "orderType": "OUTBOUND", // 订单类型：OUTBOUND 出库、INBOUND 入库、TRANSFER 移库
+      "status": "COMPLETED", // 订单状态：PENDING 待执行、IN_PROGRESS 执行中、COMPLETED 已完成、CANCELLED 已取消
+      "startedAtUtc": "2026-11-09T17:01:00.000Z", // 订单实际开始时间；尚未开始可为 null
+      "endedAtUtc": "2026-11-09T17:25:00.000Z", // 订单实际结束时间；未结束可为 null
+      "deviceIds": ["FL-001", "TR-001"], // 参与本订单的设备 ID，关联设备主数据
+      "taskIds": ["TASK-001"] // 本订单的作业任务 ID，关联回放明细 tasks
+    }
+  ],
+  "nextCursor": null // 分页游标；null 表示本次查询已返回全部订单
+}

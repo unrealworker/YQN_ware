@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "ghs.replay.orders.v1",
+  "isTest": true,
+  "warehouseId": "GHS_CA_US",
+  "displayTimeZone": "America/Los_Angeles",
+  "query": {
+    "startUtc": "2026-11-09T17:00:00.000Z",
+    "endUtc": "2026-11-09T18:00:00.000Z"
+  },
+  "orders": [
+    {
+      "orderId": "SAMPLE-OUT-001",
+      "orderType": "OUTBOUND",
+      "status": "COMPLETED",
+      "startedAtUtc": "2026-11-09T17:01:00.000Z",
+      "endedAtUtc": "2026-11-09T17:25:00.000Z",
+      "deviceIds": [
+        "FL-001",
+        "TR-001"
+      ],
+      "taskIds": [
+        "TASK-001"
+      ]
+    }
+  ],
+  "nextCursor": null
+}
