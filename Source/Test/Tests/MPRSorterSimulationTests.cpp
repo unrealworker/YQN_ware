@@ -303,11 +303,102 @@ bool FMPRSorterExchangePermit::RunTest(const FString&)
     TestTrue(TEXT("grant completes one whole cart and retains conservation"),S.GetCarts()[0].Generation==2&&S.GetCarts()[0].Collected==12&&MPRConserved(S));
     return true;
 }
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMPRSorterExternalAdmission,"MPR.Sorter.ExternalInfeedAdmission",MPRFlags)
+bool FMPRSorterExternalAdmission::RunTest(const FString&)
+{
+    MPRSorter::Simulation S;std::string E;
+    TestTrue(TEXT("an uninitialized sorter cannot receive upstream ownership"),!S.CanAcceptExternalParcel()&&!S.EnqueueExternalParcel(1));
+    S.Initialize(MPRFixture(),E);S.SetPlaying(true);
+    TestTrue(TEXT("internal arrival mode rejects external parcels"),!S.CanAcceptExternalParcel()&&!S.EnqueueExternalParcel(1));
+    auto C=MPRFixture();C.ExternalInfeed=true;C.InfeedCapacity=2;C.InfeedTravelSeconds=100;
+    C.InfeedSpacingSeconds=.01;S.Initialize(C,E);
+    const auto Paused=S;
+    TestTrue(TEXT("paused admission is rejected without mutation"),!S.EnqueueExternalParcel(50)&&MPRSame(S,Paused));
+    S.SetPlaying(true);S.Advance(1000);
+    TestTrue(TEXT("external mode never creates cargo without an upstream transfer"),S.GetStats().Spawned==0
+        &&S.GetStats().InfeedReceived==0&&S.GetStats().Queued==0&&S.GetStats().Active==0&&S.CanAcceptExternalParcel());
+    TestTrue(TEXT("zero ID is invalid and the original upstream ID is retained"),!S.EnqueueExternalParcel(0)
+        &&S.EnqueueExternalParcel(50)&&S.GetInfeedQueue().front().ParcelId==50&&S.GetStats().Spawned==1);
+    const auto AtEntry=S;
+    TestTrue(TEXT("entrance spacing applies backpressure without claiming the parcel"),!S.CanAcceptExternalParcel()
+        &&!S.EnqueueExternalParcel(60)&&MPRSame(S,AtEntry));
+    S.Advance(C.InfeedTravelSeconds/3.+.001);
+    TestTrue(TEXT("duplicate and stale upstream IDs cannot be accepted"),!S.EnqueueExternalParcel(50)&&!S.EnqueueExternalParcel(49));
+    TestTrue(TEXT("a rejected newer ID can retry after physical entrance space clears"),S.EnqueueExternalParcel(60));
+    const auto FullQueue=S;
+    TestTrue(TEXT("the bounded queue retains upstream ownership when full"),!S.CanAcceptExternalParcel()
+        &&!S.EnqueueExternalParcel(70)&&MPRSame(S,FullQueue)&&S.GetStats().Spawned==2&&MPRConserved(S));
+    S.Reset();S.SetPlaying(true);
+    TestTrue(TEXT("reset starts a fresh external ID epoch without internal arrivals"),S.EnqueueExternalParcel(1)&&S.GetStats().Spawned==1);
+    S.Reset();S.SetPlaying(true);
+    TestTrue(TEXT("maximum external ID cannot wrap into a duplicate identity"),S.EnqueueExternalParcel(std::numeric_limits<uint64_t>::max()));
+    S.Advance(200);
+    TestTrue(TEXT("exhausted IDs refuse further admissions without overflow"),!S.CanAcceptExternalParcel()&&!S.EnqueueExternalParcel(1)&&MPRConserved(S));
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMPRSorterExternalLifecycle,"MPR.Sorter.ExternalInfeedWholeCartLifecycle",MPRFlags)
+bool FMPRSorterExternalLifecycle::RunTest(const FString&)
+{
+    auto C=MPRFixture();C.ExternalInfeed=true;C.Columns=1;C.Levels=1;C.BinCapacity=1;C.CartColumns=1;
+    C.LevelHeightsCm={C.LoadHeightCm};C.DestinationDistances01={.25,.75};C.AutoCollect=false;
+    MPRSorter::Simulation S;std::string E;S.Initialize(C,E);S.SetPlaying(true);
+    bool Good=S.EnqueueExternalParcel(401),Scan=false,Induct=false,Unload=false;
+    for(int I=0;I<10000&&S.GetCarts()[0].State!=MPRSorter::CartPhase::FullWaiting;++I)
+    {
+        Good&=S.Advance(.02)&&MPRConserved(S);
+        for(const auto& P:S.GetCarriers())if(P.ParcelId==401)
+        {
+            Scan|=P.State==MPRSorter::CarrierPhase::Scan;Induct|=P.State==MPRSorter::CarrierPhase::Induct;
+            Unload|=P.State==MPRSorter::CarrierPhase::Unload;
+        }
+    }
+    TestTrue(TEXT("the original external parcel travels through queue scan transfer and the full cart"),Good&&Scan&&Induct&&Unload
+        &&S.GetStats().Completed==1&&S.GetCarts()[0].ParcelIds==std::vector<uint64_t>{401});
+    const auto Full=S;
+    TestTrue(TEXT("manual full-cart waiting rejects upstream cargo before exchange is requested"),!S.CanAcceptExternalParcel()
+        &&!S.EnqueueExternalParcel(402)&&MPRSame(S,Full));
+    Good&=S.RequestCartExchange(0);bool SawOutbound=false,SawHandoff=false,SawEmpty=false,SawDock=false,Blocked=true;
+    for(int I=0;I<10000&&S.GetStats().ExchangedCarts==0;++I)
+    {
+        Good&=S.Advance(.02)&&MPRConserved(S);
+        const auto& Cart=S.GetCarts()[0];
+        SawOutbound|=Cart.State==MPRSorter::CartPhase::Outbound;SawHandoff|=Cart.State==MPRSorter::CartPhase::Handoff;
+        SawEmpty|=Cart.State==MPRSorter::CartPhase::EmptyArriving;SawDock|=Cart.State==MPRSorter::CartPhase::Docking;
+        if(S.GetStats().ExchangedCarts==0)
+        {
+            const auto Before=S;Blocked&=!S.CanAcceptExternalParcel()&&!S.EnqueueExternalParcel(402)&&MPRSame(S,Before);
+        }
+    }
+    TestTrue(TEXT("external ownership survives the whole-cart handoff before empty replacement docks"),Good&&Blocked
+        &&SawOutbound&&SawHandoff&&SawEmpty&&SawDock&&S.GetStats().Collected==1&&S.GetStats().Spawned==1
+        &&S.GetCarts()[0].Generation==2&&S.GetCarts()[0].LastOutboundParcelIds==std::vector<uint64_t>{401});
+    TestTrue(TEXT("completed IDs cannot be recycled after cart replacement"),!S.EnqueueExternalParcel(401));
+    TestTrue(TEXT("upstream can resume only after the replacement docks"),S.CanAcceptExternalParcel()
+        &&S.EnqueueExternalParcel(402)&&S.GetStats().Spawned==2&&MPRConserved(S));
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMPRSorterExternalDeterminism,"MPR.Sorter.ExternalInfeedPauseRateAndPartition",MPRFlags)
+bool FMPRSorterExternalDeterminism::RunTest(const FString&)
+{
+    auto C=MPRFixture();C.ExternalInfeed=true;MPRSorter::Simulation A,B,Rate;std::string E;
+    A.Initialize(C,E);B.Initialize(C,E);Rate.Initialize(C,E);A.SetPlaying(true);B.SetPlaying(true);Rate.SetPlaying(true);Rate.SetRate(2);
+    bool Good=A.EnqueueExternalParcel(101)&&B.EnqueueExternalParcel(101)&&Rate.EnqueueExternalParcel(101);
+    A.Advance(60);for(int I=0;I<600;++I)B.Advance(.1);Rate.Advance(30);
+    TestTrue(TEXT("external parcels obey the same event clock across frame partitions and playback rates"),Good
+        &&MPRSame(A,B)&&MPRSame(A,Rate)&&A.GetStats().Spawned==1&&MPRConserved(A)&&MPRConserved(B)&&MPRConserved(Rate));
+    A.SetPlaying(false);const auto Before=A;A.Advance(100);
+    TestTrue(TEXT("pause freezes external motion and refuses ownership transfer"),!A.CanAcceptExternalParcel()
+        &&!A.EnqueueExternalParcel(102)&&MPRSame(A,Before));
+    A.SetPlaying(true);
+    TestTrue(TEXT("the same upstream parcel can retry after resuming"),A.EnqueueExternalParcel(102)&&A.GetStats().Spawned==2);
+    return true;
+}
 #ifdef MPR_SORTER_STANDALONE
 int main()
 {
     FMPRSorterConfiguration().RunTest("");FMPRSorterFrameEquivalence().RunTest("");FMPRSorterWholeCart().RunTest("");
     FMPRSorterInfeed().RunTest("");FMPRSorterInductClock().RunTest("");FMPRSorterPauseReset().RunTest("");FMPRSorterSceneProfiles().RunTest("");FMPRSorterExchangePermit().RunTest("");
+    FMPRSorterExternalAdmission().RunTest("");FMPRSorterExternalLifecycle().RunTest("");FMPRSorterExternalDeterminism().RunTest("");
     auto C=MPRFixture();C.BinCapacity=3;C.ChainSpeedCmS=40;
     MPRSorter::Simulation S;std::string E;S.Initialize(C,E);S.SetPlaying(true);
     double Full=-1,Out=-1,Docked=-1;

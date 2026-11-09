@@ -2,6 +2,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "MPRSorterSimulation.h"
+#include "MPRCentralDistribution.h"
+#include "MPRCentralGeometry.h"
 #include "MPRSorterSimulationActor.generated.h"
 
 class UInstancedStaticMeshComponent;
@@ -10,6 +12,7 @@ class UMPRSorterHUDWidget;
 class UMPRWorkerPoseComponent;
 class USkeletalMesh;
 class UAnimSequence;
+class FJsonObject;
 struct FMPRWorkerPoseInput;
 
 /** MPR-only, source-fitted demonstration of a circulating lift sorter. */
@@ -84,7 +87,32 @@ private:
         TArray<int32> CachedBinState;
 
     };
+    struct FFeedStation
+    {
+        FVector Feet,Drop;
+        double Yaw=0,Distance01=0;
+        int32 WorkerIndex=INDEX_NONE;
+        bool bManual=true;
+    };
+    struct FDistributionBank
+    {
+        FString Id,Profile;
+        MPRCentralGeometry::Bank Geometry;
+        TArray<FFeedStation> Stations;
+        TArray<int32> Targets;
+        TArray<MPRCentralGeometry::Belt> Belts;
+        MPRCentral::Simulation Simulation;
+        int32 CarrierOffset=0;
+    };
     bool LoadLayout();
+    bool LoadCentralDistribution();
+    void BuildCentralDistribution();
+    void UpdateCentralDistribution();
+    bool AdvanceCentralDistribution(double SimSeconds);
+    void SuppressLegacySpines();
+    FVector CentralParcelPoint(const FDistributionBank& Bank,const MPRCentral::Carrier& Carrier) const;
+    double CentralLiftHeight(const MPRCentral::Carrier& Carrier) const;
+    void AppendCentralReport(const TSharedPtr<FJsonObject>& Report) const;
     void UpdateInstances();
     void UpdateFocus();
     void AttachPanel();
@@ -112,8 +140,19 @@ private:
     UPROPERTY(VisibleAnywhere) TObjectPtr<UInstancedStaticMeshComponent> WorkerBoots;
     UPROPERTY(Transient,DuplicateTransient) TArray<TObjectPtr<UInstancedStaticMeshComponent>> RuntimeCartComponents;
     UPROPERTY(Transient,DuplicateTransient) TArray<TObjectPtr<UMPRWorkerPoseComponent>> RuntimeWorkers;
+    UPROPERTY(VisibleAnywhere) TObjectPtr<UInstancedStaticMeshComponent> CentralMetal;
+    UPROPERTY(VisibleAnywhere) TObjectPtr<UInstancedStaticMeshComponent> CentralWhite;
+    UPROPERTY(VisibleAnywhere) TObjectPtr<UInstancedStaticMeshComponent> CentralBlue;
+    UPROPERTY(VisibleAnywhere) TObjectPtr<UInstancedStaticMeshComponent> CentralBelt;
+    UPROPERTY(VisibleAnywhere) TObjectPtr<UInstancedStaticMeshComponent> CentralColumns;
+    UPROPERTY(VisibleAnywhere) TObjectPtr<UInstancedStaticMeshComponent> CentralTrays;
+    UPROPERTY(VisibleAnywhere) TObjectPtr<UInstancedStaticMeshComponent> CentralParcels;
     UPROPERTY(Transient) TObjectPtr<UMPRSorterHUDWidget> Panel;
     TArray<FMachine> Machines;
+    TArray<FDistributionBank> DistributionBanks;
+    uint64 NextCentralParcelId=1;
+    double FleetTimeRemainder=0;
+    int32 SuppressedSpineInstances=0;
     FString Error;
     int32 SelectedMachine=0,PendingFocus=INDEX_NONE;
     int32 ExchangeOwner=INDEX_NONE,NextExchangeMachine=0;

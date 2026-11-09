@@ -36,6 +36,9 @@ struct Config
     // Explicit CAD groups may use different widths. Only the supplied 96-chute
     // manual documents eight 3-column x 4-level carts; fallback tails are demo.
     int CartColumns=3,InfeedCapacity=8;
+    // Shared upstream equipment supplies the original parcel IDs. This mode
+    // never creates local arrivals at individual sorter machines.
+    bool ExternalInfeed=false;
     double InfeedTravelSeconds=4,InfeedSpacingSeconds=1,InductSeconds=.8;
     double CartWithdrawSeconds=4,CartOutboundSeconds=5,CartEmptyArrivalSeconds=4,CartDockSeconds=2,CartHandoffSeconds=2;
     // Empty means a repeatable sweep of both sides, all levels and columns.
@@ -102,6 +105,10 @@ public:
     void SetPlaying(bool Value) { Playing=Ready&&Value; }
     bool IsPlaying() const { return Playing; }
     bool IsReady() const { return Ready; }
+    bool CanAcceptExternalParcel() const;
+    // IDs must increase for this machine within a reset epoch. A rejected
+    // transfer leaves ownership upstream and does not consume its ID.
+    bool EnqueueExternalParcel(uint64_t ParcelId);
     bool SetRate(double Value);
     double GetRate() const { return Rate; }
     void SetAutoCollect(bool Value);

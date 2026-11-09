@@ -32,7 +32,7 @@ FString PhaseName(MPRSorter::CarrierPhase Phase)
     switch(Phase)
     {
     case MPRSorter::CarrierPhase::Scan:return TEXT("上包识别");
-    case MPRSorter::CarrierPhase::Induct:return TEXT("人工持货接驳");
+    case MPRSorter::CarrierPhase::Induct:return TEXT("接驳带自动入机");
     case MPRSorter::CarrierPhase::LoadedTravel:return TEXT("行走 / 升降");
     case MPRSorter::CarrierPhase::Lift:return TEXT("格口就位");
     case MPRSorter::CarrierPhase::Unload:return TEXT("侧向投料");
@@ -47,7 +47,7 @@ FString ReasonName(MPRSorter::BlockReason Reason)
     case MPRSorter::BlockReason::Lifting:return TEXT("等待托盘就位");
     case MPRSorter::BlockReason::Unloading:return TEXT("侧向投料");
     case MPRSorter::BlockReason::FullBin:return TEXT("满车等待更换");
-    case MPRSorter::BlockReason::Inducting:return TEXT("人工接驳");
+    case MPRSorter::BlockReason::Inducting:return TEXT("接驳带入机");
     case MPRSorter::BlockReason::CartExchange:return TEXT("停稳 / 整车更换");
     case MPRSorter::BlockReason::WaitingInfeed:return TEXT("等待来货");
     default:return TEXT("闭环运行");
@@ -86,6 +86,11 @@ AMPRSorterSimulationActor::AMPRSorterSimulationActor()
     static ConstructorHelpers::FObjectFinder<UStaticMesh> Sphere(TEXT("/Engine/BasicShapes/Sphere"));
     for(auto* Component:{Parcels.Get(),InfeedParcels.Get(),BinParcels.Get(),ActiveLights.Get(),FullLights.Get(),WorkerCloth.Get(),WorkerBoots.Get()}) Component->SetStaticMesh(Cube.Object);
     WorkerSkin->SetStaticMesh(Sphere.Object);WorkerHelmet->SetStaticMesh(Sphere.Object);
+    CentralMetal=MakeInstances(TEXT("CentralFrameMetal"));CentralWhite=MakeInstances(TEXT("CentralFrameWhite"));
+    CentralBlue=MakeInstances(TEXT("CentralFrameBlue"));CentralBelt=MakeInstances(TEXT("CentralBelts"));
+    CentralColumns=MakeInstances(TEXT("CentralMovingColumns"));CentralTrays=MakeInstances(TEXT("CentralLiftTrays"));
+    CentralParcels=MakeInstances(TEXT("CentralParcels"));
+    for(auto* C:{CentralMetal.Get(),CentralWhite.Get(),CentralBlue.Get(),CentralBelt.Get(),CentralParcels.Get()})C->SetStaticMesh(Cube.Object);
     static ConstructorHelpers::FObjectFinder<UMaterialInterface> Skin(TEXT("/Game/GHSNormalWarehouse/MannedForklift/Materials/M_MF_WorkerV3_Skin"));
     static ConstructorHelpers::FObjectFinder<UMaterialInterface> Navy(TEXT("/Game/GHSNormalWarehouse/MannedForklift/Materials/M_MF_WorkerV3_Navy"));
     static ConstructorHelpers::FObjectFinder<UMaterialInterface> Helmet(TEXT("/Game/GHSNormalWarehouse/MannedForklift/Materials/M_MF_WorkerV3_Helmet"));
@@ -202,11 +207,11 @@ bool AMPRSorterSimulationActor::LoadLayout()
         FVector PickupWorld,EntryWorld;
         if(!Integer(Row,TEXT("infeed_side_local_x"),InfeedSide,-1,1)||InfeedSide==0
            ||!Vector(Row,TEXT("pickup_ue_cm"),PickupWorld)||!Vector(Row,TEXT("entry_ue_cm"),EntryWorld))
-            return Fail(TEXT("设备朝向或人工接驳点缺失"));
+            return Fail(TEXT("设备朝向或输送接驳点缺失"));
         M.InfeedSide=InfeedSide;M.LoadFraction=InfeedSide>0?0.:.5;
         M.Pickup=M.World.InverseTransformPosition(PickupWorld);M.Entry=M.World.InverseTransformPosition(EntryWorld);
         if(M.Pickup.GetAbsMax()>2000||M.Entry.GetAbsMax()>2000||(M.Pickup.X-M.Entry.X)*M.InfeedSide<20
-           ||(M.Pickup-M.Entry).Size()>150)return Fail(TEXT("人工接驳点不符合当前设备范围"));
+           ||(M.Pickup-M.Entry).Size()>150)return Fail(TEXT("输送接驳点不符合当前设备范围"));
         M.FeedStart=M.Pickup-FVector(0,120,0);
         MPRSorter::Config C;int32 Levels,Sides,Capacity,TowerCount;
         if(!Number(P,TEXT("track_half_straight_cm"),M.Half)||!Number(P,TEXT("track_radius_cm"),M.Radius)
@@ -218,7 +223,7 @@ bool AMPRSorterSimulationActor::LoadLayout()
             return Fail(TEXT("设备轨道、层数或容量配置无效"));
         C.Levels=Levels;C.BinCapacity=BinCapacity;C.LoopLengthCm=4*M.Half+2*PI*M.Radius;
         C.CartColumns=Is64?4:5;C.InfeedCapacity=3;C.InfeedTravelSeconds=3.6;C.InfeedSpacingSeconds=1.2;
-        C.InductSeconds=1.6;
+        C.InductSeconds=.65;C.ExternalInfeed=true;C.InfeedTravelSeconds=1.5;
         C.ChainSpeedCmS=40;C.LiftSpeedCmS=55;C.ScanSeconds=.5;C.UnloadSeconds=1.2;C.CollectSeconds=12;C.AutoCollect=true;
         const FArray* LevelRows=nullptr;const FArray* Columns=nullptr;const FArray* BinRows=nullptr;
         if(!Array(P,TEXT("levels"),LevelRows)||LevelRows->Num()!=4||!Array(P,TEXT("column_x_cm"),Columns)||Columns->Num()!=C.Columns
@@ -295,7 +300,7 @@ bool AMPRSorterSimulationActor::LoadLayout()
         M.BinOffset=Offset;Offset+=M.Bins.Num();M.CachedBinState.Init(INDEX_NONE,M.Bins.Num());Parsed.Add(MoveTemp(M));
     }
     if(Count64!=18||Count120!=4||Offset!=1632)return Fail(TEXT("设备类型数量不符合已保存场景"));
-    Machines=MoveTemp(Parsed);Error.Empty();return true;
+    Machines=MoveTemp(Parsed);Error.Empty();return LoadCentralDistribution();
 }
 
 void AMPRSorterSimulationActor::BeginPlay()
@@ -326,8 +331,8 @@ void AMPRSorterSimulationActor::BeginPlay()
         M.Simulation.SetPlaying(bAutoStart);
     }
     if(!BuildCartInstances()||!BuildWorkers()){bReady=false;SetActorTickEnabled(false);UE_LOG(LogTemp,Error,TEXT("MPR_SORTER: %s"),*Error);return;}
-    UpdateInstances();AttachPanel();
-    UE_LOG(LogTemp,Display,TEXT("MPR_SORTER: ready, 22 machines, 96 removable carts, manual infeed, 1632 scene cells; demonstration data."));
+    BuildCentralDistribution();SuppressLegacySpines();UpdateInstances();AttachPanel();
+    UE_LOG(LogTemp,Display,TEXT("MPR_SORTER: ready, 22 machines, 96 removable carts, two shared distribution loops / six CAD operators, 1632 scene cells; demonstration data."));
 }
 
 bool AMPRSorterSimulationActor::BuildCartInstances(bool bEditorPreview)
@@ -402,13 +407,13 @@ FVector AMPRSorterSimulationActor::CarrierParcelPoint(const FMachine& M,const MP
     double Heading;FVector At=PointOnLoop(C.Distance01+M.LoadFraction,M.Half,M.Radius,Heading);At.Z=C.LiftHeightCm;
     Turn=FQuat(FVector::UpVector,Heading);
     FVector Parcel=At+FVector(0,0,PackageSize.Z*.5+.3);
-    if(C.State==MPRSorter::CarrierPhase::Scan){Turn=FQuat::Identity;return FeedPoint(M,1);}
+    if(C.State==MPRSorter::CarrierPhase::Scan){Turn=FQuat(FVector::UpVector,M.InfeedSide*PI*.5);return FeedPoint(M,1);}
     if(C.State==MPRSorter::CarrierPhase::Induct)
     {
-        const double T=FMath::Clamp(C.InductProgress,0.,1.);Turn=FQuat::Slerp(FQuat::Identity,Turn,T);
-        // Hands retain the same parcel throughout the CAD gap; the slight lift
-        // is an operator transfer, not an unsupported package moving on a belt.
-        return FMath::Lerp(FeedPoint(M,1),Parcel,T)+FVector(0,0,12*FMath::Sin(PI*T));
+        const double T=FMath::Clamp(C.InductProgress,0.,1.);
+        // The fixed powered connection supports the parcel throughout the
+        // gap; the machine receives the same ID from the shared distributor.
+        return FMath::Lerp(FeedPoint(M,1),Parcel,T);
     }
     if(C.State==MPRSorter::CarrierPhase::Unload)
     {
@@ -431,19 +436,19 @@ bool AMPRSorterSimulationActor::BuildWorkers()
 {
     for(auto& C:RuntimeWorkers)if(C)C->DestroyComponent();
     RuntimeWorkers.Reset();
-    for(auto& M:Machines)
+    auto AddWorker=[this]()
     {
-        M.WorkerOffset=RuntimeWorkers.Num();
-        for(int32 WorkerRole=0;WorkerRole<2;++WorkerRole)
-        {
-            const FName Name(*FString::Printf(TEXT("MannyWorker_%02d"),RuntimeWorkers.Num()));
-            auto* C=NewObject<UMPRWorkerPoseComponent>(this,Name,RF_Transient);
-            C->CreationMethod=EComponentCreationMethod::Instance;C->SetupAttachment(RootComponent);
-            C->RegisterComponent();RuntimeWorkers.Add(C);
-            if(!C->InitializeWorker(WorkerMesh,WorkerIdle))
-            {Error=TEXT("官方第三人称人物骨骼初始化失败");return false;}
-        }
-    }
+        const FName Name(*FString::Printf(TEXT("MannyWorker_%02d"),RuntimeWorkers.Num()));
+        auto* C=NewObject<UMPRWorkerPoseComponent>(this,Name,RF_Transient);
+        C->CreationMethod=EComponentCreationMethod::Instance;C->SetupAttachment(RootComponent);
+        C->RegisterComponent();RuntimeWorkers.Add(C);
+        return C->InitializeWorker(WorkerMesh,WorkerIdle);
+    };
+    // One hidden exchange worker per machine; only the aisle owner is visible.
+    // Production operators exist exclusively at the six CAD feed stations.
+    for(auto& M:Machines){M.WorkerOffset=RuntimeWorkers.Num();if(!AddWorker())return false;}
+    for(auto& B:DistributionBanks)for(auto& S:B.Stations)if(S.bManual)
+    {S.WorkerIndex=RuntimeWorkers.Num();if(!AddWorker())return false;}
     return true;
 }
 void AMPRSorterSimulationActor::UpdateWorker(int32 Index,const FMachine& M,const FMPRWorkerPoseInput& Local)
@@ -465,10 +470,9 @@ void AMPRSorterSimulationActor::UpdateInstances()
     for(auto& M:Machines)
     {
         const auto& Bins=M.Simulation.GetBins();const auto& Carts=M.Simulation.GetCarts();const auto& Queue=M.Simulation.GetInfeedQueue();
-        const MPRSorter::Carrier* HandCarrier=nullptr;
         for(int32 I=0;I<M.Simulation.GetConfig().InfeedCapacity;++I)
         {
-            const FTransform Transform=I<int32(Queue.size())?FTransform(FQuat::Identity,FeedPoint(M,Queue[size_t(I)].Progress01),PackageSize/100.)*M.World:Hidden;
+            const FTransform Transform=I<int32(Queue.size())?FTransform(FQuat(FVector::UpVector,M.InfeedSide*PI*.5),FeedPoint(M,Queue[size_t(I)].Progress01),PackageSize/100.)*M.World:Hidden;
             InfeedParcels->UpdateInstanceTransform(M.FeedOffset+I,Transform,true,false,true);
         }
         for(const auto& Carrier:M.Simulation.GetCarriers())
@@ -481,7 +485,6 @@ void AMPRSorterSimulationActor::UpdateInstances()
             {
                 FQuat ParcelTurn;const FVector Parcel=CarrierParcelPoint(M,Carrier,ParcelTurn);
                 Parcels->UpdateInstanceTransform(CarrierIndex,FTransform(ParcelTurn,Parcel,PackageSize/100.)*M.World,true,false,true);
-                if(Carrier.State==MPRSorter::CarrierPhase::Scan||Carrier.State==MPRSorter::CarrierPhase::Induct)HandCarrier=&Carrier;
             }
             else Parcels->UpdateInstanceTransform(CarrierIndex,Hidden,true,false,true);
             ++CarrierIndex;
@@ -514,72 +517,7 @@ void AMPRSorterSimulationActor::UpdateInstances()
             ActiveLights->UpdateInstanceTransform(Slot,Docked&&(Bin.Reserved>0||Bin.Occupancy>0)&&Bin.Occupancy<BinCapacity?Light:Hidden,true,false,true);
             FullLights->UpdateInstanceTransform(Slot,Bin.Occupancy>=BinCapacity?Light:Hidden,true,false,true);
         }
-        // Anatomical hands follow the same parcel, while the body steps beside
-        // the feed gap. No cargo is attached to or duplicated by the character.
-        const double Now=M.Simulation.GetStats().SimTime;
         auto Ease=[](double T){T=FMath::Clamp(T,0.,1.);return T*T*(3.-2.*T);};
-        double LoadHeading;const FVector Load=PointOnLoop(M.LoadFraction,M.Half,M.Radius,LoadHeading);
-        FVector Home(M.Pickup.X-M.InfeedSide*50.,M.Pickup.Y-27.,0);
-        FVector DestinationFeet(M.Entry.X+M.InfeedSide*28.,M.Pickup.Y-27.,0);
-        if(M.Profile==TEXT("cad120")){Home.X=(Home.X+DestinationFeet.X)*.5;DestinationFeet=Home;}
-        const FVector TransferDirection=(DestinationFeet-Home).GetSafeNormal();
-        FVector Feet=Home,Hand=FeedPoint(M,1);
-        const double HomeHeading=FMath::Atan2(27.,M.Pickup.X-Home.X);
-        double BodyHeading=HomeHeading;
-        auto Relax=[&](const FVector& Body,double Heading,double Side)
-        {return Body+FQuat(FVector::UpVector,Heading).RotateVector(FVector(25,Side*18,107));};
-        FMPRWorkerPoseInput Sort;
-        Sort.LeftPalmWorld=Relax(Feet,BodyHeading,-1);Sort.RightPalmWorld=Relax(Feet,BodyHeading,1);
-        Sort.GripAlpha=0;Sort.TorsoLeanDegrees=3;
-        if(HandCarrier)
-        {
-            FQuat Turn;Hand=CarrierParcelPoint(M,*HandCarrier,Turn);
-            const bool Carry=HandCarrier->State==MPRSorter::CarrierPhase::Induct;
-            const double Progress=Carry?HandCarrier->InductProgress:0.;
-            Feet=FMath::Lerp(Home,DestinationFeet,Progress);
-            BodyHeading=FMath::Atan2(Hand.Y-Feet.Y,Hand.X-Feet.X);
-            // Grip the two box faces on the worker's left/right, even while the
-            // body turns between the conveyor and the lift. No crossed arms.
-            const FVector LeftAxis(FMath::Sin(BodyHeading),-FMath::Cos(BodyHeading),0);
-            const FVector Axis=Turn.UnrotateVector(LeftAxis).GetAbs();
-            const double HalfWidth=FMath::Min(Axis.X>1.e-5?PackageSize.X*.5/Axis.X:1000.,Axis.Y>1.e-5?PackageSize.Y*.5/Axis.Y:1000.);
-            const FVector L=Hand+LeftAxis*(HalfWidth+.25)-FVector(0,0,.5),R=Hand-LeftAxis*(HalfWidth+.25)-FVector(0,0,.5);
-            if(!Carry)
-            {
-                const double Reach=Ease(HandCarrier->ScanProgress);
-                Sort.LeftPalmWorld=FMath::Lerp(Relax(Feet,BodyHeading,-1),L,Reach);
-                Sort.RightPalmWorld=FMath::Lerp(Relax(Feet,BodyHeading,1),R,Reach);
-                Sort.GripAlpha=Ease((HandCarrier->ScanProgress-.55)/.45);
-                Sort.TorsoLeanDegrees=FMath::Lerp(3.,16.,Reach);
-            }
-            else
-            {
-                Sort.LeftPalmWorld=L;Sort.RightPalmWorld=R;Sort.GripAlpha=1.;Sort.TorsoLeanDegrees=16.;
-                Sort.bWalking=M.Profile!=TEXT("cad120");Sort.GaitBlend=.35*Ease(Progress/.15)*Ease((1.-Progress)/.15);
-                Sort.TravelDistanceCm=FVector::Dist2D(Feet,Home);Sort.MoveDirectionWorld=TransferDirection;
-
-            }
-        }
-        else if(Now-M.Simulation.GetStats().LastInductCompletedTime<1.15)
-        {
-            // Reconstruct the true end pose from the simulation event time.
-            // Rendering fewer frames must not change release timing or stance.
-            const double Elapsed=FMath::Max(0.,Now-M.Simulation.GetStats().LastInductCompletedTime);
-            const double Release=Ease(Elapsed/.32),Return=Ease((Elapsed-.25)/.9);
-            const FVector EndHand=Load+FVector(0,0,M.Simulation.GetConfig().LoadHeightCm+PackageSize.Z*.5+.3);
-            const double EndHeading=FMath::Atan2(27.,Load.X-DestinationFeet.X);
-            const FVector LeftAxis(FMath::Sin(EndHeading),-FMath::Cos(EndHeading),0);
-            const FVector Axis=FQuat(FVector::UpVector,LoadHeading).UnrotateVector(LeftAxis).GetAbs();
-            const double HalfWidth=FMath::Min(Axis.X>1.e-5?PackageSize.X*.5/Axis.X:1000.,Axis.Y>1.e-5?PackageSize.Y*.5/Axis.Y:1000.);
-            Feet=FMath::Lerp(DestinationFeet,Home,Return);BodyHeading=FMath::Lerp(EndHeading,HomeHeading,Return);
-            Sort.LeftPalmWorld=FMath::Lerp(EndHand+LeftAxis*(HalfWidth+.25)-FVector(0,0,.5),Relax(Feet,BodyHeading,-1),Release);
-            Sort.RightPalmWorld=FMath::Lerp(EndHand-LeftAxis*(HalfWidth+.25)-FVector(0,0,.5),Relax(Feet,BodyHeading,1),Release);
-            Sort.GripAlpha=1.-Release;Sort.TorsoLeanDegrees=FMath::Lerp(16.,3.,Release);
-            Sort.bWalking=Elapsed>.25&&M.Profile!=TEXT("cad120");Sort.GaitBlend=.35*Ease((Elapsed-.25)/.15)*Ease((1.15-Elapsed)/.15);
-            Sort.TravelDistanceCm=FVector::Dist2D(DestinationFeet,Feet);Sort.MoveDirectionWorld=-TransferDirection;
-        }
-        Sort.BodyWorld=FTransform(FQuat(FVector::UpVector,BodyHeading),Feet);
-        UpdateWorker(M.WorkerOffset,M,Sort);
         FMPRWorkerPoseInput Push;Push.bVisible=false;
         if(MovingCart!=INDEX_NONE&&Carts[size_t(MovingCart)].State!=MPRSorter::CartPhase::Handoff)
         {
@@ -608,8 +546,9 @@ void AMPRSorterSimulationActor::UpdateInstances()
             if(Cart.State==MPRSorter::CartPhase::EmptyArriving)T=T<.7?T/.7:(T-.7)/.3;
             Push.GaitBlend=Ease(T/.12)*Ease((1.-T)/.12);
         }
-        UpdateWorker(M.WorkerOffset+1,M,Push);
+        UpdateWorker(M.WorkerOffset,M,Push);
     }
+    UpdateCentralDistribution();
     for(auto* C:{Towers.Get(),Trays.Get(),Parcels.Get(),InfeedParcels.Get()})C->MarkRenderStateDirty();
     for(auto& C:RuntimeCartComponents)C->MarkRenderStateDirty();
     if(BinsChanged)for(auto* C:{BinParcels.Get(),ActiveLights.Get(),FullLights.Get()})C->MarkRenderStateDirty();
@@ -662,12 +601,17 @@ void AMPRSorterSimulationActor::ScheduleCartExchange()
 bool AMPRSorterSimulationActor::AdvanceFleet(double WallSeconds)
 {
     if(!FMath::IsFinite(WallSeconds)||WallSeconds<0||WallSeconds*GetSimulationRate()>86400)return false;
-    double Remaining=WallSeconds;const double MaxStep=.1/GetSimulationRate();
-    while(Remaining>1.e-12)
+    // A common fixed simulation step keeps arrivals and machine acceptance
+    // identical across frame rates and diagnostic fast-forward calls.
+    if(!Machines[0].Simulation.IsPlaying())return true;
+    constexpr double SimStep=.05;
+    FleetTimeRemainder+=WallSeconds*GetSimulationRate();
+    while(FleetTimeRemainder+1.e-10>=SimStep)
     {
-        ScheduleCartExchange();const double Step=FMath::Min(Remaining,MaxStep);
-        for(auto& M:Machines)if(!M.Simulation.Advance(Step))return false;
-        Remaining=FMath::Max(0.,Remaining-Step);
+        ScheduleCartExchange();
+        for(auto& M:Machines)if(!M.Simulation.Advance(SimStep/M.Simulation.GetRate()))return false;
+        if(!AdvanceCentralDistribution(SimStep))return false;
+        FleetTimeRemainder=FMath::Max(0.,FleetTimeRemainder-SimStep);
     }
     ScheduleCartExchange();return true;
 }
@@ -676,8 +620,8 @@ void AMPRSorterSimulationActor::EndPlay(const EEndPlayReason::Type Reason)
 bool AMPRSorterSimulationActor::IsSimulationPlaying() const { return bReady&&Machines[0].Simulation.IsPlaying(); }
 bool AMPRSorterSimulationActor::IsAutomaticCollection() const { return bReady&&Machines[0].Simulation.IsAutoCollectEnabled(); }
 double AMPRSorterSimulationActor::GetSimulationRate() const { return bReady?Machines[0].Simulation.GetRate():1.; }
-void AMPRSorterSimulationActor::SetSimulationPlaying(bool Playing) { for(auto& M:Machines)M.Simulation.SetPlaying(Playing); }
-void AMPRSorterSimulationActor::ResetSimulation(){ExchangeOwner=INDEX_NONE;NextExchangeMachine=0;OwnerCompletedExchanges=0;for(auto& M:Machines){M.Simulation.Reset();M.CachedBinState.Init(INDEX_NONE,M.Bins.Num());}ScheduleCartExchange();if(bReady)UpdateInstances();}
+void AMPRSorterSimulationActor::SetSimulationPlaying(bool Playing) { for(auto& M:Machines)M.Simulation.SetPlaying(Playing);for(auto& B:DistributionBanks)B.Simulation.SetPlaying(Playing); }
+void AMPRSorterSimulationActor::ResetSimulation(){FleetTimeRemainder=0;NextCentralParcelId=1;for(auto& B:DistributionBanks)B.Simulation.Reset();ExchangeOwner=INDEX_NONE;NextExchangeMachine=0;OwnerCompletedExchanges=0;for(auto& M:Machines){M.Simulation.Reset();M.CachedBinState.Init(INDEX_NONE,M.Bins.Num());}ScheduleCartExchange();if(bReady)UpdateInstances();}
 void AMPRSorterSimulationActor::SetSimulationRate(double Rate){for(auto& M:Machines)M.Simulation.SetRate(Rate);}
 void AMPRSorterSimulationActor::SetAutomaticCollection(bool Enabled){for(auto& M:Machines)M.Simulation.SetAutoCollect(Enabled);}
 void AMPRSorterSimulationActor::ClearFullBins()
@@ -735,7 +679,7 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
     Root->SetStringField(TEXT("data_mode"),TEXT("demonstration"));Root->SetNumberField(TEXT("schema_version"),2);
     Root->SetNumberField(TEXT("machine_count"),Machines.Num());Root->SetBoolField(TEXT("playing"),IsSimulationPlaying());
     Root->SetNumberField(TEXT("rate"),GetSimulationRate());Root->SetBoolField(TEXT("automatic_collection"),IsAutomaticCollection());
-    Root->SetNumberField(TEXT("selected_machine"),SelectedMachine);Root->SetNumberField(TEXT("components"),11+RuntimeCartComponents.Num()+RuntimeWorkers.Num());
+    Root->SetNumberField(TEXT("selected_machine"),SelectedMachine);Root->SetNumberField(TEXT("components"),18+RuntimeCartComponents.Num()+RuntimeWorkers.Num());
     Root->SetNumberField(TEXT("tower_instances"),Towers->GetInstanceCount());Root->SetNumberField(TEXT("tray_instances"),Trays->GetInstanceCount());
     Root->SetNumberField(TEXT("parcel_instances"),Parcels->GetInstanceCount());Root->SetNumberField(TEXT("infeed_instances"),InfeedParcels->GetInstanceCount());
     Root->SetNumberField(TEXT("worker_slots"),RuntimeWorkers.Num());Root->SetNumberField(TEXT("bin_parcel_instances"),BinParcels->GetInstanceCount());
@@ -778,7 +722,7 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
         Row->SetNumberField(TEXT("exchanged_carts"),double(S.ExchangedCarts));Row->SetNumberField(TEXT("load_fraction"),M.LoadFraction);
         Row->SetNumberField(TEXT("infeed_side_local_x"),M.InfeedSide);Row->SetArrayField(TEXT("pickup_world_cm"),XYZ(M.World.TransformPosition(M.Pickup)));
         Row->SetArrayField(TEXT("entry_world_cm"),XYZ(M.World.TransformPosition(M.Entry)));
-        Row->SetStringField(TEXT("transfer_mode"),TEXT("manual_handoff_demo"));Row->SetStringField(TEXT("block_reason"),ReasonName(S.Reason));
+        Row->SetStringField(TEXT("transfer_mode"),TEXT("central_distribution_powered_connection"));Row->SetStringField(TEXT("block_reason"),ReasonName(S.Reason));
         Row->SetBoolField(TEXT("chain_stopped"),S.ChainStopped);int32 Count=0,Full=0;TSet<uint64> Seen;
         Row->SetBoolField(TEXT("exchange_permitted"),M.Simulation.IsExchangePermitted());
         auto Own=[&Seen,&Unique](uint64 Id){if(!Id||Seen.Contains(Id))Unique=false;else Seen.Add(Id);};
@@ -848,5 +792,6 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
     Root->SetBoolField(TEXT("unique_parcel_ownership"),Unique);
     Root->SetNumberField(TEXT("active_exchange_count"),ActiveExchanges);Root->SetNumberField(TEXT("waiting_exchange_count"),WaitingExchanges);
     Root->SetNumberField(TEXT("exchange_owner_machine"),ExchangeOwner);Root->SetBoolField(TEXT("shared_aisle_mutex_valid"),ActiveExchanges<=1);
+    AppendCentralReport(Root);
     FString Result;FJsonSerializer::Serialize(Root,TJsonWriterFactory<>::Create(&Result));return Result;
 }

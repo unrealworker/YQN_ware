@@ -1,0 +1,1898 @@
+{
+  "schema_version": 1,
+  "source": "D:\\Data\\仓库数据\\MPR\\平面布局图_MPR规划图V1.1_ALL-IN-ONE_0921.dxf",
+  "source_sha256": "c316aafe183162c5bef636885b59cc1000c3eecf50d8be645490b4716c6af863",
+  "coordinate_system": {
+    "cad_origin_dxf": [
+      12800.0,
+      8000.0
+    ],
+    "dxf_to_m": 0.0254,
+    "ue_cm": "[cad_x*100, -cad_y*100, z]; XY only, z is an explicit display assumption"
+  },
+  "correction": "Six manual feeding stations at the two ends feed a common central distribution assembly serving eighteen sorters. Do not spawn one feeding person per sorter.",
+  "central64": {
+    "source_handle": "2C9A89",
+    "source_block": "14234123",
+    "total_flat_entities": 504643,
+    "center_x_cad_m": -104.33998536,
+    "straight_frame_bounds_cad_m": [
+      [
+        -105.13423536,
+        -31.00301415
+      ],
+      [
+        -103.54573536,
+        4.99698585
+      ]
+    ],
+    "straight_frame_bounds_ue_cm": [
+      [
+        -10513.423536,
+        3100.301415,
+        0.0
+      ],
+      [
+        -10354.573536,
+        -499.698585,
+        0.0
+      ]
+    ],
+    "frame_width_m": 1.5885,
+    "straight_length_m": 36.0,
+    "source_edge_handles": [
+      "EB739",
+      "EB75B",
+      "E1D14",
+      "EB84D"
+    ],
+    "guide_inner_edges_x_cad_m": [
+      -104.87298536,
+      -103.80698536
+    ],
+    "kinematic_evidence": "Plan shows parallel guide/return paths, curved return ends and transverse distributor assemblies at drawn poses. Static CAD alone does not establish carriage speed, height or routing firmware.",
+    "workers": [
+      {
+        "id": "feed_operator_1",
+        "source_handle": "2CCF63",
+        "source_block": "terwrq434",
+        "classification": "personnel_symbol_not_equipment",
+        "position_cad_m": [
+          -106.3718077,
+          3.17347706
+        ],
+        "position_ue_cm": [
+          -10637.18077,
+          -317.347706,
+          0.0
+        ],
+        "symbol_bounds_cad_m": [
+          [
+            -106.71088298,
+            2.60406511
+          ],
+          [
+            -106.03273242,
+            3.742889
+          ]
+        ],
+        "cad_insert_rotation_deg": -0.001626,
+        "facing_ue_yaw_deg": 0,
+        "facing_basis": "Face the adjacent loading console toward central distributor; raw CAD person symbol has a bent working pose.",
+        "feed_table": {
+          "source_parent_handle": "2C9A89",
+          "reference_surface_line_handles": [
+            "920CF",
+            "9213C"
+          ],
+          "reference_surface_repetition_offset_cad_m": [
+            0,
+            0
+          ],
+          "plan_bounds_cad_m": [
+            [
+              -106.15823536,
+              2.52998585
+            ],
+            [
+              -105.18423536,
+              3.11398585
+            ]
+          ],
+          "bounds_basis": "Simplified working envelope from measured surface and frame edges; not a new vendor dimensional drawing.",
+          "surface_center_cad_m": [
+            -105.67123536,
+            2.82198585
+          ],
+          "entry_to_central_cad_m": [
+            -105.13423536,
+            2.82198585
+          ],
+          "surface_height_cm": 100,
+          "height_basis": "display assumption; original is a 2D plan"
+        }
+      },
+      {
+        "id": "feed_operator_2",
+        "source_handle": "2CCF64",
+        "source_block": "terwrq434",
+        "classification": "personnel_symbol_not_equipment",
+        "position_cad_m": [
+          -106.3718077,
+          1.57347706
+        ],
+        "position_ue_cm": [
+          -10637.18077,
+          -157.347706,
+          0.0
+        ],
+        "symbol_bounds_cad_m": [
+          [
+            -106.71088298,
+            1.00406511
+          ],
+          [
+            -106.03273242,
+            2.142889
+          ]
+        ],
+        "cad_insert_rotation_deg": -0.001626,
+        "facing_ue_yaw_deg": 0,
+        "facing_basis": "Face the adjacent loading console toward central distributor; raw CAD person symbol has a bent working pose.",
+        "feed_table": {
+          "source_parent_handle": "2C9A89",
+          "reference_surface_line_handles": [
+            "920CF",
+            "9213C"
+          ],
+          "reference_surface_repetition_offset_cad_m": [
+            0,
+            -1.6
+          ],
+          "plan_bounds_cad_m": [
+            [
+              -106.15823536,
+              0.92998585
+            ],
+            [
+              -105.18423536,
+              1.51398585
+            ]
+          ],
+          "bounds_basis": "Simplified working envelope from measured surface and frame edges; not a new vendor dimensional drawing.",
+          "surface_center_cad_m": [
+            -105.67123536,
+            1.22198585
+          ],
+          "entry_to_central_cad_m": [
+            -105.13423536,
+            1.22198585
+          ],
+          "surface_height_cm": 100,
+          "height_basis": "display assumption; original is a 2D plan"
+        }
+      },
+      {
+        "id": "feed_operator_3",
+        "source_handle": "2CCF65",
+        "source_block": "terwrq434",
+        "classification": "personnel_symbol_not_equipment",
+        "position_cad_m": [
+          -106.3718077,
+          -0.02652294
+        ],
+        "position_ue_cm": [
+          -10637.18077,
+          2.652294,
+          0.0
+        ],
+        "symbol_bounds_cad_m": [
+          [
+            -106.71088298,
+            -0.59593489
+          ],
+          [
+            -106.03273242,
+            0.542889
+          ]
+        ],
+        "cad_insert_rotation_deg": -0.001626,
+        "facing_ue_yaw_deg": 0,
+        "facing_basis": "Face the adjacent loading console toward central distributor; raw CAD person symbol has a bent working pose.",
+        "feed_table": {
+          "source_parent_handle": "2C9A89",
+          "reference_surface_line_handles": [
+            "920CF",
+            "9213C"
+          ],
+          "reference_surface_repetition_offset_cad_m": [
+            0,
+            -3.2
+          ],
+          "plan_bounds_cad_m": [
+            [
+              -106.15823536,
+              -0.67001415
+            ],
+            [
+              -105.18423536,
+              -0.08601415
+            ]
+          ],
+          "bounds_basis": "Simplified working envelope from measured surface and frame edges; not a new vendor dimensional drawing.",
+          "surface_center_cad_m": [
+            -105.67123536,
+            -0.37801415
+          ],
+          "entry_to_central_cad_m": [
+            -105.13423536,
+            -0.37801415
+          ],
+          "surface_height_cm": 100,
+          "height_basis": "display assumption; original is a 2D plan"
+        }
+      },
+      {
+        "id": "feed_operator_4",
+        "source_handle": "2CCF69",
+        "source_block": "terwrq434",
+        "classification": "personnel_symbol_not_equipment",
+        "position_cad_m": [
+          -102.28147622,
+          -25.92640775
+        ],
+        "position_ue_cm": [
+          -10228.147622,
+          2592.640775,
+          0.0
+        ],
+        "symbol_bounds_cad_m": [
+          [
+            -102.6205515,
+            -26.49581969
+          ],
+          [
+            -101.94240094,
+            -25.3569958
+          ]
+        ],
+        "cad_insert_rotation_deg": 179.998374,
+        "facing_ue_yaw_deg": 180,
+        "facing_basis": "Face the adjacent loading console toward central distributor; raw CAD person symbol has a bent working pose.",
+        "feed_table": {
+          "source_parent_handle": "2C9A89",
+          "reference_surface_line_handles": [
+            "92032",
+            "921DE"
+          ],
+          "reference_surface_repetition_offset_cad_m": [
+            0,
+            0
+          ],
+          "plan_bounds_cad_m": [
+            [
+              -103.49573536,
+              -25.92001415
+            ],
+            [
+              -102.52173536,
+              -25.33601415
+            ]
+          ],
+          "bounds_basis": "Simplified working envelope from measured surface and frame edges; not a new vendor dimensional drawing.",
+          "surface_center_cad_m": [
+            -103.00873536,
+            -25.62801415
+          ],
+          "entry_to_central_cad_m": [
+            -103.54573536,
+            -25.62801415
+          ],
+          "surface_height_cm": 100,
+          "height_basis": "display assumption; original is a 2D plan"
+        }
+      },
+      {
+        "id": "feed_operator_5",
+        "source_handle": "2CCF67",
+        "source_block": "terwrq434",
+        "classification": "personnel_symbol_not_equipment",
+        "position_cad_m": [
+          -102.28147622,
+          -27.5031528
+        ],
+        "position_ue_cm": [
+          -10228.147622,
+          2750.31528,
+          0.0
+        ],
+        "symbol_bounds_cad_m": [
+          [
+            -102.6205515,
+            -28.07256474
+          ],
+          [
+            -101.94240094,
+            -26.93374085
+          ]
+        ],
+        "cad_insert_rotation_deg": 179.998374,
+        "facing_ue_yaw_deg": 180,
+        "facing_basis": "Face the adjacent loading console toward central distributor; raw CAD person symbol has a bent working pose.",
+        "feed_table": {
+          "source_parent_handle": "2C9A89",
+          "reference_surface_line_handles": [
+            "92032",
+            "921DE"
+          ],
+          "reference_surface_repetition_offset_cad_m": [
+            0,
+            -1.6
+          ],
+          "plan_bounds_cad_m": [
+            [
+              -103.49573536,
+              -27.52001415
+            ],
+            [
+              -102.52173536,
+              -26.93601415
+            ]
+          ],
+          "bounds_basis": "Simplified working envelope from measured surface and frame edges; not a new vendor dimensional drawing.",
+          "surface_center_cad_m": [
+            -103.00873536,
+            -27.22801415
+          ],
+          "entry_to_central_cad_m": [
+            -103.54573536,
+            -27.22801415
+          ],
+          "surface_height_cm": 100,
+          "height_basis": "display assumption; original is a 2D plan"
+        }
+      },
+      {
+        "id": "feed_operator_6",
+        "source_handle": "2CCF68",
+        "source_block": "terwrq434",
+        "classification": "personnel_symbol_not_equipment",
+        "position_cad_m": [
+          -102.28147622,
+          -29.17844429
+        ],
+        "position_ue_cm": [
+          -10228.147622,
+          2917.844429,
+          0.0
+        ],
+        "symbol_bounds_cad_m": [
+          [
+            -102.6205515,
+            -29.74785624
+          ],
+          [
+            -101.94240094,
+            -28.60903235
+          ]
+        ],
+        "cad_insert_rotation_deg": 179.998374,
+        "facing_ue_yaw_deg": 180,
+        "facing_basis": "Face the adjacent loading console toward central distributor; raw CAD person symbol has a bent working pose.",
+        "feed_table": {
+          "source_parent_handle": "2C9A89",
+          "reference_surface_line_handles": [
+            "92032",
+            "921DE"
+          ],
+          "reference_surface_repetition_offset_cad_m": [
+            0,
+            -3.2
+          ],
+          "plan_bounds_cad_m": [
+            [
+              -103.49573536,
+              -29.12001415
+            ],
+            [
+              -102.52173536,
+              -28.53601415
+            ]
+          ],
+          "bounds_basis": "Simplified working envelope from measured surface and frame edges; not a new vendor dimensional drawing.",
+          "surface_center_cad_m": [
+            -103.00873536,
+            -28.82801415
+          ],
+          "entry_to_central_cad_m": [
+            -103.54573536,
+            -28.82801415
+          ],
+          "surface_height_cm": 100,
+          "height_basis": "display assumption; original is a 2D plan"
+        }
+      }
+    ],
+    "machine_links": [
+      {
+        "machine_id": "2C9A89_BRANCH_1",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -108.78083258,
+          -28.75801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -111.91153536,
+            -29.80601415
+          ],
+          [
+            -105.65012979,
+            -27.71001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC653",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -105.64923536,
+            -29.01466005
+          ],
+          [
+            -105.64923536,
+            -28.49119973
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEAD3",
+          "points_cad_m": [
+            [
+              -105.64923536,
+              -29.61966005
+            ],
+            [
+              -105.64923536,
+              -29.09619973
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -105.13423536,
+          -28.75292989
+        ],
+        "machine_edge_cad_m": [
+          -105.64923536,
+          -28.75292989
+        ],
+        "central_edge_ue_cm": [
+          -10513.423536,
+          2875.292989,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10564.923536,
+          2875.292989,
+          0.0
+        ],
+        "gap_length_m": 0.515,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_2",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -108.78083258,
+          -25.60801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -111.91153536,
+            -26.65601415
+          ],
+          [
+            -105.65012979,
+            -24.56001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC66F",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -105.64923536,
+            -25.86466005
+          ],
+          [
+            -105.64923536,
+            -25.34119973
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEAF0",
+          "points_cad_m": [
+            [
+              -105.64923536,
+              -26.46966005
+            ],
+            [
+              -105.64923536,
+              -25.94619973
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -105.13423536,
+          -25.60292989
+        ],
+        "machine_edge_cad_m": [
+          -105.64923536,
+          -25.60292989
+        ],
+        "central_edge_ue_cm": [
+          -10513.423536,
+          2560.292989,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10564.923536,
+          2560.292989,
+          0.0
+        ],
+        "gap_length_m": 0.515,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_3",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -108.78083258,
+          -22.45801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -111.91153536,
+            -23.50601415
+          ],
+          [
+            -105.65012979,
+            -21.41001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC737",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -105.64923536,
+            -22.71466005
+          ],
+          [
+            -105.64923536,
+            -22.19119973
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEAB8",
+          "points_cad_m": [
+            [
+              -105.64923536,
+              -23.31966005
+            ],
+            [
+              -105.64923536,
+              -22.79619973
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -105.13423536,
+          -22.45292989
+        ],
+        "machine_edge_cad_m": [
+          -105.64923536,
+          -22.45292989
+        ],
+        "central_edge_ue_cm": [
+          -10513.423536,
+          2245.292989,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10564.923536,
+          2245.292989,
+          0.0
+        ],
+        "gap_length_m": 0.515,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_4",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -108.78083258,
+          -19.30801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -111.91153536,
+            -20.35601415
+          ],
+          [
+            -105.65012979,
+            -18.26001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC832",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -105.64923536,
+            -19.56466005
+          ],
+          [
+            -105.64923536,
+            -19.04119973
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEB5F",
+          "points_cad_m": [
+            [
+              -105.64923536,
+              -20.16966005
+            ],
+            [
+              -105.64923536,
+              -19.64619973
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -105.13423536,
+          -19.30292989
+        ],
+        "machine_edge_cad_m": [
+          -105.64923536,
+          -19.30292989
+        ],
+        "central_edge_ue_cm": [
+          -10513.423536,
+          1930.292989,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10564.923536,
+          1930.292989,
+          0.0
+        ],
+        "gap_length_m": 0.515,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_5",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -108.78083258,
+          -16.15801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -111.91153536,
+            -17.20601415
+          ],
+          [
+            -105.65012979,
+            -15.11001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC78C",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -105.64923536,
+            -16.41466005
+          ],
+          [
+            -105.64923536,
+            -15.89119973
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEC78",
+          "points_cad_m": [
+            [
+              -105.64923536,
+              -17.01966005
+            ],
+            [
+              -105.64923536,
+              -16.49619973
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -105.13423536,
+          -16.15292989
+        ],
+        "machine_edge_cad_m": [
+          -105.64923536,
+          -16.15292989
+        ],
+        "central_edge_ue_cm": [
+          -10513.423536,
+          1615.292989,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10564.923536,
+          1615.292989,
+          0.0
+        ],
+        "gap_length_m": 0.515,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_6",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -108.78083258,
+          -13.00801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -111.91153536,
+            -14.05601415
+          ],
+          [
+            -105.65012979,
+            -11.96001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC6E3",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -105.64923536,
+            -13.26466005
+          ],
+          [
+            -105.64923536,
+            -12.74119973
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEC5C",
+          "points_cad_m": [
+            [
+              -105.64923536,
+              -13.86966005
+            ],
+            [
+              -105.64923536,
+              -13.34619973
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -105.13423536,
+          -13.00292989
+        ],
+        "machine_edge_cad_m": [
+          -105.64923536,
+          -13.00292989
+        ],
+        "central_edge_ue_cm": [
+          -10513.423536,
+          1300.292989,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10564.923536,
+          1300.292989,
+          0.0
+        ],
+        "gap_length_m": 0.515,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_7",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -108.78083258,
+          -9.85801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -111.91153536,
+            -10.90601415
+          ],
+          [
+            -105.65012979,
+            -8.81001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC812",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -105.64923536,
+            -10.11466005
+          ],
+          [
+            -105.64923536,
+            -9.59119973
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEC44",
+          "points_cad_m": [
+            [
+              -105.64923536,
+              -10.71966005
+            ],
+            [
+              -105.64923536,
+              -10.19619973
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -105.13423536,
+          -9.85292989
+        ],
+        "machine_edge_cad_m": [
+          -105.64923536,
+          -9.85292989
+        ],
+        "central_edge_ue_cm": [
+          -10513.423536,
+          985.292989,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10564.923536,
+          985.292989,
+          0.0
+        ],
+        "gap_length_m": 0.515,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_8",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -108.78083258,
+          -6.70801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -111.91153536,
+            -7.75601415
+          ],
+          [
+            -105.65012979,
+            -5.66001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC7C4",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -105.64923536,
+            -6.96466005
+          ],
+          [
+            -105.64923536,
+            -6.44119973
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEB43",
+          "points_cad_m": [
+            [
+              -105.64923536,
+              -7.56966005
+            ],
+            [
+              -105.64923536,
+              -7.04619973
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -105.13423536,
+          -6.70292989
+        ],
+        "machine_edge_cad_m": [
+          -105.64923536,
+          -6.70292989
+        ],
+        "central_edge_ue_cm": [
+          -10513.423536,
+          670.292989,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10564.923536,
+          670.292989,
+          0.0
+        ],
+        "gap_length_m": 0.515,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_9",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -108.78083258,
+          -3.55801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -111.91153536,
+            -4.60601415
+          ],
+          [
+            -105.65012979,
+            -2.51001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC71C",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -105.64923536,
+            -3.81466005
+          ],
+          [
+            -105.64923536,
+            -3.29119973
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEBEB",
+          "points_cad_m": [
+            [
+              -105.64923536,
+              -4.41966005
+            ],
+            [
+              -105.64923536,
+              -3.89619973
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -105.13423536,
+          -3.55292989
+        ],
+        "machine_edge_cad_m": [
+          -105.64923536,
+          -3.55292989
+        ],
+        "central_edge_ue_cm": [
+          -10513.423536,
+          355.292989,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10564.923536,
+          355.292989,
+          0.0
+        ],
+        "gap_length_m": 0.515,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_10",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -99.79958536,
+          -22.44801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -102.93073536,
+            -23.49601415
+          ],
+          [
+            -96.66843536,
+            -21.40001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC76F",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -102.93073536,
+            -22.19136825
+          ],
+          [
+            -102.93073536,
+            -22.71482856
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEA9F",
+          "points_cad_m": [
+            [
+              -102.93073536,
+              -21.58636825
+            ],
+            [
+              -102.93073536,
+              -22.10982856
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -103.54573536,
+          -22.4530984
+        ],
+        "machine_edge_cad_m": [
+          -102.93073536,
+          -22.4530984
+        ],
+        "central_edge_ue_cm": [
+          -10354.573536,
+          2245.30984,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10293.073536,
+          2245.30984,
+          0.0
+        ],
+        "gap_length_m": 0.615,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_11",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -99.79958536,
+          -19.29801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -102.93073536,
+            -20.34601415
+          ],
+          [
+            -96.66843536,
+            -18.25001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC7A3",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -102.93073536,
+            -19.04136825
+          ],
+          [
+            -102.93073536,
+            -19.56482856
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEBB4",
+          "points_cad_m": [
+            [
+              -102.93073536,
+              -18.43636825
+            ],
+            [
+              -102.93073536,
+              -18.95982856
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -103.54573536,
+          -19.3030984
+        ],
+        "machine_edge_cad_m": [
+          -102.93073536,
+          -19.3030984
+        ],
+        "central_edge_ue_cm": [
+          -10354.573536,
+          1930.30984,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10293.073536,
+          1930.30984,
+          0.0
+        ],
+        "gap_length_m": 0.615,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_12",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -99.79958536,
+          -16.14801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -102.93073536,
+            -17.19601415
+          ],
+          [
+            -96.66843536,
+            -15.10001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC6C8",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -102.93073536,
+            -15.89136825
+          ],
+          [
+            -102.93073536,
+            -16.41482856
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEB9C",
+          "points_cad_m": [
+            [
+              -102.93073536,
+              -15.28636825
+            ],
+            [
+              -102.93073536,
+              -15.80982856
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -103.54573536,
+          -16.1530984
+        ],
+        "machine_edge_cad_m": [
+          -102.93073536,
+          -16.1530984
+        ],
+        "central_edge_ue_cm": [
+          -10354.573536,
+          1615.30984,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10293.073536,
+          1615.30984,
+          0.0
+        ],
+        "gap_length_m": 0.615,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_13",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -99.79958536,
+          -12.99801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -102.93073536,
+            -14.04601415
+          ],
+          [
+            -96.66843536,
+            -11.95001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC6AA",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -102.93073536,
+            -12.74136825
+          ],
+          [
+            -102.93073536,
+            -13.26482856
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEB2C",
+          "points_cad_m": [
+            [
+              -102.93073536,
+              -12.13636825
+            ],
+            [
+              -102.93073536,
+              -12.65982856
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -103.54573536,
+          -13.0030984
+        ],
+        "machine_edge_cad_m": [
+          -102.93073536,
+          -13.0030984
+        ],
+        "central_edge_ue_cm": [
+          -10354.573536,
+          1300.30984,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10293.073536,
+          1300.30984,
+          0.0
+        ],
+        "gap_length_m": 0.615,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_14",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -99.79958536,
+          -9.84801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -102.93073536,
+            -10.89601415
+          ],
+          [
+            -96.66843536,
+            -8.80001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC700",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -102.93073536,
+            -9.59136825
+          ],
+          [
+            -102.93073536,
+            -10.11482856
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEB80",
+          "points_cad_m": [
+            [
+              -102.93073536,
+              -8.98636825
+            ],
+            [
+              -102.93073536,
+              -9.50982856
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -103.54573536,
+          -9.8530984
+        ],
+        "machine_edge_cad_m": [
+          -102.93073536,
+          -9.8530984
+        ],
+        "central_edge_ue_cm": [
+          -10354.573536,
+          985.30984,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10293.073536,
+          985.30984,
+          0.0
+        ],
+        "gap_length_m": 0.615,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_15",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -99.79958536,
+          -6.69801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -102.93073536,
+            -7.74601415
+          ],
+          [
+            -96.66843536,
+            -5.65001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC7F8",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -102.93073536,
+            -6.44136825
+          ],
+          [
+            -102.93073536,
+            -6.96482856
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEC23",
+          "points_cad_m": [
+            [
+              -102.93073536,
+              -5.83636825
+            ],
+            [
+              -102.93073536,
+              -6.35982856
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -103.54573536,
+          -6.7030984
+        ],
+        "machine_edge_cad_m": [
+          -102.93073536,
+          -6.7030984
+        ],
+        "central_edge_ue_cm": [
+          -10354.573536,
+          670.30984,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10293.073536,
+          670.30984,
+          0.0
+        ],
+        "gap_length_m": 0.615,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_16",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -99.79958536,
+          -3.54801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -102.93073536,
+            -4.59601415
+          ],
+          [
+            -96.66843536,
+            -2.50001415
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC68A",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -102.93073536,
+            -3.29136825
+          ],
+          [
+            -102.93073536,
+            -3.81482856
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEB11",
+          "points_cad_m": [
+            [
+              -102.93073536,
+              -2.68636825
+            ],
+            [
+              -102.93073536,
+              -3.20982856
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -103.54573536,
+          -3.5530984
+        ],
+        "machine_edge_cad_m": [
+          -102.93073536,
+          -3.5530984
+        ],
+        "central_edge_ue_cm": [
+          -10354.573536,
+          355.30984,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10293.073536,
+          355.30984,
+          0.0
+        ],
+        "gap_length_m": 0.615,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_17",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -99.79958536,
+          -0.39801415
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -102.93073536,
+            -1.44601415
+          ],
+          [
+            -96.66843536,
+            0.64998585
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC74E",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -102.93073536,
+            -0.14136825
+          ],
+          [
+            -102.93073536,
+            -0.66482856
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEC0B",
+          "points_cad_m": [
+            [
+              -102.93073536,
+              0.46363175
+            ],
+            [
+              -102.93073536,
+              -0.05982856
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -103.54573536,
+          -0.4030984
+        ],
+        "machine_edge_cad_m": [
+          -102.93073536,
+          -0.4030984
+        ],
+        "central_edge_ue_cm": [
+          -10354.573536,
+          40.30984,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10293.073536,
+          40.30984,
+          0.0
+        ],
+        "gap_length_m": 0.615,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      },
+      {
+        "machine_id": "2C9A89_BRANCH_18",
+        "source_parent_handle": "2C9A89",
+        "machine_center_cad_m": [
+          -99.79958536,
+          2.75198585
+        ],
+        "machine_bounds_cad_m": [
+          [
+            -102.93073536,
+            1.70398585
+          ],
+          [
+            -96.66843536,
+            3.79998585
+          ]
+        ],
+        "receiver_mouth_source_handle": "DC7DB",
+        "receiver_mouth_segment_cad_m": [
+          [
+            -102.93073536,
+            3.00863175
+          ],
+          [
+            -102.93073536,
+            2.48517144
+          ]
+        ],
+        "receiver_mouth_width_m": 0.52346031,
+        "second_receiver_mouth": {
+          "handle": "DEBCF",
+          "points_cad_m": [
+            [
+              -102.93073536,
+              3.61363175
+            ],
+            [
+              -102.93073536,
+              3.09017144
+            ]
+          ]
+        },
+        "central_edge_cad_m": [
+          -103.54573536,
+          2.7469016
+        ],
+        "machine_edge_cad_m": [
+          -102.93073536,
+          2.7469016
+        ],
+        "central_edge_ue_cm": [
+          -10354.573536,
+          -274.69016,
+          0.0
+        ],
+        "machine_edge_ue_cm": [
+          -10293.073536,
+          -274.69016,
+          0.0
+        ],
+        "gap_length_m": 0.615,
+        "recommended_link_width_m": 0.52346031,
+        "link_evidence": "Endpoints and mouth width measured from CAD. The continuous fixed bridging surface is a simulation completion requested by user, not an independently drawn original fixed belt.",
+        "height_basis": "Interface height follows existing machine conveyor; 2D CAD does not certify Z."
+      }
+    ]
+  },
+  "central120": {
+    "source_handle": "2C9AE5",
+    "source_block": "480",
+    "children": [
+      {
+        "handle": "115C21",
+        "block": "A$C00f80c1a",
+        "bounds_cad_m": [
+          [
+            -112.23743336,
+            18.08987051
+          ],
+          [
+            -110.60124527,
+            20.45087051
+          ]
+        ],
+        "classification": "central_distribution_hardware"
+      },
+      {
+        "handle": "115C22",
+        "block": "A$C8bcf8832",
+        "bounds_cad_m": [
+          [
+            -112.23743336,
+            16.25947051
+          ],
+          [
+            -110.87743336,
+            18.17027051
+          ]
+        ],
+        "classification": "central_distribution_hardware"
+      },
+      {
+        "handle": "115C23",
+        "block": "A$C8bcf8832",
+        "bounds_cad_m": [
+          [
+            -112.23743336,
+            14.50947051
+          ],
+          [
+            -110.87743336,
+            16.42027051
+          ]
+        ],
+        "classification": "central_distribution_hardware"
+      },
+      {
+        "handle": "115C24",
+        "block": "A$C00f80c1a",
+        "bounds_cad_m": [
+          [
+            -112.23743336,
+            12.22887051
+          ],
+          [
+            -110.60124527,
+            14.58987051
+          ]
+        ],
+        "classification": "central_distribution_hardware"
+      },
+      {
+        "handle": "115C25",
+        "block": "asdeghu",
+        "bounds_cad_m": [
+          [
+            -113.03854797,
+            11.67387051
+          ],
+          [
+            -110.32593336,
+            12.81287082
+          ]
+        ],
+        "classification": "central_distribution_hardware"
+      },
+      {
+        "handle": "115C26",
+        "block": "sagnujcni",
+        "bounds_cad_m": [
+          [
+            -112.78893336,
+            19.9218702
+          ],
+          [
+            -110.07631875,
+            21.06087051
+          ]
+        ],
+        "classification": "central_distribution_hardware"
+      },
+      {
+        "handle": "115C27",
+        "block": "asdehygc",
+        "bounds_cad_m": [
+          [
+            -110.55104605,
+            13.18163227
+          ],
+          [
+            -103.20450972,
+            15.37363427
+          ]
+        ],
+        "classification": "sorter"
+      },
+      {
+        "handle": "115C28",
+        "block": "asdehygc",
+        "bounds_cad_m": [
+          [
+            -110.55104605,
+            17.13548462
+          ],
+          [
+            -103.20450972,
+            19.32748662
+          ]
+        ],
+        "classification": "sorter"
+      },
+      {
+        "handle": "115C29",
+        "block": "asdehygc",
+        "bounds_cad_m": [
+          [
+            -119.84505149,
+            17.56760162
+          ],
+          [
+            -112.49851516,
+            19.75960362
+          ]
+        ],
+        "classification": "sorter"
+      },
+      {
+        "handle": "115C2A",
+        "block": "asdehygc",
+        "bounds_cad_m": [
+          [
+            -119.84505149,
+            13.61374927
+          ],
+          [
+            -112.49851516,
+            15.80575127
+          ]
+        ],
+        "classification": "sorter"
+      }
+    ],
+    "guide_center_x_cad_m": -111.55743336,
+    "guide_center_x_ue_cm": -11155.74333576,
+    "middle_module_width_m": 1.36,
+    "whole_distribution_hardware_bounds_cad_m": [
+      [
+        -113.03854797,
+        11.67387051
+      ],
+      [
+        -110.07631875,
+        21.06087051
+      ]
+    ],
+    "machine_count": 4,
+    "visible_personnel_symbols_in_block": 0,
+    "mechanism": "Independent central closed-return distributor with four lateral sorter interfaces.",
+    "personnel_policy": "No per-machine workers. Upstream system entry may supply simulated parcels, explicitly labeled as an assumption."
+  },
+  "legacy_straight_roller_replacement": {
+    "mesh_asset": "/Game/MPRWarehouse/Operations/Meshes/SM_MPR_Conveyor2m",
+    "candidate_actor_labels": [
+      "MPR_SM_MPR_Conveyor2m_-2_-1",
+      "MPR_SM_MPR_Conveyor2m_-2_0"
+    ],
+    "matching_instances_ue_cm": [
+      [
+        -10430.0,
+        3010.301,
+        0
+      ],
+      [
+        -10430.0,
+        2820.301,
+        0
+      ],
+      [
+        -10430.0,
+        2630.301,
+        0
+      ],
+      [
+        -10430.0,
+        2440.301,
+        0
+      ],
+      [
+        -10430.0,
+        2250.301,
+        0
+      ],
+      [
+        -10430.0,
+        2060.301,
+        0
+      ],
+      [
+        -10430.0,
+        1870.301,
+        0
+      ],
+      [
+        -10430.0,
+        1680.301,
+        0
+      ],
+      [
+        -10430.0,
+        1490.301,
+        0
+      ],
+      [
+        -10430.0,
+        1300.301,
+        0
+      ],
+      [
+        -10430.0,
+        1110.301,
+        0
+      ],
+      [
+        -10430.0,
+        920.301,
+        0
+      ],
+      [
+        -10430.0,
+        730.301,
+        0
+      ],
+      [
+        -10430.0,
+        540.301,
+        0
+      ],
+      [
+        -10430.0,
+        350.301,
+        0
+      ],
+      [
+        -10430.0,
+        160.301,
+        0
+      ],
+      [
+        -10430.0,
+        -29.699,
+        0
+      ],
+      [
+        -10430.0,
+        -219.699,
+        0
+      ],
+      [
+        -10430.0,
+        -409.699,
+        0
+      ],
+      [
+        -11152.0,
+        -1312.737,
+        0
+      ],
+      [
+        -11152.0,
+        -1474.737,
+        0
+      ],
+      [
+        -11152.0,
+        -1636.737,
+        0
+      ],
+      [
+        -11152.0,
+        -1798.737,
+        0
+      ],
+      [
+        -11152.0,
+        -1960.737,
+        0
+      ]
+    ],
+    "count": 24,
+    "policy": "Match mesh and world instance XY (1 cm tolerance), cache original transforms, transiently hide only these 24 instances. Never hide their entire HISM actor or overwrite a user-edited map."
+  },
+  "validation": {
+    "six_personnel_symbols": true,
+    "eighteen_receiver_mouths": true,
+    "four_secondary_sorters": true
+  }
+}

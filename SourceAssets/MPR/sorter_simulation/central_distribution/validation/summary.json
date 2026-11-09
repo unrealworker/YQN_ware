@@ -1,0 +1,86 @@
+{
+  "success": true,
+  "automation": {
+    "passed": 21,
+    "failed": 0
+  },
+  "native_checks": [
+    "two_banks_six_cad_operators_60_carriers_22_connected_machines",
+    "pause_freezes_central_and_machine_states_and_actual_render_poses",
+    "rates_1_2_4_match_and_reset_clears_shared_global_id_space",
+    "fixed_camera_feed_sequence_end_a_three_operators",
+    "fixed_camera_feed_sequence_end_b_three_operators",
+    "cad64_whole_cart_full_waits_and_external_infeed_backpressures",
+    "cad64_full_outbound_handoff_empty_arrival_docking_and_receiving_recovery",
+    "cad120_whole_cart_full_waits_and_external_infeed_backpressures",
+    "cad120_full_outbound_handoff_empty_arrival_docking_and_receiving_recovery",
+    "native_tick_15_second_csv_without_json_polling",
+    "global_id_conservation_bounded_instance_pools_fixed_views"
+  ],
+  "fps": 119.7693077932857,
+  "p95_ms": 9.1652,
+  "sample_seconds": 15.012193299999987,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "preservation": {
+    "success": true,
+    "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+    "map_sha256": "b665a1a8a17f22110cee330f5234df4244a6ee703da33fed8d60b9bbb30ffd4f",
+    "actors": 889,
+    "preserved_unrelated_actors": 888,
+    "content_packages_unchanged": 1943,
+    "camera_restored": true,
+    "camera": [
+      -1000.4625388238819,
+      5399.147520802134,
+      1166.1166597018625,
+      -48.19990158081055,
+      -108.80000305175781,
+      0.0
+    ],
+    "dirty_maps": [],
+    "dirty_content": []
+  },
+  "motion_duration_seconds": 32,
+  "motion_sample_fps": 8,
+  "files": {
+    "automation.json": {
+      "bytes": 9601,
+      "sha256": "87fc209acdeee584e65c463d46ce7c8f0347f3afcc70766d5e491a7bffdb1b20"
+    },
+    "central_motion.mp4": {
+      "bytes": 10294816,
+      "sha256": "5886779399c0bf674057a8c26a131776bb2fc41b553663044da107e513f64685"
+    },
+    "feeding.png": {
+      "bytes": 3351501,
+      "sha256": "61c62ada37c5ce8fb9e08c5772af382335c23c780ad59185a1dc568c1b7c41ec"
+    },
+    "feeding_other_end.png": {
+      "bytes": 3352006,
+      "sha256": "a5dc71dcd7a7f690de22c241781c440ea7dd0e8da168e627a422eb29d98a79f8"
+    },
+    "motion_capture.json": {
+      "bytes": 2518,
+      "sha256": "2aa03f809899b7072e48d7bd59cd5f072ac8099896acfb4e79a2daf454e8c903"
+    },
+    "native_profile.csv": {
+      "bytes": 3622481,
+      "sha256": "01388b04417291e6ea7db26006f546c0ec72c46e5fd71ab75404aa0234a022b7"
+    },
+    "overview.png": {
+      "bytes": 3139507,
+      "sha256": "be56d5ebb9b91ca2f87d990afcb253953bd17ee63c353236806e9d345fb7186d"
+    },
+    "runtime_report.json": {
+      "bytes": 1977892,
+      "sha256": "19fab54636fc91eb694f95c923d287d4a0e57903de72a3d8e297f564f3e084d3"
+    },
+    "scene_preservation.json": {
+      "bytes": 463,
+      "sha256": "2c4893b44440a4b4d790cf93144492378e5d39e7ac069d931cd2d28accfcdad8"
+    }
+  }
+}

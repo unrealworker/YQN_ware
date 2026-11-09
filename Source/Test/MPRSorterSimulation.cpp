@@ -69,6 +69,24 @@ void Simulation::Reset()
     RefreshStatus();
 }
 bool Simulation::SetRate(double V) {if(V!=1.&&V!=2.&&V!=4.)return false;Rate=V;return true;}
+bool Simulation::CanAcceptExternalParcel() const
+{
+    if(!Ready||!Playing||!Settings.ExternalInfeed||!NextParcelId||!FeedEnabled()
+       ||ArrivalRemaining>TimeTolerance||Infeed.size()>=size_t(Settings.InfeedCapacity))return false;
+    // Hold upstream even when manual collection has not yet been requested.
+    for(const auto& C:Carts)if(C.State!=CartPhase::Receiving)return false;
+    Destination D;if(!FindDestination(D))return false;
+    const double Gap=1./double(Settings.InfeedCapacity+1);
+    return Infeed.empty()||Infeed.back().Progress01>=Gap-PositionTolerance;
+}
+bool Simulation::EnqueueExternalParcel(uint64_t ParcelId)
+{
+    if(!CanAcceptExternalParcel()||!ParcelId||ParcelId<NextParcelId)return false;
+    Infeed.push_back({ParcelId,0});
+    NextParcelId=ParcelId==std::numeric_limits<uint64_t>::max()?0:ParcelId+1;
+    ++Totals.Spawned;++Totals.InfeedReceived;ArrivalRemaining=Settings.InfeedSpacingSeconds;
+    RefreshStatus();return true;
+}
 void Simulation::SetAutoCollect(bool V) {AutoCollect=V;RefreshStatus();}
 void Simulation::SetExchangePermit(bool V) {ExchangePermit=V;RefreshStatus();}
 bool Simulation::ClearBin(Destination D) {return RequestCartExchange(CartIndex(D));}
@@ -172,7 +190,7 @@ void Simulation::SettleEvents()
                 }
             }
         }
-        if(FeedEnabled()&&ArrivalRemaining<=TimeTolerance&&Infeed.size()<size_t(Settings.InfeedCapacity))
+        if(!Settings.ExternalInfeed&&FeedEnabled()&&ArrivalRemaining<=TimeTolerance&&Infeed.size()<size_t(Settings.InfeedCapacity))
         {
             const double Gap=1./double(Settings.InfeedCapacity+1);
             if(Infeed.empty()||Infeed.back().Progress01>=Gap-PositionTolerance)
@@ -295,7 +313,7 @@ double Simulation::NextEventSeconds(bool MoveChain) const
             double D=FeedFrontLimit()-double(I)*Gap-Infeed[I].Progress01;
             if(D>PositionTolerance)Next=std::min(Next,D*Settings.InfeedTravelSeconds);
         }
-        if(Infeed.size()<size_t(Settings.InfeedCapacity))
+        if(!Settings.ExternalInfeed&&Infeed.size()<size_t(Settings.InfeedCapacity))
         {
             if(ArrivalRemaining>TimeTolerance)Next=std::min(Next,ArrivalRemaining);
             else if(!Infeed.empty()&&Infeed.back().Progress01<Gap-PositionTolerance)

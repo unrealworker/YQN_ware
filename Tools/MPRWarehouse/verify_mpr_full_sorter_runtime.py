@@ -1,5 +1,9 @@
 """Schema-2 native MPR acceptance; readback only, never saves the map/assets.
 
+Historical per-machine manual-feed acceptance, superseded on 2026-11-09 by
+verify_mpr_central_runtime.py. Its lifecycle/camera/CSV helpers remain reused;
+do not use the old 44-worker workflow assertions for the corrected CAD layout.
+
 Run an owned process with -own -game -RenderOffscreen -TwinDiagnostics
 -EnablePython -ForceRes -ResX=1920 -ResY=1080 and
 -ExecCmds="py D:/UEPro/Test/Tools/MPRWarehouse/verify_mpr_full_sorter_runtime.py".

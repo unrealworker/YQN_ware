@@ -93,7 +93,7 @@ TSharedRef<SWidget> UMPRSorterHUDWidget::RebuildWidget()
                 [SNew(STextBlock).Font(MPRFont(11)).ColorAndOpacity(Muted)
                     .Text_Lambda([this](){return FText::FromString(bCollapsed?TEXT("展开"):TEXT("收起"));})]]]
         +SVerticalBox::Slot().AutoHeight().Padding(0,3,0,0)
-        [SNew(STextBlock).Text(FText::FromString(TEXT("演示数据 · 人工接驳 / 整组换车"))).Font(MPRFont(11)).ColorAndOpacity(Muted)]
+        [SNew(STextBlock).Text(FText::FromString(TEXT("演示数据 · 集中上料 / 自动分配 / 整组换车"))).Font(MPRFont(11)).ColorAndOpacity(Muted)]
         +SVerticalBox::Slot().AutoHeight().Padding(0,8,0,0)
         [SNew(SVerticalBox).Visibility_Lambda([this](){return bCollapsed?EVisibility::Collapsed:EVisibility::Visible;})
             +SVerticalBox::Slot().AutoHeight()

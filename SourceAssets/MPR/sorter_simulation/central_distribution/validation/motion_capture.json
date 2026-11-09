@@ -1,0 +1,76 @@
+{
+  "success": true,
+  "run_id": "20261109T092149477975Z",
+  "map_sha256": "b665a1a8a17f22110cee330f5234df4244a6ee703da33fed8d60b9bbb30ffd4f",
+  "assets_unchanged": true,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "sequence_segments": [
+    {
+      "name": "end_a_three_operators",
+      "kind": "central_feed",
+      "first_frame": 0,
+      "frame_count": 128,
+      "simulation_fps": 8,
+      "duration_seconds": 16,
+      "starts_after_reset": true,
+      "view": "feed_sequence_end_a_three_operators",
+      "camera": [
+        -11332.56314950105,
+        -658.8251091145062,
+        675.4998055,
+        -30.000000000000092,
+        30.000000000000085,
+        5.508882304545861e-15
+      ],
+      "fov_deg": 25,
+      "sampling": "Diagnostic delta 0.125 seconds at rate 1; engine fixed-step accumulator is 0.05 seconds."
+    },
+    {
+      "name": "end_b_three_operators",
+      "kind": "central_feed",
+      "first_frame": 128,
+      "frame_count": 128,
+      "simulation_fps": 8,
+      "duration_seconds": 16,
+      "starts_after_reset": true,
+      "view": "feed_sequence_end_b_three_operators",
+      "camera": [
+        -9527.436851290136,
+        3278.825108568485,
+        675.4998055000004,
+        -30.000000000000075,
+        -150.0000000000001,
+        -0.0
+      ],
+      "fov_deg": 25,
+      "sampling": "Diagnostic delta 0.125 seconds at rate 1; engine fixed-step accumulator is 0.05 seconds."
+    }
+  ],
+  "checks": [
+    {
+      "name": "fixed_camera_feed_sequence_end_a_three_operators",
+      "passed": true,
+      "frames": 128,
+      "simulation_fps": 8,
+      "duration_seconds": 16,
+      "first_frame": 0,
+      "state_file": "D:\\UEPro\\Test\\Saved\\MPR\\central_distribution_20261109\\presentation\\20261109T092149477975Z\\states\\feed_sequence_end_a_three_operators_end.json"
+    },
+    {
+      "name": "fixed_camera_feed_sequence_end_b_three_operators",
+      "passed": true,
+      "frames": 128,
+      "simulation_fps": 8,
+      "duration_seconds": 16,
+      "first_frame": 128,
+      "state_file": "D:\\UEPro\\Test\\Saved\\MPR\\central_distribution_20261109\\presentation\\20261109T092149477975Z\\states\\feed_sequence_end_b_three_operators_end.json"
+    }
+  ],
+  "frame_count": 256,
+  "video": "central_motion.mp4",
+  "video_duration_seconds": 32,
+  "sampling": "Two fixed-camera 16-second segments, each reset to initial simulation state, 8 frames per simulation second; no claimed 8 FPS runtime limit."
+}
