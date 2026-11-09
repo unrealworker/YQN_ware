@@ -1,5 +1,6 @@
 #include "MPRSorterSimulationActor.h"
 #include "MPRCentralCadData.h"
+#include "MPRCadWorkerData.h"
 #include "MPRWorkerPoseComponent.h"
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Engine/StaticMesh.h"
@@ -36,6 +37,8 @@ bool AMPRSorterSimulationActor::LoadCentralDistribution()
         // the shared chain moves. These are presentation timings, not PLC data.
         C.CarrierCount=BankIndex==0?96:24;C.SpeedCmS=90;C.LoadingSeconds=.9;
         C.TransferSeconds=.3;C.RecoverySeconds=.3;C.MaxPendingPerTarget=8;
+        int32 SourceIndex=0;
+        const char* FeedHandles[]={"2CCF63","2CCF64","2CCF65","2CCF69","2CCF67","2CCF68"};
         if(BankIndex==0)for(const auto& Source:MPRCentralCad::Workers)
         {
             FFeedStation S;S.Feet=Vec(Source.Feet);S.Yaw=Source.Yaw;
@@ -43,6 +46,12 @@ bool AMPRSorterSimulationActor::LoadCentralDistribution()
             // Personnel XY is surveyed. Reach/table geometry is a conservative
             // display fit; people never reach across the 1.5 m distributor gap.
             S.Drop=S.Feet+Forward*50.;S.Drop.Y=FMath::Lerp(S.Feet.Y,Source.Table[1],.4);S.Drop.Z=FeedSurface;
+            // The workstation port stays fixed. Standing roots follow the
+            // source torso projection, not the bounds of outstretched arms.
+            for(const auto& Person:MPRCadWorkers::Workers)
+                if(FCStringAnsi::Strcmp(Person.SourceHandle,FeedHandles[SourceIndex])==0)
+                {S.Feet=Vec(Person.Feet);S.Yaw=Person.Yaw;break;}
+            ++SourceIndex;
             S.Distance01=StationDistance(B.Geometry,S.Drop.Y,S.Feet.X>B.Geometry.Center.X);
             B.Stations.Add(S);C.FeedDistances01.push_back(S.Distance01);
         }
@@ -175,7 +184,9 @@ FVector AMPRSorterSimulationActor::CentralParcelPoint(const FDistributionBank& B
     if(C.Phase==P::Loading&&B.Stations.IsValidIndex(C.SourceStation))
     {
         const auto& S=B.Stations[C.SourceStation];const FVector Forward=FRotator(0,S.Yaw,0).Vector();
-        const FVector Drop=S.Drop+FVector(0,0,ParcelHalf),Supply=Drop-Forward*20.;const double T=C.Progress01;
+        // The person releases on the near workstation surface; the powered
+        // belt covers the remaining reach to the fixed central handoff port.
+        const FVector Drop=S.Drop-Forward*20.+FVector(0,0,ParcelHalf),Supply=Drop-Forward*20.;const double T=C.Progress01;
         // A visible arrival traverses the existing short workstation belt
         // before the worker grips it. Do not restore the user's deleted ramps.
         const FVector Side=FRotator(0,S.Yaw,0).RotateVector(FVector(0,1,0));
@@ -221,7 +232,7 @@ void AMPRSorterSimulationActor::UpdateCentralDistribution()
                 if(C.Phase!=MPRCentral::CarrierPhase::Loading||C.SourceStation!=SIndex)continue;
                 const double T=C.Progress01;const FVector Left=Turn.RotateVector(FVector(0,-1,0));
                 FVector Hand=CentralParcelPoint(B,C);
-                if(T>.5)Hand=S.Drop+FVector(0,0,ParcelHalf);
+                if(T>.5)Hand=S.Drop-Turn.RotateVector(FVector(20,0,0))+FVector(0,0,ParcelHalf);
                 const double Contact=T<.25?Ease(T/.25):1.-Ease((T-.5)/.17);
                 Pose.LeftPalmWorld=FMath::Lerp(RelaxL,Hand+Left*11.25,Contact);
                 Pose.RightPalmWorld=FMath::Lerp(RelaxR,Hand-Left*11.25,Contact);

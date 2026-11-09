@@ -1,0 +1,193 @@
+{
+  "success": true,
+  "runtime_run": "20261109T112517269152Z",
+  "cad_capture_run": "20261109T111737988358Z",
+  "automation": {
+    "passed": 23,
+    "failed": 0
+  },
+  "cad_workers": 256,
+  "added_workers": 250,
+  "central_feeders": 6,
+  "refitted_worktable_groups": 42,
+  "correct_tabletops": 84,
+  "runtime_checks": [
+    "all_cad_people_native_positions_orientations_and_visibility",
+    "empty_before_work_keeps_circulating",
+    "manual_pause_freezes_logic_and_native_render_poses",
+    "active_phases_move_at_constant_speed",
+    "six_operators_repeat_fast_feed_cycles",
+    "finished_work_empty_carriers_keep_circulating",
+    "full_destination_backpressure_does_not_stop_common_chain",
+    "two_fixed_view_eight_second_segments",
+    "native_tick_15_seconds_without_json_or_capture_polling",
+    "conserved_ids_and_bounded_native_instance_pools"
+  ],
+  "cad_checks": [
+    "all_cad_people_native_positions_orientations_and_visibility",
+    "gie2_exact_tabletops_and_worker_body_clearance",
+    "all_cad_people_native_positions_orientations_and_visibility",
+    "all_cad_people_native_positions_orientations_and_visibility",
+    "all_cad_people_native_positions_orientations_and_visibility",
+    "all_cad_people_native_positions_orientations_and_visibility",
+    "four_fixed_native_views_all_cad_worker_categories"
+  ],
+  "fps": 102.33826898087236,
+  "p95_ms": 10.5365,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "performance_scope": "15 seconds local native runtime; no JSON or capture polling; not Pixel Streaming",
+  "feed_action_seconds": 0.9,
+  "feed_cadence": [
+    {
+      "bank": "CAD64_Central",
+      "station": 0,
+      "worker_index": 22,
+      "admissions": 18,
+      "median_seconds": 5.200000000000671,
+      "max_seconds": 8.800000000000836,
+      "total_fed": 42,
+      "pitch_seconds": 0.8726032425959905,
+      "loading_seconds": 0.9,
+      "observed_simulation_seconds": 90
+    },
+    {
+      "bank": "CAD64_Central",
+      "station": 1,
+      "worker_index": 23,
+      "admissions": 19,
+      "median_seconds": 4.399999999999807,
+      "max_seconds": 8.800000000000665,
+      "total_fed": 42,
+      "pitch_seconds": 0.8726032425959905,
+      "loading_seconds": 0.9,
+      "observed_simulation_seconds": 90
+    },
+    {
+      "bank": "CAD64_Central",
+      "station": 2,
+      "worker_index": 24,
+      "admissions": 19,
+      "median_seconds": 4.799999999999812,
+      "max_seconds": 9.600000000001046,
+      "total_fed": 42,
+      "pitch_seconds": 0.8726032425959905,
+      "loading_seconds": 0.9,
+      "observed_simulation_seconds": 90
+    },
+    {
+      "bank": "CAD64_Central",
+      "station": 3,
+      "worker_index": 25,
+      "admissions": 19,
+      "median_seconds": 4.799999999999869,
+      "max_seconds": 10.40000000000083,
+      "total_fed": 42,
+      "pitch_seconds": 0.8726032425959905,
+      "loading_seconds": 0.9,
+      "observed_simulation_seconds": 90
+    },
+    {
+      "bank": "CAD64_Central",
+      "station": 4,
+      "worker_index": 26,
+      "admissions": 19,
+      "median_seconds": 4.400000000000219,
+      "max_seconds": 10.600000000001216,
+      "total_fed": 42,
+      "pitch_seconds": 0.8726032425959905,
+      "loading_seconds": 0.9,
+      "observed_simulation_seconds": 90
+    },
+    {
+      "bank": "CAD64_Central",
+      "station": 5,
+      "worker_index": 27,
+      "admissions": 19,
+      "median_seconds": 4.800000000000189,
+      "max_seconds": 9.600000000001046,
+      "total_fed": 42,
+      "pitch_seconds": 0.8726032425959905,
+      "loading_seconds": 0.9,
+      "observed_simulation_seconds": 90
+    }
+  ],
+  "video": {
+    "width": 1920,
+    "height": 1080,
+    "r_frame_rate": "16/1",
+    "duration": "16.000000",
+    "nb_frames": "256"
+  },
+  "files": {
+    "continuous_distribution\\validation\\automation.json": {
+      "sha256": "6e17899d22ed4d01a76bd8e4462ed7afc363f330ef7a95dc48f17570fbe5e53a",
+      "bytes": 10444
+    },
+    "continuous_distribution\\validation\\continuous_motion.mp4": {
+      "sha256": "fd5b0063882d445f4c1ec69ba1e53409abeaf52630fb585cd33cc724e4f67203",
+      "bytes": 21619123
+    },
+    "continuous_distribution\\validation\\feeding.png": {
+      "sha256": "d2d1a598a582c1f17b4e4c622552aea31a2194be5c98273aaa8407f768fc0770",
+      "bytes": 3474142
+    },
+    "continuous_distribution\\validation\\native_profile.csv": {
+      "sha256": "dde3a7b6f7d9dbf395bf7c935912bcac3a005a0294a8416f7b0923d1d4f52461",
+      "bytes": 3081942
+    },
+    "continuous_distribution\\validation\\overview.png": {
+      "sha256": "9f57fde757fde3491b8993dfe1ebdebb850c8bd65b76bfadde23802556bbe5bf",
+      "bytes": 3199605
+    },
+    "continuous_distribution\\validation\\runtime_report.json": {
+      "sha256": "4d2c116c4c61e5c549a92d063e52dfb1f6f05cef5d113611f82a24a5aa5c29bd",
+      "bytes": 2781675
+    },
+    "cad_workers\\validation\\01_full_warehouse.png": {
+      "sha256": "e6fd2e1fbd928f836230d53c40c8a0be3382d7d93657e84340d7d957b071e2ea",
+      "bytes": 3609320
+    },
+    "cad_workers\\validation\\02_top_level_workers.png": {
+      "sha256": "36dcf368b1536ea3abe0f1f20e6fe75b7190e981f846cea691a8703583749338",
+      "bytes": 2709573
+    },
+    "cad_workers\\validation\\03_gie2_nested_workers.png": {
+      "sha256": "08a7f8c63cda46289f513367a3580527792cc8102311f19d4bbf7f5077b142f5",
+      "bytes": 2708902
+    },
+    "cad_workers\\validation\\04_anonymous_nested_workers.png": {
+      "sha256": "411efbd7dc15180d0ee821f816cb5f4c84fd0f677bcc7dbe280e9039683124e0",
+      "bytes": 2792306
+    },
+    "cad_workers\\validation\\native_report.json": {
+      "sha256": "37589723a1d494eb5c8982badc2ad287bcf1dd2ce00fe2d786d498ed2c47f9f9",
+      "bytes": 136844
+    },
+    "continuous_distribution/validation/scene_preservation.json": {
+      "sha256": "1d6d272f58006b0756d18bad4613d5c27cc1a58e66a322660f442b502b83f3ea",
+      "bytes": 463
+    }
+  },
+  "scene_preservation": {
+    "success": true,
+    "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+    "map_sha256": "8aafbdad7af4257d152f2a4b1aa75158670e0bb05b2bad3a86f86b8749c89214",
+    "actors": 889,
+    "preserved_unrelated_actors": 888,
+    "content_packages_unchanged": 1943,
+    "camera_restored": true,
+    "camera": [
+      2383.6236404991005,
+      15339.831903383096,
+      12910.712471278626,
+      -48.19990158081055,
+      -108.80000305175781,
+      0.0
+    ],
+    "dirty_maps": [],
+    "dirty_content": []
+  }
+}

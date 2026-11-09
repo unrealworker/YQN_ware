@@ -1,6 +1,7 @@
 #include "MPRSorterSimulationActor.h"
 #include "MPRSorterHUDWidget.h"
 #include "MPRWorkerPoseComponent.h"
+#include "MPRCadWorkerData.h"
 #include "Engine/SkeletalMesh.h"
 #include "Animation/AnimSequence.h"
 #include "GHSWarehousePlayerController.h"
@@ -10,6 +11,7 @@
 #include "Components/SceneComponent.h"
 #include "Engine/StaticMesh.h"
 #include "Engine/World.h"
+#include "EngineUtils.h"
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonReader.h"
@@ -331,7 +333,7 @@ void AMPRSorterSimulationActor::BeginPlay()
         M.Simulation.SetPlaying(bAutoStart);
     }
     if(!BuildCartInstances()||!BuildWorkers()){bReady=false;SetActorTickEnabled(false);UE_LOG(LogTemp,Error,TEXT("MPR_SORTER: %s"),*Error);return;}
-    BuildCentralDistribution();SuppressLegacySpines();UpdateInstances();AttachPanel();
+    BuildCentralDistribution();SuppressLegacySpines();RefitCadWorktables();UpdateInstances();AttachPanel();
     UE_LOG(LogTemp,Display,TEXT("MPR_SORTER: ready, 22 machines, 96 removable carts, two shared distribution loops / six CAD operators, 1632 scene cells; demonstration data."));
 }
 
@@ -432,10 +434,49 @@ FVector AMPRSorterSimulationActor::CarrierParcelPoint(const FMachine& M,const MP
     }
     return Parcel;
 }
+void AMPRSorterSimulationActor::RefitCadWorktables()
+{
+    // The old GIE2 proxy used the complete CAD block bounds, including people
+    // and floor symbols. Replace only source-matched game-world instances with
+    // its two measured tabletops; preserve edited or unrelated worktables.
+    RefittedCadWorktables=0;
+    if(!GetWorld()||!GetWorld()->IsGameWorld())return;
+    TSet<int32> Matched;
+    for(TActorIterator<AActor> It(GetWorld());It;++It)
+    {
+        TArray<UInstancedStaticMeshComponent*> Components;It->GetComponents(Components);
+        for(auto* C:Components)
+        {
+            if(!C->GetStaticMesh()||C->GetStaticMesh()->GetName()!=TEXT("SM_MPR_WorkTable"))continue;
+            const int32 OriginalCount=C->GetInstanceCount();
+            for(int32 I=0;I<OriginalCount;++I)
+            {
+                FTransform Old;if(!C->GetInstanceTransform(I,Old,true))continue;
+                for(int32 J=0;J<UE_ARRAY_COUNT(MPRCadWorkers::WorkTables);++J)
+                {
+                    const auto& Table=MPRCadWorkers::WorkTables[J];
+                    if(Matched.Contains(J)||!Old.GetLocation().Equals(FVector(Table.OldCenter[0],Table.OldCenter[1],Table.OldCenter[2]),.1)
+                        ||!Old.GetScale3D().Equals(FVector(Table.OldScale[0],Table.OldScale[1],Table.OldScale[2]),.001)
+                        ||FMath::Abs(FMath::FindDeltaAngleDegrees(Old.Rotator().Yaw,Table.OldYaw))>.01)continue;
+                    for(int32 K=0;K<2;++K)
+                    {
+                        const FTransform Correct(FRotator(0,Table.Yaw[K],0),
+                            FVector(Table.Centers[K][0],Table.Centers[K][1],Table.Centers[K][2]),
+                            FVector(Table.SizeCm[0]/100.,Table.SizeCm[1]/120.,1.));
+                        if(K==0)C->UpdateInstanceTransform(I,Correct,true,false,true);else C->AddInstance(Correct,true);
+                    }
+                    Matched.Add(J);++RefittedCadWorktables;break;
+                }
+            }
+            C->MarkRenderStateDirty();
+        }
+    }
+}
+
 bool AMPRSorterSimulationActor::BuildWorkers()
 {
     for(auto& C:RuntimeWorkers)if(C)C->DestroyComponent();
-    RuntimeWorkers.Reset();
+    RuntimeWorkers.Reset();CadWorkerIndices.Reset();
     auto AddWorker=[this]()
     {
         const FName Name(*FString::Printf(TEXT("MannyWorker_%02d"),RuntimeWorkers.Num()));
@@ -445,10 +486,33 @@ bool AMPRSorterSimulationActor::BuildWorkers()
         return C->InitializeWorker(WorkerMesh,WorkerIdle);
     };
     // One hidden exchange worker per machine; only the aisle owner is visible.
-    // Production operators exist exclusively at the six CAD feed stations.
+    // Six feed operators animate with the central loop; all other source CAD
+    // personnel remain at their surveyed workstations, not at every sorter.
     for(auto& M:Machines){M.WorkerOffset=RuntimeWorkers.Num();if(!AddWorker())return false;}
     for(auto& B:DistributionBanks)for(auto& S:B.Stations)if(S.bManual)
     {S.WorkerIndex=RuntimeWorkers.Num();if(!AddWorker())return false;}
+    for(const auto& Source:MPRCadWorkers::Workers)
+    {
+        if(Source.CentralFeed)
+        {
+            int32 Index=INDEX_NONE;
+            for(const auto& B:DistributionBanks)for(const auto& S:B.Stations)
+                if(S.bManual&&S.Feet.Equals(FVector(Source.Feet[0],Source.Feet[1],Source.Feet[2]),.1))Index=S.WorkerIndex;
+            if(Index==INDEX_NONE){Error=TEXT("CAD 上料人员与中央工位不匹配");return false;}
+            CadWorkerIndices.Add(Index);continue;
+        }
+        const int32 Index=RuntimeWorkers.Num();if(!AddWorker())return false;
+        CadWorkerIndices.Add(Index);
+        FMPRWorkerPoseInput Pose;
+        const FVector Feet(Source.Feet[0],Source.Feet[1],Source.Feet[2]);
+        const FQuat Turn=FRotator(0,Source.Yaw,0).Quaternion();
+        Pose.BodyWorld=FTransform(Turn,Feet);Pose.GripAlpha=0;Pose.TorsoLeanDegrees=2;
+        Pose.LeftPalmWorld=Feet+Turn.RotateVector(FVector(23,-18,103));
+        Pose.RightPalmWorld=Feet+Turn.RotateVector(FVector(23,18,103));
+        RuntimeWorkers[Index]->ApplyWorkerPose(Pose);
+        // Fixed CAD staff do not need a per-frame bone solve.
+        RuntimeWorkers[Index]->SetComponentTickEnabled(false);
+    }
     return true;
 }
 void AMPRSorterSimulationActor::UpdateWorker(int32 Index,const FMachine& M,const FMPRWorkerPoseInput& Local)
@@ -683,6 +747,8 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
     Root->SetNumberField(TEXT("tower_instances"),Towers->GetInstanceCount());Root->SetNumberField(TEXT("tray_instances"),Trays->GetInstanceCount());
     Root->SetNumberField(TEXT("parcel_instances"),Parcels->GetInstanceCount());Root->SetNumberField(TEXT("infeed_instances"),InfeedParcels->GetInstanceCount());
     Root->SetNumberField(TEXT("worker_slots"),RuntimeWorkers.Num());Root->SetNumberField(TEXT("bin_parcel_instances"),BinParcels->GetInstanceCount());
+    Root->SetNumberField(TEXT("cad_worker_count"),CadWorkerIndices.Num());
+    Root->SetNumberField(TEXT("refitted_cad_worktables"),RefittedCadWorktables);
     Root->SetBoolField(TEXT("panel_attached"),Panel!=nullptr);
     auto Ids=[](const std::vector<uint64_t>& Values)
     {TArray<TSharedPtr<FJsonValue>> Result;for(uint64_t Id:Values)Result.Add(MakeShared<FJsonValueNumber>(double(Id)));return Result;};
@@ -694,6 +760,17 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
     };
     if(Diagnostics())
     {
+        TArray<TSharedPtr<FJsonValue>> CadWorkers;
+        for(int32 I=0;I<CadWorkerIndices.Num();++I)
+        {
+            const auto& Source=MPRCadWorkers::Workers[I];auto Row=MakeShared<FJsonObject>();
+            Row->SetNumberField(TEXT("worker_index"),CadWorkerIndices[I]);
+            Row->SetStringField(TEXT("source_handle"),UTF8_TO_TCHAR(Source.SourceHandle));
+            Row->SetArrayField(TEXT("feet_cm"),XYZ(FVector(Source.Feet[0],Source.Feet[1],Source.Feet[2])));
+            Row->SetNumberField(TEXT("yaw_deg"),Source.Yaw);Row->SetBoolField(TEXT("central_feed"),Source.CentralFeed);
+            CadWorkers.Add(MakeShared<FJsonValueObject>(Row));
+        }
+        Root->SetArrayField(TEXT("cad_workers"),CadWorkers);
         TArray<TSharedPtr<FJsonValue>> Workers;
         for(int32 I=0;I<RuntimeWorkers.Num();++I)
         {

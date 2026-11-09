@@ -123,6 +123,7 @@ private:
     FVector CarrierParcelPoint(const FMachine& Machine,const MPRSorter::Carrier& Carrier,FQuat& Turn) const;
     void UpdateWorker(int32 Index,const FMachine& Machine,const FMPRWorkerPoseInput& Input);
     bool BuildWorkers();
+    void RefitCadWorktables();
     bool BuildCartInstances(bool bEditorPreview=false);
     void ClearCartInstances();
     bool AdvanceFleet(double WallSeconds);
@@ -152,9 +153,11 @@ private:
     UPROPERTY(Transient) TObjectPtr<UMPRSorterHUDWidget> Panel;
     TArray<FMachine> Machines;
     TArray<FDistributionBank> DistributionBanks;
+    TArray<int32> CadWorkerIndices;
     uint64 NextCentralParcelId=1;
     double FleetTimeRemainder=0;
     int32 SuppressedSpineInstances=0;
+    int32 RefittedCadWorktables=0;
     FString Error;
     int32 SelectedMachine=0,PendingFocus=INDEX_NONE;
     int32 ExchangeOwner=INDEX_NONE,NextExchangeMachine=0;
