@@ -45,6 +45,8 @@ public:
     UFUNCTION(BlueprintCallable, Category="MPR Sorter") void ResetSimulation();
     UFUNCTION(BlueprintCallable, Category="MPR Sorter") void SetSimulationRate(double Rate);
     UFUNCTION(BlueprintCallable, Category="MPR Sorter") void SetAutomaticCollection(bool bEnabled);
+    // Disabling incoming work drains parcels but keeps the central loop running.
+    UFUNCTION(BlueprintCallable, Category="MPR Sorter") void SetCentralFeedingEnabled(bool bEnabled);
     UFUNCTION(BlueprintCallable, Category="MPR Sorter") void ClearFullBins();
     UFUNCTION(BlueprintCallable, Category="MPR Sorter") void FocusMachine(int32 Index);
     UFUNCTION(BlueprintPure, Category="MPR Sorter") FString GetSimulationReportJson() const;

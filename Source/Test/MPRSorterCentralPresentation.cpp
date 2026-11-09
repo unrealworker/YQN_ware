@@ -32,7 +32,10 @@ bool AMPRSorterSimulationActor::LoadCentralDistribution()
         B.Geometry.HalfStraightCm=BankIndex==0?MPRCentralCad::Half64:MPRCentralCad::Half120;
         B.Geometry.RadiusCm=BankIndex==0?MPRCentralCad::Radius64:MPRCentralCad::Radius120;
         MPRCentral::Config C;C.LoopLengthCm=4*B.Geometry.HalfStraightCm+2*PI*B.Geometry.RadiusCm;
-        C.CarrierCount=BankIndex==0?48:12;C.SpeedCmS=100;C.LoadingSeconds=3.;C.TransferSeconds=2.5;
+        // Continuous circulation; hand actions and side transfers occur while
+        // the shared chain moves. These are presentation timings, not PLC data.
+        C.CarrierCount=BankIndex==0?96:24;C.SpeedCmS=90;C.LoadingSeconds=.9;
+        C.TransferSeconds=.3;C.RecoverySeconds=.3;C.MaxPendingPerTarget=8;
         if(BankIndex==0)for(const auto& Source:MPRCentralCad::Workers)
         {
             FFeedStation S;S.Feet=Vec(Source.Feet);S.Yaw=Source.Yaw;
@@ -145,6 +148,11 @@ bool AMPRSorterSimulationActor::AdvanceCentralDistribution(double Seconds)
     return true;
 }
 
+void AMPRSorterSimulationActor::SetCentralFeedingEnabled(bool bEnabled)
+{
+    for(auto& B:DistributionBanks)B.Simulation.SetFeedingEnabled(bEnabled);
+}
+
 double AMPRSorterSimulationActor::CentralLiftHeight(const MPRCentral::Carrier& C) const
 {
     using P=MPRCentral::CarrierPhase;
@@ -236,12 +244,21 @@ void AMPRSorterSimulationActor::AppendCentralReport(const TSharedPtr<FJsonObject
         auto Row=MakeShared<FJsonObject>();Row->SetStringField(TEXT("id"),B.Id);Row->SetNumberField(TEXT("sim_time"),S.SimTime);
         Row->SetNumberField(TEXT("generated"),double(S.Generated));Row->SetNumberField(TEXT("delivered"),double(S.Delivered));Row->SetNumberField(TEXT("active"),S.Active);
         Row->SetBoolField(TEXT("stopped"),S.LoopStopped);Row->SetNumberField(TEXT("blocked_passes"),double(S.BlockedPasses));
+        const auto& Config=B.Simulation.GetConfig();
+        Row->SetNumberField(TEXT("loop_length_cm"),Config.LoopLengthCm);
+        Row->SetNumberField(TEXT("speed_cm_s"),Config.SpeedCmS);
+        Row->SetNumberField(TEXT("loop_phase01"),S.LoopPhase01);
+        Row->SetNumberField(TEXT("loading_seconds"),Config.LoadingSeconds);
+        Row->SetBoolField(TEXT("feeding_enabled"),B.Simulation.IsFeedingEnabled());
         TArray<TSharedPtr<FJsonValue>> Stations,Carriers,Links;
+        int32 SourceIndex=0;
         for(const auto& Station:B.Stations)
         {
             auto Item=MakeShared<FJsonObject>();Item->SetBoolField(TEXT("manual"),Station.bManual);Item->SetArrayField(TEXT("feet_cm"),XYZ(Station.Feet));
             Item->SetNumberField(TEXT("worker_index"),Station.WorkerIndex);Item->SetArrayField(TEXT("drop_cm"),XYZ(Station.Drop));
-            Item->SetNumberField(TEXT("yaw_deg"),Station.Yaw);Stations.Add(MakeShared<FJsonValueObject>(Item));
+            Item->SetNumberField(TEXT("yaw_deg"),Station.Yaw);
+            Item->SetNumberField(TEXT("fed_count"),double(B.Simulation.GetFeedCounts()[SourceIndex++]));
+            Stations.Add(MakeShared<FJsonValueObject>(Item));
         }
         for(int32 I=0;I<B.Targets.Num();++I)
         {

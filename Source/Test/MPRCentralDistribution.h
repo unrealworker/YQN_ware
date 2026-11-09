@@ -14,6 +14,10 @@ enum class CarrierPhase : uint8_t { Loading,Travel,Discharging,EmptyReturn,Retra
 struct Config
 {
     double LoopLengthCm=0,SpeedCmS=100,LoadingSeconds=1.2,TransferSeconds=1.,RecoverySeconds=1.;
+    // Loading starts upstream so the moving tray meets the fixed feed port at
+    // this fraction. Discharge reaches its fixed port at transfer completion.
+    double FeedHandoffProgress=.8;
+    int MaxPendingPerTarget=4;
     int CarrierCount=1;
     std::vector<double> FeedDistances01;
     // Array index identifies the destination sorter in this bank.
@@ -46,7 +50,9 @@ public:
     bool Initialize(const Config& InConfig,std::string& Error);
     // The owner resets the shared global ID counter only when all banks reset.
     void Reset();
-    void SetPlaying(bool Value) { Playing=Ready&&Value; }
+    void SetPlaying(bool Value) { Playing=Ready&&Value;Totals.LoopStopped=!Playing; }
+    void SetFeedingEnabled(bool Value) { FeedingEnabled=Value; }
+    bool IsFeedingEnabled() const { return FeedingEnabled; }
     bool IsPlaying() const { return Playing; }
     bool IsReady() const { return Ready; }
     // Delta is already simulation time: the actor applies the common rate once.
@@ -56,21 +62,25 @@ public:
     const Config& GetConfig() const { return Settings; }
     const std::vector<Carrier>& GetCarriers() const { return Carriers; }
     const Stats& GetStats() const { return Totals; }
+    const std::vector<uint64_t>& GetFeedCounts() const { return FeedCounts; }
 
 private:
     struct Stop { double Distance01=0;int SourceStation=-1,TargetIndex=-1; };
     void SettleEvents(uint64_t& NextGlobalParcelId,const CanAcceptCallback& CanAccept,const AcceptCallback& Accept);
     void Integrate(double Seconds);
     double NextEventSeconds() const;
-    bool HasDwell() const;
-    int FindTarget() const;
+    int FindTarget(const Carrier& Incoming,const CanAcceptCallback& CanAccept) const;
+    double EarliestHandoffSeconds(size_t CarrierIndex,int Target) const;
+    bool IsOldestForTarget(const Carrier& C) const;
+    bool CanFeedAt(int Source) const;
     Config Settings;
     std::vector<Carrier> Carriers;
     std::vector<Stop> Stops;
     std::vector<size_t> NextStops;
     std::vector<double> Elapsed;
+    std::vector<uint64_t> FeedCounts;
     Stats Totals;
     int NextTarget=0;
-    bool Ready=false,Playing=false;
+    bool Ready=false,Playing=false,FeedingEnabled=true;
 };
 }
