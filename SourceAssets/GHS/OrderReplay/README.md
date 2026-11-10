@@ -58,6 +58,15 @@ Native automation tests: `GHS.Replay.Motion.DirectSeek`,
 `GHS.Replay.Motion.CargoOwnership`, `GHS.Replay.Motion.BoundedEvents`,
 `GHS.Replay.Motion.CompleteTrails`.
 
-For fresh meshes, run `replay_build_assets.py` in a separate background Blender
-process, then `replay_import_headless.py` in an isolated UE commandlet. Never run
-asset generation in the user's live Blender or save the original map.
+## 2026-11-10 叉车驾驶员更新
+
+普通人工叉车和追溯叉车已改用 MPR 同款 Manny，坐姿烘焙为静态网格。
+叉车当前源文件为 `SourceAssets/GHS_Normal/MannedForklift/manned_forklift_50k.blend`。
+重建这两个叉车网格时，使用后台 Blender 执行
+`Scripts/ghs/export_manny_forklift.py`，再在 UE 执行
+`Scripts/ghs/import_forklift_driver_manny.py`，保留 UV、原有 33 个材质槽顺序及新增人物材质。
+`Scripts/ghs/verify_manny_forklift_runtime.py` 用于独立游戏进程验证 16 辆普通叉车、5 辆追溯叉车及退出恢复。
+
+旧 `replay_build_assets.py` / `replay_import_headless.py` 是原始整套资产生成流程，
+不能直接用于当前叉车：旧网格合并不保留人物 UV，且会重排材质槽。
+其他回放资产若需重建，应先隔离输出并审核差异。不要在用户正在使用的 Blender 中生成资产，也不要保存原场景地图。
