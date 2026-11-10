@@ -439,9 +439,9 @@ void AMPRSorterSimulationActor::RefitCadWorktables()
     // The old GIE2 proxy used the complete CAD block bounds, including people
     // and floor symbols. Replace only source-matched game-world instances with
     // its two measured tabletops; preserve edited or unrelated worktables.
-    RefittedCadWorktables=0;
+    RefittedCadWorktables=0;RefittedCadOperatorStations=0;
     if(!GetWorld()||!GetWorld()->IsGameWorld())return;
-    TSet<int32> Matched;
+    TSet<int32> Matched,MatchedStations;
     for(TActorIterator<AActor> It(GetWorld());It;++It)
     {
         TArray<UInstancedStaticMeshComponent*> Components;It->GetComponents(Components);
@@ -466,6 +466,23 @@ void AMPRSorterSimulationActor::RefitCadWorktables()
                         if(K==0)C->UpdateInstanceTransform(I,Correct,true,false,true);else C->AddInstance(Correct,true);
                     }
                     Matched.Add(J);++RefittedCadWorktables;break;
+                }
+                for(int32 J=0;J<UE_ARRAY_COUNT(MPRCadWorkers::OperatorStations);++J)
+                {
+                    const auto& Station=MPRCadWorkers::OperatorStations[J];
+                    if(MatchedStations.Contains(J)||!Old.GetLocation().Equals(FVector(Station.OldCenter[0],Station.OldCenter[1],Station.OldCenter[2]),.1)
+                        ||!Old.GetScale3D().Equals(FVector(Station.OldScale[0],Station.OldScale[1],Station.OldScale[2]),.001)
+                        ||FMath::Abs(FMath::FindDeltaAngleDegrees(Old.Rotator().Yaw,Station.OldYaw))>.01)continue;
+                    // PW_TG_96C_IN is L-shaped. Its enclosing block rectangle
+                    // included the operator recess; only the side console is
+                    // a desk. Preserve the CAD person's root and facing.
+                    C->UpdateInstanceTransform(I,FTransform(FRotator(0,Station.ConsoleYaw,0),
+                        FVector(Station.ConsoleCenter[0],Station.ConsoleCenter[1],Station.ConsoleCenter[2]),
+                        FVector(Station.ConsoleSizeCm[0]/100.,Station.ConsoleSizeCm[1]/120.,1.)),true,false,true);
+                    // The main envelope overlaps CAD hardware 2C9AE5/115C25,
+                    // already represented by the distributor's return assembly.
+                    // A second solid deck would cut through its moving columns.
+                    MatchedStations.Add(J);++RefittedCadOperatorStations;break;
                 }
             }
             C->MarkRenderStateDirty();
@@ -749,6 +766,7 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
     Root->SetNumberField(TEXT("worker_slots"),RuntimeWorkers.Num());Root->SetNumberField(TEXT("bin_parcel_instances"),BinParcels->GetInstanceCount());
     Root->SetNumberField(TEXT("cad_worker_count"),CadWorkerIndices.Num());
     Root->SetNumberField(TEXT("refitted_cad_worktables"),RefittedCadWorktables);
+    Root->SetNumberField(TEXT("refitted_cad_operator_stations"),RefittedCadOperatorStations);
     Root->SetBoolField(TEXT("panel_attached"),Panel!=nullptr);
     auto Ids=[](const std::vector<uint64_t>& Values)
     {TArray<TSharedPtr<FJsonValue>> Result;for(uint64_t Id:Values)Result.Add(MakeShared<FJsonValueNumber>(double(Id)));return Result;};

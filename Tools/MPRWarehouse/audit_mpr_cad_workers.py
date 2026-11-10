@@ -49,7 +49,7 @@ def read_personnel_document():
             block_name = values.get(2, '')
         retain = section in ('HEADER', 'TABLES') or kind in ('SECTION', 'ENDSEC', 'EOF')
         if section == 'BLOCKS':
-            retain |= kind in ('BLOCK', 'ENDBLK', 'INSERT', 'ATTRIB', 'SEQEND') or block_name in PERSON_BLOCKS or (block_name == 'GIE2' and values.get(5) in ('10A50D', '10A50E'))
+            retain |= kind in ('BLOCK', 'ENDBLK', 'INSERT', 'ATTRIB', 'SEQEND') or block_name in PERSON_BLOCKS or block_name in ('PW_TG_96C_IN', 'asdeghu') or (block_name == 'GIE2' and values.get(5) in ('10A50D', '10A50E'))
         if section == 'ENTITIES':
             retain |= kind in ('INSERT', 'ATTRIB', 'SEQEND')
         if retain:
@@ -90,6 +90,13 @@ def emit_header(data):
     fmt = lambda p: '{'+','.join(f'{v:.8f}' for v in p)+'}'
     for t in data['work_tables']:
         lines.append('    {'+','.join([fmt(t['legacy_center_ue_cm']),fmt(t['legacy_scale']),f"{t['legacy_yaw_deg']:.8f}",'{'+','.join(fmt(s['center_ue_cm']) for s in t['surfaces'])+'}',fmt([180.,100.]),fmt([s['yaw_deg'] for s in t['surfaces']])])+'},')
+    lines += ['};',
+              'struct OperatorStation { const char* SourceHandle; const char* WorkerHandle; double OldCenter[3]; double OldScale[3]; double OldYaw; double ConsoleCenter[3]; double ConsoleSizeCm[2]; double ConsoleYaw; };',
+              'inline constexpr OperatorStation OperatorStations[] = {']
+    for t in data['operator_stations']:
+        lines.append('    {'+','.join(['"'+t['source_handle']+'"','"'+t['worker_source_handle']+'"',
+            fmt(t['legacy_center_ue_cm']),fmt(t['legacy_scale']),f"{t['legacy_yaw_deg']:.8f}",
+            fmt(t['console']['center_ue_cm']),fmt(t['console']['size_cm']),f"{t['console']['yaw_deg']:.8f}"])+'},')
     lines += ['};', f"inline constexpr int Count={data['count']};",
               f"inline constexpr int CentralFeedCount={data['central_feed_count']};",
               f'inline constexpr const char* SourceSha256="{data["source_sha256"]}";', '}']
@@ -196,6 +203,81 @@ def main():
                                   'source_vertices_ue_cm':[ue(p) for p in pts]})
         tables.append(t)
     assert len(tables) == 42
+    # PW_TG_96C_IN has an L-shaped equipment/console footprint. Its old full
+    # INSERT envelope incorrectly filled the adjacent operator standing recess.
+    operator_stations = []
+    e = doc.entitydb['2CCF60']
+    assert e.dxf.name == 'PW_TG_96C_IN'
+    mt = e.matrix44()
+    def line_points(handle):
+        line = doc.entitydb[handle]
+        assert line.dxftype() == 'LINE'
+        return list(mt.transform_vertices([line.dxf.start, line.dxf.end]))
+    console_handles = ['1D6B06','1D6B08','1D6C2F','1D6D63','1D6AA9']
+    # Edges give exact four axis bounds; do not include the long machine edge
+    # 1D6AA9 in the console X envelope or the monitor in the standing recess.
+    console_lo = (line_points('1D6B06')[0].x, line_points('1D6D63')[0].y)
+    console_hi = (line_points('1D6C2F')[0].x, line_points('1D6C2F')[1].y)
+    console_centre = ue([(console_lo[i]+console_hi[i])*.5 for i in range(2)])
+    console_size = [(console_hi[1]-console_lo[1])*2.54,(console_hi[0]-console_lo[0])*2.54]
+    deck_handles = ['1D6AFA','1D6AFB','1D6AFC','1D6AFD','1D6AFE','1D6AFF','1D6B00','1D6B01','1D6B02','1D6B03','1D6B04']
+    deck_box = BoundingBox(p for h in deck_handles for p in line_points(h))
+    central_root = doc.entitydb['2C9AE5']
+    central_end = doc.entitydb['115C25']
+    assert central_root.dxf.name == '480' and central_end.dxf.name == 'asdeghu'
+    central_matrix = Matrix44.chain(central_end.matrix44(),central_root.matrix44())
+    end_box = bbox.extents(doc.blocks['asdeghu'],fast=True)
+    end_world_box = BoundingBox(central_matrix.transform_vertices(end_box.cube_vertices()))
+    end_ue_box = BoundingBox(ue(p) for p in end_world_box.cube_vertices())
+    deck_ue_box = BoundingBox(ue(p) for p in deck_box.cube_vertices())
+    assert end_ue_box.contains(deck_ue_box)
+    old = next(r for r in operations if r['mesh']=='SM_MPR_WorkTable' and r['source_handles']==['2CCF60'])
+    person = next(w for w in workers if w['source_handle']=='2CCF61')
+    t = {'source_handle':'2CCF60','block':'PW_TG_96C_IN','worker_source_handle':'2CCF61',
+         'legacy_center_ue_cm':[old['position_m'][0]*100,-old['position_m'][1]*100,0.],
+         'legacy_scale':old['scale'],'legacy_yaw_deg':-old['rotation_deg'],
+         'console':{'source_handles':console_handles,'center_ue_cm':console_centre,'size_cm':console_size,
+                    'yaw_deg':90., 'xy_bounds_dxf':[console_lo,console_hi],
+                    'basis':'Measured outside console edges; rounded corners simplified only, worker recess stays open.'},
+         'excluded_machine_envelope':{'source_handles':deck_handles,'center_ue_cm':ue(deck_box.center),
+                 'size_cm':[deck_box.size.x*2.54,deck_box.size.y*2.54], 'yaw_deg':0.,
+                 'xy_bounds_dxf':[list(deck_box.extmin)[:2],list(deck_box.extmax)[:2]],
+                 'boundary_ue_cm':[ue(p) for p in [line_points('1D6AFA')[0],line_points('1D6B03')[1],line_points('1D6B01')[0],line_points('1D6B01')[1],line_points('1D6AFC')[1]]],
+                 'basis':'Reference XY envelope only; NOT a new tabletop or solid slab.',
+                 'runtime_policy':'Do not generate geometry. This reference lies inside the original CAD120 central end module and intersects the existing return loop; preserve that existing mechanism.',
+                 'overlapping_cad_module':{'source_handles':['2C9AE5','115C25'],'blocks':['480','asdeghu'],
+                                           'bounds_ue_cm':[list(end_ue_box.extmin),list(end_ue_box.extmax)],
+                                           'contains_entire_reference_envelope':True},
+                 'reason':'The 2D plan does not establish an independent tabletop height or vertical separation. Adding a 93 cm slab or guessed low plinth would obstruct the current moving return assembly.'},
+         'height_basis':'Display tabletop at 93 cm, matching the existing mesh. CAD provides XY only; not a surveyed Z.',
+         'body_clearance_cm':(person['body_anchor_dxf'][0]-console_hi[0])*2.54}
+    assert t['body_clearance_cm'] > 30
+    operator_stations.append(t)
+
+    # Audit all 256 personnel against every modeled worktable after source
+    # refits. This catches non-GIE2 equipment envelopes such as the user report.
+    def clearance(point, centre, size, yaw):
+        a=math.radians(yaw); dx,dy=[point[i]-centre[i] for i in range(2)]
+        xy=[math.cos(a)*dx+math.sin(a)*dy,-math.sin(a)*dx+math.cos(a)*dy]
+        q=[abs(xy[i])-size[i]*.5 for i in range(2)]
+        return math.hypot(*[max(0,v) for v in q])+min(max(q),0.)
+    replaced={t['source_handle'] for t in tables+operator_stations}
+    raw_tables=[dict(source_handles=t['source_handles'],center=[t['position_m'][0]*100,-t['position_m'][1]*100],size=[100*t['scale'][0],120*t['scale'][1]],yaw=-t['rotation_deg'])
+                for t in operations if t['mesh']=='SM_MPR_WorkTable' and not (set(t['source_handles']) & {x['source_handle'] for x in tables})]
+    after_tables=[t for t in raw_tables if not set(t['source_handles']) & replaced]
+    for t in tables:
+        after_tables.extend(dict(source_handles=[t['source_handle'],s['source_handle']],center=s['center_ue_cm'],size=s['size_cm'],yaw=s['yaw_deg']) for s in t['surfaces'])
+    for t in operator_stations:
+        after_tables.extend(dict(source_handles=[t['source_handle'],role],center=t[role]['center_ue_cm'],size=t[role]['size_cm'],yaw=t[role]['yaw_deg']) for role in ('console',))
+    def audit(surfaces):
+        return [dict(worker_source_handle=w['source_handle'],table_source_handles=t['source_handles'],root_to_edge_cm=clearance(w['feet_ue_cm'],t['center'],t['size'],t['yaw']))
+                for w in workers for t in surfaces if clearance(w['feet_ue_cm'],t['center'],t['size'],t['yaw']) < 15.]
+    before_issues,after_issues=audit(raw_tables),audit(after_tables)
+    assert len(before_issues)==1 and before_issues[0]['worker_source_handle']=='2CCF61'
+    assert not after_issues,after_issues
+    table_audit=dict(worker_count=len(workers),body_radius_cm=15.,pre_fix_issues=before_issues,
+                     post_fix_issues=after_issues,checked_surface_count=len(after_tables),
+                     minimum_root_clearance_cm=min(clearance(w['feet_ue_cm'],t['center'],t['size'],t['yaw']) for w in workers for t in after_tables))
     data = {'source': str(SOURCE), 'source_sha256': digest, 'count': len(workers),
             'central_feed_count': 6, 'additional_count': 250, 'block_chain_counts': dict(counts),
             'coordinate_basis': {'dxf_origin': [12800., 8000.], 'to_ue_cm': '[2.54*(x-12800),-2.54*(y-8000),0]',
@@ -205,7 +287,7 @@ def main():
             'audit': {'modelspace_recursive': True, 'includes_nested_gie2_and_anonymous_blocks': True,
                       'wrapper_children_counted_once': True, 'minimum_person_separation_cm': separation,
                       'excluded_named_assembly': '小黄人 is a large equipment assembly, not a personnel symbol; recursively checked for recognized personnel anyway.'},
-            'workers': workers, 'work_tables': tables}
+            'workers': workers, 'work_tables': tables, 'operator_stations':operator_stations, 'all_worker_table_clearance_audit':table_audit}
     (OUT / 'cad_workers.json').write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
     emit_header(data)
 
@@ -244,6 +326,52 @@ def main():
             p = q(anchor(name)[0]);dr.ellipse((p[0]-7,p[1]-7,p[0]+7,p[1]+7),fill='#df5b2a')
         dr.text((35, 20), 'Original CAD symbol | local +X ->', fill='#173247')
         im.save(OUT / filename)
+    # Before/after CAD footprint sheet for the separately reported single
+    # operator station. The empty standing recess is the reason for this refit.
+    station = operator_stations[0]
+    mt = doc.entitydb[station['source_handle']].matrix44()
+    pw_lines = []
+    for entity in doc.blocks[station['block']]:
+        if entity.dxftype() in ('LINE','ARC','CIRCLE','ELLIPSE','SPLINE'):
+            try:
+                pts = [ue(p) for p in mt.transform_vertices(path.make_path(entity).flattening(.1))]
+                if len(pts)>1:pw_lines.append(pts)
+            except (TypeError,ValueError,NotImplementedError):pass
+    old_c=station['legacy_center_ue_cm'];old_s=station['legacy_scale']
+    person=next(w for w in workers if w['source_handle']==station['worker_source_handle'])['feet_ue_cm']
+    bounds=BoundingBox(p for line in pw_lines for p in line)
+    im=Image.new('RGB',(1700,900),'#f8fafc');dr=ImageDraw.Draw(im)
+    font=ImageFont.truetype('C:/Windows/Fonts/msyh.ttc',22)
+    small=ImageFont.truetype('C:/Windows/Fonts/msyh.ttc',18)
+    scale=2.65
+    def qp(p,offset):return (offset+70+(p[0]-bounds.extmin.x)*scale,160+(p[1]-bounds.extmin.y)*scale)
+    def rect(c,sz,yaw):
+        angle=math.radians(yaw);ca,sa=math.cos(angle),math.sin(angle)
+        return [[c[0]+ca*x-sa*y,c[1]+sa*x+ca*y] for x,y in [(-sz[0]/2,-sz[1]/2),(sz[0]/2,-sz[1]/2),(sz[0]/2,sz[1]/2),(-sz[0]/2,sz[1]/2)]]
+    for offset,title,after in [(0,'修改前：整块外包框填平了人员站位',False),(850,'修改后：保留原 CAD 的 L 形站位凹口',True)]:
+        dr.text((offset+40,25),title,font=font,fill='#173247')
+        if after:
+            dr.polygon([qp(p,offset) for p in rect(station['console']['center_ue_cm'],station['console']['size_cm'],90)],fill='#cae6df',outline='#21765a',width=3)
+            # Existing central machinery occupies this source envelope. Draw
+            # only the reference boundary; never suggest a new filled slab.
+            deck=station['excluded_machine_envelope']['boundary_ue_cm']
+            dr.line([qp(p,offset) for p in deck+[deck[0]]],fill='#8395a4',width=2)
+            center=[-11155.743336,-1636.737051];h=367.1;radius=44.
+            arc=[[center[0]+radius*math.cos(math.pi*i/50),center[1]+h+radius*math.sin(math.pi*i/50)] for i in range(51)]
+            dr.line([qp(p,offset) for p in arc],fill='#475ac4',width=4)
+            dr.text((offset+135,280),'已有中央回转机构：不叠加实心台面',font=small,fill='#475ac4')
+        else:
+            dr.polygon([qp(p,offset) for p in rect(old_c,[100*old_s[0],120*old_s[1]],90)],fill='#f5dbdb',outline='#be3b3b',width=3)
+        for line in pw_lines:dr.line([qp(p,offset) for p in line],fill='#587087',width=1)
+        x,y=qp(person,offset);rr=15*scale
+        dr.ellipse((x-rr,y-rr,x+rr,y+rr),outline='#dc6c17',width=3)
+        dr.ellipse((x-5,y-5,x+5,y+5),fill='#dc6c17')
+        dr.text((offset+40,755),'橙色：2CCF61 原 CAD 人员躯干中心及 15 cm 校核半径',font=small,fill='#173247')
+        text='旧桌面穿入躯干中心 49.01 cm' if not after else '仅收窄侧操作台；不增加主机板；距台边 36.21 cm'
+        dr.text((offset+40,790),text,font=small,fill='#173247')
+    dr.text((40,845),'原图：PW_TG_96C_IN / 2CCF60；人员位置与朝向不变。CAD 仅确定平面；93 cm 台高为现有展示值。',font=small,fill='#173247')
+    im.save(OUT/'operator_station_audit.png')
+
     # Overview uses the existing source extraction only as a footprint backdrop;
     # every coloured person comes from the fresh recursive scan above.
     extracted = json.loads((ROOT / 'SourceAssets/MPR/mpr_cad_extracted.json').read_text(encoding='utf8'))

@@ -23586,5 +23586,159 @@
         }
       ]
     }
-  ]
+  ],
+  "operator_stations": [
+    {
+      "source_handle": "2CCF60",
+      "block": "PW_TG_96C_IN",
+      "worker_source_handle": "2CCF61",
+      "legacy_center_ue_cm": [
+        -11168.231,
+        -1181.341,
+        0.0
+      ],
+      "legacy_scale": [
+        1.99889,
+        2.260392,
+        1
+      ],
+      "legacy_yaw_deg": 90.0,
+      "console": {
+        "source_handles": [
+          "1D6B06",
+          "1D6B08",
+          "1D6C2F",
+          "1D6D63",
+          "1D6AA9"
+        ],
+        "center_ue_cm": [
+          -11208.348572838813,
+          -1126.493639137664,
+          0.0
+        ],
+        "size_cm": [
+          90.19505415360342,
+          80.79556957440204
+        ],
+        "yaw_deg": 90.0,
+        "xy_bounds_dxf": [
+          [
+            8371.359701722042,
+            8425.746500811363
+          ],
+          [
+            8403.168981082043,
+            8461.256364651364
+          ]
+        ],
+        "basis": "Measured outside console edges; rounded corners simplified only, worker recess stays open."
+      },
+      "excluded_machine_envelope": {
+        "source_handles": [
+          "1D6AFA",
+          "1D6AFB",
+          "1D6AFC",
+          "1D6AFD",
+          "1D6AFE",
+          "1D6AFF",
+          "1D6B00",
+          "1D6B01",
+          "1D6B02",
+          "1D6B03",
+          "1D6B04"
+        ],
+        "center_ue_cm": [
+          -11155.751457002016,
+          -1227.9380764312618,
+          0.0
+        ],
+        "size_cm": [
+          239.9868403200027,
+          102.69436875359553
+        ],
+        "yaw_deg": 0.0,
+        "xy_bounds_dxf": [
+          [
+            8360.730363322042,
+            8463.224760651365
+          ],
+          [
+            8455.213371322043,
+            8503.655614491363
+          ]
+        ],
+        "boundary_ue_cm": [
+          [
+            -11275.744877162015,
+            -1176.5908920544664,
+            0.0
+          ],
+          [
+            -11057.256857954013,
+            -1176.5908920544664,
+            0.0
+          ],
+          [
+            -11035.758036842011,
+            -1198.089713166463,
+            0.0
+          ],
+          [
+            -11035.758036842011,
+            -1279.2852608080618,
+            0.0
+          ],
+          [
+            -11275.744877162015,
+            -1279.2852608080618,
+            0.0
+          ]
+        ],
+        "basis": "Reference XY envelope only; NOT a new tabletop or solid slab.",
+        "runtime_policy": "Do not generate geometry. This reference lies inside the original CAD120 central end module and intersects the existing return loop; preserve that existing mechanism.",
+        "overlapping_cad_module": {
+          "source_handles": [
+            "2C9AE5",
+            "115C25"
+          ],
+          "blocks": [
+            "480",
+            "asdeghu"
+          ],
+          "bounds_ue_cm": [
+            [
+              -11303.855706825558,
+              -1281.5704336965446,
+              0.0
+            ],
+            [
+              -11032.593335755184,
+              -1167.387051072864,
+              0.0
+            ]
+          ],
+          "contains_entire_reference_envelope": true
+        },
+        "reason": "The 2D plan does not establish an independent tabletop height or vertical separation. Adding a 93 cm slab or guessed low plinth would obstruct the current moving return assembly."
+      },
+      "height_basis": "Display tabletop at 93 cm, matching the existing mesh. CAD provides XY only; not a surveyed Z.",
+      "body_clearance_cm": 36.207679516420974
+    }
+  ],
+  "all_worker_table_clearance_audit": {
+    "worker_count": 256,
+    "body_radius_cm": 15.0,
+    "pre_fix_issues": [
+      {
+        "worker_source_handle": "2CCF61",
+        "table_source_handles": [
+          "2CCF60"
+        ],
+        "root_to_edge_cm": -49.0110929586985
+      }
+    ],
+    "post_fix_issues": [],
+    "checked_surface_count": 230,
+    "minimum_root_clearance_cm": 22.751970605384685
+  }
 }

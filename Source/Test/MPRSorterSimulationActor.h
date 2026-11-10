@@ -158,6 +158,7 @@ private:
     double FleetTimeRemainder=0;
     int32 SuppressedSpineInstances=0;
     int32 RefittedCadWorktables=0;
+    int32 RefittedCadOperatorStations=0;
     FString Error;
     int32 SelectedMachine=0,PendingFocus=INDEX_NONE;
     int32 ExchangeOwner=INDEX_NONE,NextExchangeMachine=0;
