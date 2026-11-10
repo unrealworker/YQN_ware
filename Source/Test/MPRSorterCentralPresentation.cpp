@@ -211,7 +211,11 @@ void AMPRSorterSimulationActor::UpdateCentralDistribution()
     for(auto& B:DistributionBanks)
     {
         int32 I=B.CarrierOffset;
-        for(const auto& C:B.Simulation.GetCarriers())
+        std::vector<MPRCentral::Carrier> DisplayCarriers;
+        DisplayCarriers.reserve(B.Simulation.GetCarriers().size());
+        for(size_t Index=0;Index<B.Simulation.GetCarriers().size();++Index)
+            DisplayCarriers.push_back(B.Simulation.GetPresentationCarrier(Index,FleetTimeRemainder));
+        for(const auto& C:DisplayCarriers)
         {
             double Heading;FVector Point=MPRCentralGeometry::CentralPoint(B.Geometry,C.Distance01,Heading);
             const FQuat Turn(FVector::UpVector,Heading);
@@ -226,8 +230,8 @@ void AMPRSorterSimulationActor::UpdateCentralDistribution()
             const FQuat Turn=FRotator(0,S.Yaw,0).Quaternion();
             const FVector RelaxL=S.Feet+Turn.RotateVector(FVector(25,-18,107)),RelaxR=S.Feet+Turn.RotateVector(FVector(25,18,107));
             FMPRWorkerPoseInput Pose;Pose.BodyWorld=FTransform(Turn,S.Feet);Pose.LeftPalmWorld=RelaxL;Pose.RightPalmWorld=RelaxR;
-            Pose.SimulationTime=B.Simulation.GetStats().SimTime;Pose.TorsoLeanDegrees=3;
-            for(const auto& C:B.Simulation.GetCarriers())
+            Pose.SimulationTime=B.Simulation.GetStats().SimTime+FleetTimeRemainder;Pose.TorsoLeanDegrees=3;
+            for(const auto& C:DisplayCarriers)
             {
                 if(C.Phase!=MPRCentral::CarrierPhase::Loading||C.SourceStation!=SIndex)continue;
                 const double T=C.Progress01;const FVector Left=Turn.RotateVector(FVector(0,-1,0));
@@ -253,6 +257,8 @@ void AMPRSorterSimulationActor::AppendCentralReport(const TSharedPtr<FJsonObject
     {
         const auto& S=B.Simulation.GetStats();Generated+=S.Generated;Delivered+=S.Delivered;InTransit+=S.Active;
         auto Row=MakeShared<FJsonObject>();Row->SetStringField(TEXT("id"),B.Id);Row->SetNumberField(TEXT("sim_time"),S.SimTime);
+        Row->SetNumberField(TEXT("visual_time"),S.SimTime+FleetTimeRemainder);
+        Row->SetNumberField(TEXT("visual_residual_seconds"),FleetTimeRemainder);
         Row->SetNumberField(TEXT("generated"),double(S.Generated));Row->SetNumberField(TEXT("delivered"),double(S.Delivered));Row->SetNumberField(TEXT("active"),S.Active);
         Row->SetBoolField(TEXT("stopped"),S.LoopStopped);Row->SetNumberField(TEXT("blocked_passes"),double(S.BlockedPasses));
         const auto& Config=B.Simulation.GetConfig();
@@ -278,14 +284,17 @@ void AMPRSorterSimulationActor::AppendCentralReport(const TSharedPtr<FJsonObject
             Item->SetArrayField(TEXT("machine_entry_cm"),XYZ(M.World.TransformPosition(M.Entry)));
             Links.Add(MakeShared<FJsonValueObject>(Item));
         }
-        for(const auto& C:B.Simulation.GetCarriers())
+        for(size_t Index=0;Index<B.Simulation.GetCarriers().size();++Index)
         {
+            const auto& C=B.Simulation.GetCarriers()[Index];
+            const auto Display=B.Simulation.GetPresentationCarrier(Index,FleetTimeRemainder);
             if(C.ParcelId)Own(C.ParcelId);auto Item=MakeShared<FJsonObject>();double Heading;
-            FVector Tray=MPRCentralGeometry::CentralPoint(B.Geometry,C.Distance01,Heading);Tray.Z=CentralLiftHeight(C);
+            FVector Tray=MPRCentralGeometry::CentralPoint(B.Geometry,Display.Distance01,Heading);Tray.Z=CentralLiftHeight(Display);
             Item->SetNumberField(TEXT("parcel_id"),double(C.ParcelId));Item->SetNumberField(TEXT("state"),int32(C.Phase));Item->SetNumberField(TEXT("progress"),C.Progress01);
+            Item->SetNumberField(TEXT("visual_distance01"),Display.Distance01);Item->SetNumberField(TEXT("visual_progress"),Display.Progress01);
             Item->SetNumberField(TEXT("distance01"),C.Distance01);Item->SetNumberField(TEXT("source_station"),C.SourceStation);
             Item->SetNumberField(TEXT("target_machine"),B.Targets.IsValidIndex(C.TargetIndex)?B.Targets[C.TargetIndex]:INDEX_NONE);
-            Item->SetArrayField(TEXT("tray_cm"),XYZ(Tray));if(C.ParcelId)Item->SetArrayField(TEXT("parcel_cm"),XYZ(CentralParcelPoint(B,C)));
+            Item->SetArrayField(TEXT("tray_cm"),XYZ(Tray));if(C.ParcelId)Item->SetArrayField(TEXT("parcel_cm"),XYZ(CentralParcelPoint(B,Display)));
             Carriers.Add(MakeShared<FJsonValueObject>(Item));
         }
         Row->SetArrayField(TEXT("stations"),Stations);Row->SetArrayField(TEXT("carriers"),Carriers);Row->SetArrayField(TEXT("connections"),Links);Banks.Add(MakeShared<FJsonValueObject>(Row));

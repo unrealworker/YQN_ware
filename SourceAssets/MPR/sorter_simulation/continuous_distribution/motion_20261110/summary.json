@@ -1,0 +1,132 @@
+{
+  "date": "2026-11-10",
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "source_commit_before": "26a262a",
+  "baseline_run": "20261110T032942811356Z",
+  "final_run": "20261110T035239129149Z",
+  "automation_passed": 24,
+  "automation_failed": 0,
+  "checks": [
+    {
+      "name": "native_columns_subtick_60_hz",
+      "passed": true,
+      "frames": 240,
+      "carriers": 120,
+      "frozen_carrier_frames": 0,
+      "max_distance_error_cm": 7.872440677858528e-05,
+      "failed_frames": 0,
+      "scope": "Native instance transforms after production diagnostic advance; all carriers include straight, bend and loop-wrap locations."
+    },
+    {
+      "name": "native_columns_subtick_120_hz",
+      "passed": true,
+      "frames": 240,
+      "carriers": 120,
+      "frozen_carrier_frames": 0,
+      "max_distance_error_cm": 1.6572059122976768e-05,
+      "failed_frames": 0,
+      "scope": "Native instance transforms after production diagnostic advance; all carriers include straight, bend and loop-wrap locations."
+    },
+    {
+      "name": "native_columns_subtick_irregular",
+      "passed": true,
+      "frames": 240,
+      "carriers": 120,
+      "frozen_carrier_frames": 0,
+      "max_distance_error_cm": 0.0009306153439441189,
+      "failed_frames": 0,
+      "scope": "Native instance transforms after production diagnostic advance; all carriers include straight, bend and loop-wrap locations."
+    },
+    {
+      "name": "manual_pause_preserves_fractional_render_pose",
+      "passed": true,
+      "max_motion_cm": 0.0
+    },
+    {
+      "name": "resume_has_no_backwards_or_delayed_jump",
+      "passed": true,
+      "restart_error_cm": 0.0,
+      "first_step": {
+        "dt": 0.009,
+        "stopped": 0,
+        "max_error_cm": 1.1437646251888367e-05,
+        "min_distance_cm": 0.809988562353748,
+        "max_distance_cm": 0.8100000000004002
+      }
+    },
+    {
+      "name": "actual_tick_per_frame_60",
+      "passed": true,
+      "frames": 240,
+      "sampled_carriers": 12,
+      "cap_fps": 60,
+      "mean_observed_fps": 59.99793761979825,
+      "p95_frame_ms": 16.666799783706665,
+      "frozen_carrier_frames": 0,
+      "failed_frames": 0,
+      "long_frame_count": 0,
+      "max_distance_error_cm": 7.311583634694863e-05,
+      "full_state_reads_during_sample": 0,
+      "scope": "Actual native actor Tick plus lightweight ISM readback; this is instrumented motion acceptance, not a pure performance benchmark."
+    },
+    {
+      "name": "actual_tick_per_frame_120",
+      "passed": true,
+      "frames": 240,
+      "sampled_carriers": 12,
+      "cap_fps": 120,
+      "mean_observed_fps": 119.98826514212497,
+      "p95_frame_ms": 8.333500474691391,
+      "frozen_carrier_frames": 0,
+      "failed_frames": 0,
+      "long_frame_count": 0,
+      "max_distance_error_cm": 2.7284841053187847e-12,
+      "full_state_reads_during_sample": 0,
+      "scope": "Actual native actor Tick plus lightweight ISM readback; this is instrumented motion acceptance, not a pure performance benchmark."
+    },
+    {
+      "name": "all_cad_people_clear_visible_worktable_footprints",
+      "passed": true,
+      "people": 256,
+      "visible_tabletops": 122,
+      "body_radius_cm": 15,
+      "minimum_root_to_table_edge_cm": 22.75197060565647,
+      "conflicts": []
+    },
+    {
+      "name": "source_console_restored_once",
+      "passed": true,
+      "source_handle": "2CCF60"
+    }
+  ],
+  "preview": {
+    "file": "central_motion_60fps.mp4",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "frames": 240,
+    "seconds": 4,
+    "native_capture_run": "20261110T034506241025Z",
+    "camera": [
+      -11534.954236554815,
+      -786.0086255937377,
+      770.6682618004775,
+      -28.000000000000064,
+      30.00000000000006,
+      9.005502442010992e-16
+    ],
+    "sampling": "Deterministic 1/60 second diagnostic advances, not a live FPS measurement."
+  },
+  "limitations": [
+    "Vendor cycle time and actual PLC acceptance are outside this visual simulation.",
+    "Desktop height remains the existing 93 cm display assumption; XY dimensions and personnel come from CAD.",
+    "Reported 60/120 fps samples use lightweight native transform reads; they are motion tests, not an isolated hardware benchmark."
+  ],
+  "files": {
+    "automation.json": "e8a63a99104bff8d18bb2fdd5dfb44b0673e7219d0346a88c880b9d73be7eb88",
+    "baseline_report.json": "c1f12171abb4ff8d465a1ed4129f6ce7d91d4b017e488af673de8cd6848c9e7a",
+    "central_motion_60fps.mp4": "8362a17f9452aeaf8418934ed810d20fc0e9e7167d9107552c691250e11040d8",
+    "native_report.json": "8b39ece5fd99b418db87c396d54d1017ada1d8efc5bfd2401884dd41e916b93b",
+    "scene_preservation.json": "ce6cf51a81141fc2f12d1d6794b800002ee18593328c6a40284f9eda8ef5b352"
+  }
+}

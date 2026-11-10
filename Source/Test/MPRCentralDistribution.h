@@ -9,6 +9,9 @@
 // timing. UE geometry maps the normalized distances to its actual conveyor path.
 namespace MPRCentral
 {
+// Scheduling remains deterministic at 20 Hz. Presentation samples the unused
+// fraction of this step so rendering is not quantized to that scheduling rate.
+inline constexpr double FleetStepSeconds=.05;
 enum class CarrierPhase : uint8_t { Loading,Travel,Discharging,EmptyReturn,Retracting,Recovering };
 
 struct Config
@@ -61,6 +64,10 @@ public:
         const CanAcceptCallback& CanAccept,const AcceptCallback& Accept);
     const Config& GetConfig() const { return Settings; }
     const std::vector<Carrier>& GetCarriers() const { return Carriers; }
+    // Read-only, bounded presentation sample. It never admits/transfers parcels
+    // or changes phases. The owner freezes ResidualSeconds while paused, and
+    // clears it on reset; this preserves the last displayed pose on pause.
+    Carrier GetPresentationCarrier(size_t Index,double ResidualSeconds) const;
     const Stats& GetStats() const { return Totals; }
     const std::vector<uint64_t>& GetFeedCounts() const { return FeedCounts; }
 

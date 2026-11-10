@@ -259,6 +259,66 @@ bool FMPRCentralSorterHandoff::RunTest(const FString&)
         &&Accepted.size()==Central.GetStats().Delivered);
     return true;
 }
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMPRCentralRenderSampling,"MPR.CentralDistribution.RenderRateMotionAndOwnership",MPRCentralFlags)
+bool FMPRCentralRenderSampling::RunTest(const FString&)
+{
+    // The broken implementation repeats the exact same pose between .05 s
+    // scheduling ticks. Observe path distance every display frame, including
+    // wraparound and irregular frame spacing, without changing the scheduler.
+    const std::vector<std::vector<double>> FrameSchedules={{1./60.},{1./120.},{.007,.019,.011,.031,.004,.023}};
+    for(const auto& Frames:FrameSchedules)for(double Rate:{.5,1.,4.})
+    {
+        auto C=CentralFixture();MPRCentral::Simulation S;std::string E;uint64_t Next=1;
+        S.Initialize(C,E);S.SetPlaying(true);S.SetFeedingEnabled(false);
+        auto Can=[](int){return true;};auto Take=[](int,uint64_t){return true;};
+        double Residual=0,WallTime=0,PreviousDistance=0;bool Smooth=true;
+        for(int Frame=0;Frame<1200;++Frame)
+        {
+            const double Delta=Frames[Frame%Frames.size()];WallTime+=Delta;Residual+=Delta*Rate;
+            while(Residual+1.e-10>=MPRCentral::FleetStepSeconds)
+            {S.Advance(MPRCentral::FleetStepSeconds,Next,Can,Take);Residual=std::max(0.,Residual-MPRCentral::FleetStepSeconds);}
+            const auto Before=S;const auto P=S.GetPresentationCarrier(0,Residual);
+            const double Moved=std::fmod(P.Distance01-PreviousDistance+1.,1.);
+            Smooth&=std::abs(std::remainder(P.Distance01-WallTime*Rate*C.SpeedCmS/C.LoopLengthCm,1.))<1.e-7
+                &&CentralNear(Moved,Delta*Rate*C.SpeedCmS/C.LoopLengthCm)&&CentralSame(S,Before);
+            PreviousDistance=P.Distance01;
+        }
+        TestTrue(TEXT("every rendered frame advances at chain speed at 60/120/irregular FPS and 0.5/1/4x"),Smooth);
+        const auto Last=S.GetPresentationCarrier(0,Residual);S.SetPlaying(false);const auto Frozen=S;
+        S.Advance(60,Next,Can,Take);const auto Paused=S.GetPresentationCarrier(0,Residual);
+        TestTrue(TEXT("pause retains the displayed pose including the frozen fractional step"),
+            CentralNear(Last.Distance01,Paused.Distance01)&&CentralSame(S,Frozen)&&Next==1);
+        S.Reset();const auto Reset=S.GetPresentationCarrier(0,0);
+        TestTrue(TEXT("reset plus cleared fractional clock restores the initial pose"),Reset.Distance01==0&&Reset.ParcelId==0);
+    }
+    auto C=CentralFixture();C.CarrierCount=1;C.FeedDistances01={.032};C.TargetDistances01={.5};
+    MPRCentral::Simulation S;std::string E;uint64_t Next=1;S.Initialize(C,E);S.SetPlaying(true);
+    auto Can=[](int){return true;};auto Reject=[](int,uint64_t){return false;};
+    bool Pure=true,Progress=true;int Phases=0;
+    for(int Step=0;Step<300;++Step)
+    {
+        S.Advance(MPRCentral::FleetStepSeconds,Next,Can,Reject);
+        const auto& A=S.GetCarriers()[0];const auto Before=S;const auto BeforeId=Next;
+        const auto P=S.GetPresentationCarrier(0,.04);Phases|=1<<int(A.Phase);
+        Pure&=P.ParcelId==A.ParcelId&&P.Phase==A.Phase&&P.TargetIndex==A.TargetIndex&&P.SourceStation==A.SourceStation
+            &&CentralSame(S,Before)&&Next==BeforeId&&CentralConserved(S);
+        if(A.Phase==MPRCentral::CarrierPhase::Loading||A.Phase==MPRCentral::CarrierPhase::Discharging
+            ||A.Phase==MPRCentral::CarrierPhase::Retracting||A.Phase==MPRCentral::CarrierPhase::Recovering)
+        {
+            const double Duration=A.Phase==MPRCentral::CarrierPhase::Loading?C.LoadingSeconds:
+                A.Phase==MPRCentral::CarrierPhase::Recovering?C.RecoverySeconds:C.TransferSeconds;
+            Progress&=CentralNear(P.Progress01,std::min(1.,A.Progress01+.04/Duration));
+        }
+        Progress&=CentralNear(S.GetPresentationCarrier(0,10).Distance01,S.GetPresentationCarrier(0,MPRCentral::FleetStepSeconds).Distance01)
+            &&CentralNear(S.GetPresentationCarrier(0,-1).Distance01,A.Distance01)
+            &&CentralNear(S.GetPresentationCarrier(0,std::numeric_limits<double>::quiet_NaN()).Distance01,A.Distance01);
+    }
+    TestTrue(TEXT("display sampling preserves real parcel ownership and cannot invoke or predict admissions"),Pure);
+    TestTrue(TEXT("loading unloading and retraction sample bounded phase progress without running events"),Progress
+        &&(Phases&(1<<int(MPRCentral::CarrierPhase::Loading)))&&(Phases&(1<<int(MPRCentral::CarrierPhase::Discharging)))
+        &&(Phases&(1<<int(MPRCentral::CarrierPhase::Retracting))));
+    return true;
+}
 #ifdef MPR_CENTRAL_STANDALONE
 int main()
 {
@@ -266,6 +326,7 @@ int main()
     FMPRCentralBanks().RunTest("");FMPRCentralSorterHandoff().RunTest("");
     FMPRCentralContinuous().RunTest("");
     FMPRCentralMovingPorts().RunTest("");
+    FMPRCentralRenderSampling().RunTest("");
     std::cout<<"MPR central tests: "<<MPRCentralFailures<<" failures\n";return MPRCentralFailures?1:0;
 }
 #endif

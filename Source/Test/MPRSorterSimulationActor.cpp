@@ -668,7 +668,7 @@ bool AMPRSorterSimulationActor::AdvanceFleet(double WallSeconds)
     // A common fixed simulation step keeps arrivals and machine acceptance
     // identical across frame rates and diagnostic fast-forward calls.
     if(!Machines[0].Simulation.IsPlaying())return true;
-    constexpr double SimStep=.05;
+    constexpr double SimStep=MPRCentral::FleetStepSeconds;
     FleetTimeRemainder+=WallSeconds*GetSimulationRate();
     while(FleetTimeRemainder+1.e-10>=SimStep)
     {

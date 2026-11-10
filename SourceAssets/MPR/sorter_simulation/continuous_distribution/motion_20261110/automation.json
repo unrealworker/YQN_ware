@@ -1,0 +1,415 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "PLUTO",
+			"instance": "B67A75E545BFFEC6E41CA59C82F14545",
+			"instanceName": "PLUTO-29736",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (25H2) [10.0.26200.9711] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 5060 Laptop GPU",
+			"cPUModel": "Intel(R) Core(TM) i9-14900HX",
+			"rAMInGB": 32,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.11.10-03.45.14",
+	"succeeded": 24,
+	"succeededWithWarnings": 0,
+	"failed": 0,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.87754803895950317,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "BlockedParcelRecirculation",
+			"fullTestPath": "MPR.CentralDistribution.BlockedParcelRecirculation",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016248900443315506,
+			"dateTime": "2026.11.10-03.45.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ConfigurationAndSimultaneousStations",
+			"fullTestPath": "MPR.CentralDistribution.ConfigurationAndSimultaneousStations",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016402099281549454,
+			"dateTime": "2026.11.10-03.45.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ContinuousLoadedAndEmptyCirculation",
+			"fullTestPath": "MPR.CentralDistribution.ContinuousLoadedAndEmptyCirculation",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016465101391077042,
+			"dateTime": "2026.11.10-03.45.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MovingPortAlignmentAndConcurrentPhases",
+			"fullTestPath": "MPR.CentralDistribution.MovingPortAlignmentAndConcurrentPhases",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.01614220067858696,
+			"dateTime": "2026.11.10-03.45.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PauseResetAndFramePartition",
+			"fullTestPath": "MPR.CentralDistribution.PauseResetAndFramePartition",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016526598483324051,
+			"dateTime": "2026.11.10-03.45.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "RenderRateMotionAndOwnership",
+			"fullTestPath": "MPR.CentralDistribution.RenderRateMotionAndOwnership",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016456499695777893,
+			"dateTime": "2026.11.10-03.45.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SorterOwnershipAndCartReplacement",
+			"fullTestPath": "MPR.CentralDistribution.SorterOwnershipAndCartReplacement",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016478199511766434,
+			"dateTime": "2026.11.10-03.45.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "TwentyTwoTargetsAndGlobalIdentity",
+			"fullTestPath": "MPR.CentralDistribution.TwentyTwoTargetsAndGlobalIdentity",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.118989497423172,
+			"dateTime": "2026.11.10-03.45.12",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CADCartProfiles",
+			"fullTestPath": "MPR.Sorter.CADCartProfiles",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.020555797964334488,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Configuration",
+			"fullTestPath": "MPR.Sorter.Configuration",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016676999628543854,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DeterministicFramePartition",
+			"fullTestPath": "MPR.Sorter.DeterministicFramePartition",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016116101294755936,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ExternalInfeedAdmission",
+			"fullTestPath": "MPR.Sorter.ExternalInfeedAdmission",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016447301954030991,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ExternalInfeedPauseRateAndPartition",
+			"fullTestPath": "MPR.Sorter.ExternalInfeedPauseRateAndPartition",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016496498137712479,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ExternalInfeedWholeCartLifecycle",
+			"fullTestPath": "MPR.Sorter.ExternalInfeedWholeCartLifecycle",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016099598258733749,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FullCartExchangeLifecycle",
+			"fullTestPath": "MPR.Sorter.FullCartExchangeLifecycle",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016815800219774246,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "InductionCompletionClock",
+			"fullTestPath": "MPR.Sorter.InductionCompletionClock",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016474399715662003,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "InfeedHandoffAndReservations",
+			"fullTestPath": "MPR.Sorter.InfeedHandoffAndReservations",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.023865196853876114,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "LayoutValidation",
+			"fullTestPath": "MPR.Sorter.LayoutValidation",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.27875691652297974,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PauseRateResetAndInvalidInput",
+			"fullTestPath": "MPR.Sorter.PauseRateResetAndInvalidInput",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.01270110160112381,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SharedAislePermit",
+			"fullTestPath": "MPR.Sorter.SharedAislePermit",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.016619399189949036,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CADHandoffPoseSweep",
+			"fullTestPath": "MPR.Worker.CADHandoffPoseSweep",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.046806696802377701,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "CAD pose sweep: 902 samples across all 22 machines, 0 failed samples, max palm 0.000000000cm, bone 0.000000000cm, sole 0.000000000cm",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.11.10-03.45.13"
+				}
+			],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DistanceDrivenGait",
+			"fullTestPath": "MPR.Worker.DistanceDrivenGait",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.011482898145914078,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "OfficialMannequinPose",
+			"fullTestPath": "MPR.Worker.OfficialMannequinPose",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.019267302006483078,
+			"dateTime": "2026.11.10-03.45.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SmallStrideFootSupport",
+			"fullTestPath": "MPR.Worker.SmallStrideFootSupport",
+			"tags": [],
+			"state": "Success",
+			"deviceInstance": [
+				"B67A75E545BFFEC6E41CA59C82F14545"
+			],
+			"duration": 0.098656900227069855,
+			"dateTime": "2026.11.10-03.45.14",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "Actual mannequin stance: 3756 grounded frame pairs, max world sole drift=0.000000000cm",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.11.10-03.45.14"
+				}
+			],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

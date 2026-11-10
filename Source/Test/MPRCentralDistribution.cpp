@@ -61,6 +61,23 @@ void Simulation::Reset()
         NextStops.push_back(Next==Stops.size()?0:Next);
     }
 }
+Carrier Simulation::GetPresentationCarrier(size_t Index,double ResidualSeconds) const
+{
+    if(Index>=Carriers.size())return {};
+    Carrier C=Carriers[Index];
+    const double Delta=std::isfinite(ResidualSeconds)?std::clamp(ResidualSeconds,0.,FleetStepSeconds):0.;
+    C.Distance01=Wrap(C.Distance01+Delta*Settings.SpeedCmS/Settings.LoopLengthCm);
+    if(C.Phase==CarrierPhase::Loading||C.Phase==CarrierPhase::Discharging
+        ||C.Phase==CarrierPhase::Retracting||C.Phase==CarrierPhase::Recovering)
+    {
+        const double Duration=C.Phase==CarrierPhase::Loading?Settings.LoadingSeconds:
+            C.Phase==CarrierPhase::Recovering?Settings.RecoverySeconds:Settings.TransferSeconds;
+        // Waiting at a completed local transfer is preferable to predicting a
+        // delivery which the destination may reject at the next logical tick.
+        C.Progress01=std::min(1.,C.Progress01+Delta/Duration);
+    }
+    return C;
+}
 bool Simulation::IsOldestForTarget(const Carrier& C) const
 {
     for(const auto& Other:Carriers)if(Other.ParcelId&&Other.TargetIndex==C.TargetIndex&&Other.ParcelId<C.ParcelId)return false;
