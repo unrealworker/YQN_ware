@@ -160,11 +160,10 @@ void AGHSGlobePlayerController::BeginPlay()
         SAssignNew(WarehouseOverlay,SGHSGlobeWarehouseOverlay)
             .OnSelect_Lambda([this,MarkerCommand](const FString& Id,const FString& Source){MarkerCommand(SelectedId==Id?TEXT("enter"):TEXT("select"),Id,Source);})
             .OnEnter_Lambda([MarkerCommand](const FString& Id,const FString& Source){MarkerCommand(TEXT("enter"),Id,Source);})
-            .OnCluster_Lambda([this](const TArray<FString>& Ids){Command(TEXT("{\"action\":\"clear\"}"));if(GlobeHUD)GlobeHUD->ShowWarehouseCluster(Ids);})
-            .OnInteraction_Lambda([this](bool Active){bNativeAnnotationInteraction=Active;if(GetWorld())LastInteraction=GetWorld()->GetTimeSeconds();});
+            .OnCluster_Lambda([this](const TArray<FString>& Ids){Command(TEXT("{\"action\":\"clear\"}"));if(GlobeHUD)GlobeHUD->ShowWarehouseCluster(Ids);});
         GetWorld()->GetGameViewport()->AddViewportWidgetContent(WarehouseOverlay.ToSharedRef(),51);
     }
-    LastInteraction=GetWorld()->GetTimeSeconds();ResetGlobeCamera(true);
+    ResetGlobeCamera(true);
 #if !UE_BUILD_SHIPPING
     // Opt-in standalone validation can never close a user's editor/PIE process.
     bSmokeTest=FParse::Param(FCommandLine::Get(),TEXT("GlobeSmokeTest"))&&FParse::Param(FCommandLine::Get(),TEXT("game"))&&GetWorld()->WorldType==EWorldType::Game;
@@ -370,8 +369,8 @@ void AGHSGlobePlayerController::Command(const FString& Json)
     if(Action==TEXT("back")&&Phase==EPhase::Warehouse)
     {AnnotationInputSource=InputSource;bAnnotationSceneTransition=true;if(WarehouseOverlay)WarehouseOverlay->SetPresentation(false,false,bReducedMotion,true);Phase=EPhase::Returning;PhaseTime=0;MaskOpacity=0;bReturningApplied=false;bReturningCommitted=false;bPreloadRequested=false;Error.Empty();if(GlobeHUD)GlobeHUD->SetCompact(false);CancelCameraDrag();BeginCurtain();PushState();return;}
     if(Phase==EPhase::Warehouse||Phase==EPhase::Flying||Phase==EPhase::Revealing||Phase==EPhase::Returning)return;
-    LastInteraction=GetWorld()->GetTimeSeconds();
-    if(Action==TEXT("interaction")){O->TryGetBoolField(TEXT("active"),bInteracting);return;}
+    // Legacy CEF hover/focus/drag notifications no longer gate globe rotation.
+    if(Action==TEXT("interaction"))return;
     if(Action==TEXT("select")||Action==TEXT("enter"))
     {
         FString Id;if(!O->TryGetStringField(TEXT("id"),Id)||!Registry.Find(Id))return;
@@ -385,7 +384,7 @@ void AGHSGlobePlayerController::Command(const FString& Json)
     if(Action==TEXT("clear")){SelectedId.Empty();Phase=EPhase::Idle;bEntryRequested=false;bPreloadRequested=false;UnloadDestination();Error.Empty();PushState();return;}
     if(Action==TEXT("home")||Action==TEXT("reset"))
     {
-        bEntryRequested=false;bInteracting=false;Phase=SelectedId.IsEmpty()?EPhase::Idle:EPhase::Selected;Error.Empty();
+        bEntryRequested=false;Phase=SelectedId.IsEmpty()?EPhase::Idle:EPhase::Selected;Error.Empty();
         if(GlobeRoot.IsValid())
         {
             ResetStartRotation=GlobeRoot->GetActorQuat();GlobeResetTime=0;bResettingGlobe=!bReducedMotion;
@@ -427,8 +426,11 @@ void AGHSGlobePlayerController::PlayerTick(float Dt)
         GlobeResetTime+=Dt;GlobeRoot->SetActorRotation(FQuat::Slerp(ResetStartRotation,InitialGlobeRotation,Ease(GlobeResetTime/.85f)));
         if(GlobeResetTime>=.85f)bResettingGlobe=false;
     }
-    if(Phase==EPhase::Idle&&!bReducedMotion&&!bInteracting&&!bNativeAnnotationInteraction&&!bResettingGlobe&&Now-LastInteraction>2&&GlobeRoot.IsValid())
-        GlobeRoot->AddActorWorldRotation(FRotator(0,IdleRotationDegreesPerSecond*Dt*Ease(float(Now-LastInteraction-2)),0));
+    // Browsing and selection do not interrupt the globe's constant angular speed.
+    // Camera flights and explicit home resets retain exclusive pose ownership.
+    const bool Browsing=Phase==EPhase::Idle||Phase==EPhase::Selected||Phase==EPhase::Loading||Phase==EPhase::Error;
+    if(Browsing&&bStageVisible&&!bReducedMotion&&!bResettingGlobe&&GlobeRoot.IsValid())
+        GlobeRoot->AddActorWorldRotation(FRotator(0,IdleRotationDegreesPerSecond*Dt,0));
     if(Phase==EPhase::Flying)
     {
         const float Duration=bReducedMotion?.22f:FGHSGlobeFlight::Duration;
@@ -478,7 +480,7 @@ void AGHSGlobePlayerController::PlayerTick(float Dt)
                 {SetStageVisible(true);ResetGlobeCamera(true);bReturningApplied=true;PhaseTime=0;}
             }
         }
-        else {MaskOpacity=1-Ease(PhaseTime/Duration);if(MaskOpacity<=0){Phase=!Error.IsEmpty()?EPhase::Error:(SelectedId.IsEmpty()?EPhase::Idle:EPhase::Selected);LastInteraction=Now;}}
+        else {MaskOpacity=1-Ease(PhaseTime/Duration);if(MaskOpacity<=0){Phase=!Error.IsEmpty()?EPhase::Error:(SelectedId.IsEmpty()?EPhase::Idle:EPhase::Selected);}}
     }
     if(bSmokeTest)TickSmokeTest();
 }
@@ -636,9 +638,9 @@ void AGHSGlobePlayerController::TickSmokeTest()
             else {SmokeIdleYawStart=GlobeRoot->GetActorRotation().Yaw;Snapshot(TEXT("01-initial"));SmokeStep=1;SmokeStepStarted=Now;}
         }
     }
-    else if(SmokeStep==1&&GetWorld()->GetTimeSeconds()-LastInteraction>8)
+    else if(SmokeStep==1&&Now-SmokeStepStarted>8)
     {
-        // Two seconds of interaction cooldown followed by visible, eased idle rotation.
+        // Rotation runs continuously in normal motion mode, without an input cooldown.
         SmokeIdleYawEnd=GlobeRoot.IsValid()?GlobeRoot->GetActorRotation().Yaw:SmokeIdleYawStart;
         const double Travel=FMath::Abs(FMath::FindDeltaAngleDegrees(SmokeIdleYawStart,SmokeIdleYawEnd));
         bSmokeIdleRotationVerified=GlobeRoot.IsValid()&&(bSmokeReducedMotion?Travel<.001:Travel>5.);
@@ -680,8 +682,11 @@ void AGHSGlobePlayerController::TickSmokeTest()
     else if(SmokeStep==14&&Now-SmokeStepStarted>1.2)
     {
         const auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn());
+        const FRotator HomeDelta=GlobeRoot.IsValid()?(GlobeRoot->GetActorQuat()*InitialGlobeRotation.Inverse()).Rotator():FRotator::ZeroRotator;
+        const double MaxContinuedYaw=bSmokeReducedMotion?.0001:FMath::Abs(IdleRotationDegreesPerSecond)*(Now-SmokeStepStarted)+.1;
         bSmokeHomeReset=Camera&&!Camera->IsPoseTransitionActive()&&Camera->GetActorRotation().Equals(FRotator(-32,-96,0),.01)
-            &&Camera->GetActorLocation().Equals(GlobeCenter,.01)&&GlobeRoot.IsValid()&&GlobeRoot->GetActorQuat().Equals(InitialGlobeRotation,.0001);
+            &&Camera->GetActorLocation().Equals(GlobeCenter,.01)&&GlobeRoot.IsValid()&&!bResettingGlobe
+            &&FMath::Abs(HomeDelta.Pitch)<.001&&FMath::Abs(HomeDelta.Roll)<.001&&FMath::Abs(HomeDelta.Yaw)<=MaxContinuedYaw;
         if(!bSmokeHomeReset)SmokeError=TEXT("Home did not restore camera and globe orientation");
         auto Request=MakeShared<FJsonObject>();Request->SetStringField(TEXT("action"),TEXT("select"));Request->SetStringField(TEXT("id"),Registry.GetEntries()[0].Id);Command(Encode(Request));SmokeStep=2;SmokeStepStarted=Now;
     }

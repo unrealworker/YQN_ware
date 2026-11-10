@@ -104,15 +104,14 @@ private:
     bool bResettingGlobe=false,bArrivalStarted=false;
     TSharedPtr<SWidget> GlobeViewportWidget;
     TSharedPtr<SGHSGlobeWarehouseOverlay> WarehouseOverlay;
-    bool bNativeAnnotationInteraction=false;
     bool bAnnotationSceneTransition=false;
     EPhase Phase=EPhase::Idle;
     FString SelectedId,LoadedId,Error;
     FString SelectionInputSource=TEXT("unknown"),AnnotationInputSource=TEXT("unknown");
     FVector2D Viewport=FVector2D(1920,1080),ScenePosition=FVector2D(0,64),SceneSize=FVector2D(1420,1016);
-    double LastInteraction=0,LoadStarted=0,NextPush=0;
+    double LoadStarted=0,NextPush=0;
     float PhaseTime=0,MaskOpacity=0;
-    bool bReady=false,bReducedMotion=false,bInteracting=false,bEntryRequested=false,bStageVisible=true,bReturningApplied=false,bReturningCommitted=false;
+    bool bReady=false,bReducedMotion=false,bEntryRequested=false,bStageVisible=true,bReturningApplied=false,bReturningCommitted=false;
     bool bUnloadRequested=false,bPreloadRequested=false,bUnloadTimedOut=false;
     int32 SmokeStep=0,SmokeCycles=0,SmokeWarehouseFovChecks=0,SmokeGlobeFovChecks=0;
     double SmokeStarted=0,SmokeStepStarted=0;
