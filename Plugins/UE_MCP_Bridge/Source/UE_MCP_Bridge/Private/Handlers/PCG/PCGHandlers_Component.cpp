@@ -14,7 +14,7 @@
 #include "GameFramework/Actor.h"
 #include "Kismet2/KismetEditorUtilities.h"
 #include "ScopedTransaction.h"
-#include "MCPEngineCompat.h"
+#include "StructUtils/PropertyBag.h"
 
 namespace
 {

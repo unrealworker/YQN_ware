@@ -6,7 +6,7 @@
 #include "Handlers/PCG/PCGHandlers.h"
 #include "Dom/JsonObject.h"
 #include "Dom/JsonValue.h"
-#include "PCGSettings.h"
+#include "Elements/PCGAddTag.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/Guid.h"
 #include "PCGEdge.h"
@@ -30,13 +30,10 @@ bool FMCPPCGDisconnectNotifiesTest::RunTest(const FString& Parameters)
 	UPCGGraph* Graph = NewObject<UPCGGraph>(Package, TEXT("PG_DisconnectProbe"), RF_Public | RF_Standalone | RF_Transactional);
 	if (!TestNotNull(TEXT("PCG graph fixture created"), Graph)) return false;
 
-	// The Add Tag class is reflected but not DLL-exported in UE 5.4.
-	UClass* AddTagClass = LoadClass<UPCGSettings>(nullptr, TEXT("/Script/PCG.PCGAddTagSettings"));
-	if (!TestNotNull(TEXT("Add Tag settings class exists"), AddTagClass)) return false;
-	UPCGSettings* FromSettings = nullptr;
-	UPCGSettings* ToSettings = nullptr;
-	UPCGNode* From = Graph->AddNodeOfType(AddTagClass, FromSettings);
-	UPCGNode* To = Graph->AddNodeOfType(AddTagClass, ToSettings);
+	UPCGAddTagSettings* FromSettings = nullptr;
+	UPCGAddTagSettings* ToSettings = nullptr;
+	UPCGNode* From = Graph->AddNodeOfType(FromSettings);
+	UPCGNode* To = Graph->AddNodeOfType(ToSettings);
 	if (!TestTrue(TEXT("two nodes added"), From && To)) return false;
 	if (!TestNotNull(TEXT("edge added"), Graph->AddEdge(From, PCGPinConstants::DefaultOutputLabel, To, PCGPinConstants::DefaultInputLabel))) return false;
 

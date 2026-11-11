@@ -13,7 +13,7 @@
 #include "PCGPin.h"
 #include "PCGSettings.h"
 #include "Metadata/PCGAttributePropertySelector.h"
-#include "MCPEngineCompat.h"
+#include "StructUtils/PropertyBag.h"
 
 namespace PCGGraphAuthoringTests
 {
@@ -236,30 +236,22 @@ bool FMCPPCGSelectorReplaceTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("resolvedSelectors echoes the stored selector"),
 		Replaced->TryGetObjectField(TEXT("resolvedSelectors"), Resolved) && (*Resolved)->GetStringField(TEXT("InputSource1")) == TEXT("@Last"));
 
-	// A ternary op switched to a unary op loses its third pin and reports the edge.
-#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION < 5
-	// UE 5.4 has no MulAdd; Clamp exposes its third operand as Max.
-	const TCHAR* TernaryOperation = TEXT("Clamp");
-	const TCHAR* ThirdPin = TEXT("Max");
-#else
-	const TCHAR* TernaryOperation = TEXT("MulAdd");
-	const TCHAR* ThirdPin = TEXT("InC");
-#endif
+	// A ternary op wired on InC, switched to a unary op, loses that pin and reports the edge.
 	Settings = MakeShared<FJsonObject>();
-	Settings->SetStringField(TEXT("Operation"), TernaryOperation);
-	TestTrue(TEXT("the ternary operation is written"), Ok(WriteSettings(Registry, GraphPath, Maths, Settings)));
+	Settings->SetStringField(TEXT("Operation"), TEXT("MulAdd"));
+	TestTrue(TEXT("MulAdd is written"), Ok(WriteSettings(Registry, GraphPath, Maths, Settings)));
 	auto Connect = MakeShared<FJsonObject>();
 	Connect->SetStringField(TEXT("assetPath"), GraphPath);
 	Connect->SetStringField(TEXT("sourceNode"), Graph->GetInputNode()->GetName());
 	Connect->SetStringField(TEXT("targetNode"), Maths);
-	Connect->SetStringField(TEXT("targetPin"), ThirdPin);
-	if (!TestTrue(TEXT("the third operand is wired"), Ok(Invoke(Registry, TEXT("connect_pcg_nodes"), Connect)))) return false;
+	Connect->SetStringField(TEXT("targetPin"), TEXT("InC"));
+	if (!TestTrue(TEXT("InC is wired"), Ok(Invoke(Registry, TEXT("connect_pcg_nodes"), Connect)))) return false;
 	Settings = MakeShared<FJsonObject>();
 	Settings->SetStringField(TEXT("Operation"), TEXT("Sign"));
 	const TSharedPtr<FJsonObject> Unary = WriteSettings(Registry, GraphPath, Maths, Settings);
 	TestTrue(TEXT("Sign is written"), Ok(Unary));
 	const TArray<TSharedPtr<FJsonValue>>* Removed = nullptr;
-	TestTrue(TEXT("the dropped third-operand edge is reported"), Unary->TryGetArrayField(TEXT("removedEdges"), Removed) && Removed->Num() == 1);
+	TestTrue(TEXT("the dropped InC edge is reported"), Unary->TryGetArrayField(TEXT("removedEdges"), Removed) && Removed->Num() == 1);
 	TestTrue(TEXT("a warning names it"), Unary->HasField(TEXT("warnings")));
 	return true;
 }

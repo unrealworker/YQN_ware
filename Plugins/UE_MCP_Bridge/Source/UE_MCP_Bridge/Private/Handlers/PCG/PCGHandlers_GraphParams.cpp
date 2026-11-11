@@ -7,7 +7,7 @@
 #include "HandlerJsonProperty.h"
 #include "Elements/PCGUserParameterGet.h"
 #include "ScopedTransaction.h"
-#include "MCPEngineCompat.h"
+#include "StructUtils/PropertyBag.h"
 
 namespace
 {
@@ -178,15 +178,7 @@ TSharedPtr<FJsonValue> FPCGHandlers::SetGraphParameters(const TSharedPtr<FJsonOb
 			const UPropertyBag* BagStruct = Bag.GetPropertyBagStruct();
 			const FPropertyBagPropertyDesc* Desc = BagStruct ? BagStruct->FindPropertyDescByName(Entry.Name) : nullptr;
 			const bool bRetype = Entry.bHasType && (!Desc || Desc->ValueType != Entry.Type.Type || Desc->ValueTypeObject != Entry.Type.TypeObject);
-			if (bRetype)
-			{
-#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION < 5
-				// UE 5.4 always replaces an existing property's type; it has no overwrite flag.
-				Bag.AddProperty(Entry.Name, Entry.Type.Type, const_cast<UObject*>(Entry.Type.TypeObject));
-#else
-				Bag.AddProperty(Entry.Name, Entry.Type.Type, Entry.Type.TypeObject, /*bOverwrite*/ true);
-#endif
-			}
+			if (bRetype) Bag.AddProperty(Entry.Name, Entry.Type.Type, Entry.Type.TypeObject, /*bOverwrite*/ true);
 			if (!Entry.Default.IsValid()) continue;
 			BagStruct = Bag.GetPropertyBagStruct();
 			Desc = BagStruct ? BagStruct->FindPropertyDescByName(Entry.Name) : nullptr;
@@ -216,19 +208,7 @@ TSharedPtr<FJsonValue> FPCGHandlers::SetGraphParameters(const TSharedPtr<FJsonOb
 	FScopedTransaction Transaction(NSLOCTEXT("UEMCPBridge", "SetPCGGraphParameters", "Set PCG Graph Parameters"));
 	Graph->Modify();
 	TArray<FString> Unused;
-#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION < 5
-	// UE 5.4 has no update wrapper, so perform its parameter notifications explicitly.
-	Apply(*Graph->GetMutableUserParametersStruct_Unsafe(), Unused);
-	if (Removes.Num() > 0)
-	{
-		// Remove Get Parameter nodes whose property no longer exists.
-		Graph->OnGraphParametersChanged(EPCGGraphParameterEvent::RemovedUnused, NAME_None);
-	}
-	// Migrate layouts and synchronize defaults without resetting unrelated instance overrides.
-	Graph->OnGraphParametersChanged(EPCGGraphParameterEvent::MultiplePropertiesAdded, NAME_None);
-#else
 	Graph->UpdateUserParametersStruct([&Apply, &Unused](FInstancedPropertyBag& Bag) { Apply(Bag, Unused); });
-#endif
 	Graph->PostEditChange();
 	Graph->MarkPackageDirty();
 	FString SaveError;

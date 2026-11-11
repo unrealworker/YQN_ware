@@ -15,7 +15,6 @@
 #include "UnrealClient.h"
 #include "PixelFormat.h"
 #include "Math/Float16Color.h"
-#include "Misc/EngineVersionComparison.h"
 
 namespace MCPPIE
 {
@@ -192,13 +191,7 @@ void FPIEViewportCapture::ProcessReadbacks_RenderThread(FRHICommandListImmediate
 	// flight, picking them up on a later frame.
 	if (bDrainAll && InFlight.Num() > 0)
 	{
-#if UE_VERSION_OLDER_THAN(5, 5, 0)
-		// UE 5.4 exposes submission and the GPU-idle wait as separate operations.
-		RHICmdList.SubmitCommandsAndFlushGPU();
-		RHICmdList.BlockUntilGPUIdle();
-#else
 		RHICmdList.SubmitAndBlockUntilGPUIdle();
-#endif
 	}
 
 	for (int32 i = 0; i < InFlight.Num(); )

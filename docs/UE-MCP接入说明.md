@@ -1,6 +1,6 @@
 # UE-MCP 接入说明
 
-本工程集成 [db-lyon/ue-mcp](https://github.com/db-lyon/ue-mcp) 的 `1.4.11` 源码桥接插件，当前目标为 Windows Unreal Engine 5.8.4。
+本工程集成 [db-lyon/ue-mcp](https://github.com/db-lyon/ue-mcp) 的 `1.4.13` 源码桥接插件，当前目标为 Windows Unreal Engine 5.8.4。
 
 ## 工程内容
 
@@ -9,7 +9,9 @@
 - `ue-mcp.yml`：工程共享配置，关闭反馈提交工具，启用 StateTree 分类和 UE 5.8 原生 Epic 工具。
 - `ue-mcp.local.yml`：个人覆盖配置，已加入 Git 忽略。
 
-本次使用 npm 发布包 `ue-mcp@1.4.11` 部署插件。安装器版本记录位于插件目录的 `.ue-mcp-install.json`。上游发布包有 UE 5.4 编译兼容缺口，本工程补充了头文件路径、GPU 回读同步、子系统快照遍历和资产差异 API 的兼容处理。升级或重新部署插件可能覆盖这些本地补丁，必须重新编译和验证后使用。
+当前使用 npm 发布包 `ue-mcp@1.4.13` 部署插件。安装器版本记录位于插件目录的 `.ue-mcp-install.json`。插件包含状态、运行时、编辑器桥和新增的 MVVM 四个模块；MVVM 模块按需加载，可选能力取决于工程已启用的引擎插件。
+
+本工程保留资产差异测试的本地化补丁：使用当前编辑器语言的反射属性标签，避免中文环境下硬编码英文标签导致误报。历史 UE 5.4 专用 API 兼容分支不再用于当前 UE 5.8 目标。升级或重新部署可能覆盖本地补丁，必须重新编译和验证后使用。
 
 ## 本机安装位置
 
@@ -42,7 +44,18 @@ Codex 需要重新加载 MCP 配置才会展示新工具；若当前聊天未显
 
 自动反馈提交已禁用，验证连接无需创建、修改或保存任何场景资产。
 
-## 当前 UE 5.8 验证记录（2026-10-30）
+## 当前 1.4.13 验证记录（2026-11-11）
+
+- 从已安装的 npm `ue-mcp@1.4.13` 同步项目桥接源码，用 UE 5.8.4 完成 `TestEditor Win64 Development` 编译和链接，包含新增的 MVVM 模块。没有强制启用可选引擎插件。
+- 上游文件完整同步，保留中文环境下的资产属性标签测试补丁，并清理一处文件末尾多余空行以通过 Git 差异检查；MIT 许可证和安装标记均已核对。
+- 在独立 `/Engine/Maps/Entry` 实例运行 `UE.MCP.Bridge` 和 `UE.MCP.Diff.CheckpointAsset.MaterialGraphPropertiesAndThumbnails`：共 29 项，27 项无警告成功、1 项带警告成功、1 项失败。资产差异本地化测试通过。
+- 已知上游测试失败：`UE.MCP.Bridge.HandlerSpec.Contract` 有 15 条参数读取断言失败。性能审计的 8 条来自测试传入非法 `world` 后提前返回，正常路径仍有对应参数读取；`rebuild_brush` 的 2 条来自该功能仅支持 UE 5.9，而当前 UE 5.8 按预期返回不支持；Blockout 的 5 条来自共享解析函数额外探测接口未声明的参数。相关实现与发布包一致，本次没有修改这些接口或跳过测试；这些断言不等同于合法公开调用必然失败。
+- 独立 MCP 客户端握手返回服务 `1.4.13`；`project.check_install` 返回 `ok=true`、`versionMatch=true`、桥接版本 `1.4.13`。实际连接为 `editorConnected=true`、`pluginStale=false`，读取 Entry 世界 8 个 Actor 中的 5 个。
+- Epic 原生工具注册可用，返回 20 个工具集，含 StateTree；未逐项执行新版编辑、MVVM 或业务场景操作。验证实例随后经桥接正常退出，工程描述文件验证前后 SHA256 一致。
+- 编译保留上游可选插件依赖声明、旧 API 和项目已有编解码依赖警告；构建结果为 `Succeeded`，没有为消除警告修改业务配置。
+- 证据位于本机 `Saved/UeMcpSetup1413/`：`build.log`、`build-final.log`、`Automation/index.json`、`editor-live.log`、`mcp-ue58-verification-2026-11-11T02-56-17.224Z.json`；这些运行输出不入库。
+
+## 历史 UE 5.8 验证记录（2026-10-30）
 
 - UE 5.8.4 的 `TestEditor Win64 Development` 构建验证成功；本次仅改变接入配置，没有修改迁移后的业务源码。
 - 以 Codex 配置的 UE 5.8 启动路径完成 MCP 初始化、工具发现、状态读取和场景查询：`editorConnected=true`、`pluginStale=false`，端口 `62818`。

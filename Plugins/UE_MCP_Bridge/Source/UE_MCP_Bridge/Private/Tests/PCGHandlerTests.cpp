@@ -9,9 +9,8 @@
 #include "Handlers/PCG/PCGHandlers_Internal.h"
 #include "Tests/MCPScopedTestMount.h"
 #include "Editor.h"
-#include "PCGSettings.h"
+#include "Elements/PCGAddTag.h"
 #include "PCGComponent.h"
-#include "PCGManagedResource.h"
 #include "PCGPin.h"
 #include "PCGSubgraph.h"
 #include "HandlerPackageSave.h"
@@ -32,7 +31,7 @@
 #include "Engine/SimpleConstructionScript.h"
 #include "Engine/SCS_Node.h"
 #include "Kismet2/KismetEditorUtilities.h"
-#include "MCPEngineCompat.h"
+#include "StructUtils/PropertyBag.h"
 
 namespace PCGHandlerTests
 {
@@ -75,7 +74,7 @@ namespace PCGHandlerTests
 		{
 			if (!World) return;
 			GEditor->GetEditorWorldContext().SetCurrentWorld(OriginalWorld);
-			World->DestroyWorld(false);
+			MCPDestroyDisposableWorld(World);
 		}
 	};
 }
@@ -205,7 +204,6 @@ bool FMCPPCGSpawnerSelectorTest::RunTest(const FString& Parameters)
 	WriteSettings(TEXT("MeshSelectorType"), MakeShared<FJsonValueString>(TEXT("/Script/PCG.PCGMeshSelectorByAttribute")));
 	UObject* BeforeBadMesh = Spawner->MeshSelectorParameters;
 	Graph->GetOutermost()->SetDirtyFlag(false);
-	AddExpectedError(TEXT("LoadAsset failed"), EAutomationExpectedErrorFlags::Contains, 0);
 	Entry->SetStringField(TEXT("mesh"), TEXT("/Engine/BasicShapes/MissingMesh.MissingMesh"));
 	TestFalse(TEXT("invalid mesh is refused"), Succeeded(Call(Registry, TEXT("set_static_mesh_spawner_meshes"), MeshParams)));
 	TestTrue(TEXT("invalid mesh preserves selector and type"), Spawner->MeshSelectorParameters == BeforeBadMesh
@@ -274,12 +272,9 @@ bool FMCPPCGImportWarningsTest::RunTest(const FString& Parameters)
 	FString SaveError;
 	if (!TestTrue(TEXT("child graph saves"), SaveAssetPackageChecked(Child, SaveError))) return false;
 	UPCGSubgraphSettings* FromSettings = nullptr;
-	UPCGSettings* ToSettings = nullptr;
+	UPCGAddTagSettings* ToSettings = nullptr;
 	UPCGNode* From = Graph->AddNodeOfType(FromSettings);
-	// The Add Tag class is reflected but not DLL-exported in UE 5.4.
-	UClass* AddTagClass = LoadClass<UPCGSettings>(nullptr, TEXT("/Script/PCG.PCGAddTagSettings"));
-	if (!TestNotNull(TEXT("Add Tag settings class exists"), AddTagClass)) return false;
-	UPCGNode* To = Graph->AddNodeOfType(AddTagClass, ToSettings);
+	UPCGNode* To = Graph->AddNodeOfType(ToSettings);
 	if (!TestTrue(TEXT("two nodes added"), From && To)) return false;
 	FromSettings->SetSubgraph(Child);
 	From->UpdateAfterSettingsChangeDuringCreation();
@@ -506,17 +501,7 @@ bool FMCPPCGSpawnedOutputTest::RunTest(const FString& Parameters)
 		Volume->AddInstanceComponent(ISM);
 		Spawned.Add(ISM);
 	}
-#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION < 5
-	// UE 5.4 registers managed components individually.
-	for (UActorComponent* Component : Spawned)
-	{
-		UPCGManagedISMComponent* Resource = NewObject<UPCGManagedISMComponent>(Volume->PCGComponent);
-		Resource->SetComponent(CastChecked<UInstancedStaticMeshComponent>(Component));
-		Volume->PCGComponent->AddToManagedResources(Resource);
-	}
-#else
 	Volume->PCGComponent->AddComponentsToManagedResources(Spawned);
-#endif
 
 	auto ReadParams = MakeShared<FJsonObject>();
 	ReadParams->SetStringField(TEXT("actorLabel"), TEXT("UEMCP_PCGSpawned"));
