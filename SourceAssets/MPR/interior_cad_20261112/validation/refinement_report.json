@@ -1,0 +1,919 @@
+{
+  "success": true,
+  "actors": 924,
+  "rack_groups": 59,
+  "map_sha256": "1af91bb69aeb9643a14b33dad7239f8d300c8e29318a85b48e84737d0c5ecf23",
+  "cargo_provenance": {
+    "geometry_source": "Scripts/ghs/build_refined_rack_cargo.py::carton/pallet",
+    "style_source": "Scripts/ghs/build_zcool_smart_factory.py::STYLE",
+    "edge_radius_m": 0.004,
+    "packing_tape_width_m": 0.024,
+    "label_dimensions_m": [
+      0.078,
+      0.052
+    ],
+    "adaptation": "The GHS detail vocabulary is fitted inside each existing MPR envelope. No GHS pallet-stack counts or rack geometry are imported."
+  },
+  "windows": 102,
+  "deleted_schematic_glazing_actors": 3,
+  "corrected_wall_meshes": 5,
+  "changed_existing_packages": [
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W144_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W144_Standard.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W192_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F17P1_W144_Standard.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F17P1_W192_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F20_W144_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F20_W144_Standard.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F5_W144_Standard.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F5_W192_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W144_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W144_Standard.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W192_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F9_W144_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F9_W144_Standard.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_FUnresolved_W144_Passage.uasset",
+    "Content/Maps/MPR_CAD_Warehouse_B50B57.umap"
+  ],
+  "new_packages": [
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowFacade_00_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowFacade_04_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowFacade_05_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowFacade_15_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowPartitions_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowSystem_20261112.uasset"
+  ],
+  "simulation_properties_unchanged": true,
+  "viewport_unchanged": true,
+  "world_auxiliary_actors_unchanged": true,
+  "imported": {
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W144_Passage.SM_MPR_CADRack_F16_W144_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W144_Passage.SM_MPR_CADRack_F16_W144_Passage",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          915.4000244140625
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W144_Standard.SM_MPR_CADRack_F16_W144_Standard": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W144_Standard.SM_MPR_CADRack_F16_W144_Standard",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          915.4000244140625
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W192_Passage.SM_MPR_CADRack_F16_W192_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W192_Passage.SM_MPR_CADRack_F16_W192_Passage",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -251.4600067138672,
+          251.4600067138672
+        ],
+        [
+          -53.340023040771484,
+          53.340023040771484
+        ],
+        [
+          0.0,
+          915.4000244140625
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F17P1_W144_Standard.SM_MPR_CADRack_F17P1_W144_Standard": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F17P1_W144_Standard.SM_MPR_CADRack_F17P1_W144_Standard",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -60.96001434326172,
+          60.96001434326172
+        ],
+        [
+          0.0,
+          928.7297973632812
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F17P1_W192_Passage.SM_MPR_CADRack_F17P1_W192_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F17P1_W192_Passage.SM_MPR_CADRack_F17P1_W192_Passage",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -251.4600067138672,
+          251.4600067138672
+        ],
+        [
+          -53.340023040771484,
+          53.340023040771484
+        ],
+        [
+          0.0,
+          928.7163696289062
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F20_W144_Passage.SM_MPR_CADRack_F20_W144_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F20_W144_Passage.SM_MPR_CADRack_F20_W144_Passage",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          928.71630859375
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F20_W144_Standard.SM_MPR_CADRack_F20_W144_Standard": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F20_W144_Standard.SM_MPR_CADRack_F20_W144_Standard",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          928.72998046875
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F5_W144_Standard.SM_MPR_CADRack_F5_W144_Standard": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F5_W144_Standard.SM_MPR_CADRack_F5_W144_Standard",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -60.96001434326172,
+          60.96001434326172
+        ],
+        [
+          0.0,
+          1068.1600341796875
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F5_W192_Passage.SM_MPR_CADRack_F5_W192_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F5_W192_Passage.SM_MPR_CADRack_F5_W192_Passage",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -251.4600067138672,
+          251.4600067138672
+        ],
+        [
+          -60.96002197265625,
+          60.96002197265625
+        ],
+        [
+          0.0,
+          1068.1600341796875
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W144_Passage.SM_MPR_CADRack_F7_W144_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W144_Passage.SM_MPR_CADRack_F7_W144_Passage",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -60.96001434326172,
+          60.96001434326172
+        ],
+        [
+          0.0,
+          1068.1600341796875
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W144_Standard.SM_MPR_CADRack_F7_W144_Standard": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W144_Standard.SM_MPR_CADRack_F7_W144_Standard",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -60.96001434326172,
+          60.96001434326172
+        ],
+        [
+          0.0,
+          1068.1600341796875
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W192_Passage.SM_MPR_CADRack_F7_W192_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W192_Passage.SM_MPR_CADRack_F7_W192_Passage",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -251.4600067138672,
+          251.4600067138672
+        ],
+        [
+          -60.96002197265625,
+          60.96002197265625
+        ],
+        [
+          0.0,
+          1068.1600341796875
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F9_W144_Passage.SM_MPR_CADRack_F9_W144_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F9_W144_Passage.SM_MPR_CADRack_F9_W144_Passage",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          994.4989013671875
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F9_W144_Standard.SM_MPR_CADRack_F9_W144_Standard": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F9_W144_Standard.SM_MPR_CADRack_F9_W144_Standard",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cargo.M_Zcool_Cargo",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_CargoSeam.M_Zcool_CargoSeam",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          994.4989013671875
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "CargoSeam",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "Cargo",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_FUnresolved_W144_Passage.SM_MPR_CADRack_FUnresolved_W144_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_FUnresolved_W144_Passage.SM_MPR_CADRack_FUnresolved_W144_Passage",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "lods": 3,
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          915.4000244140625
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowSystem_20261112.SM_MPR_CAD_WindowSystem_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowSystem_20261112.SM_MPR_CAD_WindowSystem_20261112",
+      "materials": [
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_GlassBlue.MI_MPR4_GlassBlue",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_Aluminium.MI_MPR4_Aluminium"
+      ],
+      "lods": 1,
+      "bounds_cm": [
+        [
+          -18210.00390625,
+          18278.076171875
+        ],
+        [
+          -8386.037109375,
+          9278.8837890625
+        ],
+        [
+          132.5,
+          387.5
+        ]
+      ],
+      "section_roles": [
+        [
+          "MPR4_GlassBlue",
+          "MPR4_Aluminium"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowFacade_00_20261112.SM_MPR_CAD_WindowFacade_00_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowFacade_00_20261112.SM_MPR_CAD_WindowFacade_00_20261112",
+      "materials": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "lods": 1,
+      "bounds_cm": [
+        [
+          -18193.00390625,
+          -16608.044921875
+        ],
+        [
+          -8385.236328125,
+          -8353.7958984375
+        ],
+        [
+          -120.00000762939453,
+          1360.0
+        ]
+      ],
+      "section_roles": [
+        [
+          "MPR4_IndustrialBlue",
+          "MPR4_FacadeWhite",
+          "MPR4_JointSeal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowFacade_04_20261112.SM_MPR_CAD_WindowFacade_04_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowFacade_04_20261112.SM_MPR_CAD_WindowFacade_04_20261112",
+      "materials": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "lods": 1,
+      "bounds_cm": [
+        [
+          16678.65625,
+          18261.076171875
+        ],
+        [
+          -8375.0791015625,
+          -8343.6396484375
+        ],
+        [
+          -120.00000762939453,
+          1360.0
+        ]
+      ],
+      "section_roles": [
+        [
+          "MPR4_IndustrialBlue",
+          "MPR4_FacadeWhite",
+          "MPR4_JointSeal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowFacade_05_20261112.SM_MPR_CAD_WindowFacade_05_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowFacade_05_20261112.SM_MPR_CAD_WindowFacade_05_20261112",
+      "materials": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "lods": 1,
+      "bounds_cm": [
+        [
+          18245.8359375,
+          18277.27734375
+        ],
+        [
+          -8358.8798828125,
+          2050.040283203125
+        ],
+        [
+          -120.00000762939453,
+          1360.0
+        ]
+      ],
+      "section_roles": [
+        [
+          "MPR4_IndustrialBlue",
+          "MPR4_FacadeWhite",
+          "MPR4_JointSeal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowFacade_15_20261112.SM_MPR_CAD_WindowFacade_15_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowFacade_15_20261112.SM_MPR_CAD_WindowFacade_15_20261112",
+      "materials": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "lods": 1,
+      "bounds_cm": [
+        [
+          -18209.205078125,
+          -18177.76171875
+        ],
+        [
+          -8369.0361328125,
+          9309.36328125
+        ],
+        [
+          -120.00000762939453,
+          1360.0
+        ]
+      ],
+      "section_roles": [
+        [
+          "MPR4_IndustrialBlue",
+          "MPR4_FacadeWhite",
+          "MPR4_JointSeal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowPartitions_20261112.SM_MPR_CAD_WindowPartitions_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_WindowPartitions_20261112.SM_MPR_CAD_WindowPartitions_20261112",
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain"
+      ],
+      "lods": 1,
+      "bounds_cm": [
+        [
+          -18162.525390625,
+          18230.595703125
+        ],
+        [
+          -8198.8564453125,
+          8364.482421875
+        ],
+        [
+          0.0,
+          330.0
+        ]
+      ],
+      "section_roles": [
+        [
+          "Porcelain"
+        ]
+      ]
+    }
+  }
+}

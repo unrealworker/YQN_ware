@@ -1,0 +1,161 @@
+{
+  "success": true,
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "map_sha256": "1af91bb69aeb9643a14b33dad7239f8d300c8e29318a85b48e84737d0c5ecf23",
+  "original_resource_packages_preserved": 1942,
+  "rack_instances": 2867,
+  "rack_groups": 59,
+  "sorter_workers_visible": 256,
+  "sorter_worker_slots": 278,
+  "sorter_machines": 22,
+  "central_carriers": 120,
+  "cart_count": 96,
+  "unchanged_sorter_configuration": true,
+  "sorter_checks": [
+    {
+      "name": "all_cad_people_native_positions_orientations_and_visibility",
+      "passed": true
+    },
+    {
+      "name": "empty_before_work_keeps_circulating",
+      "passed": true
+    },
+    {
+      "name": "manual_pause_freezes_logic_and_native_render_poses",
+      "passed": true
+    },
+    {
+      "name": "active_phases_move_at_constant_speed",
+      "passed": true
+    },
+    {
+      "name": "six_operators_repeat_fast_feed_cycles",
+      "passed": true
+    },
+    {
+      "name": "finished_work_empty_carriers_keep_circulating",
+      "passed": true
+    },
+    {
+      "name": "full_destination_backpressure_does_not_stop_common_chain",
+      "passed": true
+    },
+    {
+      "name": "native_tick_15_seconds_without_json_or_capture_polling",
+      "passed": true
+    },
+    {
+      "name": "conserved_ids_and_bounded_native_instance_pools",
+      "passed": true
+    },
+    {
+      "name": "current_cart_and_central_instance_binding",
+      "passed": true
+    },
+    {
+      "name": "cad64_whole_cart_full_waits_and_external_infeed_backpressures",
+      "passed": true
+    },
+    {
+      "name": "cad64_full_outbound_handoff_empty_arrival_docking_and_receiving_recovery",
+      "passed": true
+    },
+    {
+      "name": "cad120_whole_cart_full_waits_and_external_infeed_backpressures",
+      "passed": true
+    },
+    {
+      "name": "cad120_full_outbound_handoff_empty_arrival_docking_and_receiving_recovery",
+      "passed": true
+    },
+    {
+      "name": "automatic_whole_cart_replacement_preserved_with_continuous_chain",
+      "passed": true
+    },
+    {
+      "name": "both_cart_profiles_complete_without_actor_or_instance_pool_growth",
+      "passed": true
+    }
+  ],
+  "comparison_resolution": [
+    1920,
+    1080
+  ],
+  "comparison_views": 9,
+  "all_comparison_cameras_exactly_matched": true,
+  "fps_before": 41.916959150566,
+  "fps_after": 42.18958910002021,
+  "fps_sorter_view": 88.22375364287254,
+  "benchmark_scope": "Local native Unreal renderer, single process, 15 seconds, complete scene and original automatic simulation; not Pixel Streaming or measured vendor throughput.",
+  "visual_review": "Native captures reviewed: carton detail, rack families and open passage; window recesses and glazing; door/platform/stair connections; runtime workers and central distribution, full and empty carts. The original deep-aisle lighting remains dark. Diagnostic stepped cart snapshots can retain temporal reconstruction artifacts and are not motion-quality recordings.",
+  "evidence_files": [
+    {
+      "file": "images/before-01-interior-overview.png",
+      "sha256": "a1119b978ce56dbd56661258a2ed683888ecb984c211f0265164517cdc72c2f3"
+    },
+    {
+      "file": "images/before-rack-16.png",
+      "sha256": "323781985f975e6cbe4a2cb401be1b5918d7a1d9b68e179f44aac6faa8190cf6"
+    },
+    {
+      "file": "images/before-rack-5.png",
+      "sha256": "852adbf6879b76e84b8e3e37c9e66e40b37d6041f992da4ecc86f64982ff183d"
+    },
+    {
+      "file": "images/after-01-interior-overview.png",
+      "sha256": "8c7fc080297497fbe0659fc52251a737596b18213e78de86686ae314f5c5a64f"
+    },
+    {
+      "file": "images/after-rack-16.png",
+      "sha256": "f5b09eb489eb68a637c360ecbdfe80a4aa8fef8c220e95a3bfd1d860ec215036"
+    },
+    {
+      "file": "images/after-rack-5.png",
+      "sha256": "293191dd0ac63359b2b502d202aeda82ad740d2adc0d57b0d14ebaa31df3495a"
+    },
+    {
+      "file": "images/east-office-windows.png",
+      "sha256": "913caa020d0bd35c7fd2d76abe312fa647f570dba65d75fded16db47a6d1e555"
+    },
+    {
+      "file": "images/south-personnel-entrance.png",
+      "sha256": "1798024010fedb4e7d38a73fb6f0b3fe784460a495372304cff12e7261fbc674"
+    },
+    {
+      "file": "images/northwest-window-openings.png",
+      "sha256": "1f34e3514b0b392865839c888b3a7e4483841da84e3a8bc4575ec43322ac9484"
+    },
+    {
+      "file": "images/sorter-workers-running.png",
+      "sha256": "665b492b217ba3eda6538b5e54f390a035016a594e16b52f51c9634b8c4d69ac"
+    },
+    {
+      "file": "images/cad64_cart_full_waiting.png",
+      "sha256": "90027706ebcc92fb13e368b911477025a0a82240a3b757f5555da7f8803ac811"
+    },
+    {
+      "file": "images/cad64_cart_phase_0.png",
+      "sha256": "86d3e7b24d92ed0559205f40466a49d5c486b8245c31ee01c06f2525722de8d7"
+    },
+    {
+      "file": "images/cad120_cart_full_waiting.png",
+      "sha256": "283d564f5c31580c3867bd6a2e9807a22168d3dce91a851eed69fc9446d12c8d"
+    },
+    {
+      "file": "images/cad120_cart_phase_0.png",
+      "sha256": "b2fc9cacbd5ad92118f8141c1949ae83c98e0a7d8beae92ed3dc3e415974b4c1"
+    },
+    {
+      "file": "csv/before.csv",
+      "sha256": "fb80a2654981c5b4e2ef29fa666941524254a425c68f4e4515752364c23b946e"
+    },
+    {
+      "file": "csv/after.csv",
+      "sha256": "e52cc28d8ea42082e7d14e986ae86642002e38f254e7bef1e277dc2e8ddd0c82"
+    },
+    {
+      "file": "csv/sorter.csv",
+      "sha256": "7d9597a4129de906c1619970b0322f4c1631ffb98521730b24f9009dccb11baf"
+    }
+  ]
+}

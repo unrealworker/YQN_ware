@@ -1,0 +1,87 @@
+{
+  "success": true,
+  "stage": "details",
+  "views": [
+    {
+      "name": "east-office-windows",
+      "target": [
+        18250,
+        -4850,
+        170
+      ],
+      "distance": 1500,
+      "pitch": -12,
+      "yaw": 170
+    },
+    {
+      "name": "south-personnel-entrance",
+      "target": [
+        1620,
+        8500,
+        70
+      ],
+      "distance": 1000,
+      "pitch": -20,
+      "yaw": -70
+    },
+    {
+      "name": "northwest-window-openings",
+      "target": [
+        -16806,
+        -8344,
+        240
+      ],
+      "distance": 1000,
+      "pitch": -15,
+      "yaw": 80
+    }
+  ],
+  "captures": [
+    {
+      "name": "east-office-windows",
+      "file": "D:\\UEPro\\Test\\Saved\\MPR\\interior_cad_20261112\\runtime\\details\\east-office-windows.png",
+      "camera": [
+        19694.931011189412,
+        -5104.780322535065,
+        481.86753622663673,
+        -11.999999999999995,
+        170.0,
+        2.0322563531551034e-16
+      ]
+    },
+    {
+      "name": "south-personnel-entrance",
+      "file": "D:\\UEPro\\Test\\Saved\\MPR\\interior_cad_20261112\\runtime\\details\\south-personnel-entrance.png",
+      "camera": [
+        1298.6061951567317,
+        9383.02222155949,
+        412.0201433256687,
+        -20.000000000000004,
+        -69.99999999999997,
+        -1.6923377980788397e-15
+      ]
+    },
+    {
+      "name": "northwest-window-openings",
+      "file": "D:\\UEPro\\Test\\Saved\\MPR\\interior_cad_20261112\\runtime\\details\\northwest-window-openings.png",
+      "camera": [
+        -16973.731259496522,
+        -9295.2512425642,
+        498.81904510252076,
+        -14.999999999999993,
+        79.99999999999993,
+        3.292752502210958e-15
+      ]
+    }
+  ],
+  "resolution": [
+    1920,
+    1080
+  ],
+  "map_sha256": "1af91bb69aeb9643a14b33dad7239f8d300c8e29318a85b48e84737d0c5ecf23",
+  "conditions": "Native -game, automatic sorter simulation, 100 percent screen resolution, other project editor closed during performance measurement.",
+  "runtime_actor_count": 939,
+  "simulation_actor_count": 1,
+  "error": null,
+  "elapsed_seconds": 19.35899999999674
+}

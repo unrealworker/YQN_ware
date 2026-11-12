@@ -1,0 +1,96 @@
+{
+  "success": true,
+  "checks": [
+    {
+      "name": "SM_MPR_CAD_WindowSystem_20261112",
+      "bounds_error_m": 1.733886716692723e-05,
+      "triangles": 7260,
+      "materials": [
+        "MPR4_GlassBlue",
+        "MPR4_Aluminium"
+      ],
+      "window_rays": 0,
+      "pedestrian_door_rays": 0,
+      "glass_rays": 102
+    },
+    {
+      "name": "SM_MPR_CAD_WindowFacade_00_20261112",
+      "bounds_error_m": 1.52587890625e-05,
+      "triangles": 432,
+      "materials": [
+        "MPR4_IndustrialBlue",
+        "MPR4_FacadeWhite",
+        "MPR4_JointSeal"
+      ],
+      "window_rays": 18,
+      "pedestrian_door_rays": 0,
+      "glass_rays": 0
+    },
+    {
+      "name": "SM_MPR_CAD_WindowFacade_04_20261112",
+      "bounds_error_m": 1.52587890625e-05,
+      "triangles": 432,
+      "materials": [
+        "MPR4_IndustrialBlue",
+        "MPR4_FacadeWhite",
+        "MPR4_JointSeal"
+      ],
+      "window_rays": 18,
+      "pedestrian_door_rays": 0,
+      "glass_rays": 0
+    },
+    {
+      "name": "SM_MPR_CAD_WindowFacade_05_20261112",
+      "bounds_error_m": 1.52587890625e-05,
+      "triangles": 2844,
+      "materials": [
+        "MPR4_IndustrialBlue",
+        "MPR4_FacadeWhite",
+        "MPR4_JointSeal"
+      ],
+      "window_rays": 126,
+      "pedestrian_door_rays": 27,
+      "glass_rays": 0
+    },
+    {
+      "name": "SM_MPR_CAD_WindowFacade_15_20261112",
+      "bounds_error_m": 1.52587890625e-05,
+      "triangles": 4572,
+      "materials": [
+        "MPR4_IndustrialBlue",
+        "MPR4_FacadeWhite",
+        "MPR4_JointSeal"
+      ],
+      "window_rays": 207,
+      "pedestrian_door_rays": 45,
+      "glass_rays": 0
+    },
+    {
+      "name": "SM_MPR_CAD_WindowPartitions_20261112",
+      "bounds_error_m": 1.52587890625e-05,
+      "triangles": 1632,
+      "materials": [
+        "Porcelain"
+      ],
+      "window_rays": 0,
+      "pedestrian_door_rays": 0,
+      "glass_rays": 0
+    }
+  ],
+  "cad_glass_panes_verified": 102,
+  "external_window_apertures_verified": 41,
+  "measured_cad_jambs_verified": 82,
+  "retained_pedestrian_doors_on_changed_facades": 8,
+  "first_patch_door_facades_untouched": [
+    "MPR4_Facade_02",
+    "MPR4_Facade_07",
+    "MPR4_Facade_08",
+    "MPR4_Facade_10",
+    "MPR4_Facade_12"
+  ],
+  "unchanged_large_doors": 74,
+  "large_door_preservation_basis": "Facade02/12 asset references are outside this replacement set; first-patch validation already ray-checked all74.",
+  "exact_actor_replacements": 5,
+  "exact_old_glazing_removals": 3,
+  "limitations": "Offline FBX verification only. Window and sill heights are explicitly inherited display estimates. UE import and fixed-view inspection remain required."
+}

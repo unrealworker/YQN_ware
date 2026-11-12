@@ -1,0 +1,60 @@
+{
+  "source": "D:\\Data\\仓库数据\\MPR\\平面布局图_MPR规划图V1.1_ALL-IN-ONE_0921.dxf",
+  "verified_source_sha256": "c316aafe183162c5bef636885b59cc1000c3eecf50d8be645490b4716c6af863",
+  "stair_groups": 19,
+  "complete_external_stair_groups": 18,
+  "internal_stair_groups": 0,
+  "isolated_stair_layer_square_count": 1,
+  "nested_closed_column_sections": 309,
+  "matched_existing_centers": 161,
+  "unmodeled_sections_farther_than_half_m": 142,
+  "single_current_columns_between_source_pairs": 3,
+  "window_groups": 54,
+  "current_glazing_actors": [
+    {
+      "label": "MPR4_OfficeGlazing_West",
+      "guid": "940B0E4342E187D70917B5B8E34E9456",
+      "hidden": false,
+      "meshes": [
+        "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_OfficeGlazing_West.SM_MPR4_OfficeGlazing_West"
+      ]
+    },
+    {
+      "label": "MPR_OfficeGlazing",
+      "guid": "D6D13E164605395368CDDBB11603E1B3",
+      "hidden": false,
+      "meshes": [
+        "/Game/MPRWarehouse/Architecture/Meshes/SM_MPR_OfficeGlazing.SM_MPR_OfficeGlazing"
+      ]
+    },
+    {
+      "label": "MPR4_OfficeGlazing_East",
+      "guid": "F6DE10CB43C4E765BC4B519CFC7BC795",
+      "hidden": false,
+      "meshes": [
+        "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_OfficeGlazing_East.SM_MPR4_OfficeGlazing_East"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "priority": "high",
+      "id": "nested_columns_missing",
+      "conclusion": "164 selected PILLAR inserts are correctly placed but do not cover the nested architectural base column sections.",
+      "safe_repair": "Combine the nested source sections with selected PILLAR using geometric matching. Preserve 161 matches; explicitly resolve the 3 paired-column conflicts. Match current height only as declared visualization estimate; do not duplicate coincident structural cores."
+    },
+    {
+      "priority": "high",
+      "id": "external_stairs_missing",
+      "conclusion": "18 full stair-and-landing plan assemblies physically adjoin pedestrian doors on the north/south facade; no stair geometry in baseline.",
+      "safe_repair": "Follow measured tread/landing/rail footprints. Height remains unknown in CAD; current exterior-to-floor delta1.2m is a scene assumption, not surveyed stair rise. Exclude the isolated square."
+    },
+    {
+      "priority": "medium",
+      "id": "window_layout_not_cad",
+      "conclusion": "Source window groups extend along the west and east walls and three entry vestibules; current three glazing actors derive from two regular display bands, including an older overlapping band.",
+      "safe_repair": "Map actual window faces and vestibule plan first. Do not turn horizontal plan frames into arbitrary solid cuboids; heights and mullion vertical divisions require declared assumptions or elevations."
+    }
+  ],
+  "scope": "Read-only source and saved baseline audit; no new geometry generated; source layers are corroborated by repeated geometry and current overlaps, not names alone."
+}

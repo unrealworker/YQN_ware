@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "checks": [
+    {
+      "mesh": "SM_MPR_CAD_NestedColumns_20261112",
+      "triangles": 3408,
+      "bounds_error_m": 1.8613281241641744e-05,
+      "contact_checks": 142
+    },
+    {
+      "mesh": "SM_MPR_CAD_EntranceStairs_20261112",
+      "triangles": 6072,
+      "bounds_error_m": 1.52587890625e-05,
+      "contact_checks": 144
+    }
+  ],
+  "exact_removal_targets_verified": 6,
+  "column_profiles": 142,
+  "stair_groups": 18,
+  "column_top_contacts": 142,
+  "stair_tread_and_landing_contacts": 144,
+  "limitations": "Offline FBX verification. All heights follow declared existing-scene estimates, not source measured elevations."
+}

@@ -1,0 +1,4427 @@
+{
+  "source_sha256": "c316aafe183162c5bef636885b59cc1000c3eecf50d8be645490b4716c6af863",
+  "missing_partition_segments": [
+    {
+      "points_m": [
+        [
+          -170.47464,
+          79.58510000000001
+        ],
+        [
+          -169.47109,
+          79.58510000000001
+        ]
+      ],
+      "thickness_m": 0.12699999999999534,
+      "length_m": 1.00354999999999,
+      "uncovered_length_m": 1.00354999999999,
+      "layer": "A-WALL-GPE",
+      "source_face_handles": [
+        [
+          "2C93B4",
+          "2E093B"
+        ],
+        [
+          "2C93B4",
+          "2E0ABA"
+        ]
+      ],
+      "disposition": "plan review required; existing nearest-pair algorithm only keeps one overlap per face"
+    },
+    {
+      "points_m": [
+        [
+          -178.45024,
+          48.4224575
+        ],
+        [
+          -174.72475,
+          48.4224575
+        ]
+      ],
+      "thickness_m": 0.12695499999999527,
+      "length_m": 3.7254900000000077,
+      "uncovered_length_m": 3.7254900000000077,
+      "layer": "A-WALL-GPE",
+      "source_face_handles": [
+        [
+          "2C93B4",
+          "2E0948"
+        ],
+        [
+          "2C93B4",
+          "2E0A33"
+        ]
+      ],
+      "disposition": "plan review required; existing nearest-pair algorithm only keeps one overlap per face"
+    },
+    {
+      "points_m": [
+        [
+          7.52825,
+          69.72038
+        ],
+        [
+          7.52825,
+          74.08918
+        ]
+      ],
+      "thickness_m": 0.12699999999999978,
+      "length_m": 4.368799999999993,
+      "uncovered_length_m": 4.368799999999993,
+      "layer": "A-WALL-NDE",
+      "source_face_handles": [
+        [
+          "2C93B4",
+          "2E0980"
+        ],
+        [
+          "2C93B4",
+          "2E0A73"
+        ]
+      ],
+      "disposition": "plan review required; existing nearest-pair algorithm only keeps one overlap per face"
+    },
+    {
+      "points_m": [
+        [
+          -5.80433,
+          -79.221815
+        ],
+        [
+          -4.61778,
+          -79.221815
+        ]
+      ],
+      "thickness_m": 0.1274699999999882,
+      "length_m": 1.1865500000000004,
+      "uncovered_length_m": 1.1865500000000004,
+      "layer": "A-WALL-NDE",
+      "source_face_handles": [
+        [
+          "2C93B4",
+          "2E098A"
+        ],
+        [
+          "2C93B4",
+          "2E0A36"
+        ]
+      ],
+      "disposition": "plan review required; existing nearest-pair algorithm only keeps one overlap per face"
+    },
+    {
+      "points_m": [
+        [
+          10.9881,
+          69.81880000000001
+        ],
+        [
+          12.17464,
+          69.81880000000001
+        ]
+      ],
+      "thickness_m": 0.12699999999999534,
+      "length_m": 1.1865400000000008,
+      "uncovered_length_m": 1.1865400000000008,
+      "layer": "A-WALL-NDE",
+      "source_face_handles": [
+        [
+          "2C93B4",
+          "2E0A6E"
+        ],
+        [
+          "2C93B4",
+          "2E0A72"
+        ]
+      ],
+      "disposition": "plan review required; existing nearest-pair algorithm only keeps one overlap per face"
+    },
+    {
+      "points_m": [
+        [
+          16.710659999999997,
+          68.67898
+        ],
+        [
+          16.710659999999997,
+          71.49838
+        ]
+      ],
+      "thickness_m": 0.1269999999999989,
+      "length_m": 2.8194000000000017,
+      "uncovered_length_m": 2.8194000000000017,
+      "layer": "A-WALL-NDE",
+      "source_face_handles": [
+        [
+          "2C93B4",
+          "2E103E"
+        ],
+        [
+          "2C93B4",
+          "2E1040"
+        ]
+      ],
+      "disposition": "plan review required; existing nearest-pair algorithm only keeps one overlap per face"
+    }
+  ],
+  "pedestrian_doors": [
+    {
+      "id": "CAD_2C93B4_2E1003",
+      "source_handles": [
+        "2C93B4",
+        "2E1003"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -181.93004265110565,
+          -51.894822637976816
+        ],
+        [
+          -181.93004265110565,
+          -52.809222637976816
+        ]
+      ],
+      "opening_center_m": [
+        -181.93004265110565,
+        -52.352022637976816
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -182.26511,
+        -52.35202
+      ],
+      "exterior_edge": 15,
+      "nearest_exterior_edge_distance_m": 2.6511056603339966e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1009",
+      "source_handles": [
+        "2C93B4",
+        "2E1009"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          2.271005170605897,
+          -81.1047095509732
+        ],
+        [
+          3.1854051706058972,
+          -81.1047095509732
+        ]
+      ],
+      "opening_center_m": [
+        2.7282051706058974,
+        -81.1047095509732
+      ],
+      "opening_width_m": 0.9144000000000001,
+      "swing_bbox_center_m": [
+        2.72821,
+        -81.43978
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 2.8449104490267985,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E100A",
+      "source_handles": [
+        "2C93B4",
+        "2E100A"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          1.0137598712576954,
+          -83.1368226379876
+        ],
+        [
+          1.0137598712576954,
+          -82.2224226379876
+        ]
+      ],
+      "opening_center_m": [
+        1.0137598712576954,
+        -82.6796226379876
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        1.34883,
+        -82.67962
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 1.2699973620123899,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1012",
+      "source_handles": [
+        "2C93B4",
+        "2E1012"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -0.9928401287423047,
+          -77.37102263798869
+        ],
+        [
+          -0.07844012874230466,
+          -77.37102263798869
+        ]
+      ],
+      "opening_center_m": [
+        -0.5356401287423047,
+        -77.37102263798869
+      ],
+      "opening_width_m": 0.9144,
+      "swing_bbox_center_m": [
+        -0.53564,
+        -77.70609
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 6.578597362011308,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1013",
+      "source_handles": [
+        "2C93B4",
+        "2E1013"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -1.3230401287424893,
+          -77.67582263798869
+        ],
+        [
+          -2.2374401287424894,
+          -77.67582263798869
+        ]
+      ],
+      "opening_center_m": [
+        -1.7802401287424894,
+        -77.67582263798869
+      ],
+      "opening_width_m": 0.9144000000000001,
+      "swing_bbox_center_m": [
+        -1.78024,
+        -78.01089
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 6.273797362011308,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1014",
+      "source_handles": [
+        "2C93B4",
+        "2E1014"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -3.0248401287451228,
+          -77.6758226379912
+        ],
+        [
+          -3.939240128745123,
+          -77.6758226379912
+        ]
+      ],
+      "opening_center_m": [
+        -3.4820401287451226,
+        -77.6758226379912
+      ],
+      "opening_width_m": 0.9144000000000001,
+      "swing_bbox_center_m": [
+        -3.48204,
+        -78.01089
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 6.273797362008793,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1015",
+      "source_handles": [
+        "2C93B4",
+        "2E1015"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -7.404527401196155,
+          -77.67582263795843
+        ],
+        [
+          -6.490127401196155,
+          -77.67582263795843
+        ]
+      ],
+      "opening_center_m": [
+        -6.947327401196155,
+        -77.67582263795843
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -6.94733,
+        -78.01089
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 6.273797362041563,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1016",
+      "source_handles": [
+        "2C93B4",
+        "2E1016"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          3.642357348879845,
+          -83.9496226379913
+        ],
+        [
+          2.7279573488798454,
+          -83.9496226379913
+        ]
+      ],
+      "opening_center_m": [
+        3.1851573488798453,
+        -83.9496226379913
+      ],
+      "opening_width_m": 0.9143999999999997,
+      "swing_bbox_center_m": [
+        3.18516,
+        -84.28469
+      ],
+      "exterior_edge": 12,
+      "nearest_exterior_edge_distance_m": 2.637991300957765e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1017",
+      "source_handles": [
+        "2C93B4",
+        "2E1017"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          15.529557348879845,
+          -83.94962263799125
+        ],
+        [
+          14.615157348879844,
+          -83.94962263799125
+        ]
+      ],
+      "opening_center_m": [
+        15.072357348879844,
+        -83.94962263799125
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        15.07236,
+        -84.28469
+      ],
+      "exterior_edge": 12,
+      "nearest_exterior_edge_distance_m": 2.6379912583252008e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1018",
+      "source_handles": [
+        "2C93B4",
+        "2E1018"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          16.850357348886174,
+          -83.94962263799125
+        ],
+        [
+          17.764757348886175,
+          -83.94962263799125
+        ]
+      ],
+      "opening_center_m": [
+        17.307557348886174,
+        -83.94962263799125
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        17.30756,
+        -84.28469
+      ],
+      "exterior_edge": 12,
+      "nearest_exterior_edge_distance_m": 2.6379912583252008e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1019",
+      "source_handles": [
+        "2C93B4",
+        "2E1019"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -28.056842651120153,
+          -83.94962263799125
+        ],
+        [
+          -28.971242651120154,
+          -83.94962263799125
+        ]
+      ],
+      "opening_center_m": [
+        -28.514042651120153,
+        -83.94962263799125
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -28.51404,
+        -84.28469
+      ],
+      "exterior_edge": 12,
+      "nearest_exterior_edge_distance_m": 2.6379912583252008e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E101A",
+      "source_handles": [
+        "2C93B4",
+        "2E101A"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -59.756042651120154,
+          -83.94962263799125
+        ],
+        [
+          -60.670442651120155,
+          -83.94962263799125
+        ]
+      ],
+      "opening_center_m": [
+        -60.213242651120154,
+        -83.94962263799125
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -60.21324,
+        -84.28469
+      ],
+      "exterior_edge": 12,
+      "nearest_exterior_edge_distance_m": 2.637991258325201e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E101B",
+      "source_handles": [
+        "2C93B4",
+        "2E101B"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -91.45524265112014,
+          -83.94962263798497
+        ],
+        [
+          -92.36964265112015,
+          -83.94962263798497
+        ]
+      ],
+      "opening_center_m": [
+        -91.91244265112014,
+        -83.94962263798497
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -91.91244,
+        -84.28469
+      ],
+      "exterior_edge": 12,
+      "nearest_exterior_edge_distance_m": 2.6379849771274166e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E101C",
+      "source_handles": [
+        "2C93B4",
+        "2E101C"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -123.15444265112015,
+          -83.94962263799125
+        ],
+        [
+          -124.06884265112015,
+          -83.94962263799125
+        ]
+      ],
+      "opening_center_m": [
+        -123.61164265112015,
+        -83.94962263799125
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -123.61164,
+        -84.28469
+      ],
+      "exterior_edge": 12,
+      "nearest_exterior_edge_distance_m": 2.6379912583252008e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E101D",
+      "source_handles": [
+        "2C93B4",
+        "2E101D"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -180.21554265110657,
+          -88.06442263796619
+        ],
+        [
+          -180.21554265110657,
+          -87.15002263796619
+        ]
+      ],
+      "opening_center_m": [
+        -180.21554265110657,
+        -87.60722263796619
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -180.55061,
+        -87.60722
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 1.714497348893417,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E101E",
+      "source_handles": [
+        "2C93B4",
+        "2E101E"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -181.93004265110565,
+          -20.195622637976747
+        ],
+        [
+          -181.93004265110565,
+          -21.110022637976748
+        ]
+      ],
+      "opening_center_m": [
+        -181.93004265110565,
+        -20.652822637976747
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -182.26511,
+        -20.65282
+      ],
+      "exterior_edge": 15,
+      "nearest_exterior_edge_distance_m": 2.6511056603339966e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E101F",
+      "source_handles": [
+        "2C93B4",
+        "2E101F"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -181.9300038822991,
+          2.562699824410153
+        ],
+        [
+          -181.9300038822991,
+          3.477099824410153
+        ]
+      ],
+      "opening_center_m": [
+        -181.9300038822991,
+        3.019899824410153
+      ],
+      "opening_width_m": 0.9144000000000001,
+      "swing_bbox_center_m": [
+        -182.26507,
+        3.0199
+      ],
+      "exterior_edge": 15,
+      "nearest_exterior_edge_distance_m": 3.611770088696176e-05,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1020",
+      "source_handles": [
+        "2C93B4",
+        "2E1020"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -181.9300038822991,
+          4.391499824410153
+        ],
+        [
+          -181.9300038822991,
+          3.477099824410153
+        ]
+      ],
+      "opening_center_m": [
+        -181.9300038822991,
+        3.934299824410153
+      ],
+      "opening_width_m": 0.9144000000000001,
+      "swing_bbox_center_m": [
+        -182.26507,
+        3.9343
+      ],
+      "exterior_edge": 15,
+      "nearest_exterior_edge_distance_m": 3.611770088696176e-05,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1021",
+      "source_handles": [
+        "2C93B4",
+        "2E1021"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -178.60264265111988,
+          48.20653181257511
+        ],
+        [
+          -178.60264265111988,
+          47.292131812575114
+        ]
+      ],
+      "opening_center_m": [
+        -178.60264265111988,
+        47.74933181257511
+      ],
+      "opening_width_m": 0.9143999999999934,
+      "swing_bbox_center_m": [
+        -178.93771,
+        47.74933
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 3.327397348880112,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1022",
+      "source_handles": [
+        "2C93B4",
+        "2E1022"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -181.34584265111985,
+          48.3589773620126
+        ],
+        [
+          -180.43144265111985,
+          48.3589773620126
+        ]
+      ],
+      "opening_center_m": [
+        -180.88864265111985,
+        48.3589773620126
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -180.88864,
+        48.02391
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 1.041397348880139,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1023",
+      "source_handles": [
+        "2C93B4",
+        "2E1023"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -166.23284265111982,
+          71.21897736201034
+        ],
+        [
+          -166.23284265111982,
+          72.13337736201034
+        ]
+      ],
+      "opening_center_m": [
+        -166.23284265111982,
+        71.67617736201034
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -166.56791,
+        71.67618
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 2.874245944798596,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1024",
+      "source_handles": [
+        "2C93B4",
+        "2E1024"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -166.23284265111988,
+          64.94553866101751
+        ],
+        [
+          -166.23284265111988,
+          65.85993866101751
+        ]
+      ],
+      "opening_center_m": [
+        -166.23284265111988,
+        65.40273866101751
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -166.56791,
+        65.40274
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 9.144911344787213,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1025",
+      "source_handles": [
+        "2C93B4",
+        "2E1025"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -169.34408865111928,
+          79.36920236201777
+        ],
+        [
+          -169.34408865111928,
+          78.45480236201777
+        ]
+      ],
+      "opening_center_m": [
+        -169.34408865111928,
+        78.91200236201777
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -169.00902,
+        78.912
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 3.2636486511192686,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1026",
+      "source_handles": [
+        "2C93B4",
+        "2E1026"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -169.83964265111982,
+          71.16821497203628
+        ],
+        [
+          -169.83964265111982,
+          72.08261497203628
+        ]
+      ],
+      "opening_center_m": [
+        -169.83964265111982,
+        71.62541497203628
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -169.50458,
+        71.62541
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 4.760634544551101,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1027",
+      "source_handles": [
+        "2C93B4",
+        "2E1027"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -171.3890426511058,
+          79.6486023620126
+        ],
+        [
+          -170.4746426511058,
+          79.6486023620126
+        ]
+      ],
+      "opening_center_m": [
+        -170.9318426511058,
+        79.6486023620126
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -170.93184,
+        79.98367
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 4.041777637987408,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1028",
+      "source_handles": [
+        "2C93B4",
+        "2E1028"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -178.0240155668225,
+          71.4729773620126
+        ],
+        [
+          -178.0240155668225,
+          72.3873773620126
+        ]
+      ],
+      "opening_center_m": [
+        -178.0240155668225,
+        71.9301773620126
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -178.35908,
+        71.93018
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 3.9060244331774925,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1029",
+      "source_handles": [
+        "2C93B4",
+        "2E1029"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -169.34408865112002,
+          75.33377736200974
+        ],
+        [
+          -169.34408865112002,
+          76.24817736200973
+        ]
+      ],
+      "opening_center_m": [
+        -169.34408865112002,
+        75.79097736200973
+      ],
+      "opening_width_m": 0.9143999999999863,
+      "swing_bbox_center_m": [
+        -169.00902,
+        75.79098
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 3.2636486511200076,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E102A",
+      "source_handles": [
+        "2C93B4",
+        "2E102A"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -178.0240155668225,
+          65.2753773620126
+        ],
+        [
+          -178.0240155668225,
+          66.1897773620126
+        ]
+      ],
+      "opening_center_m": [
+        -178.0240155668225,
+        65.7325773620126
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -178.35908,
+        65.73258
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 3.9060244331774925,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E102B",
+      "source_handles": [
+        "2C93B4",
+        "2E102B"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -180.21554265111607,
+          78.66117736201204
+        ],
+        [
+          -180.21554265111607,
+          77.74677736201204
+        ]
+      ],
+      "opening_center_m": [
+        -180.21554265111607,
+        78.20397736201204
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -180.55061,
+        78.20398
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 1.7144973488839241,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E102C",
+      "source_handles": [
+        "2C93B4",
+        "2E102C"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -165.47084265111698,
+          74.54637736201185
+        ],
+        [
+          -164.55644265111698,
+          74.54637736201185
+        ]
+      ],
+      "opening_center_m": [
+        -165.01364265111698,
+        74.54637736201185
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -165.01364,
+        74.88144
+      ],
+      "exterior_edge": 2,
+      "nearest_exterior_edge_distance_m": 2.637988146148018e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E102D",
+      "source_handles": [
+        "2C93B4",
+        "2E102D"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -178.0240155668225,
+          71.1427773620126
+        ],
+        [
+          -178.0240155668225,
+          70.2283773620126
+        ]
+      ],
+      "opening_center_m": [
+        -178.0240155668225,
+        70.6855773620126
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -178.35908,
+        70.68558
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 3.9060244331774925,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E102E",
+      "source_handles": [
+        "2C93B4",
+        "2E102E"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -178.0240155668225,
+          64.9451773620126
+        ],
+        [
+          -178.0240155668225,
+          64.0307773620126
+        ]
+      ],
+      "opening_center_m": [
+        -178.0240155668225,
+        64.4879773620126
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -178.35908,
+        64.48798
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 3.9060244331774925,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E102F",
+      "source_handles": [
+        "2C93B4",
+        "2E102F"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -178.0240155668225,
+          58.7475773620126
+        ],
+        [
+          -178.0240155668225,
+          57.8331773620126
+        ]
+      ],
+      "opening_center_m": [
+        -178.0240155668225,
+        58.2903773620126
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -178.35908,
+        58.29038
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 3.9060244331774925,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1030",
+      "source_handles": [
+        "2C93B4",
+        "2E1030"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -91.455242651119,
+          74.54637736200996
+        ],
+        [
+          -92.369642651119,
+          74.54637736200996
+        ]
+      ],
+      "opening_center_m": [
+        -91.912442651119,
+        74.54637736200996
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -91.91244,
+        74.88144
+      ],
+      "exterior_edge": 2,
+      "nearest_exterior_edge_distance_m": 2.6379900361916953e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1031",
+      "source_handles": [
+        "2C93B4",
+        "2E1031"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -178.0240155668225,
+          59.0777773620126
+        ],
+        [
+          -178.0240155668225,
+          59.9921773620126
+        ]
+      ],
+      "opening_center_m": [
+        -178.0240155668225,
+        59.5349773620126
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -178.35908,
+        59.53498
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 3.9060244331774925,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1032",
+      "source_handles": [
+        "2C93B4",
+        "2E1032"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -28.056842651119,
+          74.54637736201236
+        ],
+        [
+          -28.971242651119,
+          74.54637736201236
+        ]
+      ],
+      "opening_center_m": [
+        -28.514042651119,
+        74.54637736201236
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -28.51404,
+        74.88144
+      ],
+      "exterior_edge": 2,
+      "nearest_exterior_edge_distance_m": 2.6379876345572484e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1033",
+      "source_handles": [
+        "2C93B4",
+        "2E1033"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -123.15444265111697,
+          74.54637736200996
+        ],
+        [
+          -124.06884265111697,
+          74.54637736200996
+        ]
+      ],
+      "opening_center_m": [
+        -123.61164265111697,
+        74.54637736200996
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -123.61164,
+        74.88144
+      ],
+      "exterior_edge": 2,
+      "nearest_exterior_edge_distance_m": 2.6379900361916953e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1034",
+      "source_handles": [
+        "2C93B4",
+        "2E1034"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -166.8424420432664,
+          48.20653181257511
+        ],
+        [
+          -166.8424420432664,
+          47.292131812575114
+        ]
+      ],
+      "opening_center_m": [
+        -166.8424420432664,
+        47.74933181257511
+      ],
+      "opening_width_m": 0.9143999999999934,
+      "swing_bbox_center_m": [
+        -166.50738,
+        47.74933
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 15.087597956733589,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1035",
+      "source_handles": [
+        "2C93B4",
+        "2E1035"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -178.0240155668225,
+          55.6487773620126
+        ],
+        [
+          -178.0240155668225,
+          54.7343773620126
+        ]
+      ],
+      "opening_center_m": [
+        -178.0240155668225,
+        55.1915773620126
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -178.35908,
+        55.19158
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 3.9060244331774925,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1036",
+      "source_handles": [
+        "2C93B4",
+        "2E1036"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -181.9300426510006,
+          43.40597736201186
+        ],
+        [
+          -181.9300426510006,
+          42.49157736201186
+        ]
+      ],
+      "opening_center_m": [
+        -181.9300426510006,
+        42.94877736201186
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -182.26511,
+        42.94878
+      ],
+      "exterior_edge": 15,
+      "nearest_exterior_edge_distance_m": 2.6510006136959423e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1037",
+      "source_handles": [
+        "2C93B4",
+        "2E1037"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -59.75604265111895,
+          74.54637736200988
+        ],
+        [
+          -60.670442651118954,
+          74.54637736200988
+        ]
+      ],
+      "opening_center_m": [
+        -60.213242651118954,
+        74.54637736200988
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -60.21324,
+        74.88144
+      ],
+      "exterior_edge": 2,
+      "nearest_exterior_edge_distance_m": 2.6379901214568235e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1054",
+      "source_handles": [
+        "2C93B4",
+        "2E1054"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          20.050757348882986,
+          71.62537736201186
+        ],
+        [
+          19.136357348882985,
+          71.62537736201186
+        ]
+      ],
+      "opening_center_m": [
+        19.593557348882985,
+        71.62537736201186
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        19.59356,
+        71.96044
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 2.9210026379881384,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1055",
+      "source_handles": [
+        "2C93B4",
+        "2E1055"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          20.380957348883033,
+          71.62537736201186
+        ],
+        [
+          21.295357348883034,
+          71.62537736201186
+        ]
+      ],
+      "opening_center_m": [
+        20.838157348883033,
+        71.62537736201186
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        20.83816,
+        71.96044
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 2.9210026379881384,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E105A",
+      "source_handles": [
+        "2C93B4",
+        "2E105A"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          20.609557348883033,
+          68.67897736201186
+        ],
+        [
+          19.695157348883033,
+          68.67897736201186
+        ]
+      ],
+      "opening_center_m": [
+        20.152357348883033,
+        68.67897736201186
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        20.15236,
+        69.01404
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 5.867402637988135,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E106B",
+      "source_handles": [
+        "2C93B4",
+        "2E106B"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          12.860442098955614,
+          68.52646427499504
+        ],
+        [
+          13.774842098955615,
+          68.52646427499504
+        ]
+      ],
+      "opening_center_m": [
+        13.317642098955615,
+        68.52646427499504
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        13.31764,
+        68.86153
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 6.019915725004964,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E106C",
+      "source_handles": [
+        "2C93B4",
+        "2E106C"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          8.607962882643854,
+          68.52646427501305
+        ],
+        [
+          7.693562882643853,
+          68.52646427501305
+        ]
+      ],
+      "opening_center_m": [
+        8.150762882643853,
+        68.52646427501305
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        8.15076,
+        68.86153
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 6.019915724986944,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E106D",
+      "source_handles": [
+        "2C93B4",
+        "2E106D"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          12.083721315268114,
+          68.52646427499799
+        ],
+        [
+          11.169321315268116,
+          68.52646427499799
+        ]
+      ],
+      "opening_center_m": [
+        11.626521315268114,
+        68.52646427499799
+      ],
+      "opening_width_m": 0.9143999999999988,
+      "swing_bbox_center_m": [
+        11.62652,
+        68.86153
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 6.019915725002008,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E106E",
+      "source_handles": [
+        "2C93B4",
+        "2E106E"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          7.337754826502734,
+          69.72037736201264
+        ],
+        [
+          6.4233548265027345,
+          69.72037736201264
+        ]
+      ],
+      "opening_center_m": [
+        6.880554826502735,
+        69.72037736201264
+      ],
+      "opening_width_m": 0.9143999999999997,
+      "swing_bbox_center_m": [
+        6.88055,
+        70.05544
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 4.826002637987358,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E106F",
+      "source_handles": [
+        "2C93B4",
+        "2E106F"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          4.238954826502642,
+          69.72037736201256
+        ],
+        [
+          3.3245548265026423,
+          69.72037736201256
+        ]
+      ],
+      "opening_center_m": [
+        3.781754826502642,
+        69.72037736201256
+      ],
+      "opening_width_m": 0.9143999999999997,
+      "swing_bbox_center_m": [
+        3.78175,
+        70.05544
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 4.826002637987443,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1070",
+      "source_handles": [
+        "2C93B4",
+        "2E1070"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -4.676445173497265,
+          69.7203773620108
+        ],
+        [
+          -3.762045173497265,
+          69.7203773620108
+        ]
+      ],
+      "opening_center_m": [
+        -4.219245173497265,
+        69.7203773620108
+      ],
+      "opening_width_m": 0.9143999999999997,
+      "swing_bbox_center_m": [
+        -4.21925,
+        70.05544
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 4.826002637989205,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1076",
+      "source_handles": [
+        "2C93B4",
+        "2E1076"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -9.756445173497264,
+          69.72037736201264
+        ],
+        [
+          -10.670845173497264,
+          69.72037736201264
+        ]
+      ],
+      "opening_center_m": [
+        -10.213645173497264,
+        69.72037736201264
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -10.21365,
+        70.05544
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 4.826002637987358,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E109B",
+      "source_handles": [
+        "2C93B4",
+        "2E109B"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          182.61075734888294,
+          9.192177362008398
+        ],
+        [
+          182.61075734888294,
+          8.277777362008397
+        ]
+      ],
+      "opening_center_m": [
+        182.61075734888294,
+        8.734977362008397
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        182.94582,
+        8.73498
+      ],
+      "exterior_edge": 5,
+      "nearest_exterior_edge_distance_m": 2.6511170574394782e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E109F",
+      "source_handles": [
+        "2C93B4",
+        "2E109F"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          182.61075734888294,
+          43.304377362008395
+        ],
+        [
+          182.61075734888294,
+          42.389977362008395
+        ]
+      ],
+      "opening_center_m": [
+        182.61075734888294,
+        42.847177362008395
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        182.94582,
+        42.84718
+      ],
+      "exterior_edge": 5,
+      "nearest_exterior_edge_distance_m": 2.6511170574394782e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1138",
+      "source_handles": [
+        "2C93B4",
+        "2E1138"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          166.78655734888292,
+          -21.1608226379916
+        ],
+        [
+          166.78655734888292,
+          -22.0752226379916
+        ]
+      ],
+      "opening_center_m": [
+        166.78655734888292,
+        -21.6180226379916
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        167.12162,
+        -21.61802
+      ],
+      "exterior_edge": 7,
+      "nearest_exterior_edge_distance_m": 2.6511170858611877e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E113D",
+      "source_handles": [
+        "2C93B4",
+        "2E113D"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          165.82135734888294,
+          -50.98042263798846
+        ],
+        [
+          164.90695734888294,
+          -50.98042263798846
+        ]
+      ],
+      "opening_center_m": [
+        165.36415734888294,
+        -50.98042263798846
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        165.36416,
+        -51.31549
+      ],
+      "exterior_edge": 8,
+      "nearest_exterior_edge_distance_m": 2.637988458786822e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1142",
+      "source_handles": [
+        "2C93B4",
+        "2E1142"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          149.94635734888294,
+          -66.22042263798848
+        ],
+        [
+          149.03195734888294,
+          -66.22042263798848
+        ]
+      ],
+      "opening_center_m": [
+        149.48915734888294,
+        -66.22042263798848
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        149.48916,
+        -66.55549
+      ],
+      "exterior_edge": 10,
+      "nearest_exterior_edge_distance_m": 2.6379884729976766e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1147",
+      "source_handles": [
+        "2C93B4",
+        "2E1147"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          130.74395734888293,
+          -83.94962263798848
+        ],
+        [
+          129.82955734888293,
+          -83.94962263798848
+        ]
+      ],
+      "opening_center_m": [
+        130.28675734888293,
+        -83.94962263798848
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        130.28676,
+        -84.28469
+      ],
+      "exterior_edge": 12,
+      "nearest_exterior_edge_distance_m": 2.6379884872085313e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E114C",
+      "source_handles": [
+        "2C93B4",
+        "2E114C"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          182.61075734888294,
+          -5.9462226379916485
+        ],
+        [
+          182.61075734888294,
+          -6.860622637991649
+        ]
+      ],
+      "opening_center_m": [
+        182.61075734888294,
+        -6.403422637991649
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        182.94582,
+        -6.40342
+      ],
+      "exterior_edge": 5,
+      "nearest_exterior_edge_distance_m": 2.6511170574394782e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E11A5",
+      "source_handles": [
+        "2C93B4",
+        "2E11A5"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          180.8962573481458,
+          78.55957736186045
+        ],
+        [
+          180.8962573481458,
+          77.64517736186045
+        ]
+      ],
+      "opening_center_m": [
+        180.8962573481458,
+        78.10237736186045
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        181.23132,
+        78.10238
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 1.7145026518541897,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E11B3",
+      "source_handles": [
+        "2C93B4",
+        "2E11B3"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          174.590128426121,
+          75.5115773618599
+        ],
+        [
+          175.504528426121,
+          75.5115773618599
+        ]
+      ],
+      "opening_center_m": [
+        175.047328426121,
+        75.5115773618599
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        175.04733,
+        75.84664
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 7.563431573879001,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E11B4",
+      "source_handles": [
+        "2C93B4",
+        "2E11B4"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          176.418928426121,
+          75.5115773618599
+        ],
+        [
+          175.504528426121,
+          75.5115773618599
+        ]
+      ],
+      "opening_center_m": [
+        175.961728426121,
+        75.5115773618599
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        175.96173,
+        75.84664
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 6.649031573879,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E11DB",
+      "source_handles": [
+        "2C93B4",
+        "2E11DB"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          175.7527573481461,
+          73.93677736185995
+        ],
+        [
+          174.8383573481461,
+          73.93677736185995
+        ]
+      ],
+      "opening_center_m": [
+        175.2955573481461,
+        73.93677736185995
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        175.29556,
+        74.27184
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 7.315202651853895,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E11DE",
+      "source_handles": [
+        "2C93B4",
+        "2E11DE"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          178.9277573481461,
+          60.3731773618599
+        ],
+        [
+          178.0133573481461,
+          60.3731773618599
+        ]
+      ],
+      "opening_center_m": [
+        178.4705573481461,
+        60.3731773618599
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        178.47056,
+        60.70824
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 4.140202651853912,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E11DF",
+      "source_handles": [
+        "2C93B4",
+        "2E11DF"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          179.35955734851996,
+          60.3731773618599
+        ],
+        [
+          180.27395734851996,
+          60.3731773618599
+        ]
+      ],
+      "opening_center_m": [
+        179.81675734851996,
+        60.3731773618599
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        179.81676,
+        60.70824
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 2.7940026514800422,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E11E0",
+      "source_handles": [
+        "2C93B4",
+        "2E11E0"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          178.9277573481461,
+          63.8783773618599
+        ],
+        [
+          178.0133573481461,
+          63.8783773618599
+        ]
+      ],
+      "opening_center_m": [
+        178.4705573481461,
+        63.8783773618599
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        178.47056,
+        63.54331
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 4.140202651853912,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1221",
+      "source_handles": [
+        "2C93B4",
+        "2E1221"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          165.97375734823572,
+          74.5463773618617
+        ],
+        [
+          165.05935734823572,
+          74.5463773618617
+        ]
+      ],
+      "opening_center_m": [
+        165.51655734823572,
+        74.5463773618617
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        165.51656,
+        74.88144
+      ],
+      "exterior_edge": 2,
+      "nearest_exterior_edge_distance_m": 2.638138298038939e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1233",
+      "source_handles": [
+        "2C93B4",
+        "2E1233"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          129.75335734814712,
+          74.54637736189376
+        ],
+        [
+          128.83895734814712,
+          74.54637736189376
+        ]
+      ],
+      "opening_center_m": [
+        129.29615734814712,
+        74.54637736189376
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        129.29616,
+        74.88144
+      ],
+      "exterior_edge": 2,
+      "nearest_exterior_edge_distance_m": 2.6381062383507015e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1274",
+      "source_handles": [
+        "2C93B4",
+        "2E1274"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          98.40975734814712,
+          74.54637736192274
+        ],
+        [
+          97.49535734814712,
+          74.54637736192274
+        ]
+      ],
+      "opening_center_m": [
+        97.95255734814712,
+        74.54637736192274
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        97.95256,
+        74.88144
+      ],
+      "exterior_edge": 2,
+      "nearest_exterior_edge_distance_m": 2.638077262417937e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E12AD",
+      "source_handles": [
+        "2C93B4",
+        "2E12AD"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          67.34555734888322,
+          74.54637736204928
+        ],
+        [
+          66.43115734888322,
+          74.54637736204928
+        ]
+      ],
+      "opening_center_m": [
+        66.88835734888322,
+        74.54637736204928
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        66.88836,
+        74.88144
+      ],
+      "exterior_edge": 2,
+      "nearest_exterior_edge_distance_m": 2.6379507147566983e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E12E7",
+      "source_handles": [
+        "2C93B4",
+        "2E12E7"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          35.443157348883034,
+          74.54637736198201
+        ],
+        [
+          34.52875734888303,
+          74.54637736198201
+        ]
+      ],
+      "opening_center_m": [
+        34.98595734888303,
+        74.54637736198201
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        34.98596,
+        74.88144
+      ],
+      "exterior_edge": 2,
+      "nearest_exterior_edge_distance_m": 2.63801798894292e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E134C",
+      "source_handles": [
+        "2C93B4",
+        "2E134C"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          98.53675734888313,
+          -83.94962263785237
+        ],
+        [
+          97.62235734888313,
+          -83.94962263785237
+        ]
+      ],
+      "opening_center_m": [
+        98.07955734888313,
+        -83.94962263785237
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        98.07956,
+        -84.28469
+      ],
+      "exterior_edge": 12,
+      "nearest_exterior_edge_distance_m": 2.637852375642069e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1388",
+      "source_handles": [
+        "2C93B4",
+        "2E1388"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          27.41675734888294,
+          -83.94962263810537
+        ],
+        [
+          26.50235734888294,
+          -83.94962263810537
+        ]
+      ],
+      "opening_center_m": [
+        26.95955734888294,
+        -83.94962263810537
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        26.95956,
+        -84.28469
+      ],
+      "exterior_edge": 12,
+      "nearest_exterior_edge_distance_m": 2.638105371488564e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E13BF",
+      "source_handles": [
+        "2C93B4",
+        "2E13BF"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          66.91375734888312,
+          -83.94962263810514
+        ],
+        [
+          65.99935734888312,
+          -83.94962263810514
+        ]
+      ],
+      "opening_center_m": [
+        66.45655734888312,
+        -83.94962263810514
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        66.45656,
+        -84.28469
+      ],
+      "exterior_edge": 12,
+      "nearest_exterior_edge_distance_m": 2.6381051441148884e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E146C",
+      "source_handles": [
+        "2C93B4",
+        "2E146C"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -181.93004265111696,
+          -8.003622637987537
+        ],
+        [
+          -181.93004265111696,
+          -7.089222637987537
+        ]
+      ],
+      "opening_center_m": [
+        -181.93004265111696,
+        -7.546422637987536
+      ],
+      "opening_width_m": 0.9143999999999997,
+      "swing_bbox_center_m": [
+        -182.26511,
+        -7.54642
+      ],
+      "exterior_edge": 15,
+      "nearest_exterior_edge_distance_m": 2.65111697217435e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E146D",
+      "source_handles": [
+        "2C93B4",
+        "2E146D"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -181.93004265111696,
+          -6.174822637987536
+        ],
+        [
+          -181.93004265111696,
+          -7.089222637987537
+        ]
+      ],
+      "opening_center_m": [
+        -181.93004265111696,
+        -6.632022637987537
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -182.26511,
+        -6.63202
+      ],
+      "exterior_edge": 15,
+      "nearest_exterior_edge_distance_m": 2.65111697217435e-06,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E146E",
+      "source_handles": [
+        "2C93B4",
+        "2E146E"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -176.92624265111985,
+          77.2895773620126
+        ],
+        [
+          -177.84064265111985,
+          77.2895773620126
+        ]
+      ],
+      "opening_center_m": [
+        -177.38344265111985,
+        77.2895773620126
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -177.38344,
+        77.62464
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 4.546597348880141,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E14C1",
+      "source_handles": [
+        "2C93B4",
+        "2E14C1"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          -12.662327401196109,
+          -77.67245266585903
+        ],
+        [
+          -11.747927401196108,
+          -77.67245266585903
+        ]
+      ],
+      "opening_center_m": [
+        -12.205127401196108,
+        -77.67245266585903
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -12.20513,
+        -78.00752
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 6.2771673341409695,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1534",
+      "source_handles": [
+        "2C93B4",
+        "2E1534"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          24.114757348883124,
+          -37.11202263798813
+        ],
+        [
+          24.114757348883124,
+          -38.026422637988134
+        ]
+      ],
+      "opening_center_m": [
+        24.114757348883124,
+        -37.56922263798813
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        24.44982,
+        -37.56922
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 46.38039736201186,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E1539",
+      "source_handles": [
+        "2C93B4",
+        "2E1539"
+      ],
+      "block": "DR1H45",
+      "opening_endpoints_m": [
+        [
+          24.114757348883124,
+          -4.041222637988137
+        ],
+        [
+          24.114757348883124,
+          -3.1268226379881376
+        ]
+      ],
+      "opening_center_m": [
+        24.114757348883124,
+        -3.5840226379881375
+      ],
+      "opening_width_m": 0.9143999999999997,
+      "swing_bbox_center_m": [
+        24.44982,
+        -3.58402
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 78.13040263798814,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    },
+    {
+      "id": "CAD_2C93B4_2E161D",
+      "source_handles": [
+        "2C93B4",
+        "2E161D"
+      ],
+      "block": "DR1H90",
+      "opening_endpoints_m": [
+        [
+          -171.4906426511059,
+          83.2331773620126
+        ],
+        [
+          -171.4906426511059,
+          82.3187773620126
+        ]
+      ],
+      "opening_center_m": [
+        -171.4906426511059,
+        82.7759773620126
+      ],
+      "opening_width_m": 0.9144000000000005,
+      "swing_bbox_center_m": [
+        -171.03344,
+        82.7896
+      ],
+      "exterior_edge": null,
+      "nearest_exterior_edge_distance_m": 0.9144026379874077,
+      "current_office_wall_overlap_ids": [],
+      "existing_3d_model": "not consumed by architecture or reference-shell generators",
+      "door_height_m": null
+    }
+  ],
+  "exterior_rough_openings": [
+    {
+      "axis": 1,
+      "fixed": -181.93004265110565,
+      "lo": -52.86002,
+      "hi": -51.84402,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1003",
+          "source_handles": [
+            "2C93B4",
+            "2E1003"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -181.93004265110565,
+              -51.894822637976816
+            ],
+            [
+              -181.93004265110565,
+              -52.809222637976816
+            ]
+          ],
+          "opening_center_m": [
+            -181.93004265110565,
+            -52.352022637976816
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -182.26511,
+            -52.35202
+          ],
+          "exterior_edge": 15,
+          "nearest_exterior_edge_distance_m": 2.6511056603339966e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0B73"
+        ],
+        [
+          "2C93B4",
+          "2E0B6F"
+        ]
+      ],
+      "edge": 15
+    },
+    {
+      "axis": 0,
+      "fixed": -83.9496226379913,
+      "lo": 2.67716,
+      "hi": 3.69316,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1016",
+          "source_handles": [
+            "2C93B4",
+            "2E1016"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              3.642357348879845,
+              -83.9496226379913
+            ],
+            [
+              2.7279573488798454,
+              -83.9496226379913
+            ]
+          ],
+          "opening_center_m": [
+            3.1851573488798453,
+            -83.9496226379913
+          ],
+          "opening_width_m": 0.9143999999999997,
+          "swing_bbox_center_m": [
+            3.18516,
+            -84.28469
+          ],
+          "exterior_edge": 12,
+          "nearest_exterior_edge_distance_m": 2.637991300957765e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0A8C"
+        ],
+        [
+          "2C93B4",
+          "2E0ADF"
+        ]
+      ],
+      "edge": 12
+    },
+    {
+      "axis": 0,
+      "fixed": -83.94962263799125,
+      "lo": 14.56436,
+      "hi": 15.58036,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1017",
+          "source_handles": [
+            "2C93B4",
+            "2E1017"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              15.529557348879845,
+              -83.94962263799125
+            ],
+            [
+              14.615157348879844,
+              -83.94962263799125
+            ]
+          ],
+          "opening_center_m": [
+            15.072357348879844,
+            -83.94962263799125
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            15.07236,
+            -84.28469
+          ],
+          "exterior_edge": 12,
+          "nearest_exterior_edge_distance_m": 2.6379912583252008e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0ADF"
+        ],
+        [
+          "2C93B4",
+          "2E0AF8"
+        ]
+      ],
+      "edge": 12
+    },
+    {
+      "axis": 0,
+      "fixed": -83.94962263799125,
+      "lo": 16.79956,
+      "hi": 17.81556,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1018",
+          "source_handles": [
+            "2C93B4",
+            "2E1018"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              16.850357348886174,
+              -83.94962263799125
+            ],
+            [
+              17.764757348886175,
+              -83.94962263799125
+            ]
+          ],
+          "opening_center_m": [
+            17.307557348886174,
+            -83.94962263799125
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            17.30756,
+            -84.28469
+          ],
+          "exterior_edge": 12,
+          "nearest_exterior_edge_distance_m": 2.6379912583252008e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0AF8"
+        ],
+        [
+          "2C93B4",
+          "2E0AF9"
+        ]
+      ],
+      "edge": 12
+    },
+    {
+      "axis": 0,
+      "fixed": -83.94962263799125,
+      "lo": -29.02204,
+      "hi": -28.00604,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1019",
+          "source_handles": [
+            "2C93B4",
+            "2E1019"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -28.056842651120153,
+              -83.94962263799125
+            ],
+            [
+              -28.971242651120154,
+              -83.94962263799125
+            ]
+          ],
+          "opening_center_m": [
+            -28.514042651120153,
+            -83.94962263799125
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -28.51404,
+            -84.28469
+          ],
+          "exterior_edge": 12,
+          "nearest_exterior_edge_distance_m": 2.6379912583252008e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0AF4"
+        ],
+        [
+          "2C93B4",
+          "2E0AF5"
+        ]
+      ],
+      "edge": 12
+    },
+    {
+      "axis": 0,
+      "fixed": -83.94962263799125,
+      "lo": -60.72124,
+      "hi": -59.70524,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E101A",
+          "source_handles": [
+            "2C93B4",
+            "2E101A"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -59.756042651120154,
+              -83.94962263799125
+            ],
+            [
+              -60.670442651120155,
+              -83.94962263799125
+            ]
+          ],
+          "opening_center_m": [
+            -60.213242651120154,
+            -83.94962263799125
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -60.21324,
+            -84.28469
+          ],
+          "exterior_edge": 12,
+          "nearest_exterior_edge_distance_m": 2.637991258325201e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0A8B"
+        ],
+        [
+          "2C93B4",
+          "2E0AED"
+        ]
+      ],
+      "edge": 12
+    },
+    {
+      "axis": 0,
+      "fixed": -83.94962263798497,
+      "lo": -92.42044,
+      "hi": -91.40444,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E101B",
+          "source_handles": [
+            "2C93B4",
+            "2E101B"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -91.45524265112014,
+              -83.94962263798497
+            ],
+            [
+              -92.36964265112015,
+              -83.94962263798497
+            ]
+          ],
+          "opening_center_m": [
+            -91.91244265112014,
+            -83.94962263798497
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -91.91244,
+            -84.28469
+          ],
+          "exterior_edge": 12,
+          "nearest_exterior_edge_distance_m": 2.6379849771274166e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0AE5"
+        ],
+        [
+          "2C93B4",
+          "2E0AE6"
+        ]
+      ],
+      "edge": 12
+    },
+    {
+      "axis": 0,
+      "fixed": -83.94962263799125,
+      "lo": -124.11964,
+      "hi": -123.10364,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E101C",
+          "source_handles": [
+            "2C93B4",
+            "2E101C"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -123.15444265112015,
+              -83.94962263799125
+            ],
+            [
+              -124.06884265112015,
+              -83.94962263799125
+            ]
+          ],
+          "opening_center_m": [
+            -123.61164265112015,
+            -83.94962263799125
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -123.61164,
+            -84.28469
+          ],
+          "exterior_edge": 12,
+          "nearest_exterior_edge_distance_m": 2.6379912583252008e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0ADE"
+        ],
+        [
+          "2C93B4",
+          "2E0AE0"
+        ]
+      ],
+      "edge": 12
+    },
+    {
+      "axis": 1,
+      "fixed": -181.93004265110565,
+      "lo": -21.16082,
+      "hi": -20.14482,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E101E",
+          "source_handles": [
+            "2C93B4",
+            "2E101E"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -181.93004265110565,
+              -20.195622637976747
+            ],
+            [
+              -181.93004265110565,
+              -21.110022637976748
+            ]
+          ],
+          "opening_center_m": [
+            -181.93004265110565,
+            -20.652822637976747
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -182.26511,
+            -20.65282
+          ],
+          "exterior_edge": 15,
+          "nearest_exterior_edge_distance_m": 2.6511056603339966e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0B6F"
+        ],
+        [
+          "2C93B4",
+          "2E0B70"
+        ]
+      ],
+      "edge": 15
+    },
+    {
+      "axis": 1,
+      "fixed": -181.9300038822991,
+      "lo": 2.51198,
+      "hi": 4.44238,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E101F",
+          "source_handles": [
+            "2C93B4",
+            "2E101F"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -181.9300038822991,
+              2.562699824410153
+            ],
+            [
+              -181.9300038822991,
+              3.477099824410153
+            ]
+          ],
+          "opening_center_m": [
+            -181.9300038822991,
+            3.019899824410153
+          ],
+          "opening_width_m": 0.9144000000000001,
+          "swing_bbox_center_m": [
+            -182.26507,
+            3.0199
+          ],
+          "exterior_edge": 15,
+          "nearest_exterior_edge_distance_m": 3.611770088696176e-05,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        },
+        {
+          "id": "CAD_2C93B4_2E1020",
+          "source_handles": [
+            "2C93B4",
+            "2E1020"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -181.9300038822991,
+              4.391499824410153
+            ],
+            [
+              -181.9300038822991,
+              3.477099824410153
+            ]
+          ],
+          "opening_center_m": [
+            -181.9300038822991,
+            3.934299824410153
+          ],
+          "opening_width_m": 0.9144000000000001,
+          "swing_bbox_center_m": [
+            -182.26507,
+            3.9343
+          ],
+          "exterior_edge": 15,
+          "nearest_exterior_edge_distance_m": 3.611770088696176e-05,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0A92"
+        ],
+        [
+          "2C93B4",
+          "2E0F6F"
+        ]
+      ],
+      "edge": 15
+    },
+    {
+      "axis": 0,
+      "fixed": 74.54637736201185,
+      "lo": -165.52164,
+      "hi": -164.50564,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E102C",
+          "source_handles": [
+            "2C93B4",
+            "2E102C"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -165.47084265111698,
+              74.54637736201185
+            ],
+            [
+              -164.55644265111698,
+              74.54637736201185
+            ]
+          ],
+          "opening_center_m": [
+            -165.01364265111698,
+            74.54637736201185
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -165.01364,
+            74.88144
+          ],
+          "exterior_edge": 2,
+          "nearest_exterior_edge_distance_m": 2.637988146148018e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0AA3"
+        ],
+        [
+          "2C93B4",
+          "2E0B67"
+        ]
+      ],
+      "edge": 2
+    },
+    {
+      "axis": 0,
+      "fixed": 74.54637736200996,
+      "lo": -92.42044,
+      "hi": -91.40444,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1030",
+          "source_handles": [
+            "2C93B4",
+            "2E1030"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -91.455242651119,
+              74.54637736200996
+            ],
+            [
+              -92.369642651119,
+              74.54637736200996
+            ]
+          ],
+          "opening_center_m": [
+            -91.912442651119,
+            74.54637736200996
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -91.91244,
+            74.88144
+          ],
+          "exterior_edge": 2,
+          "nearest_exterior_edge_distance_m": 2.6379900361916953e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0B63"
+        ],
+        [
+          "2C93B4",
+          "2E0B5B"
+        ]
+      ],
+      "edge": 2
+    },
+    {
+      "axis": 0,
+      "fixed": 74.54637736201236,
+      "lo": -29.02204,
+      "hi": -28.00604,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1032",
+          "source_handles": [
+            "2C93B4",
+            "2E1032"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -28.056842651119,
+              74.54637736201236
+            ],
+            [
+              -28.971242651119,
+              74.54637736201236
+            ]
+          ],
+          "opening_center_m": [
+            -28.514042651119,
+            74.54637736201236
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -28.51404,
+            74.88144
+          ],
+          "exterior_edge": 2,
+          "nearest_exterior_edge_distance_m": 2.6379876345572484e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0A9F"
+        ],
+        [
+          "2C93B4",
+          "2E0B4E"
+        ]
+      ],
+      "edge": 2
+    },
+    {
+      "axis": 0,
+      "fixed": 74.54637736200996,
+      "lo": -124.11964,
+      "hi": -123.10364,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1033",
+          "source_handles": [
+            "2C93B4",
+            "2E1033"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -123.15444265111697,
+              74.54637736200996
+            ],
+            [
+              -124.06884265111697,
+              74.54637736200996
+            ]
+          ],
+          "opening_center_m": [
+            -123.61164265111697,
+            74.54637736200996
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -123.61164,
+            74.88144
+          ],
+          "exterior_edge": 2,
+          "nearest_exterior_edge_distance_m": 2.6379900361916953e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0B68"
+        ],
+        [
+          "2C93B4",
+          "2E0B2F"
+        ]
+      ],
+      "edge": 2
+    },
+    {
+      "axis": 1,
+      "fixed": -181.9300426510006,
+      "lo": 42.44078,
+      "hi": 43.45678,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1036",
+          "source_handles": [
+            "2C93B4",
+            "2E1036"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -181.9300426510006,
+              43.40597736201186
+            ],
+            [
+              -181.9300426510006,
+              42.49157736201186
+            ]
+          ],
+          "opening_center_m": [
+            -181.9300426510006,
+            42.94877736201186
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -182.26511,
+            42.94878
+          ],
+          "exterior_edge": 15,
+          "nearest_exterior_edge_distance_m": 2.6510006136959423e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0F75"
+        ],
+        [
+          "2C93B4",
+          "2E0F74"
+        ]
+      ],
+      "edge": 15
+    },
+    {
+      "axis": 0,
+      "fixed": 74.54637736200988,
+      "lo": -60.72124,
+      "hi": -59.70524,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1037",
+          "source_handles": [
+            "2C93B4",
+            "2E1037"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -59.75604265111895,
+              74.54637736200988
+            ],
+            [
+              -60.670442651118954,
+              74.54637736200988
+            ]
+          ],
+          "opening_center_m": [
+            -60.213242651118954,
+            74.54637736200988
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -60.21324,
+            74.88144
+          ],
+          "exterior_edge": 2,
+          "nearest_exterior_edge_distance_m": 2.6379901214568235e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0B5A"
+        ],
+        [
+          "2C93B4",
+          "2E0B57"
+        ]
+      ],
+      "edge": 2
+    },
+    {
+      "axis": 1,
+      "fixed": 182.61075734888294,
+      "lo": 8.22698,
+      "hi": 9.24298,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E109B",
+          "source_handles": [
+            "2C93B4",
+            "2E109B"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              182.61075734888294,
+              9.192177362008398
+            ],
+            [
+              182.61075734888294,
+              8.277777362008397
+            ]
+          ],
+          "opening_center_m": [
+            182.61075734888294,
+            8.734977362008397
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            182.94582,
+            8.73498
+          ],
+          "exterior_edge": 5,
+          "nearest_exterior_edge_distance_m": 2.6511170574394782e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E114E"
+        ],
+        [
+          "2C93B4",
+          "2E114D"
+        ]
+      ],
+      "edge": 5
+    },
+    {
+      "axis": 1,
+      "fixed": 182.61075734888294,
+      "lo": 42.33918,
+      "hi": 43.35518,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E109F",
+          "source_handles": [
+            "2C93B4",
+            "2E109F"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              182.61075734888294,
+              43.304377362008395
+            ],
+            [
+              182.61075734888294,
+              42.389977362008395
+            ]
+          ],
+          "opening_center_m": [
+            182.61075734888294,
+            42.847177362008395
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            182.94582,
+            42.84718
+          ],
+          "exterior_edge": 5,
+          "nearest_exterior_edge_distance_m": 2.6511170574394782e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E109D"
+        ],
+        [
+          "2C93B4",
+          "2E109C"
+        ]
+      ],
+      "edge": 5
+    },
+    {
+      "axis": 1,
+      "fixed": 166.78655734888292,
+      "lo": -22.12602,
+      "hi": -21.11002,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1138",
+          "source_handles": [
+            "2C93B4",
+            "2E1138"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              166.78655734888292,
+              -21.1608226379916
+            ],
+            [
+              166.78655734888292,
+              -22.0752226379916
+            ]
+          ],
+          "opening_center_m": [
+            166.78655734888292,
+            -21.6180226379916
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            167.12162,
+            -21.61802
+          ],
+          "exterior_edge": 7,
+          "nearest_exterior_edge_distance_m": 2.6511170858611877e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E1130"
+        ],
+        [
+          "2C93B4",
+          "2E1131"
+        ]
+      ],
+      "edge": 7
+    },
+    {
+      "axis": 0,
+      "fixed": -50.98042263798846,
+      "lo": 164.85616,
+      "hi": 165.87216,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E113D",
+          "source_handles": [
+            "2C93B4",
+            "2E113D"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              165.82135734888294,
+              -50.98042263798846
+            ],
+            [
+              164.90695734888294,
+              -50.98042263798846
+            ]
+          ],
+          "opening_center_m": [
+            165.36415734888294,
+            -50.98042263798846
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            165.36416,
+            -51.31549
+          ],
+          "exterior_edge": 8,
+          "nearest_exterior_edge_distance_m": 2.637988458786822e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E112C"
+        ],
+        [
+          "2C93B4",
+          "2E112D"
+        ]
+      ],
+      "edge": 8
+    },
+    {
+      "axis": 0,
+      "fixed": -66.22042263798848,
+      "lo": 148.98116,
+      "hi": 149.99716,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1142",
+          "source_handles": [
+            "2C93B4",
+            "2E1142"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              149.94635734888294,
+              -66.22042263798848
+            ],
+            [
+              149.03195734888294,
+              -66.22042263798848
+            ]
+          ],
+          "opening_center_m": [
+            149.48915734888294,
+            -66.22042263798848
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            149.48916,
+            -66.55549
+          ],
+          "exterior_edge": 10,
+          "nearest_exterior_edge_distance_m": 2.6379884729976766e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E1126"
+        ],
+        [
+          "2C93B4",
+          "2E1127"
+        ]
+      ],
+      "edge": 10
+    },
+    {
+      "axis": 0,
+      "fixed": -83.94962263798848,
+      "lo": 129.77876,
+      "hi": 130.79476,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1147",
+          "source_handles": [
+            "2C93B4",
+            "2E1147"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              130.74395734888293,
+              -83.94962263798848
+            ],
+            [
+              129.82955734888293,
+              -83.94962263798848
+            ]
+          ],
+          "opening_center_m": [
+            130.28675734888293,
+            -83.94962263798848
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            130.28676,
+            -84.28469
+          ],
+          "exterior_edge": 12,
+          "nearest_exterior_edge_distance_m": 2.6379884872085313e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E1144"
+        ],
+        [
+          "2C93B4",
+          "2E0B04"
+        ]
+      ],
+      "edge": 12
+    },
+    {
+      "axis": 1,
+      "fixed": 182.61075734888294,
+      "lo": -6.91142,
+      "hi": -5.89542,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E114C",
+          "source_handles": [
+            "2C93B4",
+            "2E114C"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              182.61075734888294,
+              -5.9462226379916485
+            ],
+            [
+              182.61075734888294,
+              -6.860622637991649
+            ]
+          ],
+          "opening_center_m": [
+            182.61075734888294,
+            -6.403422637991649
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            182.94582,
+            -6.40342
+          ],
+          "exterior_edge": 5,
+          "nearest_exterior_edge_distance_m": 2.6511170574394782e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E1116"
+        ],
+        [
+          "2C93B4",
+          "2E1115"
+        ]
+      ],
+      "edge": 5
+    },
+    {
+      "axis": 0,
+      "fixed": 74.5463773618617,
+      "lo": 165.00856,
+      "hi": 166.02456,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1221",
+          "source_handles": [
+            "2C93B4",
+            "2E1221"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              165.97375734823572,
+              74.5463773618617
+            ],
+            [
+              165.05935734823572,
+              74.5463773618617
+            ]
+          ],
+          "opening_center_m": [
+            165.51655734823572,
+            74.5463773618617
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            165.51656,
+            74.88144
+          ],
+          "exterior_edge": 2,
+          "nearest_exterior_edge_distance_m": 2.638138298038939e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0B1D"
+        ],
+        [
+          "2C93B4",
+          "2E0B17"
+        ]
+      ],
+      "edge": 2
+    },
+    {
+      "axis": 0,
+      "fixed": 74.54637736189376,
+      "lo": 128.78816,
+      "hi": 129.80416,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1233",
+          "source_handles": [
+            "2C93B4",
+            "2E1233"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              129.75335734814712,
+              74.54637736189376
+            ],
+            [
+              128.83895734814712,
+              74.54637736189376
+            ]
+          ],
+          "opening_center_m": [
+            129.29615734814712,
+            74.54637736189376
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            129.29616,
+            74.88144
+          ],
+          "exterior_edge": 2,
+          "nearest_exterior_edge_distance_m": 2.6381062383507015e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E121D"
+        ],
+        [
+          "2C93B4",
+          "2E0B25"
+        ]
+      ],
+      "edge": 2
+    },
+    {
+      "axis": 0,
+      "fixed": 74.54637736192274,
+      "lo": 97.44456,
+      "hi": 98.46056,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1274",
+          "source_handles": [
+            "2C93B4",
+            "2E1274"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              98.40975734814712,
+              74.54637736192274
+            ],
+            [
+              97.49535734814712,
+              74.54637736192274
+            ]
+          ],
+          "opening_center_m": [
+            97.95255734814712,
+            74.54637736192274
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            97.95256,
+            74.88144
+          ],
+          "exterior_edge": 2,
+          "nearest_exterior_edge_distance_m": 2.638077262417937e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0B29"
+        ],
+        [
+          "2C93B4",
+          "2E0B2D"
+        ]
+      ],
+      "edge": 2
+    },
+    {
+      "axis": 0,
+      "fixed": 74.54637736204928,
+      "lo": 66.38036,
+      "hi": 67.39636,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E12AD",
+          "source_handles": [
+            "2C93B4",
+            "2E12AD"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              67.34555734888322,
+              74.54637736204928
+            ],
+            [
+              66.43115734888322,
+              74.54637736204928
+            ]
+          ],
+          "opening_center_m": [
+            66.88835734888322,
+            74.54637736204928
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            66.88836,
+            74.88144
+          ],
+          "exterior_edge": 2,
+          "nearest_exterior_edge_distance_m": 2.6379507147566983e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E1220"
+        ],
+        [
+          "2C93B4",
+          "2E0B2B"
+        ]
+      ],
+      "edge": 2
+    },
+    {
+      "axis": 0,
+      "fixed": 74.54637736198201,
+      "lo": 34.47796,
+      "hi": 35.49396,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E12E7",
+          "source_handles": [
+            "2C93B4",
+            "2E12E7"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              35.443157348883034,
+              74.54637736198201
+            ],
+            [
+              34.52875734888303,
+              74.54637736198201
+            ]
+          ],
+          "opening_center_m": [
+            34.98595734888303,
+            74.54637736198201
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            34.98596,
+            74.88144
+          ],
+          "exterior_edge": 2,
+          "nearest_exterior_edge_distance_m": 2.63801798894292e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0B26"
+        ],
+        [
+          "2C93B4",
+          "2E1251"
+        ]
+      ],
+      "edge": 2
+    },
+    {
+      "axis": 0,
+      "fixed": -83.94962263785237,
+      "lo": 97.57156,
+      "hi": 98.58756,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E134C",
+          "source_handles": [
+            "2C93B4",
+            "2E134C"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              98.53675734888313,
+              -83.94962263785237
+            ],
+            [
+              97.62235734888313,
+              -83.94962263785237
+            ]
+          ],
+          "opening_center_m": [
+            98.07955734888313,
+            -83.94962263785237
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            98.07956,
+            -84.28469
+          ],
+          "exterior_edge": 12,
+          "nearest_exterior_edge_distance_m": 2.637852375642069e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0B03"
+        ],
+        [
+          "2C93B4",
+          "2E1349"
+        ]
+      ],
+      "edge": 12
+    },
+    {
+      "axis": 0,
+      "fixed": -83.94962263810537,
+      "lo": 26.45156,
+      "hi": 27.46756,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E1388",
+          "source_handles": [
+            "2C93B4",
+            "2E1388"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              27.41675734888294,
+              -83.94962263810537
+            ],
+            [
+              26.50235734888294,
+              -83.94962263810537
+            ]
+          ],
+          "opening_center_m": [
+            26.95955734888294,
+            -83.94962263810537
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            26.95956,
+            -84.28469
+          ],
+          "exterior_edge": 12,
+          "nearest_exterior_edge_distance_m": 2.638105371488564e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0AF9"
+        ],
+        [
+          "2C93B4",
+          "2E0AFB"
+        ]
+      ],
+      "edge": 12
+    },
+    {
+      "axis": 0,
+      "fixed": -83.94962263810514,
+      "lo": 65.94856,
+      "hi": 66.96456,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E13BF",
+          "source_handles": [
+            "2C93B4",
+            "2E13BF"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              66.91375734888312,
+              -83.94962263810514
+            ],
+            [
+              65.99935734888312,
+              -83.94962263810514
+            ]
+          ],
+          "opening_center_m": [
+            66.45655734888312,
+            -83.94962263810514
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            66.45656,
+            -84.28469
+          ],
+          "exterior_edge": 12,
+          "nearest_exterior_edge_distance_m": 2.6381051441148884e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0AFF"
+        ],
+        [
+          "2C93B4",
+          "2E0B05"
+        ]
+      ],
+      "edge": 12
+    },
+    {
+      "axis": 1,
+      "fixed": -181.93004265111696,
+      "lo": -8.05435,
+      "hi": -6.12395,
+      "leaves": [
+        {
+          "id": "CAD_2C93B4_2E146C",
+          "source_handles": [
+            "2C93B4",
+            "2E146C"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -181.93004265111696,
+              -8.003622637987537
+            ],
+            [
+              -181.93004265111696,
+              -7.089222637987537
+            ]
+          ],
+          "opening_center_m": [
+            -181.93004265111696,
+            -7.546422637987536
+          ],
+          "opening_width_m": 0.9143999999999997,
+          "swing_bbox_center_m": [
+            -182.26511,
+            -7.54642
+          ],
+          "exterior_edge": 15,
+          "nearest_exterior_edge_distance_m": 2.65111697217435e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        },
+        {
+          "id": "CAD_2C93B4_2E146D",
+          "source_handles": [
+            "2C93B4",
+            "2E146D"
+          ],
+          "block": "DR1H45",
+          "opening_endpoints_m": [
+            [
+              -181.93004265111696,
+              -6.174822637987536
+            ],
+            [
+              -181.93004265111696,
+              -7.089222637987537
+            ]
+          ],
+          "opening_center_m": [
+            -181.93004265111696,
+            -6.632022637987537
+          ],
+          "opening_width_m": 0.9144000000000005,
+          "swing_bbox_center_m": [
+            -182.26511,
+            -6.63202
+          ],
+          "exterior_edge": 15,
+          "nearest_exterior_edge_distance_m": 2.65111697217435e-06,
+          "current_office_wall_overlap_ids": [],
+          "existing_3d_model": "not consumed by architecture or reference-shell generators",
+          "door_height_m": null
+        }
+      ],
+      "jamb_source_handles": [
+        [
+          "2C93B4",
+          "2E0B70"
+        ],
+        [
+          "2C93B4",
+          "2E0A92"
+        ]
+      ],
+      "edge": 15
+    }
+  ]
+}

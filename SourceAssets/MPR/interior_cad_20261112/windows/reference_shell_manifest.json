@@ -1,0 +1,5209 @@
+{
+  "schema_version": 4,
+  "units": "metres",
+  "axis": "CAD +Y; UE placement X=100*x,Y=-100*y,Z=100*z; negate yaw once",
+  "meshes": [
+    {
+      "name": "SM_MPR_CAD_WindowSystem_20261112",
+      "fbx": "SourceAssets/MPR/interior_cad_20261112/windows/SM_MPR_CAD_WindowSystem_20261112.fbx",
+      "material_roles": [
+        "MPR4_GlassBlue",
+        "MPR4_Aluminium"
+      ],
+      "bounds_m": [
+        [
+          -182.10003999999998,
+          182.78076
+        ],
+        [
+          -92.78882000000002,
+          83.86038000000002
+        ],
+        [
+          1.325,
+          3.875
+        ]
+      ],
+      "vertices": 4840,
+      "triangles": 7260,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "uv_channels": 1
+    },
+    {
+      "name": "SM_MPR_CAD_WindowFacade_00_20261112",
+      "fbx": "SourceAssets/MPR/interior_cad_20261112/windows/SM_MPR_CAD_WindowFacade_00_20261112.fbx",
+      "material_roles": [
+        "MPR4_IndustrialBlue",
+        "MPR4_FacadeWhite",
+        "MPR4_JointSeal"
+      ],
+      "bounds_m": [
+        [
+          -181.93003845214844,
+          -166.0804443359375
+        ],
+        [
+          83.53797912597656,
+          83.85237884521484
+        ],
+        [
+          -1.2000000476837158,
+          13.600000381469727
+        ]
+      ],
+      "vertices": 288,
+      "triangles": 432,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "uv_channels": 1
+    },
+    {
+      "name": "SM_MPR_CAD_WindowFacade_04_20261112",
+      "fbx": "SourceAssets/MPR/interior_cad_20261112/windows/SM_MPR_CAD_WindowFacade_04_20261112.fbx",
+      "material_roles": [
+        "MPR4_IndustrialBlue",
+        "MPR4_FacadeWhite",
+        "MPR4_JointSeal"
+      ],
+      "bounds_m": [
+        [
+          166.78656005859375,
+          182.6107635498047
+        ],
+        [
+          83.4363784790039,
+          83.75077819824219
+        ],
+        [
+          -1.2000000476837158,
+          13.600000381469727
+        ]
+      ],
+      "vertices": 288,
+      "triangles": 432,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "uv_channels": 1
+    },
+    {
+      "name": "SM_MPR_CAD_WindowFacade_05_20261112",
+      "fbx": "SourceAssets/MPR/interior_cad_20261112/windows/SM_MPR_CAD_WindowFacade_05_20261112.fbx",
+      "material_roles": [
+        "MPR4_IndustrialBlue",
+        "MPR4_FacadeWhite",
+        "MPR4_JointSeal"
+      ],
+      "bounds_m": [
+        [
+          182.45835876464844,
+          182.77276611328125
+        ],
+        [
+          -20.50041961669922,
+          83.58878326416016
+        ],
+        [
+          -1.2000000476837158,
+          13.600000381469727
+        ]
+      ],
+      "vertices": 1896,
+      "triangles": 2844,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "uv_channels": 1
+    },
+    {
+      "name": "SM_MPR_CAD_WindowFacade_15_20261112",
+      "fbx": "SourceAssets/MPR/interior_cad_20261112/windows/SM_MPR_CAD_WindowFacade_15_20261112.fbx",
+      "material_roles": [
+        "MPR4_IndustrialBlue",
+        "MPR4_FacadeWhite",
+        "MPR4_JointSeal"
+      ],
+      "bounds_m": [
+        [
+          -182.092041015625,
+          -181.7776336669922
+        ],
+        [
+          -93.09362030029297,
+          83.69037628173828
+        ],
+        [
+          -1.2000000476837158,
+          13.600000381469727
+        ]
+      ],
+      "vertices": 3048,
+      "triangles": 4572,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "uv_channels": 1
+    },
+    {
+      "name": "SM_MPR_CAD_WindowPartitions_20261112",
+      "fbx": "SourceAssets/MPR/interior_cad_20261112/windows/SM_MPR_CAD_WindowPartitions_20261112.fbx",
+      "material_roles": [
+        "Porcelain"
+      ],
+      "bounds_m": [
+        [
+          -181.625244140625,
+          182.3059539794922
+        ],
+        [
+          -83.64482116699219,
+          81.98857879638672
+        ],
+        [
+          0.0,
+          3.299999952316284
+        ]
+      ],
+      "vertices": 1088,
+      "triangles": 1632,
+      "instance_only": false,
+      "collision": false,
+      "tick": false,
+      "uv_channels": 1
+    }
+  ],
+  "instances": {},
+  "materials": {
+    "MPR4_FacadeWhite": {
+      "color": [
+        0.8,
+        0.82,
+        0.85
+      ],
+      "roughness": 0.72,
+      "uv_tile_m": 2,
+      "textures": {
+        "albedo": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_PaintedPanel_Base.png",
+        "normal": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_PaintedPanel_Normal.png"
+      },
+      "normal_strength": 0.12,
+      "metallic": 0,
+      "color_space": "linear RGB tint; albedo PNG sRGB, normal PNG NonColor",
+      "texture_blend": "multiply albedo by color",
+      "normal_convention": "OpenGL",
+      "ue_flip_green_channel": true
+    },
+    "MPR4_IndustrialBlue": {
+      "color": [
+        0.009,
+        0.155,
+        0.43
+      ],
+      "roughness": 0.46,
+      "metallic": 0.18,
+      "uv_tile_m": 2,
+      "textures": {
+        "albedo": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_PaintedPanel_Base.png",
+        "normal": "SourceAssets/MPR/reference_v4/architecture/textures/T_MPR4_PaintedPanel_Normal.png"
+      },
+      "normal_strength": 0.08,
+      "color_space": "linear RGB tint; albedo PNG sRGB, normal PNG NonColor",
+      "texture_blend": "multiply albedo by color",
+      "normal_convention": "OpenGL",
+      "ue_flip_green_channel": true
+    },
+    "MPR4_JointSeal": {
+      "color": [
+        0.23,
+        0.27,
+        0.31
+      ],
+      "roughness": 0.87,
+      "metallic": 0,
+      "color_space": "linear RGB tint; albedo PNG sRGB, normal PNG NonColor",
+      "texture_blend": "multiply albedo by color"
+    },
+    "MPR4_GlassBlue": {
+      "color": [
+        0.032,
+        0.087,
+        0.15
+      ],
+      "roughness": 0.16,
+      "metallic": 0.42,
+      "color_space": "linear RGB tint; albedo PNG sRGB, normal PNG NonColor",
+      "texture_blend": "multiply albedo by color"
+    },
+    "MPR4_Aluminium": {
+      "color": [
+        0.61,
+        0.66,
+        0.72
+      ],
+      "roughness": 0.31,
+      "metallic": 0.78,
+      "color_space": "linear RGB tint; albedo PNG sRGB, normal PNG NonColor",
+      "texture_blend": "multiply albedo by color"
+    },
+    "Porcelain": {
+      "color": [
+        0.83,
+        0.85,
+        0.88
+      ],
+      "roughness": 0.76
+    }
+  },
+  "scope": "CAD windows only; existing architecture/source assets unchanged.",
+  "source_sha256": "c316aafe183162c5bef636885b59cc1000c3eecf50d8be645490b4716c6af863",
+  "baseline": "Saved/MPR/interior_cad_20261112/after.json.gz",
+  "panes": [
+    {
+      "axis": 1,
+      "fixed": -180.15839,
+      "lo": -89.02962,
+      "hi": -88.11522,
+      "source_handles": [
+        "2C93B4",
+        "2E0ABC"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -89.08041999999999,
+      "frame_hi": -88.06442,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -180.15839,
+      "lo": -85.88002,
+      "hi": -84.96562,
+      "source_handles": [
+        "2C93B4",
+        "2E0AC0"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -85.93082,
+      "frame_hi": -84.91482,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -180.15839,
+      "lo": 79.93118,
+      "hi": 80.84558,
+      "source_handles": [
+        "2C93B4",
+        "2E0B89"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 79.88038,
+      "frame_hi": 80.89638,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -180.15839,
+      "lo": 75.56238,
+      "hi": 76.47678,
+      "source_handles": [
+        "2C93B4",
+        "2E0B92"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 75.51158000000001,
+      "frame_hi": 76.52758,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 81.91873,
+      "lo": -177.86604,
+      "hi": -176.95164,
+      "source_handles": [
+        "2C93B4",
+        "2E0BAD"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -177.91684,
+      "frame_hi": -176.90084,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -180.15839,
+      "lo": 78.71198,
+      "hi": 79.62638,
+      "source_handles": [
+        "2C93B4",
+        "2E0BAE"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 78.66118,
+      "frame_hi": 79.67717999999999,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 74.48923,
+      "lo": -180.93944,
+      "hi": -180.35524,
+      "source_handles": [
+        "2C93B4",
+        "2E0BBA"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -180.99024,
+      "frame_hi": -180.30444,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -180.15839,
+      "lo": -90.24882,
+      "hi": -89.33442,
+      "source_handles": [
+        "2C93B4",
+        "2E0BCB"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -90.29961999999999,
+      "frame_hi": -89.28362,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -180.15839,
+      "lo": -91.21402,
+      "hi": -90.29962,
+      "source_handles": [
+        "2C93B4",
+        "2E0BCE"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -91.26482,
+      "frame_hi": -90.24882000000001,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -180.15839,
+      "lo": -84.91482,
+      "hi": -84.00042,
+      "source_handles": [
+        "2C93B4",
+        "2E0BD2"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -84.96562,
+      "frame_hi": -83.94962000000001,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -180.15839,
+      "lo": -87.09922,
+      "hi": -86.18482,
+      "source_handles": [
+        "2C93B4",
+        "2E0BDD"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -87.15002,
+      "frame_hi": -86.13402,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": -91.32197,
+      "lo": -179.08524,
+      "hi": -178.17084,
+      "source_handles": [
+        "2C93B4",
+        "2E0BE8"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -179.13604,
+      "frame_hi": -178.12004,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": -91.32197,
+      "lo": -180.05044,
+      "hi": -179.13604,
+      "source_handles": [
+        "2C93B4",
+        "2E0BEA"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -180.10124000000002,
+      "frame_hi": -179.08524,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": -91.32197,
+      "lo": -174.71644,
+      "hi": -173.80204,
+      "source_handles": [
+        "2C93B4",
+        "2E0BF0"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -174.76724000000002,
+      "frame_hi": -173.75124,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": -83.89247,
+      "lo": -180.93944,
+      "hi": -180.35524,
+      "source_handles": [
+        "2C93B4",
+        "2E0BF5"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -180.99024,
+      "frame_hi": -180.30444,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": -83.89247,
+      "lo": -181.57444,
+      "hi": -180.99024,
+      "source_handles": [
+        "2C93B4",
+        "2E0BFD"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -181.62524000000002,
+      "frame_hi": -180.93944,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": -91.32197,
+      "lo": -175.93564,
+      "hi": -175.02124,
+      "source_handles": [
+        "2C93B4",
+        "2E0C03"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -175.98644000000002,
+      "frame_hi": -174.97044,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": -91.32197,
+      "lo": -173.75124,
+      "hi": -172.83684,
+      "source_handles": [
+        "2C93B4",
+        "2E0C06"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -173.80204,
+      "frame_hi": -172.78603999999999,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -172.72889,
+      "lo": -92.10302,
+      "hi": -91.51882,
+      "source_handles": [
+        "2C93B4",
+        "2E0C07"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -92.15382,
+      "frame_hi": -91.46802000000001,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -172.72889,
+      "lo": -92.73802,
+      "hi": -92.15382,
+      "source_handles": [
+        "2C93B4",
+        "2E0C0B"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -92.78882,
+      "frame_hi": -92.10302,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": -91.32197,
+      "lo": -177.86604,
+      "hi": -176.95164,
+      "source_handles": [
+        "2C93B4",
+        "2E0C0C"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -177.91684,
+      "frame_hi": -176.90084,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": -91.32197,
+      "lo": -176.90084,
+      "hi": -175.98644,
+      "source_handles": [
+        "2C93B4",
+        "2E0C15"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -176.95164,
+      "frame_hi": -175.93563999999998,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 81.91873,
+      "lo": -175.93564,
+      "hi": -175.02124,
+      "source_handles": [
+        "2C93B4",
+        "2E0CAC"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -175.98644000000002,
+      "frame_hi": -174.97044,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -180.15839,
+      "lo": 80.89638,
+      "hi": 81.81078,
+      "source_handles": [
+        "2C93B4",
+        "2E0CC2"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 80.84558,
+      "frame_hi": 81.86157999999999,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -180.15839,
+      "lo": 74.59718,
+      "hi": 75.51158,
+      "source_handles": [
+        "2C93B4",
+        "2E0CCC"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 74.54638,
+      "frame_hi": 75.56237999999999,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -180.15839,
+      "lo": 76.78158,
+      "hi": 77.69598,
+      "source_handles": [
+        "2C93B4",
+        "2E0CD1"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 76.73078000000001,
+      "frame_hi": 77.74678,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 74.48923,
+      "lo": -181.57444,
+      "hi": -180.99024,
+      "source_handles": [
+        "2C93B4",
+        "2E0CD6"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -181.62524000000002,
+      "frame_hi": -180.93944,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 81.91873,
+      "lo": -179.08524,
+      "hi": -178.17084,
+      "source_handles": [
+        "2C93B4",
+        "2E0CD8"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -179.13604,
+      "frame_hi": -178.12004,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 81.91873,
+      "lo": -180.05044,
+      "hi": -179.13604,
+      "source_handles": [
+        "2C93B4",
+        "2E0CE0"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -180.10124000000002,
+      "frame_hi": -179.08524,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 81.91873,
+      "lo": -173.75124,
+      "hi": -172.83684,
+      "source_handles": [
+        "2C93B4",
+        "2E0CE3"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -173.80204,
+      "frame_hi": -172.78603999999999,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -172.72889,
+      "lo": 82.75058,
+      "hi": 83.18238,
+      "source_handles": [
+        "2C93B4",
+        "2E0CF3"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 82.69978,
+      "frame_hi": 83.23317999999999,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 81.91873,
+      "lo": -174.71644,
+      "hi": -173.80204,
+      "source_handles": [
+        "2C93B4",
+        "2E0CF5"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -174.76724000000002,
+      "frame_hi": -173.75124,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 83.44273,
+      "lo": -169.38244,
+      "hi": -168.46804,
+      "source_handles": [
+        "2C93B4",
+        "2E0CFC"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 0,
+      "frame_lo": -169.43324,
+      "frame_hi": -168.41724,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 83.69038,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0AD8"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0C2B"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 0,
+      "fixed": 81.91873,
+      "lo": -176.90084,
+      "hi": -175.98644,
+      "source_handles": [
+        "2C93B4",
+        "2E0CFE"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -176.95164,
+      "frame_hi": -175.93563999999998,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -172.72889,
+      "lo": 82.11558,
+      "hi": 82.69978,
+      "source_handles": [
+        "2C93B4",
+        "2E0CFF"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 82.06478,
+      "frame_hi": 82.75058,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 83.44273,
+      "lo": -167.65524,
+      "hi": -166.74084,
+      "source_handles": [
+        "2C93B4",
+        "2E0D02"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 0,
+      "frame_lo": -167.70604,
+      "frame_hi": -166.69003999999998,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 83.69038,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0C2A"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0C2D"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 56.61398,
+      "hi": 57.52838,
+      "source_handles": [
+        "2C93B4",
+        "2E0F97"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 56.563179999999996,
+      "frame_hi": 57.57918,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0F8F"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0F90"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 60.57638,
+      "hi": 61.49078,
+      "source_handles": [
+        "2C93B4",
+        "2E0F9C"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 60.52558,
+      "frame_hi": 61.54158,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0F91"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0F92"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 62.30358,
+      "hi": 63.21798,
+      "source_handles": [
+        "2C93B4",
+        "2E0FA1"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 62.252779999999994,
+      "frame_hi": 63.26878,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0F94"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0F93"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 66.26598,
+      "hi": 67.18038,
+      "source_handles": [
+        "2C93B4",
+        "2E0FA6"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 66.21518,
+      "frame_hi": 67.23118,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0F8C"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0F8B"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 68.50118,
+      "hi": 69.41558,
+      "source_handles": [
+        "2C93B4",
+        "2E0FAB"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 68.45038000000001,
+      "frame_hi": 69.46638,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0F8D"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0F8E"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 54.37878,
+      "hi": 55.29318,
+      "source_handles": [
+        "2C93B4",
+        "2E0FB8"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 54.32798,
+      "frame_hi": 55.34398,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0FB5"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0FB4"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 48.68918,
+      "hi": 49.60358,
+      "source_handles": [
+        "2C93B4",
+        "2E0FC1"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 48.63838,
+      "frame_hi": 49.65438,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0FBB"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0FBC"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 50.41638,
+      "hi": 51.33078,
+      "source_handles": [
+        "2C93B4",
+        "2E0FC6"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 50.365579999999994,
+      "frame_hi": 51.38158,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0FBE"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0FBD"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 28.87718,
+      "hi": 29.79158,
+      "source_handles": [
+        "2C93B4",
+        "2E0FD9"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 28.82638,
+      "frame_hi": 29.84238,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0FCB"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0FCC"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 26.64198,
+      "hi": 27.55638,
+      "source_handles": [
+        "2C93B4",
+        "2E0FDE"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 26.59118,
+      "frame_hi": 27.60718,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0FCA"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0FC9"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 22.67958,
+      "hi": 23.59398,
+      "source_handles": [
+        "2C93B4",
+        "2E0FE3"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 22.628780000000003,
+      "frame_hi": 23.644779999999997,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0FCE"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0FCD"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 20.95238,
+      "hi": 21.86678,
+      "source_handles": [
+        "2C93B4",
+        "2E0FE8"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 20.901580000000003,
+      "frame_hi": 21.917579999999997,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0FCF"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0FD0"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 16.98998,
+      "hi": 17.90438,
+      "source_handles": [
+        "2C93B4",
+        "2E0FED"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 16.93918,
+      "frame_hi": 17.95518,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0FD3"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0FD4"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 14.75478,
+      "hi": 15.66918,
+      "source_handles": [
+        "2C93B4",
+        "2E0FF2"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 14.70398,
+      "frame_hi": 15.719980000000001,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0FD2"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0FD1"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": 10.79238,
+      "hi": 11.70678,
+      "source_handles": [
+        "2C93B4",
+        "2E0FF7"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": 10.741579999999999,
+      "frame_hi": 11.75758,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E0FB2"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E0FB3"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 0,
+      "fixed": 81.81713,
+      "lo": 173.51756,
+      "hi": 174.43196,
+      "source_handles": [
+        "2C93B4",
+        "2E10B1"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 173.46676,
+      "frame_hi": 174.48276,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 81.81713,
+      "lo": 174.48276,
+      "hi": 175.39716,
+      "source_handles": [
+        "2C93B4",
+        "2E10B2"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 174.43196,
+      "frame_hi": 175.44796000000002,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 81.81713,
+      "lo": 175.70196,
+      "hi": 176.61636,
+      "source_handles": [
+        "2C93B4",
+        "2E10B5"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 175.65116,
+      "frame_hi": 176.66716,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": 180.83911,
+      "lo": 80.79478,
+      "hi": 81.70918,
+      "source_handles": [
+        "2C93B4",
+        "2E116C"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 80.74398000000001,
+      "frame_hi": 81.75998,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": 180.83911,
+      "lo": 79.82958,
+      "hi": 80.74398,
+      "source_handles": [
+        "2C93B4",
+        "2E116D"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 79.77878000000001,
+      "frame_hi": 80.79477999999999,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": 180.83911,
+      "lo": 74.49558,
+      "hi": 75.40998,
+      "source_handles": [
+        "2C93B4",
+        "2E1173"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 74.44478000000001,
+      "frame_hi": 75.46078,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": 180.83911,
+      "lo": 75.46078,
+      "hi": 76.37518,
+      "source_handles": [
+        "2C93B4",
+        "2E1174"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 75.40998,
+      "frame_hi": 76.42598,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": 180.83911,
+      "lo": 76.67998,
+      "hi": 77.59438,
+      "source_handles": [
+        "2C93B4",
+        "2E1179"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 76.62918,
+      "frame_hi": 77.64518,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": 180.83911,
+      "lo": 78.61038,
+      "hi": 79.52478,
+      "source_handles": [
+        "2C93B4",
+        "2E117C"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 78.55958000000001,
+      "frame_hi": 79.57558,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 74.38763,
+      "lo": 181.03596,
+      "hi": 181.87416,
+      "source_handles": [
+        "2C93B4",
+        "2E1181"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 180.98515999999998,
+      "frame_hi": 181.92496,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 81.81713,
+      "lo": 179.81676,
+      "hi": 180.73116,
+      "source_handles": [
+        "2C93B4",
+        "2E1185"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 179.76595999999998,
+      "frame_hi": 180.78196,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 81.81713,
+      "lo": 178.85156,
+      "hi": 179.76596,
+      "source_handles": [
+        "2C93B4",
+        "2E1186"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 178.80076,
+      "frame_hi": 179.81676000000002,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": 173.40961,
+      "lo": 82.01398,
+      "hi": 82.59818,
+      "source_handles": [
+        "2C93B4",
+        "2E118B"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 81.96318000000001,
+      "frame_hi": 82.64898,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 81.81713,
+      "lo": 177.63236,
+      "hi": 178.54676,
+      "source_handles": [
+        "2C93B4",
+        "2E118D"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 177.58156,
+      "frame_hi": 178.59756000000002,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": 173.40961,
+      "lo": 82.64898,
+      "hi": 83.23318,
+      "source_handles": [
+        "2C93B4",
+        "2E118F"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 82.59818,
+      "frame_hi": 83.28398,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 81.81713,
+      "lo": 176.66716,
+      "hi": 177.58156,
+      "source_handles": [
+        "2C93B4",
+        "2E1192"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": 176.61636,
+      "frame_hi": 177.63236,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 83.34113,
+      "lo": 169.17416,
+      "hi": 170.08856,
+      "source_handles": [
+        "2C93B4",
+        "2E1194"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 4,
+      "frame_lo": 169.12336,
+      "frame_hi": 170.13936,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 83.58878,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E1154"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E1155"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 0,
+      "fixed": 83.34113,
+      "lo": 167.44696,
+      "hi": 168.36136,
+      "source_handles": [
+        "2C93B4",
+        "2E1198"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 4,
+      "frame_lo": 167.39615999999998,
+      "frame_hi": 168.41216,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 83.58878,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E115F"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E1151"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 60.42398,
+      "hi": 61.28758,
+      "source_handles": [
+        "2C93B4",
+        "2E11E5"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 60.37318,
+      "frame_hi": 61.33838,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E11E8"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E11E9"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 62.15118,
+      "hi": 63.01478,
+      "source_handles": [
+        "2C93B4",
+        "2E11EE"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 62.100379999999994,
+      "frame_hi": 63.065580000000004,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E11F1"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E11F2"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 64.41178,
+      "hi": 65.27538,
+      "source_handles": [
+        "2C93B4",
+        "2E11F7"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 64.36098,
+      "frame_hi": 65.32618,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E11FA"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E11FB"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 66.13898,
+      "hi": 67.00258,
+      "source_handles": [
+        "2C93B4",
+        "2E1200"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 66.08818000000001,
+      "frame_hi": 67.05337999999999,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E1203"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E1204"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 68.39958,
+      "hi": 69.26318,
+      "source_handles": [
+        "2C93B4",
+        "2E1209"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 68.34878,
+      "frame_hi": 69.31398,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E120C"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E120D"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 70.12678,
+      "hi": 70.99038,
+      "source_handles": [
+        "2C93B4",
+        "2E1212"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 70.07598,
+      "frame_hi": 71.04118,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E1215"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E1216"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 0,
+      "fixed": 77.22608,
+      "lo": -180.05044,
+      "hi": -179.03444,
+      "source_handles": [
+        "2C93B4",
+        "2E1474"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": null,
+      "frame_lo": -180.10124000000002,
+      "frame_hi": -178.98363999999998,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 58.16338,
+      "hi": 59.02698,
+      "source_handles": [
+        "2C93B4",
+        "2E153C"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 58.112579999999994,
+      "frame_hi": 59.077780000000004,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E153F"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E1540"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 56.43618,
+      "hi": 57.29978,
+      "source_handles": [
+        "2C93B4",
+        "2E1543"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 56.38538,
+      "frame_hi": 57.35058,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E1546"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E1547"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 54.17558,
+      "hi": 55.03918,
+      "source_handles": [
+        "2C93B4",
+        "2E154A"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 54.124779999999994,
+      "frame_hi": 55.089980000000004,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E154D"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E154E"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 52.44838,
+      "hi": 53.31198,
+      "source_handles": [
+        "2C93B4",
+        "2E1551"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 52.39758,
+      "frame_hi": 53.36278,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E1554"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E1555"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 50.18778,
+      "hi": 51.05138,
+      "source_handles": [
+        "2C93B4",
+        "2E1558"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 50.136979999999994,
+      "frame_hi": 51.102180000000004,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E155B"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E155C"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 48.46058,
+      "hi": 49.32418,
+      "source_handles": [
+        "2C93B4",
+        "2E155F"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 48.40978,
+      "frame_hi": 49.37498,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E1562"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E1563"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 46.19998,
+      "hi": 47.06358,
+      "source_handles": [
+        "2C93B4",
+        "2E1566"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 46.149179999999994,
+      "frame_hi": 47.114380000000004,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E1569"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E156A"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": 182.36311,
+      "lo": 44.47278,
+      "hi": 45.33638,
+      "source_handles": [
+        "2C93B4",
+        "2E156D"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 5,
+      "frame_lo": 44.42198,
+      "frame_hi": 45.38718,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": 182.61076,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E1570"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E1571"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": -78.76802,
+      "hi": -77.90442,
+      "source_handles": [
+        "2C93B4",
+        "2E1574"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": -78.81882,
+      "frame_hi": -77.85362,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E1577"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E1578"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": -76.53282,
+      "hi": -75.66922,
+      "source_handles": [
+        "2C93B4",
+        "2E157B"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": -76.58362,
+      "frame_hi": -75.61842,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E157E"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E157F"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": -72.57042,
+      "hi": -71.70682,
+      "source_handles": [
+        "2C93B4",
+        "2E1582"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": -72.62122,
+      "frame_hi": -71.65602,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E1585"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E1586"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": -70.84322,
+      "hi": -69.97962,
+      "source_handles": [
+        "2C93B4",
+        "2E1589"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": -70.89402,
+      "frame_hi": -69.92882,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E158C"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E158D"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": -66.88082,
+      "hi": -66.01722,
+      "source_handles": [
+        "2C93B4",
+        "2E1590"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": -66.93162,
+      "frame_hi": -65.96642,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E1593"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E1595"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": -64.64562,
+      "hi": -63.78202,
+      "source_handles": [
+        "2C93B4",
+        "2E1596"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": -64.69641999999999,
+      "frame_hi": -63.73122,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E159A"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E159C"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": -60.68322,
+      "hi": -59.81962,
+      "source_handles": [
+        "2C93B4",
+        "2E159F"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": -60.73402,
+      "frame_hi": -59.76882,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E15A2"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E15A3"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed": -181.68239,
+      "lo": -58.95602,
+      "hi": -58.09242,
+      "source_handles": [
+        "2C93B4",
+        "2E15A6"
+      ],
+      "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+      "exterior_edge": 15,
+      "frame_lo": -59.006820000000005,
+      "frame_hi": -58.041619999999995,
+      "z0": 1.325,
+      "z1": 3.875,
+      "frame_depth_m": 0.1143,
+      "wall_fixed": -181.93004,
+      "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+      "measured_jamb_source_handles": [
+        [
+          [
+            "2C93B4",
+            "2E15AA"
+          ]
+        ],
+        [
+          [
+            "2C93B4",
+            "2E15A9"
+          ]
+        ]
+      ]
+    },
+    {
+      "axis": 0,
+      "fixed": 68.61548,
+      "lo": 17.73936,
+      "hi": 18.95856,
+      "source_handles": [
+        "2C93B4",
+        "2E1061"
+      ],
+      "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+      "exterior_edge": null,
+      "frame_lo": 17.688560000000003,
+      "frame_hi": 19.009359999999997,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 68.61548,
+      "lo": 21.34616,
+      "hi": 22.59076,
+      "source_handles": [
+        "2C93B4",
+        "2E1062"
+      ],
+      "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+      "exterior_edge": null,
+      "frame_lo": 21.295360000000002,
+      "frame_hi": 22.64156,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 69.66958,
+      "lo": -7.90225,
+      "hi": -7.33075,
+      "source_handles": [
+        "2C93B4",
+        "2E1072"
+      ],
+      "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+      "exterior_edge": null,
+      "frame_lo": -7.95305,
+      "frame_hi": -7.27995,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 1,
+      "fixed": -15.43335,
+      "lo": 70.96498,
+      "hi": 72.10798,
+      "source_handles": [
+        "2C93B4",
+        "2E107C"
+      ],
+      "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+      "exterior_edge": null,
+      "frame_lo": 70.91418,
+      "frame_hi": 72.15878,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 69.64418,
+      "lo": -7.33075,
+      "hi": -6.75925,
+      "source_handles": [
+        "2C93B4",
+        "2E1108"
+      ],
+      "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+      "exterior_edge": null,
+      "frame_lo": -7.38155,
+      "frame_hi": -6.70845,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 69.66958,
+      "lo": -13.74425,
+      "hi": -13.17275,
+      "source_handles": [
+        "2C93B4",
+        "2E1109"
+      ],
+      "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+      "exterior_edge": null,
+      "frame_lo": -13.79505,
+      "frame_hi": -13.12195,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 69.64418,
+      "lo": -13.17275,
+      "hi": -12.60125,
+      "source_handles": [
+        "2C93B4",
+        "2E110A"
+      ],
+      "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+      "exterior_edge": null,
+      "frame_lo": -13.223550000000001,
+      "frame_hi": -12.55045,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 77.20068,
+      "lo": -178.43759,
+      "hi": -177.89144,
+      "source_handles": [
+        "2C93B4",
+        "2E1475"
+      ],
+      "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+      "exterior_edge": null,
+      "frame_lo": -178.48839,
+      "frame_hi": -177.84063999999998,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": 77.25148,
+      "lo": -178.98373,
+      "hi": -178.43759,
+      "source_handles": [
+        "2C93B4",
+        "2E1476"
+      ],
+      "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+      "exterior_edge": null,
+      "frame_lo": -179.03453000000002,
+      "frame_hi": -178.38679,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    },
+    {
+      "axis": 0,
+      "fixed": -81.04121,
+      "lo": 3.38833,
+      "hi": 4.30273,
+      "source_handles": [
+        "2C93B4",
+        "2E09AA"
+      ],
+      "evidence": "closed0.9144x0.127m interior window rectangle",
+      "exterior_edge": null,
+      "frame_lo": 3.3375299999999997,
+      "frame_hi": 4.35353,
+      "z0": 1.325,
+      "z1": 3.2,
+      "frame_depth_m": 0.1143
+    }
+  ],
+  "pane_count": 102,
+  "external_rough_opening_count": 41,
+  "additions": [
+    {
+      "mesh_name": "SM_MPR_CAD_WindowSystem_20261112",
+      "location_cm": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "replacements": [
+    {
+      "actor_guid": "10A8C83F4FA75E7AAB7BA1B327D43243",
+      "actor_label": "MPR4_Facade_00",
+      "old_mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_Facade_00.SM_MPR4_Facade_00",
+      "new_mesh_name": "SM_MPR_CAD_WindowFacade_00_20261112",
+      "source_mesh": "SM_MPR4_Facade_00",
+      "source_blend": "SourceAssets/MPR/reference_v4/architecture/mpr_reference_shell.blend",
+      "preserve_material_overrides": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "side": 0,
+      "windows": [
+        {
+          "axis": 0,
+          "fixed": 83.44273,
+          "lo": -169.38244,
+          "hi": -168.46804,
+          "source_handles": [
+            "2C93B4",
+            "2E0CFC"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 0,
+          "frame_lo": -169.43324,
+          "frame_hi": -168.41724,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 83.69038,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0AD8"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0C2B"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 0,
+          "fixed": 83.44273,
+          "lo": -167.65524,
+          "hi": -166.74084,
+          "source_handles": [
+            "2C93B4",
+            "2E0D02"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 0,
+          "frame_lo": -167.70604,
+          "frame_hi": -166.69003999999998,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 83.69038,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0C2A"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0C2D"
+              ]
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "actor_guid": "DF453AC5405C6DC8E0996283B67FB97A",
+      "actor_label": "MPR4_Facade_04",
+      "old_mesh": "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_Facade_04.SM_MPR4_Facade_04",
+      "new_mesh_name": "SM_MPR_CAD_WindowFacade_04_20261112",
+      "source_mesh": "SM_MPR4_Facade_04",
+      "source_blend": "SourceAssets/MPR/reference_v4/architecture/mpr_reference_shell.blend",
+      "preserve_material_overrides": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "side": 4,
+      "windows": [
+        {
+          "axis": 0,
+          "fixed": 83.34113,
+          "lo": 169.17416,
+          "hi": 170.08856,
+          "source_handles": [
+            "2C93B4",
+            "2E1194"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 4,
+          "frame_lo": 169.12336,
+          "frame_hi": 170.13936,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 83.58878,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E1154"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E1155"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 0,
+          "fixed": 83.34113,
+          "lo": 167.44696,
+          "hi": 168.36136,
+          "source_handles": [
+            "2C93B4",
+            "2E1198"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 4,
+          "frame_lo": 167.39615999999998,
+          "frame_hi": 168.41216,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 83.58878,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E115F"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E1151"
+              ]
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "actor_guid": "9DDFA7AC4DFA8E9F3CCE8A8174990D59",
+      "actor_label": "MPR4_Facade_05",
+      "old_mesh": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_05_20261112.SM_MPR_CAD_Facade_05_20261112",
+      "new_mesh_name": "SM_MPR_CAD_WindowFacade_05_20261112",
+      "source_mesh": "SM_MPR_CAD_Facade_05_20261112",
+      "source_blend": "SourceAssets/MPR/interior_cad_20261112/architecture/mpr_reference_shell.blend",
+      "preserve_material_overrides": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "side": 5,
+      "windows": [
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 60.42398,
+          "hi": 61.28758,
+          "source_handles": [
+            "2C93B4",
+            "2E11E5"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 60.37318,
+          "frame_hi": 61.33838,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E11E8"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E11E9"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 62.15118,
+          "hi": 63.01478,
+          "source_handles": [
+            "2C93B4",
+            "2E11EE"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 62.100379999999994,
+          "frame_hi": 63.065580000000004,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E11F1"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E11F2"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 64.41178,
+          "hi": 65.27538,
+          "source_handles": [
+            "2C93B4",
+            "2E11F7"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 64.36098,
+          "frame_hi": 65.32618,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E11FA"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E11FB"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 66.13898,
+          "hi": 67.00258,
+          "source_handles": [
+            "2C93B4",
+            "2E1200"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 66.08818000000001,
+          "frame_hi": 67.05337999999999,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E1203"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E1204"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 68.39958,
+          "hi": 69.26318,
+          "source_handles": [
+            "2C93B4",
+            "2E1209"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 68.34878,
+          "frame_hi": 69.31398,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E120C"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E120D"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 70.12678,
+          "hi": 70.99038,
+          "source_handles": [
+            "2C93B4",
+            "2E1212"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 70.07598,
+          "frame_hi": 71.04118,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E1215"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E1216"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 58.16338,
+          "hi": 59.02698,
+          "source_handles": [
+            "2C93B4",
+            "2E153C"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 58.112579999999994,
+          "frame_hi": 59.077780000000004,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E153F"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E1540"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 56.43618,
+          "hi": 57.29978,
+          "source_handles": [
+            "2C93B4",
+            "2E1543"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 56.38538,
+          "frame_hi": 57.35058,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E1546"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E1547"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 54.17558,
+          "hi": 55.03918,
+          "source_handles": [
+            "2C93B4",
+            "2E154A"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 54.124779999999994,
+          "frame_hi": 55.089980000000004,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E154D"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E154E"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 52.44838,
+          "hi": 53.31198,
+          "source_handles": [
+            "2C93B4",
+            "2E1551"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 52.39758,
+          "frame_hi": 53.36278,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E1554"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E1555"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 50.18778,
+          "hi": 51.05138,
+          "source_handles": [
+            "2C93B4",
+            "2E1558"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 50.136979999999994,
+          "frame_hi": 51.102180000000004,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E155B"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E155C"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 48.46058,
+          "hi": 49.32418,
+          "source_handles": [
+            "2C93B4",
+            "2E155F"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 48.40978,
+          "frame_hi": 49.37498,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E1562"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E1563"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 46.19998,
+          "hi": 47.06358,
+          "source_handles": [
+            "2C93B4",
+            "2E1566"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 46.149179999999994,
+          "frame_hi": 47.114380000000004,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E1569"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E156A"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": 182.36311,
+          "lo": 44.47278,
+          "hi": 45.33638,
+          "source_handles": [
+            "2C93B4",
+            "2E156D"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 5,
+          "frame_lo": 44.42198,
+          "frame_hi": 45.38718,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": 182.61076,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E1570"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E1571"
+              ]
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "actor_guid": "A1236C5443F129AC2DD45B94A99A4C5A",
+      "actor_label": "MPR4_Facade_15",
+      "old_mesh": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_15_20261112.SM_MPR_CAD_Facade_15_20261112",
+      "new_mesh_name": "SM_MPR_CAD_WindowFacade_15_20261112",
+      "source_mesh": "SM_MPR_CAD_Facade_15_20261112",
+      "source_blend": "SourceAssets/MPR/interior_cad_20261112/architecture/mpr_reference_shell.blend",
+      "preserve_material_overrides": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "side": 15,
+      "windows": [
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 56.61398,
+          "hi": 57.52838,
+          "source_handles": [
+            "2C93B4",
+            "2E0F97"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 56.563179999999996,
+          "frame_hi": 57.57918,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0F8F"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0F90"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 60.57638,
+          "hi": 61.49078,
+          "source_handles": [
+            "2C93B4",
+            "2E0F9C"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 60.52558,
+          "frame_hi": 61.54158,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0F91"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0F92"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 62.30358,
+          "hi": 63.21798,
+          "source_handles": [
+            "2C93B4",
+            "2E0FA1"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 62.252779999999994,
+          "frame_hi": 63.26878,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0F94"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0F93"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 66.26598,
+          "hi": 67.18038,
+          "source_handles": [
+            "2C93B4",
+            "2E0FA6"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 66.21518,
+          "frame_hi": 67.23118,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0F8C"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0F8B"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 68.50118,
+          "hi": 69.41558,
+          "source_handles": [
+            "2C93B4",
+            "2E0FAB"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 68.45038000000001,
+          "frame_hi": 69.46638,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0F8D"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0F8E"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 54.37878,
+          "hi": 55.29318,
+          "source_handles": [
+            "2C93B4",
+            "2E0FB8"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 54.32798,
+          "frame_hi": 55.34398,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0FB5"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0FB4"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 48.68918,
+          "hi": 49.60358,
+          "source_handles": [
+            "2C93B4",
+            "2E0FC1"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 48.63838,
+          "frame_hi": 49.65438,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0FBB"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0FBC"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 50.41638,
+          "hi": 51.33078,
+          "source_handles": [
+            "2C93B4",
+            "2E0FC6"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 50.365579999999994,
+          "frame_hi": 51.38158,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0FBE"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0FBD"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 28.87718,
+          "hi": 29.79158,
+          "source_handles": [
+            "2C93B4",
+            "2E0FD9"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 28.82638,
+          "frame_hi": 29.84238,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0FCB"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0FCC"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 26.64198,
+          "hi": 27.55638,
+          "source_handles": [
+            "2C93B4",
+            "2E0FDE"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 26.59118,
+          "frame_hi": 27.60718,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0FCA"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0FC9"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 22.67958,
+          "hi": 23.59398,
+          "source_handles": [
+            "2C93B4",
+            "2E0FE3"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 22.628780000000003,
+          "frame_hi": 23.644779999999997,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0FCE"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0FCD"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 20.95238,
+          "hi": 21.86678,
+          "source_handles": [
+            "2C93B4",
+            "2E0FE8"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 20.901580000000003,
+          "frame_hi": 21.917579999999997,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0FCF"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0FD0"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 16.98998,
+          "hi": 17.90438,
+          "source_handles": [
+            "2C93B4",
+            "2E0FED"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 16.93918,
+          "frame_hi": 17.95518,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0FD3"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0FD4"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 14.75478,
+          "hi": 15.66918,
+          "source_handles": [
+            "2C93B4",
+            "2E0FF2"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 14.70398,
+          "frame_hi": 15.719980000000001,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0FD2"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0FD1"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": 10.79238,
+          "hi": 11.70678,
+          "source_handles": [
+            "2C93B4",
+            "2E0FF7"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": 10.741579999999999,
+          "frame_hi": 11.75758,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E0FB2"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E0FB3"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": -78.76802,
+          "hi": -77.90442,
+          "source_handles": [
+            "2C93B4",
+            "2E1574"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": -78.81882,
+          "frame_hi": -77.85362,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E1577"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E1578"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": -76.53282,
+          "hi": -75.66922,
+          "source_handles": [
+            "2C93B4",
+            "2E157B"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": -76.58362,
+          "frame_hi": -75.61842,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E157E"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E157F"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": -72.57042,
+          "hi": -71.70682,
+          "source_handles": [
+            "2C93B4",
+            "2E1582"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": -72.62122,
+          "frame_hi": -71.65602,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E1585"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E1586"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": -70.84322,
+          "hi": -69.97962,
+          "source_handles": [
+            "2C93B4",
+            "2E1589"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": -70.89402,
+          "frame_hi": -69.92882,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E158C"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E158D"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": -66.88082,
+          "hi": -66.01722,
+          "source_handles": [
+            "2C93B4",
+            "2E1590"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": -66.93162,
+          "frame_hi": -65.96642,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E1593"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E1595"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": -64.64562,
+          "hi": -63.78202,
+          "source_handles": [
+            "2C93B4",
+            "2E1596"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": -64.69641999999999,
+          "frame_hi": -63.73122,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E159A"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E159C"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": -60.68322,
+          "hi": -59.81962,
+          "source_handles": [
+            "2C93B4",
+            "2E159F"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": -60.73402,
+          "frame_hi": -59.76882,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E15A2"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E15A3"
+              ]
+            ]
+          ]
+        },
+        {
+          "axis": 1,
+          "fixed": -181.68239,
+          "lo": -58.95602,
+          "hi": -58.09242,
+          "source_handles": [
+            "2C93B4",
+            "2E15A6"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": 15,
+          "frame_lo": -59.006820000000005,
+          "frame_hi": -58.041619999999995,
+          "z0": 1.325,
+          "z1": 3.875,
+          "frame_depth_m": 0.1143,
+          "wall_fixed": -181.93004,
+          "rough_opening_end_verification": "measured U-profile outer edges and adjacent exterior wall jambs",
+          "measured_jamb_source_handles": [
+            [
+              [
+                "2C93B4",
+                "2E15AA"
+              ]
+            ],
+            [
+              [
+                "2C93B4",
+                "2E15A9"
+              ]
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "actor_guid": "A9F0A5574790CE8CBE6462AD7D4249F5",
+      "actor_label": "MPR_OfficePartitions",
+      "old_mesh": "/Game/MPRWarehouse/Architecture/Meshes/SM_MPR_OfficePartitions.SM_MPR_OfficePartitions",
+      "new_mesh_name": "SM_MPR_CAD_WindowPartitions_20261112",
+      "source_mesh": "SM_MPR_OfficePartitions",
+      "source_blend": "SourceAssets/MPR/architecture/mpr_architecture.blend",
+      "preserve_material_overrides": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain"
+      ],
+      "side": null,
+      "windows": [
+        {
+          "axis": 1,
+          "fixed": -180.15839,
+          "lo": -89.02962,
+          "hi": -88.11522,
+          "source_handles": [
+            "2C93B4",
+            "2E0ABC"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -89.08041999999999,
+          "frame_hi": -88.06442,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -180.15839,
+          "lo": -85.88002,
+          "hi": -84.96562,
+          "source_handles": [
+            "2C93B4",
+            "2E0AC0"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -85.93082,
+          "frame_hi": -84.91482,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -180.15839,
+          "lo": 79.93118,
+          "hi": 80.84558,
+          "source_handles": [
+            "2C93B4",
+            "2E0B89"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 79.88038,
+          "frame_hi": 80.89638,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -180.15839,
+          "lo": 75.56238,
+          "hi": 76.47678,
+          "source_handles": [
+            "2C93B4",
+            "2E0B92"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 75.51158000000001,
+          "frame_hi": 76.52758,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.91873,
+          "lo": -177.86604,
+          "hi": -176.95164,
+          "source_handles": [
+            "2C93B4",
+            "2E0BAD"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -177.91684,
+          "frame_hi": -176.90084,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -180.15839,
+          "lo": 78.71198,
+          "hi": 79.62638,
+          "source_handles": [
+            "2C93B4",
+            "2E0BAE"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 78.66118,
+          "frame_hi": 79.67717999999999,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 74.48923,
+          "lo": -180.93944,
+          "hi": -180.35524,
+          "source_handles": [
+            "2C93B4",
+            "2E0BBA"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -180.99024,
+          "frame_hi": -180.30444,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -180.15839,
+          "lo": -90.24882,
+          "hi": -89.33442,
+          "source_handles": [
+            "2C93B4",
+            "2E0BCB"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -90.29961999999999,
+          "frame_hi": -89.28362,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -180.15839,
+          "lo": -91.21402,
+          "hi": -90.29962,
+          "source_handles": [
+            "2C93B4",
+            "2E0BCE"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -91.26482,
+          "frame_hi": -90.24882000000001,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -180.15839,
+          "lo": -84.91482,
+          "hi": -84.00042,
+          "source_handles": [
+            "2C93B4",
+            "2E0BD2"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -84.96562,
+          "frame_hi": -83.94962000000001,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -180.15839,
+          "lo": -87.09922,
+          "hi": -86.18482,
+          "source_handles": [
+            "2C93B4",
+            "2E0BDD"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -87.15002,
+          "frame_hi": -86.13402,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": -91.32197,
+          "lo": -179.08524,
+          "hi": -178.17084,
+          "source_handles": [
+            "2C93B4",
+            "2E0BE8"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -179.13604,
+          "frame_hi": -178.12004,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": -91.32197,
+          "lo": -180.05044,
+          "hi": -179.13604,
+          "source_handles": [
+            "2C93B4",
+            "2E0BEA"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -180.10124000000002,
+          "frame_hi": -179.08524,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": -91.32197,
+          "lo": -174.71644,
+          "hi": -173.80204,
+          "source_handles": [
+            "2C93B4",
+            "2E0BF0"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -174.76724000000002,
+          "frame_hi": -173.75124,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": -83.89247,
+          "lo": -180.93944,
+          "hi": -180.35524,
+          "source_handles": [
+            "2C93B4",
+            "2E0BF5"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -180.99024,
+          "frame_hi": -180.30444,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": -83.89247,
+          "lo": -181.57444,
+          "hi": -180.99024,
+          "source_handles": [
+            "2C93B4",
+            "2E0BFD"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -181.62524000000002,
+          "frame_hi": -180.93944,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": -91.32197,
+          "lo": -175.93564,
+          "hi": -175.02124,
+          "source_handles": [
+            "2C93B4",
+            "2E0C03"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -175.98644000000002,
+          "frame_hi": -174.97044,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": -91.32197,
+          "lo": -173.75124,
+          "hi": -172.83684,
+          "source_handles": [
+            "2C93B4",
+            "2E0C06"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -173.80204,
+          "frame_hi": -172.78603999999999,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -172.72889,
+          "lo": -92.10302,
+          "hi": -91.51882,
+          "source_handles": [
+            "2C93B4",
+            "2E0C07"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -92.15382,
+          "frame_hi": -91.46802000000001,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -172.72889,
+          "lo": -92.73802,
+          "hi": -92.15382,
+          "source_handles": [
+            "2C93B4",
+            "2E0C0B"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -92.78882,
+          "frame_hi": -92.10302,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": -91.32197,
+          "lo": -177.86604,
+          "hi": -176.95164,
+          "source_handles": [
+            "2C93B4",
+            "2E0C0C"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -177.91684,
+          "frame_hi": -176.90084,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": -91.32197,
+          "lo": -176.90084,
+          "hi": -175.98644,
+          "source_handles": [
+            "2C93B4",
+            "2E0C15"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -176.95164,
+          "frame_hi": -175.93563999999998,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.91873,
+          "lo": -175.93564,
+          "hi": -175.02124,
+          "source_handles": [
+            "2C93B4",
+            "2E0CAC"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -175.98644000000002,
+          "frame_hi": -174.97044,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -180.15839,
+          "lo": 80.89638,
+          "hi": 81.81078,
+          "source_handles": [
+            "2C93B4",
+            "2E0CC2"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 80.84558,
+          "frame_hi": 81.86157999999999,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -180.15839,
+          "lo": 74.59718,
+          "hi": 75.51158,
+          "source_handles": [
+            "2C93B4",
+            "2E0CCC"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 74.54638,
+          "frame_hi": 75.56237999999999,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -180.15839,
+          "lo": 76.78158,
+          "hi": 77.69598,
+          "source_handles": [
+            "2C93B4",
+            "2E0CD1"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 76.73078000000001,
+          "frame_hi": 77.74678,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 74.48923,
+          "lo": -181.57444,
+          "hi": -180.99024,
+          "source_handles": [
+            "2C93B4",
+            "2E0CD6"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -181.62524000000002,
+          "frame_hi": -180.93944,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.91873,
+          "lo": -179.08524,
+          "hi": -178.17084,
+          "source_handles": [
+            "2C93B4",
+            "2E0CD8"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -179.13604,
+          "frame_hi": -178.12004,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.91873,
+          "lo": -180.05044,
+          "hi": -179.13604,
+          "source_handles": [
+            "2C93B4",
+            "2E0CE0"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -180.10124000000002,
+          "frame_hi": -179.08524,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.91873,
+          "lo": -173.75124,
+          "hi": -172.83684,
+          "source_handles": [
+            "2C93B4",
+            "2E0CE3"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -173.80204,
+          "frame_hi": -172.78603999999999,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -172.72889,
+          "lo": 82.75058,
+          "hi": 83.18238,
+          "source_handles": [
+            "2C93B4",
+            "2E0CF3"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 82.69978,
+          "frame_hi": 83.23317999999999,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.91873,
+          "lo": -174.71644,
+          "hi": -173.80204,
+          "source_handles": [
+            "2C93B4",
+            "2E0CF5"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -174.76724000000002,
+          "frame_hi": -173.75124,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.91873,
+          "lo": -176.90084,
+          "hi": -175.98644,
+          "source_handles": [
+            "2C93B4",
+            "2E0CFE"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -176.95164,
+          "frame_hi": -175.93563999999998,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -172.72889,
+          "lo": 82.11558,
+          "hi": 82.69978,
+          "source_handles": [
+            "2C93B4",
+            "2E0CFF"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 82.06478,
+          "frame_hi": 82.75058,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.81713,
+          "lo": 173.51756,
+          "hi": 174.43196,
+          "source_handles": [
+            "2C93B4",
+            "2E10B1"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 173.46676,
+          "frame_hi": 174.48276,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.81713,
+          "lo": 174.48276,
+          "hi": 175.39716,
+          "source_handles": [
+            "2C93B4",
+            "2E10B2"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 174.43196,
+          "frame_hi": 175.44796000000002,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.81713,
+          "lo": 175.70196,
+          "hi": 176.61636,
+          "source_handles": [
+            "2C93B4",
+            "2E10B5"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 175.65116,
+          "frame_hi": 176.66716,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": 180.83911,
+          "lo": 80.79478,
+          "hi": 81.70918,
+          "source_handles": [
+            "2C93B4",
+            "2E116C"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 80.74398000000001,
+          "frame_hi": 81.75998,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": 180.83911,
+          "lo": 79.82958,
+          "hi": 80.74398,
+          "source_handles": [
+            "2C93B4",
+            "2E116D"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 79.77878000000001,
+          "frame_hi": 80.79477999999999,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": 180.83911,
+          "lo": 74.49558,
+          "hi": 75.40998,
+          "source_handles": [
+            "2C93B4",
+            "2E1173"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 74.44478000000001,
+          "frame_hi": 75.46078,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": 180.83911,
+          "lo": 75.46078,
+          "hi": 76.37518,
+          "source_handles": [
+            "2C93B4",
+            "2E1174"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 75.40998,
+          "frame_hi": 76.42598,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": 180.83911,
+          "lo": 76.67998,
+          "hi": 77.59438,
+          "source_handles": [
+            "2C93B4",
+            "2E1179"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 76.62918,
+          "frame_hi": 77.64518,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": 180.83911,
+          "lo": 78.61038,
+          "hi": 79.52478,
+          "source_handles": [
+            "2C93B4",
+            "2E117C"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 78.55958000000001,
+          "frame_hi": 79.57558,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 74.38763,
+          "lo": 181.03596,
+          "hi": 181.87416,
+          "source_handles": [
+            "2C93B4",
+            "2E1181"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 180.98515999999998,
+          "frame_hi": 181.92496,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.81713,
+          "lo": 179.81676,
+          "hi": 180.73116,
+          "source_handles": [
+            "2C93B4",
+            "2E1185"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 179.76595999999998,
+          "frame_hi": 180.78196,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.81713,
+          "lo": 178.85156,
+          "hi": 179.76596,
+          "source_handles": [
+            "2C93B4",
+            "2E1186"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 178.80076,
+          "frame_hi": 179.81676000000002,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": 173.40961,
+          "lo": 82.01398,
+          "hi": 82.59818,
+          "source_handles": [
+            "2C93B4",
+            "2E118B"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 81.96318000000001,
+          "frame_hi": 82.64898,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.81713,
+          "lo": 177.63236,
+          "hi": 178.54676,
+          "source_handles": [
+            "2C93B4",
+            "2E118D"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 177.58156,
+          "frame_hi": 178.59756000000002,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": 173.40961,
+          "lo": 82.64898,
+          "hi": 83.23318,
+          "source_handles": [
+            "2C93B4",
+            "2E118F"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 82.59818,
+          "frame_hi": 83.28398,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 81.81713,
+          "lo": 176.66716,
+          "hi": 177.58156,
+          "source_handles": [
+            "2C93B4",
+            "2E1192"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": 176.61636,
+          "frame_hi": 177.63236,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 77.22608,
+          "lo": -180.05044,
+          "hi": -179.03444,
+          "source_handles": [
+            "2C93B4",
+            "2E1474"
+          ],
+          "evidence": "glass centre LINE aligned with measured parallel frame cross sections",
+          "exterior_edge": null,
+          "frame_lo": -180.10124000000002,
+          "frame_hi": -178.98363999999998,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 68.61548,
+          "lo": 17.73936,
+          "hi": 18.95856,
+          "source_handles": [
+            "2C93B4",
+            "2E1061"
+          ],
+          "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+          "exterior_edge": null,
+          "frame_lo": 17.688560000000003,
+          "frame_hi": 19.009359999999997,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 68.61548,
+          "lo": 21.34616,
+          "hi": 22.59076,
+          "source_handles": [
+            "2C93B4",
+            "2E1062"
+          ],
+          "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+          "exterior_edge": null,
+          "frame_lo": 21.295360000000002,
+          "frame_hi": 22.64156,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 69.66958,
+          "lo": -7.90225,
+          "hi": -7.33075,
+          "source_handles": [
+            "2C93B4",
+            "2E1072"
+          ],
+          "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+          "exterior_edge": null,
+          "frame_lo": -7.95305,
+          "frame_hi": -7.27995,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 1,
+          "fixed": -15.43335,
+          "lo": 70.96498,
+          "hi": 72.10798,
+          "source_handles": [
+            "2C93B4",
+            "2E107C"
+          ],
+          "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+          "exterior_edge": null,
+          "frame_lo": 70.91418,
+          "frame_hi": 72.15878,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 69.64418,
+          "lo": -7.33075,
+          "hi": -6.75925,
+          "source_handles": [
+            "2C93B4",
+            "2E1108"
+          ],
+          "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+          "exterior_edge": null,
+          "frame_lo": -7.38155,
+          "frame_hi": -6.70845,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 69.66958,
+          "lo": -13.74425,
+          "hi": -13.17275,
+          "source_handles": [
+            "2C93B4",
+            "2E1109"
+          ],
+          "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+          "exterior_edge": null,
+          "frame_lo": -13.79505,
+          "frame_hi": -13.12195,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 69.64418,
+          "lo": -13.17275,
+          "hi": -12.60125,
+          "source_handles": [
+            "2C93B4",
+            "2E110A"
+          ],
+          "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+          "exterior_edge": null,
+          "frame_lo": -13.223550000000001,
+          "frame_hi": -12.55045,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 77.20068,
+          "lo": -178.43759,
+          "hi": -177.89144,
+          "source_handles": [
+            "2C93B4",
+            "2E1475"
+          ],
+          "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+          "exterior_edge": null,
+          "frame_lo": -178.48839,
+          "frame_hi": -177.84063999999998,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": 77.25148,
+          "lo": -178.98373,
+          "hi": -178.43759,
+          "source_handles": [
+            "2C93B4",
+            "2E1476"
+          ],
+          "evidence": "explicit interior/sliding-window line; frame thickness retained as display detail",
+          "exterior_edge": null,
+          "frame_lo": -179.03453000000002,
+          "frame_hi": -178.38679,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        },
+        {
+          "axis": 0,
+          "fixed": -81.04121,
+          "lo": 3.38833,
+          "hi": 4.30273,
+          "source_handles": [
+            "2C93B4",
+            "2E09AA"
+          ],
+          "evidence": "closed0.9144x0.127m interior window rectangle",
+          "exterior_edge": null,
+          "frame_lo": 3.3375299999999997,
+          "frame_hi": 4.35353,
+          "z0": 1.325,
+          "z1": 3.2,
+          "frame_depth_m": 0.1143
+        }
+      ]
+    }
+  ],
+  "removals": [
+    {
+      "actor_guid": "D6D13E164605395368CDDBB11603E1B3",
+      "actor_label": "MPR_OfficeGlazing",
+      "expected_meshes": [
+        "/Game/MPRWarehouse/Architecture/Meshes/SM_MPR_OfficeGlazing.SM_MPR_OfficeGlazing"
+      ],
+      "reason": "Old schematic glazing band superseded by source-CAD windows; remove duplicate visible layers."
+    },
+    {
+      "actor_guid": "940B0E4342E187D70917B5B8E34E9456",
+      "actor_label": "MPR4_OfficeGlazing_West",
+      "expected_meshes": [
+        "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_OfficeGlazing_West.SM_MPR4_OfficeGlazing_West"
+      ],
+      "reason": "Old schematic glazing band superseded by source-CAD windows; remove duplicate visible layers."
+    },
+    {
+      "actor_guid": "F6DE10CB43C4E765BC4B519CFC7BC795",
+      "actor_label": "MPR4_OfficeGlazing_East",
+      "expected_meshes": [
+        "/Game/MPRWarehouse/ReferenceV4/Architecture/Meshes/SM_MPR4_OfficeGlazing_East.SM_MPR4_OfficeGlazing_East"
+      ],
+      "reason": "Old schematic glazing band superseded by source-CAD windows; remove duplicate visible layers."
+    }
+  ],
+  "cut_checks": [
+    {
+      "actor_label": "MPR4_Facade_00",
+      "source_boxes": 26,
+      "touched_boxes": 3,
+      "removed_volume_m3": 1.5796543695008718
+    },
+    {
+      "actor_label": "MPR4_Facade_04",
+      "source_boxes": 26,
+      "touched_boxes": 3,
+      "removed_volume_m3": 1.5796543695008713
+    },
+    {
+      "actor_label": "MPR4_Facade_05",
+      "source_boxes": 164,
+      "touched_boxes": 14,
+      "removed_volume_m3": 10.505938473202301
+    },
+    {
+      "actor_label": "MPR4_Facade_15",
+      "source_boxes": 264,
+      "touched_boxes": 29,
+      "removed_volume_m3": 17.851538036635155
+    },
+    {
+      "actor_label": "MPR_OfficePartitions",
+      "source_boxes": 110,
+      "touched_boxes": 14,
+      "removed_volume_m3": 0.26611013267063516
+    }
+  ],
+  "height_basis": "Display frame1.325..3.875m matches current V4 glazing; indoor3.3m office walls cap frames at3.2m. CAD establishes plan, not sill/window elevations.",
+  "preservation": "Use existing patched facade05/15 as source, retain pedestrian doors and74 large doors. No sorting/worker/cargo/camera/runtime changes.",
+  "material_bindings": {
+    "MPR4_GlassBlue": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_GlassBlue",
+    "MPR4_Aluminium": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_Aluminium",
+    "MPR4_JointSeal": "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal"
+  },
+  "optimization": {
+    "unique_meshes": 6,
+    "unique_triangles": 17172,
+    "instance_count": 0,
+    "material_slots": 15,
+    "draw_strategy": "Static partition meshes; shared modules should be HISM, no per-object Tick or collision. Solar continuous strips with repeating cell texture."
+  }
+}

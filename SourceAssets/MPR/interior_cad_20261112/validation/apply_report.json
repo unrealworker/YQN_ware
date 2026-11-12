@@ -1,0 +1,1055 @@
+{
+  "success": true,
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "actors_before": 889,
+  "actors_after": 926,
+  "racks": 2867,
+  "modified_rack_groups": 27,
+  "created_actors": 37,
+  "corrected_column_instances": 3,
+  "final_column_profiles": 303,
+  "stairs": 18,
+  "changed_existing_packages": [
+    "Content/Maps/MPR_CAD_Warehouse_B50B57.umap"
+  ],
+  "added_packages": [
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W144_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W144_Standard.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W192_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F17P1_W144_Standard.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F17P1_W192_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F20_W144_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F20_W144_Standard.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F5_W144_Standard.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F5_W192_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W144_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W144_Standard.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W192_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F9_W144_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F9_W144_Standard.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_FUnresolved_W144_Passage.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_EntranceStairs_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_ExteriorPedestrianDoors_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_02_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_05_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_07_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_08_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_10_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_12_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_15_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_InteriorPedestrianDoors_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_NestedColumns_20261112.uasset",
+    "Content/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_PartitionCompletion_20261112.uasset"
+  ],
+  "source_cad_sha256": "c316aafe183162c5bef636885b59cc1000c3eecf50d8be645490b4716c6af863",
+  "map_sha256": "7132a0532b32b0337376dd66fa2f2f012d137e1cc5543cbf778b2e8b25027c6c",
+  "imported": {
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W144_Passage.SM_MPR_CADRack_F16_W144_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W144_Passage.SM_MPR_CADRack_F16_W144_Passage",
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          915.4000244140625
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W144_Standard.SM_MPR_CADRack_F16_W144_Standard": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W144_Standard.SM_MPR_CADRack_F16_W144_Standard",
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          915.4000244140625
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W192_Passage.SM_MPR_CADRack_F16_W192_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F16_W192_Passage.SM_MPR_CADRack_F16_W192_Passage",
+      "bounds_cm": [
+        [
+          -251.4600067138672,
+          251.4600067138672
+        ],
+        [
+          -53.340023040771484,
+          53.340023040771484
+        ],
+        [
+          0.0,
+          915.4000244140625
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F17P1_W144_Standard.SM_MPR_CADRack_F17P1_W144_Standard": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F17P1_W144_Standard.SM_MPR_CADRack_F17P1_W144_Standard",
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -60.96001434326172,
+          60.96001434326172
+        ],
+        [
+          0.0,
+          928.7297973632812
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F17P1_W192_Passage.SM_MPR_CADRack_F17P1_W192_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F17P1_W192_Passage.SM_MPR_CADRack_F17P1_W192_Passage",
+      "bounds_cm": [
+        [
+          -251.4600067138672,
+          251.4600067138672
+        ],
+        [
+          -53.340023040771484,
+          53.340023040771484
+        ],
+        [
+          0.0,
+          928.7163696289062
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F20_W144_Passage.SM_MPR_CADRack_F20_W144_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F20_W144_Passage.SM_MPR_CADRack_F20_W144_Passage",
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          928.71630859375
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F20_W144_Standard.SM_MPR_CADRack_F20_W144_Standard": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F20_W144_Standard.SM_MPR_CADRack_F20_W144_Standard",
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          928.72998046875
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F5_W144_Standard.SM_MPR_CADRack_F5_W144_Standard": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F5_W144_Standard.SM_MPR_CADRack_F5_W144_Standard",
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -60.96001434326172,
+          60.96001434326172
+        ],
+        [
+          0.0,
+          1068.1600341796875
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F5_W192_Passage.SM_MPR_CADRack_F5_W192_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F5_W192_Passage.SM_MPR_CADRack_F5_W192_Passage",
+      "bounds_cm": [
+        [
+          -251.4600067138672,
+          251.4600067138672
+        ],
+        [
+          -60.96002197265625,
+          60.96002197265625
+        ],
+        [
+          0.0,
+          1068.1600341796875
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W144_Passage.SM_MPR_CADRack_F7_W144_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W144_Passage.SM_MPR_CADRack_F7_W144_Passage",
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -60.96001434326172,
+          60.96001434326172
+        ],
+        [
+          0.0,
+          1068.1600341796875
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W144_Standard.SM_MPR_CADRack_F7_W144_Standard": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W144_Standard.SM_MPR_CADRack_F7_W144_Standard",
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -60.96001434326172,
+          60.96001434326172
+        ],
+        [
+          0.0,
+          1068.1600341796875
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W192_Passage.SM_MPR_CADRack_F7_W192_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F7_W192_Passage.SM_MPR_CADRack_F7_W192_Passage",
+      "bounds_cm": [
+        [
+          -251.4600067138672,
+          251.4600067138672
+        ],
+        [
+          -60.96002197265625,
+          60.96002197265625
+        ],
+        [
+          0.0,
+          1068.1600341796875
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F9_W144_Passage.SM_MPR_CADRack_F9_W144_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F9_W144_Passage.SM_MPR_CADRack_F9_W144_Passage",
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          994.4989013671875
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F9_W144_Standard.SM_MPR_CADRack_F9_W144_Standard": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_F9_W144_Standard.SM_MPR_CADRack_F9_W144_Standard",
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          994.4989013671875
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_PaleGray.M_Zcool_PaleGray",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Cobalt",
+          "PaleGray",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_FUnresolved_W144_Passage.SM_MPR_CADRack_FUnresolved_W144_Passage": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CADRack_FUnresolved_W144_Passage.SM_MPR_CADRack_FUnresolved_W144_Passage",
+      "bounds_cm": [
+        [
+          -190.5,
+          190.5
+        ],
+        [
+          -53.34001541137695,
+          53.34001541137695
+        ],
+        [
+          0.0,
+          915.4000244140625
+        ]
+      ],
+      "lods": 3,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Charcoal.M_Zcool_Charcoal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Charcoal"
+        ],
+        [
+          "Porcelain",
+          "Charcoal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_PartitionCompletion_20261112.SM_MPR_CAD_PartitionCompletion_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_PartitionCompletion_20261112.SM_MPR_CAD_PartitionCompletion_20261112",
+      "bounds_cm": [
+        [
+          -17845.025390625,
+          1677.4154052734375
+        ],
+        [
+          -7964.8583984375,
+          7928.55517578125
+        ],
+        [
+          0.0,
+          330.0
+        ]
+      ],
+      "lods": 1,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain"
+      ],
+      "section_roles": [
+        [
+          "Porcelain"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_02_20261112.SM_MPR_CAD_Facade_02_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_02_20261112.SM_MPR_CAD_Facade_02_20261112",
+      "bounds_cm": [
+        [
+          -16608.044921875,
+          16678.65625
+        ],
+        [
+          -7470.83984375,
+          -7439.39697265625
+        ],
+        [
+          -120.00000762939453,
+          1360.0
+        ]
+      ],
+      "lods": 1,
+      "materials": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "section_roles": [
+        [
+          "MPR4_IndustrialBlue",
+          "MPR4_FacadeWhite",
+          "MPR4_JointSeal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_05_20261112.SM_MPR_CAD_Facade_05_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_05_20261112.SM_MPR_CAD_Facade_05_20261112",
+      "bounds_cm": [
+        [
+          18245.8359375,
+          18277.27734375
+        ],
+        [
+          -8358.8798828125,
+          2050.040283203125
+        ],
+        [
+          -120.00000762939453,
+          1360.0
+        ]
+      ],
+      "lods": 1,
+      "materials": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "section_roles": [
+        [
+          "MPR4_IndustrialBlue",
+          "MPR4_FacadeWhite",
+          "MPR4_JointSeal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_07_20261112.SM_MPR_CAD_Facade_07_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_07_20261112.SM_MPR_CAD_Facade_07_20261112",
+      "bounds_cm": [
+        [
+          16663.416015625,
+          16694.857421875
+        ],
+        [
+          2050.04052734375,
+          5098.04052734375
+        ],
+        [
+          -120.00000762939453,
+          1360.0
+        ]
+      ],
+      "lods": 1,
+      "materials": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "section_roles": [
+        [
+          "MPR4_IndustrialBlue",
+          "MPR4_FacadeWhite",
+          "MPR4_JointSeal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_08_20261112.SM_MPR_CAD_Facade_08_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_08_20261112.SM_MPR_CAD_Facade_08_20261112",
+      "bounds_cm": [
+        [
+          15091.15625,
+          16678.65625
+        ],
+        [
+          5082.80029296875,
+          5114.24072265625
+        ],
+        [
+          -120.00000762939453,
+          1360.0
+        ]
+      ],
+      "lods": 1,
+      "materials": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "section_roles": [
+        [
+          "MPR4_IndustrialBlue",
+          "MPR4_FacadeWhite",
+          "MPR4_JointSeal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_10_20261112.SM_MPR_CAD_Facade_10_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_10_20261112.SM_MPR_CAD_Facade_10_20261112",
+      "bounds_cm": [
+        [
+          13536.6767578125,
+          15091.15625
+        ],
+        [
+          6606.80126953125,
+          6638.2412109375
+        ],
+        [
+          -120.00000762939453,
+          1360.0
+        ]
+      ],
+      "lods": 1,
+      "materials": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "section_roles": [
+        [
+          "MPR4_IndustrialBlue",
+          "MPR4_FacadeWhite",
+          "MPR4_JointSeal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_12_20261112.SM_MPR_CAD_Facade_12_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_12_20261112.SM_MPR_CAD_Facade_12_20261112",
+      "bounds_cm": [
+        [
+          -16608.04296875,
+          13536.6767578125
+        ],
+        [
+          8379.720703125,
+          8411.1630859375
+        ],
+        [
+          -120.00000762939453,
+          1360.0
+        ]
+      ],
+      "lods": 1,
+      "materials": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "section_roles": [
+        [
+          "MPR4_IndustrialBlue",
+          "MPR4_FacadeWhite",
+          "MPR4_JointSeal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_15_20261112.SM_MPR_CAD_Facade_15_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_Facade_15_20261112.SM_MPR_CAD_Facade_15_20261112",
+      "bounds_cm": [
+        [
+          -18209.205078125,
+          -18177.76171875
+        ],
+        [
+          -8369.0361328125,
+          9309.36328125
+        ],
+        [
+          -120.00000762939453,
+          1360.0
+        ]
+      ],
+      "lods": 1,
+      "materials": [
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_IndustrialBlue.MI_SC_MPR4_IndustrialBlue",
+        "/Game/MPRWarehouse/SiteComplete/Materials/MI_SC_MPR4_FacadeWhite.MI_SC_MPR4_FacadeWhite",
+        "/Game/MPRWarehouse/ReferenceV4/Materials/MI_MPR4_JointSeal.MI_MPR4_JointSeal"
+      ],
+      "section_roles": [
+        [
+          "MPR4_IndustrialBlue",
+          "MPR4_FacadeWhite",
+          "MPR4_JointSeal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_ExteriorPedestrianDoors_20261112.SM_MPR_CAD_ExteriorPedestrianDoors_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_ExteriorPedestrianDoors_20261112.SM_MPR_CAD_ExteriorPedestrianDoors_20261112",
+      "bounds_cm": [
+        [
+          -18204.50390625,
+          18272.576171875
+        ],
+        [
+          -7466.13916015625,
+          8406.462890625
+        ],
+        [
+          0.0,
+          215.00001525878906
+        ]
+      ],
+      "lods": 1,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal.M_Zcool_Metal"
+      ],
+      "section_roles": [
+        [
+          "Cobalt",
+          "Porcelain",
+          "Metal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_InteriorPedestrianDoors_20261112.SM_MPR_CAD_InteriorPedestrianDoors_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_InteriorPedestrianDoors_20261112.SM_MPR_CAD_InteriorPedestrianDoors_20261112",
+      "bounds_cm": [
+        [
+          -18139.6640625,
+          18097.625
+        ],
+        [
+          -8328.3955078125,
+          8811.5234375
+        ],
+        [
+          0.0,
+          215.00001525878906
+        ]
+      ],
+      "lods": 1,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal.M_Zcool_Metal"
+      ],
+      "section_roles": [
+        [
+          "Cobalt",
+          "Porcelain",
+          "Metal"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_NestedColumns_20261112.SM_MPR_CAD_NestedColumns_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_NestedColumns_20261112.SM_MPR_CAD_NestedColumns_20261112",
+      "bounds_cm": [
+        [
+          -18162.525390625,
+          18228.056640625
+        ],
+        [
+          -8333.4765625,
+          9273.8037109375
+        ],
+        [
+          0.0,
+          1220.0
+        ]
+      ],
+      "lods": 1,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain"
+      ],
+      "section_roles": [
+        [
+          "Cobalt",
+          "Porcelain"
+        ]
+      ]
+    },
+    "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_EntranceStairs_20261112.SM_MPR_CAD_EntranceStairs_20261112": {
+      "path": "/Game/MPRWarehouse/InteriorCAD20261112/Meshes/SM_MPR_CAD_EntranceStairs_20261112.SM_MPR_CAD_EntranceStairs_20261112",
+      "bounds_cm": [
+        [
+          -12475.421875,
+          12998.154296875
+        ],
+        [
+          -7835.25439453125,
+          8775.5791015625
+        ],
+        [
+          -123.94779968261719,
+          106.75
+        ]
+      ],
+      "lods": 1,
+      "materials": [
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Porcelain.M_Zcool_Porcelain",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Cobalt.M_Zcool_Cobalt",
+        "/Game/GHSZcoolSmartFactory/Materials/M_Zcool_Metal.M_Zcool_Metal"
+      ],
+      "section_roles": [
+        [
+          "Porcelain",
+          "Cobalt",
+          "Metal"
+        ]
+      ]
+    }
+  },
+  "existing_scene_preserved": true
+}
