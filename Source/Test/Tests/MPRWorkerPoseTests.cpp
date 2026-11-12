@@ -275,4 +275,56 @@ bool FMPRMannequinFootSupport::RunTest(const FString&)
     AddInfo(FString::Printf(TEXT("Actual mannequin stance: %d grounded frame pairs, max world sole drift=%.9fcm"),StancePairs,MaxDrift));
     return TestTrue(TEXT("Both full and 0.35 strides had actual grounded support samples"),StancePairs>1000);
 }
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMPRWorkerDisplayLODValidation,"MPR.Worker.DisplayLODWithoutPoseTick",
+    GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FMPRWorkerDisplayLODValidation::RunTest(const FString&)
+{
+    auto* Mesh=LoadObject<USkeletalMesh>(nullptr,TEXT("/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple.SKM_Manny_Simple"));
+    if(!TestNotNull(TEXT("Official worker mesh available"),Mesh)||!TestNotNull(TEXT("Engine available"),GEngine))return false;
+    if(!TestTrue(TEXT("Existing worker mesh has near and far LODs"),Mesh->GetLODNum()>1))return false;
+    const auto Init=UWorld::InitializationValues().AllowAudioPlayback(false).CreatePhysicsScene(false)
+        .ShouldSimulatePhysics(false).CreateNavigation(false).CreateAISystem(false);
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false,NAME_None,nullptr,true,ERHIFeatureLevel::Num,&Init);
+    if(!TestNotNull(TEXT("Disposable world available"),World))return false;
+    GEngine->CreateNewWorldContext(EWorldType::Game).SetCurrentWorld(World);
+    ON_SCOPE_EXIT { GEngine->DestroyWorldContext(World);World->DestroyWorld(false); };
+    auto* Owner=World->SpawnActor<AActor>();
+    auto* Worker=NewObject<UMPRWorkerPoseComponent>(Owner);Owner->SetRootComponent(Worker);Worker->RegisterComponent();
+    if(!TestTrue(TEXT("Worker initializes"),Worker->InitializeWorker(Mesh)))return false;
+    FMPRWorkerPoseInput Pose;
+    Pose.BodyWorld=FTransform(FRotator(0,30,0),FVector(1000,-700,0));
+    Pose.LeftPalmWorld=Pose.BodyWorld.TransformPosition(FVector(25,-18,107));
+    Pose.RightPalmWorld=Pose.BodyWorld.TransformPosition(FVector(25,18,107));
+    Pose.GripAlpha=0.;Pose.TorsoLeanDegrees=3.;Worker->ApplyWorkerPose(Pose);
+    const auto Bones=Worker->GetComponentSpaceTransforms();
+    const FTransform WorldPose=Worker->GetComponentTransform();
+    const int32 Revision=Worker->GetPoseRevision();
+    // Deterministic renderer-feedback fixture. Actual camera-driven MinDesiredLOD
+    // changes are additionally checked in the native scene by moving near/far.
+    Worker->bUseScreenRenderStateForUpdate=false;
+    Worker->SetLastRenderTime(World->GetTimeSeconds());
+    Worker->SetForcedLOD(Mesh->GetLODNum());
+    TestTrue(TEXT("A far display LOD is applied without enabling component tick"),Worker->UpdatePresentationLOD());
+    TestEqual(TEXT("Renderer can select the existing coarsest LOD"),Worker->GetPredictedLODLevel(),Mesh->GetLODNum()-1);
+    const int32 Changes=Worker->GetDisplayLODChanges();
+    for(int32 I=0;I<120;++I)TestFalse(TEXT("An unchanged LOD produces no further upload request"),Worker->UpdatePresentationLOD());
+    TestEqual(TEXT("Stationary LOD change counter remains stable"),Worker->GetDisplayLODChanges(),Changes);
+    Worker->SetForcedLOD(1);
+    TestTrue(TEXT("Returning near restores full existing detail"),Worker->UpdatePresentationLOD());
+    TestEqual(TEXT("Near LOD is zero"),Worker->GetPredictedLODLevel(),0);
+    TestFalse(TEXT("LOD maintenance does not create an independent animation tick"),Worker->PrimaryComponentTick.bCanEverTick);
+    TestEqual(TEXT("LOD maintenance never reruns procedural pose solving"),Worker->GetPoseRevision(),Revision);
+    TestTrue(TEXT("Worker placement remains identical"),Worker->GetComponentTransform().Equals(WorldPose,1.e-9));
+    const auto& After=Worker->GetComponentSpaceTransforms();
+    TestEqual(TEXT("Full bone data remains available across LODs"),After.Num(),Bones.Num());
+    for(int32 I=0;I<Bones.Num();++I)TestTrue(TEXT("Every existing bone pose is preserved"),After[I].Equals(Bones[I],1.e-9));
+    Worker->SetVisibility(false,true);Worker->SetForcedLOD(Mesh->GetLODNum());
+    TestFalse(TEXT("Hidden exchange worker performs no LOD maintenance"),Worker->UpdatePresentationLOD());
+    Worker->SetVisibility(true,true);Worker->SetLastRenderTime(World->GetTimeSeconds()-2.f);
+    TestFalse(TEXT("An offscreen worker does not consume a LOD it cannot upload"),Worker->UpdatePresentationLOD());
+    Worker->SetLastRenderTime(World->GetTimeSeconds());
+    TestTrue(TEXT("Returning onscreen applies the pending LOD"),Worker->UpdatePresentationLOD());
+    Worker->SetForcedLOD(0);
+    return true;
+}
 #endif

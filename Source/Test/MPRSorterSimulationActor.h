@@ -70,6 +70,7 @@ protected:
     virtual void EndPlay(const EEndPlayReason::Type Reason) override;
 private:
     friend class FMPRSorterLayoutValidation;
+    friend class FMPRSorterWorkerSelectionValidation;
     struct FBinPoint { FVector Entry,Outlet,Drop; double RimZ=0; };
     struct FCartPoint
     {
@@ -77,6 +78,7 @@ private:
         FVector Origin,BoundsMin,BoundsMax;
         double Retreat=65,OutboundEndX=0;
         int32 Side=0,FirstColumn=0,ColumnCount=0,ComponentIndex=INDEX_NONE,InstanceIndex=INDEX_NONE;
+        FMPRCartInstanceTransformCache PresentationCache;
     };
     struct FMachine
     {
@@ -158,7 +160,7 @@ private:
     TArray<FDistributionBank> DistributionBanks;
     FMPRInstanceMotionHistory CentralColumnHistory, CentralTrayHistory, CentralParcelHistory;
     FMPRInstanceMotionHistory RingTowerHistory, RingTrayHistory, RingParcelHistory, RingInfeedHistory;
-    TArray<int32> CadWorkerIndices;
+    TArray<int32> CadWorkerIndices,CadWorkerSourceIndices;
     uint64 NextCentralParcelId=1;
     double FleetTimeRemainder=0;
     int32 SuppressedSpineInstances=0;
@@ -168,5 +170,6 @@ private:
     int32 SelectedMachine=0,PendingFocus=INDEX_NONE;
     int32 ExchangeOwner=INDEX_NONE,NextExchangeMachine=0;
     uint64 OwnerCompletedExchanges=0;
+    uint64 CartTransformSubmissions=0,CartComponentDirtySubmissions=0;
     bool bReady=false,bAutomaticAdvance=true;
 };

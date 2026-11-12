@@ -2,6 +2,7 @@
 #include "MPRSorterHUDWidget.h"
 #include "MPRWorkerPoseComponent.h"
 #include "MPRCadWorkerData.h"
+#include "MPRWorkerPresentationPolicy.h"
 #include "Engine/SkeletalMesh.h"
 #include "Animation/AnimSequence.h"
 #include "GHSWarehousePlayerController.h"
@@ -373,6 +374,7 @@ bool AMPRSorterSimulationActor::BuildCartInstances(bool bEditorPreview)
         }
         Cart.ComponentIndex=ComponentIndex;
         Cart.InstanceIndex=RuntimeCartComponents[ComponentIndex]->AddInstance(FTransform(FQuat::Identity,Cart.Origin)*M.World,true);
+        Cart.PresentationCache.Reset();
     }
     return true;
 }
@@ -493,7 +495,7 @@ void AMPRSorterSimulationActor::RefitCadWorktables()
 bool AMPRSorterSimulationActor::BuildWorkers()
 {
     for(auto& C:RuntimeWorkers)if(C)C->DestroyComponent();
-    RuntimeWorkers.Reset();CadWorkerIndices.Reset();
+    RuntimeWorkers.Reset();CadWorkerIndices.Reset();CadWorkerSourceIndices.Reset();
     auto AddWorker=[this]()
     {
         const FName Name(*FString::Printf(TEXT("MannyWorker_%02d"),RuntimeWorkers.Num()));
@@ -503,23 +505,26 @@ bool AMPRSorterSimulationActor::BuildWorkers()
         return C->InitializeWorker(WorkerMesh,WorkerIdle);
     };
     // One hidden exchange worker per machine; only the aisle owner is visible.
-    // Six feed operators animate with the central loop; all other source CAD
-    // personnel remain at their surveyed workstations, not at every sorter.
+    // Six feed operators animate with the central loop. Only the exact CAD
+    // sorter-console operator is additionally displayed; other areas stay empty.
     for(auto& M:Machines){M.WorkerOffset=RuntimeWorkers.Num();if(!AddWorker())return false;}
     for(auto& B:DistributionBanks)for(auto& S:B.Stations)if(S.bManual)
     {S.WorkerIndex=RuntimeWorkers.Num();if(!AddWorker())return false;}
-    for(const auto& Source:MPRCadWorkers::Workers)
+    static_assert(UE_ARRAY_COUNT(MPRCadWorkers::Workers)==MPRWorkerPresentation::SourceWorkerCount);
+    for(int32 SourceIndex=0;SourceIndex<UE_ARRAY_COUNT(MPRCadWorkers::Workers);++SourceIndex)
     {
+        const auto& Source=MPRCadWorkers::Workers[SourceIndex];
+        if(!MPRWorkerPresentation::Find(Source.SourceHandle))continue;
         if(Source.CentralFeed)
         {
             int32 Index=INDEX_NONE;
             for(const auto& B:DistributionBanks)for(const auto& S:B.Stations)
                 if(S.bManual&&S.Feet.Equals(FVector(Source.Feet[0],Source.Feet[1],Source.Feet[2]),.1))Index=S.WorkerIndex;
             if(Index==INDEX_NONE){Error=TEXT("CAD 上料人员与中央工位不匹配");return false;}
-            CadWorkerIndices.Add(Index);continue;
+            CadWorkerIndices.Add(Index);CadWorkerSourceIndices.Add(SourceIndex);continue;
         }
         const int32 Index=RuntimeWorkers.Num();if(!AddWorker())return false;
-        CadWorkerIndices.Add(Index);
+        CadWorkerIndices.Add(Index);CadWorkerSourceIndices.Add(SourceIndex);
         FMPRWorkerPoseInput Pose;
         const FVector Feet(Source.Feet[0],Source.Feet[1],Source.Feet[2]);
         const FQuat Turn=FRotator(0,Source.Yaw,0).Quaternion();
@@ -530,6 +535,8 @@ bool AMPRSorterSimulationActor::BuildWorkers()
         // Fixed CAD staff do not need a per-frame bone solve.
         RuntimeWorkers[Index]->SetComponentTickEnabled(false);
     }
+    if(CadWorkerIndices.Num()!=MPRWorkerPresentation::RetainedWorkerCount)
+    {Error=TEXT("播种机人员白名单与 CAD 来源不匹配");return false;}
     return true;
 }
 void AMPRSorterSimulationActor::UpdateWorker(int32 Index,const FMachine& M,const FMPRWorkerPoseInput& Local)
@@ -589,15 +596,17 @@ void AMPRSorterSimulationActor::UpdateInstances()
     UpdateRingInstances();
     const FTransform Hidden(FQuat::Identity,FVector::ZeroVector,FVector::ZeroVector);
     bool BinsChanged=false;
+    TArray<int32,TInlineAllocator<10>> ChangedCartComponents;
     for(auto& M:Machines)
     {
         const auto& Bins=M.Simulation.GetBins();const auto& Carts=M.Simulation.GetCarts();
         int32 MovingCart=INDEX_NONE;
         for(int32 I=0;I<M.Carts.Num();++I)
         {
-            const auto& P=M.Carts[I];const auto& C=Carts[size_t(I)];const FVector Offset=CartOffset(M,I);
+            auto& P=M.Carts[I];const auto& C=Carts[size_t(I)];const FVector Offset=CartOffset(M,I);
             const FVector CartScale=C.State==MPRSorter::CartPhase::Handoff?FVector::ZeroVector:FVector::OneVector;
-            RuntimeCartComponents[P.ComponentIndex]->UpdateInstanceTransform(P.InstanceIndex,FTransform(FQuat::Identity,P.Origin+Offset,CartScale)*M.World,true,false,true);
+            if(P.PresentationCache.Submit(RuntimeCartComponents[P.ComponentIndex],P.InstanceIndex,FTransform(FQuat::Identity,P.Origin+Offset,CartScale)*M.World))
+            {ChangedCartComponents.AddUnique(P.ComponentIndex);++CartTransformSubmissions;}
             if(C.State!=MPRSorter::CartPhase::Receiving&&C.State!=MPRSorter::CartPhase::FullWaiting)MovingCart=I;
         }
         if(MovingCart==INDEX_NONE&&M.Simulation.IsExchangePermitted())for(int32 I=0;I<M.Carts.Num();++I)
@@ -652,7 +661,7 @@ void AMPRSorterSimulationActor::UpdateInstances()
         UpdateWorker(M.WorkerOffset,M,Push);
     }
     UpdateCentralDistribution();
-    for(auto& C:RuntimeCartComponents)C->MarkRenderStateDirty();
+    for(int32 Index:ChangedCartComponents){RuntimeCartComponents[Index]->MarkRenderStateDirty();++CartComponentDirtySubmissions;}
     if(BinsChanged)for(auto* C:{BinParcels.Get(),ActiveLights.Get(),FullLights.Get()})C->MarkRenderStateDirty();
 }
 
@@ -669,6 +678,7 @@ void AMPRSorterSimulationActor::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);if(!bReady)return;
     AttachPanel();UpdateFocus();
+    for(auto& Worker:RuntimeWorkers)if(Worker)Worker->UpdatePresentationLOD();
     if(bAutomaticAdvance&&IsSimulationPlaying())
     { AdvanceFleet(DeltaSeconds);UpdateInstances(); }
     // A stopped presentation still submits a stationary frame, clearing the
@@ -733,7 +743,11 @@ void AMPRSorterSimulationActor::ResetSimulation()
     FleetTimeRemainder=0;NextCentralParcelId=1;
     for(auto& B:DistributionBanks)B.Simulation.Reset();
     ExchangeOwner=INDEX_NONE;NextExchangeMachine=0;OwnerCompletedExchanges=0;
-    for(auto& M:Machines){M.Simulation.Reset();M.CachedBinState.Init(INDEX_NONE,M.Bins.Num());}
+    for(auto& M:Machines)
+    {
+        M.Simulation.Reset();M.CachedBinState.Init(INDEX_NONE,M.Bins.Num());
+        for(auto& Cart:M.Carts)Cart.PresentationCache.Reset();
+    }
     ScheduleCartExchange();if(bReady)UpdateInstances();
 }
 void AMPRSorterSimulationActor::SetSimulationRate(double Rate){for(auto& M:Machines)M.Simulation.SetRate(Rate);}
@@ -829,6 +843,9 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
     Root->SetNumberField(TEXT("parcel_instances"),Parcels->GetInstanceCount());Root->SetNumberField(TEXT("infeed_instances"),InfeedParcels->GetInstanceCount());
     Root->SetNumberField(TEXT("worker_slots"),RuntimeWorkers.Num());Root->SetNumberField(TEXT("bin_parcel_instances"),BinParcels->GetInstanceCount());
     Root->SetNumberField(TEXT("cad_worker_count"),CadWorkerIndices.Num());
+    Root->SetNumberField(TEXT("cad_source_worker_count"),UE_ARRAY_COUNT(MPRCadWorkers::Workers));
+    Root->SetNumberField(TEXT("omitted_cad_worker_count"),UE_ARRAY_COUNT(MPRCadWorkers::Workers)-CadWorkerIndices.Num());
+    Root->SetStringField(TEXT("worker_presentation_policy"),TEXT("sorter_workers_only"));
     Root->SetNumberField(TEXT("refitted_cad_worktables"),RefittedCadWorktables);
     Root->SetNumberField(TEXT("refitted_cad_operator_stations"),RefittedCadOperatorStations);
     Root->SetBoolField(TEXT("panel_attached"),Panel!=nullptr);
@@ -845,9 +862,11 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
         TArray<TSharedPtr<FJsonValue>> CadWorkers;
         for(int32 I=0;I<CadWorkerIndices.Num();++I)
         {
-            const auto& Source=MPRCadWorkers::Workers[I];auto Row=MakeShared<FJsonObject>();
+            const auto& Source=MPRCadWorkers::Workers[CadWorkerSourceIndices[I]];auto Row=MakeShared<FJsonObject>();
             Row->SetNumberField(TEXT("worker_index"),CadWorkerIndices[I]);
+            Row->SetNumberField(TEXT("source_index"),CadWorkerSourceIndices[I]);
             Row->SetStringField(TEXT("source_handle"),UTF8_TO_TCHAR(Source.SourceHandle));
+            Row->SetStringField(TEXT("role"),UTF8_TO_TCHAR(MPRWorkerPresentation::Find(Source.SourceHandle)->Role));
             Row->SetArrayField(TEXT("feet_cm"),XYZ(FVector(Source.Feet[0],Source.Feet[1],Source.Feet[2])));
             Row->SetNumberField(TEXT("yaw_deg"),Source.Yaw);Row->SetBoolField(TEXT("central_feed"),Source.CentralFeed);
             CadWorkers.Add(MakeShared<FJsonValueObject>(Row));
@@ -858,6 +877,17 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
         {
             const auto* C=RuntimeWorkers[I].Get();auto Row=MakeShared<FJsonObject>();
             Row->SetNumberField(TEXT("index"),I);Row->SetBoolField(TEXT("visible"),C->IsVisible());
+            const int32 CadIndex=CadWorkerIndices.Find(I);
+            FString WorkerRole=TEXT("cart_exchange"),SourceHandle,MachineId;
+            if(CadIndex!=INDEX_NONE)
+            {
+                const auto& Source=MPRCadWorkers::Workers[CadWorkerSourceIndices[CadIndex]];
+                WorkerRole=UTF8_TO_TCHAR(MPRWorkerPresentation::Find(Source.SourceHandle)->Role);
+                SourceHandle=UTF8_TO_TCHAR(Source.SourceHandle);
+            }
+            else for(const auto& Machine:Machines)if(Machine.WorkerOffset==I){MachineId=Machine.Id;break;}
+            Row->SetStringField(TEXT("role"),WorkerRole);Row->SetStringField(TEXT("source_handle"),SourceHandle);
+            Row->SetStringField(TEXT("machine_id"),MachineId);
             Row->SetBoolField(TEXT("ready"),C->IsWorkerPoseReady());Row->SetNumberField(TEXT("bone_count"),C->GetNumBones());
             Row->SetStringField(TEXT("mesh"),C->GetSkinnedAsset()->GetPathName());
             Row->SetObjectField(TEXT("transform"),Transform(C->GetComponentTransform()));
@@ -865,9 +895,15 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
             Row->SetArrayField(TEXT("left_sole"),XYZ(C->GetFootSoleWorld(true)));Row->SetArrayField(TEXT("right_sole"),XYZ(C->GetFootSoleWorld(false)));
             Row->SetNumberField(TEXT("left_error_cm"),C->GetPalmContactErrorCm(true));Row->SetNumberField(TEXT("right_error_cm"),C->GetPalmContactErrorCm(false));
             Row->SetNumberField(TEXT("limb_length_error_cm"),C->GetMaximumLimbLengthErrorCm());
+            Row->SetNumberField(TEXT("predicted_lod"),C->GetPredictedLODLevel());
+            Row->SetNumberField(TEXT("forced_lod"),C->GetForcedLOD());
+            Row->SetNumberField(TEXT("display_lod_changes"),C->GetDisplayLODChanges());
+            Row->SetNumberField(TEXT("pose_revision"),C->GetPoseRevision());
             Workers.Add(MakeShared<FJsonValueObject>(Row));
         }
         Root->SetArrayField(TEXT("skeletal_workers"),Workers);
+        Root->SetNumberField(TEXT("cart_transform_submissions"),double(CartTransformSubmissions));
+        Root->SetNumberField(TEXT("cart_component_dirty_submissions"),double(CartComponentDirtySubmissions));
         Root->SetNumberField(TEXT("legacy_worker_instances"),WorkerCloth->GetInstanceCount()+WorkerSkin->GetInstanceCount()+WorkerHelmet->GetInstanceCount()+WorkerBoots->GetInstanceCount());
     }
     TArray<TSharedPtr<FJsonValue>> Rows;uint64 Spawned=0,Completed=0,Collected=0,Exchanges=0;int32 Active=0,Occupancy=0,Queued=0,CartCount=0;

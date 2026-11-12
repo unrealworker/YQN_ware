@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "policy": "sorter_workers_only",
+  "source_cad_sha256": "c316aafe183162c5bef636885b59cc1000c3eecf50d8be645490b4716c6af863",
+  "source_worker_count": 256,
+  "source_record": "SourceAssets/MPR/sorter_simulation/cad_workers/cad_workers.json",
+  "scope": "只保留播种机旁的人员；完整 CAD 256 人来源清单不删改。换车人员继续由既有整车更换流程按需显示。",
+  "retained_workers": [
+    {"source_handle": "2CCF63", "role": "central_feed", "reason": "CAD 待播种位的六个中央投料工位之一"},
+    {"source_handle": "2CCF64", "role": "central_feed", "reason": "CAD 待播种位的六个中央投料工位之一"},
+    {"source_handle": "2CCF65", "role": "central_feed", "reason": "CAD 待播种位的六个中央投料工位之一"},
+    {"source_handle": "2CCF69", "role": "central_feed", "reason": "CAD 待播种位的六个中央投料工位之一"},
+    {"source_handle": "2CCF67", "role": "central_feed", "reason": "CAD 待播种位的六个中央投料工位之一"},
+    {"source_handle": "2CCF68", "role": "central_feed", "reason": "CAD 待播种位的六个中央投料工位之一"},
+    {"source_handle": "2CCF61", "role": "sorter_console", "reason": "原图 PW_TG_96C_IN / 2CCF60 侧操作台人员；已修复此端台穿模，距相邻 CAD120 播种机外缘约 202.8 cm"}
+  ],
+  "expected_counts": {
+    "retained_cad_workers": 7,
+    "omitted_cad_workers": 249,
+    "manual_feed_workers": 6,
+    "sorter_console_workers": 1,
+    "exchange_worker_slots": 22,
+    "runtime_worker_slots": 29,
+    "idle_visible_workers": 7,
+    "maximum_visible_workers": 8
+  }
+}

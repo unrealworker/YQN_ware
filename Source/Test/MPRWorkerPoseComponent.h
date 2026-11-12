@@ -36,6 +36,8 @@ public:
     UMPRWorkerPoseComponent();
     bool InitializeWorker(USkeletalMesh* Mesh, UAnimSequence* OptionalIdle = nullptr);
     void ApplyWorkerPose(const FMPRWorkerPoseInput& Input);
+    // Keep renderer-selected LOD current without ticking animation or solving IK.
+    bool UpdatePresentationLOD();
 
     UFUNCTION(BlueprintPure, Category="MPR Worker") bool IsWorkerPoseReady() const { return bPoseReady; }
     UFUNCTION(BlueprintPure, Category="MPR Worker") FVector GetPalmWorld(bool bLeft) const;
@@ -44,6 +46,7 @@ public:
     UFUNCTION(BlueprintPure, Category="MPR Worker") double GetMaximumLimbLengthErrorCm() const;
     UFUNCTION(BlueprintPure, Category="MPR Worker") double GetReferenceFacingYawDegrees() const { return ReferenceFacingYawDegrees; }
     UFUNCTION(BlueprintPure, Category="MPR Worker") int32 GetPoseRevision() const { return PoseRevision; }
+    UFUNCTION(BlueprintPure, Category="MPR Worker") int32 GetDisplayLODChanges() const { return DisplayLODChanges; }
 
     // Pure gait function also used by regression tests. X is along travel, Z is lift.
     static FVector FootCycleOffset(double DistanceCm, bool bLeft, bool bWalking, double StrideScale = 1.);
@@ -81,6 +84,7 @@ private:
     int32 Spine[3] = {INDEX_NONE, INDEX_NONE, INDEX_NONE};
     int32 Pelvis = INDEX_NONE;
     int32 PoseRevision = 0;
+    int32 DisplayLODChanges = 0;
     double ReferenceFacingYawDegrees = 0.;
     bool bPoseReady = false;
 };

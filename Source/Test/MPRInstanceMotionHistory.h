@@ -3,6 +3,34 @@
 #include "CoreMinimal.h"
 #include "Components/InstancedStaticMeshComponent.h"
 
+// Entire carts are usually docked. Keep their existing slots and update only
+// transforms that changed; callers group render-state notification per component.
+struct FMPRCartInstanceTransformCache
+{
+    void Reset()
+    {
+        LastComponent.Reset(); LastInstanceIndex = INDEX_NONE;
+    }
+
+    bool Submit(UInstancedStaticMeshComponent* Component, int32 InstanceIndex, const FTransform& World)
+    {
+        if (!Component || InstanceIndex < 0 || InstanceIndex >= Component->GetInstanceCount()) return false;
+        if (LastComponent.Get() == Component && LastInstanceIndex == InstanceIndex && LastWorld.Equals(World, 1.e-9)
+            && LastComponentWorld.Equals(Component->GetComponentTransform(), 1.e-9))
+            return false;
+        if (!Component->UpdateInstanceTransform(InstanceIndex, World, true, false, true)) return false;
+        LastWorld = World; LastComponentWorld = Component->GetComponentTransform();
+        LastComponent = Component; LastInstanceIndex = InstanceIndex;
+        return true;
+    }
+
+private:
+    FTransform LastWorld = FTransform::Identity;
+    FTransform LastComponentWorld = FTransform::Identity;
+    TWeakObjectPtr<UInstancedStaticMeshComponent> LastComponent;
+    int32 LastInstanceIndex = INDEX_NONE;
+};
+
 // ISM components stay fixed while their instances move. GPU Scene needs the
 // previous instance pose, not just the (stationary) component's previous pose.
 struct FMPRInstanceMotionHistory

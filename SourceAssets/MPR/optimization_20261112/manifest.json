@@ -1,0 +1,1073 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "input_reports": {
+    "before": "Saved/MPR/optimization_20261112/runtime/before/20261112T111433Z/report.json",
+    "after": "Saved/MPR/optimization_20261112/runtime/after/20261112T121131Z/report.json",
+    "lod": "Saved/MPR/optimization_20261112/runtime/after/20261112T122126Z/report.json",
+    "automation": "Saved/MPR/optimization_20261112/automation_verified/index.json",
+    "rack_apply": "Saved/MPR/optimization_20261112/rack_clearance/validation.json",
+    "rack_reload": "Saved/MPR/optimization_20261112/rack_clearance/reload_validation.json",
+    "sorter": "Saved/MPR/optimization_20261112/optimized_sorter_runtime/report.json",
+    "cart_cache": "Saved/MPR/optimization_20261112/cart_cache_runtime/report.json",
+    "worker_policy": "SourceAssets/MPR/sorter_simulation/worker_presentation_policy.json"
+  },
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "map_sha256_before": "1af91bb69aeb9643a14b33dad7239f8d300c8e29318a85b48e84737d0c5ecf23",
+  "map_sha256_after": "67cec0faee74dd8f38e7c74c4b305aa9bd2dc0c7558efc1ed131bc4ad034a659",
+  "formal_timing_samples_valid": true,
+  "after_report_success_preserved": false,
+  "historical_failure": "121131Z: outdated feed pose revision assertion failed after all three timing samples completed",
+  "independent_lod_validation_passed": true,
+  "automation_passed": 33,
+  "worker_policy": {
+    "schema_version": 1,
+    "policy": "sorter_workers_only",
+    "source_cad_sha256": "c316aafe183162c5bef636885b59cc1000c3eecf50d8be645490b4716c6af863",
+    "source_worker_count": 256,
+    "source_record": "SourceAssets/MPR/sorter_simulation/cad_workers/cad_workers.json",
+    "scope": "只保留播种机旁的人员；完整 CAD 256 人来源清单不删改。换车人员继续由既有整车更换流程按需显示。",
+    "retained_workers": [
+      {
+        "source_handle": "2CCF63",
+        "role": "central_feed",
+        "reason": "CAD 待播种位的六个中央投料工位之一"
+      },
+      {
+        "source_handle": "2CCF64",
+        "role": "central_feed",
+        "reason": "CAD 待播种位的六个中央投料工位之一"
+      },
+      {
+        "source_handle": "2CCF65",
+        "role": "central_feed",
+        "reason": "CAD 待播种位的六个中央投料工位之一"
+      },
+      {
+        "source_handle": "2CCF69",
+        "role": "central_feed",
+        "reason": "CAD 待播种位的六个中央投料工位之一"
+      },
+      {
+        "source_handle": "2CCF67",
+        "role": "central_feed",
+        "reason": "CAD 待播种位的六个中央投料工位之一"
+      },
+      {
+        "source_handle": "2CCF68",
+        "role": "central_feed",
+        "reason": "CAD 待播种位的六个中央投料工位之一"
+      },
+      {
+        "source_handle": "2CCF61",
+        "role": "sorter_console",
+        "reason": "原图 PW_TG_96C_IN / 2CCF60 侧操作台人员；已修复此端台穿模，距相邻 CAD120 播种机外缘约 202.8 cm"
+      }
+    ],
+    "expected_counts": {
+      "retained_cad_workers": 7,
+      "omitted_cad_workers": 249,
+      "manual_feed_workers": 6,
+      "sorter_console_workers": 1,
+      "exchange_worker_slots": 22,
+      "runtime_worker_slots": 29,
+      "idle_visible_workers": 7,
+      "maximum_visible_workers": 8
+    }
+  },
+  "sorter_workflow_complete": true,
+  "sorter_stage": "complete",
+  "cart_cache_complete": true,
+  "cart_cache_stage": "complete",
+  "comparisons": [
+    {
+      "view": "overview",
+      "camera": [
+        -9.094947017729282e-13,
+        22065.163450936874,
+        41948.53686436956,
+        -62.000000000000064,
+        -90.0,
+        -0.0
+      ],
+      "before": {
+        "fps": 47.228512011239786,
+        "metrics": {
+          "FrameTime": {
+            "count": 709,
+            "mean_ms": 21.173650352609307,
+            "median_ms": 21.0591,
+            "p95_ms": 23.1547,
+            "p99_ms": 24.0049,
+            "max_ms": 28.6832,
+            "over_16_67ms_count": 708,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "GameThreadTime": {
+            "count": 709,
+            "mean_ms": 3.302314527503526,
+            "median_ms": 3.254,
+            "p95_ms": 3.9442,
+            "p99_ms": 4.4351,
+            "max_ms": 18.0002,
+            "over_16_67ms_count": 1,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "RenderThreadTime": {
+            "count": 709,
+            "mean_ms": 21.175314527503527,
+            "median_ms": 21.0911,
+            "p95_ms": 23.0872,
+            "p99_ms": 24.0198,
+            "max_ms": 26.0403,
+            "over_16_67ms_count": 709,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "GPUTime": {
+            "count": 709,
+            "mean_ms": 20.335141043723553,
+            "median_ms": 20.2612,
+            "p95_ms": 21.7239,
+            "p99_ms": 22.3627,
+            "max_ms": 25.6912,
+            "over_16_67ms_count": 709,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          }
+        },
+        "frame_count": 709
+      },
+      "after": {
+        "fps": 83.97418229439643,
+        "metrics": {
+          "FrameTime": {
+            "count": 1259,
+            "mean_ms": 11.908422001588562,
+            "median_ms": 11.8973,
+            "p95_ms": 13.0381,
+            "p99_ms": 13.475,
+            "max_ms": 18.6682,
+            "over_16_67ms_count": 1,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "GameThreadTime": {
+            "count": 1259,
+            "mean_ms": 2.5775382049245437,
+            "median_ms": 2.5627,
+            "p95_ms": 2.9985,
+            "p99_ms": 3.3129,
+            "max_ms": 8.0053,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "RenderThreadTime": {
+            "count": 1259,
+            "mean_ms": 11.905645035742653,
+            "median_ms": 11.8637,
+            "p95_ms": 12.9522,
+            "p99_ms": 13.4053,
+            "max_ms": 13.8776,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "GPUTime": {
+            "count": 1259,
+            "mean_ms": 11.1101357426529,
+            "median_ms": 10.9232,
+            "p95_ms": 11.7924,
+            "p99_ms": 11.951,
+            "max_ms": 12.3833,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          }
+        },
+        "frame_count": 1259
+      },
+      "fps_change_percent": 77.80399745478248
+    },
+    {
+      "view": "rack-close",
+      "camera": [
+        -6389.143070290358,
+        -620.3181864639009,
+        2729.4344764321795,
+        -47.99999999999999,
+        17.999999999999993,
+        -0.0
+      ],
+      "before": {
+        "fps": 88.05995062776546,
+        "metrics": {
+          "FrameTime": {
+            "count": 1321,
+            "mean_ms": 11.355900075700227,
+            "median_ms": 11.3027,
+            "p95_ms": 12.568,
+            "p99_ms": 13.3613,
+            "max_ms": 16.6392,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "GameThreadTime": {
+            "count": 1321,
+            "mean_ms": 3.166289099167298,
+            "median_ms": 3.1451,
+            "p95_ms": 3.7088,
+            "p99_ms": 4.2504,
+            "max_ms": 13.3325,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "RenderThreadTime": {
+            "count": 1321,
+            "mean_ms": 11.353870931112793,
+            "median_ms": 11.2787,
+            "p95_ms": 12.5702,
+            "p99_ms": 13.3206,
+            "max_ms": 16.1763,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "GPUTime": {
+            "count": 1321,
+            "mean_ms": 10.611482134746405,
+            "median_ms": 10.5365,
+            "p95_ms": 11.5144,
+            "p99_ms": 12.0718,
+            "max_ms": 16.0,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          }
+        },
+        "frame_count": 1321
+      },
+      "after": {
+        "fps": 92.220102137864,
+        "metrics": {
+          "FrameTime": {
+            "count": 1383,
+            "mean_ms": 10.843622776572667,
+            "median_ms": 10.8125,
+            "p95_ms": 11.8122,
+            "p99_ms": 12.4356,
+            "max_ms": 15.3262,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "GameThreadTime": {
+            "count": 1383,
+            "mean_ms": 2.674509182935647,
+            "median_ms": 2.6621,
+            "p95_ms": 3.0833,
+            "p99_ms": 3.5053,
+            "max_ms": 8.3475,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "RenderThreadTime": {
+            "count": 1383,
+            "mean_ms": 10.84129197396963,
+            "median_ms": 10.7871,
+            "p95_ms": 11.7871,
+            "p99_ms": 12.2876,
+            "max_ms": 13.4572,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "GPUTime": {
+            "count": 1383,
+            "mean_ms": 10.145752060737527,
+            "median_ms": 9.9743,
+            "p95_ms": 10.8208,
+            "p99_ms": 11.0241,
+            "max_ms": 11.3946,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          }
+        },
+        "frame_count": 1383
+      },
+      "fps_change_percent": 4.724226484845251
+    },
+    {
+      "view": "sorter",
+      "camera": [
+        -13311.26160734309,
+        1300.0,
+        3325.522749552795,
+        -47.99999999999999,
+        0.0,
+        -0.0
+      ],
+      "before": {
+        "fps": 70.31999132027559,
+        "metrics": {
+          "FrameTime": {
+            "count": 1056,
+            "mean_ms": 14.220707102272726,
+            "median_ms": 14.1323,
+            "p95_ms": 15.5885,
+            "p99_ms": 17.1643,
+            "max_ms": 20.277,
+            "over_16_67ms_count": 16,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "GameThreadTime": {
+            "count": 1056,
+            "mean_ms": 3.1523274621212125,
+            "median_ms": 3.1487,
+            "p95_ms": 3.7147,
+            "p99_ms": 4.2483,
+            "max_ms": 14.2731,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "RenderThreadTime": {
+            "count": 1056,
+            "mean_ms": 14.218467518939393,
+            "median_ms": 14.123750000000001,
+            "p95_ms": 15.5967,
+            "p99_ms": 16.8075,
+            "max_ms": 20.1305,
+            "over_16_67ms_count": 14,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "GPUTime": {
+            "count": 1056,
+            "mean_ms": 13.393938541666667,
+            "median_ms": 13.269449999999999,
+            "p95_ms": 14.4598,
+            "p99_ms": 15.5214,
+            "max_ms": 18.1284,
+            "over_16_67ms_count": 5,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          }
+        },
+        "frame_count": 1056
+      },
+      "after": {
+        "fps": 87.29248603818704,
+        "metrics": {
+          "FrameTime": {
+            "count": 1309,
+            "mean_ms": 11.455739724980901,
+            "median_ms": 11.4208,
+            "p95_ms": 12.5786,
+            "p99_ms": 13.0501,
+            "max_ms": 16.1169,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "GameThreadTime": {
+            "count": 1309,
+            "mean_ms": 2.6457834988540867,
+            "median_ms": 2.6284,
+            "p95_ms": 2.9976,
+            "p99_ms": 3.4913,
+            "max_ms": 8.25,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "RenderThreadTime": {
+            "count": 1309,
+            "mean_ms": 11.453539419404125,
+            "median_ms": 11.4015,
+            "p95_ms": 12.482,
+            "p99_ms": 13.0267,
+            "max_ms": 14.7387,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          },
+          "GPUTime": {
+            "count": 1309,
+            "mean_ms": 10.718531627196333,
+            "median_ms": 10.5721,
+            "p95_ms": 11.5531,
+            "p99_ms": 11.8251,
+            "max_ms": 12.4613,
+            "over_16_67ms_count": 0,
+            "over_33_33ms_count": 0,
+            "over_50ms_count": 0
+          }
+        },
+        "frame_count": 1309
+      },
+      "fps_change_percent": 24.13608761782897
+    }
+  ],
+  "native_csv": [
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_before_20261112T111433Z_overview.csv",
+      "phase": "before",
+      "view": "overview",
+      "diagnostic_only": false,
+      "frame_count": 709,
+      "native_frame_time_seconds": 15.0121181,
+      "fps": 47.22851201123977,
+      "metrics": {
+        "FrameTime": {
+          "count": 709,
+          "mean_ms": 21.173650352609307,
+          "median_ms": 21.0591,
+          "p95_ms": 23.1547,
+          "p99_ms": 24.0049,
+          "max_ms": 28.6832,
+          "over_16_67ms_count": 708,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GameThreadTime": {
+          "count": 709,
+          "mean_ms": 3.302314527503526,
+          "median_ms": 3.254,
+          "p95_ms": 3.9442,
+          "p99_ms": 4.4351,
+          "max_ms": 18.0002,
+          "over_16_67ms_count": 1,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "RenderThreadTime": {
+          "count": 709,
+          "mean_ms": 21.175314527503527,
+          "median_ms": 21.0911,
+          "p95_ms": 23.0872,
+          "p99_ms": 24.0198,
+          "max_ms": 26.0403,
+          "over_16_67ms_count": 709,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GPUTime": {
+          "count": 709,
+          "mean_ms": 20.335141043723553,
+          "median_ms": 20.2612,
+          "p95_ms": 21.7239,
+          "p99_ms": 22.3627,
+          "max_ms": 25.6912,
+          "over_16_67ms_count": 709,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        }
+      }
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_before_20261112T111433Z_rack-close.csv",
+      "phase": "before",
+      "view": "rack-close",
+      "diagnostic_only": false,
+      "frame_count": 1321,
+      "native_frame_time_seconds": 15.001144,
+      "fps": 88.05995062776546,
+      "metrics": {
+        "FrameTime": {
+          "count": 1321,
+          "mean_ms": 11.355900075700227,
+          "median_ms": 11.3027,
+          "p95_ms": 12.568,
+          "p99_ms": 13.3613,
+          "max_ms": 16.6392,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GameThreadTime": {
+          "count": 1321,
+          "mean_ms": 3.166289099167298,
+          "median_ms": 3.1451,
+          "p95_ms": 3.7088,
+          "p99_ms": 4.2504,
+          "max_ms": 13.3325,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "RenderThreadTime": {
+          "count": 1321,
+          "mean_ms": 11.353870931112793,
+          "median_ms": 11.2787,
+          "p95_ms": 12.5702,
+          "p99_ms": 13.3206,
+          "max_ms": 16.1763,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GPUTime": {
+          "count": 1321,
+          "mean_ms": 10.611482134746405,
+          "median_ms": 10.5365,
+          "p95_ms": 11.5144,
+          "p99_ms": 12.0718,
+          "max_ms": 16.0,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        }
+      }
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_before_20261112T111433Z_sorter.csv",
+      "phase": "before",
+      "view": "sorter",
+      "diagnostic_only": false,
+      "frame_count": 1056,
+      "native_frame_time_seconds": 15.017066699999999,
+      "fps": 70.31999132027562,
+      "metrics": {
+        "FrameTime": {
+          "count": 1056,
+          "mean_ms": 14.220707102272726,
+          "median_ms": 14.1323,
+          "p95_ms": 15.5885,
+          "p99_ms": 17.1643,
+          "max_ms": 20.277,
+          "over_16_67ms_count": 16,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GameThreadTime": {
+          "count": 1056,
+          "mean_ms": 3.1523274621212125,
+          "median_ms": 3.1487,
+          "p95_ms": 3.7147,
+          "p99_ms": 4.2483,
+          "max_ms": 14.2731,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "RenderThreadTime": {
+          "count": 1056,
+          "mean_ms": 14.218467518939393,
+          "median_ms": 14.123750000000001,
+          "p95_ms": 15.5967,
+          "p99_ms": 16.8075,
+          "max_ms": 20.1305,
+          "over_16_67ms_count": 14,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GPUTime": {
+          "count": 1056,
+          "mean_ms": 13.393938541666667,
+          "median_ms": 13.269449999999999,
+          "p95_ms": 14.4598,
+          "p99_ms": 15.5214,
+          "max_ms": 18.1284,
+          "over_16_67ms_count": 5,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        }
+      }
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_before_20261112T111433Z_overview-workers-hidden-diagnostic.csv",
+      "phase": "before",
+      "view": "overview-workers-hidden-diagnostic",
+      "diagnostic_only": true,
+      "frame_count": 1185,
+      "native_frame_time_seconds": 14.997046200000002,
+      "fps": 79.01555974402478,
+      "metrics": {
+        "FrameTime": {
+          "count": 1185,
+          "mean_ms": 12.655735189873418,
+          "median_ms": 12.6001,
+          "p95_ms": 14.1089,
+          "p99_ms": 15.3848,
+          "max_ms": 19.9323,
+          "over_16_67ms_count": 1,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GameThreadTime": {
+          "count": 1185,
+          "mean_ms": 3.218778565400844,
+          "median_ms": 3.197,
+          "p95_ms": 3.7402,
+          "p99_ms": 4.2363,
+          "max_ms": 14.5614,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "RenderThreadTime": {
+          "count": 1185,
+          "mean_ms": 12.652528860759494,
+          "median_ms": 12.5839,
+          "p95_ms": 14.0062,
+          "p99_ms": 15.2812,
+          "max_ms": 16.5166,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GPUTime": {
+          "count": 1185,
+          "mean_ms": 11.83184270042194,
+          "median_ms": 11.7383,
+          "p95_ms": 12.9749,
+          "p99_ms": 14.2252,
+          "max_ms": 16.6407,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        }
+      }
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_after_20261112T121131Z_overview.csv",
+      "phase": "after",
+      "view": "overview",
+      "diagnostic_only": false,
+      "frame_count": 1259,
+      "native_frame_time_seconds": 14.992703299999999,
+      "fps": 83.97418229439651,
+      "metrics": {
+        "FrameTime": {
+          "count": 1259,
+          "mean_ms": 11.908422001588562,
+          "median_ms": 11.8973,
+          "p95_ms": 13.0381,
+          "p99_ms": 13.475,
+          "max_ms": 18.6682,
+          "over_16_67ms_count": 1,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GameThreadTime": {
+          "count": 1259,
+          "mean_ms": 2.5775382049245437,
+          "median_ms": 2.5627,
+          "p95_ms": 2.9985,
+          "p99_ms": 3.3129,
+          "max_ms": 8.0053,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "RenderThreadTime": {
+          "count": 1259,
+          "mean_ms": 11.905645035742653,
+          "median_ms": 11.8637,
+          "p95_ms": 12.9522,
+          "p99_ms": 13.4053,
+          "max_ms": 13.8776,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GPUTime": {
+          "count": 1259,
+          "mean_ms": 11.1101357426529,
+          "median_ms": 10.9232,
+          "p95_ms": 11.7924,
+          "p99_ms": 11.951,
+          "max_ms": 12.3833,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        }
+      }
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_after_20261112T121131Z_rack-close.csv",
+      "phase": "after",
+      "view": "rack-close",
+      "diagnostic_only": false,
+      "frame_count": 1383,
+      "native_frame_time_seconds": 14.9967303,
+      "fps": 92.22010213786402,
+      "metrics": {
+        "FrameTime": {
+          "count": 1383,
+          "mean_ms": 10.843622776572667,
+          "median_ms": 10.8125,
+          "p95_ms": 11.8122,
+          "p99_ms": 12.4356,
+          "max_ms": 15.3262,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GameThreadTime": {
+          "count": 1383,
+          "mean_ms": 2.674509182935647,
+          "median_ms": 2.6621,
+          "p95_ms": 3.0833,
+          "p99_ms": 3.5053,
+          "max_ms": 8.3475,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "RenderThreadTime": {
+          "count": 1383,
+          "mean_ms": 10.84129197396963,
+          "median_ms": 10.7871,
+          "p95_ms": 11.7871,
+          "p99_ms": 12.2876,
+          "max_ms": 13.4572,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GPUTime": {
+          "count": 1383,
+          "mean_ms": 10.145752060737527,
+          "median_ms": 9.9743,
+          "p95_ms": 10.8208,
+          "p99_ms": 11.0241,
+          "max_ms": 11.3946,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        }
+      }
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_after_20261112T121131Z_sorter.csv",
+      "phase": "after",
+      "view": "sorter",
+      "diagnostic_only": false,
+      "frame_count": 1309,
+      "native_frame_time_seconds": 14.9955633,
+      "fps": 87.29248603818704,
+      "metrics": {
+        "FrameTime": {
+          "count": 1309,
+          "mean_ms": 11.455739724980901,
+          "median_ms": 11.4208,
+          "p95_ms": 12.5786,
+          "p99_ms": 13.0501,
+          "max_ms": 16.1169,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GameThreadTime": {
+          "count": 1309,
+          "mean_ms": 2.6457834988540867,
+          "median_ms": 2.6284,
+          "p95_ms": 2.9976,
+          "p99_ms": 3.4913,
+          "max_ms": 8.25,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "RenderThreadTime": {
+          "count": 1309,
+          "mean_ms": 11.453539419404125,
+          "median_ms": 11.4015,
+          "p95_ms": 12.482,
+          "p99_ms": 13.0267,
+          "max_ms": 14.7387,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GPUTime": {
+          "count": 1309,
+          "mean_ms": 10.718531627196333,
+          "median_ms": 10.5721,
+          "p95_ms": 11.5531,
+          "p99_ms": 11.8251,
+          "max_ms": 12.4613,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        }
+      }
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_CONTINUOUS_20261112T134659743520Z.csv",
+      "phase": "workflow",
+      "view": "workflow_camera_not_comparable_to_three_views",
+      "diagnostic_only": false,
+      "frame_count": 1795,
+      "native_frame_time_seconds": 15.002476,
+      "fps": 119.64691694890897,
+      "metrics": {
+        "FrameTime": {
+          "count": 1795,
+          "mean_ms": 8.357925348189415,
+          "median_ms": 8.3119,
+          "p95_ms": 9.3735,
+          "p99_ms": 9.7675,
+          "max_ms": 17.2651,
+          "over_16_67ms_count": 1,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GameThreadTime": {
+          "count": 1795,
+          "mean_ms": 2.288794094707521,
+          "median_ms": 2.2389,
+          "p95_ms": 2.7162,
+          "p99_ms": 2.9828,
+          "max_ms": 15.6425,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "RenderThreadTime": {
+          "count": 1795,
+          "mean_ms": 8.356459331476323,
+          "median_ms": 8.3091,
+          "p95_ms": 9.3457,
+          "p99_ms": 9.7562,
+          "max_ms": 13.805,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        },
+        "GPUTime": {
+          "count": 1795,
+          "mean_ms": 7.70738061281337,
+          "median_ms": 7.6564,
+          "p95_ms": 8.347,
+          "p99_ms": 8.6974,
+          "max_ms": 9.2988,
+          "over_16_67ms_count": 0,
+          "over_33_33ms_count": 0,
+          "over_50ms_count": 0
+        }
+      }
+    }
+  ],
+  "attribution": "Combined change: 249 CAD staff omitted, normal display LOD, changed-cart-only submissions, and audited rack relocation. No isolated per-change gain is claimed.",
+  "limitations": [
+    "One local native UE game run per view; no repetitions or statistical confidence interval.",
+    "No Pixel Streaming, network, multi-user, GPU-triangle or manufacturer-throughput claim.",
+    "Before and after map hashes differ because 91 rack rows / 2392 instances moved; same camera and resolution do not isolate code changes.",
+    "Historical diagnostic-only hidden-skeleton sample is archived but excluded from formal comparisons."
+  ],
+  "evidence": [
+    {
+      "source_path": "Saved/MPR/optimization_20261112/runtime/before/20261112T111433Z/report.json",
+      "archive_path": "evidence/Saved__MPR__optimization_20261112__runtime__before__20261112T111433Z__report.json.gz",
+      "encoding": "gzip",
+      "raw_sha256": "91d8255bb783a905995c67a13b14843d2a810656cdcd3720e771dabd42e04865",
+      "raw_bytes": 48539,
+      "archive_sha256": "cfc4bc85191d88e25e1a47905b609e0a46a137a80d05427c5d2e99573d308f7b",
+      "archive_bytes": 3127
+    },
+    {
+      "source_path": "Saved/MPR/optimization_20261112/runtime/after/20261112T121131Z/report.json",
+      "archive_path": "evidence/Saved__MPR__optimization_20261112__runtime__after__20261112T121131Z__report.json.gz",
+      "encoding": "gzip",
+      "raw_sha256": "eb5ad6732cb8d52a05df4743bab3a547619098caa919a7a41c048f98dcd2cab7",
+      "raw_bytes": 17081,
+      "archive_sha256": "3b070f45ee0860e1cf48725b736c5f949a939fbbae785fe2eafe186a60b0decd",
+      "archive_bytes": 2911
+    },
+    {
+      "source_path": "Saved/MPR/optimization_20261112/runtime/after/20261112T122126Z/report.json",
+      "archive_path": "evidence/Saved__MPR__optimization_20261112__runtime__after__20261112T122126Z__report.json.gz",
+      "encoding": "gzip",
+      "raw_sha256": "673075db9b540cdf2234b472cc8e5812d27b95268d1e41e3810b192367a0df34",
+      "raw_bytes": 14579,
+      "archive_sha256": "c76a6f9ad94206192c9c3333bb3fdd0e4b21c381856c61465b98486e60314b89",
+      "archive_bytes": 1508
+    },
+    {
+      "source_path": "Saved/MPR/optimization_20261112/automation_verified/index.json",
+      "archive_path": "evidence/Saved__MPR__optimization_20261112__automation_verified__index.json.gz",
+      "encoding": "gzip",
+      "raw_sha256": "4ee3a1a7b714fad8425c07bdba76854c17c3cfc8089a711edb7ac42e8b12c03c",
+      "raw_bytes": 14369,
+      "archive_sha256": "e5b02262e94967b3410d72e40777a28f024ad1551e4e78d5b18f0130f5df7424",
+      "archive_bytes": 1982
+    },
+    {
+      "source_path": "Saved/MPR/optimization_20261112/rack_clearance/validation.json",
+      "archive_path": "evidence/Saved__MPR__optimization_20261112__rack_clearance__validation.json.gz",
+      "encoding": "gzip",
+      "raw_sha256": "a2bdd6adca2ca2568214313a4e9dcd0e77dd61947b04695327e239fc47807e70",
+      "raw_bytes": 1661,
+      "archive_sha256": "ab6e6d8c11bc2edac86402542cb6127d2b5117237e2de61bb9bba3e36be31bbd",
+      "archive_bytes": 633
+    },
+    {
+      "source_path": "Saved/MPR/optimization_20261112/rack_clearance/reload_validation.json",
+      "archive_path": "evidence/Saved__MPR__optimization_20261112__rack_clearance__reload_validation.json.gz",
+      "encoding": "gzip",
+      "raw_sha256": "c8652d4f4df9b9765407e1acbb9f11c2f906ebbd2a214ea5f5ba6156b66d44e2",
+      "raw_bytes": 521,
+      "archive_sha256": "9e64a8b46356545bc772ae8953ba645291c26841e45b09846b9e7df44ef54de1",
+      "archive_bytes": 319
+    },
+    {
+      "source_path": "Saved/MPR/optimization_20261112/optimized_sorter_runtime/report.json",
+      "archive_path": "evidence/Saved__MPR__optimization_20261112__optimized_sorter_runtime__report.json.gz",
+      "encoding": "gzip",
+      "raw_sha256": "94f7f73cd8e8716bfd5fefe94dd0b7743f186b383739d346c4c53af54672b8ee",
+      "raw_bytes": 44134,
+      "archive_sha256": "933a2dc5e85db8e37bd9ad7e8a8ae6983b854f8d5c2831e2973855ef4675e446",
+      "archive_bytes": 11095
+    },
+    {
+      "source_path": "Saved/MPR/optimization_20261112/cart_cache_runtime/report.json",
+      "archive_path": "evidence/Saved__MPR__optimization_20261112__cart_cache_runtime__report.json.gz",
+      "encoding": "gzip",
+      "raw_sha256": "cfca474584dd439ac7f35a2894956f4d0ca33f6c3deb7822c49417c0938295d6",
+      "raw_bytes": 21993,
+      "archive_sha256": "4595077b3c8cb6162b8b7fe1b61bbf0b9918ecb5232b1b02041d17dd5a3624da",
+      "archive_bytes": 4324
+    },
+    {
+      "source_path": "SourceAssets/MPR/sorter_simulation/worker_presentation_policy.json",
+      "archive_path": "evidence/SourceAssets__MPR__sorter_simulation__worker_presentation_policy.json.gz",
+      "encoding": "gzip",
+      "raw_sha256": "10c2e1bfd357784786457d2dbd5e09203ab7f6efd2fd5ff6a4bcd4d13a195021",
+      "raw_bytes": 1643,
+      "archive_sha256": "9f10583fb5e64cf0cf5f1a5a181247f4e7d8dae9584ca40922cbd31ef1e8a565",
+      "archive_bytes": 688
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_before_20261112T111433Z_overview.csv",
+      "archive_path": "evidence/Saved__Profiling__CSV__MPR_OPT_before_20261112T111433Z_overview.csv.gz",
+      "encoding": "gzip",
+      "raw_sha256": "3f0c4781e5119fee2a1575bac4dd874f5eddc80179b1e87fa013db69688db34e",
+      "raw_bytes": 1438316,
+      "archive_sha256": "3f75096e873a0a1d0b4b79d251dda6db38b65d301fbf180897b8434afe0c4113",
+      "archive_bytes": 306818
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_before_20261112T111433Z_rack-close.csv",
+      "archive_path": "evidence/Saved__Profiling__CSV__MPR_OPT_before_20261112T111433Z_rack-close.csv.gz",
+      "encoding": "gzip",
+      "raw_sha256": "07617cf543db5641c61d967d570b320cab54357c76bc2a5817cb204d61744c5e",
+      "raw_bytes": 2624580,
+      "archive_sha256": "780ae4473618551570663ec06e1303eb69b8ca4dc368f392420fc97f864a4b0f",
+      "archive_bytes": 537908
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_before_20261112T111433Z_sorter.csv",
+      "archive_path": "evidence/Saved__Profiling__CSV__MPR_OPT_before_20261112T111433Z_sorter.csv.gz",
+      "encoding": "gzip",
+      "raw_sha256": "c171decdbd69821d289cbdd30f8d3c29bbeadcced00d5ee2f56d52ee396bfff1",
+      "raw_bytes": 2089499,
+      "archive_sha256": "f4fe27b3131ed51292452c73909c78cd8a54717304f2b7c63062c2c9fd1857c2",
+      "archive_bytes": 440424
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_before_20261112T111433Z_overview-workers-hidden-diagnostic.csv",
+      "archive_path": "evidence/Saved__Profiling__CSV__MPR_OPT_before_20261112T111433Z_overview-workers-hidden-diagnostic.csv.gz",
+      "encoding": "gzip",
+      "raw_sha256": "287ce702a7b0deaf500eb4a7ae990c9eb3226c02d39324677e04740daf4ff60b",
+      "raw_bytes": 2377650,
+      "archive_sha256": "37839097f5cb9c6e4f31ba208dffa9f478675246ee0ec54b58ae88216b9de4ed",
+      "archive_bytes": 499731
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_after_20261112T121131Z_overview.csv",
+      "archive_path": "evidence/Saved__Profiling__CSV__MPR_OPT_after_20261112T121131Z_overview.csv.gz",
+      "encoding": "gzip",
+      "raw_sha256": "27c9a5b663474da23cbe4885632ecd025495688f20e684ca148b1d6e1e86559c",
+      "raw_bytes": 2519318,
+      "archive_sha256": "f346688b5b8218a9cb78352522fd3e6f5be578ddaa2bcbea6629050c6c95bae4",
+      "archive_bytes": 508664
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_after_20261112T121131Z_rack-close.csv",
+      "archive_path": "evidence/Saved__Profiling__CSV__MPR_OPT_after_20261112T121131Z_rack-close.csv.gz",
+      "encoding": "gzip",
+      "raw_sha256": "0b7068d470c660d7949cad76b505a3ab43a3a0e9351627a8cf24c4679fd282a6",
+      "raw_bytes": 2737180,
+      "archive_sha256": "b2c35ebe2c2dc3956cff446ebf6372b58f88c8cea13db9937d2fa2938429ec7d",
+      "archive_bytes": 547326
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_OPT_after_20261112T121131Z_sorter.csv",
+      "archive_path": "evidence/Saved__Profiling__CSV__MPR_OPT_after_20261112T121131Z_sorter.csv.gz",
+      "encoding": "gzip",
+      "raw_sha256": "474aedd11cd82baa2693faf0bea058b362c9ef6a5d178181687148c3ad8076d4",
+      "raw_bytes": 2580478,
+      "archive_sha256": "d5a9506eefadbbf49ce31eda9e5c89a26d2f577e66fab7002c816b84911d98a0",
+      "archive_bytes": 522791
+    },
+    {
+      "source_path": "Saved/Profiling/CSV/MPR_CONTINUOUS_20261112T134659743520Z.csv",
+      "archive_path": "evidence/Saved__Profiling__CSV__MPR_CONTINUOUS_20261112T134659743520Z.csv.gz",
+      "encoding": "gzip",
+      "raw_sha256": "c3dffb5e3c5f33eced10109cc7e25e5993789842413a230f2ceed2b10da00223",
+      "raw_bytes": 3550460,
+      "archive_sha256": "78c8b5ca059a2b0b782e5b2ff212ce49d23e67dc0021e336216f74836a8dcbc8",
+      "archive_bytes": 686030
+    },
+    {
+      "source_path": "Saved/MPR/optimization_20261112/automation_final/index.json",
+      "archive_path": "evidence/Saved__MPR__optimization_20261112__automation_final__index.json.gz",
+      "encoding": "gzip",
+      "raw_sha256": "664f474c8220c3167dd9dc1108c0792b9db48c266294ab3cde6b6cc7f450b1f0",
+      "raw_bytes": 25617,
+      "archive_sha256": "07f66b223ecbcc579591adbe9cf4902e96f542885c98fd9b0d7f7dd7c70009d0",
+      "archive_bytes": 2177
+    },
+    {
+      "source_path": "Saved/MPR/optimization_20261112/runtime/before/20261112T111433Z/sorter.png",
+      "archive_path": "previews/sorter-before.png",
+      "encoding": "original",
+      "raw_sha256": "1abd79cdaaedef919a5852b8049e26a0e251d6125ea236a9d92211556e86ba20",
+      "raw_bytes": 3300856,
+      "archive_sha256": "1abd79cdaaedef919a5852b8049e26a0e251d6125ea236a9d92211556e86ba20",
+      "archive_bytes": 3300856
+    },
+    {
+      "source_path": "Saved/MPR/optimization_20261112/runtime/after/20261112T121131Z/sorter.png",
+      "archive_path": "previews/sorter-after.png",
+      "encoding": "original",
+      "raw_sha256": "2a422feeffcf5886e4ec954cae83b363b74de541575d601681acd3687db423f8",
+      "raw_bytes": 3301764,
+      "archive_sha256": "2a422feeffcf5886e4ec954cae83b363b74de541575d601681acd3687db423f8",
+      "archive_bytes": 3301764
+    },
+    {
+      "source_path": "Saved/MPR/optimization_20261112/runtime/after/20261112T121131Z/rack-close.png",
+      "archive_path": "previews/rack-close-after.png",
+      "encoding": "original",
+      "raw_sha256": "f536daa359683f5e41b2611601a8070f6bc9a4484cae45ae27393928b4c37afb",
+      "raw_bytes": 3692437,
+      "archive_sha256": "f536daa359683f5e41b2611601a8070f6bc9a4484cae45ae27393928b4c37afb",
+      "archive_bytes": 3692437
+    },
+    {
+      "source_path": "Saved/MPR/optimization_20261112/runtime/after/20261112T122126Z/lod_near.png",
+      "archive_path": "previews/worker-near.png",
+      "encoding": "original",
+      "raw_sha256": "ba6ea5a7d3e1ccd64b314a66a4da95552c82609725ebbd7512cc5adc1a86ba9a",
+      "raw_bytes": 2432520,
+      "archive_sha256": "ba6ea5a7d3e1ccd64b314a66a4da95552c82609725ebbd7512cc5adc1a86ba9a",
+      "archive_bytes": 2432520
+    }
+  ]
+}

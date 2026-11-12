@@ -3,6 +3,7 @@
 #include "Animation/AnimSequence.h"
 #include "Animation/Skeleton.h"
 #include "Engine/SkeletalMesh.h"
+#include "Engine/World.h"
 #include "TwoBoneIK.h"
 
 namespace
@@ -283,6 +284,24 @@ void UMPRWorkerPoseComponent::ApplyWorkerPose(const FMPRWorkerPoseInput& Input)
     MarkRefreshTransformDirty();
     RefreshBoneTransforms();
     ++PoseRevision;
+}
+
+bool UMPRWorkerPoseComponent::UpdatePresentationLOD()
+{
+    if (!bPoseReady || !IsVisible() || !GetWorld()) return false;
+    // Match USkinnedMeshComponent::TickComponent's renderer feedback. Do not
+    // consume a new offscreen LOD unless its dynamic data can also be uploaded;
+    // otherwise returning onscreen could retain the previous rendered LOD.
+    bRecentlyRendered = (bUseScreenRenderStateForUpdate ? GetLastRenderTimeOnScreen() : GetLastRenderTime())
+        > GetWorld()->TimeSeconds - 1.0f;
+    if (!bRecentlyRendered || !UpdateLODStatus()) return false;
+
+    // PoseableMesh keeps the full component-space pose at every LOD. Reuse it:
+    // SendRenderDynamicData_Concurrent reads PredictedLODLevel and submits the
+    // existing bones. No RefreshBoneTransforms or ApplyWorkerPose is needed.
+    MarkRenderDynamicDataDirty();
+    ++DisplayLODChanges;
+    return true;
 }
 
 FVector UMPRWorkerPoseComponent::GetPalmWorld(bool bLeft) const

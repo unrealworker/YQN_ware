@@ -146,4 +146,38 @@ bool FMPRInstancePauseReset::RunTest(const FString&)
     TestFalse(TEXT("Rebuilt pool has no stale previous-transform entries beyond its current instance count"),Component->GetInstancePrevTransform(1,Stale,false));
     return true;
 }
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMPRCartPresentationChanges,"MPR.Sorter.Presentation.CartChangedTransforms",MPRInstanceMotionFlags)
+bool FMPRCartPresentationChanges::RunTest(const FString&)
+{
+    auto* Component=MakeMotionInstances(2);
+    FMPRCartInstanceTransformCache Cart;
+    const FTransform Docked=MotionTransform(1200,-400,100,20);
+    const FTransform Withdrawn=MotionTransform(1200,-335,100,20);
+    const FTransform Hidden(FQuat::Identity,Withdrawn.GetLocation(),FVector::ZeroVector);
+    TestTrue(TEXT("Initial cart transform submits even if the slot already exists"),Cart.Submit(Component,0,Docked));
+    for(int32 I=0;I<120;++I)
+        TestFalse(TEXT("Unchanged docked cart does not submit another instance update"),Cart.Submit(Component,0,Docked));
+    TestTrue(TEXT("Docked world-space pose remains unchanged"),SameStoredTransform(Component,0,Docked,false));
+    TestTrue(TEXT("Withdrawing cart submits its moved position"),Cart.Submit(Component,0,Withdrawn));
+    TestTrue(TEXT("Withdrawing world-space pose is exact"),SameStoredTransform(Component,0,Withdrawn,false));
+    TestTrue(TEXT("Handoff hides the same cart slot"),Cart.Submit(Component,0,Hidden));
+    TestFalse(TEXT("A held handoff does not repeat its hidden transform"),Cart.Submit(Component,0,Hidden));
+    TestTrue(TEXT("Hidden slot retains its exit position"),SameStoredTransform(Component,0,Hidden,false));
+    TestTrue(TEXT("Empty arriving cart becomes visible at the same position"),Cart.Submit(Component,0,Withdrawn));
+    TestTrue(TEXT("Returning cart reaches its original dock"),Cart.Submit(Component,0,Docked));
+    TestTrue(TEXT("Changing the instance mapping forces the identical world pose to the new slot"),Cart.Submit(Component,1,Docked));
+    TestTrue(TEXT("New slot receives the mapped pose"),SameStoredTransform(Component,1,Docked,false));
+    Component->SetWorldTransform(FTransform(FRotator(0,60,0),FVector(500,600,700)));
+    TestTrue(TEXT("Parent transform changes preserve the requested cart world pose"),Cart.Submit(Component,1,Docked));
+    TestTrue(TEXT("World pose is maintained after the parent moves"),SameStoredTransform(Component,1,Docked,false));
+    Cart.Reset();
+    TestTrue(TEXT("Reset forces an initial presentation without changing the slot mapping"),Cart.Submit(Component,1,Docked));
+    auto* Rebuilt=MakeMotionInstances(2);
+    TestTrue(TEXT("A rebuilt component cannot inherit another component's cached state"),Cart.Submit(Rebuilt,1,Docked));
+    TestFalse(TEXT("Invalid slot does not change the cached valid submission"),Cart.Submit(Rebuilt,9,Withdrawn));
+    TestFalse(TEXT("Valid unchanged slot still skips after the invalid call"),Cart.Submit(Rebuilt,1,Docked));
+    TestEqual(TEXT("No cart instances were added or removed"),Component->GetInstanceCount(),2);
+    TestEqual(TEXT("Rebuilt pool also retains its mapping"),Rebuilt->GetInstanceCount(),2);
+    return true;
+}
 #endif
