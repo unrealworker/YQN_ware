@@ -4,6 +4,7 @@
 #include "MPRSorterSimulation.h"
 #include "MPRCentralDistribution.h"
 #include "MPRCentralGeometry.h"
+#include "MPRInstanceMotionHistory.h"
 #include "MPRSorterSimulationActor.generated.h"
 
 class UInstancedStaticMeshComponent;
@@ -153,6 +154,7 @@ private:
     UPROPERTY(Transient) TObjectPtr<UMPRSorterHUDWidget> Panel;
     TArray<FMachine> Machines;
     TArray<FDistributionBank> DistributionBanks;
+    FMPRInstanceMotionHistory CentralColumnHistory, CentralTrayHistory, CentralParcelHistory;
     TArray<int32> CadWorkerIndices;
     uint64 NextCentralParcelId=1;
     double FleetTimeRemainder=0;

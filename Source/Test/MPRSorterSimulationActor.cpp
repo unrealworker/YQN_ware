@@ -650,6 +650,9 @@ void AMPRSorterSimulationActor::Tick(float DeltaSeconds)
     AttachPanel();UpdateFocus();
     if(bAutomaticAdvance&&IsSimulationPlaying())
     { AdvanceFleet(DeltaSeconds);UpdateInstances(); }
+    // A stopped presentation still submits a stationary frame, clearing the
+    // last moving frame's velocity without advancing any simulation state.
+    else UpdateCentralDistribution();
 }
 void AMPRSorterSimulationActor::ScheduleCartExchange()
 {
@@ -702,7 +705,7 @@ bool AMPRSorterSimulationActor::IsSimulationPlaying() const { return bReady&&Mac
 bool AMPRSorterSimulationActor::IsAutomaticCollection() const { return bReady&&Machines[0].Simulation.IsAutoCollectEnabled(); }
 double AMPRSorterSimulationActor::GetSimulationRate() const { return bReady?Machines[0].Simulation.GetRate():1.; }
 void AMPRSorterSimulationActor::SetSimulationPlaying(bool Playing) { for(auto& M:Machines)M.Simulation.SetPlaying(Playing);for(auto& B:DistributionBanks)B.Simulation.SetPlaying(Playing); }
-void AMPRSorterSimulationActor::ResetSimulation(){FleetTimeRemainder=0;NextCentralParcelId=1;for(auto& B:DistributionBanks)B.Simulation.Reset();ExchangeOwner=INDEX_NONE;NextExchangeMachine=0;OwnerCompletedExchanges=0;for(auto& M:Machines){M.Simulation.Reset();M.CachedBinState.Init(INDEX_NONE,M.Bins.Num());}ScheduleCartExchange();if(bReady)UpdateInstances();}
+void AMPRSorterSimulationActor::ResetSimulation(){CentralColumnHistory.Reset();CentralTrayHistory.Reset();CentralParcelHistory.Reset();FleetTimeRemainder=0;NextCentralParcelId=1;for(auto& B:DistributionBanks)B.Simulation.Reset();ExchangeOwner=INDEX_NONE;NextExchangeMachine=0;OwnerCompletedExchanges=0;for(auto& M:Machines){M.Simulation.Reset();M.CachedBinState.Init(INDEX_NONE,M.Bins.Num());}ScheduleCartExchange();if(bReady)UpdateInstances();}
 void AMPRSorterSimulationActor::SetSimulationRate(double Rate){for(auto& M:Machines)M.Simulation.SetRate(Rate);}
 void AMPRSorterSimulationActor::SetAutomaticCollection(bool Enabled){for(auto& M:Machines)M.Simulation.SetAutoCollect(Enabled);}
 void AMPRSorterSimulationActor::ClearFullBins()

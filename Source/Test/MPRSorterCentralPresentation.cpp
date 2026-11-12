@@ -96,6 +96,10 @@ bool AMPRSorterSimulationActor::LoadCentralDistribution()
 
 void AMPRSorterSimulationActor::BuildCentralDistribution()
 {
+    CentralColumnHistory.Reset();CentralTrayHistory.Reset();CentralParcelHistory.Reset();
+    // ClearInstances does not clear UE's previous-transform buffer. Disable it
+    // before rebuilding the pool; the first submission initializes it afresh.
+    for(auto* C:{CentralColumns.Get(),CentralTrays.Get(),CentralParcels.Get()})C->SetHasPerInstancePrevTransforms(false);
     for(auto* C:{CentralMetal.Get(),CentralWhite.Get(),CentralBlue.Get(),CentralBelt.Get(),CentralColumns.Get(),CentralTrays.Get(),CentralParcels.Get()})C->ClearInstances();
     auto Material=[this](const FString& SlotRole)->UMaterialInterface*
     {
@@ -208,9 +212,15 @@ FVector AMPRSorterSimulationActor::CentralParcelPoint(const FDistributionBank& B
 void AMPRSorterSimulationActor::UpdateCentralDistribution()
 {
     const FTransform Hidden(FQuat::Identity,FVector::ZeroVector,FVector::ZeroVector);
+    TArray<FTransform> ColumnTransforms,TrayTransforms,ParcelTransforms;
+    TArray<uint64> ParcelIds;
+    ColumnTransforms.Reserve(CentralColumns->GetInstanceCount());
+    TrayTransforms.Reserve(CentralTrays->GetInstanceCount());
+    ParcelTransforms.Reserve(CentralParcels->GetInstanceCount());
+    ParcelIds.Reserve(CentralParcels->GetInstanceCount());
     for(auto& B:DistributionBanks)
     {
-        int32 I=B.CarrierOffset;
+        check(ColumnTransforms.Num()==B.CarrierOffset);
         std::vector<MPRCentral::Carrier> DisplayCarriers;
         DisplayCarriers.reserve(B.Simulation.GetCarriers().size());
         for(size_t Index=0;Index<B.Simulation.GetCarriers().size();++Index)
@@ -219,10 +229,11 @@ void AMPRSorterSimulationActor::UpdateCentralDistribution()
         {
             double Heading;FVector Point=MPRCentralGeometry::CentralPoint(B.Geometry,C.Distance01,Heading);
             const FQuat Turn(FVector::UpVector,Heading);
-            CentralColumns->UpdateInstanceTransform(I,FTransform(Turn,Point,FVector(1.6,1.6,B.Geometry.FrameHeightCm/212.)),true,false,true);
+            ColumnTransforms.Add(FTransform(Turn,Point,FVector(1.6,1.6,B.Geometry.FrameHeightCm/212.)));
             Point.Z=CentralLiftHeight(C);
-            CentralTrays->UpdateInstanceTransform(I,FTransform(Turn,Point,FVector(1.6,1.6,1.)),true,false,true);
-            CentralParcels->UpdateInstanceTransform(I,C.ParcelId?FTransform(Turn,CentralParcelPoint(B,C),FVector(.22,.16,.05)):Hidden,true,false,true);++I;
+            TrayTransforms.Add(FTransform(Turn,Point,FVector(1.6,1.6,1.)));
+            ParcelTransforms.Add(C.ParcelId?FTransform(Turn,CentralParcelPoint(B,C),FVector(.22,.16,.05)):Hidden);
+            ParcelIds.Add(C.ParcelId);
         }
         for(int32 SIndex=0;SIndex<B.Stations.Num();++SIndex)
         {
@@ -245,7 +256,9 @@ void AMPRSorterSimulationActor::UpdateCentralDistribution()
             RuntimeWorkers[S.WorkerIndex]->ApplyWorkerPose(Pose);
         }
     }
-    for(auto* C:{CentralColumns.Get(),CentralTrays.Get(),CentralParcels.Get()})C->MarkRenderStateDirty();
+    CentralColumnHistory.Submit(CentralColumns,ColumnTransforms,GFrameCounter);
+    CentralTrayHistory.Submit(CentralTrays,TrayTransforms,GFrameCounter);
+    CentralParcelHistory.Submit(CentralParcels,ParcelTransforms,GFrameCounter,ParcelIds);
 }
 
 void AMPRSorterSimulationActor::AppendCentralReport(const TSharedPtr<FJsonObject>& Root) const
