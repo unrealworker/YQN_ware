@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "purpose": "Native geometry and preservation evidence for reproducible MPR whole-row clearance",
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "original_map_sha256": "1af91bb69aeb9643a14b33dad7239f8d300c8e29318a85b48e84737d0c5ecf23",
+  "source_dxf_sha256": "c316aafe183162c5bef636885b59cc1000c3eecf50d8be645490b4716c6af863",
+  "excluded": [
+    "map/asset binaries",
+    "runtime captures",
+    "logs",
+    "temporary caches"
+  ],
+  "inputs": {
+    "Saved/MPR/optimization_20261112/baseline.json.gz": {
+      "archive": "baseline.json.gz",
+      "encoding": "identity",
+      "original_bytes": 247040,
+      "archive_bytes": 247040,
+      "original_sha256": "a1f3e5357690b1e46c22c04e27eac14c2a91b9abdc93fa8365e2a2bbcf099999",
+      "archive_sha256": "a1f3e5357690b1e46c22c04e27eac14c2a91b9abdc93fa8365e2a2bbcf099999"
+    },
+    "Saved/MPR/optimization_20261112/native_mesh_bounds.json": {
+      "archive": "native_mesh_bounds.json.gz",
+      "encoding": "gzip",
+      "original_bytes": 420570,
+      "archive_bytes": 34471,
+      "original_sha256": "f72062b8fdd974078ddb0bc57b2c543e3595b161115f56474019f62a6f909525",
+      "archive_sha256": "8d2fb84626df9947e223d47a76c0f1b005e911941edcd74d9d0b5208912f8ea1"
+    },
+    "Saved/MPR/optimization_20261112/wall_solid_boxes.json": {
+      "archive": "wall_solid_boxes.json.gz",
+      "encoding": "gzip",
+      "original_bytes": 1574127,
+      "archive_bytes": 58482,
+      "original_sha256": "38f77dd4989f3a164b3103ffd07979b9a2e55c7a21a43f72145833e798f3cd45",
+      "archive_sha256": "db9adcdf71c912c8772826c5b0b987e64a56f48be8fdd3c446fdcc52bffd5cc3"
+    },
+    "Saved/MPR/optimization_20261112/original_package_hashes.json": {
+      "archive": "original_package_hashes.json.gz",
+      "encoding": "gzip",
+      "original_bytes": 282467,
+      "archive_bytes": 92738,
+      "original_sha256": "982a1a15798ef3aa736dce669c2b6b5081aa81de822ebe831ad0cbde18036221",
+      "archive_sha256": "37d0e1ad8254fc75b08363f69133274dfaa2ca68a575aa75dbfa544bd03c5bc7"
+    },
+    "Saved/MPR/optimization_20261112/preserved_configuration.json": {
+      "archive": "preserved_configuration.json.gz",
+      "encoding": "gzip",
+      "original_bytes": 2490,
+      "archive_bytes": 579,
+      "original_sha256": "de2e9286588a1ed31b6ea71803c9a61095b07a5646ae0eae542177526c6bd2d4",
+      "archive_sha256": "50ad586af0e916218dc84c83fca96821dd580bc476140008fcdd4690585f2cb9"
+    },
+    "Saved/MPR/interior_cad_20261112/interior_truth/pedestrian_openings.json": {
+      "archive": "pedestrian_openings.json.gz",
+      "encoding": "gzip",
+      "original_bytes": 61737,
+      "archive_bytes": 5010,
+      "original_sha256": "476139fb31852ef1325f0a1137c5ce08a1d541ed892bd0803805ddab344f2b0f",
+      "archive_sha256": "80bba139d157f86ef4a36a5f9bcb016a1c77f216f06ea0e2e1286648e651dc7a"
+    }
+  }
+}

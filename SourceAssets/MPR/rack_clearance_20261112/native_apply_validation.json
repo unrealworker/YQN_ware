@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "plan_sha256": "f1bef6de84bc6743c6263db50c99923bbe739e3fcd6009cc4e20cdfccb6261d7",
+  "actors": 924,
+  "rack_instances": 2867,
+  "rack_components": 59,
+  "moved_rows": 91,
+  "moved_instances": 2392,
+  "maximum_shift_m": 1.575,
+  "before_map_sha256": "1af91bb69aeb9643a14b33dad7239f8d300c8e29318a85b48e84737d0c5ecf23",
+  "map_sha256": "67cec0faee74dd8f38e7c74c4b305aa9bd2dc0c7558efc1ed131bc4ad034a659",
+  "changed_packages": [
+    "Content/Maps/MPR_CAD_Warehouse_B50B57.umap"
+  ],
+  "existing_other_packages_preserved": 1975,
+  "existing_actor_and_instance_identities_preserved": true,
+  "only_instance_translation_changed": true,
+  "camera_unchanged": true,
+  "simulation_properties_unchanged": true,
+  "materials_meshes_lods_and_culling_unchanged": true,
+  "column_and_equipment_poses_unchanged": true,
+  "original_fixed_contacts_retained": [
+    {
+      "rack_handle": "2DFAAC",
+      "obstacle_id": "1CEFD51242C1ED2D76ADA3A592C8B6C2:HierarchicalInstancedStaticMesh:10",
+      "obstacle_category": "fixed_operation_or_floor_storage"
+    },
+    {
+      "rack_handle": "2DFAAC",
+      "obstacle_id": "1CEFD51242C1ED2D76ADA3A592C8B6C2:HierarchicalInstancedStaticMesh:11",
+      "obstacle_category": "fixed_operation_or_floor_storage"
+    },
+    {
+      "rack_handle": "2DFAB7",
+      "obstacle_id": "1CEFD51242C1ED2D76ADA3A592C8B6C2:HierarchicalInstancedStaticMesh:18",
+      "obstacle_category": "fixed_operation_or_floor_storage"
+    },
+    {
+      "rack_handle": "2DFAC2",
+      "obstacle_id": "1CEFD51242C1ED2D76ADA3A592C8B6C2:HierarchicalInstancedStaticMesh:8",
+      "obstacle_category": "fixed_operation_or_floor_storage"
+    }
+  ]
+}
