@@ -322,6 +322,71 @@ double Simulation::NextEventSeconds(bool MoveChain) const
     }
     return Next;
 }
+double Simulation::PresentationSeconds(double ResidualSimSeconds) const
+{
+    if(!Ready||ActiveCart>=0||!std::isfinite(ResidualSimSeconds))return 0.;
+    return std::clamp(ResidualSimSeconds,0.,MaxPresentationSeconds);
+}
+double Simulation::PresentationChainSeconds(double Seconds) const
+{
+    if(Totals.ChainStopped)return 0.;
+    const double Velocity=Settings.ChainSpeedCmS/Settings.LoopLengthCm;
+    const bool HasCargo=HasCarrierCargo(),Feed=FeedEnabled();
+    Destination Candidate;const bool Available=Feed&&FindDestination(Candidate);
+    for(const auto& C:Carriers)
+    {
+        if(C.State!=CarrierPhase::EmptyReturn&&C.State!=CarrierPhase::LoadedTravel)continue;
+        double D=ForwardDistance(C.Distance01,C.State==CarrierPhase::LoadedTravel?TargetDistance(C):0.);
+        if(D<=PositionTolerance)D=1.;
+        const double Arrival=D/Velocity;
+        bool Stops=C.State==CarrierPhase::LoadedTravel;
+        if(!Stops)
+        {
+            // An empty carrier may pass the load port while another carrier
+            // works. Reaching that port is not by itself a chain-stop event.
+            Stops=std::abs(C.LiftHeightCm-Settings.LoadHeightCm)>Settings.LiftSpeedCmS*Arrival+HeightTolerance;
+            if(Feed)
+            {
+                const double FeedReady=Infeed.empty()
+                    ?(Settings.ExternalInfeed?std::numeric_limits<double>::infinity():ArrivalRemaining+Settings.InfeedTravelSeconds)
+                    :(1.-Infeed.front().Progress01)*Settings.InfeedTravelSeconds;
+                Stops|=!HasCargo||(Available&&FeedReady<=Arrival+TimeTolerance);
+            }
+        }
+        if(Stops)Seconds=std::min(Seconds,Arrival);
+    }
+    return Seconds;
+}
+Carrier Simulation::GetPresentationCarrier(size_t Index,double ResidualSimSeconds) const
+{
+    if(Index>=Carriers.size())return {};
+    Carrier Result=Carriers[Index];
+    const double Delta=PresentationSeconds(ResidualSimSeconds);
+    if(Delta<=0.)return Result;
+    if(!Totals.ChainStopped)
+        Result.Distance01=Wrap(Result.Distance01+Settings.ChainSpeedCmS*PresentationChainSeconds(Delta)/Settings.LoopLengthCm);
+    const double LiftDelta=Settings.LiftSpeedCmS*Delta;
+    Result.LiftHeightCm+=std::clamp(TargetHeight(Result)-Result.LiftHeightCm,-LiftDelta,LiftDelta);
+    if(Result.State==CarrierPhase::Scan)
+        Result.ScanProgress=std::min(1.,(PhaseElapsed[Index]+Delta)/Settings.ScanSeconds);
+    if(Result.State==CarrierPhase::Induct)
+        Result.InductProgress=std::min(1.,(PhaseElapsed[Index]+Delta)/Settings.InductSeconds);
+    if(Result.State==CarrierPhase::Unload)
+        Result.UnloadProgress=std::min(1.,(PhaseElapsed[Index]+Delta)/Settings.UnloadSeconds);
+    return Result;
+}
+InfeedParcel Simulation::GetPresentationInfeedParcel(size_t Index,double ResidualSimSeconds) const
+{
+    if(Index>=Infeed.size())return {};
+    InfeedParcel Result=Infeed[Index];
+    const double Delta=PresentationSeconds(ResidualSimSeconds);
+    if(Delta>0.&&FeedEnabled())
+    {
+        const double Limit=FeedFrontLimit()-double(Index)/double(Settings.InfeedCapacity+1);
+        Result.Progress01=std::min(Limit,Result.Progress01+Delta/Settings.InfeedTravelSeconds);
+    }
+    return Result;
+}
 void Simulation::Integrate(double Seconds,bool MoveChain)
 {
     Totals.SimTime+=Seconds;

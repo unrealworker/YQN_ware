@@ -54,6 +54,7 @@ public:
     UFUNCTION(BlueprintCallable, Category="MPR Sorter|Diagnostics") bool AdvanceSimulationForDiagnostics(double Seconds);
     UFUNCTION(BlueprintCallable, Category="MPR Sorter|Diagnostics") void SetAutomaticAdvanceForDiagnostics(bool bEnabled);
     UFUNCTION(BlueprintCallable, Category="MPR Sorter|Diagnostics") void SetPanelVisible(bool bVisible);
+    UFUNCTION(BlueprintPure, Category="MPR Sorter|Diagnostics") FString GetRingMotionDiagnostics() const;
     bool IsReady() const { return bReady; }
     bool IsSimulationPlaying() const;
     bool IsAutomaticCollection() const;
@@ -117,6 +118,7 @@ private:
     double CentralLiftHeight(const MPRCentral::Carrier& Carrier) const;
     void AppendCentralReport(const TSharedPtr<FJsonObject>& Report) const;
     void UpdateInstances();
+    void UpdateRingInstances();
     void UpdateFocus();
     void AttachPanel();
     FVector CartOffset(const FMachine& Machine,int32 CartIndex) const;
@@ -155,6 +157,7 @@ private:
     TArray<FMachine> Machines;
     TArray<FDistributionBank> DistributionBanks;
     FMPRInstanceMotionHistory CentralColumnHistory, CentralTrayHistory, CentralParcelHistory;
+    FMPRInstanceMotionHistory RingTowerHistory, RingTrayHistory, RingParcelHistory, RingInfeedHistory;
     TArray<int32> CadWorkerIndices;
     uint64 NextCentralParcelId=1;
     double FleetTimeRemainder=0;

@@ -543,33 +543,55 @@ void AMPRSorterSimulationActor::UpdateWorker(int32 Index,const FMachine& M,const
     World.SimulationTime=M.Simulation.GetStats().SimTime;
     RuntimeWorkers[Index]->ApplyWorkerPose(World);
 }
-void AMPRSorterSimulationActor::UpdateInstances()
+void AMPRSorterSimulationActor::UpdateRingInstances()
 {
-    TRACE_CPUPROFILER_EVENT_SCOPE(MPRSorter_Presentation);
     const FTransform Hidden(FQuat::Identity,FVector::ZeroVector,FVector::ZeroVector);
-    int32 CarrierIndex=0;bool BinsChanged=false;
+    TArray<FTransform> TowerTransforms,TrayTransforms,ParcelTransforms,InfeedTransforms;
+    TArray<uint64> ParcelIds,InfeedIds;
+    TowerTransforms.Reserve(Towers->GetInstanceCount());TrayTransforms.Reserve(Trays->GetInstanceCount());
+    ParcelTransforms.Reserve(Parcels->GetInstanceCount());ParcelIds.Reserve(Parcels->GetInstanceCount());
+    InfeedTransforms.Reserve(InfeedParcels->GetInstanceCount());InfeedIds.Reserve(InfeedParcels->GetInstanceCount());
     for(auto& M:Machines)
     {
-        const auto& Bins=M.Simulation.GetBins();const auto& Carts=M.Simulation.GetCarts();const auto& Queue=M.Simulation.GetInfeedQueue();
+        const auto& Queue=M.Simulation.GetInfeedQueue();
+        check(InfeedTransforms.Num()==M.FeedOffset);
         for(int32 I=0;I<M.Simulation.GetConfig().InfeedCapacity;++I)
         {
-            const FTransform Transform=I<int32(Queue.size())?FTransform(FQuat(FVector::UpVector,M.InfeedSide*PI*.5),FeedPoint(M,Queue[size_t(I)].Progress01),PackageSize/100.)*M.World:Hidden;
-            InfeedParcels->UpdateInstanceTransform(M.FeedOffset+I,Transform,true,false,true);
+            const auto Display=M.Simulation.GetPresentationInfeedParcel(size_t(I),FleetTimeRemainder);
+            InfeedTransforms.Add(I<int32(Queue.size())?FTransform(FQuat(FVector::UpVector,M.InfeedSide*PI*.5),FeedPoint(M,Display.Progress01),PackageSize/100.)*M.World:Hidden);
+            InfeedIds.Add(Display.ParcelId);
         }
-        for(const auto& Carrier:M.Simulation.GetCarriers())
+        for(size_t I=0;I<M.Simulation.GetCarriers().size();++I)
         {
+            const auto Carrier=M.Simulation.GetPresentationCarrier(I,FleetTimeRemainder);
             double Heading;FVector At=PointOnLoop(Carrier.Distance01+M.LoadFraction,M.Half,M.Radius,Heading);
             const FQuat Turn(FVector::UpVector,Heading);
-            Towers->UpdateInstanceTransform(CarrierIndex,FTransform(Turn,At)*M.World,true,false,true);
-            At.Z=Carrier.LiftHeightCm;Trays->UpdateInstanceTransform(CarrierIndex,FTransform(Turn,At)*M.World,true,false,true);
+            TowerTransforms.Add(FTransform(Turn,At)*M.World);
+            At.Z=Carrier.LiftHeightCm;TrayTransforms.Add(FTransform(Turn,At)*M.World);
             if(Carrier.ParcelId)
             {
                 FQuat ParcelTurn;const FVector Parcel=CarrierParcelPoint(M,Carrier,ParcelTurn);
-                Parcels->UpdateInstanceTransform(CarrierIndex,FTransform(ParcelTurn,Parcel,PackageSize/100.)*M.World,true,false,true);
+                ParcelTransforms.Add(FTransform(ParcelTurn,Parcel,PackageSize/100.)*M.World);
             }
-            else Parcels->UpdateInstanceTransform(CarrierIndex,Hidden,true,false,true);
-            ++CarrierIndex;
+            else ParcelTransforms.Add(Hidden);
+            ParcelIds.Add(Carrier.ParcelId);
         }
+    }
+    RingTowerHistory.Submit(Towers,TowerTransforms,GFrameCounter);
+    RingTrayHistory.Submit(Trays,TrayTransforms,GFrameCounter);
+    RingParcelHistory.Submit(Parcels,ParcelTransforms,GFrameCounter,ParcelIds);
+    RingInfeedHistory.Submit(InfeedParcels,InfeedTransforms,GFrameCounter,InfeedIds);
+}
+
+void AMPRSorterSimulationActor::UpdateInstances()
+{
+    TRACE_CPUPROFILER_EVENT_SCOPE(MPRSorter_Presentation);
+    UpdateRingInstances();
+    const FTransform Hidden(FQuat::Identity,FVector::ZeroVector,FVector::ZeroVector);
+    bool BinsChanged=false;
+    for(auto& M:Machines)
+    {
+        const auto& Bins=M.Simulation.GetBins();const auto& Carts=M.Simulation.GetCarts();
         int32 MovingCart=INDEX_NONE;
         for(int32 I=0;I<M.Carts.Num();++I)
         {
@@ -630,7 +652,6 @@ void AMPRSorterSimulationActor::UpdateInstances()
         UpdateWorker(M.WorkerOffset,M,Push);
     }
     UpdateCentralDistribution();
-    for(auto* C:{Towers.Get(),Trays.Get(),Parcels.Get(),InfeedParcels.Get()})C->MarkRenderStateDirty();
     for(auto& C:RuntimeCartComponents)C->MarkRenderStateDirty();
     if(BinsChanged)for(auto* C:{BinParcels.Get(),ActiveLights.Get(),FullLights.Get()})C->MarkRenderStateDirty();
 }
@@ -652,7 +673,7 @@ void AMPRSorterSimulationActor::Tick(float DeltaSeconds)
     { AdvanceFleet(DeltaSeconds);UpdateInstances(); }
     // A stopped presentation still submits a stationary frame, clearing the
     // last moving frame's velocity without advancing any simulation state.
-    else UpdateCentralDistribution();
+    else {UpdateCentralDistribution();UpdateRingInstances();}
 }
 void AMPRSorterSimulationActor::ScheduleCartExchange()
 {
@@ -705,7 +726,16 @@ bool AMPRSorterSimulationActor::IsSimulationPlaying() const { return bReady&&Mac
 bool AMPRSorterSimulationActor::IsAutomaticCollection() const { return bReady&&Machines[0].Simulation.IsAutoCollectEnabled(); }
 double AMPRSorterSimulationActor::GetSimulationRate() const { return bReady?Machines[0].Simulation.GetRate():1.; }
 void AMPRSorterSimulationActor::SetSimulationPlaying(bool Playing) { for(auto& M:Machines)M.Simulation.SetPlaying(Playing);for(auto& B:DistributionBanks)B.Simulation.SetPlaying(Playing); }
-void AMPRSorterSimulationActor::ResetSimulation(){CentralColumnHistory.Reset();CentralTrayHistory.Reset();CentralParcelHistory.Reset();FleetTimeRemainder=0;NextCentralParcelId=1;for(auto& B:DistributionBanks)B.Simulation.Reset();ExchangeOwner=INDEX_NONE;NextExchangeMachine=0;OwnerCompletedExchanges=0;for(auto& M:Machines){M.Simulation.Reset();M.CachedBinState.Init(INDEX_NONE,M.Bins.Num());}ScheduleCartExchange();if(bReady)UpdateInstances();}
+void AMPRSorterSimulationActor::ResetSimulation()
+{
+    CentralColumnHistory.Reset();CentralTrayHistory.Reset();CentralParcelHistory.Reset();
+    RingTowerHistory.Reset();RingTrayHistory.Reset();RingParcelHistory.Reset();RingInfeedHistory.Reset();
+    FleetTimeRemainder=0;NextCentralParcelId=1;
+    for(auto& B:DistributionBanks)B.Simulation.Reset();
+    ExchangeOwner=INDEX_NONE;NextExchangeMachine=0;OwnerCompletedExchanges=0;
+    for(auto& M:Machines){M.Simulation.Reset();M.CachedBinState.Init(INDEX_NONE,M.Bins.Num());}
+    ScheduleCartExchange();if(bReady)UpdateInstances();
+}
 void AMPRSorterSimulationActor::SetSimulationRate(double Rate){for(auto& M:Machines)M.Simulation.SetRate(Rate);}
 void AMPRSorterSimulationActor::SetAutomaticCollection(bool Enabled){for(auto& M:Machines)M.Simulation.SetAutoCollect(Enabled);}
 void AMPRSorterSimulationActor::ClearFullBins()
@@ -737,6 +767,37 @@ void AMPRSorterSimulationActor::SetPanelVisible(bool Visible){if(Panel)Panel->Se
 void AMPRSorterSimulationActor::SetAutomaticAdvanceForDiagnostics(bool Enabled){if(Diagnostics())bAutomaticAdvance=Enabled;}
 bool AMPRSorterSimulationActor::AdvanceSimulationForDiagnostics(double Seconds)
 {if(!Diagnostics()||!bReady||!AdvanceFleet(Seconds))return false;UpdateInstances();return true;}
+FString AMPRSorterSimulationActor::GetRingMotionDiagnostics() const
+{
+    if(!Diagnostics()||!bReady)return TEXT("{}");
+    auto Root=MakeShared<FJsonObject>();
+    Root->SetNumberField(TEXT("visual_residual_seconds"),FleetTimeRemainder);
+    Root->SetNumberField(TEXT("sim_time"),Machines[0].Simulation.GetStats().SimTime);
+    Root->SetNumberField(TEXT("visual_time"),Machines[0].Simulation.GetStats().SimTime+FleetTimeRemainder);
+    TArray<TSharedPtr<FJsonValue>> Rows;
+    for(int32 Index=0;Index<Machines.Num();++Index)
+    {
+        const auto& M=Machines[Index];const auto& Config=M.Simulation.GetConfig();const auto& Stats=M.Simulation.GetStats();
+        auto Row=MakeShared<FJsonObject>();Row->SetNumberField(TEXT("index"),Index);Row->SetStringField(TEXT("id"),M.Id);
+        Row->SetBoolField(TEXT("chain_stopped"),Stats.ChainStopped);Row->SetNumberField(TEXT("sim_time"),Stats.SimTime);
+        Row->SetNumberField(TEXT("speed_cm_s"),Config.ChainSpeedCmS);Row->SetNumberField(TEXT("loop_length_cm"),Config.LoopLengthCm);
+        Row->SetNumberField(TEXT("half_cm"),M.Half);Row->SetNumberField(TEXT("radius_cm"),M.Radius);Row->SetNumberField(TEXT("load_fraction"),M.LoadFraction);
+        TArray<TSharedPtr<FJsonValue>> Carriers;
+        for(size_t I=0;I<M.Simulation.GetCarriers().size();++I)
+        {
+            const auto& C=M.Simulation.GetCarriers()[I];const auto Display=M.Simulation.GetPresentationCarrier(I,FleetTimeRemainder);
+            auto Item=MakeShared<FJsonObject>();Item->SetNumberField(TEXT("state_code"),int32(C.State));
+            Item->SetNumberField(TEXT("distance01"),C.Distance01);Item->SetNumberField(TEXT("visual_distance01"),Display.Distance01);
+            Item->SetNumberField(TEXT("visual_height_cm"),Display.LiftHeightCm);Item->SetNumberField(TEXT("parcel_id"),double(C.ParcelId));
+            Item->SetNumberField(TEXT("target_distance01"),C.State==MPRSorter::CarrierPhase::EmptyReturn?0.:
+                Config.DestinationDistances01[size_t(C.Target.Side*Config.Columns+C.Target.Column)]);
+            Carriers.Add(MakeShared<FJsonValueObject>(Item));
+        }
+        Row->SetArrayField(TEXT("carriers"),Carriers);Rows.Add(MakeShared<FJsonValueObject>(Row));
+    }
+    Root->SetArrayField(TEXT("machines"),Rows);
+    FString Result;FJsonSerializer::Serialize(Root,TJsonWriterFactory<>::Create(&Result));return Result;
+}
 FString AMPRSorterSimulationActor::GetMachineTitle() const
 {if(!bReady)return Error;return FString::Printf(TEXT("木马 %02d / %d · %d 格口 · %d 车"),SelectedMachine+1,Machines.Num(),Machines[SelectedMachine].Bins.Num(),Machines[SelectedMachine].Carts.Num());}
 FString AMPRSorterSimulationActor::GetStatusText() const
@@ -815,6 +876,7 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
     {
         const auto& S=M.Simulation.GetStats();auto Row=MakeShared<FJsonObject>();Row->SetStringField(TEXT("id"),M.Id);Row->SetStringField(TEXT("profile"),M.Profile);
         Row->SetNumberField(TEXT("sim_time"),S.SimTime);Row->SetNumberField(TEXT("last_induct_completed_time"),S.LastInductCompletedTime);Row->SetNumberField(TEXT("phase"),S.ChainPhase01);
+        Row->SetNumberField(TEXT("visual_time"),S.SimTime+FleetTimeRemainder);Row->SetNumberField(TEXT("visual_residual_seconds"),FleetTimeRemainder);
         Row->SetNumberField(TEXT("spawned"),double(S.Spawned));Row->SetNumberField(TEXT("completed"),double(S.Completed));
         Row->SetNumberField(TEXT("collected"),double(S.Collected));Row->SetNumberField(TEXT("active"),S.Active);Row->SetNumberField(TEXT("queued"),S.Queued);
         Row->SetNumberField(TEXT("exchanged_carts"),double(S.ExchangedCarts));Row->SetNumberField(TEXT("load_fraction"),M.LoadFraction);
@@ -825,10 +887,12 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
         Row->SetBoolField(TEXT("exchange_permitted"),M.Simulation.IsExchangePermitted());
         auto Own=[&Seen,&Unique](uint64 Id){if(!Id||Seen.Contains(Id))Unique=false;else Seen.Add(Id);};
         TArray<TSharedPtr<FJsonValue>> Feed;
-        for(const auto& P:M.Simulation.GetInfeedQueue())
+        for(size_t FeedIndex=0;FeedIndex<M.Simulation.GetInfeedQueue().size();++FeedIndex)
         {
+            const auto& P=M.Simulation.GetInfeedQueue()[FeedIndex];const auto Display=M.Simulation.GetPresentationInfeedParcel(FeedIndex,FleetTimeRemainder);
             Own(P.ParcelId);auto Item=MakeShared<FJsonObject>();Item->SetNumberField(TEXT("parcel_id"),double(P.ParcelId));
-            Item->SetNumberField(TEXT("progress01"),P.Progress01);Item->SetArrayField(TEXT("world_cm"),XYZ(M.World.TransformPosition(FeedPoint(M,P.Progress01))));
+            Item->SetNumberField(TEXT("progress01"),P.Progress01);Item->SetNumberField(TEXT("visual_progress01"),Display.Progress01);
+            Item->SetArrayField(TEXT("world_cm"),XYZ(M.World.TransformPosition(FeedPoint(M,Display.Progress01))));
             Feed.Add(MakeShared<FJsonValueObject>(Item));
         }
         Row->SetArrayField(TEXT("infeed"),Feed);
@@ -846,18 +910,22 @@ FString AMPRSorterSimulationActor::GetSimulationReportJson() const
         }
         Row->SetNumberField(TEXT("occupancy"),Count);Row->SetNumberField(TEXT("full_bins"),Full);Row->SetArrayField(TEXT("cells"),Cells);
         TArray<TSharedPtr<FJsonValue>> Carriers;
-        for(const auto& C:M.Simulation.GetCarriers())
+        for(size_t CarrierIndex=0;CarrierIndex<M.Simulation.GetCarriers().size();++CarrierIndex)
         {
+            const auto& C=M.Simulation.GetCarriers()[CarrierIndex];const auto Display=M.Simulation.GetPresentationCarrier(CarrierIndex,FleetTimeRemainder);
             if(C.ParcelId)Own(C.ParcelId);auto Item=MakeShared<FJsonObject>();Item->SetNumberField(TEXT("parcel_id"),double(C.ParcelId));
             Item->SetStringField(TEXT("state"),PhaseName(C.State));Item->SetNumberField(TEXT("state_code"),int32(C.State));
             Item->SetNumberField(TEXT("distance01"),C.Distance01);Item->SetNumberField(TEXT("lift_cm"),C.LiftHeightCm);
+            Item->SetNumberField(TEXT("visual_distance01"),Display.Distance01);Item->SetNumberField(TEXT("visual_height_cm"),Display.LiftHeightCm);
+            Item->SetNumberField(TEXT("visual_scan_progress"),Display.ScanProgress);Item->SetNumberField(TEXT("visual_induct_progress"),Display.InductProgress);
+            Item->SetNumberField(TEXT("visual_unload_progress"),Display.UnloadProgress);
             Item->SetNumberField(TEXT("scan_progress"),C.ScanProgress);Item->SetNumberField(TEXT("induct_progress"),C.InductProgress);
             Item->SetNumberField(TEXT("unload_progress"),C.UnloadProgress);Item->SetNumberField(TEXT("target_cart"),C.TargetCartIndex);
             Item->SetNumberField(TEXT("target_cart_generation"),double(C.TargetCartGeneration));
             Item->SetNumberField(TEXT("side"),C.Target.Side);Item->SetNumberField(TEXT("column"),C.Target.Column);Item->SetNumberField(TEXT("level"),C.Target.Level);
-            double Heading;FVector Point=PointOnLoop(C.Distance01+M.LoadFraction,M.Half,M.Radius,Heading);Point.Z=C.LiftHeightCm;
+            double Heading;FVector Point=PointOnLoop(Display.Distance01+M.LoadFraction,M.Half,M.Radius,Heading);Point.Z=Display.LiftHeightCm;
             Item->SetArrayField(TEXT("tray_world_cm"),XYZ(M.World.TransformPosition(Point)));
-            if(C.ParcelId){FQuat Turn;Item->SetArrayField(TEXT("parcel_world_cm"),XYZ(M.World.TransformPosition(CarrierParcelPoint(M,C,Turn))));}
+            if(C.ParcelId){FQuat Turn;Item->SetArrayField(TEXT("parcel_world_cm"),XYZ(M.World.TransformPosition(CarrierParcelPoint(M,Display,Turn))));}
             Carriers.Add(MakeShared<FJsonValueObject>(Item));
         }
         Row->SetArrayField(TEXT("carriers"),Carriers);TArray<TSharedPtr<FJsonValue>> Carts;

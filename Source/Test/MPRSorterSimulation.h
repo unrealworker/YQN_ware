@@ -12,6 +12,9 @@
 namespace MPRSorter
 {
 constexpr int CarrierCount=4;
+// Matches the common fleet scheduler; display sampling must not predict a
+// second authoritative step or execute a parcel/cart ownership event.
+constexpr double MaxPresentationSeconds=.05;
 enum class CarrierPhase : uint8_t { EmptyReturn,Scan,LoadedTravel,Lift,Unload,Induct };
 enum class BlockReason : uint8_t { None,Scanning,Lifting,Unloading,FullBin,Inducting,CartExchange,WaitingInfeed };
 enum class CartPhase : uint8_t { Receiving,FullWaiting,Withdrawing,Outbound,EmptyArriving,Docking,Handoff };
@@ -126,6 +129,11 @@ public:
     bool Advance(double WallDeltaSeconds);
     const Config& GetConfig() const { return Settings; }
     const std::array<Carrier,CarrierCount>& GetCarriers() const { return Carriers; }
+    // Read-only fractional-step poses. Phase/identity remain authoritative;
+    // motion stops at the next event rather than predicting its outcome.
+    // A paused caller retains its residual to preserve the last shown pose.
+    Carrier GetPresentationCarrier(size_t Index,double ResidualSimSeconds) const;
+    InfeedParcel GetPresentationInfeedParcel(size_t Index,double ResidualSimSeconds) const;
     // Flattened index = (Side*Columns+Column)*Levels+Level.
     const std::vector<Bin>& GetBins() const { return Bins; }
     const Stats& GetStats() const { return Totals; }
@@ -138,6 +146,8 @@ private:
     void RefreshStatus();
     void Integrate(double Seconds,bool MoveChain);
     double NextEventSeconds(bool MoveChain) const;
+    double PresentationSeconds(double ResidualSimSeconds) const;
+    double PresentationChainSeconds(double Seconds) const;
     double TargetHeight(const Carrier& Item) const;
     double TargetDistance(const Carrier& Item) const;
     bool FindDestination(Destination& Result) const;
