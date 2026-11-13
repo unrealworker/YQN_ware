@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "SceneTypes.h"
 #include "GHSWarehouseRoofComponent.generated.h"
 
 class UMaterialInterface;
@@ -93,6 +94,9 @@ struct FGHSWarehouseRoofPart
     UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInterface>> SourceMaterials;
     UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInstanceDynamic>> DissolveInstances;
     bool bActorHidden=false,bMeshVisible=true,bMeshHidden=false;
+    bool bCastShadow=true,bCastHiddenShadow=false,bAffectDistanceFieldLighting=true;
+    bool bAffectDynamicIndirectLighting=true,bAffectIndirectLightingWhileHidden=false,bVisibleInRayTracing=true;
+    EShadowCacheInvalidationBehavior ShadowCacheInvalidationBehavior=EShadowCacheInvalidationBehavior::Auto;
 };
 
 /** The architecture roof has no equipment identity and never changes its saved asset. */
@@ -158,6 +162,7 @@ private:
     void UpdateDissolveMaterials();
     void RestoreSourceMaterials();
     void SetRoofHidden(bool bHidden);
+    void UpdateRoofLighting();
     UPROPERTY(Transient) TObjectPtr<UStaticMeshComponent> RoofMesh;
     UPROPERTY(Transient) TArray<FGHSWarehouseRoofPart> RoofParts;
     bool bMPRRoof=false;

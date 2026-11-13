@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "name": "GHS.WarehouseRoof.FastUpgradeNeverRestartsOrSlowsOpening",
+      "state": "Success"
+    },
+    {
+      "name": "GHS.WarehouseRoof.InvalidDeltaAndImmediateRestoreRemainStable",
+      "state": "Success"
+    },
+    {
+      "name": "GHS.WarehouseRoof.ManualRevealKeepsInteriorLockedUntilComplete",
+      "state": "Success"
+    },
+    {
+      "name": "GHS.WarehouseRoof.MaterialOverrideAndIdleTickLifecycle",
+      "state": "Success"
+    },
+    {
+      "name": "GHS.WarehouseRoof.MissingRoofMapDoesNotLockInteriorOrTick",
+      "state": "Success"
+    },
+    {
+      "name": "GHS.WarehouseRoof.MPRPickingPreservesSteppedFootprint",
+      "state": "Success"
+    },
+    {
+      "name": "GHS.WarehouseRoof.MPRSkinsSolarAndInstancedLightsShareRevealAndRestore",
+      "state": "Success"
+    },
+    {
+      "name": "GHS.WarehouseRoof.PickingPreservesOfficeNotchAndTransform",
+      "state": "Success"
+    },
+    {
+      "name": "GHS.WarehouseRoof.ReversalPreservesApertureAndRemainingTravel",
+      "state": "Success"
+    },
+    {
+      "name": "GHS.WarehouseRoof.ScanReleasesOcclusionAndRestoresAuthoredLighting",
+      "state": "Success"
+    }
+  ]
+}

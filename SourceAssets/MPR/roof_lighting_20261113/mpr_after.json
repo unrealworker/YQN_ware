@@ -1,0 +1,2028 @@
+{
+  "success": true,
+  "baseline": false,
+  "map": "/Game/Maps/MPR_CAD_Warehouse_B50B57",
+  "checks": [
+    {
+      "name": "scan_shadows_invalidate_each_frame",
+      "passed": true
+    },
+    {
+      "name": "scan_releases_full_roof_indirect_occlusion",
+      "passed": true
+    },
+    {
+      "name": "scan_keeps_authored_direct_shadows",
+      "passed": true
+    },
+    {
+      "name": "open_roof_cannot_cast_hidden_shadow",
+      "passed": true
+    },
+    {
+      "name": "open_roof_cannot_occlude_indirect_light",
+      "passed": true
+    },
+    {
+      "name": "restore_preserves_all_authored_lighting_flags",
+      "passed": true
+    },
+    {
+      "name": "all_views_share_fixed_camera",
+      "passed": true
+    },
+    {
+      "name": "saved_map_unchanged",
+      "passed": true
+    },
+    {
+      "name": "closed_idle_does_not_tick",
+      "passed": true
+    }
+  ],
+  "states": [
+    {
+      "name": "01_closed",
+      "camera": [
+        26521.622493794544,
+        43669.598653942216,
+        37734.25058571968,
+        -40.56143951416012,
+        -112.8386840820312,
+        -8.373085525523577e-15
+      ],
+      "phase": 0.0,
+      "progress": 0.0,
+      "parts": [
+        {
+          "actor": "StaticMeshActor_2",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_4",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_6",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_8",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_10",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_12",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_14",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_16",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_18",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_22",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_24",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_26",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_28",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_30",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_32",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_34",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_35",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_36",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_37",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_38",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_41",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_42",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_43",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_44",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_45",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_46",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_66",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_67",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_68",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_69",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        }
+      ],
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\roof_lighting_20261113\\after\\mpr\\01_closed.png",
+      "sha256": "cde5242e7834271d87e95525d165a4838d079a1a34299429850c7aa33be5b7e4"
+    },
+    {
+      "name": "02_half_open",
+      "camera": [
+        26521.622493794544,
+        43669.598653942216,
+        37734.25058571968,
+        -40.56143951416012,
+        -112.8386840820312,
+        -8.373085525523577e-15
+      ],
+      "phase": 0.4947311580181122,
+      "progress": 0.49209702014923096,
+      "parts": [
+        {
+          "actor": "StaticMeshActor_2",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_4",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_6",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_8",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_10",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_12",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_14",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_16",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_18",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_22",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_24",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_26",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_28",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_30",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_32",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_34",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_35",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_36",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_37",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_38",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_41",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_42",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_43",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_44",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_45",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "StaticMeshActor_46",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_66",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_67",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_68",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_69",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096,
+            0.49209702014923096
+          ]
+        }
+      ],
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\roof_lighting_20261113\\after\\mpr\\02_half_open.png",
+      "sha256": "8de88f4081ae4b76a6cb8ee0a893d82e565a2e6dd87c088e31743f05a8a404c8"
+    },
+    {
+      "name": "03_open",
+      "camera": [
+        26521.622493794544,
+        43669.598653942216,
+        37734.25058571968,
+        -40.56143951416012,
+        -112.8386840820312,
+        -8.373085525523577e-15
+      ],
+      "phase": 1.0,
+      "progress": 1.0,
+      "parts": [
+        {
+          "actor": "StaticMeshActor_2",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_4",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_6",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_8",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_10",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_12",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_14",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_16",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_18",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_22",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_24",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_26",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_28",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_30",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_32",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_34",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_35",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_36",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_37",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_38",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_41",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_42",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_43",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_44",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_45",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_46",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_66",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_67",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_68",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_69",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        }
+      ],
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\roof_lighting_20261113\\after\\mpr\\03_open.png",
+      "sha256": "3226b371a99f27e896860575aebd580016b0947c304cb9c9ab1a4db036c9b51c"
+    },
+    {
+      "name": "04_restored",
+      "camera": [
+        26521.622493794544,
+        43669.598653942216,
+        37734.25058571968,
+        -40.56143951416012,
+        -112.8386840820312,
+        -8.373085525523577e-15
+      ],
+      "phase": 0.0,
+      "progress": 0.0,
+      "parts": [
+        {
+          "actor": "StaticMeshActor_2",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_4",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_6",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_8",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_10",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_12",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_14",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_16",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_18",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_22",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_24",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_26",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_28",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_30",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_32",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_34",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_35",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_36",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_37",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_38",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_41",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_42",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_43",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_44",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_45",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "StaticMeshActor_46",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_66",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_67",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_68",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        },
+        {
+          "actor": "BP_GHS_InstanceGroup_C_69",
+          "mesh": "HierarchicalInstancedStaticMesh",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        }
+      ],
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\roof_lighting_20261113\\after\\mpr\\04_restored.png",
+      "sha256": "16bc8f5d792e3c3da62d8c7f03a2994744fabed5a554afafddf8340cd94c49ba"
+    }
+  ],
+  "assets_saved": false,
+  "map_sha256": "67cec0faee74dd8f38e7c74c4b305aa9bd2dc0c7558efc1ed131bc4ad034a659",
+  "stage": "complete",
+  "regression_passed": true
+}

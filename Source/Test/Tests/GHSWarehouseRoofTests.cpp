@@ -390,6 +390,86 @@ bool FGHSRoofRuntimeLifecycle::RunTest(const FString&)
     return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSRoofLightingLifecycle,
+    "GHS.WarehouseRoof.ScanReleasesOcclusionAndRestoresAuthoredLighting", GHSWarehouseRoofTests::Flags)
+bool FGHSRoofLightingLifecycle::RunTest(const FString&)
+{
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);
+    if(!TestNotNull(TEXT("Fixture world"),World) || !GEngine) return false;
+    GEngine->CreateNewWorldContext(EWorldType::Game).SetCurrentWorld(World);
+    World->InitializeActorsForPlay(FURL());
+    TArray<UStaticMeshComponent*> Meshes;
+    for(int32 I=0;I<2;++I)
+    {
+        auto* Actor=World->SpawnActor<AStaticMeshActor>();
+        Actor->Tags.Add(TEXT("GHS_WarehouseRoof"));
+        auto* Mesh=Actor->GetStaticMeshComponent();
+        Mesh->SetStaticMesh(LoadObject<UStaticMesh>(nullptr,TEXT("/Engine/BasicShapes/Cube.Cube")));
+        Mesh->SetMaterial(0,LoadObject<UMaterialInterface>(nullptr,
+            TEXT("/Game/GHSZcoolSmartFactory/Roof/Materials/M_GHSRoof_Roof.M_GHSRoof_Roof")));
+        // Mixed authored settings catch a blanket enable-on-restore regression.
+        Mesh->SetCastShadow(I==0);Mesh->SetCastHiddenShadow(I==0);
+        Mesh->SetAffectDistanceFieldLighting(I==0);Mesh->SetAffectDynamicIndirectLighting(I==0);
+        Mesh->SetAffectIndirectLightingWhileHidden(I==0);Mesh->SetVisibleInRayTracing(I==0);
+        Mesh->ShadowCacheInvalidationBehavior=I==0?EShadowCacheInvalidationBehavior::Rigid:EShadowCacheInvalidationBehavior::Static;
+        Meshes.Add(Mesh);
+    }
+    auto* Owner=World->SpawnActor<AActor>();
+    auto* Component=NewObject<UGHSWarehouseRoofComponent>(Owner);
+    Owner->AddInstanceComponent(Component);Component->RegisterComponent();Component->InitializeRoof();Owner->DispatchBeginPlay();
+    const auto CheckRestored=[&]()
+    {
+        for(int32 I=0;I<Meshes.Num();++I)
+        {
+            const auto* Mesh=Meshes[I];const bool Expected=I==0;
+            TestEqual(TEXT("Authored shadow setting restored"),bool(Mesh->CastShadow),Expected);
+            TestEqual(TEXT("Authored hidden shadow restored"),bool(Mesh->bCastHiddenShadow),Expected);
+            TestEqual(TEXT("Authored distance field lighting restored"),bool(Mesh->bAffectDistanceFieldLighting),Expected);
+            TestEqual(TEXT("Authored dynamic indirect lighting restored"),bool(Mesh->bAffectDynamicIndirectLighting),Expected);
+            TestEqual(TEXT("Authored hidden indirect lighting restored"),bool(Mesh->bAffectIndirectLightingWhileHidden),Expected);
+            TestEqual(TEXT("Authored ray tracing visibility restored"),bool(Mesh->bVisibleInRayTracing),Expected);
+            TestTrue(TEXT("Authored shadow cache behavior restored"),Mesh->ShadowCacheInvalidationBehavior==
+                (Expected?EShadowCacheInvalidationBehavior::Rigid:EShadowCacheInvalidationBehavior::Static));
+        }
+    };
+    const auto CheckReveal=[&](bool bOpen)
+    {
+        for(int32 I=0;I<Meshes.Num();++I)
+        {
+            const auto* Mesh=Meshes[I];
+            TestFalse(TEXT("A revealed roof cannot occlude distance field light"),Mesh->bAffectDistanceFieldLighting);
+            TestFalse(TEXT("A revealed roof cannot occlude Lumen indirect light"),Mesh->bAffectDynamicIndirectLighting);
+            TestFalse(TEXT("A revealed roof cannot remain in hidden GI"),Mesh->bAffectIndirectLightingWhileHidden);
+            TestFalse(TEXT("A revealed roof cannot remain opaque in ray tracing"),Mesh->bVisibleInRayTracing);
+            TestFalse(TEXT("A revealed roof cannot cast hidden shadows"),Mesh->bCastHiddenShadow);
+            TestEqual(TEXT("Masked shadow remains during scan, but is absent after opening"),bool(Mesh->CastShadow),!bOpen && I==0);
+            if(!bOpen) TestTrue(TEXT("Opacity-only animation invalidates VSM every frame"),
+                Mesh->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Always);
+        }
+    };
+    CheckRestored();
+    const auto Closed=Component->CaptureReplayState();
+    TestTrue(TEXT("Opening succeeds"),Component->OpenRoof());CheckReveal(false);
+    Component->TickComponent(.4f,LEVELTICK_All,nullptr);CheckReveal(false);
+    const auto HalfOpen=Component->CaptureReplayState();
+    Component->RestoreRoof();CheckReveal(false);
+    Component->TickComponent(.275f,LEVELTICK_All,nullptr);CheckRestored();
+    Component->RestoreReplayState(HalfOpen,true);CheckReveal(false);
+    Component->TickComponent(.4f,LEVELTICK_All,nullptr);CheckReveal(true);
+    TestFalse(TEXT("Open roof has no continuous shadow invalidation tick"),Component->IsComponentTickEnabled());
+    const auto Open=Component->CaptureReplayState();
+    Component->RestoreRoof(false);CheckRestored();
+    Component->RestoreReplayState(Open,true);CheckReveal(true);
+    Component->RestoreRoof();CheckReveal(false);
+    Component->TickComponent(.55f,LEVELTICK_All,nullptr);CheckRestored();
+    Component->RestoreReplayState(HalfOpen,true);CheckReveal(false);
+    Component->RestoreReplayState(Closed,true);CheckRestored();
+    Component->OpenRoof();CheckReveal(false);Component->ResetForWorld();CheckRestored();
+    TestFalse(TEXT("World teardown leaves no lighting update tick"),Component->IsComponentTickEnabled());
+    GEngine->DestroyWorldContext(World);World->DestroyWorld(false);
+    return true;
+}
+
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSRoofMissingMap,
     "GHS.WarehouseRoof.MissingRoofMapDoesNotLockInteriorOrTick", GHSWarehouseRoofTests::Flags)
 bool FGHSRoofMissingMap::RunTest(const FString&)

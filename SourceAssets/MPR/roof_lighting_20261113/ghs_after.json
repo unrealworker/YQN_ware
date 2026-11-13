@@ -1,0 +1,183 @@
+{
+  "success": true,
+  "baseline": false,
+  "map": "/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory",
+  "checks": [
+    {
+      "name": "scan_shadows_invalidate_each_frame",
+      "passed": true
+    },
+    {
+      "name": "scan_releases_full_roof_indirect_occlusion",
+      "passed": true
+    },
+    {
+      "name": "scan_keeps_authored_direct_shadows",
+      "passed": true
+    },
+    {
+      "name": "open_roof_cannot_cast_hidden_shadow",
+      "passed": true
+    },
+    {
+      "name": "open_roof_cannot_occlude_indirect_light",
+      "passed": true
+    },
+    {
+      "name": "restore_preserves_all_authored_lighting_flags",
+      "passed": true
+    },
+    {
+      "name": "all_views_share_fixed_camera",
+      "passed": true
+    },
+    {
+      "name": "saved_map_unchanged",
+      "passed": true
+    },
+    {
+      "name": "closed_idle_does_not_tick",
+      "passed": true
+    }
+  ],
+  "states": [
+    {
+      "name": "01_closed",
+      "camera": [
+        35145.91266271779,
+        60636.85865731022,
+        60229.91820024874,
+        -42.99999999999996,
+        -109.99999999999997,
+        8.697719514981521e-15
+      ],
+      "phase": 0.0,
+      "progress": 0.0,
+      "parts": [
+        {
+          "actor": "StaticMeshActor_228",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        }
+      ],
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\roof_lighting_20261113\\after\\ghs\\01_closed.png",
+      "sha256": "9a5324b297df071347ff9875179125c8e77ce31037574bf9f190cb9489863c09"
+    },
+    {
+      "name": "02_half_open",
+      "camera": [
+        35145.91266271779,
+        60636.85865731022,
+        60229.91820024874,
+        -42.99999999999996,
+        -109.99999999999997,
+        8.697719514981521e-15
+      ],
+      "phase": 0.4960055947303772,
+      "progress": 0.4940085709095001,
+      "parts": [
+        {
+          "actor": "StaticMeshActor_228",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.ALWAYS: 1>"
+          },
+          "material_progress": [
+            0.4940085709095001,
+            0.4940085709095001,
+            0.4940085709095001,
+            0.4940085709095001,
+            0.4940085709095001
+          ]
+        }
+      ],
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\roof_lighting_20261113\\after\\ghs\\02_half_open.png",
+      "sha256": "9e97320dd277cadad00322434ef894a79e4893f4ca595a4c5f3b9cec03ee7ccd"
+    },
+    {
+      "name": "03_open",
+      "camera": [
+        35145.91266271779,
+        60636.85865731022,
+        60229.91820024874,
+        -42.99999999999996,
+        -109.99999999999997,
+        8.697719514981521e-15
+      ],
+      "phase": 1.0,
+      "progress": 1.0,
+      "parts": [
+        {
+          "actor": "StaticMeshActor_228",
+          "mesh": "StaticMeshComponent0",
+          "hidden": true,
+          "flags": {
+            "cast_shadow": false,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": false,
+            "affect_dynamic_indirect_lighting": false,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": false,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        }
+      ],
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\roof_lighting_20261113\\after\\ghs\\03_open.png",
+      "sha256": "14a62b324154f16c5261ade72a58b72837a8a34bfd272af48eed8c42b2db9d7d"
+    },
+    {
+      "name": "04_restored",
+      "camera": [
+        35145.91266271779,
+        60636.85865731022,
+        60229.91820024874,
+        -42.99999999999996,
+        -109.99999999999997,
+        8.697719514981521e-15
+      ],
+      "phase": 0.0,
+      "progress": 0.0,
+      "parts": [
+        {
+          "actor": "StaticMeshActor_228",
+          "mesh": "StaticMeshComponent0",
+          "hidden": false,
+          "flags": {
+            "cast_shadow": true,
+            "cast_hidden_shadow": false,
+            "affect_distance_field_lighting": true,
+            "affect_dynamic_indirect_lighting": true,
+            "affect_indirect_lighting_while_hidden": false,
+            "visible_in_ray_tracing": true,
+            "shadow_cache_invalidation_behavior": "<ShadowCacheInvalidationBehavior.AUTO: 0>"
+          },
+          "material_progress": []
+        }
+      ],
+      "path": "D:\\UEPro\\Test\\Saved\\MPR\\roof_lighting_20261113\\after\\ghs\\04_restored.png",
+      "sha256": "9c824fd12888c476f974f2414f9ac5ddb1c6697b51f078be7c34dde9d50815f3"
+    }
+  ],
+  "assets_saved": false,
+  "map_sha256": "1a28e3301d524bbb9aa0a32556e684d1468d4c7f095544e8a3430599e5a5aa01",
+  "stage": "complete",
+  "regression_passed": true
+}

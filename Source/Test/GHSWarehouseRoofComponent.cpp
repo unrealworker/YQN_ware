@@ -106,6 +106,12 @@ void UGHSWarehouseRoofComponent::InitializeRoof()
             auto& Part=RoofParts.AddDefaulted_GetRef();
             Part.Actor=*It;Part.Mesh=Mesh;
             Part.bActorHidden=It->IsHidden();Part.bMeshVisible=Mesh->IsVisible();Part.bMeshHidden=Mesh->bHiddenInGame;
+            Part.bCastShadow=Mesh->CastShadow;Part.bCastHiddenShadow=Mesh->bCastHiddenShadow;
+            Part.bAffectDistanceFieldLighting=Mesh->bAffectDistanceFieldLighting;
+            Part.bAffectDynamicIndirectLighting=Mesh->bAffectDynamicIndirectLighting;
+            Part.bAffectIndirectLightingWhileHidden=Mesh->bAffectIndirectLightingWhileHidden;
+            Part.bVisibleInRayTracing=Mesh->bVisibleInRayTracing;
+            Part.ShadowCacheInvalidationBehavior=Mesh->ShadowCacheInvalidationBehavior;
             for(int32 Slot=0;Slot<Mesh->GetNumMaterials();++Slot) Part.SourceMaterials.Add(Mesh->GetMaterial(Slot));
             if(!bMPRRoof || Mesh->GetStaticMesh()->GetName()==TEXT("SM_MPR4_RoofSkin_00")) RoofMesh=Mesh;
         }
@@ -130,6 +136,33 @@ void UGHSWarehouseRoofComponent::SetRoofHidden(bool bHidden)
     }
 }
 
+void UGHSWarehouseRoofComponent::UpdateRoofLighting()
+{
+    const bool bClosed=Transition.IsClosed();
+    for(auto& Part:RoofParts) if(IsValid(Part.Mesh))
+    {
+        auto* Mesh=Part.Mesh.Get();
+        // Distance fields and cached Lumen cards describe the uncut mesh, not
+        // this frame's scan mask. Exclude only the roof from these occluders
+        // until fully closed; normal raster shadows still follow the mask.
+        Mesh->SetAffectDistanceFieldLighting(bClosed && Part.bAffectDistanceFieldLighting);
+        Mesh->SetAffectDynamicIndirectLighting(bClosed && Part.bAffectDynamicIndirectLighting);
+        Mesh->SetAffectIndirectLightingWhileHidden(bClosed && Part.bAffectIndirectLightingWhileHidden);
+        Mesh->SetVisibleInRayTracing(bClosed && Part.bVisibleInRayTracing);
+        Mesh->SetCastHiddenShadow(bClosed && Part.bCastHiddenShadow);
+        Mesh->SetCastShadow(!Transition.IsOpen() && Part.bCastShadow);
+        // Auto only knows transform/WPO changes. Our opacity-only MID scan
+        // needs per-frame shadow invalidation during the short transition.
+        const auto CacheBehavior=Transition.IsTransitioning()?EShadowCacheInvalidationBehavior::Always:
+            Part.ShadowCacheInvalidationBehavior;
+        if(Mesh->ShadowCacheInvalidationBehavior!=CacheBehavior)
+        {
+            Mesh->ShadowCacheInvalidationBehavior=CacheBehavior;
+            Mesh->MarkRenderStateDirty();
+        }
+    }
+}
+
 bool UGHSWarehouseRoofComponent::OpenRoof(bool bFast)
 {
     if(!HasRoof()) InitializeRoof();
@@ -139,6 +172,7 @@ bool UGHSWarehouseRoofComponent::OpenRoof(bool bFast)
     // opaque pieces floating above the interior until the end of the animation.
     if(!ApplyDissolveMaterials()) return false;
     Transition.Open(bFast);
+    UpdateRoofLighting();
     if(Transition.IsOpen())
     {
         SetRoofHidden(true);
@@ -216,6 +250,7 @@ void UGHSWarehouseRoofComponent::RestoreSourceMaterials()
 void UGHSWarehouseRoofComponent::RestoreRoof(bool bAnimate)
 {
     Transition.Restore(bAnimate && HasRoof());
+    UpdateRoofLighting();
     UpdateShellVisibility();
     SetComponentTickEnabled(Transition.IsTransitioning());
     if(!HasRoof()) return;
@@ -234,6 +269,7 @@ void UGHSWarehouseRoofComponent::TickComponent(float DeltaTime,ELevelTick TickTy
     if(!HasRoof()) { RestoreRoof(false); return; }
     if(!Transition.IsTransitioning()) { SetComponentTickEnabled(false); return; }
     Transition.Advance(DeltaTime);
+    UpdateRoofLighting();
     UpdateDissolveMaterials();
     if(Transition.IsOpen())
     {
@@ -379,6 +415,7 @@ void UGHSWarehouseRoofComponent::RestoreReplayState(const FGHSWarehouseRoofRepla
     Transition=Saved.Transition;bBuildingVisible=bSavedBuilding;
     if(HasRoof())
     {
+        UpdateRoofLighting();
         SetRoofHidden(Transition.IsOpen());
         if(Transition.IsTransitioning()) {ApplyDissolveMaterials();UpdateDissolveMaterials();}
         else RestoreSourceMaterials();
