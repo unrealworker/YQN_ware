@@ -1,0 +1,120 @@
+{
+  "success": true,
+  "source_handle": "2D457E",
+  "old_connected_components": 4,
+  "new_connected_components": 1,
+  "old_missing_center_samples": 812,
+  "new_center_samples_covered": 1001,
+  "branch_ports_verified": [
+    {
+      "index": 0,
+      "side": 1,
+      "source_handles": [
+        "2D457E",
+        "27F869"
+      ]
+    },
+    {
+      "index": 0,
+      "side": -1,
+      "source_handles": [
+        "2D457E",
+        "27F869"
+      ]
+    },
+    {
+      "index": 1,
+      "side": 1,
+      "source_handles": [
+        "2D457E",
+        "281959"
+      ]
+    },
+    {
+      "index": 1,
+      "side": -1,
+      "source_handles": [
+        "2D457E",
+        "281959"
+      ]
+    },
+    {
+      "index": 2,
+      "side": 1,
+      "source_handles": [
+        "2D457E",
+        "2832DB"
+      ]
+    },
+    {
+      "index": 2,
+      "side": -1,
+      "source_handles": [
+        "2D457E",
+        "2832DB"
+      ]
+    },
+    {
+      "index": 3,
+      "side": 1,
+      "source_handles": [
+        "2D457E",
+        "284C5D"
+      ]
+    },
+    {
+      "index": 3,
+      "side": -1,
+      "source_handles": [
+        "2D457E",
+        "284C5D"
+      ]
+    },
+    {
+      "index": 4,
+      "side": 1,
+      "source_handles": [
+        "2D457E",
+        "286850"
+      ]
+    },
+    {
+      "index": 4,
+      "side": -1,
+      "source_handles": [
+        "2D457E",
+        "286850"
+      ]
+    }
+  ],
+  "infeed_endpoint_connected": [
+    -17.49353,
+    -65.86867000000001
+  ],
+  "geometry": {
+    "name": "SM_MPR_CAD_2D457E_Connected",
+    "fbx": "SourceAssets/MPR/conveyor_connection_20261113/SM_MPR_CAD_2D457E_Connected.fbx",
+    "material_roles": [
+      "Metal",
+      "Rubber",
+      "Cobalt"
+    ],
+    "bounds_m": [
+      [
+        -20.44778823,
+        -14.50708841
+      ],
+      [
+        -65.885,
+        -52.86127
+      ],
+      [
+        0.0,
+        1.035
+      ]
+    ],
+    "vertices": 8148,
+    "triangles": 13904
+  },
+  "scope": "Replace only twelve instances of source 2D457E with one private mesh instance"
+}
