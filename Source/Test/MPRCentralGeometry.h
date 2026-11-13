@@ -7,6 +7,15 @@ class UInstancedStaticMeshComponent;
 /** Static, cube-instanced parts of the MPR shared distribution equipment. */
 namespace MPRCentralGeometry
 {
+    // SM_MPR_SorterSimTray is 32 cm along travel and 25 cm across travel.
+    // Shared-loop carriers reuse that asset at 1.6 XY scale.
+    inline constexpr double CentralCarrierScaleXY = 1.6;
+    inline constexpr double TransferGapCm = 2.0;
+
+    /** Fixed belt setback from a moving tray centreline. Radius=0 is a straight;
+     *  a curved return also reserves the outward sweep of the tray corners. */
+    double TransferSetbackCm(double ScaleXY, double TurnRadiusCm = 0.0);
+
     struct Bank
     {
         FVector Center = FVector::ZeroVector;

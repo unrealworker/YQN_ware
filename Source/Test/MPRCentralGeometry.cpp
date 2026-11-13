@@ -111,7 +111,9 @@ namespace MPRCentralGeometry
                     - Up * 8, FVector(Length, 3, 4), Rotation);
             }
             // Visible drive-end plate rather than a bright strip across the belt.
-            Box(Blue, Branch.End - Up * 5, FVector(4, W, 5), Rotation);
+            // Keep the drive housing inside the terminal plane. Extending it
+            // beyond End would consume the moving tray's transfer clearance.
+            Box(Blue, Branch.End - Delta / Length * 2 - Up * 5, FVector(4, W, 5), Rotation);
             const int32 SupportPairs = Length > 100 ? 2 : 1;
             for (int32 I = 0; I < SupportPairs; ++I)
             {
@@ -155,6 +157,16 @@ namespace MPRCentralGeometry
             Box(White, Mid + Forward * 16 - Right * 34 + FVector(0, 0, 11), FVector(12, 8, 16), Rotation);
             Box(Rubber, Mid + Forward * 9.7 - Right * 34 + FVector(0, 0, 12), FVector(0.5, 5, 6), Rotation);
         }
+    }
+
+    double TransferSetbackCm(double ScaleXY, double TurnRadiusCm)
+    {
+        const double HalfAcross = 12.5 * ScaleXY;
+        const double HalfAlong = 16.0 * ScaleXY;
+        const double Swept = TurnRadiusCm > 0
+            ? FMath::Sqrt(FMath::Square(TurnRadiusCm + HalfAcross) + FMath::Square(HalfAlong)) - TurnRadiusCm
+            : HalfAcross;
+        return Swept + TransferGapCm;
     }
 
     FVector CentralPoint(const Bank& Layout, double Fraction, double& HeadingRad)

@@ -3,6 +3,8 @@
 #include "GHSAutomationTestFlags.h"
 #include "Dom/JsonObject.h"
 #include "Engine/Engine.h"
+#include "Engine/StaticMesh.h"
+#include "Components/InstancedStaticMeshComponent.h"
 #include "Engine/World.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
@@ -62,12 +64,26 @@ bool FMPRSorterLayoutValidation::RunTest(const FString&)
     TestEqual(TEXT("all 22 sorters receive original parcels from the shared distributor"),ExternalInfeed,22);
     TestEqual(TEXT("two independent CAD distributor banks parsed"),Valid->DistributionBanks.Num(),2);
     int32 ManualSources=0,ExternalSources=0;TSet<int32> ConnectedMachines;
-    bool Connected=true,Continuous=true;
+    bool Connected=true,Continuous=true,FeedClear=true,BranchClear=true;
+    UStaticMesh* TrayMesh=LoadObject<UStaticMesh>(nullptr,TEXT("/Game/MPRWarehouse/SorterSimulation/Meshes/SM_MPR_SorterSimTray.SM_MPR_SorterSimTray"));
+    if(!TestNotNull(TEXT("Production tray mesh supplies the independent clearance envelope"),TrayMesh))return false;
+    const FBox TrayBounds=TrayMesh->GetBoundingBox();
+    const double OutwardHalf=-TrayBounds.Min.Y;
+    const double AlongHalf=FMath::Max(FMath::Abs(TrayBounds.Min.X),FMath::Abs(TrayBounds.Max.X));
+    TestTrue(TEXT("The real tray asset has the expected outward carrying edge"),FMath::IsNearlyEqual(OutwardHalf,12.5,.02));
     for(const auto& B:Valid->DistributionBanks)
     {
         TestEqual(TEXT("each source and destination has a physical powered connection"),B.Belts.Num(),B.Stations.Num()+B.Targets.Num());
         TestEqual(TEXT("bank destination count matches its CAD profile"),B.Targets.Num(),B.Profile==TEXT("cad64")?18:4);
-        for(const auto& Station:B.Stations){ManualSources+=Station.bManual;ExternalSources+=!Station.bManual;}
+        for(int32 I=0;I<B.Stations.Num();++I)
+        {
+            const auto& Station=B.Stations[I];ManualSources+=Station.bManual;ExternalSources+=!Station.bManual;
+            const auto& Belt=B.Belts[I];double Heading;
+            FVector Rail=MPRCentralGeometry::CentralPoint(B.Geometry,Station.Distance01,Heading);Rail.Z=Belt.End.Z;
+            const FVector Out=(Station.Drop-Rail).GetSafeNormal();
+            const double Gap=FVector::DotProduct(Belt.End-Rail,Out)-OutwardHalf*1.6;
+            FeedClear&=Gap>=1.9&&Gap<=2.1&&Belt.Start.Equals(Station.Drop,.001);
+        }
         for(int32 I=0;I<B.Targets.Num();++I)
         {
             const int32 Target=B.Targets[I];Connected&=!ConnectedMachines.Contains(Target);ConnectedMachines.Add(Target);
@@ -75,9 +91,15 @@ bool FMPRSorterLayoutValidation::RunTest(const FString&)
             const FVector Entry=M.World.TransformPosition(M.Entry),Handoff=M.World.TransformPosition(M.FeedStart);
             const FVector Pickup=M.World.TransformPosition(M.Pickup),Flow=(Belt.End-Belt.Start).GetSafeNormal();
             const double Length=(Belt.End-Belt.Start).Size(),Along=FVector::DotProduct(Handoff-Belt.Start,Flow);
-            Connected&=Length>40&&Belt.End.Equals(Entry,.001)&&Along>=0&&Along<Length
+            Connected&=Length>25&&Along>=0&&Along<Length
                 &&Handoff.Equals(Belt.Start+Flow*Along,.001)&&FVector::DotProduct(Pickup-Handoff,Flow)>0
-                &&FVector::DotProduct(Entry-Pickup,Flow)>0;
+                &&FVector::DotProduct(Belt.End-Pickup,Flow)>0&&FVector::DotProduct(Entry-Belt.End,Flow)>0;
+            double Heading;FVector Track=MPRCentralGeometry::CentralPoint(B.Geometry,
+                B.Simulation.GetConfig().TargetDistances01[size_t(I)],Heading);Track.Z=Belt.Start.Z;
+            const double CentralGap=FVector::DotProduct(Belt.Start-Track,Flow)-OutwardHalf*1.6;
+            const double TurnSweep=FMath::Sqrt(FMath::Square(M.Radius+OutwardHalf)+FMath::Square(AlongHalf))-M.Radius;
+            const double SorterGap=FVector::DotProduct(Entry-Belt.End,Flow)-TurnSweep;
+            BranchClear&=CentralGap>=1.9&&CentralGap<=2.1&&SorterGap>=1.9&&SorterGap<=2.1;
             MPRCentral::Carrier Carrier;Carrier.Phase=MPRCentral::CarrierPhase::Discharging;
             Carrier.ParcelId=1;Carrier.TargetIndex=I;Carrier.Progress01=1;
             Carrier.Distance01=B.Simulation.GetConfig().TargetDistances01[size_t(I)];
@@ -88,6 +110,67 @@ bool FMPRSorterLayoutValidation::RunTest(const FString&)
     TestEqual(TEXT("CAD120 bank uses one explicit external source"),ExternalSources,1);
     TestTrue(TEXT("all 22 powered branches connect distributor handoff through intake to the real sorter entry"),Connected&&ConnectedMachines.Num()==22);
     TestTrue(TEXT("central parcel and receiving queue meet at exactly the same handoff endpoint"),Continuous);
+    TestTrue(TEXT("All seven induction belts stop 2 cm outside the real moving tray instead of entering its centre"),FeedClear);
+    TestTrue(TEXT("All 22 branch belts clear the central tray and the receiving tray's complete curved corner sweep"),BranchClear);
+
+    // Check the produced geometry as well as its nominal endpoints: a terminal
+    // drive plate used to protrude 2 cm past End into the reserved clearance.
+    bool SolidClear=true,TurnSolidClear=true;int32 TestedTrayPoses=0,TestedTurnPoses=0;
+    UStaticMesh* Cube=LoadObject<UStaticMesh>(nullptr,TEXT("/Engine/BasicShapes/Cube.Cube"));
+    if(!TestNotNull(TEXT("Native cube geometry is available"),Cube))return false;
+    for(const auto& B:Valid->DistributionBanks)
+    {
+        TArray<UInstancedStaticMeshComponent*> Parts;
+        for(int32 I=0;I<4;++I)
+        {auto* Part=NewObject<UInstancedStaticMeshComponent>(Valid);Part->SetStaticMesh(Cube);Parts.Add(Part);}
+        TArray<MPRCentralGeometry::Feed> Stations;
+        for(const auto& S:B.Stations)if(S.bManual)
+        {MPRCentralGeometry::Feed F;F.OperatorFeet=S.Feet;F.YawDegrees=S.Yaw;F.Drop=S.Drop;Stations.Add(F);}
+        MPRCentralGeometry::Build(B.Geometry,B.Belts,Stations,Parts[0],Parts[1],Parts[2],Parts[3]);
+        TArray<FBox> FixedBoxes;
+        for(auto* Part:Parts)for(int32 I=0;I<Part->GetInstanceCount();++I)
+        {FTransform T;Part->GetInstanceTransform(I,T,true);FixedBoxes.Add(Cube->GetBoundingBox().TransformBy(T));}
+        for(const auto& Station:B.Stations)for(int32 Step=-16;Step<=16;++Step)
+        {
+            double Heading;
+            const double Fraction=Station.Distance01+Step*3./B.Simulation.GetConfig().LoopLengthCm;
+            FVector Point=MPRCentralGeometry::CentralPoint(B.Geometry,Fraction,Heading);Point.Z=103.5;
+            // Deck, belt and side rails; the inboard carriage deliberately mates
+            // with its moving column and is not part of the outward handoff.
+            const FBox Deck(FVector(-AlongHalf,-OutwardHalf,-5.5),FVector(AlongHalf,OutwardHalf,3));
+            const FBox Moving=Deck.TransformBy(FTransform(FQuat(FVector::UpVector,Heading),Point,FVector(1.6,1.6,1)));
+            for(const FBox& Fixed:FixedBoxes)
+            {
+                const FVector Overlap=Moving.Max.ComponentMin(Fixed.Max)-Moving.Min.ComponentMax(Fixed.Min);
+                SolidClear&=Overlap.GetMin()<=.03;
+            }
+            ++TestedTrayPoses;
+        }
+        for(int32 Target:B.Targets)for(int32 Step=-20;Step<=20;++Step)
+        {
+            const auto& M=Valid->Machines[Target];double Heading;
+            FVector Point=AMPRSorterSimulationActor::PointOnLoop(M.LoadFraction+Step*.003,M.Half,M.Radius,Heading);
+            Point.Z=M.Simulation.GetConfig().LoadHeightCm;
+            const FBox Deck(FVector(-AlongHalf,-OutwardHalf,-5.5),FVector(AlongHalf,OutwardHalf,3));
+            const FTransform Pose=FTransform(FQuat(FVector::UpVector,Heading),Point)*M.World;
+            // Test actual oriented deck corners against a belt's half-space.
+            // World AABBs would overestimate a rotating rectangle near a turn.
+            const FVector Entry=M.World.TransformPosition(M.Entry);
+            const auto& Branch=B.Belts[B.Stations.Num()+B.Targets.IndexOfByKey(Target)];
+            const FVector Out=(Branch.Start-Entry).GetSafeNormal();
+            const double FixedEdge=FVector::DotProduct(Branch.End-Entry,Out);
+            for(int32 Corner=0;Corner<8;++Corner)
+            {
+                const FVector Local(Corner&1?Deck.Max.X:Deck.Min.X,Corner&2?Deck.Max.Y:Deck.Min.Y,Corner&4?Deck.Max.Z:Deck.Min.Z);
+                TurnSolidClear&=FVector::DotProduct(Pose.TransformPosition(Local)-Entry,Out)<=FixedEdge-1.9;
+            }
+            ++TestedTurnPoses;
+        }
+    }
+    TestTrue(TEXT("All generated fixed parts clear the moving tray across every source port, including both sides and terminal housings"),
+        SolidClear&&TestedTrayPoses==7*33);
+    TestTrue(TEXT("The real tray corners stay outside all 22 fixed receiving belts throughout their return bends"),
+        TurnSolidClear&&TestedTurnPoses==22*41);
 
     const TCHAR* Names[]={TEXT("missing profiles"),TEXT("null final world transform"),TEXT("null CAD120 level"),TEXT("duplicate CAD120 bin"),TEXT("missing cart mesh"),TEXT("wrong cart grouping"),TEXT("invalid infeed side")};
     for(int32 Case=0;Case<7;++Case)

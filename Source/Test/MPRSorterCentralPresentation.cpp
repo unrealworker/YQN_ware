@@ -68,7 +68,12 @@ bool AMPRSorterSimulationActor::LoadCentralDistribution()
         for(const auto& S:B.Stations)
         {
             double Heading;FVector Rail=MPRCentralGeometry::CentralPoint(B.Geometry,S.Distance01,Heading);Rail.Z=FeedSurface;
-            MPRCentralGeometry::Belt Belt;Belt.Start=S.Drop;Belt.End=Rail;Belt.WidthCm=42;B.Belts.Add(Belt);
+            // The fixed induction belt must end outside the moving tray, not
+            // at its centre. The 22 cm offset leaves a 2 cm transfer gap.
+            const FVector Out=(S.Drop-Rail).GetSafeNormal();
+            MPRCentralGeometry::Belt Belt;Belt.Start=S.Drop;
+            Belt.End=Rail+Out*MPRCentralGeometry::TransferSetbackCm(MPRCentralGeometry::CentralCarrierScaleXY);
+            Belt.WidthCm=42;B.Belts.Add(Belt);
         }
         for(int32 Index=0;Index<Machines.Num();++Index)
         {
@@ -84,7 +89,12 @@ bool AMPRSorterSimulationActor::LoadCentralDistribution()
             M.Pickup=M.World.InverseTransformPosition(Load-Out*20.);
             M.Entry=LoadLocal;
             B.Targets.Add(Index);C.TargetDistances01.push_back(Distance);
-            MPRCentralGeometry::Belt Belt;Belt.Start=Track+Out*20.;Belt.End=Load;Belt.WidthCm=BankIndex==0?50.:44.;B.Belts.Add(Belt);
+            MPRCentralGeometry::Belt Belt;
+            Belt.Start=Track+Out*MPRCentralGeometry::TransferSetbackCm(MPRCentralGeometry::CentralCarrierScaleXY);
+            // At the receiving machine the tray rounds a semicircle. Reserve
+            // its corner sweep, while the original pickup stays on this belt.
+            Belt.End=Load-Out*MPRCentralGeometry::TransferSetbackCm(1.,M.Radius);
+            Belt.WidthCm=BankIndex==0?50.:44.;B.Belts.Add(Belt);
         }
         std::string Message;
         if(B.Targets.Num()!=(BankIndex==0?18:4)||!B.Simulation.Initialize(C,Message))
@@ -229,9 +239,10 @@ void AMPRSorterSimulationActor::UpdateCentralDistribution()
         {
             double Heading;FVector Point=MPRCentralGeometry::CentralPoint(B.Geometry,C.Distance01,Heading);
             const FQuat Turn(FVector::UpVector,Heading);
-            ColumnTransforms.Add(FTransform(Turn,Point,FVector(1.6,1.6,B.Geometry.FrameHeightCm/212.)));
+            const double Scale=MPRCentralGeometry::CentralCarrierScaleXY;
+            ColumnTransforms.Add(FTransform(Turn,Point,FVector(Scale,Scale,B.Geometry.FrameHeightCm/212.)));
             Point.Z=CentralLiftHeight(C);
-            TrayTransforms.Add(FTransform(Turn,Point,FVector(1.6,1.6,1.)));
+            TrayTransforms.Add(FTransform(Turn,Point,FVector(Scale,Scale,1.)));
             ParcelTransforms.Add(C.ParcelId?FTransform(Turn,CentralParcelPoint(B,C),FVector(.22,.16,.05)):Hidden);
             ParcelIds.Add(C.ParcelId);
         }
