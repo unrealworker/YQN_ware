@@ -166,7 +166,7 @@ private:
     UPROPERTY(Transient) TObjectPtr<UStaticMeshComponent> RoofMesh;
     UPROPERTY(Transient) TArray<FGHSWarehouseRoofPart> RoofParts;
     bool bMPRRoof=false;
-    /** Soft references preserve cooker discovery without loading warehouse shading on the globe. */
+    /** Lazy references keep warehouse shading off the globe. DefaultGame.ini explicitly cooks both ScanReveal directories. */
     UPROPERTY() TArray<TSoftObjectPtr<UMaterialInterface>> DissolveTemplates;
     FGHSWarehouseRoofTransition Transition;
 };

@@ -202,8 +202,17 @@ bool UGHSWarehouseRoofComponent::ApplyDissolveMaterials()
                 UMaterialInterface* Template=nullptr;
                 const FString SourceName=Source && Source->GetMaterial()?Source->GetMaterial()->GetName():FString();
                 const FString TemplateName=TEXT("M_Scan_")+SourceName;
+                FString TemplatePath=TemplateName;
                 for(const auto& Candidate:DissolveTemplates)
-                    if(Candidate.GetAssetName()==TemplateName) {Template=Candidate.LoadSynchronous();break;}
+                    if(Candidate.GetAssetName()==TemplateName)
+                    {
+                        TemplatePath=Candidate.ToSoftObjectPath().ToString();
+                        Template=Candidate.LoadSynchronous();
+                        break;
+                    }
+                if(!Template)
+                    UE_LOG(LogTemp,Warning,TEXT("Roof reveal material unavailable: source='%s', template='%s'. Check the ScanReveal cook directories."),
+                        *GetPathNameSafe(Source),*TemplatePath);
                 Part.DissolveInstances.Add(Template?UMaterialInstanceDynamic::Create(Template,this):nullptr);
             }
         }
