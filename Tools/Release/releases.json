@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "project": "YQN_ware",
+  "platform": "Win64",
+  "configuration": "Shipping",
+  "activeBaseline": "1.0.0",
+  "deployedVersion": "1.0.0",
+  "releases": [
+    {
+      "version": "1.0.0",
+      "kind": "full-baseline",
+      "status": "registered",
+      "sourceCommit": "287f6c31c0b5035b34183791c08059e322719c3e",
+      "baselineManifestSHA256": "4b626dc201f10a0c86fd7931f3a252430e4b42ce7624f823e700f08ab537b8be",
+      "artifact": "Deployment/Releases/1.0.0",
+      "notes": "当前运行的首页及屋顶修复版；从已有包注册不可变基线，不重新构建"
+    },
+    {
+      "version": "1.0.1",
+      "kind": "cumulative-patch",
+      "status": "verified",
+      "baseVersion": "1.0.0",
+      "sourceCommit": "c0dc23849f2918c81f78264e3eccd479638b8e91",
+      "notes": "提亮地球海洋和背光区域，柔化陆地颜色以匹配浅蓝首页；按用户要求暂不部署",
+      "artifact": "Deployment/Patches/YQN-Warehouse-1.0.0-to-1.0.1-Win64-Patch.zip",
+      "sha256": "830541c264b881346c9ffadb79b5ec76a2a3198381082048b4104e68bf73d4eb",
+      "bytes": 186733,
+      "payloadBytes": 258937,
+      "verification": {
+        "verifiedAt": "2026-11-17T15:05:27.0335525+08:00",
+        "nativePatchPayloadFiles": 3,
+        "baselineFileHashesRestored": 166,
+        "installerChecks": 15,
+        "releasePreflightTests": 4,
+        "runtimeReport": "Saved/Packaging/Versioning/1.0.1/RuntimeVerification.json",
+        "runtimeReportSHA256": "FA2CB3DD2FD67869D64D998CC7559078190167C8A61F83580D76683CE62D01A1",
+        "installerReport": "Saved/Packaging/Versioning/InstallerTests-e0f3284935da442a8785232f5d562dc6/results.json",
+        "deferredDeployment": true
+      }
+    }
+  ]
+}
