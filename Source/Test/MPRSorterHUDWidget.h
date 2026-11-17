@@ -17,5 +17,5 @@ protected:
     virtual TSharedRef<SWidget> RebuildWidget() override;
 private:
     UPROPERTY(Transient) TWeakObjectPtr<AMPRSorterSimulationActor> Owner;
-    bool bCollapsed=false;
+    bool bCollapsed=true;
 };
