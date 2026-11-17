@@ -5,6 +5,7 @@ The existing warehouse map is loaded asynchronously at runtime and never resaved
 """
 import json
 import math
+import runpy
 from pathlib import Path
 import unreal as u
 
@@ -175,6 +176,9 @@ for i,(key,prop) in enumerate([('color',u.MaterialProperty.MP_BASE_COLOR),('norm
         ambient.set_editor_property('const_b',.15)
         u.MaterialEditingLibrary.connect_material_expressions(node,'RGB',ambient,'A')
         u.MaterialEditingLibrary.connect_material_property(ambient,'',u.MaterialProperty.MP_EMISSIVE_COLOR)
+# Keep regenerated assets consistent with the material-only palette update.
+runpy.run_path(str(ROOT / 'Tools/GlobeNavigation/apply_light_palette.py'),
+               run_name='earth_palette')['apply_palette'](mat)
 u.MaterialEditingLibrary.recompile_material(mat)
 mesh.set_material(0,mat)
 assets.save_loaded_asset(mat)
