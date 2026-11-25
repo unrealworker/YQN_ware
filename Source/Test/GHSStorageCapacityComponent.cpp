@@ -58,6 +58,29 @@ bool UGHSStorageCapacityComponent::InitializeForWorld()
         || !Root->TryGetArrayField(TEXT("meshes"),Meshes))
     { InitializationError=TEXT("Storage metadata is incomplete"); return false; }
     RackTotalSlots=int32(RackCount); FloorTotalSlots=int32(FloorCount);
+    const auto Inventory=FGHSLocationInventory::Shared();
+    TMap<FString,TSharedPtr<FJsonObject>> CadGroups;
+    TMap<FString,FString> InventoryMaterials;
+    FString ExtraText;TSharedPtr<FJsonObject> Extra;
+    const FString DataRoot=FPaths::ProjectContentDir()/TEXT("GHSTwinUI/data");
+    if(FFileHelper::LoadFileToString(ExtraText,*(DataRoot/TEXT("scene-bindings.json")))
+        && FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(ExtraText),Extra) && Extra)
+    {
+        const TArray<TSharedPtr<FJsonValue>>* Rows=nullptr;
+        if(Extra->TryGetArrayField(TEXT("groups"),Rows)) for(const auto& Value:*Rows)
+        {
+            const auto Row=Value->AsObject();FString Mesh;
+            if(Row && Row->TryGetStringField(TEXT("mesh"),Mesh)) CadGroups.Add(Mesh,Row);
+        }
+    }
+    Extra.Reset();ExtraText.Empty();
+    if(FFileHelper::LoadFileToString(ExtraText,*(DataRoot/TEXT("inventory-materials.json")))
+        && FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(ExtraText),Extra) && Extra)
+    {
+        const TSharedPtr<FJsonObject>* Materials=nullptr;double Version=0;
+        if(Extra->TryGetNumberField(TEXT("schemaVersion"),Version) && Version==1 && Extra->TryGetObjectField(TEXT("materials"),Materials))
+            for(const auto& Entry:(*Materials)->Values) {FString Path;if(Entry.Value->TryGetString(Path)) InventoryMaterials.Add(FString(Entry.Key.ToView()),Path);}
+    }
     TMap<FString,TSharedPtr<FJsonObject>> GroupsByTag,MeshesByName;
     for(const auto& Value:*Definitions)
         if(const auto Definition=Value->AsObject(); Definition.IsValid())
@@ -98,6 +121,7 @@ bool UGHSStorageCapacityComponent::InitializeForWorld()
                     if(Low.Num()!=3 || High.Num()!=3) continue;
                     FSlot Item;
                     Item.Index=Slot->GetIntegerField(TEXT("index"));
+                    Item.Level=Slot->GetIntegerField(TEXT("level"));Item.Column=Slot->GetIntegerField(TEXT("column"));
                     Item.Bounds=FBox(FVector(Low[0]->AsNumber(),Low[1]->AsNumber(),Low[2]->AsNumber()),
                         FVector(High[0]->AsNumber(),High[1]->AsNumber(),High[2]->AsNumber()));
                     Group.Slots.Add(Item);
@@ -114,21 +138,69 @@ bool UGHSStorageCapacityComponent::InitializeForWorld()
             }
             if(!bMaterialsReady)
             { InitializationError=TEXT("Missing capacity mask material: ")+Component->GetPathName(); continue; }
+            // A group gets inventory bits only when every cargo material supports the same contract.
+            TMap<int32,UMaterialInterface*> Replacements;
+            bool bInventoryMaterialsReady=Inventory->IsReady() && Group.SlotsPerInstance>0 && Group.SlotsPerInstance<=36;
+            for(int32 Slot=Group.bRack?3:0;Slot<Component->GetNumMaterials() && bInventoryMaterialsReady;++Slot)
+            {
+                UMaterialInterface* Source=Component->GetMaterial(Slot);
+                const FString* Path=Source?InventoryMaterials.Find(Source->GetPathName()):nullptr;
+                UMaterialInterface* Replacement=Path?LoadObject<UMaterialInterface>(nullptr,**Path):nullptr;
+                float Marker=0,CapacityValue=0;
+                if(!Replacement || !Replacement->GetScalarParameterValue(FMaterialParameterInfo(TEXT("InventoryMaskVersion")),Marker) || Marker!=1.f
+                    || !Replacement->GetScalarParameterValue(FMaterialParameterInfo(TEXT("StorageCapacity")),CapacityValue)) bInventoryMaterialsReady=false;
+                else Replacements.Add(Slot,Replacement);
+            }
+            Group.InventoryMasks.SetNum(Group.InstanceCount);
+            Group.InventoryCadIds.SetNum(Group.InstanceCount);
+            if(bInventoryMaterialsReady)
+            {
+                FString SourceMesh;Definition->TryGetStringField(TEXT("source_mesh"),SourceMesh);
+                const auto* CadGroup=CadGroups.Find(SourceMesh);
+                const TArray<TSharedPtr<FJsonValue>>* CadInstances=nullptr;
+                if(CadGroup && (*CadGroup)->TryGetArrayField(TEXT("instances"),CadInstances) && CadInstances->Num()==Group.InstanceCount)
+                    for(int32 Instance=0;Instance<Group.InstanceCount;++Instance)
+                    {
+                        const auto Cad=(*CadInstances)[Instance]->AsObject();FString Id;const TArray<TSharedPtr<FJsonValue>>* Position=nullptr;
+                        FTransform Actual;
+                        if(!Cad || !Cad->TryGetStringField(TEXT("id"),Id) || !Cad->TryGetArrayField(TEXT("position_m"),Position) || Position->Num()!=3
+                            || !Component->GetInstanceTransform(Instance,Actual,true)) continue;
+                        const FVector Expected((*Position)[0]->AsNumber()*100,-(*Position)[1]->AsNumber()*100,(*Position)[2]->AsNumber()*100);
+                        if(!Actual.GetLocation().Equals(Expected,.1) || !Inventory->MatchesTransform(Id,MeshName,Actual)) continue;
+                        Group.InventoryCadIds[Instance]=Id;
+                        auto Bind=[&](int32 LocalSlot,int32 Level,int32 Column)
+                        {
+                            const auto* Location=Inventory->Find(Id,Level,Column);
+                            if(!Location || Location->State==EGHSInventoryState::Unknown || !Group.InventoryMasks[Instance].Set(LocalSlot,Location->State)) return;
+                            ++BoundInventorySlots;
+                            if(Location->State==EGHSInventoryState::Empty) ++EmptyInventorySlots;else ++OccupiedInventorySlots;
+                        };
+                        if(Group.bRack) for(const FSlot& Slot:Group.Slots) Bind(Slot.Index,Slot.Level,Slot.Column);
+                        else Bind(0,0,0);
+                    }
+            }
             // Authored Always compensated for MID-only opacity-mask changes. Keep the
             // same shadows, but only force them live while capacity is being edited.
             Group.bRestoreAlwaysShadowInvalidation=Component->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Always;
             if(Group.bRestoreAlwaysShadowInvalidation)
                 Component->ShadowCacheInvalidationBehavior=EShadowCacheInvalidationBehavior::Auto;
             // Assign once. Slider updates never touch instance data or the HISM tree.
-            if(Component->NumCustomDataFloats<1) Component->SetNumCustomDataFloats(1);
+            Group.OriginalCustomDataFloats=Component->NumCustomDataFloats;
+            Group.OriginalCustomData=Component->PerInstanceSMCustomData;
+            if(Component->NumCustomDataFloats<(bInventoryMaterialsReady?5:1)) Component->SetNumCustomDataFloats(bInventoryMaterialsReady?5:1);
             for(int32 Index=0;Index<Group.InstanceCount;++Index)
+            {
                 Component->SetCustomDataValue(Index,0,float(Group.BaseSlot+Index*Group.SlotsPerInstance),false);
+                if(bInventoryMaterialsReady) for(int32 Word=0;Word<4;++Word)
+                    Component->SetCustomDataValue(Index,Word+1,Group.InventoryMasks[Index].Values[Word],false);
+            }
             Component->MarkRenderStateDirty();
             auto& Cache=Group.bRack?RackCache:FloorCache;
             auto& Materials=Group.bRack?RackMaterials:FloorMaterials;
             for(int32 Slot=0;Slot<Component->GetNumMaterials();++Slot)
             {
-                UMaterialInterface* Source=Component->GetMaterial(Slot);
+                UMaterialInterface* Original=Component->GetMaterial(Slot);
+                UMaterialInterface* Source=bInventoryMaterialsReady && Replacements.Contains(Slot)?Replacements[Slot]:Original;
                 float ExistingCapacity=0;
                 if(!Source || !Source->GetScalarParameterValue(FMaterialParameterInfo(TEXT("StorageCapacity")),ExistingCapacity)) continue;
                 UMaterialInstanceDynamic* Instance=Cache.FindRef(Source);
@@ -139,7 +211,7 @@ bool UGHSStorageCapacityComponent::InitializeForWorld()
                     ++ParameterWrites;
                     Cache.Add(Source,Instance); Materials.Add(Instance);
                 }
-                SourceMaterials.Add(Source); SourceMaterialSlots.Emplace(Component,Slot);
+                SourceMaterials.Add(Original); SourceMaterialSlots.Emplace(Component,Slot);
                 Component->SetMaterial(Slot,Instance);
             }
             GroupByComponent.Add(Component,Groups.Num());
@@ -150,6 +222,35 @@ bool UGHSStorageCapacityComponent::InitializeForWorld()
     bInitialized=!Groups.IsEmpty();
     if(!bInitialized && InitializationError.IsEmpty()) InitializationError=TEXT("No prepared storage components found in this world");
     return bInitialized;
+}
+
+void UGHSStorageCapacityComponent::VerifyInventoryInstance(UInstancedStaticMeshComponent* Component,int32 Instance,const FTransform& Transform)
+{
+    const int32* GroupIndex=GroupByComponent.Find(Component);
+    if(!GroupIndex) return;
+    auto& Group=Groups[*GroupIndex];
+    if(!Group.InventoryMasks.IsValidIndex(Instance) || Group.InventoryCadIds[Instance].IsEmpty()) return;
+    auto& Mask=Group.InventoryMasks[Instance];FGHSInventoryMask Desired;
+    const auto Inventory=FGHSLocationInventory::Shared();
+    if(Component->GetStaticMesh() && Inventory->MatchesTransform(Group.InventoryCadIds[Instance],Component->GetStaticMesh()->GetName(),Transform))
+    {
+        auto Bind=[&](int32 Slot,int32 Level,int32 Column)
+        {if(const auto* Location=Inventory->Find(Group.InventoryCadIds[Instance],Level,Column)) Desired.Set(Slot,Location->State);};
+        if(Group.bRack) for(const FSlot& Slot:Group.Slots) Bind(Slot.Index,Slot.Level,Slot.Column);else Bind(0,0,0);
+    }
+    bool bChanged=false;
+    for(int32 Word=0;Word<4;++Word) bChanged|=Mask.Values[Word]!=Desired.Values[Word];
+    if(!bChanged) return;
+    for(int32 Slot=0;Slot<Group.SlotsPerInstance;++Slot)
+    {
+        if(Mask.IsKnown(Slot))
+        {--BoundInventorySlots;if((uint32(Mask.Values[Slot/18])&(1u<<(Slot%18)))!=0) --OccupiedInventorySlots;else --EmptyInventorySlots;}
+        if(Desired.IsKnown(Slot))
+        {++BoundInventorySlots;if((uint32(Desired.Values[Slot/18])&(1u<<(Slot%18)))!=0) ++OccupiedInventorySlots;else ++EmptyInventorySlots;}
+    }
+    Mask=Desired;
+    for(int32 Word=0;Word<4;++Word) Component->SetCustomDataValue(Instance,Word+1,Mask.Values[Word],false);
+    Component->MarkRenderStateDirty();
 }
 
 void UGHSStorageCapacityComponent::SetCapacity(float Rack,float Floor)
@@ -241,13 +342,18 @@ bool UGHSStorageCapacityComponent::IsStorageHitVisible(UPrimitiveComponent* Comp
     const FGroup& Group=Groups[*GroupIndex];
     if(InstanceIndex<0 || InstanceIndex>=Group.InstanceCount) return false;
     const int32 GlobalBase=Group.BaseSlot+InstanceIndex*Group.SlotsPerInstance;
-    if(!Group.bRack) return GHSStorageCapacity::IsSlotVisible(GlobalBase,FloorTotalSlots,FloorCapacity);
+    const auto InventoryVisible=[&](int32 Slot,bool Fallback)
+    {
+        if(!Group.InventoryMasks.IsValidIndex(InstanceIndex) || !Group.InventoryMasks[InstanceIndex].IsKnown(Slot)) return Fallback;
+        return (uint32(Group.InventoryMasks[InstanceIndex].Values[Slot/18])&(1u<<(Slot%18)))!=0;
+    };
+    if(!Group.bRack) return InventoryVisible(0,GHSStorageCapacity::IsSlotVisible(GlobalBase,FloorTotalSlots,FloorCapacity));
     FTransform Transform;
     if(!Group.Component.IsValid() || !Group.Component->GetInstanceTransform(InstanceIndex,Transform,true)) return false;
     const FVector Point=Transform.InverseTransformPosition(WorldPoint);
     for(const FSlot& Slot:Group.Slots)
         if(Slot.Bounds.ExpandBy(.02).IsInsideOrOn(Point))
-            return GHSStorageCapacity::IsSlotVisible(GlobalBase+Slot.Index,RackTotalSlots,RackCapacity);
+            return InventoryVisible(Slot.Index,GHSStorageCapacity::IsSlotVisible(GlobalBase+Slot.Index,RackTotalSlots,RackCapacity));
     // A point outside every cargo volume belongs to the retained steel/context.
     return true;
 }
@@ -262,8 +368,23 @@ FString UGHSStorageCapacityComponent::GetReportJson() const
     Report->SetNumberField(TEXT("floor_capacity"),FloorCapacity);
     Report->SetNumberField(TEXT("rack_total_slots"),RackTotalSlots);
     Report->SetNumberField(TEXT("floor_total_slots"),FloorTotalSlots);
-    Report->SetNumberField(TEXT("rack_visible_slots"),bStorageVisible?FMath::FloorToInt(RackCapacity*RackTotalSlots+.5f):0);
-    Report->SetNumberField(TEXT("floor_visible_groups"),bStorageVisible?FMath::FloorToInt(FloorCapacity*FloorTotalSlots+.5f):0);
+    Report->SetNumberField(TEXT("inventory_bound_slots"),BoundInventorySlots);
+    Report->SetNumberField(TEXT("inventory_empty_slots"),EmptyInventorySlots);
+    Report->SetNumberField(TEXT("inventory_occupied_slots"),OccupiedInventorySlots);
+    int32 VisibleRackSlots=0,VisibleFloorGroups=0;
+    if(bStorageVisible) for(const FGroup& Group:Groups)
+        for(int32 Instance=0;Instance<Group.InstanceCount;++Instance)
+            for(int32 Slot=0;Slot<Group.SlotsPerInstance;++Slot)
+            {
+                const auto& Mask=Group.InventoryMasks[Instance];
+                const bool bVisible=Mask.IsKnown(Slot)
+                    ? (uint32(Mask.Values[Slot/18])&(1u<<(Slot%18)))!=0
+                    : GHSStorageCapacity::IsSlotVisible(Group.BaseSlot+Instance*Group.SlotsPerInstance+Slot,
+                        Group.bRack?RackTotalSlots:FloorTotalSlots,Group.bRack?RackCapacity:FloorCapacity);
+                if(bVisible) {if(Group.bRack) ++VisibleRackSlots;else ++VisibleFloorGroups;}
+            }
+    Report->SetNumberField(TEXT("rack_visible_slots"),VisibleRackSlots);
+    Report->SetNumberField(TEXT("floor_visible_groups"),VisibleFloorGroups);
     Report->SetNumberField(TEXT("registered_components"),Groups.Num());
     Report->SetNumberField(TEXT("shared_materials"),RackMaterials.Num()+FloorMaterials.Num());
     Report->SetNumberField(TEXT("initialization_scans"),double(InitializationScans));
@@ -300,10 +421,23 @@ void UGHSStorageCapacityComponent::ResetForWorld()
         if(Group.bRestoreAlwaysShadowInvalidation && Component->ShadowCacheInvalidationBehavior==EShadowCacheInvalidationBehavior::Auto)
         { Component->ShadowCacheInvalidationBehavior=EShadowCacheInvalidationBehavior::Always; bChanged=true; }
         Group.bShadowCacheRefreshing=false;
+        if(Component->GetInstanceCount()==Group.InstanceCount)
+        {
+            Component->SetNumCustomDataFloats(Group.OriginalCustomDataFloats);
+            for(int32 Index=0;Index<Group.InstanceCount;++Index)
+                for(int32 Word=0;Word<Group.OriginalCustomDataFloats;++Word)
+                {
+                    const int32 Offset=Index*Group.OriginalCustomDataFloats+Word;
+                    if(Group.OriginalCustomData.IsValidIndex(Offset))
+                        Component->SetCustomDataValue(Index,Word,Group.OriginalCustomData[Offset],false);
+                }
+            bChanged=true;
+        }
         if(bChanged) Component->MarkRenderStateDirty();
     }
     for(int32 Index=0;Index<SourceMaterialSlots.Num();++Index)
         if(auto* Component=SourceMaterialSlots[Index].Key.Get()) Component->SetMaterial(SourceMaterialSlots[Index].Value,SourceMaterials[Index]);
     Groups.Empty();GroupByComponent.Empty();RackMaterials.Empty();FloorMaterials.Empty();
+    BoundInventorySlots=EmptyInventorySlots=OccupiedInventorySlots=0;
     SourceMaterials.Empty();SourceMaterialSlots.Empty();bInitialized=false;bStorageVisible=true;InitializationError.Empty();
 }

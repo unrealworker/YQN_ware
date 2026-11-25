@@ -13,6 +13,7 @@ public class Test : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "UniversalCameraPlugin", "UMG" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore", "WebBrowser", "Json", "PixelStreaming2", "PixelStreaming2Core", "PixelStreaming2Input", "AVCodecsCore", "NVENC", "ApplicationCore", "GHSDisplayBootstrap", "RenderCore", "RHI", "AnimationCore" });
+		AddEngineThirdPartyPrivateStaticDependencies(Target, "OpenSSL");
 		RuntimeDependencies.Add("$(ProjectDir)/Content/GHSTwinUI/web/...", StagedFileType.NonUFS);
 		RuntimeDependencies.Add("$(ProjectDir)/Content/GHSTwinUI/data/...", StagedFileType.NonUFS);
 		RuntimeDependencies.Add("$(ProjectDir)/Content/GHSNormalWarehouse/HUD/Fonts/DroidSansFallback.ttf", StagedFileType.NonUFS);

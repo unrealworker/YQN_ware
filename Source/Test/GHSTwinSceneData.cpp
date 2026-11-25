@@ -1,5 +1,6 @@
 #include "GHSTwinSceneData.h"
 #include "GHSStorageCapacityComponent.h"
+#include "GHSLocationInventory.h"
 
 #include "GHSDockTruckDataComponent.h"
 #include "GHSMannedForkliftDataComponent.h"
@@ -361,6 +362,7 @@ struct FGHSTwinSceneData::FImpl
     FString SearchDeviceKey;
     TMap<FString,TArray<FCadInstance>> CadByMesh;
     TMap<FString,TArray<FSlot>> SlotsByMesh;
+    TSharedPtr<FGHSLocationInventory> Inventory;
     TWeakObjectPtr<UGHSStorageCapacityComponent> Capacity;
     TMap<TWeakObjectPtr<UInstancedStaticMeshComponent>,FStorageCache> StorageCaches;
     TArray<FVisibility> Visibility;
@@ -539,6 +541,7 @@ struct FGHSTwinSceneData::FImpl
         if(Metadata && Metadata->Num()==Cache.Count && (*Metadata)[Index].Position.Equals(Transform.GetLocation(),.1))
         { Record.CadId=(*Metadata)[Index].Id; if(Cache.bDock) Record.Id=(*Metadata)[Index].DockId; }
         Cache.Transforms[Index]=Transform;
+        if(Capacity.IsValid()) Capacity->VerifyInventoryInstance(Component,Index,Transform);
         if(Cache.bDock && !Record.Id.StartsWith(TEXT("DOCK-")))
         { if(!OldId.IsEmpty()) Records.Remove(OldId); Cache.Ids[Index].Empty(); Cache.SetBounds(Index,FBox(ForceInit)); return; }
         if(Cache.bDock) { Record.Kind=Record.Type=TEXT("dock"); Record.Title=TEXT("装卸月台"); Record.LocationText=Record.Id; }
@@ -565,6 +568,7 @@ struct FGHSTwinSceneData::FImpl
     {
         if (bMetadataLoaded) return;
         bMetadataLoaded=true;
+        Inventory=FGHSLocationInventory::Shared();
         // Optional source metadata enriches an actual scene binding; geometry remains usable without it.
         auto Registry=ReadJson(FPaths::ProjectContentDir()/TEXT("GHSTwinUI/data/scene-bindings.json"));
         if (!Registry.IsValid()) Registry=ReadJson(FPaths::ProjectDir()/TEXT("SourceAssets/GHS_Normal/ue_scene_registry.json"));
@@ -668,6 +672,19 @@ struct FGHSTwinSceneData::FImpl
         return true;
     }
 
+    const FGHSLocationInventory::FLocation* InventoryLocation(const FRecord& Record,const FSlot* Slot=nullptr) const
+    {
+        if(!Inventory || Record.CadId.IsEmpty() || (Record.Kind!=TEXT("rack") && Record.Kind!=TEXT("material"))) return nullptr;
+        FTransform Current;
+        if(!CurrentTransform(Record,Current) || !Current.Equals(Record.Transform,.0001)) return nullptr;
+        return Inventory->FindForTransform(Record.CadId,Slot?Slot->Level:Record.Level,Slot?Slot->Column:Record.Column,Record.Component->GetStaticMesh()->GetName(),Current);
+    }
+    FBox SelectionBounds(const FRecord& Record) const
+    {
+        const auto* Location=InventoryLocation(Record);
+        return Location && Location->State==EGHSInventoryState::Empty?GHSLocationInventory::EmptyPickBounds(Record.LocalBounds):Record.LocalBounds;
+    }
+
     const FRecord* Find(const FString& Id) const
     {
         auto IsCurrent=[](const FRecord* Record)
@@ -694,7 +711,7 @@ struct FGHSTwinSceneData::FImpl
         Material.Title=FString::Printf(TEXT("货架托盘 · 第 %d 层 / 第 %d 列"),Level,Column);
         Material.Level=Level;Material.Column=Column;Material.LocalBounds=Slot->Bounds;Material.CachedJson.Reset();
         if(!CurrentTransform(Material,Material.Transform)) return nullptr;
-        if(!Material.Transform.GetLocation().Equals(Parent->Transform.GetLocation(),.1)) Material.CadId.Empty();
+        if(!Material.Transform.Equals(Parent->Transform,.0001)) Material.CadId.Empty();
         UpdateBounds(Material);
         if(MaterialSelections.Num()>=64) MaterialSelections.Reset();
         return &MaterialSelections.Add(Id,MoveTemp(Material));
@@ -718,6 +735,12 @@ struct FGHSTwinSceneData::FImpl
             if(Slot && !R.CadId.IsEmpty()) D.Result.Location+=TEXT(" · ")+R.CadId;
             const FString Aliases=Slot || R.Kind==TEXT("material")?TEXT("物料 货位 托盘 pallet material"):FString();
             D.Text=D.Result.Id+TEXT(" ")+D.Result.Title+TEXT(" ")+D.Result.Title.Replace(TEXT(" "),TEXT(""))+TEXT(" ")+R.Title+TEXT(" ")+R.Type+TEXT(" ")+R.MeshName+TEXT(" ")+R.Actor->GetActorNameOrLabel()+TEXT(" ")+R.CadId+TEXT(" ")+Aliases;
+            if(const auto* Location=InventoryLocation(R,Slot))
+            {
+                D.Result.Title=Location->Code;D.Result.Type=TEXT("真实库位");
+                D.Result.Status=Location->State==EGHSInventoryState::Empty?TEXT("空货位"):Location->State==EGHSInventoryState::Occupied?TEXT("已占用"):TEXT("状态待核验");
+                D.Text+=TEXT(" ")+Location->Code;
+            }
             SearchDocuments.Add(MoveTemp(D));
         };
         for(const auto& R:Devices) Add(R);
@@ -733,6 +756,12 @@ struct FGHSTwinSceneData::FImpl
     bool SearchMatches(const FSearchDocument& D,const FString& Term) const
     {
         const auto* R=Find(D.ParentId);
+        if(R && D.Result.Type==TEXT("真实库位"))
+        {
+            FTransform Current;
+            if(!CurrentTransform(*R,Current) || !Current.Equals(R->Transform,.0001) || R->CadId.IsEmpty()
+                || !Inventory || !Inventory->MatchesTransform(R->CadId,R->Component->GetStaticMesh()->GetName(),Current)) return false;
+        }
         return R && (D.Text.Contains(Term,ESearchCase::IgnoreCase) || R->LocationText.Contains(Term,ESearchCase::IgnoreCase));
     }
 
@@ -814,7 +843,8 @@ struct FGHSTwinSceneData::FImpl
         FTransform Transform=Record.Transform;
         CurrentTransform(Record,Transform);
         const bool Hidden=!Record.Actor.IsValid() || Record.Actor->IsHidden();
-        if(Record.CachedJson.IsValid() && Record.JsonTransform.Equals(Transform,.0001) && Record.bJsonHidden==Hidden)
+        const FString ActualMesh=Record.Component.IsValid() && Record.Component->GetStaticMesh()?Record.Component->GetStaticMesh()->GetName():FString();
+        if(Record.CachedJson.IsValid() && Record.JsonTransform.Equals(Transform,.0001) && Record.bJsonHidden==Hidden && ActualMesh==Record.MeshName)
             return Record.CachedJson.ToSharedRef();
         const auto Result=MakeShared<FJsonObject>();
         Result->SetStringField(TEXT("id"),Record.Id);
@@ -838,7 +868,8 @@ struct FGHSTwinSceneData::FImpl
         Result->SetNumberField(TEXT("lastUpdateSeconds"),Record.LastUpdate);
         Result->SetStringField(TEXT("source"),Record.bDemo?TEXT("demo"):(Record.bLive?TEXT("telemetry"):(Record.Kind==TEXT("device")?TEXT("unknown"):TEXT("scene"))));
         // A cached catalogue must not keep a CAD binding after an unannounced instance move.
-        Result->SetStringField(TEXT("cadId"),Transform.GetLocation().Equals(Record.Transform.GetLocation(),.1)?Record.CadId:FString());
+        const FString ValidCad=Transform.Equals(Record.Transform,.0001)?Record.CadId:FString();
+        Result->SetStringField(TEXT("cadId"),ValidCad);
         Result->SetNumberField(TEXT("instanceIndex"),Record.InstanceIndex);
         Result->SetStringField(TEXT("mesh"),Record.MeshName);
         if (Record.Level>0) Result->SetNumberField(TEXT("level"),Record.Level);
@@ -846,12 +877,21 @@ struct FGHSTwinSceneData::FImpl
         if (!Record.ParentId.IsEmpty()) Result->SetStringField(TEXT("rackId"),Record.ParentId);
         if (Record.Kind!=TEXT("device"))
         {
-            Result->SetBoolField(TEXT("businessBound"),false);
-            Result->SetStringField(TEXT("businessNote"),TEXT("已定位实际场景实例；尚未绑定 SKU、批次和业务库存。"));
+            const FString BusinessCad=Inventory && Inventory->MatchesTransform(ValidCad,ActualMesh,Transform)?ValidCad:FString();
+            const auto Business=Inventory?Inventory->Selection(BusinessCad,Record.Level,Record.Column):MakeShared<FJsonObject>();
+            FString Mapping;Business->TryGetStringField(TEXT("mappingStatus"),Mapping);
+            Result->SetObjectField(TEXT("inventory"),Business);
+            Result->SetBoolField(TEXT("businessBound"),Mapping==TEXT("mapped"));
+            Result->SetStringField(TEXT("businessNote"),Mapping==TEXT("mapped")?TEXT("已绑定库存导出快照；不代表实时或同一时点快照。"):TEXT("该场景库位尚未核验业务映射。"));
+            if(const auto* Location=InventoryLocation(Record))
+            {
+                Result->SetStringField(TEXT("title"),Location->Code);
+                Result->SetStringField(TEXT("locationCode"),Location->Code);
+            }
         }
         Result->SetStringField(TEXT("component"),Record.Component.IsValid()?Record.Component->GetName():FString());
         Result->SetStringField(TEXT("actor"),Record.Actor.IsValid()?Record.Actor->GetName():FString());
-        const FBox Bounds=Record.LocalBounds.TransformBy(Transform);
+        const FBox Bounds=SelectionBounds(Record).TransformBy(Transform);
         SetVector(Result,TEXT("worldPosition"),Bounds.GetCenter());
         SetVector(Result,TEXT("extent"),Bounds.GetExtent());
         Record.CachedJson=Result; Record.JsonTransform=Transform; Record.bJsonHidden=Hidden;
@@ -1071,7 +1111,7 @@ bool FGHSTwinSceneData::Resolve(const FString& Id,FVector& OutLocation,FVector& 
     if (!Record) return false;
     FTransform Transform;
     if (!FImpl::CurrentTransform(*Record,Transform)) return false;
-    const FBox Bounds=Record->LocalBounds.TransformBy(Transform);
+    const FBox Bounds=Impl->SelectionBounds(*Record).TransformBy(Transform);
     OutLocation=Bounds.GetCenter(); OutExtent=Bounds.GetExtent();
     return true;
 }
@@ -1134,15 +1174,24 @@ bool FGHSTwinSceneData::PickRay(const FVector& Origin,const FVector& Direction,F
             if (Slots) for (const auto& Slot : *Slots)
             {
                 double Hit=0;
-                if (GHSTwinSelection::IntersectBox(Origin,Direction,Transform,Slot.Bounds,Hit) && Hit<SlotDistance
-                    && (!Impl->Capacity.IsValid() || Impl->Capacity->IsStorageHitVisible(Record.Component.Get(),Record.InstanceIndex,Transform.TransformPosition(Slot.Bounds.GetCenter()))))
+                const auto* Location=Impl->InventoryLocation(Record,&Slot);
+                const FBox HitBounds=Location && Location->State==EGHSInventoryState::Empty?GHSLocationInventory::EmptyPickBounds(Slot.Bounds):Slot.Bounds;
+                if (GHSTwinSelection::IntersectBox(Origin,Direction,Transform,HitBounds,Hit) && Hit<SlotDistance
+                    && ((Location && Location->State!=EGHSInventoryState::Unknown) || !Impl->Capacity.IsValid() || Impl->Capacity->IsStorageHitVisible(Record.Component.Get(),Record.InstanceIndex,Transform.TransformPosition(Slot.Bounds.GetCenter()))))
                 { SlotDistance=Hit; HitSlot=&Slot; }
             }
             if (HitSlot) Distance=SlotDistance;
             else return; // Rack steel is context; only its actual cargo slots can be selected.
         }
-        if(Record.Kind==TEXT("material") && Impl->Capacity.IsValid()
-            && !Impl->Capacity->IsStorageHitVisible(Record.Component.Get(),Record.InstanceIndex,Transform.TransformPosition(Record.LocalBounds.GetCenter()))) return;
+        if(Record.Kind==TEXT("material"))
+        {
+            if(const auto* Location=Impl->InventoryLocation(Record); Location && Location->State!=EGHSInventoryState::Unknown)
+            {
+                if(Location->State==EGHSInventoryState::Empty && !GHSTwinSelection::IntersectBox(Origin,Direction,Transform,
+                    GHSLocationInventory::EmptyPickBounds(Record.LocalBounds),Distance)) return;
+            }
+            else if(Impl->Capacity.IsValid() && !Impl->Capacity->IsStorageHitVisible(Record.Component.Get(),Record.InstanceIndex,Transform.TransformPosition(Record.LocalBounds.GetCenter()))) return;
+        }
         if (Distance<Closest)
         { Closest=Distance; Selected=&Record; SelectedSlot=HitSlot; }
     };
@@ -1160,7 +1209,7 @@ bool FGHSTwinSceneData::PickRay(const FVector& Origin,const FVector& Direction,F
         Material.Level=SelectedSlot->Level; Material.Column=SelectedSlot->Column; Material.LocalBounds=SelectedSlot->Bounds;
         Material.CachedJson.Reset();
         FImpl::CurrentTransform(Material,Material.Transform);
-        if(!Material.Transform.GetLocation().Equals(Selected->Transform.GetLocation(),.1)) Material.CadId.Empty();
+        if(!Material.Transform.Equals(Selected->Transform,.0001)) Material.CadId.Empty();
         FImpl::UpdateBounds(Material); OutId=Material.Id;
         if (Impl->MaterialSelections.Num()>=64 && !Impl->MaterialSelections.Contains(OutId)) Impl->MaterialSelections.Reset();
         Impl->MaterialSelections.Add(OutId,MoveTemp(Material));
@@ -1223,7 +1272,7 @@ TArray<FGHSTwinSearchResult> FGHSTwinSceneData::Search(const FString& Query,int3
         else if(R.Status==TEXT("offline")) State=TEXT("离线");
         else if(R.Status==TEXT("charging")) State=TEXT("充电中");
         else if(R.Status==TEXT("scene")) State=TEXT("场景");
-        auto Row=D.Result;Row.Status=State;
+        auto Row=D.Result;if(Row.Status.IsEmpty()) Row.Status=State;
         if(R.Kind==TEXT("device")) Row.Location=R.LocationText;
         Results.Add(MoveTemp(Row));
     }
@@ -1262,6 +1311,8 @@ bool FGHSTwinSceneData::IsObjectVisible(const FString& Id) const
     if(!R || !R->Actor.IsValid() || R->Actor->IsHidden() || !R->Component.IsValid()
         || !R->Component->IsVisible() || R->Component->bHiddenInGame) return false;
     FTransform Transform;if(!FImpl::CurrentTransform(*R,Transform)) return false;
+    if(const auto* Location=Impl->InventoryLocation(*R); Location && Location->State!=EGHSInventoryState::Unknown)
+        return true; // A real empty location remains navigable without cargo.
     if(R->Kind==TEXT("material") && Impl->Capacity.IsValid())
         return Impl->Capacity->IsStorageHitVisible(R->Component.Get(),R->InstanceIndex,Transform.TransformPosition(R->LocalBounds.GetCenter()));
     return true;

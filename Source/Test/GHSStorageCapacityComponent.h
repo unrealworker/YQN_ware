@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "TimerManager.h"
+#include "GHSLocationInventory.h"
 #include "GHSStorageCapacityComponent.generated.h"
 
 class UPrimitiveComponent;
@@ -43,17 +44,24 @@ public:
     float GetRackCapacity() const { return RackCapacity; }
     float GetFloorCapacity() const { return FloorCapacity; }
     bool IsStorageVisible() const { return bStorageVisible; }
+    bool HasRealInventory() const { return BoundInventorySlots>0; }
+    /** Called by the existing bounded scene transform audit; no additional tick or world scan. */
+    void VerifyInventoryInstance(UInstancedStaticMeshComponent* Component,int32 Instance,const FTransform& WorldTransform);
 
 protected:
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 private:
-    struct FSlot { FBox Bounds; int32 Index=0; };
+    struct FSlot { FBox Bounds; int32 Index=0,Level=0,Column=0; };
     struct FGroup
     {
         TWeakObjectPtr<UInstancedStaticMeshComponent> Component;
         TArray<FSlot> Slots;
+        TArray<FGHSInventoryMask> InventoryMasks;
+        TArray<FString> InventoryCadIds;
+        TArray<float> OriginalCustomData;
+        int32 OriginalCustomDataFloats=0;
         int32 BaseSlot=0, SlotsPerInstance=0, InstanceCount=0;
         bool bRack=false;
         bool bRestoreAlwaysShadowInvalidation=false, bShadowCacheRefreshing=false;
@@ -68,6 +76,7 @@ private:
     TArray<TPair<TWeakObjectPtr<UInstancedStaticMeshComponent>,int32>> SourceMaterialSlots;
     float RackCapacity=.8f, FloorCapacity=1.f;
     int32 RackTotalSlots=0, FloorTotalSlots=0;
+    int32 BoundInventorySlots=0,EmptyInventorySlots=0,OccupiedInventorySlots=0;
     uint64 InitializationScans=0, ParameterWrites=0, CapacityUpdates=0;
     uint64 ShadowCacheRefreshRequests=0;
     FTimerHandle ShadowCacheSettleTimer;

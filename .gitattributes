@@ -17,5 +17,10 @@ SourceAssets/MPR/interior_cad_20261112/**/*.json -text whitespace=blank-at-eol,b
 SourceAssets/MPR/interior_cad_20261112/**/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 SourceAssets/MPR/rack_clearance_20261112/**/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 SourceAssets/MPR/rack_clearance_20261112/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Preserve exact bytes used by the GHS inventory binding source hashes.
+Content/GHSTwinUI/data/scene-bindings.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+Content/GHSTwinUI/data/rack-slots.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+Content/GHSTwinUI/data/storage-capacity.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 SourceAssets/MPR/optimization_20261112/**/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 SourceAssets/MPR/optimization_20261112/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

@@ -48,7 +48,7 @@ test('all navigation pages expose data explanations and retain explicit demonstr
   app.window.twinNavigate('inventory');app.click({action:'material'});
   assert.ok(app.html().includes('物料数据说明'));assert.ok(app.html().includes('尚未绑定 WMS'));
   app.window.twinSelect({equipment:[],facilities:[],selection:{kind:'material',id:'CAD-07',instanceIndex:7}});
-  assert.ok(app.html().includes('库存信息尚未接入'));assert.ok(app.html().includes('data-unverified="cad-example-link"'));
+  assert.ok(app.html().includes('库位编码未匹配'));assert.ok(app.html().includes('data-unverified="cad-example-link"'));
   assert.ok(!app.html().includes('480 件'));
 });
 

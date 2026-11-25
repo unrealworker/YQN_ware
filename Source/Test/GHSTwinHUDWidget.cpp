@@ -245,6 +245,7 @@ FString UGHSTwinHUDWidget::GetSceneControlsState() const
     {
         Json->SetNumberField(TEXT("rackCapacity"),Capacity?Capacity->GetRackCapacity():.8);
         Json->SetNumberField(TEXT("floorCapacity"),Capacity?Capacity->GetFloorCapacity():1.);
+        Json->SetBoolField(TEXT("inventoryMode"),Capacity && Capacity->HasRealInventory());
     }
     Json->SetBoolField(TEXT("roofClosed"),R && R->IsRoofClosed());Json->SetBoolField(TEXT("roofOpening"),R && R->IsOpening());
     Json->SetBoolField(TEXT("roofClosing"),R && R->IsClosing());

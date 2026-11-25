@@ -1,0 +1,377 @@
+"""Build conservative GHS CAD/WMS bindings without changing either source.
+
+Only existing CAD row attributes and fully qualified current WMS codes are used.
+Placeholder rows, ambiguous targets and unmatched floor areas remain unbound.
+Run with --csv and --cad; all other inputs default to this repository.
+"""
+from __future__ import annotations
+
+import argparse
+import collections
+import csv
+import hashlib
+import json
+import math
+from pathlib import Path
+import re
+
+ROOT = Path(__file__).resolve().parents[2]
+RULE = 'cad-row-bay-three-pallets-v2'
+
+
+def read_json(path):
+    return json.loads(Path(path).read_text(encoding='utf-8-sig'))
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def integer(value):
+    try:
+        result = int(str(value))
+        return result if str(value).strip() and result > 0 else None
+    except (ValueError, TypeError):
+        return None
+
+
+def expected_code(rack, local_level, column, physical):
+    """Never normalize old Rxx or GHS-SRxx aliases into active WMS names."""
+    row = rack['row_code']
+    if not re.fullmatch(r'(?:R|SR)\d{2}', row) or not integer(re.sub(r'\D', '', row)):
+        return None
+    bay = integer(rack['bay_sequence'])
+    if not bay or column not in (1, 2, 3) or not integer(physical):
+        return None
+    prefix = 'GHS-SR-' + row[2:] if row.startswith('SR') else 'GHS-' + row
+    return f'{prefix}-{3 * (bay - 1) + column:02d}-{physical:02d}'
+
+
+def physical_level(base_z, canonical_slots):
+    levels = {s['level'] for s in canonical_slots if abs(float(s['base_z_m']) - base_z) < 0.001}
+    return next(iter(levels)) if len(levels) == 1 else None
+
+
+def crosscheck_location(location, rack, physical):
+    if location.get('warehouse_id') != '108' or location.get('warehouse_code') != 'GHS_CA_US':
+        return 'warehouse_mismatch'
+    expected_area = '454' if rack['row_code'].startswith('SR') else '450'
+    if location.get('warehouse_area_id') != expected_area:
+        return 'warehouse_area_mismatch'
+    if integer(location.get('horizontal_num')) != integer(rack['bay_sequence']):
+        return 'wms_horizontal_number_mismatch'
+    if integer(location.get('location_layer')) != physical:
+        return 'wms_physical_layer_mismatch'
+    return None
+
+
+def increasing_sequence_rows(racks):
+    """Check CAD bay progression; this does not certify WMS labels in a bay."""
+    by_row = collections.defaultdict(list)
+    for rack in racks:
+        if re.fullmatch(r'(?:R|SR)\d{2}', rack['row_code']):
+            bay = integer(rack['bay_sequence'])
+            if bay:
+                by_row[rack['row_code']].append((bay, rack['physical_origin_m'][1]))
+    accepted = set()
+    for row, values in by_row.items():
+        values.sort()
+        increments = [b[1] - a[1] for a, b in zip(values, values[1:]) if a[0] != b[0]]
+        if increments and all(delta > 0.001 for delta in increments):
+            accepted.add(row)
+    return accepted
+
+
+def transform_contract(instance, source_mesh, registry_row, capacity_group):
+    """Use the authored placement and capacity mesh, never an observed new pose.
+
+    apply_refinement_v2.py converts registry CAD metres to UE centimetres,
+    reflects world Y, and sets UE yaw to minus registry rotation_deg.
+    """
+    if not registry_row or registry_row.get('id') != instance['id']:
+        return None
+    if math.dist(registry_row.get('position_m', []), instance['position_m']) > 0.001:
+        return None
+    rotation = registry_row.get('rotation_deg')
+    scale = registry_row.get('scale')
+    if not isinstance(rotation, (int, float)) or not math.isfinite(rotation):
+        return None
+    if not isinstance(scale, list) or len(scale) != 3 or not all(
+            isinstance(v, (int, float)) and math.isfinite(v) and v > 0 for v in scale):
+        return None
+    if (not capacity_group or capacity_group.get('source_mesh') != source_mesh
+            or not capacity_group.get('mesh', '').endswith('_Capacity')):
+        return None
+    return dict(expectedPositionM=instance['position_m'],
+                expectedWorldRotationDeg=[0, -rotation, 0],
+                expectedWorldScale=scale, expectedMesh=capacity_group['mesh'])
+
+
+def authored_placements(groups):
+    """Do not let a repeated CAD identity silently pick its last transform."""
+    result = collections.defaultdict(dict)
+    conflicts = set()
+    for group in groups:
+        mesh = group['mesh']
+        for row in group['instances']:
+            cid = row['id']
+            previous = result[mesh].get(cid)
+            if previous and any(previous.get(k) != row.get(k) for k in ('position_m', 'rotation_deg', 'scale')):
+                conflicts.add((mesh, cid))
+            result[mesh][cid] = row
+    for mesh, cid in conflicts:
+        result[mesh].pop(cid, None)
+    return dict(result)
+
+
+def reject_ambiguous(bindings):
+    targets = collections.Counter((x['cadId'], x['level'], x['column']) for x in bindings)
+    locations = collections.Counter(x['locationId'] for x in bindings)
+    good, rejected = [], []
+    for x in bindings:
+        (good if targets[(x['cadId'], x['level'], x['column'])] == 1
+         and locations[x['locationId']] == 1 else rejected).append(x)
+    return good, rejected
+
+
+def index_locations(rows):
+    unique = {}
+    # Stock rows repeat location metadata. Do not count them as duplicate slots.
+    fixed = ('warehouse_id', 'warehouse_code', 'warehouse_area_id', 'location_code', 'horizontal_num', 'location_layer')
+    for row in rows:
+        key = (row['warehouse_id'], row['location_id'])
+        if key in unique and any(unique[key].get(k) != row.get(k) for k in fixed):
+            raise ValueError(f'Conflicting WMS location metadata: {key}')
+        unique[key] = row
+    by_code = collections.defaultdict(list)
+    for row in unique.values():
+        by_code[row['location_code']].append(row)
+    return by_code
+
+
+def canonical_scene_groups(scene):
+    """Occ70 is the same physical layout with demo cargo removed, not new bins."""
+    canonical = {g['mesh']: g for g in scene['groups'] if not g['mesh'].endswith('_Occ70')}
+    for group in scene['groups']:
+        if not group['mesh'].endswith('_Occ70'):
+            continue
+        base = canonical.get(group['mesh'][:-6])
+        if not base:
+            raise ValueError('Demo occupancy alias lacks its canonical scene group')
+        originals = {x['id']: x['position_m'] for x in base['instances']}
+        for item in group['instances']:
+            if item['id'] not in originals or math.dist(originals[item['id']], item['position_m']) > 0.001:
+                raise ValueError('Demo occupancy alias changed CAD identity/position')
+    return list(canonical.values())
+
+
+def dxf_insert_attributes(path):
+    """Read ASCII DXF INSERT/ATTRIB evidence without any geometry conversion.
+
+    Handles and attribute values are ASCII in this source. Retain source text;
+    never repair garbled Chinese annotations into guessed business identifiers.
+    """
+    def entities():
+        current = []
+        with Path(path).open(encoding='utf-8-sig') as stream:
+            while True:
+                code = stream.readline()
+                if not code:
+                    break
+                value = stream.readline()
+                if not value:
+                    raise ValueError('Truncated DXF pair')
+                key = code.strip()
+                if key == '0' and current:
+                    yield current
+                    current = []
+                current.append((key, value.rstrip('\r\n')))
+        if current:
+            yield current
+    result = {}
+    active = None
+    for pairs in entities():
+        entity = dict(pairs)
+        kind = entity.get('0')
+        if kind == 'INSERT':
+            active = {'block': entity.get('2'), 'attributes': {},
+                      'position': [float(entity.get(k, '0')) for k in ('10', '20', '30')]}
+            result[entity['5']] = active
+        elif kind == 'ATTRIB' and active is not None:
+            active['attributes'][entity.get('2')] = entity.get('1', '')
+        elif kind == 'SEQEND':
+            active = None
+        else:
+            active = None
+    return result
+
+
+def build(csv_path, cad_path, root=ROOT):
+    scene_path = root / 'Content/GHSTwinUI/data/scene-bindings.json'
+    slot_path = root / 'Content/GHSTwinUI/data/rack-slots.json'
+    layout_path = root / 'SourceAssets/GHS/RefinementV2/Layout/rack_spacing.json'
+    model_path = root / 'SourceAssets/GHS/RefinementV2/Racks/refined_rack_cargo.json'
+    floor_path = root / 'SourceAssets/GHS/cad_layout.json'
+    registry_path = root / 'SourceAssets/GHS_Normal/ue_scene_registry.json'
+    capacity_path = root / 'Content/GHSTwinUI/data/storage-capacity.json'
+    with Path(csv_path).open(encoding='utf-8-sig', newline='') as stream:
+        wms = index_locations(csv.DictReader(stream))
+    attrs = dxf_insert_attributes(cad_path)
+    scene = read_json(scene_path)
+    authored_groups = authored_placements(read_json(registry_path)['groups'])
+    capacity_groups = {g['source_mesh']: g for g in read_json(capacity_path)['groups']}
+    slots = {m['name']: m['cargo_stacks'] for m in read_json(slot_path)['meshes']}
+    layouts = {r['instance_id']: r for r in read_json(layout_path)['racks']}
+    ordered_rows = increasing_sequence_rows(layouts.values())
+    models = {m['mapping_key']: m for m in read_json(model_path)['meshes']}
+    canonical = {m['spec_type']: m['cargo_stacks'] for m in models.values()
+                 if m.get('canonical') and not m.get('pass_variant')}
+    problems = collections.Counter()
+    examples = collections.defaultdict(list)
+    candidates = []
+    rack_count = floor_count = total_rack_slots = 0
+
+    def issue(reason, identity, count=1):
+        problems[reason] += count
+        if len(examples[reason]) < 8:
+            examples[reason].append(identity)
+
+    for group in canonical_scene_groups(scene):
+        if group['mesh'].startswith('SM_GHS_Presentation_Cargo'):
+            floor_count += len(group['instances'])
+        if not group['mesh'].startswith('SM_GHS_V2Rack_'):
+            continue
+        if group['mesh'] not in slots:
+            raise ValueError('Scene rack mesh has no slot metadata: ' + group['mesh'])
+        current_slots = slots[group['mesh']]
+        for instance in group['instances']:
+            rack_count += 1
+            total_rack_slots += len(current_slots)
+            cid = instance['id']
+            rack = layouts.get(cid)
+            if not rack:
+                issue('scene_cad_identity_missing', cid, len(current_slots))
+                continue
+            if not re.fullmatch(r'(?:R|SR)\d{2}', rack['row_code']):
+                issue('cad_row_not_business_identifier', cid, len(current_slots))
+                continue
+            source = attrs.get(rack['source_handles'][-1])
+            if (not source or source['attributes'].get('BLOCK_CODE') != rack['row_code']
+                    or integer(source['attributes'].get('SEQ')) != integer(rack['bay_sequence'])):
+                issue('original_cad_attributes_mismatch', cid, len(current_slots))
+                continue
+            if len(rack['source_handles']) == 1:
+                expected = rack['physical_origin_dxf_xy']
+                if math.dist(expected, source['position'][:2]) > 0.001:
+                    issue('original_cad_anchor_mismatch', cid, len(current_slots))
+                    continue
+            expected = [*rack['position_m'], 0]
+            if math.dist(expected, instance['position_m']) > 0.001:
+                issue('current_scene_anchor_mismatch', cid, len(current_slots))
+                continue
+            model = models[rack['mapping_key']]
+            if model['name'] != group['mesh']:
+                issue('current_scene_mesh_mismatch', cid, len(current_slots))
+                continue
+            authored = authored_groups.get(group['mesh'], {}).get(cid)
+            contract = transform_contract(instance, group['mesh'], authored,
+                                          capacity_groups.get(group['mesh']))
+            if (contract is None or abs((authored['rotation_deg'] - rack['rotation_deg'] - 90) % 360) > 0.001):
+                issue('authored_transform_contract_missing', cid, len(current_slots))
+                continue
+            # CAD bays increase along +Y; assume the three WMS labels within a
+            # bay continue that direction. This remains an inferred rule, not a
+            # field-verified label association.
+            if abs(rack['rotation_deg']) > 0.001 or rack['row_code'] not in ordered_rows:
+                issue('unverified_sequence_orientation', cid, len(current_slots))
+                continue
+            x_by_col = {s['column']: s['pallet_center_x_m'] for s in current_slots}
+            if set(x_by_col) != {1, 2, 3} or not x_by_col[1] < x_by_col[2] < x_by_col[3]:
+                issue('unverified_pallet_column_geometry', cid, len(current_slots))
+                continue
+            for slot in current_slots:
+                physical = physical_level(slot['base_z_m'], canonical.get(rack['spec_type'], []))
+                if physical is None:
+                    issue('unverified_physical_layer', f'{cid}:{slot["level"]}:{slot["column"]}')
+                    continue
+                code = expected_code(rack, slot['level'], slot['column'], physical)
+                if code:
+                    candidates.append(dict(cadId=cid, level=slot['level'], column=slot['column'],
+                                           locationCode=code, rack=rack, physical=physical,
+                                           **contract))
+
+    # Reject all competing targets even if one would subsequently fail a WMS check.
+    code_count = collections.Counter(c['locationCode'] for c in candidates)
+    proposed = []
+    for candidate in candidates:
+        code = candidate['locationCode']
+        if code_count[code] != 1:
+            issue('ambiguous_cad_targets_for_code', code)
+            continue
+        matches = wms.get(code, [])
+        if len(matches) != 1:
+            issue('wms_code_missing' if not matches else 'ambiguous_wms_location_code', code)
+            continue
+        loc = matches[0]
+        mismatch = crosscheck_location(loc, candidate['rack'], candidate['physical'])
+        if mismatch:
+            issue(mismatch, code)
+            continue
+        proposed.append({k: candidate[k] for k in ('cadId', 'level', 'column', 'locationCode', 'expectedPositionM',
+                                                  'expectedWorldRotationDeg', 'expectedWorldScale', 'expectedMesh')} |
+                        dict(locationId=loc['location_id'], confidence='rule_inferred',
+                             evidence=RULE))
+    bindings, rejected = reject_ambiguous(proposed)
+    for value in rejected:
+        issue('duplicate_target_or_location', value['locationCode'])
+    bindings.sort(key=lambda b: (b['cadId'], b['level'], b['column']))
+
+    # Verify ground IDs against original floor attributes. No semantic bridge is
+    # present from A01..A54 / SEQ to WMS TS/TMP codes; never infer one by position.
+    floor_codes = set()
+    for f in read_json(floor_path)['storage']:
+        source = attrs.get(f['source_handles'][-1], {})
+        values = source.get('attributes', {})
+        if values.get('ZONE_CODE') and values.get('SEQ'):
+            floor_codes.add(values['ZONE_CODE'] + '-' + values['SEQ'])
+    floor_direct_matches = sum(c in wms or ('GHS-' + c) in wms for c in floor_codes)
+    issue('floor_business_code_bridge_missing', 'CAD A01..A54/SEQ vs WMS TS/TMP; no verified link', floor_count)
+    return {
+        'schemaVersion': 1, 'warehouseId': 108, 'warehouseCode': 'GHS_CA_US',
+        'sourceCadSha256': sha(cad_path), 'sourceInventorySha256': sha(csv_path),
+        'sourceHashes': {str(p.relative_to(root)).replace('\\', '/'): sha(p)
+                         for p in (scene_path, slot_path, layout_path, model_path, floor_path, registry_path, capacity_path)},
+        'rule': {'id': RULE,
+                 'description': 'CAD BLOCK_CODE/SEQ + 每跨三个托位 + 由实际高度推定物理层；核对 WMS 完整编码、库区 450/454、horizontal_num、location_layer 和当前场景身份/位置/网格。',
+                 'physicalVerification': '按编码和几何规则推断，未现场核验；不是直接读取 CAD 中每个完整 WMS 库位码。',
+                 'assumptions': ['档内 C1/C2/C3 沿 CAD 档号递增方向排列；现场标签方向尚未确认。',
+                                 '通道上方货位沿用同规格完整货架的物理层号：A 上两层为 3/4，B 上六层为 7–12。'],
+                 'unknownPolicy': '未映射不代表空位，不应用库存占用状态；保留可检索的 WMS 档案。'},
+        'bindings': bindings,
+        'issues': {'counts': dict(problems), 'examples': dict(examples),
+                   'sceneRackInstances': rack_count, 'sceneRackSlots': total_rack_slots,
+                   'sceneFloorSlots': floor_count, 'mappedRackSlots': len(bindings),
+                   'mappedFloorSlots': 0, 'unmappedSceneSlots': total_rack_slots + floor_count - len(bindings),
+                   'ruleInferredBindings': len(bindings), 'fieldConfirmedBindings': 0,
+                   'cadIncreasingSequenceRows': len(ordered_rows),
+                   'wmsLocations': sum(len(v) for v in wms.values()),
+                   'unmappedWmsLocations': sum(len(v) for v in wms.values()) - len(bindings),
+                   'floorDirectCodeMatches': floor_direct_matches}}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--csv', type=Path, required=True)
+    parser.add_argument('--cad', type=Path, required=True)
+    parser.add_argument('--root', type=Path, default=ROOT)
+    parser.add_argument('--output', type=Path)
+    args = parser.parse_args()
+    result = build(args.csv, args.cad, args.root)
+    dest = args.output or args.root / 'Content/GHSTwinUI/data/inventory-bindings.json'
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(json.dumps(result, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
+    print(json.dumps({'output': str(dest), **result['issues']}, ensure_ascii=False))
+
+
+if __name__ == '__main__':
+    main()
