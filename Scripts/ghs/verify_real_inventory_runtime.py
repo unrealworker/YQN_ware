@@ -15,7 +15,8 @@ ROOT = Path(unreal.Paths.convert_relative_path_to_full(unreal.Paths.project_dir(
 CLI = unreal.SystemLibrary.get_command_line()
 assert all(re.search(r'(?:^|\s)-'+flag+r'(?=\s|$)', CLI, re.I)
            for flag in ('game', 'RenderOffscreen', 'TwinDiagnostics'))
-OUT = ROOT/'output/ghs-inventory-20261125/runtime'
+REAUDIT = bool(re.search(r'(?:^|\s)-InventoryReaudit(?=\s|$)', CLI, re.I))
+OUT = ROOT/('output/ghs-inventory-reaudit-20261125/runtime' if REAUDIT else 'output/ghs-inventory-20261125/runtime')
 OUT.mkdir(parents=True, exist_ok=True)
 MAP = ROOT/'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap'
 MAP_HASH = hashlib.sha256(MAP.read_bytes()).hexdigest()
@@ -30,7 +31,8 @@ world = pc = hud = pawn = capacity = handle = None
 finished = False
 stage = 'discover'
 token = 0
-result = dict(success=False, assets_saved=False, checks=[], captures=[], map_sha256_before=MAP_HASH)
+result = dict(success=False, assets_saved=False, checks=[], captures=[], map_sha256_before=MAP_HASH,
+              bindings_sha256=hashlib.sha256((DATA/'inventory-bindings.json').read_bytes()).hexdigest())
 
 
 def write():
@@ -227,6 +229,47 @@ def run():
         yield from wait('capacity_one',lambda:json.loads(capacity.get_report_json())['rack_capacity']==1)
         assert verify_mask(item,location)==mask
         record('real_occupancy_ignores_preview_slider_'+location['state'])
+
+    if REAUDIT:
+        cases = [
+            ('special_s06', next(x for x in BINDINGS if x['cadId']=='CAD_369D01_369ADD' and x['level']==6 and x['column']==3)),
+            ('corrected_r31_pass', next(x for x in BINDINGS if x.get('cadResolution',{}).get('originalRow')=='R31' and x.get('cadResolution',{}).get('originalBay')=='15' and x.get('cadResolution',{}).get('resolvedBay')=='13')),
+            ('leading_zero_code', next(x for x in BINDINGS if x['locationCode']=='GHS-SR-02-073-01')),
+        ]
+        for name, binding in cases:
+            item=fixture(binding)
+            location=LOCATIONS[binding['locationId']]
+            mask=verify_mask(item,location)
+            assert hud.select_object(item['id'],False)
+            yield from frame_fixture(item)
+            dom=yield from settle_text([binding['locationCode'],'按编码规则匹配'])
+            native=json.loads(hud.get_snapshot())['selection']
+            assert native['inventory']['mappingStatus']=='mapped',native
+            assert native['inventory']['location']['id']==binding['locationId'],native
+            assert native['inventory']['location']['state']==location['state'],native
+            assert not dom['errors'],dom['errors']
+            record(name,code=binding['locationCode'],mask=mask,selection=native)
+            if name=='special_s06':
+                assert binding['locationCode']=='GHS-SR-06-39-12'
+                assert location['state']=='empty'
+                hud.clear_selection()
+                screen=unreal.GameplayStatics.project_world_to_screen(pc,item['foot'],False)
+                assert screen is not None and hud.is_scene_point(screen)
+                assert hud.handle_scene_click(screen)
+                assert str(hud.selected_id)==item['id'],(str(hud.selected_id),item['id'])
+                yield from settle_text([binding['locationCode']])
+                record('special_s06_empty_mouse_pick',id=item['id'])
+            yield from capture('reaudit-'+name)
+        disputed=dict(cadId='CAD_36E079_36E021',level=1,column=1)
+        assert not any(x['cadId']==disputed['cadId'] for x in BINDINGS)
+        item=fixture(disputed)
+        assert hud.select_object(item['id'],False)
+        yield from frame_fixture(item)
+        yield from settle_text(['库位编码未匹配'])
+        native=json.loads(hud.get_snapshot())['selection']
+        assert native['inventory']['mappingStatus']=='unmapped',native
+        record('conflicting_bay_not_presented_as_verified_inventory',selection=native)
+        yield from capture('reaudit-conflicting-bay')
 
     frozen=next(x for x in BINDINGS if LOCATIONS[x['locationId']]['quantity']>0 and LOCATIONS[x['locationId']]['availableQuantity']==0)
     item=fixture(frozen)

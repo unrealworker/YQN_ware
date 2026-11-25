@@ -16,7 +16,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[2]
-RULE = 'cad-row-bay-three-pallets-v2'
+RULE = 'cad-row-bay-three-pallets-v3'
 
 
 def read_json(path):
@@ -35,6 +35,77 @@ def integer(value):
         return None
 
 
+def resolve_rack_identity(rack, all_racks, attrs):
+    """Resolve only a unique named, collinear, bilateral one-bay CAD bracket.
+
+    Original source attributes are never overwritten. The resolved copy is a
+    rule inference and its audit evidence accompanies each resulting binding.
+    """
+    def original_matches(row):
+        handles = row.get('source_handles', [])
+        original = attrs.get(handles[-1], {}).get('attributes', {}) if handles else {}
+        return (original.get('BLOCK_CODE') == row['row_code']
+                and integer(original.get('SEQ')) == integer(row['bay_sequence']))
+
+    row, bay = rack['row_code'], rack['bay_sequence']
+    evidence = dict(originalRow=row, originalBay=bay, resolvedRow=row,
+                    resolvedBay=bay, method='direct_cad_attributes')
+    if not original_matches(rack):
+        return None, evidence, 'original_cad_attributes_mismatch'
+    direct = bool(re.fullmatch(r'(?:R|SR)\d{2}', row))
+    special = bool(re.fullmatch(r'S\d{2}', row))
+    if not direct and not (special and rack.get('pass_variant')):
+        return None, evidence, 'cad_row_not_business_identifier'
+    if not rack.get('pass_variant'):
+        return dict(rack), evidence, ''
+    # Unsupported orientations and unbracketed normal labels retain the exact
+    # original identity. Sxx labels require positive bilateral evidence.
+    def fallback():
+        return (dict(rack), evidence, '') if direct else (None, evidence, 'special_pass_identity_unresolved')
+    if abs(rack['rotation_deg']) > 0.001:
+        return fallback()
+    center = rack.get('physical_center_m')
+    if not center or len(center) != 2:
+        return fallback()
+    neighbors = []
+    for other in all_racks:
+        if (other['instance_id'] == rack['instance_id'] or other.get('pass_variant')
+                or other['spec_type'] != rack['spec_type']
+                or abs(other['rotation_deg'] - rack['rotation_deg']) > 0.001
+                or not re.fullmatch(r'(?:R|SR)\d{2}', other['row_code'])):
+            continue
+        p = other.get('physical_center_m', [])
+        if len(p) != 2 or abs(p[0] - center[0]) > 0.0001:
+            continue
+        neighbors.append((p[1] - center[1], other))
+    left = sorted((n for n in neighbors if n[0] < 0), key=lambda n: -n[0])
+    right = sorted((n for n in neighbors if n[0] > 0), key=lambda n: n[0])
+    if not left or not right:
+        return fallback()
+    if ((len(left) > 1 and abs(left[0][0] - left[1][0]) < 0.0001)
+            or (len(right) > 1 and abs(right[0][0] - right[1][0]) < 0.0001)):
+        return fallback()
+    a, lower = left[0]; b, upper = right[0]
+    lower_bay, upper_bay = integer(lower['bay_sequence']), integer(upper['bay_sequence'])
+    if (not original_matches(lower) or not original_matches(upper)
+            or lower['row_code'] != upper['row_code']
+            or not lower_bay or not upper_bay or upper_bay - lower_bay != 2
+            or abs(a + b) > 0.0001 or not (3.4 < -a < 4.2 and 3.4 < b < 4.2)):
+        return fallback()
+    resolved_row = lower['row_code']; resolved_bay = str(lower_bay + 1)
+    if (special and (resolved_row != 'SR' + row[1:] or bay != resolved_bay)
+            or direct and row != resolved_row):
+        return fallback()
+    if row == resolved_row and bay == resolved_bay:
+        return dict(rack), evidence, ''
+    evidence.update(resolvedRow=resolved_row, resolvedBay=resolved_bay,
+                    method='collinear_bilateral_pass_bracket',
+                    neighbors=[dict(cadId=n['instance_id'], row=n['row_code'],
+                                    bay=n['bay_sequence'], centerM=n['physical_center_m'])
+                               for n in (lower, upper)])
+    return dict(rack, row_code=resolved_row, bay_sequence=resolved_bay), evidence, ''
+
+
 def expected_code(rack, local_level, column, physical):
     """Never normalize old Rxx or GHS-SRxx aliases into active WMS names."""
     row = rack['row_code']
@@ -45,6 +116,23 @@ def expected_code(rack, local_level, column, physical):
         return None
     prefix = 'GHS-SR-' + row[2:] if row.startswith('SR') else 'GHS-' + row
     return f'{prefix}-{3 * (bay - 1) + column:02d}-{physical:02d}'
+
+
+def numeric_code_key(code):
+    """Only normalize digit width inside the same exact current code family."""
+    match = re.fullmatch(r'GHS-(R|SR-)(\d+)-(\d+)-(\d+)', code)
+    if not match:
+        return None
+    return (match[1], *(int(value) for value in match.groups()[1:]))
+
+
+def numeric_code_index(by_code):
+    result = collections.defaultdict(list)
+    for code, rows in by_code.items():
+        key = numeric_code_key(code)
+        if key is not None:
+            result[key].extend(rows)
+    return result
 
 
 def physical_level(base_z, canonical_slots):
@@ -72,7 +160,7 @@ def increasing_sequence_rows(racks):
         if re.fullmatch(r'(?:R|SR)\d{2}', rack['row_code']):
             bay = integer(rack['bay_sequence'])
             if bay:
-                by_row[rack['row_code']].append((bay, rack['physical_origin_m'][1]))
+                by_row[rack['row_code']].append((bay, rack['position_m'][1]))
     accepted = set()
     for row, values in by_row.items():
         values.sort()
@@ -80,6 +168,26 @@ def increasing_sequence_rows(racks):
         if increments and all(delta > 0.001 for delta in increments):
             accepted.add(row)
     return accepted
+
+
+def sequence_conflicts(racks):
+    """Return both endpoints of actual-centre order inversions, never swap IDs.
+
+    INSERT origins can lie at the opposite end of a mirrored rack. Use current
+    instance centres; duplicated bay numbers remain the separate identity check.
+    """
+    by_row = collections.defaultdict(list)
+    for rack in racks:
+        bay = integer(rack['bay_sequence'])
+        if re.fullmatch(r'(?:R|SR)\d{2}', rack['row_code']) and bay:
+            by_row[rack['row_code']].append((bay, rack['position_m'][1], rack['instance_id']))
+    conflicts = set()
+    for rows in by_row.values():
+        rows.sort()
+        for a, b in zip(rows, rows[1:]):
+            if a[0] != b[0] and b[1] - a[1] <= 0.001:
+                conflicts.update((a[2], b[2]))
+    return conflicts
 
 
 def transform_contract(instance, source_mesh, registry_row, capacity_group):
@@ -216,13 +324,17 @@ def build(csv_path, cad_path, root=ROOT):
     capacity_path = root / 'Content/GHSTwinUI/data/storage-capacity.json'
     with Path(csv_path).open(encoding='utf-8-sig', newline='') as stream:
         wms = index_locations(csv.DictReader(stream))
+    numeric_wms = numeric_code_index(wms)
     attrs = dxf_insert_attributes(cad_path)
     scene = read_json(scene_path)
     authored_groups = authored_placements(read_json(registry_path)['groups'])
     capacity_groups = {g['source_mesh']: g for g in read_json(capacity_path)['groups']}
     slots = {m['name']: m['cargo_stacks'] for m in read_json(slot_path)['meshes']}
     layouts = {r['instance_id']: r for r in read_json(layout_path)['racks']}
-    ordered_rows = increasing_sequence_rows(layouts.values())
+    resolutions = {cid: resolve_rack_identity(r, layouts.values(), attrs) for cid, r in layouts.items()}
+    resolved_racks = [result[0] for result in resolutions.values() if result[0] is not None]
+    conflicting_sequence = sequence_conflicts(resolved_racks)
+    ordered_rows = increasing_sequence_rows(r for r in resolved_racks if r['instance_id'] not in conflicting_sequence)
     models = {m['mapping_key']: m for m in read_json(model_path)['meshes']}
     canonical = {m['spec_type']: m['cargo_stacks'] for m in models.values()
                  if m.get('canonical') and not m.get('pass_variant')}
@@ -252,14 +364,14 @@ def build(csv_path, cad_path, root=ROOT):
             if not rack:
                 issue('scene_cad_identity_missing', cid, len(current_slots))
                 continue
-            if not re.fullmatch(r'(?:R|SR)\d{2}', rack['row_code']):
-                issue('cad_row_not_business_identifier', cid, len(current_slots))
+            rack, resolution, resolution_error = resolutions[cid]
+            if rack is None:
+                issue(resolution_error, cid, len(current_slots))
+                continue
+            if cid in conflicting_sequence:
+                issue('cad_numbering_geometry_conflict', cid, len(current_slots))
                 continue
             source = attrs.get(rack['source_handles'][-1])
-            if (not source or source['attributes'].get('BLOCK_CODE') != rack['row_code']
-                    or integer(source['attributes'].get('SEQ')) != integer(rack['bay_sequence'])):
-                issue('original_cad_attributes_mismatch', cid, len(current_slots))
-                continue
             if len(rack['source_handles']) == 1:
                 expected = rack['physical_origin_dxf_xy']
                 if math.dist(expected, source['position'][:2]) > 0.001:
@@ -298,6 +410,7 @@ def build(csv_path, cad_path, root=ROOT):
                 if code:
                     candidates.append(dict(cadId=cid, level=slot['level'], column=slot['column'],
                                            locationCode=code, rack=rack, physical=physical,
+                                           cadResolution=resolution,
                                            **contract))
 
     # Reject all competing targets even if one would subsequently fail a WMS check.
@@ -308,7 +421,7 @@ def build(csv_path, cad_path, root=ROOT):
         if code_count[code] != 1:
             issue('ambiguous_cad_targets_for_code', code)
             continue
-        matches = wms.get(code, [])
+        matches = numeric_wms.get(numeric_code_key(code), [])
         if len(matches) != 1:
             issue('wms_code_missing' if not matches else 'ambiguous_wms_location_code', code)
             continue
@@ -317,10 +430,15 @@ def build(csv_path, cad_path, root=ROOT):
         if mismatch:
             issue(mismatch, code)
             continue
+        generated_code = code
+        # Preserve the actual source code, including a three-digit pallet index.
+        candidate['locationCode'] = loc['location_code']
         proposed.append({k: candidate[k] for k in ('cadId', 'level', 'column', 'locationCode', 'expectedPositionM',
                                                   'expectedWorldRotationDeg', 'expectedWorldScale', 'expectedMesh')} |
                         dict(locationId=loc['location_id'], confidence='rule_inferred',
-                             evidence=RULE))
+                             evidence=RULE, cadResolution=candidate['cadResolution'],
+                             codeResolution=dict(generatedCode=generated_code, sourceCode=loc['location_code'],
+                                                 method='exact' if generated_code == loc['location_code'] else 'same_family_numeric_width')))
     bindings, rejected = reject_ambiguous(proposed)
     for value in rejected:
         issue('duplicate_target_or_location', value['locationCode'])

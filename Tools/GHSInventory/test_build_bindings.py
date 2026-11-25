@@ -17,6 +17,89 @@ class BindingTests(unittest.TestCase):
                     bay_sequence=bay, spec_type=kind, pass_variant=passing,
                     rotation_deg=0.0, position_m=[1,2], mapping_key='A:0:3.7138')
 
+    def identity_fixture(self, source_row='S06', source_bay='13'):
+        def make(cid,row,bay,y,passing):
+            return dict(self.rack(row,str(bay),'B',passing),instance_id=cid,
+                        source_handles=[cid.removeprefix('CAD_')],
+                        physical_center_m=[10,y],position_m=[10,y])
+        target=make('CAD_MID',source_row,source_bay,0,True)
+        left=make('CAD_LEFT','SR06',12,-3.70975,False)
+        right=make('CAD_RIGHT','SR06',14,3.70975,False)
+        rows=[target,left,right]
+        attrs={r['source_handles'][-1]:dict(attributes=dict(BLOCK_CODE=r['row_code'],SEQ=r['bay_sequence'])) for r in rows}
+        return target,rows,attrs
+
+    def test_special_pass_requires_bilateral_cad_evidence(self):
+        target,rows,attrs=self.identity_fixture()
+        resolved,evidence,reason=self.m.resolve_rack_identity(target,rows,attrs)
+        self.assertEqual((resolved['row_code'],resolved['bay_sequence']),('SR06','13'))
+        self.assertEqual((target['row_code'],target['bay_sequence']),('S06','13'))
+        self.assertEqual([n['cadId'] for n in evidence['neighbors']],['CAD_LEFT','CAD_RIGHT'])
+        self.assertEqual(reason,'')
+
+    def test_direct_pass_bad_bay_is_corrected_only_by_bracketing_neighbors(self):
+        target,rows,attrs=self.identity_fixture('R31','15')
+        for r in rows:
+            r['spec_type']='A'
+            if r is not target:r['row_code']='R31';attrs[r['source_handles'][-1]]['attributes']['BLOCK_CODE']='R31'
+        resolved,evidence,reason=self.m.resolve_rack_identity(target,rows,attrs)
+        self.assertEqual(resolved['bay_sequence'],'13')
+        self.assertEqual(evidence['originalBay'],'15')
+        self.assertEqual(evidence['resolvedBay'],'13')
+
+    def test_special_pass_rejects_one_side_wrong_family_offset_or_tie(self):
+        for change in ('one_side','wrong_family','offset','tie','wrong_spec','wrong_direction','not_pass'):
+            with self.subTest(change=change):
+                target,rows,attrs=self.identity_fixture()
+                if change=='one_side':rows.pop()
+                elif change=='wrong_family':target['row_code']='S05';attrs['MID']['attributes']['BLOCK_CODE']='S05'
+                elif change=='offset':rows[2]['physical_center_m']=[10,4.2]
+                elif change=='tie':rows.append(dict(rows[2],instance_id='CAD_OTHER',source_handles=['OTHER']));attrs['OTHER']=attrs['RIGHT']
+                elif change=='wrong_spec':rows[2]['spec_type']='A'
+                elif change=='wrong_direction':rows[2]['rotation_deg']=180
+                elif change=='not_pass':target['pass_variant']=False
+                self.assertIsNone(self.m.resolve_rack_identity(target,rows,attrs)[0])
+
+    def test_identity_rejects_changed_original_or_neighbor_attributes(self):
+        target,rows,attrs=self.identity_fixture()
+        attrs['MID']['attributes']['SEQ']='99'
+        self.assertIsNone(self.m.resolve_rack_identity(target,rows,attrs)[0])
+        target,rows,attrs=self.identity_fixture();attrs['RIGHT']['attributes']['BLOCK_CODE']='SR05'
+        self.assertIsNone(self.m.resolve_rack_identity(target,rows,attrs)[0])
+
+    def test_placeholder_does_not_inherit_a_nearby_business_row(self):
+        target,rows,attrs=self.identity_fixture('A_A_000','1')
+        self.assertIsNone(self.m.resolve_rack_identity(target,rows,attrs)[0])
+
+    def test_numeric_width_matching_keeps_separator_families_and_raw_code(self):
+        current=dict(location_code='GHS-SR-02-073-01',location_id='1')
+        old=dict(location_code='GHS-SR02-73-01',location_id='2')
+        lookup=self.m.numeric_code_index({current['location_code']:[current],old['location_code']:[old]})
+        self.assertEqual(lookup[self.m.numeric_code_key('GHS-SR-02-73-01')],[current])
+        self.assertEqual(current['location_code'],'GHS-SR-02-073-01')
+        self.assertIsNone(self.m.numeric_code_key(old['location_code']))
+        self.assertIsNone(self.m.numeric_code_key('SR02-73-01'))
+        self.assertIsNone(self.m.numeric_code_key('R02-73-01'))
+
+    def test_multiple_same_family_numeric_codes_remain_ambiguous(self):
+        a=dict(location_code='GHS-SR-02-073-01',location_id='1')
+        b=dict(location_code='GHS-SR-02-73-01',location_id='2')
+        lookup=self.m.numeric_code_index({a['location_code']:[a],b['location_code']:[b]})
+        self.assertEqual(len(lookup[self.m.numeric_code_key(b['location_code'])]),2)
+
+    def test_sequence_conflicts_use_actual_centers_and_only_reject_inversion_endpoints(self):
+        def row(cid,bay,y,origin):
+            return dict(self.rack('R40',str(bay)),instance_id=cid,position_m=[10,y],physical_origin_m=[10,origin])
+        racks=[row('CAD_12',12,2,0),row('CAD_13',13,9,7.5),row('CAD_14',14,5.75,7.6),row('CAD_15',15,13,11)]
+        bad=self.m.sequence_conflicts(racks)
+        self.assertEqual(bad,{'CAD_13','CAD_14'})
+        self.assertEqual(self.m.increasing_sequence_rows([r for r in racks if r['instance_id'] not in bad]),{'R40'})
+
+    def test_sequence_conflicts_do_not_invent_an_order_for_duplicate_bay_numbers(self):
+        a=dict(self.rack(),instance_id='CAD_A',position_m=[1,20])
+        b=dict(a,instance_id='CAD_B',position_m=[1,10])
+        self.assertEqual(self.m.sequence_conflicts([a,b]),set())
+
     def test_complete_code_does_not_normalize_stale_alias(self):
         rack=self.rack()
         self.assertEqual(self.m.expected_code(rack, 1, 1, 1), 'GHS-R02-43-01')
@@ -48,7 +131,7 @@ class BindingTests(unittest.TestCase):
         self.assertEqual(self.m.crosscheck_location(dict(loc,warehouse_area_id='450'),r,3),'warehouse_area_mismatch')
 
     def test_numbering_direction_requires_positive_cad_progression(self):
-        def row(bay,y): return dict(self.rack(bay=str(bay)),physical_origin_m=[10,y])
+        def row(bay,y): return dict(self.rack(bay=str(bay)),physical_origin_m=[10,y],position_m=[10,y])
         self.assertEqual(self.m.increasing_sequence_rows([row(1,20),row(2,24)]),{'R02'})
         self.assertEqual(self.m.increasing_sequence_rows([row(1,24),row(2,20)]),set())
         self.assertEqual(self.m.increasing_sequence_rows([row(1,20)]),set())
