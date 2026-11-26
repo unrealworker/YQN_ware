@@ -229,6 +229,7 @@ bool FGHSPortalCommandsTest::RunTest(const FString&)
     if(!TestTrue(TEXT("Empty-world portal has a readable state"),Initial.IsValid()))return false;
     TestTrue(TEXT("Portal presentation is explicit"),Initial->GetBoolField(TEXT("portalEntry")));
     TestEqual(TEXT("Portal starts in the entry phase"),Initial->GetStringField(TEXT("phase")),FString(TEXT("idle")));
+    TestFalse(TEXT("Entry cannot reveal a warehouse before arrival is ready"),Initial->GetObjectField(TEXT("transition"))->GetBoolField(TEXT("arrivalStarted")));
     TestTrue(TEXT("No globe POIs or country projections in an empty portal world"),Initial->GetArrayField(TEXT("pois")).IsEmpty()&&Initial->GetArrayField(TEXT("countries")).IsEmpty());
     const FRotator BeforeRotation=Camera->DesiredRotation;const float BeforeZoom=Camera->DesiredZoom;
     Controller->Command(TEXT("{\"action\":\"orbit\",\"dx\":150,\"dy\":60}"));
@@ -239,6 +240,7 @@ bool FGHSPortalCommandsTest::RunTest(const FString&)
     TestEqual(TEXT("Unregistered destination fails without loading a map"),Rejected->GetStringField(TEXT("phase")),FString(TEXT("error")));
     TestFalse(TEXT("Rejected route provides a visible recovery message"),Rejected->GetStringField(TEXT("error")).IsEmpty());
     TestTrue(TEXT("Rejected route retains entry presentation"),Rejected->GetBoolField(TEXT("stageVisible")));
+    TestFalse(TEXT("An invalid route cannot uncover the scene"),Rejected->GetObjectField(TEXT("transition"))->GetBoolField(TEXT("arrivalStarted")));
     Controller->Command(TEXT("{\"action\":\"cancel\"}"));
     const auto Recovered=State();
     TestEqual(TEXT("Cancel recovers entry phase"),Recovered->GetStringField(TEXT("phase")),FString(TEXT("idle")));

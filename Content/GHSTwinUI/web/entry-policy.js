@@ -6,6 +6,8 @@
   'use strict';
   const ids=['ghs-ca','mpr-nj'];
   const browsing=phase=>['idle','selected','error'].includes(phase);
+  const sceneVisible=(phase,transition)=>phase==='warehouse'||
+    (phase==='revealing'&&!!transition&&transition.arrivalStarted===true);
   const entering=(phase,gate)=>!['warehouse','returning','error'].includes(phase)&&gate!=='cancelling'&&
     (gate==='pending'||['loading','flying','revealing'].includes(phase));
   function catalog(rows){
@@ -45,5 +47,5 @@
       matches(frame.content,0,frame.header.height,width,height-frame.header.height);
   }
   function imagePath(value){return typeof value==='string'&&/^assets\/[a-zA-Z0-9_./-]+\.(png|webp|jpe?g)$/.test(value)&&!value.includes('..')?value:'';}
-  return {catalog,filter,canEnter,advanceGate,curtainReady,catalogFrameReady,imagePath,browsing,entering};
+  return {catalog,filter,canEnter,advanceGate,curtainReady,catalogFrameReady,imagePath,browsing,entering,sceneVisible};
 });

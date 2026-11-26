@@ -161,12 +161,14 @@
     if(['loading','flying','revealing','warehouse','returning'].includes(state.phase)&&!loggedIn){loggedIn=true;showPage('warehouses');}
     if(typeof state.reducedMotion==='boolean'&&state.reducedMotion!==reduced){reduced=state.reducedMotion;applyMotion(false);}
     document.body.dataset.phase=state.phase;
+    const sceneVisible=policy.sceneVisible(state.phase,state.transition);
+    document.body.dataset.sceneVisible=String(sceneVisible);
     $('back-button').hidden=state.phase!=='warehouse';
     $('back-button').disabled=returnPending&&state.phase==='warehouse';
     $('back-button').title=state.error?'返回失败：'+state.error+'。点击重试':'返回仓库选择';
     if(state.phase!=='warehouse')returnPending=false;
     if(state.phase==='warehouse'&&state.error){returnPending=false;$('back-button').disabled=false;}
-    markInteractive($('portal'),state.phase!=='warehouse');
+    markInteractive($('portal'),!sceneVisible);
     updateCatalog();renderStatus();queueCurtain();
     if(state.phase!==lastPhase){
       if(state.phase!=='warehouse')requestAnimationFrame(viewport);

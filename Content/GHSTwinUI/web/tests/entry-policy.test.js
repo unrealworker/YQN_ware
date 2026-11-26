@@ -65,6 +65,24 @@ test('only a requested or entering warehouse shows a card spinner; returning and
   assert.equal(policy.entering('returning','pending'),false);
   assert.equal(policy.entering('loading','cancelling'),false);
 });
+test('catalog only uncovers a ready arrival; missing or non-boolean readiness never uncovers revealing',()=>{
+  for(const transition of [undefined,null,{}, {opacity:0,waitingForDestination:false},
+    {arrivalStarted:false},{arrivalStarted:'true'},{arrivalStarted:1}]){
+    assert.equal(policy.sceneVisible('revealing',transition),false);
+  }
+  const initial={phase:'loading',stageVisible:false,selectedId:'mpr-nj',warehouses:catalog,pois:[],countries:[],transition:{opacity:1}};
+  let current=initial;
+  for(const [phase,arrivalStarted,visible] of [
+    ['loading',false,false],['flying',true,false],['revealing',false,false],
+    ['revealing',true,true],['warehouse',false,true],['returning',true,false],['selected',false,false]
+  ]){
+    current=globe.nextState(current,JSON.stringify({phase,transition:{opacity:0,arrivalStarted}}));
+    assert.ok(current,'native readiness flag survives the bridge state parser');
+    assert.equal(policy.sceneVisible(current.phase,current.transition),visible,phase);
+    if(phase==='revealing')assert.equal(policy.canEnter(phase,'acknowledged','ghs-ca',catalog),false);
+  }
+  assert.equal(policy.sceneVisible('warehouse',undefined),true);
+});
 test('native catalog and phase validation rejects malformed updates without losing the last catalog',()=>{
   const initial={phase:'idle',stageVisible:true,selectedId:'',warehouses:catalog,pois:[],countries:[],transition:{opacity:0}};
   assert.equal(globe.nextState(initial,{phase:'loading'}).warehouses,catalog);

@@ -17,6 +17,7 @@ class AGHSWarehouseCameraPawn;
 class AGHSGlobeWarehouseMarkers;
 class AGHSGlobeCountryLabels;
 class SGHSGlobeWarehouseOverlay;
+class FJsonObject;
 
 /** Reuses the warehouse CEF surface, with a small return control inside the warehouse. */
 UCLASS()
@@ -123,6 +124,12 @@ private:
     double SmokeIdleYawStart=0,SmokeIdleYawEnd=0;
     bool bSmokeTest=false,bSmokeReducedMotion=false;
     bool bPortalSmokeTest=false,bPortalSmokeCancellation=false,bPortalSmokeRecovery=false,bPortalSmokeLogin=false;
+    bool bPortalSmokeArrivalPending=false,bPortalSmokeArrivalFrameReady=false;
+    int32 PortalSmokeArrivalProbe=0,PortalSmokeArrivalSamples=0;
+    double PortalSmokeArrivalProbeStarted=0;
+    FVector PortalSmokeArrivalPreviousLocation=FVector::ZeroVector;
+    FRotator PortalSmokeArrivalPreviousRotation=FRotator::ZeroRotator;
+    TArray<TSharedPtr<FJsonObject>> PortalSmokeArrivalEvidence;
     bool bSmokeIdleRotationVerified=false,bSmokeHUDRebuilt=false,bSmokeRoofOpened=false;
     bool bSmokeZoomBounds=false,bSmokeHomeReset=false,bSmokeFlightCaptured=false,bSmokeArrivalCaptured=false;
     TWeakObjectPtr<UGHSTwinHUDWidget> SmokePreviousHUD;

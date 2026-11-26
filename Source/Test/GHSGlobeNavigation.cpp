@@ -364,6 +364,32 @@ void AGHSGlobePlayerController::Command(const FString& Json)
 #if !UE_BUILD_SHIPPING
     if(Action==TEXT("portalSmokePage")&&bPortalSmokeTest)
     {FString Page;O->TryGetStringField(TEXT("page"),Page);bPortalSmokeLogin=Page==TEXT("warehouses");return;}
+    if(Action==TEXT("portalSmokeArrival")&&bPortalSmokeTest)
+    {
+        double Probe=0;FString Id;O->TryGetStringField(TEXT("warehouseId"),Id);
+        if(!bPortalSmokeArrivalPending||!Number(O,TEXT("probe"),Probe)||Probe!=PortalSmokeArrivalProbe||Id!=LoadedId)return;
+        bPortalSmokeArrivalPending=false;
+        bool SceneVisible=false,PortalHidden=false,ClearBackground=false,NoCover=false;
+        O->TryGetBoolField(TEXT("sceneVisible"),SceneVisible);O->TryGetBoolField(TEXT("portalHidden"),PortalHidden);
+        O->TryGetBoolField(TEXT("clearBackground"),ClearBackground);O->TryGetBoolField(TEXT("noCover"),NoCover);
+        const auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn());
+        if(Phase!=EPhase::Revealing||!bArrivalStarted||bReducedMotion||!Camera||Camera!=PersistentCamera||GetViewTarget()!=Camera||!Camera->WarehouseCamera||!Camera->IsPoseTransitionActive())
+        {SmokeError=TEXT("CEF arrival evidence did not arrive during an active camera transition");return;}
+        if(!SceneVisible||!PortalHidden||!ClearBackground||!NoCover)
+        {SmokeError=FString::Printf(TEXT("CEF entry obscures arrival: sceneVisible=%d portalHidden=%d clearBackground=%d noCover=%d"),SceneVisible,PortalHidden,ClearBackground,NoCover);return;}
+        const FVector Location=Camera->WarehouseCamera->GetComponentLocation();
+        const FRotator Rotation=Camera->WarehouseCamera->GetComponentRotation();
+        const double Travel=FVector::Distance(Location,PortalSmokeArrivalPreviousLocation);
+        const double Turn=Rotation.Quaternion().AngularDistance(PortalSmokeArrivalPreviousRotation.Quaternion());
+        if(PortalSmokeArrivalSamples>0&&Travel<=1.&&Turn<=FMath::DegreesToRadians(.05))
+        {SmokeError=TEXT("Arrival camera did not move between the two visible CEF samples");return;}
+        O->SetNumberField(TEXT("phaseTime"),PhaseTime);O->SetBoolField(TEXT("cameraTransitionActive"),true);
+        O->SetStringField(TEXT("cameraLocation"),Location.ToString());O->SetStringField(TEXT("cameraRotation"),Rotation.ToString());
+        O->SetNumberField(TEXT("cameraTravelSincePreviousSample"),PortalSmokeArrivalSamples>0?Travel:0.);
+        O->SetNumberField(TEXT("cameraTurnDegreesSincePreviousSample"),PortalSmokeArrivalSamples>0?FMath::RadiansToDegrees(Turn):0.);
+        PortalSmokeArrivalEvidence.Add(O);PortalSmokeArrivalPreviousLocation=Location;PortalSmokeArrivalPreviousRotation=Rotation;
+        ++PortalSmokeArrivalSamples;bPortalSmokeArrivalFrameReady=true;return;
+    }
 #endif
     if(Action==TEXT("reducedMotion")){O->TryGetBoolField(TEXT("enabled"),bReducedMotion);return;}
     if(Action==TEXT("curtainReady"))
@@ -493,7 +519,7 @@ void AGHSGlobePlayerController::PlayerTick(float Dt)
         if(!Experience||!Experience->IsReady(*this)){PhaseTime=0;MaskOpacity=1;if(Now-LoadStarted>45)Fail(TEXT("仓库界面未就绪，请重试"));}
         else
         {
-            if(!bArrivalStarted){Experience->BeginArrival(*this,bReducedMotion);bArrivalStarted=true;PhaseTime=0;}
+            if(!bArrivalStarted){Experience->BeginArrival(*this,bReducedMotion);bArrivalStarted=true;PhaseTime=0;PushState();}
             const bool Arrived=Experience->TickArrival(*this,Dt);
             MaskOpacity=1-Ease(PhaseTime/(bReducedMotion?.18f:.55f));
             if(MaskOpacity<=0&&Arrived){Phase=EPhase::Warehouse;if(GlobeHUD)GlobeHUD->SetCompact(true);PushState();}
@@ -830,7 +856,50 @@ void AGHSGlobePlayerController::TickPortalSmokeTest()
             if(!Actor->IsHidden()||Actor->IsActorTickEnabled())SmokeError=TEXT("Returning exposed the legacy globe stage");
         ++SmokeCycles;
     };
+    if(bPortalSmokeArrivalFrameReady)
+    {
+        bPortalSmokeArrivalFrameReady=false;
+        if(Phase!=EPhase::Revealing)SmokeError=TEXT("Arrival screenshot missed the moving camera phase");
+        else
+        {
+            const FString Name=FString::Printf(TEXT("%s-arrival-%d"),*LoadedId,PortalSmokeArrivalSamples);
+            PortalSmokeArrivalEvidence.Last()->SetStringField(TEXT("screenshot"),Name+TEXT(".png"));
+            Snapshot(*Name);
+        }
+    }
+    if((SmokeStep==4||SmokeStep==8)&&Phase==EPhase::Revealing&&bArrivalStarted&&
+        !bPortalSmokeArrivalPending&&PortalSmokeArrivalSamples<2&&PhaseTime>(PortalSmokeArrivalSamples==0?.25f:.8f))
+    {
+        if(!GlobeHUD||!GlobeHUD->Browser)SmokeError=TEXT("CEF surface unavailable during arrival");
+        else
+        {
+            bPortalSmokeArrivalPending=true;PortalSmokeArrivalProbeStarted=Now;++PortalSmokeArrivalProbe;
+            // Inspect the live CEF DOM after two paints, not the requested native
+            // phase alone. An opaque catalog regression must fail this smoke test.
+            GlobeHUD->Browser->Evaluate(FString::Printf(TEXT(R"JS(
+                requestAnimationFrame(()=>requestAnimationFrame(()=>{
+                    const portal=document.getElementById('portal');
+                    const transparent=el=>{
+                        const s=getComputedStyle(el),c=s.backgroundColor.match(/^rgba?\(([^)]+)\)$/);
+                        const channels=c?c[1].trim().split(/[,\s/]+/):[];
+                        return s.backgroundImage==='none'&&channels.length===4&&Number(channels[3])===0;
+                    };
+                    const points=[[.25,.25],[.75,.25],[.5,.5],[.25,.75],[.75,.75]];
+                    const noCover=[...document.querySelectorAll('body *')].every(el=>{
+                        const s=getComputedStyle(el),r=el.getBoundingClientRect();
+                        return s.display==='none'||s.visibility==='hidden'||Number(s.opacity)===0||r.width<=0||r.height<=0||transparent(el)||
+                            !points.some(([x,y])=>innerWidth*x>=r.left&&innerWidth*x<=r.right&&innerHeight*y>=r.top&&innerHeight*y<=r.bottom);
+                    });
+                    window.ue.twin.command(JSON.stringify({action:'portalSmokeArrival',probe:%d,warehouseId:'%s',
+                        sceneVisible:document.body.dataset.phase==='revealing'&&document.body.dataset.sceneVisible==='true',
+                        portalHidden:!!portal&&getComputedStyle(portal).display==='none'&&portal.getAttribute('aria-hidden')==='true',
+                        clearBackground:transparent(document.documentElement)&&transparent(document.body),noCover}));
+                }));
+            )JS"),PortalSmokeArrivalProbe,*LoadedId));
+        }
+    }
     if(Now-SmokeStarted>300)SmokeError=TEXT("Portal validation exceeded 300 seconds");
+    if(bPortalSmokeArrivalPending&&Now-PortalSmokeArrivalProbeStarted>2)SmokeError=TEXT("CEF did not return arrival visibility evidence");
     if(SmokeStep==12&&!bPortalSmokeLogin&&Now-SmokeStepStarted>5)SmokeError=TEXT("CEF login submit did not reach the warehouse selection page");
     if(SmokeStep>1&&Phase==EPhase::Error)SmokeError=Error;
     if(!SmokeError.IsEmpty())SmokeStep=99;
@@ -869,10 +938,12 @@ void AGHSGlobePlayerController::TickPortalSmokeTest()
     }
     else if(SmokeStep==3&&!Destination&&!bUnloadRequested&&Now-SmokeStepStarted>1)
     {
+        PortalSmokeArrivalSamples=0;bPortalSmokeArrivalPending=false;
         if(GlobeHUD&&GlobeHUD->Browser)GlobeHUD->Browser->Evaluate(TEXT("document.querySelector('[data-enter=\"ghs-ca\"]')?.click();"));
         Advance(4);
     }
-    else if(SmokeStep==4&&Phase==EPhase::Warehouse)Advance(16);
+    else if(SmokeStep==4&&Phase==EPhase::Warehouse)
+    {if(PortalSmokeArrivalSamples!=2)SmokeError=TEXT("GHS arrival lacks two visible moving-camera samples");Advance(16);}
     else if(SmokeStep==16&&Now-SmokeStepStarted>1)
     {CheckWarehouse(TEXT("ghs-ca"));Snapshot(TEXT("03-ghs-warehouse"));Advance(5);}
     else if(SmokeStep==5&&Now-SmokeStepStarted>1)
@@ -887,10 +958,12 @@ void AGHSGlobePlayerController::TickPortalSmokeTest()
     {Snapshot(TEXT("04-ghs-return"));Advance(7);}
     else if(SmokeStep==7&&Now-SmokeStepStarted>1)
     {
+        PortalSmokeArrivalSamples=0;bPortalSmokeArrivalPending=false;
         if(GlobeHUD&&GlobeHUD->Browser)GlobeHUD->Browser->Evaluate(TEXT("document.querySelector('[data-enter=\"mpr-nj\"]')?.click();"));
         Advance(8);
     }
-    else if(SmokeStep==8&&Phase==EPhase::Warehouse)Advance(17);
+    else if(SmokeStep==8&&Phase==EPhase::Warehouse)
+    {if(PortalSmokeArrivalSamples!=2)SmokeError=TEXT("MPR arrival lacks two visible moving-camera samples");Advance(17);}
     else if(SmokeStep==17&&Now-SmokeStepStarted>1)
     {CheckWarehouse(TEXT("mpr-nj"));Snapshot(TEXT("05-mpr-warehouse"));Advance(9);}
     else if(SmokeStep==9&&Now-SmokeStepStarted>1)
@@ -905,13 +978,15 @@ void AGHSGlobePlayerController::TickPortalSmokeTest()
     else if(SmokeStep==11&&Now-SmokeStepStarted>1)SmokeStep=99;
     if(SmokeStep==99)
     {
-        const bool Passed=SmokeError.IsEmpty()&&SmokeCycles==2&&bPortalSmokeLogin&&bPortalSmokeCancellation&&bPortalSmokeRecovery&&bSmokeHUDRebuilt;
+        const bool Passed=SmokeError.IsEmpty()&&SmokeCycles==2&&bPortalSmokeLogin&&bPortalSmokeCancellation&&bPortalSmokeRecovery&&bSmokeHUDRebuilt&&PortalSmokeArrivalEvidence.Num()==4;
         auto Report=MakeShared<FJsonObject>();Report->SetBoolField(TEXT("success"),Passed);Report->SetStringField(TEXT("error"),SmokeError);
         Report->SetNumberField(TEXT("warehouseCycles"),SmokeCycles);Report->SetBoolField(TEXT("loadingCancellation"),bPortalSmokeCancellation);
         Report->SetBoolField(TEXT("loginSubmitReachedSelection"),bPortalSmokeLogin);
         Report->SetBoolField(TEXT("invalidSelectionRecovery"),bPortalSmokeRecovery);Report->SetBoolField(TEXT("hudRecreated"),bSmokeHUDRebuilt);
         Report->SetBoolField(TEXT("browserReady"),bReady);Report->SetBoolField(TEXT("destinationUnloaded"),!Destination&&!bUnloadRequested);
-        Report->SetStringField(TEXT("scope"),TEXT("Real CEF login, GHS/MPR card and return button clicks with screenshots; curtain acknowledgements, HUD recreation and unloading; native command checks for loading cancellation and invalid selection recovery"));
+        TArray<TSharedPtr<FJsonValue>> ArrivalEvidence;for(const auto& Sample:PortalSmokeArrivalEvidence)ArrivalEvidence.Add(MakeShared<FJsonValueObject>(Sample));
+        Report->SetArrayField(TEXT("arrivalEvidence"),ArrivalEvidence);
+        Report->SetStringField(TEXT("scope"),TEXT("Real CEF login, GHS/MPR card and return button clicks; two mid-arrival DOM visibility and moving camera samples with screenshot requests per warehouse (screenshots require visual review); curtain acknowledgements, HUD recreation and unloading; native loading cancellation and invalid selection recovery"));
         const FString Folder=FPaths::ProjectSavedDir()/TEXT("PortalValidation");IFileManager::Get().MakeDirectory(*Folder,true);
         FFileHelper::SaveStringToFile(Encode(Report),*(Folder/TEXT("result.json")));
         UE_LOG(LogTemp,Display,TEXT("GHS_PORTAL_SMOKE %s"),*Encode(Report));bPortalSmokeTest=false;FPlatformMisc::RequestExitWithStatus(false,Passed?0:1);
@@ -932,6 +1007,7 @@ FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
     auto View=MakeShared<FJsonObject>();View->SetNumberField(TEXT("width"),Viewport.X);View->SetNumberField(TEXT("height"),Viewport.Y);Root->SetObjectField(TEXT("viewport"),View);
     auto Transition=MakeShared<FJsonObject>();Transition->SetNumberField(TEXT("opacity"),MaskOpacity);Transition->SetNumberField(TEXT("progress"),FMath::Clamp(PhaseTime/EntryTransitionDuration(),0.f,1.f));
     Transition->SetNumberField(TEXT("generation"),Curtain.GetGeneration());
+    Transition->SetBoolField(TEXT("arrivalStarted"),Phase==EPhase::Revealing&&bArrivalStarted);
     Transition->SetBoolField(TEXT("waitingForDestination"),
         (Phase==EPhase::Flying&&PhaseTime>EntryTransitionDuration()+2)
         ||(Phase==EPhase::Revealing&&!bArrivalStarted&&GetWorld()->GetTimeSeconds()-LoadStarted>2));
