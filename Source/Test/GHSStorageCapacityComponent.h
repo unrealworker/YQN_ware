@@ -47,6 +47,10 @@ public:
     bool HasRealInventory() const { return BoundInventorySlots>0; }
     /** Called by the existing bounded scene transform audit; no additional tick or world scan. */
     void VerifyInventoryInstance(UInstancedStaticMeshComponent* Component,int32 Instance,const FTransform& WorldTransform);
+    /** Resolve the occupied WMS location and its material slot on this exact CAD instance. */
+    bool ResolveReplaySlot(UInstancedStaticMeshComponent* Component,int32 Instance,const FString& CadId,
+        int32 Level,int32 Column,const FString& LocationId,const FString& LocationCode,int32& Slot,FBox& WorldBounds) const;
+    bool SetReplaySlotHidden(UInstancedStaticMeshComponent* Component,int32 Instance,int32 Slot,bool bHidden);
 
 protected:
     virtual void BeginPlay() override;
@@ -60,12 +64,14 @@ private:
         TArray<FSlot> Slots;
         TArray<FGHSInventoryMask> InventoryMasks;
         TArray<FString> InventoryCadIds;
+        TMap<int32,uint64> ReplayHiddenSlots;
         TArray<float> OriginalCustomData;
         int32 OriginalCustomDataFloats=0;
         int32 BaseSlot=0, SlotsPerInstance=0, InstanceCount=0;
         bool bRack=false;
         bool bRestoreAlwaysShadowInvalidation=false, bShadowCacheRefreshing=false;
     };
+    static bool WriteInstanceMask(FGroup& Group,int32 Instance);
     void BeginCapacityShadowUpdate(bool bRackChanged, bool bFloorChanged);
     void RestoreCachedShadows();
     TArray<FGroup> Groups;

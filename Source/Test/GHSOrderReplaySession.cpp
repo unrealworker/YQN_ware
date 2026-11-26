@@ -1,5 +1,6 @@
 #include "GHSOrderReplaySession.h"
 #include "GHSOrderReplayActor.h"
+#include "GHSStorageCapacityComponent.h"
 #include "GHSWarehousePlayerController.h"
 #include "GHSCampusTrafficActor.h"
 #include "GHSTwinSceneData.h"
@@ -72,7 +73,7 @@ bool GHSReplaySources::Resolve(const FJsonObject& Source,const FJsonObject& Regi
     FVector Position,Scale;
     double Yaw;
     if(!Source.TryGetStringField(TEXT("cadId"),Id) || !Id.StartsWith(TEXT("CAD_"))
-        || !Source.TryGetStringField(TEXT("role"),Role) || (Role!=TEXT("cargo") && Role!=TEXT("door"))
+        || !Source.TryGetStringField(TEXT("role"),Role) || (Role!=TEXT("cargo") && Role!=TEXT("door") && Role!=TEXT("rackSlot"))
         || !ReadReplayVector(Source,TEXT("position"),Position) || !ReadReplayVector(Source,TEXT("scale"),Scale)
         || !Source.TryGetNumberField(TEXT("yaw"),Yaw) || !FMath::IsFinite(Yaw)) return false;
     const TArray<TSharedPtr<FJsonValue>>* Groups=nullptr;
@@ -85,7 +86,9 @@ bool GHSReplaySources::Resolve(const FJsonObject& Source,const FJsonObject& Regi
         const TArray<TSharedPtr<FJsonValue>>* Entries=nullptr;
         if(!Group || !Group->TryGetStringField(TEXT("mesh"),Mesh) || !Group->TryGetStringField(TEXT("actor"),Actor)
             || !Group->TryGetArrayField(TEXT("instances"),Entries)) continue;
-        if(Role==TEXT("door") ? Mesh!=TEXT("SM_GHS_V2DockDoor") : !Mesh.StartsWith(TEXT("SM_GHS_Presentation_Cargo"))) continue;
+        if((Role==TEXT("door") && Mesh!=TEXT("SM_GHS_V2DockDoor"))
+            || (Role==TEXT("cargo") && !Mesh.StartsWith(TEXT("SM_GHS_Presentation_Cargo")))
+            || (Role==TEXT("rackSlot") && !Mesh.StartsWith(TEXT("SM_GHS_V2Rack_CAD24_")))) continue;
         for(const auto& Entry:*Entries)
         {
             const auto Row=Entry->AsObject();
@@ -94,14 +97,15 @@ bool GHSReplaySources::Resolve(const FJsonObject& Source,const FJsonObject& Regi
             FVector Cad;
             if(!MeshName.IsEmpty() || !ReadReplayVector(*Row,TEXT("position_m"),Cad)
                 || !Position.Equals(FVector(Cad.X*100,-Cad.Y*100,Cad.Z*100),.15)) return false;
-            if(Role==TEXT("cargo"))
+            if(Role!=TEXT("door"))
             {
                 double CadYaw;
                 FVector CadScale;
                 if(!Row->TryGetNumberField(TEXT("rotation_deg"),CadYaw) || !ReadReplayVector(*Row,TEXT("scale"),CadScale)
                     || FMath::Abs(FMath::FindDeltaAngleDegrees(-CadYaw,Yaw))>.05 || !Scale.Equals(CadScale,.001)) return false;
             }
-            MeshName=Mesh;GroupName=Actor;
+            MeshName=Role==TEXT("rackSlot")?Mesh+TEXT("_Capacity"):Mesh;
+            GroupName=Actor;
         }
     }
     if(MeshName.IsEmpty()) return false;
@@ -111,7 +115,7 @@ bool GHSReplaySources::Resolve(const FJsonObject& Source,const FJsonObject& Regi
     for(auto* Component:Components)
     {
         if(!Component || !Component->GetStaticMesh() || Component->GetStaticMesh()->GetName()!=MeshName) continue;
-        if(Role==TEXT("cargo") && !Component->ComponentHasTag(FName(TEXT("GHSStorageGroup:")+GroupName))) continue;
+        if(Role!=TEXT("door") && !Component->ComponentHasTag(FName(TEXT("GHSStorageGroup:")+GroupName))) continue;
         for(int32 I=0;I<Component->GetInstanceCount();++I)
         {
             FTransform Actual;
@@ -199,7 +203,7 @@ bool UGHSOrderReplaySession::LoadParkingAlternates()
 }
 void UGHSOrderReplaySession::CaptureAndIsolate()
 {
-    Originals.Reset();Instances.Reset();bCaptured=true;bRestoreVerified=false;
+    Originals.Reset();Instances.Reset();RackSlots.Reset();bCaptured=true;bRestoreVerified=false;
     if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwner()))
     {
         if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(PC->GetPawn())) {CameraPose=Camera->CaptureReplayPose();Camera->FreezeCurrentPose();}
@@ -237,12 +241,16 @@ bool UGHSOrderReplaySession::HideSourceInstances()
         for(UInstancedStaticMeshComponent* Component:OnActor) Components.Add(Component);
     }
     TArray<FInstanceState> Resolved;
-    int32 DoorCount=0,CargoCount=0;
+    TArray<FRackSlotState> SlotSources;
+    TSet<FString> RackCargoIds;
+    auto* PC=Cast<AGHSWarehousePlayerController>(GetOwner());
+    auto* Capacity=PC?PC->StorageCapacity.Get():nullptr;
+    int32 DoorCount=0,GroundCount=0;
     for(const auto& Source:Sources)
     {
         const auto Object=Source->AsObject();
         FString Role,CadId;
-        if(!Object || !Object->TryGetStringField(TEXT("role"),Role) || (Role!=TEXT("cargo") && Role!=TEXT("door")))
+        if(!Object || !Object->TryGetStringField(TEXT("role"),Role) || (Role!=TEXT("cargo") && Role!=TEXT("door") && Role!=TEXT("rackSlot")))
         {Error=TEXT("追溯文件包含无效的实例类型。");return false;}
         UInstancedStaticMeshComponent* Component=nullptr;
         int32 Index=INDEX_NONE;
@@ -266,11 +274,45 @@ bool UGHSOrderReplaySession::HideSourceInstances()
             !Component->GetInstanceTransform(Index,Transform,false) || Resolved.ContainsByPredicate([&](const FInstanceState& State)
                 {return State.Component.Get()==Component && State.Index==Index;}))
         {Error=TEXT("追溯引用缺失或指向同一场景实例：")+CadId;return false;}
-        if(Role==TEXT("cargo")) {++CargoCount;CargoBounds+=Component->Bounds.GetBox();}
+        if(Role==TEXT("rackSlot"))
+        {
+            FString LocationId,LocationCode;
+            int32 Level=0,Column=0,Slot=INDEX_NONE;
+            FBox Bounds(ForceInit);
+            if(Hash.IsEmpty() || !Capacity || !Object->TryGetStringField(TEXT("locationId"),LocationId)
+                || !Object->TryGetStringField(TEXT("locationCode"),LocationCode) || !Object->TryGetNumberField(TEXT("level"),Level)
+                || !Object->TryGetNumberField(TEXT("column"),Column) || !Capacity->InitializeForWorld()
+                || !Capacity->ResolveReplaySlot(Component,Index,CadId,Level,Column,LocationId,LocationCode,Slot,Bounds))
+            {Error=TEXT("货架取货位未匹配当前有货库位：")+CadId+TEXT(" / ")+LocationCode;return false;}
+            if(SlotSources.ContainsByPredicate([&](const FRackSlotState& SourceSlot)
+                {return SourceSlot.Component.Get()==Component && SourceSlot.Instance==Index && SourceSlot.Slot==Slot;}))
+            {Error=TEXT("货架取货位重复：")+LocationCode;return false;}
+            FString CargoId;
+            FVector PalletBase=Bounds.GetCenter();
+            PalletBase.Z=Bounds.Min.Z;
+            bool bCargoAtSlot=false;
+            if(Object->TryGetStringField(TEXT("cargoId"),CargoId) && !RackCargoIds.Contains(CargoId))
+            {
+                for(const auto& Track:Replay->GetSimulation().Tracks)
+                {
+                    if(Track.Kind!="cargo" || FString(UTF8_TO_TCHAR(Track.Id.c_str()))!=CargoId || Track.Keys.empty()) continue;
+                    const auto& Initial=Track.Keys.front();
+                    const auto& P=Initial.Position;
+                    bCargoAtSlot=Initial.Time==0 && Initial.Visible && Initial.Owner==-1 && FVector(P.X,P.Y,P.Z).Equals(PalletBase,.15);
+                    break;
+                }
+            }
+            if(!bCargoAtSlot) {Error=TEXT("回放托盘的起点未匹配货架取货位：")+LocationCode;return false;}
+            RackCargoIds.Add(CargoId);
+            SlotSources.Add({Component,Index,Slot});
+            CargoBounds+=Bounds;
+            continue;
+        }
+        if(Role==TEXT("cargo")) {++GroundCount;CargoBounds+=Component->Bounds.GetBox();}
         else {++DoorCount;LoadingDoors.Add(Component->GetStaticMesh()->GetBoundingBox().TransformBy(Transform*Component->GetComponentTransform()));}
         Resolved.Add({Component,Index,Transform});
     }
-    if(!CargoBounds.IsValid || CargoCount!=GHSReplay::ForkCount || DoorCount!=GHSReplay::TruckCount)
+    if(!CargoBounds.IsValid || 2*GroundCount+SlotSources.Num()!=GHSReplay::CargoCount || DoorCount!=GHSReplay::TruckCount)
     {Error=TEXT("回放取货托盘或月台数量与路径不一致。");return false;}
     for(const FInstanceState& Record:Resolved)
     {
@@ -278,6 +320,12 @@ bool UGHSOrderReplaySession::HideSourceInstances()
         if(!Record.Component->UpdateInstanceTransform(Record.Index,Hidden,false,true,true))
         {Error=TEXT("回放实例无法隐藏，已取消本次追溯。");return false;}
         Instances.Add(Record);
+    }
+    for(const auto& Record:SlotSources)
+    {
+        if(!Capacity->SetReplaySlotHidden(Record.Component.Get(),Record.Instance,Record.Slot,true))
+        {Error=TEXT("无法分离货架托位，已取消本次追溯。");return false;}
+        RackSlots.Add(Record);
     }
     // The full floor-storage groups define this view. Far-west docks and trucks
     // on public roads remain available through follow but never widen this frame.
@@ -291,7 +339,7 @@ bool UGHSOrderReplaySession::HideSourceInstances()
 void UGHSOrderReplaySession::Restore()
 {
     if(!bCaptured) {Meshes.Reset();ParkingAlternates.Reset();return;}
-    RestoredActors=RestoredComponents=RestoredInstances=RestoredMeshes=0;bRestoreVerified=true;
+    RestoredActors=RestoredComponents=RestoredInstances=RestoredMeshes=RestoredRackSlots=0;bRestoreVerified=true;
     for(const auto& Record:Originals) if(auto* Actor=Record.Actor.Get())
     {
         Actor->SetActorHiddenInGame(Record.Hidden);Actor->SetActorTickEnabled(Record.Tick);++RestoredActors;
@@ -305,7 +353,15 @@ void UGHSOrderReplaySession::Restore()
     }
     for(const auto& Record:Meshes) if(auto* Component=Record.Component.Get())
     {Component->SetStaticMesh(Record.Mesh.Get());Component->SetMobility(EComponentMobility::Type(Record.Mobility));bRestoreVerified&=Component->GetStaticMesh()==Record.Mesh.Get() && uint8(Component->Mobility)==Record.Mobility;++RestoredMeshes;}
-    if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwner()))
+    auto* PC=Cast<AGHSWarehousePlayerController>(GetOwner());
+    for(const auto& Record:RackSlots)
+    {
+        if(PC && PC->StorageCapacity && PC->StorageCapacity->SetReplaySlotHidden(Record.Component.Get(),Record.Instance,Record.Slot,false))
+            ++RestoredRackSlots;
+        else bRestoreVerified=false;
+    }
+    RackSlots.Reset();
+    if(PC)
     {
         if(PC->WarehouseRoof) PC->WarehouseRoof->RestoreReplayState(RoofTransition,bSavedBuilding);
         if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(PC->GetPawn())) Camera->RestoreReplayPose(CameraPose);
@@ -428,5 +484,6 @@ FString UGHSOrderReplaySession::GetRestorationReport() const
     auto Result=MakeShared<FJsonObject>();Result->SetBoolField(TEXT("verified"),bRestoreVerified);
     Result->SetNumberField(TEXT("actors"),RestoredActors);Result->SetNumberField(TEXT("components"),RestoredComponents);
     Result->SetNumberField(TEXT("instances"),RestoredInstances);Result->SetNumberField(TEXT("meshes"),RestoredMeshes);
+    Result->SetNumberField(TEXT("rackSlots"),RestoredRackSlots);
     Result->SetBoolField(TEXT("active"),bActive);Result->SetBoolField(TEXT("replayActorExists"),IsValid(Replay));return WriteSessionJson(Result);
 }

@@ -8,13 +8,16 @@ from shapely.affinity import affine_transform
 from shapely.geometry import Polygon,LineString,box
 from shapely.ops import unary_union
 from shapely.prepared import prep
-from replay_audit_sources import verify_sources
+from replay_audit_sources import verify_sources, timeline_path as replay_timeline_path
 plan=json.loads((OUT/'routes_plan.json').read_text(encoding='utf8'))
-path=ROOT/'Content/GHSTwinUI/data/order-replay.json';data=json.loads(path.read_text(encoding='utf8'));tracks=data['tracks']
+path=replay_timeline_path(ROOT);data=json.loads(path.read_text(encoding='utf8'));tracks=data['tracks']
 probe,source_hashes=verify_sources(ROOT,data)
 assert plan['source_probe_sha256']==source_hashes['source_probe_sha256']
-excluded={(s['actor'],s['component'],s['index']) for s in data['sourceInstances']}
-assert len(excluded)==8
+excluded={(s['actor'],s['component'],s['index']) for s in data['sourceInstances'] if s['role'] in ('cargo','door')}
+# These three bays are audited as actual 3D geometry in replay_validate_cargo_contacts.
+rack_sources={(s['actor'],s['component'],s['index']) for s in data['sourceInstances'] if s['role']=='rackSlot'}
+assert len(excluded)+len(rack_sources)>0
+source_bays_seen=set()
 resolved=set()
 obstacles=[];coverage=Counter()
 pass_shapes={}
@@ -33,6 +36,9 @@ for item in probe['items']:
             resolved.add(target)
             continue
         coverage[item['label']]+=1
+        if target in rack_sources:
+            source_bays_seen.add(target)
+            continue
         if '_PASS' in item['label'] or item['label'].endswith('_D1'):
             tr=inst['transform'];yaw=math.radians(tr['rotation_deg'][1]);c,s=math.cos(yaw),math.sin(yaw)
             sx,sy,sz=tr['scale'];px,py,pz=tr['position_cm']
@@ -41,6 +47,7 @@ for item in probe['items']:
             continue
         a,b,c,d,e,f=[v/100 for v in inst['bounds_cm']]
         if f>=.03 and c<=3.9:obstacles.append(box(a,b,d,e))
+assert source_bays_seen==rack_sources
 assert resolved==excluded, 'Source exclusion does not resolve in the scene'
 registry=json.loads((ROOT/'Content/GHSTwinUI/data/scene-bindings.json').read_bytes())
 for g in registry['groups']:
@@ -123,7 +130,7 @@ report=dict(success=not hits,**source_hashes,coverage=coverage,timeline_sha256=h
     facade_manifest_sha256=hashlib.sha256(facade_path.read_bytes()).hexdigest(),
     coordinate_tolerance_m=coordinate_tolerance_m,
     maximum_translation_step_m=.20,maximum_yaw_step_degrees=2,unique_forklift_poses_checked=checked,solid_geometry_count=len(obstacles),
-    continuous_part_hulls=True,rotation_sweep_padding_m=.003,collision_count=len(hits),collisions=hits[:60],scope='Chassis, tines and carried pallet swept against current CAD 2.4 rack, ground load, column, charging support, closed dock door and wall geometry. Passage and dock rack footprints use actual LOD0 faces intersecting the 0.03–3.90m height band. The five replacement stacks and three replay-operated doors are excluded.')
+    source_bays_with_separate_fbx_audit=len(source_bays_seen),continuous_part_hulls=True,rotation_sweep_padding_m=.003,collision_count=len(hits),collisions=hits[:60],scope='Chassis, tines and carried pallet swept against current CAD 2.4 rack, ground load, column, charging support, closed dock door and wall geometry. Passage and dock rack footprints use actual LOD0 faces intersecting the 0.03–3.90m height band. Replacement floor stacks and open doors are excluded. Exact source bay geometry, including every steel member and all neighboring slots, is tested by replay_validate_cargo_contacts.')
 (OUT/'static_actions_validation.json').write_text(json.dumps(report,indent=2),encoding='utf8')
 print(json.dumps({k:v for k,v in report.items() if k!='collisions'}))
 assert report['success'],'Inspect Saved/OrderReplay/static_actions_validation.json'

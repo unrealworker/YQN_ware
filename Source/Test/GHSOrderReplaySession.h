@@ -76,6 +76,7 @@ private:
     struct FComponentState {TWeakObjectPtr<UActorComponent> Component;bool Tick=false;};
     struct FActorState {TWeakObjectPtr<AActor> Actor;bool Hidden=false,Tick=false;TArray<FComponentState> Components;};
     struct FInstanceState {TWeakObjectPtr<UInstancedStaticMeshComponent> Component;int32 Index=0;FTransform Transform;};
+    struct FRackSlotState {TWeakObjectPtr<UInstancedStaticMeshComponent> Component;int32 Instance=INDEX_NONE,Slot=INDEX_NONE;};
     struct FMeshState {TWeakObjectPtr<UStaticMeshComponent> Component;TWeakObjectPtr<UStaticMesh> Mesh;uint8 Mobility=0;};
     void CaptureAndIsolate();
     void Restore();
@@ -85,6 +86,7 @@ private:
     UPROPERTY(Transient) TArray<TObjectPtr<UStaticMesh>> ParkingAlternates;
     TArray<FActorState> Originals;
     TArray<FInstanceState> Instances;
+    TArray<FRackSlotState> RackSlots;
     TArray<FMeshState> Meshes;
     FGHSReplayClock Clock;
     FGHSReplayExitGuard Exit;
@@ -93,6 +95,7 @@ private:
     bool bSavedBuilding=true,bActive=false,bPreparing=false,bCaptured=false;
     FString OrderId,StartUtc,EndUtc,SelectedId,FollowId,TrailMode=TEXT("all"),Error,ExitTitle,ExitLabel;
     int32 RestoredActors=0,RestoredComponents=0,RestoredInstances=0,RestoredMeshes=0;
+    int32 RestoredRackSlots=0;
     bool bRestoreVerified=true;
     mutable TArray<TSharedPtr<FJsonValue>> CachedMarkers;
     double EventWindowStart=-1,EventWindowEnd=-1;

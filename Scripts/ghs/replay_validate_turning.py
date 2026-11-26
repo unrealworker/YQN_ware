@@ -6,7 +6,7 @@ import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-DRIVING = {'运送托盘', '返回地堆', '前往补给月台', '补给运回地堆'}
+DRIVING = {'运送托盘', '补给运回货架', '返回地堆', '返回货架', '前往补给月台', '补给运回地堆'}
 
 
 def audit(data):
@@ -38,7 +38,7 @@ def audit(data):
             rates.append((abs(yaw_rate), a[0], b[0]))
             heading_steps.append(angle)
             speeds.append(distance / dt)
-            expected_speed = 3.2 if a[7] in {'返回地堆', '前往补给月台'} else 2.6
+            expected_speed = 3.2 if a[7] in {'返回地堆', '返回货架', '前往补给月台'} else 2.6
             speed_errors.append(abs(speed - expected_speed))
         worst = max(rates, default=(0, 0, 0))
         rows.append(dict(id=track['id'], driving_intervals=len(rates),

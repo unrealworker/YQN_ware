@@ -17,10 +17,10 @@ from mathutils.bvhtree import BVHTree
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'Scripts/ghs'))
-from replay_audit_sources import verify_sources
+from replay_audit_sources import verify_sources, timeline_path as replay_timeline_path
 
 ASSETS = ROOT/'SourceAssets/GHS/OrderReplay'
-timeline = ROOT/'Content/GHSTwinUI/data/order-replay.json'
+timeline = replay_timeline_path(ROOT)
 timeline_bytes = timeline.read_bytes()
 data = json.loads(timeline_bytes)
 _, provenance = verify_sources(ROOT,data)
@@ -63,7 +63,7 @@ def contact_samples():
             distance=math.dist(a[1],b[1])
             rotation=abs(math.remainder(b[2]-a[2],360))
             lift=abs(b[3]-a[3])
-            precision=2 if a[7] not in ('运送托盘','返回地堆','前往补给月台','补给运回地堆','驶离园区','测试补给车 · 返回园区','倒车入泊') else 15
+            precision=2 if a[7] not in ('运送托盘','返回货架','补给运回货架','返回地堆','前往补给月台','补给运回地堆','驶离园区','测试补给车 · 返回园区','倒车入泊') else 15
             if not a[5] or not b[5]:
                 continue
             n=max(1,math.ceil(distance/precision),math.ceil(rotation/2),math.ceil(lift/2))
@@ -72,7 +72,8 @@ def contact_samples():
 
 
 def read_mesh(name):
-    file=ASSETS/(name+'.fbx')
+    model=models[name]
+    file=Path(model['source_file']) if 'source_file' in model else ASSETS/(name+'.fbx')
     assert hashlib.sha256(file.read_bytes()).hexdigest()==models[name]['sha256']
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.ops.import_scene.fbx(filepath=str(file))
@@ -85,7 +86,17 @@ def read_mesh(name):
         for v in obj.data.vertices:
             p=obj.matrix_world @ v.co
             vertices.append(Vector((p.x,-p.y,p.z)))
-        faces.extend([tuple(i+start for i in t.vertices) for t in obj.data.loop_triangles])
+        omitted=model.get('omitted_slots',set())
+        uv=obj.data.uv_layers.get('CapacitySlot') if omitted else None
+        if omitted and uv is None:
+            assert len(obj.data.uv_layers)>=2
+            uv=obj.data.uv_layers[1]
+        for tri in obj.data.loop_triangles:
+            if uv:
+                slot=round(uv.data[tri.loops[0]].uv.x)
+                if slot in omitted:
+                    continue
+            faces.append(tuple(i+start for i in tri.vertices))
     return vertices,faces
 
 
@@ -112,7 +123,31 @@ def prepare(a,b,t,queries):
     queries.setdefault(key,dict(first_time_s=t,objects=[aid,bid]))
 
 
+def target_racks():
+    # The UE capacity material removes only the four chosen UV1 slots. Compare
+    # against the original exported steel, all other pallets and cartons.
+    records=[s for s in data['sourceInstances'] if s['role']=='rackSlot']
+    if not records:
+        return []
+    source=ROOT/'Saved/GHS_CAD24/Models/meshes.json'
+    rack=next(row for row in json.loads(source.read_bytes())['meshes'] if row['variant']=='A1')
+    slot_indices={(s['level'],s['column']):s['index'] for s in rack['slots']}
+    bays={}
+    for row in records:
+        bays.setdefault(row['cadId'],[]).append(row)
+    result=[]
+    for cad_id,rows in bays.items():
+        indices=sorted(slot_indices[(r['level'],r['column'])] for r in rows)
+        name='RackA1WithoutSlots'+'_'.join(str(i) for i in indices)
+        models[name]=dict(bounds_m=rack['bounds_m'],sha256=rack['fbx_sha256'],
+                          source_file=source.parent/(rack['name']+'.fbx'),omitted_slots=set(indices))
+        first=rows[0]
+        result.append((name,tuple(first['scale']),[v/100 for v in first['position']],first['yaw'],cad_id))
+    return result
+
+
 def audit():
+    racks=target_racks()
     queries={}
     samples=contact_samples()
     for t in samples:
@@ -123,6 +158,17 @@ def audit():
             if on:
                 track=tracks[i]
                 cargos.append((track['mesh'].split('/')[-1],tuple(track['scale']),p,yaw,track['id']))
+        for rack in racks:
+            for cargo in cargos:
+                if math.dist(rack[2][:2],cargo[2][:2])<4:
+                    # Exact contact of the pallet's underside and top of the beam
+                    # is intentional. Allow 0.1 mm support tolerance.
+                    lifted=[*cargo[2][:2],cargo[2][2]+.0001]
+                    prepare(rack,(*cargo[:2],lifted,*cargo[3:]),t,queries)
+            for i,(p,yaw,lift,on,_) in enumerate(poses[:5]):
+                if on and math.dist(rack[2][:2],p[:2])<5:
+                    for part,z in [('Body',0),('Carriage',lift),('Mast',max(0,lift-.7)*.5)]:
+                        prepare(rack,('SM_Replay_Forklift'+part,(1,1,1),[p[0],p[1],p[2]+z],yaw,tracks[i]['id']),t,queries)
         for j,cargo in enumerate(cargos):
             for other in cargos[j+1:]:
                 if math.dist(cargo[2][:2],other[2][:2])<2:
@@ -158,6 +204,7 @@ def audit():
         witnesses.setdefault(hit['first_mesh']+' / '+hit['second_mesh'],hit)
     report=dict(**provenance,success=not hits,timeline_sha256=hashlib.sha256(timeline_bytes).hexdigest(),
                 poses=len(samples),distinct_narrow_phase_pairs=len(queries),intersection_count=len(hits),
+                source_rack_bays=len(racks),source_rack_slots=sum(s['role']=='rackSlot' for s in data['sourceInstances']),
                 verified_fbx_sha256={name:models[name]['sha256'] for name in meshes},
                 intersections_by_mesh_pair=classes,examples_by_mesh_pair=witnesses,
                 first_intersections=hits[:80],scope='All ten cargoes including adjacent stacked, carried and truck-owned pallets versus each other and five actual fork body, carriage and mast FBX meshes; substeps at <=2cm lift/precision positioning, <=15 cm travel and <=2 degrees yaw. Vertical contacts below 0.1mm are treated as touching.')

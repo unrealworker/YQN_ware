@@ -67,26 +67,49 @@ def source_inventory(data,actors):
     groups=json.loads(bindings.read_text(encoding='utf8'))['groups']
     rows={r['id']:(g,r) for g in groups for r in g['instances']}
     components=[c for a in actors for c in a.get_components_by_class(unreal.InstancedStaticMeshComponent) if c.static_mesh]
-    snapshots={};targets={};resolved=[]
+    cap=json.loads((bindings.parent/'storage-capacity.json').read_bytes())
+    rack_meshes={m['source_mesh']:m for m in cap['meshes'] if m['kind']=='rack'}
+    snapshots={};targets={};rack_words={};resolved=[]
     for source in data['sourceInstances']:
         group,row=rows[source['cadId']]
         expected=tuple(round(v*100,6) for v in (row['position_m'][0],-row['position_m'][1],row['position_m'][2]))
         assert math.dist(expected,source['position'])<.05,(source['cadId'],expected,source['position'])
         matches=[]
+        rack=source['role']=='rackSlot'
+        mesh=rack_meshes[group['mesh']]['name'] if rack else group['mesh']
         for c in components:
-            if c.static_mesh.get_name()!=group['mesh']:continue
+            if c.static_mesh.get_name()!=mesh:continue
             key=c.get_path_name()
             if key not in snapshots:snapshots[key]=(c,instance_state(c))
             for i,t in enumerate(snapshots[key][1]):
                 if math.dist(t[0],expected)<.05:matches.append((key,i))
         assert len(matches)==1,(source['cadId'],matches)
         key,index=matches[0]
-        assert index not in targets.setdefault(key,set()),'duplicate source instance'
-        targets[key].add(index)
+        info={}
+        if rack:
+            component=snapshots[key][0]
+            slots=rack_meshes[group['mesh']]['slots']
+            [slot]=[s['index'] for s in slots if (s['level'],s['column'])==(source['level'],source['column'])]
+            if key not in rack_words:
+                before=list(component.get_editor_property('PerInstanceSMCustomData'))
+                stride=component.get_editor_property('NumCustomDataFloats')
+                assert stride>=5 and len(before)==component.get_instance_count()*stride
+                rack_words[key]=(before,list(before))
+            before,masked=rack_words[key]
+            word=index*component.get_editor_property('NumCustomDataFloats')+1+slot//18
+            bit=1<<(slot%18)
+            assert int(before[word+2])&bit and int(masked[word])&bit,(source,'not occupied or duplicate')
+            masked[word]=int(masked[word])&~bit
+            info=dict(level=source['level'],column=source['column'],location_code=source['locationCode'],slot=slot)
+        else:
+            assert index not in targets.setdefault(key,set()),'duplicate source instance'
+            targets[key].add(index)
         assert len(snapshots[key][1])==group['count'],group['actor']
-        resolved.append(dict(cad_id=source['cadId'],role=source['role'],component=key,index=index))
-    assert sum(s['role']=='cargo' for s in resolved)==5 and sum(s['role']=='door' for s in resolved)==3
-    return snapshots,targets,resolved
+        resolved.append(dict(cad_id=source['cadId'],role=source['role'],component=key,index=index,**info))
+    ground=sum(s['role']=='cargo' for s in resolved)
+    rack_count=sum(s['role']=='rackSlot' for s in resolved)
+    assert 2*ground+rack_count==10 and sum(s['role']=='door' for s in resolved)==3
+    return snapshots,targets,rack_words,resolved
 def run():
     yield from wait('discover',discover,100)
     yield from wait('initial camera',lambda:not pawn.is_pose_transition_active())
@@ -99,7 +122,9 @@ def run():
     cycle=data['cycleDuration'];events=data['events'];assert len(data['tracks'])==18
     unreal.SystemLibrary.execute_console_command(world,'DisableAllScreenMessages',pc)
     originals=unreal.GameplayStatics.get_all_actors_of_class(world,unreal.Actor)
-    source_snapshots,source_targets,resolved_sources=source_inventory(data,originals)
+    source_snapshots,source_targets,rack_words,resolved_sources=source_inventory(data,originals)
+    rack_before=json.loads(pc.storage_capacity.get_report_json())
+    rack_count=sum(s['role']=='rackSlot' for s in resolved_sources)
     tracked=[a for a in originals if any(str(t).startswith(('TwinId=GHN_MannedForklift','TwinId=GHS_DockTruck','TwinId=GHS_AGV_','TwinId=GHN_FloorStacker','TwinId=GHS_CH_')) for t in a.tags) or 'CampusTraffic' in a.get_class().get_name()]
     # Preserve an explicitly pre-hidden original, not just the default all-visible state.
     hidden=next(a for a in tracked if any(str(t).startswith('TwinId=GHN_MannedForklift') for t in a.tags));hidden.set_actor_hidden_in_game(True)
@@ -123,10 +148,19 @@ def run():
             else:assert current_value==before_value,(key,i,'unrelated source changed')
     record('cad_sources_resolved_and_only_selected_instances_hidden',sources=resolved_sources,
            checked_instances=sum(len(v[1]) for v in source_snapshots.values()))
+    def check_rack_masks(masked):
+        for key,words in rack_words.items():
+            actual=list(source_snapshots[key][0].get_editor_property('PerInstanceSMCustomData'))
+            assert actual==words[int(masked)],(key,'rack occupancy changed outside selected slots')
+        current=json.loads(pc.storage_capacity.get_report_json())
+        assert current['rack_visible_slots']==rack_before['rack_visible_slots']-rack_count*int(masked),current
+        assert current['inventory_occupied_slots']==rack_before['inventory_occupied_slots'],current
+    check_rack_masks(True)
     record('isolated_eight_devices_and_open_roof',hidden_originals=len(tracked),sources=len(data['sourceInstances']))
     command('replaySeek',time=230);first=state();yield from pause(.6);second=state()
     assert first['time']==second['time']==230 and first['devices']==second['devices']
     command('replaySeek',time=900);command('replaySeek',time=230);assert state()['devices']==first['devices']
+    check_rack_masks(True)
     record('paused_and_reverse_seek_deterministic')
     command('replayOverview');yield from wait('replay overview',lambda:not pawn.is_pose_transition_active());yield from pause(1)
     yield from capture('01-replay-overview')
@@ -172,6 +206,8 @@ def run():
     assert pc.warehouse_roof.get_transition_phase()==roof_before
     restoration=json.loads(session.get_restoration_report());assert restoration['verified'] and not restoration['replayActorExists']
     assert all(instance_state(c)==values for c,values in source_snapshots.values()),'source groups did not restore exactly'
+    check_rack_masks(False)
+    assert restoration['rackSlots']==rack_count
     record('cancel_resume_and_exact_scene_restoration',restoration=restoration)
     # Every order and arbitrary date uses the same canonical relative dataset.
     for order,start,end in [('TEST-OUT-004','2040-07-01T00:00:00.000Z','2040-07-02T00:00:00.000Z')]:

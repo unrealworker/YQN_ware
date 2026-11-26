@@ -257,8 +257,58 @@ void UGHSStorageCapacityComponent::VerifyInventoryInstance(UInstancedStaticMeshC
         {++BoundInventorySlots;if((uint32(Desired.Values[Slot/18])&(1u<<(Slot%18)))!=0) ++OccupiedInventorySlots;else ++EmptyInventorySlots;}
     }
     Mask=Desired;
-    for(int32 Word=0;Word<4;++Word) Component->SetCustomDataValue(Instance,Word+1,Mask.Values[Word],false);
+    WriteInstanceMask(Group,Instance);
+}
+
+bool UGHSStorageCapacityComponent::WriteInstanceMask(FGroup& Group,int32 Instance)
+{
+    auto* Component=Group.Component.Get();
+    if(!Component || Component->NumCustomDataFloats<5 || Instance<0 || Instance>=Component->GetInstanceCount()) return false;
+    FGHSInventoryMask Display=Group.InventoryMasks[Instance];
+    const uint64 Hidden=Group.ReplayHiddenSlots.FindRef(Instance);
+    for(int32 Slot=0;Slot<Group.SlotsPerInstance && Hidden;++Slot)
+        if(Hidden&(uint64(1)<<Slot)) Display.Set(Slot,EGHSInventoryState::Empty);
+    bool bWritten=true;
+    for(int32 Word=0;Word<4;++Word) bWritten&=Component->SetCustomDataValue(Instance,Word+1,Display.Values[Word],false);
     Component->MarkRenderStateDirty();
+    return bWritten;
+}
+
+bool UGHSStorageCapacityComponent::ResolveReplaySlot(UInstancedStaticMeshComponent* Component,int32 Instance,const FString& CadId,
+    int32 Level,int32 Column,const FString& LocationId,const FString& LocationCode,int32& Slot,FBox& WorldBounds) const
+{
+    const int32* GroupIndex=GroupByComponent.Find(Component);
+    if(!GroupIndex || !Component || !Component->GetStaticMesh() || Component->NumCustomDataFloats<5) return false;
+    const auto& Group=Groups[*GroupIndex];
+    if(!Group.bRack || !Group.InventoryCadIds.IsValidIndex(Instance) || Group.InventoryCadIds[Instance]!=CadId) return false;
+    FTransform Transform;
+    if(!Component->GetInstanceTransform(Instance,Transform,true)) return false;
+    const auto* Location=FGHSLocationInventory::Shared()->FindForTransform(CadId,Level,Column,Component->GetStaticMesh()->GetName(),Transform);
+    if(!Location || Location->State!=EGHSInventoryState::Occupied || Location->Id!=LocationId || Location->Code!=LocationCode) return false;
+    const FSlot* Match=Group.Slots.FindByPredicate([&](const FSlot& Item){return Item.Level==Level && Item.Column==Column;});
+    if(!Match || !Group.InventoryMasks[Instance].IsKnown(Match->Index)) return false;
+    Slot=Match->Index;
+    WorldBounds=Match->Bounds.TransformBy(Transform);
+    return true;
+}
+
+bool UGHSStorageCapacityComponent::SetReplaySlotHidden(UInstancedStaticMeshComponent* Component,int32 Instance,int32 Slot,bool bHidden)
+{
+    const int32* GroupIndex=GroupByComponent.Find(Component);
+    if(!GroupIndex) return false;
+    auto& Group=Groups[*GroupIndex];
+    if(!Group.bRack || !Group.InventoryMasks.IsValidIndex(Instance) || Slot<0 || Slot>=Group.SlotsPerInstance || Slot>=36) return false;
+    const uint64 Bit=uint64(1)<<Slot;
+    const uint64 Previous=Group.ReplayHiddenSlots.FindRef(Instance);
+    const uint64 Next=bHidden?(Previous|Bit):(Previous&~Bit);
+    if(Previous==Next) return true;
+    if(Next) Group.ReplayHiddenSlots.Add(Instance,Next);
+    else Group.ReplayHiddenSlots.Remove(Instance);
+    if(WriteInstanceMask(Group,Instance)) return true;
+    if(Previous) Group.ReplayHiddenSlots.Add(Instance,Previous);
+    else Group.ReplayHiddenSlots.Remove(Instance);
+    WriteInstanceMask(Group,Instance);
+    return false;
 }
 
 void UGHSStorageCapacityComponent::SetCapacity(float Rack,float Floor)
@@ -352,6 +402,7 @@ bool UGHSStorageCapacityComponent::IsStorageHitVisible(UPrimitiveComponent* Comp
     const int32 GlobalBase=Group.BaseSlot+InstanceIndex*Group.SlotsPerInstance;
     const auto InventoryVisible=[&](int32 Slot,bool Fallback)
     {
+        if(Group.ReplayHiddenSlots.FindRef(InstanceIndex)&(uint64(1)<<Slot)) return false;
         if(!Group.InventoryMasks.IsValidIndex(InstanceIndex) || !Group.InventoryMasks[InstanceIndex].IsKnown(Slot)) return Fallback;
         return (uint32(Group.InventoryMasks[InstanceIndex].Values[Slot/18])&(1u<<(Slot%18)))!=0;
     };
@@ -389,7 +440,8 @@ FString UGHSStorageCapacityComponent::GetReportJson() const
                     ? (uint32(Mask.Values[Slot/18])&(1u<<(Slot%18)))!=0
                     : GHSStorageCapacity::IsSlotVisible(Group.BaseSlot+Instance*Group.SlotsPerInstance+Slot,
                         Group.bRack?RackTotalSlots:FloorTotalSlots,Group.bRack?RackCapacity:FloorCapacity);
-                if(bVisible) {if(Group.bRack) ++VisibleRackSlots;else ++VisibleFloorGroups;}
+                if(bVisible && !(Group.ReplayHiddenSlots.FindRef(Instance)&(uint64(1)<<Slot)))
+                {if(Group.bRack) ++VisibleRackSlots;else ++VisibleFloorGroups;}
             }
     Report->SetNumberField(TEXT("rack_visible_slots"),VisibleRackSlots);
     Report->SetNumberField(TEXT("floor_visible_groups"),VisibleFloorGroups);

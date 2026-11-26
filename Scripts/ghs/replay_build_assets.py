@@ -120,4 +120,7 @@ group=[o for o in col.objects if not o.name.startswith(('Two-sided Panel','Lifte
 export_part('SM_Replay_DockDoorOpen',group)
 assert protected=={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in SOURCES},'Source files changed'
 (OUT/'replay_assets.json').write_text(json.dumps(dict(success=True,source_hashes=protected,meshes=parts,materials=list(material_specs.values())),indent=2),encoding='utf8')
+sys.path.insert(0,str(ROOT/'Scripts/ghs'))
+import replay_build_rack_cargo
+replay_build_rack_cargo.main()
 print('REPLAY_ASSETS_READY',len(parts))

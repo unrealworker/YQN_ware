@@ -49,6 +49,19 @@ bool FGHSReplayCadSourceTest::RunTest(const FString&)
     Component->AddInstance(Expected);
     TestFalse(TEXT("Ambiguous live pose rejects all candidates"),Resolve());
     TestTrue(TEXT("A failed lookup returns no selection"),!Found && Index==INDEX_NONE);
+    auto* RackGroup=Registry->GetArrayField(TEXT("groups"))[0]->AsObject().Get();
+    RackGroup->SetStringField(TEXT("mesh"),TEXT("SM_GHS_V2Rack_CAD24_A1"));
+    Source->SetStringField(TEXT("role"),TEXT("rackSlot"));
+    Component->ClearInstances();
+    Component->AddInstance(Expected);
+    TestFalse(TEXT("A floor mesh cannot replace rack steel at the same pose"),Resolve());
+    const FString RackPath=TEXT("/Game/GHSZcoolSmartFactory/StorageCapacity/Meshes/SM_GHS_V2Rack_CAD24_A1_Capacity.SM_GHS_V2Rack_CAD24_A1_Capacity");
+    auto* Rack=LoadObject<UStaticMesh>(nullptr,*RackPath);
+    if(!TestNotNull(TEXT("CAD24 rack with isolated material slots"),Rack)) return false;
+    Component->SetStaticMesh(Rack);
+    TestTrue(TEXT("CAD source rack resolves to its capacity mesh"),Resolve());
+    Source->SetStringField(TEXT("role"),TEXT("cargo"));
+    TestFalse(TEXT("A rack cannot be scaled away as one ground load"),Resolve());
     return true;
 }
 

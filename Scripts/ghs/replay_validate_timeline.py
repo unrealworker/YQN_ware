@@ -1,9 +1,9 @@
 """Clock/cargo continuity and dynamic swept-footprint audit of exported replay."""
 import bisect,json,math,hashlib
 from pathlib import Path
-from replay_audit_sources import verify_sources
+from replay_audit_sources import verify_sources, timeline_path as replay_timeline_path
 ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'Saved/OrderReplay'
-timeline_path=ROOT/'Content/GHSTwinUI/data/order-replay.json'
+timeline_path=replay_timeline_path(ROOT)
 timeline_bytes=timeline_path.read_bytes()
 timeline_hash=hashlib.sha256(timeline_bytes).hexdigest()
 data=json.loads(timeline_bytes);tracks=data['tracks'];duration=data['cycleDuration']
