@@ -1,5 +1,10 @@
 #if WITH_DEV_AUTOMATION_TESTS
 #include "../GHSCampusTrafficSimulation.h"
+#include "../GHSCampusTrafficActor.h"
+#include "Engine/Engine.h"
+#include "Engine/World.h"
+#include "GameFramework/PlayerState.h"
+#include "GameFramework/WorldSettings.h"
 #include "GHSAutomationTestFlags.h"
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSCampusTrafficPoolTest,"GHS.Twin.Traffic.BoundedLifetimeAndHeadway",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
@@ -48,6 +53,55 @@ bool FGHSCampusTrafficPoolTest::RunTest(const FString&)
     Simulation.Advance(.05);
     TestFalse(TEXT("At road end the vehicle is retired"),Last.Active);
     TestTrue(TEXT("A retired vehicle waits before returning"),Last.Cooldown>0);
+    const uint64_t PreviousGeneration=Last.Generation;
+    Simulation.Activate(Last);
+    TestTrue(TEXT("A recycled visible slot identifies its new vehicle"),Last.Generation>PreviousGeneration);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSCampusTrafficMotionTest,"GHS.Twin.Traffic.RenderedMotionHistory",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSCampusTrafficMotionTest::RunTest(const FString&)
+{
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);
+    if (!TestNotNull(TEXT("Transient traffic world"),World)) return false;
+    GEngine->CreateNewWorldContext(World->WorldType).SetCurrentWorld(World);
+    World->InitializeActorsForPlay(FURL());
+    auto* Traffic=World->SpawnActor<AGHSCampusTrafficActor>();
+    Traffic->DispatchBeginPlay();
+    TInlineComponentArray<UInstancedStaticMeshComponent*> Groups(Traffic);
+    TestEqual(TEXT("Four render batches"),Groups.Num(),GHSTraffic::KindCount);
+    if (!Groups.IsEmpty() && TestEqual(TEXT("Eight persistent slots per group"),Groups[0]->GetInstanceCount(),8))
+    {
+        auto* Component=Groups[0];
+        FTransform Initial,Current,Previous;
+        Component->GetInstanceTransform(0,Initial,true);
+        auto ReadHistory=[&](){return Component->GetInstanceTransform(0,Current,true)
+            && Component->GetInstancePrevTransform(0,Previous,true);};
+        TestTrue(TEXT("First visible frame starts at rest"),ReadHistory() && Current.Equals(Previous));
+        Traffic->Tick(.10f);
+        TestTrue(TEXT("Engine buffers keep the preceding pose for a moving vehicle"),
+            ReadHistory() && Previous.Equals(Initial) && !Current.Equals(Initial));
+        Traffic->SetActorTickEnabled(false);
+        TestTrue(TEXT("A paused traffic actor clears its previous movement"),ReadHistory() && Current.Equals(Previous));
+        Traffic->SetActorTickEnabled(true);
+        Traffic->Tick(.10f);
+        Traffic->SetActorHiddenInGame(true);
+        Traffic->SetActorTickEnabled(false);
+        Traffic->SetActorHiddenInGame(false);
+        Traffic->SetActorTickEnabled(true);
+        TestTrue(TEXT("Replay isolation restores a zero-velocity pose"),ReadHistory() && Current.Equals(Previous));
+        const FTransform Restored=Current;
+        Traffic->Tick(.10f);
+        TestTrue(TEXT("Movement resumes from the restored pose"),ReadHistory() && Previous.Equals(Restored) && !Current.Equals(Previous));
+        const FTransform BeforeWorldPause=Current;
+        World->GetWorldSettings()->SetPauserPlayerState(World->SpawnActor<APlayerState>());
+        Traffic->Tick(.10f);
+        TestTrue(TEXT("World pause clears the last vector without changing position"),
+            ReadHistory() && Current.Equals(BeforeWorldPause) && Previous.Equals(Current));
+        World->GetWorldSettings()->SetPauserPlayerState(nullptr);
+    }
+    GEngine->DestroyWorldContext(World);
+    World->DestroyWorld(false);
     return true;
 }
 #endif

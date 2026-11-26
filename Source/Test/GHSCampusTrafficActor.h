@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GHSCampusTrafficSimulation.h"
+#include "MPRInstanceMotionHistory.h"
 #include "GHSCampusTrafficActor.generated.h"
 
 class UInstancedStaticMeshComponent;
@@ -15,6 +16,8 @@ class TEST_API AGHSCampusTrafficActor : public AActor
 public:
     AGHSCampusTrafficActor();
     virtual void Tick(float DeltaSeconds) override;
+    virtual void SetActorTickEnabled(bool bEnabled) override;
+    virtual void SetActorHiddenInGame(bool bNewHidden) override;
     UFUNCTION(BlueprintPure, Category="Warehouse Traffic") FString GetTrafficReportJson() const;
     UFUNCTION(BlueprintPure, Category="Warehouse Traffic") int32 GetActiveVehicleCount() const { return Simulation.ActiveCount(); }
     UFUNCTION(BlueprintPure, Category="Warehouse Traffic") int32 GetVehicleCapacity() const { return GHSTraffic::Capacity; }
@@ -30,11 +33,19 @@ private:
         FVector At(double Distance) const;
     };
     bool LoadRoutes();
-    void UpdateInstances();
+    void UpdateInstances(bool bResetHistory=false);
+    struct FVehicleRenderGroup
+    {
+        TArray<FTransform> Poses;
+        TArray<uint64> Identities;
+        FMPRInstanceMotionHistory Motion;
+    };
+    FVehicleRenderGroup RenderGroups[GHSTraffic::KindCount];
+    uint64 LastPoseFrame=MAX_uint64;
     UPROPERTY(Transient) TArray<TObjectPtr<UInstancedStaticMeshComponent>> VehicleMeshes;
     TArray<FVector> MeshOffsets;
     TArray<FRoute> Routes;
     GHSTraffic::Simulation Simulation;
     int32 PeakActive=0;
-    bool bReady=false;
+    bool bReady=false,bWorldWasPaused=false;
 };

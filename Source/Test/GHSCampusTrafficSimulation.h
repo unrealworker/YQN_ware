@@ -18,6 +18,7 @@ struct Route { double Length=0, MaxSpeed=0; };
 struct Vehicle
 {
     int Route=0, Kind=0;
+    uint64_t Generation=0;
     double Distance=0, Speed=0, Cruise=0, Cooldown=0;
     bool Active=false;
 };
@@ -59,7 +60,7 @@ struct Simulation
     void Activate(Vehicle& V)
     {
         V.Cruise=Routes[V.Route].MaxSpeed*(.78+Random()*.22)*(V.Kind==0 ? .91 : 1.);
-        V.Speed=V.Cruise;V.Active=true;V.Cooldown=0;++Spawned;
+        V.Speed=V.Cruise;V.Active=true;V.Cooldown=0;V.Generation=++Spawned;
     }
     void Advance(double Delta)
     {

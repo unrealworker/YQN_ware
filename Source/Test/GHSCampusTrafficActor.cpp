@@ -2,6 +2,7 @@
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Components/SceneComponent.h"
 #include "Engine/StaticMesh.h"
+#include "Engine/World.h"
 #include "Dom/JsonObject.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
@@ -14,6 +15,7 @@
 AGHSCampusTrafficActor::AGHSCampusTrafficActor()
 {
     PrimaryActorTick.bCanEverTick=true;
+    PrimaryActorTick.bTickEvenWhenPaused=true;
     PrimaryActorTick.TickGroup=TG_PostUpdateWork;
     SetRootComponent(CreateDefaultSubobject<USceneComponent>(TEXT("TrafficRoot")));
     static ConstructorHelpers::FObjectFinder<UStaticMesh> Truck(TEXT("/Game/GHSZcoolSmartFactory/Park/Meshes/SM_GHSPark_ClosedTruck"));
@@ -114,11 +116,16 @@ FVector AGHSCampusTrafficActor::FRoute::At(double Distance) const
     return FMath::Lerp(Points[Low],Points[High],Alpha);
 }
 
-void AGHSCampusTrafficActor::UpdateInstances()
+void AGHSCampusTrafficActor::UpdateInstances(bool bResetHistory)
 {
-    // Keep all eight transforms of each kind inline: denser traffic must not
-    // introduce per-frame array allocations after the pool has been created.
-    TArray<FTransform,TInlineAllocator<GHSTraffic::Capacity/GHSTraffic::KindCount>> Poses[GHSTraffic::KindCount];
+    // A world pause or skipped tick can span rendered frames.
+    bResetHistory |= GFrameCounter != LastPoseFrame && GFrameCounter - LastPoseFrame != 1;
+    for (auto& Group : RenderGroups)
+    {
+        Group.Poses.Reset();
+        Group.Identities.Reset();
+        if (bResetHistory) Group.Motion.Reset();
+    }
     for(const auto& Vehicle:Simulation.Vehicles)
     {
         const auto& Route=Routes[Vehicle.Route];
@@ -128,24 +135,46 @@ void AGHSCampusTrafficActor::UpdateInstances()
         // Existing truck has a rear-door origin. Centre every asset on the
         // route and place its actual tyre contact plane onto the road slope.
         Position-=Rotation.RotateVector(MeshOffsets[Vehicle.Kind]);
-        Poses[Vehicle.Kind].Add(FTransform(Rotation,Position,Vehicle.Active ? FVector::OneVector : FVector::ZeroVector));
+        auto& Group = RenderGroups[Vehicle.Kind];
+        Group.Poses.Add(FTransform(Rotation,Position,Vehicle.Active ? FVector::OneVector : FVector::ZeroVector));
+        Group.Identities.Add(Vehicle.Generation);
     }
     for(int32 Kind=0;Kind<GHSTraffic::KindCount;++Kind)
     {
-        // Stable instance indices: no component/Actor allocation, removal,
-        // collision update or HISM tree rebuild occurs during traffic motion.
-        for(int32 I=0;I<Poses[Kind].Num();++I)
-            VehicleMeshes[Kind]->UpdateInstanceTransform(I,Poses[Kind][I],true,I==Poses[Kind].Num()-1,true);
+        auto& Group = RenderGroups[Kind];
+        Group.Motion.Submit(VehicleMeshes[Kind], Group.Poses, GFrameCounter, Group.Identities);
     }
+    LastPoseFrame=GFrameCounter;
     PeakActive=FMath::Max(PeakActive,Simulation.ActiveCount());
+}
+
+void AGHSCampusTrafficActor::SetActorTickEnabled(bool bEnabled)
+{
+    const bool bChanged = IsActorTickEnabled() != bEnabled;
+    Super::SetActorTickEnabled(bEnabled);
+    if (bReady && bChanged) UpdateInstances(true);
+}
+
+void AGHSCampusTrafficActor::SetActorHiddenInGame(bool bNewHidden)
+{
+    const bool bChanged = IsHidden() != bNewHidden;
+    Super::SetActorHiddenInGame(bNewHidden);
+    if (bReady && bChanged) UpdateInstances(true);
 }
 
 void AGHSCampusTrafficActor::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     if(!bReady)return;
+    if (GetWorld()->IsPaused())
+    {
+        if (!bWorldWasPaused) UpdateInstances(true);
+        bWorldWasPaused=true;
+        return;
+    }
     Simulation.Advance(DeltaSeconds);
-    UpdateInstances();
+    UpdateInstances(bWorldWasPaused);
+    bWorldWasPaused=false;
 }
 
 FString AGHSCampusTrafficActor::GetTrafficReportJson() const
