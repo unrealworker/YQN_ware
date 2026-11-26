@@ -1,0 +1,73 @@
+{
+  "success": true,
+  "name": "SM_MPR_GHS_Tree",
+  "fbx": "SourceAssets/MPR/ghs_tree_reuse/SM_MPR_GHS_Tree.fbx",
+  "fbx_sha256": "1f10f23b1a5a5d936131a4ed71a138c9a6e54be336429dfd7ac034966d5aa393",
+  "source_generator": "Scripts/ghs/park_vegetation.py",
+  "source_sha256": "3be7472663e7576a98c525499edf797c2b7a3ab9bda08d71fcc681c00f6299bf",
+  "source_palette": "SourceAssets/GHS/Park/reference_style.json",
+  "source_palette_sha256": "66259f36a674858879a0f786cbc0aebe55ea68b845fb15ce7822ff2ce5cb0dc5",
+  "source_function": "build_tree",
+  "source_variant": 0,
+  "source_height_m": 8.6,
+  "source_radius_m": 4.05,
+  "source_parts": 9,
+  "uniform_scale": 1.5847015306831265,
+  "vertices": 946,
+  "triangles": 1856,
+  "slot_names": [
+    "Trunk",
+    "LeafMid",
+    "LeafLight",
+    "LeafShade"
+  ],
+  "material_triangle_counts": {
+    "Trunk": 96,
+    "LeafMid": 1760,
+    "LeafLight": 0,
+    "LeafShade": 0
+  },
+  "bounds_blender_m": [
+    [
+      -6.171634674072266,
+      6.252129554748535
+    ],
+    [
+      -5.594935417175293,
+      5.369607925415039
+    ],
+    [
+      0.0,
+      13.644189834594727
+    ]
+  ],
+  "bounds_ue_cm": {
+    "min": [
+      -617.1634674072266,
+      -536.9607925415039,
+      0.0
+    ],
+    "max": [
+      625.2129554748535,
+      559.4935417175293,
+      1364.4189834594727
+    ]
+  },
+  "radial_extent_m": 6.418041188562472,
+  "height_m": 13.644189834594727,
+  "ground_origin": true,
+  "root_seating_offset_m": 0.01575631706808875,
+  "previous_mpr_height_m": 15.8644437789917,
+  "previous_mpr_triangles": 11292,
+  "triangle_reduction_percent": 83.56358483882394,
+  "roundtrip_max_bounds_error_m": 0.0,
+  "roundtrip_slots": [
+    "Trunk",
+    "LeafMid",
+    "LeafLight",
+    "LeafShade"
+  ],
+  "shape_policy": "Unmodified GHS variant 0 geometry, uniformly scaled to the prior MPR crown radius; height is lower to preserve GHS proportions.",
+  "material_policy": "Trunk uses slot 0; all five GHS crown lobes use LeafMid slot 1; slots 2 and 3 are retained without triangles for the existing MPR four-slot bindings.",
+  "source_scene_modified": false
+}
