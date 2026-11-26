@@ -1,5 +1,28 @@
 # GHS 静态库存与场景绑定
 
+## 当前 CAD 2.4 整仓规划图
+
+以整仓规划 DXF 的 `BLOCK_CODE`、`SEQ`、`BEAM_CODE_01..04` 定位每排、每档及各业务层，用配套工作簿核对各档的原始插入点、梁层代码和托位数。层内三位沿同排档号递增方向编号，反向放置的通道架按实际模型局部列反序。库存快照保留 WMS 原始编号及库存记录。R、SR、T、WALL 对应库区 450、454、481、519。WALL 的档位通过 `location_row` / `location_col` 校验。档内托盘标签方向属于规则推断。
+
+图纸文件名沿用 2.4，图内修订表的最后一条为 2026-10-10 V2.5。168 个柱网点用于将新版英寸坐标对齐现有关卡。货架立面按逐档梁层属性确定可用托位。B 型普通架使用 11 层，通道上方使用 5 层，保留立面图中的顶梁。地堆沿用原场景的三种示意堆高，实际堆高尚无逐托盘数据。
+
+重建顺序为：
+
+1. 用带 ezdxf 的 Python 运行 `Scripts/ghs/extract_cad24_layout.py <DXF>`，再用 `verify_cad24_geometry.py <DXF>` 核对原图几何。
+2. 在 Blender 后台运行 `Scripts/ghs/build_cad24_racks.py`。用普通 Python 依次运行 `Scripts/ghs/prepare_cad24_racks.py` 和 `Scripts/ghs/cad24_floor.py`。
+3. 在项目根目录使用 Python 和 openpyxl 生成库存关联与明细。
+
+```powershell
+python Tools/GHSInventory/build_bindings.py --csv '<库存 CSV>' --cad '<2.4 整仓规划 DXF>' --workbook '<2.4 库位明细 XLSX>'
+python Tools/GHSInventory/export_cad_location_info.py --csv '<库存 CSV>' --cad '<2.4 整仓规划 DXF>' --workbook '<2.4 库位明细 XLSX>' --output output/GHS-CAD24
+```
+
+4. 在 UE 5.8 完整编辑器运行 `Scripts/ghs/rebuild_cad24_map.py`。它会检查实例变换并保存 GHS 关卡。运行态验收使用 `Scripts/ghs/verify_real_inventory_runtime.py`，以独立游戏进程加载保存后的关卡。
+
+逐位 CSV 包含 CAD 排、档、梁层、库位规格、WMS 编码、数量和 SKU。明细 CSV 保留一库位多条库存记录。地堆以原图 `ZONE_CODE + SEQ` 核验，多个地堆托盘共享整区编码时保留各自独立的 CAD 身份。
+
+## 历史版本 GHS 0.23
+
 输入是用户提供的 2026-11-25 库位库存 CSV、GHS 0.23 原始 CAD，以及项目当前的场景、托位和模型清单。导入器不修改原始输入。本次接入静态导出，不代表实时库存接口。
 
 ## 数据与位置分别表示

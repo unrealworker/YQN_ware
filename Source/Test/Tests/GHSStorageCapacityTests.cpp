@@ -21,7 +21,7 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStorageCapacityPermutation,
     GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FGHSStorageCapacityPermutation::RunTest(const FString&)
 {
-    for(int32 Total:{25056,7530})
+    for(int32 Total:{25056,7530,776})
     {
         TSet<int32> Ranks;
         int32 DefaultVisible=0, OnePercentVisible=0;
@@ -39,8 +39,8 @@ bool FGHSStorageCapacityPermutation::RunTest(const FString&)
                 AddError(TEXT("Capacity reversal changed the stable slot ordering"));
         }
         TestEqual(TEXT("Permutation visits every slot once"),Ranks.Num(),Total);
-        TestEqual(TEXT("Default counts use full geometry"),DefaultVisible,Total==25056?20045:7530);
-        TestEqual(TEXT("One percent rounds complete slots"),OnePercentVisible,Total==25056?251:75);
+        TestEqual(TEXT("Default counts use full geometry"),DefaultVisible,Total==25056?20045:Total);
+        TestEqual(TEXT("One percent rounds complete slots"),OnePercentVisible,FMath::RoundToInt(.01f*Total));
     }
     TestEqual(TEXT("First slot agrees with material"),GHSStorageCapacity::SlotRank(0,25056),17);
     TestEqual(TEXT("Second slot agrees with material"),GHSStorageCapacity::SlotRank(1,25056),114);
@@ -51,20 +51,40 @@ bool FGHSStorageCapacityPermutation::RunTest(const FString&)
     return true;
 }
 
+namespace
+{
+TSharedPtr<FJsonObject> LoadCapacityFixture()
+{
+    FString Text;
+    TSharedPtr<FJsonObject> Root;
+    if(FFileHelper::LoadFileToString(Text,*(FPaths::ProjectContentDir()/TEXT("GHSTwinUI/data/storage-capacity.json"))))
+        FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Text),Root);
+    return Root;
+}
+
+FString RackMeshPath(const FString& Name)
+{
+    return TEXT("/Game/GHSZcoolSmartFactory/StorageCapacity/Meshes/")+Name+TEXT(".")+Name;
+}
+}
+
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStorageCapacityLODs,
     "GHS.StorageCapacity.AllLODsKeepCompleteCargoAndSteel",
     GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FGHSStorageCapacityLODs::RunTest(const FString&)
 {
     TArray<TSharedPtr<FJsonValue>> LODReport;
-    const TCHAR* Names[]={TEXT("A_Pass_W36176"),TEXT("A_Pass_W37138"),TEXT("A_W37138"),TEXT("A_W37619"),
-        TEXT("B_Pass_W36176"),TEXT("B_W37138"),TEXT("B_W37619"),TEXT("D1"),TEXT("D1_W37138"),TEXT("D1_W37619")};
-    const int32 Slots[]={6,6,12,12,18,36,36,6,6,6};
-    for(int32 MeshIndex=0;MeshIndex<UE_ARRAY_COUNT(Names);++MeshIndex)
+    auto Root=LoadCapacityFixture();
+    if(!TestTrue(TEXT("Prepared rack definitions available"),Root.IsValid())) return false;
+    int32 TestedRacks=0;
+    for(const auto& Entry:Root->GetArrayField(TEXT("meshes")))
     {
-        const FString Name=FString(TEXT("SM_GHS_V2Rack_"))+Names[MeshIndex]+TEXT("_Capacity");
-        const FString Path=TEXT("/Game/GHSZcoolSmartFactory/StorageCapacity/Meshes/")+Name+TEXT(".")+Name;
-        UStaticMesh* Mesh=LoadObject<UStaticMesh>(nullptr,*Path);
+        const auto Model=Entry->AsObject();
+        if(Model->GetStringField(TEXT("kind"))!=TEXT("rack")) continue;
+        const FString Name=Model->GetStringField(TEXT("name"));
+        const int32 SlotCount=Model->GetArrayField(TEXT("slots")).Num();
+        ++TestedRacks;
+        UStaticMesh* Mesh=LoadObject<UStaticMesh>(nullptr,*RackMeshPath(Name));
         if(!TestNotNull(*Name,Mesh)) continue;
         const FStaticMeshRenderData* RenderData=Mesh->GetRenderData();
         if(!TestNotNull(TEXT("CPU-readable complete mesh"),RenderData)) continue;
@@ -105,7 +125,7 @@ bool FGHSStorageCapacityLODs::RunTest(const FString&)
                     else
                     {
                         CargoSlots.Add(First);
-                        if(First>=Slots[MeshIndex]) bWholeFaces=false;
+                        if(First>=SlotCount) bWholeFaces=false;
                         if(Section.MaterialIndex==3) PalletSlots.Add(First);
                         if(Section.MaterialIndex==4) BoxSlots.Add(First);
                     }
@@ -116,13 +136,13 @@ bool FGHSStorageCapacityLODs::RunTest(const FString&)
             Row->SetStringField(TEXT("mesh"),Name);
             Row->SetNumberField(TEXT("lod"),LODIndex);
             Row->SetNumberField(TEXT("triangles"),LOD.GetNumTriangles());
-            Row->SetNumberField(TEXT("expected_slots"),Slots[MeshIndex]);
+            Row->SetNumberField(TEXT("expected_slots"),SlotCount);
             Row->SetNumberField(TEXT("pallet_slots"),PalletSlots.Num());
             Row->SetNumberField(TEXT("box_slots"),BoxSlots.Num());
             Row->SetBoolField(TEXT("whole_faces"),bWholeFaces);
             TArray<TSharedPtr<FJsonValue>> MissingPallets;
             FString MissingText;
-            for(int32 Slot=0;Slot<Slots[MeshIndex];++Slot)
+            for(int32 Slot=0;Slot<SlotCount;++Slot)
                 if(!PalletSlots.Contains(Slot))
                 {
                     MissingPallets.Add(MakeShared<FJsonValueNumber>(Slot));
@@ -134,17 +154,18 @@ bool FGHSStorageCapacityLODs::RunTest(const FString&)
 #endif
             LODReport.Add(MakeShared<FJsonValueObject>(Row));
             AddInfo(FString::Printf(TEXT("%s: pallets=%d/%d boxes=%d/%d triangles=%d missing_pallets=[%s]"),
-                *Context,PalletSlots.Num(),Slots[MeshIndex],BoxSlots.Num(),Slots[MeshIndex],LOD.GetNumTriangles(),*MissingText));
+                *Context,PalletSlots.Num(),SlotCount,BoxSlots.Num(),SlotCount,LOD.GetNumTriangles(),*MissingText));
             TestTrue(TEXT("No LOD triangle crosses a visibility threshold"),bWholeFaces);
-            TestEqual(TEXT("Each LOD retains every complete cargo slot"),CargoSlots.Num(),Slots[MeshIndex]);
-            TestEqual(TEXT("Each LOD retains every complete pallet"),PalletSlots.Num(),Slots[MeshIndex]);
-            TestEqual(TEXT("Each LOD retains boxes in every slot"),BoxSlots.Num(),Slots[MeshIndex]);
+            TestEqual(TEXT("Each LOD retains every complete cargo slot"),CargoSlots.Num(),SlotCount);
+            TestEqual(TEXT("Each LOD retains every complete pallet"),PalletSlots.Num(),SlotCount);
+            TestEqual(TEXT("Each LOD retains boxes in every slot"),BoxSlots.Num(),SlotCount);
             TestTrue(TEXT("Frame remains at zero capacity"),SteelTriangles>0);
             if(LODIndex==0) TestTrue(TEXT("Structural adjustment slots sharing Detail material retain the steel sentinel"),DetailSteelTriangles>0);
             PopContext();
             ++LODIndex;
         }
     }
+    TestTrue(TEXT("Verified prepared rack meshes"),TestedRacks>0);
     auto Report=MakeShared<FJsonObject>();
     Report->SetStringField(TEXT("owner"),TEXT("ghs-complete-storage-capacity-v1"));
     Report->SetArrayField(TEXT("lods"),LODReport);
@@ -161,6 +182,34 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSStorageCapacityRuntime,
     GHSAutomationTests::ApplicationContextMask | EAutomationTestFlags::NonNullRHI | EAutomationTestFlags::ProductFilter)
 bool FGHSStorageCapacityRuntime::RunTest(const FString&)
 {
+    auto Root=LoadCapacityFixture();
+    if(!TestTrue(TEXT("Prepared storage fixture available"),Root.IsValid())) return false;
+    TSharedPtr<FJsonObject> Group;
+    for(const auto& Entry:Root->GetArrayField(TEXT("groups")))
+    {
+        const auto Row=Entry->AsObject();
+        if(Row->GetStringField(TEXT("kind"))==TEXT("rack") &&
+            (!Group || Row->GetIntegerField(TEXT("count"))<Group->GetIntegerField(TEXT("count")))) Group=Row;
+    }
+    if(!TestTrue(TEXT("Prepared rack group found"),Group.IsValid())) return false;
+    const FString Name=Group->GetStringField(TEXT("mesh"));
+    const int32 Count=Group->GetIntegerField(TEXT("count"));
+    FVector CargoCenter=FVector::ZeroVector;
+    bool bFoundSlot=false;
+    for(const auto& Entry:Root->GetArrayField(TEXT("meshes")))
+    {
+        const auto Row=Entry->AsObject();
+        if(Row->GetStringField(TEXT("name"))!=Name) continue;
+        const auto& Slots=Row->GetArrayField(TEXT("slots"));
+        if(Slots.IsEmpty()) break;
+        const auto Slot=Slots[0]->AsObject();
+        const auto& Low=Slot->GetArrayField(TEXT("min_cm"));
+        const auto& High=Slot->GetArrayField(TEXT("max_cm"));
+        for(int32 Axis=0;Axis<3;++Axis) CargoCenter[Axis]=(Low[Axis]->AsNumber()+High[Axis]->AsNumber())*.5;
+        bFoundSlot=true;
+        break;
+    }
+    if(!TestTrue(TEXT("Physical cargo bounds found"),bFoundSlot)) return false;
     UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);
     if(!TestNotNull(TEXT("Fixture world"),World) || !GEngine) return false;
     GEngine->CreateNewWorldContext(EWorldType::Game).SetCurrentWorld(World);
@@ -169,15 +218,15 @@ bool FGHSStorageCapacityRuntime::RunTest(const FString&)
     auto* Instances=NewObject<UHierarchicalInstancedStaticMeshComponent>(Owner);
     Owner->AddInstanceComponent(Instances);
     Instances->bAutoRebuildTreeOnInstanceChanges=false;
-    Instances->ComponentTags.Add(TEXT("GHSStorageGroup:GHS_V2_Rack_A_Pass_W36176"));
-    auto* Mesh=LoadObject<UStaticMesh>(nullptr,TEXT("/Game/GHSZcoolSmartFactory/StorageCapacity/Meshes/SM_GHS_V2Rack_A_Pass_W36176_Capacity.SM_GHS_V2Rack_A_Pass_W36176_Capacity"));
+    Instances->ComponentTags.Add(FName(TEXT("GHSStorageGroup:")+Group->GetStringField(TEXT("actor"))));
+    auto* Mesh=LoadObject<UStaticMesh>(nullptr,*RackMeshPath(Name));
     if(!TestNotNull(TEXT("Prepared full rack"),Mesh))
     { GEngine->DestroyWorldContext(World); World->DestroyWorld(false); return false; }
     Instances->SetStaticMesh(Mesh);
     Instances->ShadowCacheInvalidationBehavior=EShadowCacheInvalidationBehavior::Always;
     Instances->RegisterComponent();
     const FTransform First(FRotator(0,37,0),FVector(400,-600,170),FVector(1.2,.8,1.1));
-    for(int32 Index=0;Index<11;++Index)
+    for(int32 Index=0;Index<Count;++Index)
     {
         FTransform Transform=First;
         Transform.AddToTranslation(FVector(Index*2000,0,0));
@@ -195,8 +244,8 @@ bool FGHSStorageCapacityRuntime::RunTest(const FString&)
     TestNotNull(TEXT("Full cargo receives a MID"),Cargo);
     UMaterialInterface* Steel=Instances->GetMaterial(0);
     const auto CustomData=Instances->PerInstanceSMCustomData;
-    const FVector CargoPoint=First.TransformPosition(FVector(-112.03,0,500));
-    const FVector FramePoint=First.TransformPosition(FVector(-178,0,400));
+    const FVector CargoPoint=First.TransformPosition(CargoCenter);
+    const FVector FramePoint=First.TransformPosition(Mesh->GetBoundingBox().Min);
     World->SendAllEndOfFrameUpdates();
     TestTrue(TEXT("Fixture has a render state for shadow refresh assertions"),Instances->IsRenderStateCreated());
     TestFalse(TEXT("Initialization render changes were consumed"),Instances->IsRenderStateDirty());
@@ -221,7 +270,7 @@ bool FGHSStorageCapacityRuntime::RunTest(const FString&)
     Capacity->SetCapacity(.8f,1.f);
     TestFalse(TEXT("A continuous slider burst does not recreate the HISM proxy per update"),Instances->IsRenderStateDirty());
     TestTrue(TEXT("Stable instances retain all custom data"),CustomData==Instances->PerInstanceSMCustomData);
-    TestEqual(TEXT("Slider never adds or removes instances"),Instances->GetInstanceCount(),11);
+    TestEqual(TEXT("Slider never adds or removes instances"),Instances->GetInstanceCount(),Count);
     FTransform After;
     Instances->GetInstanceTransform(0,After,true);
     TestTrue(TEXT("Slider preserves rotation/scale/position"),First.Equals(After,.0001));

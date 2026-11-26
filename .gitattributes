@@ -19,6 +19,7 @@ SourceAssets/MPR/rack_clearance_20261112/**/*.json -text whitespace=blank-at-eol
 SourceAssets/MPR/rack_clearance_20261112/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 
 # Preserve exact bytes used by the GHS inventory binding source hashes.
+SourceAssets/GHS/CAD24/racks.json -text
 Content/GHSTwinUI/data/scene-bindings.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 Content/GHSTwinUI/data/rack-slots.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 Content/GHSTwinUI/data/storage-capacity.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

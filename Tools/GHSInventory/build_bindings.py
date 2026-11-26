@@ -628,13 +628,24 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--csv', type=Path, required=True)
     parser.add_argument('--cad', type=Path, required=True)
+    parser.add_argument('--workbook', type=Path, help='CAD 2.4 库位明细（含 rack_beams 和 floor_pallets）')
     parser.add_argument('--root', type=Path, default=ROOT)
     parser.add_argument('--output', type=Path)
     args = parser.parse_args()
-    result = build(args.csv, args.cad, args.root)
+    current_groups = read_json(args.root / 'Content/GHSTwinUI/data/scene-bindings.json')['groups']
+    if any(g['mesh'].startswith('SM_GHS_V2Rack_CAD24_') for g in current_groups):
+        if not args.workbook:
+            parser.error('当前场景使用 CAD 2.4，请通过 --workbook 指定配套库位明细')
+        import bind_cad24
+        result = bind_cad24.build(args.csv, args.cad, args.workbook, args.root)
+    else:
+        if args.workbook:
+            parser.error('请先生成 CAD 2.4 的场景和托位清单')
+        result = build(args.csv, args.cad, args.root)
     dest = args.output or args.root / 'Content/GHSTwinUI/data/inventory-bindings.json'
     dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_text(json.dumps(result, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
+    from import_inventory import write_payload
+    write_payload(dest, result)
     print(json.dumps({'output': str(dest), **result['issues']}, ensure_ascii=False))
 
 

@@ -288,7 +288,8 @@ struct FGHSTwinSceneData::FImpl
     };
     struct FCadInstance
     {
-        FString Id, DockId;
+        FString Id, DockId, RackVariant, RackRow, FloorZone, FloorSequence;
+        int32 RackBay=0;
         FVector Position=FVector::ZeroVector;
     };
     struct FRecord
@@ -539,7 +540,22 @@ struct FGHSTwinSceneData::FImpl
         Record.bAvailable=true; Record.Metric=TEXT("数据绑定"); Record.Value=TEXT("待绑定业务数据");
         const auto* Metadata=CadByMesh.Find(Record.MeshName);
         if(Metadata && Metadata->Num()==Cache.Count && (*Metadata)[Index].Position.Equals(Transform.GetLocation(),.1))
-        { Record.CadId=(*Metadata)[Index].Id; if(Cache.bDock) Record.Id=(*Metadata)[Index].DockId; }
+        {
+            const FCadInstance& Cad=(*Metadata)[Index];
+            Record.CadId=Cad.Id;
+            if(Cache.bDock) Record.Id=Cad.DockId;
+            if(Cache.bRack && !Cad.RackVariant.IsEmpty())
+            {
+                Record.Title=FString::Printf(TEXT("%s 型货架"), *Cad.RackVariant);
+                if(!Cad.RackRow.IsEmpty() && Cad.RackBay>0)
+                    Record.LocationText=FString::Printf(TEXT("%s 排 · 第 %d 档"), *Cad.RackRow, Cad.RackBay);
+            }
+            if(!Cache.bRack && !Cache.bDock && !Cad.FloorZone.IsEmpty() && !Cad.FloorSequence.IsEmpty())
+            {
+                Record.Title=FString::Printf(TEXT("%s-%s 地堆托盘"), *Cad.FloorZone, *Cad.FloorSequence);
+                Record.LocationText=FString::Printf(TEXT("%s 地堆区 · %s 号"), *Cad.FloorZone, *Cad.FloorSequence);
+            }
+        }
         Cache.Transforms[Index]=Transform;
         if(Capacity.IsValid()) Capacity->VerifyInventoryInstance(Component,Index,Transform);
         if(Cache.bDock && !Record.Id.StartsWith(TEXT("DOCK-")))
@@ -593,6 +609,11 @@ struct FGHSTwinSceneData::FImpl
                     if (Object.IsValid() && Object->TryGetStringField(TEXT("id"),Entry.Id) && JsonVector(Object,TEXT("position_m"),CAD))
                     {
                         Entry.Position=FVector(CAD.X*100,-CAD.Y*100,CAD.Z*100);
+                        Object->TryGetStringField(TEXT("variant"),Entry.RackVariant);
+                        Object->TryGetStringField(TEXT("row_code"),Entry.RackRow);
+                        Object->TryGetNumberField(TEXT("bay_sequence"),Entry.RackBay);
+                        Object->TryGetStringField(TEXT("zone_code"),Entry.FloorZone);
+                        Object->TryGetStringField(TEXT("sequence"),Entry.FloorSequence);
                         FString Dock;
                         int32 Number=0;
                         if (Object->TryGetStringField(TEXT("dock_number"),Dock) && PositiveNumber(Dock,Number))

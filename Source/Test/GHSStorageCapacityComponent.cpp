@@ -10,12 +10,20 @@
 #include "Misc/Paths.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
+#include <numeric>
 
 namespace GHSStorageCapacity
 {
 int32 SlotRank(int32 GlobalSlot,int32 TotalSlots)
 {
-    return TotalSlots>0 && GlobalSlot>=0 && GlobalSlot<TotalSlots ? (GlobalSlot*97+17)%TotalSlots : INDEX_NONE;
+    if (TotalSlots<=0 || GlobalSlot<0 || GlobalSlot>=TotalSlots) return INDEX_NONE;
+    int32 Multiplier=97;
+    if (TotalSlots%97==0)
+    {
+        Multiplier=101;
+        while (std::gcd(Multiplier,TotalSlots)!=1) Multiplier+=2;
+    }
+    return int32((int64(GlobalSlot)*Multiplier+17)%TotalSlots);
 }
 bool IsSlotVisible(int32 GlobalSlot,int32 TotalSlots,float Capacity)
 {

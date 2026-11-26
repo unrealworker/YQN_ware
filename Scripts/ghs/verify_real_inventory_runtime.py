@@ -17,17 +17,18 @@ assert all(re.search(r'(?:^|\s)-'+flag+r'(?=\s|$)', CLI, re.I)
            for flag in ('game', 'RenderOffscreen', 'TwinDiagnostics'))
 REAUDIT = bool(re.search(r'(?:^|\s)-InventoryReaudit(?=\s|$)', CLI, re.I))
 CAD_AUDIT = bool(re.search(r'(?:^|\s)-InventoryCadAudit(?=\s|$)', CLI, re.I))
-OUT = ROOT/('output/ghs-cad-code-audit-20261126/runtime' if CAD_AUDIT else
+DATA = ROOT/'Content/GHSTwinUI/data'
+REGISTRY = json.loads((DATA/'scene-bindings.json').read_text(encoding='utf8'))
+PLAN24 = REGISTRY.get('rackSource') == 'SourceAssets/GHS/CAD24/racks.json'
+OUT = ROOT/('output/ghs-plan24/runtime' if PLAN24 else 'output/ghs-cad-code-audit-20261126/runtime' if CAD_AUDIT else
             'output/ghs-inventory-reaudit-20261125/runtime' if REAUDIT else 'output/ghs-inventory-20261125/runtime')
 OUT.mkdir(parents=True, exist_ok=True)
 MAP = ROOT/'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap'
 MAP_HASH = hashlib.sha256(MAP.read_bytes()).hexdigest()
-DATA = ROOT/'Content/GHSTwinUI/data'
 META = json.loads((DATA/'storage-capacity.json').read_text(encoding='utf8'))
 BINDINGS = json.loads((DATA/'inventory-bindings.json').read_text(encoding='utf8'))['bindings']
 INDEX = json.loads((DATA/'inventory/index.json').read_text(encoding='utf8'))
 LOCATIONS = {x['id']: x for x in INDEX['locations']}
-REGISTRY = json.loads((DATA/'scene-bindings.json').read_text(encoding='utf8'))
 started = time.monotonic()
 world = pc = hud = pawn = capacity = handle = None
 finished = False
@@ -173,11 +174,66 @@ def verify_mask(item, location):
     return dict(material_version=version,cargo_visible=visible)
 
 
+def verify_plan24():
+    """Verify the saved layout through the normal game HUD and actual mesh materials."""
+    cap = json.loads(capacity.get_report_json())
+    assert cap['initialized'] and not cap['error'], cap
+    assert cap['inventory_bound_slots'] == len(BINDINGS), cap
+    assert cap['rack_total_slots'] == META['rack_total_slots'], cap
+    assert cap['floor_total_slots'] == META['floor_total_slots'], cap
+    assert cap['registered_components'] == len(META['groups']), cap
+    assert cap['inventory_empty_slots'] == sum(LOCATIONS[b['locationId']]['state']=='empty' for b in BINDINGS), cap
+    record('plan24_inventory_and_capacity', capacity=cap)
+    for prefix in ('GHS-R', 'GHS-SR-', 'GHS-T', 'GHS-WALL'):
+        cases = [b for b in BINDINGS if b['locationCode'].startswith(prefix)]
+        assert cases, prefix
+        for state in ('occupied','empty'):
+            binding = next((b for b in cases if LOCATIONS[b['locationId']]['state']==state), None)
+            if binding is None:
+                continue
+            item = fixture(binding)
+            location = LOCATIONS[binding['locationId']]
+            mask = verify_mask(item,location)
+            assert hud.select_object(item['id'],False)
+            yield from wait('roof_open',hud.is_interior_available)
+            yield from frame_fixture(item)
+            yield from settle_text([binding['locationCode']])
+            selected = json.loads(hud.get_snapshot())['selection']['inventory']
+            assert selected['mappingStatus']=='mapped' and selected['location']['id']==location['id'], selected
+            assert selected['location']['state']==state, selected
+            record('plan24_location_detail', code=binding['locationCode'], mesh=binding['expectedMesh'], **mask)
+            yield from capture(binding['locationCode']+'-'+state)
+    ground_group = next(g for g in REGISTRY['groups'] if g['mesh'].startswith('SM_GHS_Presentation_Cargo'))
+    ground = ground_group['instances'][0]
+    for actor in unreal.GameplayStatics.get_all_actors_of_class(world, unreal.Actor):
+        comp = next((c for c in actor.get_components_by_class(unreal.InstancedStaticMeshComponent)
+                     if c.static_mesh and c.static_mesh.get_name()==ground_group['mesh']),None)
+        if comp:
+            assert hud.select_object(f'PALLET:{actor.get_name()}:{comp.get_name()}:0',False)
+            yield from settle_text([ground['zone_code'], '库位编码未匹配'])
+            detail = json.loads(hud.get_snapshot())['selection']
+            assert ground['zone_code']+'-'+ground['sequence'] in detail['title'], detail
+            record('plan24_ground_zone_and_sequence',title=detail['title'])
+            break
+    else:
+        raise AssertionError('Missing rebuilt ground group '+ground_group['mesh'])
+    hud.clear_selection()
+    viewport = hud.get_viewport_pixel_size()
+    pawn.transition_to_pose(unreal.Vector(0,0,0), 39000, unreal.Rotator(pitch=-78,yaw=0,roll=0),
+                            viewport,unreal.Vector2D(viewport.x*.5,viewport.y*.52),False,0)
+    yield from pause(2)
+    yield from capture('warehouse-interior')
+    assert hashlib.sha256(MAP.read_bytes()).hexdigest()==MAP_HASH
+
+
 def run():
     yield from wait('discover',discover,180)
     yield from wait('initial_camera',lambda:not pawn.is_pose_transition_active())
     yield from pause(2)
     unreal.SystemLibrary.execute_console_command(world,'DisableAllScreenMessages',pc)
+    if PLAN24:
+        yield from verify_plan24()
+        return
     hud.evaluate_diagnostics("window.__inventoryQAErrors=[];window.addEventListener('error',e=>window.__inventoryQAErrors.push(e.message));")
     cap = json.loads(capacity.get_report_json())
     assert cap['inventory_bound_slots']==len(BINDINGS), cap

@@ -164,7 +164,7 @@ def validate_partial_recovery(manifest):
     return target
 
 
-def import_rack(row, materials, editor, recover_target=None):
+def import_rack(row, materials, editor, recover_target=None, lod_ratios=None):
     target = DEST + '/Meshes/' + row['name']
     if LIB.does_asset_exist(target):
         old = LIB.load_asset(target)
@@ -199,7 +199,7 @@ def import_rack(row, materials, editor, recover_target=None):
     editor.set_lod_build_settings(mesh, 0, settings)
     reduction = unreal.StaticMeshReductionOptions()
     reduction.auto_compute_lod_screen_size = False
-    ratios = [1., .55, .30, .18]
+    ratios = lod_ratios or [1., .55, .30, .18]
     policy_file = ROOT / 'SourceAssets/GHS/StorageCapacity/lod-policy.json'
     if policy_file.exists():
         policy = read(policy_file)

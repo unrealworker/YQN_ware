@@ -14,13 +14,15 @@ from pathlib import Path
 import build_bindings as rules
 
 
-def export(root, csv_path, cad_path, output):
+def export(root, csv_path, cad_path, output, workbook=None):
     output.mkdir(parents=True, exist_ok=True)
     mapping = rules.read_json(root/'Content/GHSTwinUI/data/inventory-bindings.json')
     assert mapping['sourceInventorySha256'] == rules.sha(csv_path)
     assert mapping['sourceCadSha256'] == rules.sha(cad_path)
     for name, digest in mapping['sourceHashes'].items():
         assert rules.sha(root/name) == digest, name
+    if mapping.get('rule', {}).get('id') == 'cad24-beam-position':
+        return export_cad24(root, csv_path, mapping, output, workbook)
     attrs = rules.dxf_insert_attributes(cad_path)
     racks = {r['instance_id']: r for r in rules.read_json(root/'SourceAssets/GHS/RefinementV2/Layout/rack_spacing.json')['racks']}
     floor = {r['id']: r for r in rules.read_json(root/'SourceAssets/GHS/cad_layout.json')['storage']}
@@ -134,11 +136,89 @@ body{background:#f3f6fb;color:#21354d;font:15px/1.7 'Microsoft YaHei',sans-serif
     return summary
 
 
+def export_cad24(root, csv_path, mapping, output, workbook):
+    from bind_cad24 import read_workbook
+    if not workbook or rules.sha(workbook) != mapping['sourceWorkbookSha256']:
+        raise ValueError('请指定与当前场景绑定一致的 --workbook 库位明细')
+    beams, _floor = read_workbook(workbook)
+    layout = rules.read_json(root/'SourceAssets/GHS/CAD24/racks.json')
+    racks = {r['id']: r for r in layout['racks']}
+    ground = {p['id']: p for p in layout['ground']}
+    data = root/'Content/GHSTwinUI/data'
+    groups = rules.canonical_scene_groups(rules.read_json(data/'scene-bindings.json'))
+    models = {m['source_mesh']: m['cargo_stacks'] for m in rules.read_json(data/'storage-capacity.json')['meshes']
+              if m['kind'] == 'rack'}
+    bindings = {(b['cadId'],b['level'],b['column']):b for b in mapping['bindings']}
+    records = collections.defaultdict(list)
+    codes = set()
+    with csv_path.open(encoding='utf-8-sig', newline='') as stream:
+        reader = csv.DictReader(stream)
+        source_fields = reader.fieldnames
+        for r in reader:
+            records[r['location_id']].append(r)
+            codes.add(r['location_code'])
+    columns = ['CAD实例','排号或地堆区号','档号或地堆序号','货架规格','模型局部层','档内模型列','物理层',
+               '梁号','梁层规格','净高_英寸','深度_英寸','跨宽_英寸','该梁层库位数','该梁层可用库容_立方米',
+               '关联情况','库位ID','WMS原始库位码','库存条数','库存总件数','可用件数','SKU']
+    summary_file = output/'全部CAD托位与真实库位信息.csv'
+    detail_file = output/'已关联CAD托位的原始库存明细.csv'
+    counted = matched = raw_count = 0
+    with summary_file.open('w', encoding='utf-8-sig', newline='') as summary, detail_file.open('w', encoding='utf-8-sig', newline='') as details:
+        targets = csv.writer(summary)
+        raw = csv.writer(details)
+        targets.writerow(columns)
+        raw.writerow(['CAD实例','模型局部层','档内模型列',*source_fields])
+        for g in groups:
+            for inst in g['instances']:
+                cid = inst['id']
+                if cid in racks:
+                    r = racks[cid]
+                    row = r['row_code']
+                    bay = int(r['bay_sequence']) if row else ''
+                    slots = models[g['mesh']]
+                    variant = r['variant']
+                elif cid in ground:
+                    attrs = ground[cid]['attrs']
+                    row, bay = attrs['ZONE_CODE'], attrs['SEQ']
+                    slots = [dict(level=0,column=0,physical_level=0)]
+                    variant = '地堆'
+                else:
+                    continue
+                for s in slots:
+                    level, col, phys = s['level'], s['column'], s['physical_level']
+                    b = bindings.get((cid,level,col))
+                    beam = beams.get((row,bay),{}).get(phys,{})
+                    source_rows = records[b['locationId']] if b else []
+                    items = [item for item in source_rows if item['inventory_item_id']]
+                    if b:
+                        status = '按 CAD、库位表及 WMS 规则关联'
+                    elif cid in ground:
+                        status = '整区编码对应多个托盘' if row in codes else 'WMS 缺少对应地堆编码'
+                    else:
+                        status = '无唯一 WMS 对应' if beam else 'CAD 未给该托位业务编码'
+                    totals = [sum(int(i[field]) for i in items) if b and all(i[field] for i in items) else ''
+                              for field in ('quantity','available_quantity')]
+                    targets.writerow([cid,row,bay,variant,level,col,phys,beam.get('beam_code',''),
+                        beam.get('beam_key_code',''),beam.get('size_height',''),beam.get('size_deep',''),
+                        beam.get('size_width',''),beam.get('库位数量',''),beam.get('库容-最终可用',''),status,
+                        b['locationId'] if b else '',b['locationCode'] if b else '',len(items) if b else '',
+                        *totals,','.join(sorted({i['sku'] for i in items}))])
+                    counted += 1
+                    matched += bool(b)
+                    for item in source_rows:
+                        raw.writerow([cid,level,col,*(item[k] for k in source_fields)])
+                        raw_count += 1
+    if matched != len(bindings) or counted != mapping['issues']['sceneRackSlots'] + mapping['issues']['sceneFloorSlots']:
+        raise ValueError('导出的 CAD 托位数或关联数与场景不一致')
+    print(json.dumps(dict(sceneTargets=counted,mapped=matched,rawRows=raw_count), ensure_ascii=False))
+
+
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--root',type=Path,default=rules.ROOT)
     p.add_argument('--csv',type=Path,required=True)
     p.add_argument('--cad',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--workbook',type=Path,help='CAD 2.4 库位明细')
     args=p.parse_args()
-    export(args.root,args.csv,args.cad,args.output)
+    export(args.root,args.csv,args.cad,args.output,args.workbook)
