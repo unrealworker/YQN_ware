@@ -10,6 +10,7 @@ import unreal
 ROOT = Path(unreal.Paths.convert_relative_path_to_full(unreal.Paths.project_dir())).resolve()
 sys.path.insert(0, str(ROOT / 'Scripts/ghs'))
 from apply_storage_capacity import import_rack, DEST, MAP
+from import_cad24_distance_lods import apply as apply_distance_lods
 from storage_capacity_import_validation import configure_capacity_component
 from ue_instancing import spawn_group
 from prepare_cad24_racks import BUILT, RUNTIME, read
@@ -100,6 +101,7 @@ def apply_racks():
         mesh = LIB.load_asset(target) if LIB.does_asset_exist(target) else None
         if not mesh or LIB.get_metadata_tag(mesh, 'GHS.Capacity.FBXHash') != row['fbx_sha256']:
             mesh, _ = import_rack(row, materials, editor, lod_ratios=[1., .65, .48, .40])
+            apply_distance_lods(variants=(row['variant'],))
         meshes[name] = mesh
     for g in plans:
         label = g['actor']

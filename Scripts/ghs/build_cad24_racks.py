@@ -100,6 +100,8 @@ def main():
         print('CAD24 mesh', variant, len(rows[-1]['slots']), flush=True)
     (OUT / 'meshes.json').write_text(json.dumps(dict(cad_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
         meshes=rows), ensure_ascii=False), encoding='utf8')
+    from build_cad24_distance_lods import main as build_distance_lods
+    build_distance_lods(rows)
 
 
 if __name__ == '__main__':
