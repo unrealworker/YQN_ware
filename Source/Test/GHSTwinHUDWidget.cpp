@@ -1275,8 +1275,7 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
     const double LogoY=(Header.BrandRowHeight-21)*.5;
     Box(FVector2D(22,LogoY),FVector2D(9,9),C(TEXT("356BFA")),1); Box(FVector2D(34,LogoY),FVector2D(9,9),C(TEXT("78A3FF")),1); Box(FVector2D(22,LogoY+12),FVector2D(9,9),C(TEXT("78A3FF")),1); Box(FVector2D(34,LogoY+12),FVector2D(9,9),C(TEXT("356BFA")),1);
     HeaderText(FVector2D(57,0),Header.bCompactBrand?TEXT("GHS 数字孪生"):TEXT("GHS 仓储数字孪生"),17,Header.BrandRowHeight,FLinearColor::White);
-    if(Header.bShowContext) HeaderText(FVector2D(300,0),TEXT("三维运营中心"),12,Header.BrandRowHeight,HeaderMuted);
-    if(ViewSize.X>=1000)
+    if(Header.bSingleRow)
     {
         Line(FVector2D(Header.AddressPosition.X-20,18),FVector2D(Header.AddressPosition.X-20,46),C(TEXT("354253")));
         Line(FVector2D(ViewSize.X-128,18),FVector2D(ViewSize.X-128,46),C(TEXT("354253")));

@@ -7,6 +7,7 @@
 #include "GHSStorageCapacityComponent.h"
 #include "GHSTwinHUDWidget.h"
 #include "GHSTwinViewport.h"
+#include "GHSTwinHeaderLayout.h"
 #include "Blueprint/WidgetTree.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
 #include "Components/CanvasPanel.h"
@@ -79,7 +80,18 @@ void UGHSGlobeHUD::NativeTick(const FGeometry& Geometry,float Dt)
         const FVector2D BrowserCss=FGHSGlobeBrowserGeometry::ToCssSize(BrowserGeometry.GetLocalSize(),BrowserGeometry.GetAccumulatedLayoutTransform().GetScale(),WindowDpi);
         bFullBrowserCoverage=FGHSGlobeBrowserGeometry::CoversFullLayout(FullSize,Origin,End,bSmall)&&BrowserCss.Equals(FullBrowserCssSize,1.);
     }
-    if(BrowserSlot){BrowserSlot->SetPosition(bSmall?FVector2D(24,FMath::Max(70.,FullSize.Y-108.)):FVector2D::ZeroVector);BrowserSlot->SetSize(bSmall?FVector2D(200,44):FullSize);}
+    if(BrowserSlot)
+    {
+        FVector2D Position=bSmall?FVector2D(24,FMath::Max(70.,FullSize.Y-108.)):FVector2D::ZeroVector;
+        FVector2D BrowserSize=bSmall?FVector2D(200,44):FullSize;
+        const auto* PortalController=Cast<AGHSGlobePlayerController>(GetOwningPlayer());
+        if(bSmall&&PortalController&&PortalController->IsReturnInHeader())
+        {
+            const auto Header=FGHSTwinHeaderLayout::Calculate(FullSize.X);
+            Position=Header.ReturnButtonPosition;BrowserSize=Header.ReturnButtonSize;
+        }
+        BrowserSlot->SetPosition(Position);BrowserSlot->SetSize(BrowserSize);
+    }
 }
 void UGHSGlobeHUD::Push(const FString& Json)
 {if(Browser)Browser->Evaluate(TEXT("window.ghsGlobe&&window.ghsGlobe.receive(")+Json+TEXT(");"));}
@@ -835,6 +847,20 @@ void AGHSGlobePlayerController::TickPortalSmokeTest()
             SmokeError=TEXT("Warehouse HUD or closed roof was not initialized");
         if(WarehouseMarkers||CountryLabels||WarehouseOverlay)
             SmokeError=TEXT("Portal allocated globe annotations");
+        const bool ExpectedHeader=FCString::Strcmp(Id,TEXT("ghs-ca"))==0;
+        if(IsReturnInHeader()!=ExpectedHeader||!GlobeHUD||!GlobeHUD->Browser)
+            SmokeError=TEXT("Warehouse return control has the wrong header placement mode");
+        else
+        {
+            const auto Header=FGHSTwinHeaderLayout::Calculate(GlobeHUD->GetFullSize().X);
+            const FVector2D ExpectedPosition=ExpectedHeader?Header.ReturnButtonPosition:FVector2D(24,FMath::Max(70.,GlobeHUD->GetFullSize().Y-108.));
+            const FVector2D ExpectedSize=ExpectedHeader?Header.ReturnButtonSize:FVector2D(200,44);
+            const auto& ParentGeometry=GlobeHUD->GetCachedGeometry();
+            const auto& BrowserGeometry=GlobeHUD->Browser->GetCachedGeometry();
+            const FVector2D ActualPosition=ParentGeometry.AbsoluteToLocal(BrowserGeometry.LocalToAbsolute(FVector2D::ZeroVector));
+            if(!ActualPosition.Equals(ExpectedPosition,1.)||!BrowserGeometry.GetLocalSize().Equals(ExpectedSize,1.))
+                SmokeError=TEXT("Actual CEF return control geometry differs from the warehouse header/inspection slot");
+        }
         if(SmokeCycles==0)SmokePreviousHUD=TwinHUDWidget;
         else if(TWeakObjectPtr<UGHSTwinHUDWidget>(TwinHUDWidget.Get())==SmokePreviousHUD)
             SmokeError=TEXT("Second warehouse reused the disposed HUD");
@@ -995,12 +1021,15 @@ void AGHSGlobePlayerController::TickPortalSmokeTest()
 }
 void AGHSGlobePlayerController::PushState(bool bIncludeCatalog){if(bReady&&GlobeHUD)GlobeHUD->Push(BuildState(bIncludeCatalog));}
 FString AGHSGlobePlayerController::GetState()const{return BuildState(true);}
+bool AGHSGlobePlayerController::IsReturnInHeader()const
+{return bPortalEntry&&TwinHUDWidget&&!TwinHUDWidget->IsRoofInspectionOnly();}
 FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
 {
     static const TCHAR* Names[]={TEXT("idle"),TEXT("selected"),TEXT("loading"),TEXT("flying"),TEXT("revealing"),TEXT("warehouse"),TEXT("returning"),TEXT("error")};
     auto Root=MakeShared<FJsonObject>();Root->SetStringField(TEXT("phase"),Names[int32(Phase)]);Root->SetStringField(TEXT("selectedId"),SelectedId);Root->SetStringField(TEXT("error"),Error);
     Root->SetBoolField(TEXT("reducedMotion"),bReducedMotion);Root->SetBoolField(TEXT("stageVisible"),bStageVisible);
     Root->SetBoolField(TEXT("portalEntry"),bPortalEntry);
+    Root->SetBoolField(TEXT("returnInHeader"),IsReturnInHeader());
     Root->SetBoolField(TEXT("nativeWarehouseAnnotations"),WarehouseOverlay.IsValid());
     Root->SetBoolField(TEXT("nativeCountryLabels"),CountryLabels!=nullptr);
     Root->SetStringField(TEXT("selectionInputSource"),SelectionInputSource);

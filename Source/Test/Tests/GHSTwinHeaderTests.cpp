@@ -11,22 +11,29 @@ bool FGHSTwinHeaderReflow::RunTest(const FString&)
 {
     auto Intersects=[](FVector2D A,FVector2D AS,FVector2D B,FVector2D BS)
     { return A.X<B.X+BS.X && A.X+AS.X>B.X && A.Y<B.Y+BS.Y && A.Y+AS.Y>B.Y; };
-    for(double Width:{320.,390.,600.,639.,640.,800.,999.,1000.,1024.,1250.,1366.,1920.,2560.})
+    for(double Width:{320.,390.,440.,563.,564.,600.,639.,640.,800.,999.,1000.,1024.,1249.,1250.,1366.,1920.,2560.})
     {
         const auto H=FGHSTwinHeaderLayout::Calculate(Width);
         const auto Scene=FGHSTwinLayout::Calculate(FVector2D(Width,900));
         TestFalse(TEXT("Address and clock never overlap"),Intersects(H.AddressPosition,H.AddressSize,H.ClockPosition,H.ClockSize));
-        for(const auto& Item:{TPair<FVector2D,FVector2D>(H.AddressPosition,H.AddressSize),TPair<FVector2D,FVector2D>(H.ClockPosition,H.ClockSize)})
+        for(const auto& Item:{TPair<FVector2D,FVector2D>(H.AddressPosition,H.AddressSize),TPair<FVector2D,FVector2D>(H.ClockPosition,H.ClockSize),TPair<FVector2D,FVector2D>(H.ReturnButtonPosition,H.ReturnButtonSize)})
         {
-            TestTrue(TEXT("Full address and clock stay inside viewport"),Item.Key.X>=0 && Item.Key.X+Item.Value.X<=Width && Item.Key.Y>=0 && Item.Key.Y+Item.Value.Y<=H.Height);
+            TestTrue(TEXT("Address, clock and return slot stay inside viewport"),Item.Key.X>=0 && Item.Key.X+Item.Value.X<=Width && Item.Key.Y>=0 && Item.Key.Y+Item.Value.Y<=H.Height);
             TestFalse(TEXT("Information does not overlap the panel toggle"),Intersects(Item.Key,Item.Value,H.PanelButtonPosition,H.PanelButtonSize));
             TestFalse(TEXT("Information does not toggle the panel"),H.IsPanelButton(Item.Key+Item.Value*.5));
             TestFalse(TEXT("Information cannot select objects behind the header"),Scene.IsScenePoint(Item.Key+Item.Value*.5));
         }
+        TestFalse(TEXT("Return never covers the address"),Intersects(H.ReturnButtonPosition,H.ReturnButtonSize,H.AddressPosition,H.AddressSize));
+        TestFalse(TEXT("Return never covers the clock"),Intersects(H.ReturnButtonPosition,H.ReturnButtonSize,H.ClockPosition,H.ClockSize));
+        TestFalse(TEXT("Return never covers the brand"),Intersects(H.ReturnButtonPosition,H.ReturnButtonSize,FVector2D(22,0),FVector2D(H.bCompactBrand?184:258,H.BrandRowHeight)));
+        TestTrue(TEXT("Return uses the compact header footprint"),H.ReturnButtonSize.Equals(FVector2D(136,36)));
         TestTrue(TEXT("Panel toggle center remains clickable"),H.IsPanelButton(H.PanelButtonPosition+H.PanelButtonSize*.5));
         TestFalse(TEXT("Below toggle is not another toggle target"),H.IsPanelButton(H.PanelButtonPosition+H.PanelButtonSize+FVector2D(-8,1)));
         TestEqual(TEXT("Scene begins below the complete header"),Scene.ScenePosition.Y,H.Height);
     }
+    TestEqual(TEXT("1000 pixel header moves information below the return control"),FGHSTwinHeaderLayout::Calculate(1000).Height,112.);
+    TestEqual(TEXT("1249 pixel header retains safe two-row layout"),FGHSTwinHeaderLayout::Calculate(1249).Height,112.);
+    TestEqual(TEXT("1250 pixel header fits a single row"),FGHSTwinHeaderLayout::Calculate(1250).Height,64.);
     return true;
 }
 

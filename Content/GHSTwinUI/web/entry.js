@@ -163,6 +163,7 @@
     document.body.dataset.phase=state.phase;
     const sceneVisible=policy.sceneVisible(state.phase,state.transition);
     document.body.dataset.sceneVisible=String(sceneVisible);
+    $('back-button').dataset.inHeader=String(state.returnInHeader===true);
     $('back-button').hidden=state.phase!=='warehouse';
     $('back-button').disabled=returnPending&&state.phase==='warehouse';
     $('back-button').title=state.error?'返回失败：'+state.error+'。点击重试':'返回仓库选择';

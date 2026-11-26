@@ -4,6 +4,7 @@
 #include "../GHSGlobeTransition.h"
 #include "../GHSGlobeNavigation.h"
 #include "../GHSWarehouseCameraPawn.h"
+#include "../GHSTwinHUDWidget.h"
 #include "Camera/CameraComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/Level.h"
@@ -230,6 +231,14 @@ bool FGHSPortalCommandsTest::RunTest(const FString&)
     TestTrue(TEXT("Portal presentation is explicit"),Initial->GetBoolField(TEXT("portalEntry")));
     TestEqual(TEXT("Portal starts in the entry phase"),Initial->GetStringField(TEXT("phase")),FString(TEXT("idle")));
     TestFalse(TEXT("Entry cannot reveal a warehouse before arrival is ready"),Initial->GetObjectField(TEXT("transition"))->GetBoolField(TEXT("arrivalStarted")));
+    TestFalse(TEXT("Entry page has no warehouse header return slot"),Initial->GetBoolField(TEXT("returnInHeader")));
+    Controller->TwinHUDWidget=NewObject<UGHSTwinHUDWidget>(Controller);
+    TestTrue(TEXT("Portal GHS operational HUD uses the header return slot"),State()->GetBoolField(TEXT("returnInHeader")));
+    Controller->bPortalEntry=false;
+    TestFalse(TEXT("Legacy globe keeps its original return placement"),State()->GetBoolField(TEXT("returnInHeader")));
+    Controller->bPortalEntry=true;Controller->TwinHUDWidget->ConfigureRoofInspection(TEXT("MPR"));
+    TestFalse(TEXT("MPR inspection HUD keeps its original return placement"),State()->GetBoolField(TEXT("returnInHeader")));
+    Controller->TwinHUDWidget=nullptr;
     TestTrue(TEXT("No globe POIs or country projections in an empty portal world"),Initial->GetArrayField(TEXT("pois")).IsEmpty()&&Initial->GetArrayField(TEXT("countries")).IsEmpty());
     const FRotator BeforeRotation=Camera->DesiredRotation;const float BeforeZoom=Camera->DesiredZoom;
     Controller->Command(TEXT("{\"action\":\"orbit\",\"dx\":150,\"dy\":60}"));

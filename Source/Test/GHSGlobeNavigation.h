@@ -60,6 +60,7 @@ public:
     virtual bool InputKey(const FInputKeyEventArgs& Params) override;
     UFUNCTION(BlueprintCallable,Category="Globe") void Command(const FString& Json);
     UFUNCTION(BlueprintPure,Category="Globe") FString GetState() const;
+    bool IsReturnInHeader() const;
     /** SaaS entry is the default; -LegacyGlobe retains the old visual diagnostic path. */
     UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Navigation") bool bPortalEntry=true;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Globe") FVector GlobeCenter=FVector(0,0,300000);
