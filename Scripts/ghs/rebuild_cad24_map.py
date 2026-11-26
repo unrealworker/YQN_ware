@@ -9,6 +9,7 @@ sys.path.insert(0,str(ROOT / 'Scripts/ghs'))
 from apply_cad24_racks import apply_racks, MAP
 from cad24_floor import apply_ground, DATA, read
 from apply_refinement_v2 import transform
+from prune_cad24_clipping_columns import prune, save_and_reload
 
 
 def check_scene():
@@ -49,7 +50,9 @@ def main():
     apply_racks()
     apply_ground()
     counts = check_scene()
-    assert levels.save_current_level()
+    column_report,expected_columns = prune()
+    save_and_reload(levels,column_report,expected_columns)
+    assert check_scene()==counts
     output = ROOT/'Saved/GHS_CAD24/map-verified.json'
     output.parent.mkdir(exist_ok=True,parents=True)
     output.write_text(json.dumps(counts,indent=2),encoding='utf8')
