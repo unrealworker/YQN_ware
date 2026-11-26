@@ -128,15 +128,19 @@ bool GHSReplaySources::Resolve(const FJsonObject& Source,const FJsonObject& Regi
 bool FGHSReplayClock::Start(double Seconds)
 {
     if(!FMath::IsFinite(Seconds) || Seconds<3600) return false;
-    Time=0;Duration=Seconds;Rate=1;Playing=true;return true;
+    Time=TrailTime=0;Duration=Seconds;Rate=1;Playing=true;return true;
 }
 void FGHSReplayClock::Advance(double Seconds)
 {
     if(!Playing || !FMath::IsFinite(Seconds) || Seconds<=0) return;
-    Time=FMath::Min(Duration,Time+Seconds*Rate);if(Completed()) Playing=false;
+    const double NextTime=FMath::Min(Duration,Time+Seconds*Rate);
+    // Fast transport moves the task cursor immediately. The directional dashes
+    // advance in viewing time so they remain readable even at 64x.
+    TrailTime+=(NextTime-Time)/Rate;
+    Time=NextTime;if(Completed()) Playing=false;
 }
 void FGHSReplayClock::Seek(double Seconds)
-{if(FMath::IsFinite(Seconds)) {Time=FMath::Clamp(Seconds,0.,Duration);if(Completed()) Playing=false;}}
+{if(FMath::IsFinite(Seconds)) {Time=TrailTime=FMath::Clamp(Seconds,0.,Duration);if(Completed()) Playing=false;}}
 void FGHSReplayClock::SetRate(double Value)
 {for(double R:{1.,2.,4.,8.,16.,32.,64.}) if(Value==R) {Rate=R;return;}}
 bool FGHSReplayExitGuard::Request(const FString& Value,FGHSReplayClock& Clock)
@@ -167,7 +171,7 @@ bool UGHSOrderReplaySession::Start(const FString& Order,const FString& Start,con
     if(!HideSourceInstances()) {Restore();Replay->Destroy();Replay=nullptr;return false;}
     bActive=true;bPreparing=true;
     if(auto* PC=Cast<AGHSWarehousePlayerController>(GetOwner());PC && PC->WarehouseRoof) PC->WarehouseRoof->OpenRoof(true);
-    Replay->EvaluateAt(0);Replay->SetTrailMode(TrailMode,SelectedId);
+    Replay->EvaluateAt(0,0);Replay->SetTrailMode(TrailMode,SelectedId);
     return true;
 }
 bool UGHSOrderReplaySession::LoadParkingAlternates()
@@ -322,7 +326,7 @@ void UGHSOrderReplaySession::Advance(float Delta,FVector2D Viewport,FVector2D Sc
         if(PC && PC->WarehouseRoof && !PC->WarehouseRoof->IsInteriorAvailable()) return;
         bPreparing=false;
     }
-    Clock.Advance(Delta);Replay->EvaluateAt(Clock.Time);
+    Clock.Advance(Delta);Replay->EvaluateAt(Clock.Time,Clock.TrailTime);
     if(!FollowId.IsEmpty() && !Exit.Pending())
     {
         FVector At,Extent;FRotator Rotation;
@@ -333,7 +337,7 @@ void UGHSOrderReplaySession::Advance(float Delta,FVector2D Viewport,FVector2D Sc
 }
 void UGHSOrderReplaySession::Play() {if(bActive && !Exit.Pending()) {if(Clock.Completed()) Seek(0);Clock.Playing=true;}}
 void UGHSOrderReplaySession::Pause() {if(bActive && !Exit.Pending()) Clock.Playing=false;}
-void UGHSOrderReplaySession::Seek(double Seconds) {if(bActive && !Exit.Pending()) {Clock.Seek(Seconds);Replay->EvaluateAt(Clock.Time);}}
+void UGHSOrderReplaySession::Seek(double Seconds) {if(bActive && !Exit.Pending()) {Clock.Seek(Seconds);Replay->EvaluateAt(Clock.Time,Clock.TrailTime);}}
 void UGHSOrderReplaySession::SetRate(double Value) {if(bActive && !Exit.Pending()) Clock.SetRate(Value);}
 void UGHSOrderReplaySession::Select(const FString& Id)
 {

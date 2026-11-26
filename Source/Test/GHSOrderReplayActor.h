@@ -17,7 +17,7 @@ class TEST_API AGHSOrderReplayActor : public AActor
 public:
     AGHSOrderReplayActor();
     bool InitializeReplay();
-    void EvaluateAt(double Time);
+    void EvaluateAt(double Time,double TrailTime);
     void SetPlaybackEndTime(double EndTime);
     void SetTrailMode(const FString& Mode,const FString& SelectedId);
     FString GetSnapshotJson() const;

@@ -21,7 +21,7 @@ namespace GHSReplaySources
 /** Wall-frame deltas affect only this clock. Seeking is a pure absolute evaluation. */
 struct TEST_API FGHSReplayClock
 {
-    double Time=0,Duration=0,Rate=1;
+    double Time=0,Duration=0,Rate=1,TrailTime=0;
     bool Playing=false;
     bool Start(double Seconds);
     void Advance(double Seconds);

@@ -121,7 +121,9 @@ bool AGHSOrderReplayActor::InitializeReplay()
     {
         auto* Trail=NewObject<UInstancedStaticMeshComponent>(this,*FString::Printf(TEXT("Trail%d"),I));AddInstanceComponent(Trail);Trail->SetupAttachment(RootComponent);Trail->SetStaticMesh(Plane);Trail->SetMobility(EComponentMobility::Movable);Trail->SetCollisionEnabled(ECollisionEnabled::NoCollision);Trail->SetCastShadow(false);Trail->SetCanEverAffectNavigation(false);Trail->SetGenerateOverlapEvents(false);
         Trail->SetReceivesDecals(false);
-        // Static per-leg geometry; only two material scalars change during replay.
+        // Keep overlapping route colours in one order as the camera turns.
+        Trail->SetTranslucentSortPriority(I);
+        // Route geometry stays fixed while the material advances its cursor and dashes.
         Trail->SetNumCustomDataFloats(9);
         const auto Tint=FLinearColor::FromSRGBColor(FColor::FromHex(UTF8_TO_TCHAR(GHSReplay::TrailColor(I))));
         auto* MID=UMaterialInstanceDynamic::Create(Material,this);MID->SetVectorParameterValue(TEXT("Tint"),Tint);
@@ -152,10 +154,10 @@ bool AGHSOrderReplayActor::InitializeReplay()
         RippleMID->SetVectorParameterValue(TEXT("Tint"),Tint);RippleMID->SetScalarParameterValue(TEXT("Phase"),I*.173f);
         Ripple->SetDecalMaterial(RippleMID);Ripple->RegisterComponent();GroundRipples.Add(Ripple);RippleMaterials.Add(RippleMID);
     }
-    bReady=true;EvaluateAt(0);SetTrailMode(TrailMode,SelectedId);return true;
+    bReady=true;EvaluateAt(0,0);SetTrailMode(TrailMode,SelectedId);return true;
 }
 
-void AGHSOrderReplayActor::EvaluateAt(double Time)
+void AGHSOrderReplayActor::EvaluateAt(double Time,double TrailTime)
 {
     if(!bReady)return;CurrentTime=FMath::Max(0.,FMath::IsFinite(Time)?Time:0.);Simulation.Evaluate(CurrentTime);
     for(int I=0;I<GHSReplay::EntityCount;++I)
@@ -180,7 +182,7 @@ void AGHSOrderReplayActor::EvaluateAt(double Time)
             DoorLeft[T]->SetWorldTransform(Left*Transform);DoorRight[T]->SetWorldTransform(Right*Transform);DoorLeft[T]->SetVisibility(P.Visible);DoorRight[T]->SetVisibility(P.Visible);
         }
     }
-    for(UMaterialInstanceDynamic* Material:TrailMaterials)if(Material)Material->SetScalarParameterValue(TEXT("ReplayTime"),float(FMath::Fmod(CurrentTime,10000.)));
+    for(UMaterialInstanceDynamic* Material:TrailMaterials)if(Material)Material->SetScalarParameterValue(TEXT("ReplayTime"),float(FMath::Fmod(TrailTime,10000.)));
     for(UMaterialInstanceDynamic* Material:RippleMaterials)if(Material)Material->SetScalarParameterValue(TEXT("ReplayTime"),float(FMath::Fmod(CurrentTime,10000.)));
     UpdateTrails();
 }
@@ -188,7 +190,7 @@ void AGHSOrderReplayActor::EvaluateAt(double Time)
 void AGHSOrderReplayActor::SetPlaybackEndTime(double EndTime)
 {
     PlaybackEndTime=FMath::IsFinite(EndTime)&&EndTime>=0?EndTime:-1.;
-    if(bReady)EvaluateAt(CurrentTime);
+    if(bReady)EvaluateAt(CurrentTime,CurrentTime);
 }
 void AGHSOrderReplayActor::SetTrailMode(const FString& Mode,const FString& Id)
 {

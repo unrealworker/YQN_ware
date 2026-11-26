@@ -41,23 +41,12 @@ def custom(material,code,names,kind=unreal.CustomMaterialOutputType.CMOT_FLOAT4)
     return node(material,unreal.MaterialExpressionCustom,200,0,inputs=inputs,output_type=kind,code=code)
 
 
-def output_rgba(material,expression,masked=False):
+def output_rgba(material,expression):
     rgb=node(material,unreal.MaterialExpressionComponentMask,600,0,r=True,g=True,b=True,a=False)
     alpha=node(material,unreal.MaterialExpressionComponentMask,600,160,r=False,g=False,b=False,a=True)
     connect(expression,rgb,'');connect(expression,alpha,'')
     assert ML.connect_material_property(rgb,'',unreal.MaterialProperty.MP_EMISSIVE_COLOR)
-    if masked:
-        # Shared outgoing/return paths must not accumulate translucency brightness.
-        # A depth-writing, temporally dithered mask retains their soft light coverage.
-        dither=node(material,unreal.MaterialExpressionMaterialFunctionCall,850,160)
-        function=LIB.load_asset('/Engine/Functions/Engine_MaterialFunctions02/Utility/DitherTemporalAA')
-        assert function and dither.set_material_function(function)
-        names=ML.get_material_expression_input_names(dither)
-        alpha_pin=next(name for name in names if 'Alpha' in name)
-        connect(alpha,dither,alpha_pin)
-        assert ML.connect_material_property(dither,'',unreal.MaterialProperty.MP_OPACITY_MASK)
-    else:
-        assert ML.connect_material_property(alpha,'',unreal.MaterialProperty.MP_OPACITY)
+    assert ML.connect_material_property(alpha,'',unreal.MaterialProperty.MP_OPACITY)
 
 
 def params(material):
@@ -80,8 +69,10 @@ def finish(material,version):
 
 def build_trail_material():
     material=build_material(PATH)
-    material.set_editor_property('blend_mode',unreal.BlendMode.BLEND_MASKED)
-    material.set_editor_property('opacity_mask_clip_value',.333)
+    # Blend the measured capsule coverage directly, including the fading tail.
+    # Rendering before motion blur preserves depth testing against the warehouse.
+    material.set_editor_property('translucency_pass',unreal.MaterialTranslucencyPass.MTP_AFTER_DOF)
+    material.set_editor_property('disable_depth_test',False)
     material.set_editor_property('used_with_instanced_static_meshes',True)
     uv,clock,tint=params(material)
     distance=[];data=[]
@@ -120,7 +111,7 @@ return float4(blue * 1.45, dash * tailCoverage * active * remaining);''',
     for source,pin in [(uv,'UV'),(clock,'ReplayClock'),(distance[0],'RouteStart'),(distance[1],'PhaseDelta'),(tint,'Tint'),
                        (distance[2],'RouteLeg'),(distance[3],'ProgressStart'),(distance[4],'ProgressDelta'),(active_leg,'ActiveLeg'),(remaining_from,'RemainingFrom')]:
         connect(source,signal,pin)
-    output_rgba(material,signal,masked=True)
+    output_rgba(material,signal)
     # Miter the two end cross-sections of every plane so neighboring curve chords
     # form one continuous ribbon, rather than a chain of overlapping rectangles.
     tangent=node(material,unreal.MaterialExpressionConstant3Vector,-900,900,constant=unreal.LinearColor(1,0,0,0))
@@ -136,7 +127,7 @@ return side * (d * lerp(StartShear, EndShear, UV.x) + float3(-d.y, d.x, 0) * (le
     # UE 5.4 hides this material output from Python; use the existing scoped native bridge.
     assert unreal.GHSVisualMaterialLibrary.connect_world_position_offset(material,offset)
     assert unreal.GHSVisualMaterialLibrary.has_world_position_offset(material)
-    result=finish(material,'theme-blue-fading-long-dashes-v10')
+    result=finish(material,'theme-blue-stable-long-dashes-v11')
     result['custom_data_indices']=[v.get_editor_property('data_index') for v in data]
     result['vertex_interpolators']=len(distance)
     return result
@@ -166,6 +157,23 @@ def build_ripple_material():
 def repair():
     assert '-run=pythonscript' in unreal.SystemLibrary.get_command_line().lower(), 'Use the isolated commandlet'
     sha=lambda file:hashlib.sha256(file.read_bytes()).hexdigest()
+    if '-ghstrailonly' in unreal.SystemLibrary.get_command_line().lower():
+        stats=build_trail_material()
+        material=LIB.load_asset(PATH)
+        assert material.get_editor_property('blend_mode')==unreal.BlendMode.BLEND_TRANSLUCENT
+        assert not material.get_editor_property('disable_depth_test')
+        assert ML.get_material_property_input_node(material,unreal.MaterialProperty.MP_OPACITY)
+        assert not ML.get_material_property_input_node(material,unreal.MaterialProperty.MP_OPACITY_MASK)
+        assert stats['custom_data_indices']==list(range(9))
+        target=ROOT/'Content/GHSOrderReplay/Materials/M_ReplayTrail.uasset'
+        report=dict(success=True,version=LIB.get_metadata_tag(material,'GHS.Replay.FXVersion'),
+                    material_sha256=sha(target),blend='Translucent',depth_test=True,
+                    outputs=['EmissiveColor','Opacity','WorldPositionOffset'],statistics=stats)
+        out=ROOT/'Saved/OrderReplay/TrailStability'
+        out.mkdir(parents=True,exist_ok=True)
+        (out/'material.json').write_text(json.dumps(report,indent=2),encoding='utf8')
+        unreal.log('REPLAY_TRAIL_ONLY_READY '+report['material_sha256'])
+        return
     targets={ROOT/(p.replace('/Game/','Content/')+'.uasset') for p in [PATH,RIPPLE_PATH]}
     map_file=ROOT/'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap'
     data_file=ROOT/'Content/GHSTwinUI/data/order-replay.json'
@@ -187,7 +195,7 @@ def repair():
         material=LIB.load_asset(path)
         # Deleted editor expressions may remain as orphan subobjects after rebuilding;
         # inspect connected pixel nodes, not every UObject ever owned by the material.
-        coverage=unreal.MaterialProperty.MP_OPACITY_MASK if path==PATH else unreal.MaterialProperty.MP_OPACITY
+        coverage=unreal.MaterialProperty.MP_OPACITY
         pending=[ML.get_material_property_input_node(material,p) for p in [unreal.MaterialProperty.MP_EMISSIVE_COLOR,coverage]]
         nodes[path]=[];seen=set()
         while pending:
@@ -205,12 +213,12 @@ def repair():
     report=dict(success=True,trail=PATH,ripple=RIPPLE_PATH,palette=PALETTE,clock='ReplayTime',wall_clock_nodes=0,
                 fixed_trails=5,fixed_ground_ripples=5,custom_data_indices=indices,vertex_interpolators=5,
                 width_cm=18,wavelength_m=3.,dash_length_m=2.25,gap_length_m=.75,flow_speed_mps=1.2,
-                opacity_range=[0.,1.],core_coverage=1.,dither_region='Rear 35 percent fade and antialiased capsule edges',emission_range=[1.45,1.45],
+                opacity_range=[0.,1.],core_coverage=1.,emission_range=[1.45,1.45],
                 trail_pattern='Long round blue dashes with fading pale-blue tails; transparent gaps; no white highlight',
                 dash_gradient_srgb=['#8BB9FF','#356BFA'],gradient_direction='Transparent pale tail to theme-blue forward cap',
                 phase_source='Per-leg route metric; custom data 0=start, 1=phase delta',
                 remaining_clip=dict(active_leg='ActiveLegId',distance='RemainingFromMeters',custom_data='6 leg id, 7 progress start metres, 8 progress delta metres',front_soft_edge_cm=6),
-                trail_blending='Masked with engine DitherTemporalAA soft coverage and depth writing; no alpha accumulation',
+                trail_blending='Depth-tested alpha blending of analytic coverage; deterministic per-device order',
                 ripple_radius_cm=165,ripple_depth_cm=6,reused_shader='REPLAY_RIPPLE_HLSL derived from RINGS_HLSL',
                 ripple_gradient_srgb=['#8BB9FF','#356BFA'],ripple_core_width_cm=5.28,ripple_emission=.55,
                 statistics=dict(trail=trail_stats,ripple=ripple_stats),protected_hashes=originals,

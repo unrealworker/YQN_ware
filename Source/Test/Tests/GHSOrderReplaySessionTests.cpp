@@ -63,9 +63,21 @@ bool FGHSReplayClockTest::RunTest(const FString&)
     C.Seek(3500);TestFalse(TEXT("seek preserves pause"),C.Playing);
     C.SetRate(64);C.Playing=true;C.Advance(10);
     TestEqual(TEXT("exact interval end"),C.Time,3600.);TestFalse(TEXT("stops at end"),C.Playing);
+    C.SetRate(3);TestEqual(TEXT("unsupported speed does not change rate"),C.Rate,64.);
+    TestEqual(TEXT("flow only advances by the displayed duration before completion"),C.TrailTime,3500.+100./64.);
+    C.Seek(20);
+    TestEqual(TEXT("absolute seek restores a reproducible dash phase"),C.TrailTime,20.);
+    C.Advance(2);
+    TestEqual(TEXT("paused dashes remain still"),C.TrailTime,20.);
+    C.Playing=true;C.Advance(.25);
+    TestEqual(TEXT("64x vehicles advance sixteen seconds"),C.Time,36.);
+    TestEqual(TEXT("64x dashes advance one quarter second"),C.TrailTime,20.25);
+    C.SetRate(1);
+    TestEqual(TEXT("changing rate does not jump the dashes"),C.TrailTime,20.25);
+    C.Advance(.25);
+    TestEqual(TEXT("normal and fast playback have the same dash speed"),C.TrailTime,20.5);
     C.Seek(230);TestEqual(TEXT("rewind is direct"),C.Time,230.);
     C.Seek(std::numeric_limits<double>::infinity());TestEqual(TEXT("reject nonfinite seek"),C.Time,230.);
-    C.SetRate(3);TestEqual(TEXT("unsupported speed does not change rate"),C.Rate,64.);
     C.SetRate(1);C.Playing=true;C.Advance(-1);TestEqual(TEXT("negative delta ignored"),C.Time,230.);
     return true;
 }
