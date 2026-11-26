@@ -179,7 +179,7 @@ def build_snapshot(source_path, *, exported_at=DEFAULT_EXPORTED_AT):
     return index, shards
 
 
-def write_payload(path, payload, *, script=False, summary=False):
+def write_payload(path, payload, *, script=False, global_name=None):
     """Replace one file atomically; index is published last by the caller."""
     temporary = None
     try:
@@ -191,7 +191,7 @@ def write_payload(path, payload, *, script=False, summary=False):
                 # always strict JSON, never source code assembled from a field.
                 encoded = json.dumps(payload, ensure_ascii=True, allow_nan=False, sort_keys=True, separators=(",", ":"))
                 encoded = encoded.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
-                handle.write(("window.GHSInventorySummary=" + encoded + ";\n") if summary
+                handle.write((f"window.{global_name}=" + encoded + ";\n") if global_name
                              else ("window.GHSInventoryPayload(" + encoded + ");\n"))
             else:
                 handle.write(json.dumps(payload, ensure_ascii=False, allow_nan=False, sort_keys=True, separators=(",", ":")) + "\n")
@@ -201,10 +201,65 @@ def write_payload(path, payload, *, script=False, summary=False):
             temporary.unlink()
 
 
+def floor_zone_index(scene_bytes, index, load_shard):
+    """Resolve each CAD zone once. Stock stays in the original WMS shard."""
+    scene = json.loads(scene_bytes)
+    instances, zones, seen = {}, {}, set()
+    for group in scene['groups']:
+        if not group['mesh'].startswith('SM_GHS_Presentation_Cargo') or group['mesh'].endswith('_Occ70'):
+            continue
+        for pallet in group['instances']:
+            code = pallet.get('zone_code')
+            if not code:  # older layouts have no floor-zone identifiers
+                continue
+            sequence = pallet['sequence']
+            if (pallet['id'] in instances or not str(sequence).isdigit() or int(sequence) < 1
+                    or (code, int(sequence)) in seen):
+                raise ValueError(f'Conflicting CAD floor pallet {code} / {sequence}')
+            seen.add((code, int(sequence)))
+            instances[pallet['id']] = dict(zoneCode=code, sequence=str(sequence))
+            zones.setdefault(code, dict(palletCount=0, locationId=None))['palletCount'] += 1
+    if index['warehouseId'] != '108' or index['warehouseCode'] != 'GHS_CA_US':
+        raise ValueError('Wrong warehouse for GHS floor zones')
+    seen_codes = set()
+    for row in index['locations']:
+        code = row['code']
+        if code not in zones:
+            continue
+        if code in seen_codes:
+            raise ValueError(f'Duplicate WMS floor zone {code}')
+        seen_codes.add(code)
+        name = row['shard']
+        if not re.fullmatch(r'[0-9]{3}\.json', name):
+            raise ValueError(f'Invalid shard name {name!r}')
+        shard = load_shard(name)
+        if shard['snapshotId'] != index['snapshotId']:
+            raise ValueError(f'Stale floor zone shard {name}')
+        location = shard['locations'][row['id']]
+        if ((location['code'], location['id'], location['warehouseId'], location['warehouseCode'])
+                != (code, row['id'], '108', 'GHS_CA_US')):
+            raise ValueError(f'Conflicting WMS shard identity for {code}')
+        if location['fields']['warehouse_area_id'] == '513':
+            zones[code]['locationId'] = row['id']
+    return dict(schemaVersion=1, snapshotId=index['snapshotId'],
+                sourceSceneSha256=hashlib.sha256(scene_bytes).hexdigest(), instances=instances, zones=zones)
+
+
+def refresh_floor_zones(directory):
+    scene = (directory.parent/'scene-bindings.json').read_bytes()
+    index = json.loads((directory/'index.json').read_bytes())
+    payload = floor_zone_index(scene, index, lambda name: json.loads((directory/name).read_bytes()))
+    write_payload(directory/'floor-zones.js', payload, script=True, global_name='GHSFloorZones')
+    return payload
+
+
 def import_inventory(source_path, output_dir, *, exported_at=DEFAULT_EXPORTED_AT):
     # Finish all validation before touching any previous output.
     index, shards = build_snapshot(source_path, exported_at=exported_at)
     output_dir = Path(output_dir)
+    scene = output_dir.parent / 'scene-bindings.json'
+    floor_zones = (floor_zone_index(scene.read_bytes(), index, lambda name: shards[int(name[:3])])
+                  if scene.is_file() else None)
     output_dir.mkdir(parents=True, exist_ok=True)
     for number, shard in enumerate(shards):
         name = f"{number:03d}.json"
@@ -213,8 +268,10 @@ def import_inventory(source_path, output_dir, *, exported_at=DEFAULT_EXPORTED_AT
     # Readers must require matching snapshotId before joining index and shard.
     write_payload(output_dir / "index.json", index)
     write_payload(output_dir / "index.js", {"kind": "index", **index}, script=True)
+    if floor_zones is not None:
+        write_payload(output_dir/'floor-zones.js', floor_zones, script=True, global_name='GHSFloorZones')
     write_payload(output_dir / "summary.js", {key: value for key, value in index.items() if key != "locations"},
-                  script=True, summary=True)
+                  script=True, global_name='GHSInventorySummary')
     return index
 
 
@@ -230,6 +287,8 @@ def main():
         parser.exit(1, f"Inventory import rejected: {error}\n")
     files = [args.output / "index.json", args.output / "index.js", args.output / "summary.js",
              *(args.output / f"{i:03d}.{extension}" for i in range(SHARD_COUNT) for extension in ("json", "js"))]
+    if (args.output/'floor-zones.js').is_file():
+        files.append(args.output/'floor-zones.js')
     print(json.dumps({"snapshotId": index["snapshotId"], "summary": index["summary"],
                       "files": len(files), "bytes": sum(p.stat().st_size for p in files),
                       "indexBytes": files[0].stat().st_size, "output": str(args.output)}, ensure_ascii=False))

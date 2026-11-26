@@ -203,20 +203,35 @@ def verify_plan24():
             assert selected['location']['state']==state, selected
             record('plan24_location_detail', code=binding['locationCode'], mesh=binding['expectedMesh'], **mask)
             yield from capture(binding['locationCode']+'-'+state)
-    ground_group = next(g for g in REGISTRY['groups'] if g['mesh'].startswith('SM_GHS_Presentation_Cargo'))
-    ground = ground_group['instances'][0]
+    floors = {g['mesh']:g for g in REGISTRY['groups'] if g['mesh'].startswith('SM_GHS_Presentation_Cargo')}
+    floor_targets = {}
     for actor in unreal.GameplayStatics.get_all_actors_of_class(world, unreal.Actor):
-        comp = next((c for c in actor.get_components_by_class(unreal.InstancedStaticMeshComponent)
-                     if c.static_mesh and c.static_mesh.get_name()==ground_group['mesh']),None)
-        if comp:
-            assert hud.select_object(f'PALLET:{actor.get_name()}:{comp.get_name()}:0',False)
-            yield from settle_text([ground['zone_code'], '库位编码未匹配'])
-            detail = json.loads(hud.get_snapshot())['selection']
-            assert ground['zone_code']+'-'+ground['sequence'] in detail['title'], detail
-            record('plan24_ground_zone_and_sequence',title=detail['title'])
-            break
-    else:
-        raise AssertionError('Missing rebuilt ground group '+ground_group['mesh'])
+        for comp in actor.get_components_by_class(unreal.InstancedStaticMeshComponent):
+            g = floors.get(comp.static_mesh.get_name()) if comp.static_mesh else None
+            if g:
+                assert len(g['instances'])==comp.get_instance_count()
+                for i, row in enumerate(g['instances']):
+                    floor_targets[row['zone_code'],row['sequence']] = (actor,comp,i,row)
+    before = cap['inventory_bound_slots']
+    for code, seq, fields in [
+        ('GHS-G01-01','01',['1,242','594','648','S03-BLACK','S03-BLUE','区内有库存']),
+        ('GHS-G01-12','01',['本次快照全区无库存']),
+        ('GHS-G01-46','01',['本次快照缺少该区档案'])]:
+        actor,comp,i,row = floor_targets[code,seq]
+        assert hud.select_object(f'PALLET:{actor.get_name()}:{comp.get_name()}:{i}',False)
+        yield from wait('ground_roof_open',hud.is_interior_available)
+        pose = comp.get_instance_transform(i,True)
+        viewport = hud.get_viewport_pixel_size()
+        pawn.transition_to_pose(pose.translation+unreal.Vector(0,0,120),1300,unreal.Rotator(pitch=-27,yaw=65,roll=0),
+                                viewport,unreal.Vector2D(hud.get_panel_position().x*.5,viewport.y*.52),False,0)
+        yield from pause(1)
+        dom = yield from settle_text([code,seq,'本托序号','地堆区库存',*fields])
+        detail = json.loads(hud.get_snapshot())['selection']
+        assert detail['cadId']==row['id'] and detail['inventory']['mappingStatus']=='unmapped'
+        assert '查看原设计物料' not in dom['text']
+        record('plan24_floor_zone_inventory',code=code,sequence=seq,cad=row['id'],text=dom['text'])
+        yield from capture('ground-'+code+'-'+seq)
+    assert json.loads(capacity.get_report_json())['inventory_bound_slots']==before
     hud.clear_selection()
     viewport = hud.get_viewport_pixel_size()
     pawn.transition_to_pose(unreal.Vector(0,0,0), 39000, unreal.Rotator(pitch=-78,yaw=0,roll=0),

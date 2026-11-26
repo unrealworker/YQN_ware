@@ -102,3 +102,31 @@ test('global business-code search opens inventory without pretending an unbound 
  app.window.twinSearch(frozen.id);assert.equal(app.window.twinState.filters.inventory.query,frozen.id);
  assert.equal(app.commands.filter(c=>c.action==='focus'||c.action==='select').length,0);
 });
+
+test('floor selection reads zone totals and SKU records through the snapshot shard, keyed by CAD id',()=>{
+ const app=boot({inventory:true});
+ const select=cadId=>app.window.twinSelect({equipment:[],facilities:[],selection:{kind:'material',id:'selected-'+cadId,cadId,title:'GHS-G01-46',inventory:{mappingStatus:'unmapped'}}});
+ select('CAD_24_41852B');
+ assert.match(app.html(),/地堆区库存/);
+ assert.match(app.html(),/GHS-G01-01/);
+ assert.match(app.html(),/区内托位数<\/span><strong>17/);
+ assert.match(app.html(),/本托序号<\/span><strong>01/);
+ assert.match(app.html(),/正在读取库位索引/);
+ const indexScript=scripts(app)[0];
+ acceptIndex(app);indexScript.onload();
+ const row=index.locations.find(r=>r.code==='GHS-G01-01');
+ const shardScript=scripts(app)[0];
+ app.window.GHSInventoryPayload(shardFor(row));shardScript.onload();
+ assert.match(app.html(),/区内有库存/);assert.match(app.html(),/1,242/);
+ assert.match(app.html(),/全区 SKU · 2/);assert.match(app.html(),/S03-BLACK/);
+ select('CAD_24_4184BB');
+ const emptyRow=index.locations.find(r=>r.code==='GHS-G01-15');
+ const second=scripts(app)[0];
+ if(second){app.window.GHSInventoryPayload(shardFor(emptyRow));second.onload();}
+ assert.match(app.html(),/本次快照全区无库存/);
+ select('CAD_24_4183C3');
+ assert.match(app.html(),/GHS-G01-46/);assert.match(app.html(),/本次快照缺少该区档案/);
+ assert.doesNotMatch(app.html(),/全区无库存|1,242|SKU2038/);
+ select('unrelated-instance');
+ assert.doesNotMatch(app.html(),/地堆区库存/);
+});

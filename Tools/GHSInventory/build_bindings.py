@@ -644,7 +644,9 @@ def main():
         result = build(args.csv, args.cad, args.root)
     dest = args.output or args.root / 'Content/GHSTwinUI/data/inventory-bindings.json'
     dest.parent.mkdir(parents=True, exist_ok=True)
-    from import_inventory import write_payload
+    from import_inventory import refresh_floor_zones, write_payload
+    if result['rule']['id'] == 'cad24-beam-position' and not args.output:
+        refresh_floor_zones(args.root/'Content/GHSTwinUI/data/inventory')
     write_payload(dest, result)
     print(json.dumps({'output': str(dest), **result['issues']}, ensure_ascii=False))
 

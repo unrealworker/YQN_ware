@@ -89,7 +89,44 @@ function renderLocation(id){
  const l=shard[id];return l?renderDetail({mappingStatus:'mapped',source:index.source,location:l}):'<p>未找到该库位，未推断为空位。</p>';
 }
 const hasLocation=query=>!!index&&(byId.has(query)||index.locations.some(l=>l.code.toLowerCase()===query.toLowerCase()));
-const api={filterPage,renderDetail,renderList,renderLocation,loadIndex,loadLocation,receive,hasLocation,subscribe:fn=>listeners.add(fn),revision:()=>revision};
+function isFloorSelection(detail){
+ const instances=root.GHSFloorZones&&root.GHSFloorZones.instances;
+ return !!(detail&&detail.kind==='material'&&instances&&Object.hasOwn(instances,detail.cadId));
+}
+function floorLoading(key,message,id){
+ const error=errors.get(key);
+ if(!error)return '<p role="status">'+esc(message)+'</p>';
+ const action=key==='index'?'inventory-retry':'inventory-retry-location';
+ return '<p role="status">'+esc(error)+'</p><button class="btn" data-action="'+action+'"'+(id?' data-id="'+esc(id)+'"':'')+'>重新读取</button>';
+}
+function renderFloorZone(detail){
+ const data=root.GHSFloorZones,pallet=data.instances[detail.cadId],zone=data.zones[pallet.zoneCode];
+ let html='<button class="back" data-action="back">返回</button><header class="page-head"><h1>地堆区库存</h1><p>'+esc(pallet.zoneCode)+'</p></header>';
+ if(data.schemaVersion!==1||!root.GHSInventorySummary||data.snapshotId!==root.GHSInventorySummary.snapshotId||!zone)
+  return html+'<p role="status">地堆区索引与库存快照未通过校验。</p>';
+ html+=section('选中托位',kv('地堆区号',pallet.zoneCode)+kv('区内托位数',zone.palletCount)+kv('本托序号',pallet.sequence));
+ if(zone.locationId===null)return html+'<p class="notice-row">本次快照缺少该区档案，区内库存未知。</p>';
+ if(!index){loadIndex();return html+floorLoading('index','正在读取库位索引…');}
+ const row=byId.get(zone.locationId);
+ if(data.snapshotId!==index.snapshotId||!row||row.code!==pallet.zoneCode)return html+'<p role="status">地堆区档案与库存快照不一致。</p>';
+ const shard=shards.get(row.shard);
+ if(!shard){loadLocation(row.id);return html+floorLoading(row.shard,'正在读取区级库存明细…',row.id);}
+ const location=shard[row.id];
+ if(!location||String(location.fields?.warehouse_area_id)!=='513')return html+'<p role="status">地堆区库存明细未通过库区校验。</p>';
+ const totals=location.totals;
+ const status={occupied:'区内有库存',empty:'本次快照全区无库存',unknown:'区内库存待核验'};
+ html+=section('全区库存',kv('快照时间',index.source.exportedAt)+kv('库存状态',status[location.state])+kv('库存总量 / 件',num(totals.quantity))+kv('可用数量 / 件',num(totals.availableQuantity))+kv('已分配 / 件',num(totals.allocationQuantity))+kv('冻结 / 件',num(totals.freezeQuantity)));
+ const skuTotals=new Map();
+ for(const item of location.items){
+  const current=skuTotals.get(item.sku)||{quantity:0,available:0};
+  current.quantity+=item.quantity;
+  current.available+=item.availableQuantity;
+  skuTotals.set(item.sku,current);
+ }
+ const rows=[...skuTotals].sort(([a],[b])=>a.localeCompare(b)).map(([sku,t])=>'<article class="list-row"><div class="row-title"><strong>'+esc(sku)+'</strong><span>'+num(t.quantity)+' 件</span></div><div class="row-foot">可用 '+num(t.available)+' 件</div></article>');
+ return html+section('全区 SKU · '+num(skuTotals.size),rows.length?rows.join(''):'<p class="small">本次快照无 SKU 明细。</p>')+'<p class="small muted">库存按整个地堆区汇总，单托货品和数量待核对。</p>';
+}
+const api={filterPage,renderDetail,renderList,renderLocation,renderFloorZone,isFloorSelection,loadIndex,loadLocation,receive,hasLocation,subscribe:fn=>listeners.add(fn),revision:()=>revision};
 if(typeof module!=='undefined'&&module.exports)module.exports=api;
 else{root.TwinInventory=api;root.GHSInventoryPayload=receive;}
 })(typeof window!=='undefined'?window:globalThis);

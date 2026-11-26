@@ -59,6 +59,29 @@ class InventoryImportTests(unittest.TestCase):
         self.assertEqual(shard["snapshotId"], index["snapshotId"])
         return shard["locations"][brief["id"]]
 
+    def test_floor_zone_points_to_one_shared_location_in_the_same_snapshot(self):
+        zone = 'GHS-G01-01'
+        scene = dict(groups=[dict(mesh='SM_GHS_Presentation_CargoMid', instances=[
+            dict(id='CAD_24_1', zone_code=zone, sequence='01'),
+            dict(id='CAD_24_2', zone_code=zone, sequence='02'),
+            dict(id='CAD_24_3', zone_code='GHS-G01-20', sequence='01')])])
+        (self.root/'scene-bindings.json').write_text(json.dumps(scene), encoding='utf-8')
+        index = self.run_import([row(location_code=zone, warehouse_area_id='513')])
+        script = (self.out/'floor-zones.js').read_text('utf-8')
+        zones = json.loads(script.removeprefix('window.GHSFloorZones=').removesuffix(';\n'))
+        self.assertEqual(zones['snapshotId'], index['snapshotId'])
+        self.assertEqual(zones['instances']['CAD_24_2'], dict(zoneCode=zone, sequence='02'))
+        self.assertEqual(zones['zones'][zone], dict(palletCount=2, locationId='129'))
+        self.assertEqual(zones['zones']['GHS-G01-20'], dict(palletCount=1, locationId=None))
+        self.assertEqual(self.importer.refresh_floor_zones(self.out), zones)
+        name = self.out/index['locations'][0]['shard']
+        shard = json.loads(name.read_bytes())
+        shard['snapshotId'] = 'previous-export'
+        name.write_text(json.dumps(shard), encoding='utf-8')
+        with self.assertRaisesRegex(ValueError, 'Stale floor zone shard'):
+            self.importer.refresh_floor_zones(self.out)
+        self.assertEqual((self.out/'floor-zones.js').read_text('utf-8'), script)
+
     def test_frozen_stock_is_occupied_even_when_all_available_quantities_are_zero(self):
         rows = [row(str(i + 128), str(i + 1), "2", location_code=f"GHS-R24-{i+1:02d}-02",
                     available_quantity="0", freeze_quantity="2") for i in range(25)]
