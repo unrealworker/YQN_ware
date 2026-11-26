@@ -1,13 +1,13 @@
 """Rebuild the GHS ground pallet groups from model-space CAD inserts."""
 import json
-from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / 'Content/GHSTwinUI/data'
 SOURCE = ROOT / 'SourceAssets/GHS/CAD24/racks.json'
-GROUPS = {'Low':'GHS_CAD_PalletCargoLow', 'Mid':'GHS_CAD_PalletCargo', 'High':'GHS_CAD_PalletCargoHigh'}
 PREFIX = 'SM_GHS_Presentation_Cargo'
+MID_ACTOR = 'GHS_CAD_PalletCargo'
+MID_MESH = PREFIX + 'Mid'
 
 
 def read(path):
@@ -22,29 +22,22 @@ def prepare_ground():
     cad = read(SOURCE)
     scene = read(DATA / 'scene-bindings.json')
     capacity = read(DATA / 'storage-capacity.json')
-    variants = defaultdict(list)
+    instances = []
     for ground in cad['ground']:
         attrs = ground['attrs']
-        # Retain the three existing presentation heights. CAD HEIGHT_IN is a limit.
-        variant = ('Low','Mid','High','Mid')[int(attrs['SEQ']) % 4]
         x,y = ground['position_m'][:2]
-        variants[variant].append(dict(id=ground['id'], position_m=[x,y,.012],
+        instances.append(dict(id=ground['id'], position_m=[x,y,.012],
             rotation_deg=(ground['rotation_deg']+90)%360, scale=[float(attrs['WIDTH_IN'])*.0254/1.2,
             float(attrs['DEPTH_IN'])*.0254,1], zone_code=attrs['ZONE_CODE'], sequence=attrs['SEQ']))
-    assert len({r['id'] for rows in variants.values() for r in rows}) == len(cad['ground'])
+    assert len({r['id'] for r in instances}) == len(cad['ground']) > 0
     scene['groups'] = [g for g in scene['groups'] if not g['mesh'].startswith(PREFIX)]
     capacity['groups'] = [g for g in capacity['groups'] if g['kind']!='floor']
-    base = 0
-    for variant,actor in GROUPS.items():
-        mesh = PREFIX+variant
-        instances = variants[variant]
-        assert instances, variant
-        scene['groups'].append(dict(actor=actor,mesh=mesh,count=len(instances),instances=instances))
-        capacity['groups'].append(dict(actor=actor,mesh=mesh,source_mesh=mesh,kind='floor',
-            count=len(instances),slots_per_instance=1,base_slot=base))
-        base += len(instances)
-    capacity['floor_total_slots'] = base
-    capacity['floor_multiplier'] = 101 if base%97==0 else 97
+    count = len(instances)
+    scene['groups'].append(dict(actor=MID_ACTOR,mesh=MID_MESH,count=count,instances=instances))
+    capacity['groups'].append(dict(actor=MID_ACTOR,mesh=MID_MESH,source_mesh=MID_MESH,kind='floor',
+        count=count,slots_per_instance=1,base_slot=0))
+    capacity['floor_total_slots'] = count
+    capacity['floor_multiplier'] = 101 if count%97==0 else 97
     write(DATA / 'scene-bindings.json', scene)
     write(DATA / 'storage-capacity.json', capacity)
 
@@ -58,8 +51,16 @@ def apply_ground():
     materials = make_capacity_materials('floor',capacity['floor_total_slots'])
     actors = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
     by_label = {a.get_actor_label():a for a in actors.get_all_level_actors()}
+    retired = []
+    for variant in ('Low', 'High'):
+        label = MID_ACTOR + variant
+        if label in by_label:
+            component = by_label[label].get_component_by_class(unreal.HierarchicalInstancedStaticMeshComponent)
+            assert component and component.static_mesh.get_name() == PREFIX + variant
+            assert 'GHSStorageGroup:'+label in map(str, component.component_tags)
+            retired.append(by_label[label])
     for group in scene['groups']:
-        if group['actor'] not in GROUPS.values():
+        if group['actor'] != MID_ACTOR:
             continue
         actor = by_label[group['actor']]
         comp = actor.get_component_by_class(unreal.HierarchicalInstancedStaticMeshComponent)
@@ -82,6 +83,9 @@ def apply_ground():
             actual = comp.get_instance_transform(i,True)
             assert (actual.translation-transform.translation).length()<.1
         assert comp.get_instance_count()==group['count']
+    assert MID_ACTOR in by_label and any(g['actor']==MID_ACTOR for g in scene['groups'])
+    for actor in retired:
+        assert actors.destroy_actor(actor)
 
 
 if __name__=='__main__':
