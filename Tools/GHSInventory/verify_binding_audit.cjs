@@ -1,5 +1,5 @@
 // Independent, read-only reconciliation. No Python mapper/importer is invoked.
-// This is the 2026-11-25 snapshot audit. Usage: node verify_binding_audit.cjs [mapping.json] [audit-output-directory] [baseline.json]
+// Dated snapshot audit. Usage: node verify_binding_audit.cjs [mapping.json] [audit-output-directory] [baseline.json]
 // Raw WMS codes are reversed into bay/column/height instead of calling expected_code.
 const fs = require('node:fs');
 const path = require('node:path');
@@ -8,8 +8,8 @@ const childProcess = require('node:child_process');
 const root = path.resolve(__dirname, '../..');
 const work = path.join(root, 'output/ghs-inventory-reaudit-20261125');
 const mappingPath = process.argv[2] || path.join(root, 'Content/GHSTwinUI/data/inventory-bindings.json');
-const auditDir = process.argv[3] || work;
-const output = path.join(work, 'existing-review');
+let auditDir = process.argv[3] || work;
+let output = path.join(work, 'existing-review');
 const csvPath = 'D:/Data/仓库数据/GHS/ghs_ca_us_ue5_location_inventory_detail_20261125.csv';
 const cadPath = 'D:/Data/仓库数据/GHS/平面布局图_GHS_0.23_20260710现状.dxf';
 const json = p => JSON.parse(fs.readFileSync(path.isAbsolute(p) ? p : path.join(root, p), 'utf8').replace(/^\uFEFF/, ''));
@@ -37,12 +37,18 @@ function csv(text) {
   return rows.map((values, n) => { if (values.length !== fields.length) throw Error(`CSV width at ${n + 2}`); return Object.fromEntries(fields.map((field, i) => [field, values[i]])); });
 }
 
+const cadMetadata = {texts: new Map(), styles: new Map(), layers: new Map(), blocks: new Map()};
 function dxf() {
   const lines = fs.readFileSync(cadPath, 'utf8').split(/\r?\n/);
-  const inserts = new Map(); let entity = {}, current = null;
+  const inserts = new Map(); let entity = {}, current = null, ownerBlock = null;
   const flush = () => {
+    if (entity['0'] === 'BLOCK') { ownerBlock = entity['2']; cadMetadata.blocks.set(ownerBlock, {position: ['10','20','30'].map(k => +(entity[k] || 0)), flags: +(entity['70'] || 0)}); }
+    if (entity['0'] === 'ENDBLK') ownerBlock = null;
+    if (entity['0'] === 'TEXT') cadMetadata.texts.set(entity['5'], {...entity, ownerBlock});
+    if (entity['0'] === 'STYLE') cadMetadata.styles.set(entity['2'], {...entity});
+    if (entity['0'] === 'LAYER') cadMetadata.layers.set(entity['2'], {...entity});
     if (entity['0'] === 'INSERT') {
-      current = {block: entity['2'], attrs: {}, position: ['10', '20', '30'].map(k => +(entity[k] || 0)), rotation: +(entity['50'] || 0), scale: ['41', '42', '43'].map(k => +(entity[k] || 1))};
+      current = {block: entity['2'], ownerBlock, attrs: {}, position: ['10', '20', '30'].map(k => +(entity[k] || 0)), rotation: +(entity['50'] || 0), scale: ['41', '42', '43'].map(k => +(entity[k] || 1)), normal: ['210','220','230'].map((k,n)=>+(entity[k]??(n===2?1:0)))};
       check(!inserts.has(entity['5']), 'duplicate DXF handle', entity['5']); inserts.set(entity['5'], current);
     } else if (entity['0'] === 'ATTRIB' && current) current.attrs[entity['2']] = entity['1'];
     else current = null;
@@ -63,9 +69,13 @@ function codeParts(code) {
   return {row, ordinal, physical: level, bay: Math.ceil(ordinal / 3), column: (ordinal - 1) % 3 + 1, numeric: `${row}|${ordinal}|${level}`};
 }
 
-const baselinePath = process.argv[4] || path.join(work, 'baseline-bindings.json');
-const mapping = json(mappingPath), baseline = fs.existsSync(baselinePath) ? json(baselinePath)
-  : JSON.parse(childProcess.execFileSync('git', ['show', '2fa6fe45:Content/GHSTwinUI/data/inventory-bindings.json'], {cwd:root, maxBuffer:32*1024*1024, encoding:'utf8'}));
+const mapping = json(mappingPath);
+const r1Mode = mapping.rule.id === 'cad-row-bay-three-pallets-v4';
+const baselinePath = process.argv[4] || (r1Mode ? path.join(root, 'output/ghs-cad-code-audit-20261126/baseline-bindings.json') : path.join(work, 'baseline-bindings.json'));
+const baseline = fs.existsSync(baselinePath) ? json(baselinePath)
+  : JSON.parse(childProcess.execFileSync('git', ['show', (r1Mode ? '7e7540a3' : '2fa6fe45') + ':Content/GHSTwinUI/data/inventory-bindings.json'], {cwd:root, maxBuffer:32*1024*1024, encoding:'utf8'}));
+if (r1Mode) { auditDir = process.argv[3] || path.join(root, 'output/ghs-cad-code-audit-20261126'); output = path.join(root, 'output/ghs-cad-code-audit-20261126/independent-review'); }
+check(r1Mode || mapping.rule.id === 'cad-row-bay-three-pallets-v3', 'supported mapping rule', mapping.rule.id);
 const inventory = json('Content/GHSTwinUI/data/inventory/index.json');
 const sourceSha = sha(csvPath), sourceCadSha = sha(cadPath);
 check(mapping.sourceInventorySha256 === sourceSha && inventory.snapshotId === sourceSha, 'snapshot identity', sourceSha);
@@ -95,7 +105,7 @@ check(index.size === locations.size && index.size === inventory.locations.length
 for (const [id, loc] of locations) {
   const state = loc.totals.quantity > 0 ? 'occupied' : 'empty'; loc.state = state;
   const i = index.get(id);
-  check(i && i.code === loc.raw.location_code && i.quantity === loc.totals.quantity && i.availableQuantity === loc.totals.available_quantity && i.state === state && i.recordCount === loc.items, 'index versus raw CSV', id);
+  check(i && i.code === loc.raw.location_code && i.quantity === loc.totals.quantity && i.availableQuantity === loc.totals.available_quantity && i.state === state && i.recordCount === loc.items, 'index versus raw CSV', {id,index:i,source:{code:loc.raw.location_code,quantity:loc.totals.quantity,available:loc.totals.available_quantity,state,items:loc.items}});
 }
 
 const inserts = dxf();
@@ -111,11 +121,59 @@ for (const g of json('SourceAssets/GHS_Normal/ue_scene_registry.json').groups.fi
   const key = `${g.mesh}|${i.id}`, old = registry.get(key);
   check(!old || near(old.position_m, i.position_m) && old.rotation_deg === i.rotation_deg && near(old.scale, i.scale), 'authored placement conflict', key); registry.set(key, i);
 }
-const resolved = new Map(), brackets = [];
+const resolved = new Map(), brackets = [], axisAssignments = [];
 function rawMatches(r) { const a = inserts.get(r.source_handles.at(-1))?.attrs; return a && a.BLOCK_CODE === r.row_code && +a.SEQ === +r.bay_sequence; }
+// This calibration comes from measuring the original Romans SHX glyphs, not
+// from emitted mappings. The literal entity and its display context are checked
+// again so a moved/renamed/rotated label cannot silently remain authoritative.
+const axis = cadMetadata.texts.get('2379D0'), romans = cadMetadata.styles.get('romans'), conc = cadMetadata.layers.get('CONC');
+const textPosition = axis && ['10','20','30'].map(k => +(axis[k] || 0));
+const axisDisplayValid = axis?.['1'] === 'R1' && near(textPosition, [6907983.530347786, 1900808.299315862, 0])
+  && axis['7'] === 'romans' && +axis['40'] === 20 && +axis['41'] === .8 && +(axis['50'] || 0) === 0
+  && axis['8'] === 'CONC' && axis.ownerBlock === null && +(axis['60'] || 0) === 0 && +(axis['67'] || 0) === 0
+  && +(axis['72'] || 0) === 0 && +(axis['73'] || 0) === 0 && +(axis['51'] || 0) === 0 && +(axis['71'] || 0) === 0
+  && near(['210','220','230'].map((k, n) => +(axis[k] ?? (n === 2 ? 1 : 0))), [0,0,1])
+  && romans?.['3'] === 'romans.shx' && +romans['41'] === .8 && +(romans['50'] || 0) === 0 && +(romans['70'] || 0) === 0
+  && conc && !(+conc['70'] & 1) && +conc['62'] >= 0;
+const parent = inserts.get('35ED2D'), lineBlock = cadMetadata.blocks.get('LINE1');
+const sourceParentValid = parent?.block === 'LINE1' && near(parent.position, [0,0,0]) && parent.rotation === 0 && near(parent.scale, [1,1,1]) && near(parent.normal,[0,0,1])
+  && near(lineBlock?.position, [0,0,0]) && !(lineBlock.flags & 12);
+function centerFromRawRack(r) {
+  const raw = inserts.get(r.source_handles.at(-1));
+  const geometryBlock = cadMetadata.blocks.get('RACK_42D_144B');
+  if (!raw || !rawMatches(r) || raw.block !== 'RACK_42D_144B' || raw.rotation !== 0 || !near(raw.scale,[1,1,1]) || !near(raw.normal,[0,0,1])
+      || !near(geometryBlock?.position,[0,0,0]) || (geometryBlock.flags & 12)
+      || r.pass_variant || r.spec_type !== 'A' || r.rotation_deg !== 0 || Math.abs(r.nominal_depth_m-1.0668)>.00001 || Math.abs(r.nominal_span_m-3.81)>.00001) return null;
+  if (r.source_handles.length === 2) { if (r.source_handles[0] !== '35ED2D' || raw.ownerBlock !== 'LINE1' || !sourceParentValid) return null; }
+  else if (r.source_handles.length !== 1 || raw.ownerBlock !== null) return null;
+  const center = [(raw.position[0]+21-6917380)*.0254,(raw.position[1]+75-1902500)*.0254];
+  return near(center,r.source_physical_center_m,.001) && near(raw.position.slice(0,2),r.physical_origin_dxf_xy,.001) ? center : null;
+}
+if (r1Mode) {
+  check(axisDisplayValid && sourceParentValid, 'original visible R1 axis and parent context', {axisDisplayValid,sourceParentValid});
+  // Group raw model instances by their CAD X axis first; independently select
+  // the uniquely nearest repeated vertical row to the measured visible label.
+  const measuredAxisX = textPosition[0] + 31.238095238095237 / 2;
+  const anonymous = racks.filter(r => r.row_code === 'A_A_000' && +r.bay_sequence === 1 && r.source_handles.length === 2)
+    .map(r => ({r, center:centerFromRawRack(r)})).filter(x => x.center && Math.abs(x.center[0]/.0254+6917380-measuredAxisX)<21);
+  check(anonymous.length === 22, 'R1 physical row includes exactly 22 raw rack instances', anonymous.length);
+  check(new Set(anonymous.map(x=>x.center[0].toFixed(3))).size===1, 'R1 axis selects one unique physical column', anonymous.map(x=>x.center[0]));
+  for (const {r,center} of anonymous) {
+    const overlaps = racks.filter(x => near(x.source_physical_center_m,center,.001));
+    if (overlaps.length !== 1) continue;
+    const refs = ['R02','R03'].map(row => racks.filter(x => x.row_code === row && Math.abs(x.source_physical_center_m[1]-center[1]) <= .001));
+    if (!refs.every(x => x.length === 1 && centerFromRawRack(x[0]))) continue;
+    const [second,third] = refs.map(x => x[0]);
+    if (+second.bay_sequence !== +third.bay_sequence || !(center[0] < second.source_physical_center_m[0] && second.source_physical_center_m[0] < third.source_physical_center_m[0])) continue;
+    axisAssignments.push({cadId:r.instance_id,from:[r.row_code,+r.bay_sequence],to:['R01',+second.bay_sequence],neighbors:[second.instance_id,third.instance_id],center});
+  }
+  check(axisAssignments.length === 14, 'only 14 exact R02/R03 aligned bays accepted', axisAssignments.length);
+}
 for (const r of racks) {
   check(rawMatches(r), 'raw DXF attributes differ from layout', r.instance_id);
   let row = r.row_code, bay = +r.bay_sequence;
+  const axisAssignment = axisAssignments.find(x => x.cadId === r.instance_id);
+  if (axisAssignment) [row,bay] = axisAssignment.to;
   if (r.pass_variant && Math.abs(r.rotation_deg) < .001 && /^(?:R|SR|S)\d{2}$/.test(row)) {
     // Search geometric neighbours, independently of emitted cadResolution.
     const aligned = racks.filter(o => !o.pass_variant && o.instance_id !== r.instance_id && o.spec_type === r.spec_type && Math.abs(o.rotation_deg - r.rotation_deg) < .001 && /^(?:R|SR)\d{2}$/.test(o.row_code) && Math.abs(o.physical_center_m[0] - r.physical_center_m[0]) < .0001);
@@ -183,26 +241,46 @@ for (const b of mapping.bindings) {
   const exp = expected.get(t); if (!check(!!exp, 'binding absent in independent reverse lookup', t)) continue;
   check(b.locationId === exp.loc.raw.location_id && b.locationCode === exp.loc.raw.location_code, 'binding WMS identity', t);
   check(near(b.expectedPositionM, exp.instance.position_m) && near(b.expectedWorldRotationDeg, [0, -exp.authored.rotation_deg, 0]) && near(b.expectedWorldScale, exp.authored.scale) && b.expectedMesh === exp.capacity.mesh, 'binding transform contract', t);
-  check(b.confidence === 'rule_inferred' && b.evidence === 'cad-row-bay-three-pallets-v3', 'binding evidence qualification', t);
-  const bracket = brackets.find(x => x.cadId === b.cadId), cr = b.cadResolution;
-  check(cr && cr.originalRow === exp.r.row_code && +cr.originalBay === +exp.r.bay_sequence && cr.resolvedRow === exp.p.row && +cr.resolvedBay === exp.p.bay && cr.method === (bracket ? 'collinear_bilateral_pass_bracket' : 'direct_cad_attributes'), 'CAD resolution evidence', t);
+  check(b.confidence === 'rule_inferred' && b.evidence === mapping.rule.id, 'binding evidence qualification', t);
+  const bracket = brackets.find(x => x.cadId === b.cadId), axisAssignment = axisAssignments.find(x => x.cadId === b.cadId), cr = b.cadResolution;
+  check(cr && cr.originalRow === exp.r.row_code && +cr.originalBay === +exp.r.bay_sequence && cr.resolvedRow === exp.p.row && +cr.resolvedBay === exp.p.bay && cr.method === (axisAssignment ? 'visible_r1_axis_two_row_alignment' : bracket ? 'collinear_bilateral_pass_bracket' : 'direct_cad_attributes'), 'CAD resolution evidence', t);
   if (bracket) check(near(cr.neighbors.map(x => +x.bay), [exp.p.bay - 1, exp.p.bay + 1]) && cr.neighbors.map(x => x.cadId).join('|') === bracket.neighbors.join('|'), 'CAD bilateral evidence', t);
+  if (axisAssignment) {
+    check(cr.neighbors.map(x => x.cadId).join('|') === axisAssignment.neighbors.join('|') && cr.neighbors.every(x => +x.bay === exp.p.bay)
+      && near(cr.sourceCenterM,axisAssignment.center,.001) && cr.axisText?.handle === '2379D0' && cr.axisText?.text === 'R1'
+      && near(cr.axisText.positionDxf,textPosition) && cr.axisText.font === 'romans.shx' && cr.axisText.height === 20 && cr.axisText.width === .8
+      && Math.abs(cr.axisText.textAdvanceInches-31.238095238095237)<.00001
+      && cr.axisText.fontSha256 === '511a13122074b47de7c798a077e946abd72fd15b48944d5f259751cc5774bf60', 'original R1 text and two-reference evidence', t);
+    const v=exp.loc.raw;
+    check(((+v.location_row===exp.p.ordinal&&+v.location_col===1)||(+v.location_row===1&&+v.location_col===exp.p.ordinal))
+      && exp.authored.rotation_deg===90 && near(exp.authored.scale,[1,1,1]), 'R01 WMS axes and unmirrored model orientation', t);
+  }
   const generated = `GHS-${exp.p.row.startsWith('SR') ? 'SR-' + exp.p.row.slice(2) : exp.p.row}-${String(exp.p.ordinal).padStart(2, '0')}-${String(exp.p.physical).padStart(2, '0')}`;
   check(b.codeResolution?.generatedCode === generated && b.codeResolution?.sourceCode === b.locationCode && b.codeResolution?.method === (generated === b.locationCode ? 'exact' : 'same_family_numeric_width'), 'numeric width evidence', t);
   bump(boundStates, exp.loc.state); bump(boundFamily, exp.p.row.startsWith('SR') ? 'SR' : 'R');
-  evidence.push({target: t, locationId: b.locationId, code: b.locationCode, row: exp.p.row, bay: exp.p.bay, column: exp.p.column, physicalLevel: exp.physical, localLevel: b.level, baseZ: exp.slot.base_z_m, rawCadRow: exp.r.row_code, rawCadBay: exp.r.bay_sequence, dxfHandles: exp.r.source_handles, state: exp.loc.state, mechanism: bracket ? (/^S\d{2}$/.test(bracket.from[0]) ? 'S通道双侧定位' : 'R通道档号双侧定位') : (generated !== b.locationCode ? '同族前导零' : '原属性')});
+  evidence.push({target: t, locationId: b.locationId, code: b.locationCode, row: exp.p.row, bay: exp.p.bay, column: exp.p.column, physicalLevel: exp.physical, localLevel: b.level, baseZ: exp.slot.base_z_m, rawCadRow: exp.r.row_code, rawCadBay: exp.r.bay_sequence, dxfHandles: exp.r.source_handles, state: exp.loc.state, mechanism: axisAssignment ? '原文R1轴与双排档位对应' : bracket ? (/^S\d{2}$/.test(bracket.from[0]) ? 'S通道双侧定位' : 'R通道档号双侧定位') : (generated !== b.locationCode ? '同族前导零' : '原属性')});
 }
 for (const t of expected.keys()) check(actual.has(t), 'independent eligible target omitted', t);
 const old = new Map(baseline.bindings.map(b => [target(b), b]));
 const added = evidence.filter(b => !old.has(b.target));
 const removed = baseline.bindings.filter(b => !actual.has(target(b)));
 const addedByReason = {}; for (const b of added) bump(addedByReason, b.mechanism);
-const releasedOrdinary = added.filter(b => b.mechanism === '原属性');
-check(releasedOrdinary.length === 12 && releasedOrdinary.every(b => /^R3[12]$/.test(b.row)), 'released ordinary rack locations', releasedOrdinary);
 const reassigned = [];
 for (const [t, b] of actual) if (old.has(t) && old.get(t).locationId !== b.locationId) reassigned.push(t);
-check(actual.size === 21291 && expected.size === 21291 && added.length === 192 && removed.length === 144 && reassigned.length === 0, 'mapping delta', {actual: actual.size, expected: expected.size, added: added.length, removed: removed.length, reassigned});
-check(addedByReason['S通道双侧定位'] === 162 && addedByReason['R通道档号双侧定位'] === 12 && addedByReason['原属性'] === 12 && addedByReason['同族前导零'] === 6, 'new mapping categories', addedByReason);
+if (r1Mode) {
+  check(old.size===21291 && actual.size===21459 && expected.size===21459 && added.length===168 && removed.length===0 && reassigned.length===0, 'R1 mapping delta', {baseline:old.size,actual:actual.size,expected:expected.size,added:added.length,removed:removed.length,reassigned});
+  check(addedByReason['原文R1轴与双排档位对应']===168 && Object.keys(addedByReason).length===1, 'only original R1 axis candidates added', addedByReason);
+  for (const [t,b] of old) if (actual.has(t)) {
+    const now=actual.get(t);
+    check(b.locationCode===now.locationCode && b.expectedMesh===now.expectedMesh && near(b.expectedPositionM,now.expectedPositionM)
+      && near(b.expectedWorldRotationDeg,now.expectedWorldRotationDeg) && near(b.expectedWorldScale,now.expectedWorldScale), 'previous binding structure preserved', t);
+  }
+} else {
+  const releasedOrdinary = added.filter(b => b.mechanism === '原属性');
+  check(releasedOrdinary.length === 12 && releasedOrdinary.every(b => /^R3[12]$/.test(b.row)), 'released ordinary rack locations', releasedOrdinary);
+  check(actual.size === 21291 && expected.size === 21291 && added.length === 192 && removed.length === 144 && reassigned.length === 0, 'mapping delta', {actual: actual.size, expected: expected.size, added: added.length, removed: removed.length, reassigned});
+  check(addedByReason['S通道双侧定位'] === 162 && addedByReason['R通道档号双侧定位'] === 12 && addedByReason['原属性'] === 12 && addedByReason['同族前导零'] === 6, 'new mapping categories', addedByReason);
+}
 check(reversals.length === 8 && conflicts.size === 16 && removed.every(b => conflicts.has(b.cadId)), 'removed reversal endpoints', {reversals, conflictCount: conflicts.size});
 
 const auditExports = {};
@@ -226,7 +304,7 @@ for (const [file, expectedCount] of [['全部场景库位核对.csv', 32586], ['
   auditExports[file] = {present: true, rows: rows.length, unique: seen.size, sha256: sha(full)};
 }
 fs.mkdirSync(output, {recursive: true});
-const report = {passed: errors.length === 0, time: new Date().toISOString(), method: 'Raw CSV and DXF independently parsed in Node; reverse WMS code -> bay/column, actual model base height -> physical layer. No Python mapper or audit functions imported.', mappingPath, mappingSha256: sha(mappingPath), csvSha256: sourceSha, cadSha256: sourceCadSha, wmsRows: raw.length, wmsLocations: locations.size, inventoryRecords: inventoryItemIds.size, sceneRackSlots, sceneFloorSlots, sceneTargets: allTargets.size, independentEligibleBindings: expected.size, actualBindings: actual.size, preservedBindings: actual.size - added.length, addedBindings: added.length, addedByReason, removedBindings: removed.length, reassigned, boundStates, boundFamily, brackets, reversals, exports: auditExports, physicalLabelDirectionVerified: false, fieldConfirmed: 0, errors};
+const report = {passed: errors.length === 0, time: new Date().toISOString(), method: 'Raw CSV and DXF independently parsed in Node; reverse WMS code -> bay/column, actual model base height -> physical layer. No Python mapper or audit functions imported.', mappingPath, mappingSha256: sha(mappingPath), csvSha256: sourceSha, cadSha256: sourceCadSha, wmsRows: raw.length, wmsLocations: locations.size, inventoryRecords: inventoryItemIds.size, sceneRackSlots, sceneFloorSlots, sceneTargets: allTargets.size, independentEligibleBindings: expected.size, actualBindings: actual.size, preservedBindings: actual.size - added.length, addedBindings: added.length, addedByReason, removedBindings: removed.length, reassigned, boundStates, boundFamily, brackets, axisAssignments, reversals, exports: auditExports, physicalLabelDirectionVerified: false, fieldConfirmed: 0, errors};
 fs.writeFileSync(path.join(output, 'new-bindings-independent-review.json'), JSON.stringify(report, null, 2) + '\n');
 fs.writeFileSync(path.join(output, 'new-bindings-independent-proof.json'), JSON.stringify({all: evidence, added, removed}, null, 2) + '\n');
 console.log(JSON.stringify({...report, brackets: report.brackets.length, reversals: report.reversals.length, errors: errors.slice(0, 20)}, null, 2));

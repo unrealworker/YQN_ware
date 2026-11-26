@@ -16,7 +16,9 @@ CLI = unreal.SystemLibrary.get_command_line()
 assert all(re.search(r'(?:^|\s)-'+flag+r'(?=\s|$)', CLI, re.I)
            for flag in ('game', 'RenderOffscreen', 'TwinDiagnostics'))
 REAUDIT = bool(re.search(r'(?:^|\s)-InventoryReaudit(?=\s|$)', CLI, re.I))
-OUT = ROOT/('output/ghs-inventory-reaudit-20261125/runtime' if REAUDIT else 'output/ghs-inventory-20261125/runtime')
+CAD_AUDIT = bool(re.search(r'(?:^|\s)-InventoryCadAudit(?=\s|$)', CLI, re.I))
+OUT = ROOT/('output/ghs-cad-code-audit-20261126/runtime' if CAD_AUDIT else
+            'output/ghs-inventory-reaudit-20261125/runtime' if REAUDIT else 'output/ghs-inventory-20261125/runtime')
 OUT.mkdir(parents=True, exist_ok=True)
 MAP = ROOT/'Content/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory.umap'
 MAP_HASH = hashlib.sha256(MAP.read_bytes()).hexdigest()
@@ -152,10 +154,10 @@ def fixture(binding):
     return candidates[0]
 
 
-def frame_fixture(item):
+def frame_fixture(item, yaw=0):
     viewport = hud.get_viewport_pixel_size()
     pane = hud.get_panel_position()
-    pawn.transition_to_pose(item['center'], 1600, unreal.Rotator(pitch=-70,yaw=0,roll=0),
+    pawn.transition_to_pose(item['center'], 1600, unreal.Rotator(pitch=-70,yaw=yaw,roll=0),
         viewport,unreal.Vector2D(pane.x*.5,viewport.y*.52),False,0)
     yield from pause(1)
 
@@ -236,12 +238,18 @@ def run():
             ('corrected_r31_pass', next(x for x in BINDINGS if x.get('cadResolution',{}).get('originalRow')=='R31' and x.get('cadResolution',{}).get('originalBay')=='15' and x.get('cadResolution',{}).get('resolvedBay')=='13')),
             ('leading_zero_code', next(x for x in BINDINGS if x['locationCode']=='GHS-SR-02-073-01')),
         ]
+        if CAD_AUDIT:
+            axis_bindings=[x for x in BINDINGS if x['locationCode'].startswith('GHS-R01-')]
+            assert len(axis_bindings)==168, len(axis_bindings)
+            for state in ('occupied','empty'):
+                cases.append(('cad_r1_axis_'+state,next(x for x in axis_bindings
+                    if LOCATIONS[x['locationId']]['state']==state)))
         for name, binding in cases:
             item=fixture(binding)
             location=LOCATIONS[binding['locationId']]
             mask=verify_mask(item,location)
             assert hud.select_object(item['id'],False)
-            yield from frame_fixture(item)
+            yield from frame_fixture(item, yaw=180 if name.startswith('cad_r1_axis_') else 0)
             dom=yield from settle_text([binding['locationCode'],'按编码规则匹配'])
             native=json.loads(hud.get_snapshot())['selection']
             assert native['inventory']['mappingStatus']=='mapped',native
@@ -270,6 +278,20 @@ def run():
         assert native['inventory']['mappingStatus']=='unmapped',native
         record('conflicting_bay_not_presented_as_verified_inventory',selection=native)
         yield from capture('reaudit-conflicting-bay')
+        if CAD_AUDIT:
+            # R1 bays displaced from the two reference rows must remain unknown.
+            axis_ids={x['cadId'] for x in BINDINGS if x['locationCode'].startswith('GHS-R01-')}
+            racks=json.loads((ROOT/'SourceAssets/GHS/RefinementV2/Layout/rack_spacing.json').read_text(encoding='utf8'))['racks']
+            left_x=next(x['physical_center_m'][0] for x in racks if x['instance_id'] in axis_ids)
+            displaced=[x for x in racks if x['row_code']=='A_A_000' and
+                abs(x['physical_center_m'][0]-left_x)<.001 and x['instance_id'] not in axis_ids]
+            assert len(displaced)==8,len(displaced)
+            item=fixture(dict(cadId=displaced[0]['instance_id'],level=1,column=1))
+            assert hud.select_object(item['id'],False)
+            yield from settle_text(['库位编码未匹配'])
+            native=json.loads(hud.get_snapshot())['selection']
+            assert native['inventory']['mappingStatus']=='unmapped',native
+            record('displaced_r1_bays_remain_unmapped',cadId=displaced[0]['instance_id'])
 
     frozen=next(x for x in BINDINGS if LOCATIONS[x['locationId']]['quantity']>0 and LOCATIONS[x['locationId']]['availableQuantity']==0)
     item=fixture(frozen)

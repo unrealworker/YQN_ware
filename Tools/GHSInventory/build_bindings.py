@@ -1,7 +1,7 @@
 """Build conservative GHS CAD/WMS bindings without changing either source.
 
-Only existing CAD row attributes and fully qualified current WMS codes are used.
-Placeholder rows, ambiguous targets and unmatched floor areas remain unbound.
+Existing CAD row attributes or a strictly verified visible R1 axis are matched
+to fully qualified current WMS codes. Ambiguous targets remain unbound.
 Run with --csv and --cad; all other inputs default to this repository.
 """
 from __future__ import annotations
@@ -16,7 +16,18 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[2]
-RULE = 'cad-row-bay-three-pallets-v3'
+RULE = 'cad-row-bay-three-pallets-v4'
+
+# Measured once from the actual source TEXT with its original Romans SHX font.
+# Runtime generation verifies the text/style/transform identity, without loading
+# ezdxf or requiring that workstation font to be installed on another machine.
+R1_AXIS_CALIBRATION = {
+    'handle': '2379D0', 'text': 'R1',
+    'positionDxf': [6907983.530347786, 1900808.299315862, 0.],
+    'height': 20., 'width': .8, 'textAdvanceInches': 31.238095238095237,
+    'font': 'romans.shx',
+    'fontSha256': '511a13122074b47de7c798a077e946abd72fd15b48944d5f259751cc5774bf60',
+}
 
 
 def read_json(path):
@@ -33,6 +44,105 @@ def integer(value):
         return result if str(value).strip() and result > 0 else None
     except (ValueError, TypeError):
         return None
+
+
+def resolve_visible_r1_axis(rack, all_racks, attrs, evidence):
+    """Recover only exact same-Y bays bracketed by the R02/R03 row evidence.
+
+    The bottom R2..R69 labels use a different physical numbering system; none
+    of them are eligible here. Eight shifted R1 bays deliberately stay unknown.
+    """
+    failure = (None, evidence, 'cad_row_not_business_identifier')
+    axis = attrs.get('2379D0', {})
+    style = attrs.get('__styles__', {}).get('romans', {})
+    layer = attrs.get('__layers__', {}).get('CONC', {})
+    base = attrs.get('__blocks__', {}).get('LINE1', {})
+    rack_base = attrs.get('__blocks__', {}).get('RACK_42D_144B', {})
+    parent = attrs.get('35ED2D', {})
+    def close_vector(a, b, tolerance=.001):
+        return (isinstance(a, (list, tuple)) and len(a) == len(b)
+                and all(isinstance(v, (int, float)) and math.isfinite(v) for v in a)
+                and math.dist(a, b) <= tolerance)
+    if (axis.get('entity_type') != 'TEXT' or axis.get('text') != 'R1'
+            or not close_vector(axis.get('position'), R1_AXIS_CALIBRATION['positionDxf'])
+            or axis.get('style') != 'romans' or axis.get('height') != 20.
+            or axis.get('width') != .8 or axis.get('rotation') != 0.
+            or axis.get('align_horizontal') != 0 or axis.get('align_vertical') != 0
+            or axis.get('oblique') != 0. or axis.get('text_flags') != 0
+            or axis.get('layer') != 'CONC' or axis.get('owner_block') is not None
+            or axis.get('invisible') != 0 or axis.get('paperspace') != 0
+            or not close_vector(axis.get('normal'), [0, 0, 1])
+            or style.get('font') != 'romans.shx' or style.get('width') != .8
+            or style.get('oblique') != 0. or style.get('flags') != 0
+            or not layer or layer.get('flags', 1) & 1 or layer.get('color', -1) < 0
+            or parent.get('block') != 'LINE1'
+            or not close_vector(parent.get('position'), [0, 0, 0])
+            or parent.get('rotation') != 0. or not close_vector(parent.get('scale'), [1, 1, 1])
+            or not close_vector(parent.get('normal'), [0, 0, 1])
+            or not close_vector(base.get('position'), [0, 0, 0]) or base.get('flags', 4) & 12
+            or not close_vector(rack_base.get('position'), [0, 0, 0]) or rack_base.get('flags', 4) & 12):
+        return failure
+
+    def source_center(row):
+        handles = row.get('source_handles', [])
+        source = attrs.get(handles[-1], {}) if handles else {}
+        values = source.get('attributes', {})
+        if (values.get('BLOCK_CODE') != row['row_code']
+                or integer(values.get('SEQ')) != integer(row['bay_sequence'])
+                or source.get('block') != 'RACK_42D_144B'
+                or source.get('rotation') != 0. or not close_vector(source.get('scale'), [1, 1, 1])
+                or not close_vector(source.get('normal'), [0, 0, 1])
+                or row.get('rotation_deg') != 0. or row.get('spec_type') != 'A'
+                or row.get('pass_variant') or row.get('nominal_depth_m') != 1.0668
+                or row.get('nominal_span_m') != 3.81):
+            return None
+        if len(handles) == 2:
+            if handles[0] != '35ED2D' or source.get('owner_block') != 'LINE1':return None
+        elif len(handles) != 1 or source.get('owner_block') is not None:
+            return None
+        p = source.get('position', [])
+        if (len(p) != 3 or not close_vector(p[:2], row.get('physical_origin_dxf_xy', []))):
+            return None
+        calculated = [(p[0] + 21 - 6917380.) * .0254, (p[1] + 75 - 1902500.) * .0254]
+        if not close_vector(row.get('source_physical_center_m'), calculated):return None
+        return calculated
+
+    target = source_center(rack)
+    if (target is None or rack['row_code'] != 'A_A_000' or integer(rack['bay_sequence']) != 1
+            or len(rack['source_handles']) != 2):
+        return failure
+    axis_x = axis['position'][0] + R1_AXIS_CALIBRATION['textAdvanceInches'] / 2
+    target_x = target[0] / .0254 + 6917380.
+    if abs(axis_x - target_x) >= 21:
+        return failure
+    columns_at_axis = {round(r['source_physical_center_m'][0], 3) for r in all_racks
+                       if r.get('source_physical_center_m') and r.get('rotation_deg') == 0.
+                       and abs(r['source_physical_center_m'][0] / .0254 + 6917380. - axis_x) < 21}
+    if len(columns_at_axis) != 1:
+        return failure
+    # Reject a repeated physical cell rather than accepting the first candidate.
+    overlapping = [r for r in all_racks if r.get('source_physical_center_m')
+                   and close_vector(r['source_physical_center_m'], target)]
+    if len(overlapping) != 1 or overlapping[0]['instance_id'] != rack['instance_id']:
+        return failure
+    references = []
+    for row_name in ('R02', 'R03'):
+        same_y = [r for r in all_racks if r['row_code'] == row_name
+                  and r.get('source_physical_center_m')
+                  and abs(r['source_physical_center_m'][1] - target[1]) <= .001]
+        if len(same_y) != 1 or source_center(same_y[0]) is None:return failure
+        references.append(same_y[0])
+    first, second = references
+    bay = integer(first['bay_sequence'])
+    if (not bay or integer(second['bay_sequence']) != bay
+            or not target[0] < first['source_physical_center_m'][0] < second['source_physical_center_m'][0]):
+        return failure
+    result = dict(evidence, resolvedRow='R01', resolvedBay=str(bay),
+                  method='visible_r1_axis_two_row_alignment', axisText=dict(R1_AXIS_CALIBRATION),
+                  sourceCenterM=target,
+                  neighbors=[dict(cadId=r['instance_id'], row=r['row_code'], bay=r['bay_sequence'],
+                                  centerM=r['source_physical_center_m']) for r in references])
+    return dict(rack, row_code='R01', bay_sequence=str(bay)), result, ''
 
 
 def resolve_rack_identity(rack, all_racks, attrs):
@@ -52,6 +162,8 @@ def resolve_rack_identity(rack, all_racks, attrs):
                     resolvedBay=bay, method='direct_cad_attributes')
     if not original_matches(rack):
         return None, evidence, 'original_cad_attributes_mismatch'
+    if row == 'A_A_000':
+        return resolve_visible_r1_axis(rack, all_racks, attrs, evidence)
     direct = bool(re.fullmatch(r'(?:R|SR)\d{2}', row))
     special = bool(re.fullmatch(r'S\d{2}', row))
     if not direct and not (special and rack.get('pass_variant')):
@@ -298,12 +410,47 @@ def dxf_insert_attributes(path):
             yield current
     result = {}
     active = None
+    owner_block = None
     for pairs in entities():
         entity = dict(pairs)
         kind = entity.get('0')
-        if kind == 'INSERT':
+        if kind == 'BLOCK':
+            owner_block = entity.get('2')
+            result.setdefault('__blocks__', {})[owner_block] = {
+                'position': [float(entity.get(k, '0')) for k in ('10', '20', '30')],
+                'flags': int(entity.get('70', '0'))}
+            active = None
+        elif kind == 'ENDBLK':
+            owner_block = None
+            active = None
+        elif kind == 'STYLE':
+            result.setdefault('__styles__', {})[entity.get('2')] = {
+                'font': entity.get('3', ''), 'width': float(entity.get('41', '1')),
+                'oblique': float(entity.get('50', '0')), 'flags': int(entity.get('70', '0'))}
+            active = None
+        elif kind == 'LAYER':
+            result.setdefault('__layers__', {})[entity.get('2')] = {
+                'flags': int(entity.get('70', '0')), 'color': int(entity.get('62', '7'))}
+            active = None
+        elif kind == 'TEXT' and entity.get('5') == '2379D0':
+            result['2379D0'] = dict(
+                entity_type='TEXT', text=entity.get('1', ''), style=entity.get('7', 'Standard'),
+                position=[float(entity.get(k, '0')) for k in ('10', '20', '30')],
+                normal=[float(entity.get(k, default)) for k, default in (('210', '0'), ('220', '0'), ('230', '1'))],
+                height=float(entity.get('40', '0')), width=float(entity.get('41', '1')),
+                rotation=float(entity.get('50', '0')), layer=entity.get('8', '0'),
+                align_horizontal=int(entity.get('72', '0')), align_vertical=int(entity.get('73', '0')),
+                oblique=float(entity.get('51', '0')), text_flags=int(entity.get('71', '0')),
+                invisible=int(entity.get('60', '0')), paperspace=int(entity.get('67', '0')),
+                owner_block=owner_block)
+            active = None
+        elif kind == 'INSERT':
             active = {'block': entity.get('2'), 'attributes': {},
-                      'position': [float(entity.get(k, '0')) for k in ('10', '20', '30')]}
+                      'position': [float(entity.get(k, '0')) for k in ('10', '20', '30')],
+                      'rotation': float(entity.get('50', '0')),
+                      'scale': [float(entity.get(k, '1')) for k in ('41', '42', '43')],
+                      'normal': [float(entity.get(k, default)) for k, default in (('210', '0'), ('220', '0'), ('230', '1'))],
+                      'owner_block': owner_block}
             result[entity['5']] = active
         elif kind == 'ATTRIB' and active is not None:
             active['attributes'][entity.get('2')] = entity.get('1', '')
@@ -460,7 +607,7 @@ def build(csv_path, cad_path, root=ROOT):
         'sourceHashes': {str(p.relative_to(root)).replace('\\', '/'): sha(p)
                          for p in (scene_path, slot_path, layout_path, model_path, floor_path, registry_path, capacity_path)},
         'rule': {'id': RULE,
-                 'description': 'CAD BLOCK_CODE/SEQ + 每跨三个托位 + 由实际高度推定物理层；核对 WMS 完整编码、库区 450/454、horizontal_num、location_layer 和当前场景身份/位置/网格。',
+                 'description': 'CAD BLOCK_CODE/SEQ 或经原图R1轴文字及R02/R03双排同档核对的编号 + 每跨三个托位 + 由实际高度推定物理层；核对 WMS 完整编码、库区 450/454、horizontal_num、location_layer 和当前场景身份/位置/网格。',
                  'physicalVerification': '按编码和几何规则推断，未现场核验；不是直接读取 CAD 中每个完整 WMS 库位码。',
                  'assumptions': ['档内 C1/C2/C3 沿 CAD 档号递增方向排列；现场标签方向尚未确认。',
                                  '通道上方货位沿用同规格完整货架的物理层号：A 上两层为 3/4，B 上六层为 7–12。'],
