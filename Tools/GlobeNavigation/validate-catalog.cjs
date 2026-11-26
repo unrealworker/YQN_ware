@@ -2,7 +2,7 @@
 const fs=require('fs'),path=require('path'),root=path.resolve(__dirname,'../..');
 const catalog=JSON.parse(fs.readFileSync(path.join(root,'Content/GHSTwinUI/data/warehouses.json'),'utf8'));
 const ini=fs.readFileSync(path.join(root,'Config/DefaultGame.ini'),'utf8');
-const maps=new Set(['/Game/Maps/GHS_GlobalWarehouse',...catalog.warehouses.map(w=>w.map)]);
+const maps=new Set(['/Game/Maps/GHS_WarehousePortal','/Game/Maps/GHS_GlobalWarehouse',...catalog.warehouses.map(w=>w.map)]);
 const failures=[];
 for(const map of maps){
  if(!/^\/Game\/Maps\/[A-Za-z0-9_/]+$/.test(map)){failures.push('Invalid map path: '+map);continue;}

@@ -18,7 +18,8 @@ CATALOG = Path(__file__).with_name('releases.json')
 DEFAULT_ENGINE = Path('C:/UE/UE_5.8')
 BASES = ROOT / 'Deployment/Releases'
 PATCHES = ROOT / 'Deployment/Patches'
-MAPS = ['/Game/Maps/GHS_GlobalWarehouse',
+MAPS = ['/Game/Maps/GHS_WarehousePortal',
+        '/Game/Maps/GHS_GlobalWarehouse',
         '/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory',
         '/Game/Maps/MPR_CAD_Warehouse_B50B57']
 PAKS = 'Test/Content/Paks/'

@@ -10,6 +10,9 @@
 #include "Engine/World.h"
 #include "GameFramework/PlayerInput.h"
 #include "Misc/ScopeExit.h"
+#include "Dom/JsonObject.h"
+#include "Serialization/JsonReader.h"
+#include "Serialization/JsonSerializer.h"
 #include "GHSAutomationTestFlags.h"
 #include <limits>
 
@@ -180,6 +183,7 @@ bool FGHSGlobePersistentCameraTest::RunTest(const FString&)
     auto* Controller=World->SpawnActor<AGHSGlobePlayerController>();
     auto* Camera=World->SpawnActor<AGHSWarehouseCameraPawn>();
     if(!TestNotNull(TEXT("Globe controller"),Controller)||!TestNotNull(TEXT("Persistent camera"),Camera))return false;
+    Controller->bPortalEntry=false; // This regression explicitly exercises the legacy globe lens.
     Controller->PlayerInput=NewObject<UPlayerInput>(Controller);Controller->Possess(Camera);
     Controller->Command(TEXT("{\"action\":\"home\"}"));
     TestTrue(TEXT("Initial camera belongs to the persistent level"),Camera->GetLevel()==World->PersistentLevel);
@@ -202,5 +206,45 @@ bool FGHSGlobePersistentCameraTest::RunTest(const FString&)
     }
     Controller->UnPossess();
     return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSPortalCommandsTest,"GHS.Portal.CommandRecovery",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSPortalCommandsTest::RunTest(const FString&)
+{
+    UWorld* World=UWorld::CreateWorld(EWorldType::Game,false);
+    if(!TestNotNull(TEXT("Transient portal world"),World)||!GEngine)return false;
+    GEngine->CreateNewWorldContext(EWorldType::Game).SetCurrentWorld(World);
+    ON_SCOPE_EXIT{GEngine->DestroyWorldContext(World);World->DestroyWorld(false);};
+    World->InitializeActorsForPlay(FURL());
+    auto* Controller=World->SpawnActor<AGHSGlobePlayerController>();
+    auto* Camera=World->SpawnActor<AGHSWarehouseCameraPawn>();
+    if(!TestNotNull(TEXT("Portal controller"),Controller)||!TestNotNull(TEXT("Persistent camera"),Camera))return false;
+    Controller->bPortalEntry=true;Controller->PlayerInput=NewObject<UPlayerInput>(Controller);Controller->Possess(Camera);
+    auto State=[&]()
+    {
+        TSharedPtr<FJsonObject> Result;
+        FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Controller->GetState()),Result);
+        return Result;
+    };
+    const auto Initial=State();
+    if(!TestTrue(TEXT("Empty-world portal has a readable state"),Initial.IsValid()))return false;
+    TestTrue(TEXT("Portal presentation is explicit"),Initial->GetBoolField(TEXT("portalEntry")));
+    TestEqual(TEXT("Portal starts in the entry phase"),Initial->GetStringField(TEXT("phase")),FString(TEXT("idle")));
+    TestTrue(TEXT("No globe POIs or country projections in an empty portal world"),Initial->GetArrayField(TEXT("pois")).IsEmpty()&&Initial->GetArrayField(TEXT("countries")).IsEmpty());
+    const FRotator BeforeRotation=Camera->DesiredRotation;const float BeforeZoom=Camera->DesiredZoom;
+    Controller->Command(TEXT("{\"action\":\"orbit\",\"dx\":150,\"dy\":60}"));
+    Controller->Command(TEXT("{\"action\":\"zoom\",\"steps\":4}"));
+    TestTrue(TEXT("Entry page cannot move the hidden camera with old globe gestures"),Camera->DesiredRotation.Equals(BeforeRotation)&&FMath::IsNearlyEqual(Camera->DesiredZoom,BeforeZoom));
+    Controller->Command(TEXT("{\"action\":\"enter\",\"id\":\"/Game/Maps/ArbitraryMap\"}"));
+    const auto Rejected=State();
+    TestEqual(TEXT("Unregistered destination fails without loading a map"),Rejected->GetStringField(TEXT("phase")),FString(TEXT("error")));
+    TestFalse(TEXT("Rejected route provides a visible recovery message"),Rejected->GetStringField(TEXT("error")).IsEmpty());
+    TestTrue(TEXT("Rejected route retains entry presentation"),Rejected->GetBoolField(TEXT("stageVisible")));
+    Controller->Command(TEXT("{\"action\":\"cancel\"}"));
+    const auto Recovered=State();
+    TestEqual(TEXT("Cancel recovers entry phase"),Recovered->GetStringField(TEXT("phase")),FString(TEXT("idle")));
+    TestTrue(TEXT("Cancel clears errors and stale selections"),Recovered->GetStringField(TEXT("error")).IsEmpty()&&Recovered->GetStringField(TEXT("selectedId")).IsEmpty());
+    Controller->Command(TEXT("{\"action\":\"curtainReady\",\"generation\":1,\"width\":1920,\"height\":1080}"));
+    TestEqual(TEXT("An unsolicited curtain acknowledgement cannot activate a warehouse"),State()->GetStringField(TEXT("phase")),FString(TEXT("idle")));
+    Controller->UnPossess();return true;
 }
 #endif

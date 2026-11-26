@@ -50,7 +50,8 @@ TSharedRef<SWidget> UGHSGlobeHUD::RebuildWidget()
 {
     if(!WidgetTree)WidgetTree=NewObject<UWidgetTree>(this,TEXT("GlobeTree"));
     auto* Canvas=WidgetTree->ConstructWidget<UCanvasPanel>();Canvas->SetVisibility(ESlateVisibility::SelfHitTestInvisible);WidgetTree->RootWidget=Canvas;
-    Browser=WidgetTree->ConstructWidget<UGHSTwinBrowser>();Browser->Document=TEXT("globe.html");Browser->bTransparent=true;
+    const auto* PortalController=Cast<AGHSGlobePlayerController>(GetOwningPlayer());
+    Browser=WidgetTree->ConstructWidget<UGHSTwinBrowser>();Browser->Document=PortalController&&PortalController->bPortalEntry?TEXT("entry.html"):TEXT("globe.html");Browser->bTransparent=true;
     BrowserSlot=Canvas->AddChildToCanvas(Browser);BrowserSlot->SetPosition(FVector2D::ZeroVector);BrowserSlot->SetSize(FVector2D(1920,1080));
     return Super::RebuildWidget();
 }
@@ -94,6 +95,7 @@ void UGHSGlobeHUD::ShowWarehouseCluster(const TArray<FString>& Ids)
 AGHSGlobeGameMode::AGHSGlobeGameMode(){PlayerControllerClass=AGHSGlobePlayerController::StaticClass();}
 AGHSGlobePlayerController::AGHSGlobePlayerController()
 {
+    bPortalEntry=!FParse::Param(FCommandLine::Get(),TEXT("LegacyGlobe"));
     // Destination-specific actors are discovered only by the selected experience adapter.
     if(WarehouseRoof)WarehouseRoof->bDeferWorldInitialization=true;
     if(StorageCapacity)StorageCapacity->bDeferWorldInitialization=true;
@@ -128,7 +130,14 @@ void AGHSGlobePlayerController::BeginPlay()
         }
         if(It->ActorHasTag(TEXT("GHS_GlobeRoot"))){GlobeRoot=*It;GlobeCenter=It->GetActorLocation();InitialGlobeRotation=It->GetActorQuat();}
     }
-    if(GlobeRoot.IsValid())
+    // The persistent world remains the streaming host, but the SaaS entry has no
+    // visible globe, globe lights, post processing, or annotation allocation.
+    if(bPortalEntry)for(const auto& Entry:StageActors)if(auto* Actor=Entry.Actor.Get())
+    {
+        Actor->SetActorHiddenInGame(true);Actor->SetActorTickEnabled(false);
+        if(auto* Volume=Cast<APostProcessVolume>(Actor))Volume->bEnabled=false;
+    }
+    if(!bPortalEntry&&GlobeRoot.IsValid())
     {
         FActorSpawnParameters Params;
         Params.Owner=this;Params.OverrideLevel=GetWorld()->PersistentLevel;
@@ -155,18 +164,23 @@ void AGHSGlobePlayerController::BeginPlay()
             return float(FGHSTwinViewport::FromPixels(Pixels).SlateScale(UWidgetLayoutLibrary::GetViewportScale(this)));
         })[GlobeHUD->TakeWidget()];
         GetWorld()->GetGameViewport()->AddViewportWidgetContent(GlobeViewportWidget.ToSharedRef(),50);
-        auto MarkerCommand=[this](const TCHAR* Action,const FString& Id,const FString& Source)
-        {auto Message=MakeShared<FJsonObject>();Message->SetStringField(TEXT("action"),Action);Message->SetStringField(TEXT("id"),Id);Message->SetStringField(TEXT("inputSource"),Source);Command(Encode(Message));};
-        SAssignNew(WarehouseOverlay,SGHSGlobeWarehouseOverlay)
-            .OnSelect_Lambda([this,MarkerCommand](const FString& Id,const FString& Source){MarkerCommand(SelectedId==Id?TEXT("enter"):TEXT("select"),Id,Source);})
-            .OnEnter_Lambda([MarkerCommand](const FString& Id,const FString& Source){MarkerCommand(TEXT("enter"),Id,Source);})
-            .OnCluster_Lambda([this](const TArray<FString>& Ids){Command(TEXT("{\"action\":\"clear\"}"));if(GlobeHUD)GlobeHUD->ShowWarehouseCluster(Ids);});
-        GetWorld()->GetGameViewport()->AddViewportWidgetContent(WarehouseOverlay.ToSharedRef(),51);
+        if(!bPortalEntry)
+        {
+            auto MarkerCommand=[this](const TCHAR* Action,const FString& Id,const FString& Source)
+            {auto Message=MakeShared<FJsonObject>();Message->SetStringField(TEXT("action"),Action);Message->SetStringField(TEXT("id"),Id);Message->SetStringField(TEXT("inputSource"),Source);Command(Encode(Message));};
+            SAssignNew(WarehouseOverlay,SGHSGlobeWarehouseOverlay)
+                .OnSelect_Lambda([this,MarkerCommand](const FString& Id,const FString& Source){MarkerCommand(SelectedId==Id?TEXT("enter"):TEXT("select"),Id,Source);})
+                .OnEnter_Lambda([MarkerCommand](const FString& Id,const FString& Source){MarkerCommand(TEXT("enter"),Id,Source);})
+                .OnCluster_Lambda([this](const TArray<FString>& Ids){Command(TEXT("{\"action\":\"clear\"}"));if(GlobeHUD)GlobeHUD->ShowWarehouseCluster(Ids);});
+            GetWorld()->GetGameViewport()->AddViewportWidgetContent(WarehouseOverlay.ToSharedRef(),51);
+        }
     }
     ResetGlobeCamera(true);
 #if !UE_BUILD_SHIPPING
     // Opt-in standalone validation can never close a user's editor/PIE process.
-    bSmokeTest=FParse::Param(FCommandLine::Get(),TEXT("GlobeSmokeTest"))&&FParse::Param(FCommandLine::Get(),TEXT("game"))&&GetWorld()->WorldType==EWorldType::Game;
+    const bool StandaloneValidation=FParse::Param(FCommandLine::Get(),TEXT("game"))&&GetWorld()->WorldType==EWorldType::Game;
+    bSmokeTest=!bPortalEntry&&FParse::Param(FCommandLine::Get(),TEXT("GlobeSmokeTest"))&&StandaloneValidation;
+    bPortalSmokeTest=bPortalEntry&&FParse::Param(FCommandLine::Get(),TEXT("PortalSmokeTest"))&&StandaloneValidation;
     SmokeStarted=SmokeStepStarted=FPlatformTime::Seconds();
 #endif
     UE_LOG(LogTemp,Display,TEXT("GHS_GLOBE_READY warehouses=%d"),Registry.GetEntries().Num());
@@ -193,6 +207,13 @@ bool AGHSGlobePlayerController::InputKey(const FInputKeyEventArgs& Params)
 }
 void AGHSGlobePlayerController::ResetGlobeCamera(bool Immediate)
 {
+    if(bPortalEntry)
+    {
+        // A fully opaque page owns entry composition. Do not send the camera
+        // back through the earth when returning from either warehouse.
+        if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))Camera->FreezeCurrentPose();
+        return;
+    }
     if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))
     {
         Camera->WarehouseCamera->FieldOfView=20.f;
@@ -285,10 +306,12 @@ void AGHSGlobePlayerController::StartFlight()
     if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))
     {
         Camera->FreezeCurrentPose();
-        Flight.Begin(Camera->CaptureReplayPose(),GlobeCenter,GlobeRadius,Position(W->Latitude,W->Longitude));
+        if(!bPortalEntry)Flight.Begin(Camera->CaptureReplayPose(),GlobeCenter,GlobeRadius,Position(W->Latitude,W->Longitude));
     }
     PushState();
 }
+float AGHSGlobePlayerController::EntryTransitionDuration()const
+{return bPortalEntry?(bReducedMotion?.12f:.3f):(bReducedMotion?.22f:FGHSGlobeFlight::Duration);}
 void AGHSGlobePlayerController::BeginCurtain()
 {
     Curtain.Begin(GlobeHUD?GlobeHUD->GetFullBrowserCssSize():Viewport,GetWorld()->GetTimeSeconds());
@@ -327,8 +350,8 @@ void AGHSGlobePlayerController::SetStageVisible(bool Visible)
         auto* Volume=Cast<APostProcessVolume>(Actor);
         if(!Visible)
         {Entry.bHidden=Actor->IsHidden();Entry.bTickEnabled=Actor->IsActorTickEnabled();Entry.bPostProcessEnabled=Volume&&Volume->bEnabled;}
-        Actor->SetActorHiddenInGame(Visible?Entry.bHidden:true);Actor->SetActorTickEnabled(Visible&&Entry.bTickEnabled);
-        if(Volume)Volume->bEnabled=Visible&&Entry.bPostProcessEnabled;
+        Actor->SetActorHiddenInGame(bPortalEntry||!Visible||Entry.bHidden);Actor->SetActorTickEnabled(!bPortalEntry&&Visible&&Entry.bTickEnabled);
+        if(Volume)Volume->bEnabled=!bPortalEntry&&Visible&&Entry.bPostProcessEnabled;
     }
 }
 void AGHSGlobePlayerController::Command(const FString& Json)
@@ -338,6 +361,10 @@ void AGHSGlobePlayerController::Command(const FString& Json)
     FString InputSource;O->TryGetStringField(TEXT("inputSource"),InputSource);
     if(InputSource!=TEXT("pointer")&&InputSource!=TEXT("keyboard"))InputSource=TEXT("unknown");
     if(Action==TEXT("ready")){bReady=true;PushState(true);return;}
+#if !UE_BUILD_SHIPPING
+    if(Action==TEXT("portalSmokePage")&&bPortalSmokeTest)
+    {FString Page;O->TryGetStringField(TEXT("page"),Page);bPortalSmokeLogin=Page==TEXT("warehouses");return;}
+#endif
     if(Action==TEXT("reducedMotion")){O->TryGetBoolField(TEXT("enabled"),bReducedMotion);return;}
     if(Action==TEXT("curtainReady"))
     {
@@ -369,11 +396,20 @@ void AGHSGlobePlayerController::Command(const FString& Json)
     if(Action==TEXT("back")&&Phase==EPhase::Warehouse)
     {AnnotationInputSource=InputSource;bAnnotationSceneTransition=true;if(WarehouseOverlay)WarehouseOverlay->SetPresentation(false,false,bReducedMotion,true);Phase=EPhase::Returning;PhaseTime=0;MaskOpacity=0;bReturningApplied=false;bReturningCommitted=false;bPreloadRequested=false;Error.Empty();if(GlobeHUD)GlobeHUD->SetCompact(false);CancelCameraDrag();BeginCurtain();PushState();return;}
     if(Phase==EPhase::Warehouse||Phase==EPhase::Flying||Phase==EPhase::Revealing||Phase==EPhase::Returning)return;
+    if(bPortalEntry&&Action==TEXT("cancel"))
+    {
+        SelectedId.Empty();Phase=EPhase::Idle;bEntryRequested=false;bPreloadRequested=false;
+        Curtain.Cancel();MaskOpacity=0;UnloadDestination();Error.Empty();PushState();return;
+    }
     // Legacy CEF hover/focus/drag notifications no longer gate globe rotation.
     if(Action==TEXT("interaction"))return;
     if(Action==TEXT("select")||Action==TEXT("enter"))
     {
-        FString Id;if(!O->TryGetStringField(TEXT("id"),Id)||!Registry.Find(Id))return;
+        // The page may only resolve stable catalog IDs, never arbitrary map URLs.
+        // A loading request owns the slot until cancel or completion.
+        if(bPortalEntry&&Phase==EPhase::Loading)return;
+        FString Id;if(!O->TryGetStringField(TEXT("id"),Id)||!Registry.Find(Id))
+        {if(bPortalEntry)Fail(TEXT("未找到所选仓库，请重新选择"));return;}
         SelectedId=Id;SelectionInputSource=InputSource;
         if(Action==TEXT("enter"))AnnotationInputSource=InputSource;
         Error.Empty();Phase=EPhase::Selected;bPreloadRequested=true;PreloadSelected();
@@ -385,7 +421,7 @@ void AGHSGlobePlayerController::Command(const FString& Json)
     if(Action==TEXT("home")||Action==TEXT("reset"))
     {
         bEntryRequested=false;Phase=SelectedId.IsEmpty()?EPhase::Idle:EPhase::Selected;Error.Empty();
-        if(GlobeRoot.IsValid())
+        if(!bPortalEntry&&GlobeRoot.IsValid())
         {
             ResetStartRotation=GlobeRoot->GetActorQuat();GlobeResetTime=0;bResettingGlobe=!bReducedMotion;
             if(bReducedMotion)GlobeRoot->SetActorRotation(InitialGlobeRotation);
@@ -404,7 +440,7 @@ void AGHSGlobePlayerController::Command(const FString& Json)
         if(!Window.IsValid()||!Window->GetNativeWindow().IsValid()||!Window->IsVisible())return;
         CancelCameraDrag();Client->HandleToggleFullscreenCommand();return;
     }
-    if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))
+    if(!bPortalEntry)if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))
     {
         double DX,DY,Steps;
         if(Action==TEXT("orbit")||Action==TEXT("zoom"))bResettingGlobe=false;
@@ -429,13 +465,13 @@ void AGHSGlobePlayerController::PlayerTick(float Dt)
     // Browsing and selection do not interrupt the globe's constant angular speed.
     // Camera flights and explicit home resets retain exclusive pose ownership.
     const bool Browsing=Phase==EPhase::Idle||Phase==EPhase::Selected||Phase==EPhase::Loading||Phase==EPhase::Error;
-    if(Browsing&&bStageVisible&&!bReducedMotion&&!bResettingGlobe&&GlobeRoot.IsValid())
+    if(!bPortalEntry&&Browsing&&bStageVisible&&!bReducedMotion&&!bResettingGlobe&&GlobeRoot.IsValid())
         GlobeRoot->AddActorWorldRotation(FRotator(0,IdleRotationDegreesPerSecond*Dt,0));
     if(Phase==EPhase::Flying)
     {
-        const float Duration=bReducedMotion?.22f:FGHSGlobeFlight::Duration;
-        if(!bReducedMotion)if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))Camera->RestoreReplayPose(Flight.Sample(PhaseTime/Duration));
-        MaskOpacity=Ease((PhaseTime-Duration*.68f)/(Duration*.27f));
+        const float Duration=EntryTransitionDuration();
+        if(!bPortalEntry&&!bReducedMotion)if(auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn()))Camera->RestoreReplayPose(Flight.Sample(PhaseTime/Duration));
+        MaskOpacity=bPortalEntry?Ease(PhaseTime/Duration):Ease((PhaseTime-Duration*.68f)/(Duration*.27f));
         if(PhaseTime>=Duration&&Destination&&AwaitCurtain())
         {
             MaskOpacity=1;Destination->SetShouldBeVisible(true);
@@ -483,6 +519,7 @@ void AGHSGlobePlayerController::PlayerTick(float Dt)
         else {MaskOpacity=1-Ease(PhaseTime/Duration);if(MaskOpacity<=0){Phase=!Error.IsEmpty()?EPhase::Error:(SelectedId.IsEmpty()?EPhase::Idle:EPhase::Selected);}}
     }
     if(bSmokeTest)TickSmokeTest();
+    if(bPortalSmokeTest)TickPortalSmokeTest();
 }
 
 void AGHSGlobePlayerController::UpdateCameraManager(float Dt)
@@ -748,6 +785,139 @@ void AGHSGlobePlayerController::TickSmokeTest()
     {Snapshot(TEXT("08-warehouse-arrival"));bSmokeArrivalCaptured=true;}
 #endif
 }
+void AGHSGlobePlayerController::TickPortalSmokeTest()
+{
+#if !UE_BUILD_SHIPPING
+    const double Now=FPlatformTime::Seconds();
+    auto Snapshot=[&](const TCHAR* Name)
+    {
+        const FString Folder=FPaths::ProjectSavedDir()/TEXT("PortalValidation");IFileManager::Get().MakeDirectory(*Folder,true);
+        FFileHelper::SaveStringToFile(GetState(),*(Folder/(FString(Name)+TEXT(".json"))));
+        FScreenshotRequest::RequestScreenshot(FPaths::ConvertRelativePathToFull(Folder/(FString(Name)+TEXT(".png"))),true,false);
+    };
+    auto Advance=[&](int32 Step){SmokeStep=Step;SmokeStepStarted=Now;};
+    auto CheckWarehouse=[&](const TCHAR* Id)
+    {
+        if(SelectedId!=Id||LoadedId!=Id||!Destination||!Destination->IsLevelVisible()||!Experience||!Experience->IsReady(*this))
+            SmokeError=TEXT("Selected destination is not fully visible and ready");
+        const auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn());
+        if(!Camera||Camera!=PersistentCamera||Camera->GetLevel()!=GetWorld()->PersistentLevel||GetViewTarget()!=Camera)
+            SmokeError=TEXT("Warehouse lost the persistent camera or view target");
+        if(!Camera||!Camera->WarehouseCamera||!FMath::IsNearlyEqual(Camera->WarehouseCamera->FieldOfView,GetDefault<AGHSWarehouseCameraPawn>()->WarehouseCamera->FieldOfView,.01f))
+            SmokeError=TEXT("Warehouse camera FOV was not restored");
+        if(!TwinHUDWidget||!WarehouseRoof||!WarehouseRoof->HasRoof()||!WarehouseRoof->IsRoofClosed())
+            SmokeError=TEXT("Warehouse HUD or closed roof was not initialized");
+        if(WarehouseMarkers||CountryLabels||WarehouseOverlay)
+            SmokeError=TEXT("Portal allocated globe annotations");
+        if(SmokeCycles==0)SmokePreviousHUD=TwinHUDWidget;
+        else if(TWeakObjectPtr<UGHSTwinHUDWidget>(TwinHUDWidget.Get())==SmokePreviousHUD)
+            SmokeError=TEXT("Second warehouse reused the disposed HUD");
+        else bSmokeHUDRebuilt=true;
+    };
+    auto CheckReturned=[&]()
+    {
+        if(Destination||bUnloadRequested||TwinHUDWidget||CampusTraffic||Experience||!bStageVisible)
+            SmokeError=TEXT("Return retained destination, HUD, traffic or experience");
+        if(GetPawn()!=PersistentCamera||GetViewTarget()!=PersistentCamera)
+            SmokeError=TEXT("Return lost the persistent camera");
+        if(WarehouseRoof)
+        {
+            const auto Roof=WarehouseRoof->CaptureReplayState();
+            if(Roof.HasRoofVisibility||!Roof.Roofs.IsEmpty()||!Roof.Shells.IsEmpty()||Roof.TickEnabled)
+                SmokeError=TEXT("Return retained roof state");
+        }
+        for(const auto& Entry:StageActors)if(const auto* Actor=Entry.Actor.Get())
+            if(!Actor->IsHidden()||Actor->IsActorTickEnabled())SmokeError=TEXT("Returning exposed the legacy globe stage");
+        ++SmokeCycles;
+    };
+    if(Now-SmokeStarted>300)SmokeError=TEXT("Portal validation exceeded 300 seconds");
+    if(SmokeStep==12&&!bPortalSmokeLogin&&Now-SmokeStepStarted>5)SmokeError=TEXT("CEF login submit did not reach the warehouse selection page");
+    if(SmokeStep>1&&Phase==EPhase::Error)SmokeError=Error;
+    if(!SmokeError.IsEmpty())SmokeStep=99;
+    if(SmokeStep==0&&bReady&&Now-SmokeStepStarted>3)
+    {
+        if(!Registry.Find(TEXT("ghs-ca"))||!Registry.Find(TEXT("mpr-nj")))SmokeError=TEXT("GHS/MPR catalog entries unavailable");
+        Snapshot(TEXT("01-login"));Advance(1);
+    }
+    else if(SmokeStep==1&&Now-SmokeStepStarted>1)
+    {
+        // Exercise the mounted CEF page's real submit control. No credentials,
+        // session token or server-side authentication are invented by this test.
+        if(GlobeHUD&&GlobeHUD->Browser)GlobeHUD->Browser->Evaluate(TEXT("document.getElementById('login-button')?.click();"));
+        Advance(2);
+    }
+    else if(SmokeStep==2&&Now-SmokeStepStarted>1)
+    {
+        if(GlobeHUD&&GlobeHUD->Browser)GlobeHUD->Browser->Evaluate(TEXT("window.ue.twin.command(JSON.stringify({action:'portalSmokePage',page:window.ghsEntry?.getPage()}));"));
+        Advance(12);
+    }
+    else if(SmokeStep==12&&bPortalSmokeLogin)
+    {
+        Snapshot(TEXT("02-warehouse-selection"));Advance(13);
+    }
+    else if(SmokeStep==13&&Now-SmokeStepStarted>1)
+    {
+        Command(TEXT("{\"action\":\"enter\",\"id\":\"missing-warehouse\"}"));
+        bPortalSmokeRecovery=Phase==EPhase::Error&&!Error.IsEmpty()&&!Destination;
+        Command(TEXT("{\"action\":\"cancel\"}"));
+        bPortalSmokeRecovery=bPortalSmokeRecovery&&Phase==EPhase::Idle&&Error.IsEmpty();
+        Command(TEXT("{\"action\":\"enter\",\"id\":\"ghs-ca\"}"));
+        if(Phase==EPhase::Loading)Command(TEXT("{\"action\":\"cancel\"}"));
+        bPortalSmokeCancellation=Phase==EPhase::Idle&&!bEntryRequested&&!bPreloadRequested&&SelectedId.IsEmpty();
+        if(!bPortalSmokeRecovery||!bPortalSmokeCancellation)SmokeError=TEXT("Invalid selection recovery or loading cancellation failed");
+        Advance(3);
+    }
+    else if(SmokeStep==3&&!Destination&&!bUnloadRequested&&Now-SmokeStepStarted>1)
+    {
+        if(GlobeHUD&&GlobeHUD->Browser)GlobeHUD->Browser->Evaluate(TEXT("document.querySelector('[data-enter=\"ghs-ca\"]')?.click();"));
+        Advance(4);
+    }
+    else if(SmokeStep==4&&Phase==EPhase::Warehouse)Advance(16);
+    else if(SmokeStep==16&&Now-SmokeStepStarted>1)
+    {CheckWarehouse(TEXT("ghs-ca"));Snapshot(TEXT("03-ghs-warehouse"));Advance(5);}
+    else if(SmokeStep==5&&Now-SmokeStepStarted>1)
+    {
+        if(!WarehouseRoof||!WarehouseRoof->OpenRoof(true))SmokeError=TEXT("GHS roof could not be opened before return");
+        if(GlobeHUD&&GlobeHUD->Browser)GlobeHUD->Browser->Evaluate(TEXT("document.getElementById('back-button')?.click();"));
+        Advance(6);
+    }
+    else if(SmokeStep==6&&(Phase==EPhase::Idle||Phase==EPhase::Selected)&&!Destination&&!bUnloadRequested)
+    {CheckReturned();Advance(14);}
+    else if(SmokeStep==14&&Now-SmokeStepStarted>1)
+    {Snapshot(TEXT("04-ghs-return"));Advance(7);}
+    else if(SmokeStep==7&&Now-SmokeStepStarted>1)
+    {
+        if(GlobeHUD&&GlobeHUD->Browser)GlobeHUD->Browser->Evaluate(TEXT("document.querySelector('[data-enter=\"mpr-nj\"]')?.click();"));
+        Advance(8);
+    }
+    else if(SmokeStep==8&&Phase==EPhase::Warehouse)Advance(17);
+    else if(SmokeStep==17&&Now-SmokeStepStarted>1)
+    {CheckWarehouse(TEXT("mpr-nj"));Snapshot(TEXT("05-mpr-warehouse"));Advance(9);}
+    else if(SmokeStep==9&&Now-SmokeStepStarted>1)
+    {
+        if(GlobeHUD&&GlobeHUD->Browser)GlobeHUD->Browser->Evaluate(TEXT("document.getElementById('back-button')?.click();"));
+        Advance(10);
+    }
+    else if(SmokeStep==10&&(Phase==EPhase::Idle||Phase==EPhase::Selected)&&!Destination&&!bUnloadRequested)
+    {CheckReturned();Advance(15);}
+    else if(SmokeStep==15&&Now-SmokeStepStarted>1)
+    {Snapshot(TEXT("06-mpr-return"));Advance(11);}
+    else if(SmokeStep==11&&Now-SmokeStepStarted>1)SmokeStep=99;
+    if(SmokeStep==99)
+    {
+        const bool Passed=SmokeError.IsEmpty()&&SmokeCycles==2&&bPortalSmokeLogin&&bPortalSmokeCancellation&&bPortalSmokeRecovery&&bSmokeHUDRebuilt;
+        auto Report=MakeShared<FJsonObject>();Report->SetBoolField(TEXT("success"),Passed);Report->SetStringField(TEXT("error"),SmokeError);
+        Report->SetNumberField(TEXT("warehouseCycles"),SmokeCycles);Report->SetBoolField(TEXT("loadingCancellation"),bPortalSmokeCancellation);
+        Report->SetBoolField(TEXT("loginSubmitReachedSelection"),bPortalSmokeLogin);
+        Report->SetBoolField(TEXT("invalidSelectionRecovery"),bPortalSmokeRecovery);Report->SetBoolField(TEXT("hudRecreated"),bSmokeHUDRebuilt);
+        Report->SetBoolField(TEXT("browserReady"),bReady);Report->SetBoolField(TEXT("destinationUnloaded"),!Destination&&!bUnloadRequested);
+        Report->SetStringField(TEXT("scope"),TEXT("Real CEF login, GHS/MPR card and return button clicks with screenshots; curtain acknowledgements, HUD recreation and unloading; native command checks for loading cancellation and invalid selection recovery"));
+        const FString Folder=FPaths::ProjectSavedDir()/TEXT("PortalValidation");IFileManager::Get().MakeDirectory(*Folder,true);
+        FFileHelper::SaveStringToFile(Encode(Report),*(Folder/TEXT("result.json")));
+        UE_LOG(LogTemp,Display,TEXT("GHS_PORTAL_SMOKE %s"),*Encode(Report));bPortalSmokeTest=false;FPlatformMisc::RequestExitWithStatus(false,Passed?0:1);
+    }
+#endif
+}
 void AGHSGlobePlayerController::PushState(bool bIncludeCatalog){if(bReady&&GlobeHUD)GlobeHUD->Push(BuildState(bIncludeCatalog));}
 FString AGHSGlobePlayerController::GetState()const{return BuildState(true);}
 FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
@@ -755,14 +925,15 @@ FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
     static const TCHAR* Names[]={TEXT("idle"),TEXT("selected"),TEXT("loading"),TEXT("flying"),TEXT("revealing"),TEXT("warehouse"),TEXT("returning"),TEXT("error")};
     auto Root=MakeShared<FJsonObject>();Root->SetStringField(TEXT("phase"),Names[int32(Phase)]);Root->SetStringField(TEXT("selectedId"),SelectedId);Root->SetStringField(TEXT("error"),Error);
     Root->SetBoolField(TEXT("reducedMotion"),bReducedMotion);Root->SetBoolField(TEXT("stageVisible"),bStageVisible);
+    Root->SetBoolField(TEXT("portalEntry"),bPortalEntry);
     Root->SetBoolField(TEXT("nativeWarehouseAnnotations"),WarehouseOverlay.IsValid());
     Root->SetBoolField(TEXT("nativeCountryLabels"),CountryLabels!=nullptr);
     Root->SetStringField(TEXT("selectionInputSource"),SelectionInputSource);
     auto View=MakeShared<FJsonObject>();View->SetNumberField(TEXT("width"),Viewport.X);View->SetNumberField(TEXT("height"),Viewport.Y);Root->SetObjectField(TEXT("viewport"),View);
-    auto Transition=MakeShared<FJsonObject>();Transition->SetNumberField(TEXT("opacity"),MaskOpacity);Transition->SetNumberField(TEXT("progress"),FMath::Clamp(PhaseTime/(bReducedMotion?.22f:FGHSGlobeFlight::Duration),0.f,1.f));
+    auto Transition=MakeShared<FJsonObject>();Transition->SetNumberField(TEXT("opacity"),MaskOpacity);Transition->SetNumberField(TEXT("progress"),FMath::Clamp(PhaseTime/EntryTransitionDuration(),0.f,1.f));
     Transition->SetNumberField(TEXT("generation"),Curtain.GetGeneration());
     Transition->SetBoolField(TEXT("waitingForDestination"),
-        (Phase==EPhase::Flying&&PhaseTime>(bReducedMotion?.22f:FGHSGlobeFlight::Duration)+2)
+        (Phase==EPhase::Flying&&PhaseTime>EntryTransitionDuration()+2)
         ||(Phase==EPhase::Revealing&&!bArrivalStarted&&GetWorld()->GetTimeSeconds()-LoadStarted>2));
     Transition->SetBoolField(TEXT("awaitingCurtain"),Curtain.Active()&&!Curtain.Ready(GFrameCounter,GlobeHUD&&GlobeHUD->HasFullBrowserCoverage())&&(Phase==EPhase::Flying||(Phase==EPhase::Returning&&!bReturningCommitted)));
     Transition->SetNumberField(TEXT("width"),Curtain.GetExpectedSize().X);Transition->SetNumberField(TEXT("height"),Curtain.GetExpectedSize().Y);Root->SetObjectField(TEXT("transition"),Transition);
@@ -770,7 +941,7 @@ FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
     int32 PW=0,PH=0;GetViewportSize(PW,PH);
     FSceneViewProjectionData ProjectionData;
     const auto* Local=GetLocalPlayer();
-    const bool bHasProjection=bStageVisible&&PW>0&&PH>0&&Local&&Local->ViewportClient&&Local->ViewportClient->Viewport
+    const bool bHasProjection=!bPortalEntry&&bStageVisible&&PW>0&&PH>0&&Local&&Local->ViewportClient&&Local->ViewportClient->Viewport
         &&Local->GetProjectionData(Local->ViewportClient->Viewport,ProjectionData)&&ProjectionData.IsValidViewRectangle();
     const FMatrix ViewProjection=bHasProjection?ProjectionData.ComputeViewProjectionMatrix():FMatrix::Identity;
     const auto* Camera=Cast<AGHSWarehouseCameraPawn>(GetPawn());
@@ -823,7 +994,7 @@ FString AGHSGlobePlayerController::BuildState(bool bIncludeCatalog)const
     }
     struct FCountry{const TCHAR* Name;double Lat,Lon;};
     static const FCountry Labels[]={{TEXT("加拿大"),57,-105},{TEXT("美国"),39,-98},{TEXT("墨西哥"),23,-102},{TEXT("哥伦比亚"),4,-74},{TEXT("委内瑞拉"),8,-65},{TEXT("秘鲁"),-9,-75},{TEXT("巴西"),-10,-52},{TEXT("智利"),-34,-71},{TEXT("阿根廷"),-37,-64},{TEXT("中国"),35,103},{TEXT("澳大利亚"),-25,134},{TEXT("印度"),22,79},{TEXT("俄罗斯"),61,100},{TEXT("南非"),-29,25}};
-    if(bStageVisible)for(const auto& C:Labels){auto O=MakeShared<FJsonObject>();O->SetStringField(TEXT("id"),C.Name);O->SetStringField(TEXT("label"),C.Name);Project(C.Lat,C.Lon,O);Countries.Add(MakeShared<FJsonValueObject>(O));}
+    if(!bPortalEntry&&bStageVisible)for(const auto& C:Labels){auto O=MakeShared<FJsonObject>();O->SetStringField(TEXT("id"),C.Name);O->SetStringField(TEXT("label"),C.Name);Project(C.Lat,C.Lon,O);Countries.Add(MakeShared<FJsonValueObject>(O));}
     Root->SetNumberField(TEXT("catalogRevision"),double(Registry.GetRevision()));
     Root->SetBoolField(TEXT("poisComplete"),true);Root->SetNumberField(TEXT("poiBudget"),256);
     Root->SetArrayField(TEXT("pois"),Pois);Root->SetArrayField(TEXT("countries"),Countries);

@@ -37,6 +37,7 @@ protected:
     virtual void NativeConstruct() override;
     virtual void NativeTick(const FGeometry& Geometry,float DeltaSeconds) override;
 private:
+    friend class AGHSGlobePlayerController;
     UPROPERTY(Transient) TObjectPtr<UGHSTwinBrowser> Browser;
     UPROPERTY(Transient) TObjectPtr<UCanvasPanelSlot> BrowserSlot;
     bool bSmall=false;
@@ -58,6 +59,8 @@ public:
     virtual bool InputKey(const FInputKeyEventArgs& Params) override;
     UFUNCTION(BlueprintCallable,Category="Globe") void Command(const FString& Json);
     UFUNCTION(BlueprintPure,Category="Globe") FString GetState() const;
+    /** SaaS entry is the default; -LegacyGlobe retains the old visual diagnostic path. */
+    UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Navigation") bool bPortalEntry=true;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Globe") FVector GlobeCenter=FVector(0,0,300000);
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Globe") float GlobeRadius=10000.f;
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Globe") float IdleRotationDegreesPerSecond=1.5f;
@@ -82,6 +85,8 @@ private:
     void UpdateGlobeAnnotations(float DeltaSeconds);
     FString BuildState(bool bIncludeCatalog)const;
     void TickSmokeTest();
+    void TickPortalSmokeTest();
+    float EntryTransitionDuration()const;
     UPROPERTY(Transient) TObjectPtr<UGHSGlobeHUD> GlobeHUD;
     UPROPERTY(Transient) TObjectPtr<ULevelStreamingDynamic> Destination;
     UPROPERTY(Transient) TObjectPtr<AGHSWarehouseCameraPawn> PersistentCamera;
@@ -117,6 +122,7 @@ private:
     double SmokeStarted=0,SmokeStepStarted=0;
     double SmokeIdleYawStart=0,SmokeIdleYawEnd=0;
     bool bSmokeTest=false,bSmokeReducedMotion=false;
+    bool bPortalSmokeTest=false,bPortalSmokeCancellation=false,bPortalSmokeRecovery=false,bPortalSmokeLogin=false;
     bool bSmokeIdleRotationVerified=false,bSmokeHUDRebuilt=false,bSmokeRoofOpened=false;
     bool bSmokeZoomBounds=false,bSmokeHomeReset=false,bSmokeFlightCaptured=false,bSmokeArrivalCaptured=false;
     TWeakObjectPtr<UGHSTwinHUDWidget> SmokePreviousHUD;
