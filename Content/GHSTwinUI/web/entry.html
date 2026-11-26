@@ -14,13 +14,11 @@
     <symbol id="user-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></symbol>
     <symbol id="lock-icon" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3 M12 14v3"/></symbol>
     <symbol id="eye-icon" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
-    <symbol id="help-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 0 1 6 0c0 2-3 2-3 4m0 3h.01"/></symbol>
   </defs></svg>
   <div id="portal">
     <header class="topbar">
       <div class="brand"><svg aria-hidden="true"><use href="#warehouse-icon"/></svg><strong>YQN 仓储运营平台</strong><span class="brand-scope">多仓运营平台</span></div>
       <nav class="header-actions" aria-label="平台操作">
-        <button id="help-button" class="header-button"><svg aria-hidden="true"><use href="#help-icon"/></svg>使用帮助</button>
         <button id="logout-button" class="header-button" hidden>返回登录</button>
       </nav>
     </header>
@@ -28,33 +26,31 @@
       <section id="login-page" class="login-page" aria-labelledby="login-title">
         <div class="login-visual"><img src="assets/entry-hero.png" alt="多仓数字孪生平台主视觉" fetchpriority="high"></div>
         <div class="login-sidebar">
-          <div class="login-welcome"><h1 id="login-title" tabindex="-1">企业账号登录</h1><p>直接点击登录，选择要进入的仓库</p></div>
+          <div class="login-welcome"><h1 id="login-title" tabindex="-1">企业账号登录</h1></div>
           <form id="login-form" autocomplete="off" novalidate>
             <label class="field-label" for="company-account">企业账号</label>
             <div class="input-frame"><svg aria-hidden="true"><use href="#user-icon"/></svg><input id="company-account" type="text" autocomplete="off" placeholder="请输入企业账号（选填）" maxlength="100" spellcheck="false"></div>
             <label class="field-label password-label" for="company-password">密码</label>
             <div class="input-frame"><svg aria-hidden="true"><use href="#lock-icon"/></svg><input id="company-password" type="password" autocomplete="new-password" placeholder="请输入密码（选填）" maxlength="100"><button id="password-toggle" class="icon-button" type="button" aria-label="显示密码" aria-pressed="false"><svg aria-hidden="true"><use href="#eye-icon"/></svg></button></div>
-            <p class="access-note">当前无需账号密码，即可访问已接入仓库。</p>
             <button id="login-button" class="button primary" type="submit"><span>登录</span><svg aria-hidden="true"><use href="#arrow-icon"/></svg></button>
           </form>
           <div class="login-footer">YQN 仓储运营平台</div>
         </div>
       </section>
       <section id="warehouse-page" class="warehouse-page" aria-labelledby="warehouse-title" hidden inert>
-        <div class="page-heading"><h1 id="warehouse-title" tabindex="-1">选择仓库</h1><p>选择已接入的仓库，进入三维运营场景。</p></div>
+        <div class="page-heading"><h1 id="warehouse-title" tabindex="-1">选择仓库</h1></div>
         <div class="warehouse-toolbar">
           <div class="catalog-tab">全部仓库 <span id="warehouse-count">0</span></div>
           <div class="filters"><label class="search-box"><svg aria-hidden="true"><use href="#search-icon"/></svg><input id="warehouse-search" type="search" placeholder="搜索仓库名称或地址" aria-label="搜索仓库名称或地址" autocomplete="off" maxlength="128"></label><select id="warehouse-region" aria-label="筛选地区"><option value="">全部地区</option></select></div>
         </div>
         <div id="entry-notice" class="entry-notice" role="status" aria-live="polite" hidden><span id="entry-notice-text"></span><button id="entry-retry" class="text-button" hidden>重试进入</button></div>
         <div id="warehouse-list" class="warehouse-grid" aria-label="可进入的仓库"></div>
-        <p id="empty-state" class="empty-state" role="status" hidden>没有找到匹配的仓库，请试试其他名称或地址。</p>
+        <p id="empty-state" class="empty-state" role="status" hidden>没有找到匹配的仓库。</p>
         <p id="catalog-status" class="catalog-status" role="status">正在读取仓库目录…</p>
       </section>
     </main>
   </div>
   <button id="back-button" class="back-button" data-in-header="false" hidden><span aria-hidden="true">←</span> 返回仓库选择</button>
-  <dialog id="help-dialog" aria-labelledby="help-title"><h2 id="help-title">使用帮助</h2><p>点击登录后，选择 GHS 或 MPR 仓库卡片进入场景。当前无需填写账号密码。</p><p>点击“返回仓库选择”可切换仓库：GHS 的按钮位于顶部栏，MPR 的按钮位于左下角。</p><p>场景操作：左键旋转，右键平移，滚轮缩放。</p><form method="dialog"><button class="button primary">知道了</button></form></dialog>
   <script src="globe-policy.js"></script><script src="entry-policy.js"></script><script src="entry.js"></script>
 </body>
 </html>

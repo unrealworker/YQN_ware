@@ -7,6 +7,10 @@ test('scene settings start at 80/100 with four immediate layers and no apply but
   assert.equal(s.building,true);assert.equal(s.rackCapacity,.8);assert.equal(s.floorCapacity,1);
   assert.equal((a.html().match(/role="switch"/g)||[]).length,4);
   assert.ok(!a.html().includes('settings-apply'));assert.ok(a.html().includes('data-capacity="rackCapacity"'));
+  assert.ok(a.html().includes('<h2>场景货物展示比例</h2>'));
+  assert.ok(a.html().includes('aria-label="货架货物"'));assert.ok(a.html().includes('aria-label="地堆货物"'));
+  a.window.twinSceneControls({inventoryMode:true});
+  assert.ok(a.html().includes('<h2>未匹配货位展示比例</h2>'));
 });
 test('layer switch immediately sends its target and preserves hidden storage capacity',()=>{
  const a=open();a.window.twinState.settings.rackCapacity=.35;
@@ -32,7 +36,7 @@ test('restore defaults cancels a pending drag value and uses one reset action',(
 test('native state synchronizes auto-enabled layer and roof without refreshing business data',()=>{
  const a=open();a.window.twinSceneControls({building:true,racks:true,equipment:false,pois:false,density:'auto',rackCapacity:.4,floorCapacity:.6,roofClosed:false,roofOpening:false});
  assert.equal(a.window.twinState.settings.pois,false);assert.equal(a.window.twinState.settings.rackCapacity,.4);
- assert.ok(a.html().includes('屋顶已打开'));assert.ok(!a.html().includes('打开屋顶查看'));
+ assert.ok(a.html().includes('屋顶已打开'));assert.ok(!a.html().includes('data-action="open-warehouse"'));
 });
 
 test('roof completion during a drag appears when the drag ends even if final ack is unchanged',()=>{
@@ -51,9 +55,9 @@ test('reverse roof restoration remains closing until the native closed state arr
  a.window.twinSceneControls({roofClosed:false,roofOpening:false,roofClosing:true});
  assert.equal(a.window.twinState.settings.roofClosing,true);
  assert.ok(a.html().includes('屋顶正在恢复'));
- assert.ok(!a.html().includes('屋顶已打开'));assert.ok(!a.html().includes('打开屋顶查看'));
+ assert.ok(!a.html().includes('屋顶已打开'));assert.ok(!a.html().includes('data-action="open-warehouse"'));
  a.window.twinSceneControls({roofClosed:true,roofOpening:false,roofClosing:false});
- assert.ok(a.html().includes('屋顶已关闭'));assert.ok(a.html().includes('打开屋顶查看'));
+ assert.ok(a.html().includes('屋顶已关闭'));assert.ok(a.html().includes('data-action="open-warehouse"'));
  assert.ok(!a.html().includes('屋顶正在恢复'));
 });
 
@@ -62,7 +66,7 @@ test('navigation reversing roof restoration shows opening and then fully open',(
  a.window.twinSceneControls({roofClosed:false,roofOpening:false,roofClosing:true});
  a.window.twinSceneControls({roofClosed:false,roofOpening:true,roofClosing:false});
  assert.ok(a.html().includes('屋顶正在打开'));assert.ok(!a.html().includes('屋顶正在恢复'));
- assert.ok(!a.html().includes('打开屋顶查看'));
+ assert.ok(!a.html().includes('data-action="open-warehouse"'));
  a.window.twinSceneControls({roofClosed:false,roofOpening:false,roofClosing:false});
  assert.ok(a.html().includes('屋顶已打开'));
 });
@@ -75,7 +79,7 @@ test('roof restoration during a capacity drag renders the final closed state aft
  a.window.twinSceneControls({roofClosed:false,roofOpening:false,roofClosing:true});
  a.window.twinSceneControls({roofClosed:true,roofOpening:false,roofClosing:false});
  a.listeners.change({target:input});
- assert.ok(a.html().includes('屋顶已关闭'));assert.ok(a.html().includes('打开屋顶查看'));
+ assert.ok(a.html().includes('屋顶已关闭'));assert.ok(a.html().includes('data-action="open-warehouse"'));
  assert.equal(a.commands.filter(c=>c.action==='capacity').at(-1).floor,.65);
 });
 

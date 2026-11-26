@@ -16,14 +16,15 @@ test('overview uses the small current snapshot summary without requesting the lo
  assert.equal(summary.snapshotId,index.snapshotId);
  assert.deepEqual(JSON.parse(JSON.stringify(summary.summary)),index.summary);
  assert.equal(scripts(app).length,0);
- for(const text of ['361,661','361,097','23,232','10,061','库存总量 / 件','2026-11-25'])assert.ok(app.html().includes(text),text);
+ for(const text of ['361,661','361,097','23,232','10,061','库存总量 / 件'])assert.ok(app.html().includes(text),text);
  assert.doesNotMatch(app.html(),/337,783|14,373|货主数/);
- assert.match(app.html(),/数据未核验/); // Undocumented capacity and operational demos remain labelled.
+ assert.match(app.html(),/演示/);
 });
 
 test('real index search, state filtering, paging and detail use the same source snapshot',()=>{
  const app=boot({inventory:true});app.window.twinNavigate('inventory');
  assert.equal(scripts(app).length,1);acceptIndex(app);scripts(app)[0].onload();
+ assert.ok(app.html().includes(index.source.exportedAt));assert.match(app.html(),/库存快照/);
  assert.match(app.html(),/91,106/);assert.equal((app.html().match(/data-action="inventory-location"/g)||[]).length,20);
  app.click({action:'inventory-state',value:'empty'});assert.equal(app.window.twinState.filters.inventory.page,1);
  assert.doesNotMatch(app.html(),/inventory-state occupied/);
@@ -34,16 +35,16 @@ test('real index search, state filtering, paging and detail use the same source 
  app.click({action:'inventory-location',id:frozen.id});assert.match(app.html(),/正在读取库存明细/);
  app.window.GHSInventoryPayload(shardFor(frozen));scripts(app)[0].onload();
  assert.match(app.html(),/GHS-R24-69-02/);assert.match(app.html(),/inventory-state occupied/);
- assert.match(app.html(),/冻结/);assert.doesNotMatch(app.html(),/按编码规则匹配|物理对应待复核/);
+ assert.match(app.html(),/冻结/);assert.doesNotMatch(app.html(),/编码匹配 · 待复核/);
  assert.equal(app.commands.filter(c=>c.action==='focus').length,0,'business detail must not imply a scene match');
- app.click({action:'back'});assert.match(app.html(),/搜索真实库位/);
+ app.click({action:'back'});assert.match(app.html(),/搜索库位/);
 });
 
 test('scene bridge shows truthful empty stock and identifies rule-derived mapping',()=>{
  const app=boot({inventory:true}),l=shardFor(empty).locations[empty.id];
  app.window.twinSelect({equipment:[],facilities:[],selection:{kind:'material',id:'CAD-test',inventory:{mappingStatus:'mapped',source:index.source,location:l}}});
  assert.match(app.html(),/空货位/);assert.match(app.html(),/本次快照未关联库存记录/);
- assert.match(app.html(),/按编码规则匹配 · 物理对应待复核/);
+ assert.match(app.html(),/编码匹配 · 待复核/);
  assert.doesNotMatch(app.html(),/已现场确认|物料 SKU2038/);
  app.window.twinSelect({equipment:[],facilities:[],selection:{kind:'material',id:'CAD-unmatched',inventory:{mappingStatus:'unmapped'}}});
  assert.match(app.html(),/库位编码未匹配/);assert.doesNotMatch(app.html(),/inventory-state empty/);
@@ -90,9 +91,11 @@ test('invalid index identity and paths are rejected before listing anything',()=
 
 test('real-inventory scene control contract survives settings reset',()=>{
  const app=boot({inventory:true});app.window.twinSceneControls({inventoryMode:true});app.window.twinNavigate('scene');
- assert.match(app.html(),/仅调整未匹配库位的演示货物/);
- app.click({action:'settings-reset'});assert.match(app.html(),/仅调整未匹配库位的演示货物/);
- assert.equal(app.window.twinState.settings.inventoryMode,true);
+ function checkControls(){
+  assert.equal(app.window.twinState.settings.inventoryMode,true);
+  for(const id of ['rackCapacity','floorCapacity'])assert.ok(app.html().includes('data-capacity="'+id+'"'));
+ }
+ checkControls();app.click({action:'settings-reset'});checkControls();
 });
 
 test('global business-code search opens inventory without pretending an unbound code is a scene object',()=>{

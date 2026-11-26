@@ -223,7 +223,7 @@
     if (sessionStorage.getItem('ghsEvicted') === 'true') return halt('连接已被替换', '新访问者已进入，本标签页已停止自动重连。需要再次访问时，请主动点击“重新进入”。', true);
     if (sessionStorage.getItem('ghsReplaced') === 'true') return halt('已在其他标签页连接', '同一会话已在其他标签页连接，本页已停止自动重连。点击“重新进入”可申请独立名额。', false, 'exited');
     beginAttempt('session'); stamp('sessionRequest'); armDeadline();
-    progress(1, '正在连接仓库', '正在获取访问会话，请稍候。');
+    progress(1, '正在连接仓库', '正在获取访问会话。');
     let response = await fetch('/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: sessionStorage.getItem('ghsSession') || undefined, accessCode, displayName: $('access-name').value }) });
     if (response.status === 409) { sessionStorage.removeItem('ghsSession'); response = await fetch('/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ accessCode, displayName: $('access-name').value }) }); }
     const session = await response.json(); if (response.status === 401) return requestAccess(accessCode ? '访问码不正确，请重新输入。' : undefined); if (!response.ok) throw Error(session.error || '无法获取访问会话');

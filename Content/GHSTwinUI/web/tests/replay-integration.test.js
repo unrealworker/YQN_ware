@@ -30,7 +30,7 @@ test('cancelled leave preserves replay progress and clears a stale detail target
  const a=replay();a.click({action:'material'});const token=a.commands.findLast(c=>c.action==='replayLeave').token;a.window.twinReplayReceive({...active,exitPending:true});a.window.twinReplayReceive({...active,exitPending:false});a.window.twinReplayContinue(token);a.flush();assert.equal(a.window.twinState.detail,null);assert.equal(a.window.twinReplayUI.view().state.time,230);
 });
 test('scene selection snapshots cannot replace the replay panel while isolation is active',()=>{
- const a=replay();a.window.twinReceive({selection:{kind:'device',id:'FORK-01'},equipment:[],facilities:[]});a.flush();assert.equal(a.window.twinState.detail,null);assert.match(a.html(),/全时段设备回放/);
+ const a=replay();a.window.twinReceive({selection:{kind:'device',id:'FORK-01'},equipment:[],facilities:[]});a.flush();assert.equal(a.window.twinState.detail,null);assert.match(a.html(),/TEST-OUT-001/);
 });
 test('native event windows open the event tab and paginate within the requested time window',()=>{
  const a=replay(),events=Array.from({length:100},(_,i)=>({id:'e'+i,time:100+i,type:'pickup',deviceId:'REPLAY-FORK-01',title:'取货完成'}));
@@ -87,11 +87,12 @@ test('stationary, hidden and unknown-route devices have no remaining-route cue',
  assert.doesNotMatch(a.html(),/replay-trail-dot/);
  assert.match(a.html(),/class="replay-device-state fault">车辆故障/);
 });
-test('following a truck still shows orbit and zoom guidance and clears the guidance on cancellation',()=>{
- const a=replay();a.window.twinReplayReceive({...active,followId:'REPLAY-TRUCK-01'});a.flush();
- assert.match(a.html(),/跟随中：左键旋转 · 滚轮缩放 · 右键平移无效/);
- a.window.twinReplayReceive({...active,followId:''});a.flush();
- assert.doesNotMatch(a.html(),/跟随中：/);
+test('following a truck updates its camera action without a separate tutorial',()=>{
+ const a=replay(),truck={id:'REPLAY-TRUCK-01',type:'truck',visible:true};
+ a.window.twinReplayReceive({...active,devices:[truck],followId:truck.id});a.flush();
+ assert.match(a.html(),/取消跟随/);assert.doesNotMatch(a.html(),/左键旋转|滚轮缩放/);
+ a.window.twinReplayReceive({...active,devices:[truck],followId:''});a.flush();
+ assert.match(a.html(),/跟随视角/);assert.doesNotMatch(a.html(),/取消跟随/);
 });
 test('native Chinese fault and waiting descriptions retain semantic status colours independently of route cues',()=>{
  const a=replay();a.window.twinReplayReceive({...active,devices:[

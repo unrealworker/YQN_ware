@@ -92,8 +92,6 @@ TSharedRef<SWidget> UMPRSorterHUDWidget::RebuildWidget()
                 .OnClicked_Lambda([this](){bCollapsed=!bCollapsed;return FReply::Handled();})
                 [SNew(STextBlock).Font(MPRFont(11)).ColorAndOpacity(Muted)
                     .Text_Lambda([this](){return FText::FromString(bCollapsed?TEXT("展开"):TEXT("收起"));})]]]
-        +SVerticalBox::Slot().AutoHeight().Padding(0,3,0,0)
-        [SNew(STextBlock).Text(FText::FromString(TEXT("演示数据 · 集中上料 / 自动分配 / 整组换车"))).Font(MPRFont(11)).ColorAndOpacity(Muted)]
         +SVerticalBox::Slot().AutoHeight().Padding(0,8,0,0)
         [SNew(SVerticalBox).Visibility_Lambda([this](){return bCollapsed?EVisibility::Collapsed:EVisibility::Visible;})
             +SVerticalBox::Slot().AutoHeight()
@@ -139,10 +137,7 @@ TSharedRef<SWidget> UMPRSorterHUDWidget::RebuildWidget()
                     .OnCheckStateChanged_Lambda([this](ECheckBoxState State){if(auto* A=Owner.Get();A&&A->IsReady())A->SetAutomaticCollection(State==ECheckBoxState::Checked);})
                     [SNew(STextBlock).Font(MPRFont(12)).ColorAndOpacity(Ink).Text(FText::FromString(TEXT("自动换整车")))]]
                 +SHorizontalBox::Slot().FillWidth(1)
-                [Button(StaticCaption(TEXT("更换满车")),[](AMPRSorterSimulationActor& A){A.ClearFullBins();})]]]
-            +SVerticalBox::Slot().AutoHeight().Padding(0,5,0,0)
-            [SNew(STextBlock).Font(MPRFont(10)).ColorAndOpacity(Muted)
-                .Text(FText::FromString(TEXT("播放控制全部设备；手动换车作用当前设备。")))]];
+                [Button(StaticCaption(TEXT("更换满车")),[](AMPRSorterSimulationActor& A){A.ClearFullBins();})]]]];
 
     // The caller may reserve a taller viewport slot. Only this top-aligned,
     // content-sized border draws and hit-tests; the unused area stays transparent.

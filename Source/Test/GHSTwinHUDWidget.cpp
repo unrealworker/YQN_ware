@@ -44,6 +44,7 @@ namespace
 FLinearColor C(const TCHAR* Hex) { return FLinearColor::FromSRGBColor(FColor::FromHex(Hex)); }
 bool Inside(FVector2D P, FVector2D At, FVector2D Size) { return P.X>=At.X && P.Y>=At.Y && P.X<At.X+Size.X && P.Y<At.Y+Size.Y; }
 const FVector2D WarehousePOISize(228,56);
+const FVector2D WarehouseMenuSize(320,144);
 const FSlateFontInfo& Font(int32 Size)
 {
     static const FString Path=FPaths::ProjectContentDir()/TEXT("GHSNormalWarehouse/HUD/Fonts/DroidSansFallback.ttf");
@@ -352,7 +353,7 @@ bool UGHSTwinHUDWidget::IsScenePoint(FVector2D Position) const
     if(!Inside(Position,FVector2D(0,Layout.HeaderHeight),FVector2D(ViewSize.X,ViewSize.Y-Layout.HeaderHeight))) return false;
     if(IsSceneSearchVisible() && Inside(Position,GetSceneSearchPosition(),GetSceneSearchSize())) return false;
     if(bSearchOpen && !bSearchIsRemote && IsSceneSearchVisible() && Inside(Position,SearchLayout().Position,SearchLayout().Size)) return false;
-    if(bWarehouseMenuOpen && Inside(Position,FVector2D(24,Layout.HeaderHeight+110),FVector2D(320,176))) return false;
+    if(bWarehouseMenuOpen && Inside(Position,FVector2D(24,Layout.HeaderHeight+110),WarehouseMenuSize)) return false;
     if(FGHSTwinSceneChrome::IsHeadingPoint(Position,Layout.HeaderHeight)) return false;
     // Input follows the visible moving panel, not the area it occupied when open.
     return PanelVisibilityProgress<=0 || !Inside(Position,GetPanelVisualPosition(),GetPanelVisualSize());
@@ -383,6 +384,7 @@ void UGHSTwinHUDWidget::SetSearchOpen(bool bOpen)
 }
 FGHSTwinSearchLayout UGHSTwinHUDWidget::SearchLayout() const
 {
+    if(SearchQuery.TrimStartAndEnd().IsEmpty()) return {};
     const auto Expanded=FGHSTwinLayout::Calculate(ViewSize);
     return FGHSTwinSearchLayout::Calculate(GetSceneSearchPosition(),GetSceneSearchSize(),Expanded.ScenePosition.Y+Expanded.SceneSize.Y,SearchResults.Num());
 }
@@ -732,7 +734,7 @@ bool UGHSTwinHUDWidget::HandleChromeClick(FVector2D Position)
     { bWarehouseMenuOpen=!bWarehouseMenuOpen;SetSearchOpen(false);return true; }
     if(bWarehouseMenuOpen)
     {
-        const bool bInside=Inside(Position,FVector2D(24,Layout.HeaderHeight+110),FVector2D(320,176));
+        const bool bInside=Inside(Position,FVector2D(24,Layout.HeaderHeight+110),WarehouseMenuSize);
         bWarehouseMenuOpen=false;if(bInside) return true;
     }
     if(bSearchOpen && !Inside(Position,GetSceneSearchPosition(),GetSceneSearchSize())) SetSearchOpen(false);
@@ -981,7 +983,7 @@ void UGHSTwinHUDWidget::UpdateReplayPOIs(float DeltaSeconds)
     Block(FVector2D(24,Layout.HeaderHeight+16),FVector2D(256,84));
     if(IsSceneSearchVisible()) Block(GetSceneSearchPosition(),GetSceneSearchSize());
     if(bSearchOpen && !bSearchIsRemote && IsSceneSearchVisible()) Block(SearchLayout().Position,SearchLayout().Size);
-    if(bWarehouseMenuOpen) Block(FVector2D(24,Layout.HeaderHeight+110),FVector2D(320,176));
+    if(bWarehouseMenuOpen) Block(FVector2D(24,Layout.HeaderHeight+110),WarehouseMenuSize);
     if(PanelVisibilityProgress>0) Block(GetPanelVisualPosition(),GetPanelVisualSize());
     Block(GetSceneControlsPosition(),FVector2D(48,132));
     FVector2D Anchors[GHSReplay::DeviceCount];bool Projected[GHSReplay::DeviceCount]={};
@@ -1244,11 +1246,16 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
             auto WarehouseLine=[&](FVector2D A,FVector2D B){Line(Icon+A,Icon+B,Blue.CopyWithNewOpacity(DrawOpacity),1.5f);};
             WarehouseLine({0,7},{11,1});WarehouseLine({11,1},{22,7});WarehouseLine({2,7},{2,21});WarehouseLine({20,7},{20,21});WarehouseLine({2,21},{20,21});
             WarehouseLine({7,21},{7,11});WarehouseLine({7,11},{15,11});WarehouseLine({15,11},{15,21});WarehouseLine({7,15},{15,15});
-            const FString Status=Roof()->IsOpening()?TEXT("正在打开"):TEXT("点击查看");
+            const bool bOpening=Roof()->IsOpening();
             const auto Title=GHSTwinTypography::Measure(WarehouseTitle,Font(14));
-            const auto Subtitle=GHSTwinTypography::Measure(Status,Font(12));
-            Text(At+FVector2D(52,7+Title.CenteredOriginY(22)),WarehouseTitle,14,C(TEXT("25364B")));
-            Text(At+FVector2D(52,30+Subtitle.CenteredOriginY(18)),Status,12,C(TEXT("536478")));
+            const double TitleY=bOpening?7+Title.CenteredOriginY(22):Title.CenteredOriginY(Size.Y);
+            Text(At+FVector2D(52,TitleY),WarehouseTitle,14,C(TEXT("25364B")));
+            if(bOpening)
+            {
+                const FString Status=TEXT("正在打开");
+                const auto Subtitle=GHSTwinTypography::Measure(Status,Font(12));
+                Text(At+FVector2D(52,30+Subtitle.CenteredOriginY(18)),Status,12,C(TEXT("536478")));
+            }
             Line(At+FVector2D(204,22),At+FVector2D(210,28),Blue.CopyWithNewOpacity(DrawOpacity),1.5f);Line(At+FVector2D(210,28),At+FVector2D(204,34),Blue.CopyWithNewOpacity(DrawOpacity),1.5f);
             DrawOpacity=1.f;
         }
@@ -1373,28 +1380,17 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
             Text(BadgeAt+FVector2D((L.BadgeWidth-L.StateMetrics.Size.X)*.5,L.StateMetrics.CenteredOriginY(24)),L.State,12,Fade(Accent));
         }
     }
-    // Scene guidance stays below menus so a short viewport never obscures results.
-    if(Layout.SceneSize.X>650)
-    {
-        const auto* Replay=ReplaySession();const bool bFollowing=Replay && Replay->IsReplaying() && !Replay->GetFollowId().IsEmpty();
-        const FString Hint=IsReplayActive()?(bFollowing?TEXT("跟随中  ·  左键旋转  ·  滚轮缩放  ·  右键平移无效"):TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  点击选择回放设备")):(IsInteriorAvailable()?TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  中键返回园区  ·  点击查看详情"):TEXT("左键旋转  ·  右键平移  ·  滚轮缩放  ·  点击仓库查看内部"));
-        const auto Metrics=GHSTwinTypography::Measure(Hint,Font(11));
-        const FVector2D At(22,Layout.ScenePosition.Y+Layout.SceneSize.Y-44);
-        Box(At,FVector2D(Metrics.Size.X+28,32),FLinearColor::White.CopyWithNewOpacity(.94f),8,C(TEXT("DFE7F2")));
-        Text(At+FVector2D(14,Metrics.CenteredOriginY(32)),Hint,11,C(TEXT("536478")));
-    }
     if(WarehouseMenuProgress>0)
     {
         DrawOpacity=WarehouseMenuProgress*WarehouseMenuProgress*(3-2*WarehouseMenuProgress);
         const FVector2D At(24,Layout.HeaderHeight+110-8*(1-DrawOpacity));
-        Box(At,FVector2D(320,176),FLinearColor::White,12,C(TEXT("DFE7F2")));
+        Box(At,WarehouseMenuSize,FLinearColor::White,12,C(TEXT("DFE7F2")));
         Text(At+FVector2D(16,14),TEXT("切换仓库"),11,C(TEXT("5B6C82")));
         Box(At+FVector2D(16,46),FVector2D(288,48),C(TEXT("EDF3FF")),12);
         Text(At+FVector2D(32,60),TEXT("GHS · 当前仓库"),14,C(TEXT("356BFA")));
         Text(At+FVector2D(16,116),TEXT("暂无其他仓库"),11,C(TEXT("5B6C82")));
-        Text(At+FVector2D(16,142),TEXT("接入后会显示在这里"),11,C(TEXT("5B6C82")));
     }
-    if(SearchMenuProgress>0 && !bSearchIsRemote && IsSceneSearchVisible())
+    if(SearchMenuProgress>0 && !bSearchIsRemote && IsSceneSearchVisible() && !SearchQuery.TrimStartAndEnd().IsEmpty())
     {
         DrawOpacity=SearchMenuProgress*SearchMenuProgress*(3-2*SearchMenuProgress);
         const auto Drop=SearchLayout();const FVector2D At=Drop.Position-FVector2D(0,8*(1-DrawOpacity));
@@ -1409,8 +1405,7 @@ int32 UGHSTwinHUDWidget::NativePaint(const FPaintArgs& Args,const FGeometry& G,c
             Text(RowAt+FVector2D(12,33),(R.Type+TEXT(" · ")+R.Location).Left(24),10,C(TEXT("5B6C82")));
             Text(RowAt+FVector2D(Drop.Size.X-86,7),R.Status,11,C(TEXT("356BFA")));
         }
-        if(SearchResults.IsEmpty()) Text(At+FVector2D(16,52),SearchQuery.TrimStartAndEnd().IsEmpty()?TEXT("输入设备名称、类型、编号或物料"):TEXT("GHS 中未找到匹配设备或物料"),12,C(TEXT("5B6C82")));
-        Text(At+FVector2D(16,Drop.Size.Y-27),FString::Printf(TEXT("↑ ↓ / 滚轮   %d / %d   Enter 定位   Esc 收起"),SearchIndex==INDEX_NONE?0:SearchOffset+SearchIndex+1,SearchTotal),10,C(TEXT("5B6C82")));
+        if(SearchResults.IsEmpty()) Text(At+FVector2D(16,52),TEXT("GHS 中未找到匹配设备或物料"),12,C(TEXT("5B6C82")));
     }
     DrawOpacity=1;
     return Layer;

@@ -3,53 +3,43 @@ const assert=require('node:assert/strict');
 const {boot}=require('./harness');
 const verifiedInventory=app=>app.html().split('<div data-verified="inventory">').slice(1).map(part=>part.split('<div class="unverified-design"')[0]).join('');
 
-test('overview prioritizes the actionable demo alarm queue and explains every order segment',()=>{
+test('overview prioritizes the actionable demo alarm queue and labels every order segment',()=>{
   const app=boot(),html=app.html();
   assert.ok(html.indexOf('data-unverified="overview-alerts"')<html.indexOf('337,783'));
-  assert.ok(html.includes('告警 7 项'));assert.ok(html.includes('数据未核验'));
+  assert.ok(html.includes('告警 7 项'));assert.ok(html.includes('>演示<'));
   const progress=html.split('data-unverified="orders-progress"')[1];
   for(const [label,value,color]of[['已完成',96,'#356bfa'],['执行中',22,'#8daafc'],['待作业',8,'#d1843c'],['异常',2,'#c85852']]){
     assert.ok(progress.includes('title="'+label+' '+value+'"'));
     assert.ok(progress.includes('background:'+color+'"></i>'+label));
   }
   assert.ok(progress.includes('96 / 128 已完成'));assert.ok(progress.includes('118 / 156 已完成'));
-  assert.ok(html.includes('aria-label="库容占用说明"'));
-  assert.ok(html.includes('data-info="原设计示例：容量 2,400 托位'));
-  assert.ok(!html.includes('<p class="caption">原设计示例：容量'));
   app.click({action:'nav',page:'alerts'});
-  assert.ok(app.html().includes('设备告警中心'));assert.ok(app.html().includes('数据未核验'));
+  assert.ok(app.html().includes('设备告警中心'));assert.ok(app.html().includes('>演示<'));
 });
 
-test('data explanations keep units and distinct source times accessible without restoring metadata blocks',()=>{
-  const app=boot(),inventoryTime=app.window.TwinBusinessData.snapshot.source.queryTime,ledgerTime=app.window.TwinBusinessData.snapshot.source.forkliftSourceUpdatedTime;
+test('inventory and ledger keep distinct source timestamps outside the business views',()=>{
+  const app=boot(), {source}=app.window.TwinBusinessData.snapshot;
+  assert.equal(source.mode,'verified-extract');
+  assert.equal(source.live,false);
+  for(const timestamp of [source.queryTime,source.forkliftSourceUpdatedTime]){
+    assert.match(timestamp,/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}/);
+  }
+  assert.notEqual(source.queryTime,source.forkliftSourceUpdatedTime);
   for(const page of ['overview','inventory','devices']){
-    app.window.twinNavigate(page);const html=app.html(),visible=html.replace(/<[^>]*>/g,' ');
-    assert.ok(html.includes('aria-label="数据说明"'));
-    assert.ok(html.includes('数据非实时刷新'));
-    if(page!=='devices'){assert.ok(html.includes('数量单位待确认'));assert.ok(html.includes(inventoryTime));}
-    if(page!=='inventory')assert.ok(html.includes(ledgerTime));
-    if(page==='devices')assert.ok(!html.includes(inventoryTime),'ledger must not inherit inventory query time');
-    assert.ok(!visible.includes(inventoryTime));assert.ok(!visible.includes(ledgerTime));
-    assert.ok(!visible.includes('单位待确认'),'unit caveat belongs to the accessible data explanation');
-    assert.ok(!html.includes('evidence-time'));assert.ok(!visible.includes('GHS_CA_US'));
+    app.window.twinNavigate(page);
+    assert.ok(!app.html().includes(source.queryTime),page);
+    assert.ok(!app.html().includes(source.forkliftSourceUpdatedTime),page);
   }
 });
 
-test('all navigation pages expose data explanations and retain explicit demonstration boundaries',()=>{
+test('a selected scene instance only displays inventory from its own mapping',()=>{
   const app=boot();
-  for(const page of ['overview','inventory','orders','devices','alerts','trace','settings']){
-    app.window.twinNavigate(page);assert.ok(app.html().includes(page==='trace'?'不代表真实业务记录':'aria-label="数据说明"'),page);
-  }
-  app.window.twinNavigate('orders');assert.ok(app.html().includes('示例时点：2026-10-20 14:20:08'));
-  app.window.twinFilterType('forklift');assert.ok(app.html().includes('场景模型 · 台账未关联'));
-  assert.ok(app.html().includes('data-unverified="scene-telemetry"'));
-  app.click({action:'device',id:'FORK-07'});assert.ok(app.html().includes('场景参数 · 尚未核验'));
-  assert.ok(app.html().includes('data-unverified="scene-device"'));
   app.window.twinNavigate('inventory');app.click({action:'material'});
-  assert.ok(app.html().includes('物料数据说明'));assert.ok(app.html().includes('尚未绑定 WMS'));
+  assert.ok(app.html().includes('>演示<'));assert.ok(app.html().includes('SKU2038'));
   app.window.twinSelect({equipment:[],facilities:[],selection:{kind:'material',id:'CAD-07',instanceIndex:7}});
-  assert.ok(app.html().includes('库位编码未匹配'));assert.ok(app.html().includes('data-unverified="cad-example-link"'));
-  assert.ok(!app.html().includes('480 件'));
+  assert.ok(app.html().includes('CAD-07'));assert.ok(app.html().includes('库位编码未匹配'));
+  assert.ok(!app.html().includes('data-action="material"'));assert.ok(!app.html().includes('480 件'));
+  assert.ok(!app.html().includes('SKU2038'));
 });
 
 test('filtered alert empty state distinguishes active alerts from recovered history',()=>{
@@ -57,14 +47,14 @@ test('filtered alert empty state distinguishes active alerts from recovered hist
   app.window.twinState.filters.alerts.severity='missing';app.window.twinNavigate('alerts');
   assert.ok(app.html().includes('没有匹配的告警'));assert.ok(!app.html().includes('暂无恢复记录'));
   app.click({action:'tab',key:'alerts.history',value:'true'});
-  assert.ok(app.html().includes('暂无恢复记录'));assert.ok(app.html().includes('确认规则说明'));
+  assert.ok(app.html().includes('暂无恢复记录'));assert.ok(!app.html().includes('没有匹配的告警'));
 });
 
 test('inventory displays verified current-query totals without inventing capacity or quantity units',()=>{
   const app=boot();app.window.twinNavigate('inventory');const html=verifiedInventory(app);
   for(const value of ['337,783','336,006','1,722','14,373','76,752','156','55'])assert.ok(html.includes(value),value);
-  assert.ok(html.includes('单位待确认'));
-  assert.ok(app.html().includes('容量规则待确认'));assert.ok(html.includes('单位待确认'));
+  const inventory=app.window.TwinBusinessData.snapshot.inventory;
+  assert.equal(inventory.unit,null);assert.equal(inventory.capacity,null);
   assert.ok(!html.includes('480 件'));assert.ok(!html.includes('bin-grid'));
   assert.ok(!html.includes('占用率'));assert.ok(!html.includes('托位已用'));
   assert.ok(!html.includes('data-action="focus"'));
@@ -109,10 +99,10 @@ test('all business pages omit internal warehouse and extract metadata while reta
   }
   app.window.twinNavigate('inventory');
   for(const value of ['337,783','336,006','14,373','76,752','156','55','1,722'])assert.ok(app.html().includes(value),value);
-  assert.ok(app.html().includes('暂不提供库存定位'));assert.ok(app.html().includes('数据未核验'));
+  assert.ok(!verifiedInventory(app).includes('data-action="focus"'));assert.ok(app.html().includes('data-unverified="inventory-design"'));
   app.window.twinNavigate('devices');
   for(const value of ['82','62','20','SITDOWN-GHS-L-OUT-S1'])assert.ok(app.html().includes(value),value);
-  assert.ok(app.html().includes('台账样例不提供场景定位'));
+  assert.ok(!app.html().includes('data-action="focus"'));
 });
 
 test('scene equipment and detail copy stays business-facing without changing operational values',()=>{
@@ -120,10 +110,10 @@ test('scene equipment and detail copy stays business-facing without changing ope
   app.window.twinReceive({equipment:[{id:'FORK-07',type:'forklift',live:true,available:true,status:'running',value:'1.2 m/s'}],facilities:[]});
   app.window.twinFilterType('forklift');assertBusinessCopy(app,'scene devices');
   app.click({action:'device',id:'FORK-07'});assertBusinessCopy(app,'device detail');
-  assert.ok(app.html().includes('1.2 m/s'));assert.ok(app.html().includes('数据未核验'));
+  assert.ok(app.html().includes('1.2 m/s'));assert.ok(app.html().includes('>场景数据<'));
   app.click({action:'tab',key:'deviceTab',value:'task'});assertBusinessCopy(app,'device task');
   app.window.twinNavigate('inventory');app.click({action:'material'});assertBusinessCopy(app,'material detail');
-  assert.ok(app.html().includes('480'));assert.ok(app.html().includes('SKU2038'));assert.ok(app.html().includes('数据未核验'));
+  assert.ok(app.html().includes('480'));assert.ok(app.html().includes('SKU2038'));assert.ok(app.html().includes('>演示<'));
   app.window.twinSelect({equipment:[],facilities:[],selection:{kind:'device',id:'FORK-07'}});assertBusinessCopy(app,'unavailable device');
   assert.ok(app.html().includes('当前设备已不可用'));
 });
@@ -141,7 +131,7 @@ test('diagnostics report verified provenance and current device view for native 
 
 test('overview and ledger remain verified when scene telemetry changes and model browsing stays separate',()=>{
   const app=boot();assert.ok(app.html().includes('337,783'));assert.ok(app.html().includes('336,006'));
-  assert.ok(app.html().includes('叉车台账'));assert.ok(app.html().includes('数据未核验'));
+  assert.ok(app.html().includes('叉车台账'));assert.ok(app.html().includes('>演示<'));
   const initial=app.html();app.window.twinReceive({equipment:[{id:'FORK-07',type:'forklift',status:'running',value:'14 km/h',live:true}],facilities:[]});
   assert.equal(app.html(),initial);
   app.window.twinNavigate('devices');const ledger=app.html();
@@ -165,24 +155,26 @@ test('global search finds verified sample identities without sending scene selec
 
 test('scene card source labels refresh when only their demo provenance changes',()=>{
   const app=boot(),row={id:'FORK-07',type:'forklift',status:'unknown',available:false,value:'—',demo:false};
+  const deviceRow=()=>app.html().split('data-id="FORK-07"')[1].split('</button>')[0];
   app.window.twinReceive({equipment:[row],facilities:[]});app.window.twinFilterType('forklift');
-  assert.ok(app.html().includes('场景对象 · 遥测未接入'));
+  assert.ok(deviceRow().includes('>遥测未接入<'));
   app.window.twinReceive({equipment:[{...row,demo:true}],facilities:[]});
-  assert.ok(app.html().includes('场景演示 · 数据未核验'));
-  assert.ok(!app.html().includes('场景对象 · 遥测未接入'));
+  assert.ok(deviceRow().includes('>演示<'));
+  assert.ok(!deviceRow().includes('>遥测未接入<'));
 });
 
 test('original capacity design is retained under explicit unverified labels without replacing verified totals',()=>{
   const app=boot(),overview=app.html();
   assert.ok(overview.includes('data-unverified="capacity"'));
-  assert.ok(overview.includes('80.0%'));assert.ok(overview.includes('2,400'));
-  assert.ok(overview.includes('数据未核验'));assert.ok(overview.includes('337,783'));
+  const capacity=overview.split('data-unverified="capacity"')[1].split('data-unverified="orders-progress"')[0];
+  for(const value of ['80.0%','1,920','416','64'])assert.ok(capacity.includes('>'+value+'<'),value);
+  assert.ok(overview.includes('>演示<'));assert.ok(overview.includes('337,783'));
   app.window.twinNavigate('inventory');const verified=verifiedInventory(app),html=app.html();
   assert.ok(!verified.includes('1,920'));assert.ok(verified.includes('337,783'));
   assert.ok(html.includes('data-unverified="inventory-design"'));
   assert.ok(html.includes('data-filter="inventoryDemo.state"'));
   assert.equal((html.match(/data-action="demo-bin"/g)||[]).length,48);
-  assert.ok(html.includes('数据未核验'));assert.ok(html.includes('1,920'));
+  assert.ok(html.includes('>演示<'));assert.ok(html.includes('1,920'));
   assert.ok(!html.includes('class="unknown-metrics"'));
   assert.ok(html.indexOf('337,783')<html.indexOf('1,920'));
   assert.ok(html.indexOf('data-unverified="inventory-design"')<html.indexOf('区域目录'));
@@ -202,7 +194,7 @@ test('unverified matrix search, filtering and detail do not mutate verified samp
   app.click({action:'demo-bin',id:'6'});assert.ok(app.html().includes('A-03-06 · 空货位'));
   app.listeners.change({target:{dataset:{filter:'inventoryDemo.state'},value:'all'}});
   app.click({action:'demo-bin',id:'12'});app.click({action:'material'});
-  assert.equal(app.window.twinState.detail.kind,'material-demo');assert.ok(app.html().includes('数据未核验'));
+  assert.equal(app.window.twinState.detail.kind,'material-demo');assert.ok(app.html().includes('>演示<'));
   assert.ok(app.commands.slice(before).every(command=>!['select','focus'].includes(command.action)));
 });
 
@@ -228,16 +220,16 @@ test('legacy design shortcuts reset only design filters while verified sample se
 });
 
 test('order and alert demos stay unchecked while replay is explicitly test-only and the ledger stays verified',()=>{
-  const app=boot();for(const page of ['orders','alerts']){app.window.twinNavigate(page);assert.ok(app.html().includes('数据未核验'),page);}app.window.twinNavigate('trace');assert.ok(app.html().includes('测试回放'));assert.ok(app.html().includes('不代表真实业务记录'));
-  app.window.twinNavigate('devices');assert.ok(app.html().includes('叉车台账'));assert.ok(!app.html().includes('数据未核验'));
+  const app=boot();for(const page of ['orders','alerts']){app.window.twinNavigate(page);assert.ok(app.html().includes('>演示<'),page);}app.window.twinNavigate('trace');assert.ok(app.html().includes('测试回放'));
+  app.window.twinNavigate('devices');assert.ok(app.html().includes('叉车台账'));assert.ok(!app.html().includes('>演示<'));
 });
 
-test('scene telemetry detail keeps its original design with an unverified badge and never fills missing telemetry',()=>{
+test('scene telemetry detail displays measured values and never fills missing telemetry',()=>{
   const app=boot();app.window.twinSelect({equipment:[{id:'FORK-07',type:'forklift',live:true,available:true,status:'running',value:'1.2 m/s'}],facilities:[],selection:{kind:'device',id:'FORK-07'}});
-  assert.ok(app.html().includes('data-unverified="scene-device"'));assert.ok(app.html().includes('1.2 m/s'));
+  assert.ok(app.html().includes('>场景数据<'));assert.ok(app.html().includes('1.2 m/s'));
   app.click({action:'tab',key:'deviceTab',value:'task'});
   app.window.twinReceive({equipment:[{id:'FORK-07',type:'forklift',live:true,available:false,status:'running',value:'1.2 m/s'}],facilities:[],selection:{kind:'device',id:'FORK-07'}});
-  assert.ok(!app.html().includes('data-unverified="scene-device"'));
+  assert.ok(!app.html().includes('1.2 m/s'));
   app.click({action:'tab',key:'deviceTab',value:'status'});
   app.window.twinReceive({equipment:[{id:'FORK-07',type:'forklift',live:true,available:false,status:'unknown'}],facilities:[],selection:{kind:'device',id:'FORK-07'}});
   assert.ok(app.html().includes('遥测未接入'));assert.ok(!app.html().includes('1.2 m/s'));assert.ok(!app.html().includes('0%'));
@@ -247,6 +239,6 @@ test('unconnected device event samples retain an independent unverified source l
   const app=boot();app.window.twinSelect({equipment:[{id:'FORK-07',type:'forklift',demo:false,available:false,status:'unknown'}],facilities:[],selection:{kind:'device',id:'FORK-07'}});
   app.click({action:'tab',key:'deviceTab',value:'events'});
   assert.ok(app.html().includes('遥测未接入'));assert.ok(app.html().includes('行驶速度预警'));
-  assert.ok(app.html().includes('data-unverified="device-events"'));assert.ok(app.html().includes('数据未核验'));
-  assert.ok(!app.html().includes('data-unverified="scene-device"'));
+  assert.ok(app.html().includes('data-unverified="device-events"'));assert.ok(app.html().includes('>演示<'));
+  assert.ok(!app.html().includes('data-unverified="page"'));
 });

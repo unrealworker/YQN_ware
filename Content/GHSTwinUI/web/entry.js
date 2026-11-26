@@ -7,7 +7,6 @@
   let loggedIn=false,page='login',pageGeneration=0,ready=false,catalogKey='',catalogReceived=false;
   let gate='idle',requestId='',localError='',lastPhase='idle',curtainFrame=0,curtainAck=null;
   let reduced=motionQuery.matches,returnPending=false;
-  let helpGeneration=0;
   const animations=new Set();
   const icon=name=>'<svg aria-hidden="true"><use href="#'+name+'"/></svg>';
   const escape=value=>String(value==null?'':value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -93,7 +92,7 @@
     $('entry-notice').dataset.error=String(!!failed);
     $('entry-notice-text').textContent=failed;
     $('entry-retry').hidden=!failed||busy||!row;
-    $('warehouse-search').disabled=busy;$('warehouse-region').disabled=busy;$('logout-button').disabled=busy;$('help-button').disabled=busy;
+    $('warehouse-search').disabled=busy;$('warehouse-region').disabled=busy;$('logout-button').disabled=busy;
     for(const button of $('warehouse-list').querySelectorAll('[data-enter]')){
       const selected=policy.entering(state.phase,gate)&&button.dataset.enter===selectedId;
       button.disabled=busy;
@@ -157,7 +156,6 @@
     if(candidate.warehouses!==state.warehouses)catalogReceived=true;
     const previous=state.phase;
     state=candidate;gate=policy.advanceGate(gate,state.phase);
-    if(!policy.browsing(state.phase))closeHelp(true);
     if(['loading','flying','revealing','warehouse','returning'].includes(state.phase)&&!loggedIn){loggedIn=true;showPage('warehouses');}
     if(typeof state.reducedMotion==='boolean'&&state.reducedMotion!==reduced){reduced=state.reducedMotion;applyMotion(false);}
     document.body.dataset.phase=state.phase;
@@ -187,13 +185,6 @@
     if(send)command('reducedMotion',{enabled:reduced});
   }
   function setMotionPreference(value){reduced=value==='reduced'||motionQuery.matches;applyMotion();}
-  async function closeHelp(immediate=false){
-    const dialog=$('help-dialog');if(!dialog.open)return;
-    if(dialog.dataset.closing==='true'&&!immediate)return;
-    const generation=++helpGeneration;dialog.dataset.closing='true';
-    if(!immediate)await animate(dialog,[{opacity:1,transform:'translateY(0) scale(1)'},{opacity:0,transform:'translateY(4px) scale(.98)'}],{duration:160,easing:'cubic-bezier(.4,0,1,1)',fill:'both'});
-    if(generation===helpGeneration){dialog.close();delete dialog.dataset.closing;}
-  }
   $('login-form').addEventListener('submit',event=>{
     event.preventDefault();
     if(loggedIn)return;
@@ -218,11 +209,7 @@
     returnPending=true;$('back-button').disabled=true;
     command('back',{inputSource:inputSource(event)},()=>{returnPending=false;$('back-button').disabled=false;$('back-button').title='暂时无法返回，请重试';});
   });
-  $('help-button').addEventListener('click',()=>{if(gate==='idle'&&policy.browsing(state.phase)){$('help-dialog').showModal();}});
-  $('help-dialog').addEventListener('submit',event=>{event.preventDefault();closeHelp();});
-  $('help-dialog').addEventListener('cancel',event=>{event.preventDefault();closeHelp();});
-  $('help-dialog').addEventListener('close',()=>{if(gate==='idle'&&policy.browsing(state.phase))focus($('help-button'));});
-  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!$('help-dialog').open&&state.phase==='loading'){event.preventDefault();cancel();}});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&state.phase==='loading'){event.preventDefault();cancel();}});
   window.addEventListener('resize',()=>{curtainAck=null;viewport();queueCurtain();});
   if(motionQuery.addEventListener)motionQuery.addEventListener('change',()=>{reduced=motionQuery.matches;applyMotion();});
   else motionQuery.addListener(()=>{reduced=motionQuery.matches;applyMotion();});

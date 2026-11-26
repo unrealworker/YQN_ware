@@ -6,13 +6,13 @@ struct FGHSTwinSearchLayout
 {
     FVector2D Position=FVector2D::ZeroVector,Size=FVector2D::ZeroVector;
     int32 VisibleRows=0;
-    static constexpr double HeaderHeight=36,RowHeight=64,FooterHeight=36;
+    static constexpr double HeaderHeight=36,RowHeight=64,BottomPadding=10;
     static FGHSTwinSearchLayout Calculate(FVector2D InputPosition,FVector2D InputSize,double SceneBottom,int32 Count)
     {
         FGHSTwinSearchLayout L; L.Position=InputPosition+FVector2D(0,InputSize.Y+8);
         const double Available=FMath::Max(0.,SceneBottom-L.Position.Y-8);
-        L.VisibleRows=FMath::Clamp(FMath::FloorToInt((Available-HeaderHeight-FooterHeight)/RowHeight),0,FMath::Min(8,Count));
-        L.Size=FVector2D(InputSize.X,FMath::Min(Available,HeaderHeight+FooterHeight+FMath::Max(1,L.VisibleRows)*RowHeight)); return L;
+        L.VisibleRows=FMath::Clamp(FMath::FloorToInt((Available-HeaderHeight-BottomPadding)/RowHeight),0,FMath::Min(8,Count));
+        L.Size=FVector2D(InputSize.X,FMath::Min(Available,HeaderHeight+BottomPadding+FMath::Max(1,L.VisibleRows)*RowHeight)); return L;
     }
     int32 RowAt(FVector2D P) const
     {

@@ -37,8 +37,8 @@
     }
     function render() {
       const scrollTop = panel.scrollTop;
-      panel.hidden = !open;
-      input.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open || (!items.length && !summary.textContent);
+      input.setAttribute('aria-expanded', String(!panel.hidden));
       clear.hidden = !input.value;
       more.hidden = !hasMore; more.disabled = pending; more.textContent = pending && pendingOffset > 0 ? '正在加载…' : `加载更多（已显示 ${items.length} / ${total}）`;
       list.replaceChildren();
@@ -100,7 +100,7 @@
       hasMore = state.hasMore === true && items.length < total;
       if (offset === 0) active = Math.max(0, Math.min(items.length - 1, Number(state.selectedIndex) || 0));
       else if (jumpOnAppend && items.length > previousCount) active = previousCount;
-      summary.textContent = items.length ? `GHS · 匹配设备（${total}）· 已显示 ${items.length}` : input.value ? `GHS 中未找到“${input.value}”，试试设备类型、编号或物料名称。` : '搜索当前仓库的设备名称、类型、编号、货位或物料';
+      summary.textContent = items.length ? `已显示 ${items.length} / ${total} 项` : input.value ? `未找到“${input.value}”` : '暂无搜索结果。';
       render();
       if (jumpOnAppend) list.children[active]?.scrollIntoView({ block: 'nearest' });
       jumpOnAppend = false;

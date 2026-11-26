@@ -14,19 +14,18 @@ function filterPage(rows,f={},size=20){
  return {rows:matches.slice((page-1)*size,page*size),total:matches.length,page,pages};
 }
 function renderDetail(envelope){
- if(envelope&&envelope.mappingStatus==='unknown')return '<div class="notice-row">库存明细暂不可用，未推断为空货位。</div>';
+ if(envelope&&envelope.mappingStatus==='unknown')return '<div class="notice-row">库存明细暂不可用。</div>';
  if(!envelope||envelope.mappingStatus!=='mapped'||!envelope.location)
-  return '<div class="notice-row">库位编码未匹配，暂不能判断真实库存状态。</div>';
+  return '<div class="notice-row">库位编码未匹配，库存未知。</div>';
  const l=envelope.location,f=l.fields||{},t=l.totals||{},items=l.items||[],source=envelope.source||{};
- const reason=l.state==='empty'?(l.emptyReason==='no_inventory_record'?'本次快照未关联库存记录。':'本次快照库存总量为 0。'):l.state==='unknown'?'库存数据存在缺失或异常，暂不判断为空位。':'按库存总量判断；冻结和已分配库存仍计入有货。';
- let html='<header class="page-head"><div class="title-row"><h1>库位详情</h1><span class="source scene">真实库存快照</span></div><p>'+esc(source.exportedAt||'2026-11-25 静态导出')+'</p></header>';
- html+='<div class="selection-card inventory-location"><div class="flex-between"><h2>'+esc(l.code)+'</h2>'+badge(l.state)+'</div><p class="small">'+esc(reason)+'</p></div>';
- if(envelope.sceneBinding)html+='<p class="inventory-binding-note">按编码规则匹配 · 物理对应待复核</p>';
+ const emptyDetail=l.state==='unknown'?'库存明细待核验。':l.emptyReason==='no_inventory_record'?'本次快照未关联库存记录。':'本次快照无库存明细。';
+ let html='<header class="page-head"><div class="title-row"><h1>库位详情</h1><span class="source scene">库存快照</span></div><p>'+esc(source.exportedAt||'快照时间未知')+'</p></header>';
+ html+='<div class="selection-card inventory-location"><div class="flex-between"><h2>'+esc(l.code)+'</h2>'+badge(l.state)+'</div></div>';
  html+='<div class="kpis verified-kpis"><div class="kpi"><span>库存总量 / 件</span><strong class="num">'+num(t.quantity)+'</strong></div><div class="kpi"><span>可用数量 / 件</span><strong class="num">'+num(t.availableQuantity)+'</strong></div></div>';
  html+=section('库存构成',kv('已分配 / 件',num(t.allocationQuantity))+kv('冻结 / 件',num(t.freezeQuantity))+kv('待移入 / 件',num(t.waitMoveInQuantity))+kv('待移出 / 件',num(t.waitMoveOutQuantity)));
- html+=section('库位信息',kv('库位 ID',l.id)+kv('仓库',l.warehouseCode||'GHS_CA_US')+kv('库区 ID',f.warehouse_area_id)+kv('排 / 列 / 层（WMS 原值）',[f.location_row,f.location_col,f.location_layer].map(v=>v==null?'—':v).join(' / '))+kv('横向序号',f.horizontal_num)+kv('库位状态（源编码）',f.location_status)+kv('库位类型（源编码）',f.location_type)+kv('长 × 宽 × 高 / 米',[f.location_length_m,f.location_width_m,f.location_height_m].map(v=>v==null?'—':v).join(' × ')));
- html+=section('库存明细 · '+num(l.recordCount)+' 条 / '+num(l.skuCount)+' 个 SKU',items.length?'<div class="inventory-items">'+items.map(item=>'<article class="list-row"><div class="row-title"><strong>'+esc(item.sku)+'</strong><span class="num">'+num(item.quantity)+' 件</span></div><div class="row-sub">记录 '+esc(item.id)+'</div><div class="row-foot"><span>可用 '+num(item.availableQuantity)+'</span><span>已分配 '+num(item.allocationQuantity)+' · 冻结 '+num(item.freezeQuantity)+'</span></div><p class="small muted">'+esc(item.updatedAt||'更新时间未知')+' (UTC+8)</p></article>').join('')+'</div>':'<p class="small">本次快照无库存明细。</p>');
- html+=section('数据时间',kv('库存最近更新（UTC+8）',l.updatedAtMax)+kv('库位档案更新（源值）',f.location_updated_at)+'<p class="small muted">本次为静态导出，跨表同步完整水位待核实。空货位不等于可用库位，库位状态源编码暂不作业务解释。</p>');
+ html+=section('库位信息',kv('库位 ID',l.id)+(envelope.sceneBinding?kv('场景匹配','编码匹配 · 待复核'):'')+kv('仓库',l.warehouseCode||'GHS_CA_US')+kv('库区 ID',f.warehouse_area_id)+kv('排 / 列 / 层（WMS 原值）',[f.location_row,f.location_col,f.location_layer].map(v=>v==null?'—':v).join(' / '))+kv('横向序号',f.horizontal_num)+kv('库位状态（源编码）',f.location_status)+kv('库位类型（源编码）',f.location_type)+kv('长 × 宽 × 高 / 米',[f.location_length_m,f.location_width_m,f.location_height_m].map(v=>v==null?'—':v).join(' × ')));
+ html+=section('库存明细 · '+num(l.recordCount)+' 条 / '+num(l.skuCount)+' 个 SKU',items.length?'<div class="inventory-items">'+items.map(item=>'<article class="list-row"><div class="row-title"><strong>'+esc(item.sku)+'</strong><span class="num">'+num(item.quantity)+' 件</span></div><div class="row-sub">记录 '+esc(item.id)+'</div><div class="row-foot"><span>可用 '+num(item.availableQuantity)+'</span><span>已分配 '+num(item.allocationQuantity)+' · 冻结 '+num(item.freezeQuantity)+'</span></div><p class="small muted">'+esc(item.updatedAt||'更新时间未知')+' (UTC+8)</p></article>').join('')+'</div>':'<p class="small">'+emptyDetail+'</p>');
+ html+=section('数据时间',kv('库存最近更新（UTC+8）',l.updatedAtMax)+kv('库位档案更新（源值）',f.location_updated_at));
  return html;
 }
 let index=null,revision=0;
@@ -37,8 +36,8 @@ function script(key,url){
  if(pending.has(key)||errors.has(key))return;
  const el=root.document.createElement('script');pending.set(key,el);el.src=url;el.async=true;
  const fail=message=>{pending.delete(key);el.remove();errors.set(key,message);changed();};
- el.onerror=()=>fail('库存文件读取失败，请重试。');
- el.onload=()=>{pending.delete(key);el.remove();if(key==='index'?!index:!shards.has(key))fail(errors.get(key)||'库存文件缺少有效数据，请重试。');};
+ el.onerror=()=>fail('库存文件读取失败。');
+ el.onload=()=>{pending.delete(key);el.remove();if(key==='index'?!index:!shards.has(key))fail(errors.get(key)||'库存文件缺少有效数据。');};
  root.document.head.appendChild(el);
 }
 function loadIndex(retry=false){if(index)return;if(retry)errors.delete('index');script('index','../data/inventory/index.js');}
@@ -69,24 +68,24 @@ function receive(data){
    if(shards.size>8)shards.delete(shards.keys().next().value);
   }else throw Error('kind');
   errors.delete(key);changed();
- }catch(e){errors.set(key,'库存文件校验失败，未显示未经核验的数据。');changed();}
+ }catch(e){errors.set(key,'库存文件校验失败。');changed();}
 }
 function renderList(f){
- if(!index){loadIndex();const error=errors.get('index');return '<header class="page-head"><h1>库存与货位</h1><p>真实库存快照</p></header><p role="status">'+esc(error||'正在读取库位索引…')+'</p>'+(error?'<button class="btn" data-action="inventory-retry">重新读取</button>':'');}
+ if(!index){loadIndex();const error=errors.get('index');return '<header class="page-head"><h1>库存与货位</h1><p>库存快照</p></header><p role="status">'+esc(error||'正在读取库位索引…')+'</p>'+(error?'<button class="btn" data-action="inventory-retry">重新读取</button>':'');}
  const s=index.summary,p=filterPage(index.locations,f);f.page=p.page;
- let html='<header class="page-head"><div class="title-row"><h1>库存与货位</h1><span class="source scene">真实库存快照</span></div><p>'+esc(index.source.exportedAt)+'</p></header>';
+ let html='<header class="page-head"><div class="title-row"><h1>库存与货位</h1><span class="source scene">库存快照</span></div><p>'+esc(index.source.exportedAt)+'</p></header>';
  html+='<div class="kpis verified-kpis">'+[['库存总量 / 件',s.quantity],['可用数量 / 件',s.availableQuantity],['有货库位',s.occupiedCount],['无库存库位',s.emptyCount]].map(([k,v])=>'<div class="kpi"><span>'+k+'</span><strong class="num">'+num(v)+'</strong></div>').join('')+'</div>';
- html+='<p class="small muted">共 '+num(s.locationCount)+' 个库位档案，含临时及非场景库位，不作为三维仓库的物理容量。数据非实时刷新。</p>';
- html+='<label class="search inventory-search"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 20-5-5 M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0"/></svg><input type="search" aria-label="搜索真实库位编码或 ID" data-search="inventory" value="'+esc(f.query||'')+'" placeholder="搜索真实库位编码 / ID" autocomplete="off"></label><div class="inventory-filters">'+[['all','全部'],['occupied','有货'],['empty','空货位'],['unknown','待核验']].map(([v,t])=>'<button class="btn '+((f.state||'all')===v?'primary':'')+'" data-action="inventory-state" data-value="'+v+'">'+t+'</button>').join('')+'</div>';
+ html+='<p class="small muted">库位档案 '+num(s.locationCount)+' 个</p>';
+ html+='<label class="search inventory-search"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 20-5-5 M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0"/></svg><input type="search" aria-label="搜索库位编码或 ID" data-search="inventory" value="'+esc(f.query||'')+'" placeholder="搜索库位编码 / ID" autocomplete="off"></label><div class="inventory-filters">'+[['all','全部'],['occupied','有货'],['empty','空货位'],['unknown','待核验']].map(([v,t])=>'<button class="btn '+((f.state||'all')===v?'primary':'')+'" data-action="inventory-state" data-value="'+v+'">'+t+'</button>').join('')+'</div>';
  html+='<div class="row-list">'+p.rows.map(l=>'<button class="list-row inventory-result" data-action="inventory-location" data-id="'+esc(l.id)+'"><span class="row-title"><strong>'+esc(l.code)+'</strong>'+badge(l.state)+'</span><span class="row-foot"><span>'+num(l.quantity)+' 件 · '+num(l.skuCount)+' 个 SKU</span><span class="link">查看详情 →</span></span></button>').join('')+(p.rows.length?'':'<p class="small">没有符合条件的库位。</p>')+'</div>';
  html+='<div class="inventory-pager"><button class="btn" data-action="page" data-scope="inventory" data-value="'+(p.page-1)+'"'+(p.page===1?' disabled':'')+'>上一页</button><span>'+p.page+' / '+p.pages+' · '+num(p.total)+' 个</span><button class="btn" data-action="page" data-scope="inventory" data-value="'+(p.page+1)+'"'+(p.page===p.pages?' disabled':'')+'>下一页</button></div>';
  return html;
 }
 function renderLocation(id){
  if(!index)return renderList({});
- const row=byId.get(String(id));if(!row)return '<p>未找到该库位，未推断为空位。</p>';
+ const row=byId.get(String(id));if(!row)return '<p>未找到该库位。</p>';
  const shard=shards.get(row.shard);if(!shard){loadLocation(id);const error=errors.get(row.shard);return '<p role="status">'+esc(error||'正在读取库存明细…')+'</p>'+(error?'<button class="btn" data-action="inventory-retry-location" data-id="'+esc(id)+'">重新读取</button>':'');}
- const l=shard[id];return l?renderDetail({mappingStatus:'mapped',source:index.source,location:l}):'<p>未找到该库位，未推断为空位。</p>';
+ const l=shard[id];return l?renderDetail({mappingStatus:'mapped',source:index.source,location:l}):'<p>未找到该库位。</p>';
 }
 const hasLocation=query=>!!index&&(byId.has(query)||index.locations.some(l=>l.code.toLowerCase()===query.toLowerCase()));
 function isFloorSelection(detail){
@@ -104,7 +103,7 @@ function renderFloorZone(detail){
  let html='<button class="back" data-action="back">返回</button><header class="page-head"><h1>地堆区库存</h1><p>'+esc(pallet.zoneCode)+'</p></header>';
  if(data.schemaVersion!==1||!root.GHSInventorySummary||data.snapshotId!==root.GHSInventorySummary.snapshotId||!zone)
   return html+'<p role="status">地堆区索引与库存快照未通过校验。</p>';
- html+=section('选中托位',kv('地堆区号',pallet.zoneCode)+kv('区内托位数',zone.palletCount)+kv('本托序号',pallet.sequence));
+ html+=section('选中托位',kv('本托序号',pallet.sequence)+kv('区内托位数',zone.palletCount)+kv('单托库存明细','未提供'));
  if(zone.locationId===null)return html+'<p class="notice-row">本次快照缺少该区档案，区内库存未知。</p>';
  if(!index){loadIndex();return html+floorLoading('index','正在读取库位索引…');}
  const row=byId.get(zone.locationId);
@@ -124,7 +123,7 @@ function renderFloorZone(detail){
   skuTotals.set(item.sku,current);
  }
  const rows=[...skuTotals].sort(([a],[b])=>a.localeCompare(b)).map(([sku,t])=>'<article class="list-row"><div class="row-title"><strong>'+esc(sku)+'</strong><span>'+num(t.quantity)+' 件</span></div><div class="row-foot">可用 '+num(t.available)+' 件</div></article>');
- return html+section('全区 SKU · '+num(skuTotals.size),rows.length?rows.join(''):'<p class="small">本次快照无 SKU 明细。</p>')+'<p class="small muted">库存按整个地堆区汇总，单托货品和数量待核对。</p>';
+ return html+section('全区 SKU · '+num(skuTotals.size),rows.length?rows.join(''):'<p class="small">本次快照无 SKU 明细。</p>');
 }
 const api={filterPage,renderDetail,renderList,renderLocation,renderFloorZone,isFloorSelection,loadIndex,loadLocation,receive,hasLocation,subscribe:fn=>listeners.add(fn),revision:()=>revision};
 if(typeof module!=='undefined'&&module.exports)module.exports=api;
