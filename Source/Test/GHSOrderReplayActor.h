@@ -23,6 +23,7 @@ public:
     FString GetSnapshotJson() const;
     FString GetEventsJson(double WindowStart,double WindowEnd,int32 Limit=256) const;
     FString GetSourceInstancesJson() const;
+    const FString& GetSceneBindingsHash() const { return SceneBindingsHash; }
     bool ResolveDevice(const FString& Id,FVector& Location,FRotator& Rotation,FVector& Extent) const;
     bool PickRay(const FVector& Origin,const FVector& Direction,FString& Id) const;
     const FString& GetError() const { return Error; }
@@ -45,7 +46,7 @@ private:
     UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInstanceDynamic>> TrailMaterials;
     UPROPERTY(Transient) TArray<TObjectPtr<UDecalComponent>> GroundRipples;
     UPROPERTY(Transient) TArray<TObjectPtr<UMaterialInstanceDynamic>> RippleMaterials;
-    FString Error,SourceInstancesJson,TrailMode=TEXT("all"),SelectedId;
+    FString Error,SourceInstancesJson,SceneBindingsHash,TrailMode=TEXT("all"),SelectedId;
     double CurrentTime=0,PlaybackEndTime=-1.;
     bool bReady=false;
 };

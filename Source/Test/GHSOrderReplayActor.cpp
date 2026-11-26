@@ -69,7 +69,20 @@ bool AGHSOrderReplayActor::LoadData()
         const auto E=Value->AsObject();Simulation.Events.push_back({E->GetNumberField(TEXT("time")),N(E->GetStringField(TEXT("id"))),N(E->GetStringField(TEXT("deviceId"))),N(E->GetStringField(TEXT("kind"))),N(E->GetStringField(TEXT("text")))});
     }
     std::string Problem;if(!Simulation.Validate(Problem)){Error=S(Problem);return false;}
-    const auto& Sources=Json->GetArrayField(TEXT("sourceInstances"));FJsonSerializer::Serialize(Sources,TJsonWriterFactory<>::Create(&SourceInstancesJson));
+    int32 Version=0;
+    if(!Json->TryGetNumberField(TEXT("version"),Version) || (Version!=1 && Version!=2))
+    {Error=TEXT("不支持此追溯文件版本。");return false;}
+    if(Version==2)
+    {
+        const TSharedPtr<FJsonObject>* Provenance=nullptr;
+        if(!Json->TryGetObjectField(TEXT("provenance"),Provenance)
+            || !(*Provenance)->TryGetStringField(TEXT("sceneBindingsSha256"),SceneBindingsHash) || SceneBindingsHash.Len()!=64)
+        {Error=TEXT("追溯文件缺少 CAD 实例清单校验值。");return false;}
+    }
+    const TArray<TSharedPtr<FJsonValue>>* Sources=nullptr;
+    if(!Json->TryGetArrayField(TEXT("sourceInstances"),Sources) || Sources->IsEmpty())
+    {Error=TEXT("追溯文件缺少取货托盘和月台引用。");return false;}
+    FJsonSerializer::Serialize(*Sources,TJsonWriterFactory<>::Create(&SourceInstancesJson));
     const auto& Doors=Json->GetArrayField(TEXT("doors"));
     for(int32 I=0;I<Doors.Num();++I)
     {

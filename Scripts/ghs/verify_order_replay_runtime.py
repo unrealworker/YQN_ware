@@ -52,13 +52,54 @@ def snap_actor(a):
                     mesh=c.static_mesh.get_path_name() if isinstance(c,unreal.StaticMeshComponent) and c.static_mesh else None)
                     for c in a.get_components_by_class(unreal.ActorComponent)])
 def pose():return (numeric(pawn.get_actor_location(),'xyz'),numeric(pawn.get_actor_rotation(),('pitch','yaw','roll')),round(pawn.spring_arm_component.target_arm_length,6),numeric(pawn.spring_arm_component.socket_offset,'xyz'))
+
+def instance_state(component):
+    values=[]
+    for i in range(component.get_instance_count()):
+        t=component.get_instance_transform(i,True)
+        values.append((numeric(t.translation,'xyz'),numeric(t.rotation,'xyzw'),numeric(t.scale3d,'xyz')))
+    return values
+
+def source_inventory(data,actors):
+    """Independently find every CAD source and remember entire affected instance groups."""
+    bindings=ROOT/'Content/GHSTwinUI/data/scene-bindings.json'
+    assert data['provenance']['sceneBindingsSha256']==hashlib.sha256(bindings.read_bytes()).hexdigest()
+    groups=json.loads(bindings.read_text(encoding='utf8'))['groups']
+    rows={r['id']:(g,r) for g in groups for r in g['instances']}
+    components=[c for a in actors for c in a.get_components_by_class(unreal.InstancedStaticMeshComponent) if c.static_mesh]
+    snapshots={};targets={};resolved=[]
+    for source in data['sourceInstances']:
+        group,row=rows[source['cadId']]
+        expected=tuple(round(v*100,6) for v in (row['position_m'][0],-row['position_m'][1],row['position_m'][2]))
+        assert math.dist(expected,source['position'])<.05,(source['cadId'],expected,source['position'])
+        matches=[]
+        for c in components:
+            if c.static_mesh.get_name()!=group['mesh']:continue
+            key=c.get_path_name()
+            if key not in snapshots:snapshots[key]=(c,instance_state(c))
+            for i,t in enumerate(snapshots[key][1]):
+                if math.dist(t[0],expected)<.05:matches.append((key,i))
+        assert len(matches)==1,(source['cadId'],matches)
+        key,index=matches[0]
+        assert index not in targets.setdefault(key,set()),'duplicate source instance'
+        targets[key].add(index)
+        assert len(snapshots[key][1])==group['count'],group['actor']
+        resolved.append(dict(cad_id=source['cadId'],role=source['role'],component=key,index=index))
+    assert sum(s['role']=='cargo' for s in resolved)==5 and sum(s['role']=='door' for s in resolved)==3
+    return snapshots,targets,resolved
 def run():
     yield from wait('discover',discover,100)
     yield from wait('initial camera',lambda:not pawn.is_pose_transition_active())
-    data=json.loads((ROOT/'Content/GHSTwinUI/data/order-replay.json').read_text(encoding='utf8'))
+    timeline_path=ROOT/'Content/GHSTwinUI/data/order-replay.json'
+    timeline_bytes=timeline_path.read_bytes()
+    report['timeline_sha256']=hashlib.sha256(timeline_bytes).hexdigest()
+    data=json.loads(timeline_bytes)
+    replay_meshes=list((ROOT/'Content/GHSOrderReplay/Meshes').glob('*.uasset'))
+    report['mesh_sha256']={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in replay_meshes}
     cycle=data['cycleDuration'];events=data['events'];assert len(data['tracks'])==18
     unreal.SystemLibrary.execute_console_command(world,'DisableAllScreenMessages',pc)
     originals=unreal.GameplayStatics.get_all_actors_of_class(world,unreal.Actor)
+    source_snapshots,source_targets,resolved_sources=source_inventory(data,originals)
     tracked=[a for a in originals if any(str(t).startswith(('TwinId=GHN_MannedForklift','TwinId=GHS_DockTruck','TwinId=GHS_AGV_','TwinId=GHN_FloorStacker','TwinId=GHS_CH_')) for t in a.tags) or 'CampusTraffic' in a.get_class().get_name()]
     # Preserve an explicitly pre-hidden original, not just the default all-visible state.
     hidden=next(a for a in tracked if any(str(t).startswith('TwinId=GHN_MannedForklift') for t in a.tags));hidden.set_actor_hidden_in_game(True)
@@ -72,6 +113,16 @@ def run():
     assert len(state()['devices'])==8
     assert all(a.get_editor_property('hidden') and not a.is_actor_tick_enabled() for a in tracked)
     assert pc.warehouse_roof.is_interior_available()
+    for key,(component,before_instances) in source_snapshots.items():
+        current=instance_state(component)
+        assert len(current)==len(before_instances)
+        for i,(before_value,current_value) in enumerate(zip(before_instances,current)):
+            if i in source_targets.get(key,set()):
+                # A zero-scale instance matrix has no recoverable orientation.
+                assert current_value[0]==before_value[0] and current_value[2]==(0.,0.,0.),(key,i,'source was not hidden exactly')
+            else:assert current_value==before_value,(key,i,'unrelated source changed')
+    record('cad_sources_resolved_and_only_selected_instances_hidden',sources=resolved_sources,
+           checked_instances=sum(len(v[1]) for v in source_snapshots.values()))
     record('isolated_eight_devices_and_open_roof',hidden_originals=len(tracked),sources=len(data['sourceInstances']))
     command('replaySeek',time=230);first=state();yield from pause(.6);second=state()
     assert first['time']==second['time']==230 and first['devices']==second['devices']
@@ -94,6 +145,9 @@ def run():
     drop=event_find('dropoff');shots.append(('loading-contact',drop['time']-1,drop['deviceId']))
     supply=next((e for e in events if '补给' in e.get('text','') and e['deviceId'].startswith('REPLAY-FORK')),None)
     if supply:shots.append(('supply-return',supply['time']+1,supply['deviceId']))
+    transfers=[e for e in events if e['kind']=='transfer']
+    for i,e in enumerate(transfers[:1]+transfers[-1:] if len(transfers)>1 else transfers):
+        shots.append(('pallet-regrip-%02d'%i,e['time']+1,e['deviceId']))
     assert len(shots)>=7,[(e['kind'],e['deviceId']) for e in events]
     for name,t,dev in shots:
         command('replaySeek',time=min(3599,t));command('replayFollow',id=dev)
@@ -117,6 +171,7 @@ def run():
     assert pose()==camera_before,(pose(),camera_before)
     assert pc.warehouse_roof.get_transition_phase()==roof_before
     restoration=json.loads(session.get_restoration_report());assert restoration['verified'] and not restoration['replayActorExists']
+    assert all(instance_state(c)==values for c,values in source_snapshots.values()),'source groups did not restore exactly'
     record('cancel_resume_and_exact_scene_restoration',restoration=restoration)
     # Every order and arbitrary date uses the same canonical relative dataset.
     for order,start,end in [('TEST-OUT-004','2040-07-01T00:00:00.000Z','2040-07-02T00:00:00.000Z')]:
@@ -159,6 +214,8 @@ def run():
         saved_pose=pose();command('replayExitConfirm');assert pose()==saved_pose and not pawn.is_pose_transition_active()
         record('native_exit_guard_'+name)
     assert hashlib.sha256(MAP.read_bytes()).hexdigest()==map_hash
+    assert hashlib.sha256(timeline_path.read_bytes()).hexdigest()==report['timeline_sha256'],'timeline changed during runtime verification'
+    assert {p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in replay_meshes}==report['mesh_sha256'],'replay mesh changed during runtime verification'
     record('saved_map_unchanged',sha256=map_hash)
 
 def finish(error=None):

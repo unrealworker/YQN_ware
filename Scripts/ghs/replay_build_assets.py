@@ -42,6 +42,48 @@ def export_part(name,objects,offset=(0,0,0)):
     parts.append(dict(name=name,fbx=str(OUT/(name+'.fbx')),slots=slots,bounds_m=bounds,source_parts=len(objects),triangles=sum(len(f)-2 for f in faces),sha256=hashlib.sha256((OUT/(name+'.fbx')).read_bytes()).hexdigest()))
     bpy.data.objects.remove(obj,do_unlink=True)
 
+def export_cargo(suffix):
+    collection = bpy.data.collections['SM_GHS_Presentation_Cargo' + suffix]
+    group = [obj for obj in collection.objects if obj.name.startswith(('Lower ', 'Tier0 '))]
+    cutters = []
+    if suffix == 'Mid':
+        # Two 160 mm side openings cross the pallet at the 600 mm fork spacing
+        # after applying the playback's 1.016 XY scale. Preserve the bottom
+        # runners and the tops of the original blue deck and rim.
+        for y in (-.30 / 1.016, .30 / 1.016):
+            bpy.ops.mesh.primitive_cube_add(size=1, location=(0, y, .080))
+            cutter = bpy.context.object
+            cutter.name = 'Replay side fork pocket'
+            cutter.dimensions = (1.24, .160, .090)
+            cutters.append(cutter)
+        for obj in group:
+            if not obj.name.startswith(('Lower Pallet spacer block', 'Lower Pallet upper deck slat',
+                                        'Lower Pallet side rim')):
+                continue
+            for cutter in cutters:
+                notch = obj.modifiers.new('Side fork pocket', 'BOOLEAN')
+                notch.operation = 'DIFFERENCE'
+                notch.solver = 'EXACT'
+                notch.object = cutter
+        bpy.context.view_layer.update()
+    export_part('SM_Replay_Cargo' + suffix, group)
+    for cutter in cutters:
+        bpy.data.objects.remove(cutter, do_unlink=True)
+
+if '--only-cargo-mid' in sys.argv:
+    manifest_path = OUT / 'replay_assets.json'
+    manifest = json.loads(manifest_path.read_bytes())
+    cargo = next(row for row in manifest['meshes'] if row['name'] == 'SM_Replay_CargoMid')
+    bpy.ops.wm.open_mainfile(filepath=str(SOURCES[2]))
+    export_cargo('Mid')
+    regenerated = parts[0]
+    assert regenerated['slots'] == cargo['slots'] and regenerated['bounds_m'] == cargo['bounds_m']
+    assert protected[str(SOURCES[2])] == hashlib.sha256(SOURCES[2].read_bytes()).hexdigest()
+    cargo.update(regenerated)
+    manifest_path.write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf8')
+    print('REPLAY_CARGO_MID_READY', regenerated['triangles'], regenerated['sha256'])
+    raise SystemExit(0)
+
 bpy.ops.wm.open_mainfile(filepath=str(SOURCES[0]))
 objects=[o for o in bpy.data.objects if o.name.startswith('MF_') or any(c.name=='05_Driver' for c in o.users_collection)]
 (OUT/'fork_source_parts.json').write_text(json.dumps([o.name for o in objects],indent=2))
@@ -70,9 +112,7 @@ for side in [-1,1]:
 
 bpy.ops.wm.open_mainfile(filepath=str(SOURCES[2]))
 for suffix in ['Low','Mid','High']:
-    col=bpy.data.collections.get('SM_GHS_Presentation_Cargo'+suffix);assert col
-    group=[o for o in col.objects if o.name.startswith(('Lower ','Tier0 '))]
-    export_part('SM_Replay_Cargo'+suffix,group)
+    export_cargo(suffix)
 
 bpy.ops.wm.open_mainfile(filepath=str(SOURCES[3]))
 col=bpy.data.collections.get('SM_GHS_V2DockDoor');assert col

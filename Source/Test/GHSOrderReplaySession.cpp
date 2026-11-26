@@ -11,6 +11,10 @@
 #include "Serialization/JsonSerializer.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
+#include "Misc/SecureHash.h"
+THIRD_PARTY_INCLUDES_START
+#include <openssl/sha.h>
+THIRD_PARTY_INCLUDES_END
 
 namespace
 {
@@ -18,6 +22,35 @@ FString WriteSessionJson(const TSharedRef<FJsonObject>& Object)
 {FString Out;FJsonSerializer::Serialize(Object,TJsonWriterFactory<>::Create(&Out));return Out;}
 TArray<TSharedPtr<FJsonValue>> ArrayJson(const FString& Text)
 {TArray<TSharedPtr<FJsonValue>> Values;FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Text),Values);return Values;}
+bool ReadReplayVector(const FJsonObject& Object,const TCHAR* Field,FVector& Vector)
+{
+    const TArray<TSharedPtr<FJsonValue>>* Values=nullptr;
+    if(!Object.TryGetArrayField(Field,Values) || Values->Num()!=3) return false;
+    for(int32 Axis=0;Axis<3;++Axis)
+        if(!(*Values)[Axis]->TryGetNumber(Vector[Axis]) || !FMath::IsFinite(Vector[Axis])) return false;
+    return true;
+}
+
+bool ReadReplayRegistry(const FString& Hash,TSharedPtr<FJsonObject>& Registry,FString& Error)
+{
+    TArray<uint8> Bytes;
+    if(!FFileHelper::LoadFileToArray(Bytes,*(FPaths::ProjectContentDir()/TEXT("GHSTwinUI/data/scene-bindings.json"))))
+    {Error=TEXT("无法读取追溯所需的场景实例清单。");return false;}
+    if(!Hash.IsEmpty())
+    {
+        uint8 Digest[SHA256_DIGEST_LENGTH];
+        if(!SHA256(Bytes.GetData(),Bytes.Num(),Digest) || !BytesToHex(Digest,SHA256_DIGEST_LENGTH).Equals(Hash,ESearchCase::IgnoreCase))
+        {Error=TEXT("追溯路径与当前 CAD 布局版本不一致。");return false;}
+    }
+    FString Text;
+    FFileHelper::BufferToString(Text,Bytes.GetData(),Bytes.Num());
+    if(!FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Text),Registry) || !Registry)
+    {Error=TEXT("场景实例清单格式无效。");return false;}
+    if(Hash.IsEmpty() && Registry->HasField(TEXT("rackSourceSha256")))
+    {Error=TEXT("当前 CAD 布局需要按 CAD 标识绑定的追溯路径。");return false;}
+    return true;
+}
+
 bool EquipmentActor(AActor* Actor)
 {
     GHSTwinSelection::FIdentity Identity;
@@ -29,6 +62,67 @@ bool EquipmentActor(AActor* Actor)
         if(Mesh->GetStaticMesh() && Mesh->GetStaticMesh()->GetPathName().Contains(TEXT("SM_GHSPark_ClosedTruck"))) return true;
     return false;
 }
+}
+
+bool GHSReplaySources::Resolve(const FJsonObject& Source,const FJsonObject& Registry,
+    const TArray<UInstancedStaticMeshComponent*>& Components,UInstancedStaticMeshComponent*& OutComponent,int32& OutIndex)
+{
+    OutComponent=nullptr;OutIndex=INDEX_NONE;
+    FString Id,Role;
+    FVector Position,Scale;
+    double Yaw;
+    if(!Source.TryGetStringField(TEXT("cadId"),Id) || !Id.StartsWith(TEXT("CAD_"))
+        || !Source.TryGetStringField(TEXT("role"),Role) || (Role!=TEXT("cargo") && Role!=TEXT("door"))
+        || !ReadReplayVector(Source,TEXT("position"),Position) || !ReadReplayVector(Source,TEXT("scale"),Scale)
+        || !Source.TryGetNumberField(TEXT("yaw"),Yaw) || !FMath::IsFinite(Yaw)) return false;
+    const TArray<TSharedPtr<FJsonValue>>* Groups=nullptr;
+    if(!Registry.TryGetArrayField(TEXT("groups"),Groups)) return false;
+    FString MeshName,GroupName;
+    for(const auto& Value:*Groups)
+    {
+        const auto Group=Value->AsObject();
+        FString Mesh,Actor;
+        const TArray<TSharedPtr<FJsonValue>>* Entries=nullptr;
+        if(!Group || !Group->TryGetStringField(TEXT("mesh"),Mesh) || !Group->TryGetStringField(TEXT("actor"),Actor)
+            || !Group->TryGetArrayField(TEXT("instances"),Entries)) continue;
+        if(Role==TEXT("door") ? Mesh!=TEXT("SM_GHS_V2DockDoor") : !Mesh.StartsWith(TEXT("SM_GHS_Presentation_Cargo"))) continue;
+        for(const auto& Entry:*Entries)
+        {
+            const auto Row=Entry->AsObject();
+            FString CadId;
+            if(!Row || !Row->TryGetStringField(TEXT("id"),CadId) || CadId!=Id) continue;
+            FVector Cad;
+            if(!MeshName.IsEmpty() || !ReadReplayVector(*Row,TEXT("position_m"),Cad)
+                || !Position.Equals(FVector(Cad.X*100,-Cad.Y*100,Cad.Z*100),.15)) return false;
+            if(Role==TEXT("cargo"))
+            {
+                double CadYaw;
+                FVector CadScale;
+                if(!Row->TryGetNumberField(TEXT("rotation_deg"),CadYaw) || !ReadReplayVector(*Row,TEXT("scale"),CadScale)
+                    || FMath::Abs(FMath::FindDeltaAngleDegrees(-CadYaw,Yaw))>.05 || !Scale.Equals(CadScale,.001)) return false;
+            }
+            MeshName=Mesh;GroupName=Actor;
+        }
+    }
+    if(MeshName.IsEmpty()) return false;
+    const FQuat Rotation=FRotator(0,Yaw,0).Quaternion();
+    UInstancedStaticMeshComponent* Found=nullptr;
+    int32 Index=INDEX_NONE;
+    for(auto* Component:Components)
+    {
+        if(!Component || !Component->GetStaticMesh() || Component->GetStaticMesh()->GetName()!=MeshName) continue;
+        if(Role==TEXT("cargo") && !Component->ComponentHasTag(FName(TEXT("GHSStorageGroup:")+GroupName))) continue;
+        for(int32 I=0;I<Component->GetInstanceCount();++I)
+        {
+            FTransform Actual;
+            if(!Component->GetInstanceTransform(I,Actual,true) || !Actual.GetLocation().Equals(Position,.15)
+                || !Actual.GetScale3D().Equals(Scale,.001) || !Actual.GetRotation().Equals(Rotation,.0005)) continue;
+            if(Found) return false;
+            Found=Component;Index=I;
+        }
+    }
+    OutComponent=Found;OutIndex=Index;
+    return Found!=nullptr;
 }
 
 bool FGHSReplayClock::Start(double Seconds)
@@ -129,31 +223,58 @@ bool UGHSOrderReplaySession::HideSourceInstances()
 {
     FBox CargoBounds(ForceInit);TArray<FBox> LoadingDoors;
     const auto Sources=ArrayJson(Replay->GetSourceInstancesJson());
+    const FString& Hash=Replay->GetSceneBindingsHash();
+    TSharedPtr<FJsonObject> Registry;
+    if(!ReadReplayRegistry(Hash,Registry,Error)) return false;
+    TArray<UInstancedStaticMeshComponent*> Components;
+    for(TActorIterator<AActor> It(GetWorld());It;++It)
+    {
+        TInlineComponentArray<UInstancedStaticMeshComponent*> OnActor(*It);
+        for(UInstancedStaticMeshComponent* Component:OnActor) Components.Add(Component);
+    }
+    TArray<FInstanceState> Resolved;
+    int32 DoorCount=0,CargoCount=0;
     for(const auto& Source:Sources)
     {
-        const auto Object=Source->AsObject();FString ActorName,ComponentName;double IndexValue=-1;
-        if(!Object.IsValid() || !Object->TryGetStringField(TEXT("actor"),ActorName) || !Object->TryGetStringField(TEXT("component"),ComponentName) || !Object->TryGetNumberField(TEXT("index"),IndexValue))
-        {Error=TEXT("回放货位映射无效。");return false;}
-        bool Found=false;
-        for(TActorIterator<AActor> It(GetWorld());It && !Found;++It)
+        const auto Object=Source->AsObject();
+        FString Role,CadId;
+        if(!Object || !Object->TryGetStringField(TEXT("role"),Role) || (Role!=TEXT("cargo") && Role!=TEXT("door")))
+        {Error=TEXT("追溯文件包含无效的实例类型。");return false;}
+        UInstancedStaticMeshComponent* Component=nullptr;
+        int32 Index=INDEX_NONE;
+        if(!Hash.IsEmpty())
         {
-            if(It->GetName()!=ActorName) continue;
-            for(auto* Component:It->GetComponents()) if(Component->GetName()==ComponentName)
-                if(auto* ISM=Cast<UInstancedStaticMeshComponent>(Component))
-                {
-                    const int32 Index=int32(IndexValue);FTransform Transform;
-                    if(Index<0 || Index>=ISM->GetInstanceCount() || !ISM->GetInstanceTransform(Index,Transform,false)) break;
-                    FString Role;Object->TryGetStringField(TEXT("role"),Role);
-                    if(Role==TEXT("cargo")) CargoBounds+=ISM->Bounds.GetBox();
-                    else if(Role==TEXT("door") && ISM->GetStaticMesh())
-                        LoadingDoors.Add(ISM->GetStaticMesh()->GetBoundingBox().TransformBy(Transform*ISM->GetComponentTransform()));
-                    Instances.Add({ISM,Index,Transform});FTransform Hidden=Transform;Hidden.SetScale3D(FVector::ZeroVector);
-                    ISM->UpdateInstanceTransform(Index,Hidden,false,true,true);Found=true;break;
-                }
+            Object->TryGetStringField(TEXT("cadId"),CadId);
+            if(!GHSReplaySources::Resolve(*Object,*Registry,Components,Component,Index))
+            {Error=TEXT("追溯 CAD 实例缺失、重复或姿态已变化：")+CadId;return false;}
         }
-        if(!Found) {Error=TEXT("回放货位或月台已变化: ")+ActorName;return false;}
+        else
+        {
+            FString ActorName,ComponentName;
+            if(Object->TryGetStringField(TEXT("actor"),ActorName) && Object->TryGetStringField(TEXT("component"),ComponentName)
+                && Object->TryGetNumberField(TEXT("index"),Index))
+                for(auto* Candidate:Components)
+                    if(Candidate->GetOwner()->GetName()==ActorName && Candidate->GetName()==ComponentName)
+                    {Component=Candidate;break;}
+        }
+        FTransform Transform;
+        if(!Component || !Component->GetStaticMesh() || Index<0 || Index>=Component->GetInstanceCount() ||
+            !Component->GetInstanceTransform(Index,Transform,false) || Resolved.ContainsByPredicate([&](const FInstanceState& State)
+                {return State.Component.Get()==Component && State.Index==Index;}))
+        {Error=TEXT("追溯引用缺失或指向同一场景实例：")+CadId;return false;}
+        if(Role==TEXT("cargo")) {++CargoCount;CargoBounds+=Component->Bounds.GetBox();}
+        else {++DoorCount;LoadingDoors.Add(Component->GetStaticMesh()->GetBoundingBox().TransformBy(Transform*Component->GetComponentTransform()));}
+        Resolved.Add({Component,Index,Transform});
     }
-    if(!CargoBounds.IsValid) {Error=TEXT("回放地堆区域没有可用边界。");return false;}
+    if(!CargoBounds.IsValid || CargoCount!=GHSReplay::ForkCount || DoorCount!=GHSReplay::TruckCount)
+    {Error=TEXT("回放取货托盘或月台数量与路径不一致。");return false;}
+    for(const FInstanceState& Record:Resolved)
+    {
+        FTransform Hidden=Record.Transform;Hidden.SetScale3D(FVector::ZeroVector);
+        if(!Record.Component->UpdateInstanceTransform(Record.Index,Hidden,false,true,true))
+        {Error=TEXT("回放实例无法隐藏，已取消本次追溯。");return false;}
+        Instances.Add(Record);
+    }
     // The full floor-storage groups define this view. Far-west docks and trucks
     // on public roads remain available through follow but never widen this frame.
     WorkAreaBounds=CargoBounds.ExpandBy(FVector(400,400,0));

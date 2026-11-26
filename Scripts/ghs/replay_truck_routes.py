@@ -12,7 +12,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.dont_write_bytecode = True
-sys.path.insert(0, str(ROOT / 'Saved/ParkRefinement/python_deps'))
+sys.path.insert(0, str(ROOT / 'Scripts/_vendor/cad'))
 from shapely.geometry import LineString, Point, Polygon, box
 from shapely.ops import unary_union, substring
 from shapely.prepared import prep
@@ -158,7 +158,7 @@ def main():
     west = list(substring(glenline, 22, glenline.project(Point(-38.89, -50.1))).simplify(.4).coords)[::-1]
     probe = load('Saved/OrderReplay/scene_probe.json')
     trucks = []
-    for slot, dock in [('A', 75), ('B', 51), ('C', 20)]:
+    for slot, dock in [('A', 75), ('B', 51), ('C', 22)]:
         actor = next(r for r in probe['items'] if r['label'] == 'GHS_DockTruck_%03d' % dock)
         transform = actor['instances'][0]['transform']
         xyz = [v/100 for v in transform['position_cm']]

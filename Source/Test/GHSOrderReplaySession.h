@@ -10,6 +10,13 @@ class UStaticMeshComponent;
 class UInstancedStaticMeshComponent;
 class UStaticMesh;
 class FJsonValue;
+class FJsonObject;
+
+namespace GHSReplaySources
+{
+    bool Resolve(const FJsonObject& Source,const FJsonObject& Registry,
+        const TArray<UInstancedStaticMeshComponent*>& Components,UInstancedStaticMeshComponent*& OutComponent,int32& OutIndex);
+}
 
 /** Wall-frame deltas affect only this clock. Seeking is a pure absolute evaluation. */
 struct TEST_API FGHSReplayClock

@@ -62,6 +62,10 @@ if __name__ == '__main__':
     parser.add_argument('--report', type=Path, default=ROOT / 'Saved/OrderReplay/turning_validation.json')
     args = parser.parse_args()
     result = audit(json.loads(args.data.read_text(encoding='utf8')))
+    if args.data.resolve() == (ROOT/'Content/GHSTwinUI/data/order-replay.json').resolve():
+        from replay_audit_sources import verify_sources
+        _,evidence=verify_sources(ROOT,json.loads(args.data.read_bytes()))
+        result.update(evidence)
     result['timeline_sha256'] = hashlib.sha256(args.data.read_bytes()).hexdigest()
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding='utf8')

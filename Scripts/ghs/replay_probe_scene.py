@@ -8,11 +8,31 @@ from sync_wall_heights import snapshot,transform
 OUT=ROOT/'Saved/OrderReplay'; OUT.mkdir(parents=True,exist_ok=True)
 world=u.E.get_editor_world()
 assert world and not u.E.get_game_world(), 'Only inspect the editor world outside PIE'
+MAP='GHS_CAD_NormalWarehouse_ZcoolSmartFactory'
+assert world.get_path_name().split('.')[0]==('/Game/Maps/'+MAP)
+map_file=ROOT/'Content/Maps'/(MAP+'.umap')
+digest=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
+assert not unreal.EditorLoadingAndSavingUtils.get_dirty_map_packages(), 'A saved level is needed for a reproducible probe'
+map_sha=digest(map_file)
 by=u.labels(); before=snapshot(by)
-items=[]
+items=[];rack_footprints={}
 for label,a in by.items():
     for c in a.get_components_by_class(unreal.StaticMeshComponent):
         if not c.static_mesh: continue
+        mesh=c.static_mesh
+        if label.startswith('GHS_Rack_CAD24_') and ('_PASS' in label or label.endswith('_D1')):
+            key=mesh.get_path_name()
+            if key not in rack_footprints:
+                low=[]
+                for section in range(mesh.get_num_sections(0)):
+                    verts,indices,*_=unreal.ProceduralMeshLibrary.get_section_from_static_mesh(mesh,0,section)
+                    xyz=[(v.x,v.y,v.z) for v in verts]
+                    for i in range(0,len(indices),3):
+                        tri=[xyz[indices[k]] for k in (i,i+1,i+2)]
+                        if min(v[2] for v in tri)<=390 and max(v[2] for v in tri)>=3:
+                            low.append(tri)
+                assert low,key
+                rack_footprints[key]=low
         items.append(dict(label=label,actor=a.get_name(),component=c.get_name(),mesh=c.static_mesh.get_path_name(),
             tags=[str(t) for t in a.tags],hidden=bool(a.get_editor_property('hidden')),
             visible=bool(c.get_editor_property('visible')),hidden_in_game=bool(c.get_editor_property('hidden_in_game')),
@@ -22,7 +42,10 @@ triangles={}
 for name in sorted(u.WALLS|{'GHS_CAD_ExactFootprint'}):
     if name in by: triangles[name]=list(u.world_triangles(by[name]))
 after=snapshot(u.labels()); assert before==after,'Read-only probe changed actor state'
+assert digest(map_file)==map_sha
 report=dict(map=world.get_path_name(),actor_count=len(by),items=items,triangles_cm=triangles,unchanged=True,
+            map_sha256=map_sha,registry_sha256=digest(ROOT/'Content/GHSTwinUI/data/scene-bindings.json'),
+            rack_footprints_local_cm=rack_footprints,
             dirty_maps=[p.get_path_name() for p in unreal.EditorLoadingAndSavingUtils.get_dirty_map_packages()],
             dirty_content=[p.get_path_name() for p in unreal.EditorLoadingAndSavingUtils.get_dirty_content_packages()])
 (OUT/'scene_probe.json').write_text(json.dumps(report,ensure_ascii=False),encoding='utf-8')

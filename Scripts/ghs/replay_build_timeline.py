@@ -5,6 +5,9 @@ from replay_motion_profile import build_route_profile
 ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'Saved/OrderReplay'
 plan=json.loads((OUT/'routes_plan.json').read_text());truck_plan=json.loads((OUT/'truck_routes.json').read_text())
 assert plan['success'] and truck_plan['success']
+probe_hash = hashlib.sha256((OUT/'scene_probe.json').read_bytes()).hexdigest()
+assert plan['source_probe_sha256'] == truck_plan['sources']['Saved/OrderReplay/scene_probe.json'] == probe_hash
+assert plan['sceneBindingsSha256'] == hashlib.sha256((ROOT/'Content/GHSTwinUI/data/scene-bindings.json').read_bytes()).hexdigest()
 ASSET='/Game/GHSOrderReplay/Meshes/SM_Replay_'
 CARRY_X=1.93;CARRY_Z=-.0204;GROUND_Z=.005
 events=[];tracks=[]
@@ -77,7 +80,7 @@ for t in truck_plan['trucks']:tracks.append(dict(id=t['id'],name='装卸卡车 '
 for n,r in enumerate(plan['forklifts']):
     for layer in [1,0]:
         position=list(r['position_m']);position[2]+=layer*r['tier_height_m']
-        tracks.append(dict(id='REPLAY-CARGO-%02d'%(len(tracks)-7),name=('上层' if layer else '下层')+'蓝托盘',kind='cargo',mesh=ASSET+'Cargo'+r['kind'],scale=r['scale'],keys=[key(0,position,0)],route=[]))
+        tracks.append(dict(id='REPLAY-CARGO-%02d'%(len(tracks)-7),name=('上层' if layer else '下层')+'蓝托盘',kind='cargo',mesh=ASSET+'Cargo'+r['kind'],scale=r['scale'],keys=[key(0,position,r['source_yaw'])],route=[]))
 forks=[Motion(i,r['staging_m'],r['yaw']) for i,r in enumerate(plan['forklifts'])]
 trucks=[Motion(5+i,t['points_m'][0][:3],t['points_m'][0][3]) for i,t in enumerate(truck_plan['trucks'])]
 for m in trucks:m.door=1;m.status='等待装车';m.emit()
@@ -87,8 +90,49 @@ cargo_frames={};drop_times={}
 def ownership(cargo,t,owner,pos,yaw):
     tracks[cargo]['keys'].append(key(t,pos,yaw,owner=owner,status='已装载' if owner>=0 else '地堆'))
 
+def change_pallet_entry(i, cargo, outbound):
+    """Set the pallet down while the forklift travels to an adjacent entry face."""
+    vehicle = forks[i]
+    south = plan['forklifts'][i]['route_m'][-1][:3]
+    pad = [south[0], south[1]+4.5, .012]
+    west = [pad[0]-4.5, pad[1], GROUND_Z]
+    corner = [west[0], south[1], GROUND_Z]
+    working_lift = pad[2]-GROUND_Z-CARRY_Z
+
+    def go_around(start_at_south):
+        heading, next_heading, end, end_heading = (180,90,west,0) if start_at_south else (-90,0,south,90)
+        for yaw, point in ((heading,corner),(next_heading,end)):
+            vehicle.tween(2,yaw=yaw,status='调整叉取方向')
+            vehicle.tween(3,position=point,status='绕行至托盘侧面')
+        vehicle.tween(2,yaw=end_heading,status='对准托盘叉孔')
+
+    def transfer(pickup, heading):
+        stage = west if heading == 0 else south
+        reach = [pad[0]-CARRY_X if heading==0 else pad[0],
+                 pad[1] if heading==0 else pad[1]-CARRY_X,GROUND_Z]
+        vehicle.tween(2,yaw=heading,lift=working_lift if pickup else working_lift+.12,status='中转区对位')
+        vehicle.tween(3,position=reach,status='侧面插叉' if pickup else '中转区送托')
+        if pickup:
+            ownership(cargo,vehicle.t,i,[CARRY_X,0,CARRY_Z],-heading)
+            event(vehicle.t,i,'transfer',tracks[i]['name']+' · 从转运位重新插叉取托')
+            vehicle.tween(2,lift=working_lift+.12,status='叉起中转托盘')
+        else:
+            vehicle.tween(2,lift=working_lift,status='中转区暂放托盘')
+            ownership(cargo,vehicle.t,-1,pad,0)
+            event(vehicle.t,i,'transfer',tracks[i]['name']+' · 托盘暂放转运位')
+        vehicle.tween(3,position=stage,status='退出中转托位')
+
+    if not outbound:
+        go_around(True)
+    transfer(False,90 if outbound else 0)
+    go_around(outbound)
+    transfer(True,0 if outbound else 90)
+    if outbound:
+        go_around(False)
+    vehicle.tween(2,lift=.25,status='降低运输高度')
+
 def truck_slot(i,j):
-    # Identical pallet orientation keeps the blue runner pockets aligned with the tines.
+    # Pallets enter lengthwise after regripping to fit two across the rear door.
     upper=i in (1,4);height=1.13+(plan['forklifts'][0 if i==1 else 3]['tier_height_m'] if upper else 0)
     return [.68,(-.54 if j==0 else .54),height]
 
@@ -97,7 +141,7 @@ def approach(i,j):
     return [tx-slot[1],ty-2.85,GROUND_Z],[tx-slot[1],ty+slot[0]-CARRY_X,GROUND_Z]
 
 def outbound(i,start):
-    r=plan['forklifts'][i];m=forks[i];m.until(start,'等待作业');truck=fork_truck[i];cyaw=-r['yaw']
+    r=plan['forklifts'][i];m=forks[i];m.until(start,'等待作业');truck=fork_truck[i];cyaw=r['source_yaw']-r['yaw']
     for j,layer in enumerate([1,0]):
         if i==3 and j==1:m.wait(75,'交叉通道让行')
         if i==4 and j==1:m.wait(60,'交叉通道让行')
@@ -105,10 +149,11 @@ def outbound(i,start):
         m.tween(3,position=r['pickup_origin_m'],status='货叉插入蓝托盘');ownership(cargo,m.t,i,[CARRY_X,0,CARRY_Z],cyaw)
         m.tween(2,lift=sourcebase-GROUND_Z-CARRY_Z+.12,status='抬升托盘');event(m.t,i,'pickup',tracks[i]['name']+' · '+('上层' if layer else '下层')+'托盘取货完成')
         m.tween(4,position=r['staging_m'],status='倒车退出地堆');m.tween(3,lift=.25,status='降低运输高度')
-        m.route(r['route_m'],fault=(i==2 and j==0),carrying=True);pre,load=approach(i,j);m.tween(3,yaw=90,status='月台对位')
+        m.route(r['route_m'],fault=(i==2 and j==0),carrying=True);change_pallet_entry(i,cargo,True)
+        pre,load=approach(i,j);m.tween(3,yaw=90,status='月台对位')
         m.tween(4,position=pre,status='驶入装卸位');slot=truck_slot(i,j);lift=r['truck_position_m'][2]+slot[2]-GROUND_Z-CARRY_Z
         m.tween(4,lift=lift+.12,status='抬叉至车厢');m.tween(3,position=load,status='送入车厢');m.tween(2,lift=lift,status='平稳落托')
-        ownership(cargo,m.t,5+truck,slot,cyaw);drop_times[(i,j)]=m.t;event(m.t,i,'dropoff',tracks[i]['name']+' · 放货完成，装卸卡车 '+chr(65+truck))
+        ownership(cargo,m.t,5+truck,slot,0);drop_times[(i,j)]=m.t;event(m.t,i,'dropoff',tracks[i]['name']+' · 放货完成，装卸卡车 '+chr(65+truck))
         m.tween(4,position=pre,status='倒车退出车厢');m.tween(3,lift=.15,status='回收货叉')
         if i==4 and j==1:m.until(out_ends[1]+12,'交叉通道让行')
         m.tween(4,position=r['route_m'][-1],status='退出月台')
@@ -136,16 +181,17 @@ for ti,(m,r) in enumerate(zip(trucks,truck_plan['trucks'])):
     m.tween(3,door=1,status='开启车门');ready.append(m.t);event(m.t,5+ti,'replenishment',tracks[5+ti]['name']+' · 补给到位，开始卸回原地堆')
 
 def inbound(i,start):
-    r=plan['forklifts'][i];m=forks[i];m.until(start,'等待补给车辆');truck=fork_truck[i];cyaw=-r['yaw']
+    r=plan['forklifts'][i];m=forks[i];m.until(start,'等待补给车辆');truck=fork_truck[i];cyaw=r['source_yaw']-r['yaw']
     for j,layer in [(1,0),(0,1)]:
         cargo=8+i*2+j;m.route(r['route_m'],3.2,status='前往补给月台');pre,load=approach(i,j);m.tween(3,yaw=90,status='补给车对位')
         m.tween(4,position=pre,status='驶入装卸位');slot=truck_slot(i,j);lift=r['truck_position_m'][2]+slot[2]-GROUND_Z-CARRY_Z
-        m.tween(4,lift=lift,status='货叉对准托盘');m.tween(3,position=load,status='插入补给托盘');ownership(cargo,m.t,i,[CARRY_X,0,CARRY_Z],cyaw)
+        m.tween(4,lift=lift,status='货叉对准托盘');m.tween(3,position=load,status='插入补给托盘');ownership(cargo,m.t,i,[CARRY_X,0,CARRY_Z],0)
         m.tween(2,lift=lift+.12,status='抬起补给托盘');event(m.t,i,'pickup',tracks[i]['name']+' · 补给取货完成')
         m.tween(4,position=pre,status='倒车退出车厢');m.tween(3,lift=.25,status='降低运输高度');m.tween(4,position=r['route_m'][-1],status='退出月台')
+        change_pallet_entry(i,cargo,False)
         m.route(list(reversed(r['route_m'])),2.6,status='补给运回地堆',carrying=True);m.tween(3,yaw=r['yaw'],status='原货位对位')
         z=r['position_m'][2]+layer*r['tier_height_m'];m.tween(3,lift=z-GROUND_Z-CARRY_Z+.12,status='托盘堆叠对位');m.tween(3,position=r['pickup_origin_m'],status='送入原地堆')
-        m.tween(2,lift=z-GROUND_Z-CARRY_Z,status='平稳落托');ownership(cargo,m.t,-1,[*r['position_m'][:2],z],0);event(m.t,i,'dropoff',tracks[i]['name']+' · '+('上层' if layer else '下层')+'托盘补给完成')
+        m.tween(2,lift=z-GROUND_Z-CARRY_Z,status='平稳落托');ownership(cargo,m.t,-1,[*r['position_m'][:2],z],r['source_yaw']);event(m.t,i,'dropoff',tracks[i]['name']+' · '+('上层' if layer else '下层')+'托盘补给完成')
         m.tween(4,position=r['staging_m'],status='倒车退出地堆');m.tween(3,lift=0,status='等待下一循环')
     return m.t
 
@@ -165,9 +211,10 @@ for t in tracks:
     assert all(a[0]<b[0] for a,b in zip(t['keys'],t['keys'][1:])),t['id']
     assert t['keys'][0][1:7]==t['keys'][-1][1:7],(t['id'],t['keys'][0],t['keys'][-1])
 events.sort(key=lambda e:e['time'])
-data=dict(version=1,testData=True,cycleDuration=duration,tracks=tracks,events=events,sourceInstances=plan['source_instances'],
+data=dict(version=2,testData=True,cycleDuration=duration,tracks=tracks,events=events,sourceInstances=plan['source_instances'],
     doors=[dict(position=d['transform']['position_cm'],yaw=d['transform']['rotation_deg'][1]) for d in plan['doors']],
-    provenance=dict(sceneProbe=plan['source_probe_sha256'],truckRoutes=hashlib.sha256((OUT/'truck_routes.json').read_bytes()).hexdigest()),
+    provenance=dict(sceneProbe=plan['source_probe_sha256'],sceneBindingsSha256=plan['sceneBindingsSha256'],
+                    mapSha256=plan['mapSha256'],truckRoutes=hashlib.sha256((OUT/'truck_routes.json').read_bytes()).hexdigest()),
     notes=['Fixed 5 forklifts + 3 trucks + 10 single loaded blue pallets','Cargo returns visibly on test replenishment trucks, no visible cycle reset'])
 dest=ROOT/'Content/GHSTwinUI/data/order-replay.json';dest.write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')),encoding='utf8')
 (OUT/'timeline_summary.json').write_text(json.dumps(dict(cycleDuration=duration,outboundEnd=out_ends,truckReady=ready,inboundEnd=in_ends,events=len(events),keys={t['id']:len(t['keys']) for t in tracks},fileBytes=dest.stat().st_size),indent=2),encoding='utf8')

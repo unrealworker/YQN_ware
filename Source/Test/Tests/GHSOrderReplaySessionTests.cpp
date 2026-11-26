@@ -6,8 +6,51 @@
 #include "Engine/StaticMeshActor.h"
 #include "Engine/StaticMesh.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/InstancedStaticMeshComponent.h"
+#include "Dom/JsonObject.h"
+#include "Serialization/JsonSerializer.h"
 #include "Camera/CameraComponent.h"
 #include <limits>
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayCadSourceTest,"GHS.Replay.CADSourceIdentity",
+    GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
+bool FGHSReplayCadSourceTest::RunTest(const FString&)
+{
+    UInstancedStaticMeshComponent* Component=NewObject<UInstancedStaticMeshComponent>();
+    const FString AssetPath=TEXT("/Game/GHSZcoolSmartFactory/DoublePallet/Meshes/SM_GHS_Presentation_CargoMid.SM_GHS_Presentation_CargoMid");
+    auto* Mesh=LoadObject<UStaticMesh>(nullptr,*AssetPath);
+    if(!TestNotNull(TEXT("Mid-height CAD floor pallet mesh"),Mesh)) return false;
+    Component->SetStaticMesh(Mesh);
+    Component->ComponentTags.Add(FName(TEXT("GHSStorageGroup:Storage")));
+    Component->AddInstance(FTransform(FVector(300,400,0)));
+    const FTransform Expected(FRotator(0,90,0),FVector(100,-200,0),FVector(1,1,1));
+    Component->AddInstance(Expected);
+    const TArray<UInstancedStaticMeshComponent*> Components={Component};
+    const FString RegistryText=TEXT(R"({"groups":[{"actor":"Storage","mesh":"SM_GHS_Presentation_CargoMid","instances":[{"id":"CAD_24_A","position_m":[1,2,0],"rotation_deg":-90,"scale":[1,1,1]}]}]})");
+    const FString SourceText=TEXT(R"({"role":"cargo","cadId":"CAD_24_A","position":[100,-200,0],"yaw":90,"scale":[1,1,1],"index":0,"actor":"RenamedActor"})");
+    TSharedPtr<FJsonObject> Registry,Source;
+    FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(RegistryText),Registry);
+    FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(SourceText),Source);
+    if(!Registry || !Source) return false;
+    UInstancedStaticMeshComponent* Found=nullptr;
+    int32 Index=INDEX_NONE;
+    auto Resolve=[&](){return GHSReplaySources::Resolve(*Source,*Registry,Components,Found,Index);};
+    TestTrue(TEXT("Reordered physical instance resolves despite stale index and actor"),Resolve());
+    TestTrue(TEXT("Select the unique CAD pose"),Found==Component && Index==1);
+    Source->SetStringField(TEXT("cadId"),TEXT("CAD_24_UNKNOWN"));
+    TestFalse(TEXT("Unknown CAD identity cannot use legacy index"),Resolve());
+    Source->SetStringField(TEXT("cadId"),TEXT("CAD_24_A"));
+    Source->SetNumberField(TEXT("yaw"),-90);
+    TestFalse(TEXT("Wrong yaw cannot bind a coincident pallet"),Resolve());
+    Source->SetNumberField(TEXT("yaw"),90);
+    Component->ComponentTags.Reset();
+    TestFalse(TEXT("Unowned mesh cannot substitute for floor storage"),Resolve());
+    Component->ComponentTags.Add(FName(TEXT("GHSStorageGroup:Storage")));
+    Component->AddInstance(Expected);
+    TestFalse(TEXT("Ambiguous live pose rejects all candidates"),Resolve());
+    TestTrue(TEXT("A failed lookup returns no selection"),!Found && Index==INDEX_NONE);
+    return true;
+}
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGHSReplayClockTest,"GHS.Replay.Transport",GHSAutomationTests::ApplicationContextMask|EAutomationTestFlags::ProductFilter)
 bool FGHSReplayClockTest::RunTest(const FString&)
