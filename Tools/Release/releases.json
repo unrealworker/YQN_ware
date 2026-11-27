@@ -37,6 +37,32 @@
         "installerReport": "Saved/Packaging/Versioning/InstallerTests-e0f3284935da442a8785232f5d562dc6/results.json",
         "deferredDeployment": true
       }
+    },
+    {
+      "version": "1.1.0",
+      "kind": "cumulative-patch",
+      "status": "verified",
+      "baseVersion": "1.0.0",
+      "sourceCommit": "6f301c2a3cc8ead82b5bfcb49997243aa40e2b4a",
+      "notes": "新增登录和双仓库选择入口、GHS 真实库存与取货回放，更新 CAD 库位布局、仓库画面和导航。",
+      "artifact": "Deployment/Patches/YQN-Warehouse-1.0.0-to-1.1.0-Win64-Patch.zip",
+      "sha256": "d95a15042310e4936d72e08f971a91f72971e11213da8458535193a3d7a1edad",
+      "bytes": 102889962,
+      "payloadBytes": 461920474,
+      "verification": {
+        "verifiedAt": "2026-11-27T02:26:16.413841+00:00",
+        "runtimeReport": "Saved/Packaging/Versioning/1.1.0/RuntimeVerification.json",
+        "runtimeReportSHA256": "fff109a2eec0b888b357f7d4b9254a0f7d84847baacf767c2d6c155b00ff0001",
+        "verifiedUpgradeFrom": [
+          "1.0.0",
+          "1.0.1"
+        ],
+        "installedFileHashes": 441,
+        "baselineFileHashesRestored": 166,
+        "pixelStreamingChecks": 11,
+        "installerChecks": 22,
+        "releasePreflightTests": 10
+      }
     }
   ]
 }
