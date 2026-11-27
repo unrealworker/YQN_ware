@@ -27,21 +27,24 @@ function Assert-Rejected([scriptblock]$Action, [string]$Name) {
     Assert-True $rejected "Expected rejection: $Name"
     $results.Add($Name)
 }
-function New-Fixture([string]$Name) {
+$globalPair = @('Test/Content/Paks/global.utoc', 'Test/Content/Paks/global.ucas')
+function New-Fixture([string]$Name, [switch]$WithGlobalPatch) {
     $root = Join-Path $testRoot $Name
     $install = Join-Path $root 'install'
     $patch = Join-Path $root 'patch'
     $paths = @('TestGame.exe', 'Test/Binaries/Win64/TestGame-Win64-Shipping.exe',
         'Test/Content/Paks/Test-Windows.pak', 'Test/Content/Paks/Test-Windows.utoc', 'Test/Content/Paks/Test-Windows.ucas',
-        'Test/Content/GHSTwinUI/web/index.html')
+        'Test/Content/GHSTwinUI/web/index.html') + $globalPair
     foreach ($relative in $paths) { Write-FixtureFile $install $relative ('baseline:' + $relative) }
     $baseFiles = @($paths | ForEach-Object { File-Entry $install $_ })
     $payloadPaths = @('Test/Content/GHSTwinUI/web/index.html', 'Test/Content/Paks/Test-Windows_0_P.pak',
         'Test/Content/Paks/Test-Windows_0_P.utoc', 'Test/Content/Paks/Test-Windows_0_P.ucas')
+    if ($WithGlobalPatch) { $payloadPaths += $globalPair }
     foreach ($relative in $payloadPaths) { Write-FixtureFile (Join-Path $patch 'payload') $relative ('patch one:' + $relative) }
     $manifest = [ordered]@{ schemaVersion=1; kind='cumulative-patch'; project='Test'; baseVersion='1.0.0'; version='1.0.1';
         engineVersion='5.8.4'; sourceCommit='0000000000000000000000000000000000000001';
         baseFiles=$baseFiles; files=@($payloadPaths | ForEach-Object { File-Entry (Join-Path $patch 'payload') $_ }) }
+    if ($WithGlobalPatch) { $manifest.schemaVersion = 2 }
     $manifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $patch 'patch.json') -Encoding UTF8
     return @{ install=$install; patch=$patch; manifest=$manifest; paths=$paths }
 }
@@ -82,6 +85,50 @@ Assert-Baseline $fixture
 $marker = Get-Content -LiteralPath (Join-Path $fixture.install 'warehouse-version.json') -Raw | ConvertFrom-Json
 Assert-True ($marker.version -eq '1.0.0') 'Rollback version marker differs'
 $results.Add('Explicit rollback restores baseline hashes and version')
+
+$v1 = New-Fixture 'global-v1'
+$v2 = New-Fixture 'global-v2' -WithGlobalPatch
+$v2.manifest.version = '1.1.0'
+$v2.manifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $v2.patch 'patch.json') -Encoding UTF8
+& $installer -PatchDirectory $v1.patch -InstallDirectory $v1.install | Out-Null
+& $installer -PatchDirectory $v2.patch -InstallDirectory $v1.install | Out-Null
+foreach ($rel in $globalPair) {
+    Assert-True ((File-Entry $v1.install $rel).sha256 -eq (File-Entry (Join-Path $v2.patch 'payload') $rel).sha256) "Global pair upgrade failed: $rel"
+}
+$results.Add('Schema 1 to 2 upgrade installs both global files')
+& $installer -Rollback -InstallDirectory $v1.install | Out-Null
+Assert-Baseline $v1
+$results.Add('Schema 2 rollback restores baseline global pair')
+& $installer -PatchDirectory $v2.patch -InstallDirectory $v1.install | Out-Null
+$v1.manifest.version = '1.2.0'
+$v1.manifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $v1.patch 'patch.json') -Encoding UTF8
+& $installer -PatchDirectory $v1.patch -InstallDirectory $v1.install | Out-Null
+foreach ($entry in $v1.manifest.baseFiles | Where-Object { $_.path -in $globalPair }) {
+    Assert-True ((File-Entry $v1.install $entry.path).sha256 -eq $entry.sha256) ('Global pair did not return to baseline: ' + $entry.path)
+}
+$results.Add('Schema 2 to 1 upgrade restores omitted global files')
+& $installer -Rollback -InstallDirectory $v1.install | Out-Null
+Assert-Baseline $v1
+
+foreach ($case in @('legacy-with-global', 'missing-global-payload', 'missing-global-baseline', 'replace-main-container')) {
+    $invalid = New-Fixture $case -WithGlobalPatch
+    switch ($case) {
+        'legacy-with-global' { $invalid.manifest.schemaVersion = 1 }
+        'missing-global-payload' {
+            $invalid.manifest.files = @($invalid.manifest.files | Where-Object { $_.path -ne $globalPair[1] })
+            Remove-Item -LiteralPath (Join-Path (Join-Path $invalid.patch 'payload') $globalPair[1])
+        }
+        'missing-global-baseline' { $invalid.manifest.baseFiles = @($invalid.manifest.baseFiles | Where-Object { $_.path -ne $globalPair[0] }) }
+        'replace-main-container' {
+            $payloadRoot = Join-Path $invalid.patch 'payload'
+            $main = 'Test/Content/Paks/Test-Windows.utoc'
+            Write-FixtureFile $payloadRoot $main 'main toc replacement'
+            $invalid.manifest.files += (File-Entry $payloadRoot $main)
+        }
+    }
+    $invalid.manifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $invalid.patch 'patch.json') -Encoding UTF8
+    Assert-Rejected { & $installer -PatchDirectory $invalid.patch -InstallDirectory $invalid.install -CheckOnly } $case
+}
 
 $wrongBase = New-Fixture 'wrong-baseline'
 Write-FixtureFile $wrongBase.install 'TestGame.exe' 'unrelated executable'
@@ -130,8 +177,8 @@ Assert-Baseline $unreadableProcess
 
 # Inject one copy failure after the UI was replaced. The wrapper delegates every
 # other copy to PowerShell's native cmdlet, including rollback restoration.
-$failure = New-Fixture 'interrupted-copy'
-$global:WarehousePatchTestFailPath = Join-Path $failure.patch 'payload/Test/Content/Paks/Test-Windows_0_P.utoc'
+$failure = New-Fixture 'interrupted-copy' -WithGlobalPatch
+$global:WarehousePatchTestFailPath = Join-Path $failure.patch 'payload/Test/Content/Paks/global.ucas'
 $global:WarehousePatchTestFailureSeen = $false
 function global:Copy-Item {
     param([string]$LiteralPath, [string]$Destination, [switch]$Force)

@@ -88,7 +88,7 @@ function Assert-File([string]$Path, $Entry) {
 }
 
 function Assert-Manifest($Manifest, [string]$Root) {
-    if ($Manifest.schemaVersion -ne 1 -or $Manifest.kind -ne 'cumulative-patch' -or $Manifest.project -ne 'Test') {
+    if ($Manifest.schemaVersion -notin @(1, 2) -or $Manifest.kind -ne 'cumulative-patch' -or $Manifest.project -ne 'Test') {
         throw 'Unsupported patch manifest'
     }
     $base = Get-ReleaseVersion ([string]$Manifest.baseVersion)
@@ -103,10 +103,20 @@ function Assert-Manifest($Manifest, [string]$Root) {
         if (-not $baseMap.ContainsKey($required)) { throw "Baseline lacks required file: $required" }
     }
     if ($filesMap.Count -eq 0) { throw 'Patch has no payload files' }
+    $globalFiles = @('Test/Content/Paks/global.utoc', 'Test/Content/Paks/global.ucas')
+    foreach ($relative in $globalFiles) {
+        if ($Manifest.schemaVersion -eq 2) {
+            if (-not $baseMap.ContainsKey($relative) -or -not $filesMap.ContainsKey($relative)) {
+                throw "Schema 2 requires both global IoStore files in baseline and payload: $relative"
+            }
+        } elseif ($filesMap.ContainsKey($relative)) {
+            throw "Global IoStore replacement requires schema 2: $relative"
+        }
+    }
     foreach ($relative in $filesMap.Keys) {
-        # Native patch containers must be overlays. Replacing the original
-        # containers would invalidate the immutable baseline used by later patches.
-        if ($relative -match '^(?i:Test/Content/Paks)/' -and $baseMap.ContainsKey($relative)) {
+        # The global pair uses normal baseline backups and transactional rollback.
+        # Content container changes are carried by overlays.
+        if ($relative -match '^(?i:Test/Content/Paks)/' -and $baseMap.ContainsKey($relative) -and $relative -notin $globalFiles) {
             throw "Patch attempts to overwrite a baseline container: $relative"
         }
     }

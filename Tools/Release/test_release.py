@@ -2,6 +2,7 @@
 import tempfile
 import unittest
 from pathlib import Path
+import shutil
 from unittest.mock import patch
 
 import release
@@ -42,6 +43,49 @@ class BaselineTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'already recorded'):
                 release.build_patch(Args())
             run.assert_not_called()
+
+
+class PayloadTests(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.base = Path(temporary.name) / 'release'
+        self.stage = Path(temporary.name) / 'stage'
+        package = self.base / 'package'
+        paks = package / release.PAKS
+        paks.mkdir(parents=True)
+        for name in ('global.utoc', 'global.ucas', 'Test-Windows.ucas'):
+            (paks / name).write_bytes(name.encode())
+        self.manifest = {'files': release.inventory(package)}
+        shutil.copytree(package, self.stage)
+        self.paks = self.stage / release.PAKS
+        for extension in ('pak', 'utoc', 'ucas'):
+            (self.paks / ('Test-Windows_0_P.' + extension)).write_bytes(b'overlay')
+
+    def select(self):
+        files, schema = release.select_patch_files(self.stage, self.base, self.manifest, release.DEFAULT_ENGINE)
+        return {x['path'] for x in files}, schema
+
+    def test_unchanged_globals_keep_original_schema(self):
+        files, schema = self.select()
+        self.assertEqual(schema, 1)
+        self.assertTrue(files.isdisjoint(release.GLOBAL_PAIR))
+
+    def test_even_one_changed_global_requires_compatibility_and_both_files(self):
+        (self.paks / 'global.utoc').write_bytes(b'updated')
+        with patch.object(release, 'verify_compatible_globals') as check:
+            files, schema = self.select()
+            check.assert_called_once_with(self.base / 'package' / release.PAKS, self.paks, release.DEFAULT_ENGINE)
+            self.assertEqual(schema, 2)
+            self.assertTrue(files.issuperset(release.GLOBAL_PAIR))
+            check.side_effect = RuntimeError('incompatible')
+            with self.assertRaisesRegex(RuntimeError, 'incompatible'):
+                self.select()
+
+    def test_changed_main_container_remains_protected(self):
+        (self.paks / 'Test-Windows.ucas').write_bytes(b'changed main container')
+        with self.assertRaisesRegex(RuntimeError, 'Non-patch container changed'):
+            self.select()
 
 
 if __name__ == '__main__':

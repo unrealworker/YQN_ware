@@ -13,6 +13,8 @@ import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+from iostore_globals import verify_compatible_globals
+
 ROOT = Path(__file__).resolve().parents[2]
 CATALOG = Path(__file__).with_name('releases.json')
 DEFAULT_ENGINE = Path('C:/UE/UE_5.8')
@@ -23,6 +25,7 @@ MAPS = ['/Game/Maps/GHS_WarehousePortal',
         '/Game/Maps/GHS_CAD_NormalWarehouse_ZcoolSmartFactory',
         '/Game/Maps/MPR_CAD_Warehouse_B50B57']
 PAKS = 'Test/Content/Paks/'
+GLOBAL_PAIR = (PAKS + 'global.utoc', PAKS + 'global.ucas')
 
 
 def fail(message):
@@ -181,6 +184,39 @@ def register_base(args):
     print('Registered immutable baseline: ' + str(destination))
 
 
+def select_patch_files(windows_stage, base, baseline, engine):
+    staged_files = {x['path']: x for x in inventory(windows_stage)}
+    base_files = {x['path']: x for x in baseline['files']}
+    if any(name not in staged_files or name not in base_files for name in GLOBAL_PAIR):
+        fail('Missing global IoStore file in the staged build or baseline')
+    new_globals = any(staged_files[name]['sha256'] != base_files[name]['sha256'] for name in GLOBAL_PAIR)
+    if new_globals:
+        verify_compatible_globals(base / 'package' / PAKS, windows_stage / PAKS, engine)
+
+    selected = []
+    for name, item in staged_files.items():
+        if name in GLOBAL_PAIR:
+            if new_globals:
+                selected.append(item)
+        elif name.startswith(PAKS):
+            if re.fullmatch(r'Test-Windows_0_P\.(pak|utoc|ucas|sig)', name[len(PAKS):]):
+                selected.append(item)
+            elif name in base_files and item['sha256'] != base_files[name]['sha256']:
+                fail('Non-patch container changed; a new full baseline is required: ' + name)
+            elif name not in base_files:
+                fail('Unexpected container; review chunk/split-container support: ' + name)
+        elif name not in base_files or item['sha256'] != base_files[name]['sha256']:
+            selected.append(item)
+    for name in base_files:
+        if not name.startswith(PAKS) and name not in staged_files:
+            fail('Removing a baseline loose file requires a new full baseline: ' + name)
+    selected_names = {x['path'] for x in selected}
+    for extension in ('pak', 'utoc', 'ucas'):
+        if PAKS + 'Test-Windows_0_P.' + extension not in selected_names:
+            fail('Missing native patch container: ' + extension)
+    return selected, (2 if new_globals else 1)
+
+
 def build_patch(args):
     data = catalog()
     if any(row['version'] == args.version for row in data['releases']):
@@ -228,32 +264,14 @@ def build_patch(args):
     windows_stage = stage / 'Windows'
     if not (windows_stage / 'TestGame.exe').is_file():
         fail('Expected UAT Windows staging directory: ' + str(windows_stage))
-    staged_files = {x['path']: x for x in inventory(windows_stage)}
-    base_files = {x['path']: x for x in baseline['files']}
-    selected = []
-    for name, item in staged_files.items():
-        if name.startswith(PAKS):
-            if re.fullmatch(r'Test-Windows_0_P\.(pak|utoc|ucas|sig)', Path(name).name):
-                selected.append(item)
-            elif name in base_files and item['sha256'] != base_files[name]['sha256']:
-                fail('Non-patch container changed; a new full baseline is required: ' + name)
-            elif name not in base_files:
-                fail('Unexpected container; review chunk/split-container support: ' + name)
-        elif name not in base_files or item['sha256'] != base_files[name]['sha256']:
-            selected.append(item)
-    for name in base_files:
-        if not name.startswith(PAKS) and name not in staged_files:
-            fail('Removing a baseline loose file requires a new full baseline: ' + name)
-    for extension in ('pak', 'utoc', 'ucas'):
-        if PAKS + 'Test-Windows_0_P.' + extension not in {x['path'] for x in selected}:
-            fail('Missing native patch container: ' + extension)
+    selected, schema_version = select_patch_files(windows_stage, base, baseline, args.engine)
     output.mkdir(parents=True)
     for item in selected:
         target = output / 'payload' / item['path']
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(windows_stage / item['path'], target)
     verify_files(output / 'payload', selected)
-    manifest = {'schemaVersion': 1, 'kind': 'cumulative-patch', 'project': 'Test',
+    manifest = {'schemaVersion': schema_version, 'kind': 'cumulative-patch', 'project': 'Test',
                 'baseVersion': args.base, 'version': args.version, **engine_info(args.engine),
                 'sourceCommit': source_commit, 'sourceTrackedChanges': dirty,
                 'createdAt': now(), 'notes': args.notes, 'baseFiles': baseline['files'],

@@ -84,7 +84,7 @@ $releaseScript = 'C:\UEpro\warehouse\Tools\Release\release.py'
 
 脚本分两步调用 UE：
 
-1. `-build -cook -iterate`：增量编译及 Cook 三个指定关卡和依赖。
+1. `-build -cook -iterate` 增量编译并 Cook 登录入口、地球、GHS 和 MPR 四个关卡及其依赖。
 2. `-skipbuild -skipcook -stage -pak -iostore -generatepatch -basedonreleaseversion=<基线>`：使用第一步产物制作原生 UE 补丁，单独筛选补丁容器和变更文件。
 
 UE 不允许把 `-iterate` 与 `-basedonreleaseversion` 放在同一构建阶段，因此必须分开；不要重新合并参数。脚本不把整个 stage 执行 `-archive`，也不把基础引擎、CEF 或原始容器一起压入补丁。
@@ -108,7 +108,7 @@ UE 不允许把 `-iterate` 与 `-basedonreleaseversion` 放在同一构建阶段
 - **材质、贴图、地图**：生成包含变化资源及必要依赖、着色器的原生补丁容器；不保证一个材质只产生一个资源文件。
 - **NonUFS HTML、CSS、JS、JSON**：按哈希选择变化的松散文件，未变化的 UI 和 CEF 文件不重复交付。
 
-当前工具采用同一流程制作这些补丁，没有单独的“只改 HTML 就完全跳过 UE”入口。它仅支持当前项目的单组 `Test-Windows_0_P.pak/.utoc/.ucas` 补丁容器；分块、拆分容器、基础全局容器变化或删除基线松散文件会要求人工评估，不能静默发布不完整补丁。
+工具支持项目当前的单组 `Test-Windows_0_P.pak/.utoc/.ucas` 补丁容器。UE 5.8 的全局脚本对象表变化时，生成器校验既有对象的标识、名字及引用关系。所有旧记录都保留且兼容时，补丁同时携带 `global.utoc` 和 `global.ucas`，安装器会备份两份基线文件以供回退。其他基础容器发生变化、全局表出现不兼容变动、拆分容器或删除基线松散文件时，需要重新评估基线。
 
 ## 验证、安装与回退
 
